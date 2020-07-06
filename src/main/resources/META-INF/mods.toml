@@ -2,14 +2,14 @@ modLoader="javafml"
 loaderVersion="[31,)"
 logoFile="logo.png"
 authors="Farcr & Bagel"
-credits="Musicano, Ilja, & Pugz"
+credits="hatsondogs, five"
 
 [[mods]]
     modId="environmental"
     version="${file.jarVersion}"
-    displayName="Swamp Expansion"
+    displayName="Environmental"
     description='''
-    Expanding the Swamps. New wood, new blocks, new friends.
+    Expanding the environment. New wood, new blocks, new friends.
     '''
 
 [[dependencies.environmental]]
