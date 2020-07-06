@@ -726,7 +726,11 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 		}
 		
 		if (world.getWorld().func_234922_V_() == DimensionType.field_236000_d_) {
-			return SlabfishType.NETHER;
+			if (biome == Biomes.field_235253_az_) return SlabfishType.CRIMSON;
+			if (biome == Biomes.field_235250_aA_) return SlabfishType.WARPED;
+			if (biome == Biomes.field_235252_ay_) return SlabfishType.SOUL_SAND_VALLEY;
+			if (biome == Biomes.field_235251_aB_) return SlabfishType.BASALT_DELTAS;
+			else return SlabfishType.NETHER;
 		}
 		
 		if (world.getWorld().func_234922_V_() == DimensionType.field_236001_e_) {

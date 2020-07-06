@@ -50,6 +50,10 @@
     "flower_forest": {"trigger": "minecraft:bred_animals", "conditions": {"child": {"type": "environmental:slabfish", "nbt": "{SlabfishType:39}"}}},
     "beach": {"trigger": "minecraft:bred_animals", "conditions": {"child": {"type": "environmental:slabfish", "nbt": "{SlabfishType:40}"}}},
     "sky": {"trigger": "minecraft:bred_animals", "conditions": {"child": {"type": "environmental:slabfish", "nbt": "{SlabfishType:41}"}}},
-    "brown_mushroom": {"trigger": "minecraft:bred_animals", "conditions": {"child": {"type": "environmental:slabfish", "nbt": "{SlabfishType:42}"}}}
+    "brown_mushroom": {"trigger": "minecraft:bred_animals", "conditions": {"child": {"type": "environmental:slabfish", "nbt": "{SlabfishType:42}"}}},
+    "crimson": {"trigger": "minecraft:bred_animals", "conditions": {"child": {"type": "environmental:slabfish", "nbt": "{SlabfishType:47}"}}},
+    "warped": {"trigger": "minecraft:bred_animals", "conditions": {"child": {"type": "environmental:slabfish", "nbt": "{SlabfishType:48}"}}},
+    "soul_sand_valley": {"trigger": "minecraft:bred_animals", "conditions": {"child": {"type": "environmental:slabfish", "nbt": "{SlabfishType:49}"}}},
+    "basalt_deltas": {"trigger": "minecraft:bred_animals", "conditions": {"child": {"type": "environmental:slabfish", "nbt": "{SlabfishType:50}"}}}
   }
 }
