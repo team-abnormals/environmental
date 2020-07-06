@@ -4,8 +4,8 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import com.team_abnormals.environmental.core.other.BiomeFeatures;
-import com.team_abnormals.environmental.core.other.WisteriaColor;
+import com.team_abnormals.environmental.common.world.EnvironmentalFeatureConfigs;
+import com.team_abnormals.environmental.common.world.gen.util.WisteriaColor;
 import com.team_abnormals.environmental.core.registry.EnvironmentalFeatures;
 
 import net.minecraft.block.trees.Tree;
@@ -23,13 +23,13 @@ public class WisteriaTree extends Tree {
         switch (color) {
             case PURPLE:
             	default:
-            	return beehive ? BiomeFeatures.PURPLE_WISTERIA_MORE_BEEHIVES_CONFIG : BiomeFeatures.PURPLE_WISTERIA_CONFIG;
+            	return beehive ? EnvironmentalFeatureConfigs.PURPLE_WISTERIA_MORE_BEEHIVES_CONFIG : EnvironmentalFeatureConfigs.PURPLE_WISTERIA_CONFIG;
             case WHITE:
-            	return beehive ? BiomeFeatures.WHITE_WISTERIA_MORE_BEEHIVES_CONFIG : BiomeFeatures.WHITE_WISTERIA_CONFIG;
+            	return beehive ? EnvironmentalFeatureConfigs.WHITE_WISTERIA_MORE_BEEHIVES_CONFIG : EnvironmentalFeatureConfigs.WHITE_WISTERIA_CONFIG;
             case PINK:
-            	return beehive ? BiomeFeatures.PINK_WISTERIA_MORE_BEEHIVES_CONFIG : BiomeFeatures.PINK_WISTERIA_CONFIG;
+            	return beehive ? EnvironmentalFeatureConfigs.PINK_WISTERIA_MORE_BEEHIVES_CONFIG : EnvironmentalFeatureConfigs.PINK_WISTERIA_CONFIG;
             case BLUE:
-            	return beehive ? BiomeFeatures.BLUE_WISTERIA_MORE_BEEHIVES_CONFIG : BiomeFeatures.BLUE_WISTERIA_CONFIG;
+            	return beehive ? EnvironmentalFeatureConfigs.BLUE_WISTERIA_MORE_BEEHIVES_CONFIG : EnvironmentalFeatureConfigs.BLUE_WISTERIA_CONFIG;
         }
     }
 

@@ -7,7 +7,7 @@ import com.team_abnormals.environmental.client.render.layer.BackpackRenderLayer;
 import com.team_abnormals.environmental.client.render.layer.OverlayRenderLayer;
 import com.team_abnormals.environmental.client.render.layer.SweaterRenderLayer;
 import com.team_abnormals.environmental.common.entity.SlabfishEntity;
-import com.team_abnormals.environmental.common.entity.SlabfishType;
+import com.team_abnormals.environmental.common.entity.util.SlabfishType;
 import com.team_abnormals.environmental.core.Environmental;
 
 import net.minecraft.client.renderer.RenderType;

@@ -7,7 +7,7 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import com.team_abnormals.environmental.common.entity.SlabfishEntity;
-import com.team_abnormals.environmental.common.entity.SlabfishType;
+import com.team_abnormals.environmental.common.entity.util.SlabfishType;
 
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.EntityPredicate;

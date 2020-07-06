@@ -1,4 +1,4 @@
-package com.team_abnormals.environmental.core.other;
+package com.team_abnormals.environmental.common.entity.util;
 
 import java.awt.Color;
 import java.util.List;

@@ -3,7 +3,7 @@ package com.team_abnormals.environmental.client.render.layer;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.team_abnormals.environmental.common.entity.SlabfishEntity;
-import com.team_abnormals.environmental.common.entity.SlabfishType;
+import com.team_abnormals.environmental.common.entity.util.SlabfishType;
 import com.team_abnormals.environmental.core.Environmental;
 
 import net.minecraft.client.Minecraft;

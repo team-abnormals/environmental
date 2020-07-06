@@ -2,7 +2,6 @@ package com.team_abnormals.environmental.common.entity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -13,6 +12,9 @@ import com.google.common.collect.Maps;
 import com.team_abnormals.environmental.common.entity.goals.SlabbyBreedGoal;
 import com.team_abnormals.environmental.common.entity.goals.SlabbyFollowParentGoal;
 import com.team_abnormals.environmental.common.entity.goals.SlabbyGrabItemGoal;
+import com.team_abnormals.environmental.common.entity.util.SlabfishOverlay;
+import com.team_abnormals.environmental.common.entity.util.SlabfishRarity;
+import com.team_abnormals.environmental.common.entity.util.SlabfishType;
 import com.team_abnormals.environmental.common.item.MudBallItem;
 import com.team_abnormals.environmental.core.Environmental;
 import com.team_abnormals.environmental.core.other.EnvironmentalCriteriaTriggers;
@@ -134,17 +136,13 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 	public static final EntitySize SIZE_SITTING_CHILD = EntitySize.fixed(0.225F, 0.3F);
 	
 	private static final Ingredient BREEDING_ITEMS = Ingredient.fromItems(Items.TROPICAL_FISH, EnvironmentalItems.TROPICAL_FISH_KELP_ROLL.get());
-	private static final Ingredient HEALING_ITEMS = Ingredient.fromTag(ItemTags.FISHES);
-	private static final Ingredient SPEEDING_ITEMS = Ingredient.fromTag(EnvironmentalTags.SUSHI);
 	private static final Ingredient FOOD_ITEMS = Ingredient.fromItems(
 			ForgeRegistries.ITEMS.getValue(new ResourceLocation("atmospheric", "passionfruit")),
 			ForgeRegistries.ITEMS.getValue(new ResourceLocation("atmospheric", "shimmering_passionfruit")),
 			ForgeRegistries.ITEMS.getValue(new ResourceLocation("endergetic", "bolloom_fruit")),
 					Items.CHORUS_FRUIT
 		);
-	
-	private static final Collection<Ingredient> TEMPT = new ArrayList<Ingredient>();
-	
+		
 	private Endimation playingEndimation  = BLANK_ANIMATION;
 	public static final Endimation DANCE = new Endimation(Environmental.REGISTRY_HELPER.prefix("slabfish_dancing"), 40);
 	
@@ -179,14 +177,10 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 	public static AttributeModifierMap.MutableAttribute registerAttributes() {
     	return MobEntity.func_233666_p_()
     			.func_233815_a_(Attributes.field_233818_a_, 15.0D)
-    			.func_233815_a_(Attributes.field_233820_c_, 0.3D);
+    			.func_233815_a_(Attributes.field_233821_d_, 0.3D);
     }
 
 	protected void registerGoals() {
-		TEMPT.add(BREEDING_ITEMS);
-		TEMPT.add(HEALING_ITEMS);
-		TEMPT.add(SPEEDING_ITEMS);
-		
 		this.goalSelector.addGoal(0, new SwimGoal(this));
 		this.goalSelector.addGoal(2, new SitGoal(this));
 		
@@ -199,7 +193,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 		
 		this.goalSelector.addGoal(4, new SlabbyBreedGoal(this, 1.0D));
 		this.goalSelector.addGoal(5, new SlabbyGrabItemGoal(this, 1.1D));
-		this.goalSelector.addGoal(6, new TemptGoal(this, 1.0D, false, Ingredient.merge(TEMPT)));
+		this.goalSelector.addGoal(6, new TemptGoal(this, 1.0D, false, Ingredient.merge(Arrays.asList(BREEDING_ITEMS, Ingredient.fromTag(ItemTags.FISHES), Ingredient.fromTag(EnvironmentalTags.SUSHI)))));
 		this.goalSelector.addGoal(8, new SlabbyFollowParentGoal(this, 1.1D));
 		this.goalSelector.addGoal(9, new RandomWalkingGoal(this, 1.0D));
 		this.goalSelector.addGoal(10, new LookAtGoal(this, PlayerEntity.class, 6.0F));
@@ -293,13 +287,13 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 	// GENERAL //
 	
 	@Override
-	public ActionResultType applyPlayerInteraction(PlayerEntity player, Vector3d vec, Hand hand) {
+	public ActionResultType func_230254_b_(PlayerEntity player, Hand hand) {
 		ItemStack itemstack = player.getHeldItem(hand);
 
 		Item item = itemstack.getItem();
 		this.initSlabfishBackpack();
 		if (item instanceof SpawnEggItem || item instanceof NameTagItem || item == Items.TROPICAL_FISH || item == EnvironmentalItems.TROPICAL_FISH_KELP_ROLL.get() || item instanceof EggItem || item instanceof MudBallItem) {
-			return super.applyPlayerInteraction(player, vec, hand);
+			return super.func_230254_b_(player, hand);
 		} if(item instanceof DyeItem && this.hasBackpack() == true) {
 			DyeColor dyecolor = ((DyeItem) item).getDyeColor();
 			if(dyecolor != this.getBackpackColor()) {
@@ -391,14 +385,14 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 			this.dropItem(EnvironmentalItems.MUSIC_DISC_SLABRAVE.get());
 			return ActionResultType.SUCCESS;
 			
-		} else if(HEALING_ITEMS.test(itemstack) && itemstack.isFood() && this.getHealth() < this.getMaxHealth()) {
+		} else if(Ingredient.fromTag(ItemTags.FISHES).test(itemstack) && itemstack.isFood() && this.getHealth() < this.getMaxHealth()) {
 			if (!player.abilities.isCreativeMode) itemstack.shrink(1);
 			world.playSound(this.getPosX(), this.getPosY(), this.getPosZ(), EnvironmentalSounds.ENTITY_SLABFISH_EAT.get(), SoundCategory.NEUTRAL, 1F, 1F, true);
 			this.heal((float)item.getFood().getHealing());
 			this.particleCloud(ParticleTypes.COMPOSTER);
 			return ActionResultType.SUCCESS;
 			
-		} else if(SPEEDING_ITEMS.test(itemstack)) {
+		} else if(Ingredient.fromTag(EnvironmentalTags.SUSHI).test(itemstack)) {
 			if (!player.abilities.isCreativeMode) itemstack.shrink(1);
 			this.playBurpSound();
 			this.addPotionEffect(new EffectInstance(Effects.SPEED, 3600, 2, true, true));
@@ -426,7 +420,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 			player.stopActiveHand();
 			return ActionResultType.SUCCESS;
 		}
-		return super.applyPlayerInteraction(player, vec, hand);
+		return super.func_230254_b_(player, hand);
 	}
 	
 	protected void onInsideBlock(BlockState state) {

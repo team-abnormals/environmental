@@ -1,5 +1,7 @@
 package com.team_abnormals.environmental.common.world.biome;
 
+import com.team_abnormals.environmental.common.world.EnvironmentalBiomeFeatures;
+
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;

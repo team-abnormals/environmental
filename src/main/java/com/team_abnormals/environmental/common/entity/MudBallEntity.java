@@ -1,5 +1,7 @@
 package com.team_abnormals.environmental.common.entity;
 
+import com.team_abnormals.environmental.common.entity.util.SlabfishOverlay;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;

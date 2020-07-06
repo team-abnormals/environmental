@@ -1,4 +1,4 @@
-package com.team_abnormals.environmental.common.entity;
+package com.team_abnormals.environmental.common.entity.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;

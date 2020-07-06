@@ -4,7 +4,7 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import com.team_abnormals.environmental.common.world.biome.EnvironmentalBiomeFeatures;
+import com.team_abnormals.environmental.common.world.EnvironmentalFeatureConfigs;
 
 import net.minecraft.block.trees.Tree;
 import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
@@ -15,6 +15,6 @@ public class WillowTree extends Tree {
 	
 	@Nullable
 	protected ConfiguredFeature<BaseTreeFeatureConfig, ?> getTreeFeature(Random randomIn, boolean p_225546_2_) {
-		return Feature.field_236291_c_.withConfiguration(EnvironmentalBiomeFeatures.WILLOW_TREE_CONFIG);
+		return Feature.field_236291_c_.withConfiguration(EnvironmentalFeatureConfigs.WILLOW_TREE_CONFIG);
 	}
 }

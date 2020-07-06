@@ -6,10 +6,6 @@
     "environmental:potted_blue_wisteria_sapling",
     "environmental:potted_white_wisteria_sapling",
     "environmental:potted_purple_wisteria_sapling",
-    "environmental:potted_cattail",
-    "environmental:potted_pink_delphinium",
-    "environmental:potted_blue_delphinium",
-    "environmental:potted_white_delphinium",
-    "environmental:potted_purple_delphinium"
+    "environmental:potted_cattail"
   ]
 }

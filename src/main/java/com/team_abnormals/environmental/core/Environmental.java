@@ -69,6 +69,7 @@ public class Environmental {
     		EnvironmentalBiomes.registerBiomesToDictionary();
     		EnvironmentalFeatures.generateFeatures();
     		EnvironmentalEntities.addEntitySpawns();
+    		EnvironmentalEntities.setupAttributes();
     	});
     }
     

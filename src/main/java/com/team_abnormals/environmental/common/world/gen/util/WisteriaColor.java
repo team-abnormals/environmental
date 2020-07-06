@@ -1,4 +1,4 @@
-package com.team_abnormals.environmental.core.other;
+package com.team_abnormals.environmental.common.world.gen.util;
 
 public enum WisteriaColor {
     PINK,

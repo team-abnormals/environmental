@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.util.Random;
 
 import com.team_abnormals.environmental.common.entity.goals.LandOnPlantGoal;
-import com.team_abnormals.environmental.core.other.ButterflyType;
+import com.team_abnormals.environmental.common.entity.util.ButterflyType;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BushBlock;

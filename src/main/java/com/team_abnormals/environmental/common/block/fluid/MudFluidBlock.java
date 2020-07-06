@@ -3,7 +3,7 @@ package com.team_abnormals.environmental.common.block.fluid;
 import java.util.function.Supplier;
 
 import com.team_abnormals.environmental.common.entity.SlabfishEntity;
-import com.team_abnormals.environmental.common.entity.SlabfishOverlay;
+import com.team_abnormals.environmental.common.entity.util.SlabfishOverlay;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -16,7 +16,6 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
 public class MudFluidBlock extends FlowingFluidBlock {
@@ -26,8 +25,9 @@ public class MudFluidBlock extends FlowingFluidBlock {
         super(fluid, properties);
     }
 
-    @Override
-    public int tickRate(IWorldReader p_149738_1_) { return 35; }
+// TODO: Figure out what this is lol
+//    @Override
+//    public int tickRate(IWorldReader p_149738_1_) { return 35; }
 
     @Override
     public boolean reactWithNeighbors(World worldIn, BlockPos pos, BlockState state) {
