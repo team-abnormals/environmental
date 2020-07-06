@@ -1,0 +1,6 @@
+{
+    "parent": "environmental:block/vertical_planks",
+    "textures": {
+        "all": "environmental:block/wisteria_planks"
+    }
+}

@@ -1,0 +1,111 @@
+{
+	"block.environmental.mud_bricks": "Глинянные кирпичи",
+	"block.environmental.mud_brick_slab": "Плита из глинянных кирпичей",
+	"block.environmental.mud_brick_stairs": "Ступеньки из глинянных кирпичей",
+	"block.environmental.mud_brick_wall": "Ограда из глинянных кирпичей",
+	"block.environmental.mud_brick_vertical_slab": "Вертикальная плита из глинянных кирпичей",
+	"block.environmental.mud_vase": "Глиняная ваза",
+
+	"block.environmental.willow_planks": "Ивовые доски",
+	"block.environmental.willow_slab": "Ивовая плита",
+	"block.environmental.willow_stairs": "Ивовые ступеньки",
+	"block.environmental.willow_fence": "Ивовый забор",
+	"block.environmental.willow_fence_gate": "Ивовая калитка",
+	"block.environmental.willow_pressure_plate": "Ивовая нажимная плита",
+	"block.environmental.willow_door": "Ивовая дверь",
+	"block.environmental.willow_trapdoor": "Ивовый люк",
+	"block.environmental.willow_button": "Ивовая кнопка",
+	"block.environmental.willow_bookshelf": "Ивовая книжная полка",
+	"block.environmental.willow_ladder": "Ивовая лестница",
+	"block.environmental.willow_log": "Ивовое бревно",
+	"block.environmental.willow_wood": "Ива",
+	"block.environmental.stripped_willow_log": "Обтёсанное ивовое бревно",
+	"block.environmental.stripped_willow_wood": "Обтёсанная ивовая древесина",
+	"block.environmental.willow_sapling": "Саженец ивы",
+	"block.environmental.willow_leaves": "Ивовые листья",
+	"block.environmental.hanging_willow_leaves": "Свисающие ивовые листья",
+	"block.environmental.vertical_willow_planks": "Вертикальные ивовые доски",
+	"block.environmental.willow_vertical_slab": "Вертикальная плита из ивовых досок",
+	"block.environmental.willow_leaf_carpet": "Ковер из листьев ивы",
+	"block.environmental.potted_willow_sapling": "Саженец ивы в горшке",
+
+	"block.environmental.cattail_sprouts": "Ростки рогоза",
+	"block.environmental.cattail": "Рогоз",
+	"block.environmental.tall_cattail": "Высокий рогоз",
+	"block.environmental.potted_cattail": "Рогоз в горшке",
+
+	"block.environmental.cattail_thatch": "Солома рогоза",
+	"block.environmental.cattail_thatch_slab": "Плита из соломы рогоза",
+	"block.environmental.cattail_thatch_stairs": "Ступеньки из соломы рогоза",
+	"block.environmental.cattail_thatch_vertical_slab": "Вертикальная плита из соломы рогоза",
+	"block.environmental.cattail_seed_sack": "Мешок семян рогоза",
+	"item.environmental.cattail_seeds": "Семена рогоза",
+
+	"block.environmental.rice_sack": "Мешок риса",
+	"block.environmental.rice": "Рис",
+	"block.environmental.tall_rice": "Рис",
+	"item.environmental.rice_ball": "Рисовый шарик",
+	
+	"block.environmental.duckweed": "Ряска",
+	"block.environmental.duckweed_thatch": "Тростник ряски",
+	"block.environmental.duckweed_thatch_slab": "Плита из тростника ряски",
+	"block.environmental.duckweed_thatch_stairs": "Ступеньки из тростника ряски",
+	"block.environmental.duckweed_thatch_vertical_slab": "Вертикальная плита из тростника ряски",
+	
+	"item.environmental.slabfish_spawn_egg": "Яйцо призыва Плитняка",
+	"item.environmental.axolotl_spawn_egg": "Яйцо призыва Аксолотля",
+	
+	"item.environmental.cod_kelp_roll": "Ролл из водорослей трески",
+	"item.environmental.tropical_fish_kelp_roll": "Ролл из водорослей тропических рыб",
+	"item.environmental.crab_kelp_roll": "Ролл из крабовых водорослей",
+	"item.environmental.pike_kelp_roll": "Ролл из щучих водорослей",
+	"item.environmental.cavefish_kelp_roll": "Ролл из водорослей пещерных рыб",
+	
+	"item.environmental.salmon_rice_cake": "Рисовый пирог с лососем",
+	"item.environmental.pufferfish_rice_cake": "Рисовый пирог с фугой",
+	"item.environmental.lionfish_rice_cake": "Рисовый пирог с крылаткой",
+	
+	"item.environmental.squid_ink_risotto": "Ризотто с чернилами кальмара",
+	
+	"item.environmental.axolotl_bucket": "Аксолотль в ведре",
+	
+	"item.environmental.mud_ball": "Глинянной шар",
+	"item.environmental.mud_brick": "Глинянные кирпичи",
+	"item.environmental.mud_bucket": "Глинянное ведро",
+	"item.environmental.willow_boat": "Ивовая лодка",
+	
+	"item.environmental.music_disc_slabrave": "Музыкальный диск",
+	"item.environmental.music_disc_slabrave.desc": "Mista Jub - Slabrave",
+	
+	"entity.environmental.slabfish": "Плитняк",
+	"entity.environmental.axolotl": "Аксолотль",
+	"entity.environmental.boat": "Лодка",
+	
+	"biome.environmental.marsh": "Болото",
+	"biome.environmental.mushroom_marsh": "Грибное болото",
+	"biome.environmental.mire": "Трясина",
+	
+	"advancements.husbandry.equip_axolotl.title": "Затерянный в море, но не одинокий!",
+	"advancements.husbandry.equip_axolotl.description": "Пусть Аксолотль вцепится в тебя и исцелит!",
+	
+	"advancements.husbandry.breed_all_slabfish.title": "Фанк-Генетика",
+	"advancements.husbandry.breed_all_slabfish.description": "Разведите все варианты Плитняков!",
+	
+	"advancements.husbandry.backpack_slabfish.title": "Первый день в школе",
+	"advancements.husbandry.backpack_slabfish.description": "Дайте рюкзак Плитняку",
+	
+	"advancements.adventure.find_natural_slabfish.title": "Они бывают разных цветов!",
+	"advancements.adventure.find_natural_slabfish.description": "Найти все варианты натуральных Плитняков",
+	
+	"subtitles.entity.slabfish.burp": "Плитняк отрыгивает",
+	"subtitles.entity.slabfish.death": "Плитняк умирает",
+	"subtitles.entity.slabfish.step": "Плитняк идёт",
+	"subtitles.entity.slabfish.hurt": "Плитняку больно",
+	"subtitles.entity.slabfish.eat": "Плитняк ест",
+	"subtitles.entity.slabfish.transform": "Плитняк преображается",
+	"subtitles.entity.slabfish.backpack": "Рюкзак надет",
+	"subtitles.entity.slabfish.sweater": "Свитер надет",
+	
+	"block.environmental.mud": "Глина",
+	"fluid.environmental.mud": "Глина"
+}

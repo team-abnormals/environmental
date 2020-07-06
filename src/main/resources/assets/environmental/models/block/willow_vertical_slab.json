@@ -1,0 +1,8 @@
+{
+    "parent": "environmental:block/vertical_slab",
+    "textures": {
+        "side": "environmental:block/willow_planks",
+        "top": "environmental:block/willow_planks",
+        "bottom": "environmental:block/willow_planks"
+    }
+}

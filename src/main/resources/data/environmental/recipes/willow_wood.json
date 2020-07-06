@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "bark",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "environmental:willow_log"
+    }
+  },
+  "result": {
+    "item": "environmental:willow_wood",
+    "count": 3
+  }
+}

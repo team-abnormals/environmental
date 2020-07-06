@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+	"environmental:cattail_thatch_stairs",
+	"environmental:mud_brick_stairs"
+  ]
+}

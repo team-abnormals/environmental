@@ -1,0 +1,36 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "environmental:mud_ball"
+        },
+        {
+            "item": "environmental:mud_ball"
+        },
+        {
+            "item": "environmental:mud_ball"
+        },
+        {
+            "item": "environmental:mud_ball"
+        },
+        {
+            "item": "minecraft:bucket"
+        },
+        {
+            "item": "environmental:mud_ball"
+        },
+        {
+            "item": "environmental:mud_ball"
+        },
+        {
+            "item": "environmental:mud_ball"
+        },
+        {
+            "item": "environmental:mud_ball"
+        }
+    ],
+    "result": {
+        "item": "environmental:mud_bucket",
+        "count": 1
+    }
+}

@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "environmental:block/wisteria_planks",
+        "side": "environmental:block/wisteria_bookshelf"
+    }
+}

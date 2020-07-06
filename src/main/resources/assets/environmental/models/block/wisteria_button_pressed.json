@@ -1,0 +1,6 @@
+{
+    "parent": "block/button_pressed",
+    "textures": {
+        "texture": "environmental:block/wisteria_planks"
+    }
+}

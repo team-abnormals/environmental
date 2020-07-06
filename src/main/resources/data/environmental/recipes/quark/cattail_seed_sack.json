@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TTT",
+    "TTT",
+    "TTT"
+  ],
+  "key": {
+    "T": {
+      "item": "environmental:cattail_seeds"
+    }
+  },
+  "result": {
+    "item": "environmental:cattail_seed_sack"
+  },
+  "conditions": [
+    {
+      "type": "abnormals_core:quark_flag",
+      "flag": "berry_sack"
+    }
+  ]
+}

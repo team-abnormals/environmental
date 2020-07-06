@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "environmental:cattail_seeds"
+        },
+        {
+            "item": "environmental:cattail_seeds"
+        },
+        {
+            "item": "environmental:cattail_seeds"
+        }
+    ],
+    "result": {
+        "item": "minecraft:string",
+        "count": 1
+    }
+}

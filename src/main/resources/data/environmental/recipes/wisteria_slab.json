@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_slab",
+  "pattern": [
+    "PPP"
+  ],
+  "key": {
+    "P": {
+      "item": "environmental:wisteria_planks"
+    }
+  },
+  "result": {
+    "item": "environmental:wisteria_slab",
+    "count": 6
+  }
+}

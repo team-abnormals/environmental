@@ -1,0 +1,17 @@
+{
+    "variants": {
+        "age=0":  { "model": "environmental:block/rice_stage0" },
+        "age=1":  { "model": "environmental:block/rice_stage1" },
+        "age=2":  { "model": "environmental:block/rice_stage2" },
+        "age=3":  { "model": "environmental:block/rice_stage3" },
+        "age=4":  { "model": "environmental:block/rice_stage4" },
+        "age=5":  { "model": "environmental:block/rice_stage5" }
+    }
+}
+
+
+
+
+
+
+

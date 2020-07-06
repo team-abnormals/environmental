@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "environmental:duckweed_thatch"
+    }
+  },
+  "result": {
+    "item": "environmental:duckweed_thatch_stairs",
+    "count": 4
+  }
+}

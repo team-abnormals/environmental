@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "environmental:willow_log",
+    "environmental:willow_wood",
+    "environmental:stripped_willow_log",
+    "environmental:stripped_willow_wood"
+  ]
+}

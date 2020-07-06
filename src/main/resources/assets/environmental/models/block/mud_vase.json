@@ -1,0 +1,50 @@
+{
+	"credit": "Made by Farcr",
+	"parent": "block/block",
+	"textures": {
+		"vase": "environmental:block/mud_vase",
+		"particle": "environmental:block/mud_vase"
+	},
+	"elements": [
+		{
+			"name": "vase",
+			"from": [5, 0, 5],
+			"to": [11, 9, 11],
+			"rotation": {"angle": 0, "axis": "z", "origin": [13, 8, 13]},
+			"faces": {
+				"north": {"uv": [2, 7, 8, 16], "texture": "vase"},
+				"east": {"uv": [2, 7, 8, 16], "texture": "vase"},
+				"south": {"uv": [2, 7, 8, 16], "texture": "vase"},
+				"west": {"uv": [2, 7, 8, 16], "texture": "vase"},
+				"up": {"uv": [2, 0, 8, 6], "texture": "vase"},
+				"down": {"uv": [9, 0, 15, 6], "texture": "vase"}
+			}
+		},
+		{
+			"name": "handle1",
+			"from": [3, 3, 7],
+			"to": [5, 6, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [11, 11, 15]},
+			"faces": {
+				"north": {"uv": [8, 10, 10, 13], "texture": "vase"},
+				"south": {"uv": [0, 10, 2, 13], "texture": "vase"},
+				"west": {"uv": [11, 10, 13, 13], "texture": "vase"},
+				"up": {"uv": [11, 7, 13, 9], "texture": "vase"},
+				"down": {"uv": [14, 7, 16, 9], "texture": "vase"}
+			}
+		},
+		{
+			"name": "handle2",
+			"from": [11, 3, 7],
+			"to": [13, 6, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [19, 11, 15]},
+			"faces": {
+				"north": {"uv": [0, 10, 2, 13], "texture": "vase"},
+				"east": {"uv": [11, 10, 13, 13], "texture": "vase"},
+				"south": {"uv": [8, 10, 10, 13], "texture": "vase"},
+				"up": {"uv": [11, 7, 13, 9], "texture": "vase"},
+				"down": {"uv": [14, 7, 16, 9], "texture": "vase"}
+			}
+		}
+	]
+}

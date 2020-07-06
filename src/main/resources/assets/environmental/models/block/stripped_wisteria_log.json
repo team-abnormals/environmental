@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "environmental:block/stripped_wisteria_log_top",
+        "side": "environmental:block/stripped_wisteria_log"
+    }
+}

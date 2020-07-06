@@ -1,0 +1,55 @@
+{
+    "block.environmental.wisteria_log": "Wisteriastamm",
+    "block.environmental.stripped_wisteria_log": "Entrindeter Wisteriastamm",
+    "block.environmental.wisteria_wood": "Wisteriaholz",
+    "block.environmental.stripped_wisteria_wood": "Entrindetes Wisteriaholz",
+    "block.environmental.wisteria_planks": "Wisteriabretter",
+    "block.environmental.wisteria_stairs": "Wisteriatreppe",
+    "block.environmental.wisteria_slab": "Wisteriastufe",
+    "block.environmental.wisteria_fence": "Wisteriazaun",
+    "block.environmental.wisteria_fence_gate": "Wisteriazauntor",
+    "block.environmental.wisteria_door": "Wisteriatür",
+    "block.environmental.wisteria_trapdoor": "Wisteriafalltür",
+    "block.environmental.wisteria_button": "Wisteriaknopf",
+    "block.environmental.wisteria_pressure_plate": "Wisteria Druckplatte",
+    "block.environmental.wisteria_sign": "Wisteriaschild",
+    
+    "block.environmental.wisteria_bookshelf": "Wisteria Bücherregal",
+    "block.environmental.wisteria_ladder": "Wisteria Leiter",
+    "block.environmental.vertical_wisteria_planks": "Vertikale Wisteriabretter",
+    "block.environmental.wisteria_vertical_slab": "Wisteria Vertikal Stufe",
+    
+    "block.environmental.blue_wisteria_leaves": "Blaue Wisteriablätter",
+    "block.environmental.pink_wisteria_leaves": "Rosa Wisteriablätter",
+    "block.environmental.purple_wisteria_leaves": "Lila Wisteriablätter",
+    "block.environmental.white_wisteria_leaves": "Weiße Wisteriablätter",
+    
+    "block.environmental.blue_hanging_wisteria_leaves": "Hängende Blaue Wisteriablätter",
+    "block.environmental.pink_hanging_wisteria_leaves": "Hängende Rosa Wisteriablätter",
+    "block.environmental.purple_hanging_wisteria_leaves": "Hängende Lila Wisteriablätter",
+    "block.environmental.white_hanging_wisteria_leaves": "Hängende Weiße Wisteriablätter",
+    
+    "block.environmental.blue_wisteria_sapling": "Blauer Wisteriasetzling",
+    "block.environmental.pink_wisteria_sapling": "Rosa Wisteriasetzling",
+    "block.environmental.purple_wisteria_sapling": "Lila Wisteriasetzling",
+    "block.environmental.white_wisteria_sapling": "Weißer Wisteriasetzling",
+    
+    "block.environmental.blue_wisteria_leaf_carpet": "Blauer Wisteriablatt Teppich",
+    "block.environmental.pink_wisteria_leaf_carpet": "Rosa Wisteriablatt Teppich",
+    "block.environmental.purple_wisteria_leaf_carpet": "Lila Wisteriablatt Teppich",
+    "block.environmental.white_wisteria_leaf_carpet": "Weißer Wisteriablatt Teppich",
+    
+    "block.environmental.blue_delphinium": "Blauer Rittersporn",
+    "block.environmental.pink_delphinium": "Rosa Rittersporn",
+    "block.environmental.purple_delphinium": "Lila Rittersporn",
+    "block.environmental.white_delphinium": "Weißer Rittersporn",
+
+    "item.environmental.butterfly_spawn_egg": "Schmetterling-Spawn-Ei",
+    "item.environmental.bottled_butterfly": "Schmetterling in der Flasche",
+    "item.environmental.wisteria_boat": "Wisteria Boot",
+
+    "biome.environmental.wisteria_forest": "Wisteriawald",
+    "biome.environmental.wisteria_forest_hills": "Wisteria Waldhügel",
+
+    "entity.environmental.butterfly": "Schmetterling"
+}

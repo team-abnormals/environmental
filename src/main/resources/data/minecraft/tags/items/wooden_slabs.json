@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "environmental:willow_slab",
+    "environmental:wisteria_slab"
+  ]
+}

@@ -1,0 +1,104 @@
+{
+	"block.environmental.mud_bricks": "Mutatiili",
+	"block.environmental.mud_brick_slab": "Mutatiililaatta",
+	"block.environmental.mud_brick_stairs": "Mutatiiliportaat",
+	"block.environmental.mud_brick_wall": "Mutatiilimuuri",
+	"block.environmental.mud_brick_vertical_slab": "Pystysuora mutatiililaatta",
+	"block.environmental.mud_vase": "Mutavaasi",
+	
+	"block.environmental.willow_planks": "Pajulankut",
+	"block.environmental.willow_slab": "Pajulaatta",
+	"block.environmental.willow_stairs": "Pajuportaat",
+	"block.environmental.willow_fence": "Pajuaita",
+	"block.environmental.willow_fence_gate": "Pajuportti",
+	"block.environmental.willow_pressure_plate": "Pajupainelaatta",
+	"block.environmental.willow_door": "Pajuovi",
+	"block.environmental.willow_trapdoor": "Pajuluukku",
+	"block.environmental.willow_button": "Pajunappi",
+	"block.environmental.willow_bookshelf": "Pajukirjahylly",
+	"block.environmental.willow_ladder": "Pajutikas",
+	"block.environmental.willow_log": "Pajuhalko",
+	"block.environmental.willow_wood": "Pajupuu",
+	"block.environmental.stripped_willow_log": "Kuorittu pajuhalko",
+	"block.environmental.stripped_willow_wood": "Kuorittu paju",
+	"block.environmental.willow_sapling": "Pajun taimi",
+	"block.environmental.willow_leaves": "Pajunlehdet",
+	"block.environmental.hanging_willow_leaves": "Roikkuvat pajunlehdet",
+	"block.environmental.vertical_willow_planks": "Pystysuorat pajulankut",
+	"block.environmental.willow_vertical_slab": "Pystysuora pajulaatta",
+	"block.environmental.willow_leaf_carpet": "Pajunlehtimatto",
+	"block.environmental.potted_willow_sapling": "Istutettu pajun taimi",
+	
+	"block.environmental.cattail_sprouts": "Osmankäämin verso",
+	"block.environmental.cattail": "Osmankäämi",
+	"block.environmental.tall_cattail": "Pitkä osmankäämi",
+	"block.environmental.potted_cattail": "Istutettu osmankäämi",
+	
+	"block.environmental.cattail_thatch": "Osmankäämikuutio",
+	"block.environmental.cattail_thatch_slab": "Osmankäämilaatta",
+	"block.environmental.cattail_thatch_stairs": "Osmankäämiportaat",
+	"block.environmental.cattail_thatch_vertical_slab": "Pystysuora osmankäämilaatta",
+	"block.environmental.cattail_seed_sack": "Osmankäämin siemensäkki",
+	"item.environmental.cattail_seeds": "Osmankäämin siemenet",
+	
+	"block.environmental.rice_sack": "Riisisäkki",
+	"block.environmental.rice": "Riisi",
+	"block.environmental.tall_rice": "Pitkä riisi",
+	"item.environmental.rice_ball": "Riisipallo",
+
+	"block.environmental.duckweed": "Sorsanlimaska",
+	"block.environmental.duckweed_thatch": "Sorsanlimaskakuutio",
+	"block.environmental.duckweed_thatch_slab": "Sorsanlimaskalaatta",
+	"block.environmental.duckweed_thatch_stairs": "Sorsanlimaskaportaat",
+	"block.environmental.duckweed_thatch_vertical_slab": "Pystysuora sorsanlimaskalaatta",
+	
+	"item.environmental.slabfish_spawn_egg": "Luo laattakala",
+	
+	"item.environmental.cod_kelp_roll": "Ahvenlevärulla",
+	"item.environmental.tropical_fish_kelp_roll": "Trooppinen kalalevärulla",
+	"item.environmental.crab_kelp_roll": "Taskurapulevärulla",
+	"item.environmental.pike_kelp_roll": "Haukilevärulla",
+	"item.environmental.cavefish_kelp_roll": "Luolakalalevärulla",
+	
+	"item.environmental.salmon_rice_cake": "Lohilevärulla",
+	"item.environmental.pufferfish_rice_cake": "Pallokalalevärulla",
+	"item.environmental.lionfish_rice_cake": "Leijonakalalevärulla",
+	
+	"item.environmental.squid_ink_risotto": "Musta risotto",
+	
+	"item.environmental.mud_ball": "Mutapallo",
+	"item.environmental.mud_brick": "Mutatiili",
+	"item.environmental.mud_bucket": "Mutaämpäri",
+	"item.environmental.willow_boat": "Pajuvene",
+	
+	"item.environmental.music_disc_slabrave": "Musiikkilevy",
+	"item.environmental.music_disc_slabrave.desc": "Mista Jub - Slabrave",
+	
+	"entity.environmental.slabfish": "Laattakala",
+	"entity.environmental.boat": "Vene",
+	
+	"biome.environmental.marsh": "Marski",
+	"biome.environmental.mushroom_marsh": "Sienimarski",
+	"biome.environmental.mire": "Letto",
+	
+	"advancements.husbandry.breed_all_slabfish.title": "Epävakaata genetiikkaa",
+	"advancements.husbandry.breed_all_slabfish.description": "Parita kaikki laattakalarodut!",
+	
+	"advancements.husbandry.backpack_slabfish.title": "Ensimmäinen koulupäivä",
+	"advancements.husbandry.backpack_slabfish.description": "Anna laattakalalle reppu",
+	
+	"advancements.adventure.find_natural_slabfish.title": "Niitä on erivärisiä!",
+	"advancements.adventure.find_natural_slabfish.description": "Löydä kaikki luonnolliset laattakalarodut",
+	
+	"subtitles.entity.slabfish.burp": "Laattakala röyhtäisee",
+	"subtitles.entity.slabfish.death": "Laattakala kuolee",
+	"subtitles.entity.slabfish.step": "Laattakala astelee",
+	"subtitles.entity.slabfish.hurt": "Laattakala vahingoittuu",
+	"subtitles.entity.slabfish.eat": "Laattakala syö",
+	"subtitles.entity.slabfish.transform": "Laattakala muuntautuu",
+	"subtitles.entity.slabfish.backpack": "Laattakalalle puetaan reppu",
+	"subtitles.entity.slabfish.sweater": "Laattakalalle puetaan villapaita",
+	
+	"block.environmental.mud": "Muta",
+	"fluid.environmental.mud": "Muta"
+}

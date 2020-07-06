@@ -1,0 +1,7 @@
+{
+    "parent": "environmental:block/leaf_carpet",
+    "textures": {
+        "all": "environmental:block/willow_leaves"
+    }
+}
+

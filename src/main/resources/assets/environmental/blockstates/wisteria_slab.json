@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "type=bottom": { "model": "environmental:block/wisteria_slab" },
+        "type=top": { "model": "environmental:block/wisteria_slab_top" },
+        "type=double": { "model": "environmental:block/wisteria_planks" }
+    }
+}

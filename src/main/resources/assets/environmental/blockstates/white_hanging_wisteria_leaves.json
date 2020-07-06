@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "half=lower": { "model": "environmental:block/white_hanging_wisteria_leaves_bottom" },
+        "half=upper":    { "model": "environmental:block/white_hanging_wisteria_leaves_top" }
+    }
+}

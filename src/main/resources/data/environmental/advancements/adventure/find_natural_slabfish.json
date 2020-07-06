@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:adventure/sleep_in_bed",
+  "display": {
+    "icon": {
+      "item": "environmental:willow_boat"
+    },
+    "title": {
+      "translate": "advancements.adventure.find_natural_slabfish.title"
+    },
+    "description": {
+      "translate": "advancements.adventure.find_natural_slabfish.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+	"criteria": {
+		"swamp": {
+			"trigger": "environmental:swamp_slabfish"
+		},
+		"marsh": {
+			"trigger": "environmental:marsh_slabfish"
+		}
+	}
+}

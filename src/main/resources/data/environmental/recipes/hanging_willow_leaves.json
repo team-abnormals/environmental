@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "environmental:willow_leaves"
+    }
+  },
+  "result": {
+    "item": "environmental:hanging_willow_leaves",
+    "count": 3
+  }
+}

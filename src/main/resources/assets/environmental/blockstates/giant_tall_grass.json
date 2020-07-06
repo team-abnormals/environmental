@@ -1,0 +1,13 @@
+{
+    "variants": {
+        "half=upper":  { "model": "environmental:block/giant_tall_grass_top" },
+        "half=lower":  { "model": "environmental:block/giant_tall_grass_bottom" }
+    }
+}
+
+
+
+
+
+
+

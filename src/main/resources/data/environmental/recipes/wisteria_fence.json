@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_fence",
+  "pattern": [
+    "PSP",
+    "PSP"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "P": {
+      "item": "environmental:wisteria_planks"
+    }
+  },
+  "result": {
+    "item": "environmental:wisteria_fence",
+    "count": 3
+  }
+}

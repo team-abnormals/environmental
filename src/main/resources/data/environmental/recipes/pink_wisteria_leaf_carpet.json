@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LL"
+  ],
+  "key": {
+    "L": {
+      "item": "environmental:pink_wisteria_leaves"
+    }
+  },
+  "result": {
+    "item": "environmental:pink_wisteria_leaf_carpet",
+    "count": 3
+  },
+  "conditions": [
+    {
+      "type": "abnormals_core:quark_flag",
+      "flag": "leaf_carpet"
+    }
+  ]
+}

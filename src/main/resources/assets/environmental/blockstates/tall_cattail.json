@@ -1,0 +1,19 @@
+{
+    "variants": {
+        "half=upper,age=0,fake_waterlogged=false":  { "model": "environmental:block/cattail_tall_top" },
+        "half=lower,age=0,fake_waterlogged=false":  { "model": "environmental:block/cattail_tall_bottom" },
+        "half=upper,age=1,fake_waterlogged=false":  { "model": "environmental:block/cattail_tall_grown_top" },
+        "half=lower,age=1,fake_waterlogged=false":  { "model": "environmental:block/cattail_tall_grown_bottom" },
+        "half=upper,age=0,fake_waterlogged=true":  { "model": "environmental:block/cattail_tall_top_animated" },
+        "half=lower,age=0,fake_waterlogged=true":  { "model": "environmental:block/cattail_tall_bottom_animated" },
+        "half=upper,age=1,fake_waterlogged=true":  { "model": "environmental:block/cattail_tall_grown_top" },
+        "half=lower,age=1,fake_waterlogged=true":  { "model": "environmental:block/cattail_tall_grown_bottom" }
+    }
+}
+
+
+
+
+
+
+

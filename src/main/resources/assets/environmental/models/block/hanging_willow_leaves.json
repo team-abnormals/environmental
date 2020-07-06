@@ -1,0 +1,59 @@
+{
+	"credit": "Made by Farcr",
+	"ambientocclusion": false,
+        "parent": "block/block",
+	"textures": {
+		"leaves": "environmental:block/hanging_willow_leaves",
+        "particle":"environmental:block/willow_leaves"
+	},
+	"elements": [
+		{
+			"from": [3, 0, 0],
+			"to": [3, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#leaves", "tintindex": 0 },
+				"east": {"uv": [0, 0, 16, 16], "texture": "#leaves", "tintindex": 0 },
+				"south": {"uv": [0, 0, 16, 16], "texture": "#leaves", "tintindex": 0 },
+				"west": {"uv": [0, 0, 16, 16], "texture": "#leaves", "tintindex": 0 },
+				"up": {"uv": [0, 0, 16, 16], "texture": "#leaves", "tintindex": 0 },
+				"down": {"uv": [0, 0, 16, 16], "texture": "#leaves", "tintindex": 0 }
+			}
+		},
+		{
+			"from": [13, 0, 0],
+			"to": [13, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#leaves", "tintindex": 0 },
+				"east": {"uv": [0, 0, 16, 16], "texture": "#leaves", "tintindex": 0 },
+				"south": {"uv": [0, 0, 16, 16], "texture": "#leaves", "tintindex": 0 },
+				"west": {"uv": [0, 0, 16, 16], "texture": "#leaves", "tintindex": 0 },
+				"up": {"uv": [0, 0, 16, 16], "texture": "#leaves", "tintindex": 0 },
+				"down": {"uv": [0, 0, 16, 16], "texture": "#leaves", "tintindex": 0 }
+			}
+		},
+		{
+			"from": [0, 0, 3],
+			"to": [16, 16, 3],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#leaves", "tintindex": 0 },
+				"east": {"uv": [0, 0, 16, 16], "texture": "#leaves", "tintindex": 0 },
+				"south": {"uv": [0, 0, 16, 16], "texture": "#leaves", "tintindex": 0 },
+				"west": {"uv": [0, 0, 16, 16], "texture": "#leaves", "tintindex": 0 },
+				"up": {"uv": [0, 0, 16, 16], "texture": "#leaves", "tintindex": 0 },
+				"down": {"uv": [0, 0, 16, 16], "texture": "#leaves", "tintindex": 0 }
+			}
+		},
+		{
+			"from": [0, 0, 13],
+			"to": [16, 16, 13],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#leaves", "tintindex": 0 },
+				"east": {"uv": [0, 0, 16, 16], "texture": "#leaves", "tintindex": 0 },
+				"south": {"uv": [0, 0, 16, 16], "texture": "#leaves", "tintindex": 0 },
+				"west": {"uv": [0, 0, 16, 16], "texture": "#leaves", "tintindex": 0 },
+				"up": {"uv": [0, 0, 16, 16], "texture": "#leaves", "tintindex": 0 },
+				"down": {"uv": [0, 0, 16, 16], "texture": "#leaves", "tintindex": 0 }
+			}
+		}
+	]
+}

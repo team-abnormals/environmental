@@ -1,0 +1,6 @@
+{   
+    "parent": "environmental:block/leaf_carpet",
+    "textures": {
+        "all": "environmental:block/purple_wisteria_leaves"
+    }
+}

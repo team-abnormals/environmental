@@ -1,0 +1,56 @@
+{
+    "block.environmental.wisteria_log": "위스테리아나무 원목",
+    "block.environmental.stripped_wisteria_log": "껍질을 벗긴 위스테리아나무 원목",
+    "block.environmental.wisteria_wood": "위스테리아나무",
+    "block.environmental.stripped_wisteria_wood": "껍질을 벗긴 위스테리아나무",
+    "block.environmental.wisteria_planks": "위스테리아나무 판자",
+    "block.environmental.wisteria_stairs": "위스테리아나무 계단",
+    "block.environmental.wisteria_slab": "위스테리아나무 반 블록",
+    "block.environmental.wisteria_fence": "위스테리아나무 울타리",
+    "block.environmental.wisteria_fence_gate": "위스테리아나무 울타리 문",
+    "block.environmental.wisteria_door": "위스테리아나무 문",
+    "block.environmental.wisteria_trapdoor": "위스테리아나무 다락문",
+    "block.environmental.wisteria_button": "위스테리아나무 버튼",
+    "block.environmental.wisteria_pressure_plate": "위스테리아나무 압력판",
+    "block.environmental.wisteria_sign": "위스테리아나무 표지판",
+    
+    "block.environmental.wisteria_bookshelf": "위스테리아나무 책꽂이",
+    "block.environmental.wisteria_ladder": "위스테리아나무 사다리",
+    "block.environmental.vertical_wisteria_planks": "수직 위스테리아나무 판자",
+    "block.environmental.wisteria_vertical_slab": "위스테리아나무 수직 반 블록",
+    
+    "block.environmental.blue_wisteria_leaves": "푸른위스테리아나무 잎",
+    "block.environmental.pink_wisteria_leaves": "분홍위스테리아나무 잎",
+    "block.environmental.purple_wisteria_leaves": "보라위스테리아나무 잎",
+    "block.environmental.white_wisteria_leaves": "흰위스테리아나무 잎",
+    
+    "block.environmental.blue_hanging_wisteria_leaves": "푸른걸이위스테리아나무 잎",
+    "block.environmental.pink_hanging_wisteria_leaves": "분홍걸이위스테리아나무 잎",
+    "block.environmental.purple_hanging_wisteria_leaves": "보라걸이위스테리아나무 잎",
+    "block.environmental.white_hanging_wisteria_leaves": "흰걸이위스테리아나무 잎",
+    
+    "block.environmental.blue_wisteria_sapling": "푸른위스테리아나무 묘목",
+    "block.environmental.pink_wisteria_sapling": "분홍위스테리아나무 묘목",
+    "block.environmental.purple_wisteria_sapling": "보라위스테리아나무 묘목",
+    "block.environmental.white_wisteria_sapling": "흰위스테리아나무 묘목",
+    
+    "block.environmental.blue_wisteria_leaf_carpet": "푸른위스테리아나무 잎 카펫",
+    "block.environmental.pink_wisteria_leaf_carpet": "분홍위스테리아나무 잎 카펫",
+    "block.environmental.purple_wisteria_leaf_carpet": "보라위스테리아나무 잎 카펫",
+    "block.environmental.white_wisteria_leaf_carpet": "흰위스테리아나무 잎 카펫",
+    
+    "block.environmental.blue_delphinium": "푸른델피니움",
+    "block.environmental.pink_delphinium": "분홍델피니움",
+    "block.environmental.purple_delphinium": "보라델피니움",
+    "block.environmental.white_delphinium": "흰델피니움",
+
+    "item.environmental.butterfly_spawn_egg": "나비 스폰 알",
+    "item.environmental.bottled_butterfly": "병에 담긴 나비",
+    "item.environmental.wisteria_boat": "위스테리아나무 보트",
+
+    "biome.environmental.wisteria_forest": "위스테리아나무 숲",
+    "biome.environmental.wisteria_forest_hills": "위스테리아나무 숲 언덕",
+
+    "entity.environmental.butterfly": "나비",
+    "entity.environmental.boat": "보트"
+}

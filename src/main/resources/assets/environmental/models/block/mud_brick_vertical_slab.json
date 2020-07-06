@@ -1,0 +1,8 @@
+{
+    "parent": "environmental:block/vertical_slab",
+    "textures": {
+        "side": "environmental:block/mud_bricks",
+        "top": "environmental:block/mud_bricks",
+        "bottom": "environmental:block/mud_bricks"
+    }
+}

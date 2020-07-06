@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "type=bottom": { "model": "environmental:block/willow_slab" },
+        "type=top": { "model": "environmental:block/willow_slab_top" },
+        "type=double": { "model": "environmental:block/willow_planks" }
+    }
+}

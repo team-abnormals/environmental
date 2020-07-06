@@ -1,0 +1,26 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "/ /",
+        "/O/",
+        "/ /"
+    ],
+    "key": {
+        "/": {
+            "item": "minecraft:stick"
+        },
+        "O": {
+            "item": "environmental:willow_planks"
+        }
+    },
+    "result": {
+        "item": "environmental:willow_ladder",
+        "count": 4
+    },
+  "conditions": [
+    {
+      "type": "abnormals_core:quark_flag",
+      "flag": "variant_ladders"
+    }
+  ]
+}

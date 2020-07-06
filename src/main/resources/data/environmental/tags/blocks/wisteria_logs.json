@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "environmental:wisteria_log",
+    "environmental:wisteria_wood",
+    "environmental:stripped_wisteria_log",
+    "environmental:stripped_wisteria_wood"
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "music.record.slabrave": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "environmental:record/slabrave",
+        "stream": true
+      }
+    ]
+  },
+  "entity.slabfish.death": {
+    "sounds": [
+      "entity/fish/hurt1",
+      "entity/fish/hurt2",
+      "entity/fish/hurt3",
+      "entity/fish/hurt4"
+    ],
+    "subtitle": "subtitles.entity.slabfish.death"
+  },
+  "entity.slabfish.step": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "entity/fish/flop1",
+        "volume": 0.3
+      },
+      {
+        "name": "entity/fish/flop2",
+        "volume": 0.3
+      },
+      {
+        "name": "entity/fish/flop3",
+        "volume": 0.3
+      },
+      {
+        "name": "entity/fish/flop4",
+        "volume": 0.3
+      }
+    ],
+    "subtitle": "subtitles.entity.slabfish.step"
+  },
+  "entity.slabfish.hurt": {
+    "sounds": [
+      "entity/fish/hurt1",
+      "entity/fish/hurt2",
+      "entity/fish/hurt3",
+      "entity/fish/hurt4"
+    ],
+    "subtitle": "subtitles.entity.slabfish.hurt"
+  },
+  "entity.slabfish.transform": {
+    "sounds": [
+      "random/fizz"
+    ],
+    "subtitle": "subtitles.entity.slabfish.transform"
+  },
+  "entity.slabfish.eat": {
+    "sounds": [
+      "random/eat1",
+      "random/eat2",
+      "random/eat3"
+    ],
+    "subtitle": "subtitles.entity.slabfish.eat"
+  },
+  "entity.slabfish.burp": {
+    "sounds": [
+      "random/burp"
+    ],
+    "subtitle": "subtitles.entity.slabfish.burp"
+  },
+  "entity.slabfish.backpack": {
+    "sounds": [
+      "mob/horse/leather"
+    ],
+    "subtitle": "subtitles.entity.slabfish.backpack"
+  },
+  "entity.slabfish.sweater": {
+    "sounds": [
+      "item/armor/equip_leather1",
+      "item/armor/equip_leather2",
+      "item/armor/equip_leather3",
+      "item/armor/equip_leather4",
+      "item/armor/equip_leather5",
+      "item/armor/equip_leather6"
+    ],
+    "subtitle": "subtitles.entity.slabfish.sweater"
+  }
+}

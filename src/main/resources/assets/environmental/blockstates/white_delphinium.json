@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "half=lower": { "model": "environmental:block/white_delphinium_bottom" },
+        "half=upper":    { "model": "environmental:block/white_delphinium_top" }
+    }
+}

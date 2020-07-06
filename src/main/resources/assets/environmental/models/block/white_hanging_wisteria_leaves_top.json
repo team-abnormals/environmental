@@ -1,0 +1,6 @@
+{
+    "parent": "environmental:block/hanging_wisteria_leaves_top",
+    "textures": {
+        "all": "environmental:block/white_hanging_wisteria_leaves_top"
+    }
+}
