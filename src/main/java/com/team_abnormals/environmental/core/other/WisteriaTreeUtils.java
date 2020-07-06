@@ -30,13 +30,13 @@ public class WisteriaTreeUtils {
 
     protected static boolean isLeaves(IWorldGenerationBaseReader worldIn, BlockPos pos) {
         return worldIn.hasBlockState(pos, (p_214579_0_) -> {
-            return p_214579_0_.isIn(BlockTags.LEAVES);
+            return p_214579_0_.func_235714_a_(BlockTags.LEAVES);
         });
     }
     
     public static boolean isLog(IWorldGenerationBaseReader worldIn, BlockPos pos) {
         return worldIn.hasBlockState(pos, (p_214579_0_) -> {
-           return p_214579_0_.isIn(BlockTags.LOGS);
+           return p_214579_0_.func_235714_a_(BlockTags.LOGS);
         });
      }
 }

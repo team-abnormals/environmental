@@ -14,9 +14,12 @@ import net.minecraft.item.BlockNamedItem;
 import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.item.Items;
 import net.minecraft.item.Rarity;
 import net.minecraft.item.SoupItem;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 
@@ -46,11 +49,20 @@ public class EnvironmentalItems {
 	public static final RegistryObject<Item> PUFFERFISH_RICE_CAKE 		= HELPER.createItem("pufferfish_rice_cake", () -> new Item(new Item.Properties().food(EnvironmentalFoods.PUFFERFISH_RICE_CAKE).group(ItemGroup.FOOD)));
 	public static final RegistryObject<Item> LIONFISH_RICE_CAKE 		= HELPER.createCompatItem("upgrade_aquatic", "lionfish_rice_cake", new Item.Properties().food(EnvironmentalFoods.LIONFISH_RICE_CAKE), ItemGroup.FOOD);
 	
-	public static final RegistryObject<Item> MUSIC_DISC_SLABRAVE 	= HELPER.createItem("music_disc_slabrave", () -> new AbnormalsMusicDiscItem(12, EnvironmentalSounds.SLABRAVE, new Item.Properties().maxStackSize(1).group(ItemGroup.MISC).rarity(Rarity.RARE)));
+	public static final RegistryObject<Item> MUSIC_DISC_SLABRAVE 	= HELPER.createItem("music_disc_slabrave", () -> new AbnormalsMusicDiscItem(12, () -> EnvironmentalSounds.SLABRAVE.get(), new Item.Properties().maxStackSize(1).group(ItemGroup.MISC).rarity(Rarity.RARE)));
 //	public static final RegistryObject<Item> AXOLOTL_BUCKET = HELPER.createItem("axolotl_bucket", () -> new AxolotlBucketItem(() -> EnvironmentalEntities.AXOLOTL.get(), () -> Fluids.WATER, new Item.Properties().group(ItemGroup.MISC).maxStackSize(1)));
 	public static final RegistryObject<Item> SLABFISH_BUCKET = HELPER.createItem("slabfish_bucket", () -> new SlabfishBucketItem(() -> EnvironmentalEntities.SLABFISH.get(), () -> Fluids.WATER, new Item.Properties().group(ItemGroup.MISC).maxStackSize(1)));
 
 	public static final RegistryObject<Item> SLABFISH_SPAWN_EGG = HELPER.createSpawnEggItem("slabfish", () -> EnvironmentalEntities.SLABFISH.get(), 6263617, 13940616);
 //	public static final RegistryObject<Item> AXOLOTL_SPAWN_EGG = HELPER.createSpawnEggItem("axolotl", () -> EnvironmentalEntities.AXOLOTL.get(), 6263617, 13940616);
 
+	public static void setupProperties() {
+		ItemModelsProperties.func_239418_a_(SLABFISH_BUCKET.get(), new ResourceLocation("variant"), (stack, world, entity) -> {
+			CompoundNBT compoundnbt = stack.getTag();
+			if (compoundnbt != null && compoundnbt.contains("SlabfishType", 3)) {
+				return compoundnbt.getInt("SlabfishType");
+			}
+			return 0;
+		});
+	}
 }

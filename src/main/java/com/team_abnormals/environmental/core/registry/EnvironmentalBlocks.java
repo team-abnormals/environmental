@@ -46,8 +46,8 @@ import com.teamabnormals.abnormals_core.common.blocks.wood.WoodStairsBlock;
 import com.teamabnormals.abnormals_core.common.blocks.wood.WoodTrapDoorBlock;
 import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
 
+import net.minecraft.block.AbstractBlock.Properties;
 import net.minecraft.block.Block;
-import net.minecraft.block.Block.Properties;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.DoublePlantBlock;
 import net.minecraft.block.FlowerPotBlock;
@@ -69,7 +69,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class EnvironmentalBlocks {
     
 	public static final RegistryHelper HELPER = Environmental.REGISTRY_HELPER;
-	public static final DeferredRegister<PaintingType> PAINTINGS = new DeferredRegister<>(ForgeRegistries.PAINTING_TYPES, Environmental.MODID);
+	public static final DeferredRegister<PaintingType> PAINTINGS = DeferredRegister.create(ForgeRegistries.PAINTING_TYPES, Environmental.MODID);
 
 	public static final RegistryObject<Block> MUD_BRICKS 				= HELPER.createBlock("mud_bricks", () -> new Block(EnvironmentalProperties.MUD_BRICKS), ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<Block> MUD_BRICK_STAIRS 			= HELPER.createBlock("mud_brick_stairs", () -> new AbnormalsStairsBlock(MUD_BRICKS.get().getDefaultState(), EnvironmentalProperties.MUD_BRICKS), ItemGroup.BUILDING_BLOCKS);
@@ -80,7 +80,7 @@ public class EnvironmentalBlocks {
 
 	public static final RegistryObject<Block> STRIPPED_WILLOW_LOG 	= HELPER.createBlock("stripped_willow_log", () -> new StrippedLogBlock(EnvironmentalProperties.LOG), ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<Block> STRIPPED_WILLOW_WOOD 	= HELPER.createBlock("stripped_willow_wood", () -> new StrippedWoodBlock(EnvironmentalProperties.LOG), ItemGroup.BUILDING_BLOCKS);
-	public static final RegistryObject<Block> WILLOW_LOG			= HELPER.createBlock("willow_log", () -> new AbnormalsLogBlock(STRIPPED_WILLOW_LOG, MaterialColor.GREEN, EnvironmentalProperties.LOG), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> WILLOW_LOG			= HELPER.createBlock("willow_log", () -> new AbnormalsLogBlock(STRIPPED_WILLOW_LOG, EnvironmentalProperties.LOG), ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<Block> WILLOW_WOOD 			= HELPER.createBlock("willow_wood", () -> new WoodBlock(STRIPPED_WILLOW_WOOD, EnvironmentalProperties.LOG), ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<Block> WILLOW_PLANKS 		= HELPER.createBlock("willow_planks", () -> new PlanksBlock(EnvironmentalProperties.WILLOW_PLANKS), ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<Block> WILLOW_SLAB 			= HELPER.createBlock("willow_slab", () -> new WoodSlabBlock(EnvironmentalProperties.WILLOW_PLANKS), ItemGroup.BUILDING_BLOCKS);
@@ -103,7 +103,7 @@ public class EnvironmentalBlocks {
 	public static final Pair<RegistryObject<AbnormalsStandingSignBlock>, RegistryObject<AbnormalsWallSignBlock>> SIGNS = HELPER.createSignBlock("willow", MaterialColor.GREEN);
 
 	public static final RegistryObject<Block> STRIPPED_WISTERIA_LOG 		= HELPER.createBlock("stripped_wisteria_log", () -> new StrippedLogBlock(EnvironmentalProperties.WISTERIA_LOG(true)), ItemGroup.BUILDING_BLOCKS);
-    public static final RegistryObject<Block> WISTERIA_LOG 					= HELPER.createBlock("wisteria_log", () -> new AbnormalsLogBlock(STRIPPED_WISTERIA_LOG, MaterialColor.WHITE_TERRACOTTA, EnvironmentalProperties.WISTERIA_LOG(false)), ItemGroup.BUILDING_BLOCKS);
+    public static final RegistryObject<Block> WISTERIA_LOG 					= HELPER.createBlock("wisteria_log", () -> new AbnormalsLogBlock(STRIPPED_WISTERIA_LOG, EnvironmentalProperties.WISTERIA_LOG(false)), ItemGroup.BUILDING_BLOCKS);
     public static final RegistryObject<Block> STRIPPED_WISTERIA_WOOD 		= HELPER.createBlock("stripped_wisteria_wood", () -> new StrippedWoodBlock(EnvironmentalProperties.WISTERIA_LOG(true)), ItemGroup.BUILDING_BLOCKS);
     public static final RegistryObject<Block> WISTERIA_WOOD 				= HELPER.createBlock("wisteria_wood", () -> new WoodBlock(STRIPPED_WISTERIA_WOOD, EnvironmentalProperties.WISTERIA_LOG(false)), ItemGroup.BUILDING_BLOCKS);
     public static final RegistryObject<Block> WISTERIA_PLANKS 				= HELPER.createBlock("wisteria_planks", () -> new PlanksBlock(EnvironmentalProperties.WISTERIA_PLANKS), ItemGroup.BUILDING_BLOCKS);

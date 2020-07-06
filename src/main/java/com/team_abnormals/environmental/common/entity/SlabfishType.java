@@ -103,7 +103,8 @@ public enum SlabfishType implements IStringSerializable {
 		return types.get(rand.nextInt(types.size()));
 	}
 
-	public String getName() {
+	@Override
+	public String func_176610_l() {
 		return this.name;
 	}
 	

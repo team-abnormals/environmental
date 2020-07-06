@@ -7,7 +7,6 @@ import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
-import net.minecraft.entity.EntityType;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -27,9 +26,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.IForgeShearable;
 
-@SuppressWarnings("deprecation")
-public class WisteriaLeavesBlock extends Block implements net.minecraftforge.common.IShearable {
+public class WisteriaLeavesBlock extends Block implements IForgeShearable {
     public static final IntegerProperty DISTANCE = IntegerProperty.create("distance", 1, 8);
     public static final BooleanProperty PERSISTENT = BlockStateProperties.PERSISTENT;
 
@@ -70,22 +69,23 @@ public class WisteriaLeavesBlock extends Block implements net.minecraftforge.com
         return stateIn;
     }
 
-    private static BlockState updateDistance(BlockState state, IWorld world, BlockPos pos) {
-        int i = 8;
-        try (BlockPos.PooledMutable blockpos$pooledmutableblockpos = BlockPos.PooledMutable.retain()) {
-            for(Direction direction : Direction.values()) {
-                blockpos$pooledmutableblockpos.setPos(pos).move(direction);
-                i = Math.min(i, getDistance(world.getBlockState(blockpos$pooledmutableblockpos)) + 1);
-                if (i == 1) {
-                    break;
-                }
-            }
+    private static BlockState updateDistance(BlockState state, IWorld worldIn, BlockPos pos) {
+    	int i = 7;
+    	BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
+
+        for(Direction direction : Direction.values()) {
+           blockpos$mutable.func_239622_a_(pos, direction);
+           i = Math.min(i, getDistance(worldIn.getBlockState(blockpos$mutable)) + 1);
+           if (i == 1) {
+              break;
+           }
         }
-        return state.with(DISTANCE, i);
+
+        return state.with(DISTANCE, Integer.valueOf(i));
     }
 
     private static int getDistance(BlockState neighbor) {
-        if (BlockTags.LOGS.contains(neighbor.getBlock())) {
+        if (BlockTags.LOGS.func_230235_a_(neighbor.getBlock())) {
             return 0;
         } else {
             if (neighbor.getBlock() instanceof WisteriaLeavesBlock) return neighbor.get(DISTANCE);
@@ -108,14 +108,6 @@ public class WisteriaLeavesBlock extends Block implements net.minecraftforge.com
                 }
             }
         }
-    }
-    @Override
-    public boolean causesSuffocation(BlockState state, IBlockReader worldIn, BlockPos pos) {
-        return false;
-    }
-    @Override
-    public boolean canEntitySpawn(BlockState state, IBlockReader worldIn, BlockPos pos, EntityType<?> type) {
-        return type == EntityType.OCELOT || type == EntityType.PARROT;
     }
 
     @Override

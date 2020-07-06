@@ -3,7 +3,6 @@ package com.team_abnormals.environmental.common.world.biome;
 import java.util.List;
 
 import com.google.common.collect.ImmutableList;
-import com.team_abnormals.environmental.common.world.gen.treedecorator.HangingWillowLeavesTreeDecorator;
 import com.team_abnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.team_abnormals.environmental.core.registry.EnvironmentalFeatures;
 
@@ -15,6 +14,7 @@ import net.minecraft.world.gen.GenerationStage.Decoration;
 import net.minecraft.world.gen.blockplacer.DoublePlantBlockPlacer;
 import net.minecraft.world.gen.blockplacer.SimpleBlockPlacer;
 import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
+import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
 import net.minecraft.world.gen.feature.BlockClusterFeatureConfig;
 import net.minecraft.world.gen.feature.BlockStateFeatureConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
@@ -23,8 +23,8 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.MultipleRandomFeatureConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.SeaGrassConfig;
-import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.feature.TwoFeatureChoiceConfig;
+import net.minecraft.world.gen.feature.TwoLayerFeature;
 import net.minecraft.world.gen.foliageplacer.BlobFoliagePlacer;
 import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
 import net.minecraft.world.gen.placement.ChanceConfig;
@@ -34,6 +34,7 @@ import net.minecraft.world.gen.placement.HeightWithChanceConfig;
 import net.minecraft.world.gen.placement.IPlacementConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.treedecorator.LeaveVineTreeDecorator;
+import net.minecraft.world.gen.trunkplacer.StraightTrunkPlacer;
 import net.minecraftforge.fml.ModList;
 
 public class EnvironmentalBiomeFeatures {
@@ -41,18 +42,16 @@ public class EnvironmentalBiomeFeatures {
 	public static final BlockClusterFeatureConfig DUCKWEED_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(EnvironmentalBlocks.DUCKWEED.get().getDefaultState()), new SimpleBlockPlacer())).tries(1024).build();
 	public static final BlockClusterFeatureConfig GIANT_TALL_GRASS_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(EnvironmentalBlocks.GIANT_TALL_GRASS.get().getDefaultState()), new DoublePlantBlockPlacer())).tries(256).func_227317_b_().build();
 
-	
-	public static final TreeFeatureConfig WILLOW_TREE_CONFIG = (
-			new TreeFeatureConfig.Builder(
+	public static final BaseTreeFeatureConfig WILLOW_TREE_CONFIG = (
+			new BaseTreeFeatureConfig.Builder(
 					new SimpleBlockStateProvider(EnvironmentalBlocks.WILLOW_LOG.get().getDefaultState()), 
 					new SimpleBlockStateProvider(EnvironmentalBlocks.WILLOW_LEAVES.get().getDefaultState()), 
-					new BlobFoliagePlacer(3, 0)))
-			.baseHeight(5)
-			.heightRandA(3)
-			.foliageHeight(3)
-			.maxWaterDepth(1)
-			.decorators(ImmutableList.of(new LeaveVineTreeDecorator(), new HangingWillowLeavesTreeDecorator()))
-			.setSapling((net.minecraftforge.common.IPlantable)EnvironmentalBlocks.WILLOW_SAPLING.get()).build();
+					new BlobFoliagePlacer(3, 0, 0, 0, 3), 
+					new StraightTrunkPlacer(5, 3, 0), 
+					new TwoLayerFeature(1, 0, 1)))
+			.func_236701_a_(1)
+			.func_236703_a_(ImmutableList.of(LeaveVineTreeDecorator.field_236871_b_))
+			.build();
 	
 	public static void addMushrooms(Biome biome) {
 		if (!ModList.get().isLoaded("enhanced_mushrooms"))
@@ -66,7 +65,7 @@ public class EnvironmentalBiomeFeatures {
 	}
 	
 	public static void addMarshVegetation(Biome biome) {
-		biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.withConfiguration(new MultipleRandomFeatureConfig(ImmutableList.of(Feature.FANCY_TREE.withConfiguration(DefaultBiomeFeatures.FANCY_TREE_CONFIG).withChance(0.33333334F)), Feature.NORMAL_TREE.withConfiguration(DefaultBiomeFeatures.OAK_TREE_CONFIG))).withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(0, 0.25F, 1))));
+		biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.withConfiguration(new MultipleRandomFeatureConfig(ImmutableList.of(Feature.field_236291_c_.withConfiguration(DefaultBiomeFeatures.FANCY_TREE_CONFIG).withChance(0.33333334F)), Feature.field_236291_c_.withConfiguration(DefaultBiomeFeatures.OAK_TREE_CONFIG))).withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(0, 0.25F, 1))));
 		biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.FLOWER.withConfiguration(DefaultBiomeFeatures.BLUE_ORCHID_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_32.configure(new FrequencyConfig(1))));
 		biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.FLOWER.withConfiguration(EnvironmentalBiomeFeatures.CORNFLOWER_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_32.configure(new FrequencyConfig(1))));
 		biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(DefaultBiomeFeatures.GRASS_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(5))));
@@ -103,11 +102,11 @@ public class EnvironmentalBiomeFeatures {
 	}
 	
 	public static void addWillowTrees(Biome biome) {
-        biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.WILLOW_TREE.withConfiguration(WILLOW_TREE_CONFIG).withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(3, 0.1F, 1))));
+        biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.field_236291_c_.withConfiguration(WILLOW_TREE_CONFIG).withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(3, 0.1F, 1))));
 	}
 	
 	public static void addSwampOaks(Biome biome) {
-        biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.withConfiguration(new MultipleRandomFeatureConfig(ImmutableList.of(Feature.FANCY_TREE.withConfiguration(DefaultBiomeFeatures.FANCY_TREE_CONFIG).withChance(0.33333334F)), Feature.NORMAL_TREE.withConfiguration(DefaultBiomeFeatures.OAK_TREE_CONFIG))).withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(0, 0.05F, 1))));
+        biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.withConfiguration(new MultipleRandomFeatureConfig(ImmutableList.of(Feature.field_236291_c_.withConfiguration(DefaultBiomeFeatures.FANCY_TREE_CONFIG).withChance(0.33333334F)), Feature.field_236291_c_.withConfiguration(DefaultBiomeFeatures.OAK_TREE_CONFIG))).withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(0, 0.05F, 1))));
 	}
 	
 	public static void overrideFeatures(Biome biome){
@@ -120,8 +119,8 @@ public class EnvironmentalBiomeFeatures {
     			if (configuredFeature.config instanceof DecoratedFeatureConfig) {
     	    		 DecoratedFeatureConfig decorated = (DecoratedFeatureConfig)configuredFeature.config;
     	    		 
-    	    		 if (decorated.feature.config instanceof TreeFeatureConfig) {
-    	    			 TreeFeatureConfig tree = (TreeFeatureConfig)decorated.feature.config;
+    	    		 if (decorated.feature.config instanceof BaseTreeFeatureConfig) {
+    	    			 BaseTreeFeatureConfig tree = (BaseTreeFeatureConfig)decorated.feature.config;
     	    			 
     	    			 if (tree == DefaultBiomeFeatures.SWAMP_TREE_CONFIG) {
     	    				 biome.getFeatures(stage).remove(configuredFeature);

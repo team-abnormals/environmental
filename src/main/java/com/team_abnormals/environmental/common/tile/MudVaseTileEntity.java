@@ -4,6 +4,7 @@ import javax.annotation.Nullable;
 
 import com.team_abnormals.environmental.core.registry.EnvironmentalTileEntities;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
@@ -35,8 +36,8 @@ public class MudVaseTileEntity extends LockableLootTileEntity {
         return compound;
      }
 
-     public void read(CompoundNBT compound) {
-        super.read(compound);
+     public void func_230337_a_(BlockState state, CompoundNBT compound) {
+        super.func_230337_a_(state, compound);
         this.inventory = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
         if (!this.checkLootAndRead(compound)) {
            ItemStackHelper.loadAllItems(compound, this.inventory);

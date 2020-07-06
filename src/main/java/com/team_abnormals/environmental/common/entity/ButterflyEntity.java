@@ -12,18 +12,20 @@ import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.Pose;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomFlyingGoal;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -43,7 +45,7 @@ public class ButterflyEntity extends CreatureEntity {
 
     public static boolean spawnCondition(EntityType<ButterflyEntity> entity, IWorld world, SpawnReason reason, BlockPos pos, Random random) {
         int light = world.getLight(pos);
-        if (world.getDimension().getType() == DimensionType.OVERWORLD && world.canBlockSeeSky(pos) && light >= 7 && world.getWorld().isDaytime()) {
+        if (world.getWorld().func_234922_V_() == DimensionType.field_235999_c_ && world.canBlockSeeSky(pos) && light >= 7 && world.getWorld().isDaytime()) {
             return (world.getBlockState(pos).getBlock() instanceof BushBlock || world.getBlockState(pos.down()).getBlock() instanceof BushBlock || world.getBlockState(pos.north()).getBlock() instanceof BushBlock || world.getBlockState(pos.south()).getBlock() instanceof BushBlock || world.getBlockState(pos.east()).getBlock() instanceof BushBlock || world.getBlockState(pos.west()).getBlock() instanceof BushBlock) && world.getLightSubtracted(pos, 0) > 8;
         }
         else return false;
@@ -94,10 +96,9 @@ public class ButterflyEntity extends CreatureEntity {
 
     protected void collideWithNearbyEntities() {
     }
-
-    protected void registerAttributes() {
-        super.registerAttributes();
-        getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(3.0D);
+    
+    public static AttributeModifierMap.MutableAttribute registerAttributes() {
+    	return MobEntity.func_233666_p_().func_233815_a_(Attributes.field_233818_a_, 3.0D);
     }
 
     public void tick() {
@@ -116,8 +117,8 @@ public class ButterflyEntity extends CreatureEntity {
         double x = (double)spawnPosition.getX() + 0.5D - getPosX();
         double y = (double)spawnPosition.getY() + 0.1D - getPosY();
         double z = (double)spawnPosition.getZ() + 0.5D - getPosZ();
-        Vec3d lvt_9_1_ = getMotion();
-        Vec3d lvt_10_1_ = lvt_9_1_.add((Math.signum(x) * 0.5D - lvt_9_1_.x) * 0.10000000149011612D, (Math.signum(y) * 0.699999988079071D - lvt_9_1_.y) * 0.10000000149011612D, (Math.signum(z) * 0.5D - lvt_9_1_.z) * 0.10000000149011612D);
+        Vector3d lvt_9_1_ = getMotion();
+        Vector3d lvt_10_1_ = lvt_9_1_.add((Math.signum(x) * 0.5D - lvt_9_1_.x) * 0.10000000149011612D, (Math.signum(y) * 0.699999988079071D - lvt_9_1_.y) * 0.10000000149011612D, (Math.signum(z) * 0.5D - lvt_9_1_.z) * 0.10000000149011612D);
         setMotion(lvt_10_1_);
         float lvt_11_1_ = (float)(MathHelper.atan2(lvt_10_1_.z, lvt_10_1_.x) * 57.2957763671875D) - 90.0F;
         float lvt_12_1_ = MathHelper.wrapDegrees(lvt_11_1_ - rotationYaw);

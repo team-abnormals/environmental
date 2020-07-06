@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[31,)"
+loaderVersion="[32,)"
 logoFile="logo.png"
 authors="Farcr & Bagel"
 credits="hatsondogs, five"
@@ -15,20 +15,20 @@ credits="hatsondogs, five"
 [[dependencies.environmental]]
     modId="forge"
     mandatory=true
-    versionRange="[31.1.46,)"
+    versionRange="[32.0.47,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.environmental]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.15.2]"
+    versionRange="[1.16.1,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.environmental]]
     modId="abnormals_core"
     mandatory=true
-    versionRange="[1.0.6,)"
+    versionRange="[2.0.0,)"
     ordering="AFTER"
     side="BOTH"

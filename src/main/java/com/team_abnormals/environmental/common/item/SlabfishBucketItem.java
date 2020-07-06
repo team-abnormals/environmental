@@ -23,7 +23,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -41,13 +40,6 @@ public class SlabfishBucketItem extends BucketItem {
 	public SlabfishBucketItem(Supplier<EntityType<? extends SlabfishEntity>> entityType, Supplier<? extends Fluid> supplier, Item.Properties builder) {
 		super(supplier, builder);
 		this.entityType = entityType;
-		this.addPropertyOverride(new ResourceLocation("variant"), (stack, world, entity) -> {
-			CompoundNBT compoundnbt = stack.getTag();
-			if (compoundnbt != null && compoundnbt.contains("SlabfishType", 3)) {
-				return compoundnbt.getInt("SlabfishType");
-			}
-			return 0;
-		});
 	}
 
 	public void onLiquidPlaced(World worldIn, ItemStack p_203792_2_, BlockPos pos) {
@@ -87,21 +79,21 @@ public class SlabfishBucketItem extends BucketItem {
 			if (compoundnbt.contains("SlabfishType", 3)) {
 				int i = compoundnbt.getInt("SlabfishType");
 				TextFormatting[] btextformatting = new TextFormatting[] {TextFormatting.ITALIC, SlabfishType.byId(i).getRarity().color};
-				tooltip.add((new TranslationTextComponent(SlabfishType.byId(i).getTranslationKey()).applyTextStyles(btextformatting)));
+				tooltip.add((new TranslationTextComponent(SlabfishType.byId(i).getTranslationKey()).func_240701_a_(btextformatting)));
 			}
 			if (compoundnbt.contains("Age") && compoundnbt.getInt("Age") < 0) {
 				TextFormatting[] atextformatting = new TextFormatting[] {TextFormatting.ITALIC, TextFormatting.GRAY};
-				tooltip.add((new TranslationTextComponent("entity.environmental.slabfish.baby").applyTextStyles(atextformatting)));
+				tooltip.add((new TranslationTextComponent("entity.environmental.slabfish.baby").func_240701_a_(atextformatting)));
 			}
 			if (compoundnbt.contains("HasBackpack") && compoundnbt.getBoolean("HasBackpack") && compoundnbt.contains("BackpackColor", 99)) {
 				int i = compoundnbt.getInt("BackpackColor");
 				TextFormatting[] atextformatting = new TextFormatting[] {TextFormatting.ITALIC, TextFormatting.GRAY};
-				tooltip.add((new TranslationTextComponent("entity.environmental.slabfish." + DyeColor.byId(i).getTranslationKey() + "_backpack").applyTextStyles(atextformatting)));
+				tooltip.add((new TranslationTextComponent("entity.environmental.slabfish." + DyeColor.byId(i).getTranslationKey() + "_backpack").func_240701_a_(atextformatting)));
 			}
 			if (compoundnbt.contains("HasSweater") && compoundnbt.getBoolean("HasSweater")  && compoundnbt.contains("SweaterColor", 99)) {
 				int i = compoundnbt.getInt("SweaterColor");
 				TextFormatting[] atextformatting = new TextFormatting[] {TextFormatting.ITALIC, TextFormatting.GRAY};
-				tooltip.add((new TranslationTextComponent("entity.environmental.slabfish." + DyeColor.byId(i).getTranslationKey() + "_sweater").applyTextStyles(atextformatting)));
+				tooltip.add((new TranslationTextComponent("entity.environmental.slabfish." + DyeColor.byId(i).getTranslationKey() + "_sweater").func_240701_a_(atextformatting)));
 			}
 		}
 	}

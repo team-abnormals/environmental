@@ -13,7 +13,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 @EventBusSubscriber(modid = Environmental.MODID, bus = Bus.MOD)
 public class EnvironmentalFluids {
-	public static final DeferredRegister<Fluid> FLUIDS = new DeferredRegister<>(ForgeRegistries.FLUIDS, Environmental.MODID);
+	public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, Environmental.MODID);
 
     public static final RegistryObject<Fluid> MUD = FLUIDS.register("mud", () -> new MudFluid.Source());
     public static final RegistryObject<FlowingFluid> FLOWING_MUD = FLUIDS.register("flowing_mud", () -> new MudFluid.Flowing());

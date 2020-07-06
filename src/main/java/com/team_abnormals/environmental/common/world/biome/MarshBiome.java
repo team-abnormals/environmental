@@ -5,22 +5,36 @@ import com.team_abnormals.environmental.core.registry.EnvironmentalBiomes;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeAmbience;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.feature.structure.MineshaftConfig;
-import net.minecraft.world.gen.feature.structure.MineshaftStructure;
+import net.minecraft.world.biome.MoodSoundAmbience;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public final class MarshBiome extends Biome {
 	public MarshBiome() {
-		super((new Biome.Builder()).surfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_DIRT_GRAVEL_CONFIG).precipitation(Biome.RainType.RAIN).category(Biome.Category.SWAMP).depth(-0.25F).scale(0.0F).temperature(0.8F).downfall(0.9F).waterColor(6134398).waterFogColor(2569515).parent((String) null));
-		this.addStructure(Feature.SWAMP_HUT.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
-		this.addStructure(Feature.MINESHAFT.withConfiguration(new MineshaftConfig(0.004D, MineshaftStructure.Type.NORMAL)));
+		
+		super((new Biome.Builder())
+				.surfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_DIRT_GRAVEL_CONFIG)
+				.precipitation(Biome.RainType.RAIN)
+				.category(Biome.Category.SWAMP)
+				.depth(-0.25F)
+				.scale(0.0F)
+				.temperature(0.8F)
+				.downfall(0.9F)
+				.func_235097_a_((new BiomeAmbience.Builder())
+				.func_235246_b_(6134398)  // waterColor
+				.func_235248_c_(2302743)  // waterFogColor
+				.func_235239_a_(12638463) // fogColor
+				.func_235243_a_(MoodSoundAmbience.field_235027_b_)
+				.func_235238_a_()).parent((String) null));
+
+		this.func_235063_a_(DefaultBiomeFeatures.field_235172_j_); // SWAMP_HUT
+		this.func_235063_a_(DefaultBiomeFeatures.field_235150_b_); // MINESHAFT
+		this.func_235063_a_(DefaultBiomeFeatures.field_235130_B_); // RUINED_PORTAL
+		
 		DefaultBiomeFeatures.addCarvers(this);
-		DefaultBiomeFeatures.addStructures(this);
 		DefaultBiomeFeatures.addMonsterRooms(this);
 		DefaultBiomeFeatures.addStoneVariants(this);
 		DefaultBiomeFeatures.addOres(this);
@@ -37,7 +51,7 @@ public final class MarshBiome extends Biome {
 		EnvironmentalBiomeFeatures.addRice(this);
 		EnvironmentalBiomeFeatures.addGiantTallGrass(this, 50);
 		
-		DefaultBiomeFeatures.addFossils(this);
+		DefaultBiomeFeatures.func_235191_ai_(this);
 		DefaultBiomeFeatures.addFreezeTopLayer(this);
 		
 		this.addSpawn(EntityClassification.CREATURE, new Biome.SpawnListEntry(EntityType.SHEEP, 12, 4, 4));

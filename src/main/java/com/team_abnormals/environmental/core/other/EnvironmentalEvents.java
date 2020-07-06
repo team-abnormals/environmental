@@ -27,6 +27,9 @@ import net.minecraft.entity.projectile.ProjectileItemEntity;
 import net.minecraft.entity.projectile.ThrowableEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.loot.LootPool;
+import net.minecraft.loot.LootTables;
+import net.minecraft.loot.TableLootEntry;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.potion.Potion;
@@ -41,10 +44,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
-import net.minecraft.world.dimension.DimensionType;
-import net.minecraft.world.storage.loot.LootPool;
-import net.minecraft.world.storage.loot.LootTables;
-import net.minecraft.world.storage.loot.TableLootEntry;
+import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.LootTableLoadEvent;
@@ -194,12 +194,12 @@ public class EnvironmentalEvents {
 	public static void SlabfishDeath(LivingDeathEvent event) {
 		if (event.getEntity() instanceof SlabfishEntity) {
 			SlabfishEntity entity = (SlabfishEntity)event.getEntity();
-			if (entity.getEntityWorld().getDimension().getType() == DimensionType.THE_NETHER) {
+			if (entity.getEntityWorld().getBiome(new BlockPos(entity.getPositionVec())) == Biomes.field_235252_ay_) {
 				if (!entity.getEntityWorld().isRemote && entity.getSlabfishType() != SlabfishType.GHOST) {
 					SlabfishEntity ghost = EnvironmentalEntities.SLABFISH.get().create(entity.world);					
 					ghost.addPotionEffect(new EffectInstance(Effects.LEVITATION, 140, 0, false, false));
 					ghost.addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 140, 0, false, false));
-					entity.getEntityWorld().playSound(null, entity.getPosition(), SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.NEUTRAL, 1, 1);
+					entity.getEntityWorld().playSound(null, new BlockPos(entity.getPositionVec()), SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.NEUTRAL, 1, 1);
 					ghost.setPosition(entity.getPosX(), entity.getPosY(), entity.getPosZ());
 					ghost.setLocationAndAngles(entity.getPosX(), entity.getPosY(), entity.getPosZ(), entity.rotationYaw, entity.rotationPitch);
 					ghost.setNoAI(((MobEntity) entity).isAIDisabled());
@@ -209,7 +209,7 @@ public class EnvironmentalEvents {
 		    			ghost.setCustomNameVisible(entity.isCustomNameVisible());
 		    		}
 		    		ghost.setSlabfishType(SlabfishType.GHOST);
-					ghost.setFireTimer(0);
+					ghost.setFire(0);
 					entity.getEntityWorld().addEntity(ghost);
 				}
 			}

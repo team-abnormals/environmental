@@ -24,7 +24,7 @@ public class SlabbyGrabItemGoal extends Goal {
 	public boolean shouldExecute() {
 		if (!this.slabfish.hasBackpack()) {
 			return false;
-		} else if (this.slabfish.isSitting()) {
+		} else if (this.slabfish.func_233685_eM_()) {
 			return false;
 		} else {
 			List<ItemEntity> list = this.slabfish.world.getEntitiesWithinAABB(ItemEntity.class, this.slabfish.getBoundingBox().grow(12.0D, 4.0D, 12.0D));

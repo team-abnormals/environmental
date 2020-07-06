@@ -14,8 +14,8 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.BushBlock;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.IWaterLoggable;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -27,9 +27,9 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
@@ -86,7 +86,7 @@ public class CattailBlock extends BushBlock implements IWaterLoggable, IGrowable
 	}
     
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        Vec3d vec3d = state.getOffset(worldIn, pos);
+        Vector3d vec3d = state.getOffset(worldIn, pos);
         return SHAPE.withOffset(vec3d.x, vec3d.y, vec3d.z);
      }
     
@@ -96,14 +96,14 @@ public class CattailBlock extends BushBlock implements IWaterLoggable, IGrowable
 
     @Nullable
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		IFluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
+		FluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
 		boolean flag = ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8;
 		return this.getDefaultState().with(WATERLOGGED, flag);
 	}
     
     public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
     	DoubleCattailBlock doubleplantblock = (DoubleCattailBlock)(EnvironmentalBlocks.TALL_CATTAIL.get());
-    	IFluidState ifluidstateUp = worldIn.getFluidState(pos.up());
+    	FluidState ifluidstateUp = worldIn.getFluidState(pos.up());
         if (doubleplantblock.getDefaultState().isValidPosition(worldIn, pos) && (worldIn.isAirBlock(pos.up()) || (Boolean.valueOf(ifluidstateUp.isTagged(FluidTags.WATER) && ifluidstateUp.getLevel() == 8)))) {
         	DoubleCattailBlock.placeAt(worldIn, pos, 2);
         }
@@ -135,7 +135,7 @@ public class CattailBlock extends BushBlock implements IWaterLoggable, IGrowable
     
     @SuppressWarnings("deprecation")
     @Override
-	public IFluidState getFluidState(BlockState state) {
+	public FluidState getFluidState(BlockState state) {
 		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);	
 	}
 

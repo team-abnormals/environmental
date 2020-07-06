@@ -12,10 +12,10 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.IFluidState;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.state.IProperty;
+import net.minecraft.state.IntegerProperty;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.Tag;
 import net.minecraft.tileentity.TileEntity;
@@ -52,7 +52,7 @@ public abstract class MudFluid extends FlowingFluid {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void animateTick(World worldIn, BlockPos pos, IFluidState state, Random random) {
+    public void animateTick(World worldIn, BlockPos pos, FluidState state, Random random) {
         if (!state.isSource() && !(Boolean)state.get(FALLING)) {
             if (random.nextInt(64) == 0) {
                 worldIn.playSound((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, SoundEvents.BLOCK_WATER_AMBIENT, SoundCategory.BLOCKS, random.nextFloat() * 0.25F + 0.75F, random.nextFloat() + 0.5F, false);
@@ -72,8 +72,7 @@ public abstract class MudFluid extends FlowingFluid {
     }
 
     protected void beforeReplacingBlock(IWorld world, BlockPos pos, BlockState state) {
-        @SuppressWarnings("deprecation")
-		TileEntity tileentity = state.getBlock().hasTileEntity() ? world.getTileEntity(pos) : null;
+		TileEntity tileentity = state.getBlock().hasTileEntity(state) ? world.getTileEntity(pos) : null;
         Block.spawnDrops(state, world.getWorld(), pos, tileentity);
     }
 
@@ -81,7 +80,7 @@ public abstract class MudFluid extends FlowingFluid {
         return 1;
     }
 
-    public BlockState getBlockState(IFluidState state) {
+    public BlockState getBlockState(FluidState state) {
         return (BlockState)EnvironmentalBlocks.MUD.get().getDefaultState().with(FlowingFluidBlock.LEVEL, getLevelFromState(state));
     }
 
@@ -97,7 +96,7 @@ public abstract class MudFluid extends FlowingFluid {
         return 6;
     }
 
-    public boolean canDisplace(IFluidState state, IBlockReader reader, BlockPos pos, Fluid fluid, Direction direction) {
+    public boolean canDisplace(FluidState state, IBlockReader reader, BlockPos pos, Fluid fluid, Direction direction) {
         return direction == Direction.DOWN && !fluid.isIn(FluidTags.WATER);
     }
 
@@ -114,27 +113,27 @@ public abstract class MudFluid extends FlowingFluid {
 
     public static class Source extends MudFluid {
 
-        public int getLevel(IFluidState state) {
+        public int getLevel(FluidState state) {
             return 8;
         }
 
-        public boolean isSource(IFluidState state) {
+        public boolean isSource(FluidState state) {
             return true;
         }
     }
 
     public static class Flowing extends MudFluid {
 
-        protected void fillStateContainer(net.minecraft.state.StateContainer.Builder<Fluid, IFluidState> builder) {
+        protected void fillStateContainer(net.minecraft.state.StateContainer.Builder<Fluid, FluidState> builder) {
             super.fillStateContainer(builder);
-            builder.add(new IProperty[]{LEVEL_1_8});
+            builder.add(new IntegerProperty[]{LEVEL_1_8});
         }
 
-        public int getLevel (IFluidState state) {
+        public int getLevel (FluidState state) {
             return (Integer)state.get(LEVEL_1_8);
         }
 
-        public boolean isSource(IFluidState state) {
+        public boolean isSource(FluidState state) {
             return false;
         }
 		

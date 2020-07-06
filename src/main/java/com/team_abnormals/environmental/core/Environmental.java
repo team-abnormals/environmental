@@ -6,6 +6,7 @@ import com.team_abnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.team_abnormals.environmental.core.registry.EnvironmentalEntities;
 import com.team_abnormals.environmental.core.registry.EnvironmentalFeatures;
 import com.team_abnormals.environmental.core.registry.EnvironmentalFluids;
+import com.team_abnormals.environmental.core.registry.EnvironmentalItems;
 import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
 
 import net.minecraftforge.api.distmarker.Dist;
@@ -76,6 +77,7 @@ public class Environmental {
     	DeferredWorkQueue.runLater(() -> {
     		EnvironmentalData.setRenderLayers();
             EnvironmentalData.registerBlockColors();
+            EnvironmentalItems.setupProperties();
     	});
     }
     

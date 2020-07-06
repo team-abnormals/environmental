@@ -2,10 +2,9 @@ package com.team_abnormals.environmental.common.world.gen.feature;
 
 import java.util.Random;
 import java.util.Set;
-import java.util.function.Function;
 import java.util.function.Supplier;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 import com.team_abnormals.environmental.core.other.BiomeFeatures;
 import com.team_abnormals.environmental.core.other.WisteriaTreeUtils;
 
@@ -13,22 +12,25 @@ import net.minecraft.block.BlockState;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
+import net.minecraft.world.ISeedReader;
 import net.minecraft.world.IWorldWriter;
+import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.IWorldGenerationBaseReader;
 import net.minecraft.world.gen.IWorldGenerationReader;
-import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.TreeFeatureConfig;
+import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.structure.StructureManager;
 
-public class BigWisteriaTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> {
+public class BigWisteriaTreeFeature extends Feature<BaseTreeFeatureConfig> {
 	private Supplier<BlockState> VINE_UPPER;
 	private Supplier<BlockState> VINE_LOWER;
 
-	public BigWisteriaTreeFeature(Function<Dynamic<?>, ? extends TreeFeatureConfig> config) {
-		super(config);
+	public BigWisteriaTreeFeature(Codec<BaseTreeFeatureConfig> p_i231999_1_) {
+		super(p_i231999_1_);
 	}
 
 	@Override
-	public boolean place(IWorldGenerationReader world, Random random, BlockPos pos, Set<BlockPos> changedBlocks, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, TreeFeatureConfig config) {
+	public boolean func_230362_a_(ISeedReader world, StructureManager p_230362_2_, ChunkGenerator p_230362_3_, Random random, BlockPos pos, BaseTreeFeatureConfig config) {
 		if (config.leavesProvider.getBlockState(random, pos) == BiomeFeatures.BLUE_WISTERIA_LEAVES) {
 			VINE_UPPER = () -> BiomeFeatures.BLUE_HANGING_WISTERIA_LEAVES_TOP;
 			VINE_LOWER = () -> BiomeFeatures.BLUE_HANGING_WISTERIA_LEAVES_BOTTOM;
@@ -91,7 +93,7 @@ public class BigWisteriaTreeFeature extends AbstractTreeFeature<TreeFeatureConfi
 											boolean place = true;
 											if (y < 0) {
 												place = world.hasBlockState(leafPos.add(0, 1, 0), (state) -> {
-													return state.isIn(BlockTags.LEAVES);
+													return state.func_235714_a_(BlockTags.LEAVES);
 												});
 												if (place && random.nextInt(Math.abs(y) + 1) != 0) {
 													place = false;
@@ -134,7 +136,7 @@ public class BigWisteriaTreeFeature extends AbstractTreeFeature<TreeFeatureConfi
 		}
 	}
 
-	private void placeVines(Set<BlockPos> changedBlocks, IWorldGenerationReader world, Random random, BlockPos pos, BlockState leaf, BlockState vineLower, BlockState vineUpper, MutableBoundingBox boundingBox, TreeFeatureConfig config) {
+	private void placeVines(Set<BlockPos> changedBlocks, IWorldGenerationReader world, Random random, BlockPos pos, BlockState leaf, BlockState vineLower, BlockState vineUpper, MutableBoundingBox boundingBox, BaseTreeFeatureConfig config) {
 		int length = WisteriaTreeUtils.getLengthByNeighbors(world, random, pos);
 		if (random.nextInt(6) != 5 && isAir(world, pos) && !WisteriaTreeUtils.isLog(world, pos)) {
 			switch (length) {
@@ -160,7 +162,7 @@ public class BigWisteriaTreeFeature extends AbstractTreeFeature<TreeFeatureConfi
 		}
 	}
 
-	private void placeLeafAt(Set<BlockPos> changedBlocks, IWorldGenerationReader worldIn, BlockPos pos, MutableBoundingBox boundingBox, TreeFeatureConfig config, Random random) {
+	private void placeLeafAt(Set<BlockPos> changedBlocks, IWorldGenerationReader worldIn, BlockPos pos, MutableBoundingBox boundingBox, BaseTreeFeatureConfig config, Random random) {
 		if (isAirOrLeaves(worldIn, pos)) {
 			setLogState(changedBlocks, worldIn, pos, config.leavesProvider.getBlockState(random, pos), boundingBox);
 		}
@@ -178,7 +180,7 @@ public class BigWisteriaTreeFeature extends AbstractTreeFeature<TreeFeatureConfi
 		p_208521_1_.setBlockState(p_208521_2_, p_208521_3_, 18);
 	}
 
-	public static boolean isLeaves(IWorldGenerationBaseReader worldIn, BlockPos pos, TreeFeatureConfig config, Random random) {
+	public static boolean isLeaves(IWorldGenerationBaseReader worldIn, BlockPos pos, BaseTreeFeatureConfig config, Random random) {
 		if (worldIn instanceof net.minecraft.world.IWorldReader) // FORGE: Redirect to state method when possible
 			return worldIn.hasBlockState(pos, state -> state == config.leavesProvider.getBlockState(random, pos));
 		return worldIn.hasBlockState(pos, (p_227223_0_) -> {

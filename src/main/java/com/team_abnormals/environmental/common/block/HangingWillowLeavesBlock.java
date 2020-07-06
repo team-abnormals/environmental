@@ -20,14 +20,14 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.IForgeShearable;
 
 import javax.annotation.Nullable;
 
 import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
 
 import java.util.Random;
-@SuppressWarnings("deprecation")
-public class HangingWillowLeavesBlock extends Block implements net.minecraftforge.common.IShearable {
+public class HangingWillowLeavesBlock extends Block implements IForgeShearable {
     protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0, 7.0, 2.0, 14.0, 16.0, 14.0);
 
     public HangingWillowLeavesBlock(Block.Properties properties) {

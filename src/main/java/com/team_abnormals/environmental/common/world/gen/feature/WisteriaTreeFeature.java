@@ -2,10 +2,9 @@ package com.team_abnormals.environmental.common.world.gen.feature;
 
 import java.util.Random;
 import java.util.Set;
-import java.util.function.Function;
 import java.util.function.Supplier;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 import com.team_abnormals.environmental.core.other.BiomeFeatures;
 import com.team_abnormals.environmental.core.other.WisteriaTreeUtils;
 
@@ -13,22 +12,26 @@ import net.minecraft.block.BlockState;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
+import net.minecraft.world.ISeedReader;
 import net.minecraft.world.IWorldWriter;
+import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.IWorldGenerationBaseReader;
 import net.minecraft.world.gen.IWorldGenerationReader;
-import net.minecraft.world.gen.feature.AbstractTreeFeature;
+import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
+import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
+import net.minecraft.world.gen.feature.structure.StructureManager;
 
-public class WisteriaTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> {
+public class WisteriaTreeFeature extends Feature<BaseTreeFeatureConfig> {
 	private Supplier<BlockState> VINE_UPPER;
 	private Supplier<BlockState> VINE_LOWER;
 
-	public WisteriaTreeFeature(Function<Dynamic<?>, ? extends TreeFeatureConfig> config) {
-		super(config);
+	public WisteriaTreeFeature(Codec<BaseTreeFeatureConfig> p_i231999_1_) {
+		super(p_i231999_1_);
 	}
 
 	@Override
-	public boolean place(IWorldGenerationReader world, Random random, BlockPos pos, Set<BlockPos> changedBlocks, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBox, TreeFeatureConfig config) {
+	public boolean func_230362_a_(ISeedReader world, StructureManager p_230362_2_, ChunkGenerator p_230362_3_, Random random, BlockPos pos, BaseTreeFeatureConfig config) {
 		if (config.leavesProvider.getBlockState(random, pos) == BiomeFeatures.BLUE_WISTERIA_LEAVES) {
 			VINE_UPPER = () -> BiomeFeatures.BLUE_HANGING_WISTERIA_LEAVES_TOP;
 			VINE_LOWER = () -> BiomeFeatures.BLUE_HANGING_WISTERIA_LEAVES_BOTTOM;
@@ -82,7 +85,7 @@ public class WisteriaTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> 
 								boolean place = true;
 								if (y < 0) {
 									place = world.hasBlockState(leafPos.add(0, 1, 0), (state) -> {
-										return state.isIn(BlockTags.LEAVES);
+										return state.func_235714_a_(BlockTags.LEAVES);
 									});
 									if (place && random.nextInt(Math.abs(y) + 1) != 0) {
 										place = false;
@@ -181,7 +184,7 @@ public class WisteriaTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> 
 	protected final void setLogState(Set<BlockPos> changedBlocks, IWorldWriter worldIn, BlockPos pos, BlockState p_208520_4_, MutableBoundingBox p_208520_5_) {
 		this.func_208521_b(worldIn, pos, p_208520_4_);
 		p_208520_5_.expandTo(new MutableBoundingBox(pos, pos));
-		if (BlockTags.LOGS.contains(p_208520_4_.getBlock())) {
+		if (BlockTags.LOGS.func_230235_a_(p_208520_4_.getBlock())) {
 			changedBlocks.add(pos.toImmutable());
 		}
 	}

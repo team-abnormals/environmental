@@ -6,8 +6,8 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -49,11 +49,11 @@ public class DuckweedItem extends BlockItem {
             }
 
             BlockPos blockpos1 = blockpos.up();
-            IFluidState ifluidstate = worldIn.getFluidState(blockpos);
+            FluidState ifluidstate = worldIn.getFluidState(blockpos);
             if ((ifluidstate.getFluid() == Fluids.WATER) && worldIn.isAirBlock(blockpos1)) {
 
                // special case for handling block placement with water lilies
-               net.minecraftforge.common.util.BlockSnapshot blocksnapshot = net.minecraftforge.common.util.BlockSnapshot.getBlockSnapshot(worldIn, blockpos1);
+               net.minecraftforge.common.util.BlockSnapshot blocksnapshot = net.minecraftforge.common.util.BlockSnapshot.create(worldIn, blockpos1);
                worldIn.setBlockState(blockpos1, EnvironmentalBlocks.DUCKWEED.get().getDefaultState(), 11);
                if (net.minecraftforge.event.ForgeEventFactory.onBlockPlace(playerIn, blocksnapshot, net.minecraft.util.Direction.UP)) {
                   blocksnapshot.restore(true, false);

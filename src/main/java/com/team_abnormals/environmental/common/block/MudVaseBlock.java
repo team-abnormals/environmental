@@ -12,8 +12,8 @@ import net.minecraft.block.ContainerBlock;
 import net.minecraft.block.IWaterLoggable;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.fluid.IFluidState;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
@@ -90,13 +90,8 @@ public class MudVaseBlock extends ContainerBlock implements IWaterLoggable {
 	
 	@SuppressWarnings("deprecation")
     @Override
-	public IFluidState getFluidState(BlockState state) {
+	public FluidState getFluidState(BlockState state) {
 		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);	
-	}
-
-	@Override
-	public boolean isNormalCube(BlockState state, IBlockReader worldIn, BlockPos pos) {
-	    return false;
 	}
 	
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
@@ -136,6 +131,7 @@ public class MudVaseBlock extends ContainerBlock implements IWaterLoggable {
 		return state.with(HORIZONTAL_FACING, rot.rotate(state.get(HORIZONTAL_FACING)));
 	}
 
+	@SuppressWarnings("deprecation")
 	public BlockState mirror(BlockState state, Mirror mirrorIn) {
 		return state.rotate(mirrorIn.toRotation(state.get(HORIZONTAL_FACING)));
 	}

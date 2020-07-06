@@ -29,7 +29,7 @@ public class MudBallItem extends Item {
       if (!worldIn.isRemote) {
          MudBallEntity mudballentity = new MudBallEntity(worldIn, playerIn);
          mudballentity.setItem(new ItemStack(EnvironmentalItems.MUD_BALL.get()));
-         mudballentity.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 0.6F, 1.0F);
+         mudballentity.shoot(playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 0.6F, 1.0F);
          worldIn.addEntity(mudballentity);
       }
 

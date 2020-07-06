@@ -14,7 +14,7 @@ import net.minecraft.block.BushBlock;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.IWaterLoggable;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.fluid.IFluidState;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.IntegerProperty;
@@ -87,7 +87,7 @@ public class RiceBlock extends BushBlock implements IWaterLoggable, IGrowable, I
 
     @Nullable
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		IFluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
+		FluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
 		boolean flag = ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8;
 		return this.getDefaultState().with(WATERLOGGED, flag);
 	}
@@ -100,7 +100,7 @@ public class RiceBlock extends BushBlock implements IWaterLoggable, IGrowable, I
     		worldIn.setBlockState(pos, state.with(AGE, newAge));
     	} else {
     		DoubleRiceBlock doubleplantblock = (DoubleRiceBlock)(EnvironmentalBlocks.TALL_RICE.get());
-        	IFluidState ifluidstateUp = worldIn.getFluidState(pos.up());
+        	FluidState ifluidstateUp = worldIn.getFluidState(pos.up());
             if (doubleplantblock.getDefaultState().isValidPosition(worldIn, pos) && (worldIn.isAirBlock(pos.up()) || (Boolean.valueOf(ifluidstateUp.isTagged(FluidTags.WATER) && ifluidstateUp.getLevel() == 8)))) {
                doubleplantblock.placeAt(worldIn, pos, 2, newAge);
             }
@@ -140,7 +140,7 @@ public class RiceBlock extends BushBlock implements IWaterLoggable, IGrowable, I
     
     @SuppressWarnings("deprecation")
     @Override
-	public IFluidState getFluidState(BlockState state) {
+	public FluidState getFluidState(BlockState state) {
 		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);	
 	}
 

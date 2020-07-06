@@ -10,12 +10,12 @@ import com.team_abnormals.environmental.common.entity.SlabfishEntity;
 import com.team_abnormals.environmental.common.entity.SlabfishType;
 import com.team_abnormals.environmental.core.Environmental;
 
-import net.minecraft.client.renderer.Quaternion;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.vector.Quaternion;
 
 public class SlabfishRenderer extends MobRenderer<SlabfishEntity, SlabfishModel<SlabfishEntity>> {	
 	public SlabfishRenderer(EntityRendererManager renderManager) {
@@ -28,15 +28,15 @@ public class SlabfishRenderer extends MobRenderer<SlabfishEntity, SlabfishModel<
 
 	@Override
 	public ResourceLocation getEntityTexture(SlabfishEntity slabby) {
-		return new ResourceLocation(Environmental.MODID, "textures/entity/slabfish/slabfish_" + slabby.getSlabfishType().getName() + ".png");
+		return new ResourceLocation(Environmental.MODID, "textures/entity/slabfish/slabfish_" + slabby.getSlabfishType().func_176610_l() + ".png");
 	}
 	
 	@Override
-	protected RenderType func_230042_a_(SlabfishEntity slabfish, boolean p_230042_2_, boolean p_230042_3_) {
+	protected RenderType func_230496_a_(SlabfishEntity slabfish, boolean p_230042_2_, boolean p_230042_3_, boolean h) {
 		if (slabfish.getSlabfishType() == SlabfishType.GHOST) {
 			return RenderType.getEntityTranslucent(this.getEntityTexture(slabfish));
 		} else {
-			return super.func_230042_a_(slabfish, p_230042_2_, p_230042_3_);
+			return super.func_230496_a_(slabfish, p_230042_2_, p_230042_3_, h);
 		}
 	}
 	
@@ -50,7 +50,7 @@ public class SlabfishRenderer extends MobRenderer<SlabfishEntity, SlabfishModel<
 	protected void preRenderCallback(SlabfishEntity slabfish, MatrixStack matrixStack, float partialTickTime) {
 	    matrixStack.scale(1.0F, 1.0F, 1.0F);
 	    if(slabfish.isChild()) matrixStack.scale(0.5F, 0.5F, 0.5F);
-	    if(slabfish.isSitting() || slabfish.getRidingEntity() != null) matrixStack.translate(0F, 0.3125F, 0F);
+	    if(slabfish.func_233685_eM_() || slabfish.getRidingEntity() != null) matrixStack.translate(0F, 0.3125F, 0F);
 	    if(slabfish.isInWater()) {
 	    	matrixStack.translate(0F, -0.2F, 0.5F);
 	    	matrixStack.rotate(new Quaternion(90F, 0, 0, true));

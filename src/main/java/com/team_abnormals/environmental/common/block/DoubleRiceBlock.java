@@ -16,7 +16,7 @@ import net.minecraft.block.IWaterLoggable;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.fluid.IFluidState;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -59,10 +59,11 @@ public class DoubleRiceBlock extends Block implements IGrowable, IWaterLoggable,
 		super(properties);
 		this.setDefaultState(this.stateContainer.getBaseState().with(HALF, DoubleBlockHalf.LOWER).with(AGE, 6).with(FAKE_WATERLOGGED, false));
 	}
+	
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        return state.get(HALF) == DoubleBlockHalf.UPPER ? SHAPE_TOP : SHAPE;
-     }
+		return state.get(HALF) == DoubleBlockHalf.UPPER ? SHAPE_TOP : SHAPE;
+	}
 	
 	@Override
 	public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state) {
@@ -95,14 +96,14 @@ public class DoubleRiceBlock extends Block implements IGrowable, IWaterLoggable,
     @Nullable
     @Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		IFluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
+    	FluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
 		BlockPos blockpos = context.getPos();
-		return blockpos.getY() < context.getWorld().getDimension().getHeight() - 1 && context.getWorld().getBlockState(blockpos.up()).isReplaceable(context) ? super.getStateForPlacement(context).with(WATERLOGGED, Boolean.valueOf(ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8)).with(FAKE_WATERLOGGED, Boolean.valueOf(ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8)) : null;
+		return context.getWorld().getBlockState(blockpos.up()).isReplaceable(context) ? super.getStateForPlacement(context).with(WATERLOGGED, Boolean.valueOf(ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8)).with(FAKE_WATERLOGGED, Boolean.valueOf(ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8)) : null;
 	}
 	
 	public void placeAt(IWorld worldIn, BlockPos pos, int flags, int age) {
-		IFluidState ifluidstate = worldIn.getFluidState(pos);
-		IFluidState ifluidstateUp = worldIn.getFluidState(pos.up());
+		FluidState ifluidstate = worldIn.getFluidState(pos);
+		FluidState ifluidstateUp = worldIn.getFluidState(pos.up());
 		boolean applyFakeWaterLogging = Boolean.valueOf(ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8) || Boolean.valueOf(ifluidstateUp.isTagged(FluidTags.WATER) && ifluidstateUp.getLevel() == 8) ? true : false;
 		worldIn.setBlockState(pos, this.getDefaultState().with(AGE, age).with(HALF, DoubleBlockHalf.LOWER).with(WATERLOGGED, Boolean.valueOf(ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8)).with(FAKE_WATERLOGGED, applyFakeWaterLogging), flags);
 		worldIn.setBlockState(pos.up(), this.getDefaultState().with(AGE, age).with(HALF, DoubleBlockHalf.UPPER).with(WATERLOGGED, Boolean.valueOf(ifluidstateUp.isTagged(FluidTags.WATER) && ifluidstateUp.getLevel() == 8)).with(FAKE_WATERLOGGED, applyFakeWaterLogging), flags);
@@ -184,13 +185,13 @@ public class DoubleRiceBlock extends Block implements IGrowable, IWaterLoggable,
 	}
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
-		IFluidState ifluidstateUp = worldIn.getFluidState(pos.up());
+		FluidState ifluidstateUp = worldIn.getFluidState(pos.up());
 		worldIn.setBlockState(pos.up(), this.getDefaultState().with(HALF, DoubleBlockHalf.UPPER).with(WATERLOGGED, Boolean.valueOf(ifluidstateUp.isTagged(FluidTags.WATER) && ifluidstateUp.getLevel() == 8)), 3);
 	}
 	
 	@SuppressWarnings("deprecation")
 	@Override
-	public IFluidState getFluidState(BlockState state) {
+	public FluidState getFluidState(BlockState state) {
 		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
 	}
 

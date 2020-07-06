@@ -9,8 +9,8 @@ import com.team_abnormals.environmental.core.other.WisteriaColor;
 import com.team_abnormals.environmental.core.registry.EnvironmentalFeatures;
 
 import net.minecraft.block.trees.Tree;
+import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.TreeFeatureConfig;
 
 public class WisteriaTree extends Tree {
     private WisteriaColor color;
@@ -19,7 +19,7 @@ public class WisteriaTree extends Tree {
         color = colorIn;
     }
     
-    private TreeFeatureConfig setConfigByColor(WisteriaColor color, boolean beehive) {
+    private BaseTreeFeatureConfig setConfigByColor(WisteriaColor color, boolean beehive) {
         switch (color) {
             case PURPLE:
             	default:
@@ -37,7 +37,7 @@ public class WisteriaTree extends Tree {
      * Get a {@link net.minecraft.world.gen.feature.ConfiguredFeature} of tree
      */
     @Nullable
-    protected ConfiguredFeature<TreeFeatureConfig, ?> getTreeFeature(Random randomIn, boolean beehive) {
+	protected ConfiguredFeature<BaseTreeFeatureConfig, ?> getTreeFeature(Random randomIn, boolean beehive) {
        return randomIn.nextInt(10) == 0 ? EnvironmentalFeatures.BIG_WISTERIA_TREE.withConfiguration(setConfigByColor(color, beehive)) : EnvironmentalFeatures.WISTERIA_TREE.withConfiguration(setConfigByColor(color, beehive));
     }
 }

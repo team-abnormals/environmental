@@ -22,7 +22,7 @@ public class SlabbyFollowParentGoal extends Goal {
 	   public boolean shouldExecute() {
 	      if (this.childAnimal.getGrowingAge() >= 0) {
 	         return false;
-	      } else if (this.childAnimal.isSitting()) {
+	      } else if (this.childAnimal.func_233685_eM_()) {
 	          return false;
 	      } else {
 	         List<SlabfishEntity> list = this.childAnimal.world.getEntitiesWithinAABB(this.childAnimal.getClass(), this.childAnimal.getBoundingBox().grow(8.0D, 4.0D, 8.0D));

@@ -4,7 +4,7 @@ import com.team_abnormals.environmental.common.block.fluid.MudFluid;
 import com.team_abnormals.environmental.core.Environmental;
 
 import net.minecraft.client.renderer.ActiveRenderInfo;
-import net.minecraft.fluid.IFluidState;
+import net.minecraft.fluid.FluidState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityViewRenderEvent.FogColors;
@@ -19,7 +19,7 @@ public class EnvironmentalClientEvents {
     @OnlyIn(Dist.CLIENT)
     public void onFogColor(FogColors event) {
         ActiveRenderInfo info = event.getInfo();
-        IFluidState state = info.getFluidState();
+        FluidState state = info.getFluidState();
         if (state.getFluid() instanceof MudFluid) {
             event.setRed(0.140625F);
             event.setGreen(0.0625F);
@@ -31,7 +31,7 @@ public class EnvironmentalClientEvents {
     @OnlyIn(Dist.CLIENT)
     public void onFogDensity(FogDensity event) {
         ActiveRenderInfo info = event.getInfo();
-        IFluidState state = info.getFluidState();
+        FluidState state = info.getFluidState();
         if (state.getFluid() instanceof MudFluid) {
             event.setDensity(1.0F);
             event.setCanceled(true);

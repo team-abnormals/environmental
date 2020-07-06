@@ -25,6 +25,7 @@ public enum SlabfishOverlay implements IStringSerializable {
 	public int getId() {
 		return this.id;
 	}
+	
 	public static SlabfishOverlay byId(int id) {
 		if (id < 0 || id >= VALUES.length) {
 			id = 0;
@@ -41,7 +42,8 @@ public enum SlabfishOverlay implements IStringSerializable {
 		return type;
 	}
 
-	public String getName() {
+	@Override
+	public String func_176610_l() {
 		return this.name;
 	}
 }

@@ -1,7 +1,12 @@
 package com.team_abnormals.environmental.common.block;
 
-import net.minecraft.block.*;
+import java.util.Random;
 
+import javax.annotation.Nullable;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.BlockItemUseContext;
@@ -21,11 +26,9 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.IForgeShearable;
 
-import javax.annotation.Nullable;
-import java.util.Random;
-@SuppressWarnings("deprecation")
-public class HangingWisteriaLeavesBlock extends Block implements net.minecraftforge.common.IShearable {
+public class HangingWisteriaLeavesBlock extends Block implements IForgeShearable {
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     protected static final VoxelShape WISTERIA_VINE_TOP = Block.makeCuboidShape(1, 0, 1, 15, 16, 15);
     protected static final VoxelShape WISTERIA_VINE_BOTTOM = Block.makeCuboidShape(4, 0, 4, 12, 16, 12);

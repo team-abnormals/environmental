@@ -56,7 +56,7 @@ public class MudBallEntity extends ProjectileItemEntity {
    protected void onImpact(RayTraceResult result) {
       if (result.getType() == RayTraceResult.Type.ENTITY) {
          Entity entity = ((EntityRayTraceResult)result).getEntity();
-         entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float)0);
+         entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.func_234616_v_()), (float)0);
          if (entity instanceof SlabfishEntity) {
         	 SlabfishEntity slabby = (SlabfishEntity)entity;
         	 if(slabby.getSlabfishOverlay() != SlabfishOverlay.MUDDY) slabby.setSlabfishOverlay(SlabfishOverlay.MUDDY);

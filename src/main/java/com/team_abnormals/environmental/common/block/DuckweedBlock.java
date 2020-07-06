@@ -8,8 +8,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BushBlock;
 import net.minecraft.block.IGrowable;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -20,6 +20,7 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.PlantType;
 
 public class DuckweedBlock extends BushBlock implements IGrowable {
 	protected static final VoxelShape DUCKWEED_AABB = Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 1.5D, 15.0D);
@@ -34,13 +35,13 @@ public class DuckweedBlock extends BushBlock implements IGrowable {
 
 	@Override
 	public boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
-		IFluidState ifluidstate = worldIn.getFluidState(pos);
+		FluidState ifluidstate = worldIn.getFluidState(pos);
 		return ifluidstate.getFluid() == Fluids.WATER;
 	}
 	
 	@Override
-	public net.minecraftforge.common.PlantType getPlantType(IBlockReader world, BlockPos pos) {
-		return net.minecraftforge.common.PlantType.Water;
+	public PlantType getPlantType(IBlockReader world, BlockPos pos) {
+		return PlantType.WATER;
 	}
 
 	@SuppressWarnings("deprecation")

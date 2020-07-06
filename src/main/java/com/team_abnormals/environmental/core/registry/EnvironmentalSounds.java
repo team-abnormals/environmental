@@ -3,10 +3,7 @@ package com.team_abnormals.environmental.core.registry;
 import com.team_abnormals.environmental.core.Environmental;
 import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
 
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 
@@ -24,10 +21,5 @@ public class EnvironmentalSounds {
 	public static final RegistryObject<SoundEvent> ENTITY_SLABFISH_BACKPACK	= HELPER.createSoundEvent("entity.slabfish.backpack");
 	public static final RegistryObject<SoundEvent> ENTITY_SLABFISH_SWEATER	= HELPER.createSoundEvent("entity.slabfish.sweater");
 	
-	public static final SoundEvent SLABRAVE = new SoundEvent(new ResourceLocation(Environmental.MODID, "music.record.slabrave")).setRegistryName("music.record.slabrave");
-	
-	@SubscribeEvent
-    public static void registerSounds(RegistryEvent.Register<SoundEvent> event) {
-		event.getRegistry().register(SLABRAVE);
-    }
+	public static final RegistryObject<SoundEvent> SLABRAVE = HELPER.createSoundEvent("music.record.slabrave");
 }

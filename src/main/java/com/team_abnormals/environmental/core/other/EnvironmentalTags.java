@@ -7,12 +7,11 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.Tag;
-import net.minecraft.util.ResourceLocation;
 
 public class EnvironmentalTags {
-	public static final Tag<Block> CATTAIL_PLANTABLE_ON = new BlockTags.Wrapper(new ResourceLocation(Environmental.MODID, "cattail_plantable_on"));
-	public static final Tag<Item> SUSHI = new ItemTags.Wrapper(new ResourceLocation(Environmental.MODID, "sushi"));
-	public static final Tag<Fluid> MUD = new FluidTags.Wrapper(new ResourceLocation(Environmental.MODID, "mud"));
+	public static final ITag.INamedTag<Block>  CATTAIL_PLANTABLE_ON = BlockTags.makeWrapperTag(Environmental.MODID + ":cattail_plantable_on");
+	public static final ITag.INamedTag<Item>  SUSHI = ItemTags.makeWrapperTag(Environmental.MODID + ":sushi");
+	public static final ITag.INamedTag<Fluid>  MUD = FluidTags.makeWrapperTag(Environmental.MODID + ":mud");
 }
