@@ -31,21 +31,21 @@ public class WisteriaTreeUtils {
     }
 
     protected static boolean isLeaves(IWorldGenerationBaseReader worldIn, BlockPos pos) {
-        return worldIn.hasBlockState(pos, (p_214579_0_) -> {
-            return p_214579_0_.func_235714_a_(BlockTags.LEAVES);
+        return worldIn.hasBlockState(pos, (state) -> {
+            return state.isIn(BlockTags.LEAVES);
         });
     }
     
     public static boolean isLog(IWorldGenerationBaseReader worldIn, BlockPos pos) {
-        return worldIn.hasBlockState(pos, (p_214579_0_) -> {
-           return p_214579_0_.func_235714_a_(BlockTags.LOGS);
+        return worldIn.hasBlockState(pos, (state) -> {
+           return state.isIn(BlockTags.LOGS);
         });
      }
     
 
     public static void placeVines(IWorldGenerationReader world, Random random, BlockPos pos, BlockState leaf, BlockState vineLower, BlockState vineUpper, BaseTreeFeatureConfig config) {
 		int length = WisteriaTreeUtils.getLengthByNeighbors(world, random, pos);
-		if (random.nextInt(6) != 5 && WisteriaTreeUtils.isAir(world, pos) && !WisteriaTreeUtils.isLog(world, pos)) {
+		if (random.nextInt(6) != 5 && isAir(world, pos) && !isLog(world, pos)) {
 			switch (length) {
 			case 0:
 				break;
@@ -75,9 +75,13 @@ public class WisteriaTreeUtils {
 		}
 	}
 
-    public static boolean isAirOrLeaves(IWorldGenerationReader worldIn, BlockPos pos) {
-		return isAir(worldIn, pos) || isLeaves(worldIn, pos);
-	}
+    public static boolean isAirOrLeaves(IWorldGenerationBaseReader worldIn, BlockPos pos) {
+    	if (worldIn instanceof net.minecraft.world.IWorldReader) // FORGE: Redirect to state method when possible
+    		return worldIn.hasBlockState(pos, state -> state.canBeReplacedByLeaves((net.minecraft.world.IWorldReader)worldIn, pos));
+    	return worldIn.hasBlockState(pos, (p_227223_0_) -> {
+        	return p_227223_0_.isAir() || p_227223_0_.isIn(BlockTags.LEAVES);
+    	});
+    }
 
 	public static boolean isLeaves(IWorldGenerationBaseReader worldIn, BlockPos pos, BaseTreeFeatureConfig config, Random random) {
 		if (worldIn instanceof net.minecraft.world.IWorldReader) // FORGE: Redirect to state method when possible

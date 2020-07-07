@@ -98,7 +98,7 @@ public class ButterflyEntity extends CreatureEntity {
     }
     
     public static AttributeModifierMap.MutableAttribute registerAttributes() {
-    	return MobEntity.func_233666_p_().func_233815_a_(Attributes.field_233818_a_, 3.0D);
+    	return MobEntity.func_233666_p_().func_233815_a_(Attributes.MAX_HEALTH, 3.0D);
     }
 
     public void tick() {

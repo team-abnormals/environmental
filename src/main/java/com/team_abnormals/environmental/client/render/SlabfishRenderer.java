@@ -28,7 +28,7 @@ public class SlabfishRenderer extends MobRenderer<SlabfishEntity, SlabfishModel<
 
 	@Override
 	public ResourceLocation getEntityTexture(SlabfishEntity slabby) {
-		return new ResourceLocation(Environmental.MODID, "textures/entity/slabfish/slabfish_" + slabby.getSlabfishType().func_176610_l() + ".png");
+		return new ResourceLocation(Environmental.MODID, "textures/entity/slabfish/slabfish_" + slabby.getSlabfishType().getString() + ".png");
 	}
 	
 	@Override

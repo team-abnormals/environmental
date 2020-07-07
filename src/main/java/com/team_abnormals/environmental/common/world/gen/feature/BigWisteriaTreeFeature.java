@@ -89,13 +89,13 @@ public class BigWisteriaTreeFeature extends Feature<BaseTreeFeatureConfig> {
 											boolean place = true;
 											if (y < 0) {
 												place = world.hasBlockState(leafPos.add(0, 1, 0), (state) -> {
-													return state.func_235714_a_(BlockTags.LEAVES);
+													return state.isIn(BlockTags.LEAVES);
 												});
 												if (place && random.nextInt(Math.abs(y) + 1) != 0) {
 													place = false;
-													if (random.nextInt(5) == 0 && !WisteriaTreeUtils.isLog(world, leafPos)) {
-														WisteriaTreeUtils.placeVines(world, random, leafPos, config.leavesProvider.getBlockState(random, pos), VINE_LOWER.get(), VINE_UPPER.get(), config);
-													}
+//													if (random.nextInt(5) == 0 && !WisteriaTreeUtils.isLog(world, leafPos)) {
+//														WisteriaTreeUtils.placeVines(world, random, leafPos, config.leavesProvider.getBlockState(random, pos), VINE_LOWER.get(), VINE_UPPER.get(), config);
+//													}
 												}
 											}
 											if (place) {

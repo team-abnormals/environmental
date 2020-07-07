@@ -80,7 +80,7 @@ public class WisteriaTreeFeature extends Feature<BaseTreeFeatureConfig> {
 								boolean place = true;
 								if (y < 0) {
 									place = world.hasBlockState(leafPos.add(0, 1, 0), (state) -> {
-										return state.func_235714_a_(BlockTags.LEAVES);
+										return state.isIn(BlockTags.LEAVES);
 									});
 									if (place && random.nextInt(Math.abs(y) + 1) != 0) {
 										place = false;
@@ -132,7 +132,7 @@ public class WisteriaTreeFeature extends Feature<BaseTreeFeatureConfig> {
 				new BlockPos(pos.getX() + 1, treeHeight - heightOffset, pos.getZ() - 1), new BlockPos(pos.getX() - 1, treeHeight - heightOffset, pos.getZ() + 1), new BlockPos(pos.getX() + 1, treeHeight - heightOffset, pos.getZ() + 1) };
 		BlockPos startPos = startPositions[random.nextInt(8)];
 		if (WisteriaTreeUtils.isAirOrLeaves(world, startPos)) {
-			boolean vines = random.nextInt(6) != 5;
+//			boolean vines = random.nextInt(6) != 5;
 			BlockPos placePos = startPos;
 			for (int y = (treeHeight - heightOffset); y <= treeHeight; ++y) {
 				placePos = new BlockPos(startPos.getX(), y, startPos.getZ());
@@ -140,7 +140,7 @@ public class WisteriaTreeFeature extends Feature<BaseTreeFeatureConfig> {
 					WisteriaTreeUtils.setForcedState(world, placePos, config.trunkProvider.getBlockState(random, pos));
 			}
 			WisteriaTreeUtils.placeLeafAt(world, placePos.up(), config, random);
-			if (vines) WisteriaTreeUtils.placeVines(world, random, startPos.down(), config.leavesProvider.getBlockState(random, pos), VINE_LOWER.get(), VINE_UPPER.get(), config);
+//			if (vines) WisteriaTreeUtils.placeVines(world, random, startPos.down(), config.leavesProvider.getBlockState(random, pos), VINE_LOWER.get(), VINE_UPPER.get(), config);
 		}
 	}
 }

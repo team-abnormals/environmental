@@ -85,7 +85,7 @@ public class WisteriaLeavesBlock extends Block implements IForgeShearable {
     }
 
     private static int getDistance(BlockState neighbor) {
-        if (BlockTags.LOGS.func_230235_a_(neighbor.getBlock())) {
+        if (BlockTags.LOGS.contains(neighbor.getBlock())) {
             return 0;
         } else {
             if (neighbor.getBlock() instanceof WisteriaLeavesBlock) return neighbor.get(DISTANCE);

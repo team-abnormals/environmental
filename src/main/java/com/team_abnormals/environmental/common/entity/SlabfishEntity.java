@@ -176,8 +176,8 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 	
 	public static AttributeModifierMap.MutableAttribute registerAttributes() {
     	return MobEntity.func_233666_p_()
-    			.func_233815_a_(Attributes.field_233818_a_, 15.0D)
-    			.func_233815_a_(Attributes.field_233821_d_, 0.3D);
+    			.func_233815_a_(Attributes.MAX_HEALTH, 15.0D)
+    			.func_233815_a_(Attributes.MOVEMENT_SPEED, 0.3D);
     }
 
 	protected void registerGoals() {
