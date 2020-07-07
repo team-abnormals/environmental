@@ -10,13 +10,12 @@ import com.team_abnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.treedecorator.LeaveVineTreeDecorator;
 import net.minecraft.world.gen.treedecorator.TreeDecorator;
 import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
 
 public class HangingWillowLeavesTreeDecorator extends TreeDecorator {
-	public static final Codec<LeaveVineTreeDecorator> field_236870_a_;
-	public static final LeaveVineTreeDecorator field_236871_b_ = new LeaveVineTreeDecorator();
+	public static final Codec<HangingWillowLeavesTreeDecorator> field_236870_a_;
+	public static final HangingWillowLeavesTreeDecorator field_236871_b_ = new HangingWillowLeavesTreeDecorator();
 
 	protected TreeDecoratorType<?> func_230380_a_() {
 		return TreeDecoratorType.LEAVE_VINE;

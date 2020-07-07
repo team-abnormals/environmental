@@ -3,6 +3,7 @@ package com.team_abnormals.environmental.common.world;
 import com.google.common.collect.ImmutableList;
 import com.team_abnormals.environmental.common.block.HangingWisteriaLeavesBlock;
 import com.team_abnormals.environmental.common.block.WisteriaLeavesBlock;
+import com.team_abnormals.environmental.common.world.gen.treedecorator.HangingWillowLeavesTreeDecorator;
 import com.team_abnormals.environmental.core.registry.EnvironmentalBlocks;
 
 import net.minecraft.block.BlockState;
@@ -60,7 +61,7 @@ public class EnvironmentalFeatureConfigs {
 					new StraightTrunkPlacer(5, 3, 0), 
 					new TwoLayerFeature(1, 0, 1)))
 			.func_236701_a_(1)
-			.func_236703_a_(ImmutableList.of(LeaveVineTreeDecorator.field_236871_b_))
+			.func_236703_a_(ImmutableList.of(LeaveVineTreeDecorator.field_236871_b_,HangingWillowLeavesTreeDecorator.field_236871_b_))
 			.build();
 	
 	public static final BaseTreeFeatureConfig BLUE_WISTERIA_NO_BEEHIVES_CONFIG = (new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(WISTERIA_LOG), new SimpleBlockStateProvider(BLUE_WISTERIA_LEAVES),new BlobFoliagePlacer(0, 0, 0, 0, 0), new StraightTrunkPlacer(0, 0, 0), new TwoLayerFeature(0, 0, 0))).func_236701_a_(1).build();
