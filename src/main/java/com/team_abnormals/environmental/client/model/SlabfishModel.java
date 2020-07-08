@@ -100,8 +100,8 @@ public class SlabfishModel<E extends SlabfishEntity> extends EndimatorEntityMode
     		
     		this.rightArm.rotateAngleZ = ageInTicks;
             this.leftArm.rotateAngleZ = -ageInTicks;
-    		this.rightLeg.rotateAngleX = (entityIn.func_233685_eM_() || entityIn.getRidingEntity() != null) ? -1.57F :  MathHelper.cos(limbSwing * 0.6662F) * 1.5F * limbSwingAmount;
-            this.leftLeg.rotateAngleX = (entityIn.func_233685_eM_() || entityIn.getRidingEntity() != null) ? -1.57F :  MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.5F * limbSwingAmount;
+    		this.rightLeg.rotateAngleX = (entityIn.func_233684_eK_() || entityIn.getRidingEntity() != null) ? -1.57F :  MathHelper.cos(limbSwing * 0.6662F) * 1.5F * limbSwingAmount;
+            this.leftLeg.rotateAngleX = (entityIn.func_233684_eK_() || entityIn.getRidingEntity() != null) ? -1.57F :  MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.5F * limbSwingAmount;
     		
     	} else {
     		this.rightLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.7F * limbSwingAmount;

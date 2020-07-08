@@ -483,7 +483,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 			this.jukeboxPosition = null;
 		} 
 				
-		if (!this.func_233685_eM_()) this.setTamed(false);
+		if (!this.func_233684_eK_()) this.setTamed(false);
 		
 		if(this.isInWater() && this.getRidingEntity() != null) this.stopRiding();
 		
@@ -631,13 +631,12 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 	
 	@Override
 	public EntitySize getSize(Pose pose) {
-		return this.isInWater() ? this.isChild() ? SIZE_SWIMMING_CHILD : SIZE_SWIMMING : (this.func_233685_eM_() || this.getRidingEntity() != null) ? this.isChild() ? SIZE_SITTING_CHILD : SIZE_SITTING : super.getSize(pose);
+		return this.isInWater() ? this.isChild() ? SIZE_SWIMMING_CHILD : SIZE_SWIMMING : (this.func_233684_eK_() || this.getRidingEntity() != null) ? this.isChild() ? SIZE_SITTING_CHILD : SIZE_SITTING : super.getSize(pose);
 	}
 
 	@Override
 	protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
-		return this.func_233685_eM_() ? sizeIn.height * 0.6F : 
-			this.isInWater() ? (this.isChild() ? sizeIn.height * 1.4F : sizeIn.height * 0.855F) : sizeIn.height * 0.8F;
+		return this.func_233684_eK_() ? sizeIn.height * 0.6F : this.isInWater() ? (this.isChild() ? sizeIn.height * 1.4F : sizeIn.height * 0.855F) : sizeIn.height * 0.8F;
 	}
 
 	@Override
