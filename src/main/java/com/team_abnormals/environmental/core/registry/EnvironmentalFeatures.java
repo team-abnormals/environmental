@@ -58,15 +58,15 @@ public class EnvironmentalFeatures {
 		}
 		
 		if (biome.getCategory() == Biome.Category.SAVANNA || biome.getRegistryName().toString().contains("rosewood")) {
-//			EnvironmentalBiomeFeatures.addGiantTallGrass(biome, 3);
+			EnvironmentalBiomeFeatures.addGiantTallGrass(biome, 3);
 		}
 		
 		if (biome.getCategory() == Biome.Category.JUNGLE) {
-//			EnvironmentalBiomeFeatures.addGiantTallGrass(biome, 5);
+			EnvironmentalBiomeFeatures.addGiantTallGrass(biome, 5);
 		}
 		
 		if (biome.getCategory() == Biome.Category.PLAINS) {
-//			EnvironmentalBiomeFeatures.addGiantTallGrass(biome, 1);
+			EnvironmentalBiomeFeatures.addGiantTallGrass(biome, 1);
 		}
 		
 		if (biome.getCategory() == Biome.Category.FOREST) {

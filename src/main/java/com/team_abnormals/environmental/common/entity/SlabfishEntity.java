@@ -103,7 +103,6 @@ import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.DimensionType;
@@ -130,9 +129,9 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 	private static final DataParameter<Boolean> HAS_SWEATER = EntityDataManager.createKey(SlabfishEntity.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Integer> SWEATER_COLOR = EntityDataManager.createKey(SlabfishEntity.class, DataSerializers.VARINT);
 		
-	public static final EntitySize SIZE_SWIMMING = EntitySize.fixed(0.75F, 0.25F);
+	public static final EntitySize SIZE_SWIMMING = EntitySize.fixed(0.7F, 0.6F);
 	public static final EntitySize SIZE_SITTING = EntitySize.fixed(0.45F, 0.6F);
-	public static final EntitySize SIZE_SWIMMING_CHILD = EntitySize.fixed(0.375F, 0.125F);
+	public static final EntitySize SIZE_SWIMMING_CHILD = EntitySize.fixed(0.35F, 0.3F);
 	public static final EntitySize SIZE_SITTING_CHILD = EntitySize.fixed(0.225F, 0.3F);
 	
 	private static final Ingredient BREEDING_ITEMS = Ingredient.fromItems(Items.TROPICAL_FISH, EnvironmentalItems.TROPICAL_FISH_KELP_ROLL.get());
@@ -180,6 +179,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
     			.func_233815_a_(Attributes.MOVEMENT_SPEED, 0.3D);
     }
 
+	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new SwimGoal(this));
 		this.goalSelector.addGoal(2, new SitGoal(this));
@@ -250,6 +250,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 		}
 	}
 
+	@Override
 	public boolean canBeLeashedTo(PlayerEntity player) {
 		return !this.getLeashed();
 	}
@@ -422,7 +423,8 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 		}
 		return super.func_230254_b_(player, hand);
 	}
-	
+
+	@Override
 	protected void onInsideBlock(BlockState state) {
 		if (state.getBlock() == EnvironmentalBlocks.MUD.get()) {
 			if(this.getSlabfishOverlay() != SlabfishOverlay.MUDDY) this.setSlabfishOverlay(SlabfishOverlay.MUDDY);
@@ -471,7 +473,8 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 	   this.jukeboxPosition = pos;
 	   this.isPartying = isPartying;
 	}
-	
+
+	@Override
 	public void livingTick() {
 		super.livingTick();
 		
@@ -498,8 +501,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 				this.doParticle(this.world, this.getPosX() - (double)0.3F, this.getPosX() + (double)0.3F, this.getPosZ() - (double)0.3F, this.getPosZ() + (double)0.3F, this.getPosYHeight(0.5D), new ItemParticleData(ParticleTypes.ITEM, new ItemStack(EnvironmentalItems.MUD_BALL.get())));
 			}
 		}
-		
-		
+				
 		List<PlayerEntity> playerList = world.getEntitiesWithinAABB(PlayerEntity.class, this.getBoundingBox().grow(5.0D, 5.0D, 5.0D));
 
 		for(PlayerEntity player : playerList) {
@@ -522,13 +524,8 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 		if (!this.onGround && this.wingRotDelta < 1.0F) {
 			this.wingRotDelta = 1.0F;
 		}
-
+		
 		this.wingRotDelta = (float)((double)this.wingRotDelta * 0.9D);
-		Vector3d vec3d = this.getMotion();
-		if (!this.onGround && vec3d.y < 0.0D) {
-			this.setMotion(vec3d.mul(1.0D, 0.6D, 1.0D));
-		}
-
 		this.wingRotation += this.wingRotDelta * 2.0F;
 		
 	}
@@ -536,7 +533,8 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 	private boolean isMoving() {
 		return this.getMotion().getX() > 0 || this.getMotion().getY() > 0 || this.getMotion().getZ() > 0;
 	}
-	
+
+	@Override
 	public double getYOffset() {
 		if (this.getRidingEntity() != null) {
 			if (this.getRidingEntity() instanceof BoatEntity) return 0.3D;
@@ -544,7 +542,8 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 		}
 		return super.getYOffset();
 	}
-	
+
+	@Override
 	public boolean attackEntityFrom(DamageSource source, float amount) {
 		if (this.isInvulnerableTo(source)) {
 			return false;
@@ -563,14 +562,17 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 	
 	// DETAILS //
 
+	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
 		return EnvironmentalSounds.ENTITY_SLABFISH_HURT.get();
 	}
 
+	@Override
 	protected SoundEvent getDeathSound() {
 		return EnvironmentalSounds.ENTITY_SLABFISH_DEATH.get();
 	}
 
+	@Override
 	protected void playStepSound(BlockPos pos, BlockState blockIn) {
 	   this.playSound(EnvironmentalSounds.ENTITY_SLABFISH_STEP.get(), 0.15F, 1.0F);
 	}
@@ -608,18 +610,21 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 	}
 	
 	// STATS //
-	
+
+	@Override
 	public SlabfishEntity createChild(AgeableEntity ageable) {
 		SlabfishEntity baby = EnvironmentalEntities.SLABFISH.get().create(this.world);
 		baby.setSlabfishType(this.getSlabfishType());
 		baby.setPreNameType(this.getSlabfishType());
 		return baby;
 	}
-	
+
+	@Override
 	public ItemStack getPickedResult(RayTraceResult target) {
 		return new ItemStack(EnvironmentalItems.SLABFISH_SPAWN_EGG.get());
 	}
-	
+
+	@Override
 	public boolean isBreedingItem(ItemStack stack) {
 		return BREEDING_ITEMS.test(stack);
 	}
@@ -629,27 +634,34 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 		return this.isInWater() ? this.isChild() ? SIZE_SWIMMING_CHILD : SIZE_SWIMMING : (this.func_233685_eM_() || this.getRidingEntity() != null) ? this.isChild() ? SIZE_SITTING_CHILD : SIZE_SITTING : super.getSize(pose);
 	}
 
+	@Override
 	protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
-		return this.func_233685_eM_() ? sizeIn.height * 0.6F : sizeIn.height * 0.8F;
+		return this.func_233685_eM_() ? sizeIn.height * 0.6F : 
+			this.isInWater() ? (this.isChild() ? sizeIn.height * 1.4F : sizeIn.height * 0.855F) : sizeIn.height * 0.8F;
 	}
-	
+
+	@Override
 	public boolean canBreatheUnderwater() {
 		return true;
 	}
 	
+	@Override
 	public boolean isPushedByWater() {
 		return false;
 	}
-	
+
+	@Override
 	public boolean onLivingFall(float distance, float damageMultiplier) {
 		return false;
 	}
 	
-	
+
+	@Override
 	public int getMaxSpawnedInChunk() {
 		return 5;
 	}
-	
+
+	@Override
 	protected float getWaterSlowDown() {
 		return 0.96F;
 	}
@@ -1082,7 +1094,8 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 	public boolean isPlayerNear(float multiplier) {
 		return !this.getNearbyItems(multiplier).isEmpty();
 	}
-	
+
+	@Override
 	protected void dropInventory() {
 		super.dropInventory();
 		if (this.hasBackpack()) {
@@ -1132,7 +1145,8 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 			}
 		}
 	}
-	
+
+	@Override
 	protected void updateEquipmentIfNeeded(ItemEntity itemEntity) {
 		ItemStack itemstack = itemEntity.getItem();
 		Inventory inventory = this.slabfishBackpack;
@@ -1149,7 +1163,8 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 			}	
 		}
 	}
-	
+
+	@Override
 	public void onInventoryChanged(IInventory invBasic) {
 	}
 	

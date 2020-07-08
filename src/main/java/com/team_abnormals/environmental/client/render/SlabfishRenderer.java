@@ -52,7 +52,7 @@ public class SlabfishRenderer extends MobRenderer<SlabfishEntity, SlabfishModel<
 	    if(slabfish.isChild()) matrixStack.scale(0.5F, 0.5F, 0.5F);
 	    if(slabfish.func_233685_eM_() || slabfish.getRidingEntity() != null) matrixStack.translate(0F, 0.3125F, 0F);
 	    if(slabfish.isInWater()) {
-	    	matrixStack.translate(0F, -0.2F, 0.5F);
+	    	matrixStack.translate(0F, slabfish.isChild() ? -0.8F : -0.4F, 0.5F);
 	    	matrixStack.rotate(new Quaternion(90F, 0, 0, true));
 	    }
 	}

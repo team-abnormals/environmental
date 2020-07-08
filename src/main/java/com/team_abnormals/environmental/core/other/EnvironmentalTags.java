@@ -11,7 +11,7 @@ import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 
 public class EnvironmentalTags {
-	public static final ITag.INamedTag<Block>  CATTAIL_PLANTABLE_ON = BlockTags.makeWrapperTag(Environmental.MODID + ":cattail_plantable_on");
-	public static final ITag.INamedTag<Item>  SUSHI = ItemTags.makeWrapperTag(Environmental.MODID + ":sushi");
-	public static final ITag.INamedTag<Fluid>  MUD = FluidTags.makeWrapperTag(Environmental.MODID + ":mud");
+	public static final ITag.INamedTag<Block> CATTAIL_PLANTABLE_ON 	= BlockTags.makeWrapperTag(Environmental.MODID + ":cattail_plantable_on");
+	public static final ITag.INamedTag<Item> SUSHI 					= ItemTags.makeWrapperTag(Environmental.MODID + ":sushi");
+	public static final ITag.INamedTag<Fluid> MUD 					= FluidTags.makeWrapperTag(Environmental.MODID + ":mud");
 }
