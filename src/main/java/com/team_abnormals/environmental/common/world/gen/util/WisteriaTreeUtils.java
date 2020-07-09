@@ -107,8 +107,15 @@ public class WisteriaTreeUtils {
     	worldIn.setBlockState(pos, state, 18);
     }
     
+    public static void setDirtAt(IWorld worldIn, BlockPos pos) {
+    	Block block = worldIn.getBlockState(pos).getBlock();
+    	if (block == Blocks.GRASS_BLOCK || block == Blocks.FARMLAND) {
+    		setForcedState(worldIn, pos, Blocks.DIRT.getDefaultState());
+    	}
+    }
+    
 	public static boolean isValidGround(IWorld world, BlockPos pos) {
 		Block block = world.getBlockState(pos).getBlock();
-		return block == Blocks.DIRT || block == Blocks.GRASS_BLOCK;
+		return block.isValidPosition(world.getBlockState(pos), world, pos);
 	}
 }

@@ -8,7 +8,6 @@ import com.team_abnormals.environmental.common.world.EnvironmentalFeatureConfigs
 import com.team_abnormals.environmental.common.world.gen.util.WisteriaTreeUtils;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
@@ -72,8 +71,8 @@ public class WisteriaTreeFeature extends Feature<BaseTreeFeatureConfig> {
             }
             if (!flag) {
                 return false;
-            } else if (WisteriaTreeUtils.isValidGround(world, pos.down()) && pos.getY() < world.getHeight() - height - 1) {
-            	WisteriaTreeUtils.setForcedState(world, pos.down(), Blocks.DIRT.getDefaultState());
+            } else if (WisteriaTreeUtils.isValidGround(world, pos) && pos.getY() < world.getHeight() - height - 1) {
+            	WisteriaTreeUtils.setDirtAt(world, pos.down());
                 for (int y = 4; y > -4; --y) {
                     for (int x = 4; x > -4; --x) {
                         for (int z = 4; z > -4; --z) {
