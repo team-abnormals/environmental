@@ -1,9 +1,14 @@
 package com.team_abnormals.environmental.core.other;
 
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
+import net.minecraft.entity.EntityType;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockReader;
 import net.minecraftforge.common.ToolType;
 
 public class EnvironmentalProperties {
@@ -25,7 +30,7 @@ public class EnvironmentalProperties {
     
     public static final Block.Properties WISTERIA_PLANKS = Block.Properties.create(Material.WOOD, MaterialColor.WHITE_TERRACOTTA).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD);
     public static final Block.Properties WISTERIA_LEAVES(MaterialColor color) {
-        return Block.Properties.create(Material.LEAVES, color).notSolid().hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT);
+        return AbstractBlock.Properties.create(Material.LEAVES, color).notSolid().hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT).setPropagatesDownwards(EnvironmentalProperties::func_235441_c_).setSuffocates(EnvironmentalProperties::func_235436_b_).setBlocksVision(EnvironmentalProperties::func_235436_b_);
     }
     public static final Block.Properties DELPHINIUMS = Block.Properties.create(Material.TALL_PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT);
     public static final Block.Properties WOOD_BUTTON = Block.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD);
@@ -34,4 +39,12 @@ public class EnvironmentalProperties {
         MaterialColor color = stripped ? MaterialColor.WHITE_TERRACOTTA : MaterialColor.GRAY;
         return Block.Properties.create(Material.WOOD, color).hardnessAndResistance(2.0F).sound(SoundType.WOOD);
     }
+
+     private static Boolean func_235441_c_(BlockState p_235441_0_, IBlockReader p_235441_1_, BlockPos p_235441_2_, EntityType<?> p_235441_3_) {
+        return p_235441_3_ == EntityType.OCELOT || p_235441_3_ == EntityType.PARROT;
+     }
+     
+     private static boolean func_235436_b_(BlockState p_235436_0_, IBlockReader p_235436_1_, BlockPos p_235436_2_) {
+    	 return false;
+     }
 }
