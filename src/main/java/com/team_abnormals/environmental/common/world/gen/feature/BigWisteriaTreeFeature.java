@@ -71,7 +71,7 @@ public class BigWisteriaTreeFeature extends Feature<BaseTreeFeatureConfig> {
             }
             if (!flag) {
                 return false;
-            } else if (WisteriaTreeUtils.isValidGround(world, pos) && pos.getY() < world.getHeight() - height - 1) {
+            } else if (WisteriaTreeUtils.isValidGround(world, pos.down()) && pos.getY() < world.getHeight() - height - 1) {
             	WisteriaTreeUtils.setForcedState(world, pos.down(), Blocks.DIRT.getDefaultState());
                 for (int k = 0; k < 3; ++k) {
                     BlockPos position = new BlockPos(pos.add(0, random.nextInt(3) + 4, 0));
