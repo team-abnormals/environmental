@@ -76,7 +76,7 @@ public class EnvironmentalFeatures {
             }
         }
 		
-    	if (EnvironmentalConfig.ValuesHolder.generateWisterias()) {
+    	if (EnvironmentalConfig.ValuesHolder.generateExternalWisterias()) {
 	        if (biome.getCategory() == Biome.Category.JUNGLE) {
 	        	EnvironmentalBiomeFeatures.addWisteriaTree(biome, WisteriaColor.PINK, 0, 0.1F, true);
 	        }
