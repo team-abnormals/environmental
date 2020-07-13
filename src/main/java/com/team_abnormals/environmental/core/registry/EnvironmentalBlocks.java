@@ -13,6 +13,7 @@ import com.team_abnormals.environmental.common.block.KilnBlock;
 import com.team_abnormals.environmental.common.block.MudVaseBlock;
 import com.team_abnormals.environmental.common.block.PottedCartwheelBlock;
 import com.team_abnormals.environmental.common.block.RiceBlock;
+import com.team_abnormals.environmental.common.block.SawmillBlock;
 import com.team_abnormals.environmental.common.block.WisteriaLeavesBlock;
 import com.team_abnormals.environmental.common.block.fluid.MudFluidBlock;
 import com.team_abnormals.environmental.common.world.gen.feature.trees.WillowTree;
@@ -88,7 +89,11 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> MUD_BRICK_VERTICAL_SLAB	= HELPER.createCompatBlock("quark", "mud_brick_vertical_slab", () -> new VerticalSlabBlock(EnvironmentalProperties.MUD_BRICKS), ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<Block> MUD_VASE	 				= HELPER.createBlock("mud_vase", () -> new MudVaseBlock(EnvironmentalProperties.FLOWER_POT), ItemGroup.DECORATIONS);
 	public static final RegistryObject<Block> MUD 						= HELPER.createBlockNoItem("mud", () -> new MudFluidBlock(() -> {return EnvironmentalFluids.FLOWING_MUD.get();}, Properties.create(Material.WATER).doesNotBlockMovement().hardnessAndResistance(100.0F).noDrops()));
+	
+	// Crafting //
+	
 	public static final RegistryObject<Block> KILN		 				= HELPER.createBlock("kiln", () -> new KilnBlock(Properties.from(Blocks.SMOKER)), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> SAWMILL	 				= HELPER.createBlock("sawmill", () -> new SawmillBlock(Properties.from(Blocks.STONECUTTER).notSolid()), ItemGroup.DECORATIONS);
 
 	// Willow //
 	

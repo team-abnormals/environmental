@@ -10,6 +10,7 @@ import javax.annotation.Nullable;
 import com.team_abnormals.environmental.client.gui.screen.inventory.KilnScreen;
 import com.team_abnormals.environmental.common.inventory.container.KilnContainer;
 import com.team_abnormals.environmental.common.item.crafting.BakingRecipe;
+import com.team_abnormals.environmental.common.item.crafting.SawingRecipe;
 import com.team_abnormals.environmental.core.Environmental;
 import com.team_abnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.team_abnormals.environmental.core.registry.EnvironmentalRecipes;
@@ -19,7 +20,6 @@ import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaRecipeCategoryUid;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.helpers.IJeiHelpers;
-import mezz.jei.api.recipe.category.IRecipeCategory;
 import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
@@ -36,9 +36,11 @@ import net.minecraft.item.crafting.RecipeManager;
 import net.minecraft.util.ResourceLocation;
 
 @JeiPlugin
-public class EnvironmentalJEIPlugin implements IModPlugin {
+public class EnvironmentalPlugin implements IModPlugin {
 	@Nullable
 	private BakingCategory bakingCategory;
+	@Nullable
+	private SawingCategory sawingCategory;
 	
 	@Override
 	public ResourceLocation getPluginUid() {
@@ -51,15 +53,21 @@ public class EnvironmentalJEIPlugin implements IModPlugin {
 		IGuiHelper guiHelper = jeiHelpers.getGuiHelper();
 		
 		bakingCategory = new BakingCategory(guiHelper);
+		sawingCategory = new SawingCategory(guiHelper);
+
 		registration.addRecipeCategories(bakingCategory);
+		registration.addRecipeCategories(sawingCategory);
 	}
 	
 	@Override
 	public void registerRecipes(IRecipeRegistration registration) {
 		ErrorUtil.checkNotNull(bakingCategory, "bakingCategory");
+		ErrorUtil.checkNotNull(sawingCategory, "sawingCategory");
 
-		Results recipes = getValidRecipes(bakingCategory);
+		Results recipes = getAllRecipes();
+		
 		registration.addRecipes(recipes.getBakingRecipes(), BakingCategory.BAKING);
+		registration.addRecipes(recipes.getSawingRecipes(), SawingCategory.SAWING);
 	}
 
 	@Override
@@ -75,22 +83,23 @@ public class EnvironmentalJEIPlugin implements IModPlugin {
 	@Override
 	public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
 		registration.addRecipeCatalyst(new ItemStack(EnvironmentalBlocks.KILN.get()), BakingCategory.BAKING, VanillaRecipeCategoryUid.FUEL);
+		registration.addRecipeCatalyst(new ItemStack(EnvironmentalBlocks.SAWMILL.get()), SawingCategory.SAWING);
 	}
 	
 	public static class Results {
 		private final List<BakingRecipe> bakingRecipes = new ArrayList<>();
-		private final List<BakingRecipe> sawingRecipes = new ArrayList<>();
+		private final List<SawingRecipe> sawingRecipes = new ArrayList<>();
 
 		public List<BakingRecipe> getBakingRecipes() {
 			return bakingRecipes;
 		}
 		
-		public List<BakingRecipe> getSawingRecipes() {
+		public List<SawingRecipe> getSawingRecipes() {
 			return sawingRecipes;
 		}
 	}
 
-	public static Results getValidRecipes(IRecipeCategory<BakingRecipe> bakingCategory) {
+	public static Results getAllRecipes() {
 
 		Results results = new Results();
 		ClientWorld world = Minecraft.getInstance().world;
@@ -99,10 +108,14 @@ public class EnvironmentalJEIPlugin implements IModPlugin {
 		for (BakingRecipe recipe : getRecipes(recipeManager, EnvironmentalRecipes.RecipeTypes.BAKING)) {
 			results.bakingRecipes.add(recipe);
 		}
+		
+		for (SawingRecipe recipe : getRecipes(recipeManager, EnvironmentalRecipes.RecipeTypes.SAWING)) {
+			results.sawingRecipes.add(recipe);
+		}
 
 		return results;
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	private static <C extends IInventory, T extends IRecipe<C>> Collection<T> getRecipes(RecipeManager recipeManager, IRecipeType<T> recipeType) {
 		Map<ResourceLocation, IRecipe<C>> recipesMap = recipeManager.getRecipes(recipeType);

@@ -1,6 +1,7 @@
 package com.team_abnormals.environmental.core;
 
 import com.team_abnormals.environmental.client.gui.screen.inventory.KilnScreen;
+import com.team_abnormals.environmental.client.gui.screen.inventory.SawmillScreen;
 import com.team_abnormals.environmental.core.other.EnvironmentalData;
 import com.team_abnormals.environmental.core.registry.EnvironmentalBiomes;
 import com.team_abnormals.environmental.core.registry.EnvironmentalBlocks;
@@ -86,6 +87,7 @@ public class Environmental {
             EnvironmentalData.registerBlockColors();
             EnvironmentalItems.setupProperties();
             ScreenManager.registerFactory(EnvironmentalContainerTypes.KILN.get(), KilnScreen::new);
+            ScreenManager.registerFactory(EnvironmentalContainerTypes.SAWMILL.get(), SawmillScreen::new);
     	});
     }
     

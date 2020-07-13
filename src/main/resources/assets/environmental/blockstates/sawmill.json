@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "environmental:block/sawmill",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "environmental:block/sawmill"
+    },
+    "facing=south": {
+      "model": "environmental:block/sawmill",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "environmental:block/sawmill",
+      "y": 270
+    }
+  }
+}
