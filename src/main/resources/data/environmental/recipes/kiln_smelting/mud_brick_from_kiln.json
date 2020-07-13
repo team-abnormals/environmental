@@ -1,0 +1,9 @@
+{
+  "type": "environmental:kiln_smelting",
+  "ingredient": {
+    "item": "environmental:mud_ball"
+  },
+  "result": "environmental:mud_brick",
+  "experience": 0.35,
+  "cookingtime": 100
+}

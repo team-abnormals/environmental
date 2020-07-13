@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "minecraft:terracotta"
+        },
+        {
+            "item": "minecraft:terracotta"
+        },
+        {
+            "item": "minecraft:terracotta"
+        },
+        {
+            "item": "minecraft:terracotta"
+        }
+    ],
+    "result": {
+        "item": "environmental:terracotta_bricks",
+        "count": 4
+    }
+}
