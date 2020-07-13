@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "top": "environmental:block/kiln_top",
+    "bottom": "environmental:block/kiln_bottom",
+    "side": "environmental:block/kiln_side",
+    "front": "environmental:block/kiln_front"
+  }
+}

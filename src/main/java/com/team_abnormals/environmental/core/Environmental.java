@@ -1,14 +1,18 @@
 package com.team_abnormals.environmental.core;
 
+import com.team_abnormals.environmental.client.gui.screen.inventory.KilnScreen;
 import com.team_abnormals.environmental.core.other.EnvironmentalData;
 import com.team_abnormals.environmental.core.registry.EnvironmentalBiomes;
 import com.team_abnormals.environmental.core.registry.EnvironmentalBlocks;
+import com.team_abnormals.environmental.core.registry.EnvironmentalContainerTypes;
 import com.team_abnormals.environmental.core.registry.EnvironmentalEntities;
 import com.team_abnormals.environmental.core.registry.EnvironmentalFeatures;
 import com.team_abnormals.environmental.core.registry.EnvironmentalFluids;
 import com.team_abnormals.environmental.core.registry.EnvironmentalItems;
+import com.team_abnormals.environmental.core.registry.EnvironmentalRecipes;
 import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
 
+import net.minecraft.client.gui.ScreenManager;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ColorHandlerEvent;
@@ -40,6 +44,8 @@ public class Environmental {
     	REGISTRY_HELPER.getDeferredSoundRegister().register(modEventBus);
 
         EnvironmentalBlocks.PAINTINGS.register(modEventBus);
+        EnvironmentalContainerTypes.CONTAINER_TYPES.register(modEventBus);
+        EnvironmentalRecipes.Serailizers.RECIPE_SERIALIZERS.register(modEventBus);
         EnvironmentalFluids.FLUIDS.register(modEventBus);
         EnvironmentalBiomes.BIOMES.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(this);
@@ -79,6 +85,7 @@ public class Environmental {
     		EnvironmentalData.setRenderLayers();
             EnvironmentalData.registerBlockColors();
             EnvironmentalItems.setupProperties();
+            ScreenManager.registerFactory(EnvironmentalContainerTypes.KILN.get(), KilnScreen::new);
     	});
     }
     

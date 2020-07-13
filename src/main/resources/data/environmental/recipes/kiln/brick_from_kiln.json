@@ -1,5 +1,5 @@
 {
-  "type": "environmental:kiln_smelting",
+  "type": "environmental:baking",
   "ingredient": {
     "item": "minecraft:clay_ball"
   },
