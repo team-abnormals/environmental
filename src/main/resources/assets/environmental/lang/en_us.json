@@ -29,6 +29,51 @@
 	"block.environmental.willow_leaf_carpet": "Willow Leaf Carpet",
 	"block.environmental.potted_willow_sapling": "Potted Willow Sapling",
 	"block.environmental.willow_sign": "Willow Sign",
+	"block.environmental.willow_chest": "Willow Chest",
+	"block.environmental.willow_trapped_chest": "Willow Trapped Chest",
+	"block.environmental.willow_beehive": "Willow Beehive",
+	
+	"block.environmental.wisteria_log": "Wisteria Log",
+    "block.environmental.stripped_wisteria_log": "Stripped Wisteria Log",
+    "block.environmental.wisteria_wood": "Wisteria Wood",
+    "block.environmental.stripped_wisteria_wood": "Stripped Wisteria Wood",
+    "block.environmental.wisteria_planks": "Wisteria Planks",
+    "block.environmental.wisteria_stairs": "Wisteria Stairs",
+    "block.environmental.wisteria_slab": "Wisteria Slab",
+    "block.environmental.wisteria_fence": "Wisteria Fence",
+    "block.environmental.wisteria_fence_gate": "Wisteria Fence Gate",
+    "block.environmental.wisteria_door": "Wisteria Door",
+    "block.environmental.wisteria_trapdoor": "Wisteria Trapdoor",
+    "block.environmental.wisteria_button": "Wisteria Button",
+    "block.environmental.wisteria_pressure_plate": "Wisteria Pressure Plate",
+    "block.environmental.wisteria_sign": "Wisteria Sign",
+    "block.environmental.wisteria_bookshelf": "Wisteria Bookshelf",
+    "block.environmental.wisteria_ladder": "Wisteria Ladder",
+    "block.environmental.vertical_wisteria_planks": "Vertical Wisteria Planks",
+    "block.environmental.wisteria_vertical_slab": "Wisteria Vertical Slab",
+    "block.environmental.wisteria_chest": "Wisteria Chest",
+	"block.environmental.wisteria_trapped_chest": "Wisteria Trapped Chest",
+	"block.environmental.wisteria_beehive": "Wisteria Beehive",
+	
+    "block.environmental.blue_wisteria_leaves": "Blue Wisteria Leaves",
+    "block.environmental.pink_wisteria_leaves": "Pink Wisteria Leaves",
+    "block.environmental.purple_wisteria_leaves": "Purple Wisteria Leaves",
+    "block.environmental.white_wisteria_leaves": "White Wisteria Leaves",
+    
+    "block.environmental.blue_hanging_wisteria_leaves": "Blue Hanging Wisteria Leaves",
+    "block.environmental.pink_hanging_wisteria_leaves": "Pink Hanging Wisteria Leaves",
+    "block.environmental.purple_hanging_wisteria_leaves": "Purple Hanging Wisteria Leaves",
+    "block.environmental.white_hanging_wisteria_leaves": "White Hanging Wisteria Leaves",
+    
+    "block.environmental.blue_wisteria_sapling": "Blue Wisteria Sapling",
+    "block.environmental.pink_wisteria_sapling": "Pink Wisteria Sapling",
+    "block.environmental.purple_wisteria_sapling": "Purple Wisteria Sapling",
+    "block.environmental.white_wisteria_sapling": "White Wisteria Sapling",
+    
+    "block.environmental.blue_wisteria_leaf_carpet": "Blue Wisteria Leaf Carpet",
+    "block.environmental.pink_wisteria_leaf_carpet": "Pink Wisteria Leaf Carpet",
+    "block.environmental.purple_wisteria_leaf_carpet": "Purple Wisteria Leaf Carpet",
+    "block.environmental.white_wisteria_leaf_carpet": "White Wisteria Leaf Carpet",
 	
 	"block.environmental.cattail_sprouts": "Cattail Sprouts",
 	"block.environmental.cattail": "Cattail",
@@ -40,14 +85,30 @@
 	"block.environmental.cattail_thatch_stairs": "Cattail Thatch Stairs",
 	"block.environmental.cattail_thatch_vertical_slab": "Cattail Thatch Vertical Slab",
 	"block.environmental.cattail_seed_sack": "Cattail Seed Sack",
-	"item.environmental.cattail_seeds": "Cattail Seeds",
+		    
+    "block.environmental.blue_delphinium": "Blue Delphinium",
+    "block.environmental.pink_delphinium": "Pink Delphinium",
+    "block.environmental.purple_delphinium": "Purple Delphinium",
+    "block.environmental.white_delphinium": "White Delphinium",
+	
+	"block.environmental.cartwheel" : "Cartwheel",
+	"block.environmental.bluebell" : "Bluebell",
+	"block.environmental.violet": "Violet",
+	"block.environmental.columbine" : "Columbine",
+	"block.environmental.dianthus" : "Dianthus",
+	"block.environmental.bird_of_paradise" : "Bird of Paradise",
+	"block.environmental.yellow_hibiscus" : "Yellow Hibiscus",
+	"block.environmental.orange_hibiscus" : "Orange Hibiscus",
+	"block.environmental.red_hibiscus" : "Red Hibiscus",
+	"block.environmental.pink_hibiscus" : "Pink Hibiscus",
+	"block.environmental.magenta_hibiscus" : "Magenta Hibiscus",
+	"block.environmental.purple_hibiscus" : "Purple Hibiscus",
 	
 	"block.environmental.giant_tall_grass": "Giant Tall Grass",
 	
 	"block.environmental.rice_sack": "Rice Sack",
 	"block.environmental.rice": "Rice",
 	"block.environmental.tall_rice": "Rice",
-	"item.environmental.rice_ball": "Rice Ball",
 	
 	"block.environmental.duckweed": "Duckweed",
 	"block.environmental.duckweed_thatch": "Duckweed Thatch",
@@ -57,6 +118,10 @@
 	
 	"item.environmental.slabfish_spawn_egg": "Slabfish Spawn Egg",
 	"item.environmental.axolotl_spawn_egg": "Axolotl Spawn Egg",
+	"item.environmental.butterfly_spawn_egg": "Butterfly Spawn Egg",
+	
+	"item.environmental.cattail_seeds": "Cattail Seeds",
+	"item.environmental.rice_ball": "Rice Ball",
 	
 	"item.environmental.cod_kelp_roll": "Cod Kelp Roll",
 	"item.environmental.tropical_fish_kelp_roll": "Tropical Fish Kelp Roll",
@@ -72,18 +137,22 @@
 	
 	"item.environmental.axolotl_bucket": "Bucket of Axolotl",
 	"item.environmental.slabfish_bucket": "Bucket of Slabfish",
+	"item.environmental.bottled_butterfly": "Bottled Butterfly",
 	
 	"item.environmental.mud_ball": "Mud Ball",
 	"item.environmental.mud_brick": "Mud Brick",
 	"item.environmental.mud_bucket": "Mud Bucket",
+	
 	"item.environmental.willow_boat": "Willow Boat",
+	"item.environmental.wisteria_boat": "Wisteria Boat",
 	
 	"item.environmental.music_disc_slabrave": "Music Disc",
 	"item.environmental.music_disc_slabrave.desc": "Mista Jub - Slabrave",
-	
+    
 	"entity.environmental.slabfish": "Slabfish",
 	"entity.environmental.axolotl": "Axolotl",
 	"entity.environmental.boat": "Boat",
+	"entity.environmental.butterfly": "Butterfly",
 	
 	"biome.environmental.marsh": "Marsh",
 	"biome.environmental.mushroom_marsh": "Mushroom Marsh",
@@ -199,56 +268,5 @@
 	"entity.environmental.slabfish.black_sweater": "Black Sweater",
 	
 	"block.environmental.mud": "Mud",
-	"fluid.environmental.mud": "Mud",
-	
-	"block.environmental.wisteria_log": "Wisteria Log",
-    "block.environmental.stripped_wisteria_log": "Stripped Wisteria Log",
-    "block.environmental.wisteria_wood": "Wisteria Wood",
-    "block.environmental.stripped_wisteria_wood": "Stripped Wisteria Wood",
-    "block.environmental.wisteria_planks": "Wisteria Planks",
-    "block.environmental.wisteria_stairs": "Wisteria Stairs",
-    "block.environmental.wisteria_slab": "Wisteria Slab",
-    "block.environmental.wisteria_fence": "Wisteria Fence",
-    "block.environmental.wisteria_fence_gate": "Wisteria Fence Gate",
-    "block.environmental.wisteria_door": "Wisteria Door",
-    "block.environmental.wisteria_trapdoor": "Wisteria Trapdoor",
-    "block.environmental.wisteria_button": "Wisteria Button",
-    "block.environmental.wisteria_pressure_plate": "Wisteria Pressure Plate",
-    "block.environmental.wisteria_sign": "Wisteria Sign",
-    
-    "block.environmental.wisteria_bookshelf": "Wisteria Bookshelf",
-    "block.environmental.wisteria_ladder": "Wisteria Ladder",
-    "block.environmental.vertical_wisteria_planks": "Vertical Wisteria Planks",
-    "block.environmental.wisteria_vertical_slab": "Wisteria Vertical Slab",
-    
-    "block.environmental.blue_wisteria_leaves": "Blue Wisteria Leaves",
-    "block.environmental.pink_wisteria_leaves": "Pink Wisteria Leaves",
-    "block.environmental.purple_wisteria_leaves": "Purple Wisteria Leaves",
-    "block.environmental.white_wisteria_leaves": "White Wisteria Leaves",
-    
-    "block.environmental.blue_hanging_wisteria_leaves": "Blue Hanging Wisteria Leaves",
-    "block.environmental.pink_hanging_wisteria_leaves": "Pink Hanging Wisteria Leaves",
-    "block.environmental.purple_hanging_wisteria_leaves": "Purple Hanging Wisteria Leaves",
-    "block.environmental.white_hanging_wisteria_leaves": "White Hanging Wisteria Leaves",
-    
-    "block.environmental.blue_wisteria_sapling": "Blue Wisteria Sapling",
-    "block.environmental.pink_wisteria_sapling": "Pink Wisteria Sapling",
-    "block.environmental.purple_wisteria_sapling": "Purple Wisteria Sapling",
-    "block.environmental.white_wisteria_sapling": "White Wisteria Sapling",
-    
-    "block.environmental.blue_wisteria_leaf_carpet": "Blue Wisteria Leaf Carpet",
-    "block.environmental.pink_wisteria_leaf_carpet": "Pink Wisteria Leaf Carpet",
-    "block.environmental.purple_wisteria_leaf_carpet": "Purple Wisteria Leaf Carpet",
-    "block.environmental.white_wisteria_leaf_carpet": "White Wisteria Leaf Carpet",
-    
-    "block.environmental.blue_delphinium": "Blue Delphinium",
-    "block.environmental.pink_delphinium": "Pink Delphinium",
-    "block.environmental.purple_delphinium": "Purple Delphinium",
-    "block.environmental.white_delphinium": "White Delphinium",
-
-    "item.environmental.butterfly_spawn_egg": "Butterfly Spawn Egg",
-    "item.environmental.bottled_butterfly": "Bottled Butterfly",
-    "item.environmental.wisteria_boat": "Wisteria Boat",
-
-    "entity.environmental.butterfly": "Butterfly"
+	"fluid.environmental.mud": "Mud"
 }

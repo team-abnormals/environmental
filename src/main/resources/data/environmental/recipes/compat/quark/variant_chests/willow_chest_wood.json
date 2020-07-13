@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "willow_chest",
+  "pattern": [
+    "###",
+    "# #",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "environmental:willow_logs"
+    }
+  },
+  "result": {
+    "item": "environmental:willow_chest",
+    "count": 4
+  },
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "abnormals_core:quark_flag",
+          "flag": "wood_to_chest_recipes"
+        },
+        {
+          "type": "abnormals_core:quark_flag",
+          "flag": "variant_chests"
+        }
+      ]
+    }
+  ]
+} 

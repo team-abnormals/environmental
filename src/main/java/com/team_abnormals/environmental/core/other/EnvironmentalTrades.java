@@ -4,6 +4,7 @@ import com.team_abnormals.environmental.core.Environmental;
 import com.team_abnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.team_abnormals.environmental.core.registry.EnvironmentalItems;
 import com.teamabnormals.abnormals_core.core.utils.TradeUtils;
+import com.teamabnormals.abnormals_core.core.utils.TradeUtils.ItemsForEmeraldsTrade;
 
 import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraftforge.event.village.VillagerTradesEvent;
@@ -18,15 +19,29 @@ public class EnvironmentalTrades {
 	@SubscribeEvent
 	public static void onWandererTradesEvent(WandererTradesEvent event) {
 		event.getGenericTrades().add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.CATTAIL_SEEDS.get(), 1, 1, 6, 1));
+		
 		event.getGenericTrades().add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalBlocks.WILLOW_SAPLING.get(), 5, 1, 8, 1));
+		event.getGenericTrades().add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalBlocks.BLUE_WISTERIA_SAPLING.get(), 5, 1, 8, 1));
+        event.getGenericTrades().add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalBlocks.PINK_WISTERIA_SAPLING.get(), 5, 1, 8, 1));
+        event.getGenericTrades().add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalBlocks.PURPLE_WISTERIA_SAPLING.get(), 5, 1, 8, 1));
+        event.getGenericTrades().add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalBlocks.WHITE_WISTERIA_SAPLING.get(), 5, 1, 8, 1));
+        
 		event.getGenericTrades().add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.RICE.get(), 1, 1, 12, 1));
 		event.getGenericTrades().add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.DUCKWEED.get(), 1, 2, 6, 1));
 		event.getRareTrades().add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.SLABFISH_BUCKET.get(), 5, 1, 4, 1));
 		
-        event.getGenericTrades().add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalBlocks.BLUE_WISTERIA_SAPLING.get(), 5, 1, 8, 1));
-        event.getGenericTrades().add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalBlocks.PINK_WISTERIA_SAPLING.get(), 5, 1, 8, 1));
-        event.getGenericTrades().add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalBlocks.PURPLE_WISTERIA_SAPLING.get(), 5, 1, 8, 1));
-        event.getGenericTrades().add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalBlocks.WHITE_WISTERIA_SAPLING.get(), 5, 1, 8, 1));
+		event.getGenericTrades().add(new ItemsForEmeraldsTrade(EnvironmentalBlocks.CARTWHEEL.get(), 2, 1, 5, 1));
+		event.getGenericTrades().add(new ItemsForEmeraldsTrade(EnvironmentalBlocks.VIOLET.get(), 1, 1, 12, 1));
+		event.getGenericTrades().add(new ItemsForEmeraldsTrade(EnvironmentalBlocks.BLUEBELL.get(), 1, 1, 8, 1));
+		event.getGenericTrades().add(new ItemsForEmeraldsTrade(EnvironmentalBlocks.COLUMBINE.get(), 1, 1, 7, 1));
+		event.getGenericTrades().add(new ItemsForEmeraldsTrade(EnvironmentalBlocks.DIANTHUS.get(), 1, 1, 8, 1));
+		event.getGenericTrades().add(new ItemsForEmeraldsTrade(EnvironmentalBlocks.YELLOW_HIBISCUS.get(), 1, 1, 12, 1));
+		event.getGenericTrades().add(new ItemsForEmeraldsTrade(EnvironmentalBlocks.ORANGE_HIBISCUS.get(), 1, 1, 12, 1));
+		event.getGenericTrades().add(new ItemsForEmeraldsTrade(EnvironmentalBlocks.RED_HIBISCUS.get(), 1, 1, 12, 1));
+		event.getGenericTrades().add(new ItemsForEmeraldsTrade(EnvironmentalBlocks.PINK_HIBISCUS.get(), 1, 1, 12, 1));
+		event.getGenericTrades().add(new ItemsForEmeraldsTrade(EnvironmentalBlocks.MAGENTA_HIBISCUS.get(), 1, 1, 12, 1));
+		event.getGenericTrades().add(new ItemsForEmeraldsTrade(EnvironmentalBlocks.PURPLE_HIBISCUS.get(), 1, 1, 12, 1));
+		
         event.getGenericTrades().add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalBlocks.BLUE_DELPHINIUM.get(), 2, 1, 6, 1));
         event.getGenericTrades().add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalBlocks.PINK_DELPHINIUM.get(), 2, 1, 6, 1));
         event.getGenericTrades().add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalBlocks.PURPLE_DELPHINIUM.get(), 2, 1, 6, 1));

@@ -1,0 +1,10 @@
+{
+	"replace": false,
+	"values": [
+		"environmental:bird_of_paradise",
+		"environmental:blue_delphinium",
+		"environmental:pink_delphinium",
+		"environmental:white_delphinium",
+		"environmental:purple_delphinium"
+	]
+}

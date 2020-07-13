@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "environmental:block/cartwheel" },
+        "facing=south": { "model": "environmental:block/cartwheel", "y": 180 },
+        "facing=west":  { "model": "environmental:block/cartwheel", "y": 270 },
+        "facing=east":  { "model": "environmental:block/cartwheel", "y": 90 }
+    }
+}

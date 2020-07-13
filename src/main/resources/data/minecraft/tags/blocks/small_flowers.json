@@ -1,0 +1,16 @@
+{
+	"replace": false,
+	"values": [
+		"environmental:cartwheel",
+		"environmental:bluebell",
+		"environmental:violet",
+		"environmental:dianthus",
+		"environmental:columbine",
+		"environmental:red_hibiscus",
+		"environmental:orange_hibiscus",
+		"environmental:yellow_hibiscus",
+		"environmental:pink_hibiscus",
+		"environmental:magenta_hibiscus",
+		"environmental:purple_hibiscus"
+	]
+}
