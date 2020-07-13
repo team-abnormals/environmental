@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "#G#",
+        "CCC"
+    ],
+    "key": {
+        "#": {
+            "item": "environmental:mud_bricks"
+        },
+        "G": {
+            "item": "minecraft:glass"
+        },
+        "C": {
+            "item": "minecraft:cobblestone"
+        }
+    },
+    "result": {
+        "item": "environmental:kiln",
+        "count": 1
+    }
+}
