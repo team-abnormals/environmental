@@ -1,0 +1,14 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "atmospheric:grimwood_logs"
+  },
+  "result": "atmospheric:grimwood_trapdoor",
+  "count": 1,
+  "conditions":[
+    {
+      "type":"forge:mod_loaded",
+      "modid":"atmospheric"
+    }
+  ]
+}

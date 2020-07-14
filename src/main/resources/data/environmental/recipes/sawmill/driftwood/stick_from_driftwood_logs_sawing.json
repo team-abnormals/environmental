@@ -1,0 +1,14 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "upgrade_aquatic:driftwood_logs"
+  },
+  "result": "minecraft:stick",
+  "count": 8,
+  "conditions":[
+    {
+      "type":"forge:mod_loaded",
+      "modid":"upgrade_aquatic"
+    }
+  ]
+}

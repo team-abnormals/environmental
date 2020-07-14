@@ -1,0 +1,8 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "minecraft:spruce_logs"
+  },
+  "result": "minecraft:bowl",
+  "count": 4
+}

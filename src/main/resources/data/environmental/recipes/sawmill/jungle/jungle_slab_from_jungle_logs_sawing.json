@@ -1,0 +1,8 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "minecraft:jungle_logs"
+  },
+  "result": "minecraft:jungle_slab",
+  "count": 8
+}

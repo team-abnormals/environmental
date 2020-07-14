@@ -1,0 +1,8 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "minecraft:birch_logs"
+  },
+  "result": "minecraft:crafting_table",
+  "count": 1
+}

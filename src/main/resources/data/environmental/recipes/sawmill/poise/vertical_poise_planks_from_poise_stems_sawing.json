@@ -1,0 +1,23 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "endergetic:poise_stems"
+  },
+  "result": "endergetic:vertical_poise_planks",
+  "count": 4,
+  "conditions":[
+    {
+      "type":"forge:and",
+      "values": [
+        {
+          "type":"forge:mod_loaded",
+          "modid":"endergetic"
+        },
+        {
+          "type":"abnormals_core:quark_flag",
+          "flag":"vertical_planks"
+        }
+      ]
+    }
+  ]
+}

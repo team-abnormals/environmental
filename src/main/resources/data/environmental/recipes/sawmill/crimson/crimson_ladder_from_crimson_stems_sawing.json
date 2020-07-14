@@ -1,0 +1,14 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "minecraft:crimson_stems"
+  },
+  "result": "quark:crimson_ladder",
+  "count": 8,
+  "conditions":[
+    {
+      "type":"abnormals_core:quark_flag",
+      "flag":"variant_ladders"
+    }
+  ]
+}

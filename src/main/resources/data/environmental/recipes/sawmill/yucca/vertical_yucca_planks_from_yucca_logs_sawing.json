@@ -1,0 +1,23 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "atmospheric:yucca_logs"
+  },
+  "result": "atmospheric:vertical_yucca_planks",
+  "count": 4,
+  "conditions":[
+    {
+      "type":"forge:and",
+      "values": [
+        {
+          "type":"forge:mod_loaded",
+          "modid":"atmospheric"
+        },
+        {
+          "type":"abnormals_core:quark_flag",
+          "flag":"vertical_planks"
+        }
+      ]
+    }
+  ]
+}

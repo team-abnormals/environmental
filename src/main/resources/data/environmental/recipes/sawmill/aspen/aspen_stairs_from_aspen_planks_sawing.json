@@ -1,0 +1,14 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "item": "atmospheric:aspen_planks"
+  },
+  "result": "atmospheric:aspen_stairs",
+  "count": 1,
+  "conditions":[
+    {
+      "type":"forge:mod_loaded",
+      "modid":"atmospheric"
+    }
+  ]
+}

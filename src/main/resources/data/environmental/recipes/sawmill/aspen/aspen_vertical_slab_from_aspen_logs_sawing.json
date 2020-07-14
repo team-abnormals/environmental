@@ -1,0 +1,23 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "atmospheric:aspen_logs"
+  },
+  "result": "atmospheric:aspen_vertical_slab",
+  "count": 8,
+  "conditions":[
+    {
+      "type":"forge:and",
+      "values": [
+        {
+          "type":"forge:mod_loaded",
+          "modid":"atmospheric"
+        },
+        {
+          "type":"abnormals_core:quark_flag",
+          "flag":"vertical_slabs"
+        }
+      ]
+    }
+  ]
+}

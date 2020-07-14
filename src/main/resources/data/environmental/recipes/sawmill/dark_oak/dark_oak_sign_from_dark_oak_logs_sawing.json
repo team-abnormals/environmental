@@ -1,0 +1,8 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "minecraft:dark_oak_logs"
+  },
+  "result": "minecraft:dark_oak_sign",
+  "count": 2
+}

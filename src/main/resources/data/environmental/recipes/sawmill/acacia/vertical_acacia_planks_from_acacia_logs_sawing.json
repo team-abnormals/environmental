@@ -1,0 +1,14 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "minecraft:acacia_logs"
+  },
+  "result": "quark:vertical_acacia_planks",
+  "count": 4,
+  "conditions":[
+    {
+      "type":"abnormals_core:quark_flag",
+      "flag":"vertical_planks"
+    }
+  ]
+}

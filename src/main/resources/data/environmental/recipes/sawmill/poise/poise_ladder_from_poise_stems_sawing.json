@@ -1,0 +1,23 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "endergetic:poise_stems"
+  },
+  "result": "endergetic:poise_ladder",
+  "count": 8,
+  "conditions":[
+    {
+      "type":"forge:and",
+      "values": [
+        {
+          "type":"forge:mod_loaded",
+          "modid":"endergetic"
+        },
+        {
+          "type":"abnormals_core:quark_flag",
+          "flag":"variant_ladders"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "environmental:wisteria_logs"
+  },
+  "result": "environmental:wisteria_sign",
+  "count": 2
+}

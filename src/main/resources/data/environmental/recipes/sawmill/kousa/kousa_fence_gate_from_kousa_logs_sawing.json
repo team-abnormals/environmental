@@ -1,0 +1,14 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "atmospheric:kousa_logs"
+  },
+  "result": "atmospheric:kousa_fence_gate",
+  "count": 1,
+  "conditions":[
+    {
+      "type":"forge:mod_loaded",
+      "modid":"atmospheric"
+    }
+  ]
+}

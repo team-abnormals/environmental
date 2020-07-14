@@ -1,0 +1,8 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "environmental:willow_logs"
+  },
+  "result": "minecraft:stick",
+  "count": 8
+}

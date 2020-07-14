@@ -1,0 +1,14 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "minecraft:jungle_logs"
+  },
+  "result": "quark:vertical_jungle_planks",
+  "count": 4,
+  "conditions":[
+    {
+      "type":"abnormals_core:quark_flag",
+      "flag":"vertical_planks"
+    }
+  ]
+}

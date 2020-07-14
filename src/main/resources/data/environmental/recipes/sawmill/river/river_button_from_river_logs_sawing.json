@@ -1,0 +1,14 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "upgrade_aquatic:river_logs"
+  },
+  "result": "upgrade_aquatic:river_button",
+  "count": 4,
+  "conditions":[
+    {
+      "type":"forge:mod_loaded",
+      "modid":"upgrade_aquatic"
+    }
+  ]
+}

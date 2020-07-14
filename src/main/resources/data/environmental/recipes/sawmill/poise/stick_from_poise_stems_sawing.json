@@ -1,0 +1,14 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "endergetic:poise_stems"
+  },
+  "result": "minecraft:stick",
+  "count": 8,
+  "conditions":[
+    {
+      "type":"forge:mod_loaded",
+      "modid":"endergetic"
+    }
+  ]
+}

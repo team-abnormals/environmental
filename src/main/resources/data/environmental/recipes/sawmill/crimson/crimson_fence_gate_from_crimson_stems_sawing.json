@@ -1,0 +1,8 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "minecraft:crimson_stems"
+  },
+  "result": "minecraft:crimson_fence_gate",
+  "count": 1
+}
