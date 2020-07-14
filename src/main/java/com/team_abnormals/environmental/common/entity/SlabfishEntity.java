@@ -165,6 +165,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 		skins.put(Arrays.asList("jub", "slabrave", "mista jub"), SlabfishType.MISTA_JUB);
 		skins.put(Arrays.asList("smelly", "stinky", "smellysox", "thefaceofgaming"), SlabfishType.SMELLY);
 		skins.put(Arrays.asList("squart", "squar", "squarticus"), SlabfishType.SQUART);
+		skins.put(Arrays.asList("bmo", "beemo", "be more"), SlabfishType.BMO);
 	});
 	
 	public SlabfishEntity(EntityType<? extends SlabfishEntity> type, World worldIn) {
