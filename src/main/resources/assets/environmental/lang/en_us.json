@@ -154,6 +154,9 @@
 	
 	"item.environmental.music_disc_slabrave": "Music Disc",
 	"item.environmental.music_disc_slabrave.desc": "Mista Jub - Slabrave",
+	
+	"item.environmental.music_disc_leaving_home": "Music Disc",
+	"item.environmental.music_disc_leaving_home.desc": "hatsondogs - Leaving Home",
     
 	"entity.environmental.slabfish": "Slabfish",
 	"entity.environmental.axolotl": "Axolotl",

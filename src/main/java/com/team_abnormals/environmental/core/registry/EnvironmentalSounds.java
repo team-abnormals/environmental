@@ -21,5 +21,6 @@ public class EnvironmentalSounds {
 	public static final RegistryObject<SoundEvent> ENTITY_SLABFISH_BACKPACK	= HELPER.createSoundEvent("entity.slabfish.backpack");
 	public static final RegistryObject<SoundEvent> ENTITY_SLABFISH_SWEATER	= HELPER.createSoundEvent("entity.slabfish.sweater");
 	
-	public static final RegistryObject<SoundEvent> SLABRAVE = HELPER.createSoundEvent("music.record.slabrave");
+	public static final RegistryObject<SoundEvent> SLABRAVE 	= HELPER.createSoundEvent("music.record.slabrave");
+	public static final RegistryObject<SoundEvent> LEAVING_HOME = HELPER.createSoundEvent("music.record.leaving_home");
 }

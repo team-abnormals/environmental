@@ -8,6 +8,15 @@
       }
     ]
   },
+  "music.record.leaving_home": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "environmental:record/leaving_home",
+        "stream": true
+      }
+    ]
+  },
   "entity.slabfish.death": {
     "sounds": [
       "entity/fish/hurt1",

@@ -1,0 +1,6 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "environmental:item/music_disc_leaving_home"
+    }
+}

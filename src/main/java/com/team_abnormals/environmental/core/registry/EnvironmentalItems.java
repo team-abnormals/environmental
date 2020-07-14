@@ -49,8 +49,10 @@ public class EnvironmentalItems {
 	public static final RegistryObject<Item> PUFFERFISH_RICE_CAKE 		= HELPER.createItem("pufferfish_rice_cake", () -> new Item(new Item.Properties().food(EnvironmentalFoods.PUFFERFISH_RICE_CAKE).group(ItemGroup.FOOD)));
 	public static final RegistryObject<Item> LIONFISH_RICE_CAKE 		= HELPER.createCompatItem("upgrade_aquatic", "lionfish_rice_cake", new Item.Properties().food(EnvironmentalFoods.LIONFISH_RICE_CAKE), ItemGroup.FOOD);
 	
-	public static final RegistryObject<Item> MUSIC_DISC_SLABRAVE 	= HELPER.createItem("music_disc_slabrave", () -> new AbnormalsMusicDiscItem(12, () -> EnvironmentalSounds.SLABRAVE.get(), new Item.Properties().maxStackSize(1).group(ItemGroup.MISC).rarity(Rarity.RARE)));
-//	public static final RegistryObject<Item> AXOLOTL_BUCKET = HELPER.createItem("axolotl_bucket", () -> new AxolotlBucketItem(() -> EnvironmentalEntities.AXOLOTL.get(), () -> Fluids.WATER, new Item.Properties().group(ItemGroup.MISC).maxStackSize(1)));
+	public static final RegistryObject<Item> MUSIC_DISC_SLABRAVE 		= HELPER.createItem("music_disc_slabrave", () -> new AbnormalsMusicDiscItem(12, () -> EnvironmentalSounds.SLABRAVE.get(), new Item.Properties().maxStackSize(1).group(ItemGroup.MISC).rarity(Rarity.RARE)));
+	public static final RegistryObject<Item> MUSIC_DISC_LEAVING_HOME 	= HELPER.createItem("music_disc_leaving_home", () -> new AbnormalsMusicDiscItem(12, () -> EnvironmentalSounds.LEAVING_HOME.get(), new Item.Properties().maxStackSize(1).group(ItemGroup.MISC).rarity(Rarity.RARE)));
+
+	//	public static final RegistryObject<Item> AXOLOTL_BUCKET = HELPER.createItem("axolotl_bucket", () -> new AxolotlBucketItem(() -> EnvironmentalEntities.AXOLOTL.get(), () -> Fluids.WATER, new Item.Properties().group(ItemGroup.MISC).maxStackSize(1)));
 	public static final RegistryObject<Item> SLABFISH_BUCKET = HELPER.createItem("slabfish_bucket", () -> new SlabfishBucketItem(() -> EnvironmentalEntities.SLABFISH.get(), () -> Fluids.WATER, new Item.Properties().group(ItemGroup.MISC).maxStackSize(1)));
 
 	public static final RegistryObject<Item> SLABFISH_SPAWN_EGG = HELPER.createSpawnEggItem("slabfish", () -> EnvironmentalEntities.SLABFISH.get(), 6263617, 13940616);
