@@ -25,7 +25,6 @@ import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import mezz.jei.api.registration.IRecipeTransferRegistration;
-import mezz.jei.util.ErrorUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.inventory.IInventory;
@@ -37,6 +36,8 @@ import net.minecraft.util.ResourceLocation;
 
 @JeiPlugin
 public class EnvironmentalPlugin implements IModPlugin {
+	public static final ResourceLocation RECIPE_GUI_ENVIRONMENTAL = new ResourceLocation(Environmental.MODID, "textures/gui/jei.png");
+
 	@Nullable
 	private BakingCategory bakingCategory;
 	@Nullable
@@ -61,9 +62,6 @@ public class EnvironmentalPlugin implements IModPlugin {
 	
 	@Override
 	public void registerRecipes(IRecipeRegistration registration) {
-		ErrorUtil.checkNotNull(bakingCategory, "bakingCategory");
-		ErrorUtil.checkNotNull(sawingCategory, "sawingCategory");
-
 		Results recipes = getAllRecipes();
 		
 		registration.addRecipes(recipes.getBakingRecipes(), BakingCategory.BAKING);
