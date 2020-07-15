@@ -11,7 +11,7 @@ import net.minecraft.util.text.ITextComponent;
 public class KilnScreen extends AbstractFurnaceScreen<KilnContainer> {
     private static final ResourceLocation GUI_TEXTURE = new ResourceLocation(Environmental.MODID, "textures/gui/container/kiln.png");
 
-    public KilnScreen(KilnContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
-        super(screenContainer, new KilnRecipeGui(), inv, titleIn, GUI_TEXTURE);
+    public KilnScreen(KilnContainer screenContainer, PlayerInventory playerInventory, ITextComponent title) {
+        super(screenContainer, new KilnRecipeGui(), playerInventory, title, GUI_TEXTURE);
     }
 }

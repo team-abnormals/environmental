@@ -26,38 +26,38 @@ public class SawmillScreen extends ContainerScreen<SawmillContainer> {
     private int recipeIndexOffset;
     private boolean hasItemsInInputSlot;
 
-    public SawmillScreen(SawmillContainer containerIn, PlayerInventory playerInv, ITextComponent titleIn) {
-        super(containerIn, playerInv, titleIn);
-        containerIn.setInventoryUpdateListener(this::onInventoryUpdate);
+    public SawmillScreen(SawmillContainer screenContainer, PlayerInventory playerInventory, ITextComponent title) {
+        super(screenContainer, playerInventory, title);
+        screenContainer.setInventoryUpdateListener(this::onInventoryUpdate);
         --this.field_238743_q_;
     }
 
     @Override
-    public void render(MatrixStack p_230430_1_, int p_230430_2_, int p_230430_3_, float p_230430_4_) {
-        super.render(p_230430_1_, p_230430_2_, p_230430_3_, p_230430_4_);
-        this.func_230459_a_(p_230430_1_, p_230430_2_, p_230430_3_);
+    public void render(MatrixStack stack, int mouseX, int mouseY, float partialTicks) {
+        super.render(stack, mouseX, mouseY, partialTicks);
+        this.func_230459_a_(stack, mouseX, mouseY);
     }
 
     @Override
-    protected void func_230450_a_(MatrixStack p_230450_1_, float p_230450_2_, int p_230450_3_, int p_230450_4_) {
-        this.renderBackground(p_230450_1_);
+    protected void func_230450_a_(MatrixStack stack, float p_230450_2_, int p_230450_3_, int p_230450_4_) {
+        this.renderBackground(stack);
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.minecraft.getTextureManager().bindTexture(BACKGROUND_TEXTURE);
         int i = this.guiLeft;
         int j = this.guiTop;
-        this.blit(p_230450_1_, i, j, 0, 0, this.xSize, this.ySize);
+        this.blit(stack, i, j, 0, 0, this.xSize, this.ySize);
         int k = (int) (41.0F * this.sliderProgress);
-        this.blit(p_230450_1_, i + 119, j + 15 + k, 176 + (this.canScroll() ? 0 : 12), 0, 12, 15);
+        this.blit(stack, i + 119, j + 15 + k, 176 + (this.canScroll() ? 0 : 12), 0, 12, 15);
         int l = this.guiLeft + 52;
         int i1 = this.guiTop + 14;
         int j1 = this.recipeIndexOffset + 12;
-        this.func_238853_b_(p_230450_1_, p_230450_3_, p_230450_4_, l, i1, j1);
+        this.func_238853_b_(stack, p_230450_3_, p_230450_4_, l, i1, j1);
         this.drawRecipesItems(l, i1, j1);
     }
 
     @Override
-    protected void func_230459_a_(MatrixStack p_230459_1_, int p_230459_2_, int p_230459_3_) {
-        super.func_230459_a_(p_230459_1_, p_230459_2_, p_230459_3_);
+    protected void func_230459_a_(MatrixStack stack, int mouseX, int mouseY) {
+        super.func_230459_a_(stack, mouseX, mouseY);
         if (this.hasItemsInInputSlot) {
             int i = this.guiLeft + 52;
             int j = this.guiTop + 14;
@@ -68,8 +68,8 @@ public class SawmillScreen extends ContainerScreen<SawmillContainer> {
                 int i1 = l - this.recipeIndexOffset;
                 int j1 = i + i1 % 4 * 16;
                 int k1 = j + i1 / 4 * 18 + 2;
-                if (p_230459_2_ >= j1 && p_230459_2_ < j1 + 16 && p_230459_3_ >= k1 && p_230459_3_ < k1 + 18) {
-                    this.renderTooltip(p_230459_1_, list.get(l).getRecipeOutput(), p_230459_2_, p_230459_3_);
+                if (mouseX >= j1 && mouseX < j1 + 16 && mouseY >= k1 && mouseY < k1 + 18) {
+                    this.renderTooltip(stack, list.get(l).getRecipeOutput(), mouseX, mouseY);
                 }
             }
         }

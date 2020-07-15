@@ -8,11 +8,11 @@ import net.minecraft.inventory.container.AbstractFurnaceContainer;
 import net.minecraft.util.IIntArray;
 
 public class KilnContainer extends AbstractFurnaceContainer {
-    public KilnContainer(int p_i50061_1_, PlayerInventory p_i50061_2_) {
-        super(EnvironmentalContainerTypes.KILN.get(), EnvironmentalRecipes.RecipeTypes.BAKING, p_i50061_1_, p_i50061_2_);
+    public KilnContainer(int windowId, PlayerInventory playerInventory) {
+        super(EnvironmentalContainerTypes.KILN.get(), EnvironmentalRecipes.RecipeTypes.BAKING, windowId, playerInventory);
     }
 
-    public KilnContainer(int p_i50062_1_, PlayerInventory p_i50062_2_, IInventory p_i50062_3_, IIntArray p_i50062_4_) {
-        super(EnvironmentalContainerTypes.KILN.get(), EnvironmentalRecipes.RecipeTypes.BAKING, p_i50062_1_, p_i50062_2_, p_i50062_3_, p_i50062_4_);
+    public KilnContainer(int windowId, PlayerInventory playerInventory, IInventory kilnInventory, IIntArray furnaceData) {
+        super(EnvironmentalContainerTypes.KILN.get(), EnvironmentalRecipes.RecipeTypes.BAKING, windowId, playerInventory, kilnInventory, furnaceData);
     }
 }

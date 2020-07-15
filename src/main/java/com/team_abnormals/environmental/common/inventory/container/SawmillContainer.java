@@ -43,14 +43,14 @@ public class SawmillContainer extends Container {
     };
     private final CraftResultInventory inventory = new CraftResultInventory();
 
-    public SawmillContainer(int windowIdIn, PlayerInventory playerInventoryIn) {
-        this(windowIdIn, playerInventoryIn, IWorldPosCallable.DUMMY);
+    public SawmillContainer(int windowId, PlayerInventory playerInventory) {
+        this(windowId, playerInventory, IWorldPosCallable.DUMMY);
     }
 
-    public SawmillContainer(int windowIdIn, PlayerInventory playerInventoryIn, final IWorldPosCallable worldPosCallableIn) {
-        super(EnvironmentalContainerTypes.SAWMILL.get(), windowIdIn);
-        this.worldPosCallable = worldPosCallableIn;
-        this.world = playerInventoryIn.player.world;
+    public SawmillContainer(int windowId, PlayerInventory playerInventory, final IWorldPosCallable worldPos) {
+        super(EnvironmentalContainerTypes.SAWMILL.get(), windowId);
+        this.worldPosCallable = worldPos;
+        this.world = playerInventory.player.world;
         this.inputInventorySlot = this.addSlot(new Slot(this.inputInventory, 0, 20, 33));
         this.outputInventorySlot = this.addSlot(new Slot(this.inventory, 1, 143, 33) {
             public boolean isItemValid(ItemStack stack) {
@@ -64,7 +64,7 @@ public class SawmillContainer extends Container {
                 }
 
                 stack.getItem().onCreated(stack, thePlayer.world, thePlayer);
-                worldPosCallableIn.consume((p_216954_1_, p_216954_2_) -> {
+                worldPos.consume((p_216954_1_, p_216954_2_) -> {
                     long l = p_216954_1_.getGameTime();
                     if (SawmillContainer.this.lastOnTake != l) {
                         p_216954_1_.playSound((PlayerEntity) null, p_216954_2_, SoundEvents.UI_STONECUTTER_TAKE_RESULT, SoundCategory.BLOCKS, 1.0F, 1.0F);
@@ -78,12 +78,12 @@ public class SawmillContainer extends Container {
 
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 9; ++j) {
-                this.addSlot(new Slot(playerInventoryIn, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+                this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
             }
         }
 
         for (int k = 0; k < 9; ++k) {
-            this.addSlot(new Slot(playerInventoryIn, k, 8 + k * 18, 142));
+            this.addSlot(new Slot(playerInventory, k, 8 + k * 18, 142));
         }
 
         this.trackInt(this.selectedRecipe);
