@@ -1,12 +1,9 @@
 package com.team_abnormals.environmental.common.block.fluid;
 
-import java.util.Random;
-
 import com.team_abnormals.environmental.core.Environmental;
 import com.team_abnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.team_abnormals.environmental.core.registry.EnvironmentalFluids;
 import com.team_abnormals.environmental.core.registry.EnvironmentalItems;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FlowingFluidBlock;
@@ -33,6 +30,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidAttributes.Builder;
 
+import java.util.Random;
+
 public abstract class MudFluid extends FlowingFluid {
     public MudFluid() {
     }
@@ -53,12 +52,12 @@ public abstract class MudFluid extends FlowingFluid {
 
     @OnlyIn(Dist.CLIENT)
     public void animateTick(World worldIn, BlockPos pos, FluidState state, Random random) {
-        if (!state.isSource() && !(Boolean)state.get(FALLING)) {
+        if (!state.isSource() && !(Boolean) state.get(FALLING)) {
             if (random.nextInt(64) == 0) {
-                worldIn.playSound((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, SoundEvents.BLOCK_WATER_AMBIENT, SoundCategory.BLOCKS, random.nextFloat() * 0.25F + 0.75F, random.nextFloat() + 0.5F, false);
+                worldIn.playSound((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, SoundEvents.BLOCK_WATER_AMBIENT, SoundCategory.BLOCKS, random.nextFloat() * 0.25F + 0.75F, random.nextFloat() + 0.5F, false);
             }
         } else if (random.nextInt(10) == 0) {
-            worldIn.addParticle(ParticleTypes.UNDERWATER, (double)((float)pos.getX() + random.nextFloat()), (double)((float)pos.getY() + random.nextFloat()), (double)((float)pos.getZ() + random.nextFloat()), 0.0D, 0.0D, 0.0D);
+            worldIn.addParticle(ParticleTypes.UNDERWATER, (double) ((float) pos.getX() + random.nextFloat()), (double) ((float) pos.getY() + random.nextFloat()), (double) ((float) pos.getZ() + random.nextFloat()), 0.0D, 0.0D, 0.0D);
         }
 
     }
@@ -72,7 +71,7 @@ public abstract class MudFluid extends FlowingFluid {
     }
 
     protected void beforeReplacingBlock(IWorld world, BlockPos pos, BlockState state) {
-		TileEntity tileentity = state.getBlock().hasTileEntity(state) ? world.getTileEntity(pos) : null;
+        TileEntity tileentity = state.getBlock().hasTileEntity(state) ? world.getTileEntity(pos) : null;
         Block.spawnDrops(state, world.getWorld(), pos, tileentity);
     }
 
@@ -81,7 +80,7 @@ public abstract class MudFluid extends FlowingFluid {
     }
 
     public BlockState getBlockState(FluidState state) {
-        return (BlockState)EnvironmentalBlocks.MUD.get().getDefaultState().with(FlowingFluidBlock.LEVEL, getLevelFromState(state));
+        return (BlockState) EnvironmentalBlocks.MUD.get().getDefaultState().with(FlowingFluidBlock.LEVEL, getLevelFromState(state));
     }
 
     public boolean isEquivalentTo(Fluid fluidIn) {
@@ -103,7 +102,7 @@ public abstract class MudFluid extends FlowingFluid {
     protected float getExplosionResistance() {
         return 100.0F;
     }
-    
+
     @Override
     protected FluidAttributes createAttributes() {
         Builder builder = FluidAttributes.builder(new ResourceLocation(Environmental.MODID, "block/mud_still"), new ResourceLocation(Environmental.MODID, "block/mud_flow"));
@@ -129,13 +128,13 @@ public abstract class MudFluid extends FlowingFluid {
             builder.add(new IntegerProperty[]{LEVEL_1_8});
         }
 
-        public int getLevel (FluidState state) {
-            return (Integer)state.get(LEVEL_1_8);
+        public int getLevel(FluidState state) {
+            return (Integer) state.get(LEVEL_1_8);
         }
 
         public boolean isSource(FluidState state) {
             return false;
         }
-		
+
     }
 }

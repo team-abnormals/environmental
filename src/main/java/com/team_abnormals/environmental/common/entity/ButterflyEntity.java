@@ -1,20 +1,10 @@
 package com.team_abnormals.environmental.common.entity;
 
-import java.awt.Color;
-import java.util.Random;
-
 import com.team_abnormals.environmental.common.entity.goals.LandOnPlantGoal;
 import com.team_abnormals.environmental.common.entity.util.ButterflyType;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BushBlock;
-import net.minecraft.entity.CreatureEntity;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntitySize;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.Pose;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomFlyingGoal;
@@ -28,6 +18,9 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+
+import java.awt.*;
+import java.util.Random;
 
 @SuppressWarnings("static-access")
 public class ButterflyEntity extends CreatureEntity {
@@ -47,8 +40,7 @@ public class ButterflyEntity extends CreatureEntity {
         int light = world.getLight(pos);
         if (world.getWorld().func_234922_V_() == DimensionType.field_235999_c_ && world.canBlockSeeSky(pos) && light >= 7 && world.getWorld().isDaytime()) {
             return (world.getBlockState(pos).getBlock() instanceof BushBlock || world.getBlockState(pos.down()).getBlock() instanceof BushBlock || world.getBlockState(pos.north()).getBlock() instanceof BushBlock || world.getBlockState(pos.south()).getBlock() instanceof BushBlock || world.getBlockState(pos.east()).getBlock() instanceof BushBlock || world.getBlockState(pos.west()).getBlock() instanceof BushBlock) && world.getLightSubtracted(pos, 0) > 8;
-        }
-        else return false;
+        } else return false;
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -82,7 +74,7 @@ public class ButterflyEntity extends CreatureEntity {
         return getButterflyVariant().patternA;
     }
 
-	@OnlyIn(Dist.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     public ResourceLocation getPatternTextureB() {
         return getButterflyVariant().patternB;
     }
@@ -96,9 +88,9 @@ public class ButterflyEntity extends CreatureEntity {
 
     protected void collideWithNearbyEntities() {
     }
-    
+
     public static AttributeModifierMap.MutableAttribute registerAttributes() {
-    	return MobEntity.func_233666_p_().func_233815_a_(Attributes.MAX_HEALTH, 3.0D);
+        return MobEntity.func_233666_p_().func_233815_a_(Attributes.MAX_HEALTH, 3.0D);
     }
 
     public void tick() {
@@ -112,15 +104,15 @@ public class ButterflyEntity extends CreatureEntity {
             spawnPosition = null;
         }
         if (spawnPosition == null || rand.nextInt(30) == 0 || spawnPosition.withinDistance(getPositionVec(), 2.0D)) {
-            spawnPosition = new BlockPos(getPosX() + (double)rand.nextInt(7) - (double)rand.nextInt(7), getPosY() + (double)rand.nextInt(6) - 2.0D, getPosZ() + (double)rand.nextInt(7) - (double)rand.nextInt(7));
+            spawnPosition = new BlockPos(getPosX() + (double) rand.nextInt(7) - (double) rand.nextInt(7), getPosY() + (double) rand.nextInt(6) - 2.0D, getPosZ() + (double) rand.nextInt(7) - (double) rand.nextInt(7));
         }
-        double x = (double)spawnPosition.getX() + 0.5D - getPosX();
-        double y = (double)spawnPosition.getY() + 0.1D - getPosY();
-        double z = (double)spawnPosition.getZ() + 0.5D - getPosZ();
+        double x = (double) spawnPosition.getX() + 0.5D - getPosX();
+        double y = (double) spawnPosition.getY() + 0.1D - getPosY();
+        double z = (double) spawnPosition.getZ() + 0.5D - getPosZ();
         Vector3d lvt_9_1_ = getMotion();
         Vector3d lvt_10_1_ = lvt_9_1_.add((Math.signum(x) * 0.5D - lvt_9_1_.x) * 0.10000000149011612D, (Math.signum(y) * 0.699999988079071D - lvt_9_1_.y) * 0.10000000149011612D, (Math.signum(z) * 0.5D - lvt_9_1_.z) * 0.10000000149011612D);
         setMotion(lvt_10_1_);
-        float lvt_11_1_ = (float)(MathHelper.atan2(lvt_10_1_.z, lvt_10_1_.x) * 57.2957763671875D) - 90.0F;
+        float lvt_11_1_ = (float) (MathHelper.atan2(lvt_10_1_.z, lvt_10_1_.x) * 57.2957763671875D) - 90.0F;
         float lvt_12_1_ = MathHelper.wrapDegrees(lvt_11_1_ - rotationYaw);
         moveForward = 0.5F;
         rotationYaw += lvt_12_1_;

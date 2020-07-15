@@ -1,9 +1,6 @@
 package com.team_abnormals.environmental.common.tile;
 
-import javax.annotation.Nullable;
-
 import com.team_abnormals.environmental.core.registry.EnvironmentalTileEntities;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -20,115 +17,117 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
+import javax.annotation.Nullable;
+
 public class MudVaseTileEntity extends LockableLootTileEntity {
-	private NonNullList<ItemStack> inventory = NonNullList.withSize(1, ItemStack.EMPTY);
+    private NonNullList<ItemStack> inventory = NonNullList.withSize(1, ItemStack.EMPTY);
 
-	public MudVaseTileEntity() {
-		super(EnvironmentalTileEntities.MUD_VASE.get());
-	}
+    public MudVaseTileEntity() {
+        super(EnvironmentalTileEntities.MUD_VASE.get());
+    }
 
-	@Override
-	public CompoundNBT write(CompoundNBT compound) {
-		super.write(compound);
-		if (!this.checkLootAndWrite(compound)) {
-			ItemStackHelper.saveAllItems(compound, this.inventory);
-		}
+    @Override
+    public CompoundNBT write(CompoundNBT compound) {
+        super.write(compound);
+        if (!this.checkLootAndWrite(compound)) {
+            ItemStackHelper.saveAllItems(compound, this.inventory);
+        }
 
-		return compound;
-	}
+        return compound;
+    }
 
-	@Override
-	public void read(BlockState state, CompoundNBT compound) {
-		super.read(state, compound);
-		this.inventory = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
-		if (!this.checkLootAndRead(compound)) {
-			ItemStackHelper.loadAllItems(compound, this.inventory);
-		}
+    @Override
+    public void read(BlockState state, CompoundNBT compound) {
+        super.read(state, compound);
+        this.inventory = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
+        if (!this.checkLootAndRead(compound)) {
+            ItemStackHelper.loadAllItems(compound, this.inventory);
+        }
 
-	}
+    }
 
-	@Override
-	public int getSizeInventory() {
-		return 1;
-	}
+    @Override
+    public int getSizeInventory() {
+        return 1;
+    }
 
-	@Override
-	protected NonNullList<ItemStack> getItems() {
-		return this.inventory;
-	}
+    @Override
+    protected NonNullList<ItemStack> getItems() {
+        return this.inventory;
+    }
 
-	@Override
-	protected void setItems(NonNullList<ItemStack> itemsIn) {
-		this.inventory = itemsIn;
-	}
+    @Override
+    protected void setItems(NonNullList<ItemStack> itemsIn) {
+        this.inventory = itemsIn;
+    }
 
-	@Override
-	protected ITextComponent getDefaultName() {
-		return new TranslationTextComponent("container.mud_vase");
-	}
+    @Override
+    protected ITextComponent getDefaultName() {
+        return new TranslationTextComponent("container.mud_vase");
+    }
 
-	@Override
-	protected Container createMenu(int id, PlayerInventory player) {
-		return null;
-	}
+    @Override
+    protected Container createMenu(int id, PlayerInventory player) {
+        return null;
+    }
 
-	public static int calcRedstone(@Nullable TileEntity te) {
-		return te instanceof IInventory ? calcRedstoneFromInventory((IInventory) te) : 0;
-	}
+    public static int calcRedstone(@Nullable TileEntity te) {
+        return te instanceof IInventory ? calcRedstoneFromInventory((IInventory) te) : 0;
+    }
 
-	public static int calcRedstoneFromInventory(@Nullable IInventory inv) {
-		if (inv == null) {
-			return 0;
-		} else {
-			ItemStack itemstack = inv.getStackInSlot(0);
-			if (itemstack == ItemStack.EMPTY) {
-				return 0;
-			} else {
-				return 5;
-			}
+    public static int calcRedstoneFromInventory(@Nullable IInventory inv) {
+        if (inv == null) {
+            return 0;
+        } else {
+            ItemStack itemstack = inv.getStackInSlot(0);
+            if (itemstack == ItemStack.EMPTY) {
+                return 0;
+            } else {
+                return 5;
+            }
 
-		}
-	}
+        }
+    }
 
-	public boolean addItem(ItemStack itemStackIn) {
-		ItemStack itemstack = this.inventory.get(0);
-		if (itemstack.isEmpty()) {
-			this.inventory.set(0, itemStackIn.split(1));
-			this.inventoryChanged();
-			return true;
-		}
-		return false;
-	}
+    public boolean addItem(ItemStack itemStackIn) {
+        ItemStack itemstack = this.inventory.get(0);
+        if (itemstack.isEmpty()) {
+            this.inventory.set(0, itemStackIn.split(1));
+            this.inventoryChanged();
+            return true;
+        }
+        return false;
+    }
 
-	public boolean removeItem(PlayerEntity player, Hand hand) {
-		ItemStack itemstack = this.inventory.get(0);
-		if (!itemstack.isEmpty()) {
-			this.inventory.set(0, ItemStack.EMPTY);
-			this.inventoryChanged();
-			player.setHeldItem(hand, itemstack);
-			return true;
-		}
-		return false;
-	}
+    public boolean removeItem(PlayerEntity player, Hand hand) {
+        ItemStack itemstack = this.inventory.get(0);
+        if (!itemstack.isEmpty()) {
+            this.inventory.set(0, ItemStack.EMPTY);
+            this.inventoryChanged();
+            player.setHeldItem(hand, itemstack);
+            return true;
+        }
+        return false;
+    }
 
-	private void inventoryChanged() {
-		this.markDirty();
-		this.getWorld().notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 3);
-	}
+    private void inventoryChanged() {
+        this.markDirty();
+        this.getWorld().notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 3);
+    }
 
-	public void clear() {
-		this.inventory.clear();
-	}
+    public void clear() {
+        this.inventory.clear();
+    }
 
-	public NonNullList<ItemStack> getInventory() {
-		return this.inventory;
-	}
+    public NonNullList<ItemStack> getInventory() {
+        return this.inventory;
+    }
 
-	public void dropAllItems() {
-		if (!this.getWorld().isRemote) {
-			InventoryHelper.dropItems(this.getWorld(), this.getPos(), this.getInventory());
-		}
+    public void dropAllItems() {
+        if (!this.getWorld().isRemote) {
+            InventoryHelper.dropItems(this.getWorld(), this.getPos(), this.getInventory());
+        }
 
-		this.inventoryChanged();
-	}
+        this.inventoryChanged();
+    }
 }
