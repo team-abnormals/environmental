@@ -29,7 +29,7 @@ public class WandererBootsItem extends ArmorItem {
 		builder.putAll(super.getAttributeModifiers(this.getEquipmentSlot()));
 		UUID uuid = UUID.fromString("845DB27C-C624-495F-8C9F-6020A9A58B6B");
 		
-		builder.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(uuid, "Speed modifier", (double) 0.5F, AttributeModifier.Operation.MULTIPLY_BASE));
+		builder.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(uuid, "Speed modifier", (double) 0.60F, AttributeModifier.Operation.MULTIPLY_BASE));
 
 		this.attributes = builder.build();
 
