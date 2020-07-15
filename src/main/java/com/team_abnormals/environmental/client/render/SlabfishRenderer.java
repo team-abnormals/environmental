@@ -47,6 +47,7 @@ public class SlabfishRenderer extends MobRenderer<SlabfishEntity, SlabfishModel<
 
     @Override
     protected void preRenderCallback(SlabfishEntity slabfish, MatrixStack matrixStack, float partialTickTime) {
+        this.entityModel.partialTicks = partialTickTime;
         matrixStack.scale(1.0F, 1.0F, 1.0F);
         if (slabfish.isChild()) matrixStack.scale(0.5F, 0.5F, 0.5F);
         if (slabfish.func_233684_eK_() || slabfish.getRidingEntity() != null) matrixStack.translate(0F, 0.3125F, 0F);

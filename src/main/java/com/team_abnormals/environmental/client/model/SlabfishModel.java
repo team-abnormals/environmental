@@ -24,6 +24,7 @@ public class SlabfishModel<E extends SlabfishEntity> extends EndimatorEntityMode
     public EndimatorModelRenderer leftArm;
     public EndimatorModelRenderer fin;
     public EndimatorModelRenderer backpack;
+    public float partialTicks;
 
     public SlabfishModel() {
         this.textureWidth = 32;
@@ -92,8 +93,8 @@ public class SlabfishModel<E extends SlabfishEntity> extends EndimatorEntityMode
 
         if (!entityIn.isInWater()) {
             if (entityIn.isPartying()) {
-                float f = MathHelper.cos((float) entityIn.ticksExisted);
-                float f1 = MathHelper.sin((float) entityIn.ticksExisted);
+                float f = MathHelper.cos((float) entityIn.ticksExisted + partialTicks);
+                float f1 = MathHelper.sin((float) entityIn.ticksExisted + partialTicks);
                 this.body.rotationPointZ = f;
                 this.body.rotationPointY = 19.75F - f1;
             }
