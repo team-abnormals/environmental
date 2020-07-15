@@ -122,6 +122,9 @@
 	
 	"fluid.environmental.mud": "Mud",
 	
+	"item.environmental.wanderer_boots": "Wanderer Boots",
+	"item.environmental.thief_hood": "Thief Hood",
+	
 	"item.environmental.slabfish_spawn_egg": "Slabfish Spawn Egg",
 	"item.environmental.axolotl_spawn_egg": "Axolotl Spawn Egg",
 	"item.environmental.butterfly_spawn_egg": "Butterfly Spawn Egg",

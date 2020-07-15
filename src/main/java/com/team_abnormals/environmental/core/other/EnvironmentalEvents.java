@@ -13,16 +13,19 @@ import com.team_abnormals.environmental.common.entity.util.SlabfishOverlay;
 import com.team_abnormals.environmental.common.entity.util.SlabfishType;
 import com.team_abnormals.environmental.core.Environmental;
 import com.team_abnormals.environmental.core.registry.EnvironmentalEntities;
+import com.team_abnormals.environmental.core.registry.EnvironmentalItems;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PotionEntity;
 import net.minecraft.entity.projectile.ProjectileItemEntity;
 import net.minecraft.entity.projectile.ThrowableEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.loot.LootPool;
@@ -45,12 +48,14 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.RenderNameplateEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
+import net.minecraftforge.eventbus.api.Event.Result;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
@@ -70,7 +75,16 @@ public class EnvironmentalEvents {
     public static void onEntityInteract(PlayerEvent.BreakSpeed event) {
         if (event.getState().getBlock() instanceof HangingWisteriaLeavesBlock && event.getPlayer().getHeldItemMainhand().getItem() == Items.SHEARS) event.setNewSpeed(15.0F);
     }
-	
+    
+    @SubscribeEvent
+    public static void renderNameplate(RenderNameplateEvent event) {
+    	if (event.getEntity() instanceof LivingEntity) {
+    		LivingEntity entity = (LivingEntity) event.getEntity();
+    		if (entity.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() == EnvironmentalItems.THIEF_HOOD.get()) {
+    			event.setResult(Result.DENY);
+    		}
+    	}
+    }
 	
 	@SubscribeEvent
     @OnlyIn(Dist.CLIENT)
