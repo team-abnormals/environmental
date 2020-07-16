@@ -103,6 +103,7 @@ import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.DimensionType;
@@ -524,6 +525,12 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 		this.destPos = MathHelper.clamp(this.destPos, 0.0F, 1.0F);
 		if (!this.onGround && this.wingRotDelta < 1.0F) {
 			this.wingRotDelta = 1.0F;
+		}
+		
+		this.wingRotDelta = (float)((double)this.wingRotDelta * 0.9D);
+		Vector3d vec3d = this.getMotion();
+		if (!this.onGround && vec3d.y < 0.0D) {
+			this.setMotion(vec3d.mul(1.0D, 0.6D, 1.0D));
 		}
 		
 		this.wingRotDelta = (float)((double)this.wingRotDelta * 0.9D);
