@@ -71,7 +71,7 @@ public class WisteriaTreeFeature extends Feature<BaseTreeFeatureConfig> {
             }
             if (!flag) {
                 return false;
-            } else if (WisteriaTreeUtils.isValidGround(world, pos) && pos.getY() < world.getHeight() - height - 1) {
+            } else if (WisteriaTreeUtils.isValidGround(world, pos.down()) && pos.getY() < world.getHeight() - height - 1) {
             	WisteriaTreeUtils.setDirtAt(world, pos.down());
                 for (int y = 4; y > -4; --y) {
                     for (int x = 4; x > -4; --x) {

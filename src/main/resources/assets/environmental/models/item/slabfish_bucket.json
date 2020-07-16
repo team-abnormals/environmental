@@ -54,6 +54,7 @@
         { "predicate": { "variant": 47 }, "model": "environmental:item/slabfish_bucket/crimson" },
         { "predicate": { "variant": 48 }, "model": "environmental:item/slabfish_bucket/warped" },
         { "predicate": { "variant": 49 }, "model": "environmental:item/slabfish_bucket/soul_sand_valley" },
-        { "predicate": { "variant": 50 }, "model": "environmental:item/slabfish_bucket/basalt_deltas" }
+        { "predicate": { "variant": 50 }, "model": "environmental:item/slabfish_bucket/basalt_deltas" },
+        { "predicate": { "variant": 50 }, "model": "environmental:item/slabfish_bucket/bmo" }
     ]
 }

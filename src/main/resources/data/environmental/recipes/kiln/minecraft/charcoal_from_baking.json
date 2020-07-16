@@ -1,0 +1,9 @@
+{
+  "type": "environmental:baking",
+  "ingredient": {
+    "tag": "minecraft:logs_that_burn"
+  },
+  "result": "minecraft:charcoal",
+  "experience": 0.15,
+  "cookingtime": 100
+}

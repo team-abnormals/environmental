@@ -122,6 +122,9 @@
 	
 	"fluid.environmental.mud": "Mud",
 	
+	"item.environmental.wanderer_boots": "Wanderer Boots",
+	"item.environmental.thief_hood": "Thief Hood",
+	
 	"item.environmental.slabfish_spawn_egg": "Slabfish Spawn Egg",
 	"item.environmental.axolotl_spawn_egg": "Axolotl Spawn Egg",
 	"item.environmental.butterfly_spawn_egg": "Butterfly Spawn Egg",
@@ -170,8 +173,8 @@
 	"container.kiln": "Kiln",
 	"container.sawmill": "Sawmill",
 	
-	"gui.jei.category.baking": "Baking",
-	"gui.jei.category.sawing": "Sawing",
+	"gui.environmental.category.baking": "Baking",
+	"gui.environmental.category.sawing": "Sawing",
 	
 	"advancements.husbandry.equip_axolotl.title": "Lost in the Sea, but not alone!",
 	"advancements.husbandry.equip_axolotl.description": "Have an Axolotl latch onto you and get healed!",
@@ -247,6 +250,7 @@
 	"entity.environmental.slabfish.warped": "Warped",
 	"entity.environmental.slabfish.soul_sand_valley": "Soul Sand Valley",
 	"entity.environmental.slabfish.basalt_deltas": "Basalt Deltas",
+	"entity.environmental.slabfish.bmo": "BMO",
 	
 	"entity.environmental.slabfish.white_backpack": "White Backpack",
 	"entity.environmental.slabfish.orange_backpack": "Orange Backpack",

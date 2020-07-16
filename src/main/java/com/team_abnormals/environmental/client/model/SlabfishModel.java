@@ -11,7 +11,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
 /**
- * ModelSlabfish - Undefined
+ * ModelSlabfish - Farcr
  * Created using Tabula 7.1.0
  * @param <E>
  */
