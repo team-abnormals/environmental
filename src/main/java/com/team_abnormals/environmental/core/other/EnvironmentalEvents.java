@@ -2,6 +2,7 @@ package com.team_abnormals.environmental.core.other;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 import com.google.common.collect.ImmutableMap;
@@ -31,6 +32,7 @@ import net.minecraft.item.Items;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTables;
 import net.minecraft.loot.TableLootEntry;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.potion.Potion;
@@ -46,8 +48,6 @@ import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biomes;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderNameplateEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
@@ -87,9 +87,7 @@ public class EnvironmentalEvents {
     }
 	
 	@SubscribeEvent
-    @OnlyIn(Dist.CLIENT)
     public static void onThrowableImpact(final ProjectileImpactEvent.Throwable event) {
-
         ThrowableEntity projectileEntity = event.getThrowable();
 
         if (projectileEntity instanceof PotionEntity) {
@@ -194,22 +192,37 @@ public class EnvironmentalEvents {
 		if (event.getEntity() instanceof SlabfishEntity) {
 			SlabfishEntity entity = (SlabfishEntity)event.getEntity();
 			if (entity.getEntityWorld().getBiome(new BlockPos(entity.getPositionVec())) == Biomes.field_235252_ay_) {
-				if (!entity.getEntityWorld().isRemote && entity.getSlabfishType() != SlabfishType.GHOST) {
-					SlabfishEntity ghost = EnvironmentalEntities.SLABFISH.get().create(entity.world);					
-					ghost.addPotionEffect(new EffectInstance(Effects.LEVITATION, 140, 0, false, false));
-					ghost.addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 140, 0, false, false));
-					entity.getEntityWorld().playSound(null, new BlockPos(entity.getPositionVec()), SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.NEUTRAL, 1, 1);
-					ghost.setPosition(entity.getPosX(), entity.getPosY(), entity.getPosZ());
-					ghost.setLocationAndAngles(entity.getPosX(), entity.getPosY(), entity.getPosZ(), entity.rotationYaw, entity.rotationPitch);
-					ghost.setNoAI(((MobEntity) entity).isAIDisabled());
-		    		ghost.setGrowingAge(entity.getGrowingAge());
-		    		if(entity.hasCustomName()) {
-		    			ghost.setCustomName(entity.getCustomName());
-		    			ghost.setCustomNameVisible(entity.isCustomNameVisible());
-		    		}
-		    		ghost.setSlabfishType(SlabfishType.GHOST);
-					ghost.setFire(0);
-					entity.getEntityWorld().addEntity(ghost);
+				if (entity.getSlabfishType() != SlabfishType.GHOST) {
+					if(entity.getEntityWorld().isRemote()) {
+						Random rand = new Random();
+						
+						for(int i = 0; i < 7; ++i) {
+				            double d0 = rand.nextGaussian() * 0.02D;
+				            double d1 = rand.nextGaussian() * 0.02D;
+				            double d2 = rand.nextGaussian() * 0.02D;
+				            entity.world.addParticle(ParticleTypes.SOUL, entity.getPosXRandom(1.0D), entity.getPosYRandom() + 0.5D, entity.getPosZRandom(1.0D), d0, d1, d2);
+				         }
+					}
+					
+					if (!entity.getEntityWorld().isRemote) {
+						SlabfishEntity ghost = EnvironmentalEntities.SLABFISH.get().create(entity.world);					
+						ghost.addPotionEffect(new EffectInstance(Effects.LEVITATION, 140, 0, false, false));
+						ghost.addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 140, 0, false, false));
+						entity.getEntityWorld().playSound(null, new BlockPos(entity.getPositionVec()), SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.NEUTRAL, 1, 1);
+						
+						ghost.setPosition(entity.getPosX(), entity.getPosY(), entity.getPosZ());
+						ghost.setLocationAndAngles(entity.getPosX(), entity.getPosY(), entity.getPosZ(), entity.rotationYaw, entity.rotationPitch);
+						ghost.setNoAI(((MobEntity) entity).isAIDisabled());
+			    		ghost.setGrowingAge(entity.getGrowingAge());
+			    		ghost.setSlabfishType(SlabfishType.GHOST);
+						ghost.setFire(0);
+			    		if(entity.hasCustomName()) {
+			    			ghost.setCustomName(entity.getCustomName());
+			    			ghost.setCustomNameVisible(entity.isCustomNameVisible());
+			    		}
+						
+						entity.getEntityWorld().addEntity(ghost);
+					}
 				}
 			}
 		}
