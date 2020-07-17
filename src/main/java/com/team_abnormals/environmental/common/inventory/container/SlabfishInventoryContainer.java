@@ -28,6 +28,11 @@ public class SlabfishInventoryContainer extends Container {
                 public boolean isItemValid(ItemStack stack) {
                     return SlabfishEntity.getSweaterMap().containsKey(stack.getItem()) && !this.getHasStack();
                 }
+
+                @Override
+                public int getSlotStackLimit() {
+                    return 1;
+                }
             });
             if (slabfish.hasBackpack()) {
                 for (int k = 0; k < 3; ++k) {
