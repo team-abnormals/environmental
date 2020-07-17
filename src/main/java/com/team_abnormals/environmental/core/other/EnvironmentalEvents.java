@@ -20,8 +20,14 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.monster.HuskEntity;
+import net.minecraft.entity.monster.SkeletonEntity;
+import net.minecraft.entity.monster.StrayEntity;
+import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PotionEntity;
 import net.minecraft.entity.projectile.ProjectileItemEntity;
@@ -47,11 +53,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.client.event.RenderNameplateEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
@@ -75,6 +83,37 @@ public class EnvironmentalEvents {
     public static void onEntityInteract(PlayerEvent.BreakSpeed event) {
         if (event.getState().getBlock() instanceof HangingWisteriaLeavesBlock && event.getPlayer().getHeldItemMainhand().getItem() == Items.SHEARS) event.setNewSpeed(15.0F);
     }
+    
+	@SubscribeEvent
+	public static void replaceHuskAndStraySpawns(LivingSpawnEvent.CheckSpawn event) {
+		Entity entity = event.getEntity();
+		if (event.getSpawnReason() == SpawnReason.NATURAL && entity.getPosY() > 60 && entity.getType() == EntityType.ZOMBIE) {
+			ZombieEntity zombie = (ZombieEntity)event.getEntity();
+			if (event.getWorld().getBiome(entity.func_233580_cy_()).getCategory() == Biome.Category.DESERT) {
+				
+				HuskEntity husk = EntityType.HUSK.create(event.getWorld().getWorld());
+				husk.setChild(zombie.isChild());
+				for(EquipmentSlotType slot : EquipmentSlotType.values()) zombie.setItemStackToSlot(slot, zombie.getItemStackFromSlot(slot));	
+				husk.setLocationAndAngles(zombie.getPosX(), zombie.getPosY(), zombie.getPosZ(), zombie.rotationYaw, zombie.rotationPitch);
+				
+				event.getWorld().addEntity(husk);
+				event.getEntity().remove();
+			}
+		}
+		
+		if (event.getSpawnReason() == SpawnReason.NATURAL && entity.getPosY() > 60 && entity.getType() == EntityType.SKELETON) {
+			SkeletonEntity zombie = (SkeletonEntity)event.getEntity();
+			if (event.getWorld().getBiome(entity.func_233580_cy_()).getCategory() == Biome.Category.ICY) {
+				
+				StrayEntity husk = EntityType.STRAY.create(event.getWorld().getWorld());
+				for(EquipmentSlotType slot : EquipmentSlotType.values()) zombie.setItemStackToSlot(slot, zombie.getItemStackFromSlot(slot));	
+				husk.setLocationAndAngles(zombie.getPosX(), zombie.getPosY(), zombie.getPosZ(), zombie.rotationYaw, zombie.rotationPitch);
+				
+				event.getWorld().addEntity(husk);
+				event.getEntity().remove();
+			}
+		}
+	}
     
     @SubscribeEvent
     public static void renderNameplate(RenderNameplateEvent event) {
