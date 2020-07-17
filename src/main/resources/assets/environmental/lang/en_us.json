@@ -256,6 +256,9 @@
 	"entity.environmental.boat": "Boat",
 	"entity.environmental.butterfly": "Butterfly",
 	
+	"entity.minecraft.villager.environmental.ceramist": "Ceramist",
+	"entity.minecraft.villager.environmental.carpenter": "Carpenter",
+	
 	"biome.environmental.marsh": "Marsh",
 	"biome.environmental.mushroom_marsh": "Mushroom Marsh",
 	"biome.environmental.mire": "Mire",

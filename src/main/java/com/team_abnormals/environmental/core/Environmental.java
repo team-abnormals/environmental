@@ -11,6 +11,7 @@ import com.team_abnormals.environmental.core.registry.EnvironmentalFeatures;
 import com.team_abnormals.environmental.core.registry.EnvironmentalFluids;
 import com.team_abnormals.environmental.core.registry.EnvironmentalItems;
 import com.team_abnormals.environmental.core.registry.EnvironmentalRecipes;
+import com.team_abnormals.environmental.core.registry.EnvironmentalVillagers;
 import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
 
 import net.minecraft.client.gui.ScreenManager;
@@ -45,10 +46,15 @@ public class Environmental {
     	REGISTRY_HELPER.getDeferredSoundRegister().register(modEventBus);
 
         EnvironmentalBlocks.PAINTINGS.register(modEventBus);
-        EnvironmentalContainerTypes.CONTAINER_TYPES.register(modEventBus);
-        EnvironmentalRecipes.Serailizers.RECIPE_SERIALIZERS.register(modEventBus);
         EnvironmentalFluids.FLUIDS.register(modEventBus);
         EnvironmentalBiomes.BIOMES.register(modEventBus);
+        
+        EnvironmentalVillagers.POI_TYPES.register(modEventBus);
+        EnvironmentalVillagers.PROFESSIONS.register(modEventBus);
+        
+        EnvironmentalContainerTypes.CONTAINER_TYPES.register(modEventBus);
+        EnvironmentalRecipes.Serailizers.RECIPE_SERIALIZERS.register(modEventBus);
+        
         MinecraftForge.EVENT_BUS.register(this);
         
         modEventBus.addListener((ModConfig.ModConfigEvent event) -> {
@@ -72,9 +78,12 @@ public class Environmental {
     		REGISTRY_HELPER.processSpawnEggDispenseBehaviors();
     		EnvironmentalData.registerCompostables();
     		EnvironmentalData.registerFlammables();
+    		
     		EnvironmentalBiomes.addBiomeTypes();
     		EnvironmentalBiomes.registerBiomesToDictionary();
     		EnvironmentalFeatures.generateFeatures();
+    		
+    		EnvironmentalVillagers.setupVillagers();
     		EnvironmentalEntities.addEntitySpawns();
     		EnvironmentalEntities.setupAttributes();
     	});

@@ -3,10 +3,12 @@ package com.team_abnormals.environmental.core.other;
 import com.team_abnormals.environmental.core.Environmental;
 import com.team_abnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.team_abnormals.environmental.core.registry.EnvironmentalItems;
+import com.team_abnormals.environmental.core.registry.EnvironmentalVillagers;
 import com.teamabnormals.abnormals_core.core.utils.TradeUtils;
 import com.teamabnormals.abnormals_core.core.utils.TradeUtils.ItemsForEmeraldsTrade;
 
 import net.minecraft.entity.merchant.villager.VillagerProfession;
+import net.minecraft.item.Items;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -46,6 +48,20 @@ public class EnvironmentalTrades {
         event.getGenericTrades().add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalBlocks.PINK_DELPHINIUM.get(), 2, 1, 6, 1));
         event.getGenericTrades().add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalBlocks.PURPLE_DELPHINIUM.get(), 2, 1, 6, 1));
         event.getGenericTrades().add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalBlocks.WHITE_DELPHINIUM.get(), 2, 1, 6, 1));
+	}
+	
+	@SubscribeEvent
+	public static void onCarpenterTradesEvent(VillagerTradesEvent event) {
+		if(event.getType() == EnvironmentalVillagers.CARPENTER.get()) {
+			event.getTrades().get(1).add(new TradeUtils.EmeraldsForItemsTrade(Items.ACACIA_BOAT, 23, 1, 6, 1));
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onCeramistTradesEvent(VillagerTradesEvent event) {
+		if(event.getType() == EnvironmentalVillagers.CERAMIST.get()) {
+			event.getTrades().get(1).add(new TradeUtils.EmeraldsForItemsTrade(Items.ACACIA_BOAT, 23, 1, 6, 1));
+		}
 	}
 	
 	@SubscribeEvent
