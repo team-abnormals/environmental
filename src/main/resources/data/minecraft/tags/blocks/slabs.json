@@ -2,6 +2,23 @@
   "replace": false,
   "values": [
 	"environmental:cattail_thatch_slab",
-	"environmental:mud_brick_slab"
+	"environmental:mud_brick_slab",
+	"environmental:terracotta_brick_slab",
+	"environmental:white_terracotta_brick_slab",
+    "environmental:orange_terracotta_brick_slab",
+    "environmental:magenta_terracotta_brick_slab",
+    "environmental:light_blue_terracotta_brick_slab",
+    "environmental:yellow_terracotta_brick_slab",
+    "environmental:lime_terracotta_brick_slab",
+    "environmental:pink_terracotta_brick_slab",
+    "environmental:gray_terracotta_brick_slab",
+    "environmental:light_gray_terracotta_brick_slab",
+    "environmental:cyan_terracotta_brick_slab",
+    "environmental:purple_terracotta_brick_slab",
+    "environmental:blue_terracotta_brick_slab",
+    "environmental:brown_terracotta_brick_slab",
+    "environmental:green_terracotta_brick_slab",
+    "environmental:red_terracotta_brick_slab",
+    "environmental:black_terracotta_brick_slab"
   ]
 }

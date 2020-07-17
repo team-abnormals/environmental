@@ -2,15 +2,15 @@
     "type": "minecraft:crafting_shaped",
     "pattern": [
         "###",
-        "#G#",
+        "#F#",
         "CCC"
     ],
     "key": {
         "#": {
             "item": "environmental:mud_bricks"
         },
-        "G": {
-            "item": "minecraft:glass"
+        "F": {
+            "item": "minecraft:furnace"
         },
         "C": {
             "item": "minecraft:cobblestone"

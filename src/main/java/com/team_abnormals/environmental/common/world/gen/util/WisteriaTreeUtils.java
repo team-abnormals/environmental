@@ -1,5 +1,8 @@
 package com.team_abnormals.environmental.common.world.gen.util;
 
+import java.util.Random;
+
+import com.team_abnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -10,6 +13,7 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldWriter;
 import net.minecraft.world.gen.IWorldGenerationBaseReader;
 import net.minecraft.world.gen.IWorldGenerationReader;
+import net.minecraftforge.common.IPlantable;
 
 import java.util.Random;
 
@@ -114,9 +118,8 @@ public class WisteriaTreeUtils {
             setForcedState(worldIn, pos, Blocks.DIRT.getDefaultState());
         }
     }
-
-    public static boolean isValidGround(IWorld world, BlockPos pos) {
-        Block block = world.getBlockState(pos).getBlock();
-        return block.isValidPosition(world.getBlockState(pos), world, pos);
-    }
+    
+	public static boolean isValidGround(IWorld world, BlockPos pos) {
+		return world.getBlockState(pos).canSustainPlant(world, pos, Direction.UP, (IPlantable)EnvironmentalBlocks.BLUE_WISTERIA_SAPLING.get());
+	}
 }

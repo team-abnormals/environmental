@@ -3,9 +3,11 @@ package com.team_abnormals.environmental.core.other;
 import com.team_abnormals.environmental.core.Environmental;
 import com.team_abnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.team_abnormals.environmental.core.registry.EnvironmentalItems;
+import com.team_abnormals.environmental.core.registry.EnvironmentalVillagers;
 import com.teamabnormals.abnormals_core.core.utils.TradeUtils;
 import com.teamabnormals.abnormals_core.core.utils.TradeUtils.ItemsForEmeraldsTrade;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
+import net.minecraft.item.Items;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -45,28 +47,42 @@ public class EnvironmentalTrades {
         event.getGenericTrades().add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalBlocks.PINK_DELPHINIUM.get(), 2, 1, 6, 1));
         event.getGenericTrades().add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalBlocks.PURPLE_DELPHINIUM.get(), 2, 1, 6, 1));
         event.getGenericTrades().add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalBlocks.WHITE_DELPHINIUM.get(), 2, 1, 6, 1));
-    }
-
-    @SubscribeEvent
-    public static void onVillagerTradesEvent(VillagerTradesEvent event) {
-        if (event.getType() == VillagerProfession.FARMER) {
-            event.getTrades().get(1).add(new TradeUtils.EmeraldsForItemsTrade(EnvironmentalItems.RICE.get(), 23, 1, 6, 1));
-        }
-
-        if (event.getType() == VillagerProfession.FISHERMAN) {
-            event.getTrades().get(3).add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.COD_KELP_ROLL.get(), 5, 2, 6, 15));
-            event.getTrades().get(3).add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.SALMON_RICE_CAKE.get(), 5, 2, 6, 15));
-            event.getTrades().get(4).add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.PUFFERFISH_RICE_CAKE.get(), 3, 4, 5, 30));
-            event.getTrades().get(5).add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.TROPICAL_FISH_KELP_ROLL.get(), 3, 4, 5, 30));
-
-            if (ModList.get().isLoaded("upgrade_aquatic")) {
-                event.getTrades().get(4).add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.PIKE_KELP_ROLL.get(), 4, 1, 3, 25));
-                event.getTrades().get(5).add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.LIONFISH_RICE_CAKE.get(), 3, 4, 5, 30));
-            }
-
-            if (ModList.get().isLoaded("quark")) {
-                event.getTrades().get(4).add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.CRAB_KELP_ROLL.get(), 4, 1, 3, 25));
-            }
-        }
+	}
+	
+	@SubscribeEvent
+	public static void onCarpenterTradesEvent(VillagerTradesEvent event) {
+		if(event.getType() == EnvironmentalVillagers.CARPENTER.get()) {
+			event.getTrades().get(1).add(new TradeUtils.EmeraldsForItemsTrade(Items.ACACIA_BOAT, 23, 1, 6, 1));
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onCeramistTradesEvent(VillagerTradesEvent event) {
+		if(event.getType() == EnvironmentalVillagers.CERAMIST.get()) {
+			event.getTrades().get(1).add(new TradeUtils.EmeraldsForItemsTrade(Items.ACACIA_BOAT, 23, 1, 6, 1));
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onVillagerTradesEvent(VillagerTradesEvent event) {
+		if(event.getType() == VillagerProfession.FARMER) {
+			event.getTrades().get(1).add(new TradeUtils.EmeraldsForItemsTrade(EnvironmentalItems.RICE.get(), 23, 1, 6, 1));
+		}
+		
+		if(event.getType() == VillagerProfession.FISHERMAN) {
+			event.getTrades().get(3).add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.COD_KELP_ROLL.get(), 5, 2, 6, 15));
+			event.getTrades().get(3).add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.SALMON_RICE_CAKE.get(), 5, 2, 6, 15));
+			event.getTrades().get(4).add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.PUFFERFISH_RICE_CAKE.get(), 3, 4, 5, 30));
+			event.getTrades().get(5).add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.TROPICAL_FISH_KELP_ROLL.get(), 3, 4, 5, 30));
+			
+			if(ModList.get().isLoaded("upgrade_aquatic")) {
+				event.getTrades().get(4).add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.PIKE_KELP_ROLL.get(), 4, 1, 3, 25));
+				event.getTrades().get(5).add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.LIONFISH_RICE_CAKE.get(), 3, 4, 5, 30));	
+			}
+			
+			if(ModList.get().isLoaded("quark")) {
+				event.getTrades().get(4).add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.CRAB_KELP_ROLL.get(), 4, 1, 3, 25));
+			}
+		}
     }
 }

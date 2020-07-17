@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "environmental:block/cyan_terracotta_bricks",
+    "top": "environmental:block/cyan_terracotta_bricks",
+    "side": "environmental:block/cyan_terracotta_bricks"
+  }
+}

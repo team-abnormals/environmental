@@ -1,0 +1,6 @@
+{
+    "parent": "block/template_wall_post",
+    "textures": {
+        "wall": "environmental:block/blue_terracotta_bricks"
+    }
+}
