@@ -3,6 +3,7 @@ package com.team_abnormals.environmental.core;
 import com.team_abnormals.environmental.client.gui.screen.inventory.KilnScreen;
 import com.team_abnormals.environmental.client.gui.screen.inventory.SawmillScreen;
 import com.team_abnormals.environmental.common.network.message.SOpenSlabfishInventoryMessage;
+import com.team_abnormals.environmental.core.other.EnvironmentalCompat;
 import com.team_abnormals.environmental.core.other.EnvironmentalData;
 import com.team_abnormals.environmental.core.registry.*;
 import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
@@ -83,6 +84,7 @@ public class Environmental {
             EnvironmentalFeatures.generateFeatures();
             EnvironmentalEntities.addEntitySpawns();
             EnvironmentalEntities.setupAttributes();
+            EnvironmentalCompat.setupVanilla();
         });
     }
 
