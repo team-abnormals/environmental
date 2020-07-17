@@ -233,7 +233,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         if (item instanceof SpawnEggItem || item instanceof NameTagItem || item == Items.TROPICAL_FISH || item == EnvironmentalItems.TROPICAL_FISH_KELP_ROLL.get() || item instanceof EggItem || item instanceof MudBallItem) {
             return super.func_230254_b_(player, hand);
         }
-        if (item instanceof DyeItem && this.hasBackpack() == true) {
+        if (item instanceof DyeItem && this.hasBackpack()) {
             DyeColor dyecolor = ((DyeItem) item).getDyeColor();
             if (dyecolor != this.getBackpackColor()) {
                 this.setBackpackColor(dyecolor);
@@ -262,21 +262,9 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
             if (!player.isCreative()) {
                 itemstack.shrink(1);
             }
-
-//			IItemProvider previousSweater = Items.AIR;
-//			this.playSweaterSound();
-//			if(!player.abilities.isCreativeMode) itemstack.shrink(1);
-//			if (this.hasSweater()) previousSweater = SWEATER_MAP.inverse().get(this.getSweaterColor());
-//			this.setSweaterColor(SWEATER_MAP.get(item));
-//			if (!this.hasSweater()) {
-//				this.setSweatered(true);
-//			} else {
-//				this.dropItem(previousSweater);
-//				this.playSweaterSound();
-//			}
             return ActionResultType.SUCCESS;
 
-        } else if (item.isIn(Tags.Items.CHESTS_WOODEN) && this.hasBackpack() == false) {
+        } else if (item.isIn(Tags.Items.CHESTS_WOODEN) && !this.hasBackpack()) {
             this.setBackpacked(true);
             this.setBackpackItem(itemstack);
             this.playBackpackSound();
@@ -287,24 +275,22 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
             }
             return ActionResultType.SUCCESS;
 
-        } else if (item == Items.SHEARS && this.hasSweater() == true && !player.isSecondaryUseActive()) {
-            this.setSweatered(false);
-            this.playSweaterSound();
-            this.dropItem(SWEATER_MAP.inverse().get(this.getSweaterColor()));
-            if (!this.world.isRemote) itemstack.damageItem(1, player, (tool) -> {
-                tool.sendBreakAnimation(hand);
-            });
+        } else if (item == Items.SHEARS && this.hasSweater() && !player.isSecondaryUseActive()) {
+            ItemStack previousSweater = this.slabfishBackpack.getStackInSlot(0);
+
+            if (!previousSweater.isEmpty()) {
+                InventoryHelper.spawnItemStack(this.world, this.getPosX(), this.getPosY(), this.getPosZ(), previousSweater.copy());
+                this.slabfishBackpack.removeStackFromSlot(0);
+            }
+
             return ActionResultType.SUCCESS;
 
-        } else if (item == Items.SHEARS && this.hasBackpack() == true && player.isSecondaryUseActive()) {
+        } else if (item == Items.SHEARS && this.hasBackpack() && player.isSecondaryUseActive()) {
             this.setBackpackColor(DyeColor.BROWN);
             this.dropBackpack();
             this.setBackpacked(false);
             this.playBackpackSound();
-            this.slabfishBackpack.clear();
-            if (!this.world.isRemote) itemstack.damageItem(1, player, (tool) -> {
-                tool.sendBreakAnimation(hand);
-            });
+            if (!this.world.isRemote) itemstack.attemptDamageItem(1, player.getRNG(), (ServerPlayerEntity) player);
             return ActionResultType.SUCCESS;
 
         } else if (item == Items.WATER_BUCKET && this.isAlive()) {
@@ -315,7 +301,6 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
                 this.setBackpackColor(DyeColor.BROWN);
                 this.dropBackpack();
                 this.setBackpacked(false);
-                this.slabfishBackpack.clear();
             }
             this.playSound(SoundEvents.ITEM_BUCKET_FILL_FISH, 1.0F, 1.0F);
             itemstack.shrink(1);
@@ -1051,36 +1036,9 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
     @Override
     protected void dropInventory() {
-        super.dropInventory();
-        if (this.hasBackpack()) {
-            this.dropItem(this.getBackpackItem().getItem());
-            if (this.slabfishBackpack != null) {
-                for (int i = 0; i < this.slabfishBackpack.getSizeInventory(); ++i) {
-                    ItemStack itemstack = this.slabfishBackpack.getStackInSlot(i);
-                    if (!itemstack.isEmpty() && !EnchantmentHelper.hasVanishingCurse(itemstack)) {
-                        this.entityDropItem(itemstack);
-                    }
-                }
-
-            }
-        }
+        this.dropBackpack();
         if (this.hasSweater()) {
             this.dropItem(SWEATER_MAP.inverse().get(this.getSweaterColor()));
-        }
-    }
-
-    protected void dropItems() {
-        super.dropInventory();
-        if (this.hasBackpack()) {
-            if (this.slabfishBackpack != null) {
-                for (int i = 0; i < this.slabfishBackpack.getSizeInventory(); ++i) {
-                    ItemStack itemstack = this.slabfishBackpack.getStackInSlot(i);
-                    if (!itemstack.isEmpty() && !EnchantmentHelper.hasVanishingCurse(itemstack)) {
-                        this.entityDropItem(itemstack);
-                    }
-                }
-
-            }
         }
     }
 
@@ -1089,8 +1047,8 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         if (this.hasBackpack()) {
             this.dropItem(this.getBackpackItem().getItem());
             if (this.slabfishBackpack != null) {
-                for (int i = 0; i < this.slabfishBackpack.getSizeInventory(); ++i) {
-                    ItemStack itemstack = this.slabfishBackpack.getStackInSlot(i);
+                for (int i = 1; i < this.slabfishBackpack.getSizeInventory(); ++i) {
+                    ItemStack itemstack = this.slabfishBackpack.removeStackFromSlot(i);
                     if (!itemstack.isEmpty() && !EnchantmentHelper.hasVanishingCurse(itemstack)) {
                         this.entityDropItem(itemstack);
                     }
@@ -1179,7 +1137,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         sweaterMap.put(Items.BLACK_WOOL, DyeColor.BLACK);
     });
 
-    public Map<Item, DyeColor> getSweaterMap() {
+    public static Map<Item, DyeColor> getSweaterMap() {
         return SWEATER_MAP;
     }
 

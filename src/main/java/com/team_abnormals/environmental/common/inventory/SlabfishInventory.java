@@ -194,7 +194,7 @@ public class SlabfishInventory implements IInventory
     {
         if (index < 0 || index >= this.getSizeInventory())
             return false;
-        return index != 0 || this.slabfish.getSweaterMap().containsKey(stack.getItem());
+        return index != 0 || SlabfishEntity.getSweaterMap().containsKey(stack.getItem());
     }
 
     @Override

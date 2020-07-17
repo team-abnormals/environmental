@@ -26,7 +26,7 @@ public class SlabfishInventoryContainer extends Container {
                  * Check if the stack is allowed to be placed in this slot
                  */
                 public boolean isItemValid(ItemStack stack) {
-                    return slabfish.getSweaterMap().containsKey(stack.getItem()) && !this.getHasStack();
+                    return SlabfishEntity.getSweaterMap().containsKey(stack.getItem()) && !this.getHasStack();
                 }
             });
             if (slabfish.hasBackpack()) {
