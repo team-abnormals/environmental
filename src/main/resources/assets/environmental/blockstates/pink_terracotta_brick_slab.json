@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "type=bottom": { "model": "environmental:block/pink_terracotta_brick_slab" },
+        "type=top": { "model": "environmental:block/pink_terracotta_brick_slab_top" },
+        "type=double": { "model": "environmental:block/pink_terracotta_bricks" }
+    }
+}

@@ -170,6 +170,110 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> WISTERIA_BEEHIVE		 		= HELPER.createCompatBlock("buzzier_bees", "wisteria_beehive", () -> new AbnormalsBeehiveBlock(Properties.from(Blocks.BEEHIVE)), ItemGroup.DECORATIONS);
     public static final Pair<RegistryObject<AbnormalsChestBlock>, RegistryObject<AbnormalsTrappedChestBlock>> WISTERIA_CHESTS = HELPER.createCompatChestBlocks("wisteria", MaterialColor.WHITE_TERRACOTTA);
 
+    // TERRACOTTA BRICKS //
+    
+    public static final RegistryObject<Block> TERRACOTTA_BRICKS 				= HELPER.createBlock("terracotta_bricks", () -> new Block(EnvironmentalProperties.TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> TERRACOTTA_BRICK_STAIRS 			= HELPER.createBlock("terracotta_brick_stairs", () -> new AbnormalsStairsBlock(TERRACOTTA_BRICKS.get().getDefaultState(), EnvironmentalProperties.TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> TERRACOTTA_BRICK_SLAB 			= HELPER.createBlock("terracotta_brick_slab", () -> new SlabBlock(EnvironmentalProperties.TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> TERRACOTTA_BRICK_WALL 			= HELPER.createBlock("terracotta_brick_wall", () -> new WallBlock(EnvironmentalProperties.TERRACOTTA_BRICKS), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> TERRACOTTA_BRICK_VERTICAL_SLAB	= HELPER.createCompatBlock("quark", "terracotta_brick_vertical_slab", () -> new VerticalSlabBlock(EnvironmentalProperties.TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+
+    public static final RegistryObject<Block> WHITE_TERRACOTTA_BRICKS 				= HELPER.createBlock("white_terracotta_bricks", () -> new Block(EnvironmentalProperties.WHITE_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> WHITE_TERRACOTTA_BRICK_STAIRS 		= HELPER.createBlock("white_terracotta_brick_stairs", () -> new AbnormalsStairsBlock(WHITE_TERRACOTTA_BRICKS.get().getDefaultState(), EnvironmentalProperties.WHITE_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> WHITE_TERRACOTTA_BRICK_SLAB 			= HELPER.createBlock("white_terracotta_brick_slab", () -> new SlabBlock(EnvironmentalProperties.WHITE_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> WHITE_TERRACOTTA_BRICK_WALL 			= HELPER.createBlock("white_terracotta_brick_wall", () -> new WallBlock(EnvironmentalProperties.WHITE_TERRACOTTA_BRICKS), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> WHITE_TERRACOTTA_BRICK_VERTICAL_SLAB	= HELPER.createCompatBlock("quark", "white_terracotta_brick_vertical_slab", () -> new VerticalSlabBlock(EnvironmentalProperties.WHITE_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+
+    public static final RegistryObject<Block> ORANGE_TERRACOTTA_BRICKS 				= HELPER.createBlock("orange_terracotta_bricks", () -> new Block(EnvironmentalProperties.ORANGE_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> ORANGE_TERRACOTTA_BRICK_STAIRS 		= HELPER.createBlock("orange_terracotta_brick_stairs", () -> new AbnormalsStairsBlock(ORANGE_TERRACOTTA_BRICKS.get().getDefaultState(), EnvironmentalProperties.ORANGE_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> ORANGE_TERRACOTTA_BRICK_SLAB 			= HELPER.createBlock("orange_terracotta_brick_slab", () -> new SlabBlock(EnvironmentalProperties.ORANGE_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> ORANGE_TERRACOTTA_BRICK_WALL 			= HELPER.createBlock("orange_terracotta_brick_wall", () -> new WallBlock(EnvironmentalProperties.ORANGE_TERRACOTTA_BRICKS), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> ORANGE_TERRACOTTA_BRICK_VERTICAL_SLAB	= HELPER.createCompatBlock("quark", "orange_terracotta_brick_vertical_slab", () -> new VerticalSlabBlock(EnvironmentalProperties.ORANGE_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+
+    public static final RegistryObject<Block> MAGENTA_TERRACOTTA_BRICKS 				= HELPER.createBlock("magenta_terracotta_bricks", () -> new Block(EnvironmentalProperties.MAGENTA_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> MAGENTA_TERRACOTTA_BRICK_STAIRS 			= HELPER.createBlock("magenta_terracotta_brick_stairs", () -> new AbnormalsStairsBlock(MAGENTA_TERRACOTTA_BRICKS.get().getDefaultState(), EnvironmentalProperties.MAGENTA_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> MAGENTA_TERRACOTTA_BRICK_SLAB 			= HELPER.createBlock("magenta_terracotta_brick_slab", () -> new SlabBlock(EnvironmentalProperties.MAGENTA_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> MAGENTA_TERRACOTTA_BRICK_WALL 			= HELPER.createBlock("magenta_terracotta_brick_wall", () -> new WallBlock(EnvironmentalProperties.MAGENTA_TERRACOTTA_BRICKS), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> MAGENTA_TERRACOTTA_BRICK_VERTICAL_SLAB	= HELPER.createCompatBlock("quark", "magenta_terracotta_brick_vertical_slab", () -> new VerticalSlabBlock(EnvironmentalProperties.MAGENTA_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+
+    public static final RegistryObject<Block> LIGHT_BLUE_TERRACOTTA_BRICKS 				= HELPER.createBlock("light_blue_terracotta_bricks", () -> new Block(EnvironmentalProperties.LIGHT_BLUE_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> LIGHT_BLUE_TERRACOTTA_BRICK_STAIRS 		= HELPER.createBlock("light_blue_terracotta_brick_stairs", () -> new AbnormalsStairsBlock(LIGHT_BLUE_TERRACOTTA_BRICKS.get().getDefaultState(), EnvironmentalProperties.LIGHT_BLUE_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> LIGHT_BLUE_TERRACOTTA_BRICK_SLAB 			= HELPER.createBlock("light_blue_terracotta_brick_slab", () -> new SlabBlock(EnvironmentalProperties.LIGHT_BLUE_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> LIGHT_BLUE_TERRACOTTA_BRICK_WALL 			= HELPER.createBlock("light_blue_terracotta_brick_wall", () -> new WallBlock(EnvironmentalProperties.LIGHT_BLUE_TERRACOTTA_BRICKS), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> LIGHT_BLUE_TERRACOTTA_BRICK_VERTICAL_SLAB	= HELPER.createCompatBlock("quark", "light_blue_terracotta_brick_vertical_slab", () -> new VerticalSlabBlock(EnvironmentalProperties.LIGHT_BLUE_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+
+    public static final RegistryObject<Block> YELLOW_TERRACOTTA_BRICKS 				= HELPER.createBlock("yellow_terracotta_bricks", () -> new Block(EnvironmentalProperties.YELLOW_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> YELLOW_TERRACOTTA_BRICK_STAIRS 		= HELPER.createBlock("yellow_terracotta_brick_stairs", () -> new AbnormalsStairsBlock(YELLOW_TERRACOTTA_BRICKS.get().getDefaultState(), EnvironmentalProperties.YELLOW_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> YELLOW_TERRACOTTA_BRICK_SLAB 			= HELPER.createBlock("yellow_terracotta_brick_slab", () -> new SlabBlock(EnvironmentalProperties.YELLOW_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> YELLOW_TERRACOTTA_BRICK_WALL 			= HELPER.createBlock("yellow_terracotta_brick_wall", () -> new WallBlock(EnvironmentalProperties.YELLOW_TERRACOTTA_BRICKS), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> YELLOW_TERRACOTTA_BRICK_VERTICAL_SLAB	= HELPER.createCompatBlock("quark", "yellow_terracotta_brick_vertical_slab", () -> new VerticalSlabBlock(EnvironmentalProperties.YELLOW_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+
+    public static final RegistryObject<Block> LIME_TERRACOTTA_BRICKS 				= HELPER.createBlock("lime_terracotta_bricks", () -> new Block(EnvironmentalProperties.LIME_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> LIME_TERRACOTTA_BRICK_STAIRS 			= HELPER.createBlock("lime_terracotta_brick_stairs", () -> new AbnormalsStairsBlock(LIME_TERRACOTTA_BRICKS.get().getDefaultState(), EnvironmentalProperties.LIME_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> LIME_TERRACOTTA_BRICK_SLAB 			= HELPER.createBlock("lime_terracotta_brick_slab", () -> new SlabBlock(EnvironmentalProperties.LIME_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> LIME_TERRACOTTA_BRICK_WALL 			= HELPER.createBlock("lime_terracotta_brick_wall", () -> new WallBlock(EnvironmentalProperties.LIME_TERRACOTTA_BRICKS), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> LIME_TERRACOTTA_BRICK_VERTICAL_SLAB	= HELPER.createCompatBlock("quark", "lime_terracotta_brick_vertical_slab", () -> new VerticalSlabBlock(EnvironmentalProperties.LIME_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+
+    public static final RegistryObject<Block> PINK_TERRACOTTA_BRICKS 				= HELPER.createBlock("pink_terracotta_bricks", () -> new Block(EnvironmentalProperties.PINK_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> PINK_TERRACOTTA_BRICK_STAIRS 			= HELPER.createBlock("pink_terracotta_brick_stairs", () -> new AbnormalsStairsBlock(PINK_TERRACOTTA_BRICKS.get().getDefaultState(), EnvironmentalProperties.PINK_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> PINK_TERRACOTTA_BRICK_SLAB 			= HELPER.createBlock("pink_terracotta_brick_slab", () -> new SlabBlock(EnvironmentalProperties.PINK_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> PINK_TERRACOTTA_BRICK_WALL 			= HELPER.createBlock("pink_terracotta_brick_wall", () -> new WallBlock(EnvironmentalProperties.PINK_TERRACOTTA_BRICKS), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> PINK_TERRACOTTA_BRICK_VERTICAL_SLAB	= HELPER.createCompatBlock("quark", "pink_terracotta_brick_vertical_slab", () -> new VerticalSlabBlock(EnvironmentalProperties.PINK_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+
+    public static final RegistryObject<Block> GRAY_TERRACOTTA_BRICKS 				= HELPER.createBlock("gray_terracotta_bricks", () -> new Block(EnvironmentalProperties.GRAY_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> GRAY_TERRACOTTA_BRICK_STAIRS 			= HELPER.createBlock("gray_terracotta_brick_stairs", () -> new AbnormalsStairsBlock(GRAY_TERRACOTTA_BRICKS.get().getDefaultState(), EnvironmentalProperties.GRAY_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> GRAY_TERRACOTTA_BRICK_SLAB 			= HELPER.createBlock("gray_terracotta_brick_slab", () -> new SlabBlock(EnvironmentalProperties.GRAY_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> GRAY_TERRACOTTA_BRICK_WALL 			= HELPER.createBlock("gray_terracotta_brick_wall", () -> new WallBlock(EnvironmentalProperties.GRAY_TERRACOTTA_BRICKS), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> GRAY_TERRACOTTA_BRICK_VERTICAL_SLAB	= HELPER.createCompatBlock("quark", "gray_terracotta_brick_vertical_slab", () -> new VerticalSlabBlock(EnvironmentalProperties.GRAY_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+
+    public static final RegistryObject<Block> LIGHT_GRAY_TERRACOTTA_BRICKS 				= HELPER.createBlock("light_gray_terracotta_bricks", () -> new Block(EnvironmentalProperties.LIGHT_GRAY_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> LIGHT_GRAY_TERRACOTTA_BRICK_STAIRS 		= HELPER.createBlock("light_gray_terracotta_brick_stairs", () -> new AbnormalsStairsBlock(LIGHT_GRAY_TERRACOTTA_BRICKS.get().getDefaultState(), EnvironmentalProperties.LIGHT_GRAY_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> LIGHT_GRAY_TERRACOTTA_BRICK_SLAB 			= HELPER.createBlock("light_gray_terracotta_brick_slab", () -> new SlabBlock(EnvironmentalProperties.LIGHT_GRAY_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> LIGHT_GRAY_TERRACOTTA_BRICK_WALL 			= HELPER.createBlock("light_gray_terracotta_brick_wall", () -> new WallBlock(EnvironmentalProperties.LIGHT_GRAY_TERRACOTTA_BRICKS), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> LIGHT_GRAY_TERRACOTTA_BRICK_VERTICAL_SLAB	= HELPER.createCompatBlock("quark", "light_gray_terracotta_brick_vertical_slab", () -> new VerticalSlabBlock(EnvironmentalProperties.LIGHT_GRAY_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+
+    public static final RegistryObject<Block> CYAN_TERRACOTTA_BRICKS 				= HELPER.createBlock("cyan_terracotta_bricks", () -> new Block(EnvironmentalProperties.CYAN_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> CYAN_TERRACOTTA_BRICK_STAIRS 			= HELPER.createBlock("cyan_terracotta_brick_stairs", () -> new AbnormalsStairsBlock(CYAN_TERRACOTTA_BRICKS.get().getDefaultState(), EnvironmentalProperties.CYAN_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> CYAN_TERRACOTTA_BRICK_SLAB 			= HELPER.createBlock("cyan_terracotta_brick_slab", () -> new SlabBlock(EnvironmentalProperties.CYAN_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> CYAN_TERRACOTTA_BRICK_WALL 			= HELPER.createBlock("cyan_terracotta_brick_wall", () -> new WallBlock(EnvironmentalProperties.CYAN_TERRACOTTA_BRICKS), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> CYAN_TERRACOTTA_BRICK_VERTICAL_SLAB	= HELPER.createCompatBlock("quark", "cyan_terracotta_brick_vertical_slab", () -> new VerticalSlabBlock(EnvironmentalProperties.CYAN_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+
+    public static final RegistryObject<Block> PURPLE_TERRACOTTA_BRICKS 				= HELPER.createBlock("purple_terracotta_bricks", () -> new Block(EnvironmentalProperties.PURPLE_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> PURPLE_TERRACOTTA_BRICK_STAIRS 		= HELPER.createBlock("purple_terracotta_brick_stairs", () -> new AbnormalsStairsBlock(PURPLE_TERRACOTTA_BRICKS.get().getDefaultState(), EnvironmentalProperties.PURPLE_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> PURPLE_TERRACOTTA_BRICK_SLAB 			= HELPER.createBlock("purple_terracotta_brick_slab", () -> new SlabBlock(EnvironmentalProperties.PURPLE_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> PURPLE_TERRACOTTA_BRICK_WALL 			= HELPER.createBlock("purple_terracotta_brick_wall", () -> new WallBlock(EnvironmentalProperties.PURPLE_TERRACOTTA_BRICKS), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> PURPLE_TERRACOTTA_BRICK_VERTICAL_SLAB	= HELPER.createCompatBlock("quark", "purple_terracotta_brick_vertical_slab", () -> new VerticalSlabBlock(EnvironmentalProperties.PURPLE_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+
+    public static final RegistryObject<Block> BLUE_TERRACOTTA_BRICKS 				= HELPER.createBlock("blue_terracotta_bricks", () -> new Block(EnvironmentalProperties.BLUE_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> BLUE_TERRACOTTA_BRICK_STAIRS 			= HELPER.createBlock("blue_terracotta_brick_stairs", () -> new AbnormalsStairsBlock(BLUE_TERRACOTTA_BRICKS.get().getDefaultState(), EnvironmentalProperties.BLUE_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> BLUE_TERRACOTTA_BRICK_SLAB 			= HELPER.createBlock("blue_terracotta_brick_slab", () -> new SlabBlock(EnvironmentalProperties.BLUE_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> BLUE_TERRACOTTA_BRICK_WALL 			= HELPER.createBlock("blue_terracotta_brick_wall", () -> new WallBlock(EnvironmentalProperties.BLUE_TERRACOTTA_BRICKS), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> BLUE_TERRACOTTA_BRICK_VERTICAL_SLAB	= HELPER.createCompatBlock("quark", "blue_terracotta_brick_vertical_slab", () -> new VerticalSlabBlock(EnvironmentalProperties.BLUE_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+
+    public static final RegistryObject<Block> BROWN_TERRACOTTA_BRICKS 				= HELPER.createBlock("brown_terracotta_bricks", () -> new Block(EnvironmentalProperties.BROWN_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> BROWN_TERRACOTTA_BRICK_STAIRS 		= HELPER.createBlock("brown_terracotta_brick_stairs", () -> new AbnormalsStairsBlock(BROWN_TERRACOTTA_BRICKS.get().getDefaultState(), EnvironmentalProperties.BROWN_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> BROWN_TERRACOTTA_BRICK_SLAB 			= HELPER.createBlock("brown_terracotta_brick_slab", () -> new SlabBlock(EnvironmentalProperties.BROWN_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> BROWN_TERRACOTTA_BRICK_WALL 			= HELPER.createBlock("brown_terracotta_brick_wall", () -> new WallBlock(EnvironmentalProperties.BROWN_TERRACOTTA_BRICKS), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> BROWN_TERRACOTTA_BRICK_VERTICAL_SLAB	= HELPER.createCompatBlock("quark", "brown_terracotta_brick_vertical_slab", () -> new VerticalSlabBlock(EnvironmentalProperties.BROWN_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+
+    public static final RegistryObject<Block> GREEN_TERRACOTTA_BRICKS 				= HELPER.createBlock("green_terracotta_bricks", () -> new Block(EnvironmentalProperties.GREEN_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> GREEN_TERRACOTTA_BRICK_STAIRS 		= HELPER.createBlock("green_terracotta_brick_stairs", () -> new AbnormalsStairsBlock(GREEN_TERRACOTTA_BRICKS.get().getDefaultState(), EnvironmentalProperties.GREEN_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> GREEN_TERRACOTTA_BRICK_SLAB 			= HELPER.createBlock("green_terracotta_brick_slab", () -> new SlabBlock(EnvironmentalProperties.GREEN_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> GREEN_TERRACOTTA_BRICK_WALL 			= HELPER.createBlock("green_terracotta_brick_wall", () -> new WallBlock(EnvironmentalProperties.GREEN_TERRACOTTA_BRICKS), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> GREEN_TERRACOTTA_BRICK_VERTICAL_SLAB	= HELPER.createCompatBlock("quark", "green_terracotta_brick_vertical_slab", () -> new VerticalSlabBlock(EnvironmentalProperties.GREEN_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+
+    public static final RegistryObject<Block> RED_TERRACOTTA_BRICKS 				= HELPER.createBlock("red_terracotta_bricks", () -> new Block(EnvironmentalProperties.RED_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> RED_TERRACOTTA_BRICK_STAIRS 			= HELPER.createBlock("red_terracotta_brick_stairs", () -> new AbnormalsStairsBlock(RED_TERRACOTTA_BRICKS.get().getDefaultState(), EnvironmentalProperties.RED_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> RED_TERRACOTTA_BRICK_SLAB 			= HELPER.createBlock("red_terracotta_brick_slab", () -> new SlabBlock(EnvironmentalProperties.RED_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> RED_TERRACOTTA_BRICK_WALL 			= HELPER.createBlock("red_terracotta_brick_wall", () -> new WallBlock(EnvironmentalProperties.RED_TERRACOTTA_BRICKS), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> RED_TERRACOTTA_BRICK_VERTICAL_SLAB	= HELPER.createCompatBlock("quark", "red_terracotta_brick_vertical_slab", () -> new VerticalSlabBlock(EnvironmentalProperties.RED_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+
+    public static final RegistryObject<Block> BLACK_TERRACOTTA_BRICKS 				= HELPER.createBlock("black_terracotta_bricks", () -> new Block(EnvironmentalProperties.BLACK_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> BLACK_TERRACOTTA_BRICK_STAIRS 		= HELPER.createBlock("black_terracotta_brick_stairs", () -> new AbnormalsStairsBlock(BLACK_TERRACOTTA_BRICKS.get().getDefaultState(), EnvironmentalProperties.BLACK_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> BLACK_TERRACOTTA_BRICK_SLAB 			= HELPER.createBlock("black_terracotta_brick_slab", () -> new SlabBlock(EnvironmentalProperties.BLACK_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> BLACK_TERRACOTTA_BRICK_WALL 			= HELPER.createBlock("black_terracotta_brick_wall", () -> new WallBlock(EnvironmentalProperties.BLACK_TERRACOTTA_BRICKS), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> BLACK_TERRACOTTA_BRICK_VERTICAL_SLAB	= HELPER.createCompatBlock("quark", "black_terracotta_brick_vertical_slab", () -> new VerticalSlabBlock(EnvironmentalProperties.BLACK_TERRACOTTA_BRICKS), ItemGroup.BUILDING_BLOCKS);
+    
     // Delphiniums //
     
     public static final RegistryObject<Block> PINK_DELPHINIUM 	= HELPER.createBlock("pink_delphinium", () -> new AbnormalsTallFlowerBlock(EnvironmentalProperties.DELPHINIUMS), ItemGroup.DECORATIONS);

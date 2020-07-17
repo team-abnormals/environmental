@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "type=bottom": { "model": "environmental:block/light_blue_terracotta_brick_slab" },
+        "type=top": { "model": "environmental:block/light_blue_terracotta_brick_slab_top" },
+        "type=double": { "model": "environmental:block/light_blue_terracotta_bricks" }
+    }
+}

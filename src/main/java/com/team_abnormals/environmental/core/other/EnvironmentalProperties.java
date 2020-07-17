@@ -1,7 +1,6 @@
 package com.team_abnormals.environmental.core.other;
 
 import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -12,40 +11,58 @@ import net.minecraft.world.IBlockReader;
 import net.minecraftforge.common.ToolType;
 
 public class EnvironmentalProperties {
-	public static final Block.Properties WILLOW_PLANKS 			= Block.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD);
-	public static final Block.Properties WILLOW_DOORS 			= Block.Properties.create(Material.WOOD, MaterialColor.WOOD).notSolid().hardnessAndResistance(3.0F).sound(SoundType.WOOD);
-	public static final Block.Properties WILLOW_BUTTON 			= Block.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD);
-	public static final Block.Properties WILLOW_PRESSURE_PLATE 	= Block.Properties.create(Material.WOOD).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD);
-	public static final Block.Properties FLOWER_POT 			= Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.0F).notSolid();
-	public static final Block.Properties LADDER 				= Block.Properties.create(Material.MISCELLANEOUS).notSolid().harvestTool(ToolType.AXE).hardnessAndResistance(0.4F).sound(SoundType.LADDER);
-	public static final Block.Properties BOOKSHELF 				= Block.Properties.create(Material.WOOD).hardnessAndResistance(1.5F).sound(SoundType.WOOD);
-	public static final Block.Properties LEAVES 				= Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).notSolid().tickRandomly().sound(SoundType.PLANT);
-	public static final Block.Properties LOG 					= Block.Properties.create(Material.WOOD, MaterialColor.BROWN).hardnessAndResistance(2.0F).sound(SoundType.WOOD);
-	public static final Block.Properties SAPLING 				= Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0.0F).sound(SoundType.PLANT);
+	public static final AbstractBlock.Properties WILLOW_PLANKS 			= AbstractBlock.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD);
+	public static final AbstractBlock.Properties WILLOW_DOORS 			= AbstractBlock.Properties.create(Material.WOOD, MaterialColor.WOOD).notSolid().hardnessAndResistance(3.0F).sound(SoundType.WOOD);
+	public static final AbstractBlock.Properties WILLOW_BUTTON 			= AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD);
+	public static final AbstractBlock.Properties WILLOW_PRESSURE_PLATE 	= AbstractBlock.Properties.create(Material.WOOD).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD);
+	public static final AbstractBlock.Properties FLOWER_POT 			= AbstractBlock.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.0F).notSolid();
+	public static final AbstractBlock.Properties LADDER 				= AbstractBlock.Properties.create(Material.MISCELLANEOUS).notSolid().harvestTool(ToolType.AXE).hardnessAndResistance(0.4F).sound(SoundType.LADDER);
+	public static final AbstractBlock.Properties BOOKSHELF 				= AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(1.5F).sound(SoundType.WOOD);
+	public static final AbstractBlock.Properties LEAVES 				= AbstractBlock.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).notSolid().tickRandomly().sound(SoundType.PLANT);
+	public static final AbstractBlock.Properties LOG 					= AbstractBlock.Properties.create(Material.WOOD, MaterialColor.BROWN).hardnessAndResistance(2.0F).sound(SoundType.WOOD);
+	public static final AbstractBlock.Properties SAPLING 				= AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0.0F).sound(SoundType.PLANT);
 	
-	public static final Block.Properties MUD_BRICKS = Block.Properties.create(Material.ROCK, MaterialColor.BROWN).hardnessAndResistance(1.5F, 2.5F).sound(SoundType.STONE);
-	public static final Block.Properties CATTAIL 	= Block.Properties.create(Material.TALL_PLANTS).hardnessAndResistance(0.0F).doesNotBlockMovement().tickRandomly().sound(SoundType.WET_GRASS);
-	public static final Block.Properties RICE 		= Block.Properties.create(Material.TALL_PLANTS).hardnessAndResistance(0.0F).doesNotBlockMovement().tickRandomly().sound(SoundType.CROP);
-	public static final Block.Properties DUCKWEED 	= Block.Properties.create(Material.PLANTS).hardnessAndResistance(0.0F).doesNotBlockMovement().sound(SoundType.CROP);
-	public static final Block.Properties THATCH 	= Block.Properties.create(Material.ORGANIC, MaterialColor.GREEN).hardnessAndResistance(0.5F).sound(SoundType.PLANT).harvestTool(ToolType.AXE);
+	public static final AbstractBlock.Properties MUD_BRICKS = AbstractBlock.Properties.create(Material.ROCK, MaterialColor.BROWN).hardnessAndResistance(1.5F, 2.5F).sound(SoundType.STONE);
+	public static final AbstractBlock.Properties CATTAIL 	= AbstractBlock.Properties.create(Material.TALL_PLANTS).hardnessAndResistance(0.0F).doesNotBlockMovement().tickRandomly().sound(SoundType.WET_GRASS);
+	public static final AbstractBlock.Properties RICE 		= AbstractBlock.Properties.create(Material.TALL_PLANTS).hardnessAndResistance(0.0F).doesNotBlockMovement().tickRandomly().sound(SoundType.CROP);
+	public static final AbstractBlock.Properties DUCKWEED 	= AbstractBlock.Properties.create(Material.PLANTS).hardnessAndResistance(0.0F).doesNotBlockMovement().sound(SoundType.CROP);
+	public static final AbstractBlock.Properties THATCH 	= AbstractBlock.Properties.create(Material.ORGANIC, MaterialColor.GREEN).hardnessAndResistance(0.5F).sound(SoundType.PLANT).harvestTool(ToolType.AXE);
 
-	public static final Block.Properties WISTERIA_PLANKS = Block.Properties.create(Material.WOOD, MaterialColor.WHITE_TERRACOTTA).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD);
+	public static final AbstractBlock.Properties TERRACOTTA_BRICKS 				= AbstractBlock.Properties.create(Material.ROCK, MaterialColor.ADOBE).setRequiresTool().hardnessAndResistance(1.25F, 4.2F);
+	public static final AbstractBlock.Properties WHITE_TERRACOTTA_BRICKS 		= AbstractBlock.Properties.create(Material.ROCK, MaterialColor.WHITE_TERRACOTTA).setRequiresTool().hardnessAndResistance(1.25F, 4.2F);
+	public static final AbstractBlock.Properties ORANGE_TERRACOTTA_BRICKS 		= AbstractBlock.Properties.create(Material.ROCK, MaterialColor.ORANGE_TERRACOTTA).setRequiresTool().hardnessAndResistance(1.25F, 4.2F);
+	public static final AbstractBlock.Properties MAGENTA_TERRACOTTA_BRICKS 		= AbstractBlock.Properties.create(Material.ROCK, MaterialColor.MAGENTA_TERRACOTTA).setRequiresTool().hardnessAndResistance(1.25F, 4.2F);
+	public static final AbstractBlock.Properties LIGHT_BLUE_TERRACOTTA_BRICKS 	= AbstractBlock.Properties.create(Material.ROCK, MaterialColor.LIGHT_BLUE_TERRACOTTA).setRequiresTool().hardnessAndResistance(1.25F, 4.2F);
+	public static final AbstractBlock.Properties YELLOW_TERRACOTTA_BRICKS 		= AbstractBlock.Properties.create(Material.ROCK, MaterialColor.YELLOW_TERRACOTTA).setRequiresTool().hardnessAndResistance(1.25F, 4.2F);
+	public static final AbstractBlock.Properties LIME_TERRACOTTA_BRICKS 		= AbstractBlock.Properties.create(Material.ROCK, MaterialColor.LIME_TERRACOTTA).setRequiresTool().hardnessAndResistance(1.25F, 4.2F);
+	public static final AbstractBlock.Properties PINK_TERRACOTTA_BRICKS 		= AbstractBlock.Properties.create(Material.ROCK, MaterialColor.PINK_TERRACOTTA).setRequiresTool().hardnessAndResistance(1.25F, 4.2F);
+	public static final AbstractBlock.Properties GRAY_TERRACOTTA_BRICKS 		= AbstractBlock.Properties.create(Material.ROCK, MaterialColor.GRAY_TERRACOTTA).setRequiresTool().hardnessAndResistance(1.25F, 4.2F);
+	public static final AbstractBlock.Properties LIGHT_GRAY_TERRACOTTA_BRICKS 	= AbstractBlock.Properties.create(Material.ROCK, MaterialColor.LIGHT_GRAY_TERRACOTTA).setRequiresTool().hardnessAndResistance(1.25F, 4.2F);
+	public static final AbstractBlock.Properties CYAN_TERRACOTTA_BRICKS 		= AbstractBlock.Properties.create(Material.ROCK, MaterialColor.CYAN_TERRACOTTA).setRequiresTool().hardnessAndResistance(1.25F, 4.2F);
+	public static final AbstractBlock.Properties PURPLE_TERRACOTTA_BRICKS 		= AbstractBlock.Properties.create(Material.ROCK, MaterialColor.PURPLE_TERRACOTTA).setRequiresTool().hardnessAndResistance(1.25F, 4.2F);
+	public static final AbstractBlock.Properties BLUE_TERRACOTTA_BRICKS 		= AbstractBlock.Properties.create(Material.ROCK, MaterialColor.BLUE_TERRACOTTA).setRequiresTool().hardnessAndResistance(1.25F, 4.2F);
+	public static final AbstractBlock.Properties BROWN_TERRACOTTA_BRICKS 		= AbstractBlock.Properties.create(Material.ROCK, MaterialColor.BROWN_TERRACOTTA).setRequiresTool().hardnessAndResistance(1.25F, 4.2F);
+	public static final AbstractBlock.Properties GREEN_TERRACOTTA_BRICKS 		= AbstractBlock.Properties.create(Material.ROCK, MaterialColor.GREEN_TERRACOTTA).setRequiresTool().hardnessAndResistance(1.25F, 4.2F);
+	public static final AbstractBlock.Properties RED_TERRACOTTA_BRICKS 			= AbstractBlock.Properties.create(Material.ROCK, MaterialColor.RED_TERRACOTTA).setRequiresTool().hardnessAndResistance(1.25F, 4.2F);
+	public static final AbstractBlock.Properties BLACK_TERRACOTTA_BRICKS 		= AbstractBlock.Properties.create(Material.ROCK, MaterialColor.BLACK_TERRACOTTA).setRequiresTool().hardnessAndResistance(1.25F, 4.2F);
 
-	public static final Block.Properties WISTERIA_LEAVES(MaterialColor color) {
+	public static final AbstractBlock.Properties WISTERIA_PLANKS = AbstractBlock.Properties.create(Material.WOOD, MaterialColor.WHITE_TERRACOTTA).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD);
+
+	public static final AbstractBlock.Properties WISTERIA_LEAVES(MaterialColor color) {
 		return AbstractBlock.Properties.create(Material.LEAVES, color).notSolid().hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT).setPropagatesDownwards(EnvironmentalProperties::canSpawn).setSuffocates(EnvironmentalProperties::canSuffocate).setBlocksVision(EnvironmentalProperties::canSuffocate);
 	}
 
-	public static final Block.Properties DELPHINIUMS = Block.Properties.create(Material.TALL_PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT);
-	public static final Block.Properties WOOD_BUTTON = Block.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD);
-	public static final Block.Properties WISTERIA_DOORS = Block.Properties.create(Material.WOOD, MaterialColor.WHITE_TERRACOTTA).notSolid().hardnessAndResistance(3.0F).sound(SoundType.WOOD);
+	public static final AbstractBlock.Properties DELPHINIUMS = AbstractBlock.Properties.create(Material.TALL_PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT);
+	public static final AbstractBlock.Properties WOOD_BUTTON = AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD);
+	public static final AbstractBlock.Properties WISTERIA_DOORS = AbstractBlock.Properties.create(Material.WOOD, MaterialColor.WHITE_TERRACOTTA).notSolid().hardnessAndResistance(3.0F).sound(SoundType.WOOD);
 
-	public static final Block.Properties WISTERIA_LOG(boolean stripped) {
+	public static final AbstractBlock.Properties WISTERIA_LOG(boolean stripped) {
 		MaterialColor color = stripped ? MaterialColor.WHITE_TERRACOTTA : MaterialColor.GRAY;
-		return Block.Properties.create(Material.WOOD, color).hardnessAndResistance(2.0F).sound(SoundType.WOOD);
+		return AbstractBlock.Properties.create(Material.WOOD, color).hardnessAndResistance(2.0F).sound(SoundType.WOOD);
 	}
 
-	public static final Block.Properties FLOWER = Block.Properties.create(Material.PLANTS).notSolid().doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.PLANT);
-	public static final Block.Properties CANDLE = Block.Properties.create(Material.CORAL).hardnessAndResistance(0.1F).notSolid().sound(SoundType.WOOD);
+	public static final AbstractBlock.Properties FLOWER = AbstractBlock.Properties.create(Material.PLANTS).notSolid().doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.PLANT);
+	public static final AbstractBlock.Properties CANDLE = AbstractBlock.Properties.create(Material.CORAL).hardnessAndResistance(0.1F).notSolid().sound(SoundType.WOOD);
 
 	private static Boolean canSpawn(BlockState state, IBlockReader access, BlockPos pos, EntityType<?> entity) {
 		return entity == EntityType.OCELOT || entity == EntityType.PARROT;
