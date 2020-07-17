@@ -33,14 +33,11 @@ import net.minecraft.entity.item.BoatEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.IInventoryChangedListener;
 import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.*;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
@@ -354,10 +351,12 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
             if (!world.isRemote()) this.func_233687_w_(false);
             this.setTamed(false);
             return ActionResultType.SUCCESS;
-        } else if (openGui(player)) {
+        } else {
+            if (!world.isRemote()) {
+                openGui((ServerPlayerEntity) player);
+            }
             return ActionResultType.SUCCESS;
         }
-        return super.func_230254_b_(player, hand);
     }
 
     @Override
@@ -459,10 +458,10 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         this.oFlapSpeed = this.destPos;
         this.destPos = (float) ((double) this.destPos + (double) (this.onGround ? -1 : 4) * 0.3D);
         this.destPos = MathHelper.clamp(this.destPos, 0.0F, 1.0F);
-        if (!this.onGround ) {
-            if(!this.isInWater() && this.getMotion().y < 0)
+        if (!this.onGround) {
+            if (!this.isInWater() && this.getMotion().y < 0)
                 this.setMotion(this.getMotion().mul(1, 0.6, 1));
-            if(this.wingRotDelta < 1.0F)
+            if (this.wingRotDelta < 1.0F)
                 this.wingRotDelta = 1.0F;
         }
 
@@ -990,26 +989,16 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
     // INVENTORY //
 
-    public boolean openGui(PlayerEntity player) {
-        if (!player.world.isRemote()) {
-            OptionalInt optional = player.openContainer(new INamedContainerProvider() {
-                @Override
-                public ITextComponent getDisplayName() {
-                    return SlabfishEntity.this.getDisplayName();
-                }
+    public void openGui(ServerPlayerEntity player) {
 
-                @Override
-                public Container createMenu(int id, PlayerInventory inventory, PlayerEntity player) {
-                    return new SlabfishInventoryContainer(id, inventory, SlabfishEntity.this.slabfishBackpack, SlabfishEntity.this);
-                }
-            });
-            optional.ifPresent(windowId -> Environmental.CHANNEL.sendToServer(new SOpenSlabfishInventoryMessage(this, windowId)));
-            if(optional.isPresent())
-                playersUsing++;
+        if (player.openContainer != player.container)
+            player.closeScreen();
 
-            return optional.isPresent();
-        }
-        return true;
+        player.getNextWindowId();
+        Environmental.CHANNEL.sendToServer(new SOpenSlabfishInventoryMessage(this, player.currentWindowId));
+        player.openContainer = new SlabfishInventoryContainer(player.currentWindowId, player.inventory, this.slabfishBackpack, this);
+        player.openContainer.addListener(player);
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.entity.player.PlayerContainerEvent.Open(player, player.openContainer));
     }
 
     @Override
@@ -1020,10 +1009,6 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
     @Override
     public boolean canPickUpItem(ItemStack stack) {
         return hasBackpack();
-    }
-
-    protected int getInventorySize() {
-        return this.hasBackpack() ? 1 + 3 * this.getInventoryColumns() : 1;
     }
 
     public List<ItemEntity> getNearbyItems(float multiplier) {
@@ -1064,9 +1049,9 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
         if (this.hasBackpack()) {
             ItemStack stack = this.slabfishBackpack.addItem(itemstack);
-            if(!ItemStack.areItemStacksEqual(itemstack, stack))
+            if (!ItemStack.areItemStacksEqual(itemstack, stack))
                 this.onItemPickup(itemEntity, itemstack.getCount() - stack.getCount());
-            if(stack.isEmpty())
+            if (stack.isEmpty())
                 itemEntity.remove();
             else
                 itemEntity.setItem(stack);
@@ -1082,11 +1067,9 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
             playSweaterSound();
 
         this.backpackFull = true;
-        for (int i = 1; i < this.slabfishBackpack.getSizeInventory(); i++)
-        {
+        for (int i = 1; i < this.slabfishBackpack.getSizeInventory(); i++) {
             ItemStack stack = this.slabfishBackpack.getStackInSlot(i);
-            if (stack.isEmpty() || stack.getCount() < stack.getMaxStackSize())
-            {
+            if (stack.isEmpty() || stack.getCount() < stack.getMaxStackSize()) {
                 this.backpackFull = false;
                 break;
             }
