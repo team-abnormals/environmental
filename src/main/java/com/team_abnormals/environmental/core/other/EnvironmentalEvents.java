@@ -16,7 +16,6 @@ import com.team_abnormals.environmental.core.Environmental;
 import com.team_abnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.team_abnormals.environmental.core.registry.EnvironmentalEntities;
 import com.team_abnormals.environmental.core.registry.EnvironmentalItems;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -72,21 +71,26 @@ import net.minecraftforge.eventbus.api.Event.Result;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 @EventBusSubscriber(modid = Environmental.MODID)
 public class EnvironmentalEvents {
-	private static final Set<ResourceLocation> RICE_SHIPWRECK_LOOT_INJECTIONS = Sets.newHashSet(LootTables.CHESTS_SHIPWRECK_SUPPLY);
-	
-	@SubscribeEvent
-	public static void onInjectLoot(LootTableLoadEvent event) {
-		if (RICE_SHIPWRECK_LOOT_INJECTIONS.contains(event.getName())) {
-			LootPool pool = LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(Environmental.MODID, "injections/rice_shipwreck")).weight(1).quality(0)).name("rice_shipwreck").build();
-			event.getTable().addPool(pool);
-		}
-	}
+    private static final Set<ResourceLocation> RICE_SHIPWRECK_LOOT_INJECTIONS = Sets.newHashSet(LootTables.CHESTS_SHIPWRECK_SUPPLY);
+
+    @SubscribeEvent
+    public static void onInjectLoot(LootTableLoadEvent event) {
+        if (RICE_SHIPWRECK_LOOT_INJECTIONS.contains(event.getName())) {
+            LootPool pool = LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(Environmental.MODID, "injections/rice_shipwreck")).weight(1).quality(0)).name("rice_shipwreck").build();
+            event.getTable().addPool(pool);
+        }
+    }
 
     @SubscribeEvent
     public static void onEntityInteract(PlayerEvent.BreakSpeed event) {
-        if (event.getState().getBlock() instanceof HangingWisteriaLeavesBlock && event.getPlayer().getHeldItemMainhand().getItem() == Items.SHEARS) event.setNewSpeed(15.0F);
+        if (event.getState().getBlock() instanceof HangingWisteriaLeavesBlock && event.getPlayer().getHeldItemMainhand().getItem() == Items.SHEARS)
+            event.setNewSpeed(15.0F);
     }
     
 	@SubscribeEvent
@@ -143,28 +147,55 @@ public class EnvironmentalEvents {
             if (potion == Potions.WATER && list.isEmpty()) {
                 AxisAlignedBB axisalignedbb = potionEntity.getBoundingBox().grow(2.0D, 1.0D, 2.0D);
                 List<SlabfishEntity> slabs = potionEntity.world.getEntitiesWithinAABB(SlabfishEntity.class, axisalignedbb);
-                if(slabs != null && slabs.size() > 0) {
+                if (slabs != null && slabs.size() > 0) {
                     for (SlabfishEntity slabfish : slabs) {
-                    	slabfish.setSlabfishOverlay(SlabfishOverlay.NONE);
+                        slabfish.setSlabfishOverlay(SlabfishOverlay.NONE);
                     }
                 }
             }
         }
-        
+
         if (projectileEntity instanceof ProjectileItemEntity) {
-        	ProjectileItemEntity snowball = (ProjectileItemEntity)projectileEntity;
-        	if (event.getRayTraceResult().getType() == RayTraceResult.Type.ENTITY) {
-    			EntityRayTraceResult entity = (EntityRayTraceResult)event.getRayTraceResult();
-    			if (entity.getEntity() instanceof SlabfishEntity) {
-    				SlabfishEntity slabfish = (SlabfishEntity)entity.getEntity();
-    				if (snowball.getItem().getItem() == Items.SNOWBALL) slabfish.setSlabfishOverlay(SlabfishOverlay.SNOWY);
-        			if (snowball.getItem().getItem() == Items.EGG) slabfish.setSlabfishOverlay(SlabfishOverlay.EGG);
-    			}
-        	}
+            ProjectileItemEntity snowball = (ProjectileItemEntity) projectileEntity;
+            if (event.getRayTraceResult().getType() == RayTraceResult.Type.ENTITY) {
+                EntityRayTraceResult entity = (EntityRayTraceResult) event.getRayTraceResult();
+                if (entity.getEntity() instanceof SlabfishEntity) {
+                    SlabfishEntity slabfish = (SlabfishEntity) entity.getEntity();
+                    if (snowball.getItem().getItem() == Items.SNOWBALL)
+                        slabfish.setSlabfishOverlay(SlabfishOverlay.SNOWY);
+                    if (snowball.getItem().getItem() == Items.EGG) slabfish.setSlabfishOverlay(SlabfishOverlay.EGG);
+                }
+            }
         }
     }
-	
-	protected static final Map<Block, BlockState> HOE_LOOKUP = Maps.newHashMap(ImmutableMap.of(Blocks.GRASS_BLOCK, Blocks.FARMLAND.getDefaultState(), Blocks.GRASS_PATH, Blocks.FARMLAND.getDefaultState(), Blocks.DIRT, Blocks.FARMLAND.getDefaultState(), Blocks.COARSE_DIRT, Blocks.DIRT.getDefaultState()));
+
+    protected static final Map<Block, BlockState> HOE_LOOKUP = Maps.newHashMap(ImmutableMap.of(Blocks.GRASS_BLOCK, Blocks.FARMLAND.getDefaultState(), Blocks.GRASS_PATH, Blocks.FARMLAND.getDefaultState(), Blocks.DIRT, Blocks.FARMLAND.getDefaultState(), Blocks.COARSE_DIRT, Blocks.DIRT.getDefaultState()));
+
+    @SubscribeEvent
+    public static void underwaterHoe(UseHoeEvent event) {
+        ItemStack hoe = event.getContext().getItem();
+
+        //if (event.getResult() == Result.ALLOW) {
+        World world = event.getContext().getWorld();
+        BlockPos blockpos = event.getContext().getPos();
+        if (event.getContext().getFace() != Direction.DOWN) {
+            BlockState blockstate = HOE_LOOKUP.get(world.getBlockState(blockpos).getBlock());
+            if (blockstate != null) {
+                PlayerEntity playerentity = event.getPlayer();
+                world.playSound(playerentity, blockpos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                playerentity.swingArm(event.getContext().getHand());
+                if (!world.isRemote) {
+                    world.setBlockState(blockpos, blockstate, 11);
+                    if (playerentity != null) {
+                        hoe.damageItem(1, playerentity, (anim) -> {
+                            anim.sendBreakAnimation(event.getContext().getHand());
+                        });
+                    }
+                }
+            }
+        }
+        //}
+    }
 
 	@SubscribeEvent
 	public static void underWaterHoe(UseHoeEvent event) {
@@ -233,7 +264,6 @@ public class EnvironmentalEvents {
 //	            }
 //		}
 //	}
-	
 	@SubscribeEvent
 	public static void onInteractWithEntity(PlayerInteractEvent.EntityInteract event){
 		ItemStack stack = event.getItemStack();

@@ -2,7 +2,6 @@ package com.team_abnormals.environmental.core.other;
 
 import com.team_abnormals.environmental.common.block.fluid.MudFluid;
 import com.team_abnormals.environmental.core.Environmental;
-
 import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.fluid.FluidState;
 import net.minecraftforge.api.distmarker.Dist;
@@ -14,7 +13,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 @EventBusSubscriber(modid = Environmental.MODID, value = Dist.CLIENT)
 public class EnvironmentalClientEvents {
-    
+
     @SubscribeEvent
     @OnlyIn(Dist.CLIENT)
     public void onFogColor(FogColors event) {

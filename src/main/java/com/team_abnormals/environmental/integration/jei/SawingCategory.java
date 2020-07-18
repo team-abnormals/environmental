@@ -3,7 +3,6 @@ package com.team_abnormals.environmental.integration.jei;
 import com.team_abnormals.environmental.common.item.crafting.SawingRecipe;
 import com.team_abnormals.environmental.core.Environmental;
 import com.team_abnormals.environmental.core.registry.EnvironmentalBlocks;
-
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -16,8 +15,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 public class SawingCategory implements IRecipeCategory<SawingRecipe> {
-	public static final ResourceLocation SAWING = new ResourceLocation(Environmental.MODID, "sawing");
-	
+    public static final ResourceLocation SAWING = new ResourceLocation(Environmental.MODID, "sawing");
+
     private static final int inputSlot = 0;
     private static final int outputSlot = 1;
 

@@ -1,9 +1,9 @@
 package com.team_abnormals.environmental.common.entity.util;
 
-import java.awt.Color;
-import java.util.List;
-
 import com.team_abnormals.environmental.common.entity.ButterflyEntity.Variant;
+
+import java.awt.*;
+import java.util.List;
 
 public enum ButterflyType {
     //TIGER(new Variant("Orange Tiger", new Color(), new Color()), new Variant("Yellow Tiger", new Color(), new Color()), new Variant("Dark Glassy Tiger", new Color(), new Color()), new Variant("Blue Glassy Tiger", new Color(), new Color())),

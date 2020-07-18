@@ -1,18 +1,7 @@
 package com.team_abnormals.environmental.common.entity.goals;
 
-import java.util.Random;
-
 import com.team_abnormals.environmental.common.entity.ButterflyEntity;
-
-import net.minecraft.block.BeetrootBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.BushBlock;
-import net.minecraft.block.CarrotBlock;
-import net.minecraft.block.CropsBlock;
-import net.minecraft.block.PotatoBlock;
-import net.minecraft.block.StemBlock;
+import net.minecraft.block.*;
 import net.minecraft.entity.ai.goal.MoveToBlockGoal;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.properties.BlockStateProperties;
@@ -20,6 +9,8 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class LandOnPlantGoal extends MoveToBlockGoal {
     private final ButterflyEntity butterfly;
@@ -53,8 +44,7 @@ public class LandOnPlantGoal extends MoveToBlockGoal {
                     if (integer < 3) {
                         world.setBlockState(blockpos, blockstate.with(BeetrootBlock.BEETROOT_AGE, integer + 1), 2);
                     }
-                }
-                else {
+                } else {
                     Integer integer = blockstate.get(BlockStateProperties.AGE_0_7);
                     if (integer < 7) {
                         world.setBlockState(blockpos, blockstate.with(CropsBlock.AGE, integer + 1), 2);
@@ -63,7 +53,7 @@ public class LandOnPlantGoal extends MoveToBlockGoal {
                 double d0 = random.nextGaussian() * 0.02D;
                 double d1 = random.nextGaussian() * 0.02D;
                 double d2 = random.nextGaussian() * 0.02D;
-                world.addParticle(ParticleTypes.HAPPY_VILLAGER, (double)((float)blockpos.getX() + random.nextFloat()), (double)blockpos.getY() + (double)random.nextFloat() * blockstate.getShape(world, blockpos).getEnd(Direction.Axis.Y), (double)((float)blockpos.getZ() + random.nextFloat()), d0, d1, d2);
+                world.addParticle(ParticleTypes.HAPPY_VILLAGER, (double) ((float) blockpos.getX() + random.nextFloat()), (double) blockpos.getY() + (double) random.nextFloat() * blockstate.getShape(world, blockpos).getEnd(Direction.Axis.Y), (double) ((float) blockpos.getZ() + random.nextFloat()), d0, d1, d2);
             }
         }
     }

@@ -1,9 +1,5 @@
 package com.team_abnormals.environmental.common.block;
 
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -27,6 +23,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.IForgeShearable;
+
+import javax.annotation.Nullable;
+import java.util.Random;
 
 public class HangingWisteriaLeavesBlock extends Block implements IForgeShearable {
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
@@ -55,8 +54,7 @@ public class HangingWisteriaLeavesBlock extends Block implements IForgeShearable
             if (world.getBlockState(pos.up()) == Blocks.AIR.getDefaultState()) {
                 world.removeBlock(pos, false);
             }
-        }
-        else if (state == getDefaultState().with(HALF, DoubleBlockHalf.LOWER)) {
+        } else if (state == getDefaultState().with(HALF, DoubleBlockHalf.LOWER)) {
             if (world.getBlockState(pos.up()) == Blocks.AIR.getDefaultState()) {
                 world.removeBlock(pos, false);
             }
@@ -78,9 +76,9 @@ public class HangingWisteriaLeavesBlock extends Block implements IForgeShearable
                 BlockPos blockpos = pos.down();
                 BlockState blockstate = worldIn.getBlockState(blockpos);
                 if (!blockstate.isSolid() || !blockstate.isSolidSide(worldIn, blockpos, Direction.UP)) {
-                    double d0 = (double)((float)pos.getX() + rand.nextFloat());
-                    double d1 = (double)pos.getY() - 0.05D;
-                    double d2 = (double)((float)pos.getZ() + rand.nextFloat());
+                    double d0 = (double) ((float) pos.getX() + rand.nextFloat());
+                    double d1 = (double) pos.getY() - 0.05D;
+                    double d2 = (double) ((float) pos.getZ() + rand.nextFloat());
                     worldIn.addParticle(ParticleTypes.DRIPPING_WATER, d0, d1, d2, 0.0D, 0.0D, 0.0D);
                 }
             }
@@ -125,11 +123,9 @@ public class HangingWisteriaLeavesBlock extends Block implements IForgeShearable
         if (isStateValid(world, pos)) {
             if (world.getBlockState(pos.up()) == getDefaultState().with(HALF, DoubleBlockHalf.UPPER)) {
                 return getDefaultState().with(HALF, DoubleBlockHalf.LOWER);
-            }
-            else if (world.getBlockState(pos.up()) == getDefaultState().with(HALF, DoubleBlockHalf.LOWER)) {
+            } else if (world.getBlockState(pos.up()) == getDefaultState().with(HALF, DoubleBlockHalf.LOWER)) {
                 return null;
-            }
-            else return getDefaultState().with(HALF, DoubleBlockHalf.UPPER);
+            } else return getDefaultState().with(HALF, DoubleBlockHalf.UPPER);
         }
         return null;
     }

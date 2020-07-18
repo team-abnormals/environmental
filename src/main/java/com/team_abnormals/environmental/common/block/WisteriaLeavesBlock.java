@@ -1,9 +1,6 @@
 package com.team_abnormals.environmental.common.block;
 
-import java.util.Random;
-
 import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
@@ -27,6 +24,8 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.IForgeShearable;
+
+import java.util.Random;
 
 public class WisteriaLeavesBlock extends Block implements IForgeShearable {
     public static final IntegerProperty DISTANCE = IntegerProperty.create("distance", 1, 8);
@@ -70,15 +69,15 @@ public class WisteriaLeavesBlock extends Block implements IForgeShearable {
     }
 
     private static BlockState updateDistance(BlockState state, IWorld worldIn, BlockPos pos) {
-    	int i = 7;
-    	BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
+        int i = 7;
+        BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
 
-        for(Direction direction : Direction.values()) {
-           blockpos$mutable.func_239622_a_(pos, direction);
-           i = Math.min(i, getDistance(worldIn.getBlockState(blockpos$mutable)) + 1);
-           if (i == 1) {
-              break;
-           }
+        for (Direction direction : Direction.values()) {
+            blockpos$mutable.func_239622_a_(pos, direction);
+            i = Math.min(i, getDistance(worldIn.getBlockState(blockpos$mutable)) + 1);
+            if (i == 1) {
+                break;
+            }
         }
 
         return state.with(DISTANCE, Integer.valueOf(i));
@@ -93,6 +92,7 @@ public class WisteriaLeavesBlock extends Block implements IForgeShearable {
             else return 8;
         }
     }
+
     @Override
     @OnlyIn(Dist.CLIENT)
     public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
@@ -101,9 +101,9 @@ public class WisteriaLeavesBlock extends Block implements IForgeShearable {
                 BlockPos blockpos = pos.down();
                 BlockState blockstate = worldIn.getBlockState(blockpos);
                 if (!blockstate.isSolid() || !blockstate.isSolidSide(worldIn, blockpos, Direction.UP)) {
-                    double d0 = (double)((float)pos.getX() + rand.nextFloat());
-                    double d1 = (double)pos.getY() - 0.05D;
-                    double d2 = (double)((float)pos.getZ() + rand.nextFloat());
+                    double d0 = (double) ((float) pos.getX() + rand.nextFloat());
+                    double d1 = (double) pos.getY() - 0.05D;
+                    double d2 = (double) ((float) pos.getZ() + rand.nextFloat());
                     worldIn.addParticle(ParticleTypes.DRIPPING_WATER, d0, d1, d2, 0.0D, 0.0D, 0.0D);
                 }
             }
@@ -119,16 +119,16 @@ public class WisteriaLeavesBlock extends Block implements IForgeShearable {
     public BlockState getStateForPlacement(BlockItemUseContext context) {
         return updateDistance(getDefaultState().with(PERSISTENT, true), context.getWorld(), context.getPos());
     }
-    
+
     @Override
-	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-		if(ItemStackUtils.isInGroup(this.asItem(), group)) {
-			int targetIndex = ItemStackUtils.findIndexOfItem(Items.DARK_OAK_LEAVES, items);
-			if(targetIndex != -1) {
-				items.add(targetIndex + 1, new ItemStack(this));
-			} else {
-				super.fillItemGroup(group, items);
-			}
-		}
-	}
+    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+        if (ItemStackUtils.isInGroup(this.asItem(), group)) {
+            int targetIndex = ItemStackUtils.findIndexOfItem(Items.DARK_OAK_LEAVES, items);
+            if (targetIndex != -1) {
+                items.add(targetIndex + 1, new ItemStack(this));
+            } else {
+                super.fillItemGroup(group, items);
+            }
+        }
+    }
 }
