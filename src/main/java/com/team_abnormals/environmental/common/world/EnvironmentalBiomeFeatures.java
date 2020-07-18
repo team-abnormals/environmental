@@ -1,9 +1,12 @@
 package com.team_abnormals.environmental.common.world;
 
+import java.util.List;
+
 import com.google.common.collect.ImmutableList;
 import com.team_abnormals.environmental.common.world.gen.util.WisteriaColor;
 import com.team_abnormals.environmental.core.EnvironmentalConfig;
 import com.team_abnormals.environmental.core.registry.EnvironmentalFeatures;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.world.biome.Biome;
@@ -13,11 +16,25 @@ import net.minecraft.world.gen.GenerationStage.Decoration;
 import net.minecraft.world.gen.blockplacer.DoublePlantBlockPlacer;
 import net.minecraft.world.gen.blockplacer.SimpleBlockPlacer;
 import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
-import net.minecraft.world.gen.feature.*;
-import net.minecraft.world.gen.placement.*;
+import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
+import net.minecraft.world.gen.feature.BlockClusterFeatureConfig;
+import net.minecraft.world.gen.feature.BlockStateFeatureConfig;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.gen.feature.DecoratedFeatureConfig;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.MultipleRandomFeatureConfig;
+import net.minecraft.world.gen.feature.MultipleWithChanceRandomFeatureConfig;
+import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.world.gen.feature.SeaGrassConfig;
+import net.minecraft.world.gen.feature.TwoFeatureChoiceConfig;
+import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
+import net.minecraft.world.gen.placement.ChanceConfig;
+import net.minecraft.world.gen.placement.CountRangeConfig;
+import net.minecraft.world.gen.placement.FrequencyConfig;
+import net.minecraft.world.gen.placement.HeightWithChanceConfig;
+import net.minecraft.world.gen.placement.IPlacementConfig;
+import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.fml.ModList;
-
-import java.util.List;
 
 public class EnvironmentalBiomeFeatures {
     public static void addMushrooms(Biome biome) {
@@ -48,6 +65,10 @@ public class EnvironmentalBiomeFeatures {
         if (EnvironmentalConfig.ValuesHolder.giantTallGrass()) {
             biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(EnvironmentalFeatureConfigs.GIANT_TALL_GRASS_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_32.configure(new FrequencyConfig(chance))));
         }
+    }
+    
+    public static void addMyceliumSprouts(Biome biome) {
+    	biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(EnvironmentalFeatureConfigs.MYCELIUM_SPROUTS_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP.configure(new FrequencyConfig(5))));
     }
 
     public static void addMarshPools(Biome biome) {

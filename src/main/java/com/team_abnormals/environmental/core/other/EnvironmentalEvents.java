@@ -16,6 +16,7 @@ import com.team_abnormals.environmental.core.Environmental;
 import com.team_abnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.team_abnormals.environmental.core.registry.EnvironmentalEntities;
 import com.team_abnormals.environmental.core.registry.EnvironmentalItems;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -70,10 +71,6 @@ import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.eventbus.api.Event.Result;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 @EventBusSubscriber(modid = Environmental.MODID)
 public class EnvironmentalEvents {

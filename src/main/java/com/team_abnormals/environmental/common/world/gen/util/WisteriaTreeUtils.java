@@ -3,6 +3,7 @@ package com.team_abnormals.environmental.common.world.gen.util;
 import java.util.Random;
 
 import com.team_abnormals.environmental.core.registry.EnvironmentalBlocks;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -14,8 +15,6 @@ import net.minecraft.world.IWorldWriter;
 import net.minecraft.world.gen.IWorldGenerationBaseReader;
 import net.minecraft.world.gen.IWorldGenerationReader;
 import net.minecraftforge.common.IPlantable;
-
-import java.util.Random;
 
 @SuppressWarnings("deprecation")
 public class WisteriaTreeUtils {

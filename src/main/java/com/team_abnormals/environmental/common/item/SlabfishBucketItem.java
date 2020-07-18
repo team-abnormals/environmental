@@ -1,15 +1,26 @@
 package com.team_abnormals.environmental.common.item;
 
+import java.util.List;
+import java.util.function.Supplier;
+
+import javax.annotation.Nullable;
+
 import com.team_abnormals.environmental.common.entity.SlabfishEntity;
 import com.team_abnormals.environmental.common.entity.util.SlabfishType;
 import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
+
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
-import net.minecraft.item.*;
+import net.minecraft.item.BucketItem;
+import net.minecraft.item.DyeColor;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.NonNullList;
@@ -24,12 +35,7 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.registries.ForgeRegistries;
-
-import javax.annotation.Nullable;
-import java.util.List;
-import java.util.function.Supplier;
 
 public class SlabfishBucketItem extends BucketItem {
     private final Supplier<EntityType<? extends SlabfishEntity>> entityType;

@@ -44,6 +44,10 @@ public class EnvironmentalFeatures {
     public static void generate(Biome biome) {
         boolean wisterias = EnvironmentalConfig.ValuesHolder.generateExternalWisterias();
 
+        if (biome.getCategory() == Biome.Category.MUSHROOM) {
+        	EnvironmentalBiomeFeatures.addMyceliumSprouts(biome);
+        }
+        
         if (biome == Biomes.SWAMP || biome == Biomes.SWAMP_HILLS) {
             EnvironmentalBiomeFeatures.overrideFeatures(biome);
             EnvironmentalBiomeFeatures.addMushrooms(biome);

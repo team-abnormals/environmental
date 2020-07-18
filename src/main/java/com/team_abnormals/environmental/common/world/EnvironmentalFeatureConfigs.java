@@ -5,6 +5,7 @@ import com.team_abnormals.environmental.common.block.HangingWisteriaLeavesBlock;
 import com.team_abnormals.environmental.common.block.WisteriaLeavesBlock;
 import com.team_abnormals.environmental.common.world.gen.treedecorator.HangingWillowLeavesTreeDecorator;
 import com.team_abnormals.environmental.core.registry.EnvironmentalBlocks;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.state.properties.DoubleBlockHalf;
@@ -50,7 +51,8 @@ public class EnvironmentalFeatureConfigs {
     public static final BlockClusterFeatureConfig CORNFLOWER_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(Blocks.CORNFLOWER.getDefaultState()), new SimpleBlockPlacer())).tries(64).build();
     public static final BlockClusterFeatureConfig DUCKWEED_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(EnvironmentalBlocks.DUCKWEED.get().getDefaultState()), new SimpleBlockPlacer())).tries(1024).build();
     public static final BlockClusterFeatureConfig GIANT_TALL_GRASS_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(EnvironmentalBlocks.GIANT_TALL_GRASS.get().getDefaultState()), new DoublePlantBlockPlacer())).tries(256).func_227317_b_().build();
-
+    public static final BlockClusterFeatureConfig MYCELIUM_SPROUTS_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(EnvironmentalBlocks.MYCELIUM_SPROUTS.get().getDefaultState()), SimpleBlockPlacer.field_236447_c_)).tries(32).build();
+    
     public static final BaseTreeFeatureConfig WILLOW_TREE_CONFIG = (
             new BaseTreeFeatureConfig.Builder(
                     new SimpleBlockStateProvider(EnvironmentalBlocks.WILLOW_LOG.get().getDefaultState()),
@@ -77,6 +79,4 @@ public class EnvironmentalFeatureConfigs {
     public static final BaseTreeFeatureConfig WHITE_WISTERIA_NO_BEEHIVES_CONFIG = (new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(WISTERIA_LOG), new SimpleBlockStateProvider(WHITE_WISTERIA_LEAVES), null, null, null)).func_236701_a_(1).build();
     public static final BaseTreeFeatureConfig WHITE_WISTERIA_CONFIG = (new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(WISTERIA_LOG), new SimpleBlockStateProvider(WHITE_WISTERIA_LEAVES), null, null, null)).func_236703_a_(ImmutableList.of(new BeehiveTreeDecorator(0.002F))).func_236701_a_(1).build();
     public static final BaseTreeFeatureConfig WHITE_WISTERIA_MORE_BEEHIVES_CONFIG = (new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(WISTERIA_LOG), new SimpleBlockStateProvider(WHITE_WISTERIA_LEAVES), null, null, null)).func_236703_a_(ImmutableList.of(new BeehiveTreeDecorator(0.05F))).func_236701_a_(1).build();
-
-
 }
