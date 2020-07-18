@@ -11,7 +11,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -22,6 +24,8 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -83,10 +87,20 @@ public class SlabfishBucketItem extends BucketItem {
                 TextFormatting[] atextformatting = new TextFormatting[]{TextFormatting.ITALIC, TextFormatting.GRAY};
                 tooltip.add((new TranslationTextComponent("entity.environmental.slabfish." + DyeColor.byId(i).getTranslationKey() + "_backpack").func_240701_a_(atextformatting)));
             }
-            if (compoundnbt.contains("HasSweater") && compoundnbt.getBoolean("HasSweater") && compoundnbt.contains("SweaterColor", 99)) {
-                int i = compoundnbt.getInt("SweaterColor");
-                TextFormatting[] atextformatting = new TextFormatting[]{TextFormatting.ITALIC, TextFormatting.GRAY};
-                tooltip.add((new TranslationTextComponent("entity.environmental.slabfish." + DyeColor.byId(i).getTranslationKey() + "_sweater").func_240701_a_(atextformatting)));
+
+
+            ListNBT list = compoundnbt.getList("Items", 10);
+            for (int i = 0; i < list.size(); ++i)
+            {
+                CompoundNBT slotNbt = list.getCompound(i);
+                int index = slotNbt.getByte("Slot") & 255;
+                if (index == 0)
+                {
+                    Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(slotNbt.getString("id")));
+                    if(item != null && SlabfishEntity.getSweaterMap().containsKey(item))
+                        tooltip.add((new TranslationTextComponent("entity.environmental.slabfish." + SlabfishEntity.getSweaterMap().get(item).getTranslationKey() + "_sweater").func_240701_a_(TextFormatting.ITALIC, TextFormatting.GRAY)));
+                    break;
+                }
             }
         }
     }

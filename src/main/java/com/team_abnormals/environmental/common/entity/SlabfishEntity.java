@@ -189,9 +189,6 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
         compound.put("BackpackItem", itemstackTag);
 
-        compound.putBoolean("HasSweater", this.hasSweater());
-        compound.putByte("SweaterColor", (byte) this.getSweaterColor().getId());
-
         this.slabfishBackpack.write(compound);
     }
 
@@ -213,9 +210,6 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
             this.setBackpackColor(DyeColor.byId(compound.getInt("BackpackColor")));
         ItemStack backpackItem = ItemStack.read(compound.getCompound("BackpackItem"));
         this.setBackpackItem(backpackItem);
-
-        this.setSweatered(compound.getBoolean("HasSweater"));
-        if (compound.contains("SweaterColor", 99)) this.setSweaterColor(DyeColor.byId(compound.getInt("SweaterColor")));
 
         this.slabfishBackpack.read(compound);
         updateSweater();
@@ -852,15 +846,13 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
             if (dataTag.contains("BackpackColor"))
                 this.setBackpackColor(DyeColor.byId(dataTag.getInt("BackpackColor")));
 
-            if (dataTag.contains("HasSweater")) this.setSweatered(dataTag.getBoolean("HasSweater"));
-            if (dataTag.contains("SweaterColor")) this.setSweaterColor(DyeColor.byId(dataTag.getInt("SweaterColor")));
-
             if (dataTag.contains("BackpackItem")) {
                 ItemStack backpackItem = ItemStack.read(dataTag.getCompound("BackpackItem"));
                 this.setBackpackItem(backpackItem);
             }
 
             this.slabfishBackpack.read(dataTag);
+            this.updateSweater();
 
             return spawnDataIn;
         }
@@ -919,9 +911,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         this.getBackpackItem().write(itemstackTag);
         if (this.hasBackpack()) compound.put("BackpackItem", itemstackTag);
 
-        compound.putBoolean("HasSweater", this.hasSweater());
-
-        if (this.hasSweater()) compound.putByte("SweaterColor", (byte) this.getSweaterColor().getId());
+        this.slabfishBackpack.write(compound);
     }
 
     // DATA //
@@ -938,7 +928,6 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
             }
         }
     }
-
 
     public boolean hasBackpack() {
         return this.dataManager.get(HAS_BACKPACK);
