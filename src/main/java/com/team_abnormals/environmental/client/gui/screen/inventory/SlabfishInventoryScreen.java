@@ -25,7 +25,8 @@ public class SlabfishInventoryScreen extends ContainerScreen<SlabfishInventoryCo
         this.passEvents = false;
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     protected void func_230450_a_(MatrixStack p_230450_1_, float p_230450_2_, int p_230450_3_, int p_230450_4_) {
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.minecraft.getTextureManager().bindTexture(SLABFISH_GUI_TEXTURE);

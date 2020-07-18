@@ -38,7 +38,8 @@ public class SawmillScreen extends ContainerScreen<SawmillContainer> {
         this.func_230459_a_(stack, mouseX, mouseY);
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     protected void func_230450_a_(MatrixStack stack, float p_230450_2_, int p_230450_3_, int p_230450_4_) {
         this.renderBackground(stack);
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
