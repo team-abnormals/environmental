@@ -11,6 +11,7 @@ import com.team_abnormals.environmental.common.block.HangingWillowLeavesBlock;
 import com.team_abnormals.environmental.common.block.HangingWisteriaLeavesBlock;
 import com.team_abnormals.environmental.common.block.KilnBlock;
 import com.team_abnormals.environmental.common.block.MudVaseBlock;
+import com.team_abnormals.environmental.common.block.MyceliumSproutsBlock;
 import com.team_abnormals.environmental.common.block.PottedCartwheelBlock;
 import com.team_abnormals.environmental.common.block.RiceBlock;
 import com.team_abnormals.environmental.common.block.SawmillBlock;
@@ -59,6 +60,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.DoublePlantBlock;
 import net.minecraft.block.FlowerPotBlock;
+import net.minecraft.block.GrassPathBlock;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.SoundType;
@@ -341,8 +343,14 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> DUCKWEED_THATCH_STAIRS   		= HELPER.createBlock("duckweed_thatch_stairs", () -> new ThatchStairsBlock(CATTAIL_THATCH.get().getDefaultState(), EnvironmentalProperties.THATCH), ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<Block> DUCKWEED_THATCH_VERTICAL_SLAB	= HELPER.createCompatBlock("quark","duckweed_thatch_vertical_slab", () -> new ThatchVerticalSlabBlock(EnvironmentalProperties.THATCH), ItemGroup.BUILDING_BLOCKS);
 
+	// Paths //
+	
+	public static final RegistryObject<Block> PODZOL_PATH 	= HELPER.createBlock("podzol_path", () -> new GrassPathBlock(EnvironmentalProperties.PODZOL_PATH), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> MYCELIUM_PATH = HELPER.createBlock("mycelium_path", () -> new GrassPathBlock(EnvironmentalProperties.MYCELIUM_PATH), ItemGroup.DECORATIONS);
+	
 	// Plants //
 	
+	public static final RegistryObject<Block> MYCELIUM_SPROUTS = HELPER.createBlock("mycelium_sprouts", () -> new MyceliumSproutsBlock(EnvironmentalProperties.MYCELIUM_SPROUTS), ItemGroup.DECORATIONS);
 	public static final RegistryObject<Block> GIANT_TALL_GRASS = HELPER.createBlock("giant_tall_grass", () -> new DoublePlantBlock(Block.Properties.from(Blocks.TALL_GRASS)), ItemGroup.DECORATIONS);
 	
 	// Paintings //

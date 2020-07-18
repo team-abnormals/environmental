@@ -1,0 +1,9 @@
+{
+    "parent": "block/grass_path",
+    "textures": {
+        "particle": "minecraft:block/dirt",
+        "top": "environmental:block/mycelium_path_top",
+        "side": "environmental:block/mycelium_path_side",
+        "bottom": "minecraft:block/dirt"
+    }
+}

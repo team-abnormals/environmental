@@ -22,11 +22,16 @@ public class EnvironmentalProperties {
 	public static final AbstractBlock.Properties LOG 					= AbstractBlock.Properties.create(Material.WOOD, MaterialColor.BROWN).hardnessAndResistance(2.0F).sound(SoundType.WOOD);
 	public static final AbstractBlock.Properties SAPLING 				= AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0.0F).sound(SoundType.PLANT);
 	
-	public static final AbstractBlock.Properties MUD_BRICKS = AbstractBlock.Properties.create(Material.ROCK, MaterialColor.BROWN).hardnessAndResistance(1.5F, 2.5F).sound(SoundType.STONE);
 	public static final AbstractBlock.Properties CATTAIL 	= AbstractBlock.Properties.create(Material.TALL_PLANTS).hardnessAndResistance(0.0F).doesNotBlockMovement().tickRandomly().sound(SoundType.WET_GRASS);
 	public static final AbstractBlock.Properties RICE 		= AbstractBlock.Properties.create(Material.TALL_PLANTS).hardnessAndResistance(0.0F).doesNotBlockMovement().tickRandomly().sound(SoundType.CROP);
 	public static final AbstractBlock.Properties DUCKWEED 	= AbstractBlock.Properties.create(Material.PLANTS).hardnessAndResistance(0.0F).doesNotBlockMovement().sound(SoundType.CROP);
 	public static final AbstractBlock.Properties THATCH 	= AbstractBlock.Properties.create(Material.ORGANIC, MaterialColor.GREEN).hardnessAndResistance(0.5F).sound(SoundType.PLANT).harvestTool(ToolType.AXE);
+
+	public static final AbstractBlock.Properties MYCELIUM_SPROUTS 	= AbstractBlock.Properties.create(Material.TALL_PLANTS, MaterialColor.PURPLE).doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.field_235591_M_);
+	public static final AbstractBlock.Properties MYCELIUM_PATH 		= AbstractBlock.Properties.create(Material.EARTH, MaterialColor.PURPLE).hardnessAndResistance(0.65F).sound(SoundType.PLANT).setBlocksVision(EnvironmentalProperties::canSuffocate).setBlocksVision(EnvironmentalProperties::canSuffocate);
+	public static final AbstractBlock.Properties PODZOL_PATH 		= AbstractBlock.Properties.create(Material.EARTH, MaterialColor.OBSIDIAN).hardnessAndResistance(0.65F).sound(SoundType.PLANT).setBlocksVision(EnvironmentalProperties::canSuffocate).setBlocksVision(EnvironmentalProperties::canSuffocate);
+	
+	public static final AbstractBlock.Properties MUD_BRICKS = AbstractBlock.Properties.create(Material.ROCK, MaterialColor.BROWN).hardnessAndResistance(1.5F, 2.5F).sound(SoundType.STONE);
 
 	public static final AbstractBlock.Properties TERRACOTTA_BRICKS 				= AbstractBlock.Properties.create(Material.ROCK, MaterialColor.ADOBE).setRequiresTool().hardnessAndResistance(1.25F, 4.2F);
 	public static final AbstractBlock.Properties WHITE_TERRACOTTA_BRICKS 		= AbstractBlock.Properties.create(Material.ROCK, MaterialColor.WHITE_TERRACOTTA).setRequiresTool().hardnessAndResistance(1.25F, 4.2F);
@@ -62,7 +67,6 @@ public class EnvironmentalProperties {
 	}
 
 	public static final AbstractBlock.Properties FLOWER = AbstractBlock.Properties.create(Material.PLANTS).notSolid().doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.PLANT);
-	public static final AbstractBlock.Properties CANDLE = AbstractBlock.Properties.create(Material.CORAL).hardnessAndResistance(0.1F).notSolid().sound(SoundType.WOOD);
 
 	private static Boolean canSpawn(BlockState state, IBlockReader access, BlockPos pos, EntityType<?> entity) {
 		return entity == EntityType.OCELOT || entity == EntityType.PARROT;

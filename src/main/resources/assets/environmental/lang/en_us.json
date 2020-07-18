@@ -198,6 +198,9 @@
 	"block.environmental.magenta_hibiscus" : "Magenta Hibiscus",
 	"block.environmental.purple_hibiscus" : "Purple Hibiscus",
 	
+	"block.environmental.podzol_path": "Podzol Path",
+	"block.environmental.mycelium_path": "Mycelium Path",
+	"block.environmental.mycelium_sprouts": "Mycelium Sprouts",
 	"block.environmental.giant_tall_grass": "Giant Tall Grass",
 	
 	"block.environmental.rice_sack": "Rice Sack",
