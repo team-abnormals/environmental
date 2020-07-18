@@ -12,6 +12,7 @@ import com.team_abnormals.environmental.common.block.HangingWisteriaLeavesBlock;
 import com.team_abnormals.environmental.common.entity.SlabfishEntity;
 import com.team_abnormals.environmental.common.entity.util.SlabfishOverlay;
 import com.team_abnormals.environmental.common.entity.util.SlabfishType;
+import com.team_abnormals.environmental.common.item.WandererBootsItem;
 import com.team_abnormals.environmental.core.Environmental;
 import com.team_abnormals.environmental.core.registry.EnvironmentalEntities;
 import com.team_abnormals.environmental.core.registry.EnvironmentalItems;
@@ -57,8 +58,10 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.client.event.RenderNameplateEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
+import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -162,7 +165,7 @@ public class EnvironmentalEvents {
 	protected static final Map<Block, BlockState> HOE_LOOKUP = Maps.newHashMap(ImmutableMap.of(Blocks.GRASS_BLOCK, Blocks.FARMLAND.getDefaultState(), Blocks.GRASS_PATH, Blocks.FARMLAND.getDefaultState(), Blocks.DIRT, Blocks.FARMLAND.getDefaultState(), Blocks.COARSE_DIRT, Blocks.DIRT.getDefaultState()));
 
 	@SubscribeEvent
-	public static void underwaterHoe(UseHoeEvent event) {
+	public static void underWaterHoe(UseHoeEvent event) {
 		ItemStack hoe = event.getContext().getItem();
 		
 		//if (event.getResult() == Result.ALLOW) {
@@ -186,7 +189,7 @@ public class EnvironmentalEvents {
 	}
 	
 //	@SubscribeEvent
-//	public static void bonemealLilypad(RightClickBlock event) {
+//	public static void fertilizeLilypad(RightClickBlock event) {
 //		BlockPos blockPos = event.getPos();
 //		Random random = new Random();
 //		World world = event.getWorld();
@@ -227,7 +230,7 @@ public class EnvironmentalEvents {
 	}
 	
 	@SubscribeEvent
-	public static void SlabfishDeath(LivingDeathEvent event) {
+	public static void onSlabfishDeath(LivingDeathEvent event) {
 		if (event.getEntity() instanceof SlabfishEntity) {
 			SlabfishEntity entity = (SlabfishEntity)event.getEntity();
 			if (entity.getEntityWorld().getBiome(new BlockPos(entity.getPositionVec())) == Biomes.field_235252_ay_) {
@@ -265,6 +268,19 @@ public class EnvironmentalEvents {
 				}
 			}
 		}
+	}
+	
+//	@SubscribeEvent
+//	public static void playerNameEvent(PlayerEvent.NameFormat event) {
+//		if (event.getPlayer().getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() == EnvironmentalItems.THIEF_HOOD.get())
+//			event.setDisplayname("???");
+//		System.out.println(event.getDisplayname());
+//	}
+
+	@SubscribeEvent
+	public static void onFallEvent(LivingFallEvent event) {
+		if (event.getEntityLiving().getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == EnvironmentalItems.WANDERER_BOOTS.get() && event.getEntityLiving().fallDistance < 6)
+			event.setDamageMultiplier(0);
 	}
 }
 
