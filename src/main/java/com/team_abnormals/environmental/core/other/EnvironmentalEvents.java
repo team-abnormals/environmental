@@ -12,6 +12,7 @@ import com.team_abnormals.environmental.common.block.HangingWisteriaLeavesBlock;
 import com.team_abnormals.environmental.common.entity.SlabfishEntity;
 import com.team_abnormals.environmental.common.entity.util.SlabfishOverlay;
 import com.team_abnormals.environmental.common.entity.util.SlabfishType;
+import com.team_abnormals.environmental.common.item.WandererBootsItem;
 import com.team_abnormals.environmental.core.Environmental;
 import com.team_abnormals.environmental.core.registry.EnvironmentalEntities;
 import com.team_abnormals.environmental.core.registry.EnvironmentalItems;
@@ -56,8 +57,10 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.client.event.RenderNameplateEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
+import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -192,8 +195,32 @@ public class EnvironmentalEvents {
         //}
     }
 
+	@SubscribeEvent
+	public static void underWaterHoe(UseHoeEvent event) {
+		ItemStack hoe = event.getContext().getItem();
+		
+		//if (event.getResult() == Result.ALLOW) {
+			World world = event.getContext().getWorld();
+			BlockPos blockpos = event.getContext().getPos();
+			if (event.getContext().getFace() != Direction.DOWN) {
+				BlockState blockstate = HOE_LOOKUP.get(world.getBlockState(blockpos).getBlock());
+				if (blockstate != null) {
+					PlayerEntity playerentity = event.getPlayer();
+		            world.playSound(playerentity, blockpos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+		            playerentity.swingArm(event.getContext().getHand());
+		            if (!world.isRemote) {
+		            	world.setBlockState(blockpos, blockstate, 11);
+		            	if (playerentity != null) {
+		            		hoe.damageItem(1, playerentity, (anim) -> { anim.sendBreakAnimation(event.getContext().getHand()); });
+		            	}
+		            }
+				}
+			}
+		//}
+	}
+	
 //	@SubscribeEvent
-//	public static void bonemealLilypad(RightClickBlock event) {
+//	public static void fertilizeLilypad(RightClickBlock event) {
 //		BlockPos blockPos = event.getPos();
 //		Random random = new Random();
 //		World world = event.getWorld();
@@ -233,7 +260,7 @@ public class EnvironmentalEvents {
 	}
 	
 	@SubscribeEvent
-	public static void SlabfishDeath(LivingDeathEvent event) {
+	public static void onSlabfishDeath(LivingDeathEvent event) {
 		if (event.getEntity() instanceof SlabfishEntity) {
 			SlabfishEntity entity = (SlabfishEntity)event.getEntity();
 			if (entity.getEntityWorld().getBiome(new BlockPos(entity.getPositionVec())) == Biomes.field_235252_ay_) {
@@ -271,6 +298,19 @@ public class EnvironmentalEvents {
 				}
 			}
 		}
+	}
+	
+//	@SubscribeEvent
+//	public static void playerNameEvent(PlayerEvent.NameFormat event) {
+//		if (event.getPlayer().getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() == EnvironmentalItems.THIEF_HOOD.get())
+//			event.setDisplayname("???");
+//		System.out.println(event.getDisplayname());
+//	}
+
+	@SubscribeEvent
+	public static void onFallEvent(LivingFallEvent event) {
+		if (event.getEntityLiving().getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == EnvironmentalItems.WANDERER_BOOTS.get() && event.getEntityLiving().fallDistance < 6)
+			event.setDamageMultiplier(0);
 	}
 }
 
