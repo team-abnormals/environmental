@@ -12,7 +12,7 @@ import com.team_abnormals.environmental.common.block.HangingWillowLeavesBlock;
 import com.team_abnormals.environmental.common.block.HangingWisteriaLeavesBlock;
 import com.team_abnormals.environmental.common.block.KilnBlock;
 import com.team_abnormals.environmental.common.block.LargeLilyPadBlock;
-import com.team_abnormals.environmental.common.block.MudVaseBlock;
+import com.team_abnormals.environmental.common.block.SlabfishEffigyBlock;
 import com.team_abnormals.environmental.common.block.MyceliumSproutsBlock;
 import com.team_abnormals.environmental.common.block.PottedCartwheelBlock;
 import com.team_abnormals.environmental.common.block.RiceBlock;
@@ -92,7 +92,7 @@ public class EnvironmentalBlocks {
     public static final RegistryObject<Block> MUD_BRICK_SLAB = HELPER.createBlock("mud_brick_slab", () -> new SlabBlock(EnvironmentalProperties.MUD_BRICKS), ItemGroup.BUILDING_BLOCKS);
     public static final RegistryObject<Block> MUD_BRICK_WALL = HELPER.createBlock("mud_brick_wall", () -> new WallBlock(EnvironmentalProperties.MUD_BRICKS), ItemGroup.DECORATIONS);
     public static final RegistryObject<Block> MUD_BRICK_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "mud_brick_vertical_slab", () -> new VerticalSlabBlock(EnvironmentalProperties.MUD_BRICKS), ItemGroup.BUILDING_BLOCKS);
-    public static final RegistryObject<Block> MUD_VASE = HELPER.createBlock("mud_vase", () -> new MudVaseBlock(EnvironmentalProperties.FLOWER_POT), ItemGroup.DECORATIONS);
+    public static final RegistryObject<Block> SLABFISH_EFFIGY = HELPER.createBlock("slabfish_effigy", () -> new SlabfishEffigyBlock(EnvironmentalProperties.FLOWER_POT), ItemGroup.DECORATIONS);
     public static final RegistryObject<Block> MUD = HELPER.createBlockNoItem("mud", () -> new MudFluidBlock(() -> {
         return EnvironmentalFluids.FLOWING_MUD.get();
     }, Properties.create(Material.WATER).doesNotBlockMovement().hardnessAndResistance(100.0F).noDrops()));

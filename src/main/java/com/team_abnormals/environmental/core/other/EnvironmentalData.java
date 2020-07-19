@@ -109,6 +109,7 @@ public class EnvironmentalData {
 	}
 	
 	public static void setRenderLayers() {
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.SLABFISH_EFFIGY.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WILLOW_DOOR.get(),RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WILLOW_TRAPDOOR.get(),RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WILLOW_LADDER.get(),RenderType.getCutout());

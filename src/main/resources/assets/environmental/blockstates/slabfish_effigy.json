@@ -1,5 +1,8 @@
 {
     "variants": {
-        "": { "model": "environmental:block/slabfish_effigy" }
+        "facing=south": { "model": "environmental:block/slabfish_effigy" },
+        "facing=west": { "model": "environmental:block/slabfish_effigy", "y": 90 },
+        "facing=north": { "model": "environmental:block/slabfish_effigy", "y": 180 },
+        "facing=east": { "model": "environmental:block/slabfish_effigy", "y": 270 }
     }
 }

@@ -1,6 +1,6 @@
 package com.team_abnormals.environmental.common.block;
 
-import com.team_abnormals.environmental.common.tile.MudVaseTileEntity;
+import com.team_abnormals.environmental.common.tile.SlabfishEffigyTileEntity;
 import com.team_abnormals.environmental.core.registry.EnvironmentalTileEntities;
 import net.minecraft.block.*;
 import net.minecraft.entity.LivingEntity;
@@ -26,20 +26,20 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class MudVaseBlock extends ContainerBlock implements IWaterLoggable {
+public class SlabfishEffigyBlock extends ContainerBlock implements IWaterLoggable {
     protected static final VoxelShape SHAPE = Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 9.0D, 11.0D);
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final DirectionProperty HORIZONTAL_FACING = BlockStateProperties.HORIZONTAL_FACING;
 
-    public MudVaseBlock(Properties properties) {
+    public SlabfishEffigyBlock(Properties properties) {
         super(properties);
         this.setDefaultState(this.getDefaultState().with(HORIZONTAL_FACING, Direction.NORTH).with(WATERLOGGED, false));
     }
 
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         TileEntity tileentity = worldIn.getTileEntity(pos);
-        if (tileentity instanceof MudVaseTileEntity) {
-            MudVaseTileEntity mudvasetileentity = (MudVaseTileEntity) tileentity;
+        if (tileentity instanceof SlabfishEffigyTileEntity) {
+            SlabfishEffigyTileEntity mudvasetileentity = (SlabfishEffigyTileEntity) tileentity;
             ItemStack itemstack = player.getHeldItem(handIn);
             if (itemstack.isEmpty()) {
                 if (mudvasetileentity.removeItem(player, handIn)) {
@@ -60,8 +60,8 @@ public class MudVaseBlock extends ContainerBlock implements IWaterLoggable {
     public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             TileEntity tileentity = worldIn.getTileEntity(pos);
-            if (tileentity instanceof MudVaseTileEntity) {
-                InventoryHelper.dropItems(worldIn, pos, ((MudVaseTileEntity) tileentity).getInventory());
+            if (tileentity instanceof SlabfishEffigyTileEntity) {
+                InventoryHelper.dropItems(worldIn, pos, ((SlabfishEffigyTileEntity) tileentity).getInventory());
             }
 
             super.onReplaced(state, worldIn, pos, newState, isMoving);
@@ -102,8 +102,8 @@ public class MudVaseBlock extends ContainerBlock implements IWaterLoggable {
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         if (stack.hasDisplayName()) {
             TileEntity tileentity = worldIn.getTileEntity(pos);
-            if (tileentity instanceof MudVaseTileEntity) {
-                ((MudVaseTileEntity) tileentity).setCustomName(stack.getDisplayName());
+            if (tileentity instanceof SlabfishEffigyTileEntity) {
+                ((SlabfishEffigyTileEntity) tileentity).setCustomName(stack.getDisplayName());
             }
         }
     }
@@ -113,7 +113,7 @@ public class MudVaseBlock extends ContainerBlock implements IWaterLoggable {
     }
 
     public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos) {
-        return MudVaseTileEntity.calcRedstone(worldIn.getTileEntity(pos));
+        return SlabfishEffigyTileEntity.calcRedstone(worldIn.getTileEntity(pos));
     }
 
     public BlockState rotate(BlockState state, Rotation rot) {
@@ -127,6 +127,6 @@ public class MudVaseBlock extends ContainerBlock implements IWaterLoggable {
 
     @Override
     public TileEntity createNewTileEntity(IBlockReader worldIn) {
-        return EnvironmentalTileEntities.MUD_VASE.get().create();
+        return EnvironmentalTileEntities.SLABFISH_EFFIGY.get().create();
     }
 }
