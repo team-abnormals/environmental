@@ -7,9 +7,11 @@ import com.team_abnormals.environmental.common.block.CattailSproutsBlock;
 import com.team_abnormals.environmental.common.block.DoubleCattailBlock;
 import com.team_abnormals.environmental.common.block.DoubleRiceBlock;
 import com.team_abnormals.environmental.common.block.DuckweedBlock;
+import com.team_abnormals.environmental.common.block.GiantLilyPadBlock;
 import com.team_abnormals.environmental.common.block.HangingWillowLeavesBlock;
 import com.team_abnormals.environmental.common.block.HangingWisteriaLeavesBlock;
 import com.team_abnormals.environmental.common.block.KilnBlock;
+import com.team_abnormals.environmental.common.block.LargeLilyPadBlock;
 import com.team_abnormals.environmental.common.block.MudVaseBlock;
 import com.team_abnormals.environmental.common.block.MyceliumSproutsBlock;
 import com.team_abnormals.environmental.common.block.PottedCartwheelBlock;
@@ -55,6 +57,7 @@ import com.teamabnormals.abnormals_core.common.blocks.wood.WoodStairsBlock;
 import com.teamabnormals.abnormals_core.common.blocks.wood.WoodTrapDoorBlock;
 import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
 
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.AbstractBlock.Properties;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -345,6 +348,11 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> DUCKWEED_THATCH_STAIRS   		= HELPER.createBlock("duckweed_thatch_stairs", () -> new ThatchStairsBlock(CATTAIL_THATCH.get().getDefaultState(), EnvironmentalProperties.THATCH), ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<Block> DUCKWEED_THATCH_VERTICAL_SLAB	= HELPER.createCompatBlock("quark","duckweed_thatch_vertical_slab", () -> new ThatchVerticalSlabBlock(EnvironmentalProperties.THATCH), ItemGroup.BUILDING_BLOCKS);
 
+	// Lily Pads //
+	
+	public static final RegistryObject<Block> LARGE_LILY_PAD 	= HELPER.createBlockNoItem("large_lily_pad", () -> new LargeLilyPadBlock(AbstractBlock.Properties.from(Blocks.LILY_PAD)));
+	public static final RegistryObject<Block> GIANT_LILY_PAD 	= HELPER.createBlockNoItem("giant_lily_pad", () -> new GiantLilyPadBlock(AbstractBlock.Properties.from(Blocks.LILY_PAD)));
+	
 	// Paths //
 	
 	public static final RegistryObject<Block> PODZOL_PATH 	= HELPER.createBlock("podzol_path", () -> new GrassPathBlock(EnvironmentalProperties.PODZOL_PATH), ItemGroup.DECORATIONS);

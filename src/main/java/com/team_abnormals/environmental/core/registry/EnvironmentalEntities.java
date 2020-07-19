@@ -1,14 +1,18 @@
 package com.team_abnormals.environmental.core.registry;
 
+import com.team_abnormals.environmental.client.render.DuckRenderer;
 import com.team_abnormals.environmental.client.render.SlabfishRenderer;
+import com.team_abnormals.environmental.common.entity.DuckEntity;
 import com.team_abnormals.environmental.common.entity.SlabfishEntity;
 import com.team_abnormals.environmental.core.Environmental;
 import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
+
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.gen.Heightmap;
@@ -24,11 +28,14 @@ public class EnvironmentalEntities {
     public static final RegistryHelper HELPER = Environmental.REGISTRY_HELPER;
 
     public static final RegistryObject<EntityType<SlabfishEntity>> SLABFISH = HELPER.createLivingEntity("slabfish", SlabfishEntity::new, EntityClassification.CREATURE, 0.45F, 0.9F);
+    public static final RegistryObject<EntityType<DuckEntity>> DUCK = HELPER.createLivingEntity("duck", DuckEntity::new, EntityClassification.CREATURE, 0.5F, 0.8F);
+
 //	public static final RegistryObject<EntityType<AxolotlEntity>> AXOLOTL = HELPER.createLivingEntity("axolotl", AxolotlEntity::new, EntityClassification.CREATURE, 0.6F, 0.5F));
 
     @OnlyIn(Dist.CLIENT)
     public static void registerRendering() {
         RenderingRegistry.registerEntityRenderingHandler((EntityType<? extends SlabfishEntity>) SLABFISH.get(), SlabfishRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler((EntityType<? extends DuckEntity>) DUCK.get(), DuckRenderer::new);
         //RenderingRegistry.registerEntityRenderingHandler((EntityType<? extends AxolotlEntity>)AXOLOTL.get(), AxolotlRenderer::new);
     }
 
@@ -47,5 +54,6 @@ public class EnvironmentalEntities {
 
     public static void setupAttributes() {
         GlobalEntityTypeAttributes.put(SLABFISH.get(), SlabfishEntity.registerAttributes().func_233813_a_());
+        GlobalEntityTypeAttributes.put(DUCK.get(), ChickenEntity.func_234187_eI_().func_233813_a_());
     }
 }

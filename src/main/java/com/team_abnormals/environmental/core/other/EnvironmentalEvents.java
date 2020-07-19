@@ -9,6 +9,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.team_abnormals.environmental.common.block.HangingWisteriaLeavesBlock;
+import com.team_abnormals.environmental.common.block.LargeLilyPadBlock;
 import com.team_abnormals.environmental.common.entity.SlabfishEntity;
 import com.team_abnormals.environmental.common.entity.util.SlabfishOverlay;
 import com.team_abnormals.environmental.common.entity.util.SlabfishType;
@@ -34,6 +35,7 @@ import net.minecraft.entity.projectile.PotionEntity;
 import net.minecraft.entity.projectile.ProjectileItemEntity;
 import net.minecraft.entity.projectile.ThrowableEntity;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.BoneMealItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -237,30 +239,22 @@ public class EnvironmentalEvents {
 		}
 	}
 	
-//	@SubscribeEvent
-//	public static void fertilizeLilypad(RightClickBlock event) {
-//		BlockPos blockPos = event.getPos();
-//		Random random = new Random();
-//		World world = event.getWorld();
-//		BlockState state = world.getBlockState(blockPos);
-//		if (state.getBlock() == Blocks.LILY_PAD && event.getItemStack().getItem() == Items.BONE_MEAL) {
-//            if (!event.getPlayer().abilities.isCreativeMode) event.getItemStack().shrink(1);
-//			event.getPlayer().swingArm(event.getHand());
-//            BoneMealItem.spawnBonemealParticles(world, blockPos, 2);
-//            
-//			label:
-//				for(int x = 0; x < 64; ++x) {
-//					BlockPos newBlockPos = blockPos;
-//					for(int y = 0; y < x / 16; ++y) {
-//						newBlockPos = newBlockPos.add(random.nextInt(3) - 1, 0, random.nextInt(3) - 1);
-//	                    if (state.isValidPosition(world, newBlockPos) && world.isAirBlock(newBlockPos)) {
-//	                        world.setBlockState(newBlockPos, state);
-//	                        break label;
-//	                    }
-//	                }
-//	            }
-//		}
-//	}
+	@SubscribeEvent
+	public static void fertilizeLilypad(RightClickBlock event) {
+		BlockPos blockPos = event.getPos();
+		Random random = new Random();
+		World world = event.getWorld();
+		BlockState state = world.getBlockState(blockPos);
+		if (state.isIn(Blocks.LILY_PAD) && event.getItemStack().getItem() == Items.BONE_MEAL) {
+            if (!event.getPlayer().abilities.isCreativeMode) event.getItemStack().shrink(1);
+			event.getPlayer().swingArm(event.getHand());
+            BoneMealItem.spawnBonemealParticles(world, blockPos, 2);
+            if (random.nextInt(4) == 0 && LargeLilyPadBlock.checkPositions(world, blockPos, EnvironmentalBlocks.LARGE_LILY_PAD.get().getDefaultState())) {
+            	LargeLilyPadBlock.placeAt(world, blockPos, EnvironmentalBlocks.LARGE_LILY_PAD.get().getDefaultState());
+            }
+		}
+	}
+	
 	@SubscribeEvent
 	public static void onInteractWithEntity(PlayerInteractEvent.EntityInteract event){
 		ItemStack stack = event.getItemStack();
