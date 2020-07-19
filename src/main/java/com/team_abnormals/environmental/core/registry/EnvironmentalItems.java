@@ -52,6 +52,8 @@ public class EnvironmentalItems {
 	public static final RegistryObject<Item> SLABFISH_BUCKET = HELPER.createItem("slabfish_bucket", () -> new SlabfishBucketItem(() -> EnvironmentalEntities.SLABFISH.get(), () -> Fluids.WATER, new Item.Properties().group(ItemGroup.MISC).maxStackSize(1)));
 
     public static final RegistryObject<Item> SLABFISH_SPAWN_EGG = HELPER.createSpawnEggItem("slabfish", () -> EnvironmentalEntities.SLABFISH.get(), 6263617, 13940616);
+    public static final RegistryObject<Item> DUCK_SPAWN_EGG 	= HELPER.createSpawnEggItem("duck", () -> EnvironmentalEntities.DUCK.get(), 1138489, 16754947);
+
 //	public static final RegistryObject<Item> AXOLOTL_SPAWN_EGG = HELPER.createSpawnEggItem("axolotl", () -> EnvironmentalEntities.AXOLOTL.get(), 6263617, 13940616);
 
     public static void setupProperties() {

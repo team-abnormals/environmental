@@ -1,0 +1,18 @@
+{
+	"ambientocclusion": false,
+	"texture_size": [48, 48],
+	"textures": {
+		"particle": "environmental:block/giant_lily_pad",
+		"texture": "environmental:block/giant_lily_pad"
+	},
+	"elements": [
+		{
+			"from": [-16, 0.25, -16],
+			"to": [32, 0.25, 32],
+			"faces": {
+				"up": {"uv": [0, 0, 16, 16], "texture": "#texture", "tintindex": 0 },
+				"down": {"uv": [0, 16, 16, 0], "texture": "#texture", "tintindex": 0 }
+			}
+		}
+	]
+}

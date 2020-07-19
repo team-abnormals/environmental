@@ -19,11 +19,11 @@ import net.minecraft.util.text.TranslationTextComponent;
 
 import javax.annotation.Nullable;
 
-public class MudVaseTileEntity extends LockableLootTileEntity {
+public class SlabfishEffigyTileEntity extends LockableLootTileEntity {
     private NonNullList<ItemStack> inventory = NonNullList.withSize(1, ItemStack.EMPTY);
 
-    public MudVaseTileEntity() {
-        super(EnvironmentalTileEntities.MUD_VASE.get());
+    public SlabfishEffigyTileEntity() {
+        super(EnvironmentalTileEntities.SLABFISH_EFFIGY.get());
     }
 
     @Override
@@ -63,7 +63,7 @@ public class MudVaseTileEntity extends LockableLootTileEntity {
 
     @Override
     protected ITextComponent getDefaultName() {
-        return new TranslationTextComponent("container.mud_vase");
+        return new TranslationTextComponent("container.slabfish_effigy");
     }
 
     @Override

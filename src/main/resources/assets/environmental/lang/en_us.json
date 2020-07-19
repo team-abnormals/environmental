@@ -203,6 +203,9 @@
 	"block.environmental.mycelium_sprouts": "Mycelium Sprouts",
 	"block.environmental.giant_tall_grass": "Giant Tall Grass",
 	
+	"block.environmental.large_lily_pad": "Large Lily Pad",
+	"block.environmental.giant_lily_pad": "Giant Lily pad",
+	
 	"block.environmental.rice_sack": "Rice Sack",
 	"block.environmental.rice": "Rice",
 	"block.environmental.tall_rice": "Rice",
@@ -221,6 +224,7 @@
 	"item.environmental.slabfish_spawn_egg": "Slabfish Spawn Egg",
 	"item.environmental.axolotl_spawn_egg": "Axolotl Spawn Egg",
 	"item.environmental.butterfly_spawn_egg": "Butterfly Spawn Egg",
+	"item.environmental.duck_spawn_egg": "Duck Spawn Egg",
 	
 	"item.environmental.cattail_seeds": "Cattail Seeds",
 	"item.environmental.rice_ball": "Rice Ball",
@@ -256,7 +260,7 @@
     
 	"entity.environmental.slabfish": "Slabfish",
 	"entity.environmental.axolotl": "Axolotl",
-	"entity.environmental.boat": "Boat",
+	"entity.environmental.duck": "Duck",
 	"entity.environmental.butterfly": "Butterfly",
 	
 	"entity.minecraft.villager.environmental.ceramist": "Ceramist",
