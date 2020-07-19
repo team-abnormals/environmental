@@ -1,6 +1,7 @@
 package com.team_abnormals.environmental.core.other;
 
 import com.team_abnormals.environmental.common.block.fluid.MudFluid;
+import com.team_abnormals.environmental.client.particle.KilnSmokeParticle;
 import com.team_abnormals.environmental.core.Environmental;
 import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.fluid.FluidState;
@@ -11,6 +12,7 @@ import net.minecraftforge.client.event.EntityViewRenderEvent.FogDensity;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
+@OnlyIn(Dist.CLIENT)
 @EventBusSubscriber(modid = Environmental.MODID, value = Dist.CLIENT)
 public class EnvironmentalClientEvents {
 

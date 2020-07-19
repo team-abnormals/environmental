@@ -5,15 +5,7 @@ import com.team_abnormals.environmental.client.gui.screen.inventory.SawmillScree
 import com.team_abnormals.environmental.common.network.message.SOpenSlabfishInventoryMessage;
 import com.team_abnormals.environmental.core.other.EnvironmentalCompat;
 import com.team_abnormals.environmental.core.other.EnvironmentalData;
-import com.team_abnormals.environmental.core.registry.EnvironmentalBiomes;
-import com.team_abnormals.environmental.core.registry.EnvironmentalBlocks;
-import com.team_abnormals.environmental.core.registry.EnvironmentalContainerTypes;
-import com.team_abnormals.environmental.core.registry.EnvironmentalEntities;
-import com.team_abnormals.environmental.core.registry.EnvironmentalFeatures;
-import com.team_abnormals.environmental.core.registry.EnvironmentalFluids;
-import com.team_abnormals.environmental.core.registry.EnvironmentalItems;
-import com.team_abnormals.environmental.core.registry.EnvironmentalRecipes;
-import com.team_abnormals.environmental.core.registry.EnvironmentalVillagers;
+import com.team_abnormals.environmental.core.registry.*;
 import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.util.ResourceLocation;
@@ -58,17 +50,19 @@ public class Environmental {
         REGISTRY_HELPER.getDeferredEntityRegister().register(modEventBus);
         REGISTRY_HELPER.getDeferredTileEntityRegister().register(modEventBus);
         REGISTRY_HELPER.getDeferredSoundRegister().register(modEventBus);
-
+        
         EnvironmentalBlocks.PAINTINGS.register(modEventBus);
         EnvironmentalFluids.FLUIDS.register(modEventBus);
         EnvironmentalBiomes.BIOMES.register(modEventBus);
-        
+
         EnvironmentalVillagers.POI_TYPES.register(modEventBus);
         EnvironmentalVillagers.PROFESSIONS.register(modEventBus);
         
         EnvironmentalContainerTypes.CONTAINER_TYPES.register(modEventBus);
         EnvironmentalRecipes.Serailizers.RECIPE_SERIALIZERS.register(modEventBus);
-        
+
+        EnvironmentalParticles.PARTICLE_TYPES.register(modEventBus);
+
         MinecraftForge.EVENT_BUS.register(this);
 
         modEventBus.addListener((ModConfig.ModConfigEvent event) -> {
