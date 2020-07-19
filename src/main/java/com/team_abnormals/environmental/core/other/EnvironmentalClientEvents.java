@@ -1,8 +1,8 @@
 package com.team_abnormals.environmental.core.other;
 
 import com.team_abnormals.environmental.common.block.fluid.MudFluid;
-import com.team_abnormals.environmental.client.particle.KilnSmokeParticle;
 import com.team_abnormals.environmental.core.Environmental;
+
 import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.fluid.FluidState;
 import net.minecraftforge.api.distmarker.Dist;
