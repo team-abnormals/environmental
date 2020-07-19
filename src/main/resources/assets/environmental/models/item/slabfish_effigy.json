@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "environmental:item/mud_vase"
+        "layer0": "environmental:item/slabfish_effigy"
     }
 }

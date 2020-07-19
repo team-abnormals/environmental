@@ -1,8 +1,0 @@
-{
-    "variants": {
-        "facing=south": { "model": "environmental:block/mud_vase" },
-        "facing=west": { "model": "environmental:block/mud_vase", "y": 90 },
-        "facing=north": { "model": "environmental:block/mud_vase", "y": 180 },
-        "facing=east": { "model": "environmental:block/mud_vase", "y": 270 }
-    }
-}
