@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "stained_terracotta_bricks",
+  "pattern": [
+    "###",
+    "#X#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "environmental:terracotta_bricks"
+    },
+    "X": {
+      "item": "minecraft:black_dye"
+    }
+  },
+  "result": {
+    "item": "environmental:black_terracotta_bricks",
+    "count": 8
+  }
+}
