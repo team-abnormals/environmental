@@ -219,7 +219,16 @@
 	"fluid.environmental.mud": "Mud",
 	
 	"item.environmental.wanderer_boots": "Wanderer Boots",
+	"item.environmental.constructor_belt": "Constructor Belt",
 	"item.environmental.thief_hood": "Thief Hood",
+	
+	"generic.reachDistance": "Reach Distance",
+	
+	"enchantment.environmental.reaching": "Reaching",
+	"enchantment.environmental.reaching.desc": "Increases Reach Distance by 1 block per level",
+	
+	"enchantment.environmental.travelling": "Travelling",
+	"enchantment.environmental.travelling.desc": "Increases Movement Speed by 5% per level",
 	
 	"item.environmental.slabfish_spawn_egg": "Slabfish Spawn Egg",
 	"item.environmental.axolotl_spawn_egg": "Axolotl Spawn Egg",

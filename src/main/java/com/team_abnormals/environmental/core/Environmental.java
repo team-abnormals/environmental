@@ -1,13 +1,30 @@
 package com.team_abnormals.environmental.core;
 
+import static com.teamabnormals.abnormals_core.core.AbnormalsCore.NETWORK_PROTOCOL;
+
+import java.lang.reflect.Array;
+
 import com.team_abnormals.environmental.client.gui.screen.inventory.KilnScreen;
 import com.team_abnormals.environmental.client.gui.screen.inventory.SawmillScreen;
 import com.team_abnormals.environmental.common.network.message.SOpenSlabfishInventoryMessage;
 import com.team_abnormals.environmental.core.other.EnvironmentalCompat;
 import com.team_abnormals.environmental.core.other.EnvironmentalData;
-import com.team_abnormals.environmental.core.registry.*;
+import com.team_abnormals.environmental.core.registry.EnvironmentalBiomes;
+import com.team_abnormals.environmental.core.registry.EnvironmentalBlocks;
+import com.team_abnormals.environmental.core.registry.EnvironmentalContainerTypes;
+import com.team_abnormals.environmental.core.registry.EnvironmentalEnchantments;
+import com.team_abnormals.environmental.core.registry.EnvironmentalEntities;
+import com.team_abnormals.environmental.core.registry.EnvironmentalFeatures;
+import com.team_abnormals.environmental.core.registry.EnvironmentalFluids;
+import com.team_abnormals.environmental.core.registry.EnvironmentalItems;
+import com.team_abnormals.environmental.core.registry.EnvironmentalParticles;
+import com.team_abnormals.environmental.core.registry.EnvironmentalRecipes;
+import com.team_abnormals.environmental.core.registry.EnvironmentalVillagers;
 import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
+
 import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.enchantment.EnchantmentType;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -24,8 +41,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
-
-import static com.teamabnormals.abnormals_core.core.AbnormalsCore.NETWORK_PROTOCOL;
 
 @SuppressWarnings("deprecation")
 @Mod(Environmental.MODID)
@@ -54,7 +69,7 @@ public class Environmental {
         EnvironmentalBlocks.PAINTINGS.register(modEventBus);
         EnvironmentalFluids.FLUIDS.register(modEventBus);
         EnvironmentalBiomes.BIOMES.register(modEventBus);
-
+        
         EnvironmentalVillagers.POI_TYPES.register(modEventBus);
         EnvironmentalVillagers.PROFESSIONS.register(modEventBus);
         
@@ -62,6 +77,7 @@ public class Environmental {
         EnvironmentalRecipes.Serailizers.RECIPE_SERIALIZERS.register(modEventBus);
 
         EnvironmentalParticles.PARTICLE_TYPES.register(modEventBus);
+        EnvironmentalEnchantments.ENCHANTMENTS.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
 
@@ -96,6 +112,9 @@ public class Environmental {
     		EnvironmentalEntities.setupAttributes();
 
             EnvironmentalCompat.setupVanilla();
+            
+            ItemGroup.TOOLS.setRelevantEnchantmentTypes(add(ItemGroup.TOOLS.getRelevantEnchantmentTypes(), EnvironmentalEnchantments.CONSTRUCTOR_BELT));
+            ItemGroup.TOOLS.setRelevantEnchantmentTypes(add(ItemGroup.TOOLS.getRelevantEnchantmentTypes(), EnvironmentalEnchantments.WANDERER_BOOTS));
         });
     }
 
@@ -123,4 +142,16 @@ public class Environmental {
     private void registerItemColors(ColorHandlerEvent.Item event) {
         REGISTRY_HELPER.processSpawnEggColors(event);
     }
+    
+    /**
+     * @author SmellyModder(Luke Tonon)
+     */
+    public static EnchantmentType[] add(EnchantmentType[] array, EnchantmentType element) {
+		EnchantmentType[] newArray = array;
+		int arrayLength = Array.getLength(newArray);
+		Object newArrayObject = Array.newInstance(newArray.getClass().getComponentType(), arrayLength + 1);
+		System.arraycopy(array, 0, newArrayObject, 0, arrayLength);
+		newArray[newArray.length - 1] = element;
+		return newArray;
+	}
 }
