@@ -113,8 +113,8 @@ public class Environmental {
 
             EnvironmentalCompat.setupVanilla();
             
-            ItemGroup.TOOLS.setRelevantEnchantmentTypes(add(ItemGroup.TOOLS.getRelevantEnchantmentTypes(), EnvironmentalEnchantments.CONSTRUCTOR_BELT));
-            ItemGroup.TOOLS.setRelevantEnchantmentTypes(add(ItemGroup.TOOLS.getRelevantEnchantmentTypes(), EnvironmentalEnchantments.WANDERER_BOOTS));
+            ItemGroup.COMBAT.setRelevantEnchantmentTypes(add(ItemGroup.COMBAT.getRelevantEnchantmentTypes(), EnvironmentalEnchantments.CONSTRUCTOR_BELT));
+            ItemGroup.COMBAT.setRelevantEnchantmentTypes(add(ItemGroup.COMBAT.getRelevantEnchantmentTypes(), EnvironmentalEnchantments.WANDERER_BOOTS));
         });
     }
 

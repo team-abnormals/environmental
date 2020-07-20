@@ -43,6 +43,8 @@ public class WandererBootsModel<T extends LivingEntity> extends BipedModel<T> {
 		this.leftLeg.copyModelAngles(this.bipedLeftLeg);
 		this.rightLeg.copyModelAngles(this.bipedRightLeg);
 		
+		matrixStack.scale(1.1F, 1.0F, 1.1F);
+		
 		this.leftLeg.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
 		this.rightLeg.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
 	}
