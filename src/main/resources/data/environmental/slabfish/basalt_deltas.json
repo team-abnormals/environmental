@@ -1,0 +1,9 @@
+{
+  "rarity": "legendary",
+  "conditions": [
+    {
+      "type": "biome",
+      "biome": "minecraft:basalt_deltas"
+    }
+  ]
+}

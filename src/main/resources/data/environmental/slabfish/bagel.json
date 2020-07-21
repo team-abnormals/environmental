@@ -1,0 +1,13 @@
+{
+  "rarity": "uncommon",
+  "conditions": [
+    {
+      "type": "rename",
+      "names": [
+        "bagel",
+        "shyguy",
+        "shy guy"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "rarity": "rare",
+  "conditions": [
+    {
+      "type": "height",
+      "min": 0,
+      "max": 30
+    },
+    {
+      "type": "light_level",
+      "min": 0,
+      "max": 0
+    }
+  ]
+}

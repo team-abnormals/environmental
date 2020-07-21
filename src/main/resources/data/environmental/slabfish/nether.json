@@ -1,0 +1,9 @@
+{
+  "rarity": "rare",
+  "conditions": [
+    {
+      "type": "dimension",
+      "dimension": "minecraft:the_nether"
+    }
+  ]
+}

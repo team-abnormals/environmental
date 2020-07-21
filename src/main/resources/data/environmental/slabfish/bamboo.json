@@ -1,0 +1,18 @@
+{
+  "rarity": "rare",
+  "conditions": [
+    {
+      "type": "or",
+      "conditions": [
+        {
+          "type": "biome",
+          "biome": "minecraft:bamboo_jungle"
+        },
+        {
+          "type": "biome",
+          "biome": "minecraft:bamboo_jungle_hills"
+        }
+      ]
+    }
+  ]
+}

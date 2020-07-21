@@ -1,0 +1,14 @@
+{
+  "rarity": "rare",
+  "conditions": [
+    {
+      "type": "parents",
+      "parent1": "environmental:skeleton",
+      "parent2": "environmental:skeleton"
+    },
+    {
+      "type": "dimension",
+      "dimension": "minecraft:the_nether"
+    }
+  ]
+}
