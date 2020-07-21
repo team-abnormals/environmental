@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.team_abnormals.environmental.common.network.message.SSyncSlabfishTypeMessage;
 import com.team_abnormals.environmental.common.slabfish.condition.SlabfishCondition;
+import com.team_abnormals.environmental.common.slabfish.condition.SlabfishConditionContext;
 import com.team_abnormals.environmental.core.Environmental;
 import net.minecraft.client.resources.JsonReloadListener;
 import net.minecraft.profiler.IProfiler;
@@ -16,12 +17,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nullable;
-import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 /**
  * <p>Loads all slabfish from data packs as a server implementation of {@link SlabfishManager}.</p>
@@ -61,11 +61,11 @@ public class SlabfishLoader extends JsonReloadListener implements SlabfishManage
                 LOGGER.error("Parsing error loading custom slabfish " + location, e);
             }
         }));
-        parsed.put(DEFAULT_SLABFISH.getRegistryName(), DEFAULT_SLABFISH);
 
         LOGGER.info("Loaded " + parsed.size() + " Slabfish Types");
 
         this.slabfishTypes.clear();
+        this.slabfishTypes.put(DEFAULT_SLABFISH.getRegistryName(), DEFAULT_SLABFISH);
         this.slabfishTypes.putAll(parsed);
 
         if (EffectiveSide.get().isServer())
@@ -74,9 +74,15 @@ public class SlabfishLoader extends JsonReloadListener implements SlabfishManage
 
     @Nullable
     @Override
-    public SlabfishType getSlabfish(ResourceLocation registryName)
+    public SlabfishType get(ResourceLocation registryName)
     {
         return this.slabfishTypes.get(registryName);
+    }
+
+    @Override
+    public SlabfishType get(SlabfishConditionContext context)
+    {
+        return this.slabfishTypes.values().stream().filter(slabfishType -> slabfishType.test(context)).max(Comparator.comparingInt(SlabfishType::getPriority)).orElse(DEFAULT_SLABFISH);
     }
 
     @Override

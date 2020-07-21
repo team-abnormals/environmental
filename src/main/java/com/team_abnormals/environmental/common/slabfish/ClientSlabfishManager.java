@@ -1,6 +1,7 @@
 package com.team_abnormals.environmental.common.slabfish;
 
 import com.team_abnormals.environmental.common.network.message.SSyncSlabfishTypeMessage;
+import com.team_abnormals.environmental.common.slabfish.condition.SlabfishConditionContext;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
@@ -29,9 +30,15 @@ public final class ClientSlabfishManager implements SlabfishManager
 
     @Nullable
     @Override
-    public SlabfishType getSlabfish(ResourceLocation registryName)
+    public SlabfishType get(ResourceLocation registryName)
     {
         return this.slabfishTypes.get(registryName);
+    }
+
+    @Override
+    public SlabfishType get(SlabfishConditionContext context)
+    {
+        throw new UnsupportedOperationException("Client does not have access to select random slabfish based on conditions");
     }
 
     @Override

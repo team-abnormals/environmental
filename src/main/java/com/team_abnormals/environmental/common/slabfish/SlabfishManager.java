@@ -2,6 +2,7 @@ package com.team_abnormals.environmental.common.slabfish;
 
 import com.team_abnormals.environmental.common.entity.util.SlabfishRarity;
 import com.team_abnormals.environmental.common.slabfish.condition.SlabfishCondition;
+import com.team_abnormals.environmental.common.slabfish.condition.SlabfishConditionContext;
 import com.team_abnormals.environmental.core.Environmental;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IWorldReader;
@@ -30,7 +31,15 @@ public interface SlabfishManager
      * @return The slabfish type by that name or null for no slabfish under that name
      */
     @Nullable
-    SlabfishType getSlabfish(ResourceLocation registryName);
+    SlabfishType get(ResourceLocation registryName);
+
+    /**
+     * Checks through all slabfish types for a slabfish conditions that succeed in the current context.
+     *
+     * @param context The context of the slabfish
+     * @return The slabfish that that was selected to be the best fit for the context
+     */
+    SlabfishType get(SlabfishConditionContext context);
 
     /**
      * Fetches a random slabfish type by the specified {@link Predicate}.

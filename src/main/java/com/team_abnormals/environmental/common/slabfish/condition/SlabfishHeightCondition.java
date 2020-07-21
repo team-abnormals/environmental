@@ -42,7 +42,7 @@ public class SlabfishHeightCondition implements SlabfishCondition
     @SuppressWarnings("unused")
     public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context)
     {
-        if ((json.has("min") || json.has("max")) || json.has("value"))
+        if ((json.has("min") || json.has("max")) && json.has("value"))
             throw new JsonSyntaxException("Either 'min' and 'max' or 'value' can be present.");
         return json.has("value") ? new SlabfishHeightCondition(json.get("value").getAsInt(), json.get("value").getAsInt()) : new SlabfishHeightCondition(json.get("min").getAsInt(), json.get("max").getAsInt());
     }

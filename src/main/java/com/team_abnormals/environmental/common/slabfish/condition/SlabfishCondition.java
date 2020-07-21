@@ -7,8 +7,6 @@ import com.team_abnormals.environmental.common.slabfish.SlabfishType;
 import java.lang.reflect.Type;
 import java.util.function.Predicate;
 
-// TODO use slabfish type context or smth
-
 /**
  * <p>A condition that can be used to determine whether or not a {@link SlabfishType} can be added.</p>
  *
