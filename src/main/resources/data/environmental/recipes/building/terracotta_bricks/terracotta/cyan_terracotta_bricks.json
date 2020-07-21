@@ -1,16 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
+  "group": "stained_terracotta_bricks",
   "pattern": [
     "##",
     "##"
   ],
   "key": {
     "#": {
-      "item": "minecraft:terracotta"
+      "item": "minecraft:cyan_terracotta"
     }
   },
   "result": {
-    "item": "environmental:terracotta_bricks",
+    "item": "environmental:cyan_terracotta_bricks",
     "count": 4
   }
 }
