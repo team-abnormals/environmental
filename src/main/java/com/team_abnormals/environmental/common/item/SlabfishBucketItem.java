@@ -74,6 +74,7 @@ public class SlabfishBucketItem extends BucketItem {
         }
     }
 
+    @Deprecated
     @Override
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {

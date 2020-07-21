@@ -62,6 +62,7 @@ public enum SlabfishType implements IStringSerializable {
     BASALT_DELTAS(50, "basalt_deltas", SlabfishRarity.LEGENDARY),
     BMO(51, "bmo", SlabfishRarity.UNCOMMON);
 
+    @Deprecated
     private static final SlabfishType[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(SlabfishType::getId)).toArray(SlabfishType[]::new);
     private final int id;
     private final String name;

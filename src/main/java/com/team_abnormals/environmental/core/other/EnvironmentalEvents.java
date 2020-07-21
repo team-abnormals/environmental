@@ -270,13 +270,14 @@ public class EnvironmentalEvents {
 			}
 		}
 	}
-	
+
+	@Deprecated
 	@SubscribeEvent
 	public static void onSlabfishDeath(LivingDeathEvent event) {
 		if (event.getEntity() instanceof SlabfishEntity) {
 			SlabfishEntity entity = (SlabfishEntity)event.getEntity();
 			if (entity.getEntityWorld().getBiome(new BlockPos(entity.getPositionVec())) == Biomes.field_235252_ay_) {
-				if (entity.getSlabfishType() != SlabfishType.GHOST) {
+				if (entity.getSlabfishTypeOld() != SlabfishType.GHOST) {
 					if(entity.getEntityWorld().isRemote()) {
 						Random rand = new Random();
 						
@@ -298,7 +299,7 @@ public class EnvironmentalEvents {
 						ghost.setLocationAndAngles(entity.getPosX(), entity.getPosY(), entity.getPosZ(), entity.rotationYaw, entity.rotationPitch);
 						ghost.setNoAI(((MobEntity) entity).isAIDisabled());
 			    		ghost.setGrowingAge(entity.getGrowingAge());
-			    		ghost.setSlabfishType(SlabfishType.GHOST);
+			    		ghost.setSlabfishTypeOld(SlabfishType.GHOST);
 						ghost.setFire(0);
 			    		if(entity.hasCustomName()) {
 			    			ghost.setCustomName(entity.getCustomName());

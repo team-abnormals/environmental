@@ -68,16 +68,17 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.network.NetworkHooks;
-import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
 import java.util.*;
 
 public class SlabfishEntity extends TameableEntity implements IInventoryChangedListener, IBucketableEntity, IEndimatedEntity {
-    private static final DataParameter<Integer> SLABFISH_TYPE = EntityDataManager.createKey(SlabfishEntity.class, DataSerializers.VARINT);
+    @Deprecated
+    private static final DataParameter<Integer> SLABFISH_TYPE_OLD = EntityDataManager.createKey(SlabfishEntity.class, DataSerializers.VARINT);
     private static final DataParameter<Integer> SLABFISH_OVERLAY = EntityDataManager.createKey(SlabfishEntity.class, DataSerializers.VARINT);
-    private static final DataParameter<Integer> PRE_NAME_TYPE = EntityDataManager.createKey(SlabfishEntity.class, DataSerializers.VARINT);
+    @Deprecated
+    private static final DataParameter<Integer> PRE_NAME_TYPE_OLD = EntityDataManager.createKey(SlabfishEntity.class, DataSerializers.VARINT);
     private static final DataParameter<Boolean> FROM_BUCKET = EntityDataManager.createKey(SlabfishEntity.class, DataSerializers.BOOLEAN);
 
     private static final DataParameter<Boolean> HAS_BACKPACK = EntityDataManager.createKey(SlabfishEntity.class, DataSerializers.BOOLEAN);
@@ -116,6 +117,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
     public boolean isPartying = false;
     BlockPos jukeboxPosition;
 
+    @Deprecated
     private static final Map<List<String>, SlabfishType> NAMES = Util.make(Maps.newHashMap(), (skins) -> {
         skins.put(Arrays.asList("cameron", "cam", "cringe"), SlabfishType.CAMERON);
         skins.put(Arrays.asList("bagel", "shyguy", "shy guy", "bagielo"), SlabfishType.BAGEL);
@@ -161,9 +163,9 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
     @Override
     protected void registerData() {
         super.registerData();
-        this.getDataManager().register(SLABFISH_TYPE, 0);
+        this.getDataManager().register(SLABFISH_TYPE_OLD, 0);
         this.getDataManager().register(SLABFISH_OVERLAY, 0);
-        this.getDataManager().register(PRE_NAME_TYPE, 0);
+        this.getDataManager().register(PRE_NAME_TYPE_OLD, 0);
         this.getDataManager().register(FROM_BUCKET, false);
 
         this.getDataManager().register(HAS_BACKPACK, false);
@@ -177,9 +179,9 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
     @Override
     public void writeAdditional(CompoundNBT compound) {
         super.writeAdditional(compound);
-        compound.putInt("SlabfishType", this.getSlabfishType().getId());
+        compound.putInt("SlabfishType", this.getSlabfishTypeOld().getId());
         compound.putInt("SlabfishOverlay", this.getSlabfishOverlay().getId());
-        compound.putInt("PreNameType", this.getPreNameType().getId());
+        compound.putInt("PreNameType", this.getPreNameTypeOld().getId());
         compound.putBoolean("FromBucket", this.isFromBucket());
 
         compound.putBoolean("HasBackpack", this.hasBackpack());
@@ -200,9 +202,9 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
     @Override
     public void readAdditional(CompoundNBT compound) {
         super.readAdditional(compound);
-        this.setSlabfishType(SlabfishType.byId(compound.getInt("SlabfishType")));
+        this.setSlabfishTypeOld(SlabfishType.byId(compound.getInt("SlabfishType")));
         this.setSlabfishOverlay(SlabfishOverlay.byId(compound.getInt("SlabfishOverlay")));
-        this.setPreNameType(SlabfishType.byId(compound.getInt("PreNameType")));
+        this.setPreNameTypeOld(SlabfishType.byId(compound.getInt("PreNameType")));
         this.setFromBucket(compound.getBoolean("FromBucket"));
 
         this.setBackpacked(compound.getBoolean("HasBackpack"));
@@ -438,9 +440,9 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
             if (player instanceof ServerPlayerEntity) {
                 ServerPlayerEntity serverplayerentity = (ServerPlayerEntity) player;
                 if (!world.isRemote()) {
-                    if (this.getSlabfishType() == SlabfishType.SWAMP)
+                    if (this.getSlabfishTypeOld() == SlabfishType.SWAMP)
                         EnvironmentalCriteriaTriggers.SWAMP_SLABFISH.trigger(serverplayerentity);
-                    if (this.getSlabfishType() == SlabfishType.MARSH)
+                    if (this.getSlabfishTypeOld() == SlabfishType.MARSH)
                         EnvironmentalCriteriaTriggers.MARSH_SLABFISH.trigger(serverplayerentity);
                 }
             }
@@ -549,8 +551,8 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
     @Override
     public SlabfishEntity createChild(AgeableEntity ageable) {
         SlabfishEntity baby = EnvironmentalEntities.SLABFISH.get().create(this.world);
-        baby.setSlabfishType(this.getSlabfishType());
-        baby.setPreNameType(this.getSlabfishType());
+        baby.setSlabfishTypeOld(this.getSlabfishTypeOld());
+        baby.setPreNameTypeOld(this.getSlabfishTypeOld());
         return baby;
     }
 
@@ -602,6 +604,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
     // SLABFISH TYPE //
 
+    @Deprecated
     public SlabfishType getTypeForConditions(IWorld world) {
         BlockPos pos = new BlockPos(this.getPositionVec());
         Biome biome = world.getBiome(pos);
@@ -690,6 +693,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         return SlabfishType.SWAMP;
     }
 
+    @Deprecated
     public SlabfishType getRandomType() {
         boolean flag = false;
         SlabfishType type = SlabfishType.SWAMP;
@@ -715,56 +719,59 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         return type;
     }
 
+    @Deprecated
     public Biome findBiome(String modid, String name) {
         return ForgeRegistries.BIOMES.getValue(new ResourceLocation(modid, name));
     }
 
+    @Deprecated
     public SlabfishType getTypeForBreeding(IWorld world, SlabfishEntity parent1, SlabfishEntity parent2) {
         BlockPos pos = new BlockPos(this.getPositionVec());
         Biome biome = world.getBiome(pos);
 
-        if (parent1.getSlabfishType() == SlabfishType.SKELETON && parent2.getSlabfishType() == SlabfishType.SKELETON) {
+        if (parent1.getSlabfishTypeOld() == SlabfishType.SKELETON && parent2.getSlabfishTypeOld() == SlabfishType.SKELETON) {
             if (world.getWorld().func_234922_V_() == DimensionType.field_236000_d_) return SlabfishType.WITHER;
             if (world.getBiome(pos).getCategory() == Biome.Category.ICY) return SlabfishType.STRAY;
         }
 
         if (this.getTypeForConditions(world) == SlabfishType.SWAMP && biome.getCategory() != Biome.Category.SWAMP) {
             if (rand.nextBoolean()) {
-                return parent1.getSlabfishType();
+                return parent1.getSlabfishTypeOld();
             } else {
-                return parent2.getSlabfishType();
+                return parent2.getSlabfishTypeOld();
             }
         } else {
             if (rand.nextBoolean()) {
                 return this.getTypeForConditions(world);
             } else {
                 if (rand.nextBoolean()) {
-                    return parent1.getSlabfishType();
+                    return parent1.getSlabfishTypeOld();
                 } else {
-                    return parent2.getSlabfishType();
+                    return parent2.getSlabfishTypeOld();
                 }
             }
         }
     }
 
+    @Deprecated
     public void setCustomName(@Nullable ITextComponent name) {
         super.setCustomName(name);
-        if (name != null && this.getSlabfishType() != SlabfishType.GHOST) {
+        if (name != null && this.getSlabfishTypeOld() != SlabfishType.GHOST) {
             super.setCustomName(name);
             for (Map.Entry<List<String>, SlabfishType> entries : NAMES.entrySet()) {
                 if (entries.getKey().contains(name.getString().toLowerCase().trim())) {
-                    if (this.getSlabfishType() == entries.getValue()) {
+                    if (this.getSlabfishTypeOld() == entries.getValue()) {
                         return;
                     }
-                    if (!NAMES.containsValue(this.getSlabfishType())) {
-                        this.setPreNameType(this.getSlabfishType());
+                    if (!NAMES.containsValue(this.getSlabfishTypeOld())) {
+                        this.setPreNameTypeOld(this.getSlabfishTypeOld());
                     }
-                    this.setSlabfishType(entries.getValue());
+                    this.setSlabfishTypeOld(entries.getValue());
                     return;
                 }
             }
-            if (this.getSlabfishType() != this.getPreNameType()) {
-                this.setSlabfishType(this.getPreNameType());
+            if (this.getSlabfishTypeOld() != this.getPreNameTypeOld()) {
+                this.setSlabfishTypeOld(this.getPreNameTypeOld());
             }
         }
     }
@@ -774,38 +781,43 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         this.particleCloud(ParticleTypes.CAMPFIRE_COSY_SMOKE);
     }
 
+    @Deprecated
     public void onStruckByLightning(LightningBoltEntity lightningBolt) {
         UUID uuid = lightningBolt.getUniqueID();
-        if (!uuid.equals(this.lightningUUID) && this.getSlabfishType() != SlabfishType.GHOST) {
-            if (this.getSlabfishType() == SlabfishType.MUSHROOM) {
-                this.setSlabfishType(SlabfishType.BROWN_MUSHROOM);
-                this.setPreNameType(SlabfishType.BROWN_MUSHROOM);
-            } else if (this.getSlabfishType() == SlabfishType.BROWN_MUSHROOM) {
-                this.setSlabfishType(SlabfishType.MUSHROOM);
-                this.setPreNameType(SlabfishType.MUSHROOM);
+        if (!uuid.equals(this.lightningUUID) && this.getSlabfishTypeOld() != SlabfishType.GHOST) {
+            if (this.getSlabfishTypeOld() == SlabfishType.MUSHROOM) {
+                this.setSlabfishTypeOld(SlabfishType.BROWN_MUSHROOM);
+                this.setPreNameTypeOld(SlabfishType.BROWN_MUSHROOM);
+            } else if (this.getSlabfishTypeOld() == SlabfishType.BROWN_MUSHROOM) {
+                this.setSlabfishTypeOld(SlabfishType.MUSHROOM);
+                this.setPreNameTypeOld(SlabfishType.MUSHROOM);
             } else {
-                this.setSlabfishType(SlabfishType.SKELETON);
-                this.setPreNameType(SlabfishType.SKELETON);
+                this.setSlabfishTypeOld(SlabfishType.SKELETON);
+                this.setPreNameTypeOld(SlabfishType.SKELETON);
             }
             this.lightningUUID = uuid;
             this.playSound(SoundEvents.ENTITY_LIGHTNING_BOLT_THUNDER, 2.0F, 1.0F);
         }
     }
 
-    public SlabfishType getSlabfishType() {
-        return SlabfishType.byId(this.dataManager.get(SLABFISH_TYPE));
+    @Deprecated
+    public SlabfishType getSlabfishTypeOld() {
+        return SlabfishType.byId(this.dataManager.get(SLABFISH_TYPE_OLD));
     }
 
-    public void setSlabfishType(SlabfishType typeId) {
-        this.dataManager.set(SLABFISH_TYPE, typeId.getId());
+    @Deprecated
+    public void setSlabfishTypeOld(SlabfishType typeId) {
+        this.dataManager.set(SLABFISH_TYPE_OLD, typeId.getId());
     }
 
-    public SlabfishType getPreNameType() {
-        return SlabfishType.byId(this.dataManager.get(PRE_NAME_TYPE));
+    @Deprecated
+    public SlabfishType getPreNameTypeOld() {
+        return SlabfishType.byId(this.dataManager.get(PRE_NAME_TYPE_OLD));
     }
 
-    public void setPreNameType(SlabfishType typeId) {
-        this.dataManager.set(PRE_NAME_TYPE, typeId.getId());
+    @Deprecated
+    public void setPreNameTypeOld(SlabfishType typeId) {
+        this.dataManager.set(PRE_NAME_TYPE_OLD, typeId.getId());
     }
 
     @Nullable
@@ -817,11 +829,11 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         if (dataTag != null && dataTag.contains("SlabfishType", 3)) {
             if (dataTag.contains("Health")) this.setHealth(dataTag.getFloat("Health"));
             if (dataTag.contains("Age")) this.setGrowingAge(dataTag.getInt("Age"));
-            this.setSlabfishType(SlabfishType.byId(dataTag.getInt("SlabfishType")));
+            this.setSlabfishTypeOld(SlabfishType.byId(dataTag.getInt("SlabfishType")));
             if (dataTag.contains("PreNameType")) {
-                this.setPreNameType(SlabfishType.byId(dataTag.getInt("PreNameType")));
+                this.setPreNameTypeOld(SlabfishType.byId(dataTag.getInt("PreNameType")));
             } else {
-                this.setPreNameType(SlabfishType.byId(dataTag.getInt("SlabfishType")));
+                this.setPreNameTypeOld(SlabfishType.byId(dataTag.getInt("SlabfishType")));
             }
 
             if (dataTag.contains("HasBackpack")) this.setBackpacked(dataTag.getBoolean("HasBackpack"));
@@ -845,8 +857,8 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
             spawnDataIn = new SlabfishEntity.SlabfishData(type);
         }
 
-        this.setSlabfishType(type);
-        this.setPreNameType(type);
+        this.setSlabfishTypeOld(type);
+        this.setPreNameTypeOld(type);
         return spawnDataIn;
     }
 
@@ -884,8 +896,8 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         compound.putFloat("Health", this.getHealth());
         compound.putInt("Age", this.getGrowingAge());
 
-        compound.putInt("SlabfishType", this.getSlabfishType().getId());
-        compound.putInt("PreNameType", this.getPreNameType().getId());
+        compound.putInt("SlabfishType", this.getSlabfishTypeOld().getId());
+        compound.putInt("PreNameType", this.getPreNameTypeOld().getId());
 
         compound.putBoolean("HasBackpack", this.hasBackpack());
         if (this.hasBackpack()) compound.putByte("BackpackColor", (byte) this.getBackpackColor().getId());

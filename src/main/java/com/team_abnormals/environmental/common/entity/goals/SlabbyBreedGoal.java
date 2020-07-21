@@ -81,14 +81,15 @@ public class SlabbyBreedGoal extends Goal {
         return SlabfishEntity;
     }
 
+    @Deprecated
     protected void spawnBaby() {
         Random rand = new Random();
         SlabfishEntity slabby = this.animal.createChild(this.targetMate);
-        slabby.setSlabfishType(animal.getTypeForBreeding(animal.world, this.animal, this.targetMate));
+        slabby.setSlabfishTypeOld(animal.getTypeForBreeding(animal.world, this.animal, this.targetMate));
         if (this.animal.getLoveCause().getStats().getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)) >= 72000 && animal.world.isNightTime()) {
-            if (rand.nextInt(4) == 0) slabby.setSlabfishType(SlabfishType.NIGHTMARE);
+            if (rand.nextInt(4) == 0) slabby.setSlabfishTypeOld(SlabfishType.NIGHTMARE);
         }
-        slabby.setPreNameType(slabby.getSlabfishType());
+        slabby.setPreNameTypeOld(slabby.getSlabfishTypeOld());
         final net.minecraftforge.event.entity.living.BabyEntitySpawnEvent event = new net.minecraftforge.event.entity.living.BabyEntitySpawnEvent(animal, targetMate, slabby);
         final boolean cancelled = net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event);
         slabby = (SlabfishEntity) event.getChild();
