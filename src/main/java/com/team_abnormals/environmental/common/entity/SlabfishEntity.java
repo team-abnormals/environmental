@@ -111,6 +111,7 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class SlabfishEntity extends TameableEntity implements IInventoryChangedListener, IBucketableEntity, IEndimatedEntity {
@@ -1024,7 +1025,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
             player.closeScreen();
 
         player.getNextWindowId();
-        Environmental.CHANNEL.sendToServer(new SOpenSlabfishInventoryMessage(this, player.currentWindowId));
+        Environmental.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new SOpenSlabfishInventoryMessage(this, player.currentWindowId));
         player.openContainer = new SlabfishInventoryContainer(player.currentWindowId, player.inventory, this.slabfishBackpack, this);
         player.openContainer.addListener(player);
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.entity.player.PlayerContainerEvent.Open(player, player.openContainer));
