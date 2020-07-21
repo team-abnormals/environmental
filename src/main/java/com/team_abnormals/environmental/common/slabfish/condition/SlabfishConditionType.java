@@ -12,7 +12,7 @@ import java.util.function.BiFunction;
  */
 public enum SlabfishConditionType
 {
-    OR(SlabfishOrCondition::deserialize), RENAME(SlabfishRenameCondition::deserialize);//, BIOME, HEIGHT, LIGHT_LEVEL, LIGHTNING, DIMENSION, PARENTS, RAID;
+    OR(SlabfishOrCondition::deserialize), RENAME(SlabfishRenameCondition::deserialize), BIOME(SlabfishBiomeCondition::deserialize);//, HEIGHT, LIGHT_LEVEL, LIGHTNING, DIMENSION, PARENTS, RAID;
 
     private final BiFunction<JsonObject, JsonDeserializationContext, SlabfishCondition> jsonDeserializer;
 

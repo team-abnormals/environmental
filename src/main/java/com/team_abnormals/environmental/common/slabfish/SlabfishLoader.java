@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 public class SlabfishLoader extends JsonReloadListener implements SlabfishManager
 {
     private static final Logger LOGGER = LogManager.getLogger();
-    private static final Gson GSON = new GsonBuilder().registerTypeAdapter(SlabfishType.class, new SlabfishType.Deserializer()).registerTypeAdapter(SlabfishCondition.class, new SlabfishCondition.Deserializer()).create();
+    private static final Gson GSON = new GsonBuilder().registerTypeAdapter(ResourceLocation.class, new ResourceLocation.Serializer()).registerTypeAdapter(SlabfishType.class, new SlabfishType.Deserializer()).registerTypeAdapter(SlabfishCondition.class, new SlabfishCondition.Deserializer()).create();
     static SlabfishLoader instance;
 
     private final Map<ResourceLocation, SlabfishType> slabfishTypes;

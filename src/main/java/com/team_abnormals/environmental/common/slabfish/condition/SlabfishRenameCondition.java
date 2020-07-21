@@ -2,6 +2,11 @@ package com.team_abnormals.environmental.common.slabfish.condition;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
+import jdk.nashorn.internal.runtime.regexp.joni.Regex;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * <p>A {@link SlabfishCondition} that returns <code>true</code> if any of the slabfish names are met.</p>
@@ -10,13 +15,24 @@ import com.google.gson.JsonObject;
  */
 public class SlabfishRenameCondition implements SlabfishCondition
 {
-    private final String[] names;
-    private final boolean caseSensitive;
+    private final Pattern pattern;
 
-    public SlabfishRenameCondition(String[] names, boolean caseSensitive)
+    private SlabfishRenameCondition(Pattern pattern)
     {
-        this.names = names;
-        this.caseSensitive = caseSensitive;
+        this.pattern = pattern;
+    }
+
+    private SlabfishRenameCondition(String[] names, boolean caseSensitive)
+    {
+        StringBuilder regexBuilder = new StringBuilder();
+        for (int i = 0; i < names.length; i++)
+        {
+            regexBuilder.append("\\b").append(names[i]);
+            if (i < names.length - 1)
+                regexBuilder.append("|");
+        }
+
+        this.pattern = Pattern.compile(regexBuilder.toString(), (!caseSensitive ? Pattern.CASE_INSENSITIVE : 0) | Pattern.UNICODE_CASE);
     }
 
     @Override
@@ -28,10 +44,7 @@ public class SlabfishRenameCondition implements SlabfishCondition
     @Override
     public boolean test(SlabfishConditionContext context)
     {
-        for (String name : this.names)
-            if (this.caseSensitive ? name.equals(context.getName()) : name.equalsIgnoreCase(context.getName()))
-                return true;
-        return false;
+        return this.pattern.matcher(context.getName()).matches();
     }
 
     /**
@@ -43,6 +56,8 @@ public class SlabfishRenameCondition implements SlabfishCondition
      */
     public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context)
     {
-        return new SlabfishRenameCondition(context.deserialize(json.get("names"), String[].class), json.has("caseSensitive") && json.get("caseSensitive").getAsBoolean());
+        if (json.has("regex") && (json.has("names") || json.has("caseSensitive")))
+            throw new JsonSyntaxException("Either 'regex' or 'names' and 'caseSensitive' can be present.");
+        return json.has("regex") ? new SlabfishRenameCondition(Pattern.compile(json.get("regex").getAsString())) : new SlabfishRenameCondition(context.deserialize(json.get("names"), String[].class), json.has("caseSensitive") && json.get("caseSensitive").getAsBoolean());
     }
 }
