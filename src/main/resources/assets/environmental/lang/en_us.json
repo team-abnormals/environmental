@@ -218,9 +218,9 @@
 	
 	"fluid.environmental.mud": "Mud",
 	
-	"item.environmental.wanderer_boots": "Wanderer Boots",
-	"item.environmental.constructor_belt": "Constructor Belt",
-	"item.environmental.thief_hood": "Thief Hood",
+	"item.environmental.wanderer_boots": "Wanderer's Boots",
+	"item.environmental.constructor_belt": "Constructor's Belt",
+	"item.environmental.thief_hood": "Thief's Hood",
 	
 	"generic.reachDistance": "Reach Distance",
 	
