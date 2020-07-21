@@ -39,7 +39,6 @@ public class ClientNetworkHandler
 
     public static void handleSyncSlabfishType(SSyncSlabfishTypeMessage msg, NetworkEvent.Context ctx)
     {
-        System.out.println("Received slabfish types. Sending response to server.");
-        Environmental.LOGIN.reply(new CAcknowledgeEnvironmentalMessage(), ctx);
+        System.out.println("TEST Received slabfish types");
     }
 }

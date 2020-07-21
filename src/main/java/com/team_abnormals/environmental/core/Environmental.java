@@ -144,29 +144,33 @@ public class Environmental
 
     private void setupPlayMessages()
     {
-        int id = -1;
-
-        PLAY.messageBuilder(SOpenSlabfishInventoryMessage.class, id++)
+        PLAY.messageBuilder(SOpenSlabfishInventoryMessage.class, 0, NetworkDirection.PLAY_TO_CLIENT)
                 .encoder(SOpenSlabfishInventoryMessage::serialize).decoder(SOpenSlabfishInventoryMessage::deserialize)
                 .consumer(SOpenSlabfishInventoryMessage::handle)
                 .add();
+
+        PLAY.messageBuilder(SSyncSlabfishTypeMessage.class, 1, NetworkDirection.PLAY_TO_CLIENT).
+                encoder(SSyncSlabfishTypeMessage::serialize).
+                decoder(SSyncSlabfishTypeMessage::deserialize).
+                consumer(SSyncSlabfishTypeMessage::handlePlay).
+                add();
     }
 
     private void setupLoginMessages()
     {
         LOGIN.messageBuilder(CAcknowledgeEnvironmentalMessage.class, 99, NetworkDirection.LOGIN_TO_SERVER).
                 loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex).
-                decoder(CAcknowledgeEnvironmentalMessage::deserialize).
                 encoder(CAcknowledgeEnvironmentalMessage::serialize).
+                decoder(CAcknowledgeEnvironmentalMessage::deserialize).
                 consumer(FMLHandshakeHandler.indexFirst(CAcknowledgeEnvironmentalMessage::handle)).
                 add();
 
         LOGIN.messageBuilder(SSyncSlabfishTypeMessage.class, 0, NetworkDirection.LOGIN_TO_CLIENT).
                 loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex).
-                decoder(SSyncSlabfishTypeMessage::deserialize).
                 encoder(SSyncSlabfishTypeMessage::serialize).
+                decoder(SSyncSlabfishTypeMessage::deserialize).
                 markAsLoginPacket().
-                consumer(FMLHandshakeHandler.biConsumerFor(SSyncSlabfishTypeMessage::handle)).
+                consumer(FMLHandshakeHandler.biConsumerFor((__, msg, ctx) -> SSyncSlabfishTypeMessage.handleLogin(msg, ctx))).
                 add();
 
 //        PLAY.messageBuilder(SOpenSlabfishInventoryMessage.class, id++)

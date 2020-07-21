@@ -62,14 +62,12 @@ public enum SlabfishType implements IStringSerializable {
     BASALT_DELTAS(50, "basalt_deltas", SlabfishRarity.LEGENDARY),
     BMO(51, "bmo", SlabfishRarity.UNCOMMON);
 
-    private static final SlabfishType[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(SlabfishType::getId)).toArray((array) -> {
-        return new SlabfishType[array];
-    });
+    private static final SlabfishType[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(SlabfishType::getId)).toArray(SlabfishType[]::new);
     private final int id;
     private final String name;
     private final SlabfishRarity rarity;
 
-    private SlabfishType(int idIn, String name, SlabfishRarity rarity) {
+    SlabfishType(int idIn, String name, SlabfishRarity rarity) {
         this.id = idIn;
         this.name = name;
         this.rarity = rarity;

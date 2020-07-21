@@ -1,13 +1,5 @@
 package com.team_abnormals.environmental.common.entity;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-import javax.annotation.Nullable;
-
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Maps;
@@ -24,37 +16,18 @@ import com.team_abnormals.environmental.common.network.message.SOpenSlabfishInve
 import com.team_abnormals.environmental.core.Environmental;
 import com.team_abnormals.environmental.core.other.EnvironmentalCriteriaTriggers;
 import com.team_abnormals.environmental.core.other.EnvironmentalTags;
-import com.team_abnormals.environmental.core.registry.EnvironmentalBiomes;
-import com.team_abnormals.environmental.core.registry.EnvironmentalBlocks;
-import com.team_abnormals.environmental.core.registry.EnvironmentalEntities;
-import com.team_abnormals.environmental.core.registry.EnvironmentalItems;
-import com.team_abnormals.environmental.core.registry.EnvironmentalSounds;
+import com.team_abnormals.environmental.core.registry.*;
 import com.teamabnormals.abnormals_core.core.library.api.IBucketableEntity;
 import com.teamabnormals.abnormals_core.core.library.endimator.Endimation;
 import com.teamabnormals.abnormals_core.core.library.endimator.entity.IEndimatedEntity;
-
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.AgeableEntity;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntitySize;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ILivingEntityData;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.Pose;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.AvoidEntityGoal;
-import net.minecraft.entity.ai.goal.LookAtGoal;
-import net.minecraft.entity.ai.goal.LookRandomlyGoal;
-import net.minecraft.entity.ai.goal.RandomWalkingGoal;
-import net.minecraft.entity.ai.goal.SitGoal;
-import net.minecraft.entity.ai.goal.SwimGoal;
-import net.minecraft.entity.ai.goal.TemptGoal;
+import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.item.BoatEntity;
 import net.minecraft.entity.item.ItemEntity;
@@ -65,14 +38,7 @@ import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.IInventoryChangedListener;
 import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.DyeColor;
-import net.minecraft.item.DyeItem;
-import net.minecraft.item.EggItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.NameTagItem;
-import net.minecraft.item.SpawnEggItem;
+import net.minecraft.item.*;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
@@ -87,16 +53,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EntityPredicates;
-import net.minecraft.util.Hand;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.Util;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
@@ -111,7 +68,11 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import javax.annotation.Nullable;
+import java.util.*;
 
 public class SlabfishEntity extends TameableEntity implements IInventoryChangedListener, IBucketableEntity, IEndimatedEntity {
     private static final DataParameter<Integer> SLABFISH_TYPE = EntityDataManager.createKey(SlabfishEntity.class, DataSerializers.VARINT);
@@ -733,27 +694,9 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         boolean flag = false;
         SlabfishType type = SlabfishType.SWAMP;
         float chance = rand.nextFloat();
-        SlabfishRarity rarity = SlabfishRarity.COMMON;
+        SlabfishRarity rarity = SlabfishRarity.byChance(chance);
 
-        if (chance > 0.45) {
-            if (chance > 0.75) {
-                if (chance > 0.90) {
-                    if (chance > 0.98) {
-                        rarity = SlabfishRarity.LEGENDARY;
-                    } else {
-                        rarity = SlabfishRarity.EPIC;
-                    }
-                } else {
-                    rarity = SlabfishRarity.RARE;
-                }
-            } else {
-                rarity = SlabfishRarity.UNCOMMON;
-            }
-        } else {
-            rarity = SlabfishRarity.COMMON;
-        }
-
-        while (flag == false) {
+        while (!flag) {
             type = SlabfishType.getRandomFromRarity(rarity, rand);
             if ((type == SlabfishType.DUNES || type == SlabfishType.ROSEWOOD) && !ModList.get().isLoaded("atmospheric")) {
                 flag = false;

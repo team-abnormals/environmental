@@ -3,16 +3,26 @@ package com.team_abnormals.environmental.common.slabfish;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
+import com.team_abnormals.environmental.common.entity.util.SlabfishRarity;
+import com.team_abnormals.environmental.common.network.message.SSyncSlabfishTypeMessage;
+import com.team_abnormals.environmental.common.slabfish.condition.SlabfishCondition;
+import com.team_abnormals.environmental.common.slabfish.condition.SlabfishConditionType;
+import com.team_abnormals.environmental.core.Environmental;
 import net.minecraft.client.resources.JsonReloadListener;
 import net.minecraft.profiler.IProfiler;
 import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.thread.EffectiveSide;
+import net.minecraftforge.fml.network.PacketDistributor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nullable;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
+import java.util.function.Predicate;
 
 /**
  * <p>Manages all types of slabfish through data packs.</p>
@@ -21,8 +31,11 @@ import java.util.Map;
  */
 public class SlabfishManager extends JsonReloadListener
 {
+    public static final ResourceLocation DEFAULT = new ResourceLocation(Environmental.MODID, "");
+
     private static final Logger LOGGER = LogManager.getLogger();
-    private static final Gson GSON = new GsonBuilder().create();
+    private static final Gson GSON = new GsonBuilder().registerTypeAdapter(SlabfishType.class, new SlabfishType.Deserializer()).registerTypeAdapter(SlabfishCondition.class, new SlabfishCondition.Deserializer()).create();
+    private static final SlabfishType DEFAULT_SLABFISH_TYPE = new SlabfishType(SlabfishRarity.COMMON, new SlabfishCondition[0]);
     private static SlabfishManager instance;
 
     private final Map<ResourceLocation, SlabfishType> slabfishTypes;
@@ -42,24 +55,25 @@ public class SlabfishManager extends JsonReloadListener
         {
             try
             {
-//                JsonObject jsonobject = JSONUtils.getJsonObject(p_240923_3_, "advancement");
-//                Advancement.Builder advancement$builder = Advancement.Builder.func_241043_a_(jsonobject, new ConditionArrayParser(p_240923_2_, this.field_240922_d_));
-//                if (advancement$builder == null) {
-//                    LOGGER.debug("Skipping loading advancement {} as it's conditions were not met", p_240923_2_);
-//                    return;
-//                }
-//                map.put(p_240923_2_, advancement$builder);
+                SlabfishType slabfishType = GSON.fromJson(json, SlabfishType.class);
+                LOGGER.debug("Registered Slabfish Type: " + location);
+                LOGGER.debug("Rarity: " + slabfishType.getRarity());
+                parsed.put(location, slabfishType);
             }
             catch (Exception e)
             {
                 LOGGER.error("Parsing error loading custom slabfish " + location, e);
             }
         }));
+        parsed.put(DEFAULT, DEFAULT_SLABFISH_TYPE);
 
         LOGGER.info("Loaded " + parsed.size() + " Slabfish Types");
 
         this.slabfishTypes.clear();
         this.slabfishTypes.putAll(parsed);
+
+        if (EffectiveSide.get().isServer())
+            Environmental.PLAY.send(PacketDistributor.ALL.noArg(), new SSyncSlabfishTypeMessage());
     }
 
     /**
@@ -72,6 +86,21 @@ public class SlabfishManager extends JsonReloadListener
     public static SlabfishType getSlabfish(ResourceLocation registryName)
     {
         return instance == null ? null : instance.slabfishTypes.get(registryName);
+    }
+
+    /**
+     * Fetches a random slabfish type by the specified {@link Predicate}.
+     *
+     * @param predicate The predicate to use when searching for a slabfish type
+     * @param random    The random to use for the index
+     * @return A random slabfish type by that rarity or {@link #DEFAULT_SLABFISH_TYPE} if there were no results
+     */
+    public static SlabfishType getRandom(Predicate<SlabfishType> predicate, Random random)
+    {
+        SlabfishType[] slabfishTypes = getAllSlabfish();
+        if (slabfishTypes.length == 0)
+            return DEFAULT_SLABFISH_TYPE;
+        return Arrays.stream(slabfishTypes).filter(predicate).skip(random.nextInt(slabfishTypes.length)).findFirst().orElse(DEFAULT_SLABFISH_TYPE);
     }
 
     /**
