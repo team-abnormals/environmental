@@ -1,0 +1,49 @@
+{
+	"credit": "Made by Farcr",
+	"parent": "shelf_fungi",
+	"textures": {
+		"0": "environmental:block/shelf_fungi",
+		"particle": "environmental:block/shelf_fungi"
+	},
+	"elements": [
+		{
+			"from": [0, 13, 11],
+			"to": [16, 13, 16],
+			"rotation": {"angle": -22.5, "axis": "x", "origin": [8, 13, 16]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 0], "texture": "#missing"},
+				"east": {"uv": [0, 0, 5, 0], "texture": "#missing"},
+				"south": {"uv": [0, 0, 16, 0], "texture": "#missing"},
+				"west": {"uv": [0, 0, 5, 0], "texture": "#missing"},
+				"up": {"uv": [0, 0, 16, 5], "rotation": 180, "texture": "#0"},
+				"down": {"uv": [0, 0, 16, 5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [0, 8, 11],
+			"to": [16, 8, 16],
+			"rotation": {"angle": -22.5, "axis": "x", "origin": [8, 8, 16]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 0], "texture": "#missing"},
+				"east": {"uv": [0, 0, 5, 0], "texture": "#missing"},
+				"south": {"uv": [0, 0, 16, 0], "texture": "#missing"},
+				"west": {"uv": [0, 0, 5, 0], "texture": "#missing"},
+				"up": {"uv": [0, 5, 16, 10], "rotation": 180, "texture": "#0"},
+				"down": {"uv": [0, 5, 16, 10], "texture": "#0"}
+			}
+		},
+		{
+			"from": [0, 3, 11],
+			"to": [16, 3, 16],
+			"rotation": {"angle": -22.5, "axis": "x", "origin": [8, 3, 16]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 0], "texture": "#missing"},
+				"east": {"uv": [0, 0, 5, 0], "texture": "#missing"},
+				"south": {"uv": [0, 0, 16, 0], "texture": "#missing"},
+				"west": {"uv": [0, 0, 5, 0], "texture": "#missing"},
+				"up": {"uv": [0, 10, 16, 15], "rotation": 180, "texture": "#0"},
+				"down": {"uv": [0, 10, 16, 15], "texture": "#0"}
+			}
+		}
+	]
+}
