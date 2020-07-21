@@ -2,12 +2,11 @@ package com.team_abnormals.environmental.core;
 
 import com.team_abnormals.environmental.client.gui.screen.inventory.KilnScreen;
 import com.team_abnormals.environmental.client.gui.screen.inventory.SawmillScreen;
-import com.team_abnormals.environmental.common.network.ClientNetworkHandler;
-import com.team_abnormals.environmental.common.network.ServerNetworkHandler;
 import com.team_abnormals.environmental.common.network.message.CAcknowledgeEnvironmentalMessage;
 import com.team_abnormals.environmental.common.network.message.EnvironmentalLoginMessage;
 import com.team_abnormals.environmental.common.network.message.SOpenSlabfishInventoryMessage;
 import com.team_abnormals.environmental.common.network.message.SSyncSlabfishTypeMessage;
+import com.team_abnormals.environmental.common.slabfish.SlabfishManager;
 import com.team_abnormals.environmental.core.other.EnvironmentalCompat;
 import com.team_abnormals.environmental.core.other.EnvironmentalData;
 import com.team_abnormals.environmental.core.registry.*;
@@ -20,7 +19,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -30,7 +31,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.network.FMLHandshakeHandler;
-import net.minecraftforge.fml.network.FMLHandshakeMessages;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
@@ -179,6 +179,12 @@ public class Environmental
     private void registerItemColors(ColorHandlerEvent.Item event)
     {
         REGISTRY_HELPER.processSpawnEggColors(event);
+    }
+
+    @SubscribeEvent
+    public void onEvent(AddReloadListenerEvent event)
+    {
+        event.addListener(new SlabfishManager());
     }
 
     /**
