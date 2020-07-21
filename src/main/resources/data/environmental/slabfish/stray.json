@@ -7,7 +7,7 @@
       "parent2": "environmental:skeleton"
     },
     {
-      "type": "biome_category",
+      "type": "biome",
       "category": "icy"
     }
   ]
