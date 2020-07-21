@@ -81,7 +81,7 @@ public class SlabfishBucketItem extends BucketItem {
         if (compoundnbt != null) {
             if (compoundnbt.contains("SlabfishType", 3)) {
                 int i = compoundnbt.getInt("SlabfishType");
-                TextFormatting[] btextformatting = new TextFormatting[]{TextFormatting.ITALIC, SlabfishType.byId(i).getRarity().color};
+                TextFormatting[] btextformatting = new TextFormatting[]{TextFormatting.ITALIC, SlabfishType.byId(i).getRarity().getColor()};
                 tooltip.add((new TranslationTextComponent(SlabfishType.byId(i).getTranslationKey()).func_240701_a_(btextformatting)));
             }
             if (compoundnbt.contains("Age") && compoundnbt.getInt("Age") < 0) {

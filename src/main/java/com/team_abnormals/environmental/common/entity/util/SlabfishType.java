@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Random;
 
+@Deprecated
 public enum SlabfishType implements IStringSerializable {
     SWAMP(0, "swamp", SlabfishRarity.COMMON),
     OCEAN(1, "ocean", SlabfishRarity.COMMON),
