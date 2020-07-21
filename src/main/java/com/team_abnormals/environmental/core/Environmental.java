@@ -6,7 +6,7 @@ import com.team_abnormals.environmental.common.network.message.CAcknowledgeEnvir
 import com.team_abnormals.environmental.common.network.message.EnvironmentalLoginMessage;
 import com.team_abnormals.environmental.common.network.message.SOpenSlabfishInventoryMessage;
 import com.team_abnormals.environmental.common.network.message.SSyncSlabfishTypeMessage;
-import com.team_abnormals.environmental.common.slabfish.SlabfishManager;
+import com.team_abnormals.environmental.common.slabfish.SlabfishLoader;
 import com.team_abnormals.environmental.core.other.EnvironmentalCompat;
 import com.team_abnormals.environmental.core.other.EnvironmentalData;
 import com.team_abnormals.environmental.core.registry.*;
@@ -188,7 +188,7 @@ public class Environmental
     @SubscribeEvent
     public void onEvent(AddReloadListenerEvent event)
     {
-        event.addListener(new SlabfishManager());
+        event.addListener(new SlabfishLoader());
     }
 
     /**

@@ -3,17 +3,15 @@ package com.team_abnormals.environmental.common.network;
 import com.team_abnormals.environmental.client.gui.screen.inventory.SlabfishInventoryScreen;
 import com.team_abnormals.environmental.common.entity.SlabfishEntity;
 import com.team_abnormals.environmental.common.inventory.container.SlabfishInventoryContainer;
-import com.team_abnormals.environmental.common.network.message.CAcknowledgeEnvironmentalMessage;
 import com.team_abnormals.environmental.common.network.message.SOpenSlabfishInventoryMessage;
 import com.team_abnormals.environmental.common.network.message.SSyncSlabfishTypeMessage;
-import com.team_abnormals.environmental.core.Environmental;
+import com.team_abnormals.environmental.common.slabfish.ClientSlabfishManager;
+import com.team_abnormals.environmental.common.slabfish.SlabfishLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkEvent;
-
-import java.util.function.Supplier;
 
 public class ClientNetworkHandler
 {
@@ -39,6 +37,6 @@ public class ClientNetworkHandler
 
     public static void handleSyncSlabfishType(SSyncSlabfishTypeMessage msg, NetworkEvent.Context ctx)
     {
-        System.out.println("TEST Received slabfish types");
+        ClientSlabfishManager.receive(msg);
     }
 }

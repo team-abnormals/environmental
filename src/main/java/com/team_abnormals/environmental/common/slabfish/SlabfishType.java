@@ -1,11 +1,11 @@
 package com.team_abnormals.environmental.common.slabfish;
 
 import com.google.gson.*;
-import com.team_abnormals.environmental.common.entity.SlabfishEntity;
 import com.team_abnormals.environmental.common.entity.util.SlabfishRarity;
 import com.team_abnormals.environmental.common.slabfish.condition.SlabfishCondition;
 import com.team_abnormals.environmental.common.slabfish.condition.SlabfishConditionContext;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -19,12 +19,15 @@ import java.util.function.Predicate;
  */
 public class SlabfishType implements Predicate<SlabfishConditionContext>
 {
+    private ResourceLocation registryName;
     private final SlabfishRarity rarity;
+    private final int priority;
     private final SlabfishCondition[] conditions;
 
-    public SlabfishType(SlabfishRarity rarity, SlabfishCondition[] conditions)
+    public SlabfishType(SlabfishRarity rarity, int priority, SlabfishCondition[] conditions)
     {
         this.rarity = rarity;
+        this.priority = priority;
         this.conditions = conditions;
     }
 
@@ -38,11 +41,38 @@ public class SlabfishType implements Predicate<SlabfishConditionContext>
     }
 
     /**
+     * @return The registry name of this slabfish
+     */
+    public ResourceLocation getRegistryName()
+    {
+        return registryName;
+    }
+
+    /**
      * @return The rarity of this slabfish
      */
     public SlabfishRarity getRarity()
     {
         return rarity;
+    }
+
+    /**
+     * @return The priority of this slabfish. Used to determine what slabfish should be chosen over others when different types have passed conditions
+     */
+    public int getPriority()
+    {
+        return priority;
+    }
+
+    /**
+     * Sets the registry name of this slabfish type.
+     *
+     * @param registryName The new registry name for this slabfish
+     */
+    SlabfishType setRegistryName(ResourceLocation registryName)
+    {
+        this.registryName = registryName;
+        return this;
     }
 
     /**
@@ -52,7 +82,20 @@ public class SlabfishType implements Predicate<SlabfishConditionContext>
      */
     public void writeTo(PacketBuffer buf)
     {
+        buf.writeResourceLocation(this.registryName);
         buf.writeVarInt(this.rarity.ordinal());
+        buf.writeVarInt(this.priority);
+    }
+
+    @Override
+    public String toString()
+    {
+        // TODO remove this println
+        System.out.println(this.conditions.length);
+        return "SlabfishType{" +
+                "rarity=" + rarity +
+                ", priority=" + priority +
+                '}';
     }
 
     /**
@@ -64,8 +107,10 @@ public class SlabfishType implements Predicate<SlabfishConditionContext>
     @OnlyIn(Dist.CLIENT)
     public static SlabfishType readFrom(PacketBuffer buf)
     {
-        int rarity = buf.readVarInt();
-        return new SlabfishType(rarity < 0 || rarity >= SlabfishRarity.values().length ? SlabfishRarity.COMMON : SlabfishRarity.values()[rarity], new SlabfishCondition[0]);
+        ResourceLocation registryName = buf.readResourceLocation();
+        SlabfishRarity rarity = SlabfishRarity.byId(buf.readVarInt());
+        int priority = buf.readVarInt();
+        return new SlabfishType(rarity, priority, new SlabfishCondition[0]).setRegistryName(registryName);
     }
 
     public static class Deserializer implements JsonDeserializer<SlabfishType>
@@ -88,7 +133,7 @@ public class SlabfishType implements Predicate<SlabfishConditionContext>
             if (!jsonObject.has("rarity"))
                 throw new JsonSyntaxException("Slabfish rarity is required");
             SlabfishRarity rarity = deserializeRarity(jsonObject.get("rarity"));
-            return new SlabfishType(rarity, jsonObject.has("conditions") ? context.deserialize(jsonObject.get("conditions"), SlabfishCondition[].class) : new SlabfishCondition[0]);
+            return new SlabfishType(rarity, jsonObject.has("priority") ? jsonObject.get("priority").getAsInt() : 0, jsonObject.has("conditions") ? context.deserialize(jsonObject.get("conditions"), SlabfishCondition[].class) : new SlabfishCondition[0]);
         }
     }
 }

@@ -1,10 +1,12 @@
 package com.team_abnormals.environmental.common.network.message;
 
 import com.team_abnormals.environmental.common.network.ClientNetworkHandler;
+import com.team_abnormals.environmental.common.slabfish.SlabfishLoader;
 import com.team_abnormals.environmental.common.slabfish.SlabfishManager;
 import com.team_abnormals.environmental.common.slabfish.SlabfishType;
 import com.team_abnormals.environmental.core.Environmental;
 import net.minecraft.network.PacketBuffer;
+import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.network.NetworkEvent;
 
 import java.util.function.Supplier;
@@ -21,7 +23,7 @@ public class SSyncSlabfishTypeMessage implements EnvironmentalLoginMessage
 
     public SSyncSlabfishTypeMessage()
     {
-        this(SlabfishManager.getAllSlabfish());
+        this(SlabfishManager.get(LogicalSide.SERVER).getAllSlabfish());
     }
 
     private SSyncSlabfishTypeMessage(SlabfishType[] slabfishTypes)
@@ -58,6 +60,14 @@ public class SSyncSlabfishTypeMessage implements EnvironmentalLoginMessage
             Environmental.LOGIN.reply(new CAcknowledgeEnvironmentalMessage(), ctx.get());
         });
         ctx.get().setPacketHandled(true);
+    }
+
+    /**
+     * @return The types of slabfish received from the server
+     */
+    public SlabfishType[] getSlabfishTypes()
+    {
+        return slabfishTypes;
     }
 
     @Override

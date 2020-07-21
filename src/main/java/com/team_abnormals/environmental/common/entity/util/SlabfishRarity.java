@@ -51,4 +51,17 @@ public enum SlabfishRarity
                 return values()[i];
         return COMMON;
     }
+
+    /**
+     * Checks the rarity types for a rarity with the specified id.
+     *
+     * @param id The id of the rarity
+     * @return The rarity by that id or {@link #COMMON} if there is no rarity by that id
+     */
+    public static SlabfishRarity byId(int id)
+    {
+        if (id < 0 || id >= values().length)
+            return COMMON;
+        return values()[id];
+    }
 }
