@@ -1024,7 +1024,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
             player.closeScreen();
 
         player.getNextWindowId();
-        Environmental.CHANNEL.sendToServer(new SOpenSlabfishInventoryMessage(this, player.currentWindowId));
+        Environmental.PLAY.sendToServer(new SOpenSlabfishInventoryMessage(this, player.currentWindowId));
         player.openContainer = new SlabfishInventoryContainer(player.currentWindowId, player.inventory, this.slabfishBackpack, this);
         player.openContainer.addListener(player);
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.entity.player.PlayerContainerEvent.Open(player, player.openContainer));
