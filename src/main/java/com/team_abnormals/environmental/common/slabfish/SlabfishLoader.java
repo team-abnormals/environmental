@@ -11,12 +11,12 @@ import net.minecraft.client.resources.JsonReloadListener;
 import net.minecraft.profiler.IProfiler;
 import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.fml.common.thread.EffectiveSide;
 import net.minecraftforge.fml.network.PacketDistributor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.annotation.Nullable;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +31,7 @@ import java.util.function.Predicate;
 public class SlabfishLoader extends JsonReloadListener implements SlabfishManager
 {
     private static final Logger LOGGER = LogManager.getLogger();
-    private static final Gson GSON = new GsonBuilder().registerTypeAdapter(ResourceLocation.class, new ResourceLocation.Serializer()).registerTypeAdapter(SlabfishType.class, new SlabfishType.Deserializer()).registerTypeAdapter(SlabfishCondition.class, new SlabfishCondition.Deserializer()).create();
+    private static final Gson GSON = new GsonBuilder().registerTypeAdapter(ResourceLocation.class, new ResourceLocation.Serializer()).registerTypeAdapter(ITextComponent.class, new ITextComponent.Serializer()).registerTypeAdapter(SlabfishType.class, new SlabfishType.Deserializer()).registerTypeAdapter(SlabfishCondition.class, new SlabfishCondition.Deserializer()).create();
     static SlabfishLoader instance;
 
     private final Map<ResourceLocation, SlabfishType> slabfishTypes;
@@ -72,17 +72,16 @@ public class SlabfishLoader extends JsonReloadListener implements SlabfishManage
             Environmental.PLAY.send(PacketDistributor.ALL.noArg(), new SSyncSlabfishTypeMessage());
     }
 
-    @Nullable
     @Override
     public SlabfishType get(ResourceLocation registryName)
     {
-        return this.slabfishTypes.get(registryName);
+        return this.slabfishTypes.getOrDefault(registryName, DEFAULT_SLABFISH);
     }
 
     @Override
-    public SlabfishType get(SlabfishConditionContext context)
+    public SlabfishType get(Predicate<SlabfishType> predicate, SlabfishConditionContext context)
     {
-        return this.slabfishTypes.values().stream().filter(slabfishType -> slabfishType.test(context)).max(Comparator.comparingInt(SlabfishType::getPriority)).orElse(DEFAULT_SLABFISH);
+        return this.slabfishTypes.values().stream().filter(slabfishType -> predicate.test(slabfishType) && slabfishType.test(context)).max(Comparator.comparingInt(SlabfishType::getPriority)).orElse(DEFAULT_SLABFISH);
     }
 
     @Override

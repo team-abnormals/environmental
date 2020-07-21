@@ -2,7 +2,8 @@
   "rarity": "epic",
   "conditions": [
     {
-      "type": "lightning"
+      "type": "lightning",
+      "slabfishType": "environmental:brown_mushroom"
     }
   ]
 }

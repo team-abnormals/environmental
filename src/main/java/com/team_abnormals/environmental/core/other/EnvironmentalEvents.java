@@ -1,10 +1,5 @@
 package com.team_abnormals.environmental.core.other;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -12,19 +7,16 @@ import com.team_abnormals.environmental.common.block.HangingWisteriaLeavesBlock;
 import com.team_abnormals.environmental.common.block.LargeLilyPadBlock;
 import com.team_abnormals.environmental.common.entity.SlabfishEntity;
 import com.team_abnormals.environmental.common.entity.util.SlabfishOverlay;
-import com.team_abnormals.environmental.common.entity.util.SlabfishType;
 import com.team_abnormals.environmental.core.Environmental;
 import com.team_abnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.team_abnormals.environmental.core.registry.EnvironmentalEntities;
 import com.team_abnormals.environmental.core.registry.EnvironmentalItems;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.monster.HuskEntity;
 import net.minecraft.entity.monster.SkeletonEntity;
@@ -35,20 +27,12 @@ import net.minecraft.entity.projectile.PotionEntity;
 import net.minecraft.entity.projectile.ProjectileItemEntity;
 import net.minecraft.entity.projectile.ThrowableEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.BoneMealItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.ShovelItem;
+import net.minecraft.item.*;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTables;
 import net.minecraft.loot.TableLootEntry;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionUtils;
-import net.minecraft.potion.Potions;
+import net.minecraft.potion.*;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
@@ -73,6 +57,11 @@ import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.eventbus.api.Event.Result;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
 
 @EventBusSubscriber(modid = Environmental.MODID)
 public class EnvironmentalEvents {
@@ -277,7 +266,7 @@ public class EnvironmentalEvents {
 		if (event.getEntity() instanceof SlabfishEntity) {
 			SlabfishEntity entity = (SlabfishEntity)event.getEntity();
 			if (entity.getEntityWorld().getBiome(new BlockPos(entity.getPositionVec())) == Biomes.field_235252_ay_) {
-				if (entity.getSlabfishTypeOld() != SlabfishType.GHOST) {
+				if (entity.getSlabfishType() != EnvironmentalSlabfishTypes.GHOST) {
 					if(entity.getEntityWorld().isRemote()) {
 						Random rand = new Random();
 						
@@ -290,16 +279,19 @@ public class EnvironmentalEvents {
 					}
 					
 					if (!entity.getEntityWorld().isRemote) {
-						SlabfishEntity ghost = EnvironmentalEntities.SLABFISH.get().create(entity.world);					
+						SlabfishEntity ghost = EnvironmentalEntities.SLABFISH.get().create(entity.world);
+						if(ghost == null)
+							return;
+
 						ghost.addPotionEffect(new EffectInstance(Effects.LEVITATION, 140, 0, false, false));
 						ghost.addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 140, 0, false, false));
 						entity.getEntityWorld().playSound(null, new BlockPos(entity.getPositionVec()), SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.NEUTRAL, 1, 1);
 						
 						ghost.setPosition(entity.getPosX(), entity.getPosY(), entity.getPosZ());
 						ghost.setLocationAndAngles(entity.getPosX(), entity.getPosY(), entity.getPosZ(), entity.rotationYaw, entity.rotationPitch);
-						ghost.setNoAI(((MobEntity) entity).isAIDisabled());
+						ghost.setNoAI(entity.isAIDisabled());
 			    		ghost.setGrowingAge(entity.getGrowingAge());
-			    		ghost.setSlabfishTypeOld(SlabfishType.GHOST);
+			    		ghost.setSlabfishType(EnvironmentalSlabfishTypes.GHOST);
 						ghost.setFire(0);
 			    		if(entity.hasCustomName()) {
 			    			ghost.setCustomName(entity.getCustomName());

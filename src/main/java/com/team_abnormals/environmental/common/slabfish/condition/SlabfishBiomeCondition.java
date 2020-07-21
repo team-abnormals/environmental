@@ -1,9 +1,8 @@
 package com.team_abnormals.environmental.common.slabfish.condition;
 
-import com.google.common.collect.ImmutableList;
 import com.google.gson.*;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.BiomeManager;
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
@@ -36,16 +35,12 @@ public class SlabfishBiomeCondition implements SlabfishCondition
         }
     }
 
-    private SlabfishBiomeCondition(BiomeManager.BiomeType... biomeTypes)
+    private SlabfishBiomeCondition(@Nullable Biome.Category biomeCategory, @Nullable Biome.TempCategory tempCategory)
     {
         List<ResourceLocation> validBiomes = new ArrayList<>();
-        for (BiomeManager.BiomeType biomeType : biomeTypes)
-        {
-            ImmutableList<BiomeManager.BiomeEntry> biomes = BiomeManager.getBiomes(biomeType);
-            if (biomes != null)
-                for (BiomeManager.BiomeEntry biomeEntry : biomes)
-                    validBiomes.add(biomeEntry.biome.getRegistryName());
-        }
+        for (Biome biome : ForgeRegistries.BIOMES)
+            if ((tempCategory == null || biome.getTempCategory() == tempCategory) && (biomeCategory == null || biome.getCategory() == biomeCategory))
+                validBiomes.add(biome.getRegistryName());
         this.biomes = validBiomes.toArray(new ResourceLocation[0]);
     }
 
@@ -65,14 +60,26 @@ public class SlabfishBiomeCondition implements SlabfishCondition
     }
 
     @Nullable
-    private static BiomeManager.BiomeType deserializeBiomeType(JsonElement element) throws JsonParseException
+    private static Biome.Category deserializeBiomeType(JsonElement element) throws JsonParseException
     {
         if (!element.isJsonPrimitive() || !element.getAsJsonPrimitive().isString())
             throw new JsonSyntaxException("Biome type expected to be a string");
         String name = element.getAsString();
-        for (BiomeManager.BiomeType biomeType : BiomeManager.BiomeType.values())
-            if (biomeType.name().equalsIgnoreCase(name))
-                return biomeType;
+        for (Biome.Category biomeCategory : Biome.Category.values())
+            if (biomeCategory.name().equalsIgnoreCase(name))
+                return biomeCategory;
+        return null;
+    }
+
+    @Nullable
+    private static Biome.TempCategory deserializeBiomeTempCategory(JsonElement element) throws JsonParseException
+    {
+        if (!element.isJsonPrimitive() || !element.getAsJsonPrimitive().isString())
+            throw new JsonSyntaxException("Biome temperature category expected to be a string");
+        String name = element.getAsString();
+        for (Biome.TempCategory tempCategory : Biome.TempCategory.values())
+            if (tempCategory.name().equalsIgnoreCase(name))
+                return tempCategory;
         return null;
     }
 
@@ -90,22 +97,17 @@ public class SlabfishBiomeCondition implements SlabfishCondition
 
         if (json.has("biome"))
         {
-            return new SlabfishBiomeCondition((ResourceLocation) context.deserialize(json.get("biome"), ResourceLocation.class));
+            return new SlabfishBiomeCondition(context.deserialize(json.get("biome"), ResourceLocation.class));
         }
 
-        if (json.has("category"))
+        if (json.has("category") || json.has("tempCategory"))
         {
-            BiomeManager.BiomeType biomeType = deserializeBiomeType(json.get("category"));
-            if (biomeType == null)
-            {
-                return new SlabfishBiomeCondition();
-            }
-            else
-            {
-                return new SlabfishBiomeCondition(biomeType);
-            }
+            Biome.Category biomeCategory = deserializeBiomeType(json.get("category"));
+            Biome.TempCategory tempCategory = json.has("tempCategory") ? deserializeBiomeTempCategory(json.get("tempCategory")) : null;
+
+            return new SlabfishBiomeCondition(biomeCategory, tempCategory);
         }
 
-        throw new JsonSyntaxException("Either 'biome' or 'category' must be present.");
+        throw new JsonSyntaxException("Either 'biome' or 'category' and 'tempCategory' must be present.");
     }
 }

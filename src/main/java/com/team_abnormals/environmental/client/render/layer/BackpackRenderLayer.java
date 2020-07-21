@@ -3,8 +3,8 @@ package com.team_abnormals.environmental.client.render.layer;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.team_abnormals.environmental.common.entity.SlabfishEntity;
-import com.team_abnormals.environmental.common.entity.util.SlabfishType;
 import com.team_abnormals.environmental.core.Environmental;
+import com.team_abnormals.environmental.core.other.EnvironmentalSlabfishTypes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
@@ -28,13 +28,15 @@ public class BackpackRenderLayer<E extends SlabfishEntity, M extends EntityModel
         if (!slabby.hasBackpack()) return;
 
 
+        String textureId = Environmental.MODID;
         String textureSuffix = slabby.getBackpackColor().getTranslationKey();
 
-        if (slabby.getSlabfishTypeOld() == SlabfishType.SNAKE_BLOCK || slabby.getSlabfishTypeOld() == SlabfishType.GORE) {
-            textureSuffix = slabby.getSlabfishTypeOld().getString();
+        if (slabby.getSlabfishType() == EnvironmentalSlabfishTypes.SNAKE_BLOCK || slabby.getSlabfishType() == EnvironmentalSlabfishTypes.GORE) {
+            textureId = slabby.getSlabfishType().getNamespace();
+            textureSuffix = slabby.getSlabfishType().getPath();
         }
 
-        ResourceLocation texture = new ResourceLocation(Environmental.MODID, "textures/entity/slabfish/backpacks/backpack_" + textureSuffix + ".png");
+        ResourceLocation texture = new ResourceLocation(textureId, "textures/entity/slabfish/backpacks/backpack_" + textureSuffix + ".png");
 
         Minecraft.getInstance().getTextureManager().bindTexture(texture);
         IVertexBuilder ivertexbuilder = bufferIn.getBuffer(RenderType.getEntityCutoutNoCull(texture));

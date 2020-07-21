@@ -1,0 +1,12 @@
+{
+  "rarity": "epic",
+  "conditions": [
+    {
+      "type": "insomnia"
+    },
+    {
+      "type": "random",
+      "chance": 0.25
+    }
+  ]
+}

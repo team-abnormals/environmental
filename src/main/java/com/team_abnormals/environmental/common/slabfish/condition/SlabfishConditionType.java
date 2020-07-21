@@ -20,7 +20,9 @@ public enum SlabfishConditionType
     LIGHTNING(SlabfishLightningCondition::deserialize),
     DIMENSION(SlabfishDimensionCondition::deserialize),
     PARENTS(SlabfishParentCondition::deserialize),
-    RAID(SlabfishRaidCondition::deserialize);
+    RAID(SlabfishRaidCondition::deserialize),
+    INSOMNIA(SlabfishInsomniaCondition::deserialize),
+    RANDOM(SlabfishRandomCondition::deserialize);
 
     private final BiFunction<JsonObject, JsonDeserializationContext, SlabfishCondition> jsonDeserializer;
 

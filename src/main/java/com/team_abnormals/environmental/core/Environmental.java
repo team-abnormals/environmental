@@ -113,6 +113,7 @@ public class Environmental
             REGISTRY_HELPER.processSpawnEggDispenseBehaviors();
             EnvironmentalData.registerCompostables();
             EnvironmentalData.registerFlammables();
+            EnvironmentalData.registerDataSerializers();
 
             EnvironmentalBiomes.addBiomeTypes();
             EnvironmentalBiomes.registerBiomesToDictionary();

@@ -1,7 +1,10 @@
 package com.team_abnormals.environmental.common.entity.goals;
 
 import com.team_abnormals.environmental.common.entity.SlabfishEntity;
-import com.team_abnormals.environmental.common.entity.util.SlabfishType;
+import com.team_abnormals.environmental.common.entity.util.SlabfishTypeOld;
+import com.team_abnormals.environmental.common.slabfish.SlabfishManager;
+import com.team_abnormals.environmental.common.slabfish.SlabfishType;
+import com.team_abnormals.environmental.common.slabfish.condition.SlabfishConditionContext;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.EntityPredicate;
 import net.minecraft.entity.ai.goal.Goal;
@@ -85,11 +88,15 @@ public class SlabbyBreedGoal extends Goal {
     protected void spawnBaby() {
         Random rand = new Random();
         SlabfishEntity slabby = this.animal.createChild(this.targetMate);
-        slabby.setSlabfishTypeOld(animal.getTypeForBreeding(animal.world, this.animal, this.targetMate));
-        if (this.animal.getLoveCause().getStats().getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)) >= 72000 && animal.world.isNightTime()) {
-            if (rand.nextInt(4) == 0) slabby.setSlabfishTypeOld(SlabfishType.NIGHTMARE);
-        }
-        slabby.setPreNameTypeOld(slabby.getSlabfishTypeOld());
+        if(slabby == null)
+            return;
+
+        SlabfishType slabfishType = SlabfishManager.get(this.world).get(__->true, SlabfishConditionContext.breeding(slabby, this.animal.getLoveCause(), this.animal, this.targetMate));
+        slabby.setSlabfishType(slabfishType.getRegistryName());
+//        if (this.animal.getLoveCause()!=null && this.animal.getLoveCause().getStats().getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)) >= 72000 && animal.world.isNightTime()) {
+//            if (rand.nextInt(4) == 0) slabby.setSlabfishTypeOld(SlabfishTypeOld.NIGHTMARE);
+//        }
+        slabby.setPreNameType(slabby.getSlabfishType());
         final net.minecraftforge.event.entity.living.BabyEntitySpawnEvent event = new net.minecraftforge.event.entity.living.BabyEntitySpawnEvent(animal, targetMate, slabby);
         final boolean cancelled = net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event);
         slabby = (SlabfishEntity) event.getChild();

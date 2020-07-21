@@ -11,11 +11,36 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.ItemColors;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.IDataSerializer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.FoliageColors;
 import net.minecraft.world.GrassColors;
 import net.minecraft.world.biome.BiomeColors;
 
 public class EnvironmentalData {
+    public static final IDataSerializer<ResourceLocation> RESOURCE_LOCATION = new IDataSerializer<ResourceLocation>()
+    {
+        @Override
+        public void write(PacketBuffer buf, ResourceLocation value)
+        {
+            buf.writeResourceLocation(value);
+        }
+
+        @Override
+        public ResourceLocation read(PacketBuffer buf)
+        {
+            return buf.readResourceLocation();
+        }
+
+        @Override
+        public ResourceLocation copyValue(ResourceLocation value)
+        {
+            return new ResourceLocation(value.getNamespace(), value.getPath());
+        }
+    };
+
     public static void registerCompostables() {
         DataUtils.registerCompostable(0.30F, EnvironmentalBlocks.WILLOW_LEAVES.get());
         DataUtils.registerCompostable(0.30F, EnvironmentalBlocks.WILLOW_SAPLING.get());
@@ -225,5 +250,9 @@ public class EnvironmentalData {
         DataUtils.registerBlockItemColor(itemColors, (color, items) -> GrassColors.get(0.5D, 1.0D), Arrays.asList(EnvironmentalBlocks.GIANT_TALL_GRASS));
         DataUtils.registerBlockItemColor(itemColors, (color, items) -> FoliageColors.get(0.5D, 1.0D), Arrays.asList(
                 EnvironmentalBlocks.WILLOW_LEAVES, EnvironmentalBlocks.WILLOW_LEAF_CARPET, EnvironmentalBlocks.HANGING_WILLOW_LEAVES));
+    }
+
+    public static void registerDataSerializers(){
+        DataSerializers.registerSerializer(RESOURCE_LOCATION);
     }
 }

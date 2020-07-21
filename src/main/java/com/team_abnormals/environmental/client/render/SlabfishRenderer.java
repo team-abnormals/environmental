@@ -7,8 +7,10 @@ import com.team_abnormals.environmental.client.render.layer.BackpackRenderLayer;
 import com.team_abnormals.environmental.client.render.layer.OverlayRenderLayer;
 import com.team_abnormals.environmental.client.render.layer.SweaterRenderLayer;
 import com.team_abnormals.environmental.common.entity.SlabfishEntity;
-import com.team_abnormals.environmental.common.entity.util.SlabfishType;
+import com.team_abnormals.environmental.common.entity.util.SlabfishTypeOld;
+import com.team_abnormals.environmental.common.slabfish.SlabfishType;
 import com.team_abnormals.environmental.core.Environmental;
+import com.team_abnormals.environmental.core.other.EnvironmentalSlabfishTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
@@ -27,12 +29,13 @@ public class SlabfishRenderer extends MobRenderer<SlabfishEntity, SlabfishModel<
 
     @Override
     public ResourceLocation getEntityTexture(SlabfishEntity slabby) {
-        return new ResourceLocation(Environmental.MODID, "textures/entity/slabfish/slabfish_" + slabby.getSlabfishTypeOld().getString() + ".png");
+        ResourceLocation slabfishType = slabby.getSlabfishType();
+        return new ResourceLocation(slabfishType.getNamespace(), "textures/entity/slabfish/slabfish_" + slabfishType.getPath() + ".png");
     }
 
     @Override
     protected RenderType func_230496_a_(SlabfishEntity slabfish, boolean p_230042_2_, boolean p_230042_3_, boolean h) {
-        if (slabfish.getSlabfishTypeOld() == SlabfishType.GHOST) {
+        if (slabfish.getSlabfishType() == EnvironmentalSlabfishTypes.GHOST) {
             return RenderType.getEntityTranslucent(this.getEntityTexture(slabfish));
         } else {
             return super.func_230496_a_(slabfish, p_230042_2_, p_230042_3_, h);

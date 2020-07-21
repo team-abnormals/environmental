@@ -8,15 +8,23 @@ import com.team_abnormals.environmental.common.entity.goals.SlabbyFollowParentGo
 import com.team_abnormals.environmental.common.entity.goals.SlabbyGrabItemGoal;
 import com.team_abnormals.environmental.common.entity.util.SlabfishOverlay;
 import com.team_abnormals.environmental.common.entity.util.SlabfishRarity;
-import com.team_abnormals.environmental.common.entity.util.SlabfishType;
+import com.team_abnormals.environmental.common.entity.util.SlabfishTypeOld;
 import com.team_abnormals.environmental.common.inventory.SlabfishInventory;
 import com.team_abnormals.environmental.common.inventory.container.SlabfishInventoryContainer;
 import com.team_abnormals.environmental.common.item.MudBallItem;
 import com.team_abnormals.environmental.common.network.message.SOpenSlabfishInventoryMessage;
+import com.team_abnormals.environmental.common.slabfish.SlabfishManager;
+import com.team_abnormals.environmental.common.slabfish.SlabfishType;
+import com.team_abnormals.environmental.common.slabfish.condition.SlabfishConditionContext;
 import com.team_abnormals.environmental.core.Environmental;
 import com.team_abnormals.environmental.core.other.EnvironmentalCriteriaTriggers;
+import com.team_abnormals.environmental.core.other.EnvironmentalData;
+import com.team_abnormals.environmental.core.other.EnvironmentalSlabfishTypes;
 import com.team_abnormals.environmental.core.other.EnvironmentalTags;
-import com.team_abnormals.environmental.core.registry.*;
+import com.team_abnormals.environmental.core.registry.EnvironmentalBlocks;
+import com.team_abnormals.environmental.core.registry.EnvironmentalEntities;
+import com.team_abnormals.environmental.core.registry.EnvironmentalItems;
+import com.team_abnormals.environmental.core.registry.EnvironmentalSounds;
 import com.teamabnormals.abnormals_core.core.library.api.IBucketableEntity;
 import com.teamabnormals.abnormals_core.core.library.endimator.Endimation;
 import com.teamabnormals.abnormals_core.core.library.endimator.entity.IEndimatedEntity;
@@ -59,26 +67,26 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.DimensionType;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
-import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.fml.ModList;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class SlabfishEntity extends TameableEntity implements IInventoryChangedListener, IBucketableEntity, IEndimatedEntity {
-    @Deprecated
-    private static final DataParameter<Integer> SLABFISH_TYPE_OLD = EntityDataManager.createKey(SlabfishEntity.class, DataSerializers.VARINT);
+
+    private static final DataParameter<ResourceLocation> SLABFISH_TYPE = EntityDataManager.createKey(SlabfishEntity.class, EnvironmentalData.RESOURCE_LOCATION);
     private static final DataParameter<Integer> SLABFISH_OVERLAY = EntityDataManager.createKey(SlabfishEntity.class, DataSerializers.VARINT);
-    @Deprecated
-    private static final DataParameter<Integer> PRE_NAME_TYPE_OLD = EntityDataManager.createKey(SlabfishEntity.class, DataSerializers.VARINT);
+    private static final DataParameter<ResourceLocation> PRE_NAME_TYPE = EntityDataManager.createKey(SlabfishEntity.class, EnvironmentalData.RESOURCE_LOCATION);
     private static final DataParameter<Boolean> FROM_BUCKET = EntityDataManager.createKey(SlabfishEntity.class, DataSerializers.BOOLEAN);
 
     private static final DataParameter<Boolean> HAS_BACKPACK = EntityDataManager.createKey(SlabfishEntity.class, DataSerializers.BOOLEAN);
@@ -118,16 +126,16 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
     BlockPos jukeboxPosition;
 
     @Deprecated
-    private static final Map<List<String>, SlabfishType> NAMES = Util.make(Maps.newHashMap(), (skins) -> {
-        skins.put(Arrays.asList("cameron", "cam", "cringe"), SlabfishType.CAMERON);
-        skins.put(Arrays.asList("bagel", "shyguy", "shy guy", "bagielo"), SlabfishType.BAGEL);
-        skins.put(Arrays.asList("gore", "gore.", "musicano"), SlabfishType.GORE);
-        skins.put(Arrays.asList("snake", "snake block", "snakeblock"), SlabfishType.SNAKE_BLOCK);
-        skins.put(Arrays.asList("jackson", "jason", "json"), SlabfishType.JACKSON);
-        skins.put(Arrays.asList("jub", "slabrave", "mista jub"), SlabfishType.MISTA_JUB);
-        skins.put(Arrays.asList("smelly", "stinky", "smellysox", "thefaceofgaming"), SlabfishType.SMELLY);
-        skins.put(Arrays.asList("squart", "squar", "squarticus"), SlabfishType.SQUART);
-        skins.put(Arrays.asList("bmo", "beemo", "be more"), SlabfishType.BMO);
+    private static final Map<List<String>, SlabfishTypeOld> NAMES = Util.make(Maps.newHashMap(), (skins) -> {
+        skins.put(Arrays.asList("cameron", "cam", "cringe"), SlabfishTypeOld.CAMERON);
+        skins.put(Arrays.asList("bagel", "shyguy", "shy guy", "bagielo"), SlabfishTypeOld.BAGEL);
+        skins.put(Arrays.asList("gore", "gore.", "musicano"), SlabfishTypeOld.GORE);
+        skins.put(Arrays.asList("snake", "snake block", "snakeblock"), SlabfishTypeOld.SNAKE_BLOCK);
+        skins.put(Arrays.asList("jackson", "jason", "json"), SlabfishTypeOld.JACKSON);
+        skins.put(Arrays.asList("jub", "slabrave", "mista jub"), SlabfishTypeOld.MISTA_JUB);
+        skins.put(Arrays.asList("smelly", "stinky", "smellysox", "thefaceofgaming"), SlabfishTypeOld.SMELLY);
+        skins.put(Arrays.asList("squart", "squar", "squarticus"), SlabfishTypeOld.SQUART);
+        skins.put(Arrays.asList("bmo", "beemo", "be more"), SlabfishTypeOld.BMO);
     });
 
     public SlabfishEntity(EntityType<? extends SlabfishEntity> type, World worldIn) {
@@ -163,9 +171,9 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
     @Override
     protected void registerData() {
         super.registerData();
-        this.getDataManager().register(SLABFISH_TYPE_OLD, 0);
+        this.getDataManager().register(SLABFISH_TYPE, SlabfishManager.DEFAULT_SLABFISH.getRegistryName());
         this.getDataManager().register(SLABFISH_OVERLAY, 0);
-        this.getDataManager().register(PRE_NAME_TYPE_OLD, 0);
+        this.getDataManager().register(PRE_NAME_TYPE, SlabfishManager.DEFAULT_SLABFISH.getRegistryName());
         this.getDataManager().register(FROM_BUCKET, false);
 
         this.getDataManager().register(HAS_BACKPACK, false);
@@ -179,9 +187,9 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
     @Override
     public void writeAdditional(CompoundNBT compound) {
         super.writeAdditional(compound);
-        compound.putInt("SlabfishType", this.getSlabfishTypeOld().getId());
+        compound.putString("SlabfishType", this.getSlabfishType().toString());
         compound.putInt("SlabfishOverlay", this.getSlabfishOverlay().getId());
-        compound.putInt("PreNameType", this.getPreNameTypeOld().getId());
+        compound.putString("PreNameType", this.getPreNameType().toString());
         compound.putBoolean("FromBucket", this.isFromBucket());
 
         compound.putBoolean("HasBackpack", this.hasBackpack());
@@ -202,13 +210,13 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
     @Override
     public void readAdditional(CompoundNBT compound) {
         super.readAdditional(compound);
-        this.setSlabfishTypeOld(SlabfishType.byId(compound.getInt("SlabfishType")));
+        this.setSlabfishType(new ResourceLocation(compound.getString("SlabfishType")));
         this.setSlabfishOverlay(SlabfishOverlay.byId(compound.getInt("SlabfishOverlay")));
-        this.setPreNameTypeOld(SlabfishType.byId(compound.getInt("PreNameType")));
+        this.setPreNameType(new ResourceLocation(compound.getString("PreNameType")));
         this.setFromBucket(compound.getBoolean("FromBucket"));
 
         this.setBackpacked(compound.getBoolean("HasBackpack"));
-        if (compound.contains("BackpackColor", 99))
+        if (compound.contains("BackpackColor", Constants.NBT.TAG_ANY_NUMERIC))
             this.setBackpackColor(DyeColor.byId(compound.getInt("BackpackColor")));
         ItemStack backpackItem = ItemStack.read(compound.getCompound("BackpackItem"));
         this.setBackpackItem(backpackItem);
@@ -434,16 +442,13 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
             }
         }
 
-        List<PlayerEntity> playerList = world.getEntitiesWithinAABB(PlayerEntity.class, this.getBoundingBox().grow(5.0D, 5.0D, 5.0D));
+        List<PlayerEntity> playerList = this.world.getEntitiesWithinAABB(PlayerEntity.class, this.getBoundingBox().grow(5.0D, 5.0D, 5.0D));
 
         for (PlayerEntity player : playerList) {
             if (player instanceof ServerPlayerEntity) {
                 ServerPlayerEntity serverplayerentity = (ServerPlayerEntity) player;
-                if (!world.isRemote()) {
-                    if (this.getSlabfishTypeOld() == SlabfishType.SWAMP)
-                        EnvironmentalCriteriaTriggers.SWAMP_SLABFISH.trigger(serverplayerentity);
-                    if (this.getSlabfishTypeOld() == SlabfishType.MARSH)
-                        EnvironmentalCriteriaTriggers.MARSH_SLABFISH.trigger(serverplayerentity);
+                if (!this.world.isRemote()) {
+                    EnvironmentalCriteriaTriggers.SLABFISH.trigger(serverplayerentity, this);
                 }
             }
         }
@@ -551,8 +556,10 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
     @Override
     public SlabfishEntity createChild(AgeableEntity ageable) {
         SlabfishEntity baby = EnvironmentalEntities.SLABFISH.get().create(this.world);
-        baby.setSlabfishTypeOld(this.getSlabfishTypeOld());
-        baby.setPreNameTypeOld(this.getSlabfishTypeOld());
+        if (baby == null)
+            return null;
+        baby.setSlabfishType(this.getSlabfishType());
+        baby.setPreNameType(this.getSlabfishType());
         return baby;
     }
 
@@ -604,174 +611,163 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
     // SLABFISH TYPE //
 
-    @Deprecated
-    public SlabfishType getTypeForConditions(IWorld world) {
-        BlockPos pos = new BlockPos(this.getPositionVec());
-        Biome biome = world.getBiome(pos);
+    public SlabfishType getTypeForConditions() {
+        SlabfishConditionContext context = SlabfishConditionContext.of(this);
+//        BlockPos pos = new BlockPos(this.getPositionVec());
+//        Biome biome = world.getBiome(pos);
+//
+//        List<Biome> MARSH = new ArrayList<Biome>();
+//        MARSH.add(EnvironmentalBiomes.MARSH.get());
+//        MARSH.add(EnvironmentalBiomes.MUSHROOM_MARSH.get());
+//
+//        List<Biome> ROSEWOOD = new ArrayList<Biome>();
+//        ROSEWOOD.add(findBiome("atmospheric", "rosewood_forest"));
+//        ROSEWOOD.add(findBiome("atmospheric", "rosewood_mountains"));
+//        ROSEWOOD.add(findBiome("atmospheric", "rosewood_plateau"));
+//        ROSEWOOD.add(findBiome("atmospheric", "rosewood_forest_plateau"));
+//
+//        List<Biome> DUNES = new ArrayList<Biome>();
+//        DUNES.add(findBiome("atmospheric", "dunes"));
+//        DUNES.add(findBiome("atmospheric", "dunes_hills"));
+//        DUNES.add(findBiome("atmospheric", "petrified_dunes"));
+//        DUNES.add(findBiome("atmospheric", "rocky_dunes"));
+//        DUNES.add(findBiome("atmospheric", "rocky_dunes_hills"));
+//        DUNES.add(findBiome("atmospheric", "flourishing_dunes"));
+//
+//        List<Biome> MAPLE = new ArrayList<Biome>();
+//        MAPLE.add(findBiome("autumnity", "maple_forest"));
+//        MAPLE.add(findBiome("autumnity", "maple_forest_hills"));
+//        MAPLE.add(findBiome("autumnity", "pumpkin_fields"));
+//
+//        List<Biome> POISE = new ArrayList<Biome>();
+//        POISE.add(findBiome("endergetic", "poise_forest"));
+//
+//        if (world.getWorld().func_234922_V_() == DimensionType.field_235999_c_) {
+//            if (((ServerWorld) this.world).findRaid(pos) != null) return SlabfishTypeOld.TOTEM;
+//            if (pos.getY() <= 20 && world.getLight(pos) == 0) return SlabfishTypeOld.CAVE;
+//            if (pos.getY() >= 200) return SlabfishTypeOld.SKY;
+//
+//            if (MARSH.contains(biome)) return SlabfishTypeOld.MARSH;
+//            if (MAPLE.contains(biome)) return SlabfishTypeOld.MAPLE;
+//            if (ROSEWOOD.contains(biome)) return SlabfishTypeOld.ROSEWOOD;
+//            if (DUNES.contains(biome)) return SlabfishTypeOld.DUNES;
+//
+//            if (biome == Biomes.ICE_SPIKES) return SlabfishTypeOld.ICE_SPIKES;
+//            if (biome == Biomes.DARK_FOREST || biome == Biomes.DARK_FOREST_HILLS) return SlabfishTypeOld.DARK_FOREST;
+//            if (biome == Biomes.FLOWER_FOREST) return SlabfishTypeOld.FLOWER_FOREST;
+//
+//            if (biome.getCategory() == Biome.Category.OCEAN) {
+//                if (pos.getY() <= 50 && world.getFluidState(pos).getLevel() == 8) return SlabfishTypeOld.DROWNED;
+//                else if (biome == Biomes.FROZEN_OCEAN || biome == Biomes.DEEP_FROZEN_OCEAN)
+//                    return SlabfishTypeOld.FROZEN_OCEAN;
+//                else if (biome == Biomes.WARM_OCEAN || biome == Biomes.DEEP_WARM_OCEAN) return SlabfishTypeOld.WARM_OCEAN;
+//                else return SlabfishTypeOld.OCEAN;
+//            }
+//
+//            if (biome.getCategory() == Biome.Category.JUNGLE) {
+//                if (biome == Biomes.BAMBOO_JUNGLE || biome == Biomes.BAMBOO_JUNGLE_HILLS) return SlabfishTypeOld.BAMBOO;
+//                else return SlabfishTypeOld.JUNGLE;
+//            }
+//
+//            if (biome.getCategory() == Biome.Category.MUSHROOM) return SlabfishTypeOld.MUSHROOM;
+//            if (biome.getCategory() == Biome.Category.RIVER) return SlabfishTypeOld.RIVER;
+//            if (biome.getCategory() == Biome.Category.BEACH) return SlabfishTypeOld.BEACH;
+//            if (biome.getCategory() == Biome.Category.SAVANNA) return SlabfishTypeOld.SAVANNA;
+//            if (biome.getCategory() == Biome.Category.MESA) return SlabfishTypeOld.BADLANDS;
+//            if (biome.getCategory() == Biome.Category.ICY) return SlabfishTypeOld.SNOWY;
+//            if (biome.getCategory() == Biome.Category.DESERT) return SlabfishTypeOld.DESERT;
+//            if (biome.getCategory() == Biome.Category.TAIGA) return SlabfishTypeOld.TAIGA;
+//            if (biome.getCategory() == Biome.Category.FOREST) return SlabfishTypeOld.FOREST;
+//            if (biome.getCategory() == Biome.Category.PLAINS) return SlabfishTypeOld.PLAINS;
+//            if (biome.getCategory() == Biome.Category.EXTREME_HILLS || biome == Biomes.STONE_SHORE)
+//                return SlabfishTypeOld.MOUNTAIN;
+//        }
+//
+//        if (world.getWorld().func_234922_V_() == DimensionType.field_236000_d_) {
+//            if (biome == Biomes.field_235253_az_) return SlabfishTypeOld.CRIMSON;
+//            if (biome == Biomes.field_235250_aA_) return SlabfishTypeOld.WARPED;
+//            if (biome == Biomes.field_235252_ay_) return SlabfishTypeOld.SOUL_SAND_VALLEY;
+//            if (biome == Biomes.field_235251_aB_) return SlabfishTypeOld.BASALT_DELTAS;
+//            else return SlabfishTypeOld.NETHER;
+//        }
+//
+//        if (world.getWorld().func_234922_V_() == DimensionType.field_236001_e_) {
+//            if (POISE.contains(biome)) return SlabfishTypeOld.POISE;
+//            else if (biome == Biomes.END_HIGHLANDS) return SlabfishTypeOld.CHORUS;
+//            else return SlabfishTypeOld.END;
+//        }
 
-        List<Biome> MARSH = new ArrayList<Biome>();
-        MARSH.add(EnvironmentalBiomes.MARSH.get());
-        MARSH.add(EnvironmentalBiomes.MUSHROOM_MARSH.get());
-
-        List<Biome> ROSEWOOD = new ArrayList<Biome>();
-        ROSEWOOD.add(findBiome("atmospheric", "rosewood_forest"));
-        ROSEWOOD.add(findBiome("atmospheric", "rosewood_mountains"));
-        ROSEWOOD.add(findBiome("atmospheric", "rosewood_plateau"));
-        ROSEWOOD.add(findBiome("atmospheric", "rosewood_forest_plateau"));
-
-        List<Biome> DUNES = new ArrayList<Biome>();
-        DUNES.add(findBiome("atmospheric", "dunes"));
-        DUNES.add(findBiome("atmospheric", "dunes_hills"));
-        DUNES.add(findBiome("atmospheric", "petrified_dunes"));
-        DUNES.add(findBiome("atmospheric", "rocky_dunes"));
-        DUNES.add(findBiome("atmospheric", "rocky_dunes_hills"));
-        DUNES.add(findBiome("atmospheric", "flourishing_dunes"));
-
-        List<Biome> MAPLE = new ArrayList<Biome>();
-        MAPLE.add(findBiome("autumnity", "maple_forest"));
-        MAPLE.add(findBiome("autumnity", "maple_forest_hills"));
-        MAPLE.add(findBiome("autumnity", "pumpkin_fields"));
-
-        List<Biome> POISE = new ArrayList<Biome>();
-        POISE.add(findBiome("endergetic", "poise_forest"));
-
-        if (world.getWorld().func_234922_V_() == DimensionType.field_235999_c_) {
-            if (((ServerWorld) this.world).findRaid(pos) != null) return SlabfishType.TOTEM;
-            if (pos.getY() <= 20 && world.getLight(pos) == 0) return SlabfishType.CAVE;
-            if (pos.getY() >= 200) return SlabfishType.SKY;
-
-            if (MARSH.contains(biome)) return SlabfishType.MARSH;
-            if (MAPLE.contains(biome)) return SlabfishType.MAPLE;
-            if (ROSEWOOD.contains(biome)) return SlabfishType.ROSEWOOD;
-            if (DUNES.contains(biome)) return SlabfishType.DUNES;
-
-            if (biome == Biomes.ICE_SPIKES) return SlabfishType.ICE_SPIKES;
-            if (biome == Biomes.DARK_FOREST || biome == Biomes.DARK_FOREST_HILLS) return SlabfishType.DARK_FOREST;
-            if (biome == Biomes.FLOWER_FOREST) return SlabfishType.FLOWER_FOREST;
-
-            if (biome.getCategory() == Biome.Category.OCEAN) {
-                if (pos.getY() <= 50 && world.getFluidState(pos).getLevel() == 8) return SlabfishType.DROWNED;
-                else if (biome == Biomes.FROZEN_OCEAN || biome == Biomes.DEEP_FROZEN_OCEAN)
-                    return SlabfishType.FROZEN_OCEAN;
-                else if (biome == Biomes.WARM_OCEAN || biome == Biomes.DEEP_WARM_OCEAN) return SlabfishType.WARM_OCEAN;
-                else return SlabfishType.OCEAN;
-            }
-
-            if (biome.getCategory() == Biome.Category.JUNGLE) {
-                if (biome == Biomes.BAMBOO_JUNGLE || biome == Biomes.BAMBOO_JUNGLE_HILLS) return SlabfishType.BAMBOO;
-                else return SlabfishType.JUNGLE;
-            }
-
-            if (biome.getCategory() == Biome.Category.MUSHROOM) return SlabfishType.MUSHROOM;
-            if (biome.getCategory() == Biome.Category.RIVER) return SlabfishType.RIVER;
-            if (biome.getCategory() == Biome.Category.BEACH) return SlabfishType.BEACH;
-            if (biome.getCategory() == Biome.Category.SAVANNA) return SlabfishType.SAVANNA;
-            if (biome.getCategory() == Biome.Category.MESA) return SlabfishType.BADLANDS;
-            if (biome.getCategory() == Biome.Category.ICY) return SlabfishType.SNOWY;
-            if (biome.getCategory() == Biome.Category.DESERT) return SlabfishType.DESERT;
-            if (biome.getCategory() == Biome.Category.TAIGA) return SlabfishType.TAIGA;
-            if (biome.getCategory() == Biome.Category.FOREST) return SlabfishType.FOREST;
-            if (biome.getCategory() == Biome.Category.PLAINS) return SlabfishType.PLAINS;
-            if (biome.getCategory() == Biome.Category.EXTREME_HILLS || biome == Biomes.STONE_SHORE)
-                return SlabfishType.MOUNTAIN;
-        }
-
-        if (world.getWorld().func_234922_V_() == DimensionType.field_236000_d_) {
-            if (biome == Biomes.field_235253_az_) return SlabfishType.CRIMSON;
-            if (biome == Biomes.field_235250_aA_) return SlabfishType.WARPED;
-            if (biome == Biomes.field_235252_ay_) return SlabfishType.SOUL_SAND_VALLEY;
-            if (biome == Biomes.field_235251_aB_) return SlabfishType.BASALT_DELTAS;
-            else return SlabfishType.NETHER;
-        }
-
-        if (world.getWorld().func_234922_V_() == DimensionType.field_236001_e_) {
-            if (POISE.contains(biome)) return SlabfishType.POISE;
-            else if (biome == Biomes.END_HIGHLANDS) return SlabfishType.CHORUS;
-            else return SlabfishType.END;
-        }
-
-        return SlabfishType.SWAMP;
+        return SlabfishManager.DEFAULT_SLABFISH;
     }
 
-    @Deprecated
-    public SlabfishType getRandomType() {
-        boolean flag = false;
-        SlabfishType type = SlabfishType.SWAMP;
-        float chance = rand.nextFloat();
-        SlabfishRarity rarity = SlabfishRarity.byChance(chance);
-
-        while (!flag) {
-            type = SlabfishType.getRandomFromRarity(rarity, rand);
-            if ((type == SlabfishType.DUNES || type == SlabfishType.ROSEWOOD) && !ModList.get().isLoaded("atmospheric")) {
-                flag = false;
-            } else if (type == SlabfishType.POISE && !ModList.get().isLoaded("endergetic")) {
-                flag = false;
-            } else if (type == SlabfishType.MAPLE && !ModList.get().isLoaded("autumnity")) {
-                flag = false;
-            } else if (type == SlabfishType.BAGEL || type == SlabfishType.CAMERON || type == SlabfishType.GORE || type == SlabfishType.SNAKE_BLOCK
-                    || type == SlabfishType.SMELLY || type == SlabfishType.SQUART || type == SlabfishType.MISTA_JUB || type == SlabfishType.JACKSON) {
-                flag = false;
-            } else {
-                flag = true;
-            }
-        }
-
-        return type;
-    }
+//    @Deprecated
+//    public SlabfishType getRandomType() {
+//        boolean flag = false;
+//        SlabfishTypeOld type = SlabfishTypeOld.SWAMP;
+//        float chance = rand.nextFloat();
+//        SlabfishRarity rarity = SlabfishRarity.byChance(chance);
+//
+//        while (!flag) {
+//            type = SlabfishTypeOld.getRandomFromRarity(rarity, rand);
+//            if ((type == SlabfishTypeOld.DUNES || type == SlabfishTypeOld.ROSEWOOD) && !ModList.get().isLoaded("atmospheric")) {
+//                flag = false;
+//            } else if (type == SlabfishTypeOld.POISE && !ModList.get().isLoaded("endergetic")) {
+//                flag = false;
+//            } else if (type == SlabfishTypeOld.MAPLE && !ModList.get().isLoaded("autumnity")) {
+//                flag = false;
+//            } else if (type == SlabfishTypeOld.BAGEL || type == SlabfishTypeOld.CAMERON || type == SlabfishTypeOld.GORE || type == SlabfishTypeOld.SNAKE_BLOCK
+//                    || type == SlabfishTypeOld.SMELLY || type == SlabfishTypeOld.SQUART || type == SlabfishTypeOld.MISTA_JUB || type == SlabfishTypeOld.JACKSON) {
+//                flag = false;
+//            } else {
+//                flag = true;
+//            }
+//        }
+//
+//        return type;
+//    }
 
     @Deprecated
     public Biome findBiome(String modid, String name) {
         return ForgeRegistries.BIOMES.getValue(new ResourceLocation(modid, name));
     }
 
-    @Deprecated
-    public SlabfishType getTypeForBreeding(IWorld world, SlabfishEntity parent1, SlabfishEntity parent2) {
-        BlockPos pos = new BlockPos(this.getPositionVec());
-        Biome biome = world.getBiome(pos);
-
-        if (parent1.getSlabfishTypeOld() == SlabfishType.SKELETON && parent2.getSlabfishTypeOld() == SlabfishType.SKELETON) {
-            if (world.getWorld().func_234922_V_() == DimensionType.field_236000_d_) return SlabfishType.WITHER;
-            if (world.getBiome(pos).getCategory() == Biome.Category.ICY) return SlabfishType.STRAY;
-        }
-
-        if (this.getTypeForConditions(world) == SlabfishType.SWAMP && biome.getCategory() != Biome.Category.SWAMP) {
-            if (rand.nextBoolean()) {
-                return parent1.getSlabfishTypeOld();
-            } else {
-                return parent2.getSlabfishTypeOld();
-            }
-        } else {
-            if (rand.nextBoolean()) {
-                return this.getTypeForConditions(world);
-            } else {
-                if (rand.nextBoolean()) {
-                    return parent1.getSlabfishTypeOld();
-                } else {
-                    return parent2.getSlabfishTypeOld();
-                }
-            }
-        }
-    }
+//    @Deprecated
+//    public SlabfishTypeOld getTypeForBreeding(IWorld world, SlabfishEntity parent1, SlabfishEntity parent2) {
+//        BlockPos pos = new BlockPos(this.getPositionVec());
+//        Biome biome = world.getBiome(pos);
+//
+//        if (parent1.getSlabfishTypeOld() == SlabfishTypeOld.SKELETON && parent2.getSlabfishTypeOld() == SlabfishTypeOld.SKELETON) {
+//            if (world.getWorld().func_234922_V_() == DimensionType.field_236000_d_) return SlabfishTypeOld.WITHER;
+//            if (world.getBiome(pos).getCategory() == Biome.Category.ICY) return SlabfishTypeOld.STRAY;
+//        }
+//
+//        if (this.getTypeForConditions(world) == SlabfishTypeOld.SWAMP && biome.getCategory() != Biome.Category.SWAMP) {
+//            if (rand.nextBoolean()) {
+//                return parent1.getSlabfishTypeOld();
+//            } else {
+//                return parent2.getSlabfishTypeOld();
+//            }
+//        } else {
+//            if (rand.nextBoolean()) {
+//                return this.getTypeForConditions(world);
+//            } else {
+//                if (rand.nextBoolean()) {
+//                    return parent1.getSlabfishTypeOld();
+//                } else {
+//                    return parent2.getSlabfishTypeOld();
+//                }
+//            }
+//        }
+//    }
 
     @Deprecated
     public void setCustomName(@Nullable ITextComponent name) {
         super.setCustomName(name);
-        if (name != null && this.getSlabfishTypeOld() != SlabfishType.GHOST) {
+        if (!this.world.isRemote() && name != null && this.getSlabfishType() != EnvironmentalSlabfishTypes.GHOST) {
             super.setCustomName(name);
-            for (Map.Entry<List<String>, SlabfishType> entries : NAMES.entrySet()) {
-                if (entries.getKey().contains(name.getString().toLowerCase().trim())) {
-                    if (this.getSlabfishTypeOld() == entries.getValue()) {
-                        return;
-                    }
-                    if (!NAMES.containsValue(this.getSlabfishTypeOld())) {
-                        this.setPreNameTypeOld(this.getSlabfishTypeOld());
-                    }
-                    this.setSlabfishTypeOld(entries.getValue());
-                    return;
-                }
-            }
-            if (this.getSlabfishTypeOld() != this.getPreNameTypeOld()) {
-                this.setSlabfishTypeOld(this.getPreNameTypeOld());
+            SlabfishType newType = SlabfishManager.get(this.world).get(slabfishType -> true, SlabfishConditionContext.of(this));
+            if (newType.getRegistryName() != this.getSlabfishType()) {
+                this.setSlabfishType(newType.getRegistryName());
             }
         }
     }
@@ -784,56 +780,60 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
     @Deprecated
     public void onStruckByLightning(LightningBoltEntity lightningBolt) {
         UUID uuid = lightningBolt.getUniqueID();
-        if (!uuid.equals(this.lightningUUID) && this.getSlabfishTypeOld() != SlabfishType.GHOST) {
-            if (this.getSlabfishTypeOld() == SlabfishType.MUSHROOM) {
-                this.setSlabfishTypeOld(SlabfishType.BROWN_MUSHROOM);
-                this.setPreNameTypeOld(SlabfishType.BROWN_MUSHROOM);
-            } else if (this.getSlabfishTypeOld() == SlabfishType.BROWN_MUSHROOM) {
-                this.setSlabfishTypeOld(SlabfishType.MUSHROOM);
-                this.setPreNameTypeOld(SlabfishType.MUSHROOM);
-            } else {
-                this.setSlabfishTypeOld(SlabfishType.SKELETON);
-                this.setPreNameTypeOld(SlabfishType.SKELETON);
-            }
+        if (!this.world.isRemote() && !uuid.equals(this.lightningUUID) && this.getSlabfishType() != EnvironmentalSlabfishTypes.GHOST) {
+            SlabfishConditionContext context = SlabfishConditionContext.lightning(this);
+            SlabfishType newType = SlabfishManager.get(this.world).get(__ -> true, context);
+            this.setSlabfishType(newType.getRegistryName());
+            this.setPreNameType(newType.getRegistryName());
+//            if (this.getSlabfishTypeOld() == SlabfishTypeOld.MUSHROOM) {
+//                this.setSlabfishTypeOld(SlabfishTypeOld.BROWN_MUSHROOM);
+//                this.setPreNameTypeOld(SlabfishTypeOld.BROWN_MUSHROOM);
+//            } else if (this.getSlabfishTypeOld() == SlabfishTypeOld.BROWN_MUSHROOM) {
+//                this.setSlabfishTypeOld(SlabfishTypeOld.MUSHROOM);
+//                this.setPreNameTypeOld(SlabfishTypeOld.MUSHROOM);
+//            } else {
+//                this.setSlabfishTypeOld(SlabfishTypeOld.SKELETON);
+//                this.setPreNameTypeOld(SlabfishTypeOld.SKELETON);
+//            }
             this.lightningUUID = uuid;
             this.playSound(SoundEvents.ENTITY_LIGHTNING_BOLT_THUNDER, 2.0F, 1.0F);
         }
     }
 
-    @Deprecated
-    public SlabfishType getSlabfishTypeOld() {
-        return SlabfishType.byId(this.dataManager.get(SLABFISH_TYPE_OLD));
+    public ResourceLocation getSlabfishType() {
+        return this.dataManager.get(SLABFISH_TYPE);
     }
 
-    @Deprecated
-    public void setSlabfishTypeOld(SlabfishType typeId) {
-        this.dataManager.set(SLABFISH_TYPE_OLD, typeId.getId());
+    public void setSlabfishType(ResourceLocation type) {
+        this.dataManager.set(SLABFISH_TYPE, type);
     }
 
-    @Deprecated
-    public SlabfishType getPreNameTypeOld() {
-        return SlabfishType.byId(this.dataManager.get(PRE_NAME_TYPE_OLD));
+    public ResourceLocation getPreNameType() {
+        return this.dataManager.get(PRE_NAME_TYPE);
     }
 
-    @Deprecated
-    public void setPreNameTypeOld(SlabfishType typeId) {
-        this.dataManager.set(PRE_NAME_TYPE_OLD, typeId.getId());
+    public void setPreNameType(ResourceLocation type) {
+        this.dataManager.set(PRE_NAME_TYPE, type);
     }
 
     @Nullable
     @Override
-    public ILivingEntityData onInitialSpawn(IWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, ILivingEntityData spawnDataIn, CompoundNBT dataTag) {
-        spawnDataIn = super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
-        SlabfishType type = reason == SpawnReason.BUCKET ? this.getRandomType() : this.getTypeForConditions(worldIn);
+    public ILivingEntityData onInitialSpawn(IWorld world, DifficultyInstance difficulty, SpawnReason reason, ILivingEntityData spawnDataIn, CompoundNBT dataTag) {
+        spawnDataIn = super.onInitialSpawn(world, difficulty, reason, spawnDataIn, dataTag);
 
-        if (dataTag != null && dataTag.contains("SlabfishType", 3)) {
+        SlabfishManager slabfishManager = SlabfishManager.get(world);
+        SlabfishRarity rarity = SlabfishRarity.byChance(world.getRandom().nextFloat());
+        ResourceLocation type = reason == SpawnReason.BUCKET ? slabfishManager.getRandom(slabfishType -> slabfishType.getRarity() == rarity, world.getRandom()).getRegistryName() : slabfishManager.get(__ -> true, SlabfishConditionContext.of(this)).getRegistryName();
+        System.out.println(type);
+
+        if (dataTag != null && dataTag.contains("SlabfishType", Constants.NBT.TAG_STRING)) {
             if (dataTag.contains("Health")) this.setHealth(dataTag.getFloat("Health"));
             if (dataTag.contains("Age")) this.setGrowingAge(dataTag.getInt("Age"));
-            this.setSlabfishTypeOld(SlabfishType.byId(dataTag.getInt("SlabfishType")));
+            this.setSlabfishType(new ResourceLocation(dataTag.getString("SlabfishType")));
             if (dataTag.contains("PreNameType")) {
-                this.setPreNameTypeOld(SlabfishType.byId(dataTag.getInt("PreNameType")));
+                this.setPreNameType(new ResourceLocation(dataTag.getString("PreNameType")));
             } else {
-                this.setPreNameTypeOld(SlabfishType.byId(dataTag.getInt("SlabfishType")));
+                this.setPreNameType(new ResourceLocation(dataTag.getString("SlabfishType")));
             }
 
             if (dataTag.contains("HasBackpack")) this.setBackpacked(dataTag.getBoolean("HasBackpack"));
@@ -852,21 +852,21 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         }
 
         if (spawnDataIn instanceof SlabfishEntity.SlabfishData) {
-            type = ((SlabfishEntity.SlabfishData) spawnDataIn).typeData;
+            type = ((SlabfishEntity.SlabfishData) spawnDataIn).type;
         } else if (!this.isFromBucket()) {
             spawnDataIn = new SlabfishEntity.SlabfishData(type);
         }
 
-        this.setSlabfishTypeOld(type);
-        this.setPreNameTypeOld(type);
+        this.setSlabfishType(type);
+        this.setPreNameType(type);
         return spawnDataIn;
     }
 
     public static class SlabfishData extends AgeableData implements ILivingEntityData {
-        public final SlabfishType typeData;
+        public final ResourceLocation type;
 
-        public SlabfishData(SlabfishType type) {
-            this.typeData = type;
+        public SlabfishData(ResourceLocation type) {
+            this.type = type;
         }
     }
 
@@ -896,8 +896,8 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         compound.putFloat("Health", this.getHealth());
         compound.putInt("Age", this.getGrowingAge());
 
-        compound.putInt("SlabfishType", this.getSlabfishTypeOld().getId());
-        compound.putInt("PreNameType", this.getPreNameTypeOld().getId());
+        compound.putString("SlabfishType", this.getSlabfishType().toString());
+        compound.putString("PreNameType", this.getPreNameType().toString());
 
         compound.putBoolean("HasBackpack", this.hasBackpack());
         if (this.hasBackpack()) compound.putByte("BackpackColor", (byte) this.getBackpackColor().getId());
@@ -979,7 +979,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
             player.closeScreen();
 
         player.getNextWindowId();
-        Environmental.PLAY.sendToServer(new SOpenSlabfishInventoryMessage(this, player.currentWindowId));
+        Environmental.PLAY.send(PacketDistributor.PLAYER.with(() -> player), new SOpenSlabfishInventoryMessage(this, player.currentWindowId));
         player.openContainer = new SlabfishInventoryContainer(player.currentWindowId, player.inventory, this.slabfishBackpack, this);
         player.openContainer.addListener(player);
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.entity.player.PlayerContainerEvent.Open(player, player.openContainer));

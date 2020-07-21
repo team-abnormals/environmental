@@ -28,15 +28,14 @@ public final class ClientSlabfishManager implements SlabfishManager
         this.slabfishTypes = new HashMap<>();
     }
 
-    @Nullable
     @Override
     public SlabfishType get(ResourceLocation registryName)
     {
-        return this.slabfishTypes.get(registryName);
+        return this.slabfishTypes.getOrDefault(registryName, DEFAULT_SLABFISH);
     }
 
     @Override
-    public SlabfishType get(SlabfishConditionContext context)
+    public SlabfishType get(Predicate<SlabfishType> predicate, SlabfishConditionContext context)
     {
         throw new UnsupportedOperationException("Client does not have access to select random slabfish based on conditions");
     }

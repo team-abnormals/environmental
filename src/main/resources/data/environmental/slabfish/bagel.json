@@ -1,5 +1,8 @@
 {
   "rarity": "uncommon",
+  "displayName": {
+    "translate": "entity.environmental.slabfish.bagel"
+  },
   "conditions": [
     {
       "type": "rename",

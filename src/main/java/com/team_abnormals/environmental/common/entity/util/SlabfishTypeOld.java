@@ -8,7 +8,7 @@ import java.util.Comparator;
 import java.util.Random;
 
 @Deprecated
-public enum SlabfishType implements IStringSerializable {
+public enum SlabfishTypeOld implements IStringSerializable {
     SWAMP(0, "swamp", SlabfishRarity.COMMON),
     OCEAN(1, "ocean", SlabfishRarity.COMMON),
     MARSH(2, "marsh", SlabfishRarity.COMMON),
@@ -63,12 +63,12 @@ public enum SlabfishType implements IStringSerializable {
     BMO(51, "bmo", SlabfishRarity.UNCOMMON);
 
     @Deprecated
-    private static final SlabfishType[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(SlabfishType::getId)).toArray(SlabfishType[]::new);
+    private static final SlabfishTypeOld[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(SlabfishTypeOld::getId)).toArray(SlabfishTypeOld[]::new);
     private final int id;
     private final String name;
     private final SlabfishRarity rarity;
 
-    SlabfishType(int idIn, String name, SlabfishRarity rarity) {
+    SlabfishTypeOld(int idIn, String name, SlabfishRarity rarity) {
         this.id = idIn;
         this.name = name;
         this.rarity = rarity;
@@ -82,15 +82,15 @@ public enum SlabfishType implements IStringSerializable {
         return this.rarity;
     }
 
-    public static SlabfishType byId(int id) {
+    public static SlabfishTypeOld byId(int id) {
         if (id < 0 || id >= VALUES.length) {
             id = 0;
         }
         return VALUES[id];
     }
 
-    public static SlabfishType byName(String key, SlabfishType type) {
-        for (SlabfishType slabfishtype : values()) {
+    public static SlabfishTypeOld byName(String key, SlabfishTypeOld type) {
+        for (SlabfishTypeOld slabfishtype : values()) {
             if (slabfishtype.name.equals(key)) {
                 return slabfishtype;
             }
@@ -98,9 +98,9 @@ public enum SlabfishType implements IStringSerializable {
         return type;
     }
 
-    public static SlabfishType getRandomFromRarity(SlabfishRarity rarity, Random rand) {
-        ArrayList<SlabfishType> types = new ArrayList<>();
-        for (SlabfishType slabfishtype : values()) {
+    public static SlabfishTypeOld getRandomFromRarity(SlabfishRarity rarity, Random rand) {
+        ArrayList<SlabfishTypeOld> types = new ArrayList<>();
+        for (SlabfishTypeOld slabfishtype : values()) {
             if (slabfishtype.getRarity() == rarity) {
                 types.add(slabfishtype);
             }

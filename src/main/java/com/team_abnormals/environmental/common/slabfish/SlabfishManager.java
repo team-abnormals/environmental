@@ -5,10 +5,10 @@ import com.team_abnormals.environmental.common.slabfish.condition.SlabfishCondit
 import com.team_abnormals.environmental.common.slabfish.condition.SlabfishConditionContext;
 import com.team_abnormals.environmental.core.Environmental;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IWorldReader;
 import net.minecraftforge.fml.LogicalSide;
 
-import javax.annotation.Nullable;
 import java.util.Random;
 import java.util.function.Predicate;
 
@@ -22,24 +22,24 @@ public interface SlabfishManager
     /**
      * The default slabfish that exists if there are no other slabfish types to choose from.
      */
-    SlabfishType DEFAULT_SLABFISH = new SlabfishType(SlabfishRarity.COMMON, -1, new SlabfishCondition[0]).setRegistryName(new ResourceLocation(Environmental.MODID, "default"));
+    SlabfishType DEFAULT_SLABFISH = new SlabfishType(SlabfishRarity.COMMON, new TranslationTextComponent("slabfish." + Environmental.MODID + ".swamp"), -1, new SlabfishCondition[0]).setRegistryName(new ResourceLocation(Environmental.MODID, "swamp"));
 
     /**
      * Checks the slabfish types for a slabfish of the specified name.
      *
      * @param registryName The name of the slabfish to search for
-     * @return The slabfish type by that name or null for no slabfish under that name
+     * @return The slabfish type by that name or {@link #DEFAULT_SLABFISH} for no slabfish under that name
      */
-    @Nullable
     SlabfishType get(ResourceLocation registryName);
 
     /**
      * Checks through all slabfish types for a slabfish conditions that succeed in the current context.
      *
-     * @param context The context of the slabfish
+     * @param predicate The predicate to determine what kinds of slabfish to allow
+     * @param context   The context of the slabfish
      * @return The slabfish that that was selected to be the best fit for the context
      */
-    SlabfishType get(SlabfishConditionContext context);
+    SlabfishType get(Predicate<SlabfishType> predicate, SlabfishConditionContext context);
 
     /**
      * Fetches a random slabfish type by the specified {@link Predicate}.
