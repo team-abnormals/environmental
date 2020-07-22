@@ -58,18 +58,5 @@ public class EnvironmentalItems {
 //	public static final RegistryObject<Item> AXOLOTL_SPAWN_EGG = HELPER.createSpawnEggItem("axolotl", () -> EnvironmentalEntities.AXOLOTL.get(), 6263617, 13940616);
 
     public static void setupProperties() {
-        ItemModelsProperties.func_239418_a_(SLABFISH_BUCKET.get(), new ResourceLocation("variant"), (stack, world, entity) -> {
-            CompoundNBT compoundnbt = stack.getTag();
-            if (compoundnbt != null && compoundnbt.contains("SlabfishType", Constants.NBT.TAG_STRING)) {
-                return compoundnbt.getString("SlabfishType").hashCode();
-            }
-            return 0;
-        });
     }
-
-    // TODO autogenerate slabfish bucket model
-//    @SubscribeEvent
-//    public static void onEvent(ModelBakeEvent event) {
-//
-//    }
 }
