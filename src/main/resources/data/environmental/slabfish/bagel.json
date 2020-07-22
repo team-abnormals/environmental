@@ -4,6 +4,7 @@
   "displayName": {
     "translate": "entity.environmental.slabfish.bagel"
   },
+  "tradable": false,
   "conditions": [
     {
       "type": "rename",

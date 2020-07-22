@@ -10,6 +10,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.ModList;
 
 import java.lang.reflect.Type;
 import java.util.function.Predicate;
@@ -26,15 +27,19 @@ public class SlabfishType implements Predicate<SlabfishConditionContext>
     private final boolean translucent;
     private final boolean customBackpack;
     private final SlabfishRarity rarity;
+    private final boolean tradable;
+    private final boolean modLoaded;
     private final int priority;
     private final SlabfishCondition[] conditions;
 
-    public SlabfishType(SlabfishRarity rarity, ITextComponent displayName, boolean translucent, boolean customBackpack, int priority, SlabfishCondition[] conditions)
+    public SlabfishType(SlabfishRarity rarity, ITextComponent displayName, boolean translucent, boolean customBackpack, boolean tradable, boolean modLoaded, int priority, SlabfishCondition[] conditions)
     {
         this.rarity = rarity;
         this.displayName = displayName;
         this.translucent = translucent;
         this.customBackpack = customBackpack;
+        this.tradable = tradable;
+        this.modLoaded = modLoaded;
         this.priority = priority;
         this.conditions = conditions;
     }
@@ -89,6 +94,22 @@ public class SlabfishType implements Predicate<SlabfishConditionContext>
     }
 
     /**
+     * @return Whether or not this item can be traded for with a wandering trader
+     */
+    public boolean isTradable()
+    {
+        return tradable;
+    }
+
+    /**
+     * @return Whether or not this type should be loaded only if a mod with a provided name is loaded
+     */
+    public boolean isModLoaded()
+    {
+        return modLoaded;
+    }
+
+    /**
      * @return The priority of this slabfish. Used to determine what slabfish should be chosen over others when different types have passed conditions
      */
     public int getPriority()
@@ -121,6 +142,7 @@ public class SlabfishType implements Predicate<SlabfishConditionContext>
         buf.writeBoolean(this.translucent);
         buf.writeBoolean(this.customBackpack);
         buf.writeVarInt(this.rarity.ordinal());
+        buf.writeBoolean(this.modLoaded);
         buf.writeVarInt(this.priority);
     }
 
@@ -149,8 +171,9 @@ public class SlabfishType implements Predicate<SlabfishConditionContext>
         boolean translucent = buf.readBoolean();
         boolean customBackpack = buf.readBoolean();
         SlabfishRarity rarity = SlabfishRarity.byId(buf.readVarInt());
+        boolean modLoaded = buf.readBoolean();
         int priority = buf.readVarInt();
-        return new SlabfishType(rarity, displayName, translucent, customBackpack, priority, new SlabfishCondition[0]).setRegistryName(registryName);
+        return new SlabfishType(rarity, displayName, translucent, customBackpack, false, modLoaded, priority, new SlabfishCondition[0]).setRegistryName(registryName);
     }
 
     /**
@@ -177,8 +200,17 @@ public class SlabfishType implements Predicate<SlabfishConditionContext>
             JsonObject jsonObject = json.getAsJsonObject();
             if (!jsonObject.has("rarity"))
                 throw new JsonSyntaxException("Slabfish rarity is required");
+
             SlabfishRarity rarity = deserializeRarity(jsonObject.get("rarity"));
-            return new SlabfishType(rarity, jsonObject.has("displayName") ? context.deserialize(jsonObject.get("displayName"), ITextComponent.class) : null, jsonObject.has("translucent") && jsonObject.get("translucent").getAsBoolean(), jsonObject.has("customBackpack") && jsonObject.get("customBackpack").getAsBoolean(), jsonObject.has("priority") ? jsonObject.get("priority").getAsInt() : 0, jsonObject.has("conditions") ? context.deserialize(jsonObject.get("conditions"), SlabfishCondition[].class) : new SlabfishCondition[0]);
+            ITextComponent displayName = jsonObject.has("displayName") ? context.deserialize(jsonObject.get("displayName"), ITextComponent.class) : null;
+            boolean translucent = jsonObject.has("translucent") && jsonObject.get("translucent").getAsBoolean();
+            boolean customBackpack = jsonObject.has("customBackpack") && jsonObject.get("customBackpack").getAsBoolean();
+            boolean tradable = !jsonObject.has("tradable") || jsonObject.get("tradable").getAsBoolean();
+            boolean modLoaded = !jsonObject.has("mod") || ModList.get().isLoaded(jsonObject.get("mod").getAsString());
+            int priority = jsonObject.has("priority") ? jsonObject.get("priority").getAsInt() : 0;
+            SlabfishCondition[] conditions = jsonObject.has("conditions") ? context.deserialize(jsonObject.get("conditions"), SlabfishCondition[].class) : new SlabfishCondition[0];
+
+            return new SlabfishType(rarity, displayName, translucent, customBackpack, tradable, modLoaded, priority, conditions);
         }
     }
 }

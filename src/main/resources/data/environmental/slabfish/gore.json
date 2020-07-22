@@ -5,6 +5,7 @@
     "translate": "entity.environmental.slabfish.gore"
   },
   "customBackpack": true,
+  "tradable": false,
   "conditions": [
     {
       "type": "rename",

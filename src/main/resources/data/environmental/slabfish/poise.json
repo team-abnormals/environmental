@@ -4,6 +4,7 @@
   "displayName": {
     "translate": "entity.environmental.slabfish.poise"
   },
+  "mod": "endergetic",
   "conditions": [
     {
       "type": "biome",

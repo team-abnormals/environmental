@@ -4,6 +4,7 @@
   "displayName": {
     "translate": "entity.environmental.slabfish.smelly"
   },
+  "tradable": false,
   "conditions": [
     {
       "type": "rename",

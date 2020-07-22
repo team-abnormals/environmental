@@ -672,7 +672,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
         SlabfishManager slabfishManager = SlabfishManager.get(world);
         SlabfishRarity rarity = SlabfishRarity.byChance(world.getRandom().nextFloat());
-        ResourceLocation type = reason == SpawnReason.BUCKET ? slabfishManager.getRandom(slabfishType -> slabfishType.getRarity() == rarity, world.getRandom()).getRegistryName() : slabfishManager.get(__ -> true, SlabfishConditionContext.of(this)).getRegistryName();
+        ResourceLocation type = reason == SpawnReason.BUCKET ? slabfishManager.getRandom(slabfishType -> slabfishType.isModLoaded() && slabfishType.isTradable() && slabfishType.getRarity() == rarity, world.getRandom()).getRegistryName() : slabfishManager.get(__ -> true, SlabfishConditionContext.of(this)).getRegistryName();
 
         if (spawnDataIn instanceof SlabfishEntity.SlabfishData) {
             type = ((SlabfishEntity.SlabfishData) spawnDataIn).type;

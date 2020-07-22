@@ -5,6 +5,7 @@
     "translate": "entity.environmental.slabfish.snake_block"
   },
   "customBackpack": true,
+  "tradable": false,
   "conditions": [
     {
       "type": "rename",

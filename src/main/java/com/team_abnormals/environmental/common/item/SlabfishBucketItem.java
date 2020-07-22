@@ -77,7 +77,8 @@ public class SlabfishBucketItem extends BucketItem {
         if (compoundnbt != null) {
             if (compoundnbt.contains("SlabfishType", Constants.NBT.TAG_STRING)) {
                 SlabfishType slabfishType = SlabfishManager.get(worldIn).get(new ResourceLocation(compoundnbt.getString("SlabfishType")));
-                tooltip.add(slabfishType.getDisplayName().deepCopy().func_240701_a_(TextFormatting.ITALIC, slabfishType.getRarity().getFormatting()));
+                if (slabfishType != SlabfishManager.DEFAULT_SLABFISH)
+                    tooltip.add(slabfishType.getDisplayName().deepCopy().func_240701_a_(TextFormatting.ITALIC, slabfishType.getRarity().getFormatting()));
             }
             if (compoundnbt.contains("Age", Constants.NBT.TAG_ANY_NUMERIC) && compoundnbt.getInt("Age") < 0) {
                 tooltip.add((new TranslationTextComponent("entity.environmental.slabfish.baby").func_240701_a_(TextFormatting.ITALIC, TextFormatting.GRAY)));

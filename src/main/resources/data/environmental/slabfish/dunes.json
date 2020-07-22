@@ -3,6 +3,7 @@
   "displayName": {
     "translate": "entity.environmental.slabfish.dunes"
   },
+  "mod": "atmospheric",
   "conditions": [
     {
       "type": "or",

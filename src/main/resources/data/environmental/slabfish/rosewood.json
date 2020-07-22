@@ -3,6 +3,7 @@
   "displayName": {
     "translate": "entity.environmental.slabfish.rosewood"
   },
+  "mod": "atmospheric",
   "conditions": [
     {
       "type": "or",

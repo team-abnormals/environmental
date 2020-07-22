@@ -4,6 +4,7 @@
   "displayName": {
     "translate": "entity.environmental.slabfish.bmo"
   },
+  "tradable": false,
   "conditions": [
     {
       "type": "rename",

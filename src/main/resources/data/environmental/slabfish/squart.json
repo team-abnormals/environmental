@@ -4,6 +4,7 @@
   "displayName": {
     "translate": "entity.environmental.slabfish.squart"
   },
+  "tradable": false,
   "conditions": [
     {
       "type": "rename",

@@ -4,6 +4,7 @@
   "displayName": {
     "translate": "entity.environmental.slabfish.mista_jub"
   },
+  "tradable": false,
   "conditions": [
     {
       "type": "rename",

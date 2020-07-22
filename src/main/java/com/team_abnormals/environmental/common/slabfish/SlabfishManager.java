@@ -22,7 +22,7 @@ public interface SlabfishManager
     /**
      * The default slabfish that exists if there are no other slabfish types to choose from.
      */
-    SlabfishType DEFAULT_SLABFISH = new SlabfishType(SlabfishRarity.COMMON, new TranslationTextComponent("entity." + Environmental.MODID + ".slabfish.swamp"), false, false, -1, new SlabfishCondition[0]).setRegistryName(new ResourceLocation(Environmental.MODID, "swamp"));
+    SlabfishType DEFAULT_SLABFISH = new SlabfishType(SlabfishRarity.COMMON, new TranslationTextComponent("entity." + Environmental.MODID + ".slabfish.swamp"), false, false, true, true, -1, new SlabfishCondition[0]).setRegistryName(new ResourceLocation(Environmental.MODID, "swamp"));
 
     /**
      * The id for the ghost slabfish. Used for custom functionality.

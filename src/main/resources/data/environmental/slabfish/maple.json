@@ -3,6 +3,7 @@
   "displayName": {
     "translate": "entity.environmental.slabfish.maple"
   },
+  "mod": "autumnity",
   "conditions": [
     {
       "type": "or",
