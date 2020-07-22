@@ -7,6 +7,7 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.TagCollectionManager;
+import net.minecraft.util.LazyValue;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
@@ -30,19 +31,12 @@ public class SweaterType implements Predicate<ItemStack>
     private ITextComponent displayName;
     private final Ingredient ingredient;
     @OnlyIn(Dist.CLIENT)
-    private ResourceLocation textureLocation;
+    private final LazyValue<ResourceLocation> textureLocation = new LazyValue<>(() -> new ResourceLocation(this.getRegistryName().getNamespace(), "textures/entity/slabfish/sweaters/sweater_" + this.getRegistryName().getPath() + ".png"));
 
     public SweaterType(@Nullable ITextComponent displayName, Ingredient ingredient)
     {
         this.displayName = displayName;
         this.ingredient = ingredient;
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    private SweaterType(@Nullable ITextComponent displayName, Ingredient ingredient, ResourceLocation registryName)
-    {
-        this(displayName, ingredient);
-        this.textureLocation = new ResourceLocation(registryName.getNamespace(), "textures/entity/slabfish/sweaters/sweater_" + registryName.getPath() + ".png");
     }
 
     /**
@@ -81,9 +75,8 @@ public class SweaterType implements Predicate<ItemStack>
     @OnlyIn(Dist.CLIENT)
     public ResourceLocation getTextureLocation()
     {
-        return textureLocation;
+        return this.textureLocation.getValue();
     }
-
 
     /**
      * Sets the registry name of this sweater type.
@@ -131,8 +124,8 @@ public class SweaterType implements Predicate<ItemStack>
     {
         ResourceLocation registryName = buf.readResourceLocation();
         ITextComponent displayName = buf.readTextComponent();
-        Ingredient item = Ingredient.read(buf);
-        return new SweaterType(displayName, item, registryName).setRegistryName(registryName);
+        Ingredient ingredient = Ingredient.read(buf);
+        return new SweaterType(displayName, ingredient).setRegistryName(registryName);
     }
 
     /**

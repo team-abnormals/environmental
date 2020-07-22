@@ -7,6 +7,7 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.TagCollectionManager;
+import net.minecraft.util.LazyValue;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
@@ -30,33 +31,18 @@ public class BackpackType implements Predicate<ItemStack>
     private ITextComponent displayName;
     private final Ingredient ingredient;
     @OnlyIn(Dist.CLIENT)
-    private ResourceLocation textureLocation;
+    private final LazyValue<ResourceLocation> textureLocation = new LazyValue<>(() -> new ResourceLocation(this.getRegistryName().getNamespace(), "textures/entity/slabfish/backpacks/backpack_" + this.getRegistryName().getPath() + ".png"));
 
-    public BackpackType(@Nullable ITextComponent displayName, Ingredient ingredient)
+    public BackpackType(@Nullable ITextComponent displayName, @Nullable Ingredient ingredient)
     {
         this.displayName = displayName;
         this.ingredient = ingredient;
     }
 
-    @OnlyIn(Dist.CLIENT)
-    private BackpackType(@Nullable ITextComponent displayName, Ingredient ingredient, ResourceLocation registryName)
-    {
-        this(displayName, ingredient);
-        this.textureLocation = new ResourceLocation(registryName.getNamespace(), "textures/entity/slabfish/backpacks/backpack_" + registryName.getPath() + ".png");
-    }
-
-    /**
-     * @return Whether or not this backpack type is considered to be empty
-     */
-    public boolean isEmpty()
-    {
-        return this == SlabfishManager.EMPTY_BACKPACK;
-    }
-
     @Override
     public boolean test(ItemStack stack)
     {
-        return !this.isEmpty() && this.ingredient != Ingredient.EMPTY && this.ingredient.test(stack);
+        return this.ingredient != null && this.ingredient.test(stack);
     }
 
     /**
@@ -81,7 +67,7 @@ public class BackpackType implements Predicate<ItemStack>
     @OnlyIn(Dist.CLIENT)
     public ResourceLocation getTextureLocation()
     {
-        return textureLocation;
+        return this.textureLocation.getValue();
     }
 
     /**
@@ -106,6 +92,8 @@ public class BackpackType implements Predicate<ItemStack>
     {
         buf.writeResourceLocation(this.registryName);
         buf.writeTextComponent(this.displayName);
+        buf.writeBoolean(this.ingredient != null);
+        if(this.ingredient != null)
         this.ingredient.write(buf);
     }
 
@@ -115,7 +103,7 @@ public class BackpackType implements Predicate<ItemStack>
         return "BackpackType{" +
                 "registryName=" + registryName +
                 ", displayName=" + displayName.getString() +
-                ", ingredient=" + Arrays.toString(ingredient.getMatchingStacks()) +
+                ", ingredient=" + (ingredient == null ? null : Arrays.toString(ingredient.getMatchingStacks())) +
                 '}';
     }
 
@@ -130,8 +118,8 @@ public class BackpackType implements Predicate<ItemStack>
     {
         ResourceLocation registryName = buf.readResourceLocation();
         ITextComponent displayName = buf.readTextComponent();
-        Ingredient item = Ingredient.read(buf);
-        return new BackpackType(displayName, item, registryName).setRegistryName(registryName);
+        Ingredient ingredient = buf.readBoolean() ? Ingredient.read(buf) : null;
+        return new BackpackType(displayName, ingredient).setRegistryName(registryName);
     }
 
     /**
@@ -151,7 +139,7 @@ public class BackpackType implements Predicate<ItemStack>
             ITextComponent displayName = jsonObject.has("displayName") ? context.deserialize(jsonObject.get("displayName"), ITextComponent.class) : null;
             Item item = jsonObject.has("item") && ForgeRegistries.ITEMS.containsKey(new ResourceLocation(jsonObject.get("item").getAsString())) ? ForgeRegistries.ITEMS.getValue(new ResourceLocation(jsonObject.get("item").getAsString())) : null;
             ITag<Item> tag = jsonObject.has("tag") ? TagCollectionManager.func_232928_e_().func_232925_b_().get(new ResourceLocation(jsonObject.get("tag").getAsString())) : null;
-            Ingredient ingredient = item != null ? Ingredient.fromItems(item) : tag != null ? Ingredient.fromTag(tag) : Ingredient.EMPTY;
+            Ingredient ingredient = item != null ? Ingredient.fromItems(item) : tag != null ? Ingredient.fromTag(tag) : null;
 
             return new BackpackType(displayName, ingredient);
         }

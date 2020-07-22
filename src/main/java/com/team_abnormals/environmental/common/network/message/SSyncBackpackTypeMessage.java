@@ -53,11 +53,8 @@ public class SSyncBackpackTypeMessage implements EnvironmentalLoginMessage
 
     public static void handleLogin(SSyncBackpackTypeMessage msg, Supplier<NetworkEvent.Context> ctx)
     {
-        ctx.get().enqueueWork(() ->
-        {
-            ClientNetworkHandler.handleSyncBackpackType(msg, ctx.get());
-            Environmental.LOGIN.reply(new CAcknowledgeEnvironmentalMessage(), ctx.get());
-        });
+        ctx.get().enqueueWork(() -> ClientNetworkHandler.handleSyncBackpackType(msg, ctx.get()));
+        Environmental.LOGIN.reply(new CAcknowledgeEnvironmentalMessage(), ctx.get());
         ctx.get().setPacketHandled(true);
     }
 

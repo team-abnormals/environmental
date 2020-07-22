@@ -53,11 +53,8 @@ public class SSyncSlabfishTypeMessage implements EnvironmentalLoginMessage
 
     public static void handleLogin(SSyncSlabfishTypeMessage msg, Supplier<NetworkEvent.Context> ctx)
     {
-        ctx.get().enqueueWork(() ->
-        {
-            ClientNetworkHandler.handleSyncSlabfishType(msg, ctx.get());
-            Environmental.LOGIN.reply(new CAcknowledgeEnvironmentalMessage(), ctx.get());
-        });
+        ctx.get().enqueueWork(() -> ClientNetworkHandler.handleSyncSlabfishType(msg, ctx.get()));
+        Environmental.LOGIN.reply(new CAcknowledgeEnvironmentalMessage(), ctx.get());
         ctx.get().setPacketHandled(true);
     }
 

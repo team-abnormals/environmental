@@ -19,6 +19,7 @@ import net.minecraft.world.World;
 public class EnvironmentalCompat {
 
     public static void setupVanilla() {
+        // TODO make these work properly with tags or smth
         for(Item item : SlabfishEntity.getSweaterMap().keySet()) {
             DispenserBlock.registerDispenseBehavior(item, new OptionalDispenseBehavior() {
                 @Override
@@ -60,10 +61,7 @@ public class EnvironmentalCompat {
                 BlockPos blockpos = source.getBlockPos().offset(source.getBlockState().get(DispenserBlock.FACING));
 
                 for(SlabfishEntity slabfishEntity : source.getWorld().getEntitiesWithinAABB(SlabfishEntity.class, new AxisAlignedBB(blockpos), (entity) -> entity.isAlive() && !entity.hasBackpack())) {
-                    ItemStack typeUsed = new ItemStack(stack.getItem(), 1);
-                    slabfishEntity.setBackpack(SlabfishManager.get(source.getWorld()).getBackpackType(typeUsed).getRegistryName());
-                    slabfishEntity.setBackpackTypeUsed(typeUsed);
-                    stack.shrink(1);
+                    slabfishEntity.slabfishBackpack.setInventorySlotContents(1, stack.split(1));
                     this.func_239796_a_(true);
                     return stack;
                 }

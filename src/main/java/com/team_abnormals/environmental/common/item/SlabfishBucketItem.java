@@ -1,8 +1,10 @@
 package com.team_abnormals.environmental.common.item;
 
 import com.team_abnormals.environmental.common.entity.SlabfishEntity;
+import com.team_abnormals.environmental.common.slabfish.BackpackType;
 import com.team_abnormals.environmental.common.slabfish.SlabfishManager;
 import com.team_abnormals.environmental.common.slabfish.SlabfishType;
+import com.team_abnormals.environmental.common.slabfish.SweaterType;
 import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -26,13 +28,18 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.util.Constants;
-import net.minecraftforge.registries.ForgeRegistries;
+import org.apache.commons.lang3.tuple.MutablePair;
 
 import javax.annotation.Nullable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 
 public class SlabfishBucketItem extends BucketItem {
+
+    private static final Map<String, ResourceLocation> LOCATION_CACHE = new HashMap<>();
+    private static final MutablePair<CompoundNBT, SweaterType> SWEATER_TYPE_CACHE = new MutablePair<>(null, SlabfishManager.EMPTY_SWEATER);
     private final Supplier<EntityType<? extends SlabfishEntity>> entityType;
 
     public SlabfishBucketItem(Supplier<EntityType<? extends SlabfishEntity>> entityType, Supplier<? extends Fluid> supplier, Item.Properties builder) {
@@ -75,30 +82,36 @@ public class SlabfishBucketItem extends BucketItem {
     public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         CompoundNBT compoundnbt = stack.getTag();
         if (compoundnbt != null) {
+            SlabfishManager slabfishManager = SlabfishManager.get(worldIn);
+
             if (compoundnbt.contains("SlabfishType", Constants.NBT.TAG_STRING)) {
-                SlabfishType slabfishType = SlabfishManager.get(worldIn).getSlabfishType(new ResourceLocation(compoundnbt.getString("SlabfishType")));
+                SlabfishType slabfishType = slabfishManager.getSlabfishType(LOCATION_CACHE.computeIfAbsent(compoundnbt.getString("SlabfishType"), ResourceLocation::new));
                 if (slabfishType != SlabfishManager.DEFAULT_SLABFISH)
                     tooltip.add(slabfishType.getDisplayName().deepCopy().func_240701_a_(TextFormatting.ITALIC, slabfishType.getRarity().getFormatting()));
             }
             if (compoundnbt.contains("Age", Constants.NBT.TAG_ANY_NUMERIC) && compoundnbt.getInt("Age") < 0) {
                 tooltip.add((new TranslationTextComponent("entity.environmental.slabfish.baby").func_240701_a_(TextFormatting.ITALIC, TextFormatting.GRAY)));
             }
-            if (compoundnbt.contains("HasBackpack") && compoundnbt.getBoolean("HasBackpack") && compoundnbt.contains("BackpackColor", Constants.NBT.TAG_ANY_NUMERIC)) {
-                int i = compoundnbt.getInt("BackpackColor");
-                tooltip.add((new TranslationTextComponent("entity.environmental.slabfish." + DyeColor.byId(i).getTranslationKey() + "_backpack").func_240701_a_(TextFormatting.ITALIC, TextFormatting.GRAY)));
+            if (compoundnbt.contains("BackpackType", Constants.NBT.TAG_STRING)) {
+                BackpackType backpackType = slabfishManager.getBackpackType(LOCATION_CACHE.computeIfAbsent(compoundnbt.getString("BackpackType"), ResourceLocation::new));
+                tooltip.add(backpackType.getDisplayName().deepCopy().func_240701_a_(TextFormatting.ITALIC, TextFormatting.GRAY));
             }
 
-            ListNBT list = compoundnbt.getList("Items", Constants.NBT.TAG_LIST);
-            for (int i = 0; i < list.size(); ++i) {
-                CompoundNBT slotNbt = list.getCompound(i);
-                int index = slotNbt.getByte("Slot") & 255;
-                if (index == 0) {
-                    Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(slotNbt.getString("id")));
-                    if (item != null && SlabfishEntity.getSweaterMap().containsKey(item))
-                        tooltip.add((new TranslationTextComponent("entity.environmental.slabfish." + SlabfishEntity.getSweaterMap().get(item).getTranslationKey() + "_sweater").func_240701_a_(TextFormatting.ITALIC, TextFormatting.GRAY)));
-                    break;
+            if (!compoundnbt.equals(SWEATER_TYPE_CACHE.getLeft())) {
+                ListNBT list = compoundnbt.getList("Items", Constants.NBT.TAG_LIST);
+                for (int i = 0; i < list.size(); ++i) {
+                    CompoundNBT slotNbt = list.getCompound(i);
+                    int index = slotNbt.getByte("Slot") & 255;
+                    if (index == 0) {
+                        ItemStack slotStack = ItemStack.read(slotNbt);
+                        SWEATER_TYPE_CACHE.setRight(slabfishManager.hasSweaterType(slotStack) ? slabfishManager.getSweaterType(slotStack) : SlabfishManager.EMPTY_SWEATER);
+                        break;
+                    }
                 }
             }
+
+            if (!SlabfishManager.EMPTY_SWEATER.equals(SWEATER_TYPE_CACHE.getRight()))
+                tooltip.add(SWEATER_TYPE_CACHE.getRight().getDisplayName().deepCopy().func_240701_a_(TextFormatting.ITALIC, TextFormatting.GRAY));
         }
     }
 }

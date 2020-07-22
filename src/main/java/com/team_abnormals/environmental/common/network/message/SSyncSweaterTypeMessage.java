@@ -2,7 +2,6 @@ package com.team_abnormals.environmental.common.network.message;
 
 import com.team_abnormals.environmental.common.network.ClientNetworkHandler;
 import com.team_abnormals.environmental.common.slabfish.SlabfishManager;
-import com.team_abnormals.environmental.common.slabfish.SlabfishType;
 import com.team_abnormals.environmental.common.slabfish.SweaterType;
 import com.team_abnormals.environmental.core.Environmental;
 import net.minecraft.network.PacketBuffer;
@@ -54,11 +53,8 @@ public class SSyncSweaterTypeMessage implements EnvironmentalLoginMessage
 
     public static void handleLogin(SSyncSweaterTypeMessage msg, Supplier<NetworkEvent.Context> ctx)
     {
-        ctx.get().enqueueWork(() ->
-        {
-            ClientNetworkHandler.handleSyncSweaterType(msg, ctx.get());
-            Environmental.LOGIN.reply(new CAcknowledgeEnvironmentalMessage(), ctx.get());
-        });
+        ctx.get().enqueueWork(() -> ClientNetworkHandler.handleSyncSweaterType(msg, ctx.get()));
+        Environmental.LOGIN.reply(new CAcknowledgeEnvironmentalMessage(), ctx.get());
         ctx.get().setPacketHandled(true);
     }
 

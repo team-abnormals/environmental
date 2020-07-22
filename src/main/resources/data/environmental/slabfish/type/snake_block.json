@@ -4,7 +4,7 @@
   "displayName": {
     "translate": "entity.environmental.slabfish.snake_block"
   },
-  "customBackpack": true,
+  "customBackpack": "environmental:snake_block",
   "tradable": false,
   "conditions": [
     {

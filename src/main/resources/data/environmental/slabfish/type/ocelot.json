@@ -4,7 +4,7 @@
   "displayName": {
     "translate": "entity.environmental.slabfish.ocelot"
   },
-  "customBackpack": true,
+  "customBackpack": "environmental:ocelot",
   "tradable": false,
   "conditions": [
     {

@@ -11,7 +11,6 @@ import com.team_abnormals.environmental.common.inventory.SlabfishInventory;
 import com.team_abnormals.environmental.common.inventory.container.SlabfishInventoryContainer;
 import com.team_abnormals.environmental.common.item.MudBallItem;
 import com.team_abnormals.environmental.common.network.message.SOpenSlabfishInventoryMessage;
-import com.team_abnormals.environmental.common.slabfish.BackpackType;
 import com.team_abnormals.environmental.common.slabfish.SlabfishManager;
 import com.team_abnormals.environmental.common.slabfish.SlabfishType;
 import com.team_abnormals.environmental.common.slabfish.SweaterType;
@@ -88,9 +87,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
     private static final DataParameter<Boolean> FROM_BUCKET = EntityDataManager.createKey(SlabfishEntity.class, DataSerializers.BOOLEAN);
 
     private static final DataParameter<ResourceLocation> BACKPACK = EntityDataManager.createKey(SlabfishEntity.class, EnvironmentalData.RESOURCE_LOCATION);
-    private static final DataParameter<ItemStack> BACKPACK_USED = EntityDataManager.createKey(SlabfishEntity.class, DataSerializers.ITEMSTACK);
-    private static final DataParameter<ItemStack> BACKPACK_TYPE_USED = EntityDataManager.createKey(SlabfishEntity.class, DataSerializers.ITEMSTACK);
-
+    private static final DataParameter<Boolean> HAS_BACKPACK = EntityDataManager.createKey(SlabfishEntity.class, DataSerializers.BOOLEAN);
     private static final DataParameter<ResourceLocation> SWEATER = EntityDataManager.createKey(SlabfishEntity.class, EnvironmentalData.RESOURCE_LOCATION);
 
     public static final EntitySize SIZE_SWIMMING = EntitySize.fixed(0.7F, 0.6F);
@@ -160,10 +157,8 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         this.getDataManager().register(PRE_NAME_TYPE, SlabfishManager.DEFAULT_SLABFISH.getRegistryName());
         this.getDataManager().register(FROM_BUCKET, false);
 
-        this.getDataManager().register(BACKPACK, SlabfishManager.EMPTY_BACKPACK.getRegistryName());
-        this.getDataManager().register(BACKPACK_USED, ItemStack.EMPTY);
-        this.getDataManager().register(BACKPACK_TYPE_USED, ItemStack.EMPTY);
-
+        this.getDataManager().register(BACKPACK, SlabfishManager.WHITE_BACKPACK.getRegistryName());
+        this.getDataManager().register(HAS_BACKPACK, false);
         this.getDataManager().register(SWEATER, SlabfishManager.EMPTY_SWEATER.getRegistryName());
     }
 
@@ -172,14 +167,9 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         super.writeAdditional(compound);
         compound.putString("SlabfishType", this.getSlabfishType().toString());
         compound.putInt("SlabfishOverlay", this.getSlabfishOverlay().getId());
+        compound.putString("BackpackType", this.getBackpack().toString());
         compound.putString("PreNameType", this.getPreNameType().toString());
         compound.putBoolean("FromBucket", this.isFromBucket());
-
-        if (this.hasBackpack()) {
-            compound.putString("BackpackType", this.getBackpack().toString());
-            compound.put("BackpackItem", this.getBackpackItem().write(new CompoundNBT()));
-            compound.put("BackpackTypeItem", this.getBackpackTypeItem().write(new CompoundNBT()));
-        }
 
         this.slabfishBackpack.write(compound);
     }
@@ -194,17 +184,13 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         super.readAdditional(compound);
         this.setSlabfishType(new ResourceLocation(compound.getString("SlabfishType")));
         this.setSlabfishOverlay(SlabfishOverlay.byId(compound.getInt("SlabfishOverlay")));
+        this.setBackpack(new ResourceLocation(compound.getString("BackpackType")));
         this.setPreNameType(new ResourceLocation(compound.getString("PreNameType")));
         this.setFromBucket(compound.getBoolean("FromBucket"));
 
-        if (compound.contains("BackpackType", Constants.NBT.TAG_STRING)) {
-            this.setBackpack(new ResourceLocation(compound.getString("BackpackType")));
-            this.setBackpackItem(ItemStack.read(compound.getCompound("BackpackItem")));
-            this.setBackpackTypeUsed(ItemStack.read(compound.getCompound("BackpackTypeItem")));
-        }
-
         this.slabfishBackpack.read(compound);
-        updateSweater();
+        this.updateSweater();
+        this.updateBackpack();
     }
 
     // GENERAL //
@@ -218,14 +204,45 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
             return super.func_230254_b_(player, hand);
         }
 
-        BackpackType backpackType = SlabfishManager.get(this.world).getBackpackType(itemstack);
-        SweaterType sweaterType = SlabfishManager.get(this.world).getSweaterType(itemstack);
-        if (!backpackType.isEmpty() && this.hasBackpack()) {
-            if (!backpackType.getRegistryName().equals(this.getBackpack())) {
-                this.setBackpack(backpackType.getRegistryName());
-                this.setBackpackTypeUsed(new ItemStack(itemstack.getItem(), 1));
+        SlabfishManager slabfishManager = SlabfishManager.get(this.world);
+        SlabfishType slabfishType = slabfishManager.getSlabfishType(this.getSlabfishType());
+        if (this.hasBackpack() && (slabfishType.getCustomBackpack() == null || !slabfishManager.hasBackpackType(slabfishType.getCustomBackpack())) && slabfishManager.hasBackpackType(itemstack) && !slabfishManager.getBackpackType(itemstack).getRegistryName().equals(this.getBackpack())) {
+            if (!this.world.isRemote()) {
+                ItemStack previousBackpack = this.slabfishBackpack.getStackInSlot(2);
+
+                if (!previousBackpack.isEmpty()) {
+                    InventoryHelper.spawnItemStack(this.world, this.getPosX(), this.getPosY(), this.getPosZ(), previousBackpack.copy());
+                    this.slabfishBackpack.removeStackFromSlot(2);
+                }
+
+                this.slabfishBackpack.setInventorySlotContents(2, new ItemStack(item));
                 if (!player.isCreative())
                     itemstack.shrink(1);
+            }
+            return ActionResultType.SUCCESS;
+        } else if (slabfishManager.hasSweaterType(itemstack) && !player.isSecondaryUseActive() && (!this.hasSweater() || !slabfishManager.getSweaterType(itemstack).getRegistryName().equals(this.getSweater()))) {
+            if (!this.world.isRemote()) {
+                ItemStack previousSweater = this.slabfishBackpack.getStackInSlot(0);
+
+                if (!previousSweater.isEmpty()) {
+                    InventoryHelper.spawnItemStack(this.world, this.getPosX(), this.getPosY(), this.getPosZ(), previousSweater.copy());
+                    this.slabfishBackpack.removeStackFromSlot(0);
+                }
+
+                this.slabfishBackpack.setInventorySlotContents(0, new ItemStack(item));
+                if (!player.isCreative())
+                    itemstack.shrink(1);
+            }
+            return ActionResultType.SUCCESS;
+        } else if (item.isIn(Tags.Items.CHESTS_WOODEN) && !this.hasBackpack()) {
+            if (!this.world.isRemote()) {
+                this.slabfishBackpack.setInventorySlotContents(1, new ItemStack(item));
+
+                if (!player.isCreative())
+                    itemstack.shrink(1);
+
+                if (player instanceof ServerPlayerEntity)
+                    EnvironmentalCriteriaTriggers.BACKPACK_SLABFISH.trigger((ServerPlayerEntity) player);
             }
             return ActionResultType.SUCCESS;
         } else if (item == Items.RABBIT_FOOT && !player.isBeingRidden()) {
@@ -235,34 +252,6 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
             this.particleCloud(ParticleTypes.CAMPFIRE_COSY_SMOKE);
             return ActionResultType.SUCCESS;
 
-        } else if (!sweaterType.isEmpty() && !this.hasSweater() && !sweaterType.getRegistryName().equals(this.getSweater()) && !player.isSecondaryUseActive()) {
-            ItemStack previousSweater = this.slabfishBackpack.getStackInSlot(0);
-
-            if (!previousSweater.isEmpty()) {
-                InventoryHelper.spawnItemStack(this.world, this.getPosX(), this.getPosY(), this.getPosZ(), previousSweater.copy());
-                this.slabfishBackpack.removeStackFromSlot(0);
-            }
-
-            this.slabfishBackpack.setInventorySlotContents(0, new ItemStack(itemstack.getItem()));
-            if (!player.isCreative()) {
-                itemstack.shrink(1);
-            }
-            return ActionResultType.SUCCESS;
-
-        } else if (item.isIn(Tags.Items.CHESTS_WOODEN) && !this.hasBackpack()) {
-            ItemStack typeUsed = new ItemStack(Items.BROWN_DYE, 1);
-            BackpackType type = SlabfishManager.get(this.world).getBackpackType(typeUsed);
-            this.setBackpack(type.getRegistryName());
-            this.setBackpackTypeUsed(typeUsed);
-            this.playBackpackSound();
-
-            if (!player.isCreative())
-                itemstack.shrink(1);
-
-            if (player instanceof ServerPlayerEntity)
-                EnvironmentalCriteriaTriggers.BACKPACK_SLABFISH.trigger((ServerPlayerEntity) player);
-
-            return ActionResultType.SUCCESS;
         } else if (item == Items.SHEARS && this.hasSweater() && !player.isSecondaryUseActive()) {
             ItemStack previousSweater = this.slabfishBackpack.getStackInSlot(0);
 
@@ -273,24 +262,16 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
             return ActionResultType.SUCCESS;
 
-        } else if (item == Items.SHEARS && this.hasBackpack() && player.isSecondaryUseActive()) {
+        } else if (player.isSecondaryUseActive() && item == Items.SHEARS && this.hasBackpack()) {
             this.dropBackpack();
-            this.entityDropItem(this.getBackpackTypeItem());
-            this.setBackpack(SlabfishManager.EMPTY_BACKPACK.getRegistryName());
-            this.setBackpackTypeUsed(ItemStack.EMPTY);
-            this.playBackpackSound();
             return ActionResultType.SUCCESS;
 
         } else if (item == Items.WATER_BUCKET && this.isAlive()) {
             if (this.getGrowingAge() < 0) {
                 return ActionResultType.FAIL;
             }
-            if (this.hasBackpack()) {
+            if (this.hasBackpack())
                 this.dropBackpack();
-                this.entityDropItem(this.getBackpackTypeItem());
-                this.setBackpack(SlabfishManager.EMPTY_BACKPACK.getRegistryName());
-                this.setBackpackTypeUsed(ItemStack.EMPTY);
-            }
             this.playSound(SoundEvents.ITEM_BUCKET_FILL_FISH, 1.0F, 1.0F);
             itemstack.shrink(1);
             ItemStack itemstack1 = this.getBucket();
@@ -634,6 +615,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
     public void setSlabfishType(ResourceLocation type) {
         this.dataManager.set(SLABFISH_TYPE, type);
+        this.updateBackpack();
     }
 
     public ResourceLocation getPreNameType() {
@@ -659,19 +641,12 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
                 this.setPreNameType(new ResourceLocation(dataTag.getString("SlabfishType")));
             }
 
-            if (dataTag.contains("BackpackType", Constants.NBT.TAG_STRING)) {
+            if (dataTag.contains("BackpackType", Constants.NBT.TAG_STRING))
                 this.setBackpack(new ResourceLocation(dataTag.getString("BackpackType")));
-                this.setBackpackItem(ItemStack.read(dataTag.getCompound("BackpackItem")));
-                this.setBackpackTypeUsed(ItemStack.read(dataTag.getCompound("BackpackTypeItem")));
-            }
-
-            if (dataTag.contains("BackpackItem")) {
-                ItemStack backpackItem = ItemStack.read(dataTag.getCompound("BackpackItem"));
-                this.setBackpackItem(backpackItem);
-            }
 
             this.slabfishBackpack.read(dataTag);
             this.updateSweater();
+            this.updateBackpack();
 
             return spawnDataIn;
         }
@@ -726,12 +701,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
         compound.putString("SlabfishType", this.getSlabfishType().toString());
         compound.putString("PreNameType", this.getPreNameType().toString());
-
-        if (this.hasBackpack()) {
-            compound.putString("BackpackType", this.getBackpack().toString());
-            compound.put("BackpackItem", this.getBackpackItem().write(new CompoundNBT()));
-            compound.put("BackpackTypeItem", this.getBackpackTypeItem().write(new CompoundNBT()));
-        }
+        compound.putString("BackpackType", this.getBackpack().toString());
 
         this.slabfishBackpack.write(compound);
     }
@@ -740,8 +710,8 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
     private void updateSweater() {
         if (!this.world.isRemote()) {
-            ItemStack stack = this.slabfishBackpack.getStackInSlot(0);
-            SweaterType sweaterType = SlabfishManager.get(this.world).getSweaterType(stack);
+            ItemStack sweaterStack = this.slabfishBackpack.getStackInSlot(0);
+            SweaterType sweaterType = SlabfishManager.get(this.world).getSweaterType(sweaterStack);
             if (!sweaterType.isEmpty()) {
                 this.setSweater(sweaterType.getRegistryName());
             } else {
@@ -750,32 +720,37 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         }
     }
 
+    private void updateBackpack() {
+        if (!this.world.isRemote()) {
+            SlabfishManager slabfishManager = SlabfishManager.get(this.world);
+            SlabfishType slabfishType = slabfishManager.getSlabfishType(this.getSlabfishType());
+            ResourceLocation backpackType = slabfishType.getCustomBackpack();
+
+            if (backpackType != null && slabfishManager.hasBackpackType(backpackType)) {
+                this.setBackpack(backpackType);
+                if (!this.slabfishBackpack.getStackInSlot(2).isEmpty())
+                    this.entityDropItem(this.slabfishBackpack.removeStackFromSlot(2));
+            } else {
+                ItemStack backpackColorStack = this.slabfishBackpack.getStackInSlot(2);
+                this.setBackpack(SlabfishManager.get(this.world).getBackpackType(backpackColorStack).getRegistryName());
+            }
+        }
+    }
+
     public boolean hasBackpack() {
-        return !this.dataManager.get(BACKPACK).equals(SlabfishManager.EMPTY_BACKPACK.getRegistryName());
+        return this.getDataManager().get(HAS_BACKPACK);
+    }
+
+    public void setHasBackpack(boolean hasBackpack) {
+        this.getDataManager().set(HAS_BACKPACK, hasBackpack);
     }
 
     public void setBackpack(ResourceLocation backpackType) {
         this.dataManager.set(BACKPACK, backpackType);
     }
 
-    public void setBackpackTypeUsed(ItemStack stack) {
-        this.dataManager.set(BACKPACK_TYPE_USED, stack);
-    }
-
     public ResourceLocation getBackpack() {
         return this.dataManager.get(BACKPACK);
-    }
-
-    public ItemStack getBackpackItem() {
-        return this.dataManager.get(BACKPACK_USED);
-    }
-
-    public void setBackpackItem(ItemStack stack) {
-        this.dataManager.set(BACKPACK_USED, stack);
-    }
-
-    public ItemStack getBackpackTypeItem() {
-        return this.dataManager.get(BACKPACK_TYPE_USED);
     }
 
     public boolean hasSweater() {
@@ -834,7 +809,6 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
     protected void dropBackpack() {
         super.dropInventory();
         if (this.hasBackpack()) {
-            this.dropItem(this.getBackpackItem().getItem());
             if (this.slabfishBackpack != null) {
                 for (int i = 1; i < this.slabfishBackpack.getSizeInventory(); ++i) {
                     ItemStack itemstack = this.slabfishBackpack.removeStackFromSlot(i);
@@ -851,7 +825,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         ItemStack itemstack = itemEntity.getItem();
 
         if (this.hasBackpack()) {
-            ItemStack stack = this.slabfishBackpack.addItem(itemstack);
+            ItemStack stack = this.slabfishBackpack.addItem(itemstack, 3, this.slabfishBackpack.getSizeInventory());
             if (!ItemStack.areItemStacksEqual(itemstack, stack))
                 this.onItemPickup(itemEntity, itemstack.getCount() - stack.getCount());
             if (stack.isEmpty())
@@ -861,21 +835,43 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         }
     }
 
+    private boolean clearing;
+
     @Override
     public void onInventoryChanged(IInventory invBasic) {
-        boolean flag = this.hasSweater();
+        if (this.clearing)
+            return;
+
+        boolean hadSweater = this.hasSweater();
+        boolean hadBackpack = this.hasBackpack();
         this.updateSweater();
 
-        if (!flag && this.hasSweater())
-            playSweaterSound();
+        boolean hasBackpack = !this.slabfishBackpack.getStackInSlot(1).isEmpty() && this.slabfishBackpack.getStackInSlot(1).getItem().isIn(Tags.Items.CHESTS_WOODEN);
 
-        this.backpackFull = true;
-        for (int i = 1; i < this.slabfishBackpack.getSizeInventory(); i++) {
-            ItemStack stack = this.slabfishBackpack.getStackInSlot(i);
-            if (stack.isEmpty() || stack.getCount() < stack.getMaxStackSize()) {
-                this.backpackFull = false;
-                break;
+        if (!hadSweater && this.hasSweater())
+            this.playSweaterSound();
+        if (hadBackpack != hasBackpack)
+            this.playBackpackSound();
+        if (hadBackpack && !hasBackpack) {
+            this.clearing = true;
+            this.dropBackpack();
+            this.clearing = false;
+        }
+
+        this.setHasBackpack(hasBackpack);
+        this.updateBackpack();
+
+        if (this.hasBackpack()) {
+            this.backpackFull = true;
+            for (int i = 3; i < this.slabfishBackpack.getSizeInventory(); i++) {
+                ItemStack stack = this.slabfishBackpack.getStackInSlot(i);
+                if (stack.isEmpty() || stack.getCount() < stack.getMaxStackSize()) {
+                    this.backpackFull = false;
+                    break;
+                }
             }
+        } else {
+            this.backpackFull = false;
         }
     }
 
