@@ -4,6 +4,7 @@ import com.team_abnormals.environmental.common.entity.util.SlabfishRarity;
 import com.team_abnormals.environmental.common.slabfish.condition.SlabfishCondition;
 import com.team_abnormals.environmental.common.slabfish.condition.SlabfishConditionContext;
 import com.team_abnormals.environmental.core.Environmental;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -18,8 +19,7 @@ import java.util.function.Predicate;
  *
  * @author Ocelot
  */
-public interface SlabfishManager
-{
+public interface SlabfishManager {
     /**
      * The default slabfish that exists if there are no other slabfish types to choose from.
      */
@@ -74,6 +74,22 @@ public interface SlabfishManager
     SlabfishType getSlabfishType(Predicate<SlabfishType> predicate, SlabfishConditionContext context);
 
     /**
+     * Checks the sweater types for a sweater using the specified stack.
+     *
+     * @param stack The stack to test against the sweater types
+     * @return The sweater type using that stack or {@link #EMPTY_SWEATER} if that item has no sweater type
+     */
+    SweaterType getSweaterType(ItemStack stack);
+
+    /**
+     * Checks the backpack types for a backpack using the specified stack.
+     *
+     * @param stack The stack to test against the backpack types
+     * @return The backpack type using that stack or {@link #EMPTY_BACKPACK} if that item has no backpack type
+     */
+    BackpackType getBackpackType(ItemStack stack);
+
+    /**
      * Fetches a random slabfish type by the specified {@link Predicate}.
      *
      * @param predicate The predicate to use when searching for a slabfish type
@@ -103,8 +119,7 @@ public interface SlabfishManager
      * @param side The logical side to get the slabfish manager for
      * @return The slabfish manager for that side
      */
-    static SlabfishManager get(LogicalSide side)
-    {
+    static SlabfishManager get(LogicalSide side) {
         return side.isClient() ? ClientSlabfishManager.INSTANCE : SlabfishLoader.instance;
     }
 
@@ -114,8 +129,7 @@ public interface SlabfishManager
      * @param world The world to get the logical side from
      * @return The slabfish manager for that side
      */
-    static SlabfishManager get(IWorldReader world)
-    {
+    static SlabfishManager get(IWorldReader world) {
         return world.isRemote() ? ClientSlabfishManager.INSTANCE : SlabfishLoader.instance;
     }
 }

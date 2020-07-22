@@ -36,8 +36,8 @@ public class SlabfishInventoryContainer extends Container {
             });
             if (slabfish.hasBackpack()) {
                 for (int k = 0; k < 3; ++k) {
-                    for (int l = 0; l < slabfish.getInventoryColumns(); ++l) {
-                        this.addSlot(new Slot(slabfishInventory, 1 + l + k * slabfish.getInventoryColumns(), 80 + l * 18, 18 + k * 18));
+                    for (int l = 0; l < 5; ++l) {
+                        this.addSlot(new Slot(slabfishInventory, 1 + l + k * 5, 80 + l * 18, 18 + k * 18));
                     }
                 }
             }

@@ -4,6 +4,7 @@ import com.team_abnormals.environmental.common.network.message.SSyncBackpackType
 import com.team_abnormals.environmental.common.network.message.SSyncSlabfishTypeMessage;
 import com.team_abnormals.environmental.common.network.message.SSyncSweaterTypeMessage;
 import com.team_abnormals.environmental.common.slabfish.condition.SlabfishConditionContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.Arrays;
@@ -55,6 +56,22 @@ public final class ClientSlabfishManager implements SlabfishManager
     public SlabfishType getSlabfishType(Predicate<SlabfishType> predicate, SlabfishConditionContext context)
     {
         throw new UnsupportedOperationException("Client does not have access to select random slabfish");
+    }
+
+    @Override
+    public SweaterType getSweaterType(ItemStack stack)
+    {
+        if (this.sweaterTypes.isEmpty())
+            return EMPTY_SWEATER;
+        return this.sweaterTypes.values().stream().filter(sweaterType -> sweaterType.test(stack)).findFirst().orElse(EMPTY_SWEATER);
+    }
+
+    @Override
+    public BackpackType getBackpackType(ItemStack stack)
+    {
+        if (this.backpackTypes.isEmpty())
+            return EMPTY_BACKPACK;
+        return this.backpackTypes.values().stream().filter(backpackType -> backpackType.test(stack)).findFirst().orElse(EMPTY_BACKPACK);
     }
 
     @Override

@@ -29,6 +29,8 @@ public class BackpackType implements Predicate<ItemStack>
     private ResourceLocation registryName;
     private ITextComponent displayName;
     private final Ingredient ingredient;
+    @OnlyIn(Dist.CLIENT)
+    private ResourceLocation textureLocation;
 
     public BackpackType(@Nullable ITextComponent displayName, Ingredient ingredient)
     {
@@ -36,10 +38,25 @@ public class BackpackType implements Predicate<ItemStack>
         this.ingredient = ingredient;
     }
 
+    @OnlyIn(Dist.CLIENT)
+    private BackpackType(@Nullable ITextComponent displayName, Ingredient ingredient, ResourceLocation registryName)
+    {
+        this(displayName, ingredient);
+        this.textureLocation = new ResourceLocation(registryName.getNamespace(), "textures/entity/slabfish/backpacks/backpack_" + registryName.getPath() + ".png");
+    }
+
+    /**
+     * @return Whether or not this backpack type is considered to be empty
+     */
+    public boolean isEmpty()
+    {
+        return this == SlabfishManager.EMPTY_BACKPACK;
+    }
+
     @Override
     public boolean test(ItemStack stack)
     {
-        return this.ingredient.test(stack);
+        return !this.isEmpty() && this.ingredient != Ingredient.EMPTY && this.ingredient.test(stack);
     }
 
     /**
@@ -56,6 +73,15 @@ public class BackpackType implements Predicate<ItemStack>
     public ITextComponent getDisplayName()
     {
         return displayName;
+    }
+
+    /**
+     * @return The location of the texture for this backpack
+     */
+    @OnlyIn(Dist.CLIENT)
+    public ResourceLocation getTextureLocation()
+    {
+        return textureLocation;
     }
 
     /**
@@ -105,7 +131,7 @@ public class BackpackType implements Predicate<ItemStack>
         ResourceLocation registryName = buf.readResourceLocation();
         ITextComponent displayName = buf.readTextComponent();
         Ingredient item = Ingredient.read(buf);
-        return new BackpackType(displayName, item).setRegistryName(registryName);
+        return new BackpackType(displayName, item, registryName).setRegistryName(registryName);
     }
 
     /**

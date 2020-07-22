@@ -29,6 +29,8 @@ public class SweaterType implements Predicate<ItemStack>
     private ResourceLocation registryName;
     private ITextComponent displayName;
     private final Ingredient ingredient;
+    @OnlyIn(Dist.CLIENT)
+    private ResourceLocation textureLocation;
 
     public SweaterType(@Nullable ITextComponent displayName, Ingredient ingredient)
     {
@@ -36,10 +38,25 @@ public class SweaterType implements Predicate<ItemStack>
         this.ingredient = ingredient;
     }
 
+    @OnlyIn(Dist.CLIENT)
+    private SweaterType(@Nullable ITextComponent displayName, Ingredient ingredient, ResourceLocation registryName)
+    {
+        this(displayName, ingredient);
+        this.textureLocation = new ResourceLocation(registryName.getNamespace(), "textures/entity/slabfish/sweaters/sweater_" + registryName.getPath() + ".png");
+    }
+
+    /**
+     * @return Whether or not this sweater type is considered to be empty
+     */
+    public boolean isEmpty()
+    {
+        return this == SlabfishManager.EMPTY_SWEATER;
+    }
+
     @Override
     public boolean test(ItemStack stack)
     {
-        return this.ingredient.test(stack);
+        return !this.isEmpty() && this.ingredient != Ingredient.EMPTY && this.ingredient.test(stack);
     }
 
     /**
@@ -57,6 +74,16 @@ public class SweaterType implements Predicate<ItemStack>
     {
         return displayName;
     }
+
+    /**
+     * @return The location of the texture for this sweater
+     */
+    @OnlyIn(Dist.CLIENT)
+    public ResourceLocation getTextureLocation()
+    {
+        return textureLocation;
+    }
+
 
     /**
      * Sets the registry name of this sweater type.
@@ -105,7 +132,7 @@ public class SweaterType implements Predicate<ItemStack>
         ResourceLocation registryName = buf.readResourceLocation();
         ITextComponent displayName = buf.readTextComponent();
         Ingredient item = Ingredient.read(buf);
-        return new SweaterType(displayName, item).setRegistryName(registryName);
+        return new SweaterType(displayName, item, registryName).setRegistryName(registryName);
     }
 
     /**

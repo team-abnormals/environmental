@@ -35,7 +35,7 @@ public class SlabfishInventoryScreen extends ContainerScreen<SlabfishInventoryCo
         this.blit(p_230450_1_, i, j, 0, 0, this.xSize, this.ySize);
 
         if (this.slabfish.hasBackpack()) {
-            this.blit(p_230450_1_, i + 79, j + 17, 0, this.ySize, this.slabfish.getInventoryColumns() * 18, 54);
+            this.blit(p_230450_1_, i + 79, j + 17, 0, this.ySize, 5 * 18, 54);
         }
 
         InventoryScreen.drawEntityOnScreen(i + 51, j + 60, 32, (float) (i + 51) - this.mouseX, (float) (j + 75 - 50) - this.mouseY, this.slabfish);

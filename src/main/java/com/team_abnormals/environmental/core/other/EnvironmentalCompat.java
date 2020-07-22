@@ -1,6 +1,8 @@
 package com.team_abnormals.environmental.core.other;
 
 import com.team_abnormals.environmental.common.entity.SlabfishEntity;
+import com.team_abnormals.environmental.common.slabfish.BackpackType;
+import com.team_abnormals.environmental.common.slabfish.SlabfishManager;
 import com.team_abnormals.environmental.core.registry.EnvironmentalItems;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.dispenser.DefaultDispenseItemBehavior;
@@ -58,7 +60,9 @@ public class EnvironmentalCompat {
                 BlockPos blockpos = source.getBlockPos().offset(source.getBlockState().get(DispenserBlock.FACING));
 
                 for(SlabfishEntity slabfishEntity : source.getWorld().getEntitiesWithinAABB(SlabfishEntity.class, new AxisAlignedBB(blockpos), (entity) -> entity.isAlive() && !entity.hasBackpack())) {
-                    slabfishEntity.setBackpacked(true);
+                    ItemStack typeUsed = new ItemStack(stack.getItem(), 1);
+                    slabfishEntity.setBackpack(SlabfishManager.get(source.getWorld()).getBackpackType(typeUsed).getRegistryName());
+                    slabfishEntity.setBackpackTypeUsed(typeUsed);
                     stack.shrink(1);
                     this.func_239796_a_(true);
                     return stack;

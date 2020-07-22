@@ -10,6 +10,7 @@ import com.team_abnormals.environmental.common.slabfish.condition.SlabfishCondit
 import com.team_abnormals.environmental.common.slabfish.condition.SlabfishConditionContext;
 import com.team_abnormals.environmental.core.Environmental;
 import net.minecraft.client.resources.JsonReloadListener;
+import net.minecraft.item.ItemStack;
 import net.minecraft.profiler.IProfiler;
 import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
@@ -150,6 +151,22 @@ public class SlabfishLoader extends JsonReloadListener implements SlabfishManage
     public SlabfishType getSlabfishType(Predicate<SlabfishType> predicate, SlabfishConditionContext context)
     {
         return this.slabfishTypes.values().stream().filter(slabfishType -> predicate.test(slabfishType) && slabfishType.test(context)).max(Comparator.comparingInt(SlabfishType::getPriority)).orElse(DEFAULT_SLABFISH);
+    }
+
+    @Override
+    public SweaterType getSweaterType(ItemStack stack)
+    {
+        if (this.sweaterTypes.isEmpty())
+            return EMPTY_SWEATER;
+        return this.sweaterTypes.values().stream().filter(sweaterType -> sweaterType.test(stack)).findFirst().orElse(EMPTY_SWEATER);
+    }
+
+    @Override
+    public BackpackType getBackpackType(ItemStack stack)
+    {
+        if (this.backpackTypes.isEmpty())
+            return EMPTY_BACKPACK;
+        return this.backpackTypes.values().stream().filter(backpackType -> backpackType.test(stack)).findFirst().orElse(EMPTY_BACKPACK);
     }
 
     @Override
