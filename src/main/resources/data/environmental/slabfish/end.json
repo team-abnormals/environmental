@@ -1,0 +1,12 @@
+{
+  "rarity": "epic",
+  "displayName": {
+    "translate": "entity.environmental.slabfish.end"
+  },
+  "conditions": [
+    {
+      "type": "dimension",
+      "dimension": "minecraft:the_end"
+    }
+  ]
+}

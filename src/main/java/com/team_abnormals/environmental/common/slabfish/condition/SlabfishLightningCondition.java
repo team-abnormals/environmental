@@ -4,6 +4,8 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import net.minecraft.util.ResourceLocation;
 
+import javax.annotation.Nullable;
+
 /**
  * <p>A {@link SlabfishCondition} that returns <code>true</code> if the slabfish is struck by lightning.</p>
  *
@@ -13,7 +15,7 @@ public class SlabfishLightningCondition implements SlabfishCondition
 {
     private final ResourceLocation slabfishType;
 
-    private SlabfishLightningCondition(ResourceLocation slabfishType)
+    private SlabfishLightningCondition(@Nullable ResourceLocation slabfishType)
     {
         this.slabfishType = slabfishType;
     }
@@ -27,7 +29,7 @@ public class SlabfishLightningCondition implements SlabfishCondition
     @Override
     public boolean test(SlabfishConditionContext context)
     {
-        return context.isStruckByLightning() && this.slabfishType.equals(context.getSlabfishType());
+        return context.isStruckByLightning() && (this.slabfishType == null || this.slabfishType.equals(context.getSlabfishType()));
     }
 
     /**
@@ -40,6 +42,6 @@ public class SlabfishLightningCondition implements SlabfishCondition
     @SuppressWarnings("unused")
     public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context)
     {
-        return new SlabfishLightningCondition(context.deserialize(json.get("slabfishType"), ResourceLocation.class));
+        return new SlabfishLightningCondition(json.has("slabfishType") ? context.deserialize(json.get("slabfishType"), ResourceLocation.class) : null);
     }
 }

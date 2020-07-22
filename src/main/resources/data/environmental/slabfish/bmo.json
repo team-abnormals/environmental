@@ -1,0 +1,17 @@
+{
+  "rarity": "uncommon",
+  "priority": 10,
+  "displayName": {
+    "translate": "entity.environmental.slabfish.bmo"
+  },
+  "conditions": [
+    {
+      "type": "rename",
+      "names": [
+        "bmo",
+        "beemo",
+        "be emo"
+      ]
+    }
+  ]
+}

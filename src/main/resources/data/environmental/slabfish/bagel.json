@@ -1,5 +1,6 @@
 {
   "rarity": "uncommon",
+  "priority": 10,
   "displayName": {
     "translate": "entity.environmental.slabfish.bagel"
   },
@@ -9,7 +10,8 @@
       "names": [
         "bagel",
         "shyguy",
-        "shy guy"
+        "shy guy",
+        "bagelio"
       ]
     }
   ]

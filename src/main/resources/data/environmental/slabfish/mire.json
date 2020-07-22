@@ -1,0 +1,11 @@
+{
+  "rarity": "uncommon",
+  "displayName": {
+    "translate": "entity.environmental.slabfish.mire"
+  },
+  "conditions": [
+    {
+      "type": "impossible"
+    }
+  ]
+}

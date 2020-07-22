@@ -7,10 +7,7 @@ import com.team_abnormals.environmental.client.render.layer.BackpackRenderLayer;
 import com.team_abnormals.environmental.client.render.layer.OverlayRenderLayer;
 import com.team_abnormals.environmental.client.render.layer.SweaterRenderLayer;
 import com.team_abnormals.environmental.common.entity.SlabfishEntity;
-import com.team_abnormals.environmental.common.entity.util.SlabfishTypeOld;
-import com.team_abnormals.environmental.common.slabfish.SlabfishType;
-import com.team_abnormals.environmental.core.Environmental;
-import com.team_abnormals.environmental.core.other.EnvironmentalSlabfishTypes;
+import com.team_abnormals.environmental.common.slabfish.SlabfishManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
@@ -19,6 +16,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Quaternion;
 
 public class SlabfishRenderer extends MobRenderer<SlabfishEntity, SlabfishModel<SlabfishEntity>> {
+
     public SlabfishRenderer(EntityRendererManager renderManager) {
         super(renderManager, new SlabfishModel<>(), 0.3F);
         this.addLayer(new SweaterRenderLayer<>(this));
@@ -29,16 +27,19 @@ public class SlabfishRenderer extends MobRenderer<SlabfishEntity, SlabfishModel<
 
     @Override
     public ResourceLocation getEntityTexture(SlabfishEntity slabby) {
-        ResourceLocation slabfishType = slabby.getSlabfishType();
+        ResourceLocation slabfishType = SlabfishManager.get(slabby.world).get(slabby.getSlabfishType()).getRegistryName();
         return new ResourceLocation(slabfishType.getNamespace(), "textures/entity/slabfish/slabfish_" + slabfishType.getPath() + ".png");
     }
 
     @Override
-    protected RenderType func_230496_a_(SlabfishEntity slabfish, boolean p_230042_2_, boolean p_230042_3_, boolean h) {
-        if (slabfish.getSlabfishType() == EnvironmentalSlabfishTypes.GHOST) {
-            return RenderType.getEntityTranslucent(this.getEntityTexture(slabfish));
+    protected RenderType func_230496_a_(SlabfishEntity slabby, boolean p_230496_2_, boolean p_230496_3_, boolean p_230496_4_) {
+        ResourceLocation texture = this.getEntityTexture(slabby);
+        if (p_230496_3_) {
+            return RenderType.func_239268_f_(texture);
+        } else if (p_230496_2_) {
+            return SlabfishManager.get(slabby.world).get(slabby.getSlabfishType()).isTranslucent() ? RenderType.getEntityTranslucent(texture) : this.entityModel.getRenderType(texture);
         } else {
-            return super.func_230496_a_(slabfish, p_230042_2_, p_230042_3_, h);
+            return p_230496_4_ ? RenderType.getOutline(texture) : null;
         }
     }
 

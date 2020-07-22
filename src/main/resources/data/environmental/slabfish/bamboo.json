@@ -1,5 +1,9 @@
 {
-  "rarity": "rare",
+  "rarity": "epic",
+  "priority": 1,
+  "displayName": {
+    "translate": "entity.environmental.slabfish.bamboo"
+  },
   "conditions": [
     {
       "type": "or",

@@ -1,0 +1,25 @@
+{
+  "rarity": "uncommon",
+  "displayName": {
+    "translate": "entity.environmental.slabfish.maple"
+  },
+  "conditions": [
+    {
+      "type": "or",
+      "conditions": [
+        {
+          "type": "biome",
+          "biome": "autumnity:maple_forest"
+        },
+        {
+          "type": "biome",
+          "biome": "autumnity:maple_forest_hills"
+        },
+        {
+          "type": "biome",
+          "biome": "autumnity:pumpkin_fields"
+        }
+      ]
+    }
+  ]
+}

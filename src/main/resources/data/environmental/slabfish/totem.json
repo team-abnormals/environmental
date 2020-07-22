@@ -1,5 +1,9 @@
 {
   "rarity": "epic",
+  "priority": 2,
+  "displayName": {
+    "translate": "entity.environmental.slabfish.totem"
+  },
   "conditions": [
     {
       "type": "raid"

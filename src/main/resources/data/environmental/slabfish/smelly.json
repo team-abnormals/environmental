@@ -1,0 +1,18 @@
+{
+  "rarity": "uncommon",
+  "priority": 10,
+  "displayName": {
+    "translate": "entity.environmental.slabfish.smelly"
+  },
+  "conditions": [
+    {
+      "type": "rename",
+      "names": [
+        "smelly",
+        "stinky",
+        "smellysox",
+        "thefaceofgaming"
+      ]
+    }
+  ]
+}

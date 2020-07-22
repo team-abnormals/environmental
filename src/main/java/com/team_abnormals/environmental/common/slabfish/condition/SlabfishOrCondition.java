@@ -2,6 +2,7 @@ package com.team_abnormals.environmental.common.slabfish.condition;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
 import com.team_abnormals.environmental.common.entity.SlabfishEntity;
 
 /**
@@ -42,6 +43,8 @@ public class SlabfishOrCondition implements SlabfishCondition
      */
     public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context)
     {
+        if(!json.has("conditions"))
+            throw new JsonSyntaxException("'conditions' must be present.");
         return new SlabfishOrCondition(context.deserialize(json.get("conditions"), SlabfishCondition[].class));
     }
 }

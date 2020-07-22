@@ -1,0 +1,18 @@
+{
+  "rarity": "uncommon",
+  "priority": 10,
+  "displayName": {
+    "translate": "entity.environmental.slabfish.snake_block"
+  },
+  "customBackpack": true,
+  "conditions": [
+    {
+      "type": "rename",
+      "names": [
+        "snake",
+        "snake block",
+        "snakeblock"
+      ]
+    }
+  ]
+}

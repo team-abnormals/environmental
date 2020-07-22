@@ -37,15 +37,13 @@ public final class ClientSlabfishManager implements SlabfishManager
     @Override
     public SlabfishType get(Predicate<SlabfishType> predicate, SlabfishConditionContext context)
     {
-        throw new UnsupportedOperationException("Client does not have access to select random slabfish based on conditions");
+        throw new UnsupportedOperationException("Client does not have access to select random slabfish");
     }
 
     @Override
     public SlabfishType getRandom(Predicate<SlabfishType> predicate, Random random)
     {
-        if (this.slabfishTypes.isEmpty())
-            return DEFAULT_SLABFISH;
-        return this.slabfishTypes.values().stream().filter(predicate).skip(random.nextInt(this.slabfishTypes.size())).findFirst().orElse(DEFAULT_SLABFISH);
+        throw new UnsupportedOperationException("Client does not have access to select random slabfish");
     }
 
     @Override

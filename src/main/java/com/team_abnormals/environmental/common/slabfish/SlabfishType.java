@@ -23,14 +23,18 @@ public class SlabfishType implements Predicate<SlabfishConditionContext>
 {
     private ResourceLocation registryName;
     private ITextComponent displayName;
+    private final boolean translucent;
+    private final boolean customBackpack;
     private final SlabfishRarity rarity;
     private final int priority;
     private final SlabfishCondition[] conditions;
 
-    public SlabfishType(SlabfishRarity rarity, ITextComponent displayName, int priority, SlabfishCondition[] conditions)
+    public SlabfishType(SlabfishRarity rarity, ITextComponent displayName, boolean translucent, boolean customBackpack, int priority, SlabfishCondition[] conditions)
     {
         this.rarity = rarity;
         this.displayName = displayName;
+        this.translucent = translucent;
+        this.customBackpack = customBackpack;
         this.priority = priority;
         this.conditions = conditions;
     }
@@ -58,6 +62,22 @@ public class SlabfishType implements Predicate<SlabfishConditionContext>
     public ITextComponent getDisplayName()
     {
         return displayName;
+    }
+
+    /**
+     * @return Whether or not the slabfish texture is translucent
+     */
+    public boolean isTranslucent()
+    {
+        return translucent;
+    }
+
+    /**
+     * @return Whether or not this slabfish has a custom backpack
+     */
+    public boolean hasCustomBackpack()
+    {
+        return customBackpack;
     }
 
     /**
@@ -98,6 +118,8 @@ public class SlabfishType implements Predicate<SlabfishConditionContext>
     {
         buf.writeResourceLocation(this.registryName);
         buf.writeTextComponent(this.displayName);
+        buf.writeBoolean(this.translucent);
+        buf.writeBoolean(this.customBackpack);
         buf.writeVarInt(this.rarity.ordinal());
         buf.writeVarInt(this.priority);
     }
@@ -124,9 +146,11 @@ public class SlabfishType implements Predicate<SlabfishConditionContext>
     {
         ResourceLocation registryName = buf.readResourceLocation();
         ITextComponent displayName = buf.readTextComponent();
+        boolean translucent = buf.readBoolean();
+        boolean customBackpack = buf.readBoolean();
         SlabfishRarity rarity = SlabfishRarity.byId(buf.readVarInt());
         int priority = buf.readVarInt();
-        return new SlabfishType(rarity, displayName, priority, new SlabfishCondition[0]).setRegistryName(registryName);
+        return new SlabfishType(rarity, displayName, translucent, customBackpack, priority, new SlabfishCondition[0]).setRegistryName(registryName);
     }
 
     /**
@@ -154,7 +178,7 @@ public class SlabfishType implements Predicate<SlabfishConditionContext>
             if (!jsonObject.has("rarity"))
                 throw new JsonSyntaxException("Slabfish rarity is required");
             SlabfishRarity rarity = deserializeRarity(jsonObject.get("rarity"));
-            return new SlabfishType(rarity, jsonObject.has("displayName") ? context.deserialize(jsonObject.get("displayName"), ITextComponent.class) : null, jsonObject.has("priority") ? jsonObject.get("priority").getAsInt() : 0, jsonObject.has("conditions") ? context.deserialize(jsonObject.get("conditions"), SlabfishCondition[].class) : new SlabfishCondition[0]);
+            return new SlabfishType(rarity, jsonObject.has("displayName") ? context.deserialize(jsonObject.get("displayName"), ITextComponent.class) : null, jsonObject.has("translucent") && jsonObject.get("translucent").getAsBoolean(), jsonObject.has("customBackpack") && jsonObject.get("customBackpack").getAsBoolean(), jsonObject.has("priority") ? jsonObject.get("priority").getAsInt() : 0, jsonObject.has("conditions") ? context.deserialize(jsonObject.get("conditions"), SlabfishCondition[].class) : new SlabfishCondition[0]);
         }
     }
 }

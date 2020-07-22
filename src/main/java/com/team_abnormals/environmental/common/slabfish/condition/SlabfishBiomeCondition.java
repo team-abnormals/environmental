@@ -59,7 +59,6 @@ public class SlabfishBiomeCondition implements SlabfishCondition
         return false;
     }
 
-    @Nullable
     private static Biome.Category deserializeBiomeType(JsonElement element) throws JsonParseException
     {
         if (!element.isJsonPrimitive() || !element.getAsJsonPrimitive().isString())
@@ -68,10 +67,9 @@ public class SlabfishBiomeCondition implements SlabfishCondition
         for (Biome.Category biomeCategory : Biome.Category.values())
             if (biomeCategory.name().equalsIgnoreCase(name))
                 return biomeCategory;
-        return null;
+        throw new JsonSyntaxException("Unknown biome category: " + name);
     }
 
-    @Nullable
     private static Biome.TempCategory deserializeBiomeTempCategory(JsonElement element) throws JsonParseException
     {
         if (!element.isJsonPrimitive() || !element.getAsJsonPrimitive().isString())
@@ -80,7 +78,7 @@ public class SlabfishBiomeCondition implements SlabfishCondition
         for (Biome.TempCategory tempCategory : Biome.TempCategory.values())
             if (tempCategory.name().equalsIgnoreCase(name))
                 return tempCategory;
-        return null;
+        throw new JsonSyntaxException("Unknown biome temp category: " + name);
     }
 
     /**

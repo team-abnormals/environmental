@@ -1,0 +1,13 @@
+{
+  "rarity": "rare",
+  "priority": 1,
+  "displayName": {
+    "translate": "entity.environmental.slabfish.flower_forest"
+  },
+  "conditions": [
+    {
+      "type": "biome",
+      "biome": "minecraft:flower_forest"
+    }
+  ]
+}

@@ -1,10 +1,14 @@
 {
-  "rarity": "rare",
+  "rarity": "legendary",
+  "priority": 2,
+  "displayName": {
+    "translate": "entity.environmental.slabfish.stray"
+  },
   "conditions": [
     {
       "type": "parents",
-      "parent1": "environmental:skeleton",
-      "parent2": "environmental:skeleton"
+      "parentA": "environmental:skeleton",
+      "parentB": "environmental:skeleton"
     },
     {
       "type": "biome",

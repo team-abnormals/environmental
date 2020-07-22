@@ -37,7 +37,14 @@ public class SlabfishParentCondition implements SlabfishCondition
         Pair<SlabfishType, SlabfishType> parentTypes = context.getParentTypes();
         if (parentTypes == null)
             return false;
-        return this.parentB == null ? this.parentA.equals(parentTypes.getLeft().getRegistryName()) || this.parentA.equals(parentTypes.getRight().getRegistryName()) : (this.parentA.equals(parentTypes.getLeft().getRegistryName()) && this.parentB.equals(parentTypes.getRight().getRegistryName())) || (this.parentA.equals(parentTypes.getRight().getRegistryName()) && this.parentB.equals(parentTypes.getLeft().getRegistryName()));
+
+        if (!this.parentA.equals(parentTypes.getLeft().getRegistryName()) && !this.parentA.equals(parentTypes.getRight().getRegistryName()))
+            return false;
+
+        if (this.parentB == null)
+            return true;
+
+        return (this.parentA.equals(parentTypes.getLeft().getRegistryName()) && this.parentB.equals(parentTypes.getRight().getRegistryName())) || (this.parentA.equals(parentTypes.getRight().getRegistryName()) && this.parentB.equals(parentTypes.getLeft().getRegistryName()));
     }
 
     /**
@@ -51,6 +58,8 @@ public class SlabfishParentCondition implements SlabfishCondition
     {
         if ((json.has("parentA") || json.has("parentB")) && json.has("parent"))
             throw new JsonSyntaxException("Either 'parentA' and 'parentB' or 'parent' can be present.");
+        if(!json.has("parentA") && !json.has("parentB") && !json.has("parent"))
+            throw new JsonSyntaxException("Either 'parentA' and 'parentB' or 'parent' must be present.");
         return json.has("parent") ? new SlabfishParentCondition(context.deserialize(json.get("parent"), ResourceLocation.class), null) : new SlabfishParentCondition(context.deserialize(json.get("parentA"), ResourceLocation.class), context.deserialize(json.get("parentB"), ResourceLocation.class));
     }
 }

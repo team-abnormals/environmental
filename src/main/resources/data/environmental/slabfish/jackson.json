@@ -1,0 +1,13 @@
+{
+  "rarity": "uncommon",
+  "priority": 10,
+  "displayName": {
+    "translate": "entity.environmental.slabfish.jackson"
+  },
+  "conditions": [
+    {
+      "type": "rename",
+      "regex": "(?i)\\bjackson|\\bjason|\\bjson|.*\\.json$"
+    }
+  ]
+}

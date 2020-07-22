@@ -59,9 +59,11 @@ public class SlabfishLightCondition implements SlabfishCondition
     {
         if ((json.has("min") || json.has("max")) && json.has("value"))
             throw new JsonSyntaxException("Either 'min' and 'max' or 'value' can be present.");
+        if(!json.has("min") && !json.has("max") && !json.has("value"))
+            throw new JsonSyntaxException("Either 'min' and 'max' or 'value' must be present.");
         LightType lightType = null;
         if (json.has("lightType"))
             lightType = deserializeLightType(json.get("lightType"));
-        return json.has("value") ? new SlabfishLightCondition(json.get("value").getAsInt(), json.get("value").getAsInt(), lightType) : new SlabfishLightCondition(json.get("min").getAsInt(), json.get("max").getAsInt(), lightType);
+        return json.has("value") ? new SlabfishLightCondition(json.get("value").getAsInt(), json.get("value").getAsInt(), lightType) : new SlabfishLightCondition(json.has("min") ? json.get("min").getAsInt() : Integer.MIN_VALUE, json.has("max") ? json.get("max").getAsInt() : Integer.MAX_VALUE, lightType);
     }
 }

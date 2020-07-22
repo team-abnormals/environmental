@@ -2,6 +2,7 @@ package com.team_abnormals.environmental.common.slabfish.condition;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
 
 /**
  * <p>A {@link SlabfishCondition} that returns <code>true</code> if the player that bred two slabfish together has insomnia.</p>
@@ -39,6 +40,8 @@ public class SlabfishRandomCondition implements SlabfishCondition
     @SuppressWarnings("unused")
     public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context)
     {
+        if(!json.has("chance"))
+            throw new JsonSyntaxException("'chance' must be present.");
         return new SlabfishRandomCondition(json.get("chance").getAsFloat());
     }
 }

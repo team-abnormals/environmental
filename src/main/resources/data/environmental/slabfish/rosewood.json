@@ -1,0 +1,29 @@
+{
+  "rarity": "epic",
+  "displayName": {
+    "translate": "entity.environmental.slabfish.rosewood"
+  },
+  "conditions": [
+    {
+      "type": "or",
+      "conditions": [
+        {
+          "type": "biome",
+          "biome": "atmospheric:rosewood_forest"
+        },
+        {
+          "type": "biome",
+          "biome": "atmospheric:rosewood_mountains"
+        },
+        {
+          "type": "biome",
+          "biome": "atmospheric:rosewood_plateau"
+        },
+        {
+          "type": "biome",
+          "biome": "atmospheric:rosewood_forest_plateau"
+        }
+      ]
+    }
+  ]
+}

@@ -3,9 +3,7 @@ package com.team_abnormals.environmental.common.slabfish.condition;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import jdk.nashorn.internal.runtime.regexp.joni.Regex;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -56,8 +54,10 @@ public class SlabfishRenameCondition implements SlabfishCondition
      */
     public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context)
     {
-        if (json.has("regex") && (json.has("names") || json.has("caseSensitive")))
+        if ((json.has("names") || json.has("caseSensitive")) && json.has("regex"))
             throw new JsonSyntaxException("Either 'regex' or 'names' and 'caseSensitive' can be present.");
+        if (!json.has("names") && !json.has("caseSensitive") && !json.has("regex"))
+            throw new JsonSyntaxException("Either 'regex' or 'names' and 'caseSensitive' must be present.");
         return json.has("regex") ? new SlabfishRenameCondition(Pattern.compile(json.get("regex").getAsString())) : new SlabfishRenameCondition(context.deserialize(json.get("names"), String[].class), json.has("caseSensitive") && json.get("caseSensitive").getAsBoolean());
     }
 }

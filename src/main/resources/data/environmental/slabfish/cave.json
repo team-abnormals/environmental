@@ -1,15 +1,17 @@
 {
   "rarity": "rare",
+  "priority": 2,
+  "displayName": {
+    "translate": "entity.environmental.slabfish.cave"
+  },
   "conditions": [
     {
       "type": "height",
-      "min": 0,
-      "max": 30
+      "max": 20
     },
     {
       "type": "light_level",
-      "min": 0,
-      "max": 0
+      "value": 0
     }
   ]
 }

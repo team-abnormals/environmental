@@ -3,8 +3,13 @@ package com.team_abnormals.environmental.common.slabfish.condition;
 import com.team_abnormals.environmental.common.entity.SlabfishEntity;
 import com.team_abnormals.environmental.common.slabfish.SlabfishManager;
 import com.team_abnormals.environmental.common.slabfish.SlabfishType;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.stats.Stats;
+import net.minecraft.tags.ITag;
 import net.minecraft.util.LazyValue;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -31,7 +36,11 @@ public class SlabfishConditionContext
     private final LazyValue<String> name;
     private final LazyValue<BlockPos> pos;
     private final LazyValue<Biome> biome;
-    private final LazyValue<Boolean> raid;
+    private final LazyValue<Boolean> inRaid;
+    private final LazyValue<BlockState> inBlock;
+    private final LazyValue<FluidState> inFluid;
+    private final LazyValue<Boolean> dayTime;
+    private final LazyValue<Boolean> nightTime;
     private final LazyValue<Integer> light;
     private final Map<LightType, LazyValue<Integer>> lightTypes;
     private final LazyValue<ResourceLocation> dimension;
@@ -47,7 +56,11 @@ public class SlabfishConditionContext
         this.name = new LazyValue<>(() -> slabfish.getDisplayName().getString().trim());
         this.pos = new LazyValue<>(() -> new BlockPos(slabfish.getPositionVec()));
         this.biome = new LazyValue<>(() -> world.getBiome(this.pos.getValue()));
-        this.raid = new LazyValue<>(() -> world.findRaid(this.pos.getValue()) != null);
+        this.inRaid = new LazyValue<>(() -> world.findRaid(this.pos.getValue()) != null);
+        this.inBlock = new LazyValue<>(() -> world.getBlockState(this.pos.getValue()));
+        this.inFluid = new LazyValue<>(() -> world.getFluidState(this.pos.getValue()));
+        this.dayTime = new LazyValue<>(world::isDaytime);
+        this.nightTime = new LazyValue<>(world::isNightTime);
         this.light = new LazyValue<>(() -> world.getLight(this.pos.getValue()));
         this.lightTypes = new HashMap<>();
         for (LightType lightType : LightType.values())
@@ -55,7 +68,8 @@ public class SlabfishConditionContext
         this.dimension = new LazyValue<>(() -> world.func_234923_W_().func_240901_a_());
         this.slabfishType = new LazyValue<>(slabfish::getSlabfishType);
         this.breederInsomnia = new LazyValue<>(() -> breeder != null && breeder.getStats().getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)) >= 72000 && world.isNightTime());
-        this.parents = parent1 != null && parent2 != null ? new ImmutablePair<>(SlabfishManager.DEFAULT_SLABFISH, SlabfishManager.DEFAULT_SLABFISH) : null;// TODO get type from parents
+        SlabfishManager slabfishManager = SlabfishManager.get(world);
+        this.parents = parent1 != null && parent2 != null ? new ImmutablePair<>(slabfishManager.get(parent1.getSlabfishType()), slabfishManager.get(parent2.getSlabfishType())) : null;
     }
 
     /**
@@ -99,11 +113,51 @@ public class SlabfishConditionContext
     }
 
     /**
+     * @return Whether or not it is currently day
+     */
+    public boolean isDay()
+    {
+        return this.dayTime.getValue();
+    }
+
+    /**
+     * @return Whether or not it is currently night
+     */
+    public boolean isNight()
+    {
+        return this.nightTime.getValue();
+    }
+
+    /**
      * @return Whether or not a raid is currently ongoing
      */
     public boolean isInRaid()
     {
-        return this.raid.getValue();
+        return this.inRaid.getValue();
+    }
+
+    /**
+     * @return Whether or not the slabfish is currently in water
+     */
+    public boolean isInBlock(Block block)
+    {
+        return this.inBlock.getValue().isIn(block);
+    }
+
+    /**
+     * @return Whether or not the slabfish is currently in that tag
+     */
+    public boolean isInBlock(ITag<Block> tag)
+    {
+        return this.inBlock.getValue().isIn(tag);
+    }
+
+    /**
+     * @return Whether or not the slabfish is currently in that tag
+     */
+    public boolean isInFluid(ITag<Fluid> tag)
+    {
+        return this.inFluid.getValue().isTagged(tag);
     }
 
     /**

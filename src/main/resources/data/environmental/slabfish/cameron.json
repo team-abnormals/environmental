@@ -1,0 +1,17 @@
+{
+  "rarity": "uncommon",
+  "priority": 10,
+  "displayName": {
+    "translate": "entity.environmental.slabfish.cameron"
+  },
+  "conditions": [
+    {
+      "type": "rename",
+      "names": [
+        "cameron",
+        "cam",
+        "cringe"
+      ]
+    }
+  ]
+}

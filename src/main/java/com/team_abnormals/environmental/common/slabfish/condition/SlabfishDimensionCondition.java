@@ -2,6 +2,7 @@ package com.team_abnormals.environmental.common.slabfish.condition;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
 import net.minecraft.util.ResourceLocation;
 
 /**
@@ -39,6 +40,8 @@ public class SlabfishDimensionCondition implements SlabfishCondition
      */
     public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context)
     {
+        if(!json.has("dimension"))
+            throw new JsonSyntaxException("'dimension' is required");
         return new SlabfishDimensionCondition(context.deserialize(json.get("dimension"), ResourceLocation.class));
     }
 }

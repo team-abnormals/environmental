@@ -2,13 +2,11 @@ package com.team_abnormals.environmental.common.entity;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-import com.google.common.collect.Maps;
 import com.team_abnormals.environmental.common.entity.goals.SlabbyBreedGoal;
 import com.team_abnormals.environmental.common.entity.goals.SlabbyFollowParentGoal;
 import com.team_abnormals.environmental.common.entity.goals.SlabbyGrabItemGoal;
 import com.team_abnormals.environmental.common.entity.util.SlabfishOverlay;
 import com.team_abnormals.environmental.common.entity.util.SlabfishRarity;
-import com.team_abnormals.environmental.common.entity.util.SlabfishTypeOld;
 import com.team_abnormals.environmental.common.inventory.SlabfishInventory;
 import com.team_abnormals.environmental.common.inventory.container.SlabfishInventoryContainer;
 import com.team_abnormals.environmental.common.item.MudBallItem;
@@ -19,7 +17,6 @@ import com.team_abnormals.environmental.common.slabfish.condition.SlabfishCondit
 import com.team_abnormals.environmental.core.Environmental;
 import com.team_abnormals.environmental.core.other.EnvironmentalCriteriaTriggers;
 import com.team_abnormals.environmental.core.other.EnvironmentalData;
-import com.team_abnormals.environmental.core.other.EnvironmentalSlabfishTypes;
 import com.team_abnormals.environmental.core.other.EnvironmentalTags;
 import com.team_abnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.team_abnormals.environmental.core.registry.EnvironmentalEntities;
@@ -126,17 +123,17 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
     BlockPos jukeboxPosition;
 
     @Deprecated
-    private static final Map<List<String>, SlabfishTypeOld> NAMES = Util.make(Maps.newHashMap(), (skins) -> {
-        skins.put(Arrays.asList("cameron", "cam", "cringe"), SlabfishTypeOld.CAMERON);
-        skins.put(Arrays.asList("bagel", "shyguy", "shy guy", "bagielo"), SlabfishTypeOld.BAGEL);
-        skins.put(Arrays.asList("gore", "gore.", "musicano"), SlabfishTypeOld.GORE);
-        skins.put(Arrays.asList("snake", "snake block", "snakeblock"), SlabfishTypeOld.SNAKE_BLOCK);
-        skins.put(Arrays.asList("jackson", "jason", "json"), SlabfishTypeOld.JACKSON);
-        skins.put(Arrays.asList("jub", "slabrave", "mista jub"), SlabfishTypeOld.MISTA_JUB);
-        skins.put(Arrays.asList("smelly", "stinky", "smellysox", "thefaceofgaming"), SlabfishTypeOld.SMELLY);
-        skins.put(Arrays.asList("squart", "squar", "squarticus"), SlabfishTypeOld.SQUART);
-        skins.put(Arrays.asList("bmo", "beemo", "be more"), SlabfishTypeOld.BMO);
-    });
+//    private static final Map<List<String>, SlabfishTypeOld> NAMES = Util.make(Maps.newHashMap(), (skins) -> {
+//        skins.put(Arrays.asList("cameron", "cam", "cringe"), SlabfishTypeOld.CAMERON);
+//        skins.put(Arrays.asList("bagel", "shyguy", "shy guy", "bagielo"), SlabfishTypeOld.BAGEL);
+//        skins.put(Arrays.asList("gore", "gore.", "musicano"), SlabfishTypeOld.GORE);
+//        skins.put(Arrays.asList("snake", "snake block", "snakeblock"), SlabfishTypeOld.SNAKE_BLOCK);
+//        skins.put(Arrays.asList("jackson", "jason", "json"), SlabfishTypeOld.JACKSON);
+//        skins.put(Arrays.asList("jub", "slabrave", "mista jub"), SlabfishTypeOld.MISTA_JUB);
+//        skins.put(Arrays.asList("smelly", "stinky", "smellysox", "thefaceofgaming"), SlabfishTypeOld.SMELLY);
+//        skins.put(Arrays.asList("squart", "squar", "squarticus"), SlabfishTypeOld.SQUART);
+//        skins.put(Arrays.asList("bmo", "beemo", "be more"), SlabfishTypeOld.BMO);
+//    });
 
     public SlabfishEntity(EntityType<? extends SlabfishEntity> type, World worldIn) {
         super(type, worldIn);
@@ -292,7 +289,6 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
             this.dropBackpack();
             this.setBackpacked(false);
             this.playBackpackSound();
-            if (!this.world.isRemote) itemstack.attemptDamageItem(1, player.getRNG(), (ServerPlayerEntity) player);
             return ActionResultType.SUCCESS;
 
         } else if (item == Items.WATER_BUCKET && this.isAlive()) {
@@ -763,7 +759,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
     @Deprecated
     public void setCustomName(@Nullable ITextComponent name) {
         super.setCustomName(name);
-        if (!this.world.isRemote() && name != null && this.getSlabfishType() != EnvironmentalSlabfishTypes.GHOST) {
+        if (!this.world.isRemote() && name != null && !this.getSlabfishType().equals(SlabfishManager.GHOST)) {
             super.setCustomName(name);
             SlabfishType newType = SlabfishManager.get(this.world).get(slabfishType -> true, SlabfishConditionContext.of(this));
             if (newType.getRegistryName() != this.getSlabfishType()) {
@@ -780,7 +776,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
     @Deprecated
     public void onStruckByLightning(LightningBoltEntity lightningBolt) {
         UUID uuid = lightningBolt.getUniqueID();
-        if (!this.world.isRemote() && !uuid.equals(this.lightningUUID) && this.getSlabfishType() != EnvironmentalSlabfishTypes.GHOST) {
+        if (!this.world.isRemote() && !uuid.equals(this.lightningUUID) && !this.getSlabfishType().equals(SlabfishManager.GHOST)) {
             SlabfishConditionContext context = SlabfishConditionContext.lightning(this);
             SlabfishType newType = SlabfishManager.get(this.world).get(__ -> true, context);
             this.setSlabfishType(newType.getRegistryName());
@@ -824,7 +820,6 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         SlabfishManager slabfishManager = SlabfishManager.get(world);
         SlabfishRarity rarity = SlabfishRarity.byChance(world.getRandom().nextFloat());
         ResourceLocation type = reason == SpawnReason.BUCKET ? slabfishManager.getRandom(slabfishType -> slabfishType.getRarity() == rarity, world.getRandom()).getRegistryName() : slabfishManager.get(__ -> true, SlabfishConditionContext.of(this)).getRegistryName();
-        System.out.println(type);
 
         if (dataTag != null && dataTag.contains("SlabfishType", Constants.NBT.TAG_STRING)) {
             if (dataTag.contains("Health")) this.setHealth(dataTag.getFloat("Health"));

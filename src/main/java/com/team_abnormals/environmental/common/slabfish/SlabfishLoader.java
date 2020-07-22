@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 /**
  * <p>Loads all slabfish from data packs as a server implementation of {@link SlabfishManager}.</p>
@@ -51,10 +52,7 @@ public class SlabfishLoader extends JsonReloadListener implements SlabfishManage
         {
             try
             {
-                SlabfishType slabfishType = GSON.fromJson(json, SlabfishType.class).setRegistryName(location);
-                LOGGER.debug("Registered Slabfish Type: " + location);
-                LOGGER.debug("Rarity: " + slabfishType.getRarity());
-                parsed.put(location, slabfishType);
+                parsed.put(location, GSON.fromJson(json, SlabfishType.class).setRegistryName(location));
             }
             catch (Exception e)
             {
@@ -89,7 +87,7 @@ public class SlabfishLoader extends JsonReloadListener implements SlabfishManage
     {
         if (this.slabfishTypes.isEmpty())
             return DEFAULT_SLABFISH;
-        return this.slabfishTypes.values().stream().filter(predicate).skip(random.nextInt(this.slabfishTypes.size())).findFirst().orElse(DEFAULT_SLABFISH);
+        return this.slabfishTypes.values().stream().skip(random.nextInt(this.slabfishTypes.values().size())).filter(predicate).findFirst().orElse(DEFAULT_SLABFISH);
     }
 
     @Override

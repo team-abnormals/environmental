@@ -3,8 +3,8 @@ package com.team_abnormals.environmental.client.render.layer;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.team_abnormals.environmental.common.entity.SlabfishEntity;
+import com.team_abnormals.environmental.common.slabfish.SlabfishManager;
 import com.team_abnormals.environmental.core.Environmental;
-import com.team_abnormals.environmental.core.other.EnvironmentalSlabfishTypes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
@@ -31,7 +31,12 @@ public class BackpackRenderLayer<E extends SlabfishEntity, M extends EntityModel
         String textureId = Environmental.MODID;
         String textureSuffix = slabby.getBackpackColor().getTranslationKey();
 
-        if (slabby.getSlabfishType() == EnvironmentalSlabfishTypes.SNAKE_BLOCK || slabby.getSlabfishType() == EnvironmentalSlabfishTypes.GORE) {
+//        if (slabby.getSlabfishType() == EnvironmentalSlabfishTypes.SNAKE_BLOCK || slabby.getSlabfishType() == EnvironmentalSlabfishTypes.GORE) {
+//            textureId = slabby.getSlabfishType().getNamespace();
+//            textureSuffix = slabby.getSlabfishType().getPath();
+//        }
+
+        if (SlabfishManager.get(slabby.getEntityWorld()).get(slabby.getSlabfishType()).hasCustomBackpack()) {
             textureId = slabby.getSlabfishType().getNamespace();
             textureSuffix = slabby.getSlabfishType().getPath();
         }

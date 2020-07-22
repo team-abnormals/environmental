@@ -1,0 +1,18 @@
+{
+  "rarity": "uncommon",
+  "priority": 10,
+  "displayName": {
+    "translate": "entity.environmental.slabfish.gore"
+  },
+  "customBackpack": true,
+  "conditions": [
+    {
+      "type": "rename",
+      "names": [
+        "gore",
+        "gore.",
+        "musicano"
+      ]
+    }
+  ]
+}

@@ -44,6 +44,8 @@ public class SlabfishHeightCondition implements SlabfishCondition
     {
         if ((json.has("min") || json.has("max")) && json.has("value"))
             throw new JsonSyntaxException("Either 'min' and 'max' or 'value' can be present.");
-        return json.has("value") ? new SlabfishHeightCondition(json.get("value").getAsInt(), json.get("value").getAsInt()) : new SlabfishHeightCondition(json.get("min").getAsInt(), json.get("max").getAsInt());
+        if (!json.has("min") && !json.has("max") && !json.has("value"))
+            throw new JsonSyntaxException("Either 'min' and 'max' or 'value' must be present.");
+        return json.has("value") ? new SlabfishHeightCondition(json.get("value").getAsInt(), json.get("value").getAsInt()) : new SlabfishHeightCondition(json.has("min") ? json.get("min").getAsInt() : Integer.MIN_VALUE, json.has("max") ? json.get("max").getAsInt() : Integer.MAX_VALUE);
     }
 }

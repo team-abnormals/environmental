@@ -12,6 +12,7 @@ import java.util.function.BiFunction;
  */
 public enum SlabfishConditionType
 {
+    IMPOSSIBLE(SlabfishImpossibleCondition::deserialize),
     OR(SlabfishOrCondition::deserialize),
     RENAME(SlabfishRenameCondition::deserialize),
     BIOME(SlabfishBiomeCondition::deserialize),
@@ -22,7 +23,10 @@ public enum SlabfishConditionType
     PARENTS(SlabfishParentCondition::deserialize),
     RAID(SlabfishRaidCondition::deserialize),
     INSOMNIA(SlabfishInsomniaCondition::deserialize),
-    RANDOM(SlabfishRandomCondition::deserialize);
+    RANDOM(SlabfishRandomCondition::deserialize),
+    TIME(SlabfishTimeCondition::deserialize),
+    IN_BLOCK(SlabfishInBlockCondition::deserialize),
+    IN_FLUID(SlabfishInFluidCondition::deserialize);
 
     private final BiFunction<JsonObject, JsonDeserializationContext, SlabfishCondition> jsonDeserializer;
 
