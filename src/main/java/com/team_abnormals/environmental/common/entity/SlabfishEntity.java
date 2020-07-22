@@ -817,10 +817,6 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
     public ILivingEntityData onInitialSpawn(IWorld world, DifficultyInstance difficulty, SpawnReason reason, ILivingEntityData spawnDataIn, CompoundNBT dataTag) {
         spawnDataIn = super.onInitialSpawn(world, difficulty, reason, spawnDataIn, dataTag);
 
-        SlabfishManager slabfishManager = SlabfishManager.get(world);
-        SlabfishRarity rarity = SlabfishRarity.byChance(world.getRandom().nextFloat());
-        ResourceLocation type = reason == SpawnReason.BUCKET ? slabfishManager.getRandom(slabfishType -> slabfishType.getRarity() == rarity, world.getRandom()).getRegistryName() : slabfishManager.get(__ -> true, SlabfishConditionContext.of(this)).getRegistryName();
-
         if (dataTag != null && dataTag.contains("SlabfishType", Constants.NBT.TAG_STRING)) {
             if (dataTag.contains("Health")) this.setHealth(dataTag.getFloat("Health"));
             if (dataTag.contains("Age")) this.setGrowingAge(dataTag.getInt("Age"));
@@ -845,6 +841,10 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
             return spawnDataIn;
         }
+
+        SlabfishManager slabfishManager = SlabfishManager.get(world);
+        SlabfishRarity rarity = SlabfishRarity.byChance(world.getRandom().nextFloat());
+        ResourceLocation type = reason == SpawnReason.BUCKET ? slabfishManager.getRandom(slabfishType -> slabfishType.getRarity() == rarity, world.getRandom()).getRegistryName() : slabfishManager.get(__ -> true, SlabfishConditionContext.of(this)).getRegistryName();
 
         if (spawnDataIn instanceof SlabfishEntity.SlabfishData) {
             type = ((SlabfishEntity.SlabfishData) spawnDataIn).type;
