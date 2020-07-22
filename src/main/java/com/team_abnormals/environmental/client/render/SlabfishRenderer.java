@@ -27,7 +27,7 @@ public class SlabfishRenderer extends MobRenderer<SlabfishEntity, SlabfishModel<
 
     @Override
     public ResourceLocation getEntityTexture(SlabfishEntity slabby) {
-        ResourceLocation slabfishType = SlabfishManager.get(slabby.world).get(slabby.getSlabfishType()).getRegistryName();
+        ResourceLocation slabfishType = SlabfishManager.get(slabby.world).getSlabfishType(slabby.getSlabfishType()).getRegistryName();
         return new ResourceLocation(slabfishType.getNamespace(), "textures/entity/slabfish/slabfish_" + slabfishType.getPath() + ".png");
     }
 
@@ -37,7 +37,7 @@ public class SlabfishRenderer extends MobRenderer<SlabfishEntity, SlabfishModel<
         if (p_230496_3_) {
             return RenderType.func_239268_f_(texture);
         } else if (p_230496_2_) {
-            return SlabfishManager.get(slabby.world).get(slabby.getSlabfishType()).isTranslucent() ? RenderType.getEntityTranslucent(texture) : this.entityModel.getRenderType(texture);
+            return SlabfishManager.get(slabby.world).getSlabfishType(slabby.getSlabfishType()).isTranslucent() ? RenderType.getEntityTranslucent(texture) : this.entityModel.getRenderType(texture);
         } else {
             return p_230496_4_ ? RenderType.getOutline(texture) : null;
         }

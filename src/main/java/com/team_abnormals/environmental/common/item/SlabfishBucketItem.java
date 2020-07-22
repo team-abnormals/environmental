@@ -76,7 +76,7 @@ public class SlabfishBucketItem extends BucketItem {
         CompoundNBT compoundnbt = stack.getTag();
         if (compoundnbt != null) {
             if (compoundnbt.contains("SlabfishType", Constants.NBT.TAG_STRING)) {
-                SlabfishType slabfishType = SlabfishManager.get(worldIn).get(new ResourceLocation(compoundnbt.getString("SlabfishType")));
+                SlabfishType slabfishType = SlabfishManager.get(worldIn).getSlabfishType(new ResourceLocation(compoundnbt.getString("SlabfishType")));
                 if (slabfishType != SlabfishManager.DEFAULT_SLABFISH)
                     tooltip.add(slabfishType.getDisplayName().deepCopy().func_240701_a_(TextFormatting.ITALIC, slabfishType.getRarity().getFormatting()));
             }

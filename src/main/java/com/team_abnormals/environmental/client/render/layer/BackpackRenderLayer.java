@@ -36,7 +36,7 @@ public class BackpackRenderLayer<E extends SlabfishEntity, M extends EntityModel
 //            textureSuffix = slabby.getSlabfishType().getPath();
 //        }
 
-        if (SlabfishManager.get(slabby.getEntityWorld()).get(slabby.getSlabfishType()).hasCustomBackpack()) {
+        if (SlabfishManager.get(slabby.getEntityWorld()).getSlabfishType(slabby.getSlabfishType()).hasCustomBackpack()) {
             textureId = slabby.getSlabfishType().getNamespace();
             textureSuffix = slabby.getSlabfishType().getPath();
         }

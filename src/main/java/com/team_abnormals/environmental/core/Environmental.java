@@ -2,10 +2,7 @@ package com.team_abnormals.environmental.core;
 
 import com.team_abnormals.environmental.client.gui.screen.inventory.KilnScreen;
 import com.team_abnormals.environmental.client.gui.screen.inventory.SawmillScreen;
-import com.team_abnormals.environmental.common.network.message.CAcknowledgeEnvironmentalMessage;
-import com.team_abnormals.environmental.common.network.message.EnvironmentalLoginMessage;
-import com.team_abnormals.environmental.common.network.message.SOpenSlabfishInventoryMessage;
-import com.team_abnormals.environmental.common.network.message.SSyncSlabfishTypeMessage;
+import com.team_abnormals.environmental.common.network.message.*;
 import com.team_abnormals.environmental.common.slabfish.SlabfishLoader;
 import com.team_abnormals.environmental.core.other.EnvironmentalCompat;
 import com.team_abnormals.environmental.core.other.EnvironmentalData;
@@ -145,16 +142,28 @@ public class Environmental
 
     private void setupPlayMessages()
     {
-        PLAY.messageBuilder(SOpenSlabfishInventoryMessage.class, 0, NetworkDirection.PLAY_TO_CLIENT)
-                .encoder(SOpenSlabfishInventoryMessage::serialize).decoder(SOpenSlabfishInventoryMessage::deserialize)
-                .consumer(SOpenSlabfishInventoryMessage::handle)
-                .add();
-
-        PLAY.messageBuilder(SSyncSlabfishTypeMessage.class, 1, NetworkDirection.PLAY_TO_CLIENT).
+        PLAY.messageBuilder(SSyncSlabfishTypeMessage.class, 0, NetworkDirection.PLAY_TO_CLIENT).
                 encoder(SSyncSlabfishTypeMessage::serialize).
                 decoder(SSyncSlabfishTypeMessage::deserialize).
                 consumer(SSyncSlabfishTypeMessage::handlePlay).
                 add();
+
+        PLAY.messageBuilder(SSyncSweaterTypeMessage.class, 1, NetworkDirection.PLAY_TO_CLIENT).
+                encoder(SSyncSweaterTypeMessage::serialize).
+                decoder(SSyncSweaterTypeMessage::deserialize).
+                consumer(SSyncSweaterTypeMessage::handlePlay).
+                add();
+
+        PLAY.messageBuilder(SSyncBackpackTypeMessage.class, 2, NetworkDirection.PLAY_TO_CLIENT).
+                encoder(SSyncBackpackTypeMessage::serialize).
+                decoder(SSyncBackpackTypeMessage::deserialize).
+                consumer(SSyncBackpackTypeMessage::handlePlay).
+                add();
+
+        PLAY.messageBuilder(SOpenSlabfishInventoryMessage.class, 3, NetworkDirection.PLAY_TO_CLIENT)
+                .encoder(SOpenSlabfishInventoryMessage::serialize).decoder(SOpenSlabfishInventoryMessage::deserialize)
+                .consumer(SOpenSlabfishInventoryMessage::handle)
+                .add();
     }
 
     private void setupLoginMessages()
@@ -174,10 +183,21 @@ public class Environmental
                 consumer(FMLHandshakeHandler.biConsumerFor((__, msg, ctx) -> SSyncSlabfishTypeMessage.handleLogin(msg, ctx))).
                 add();
 
-//        PLAY.messageBuilder(SOpenSlabfishInventoryMessage.class, id++)
-//                .encoder(SOpenSlabfishInventoryMessage::serialize).decoder(SOpenSlabfishInventoryMessage::deserialize)
-//                .consumer(SOpenSlabfishInventoryMessage::handle)
-//                .add();
+        LOGIN.messageBuilder(SSyncSweaterTypeMessage.class, 1, NetworkDirection.LOGIN_TO_CLIENT).
+                loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex).
+                encoder(SSyncSweaterTypeMessage::serialize).
+                decoder(SSyncSweaterTypeMessage::deserialize).
+                markAsLoginPacket().
+                consumer(FMLHandshakeHandler.biConsumerFor((__, msg, ctx) -> SSyncSweaterTypeMessage.handleLogin(msg, ctx))).
+                add();
+
+        LOGIN.messageBuilder(SSyncBackpackTypeMessage.class, 2, NetworkDirection.LOGIN_TO_CLIENT).
+                loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex).
+                encoder(SSyncBackpackTypeMessage::serialize).
+                decoder(SSyncBackpackTypeMessage::deserialize).
+                markAsLoginPacket().
+                consumer(FMLHandshakeHandler.biConsumerFor((__, msg, ctx) -> SSyncBackpackTypeMessage.handleLogin(msg, ctx))).
+                add();
     }
 
     @OnlyIn(Dist.CLIENT)

@@ -4,7 +4,9 @@ import com.team_abnormals.environmental.client.gui.screen.inventory.SlabfishInve
 import com.team_abnormals.environmental.common.entity.SlabfishEntity;
 import com.team_abnormals.environmental.common.inventory.container.SlabfishInventoryContainer;
 import com.team_abnormals.environmental.common.network.message.SOpenSlabfishInventoryMessage;
+import com.team_abnormals.environmental.common.network.message.SSyncBackpackTypeMessage;
 import com.team_abnormals.environmental.common.network.message.SSyncSlabfishTypeMessage;
+import com.team_abnormals.environmental.common.network.message.SSyncSweaterTypeMessage;
 import com.team_abnormals.environmental.common.slabfish.ClientSlabfishManager;
 import com.team_abnormals.environmental.common.slabfish.SlabfishLoader;
 import net.minecraft.client.Minecraft;
@@ -36,6 +38,16 @@ public class ClientNetworkHandler
     }
 
     public static void handleSyncSlabfishType(SSyncSlabfishTypeMessage msg, NetworkEvent.Context ctx)
+    {
+        ClientSlabfishManager.receive(msg);
+    }
+
+    public static void handleSyncSweaterType(SSyncSweaterTypeMessage msg, NetworkEvent.Context ctx)
+    {
+        ClientSlabfishManager.receive(msg);
+    }
+
+    public static void handleSyncBackpackType(SSyncBackpackTypeMessage msg, NetworkEvent.Context ctx)
     {
         ClientSlabfishManager.receive(msg);
     }

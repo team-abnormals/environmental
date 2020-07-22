@@ -1,7 +1,6 @@
 package com.team_abnormals.environmental.common.network.message;
 
 import com.team_abnormals.environmental.common.network.ClientNetworkHandler;
-import com.team_abnormals.environmental.common.slabfish.SlabfishLoader;
 import com.team_abnormals.environmental.common.slabfish.SlabfishManager;
 import com.team_abnormals.environmental.common.slabfish.SlabfishType;
 import com.team_abnormals.environmental.core.Environmental;
@@ -23,7 +22,7 @@ public class SSyncSlabfishTypeMessage implements EnvironmentalLoginMessage
 
     public SSyncSlabfishTypeMessage()
     {
-        this(SlabfishManager.get(LogicalSide.SERVER).getAllSlabfish());
+        this(SlabfishManager.get(LogicalSide.SERVER).getAllSlabfishTypes());
     }
 
     private SSyncSlabfishTypeMessage(SlabfishType[] slabfishTypes)

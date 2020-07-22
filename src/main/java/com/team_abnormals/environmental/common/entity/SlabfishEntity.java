@@ -66,7 +66,6 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.network.NetworkHooks;
@@ -599,7 +598,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         super.setCustomName(name);
         if (!this.world.isRemote() && name != null && !this.getSlabfishType().equals(SlabfishManager.GHOST)) {
             super.setCustomName(name);
-            SlabfishType newType = SlabfishManager.get(this.world).get(slabfishType -> true, SlabfishConditionContext.of(this));
+            SlabfishType newType = SlabfishManager.get(this.world).getSlabfishType(slabfishType -> true, SlabfishConditionContext.of(this));
             if (newType.getRegistryName() != this.getSlabfishType()) {
                 this.setSlabfishType(newType.getRegistryName());
             }
@@ -616,7 +615,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         UUID uuid = lightningBolt.getUniqueID();
         if (!this.world.isRemote() && !uuid.equals(this.lightningUUID) && !this.getSlabfishType().equals(SlabfishManager.GHOST)) {
             SlabfishConditionContext context = SlabfishConditionContext.lightning(this);
-            SlabfishType newType = SlabfishManager.get(this.world).get(__ -> true, context);
+            SlabfishType newType = SlabfishManager.get(this.world).getSlabfishType(__ -> true, context);
             this.setSlabfishType(newType.getRegistryName());
             this.setPreNameType(newType.getRegistryName());
             this.lightningUUID = uuid;
@@ -672,7 +671,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
         SlabfishManager slabfishManager = SlabfishManager.get(world);
         SlabfishRarity rarity = SlabfishRarity.byChance(world.getRandom().nextFloat());
-        ResourceLocation type = reason == SpawnReason.BUCKET ? slabfishManager.getRandom(slabfishType -> slabfishType.isModLoaded() && slabfishType.isTradable() && slabfishType.getRarity() == rarity, world.getRandom()).getRegistryName() : slabfishManager.get(__ -> true, SlabfishConditionContext.of(this)).getRegistryName();
+        ResourceLocation type = reason == SpawnReason.BUCKET ? slabfishManager.getRandomSlabfishType(slabfishType -> slabfishType.isModLoaded() && slabfishType.isTradable() && slabfishType.getRarity() == rarity, world.getRandom()).getRegistryName() : slabfishManager.getSlabfishType(__ -> true, SlabfishConditionContext.of(this)).getRegistryName();
 
         if (spawnDataIn instanceof SlabfishEntity.SlabfishData) {
             type = ((SlabfishEntity.SlabfishData) spawnDataIn).type;

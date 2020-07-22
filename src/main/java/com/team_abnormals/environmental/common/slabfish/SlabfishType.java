@@ -12,6 +12,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.ModList;
 
+import javax.annotation.Nullable;
 import java.lang.reflect.Type;
 import java.util.function.Predicate;
 
@@ -32,7 +33,7 @@ public class SlabfishType implements Predicate<SlabfishConditionContext>
     private final int priority;
     private final SlabfishCondition[] conditions;
 
-    public SlabfishType(SlabfishRarity rarity, ITextComponent displayName, boolean translucent, boolean customBackpack, boolean tradable, boolean modLoaded, int priority, SlabfishCondition[] conditions)
+    public SlabfishType(SlabfishRarity rarity, @Nullable ITextComponent displayName, boolean translucent, boolean customBackpack, boolean tradable, boolean modLoaded, int priority, SlabfishCondition[] conditions)
     {
         this.rarity = rarity;
         this.displayName = displayName;
@@ -153,6 +154,7 @@ public class SlabfishType implements Predicate<SlabfishConditionContext>
                 "registryName=" + registryName +
                 ", displayName=" + displayName.getString() +
                 ", rarity=" + rarity +
+                ", modLoaded=" + modLoaded +
                 ", priority=" + priority +
                 '}';
     }
@@ -177,7 +179,7 @@ public class SlabfishType implements Predicate<SlabfishConditionContext>
     }
 
     /**
-     * <p>Deserializes this slabfish type from JSON.</p>
+     * <p>Deserializes a slabfish type from JSON.</p>
      *
      * @author Ocelot
      */
@@ -186,7 +188,7 @@ public class SlabfishType implements Predicate<SlabfishConditionContext>
         private static SlabfishRarity deserializeRarity(JsonElement element) throws JsonParseException
         {
             if (!element.isJsonPrimitive() || !element.getAsJsonPrimitive().isString())
-                throw new JsonSyntaxException("Slabfish rarity expected to be a string");
+                throw new JsonSyntaxException("'rarity' expected to be a string");
             String name = element.getAsString();
             for (SlabfishRarity rarity : SlabfishRarity.values())
                 if (rarity.name().equalsIgnoreCase(name))
@@ -199,7 +201,7 @@ public class SlabfishType implements Predicate<SlabfishConditionContext>
         {
             JsonObject jsonObject = json.getAsJsonObject();
             if (!jsonObject.has("rarity"))
-                throw new JsonSyntaxException("Slabfish rarity is required");
+                throw new JsonSyntaxException("'rarity' is required");
 
             SlabfishRarity rarity = deserializeRarity(jsonObject.get("rarity"));
             ITextComponent displayName = jsonObject.has("displayName") ? context.deserialize(jsonObject.get("displayName"), ITextComponent.class) : null;

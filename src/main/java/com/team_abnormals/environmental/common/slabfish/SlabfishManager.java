@@ -4,6 +4,7 @@ import com.team_abnormals.environmental.common.entity.util.SlabfishRarity;
 import com.team_abnormals.environmental.common.slabfish.condition.SlabfishCondition;
 import com.team_abnormals.environmental.common.slabfish.condition.SlabfishConditionContext;
 import com.team_abnormals.environmental.core.Environmental;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IWorldReader;
@@ -25,6 +26,16 @@ public interface SlabfishManager
     SlabfishType DEFAULT_SLABFISH = new SlabfishType(SlabfishRarity.COMMON, new TranslationTextComponent("entity." + Environmental.MODID + ".slabfish.swamp"), false, false, true, true, -1, new SlabfishCondition[0]).setRegistryName(new ResourceLocation(Environmental.MODID, "swamp"));
 
     /**
+     * The default sweater that exists if there are no other sweater types to choose from.
+     */
+    SweaterType EMPTY_SWEATER = new SweaterType(null, Ingredient.EMPTY).setRegistryName(new ResourceLocation(Environmental.MODID, "empty"));
+
+    /**
+     * The default backpack that exists if there are no other backpack types to choose from.
+     */
+    BackpackType EMPTY_BACKPACK = new BackpackType(null, Ingredient.EMPTY).setRegistryName(new ResourceLocation(Environmental.MODID, "empty"));
+
+    /**
      * The id for the ghost slabfish. Used for custom functionality.
      */
     ResourceLocation GHOST = new ResourceLocation(Environmental.MODID, "ghost");
@@ -35,7 +46,23 @@ public interface SlabfishManager
      * @param registryName The name of the slabfish to search for
      * @return The slabfish type by that name or {@link #DEFAULT_SLABFISH} for no slabfish under that name
      */
-    SlabfishType get(ResourceLocation registryName);
+    SlabfishType getSlabfishType(ResourceLocation registryName);
+
+    /**
+     * Checks the sweater types for a sweater of the specified name.
+     *
+     * @param registryName The name of the sweater to search for
+     * @return The sweater type by that name or {@link #EMPTY_SWEATER} for no sweater under that name
+     */
+    SweaterType getSweaterType(ResourceLocation registryName);
+
+    /**
+     * Checks the backpack types for a backpack of the specified name.
+     *
+     * @param registryName The name of the backpack to search for
+     * @return The sweater type by that name or {@link #EMPTY_BACKPACK} for no sweater under that name
+     */
+    BackpackType getBackpackType(ResourceLocation registryName);
 
     /**
      * Checks through all slabfish types for a slabfish conditions that succeed in the current context.
@@ -44,7 +71,7 @@ public interface SlabfishManager
      * @param context   The context of the slabfish
      * @return The slabfish that that was selected to be the best fit for the context
      */
-    SlabfishType get(Predicate<SlabfishType> predicate, SlabfishConditionContext context);
+    SlabfishType getSlabfishType(Predicate<SlabfishType> predicate, SlabfishConditionContext context);
 
     /**
      * Fetches a random slabfish type by the specified {@link Predicate}.
@@ -53,12 +80,22 @@ public interface SlabfishManager
      * @param random    The random to use for the index
      * @return A random slabfish type by that rarity or {@link #DEFAULT_SLABFISH} if there were no results
      */
-    SlabfishType getRandom(Predicate<SlabfishType> predicate, Random random);
+    SlabfishType getRandomSlabfishType(Predicate<SlabfishType> predicate, Random random);
 
     /**
      * @return All registered slabfish types
      */
-    SlabfishType[] getAllSlabfish();
+    SlabfishType[] getAllSlabfishTypes();
+
+    /**
+     * @return All registered sweater types
+     */
+    SweaterType[] getAllSweaterTypes();
+
+    /**
+     * @return All registered backpack types
+     */
+    BackpackType[] getAllBackpackTypes();
 
     /**
      * Fetches the slabfish manager for the specified side.
@@ -79,6 +116,6 @@ public interface SlabfishManager
      */
     static SlabfishManager get(IWorldReader world)
     {
-        return get(world.isRemote() ? LogicalSide.CLIENT : LogicalSide.SERVER);
+        return world.isRemote() ? ClientSlabfishManager.INSTANCE : SlabfishLoader.instance;
     }
 }

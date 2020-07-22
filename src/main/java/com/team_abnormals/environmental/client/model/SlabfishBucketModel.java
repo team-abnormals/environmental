@@ -104,7 +104,7 @@ public class SlabfishBucketModel implements IBakedModel
         {
             if (stack.getTag() != null && stack.getTag().contains("SlabfishType", Constants.NBT.TAG_STRING))
             {
-                ResourceLocation slabfishType = SlabfishManager.get(LogicalSide.CLIENT).get(this.locationCache.computeIfAbsent(stack.getTag().getString("SlabfishType"), ResourceLocation::new)).getRegistryName();
+                ResourceLocation slabfishType = SlabfishManager.get(LogicalSide.CLIENT).getSlabfishType(this.locationCache.computeIfAbsent(stack.getTag().getString("SlabfishType"), ResourceLocation::new)).getRegistryName();
                 if (this.modelLocations.containsKey(slabfishType))
                     return this.modelManager.getModel(this.modelLocations.get(slabfishType));
             }

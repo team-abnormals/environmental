@@ -3,7 +3,9 @@ package com.team_abnormals.environmental.common.slabfish;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
+import com.team_abnormals.environmental.common.network.message.SSyncBackpackTypeMessage;
 import com.team_abnormals.environmental.common.network.message.SSyncSlabfishTypeMessage;
+import com.team_abnormals.environmental.common.network.message.SSyncSweaterTypeMessage;
 import com.team_abnormals.environmental.common.slabfish.condition.SlabfishCondition;
 import com.team_abnormals.environmental.common.slabfish.condition.SlabfishConditionContext;
 import com.team_abnormals.environmental.core.Environmental;
@@ -31,58 +33,127 @@ import java.util.function.Predicate;
 public class SlabfishLoader extends JsonReloadListener implements SlabfishManager
 {
     private static final Logger LOGGER = LogManager.getLogger();
-    private static final Gson GSON = new GsonBuilder().registerTypeAdapter(ResourceLocation.class, new ResourceLocation.Serializer()).registerTypeAdapter(ITextComponent.class, new ITextComponent.Serializer()).registerTypeAdapter(SlabfishType.class, new SlabfishType.Deserializer()).registerTypeAdapter(SlabfishCondition.class, new SlabfishCondition.Deserializer()).create();
+    private static final Gson GSON = new GsonBuilder()
+            .registerTypeAdapter(ResourceLocation.class, new ResourceLocation.Serializer())
+            .registerTypeAdapter(ITextComponent.class, new ITextComponent.Serializer())
+            .registerTypeAdapter(SlabfishType.class, new SlabfishType.Deserializer())
+            .registerTypeAdapter(SlabfishCondition.class, new SlabfishCondition.Deserializer())
+            .registerTypeAdapter(SweaterType.class, new SweaterType.Deserializer())
+            .registerTypeAdapter(BackpackType.class, new BackpackType.Deserializer())
+            .create();
+
     static SlabfishLoader instance;
 
     private final Map<ResourceLocation, SlabfishType> slabfishTypes;
+    private final Map<ResourceLocation, SweaterType> sweaterTypes;
+    private final Map<ResourceLocation, BackpackType> backpackTypes;
 
     public SlabfishLoader()
     {
         super(GSON, "slabfish");
         this.slabfishTypes = new HashMap<>();
+        this.sweaterTypes = new HashMap<>();
+        this.backpackTypes = new HashMap<>();
         instance = this;
     }
 
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> object, IResourceManager resourceManager, IProfiler profiler)
     {
-        Map<ResourceLocation, SlabfishType> parsed = new HashMap<>();
+        Map<ResourceLocation, SlabfishType> parsedSlabfishTypes = new HashMap<>();
+        Map<ResourceLocation, SweaterType> parsedSweaterTypes = new HashMap<>();
+        Map<ResourceLocation, BackpackType> parsedBackpackTypes = new HashMap<>();
+
         object.forEach(((location, json) ->
         {
-            try
+            if (location.getPath().startsWith("type"))
             {
-                parsed.put(location, GSON.fromJson(json, SlabfishType.class).setRegistryName(location));
+                ResourceLocation registryName = new ResourceLocation(location.getNamespace(), location.getPath().substring("type/".length()));
+                try
+                {
+                    parsedSlabfishTypes.put(location, GSON.fromJson(json, SlabfishType.class).setRegistryName(registryName));
+                }
+                catch (Exception e)
+                {
+                    LOGGER.error("Parsing error loading custom slabfish " + registryName, e);
+                }
             }
-            catch (Exception e)
+            else if (location.getPath().startsWith("sweater"))
             {
-                LOGGER.error("Parsing error loading custom slabfish " + location, e);
+                ResourceLocation registryName = new ResourceLocation(location.getNamespace(), location.getPath().substring("sweater/".length()));
+                try
+                {
+                    parsedSweaterTypes.put(location, GSON.fromJson(json, SweaterType.class).setRegistryName(registryName));
+                }
+                catch (Exception e)
+                {
+                    LOGGER.error("Parsing error loading custom sweater " + registryName, e);
+                }
+            }
+            else if (location.getPath().startsWith("backpack"))
+            {
+                ResourceLocation registryName = new ResourceLocation(location.getNamespace(), location.getPath().substring("backpack/".length()));
+                try
+                {
+                    parsedBackpackTypes.put(location, GSON.fromJson(json, BackpackType.class).setRegistryName(registryName));
+                }
+                catch (Exception e)
+                {
+                    LOGGER.error("Parsing error loading custom backpack " + registryName, e);
+                }
             }
         }));
 
-        LOGGER.info("Loaded " + parsed.size() + " Slabfish Types");
+        LOGGER.info("Loaded " + parsedSlabfishTypes.size() + " Slabfish Types");
+        LOGGER.info("Loaded " + parsedSweaterTypes.size() + " Sweater Types");
+        LOGGER.info("Loaded " + parsedBackpackTypes.size() + " Backpack Types");
 
         this.slabfishTypes.clear();
         this.slabfishTypes.put(DEFAULT_SLABFISH.getRegistryName(), DEFAULT_SLABFISH);
-        this.slabfishTypes.putAll(parsed);
+        this.slabfishTypes.putAll(parsedSlabfishTypes);
+
+        this.sweaterTypes.clear();
+        this.sweaterTypes.put(EMPTY_SWEATER.getRegistryName(), EMPTY_SWEATER);
+        this.sweaterTypes.putAll(parsedSweaterTypes);
+
+        this.backpackTypes.clear();
+        this.backpackTypes.put(EMPTY_BACKPACK.getRegistryName(), EMPTY_BACKPACK);
+        this.backpackTypes.putAll(parsedBackpackTypes);
 
         if (EffectiveSide.get().isServer())
+        {
             Environmental.PLAY.send(PacketDistributor.ALL.noArg(), new SSyncSlabfishTypeMessage());
+            Environmental.PLAY.send(PacketDistributor.ALL.noArg(), new SSyncSweaterTypeMessage());
+            Environmental.PLAY.send(PacketDistributor.ALL.noArg(), new SSyncBackpackTypeMessage());
+        }
     }
 
     @Override
-    public SlabfishType get(ResourceLocation registryName)
+    public SlabfishType getSlabfishType(ResourceLocation registryName)
     {
         return this.slabfishTypes.getOrDefault(registryName, DEFAULT_SLABFISH);
     }
 
     @Override
-    public SlabfishType get(Predicate<SlabfishType> predicate, SlabfishConditionContext context)
+    public SweaterType getSweaterType(ResourceLocation registryName)
+    {
+        return this.sweaterTypes.getOrDefault(registryName, EMPTY_SWEATER);
+    }
+
+    @Override
+    public BackpackType getBackpackType(ResourceLocation registryName)
+    {
+        return this.backpackTypes.getOrDefault(registryName, EMPTY_BACKPACK);
+    }
+
+    @Override
+    public SlabfishType getSlabfishType(Predicate<SlabfishType> predicate, SlabfishConditionContext context)
     {
         return this.slabfishTypes.values().stream().filter(slabfishType -> predicate.test(slabfishType) && slabfishType.test(context)).max(Comparator.comparingInt(SlabfishType::getPriority)).orElse(DEFAULT_SLABFISH);
     }
 
     @Override
-    public SlabfishType getRandom(Predicate<SlabfishType> predicate, Random random)
+    public SlabfishType getRandomSlabfishType(Predicate<SlabfishType> predicate, Random random)
     {
         if (this.slabfishTypes.isEmpty())
             return DEFAULT_SLABFISH;
@@ -91,8 +162,20 @@ public class SlabfishLoader extends JsonReloadListener implements SlabfishManage
     }
 
     @Override
-    public SlabfishType[] getAllSlabfish()
+    public SlabfishType[] getAllSlabfishTypes()
     {
         return this.slabfishTypes.values().toArray(new SlabfishType[0]);
+    }
+
+    @Override
+    public SweaterType[] getAllSweaterTypes()
+    {
+        return this.sweaterTypes.values().toArray(new SweaterType[0]);
+    }
+
+    @Override
+    public BackpackType[] getAllBackpackTypes()
+    {
+        return this.backpackTypes.values().toArray(new BackpackType[0]);
     }
 }

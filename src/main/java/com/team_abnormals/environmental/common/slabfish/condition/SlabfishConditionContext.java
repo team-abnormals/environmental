@@ -69,7 +69,7 @@ public class SlabfishConditionContext
         this.slabfishType = new LazyValue<>(slabfish::getSlabfishType);
         this.breederInsomnia = new LazyValue<>(() -> breeder != null && breeder.getStats().getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)) >= 72000 && world.isNightTime());
         SlabfishManager slabfishManager = SlabfishManager.get(world);
-        this.parents = parent1 != null && parent2 != null ? new ImmutablePair<>(slabfishManager.get(parent1.getSlabfishType()), slabfishManager.get(parent2.getSlabfishType())) : null;
+        this.parents = parent1 != null && parent2 != null ? new ImmutablePair<>(slabfishManager.getSlabfishType(parent1.getSlabfishType()), slabfishManager.getSlabfishType(parent2.getSlabfishType())) : null;
     }
 
     /**
