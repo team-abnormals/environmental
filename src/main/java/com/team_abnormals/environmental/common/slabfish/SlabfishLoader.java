@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 /**
  * <p>Loads all slabfish from data packs as a server implementation of {@link SlabfishManager}.</p>
@@ -87,7 +86,8 @@ public class SlabfishLoader extends JsonReloadListener implements SlabfishManage
     {
         if (this.slabfishTypes.isEmpty())
             return DEFAULT_SLABFISH;
-        return this.slabfishTypes.values().stream().skip(random.nextInt(this.slabfishTypes.values().size())).filter(predicate).findFirst().orElse(DEFAULT_SLABFISH);
+        SlabfishType[] slabfishTypes = this.slabfishTypes.values().stream().filter(predicate).toArray(SlabfishType[]::new);
+        return slabfishTypes.length == 0 ? DEFAULT_SLABFISH : slabfishTypes[random.nextInt(slabfishTypes.length)];
     }
 
     @Override
