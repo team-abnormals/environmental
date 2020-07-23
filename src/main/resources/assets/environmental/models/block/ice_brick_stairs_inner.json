@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "environmental:block/ice_bricks",
+    "top": "environmental:block/ice_bricks",
+    "side": "environmental:block/ice_bricks"
+  }
+}

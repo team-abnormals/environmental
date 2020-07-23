@@ -2,6 +2,7 @@ package com.team_abnormals.environmental.core.other;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
@@ -32,6 +33,7 @@ public class EnvironmentalProperties {
 	public static final AbstractBlock.Properties PODZOL_PATH 		= AbstractBlock.Properties.create(Material.EARTH, MaterialColor.OBSIDIAN).hardnessAndResistance(0.65F).sound(SoundType.PLANT).setBlocksVision(EnvironmentalProperties::canSuffocate).setBlocksVision(EnvironmentalProperties::canSuffocate);
 	
 	public static final AbstractBlock.Properties MUD_BRICKS = AbstractBlock.Properties.create(Material.ROCK, MaterialColor.BROWN).hardnessAndResistance(1.5F, 2.5F).sound(SoundType.STONE);
+	public static final AbstractBlock.Properties ICE_BRICKS = AbstractBlock.Properties.create(Material.ICE).slipperiness(0.99F).hardnessAndResistance(1.0F, 2.0F).sound(SoundType.GLASS);
 
 	public static final AbstractBlock.Properties TERRACOTTA_BRICKS 				= AbstractBlock.Properties.create(Material.ROCK, MaterialColor.ADOBE).setRequiresTool().hardnessAndResistance(1.25F, 4.2F);
 	public static final AbstractBlock.Properties WHITE_TERRACOTTA_BRICKS 		= AbstractBlock.Properties.create(Material.ROCK, MaterialColor.WHITE_TERRACOTTA).setRequiresTool().hardnessAndResistance(1.25F, 4.2F);
