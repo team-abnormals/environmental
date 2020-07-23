@@ -157,7 +157,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         this.getDataManager().register(PRE_NAME_TYPE, SlabfishManager.DEFAULT_SLABFISH.getRegistryName());
         this.getDataManager().register(FROM_BUCKET, false);
 
-        this.getDataManager().register(BACKPACK, SlabfishManager.WHITE_BACKPACK.getRegistryName());
+        this.getDataManager().register(BACKPACK, SlabfishManager.BROWN_BACKPACK.getRegistryName());
         this.getDataManager().register(HAS_BACKPACK, false);
         this.getDataManager().register(SWEATER, SlabfishManager.EMPTY_SWEATER.getRegistryName());
     }
