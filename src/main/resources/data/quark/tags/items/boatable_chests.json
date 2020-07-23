@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "environmental:willow_chest",
+    "environmental:wisteria_chest"
+  ]
+}
