@@ -167,7 +167,8 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         super.writeAdditional(compound);
         compound.putString("SlabfishType", this.getSlabfishType().toString());
         compound.putInt("SlabfishOverlay", this.getSlabfishOverlay().getId());
-        compound.putString("BackpackType", this.getBackpack().toString());
+        if (this.hasBackpack())
+            compound.putString("BackpackType", this.getBackpack().toString());
         compound.putString("PreNameType", this.getPreNameType().toString());
         compound.putBoolean("FromBucket", this.isFromBucket());
 
@@ -184,7 +185,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         super.readAdditional(compound);
         this.setSlabfishType(new ResourceLocation(compound.getString("SlabfishType")));
         this.setSlabfishOverlay(SlabfishOverlay.byId(compound.getInt("SlabfishOverlay")));
-        this.setBackpack(new ResourceLocation(compound.getString("BackpackType")));
+        this.setBackpack(compound.contains("BackpackType", Constants.NBT.TAG_STRING) ? new ResourceLocation(compound.getString("BackpackType")) : SlabfishManager.BROWN_BACKPACK.getRegistryName());
         this.setPreNameType(new ResourceLocation(compound.getString("PreNameType")));
         this.setFromBucket(compound.getBoolean("FromBucket"));
 
@@ -701,7 +702,8 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
         compound.putString("SlabfishType", this.getSlabfishType().toString());
         compound.putString("PreNameType", this.getPreNameType().toString());
-        compound.putString("BackpackType", this.getBackpack().toString());
+        if (this.hasBackpack())
+            compound.putString("BackpackType", this.getBackpack().toString());
 
         this.slabfishBackpack.write(compound);
     }

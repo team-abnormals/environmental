@@ -98,12 +98,13 @@ public class SlabfishBucketItem extends BucketItem {
             }
 
             if (!compoundnbt.equals(SWEATER_TYPE_CACHE.getLeft())) {
-                ListNBT list = compoundnbt.getList("Items", Constants.NBT.TAG_LIST);
-                for (int i = 0; i < list.size(); ++i) {
+                ListNBT list = compoundnbt.getList("Items", Constants.NBT.TAG_COMPOUND);
+                for (int i = 0; i < list.size(); i++) {
                     CompoundNBT slotNbt = list.getCompound(i);
                     int index = slotNbt.getByte("Slot") & 255;
                     if (index == 0) {
                         ItemStack slotStack = ItemStack.read(slotNbt);
+                        SWEATER_TYPE_CACHE.setLeft(compoundnbt);
                         SWEATER_TYPE_CACHE.setRight(slabfishManager.hasSweaterType(slotStack) ? slabfishManager.getSweaterType(slotStack) : SlabfishManager.EMPTY_SWEATER);
                         break;
                     }
