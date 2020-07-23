@@ -44,7 +44,7 @@ public final class ClientSlabfishManager implements SlabfishManager {
 
     @Override
     public BackpackType getBackpackType(ResourceLocation registryName) {
-        return this.backpackTypes.getOrDefault(registryName, WHITE_BACKPACK);
+        return this.backpackTypes.getOrDefault(registryName, BROWN_BACKPACK);
     }
 
     @Override
@@ -62,8 +62,8 @@ public final class ClientSlabfishManager implements SlabfishManager {
     @Override
     public BackpackType getBackpackType(ItemStack stack) {
         if (this.backpackTypes.isEmpty())
-            return WHITE_BACKPACK;
-        return this.backpackTypes.values().stream().filter(backpackType -> backpackType.test(stack)).findFirst().orElse(WHITE_BACKPACK);
+            return BROWN_BACKPACK;
+        return this.backpackTypes.values().stream().filter(backpackType -> backpackType.test(stack)).findFirst().orElse(BROWN_BACKPACK);
     }
 
     @Override

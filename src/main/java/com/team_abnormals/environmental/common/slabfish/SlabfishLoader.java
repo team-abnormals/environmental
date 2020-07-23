@@ -63,7 +63,7 @@ public class SlabfishLoader extends JsonReloadListener implements SlabfishManage
         Map<ResourceLocation, BackpackType> parsedBackpackTypes = new HashMap<>();
 
         // Force this to exist if there is no overriding JSON
-        parsedBackpackTypes.put(WHITE_BACKPACK.getRegistryName(), WHITE_BACKPACK);
+        parsedBackpackTypes.put(BROWN_BACKPACK.getRegistryName(), BROWN_BACKPACK);
 
         object.forEach(((location, json) ->
         {
@@ -125,7 +125,7 @@ public class SlabfishLoader extends JsonReloadListener implements SlabfishManage
 
     @Override
     public BackpackType getBackpackType(ResourceLocation registryName) {
-        return this.backpackTypes.getOrDefault(registryName, WHITE_BACKPACK);
+        return this.backpackTypes.getOrDefault(registryName, BROWN_BACKPACK);
     }
 
     @Override
@@ -143,8 +143,8 @@ public class SlabfishLoader extends JsonReloadListener implements SlabfishManage
     @Override
     public BackpackType getBackpackType(ItemStack stack) {
         if (this.backpackTypes.isEmpty())
-            return WHITE_BACKPACK;
-        return this.backpackTypes.values().stream().filter(backpackType -> backpackType.test(stack)).findFirst().orElse(WHITE_BACKPACK);
+            return BROWN_BACKPACK;
+        return this.backpackTypes.values().stream().filter(backpackType -> backpackType.test(stack)).findFirst().orElse(BROWN_BACKPACK);
     }
 
     @Override

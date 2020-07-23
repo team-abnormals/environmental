@@ -33,7 +33,7 @@ public interface SlabfishManager {
     /**
      * The default backpack that exists if there are no other backpack types to choose from.
      */
-    BackpackType WHITE_BACKPACK = new BackpackType(null, Ingredient.EMPTY).setRegistryName(new ResourceLocation(Environmental.MODID, "white"));
+    BackpackType BROWN_BACKPACK = new BackpackType(null, Ingredient.EMPTY).setRegistryName(new ResourceLocation(Environmental.MODID, "brown"));
 
     /**
      * The id for the ghost slabfish. Used for custom functionality.
@@ -60,7 +60,7 @@ public interface SlabfishManager {
      * Checks the backpack types for a backpack of the specified name.
      *
      * @param registryName The name of the backpack to search for
-     * @return The sweater type by that name or {@link #WHITE_BACKPACK} for no sweater under that name
+     * @return The sweater type by that name or {@link #BROWN_BACKPACK} for no sweater under that name
      */
     BackpackType getBackpackType(ResourceLocation registryName);
 
@@ -85,7 +85,7 @@ public interface SlabfishManager {
      * Checks the backpack types for a backpack using the specified stack.
      *
      * @param stack The stack to test against the backpack types
-     * @return The backpack type using that stack or {@link #WHITE_BACKPACK} if that item has no backpack type
+     * @return The backpack type using that stack or {@link #BROWN_BACKPACK} if that item has no backpack type
      */
     BackpackType getBackpackType(ItemStack stack);
 
