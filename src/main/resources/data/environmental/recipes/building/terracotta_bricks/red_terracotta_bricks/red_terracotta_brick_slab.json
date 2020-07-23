@@ -1,17 +1,15 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "#  ",
-	"## ",
     "###"
   ],
   "key": {
     "#": {
-      "item": "environmental:mud_bricks"
+      "item": "environmental:red_terracotta_bricks"
     }
   },
   "result": {
-    "item": "environmental:mud_brick_stairs",
-    "count": 4
+    "item": "environmental:red_terracotta_brick_slab",
+    "count": 6
   }
 }

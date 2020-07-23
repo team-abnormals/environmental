@@ -2,16 +2,16 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "#  ",
-	"## ",
+    "## ",
     "###"
   ],
   "key": {
     "#": {
-      "item": "environmental:mud_bricks"
+      "item": "environmental:pink_terracotta_bricks"
     }
   },
   "result": {
-    "item": "environmental:mud_brick_stairs",
+    "item": "environmental:pink_terracotta_brick_stairs",
     "count": 4
   }
 }
