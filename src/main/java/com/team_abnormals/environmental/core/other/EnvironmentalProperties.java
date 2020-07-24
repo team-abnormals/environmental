@@ -21,6 +21,16 @@ public class EnvironmentalProperties {
 	public static final AbstractBlock.Properties WILLOW_LOG 			= AbstractBlock.Properties.create(Material.WOOD, MaterialColor.BROWN).hardnessAndResistance(2.0F).sound(SoundType.WOOD);
 	public static final AbstractBlock.Properties WILLOW_SAPLING 		= AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0.0F).sound(SoundType.PLANT);
 	
+	public static final AbstractBlock.Properties CHERRY_PLANKS 			= AbstractBlock.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD);
+	public static final AbstractBlock.Properties CHERRY_DOOR 			= AbstractBlock.Properties.create(Material.WOOD, MaterialColor.WOOD).notSolid().hardnessAndResistance(3.0F).sound(SoundType.WOOD);
+	public static final AbstractBlock.Properties CHERRY_BUTTON 			= AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD);
+	public static final AbstractBlock.Properties CHERRY_PRESSURE_PLATE 	= AbstractBlock.Properties.create(Material.WOOD).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD);
+	public static final AbstractBlock.Properties CHERRY_LADDER 			= AbstractBlock.Properties.create(Material.MISCELLANEOUS).notSolid().harvestTool(ToolType.AXE).hardnessAndResistance(0.4F).sound(SoundType.LADDER);
+	public static final AbstractBlock.Properties CHERRY_BOOKSHELF 		= AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(1.5F).sound(SoundType.WOOD);
+	public static final AbstractBlock.Properties CHERRY_LEAVES 			= AbstractBlock.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).notSolid().tickRandomly().sound(SoundType.PLANT);
+	public static final AbstractBlock.Properties CHERRY_LOG 			= AbstractBlock.Properties.create(Material.WOOD, MaterialColor.BROWN).hardnessAndResistance(2.0F).sound(SoundType.WOOD);
+	public static final AbstractBlock.Properties CHERRY_SAPLING 		= AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0.0F).sound(SoundType.PLANT);
+	
 	public static final AbstractBlock.Properties WISTERIA_PLANKS 		= AbstractBlock.Properties.create(Material.WOOD, MaterialColor.WHITE_TERRACOTTA).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD);
 	public static final AbstractBlock.Properties PINK_WISTERIA_LEAVES 	= AbstractBlock.Properties.create(Material.LEAVES, MaterialColor.PINK).notSolid().hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT).setPropagatesDownwards(PropertyExtensions::canSpawn).setSuffocates(PropertyExtensions::canSuffocate).setBlocksVision(PropertyExtensions::canSuffocate);
 	public static final AbstractBlock.Properties BLUE_WISTERIA_LEAVES 	= AbstractBlock.Properties.create(Material.LEAVES, MaterialColor.BLUE).notSolid().hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT).setPropagatesDownwards(PropertyExtensions::canSpawn).setSuffocates(PropertyExtensions::canSuffocate).setBlocksVision(PropertyExtensions::canSuffocate);
