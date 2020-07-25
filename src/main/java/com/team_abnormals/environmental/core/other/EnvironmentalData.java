@@ -28,7 +28,9 @@ public class EnvironmentalData {
         DataUtils.registerCompostable(0.65F, EnvironmentalBlocks.DUCKWEED.get());
         DataUtils.registerCompostable(0.30F, EnvironmentalBlocks.CATTAIL.get());
         DataUtils.registerCompostable(0.65F, EnvironmentalBlocks.TALL_CATTAIL.get());
-
+        DataUtils.registerCompostable(0.65F, EnvironmentalBlocks.GIANT_TALL_GRASS.get());
+        DataUtils.registerCompostable(0.50F, EnvironmentalBlocks.MYCELIUM_SPROUTS.get());
+        
         DataUtils.registerCompostable(0.30F, EnvironmentalItems.RICE.get());
         DataUtils.registerCompostable(0.30F, EnvironmentalItems.CATTAIL_SEEDS.get());
 
