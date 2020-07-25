@@ -3,6 +3,8 @@
   "values": [
     "environmental:willow_planks",
     "environmental:vertical_willow_planks",
+    "environmental:cherry_planks",
+    "environmental:vertical_cherry_planks",
     "environmental:wisteria_planks",
     "environmental:vertical_wisteria_planks"
   ]

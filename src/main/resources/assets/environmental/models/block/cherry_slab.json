@@ -1,0 +1,8 @@
+{
+    "parent": "block/slab",
+    "textures": {
+        "bottom": "environmental:block/cherry_planks",
+        "top": "environmental:block/cherry_planks",
+        "side": "environmental:block/cherry_planks"
+    }
+}

@@ -37,8 +37,10 @@ public class EnvironmentalItems {
     public static final RegistryObject<Item> MUD_BALL 		= HELPER.createItem("mud_ball", () -> new MudBallItem(new Item.Properties().group(ItemGroup.MATERIALS)));
     public static final RegistryObject<Item> MUD_BRICK 		= HELPER.createItem("mud_brick", () -> new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
     public static final RegistryObject<Item> MUD_BUCKET 	= HELPER.createItem("mud_bucket", () -> new BucketItem(EnvironmentalFluids.MUD, new Item.Properties().containerItem(Items.BUCKET).maxStackSize(1)));
+    
     public static final RegistryObject<Item> WILLOW_BOAT 	= HELPER.createBoatItem("willow", EnvironmentalBlocks.WILLOW_PLANKS);
     public static final RegistryObject<Item> WISTERIA_BOAT 	= HELPER.createBoatItem("wisteria", EnvironmentalBlocks.WISTERIA_PLANKS);
+    public static final RegistryObject<Item> CHERRY_BOAT 	= HELPER.createBoatItem("cherry", EnvironmentalBlocks.CHERRY_PLANKS);
 
     public static final RegistryObject<Item> CATTAIL_SEEDS 		= HELPER.createItem("cattail_seeds", () -> new BlockNamedItem(EnvironmentalBlocks.CATTAIL_SPROUTS.get(), new Item.Properties().group(ItemGroup.MATERIALS)));
     public static final RegistryObject<Item> DUCKWEED 			= HELPER.createItem("duckweed", () -> new DuckweedItem(EnvironmentalBlocks.DUCKWEED.get(), new Item.Properties().group(ItemGroup.DECORATIONS)));

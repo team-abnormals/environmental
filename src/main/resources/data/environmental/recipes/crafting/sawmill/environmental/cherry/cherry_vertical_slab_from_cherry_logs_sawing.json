@@ -1,0 +1,14 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "environmental:cherry_logs"
+  },
+  "result": "environmental:cherry_vertical_slab",
+  "count": 8,
+  "conditions":[
+    {
+      "type":"abnormals_core:quark_flag",
+      "flag":"vertical_slabs"
+    }
+  ]
+}

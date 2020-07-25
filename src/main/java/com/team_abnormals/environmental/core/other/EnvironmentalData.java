@@ -20,7 +20,11 @@ public class EnvironmentalData {
         DataUtils.registerCompostable(0.30F, EnvironmentalBlocks.WILLOW_LEAVES.get());
         DataUtils.registerCompostable(0.30F, EnvironmentalBlocks.WILLOW_SAPLING.get());
         DataUtils.registerCompostable(0.30F, EnvironmentalBlocks.WILLOW_LEAF_CARPET.get());
-
+        
+        DataUtils.registerCompostable(0.30F, EnvironmentalBlocks.CHERRY_LEAVES.get());
+        DataUtils.registerCompostable(0.30F, EnvironmentalBlocks.CHERRY_SAPLING.get());
+        DataUtils.registerCompostable(0.30F, EnvironmentalBlocks.CHERRY_LEAF_CARPET.get());
+        
         DataUtils.registerCompostable(0.65F, EnvironmentalBlocks.DUCKWEED.get());
         DataUtils.registerCompostable(0.30F, EnvironmentalBlocks.CATTAIL.get());
         DataUtils.registerCompostable(0.65F, EnvironmentalBlocks.TALL_CATTAIL.get());
@@ -42,18 +46,22 @@ public class EnvironmentalData {
         DataUtils.registerCompostable(0.75F, EnvironmentalBlocks.WHITE_DELPHINIUM.get());
         DataUtils.registerCompostable(0.75F, EnvironmentalBlocks.PINK_DELPHINIUM.get());
         DataUtils.registerCompostable(0.75F, EnvironmentalBlocks.PURPLE_DELPHINIUM.get());
+        
         DataUtils.registerCompostable(0.35F, EnvironmentalBlocks.BLUE_WISTERIA_LEAVES.get());
         DataUtils.registerCompostable(0.35F, EnvironmentalBlocks.WHITE_WISTERIA_LEAVES.get());
         DataUtils.registerCompostable(0.35F, EnvironmentalBlocks.PINK_WISTERIA_LEAVES.get());
         DataUtils.registerCompostable(0.35F, EnvironmentalBlocks.PURPLE_WISTERIA_LEAVES.get());
+        
         DataUtils.registerCompostable(0.35F, EnvironmentalBlocks.BLUE_HANGING_WISTERIA_LEAVES.get());
         DataUtils.registerCompostable(0.35F, EnvironmentalBlocks.WHITE_HANGING_WISTERIA_LEAVES.get());
         DataUtils.registerCompostable(0.35F, EnvironmentalBlocks.PINK_HANGING_WISTERIA_LEAVES.get());
         DataUtils.registerCompostable(0.35F, EnvironmentalBlocks.PURPLE_HANGING_WISTERIA_LEAVES.get());
+        
         DataUtils.registerCompostable(0.35F, EnvironmentalBlocks.BLUE_WISTERIA_SAPLING.get());
         DataUtils.registerCompostable(0.35F, EnvironmentalBlocks.WHITE_WISTERIA_SAPLING.get());
         DataUtils.registerCompostable(0.35F, EnvironmentalBlocks.PINK_WISTERIA_SAPLING.get());
         DataUtils.registerCompostable(0.35F, EnvironmentalBlocks.PURPLE_WISTERIA_SAPLING.get());
+        
         DataUtils.registerCompostable(0.35F, EnvironmentalBlocks.BLUE_WISTERIA_LEAF_CARPET.get());
         DataUtils.registerCompostable(0.35F, EnvironmentalBlocks.WHITE_WISTERIA_LEAF_CARPET.get());
         DataUtils.registerCompostable(0.35F, EnvironmentalBlocks.PINK_WISTERIA_LEAF_CARPET.get());
@@ -76,6 +84,22 @@ public class EnvironmentalData {
         DataUtils.registerFlammable(EnvironmentalBlocks.WILLOW_LEAF_CARPET.get(), 30, 60);
         DataUtils.registerFlammable(EnvironmentalBlocks.WILLOW_VERTICAL_SLAB.get(), 5, 20);
         DataUtils.registerFlammable(EnvironmentalBlocks.WILLOW_BOOKSHELF.get(), 5, 20);
+        
+        DataUtils.registerFlammable(EnvironmentalBlocks.CHERRY_LEAVES.get(), 30, 60);
+        DataUtils.registerFlammable(EnvironmentalBlocks.CHERRY_LOG.get(), 5, 5);
+        DataUtils.registerFlammable(EnvironmentalBlocks.CHERRY_WOOD.get(), 5, 5);
+        DataUtils.registerFlammable(EnvironmentalBlocks.STRIPPED_CHERRY_LOG.get(), 5, 5);
+        DataUtils.registerFlammable(EnvironmentalBlocks.STRIPPED_CHERRY_WOOD.get(), 5, 5);
+        DataUtils.registerFlammable(EnvironmentalBlocks.CHERRY_PLANKS.get(), 5, 20);
+        DataUtils.registerFlammable(EnvironmentalBlocks.CHERRY_SLAB.get(), 5, 20);
+        DataUtils.registerFlammable(EnvironmentalBlocks.CHERRY_STAIRS.get(), 5, 20);
+        DataUtils.registerFlammable(EnvironmentalBlocks.CHERRY_FENCE.get(), 5, 20);
+        DataUtils.registerFlammable(EnvironmentalBlocks.CHERRY_FENCE_GATE.get(), 5, 20);
+        DataUtils.registerFlammable(EnvironmentalBlocks.VERTICAL_CHERRY_PLANKS.get(), 5, 20);
+        DataUtils.registerFlammable(EnvironmentalBlocks.CHERRY_LEAF_CARPET.get(), 30, 60);
+        DataUtils.registerFlammable(EnvironmentalBlocks.CHERRY_VERTICAL_SLAB.get(), 5, 20);
+        DataUtils.registerFlammable(EnvironmentalBlocks.CHERRY_BOOKSHELF.get(), 5, 20);
+        
         DataUtils.registerFlammable(EnvironmentalBlocks.GIANT_TALL_GRASS.get(), 60, 100);
 
         DataUtils.registerFlammable(EnvironmentalBlocks.BLUE_WISTERIA_LEAVES.get(), 30, 60);
@@ -110,6 +134,7 @@ public class EnvironmentalData {
 	
 	public static void setRenderLayers() {
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.SLABFISH_EFFIGY.get(), RenderType.getCutout());
+		
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WILLOW_DOOR.get(),RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WILLOW_TRAPDOOR.get(),RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WILLOW_LADDER.get(),RenderType.getCutout());
@@ -118,6 +143,14 @@ public class EnvironmentalData {
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.HANGING_WILLOW_LEAVES.get(),RenderType.getCutoutMipped());
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WILLOW_LEAF_CARPET.get(),RenderType.getCutoutMipped());
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WILLOW_SAPLING.get(),RenderType.getCutout());
+		
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CHERRY_DOOR.get(),RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CHERRY_TRAPDOOR.get(),RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CHERRY_LADDER.get(),RenderType.getCutout());
+		
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CHERRY_LEAVES.get(),RenderType.getCutoutMipped());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CHERRY_LEAF_CARPET.get(),RenderType.getCutoutMipped());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CHERRY_SAPLING.get(),RenderType.getCutout());
 		
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.MYCELIUM_SPROUTS.get(),RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.GIANT_TALL_GRASS.get(),RenderType.getCutout());

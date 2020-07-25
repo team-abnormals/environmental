@@ -141,32 +141,32 @@ public class EnvironmentalBlocks {
 
     // Cherry //
 
-//    public static final RegistryObject<Block> STRIPPED_CHERRY_LOG = HELPER.createBlock("stripped_cherry_log", () -> new StrippedLogBlock(EnvironmentalProperties.CHERRY_LOG), ItemGroup.BUILDING_BLOCKS);
-//    public static final RegistryObject<Block> STRIPPED_CHERRY_WOOD = HELPER.createBlock("stripped_cherry_wood", () -> new StrippedWoodBlock(EnvironmentalProperties.CHERRY_LOG), ItemGroup.BUILDING_BLOCKS);
-//    public static final RegistryObject<Block> CHERRY_LOG = HELPER.createBlock("cherry_log", () -> new AbnormalsLogBlock(STRIPPED_CHERRY_LOG, EnvironmentalProperties.CHERRY_LOG), ItemGroup.BUILDING_BLOCKS);
-//    public static final RegistryObject<Block> CHERRY_WOOD = HELPER.createBlock("cherry_wood", () -> new WoodBlock(STRIPPED_CHERRY_WOOD, EnvironmentalProperties.CHERRY_LOG), ItemGroup.BUILDING_BLOCKS);
-//    public static final RegistryObject<Block> CHERRY_PLANKS = HELPER.createBlock("cherry_planks", () -> new PlanksBlock(EnvironmentalProperties.CHERRY_PLANKS), ItemGroup.BUILDING_BLOCKS);
-//    public static final RegistryObject<Block> CHERRY_SLAB = HELPER.createBlock("cherry_slab", () -> new WoodSlabBlock(EnvironmentalProperties.CHERRY_PLANKS), ItemGroup.BUILDING_BLOCKS);
-//    public static final RegistryObject<Block> CHERRY_STAIRS = HELPER.createBlock("cherry_stairs", () -> new WoodStairsBlock(CHERRY_PLANKS.get().getDefaultState(), EnvironmentalProperties.CHERRY_PLANKS), ItemGroup.BUILDING_BLOCKS);
-//    public static final RegistryObject<Block> CHERRY_FENCE = HELPER.createBlock("cherry_fence", () -> new WoodFenceBlock(EnvironmentalProperties.CHERRY_PLANKS), ItemGroup.DECORATIONS);
-//    public static final RegistryObject<Block> CHERRY_FENCE_GATE = HELPER.createBlock("cherry_fence_gate", () -> new WoodFenceGateBlock(EnvironmentalProperties.CHERRY_PLANKS), ItemGroup.REDSTONE);
-//    public static final RegistryObject<Block> CHERRY_PRESSURE_PLATE = HELPER.createBlock("cherry_pressure_plate", () -> new WoodPressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, EnvironmentalProperties.CHERRY_PRESSURE_PLATE), ItemGroup.REDSTONE);
-//    public static final RegistryObject<Block> CHERRY_DOOR = HELPER.createBlock("cherry_door", () -> new WoodDoorBlock(EnvironmentalProperties.CHERRY_DOOR), ItemGroup.REDSTONE);
-//    public static final RegistryObject<Block> CHERRY_TRAPDOOR = HELPER.createBlock("cherry_trapdoor", () -> new WoodTrapDoorBlock(EnvironmentalProperties.CHERRY_DOOR), ItemGroup.REDSTONE);
-//    public static final RegistryObject<Block> CHERRY_BUTTON = HELPER.createBlock("cherry_button", () -> new AbnormalsWoodButtonBlock(EnvironmentalProperties.CHERRY_BUTTON), ItemGroup.REDSTONE);
-//    public static final Pair<RegistryObject<AbnormalsStandingSignBlock>, RegistryObject<AbnormalsWallSignBlock>> CHERRY_SIGNS = HELPER.createSignBlock("cherry", MaterialColor.RED);
-//
-//    public static final RegistryObject<Block> CHERRY_LEAVES = HELPER.createBlock("cherry_leaves", () -> new AbnormalsLeavesBlock(EnvironmentalProperties.CHERRY_LEAVES), ItemGroup.DECORATIONS);
-//    public static final RegistryObject<Block> CHERRY_SAPLING = HELPER.createBlock("cherry_sapling", () -> new AbnormalsSaplingBlock(new WillowTree(), EnvironmentalProperties.CHERRY_SAPLING), ItemGroup.DECORATIONS);
-//    public static final RegistryObject<Block> POTTED_CHERRY_SAPLING = HELPER.createBlockNoItem("potted_cherry_sapling", () -> new FlowerPotBlock(EnvironmentalBlocks.CHERRY_SAPLING.get(), EnvironmentalProperties.FLOWER_POT));
-//
-//    public static final RegistryObject<Block> VERTICAL_CHERRY_PLANKS = HELPER.createCompatBlock("quark", "vertical_cherry_planks", () -> new Block(EnvironmentalProperties.CHERRY_PLANKS), ItemGroup.BUILDING_BLOCKS);
-//    public static final RegistryObject<Block> CHERRY_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "cherry_vertical_slab", () -> new VerticalSlabBlock(EnvironmentalProperties.CHERRY_PLANKS), ItemGroup.BUILDING_BLOCKS);
-//    public static final RegistryObject<Block> CHERRY_LADDER = HELPER.createCompatBlock("quark", "cherry_ladder", () -> new AbnormalsLadderBlock(EnvironmentalProperties.CHERRY_LADDER), ItemGroup.DECORATIONS);
-//    public static final RegistryObject<Block> CHERRY_BOOKSHELF = HELPER.createCompatBlock("quark", "cherry_bookshelf", () -> new BookshelfBlock(EnvironmentalProperties.CHERRY_BOOKSHELF), ItemGroup.DECORATIONS);
-//    public static final RegistryObject<Block> CHERRY_LEAF_CARPET = HELPER.createCompatBlock("quark", "cherry_leaf_carpet", () -> new LeafCarpetBlock(EnvironmentalProperties.CHERRY_LEAVES.notSolid()), ItemGroup.DECORATIONS);
-//    public static final RegistryObject<Block> CHERRY_BEEHIVE = HELPER.createCompatBlock("buzzier_bees", "cherry_beehive", () -> new AbnormalsBeehiveBlock(Properties.from(Blocks.BEEHIVE)), ItemGroup.DECORATIONS);
-//    public static final Pair<RegistryObject<AbnormalsChestBlock>, RegistryObject<AbnormalsTrappedChestBlock>> CHERRY_CHESTS = HELPER.createCompatChestBlocks("cherry", MaterialColor.GREEN);
+    public static final RegistryObject<Block> STRIPPED_CHERRY_LOG = HELPER.createBlock("stripped_cherry_log", () -> new StrippedLogBlock(EnvironmentalProperties.CHERRY_LOG), ItemGroup.BUILDING_BLOCKS);
+    public static final RegistryObject<Block> STRIPPED_CHERRY_WOOD = HELPER.createBlock("stripped_cherry_wood", () -> new StrippedWoodBlock(EnvironmentalProperties.CHERRY_LOG), ItemGroup.BUILDING_BLOCKS);
+    public static final RegistryObject<Block> CHERRY_LOG = HELPER.createBlock("cherry_log", () -> new AbnormalsLogBlock(STRIPPED_CHERRY_LOG, EnvironmentalProperties.CHERRY_LOG), ItemGroup.BUILDING_BLOCKS);
+    public static final RegistryObject<Block> CHERRY_WOOD = HELPER.createBlock("cherry_wood", () -> new WoodBlock(STRIPPED_CHERRY_WOOD, EnvironmentalProperties.CHERRY_LOG), ItemGroup.BUILDING_BLOCKS);
+    public static final RegistryObject<Block> CHERRY_PLANKS = HELPER.createBlock("cherry_planks", () -> new PlanksBlock(EnvironmentalProperties.CHERRY_PLANKS), ItemGroup.BUILDING_BLOCKS);
+    public static final RegistryObject<Block> CHERRY_SLAB = HELPER.createBlock("cherry_slab", () -> new WoodSlabBlock(EnvironmentalProperties.CHERRY_PLANKS), ItemGroup.BUILDING_BLOCKS);
+    public static final RegistryObject<Block> CHERRY_STAIRS = HELPER.createBlock("cherry_stairs", () -> new WoodStairsBlock(CHERRY_PLANKS.get().getDefaultState(), EnvironmentalProperties.CHERRY_PLANKS), ItemGroup.BUILDING_BLOCKS);
+    public static final RegistryObject<Block> CHERRY_FENCE = HELPER.createBlock("cherry_fence", () -> new WoodFenceBlock(EnvironmentalProperties.CHERRY_PLANKS), ItemGroup.DECORATIONS);
+    public static final RegistryObject<Block> CHERRY_FENCE_GATE = HELPER.createBlock("cherry_fence_gate", () -> new WoodFenceGateBlock(EnvironmentalProperties.CHERRY_PLANKS), ItemGroup.REDSTONE);
+    public static final RegistryObject<Block> CHERRY_PRESSURE_PLATE = HELPER.createBlock("cherry_pressure_plate", () -> new WoodPressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, EnvironmentalProperties.CHERRY_PRESSURE_PLATE), ItemGroup.REDSTONE);
+    public static final RegistryObject<Block> CHERRY_DOOR = HELPER.createBlock("cherry_door", () -> new WoodDoorBlock(EnvironmentalProperties.CHERRY_DOOR), ItemGroup.REDSTONE);
+    public static final RegistryObject<Block> CHERRY_TRAPDOOR = HELPER.createBlock("cherry_trapdoor", () -> new WoodTrapDoorBlock(EnvironmentalProperties.CHERRY_DOOR), ItemGroup.REDSTONE);
+    public static final RegistryObject<Block> CHERRY_BUTTON = HELPER.createBlock("cherry_button", () -> new AbnormalsWoodButtonBlock(EnvironmentalProperties.CHERRY_BUTTON), ItemGroup.REDSTONE);
+    public static final Pair<RegistryObject<AbnormalsStandingSignBlock>, RegistryObject<AbnormalsWallSignBlock>> CHERRY_SIGNS = HELPER.createSignBlock("cherry", MaterialColor.RED);
+
+    public static final RegistryObject<Block> CHERRY_LEAVES = HELPER.createBlock("cherry_leaves", () -> new AbnormalsLeavesBlock(EnvironmentalProperties.CHERRY_LEAVES), ItemGroup.DECORATIONS);
+    public static final RegistryObject<Block> CHERRY_SAPLING = HELPER.createBlock("cherry_sapling", () -> new AbnormalsSaplingBlock(new WillowTree(), EnvironmentalProperties.CHERRY_SAPLING), ItemGroup.DECORATIONS);
+    public static final RegistryObject<Block> POTTED_CHERRY_SAPLING = HELPER.createBlockNoItem("potted_cherry_sapling", () -> new FlowerPotBlock(EnvironmentalBlocks.CHERRY_SAPLING.get(), EnvironmentalProperties.FLOWER_POT));
+
+    public static final RegistryObject<Block> VERTICAL_CHERRY_PLANKS = HELPER.createCompatBlock("quark", "vertical_cherry_planks", () -> new Block(EnvironmentalProperties.CHERRY_PLANKS), ItemGroup.BUILDING_BLOCKS);
+    public static final RegistryObject<Block> CHERRY_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "cherry_vertical_slab", () -> new VerticalSlabBlock(EnvironmentalProperties.CHERRY_PLANKS), ItemGroup.BUILDING_BLOCKS);
+    public static final RegistryObject<Block> CHERRY_LADDER = HELPER.createCompatBlock("quark", "cherry_ladder", () -> new AbnormalsLadderBlock(EnvironmentalProperties.CHERRY_LADDER), ItemGroup.DECORATIONS);
+    public static final RegistryObject<Block> CHERRY_BOOKSHELF = HELPER.createCompatBlock("quark", "cherry_bookshelf", () -> new BookshelfBlock(EnvironmentalProperties.CHERRY_BOOKSHELF), ItemGroup.DECORATIONS);
+    public static final RegistryObject<Block> CHERRY_LEAF_CARPET = HELPER.createCompatBlock("quark", "cherry_leaf_carpet", () -> new LeafCarpetBlock(EnvironmentalProperties.CHERRY_LEAVES.notSolid()), ItemGroup.DECORATIONS);
+    public static final RegistryObject<Block> CHERRY_BEEHIVE = HELPER.createCompatBlock("buzzier_bees", "cherry_beehive", () -> new AbnormalsBeehiveBlock(Properties.from(Blocks.BEEHIVE)), ItemGroup.DECORATIONS);
+    public static final Pair<RegistryObject<AbnormalsChestBlock>, RegistryObject<AbnormalsTrappedChestBlock>> CHERRY_CHESTS = HELPER.createCompatChestBlocks("cherry", MaterialColor.GREEN);
     
     // Wisteria //
 

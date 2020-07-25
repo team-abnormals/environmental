@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "environmental:willow_beehive",
+    "environmental:cherry_beehive",
     "environmental:wisteria_beehive"
   ]
 }

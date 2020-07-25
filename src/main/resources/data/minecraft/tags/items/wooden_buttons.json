@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "environmental:willow_button",
+    "environmental:cherry_button",
     "environmental:wisteria_button"
   ]
 }

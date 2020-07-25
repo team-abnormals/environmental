@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "#environmental:willow_logs",
+    "#environmental:cherry_logs",
     "#environmental:wisteria_logs"
   ]
 }
