@@ -328,8 +328,8 @@ public class EnvironmentalEvents {
 	}
 
 	@SubscribeEvent
-	public void onExecutionerCleaverKill(LivingDeathEvent event) {
-		if (event.getSource().getTrueSource() instanceof PlayerEntity) {
+	public static void onExecutionerCleaverKill(LivingDeathEvent event) {
+		if (event.getSource().getTrueSource() instanceof PlayerEntity && event.getEntity() instanceof PlayerEntity) {
 			PlayerEntity wielder = (PlayerEntity) event.getSource().getTrueSource();
 			PlayerEntity targetPlayer = (PlayerEntity) event.getEntity();
 			World world = wielder.world;

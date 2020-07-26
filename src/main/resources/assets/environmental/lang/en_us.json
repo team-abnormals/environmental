@@ -256,7 +256,8 @@
 	"item.environmental.wanderer_boots": "Wanderer's Boots",
 	"item.environmental.constructor_belt": "Constructor's Belt",
 	"item.environmental.thief_hood": "Thief's Hood",
-	
+	"item.environmental.executioner_cleaver": "Executioner's Cleaver",
+
 	"generic.reachDistance": "Reach Distance",
 	
 	"enchantment.environmental.reaching": "Reaching",

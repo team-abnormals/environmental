@@ -28,7 +28,7 @@ public class ExecutionerCleaverItem extends SwordItem {
     private final float attackSpeed;
 
     public ExecutionerCleaverItem(IItemTier tier, float attackDamage, float attackSpeed, Properties properties) {
-        super(tier, 7, attackSpeed, properties);
+        super(tier, 6, attackSpeed, properties);
         this.attackDamage = attackDamage;
         this.attackSpeed = attackSpeed;
     }
