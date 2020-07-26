@@ -52,14 +52,16 @@ public class EnvironmentalProperties {
 	
 	public static final AbstractBlock.Properties FLOWER 		= AbstractBlock.Properties.create(Material.PLANTS).notSolid().doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.PLANT);
 	public static final AbstractBlock.Properties DELPHINIUMS 	= AbstractBlock.Properties.create(Material.TALL_PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT);
-	public static final AbstractBlock.Properties FLOWER_POT 			= AbstractBlock.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.0F).notSolid();
+	public static final AbstractBlock.Properties FLOWER_POT 	= AbstractBlock.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.0F).notSolid();
 
-	public static final AbstractBlock.Properties MYCELIUM_PATH 		= AbstractBlock.Properties.create(Material.EARTH, MaterialColor.PURPLE).hardnessAndResistance(0.65F).sound(SoundType.PLANT).setBlocksVision(PropertyExtensions::canSuffocate).setBlocksVision(PropertyExtensions::canSuffocate);
-	public static final AbstractBlock.Properties PODZOL_PATH 		= AbstractBlock.Properties.create(Material.EARTH, MaterialColor.OBSIDIAN).hardnessAndResistance(0.65F).sound(SoundType.PLANT).setBlocksVision(PropertyExtensions::canSuffocate).setBlocksVision(PropertyExtensions::canSuffocate);
+	public static final AbstractBlock.Properties MYCELIUM_PATH 	= AbstractBlock.Properties.create(Material.EARTH, MaterialColor.PURPLE).hardnessAndResistance(0.65F).sound(SoundType.PLANT).setBlocksVision(PropertyExtensions::canSuffocate).setBlocksVision(PropertyExtensions::canSuffocate);
+	public static final AbstractBlock.Properties PODZOL_PATH 	= AbstractBlock.Properties.create(Material.EARTH, MaterialColor.OBSIDIAN).hardnessAndResistance(0.65F).sound(SoundType.PLANT).setBlocksVision(PropertyExtensions::canSuffocate).setBlocksVision(PropertyExtensions::canSuffocate);
 	
 	public static final AbstractBlock.Properties MUD_BRICKS = AbstractBlock.Properties.create(Material.ROCK, MaterialColor.BROWN).hardnessAndResistance(1.5F, 2.5F).sound(SoundType.STONE);
-	public static final AbstractBlock.Properties ICE_BRICKS = AbstractBlock.Properties.create(Material.ICE).slipperiness(0.99F).hardnessAndResistance(1.0F, 2.0F).sound(SoundType.GLASS);
-
+	
+	public static final AbstractBlock.Properties ICE_BRICKS 	= AbstractBlock.Properties.create(Material.ICE).slipperiness(0.99F).hardnessAndResistance(1.0F, 2.0F).sound(SoundType.GLASS);
+	public static final AbstractBlock.Properties ICE_LANTERN	= AbstractBlock.Properties.create(Material.ICE).setRequiresTool().hardnessAndResistance(3.5F).sound(SoundType.LANTERN).setLightLevel((state) -> {return 12;}).notSolid();
+	
 	public static final AbstractBlock.Properties THATCH 	= AbstractBlock.Properties.create(Material.ORGANIC, MaterialColor.GREEN).hardnessAndResistance(0.5F).sound(SoundType.PLANT).harvestTool(ToolType.AXE);
 
 	public static final AbstractBlock.Properties TERRACOTTA_BRICKS 				= AbstractBlock.Properties.create(Material.ROCK, MaterialColor.ADOBE).setRequiresTool().hardnessAndResistance(1.25F, 4.2F);

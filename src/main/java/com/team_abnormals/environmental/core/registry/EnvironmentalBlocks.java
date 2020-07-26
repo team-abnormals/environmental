@@ -12,11 +12,11 @@ import com.team_abnormals.environmental.common.block.HangingWillowLeavesBlock;
 import com.team_abnormals.environmental.common.block.HangingWisteriaLeavesBlock;
 import com.team_abnormals.environmental.common.block.KilnBlock;
 import com.team_abnormals.environmental.common.block.LargeLilyPadBlock;
-import com.team_abnormals.environmental.common.block.SlabfishEffigyBlock;
 import com.team_abnormals.environmental.common.block.MyceliumSproutsBlock;
 import com.team_abnormals.environmental.common.block.PottedCartwheelBlock;
 import com.team_abnormals.environmental.common.block.RiceBlock;
 import com.team_abnormals.environmental.common.block.SawmillBlock;
+import com.team_abnormals.environmental.common.block.SlabfishEffigyBlock;
 import com.team_abnormals.environmental.common.block.WisteriaLeavesBlock;
 import com.team_abnormals.environmental.common.block.fluid.MudFluidBlock;
 import com.team_abnormals.environmental.common.world.gen.feature.trees.WillowTree;
@@ -64,6 +64,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.DoublePlantBlock;
 import net.minecraft.block.FlowerPotBlock;
 import net.minecraft.block.GrassPathBlock;
+import net.minecraft.block.LanternBlock;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.SoundType;
@@ -101,7 +102,7 @@ public class EnvironmentalBlocks {
     public static final RegistryObject<Block> KILN = HELPER.createBlock("kiln", () -> new KilnBlock(Properties.from(Blocks.SMOKER)), ItemGroup.DECORATIONS);
     public static final RegistryObject<Block> SAWMILL = HELPER.createBlock("sawmill", () -> new SawmillBlock(Properties.from(Blocks.STONECUTTER).notSolid()), ItemGroup.DECORATIONS);
 
-    // Ice Bricks //
+    // Ice //
     
     public static final RegistryObject<Block> ICE_BRICKS = HELPER.createBlock("ice_bricks", () -> new Block(EnvironmentalProperties.ICE_BRICKS), ItemGroup.BUILDING_BLOCKS);
     public static final RegistryObject<Block> ICE_BRICK_STAIRS = HELPER.createBlock("ice_brick_stairs", () -> new AbnormalsStairsBlock(ICE_BRICKS.get().getDefaultState(), EnvironmentalProperties.ICE_BRICKS), ItemGroup.BUILDING_BLOCKS);
@@ -109,6 +110,8 @@ public class EnvironmentalBlocks {
     public static final RegistryObject<Block> ICE_BRICK_WALL = HELPER.createBlock("ice_brick_wall", () -> new WallBlock(EnvironmentalProperties.ICE_BRICKS), ItemGroup.DECORATIONS);
     public static final RegistryObject<Block> ICE_BRICK_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "ice_brick_vertical_slab", () -> new VerticalSlabBlock(EnvironmentalProperties.ICE_BRICKS), ItemGroup.BUILDING_BLOCKS);
     
+    public static final RegistryObject<Block> ICE_LANTERN = HELPER.createBlock("ice_lantern", () -> new LanternBlock(EnvironmentalProperties.ICE_LANTERN), ItemGroup.DECORATIONS);
+
     // Willow //
 
     public static final RegistryObject<Block> STRIPPED_WILLOW_LOG = HELPER.createBlock("stripped_willow_log", () -> new StrippedLogBlock(EnvironmentalProperties.WILLOW_LOG), ItemGroup.BUILDING_BLOCKS);
