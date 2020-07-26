@@ -26,6 +26,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.monster.HuskEntity;
 import net.minecraft.entity.monster.SkeletonEntity;
 import net.minecraft.entity.monster.StrayEntity;
@@ -43,6 +44,7 @@ import net.minecraft.item.ShovelItem;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTables;
 import net.minecraft.loot.TableLootEntry;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
@@ -323,6 +325,27 @@ public class EnvironmentalEvents {
 	public static void onFallEvent(LivingFallEvent event) {
 		if (event.getEntityLiving().getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == EnvironmentalItems.WANDERER_BOOTS.get() && event.getEntityLiving().fallDistance < 6)
 			event.setDamageMultiplier(0);
+	}
+
+	@SubscribeEvent
+	public void onExecutionerCleaverKill(LivingDeathEvent event) {
+		if (event.getSource().getTrueSource() instanceof PlayerEntity) {
+			PlayerEntity wielder = (PlayerEntity) event.getSource().getTrueSource();
+			PlayerEntity targetPlayer = (PlayerEntity) event.getEntity();
+			World world = wielder.world;
+
+			if(wielder.getHeldItemMainhand().getItem() != EnvironmentalItems.EXECUTIONER_CLEAVER.get() || targetPlayer == null)
+				return;
+
+			CompoundNBT skullNbt = new CompoundNBT();
+			skullNbt.putString("SkullOwner", targetPlayer.getName().getString());
+
+			ItemStack stack = new ItemStack(Items.PLAYER_HEAD);
+			stack.setTag(skullNbt);
+
+			if(!world.isRemote())
+				world.addEntity(new ItemEntity(world, targetPlayer.getPosX(), targetPlayer.getPosY(), targetPlayer.getPosZ(), stack));
+		}
 	}
 }
 
