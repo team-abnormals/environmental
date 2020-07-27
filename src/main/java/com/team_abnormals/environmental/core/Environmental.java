@@ -107,7 +107,9 @@ public class Environmental {
     		EnvironmentalBiomes.registerBiomesToDictionary();
     		EnvironmentalFeatures.generateFeatures();
     		
-    		EnvironmentalVillagers.setupVillagers();
+    		EnvironmentalVillagers.registerVillagerTypes();
+    		EnvironmentalVillagers.registerPOIs();
+    		
     		EnvironmentalEntities.addEntitySpawns();
     		EnvironmentalEntities.setupAttributes();
 
