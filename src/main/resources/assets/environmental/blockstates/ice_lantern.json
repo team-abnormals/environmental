@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "environmental:block/ice_lantern"
+    },
+    "hanging=true": {
+      "model": "environmental:block/ice_lantern_hanging"
+    }
+  }
+}

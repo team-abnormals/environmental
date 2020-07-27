@@ -3,6 +3,7 @@ package com.team_abnormals.environmental.core.registry;
 import com.team_abnormals.environmental.common.item.*;
 import com.team_abnormals.environmental.core.Environmental;
 import com.team_abnormals.environmental.core.other.EnvironmentalFoods;
+import com.team_abnormals.environmental.core.other.EnvironmentalItemTier;
 import com.teamabnormals.abnormals_core.common.items.AbnormalsMusicDiscItem;
 import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
 import net.minecraft.fluid.Fluids;
@@ -20,15 +21,18 @@ import net.minecraftforge.fml.common.Mod;
 public class EnvironmentalItems {
     public static final RegistryHelper HELPER = Environmental.REGISTRY_HELPER;
 
-    public static final RegistryObject<Item> THIEF_HOOD = HELPER.createItem("thief_hood", () -> new ThiefHoodItem(new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
-    public static final RegistryObject<Item> CONSTRUCTOR_BELT = HELPER.createItem("constructor_belt", () -> new ConstructorBeltItem(new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
-    public static final RegistryObject<Item> WANDERER_BOOTS = HELPER.createItem("wanderer_boots", () -> new WandererBootsItem(new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
+    public static final RegistryObject<Item> THIEF_HOOD			 = HELPER.createItem("thief_hood", () -> new ThiefHoodItem(new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
+    public static final RegistryObject<Item> CONSTRUCTOR_BELT 	 = HELPER.createItem("constructor_belt", () -> new ConstructorBeltItem(new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
+    public static final RegistryObject<Item> WANDERER_BOOTS		 = HELPER.createItem("wanderer_boots", () -> new WandererBootsItem(new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
+    public static final RegistryObject<Item> EXECUTIONER_CLEAVER = HELPER.createItem("executioner_cleaver", () -> new ExecutionerCleaverItem(EnvironmentalItemTier.EXECUTIONER, 6.5f, -3.1F, new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
 
-    public static final RegistryObject<Item> MUD_BALL = HELPER.createItem("mud_ball", () -> new MudBallItem(new Item.Properties().group(ItemGroup.MATERIALS)));
-    public static final RegistryObject<Item> MUD_BRICK = HELPER.createItem("mud_brick", () -> new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
-    public static final RegistryObject<Item> MUD_BUCKET = HELPER.createItem("mud_bucket", () -> new BucketItem(EnvironmentalFluids.MUD, new Item.Properties().containerItem(Items.BUCKET).maxStackSize(1)));
-    public static final RegistryObject<Item> WILLOW_BOAT = HELPER.createBoatItem("willow", EnvironmentalBlocks.WILLOW_PLANKS);
-    public static final RegistryObject<Item> WISTERIA_BOAT = HELPER.createBoatItem("wisteria", EnvironmentalBlocks.WISTERIA_PLANKS);
+    public static final RegistryObject<Item> MUD_BALL 		= HELPER.createItem("mud_ball", () -> new MudBallItem(new Item.Properties().group(ItemGroup.MATERIALS)));
+    public static final RegistryObject<Item> MUD_BRICK 		= HELPER.createItem("mud_brick", () -> new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
+    public static final RegistryObject<Item> MUD_BUCKET 	= HELPER.createItem("mud_bucket", () -> new BucketItem(EnvironmentalFluids.MUD, new Item.Properties().containerItem(Items.BUCKET).maxStackSize(1)));
+    
+    public static final RegistryObject<Item> WILLOW_BOAT 	= HELPER.createBoatItem("willow", EnvironmentalBlocks.WILLOW_PLANKS);
+    public static final RegistryObject<Item> WISTERIA_BOAT 	= HELPER.createBoatItem("wisteria", EnvironmentalBlocks.WISTERIA_PLANKS);
+    public static final RegistryObject<Item> CHERRY_BOAT 	= HELPER.createBoatItem("cherry", EnvironmentalBlocks.CHERRY_PLANKS);
 
     public static final RegistryObject<Item> CATTAIL_SEEDS = HELPER.createItem("cattail_seeds", () -> new BlockNamedItem(EnvironmentalBlocks.CATTAIL_SPROUTS.get(), new Item.Properties().group(ItemGroup.MATERIALS)));
     public static final RegistryObject<Item> DUCKWEED = HELPER.createItem("duckweed", () -> new DuckweedItem(EnvironmentalBlocks.DUCKWEED.get(), new Item.Properties().group(ItemGroup.DECORATIONS)));

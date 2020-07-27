@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LL"
+  ],
+  "key": {
+    "L": {
+      "item": "environmental:cherry_leaves"
+    }
+  },
+  "result": {
+    "item": "environmental:cherry_leaf_carpet",
+    "count": 3
+  },
+  "conditions": [
+    {
+      "type": "abnormals_core:quark_flag",
+      "flag": "leaf_carpet"
+    }
+  ]
+}

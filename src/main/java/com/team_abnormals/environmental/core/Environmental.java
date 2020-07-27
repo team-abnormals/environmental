@@ -103,22 +103,21 @@ public class Environmental
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, EnvironmentalConfig.COMMON_SPEC);
     }
 
-    private void setupCommon(final FMLCommonSetupEvent event)
-    {
-        DeferredWorkQueue.runLater(() ->
-        {
-            REGISTRY_HELPER.processSpawnEggDispenseBehaviors();
-            EnvironmentalData.registerCompostables();
-            EnvironmentalData.registerFlammables();
-            EnvironmentalData.registerDataSerializers();
-
-            EnvironmentalBiomes.addBiomeTypes();
-            EnvironmentalBiomes.registerBiomesToDictionary();
-            EnvironmentalFeatures.generateFeatures();
-
-            EnvironmentalVillagers.setupVillagers();
-            EnvironmentalEntities.addEntitySpawns();
-            EnvironmentalEntities.setupAttributes();
+    private void setupCommon(final FMLCommonSetupEvent event) {
+    	DeferredWorkQueue.runLater(() -> {
+    		REGISTRY_HELPER.processSpawnEggDispenseBehaviors();
+    		EnvironmentalData.registerCompostables();
+    		EnvironmentalData.registerFlammables();
+    		
+    		EnvironmentalBiomes.addBiomeTypes();
+    		EnvironmentalBiomes.registerBiomesToDictionary();
+    		EnvironmentalFeatures.generateFeatures();
+    		
+    		EnvironmentalVillagers.registerVillagerTypes();
+    		EnvironmentalVillagers.registerPOIs();
+    		
+    		EnvironmentalEntities.addEntitySpawns();
+    		EnvironmentalEntities.setupAttributes();
 
             EnvironmentalCompat.setupVanilla();
 

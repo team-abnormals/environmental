@@ -7,8 +7,17 @@
 	"block.environmental.mud_brick_stairs": "Mud Brick Stairs",
 	"block.environmental.mud_brick_wall": "Mud Brick Wall",
 	"block.environmental.mud_brick_vertical_slab": "Mud Brick Vertical Slab",
+	
 	"block.environmental.slabfish_effigy": "Slabfish Effigy",
 	"block.environmental.mud": "Mud",
+	
+	"block.environmental.ice_bricks": "Ice Bricks",
+	"block.environmental.ice_brick_slab": "Ice Brick Slab",
+	"block.environmental.ice_brick_stairs": "Ice Brick Stairs",
+	"block.environmental.ice_brick_wall": "Ice Brick Wall",
+	"block.environmental.ice_brick_vertical_slab": "Ice Brick Vertical Slab",
+	
+	"block.environmental.ice_lantern": "Ice Lantern",
 	
 	"block.environmental.willow_planks": "Willow Planks",
 	"block.environmental.willow_slab": "Willow Slab",
@@ -36,6 +45,32 @@
 	"block.environmental.willow_chest": "Willow Chest",
 	"block.environmental.willow_trapped_chest": "Willow Trapped Chest",
 	"block.environmental.willow_beehive": "Willow Beehive",
+	
+	"block.environmental.cherry_planks": "Cherry Planks",
+	"block.environmental.cherry_slab": "Cherry Slab",
+	"block.environmental.cherry_stairs": "Cherry Stairs",
+	"block.environmental.cherry_fence": "Cherry Fence",
+	"block.environmental.cherry_fence_gate": "Cherry Fence Gate",
+	"block.environmental.cherry_pressure_plate": "Cherry Pressure Plate",
+	"block.environmental.cherry_door": "Cherry Door",
+	"block.environmental.cherry_trapdoor": "Cherry Trapdoor",
+	"block.environmental.cherry_button": "Cherry Button",
+	"block.environmental.cherry_bookshelf": "Cherry Bookshelf",
+	"block.environmental.cherry_ladder": "Cherry Ladder",
+	"block.environmental.cherry_log": "Cherry Log",
+	"block.environmental.cherry_wood": "Cherry Wood",
+	"block.environmental.stripped_cherry_log": "Stripped Cherry Log",
+	"block.environmental.stripped_cherry_wood": "Stripped Cherry Wood",
+	"block.environmental.cherry_sapling": "Cherry Sapling",
+	"block.environmental.cherry_leaves": "Cherry Leaves",
+	"block.environmental.vertical_cherry_planks": "Vertical Cherry Planks",
+	"block.environmental.cherry_vertical_slab": "Cherry Vertical Slab",
+	"block.environmental.cherry_leaf_carpet": "Cherry Leaf Carpet",
+	"block.environmental.potted_cherry_sapling": "Potted Cherry Sapling",
+	"block.environmental.cherry_sign": "Cherry Sign",
+	"block.environmental.cherry_chest": "Cherry Chest",
+	"block.environmental.cherry_trapped_chest": "Cherry Trapped Chest",
+	"block.environmental.cherry_beehive": "Cherry Beehive",
 	
 	"block.environmental.wisteria_log": "Wisteria Log",
     "block.environmental.stripped_wisteria_log": "Stripped Wisteria Log",
@@ -221,7 +256,8 @@
 	"item.environmental.wanderer_boots": "Wanderer's Boots",
 	"item.environmental.constructor_belt": "Constructor's Belt",
 	"item.environmental.thief_hood": "Thief's Hood",
-	
+	"item.environmental.executioner_cleaver": "Executioner's Cleaver",
+
 	"generic.reachDistance": "Reach Distance",
 	
 	"enchantment.environmental.reaching": "Reaching",
@@ -259,6 +295,7 @@
 	"item.environmental.mud_bucket": "Mud Bucket",
 	
 	"item.environmental.willow_boat": "Willow Boat",
+	"item.environmental.cherry_boat": "Cherry Boat",
 	"item.environmental.wisteria_boat": "Wisteria Boat",
 	
 	"item.environmental.music_disc_slabrave": "Music Disc",

@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "environmental:cherry_log",
+    "environmental:cherry_wood",
+    "environmental:stripped_cherry_log",
+    "environmental:stripped_cherry_wood"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "type=bottom": { "model": "environmental:block/cherry_slab" },
+        "type=top": { "model": "environmental:block/cherry_slab_top" },
+        "type=double": { "model": "environmental:block/cherry_planks" }
+    }
+}
