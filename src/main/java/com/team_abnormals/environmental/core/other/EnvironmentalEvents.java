@@ -89,7 +89,7 @@ public class EnvironmentalEvents {
         Entity entity = event.getEntity();
         if (event.getSpawnReason() == SpawnReason.NATURAL && entity.getPosY() > 60 && entity.getType() == EntityType.ZOMBIE) {
             ZombieEntity zombie = (ZombieEntity) event.getEntity();
-            if (event.getWorld().getBiome(entity.func_233580_cy_()).getCategory() == Biome.Category.DESERT) {
+            if (event.getWorld().getBiome(entity.getPosition()).getCategory() == Biome.Category.DESERT) {
 
                 HuskEntity husk = EntityType.HUSK.create(event.getWorld().getWorld());
                 husk.setChild(zombie.isChild());
@@ -104,7 +104,7 @@ public class EnvironmentalEvents {
 
         if (event.getSpawnReason() == SpawnReason.NATURAL && entity.getPosY() > 60 && entity.getType() == EntityType.SKELETON) {
             SkeletonEntity zombie = (SkeletonEntity) event.getEntity();
-            if (event.getWorld().getBiome(entity.func_233580_cy_()).getCategory() == Biome.Category.ICY) {
+            if (event.getWorld().getBiome(entity.getPosition()).getCategory() == Biome.Category.ICY) {
 
                 StrayEntity husk = EntityType.STRAY.create(event.getWorld().getWorld());
                 for (EquipmentSlotType slot : EquipmentSlotType.values())
@@ -272,7 +272,7 @@ public class EnvironmentalEvents {
     public static void onSlabfishDeath(LivingDeathEvent event) {
         if (event.getEntity() instanceof SlabfishEntity) {
             SlabfishEntity entity = (SlabfishEntity) event.getEntity();
-            if (entity.getEntityWorld().getBiome(new BlockPos(entity.getPositionVec())) == Biomes.field_235252_ay_) {
+            if (entity.getEntityWorld().getBiome(new BlockPos(entity.getPositionVec())) == Biomes.SOUL_SAND_VALLEY) {
                 if (!entity.getSlabfishType().equals(SlabfishManager.GHOST)) {
                     if (entity.getEntityWorld().isRemote()) {
                         Random rand = new Random();

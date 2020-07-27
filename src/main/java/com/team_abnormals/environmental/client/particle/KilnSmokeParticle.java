@@ -9,7 +9,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class KilnSmokeParticle extends SpriteTexturedParticle {
     private KilnSmokeParticle(ClientWorld world, double x, double y, double z, double motionX, double motionY, double motionZ) {
         super(world, x, y, z);
-        this.multipleParticleScaleBy(3.0F);
+        this.getScale(3.0F);
         this.setSize(0.25F, 0.25F);
         this.maxAge = this.rand.nextInt(50) + 40;
 
@@ -19,6 +19,7 @@ public class KilnSmokeParticle extends SpriteTexturedParticle {
         this.motionZ = motionZ;
     }
 
+    @Override
     public void tick() {
         this.prevPosX = this.posX;
         this.prevPosY = this.posY;
@@ -37,6 +38,7 @@ public class KilnSmokeParticle extends SpriteTexturedParticle {
         }
     }
 
+    @Override
     public IParticleRenderType getRenderType() {
         return IParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }

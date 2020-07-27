@@ -24,15 +24,15 @@ public final class MarshBiome extends Biome {
                 .temperature(0.8F)
                 .downfall(0.9F)
                 .func_235097_a_((new BiomeAmbience.Builder())
-                        .func_235246_b_(6134398)  // waterColor
-                        .func_235248_c_(2302743)  // waterFogColor
-                        .func_235239_a_(12638463) // fogColor
-                        .func_235243_a_(MoodSoundAmbience.field_235027_b_)
-                        .func_235238_a_()).parent((String) null));
+                        .setWaterColor(6134398)
+                        .setWaterFogColor(2302743)
+                        .setFogColor(12638463)
+                        .setMoodSound(MoodSoundAmbience.field_235027_b_)
+                        .build()).parent((String) null));
 
-        this.func_235063_a_(DefaultBiomeFeatures.field_235172_j_); // SWAMP_HUT
-        this.func_235063_a_(DefaultBiomeFeatures.field_235150_b_); // MINESHAFT
-        this.func_235063_a_(DefaultBiomeFeatures.field_235130_B_); // RUINED_PORTAL
+        this.func_235063_a_(DefaultBiomeFeatures.SWAMP_HUT);
+        this.func_235063_a_(DefaultBiomeFeatures.MINESHAFT_NORMAL);
+        this.func_235063_a_(DefaultBiomeFeatures.RUINED_PORTAL_SWAMP);
 
         DefaultBiomeFeatures.addCarvers(this);
         DefaultBiomeFeatures.addMonsterRooms(this);

@@ -38,7 +38,7 @@ public class ButterflyEntity extends CreatureEntity {
 
     public static boolean spawnCondition(EntityType<ButterflyEntity> entity, IWorld world, SpawnReason reason, BlockPos pos, Random random) {
         int light = world.getLight(pos);
-        if (world.getWorld().func_234922_V_() == DimensionType.field_235999_c_ && world.canBlockSeeSky(pos) && light >= 7 && world.getWorld().isDaytime()) {
+        if (world.getWorld().func_234922_V_() == DimensionType.OVERWORLD && world.canBlockSeeSky(pos) && light >= 7 && world.getWorld().isDaytime()) {
             return (world.getBlockState(pos).getBlock() instanceof BushBlock || world.getBlockState(pos.down()).getBlock() instanceof BushBlock || world.getBlockState(pos.north()).getBlock() instanceof BushBlock || world.getBlockState(pos.south()).getBlock() instanceof BushBlock || world.getBlockState(pos.east()).getBlock() instanceof BushBlock || world.getBlockState(pos.west()).getBlock() instanceof BushBlock) && world.getLightSubtracted(pos, 0) > 8;
         } else return false;
     }
@@ -90,7 +90,7 @@ public class ButterflyEntity extends CreatureEntity {
     }
 
     public static AttributeModifierMap.MutableAttribute registerAttributes() {
-        return MobEntity.func_233666_p_().func_233815_a_(Attributes.MAX_HEALTH, 3.0D);
+        return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 3.0D);
     }
 
     public void tick() {

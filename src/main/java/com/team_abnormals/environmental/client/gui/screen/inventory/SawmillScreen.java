@@ -29,7 +29,7 @@ public class SawmillScreen extends ContainerScreen<SawmillContainer> {
     public SawmillScreen(SawmillContainer screenContainer, PlayerInventory playerInventory, ITextComponent title) {
         super(screenContainer, playerInventory, title);
         screenContainer.setInventoryUpdateListener(this::onInventoryUpdate);
-        --this.field_238743_q_;
+        --this.titleY;
     }
 
     @Override
@@ -38,9 +38,9 @@ public class SawmillScreen extends ContainerScreen<SawmillContainer> {
         this.func_230459_a_(stack, mouseX, mouseY);
     }
 
-    @SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation")
 	@Override
-    protected void func_230450_a_(MatrixStack stack, float p_230450_2_, int p_230450_3_, int p_230450_4_) {
+    protected void drawGuiContainerBackgroundLayer(MatrixStack stack, float p_230450_2_, int p_230450_3_, int p_230450_4_) {
         this.renderBackground(stack);
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.minecraft.getTextureManager().bindTexture(BACKGROUND_TEXTURE);

@@ -29,8 +29,8 @@ public class SlabfishInventoryScreen extends ContainerScreen<SlabfishInventoryCo
     }
 
     @SuppressWarnings("deprecation")
-    @Override
-    protected void func_230450_a_(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
+	@Override
+    protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.getMinecraft().getTextureManager().bindTexture(SLABFISH_GUI_TEXTURE);
         int i = (this.width - this.xSize) / 2;

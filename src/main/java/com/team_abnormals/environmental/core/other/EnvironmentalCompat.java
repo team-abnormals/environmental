@@ -28,7 +28,7 @@ public class EnvironmentalCompat {
                     for(SlabfishEntity slabfishEntity : source.getWorld().getEntitiesWithinAABB(SlabfishEntity.class, new AxisAlignedBB(blockpos), (entity) -> entity.isAlive() && !entity.hasSweater())) {
                         if (SlabfishEntity.getSweaterMap().containsKey(stack.getItem())) {
                             slabfishEntity.slabfishBackpack.setInventorySlotContents(0, stack.split(1));
-                            this.func_239796_a_(true);
+                            this.setSuccessful(true);
                             return stack;
                         }
                     }
@@ -61,7 +61,7 @@ public class EnvironmentalCompat {
 
                 for(SlabfishEntity slabfishEntity : source.getWorld().getEntitiesWithinAABB(SlabfishEntity.class, new AxisAlignedBB(blockpos), (entity) -> entity.isAlive() && !entity.hasBackpack())) {
                     slabfishEntity.slabfishBackpack.setInventorySlotContents(1, stack.split(1));
-                    this.func_239796_a_(true);
+                    this.setSuccessful(true);
                     return stack;
                 }
                 return super.dispenseStack(source, stack);

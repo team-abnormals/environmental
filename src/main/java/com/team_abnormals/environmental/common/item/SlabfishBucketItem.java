@@ -87,14 +87,14 @@ public class SlabfishBucketItem extends BucketItem {
             if (compoundnbt.contains("SlabfishType", Constants.NBT.TAG_STRING)) {
                 SlabfishType slabfishType = slabfishManager.getSlabfishType(LOCATION_CACHE.computeIfAbsent(compoundnbt.getString("SlabfishType"), ResourceLocation::new));
                 if (slabfishType != SlabfishManager.DEFAULT_SLABFISH)
-                    tooltip.add(slabfishType.getDisplayName().deepCopy().func_240701_a_(TextFormatting.ITALIC, slabfishType.getRarity().getFormatting()));
+                    tooltip.add(slabfishType.getDisplayName().deepCopy().mergeStyle(TextFormatting.ITALIC, slabfishType.getRarity().getFormatting()));
             }
             if (compoundnbt.contains("Age", Constants.NBT.TAG_ANY_NUMERIC) && compoundnbt.getInt("Age") < 0) {
-                tooltip.add((new TranslationTextComponent("entity.environmental.slabfish.baby").func_240701_a_(TextFormatting.ITALIC, TextFormatting.GRAY)));
+                tooltip.add((new TranslationTextComponent("entity.environmental.slabfish.baby").mergeStyle(TextFormatting.ITALIC, TextFormatting.GRAY)));
             }
             if (compoundnbt.contains("BackpackType", Constants.NBT.TAG_STRING)) {
                 BackpackType backpackType = slabfishManager.getBackpackType(LOCATION_CACHE.computeIfAbsent(compoundnbt.getString("BackpackType"), ResourceLocation::new));
-                tooltip.add(backpackType.getDisplayName().deepCopy().func_240701_a_(TextFormatting.ITALIC, TextFormatting.GRAY));
+                tooltip.add(backpackType.getDisplayName().deepCopy().mergeStyle(TextFormatting.ITALIC, TextFormatting.GRAY));
             }
 
             if (!compoundnbt.equals(SWEATER_TYPE_CACHE.getLeft())) {
@@ -114,7 +114,7 @@ public class SlabfishBucketItem extends BucketItem {
             }
 
             if (!SlabfishManager.EMPTY_SWEATER.equals(SWEATER_TYPE_CACHE.getRight()))
-                tooltip.add(SWEATER_TYPE_CACHE.getRight().getDisplayName().deepCopy().func_240701_a_(TextFormatting.ITALIC, TextFormatting.GRAY));
+                tooltip.add(SWEATER_TYPE_CACHE.getRight().getDisplayName().deepCopy().mergeStyle(TextFormatting.ITALIC, TextFormatting.GRAY));
         }
     }
 }

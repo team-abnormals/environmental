@@ -23,8 +23,8 @@ public class EnvironmentalFeatures {
     public static final Feature<NoFeatureConfig> CATTAILS = new CattailsFeature(NoFeatureConfig.field_236558_a_);
     public static final Feature<NoFeatureConfig> DENSE_CATTAILS = new DenseCattailsFeature(NoFeatureConfig.field_236558_a_);
     public static final Feature<NoFeatureConfig> RICE = new RiceFeature(NoFeatureConfig.field_236558_a_);
-    public static final Feature<BaseTreeFeatureConfig> WISTERIA_TREE = new WisteriaTreeFeature(BaseTreeFeatureConfig.field_236676_a_);
-    public static final Feature<BaseTreeFeatureConfig> BIG_WISTERIA_TREE = new BigWisteriaTreeFeature(BaseTreeFeatureConfig.field_236676_a_);
+    public static final Feature<BaseTreeFeatureConfig> WISTERIA_TREE = new WisteriaTreeFeature(BaseTreeFeatureConfig.CODEC_BASE_TREE_FEATURE_CONFIG);
+    public static final Feature<BaseTreeFeatureConfig> BIG_WISTERIA_TREE = new BigWisteriaTreeFeature(BaseTreeFeatureConfig.CODEC_BASE_TREE_FEATURE_CONFIG);
 
     @SubscribeEvent
     public static void registerFeatures(RegistryEvent.Register<Feature<?>> event) {
