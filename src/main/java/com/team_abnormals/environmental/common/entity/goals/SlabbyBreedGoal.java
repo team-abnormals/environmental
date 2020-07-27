@@ -117,9 +117,8 @@ public class SlabbyBreedGoal extends Goal {
             slabby.setGrowingAge(-24000);
             slabby.setLocationAndAngles(this.animal.getPosX(), this.animal.getPosY(), this.animal.getPosZ(), 0.0F, 0.0F);
 
-            SlabfishType slabfishType = SlabfishManager.get(this.world).getSlabfishType(__ -> true, SlabfishConditionContext.breeding(slabby, this.animal.getLoveCause(), this.animal, this.targetMate));
+            SlabfishType slabfishType = SlabfishManager.get(this.world).getSlabfishType(SlabfishConditionContext.breeding(slabby, this.animal.getLoveCause(), this.animal, this.targetMate));
             slabby.setSlabfishType(slabfishType.getRegistryName());
-            slabby.setPreNameType(slabfishType.getRegistryName());
 
             this.world.addEntity(slabby);
             this.world.setEntityState(this.animal, (byte) 18);

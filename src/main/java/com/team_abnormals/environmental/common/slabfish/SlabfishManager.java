@@ -67,6 +67,16 @@ public interface SlabfishManager {
     /**
      * Checks through all slabfish types for a slabfish conditions that succeed in the current context.
      *
+     * @param context The context of the slabfish
+     * @return The slabfish that that was selected to be the best fit for the context
+     */
+    default SlabfishType getSlabfishType(SlabfishConditionContext context) {
+        return this.getSlabfishType(__ -> true, context);
+    }
+
+    /**
+     * Checks through all slabfish types for a slabfish conditions that succeed in the current context.
+     *
      * @param predicate The predicate to determine what kinds of slabfish to allow
      * @param context   The context of the slabfish
      * @return The slabfish that that was selected to be the best fit for the context
