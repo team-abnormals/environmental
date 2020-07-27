@@ -83,7 +83,6 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
     private static final DataParameter<ResourceLocation> SLABFISH_TYPE = EntityDataManager.createKey(SlabfishEntity.class, EnvironmentalData.RESOURCE_LOCATION);
     private static final DataParameter<Integer> SLABFISH_OVERLAY = EntityDataManager.createKey(SlabfishEntity.class, DataSerializers.VARINT);
-    private static final DataParameter<ResourceLocation> PRE_NAME_TYPE = EntityDataManager.createKey(SlabfishEntity.class, EnvironmentalData.RESOURCE_LOCATION);
     private static final DataParameter<Boolean> FROM_BUCKET = EntityDataManager.createKey(SlabfishEntity.class, DataSerializers.BOOLEAN);
 
     private static final DataParameter<ResourceLocation> BACKPACK = EntityDataManager.createKey(SlabfishEntity.class, EnvironmentalData.RESOURCE_LOCATION);
@@ -154,7 +153,6 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         super.registerData();
         this.getDataManager().register(SLABFISH_TYPE, SlabfishManager.DEFAULT_SLABFISH.getRegistryName());
         this.getDataManager().register(SLABFISH_OVERLAY, 0);
-        this.getDataManager().register(PRE_NAME_TYPE, SlabfishManager.DEFAULT_SLABFISH.getRegistryName());
         this.getDataManager().register(FROM_BUCKET, false);
 
         this.getDataManager().register(BACKPACK, SlabfishManager.BROWN_BACKPACK.getRegistryName());
@@ -169,7 +167,6 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         compound.putInt("SlabfishOverlay", this.getSlabfishOverlay().getId());
         if (this.hasBackpack())
             compound.putString("BackpackType", this.getBackpack().toString());
-        compound.putString("PreNameType", this.getPreNameType().toString());
         compound.putBoolean("FromBucket", this.isFromBucket());
 
         this.slabfishBackpack.write(compound);
@@ -186,7 +183,6 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         this.setSlabfishType(new ResourceLocation(compound.getString("SlabfishType")));
         this.setSlabfishOverlay(SlabfishOverlay.byId(compound.getInt("SlabfishOverlay")));
         this.setBackpack(compound.contains("BackpackType", Constants.NBT.TAG_STRING) ? new ResourceLocation(compound.getString("BackpackType")) : SlabfishManager.BROWN_BACKPACK.getRegistryName());
-        this.setPreNameType(new ResourceLocation(compound.getString("PreNameType")));
         this.setFromBucket(compound.getBoolean("FromBucket"));
 
         this.slabfishBackpack.read(compound);
@@ -528,7 +524,6 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         if (baby == null)
             return null;
         baby.setSlabfishType(this.getSlabfishType());
-        baby.setPreNameType(this.getSlabfishType());
         return baby;
     }
 
@@ -585,7 +580,11 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         super.setCustomName(name);
         if (!this.world.isRemote() && name != null && !this.getSlabfishType().equals(SlabfishManager.GHOST)) {
             super.setCustomName(name);
-            SlabfishType newType = SlabfishManager.get(this.world).getSlabfishType(slabfishType -> true, SlabfishConditionContext.of(this));
+            SlabfishManager slabfishManager = SlabfishManager.get(this.world);
+            SlabfishType currentType = slabfishManager.getSlabfishType(this.getSlabfishType());
+            SlabfishType newType = slabfishManager.getSlabfishType(SlabfishConditionContext.of(this));
+            if(!currentType.isTradable() && newType.isTradable())
+                return;
             if (newType.getRegistryName() != this.getSlabfishType()) {
                 this.setSlabfishType(newType.getRegistryName());
             }
@@ -601,10 +600,12 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
     public void onStruckByLightning(LightningBoltEntity lightningBolt) {
         UUID uuid = lightningBolt.getUniqueID();
         if (!this.world.isRemote() && !uuid.equals(this.lightningUUID) && !this.getSlabfishType().equals(SlabfishManager.GHOST)) {
-            SlabfishConditionContext context = SlabfishConditionContext.lightning(this);
-            SlabfishType newType = SlabfishManager.get(this.world).getSlabfishType(__ -> true, context);
+            SlabfishManager slabfishManager = SlabfishManager.get(this.world);
+            SlabfishType currentType = slabfishManager.getSlabfishType(this.getSlabfishType());
+            SlabfishType newType = slabfishManager.getSlabfishType(SlabfishConditionContext.lightning(this));
+            if(!currentType.isTradable() && newType.isTradable())
+                return;
             this.setSlabfishType(newType.getRegistryName());
-            this.setPreNameType(newType.getRegistryName());
             this.lightningUUID = uuid;
             this.playSound(SoundEvents.ENTITY_LIGHTNING_BOLT_THUNDER, 2.0F, 1.0F);
         }
@@ -619,14 +620,6 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         this.updateBackpack();
     }
 
-    public ResourceLocation getPreNameType() {
-        return this.dataManager.get(PRE_NAME_TYPE);
-    }
-
-    public void setPreNameType(ResourceLocation type) {
-        this.dataManager.set(PRE_NAME_TYPE, type);
-    }
-
     @Nullable
     @Override
     public ILivingEntityData onInitialSpawn(IWorld world, DifficultyInstance difficulty, SpawnReason reason, ILivingEntityData spawnDataIn, CompoundNBT dataTag) {
@@ -636,11 +629,6 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
             if (dataTag.contains("Health")) this.setHealth(dataTag.getFloat("Health"));
             if (dataTag.contains("Age")) this.setGrowingAge(dataTag.getInt("Age"));
             this.setSlabfishType(new ResourceLocation(dataTag.getString("SlabfishType")));
-            if (dataTag.contains("PreNameType")) {
-                this.setPreNameType(new ResourceLocation(dataTag.getString("PreNameType")));
-            } else {
-                this.setPreNameType(new ResourceLocation(dataTag.getString("SlabfishType")));
-            }
 
             if (dataTag.contains("BackpackType", Constants.NBT.TAG_STRING))
                 this.setBackpack(new ResourceLocation(dataTag.getString("BackpackType")));
@@ -663,7 +651,6 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         }
 
         this.setSlabfishType(type);
-        this.setPreNameType(type);
         return spawnDataIn;
     }
 
@@ -701,7 +688,6 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         compound.putInt("Age", this.getGrowingAge());
 
         compound.putString("SlabfishType", this.getSlabfishType().toString());
-        compound.putString("PreNameType", this.getPreNameType().toString());
         if (this.hasBackpack())
             compound.putString("BackpackType", this.getBackpack().toString());
 
