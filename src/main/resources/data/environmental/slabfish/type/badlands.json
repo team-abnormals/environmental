@@ -1,0 +1,12 @@
+{
+  "rarity": "epic",
+  "displayName": {
+    "translate": "entity.environmental.slabfish.badlands"
+  },
+  "conditions": [
+    {
+      "type": "biome",
+      "category": "mesa"
+    }
+  ]
+}

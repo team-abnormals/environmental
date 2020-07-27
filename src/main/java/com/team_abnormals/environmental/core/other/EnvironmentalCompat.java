@@ -1,6 +1,8 @@
 package com.team_abnormals.environmental.core.other;
 
 import com.team_abnormals.environmental.common.entity.SlabfishEntity;
+import com.team_abnormals.environmental.common.slabfish.BackpackType;
+import com.team_abnormals.environmental.common.slabfish.SlabfishManager;
 import com.team_abnormals.environmental.core.registry.EnvironmentalItems;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.dispenser.DefaultDispenseItemBehavior;
@@ -17,6 +19,7 @@ import net.minecraft.world.World;
 public class EnvironmentalCompat {
 
     public static void setupVanilla() {
+        // TODO make these work properly with tags or smth
         for(Item item : SlabfishEntity.getSweaterMap().keySet()) {
             DispenserBlock.registerDispenseBehavior(item, new OptionalDispenseBehavior() {
                 @Override
@@ -58,8 +61,7 @@ public class EnvironmentalCompat {
                 BlockPos blockpos = source.getBlockPos().offset(source.getBlockState().get(DispenserBlock.FACING));
 
                 for(SlabfishEntity slabfishEntity : source.getWorld().getEntitiesWithinAABB(SlabfishEntity.class, new AxisAlignedBB(blockpos), (entity) -> entity.isAlive() && !entity.hasBackpack())) {
-                    slabfishEntity.setBackpacked(true);
-                    stack.shrink(1);
+                    slabfishEntity.slabfishBackpack.setInventorySlotContents(1, stack.split(1));
                     this.func_239796_a_(true);
                     return stack;
                 }

@@ -15,12 +15,18 @@
     "announce_to_chat": true,
     "hidden": false
   },
-	"criteria": {
-		"swamp": {
-			"trigger": "environmental:swamp_slabfish"
-		},
-		"marsh": {
-			"trigger": "environmental:marsh_slabfish"
-		}
-	}
+  "criteria": {
+    "swamp": {
+      "trigger": "environmental:slabfish",
+      "conditions": {
+        "slabfish": "environmental:swamp"
+      }
+    },
+    "marsh": {
+      "trigger": "environmental:slabfish",
+      "conditions": {
+        "slabfish": "environmental:marsh"
+      }
+    }
+  }
 }

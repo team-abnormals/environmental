@@ -1,0 +1,12 @@
+{
+  "rarity": "uncommon",
+  "displayName": {
+    "translate": "entity.environmental.slabfish.taiga"
+  },
+  "conditions": [
+    {
+      "type": "biome",
+      "category": "taiga"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "rarity": "rare",
+  "priority": 2,
+  "displayName": {
+    "translate": "entity.environmental.slabfish.wither"
+  },
+  "conditions": [
+    {
+      "type": "parents",
+      "parentA": "environmental:skeleton",
+      "parentB": "environmental:skeleton"
+    },
+    {
+      "type": "dimension",
+      "dimension": "minecraft:the_nether"
+    }
+  ]
+}

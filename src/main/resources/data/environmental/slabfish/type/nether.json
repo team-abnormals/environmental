@@ -1,0 +1,12 @@
+{
+  "rarity": "rare",
+  "displayName": {
+    "translate": "entity.environmental.slabfish.nether"
+  },
+  "conditions": [
+    {
+      "type": "dimension",
+      "dimension": "minecraft:the_nether"
+    }
+  ]
+}

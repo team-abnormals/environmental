@@ -1,0 +1,12 @@
+{
+  "rarity": "uncommon",
+  "displayName": {
+    "translate": "entity.environmental.slabfish.river"
+  },
+  "conditions": [
+    {
+      "type": "biome",
+      "category": "river"
+    }
+  ]
+}

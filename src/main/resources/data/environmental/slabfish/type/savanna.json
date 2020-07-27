@@ -1,0 +1,12 @@
+{
+  "rarity": "uncommon",
+  "displayName": {
+    "translate": "entity.environmental.slabfish.savanna"
+  },
+  "conditions": [
+    {
+      "type": "biome",
+      "category": "savanna"
+    }
+  ]
+}

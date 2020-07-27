@@ -1,7 +1,9 @@
 package com.team_abnormals.environmental.common.entity.goals;
 
 import com.team_abnormals.environmental.common.entity.SlabfishEntity;
-import com.team_abnormals.environmental.common.entity.util.SlabfishType;
+import com.team_abnormals.environmental.common.slabfish.SlabfishManager;
+import com.team_abnormals.environmental.common.slabfish.SlabfishType;
+import com.team_abnormals.environmental.common.slabfish.condition.SlabfishConditionContext;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.EntityPredicate;
 import net.minecraft.entity.ai.goal.Goal;
@@ -81,14 +83,11 @@ public class SlabbyBreedGoal extends Goal {
         return SlabfishEntity;
     }
 
+    @Deprecated
     protected void spawnBaby() {
         Random rand = new Random();
         SlabfishEntity slabby = this.animal.createChild(this.targetMate);
-        slabby.setSlabfishType(animal.getTypeForBreeding(animal.world, this.animal, this.targetMate));
-        if (this.animal.getLoveCause().getStats().getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)) >= 72000 && animal.world.isNightTime()) {
-            if (rand.nextInt(4) == 0) slabby.setSlabfishType(SlabfishType.NIGHTMARE);
-        }
-        slabby.setPreNameType(slabby.getSlabfishType());
+
         final net.minecraftforge.event.entity.living.BabyEntitySpawnEvent event = new net.minecraftforge.event.entity.living.BabyEntitySpawnEvent(animal, targetMate, slabby);
         final boolean cancelled = net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event);
         slabby = (SlabfishEntity) event.getChild();
@@ -117,12 +116,15 @@ public class SlabbyBreedGoal extends Goal {
             this.targetMate.resetInLove();
             slabby.setGrowingAge(-24000);
             slabby.setLocationAndAngles(this.animal.getPosX(), this.animal.getPosY(), this.animal.getPosZ(), 0.0F, 0.0F);
+
+            SlabfishType slabfishType = SlabfishManager.get(this.world).getSlabfishType(SlabfishConditionContext.breeding(slabby, this.animal.getLoveCause(), this.animal, this.targetMate));
+            slabby.setSlabfishType(slabfishType.getRegistryName());
+
             this.world.addEntity(slabby);
             this.world.setEntityState(this.animal, (byte) 18);
             if (this.world.getGameRules().getBoolean(GameRules.DO_MOB_LOOT)) {
                 this.world.addEntity(new ExperienceOrbEntity(this.world, this.animal.getPosX(), this.animal.getPosY(), this.animal.getPosZ(), this.animal.getRNG().nextInt(7) + 1));
             }
-
         }
     }
 }

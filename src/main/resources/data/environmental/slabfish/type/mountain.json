@@ -1,0 +1,12 @@
+{
+  "rarity": "uncommon",
+  "displayName": {
+    "translate": "entity.environmental.slabfish.mountain"
+  },
+  "conditions": [
+    {
+      "type": "biome",
+      "category": "extreme_hills"
+    }
+  ]
+}

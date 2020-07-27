@@ -1,0 +1,38 @@
+{
+  "rarity": "epic",
+  "displayName": {
+    "translate": "entity.environmental.slabfish.dunes"
+  },
+  "mod": "atmospheric",
+  "conditions": [
+    {
+      "type": "or",
+      "conditions": [
+        {
+          "type": "biome",
+          "biome": "atmospheric:dunes"
+        },
+        {
+          "type": "biome",
+          "biome": "atmospheric:dunes_hills"
+        },
+        {
+          "type": "biome",
+          "biome": "atmospheric:petrified_dunes"
+        },
+        {
+          "type": "biome",
+          "biome": "atmospheric:rocky_dunes"
+        },
+        {
+          "type": "biome",
+          "biome": "atmospheric:rocky_dunes_hills"
+        },
+        {
+          "type": "biome",
+          "biome": "atmospheric:flourishing_dunes"
+        }
+      ]
+    }
+  ]
+}

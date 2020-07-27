@@ -1,0 +1,22 @@
+{
+  "rarity": "rare",
+  "priority": 1,
+  "displayName": {
+    "translate": "entity.environmental.slabfish.dark_forest"
+  },
+  "conditions": [
+    {
+      "type": "or",
+      "conditions": [
+        {
+          "type": "biome",
+          "biome": "minecraft:dark_forest"
+        },
+        {
+          "type": "biome",
+          "biome": "minecraft:dark_forest_hills"
+        }
+      ]
+    }
+  ]
+}
