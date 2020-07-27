@@ -16,7 +16,6 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.EnumSet;
 import java.util.List;
-import java.util.Random;
 
 public class SlabbyBreedGoal extends Goal {
     private static final EntityPredicate field_220689_d = (new EntityPredicate()).setDistance(8.0D).allowInvulnerable().allowFriendlyFire().setLineOfSiteRequired();
@@ -85,7 +84,6 @@ public class SlabbyBreedGoal extends Goal {
 
     @Deprecated
     protected void spawnBaby() {
-        Random rand = new Random();
         SlabfishEntity slabby = this.animal.createChild(this.targetMate);
 
         final net.minecraftforge.event.entity.living.BabyEntitySpawnEvent event = new net.minecraftforge.event.entity.living.BabyEntitySpawnEvent(animal, targetMate, slabby);

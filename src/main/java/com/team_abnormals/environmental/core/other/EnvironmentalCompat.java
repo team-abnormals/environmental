@@ -1,8 +1,6 @@
 package com.team_abnormals.environmental.core.other;
 
 import com.team_abnormals.environmental.common.entity.SlabfishEntity;
-import com.team_abnormals.environmental.common.slabfish.BackpackType;
-import com.team_abnormals.environmental.common.slabfish.SlabfishManager;
 import com.team_abnormals.environmental.core.registry.EnvironmentalItems;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.dispenser.DefaultDispenseItemBehavior;
@@ -16,9 +14,10 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+@SuppressWarnings("deprecation")
 public class EnvironmentalCompat {
 
-    public static void setupVanilla() {
+	public static void setupVanilla() {
         // TODO make these work properly with tags or smth
         for(Item item : SlabfishEntity.getSweaterMap().keySet()) {
             DispenserBlock.registerDispenseBehavior(item, new OptionalDispenseBehavior() {

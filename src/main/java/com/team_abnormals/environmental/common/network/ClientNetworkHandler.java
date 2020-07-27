@@ -8,7 +8,6 @@ import com.team_abnormals.environmental.common.network.message.SSyncBackpackType
 import com.team_abnormals.environmental.common.network.message.SSyncSlabfishTypeMessage;
 import com.team_abnormals.environmental.common.network.message.SSyncSweaterTypeMessage;
 import com.team_abnormals.environmental.common.slabfish.ClientSlabfishManager;
-import com.team_abnormals.environmental.common.slabfish.SlabfishLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;

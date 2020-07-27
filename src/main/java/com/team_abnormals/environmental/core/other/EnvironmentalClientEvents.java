@@ -10,7 +10,6 @@ import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
-@SuppressWarnings("unused")
 @OnlyIn(Dist.CLIENT)
 @EventBusSubscriber(modid = Environmental.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
 public class EnvironmentalClientEvents {

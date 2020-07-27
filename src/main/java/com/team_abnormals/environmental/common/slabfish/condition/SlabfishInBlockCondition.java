@@ -32,7 +32,6 @@ public class SlabfishInBlockCondition implements SlabfishCondition {
      * @param context The context of the json deserialization
      * @return A new slabfish condition from that json
      */
-    @SuppressWarnings("unused")
     public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context) {
         if (json.has("block") && json.has("tag"))
             throw new JsonSyntaxException("Either 'block' or 'tag' can be present.");

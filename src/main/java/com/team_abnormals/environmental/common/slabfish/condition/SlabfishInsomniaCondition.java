@@ -19,7 +19,6 @@ public class SlabfishInsomniaCondition implements SlabfishCondition {
      * @param context The context of the json deserialization
      * @return A new slabfish condition from that json
      */
-    @SuppressWarnings("unused")
     public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context) {
         return new SlabfishInsomniaCondition();
     }

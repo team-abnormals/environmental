@@ -25,7 +25,6 @@ public class SlabfishLightningCondition implements SlabfishCondition {
      * @param context The context of the json deserialization
      * @return A new slabfish condition from that json
      */
-    @SuppressWarnings("unused")
     public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context) {
         return new SlabfishLightningCondition(json.has("slabfishType") ? context.deserialize(json.get("slabfishType"), ResourceLocation.class) : null);
     }

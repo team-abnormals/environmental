@@ -16,7 +16,6 @@ import java.util.Set;
  * @author Ocelot
  * @since 3.1.0
  */
-@SuppressWarnings("unused")
 public abstract class DynamicInventory implements IInventory {
     private final Int2ObjectOpenHashMap<ItemStack> inventory;
     private Set<IInventoryChangedListener> listeners;

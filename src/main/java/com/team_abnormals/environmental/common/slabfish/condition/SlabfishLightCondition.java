@@ -39,7 +39,6 @@ public class SlabfishLightCondition implements SlabfishCondition {
      * @param context The context of the json deserialization
      * @return A new slabfish condition from that json
      */
-    @SuppressWarnings("unused")
     public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context) {
         if ((json.has("min") || json.has("max")) && json.has("value"))
             throw new JsonSyntaxException("Either 'min' and 'max' or 'value' can be present.");

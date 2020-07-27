@@ -28,6 +28,7 @@ import java.util.Random;
  *
  * @author Ocelot
  */
+@SuppressWarnings("deprecation")
 public class SlabfishBucketModel implements IBakedModel
 {
     private final IBakedModel model;
@@ -69,7 +70,7 @@ public class SlabfishBucketModel implements IBakedModel
         return this.model.isBuiltInRenderer();
     }
 
-    @Override
+	@Override
     public TextureAtlasSprite getParticleTexture()
     {
         return this.model.getParticleTexture();
