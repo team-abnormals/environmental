@@ -53,7 +53,7 @@ public class EnvironmentalEntities {
     }
 
     public static void setupAttributes() {
-        GlobalEntityTypeAttributes.put(SLABFISH.get(), SlabfishEntity.registerAttributes().func_233813_a_());
-        GlobalEntityTypeAttributes.put(DUCK.get(), ChickenEntity.func_234187_eI_().func_233813_a_());
+        GlobalEntityTypeAttributes.put(SLABFISH.get(), SlabfishEntity.registerAttributes().create());
+        GlobalEntityTypeAttributes.put(DUCK.get(), ChickenEntity.func_234187_eI_().create());
     }
 }

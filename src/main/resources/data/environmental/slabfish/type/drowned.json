@@ -1,0 +1,22 @@
+{
+  "rarity": "epic",
+  "priority": 2,
+  "displayName": {
+    "translate": "entity.environmental.slabfish.drowned"
+  },
+  "conditions": [
+    {
+      "type": "biome",
+      "category": "ocean"
+    },
+    {
+      "type": "height",
+      "min": 0,
+      "max": 50
+    },
+    {
+      "type": "in_fluid",
+      "tag": "minecraft:water"
+    }
+  ]
+}

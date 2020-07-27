@@ -1,0 +1,21 @@
+{
+  "rarity": "common",
+  "displayName": {
+    "translate": "entity.environmental.slabfish.marsh"
+  },
+  "conditions": [
+    {
+      "type": "or",
+      "conditions": [
+        {
+          "type": "biome",
+          "biome": "environmental:marsh"
+        },
+        {
+          "type": "biome",
+          "biome": "environmental:mushroom_marsh"
+        }
+      ]
+    }
+  ]
+}

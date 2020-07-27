@@ -1,0 +1,13 @@
+{
+  "rarity": "legendary",
+  "priority": 2,
+  "displayName": {
+    "translate": "entity.environmental.slabfish.brown_mushroom"
+  },
+  "conditions": [
+    {
+      "type": "lightning",
+      "slabfishType": "environmental:mushroom"
+    }
+  ]
+}

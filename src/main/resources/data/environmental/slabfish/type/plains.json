@@ -1,0 +1,12 @@
+{
+  "rarity": "uncommon",
+  "displayName": {
+    "translate": "entity.environmental.slabfish.plains"
+  },
+  "conditions": [
+    {
+      "type": "biome",
+      "category": "plains"
+    }
+  ]
+}

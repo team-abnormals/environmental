@@ -1,0 +1,22 @@
+{
+  "rarity": "epic",
+  "priority": 2,
+  "displayName": {
+    "translate": "entity.environmental.slabfish.mushroom"
+  },
+  "conditions": [
+    {
+      "type": "or",
+      "conditions": [
+        {
+          "type": "lightning",
+          "slabfishType": "environmental:brown_mushroom"
+        },
+        {
+          "type": "biome",
+          "category": "mushroom"
+        }
+      ]
+    }
+  ]
+}

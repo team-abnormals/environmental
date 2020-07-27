@@ -3,7 +3,8 @@ package com.team_abnormals.environmental.client.render.layer;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.team_abnormals.environmental.common.entity.SlabfishEntity;
-import com.team_abnormals.environmental.core.Environmental;
+import com.team_abnormals.environmental.common.slabfish.SlabfishManager;
+import com.team_abnormals.environmental.common.slabfish.SweaterType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
@@ -11,7 +12,6 @@ import net.minecraft.client.renderer.entity.IEntityRenderer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -23,13 +23,13 @@ public class SweaterRenderLayer<E extends SlabfishEntity, M extends EntityModel<
     }
 
     @Override
-    public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, E slabfish, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-        if (!slabfish.hasSweater()) return;
+    public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, E slabby, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+        if (!slabby.hasSweater()) return;
 
-        ResourceLocation texture = new ResourceLocation(Environmental.MODID, "textures/entity/slabfish/sweaters/sweater_" + slabfish.getSweaterColor().getTranslationKey() + ".png");
-        Minecraft.getInstance().getTextureManager().bindTexture(texture);
-        IVertexBuilder ivertexbuilder = bufferIn.getBuffer(RenderType.getEntityCutoutNoCull(texture));
-        this.getEntityModel().setRotationAngles(slabfish, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+        SweaterType sweaterType = SlabfishManager.get(slabby.getEntityWorld()).getSweaterType(slabby.getSweater());
+        Minecraft.getInstance().getTextureManager().bindTexture(sweaterType.getTextureLocation());
+        IVertexBuilder ivertexbuilder = bufferIn.getBuffer(RenderType.getEntityCutoutNoCull(sweaterType.getTextureLocation()));
+        this.getEntityModel().setRotationAngles(slabby, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
         this.getEntityModel().render(matrixStackIn, ivertexbuilder, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
     }
 

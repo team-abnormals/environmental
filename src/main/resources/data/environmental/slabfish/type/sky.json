@@ -1,0 +1,13 @@
+{
+  "rarity": "legendary",
+  "priority": 2,
+  "displayName": {
+    "translate": "entity.environmental.slabfish.sky"
+  },
+  "conditions": [
+    {
+      "type": "height",
+      "min": 200
+    }
+  ]
+}

@@ -6,12 +6,14 @@ import com.team_abnormals.environmental.common.item.crafting.BakingRecipe;
 import com.team_abnormals.environmental.common.item.crafting.SawingRecipe;
 import com.team_abnormals.environmental.core.Environmental;
 import com.team_abnormals.environmental.core.registry.EnvironmentalBlocks;
+import com.team_abnormals.environmental.core.registry.EnvironmentalItems;
 import com.team_abnormals.environmental.core.registry.EnvironmentalRecipes;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaRecipeCategoryUid;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.helpers.IJeiHelpers;
+import mezz.jei.api.ingredients.subtypes.ISubtypeInterpreter;
 import mezz.jei.api.registration.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.world.ClientWorld;
@@ -21,8 +23,8 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.RecipeManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.util.Constants;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -30,12 +32,8 @@ import java.util.Map;
 
 @JeiPlugin
 public class EnvironmentalPlugin implements IModPlugin {
-    public static final ResourceLocation RECIPE_GUI_ENVIRONMENTAL = new ResourceLocation(Environmental.MODID, "textures/gui/jei.png");
 
-    @Nullable
-    private BakingCategory bakingCategory;
-    @Nullable
-    private SawingCategory sawingCategory;
+    public static final ResourceLocation RECIPE_GUI_ENVIRONMENTAL = new ResourceLocation(Environmental.MODID, "textures/gui/jei.png");
 
     @Override
     public ResourceLocation getPluginUid() {
@@ -43,15 +41,17 @@ public class EnvironmentalPlugin implements IModPlugin {
     }
 
     @Override
+    public void registerItemSubtypes(ISubtypeRegistration registration) {
+        registration.registerSubtypeInterpreter(EnvironmentalItems.SLABFISH_BUCKET.get(), stack -> stack.getTag() != null && stack.getTag().contains("SlabfishType", Constants.NBT.TAG_STRING) ? stack.getTag().getString("SlabfishType") : ISubtypeInterpreter.NONE);
+    }
+
+    @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
         IJeiHelpers jeiHelpers = registration.getJeiHelpers();
         IGuiHelper guiHelper = jeiHelpers.getGuiHelper();
 
-        bakingCategory = new BakingCategory(guiHelper);
-        sawingCategory = new SawingCategory(guiHelper);
-
-        registration.addRecipeCategories(bakingCategory);
-        registration.addRecipeCategories(sawingCategory);
+        registration.addRecipeCategories(new BakingCategory(guiHelper));
+        registration.addRecipeCategories(new SawingCategory(guiHelper));
     }
 
     @Override
@@ -97,13 +97,8 @@ public class EnvironmentalPlugin implements IModPlugin {
         ClientWorld world = Minecraft.getInstance().world;
         RecipeManager recipeManager = world.getRecipeManager();
 
-        for (BakingRecipe recipe : getRecipes(recipeManager, EnvironmentalRecipes.RecipeTypes.BAKING)) {
-            results.bakingRecipes.add(recipe);
-        }
-
-        for (SawingRecipe recipe : getRecipes(recipeManager, EnvironmentalRecipes.RecipeTypes.SAWING)) {
-            results.sawingRecipes.add(recipe);
-        }
+        results.bakingRecipes.addAll(getRecipes(recipeManager, EnvironmentalRecipes.RecipeTypes.BAKING));
+        results.sawingRecipes.addAll(getRecipes(recipeManager, EnvironmentalRecipes.RecipeTypes.SAWING));
 
         return results;
     }

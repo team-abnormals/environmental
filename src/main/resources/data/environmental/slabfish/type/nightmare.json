@@ -1,0 +1,16 @@
+{
+  "rarity": "epic",
+  "priority": 2,
+  "displayName": {
+    "translate": "entity.environmental.slabfish.nightmare"
+  },
+  "conditions": [
+    {
+      "type": "insomnia"
+    },
+    {
+      "type": "time",
+      "time": "night"
+    }
+  ]
+}

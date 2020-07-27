@@ -1,0 +1,12 @@
+{
+  "rarity": "uncommon",
+  "displayName": {
+    "translate": "entity.environmental.slabfish.snowy"
+  },
+  "conditions": [
+    {
+      "type": "biome",
+      "category": "icy"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "rarity": "rare",
+  "displayName": {
+    "translate": "entity.environmental.slabfish.jungle"
+  },
+  "conditions": [
+    {
+      "type": "biome",
+      "category": "jungle"
+    }
+  ]
+}

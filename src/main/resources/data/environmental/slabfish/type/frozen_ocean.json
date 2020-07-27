@@ -1,0 +1,22 @@
+{
+  "rarity": "uncommon",
+  "priority": 1,
+  "displayName": {
+    "translate": "entity.environmental.slabfish.frozen_ocean"
+  },
+  "conditions": [
+    {
+      "type": "or",
+      "conditions": [
+        {
+          "type": "biome",
+          "biome": "minecraft:frozen_ocean"
+        },
+        {
+          "type": "biome",
+          "biome": "minecraft:deep_frozen_ocean"
+        }
+      ]
+    }
+  ]
+}

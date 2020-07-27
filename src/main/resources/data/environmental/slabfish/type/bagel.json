@@ -1,0 +1,19 @@
+{
+  "rarity": "uncommon",
+  "priority": 10,
+  "displayName": {
+    "translate": "entity.environmental.slabfish.bagel"
+  },
+  "tradable": false,
+  "conditions": [
+    {
+      "type": "rename",
+      "names": [
+        "bagel",
+        "shyguy",
+        "shy guy",
+        "bagelio"
+      ]
+    }
+  ]
+}

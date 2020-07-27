@@ -25,7 +25,7 @@ public class SlabbyGrabItemGoal extends Goal implements IInventoryChangedListene
     }
 
     private boolean canPickupItem(IInventory inventory, ItemStack stack) {
-        for(int i = 1; i < inventory.getSizeInventory(); i++) {
+        for(int i = 3; i < inventory.getSizeInventory(); i++) {
             ItemStack stackInSlot = inventory.getStackInSlot(i);
             if (stackInSlot.isEmpty() || (ItemStack.areItemsEqual(stack, stackInSlot) && ItemStack.areItemStackTagsEqual(stackInSlot, stack) && stackInSlot.getCount() < Math.min(stackInSlot.getMaxStackSize(), inventory.getInventoryStackLimit())))
                     return true;

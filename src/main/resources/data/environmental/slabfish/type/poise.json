@@ -1,0 +1,14 @@
+{
+  "rarity": "epic",
+  "priority": 1,
+  "displayName": {
+    "translate": "entity.environmental.slabfish.poise"
+  },
+  "mod": "endergetic",
+  "conditions": [
+    {
+      "type": "biome",
+      "biome": "endergetic:poise_forest"
+    }
+  ]
+}

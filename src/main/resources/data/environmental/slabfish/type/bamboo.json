@@ -1,0 +1,22 @@
+{
+  "rarity": "epic",
+  "priority": 1,
+  "displayName": {
+    "translate": "entity.environmental.slabfish.bamboo"
+  },
+  "conditions": [
+    {
+      "type": "or",
+      "conditions": [
+        {
+          "type": "biome",
+          "biome": "minecraft:bamboo_jungle"
+        },
+        {
+          "type": "biome",
+          "biome": "minecraft:bamboo_jungle_hills"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "rarity": "uncommon",
+  "priority": 10,
+  "displayName": {
+    "translate": "entity.environmental.slabfish.mista_jub"
+  },
+  "tradable": false,
+  "conditions": [
+    {
+      "type": "rename",
+      "names": [
+        "mista jub",
+        "jub",
+        "slabrave"
+      ]
+    }
+  ]
+}

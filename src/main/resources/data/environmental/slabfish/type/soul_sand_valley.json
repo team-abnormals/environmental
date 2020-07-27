@@ -1,0 +1,13 @@
+{
+  "rarity": "epic",
+  "priority": 1,
+  "displayName": {
+    "translate": "entity.environmental.slabfish.soul_sand_valley"
+  },
+  "conditions": [
+    {
+      "type": "biome",
+      "biome": "minecraft:soul_sand_valley"
+    }
+  ]
+}

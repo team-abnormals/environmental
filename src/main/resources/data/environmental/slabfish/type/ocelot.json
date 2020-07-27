@@ -1,0 +1,15 @@
+{
+  "rarity": "uncommon",
+  "priority": 10,
+  "displayName": {
+    "translate": "entity.environmental.slabfish.ocelot"
+  },
+  "customBackpack": "environmental:ocelot",
+  "tradable": false,
+  "conditions": [
+    {
+      "type": "rename",
+      "regex": "(?i).*-e$"
+    }
+  ]
+}

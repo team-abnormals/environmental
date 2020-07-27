@@ -1,0 +1,12 @@
+{
+  "rarity": "common",
+  "displayName": {
+    "translate": "entity.environmental.slabfish.ocean"
+  },
+  "conditions": [
+    {
+      "type": "biome",
+      "category": "ocean"
+    }
+  ]
+}

@@ -14,9 +14,11 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+@SuppressWarnings("deprecation")
 public class EnvironmentalCompat {
 
-    public static void setupVanilla() {
+	public static void setupVanilla() {
+        // TODO make these work properly with tags or smth
         for(Item item : SlabfishEntity.getSweaterMap().keySet()) {
             DispenserBlock.registerDispenseBehavior(item, new OptionalDispenseBehavior() {
                 @Override
@@ -26,7 +28,7 @@ public class EnvironmentalCompat {
                     for(SlabfishEntity slabfishEntity : source.getWorld().getEntitiesWithinAABB(SlabfishEntity.class, new AxisAlignedBB(blockpos), (entity) -> entity.isAlive() && !entity.hasSweater())) {
                         if (SlabfishEntity.getSweaterMap().containsKey(stack.getItem())) {
                             slabfishEntity.slabfishBackpack.setInventorySlotContents(0, stack.split(1));
-                            this.func_239796_a_(true);
+                            this.setSuccessful(true);
                             return stack;
                         }
                     }
@@ -58,9 +60,8 @@ public class EnvironmentalCompat {
                 BlockPos blockpos = source.getBlockPos().offset(source.getBlockState().get(DispenserBlock.FACING));
 
                 for(SlabfishEntity slabfishEntity : source.getWorld().getEntitiesWithinAABB(SlabfishEntity.class, new AxisAlignedBB(blockpos), (entity) -> entity.isAlive() && !entity.hasBackpack())) {
-                    slabfishEntity.setBackpacked(true);
-                    stack.shrink(1);
-                    this.func_239796_a_(true);
+                    slabfishEntity.slabfishBackpack.setInventorySlotContents(1, stack.split(1));
+                    this.setSuccessful(true);
                     return stack;
                 }
                 return super.dispenseStack(source, stack);

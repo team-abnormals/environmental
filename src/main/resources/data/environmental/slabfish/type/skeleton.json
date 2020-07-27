@@ -1,0 +1,12 @@
+{
+  "rarity": "epic",
+  "priority": 2,
+  "displayName": {
+    "translate": "entity.environmental.slabfish.skeleton"
+  },
+  "conditions": [
+    {
+      "type": "lightning"
+    }
+  ]
+}

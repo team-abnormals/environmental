@@ -17,12 +17,12 @@ public class DirectionalFlowersFeature<U extends BlockClusterFeatureConfig> exte
     }
 
     @Override
-    public boolean func_225559_a_(IWorld world, BlockPos pos, U config) {
+    public boolean isValidPosition(IWorld world, BlockPos pos, U config) {
         return !config.blacklist.contains(world.getBlockState(pos));
     }
 
     @Override
-    public int func_225560_a_(U config) {
+    public int getFlowerCount(U config) {
         return config.tryCount;
     }
 
