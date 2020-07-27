@@ -8,22 +8,8 @@ import com.google.gson.JsonObject;
  *
  * @author Ocelot
  */
-public class SlabfishRaidCondition implements SlabfishCondition
-{
-    private SlabfishRaidCondition()
-    {
-    }
-
-    @Override
-    public SlabfishConditionType getType()
-    {
-        return SlabfishConditionType.RAID;
-    }
-
-    @Override
-    public boolean test(SlabfishConditionContext context)
-    {
-        return context.isInRaid();
+public class SlabfishRaidCondition implements SlabfishCondition {
+    private SlabfishRaidCondition() {
     }
 
     /**
@@ -33,8 +19,17 @@ public class SlabfishRaidCondition implements SlabfishCondition
      * @param context The context of the json deserialization
      * @return A new slabfish condition from that json
      */
-    public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context)
-    {
+    public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context) {
         return new SlabfishRaidCondition();
+    }
+
+    @Override
+    public SlabfishConditionType getType() {
+        return SlabfishConditionType.RAID;
+    }
+
+    @Override
+    public boolean test(SlabfishConditionContext context) {
+        return context.isInRaid();
     }
 }

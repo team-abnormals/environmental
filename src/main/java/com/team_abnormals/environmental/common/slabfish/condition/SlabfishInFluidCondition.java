@@ -15,25 +15,11 @@ import javax.annotation.Nullable;
  *
  * @author Ocelot
  */
-public class SlabfishInFluidCondition implements SlabfishCondition
-{
+public class SlabfishInFluidCondition implements SlabfishCondition {
     private final ITag<Fluid> tag;
 
-    private SlabfishInFluidCondition(@Nullable ITag<Fluid> tag)
-    {
+    private SlabfishInFluidCondition(@Nullable ITag<Fluid> tag) {
         this.tag = tag;
-    }
-
-    @Override
-    public SlabfishConditionType getType()
-    {
-        return SlabfishConditionType.IN_FLUID;
-    }
-
-    @Override
-    public boolean test(SlabfishConditionContext context)
-    {
-        return context.isInFluid(this.tag);
     }
 
     /**
@@ -44,10 +30,19 @@ public class SlabfishInFluidCondition implements SlabfishCondition
      * @return A new slabfish condition from that json
      */
     @SuppressWarnings("unused")
-    public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context)
-    {
+    public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context) {
         if (!json.has("tag"))
             throw new JsonSyntaxException("'tag' must be present.");
         return new SlabfishInFluidCondition(TagCollectionManager.func_232928_e_().func_232926_c_().get(new ResourceLocation(json.get("tag").getAsString())));
+    }
+
+    @Override
+    public SlabfishConditionType getType() {
+        return SlabfishConditionType.IN_FLUID;
+    }
+
+    @Override
+    public boolean test(SlabfishConditionContext context) {
+        return context.isInFluid(this.tag);
     }
 }

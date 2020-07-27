@@ -29,8 +29,7 @@ import java.util.Random;
  *
  * @author Ocelot
  */
-public class SlabfishConditionContext
-{
+public class SlabfishConditionContext {
     private final boolean struckByLightning;
     private final LazyValue<Random> random;
     private final LazyValue<String> name;
@@ -48,8 +47,7 @@ public class SlabfishConditionContext
     private final LazyValue<Boolean> breederInsomnia;
     private final Pair<SlabfishType, SlabfishType> parents;
 
-    private SlabfishConditionContext(SlabfishEntity slabfish, boolean struckByLightning, @Nullable ServerPlayerEntity breeder, @Nullable SlabfishEntity parent1, @Nullable SlabfishEntity parent2)
-    {
+    private SlabfishConditionContext(SlabfishEntity slabfish, boolean struckByLightning, @Nullable ServerPlayerEntity breeder, @Nullable SlabfishEntity parent1, @Nullable SlabfishEntity parent2) {
         ServerWorld world = (ServerWorld) slabfish.getEntityWorld();
         this.struckByLightning = struckByLightning;
         this.random = new LazyValue<>(world::getRandom);
@@ -73,153 +71,12 @@ public class SlabfishConditionContext
     }
 
     /**
-     * @return Whether or not the slabfish was struck by lightning
-     */
-    public boolean isStruckByLightning()
-    {
-        return struckByLightning;
-    }
-
-    /**
-     * @return The slabfish world random number generator
-     */
-    public Random getRandom()
-    {
-        return this.random.getValue();
-    }
-
-    /**
-     * @return The name of the slabfish
-     */
-    public String getName()
-    {
-        return this.name.getValue();
-    }
-
-    /**
-     * @return The position of the slabfish
-     */
-    public BlockPos getPos()
-    {
-        return this.pos.getValue();
-    }
-
-    /**
-     * @return The biome the slabfish is in
-     */
-    public Biome getBiome()
-    {
-        return this.biome.getValue();
-    }
-
-    /**
-     * @return Whether or not it is currently day
-     */
-    public boolean isDay()
-    {
-        return this.dayTime.getValue();
-    }
-
-    /**
-     * @return Whether or not it is currently night
-     */
-    public boolean isNight()
-    {
-        return this.nightTime.getValue();
-    }
-
-    /**
-     * @return Whether or not a raid is currently ongoing
-     */
-    public boolean isInRaid()
-    {
-        return this.inRaid.getValue();
-    }
-
-    /**
-     * @return Whether or not the slabfish is currently in water
-     */
-    public boolean isInBlock(Block block)
-    {
-        return this.inBlock.getValue().isIn(block);
-    }
-
-    /**
-     * @return Whether or not the slabfish is currently in that tag
-     */
-    public boolean isInBlock(ITag<Block> tag)
-    {
-        return this.inBlock.getValue().isIn(tag);
-    }
-
-    /**
-     * @return Whether or not the slabfish is currently in that tag
-     */
-    public boolean isInFluid(ITag<Fluid> tag)
-    {
-        return this.inFluid.getValue().isTagged(tag);
-    }
-
-    /**
-     * @return The light value at the slabfish position
-     */
-    public int getLight()
-    {
-        return this.light.getValue();
-    }
-
-    /**
-     * Fetches light for the specified type of light
-     *
-     * @param lightType The type of light to get
-     * @return The sky light value at the slabfish position
-     */
-    public int getLightFor(LightType lightType)
-    {
-        return this.lightTypes.get(lightType).getValue();
-    }
-
-    /**
-     * @return The dimension the slabfish is in
-     */
-    public ResourceLocation getDimension()
-    {
-        return this.dimension.getValue();
-    }
-
-    /**
-     * @return The type of slabfish this slabfish was before trying to undergo a change
-     */
-    public ResourceLocation getSlabfishType()
-    {
-        return this.slabfishType.getValue();
-    }
-
-    /**
-     * @return Whether or not the player that bred the two slabfish together has insomnia
-     */
-    public boolean isBreederInsomnia()
-    {
-        return this.breederInsomnia.getValue();
-    }
-
-    /**
-     * @return The types of slabfish the parents were or null if there are no parents
-     */
-    @Nullable
-    public Pair<SlabfishType, SlabfishType> getParentTypes()
-    {
-        return this.parents;
-    }
-
-    /**
      * Fetches a new context for the specified entity.
      *
      * @param slabfish The entity to focus on
      * @return A new context with that slabfish as the focus
      */
-    public static SlabfishConditionContext of(SlabfishEntity slabfish)
-    {
+    public static SlabfishConditionContext of(SlabfishEntity slabfish) {
         return new SlabfishConditionContext(slabfish, false, null, null, null);
     }
 
@@ -229,8 +86,7 @@ public class SlabfishConditionContext
      * @param slabfish The entity to focus on
      * @return A new context with that slabfish as the focus
      */
-    public static SlabfishConditionContext lightning(SlabfishEntity slabfish)
-    {
+    public static SlabfishConditionContext lightning(SlabfishEntity slabfish) {
         return new SlabfishConditionContext(slabfish, true, null, null, null);
     }
 
@@ -243,8 +99,130 @@ public class SlabfishConditionContext
      * @param parent2  The second parent of breeding
      * @return A new context with that slabfish as the focus
      */
-    public static SlabfishConditionContext breeding(SlabfishEntity slabfish, @Nullable ServerPlayerEntity breeder, SlabfishEntity parent1, SlabfishEntity parent2)
-    {
+    public static SlabfishConditionContext breeding(SlabfishEntity slabfish, @Nullable ServerPlayerEntity breeder, SlabfishEntity parent1, SlabfishEntity parent2) {
         return new SlabfishConditionContext(slabfish, false, breeder, parent1, parent2);
+    }
+
+    /**
+     * @return Whether or not the slabfish was struck by lightning
+     */
+    public boolean isStruckByLightning() {
+        return struckByLightning;
+    }
+
+    /**
+     * @return The slabfish world random number generator
+     */
+    public Random getRandom() {
+        return this.random.getValue();
+    }
+
+    /**
+     * @return The name of the slabfish
+     */
+    public String getName() {
+        return this.name.getValue();
+    }
+
+    /**
+     * @return The position of the slabfish
+     */
+    public BlockPos getPos() {
+        return this.pos.getValue();
+    }
+
+    /**
+     * @return The biome the slabfish is in
+     */
+    public Biome getBiome() {
+        return this.biome.getValue();
+    }
+
+    /**
+     * @return Whether or not it is currently day
+     */
+    public boolean isDay() {
+        return this.dayTime.getValue();
+    }
+
+    /**
+     * @return Whether or not it is currently night
+     */
+    public boolean isNight() {
+        return this.nightTime.getValue();
+    }
+
+    /**
+     * @return Whether or not a raid is currently ongoing
+     */
+    public boolean isInRaid() {
+        return this.inRaid.getValue();
+    }
+
+    /**
+     * @return Whether or not the slabfish is currently in water
+     */
+    public boolean isInBlock(Block block) {
+        return this.inBlock.getValue().isIn(block);
+    }
+
+    /**
+     * @return Whether or not the slabfish is currently in that tag
+     */
+    public boolean isInBlock(ITag<Block> tag) {
+        return this.inBlock.getValue().isIn(tag);
+    }
+
+    /**
+     * @return Whether or not the slabfish is currently in that tag
+     */
+    public boolean isInFluid(ITag<Fluid> tag) {
+        return this.inFluid.getValue().isTagged(tag);
+    }
+
+    /**
+     * @return The light value at the slabfish position
+     */
+    public int getLight() {
+        return this.light.getValue();
+    }
+
+    /**
+     * Fetches light for the specified type of light
+     *
+     * @param lightType The type of light to get
+     * @return The sky light value at the slabfish position
+     */
+    public int getLightFor(LightType lightType) {
+        return this.lightTypes.get(lightType).getValue();
+    }
+
+    /**
+     * @return The dimension the slabfish is in
+     */
+    public ResourceLocation getDimension() {
+        return this.dimension.getValue();
+    }
+
+    /**
+     * @return The type of slabfish this slabfish was before trying to undergo a change
+     */
+    public ResourceLocation getSlabfishType() {
+        return this.slabfishType.getValue();
+    }
+
+    /**
+     * @return Whether or not the player that bred the two slabfish together has insomnia
+     */
+    public boolean isBreederInsomnia() {
+        return this.breederInsomnia.getValue();
+    }
+
+    /**
+     * @return The types of slabfish the parents were or null if there are no parents
+     */
+    @Nullable
+    public Pair<SlabfishType, SlabfishType> getParentTypes() {
+        return this.parents;
     }
 }

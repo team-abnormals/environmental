@@ -8,22 +8,8 @@ import com.google.gson.JsonObject;
  *
  * @author Ocelot
  */
-public class SlabfishImpossibleCondition implements SlabfishCondition
-{
-    public SlabfishImpossibleCondition()
-    {
-    }
-
-    @Override
-    public SlabfishConditionType getType()
-    {
-        return SlabfishConditionType.IMPOSSIBLE;
-    }
-
-    @Override
-    public boolean test(SlabfishConditionContext context)
-    {
-        return false;
+public class SlabfishImpossibleCondition implements SlabfishCondition {
+    public SlabfishImpossibleCondition() {
     }
 
     /**
@@ -33,8 +19,17 @@ public class SlabfishImpossibleCondition implements SlabfishCondition
      * @param context The context of the json deserialization
      * @return A new slabfish condition from that json
      */
-    public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context)
-    {
+    public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context) {
         return new SlabfishImpossibleCondition();
+    }
+
+    @Override
+    public SlabfishConditionType getType() {
+        return SlabfishConditionType.IMPOSSIBLE;
+    }
+
+    @Override
+    public boolean test(SlabfishConditionContext context) {
+        return false;
     }
 }

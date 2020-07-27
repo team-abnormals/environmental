@@ -8,22 +8,8 @@ import com.google.gson.JsonObject;
  *
  * @author Ocelot
  */
-public class SlabfishInsomniaCondition implements SlabfishCondition
-{
-    private SlabfishInsomniaCondition()
-    {
-    }
-
-    @Override
-    public SlabfishConditionType getType()
-    {
-        return SlabfishConditionType.INSOMNIA;
-    }
-
-    @Override
-    public boolean test(SlabfishConditionContext context)
-    {
-        return context.isBreederInsomnia();
+public class SlabfishInsomniaCondition implements SlabfishCondition {
+    private SlabfishInsomniaCondition() {
     }
 
     /**
@@ -34,8 +20,17 @@ public class SlabfishInsomniaCondition implements SlabfishCondition
      * @return A new slabfish condition from that json
      */
     @SuppressWarnings("unused")
-    public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context)
-    {
+    public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context) {
         return new SlabfishInsomniaCondition();
+    }
+
+    @Override
+    public SlabfishConditionType getType() {
+        return SlabfishConditionType.INSOMNIA;
+    }
+
+    @Override
+    public boolean test(SlabfishConditionContext context) {
+        return context.isBreederInsomnia();
     }
 }

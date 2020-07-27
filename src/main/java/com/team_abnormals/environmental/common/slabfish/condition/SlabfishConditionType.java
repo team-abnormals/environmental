@@ -10,8 +10,7 @@ import java.util.function.BiFunction;
  *
  * @author Ocelot
  */
-public enum SlabfishConditionType
-{
+public enum SlabfishConditionType {
     IMPOSSIBLE(SlabfishImpossibleCondition::deserialize),
     OR(SlabfishOrCondition::deserialize),
     RENAME(SlabfishRenameCondition::deserialize),
@@ -30,8 +29,7 @@ public enum SlabfishConditionType
 
     private final BiFunction<JsonObject, JsonDeserializationContext, SlabfishCondition> jsonDeserializer;
 
-    SlabfishConditionType(BiFunction<JsonObject, JsonDeserializationContext, SlabfishCondition> jsonDeserializer)
-    {
+    SlabfishConditionType(BiFunction<JsonObject, JsonDeserializationContext, SlabfishCondition> jsonDeserializer) {
         this.jsonDeserializer = jsonDeserializer;
     }
 
@@ -42,8 +40,7 @@ public enum SlabfishConditionType
      * @param context The context of JSON deserialization
      * @return A new condition deserialized from JSON
      */
-    public SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context)
-    {
+    public SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context) {
         return this.jsonDeserializer.apply(json, context);
     }
 }

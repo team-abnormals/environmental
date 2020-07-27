@@ -1,7 +1,6 @@
 package com.team_abnormals.environmental.common.slabfish.condition;
 
 import com.google.gson.*;
-import com.team_abnormals.environmental.common.entity.SlabfishEntity;
 import com.team_abnormals.environmental.common.slabfish.SlabfishType;
 
 import java.lang.reflect.Type;
@@ -12,8 +11,7 @@ import java.util.function.Predicate;
  *
  * @author Ocelot
  */
-public interface SlabfishCondition extends Predicate<SlabfishConditionContext>
-{
+public interface SlabfishCondition extends Predicate<SlabfishConditionContext> {
     /**
      * Determines if this condition is met based on the specified context.
      *
@@ -33,10 +31,8 @@ public interface SlabfishCondition extends Predicate<SlabfishConditionContext>
      *
      * @author Ocelot
      */
-    class Deserializer implements JsonDeserializer<SlabfishCondition>
-    {
-        private static SlabfishConditionType deserializeType(JsonElement element)
-        {
+    class Deserializer implements JsonDeserializer<SlabfishCondition> {
+        private static SlabfishConditionType deserializeType(JsonElement element) {
             if (!element.isJsonPrimitive() || !element.getAsJsonPrimitive().isString())
                 throw new JsonSyntaxException("Slabfish condition type expected to be a string");
             String name = element.getAsString();
@@ -47,8 +43,7 @@ public interface SlabfishCondition extends Predicate<SlabfishConditionContext>
         }
 
         @Override
-        public SlabfishCondition deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
-        {
+        public SlabfishCondition deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
             JsonObject jsonObject = json.getAsJsonObject();
             if (!jsonObject.has("type"))
                 throw new JsonSyntaxException("Slabfish condition type is required");

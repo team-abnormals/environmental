@@ -11,25 +11,11 @@ import javax.annotation.Nullable;
  *
  * @author Ocelot
  */
-public class SlabfishLightningCondition implements SlabfishCondition
-{
+public class SlabfishLightningCondition implements SlabfishCondition {
     private final ResourceLocation slabfishType;
 
-    private SlabfishLightningCondition(@Nullable ResourceLocation slabfishType)
-    {
+    private SlabfishLightningCondition(@Nullable ResourceLocation slabfishType) {
         this.slabfishType = slabfishType;
-    }
-
-    @Override
-    public SlabfishConditionType getType()
-    {
-        return SlabfishConditionType.LIGHTNING;
-    }
-
-    @Override
-    public boolean test(SlabfishConditionContext context)
-    {
-        return context.isStruckByLightning() && (this.slabfishType == null || this.slabfishType.equals(context.getSlabfishType()));
     }
 
     /**
@@ -40,8 +26,17 @@ public class SlabfishLightningCondition implements SlabfishCondition
      * @return A new slabfish condition from that json
      */
     @SuppressWarnings("unused")
-    public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context)
-    {
+    public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context) {
         return new SlabfishLightningCondition(json.has("slabfishType") ? context.deserialize(json.get("slabfishType"), ResourceLocation.class) : null);
+    }
+
+    @Override
+    public SlabfishConditionType getType() {
+        return SlabfishConditionType.LIGHTNING;
+    }
+
+    @Override
+    public boolean test(SlabfishConditionContext context) {
+        return context.isStruckByLightning() && (this.slabfishType == null || this.slabfishType.equals(context.getSlabfishType()));
     }
 }

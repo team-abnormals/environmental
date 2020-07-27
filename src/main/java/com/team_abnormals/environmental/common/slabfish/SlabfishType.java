@@ -22,8 +22,6 @@ import java.util.function.Predicate;
  * @author Ocelot
  */
 public class SlabfishType implements Predicate<SlabfishConditionContext> {
-    private ResourceLocation registryName;
-    private ITextComponent displayName;
     private final boolean translucent;
     private final ResourceLocation customBackpack;
     private final SlabfishRarity rarity;
@@ -31,6 +29,8 @@ public class SlabfishType implements Predicate<SlabfishConditionContext> {
     private final boolean modLoaded;
     private final int priority;
     private final SlabfishCondition[] conditions;
+    private ResourceLocation registryName;
+    private ITextComponent displayName;
 
     public SlabfishType(SlabfishRarity rarity, @Nullable ITextComponent displayName, @Nullable ResourceLocation customBackpack, boolean translucent, boolean tradable, boolean modLoaded, int priority, SlabfishCondition[] conditions) {
         this.rarity = rarity;
@@ -41,6 +41,24 @@ public class SlabfishType implements Predicate<SlabfishConditionContext> {
         this.modLoaded = modLoaded;
         this.priority = priority;
         this.conditions = conditions;
+    }
+
+    /**
+     * Creates a new {@link SlabfishType} from the specified {@link PacketBuffer} on the client side.
+     *
+     * @param buf The buffer to read from
+     * @return A new slabfish type created from the data in the buffer
+     */
+    @OnlyIn(Dist.CLIENT)
+    public static SlabfishType readFrom(PacketBuffer buf) {
+        ResourceLocation registryName = buf.readResourceLocation();
+        ITextComponent displayName = buf.readTextComponent();
+        ResourceLocation customBackpack = buf.readBoolean() ? buf.readResourceLocation() : null;
+        boolean translucent = buf.readBoolean();
+        SlabfishRarity rarity = SlabfishRarity.byId(buf.readVarInt());
+        boolean modLoaded = buf.readBoolean();
+        int priority = buf.readVarInt();
+        return new SlabfishType(rarity, displayName, customBackpack, translucent, false, modLoaded, priority, new SlabfishCondition[0]).setRegistryName(registryName);
     }
 
     @Override
@@ -56,6 +74,18 @@ public class SlabfishType implements Predicate<SlabfishConditionContext> {
      */
     public ResourceLocation getRegistryName() {
         return registryName;
+    }
+
+    /**
+     * Sets the registry name of this slabfish type.
+     *
+     * @param registryName The new registry name for this slabfish
+     */
+    SlabfishType setRegistryName(ResourceLocation registryName) {
+        this.registryName = registryName;
+        if (this.displayName == null)
+            this.displayName = new StringTextComponent(registryName.toString());
+        return this;
     }
 
     /**
@@ -109,18 +139,6 @@ public class SlabfishType implements Predicate<SlabfishConditionContext> {
     }
 
     /**
-     * Sets the registry name of this slabfish type.
-     *
-     * @param registryName The new registry name for this slabfish
-     */
-    SlabfishType setRegistryName(ResourceLocation registryName) {
-        this.registryName = registryName;
-        if (this.displayName == null)
-            this.displayName = new StringTextComponent(registryName.toString());
-        return this;
-    }
-
-    /**
      * Writes this {@link SlabfishType} into the specified {@link PacketBuffer} for syncing with clients.
      *
      * @param buf The buffer to write into
@@ -146,24 +164,6 @@ public class SlabfishType implements Predicate<SlabfishConditionContext> {
                 ", modLoaded=" + modLoaded +
                 ", priority=" + priority +
                 '}';
-    }
-
-    /**
-     * Creates a new {@link SlabfishType} from the specified {@link PacketBuffer} on the client side.
-     *
-     * @param buf The buffer to read from
-     * @return A new slabfish type created from the data in the buffer
-     */
-    @OnlyIn(Dist.CLIENT)
-    public static SlabfishType readFrom(PacketBuffer buf) {
-        ResourceLocation registryName = buf.readResourceLocation();
-        ITextComponent displayName = buf.readTextComponent();
-        ResourceLocation customBackpack = buf.readBoolean() ? buf.readResourceLocation() : null;
-        boolean translucent = buf.readBoolean();
-        SlabfishRarity rarity = SlabfishRarity.byId(buf.readVarInt());
-        boolean modLoaded = buf.readBoolean();
-        int priority = buf.readVarInt();
-        return new SlabfishType(rarity, displayName, customBackpack, translucent, false, modLoaded, priority, new SlabfishCondition[0]).setRegistryName(registryName);
     }
 
     /**

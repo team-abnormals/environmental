@@ -25,92 +25,16 @@ import java.util.function.Predicate;
  *
  * @author Ocelot
  */
-public class SweaterType implements Predicate<ItemStack>
-{
-    private ResourceLocation registryName;
-    private ITextComponent displayName;
+public class SweaterType implements Predicate<ItemStack> {
     private final Ingredient ingredient;
+    private ResourceLocation registryName;
     @OnlyIn(Dist.CLIENT)
     private final LazyValue<ResourceLocation> textureLocation = new LazyValue<>(() -> new ResourceLocation(this.getRegistryName().getNamespace(), "textures/entity/slabfish/sweaters/sweater_" + this.getRegistryName().getPath() + ".png"));
+    private ITextComponent displayName;
 
-    public SweaterType(@Nullable ITextComponent displayName, Ingredient ingredient)
-    {
+    public SweaterType(@Nullable ITextComponent displayName, Ingredient ingredient) {
         this.displayName = displayName;
         this.ingredient = ingredient;
-    }
-
-    /**
-     * @return Whether or not this sweater type is considered to be empty
-     */
-    public boolean isEmpty()
-    {
-        return this == SlabfishManager.EMPTY_SWEATER;
-    }
-
-    @Override
-    public boolean test(ItemStack stack)
-    {
-        return !this.isEmpty() && this.ingredient != Ingredient.EMPTY && this.ingredient.test(stack);
-    }
-
-    /**
-     * @return The registry name of this sweater
-     */
-    public ResourceLocation getRegistryName()
-    {
-        return registryName;
-    }
-
-    /**
-     * @return The display name to use when showing this type
-     */
-    public ITextComponent getDisplayName()
-    {
-        return displayName;
-    }
-
-    /**
-     * @return The location of the texture for this sweater
-     */
-    @OnlyIn(Dist.CLIENT)
-    public ResourceLocation getTextureLocation()
-    {
-        return this.textureLocation.getValue();
-    }
-
-    /**
-     * Sets the registry name of this sweater type.
-     *
-     * @param registryName The new registry name for this sweater
-     */
-    SweaterType setRegistryName(ResourceLocation registryName)
-    {
-        this.registryName = registryName;
-        if (this.displayName == null)
-            this.displayName = new StringTextComponent(registryName.toString());
-        return this;
-    }
-
-    /**
-     * Writes this {@link SweaterType} into the specified {@link PacketBuffer} for syncing with clients.
-     *
-     * @param buf The buffer to write into
-     */
-    public void writeTo(PacketBuffer buf)
-    {
-        buf.writeResourceLocation(this.registryName);
-        buf.writeTextComponent(this.displayName);
-        this.ingredient.write(buf);
-    }
-
-    @Override
-    public String toString()
-    {
-        return "SweaterType{" +
-                "registryName=" + registryName +
-                ", displayName=" + displayName.getString() +
-                ", ingredient=" + Arrays.toString(ingredient.getMatchingStacks()) +
-                '}';
     }
 
     /**
@@ -120,8 +44,7 @@ public class SweaterType implements Predicate<ItemStack>
      * @return A new sweater type created from the data in the buffer
      */
     @OnlyIn(Dist.CLIENT)
-    public static SweaterType readFrom(PacketBuffer buf)
-    {
+    public static SweaterType readFrom(PacketBuffer buf) {
         ResourceLocation registryName = buf.readResourceLocation();
         ITextComponent displayName = buf.readTextComponent();
         Ingredient ingredient = Ingredient.read(buf);
@@ -129,15 +52,79 @@ public class SweaterType implements Predicate<ItemStack>
     }
 
     /**
+     * @return Whether or not this sweater type is considered to be empty
+     */
+    public boolean isEmpty() {
+        return this == SlabfishManager.EMPTY_SWEATER;
+    }
+
+    @Override
+    public boolean test(ItemStack stack) {
+        return !this.isEmpty() && this.ingredient != Ingredient.EMPTY && this.ingredient.test(stack);
+    }
+
+    /**
+     * @return The registry name of this sweater
+     */
+    public ResourceLocation getRegistryName() {
+        return registryName;
+    }
+
+    /**
+     * Sets the registry name of this sweater type.
+     *
+     * @param registryName The new registry name for this sweater
+     */
+    SweaterType setRegistryName(ResourceLocation registryName) {
+        this.registryName = registryName;
+        if (this.displayName == null)
+            this.displayName = new StringTextComponent(registryName.toString());
+        return this;
+    }
+
+    /**
+     * @return The display name to use when showing this type
+     */
+    public ITextComponent getDisplayName() {
+        return displayName;
+    }
+
+    /**
+     * @return The location of the texture for this sweater
+     */
+    @OnlyIn(Dist.CLIENT)
+    public ResourceLocation getTextureLocation() {
+        return this.textureLocation.getValue();
+    }
+
+    /**
+     * Writes this {@link SweaterType} into the specified {@link PacketBuffer} for syncing with clients.
+     *
+     * @param buf The buffer to write into
+     */
+    public void writeTo(PacketBuffer buf) {
+        buf.writeResourceLocation(this.registryName);
+        buf.writeTextComponent(this.displayName);
+        this.ingredient.write(buf);
+    }
+
+    @Override
+    public String toString() {
+        return "SweaterType{" +
+                "registryName=" + registryName +
+                ", displayName=" + displayName.getString() +
+                ", ingredient=" + Arrays.toString(ingredient.getMatchingStacks()) +
+                '}';
+    }
+
+    /**
      * <p>Deserializes a sweater type from JSON.</p>
      *
      * @author Ocelot
      */
-    public static class Deserializer implements JsonDeserializer<SweaterType>
-    {
+    public static class Deserializer implements JsonDeserializer<SweaterType> {
         @Override
-        public SweaterType deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException
-        {
+        public SweaterType deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException {
             JsonObject jsonObject = json.getAsJsonObject();
             if (jsonObject.has("item") && jsonObject.has("tag"))
                 throw new JsonSyntaxException("Either 'item' or 'tag' can be present");

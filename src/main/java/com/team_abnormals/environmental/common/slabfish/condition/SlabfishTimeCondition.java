@@ -8,25 +8,11 @@ import com.google.gson.JsonObject;
  *
  * @author Ocelot
  */
-public class SlabfishTimeCondition implements SlabfishCondition
-{
+public class SlabfishTimeCondition implements SlabfishCondition {
     private final boolean day;
 
-    private SlabfishTimeCondition(boolean day)
-    {
+    private SlabfishTimeCondition(boolean day) {
         this.day = day;
-    }
-
-    @Override
-    public SlabfishConditionType getType()
-    {
-        return SlabfishConditionType.TIME;
-    }
-
-    @Override
-    public boolean test(SlabfishConditionContext context)
-    {
-        return this.day ? context.isDay() : context.isNight();
     }
 
     /**
@@ -37,8 +23,17 @@ public class SlabfishTimeCondition implements SlabfishCondition
      * @return A new slabfish condition from that json
      */
     @SuppressWarnings("unused")
-    public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context)
-    {
+    public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context) {
         return new SlabfishTimeCondition(!json.has("time") || !json.get("time").getAsString().equals("night"));
+    }
+
+    @Override
+    public SlabfishConditionType getType() {
+        return SlabfishConditionType.TIME;
+    }
+
+    @Override
+    public boolean test(SlabfishConditionContext context) {
+        return this.day ? context.isDay() : context.isNight();
     }
 }

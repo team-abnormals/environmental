@@ -32,6 +32,38 @@ public final class ClientSlabfishManager implements SlabfishManager {
         this.backpackTypes = new HashMap<>();
     }
 
+    /**
+     * Receives the slabfish types from the server.
+     *
+     * @param msg The message containing the new types
+     */
+    public static void receive(SSyncSlabfishTypeMessage msg) {
+        INSTANCE.slabfishTypes.clear();
+        INSTANCE.slabfishTypes.putAll(Arrays.stream(msg.getSlabfishTypes()).collect(Collectors.toMap(SlabfishType::getRegistryName, slabfishType -> slabfishType)));
+    }
+
+    /**
+     * Receives the sweater types from the server.
+     *
+     * @param msg The message containing the new types
+     */
+    public static void receive(SSyncSweaterTypeMessage msg) {
+        INSTANCE.sweaterTypes.clear();
+        INSTANCE.sweaterTypes.putAll(Arrays.stream(msg.getSweaterTypes()).collect(Collectors.toMap(SweaterType::getRegistryName, sweaterType -> sweaterType)));
+        System.out.println("Received sweater types: " + INSTANCE.sweaterTypes);
+    }
+
+    /**
+     * Receives the backpack types from the server.
+     *
+     * @param msg The message containing the new types
+     */
+    public static void receive(SSyncBackpackTypeMessage msg) {
+        INSTANCE.backpackTypes.clear();
+        INSTANCE.backpackTypes.putAll(Arrays.stream(msg.getBackpackTypes()).collect(Collectors.toMap(BackpackType::getRegistryName, backpackType -> backpackType)));
+        System.out.println("Received backpack types: " + INSTANCE.backpackTypes);
+    }
+
     @Override
     public SlabfishType getSlabfishType(ResourceLocation registryName) {
         return this.slabfishTypes.getOrDefault(registryName, DEFAULT_SLABFISH);
@@ -108,37 +140,5 @@ public final class ClientSlabfishManager implements SlabfishManager {
     @Override
     public BackpackType[] getAllBackpackTypes() {
         return this.backpackTypes.values().toArray(new BackpackType[0]);
-    }
-
-    /**
-     * Receives the slabfish types from the server.
-     *
-     * @param msg The message containing the new types
-     */
-    public static void receive(SSyncSlabfishTypeMessage msg) {
-        INSTANCE.slabfishTypes.clear();
-        INSTANCE.slabfishTypes.putAll(Arrays.stream(msg.getSlabfishTypes()).collect(Collectors.toMap(SlabfishType::getRegistryName, slabfishType -> slabfishType)));
-    }
-
-    /**
-     * Receives the sweater types from the server.
-     *
-     * @param msg The message containing the new types
-     */
-    public static void receive(SSyncSweaterTypeMessage msg) {
-        INSTANCE.sweaterTypes.clear();
-        INSTANCE.sweaterTypes.putAll(Arrays.stream(msg.getSweaterTypes()).collect(Collectors.toMap(SweaterType::getRegistryName, sweaterType -> sweaterType)));
-        System.out.println("Received sweater types: " + INSTANCE.sweaterTypes);
-    }
-
-    /**
-     * Receives the backpack types from the server.
-     *
-     * @param msg The message containing the new types
-     */
-    public static void receive(SSyncBackpackTypeMessage msg) {
-        INSTANCE.backpackTypes.clear();
-        INSTANCE.backpackTypes.putAll(Arrays.stream(msg.getBackpackTypes()).collect(Collectors.toMap(BackpackType::getRegistryName, backpackType -> backpackType)));
-        System.out.println("Received backpack types: " + INSTANCE.backpackTypes);
     }
 }

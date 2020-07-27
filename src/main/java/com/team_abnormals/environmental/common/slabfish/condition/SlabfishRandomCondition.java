@@ -9,25 +9,11 @@ import com.google.gson.JsonSyntaxException;
  *
  * @author Ocelot
  */
-public class SlabfishRandomCondition implements SlabfishCondition
-{
+public class SlabfishRandomCondition implements SlabfishCondition {
     private final float chance;
 
-    private SlabfishRandomCondition(float chance)
-    {
+    private SlabfishRandomCondition(float chance) {
         this.chance = chance;
-    }
-
-    @Override
-    public SlabfishConditionType getType()
-    {
-        return SlabfishConditionType.RANDOM;
-    }
-
-    @Override
-    public boolean test(SlabfishConditionContext context)
-    {
-        return context.getRandom().nextFloat() <= this.chance;
     }
 
     /**
@@ -38,10 +24,19 @@ public class SlabfishRandomCondition implements SlabfishCondition
      * @return A new slabfish condition from that json
      */
     @SuppressWarnings("unused")
-    public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context)
-    {
-        if(!json.has("chance"))
+    public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context) {
+        if (!json.has("chance"))
             throw new JsonSyntaxException("'chance' must be present.");
         return new SlabfishRandomCondition(json.get("chance").getAsFloat());
+    }
+
+    @Override
+    public SlabfishConditionType getType() {
+        return SlabfishConditionType.RANDOM;
+    }
+
+    @Override
+    public boolean test(SlabfishConditionContext context) {
+        return context.getRandom().nextFloat() <= this.chance;
     }
 }

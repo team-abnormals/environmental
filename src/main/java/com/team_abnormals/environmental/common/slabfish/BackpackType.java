@@ -25,86 +25,16 @@ import java.util.function.Predicate;
  *
  * @author Ocelot
  */
-public class BackpackType implements Predicate<ItemStack>
-{
-    private ResourceLocation registryName;
-    private ITextComponent displayName;
+public class BackpackType implements Predicate<ItemStack> {
     private final Ingredient ingredient;
+    private ResourceLocation registryName;
     @OnlyIn(Dist.CLIENT)
     private final LazyValue<ResourceLocation> textureLocation = new LazyValue<>(() -> new ResourceLocation(this.getRegistryName().getNamespace(), "textures/entity/slabfish/backpacks/backpack_" + this.getRegistryName().getPath() + ".png"));
+    private ITextComponent displayName;
 
-    public BackpackType(@Nullable ITextComponent displayName, @Nullable Ingredient ingredient)
-    {
+    public BackpackType(@Nullable ITextComponent displayName, @Nullable Ingredient ingredient) {
         this.displayName = displayName;
         this.ingredient = ingredient;
-    }
-
-    @Override
-    public boolean test(ItemStack stack)
-    {
-        return this.ingredient != null && this.ingredient.test(stack);
-    }
-
-    /**
-     * @return The registry name of this backpack
-     */
-    public ResourceLocation getRegistryName()
-    {
-        return registryName;
-    }
-
-    /**
-     * @return The display name to use when showing this type
-     */
-    public ITextComponent getDisplayName()
-    {
-        return displayName;
-    }
-
-    /**
-     * @return The location of the texture for this backpack
-     */
-    @OnlyIn(Dist.CLIENT)
-    public ResourceLocation getTextureLocation()
-    {
-        return this.textureLocation.getValue();
-    }
-
-    /**
-     * Sets the registry name of this backpack type.
-     *
-     * @param registryName The new registry name for this backpack
-     */
-    BackpackType setRegistryName(ResourceLocation registryName)
-    {
-        this.registryName = registryName;
-        if (this.displayName == null)
-            this.displayName = new StringTextComponent(registryName.toString());
-        return this;
-    }
-
-    /**
-     * Writes this {@link BackpackType} into the specified {@link PacketBuffer} for syncing with clients.
-     *
-     * @param buf The buffer to write into
-     */
-    public void writeTo(PacketBuffer buf)
-    {
-        buf.writeResourceLocation(this.registryName);
-        buf.writeTextComponent(this.displayName);
-        buf.writeBoolean(this.ingredient != null);
-        if(this.ingredient != null)
-        this.ingredient.write(buf);
-    }
-
-    @Override
-    public String toString()
-    {
-        return "BackpackType{" +
-                "registryName=" + registryName +
-                ", displayName=" + displayName.getString() +
-                ", ingredient=" + (ingredient == null ? null : Arrays.toString(ingredient.getMatchingStacks())) +
-                '}';
     }
 
     /**
@@ -114,12 +44,72 @@ public class BackpackType implements Predicate<ItemStack>
      * @return A new backpack type created from the data in the buffer
      */
     @OnlyIn(Dist.CLIENT)
-    public static BackpackType readFrom(PacketBuffer buf)
-    {
+    public static BackpackType readFrom(PacketBuffer buf) {
         ResourceLocation registryName = buf.readResourceLocation();
         ITextComponent displayName = buf.readTextComponent();
         Ingredient ingredient = buf.readBoolean() ? Ingredient.read(buf) : null;
         return new BackpackType(displayName, ingredient).setRegistryName(registryName);
+    }
+
+    @Override
+    public boolean test(ItemStack stack) {
+        return this.ingredient != null && this.ingredient.test(stack);
+    }
+
+    /**
+     * @return The registry name of this backpack
+     */
+    public ResourceLocation getRegistryName() {
+        return registryName;
+    }
+
+    /**
+     * Sets the registry name of this backpack type.
+     *
+     * @param registryName The new registry name for this backpack
+     */
+    BackpackType setRegistryName(ResourceLocation registryName) {
+        this.registryName = registryName;
+        if (this.displayName == null)
+            this.displayName = new StringTextComponent(registryName.toString());
+        return this;
+    }
+
+    /**
+     * @return The display name to use when showing this type
+     */
+    public ITextComponent getDisplayName() {
+        return displayName;
+    }
+
+    /**
+     * @return The location of the texture for this backpack
+     */
+    @OnlyIn(Dist.CLIENT)
+    public ResourceLocation getTextureLocation() {
+        return this.textureLocation.getValue();
+    }
+
+    /**
+     * Writes this {@link BackpackType} into the specified {@link PacketBuffer} for syncing with clients.
+     *
+     * @param buf The buffer to write into
+     */
+    public void writeTo(PacketBuffer buf) {
+        buf.writeResourceLocation(this.registryName);
+        buf.writeTextComponent(this.displayName);
+        buf.writeBoolean(this.ingredient != null);
+        if (this.ingredient != null)
+            this.ingredient.write(buf);
+    }
+
+    @Override
+    public String toString() {
+        return "BackpackType{" +
+                "registryName=" + registryName +
+                ", displayName=" + displayName.getString() +
+                ", ingredient=" + (ingredient == null ? null : Arrays.toString(ingredient.getMatchingStacks())) +
+                '}';
     }
 
     /**
@@ -127,11 +117,9 @@ public class BackpackType implements Predicate<ItemStack>
      *
      * @author Ocelot
      */
-    public static class Deserializer implements JsonDeserializer<BackpackType>
-    {
+    public static class Deserializer implements JsonDeserializer<BackpackType> {
         @Override
-        public BackpackType deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException
-        {
+        public BackpackType deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException {
             JsonObject jsonObject = json.getAsJsonObject();
             if (jsonObject.has("item") && jsonObject.has("tag"))
                 throw new JsonSyntaxException("Either 'item' or 'tag' can be present");

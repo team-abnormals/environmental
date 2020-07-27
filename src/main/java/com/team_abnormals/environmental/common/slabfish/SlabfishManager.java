@@ -41,6 +41,26 @@ public interface SlabfishManager {
     ResourceLocation GHOST = new ResourceLocation(Environmental.MODID, "ghost");
 
     /**
+     * Fetches the slabfish manager for the specified side.
+     *
+     * @param side The logical side to get the slabfish manager for
+     * @return The slabfish manager for that side
+     */
+    static SlabfishManager get(LogicalSide side) {
+        return side.isClient() ? ClientSlabfishManager.INSTANCE : SlabfishLoader.instance;
+    }
+
+    /**
+     * Same as {@link #get(LogicalSide)} but provides ease of access by using a world instead of {@link LogicalSide}.
+     *
+     * @param world The world to get the logical side from
+     * @return The slabfish manager for that side
+     */
+    static SlabfishManager get(IWorldReader world) {
+        return world.isRemote() ? ClientSlabfishManager.INSTANCE : SlabfishLoader.instance;
+    }
+
+    /**
      * Checks the slabfish types for a slabfish of the specified name.
      *
      * @param registryName The name of the slabfish to search for
@@ -154,24 +174,4 @@ public interface SlabfishManager {
      * @return All registered backpack types
      */
     BackpackType[] getAllBackpackTypes();
-
-    /**
-     * Fetches the slabfish manager for the specified side.
-     *
-     * @param side The logical side to get the slabfish manager for
-     * @return The slabfish manager for that side
-     */
-    static SlabfishManager get(LogicalSide side) {
-        return side.isClient() ? ClientSlabfishManager.INSTANCE : SlabfishLoader.instance;
-    }
-
-    /**
-     * Same as {@link #get(LogicalSide)} but provides ease of access by using a world instead of {@link LogicalSide}.
-     *
-     * @param world The world to get the logical side from
-     * @return The slabfish manager for that side
-     */
-    static SlabfishManager get(IWorldReader world) {
-        return world.isRemote() ? ClientSlabfishManager.INSTANCE : SlabfishLoader.instance;
-    }
 }
