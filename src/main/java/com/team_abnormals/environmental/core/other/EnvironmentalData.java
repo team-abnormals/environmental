@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import com.team_abnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.team_abnormals.environmental.core.registry.EnvironmentalItems;
-import com.teamabnormals.abnormals_core.core.utils.DataUtils;
+import com.minecraftabnormals.abnormals_core.core.utils.DataUtils;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;

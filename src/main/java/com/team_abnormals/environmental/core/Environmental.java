@@ -7,7 +7,7 @@ import com.team_abnormals.environmental.common.slabfish.SlabfishLoader;
 import com.team_abnormals.environmental.core.other.EnvironmentalCompat;
 import com.team_abnormals.environmental.core.other.EnvironmentalData;
 import com.team_abnormals.environmental.core.registry.*;
-import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
+import com.minecraftabnormals.abnormals_core.core.utils.RegistryHelper;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.item.ItemGroup;
@@ -34,7 +34,7 @@ import net.minecraftforge.fml.network.simple.SimpleChannel;
 
 import java.lang.reflect.Array;
 
-import static com.teamabnormals.abnormals_core.core.AbnormalsCore.NETWORK_PROTOCOL;
+import static com.minecraftabnormals.abnormals_core.core.AbnormalsCore.NETWORK_PROTOCOL;
 
 @SuppressWarnings("deprecation")
 @Mod(Environmental.MODID)

@@ -5,7 +5,7 @@ import com.team_abnormals.environmental.client.render.SlabfishRenderer;
 import com.team_abnormals.environmental.common.entity.DuckEntity;
 import com.team_abnormals.environmental.common.entity.SlabfishEntity;
 import com.team_abnormals.environmental.core.Environmental;
-import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
+import com.minecraftabnormals.abnormals_core.core.utils.RegistryHelper;
 
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
