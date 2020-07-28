@@ -73,7 +73,7 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.16.1-32.0.75'
+    minecraft 'net.minecraftforge:forge:1.16.1-32.0.88'
     implementation fg.deobf("curse.maven:abnormals-core:2989106")
     
     compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
