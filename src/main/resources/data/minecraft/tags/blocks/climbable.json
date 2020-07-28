@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "environmental:ice_chain",
+    "environmental:willow_ladder",
+    "environmental:cherry_ladder",
+    "environmental:wisteria_ladder"
+  ]
+}

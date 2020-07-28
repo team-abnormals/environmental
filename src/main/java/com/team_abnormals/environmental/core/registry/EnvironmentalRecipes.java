@@ -15,8 +15,7 @@ public class EnvironmentalRecipes {
     public static class Serailizers {
         public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, Environmental.MODID);
         public static final RegistryObject<IRecipeSerializer<BakingRecipe>> BAKING = RECIPE_SERIALIZERS.register("baking", () -> new BakingRecipe.Serializer());
-        public static final RegistryObject<IRecipeSerializer<SawingRecipe>> SAWING = RECIPE_SERIALIZERS.register("sawing", () -> new SingleItemRecipe.Serializer<SawingRecipe>(SawingRecipe::new) {
-        });
+        public static final RegistryObject<IRecipeSerializer<SawingRecipe>> SAWING = RECIPE_SERIALIZERS.register("sawing", () -> new SingleItemRecipe.Serializer<SawingRecipe>(SawingRecipe::new){});
     }
 
     public static class RecipeTypes {
