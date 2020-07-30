@@ -27,12 +27,12 @@ public class EnvironmentalConfig {
             giantMushroomsInSwamps = builder
                     .comment("If Giant Mushrooms generate in Swamps, for bedrock parity; Default: True")
                     .translation(makeTranslation("giantMushroomsInSwamps"))
-                    .define("giantMushroomsInSwamps", false);
+                    .define("giantMushroomsInSwamps", true);
 
             giantTallGrass = builder
                     .comment("If Giant Tall Grass generates; Default: True")
                     .translation(makeTranslation("giantTallGrass"))
-                    .define("giantTallGrass", false);
+                    .define("giantTallGrass", true);
 
             builder.pop();
         }
