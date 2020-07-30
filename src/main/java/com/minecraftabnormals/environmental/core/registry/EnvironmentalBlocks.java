@@ -18,6 +18,7 @@ import com.minecraftabnormals.environmental.common.block.SawmillBlock;
 import com.minecraftabnormals.environmental.common.block.SlabfishEffigyBlock;
 import com.minecraftabnormals.environmental.common.block.WisteriaLeavesBlock;
 import com.minecraftabnormals.environmental.common.block.fluid.MudFluidBlock;
+import com.minecraftabnormals.environmental.common.world.gen.feature.trees.CherryTree;
 import com.minecraftabnormals.environmental.common.world.gen.feature.trees.WillowTree;
 import com.minecraftabnormals.environmental.common.world.gen.feature.trees.WisteriaTree;
 import com.minecraftabnormals.environmental.common.world.gen.util.WisteriaColor;
@@ -162,7 +163,7 @@ public class EnvironmentalBlocks {
     public static final Pair<RegistryObject<AbnormalsStandingSignBlock>, RegistryObject<AbnormalsWallSignBlock>> CHERRY_SIGNS = HELPER.createSignBlock("cherry", MaterialColor.RED);
 
     public static final RegistryObject<Block> CHERRY_LEAVES = HELPER.createBlock("cherry_leaves", () -> new AbnormalsLeavesBlock(EnvironmentalProperties.CHERRY_LEAVES), ItemGroup.DECORATIONS);
-    public static final RegistryObject<Block> CHERRY_SAPLING = HELPER.createBlock("cherry_sapling", () -> new AbnormalsSaplingBlock(new WillowTree(), EnvironmentalProperties.CHERRY_SAPLING), ItemGroup.DECORATIONS);
+    public static final RegistryObject<Block> CHERRY_SAPLING = HELPER.createBlock("cherry_sapling", () -> new AbnormalsSaplingBlock(new CherryTree(), EnvironmentalProperties.CHERRY_SAPLING), ItemGroup.DECORATIONS);
     public static final RegistryObject<Block> POTTED_CHERRY_SAPLING = HELPER.createBlockNoItem("potted_cherry_sapling", () -> new FlowerPotBlock(EnvironmentalBlocks.CHERRY_SAPLING.get(), EnvironmentalProperties.FLOWER_POT));
 
     public static final RegistryObject<Block> VERTICAL_CHERRY_PLANKS = HELPER.createCompatBlock("quark", "vertical_cherry_planks", () -> new Block(EnvironmentalProperties.CHERRY_PLANKS), ItemGroup.BUILDING_BLOCKS);

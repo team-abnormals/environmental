@@ -23,19 +23,16 @@ public class WisteriaTree extends Tree {
         switch (color) {
             case PURPLE:
             default:
-                return beehive ? EnvironmentalFeatureConfigs.PURPLE_WISTERIA_MORE_BEEHIVES_CONFIG : EnvironmentalFeatureConfigs.PURPLE_WISTERIA_CONFIG;
+                return beehive ? EnvironmentalFeatureConfigs.PURPLE_WISTERIA_TREE_WITH_MORE_BEEHIVES_CONFIG : EnvironmentalFeatureConfigs.PURPLE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG;
             case WHITE:
-                return beehive ? EnvironmentalFeatureConfigs.WHITE_WISTERIA_MORE_BEEHIVES_CONFIG : EnvironmentalFeatureConfigs.WHITE_WISTERIA_CONFIG;
+                return beehive ? EnvironmentalFeatureConfigs.WHITE_WISTERIA_TREE_WITH_MORE_BEEHIVES_CONFIG : EnvironmentalFeatureConfigs.WHITE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG;
             case PINK:
-                return beehive ? EnvironmentalFeatureConfigs.PINK_WISTERIA_MORE_BEEHIVES_CONFIG : EnvironmentalFeatureConfigs.PINK_WISTERIA_CONFIG;
+                return beehive ? EnvironmentalFeatureConfigs.PINK_WISTERIA_TREE_WITH_MORE_BEEHIVES_CONFIG : EnvironmentalFeatureConfigs.PINK_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG;
             case BLUE:
-                return beehive ? EnvironmentalFeatureConfigs.BLUE_WISTERIA_MORE_BEEHIVES_CONFIG : EnvironmentalFeatureConfigs.BLUE_WISTERIA_CONFIG;
+                return beehive ? EnvironmentalFeatureConfigs.BLUE_WISTERIA_TREE_WITH_MORE_BEEHIVES_CONFIG : EnvironmentalFeatureConfigs.BLUE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG;
         }
     }
 
-    /**
-     * Get a {@link net.minecraft.world.gen.feature.ConfiguredFeature} of tree
-     */
     @Nullable
     protected ConfiguredFeature<BaseTreeFeatureConfig, ?> getTreeFeature(Random randomIn, boolean beehive) {
         return randomIn.nextInt(10) == 0 ? EnvironmentalFeatures.BIG_WISTERIA_TREE.withConfiguration(setConfigByColor(color, beehive)) : EnvironmentalFeatures.WISTERIA_TREE.withConfiguration(setConfigByColor(color, beehive));
