@@ -22,10 +22,15 @@ public class EnvironmentalItems {
     public static final RegistryHelper HELPER = Environmental.REGISTRY_HELPER;
 
     public static final RegistryObject<Item> THIEF_HOOD			 = HELPER.createItem("thief_hood", () -> new ThiefHoodItem(new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
+    public static final RegistryObject<Item> FOOL_WINGS		 	 = HELPER.createItem("fool_wings", () -> new ConstructorBeltItem(new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
     public static final RegistryObject<Item> CONSTRUCTOR_BELT 	 = HELPER.createItem("constructor_belt", () -> new ConstructorBeltItem(new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
     public static final RegistryObject<Item> WANDERER_BOOTS		 = HELPER.createItem("wanderer_boots", () -> new WandererBootsItem(new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
     public static final RegistryObject<Item> EXECUTIONER_CLEAVER = HELPER.createItem("executioner_cleaver", () -> new ExecutionerCleaverItem(EnvironmentalItemTier.EXECUTIONER, 6.5f, -3.1F, new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
 
+    public static final RegistryObject<Item> CHERRIES	= HELPER.createItem("cherries", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).food(EnvironmentalFoods.CHERRIES)));
+    public static final RegistryObject<Item> CHERRY_PIE = HELPER.createItem("cherry_pie", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).food(EnvironmentalFoods.CHERRY_PIE)));
+    public static final RegistryObject<Item> APPLE_PIE 	= HELPER.createItem("apple_pie", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).food(EnvironmentalFoods.APPLE_PIE)));
+    
     public static final RegistryObject<Item> MUD_BALL 		= HELPER.createItem("mud_ball", () -> new MudBallItem(new Item.Properties().group(ItemGroup.MATERIALS)));
     public static final RegistryObject<Item> MUD_BRICK 		= HELPER.createItem("mud_brick", () -> new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
     public static final RegistryObject<Item> MUD_BUCKET 	= HELPER.createItem("mud_bucket", () -> new BucketItem(EnvironmentalFluids.MUD, new Item.Properties().containerItem(Items.BUCKET).maxStackSize(1)));

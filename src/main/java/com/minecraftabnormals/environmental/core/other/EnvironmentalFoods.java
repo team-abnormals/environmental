@@ -8,7 +8,10 @@ import net.minecraft.potion.Effects;
 public class EnvironmentalFoods {
 
     // saturation value = (hunger * saturation * 2)
-
+    public static final Food CHERRIES = new Food.Builder().hunger(4).saturation(0.5F).build(); //0.5
+    public static final Food CHERRY_PIE = new Food.Builder().hunger(4).saturation(0.5F).build(); //0.5
+    public static final Food APPLE_PIE = new Food.Builder().hunger(4).saturation(0.5F).build(); //0.5
+	
     public static final Food RICE_BALL = new Food.Builder().hunger(4).saturation(0.5F).build(); //0.5
 
     public static final Food COD_KELP_ROLL = new Food.Builder().hunger(3).saturation(0.7F).fastToEat().build(); //0.70
