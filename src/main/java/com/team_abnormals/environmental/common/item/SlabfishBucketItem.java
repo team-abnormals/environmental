@@ -5,7 +5,7 @@ import com.team_abnormals.environmental.common.slabfish.BackpackType;
 import com.team_abnormals.environmental.common.slabfish.SlabfishManager;
 import com.team_abnormals.environmental.common.slabfish.SlabfishType;
 import com.team_abnormals.environmental.common.slabfish.SweaterType;
-import com.minecraftabnormals.abnormals_core.core.utils.ItemStackUtils;
+import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;

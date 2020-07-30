@@ -5,7 +5,7 @@ import com.team_abnormals.environmental.client.render.SlabfishRenderer;
 import com.team_abnormals.environmental.common.entity.DuckEntity;
 import com.team_abnormals.environmental.common.entity.SlabfishEntity;
 import com.team_abnormals.environmental.core.Environmental;
-import com.minecraftabnormals.abnormals_core.core.utils.RegistryHelper;
+import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
 
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
@@ -39,7 +39,7 @@ public class EnvironmentalEntities {
         //RenderingRegistry.registerEntityRenderingHandler((EntityType<? extends AxolotlEntity>)AXOLOTL.get(), AxolotlRenderer::new);
     }
 
-    public static void addEntitySpawns() {
+    public static void registerSpawns() {
         ForgeRegistries.BIOMES.getValues().stream().forEach(EnvironmentalEntities::processSpawning);
 
         EntitySpawnPlacementRegistry.register(EnvironmentalEntities.SLABFISH.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canAnimalSpawn);
@@ -52,7 +52,7 @@ public class EnvironmentalEntities {
         }
     }
 
-    public static void setupAttributes() {
+    public static void registerAttributes() {
         GlobalEntityTypeAttributes.put(SLABFISH.get(), SlabfishEntity.registerAttributes().create());
         GlobalEntityTypeAttributes.put(DUCK.get(), ChickenEntity.func_234187_eI_().create());
     }

@@ -1,16 +1,16 @@
 modLoader="javafml"
 loaderVersion="[32,)"
-logoFile="logo.png"
-authors="Farcr, Bagel, and Jackson"
-credits="hatsondogs, Five, Echolite, Ocelot"
+issueTrackerURL="https://github.com/minecraftabnormals/Environmental/issues"
+license="https://github.com/minecraftabnormals/Environmental/blob/master/LICENSE.txt"
 
 [[mods]]
     modId="environmental"
     version="${file.jarVersion}"
+    logoFile="logo.png"
+	authors="Farcr, Bagel, and Jackson"
+	credits="hatsondogs, Five, Echolite, Ocelot"
     displayName="Environmental"
-    description='''
-    Expanding the environment. New wood, new blocks, new friends.
-    '''
+    description='''Expanding the environment. New wood, new blocks, new friends.'''
 
 [[dependencies.environmental]]
     modId="forge"
@@ -29,6 +29,6 @@ credits="hatsondogs, Five, Echolite, Ocelot"
 [[dependencies.environmental]]
     modId="abnormals_core"
     mandatory=true
-    versionRange="[2.1.0,)"
+    versionRange="[2.0.1,)"
     ordering="AFTER"
     side="BOTH"

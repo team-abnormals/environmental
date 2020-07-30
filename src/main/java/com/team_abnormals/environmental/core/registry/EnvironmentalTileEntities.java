@@ -3,7 +3,7 @@ package com.team_abnormals.environmental.core.registry;
 import com.team_abnormals.environmental.common.tile.KilnTileEntity;
 import com.team_abnormals.environmental.common.tile.SlabfishEffigyTileEntity;
 import com.team_abnormals.environmental.core.Environmental;
-import com.minecraftabnormals.abnormals_core.core.utils.RegistryHelper;
+import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;

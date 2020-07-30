@@ -4,8 +4,8 @@ import com.team_abnormals.environmental.common.item.*;
 import com.team_abnormals.environmental.core.Environmental;
 import com.team_abnormals.environmental.core.other.EnvironmentalFoods;
 import com.team_abnormals.environmental.core.other.EnvironmentalItemTier;
-import com.minecraftabnormals.abnormals_core.common.items.AbnormalsMusicDiscItem;
-import com.minecraftabnormals.abnormals_core.core.utils.RegistryHelper;
+import com.teamabnormals.abnormals_core.common.items.AbnormalsMusicDiscItem;
+import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
@@ -60,7 +60,4 @@ public class EnvironmentalItems {
     public static final RegistryObject<Item> DUCK_SPAWN_EGG = HELPER.createSpawnEggItem("duck", () -> EnvironmentalEntities.DUCK.get(), 1138489, 16754947);
 
 //	public static final RegistryObject<Item> AXOLOTL_SPAWN_EGG = HELPER.createSpawnEggItem("axolotl", () -> EnvironmentalEntities.AXOLOTL.get(), 6263617, 13940616);
-
-    public static void setupProperties() {
-    }
 }

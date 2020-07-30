@@ -2,7 +2,7 @@ package com.team_abnormals.environmental.common.block;
 
 import com.team_abnormals.environmental.core.other.EnvironmentalTags;
 import com.team_abnormals.environmental.core.registry.EnvironmentalBlocks;
-import com.minecraftabnormals.abnormals_core.core.utils.ItemStackUtils;
+import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
 import net.minecraft.block.*;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;

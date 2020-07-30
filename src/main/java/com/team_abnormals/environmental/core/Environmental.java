@@ -1,16 +1,32 @@
 package com.team_abnormals.environmental.core;
 
+import static com.teamabnormals.abnormals_core.core.AbnormalsCore.NETWORK_PROTOCOL;
+
 import com.team_abnormals.environmental.client.gui.screen.inventory.KilnScreen;
 import com.team_abnormals.environmental.client.gui.screen.inventory.SawmillScreen;
-import com.team_abnormals.environmental.common.network.message.*;
+import com.team_abnormals.environmental.common.network.message.CAcknowledgeEnvironmentalMessage;
+import com.team_abnormals.environmental.common.network.message.EnvironmentalLoginMessage;
+import com.team_abnormals.environmental.common.network.message.SOpenSlabfishInventoryMessage;
+import com.team_abnormals.environmental.common.network.message.SSyncBackpackTypeMessage;
+import com.team_abnormals.environmental.common.network.message.SSyncSlabfishTypeMessage;
+import com.team_abnormals.environmental.common.network.message.SSyncSweaterTypeMessage;
 import com.team_abnormals.environmental.common.slabfish.SlabfishLoader;
+import com.team_abnormals.environmental.core.other.EnvironmentalClient;
 import com.team_abnormals.environmental.core.other.EnvironmentalCompat;
 import com.team_abnormals.environmental.core.other.EnvironmentalData;
-import com.team_abnormals.environmental.core.registry.*;
-import com.minecraftabnormals.abnormals_core.core.utils.RegistryHelper;
+import com.team_abnormals.environmental.core.registry.EnvironmentalBiomes;
+import com.team_abnormals.environmental.core.registry.EnvironmentalBlocks;
+import com.team_abnormals.environmental.core.registry.EnvironmentalContainerTypes;
+import com.team_abnormals.environmental.core.registry.EnvironmentalEnchantments;
+import com.team_abnormals.environmental.core.registry.EnvironmentalEntities;
+import com.team_abnormals.environmental.core.registry.EnvironmentalFeatures;
+import com.team_abnormals.environmental.core.registry.EnvironmentalFluids;
+import com.team_abnormals.environmental.core.registry.EnvironmentalParticles;
+import com.team_abnormals.environmental.core.registry.EnvironmentalRecipes;
+import com.team_abnormals.environmental.core.registry.EnvironmentalVillagers;
+import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
+
 import net.minecraft.client.gui.ScreenManager;
-import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -31,10 +47,6 @@ import net.minecraftforge.fml.network.FMLHandshakeHandler;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
-
-import java.lang.reflect.Array;
-
-import static com.minecraftabnormals.abnormals_core.core.AbnormalsCore.NETWORK_PROTOCOL;
 
 @SuppressWarnings("deprecation")
 @Mod(Environmental.MODID)
@@ -84,17 +96,17 @@ public class Environmental
 
         MinecraftForge.EVENT_BUS.register(this);
 
-        modEventBus.addListener((ModConfig.ModConfigEvent event) ->
+        modEventBus.addListener((ModConfig.ModConfigEvent event) -> 
         {
             final ModConfig config = event.getConfig();
-            if (config.getSpec() == EnvironmentalConfig.COMMON_SPEC)
+            if (config.getSpec() == EnvironmentalConfig.COMMON_SPEC) 
             {
                 EnvironmentalConfig.ValuesHolder.updateCommonValuesFromConfig(config);
             }
         });
 
         modEventBus.addListener(this::setupCommon);
-        DistExecutor.runWhenOn(Dist.CLIENT, () -> () ->
+        DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> 
         {
             modEventBus.addListener(this::setupClient);
             modEventBus.addListener(this::registerItemColors);
@@ -103,13 +115,17 @@ public class Environmental
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, EnvironmentalConfig.COMMON_SPEC);
     }
 
-    private void setupCommon(final FMLCommonSetupEvent event) {
-    	DeferredWorkQueue.runLater(() -> {
-    		REGISTRY_HELPER.processSpawnEggDispenseBehaviors();
-    		EnvironmentalData.registerCompostables();
-    		EnvironmentalData.registerFlammables();
+    private void setupCommon(final FMLCommonSetupEvent event) 
+    {
+    	DeferredWorkQueue.runLater(() -> 
+    	{
+    		EnvironmentalCompat.registerCompostables();
+    		EnvironmentalCompat.registerFlammables();
+            EnvironmentalCompat.registerDispenserBehaviors();
+
             EnvironmentalData.registerDataSerializers();
-    		
+    		EnvironmentalEnchantments.addEnchantmentsToItemGroups();
+            
     		EnvironmentalBiomes.addBiomeTypes();
     		EnvironmentalBiomes.registerBiomesToDictionary();
     		EnvironmentalFeatures.generateFeatures();
@@ -117,13 +133,8 @@ public class Environmental
     		EnvironmentalVillagers.registerVillagerTypes();
     		EnvironmentalVillagers.registerPOIs();
     		
-    		EnvironmentalEntities.addEntitySpawns();
-    		EnvironmentalEntities.setupAttributes();
-
-            EnvironmentalCompat.setupVanilla();
-
-            ItemGroup.COMBAT.setRelevantEnchantmentTypes(add(ItemGroup.COMBAT.getRelevantEnchantmentTypes(), EnvironmentalEnchantments.CONSTRUCTOR_BELT));
-            ItemGroup.COMBAT.setRelevantEnchantmentTypes(add(ItemGroup.COMBAT.getRelevantEnchantmentTypes(), EnvironmentalEnchantments.WANDERER_BOOTS));
+    		EnvironmentalEntities.registerSpawns();
+    		EnvironmentalEntities.registerAttributes();
         });
     }
 
@@ -132,9 +143,8 @@ public class Environmental
         EnvironmentalEntities.registerRendering();
         DeferredWorkQueue.runLater(() ->
         {
-            EnvironmentalData.setRenderLayers();
-            EnvironmentalData.registerBlockColors();
-            EnvironmentalItems.setupProperties();
+            EnvironmentalClient.setRenderLayers();
+            EnvironmentalClient.registerBlockColors();
             ScreenManager.registerFactory(EnvironmentalContainerTypes.KILN.get(), KilnScreen::new);
             ScreenManager.registerFactory(EnvironmentalContainerTypes.SAWMILL.get(), SawmillScreen::new);
         });
@@ -210,18 +220,5 @@ public class Environmental
     public void onEvent(AddReloadListenerEvent event)
     {
         event.addListener(new SlabfishLoader());
-    }
-
-    /**
-     * @author SmellyModder(Luke Tonon)
-     */
-    public static EnchantmentType[] add(EnchantmentType[] array, EnchantmentType element)
-    {
-        EnchantmentType[] newArray = array;
-        int arrayLength = Array.getLength(newArray);
-        Object newArrayObject = Array.newInstance(newArray.getClass().getComponentType(), arrayLength + 1);
-        System.arraycopy(array, 0, newArrayObject, 0, arrayLength);
-        newArray[newArray.length - 1] = element;
-        return newArray;
     }
 }

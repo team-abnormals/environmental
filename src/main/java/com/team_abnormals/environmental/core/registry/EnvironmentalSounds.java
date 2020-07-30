@@ -1,7 +1,7 @@
 package com.team_abnormals.environmental.core.registry;
 
 import com.team_abnormals.environmental.core.Environmental;
-import com.minecraftabnormals.abnormals_core.core.utils.RegistryHelper;
+import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;

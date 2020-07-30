@@ -2,7 +2,7 @@ package com.team_abnormals.environmental.core.other;
 
 import com.team_abnormals.environmental.common.entity.util.SlabfishNearbyCriteriaTrigger;
 import com.team_abnormals.environmental.core.Environmental;
-import com.minecraftabnormals.abnormals_core.common.advancement.EmptyTrigger;
+import com.teamabnormals.abnormals_core.common.advancement.EmptyTrigger;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
