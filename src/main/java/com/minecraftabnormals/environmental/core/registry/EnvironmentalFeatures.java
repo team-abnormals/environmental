@@ -21,9 +21,12 @@ import net.minecraftforge.registries.ForgeRegistries;
 @Mod.EventBusSubscriber(modid = Environmental.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class EnvironmentalFeatures {
     public static final Feature<BlockClusterFeatureConfig> DIRECTIONAL_FLOWER = new DirectionalFlowersFeature<BlockClusterFeatureConfig>(BlockClusterFeatureConfig.field_236587_a_);
+    public static final Feature<NoFeatureConfig> FALLEN_LEAVES = new FallenLeavesFeature(NoFeatureConfig.field_236558_a_);
+
     public static final Feature<NoFeatureConfig> CATTAILS = new CattailsFeature(NoFeatureConfig.field_236558_a_);
     public static final Feature<NoFeatureConfig> DENSE_CATTAILS = new DenseCattailsFeature(NoFeatureConfig.field_236558_a_);
     public static final Feature<NoFeatureConfig> RICE = new RiceFeature(NoFeatureConfig.field_236558_a_);
+    
     public static final Feature<BaseTreeFeatureConfig> WISTERIA_TREE = new WisteriaTreeFeature(BaseTreeFeatureConfig.CODEC_BASE_TREE_FEATURE_CONFIG);
     public static final Feature<BaseTreeFeatureConfig> BIG_WISTERIA_TREE = new BigWisteriaTreeFeature(BaseTreeFeatureConfig.CODEC_BASE_TREE_FEATURE_CONFIG);
 
@@ -31,9 +34,12 @@ public class EnvironmentalFeatures {
     public static void registerFeatures(RegistryEvent.Register<Feature<?>> event) {
         event.getRegistry().registerAll(
                 DIRECTIONAL_FLOWER.setRegistryName(Environmental.MODID, "directional_flower"),
+                FALLEN_LEAVES.setRegistryName(Environmental.MODID, "fallen_leaves"),
+
                 CATTAILS.setRegistryName(Environmental.MODID, "cattails"),
                 DENSE_CATTAILS.setRegistryName(Environmental.MODID, "dense_cattails"),
                 RICE.setRegistryName(Environmental.MODID, "rice"),
+                
                 WISTERIA_TREE.setRegistryName(Environmental.MODID, "wisteria_tree"),
                 BIG_WISTERIA_TREE.setRegistryName(Environmental.MODID, "big_wisteria_tree"));
     }

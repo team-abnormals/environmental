@@ -242,6 +242,8 @@
 	"block.environmental.large_lily_pad": "Large Lily Pad",
 	"block.environmental.giant_lily_pad": "Giant Lily pad",
 	
+	"block.environmental.cherry_crate": "Cherry Crate",
+	
 	"block.environmental.rice_sack": "Rice Sack",
 	"block.environmental.rice": "Rice",
 	"block.environmental.tall_rice": "Rice",
@@ -256,6 +258,7 @@
 	
 	"item.environmental.wanderer_boots": "Wanderer's Boots",
 	"item.environmental.constructor_belt": "Constructor's Belt",
+	"item.environmental.fool_wings": "Fool's Wings",
 	"item.environmental.thief_hood": "Thief's Hood",
 	"item.environmental.executioner_cleaver": "Executioner's Cleaver",
 
@@ -295,6 +298,10 @@
 	"item.environmental.mud_brick": "Mud Brick",
 	"item.environmental.mud_bucket": "Mud Bucket",
 	
+	"item.environmental.cherries": "Cherries",
+	"item.environmental.cherry_pie": "Cherry Pie",
+	"item.environmental.apple_pie": "Apple Pie",
+	
 	"item.environmental.willow_boat": "Willow Boat",
 	"item.environmental.cherry_boat": "Cherry Boat",
 	"item.environmental.wisteria_boat": "Wisteria Boat",
@@ -316,6 +323,7 @@
 	"biome.environmental.marsh": "Marsh",
 	"biome.environmental.mushroom_marsh": "Mushroom Marsh",
 	"biome.environmental.mire": "Mire",
+	"biome.environmental.cherry_blossom_forest": "Cherry Blossom Forest",
 	
 	"container.kiln": "Kiln",
 	"container.sawmill": "Sawmill",
@@ -400,6 +408,7 @@
 	"entity.environmental.slabfish.bmo": "BMO",
 	"entity.environmental.slabfish.ocelot": "WALL-E",
 	"entity.environmental.slabfish.eve": "EVE",
+	"entity.environmental.slabfish.cherry": "Cherry",
 	
 	"entity.environmental.slabfish.backpack.white": "White Backpack",
 	"entity.environmental.slabfish.backpack.orange": "Orange Backpack",
