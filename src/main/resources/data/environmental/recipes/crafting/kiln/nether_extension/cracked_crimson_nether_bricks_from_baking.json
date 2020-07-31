@@ -1,9 +1,9 @@
 {
   "type": "environmental:baking",
   "ingredient": {
-    "item": "red_nether_bricks"
+    "item": "minecraft:red_nether_bricks"
   },
-  "result": "nether_extension:cracked_red_nether_bricks",
+  "result": "nether_extension:cracked_crimson_nether_bricks",
   "experience": 0.1,
   "cookingtime": 100,
   "conditions":[
