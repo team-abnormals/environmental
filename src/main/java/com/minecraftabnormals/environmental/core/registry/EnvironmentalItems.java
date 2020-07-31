@@ -1,28 +1,37 @@
 package com.minecraftabnormals.environmental.core.registry;
 
-import com.minecraftabnormals.environmental.common.item.*;
+import com.minecraftabnormals.environmental.common.item.ConstructorBeltItem;
+import com.minecraftabnormals.environmental.common.item.DuckweedItem;
+import com.minecraftabnormals.environmental.common.item.ExecutionerCleaverItem;
+import com.minecraftabnormals.environmental.common.item.FoolWingsItem;
+import com.minecraftabnormals.environmental.common.item.MudBallItem;
+import com.minecraftabnormals.environmental.common.item.SlabfishBucketItem;
+import com.minecraftabnormals.environmental.common.item.ThiefHoodItem;
+import com.minecraftabnormals.environmental.common.item.WandererBootsItem;
 import com.minecraftabnormals.environmental.core.Environmental;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalFoods;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalItemTier;
 import com.teamabnormals.abnormals_core.common.items.AbnormalsMusicDiscItem;
 import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
+
 import net.minecraft.fluid.Fluids;
-import net.minecraft.item.*;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.event.ModelBakeEvent;
-import net.minecraftforge.common.util.Constants;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.BlockNamedItem;
+import net.minecraft.item.BucketItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.Items;
+import net.minecraft.item.Rarity;
+import net.minecraft.item.SoupItem;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 
-@SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = Environmental.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class EnvironmentalItems {
     public static final RegistryHelper HELPER = Environmental.REGISTRY_HELPER;
 
     public static final RegistryObject<Item> THIEF_HOOD			 = HELPER.createItem("thief_hood", () -> new ThiefHoodItem(new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
-    public static final RegistryObject<Item> FOOL_WINGS		 	 = HELPER.createItem("fool_wings", () -> new ConstructorBeltItem(new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
+    public static final RegistryObject<Item> FOOL_WINGS		 	 = HELPER.createItem("fool_wings", () -> new FoolWingsItem(new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
     public static final RegistryObject<Item> CONSTRUCTOR_BELT 	 = HELPER.createItem("constructor_belt", () -> new ConstructorBeltItem(new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
     public static final RegistryObject<Item> WANDERER_BOOTS		 = HELPER.createItem("wanderer_boots", () -> new WandererBootsItem(new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
     public static final RegistryObject<Item> EXECUTIONER_CLEAVER = HELPER.createItem("executioner_cleaver", () -> new ExecutionerCleaverItem(EnvironmentalItemTier.EXECUTIONER, 6.5f, -3.1F, new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
