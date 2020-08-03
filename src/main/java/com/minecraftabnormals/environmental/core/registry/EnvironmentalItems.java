@@ -1,6 +1,6 @@
 package com.minecraftabnormals.environmental.core.registry;
 
-import com.minecraftabnormals.environmental.common.item.ConstructorBeltItem;
+import com.minecraftabnormals.environmental.common.item.ArchitectBeltItem;
 import com.minecraftabnormals.environmental.common.item.DuckweedItem;
 import com.minecraftabnormals.environmental.common.item.ExecutionerCleaverItem;
 import com.minecraftabnormals.environmental.common.item.FoolWingsItem;
@@ -32,7 +32,7 @@ public class EnvironmentalItems {
 
     public static final RegistryObject<Item> THIEF_HOOD			 = HELPER.createItem("thief_hood", () -> new ThiefHoodItem(new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
     public static final RegistryObject<Item> FOOL_WINGS		 	 = HELPER.createItem("fool_wings", () -> new FoolWingsItem(new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
-    public static final RegistryObject<Item> CONSTRUCTOR_BELT 	 = HELPER.createItem("constructor_belt", () -> new ConstructorBeltItem(new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
+    public static final RegistryObject<Item> CONSTRUCTOR_BELT 	 = HELPER.createItem("architect_belt", () -> new ArchitectBeltItem(new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
     public static final RegistryObject<Item> WANDERER_BOOTS		 = HELPER.createItem("wanderer_boots", () -> new WandererBootsItem(new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
     public static final RegistryObject<Item> EXECUTIONER_CLEAVER = HELPER.createItem("executioner_cleaver", () -> new ExecutionerCleaverItem(EnvironmentalItemTier.EXECUTIONER, 6.5f, -3.1F, new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
 

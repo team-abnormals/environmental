@@ -4,10 +4,15 @@ import java.util.UUID;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableMultimap.Builder;
-import com.minecraftabnormals.environmental.core.registry.EnvironmentalEnchantments;
 import com.google.common.collect.Multimap;
+import com.minecraftabnormals.environmental.client.model.ArchitectBeltModel;
+import com.minecraftabnormals.environmental.core.Environmental;
+import com.minecraftabnormals.environmental.core.registry.EnvironmentalEnchantments;
 
+import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -16,22 +21,22 @@ import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ForgeMod;
 
-public class ConstructorBeltItem extends ArmorItem {
+public class ArchitectBeltItem extends ArmorItem {
 
-	public ConstructorBeltItem(Properties properties) {
+	public ArchitectBeltItem(Properties properties) {
 		super(ArmorMaterial.LEATHER, EquipmentSlotType.LEGS, properties);
 	}
 
-//	@SuppressWarnings({ "rawtypes", "unchecked" })
-//	@Override
-//	public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack stack, EquipmentSlotType armorSlot, A _default) {
-//		return (A) new WandererBootsModel(1.0F);
-//	}
-
-//	@Override
-//	public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type) {
-//		return Environmental.MODID + ":textures/models/armor/constructor_belt.png";
-//	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack stack, EquipmentSlotType armorSlot, A _default) {
+		return (A) new ArchitectBeltModel(1.0F);
+	}
+	
+	@Override
+	public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type) {
+		return Environmental.MODID + ":textures/models/armor/architect_belt.png";
+	}
 
 	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType slot, ItemStack stack) {
 		Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();

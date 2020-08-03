@@ -36,11 +36,11 @@ public class ThiefHoodModel<T extends LivingEntity> extends BipedModel<T> {
 
 		this.rightArm = new ModelRenderer(this);
 		this.rightArm.setRotationPoint(-5.0F, 0.0F, 0.0F);
-		this.rightArm.setTextureOffset(0, 19).addBox(-3.0F, -3.0F, -2.5F, 5.0F, 8.0F, 5.0F, -0.1F, false);
+		this.rightArm.setTextureOffset(0, 19).addBox(-3.5F, -3.0F, -2.5F, 5.0F, 8.0F, 5.0F, -0.1F, false);
 
 		this.leftArm = new ModelRenderer(this);
 		this.leftArm.setRotationPoint(5.0F, 0.0F, 0.0F);
-		this.leftArm.setTextureOffset(0, 19).addBox(-2.0F, -3.0F, -2.5F, 5.0F, 8.0F, 5.0F, -0.1F, true);
+		this.leftArm.setTextureOffset(0, 19).addBox(-1.5F, -3.0F, -2.5F, 5.0F, 8.0F, 5.0F, -0.1F, true);
     }
 
 	@Override
