@@ -30,11 +30,11 @@ public class ArchitectBeltModel<T extends LivingEntity> extends BipedModel<T> {
 
 		this.rightKnee = new ModelRenderer(this);
 		this.rightKnee.setRotationPoint(-2.0F, 12.0F, 0.0F);
-		this.rightKnee.setTextureOffset(28, 0).addBox(-2.5F, 2.0F, -2.5F, 5.0F, 5.0F, 5.0F, -0.2F, false);
+		this.rightKnee.setTextureOffset(28, 0).addBox(-2.5F, 1.5F, -2.5F, 5.0F, 5.0F, 5.0F, -0.2F, false);
 
 		this.leftKnee = new ModelRenderer(this);
 		this.leftKnee.setRotationPoint(2.0F, 12.0F, 0.0F);
-		this.leftKnee.setTextureOffset(28, 0).addBox(-2.5F, 2.0F, -2.5F, 5.0F, 5.0F, 5.0F, -0.2F, true);
+		this.leftKnee.setTextureOffset(28, 0).addBox(-2.5F, 1.5F, -2.5F, 5.0F, 5.0F, 5.0F, -0.2F, true);
     }
 
 	@Override
@@ -43,13 +43,11 @@ public class ArchitectBeltModel<T extends LivingEntity> extends BipedModel<T> {
 		this.rightKnee.copyModelAngles(this.bipedRightLeg);
 		this.leftKnee.copyModelAngles(this.bipedLeftLeg);
 		
-		matrixStack.push();
-		matrixStack.scale(0.95F, 1.0F, 0.95F);
-		this.belt.render(matrixStack, buffer, packedLight, packedOverlay);
-		matrixStack.pop();
-		
 		this.rightKnee.render(matrixStack, buffer, packedLight, packedOverlay);
 		this.leftKnee.render(matrixStack, buffer, packedLight, packedOverlay);
+		
+		matrixStack.scale(0.95F, 1.0F, 0.95F);
+		this.belt.render(matrixStack, buffer, packedLight, packedOverlay);
 	}
 
 	public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {

@@ -51,8 +51,8 @@ public class FoolWingsModel<T extends LivingEntity> extends BipedModel<T> {
 
 	@Override
 	public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
-		rightWing.copyModelAngles(bipedBody);
-		leftWing.copyModelAngles(bipedBody);
+//		rightWing.copyModelAngles(bipedBody);
+//		leftWing.copyModelAngles(bipedBody);
 		
 		rightWing.render(matrixStack, buffer, packedLight, packedOverlay);
 		leftWing.render(matrixStack, buffer, packedLight, packedOverlay);
