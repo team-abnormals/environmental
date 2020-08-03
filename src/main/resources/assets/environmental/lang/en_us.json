@@ -7,9 +7,12 @@
 	"block.environmental.mud_brick_stairs": "Mud Brick Stairs",
 	"block.environmental.mud_brick_wall": "Mud Brick Wall",
 	"block.environmental.mud_brick_vertical_slab": "Mud Brick Vertical Slab",
+	"block.environmental.chiseled_mud_bricks": "Chiseled Mud Bricks",
 	
 	"block.environmental.slabfish_effigy": "Slabfish Effigy",
 	"block.environmental.mud": "Mud",
+	
+	"block.environmental.chiseled_bricks": "Chiseled Bricks",
 	
 	"block.environmental.ice_bricks": "Ice Bricks",
 	"block.environmental.ice_brick_slab": "Ice Brick Slab",
@@ -204,6 +207,24 @@
 	"block.environmental.green_terracotta_brick_wall": "Green Terracotta Brick Wall",
 	"block.environmental.red_terracotta_brick_wall": "Red Terracotta Brick Wall",
 	"block.environmental.black_terracotta_brick_wall": "Black Terracotta Brick Wall",
+	
+	"block.environmental.chiseled_terracotta_bricks": "Chiseled Terracotta Bricks",	
+	"block.environmental.chiseled_white_terracotta_bricks": "Chiseled White Terracotta Bricks",
+	"block.environmental.chiseled_orange_terracotta_bricks": "Chiseled Orange Terracotta Bricks",
+	"block.environmental.chiseled_magenta_terracotta_bricks": "Chiseled Magenta Terracotta Bricks",
+	"block.environmental.chiseled_light_blue_terracotta_bricks": "Chiseled Light Blue Terracotta Bricks",
+	"block.environmental.chiseled_yellow_terracotta_bricks": "Chiseled Yellow Terracotta Bricks",
+	"block.environmental.chiseled_lime_terracotta_bricks": "Chiseled Lime Terracotta Bricks",
+	"block.environmental.chiseled_pink_terracotta_bricks": "Chiseled Pink Terracotta Bricks",
+	"block.environmental.chiseled_gray_terracotta_bricks": "Chiseled Gray Terracotta Bricks",
+	"block.environmental.chiseled_light_gray_terracotta_bricks": "Chiseled Light Gray Terracotta Bricks",
+	"block.environmental.chiseled_cyan_terracotta_bricks": "Chiseled Cyan Terracotta Bricks",
+	"block.environmental.chiseled_purple_terracotta_bricks": "Chiseled Purple Terracotta Bricks",
+	"block.environmental.chiseled_blue_terracotta_bricks": "Chiseled Blue Terracotta Bricks",
+	"block.environmental.chiseled_brown_terracotta_bricks": "Chiseled Brown Terracotta Bricks",
+	"block.environmental.chiseled_green_terracotta_bricks": "Chiseled Green Terracotta Bricks",
+	"block.environmental.chiseled_red_terracotta_bricks": "Chiseled Red Terracotta Bricks",
+	"block.environmental.chiseled_black_terracotta_bricks": "Chiseled Black Terracotta Bricks",
 	
 	"block.environmental.cattail_sprouts": "Cattail Sprouts",
 	"block.environmental.cattail": "Cattail",
