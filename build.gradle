@@ -21,7 +21,7 @@ version = '1.0.0'
 group = 'com.minecraftabnormals'
 archivesBaseName = 'Environmental-1.16.1'
 
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
 minecraft {
     mappings channel: 'snapshot', version: '20200723-1.16.1'
@@ -70,6 +70,20 @@ repositories {
 		name = "ModMaven"
 		url = "https://modmaven.k-4u.nl"
 	}
+}
+
+jar {
+    manifest {
+        attributes([
+          "Specification-Title": "Environmental",
+            "Specification-Vendor": "Team Abnormals",
+            "Specification-Version": "1",
+            "Implementation-Title": project.name,
+            "Implementation-Version": "${version}",
+            "Implementation-Vendor": "Team Abnormals",
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
 }
 
 dependencies {
