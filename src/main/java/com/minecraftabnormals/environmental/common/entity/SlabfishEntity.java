@@ -1,5 +1,12 @@
 package com.minecraftabnormals.environmental.common.entity;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import javax.annotation.Nullable;
+
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.minecraftabnormals.environmental.common.entity.goals.SlabbyBreedGoal;
@@ -24,16 +31,29 @@ import com.minecraftabnormals.environmental.core.registry.EnvironmentalEntities;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalSounds;
 import com.teamabnormals.abnormals_core.core.library.api.IBucketableEntity;
-import com.teamabnormals.abnormals_core.core.library.endimator.Endimation;
-import com.teamabnormals.abnormals_core.core.library.endimator.entity.IEndimatedEntity;
+
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.*;
+import net.minecraft.entity.AgeableEntity;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntitySize;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ILivingEntityData;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.Pose;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.ai.goal.LookRandomlyGoal;
+import net.minecraft.entity.ai.goal.RandomWalkingGoal;
+import net.minecraft.entity.ai.goal.SitGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.item.BoatEntity;
 import net.minecraft.entity.item.ItemEntity;
@@ -44,7 +64,13 @@ import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.IInventoryChangedListener;
 import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.*;
+import net.minecraft.item.DyeColor;
+import net.minecraft.item.EggItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.item.NameTagItem;
+import net.minecraft.item.SpawnEggItem;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
@@ -59,7 +85,16 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityPredicates;
+import net.minecraft.util.Hand;
+import net.minecraft.util.IItemProvider;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
+import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
@@ -73,13 +108,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import javax.annotation.Nullable;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-public class SlabfishEntity extends TameableEntity implements IInventoryChangedListener, IBucketableEntity, IEndimatedEntity {
+public class SlabfishEntity extends TameableEntity implements IInventoryChangedListener, IBucketableEntity {
 
     private static final DataParameter<ResourceLocation> SLABFISH_TYPE = EntityDataManager.createKey(SlabfishEntity.class, EnvironmentalData.RESOURCE_LOCATION);
     private static final DataParameter<Integer> SLABFISH_OVERLAY = EntityDataManager.createKey(SlabfishEntity.class, DataSerializers.VARINT);
@@ -101,10 +130,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
             ForgeRegistries.ITEMS.getValue(new ResourceLocation("endergetic", "bolloom_fruit")),
             Items.CHORUS_FRUIT
     );
-
-    private Endimation playingEndimation = BLANK_ANIMATION;
-    public static final Endimation DANCE = new Endimation(Environmental.REGISTRY_HELPER.prefix("slabfish_dancing"), 40);
-
+    
     public SlabfishInventory slabfishBackpack;
     public boolean backpackFull;
     public int playersUsing;
@@ -114,7 +140,6 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
     public float oFlapSpeed;
     public float oFlap;
     public float wingRotDelta = 1.0F;
-    private int animationTick;
     public boolean isPartying = false;
     BlockPos jukeboxPosition;
 
@@ -917,30 +942,5 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
     @Override
     public ItemStack getBucket() {
         return new ItemStack(EnvironmentalItems.SLABFISH_BUCKET.get());
-    }
-
-    @Override
-    public int getAnimationTick() {
-        return animationTick;
-    }
-
-    @Override
-    public Endimation[] getEndimations() {
-        return new Endimation[]{DANCE};
-    }
-
-    @Override
-    public Endimation getPlayingEndimation() {
-        return this.playingEndimation;
-    }
-
-    @Override
-    public void setAnimationTick(int animationTick) {
-        this.animationTick = animationTick;
-    }
-
-    @Override
-    public void setPlayingEndimation(Endimation playingEndimation) {
-        this.playingEndimation = playingEndimation;
     }
 }

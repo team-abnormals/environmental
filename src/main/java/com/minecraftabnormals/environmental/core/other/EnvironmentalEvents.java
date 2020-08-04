@@ -200,33 +200,7 @@ public class EnvironmentalEvents {
         }
         //}
     }
-
-    @SubscribeEvent
-    public static void underWaterHoe(UseHoeEvent event) {
-        ItemStack hoe = event.getContext().getItem();
-
-        //if (event.getResult() == Result.ALLOW) {
-        World world = event.getContext().getWorld();
-        BlockPos blockpos = event.getContext().getPos();
-        if (event.getContext().getFace() != Direction.DOWN) {
-            BlockState blockstate = HOE_LOOKUP.get(world.getBlockState(blockpos).getBlock());
-            if (blockstate != null) {
-                PlayerEntity playerentity = event.getPlayer();
-                world.playSound(playerentity, blockpos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                playerentity.swingArm(event.getContext().getHand());
-                if (!world.isRemote) {
-                    world.setBlockState(blockpos, blockstate, 11);
-                    if (playerentity != null) {
-                        hoe.damageItem(1, playerentity, (anim) -> {
-                            anim.sendBreakAnimation(event.getContext().getHand());
-                        });
-                    }
-                }
-            }
-        }
-        //}
-    }
-
+    
     @SubscribeEvent
     public static void rightClickBlock(RightClickBlock event) {
         World world = event.getWorld();

@@ -46,8 +46,10 @@ public class ArchitectBeltModel<T extends LivingEntity> extends BipedModel<T> {
 		this.rightKnee.render(matrixStack, buffer, packedLight, packedOverlay);
 		this.leftKnee.render(matrixStack, buffer, packedLight, packedOverlay);
 		
+		matrixStack.push();
 		matrixStack.scale(0.95F, 1.0F, 0.95F);
 		this.belt.render(matrixStack, buffer, packedLight, packedOverlay);
+		matrixStack.pop();
 	}
 
 	public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {

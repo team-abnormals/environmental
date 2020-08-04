@@ -50,7 +50,6 @@ public class ThiefHoodModel<T extends LivingEntity> extends BipedModel<T> {
 		this.leftArm.copyModelAngles(this.bipedLeftArm);
 		this.body.copyModelAngles(this.bipedBody);
 		
-		
 		this.head.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
 		this.body.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
 		this.leftArm.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
