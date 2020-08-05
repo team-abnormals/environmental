@@ -1,7 +1,7 @@
 {
   "rarity": "rare",
   "displayName": {
-    "translate": "entity.environmental.slabfish.jungle"
+    "translate": "entity.environmental.slabfish.type.jungle"
   },
   "conditions": [
     {

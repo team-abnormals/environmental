@@ -29,7 +29,7 @@ public class SweaterType implements Predicate<ItemStack> {
     private final Ingredient ingredient;
     private ResourceLocation registryName;
     @OnlyIn(Dist.CLIENT)
-    private final LazyValue<ResourceLocation> textureLocation = new LazyValue<>(() -> new ResourceLocation(this.getRegistryName().getNamespace(), "textures/entity/slabfish/sweaters/sweater_" + this.getRegistryName().getPath() + ".png"));
+    private final LazyValue<ResourceLocation> textureLocation = new LazyValue<>(() -> new ResourceLocation(this.getRegistryName().getNamespace(), "textures/entity/slabfish/sweater/" + this.getRegistryName().getPath() + ".png"));
     private ITextComponent displayName;
 
     public SweaterType(@Nullable ITextComponent displayName, Ingredient ingredient) {

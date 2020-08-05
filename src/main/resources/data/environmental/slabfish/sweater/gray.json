@@ -1,6 +1,6 @@
 {
   "displayName": {
-    "translate": "entity.environmental.slabfish.sweater.gray"
+    "translate": "entity.environmental.slabfish.type.sweater.gray"
   },
   "item": "minecraft:gray_wool"
 }

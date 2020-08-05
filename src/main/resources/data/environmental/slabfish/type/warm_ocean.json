@@ -2,7 +2,7 @@
   "rarity": "uncommon",
   "priority": 1,
   "displayName": {
-    "translate": "entity.environmental.slabfish.warm_ocean"
+    "translate": "entity.environmental.slabfish.type.warm_ocean"
   },
   "conditions": [
     {

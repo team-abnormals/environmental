@@ -1,7 +1,7 @@
 {
   "rarity": "epic",
   "displayName": {
-    "translate": "entity.environmental.slabfish.dunes"
+    "translate": "entity.environmental.slabfish.type.dunes"
   },
   "mod": "atmospheric",
   "conditions": [

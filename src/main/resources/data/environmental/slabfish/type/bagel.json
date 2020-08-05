@@ -2,7 +2,7 @@
   "rarity": "uncommon",
   "priority": 10,
   "displayName": {
-    "translate": "entity.environmental.slabfish.bagel"
+    "translate": "entity.environmental.slabfish.type.bagel"
   },
   "tradable": false,
   "conditions": [

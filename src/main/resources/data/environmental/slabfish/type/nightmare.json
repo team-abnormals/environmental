@@ -2,7 +2,7 @@
   "rarity": "epic",
   "priority": 2,
   "displayName": {
-    "translate": "entity.environmental.slabfish.nightmare"
+    "translate": "entity.environmental.slabfish.type.nightmare"
   },
   "conditions": [
     {

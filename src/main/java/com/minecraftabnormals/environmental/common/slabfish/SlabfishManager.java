@@ -24,7 +24,7 @@ public interface SlabfishManager {
     /**
      * The default slabfish that exists if there are no other slabfish types to choose from.
      */
-    SlabfishType DEFAULT_SLABFISH = new SlabfishType(SlabfishRarity.COMMON, new TranslationTextComponent("entity." + Environmental.MODID + ".slabfish.swamp"), null, false, true, true, -1, new SlabfishCondition[0]).setRegistryName(new ResourceLocation(Environmental.MODID, "swamp"));
+    SlabfishType DEFAULT_SLABFISH = new SlabfishType(SlabfishRarity.COMMON, new TranslationTextComponent("entity." + Environmental.MODID + ".slabfish.type.swamp"), null, false, true, true, -1, new SlabfishCondition[0]).setRegistryName(new ResourceLocation(Environmental.MODID, "swamp"));
 
     /**
      * The default sweater that exists if there are no other sweater types to choose from.

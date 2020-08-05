@@ -2,7 +2,7 @@
   "rarity": "epic",
   "priority": 1,
   "displayName": {
-    "translate": "entity.environmental.slabfish.soul_sand_valley"
+    "translate": "entity.environmental.slabfish.type.soul_sand_valley"
   },
   "conditions": [
     {

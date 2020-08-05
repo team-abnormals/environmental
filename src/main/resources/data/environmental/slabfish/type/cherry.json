@@ -2,7 +2,7 @@
   "rarity": "rare",
   "priority": 1,
   "displayName": {
-    "translate": "entity.environmental.slabfish.cherry"
+    "translate": "entity.environmental.slabfish.type.cherry"
   },
   "conditions": [
     {
