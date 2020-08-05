@@ -96,15 +96,6 @@ public class Environmental
 
         MinecraftForge.EVENT_BUS.register(this);
 
-        modEventBus.addListener((ModConfig.ModConfigEvent event) -> 
-        {
-            final ModConfig config = event.getConfig();
-            if (config.getSpec() == EnvironmentalConfig.COMMON_SPEC) 
-            {
-                EnvironmentalConfig.ValuesHolder.updateCommonValuesFromConfig(config);
-            }
-        });
-
         modEventBus.addListener(this::setupCommon);
         DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> 
         {
