@@ -2,7 +2,7 @@
   "rarity": "uncommon",
   "priority": 10,
   "displayName": {
-    "translate": "entity.environmental.slabfish.mista_jub"
+    "translate": "entity.environmental.slabfish.type.mista_jub"
   },
   "tradable": false,
   "conditions": [

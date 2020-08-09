@@ -4,6 +4,7 @@ import com.minecraftabnormals.environmental.common.world.biome.CherryBlossomFore
 import com.minecraftabnormals.environmental.common.world.biome.MarshBiome;
 import com.minecraftabnormals.environmental.common.world.biome.MushroomMarshBiome;
 import com.minecraftabnormals.environmental.core.Environmental;
+import com.minecraftabnormals.environmental.core.EnvironmentalConfig;
 
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
@@ -20,8 +21,9 @@ public class EnvironmentalBiomes {
     public static final RegistryObject<Biome> CHERRY_BLOSSOM_FOREST = BIOMES.register("cherry_blossom_forest", () -> new CherryBlossomForestBiome());
     
     public static void registerBiomesToDictionary() {
-        BiomeManager.addBiome(BiomeManager.BiomeType.WARM, new BiomeManager.BiomeEntry(MARSH.get(), 6));
-        BiomeManager.addBiome(BiomeManager.BiomeType.WARM, new BiomeManager.BiomeEntry(CHERRY_BLOSSOM_FOREST.get(), 4));
+        BiomeManager.addBiome(BiomeManager.BiomeType.WARM, new BiomeManager.BiomeEntry(MARSH.get(), EnvironmentalConfig.COMMON.marshWeight.get()));
+        BiomeManager.addBiome(BiomeManager.BiomeType.WARM, new BiomeManager.BiomeEntry(MUSHROOM_MARSH.get(), EnvironmentalConfig.COMMON.mushroomMarshWeight.get()));
+        BiomeManager.addBiome(BiomeManager.BiomeType.WARM, new BiomeManager.BiomeEntry(CHERRY_BLOSSOM_FOREST.get(), EnvironmentalConfig.COMMON.cherryBlossomForestWeight.get()));
     }
 
     public static void addBiomeTypes() {

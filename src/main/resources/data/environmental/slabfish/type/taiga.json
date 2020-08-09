@@ -1,7 +1,7 @@
 {
   "rarity": "uncommon",
   "displayName": {
-    "translate": "entity.environmental.slabfish.taiga"
+    "translate": "entity.environmental.slabfish.type.taiga"
   },
   "conditions": [
     {

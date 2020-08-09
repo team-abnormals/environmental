@@ -2,7 +2,7 @@
   "rarity": "uncommon",
   "priority": 10,
   "displayName": {
-    "translate": "entity.environmental.slabfish.squart"
+    "translate": "entity.environmental.slabfish.type.squart"
   },
   "tradable": false,
   "conditions": [

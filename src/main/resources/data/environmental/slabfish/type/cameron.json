@@ -2,7 +2,7 @@
   "rarity": "uncommon",
   "priority": 10,
   "displayName": {
-    "translate": "entity.environmental.slabfish.cameron"
+    "translate": "entity.environmental.slabfish.type.cameron"
   },
   "tradable": false,
   "conditions": [

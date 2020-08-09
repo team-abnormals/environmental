@@ -2,7 +2,7 @@
   "rarity": "uncommon",
   "priority": 10,
   "displayName": {
-    "translate": "entity.environmental.slabfish.gore"
+    "translate": "entity.environmental.slabfish.type.gore"
   },
   "customBackpack": "environmental:gore",
   "tradable": false,

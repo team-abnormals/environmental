@@ -1,7 +1,7 @@
 {
   "rarity": "uncommon",
   "displayName": {
-    "translate": "entity.environmental.slabfish.beach"
+    "translate": "entity.environmental.slabfish.type.beach"
   },
   "conditions": [
     {

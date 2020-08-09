@@ -2,7 +2,7 @@
   "rarity": "uncommon",
   "priority": 10,
   "displayName": {
-    "translate": "entity.environmental.slabfish.bmo"
+    "translate": "entity.environmental.slabfish.type.bmo"
   },
   "tradable": false,
   "conditions": [

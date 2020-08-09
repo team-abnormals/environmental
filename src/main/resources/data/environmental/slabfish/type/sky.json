@@ -2,7 +2,7 @@
   "rarity": "legendary",
   "priority": 2,
   "displayName": {
-    "translate": "entity.environmental.slabfish.sky"
+    "translate": "entity.environmental.slabfish.type.sky"
   },
   "conditions": [
     {

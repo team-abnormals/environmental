@@ -2,7 +2,7 @@
   "rarity": "rare",
   "priority": 1,
   "displayName": {
-    "translate": "entity.environmental.slabfish.flower_forest"
+    "translate": "entity.environmental.slabfish.type.flower_forest"
   },
   "conditions": [
     {

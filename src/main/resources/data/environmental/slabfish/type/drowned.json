@@ -2,7 +2,7 @@
   "rarity": "epic",
   "priority": 2,
   "displayName": {
-    "translate": "entity.environmental.slabfish.drowned"
+    "translate": "entity.environmental.slabfish.type.drowned"
   },
   "conditions": [
     {

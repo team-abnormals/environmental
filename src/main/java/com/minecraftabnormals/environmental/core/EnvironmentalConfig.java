@@ -1,13 +1,10 @@
 package com.minecraftabnormals.environmental.core;
 
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
-import net.minecraftforge.fml.config.ModConfig;
 import org.apache.commons.lang3.tuple.Pair;
 
-/**
- * @author SmellyModder(Luke Tonon)
- */
+import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
+
 public class EnvironmentalConfig {
 
     public static class Common {
@@ -15,24 +12,48 @@ public class EnvironmentalConfig {
         public final ConfigValue<Boolean> giantMushroomsInSwamps;
         public final ConfigValue<Boolean> giantTallGrass;
 
+        public final ConfigValue<Integer> marshWeight;
+        public final ConfigValue<Integer> mushroomMarshWeight;
+        public final ConfigValue<Integer> cherryBlossomForestWeight;
+
         Common(ForgeConfigSpec.Builder builder) {
-            builder.comment("Common Config")
-                    .push("common");
+            builder.comment("Biome Weight Config")
+            .push("biomes");
+
+            marshWeight = builder
+                    .comment("The weight of Marsh biomes; Default: 6")
+                    .translation(makeTranslation("marshWeight"))
+                    .define("Marsh weight", 6);
+            
+            mushroomMarshWeight = builder
+                    .comment("The weight of Mushroom Marsh biomes; Default: 0")
+                    .translation(makeTranslation("marshWeight"))
+                    .define("Mushroom Marsh weight", 0);
+
+            cherryBlossomForestWeight = builder
+                    .comment("The weight of Cherry Blossom Forest biomes; Default: 4")
+                    .translation(makeTranslation("cherryBlossomForestWeight"))
+                    .define("Cherry Blossom Forest weight", 4);
+
+            builder.pop();
+            
+            builder.comment("Feature Generation Config")
+                    .push("features");
 
             generateExternalWisterias = builder
                     .comment("If Wisteria Trees generate outside of Flower Forests; Default: False")
                     .translation(makeTranslation("generateExternalWisterias"))
-                    .define("generateExternalWisterias", false);
+                    .define("Wisteria Tree generation out of Flower Forests", false);
 
             giantMushroomsInSwamps = builder
                     .comment("If Giant Mushrooms generate in Swamps, for bedrock parity; Default: True")
                     .translation(makeTranslation("giantMushroomsInSwamps"))
-                    .define("giantMushroomsInSwamps", true);
+                    .define("Giant Mushroom generation in Swamps", true);
 
             giantTallGrass = builder
                     .comment("If Giant Tall Grass generates; Default: True")
                     .translation(makeTranslation("giantTallGrass"))
-                    .define("giantTallGrass", true);
+                    .define("Giant Tall Grass generation", true);
 
             builder.pop();
         }
@@ -50,29 +71,4 @@ public class EnvironmentalConfig {
         COMMON_SPEC = specPair.getRight();
         COMMON = specPair.getLeft();
     }
-
-    public static class ValuesHolder {
-        private static boolean generateExternalWisterias;
-        private static boolean giantMushroomsInSwamps;
-        private static boolean giantTallGrass;
-
-        public static void updateCommonValuesFromConfig(ModConfig config) {
-            generateExternalWisterias = EnvironmentalConfig.COMMON.generateExternalWisterias.get();
-            giantMushroomsInSwamps = EnvironmentalConfig.COMMON.giantMushroomsInSwamps.get();
-            giantTallGrass = EnvironmentalConfig.COMMON.giantTallGrass.get();
-        }
-
-        public static boolean generateExternalWisterias() {
-            return generateExternalWisterias;
-        }
-
-        public static boolean giantMushroomsInSwamps() {
-            return giantMushroomsInSwamps;
-        }
-
-        public static boolean giantTallGrass() {
-            return giantTallGrass;
-        }
-    }
-
 }

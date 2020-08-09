@@ -2,7 +2,7 @@
   "rarity": "epic",
   "priority": 2,
   "displayName": {
-    "translate": "entity.environmental.slabfish.totem"
+    "translate": "entity.environmental.slabfish.type.totem"
   },
   "conditions": [
     {

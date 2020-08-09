@@ -49,7 +49,7 @@ public class EnvironmentalFeatures {
     }
 
     public static void generate(Biome biome) {
-        boolean wisterias = EnvironmentalConfig.ValuesHolder.generateExternalWisterias();
+        boolean wisterias = EnvironmentalConfig.COMMON.generateExternalWisterias.get();
 
         if (biome.getCategory() == Biome.Category.MUSHROOM) {
         	EnvironmentalBiomeFeatures.addMyceliumSprouts(biome);

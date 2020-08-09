@@ -29,7 +29,7 @@ public class BackpackType implements Predicate<ItemStack> {
     private final Ingredient ingredient;
     private ResourceLocation registryName;
     @OnlyIn(Dist.CLIENT)
-    private final LazyValue<ResourceLocation> textureLocation = new LazyValue<>(() -> new ResourceLocation(this.getRegistryName().getNamespace(), "textures/entity/slabfish/backpacks/backpack_" + this.getRegistryName().getPath() + ".png"));
+    private final LazyValue<ResourceLocation> textureLocation = new LazyValue<>(() -> new ResourceLocation(this.getRegistryName().getNamespace(), "textures/entity/slabfish/backpack/" + this.getRegistryName().getPath() + ".png"));
     private ITextComponent displayName;
 
     public BackpackType(@Nullable ITextComponent displayName, @Nullable Ingredient ingredient) {

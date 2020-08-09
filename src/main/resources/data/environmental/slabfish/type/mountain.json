@@ -1,7 +1,7 @@
 {
   "rarity": "uncommon",
   "displayName": {
-    "translate": "entity.environmental.slabfish.mountain"
+    "translate": "entity.environmental.slabfish.type.mountain"
   },
   "conditions": [
     {

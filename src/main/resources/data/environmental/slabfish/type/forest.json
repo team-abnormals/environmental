@@ -1,7 +1,7 @@
 {
   "rarity": "uncommon",
   "displayName": {
-    "translate": "entity.environmental.slabfish.forest"
+    "translate": "entity.environmental.slabfish.type.forest"
   },
   "conditions": [
     {

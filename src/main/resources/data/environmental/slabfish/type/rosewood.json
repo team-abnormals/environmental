@@ -1,7 +1,7 @@
 {
   "rarity": "epic",
   "displayName": {
-    "translate": "entity.environmental.slabfish.rosewood"
+    "translate": "entity.environmental.slabfish.type.rosewood"
   },
   "mod": "atmospheric",
   "conditions": [
