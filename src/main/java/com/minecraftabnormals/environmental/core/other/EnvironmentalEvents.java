@@ -30,6 +30,7 @@ import net.minecraft.entity.monster.HuskEntity;
 import net.minecraft.entity.monster.SkeletonEntity;
 import net.minecraft.entity.monster.StrayEntity;
 import net.minecraft.entity.monster.ZombieEntity;
+import net.minecraft.entity.passive.MooshroomEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PotionEntity;
 import net.minecraft.entity.projectile.ProjectileItemEntity;
@@ -96,9 +97,13 @@ public class EnvironmentalEvents {
     }
 
     @SubscribeEvent
-    public static void replaceHuskAndStraySpawns(LivingSpawnEvent.CheckSpawn event) {
+    public static void livingSpawnEvent(LivingSpawnEvent.CheckSpawn event) {
         Entity entity = event.getEntity();
-        if (event.getSpawnReason() == SpawnReason.NATURAL && entity.getPosY() > 60 && entity.getType() == EntityType.ZOMBIE) {
+        boolean naturalSpawn = event.getSpawnReason() == SpawnReason.NATURAL;
+        boolean chunkGenSpawn = event.getSpawnReason() == SpawnReason.CHUNK_GENERATION;
+        boolean validSpawn = naturalSpawn || chunkGenSpawn;
+        
+        if (validSpawn && entity.getPosY() > 60 && entity.getType() == EntityType.ZOMBIE) {
             ZombieEntity zombie = (ZombieEntity) event.getEntity();
             if (event.getWorld().getBiome(entity.getPosition()).getCategory() == Biome.Category.DESERT) {
 
@@ -113,7 +118,7 @@ public class EnvironmentalEvents {
             }
         }
 
-        if (event.getSpawnReason() == SpawnReason.NATURAL && entity.getPosY() > 60 && entity.getType() == EntityType.SKELETON) {
+        if (validSpawn && entity.getPosY() > 60 && entity.getType() == EntityType.SKELETON) {
             SkeletonEntity zombie = (SkeletonEntity) event.getEntity();
             if (event.getWorld().getBiome(entity.getPosition()).getCategory() == Biome.Category.ICY) {
 
@@ -123,6 +128,18 @@ public class EnvironmentalEvents {
                 husk.setLocationAndAngles(zombie.getPosX(), zombie.getPosY(), zombie.getPosZ(), zombie.rotationYaw, zombie.rotationPitch);
 
                 event.getWorld().addEntity(husk);
+                event.getEntity().remove();
+            }
+        }
+        
+        if (validSpawn && entity.getType() == EntityType.MOOSHROOM) {
+            MooshroomEntity mooshroom = (MooshroomEntity) event.getEntity();
+            Random random = new Random();
+            if (random.nextInt(3) == 0) {
+                MooshroomEntity brownMooshroom = EntityType.MOOSHROOM.create(event.getWorld().getWorld());
+                brownMooshroom.setLocationAndAngles(mooshroom.getPosX(), mooshroom.getPosY(), mooshroom.getPosZ(), mooshroom.rotationYaw, mooshroom.rotationPitch);
+                brownMooshroom.setMooshroomType(MooshroomEntity.Type.BROWN);
+                event.getWorld().addEntity(brownMooshroom);
                 event.getEntity().remove();
             }
         }
