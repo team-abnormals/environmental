@@ -60,7 +60,6 @@ public class EnvironmentalItems {
     public static final RegistryObject<Item> TROPICAL_FISH_KELP_ROLL    = HELPER.createItem("tropical_fish_kelp_roll", () -> new Item(new Item.Properties().food(EnvironmentalFoods.TROPICAL_FISH_KELP_ROLL).group(ItemGroup.FOOD)));
     public static final RegistryObject<Item> CRAB_KELP_ROLL             = HELPER.createCompatItem("quark", "crab_kelp_roll", new Item.Properties().food(EnvironmentalFoods.CRAB_KELP_ROLL), ItemGroup.FOOD);
     public static final RegistryObject<Item> PIKE_KELP_ROLL             = HELPER.createCompatItem("upgrade_aquatic", "pike_kelp_roll", new Item.Properties().food(EnvironmentalFoods.PIKE_KELP_ROLL), ItemGroup.FOOD);
-    public static final RegistryObject<Item> CAVEFISH_KELP_ROLL         = HELPER.createCompatItem("none", "cavefish_kelp_roll", new Item.Properties().food(EnvironmentalFoods.CAVEFISH_KELP_ROLL), ItemGroup.FOOD);
 
     public static final RegistryObject<Item> SALMON_RICE_CAKE       = HELPER.createItem("salmon_rice_cake", () -> new Item(new Item.Properties().food(EnvironmentalFoods.SALMON_RICE_CAKE).group(ItemGroup.FOOD)));
     public static final RegistryObject<Item> PUFFERFISH_RICE_CAKE   = HELPER.createItem("pufferfish_rice_cake", () -> new Item(new Item.Properties().food(EnvironmentalFoods.PUFFERFISH_RICE_CAKE).group(ItemGroup.FOOD)));

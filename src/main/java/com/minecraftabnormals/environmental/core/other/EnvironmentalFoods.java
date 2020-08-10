@@ -21,7 +21,6 @@ public class EnvironmentalFoods {
     public static final Food TROPICAL_FISH_KELP_ROLL = new Food.Builder().hunger(4).saturation(1.3F).fastToEat().build(); //1.25
     public static final Food CRAB_KELP_ROLL = new Food.Builder().hunger(6).saturation(0.7F).fastToEat().build(); //0.69
     public static final Food PIKE_KELP_ROLL = new Food.Builder().hunger(5).saturation(0.9F).fastToEat().build(); //0.86
-    public static final Food CAVEFISH_KELP_ROLL = new Food.Builder().hunger(2).saturation(0.8F).fastToEat().build(); //0.75
 
     public static final Food SALMON_RICE_CAKE = new Food.Builder().hunger(4).saturation(0.7F).fastToEat().build(); //0.67
     public static final Food PUFFERFISH_RICE_CAKE = new Food.Builder().hunger(4).saturation(0.3F).fastToEat().effect(new EffectInstance(Effects.WEAKNESS, 600), 1.0F).build(); //0.25
