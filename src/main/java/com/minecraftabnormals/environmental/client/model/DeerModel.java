@@ -106,7 +106,7 @@ public class DeerModel<E extends DeerEntity> extends EntityModel<E> {
 
     @Override
     public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        if(!this.entity.hasAntlers()) {
+        if(!this.entity.hasAntlers() || entity.isChild()) {
             leftAntler.showModel = false;
             rightAntler.showModel = false;
         } else {
