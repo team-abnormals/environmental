@@ -134,7 +134,13 @@ public class DeerEntity extends AnimalEntity {
 
     @Override
     public DeerEntity createChild(AgeableEntity ageable) {
-        return EnvironmentalEntities.DEER.get().create(this.world);
+        DeerEntity entity = EnvironmentalEntities.DEER.get().create(this.world);
+        
+        entity.setCoatColor(((DeerEntity)ageable).getCoatColor());
+        entity.setCoatType(this.getCoatType());
+        entity.setHasAntlers(rand.nextBoolean());
+        
+        return entity;
     }
 
     public static AttributeModifierMap.MutableAttribute registerAttributes() {
