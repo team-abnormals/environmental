@@ -1,0 +1,25 @@
+package com.minecraftabnormals.environmental.client.render;
+
+import com.minecraftabnormals.environmental.client.model.DeerModel;
+import com.minecraftabnormals.environmental.client.render.layer.DeerMarkingsRenderLayer;
+import com.minecraftabnormals.environmental.common.entity.DeerEntity;
+import com.minecraftabnormals.environmental.common.entity.util.DeerCoatColors;
+import com.minecraftabnormals.environmental.core.Environmental;
+
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.util.ResourceLocation;
+
+public class DeerRenderer extends MobRenderer<DeerEntity, DeerModel<DeerEntity>> {
+
+    public DeerRenderer(EntityRendererManager renderManager) {
+        super(renderManager, new DeerModel<>(), 1.0F);
+        this.addLayer(new DeerMarkingsRenderLayer<>(this));
+    }
+    
+    @Override
+    public ResourceLocation getEntityTexture(DeerEntity entity) {
+        DeerCoatColors coatType = DeerCoatColors.byId(entity.getCoatColor());
+        return new ResourceLocation(Environmental.MODID, "textures/entity/deer/deer_" + coatType.name().toLowerCase() + ".png");
+    }
+}
