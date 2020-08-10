@@ -1,5 +1,8 @@
 package com.minecraftabnormals.environmental.core.registry;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.minecraftabnormals.environmental.client.render.DeerRenderer;
 import com.minecraftabnormals.environmental.client.render.DuckRenderer;
 import com.minecraftabnormals.environmental.client.render.SlabfishRenderer;
@@ -45,15 +48,39 @@ public class EnvironmentalEntities {
 
     public static void registerSpawns() {
         ForgeRegistries.BIOMES.getValues().stream().forEach(EnvironmentalEntities::processSpawning);
+        ForgeRegistries.BIOMES.getValues().stream().forEach(EnvironmentalEntities::removeSpawns);
 
         EntitySpawnPlacementRegistry.register(EnvironmentalEntities.SLABFISH.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canAnimalSpawn);
-
+        EntitySpawnPlacementRegistry.register(EnvironmentalEntities.DUCK.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canAnimalSpawn);
+        EntitySpawnPlacementRegistry.register(EnvironmentalEntities.DEER.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canAnimalSpawn);
     }
 
     private static void processSpawning(Biome biome) {
         if (biome.getCategory() == Category.SWAMP) {
-            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(EnvironmentalEntities.SLABFISH.get(), 50, 2, 4));
+            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(EnvironmentalEntities.SLABFISH.get(), 40, 2, 4));
+            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(EnvironmentalEntities.DUCK.get(), 10, 4, 4));
         }
+        
+        if (biome.getCategory() == Category.FOREST) {
+            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(EnvironmentalEntities.DEER.get(), 10, 4, 4));
+        }
+    }
+    
+    private static void removeSpawns(Biome biome) {
+        List<Biome.SpawnListEntry> entrysToRemove = new ArrayList<>();
+        for(Biome.SpawnListEntry entry : biome.getSpawns(EntityClassification.CREATURE)) {
+            if(biome.getCategory() != Biome.Category.FOREST) {
+                if (entry.entityType == EntityType.PIG || entry.entityType == EntityType.CHICKEN) {
+                    entrysToRemove.add(entry);
+                }
+            }
+            if(biome.getCategory() != Biome.Category.PLAINS) {
+                if (entry.entityType == EntityType.COW || entry.entityType == EntityType.SHEEP) {
+                    entrysToRemove.add(entry);
+                }
+            }
+        };
+        biome.getSpawns(EntityClassification.CREATURE).removeAll(entrysToRemove);
     }
 
     public static void registerAttributes() {
