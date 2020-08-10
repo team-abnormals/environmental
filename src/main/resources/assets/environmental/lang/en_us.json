@@ -282,22 +282,18 @@
 	"item.environmental.fool_wings": "Fool's Wings",
 	"item.environmental.thief_hood": "Thief's Hood",
 	"item.environmental.executioner_cleaver": "Executioner's Cleaver",
-
-	"generic.reachDistance": "Reach Distance",
-	
-	"enchantment.environmental.reaching": "Reaching",
-	"enchantment.environmental.reaching.desc": "Increases Reach Distance by 1 block per level",
-	
-	"enchantment.environmental.travelling": "Travelling",
-	"enchantment.environmental.travelling.desc": "Increases Movement Speed by 5% per level",
 	
 	"item.environmental.slabfish_spawn_egg": "Slabfish Spawn Egg",
 	"item.environmental.axolotl_spawn_egg": "Axolotl Spawn Egg",
 	"item.environmental.butterfly_spawn_egg": "Butterfly Spawn Egg",
 	"item.environmental.duck_spawn_egg": "Duck Spawn Egg",
+	"item.environmental.deer_spawn_egg": "Deer Spawn Egg",
 	
 	"item.environmental.cattail_seeds": "Cattail Seeds",
-	"item.environmental.rice_ball": "Rice Ball",
+  "item.environmental.rice_ball": "Rice Ball",
+  
+	"item.environmental.venison": "Raw Venison",
+	"item.environmental.cooked_venison": "Cooked Venison",
 	
 	"item.environmental.cod_kelp_roll": "Cod Kelp Roll",
 	"item.environmental.tropical_fish_kelp_roll": "Tropical Fish Kelp Roll",
@@ -337,6 +333,7 @@
 	"entity.environmental.axolotl": "Axolotl",
 	"entity.environmental.duck": "Duck",
 	"entity.environmental.butterfly": "Butterfly",
+	"entity.environmental.deer": "Deer",
 	
 	"entity.minecraft.villager.environmental.ceramist": "Ceramist",
 	"entity.minecraft.villager.environmental.carpenter": "Carpenter",
@@ -351,6 +348,14 @@
 	
 	"gui.environmental.category.baking": "Baking",
 	"gui.environmental.category.sawing": "Sawing",
+
+  "generic.reachDistance": "Reach Distance",
+  
+  "enchantment.environmental.reaching": "Reaching",
+  "enchantment.environmental.reaching.desc": "Increases Reach Distance by 1 block per level",
+  
+  "enchantment.environmental.travelling": "Travelling",
+  "enchantment.environmental.travelling.desc": "Increases Movement Speed by 5% per level",
 	
 	"advancements.husbandry.equip_axolotl.title": "Lost in the Sea, but not alone!",
 	"advancements.husbandry.equip_axolotl.description": "Have an Axolotl latch onto you and get healed!",

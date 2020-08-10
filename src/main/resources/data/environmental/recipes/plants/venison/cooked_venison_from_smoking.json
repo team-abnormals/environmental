@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "environmental:venison"
+  },
+  "result": "environmental:cooked_venison",
+  "experience": 0.35,
+  "cookingtime": 100
+}
