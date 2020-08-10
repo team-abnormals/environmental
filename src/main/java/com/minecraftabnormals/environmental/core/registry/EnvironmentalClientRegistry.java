@@ -1,13 +1,13 @@
 package com.minecraftabnormals.environmental.core.registry;
 
 import com.minecraftabnormals.environmental.client.model.SlabfishBucketModel;
+import com.minecraftabnormals.environmental.client.particle.CherryBlossomParticle;
 import com.minecraftabnormals.environmental.client.particle.KilnSmokeParticle;
 import com.minecraftabnormals.environmental.core.Environmental;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.client.renderer.model.ModelResourceLocation;
-import net.minecraft.particles.BasicParticleType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -16,9 +16,7 @@ import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(modid = Environmental.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -29,10 +27,8 @@ public class EnvironmentalClientRegistry
     public static void registerParticleFactory(ParticleFactoryRegisterEvent event)
     {
         ParticleManager particleManager = Minecraft.getInstance().particles;
-        if (checkForNonNullWithReflectionCauseForgeIsBaby(EnvironmentalParticles.KILN_SMOKE))
-        {
-            particleManager.registerFactory(EnvironmentalParticles.KILN_SMOKE.get(), KilnSmokeParticle.KilnSmokeFactory::new);
-        }
+        particleManager.registerFactory(EnvironmentalParticles.KILN_SMOKE.get(), KilnSmokeParticle.Factory::new);
+        particleManager.registerFactory(EnvironmentalParticles.CHERRY_BLOSSOM.get(), CherryBlossomParticle.Factory::new);
     }
 
     @SubscribeEvent
@@ -46,10 +42,5 @@ public class EnvironmentalClientRegistry
     public static void onEvent(ModelBakeEvent event)
     {
         event.getModelRegistry().put(new ModelResourceLocation(EnvironmentalItems.SLABFISH_BUCKET.getId(), "inventory"), new SlabfishBucketModel(event.getModelManager()));
-    }
-
-    private static boolean checkForNonNullWithReflectionCauseForgeIsBaby(RegistryObject<BasicParticleType> registryObject)
-    {
-        return ObfuscationReflectionHelper.getPrivateValue(RegistryObject.class, registryObject, "value") != null;
     }
 }

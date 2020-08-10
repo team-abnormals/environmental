@@ -44,10 +44,10 @@ public class KilnSmokeParticle extends SpriteTexturedParticle {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public static class KilnSmokeFactory implements IParticleFactory<BasicParticleType> {
+    public static class Factory implements IParticleFactory<BasicParticleType> {
         private final IAnimatedSprite spriteSet;
 
-        public KilnSmokeFactory(IAnimatedSprite spriteSet) {
+        public Factory(IAnimatedSprite spriteSet) {
             this.spriteSet = spriteSet;
         }
 

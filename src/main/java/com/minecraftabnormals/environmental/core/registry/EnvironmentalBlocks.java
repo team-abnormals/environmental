@@ -3,6 +3,7 @@ package com.minecraftabnormals.environmental.core.registry;
 import com.minecraftabnormals.environmental.common.block.CartwheelBlock;
 import com.minecraftabnormals.environmental.common.block.CattailBlock;
 import com.minecraftabnormals.environmental.common.block.CattailSproutsBlock;
+import com.minecraftabnormals.environmental.common.block.CherryLeavesBlock;
 import com.minecraftabnormals.environmental.common.block.DoubleCattailBlock;
 import com.minecraftabnormals.environmental.common.block.DoubleRiceBlock;
 import com.minecraftabnormals.environmental.common.block.DuckweedBlock;
@@ -162,7 +163,7 @@ public class EnvironmentalBlocks {
     public static final RegistryObject<Block> CHERRY_BUTTON = HELPER.createBlock("cherry_button", () -> new AbnormalsWoodButtonBlock(EnvironmentalProperties.CHERRY_BUTTON), ItemGroup.REDSTONE);
     public static final Pair<RegistryObject<AbnormalsStandingSignBlock>, RegistryObject<AbnormalsWallSignBlock>> CHERRY_SIGNS = HELPER.createSignBlock("cherry", MaterialColor.RED);
 
-    public static final RegistryObject<Block> CHERRY_LEAVES = HELPER.createBlock("cherry_leaves", () -> new AbnormalsLeavesBlock(EnvironmentalProperties.CHERRY_LEAVES), ItemGroup.DECORATIONS);
+    public static final RegistryObject<Block> CHERRY_LEAVES = HELPER.createBlock("cherry_leaves", () -> new CherryLeavesBlock(EnvironmentalProperties.CHERRY_LEAVES), ItemGroup.DECORATIONS);
     public static final RegistryObject<Block> CHERRY_SAPLING = HELPER.createBlock("cherry_sapling", () -> new AbnormalsSaplingBlock(new CherryTree(), EnvironmentalProperties.CHERRY_SAPLING), ItemGroup.DECORATIONS);
     public static final RegistryObject<Block> POTTED_CHERRY_SAPLING = HELPER.createBlockNoItem("potted_cherry_sapling", () -> new FlowerPotBlock(EnvironmentalBlocks.CHERRY_SAPLING.get(), EnvironmentalProperties.FLOWER_POT));
 
