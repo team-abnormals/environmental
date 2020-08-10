@@ -41,8 +41,8 @@ public final class CherryBlossomForestBiome extends Biome {
         
         EnvironmentalBiomeFeatures.addCherryTrees(this);
         EnvironmentalBiomeFeatures.addBlossomVegetation(this);
+        EnvironmentalBiomeFeatures.addGrass(this);
         
-        DefaultBiomeFeatures.addGrass(this);
         DefaultBiomeFeatures.addTallGrass(this);
         DefaultBiomeFeatures.addMushrooms(this);
 
