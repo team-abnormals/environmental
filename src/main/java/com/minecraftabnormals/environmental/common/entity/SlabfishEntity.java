@@ -26,7 +26,6 @@ import com.minecraftabnormals.environmental.core.Environmental;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalCriteriaTriggers;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalData;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalTags;
-import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEntities;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalSounds;
@@ -356,9 +355,6 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
     @Override
     protected void onInsideBlock(BlockState state) {
-        if (state.getBlock() == EnvironmentalBlocks.MUD.get()) {
-            if (this.getSlabfishOverlay() != SlabfishOverlay.MUDDY) this.setSlabfishOverlay(SlabfishOverlay.MUDDY);
-        }
         if (state.getBlock() == Blocks.WATER) {
             if (this.getSlabfishOverlay() != SlabfishOverlay.NONE) this.setSlabfishOverlay(SlabfishOverlay.NONE);
         }

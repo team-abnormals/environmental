@@ -17,10 +17,8 @@ import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.BlockNamedItem;
-import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.item.Items;
 import net.minecraft.item.Rarity;
 import net.minecraft.item.SoupItem;
 import net.minecraftforge.fml.RegistryObject;
@@ -44,7 +42,6 @@ public class EnvironmentalItems {
 
     public static final RegistryObject<Item> MUD_BALL 		= HELPER.createItem("mud_ball", () -> new MudBallItem(new Item.Properties().group(ItemGroup.MATERIALS)));
     public static final RegistryObject<Item> MUD_BRICK 		= HELPER.createItem("mud_brick", () -> new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
-    public static final RegistryObject<Item> MUD_BUCKET 	= HELPER.createItem("mud_bucket", () -> new BucketItem(EnvironmentalFluids.MUD, new Item.Properties().containerItem(Items.BUCKET).maxStackSize(1)));
     
     public static final RegistryObject<Item> WILLOW_BOAT 	= HELPER.createBoatItem("willow", EnvironmentalBlocks.WILLOW_PLANKS);
     public static final RegistryObject<Item> WISTERIA_BOAT 	= HELPER.createBoatItem("wisteria", EnvironmentalBlocks.WISTERIA_PLANKS);

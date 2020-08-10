@@ -17,7 +17,6 @@ import com.minecraftabnormals.environmental.common.block.RiceBlock;
 import com.minecraftabnormals.environmental.common.block.SawmillBlock;
 import com.minecraftabnormals.environmental.common.block.SlabfishEffigyBlock;
 import com.minecraftabnormals.environmental.common.block.WisteriaLeavesBlock;
-import com.minecraftabnormals.environmental.common.block.fluid.MudFluidBlock;
 import com.minecraftabnormals.environmental.common.world.gen.feature.trees.CherryTree;
 import com.minecraftabnormals.environmental.common.world.gen.feature.trees.WillowTree;
 import com.minecraftabnormals.environmental.common.world.gen.feature.trees.WisteriaTree;
@@ -98,7 +97,6 @@ public class EnvironmentalBlocks {
     public static final RegistryObject<Block> CHISELED_MUD_BRICKS = HELPER.createBlock("chiseled_mud_bricks", () -> new Block(EnvironmentalProperties.MUD_BRICKS), ItemGroup.BUILDING_BLOCKS);
 
     public static final RegistryObject<Block> SLABFISH_EFFIGY = HELPER.createBlock("slabfish_effigy", () -> new SlabfishEffigyBlock(EnvironmentalProperties.FLOWER_POT), ItemGroup.DECORATIONS);
-    public static final RegistryObject<Block> MUD = HELPER.createBlockNoItem("mud", () -> new MudFluidBlock(() -> { return EnvironmentalFluids.FLOWING_MUD.get(); }, Properties.create(Material.WATER).doesNotBlockMovement().hardnessAndResistance(100.0F).noDrops()));
 
     // Crafting //
 

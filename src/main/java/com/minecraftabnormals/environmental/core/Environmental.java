@@ -20,7 +20,6 @@ import com.minecraftabnormals.environmental.core.registry.EnvironmentalContainer
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEnchantments;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEntities;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalFeatures;
-import com.minecraftabnormals.environmental.core.registry.EnvironmentalFluids;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalParticles;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalRecipes;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalVillagers;
@@ -82,7 +81,6 @@ public class Environmental
         REGISTRY_HELPER.getDeferredSoundRegister().register(modEventBus);
 
         EnvironmentalBlocks.PAINTINGS.register(modEventBus);
-        EnvironmentalFluids.FLUIDS.register(modEventBus);
         EnvironmentalBiomes.BIOMES.register(modEventBus);
 
         EnvironmentalVillagers.POI_TYPES.register(modEventBus);
