@@ -33,20 +33,15 @@ public class DeerModel<E extends DeerEntity> extends EntityModel<E> {
         this.textureHeight = 64;
 
         this.neck = new ModelRenderer(this);
-        this.neck.setRotationPoint(0.0F, 10.0F, -4.0F);
+        this.neck.setRotationPoint(0.0F, 10.0F, -7.0F);
         this.setRotationAngle(this.neck, 0.2618F, 0.0F, 0.0F);
-        this.neck.setTextureOffset(0, 41).addBox(-2.5F, -10.0F, -5.0F, 5.0F, 10.0F, 5.0F, 0.0F, false);
+        this.neck.setTextureOffset(0, 41).addBox(-2.5F, -9.2235F, -2.1022F, 5.0F, 10.0F, 5.0F, 0.0F, false);
 
         this.head = new ModelRenderer(this);
-        this.head.setRotationPoint(0.0F, -9.0F, -2.5F);
+        this.head.setRotationPoint(0.0F, -8.2235F, 0.3978F);
         this.neck.addChild(this.head);
         this.setRotationAngle(this.head, -0.2618F, 0.0F, 0.0F);
         this.head.setTextureOffset(0, 22).addBox(-3.0F, -5.0F, -3.0F, 6.0F, 5.0F, 6.0F, 0.0F, false);
-
-        this.snout = new ModelRenderer(this);
-        this.snout.setRotationPoint(0.0F, 0.0F, 0.0F);
-        this.head.addChild(this.snout);
-        this.snout.setTextureOffset(0, 33).addBox(-2.5F, -3.0F, -8.0F, 5.0F, 3.0F, 5.0F, 0.0F, false);
 
         this.rightEar = new ModelRenderer(this);
         this.rightEar.setRotationPoint(-3.0F, -5.0F, 1.0F);
@@ -71,6 +66,11 @@ public class DeerModel<E extends DeerEntity> extends EntityModel<E> {
         this.head.addChild(this.leftAntler);
         this.setRotationAngle(this.leftAntler, 0.0F, -0.4363F, 0.0F);
         this.leftAntler.setTextureOffset(0, 7).addBox(-2.0F, -6.0F, 0.0F, 10.0F, 10.0F, 0.0F, 0.0F, true);
+
+        this.snout = new ModelRenderer(this);
+        this.snout.setRotationPoint(0.0F, 0.0F, 0.0F);
+        this.head.addChild(this.snout);
+        this.snout.setTextureOffset(0, 33).addBox(-2.5F, -3.0F, -8.0F, 5.0F, 3.0F, 5.0F, 0.0F, false);
 
         this.body = new ModelRenderer(this);
         this.body.setRotationPoint(3.5F, 14.0F, -9.0F);
@@ -98,10 +98,10 @@ public class DeerModel<E extends DeerEntity> extends EntityModel<E> {
         this.entity = entity;
 
         this.neck.rotateAngleY = netHeadYaw * ((float) Math.PI / 180F);
-        this.backRightLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-        this.backLeftLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
-        this.frontRightLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
-        this.frontLeftLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+        this.backRightLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.0F * limbSwingAmount;
+        this.backLeftLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.0F * limbSwingAmount;
+        this.frontRightLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.0F * limbSwingAmount;
+        this.frontLeftLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.0F * limbSwingAmount;
     }
 
     @Override

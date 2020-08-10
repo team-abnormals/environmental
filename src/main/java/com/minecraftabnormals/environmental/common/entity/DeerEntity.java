@@ -32,6 +32,9 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
@@ -40,8 +43,8 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 public class DeerEntity extends AnimalEntity {
     private static final DataParameter<Integer> DEER_COAT_COLOR = EntityDataManager.createKey(DeerEntity.class, DataSerializers.VARINT);
-    private static final DataParameter<Integer> DEER_COAT_TYPE  = EntityDataManager.createKey(DeerEntity.class, DataSerializers.VARINT);
-    private static final DataParameter<Boolean> HAS_ANTLERS     = EntityDataManager.createKey(DeerEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Integer> DEER_COAT_TYPE = EntityDataManager.createKey(DeerEntity.class, DataSerializers.VARINT);
+    private static final DataParameter<Boolean> HAS_ANTLERS = EntityDataManager.createKey(DeerEntity.class, DataSerializers.BOOLEAN);
 
     public DeerEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
         super(type, worldIn);
@@ -79,6 +82,21 @@ public class DeerEntity extends AnimalEntity {
         this.setHasAntlers(compound.getBoolean("Antlers"));
     }
 
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return SoundEvents.ENTITY_FOX_AMBIENT;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+        return SoundEvents.ENTITY_FOX_HURT;
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.ENTITY_FOX_DEATH;
+    }
+
     private void setCoatColor(int id) {
         this.dataManager.set(DEER_COAT_COLOR, id);
     }
@@ -86,7 +104,7 @@ public class DeerEntity extends AnimalEntity {
     public int getCoatColor() {
         return this.dataManager.get(DEER_COAT_COLOR);
     }
-    
+
     private void setCoatType(int id) {
         this.dataManager.set(DEER_COAT_TYPE, id);
     }
@@ -94,7 +112,7 @@ public class DeerEntity extends AnimalEntity {
     public int getCoatType() {
         return this.dataManager.get(DEER_COAT_TYPE);
     }
-    
+
     private void setHasAntlers(boolean antlers) {
         this.dataManager.set(HAS_ANTLERS, antlers);
     }
@@ -102,11 +120,16 @@ public class DeerEntity extends AnimalEntity {
     public boolean hasAntlers() {
         return this.dataManager.get(HAS_ANTLERS);
     }
-    
+
     public void setDeerData(DeerCoatColors coatColor, DeerCoatTypes coatType, boolean antlers) {
         this.setCoatColor(coatColor.getId());
         this.setCoatType(coatType.getId());
         this.setHasAntlers(antlers);
+    }
+
+    @Override
+    public boolean isBreedingItem(ItemStack stack) {
+        return stack.getItem().isIn(ItemTags.FLOWERS);
     }
 
     @Override
@@ -115,9 +138,7 @@ public class DeerEntity extends AnimalEntity {
     }
 
     public static AttributeModifierMap.MutableAttribute registerAttributes() {
-        return MobEntity.func_233666_p_()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 10.0D)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.3D);
+        return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 20.0D).createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D);
     }
 
     @Override
@@ -136,6 +157,7 @@ public class DeerEntity extends AnimalEntity {
 
         return super.onInitialSpawn(worldIn, difficulty, reason, spawnDataIn, dataTag);
     }
+
     @Override
     public IPacket<?> createSpawnPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
