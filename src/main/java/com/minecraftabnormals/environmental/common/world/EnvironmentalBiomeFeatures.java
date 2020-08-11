@@ -74,7 +74,7 @@ public class EnvironmentalBiomeFeatures {
     }
     
     public static void addGiantTallGrass(Biome biome, int chance) {
-        if (EnvironmentalConfig.COMMON.generateExternalWisterias.get()) {
+        if (EnvironmentalConfig.COMMON.giantTallGrass.get()) {
             biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(EnvironmentalFeatureConfigs.GIANT_TALL_GRASS_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_32.configure(new FrequencyConfig(chance))));
         }
     }
