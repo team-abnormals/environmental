@@ -1,16 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "#"
+    "S",
+    "S",
+    "S"
   ],
   "key": {
-    "#": {
-      "item": "environmental:cattail_thatch_vertical_slab"
+    "S": {
+      "item": "environmental:cattail_thatch_slab"
     }
   },
   "result": {
-    "item": "environmental:cattail_thatch_slab",
-    "count": 1
+    "item": "environmental:cattail_thatch_vertical_slab",
+    "count": 3
   },
   "conditions": [
     {
