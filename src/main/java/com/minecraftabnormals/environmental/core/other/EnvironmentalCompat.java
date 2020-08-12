@@ -47,6 +47,11 @@ public class EnvironmentalCompat {
         DataUtils.registerCompostable(EnvironmentalBlocks.DUCKWEED_THATCH_SLAB.get(), 0.85F);
         DataUtils.registerCompostable(EnvironmentalBlocks.DUCKWEED_THATCH_STAIRS.get(), 0.85F);
         DataUtils.registerCompostable(EnvironmentalBlocks.DUCKWEED_THATCH_VERTICAL_SLAB.get(), 0.85F);
+        
+        DataUtils.registerCompostable(EnvironmentalBlocks.THATCH.get(), 0.65F);
+        DataUtils.registerCompostable(EnvironmentalBlocks.THATCH_SLAB.get(), 0.65F);
+        DataUtils.registerCompostable(EnvironmentalBlocks.THATCH_STAIRS.get(), 0.65F);
+        DataUtils.registerCompostable(EnvironmentalBlocks.THATCH_VERTICAL_SLAB.get(), 0.65F);
 
         DataUtils.registerCompostable(EnvironmentalBlocks.BLUE_DELPHINIUM.get(), 0.75F);
         DataUtils.registerCompostable(EnvironmentalBlocks.WHITE_DELPHINIUM.get(), 0.75F);

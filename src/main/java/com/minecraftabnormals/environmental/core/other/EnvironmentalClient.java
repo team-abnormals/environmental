@@ -57,6 +57,11 @@ public class EnvironmentalClient {
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.DUCKWEED_THATCH_STAIRS.get(),RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.DUCKWEED_THATCH_VERTICAL_SLAB.get(),RenderType.getCutout());
 		
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.THATCH.get(),RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.THATCH_SLAB.get(),RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.THATCH_STAIRS.get(),RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.THATCH_VERTICAL_SLAB.get(),RenderType.getCutout());
+		
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CARTWHEEL.get(),RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.VIOLET.get(),RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.COLUMBINE.get(),RenderType.getCutout());
