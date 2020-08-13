@@ -130,6 +130,7 @@ public class Environmental
     private void setupClient(final FMLClientSetupEvent event)
     {
         EnvironmentalEntities.registerRendering();
+        EnvironmentalClient.removeRecipeBookWarnings();
         DeferredWorkQueue.runLater(() ->
         {
             EnvironmentalClient.setRenderLayers();
