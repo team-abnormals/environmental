@@ -10,8 +10,8 @@ public class EnvironmentalFoods {
     public static final Food CHERRY_PIE = new Food.Builder().hunger(6).saturation(0.3F).build();
     public static final Food APPLE_PIE = new Food.Builder().hunger(10).saturation(0.2F).build();
     
-    public static final Food VENISON = (new Food.Builder()).meat().hunger(2).saturation(0.3F).meat().build();
-    public static final Food COOKED_VENISON = (new Food.Builder()).meat().hunger(6).saturation(0.8F).meat().build();
+    public static final Food VENISON = (new Food.Builder()).hunger(2).saturation(0.3F).meat().build();
+    public static final Food COOKED_VENISON = (new Food.Builder()).hunger(6).saturation(0.8F).meat().build();
 	
     public static final Food RICE_BALL = new Food.Builder().hunger(4).saturation(0.5F).build();
 
