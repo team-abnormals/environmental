@@ -1,6 +1,6 @@
 {
   "displayName": {
-    "translate": "entity.environmental.slabfish.type.backpack.yellow"
+    "translate": "entity.environmental.slabfish.backpack.yellow"
   },
   "tag": "forge:dyes/yellow"
 }

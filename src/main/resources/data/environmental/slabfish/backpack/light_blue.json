@@ -1,6 +1,6 @@
 {
   "displayName": {
-    "translate": "entity.environmental.slabfish.type.backpack.light_blue"
+    "translate": "entity.environmental.slabfish.backpack.light_blue"
   },
   "tag": "forge:dyes/light_blue"
 }

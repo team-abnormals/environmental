@@ -1,6 +1,6 @@
 {
   "displayName": {
-    "translate": "entity.environmental.slabfish.type.backpack.magenta"
+    "translate": "entity.environmental.slabfish.backpack.magenta"
   },
   "tag": "forge:dyes/magenta"
 }
