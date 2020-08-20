@@ -1,0 +1,27 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "minecraft:baked_potato"
+        },
+        {
+            "item": "minecraft:baked_potato"
+        },
+        {
+            "item": "minecraft:baked_potato"
+        },
+        {
+            "item": "environmental:truffle"
+        },
+        {
+            "item": "environmental:rice_ball"
+        },
+        {
+            "item": "minecraft:bowl"
+        }
+    ],
+    "result": {
+        "item": "environmental:truffle_puree",
+        "count": 1
+    }
+}
