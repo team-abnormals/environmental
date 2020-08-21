@@ -1,7 +1,13 @@
 package com.minecraftabnormals.environmental.core.registry;
 
 import com.minecraftabnormals.environmental.common.world.EnvironmentalBiomeFeatures;
-import com.minecraftabnormals.environmental.common.world.gen.feature.*;
+import com.minecraftabnormals.environmental.common.world.gen.feature.BigWisteriaTreeFeature;
+import com.minecraftabnormals.environmental.common.world.gen.feature.CattailsFeature;
+import com.minecraftabnormals.environmental.common.world.gen.feature.DenseCattailsFeature;
+import com.minecraftabnormals.environmental.common.world.gen.feature.DirectionalFlowersFeature;
+import com.minecraftabnormals.environmental.common.world.gen.feature.FallenLeavesFeature;
+import com.minecraftabnormals.environmental.common.world.gen.feature.RiceFeature;
+import com.minecraftabnormals.environmental.common.world.gen.feature.WisteriaTreeFeature;
 import com.minecraftabnormals.environmental.common.world.gen.util.WisteriaColor;
 import com.minecraftabnormals.environmental.core.Environmental;
 import com.minecraftabnormals.environmental.core.EnvironmentalConfig;
@@ -13,36 +19,24 @@ import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
 import net.minecraft.world.gen.feature.BlockClusterFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 @Mod.EventBusSubscriber(modid = Environmental.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class EnvironmentalFeatures {
-    public static final Feature<BlockClusterFeatureConfig> DIRECTIONAL_FLOWER = new DirectionalFlowersFeature<BlockClusterFeatureConfig>(BlockClusterFeatureConfig.field_236587_a_);
-    public static final Feature<NoFeatureConfig> FALLEN_LEAVES = new FallenLeavesFeature(NoFeatureConfig.field_236558_a_);
+    public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, Environmental.MODID);
 
-    public static final Feature<NoFeatureConfig> CATTAILS = new CattailsFeature(NoFeatureConfig.field_236558_a_);
-    public static final Feature<NoFeatureConfig> DENSE_CATTAILS = new DenseCattailsFeature(NoFeatureConfig.field_236558_a_);
-    public static final Feature<NoFeatureConfig> RICE = new RiceFeature(NoFeatureConfig.field_236558_a_);
+    public static final RegistryObject<Feature<BlockClusterFeatureConfig>> DIRECTIONAL_FLOWER = FEATURES.register("directional_flower", () -> new DirectionalFlowersFeature<BlockClusterFeatureConfig>(BlockClusterFeatureConfig.field_236587_a_));
+    public static final RegistryObject<Feature<NoFeatureConfig>> FALLEN_LEAVES = FEATURES.register("fallen_leaves", () -> new FallenLeavesFeature(NoFeatureConfig.field_236558_a_));
+
+    public static final RegistryObject<Feature<NoFeatureConfig>> CATTAILS = FEATURES.register("cattails", () -> new CattailsFeature(NoFeatureConfig.field_236558_a_));
+    public static final RegistryObject<Feature<NoFeatureConfig>> DENSE_CATTAILS = FEATURES.register("dense_cattails", () -> new DenseCattailsFeature(NoFeatureConfig.field_236558_a_));
+    public static final RegistryObject<Feature<NoFeatureConfig>> RICE = FEATURES.register("rice", () -> new RiceFeature(NoFeatureConfig.field_236558_a_));
     
-    public static final Feature<BaseTreeFeatureConfig> WISTERIA_TREE = new WisteriaTreeFeature(BaseTreeFeatureConfig.CODEC_BASE_TREE_FEATURE_CONFIG);
-    public static final Feature<BaseTreeFeatureConfig> BIG_WISTERIA_TREE = new BigWisteriaTreeFeature(BaseTreeFeatureConfig.CODEC_BASE_TREE_FEATURE_CONFIG);
-
-    @SubscribeEvent
-    public static void registerFeatures(RegistryEvent.Register<Feature<?>> event) {
-        event.getRegistry().registerAll(
-                DIRECTIONAL_FLOWER.setRegistryName(Environmental.MODID, "directional_flower"),
-                FALLEN_LEAVES.setRegistryName(Environmental.MODID, "fallen_leaves"),
-
-                CATTAILS.setRegistryName(Environmental.MODID, "cattails"),
-                DENSE_CATTAILS.setRegistryName(Environmental.MODID, "dense_cattails"),
-                RICE.setRegistryName(Environmental.MODID, "rice"),
-                
-                WISTERIA_TREE.setRegistryName(Environmental.MODID, "wisteria_tree"),
-                BIG_WISTERIA_TREE.setRegistryName(Environmental.MODID, "big_wisteria_tree"));
-    }
+    public static final RegistryObject<Feature<BaseTreeFeatureConfig>> WISTERIA_TREE = FEATURES.register("wisteria_tree", () -> new WisteriaTreeFeature(BaseTreeFeatureConfig.CODEC_BASE_TREE_FEATURE_CONFIG));
+    public static final RegistryObject<Feature<BaseTreeFeatureConfig>> BIG_WISTERIA_TREE = FEATURES.register("big_wisteria_tree", () -> new BigWisteriaTreeFeature(BaseTreeFeatureConfig.CODEC_BASE_TREE_FEATURE_CONFIG));
 
     public static void generateFeatures() {
         ForgeRegistries.BIOMES.getValues().forEach(EnvironmentalFeatures::generate);

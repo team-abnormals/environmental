@@ -89,15 +89,15 @@ public class EnvironmentalBiomeFeatures {
     }
 
     public static void addCattails(Biome biome) {
-        biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.CATTAILS.withConfiguration(new NoFeatureConfig()).withPlacement(Placement.COUNT_HEIGHTMAP_32.configure(new FrequencyConfig(12))));
+        biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.CATTAILS.get().withConfiguration(new NoFeatureConfig()).withPlacement(Placement.COUNT_HEIGHTMAP_32.configure(new FrequencyConfig(12))));
     }
 
     public static void addDenseCattails(Biome biome) {
-        biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.DENSE_CATTAILS.withConfiguration(new NoFeatureConfig()).withPlacement(Placement.COUNT_HEIGHTMAP_32.configure(new FrequencyConfig(8))));
+        biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.DENSE_CATTAILS.get().withConfiguration(new NoFeatureConfig()).withPlacement(Placement.COUNT_HEIGHTMAP_32.configure(new FrequencyConfig(8))));
     }
 
     public static void addRice(Biome biome) {
-        biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.RICE.withConfiguration(new NoFeatureConfig()).withPlacement(Placement.COUNT_HEIGHTMAP_32.configure(new FrequencyConfig(2))));
+        biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.RICE.get().withConfiguration(new NoFeatureConfig()).withPlacement(Placement.COUNT_HEIGHTMAP_32.configure(new FrequencyConfig(2))));
     }
 
     public static void addDuckweed(Biome biome, float chance) {
@@ -114,7 +114,7 @@ public class EnvironmentalBiomeFeatures {
     
     public static void addCherryTrees(Biome biomeIn) {
         biomeIn.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.withConfiguration(new MultipleRandomFeatureConfig(ImmutableList.of(Feature.field_236291_c_.withConfiguration(EnvironmentalFeatureConfigs.CHERRY_TREE_CONFIG).withChance(0.1F)), Feature.field_236291_c_.withConfiguration(EnvironmentalFeatureConfigs.CHERRY_TREE_WITH_FEW_BEEHIVES_CONFIG))).withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(7, 0.1F, 1))));
-		biomeIn.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.FALLEN_LEAVES.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(64))));
+		biomeIn.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.FALLEN_LEAVES.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(64))));
     }
     
     public static void addGrass(Biome biomeIn) {
@@ -128,7 +128,7 @@ public class EnvironmentalBiomeFeatures {
 
     public static void addDirectionalFlower(BlockState blockState, Biome biomeIn, int frequency) {
         BlockClusterFeatureConfig config = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(blockState), SimpleBlockPlacer.field_236447_c_)).tries(32).build();
-        biomeIn.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.DIRECTIONAL_FLOWER.withConfiguration(config).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(frequency))));
+        biomeIn.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.DIRECTIONAL_FLOWER.get().withConfiguration(config).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(frequency))));
     }
 
     public static void addDoubleFlower(BlockState blockState, Biome biomeIn, int frequency) {
@@ -150,19 +150,19 @@ public class EnvironmentalBiomeFeatures {
         biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.withConfiguration(
                 new MultipleRandomFeatureConfig(
                         ImmutableList.of(
-                                EnvironmentalFeatures.WISTERIA_TREE.withConfiguration(EnvironmentalFeatureConfigs.BLUE_WISTERIA_TREE_CONFIG).withChance(0.15F),
-                                EnvironmentalFeatures.WISTERIA_TREE.withConfiguration(EnvironmentalFeatureConfigs.WHITE_WISTERIA_TREE_CONFIG).withChance(0.15F),
-                                EnvironmentalFeatures.WISTERIA_TREE.withConfiguration(EnvironmentalFeatureConfigs.PINK_WISTERIA_TREE_CONFIG).withChance(0.15F)),
-                        EnvironmentalFeatures.WISTERIA_TREE.withConfiguration(EnvironmentalFeatureConfigs.PURPLE_WISTERIA_TREE_CONFIG)))
+                                EnvironmentalFeatures.WISTERIA_TREE.get().withConfiguration(EnvironmentalFeatureConfigs.BLUE_WISTERIA_TREE_CONFIG).withChance(0.15F),
+                                EnvironmentalFeatures.WISTERIA_TREE.get().withConfiguration(EnvironmentalFeatureConfigs.WHITE_WISTERIA_TREE_CONFIG).withChance(0.15F),
+                                EnvironmentalFeatures.WISTERIA_TREE.get().withConfiguration(EnvironmentalFeatureConfigs.PINK_WISTERIA_TREE_CONFIG).withChance(0.15F)),
+                        EnvironmentalFeatures.WISTERIA_TREE.get().withConfiguration(EnvironmentalFeatureConfigs.PURPLE_WISTERIA_TREE_CONFIG)))
                 .withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(count, extraChance, 1))));
 
         biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.withConfiguration(
                 new MultipleRandomFeatureConfig(
                         ImmutableList.of(
-                                EnvironmentalFeatures.BIG_WISTERIA_TREE.withConfiguration(EnvironmentalFeatureConfigs.BLUE_WISTERIA_TREE_CONFIG).withChance(0.5F),
-                                EnvironmentalFeatures.BIG_WISTERIA_TREE.withConfiguration(EnvironmentalFeatureConfigs.WHITE_WISTERIA_TREE_CONFIG).withChance(0.5F),
-                                EnvironmentalFeatures.BIG_WISTERIA_TREE.withConfiguration(EnvironmentalFeatureConfigs.PINK_WISTERIA_TREE_CONFIG).withChance(0.5F)),
-                        EnvironmentalFeatures.BIG_WISTERIA_TREE.withConfiguration(EnvironmentalFeatureConfigs.PURPLE_WISTERIA_TREE_CONFIG)))
+                                EnvironmentalFeatures.BIG_WISTERIA_TREE.get().withConfiguration(EnvironmentalFeatureConfigs.BLUE_WISTERIA_TREE_CONFIG).withChance(0.5F),
+                                EnvironmentalFeatures.BIG_WISTERIA_TREE.get().withConfiguration(EnvironmentalFeatureConfigs.WHITE_WISTERIA_TREE_CONFIG).withChance(0.5F),
+                                EnvironmentalFeatures.BIG_WISTERIA_TREE.get().withConfiguration(EnvironmentalFeatureConfigs.PINK_WISTERIA_TREE_CONFIG).withChance(0.5F)),
+                        EnvironmentalFeatures.BIG_WISTERIA_TREE.get().withConfiguration(EnvironmentalFeatureConfigs.PURPLE_WISTERIA_TREE_CONFIG)))
                 .withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(count / 2, extraChance, 1))));
     }
 
@@ -170,19 +170,19 @@ public class EnvironmentalBiomeFeatures {
         biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.withConfiguration(
                 new MultipleRandomFeatureConfig(
                         ImmutableList.of(
-                                EnvironmentalFeatures.WISTERIA_TREE.withConfiguration(EnvironmentalFeatureConfigs.BLUE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG).withChance(0.15F),
-                                EnvironmentalFeatures.WISTERIA_TREE.withConfiguration(EnvironmentalFeatureConfigs.WHITE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG).withChance(0.15F),
-                                EnvironmentalFeatures.WISTERIA_TREE.withConfiguration(EnvironmentalFeatureConfigs.PINK_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG).withChance(0.15F)),
-                        EnvironmentalFeatures.WISTERIA_TREE.withConfiguration(EnvironmentalFeatureConfigs.PURPLE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG)))
+                                EnvironmentalFeatures.WISTERIA_TREE.get().withConfiguration(EnvironmentalFeatureConfigs.BLUE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG).withChance(0.15F),
+                                EnvironmentalFeatures.WISTERIA_TREE.get().withConfiguration(EnvironmentalFeatureConfigs.WHITE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG).withChance(0.15F),
+                                EnvironmentalFeatures.WISTERIA_TREE.get().withConfiguration(EnvironmentalFeatureConfigs.PINK_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG).withChance(0.15F)),
+                        EnvironmentalFeatures.WISTERIA_TREE.get().withConfiguration(EnvironmentalFeatureConfigs.PURPLE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG)))
                 .withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(count, extraChance, 1))));
 
         biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.withConfiguration(
                 new MultipleRandomFeatureConfig(
                         ImmutableList.of(
-                                EnvironmentalFeatures.BIG_WISTERIA_TREE.withConfiguration(EnvironmentalFeatureConfigs.BLUE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG).withChance(0.5F),
-                                EnvironmentalFeatures.BIG_WISTERIA_TREE.withConfiguration(EnvironmentalFeatureConfigs.WHITE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG).withChance(0.5F),
-                                EnvironmentalFeatures.BIG_WISTERIA_TREE.withConfiguration(EnvironmentalFeatureConfigs.PINK_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG).withChance(0.5F)),
-                        EnvironmentalFeatures.BIG_WISTERIA_TREE.withConfiguration(EnvironmentalFeatureConfigs.PURPLE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG)))
+                                EnvironmentalFeatures.BIG_WISTERIA_TREE.get().withConfiguration(EnvironmentalFeatureConfigs.BLUE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG).withChance(0.5F),
+                                EnvironmentalFeatures.BIG_WISTERIA_TREE.get().withConfiguration(EnvironmentalFeatureConfigs.WHITE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG).withChance(0.5F),
+                                EnvironmentalFeatures.BIG_WISTERIA_TREE.get().withConfiguration(EnvironmentalFeatureConfigs.PINK_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG).withChance(0.5F)),
+                        EnvironmentalFeatures.BIG_WISTERIA_TREE.get().withConfiguration(EnvironmentalFeatureConfigs.PURPLE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG)))
                 .withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(count / 2, extraChance, 1))));
     }
 
@@ -192,32 +192,32 @@ public class EnvironmentalBiomeFeatures {
                 biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.withConfiguration(
                         new MultipleRandomFeatureConfig(
                                 ImmutableList.of(
-                                        EnvironmentalFeatures.BIG_WISTERIA_TREE.withConfiguration(EnvironmentalFeatureConfigs.BLUE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG).withChance(0.2F)),
-                                EnvironmentalFeatures.WISTERIA_TREE.withConfiguration(EnvironmentalFeatureConfigs.BLUE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG)))
+                                        EnvironmentalFeatures.BIG_WISTERIA_TREE.get().withConfiguration(EnvironmentalFeatureConfigs.BLUE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG).withChance(0.2F)),
+                                EnvironmentalFeatures.WISTERIA_TREE.get().withConfiguration(EnvironmentalFeatureConfigs.BLUE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG)))
                         .withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(count, extraChance, 1))));
                 break;
             case WHITE:
                 biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.withConfiguration(
                         new MultipleRandomFeatureConfig(
                                 ImmutableList.of(
-                                        EnvironmentalFeatures.BIG_WISTERIA_TREE.withConfiguration(EnvironmentalFeatureConfigs.WHITE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG).withChance(0.2F)),
-                                EnvironmentalFeatures.WISTERIA_TREE.withConfiguration(EnvironmentalFeatureConfigs.WHITE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG)))
+                                        EnvironmentalFeatures.BIG_WISTERIA_TREE.get().withConfiguration(EnvironmentalFeatureConfigs.WHITE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG).withChance(0.2F)),
+                                EnvironmentalFeatures.WISTERIA_TREE.get().withConfiguration(EnvironmentalFeatureConfigs.WHITE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG)))
                         .withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(count, extraChance, 1))));
                 break;
             case PINK:
                 biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.withConfiguration(
                         new MultipleRandomFeatureConfig(
                                 ImmutableList.of(
-                                        EnvironmentalFeatures.BIG_WISTERIA_TREE.withConfiguration(EnvironmentalFeatureConfigs.PINK_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG).withChance(0.2F)),
-                                EnvironmentalFeatures.WISTERIA_TREE.withConfiguration(EnvironmentalFeatureConfigs.PINK_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG)))
+                                        EnvironmentalFeatures.BIG_WISTERIA_TREE.get().withConfiguration(EnvironmentalFeatureConfigs.PINK_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG).withChance(0.2F)),
+                                EnvironmentalFeatures.WISTERIA_TREE.get().withConfiguration(EnvironmentalFeatureConfigs.PINK_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG)))
                         .withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(count, extraChance, 1))));
                 break;
             case PURPLE:
                 biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.withConfiguration(
                         new MultipleRandomFeatureConfig(
                                 ImmutableList.of(
-                                        EnvironmentalFeatures.BIG_WISTERIA_TREE.withConfiguration(EnvironmentalFeatureConfigs.PURPLE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG).withChance(0.2F)),
-                                EnvironmentalFeatures.WISTERIA_TREE.withConfiguration(EnvironmentalFeatureConfigs.PURPLE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG)))
+                                        EnvironmentalFeatures.BIG_WISTERIA_TREE.get().withConfiguration(EnvironmentalFeatureConfigs.PURPLE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG).withChance(0.2F)),
+                                EnvironmentalFeatures.WISTERIA_TREE.get().withConfiguration(EnvironmentalFeatureConfigs.PURPLE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG)))
                         .withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(count, extraChance, 1))));
 
                 break;
@@ -230,32 +230,32 @@ public class EnvironmentalBiomeFeatures {
                 biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.withConfiguration(
                         new MultipleRandomFeatureConfig(
                                 ImmutableList.of(
-                                        EnvironmentalFeatures.BIG_WISTERIA_TREE.withConfiguration(EnvironmentalFeatureConfigs.BLUE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG).withChance(0.2F)),
-                                EnvironmentalFeatures.WISTERIA_TREE.withConfiguration(EnvironmentalFeatureConfigs.BLUE_WISTERIA_TREE_CONFIG)))
+                                        EnvironmentalFeatures.BIG_WISTERIA_TREE.get().withConfiguration(EnvironmentalFeatureConfigs.BLUE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG).withChance(0.2F)),
+                                EnvironmentalFeatures.WISTERIA_TREE.get().withConfiguration(EnvironmentalFeatureConfigs.BLUE_WISTERIA_TREE_CONFIG)))
                         .withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(count, extraChance, 1))));
                 break;
             case WHITE:
                 biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.withConfiguration(
                         new MultipleRandomFeatureConfig(
                                 ImmutableList.of(
-                                        EnvironmentalFeatures.BIG_WISTERIA_TREE.withConfiguration(EnvironmentalFeatureConfigs.WHITE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG).withChance(0.2F)),
-                                EnvironmentalFeatures.WISTERIA_TREE.withConfiguration(EnvironmentalFeatureConfigs.WHITE_WISTERIA_TREE_CONFIG)))
+                                        EnvironmentalFeatures.BIG_WISTERIA_TREE.get().withConfiguration(EnvironmentalFeatureConfigs.WHITE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG).withChance(0.2F)),
+                                EnvironmentalFeatures.WISTERIA_TREE.get().withConfiguration(EnvironmentalFeatureConfigs.WHITE_WISTERIA_TREE_CONFIG)))
                         .withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(count, extraChance, 1))));
                 break;
             case PINK:
                 biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.withConfiguration(
                         new MultipleRandomFeatureConfig(
                                 ImmutableList.of(
-                                        EnvironmentalFeatures.BIG_WISTERIA_TREE.withConfiguration(EnvironmentalFeatureConfigs.PINK_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG).withChance(0.2F)),
-                                EnvironmentalFeatures.WISTERIA_TREE.withConfiguration(EnvironmentalFeatureConfigs.PINK_WISTERIA_TREE_CONFIG)))
+                                        EnvironmentalFeatures.BIG_WISTERIA_TREE.get().withConfiguration(EnvironmentalFeatureConfigs.PINK_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG).withChance(0.2F)),
+                                EnvironmentalFeatures.WISTERIA_TREE.get().withConfiguration(EnvironmentalFeatureConfigs.PINK_WISTERIA_TREE_CONFIG)))
                         .withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(count, extraChance, 1))));
                 break;
             case PURPLE:
                 biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.withConfiguration(
                         new MultipleRandomFeatureConfig(
                                 ImmutableList.of(
-                                        EnvironmentalFeatures.BIG_WISTERIA_TREE.withConfiguration(EnvironmentalFeatureConfigs.PURPLE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG).withChance(0.2F)),
-                                EnvironmentalFeatures.WISTERIA_TREE.withConfiguration(EnvironmentalFeatureConfigs.PURPLE_WISTERIA_TREE_CONFIG)))
+                                        EnvironmentalFeatures.BIG_WISTERIA_TREE.get().withConfiguration(EnvironmentalFeatureConfigs.PURPLE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG).withChance(0.2F)),
+                                EnvironmentalFeatures.WISTERIA_TREE.get().withConfiguration(EnvironmentalFeatureConfigs.PURPLE_WISTERIA_TREE_CONFIG)))
                         .withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(count, extraChance, 1))));
                 break;
         }

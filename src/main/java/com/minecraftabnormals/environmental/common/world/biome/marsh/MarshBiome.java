@@ -1,38 +1,27 @@
-package com.minecraftabnormals.environmental.common.world.biome;
+package com.minecraftabnormals.environmental.common.world.biome.marsh;
 
 import com.minecraftabnormals.environmental.common.world.EnvironmentalBiomeFeatures;
+import com.minecraftabnormals.environmental.common.world.biome.EnvironmentalBiome;
+import com.minecraftabnormals.environmental.core.registry.EnvironmentalBiomes;
 
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeAmbience;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
-import net.minecraft.world.biome.MoodSoundAmbience;
-import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public final class MushroomMarshBiome extends Biome {
-    public MushroomMarshBiome() {
-        super((new Biome.Builder())
-                .surfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_DIRT_GRAVEL_CONFIG)
-                .precipitation(Biome.RainType.RAIN)
-                .category(Biome.Category.SWAMP)
-                .depth(-0.25F)
-                .scale(0.0F)
-                .temperature(0.8F)
-                .downfall(0.9F)
-                .func_235097_a_((new BiomeAmbience.Builder())
-                        .setWaterColor(6134398)
-                        .setWaterFogColor(2302743)
-                        .setFogColor(12638463)
-                        .setMoodSound(MoodSoundAmbience.field_235027_b_)
-                        .build()).parent((String) null));
+public final class MarshBiome extends EnvironmentalBiome {
+    public MarshBiome(Biome.Builder builder) {
+        super(builder);
+    }
 
-        this.func_235063_a_(DefaultBiomeFeatures.SWAMP_HUT); // SWAMP_HUT
-        this.func_235063_a_(DefaultBiomeFeatures.MINESHAFT_NORMAL); // MINESHAFT
-        this.func_235063_a_(DefaultBiomeFeatures.RUINED_PORTAL_SWAMP); // RUINED_PORTAL
-
+    @Override
+    public void addFeatures() {
+        this.func_235063_a_(DefaultBiomeFeatures.SWAMP_HUT);
+        this.func_235063_a_(DefaultBiomeFeatures.MINESHAFT_NORMAL);
+        this.func_235063_a_(DefaultBiomeFeatures.RUINED_PORTAL_SWAMP);
+        
         DefaultBiomeFeatures.addCarvers(this);
         DefaultBiomeFeatures.addMonsterRooms(this);
         DefaultBiomeFeatures.addStoneVariants(this);
@@ -42,9 +31,8 @@ public final class MushroomMarshBiome extends Biome {
 
         EnvironmentalBiomeFeatures.addDenseCattails(this);
         EnvironmentalBiomeFeatures.addMarshVegetation(this);
-        DefaultBiomeFeatures.addMushrooms(this);
-        EnvironmentalBiomeFeatures.addMarshMushrooms(this);
         EnvironmentalBiomeFeatures.addDuckweed(this, 0.1F);
+        DefaultBiomeFeatures.addMushrooms(this);
         DefaultBiomeFeatures.addExtraReedsAndPumpkins(this);
         DefaultBiomeFeatures.addTallGrass(this);
         DefaultBiomeFeatures.addVeryDenseGrass(this);
@@ -53,7 +41,10 @@ public final class MushroomMarshBiome extends Biome {
 
         DefaultBiomeFeatures.func_235191_ai_(this);
         DefaultBiomeFeatures.addFreezeTopLayer(this);
-
+    }
+    
+    @Override
+    public void addSpawns() {
         this.addSpawn(EntityClassification.CREATURE, new Biome.SpawnListEntry(EntityType.SHEEP, 12, 4, 4));
         this.addSpawn(EntityClassification.CREATURE, new Biome.SpawnListEntry(EntityType.PIG, 10, 4, 4));
         this.addSpawn(EntityClassification.CREATURE, new Biome.SpawnListEntry(EntityType.CHICKEN, 10, 4, 4));
@@ -79,5 +70,12 @@ public final class MushroomMarshBiome extends Biome {
     @OnlyIn(Dist.CLIENT)
     public int getFoliageColor() {
         return 5468214;
+    }
+
+
+    @Override
+    public Biome getHill(net.minecraft.world.gen.INoiseRandom rand) {
+        int chance = rand.random(4);
+        return chance == 0 ? EnvironmentalBiomes.MUSHROOM_MARSH.get() : EnvironmentalBiomes.MARSH.get();
     }
 }

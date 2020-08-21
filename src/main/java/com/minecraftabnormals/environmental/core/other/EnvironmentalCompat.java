@@ -143,9 +143,28 @@ public class EnvironmentalCompat {
         DataUtils.registerFlammable(EnvironmentalBlocks.WISTERIA_BOOKSHELF.get(), 5, 20);
 	}
 	
-    @SuppressWarnings("deprecation")
 	public static void registerDispenserBehaviors() {
 		Environmental.REGISTRY_HELPER.processSpawnEggDispenseBehaviors();
+
+        DispenserBlock.registerDispenseBehavior(EnvironmentalItems.SLABFISH_BUCKET.get(), new DefaultDispenseItemBehavior() {
+            @Override
+            protected ItemStack dispenseStack(IBlockSource source, ItemStack stack) {
+                BucketItem bucket = (BucketItem)stack.getItem();
+                BlockPos pos = source.getBlockPos().offset(source.getBlockState().get(DispenserBlock.FACING));
+                World world = source.getWorld();
+
+                if (bucket.tryPlaceContainedLiquid(null, world, pos, null)) {
+                    bucket.onLiquidPlaced(world, stack, pos);
+                    return new ItemStack(Items.BUCKET);
+                } else {
+                    return super.dispense(source, stack);
+                }
+            }
+        });
+    }
+    
+    @SuppressWarnings("deprecation")
+    public static void registerUnusedDispenseBehaviors() {
         // TODO make these work properly with tags or smth
         for(Item item : SlabfishEntity.getSweaterMap().keySet()) {
             DispenserBlock.registerDispenseBehavior(item, new OptionalDispenseBehavior() {
@@ -165,23 +184,7 @@ public class EnvironmentalCompat {
                 }
             });
         }
-
-        DispenserBlock.registerDispenseBehavior(EnvironmentalItems.SLABFISH_BUCKET.get(), new DefaultDispenseItemBehavior() {
-            @Override
-            protected ItemStack dispenseStack(IBlockSource source, ItemStack stack) {
-                BucketItem bucket = (BucketItem)stack.getItem();
-                BlockPos pos = source.getBlockPos().offset(source.getBlockState().get(DispenserBlock.FACING));
-                World world = source.getWorld();
-
-                if (bucket.tryPlaceContainedLiquid(null, world, pos, null)) {
-                    bucket.onLiquidPlaced(world, stack, pos);
-                    return new ItemStack(Items.BUCKET);
-                } else {
-                    return super.dispense(source, stack);
-                }
-            }
-        });
-
+        
         DispenserBlock.registerDispenseBehavior(Items.CHEST, new OptionalDispenseBehavior() {
             @Override
             protected ItemStack dispenseStack(IBlockSource source, ItemStack stack) {

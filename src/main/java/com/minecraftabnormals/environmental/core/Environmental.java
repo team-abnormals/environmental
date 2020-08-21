@@ -82,7 +82,8 @@ public class Environmental
 
         EnvironmentalBlocks.PAINTINGS.register(modEventBus);
         EnvironmentalBiomes.BIOMES.register(modEventBus);
-
+        EnvironmentalFeatures.FEATURES.register(modEventBus);
+        
         EnvironmentalVillagers.POI_TYPES.register(modEventBus);
         EnvironmentalVillagers.PROFESSIONS.register(modEventBus);
 
@@ -115,8 +116,9 @@ public class Environmental
             EnvironmentalData.registerDataSerializers();
     		EnvironmentalEnchantments.addEnchantmentsToItemGroups();
             
+    		EnvironmentalBiomes.addFeaturesAndSpawns();
     		EnvironmentalBiomes.addBiomeTypes();
-    		EnvironmentalBiomes.registerBiomesToDictionary();
+    		EnvironmentalBiomes.addBiomesToGeneration();
     		EnvironmentalFeatures.generateFeatures();
     		
     		EnvironmentalVillagers.registerVillagerTypes();

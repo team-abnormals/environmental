@@ -1,63 +1,55 @@
-package com.minecraftabnormals.environmental.common.world.biome;
+package com.minecraftabnormals.environmental.common.world.biome.marsh;
 
 import com.minecraftabnormals.environmental.common.world.EnvironmentalBiomeFeatures;
+import com.minecraftabnormals.environmental.common.world.biome.EnvironmentalBiome;
 
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeAmbience;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
-import net.minecraft.world.biome.MoodSoundAmbience;
-import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
-public final class CherryBlossomForestBiome extends Biome {
-    public CherryBlossomForestBiome() {
-        super((new Biome.Builder())
-        		.surfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_DIRT_GRAVEL_CONFIG)
-        		.precipitation(Biome.RainType.RAIN).category(Biome.Category.FOREST)
-        		.depth(0.1F)
-        		.scale(0.2F)
-        		.temperature(0.75F)
-        		.downfall(0.8F)
-        		.func_235097_a_((new BiomeAmbience.Builder())
-        				.setWaterColor(5216182)
-        				.setWaterFogColor(335411)
-        				.setFogColor(12638463)
-        				.setMoodSound(MoodSoundAmbience.field_235027_b_)
-        				.build())
-        		.parent((String)null));
+public final class MushroomMarshBiome extends EnvironmentalBiome {
+    public MushroomMarshBiome(Biome.Builder builder) {
+        super(builder);
+    }
 
-        DefaultBiomeFeatures.func_235196_b_(this);
-        this.func_235063_a_(DefaultBiomeFeatures.RUINED_PORTAL_STANDARD);
-        DefaultBiomeFeatures.addMonsterRooms(this);
-
+    @Override
+    public void addFeatures() {
+        this.func_235063_a_(DefaultBiomeFeatures.SWAMP_HUT); // SWAMP_HUT
+        this.func_235063_a_(DefaultBiomeFeatures.MINESHAFT_NORMAL); // MINESHAFT
+        this.func_235063_a_(DefaultBiomeFeatures.RUINED_PORTAL_SWAMP); // RUINED_PORTAL
+        
         DefaultBiomeFeatures.addCarvers(this);
+        DefaultBiomeFeatures.addMonsterRooms(this);
         DefaultBiomeFeatures.addStoneVariants(this);
         DefaultBiomeFeatures.addOres(this);
-        DefaultBiomeFeatures.addSedimentDisks(this);
-        
-        DefaultBiomeFeatures.addLakes(this);
-        DefaultBiomeFeatures.addSprings(this);
-        
-        EnvironmentalBiomeFeatures.addCherryTrees(this);
-        EnvironmentalBiomeFeatures.addBlossomVegetation(this);
-        EnvironmentalBiomeFeatures.addGrass(this);
-        
-        DefaultBiomeFeatures.addTallGrass(this);
+        DefaultBiomeFeatures.addSwampClayDisks(this);
+        EnvironmentalBiomeFeatures.addMarshPools(this);
+
+        EnvironmentalBiomeFeatures.addDenseCattails(this);
+        EnvironmentalBiomeFeatures.addMarshVegetation(this);
         DefaultBiomeFeatures.addMushrooms(this);
+        EnvironmentalBiomeFeatures.addMarshMushrooms(this);
+        EnvironmentalBiomeFeatures.addDuckweed(this, 0.1F);
+        DefaultBiomeFeatures.addExtraReedsAndPumpkins(this);
+        DefaultBiomeFeatures.addTallGrass(this);
+        DefaultBiomeFeatures.addVeryDenseGrass(this);
+        EnvironmentalBiomeFeatures.addRice(this);
+        EnvironmentalBiomeFeatures.addGiantTallGrass(this, 50);
 
+        DefaultBiomeFeatures.func_235191_ai_(this);
         DefaultBiomeFeatures.addFreezeTopLayer(this);
+    }
 
+    @Override
+    public void addSpawns() {
         this.addSpawn(EntityClassification.CREATURE, new Biome.SpawnListEntry(EntityType.SHEEP, 12, 4, 4));
         this.addSpawn(EntityClassification.CREATURE, new Biome.SpawnListEntry(EntityType.PIG, 10, 4, 4));
         this.addSpawn(EntityClassification.CREATURE, new Biome.SpawnListEntry(EntityType.CHICKEN, 10, 4, 4));
         this.addSpawn(EntityClassification.CREATURE, new Biome.SpawnListEntry(EntityType.COW, 8, 4, 4));
-        this.addSpawn(EntityClassification.CREATURE, new Biome.SpawnListEntry(EntityType.PANDA, 80, 1, 2));
-        
-        this.addSpawn(EntityClassification.WATER_AMBIENT, new Biome.SpawnListEntry(EntityType.SALMON, 15, 1, 5));
-        
         this.addSpawn(EntityClassification.AMBIENT, new Biome.SpawnListEntry(EntityType.BAT, 10, 8, 8));
-        
         this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.SPIDER, 100, 4, 4));
         this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.ZOMBIE, 95, 4, 4));
         this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.ZOMBIE_VILLAGER, 5, 1, 1));
@@ -69,9 +61,14 @@ public final class CherryBlossomForestBiome extends Biome {
         this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.SLIME, 1, 1, 1));
     }
 
-//    @Override
-//    public Biome getHill(net.minecraft.world.gen.INoiseRandom rand) {
-//        int chance = rand.random(4);
-//        return chance == 0 ? EnvironmentalBiomes.MUSHROOM_MARSH.get() : EnvironmentalBiomes.MARSH.get();
-//    }
+    @OnlyIn(Dist.CLIENT)
+    public int getGrassColor(double posX, double posZ) {
+        double d0 = INFO_NOISE.noiseAt(posX * 0.0225D, posZ * 0.0225D, false);
+        return d0 < -0.1D ? 6263617 : 6195253;
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public int getFoliageColor() {
+        return 5468214;
+    }
 }
