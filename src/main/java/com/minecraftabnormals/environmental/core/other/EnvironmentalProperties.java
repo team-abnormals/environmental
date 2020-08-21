@@ -17,7 +17,7 @@ public class EnvironmentalProperties {
 	public static final AbstractBlock.Properties WILLOW_PRESSURE_PLATE 	= AbstractBlock.Properties.create(Material.WOOD).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD);
 	public static final AbstractBlock.Properties WILLOW_LADDER 			= AbstractBlock.Properties.create(Material.MISCELLANEOUS).notSolid().harvestTool(ToolType.AXE).hardnessAndResistance(0.4F).sound(SoundType.LADDER);
 	public static final AbstractBlock.Properties WILLOW_BOOKSHELF 		= AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(1.5F).sound(SoundType.WOOD);
-	public static final AbstractBlock.Properties WILLOW_LEAVES 			= AbstractBlock.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).notSolid().tickRandomly().sound(SoundType.PLANT);
+	public static final AbstractBlock.Properties WILLOW_LEAVES 			= PropertyExtensions.createLeaves(MaterialColor.GREEN);
 	public static final AbstractBlock.Properties WILLOW_LOG 			= AbstractBlock.Properties.create(Material.WOOD, MaterialColor.BROWN).hardnessAndResistance(2.0F).sound(SoundType.WOOD);
 	public static final AbstractBlock.Properties WILLOW_SAPLING 		= AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0.0F).sound(SoundType.PLANT);
 	
@@ -27,15 +27,15 @@ public class EnvironmentalProperties {
 	public static final AbstractBlock.Properties CHERRY_PRESSURE_PLATE 	= AbstractBlock.Properties.create(Material.WOOD).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD);
 	public static final AbstractBlock.Properties CHERRY_LADDER 			= AbstractBlock.Properties.create(Material.MISCELLANEOUS).notSolid().harvestTool(ToolType.AXE).hardnessAndResistance(0.4F).sound(SoundType.LADDER);
 	public static final AbstractBlock.Properties CHERRY_BOOKSHELF 		= AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(1.5F).sound(SoundType.WOOD);
-	public static final AbstractBlock.Properties CHERRY_LEAVES 			= AbstractBlock.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).notSolid().tickRandomly().sound(SoundType.PLANT);
+	public static final AbstractBlock.Properties CHERRY_LEAVES 			= PropertyExtensions.createLeaves(MaterialColor.PINK);
 	public static final AbstractBlock.Properties CHERRY_LOG 			= AbstractBlock.Properties.create(Material.WOOD, MaterialColor.BROWN).hardnessAndResistance(2.0F).sound(SoundType.WOOD);
 	public static final AbstractBlock.Properties CHERRY_SAPLING 		= AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0.0F).sound(SoundType.PLANT);
 	
 	public static final AbstractBlock.Properties WISTERIA_PLANKS 		= AbstractBlock.Properties.create(Material.WOOD, MaterialColor.WHITE_TERRACOTTA).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD);
-	public static final AbstractBlock.Properties PINK_WISTERIA_LEAVES 	= AbstractBlock.Properties.create(Material.LEAVES, MaterialColor.PINK).notSolid().hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT).setAllowsSpawn(PropertyExtensions::allowsSpawnOnLeaves).setSuffocates(PropertyExtensions::isntSolid).setBlocksVision(PropertyExtensions::isntSolid);
-	public static final AbstractBlock.Properties BLUE_WISTERIA_LEAVES 	= AbstractBlock.Properties.create(Material.LEAVES, MaterialColor.BLUE).notSolid().hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT).setAllowsSpawn(PropertyExtensions::allowsSpawnOnLeaves).setSuffocates(PropertyExtensions::isntSolid).setBlocksVision(PropertyExtensions::isntSolid);
-	public static final AbstractBlock.Properties PURPLE_WISTERIA_LEAVES = AbstractBlock.Properties.create(Material.LEAVES, MaterialColor.PURPLE).notSolid().hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT).setAllowsSpawn(PropertyExtensions::allowsSpawnOnLeaves).setSuffocates(PropertyExtensions::isntSolid).setBlocksVision(PropertyExtensions::isntSolid);
-	public static final AbstractBlock.Properties WHITE_WISTERIA_LEAVES 	= AbstractBlock.Properties.create(Material.LEAVES, MaterialColor.SNOW).notSolid().hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT).setAllowsSpawn(PropertyExtensions::allowsSpawnOnLeaves).setSuffocates(PropertyExtensions::isntSolid).setBlocksVision(PropertyExtensions::isntSolid);
+	public static final AbstractBlock.Properties PINK_WISTERIA_LEAVES 	= PropertyExtensions.createLeaves(MaterialColor.PINK);
+	public static final AbstractBlock.Properties BLUE_WISTERIA_LEAVES 	= PropertyExtensions.createLeaves(MaterialColor.BLUE);
+	public static final AbstractBlock.Properties PURPLE_WISTERIA_LEAVES = PropertyExtensions.createLeaves(MaterialColor.PURPLE);
+	public static final AbstractBlock.Properties WHITE_WISTERIA_LEAVES 	= PropertyExtensions.createLeaves(MaterialColor.SNOW);
 	public static final AbstractBlock.Properties WISTERIA_BUTTON 		= AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD);
 	public static final AbstractBlock.Properties WISTERIA_DOOR 			= AbstractBlock.Properties.create(Material.WOOD, MaterialColor.WHITE_TERRACOTTA).notSolid().hardnessAndResistance(3.0F).sound(SoundType.WOOD);
 	public static final AbstractBlock.Properties WISTERIA_LOG 			= AbstractBlock.Properties.create(Material.WOOD, MaterialColor.GRAY).hardnessAndResistance(2.0F).sound(SoundType.WOOD);
@@ -87,6 +87,10 @@ public class EnvironmentalProperties {
 	public static final AbstractBlock.Properties BLACK_TERRACOTTA_BRICKS 		= AbstractBlock.Properties.create(Material.ROCK, MaterialColor.BLACK_TERRACOTTA).setRequiresTool().hardnessAndResistance(1.25F, 4.2F);
 	
     static class PropertyExtensions {
+        private static AbstractBlock.Properties createLeaves(MaterialColor color) {
+            return AbstractBlock.Properties.create(Material.LEAVES, color).harvestTool(ToolType.HOE).notSolid().hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT).setAllowsSpawn(PropertyExtensions::allowsSpawnOnLeaves).setSuffocates(PropertyExtensions::isntSolid).setBlocksVision(PropertyExtensions::isntSolid);
+        }
+        
         private static Boolean allowsSpawnOnLeaves(BlockState state, IBlockReader access, BlockPos pos, EntityType<?> entity) {
             return entity == EntityType.OCELOT || entity == EntityType.PARROT;
         }
