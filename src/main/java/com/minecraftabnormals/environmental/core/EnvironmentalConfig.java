@@ -29,8 +29,8 @@ public class EnvironmentalConfig {
                     .define("Mushroom Marsh weight", 0);
 
             cherryBlossomForestWeight = builder
-                    .comment("The weight of Cherry Blossom Forest biomes; Default: 4")
-                    .define("Cherry Blossom Forest weight", 4);
+                    .comment("The weight of Cherry Blossom Forest biomes; Default: 3")
+                    .define("Cherry Blossom Forest weight", 3);
 
             builder.pop();
             
