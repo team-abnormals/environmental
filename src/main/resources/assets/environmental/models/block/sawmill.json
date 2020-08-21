@@ -2,6 +2,7 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
+		"3": "environmental:block/sawmill_saw",
 		"side": "environmental:block/sawmill_side",
 		"particle": "environmental:block/sawmill_front",
 		"front": "environmental:block/sawmill_front",
@@ -32,13 +33,13 @@
 			}
 		},
 		{
-			"from": [8, 10, 0],
+			"from": [8, 0, 0],
 			"to": [8, 16, 9],
 			"faces": {
 				"north": {"uv": [0, 0, 0, 6], "texture": "#front"},
-				"east": {"uv": [7, 0, 16, 6], "texture": "#side"},
+				"east": {"uv": [7, 0, 16, 16], "texture": "#3"},
 				"south": {"uv": [0, 0, 0, 6], "texture": "#front"},
-				"west": {"uv": [7, 0, 16, 6], "texture": "#side"},
+				"west": {"uv": [16, 0, 7, 16], "texture": "#3"},
 				"up": {"uv": [0, 0, 9, 0], "rotation": 90, "texture": "#front"},
 				"down": {"uv": [0, 0, 9, 0], "rotation": 270, "texture": "#front"}
 			}
