@@ -9,8 +9,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class KilnSmokeParticle extends SpriteTexturedParticle {
     private KilnSmokeParticle(ClientWorld world, double x, double y, double z, double motionX, double motionY, double motionZ) {
         super(world, x, y, z);
-        this.getScale(3.0F);
-        this.setSize(0.25F, 0.25F);
+        this.particleScale *= 2.5F;
         this.maxAge = this.rand.nextInt(50) + 40;
 
         this.particleGravity = 3.0E-6F;
