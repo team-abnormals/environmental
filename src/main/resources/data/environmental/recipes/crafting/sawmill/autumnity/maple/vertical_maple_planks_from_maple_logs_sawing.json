@@ -1,0 +1,23 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "autumnity:maple_logs"
+  },
+  "result": "autumnity:vertical_maple_planks",
+  "count": 4,
+  "conditions":[
+    {
+      "type":"forge:and",
+      "values": [
+        {
+          "type":"forge:mod_loaded",
+          "modid":"autumnity"
+        },
+        {
+          "type":"abnormals_core:quark_flag",
+          "flag":"vertical_planks"
+        }
+      ]
+    }
+  ]
+}
