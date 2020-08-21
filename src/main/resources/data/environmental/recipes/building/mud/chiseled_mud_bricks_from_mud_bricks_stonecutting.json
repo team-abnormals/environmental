@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "environmental:mud_bricks"
+  },
+  "result": "environmental:chiseled_mud_bricks",
+  "count": 1
+}
