@@ -60,6 +60,7 @@ public class EnvironmentalFeatureConfigs {
 			.addWeightedBlockstate(Blocks.RED_TULIP.getDefaultState(), 2)
 			.addWeightedBlockstate(Blocks.WHITE_TULIP.getDefaultState(), 1)
 			.addWeightedBlockstate(Blocks.PINK_TULIP.getDefaultState(), 3)
+			.addWeightedBlockstate(Blocks.ORANGE_TULIP.getDefaultState(), 1)
 			.addWeightedBlockstate(Blocks.LILY_OF_THE_VALLEY.getDefaultState(), 1),
 			SimpleBlockPlacer.field_236447_c_)).tries(64).build();
 	
