@@ -12,7 +12,7 @@
   "conditions": [
     {
       "type": "abnormals_core:quark_flag",
-      "flag": "berry_sack"
+      "flag": "golden_apple_crate"
     }
   ]
 }
