@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:cyan_terracotta"
+  },
+  "result": "environmental:cyan_terracotta_brick_stairs",
+  "count": 1
+}

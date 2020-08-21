@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "environmental:pink_terracotta_bricks"
+  },
+  "result": "environmental:chiseled_pink_terracotta_bricks",
+  "count": 1
+}
