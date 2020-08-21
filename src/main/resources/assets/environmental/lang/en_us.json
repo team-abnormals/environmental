@@ -343,7 +343,11 @@
 	"biome.environmental.marsh": "Marsh",
 	"biome.environmental.mushroom_marsh": "Mushroom Marsh",
 	"biome.environmental.mire": "Mire",
-	"biome.environmental.cherry_blossom_forest": "Cherry Blossom Forest",
+	
+	"biome.environmental.blossom_woods": "Blossom Woods",
+	"biome.environmental.blossom_hills": "Blossom Hills",
+	"biome.environmental.blossom_highlands": "Blossom Highlands",
+	"biome.environmental.blossom_valleys": "Blossom Valleys",
 	
 	"container.kiln": "Kiln",
 	"container.sawmill": "Sawmill",
@@ -404,7 +408,7 @@
   
 	"entity.environmental.slabfish.type.marsh": "Marsh",
 	"entity.environmental.slabfish.type.mire": "Mire",
-	"entity.environmental.slabfish.type.cherry": "Cherry",
+	"entity.environmental.slabfish.type.blossom": "Blossom",
 	"entity.environmental.slabfish.type.maple": "Maple Forest",
   "entity.environmental.slabfish.type.rosewood": "Rosewood Forest",
   "entity.environmental.slabfish.type.dunes": "Dunes",

@@ -32,7 +32,7 @@ public class EnvironmentalVillagers
 	public static void registerVillagerTypes() {
 		VillagerTrades.VILLAGER_DEFAULT_TRADES.isEmpty();
 		IVillagerType.BY_BIOME.put(Biomes.ICE_SPIKES, IVillagerType.register(Environmental.MODID + ":ice_spikes"));
-		IVillagerType.BY_BIOME.put(EnvironmentalBiomes.CHERRY_BLOSSOM_FOREST.get(), IVillagerType.register(Environmental.MODID + ":cherry_blossom_forest"));
+		IVillagerType.BY_BIOME.put(EnvironmentalBiomes.BLOSSOM_WOODS.get(), IVillagerType.register(Environmental.MODID + ":cherry_blossom_forest"));
 	}
 	
 	public static void registerPOIs() {		

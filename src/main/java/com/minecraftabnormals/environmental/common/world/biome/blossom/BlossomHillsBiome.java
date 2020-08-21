@@ -8,10 +8,11 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 
-public final class CherryBlossomForestBiome extends EnvironmentalBiome {
-    public CherryBlossomForestBiome(Biome.Builder builder) {
+public final class BlossomHillsBiome extends EnvironmentalBiome {
+    public BlossomHillsBiome(Biome.Builder builder) {
         super(builder);
     }
+    
 
     @Override
     public void addFeatures() {

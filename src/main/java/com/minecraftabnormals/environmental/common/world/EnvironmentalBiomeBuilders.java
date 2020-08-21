@@ -6,9 +6,10 @@ import net.minecraft.world.biome.MoodSoundAmbience;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 
 public class EnvironmentalBiomeBuilders {
-    public static final Biome.Builder MARSH                     = createMarshBiome(-0.25F, 0.0F);
-    public static final Biome.Builder CHERRY_BLOSSOM_FOREST     = createBlossomBiome(0.1F, 0.2F);
-    
+    public static final Biome.Builder MARSH         = createMarshBiome(-0.25F, 0.0F);
+    public static final Biome.Builder BLOSSOM_WOODS = createBlossomBiome(0.1F, 0.2F);
+    public static final Biome.Builder BLOSSOM_HILLS = createBlossomBiome(0.45F, 0.3F);
+
     private static Biome.Builder createMarshBiome(float depth, float scale) {
         return (new Biome.Builder())
         .surfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_DIRT_GRAVEL_CONFIG)

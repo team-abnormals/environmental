@@ -14,12 +14,17 @@ public class EnvironmentalConfig {
 
         public final ConfigValue<Integer> marshWeight;
         public final ConfigValue<Integer> mushroomMarshWeight;
-        public final ConfigValue<Integer> cherryBlossomForestWeight;
+        
+        public final ConfigValue<Integer> blossomWoodsWeight;
+        public final ConfigValue<Integer> blossomHillsWeight;
+        public final ConfigValue<Integer> blossomHighlandsWeight;
+        public final ConfigValue<Integer> blossomValleysWeight;
 
         Common(ForgeConfigSpec.Builder builder) {
             builder.comment("Biome Weight Config")
             .push("biomes");
 
+            builder.push("marsh");
             marshWeight = builder
                     .comment("The weight of Marsh biomes; Default: 6")
                     .define("Marsh weight", 6);
@@ -28,9 +33,23 @@ public class EnvironmentalConfig {
                     .comment("The weight of Mushroom Marsh biomes; Default: 0")
                     .define("Mushroom Marsh weight", 0);
 
-            cherryBlossomForestWeight = builder
-                    .comment("The weight of Cherry Blossom Forest biomes; Default: 3")
-                    .define("Cherry Blossom Forest weight", 3);
+            builder.push("blossom");
+            blossomWoodsWeight = builder
+                    .comment("The weight of Blossom Woods biomes; Default: 3")
+                    .define("Blossom Woods weight", 3);
+            
+            blossomHillsWeight = builder
+                    .comment("The weight of Blossom Hills biomes; Default: 0")
+                    .define("Blossom Hills weight", 0);
+            
+            blossomHighlandsWeight = builder
+                    .comment("The weight of Blossom Highlands biomes; Default: 1")
+                    .define("Blossom Highlands weight", 1);
+            
+            blossomValleysWeight = builder
+                    .comment("The weight of Blossom Valleys biomes; Default: 0")
+                    .define("Blossom Valleys weight", 0);
+            builder.pop();
 
             builder.pop();
             
