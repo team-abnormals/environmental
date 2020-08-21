@@ -19,9 +19,9 @@ import net.minecraft.entity.ai.goal.FollowParentGoal;
 import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
 import net.minecraft.entity.ai.goal.PanicGoal;
+import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.goal.TemptGoal;
-import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -54,32 +54,35 @@ public class DuckEntity extends AnimalEntity {
         this.setPathPriority(PathNodeType.WATER, 0.0F);
     }
 
+    @Override
     protected void registerGoals() {
        this.goalSelector.addGoal(0, new SwimGoal(this));
        this.goalSelector.addGoal(1, new PanicGoal(this, 1.4D));
        this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
        this.goalSelector.addGoal(3, new TemptGoal(this, 1.0D, false, Ingredient.fromTag(EnvironmentalTags.Items.DUCK_BREEDING_ITEMS)));
        this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
-       this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
+       this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 1.0D));
        this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 6.0F));
        this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
     }
 
+    @Override
     protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
        return this.isChild() ? sizeIn.height * 0.85F : sizeIn.height * 0.92F;
     }
 
-    public static AttributeModifierMap.MutableAttribute func_234187_eI_() {
+    public static AttributeModifierMap.MutableAttribute registerAttributes() {
        return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 4.0D).createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.25D);
     }
 
+    @Override
     public void livingTick() {
        super.livingTick();
        this.oFlap = this.wingRotation;
        this.oFlapSpeed = this.destPos;
        this.destPos = (float)((double)this.destPos + (double)(this.onGround ? -1 : 4) * 0.3D);
        this.destPos = MathHelper.clamp(this.destPos, 0.0F, 1.0F);
-       if (!this.onGround && !this.isInWater() && this.wingRotDelta < 1.0F) {
+       if (!this.onGround && this.wingRotDelta < 1.0F) {
           this.wingRotDelta = 1.0F;
        }
 
@@ -96,35 +99,48 @@ public class DuckEntity extends AnimalEntity {
           this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
        }
     }
+    
+    @Override
+    protected float getWaterSlowDown() {
+        return 0.95F;
+    }
 
+    @Override
     public boolean onLivingFall(float distance, float damageMultiplier) {
        return false;
     }
 
+    @Override
     protected SoundEvent getAmbientSound() {
        return SoundEvents.ENTITY_CHICKEN_AMBIENT;
     }
 
+    @Override
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
        return SoundEvents.ENTITY_CHICKEN_HURT;
     }
 
+    @Override
     protected SoundEvent getDeathSound() {
        return SoundEvents.ENTITY_CHICKEN_DEATH;
     }
 
+    @Override
     protected void playStepSound(BlockPos pos, BlockState blockIn) {
        this.playSound(SoundEvents.ENTITY_CHICKEN_STEP, 0.15F, 1.0F);
     }
 
+    @Override
     public boolean isBreedingItem(ItemStack stack) {
        return Ingredient.fromTag(EnvironmentalTags.Items.DUCK_BREEDING_ITEMS).test(stack);
     }
 
+    @Override
     protected int getExperiencePoints(PlayerEntity player) {
        return this.isChickenJockey() ? 10 : super.getExperiencePoints(player);
     }
 
+    @Override
     public void readAdditional(CompoundNBT compound) {
        super.readAdditional(compound);
        this.chickenJockey = compound.getBoolean("IsChickenJockey");
@@ -134,16 +150,19 @@ public class DuckEntity extends AnimalEntity {
 
     }
 
+    @Override
     public void writeAdditional(CompoundNBT compound) {
        super.writeAdditional(compound);
        compound.putBoolean("IsChickenJockey", this.chickenJockey);
        compound.putInt("EggLayTime", this.timeUntilNextEgg);
     }
 
+    @Override
     public boolean canDespawn(double distanceToClosestPlayer) {
        return this.isChickenJockey();
     }
 
+    @Override
     public void updatePassenger(Entity passenger) {
        super.updatePassenger(passenger);
        float f = MathHelper.sin(this.renderYawOffset * ((float)Math.PI / 180F));

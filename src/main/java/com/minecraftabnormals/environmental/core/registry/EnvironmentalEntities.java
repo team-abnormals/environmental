@@ -17,7 +17,6 @@ import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.gen.Heightmap;
@@ -86,6 +85,6 @@ public class EnvironmentalEntities {
     public static void registerAttributes() {
         GlobalEntityTypeAttributes.put(SLABFISH.get(), SlabfishEntity.registerAttributes().create());
         GlobalEntityTypeAttributes.put(DEER.get(), DeerEntity.registerAttributes().create());
-        GlobalEntityTypeAttributes.put(DUCK.get(), ChickenEntity.func_234187_eI_().create());
+        GlobalEntityTypeAttributes.put(DUCK.get(), DuckEntity.registerAttributes().create());
     }
 }
