@@ -73,29 +73,20 @@ public class WisteriaTreeUtils {
                 case 0:
                     break;
                 case 1:
-                    if (WisteriaTreeUtils.isAir(world, pos)) setForcedState(world, pos, vineLower);
                     break;
                 case 2:
-                    if (WisteriaTreeUtils.isAir(world, pos)) setForcedState(world, pos, vineUpper);
-                    if (WisteriaTreeUtils.isAir(world, pos.down())) setForcedState(world, pos.down(), vineLower);
                     break;
                 case 3:
                     if (WisteriaTreeUtils.isAir(world, pos)) placeLeafAt(world, pos, leaf);
-                    if (WisteriaTreeUtils.isAir(world, pos.down())) setForcedState(world, pos.down(), vineUpper);
-                    if (WisteriaTreeUtils.isAir(world, pos.down(2))) setForcedState(world, pos.down(2), vineLower);
                     break;
                 case 4:
                     if (WisteriaTreeUtils.isAir(world, pos)) placeLeafAt(world, pos, leaf);
                     if (WisteriaTreeUtils.isAir(world, pos.down())) placeLeafAt(world, pos.down(), leaf);
-                    if (WisteriaTreeUtils.isAir(world, pos.down(2))) setForcedState(world, pos.down(2), vineUpper);
-                    if (WisteriaTreeUtils.isAir(world, pos.down(3))) setForcedState(world, pos.down(3), vineLower);
                     break;
                 case 5:
                     if (WisteriaTreeUtils.isAir(world, pos)) placeLeafAt(world, pos, leaf);
                     if (WisteriaTreeUtils.isAir(world, pos.down())) placeLeafAt(world, pos.down(), leaf);
                     if (WisteriaTreeUtils.isAir(world, pos.down(2))) placeLeafAt(world, pos.down(2), leaf);
-                    if (WisteriaTreeUtils.isAir(world, pos.down(3))) setForcedState(world, pos.down(3), vineUpper);
-                    if (WisteriaTreeUtils.isAir(world, pos.down(4))) setForcedState(world, pos.down(4), vineLower);
                     break;
             }
         }
