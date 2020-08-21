@@ -6,11 +6,11 @@
   ],
   "key": {
     "B": {
-      "item": "environmental:mud_brick"
+      "item": "environmental:mud_ball"
     }
   },
   "result": {
-    "item": "environmental:mud_bricks",
+    "item": "environmental:mud",
     "count": 1
   }
 }

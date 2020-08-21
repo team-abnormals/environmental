@@ -1,9 +1,9 @@
 {
   "type": "environmental:baking",
   "ingredient": {
-    "item": "environmental:mud_ball"
+    "item": "environmental:mud"
   },
-  "result": "environmental:mud_brick",
+  "result": "environmental:mud_bricks",
   "experience": 0.3,
   "cookingtime": 100
 }

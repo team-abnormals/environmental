@@ -12,6 +12,7 @@ import com.minecraftabnormals.environmental.common.block.HangingWillowLeavesBloc
 import com.minecraftabnormals.environmental.common.block.HangingWisteriaLeavesBlock;
 import com.minecraftabnormals.environmental.common.block.KilnBlock;
 import com.minecraftabnormals.environmental.common.block.LargeLilyPadBlock;
+import com.minecraftabnormals.environmental.common.block.MudBlock;
 import com.minecraftabnormals.environmental.common.block.MyceliumSproutsBlock;
 import com.minecraftabnormals.environmental.common.block.PottedCartwheelBlock;
 import com.minecraftabnormals.environmental.common.block.RiceBlock;
@@ -89,6 +90,8 @@ public class EnvironmentalBlocks {
     public static final DeferredRegister<PaintingType> PAINTINGS = DeferredRegister.create(ForgeRegistries.PAINTING_TYPES, Environmental.MODID);
 
     // Mud //
+    
+    public static final RegistryObject<Block> MUD = HELPER.createBlock("mud", () -> new MudBlock(EnvironmentalProperties.MUD), ItemGroup.BUILDING_BLOCKS);
 
     public static final RegistryObject<Block> MUD_BRICKS = HELPER.createBlock("mud_bricks", () -> new Block(EnvironmentalProperties.MUD_BRICKS), ItemGroup.BUILDING_BLOCKS);
     public static final RegistryObject<Block> MUD_BRICK_STAIRS = HELPER.createBlock("mud_brick_stairs", () -> new AbnormalsStairsBlock(MUD_BRICKS.get().getDefaultState(), EnvironmentalProperties.MUD_BRICKS), ItemGroup.BUILDING_BLOCKS);
