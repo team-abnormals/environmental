@@ -50,7 +50,7 @@ public class RiceBlock extends BushBlock implements IWaterLoggable, IGrowable, I
     @Override
     protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
         Block block = state.getBlock();
-        if (worldIn.getFluidState(pos).getLevel() == 8 && block.isIn(EnvironmentalTags.CATTAIL_PLANTABLE_ON))
+        if (worldIn.getFluidState(pos).getLevel() == 8 && block.isIn(EnvironmentalTags.Blocks.CATTAIL_PLANTABLE_ON))
             return true;
         else if (block.getBlock() == Blocks.FARMLAND) return true;
         return false;
