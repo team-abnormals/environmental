@@ -72,10 +72,7 @@ public class EnvironmentalFeatures {
         if (biome.getCategory() == Biome.Category.TAIGA) {
             EnvironmentalBiomeFeatures.addShortFlower(EnvironmentalBlocks.VIOLET.get().getDefaultState(), biome, 4);
         }
-        if (biome.getCategory() == Biome.Category.EXTREME_HILLS) {
-            EnvironmentalBiomeFeatures.addShortFlower(EnvironmentalBlocks.COLUMBINE.get().getDefaultState(), biome, 4);
-        }
-
+        
         if (biome.getRegistryName().toString().contains("rosewood")) {
             EnvironmentalBiomeFeatures.addGiantTallGrass(biome, 3);
         }

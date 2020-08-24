@@ -20,7 +20,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "environmental:columbine"
+          "name": "environmental:lotus_flower"
         }
       ],
       "conditions": [

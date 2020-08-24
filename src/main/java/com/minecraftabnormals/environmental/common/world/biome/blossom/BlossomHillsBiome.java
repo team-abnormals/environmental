@@ -1,6 +1,7 @@
 package com.minecraftabnormals.environmental.common.world.biome.blossom;
 
 import com.minecraftabnormals.environmental.common.world.EnvironmentalBiomeFeatures;
+import com.minecraftabnormals.environmental.common.world.EnvironmentalFeatureConfigs;
 import com.minecraftabnormals.environmental.common.world.biome.EnvironmentalBiome;
 
 import net.minecraft.entity.EntityClassification;
@@ -31,6 +32,7 @@ public final class BlossomHillsBiome extends EnvironmentalBiome {
         EnvironmentalBiomeFeatures.addCherryTrees(this);
         EnvironmentalBiomeFeatures.addBlossomVegetation(this);
         EnvironmentalBiomeFeatures.addGrass(this);
+        EnvironmentalBiomeFeatures.addShortFlower(EnvironmentalFeatureConfigs.LOTUS_FLOWER, this, 3);
 
         DefaultBiomeFeatures.addTallGrass(this);
         DefaultBiomeFeatures.addMushrooms(this);

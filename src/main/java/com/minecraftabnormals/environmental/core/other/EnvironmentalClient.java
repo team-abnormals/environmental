@@ -77,7 +77,7 @@ public class EnvironmentalClient {
 		
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CARTWHEEL.get(),RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.VIOLET.get(),RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.COLUMBINE.get(),RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.LOTUS_FLOWER.get(),RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.DIANTHUS.get(),RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.BLUEBELL.get(),RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.YELLOW_HIBISCUS.get(),RenderType.getCutout());
@@ -90,7 +90,7 @@ public class EnvironmentalClient {
 
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_CARTWHEEL.get(),RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_VIOLET.get(),RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_COLUMBINE.get(),RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_LOTUS_FLOWER.get(),RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_DIANTHUS.get(),RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_BLUEBELL.get(),RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_YELLOW_HIBISCUS.get(),RenderType.getCutout());

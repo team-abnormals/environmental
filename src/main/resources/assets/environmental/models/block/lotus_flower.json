@@ -1,6 +1,6 @@
 {
     "parent": "block/cross",
     "textures": {
-        "cross": "environmental:block/columbine"
+        "cross": "environmental:block/lotus_flower"
     }
 }
