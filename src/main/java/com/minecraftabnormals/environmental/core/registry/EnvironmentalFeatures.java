@@ -56,7 +56,6 @@ public class EnvironmentalFeatures {
             EnvironmentalBiomeFeatures.addSwampOaks(biome);
             EnvironmentalBiomeFeatures.addCattails(biome);
             EnvironmentalBiomeFeatures.addDuckweed(biome, 0.15F);
-            EnvironmentalBiomeFeatures.addShortFlower(EnvironmentalBlocks.DIANTHUS.get().getDefaultState(), biome, 5);
             if (wisterias) EnvironmentalBiomeFeatures.addWisteriaTree(biome, WisteriaColor.BLUE, 0, 0.001F, true);
         }
 
