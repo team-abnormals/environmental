@@ -69,7 +69,6 @@ import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
-@SuppressWarnings("deprecation")
 @EventBusSubscriber(modid = Environmental.MODID)
 public class EnvironmentalEvents {
     private static final Set<ResourceLocation> RICE_SHIPWRECK_LOOT_INJECTIONS = Sets.newHashSet(LootTables.CHESTS_SHIPWRECK_SUPPLY);

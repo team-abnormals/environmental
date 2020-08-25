@@ -1,21 +1,28 @@
 buildscript {
     repositories {
-        maven { 
-        	url = 'https://files.minecraftforge.net/maven' 
-        }
+        maven { url = 'https://files.minecraftforge.net/maven' }
         jcenter()
         mavenCentral()
+        maven { url = 'https://dist.creeper.host/Sponge/maven' }
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
+        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
     }
 }
+
 plugins {
   id "com.wynprice.cursemaven" version "2.1.1"
 }
+
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
+apply plugin: 'org.spongepowered.mixin'
+
+mixin {
+    add sourceSets.main, "neapolitan.refmap.json"
+}
 
 version = '1.0.0'
 group = 'com.minecraftabnormals'
@@ -31,6 +38,7 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
+            arg "-mixin.config=environmental.mixins.json"
             mods {
                 environmental {
                     source sourceSets.main
@@ -41,6 +49,7 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
+            arg "-mixin.config=environmental.mixins.json"
             mods {
                 environmental {
                     source sourceSets.main
@@ -61,6 +70,14 @@ minecraft {
     }
 }
 
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.16.1-32.0.88'
+    implementation fg.deobf("curse.maven:abnormals-core:3017821")
+    
+    compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
+}
+
 repositories {
 	maven {
 		name = "Progwml6 maven"
@@ -76,20 +93,13 @@ jar {
     manifest {
         attributes([
           "Specification-Title": "Environmental",
-            "Specification-Vendor": "Team Abnormals",
-            "Specification-Version": "1",
-            "Implementation-Title": project.name,
-            "Implementation-Version": "${version}",
-            "Implementation-Vendor": "Team Abnormals",
-            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+          "Specification-Vendor": "Team Abnormals",
+          "Specification-Version": "1",
+          "Implementation-Title": project.name,
+          "Implementation-Version": "${version}",
+          "Implementation-Vendor": "Team Abnormals",
+          "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+          "MixinConfigs": "environmental.mixins.json"
         ])
     }
-}
-
-dependencies {
-    minecraft 'net.minecraftforge:forge:1.16.1-32.0.88'
-    implementation fg.deobf("curse.maven:abnormals-core:3017821")
-    
-    compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
 }
