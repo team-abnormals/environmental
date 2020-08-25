@@ -3,6 +3,7 @@ package com.minecraftabnormals.environmental.core.registry;
 import com.minecraftabnormals.environmental.client.model.SlabfishBucketModel;
 import com.minecraftabnormals.environmental.client.particle.CherryBlossomParticle;
 import com.minecraftabnormals.environmental.client.particle.KilnSmokeParticle;
+import com.minecraftabnormals.environmental.client.particle.LotusBlossomParticle;
 import com.minecraftabnormals.environmental.core.Environmental;
 
 import net.minecraft.client.Minecraft;
@@ -32,6 +33,7 @@ public class EnvironmentalClientRegistry
         ParticleManager particleManager = Minecraft.getInstance().particles;
         if(checkForNonNull(EnvironmentalParticles.KILN_SMOKE)) particleManager.registerFactory(EnvironmentalParticles.KILN_SMOKE.get(), KilnSmokeParticle.Factory::new);
         if(checkForNonNull(EnvironmentalParticles.CHERRY_BLOSSOM)) particleManager.registerFactory(EnvironmentalParticles.CHERRY_BLOSSOM.get(), CherryBlossomParticle.Factory::new);
+        if(checkForNonNull(EnvironmentalParticles.LOTUS_BLOSSOM)) particleManager.registerFactory(EnvironmentalParticles.LOTUS_BLOSSOM.get(), LotusBlossomParticle.Factory::new);
     }
 
     @SubscribeEvent

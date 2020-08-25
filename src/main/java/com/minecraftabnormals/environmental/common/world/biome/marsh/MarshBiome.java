@@ -1,7 +1,7 @@
 package com.minecraftabnormals.environmental.common.world.biome.marsh;
 
 import com.minecraftabnormals.environmental.common.world.EnvironmentalBiomeFeatures;
-import com.minecraftabnormals.environmental.common.world.biome.EnvironmentalBiome;
+import com.minecraftabnormals.environmental.common.world.biome.AbnormalsBiome;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalBiomes;
 
 import net.minecraft.entity.EntityClassification;
@@ -12,7 +12,7 @@ import net.minecraft.world.gen.INoiseRandom;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public final class MarshBiome extends EnvironmentalBiome {
+public final class MarshBiome extends AbnormalsBiome {
     public MarshBiome(Biome.Builder builder) {
         super(builder);
     }

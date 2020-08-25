@@ -1,7 +1,7 @@
 package com.minecraftabnormals.environmental.core.registry;
 
 import com.minecraftabnormals.environmental.common.world.EnvironmentalBiomeBuilders;
-import com.minecraftabnormals.environmental.common.world.biome.EnvironmentalBiome;
+import com.minecraftabnormals.environmental.common.world.biome.AbnormalsBiome;
 import com.minecraftabnormals.environmental.common.world.biome.blossom.BlossomHillsBiome;
 import com.minecraftabnormals.environmental.common.world.biome.blossom.BlossomWoodsBiome;
 import com.minecraftabnormals.environmental.common.world.biome.marsh.MarshBiome;
@@ -19,18 +19,17 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class EnvironmentalBiomes {
     public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, Environmental.MODID);
 
-    public static final RegistryObject<EnvironmentalBiome> MARSH            = BIOMES.register("marsh", () -> new MarshBiome(EnvironmentalBiomeBuilders.MARSH));
-    public static final RegistryObject<EnvironmentalBiome> MUSHROOM_MARSH   = BIOMES.register("mushroom_marsh", () -> new MushroomMarshBiome(EnvironmentalBiomeBuilders.MARSH));
+    public static final RegistryObject<Biome> MARSH            = BIOMES.register("marsh", () -> new MarshBiome(EnvironmentalBiomeBuilders.MARSH));
+    public static final RegistryObject<Biome> MUSHROOM_MARSH   = BIOMES.register("mushroom_marsh", () -> new MushroomMarshBiome(EnvironmentalBiomeBuilders.MARSH));
     
-    public static final RegistryObject<EnvironmentalBiome> BLOSSOM_WOODS    = BIOMES.register("blossom_woods", () -> new BlossomWoodsBiome(EnvironmentalBiomeBuilders.BLOSSOM_WOODS));
-    public static final RegistryObject<EnvironmentalBiome> BLOSSOM_HILLS    = BIOMES.register("blossom_hills", () -> new BlossomHillsBiome(EnvironmentalBiomeBuilders.BLOSSOM_HILLS));
+    public static final RegistryObject<Biome> BLOSSOM_WOODS    = BIOMES.register("blossom_woods", () -> new BlossomWoodsBiome(EnvironmentalBiomeBuilders.BLOSSOM_WOODS));
+    public static final RegistryObject<Biome> BLOSSOM_HILLS    = BIOMES.register("blossom_hills", () -> new BlossomHillsBiome(EnvironmentalBiomeBuilders.BLOSSOM_HILLS));
 
     public static void addFeaturesAndSpawns() {
-        for (RegistryObject<Biome> biome : BIOMES.getEntries()) {
-            EnvironmentalBiome abstractBiome = (EnvironmentalBiome)biome.get();
-            abstractBiome.addFeatures();
-            abstractBiome.addSpawns();
-        }
+        ForgeRegistries.BIOMES.getValues().stream().filter(biome -> biome instanceof AbnormalsBiome).forEach((biome) -> {
+            ((AbnormalsBiome)biome).addFeatures();
+            ((AbnormalsBiome)biome).addSpawns();
+        });
     }
     
     public static void addBiomesToGeneration() {

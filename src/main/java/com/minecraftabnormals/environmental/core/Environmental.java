@@ -114,7 +114,6 @@ public class Environmental
             EnvironmentalCompat.registerDispenserBehaviors();
 
             EnvironmentalData.registerDataSerializers();
-    		EnvironmentalEnchantments.addEnchantmentsToItemGroups();
             
     		EnvironmentalBiomes.addFeaturesAndSpawns();
     		EnvironmentalBiomes.addBiomeTypes();

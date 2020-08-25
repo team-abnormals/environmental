@@ -2,18 +2,17 @@ package com.minecraftabnormals.environmental.common.world.biome.blossom;
 
 import com.minecraftabnormals.environmental.common.world.EnvironmentalBiomeFeatures;
 import com.minecraftabnormals.environmental.common.world.EnvironmentalFeatureConfigs;
-import com.minecraftabnormals.environmental.common.world.biome.EnvironmentalBiome;
+import com.minecraftabnormals.environmental.common.world.biome.AbnormalsBiome;
 
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 
-public final class BlossomHillsBiome extends EnvironmentalBiome {
+public final class BlossomHillsBiome extends AbnormalsBiome {
     public BlossomHillsBiome(Biome.Builder builder) {
         super(builder);
     }
-    
 
     @Override
     public void addFeatures() {

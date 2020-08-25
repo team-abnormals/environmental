@@ -12,6 +12,7 @@ import com.minecraftabnormals.environmental.common.block.HangingWillowLeavesBloc
 import com.minecraftabnormals.environmental.common.block.HangingWisteriaLeavesBlock;
 import com.minecraftabnormals.environmental.common.block.KilnBlock;
 import com.minecraftabnormals.environmental.common.block.LargeLilyPadBlock;
+import com.minecraftabnormals.environmental.common.block.LotusFlowerBlock;
 import com.minecraftabnormals.environmental.common.block.MudBlock;
 import com.minecraftabnormals.environmental.common.block.MyceliumSproutsBlock;
 import com.minecraftabnormals.environmental.common.block.PottedCartwheelBlock;
@@ -353,7 +354,7 @@ public class EnvironmentalBlocks {
     public static final RegistryObject<Block> BLUEBELL = HELPER.createBlock("bluebell", () -> new AbnormalsFlowerBlock(Effects.WATER_BREATHING, 6, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
     public static final RegistryObject<Block> VIOLET = HELPER.createBlock("violet", () -> new AbnormalsFlowerBlock(Effects.INVISIBILITY, 6, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
     public static final RegistryObject<Block> DIANTHUS = HELPER.createBlock("dianthus", () -> new AbnormalsFlowerBlock(Effects.STRENGTH, 8, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
-    public static final RegistryObject<Block> LOTUS_FLOWER = HELPER.createBlock("lotus_flower", () -> new AbnormalsFlowerBlock(Effects.MINING_FATIGUE, 6, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
+    public static final RegistryObject<Block> LOTUS_FLOWER = HELPER.createBlock("lotus_flower", () -> new LotusFlowerBlock(Effects.MINING_FATIGUE, 6, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
     public static final RegistryObject<Block> YELLOW_HIBISCUS = HELPER.createBlock("yellow_hibiscus", () -> new AbnormalsFlowerBlock(Effects.GLOWING, 8, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
     public static final RegistryObject<Block> ORANGE_HIBISCUS = HELPER.createBlock("orange_hibiscus", () -> new AbnormalsFlowerBlock(Effects.GLOWING, 8, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
     public static final RegistryObject<Block> RED_HIBISCUS = HELPER.createBlock("red_hibiscus", () -> new AbnormalsFlowerBlock(Effects.GLOWING, 8, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);

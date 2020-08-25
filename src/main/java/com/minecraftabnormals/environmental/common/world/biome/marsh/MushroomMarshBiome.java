@@ -1,7 +1,7 @@
 package com.minecraftabnormals.environmental.common.world.biome.marsh;
 
 import com.minecraftabnormals.environmental.common.world.EnvironmentalBiomeFeatures;
-import com.minecraftabnormals.environmental.common.world.biome.EnvironmentalBiome;
+import com.minecraftabnormals.environmental.common.world.biome.AbnormalsBiome;
 
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -10,7 +10,7 @@ import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public final class MushroomMarshBiome extends EnvironmentalBiome {
+public final class MushroomMarshBiome extends AbnormalsBiome {
     public MushroomMarshBiome(Biome.Builder builder) {
         super(builder);
     }

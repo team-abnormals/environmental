@@ -2,7 +2,7 @@ package com.minecraftabnormals.environmental.common.world.biome.blossom;
 
 import com.minecraftabnormals.environmental.common.world.EnvironmentalBiomeFeatures;
 import com.minecraftabnormals.environmental.common.world.EnvironmentalFeatureConfigs;
-import com.minecraftabnormals.environmental.common.world.biome.EnvironmentalBiome;
+import com.minecraftabnormals.environmental.common.world.biome.AbnormalsBiome;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalBiomes;
 
 import net.minecraft.entity.EntityClassification;
@@ -11,12 +11,11 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.INoiseRandom;
 
-public final class BlossomWoodsBiome extends EnvironmentalBiome {
+public final class BlossomWoodsBiome extends AbnormalsBiome {
     public BlossomWoodsBiome(Biome.Builder builder) {
         super(builder);
     }
     
-
     @Override
     public void addFeatures() {
         DefaultBiomeFeatures.func_235196_b_(this);
