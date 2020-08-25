@@ -16,16 +16,13 @@ import com.minecraftabnormals.environmental.common.slabfish.SlabfishManager;
 import com.minecraftabnormals.environmental.core.Environmental;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEntities;
-import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.monster.HuskEntity;
 import net.minecraft.entity.monster.SkeletonEntity;
 import net.minecraft.entity.monster.StrayEntity;
@@ -44,7 +41,6 @@ import net.minecraft.item.ShovelItem;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTables;
 import net.minecraft.loot.TableLootEntry;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
@@ -59,25 +55,21 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
-import net.minecraftforge.client.event.RenderNameplateEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
-import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
-import net.minecraftforge.eventbus.api.Event.Result;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
+@SuppressWarnings("deprecation")
 @EventBusSubscriber(modid = Environmental.MODID)
 public class EnvironmentalEvents {
     private static final Set<ResourceLocation> RICE_SHIPWRECK_LOOT_INJECTIONS = Sets.newHashSet(LootTables.CHESTS_SHIPWRECK_SUPPLY);
@@ -146,16 +138,6 @@ public class EnvironmentalEvents {
     }
 
     @SubscribeEvent
-    public static void renderNameplate(RenderNameplateEvent event) {
-        if (event.getEntity() instanceof LivingEntity) {
-            LivingEntity entity = (LivingEntity) event.getEntity();
-            if (entity.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() == EnvironmentalItems.THIEF_HOOD.get()) {
-                event.setResult(Result.DENY);
-            }
-        }
-    }
-
-    @SubscribeEvent
     public static void onThrowableImpact(final ProjectileImpactEvent.Throwable event) {
         ThrowableEntity projectileEntity = event.getThrowable();
 
@@ -192,7 +174,7 @@ public class EnvironmentalEvents {
 
     protected static final Map<Block, BlockState> HOE_LOOKUP = Maps.newHashMap(ImmutableMap.of(Blocks.GRASS_BLOCK, Blocks.FARMLAND.getDefaultState(), Blocks.GRASS_PATH, Blocks.FARMLAND.getDefaultState(), Blocks.DIRT, Blocks.FARMLAND.getDefaultState(), Blocks.COARSE_DIRT, Blocks.DIRT.getDefaultState()));
 
-    @SubscribeEvent
+	@SubscribeEvent
     public static void underwaterHoe(UseHoeEvent event) {
         ItemStack hoe = event.getContext().getItem();
 
@@ -313,48 +295,5 @@ public class EnvironmentalEvents {
             }
         }
     }
-
-	@SubscribeEvent
-	public static void playerNameEvent(PlayerEvent.NameFormat event) {
-		if (event.getPlayer().getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() == EnvironmentalItems.THIEF_HOOD.get()) {
-			event.setDisplayname(new StringTextComponent("???"));
-		}
-	}
-	
-	@SubscribeEvent
-	public static void hoodEquippedEvent(LivingEquipmentChangeEvent event) {
-		if (event.getTo().getItem() == EnvironmentalItems.THIEF_HOOD.get() || event.getFrom().getItem() == EnvironmentalItems.THIEF_HOOD.get()) {
-			if (event.getEntityLiving() instanceof PlayerEntity) {
-				((PlayerEntity)event.getEntityLiving()).refreshDisplayName();
-			}
-		}
-	}
-
-	@SubscribeEvent
-	public static void onFallEvent(LivingFallEvent event) {
-		if (event.getEntityLiving().getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == EnvironmentalItems.WANDERER_BOOTS.get() && event.getEntityLiving().fallDistance < 6)
-			event.setDamageMultiplier(0);
-	}
-
-	@SubscribeEvent
-	public static void onExecutionerCleaverKill(LivingDeathEvent event) {
-		if (event.getSource().getTrueSource() instanceof PlayerEntity && event.getEntity() instanceof PlayerEntity) {
-			PlayerEntity wielder = (PlayerEntity) event.getSource().getTrueSource();
-			PlayerEntity targetPlayer = (PlayerEntity) event.getEntity();
-			World world = wielder.world;
-
-			if(wielder.getHeldItemMainhand().getItem() != EnvironmentalItems.EXECUTIONER_CLEAVER.get() || targetPlayer == null)
-				return;
-
-			CompoundNBT skullNbt = new CompoundNBT();
-			skullNbt.putString("SkullOwner", targetPlayer.getName().getString());
-
-			ItemStack stack = new ItemStack(Items.PLAYER_HEAD);
-			stack.setTag(skullNbt);
-
-			if(!world.isRemote())
-				world.addEntity(new ItemEntity(world, targetPlayer.getPosX(), targetPlayer.getPosY(), targetPlayer.getPosZ(), stack));
-		}
-	}
 }
 
