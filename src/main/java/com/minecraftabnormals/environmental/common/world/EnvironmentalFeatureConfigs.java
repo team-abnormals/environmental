@@ -33,7 +33,8 @@ public class EnvironmentalFeatureConfigs {
     private static final BeehiveTreeDecorator MANY_BEEHIVES = new BeehiveTreeDecorator(0.05F);
     
     public static final BlockState LOTUS_FLOWER = EnvironmentalBlocks.LOTUS_FLOWER.get().getDefaultState();
-    
+    public static final BlockState MUD = EnvironmentalBlocks.MUD.get().getDefaultState();
+
     public static final BlockState WILLOW_LOG = EnvironmentalBlocks.WILLOW_LOG.get().getDefaultState();
     public static final BlockState WILLOW_LEAVES = EnvironmentalBlocks.WILLOW_LEAVES.get().getDefaultState();
 

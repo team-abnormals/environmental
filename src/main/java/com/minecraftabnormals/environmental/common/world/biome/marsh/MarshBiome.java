@@ -29,7 +29,8 @@ public final class MarshBiome extends AbnormalsBiome {
         DefaultBiomeFeatures.addOres(this);
         DefaultBiomeFeatures.addSwampClayDisks(this);
         EnvironmentalBiomeFeatures.addMarshPools(this);
-
+        EnvironmentalBiomeFeatures.addMudDisks(this);
+        
         EnvironmentalBiomeFeatures.addDenseCattails(this);
         EnvironmentalBiomeFeatures.addMarshVegetation(this);
         EnvironmentalBiomeFeatures.addDuckweed(this, 0.1F);

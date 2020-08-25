@@ -27,6 +27,7 @@ public final class MushroomMarshBiome extends AbnormalsBiome {
         DefaultBiomeFeatures.addOres(this);
         DefaultBiomeFeatures.addSwampClayDisks(this);
         EnvironmentalBiomeFeatures.addMarshPools(this);
+        EnvironmentalBiomeFeatures.addMudDisks(this);
 
         EnvironmentalBiomeFeatures.addDenseCattails(this);
         EnvironmentalBiomeFeatures.addMarshVegetation(this);
