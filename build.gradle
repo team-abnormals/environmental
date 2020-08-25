@@ -21,7 +21,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 
 mixin {
-    add sourceSets.main, "neapolitan.refmap.json"
+    add sourceSets.main, "environmental.refmap.json"
 }
 
 version = '1.0.0'
