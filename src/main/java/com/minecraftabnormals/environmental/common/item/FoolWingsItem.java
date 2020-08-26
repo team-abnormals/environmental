@@ -52,20 +52,15 @@ public class FoolWingsItem extends ArmorItem {
 			boolean wearingWings = player.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() instanceof FoolWingsItem;
 			boolean hasJumped = hasJumpedMap.get(uuid);
 
-			if (player.isOnGround())
-				hasJumpedMap.put(uuid, false);
-			if (!wearingWings)
-				return;
+			if (player.isOnGround()) hasJumpedMap.put(uuid, false);
+			if (!wearingWings) return;
 
 			if (!player.isOnGround() && !hasJumped && !player.isElytraFlying() && !player.abilities.isFlying) {
 				if (player.isJumping && player.getMotion().getY() < 0) {
 					player.setMotion(player.getMotion().getX(), 0.5D, player.getMotion().getZ());
 					hasJumpedMap.put(uuid, true);
-
 					player.playSound(SoundEvents.ENTITY_ENDER_DRAGON_FLAP, 0.4F, 2.0F);
-					player.getItemStackFromSlot(EquipmentSlotType.CHEST).damageItem(2, player, (onBroken) -> {
-						onBroken.sendBreakAnimation(EquipmentSlotType.CHEST);
-					});
+					player.getItemStackFromSlot(EquipmentSlotType.CHEST).attemptDamageItem(1, player.world.rand, null);
 				}
 
 			}

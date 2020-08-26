@@ -1,5 +1,6 @@
 package com.minecraftabnormals.environmental.client.model;
 
+import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -48,15 +49,18 @@ public class FoolWingsModel<T extends LivingEntity> extends BipedModel<T> {
 		this.leftWing.addChild(this.leftBackTop);
 		this.leftBackTop.setTextureOffset(46, 49).addBox(-5.0F, -25.0F, 0.0F, 6.0F, 6.0F, 3.0F, 0.0F, true);
 	}
-
+	
 	@Override
-	public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
-//		rightWing.copyModelAngles(bipedBody);
-//		leftWing.copyModelAngles(bipedBody);
-		
-		rightWing.render(matrixStack, buffer, packedLight, packedOverlay);
-		leftWing.render(matrixStack, buffer, packedLight, packedOverlay);
+	protected Iterable<ModelRenderer> getBodyParts() {
+		return ImmutableList.of(this.leftWing, this.rightWing);
 	}
+	
+	@Override
+	public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+		rightWing.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+		leftWing.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
 
 	public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
 		modelRenderer.rotateAngleX = x;
