@@ -145,7 +145,7 @@ public class EnvironmentalBlocks {
     public static final RegistryObject<Block> VERTICAL_WILLOW_PLANKS = HELPER.createCompatBlock("quark", "vertical_willow_planks", () -> new Block(EnvironmentalProperties.WILLOW_PLANKS), ItemGroup.BUILDING_BLOCKS);
     public static final RegistryObject<Block> WILLOW_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "willow_vertical_slab", () -> new VerticalSlabBlock(EnvironmentalProperties.WILLOW_PLANKS), ItemGroup.BUILDING_BLOCKS);
     public static final RegistryObject<Block> WILLOW_LADDER = HELPER.createCompatBlock("quark", "willow_ladder", () -> new AbnormalsLadderBlock(EnvironmentalProperties.WILLOW_LADDER), ItemGroup.DECORATIONS);
-    public static final RegistryObject<Block> WILLOW_BOOKSHELF = HELPER.createCompatBlock("quark", "willow_bookshelf", () -> new BookshelfBlock(EnvironmentalProperties.WILLOW_BOOKSHELF), ItemGroup.DECORATIONS);
+    public static final RegistryObject<Block> WILLOW_BOOKSHELF = HELPER.createCompatBlock("quark", "willow_bookshelf", () -> new BookshelfBlock(EnvironmentalProperties.WILLOW_BOOKSHELF), ItemGroup.BUILDING_BLOCKS);
     public static final RegistryObject<Block> WILLOW_LEAF_CARPET = HELPER.createCompatBlock("quark", "willow_leaf_carpet", () -> new LeafCarpetBlock(EnvironmentalProperties.WILLOW_LEAVES.notSolid()), ItemGroup.DECORATIONS);
     public static final RegistryObject<Block> WILLOW_BEEHIVE = HELPER.createCompatBlock("buzzier_bees", "willow_beehive", () -> new AbnormalsBeehiveBlock(Properties.from(Blocks.BEEHIVE)), ItemGroup.DECORATIONS);
     public static final Pair<RegistryObject<AbnormalsChestBlock>, RegistryObject<AbnormalsTrappedChestBlock>> WILLOW_CHESTS = HELPER.createCompatChestBlocks("willow", MaterialColor.GREEN);
@@ -174,7 +174,7 @@ public class EnvironmentalBlocks {
     public static final RegistryObject<Block> VERTICAL_CHERRY_PLANKS = HELPER.createCompatBlock("quark", "vertical_cherry_planks", () -> new Block(EnvironmentalProperties.CHERRY_PLANKS), ItemGroup.BUILDING_BLOCKS);
     public static final RegistryObject<Block> CHERRY_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "cherry_vertical_slab", () -> new VerticalSlabBlock(EnvironmentalProperties.CHERRY_PLANKS), ItemGroup.BUILDING_BLOCKS);
     public static final RegistryObject<Block> CHERRY_LADDER = HELPER.createCompatBlock("quark", "cherry_ladder", () -> new AbnormalsLadderBlock(EnvironmentalProperties.CHERRY_LADDER), ItemGroup.DECORATIONS);
-    public static final RegistryObject<Block> CHERRY_BOOKSHELF = HELPER.createCompatBlock("quark", "cherry_bookshelf", () -> new BookshelfBlock(EnvironmentalProperties.CHERRY_BOOKSHELF), ItemGroup.DECORATIONS);
+    public static final RegistryObject<Block> CHERRY_BOOKSHELF = HELPER.createCompatBlock("quark", "cherry_bookshelf", () -> new BookshelfBlock(EnvironmentalProperties.CHERRY_BOOKSHELF), ItemGroup.BUILDING_BLOCKS);
     public static final RegistryObject<Block> CHERRY_LEAF_CARPET = HELPER.createCompatBlock("quark", "cherry_leaf_carpet", () -> new LeafCarpetBlock(EnvironmentalProperties.CHERRY_LEAVES.notSolid()), ItemGroup.DECORATIONS);
     public static final RegistryObject<Block> CHERRY_BEEHIVE = HELPER.createCompatBlock("buzzier_bees", "cherry_beehive", () -> new AbnormalsBeehiveBlock(Properties.from(Blocks.BEEHIVE)), ItemGroup.DECORATIONS);
     public static final Pair<RegistryObject<AbnormalsChestBlock>, RegistryObject<AbnormalsTrappedChestBlock>> CHERRY_CHESTS = HELPER.createCompatChestBlocks("cherry", MaterialColor.RED);
@@ -215,7 +215,7 @@ public class EnvironmentalBlocks {
     public static final RegistryObject<Block> POTTED_PURPLE_WISTERIA_SAPLING = HELPER.createBlockNoItem("potted_purple_wisteria_sapling", () -> new FlowerPotBlock(PURPLE_WISTERIA_SAPLING.get(), EnvironmentalProperties.FLOWER_POT));
     public static final RegistryObject<Block> POTTED_WHITE_WISTERIA_SAPLING = HELPER.createBlockNoItem("potted_white_wisteria_sapling", () -> new FlowerPotBlock(WHITE_WISTERIA_SAPLING.get(), EnvironmentalProperties.FLOWER_POT));
 
-    public static final RegistryObject<Block> WISTERIA_BOOKSHELF = HELPER.createCompatBlock("quark", "wisteria_bookshelf", () -> new BookshelfBlock(EnvironmentalProperties.WISTERIA_BOOKSHELF), ItemGroup.DECORATIONS);
+    public static final RegistryObject<Block> WISTERIA_BOOKSHELF = HELPER.createCompatBlock("quark", "wisteria_bookshelf", () -> new BookshelfBlock(EnvironmentalProperties.WISTERIA_BOOKSHELF), ItemGroup.BUILDING_BLOCKS);
     public static final RegistryObject<Block> WISTERIA_LADDER = HELPER.createCompatBlock("quark", "wisteria_ladder", () -> new AbnormalsLadderBlock(EnvironmentalProperties.WISTERIA_LADDER), ItemGroup.DECORATIONS);
     public static final RegistryObject<Block> VERTICAL_WISTERIA_PLANKS = HELPER.createCompatBlock("quark", "vertical_wisteria_planks", () -> new Block(EnvironmentalProperties.WISTERIA_PLANKS), ItemGroup.BUILDING_BLOCKS);
     public static final RegistryObject<Block> WISTERIA_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "wisteria_vertical_slab", () -> new VerticalSlabBlock(EnvironmentalProperties.WISTERIA_PLANKS), ItemGroup.BUILDING_BLOCKS);
