@@ -9,16 +9,20 @@ import com.minecraftabnormals.environmental.core.registry.EnvironmentalVillagers
 import com.teamabnormals.abnormals_core.core.utils.TradeUtils;
 import com.teamabnormals.abnormals_core.core.utils.TradeUtils.ItemsForEmeraldsTrade;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.entity.merchant.villager.VillagerTrades.ITrade;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
 
 @Mod.EventBusSubscriber(modid = Environmental.MODID)
 public class EnvironmentalTrades {
@@ -36,6 +40,7 @@ public class EnvironmentalTrades {
         event.getGenericTrades().add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.RICE.get(), 1, 1, 12, 1));
         event.getGenericTrades().add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.DUCKWEED.get(), 1, 2, 6, 1));
         event.getRareTrades().add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.SLABFISH_BUCKET.get(), 5, 1, 4, 1));
+        event.getRareTrades().add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.WANDERER_BOOTS.get(), 24, 1, 1, 1));
 
         event.getGenericTrades().add(new ItemsForEmeraldsTrade(EnvironmentalBlocks.CARTWHEEL.get(), 2, 1, 5, 1));
         event.getGenericTrades().add(new ItemsForEmeraldsTrade(EnvironmentalBlocks.VIOLET.get(), 1, 1, 12, 1));
@@ -82,13 +87,13 @@ public class EnvironmentalTrades {
 			// APPRENTICE //
 			for(Item item : ItemTags.SIGNS.getAllElements()) {
 				if (notOnBlacklist(item, defaultRemoved)) {
-					apprentice.add(new TradeUtils.EmeraldsForItemsTrade(item, 6, 1, 4, 10));
+					apprentice.add(new TradeUtils.ItemsForEmeraldsTrade(item, 1, 3, 4, 10));
 				}
 			}
 			
 			for(Item item : ItemTags.WOODEN_TRAPDOORS.getAllElements()) {
 				if (notOnBlacklist(item, defaultRemoved)) {
-					apprentice.add(new TradeUtils.ItemsForEmeraldsTrade(item, 1, 6, 4, 10));
+					apprentice.add(new TradeUtils.ItemsForEmeraldsTrade(item, 1, 4, 8, 10));
 				}
 			}
 			
@@ -99,7 +104,7 @@ public class EnvironmentalTrades {
 			
 			for(Item item : ItemTags.WOODEN_DOORS.getAllElements()) {
 				if (notOnBlacklist(item, defaultRemoved)) {
-					journeyman.add(new TradeUtils.ItemsForEmeraldsTrade(item, 1, 3, 5, 15));
+					journeyman.add(new TradeUtils.ItemsForEmeraldsTrade(item, 1, 2, 8, 15));
 				}
 			}
 			
@@ -109,7 +114,7 @@ public class EnvironmentalTrades {
 			expert.add(new TradeUtils.EmeraldsForItemsTrade(Items.GOLDEN_AXE, 1, 7, 1, 20));
 
 			// MASTER //
-			master.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.CONSTRUCTOR_BELT.get(), 24, 1, 4, 5));
+			master.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.CONSTRUCTOR_BELT.get(), 24, 1, 1, 5));
 		}
 	}
 	
@@ -122,10 +127,40 @@ public class EnvironmentalTrades {
 	
 	@SubscribeEvent
 	public static void onCeramistTradesEvent(VillagerTradesEvent event) {
+		Block[] terracottas = new Block[] {Blocks.WHITE_TERRACOTTA, Blocks.ORANGE_TERRACOTTA, Blocks.MAGENTA_TERRACOTTA, Blocks.LIGHT_BLUE_TERRACOTTA, Blocks.YELLOW_TERRACOTTA, Blocks.LIME_TERRACOTTA, Blocks.PINK_TERRACOTTA, Blocks.GRAY_TERRACOTTA, Blocks.LIGHT_GRAY_TERRACOTTA, Blocks.CYAN_TERRACOTTA, Blocks.PURPLE_TERRACOTTA, Blocks.BLUE_TERRACOTTA, Blocks.BROWN_TERRACOTTA, Blocks.GREEN_TERRACOTTA, Blocks.RED_TERRACOTTA, Blocks.BLACK_TERRACOTTA};
+		Block[] glazed_terracottas = new Block[] {Blocks.WHITE_GLAZED_TERRACOTTA, Blocks.ORANGE_GLAZED_TERRACOTTA, Blocks.MAGENTA_GLAZED_TERRACOTTA, Blocks.LIGHT_BLUE_GLAZED_TERRACOTTA, Blocks.YELLOW_GLAZED_TERRACOTTA, Blocks.LIME_GLAZED_TERRACOTTA, Blocks.PINK_GLAZED_TERRACOTTA, Blocks.GRAY_GLAZED_TERRACOTTA, Blocks.LIGHT_GRAY_GLAZED_TERRACOTTA, Blocks.CYAN_GLAZED_TERRACOTTA, Blocks.PURPLE_GLAZED_TERRACOTTA, Blocks.BLUE_GLAZED_TERRACOTTA, Blocks.BROWN_GLAZED_TERRACOTTA, Blocks.GREEN_GLAZED_TERRACOTTA, Blocks.RED_GLAZED_TERRACOTTA, Blocks.BLACK_GLAZED_TERRACOTTA};
+		Block[] terracotta_bricks = new Block[] {EnvironmentalBlocks.WHITE_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.ORANGE_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.MAGENTA_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.LIGHT_BLUE_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.YELLOW_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.LIME_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.PINK_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.GRAY_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.LIGHT_GRAY_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CYAN_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.PURPLE_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.BLUE_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.BROWN_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.GREEN_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.RED_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.BLACK_TERRACOTTA_BRICKS.get()};
+		Block[] chisled_terracotta_bricks = new Block[] {EnvironmentalBlocks.CHISELED_WHITE_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_ORANGE_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_MAGENTA_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_LIGHT_BLUE_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_YELLOW_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_LIME_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_PINK_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_GRAY_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_LIGHT_GRAY_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_CYAN_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_PURPLE_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_BLUE_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_BROWN_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_GREEN_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_RED_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_BLACK_TERRACOTTA_BRICKS.get()};
+
 		List<ITrade> novice = event.getTrades().get(1);
+		List<ITrade> apprentice = event.getTrades().get(2);
+		List<ITrade> journeyman = event.getTrades().get(3);
+		List<ITrade> expert = event.getTrades().get(4);
+		List<ITrade> master = event.getTrades().get(5);
+		
 		if(event.getType() == EnvironmentalVillagers.CERAMIST.get()) {
-			novice.add(new TradeUtils.EmeraldsForItemsTrade(Items.ACACIA_BOAT, 23, 1, 6, 1));
+			novice.add(new TradeUtils.EmeraldsForItemsTrade(EnvironmentalItems.MUD_BALL.get(), 16, 1, 16, 2));
+			novice.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.MUD_BRICK.get(), 1, 10, 16, 1));
 			
+			apprentice.add(new TradeUtils.ItemsForEmeraldsTrade(Items.FLOWER_POT, 1, 1, 10, 2));
+			apprentice.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalBlocks.SLABFISH_EFFIGY.get(), 1, 1, 10, 2));
+			apprentice.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalBlocks.CHISELED_BRICKS.get(), 1, 4, 16, 10));
+			apprentice.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalBlocks.CHISELED_MUD_BRICKS.get(), 1, 4, 16, 10));
+			if (ModList.get().isLoaded("buzzier_bees"))
+				apprentice.add(new TradeUtils.ItemsForEmeraldsTrade(ForgeRegistries.ITEMS.getValue(new ResourceLocation("buzzier_bees", "honey_pot")), 3, 1, 10, 6));
+			
+			for(Block terracotta : terracottas)
+				journeyman.add(new TradeUtils.EmeraldsForItemsTrade(terracotta, 1, 1, 12, 15));
+			for(Block glazed_terracotta : glazed_terracottas) 
+				journeyman.add(new TradeUtils.EmeraldsForItemsTrade(glazed_terracotta, 1, 1, 12, 15));
+			
+			
+			for(Block terracotta_brick : terracotta_bricks) 
+				expert.add(new TradeUtils.ItemsForEmeraldsTrade(terracotta_brick, 1, 1, 12, 15));
+			for(Block chiseled_terracotta_brick : chisled_terracotta_bricks) 
+				expert.add(new TradeUtils.ItemsForEmeraldsTrade(chiseled_terracotta_brick, 1, 1, 12, 15));
+			
+			master.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.CONSTRUCTOR_BELT.get(), 24, 1, 1, 5));
 		}
 	}
 	
