@@ -1,5 +1,4 @@
-# Minecraft Abnormals: Environmental
-![enter image description here](https://cdn.discordapp.com/attachments/710973586654887956/748241960246050850/environmental_logo.png)
+![](https://cdn.discordapp.com/attachments/710973586654887956/748241960246050850/environmental_logo.png)
 ## Introduction
 You've seen the Endergetic Expansion, an expansion to the End. You've heard of Nether Extension, an expansion to the nether.. but what about an expansion to the whole Overworld and its biomes? Introducing... **Environmental**!
 
