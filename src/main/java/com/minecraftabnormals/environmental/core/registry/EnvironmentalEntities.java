@@ -2,8 +2,10 @@ package com.minecraftabnormals.environmental.core.registry;
 
 import com.minecraftabnormals.environmental.client.render.DuckRenderer;
 import com.minecraftabnormals.environmental.client.render.SlabfishRenderer;
+import com.minecraftabnormals.environmental.client.render.YakRenderer;
 import com.minecraftabnormals.environmental.common.entity.DuckEntity;
 import com.minecraftabnormals.environmental.common.entity.SlabfishEntity;
+import com.minecraftabnormals.environmental.common.entity.YakEntity;
 import com.minecraftabnormals.environmental.core.Environmental;
 import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
 
@@ -29,13 +31,15 @@ public class EnvironmentalEntities {
 
     public static final RegistryObject<EntityType<SlabfishEntity>> SLABFISH = HELPER.createLivingEntity("slabfish", SlabfishEntity::new, EntityClassification.CREATURE, 0.45F, 0.9F);
     public static final RegistryObject<EntityType<DuckEntity>> DUCK = HELPER.createLivingEntity("duck", DuckEntity::new, EntityClassification.CREATURE, 0.5F, 0.8F);
+    public static final RegistryObject<EntityType<YakEntity>> YAK = HELPER.createLivingEntity("yak", YakEntity::new, EntityClassification.CREATURE, 0.5F, 0.8F);
 
 //	public static final RegistryObject<EntityType<AxolotlEntity>> AXOLOTL = HELPER.createLivingEntity("axolotl", AxolotlEntity::new, EntityClassification.CREATURE, 0.6F, 0.5F));
 
     @OnlyIn(Dist.CLIENT)
     public static void registerRendering() {
-        RenderingRegistry.registerEntityRenderingHandler((EntityType<? extends SlabfishEntity>) SLABFISH.get(), SlabfishRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler((EntityType<? extends DuckEntity>) DUCK.get(), DuckRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(SLABFISH.get(), SlabfishRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(DUCK.get(), DuckRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(YAK.get(), YakRenderer::new);
         //RenderingRegistry.registerEntityRenderingHandler((EntityType<? extends AxolotlEntity>)AXOLOTL.get(), AxolotlRenderer::new);
     }
 
@@ -43,17 +47,20 @@ public class EnvironmentalEntities {
         ForgeRegistries.BIOMES.getValues().stream().forEach(EnvironmentalEntities::processSpawning);
 
         EntitySpawnPlacementRegistry.register(EnvironmentalEntities.SLABFISH.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canAnimalSpawn);
+        EntitySpawnPlacementRegistry.register(EnvironmentalEntities.YAK.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canAnimalSpawn);
 
     }
 
     private static void processSpawning(Biome biome) {
-        if (biome.getCategory() == Category.SWAMP) {
+        if (biome.getCategory() == Category.SWAMP)
             biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(EnvironmentalEntities.SLABFISH.get(), 50, 2, 4));
-        }
+        if(biome.getCategory() == Category.EXTREME_HILLS)
+            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(YAK.get(), 50, 2, 4));
     }
 
     public static void registerAttributes() {
         GlobalEntityTypeAttributes.put(SLABFISH.get(), SlabfishEntity.registerAttributes().create());
         GlobalEntityTypeAttributes.put(DUCK.get(), ChickenEntity.func_234187_eI_().create());
+        GlobalEntityTypeAttributes.put(YAK.get(), YakEntity.registerAttributes().create());
     }
 }

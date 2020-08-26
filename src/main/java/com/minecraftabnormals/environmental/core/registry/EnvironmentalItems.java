@@ -63,6 +63,7 @@ public class EnvironmentalItems {
 
     public static final RegistryObject<Item> SLABFISH_SPAWN_EGG = HELPER.createSpawnEggItem("slabfish", () -> EnvironmentalEntities.SLABFISH.get(), 6263617, 13940616);
     public static final RegistryObject<Item> DUCK_SPAWN_EGG = HELPER.createSpawnEggItem("duck", () -> EnvironmentalEntities.DUCK.get(), 1138489, 16754947);
+    public static final RegistryObject<Item> YAK_SPAWN_EGG = HELPER.createSpawnEggItem("yak", () -> EnvironmentalEntities.YAK.get(), 5392966, 8607802);
 
 //	public static final RegistryObject<Item> AXOLOTL_SPAWN_EGG = HELPER.createSpawnEggItem("axolotl", () -> EnvironmentalEntities.AXOLOTL.get(), 6263617, 13940616);
 }
