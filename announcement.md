@@ -1,29 +1,37 @@
-![](https://cdn.discordapp.com/attachments/710973586654887956/748241960246050850/environmental_logo.png)
+
+![Logo](https://cdn.discordapp.com/attachments/710973586654887956/748241960246050850/environmental_logo.png)
 ## Introduction
 You've seen the Endergetic Expansion, an expansion to the End. You've heard of Nether Extension, an expansion to the nether.. but what about an expansion to the whole Overworld and its biomes? Introducing... **Environmental**!
 
 During development of our mods, specifically Swamp Expansion and Bloomful we noticed we had a lot of ideas to create other biome expansions similar to those mods... it eventually started getting quite out of hand. We decided to take a big leap, and merge the mods into one sole Overworld expansion mod, as we didn't want to keep creating more and more biome expansion mods. We are very excited to get it out soon and show everyone what awaits!
 ## Content
+![Content](https://cdn.discordapp.com/attachments/715791440482926613/748259303076397127/unknown.png)
 To start, all content from Swamp Expansion and Bloomful was merged into this mod. The old flowers from Buzzier Bees were also moved here as they fit expanding the biomes better. Hibiscus, Delphiniums, and Dianthus flowers have all recieved texture updates from Five.
 
 Mud Vases from Swamp Expansion have turned into Slabfish Effigies, a new block to attract Slabfish, and mud now generates as block patches in Swamps and Marshes!
 
 Slabfish have gotten some new variants to account for new biomes including the new Nether update biomes. Slabfish variants, backpacks, and sweaters have also gone data-driven, which was announced earlier. Tutorials for adding your own Slabfish, Slabfish backpacks, and Slabfish sweaters, will come soon.
 ### Wildlife
-There is a nice selection of new wildlife, with plenty more to come! You can find Deer in Forest biomes, Duck in Swamp biomes, Yak in Mountain biomes, and Fennec Foxes in Desert biomes.
+![Wildlife](https://cdn.discordapp.com/attachments/715791440482926613/748256566867918873/unknown.png)
+There is a nice selection of new wildlife, with plenty more to come! You can find Deer wandering in Forest biomes, and Duck in Swamp biomes!
 
 They do have some special capabilities and AI but as we wanted to get some new content out they are still fairly simple at the moment, but fear not, as more content and interactions will come in the future for them, as well as plenty of new mobs and animals!
+
+Some of these brilliant animals planned include Butterflies and Wisterients from Endergy's original Flower Forest expansion suggestion, as well as Koi and Penguin which were originally planned for Upgrade Aquatic but were moved here after further discussion. More planned animals include Fennec Foxes, Seals, Cardinals, Koi, Antelope, Yak, and Axolotls! 
 ### Blossom Woods
+![Blossom Woods](https://cdn.discordapp.com/attachments/715791440482926613/748259704593055905/unknown.png)
 That's right! A brand new and beautiful biome has appeared. Blossom Forest biomes can now be found, which are filled with lovely pink Cherry Trees, which produce falling pink leaf particles and can drop Cherries similar to how apples are dropped. Cherry Wood is a red color, similar to that of the wood  pictured on the Smithing Table.
 
 Bamboo is spread out across the biome, alongside the new Lotus Flowers that create floating red particles. Deer and Panda can be found wandering this forest, with Koi and Cardinals joining them in the future! 
 
 Blossom Woods have a Blossom Hills variant, which is identical except for the height of the biome. Blossom Highlands are a mountainous variant that generates separately, and has a sub-biome called Blossom Valleys, which are low and flat. 
 ### Villagers & Workstations
+![Villagers & Workstations](https://cdn.discordapp.com/attachments/715791440482926613/748261903008137235/unknown.png)
 Mud Bricks have been provided a new use, they are now also used to craft Kilns! Kilns can smelt everything Blast Furnaces and Smokers don't cover at double speed. These are also the workstations for the new Ceramist villager, who sells content related to bricks and building.
 
 After adding all these wood types, we realized crafting recipes for the variants are somewhat inconvenient. Sawmills can now be made, which function similar to Stonecutters but for wood-related recipes! They are the workstation for the new Carpenter villager, that sells content related to wood and trees.
 ### Explorer's Gear
+![Explorer's Gear](https://cdn.discordapp.com/attachments/715791440482926613/748260055953965196/unknown.png)
 Behold a set unlike any other, with parts that all have special effects, uses, and obtaining methods. The Explorer's Gear is a new set including a hood, wings, belt, boots, and a cleaver.
 
 The Thief's Hood is a new headgear that makes the user's nameplate not render, as well as their name appearing as `???` in chat. In the future, it will also ideally decrease mob detection range to provide some use outside multiplayer. It is a rare drop from Skeletons and Zombies.
