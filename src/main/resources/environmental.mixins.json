@@ -6,7 +6,8 @@
   "refmap": "environmental.refmap.json",
   "mixins": [
     "VindicatorEntityMixin",
-    "LilyPadBlockMixin"
+    "LilyPadBlockMixin",
+    "DoublePlantBlockMixin"
   ],
   "client": [
   ],
