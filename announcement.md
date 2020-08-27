@@ -51,8 +51,6 @@ To go with Ice Bricks, Ice Lanterns and Ice Chains are new craftable decorations
 ## Final Remarks
 Developers: do not let this discourage you from creating and developing your own expansions to the overworld and the biomes we plan on expanding! Even if some ideas overlap a bit, it is not a major issue as we are sure both mods will have different plans for that content and the ideas as a whole. Please don't cancel your plans because of us, we love to see your mods and ideas as well! We know from time to time content may overlap but even if it does there are ways to address that and create compatibility for the player-base.
 
-We'd also like to give a shout-out to **Cell Membrane**, who guessed the theme of the mod: ![cell](https://cdn.discordapp.com/attachments/702219337863528636/748410223580020746/unknown.png) 
-And another shout-out to **Estellairon**, who guessed the exact name of the mod:
-![estellairon](https://cdn.discordapp.com/attachments/702219337863528636/748410213534793731/unknown.png)
+We'd also like to give a shout-out to **Cell Membrane**, who guessed the theme of the mod, and another shout-out to **Estellairon**, who guessed the exact name of the mod!
 
 Finally, we have many big plans after the release, including tons of new mobs, blocks, items, and more. This mod will only grow over time! We hope you all are excited for the release of **Environmental** which will hopefully be coming very soon! The team has put a lot of effort and love into it and we are hope you are as excited for it as we are!
