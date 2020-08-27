@@ -9,8 +9,8 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 
-public final class BlossomHillsBiome extends AbnormalsBiome {
-    public BlossomHillsBiome(Biome.Builder builder) {
+public final class BlossomValleysBiome extends AbnormalsBiome {
+    public BlossomValleysBiome(Biome.Builder builder) {
         super(builder);
     }
 
@@ -28,8 +28,8 @@ public final class BlossomHillsBiome extends AbnormalsBiome {
         DefaultBiomeFeatures.addLakes(this);
         DefaultBiomeFeatures.addSprings(this);
 
-        EnvironmentalBiomeFeatures.addCherryTrees(this);
-        EnvironmentalBiomeFeatures.addBlossomBamboo(this);
+        EnvironmentalBiomeFeatures.addValleyCherryTrees(this);
+        EnvironmentalBiomeFeatures.addBlossomValleysBamboo(this);
         EnvironmentalBiomeFeatures.addBlossomVegetation(this);
         EnvironmentalBiomeFeatures.addGrass(this);
         EnvironmentalBiomeFeatures.addShortFlower(EnvironmentalFeatureConfigs.LOTUS_FLOWER, this, 3);

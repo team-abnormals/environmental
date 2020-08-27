@@ -9,6 +9,8 @@ public class EnvironmentalBiomeBuilders {
     public static final Biome.Builder MARSH         = createMarshBiome(-0.25F, 0.0F);
     public static final Biome.Builder BLOSSOM_WOODS = createBlossomBiome(0.1F, 0.2F);
     public static final Biome.Builder BLOSSOM_HILLS = createBlossomBiome(0.45F, 0.3F);
+    public static final Biome.Builder BLOSSOM_HIGHLANDS = createBlossomBiome(1.4F, 0.5F);
+    public static final Biome.Builder BLOSSOM_VALLEYS 	= createBlossomBiome(0.1F, 0.1F);
 
     private static Biome.Builder createMarshBiome(float depth, float scale) {
         return (new Biome.Builder())
@@ -31,8 +33,8 @@ public class EnvironmentalBiomeBuilders {
         return (new Biome.Builder())
         .surfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_DIRT_GRAVEL_CONFIG)
         .precipitation(Biome.RainType.RAIN).category(Biome.Category.FOREST)
-        .depth(0.1F)
-        .scale(0.2F)
+        .depth(depth)
+        .scale(scale)
         .temperature(0.75F)
         .downfall(0.8F)
         .func_235097_a_((new BiomeAmbience.Builder())

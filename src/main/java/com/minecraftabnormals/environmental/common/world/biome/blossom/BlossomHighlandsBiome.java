@@ -3,17 +3,19 @@ package com.minecraftabnormals.environmental.common.world.biome.blossom;
 import com.minecraftabnormals.environmental.common.world.EnvironmentalBiomeFeatures;
 import com.minecraftabnormals.environmental.common.world.EnvironmentalFeatureConfigs;
 import com.minecraftabnormals.environmental.common.world.biome.AbnormalsBiome;
+import com.minecraftabnormals.environmental.core.registry.EnvironmentalBiomes;
 
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
+import net.minecraft.world.gen.INoiseRandom;
 
-public final class BlossomHillsBiome extends AbnormalsBiome {
-    public BlossomHillsBiome(Biome.Builder builder) {
+public final class BlossomHighlandsBiome extends AbnormalsBiome {
+    public BlossomHighlandsBiome(Biome.Builder builder) {
         super(builder);
     }
-
+    
     @Override
     public void addFeatures() {
         DefaultBiomeFeatures.func_235196_b_(this);
@@ -61,5 +63,10 @@ public final class BlossomHillsBiome extends AbnormalsBiome {
         this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.ENDERMAN, 10, 1, 4));
         this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.WITCH, 5, 1, 1));
         this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.SLIME, 1, 1, 1));
+    }
+    
+    @Override
+    public Biome getHill(INoiseRandom rand) {
+        return EnvironmentalBiomes.BLOSSOM_VALLEYS.get();
     }
 }

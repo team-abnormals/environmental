@@ -31,6 +31,7 @@ public final class BlossomWoodsBiome extends AbnormalsBiome {
         DefaultBiomeFeatures.addSprings(this);
 
         EnvironmentalBiomeFeatures.addCherryTrees(this);
+        EnvironmentalBiomeFeatures.addBlossomBamboo(this);
         EnvironmentalBiomeFeatures.addBlossomVegetation(this);
         EnvironmentalBiomeFeatures.addGrass(this);
         EnvironmentalBiomeFeatures.addShortFlower(EnvironmentalFeatureConfigs.LOTUS_FLOWER, this, 3);
