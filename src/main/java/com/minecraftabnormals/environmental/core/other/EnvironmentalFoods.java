@@ -12,6 +12,9 @@ public class EnvironmentalFoods {
     
     public static final Food VENISON = (new Food.Builder()).hunger(2).saturation(0.3F).meat().build();
     public static final Food COOKED_VENISON = (new Food.Builder()).hunger(6).saturation(0.8F).meat().build();
+    
+    public static final Food DUCK = (new Food.Builder()).hunger(4).saturation(0.1F).effect(() -> new EffectInstance(Effects.HUNGER, 600, 0), 0.3F).meat().build();
+    public static final Food COOKED_DUCK = (new Food.Builder()).hunger(8).saturation(0.3F).meat().build();
 	
     public static final Food RICE_BALL = new Food.Builder().hunger(4).saturation(0.5F).build();
 

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "environmental:duck"
+  },
+  "result": "environmental:cooked_duck",
+  "experience": 0.35,
+  "cookingtime": 200
+}
