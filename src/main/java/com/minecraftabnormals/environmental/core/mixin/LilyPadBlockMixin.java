@@ -35,8 +35,8 @@ public class LilyPadBlockMixin extends Block implements IGrowable {
 
 	@Override
 	public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
-		if (rand.nextInt(4) == 0 && LargeLilyPadBlock.checkPositions(worldIn, pos, EnvironmentalBlocks.LARGE_LILY_PAD.get().getDefaultState())) {
-            LargeLilyPadBlock.placeAt(worldIn, pos, EnvironmentalBlocks.LARGE_LILY_PAD.get().getDefaultState());
+		if (rand.nextInt(4) == 0) {
+            LargeLilyPadBlock.placeAt(worldIn, pos, EnvironmentalBlocks.LARGE_LILY_PAD.get().getDefaultState(), 2);
         }
 	}
 }

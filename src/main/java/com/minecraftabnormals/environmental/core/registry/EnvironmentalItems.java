@@ -1,9 +1,9 @@
 package com.minecraftabnormals.environmental.core.registry;
 
 import com.minecraftabnormals.environmental.common.item.ArchitectBeltItem;
-import com.minecraftabnormals.environmental.common.item.DuckweedItem;
 import com.minecraftabnormals.environmental.common.item.ExecutionerCleaverItem;
 import com.minecraftabnormals.environmental.common.item.FoolWingsItem;
+import com.minecraftabnormals.environmental.common.item.LargeLilyPadItem;
 import com.minecraftabnormals.environmental.common.item.MudBallItem;
 import com.minecraftabnormals.environmental.common.item.SlabfishBucketItem;
 import com.minecraftabnormals.environmental.common.item.ThiefHoodItem;
@@ -19,6 +19,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.BlockNamedItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.LilyPadItem;
 import net.minecraft.item.Rarity;
 import net.minecraft.item.SoupItem;
 import net.minecraftforge.fml.RegistryObject;
@@ -50,7 +51,7 @@ public class EnvironmentalItems {
     public static final RegistryObject<Item> CHERRY_BOAT 	= HELPER.createBoatItem("cherry", EnvironmentalBlocks.CHERRY_PLANKS);
 
     public static final RegistryObject<Item> CATTAIL_SEEDS      = HELPER.createItem("cattail_seeds", () -> new BlockNamedItem(EnvironmentalBlocks.CATTAIL_SPROUTS.get(), new Item.Properties().group(ItemGroup.MATERIALS)));
-    public static final RegistryObject<Item> DUCKWEED           = HELPER.createItem("duckweed", () -> new DuckweedItem(EnvironmentalBlocks.DUCKWEED.get(), new Item.Properties().group(ItemGroup.DECORATIONS)));
+    public static final RegistryObject<Item> DUCKWEED           = HELPER.createItem("duckweed", () -> new LilyPadItem(EnvironmentalBlocks.DUCKWEED.get(), new Item.Properties().group(ItemGroup.DECORATIONS)));
     public static final RegistryObject<Item> RICE               = HELPER.createItem("rice", () -> new BlockItem(EnvironmentalBlocks.RICE.get(), new Item.Properties().group(ItemGroup.MISC)));
     public static final RegistryObject<Item> RICE_BALL          = HELPER.createItem("rice_ball", () -> new Item(new Item.Properties().food(EnvironmentalFoods.RICE_BALL).group(ItemGroup.FOOD)));
     public static final RegistryObject<Item> SQUID_INK_RISOTTO  = HELPER.createItem("squid_ink_risotto", () -> new SoupItem(new Item.Properties().maxStackSize(1).food(EnvironmentalFoods.SQUID_INK_RISOTTO).group(ItemGroup.FOOD)));
@@ -67,6 +68,9 @@ public class EnvironmentalItems {
     public static final RegistryObject<Item> MUSIC_DISC_SLABRAVE        = HELPER.createItem("music_disc_slabrave", () -> new AbnormalsMusicDiscItem(12, () -> EnvironmentalSounds.SLABRAVE.get(), new Item.Properties().maxStackSize(1).group(ItemGroup.MISC).rarity(Rarity.RARE)));
     public static final RegistryObject<Item> MUSIC_DISC_LEAVING_HOME    = HELPER.createItem("music_disc_leaving_home", () -> new AbnormalsMusicDiscItem(12, () -> EnvironmentalSounds.LEAVING_HOME.get(), new Item.Properties().maxStackSize(1).group(ItemGroup.MISC).rarity(Rarity.RARE)));
 
+    public static final RegistryObject<Item> LARGE_LILY_PAD	= HELPER.createItem("large_lily_pad", () -> new LargeLilyPadItem(EnvironmentalBlocks.LARGE_LILY_PAD.get(), new Item.Properties().group(ItemGroup.DECORATIONS)));
+    public static final RegistryObject<Item> GIANT_LILY_PAD	= HELPER.createItem("giant_lily_pad", () -> new LargeLilyPadItem(EnvironmentalBlocks.GIANT_LILY_PAD.get(), new Item.Properties().group(ItemGroup.DECORATIONS)));
+    
 //    public static final RegistryObject<Item> AXOLOTL_BUCKET = HELPER.createItem("axolotl_bucket", () -> new AxolotlBucketItem(() -> EnvironmentalEntities.AXOLOTL.get(), () -> Fluids.WATER, new Item.Properties().group(ItemGroup.MISC).maxStackSize(1)));
     public static final RegistryObject<Item> SLABFISH_BUCKET = HELPER.createItem("slabfish_bucket", () -> new SlabfishBucketItem(() -> EnvironmentalEntities.SLABFISH.get(), () -> Fluids.WATER, new Item.Properties().group(ItemGroup.MISC).maxStackSize(1)));
 
