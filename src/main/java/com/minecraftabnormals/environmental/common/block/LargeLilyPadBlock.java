@@ -71,19 +71,17 @@ public class LargeLilyPadBlock extends BushBlock implements IGrowable, IPlantabl
 	}
 
 	public static void placeAt(World world, BlockPos pos, BlockState state, int flags) {
-		if (checkPositions(world, pos, state)) {
-			world.setBlockState(pos, state.with(POSITION, LilyPadPosition.CENTER), flags);
+		world.setBlockState(pos, state.with(POSITION, LilyPadPosition.CENTER), flags);
 
-			world.setBlockState(pos.offset(Direction.NORTH), state.with(POSITION, LilyPadPosition.NORTH), flags);
-			world.setBlockState(pos.offset(Direction.EAST), state.with(POSITION, LilyPadPosition.EAST), flags);
-			world.setBlockState(pos.offset(Direction.SOUTH), state.with(POSITION, LilyPadPosition.SOUTH), flags);
-			world.setBlockState(pos.offset(Direction.WEST), state.with(POSITION, LilyPadPosition.WEST), flags);
+		world.setBlockState(pos.offset(Direction.NORTH), state.with(POSITION, LilyPadPosition.NORTH), flags);
+		world.setBlockState(pos.offset(Direction.EAST), state.with(POSITION, LilyPadPosition.EAST), flags);
+		world.setBlockState(pos.offset(Direction.SOUTH), state.with(POSITION, LilyPadPosition.SOUTH), flags);
+		world.setBlockState(pos.offset(Direction.WEST), state.with(POSITION, LilyPadPosition.WEST), flags);
 
-			world.setBlockState(pos.offset(Direction.NORTH).offset(Direction.EAST), state.with(POSITION, LilyPadPosition.NORTHEAST), flags);
-			world.setBlockState(pos.offset(Direction.SOUTH).offset(Direction.EAST), state.with(POSITION, LilyPadPosition.SOUTHEAST), flags);
-			world.setBlockState(pos.offset(Direction.SOUTH).offset(Direction.WEST), state.with(POSITION, LilyPadPosition.SOUTHWEST), flags);
-			world.setBlockState(pos.offset(Direction.NORTH).offset(Direction.WEST), state.with(POSITION, LilyPadPosition.NORTHWEST), flags);
-		}
+		world.setBlockState(pos.offset(Direction.NORTH).offset(Direction.EAST), state.with(POSITION, LilyPadPosition.NORTHEAST), flags);
+		world.setBlockState(pos.offset(Direction.SOUTH).offset(Direction.EAST), state.with(POSITION, LilyPadPosition.SOUTHEAST), flags);
+		world.setBlockState(pos.offset(Direction.SOUTH).offset(Direction.WEST), state.with(POSITION, LilyPadPosition.SOUTHWEST), flags);
+		world.setBlockState(pos.offset(Direction.NORTH).offset(Direction.WEST), state.with(POSITION, LilyPadPosition.NORTHWEST), flags);
 	}
 
 	public static boolean checkPositions(World world, BlockPos pos, BlockState state) {
