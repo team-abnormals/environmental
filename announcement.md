@@ -1,9 +1,11 @@
-
 ![Logo](https://cdn.discordapp.com/attachments/710973586654887956/748241960246050850/environmental_logo.png)
 ## Introduction
+![enter image description here](https://cdn.discordapp.com/attachments/710973586654887956/748951115831181502/final.png)
 You've seen the Endergetic Expansion, an expansion to the End. You've heard of Nether Extension, an expansion to the nether.. but what about an expansion to the whole Overworld and its biomes? Introducing... **Environmental**!
 
 During the development of our mods, more specifically Swamp Expansion and Bloomful we noticed we had a lot of ideas to create other biome expansions similar to those mods... it eventually started getting quite out of hand. We decided to take a big leap and merge the mods into one Overworld expansion mod, as we felt it was better to have the new biome expansions we created not be individual mods. We are very excited to get it out soon and show everyone what awaits!
+
+Below is an overview of the content being changed and added. The mod is still in development and won't be released for a bit, but will hopefully be soon. Some is still subject to change and be added as the mod is developed so stay tuned for more info!
 ## Content
 ![Content](https://cdn.discordapp.com/attachments/715791440482926613/748259303076397127/unknown.png)
 To start, all content from Swamp Expansion and Bloomful was merged into this mod. The old flowers from Buzzier Bees were also moved here as they fit expanding the biomes better. Hibiscus, Delphiniums, and Dianthus flowers have all received texture updates from Five.
@@ -45,12 +47,15 @@ The Wanderer's Boots are a boot item that increases the speed of the player by 2
 The Executioner's Cleaver is a strong new sword with high damage but low attack speed. As a bonus, it can drop Player heads upon kill. Vindicators have a chance to spawn with them, which gets higher based on the difficulty of the world.
 
 ### Building & Decoration
+![Building & Decoration](https://cdn.discordapp.com/attachments/710973586654887956/748985682755584060/2020-08-28_22.21.31.png)
 Plenty of new decorations and building blocks have been added, including many new brick types to go with the Ceramist and Kiln. New brick types were added such as Terracotta Bricks and Ice Bricks. In addition, chiseled variants of Bricks, Mud Bricks, Terracotta Bricks, and Ice Bricks were added.
 
 To go with Ice Bricks, Ice Lanterns and Ice Chains are new craftable decorations. There are also Podzol and Mycelium paths available to go alongside Grass paths and the Nylium paths from Nether Extension. New foliage can be found around too, such as Mycelium Sprouts, and larger variants of lily pads, all in addition to Giant Tall Grass. 
 ## Final Remarks
 Developers: do not let this discourage you from creating and developing your own expansions to the overworld and the biomes we plan on expanding! Even if some ideas overlap a bit, it is not a major issue as we are sure both mods will have different plans for that content and the ideas as a whole. Please don't cancel your plans because of us, we love to see your mods and ideas as well! We know from time to time content may overlap but even if it does there are ways to address that and create compatibility for the player-base.
 
-We'd also like to give a shout-out to **Cell Membrane**, who guessed the theme of the mod, and another shout-out to **Estellairon**, who guessed the exact name of the mod!
+We'd also like to give a shout-out to **Cell Membrane**, who guessed the theme of the mod: ![cell](https://cdn.discordapp.com/attachments/702219337863528636/748410223580020746/unknown.png) 
+And another shout-out to **Estellairon**, who guessed the exact name of the mod:
+![estellairon](https://cdn.discordapp.com/attachments/702219337863528636/748410213534793731/unknown.png)
 
 Finally, we have many big plans after the release, including tons of new mobs, blocks, items, and more. This mod will only grow over time! We hope you all are excited for the release of **Environmental** which will hopefully be coming very soon! The team has put a lot of effort and love into it and we are hope you are as excited for it as we are!
