@@ -88,9 +88,7 @@ public class EnvironmentalBiomeFeatures {
     public static void addBlossomValleysBamboo(Biome biomeIn) {
     	biomeIn.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.BAMBOO.withConfiguration(new ProbabilityConfig(0.0F)).withPlacement(Placement.TOP_SOLID_HEIGHTMAP_NOISE_BIASED.configure(new TopSolidWithNoiseConfig(2, 5.0D, 0.2D, Heightmap.Type.WORLD_SURFACE_WG))));
     	biomeIn.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.BAMBOO.withConfiguration(new ProbabilityConfig(0.0F)).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(2))));
-    }
-
-    	
+    }    	
     
     public static void addGiantTallGrass(Biome biome, int chance) {
         if (EnvironmentalConfig.COMMON.generateGiantTallGrass.get()) {

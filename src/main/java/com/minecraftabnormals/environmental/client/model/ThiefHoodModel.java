@@ -42,7 +42,7 @@ public class ThiefHoodModel<T extends LivingEntity> extends BipedModel<T> {
 		this.leftArm.setRotationPoint(5.0F, 0.0F, 0.0F);
 		this.leftArm.setTextureOffset(0, 19).addBox(-1.75F, -3.0F, -2.5F, 5.0F, 8.0F, 5.0F, -0.1F, true);
     }
-
+    
 	@Override
 	public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
 		this.head.copyModelAngles(this.bipedHead);

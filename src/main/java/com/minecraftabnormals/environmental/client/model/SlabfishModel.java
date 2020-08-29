@@ -1,10 +1,9 @@
 package com.minecraftabnormals.environmental.client.model;
 
+import com.google.common.collect.ImmutableList;
 import com.minecraftabnormals.environmental.common.entity.SlabfishEntity;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
 
-import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
@@ -15,7 +14,7 @@ import net.minecraft.util.math.MathHelper;
  *
  * @param <E>
  */
-public class SlabfishModel<E extends SlabfishEntity> extends EntityModel<E> {
+public class SlabfishModel<E extends SlabfishEntity> extends AgeableModel<E> {
     Entity entity;
     public ModelRenderer body;
     public ModelRenderer rightLeg;
@@ -64,13 +63,6 @@ public class SlabfishModel<E extends SlabfishEntity> extends EntityModel<E> {
         this.body.addChild(this.backpack);
     }
 
-    @Override
-    public void render(MatrixStack matrixStack, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-        this.body.render(matrixStack, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
-        this.leftLeg.render(matrixStack, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
-        this.rightLeg.render(matrixStack, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
-    }
-
     /**
      * This is a helper function from Tabula to set the rotation of model parts
      */
@@ -104,4 +96,14 @@ public class SlabfishModel<E extends SlabfishEntity> extends EntityModel<E> {
             this.leftArm.rotateAngleZ = -ageInTicks;
         }
     }
+
+	@Override
+	protected Iterable<ModelRenderer> getHeadParts() {
+		return ImmutableList.of();
+	}
+
+	@Override
+	protected Iterable<ModelRenderer> getBodyParts() {
+		return ImmutableList.of(this.body, this.rightLeg, this.leftLeg);
+	}
 }

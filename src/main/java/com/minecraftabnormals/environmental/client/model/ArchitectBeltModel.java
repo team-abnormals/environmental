@@ -16,8 +16,8 @@ public class ArchitectBeltModel<T extends LivingEntity> extends BipedModel<T> {
 	private final ModelRenderer pouch;
 	private final ModelRenderer leftKnee;
 
-    public ArchitectBeltModel(float modelSize) {
-    	super(modelSize, 0.0F, 48, 32);
+	public ArchitectBeltModel(float modelSize) {
+		super(modelSize, 0.0F, 48, 32);
 
 		this.belt = new ModelRenderer(this);
 		this.belt.setRotationPoint(0.0F, 0.0F, 0.0F);
@@ -35,17 +35,17 @@ public class ArchitectBeltModel<T extends LivingEntity> extends BipedModel<T> {
 		this.leftKnee = new ModelRenderer(this);
 		this.leftKnee.setRotationPoint(2.0F, 12.0F, 0.0F);
 		this.leftKnee.setTextureOffset(28, 0).addBox(-2.5F, 1.5F, -2.5F, 5.0F, 5.0F, 5.0F, -0.2F, true);
-    }
+	}
 
 	@Override
-	public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
+	public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
 		this.belt.copyModelAngles(this.bipedBody);
 		this.rightKnee.copyModelAngles(this.bipedRightLeg);
 		this.leftKnee.copyModelAngles(this.bipedLeftLeg);
-		
+
 		this.rightKnee.render(matrixStack, buffer, packedLight, packedOverlay);
 		this.leftKnee.render(matrixStack, buffer, packedLight, packedOverlay);
-		
+
 		matrixStack.push();
 		matrixStack.scale(0.95F, 1.0F, 0.95F);
 		this.belt.render(matrixStack, buffer, packedLight, packedOverlay);
