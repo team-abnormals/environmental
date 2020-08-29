@@ -70,6 +70,7 @@ public class Environmental
     public Environmental()
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        MinecraftForge.EVENT_BUS.register(this);
 
         this.setupPlayMessages();
         this.setupLoginMessages();
@@ -92,15 +93,20 @@ public class Environmental
 
         EnvironmentalParticles.PARTICLE_TYPES.register(modEventBus);
         EnvironmentalEnchantments.ENCHANTMENTS.register(modEventBus);
-
-        MinecraftForge.EVENT_BUS.register(this);
-
+        
         modEventBus.addListener(this::setupCommon);
         DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> 
         {
             modEventBus.addListener(this::setupClient);
             modEventBus.addListener(this::registerItemColors);
         });
+
+        modEventBus.addListener((ModConfig.ModConfigEvent event) -> 
+        {
+			if (event.getConfig().getSpec() == EnvironmentalConfig.COMMON_SPEC) {
+				EnvironmentalConfig.onConfigReload(event);
+			}
+		});
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, EnvironmentalConfig.COMMON_SPEC);
     }

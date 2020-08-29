@@ -19,7 +19,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EnvironmentalCompat {
-
+	
     public static void registerCompostables() {
         DataUtils.registerCompostable(EnvironmentalBlocks.WILLOW_LEAVES.get(), 0.30F);
         DataUtils.registerCompostable(EnvironmentalBlocks.WILLOW_SAPLING.get(), 0.30F);
