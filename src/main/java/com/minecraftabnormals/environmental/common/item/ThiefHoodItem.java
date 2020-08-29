@@ -7,6 +7,7 @@ import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.monster.EndermanEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
@@ -16,8 +17,8 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.client.event.RenderNameplateEvent;
 import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.eventbus.api.Event.Result;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 @EventBusSubscriber(modid = Environmental.MODID)
@@ -46,6 +47,11 @@ public class ThiefHoodItem extends ArmorItem {
 				event.setResult(Result.DENY);
 			}
 		}
+	}
+	
+	@Override
+	public boolean isEnderMask(ItemStack stack, PlayerEntity player, EndermanEntity endermanEntity) {
+		return true;
 	}
 
 	@SubscribeEvent
