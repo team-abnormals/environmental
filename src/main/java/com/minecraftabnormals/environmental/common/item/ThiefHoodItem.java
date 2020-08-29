@@ -38,6 +38,11 @@ public class ThiefHoodItem extends ArmorItem {
 	public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type) {
 		return Environmental.MODID + ":textures/models/armor/thief_hood.png";
 	}
+	
+	@Override
+	public boolean isEnderMask(ItemStack stack, PlayerEntity player, EndermanEntity endermanEntity) {
+		return true;
+	}
 
 	@SubscribeEvent
 	public static void renderNameplate(RenderNameplateEvent event) {
@@ -47,11 +52,6 @@ public class ThiefHoodItem extends ArmorItem {
 				event.setResult(Result.DENY);
 			}
 		}
-	}
-	
-	@Override
-	public boolean isEnderMask(ItemStack stack, PlayerEntity player, EndermanEntity endermanEntity) {
-		return true;
 	}
 
 	@SubscribeEvent

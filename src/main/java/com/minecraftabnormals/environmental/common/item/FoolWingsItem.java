@@ -60,7 +60,9 @@ public class FoolWingsItem extends ArmorItem {
 					player.setMotion(player.getMotion().getX(), 0.5D, player.getMotion().getZ());
 					hasJumpedMap.put(uuid, true);
 					player.playSound(SoundEvents.ENTITY_ENDER_DRAGON_FLAP, 0.4F, 2.0F);
-					player.getItemStackFromSlot(EquipmentSlotType.CHEST).attemptDamageItem(1, player.world.rand, null);
+					if (player.abilities.isCreativeMode) {
+						player.getItemStackFromSlot(EquipmentSlotType.CHEST).attemptDamageItem(1, player.world.rand, null);
+					}
 				}
 
 			}
