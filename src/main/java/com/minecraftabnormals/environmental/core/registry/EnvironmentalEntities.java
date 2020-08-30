@@ -3,12 +3,8 @@ package com.minecraftabnormals.environmental.core.registry;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.minecraftabnormals.environmental.client.render.DeerRenderer;
-import com.minecraftabnormals.environmental.client.render.DuckRenderer;
-import com.minecraftabnormals.environmental.client.render.SlabfishRenderer;
-import com.minecraftabnormals.environmental.common.entity.DeerEntity;
-import com.minecraftabnormals.environmental.common.entity.DuckEntity;
-import com.minecraftabnormals.environmental.common.entity.SlabfishEntity;
+import com.minecraftabnormals.environmental.client.render.*;
+import com.minecraftabnormals.environmental.common.entity.*;
 import com.minecraftabnormals.environmental.core.Environmental;
 import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
 
@@ -34,14 +30,15 @@ public class EnvironmentalEntities {
     public static final RegistryObject<EntityType<SlabfishEntity>> SLABFISH = HELPER.createLivingEntity("slabfish", SlabfishEntity::new, EntityClassification.CREATURE, 0.45F, 0.9F);
     public static final RegistryObject<EntityType<DuckEntity>> DUCK = HELPER.createLivingEntity("duck", DuckEntity::new, EntityClassification.CREATURE, 0.5F, 0.8F);
     public static final RegistryObject<EntityType<DeerEntity>> DEER = HELPER.createLivingEntity("deer", DeerEntity::new, EntityClassification.CREATURE, 1.2F, 1.8F);
-
+    public static final RegistryObject<EntityType<YakEntity>> YAK = HELPER.createLivingEntity("yak", YakEntity::new, EntityClassification.CREATURE, 0.5F, 0.8F);
 //	public static final RegistryObject<EntityType<AxolotlEntity>> AXOLOTL = HELPER.createLivingEntity("axolotl", AxolotlEntity::new, EntityClassification.CREATURE, 0.6F, 0.5F));
 
     @OnlyIn(Dist.CLIENT)
     public static void registerRendering() {
         RenderingRegistry.registerEntityRenderingHandler(SLABFISH.get(), SlabfishRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(DUCK.get(), DuckRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(DEER.get(), DeerRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(DEER.get(), DeerRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(YAK.get(), YakRenderer::new);
         //RenderingRegistry.registerEntityRenderingHandler((EntityType<? extends AxolotlEntity>)AXOLOTL.get(), AxolotlRenderer::new);
     }
 
@@ -50,6 +47,7 @@ public class EnvironmentalEntities {
         ForgeRegistries.BIOMES.getValues().stream().forEach(EnvironmentalEntities::removeSpawns);
 
         EntitySpawnPlacementRegistry.register(EnvironmentalEntities.SLABFISH.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canAnimalSpawn);
+        EntitySpawnPlacementRegistry.register(EnvironmentalEntities.YAK.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canAnimalSpawn);
         EntitySpawnPlacementRegistry.register(EnvironmentalEntities.DUCK.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canAnimalSpawn);
         EntitySpawnPlacementRegistry.register(EnvironmentalEntities.DEER.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canAnimalSpawn);
     }
@@ -63,6 +61,9 @@ public class EnvironmentalEntities {
         if (biome.getCategory() == Category.FOREST) {
             biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(EnvironmentalEntities.DEER.get(), 10, 4, 4));
         }
+		
+		if(biome.getCategory() == Category.EXTREME_HILLS)
+            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(YAK.get(), 50, 2, 4));
     }
     
     private static void removeSpawns(Biome biome) {
@@ -86,5 +87,6 @@ public class EnvironmentalEntities {
         GlobalEntityTypeAttributes.put(SLABFISH.get(), SlabfishEntity.registerAttributes().create());
         GlobalEntityTypeAttributes.put(DEER.get(), DeerEntity.registerAttributes().create());
         GlobalEntityTypeAttributes.put(DUCK.get(), DuckEntity.registerAttributes().create());
+        GlobalEntityTypeAttributes.put(YAK.get(), YakEntity.registerAttributes().create());
     }
 }
