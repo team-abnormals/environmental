@@ -19,7 +19,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EnvironmentalCompat {
-
+	
     public static void registerCompostables() {
         DataUtils.registerCompostable(EnvironmentalBlocks.WILLOW_LEAVES.get(), 0.30F);
         DataUtils.registerCompostable(EnvironmentalBlocks.WILLOW_SAPLING.get(), 0.30F);
@@ -47,6 +47,11 @@ public class EnvironmentalCompat {
         DataUtils.registerCompostable(EnvironmentalBlocks.DUCKWEED_THATCH_SLAB.get(), 0.85F);
         DataUtils.registerCompostable(EnvironmentalBlocks.DUCKWEED_THATCH_STAIRS.get(), 0.85F);
         DataUtils.registerCompostable(EnvironmentalBlocks.DUCKWEED_THATCH_VERTICAL_SLAB.get(), 0.85F);
+        
+        DataUtils.registerCompostable(EnvironmentalBlocks.THATCH.get(), 0.65F);
+        DataUtils.registerCompostable(EnvironmentalBlocks.THATCH_SLAB.get(), 0.65F);
+        DataUtils.registerCompostable(EnvironmentalBlocks.THATCH_STAIRS.get(), 0.65F);
+        DataUtils.registerCompostable(EnvironmentalBlocks.THATCH_VERTICAL_SLAB.get(), 0.65F);
 
         DataUtils.registerCompostable(EnvironmentalBlocks.BLUE_DELPHINIUM.get(), 0.75F);
         DataUtils.registerCompostable(EnvironmentalBlocks.WHITE_DELPHINIUM.get(), 0.75F);
@@ -138,9 +143,28 @@ public class EnvironmentalCompat {
         DataUtils.registerFlammable(EnvironmentalBlocks.WISTERIA_BOOKSHELF.get(), 5, 20);
 	}
 	
-    @SuppressWarnings("deprecation")
 	public static void registerDispenserBehaviors() {
 		Environmental.REGISTRY_HELPER.processSpawnEggDispenseBehaviors();
+
+        DispenserBlock.registerDispenseBehavior(EnvironmentalItems.SLABFISH_BUCKET.get(), new DefaultDispenseItemBehavior() {
+            @Override
+            protected ItemStack dispenseStack(IBlockSource source, ItemStack stack) {
+                BucketItem bucket = (BucketItem)stack.getItem();
+                BlockPos pos = source.getBlockPos().offset(source.getBlockState().get(DispenserBlock.FACING));
+                World world = source.getWorld();
+
+                if (bucket.tryPlaceContainedLiquid(null, world, pos, null)) {
+                    bucket.onLiquidPlaced(world, stack, pos);
+                    return new ItemStack(Items.BUCKET);
+                } else {
+                    return super.dispense(source, stack);
+                }
+            }
+        });
+    }
+    
+    @SuppressWarnings("deprecation")
+    public static void registerUnusedDispenseBehaviors() {
         // TODO make these work properly with tags or smth
         for(Item item : SlabfishEntity.getSweaterMap().keySet()) {
             DispenserBlock.registerDispenseBehavior(item, new OptionalDispenseBehavior() {
@@ -160,23 +184,7 @@ public class EnvironmentalCompat {
                 }
             });
         }
-
-        DispenserBlock.registerDispenseBehavior(EnvironmentalItems.SLABFISH_BUCKET.get(), new DefaultDispenseItemBehavior() {
-            @Override
-            protected ItemStack dispenseStack(IBlockSource source, ItemStack stack) {
-                BucketItem bucket = (BucketItem)stack.getItem();
-                BlockPos pos = source.getBlockPos().offset(source.getBlockState().get(DispenserBlock.FACING));
-                World world = source.getWorld();
-
-                if (bucket.tryPlaceContainedLiquid(null, world, pos, null)) {
-                    bucket.onLiquidPlaced(world, stack, pos);
-                    return new ItemStack(Items.BUCKET);
-                } else {
-                    return super.dispense(source, stack);
-                }
-            }
-        });
-
+        
         DispenserBlock.registerDispenseBehavior(Items.CHEST, new OptionalDispenseBehavior() {
             @Override
             protected ItemStack dispenseStack(IBlockSource source, ItemStack stack) {

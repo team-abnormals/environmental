@@ -69,7 +69,7 @@ public class DoubleRiceBlock extends Block implements IGrowable, IWaterLoggable,
 
     protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
         Block block = state.getBlock();
-        if (worldIn.getFluidState(pos).getLevel() == 8 && block.isIn(EnvironmentalTags.CATTAIL_PLANTABLE_ON))
+        if (worldIn.getFluidState(pos).getLevel() == 8 && block.isIn(EnvironmentalTags.Blocks.CATTAIL_PLANTABLE_ON))
             return true;
         else if (block.getBlock() == Blocks.FARMLAND) return true;
         return false;
@@ -150,7 +150,7 @@ public class DoubleRiceBlock extends Block implements IGrowable, IWaterLoggable,
     public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
         super.tick(state, worldIn, pos, random);
         int i = state.get(AGE);
-        int chance = worldIn.getBlockState(pos.down().down()).isFertile(worldIn, pos.down().down()) ? 10 : 12;
+        int chance = worldIn.getBlockState(pos.down().down()).isFertile(worldIn, pos.down().down()) ? 6 : 8;
         if (state.get(HALF) == DoubleBlockHalf.UPPER && i < 7 && (worldIn.getBlockState(pos.down().down()).getBlock() == Blocks.FARMLAND || worldIn.getFluidState(pos.down()).getLevel() == 8) && worldIn.getLightSubtracted(pos.up(), 0) >= 9 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, random.nextInt(chance) == 0)) {
             worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(i + 1)), 2);
             if (worldIn.getBlockState(pos.down()).getBlock() == this && worldIn.getBlockState(pos.down()).get(AGE) == 6) {

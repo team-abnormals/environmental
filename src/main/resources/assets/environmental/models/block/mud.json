@@ -1,6 +1,6 @@
 {
+    "parent": "block/cube_all",
     "textures": {
-        "particle": "environmental:block/mud_still"
+        "all": "environmental:block/mud"
     }
 }
-

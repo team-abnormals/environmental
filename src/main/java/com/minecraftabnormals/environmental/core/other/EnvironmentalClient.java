@@ -1,17 +1,33 @@
 package com.minecraftabnormals.environmental.core.other;
 
 import java.util.Arrays;
+import java.util.logging.LogRecord;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.Marker;
+import org.apache.logging.log4j.core.Filter;
+import org.apache.logging.log4j.core.LogEvent;
+import org.apache.logging.log4j.core.Logger;
+import org.apache.logging.log4j.core.LoggerContext;
+import org.apache.logging.log4j.core.filter.AbstractFilter;
+import org.apache.logging.log4j.core.filter.CompositeFilter;
+import org.apache.logging.log4j.core.filter.ThresholdFilter;
 
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.teamabnormals.abnormals_core.core.utils.DataUtils;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.ItemColors;
+import net.minecraft.client.util.ClientRecipeBook;
+import net.minecraft.item.BlockItem;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.FoliageColors;
 import net.minecraft.world.GrassColors;
+import net.minecraft.world.IBlockDisplayReader;
 import net.minecraft.world.biome.BiomeColors;
 
 public class EnvironmentalClient {
@@ -20,6 +36,7 @@ public class EnvironmentalClient {
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.SLABFISH_EFFIGY.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.ICE_LANTERN.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.ICE_CHAIN.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.SAWMILL.get(), RenderType.getCutout());
 
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WILLOW_DOOR.get(),RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WILLOW_TRAPDOOR.get(),RenderType.getCutout());
@@ -57,9 +74,14 @@ public class EnvironmentalClient {
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.DUCKWEED_THATCH_STAIRS.get(),RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.DUCKWEED_THATCH_VERTICAL_SLAB.get(),RenderType.getCutout());
 		
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.THATCH.get(),RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.THATCH_SLAB.get(),RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.THATCH_STAIRS.get(),RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.THATCH_VERTICAL_SLAB.get(),RenderType.getCutout());
+		
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CARTWHEEL.get(),RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.VIOLET.get(),RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.COLUMBINE.get(),RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.LOTUS_FLOWER.get(),RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.DIANTHUS.get(),RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.BLUEBELL.get(),RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.YELLOW_HIBISCUS.get(),RenderType.getCutout());
@@ -72,7 +94,7 @@ public class EnvironmentalClient {
 
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_CARTWHEEL.get(),RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_VIOLET.get(),RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_COLUMBINE.get(),RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_LOTUS_FLOWER.get(),RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_DIANTHUS.get(),RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_BLUEBELL.get(),RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_YELLOW_HIBISCUS.get(),RenderType.getCutout());
@@ -134,16 +156,66 @@ public class EnvironmentalClient {
 	
     public static void registerBlockColors() {
         BlockColors blockColors = Minecraft.getInstance().getBlockColors();
+        ItemColors itemColors = Minecraft.getInstance().getItemColors();
+
         DataUtils.registerBlockColor(blockColors, (x, world, pos, u) -> world != null && pos != null ? BiomeColors.getGrassColor(world, pos) : GrassColors.get(0.5D, 1.0D), Arrays.asList(EnvironmentalBlocks.GIANT_TALL_GRASS));
         DataUtils.registerBlockColor(blockColors, (x, world, pos, u) -> world != null && pos != null ? BiomeColors.getFoliageColor(world, pos) : FoliageColors.get(0.5D, 1.0D), Arrays.asList(
                 EnvironmentalBlocks.WILLOW_LEAVES, EnvironmentalBlocks.WILLOW_LEAF_CARPET, EnvironmentalBlocks.HANGING_WILLOW_LEAVES));
 
-        DataUtils.registerBlockColor(blockColors, (x, world, pos, u) -> world != null && pos != null ? 2129968 : 7455580, Arrays.asList(EnvironmentalBlocks.LARGE_LILY_PAD));
-        DataUtils.registerBlockColor(blockColors, (x, world, pos, u) -> world != null && pos != null ? 2129968 : 7455580, Arrays.asList(EnvironmentalBlocks.GIANT_LILY_PAD));
+        DataUtils.registerBlockColor(blockColors, (x, world, pos, u) -> world != null && pos != null ? 2129968 : 7455580, Arrays.asList(EnvironmentalBlocks.LARGE_LILY_PAD, EnvironmentalBlocks.GIANT_LILY_PAD));
         
-        ItemColors itemColors = Minecraft.getInstance().getItemColors();
+        
+        DataUtils.registerBlockItemColor(itemColors, (p_210235_1_, p_210235_2_) -> {
+            BlockState blockstate = ((BlockItem)p_210235_1_.getItem()).getBlock().getDefaultState();
+            return blockColors.getColor(blockstate, (IBlockDisplayReader)null, (BlockPos)null, p_210235_2_);
+         }, Arrays.asList(EnvironmentalBlocks.LARGE_LILY_PAD, EnvironmentalBlocks.GIANT_LILY_PAD));
+
         DataUtils.registerBlockItemColor(itemColors, (color, items) -> GrassColors.get(0.5D, 1.0D), Arrays.asList(EnvironmentalBlocks.GIANT_TALL_GRASS));
         DataUtils.registerBlockItemColor(itemColors, (color, items) -> FoliageColors.get(0.5D, 1.0D), Arrays.asList(
                 EnvironmentalBlocks.WILLOW_LEAVES, EnvironmentalBlocks.WILLOW_LEAF_CARPET, EnvironmentalBlocks.HANGING_WILLOW_LEAVES));
+    }
+
+    public static void removeRecipeBookWarnings() {
+        LoggerContext loggerContext = ((Logger) ClientRecipeBook.field_241555_k_).getContext();
+        Filter logFilter = loggerContext.getConfiguration().getFilter();
+        Filter filterToRemove = null;
+        
+        if (logFilter instanceof CompositeFilter) {
+            CompositeFilter compositeFilter = (CompositeFilter) logFilter;
+            Filter[] filters = compositeFilter.getFiltersArray();
+            for (Filter filter : filters) {
+                if (filter instanceof ThresholdFilter) {
+                    filterToRemove = filter;
+                }
+            }
+        }
+        
+        if (filterToRemove != null) {
+            loggerContext.removeFilter(filterToRemove);
+            loggerContext.addFilter(new SilentRecipeBookFilter());
+        }
+    }
+
+    static class SilentRecipeBookFilter extends AbstractFilter implements java.util.logging.Filter {
+
+        @Override
+        public boolean isLoggable(LogRecord record) {
+            return false;
+        }
+
+        @Override
+        public Result filter(LogEvent event) {
+            return Result.DENY;
+        }
+
+        @Override
+        public Result filter(Logger logger, Level level, Marker marker, String msg, Object p0) {
+            return Result.DENY;
+        }
+
+        @Override
+        public Result filter(Logger logger, Level level, Marker marker, String msg, Object... params) {
+            return Result.DENY;
+        }
     }
 }

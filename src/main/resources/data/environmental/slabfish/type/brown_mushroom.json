@@ -2,7 +2,7 @@
   "rarity": "legendary",
   "priority": 2,
   "displayName": {
-    "translate": "entity.environmental.slabfish.brown_mushroom"
+    "translate": "entity.environmental.slabfish.type.brown_mushroom"
   },
   "conditions": [
     {

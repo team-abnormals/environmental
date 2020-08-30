@@ -2,13 +2,13 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "environmental:cherries"
+      "tag": "forge:fruits/cherry"
     },
     {
-      "item": "environmental:cherries"
+      "tag": "forge:fruits/cherry"
     },
     {
-      "item": "environmental:cherries"
+      "tag": "forge:fruits/cherry"
     },
     {
       "item": "minecraft:sugar"

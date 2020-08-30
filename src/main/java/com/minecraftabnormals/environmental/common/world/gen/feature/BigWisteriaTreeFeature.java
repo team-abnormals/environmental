@@ -9,6 +9,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.IWorldGenerationBaseReader;
 import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.structure.StructureManager;
@@ -117,11 +118,9 @@ public class BigWisteriaTreeFeature extends Feature<BaseTreeFeatureConfig> {
                 BlockPos startPos = pos.up(height);
 
                 for (BlockPos blockpos : BlockPos.getAllInBoxMutable(startPos.getX() - 10, startPos.getY() - 10, startPos.getZ() - 10, startPos.getX() + 10, startPos.getY() + 10, startPos.getZ() + 10)) {
-                    if (WisteriaTreeUtils.isAir(world, blockpos) && WisteriaTreeUtils.isLeaves(world, blockpos.up()) && world.getBlockState(pos.up()).getBlock() == config.leavesProvider.getBlockState(random, pos.up()).getBlock() && random.nextInt(4) == 0) {
-                        if (WisteriaTreeUtils.isAir(world, blockpos))
-                            WisteriaTreeUtils.setForcedState(world, blockpos, VINE_UPPER.get());
-                        if (WisteriaTreeUtils.isAir(world, blockpos.down()) && random.nextInt(2) == 0)
-                            WisteriaTreeUtils.setForcedState(world, blockpos.down(), VINE_LOWER.get());
+                    if (WisteriaTreeUtils.isAir(world, blockpos) && isLeaves(world, blockpos.up(), config, random) && random.nextInt(4) == 0) {
+                        if (WisteriaTreeUtils.isAir(world, blockpos)) WisteriaTreeUtils.setForcedState(world, blockpos, VINE_UPPER.get());
+                        if (WisteriaTreeUtils.isAir(world, blockpos.down()) && random.nextInt(2) == 0) WisteriaTreeUtils.setForcedState(world, blockpos.down(), VINE_LOWER.get());
                     }
                 }
 
@@ -132,5 +131,14 @@ public class BigWisteriaTreeFeature extends Feature<BaseTreeFeatureConfig> {
         } else {
             return false;
         }
+    }
+    
+    
+    public static boolean isLeaves(IWorldGenerationBaseReader worldIn, BlockPos pos, BaseTreeFeatureConfig config, Random random) {
+        if (worldIn instanceof net.minecraft.world.IWorldReader) // FORGE: Redirect to state method when possible
+            return worldIn.hasBlockState(pos, state -> state == config.leavesProvider.getBlockState(random, pos));
+        return worldIn.hasBlockState(pos, (p_227223_0_) -> {
+            return config.leavesProvider.getBlockState(random, pos) == p_227223_0_;
+        });
     }
 }

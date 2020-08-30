@@ -43,7 +43,7 @@ public class CattailSproutsBlock extends BushBlock implements IWaterLoggable, IG
     @Override
     protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
         Block block = state.getBlock();
-        return block.isIn(EnvironmentalTags.CATTAIL_PLANTABLE_ON);
+        return block.isIn(EnvironmentalTags.Blocks.CATTAIL_PLANTABLE_ON);
     }
 
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {

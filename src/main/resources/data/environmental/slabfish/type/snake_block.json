@@ -2,7 +2,7 @@
   "rarity": "uncommon",
   "priority": 10,
   "displayName": {
-    "translate": "entity.environmental.slabfish.snake_block"
+    "translate": "entity.environmental.slabfish.type.snake_block"
   },
   "customBackpack": "environmental:snake_block",
   "tradable": false,

@@ -1,0 +1,14 @@
+{
+  "type": "environmental:baking",
+  "ingredient": {
+    "item": "minecraft:honeycomb"
+  },
+  "result": "buzzier_bees:wax",
+  "experience": 0.5,
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "buzzier_bees"
+    }
+  ]
+}

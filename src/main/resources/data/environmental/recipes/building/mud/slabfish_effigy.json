@@ -1,16 +1,16 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "# #",
-        " # "
-    ],
-    "key": {
-        "#": {
-            "item": "environmental:mud_brick"
-        }
-    },
-    "result": {
-        "item": "environmental:slabfish_effigy",
-        "count": 1
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "environmental:mud_brick"
     }
+  },
+  "result": {
+    "item": "environmental:slabfish_effigy",
+    "count": 1
+  }
 }

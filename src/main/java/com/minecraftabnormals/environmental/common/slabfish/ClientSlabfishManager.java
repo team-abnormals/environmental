@@ -51,7 +51,6 @@ public final class ClientSlabfishManager implements SlabfishManager {
     public static void receive(SSyncSweaterTypeMessage msg) {
         INSTANCE.sweaterTypes.clear();
         INSTANCE.sweaterTypes.putAll(Arrays.stream(msg.getSweaterTypes()).collect(Collectors.toMap(SweaterType::getRegistryName, sweaterType -> sweaterType)));
-        System.out.println("Received sweater types: " + INSTANCE.sweaterTypes);
     }
 
     /**
@@ -62,7 +61,6 @@ public final class ClientSlabfishManager implements SlabfishManager {
     public static void receive(SSyncBackpackTypeMessage msg) {
         INSTANCE.backpackTypes.clear();
         INSTANCE.backpackTypes.putAll(Arrays.stream(msg.getBackpackTypes()).collect(Collectors.toMap(BackpackType::getRegistryName, backpackType -> backpackType)));
-        System.out.println("Received backpack types: " + INSTANCE.backpackTypes);
     }
 
     @Override

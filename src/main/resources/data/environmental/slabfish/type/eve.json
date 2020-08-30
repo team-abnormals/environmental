@@ -2,7 +2,7 @@
   "rarity": "uncommon",
   "priority": 10,
   "displayName": {
-    "translate": "entity.environmental.slabfish.eve"
+    "translate": "entity.environmental.slabfish.type.eve"
   },
   "tradable": false,
   "conditions": [

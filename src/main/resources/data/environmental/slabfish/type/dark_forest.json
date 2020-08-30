@@ -2,7 +2,7 @@
   "rarity": "rare",
   "priority": 1,
   "displayName": {
-    "translate": "entity.environmental.slabfish.dark_forest"
+    "translate": "entity.environmental.slabfish.type.dark_forest"
   },
   "conditions": [
     {

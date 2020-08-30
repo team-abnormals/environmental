@@ -20,7 +20,6 @@ import com.minecraftabnormals.environmental.core.registry.EnvironmentalContainer
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEnchantments;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEntities;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalFeatures;
-import com.minecraftabnormals.environmental.core.registry.EnvironmentalFluids;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalParticles;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalRecipes;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalVillagers;
@@ -71,6 +70,7 @@ public class Environmental
     public Environmental()
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        MinecraftForge.EVENT_BUS.register(this);
 
         this.setupPlayMessages();
         this.setupLoginMessages();
@@ -82,9 +82,9 @@ public class Environmental
         REGISTRY_HELPER.getDeferredSoundRegister().register(modEventBus);
 
         EnvironmentalBlocks.PAINTINGS.register(modEventBus);
-        EnvironmentalFluids.FLUIDS.register(modEventBus);
         EnvironmentalBiomes.BIOMES.register(modEventBus);
-
+        EnvironmentalFeatures.FEATURES.register(modEventBus);
+        
         EnvironmentalVillagers.POI_TYPES.register(modEventBus);
         EnvironmentalVillagers.PROFESSIONS.register(modEventBus);
 
@@ -93,24 +93,20 @@ public class Environmental
 
         EnvironmentalParticles.PARTICLE_TYPES.register(modEventBus);
         EnvironmentalEnchantments.ENCHANTMENTS.register(modEventBus);
-
-        MinecraftForge.EVENT_BUS.register(this);
-
-        modEventBus.addListener((ModConfig.ModConfigEvent event) -> 
-        {
-            final ModConfig config = event.getConfig();
-            if (config.getSpec() == EnvironmentalConfig.COMMON_SPEC) 
-            {
-                EnvironmentalConfig.ValuesHolder.updateCommonValuesFromConfig(config);
-            }
-        });
-
+        
         modEventBus.addListener(this::setupCommon);
         DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> 
         {
             modEventBus.addListener(this::setupClient);
             modEventBus.addListener(this::registerItemColors);
         });
+
+        modEventBus.addListener((ModConfig.ModConfigEvent event) -> 
+        {
+			if (event.getConfig().getSpec() == EnvironmentalConfig.COMMON_SPEC) {
+				EnvironmentalConfig.onConfigReload(event);
+			}
+		});
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, EnvironmentalConfig.COMMON_SPEC);
     }
@@ -124,10 +120,10 @@ public class Environmental
             EnvironmentalCompat.registerDispenserBehaviors();
 
             EnvironmentalData.registerDataSerializers();
-    		EnvironmentalEnchantments.addEnchantmentsToItemGroups();
             
+    		EnvironmentalBiomes.addFeaturesAndSpawns();
     		EnvironmentalBiomes.addBiomeTypes();
-    		EnvironmentalBiomes.registerBiomesToDictionary();
+    		EnvironmentalBiomes.addBiomesToGeneration();
     		EnvironmentalFeatures.generateFeatures();
     		
     		EnvironmentalVillagers.registerVillagerTypes();
@@ -141,6 +137,7 @@ public class Environmental
     private void setupClient(final FMLClientSetupEvent event)
     {
         EnvironmentalEntities.registerRendering();
+        EnvironmentalClient.removeRecipeBookWarnings();
         DeferredWorkQueue.runLater(() ->
         {
             EnvironmentalClient.setRenderLayers();

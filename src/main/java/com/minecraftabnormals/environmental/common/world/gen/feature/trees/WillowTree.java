@@ -15,6 +15,6 @@ public class WillowTree extends Tree {
 
     @Nullable
     protected ConfiguredFeature<BaseTreeFeatureConfig, ?> getTreeFeature(Random randomIn, boolean p_225546_2_) {
-        return Feature.field_236291_c_.withConfiguration(EnvironmentalFeatureConfigs.CHERRY_TREE_CONFIG);
+        return Feature.field_236291_c_.withConfiguration(EnvironmentalFeatureConfigs.WILLOW_TREE_CONFIG);
     }
 }

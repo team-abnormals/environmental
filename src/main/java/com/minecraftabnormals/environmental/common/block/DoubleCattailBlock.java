@@ -65,7 +65,7 @@ public class DoubleCattailBlock extends Block implements IGrowable, IWaterLoggab
 
     protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
         Block block = state.getBlock();
-        return block.isIn(EnvironmentalTags.CATTAIL_PLANTABLE_ON);
+        return block.isIn(EnvironmentalTags.Blocks.CATTAIL_PLANTABLE_ON);
     }
 
     @Override

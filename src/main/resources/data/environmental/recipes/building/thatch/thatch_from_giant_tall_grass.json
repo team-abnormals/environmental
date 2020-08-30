@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X#",
+    "#X"
+  ],
+  "key": {
+    "#": {
+      "item": "environmental:giant_tall_grass"
+    },
+    "X": {
+      "item": "minecraft:wheat"
+    }
+  },
+  "result": {
+    "item": "environmental:thatch",
+    "count": 4
+  }
+}

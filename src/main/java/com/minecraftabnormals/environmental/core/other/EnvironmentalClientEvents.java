@@ -14,28 +14,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 @OnlyIn(Dist.CLIENT)
 @EventBusSubscriber(modid = Environmental.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
 public class EnvironmentalClientEvents {
-
-//    @SubscribeEvent
-//    public static void onFogColor(FogColors event) {
-//        ActiveRenderInfo info = event.getInfo();
-//        FluidState state = info.getFluidState();
-//        if (state.getFluid() instanceof MudFluid) {
-//            event.setRed(0.140625F);
-//            event.setGreen(0.0625F);
-//            event.setBlue(0.015625F);
-//        }
-//    }
-//
-//    @SubscribeEvent
-//    public static void onFogDensity(FogDensity event) {
-//        ActiveRenderInfo info = event.getInfo();
-//        FluidState state = info.getFluidState();
-//        if (state.getFluid() instanceof MudFluid) {
-//            event.setDensity(1.0F);
-//            event.setCanceled(true);
-//        }
-//    }
-
+    
     @SubscribeEvent
     public static void onEvent(TextureStitchEvent.Pre event) {
         AtlasTexture texture = event.getMap();

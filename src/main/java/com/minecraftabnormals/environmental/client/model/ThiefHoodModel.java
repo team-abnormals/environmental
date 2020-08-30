@@ -36,13 +36,13 @@ public class ThiefHoodModel<T extends LivingEntity> extends BipedModel<T> {
 
 		this.rightArm = new ModelRenderer(this);
 		this.rightArm.setRotationPoint(-5.0F, 0.0F, 0.0F);
-		this.rightArm.setTextureOffset(0, 19).addBox(-3.0F, -3.0F, -2.5F, 5.0F, 8.0F, 5.0F, -0.1F, false);
+		this.rightArm.setTextureOffset(0, 19).addBox(-3.25F, -3.0F, -2.5F, 5.0F, 8.0F, 5.0F, -0.1F, false);
 
 		this.leftArm = new ModelRenderer(this);
 		this.leftArm.setRotationPoint(5.0F, 0.0F, 0.0F);
-		this.leftArm.setTextureOffset(0, 19).addBox(-2.0F, -3.0F, -2.5F, 5.0F, 8.0F, 5.0F, -0.1F, true);
+		this.leftArm.setTextureOffset(0, 19).addBox(-1.75F, -3.0F, -2.5F, 5.0F, 8.0F, 5.0F, -0.1F, true);
     }
-
+    
 	@Override
 	public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
 		this.head.copyModelAngles(this.bipedHead);
@@ -53,7 +53,7 @@ public class ThiefHoodModel<T extends LivingEntity> extends BipedModel<T> {
 		this.head.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
 		this.body.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
 		this.leftArm.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
-		this.rightArm.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+		this.rightArm.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);	
 	}
 
 	public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {

@@ -2,7 +2,7 @@
   "rarity": "uncommon",
   "priority": 10,
   "displayName": {
-    "translate": "entity.environmental.slabfish.smelly"
+    "translate": "entity.environmental.slabfish.type.smelly"
   },
   "tradable": false,
   "conditions": [

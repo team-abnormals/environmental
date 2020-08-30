@@ -29,7 +29,7 @@ public class BackpackOverlayRenderLayer<E extends SlabfishEntity, M extends Enti
         if (slabfish.getSlabfishOverlay() == SlabfishOverlay.NONE || slabfish.getSlabfishOverlay() == SlabfishOverlay.EGG || !slabfish.hasBackpack())
             return;
 
-        ResourceLocation texture = new ResourceLocation(Environmental.MODID, "textures/entity/slabfish/overlays/" + slabfish.getSlabfishOverlay().getString() + "_overlay_backpack.png");
+        ResourceLocation texture = new ResourceLocation(Environmental.MODID, "textures/entity/slabfish/overlay/" + slabfish.getSlabfishOverlay().getString() + "_backpack.png");
         Minecraft.getInstance().getTextureManager().bindTexture(texture);
         IVertexBuilder ivertexbuilder = bufferIn.getBuffer(RenderType.getEntityCutoutNoCull(texture));
         this.getEntityModel().setRotationAngles(slabfish, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);

@@ -1,7 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "environmental:mud",
-    "environmental:flowing_mud"
-  ]
-} 

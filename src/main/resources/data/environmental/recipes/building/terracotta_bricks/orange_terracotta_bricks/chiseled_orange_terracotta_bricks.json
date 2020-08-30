@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "environmental:orange_terracotta_brick_slab"
+    }
+  },
+  "result": {
+    "item": "environmental:chiseled_orange_terracotta_bricks"
+  }
+}

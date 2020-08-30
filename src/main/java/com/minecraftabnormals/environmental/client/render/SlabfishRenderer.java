@@ -29,7 +29,7 @@ public class SlabfishRenderer extends MobRenderer<SlabfishEntity, SlabfishModel<
     @Override
     public ResourceLocation getEntityTexture(SlabfishEntity slabby) {
         ResourceLocation slabfishType = SlabfishManager.get(slabby.world).getSlabfishType(slabby.getSlabfishType()).getRegistryName();
-        return new ResourceLocation(slabfishType.getNamespace(), "textures/entity/slabfish/slabfish_" + slabfishType.getPath() + ".png");
+        return new ResourceLocation(slabfishType.getNamespace(), "textures/entity/slabfish/type/" + slabfishType.getPath() + ".png");
     }
 
     @Override
@@ -53,8 +53,6 @@ public class SlabfishRenderer extends MobRenderer<SlabfishEntity, SlabfishModel<
     @Override
     protected void preRenderCallback(SlabfishEntity slabfish, MatrixStack matrixStack, float partialTickTime) {
         this.entityModel.partialTicks = partialTickTime;
-        matrixStack.scale(1.0F, 1.0F, 1.0F);
-        if (slabfish.isChild()) matrixStack.scale(0.5F, 0.5F, 0.5F);
         if (slabfish.func_233684_eK_() || slabfish.getRidingEntity() != null) matrixStack.translate(0F, 0.3125F, 0F);
         if (slabfish.isInWater()) {
             matrixStack.translate(0F, slabfish.isChild() ? -0.8F : -0.4F, 0.5F);

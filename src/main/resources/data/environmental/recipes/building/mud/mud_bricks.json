@@ -1,16 +1,16 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "BB",
-        "BB"
-    ],
-    "key": {
-        "B": {
-            "item": "environmental:mud_brick"
-        }
-    },
-    "result": {
-        "item": "environmental:mud_bricks",
-        "count": 1
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BB",
+    "BB"
+  ],
+  "key": {
+    "B": {
+      "item": "environmental:mud_brick"
     }
+  },
+  "result": {
+    "item": "environmental:mud_bricks",
+    "count": 1
+  }
 }

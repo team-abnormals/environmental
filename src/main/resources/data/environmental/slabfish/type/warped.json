@@ -2,7 +2,7 @@
   "rarity": "epic",
   "priority": 1,
   "displayName": {
-    "translate": "entity.environmental.slabfish.warped"
+    "translate": "entity.environmental.slabfish.type.warped"
   },
   "conditions": [
     {

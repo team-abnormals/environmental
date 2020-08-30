@@ -1,5 +1,11 @@
 package com.minecraftabnormals.environmental.common.entity;
 
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import javax.annotation.Nullable;
+
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.minecraftabnormals.environmental.common.entity.goals.SlabbyBreedGoal;
@@ -19,21 +25,33 @@ import com.minecraftabnormals.environmental.core.Environmental;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalCriteriaTriggers;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalData;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalTags;
-import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEntities;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalSounds;
 import com.teamabnormals.abnormals_core.core.library.api.IBucketableEntity;
-import com.teamabnormals.abnormals_core.core.library.endimator.Endimation;
-import com.teamabnormals.abnormals_core.core.library.endimator.entity.IEndimatedEntity;
+
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.*;
+import net.minecraft.entity.AgeableEntity;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntitySize;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ILivingEntityData;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.Pose;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.ai.goal.LookRandomlyGoal;
+import net.minecraft.entity.ai.goal.RandomWalkingGoal;
+import net.minecraft.entity.ai.goal.SitGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.item.BoatEntity;
 import net.minecraft.entity.item.ItemEntity;
@@ -44,7 +62,13 @@ import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.IInventoryChangedListener;
 import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.*;
+import net.minecraft.item.DyeColor;
+import net.minecraft.item.EggItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.item.NameTagItem;
+import net.minecraft.item.SpawnEggItem;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
@@ -59,7 +83,16 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityPredicates;
+import net.minecraft.util.Hand;
+import net.minecraft.util.IItemProvider;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
+import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
@@ -71,15 +104,8 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.fml.network.PacketDistributor;
-import net.minecraftforge.registries.ForgeRegistries;
 
-import javax.annotation.Nullable;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-public class SlabfishEntity extends TameableEntity implements IInventoryChangedListener, IBucketableEntity, IEndimatedEntity {
+public class SlabfishEntity extends TameableEntity implements IInventoryChangedListener, IBucketableEntity {
 
     private static final DataParameter<ResourceLocation> SLABFISH_TYPE = EntityDataManager.createKey(SlabfishEntity.class, EnvironmentalData.RESOURCE_LOCATION);
     private static final DataParameter<Integer> SLABFISH_OVERLAY = EntityDataManager.createKey(SlabfishEntity.class, DataSerializers.VARINT);
@@ -93,18 +119,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
     public static final EntitySize SIZE_SITTING = EntitySize.fixed(0.45F, 0.6F);
     public static final EntitySize SIZE_SWIMMING_CHILD = EntitySize.fixed(0.35F, 0.3F);
     public static final EntitySize SIZE_SITTING_CHILD = EntitySize.fixed(0.225F, 0.3F);
-
-    private static final Ingredient BREEDING_ITEMS = Ingredient.fromItems(Items.TROPICAL_FISH, EnvironmentalItems.TROPICAL_FISH_KELP_ROLL.get());
-    private static final Ingredient FOOD_ITEMS = Ingredient.fromItems(
-            ForgeRegistries.ITEMS.getValue(new ResourceLocation("atmospheric", "passionfruit")),
-            ForgeRegistries.ITEMS.getValue(new ResourceLocation("atmospheric", "shimmering_passionfruit")),
-            ForgeRegistries.ITEMS.getValue(new ResourceLocation("endergetic", "bolloom_fruit")),
-            Items.CHORUS_FRUIT
-    );
-
-    private Endimation playingEndimation = BLANK_ANIMATION;
-    public static final Endimation DANCE = new Endimation(Environmental.REGISTRY_HELPER.prefix("slabfish_dancing"), 40);
-
+    
     public SlabfishInventory slabfishBackpack;
     public boolean backpackFull;
     public int playersUsing;
@@ -114,7 +129,6 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
     public float oFlapSpeed;
     public float oFlap;
     public float wingRotDelta = 1.0F;
-    private int animationTick;
     public boolean isPartying = false;
     BlockPos jukeboxPosition;
 
@@ -141,7 +155,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
         this.goalSelector.addGoal(4, new SlabbyBreedGoal(this, 1.0D));
         this.goalSelector.addGoal(5, new SlabbyGrabItemGoal(this, 1.1D));
-        this.goalSelector.addGoal(6, new TemptGoal(this, 1.0D, false, Ingredient.merge(Arrays.asList(BREEDING_ITEMS, Ingredient.fromTag(ItemTags.FISHES), Ingredient.fromTag(EnvironmentalTags.SUSHI)))));
+        this.goalSelector.addGoal(6, new TemptGoal(this, 1.0D, false, Ingredient.fromTag(EnvironmentalTags.Items.SLABFISH_TEMPTATION_ITEMS)));
         this.goalSelector.addGoal(8, new SlabbyFollowParentGoal(this, 1.1D));
         this.goalSelector.addGoal(9, new RandomWalkingGoal(this, 1.0D));
         this.goalSelector.addGoal(10, new LookAtGoal(this, PlayerEntity.class, 6.0F));
@@ -194,16 +208,16 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
     @Override
     public ActionResultType func_230254_b_(PlayerEntity player, Hand hand) {
-        ItemStack itemstack = player.getHeldItem(hand);
+        ItemStack stack = player.getHeldItem(hand);
 
-        Item item = itemstack.getItem();
+        Item item = stack.getItem();
         if (item instanceof SpawnEggItem || item instanceof NameTagItem || item == Items.TROPICAL_FISH || item == EnvironmentalItems.TROPICAL_FISH_KELP_ROLL.get() || item instanceof EggItem || item instanceof MudBallItem) {
             return super.func_230254_b_(player, hand);
         }
 
         SlabfishManager slabfishManager = SlabfishManager.get(this.world);
         SlabfishType slabfishType = slabfishManager.getSlabfishType(this.getSlabfishType());
-        if (this.hasBackpack() && (slabfishType.getCustomBackpack() == null || !slabfishManager.hasBackpackType(slabfishType.getCustomBackpack())) && slabfishManager.hasBackpackType(itemstack) && !slabfishManager.getBackpackType(itemstack).getRegistryName().equals(this.getBackpack())) {
+        if (this.hasBackpack() && (slabfishType.getCustomBackpack() == null || !slabfishManager.hasBackpackType(slabfishType.getCustomBackpack())) && slabfishManager.hasBackpackType(stack) && !slabfishManager.getBackpackType(stack).getRegistryName().equals(this.getBackpack())) {
             if (!this.world.isRemote()) {
                 ItemStack previousBackpack = this.slabfishBackpack.getStackInSlot(2);
 
@@ -214,10 +228,10 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
                 this.slabfishBackpack.setInventorySlotContents(2, new ItemStack(item));
                 if (!player.isCreative())
-                    itemstack.shrink(1);
+                    stack.shrink(1);
             }
             return ActionResultType.SUCCESS;
-        } else if (slabfishManager.hasSweaterType(itemstack) && !player.isSecondaryUseActive() && (!this.hasSweater() || !slabfishManager.getSweaterType(itemstack).getRegistryName().equals(this.getSweater()))) {
+        } else if (slabfishManager.hasSweaterType(stack) && !player.isSecondaryUseActive() && (!this.hasSweater() || !slabfishManager.getSweaterType(stack).getRegistryName().equals(this.getSweater()))) {
             if (!this.world.isRemote()) {
                 ItemStack previousSweater = this.slabfishBackpack.getStackInSlot(0);
 
@@ -228,7 +242,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
                 this.slabfishBackpack.setInventorySlotContents(0, new ItemStack(item));
                 if (!player.isCreative())
-                    itemstack.shrink(1);
+                    stack.shrink(1);
             }
             return ActionResultType.SUCCESS;
         } else if (item.isIn(Tags.Items.CHESTS_WOODEN) && !this.hasBackpack()) {
@@ -236,14 +250,14 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
                 this.slabfishBackpack.setInventorySlotContents(1, new ItemStack(item));
 
                 if (!player.isCreative())
-                    itemstack.shrink(1);
+                    stack.shrink(1);
 
                 if (player instanceof ServerPlayerEntity)
                     EnvironmentalCriteriaTriggers.BACKPACK_SLABFISH.trigger((ServerPlayerEntity) player);
             }
             return ActionResultType.SUCCESS;
         } else if (item == Items.RABBIT_FOOT && !player.isBeingRidden()) {
-            if (!player.abilities.isCreativeMode) itemstack.shrink(1);
+            if (!player.abilities.isCreativeMode) stack.shrink(1);
             this.startRiding(player);
             this.playSound(SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
             this.particleCloud(ParticleTypes.CAMPFIRE_COSY_SMOKE);
@@ -270,45 +284,45 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
             if (this.hasBackpack())
                 this.dropBackpack();
             this.playSound(SoundEvents.ITEM_BUCKET_FILL_FISH, 1.0F, 1.0F);
-            itemstack.shrink(1);
-            ItemStack itemstack1 = this.getBucket();
-            this.setBucketData(itemstack1);
+            stack.shrink(1);
+            ItemStack stack1 = this.getBucket();
+            this.setBucketData(stack1);
             if (!this.world.isRemote) {
-                CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayerEntity) player, itemstack1);
+                CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayerEntity) player, stack1);
             }
 
-            if (itemstack.isEmpty()) {
-                player.setHeldItem(hand, itemstack1);
-            } else if (!player.inventory.addItemStackToInventory(itemstack1)) {
-                player.dropItem(itemstack1, false);
+            if (stack.isEmpty()) {
+                player.setHeldItem(hand, stack1);
+            } else if (!player.inventory.addItemStackToInventory(stack1)) {
+                player.dropItem(stack1, false);
             }
 
             this.remove();
             return ActionResultType.SUCCESS;
         } else if (item.isIn(ItemTags.MUSIC_DISCS)) {
-            if (!player.abilities.isCreativeMode) itemstack.shrink(1);
+            if (!player.abilities.isCreativeMode) stack.shrink(1);
             this.playBurpSound();
             this.particleCloud(ParticleTypes.NOTE);
             this.dropItem(EnvironmentalItems.MUSIC_DISC_SLABRAVE.get());
             return ActionResultType.SUCCESS;
 
-        } else if (Ingredient.fromTag(ItemTags.FISHES).test(itemstack) && itemstack.isFood() && this.getHealth() < this.getMaxHealth()) {
-            if (!player.abilities.isCreativeMode) itemstack.shrink(1);
+        } else if (Ingredient.fromTag(ItemTags.FISHES).test(stack) && stack.isFood() && this.getHealth() < this.getMaxHealth()) {
+            if (!player.abilities.isCreativeMode) stack.shrink(1);
             world.playSound(this.getPosX(), this.getPosY(), this.getPosZ(), EnvironmentalSounds.ENTITY_SLABFISH_EAT.get(), SoundCategory.NEUTRAL, 1F, 1F, true);
             this.heal((float) item.getFood().getHealing());
             this.particleCloud(ParticleTypes.COMPOSTER);
             return ActionResultType.SUCCESS;
 
-        } else if (Ingredient.fromTag(EnvironmentalTags.SUSHI).test(itemstack)) {
-            if (!player.abilities.isCreativeMode) itemstack.shrink(1);
+        } else if (Ingredient.fromTag(EnvironmentalTags.Items.SUSHI).test(stack)) {
+            if (!player.abilities.isCreativeMode) stack.shrink(1);
             this.playBurpSound();
             this.addPotionEffect(new EffectInstance(Effects.SPEED, 3600, 2, true, true));
             this.particleCloud(ParticleTypes.CLOUD);
             return ActionResultType.SUCCESS;
 
-        } else if (FOOD_ITEMS.test(itemstack)) {
-            if (!player.abilities.isCreativeMode) itemstack.shrink(1);
-            itemstack.onItemUseFinish(this.world, this);
+        } else if (Ingredient.fromTag(EnvironmentalTags.Items.SLABFISH_FOODS).test(stack)) {
+            if (!player.abilities.isCreativeMode) stack.shrink(1);
+            stack.onItemUseFinish(this.world, this);
             world.playSound(this.getPosX(), this.getPosY(), this.getPosZ(), EnvironmentalSounds.ENTITY_SLABFISH_EAT.get(), SoundCategory.NEUTRAL, 1F, 1F, true);
             return ActionResultType.SUCCESS;
         } else if (!this.func_233685_eM_() && this.hasBackpack() && player.isSecondaryUseActive() && !this.isInWater()) {
@@ -331,9 +345,6 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
     @Override
     protected void onInsideBlock(BlockState state) {
-        if (state.getBlock() == EnvironmentalBlocks.MUD.get()) {
-            if (this.getSlabfishOverlay() != SlabfishOverlay.MUDDY) this.setSlabfishOverlay(SlabfishOverlay.MUDDY);
-        }
         if (state.getBlock() == Blocks.WATER) {
             if (this.getSlabfishOverlay() != SlabfishOverlay.NONE) this.setSlabfishOverlay(SlabfishOverlay.NONE);
         }
@@ -534,7 +545,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
     @Override
     public boolean isBreedingItem(ItemStack stack) {
-        return BREEDING_ITEMS.test(stack);
+        return Ingredient.fromTag(EnvironmentalTags.Items.SLABFISH_BREEDING_ITEMS).test(stack);
     }
 
     @Override
@@ -917,30 +928,5 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
     @Override
     public ItemStack getBucket() {
         return new ItemStack(EnvironmentalItems.SLABFISH_BUCKET.get());
-    }
-
-    @Override
-    public int getAnimationTick() {
-        return animationTick;
-    }
-
-    @Override
-    public Endimation[] getEndimations() {
-        return new Endimation[]{DANCE};
-    }
-
-    @Override
-    public Endimation getPlayingEndimation() {
-        return this.playingEndimation;
-    }
-
-    @Override
-    public void setAnimationTick(int animationTick) {
-        this.animationTick = animationTick;
-    }
-
-    @Override
-    public void setPlayingEndimation(Endimation playingEndimation) {
-        this.playingEndimation = playingEndimation;
     }
 }
