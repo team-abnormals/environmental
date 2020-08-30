@@ -8,7 +8,6 @@ import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Util;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 import net.minecraftforge.fml.ModList;
@@ -39,7 +38,6 @@ public class EnvironmentalConfig {
         public final ConfigValue<Integer> jungleFog;
         public final ConfigValue<Integer> snowyFog;
         public final ConfigValue<Integer> swampFog;
-        public final ConfigValue<Integer> iceSpikesFog;
 
         Common(ForgeConfigSpec.Builder builder) {
         	builder.push("worldgen");
@@ -64,10 +62,9 @@ public class EnvironmentalConfig {
             		customFogs = builder.define("Enable Custom Fogs", true);
             		builder.push("values");
             			desertFog = builder.define("Desert Fog decimal value", 14539186);
-            			jungleFog = builder.define("Jungle Fog decimal value", 11927516);
-            			snowyFog = builder.define("Snowy Fog decimal value", 15266047);
-            			swampFog = builder.define("Swamp Fog decimal value", 7317109);
-            			iceSpikesFog = builder.define("Ice Spikes Fog decimal value", 9543167);
+            			jungleFog = builder.define("Jungle Fog decimal value", 11591080);
+            			snowyFog = builder.define("Snowy Fog decimal value", 16777215);
+            			swampFog = builder.define("Swamp Fog decimal value", 11595468);
             		builder.pop();
             	builder.pop();
             builder.pop();
@@ -101,7 +98,6 @@ public class EnvironmentalConfig {
 			if(category == Biome.Category.JUNGLE) replaceFogValue(biome, EnvironmentalConfig.COMMON.jungleFog);
 			if(category == Biome.Category.ICY) replaceFogValue(biome, EnvironmentalConfig.COMMON.snowyFog);
 			if(category == Biome.Category.SWAMP) replaceFogValue(biome, EnvironmentalConfig.COMMON.swampFog);
-			if(biome == Biomes.ICE_SPIKES) replaceFogValue(biome, EnvironmentalConfig.COMMON.iceSpikesFog);
 		}
 	}
     
