@@ -12,8 +12,7 @@ import net.minecraft.client.renderer.model.ModelRenderer;
  */
 public class YakModel<E extends YakEntity> extends QuadrupedModel<E> {
 
-	private float headRotationAngleX;
-
+	//private float headRotationAngleX;
 
 	public YakModel() {
 		super(12, 0.0F, false, 10.0F, 5.5F, 2.0F, 2.0F, 24);
