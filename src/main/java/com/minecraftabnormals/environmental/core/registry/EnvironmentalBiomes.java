@@ -1,7 +1,6 @@
 package com.minecraftabnormals.environmental.core.registry;
 
 import com.minecraftabnormals.environmental.common.world.EnvironmentalBiomeBuilders;
-import com.minecraftabnormals.environmental.common.world.biome.AbnormalsBiome;
 import com.minecraftabnormals.environmental.common.world.biome.blossom.BlossomHighlandsBiome;
 import com.minecraftabnormals.environmental.common.world.biome.blossom.BlossomHillsBiome;
 import com.minecraftabnormals.environmental.common.world.biome.blossom.BlossomValleysBiome;
@@ -28,13 +27,6 @@ public class EnvironmentalBiomes {
     public static final RegistryObject<Biome> BLOSSOM_HILLS 	= BIOMES.register("blossom_hills", () -> new BlossomHillsBiome(EnvironmentalBiomeBuilders.BLOSSOM_HILLS));
     public static final RegistryObject<Biome> BLOSSOM_HIGHLANDS	= BIOMES.register("blossom_highlands", () -> new BlossomHighlandsBiome(EnvironmentalBiomeBuilders.BLOSSOM_HIGHLANDS));
     public static final RegistryObject<Biome> BLOSSOM_VALLEYS	= BIOMES.register("blossom_valleys", () -> new BlossomValleysBiome(EnvironmentalBiomeBuilders.BLOSSOM_VALLEYS));
-
-    public static void addFeaturesAndSpawns() {
-        ForgeRegistries.BIOMES.getValues().stream().filter(biome -> biome instanceof AbnormalsBiome).forEach((biome) -> {
-            ((AbnormalsBiome)biome).addFeatures();
-            ((AbnormalsBiome)biome).addSpawns();
-        });
-    }
     
     public static void addBiomesToGeneration() {
         BiomeManager.addBiome(BiomeManager.BiomeType.WARM, new BiomeManager.BiomeEntry(MARSH.get(), EnvironmentalConfig.COMMON.marshWeight.get()));

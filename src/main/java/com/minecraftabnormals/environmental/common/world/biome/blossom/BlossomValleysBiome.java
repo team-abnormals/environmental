@@ -2,7 +2,7 @@ package com.minecraftabnormals.environmental.common.world.biome.blossom;
 
 import com.minecraftabnormals.environmental.common.world.EnvironmentalBiomeFeatures;
 import com.minecraftabnormals.environmental.common.world.EnvironmentalFeatureConfigs;
-import com.minecraftabnormals.environmental.common.world.biome.AbnormalsBiome;
+import com.teamabnormals.abnormals_core.common.world.biome.AbnormalsBiome;
 
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;

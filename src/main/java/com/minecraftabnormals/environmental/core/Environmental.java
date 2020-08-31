@@ -121,7 +121,6 @@ public class Environmental
 
             EnvironmentalData.registerDataSerializers();
             
-    		EnvironmentalBiomes.addFeaturesAndSpawns();
     		EnvironmentalBiomes.addBiomeTypes();
     		EnvironmentalBiomes.addBiomesToGeneration();
     		EnvironmentalFeatures.generateFeatures();

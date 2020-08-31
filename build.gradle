@@ -72,7 +72,7 @@ minecraft {
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.16.1-32.0.88'
-    implementation fg.deobf("curse.maven:abnormals-core:3017821")
+    implementation fg.deobf("curse.maven:abnormals-core:3043251")
     
     compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
