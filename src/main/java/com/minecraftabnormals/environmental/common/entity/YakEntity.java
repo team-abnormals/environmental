@@ -33,7 +33,10 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.DrinkHelper;
+import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
@@ -53,7 +56,7 @@ public class YakEntity extends AnimalEntity implements IForgeShearable {
 
 	@Override
 	protected void registerGoals() {
-      this.eatGrassGoal = new EatGrassGoal(this);
+		this.eatGrassGoal = new EatGrassGoal(this);
 		this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setCallsForHelp(YakEntity.class));
 //		this.goalSelector.addGoal(1, new YakChargeGoal(this));
 		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
@@ -83,31 +86,42 @@ public class YakEntity extends AnimalEntity implements IForgeShearable {
 		this.setSheared(compound.getBoolean("Sheared"));
 	}
 
+	@Override
+	protected void updateAITasks() {
+		this.timer = this.eatGrassGoal.getEatingGrassTimer();
+		super.updateAITasks();
+	}
 
-    @Override
-    protected void updateAITasks() {
-        this.timer = this.eatGrassGoal.getEatingGrassTimer();
-        super.updateAITasks();
-    }
+	@Override
+	public void livingTick() {
+		if (this.world.isRemote) {
+			this.timer = Math.max(0, this.timer - 1);
+		}
 
-    @Override
-    public void livingTick() {
-        if (this.world.isRemote) {
-            this.timer = Math.max(0, this.timer - 1);
-        }
+		super.livingTick();
+	}
 
-        super.livingTick();
-    }
+	@Override
+	public void handleStatusUpdate(byte id) {
+		if (id == 10) {
+			this.timer = 40;
+		} else {
+			super.handleStatusUpdate(id);
+		}
+	}
 
-    @Override
-    public void handleStatusUpdate(byte id) {
-        if (id == 10) {
-            this.timer = 40;
-        } else {
-            super.handleStatusUpdate(id);
-        }
-
-    }
+	@Override
+	public ActionResultType func_230254_b_(PlayerEntity p_230254_1_, Hand p_230254_2_) {
+		ItemStack itemstack = p_230254_1_.getHeldItem(p_230254_2_);
+		if (itemstack.getItem() == Items.BUCKET && !this.isChild()) {
+			p_230254_1_.playSound(SoundEvents.ENTITY_COW_MILK, 1.0F, 1.0F);
+			ItemStack itemstack1 = DrinkHelper.func_241445_a_(itemstack, p_230254_1_, Items.MILK_BUCKET.getDefaultInstance());
+			p_230254_1_.setHeldItem(p_230254_2_, itemstack1);
+			return ActionResultType.func_233537_a_(this.world.isRemote);
+		} else {
+			return super.func_230254_b_(p_230254_1_, p_230254_2_);
+		}
+	}
 
 //	public float getHeadRotationPointY(float partialTicks) {
 //		if (this.timer <= 0) {
@@ -206,8 +220,8 @@ public class YakEntity extends AnimalEntity implements IForgeShearable {
 		return this.isChild() ? size.height * 0.95F : 1.3F;
 	}
 
-    @Override
-    public ItemStack getPickedResult(RayTraceResult target) {
-        return new ItemStack(EnvironmentalItems.YAK_SPAWN_EGG.get());
-    }
+	@Override
+	public ItemStack getPickedResult(RayTraceResult target) {
+		return new ItemStack(EnvironmentalItems.YAK_SPAWN_EGG.get());
+	}
 }
