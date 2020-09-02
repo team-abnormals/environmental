@@ -6,6 +6,7 @@ import java.util.List;
 import com.minecraftabnormals.environmental.client.render.*;
 import com.minecraftabnormals.environmental.common.entity.*;
 import com.minecraftabnormals.environmental.core.Environmental;
+import com.minecraftabnormals.environmental.core.EnvironmentalConfig;
 import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
 
 import net.minecraft.entity.EntityClassification;
@@ -44,7 +45,9 @@ public class EnvironmentalEntities {
 
     public static void registerSpawns() {
         ForgeRegistries.BIOMES.getValues().stream().forEach(EnvironmentalEntities::processSpawning);
-        ForgeRegistries.BIOMES.getValues().stream().forEach(EnvironmentalEntities::removeSpawns);
+        if(EnvironmentalConfig.COMMON.limitFarmAnimalSpawns.get()) {
+            ForgeRegistries.BIOMES.getValues().stream().forEach(EnvironmentalEntities::removeSpawns);
+        }
 
         EntitySpawnPlacementRegistry.register(EnvironmentalEntities.SLABFISH.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canAnimalSpawn);
         EntitySpawnPlacementRegistry.register(EnvironmentalEntities.YAK.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canAnimalSpawn);

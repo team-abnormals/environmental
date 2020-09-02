@@ -24,6 +24,8 @@ public class EnvironmentalConfig {
         public final ConfigValue<Integer> blossomHillsWeight;
         public final ConfigValue<Integer> blossomHighlandsWeight;
         public final ConfigValue<Integer> blossomValleysWeight;
+        
+        public final ConfigValue<Boolean> limitFarmAnimalSpawns;
                 
         public final ConfigValue<Boolean> customFogs;
         public final ConfigValue<Integer> desertFog;
@@ -59,6 +61,10 @@ public class EnvironmentalConfig {
             			swampFog = builder.define("Swamp Fog decimal value", 11595468);
             		builder.pop();
             	builder.pop();
+            builder.pop();
+            
+            builder.push("Misc");
+            limitFarmAnimalSpawns = builder.comment("Make farm animals spawn in less biomes to allow new mobs to take their place and diversify biome spawns").define("Limit farm animal spawns", true);
             builder.pop();
         }
     }
