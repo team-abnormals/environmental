@@ -2,15 +2,9 @@ package com.minecraftabnormals.environmental.core;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
-
-import net.minecraft.block.Block;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Util;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
-import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -30,9 +24,7 @@ public class EnvironmentalConfig {
         public final ConfigValue<Integer> blossomHillsWeight;
         public final ConfigValue<Integer> blossomHighlandsWeight;
         public final ConfigValue<Integer> blossomValleysWeight;
-        
-        public final ConfigValue<Boolean> renameThatch;
-        
+                
         public final ConfigValue<Boolean> customFogs;
         public final ConfigValue<Integer> desertFog;
         public final ConfigValue<Integer> jungleFog;
@@ -68,10 +60,6 @@ public class EnvironmentalConfig {
             		builder.pop();
             	builder.pop();
             builder.pop();
-            
-            builder.push("misc");
-            	renameThatch = builder.define("If Thatch is renamed to Grass Thatch", ModList.get().isLoaded("quark"));
-            builder.pop();
         }
     }
     
@@ -85,12 +73,6 @@ public class EnvironmentalConfig {
     }
     
     public static void onConfigReload(final ModConfig.ModConfigEvent event) {
-    	boolean renameThatch = EnvironmentalConfig.COMMON.renameThatch.get();
-    	createAltName(renameThatch, EnvironmentalBlocks.THATCH.get(), "grass_thatch");
-		createAltName(renameThatch, EnvironmentalBlocks.THATCH_SLAB.get(), "grass_thatch_slab");
-		createAltName(renameThatch, EnvironmentalBlocks.THATCH_STAIRS.get(), "grass_thatch_stairs");
-		createAltName(renameThatch, EnvironmentalBlocks.THATCH_VERTICAL_SLAB.get(), "grass_thatch_vertical_slab");
-		
 		for (Biome biome : ForgeRegistries.BIOMES.getValues()) {
 			Biome.Category category = biome.getCategory();
 			
@@ -108,12 +90,4 @@ public class EnvironmentalConfig {
     		biome.field_235052_p_.fogColor = 12638463;
     	}
     }
-	
-	private static void createAltName(boolean criteria, Block block, String name) {
-		if (criteria) {
-			block.translationKey = Util.makeTranslationKey("block", new ResourceLocation(Environmental.MODID, name));
-		} else {
-			block.translationKey = Util.makeTranslationKey("block", block.getRegistryName());
-		}
-	}
 }

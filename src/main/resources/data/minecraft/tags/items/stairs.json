@@ -1,11 +1,13 @@
 {
   "replace": false,
   "values": [
-	"environmental:cattail_thatch_stairs",
-	"environmental:mud_brick_stairs",
-	"environmental:ice_brick_stairs",
-	"environmental:terracotta_brick_stairs",
-	"environmental:white_terracotta_brick_stairs",
+    "environmental:grass_thatch_stairs",
+    "environmental:cattail_thatch_stairs",
+    "environmental:duckweed_thatch_stairs",
+    "environmental:mud_brick_stairs",
+    "environmental:ice_brick_stairs",
+    "environmental:terracotta_brick_stairs",
+    "environmental:white_terracotta_brick_stairs",
     "environmental:orange_terracotta_brick_stairs",
     "environmental:magenta_terracotta_brick_stairs",
     "environmental:light_blue_terracotta_brick_stairs",

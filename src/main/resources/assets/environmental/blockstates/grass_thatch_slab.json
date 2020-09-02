@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "type=bottom": { "model": "environmental:block/grass_thatch_slab" },
+        "type=top": { "model": "environmental:block/grass_thatch_slab_top" },
+        "type=double": { "model": "environmental:block/grass_thatch" }
+    }
+}

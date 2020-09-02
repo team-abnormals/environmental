@@ -406,10 +406,10 @@ public class EnvironmentalBlocks {
 
 	// Duckweed //
     
-    public static final RegistryObject<Block> THATCH               = HELPER.createBlock("thatch", () -> new ThatchBlock(EnvironmentalProperties.THATCH), ItemGroup.BUILDING_BLOCKS);
-    public static final RegistryObject<Block> THATCH_SLAB          = HELPER.createBlock("thatch_slab", () -> new ThatchSlabBlock(EnvironmentalProperties.THATCH), ItemGroup.BUILDING_BLOCKS);
-    public static final RegistryObject<Block> THATCH_STAIRS        = HELPER.createBlock("thatch_stairs", () -> new ThatchStairsBlock(CATTAIL_THATCH.get().getDefaultState(), EnvironmentalProperties.THATCH), ItemGroup.BUILDING_BLOCKS);
-    public static final RegistryObject<Block> THATCH_VERTICAL_SLAB = HELPER.createCompatBlock("quark","thatch_vertical_slab", () -> new ThatchVerticalSlabBlock(EnvironmentalProperties.THATCH), ItemGroup.BUILDING_BLOCKS);
+    public static final RegistryObject<Block> GRASS_THATCH               = HELPER.createBlock("grass_thatch", () -> new ThatchBlock(EnvironmentalProperties.GRASS_THATCH), ItemGroup.BUILDING_BLOCKS);
+    public static final RegistryObject<Block> GRASS_THATCH_SLAB          = HELPER.createBlock("grass_thatch_slab", () -> new ThatchSlabBlock(EnvironmentalProperties.GRASS_THATCH), ItemGroup.BUILDING_BLOCKS);
+    public static final RegistryObject<Block> GRASS_THATCH_STAIRS        = HELPER.createBlock("grass_thatch_stairs", () -> new ThatchStairsBlock(GRASS_THATCH.get().getDefaultState(), EnvironmentalProperties.GRASS_THATCH), ItemGroup.BUILDING_BLOCKS);
+    public static final RegistryObject<Block> GRASS_THATCH_VERTICAL_SLAB = HELPER.createCompatBlock("quark","grass_thatch_vertical_slab", () -> new ThatchVerticalSlabBlock(EnvironmentalProperties.GRASS_THATCH), ItemGroup.BUILDING_BLOCKS);
 
 	// Lily Pads //
 	

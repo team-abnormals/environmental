@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "environmental:thatch"
+          "name": "environmental:grass_thatch_stairs"
         }
       ],
       "conditions": [

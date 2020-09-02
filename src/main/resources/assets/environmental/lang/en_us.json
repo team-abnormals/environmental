@@ -232,11 +232,6 @@
 	"block.environmental.tall_cattail": "Tall Cattail",
 	"block.environmental.potted_cattail": "Potted Cattail",
 	
-	"block.environmental.thatch": "Thatch",
-  "block.environmental.thatch_slab": "Thatch Slab",
-  "block.environmental.thatch_stairs": "Thatch Stairs",
-  "block.environmental.thatch_vertical_slab": "Thatch Vertical Slab",
-  
   "block.environmental.grass_thatch": "Grass Thatch",
   "block.environmental.grass_thatch_slab": "Grass Thatch Slab",
   "block.environmental.grass_thatch_stairs": "Grass Thatch Stairs",

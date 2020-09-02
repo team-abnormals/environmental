@@ -1,7 +1,0 @@
-{
-    "variants": {
-        "type=bottom": { "model": "environmental:block/thatch_slab" },
-        "type=top": { "model": "environmental:block/thatch_slab_top" },
-        "type=double": { "model": "environmental:block/thatch" }
-    }
-}

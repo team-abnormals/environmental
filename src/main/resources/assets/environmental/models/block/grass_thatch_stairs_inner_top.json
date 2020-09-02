@@ -1,0 +1,7 @@
+{
+  "parent": "abnormals_core:block/thatch/thatch_stairs_inner_top",
+  "textures": {
+    "thatch": "environmental:block/grass_thatch",
+    "extrudes": "environmental:block/grass_thatch_extrudes"
+  }
+}

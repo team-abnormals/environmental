@@ -1,11 +1,13 @@
 {
   "replace": false,
   "values": [
-	"environmental:cattail_thatch_slab",
-	"environmental:mud_brick_slab",
-	"environmental:ice_brick_slab",
-	"environmental:terracotta_brick_slab",
-	"environmental:white_terracotta_brick_slab",
+    "environmental:grass_thatch_slab",
+    "environmental:cattail_thatch_slab",
+    "environmental:duckweed_thatch_slab",
+    "environmental:mud_brick_slab",
+    "environmental:ice_brick_slab",
+    "environmental:terracotta_brick_slab",
+    "environmental:white_terracotta_brick_slab",
     "environmental:orange_terracotta_brick_slab",
     "environmental:magenta_terracotta_brick_slab",
     "environmental:light_blue_terracotta_brick_slab",

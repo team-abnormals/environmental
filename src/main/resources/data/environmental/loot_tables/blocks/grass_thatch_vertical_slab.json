@@ -12,7 +12,7 @@
               "conditions": [
                 {
                   "condition": "minecraft:block_state_property",
-                  "block": "environmental:thatch_vertical_slab",
+                  "block": "environmental:grass_thatch_vertical_slab",
                   "properties": {
                     "type": "double"
                   }
@@ -24,7 +24,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "environmental:thatch_vertical_slab"
+          "name": "environmental:grass_thatch_vertical_slab"
         }
       ]
     }

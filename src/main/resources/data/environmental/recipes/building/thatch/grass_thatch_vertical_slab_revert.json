@@ -7,11 +7,11 @@
   ],
   "key": {
     "S": {
-      "item": "environmental:thatch_slab"
+      "item": "environmental:grass_thatch_slab"
     }
   },
   "result": {
-    "item": "environmental:thatch_vertical_slab",
+    "item": "environmental:grass_thatch_vertical_slab",
     "count": 3
   },
   "conditions": [
