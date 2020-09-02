@@ -45,7 +45,8 @@ public class EnvironmentalItems {
 
     public static final RegistryObject<Item> MUD_BALL 		= HELPER.createItem("mud_ball", () -> new MudBallItem(new Item.Properties().group(ItemGroup.MATERIALS)));
     public static final RegistryObject<Item> MUD_BRICK 		= HELPER.createItem("mud_brick", () -> new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
-    
+    public static final RegistryObject<Item> YAK_HAIR 		= HELPER.createItem("yak_hair", () -> new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
+
     public static final RegistryObject<Item> WILLOW_BOAT 	= HELPER.createBoatItem("willow", EnvironmentalBlocks.WILLOW_PLANKS);
     public static final RegistryObject<Item> WISTERIA_BOAT 	= HELPER.createBoatItem("wisteria", EnvironmentalBlocks.WISTERIA_PLANKS);
     public static final RegistryObject<Item> CHERRY_BOAT 	= HELPER.createBoatItem("cherry", EnvironmentalBlocks.CHERRY_PLANKS);

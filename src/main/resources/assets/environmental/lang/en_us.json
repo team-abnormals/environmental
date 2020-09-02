@@ -1,7 +1,7 @@
 {
 	"block.environmental.kiln": "Kiln",
 	"block.environmental.sawmill": "Sawmill",
-	
+
   "block.environmental.mud": "Mud",
 	"block.environmental.mud_bricks": "Mud Bricks",
 	"block.environmental.mud_brick_slab": "Mud Brick Slab",
@@ -9,21 +9,21 @@
 	"block.environmental.mud_brick_wall": "Mud Brick Wall",
 	"block.environmental.mud_brick_vertical_slab": "Mud Brick Vertical Slab",
 	"block.environmental.chiseled_mud_bricks": "Chiseled Mud Bricks",
-	
+
 	"block.environmental.slabfish_effigy": "Slabfish Effigy",
-	
+
 	"block.environmental.chiseled_bricks": "Chiseled Bricks",
-	
+
 	"block.environmental.ice_bricks": "Ice Bricks",
 	"block.environmental.ice_brick_slab": "Ice Brick Slab",
 	"block.environmental.ice_brick_stairs": "Ice Brick Stairs",
 	"block.environmental.ice_brick_wall": "Ice Brick Wall",
 	"block.environmental.ice_brick_vertical_slab": "Ice Brick Vertical Slab",
 	"block.environmental.chiseled_ice_bricks": "Chiseled Ice Bricks",
-	
+
 	"block.environmental.ice_lantern": "Ice Lantern",
 	"block.environmental.ice_chain": "Ice Chain",
-	
+
 	"block.environmental.willow_planks": "Willow Planks",
 	"block.environmental.willow_slab": "Willow Slab",
 	"block.environmental.willow_stairs": "Willow Stairs",
@@ -50,7 +50,7 @@
 	"block.environmental.willow_chest": "Willow Chest",
 	"block.environmental.willow_trapped_chest": "Willow Trapped Chest",
 	"block.environmental.willow_beehive": "Willow Beehive",
-	
+
 	"block.environmental.cherry_planks": "Cherry Planks",
 	"block.environmental.cherry_slab": "Cherry Slab",
 	"block.environmental.cherry_stairs": "Cherry Stairs",
@@ -76,7 +76,7 @@
 	"block.environmental.cherry_chest": "Cherry Chest",
 	"block.environmental.cherry_trapped_chest": "Cherry Trapped Chest",
 	"block.environmental.cherry_beehive": "Cherry Beehive",
-	
+
 	"block.environmental.wisteria_log": "Wisteria Log",
   "block.environmental.stripped_wisteria_log": "Stripped Wisteria Log",
   "block.environmental.wisteria_wood": "Wisteria Wood",
@@ -98,28 +98,28 @@
   "block.environmental.wisteria_chest": "Wisteria Chest",
 	"block.environmental.wisteria_trapped_chest": "Wisteria Trapped Chest",
 	"block.environmental.wisteria_beehive": "Wisteria Beehive",
-	
+
   "block.environmental.blue_wisteria_leaves": "Blue Wisteria Leaves",
   "block.environmental.pink_wisteria_leaves": "Pink Wisteria Leaves",
   "block.environmental.purple_wisteria_leaves": "Purple Wisteria Leaves",
   "block.environmental.white_wisteria_leaves": "White Wisteria Leaves",
-  
+
   "block.environmental.blue_hanging_wisteria_leaves": "Blue Hanging Wisteria Leaves",
   "block.environmental.pink_hanging_wisteria_leaves": "Pink Hanging Wisteria Leaves",
   "block.environmental.purple_hanging_wisteria_leaves": "Purple Hanging Wisteria Leaves",
   "block.environmental.white_hanging_wisteria_leaves": "White Hanging Wisteria Leaves",
-  
+
   "block.environmental.blue_wisteria_sapling": "Blue Wisteria Sapling",
   "block.environmental.pink_wisteria_sapling": "Pink Wisteria Sapling",
   "block.environmental.purple_wisteria_sapling": "Purple Wisteria Sapling",
   "block.environmental.white_wisteria_sapling": "White Wisteria Sapling",
-  
+
   "block.environmental.blue_wisteria_leaf_carpet": "Blue Wisteria Leaf Carpet",
   "block.environmental.pink_wisteria_leaf_carpet": "Pink Wisteria Leaf Carpet",
   "block.environmental.purple_wisteria_leaf_carpet": "Purple Wisteria Leaf Carpet",
   "block.environmental.white_wisteria_leaf_carpet": "White Wisteria Leaf Carpet",
-  
-  "block.environmental.terracotta_bricks": "Terracotta Bricks",	
+
+  "block.environmental.terracotta_bricks": "Terracotta Bricks",
 	"block.environmental.white_terracotta_bricks": "White Terracotta Bricks",
 	"block.environmental.orange_terracotta_bricks": "Orange Terracotta Bricks",
 	"block.environmental.magenta_terracotta_bricks": "Magenta Terracotta Bricks",
@@ -136,8 +136,8 @@
 	"block.environmental.green_terracotta_bricks": "Green Terracotta Bricks",
 	"block.environmental.red_terracotta_bricks": "Red Terracotta Bricks",
 	"block.environmental.black_terracotta_bricks": "Black Terracotta Bricks",
-	
-	"block.environmental.terracotta_brick_stairs": "Terracotta Brick Stairs",	
+
+	"block.environmental.terracotta_brick_stairs": "Terracotta Brick Stairs",
 	"block.environmental.white_terracotta_brick_stairs": "White Terracotta Brick Stairs",
 	"block.environmental.orange_terracotta_brick_stairs": "Orange Terracotta Brick Stairs",
 	"block.environmental.magenta_terracotta_brick_stairs": "Magenta Terracotta Brick Stairs",
@@ -154,8 +154,8 @@
 	"block.environmental.green_terracotta_brick_stairs": "Green Terracotta Brick Stairs",
 	"block.environmental.red_terracotta_brick_stairs": "Red Terracotta Brick Stairs",
 	"block.environmental.black_terracotta_brick_stairs": "Black Terracotta Brick Stairs",
-	
-	"block.environmental.terracotta_brick_slab": "Terracotta Brick Slab",	
+
+	"block.environmental.terracotta_brick_slab": "Terracotta Brick Slab",
 	"block.environmental.white_terracotta_brick_slab": "White Terracotta Brick Slab",
 	"block.environmental.orange_terracotta_brick_slab": "Orange Terracotta Brick Slab",
 	"block.environmental.magenta_terracotta_brick_slab": "Magenta Terracotta Brick Slab",
@@ -172,8 +172,8 @@
 	"block.environmental.green_terracotta_brick_slab": "Green Terracotta Brick Slab",
 	"block.environmental.red_terracotta_brick_slab": "Red Terracotta Brick Slab",
 	"block.environmental.black_terracotta_brick_slab": "Black Terracotta Brick Slab",
-	
-	"block.environmental.terracotta_brick_vertical_slab": "Terracotta Brick Vertical Slab",	
+
+	"block.environmental.terracotta_brick_vertical_slab": "Terracotta Brick Vertical Slab",
 	"block.environmental.white_terracotta_brick_vertical_slab": "White Terracotta Brick Vertical Slab",
 	"block.environmental.orange_terracotta_brick_vertical_slab": "Orange Terracotta Brick Vertical Slab",
 	"block.environmental.magenta_terracotta_brick_vertical_slab": "Magenta Terracotta Brick Vertical Slab",
@@ -190,8 +190,8 @@
 	"block.environmental.green_terracotta_brick_vertical_slab": "Green Terracotta Brick Vertical Slab",
 	"block.environmental.red_terracotta_brick_vertical_slab": "Red Terracotta Brick Vertical Slab",
 	"block.environmental.black_terracotta_brick_vertical_slab": "Black Terracotta Brick Vertical Slab",
-	
-	"block.environmental.terracotta_brick_wall": "Terracotta Brick Wall",	
+
+	"block.environmental.terracotta_brick_wall": "Terracotta Brick Wall",
 	"block.environmental.white_terracotta_brick_wall": "White Terracotta Brick Wall",
 	"block.environmental.orange_terracotta_brick_wall": "Orange Terracotta Brick Wall",
 	"block.environmental.magenta_terracotta_brick_wall": "Magenta Terracotta Brick Wall",
@@ -208,8 +208,8 @@
 	"block.environmental.green_terracotta_brick_wall": "Green Terracotta Brick Wall",
 	"block.environmental.red_terracotta_brick_wall": "Red Terracotta Brick Wall",
 	"block.environmental.black_terracotta_brick_wall": "Black Terracotta Brick Wall",
-	
-	"block.environmental.chiseled_terracotta_bricks": "Chiseled Terracotta Bricks",	
+
+	"block.environmental.chiseled_terracotta_bricks": "Chiseled Terracotta Bricks",
 	"block.environmental.chiseled_white_terracotta_bricks": "Chiseled White Terracotta Bricks",
 	"block.environmental.chiseled_orange_terracotta_bricks": "Chiseled Orange Terracotta Bricks",
 	"block.environmental.chiseled_magenta_terracotta_bricks": "Chiseled Magenta Terracotta Bricks",
@@ -226,28 +226,28 @@
 	"block.environmental.chiseled_green_terracotta_bricks": "Chiseled Green Terracotta Bricks",
 	"block.environmental.chiseled_red_terracotta_bricks": "Chiseled Red Terracotta Bricks",
 	"block.environmental.chiseled_black_terracotta_bricks": "Chiseled Black Terracotta Bricks",
-	
+
 	"block.environmental.cattail_sprouts": "Cattail Sprouts",
 	"block.environmental.cattail": "Cattail",
 	"block.environmental.tall_cattail": "Tall Cattail",
 	"block.environmental.potted_cattail": "Potted Cattail",
-	
+
   "block.environmental.grass_thatch": "Grass Thatch",
   "block.environmental.grass_thatch_slab": "Grass Thatch Slab",
   "block.environmental.grass_thatch_stairs": "Grass Thatch Stairs",
   "block.environmental.grass_thatch_vertical_slab": "Grass Thatch Vertical Slab",
-	
+
 	"block.environmental.cattail_thatch": "Cattail Thatch",
 	"block.environmental.cattail_thatch_slab": "Cattail Thatch Slab",
 	"block.environmental.cattail_thatch_stairs": "Cattail Thatch Stairs",
 	"block.environmental.cattail_thatch_vertical_slab": "Cattail Thatch Vertical Slab",
 	"block.environmental.cattail_seed_sack": "Cattail Seed Sack",
-		  
+
   "block.environmental.blue_delphinium": "Blue Delphinium",
   "block.environmental.pink_delphinium": "Pink Delphinium",
   "block.environmental.purple_delphinium": "Purple Delphinium",
   "block.environmental.white_delphinium": "White Delphinium",
-	
+
 	"block.environmental.cartwheel" : "Cartwheel",
 	"block.environmental.bluebell" : "Bluebell",
 	"block.environmental.violet": "Violet",
@@ -260,126 +260,128 @@
 	"block.environmental.pink_hibiscus" : "Pink Hibiscus",
 	"block.environmental.magenta_hibiscus" : "Magenta Hibiscus",
 	"block.environmental.purple_hibiscus" : "Purple Hibiscus",
-	
+
 	"block.environmental.podzol_path": "Podzol Path",
 	"block.environmental.mycelium_path": "Mycelium Path",
 	"block.environmental.mycelium_sprouts": "Mycelium Sprouts",
 	"block.environmental.giant_tall_grass": "Giant Tall Grass",
-	
+
 	"block.environmental.large_lily_pad": "Large Lily Pad",
 	"block.environmental.giant_lily_pad": "Giant Lily Pad",
-	
+
 	"block.environmental.cherry_crate": "Cherry Crate",
-	
+
 	"block.environmental.rice_sack": "Rice Sack",
 	"block.environmental.rice": "Rice",
 	"block.environmental.tall_rice": "Rice",
-	
+
 	"block.environmental.duckweed": "Duckweed",
 	"block.environmental.duckweed_thatch": "Duckweed Thatch",
 	"block.environmental.duckweed_thatch_slab": "Duckweed Thatch Slab",
 	"block.environmental.duckweed_thatch_stairs": "Duckweed Thatch Stairs",
 	"block.environmental.duckweed_thatch_vertical_slab": "Duckweed Thatch Vertical Slab",
-		
+
 	"item.environmental.wanderer_boots": "Wanderer's Boots",
 	"item.environmental.architect_belt": "Architect's Belt",
 	"item.environmental.fool_wings": "Fool's Wings",
 	"item.environmental.thief_hood": "Thief's Hood",
 	"item.environmental.executioner_cleaver": "Executioner's Cleaver",
-	
+
 	"item.environmental.slabfish_spawn_egg": "Slabfish Spawn Egg",
 	"item.environmental.axolotl_spawn_egg": "Axolotl Spawn Egg",
 	"item.environmental.butterfly_spawn_egg": "Butterfly Spawn Egg",
 	"item.environmental.duck_spawn_egg": "Duck Spawn Egg",
 	"item.environmental.deer_spawn_egg": "Deer Spawn Egg",
 	"item.environmental.yak_spawn_egg": "Yak Spawn Egg",
-	
+
 	"item.environmental.cattail_seeds": "Cattail Seeds",
-  "item.environmental.rice_ball": "Rice Ball",
-  
+    "item.environmental.rice_ball": "Rice Ball",
+
 	"item.environmental.venison": "Raw Venison",
 	"item.environmental.cooked_venison": "Cooked Venison",
 	"item.environmental.duck": "Raw Duck",
-  "item.environmental.cooked_duck": "Cooked Duck",
-	
+    "item.environmental.cooked_duck": "Cooked Duck",
+
 	"item.environmental.cod_kelp_roll": "Cod Kelp Roll",
 	"item.environmental.tropical_fish_kelp_roll": "Tropical Fish Kelp Roll",
 	"item.environmental.crab_kelp_roll": "Crab Kelp Roll",
 	"item.environmental.pike_kelp_roll": "Pike Kelp Roll",
-	
+
 	"item.environmental.salmon_rice_cake": "Salmon Rice Cake",
 	"item.environmental.pufferfish_rice_cake": "Pufferfish Rice Cake",
 	"item.environmental.lionfish_rice_cake": "Lionfish Rice Cake",
-	
+
 	"item.environmental.squid_ink_risotto": "Squid Ink Risotto",
-	
+
 	"item.environmental.axolotl_bucket": "Bucket of Axolotl",
 	"item.environmental.slabfish_bucket": "Bucket of Slabfish",
 	"item.environmental.bottled_butterfly": "Bottled Butterfly",
-	
+
 	"item.environmental.mud_ball": "Mud Ball",
 	"item.environmental.mud_brick": "Mud Brick",
 	"item.environmental.mud_bucket": "Mud Bucket",
-	
+
+    "item.environmental.yak_hair": "Yak Hair",
+
 	"item.environmental.cherries": "Cherries",
 	"item.environmental.cherry_pie": "Cherry Pie",
 	"item.environmental.apple_pie": "Apple Pie",
-	
+
 	"item.environmental.willow_boat": "Willow Boat",
 	"item.environmental.cherry_boat": "Cherry Boat",
 	"item.environmental.wisteria_boat": "Wisteria Boat",
-	
+
 	"item.environmental.music_disc_slabrave": "Music Disc",
 	"item.environmental.music_disc_slabrave.desc": "Mista Jub - Slabrave",
-	
+
 	"item.environmental.music_disc_leaving_home": "Music Disc",
 	"item.environmental.music_disc_leaving_home.desc": "hatsondogs - Leaving Home",
-  
+
 	"entity.environmental.slabfish": "Slabfish",
 	"entity.environmental.axolotl": "Axolotl",
 	"entity.environmental.duck": "Duck",
 	"entity.environmental.butterfly": "Butterfly",
 	"entity.environmental.deer": "Deer",
 	"entity.environmental.yak": "Yak",
-	
+
 	"entity.minecraft.villager.environmental.ceramist": "Ceramist",
 	"entity.minecraft.villager.environmental.carpenter": "Carpenter",
-	
+
 	"biome.environmental.marsh": "Marsh",
 	"biome.environmental.mushroom_marsh": "Mushroom Marsh",
 	"biome.environmental.mire": "Mire",
-	
+
 	"biome.environmental.blossom_woods": "Blossom Woods",
 	"biome.environmental.blossom_hills": "Blossom Hills",
 	"biome.environmental.blossom_highlands": "Blossom Highlands",
 	"biome.environmental.blossom_valleys": "Blossom Valleys",
-	
+
 	"container.kiln": "Kiln",
 	"container.sawmill": "Sawmill",
-	
+
 	"gui.environmental.category.baking": "Baking",
 	"gui.environmental.category.sawing": "Sawing",
 
   "generic.reachDistance": "Reach Distance",
-  
+
   "enchantment.environmental.reaching": "Reaching",
   "enchantment.environmental.reaching.desc": "Increases Reach Distance by 1 block per level",
-  
+
   "enchantment.environmental.travelling": "Travelling",
   "enchantment.environmental.travelling.desc": "Increases Movement Speed by 5% per level",
-	
+
 	"advancements.husbandry.equip_axolotl.title": "Lost in the Sea, but not alone!",
 	"advancements.husbandry.equip_axolotl.description": "Have an Axolotl latch onto you and get healed!",
-	
+
 	"advancements.husbandry.breed_all_slabfish.title": "Funky Genetics",
 	"advancements.husbandry.breed_all_slabfish.description": "Breed all Slabfish variants!",
-	
+
 	"advancements.husbandry.backpack_slabfish.title": "First Day of School",
 	"advancements.husbandry.backpack_slabfish.description": "Give a Slabfish a backpack",
-	
+
 	"advancements.adventure.find_natural_slabfish.title": "They Come in Different Colors!",
 	"advancements.adventure.find_natural_slabfish.description": "Find all natural Slabfish variants",
-	
+
 	"subtitles.entity.slabfish.burp": "Slabfish burps",
 	"subtitles.entity.slabfish.death": "Slabfish dies",
 	"subtitles.entity.slabfish.step": "Slabfish steps",
@@ -388,9 +390,9 @@
 	"subtitles.entity.slabfish.transform": "Slabfish transforms",
 	"subtitles.entity.slabfish.backpack": "Backpack equips",
 	"subtitles.entity.slabfish.sweater": "Sweater equips",
-	
+
 	"entity.environmental.slabfish.baby": "Baby",
-	
+
 	"entity.environmental.slabfish.type.swamp": "Swamp",
 	"entity.environmental.slabfish.type.ocean": "Ocean",
 	"entity.environmental.slabfish.type.jungle": "Jungle",
@@ -403,31 +405,31 @@
   "entity.environmental.slabfish.type.river": "River",
   "entity.environmental.slabfish.type.ice_spikes": "Ice Spikes",
   "entity.environmental.slabfish.type.mountain": "Mountain",
-  "entity.environmental.slabfish.type.mushroom": "Mushroom",  
+  "entity.environmental.slabfish.type.mushroom": "Mushroom",
   "entity.environmental.slabfish.type.bamboo": "Bamboo Jungle",
   "entity.environmental.slabfish.type.dark_forest": "Dark Forest",
   "entity.environmental.slabfish.type.flower_forest": "Flower Forest",
   "entity.environmental.slabfish.type.beach": "Beach",
   "entity.environmental.slabfish.type.frozen_ocean": "Frozen Ocean",
   "entity.environmental.slabfish.type.warm_ocean": "Warm Ocean",
-  
+
 	"entity.environmental.slabfish.type.marsh": "Marsh",
 	"entity.environmental.slabfish.type.mire": "Mire",
 	"entity.environmental.slabfish.type.blossom": "Blossom",
 	"entity.environmental.slabfish.type.maple": "Maple Forest",
   "entity.environmental.slabfish.type.rosewood": "Rosewood Forest",
   "entity.environmental.slabfish.type.dunes": "Dunes",
-  
+
   "entity.environmental.slabfish.type.nether": "Nether",
   "entity.environmental.slabfish.type.crimson": "Crimson",
   "entity.environmental.slabfish.type.warped": "Warped",
   "entity.environmental.slabfish.type.soul_sand_valley": "Soul Sand Valley",
   "entity.environmental.slabfish.type.basalt_deltas": "Basalt Deltas",
-  
+
   "entity.environmental.slabfish.type.end": "End",
   "entity.environmental.slabfish.type.chorus": "Chorus Plains",
   "entity.environmental.slabfish.type.poise": "Poise Forest",
-  
+
 	"entity.environmental.slabfish.type.cave": "Cave",
   "entity.environmental.slabfish.type.totem": "Totem",
   "entity.environmental.slabfish.type.brown_mushroom": "Brown Mushroom",
@@ -450,7 +452,7 @@
 	"entity.environmental.slabfish.type.bmo": "BMO",
 	"entity.environmental.slabfish.type.ocelot": "WALL-E",
 	"entity.environmental.slabfish.type.eve": "EVE",
-	
+
 	"entity.environmental.slabfish.backpack.white": "White Backpack",
 	"entity.environmental.slabfish.backpack.orange": "Orange Backpack",
 	"entity.environmental.slabfish.backpack.magenta": "Magenta Backpack",
@@ -470,7 +472,7 @@
 	"entity.environmental.slabfish.backpack.snake_block": "Gooey Growth",
 	"entity.environmental.slabfish.backpack.gore": "Gorey Growth",
 	"entity.environmental.slabfish.backpack.ocelot": "Cooler",
-	
+
 	"entity.environmental.slabfish.sweater.white": "White Sweater",
 	"entity.environmental.slabfish.sweater.orange": "Orange Sweater",
 	"entity.environmental.slabfish.sweater.magenta": "Magenta Sweater",
