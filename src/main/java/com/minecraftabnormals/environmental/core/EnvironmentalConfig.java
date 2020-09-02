@@ -26,7 +26,8 @@ public class EnvironmentalConfig {
         public final ConfigValue<Integer> blossomValleysWeight;
         
         public final ConfigValue<Boolean> limitFarmAnimalSpawns;
-                
+        public final ConfigValue<Boolean> biomeVariantsAlwaysSpawn;
+
         public final ConfigValue<Boolean> customFogs;
         public final ConfigValue<Integer> desertFog;
         public final ConfigValue<Integer> jungleFog;
@@ -63,8 +64,9 @@ public class EnvironmentalConfig {
             	builder.pop();
             builder.pop();
             
-            builder.push("Misc");
+            builder.push("entities");
             limitFarmAnimalSpawns = builder.comment("Make farm animals spawn in less biomes to allow new mobs to take their place and diversify biome spawns").define("Limit farm animal spawns", true);
+            biomeVariantsAlwaysSpawn = builder.comment("Make biome variants of mobs like Husk always spawn in place of their original in their biomes").define("Biome variants always spawn", true);
             builder.pop();
         }
     }

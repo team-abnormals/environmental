@@ -13,6 +13,7 @@ import com.minecraftabnormals.environmental.common.entity.SlabfishEntity;
 import com.minecraftabnormals.environmental.common.entity.util.SlabfishOverlay;
 import com.minecraftabnormals.environmental.common.slabfish.SlabfishManager;
 import com.minecraftabnormals.environmental.core.Environmental;
+import com.minecraftabnormals.environmental.core.EnvironmentalConfig;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEntities;
 
@@ -91,8 +92,9 @@ public class EnvironmentalEvents {
         boolean naturalSpawn = event.getSpawnReason() == SpawnReason.NATURAL;
         boolean chunkGenSpawn = event.getSpawnReason() == SpawnReason.CHUNK_GENERATION;
         boolean validSpawn = naturalSpawn || chunkGenSpawn;
+        boolean replaceVariants = EnvironmentalConfig.COMMON.biomeVariantsAlwaysSpawn.get();
         
-        if (validSpawn && entity.getPosY() > 60 && entity.getType() == EntityType.ZOMBIE) {
+        if (replaceVariants && validSpawn && entity.getPosY() > 60 && entity.getType() == EntityType.ZOMBIE) {
             ZombieEntity zombie = (ZombieEntity) event.getEntity();
             if (event.getWorld().getBiome(entity.getPosition()).getCategory() == Biome.Category.DESERT) {
 
@@ -107,7 +109,7 @@ public class EnvironmentalEvents {
             }
         }
 
-        if (validSpawn && entity.getPosY() > 60 && entity.getType() == EntityType.SKELETON) {
+        if (replaceVariants && validSpawn && entity.getPosY() > 60 && entity.getType() == EntityType.SKELETON) {
             SkeletonEntity zombie = (SkeletonEntity) event.getEntity();
             if (event.getWorld().getBiome(entity.getPosition()).getCategory() == Biome.Category.ICY) {
 
