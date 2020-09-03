@@ -270,6 +270,7 @@
 	"block.environmental.giant_lily_pad": "Giant Lily Pad",
 	
 	"block.environmental.cherry_crate": "Cherry Crate",
+	"block.environmental.yak_hair_block": "Yak Hair Block",
 	
 	"block.environmental.rice_sack": "Rice Sack",
 	"block.environmental.rice": "Rice",
@@ -293,6 +294,9 @@
 	"item.environmental.duck_spawn_egg": "Duck Spawn Egg",
 	"item.environmental.deer_spawn_egg": "Deer Spawn Egg",
 	"item.environmental.yak_spawn_egg": "Yak Spawn Egg",
+	
+	"item.environmental.yak_hair": "Yak Hair",
+	"item.environmental.yak_pants": "Yak Pants",
 	
 	"item.environmental.cattail_seeds": "Cattail Seeds",
   "item.environmental.rice_ball": "Rice Ball",

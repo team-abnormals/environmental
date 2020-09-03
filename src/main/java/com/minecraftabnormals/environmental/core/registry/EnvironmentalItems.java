@@ -15,6 +15,9 @@ import com.teamabnormals.abnormals_core.common.items.AbnormalsMusicDiscItem;
 import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
 
 import net.minecraft.fluid.Fluids;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.BlockNamedItem;
 import net.minecraft.item.Item;
@@ -46,6 +49,9 @@ public class EnvironmentalItems {
     public static final RegistryObject<Item> MUD_BALL 		= HELPER.createItem("mud_ball", () -> new MudBallItem(new Item.Properties().group(ItemGroup.MATERIALS)));
     public static final RegistryObject<Item> MUD_BRICK 		= HELPER.createItem("mud_brick", () -> new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
     
+    public static final RegistryObject<Item> YAK_HAIR 		= HELPER.createItem("yak_hair", () -> new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
+    public static final RegistryObject<Item> YAK_PANTS 		= HELPER.createItem("yak_pants", () -> new ArmorItem(ArmorMaterial.LEATHER, EquipmentSlotType.LEGS, new Item.Properties().group(ItemGroup.COMBAT)));
+
     public static final RegistryObject<Item> WILLOW_BOAT 	= HELPER.createBoatItem("willow", EnvironmentalBlocks.WILLOW_PLANKS);
     public static final RegistryObject<Item> WISTERIA_BOAT 	= HELPER.createBoatItem("wisteria", EnvironmentalBlocks.WISTERIA_PLANKS);
     public static final RegistryObject<Item> CHERRY_BOAT 	= HELPER.createBoatItem("cherry", EnvironmentalBlocks.CHERRY_PLANKS);

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "environmental:yak_hair_block"
+    }
+  ],
+  "result": {
+    "item": "environmental:yak_hair",
+    "count": 9
+  }
+}

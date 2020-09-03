@@ -72,7 +72,24 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:brown_wool"
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 3.0,
+                "max": 5.0,
+                "type": "minecraft:uniform"
+              }
+            },
+            {
+              "function": "minecraft:looting_enchant",
+              "count": {
+                "min": 1.0,
+                "max": 3.0
+              }
+            }
+          ],
+          "name": "environmental:yak_hair"
         }
       ]
     }

@@ -1,0 +1,7 @@
+{
+  "parent": "abnormals_core:block/thatch/thatch",
+  "textures": {
+    "thatch": "environmental:block/yak_hair_block",
+    "extrudes": "environmental:block/yak_hair_block_extrudes"
+  }
+}

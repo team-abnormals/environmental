@@ -396,6 +396,10 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> TALL_RICE = HELPER.createBlockNoItem("tall_rice", () -> new DoubleRiceBlock(EnvironmentalProperties.RICE));
 	public static final RegistryObject<Block> RICE_SACK	= HELPER.createCompatBlock("quark", "rice_sack", () -> new Block(Block.Properties.create(Material.WOOL, MaterialColor.WHITE_TERRACOTTA).hardnessAndResistance(0.5F).sound(SoundType.CLOTH)), ItemGroup.DECORATIONS);
 
+	// Yak Hair //
+	
+	public static final RegistryObject<Block> YAK_HAIR_BLOCK	= HELPER.createBlock("yak_hair_block", () -> new ThatchBlock(EnvironmentalProperties.YAK_HAIR_BLOCK), ItemGroup.BUILDING_BLOCKS);
+	
 	// Duckweed //
 	
 	public static final RegistryObject<Block> DUCKWEED 						= HELPER.createBlockNoItem("duckweed", () -> new DuckweedBlock(EnvironmentalProperties.DUCKWEED));

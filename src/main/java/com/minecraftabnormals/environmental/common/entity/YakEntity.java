@@ -199,11 +199,11 @@ public class YakEntity extends AnimalEntity implements IForgeShearable {
 		world.playMovingSound(null, this, SoundEvents.ENTITY_SHEEP_SHEAR, player == null ? SoundCategory.BLOCKS : SoundCategory.PLAYERS, 1.0F, 1.0F);
 		if (!world.isRemote) {
 			this.setSheared(true);
-			int i = 1 + this.rand.nextInt(3);
+			int i = 4 + this.rand.nextInt(12);
 
 			java.util.List<ItemStack> items = new java.util.ArrayList<>();
 			for (int j = 0; j < i; ++j) {
-				items.add(new ItemStack(Items.BROWN_WOOL));
+				items.add(new ItemStack(EnvironmentalItems.YAK_HAIR.get()));
 			}
 			return items;
 		}
