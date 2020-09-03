@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import com.minecraftabnormals.environmental.client.model.FoolWingsModel;
 import com.minecraftabnormals.environmental.core.Environmental;
+import com.minecraftabnormals.environmental.core.other.EnvironmentalArmorMaterials;
 
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.Entity;
@@ -12,7 +13,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
-import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
@@ -24,7 +24,7 @@ public class FoolWingsItem extends ArmorItem {
 	private static HashMap<UUID, Boolean> hasJumpedMap = new HashMap<UUID, Boolean>();
 
 	public FoolWingsItem(Properties properties) {
-		super(ArmorMaterial.LEATHER, EquipmentSlotType.CHEST, properties);
+		super(EnvironmentalArmorMaterials.EXPLORER, EquipmentSlotType.CHEST, properties);
 	}
 
 	@Override

@@ -7,6 +7,7 @@ import com.google.common.collect.ImmutableMultimap.Builder;
 import com.google.common.collect.Multimap;
 import com.minecraftabnormals.environmental.client.model.WandererBootsModel;
 import com.minecraftabnormals.environmental.core.Environmental;
+import com.minecraftabnormals.environmental.core.other.EnvironmentalArmorMaterials;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEnchantments;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
 
@@ -19,7 +20,6 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
-import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -29,7 +29,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 public class WandererBootsItem extends ArmorItem {
 
 	public WandererBootsItem(Properties properties) {
-		super(ArmorMaterial.LEATHER, EquipmentSlotType.FEET, properties);
+		super(EnvironmentalArmorMaterials.EXPLORER, EquipmentSlotType.FEET, properties);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })

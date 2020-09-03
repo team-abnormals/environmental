@@ -2,6 +2,7 @@ package com.minecraftabnormals.environmental.common.item;
 
 import com.minecraftabnormals.environmental.client.model.ThiefHoodModel;
 import com.minecraftabnormals.environmental.core.Environmental;
+import com.minecraftabnormals.environmental.core.other.EnvironmentalArmorMaterials;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
 
 import net.minecraft.client.renderer.entity.model.BipedModel;
@@ -11,7 +12,6 @@ import net.minecraft.entity.monster.EndermanEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
-import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.client.event.RenderNameplateEvent;
@@ -25,7 +25,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 public class ThiefHoodItem extends ArmorItem {
 
 	public ThiefHoodItem(Properties properties) {
-		super(ArmorMaterial.LEATHER, EquipmentSlotType.HEAD, properties);
+		super(EnvironmentalArmorMaterials.EXPLORER, EquipmentSlotType.HEAD, properties);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
