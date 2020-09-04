@@ -1,0 +1,38 @@
+{
+  "rarity": "epic",
+  "displayName": {
+    "translate": "entity.environmental.slabfish.type.rainforest"
+  },
+  "mod": "atmospheric",
+  "conditions": [
+    {
+      "type": "or",
+      "conditions": [
+        {
+          "type": "biome",
+          "biome": "atmospheric:rainforest"
+        },
+        {
+          "type": "biome",
+          "biome": "atmospheric:rainforest_mountains"
+        },
+        {
+          "type": "biome",
+          "biome": "atmospheric:rainforest_plateau"
+        },
+        {
+          "type": "biome",
+          "biome": "atmospheric:sparse_rainforest_plateau"
+        },
+        {
+          "type": "biome",
+          "biome": "atmospheric:rainforest_basin"
+        },
+        {
+          "type": "biome",
+          "biome": "atmospheric:sparse_rainforest_basin"
+        }
+      ]
+    }
+  ]
+}
