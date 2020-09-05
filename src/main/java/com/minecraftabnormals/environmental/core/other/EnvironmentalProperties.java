@@ -49,7 +49,8 @@ public class EnvironmentalProperties {
 	
 	public static final AbstractBlock.Properties DUCKWEED 			= AbstractBlock.Properties.create(Material.PLANTS).hardnessAndResistance(0.0F).doesNotBlockMovement().sound(SoundType.CROP);
 	public static final AbstractBlock.Properties MYCELIUM_SPROUTS 	= AbstractBlock.Properties.create(Material.TALL_PLANTS, MaterialColor.PURPLE).doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.NETHER_SPROUT);
-	
+	public static final AbstractBlock.Properties TALL_DEAD_BUSH 	= AbstractBlock.Properties.create(Material.TALL_PLANTS, MaterialColor.WOOD).doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.PLANT);
+
 	public static final AbstractBlock.Properties FLOWER 		= AbstractBlock.Properties.create(Material.PLANTS).notSolid().doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.PLANT);
 	public static final AbstractBlock.Properties DELPHINIUMS 	= AbstractBlock.Properties.create(Material.TALL_PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT);
 	public static final AbstractBlock.Properties FLOWER_POT 	= AbstractBlock.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.0F).notSolid();

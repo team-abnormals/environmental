@@ -19,6 +19,7 @@ import com.minecraftabnormals.environmental.common.block.PottedCartwheelBlock;
 import com.minecraftabnormals.environmental.common.block.RiceBlock;
 import com.minecraftabnormals.environmental.common.block.SawmillBlock;
 import com.minecraftabnormals.environmental.common.block.SlabfishEffigyBlock;
+import com.minecraftabnormals.environmental.common.block.TallDeadBushBlock;
 import com.minecraftabnormals.environmental.common.block.WisteriaLeavesBlock;
 import com.minecraftabnormals.environmental.common.world.gen.feature.trees.CherryTree;
 import com.minecraftabnormals.environmental.common.world.gen.feature.trees.WillowTree;
@@ -427,9 +428,10 @@ public class EnvironmentalBlocks {
 	
 	// Plants //
 	
-	public static final RegistryObject<Block> MYCELIUM_SPROUTS = HELPER.createBlock("mycelium_sprouts", () -> new MyceliumSproutsBlock(EnvironmentalProperties.MYCELIUM_SPROUTS), ItemGroup.DECORATIONS);
-	public static final RegistryObject<Block> GIANT_TALL_GRASS = HELPER.createBlock("giant_tall_grass", () -> new DoublePlantBlock(Block.Properties.from(Blocks.TALL_GRASS)), ItemGroup.DECORATIONS);
-	
+	public static final RegistryObject<Block> MYCELIUM_SPROUTS	= HELPER.createBlock("mycelium_sprouts", () -> new MyceliumSproutsBlock(EnvironmentalProperties.MYCELIUM_SPROUTS), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> GIANT_TALL_GRASS 	= HELPER.createBlock("giant_tall_grass", () -> new DoublePlantBlock(Block.Properties.from(Blocks.TALL_GRASS)), ItemGroup.DECORATIONS);
+    public static final RegistryObject<Block> TALL_DEAD_BUSH 	= HELPER.createBlock("tall_dead_bush", () -> new TallDeadBushBlock(EnvironmentalProperties.TALL_DEAD_BUSH), ItemGroup.DECORATIONS);
+
 	// Paintings //
 	
 	public static final RegistryObject<PaintingType> SNAKE_BLOCK 			= PAINTINGS.register("snake_block", () -> new PaintingType(32, 32));

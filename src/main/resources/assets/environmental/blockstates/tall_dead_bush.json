@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "environmental:block/tall_dead_bush_bottom"
+    },
+    "half=upper": {
+      "model": "environmental:block/tall_dead_bush_top"
+    }
+  }
+}
