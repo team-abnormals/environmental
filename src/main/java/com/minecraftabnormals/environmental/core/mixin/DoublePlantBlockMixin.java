@@ -36,10 +36,8 @@ public class DoublePlantBlockMixin extends Block implements IGrowable {
 
 	@Override
 	public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
-		if (rand.nextInt(4) == 0) {
-			DoublePlantBlock giantTallGrass = (DoublePlantBlock) EnvironmentalBlocks.GIANT_TALL_GRASS.get();
-			if(state.get(DoublePlantBlock.HALF) == DoubleBlockHalf.LOWER) giantTallGrass.placeAt(worldIn, pos, 2);
-			else giantTallGrass.placeAt(worldIn, pos.down(), 2);
-		}
+		DoublePlantBlock giantTallGrass = (DoublePlantBlock) EnvironmentalBlocks.GIANT_TALL_GRASS.get();
+		if(state.get(DoublePlantBlock.HALF) == DoubleBlockHalf.LOWER) giantTallGrass.placeAt(worldIn, pos, 2);
+		else giantTallGrass.placeAt(worldIn, pos.down(), 2);
 	}
 }
