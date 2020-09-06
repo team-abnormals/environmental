@@ -28,7 +28,6 @@ import java.util.function.Predicate;
 public class SweaterType implements Predicate<ItemStack> {
     private final Ingredient ingredient;
     private ResourceLocation registryName;
-    @OnlyIn(Dist.CLIENT)
     private final LazyValue<ResourceLocation> textureLocation = new LazyValue<>(() -> new ResourceLocation(this.getRegistryName().getNamespace(), "textures/entity/slabfish/sweater/" + this.getRegistryName().getPath() + ".png"));
     private ITextComponent displayName;
 
