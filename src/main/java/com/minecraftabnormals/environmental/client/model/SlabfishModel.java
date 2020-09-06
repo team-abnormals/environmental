@@ -7,6 +7,8 @@ import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 /**
  * ModelSlabfish - Farcr
@@ -14,6 +16,7 @@ import net.minecraft.util.math.MathHelper;
  *
  * @param <E>
  */
+@OnlyIn(Dist.CLIENT)
 public class SlabfishModel<E extends SlabfishEntity> extends AgeableModel<E> {
     Entity entity;
     public ModelRenderer body;

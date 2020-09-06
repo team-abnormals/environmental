@@ -7,11 +7,14 @@ import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 /**
  * DeerModel - hatsondogs 
  * @param <E>
  */
+@OnlyIn(Dist.CLIENT)
 public class DeerModel<E extends DeerEntity> extends EntityModel<E> {
     protected E entity;
 

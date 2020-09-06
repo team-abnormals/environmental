@@ -19,6 +19,8 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeMod;
 
 public class ArchitectBeltItem extends ArmorItem {
@@ -29,6 +31,7 @@ public class ArchitectBeltItem extends ArmorItem {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
+	@OnlyIn(Dist.CLIENT)
 	public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack stack, EquipmentSlotType armorSlot, A _default) {
 		return (A) new ArchitectBeltModel(1.0F);
 	}

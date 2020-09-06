@@ -133,6 +133,7 @@ public class Environmental
         });
     }
 
+    @OnlyIn(Dist.CLIENT)
     private void setupClient(final FMLClientSetupEvent event)
     {
         EnvironmentalEntities.registerRendering();

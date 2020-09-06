@@ -6,11 +6,14 @@ import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 /**
  * ModelAxolotl - MCVinnyq
  * Created using Tabula 7.1.0
  */
+@OnlyIn(Dist.CLIENT)
 public class AxolotlModel<T extends TameableEntity, E> extends AgeableModel<T> {
     public ModelRenderer Head;
     public ModelRenderer Body;

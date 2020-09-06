@@ -18,14 +18,13 @@ import net.minecraft.entity.monster.AbstractIllagerEntity;
 import net.minecraft.entity.monster.VindicatorEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraft.world.raid.Raid;
 
 @Mixin(VindicatorEntity.class)
-public class VindicatorEntityMixin extends AbstractIllagerEntity {
+public abstract class VindicatorEntityMixin extends AbstractIllagerEntity {
 
 	protected VindicatorEntityMixin(EntityType<? extends AbstractIllagerEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -60,12 +59,5 @@ public class VindicatorEntityMixin extends AbstractIllagerEntity {
 		if (this.getRaid() == null && this.world.rand.nextInt(bladeChance) == 0) {
 			this.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(EnvironmentalItems.EXECUTIONER_CLEAVER.get()));
 		}
-	}
-
-	public void applyWaveBonus(int p_213660_1_, boolean p_213660_2_) {
-	}
-
-	public SoundEvent getRaidLossSound() {
-		return null;
 	}
 }

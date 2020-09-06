@@ -14,10 +14,10 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraftforge.client.event.RenderNameplateEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.eventbus.api.Event.Result;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
@@ -30,6 +30,7 @@ public class ThiefHoodItem extends ArmorItem {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
+	@OnlyIn(Dist.CLIENT)
 	public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack stack, EquipmentSlotType armorSlot, A _default) {
 		return (A) new ThiefHoodModel(1.0F);
 	}
@@ -42,16 +43,6 @@ public class ThiefHoodItem extends ArmorItem {
 	@Override
 	public boolean isEnderMask(ItemStack stack, PlayerEntity player, EndermanEntity endermanEntity) {
 		return true;
-	}
-
-	@SubscribeEvent
-	public static void renderNameplate(RenderNameplateEvent event) {
-		if (event.getEntity() instanceof LivingEntity) {
-			LivingEntity entity = (LivingEntity) event.getEntity();
-			if (entity.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() == EnvironmentalItems.THIEF_HOOD.get()) {
-				event.setResult(Result.DENY);
-			}
-		}
 	}
 
 	@SubscribeEvent

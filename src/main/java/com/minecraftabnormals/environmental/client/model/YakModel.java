@@ -3,6 +3,8 @@ package com.minecraftabnormals.environmental.client.model;
 import com.minecraftabnormals.environmental.common.entity.YakEntity;
 import net.minecraft.client.renderer.entity.model.QuadrupedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 /**
  * YakModel - Hatsondogs
@@ -10,6 +12,7 @@ import net.minecraft.client.renderer.model.ModelRenderer;
  *
  * @param <E>
  */
+@OnlyIn(Dist.CLIENT)
 public class YakModel<E extends YakEntity> extends QuadrupedModel<E> {
 
 	//private float headRotationAngleX;
