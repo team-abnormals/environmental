@@ -32,7 +32,7 @@ public final class BlossomHillsBiome extends AbnormalsBiome {
         EnvironmentalBiomeFeatures.addBlossomBamboo(this);
         EnvironmentalBiomeFeatures.addBlossomVegetation(this);
         EnvironmentalBiomeFeatures.addGrass(this);
-        EnvironmentalBiomeFeatures.addShortFlower(EnvironmentalFeatureConfigs.LOTUS_FLOWER, this, 3);
+        EnvironmentalBiomeFeatures.addShortFlower(EnvironmentalFeatureConfigs.RED_LOTUS_FLOWER, this, 3);
 
         DefaultBiomeFeatures.addTallGrass(this);
         DefaultBiomeFeatures.addMushrooms(this);

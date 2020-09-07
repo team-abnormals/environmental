@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "environmental:block/lotus_flower"
+        "layer0": "environmental:block/red_lotus_flower"
     }
 }

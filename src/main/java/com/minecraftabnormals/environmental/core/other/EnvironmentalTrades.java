@@ -46,7 +46,7 @@ public class EnvironmentalTrades {
 		trades.add(new ItemsForEmeraldsTrade(EnvironmentalBlocks.CARTWHEEL.get(), 2, 1, 5, 1));
 		trades.add(new ItemsForEmeraldsTrade(EnvironmentalBlocks.VIOLET.get(), 1, 1, 12, 1));
 		trades.add(new ItemsForEmeraldsTrade(EnvironmentalBlocks.BLUEBELL.get(), 1, 1, 8, 1));
-		trades.add(new ItemsForEmeraldsTrade(EnvironmentalBlocks.LOTUS_FLOWER.get(), 1, 1, 7, 1));
+		trades.add(new ItemsForEmeraldsTrade(EnvironmentalBlocks.RED_LOTUS_FLOWER.get(), 1, 1, 7, 1));
 		trades.add(new ItemsForEmeraldsTrade(EnvironmentalBlocks.DIANTHUS.get(), 1, 1, 8, 1));
 		trades.add(new ItemsForEmeraldsTrade(EnvironmentalBlocks.YELLOW_HIBISCUS.get(), 1, 1, 12, 1));
 		trades.add(new ItemsForEmeraldsTrade(EnvironmentalBlocks.ORANGE_HIBISCUS.get(), 1, 1, 12, 1));

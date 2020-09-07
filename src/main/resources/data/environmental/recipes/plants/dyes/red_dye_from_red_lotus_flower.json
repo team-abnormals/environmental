@@ -3,7 +3,7 @@
   "group": "red_dye",
   "ingredients": [
     {
-      "item": "environmental:lotus_flower"
+      "item": "environmental:red_lotus_flower"
     }
   ],
   "result": {

@@ -356,7 +356,7 @@ public class EnvironmentalBlocks {
     public static final RegistryObject<Block> BLUEBELL = HELPER.createBlock("bluebell", () -> new AbnormalsFlowerBlock(Effects.WATER_BREATHING, 6, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
     public static final RegistryObject<Block> VIOLET = HELPER.createBlock("violet", () -> new AbnormalsFlowerBlock(Effects.INVISIBILITY, 6, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
     public static final RegistryObject<Block> DIANTHUS = HELPER.createBlock("dianthus", () -> new AbnormalsFlowerBlock(Effects.STRENGTH, 8, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
-    public static final RegistryObject<Block> LOTUS_FLOWER = HELPER.createBlock("lotus_flower", () -> new LotusFlowerBlock(Effects.MINING_FATIGUE, 6, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
+    public static final RegistryObject<Block> RED_LOTUS_FLOWER = HELPER.createBlock("red_lotus_flower", () -> new LotusFlowerBlock(Effects.MINING_FATIGUE, 6, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
     public static final RegistryObject<Block> YELLOW_HIBISCUS = HELPER.createBlock("yellow_hibiscus", () -> new AbnormalsFlowerBlock(Effects.GLOWING, 8, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
     public static final RegistryObject<Block> ORANGE_HIBISCUS = HELPER.createBlock("orange_hibiscus", () -> new AbnormalsFlowerBlock(Effects.GLOWING, 8, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
     public static final RegistryObject<Block> RED_HIBISCUS = HELPER.createBlock("red_hibiscus", () -> new AbnormalsFlowerBlock(Effects.GLOWING, 8, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
@@ -369,7 +369,7 @@ public class EnvironmentalBlocks {
     public static final RegistryObject<Block> POTTED_BLUEBELL = HELPER.createBlockNoItem("potted_bluebell", () -> new FlowerPotBlock(BLUEBELL.get(), EnvironmentalProperties.FLOWER_POT));
     public static final RegistryObject<Block> POTTED_VIOLET = HELPER.createBlockNoItem("potted_violet", () -> new FlowerPotBlock(VIOLET.get(), EnvironmentalProperties.FLOWER_POT));
     public static final RegistryObject<Block> POTTED_DIANTHUS = HELPER.createBlockNoItem("potted_dianthus", () -> new FlowerPotBlock(DIANTHUS.get(), EnvironmentalProperties.FLOWER_POT));
-    public static final RegistryObject<Block> POTTED_LOTUS_FLOWER = HELPER.createBlockNoItem("potted_lotus_flower", () -> new FlowerPotBlock(LOTUS_FLOWER.get(), EnvironmentalProperties.FLOWER_POT));
+    public static final RegistryObject<Block> POTTED_RED_LOTUS_FLOWER = HELPER.createBlockNoItem("potted_red_lotus_flower", () -> new FlowerPotBlock(RED_LOTUS_FLOWER.get(), EnvironmentalProperties.FLOWER_POT));
     public static final RegistryObject<Block> POTTED_YELLOW_HIBISCUS = HELPER.createBlockNoItem("potted_yellow_hibiscus", () -> new FlowerPotBlock(YELLOW_HIBISCUS.get(), EnvironmentalProperties.FLOWER_POT));
     public static final RegistryObject<Block> POTTED_ORANGE_HIBISCUS = HELPER.createBlockNoItem("potted_orange_hibiscus", () -> new FlowerPotBlock(ORANGE_HIBISCUS.get(), EnvironmentalProperties.FLOWER_POT));
     public static final RegistryObject<Block> POTTED_RED_HIBISCUS = HELPER.createBlockNoItem("potted_red_hibiscus", () -> new FlowerPotBlock(RED_HIBISCUS.get(), EnvironmentalProperties.FLOWER_POT));
