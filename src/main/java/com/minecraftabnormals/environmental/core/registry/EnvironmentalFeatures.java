@@ -66,7 +66,7 @@ public class EnvironmentalFeatures {
 
         if (biome.getCategory() == Biome.Category.SAVANNA) {
             EnvironmentalBiomeFeatures.addGiantTallGrass(biome, 3);
-            EnvironmentalBiomeFeatures.addShortFlower(Blocks.ALLIUM.getDefaultState(), biome, 4);
+            EnvironmentalBiomeFeatures.addShortFlower(Blocks.ALLIUM.getDefaultState(), biome, 3);
         }
 
         if (biome.getCategory() == Biome.Category.TAIGA) {

@@ -1,0 +1,6 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "environmental:block/white_lotus_flower"
+  }
+}

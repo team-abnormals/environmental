@@ -8,8 +8,10 @@ import com.minecraftabnormals.environmental.core.Environmental;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleManager;
+import net.minecraft.client.particle.ParticleManager.IParticleMetaFactory;
 import net.minecraft.client.renderer.model.ModelResourceLocation;
 import net.minecraft.particles.BasicParticleType;
+import net.minecraft.particles.IParticleData;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -28,12 +30,13 @@ public class EnvironmentalClientRegistry
 {
 
     @SubscribeEvent
-    public static void registerParticleFactory(ParticleFactoryRegisterEvent event)
+    public static void registerParticleFactorys(ParticleFactoryRegisterEvent event)
     {
-        ParticleManager particleManager = Minecraft.getInstance().particles;
-        if(checkForNonNull(EnvironmentalParticles.KILN_SMOKE)) particleManager.registerFactory(EnvironmentalParticles.KILN_SMOKE.get(), KilnSmokeParticle.Factory::new);
-        if(checkForNonNull(EnvironmentalParticles.CHERRY_BLOSSOM)) particleManager.registerFactory(EnvironmentalParticles.CHERRY_BLOSSOM.get(), CherryBlossomParticle.Factory::new);
-        if(checkForNonNull(EnvironmentalParticles.LOTUS_BLOSSOM)) particleManager.registerFactory(EnvironmentalParticles.LOTUS_BLOSSOM.get(), LotusBlossomParticle.Factory::new);
+        ParticleManager manager = Minecraft.getInstance().particles;
+        registerParticleFactory(manager, EnvironmentalParticles.KILN_SMOKE, KilnSmokeParticle.Factory::new);
+        registerParticleFactory(manager, EnvironmentalParticles.CHERRY_BLOSSOM, CherryBlossomParticle.Factory::new);
+        registerParticleFactory(manager, EnvironmentalParticles.RED_LOTUS_BLOSSOM, LotusBlossomParticle.Factory::new);
+        registerParticleFactory(manager, EnvironmentalParticles.WHITE_LOTUS_BLOSSOM, LotusBlossomParticle.Factory::new);
     }
 
     @SubscribeEvent
@@ -47,6 +50,11 @@ public class EnvironmentalClientRegistry
     public static void onEvent(ModelBakeEvent event)
     {
         event.getModelRegistry().put(new ModelResourceLocation(EnvironmentalItems.SLABFISH_BUCKET.getId(), "inventory"), new SlabfishBucketModel(event.getModelManager()));
+    }
+    
+    private static <T extends IParticleData> void registerParticleFactory(ParticleManager manager, RegistryObject<BasicParticleType> particleTypeIn, IParticleMetaFactory<BasicParticleType> particleMetaFactoryIn) 
+    {
+    	 if(checkForNonNull(particleTypeIn)) manager.registerFactory(particleTypeIn.get(), particleMetaFactoryIn);
     }
     
     private static boolean checkForNonNull(RegistryObject<BasicParticleType> registryObject)

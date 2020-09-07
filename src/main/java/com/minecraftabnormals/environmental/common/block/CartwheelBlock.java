@@ -1,20 +1,16 @@
 package com.minecraftabnormals.environmental.common.block;
 
-import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
+import com.teamabnormals.abnormals_core.common.blocks.AbnormalsFlowerBlock;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.FlowerBlock;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.potion.Effect;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
-import net.minecraft.util.NonNullList;
 
-public class CartwheelBlock extends FlowerBlock {
+public class CartwheelBlock extends AbnormalsFlowerBlock {
     public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 
     public CartwheelBlock(Effect effect, int effectDuration, Properties properties) {
@@ -27,17 +23,5 @@ public class CartwheelBlock extends FlowerBlock {
 
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(FACING);
-    }
-
-    @Override
-    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-        if (ItemStackUtils.isInGroup(this.asItem(), group)) {
-            int targetIndex = ItemStackUtils.findIndexOfItem(Items.WITHER_ROSE, items);
-            if (targetIndex != -1) {
-                items.add(targetIndex + 1, new ItemStack(this));
-            } else {
-                super.fillItemGroup(group, items);
-            }
-        }
     }
 }

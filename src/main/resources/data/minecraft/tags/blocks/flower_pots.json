@@ -2,7 +2,7 @@
 	"replace": false,
 	"values": [
 		"environmental:potted_willow_sapling",
-    	"environmental:potted_cherry_sapling",
+    		"environmental:potted_cherry_sapling",
 		"environmental:potted_pink_wisteria_sapling",
 		"environmental:potted_blue_wisteria_sapling",
 		"environmental:potted_white_wisteria_sapling",
@@ -13,6 +13,7 @@
 		"environmental:potted_violet",
 		"environmental:potted_dianthus",
 		"environmental:potted_red_lotus_flower",
+		"environmental:potted_white_lotus_flower",
 		"environmental:potted_bird_of_paradise",
 		"environmental:potted_red_hibiscus",
 		"environmental:potted_orange_hibiscus",

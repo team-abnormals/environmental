@@ -2,10 +2,11 @@ package com.minecraftabnormals.environmental.common.block;
 
 import java.util.Random;
 
-import com.minecraftabnormals.environmental.core.registry.EnvironmentalParticles;
+import com.google.common.base.Supplier;
 import com.teamabnormals.abnormals_core.common.blocks.AbnormalsFlowerBlock;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.particles.IParticleData;
 import net.minecraft.potion.Effect;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -13,9 +14,11 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class LotusFlowerBlock extends AbnormalsFlowerBlock {
+	private Supplier<IParticleData> particle;
 
-    public LotusFlowerBlock(Effect stewEffect, int stewEffectDuration, Properties properties) {
+    public LotusFlowerBlock(Supplier<IParticleData> particle, Effect stewEffect, int stewEffectDuration, Properties properties) {
         super(stewEffect, stewEffectDuration, properties);
+        this.particle = particle;
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -30,7 +33,7 @@ public class LotusFlowerBlock extends AbnormalsFlowerBlock {
             double z = pos.getZ() + 0.25D + offsetZ;
 
             if (worldIn.isRemote && worldIn.getGameTime() % 9 == 0)
-                worldIn.addParticle(EnvironmentalParticles.LOTUS_BLOSSOM.get(), x, y, z, 0.03D, 0.0D, 0.03D);
+                worldIn.addParticle(this.particle.get(), x, y, z, 0.03D, 0.0D, 0.03D);
         }
     }
 }
