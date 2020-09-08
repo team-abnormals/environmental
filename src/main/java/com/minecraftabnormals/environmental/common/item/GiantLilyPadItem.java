@@ -1,6 +1,6 @@
 package com.minecraftabnormals.environmental.common.item;
 
-import com.minecraftabnormals.environmental.common.block.LargeLilyPadBlock;
+import com.minecraftabnormals.environmental.common.block.GiantLilyPadBlock;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
 
 import net.minecraft.advancements.CriteriaTriggers;
@@ -25,9 +25,9 @@ import net.minecraft.util.math.RayTraceContext;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class LargeLilyPadItem extends BlockItem {
-    public LargeLilyPadItem(Item.Properties builder) {
-        super(EnvironmentalBlocks.LARGE_LILY_PAD.get(), builder);
+public class GiantLilyPadItem extends BlockItem {
+    public GiantLilyPadItem(Item.Properties builder) {
+        super(EnvironmentalBlocks.GIANT_LILY_PAD.get(), builder);
     }
 
     public ActionResultType onItemUse(ItemUseContext context) {
@@ -50,11 +50,11 @@ public class LargeLilyPadItem extends BlockItem {
 
                 BlockPos blockpos1 = blockpos.up();
                 FluidState ifluidstate = worldIn.getFluidState(blockpos);
-                if ((ifluidstate.getFluid() == Fluids.WATER) && LargeLilyPadBlock.checkPositions(worldIn, blockpos1, this.getBlock().getDefaultState())) {
+                if ((ifluidstate.getFluid() == Fluids.WATER) && GiantLilyPadBlock.checkPositions(worldIn, blockpos1, this.getBlock().getDefaultState())) {
 
                     // special case for handling block placement with water lilies
                     net.minecraftforge.common.util.BlockSnapshot blocksnapshot = net.minecraftforge.common.util.BlockSnapshot.create(worldIn, blockpos1);
-                    LargeLilyPadBlock.placeAt(worldIn, blockpos1, this.getBlock().getDefaultState(), 18);
+                    GiantLilyPadBlock.placeAt(worldIn, blockpos1, this.getBlock().getDefaultState(), 18);
                     if (net.minecraftforge.event.ForgeEventFactory.onBlockPlace(playerIn, blocksnapshot, net.minecraft.util.Direction.UP)) {
                         blocksnapshot.restore(true, false);
                         return ActionResult.resultFail(itemstack);

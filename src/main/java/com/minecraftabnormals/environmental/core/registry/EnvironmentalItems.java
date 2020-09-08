@@ -3,6 +3,7 @@ package com.minecraftabnormals.environmental.core.registry;
 import com.minecraftabnormals.environmental.common.item.ArchitectBeltItem;
 import com.minecraftabnormals.environmental.common.item.ExecutionerCleaverItem;
 import com.minecraftabnormals.environmental.common.item.FoolWingsItem;
+import com.minecraftabnormals.environmental.common.item.GiantLilyPadItem;
 import com.minecraftabnormals.environmental.common.item.LargeLilyPadItem;
 import com.minecraftabnormals.environmental.common.item.MudBallItem;
 import com.minecraftabnormals.environmental.common.item.SlabfishBucketItem;
@@ -73,8 +74,8 @@ public class EnvironmentalItems {
     public static final RegistryObject<Item> MUSIC_DISC_SLABRAVE        = HELPER.createItem("music_disc_slabrave", () -> new AbnormalsMusicDiscItem(12, () -> EnvironmentalSounds.SLABRAVE.get(), new Item.Properties().maxStackSize(1).group(ItemGroup.MISC).rarity(Rarity.RARE)));
     public static final RegistryObject<Item> MUSIC_DISC_LEAVING_HOME    = HELPER.createItem("music_disc_leaving_home", () -> new AbnormalsMusicDiscItem(12, () -> EnvironmentalSounds.LEAVING_HOME.get(), new Item.Properties().maxStackSize(1).group(ItemGroup.MISC).rarity(Rarity.RARE)));
 
-    public static final RegistryObject<Item> LARGE_LILY_PAD	= HELPER.createItem("large_lily_pad", () -> new LargeLilyPadItem(EnvironmentalBlocks.LARGE_LILY_PAD.get(), new Item.Properties().group(ItemGroup.DECORATIONS)));
-    public static final RegistryObject<Item> GIANT_LILY_PAD	= HELPER.createItem("giant_lily_pad", () -> new LargeLilyPadItem(EnvironmentalBlocks.GIANT_LILY_PAD.get(), new Item.Properties().group(ItemGroup.DECORATIONS)));
+    public static final RegistryObject<Item> LARGE_LILY_PAD	= HELPER.createItem("large_lily_pad", () -> new LargeLilyPadItem(new Item.Properties().group(ItemGroup.DECORATIONS)));
+    public static final RegistryObject<Item> GIANT_LILY_PAD	= HELPER.createItem("giant_lily_pad", () -> new GiantLilyPadItem(new Item.Properties().group(ItemGroup.DECORATIONS)));
     
 //    public static final RegistryObject<Item> AXOLOTL_BUCKET = HELPER.createItem("axolotl_bucket", () -> new AxolotlBucketItem(() -> EnvironmentalEntities.AXOLOTL.get(), () -> Fluids.WATER, new Item.Properties().group(ItemGroup.MISC).maxStackSize(1)));
     public static final RegistryObject<Item> SLABFISH_BUCKET = HELPER.createItem("slabfish_bucket", () -> new SlabfishBucketItem(() -> EnvironmentalEntities.SLABFISH.get(), () -> Fluids.WATER, new Item.Properties().group(ItemGroup.MISC).maxStackSize(1)));

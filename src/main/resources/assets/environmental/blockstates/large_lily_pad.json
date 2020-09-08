@@ -1,15 +1,16 @@
 {
-    "variants": {
-        "position=center": { "model": "environmental:block/large_lily_pad_center" },
-        
-        "position=north": { "model": "environmental:block/large_lily_pad_north" },
-        "position=east": { "model": "environmental:block/large_lily_pad_east" },
-        "position=south": { "model": "environmental:block/large_lily_pad_south" },
-        "position=west": { "model": "environmental:block/large_lily_pad_west" },
-        
-        "position=northeast": { "model": "environmental:block/large_lily_pad_northeast" },
-        "position=southeast": { "model": "environmental:block/large_lily_pad_southeast" },
-        "position=northwest": { "model": "environmental:block/large_lily_pad_northwest" },
-        "position=southwest": { "model": "environmental:block/large_lily_pad_southwest" }
+  "variants": {
+    "position=northeast": {
+      "model": "environmental:block/large_lily_pad_northeast"
+    },
+    "position=southeast": {
+      "model": "environmental:block/large_lily_pad_southeast"
+    },
+    "position=northwest": {
+      "model": "environmental:block/large_lily_pad_northwest"
+    },
+    "position=southwest": {
+      "model": "environmental:block/large_lily_pad_southwest"
     }
+  }
 }

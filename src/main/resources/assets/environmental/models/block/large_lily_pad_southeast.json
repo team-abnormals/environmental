@@ -1,7 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
-	"texture_size": [48, 48],
+	"texture_size": [32, 32],
 	"textures": {
 		"particle": "environmental:block/large_lily_pad",
 		"texture": "environmental:block/large_lily_pad"
@@ -12,8 +12,8 @@
 			"to": [16, 0.25, 16],
 			"rotation": {"angle": 0, "axis": "y", "origin": [16, 8, 16]},
 			"faces": {
-				"up": {"uv": [10.66667, 10.66667, 16, 16], "texture": "#texture", "tintindex": 0},
-				"down": {"uv": [10.66667, 16, 16, 10.66667], "texture": "#texture", "tintindex": 0}
+				"up": {"uv": [8, 8, 16, 16], "texture": "#texture", "tintindex": 0},
+				"down": {"uv": [8, 16, 16, 8], "texture": "#texture", "tintindex": 0}
 			}
 		}
 	]

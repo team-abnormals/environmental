@@ -4,6 +4,7 @@ import java.util.Random;
 
 import org.spongepowered.asm.mixin.Mixin;
 
+import com.minecraftabnormals.environmental.common.block.GiantLilyPadBlock;
 import com.minecraftabnormals.environmental.common.block.LargeLilyPadBlock;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
 
@@ -35,8 +36,16 @@ public class LilyPadBlockMixin extends Block implements IGrowable {
 
 	@Override
 	public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
-		if (rand.nextInt(4) == 0 && LargeLilyPadBlock.checkPositions(worldIn, pos, EnvironmentalBlocks.LARGE_LILY_PAD.get().getDefaultState())) {
-            LargeLilyPadBlock.placeAt(worldIn, pos, EnvironmentalBlocks.LARGE_LILY_PAD.get().getDefaultState(), 2);
-        }
+		if (rand.nextInt(3) == 0) {
+			if (rand.nextBoolean()) {
+				if (LargeLilyPadBlock.checkPositions(worldIn, pos, EnvironmentalBlocks.LARGE_LILY_PAD.get().getDefaultState())) {
+					LargeLilyPadBlock.placeAt(worldIn, pos, EnvironmentalBlocks.LARGE_LILY_PAD.get().getDefaultState(), 2);
+				}
+			} else {
+				if (GiantLilyPadBlock.checkPositions(worldIn, pos, EnvironmentalBlocks.GIANT_LILY_PAD.get().getDefaultState())) {
+					GiantLilyPadBlock.placeAt(worldIn, pos, EnvironmentalBlocks.GIANT_LILY_PAD.get().getDefaultState(), 2);
+				}
+			}
+		}
 	}
 }
