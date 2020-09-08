@@ -1,6 +1,17 @@
 package com.minecraftabnormals.environmental.common.block;
 
-import net.minecraft.block.*;
+import java.util.Random;
+
+import javax.annotation.Nullable;
+
+import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
+import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.IGrowable;
+import net.minecraft.block.IWaterLoggable;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
@@ -14,8 +25,13 @@ import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.DoubleBlockHalf;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.MathHelper;
@@ -29,14 +45,7 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.IPlantable;
-
-import javax.annotation.Nullable;
-
-import com.minecraftabnormals.environmental.core.other.EnvironmentalTags;
-import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
-import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
-
-import java.util.Random;
+import net.minecraftforge.common.Tags;
 
 public class DoubleRiceBlock extends Block implements IGrowable, IWaterLoggable, IPlantable {
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
@@ -69,7 +78,7 @@ public class DoubleRiceBlock extends Block implements IGrowable, IWaterLoggable,
 
     protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
         Block block = state.getBlock();
-        if (worldIn.getFluidState(pos).getLevel() == 8 && block.isIn(EnvironmentalTags.Blocks.CATTAIL_PLANTABLE_ON))
+        if (worldIn.getFluidState(pos).getLevel() == 8 && (block.isIn(Tags.Blocks.DIRT) || block.isIn(BlockTags.SAND)))
             return true;
         else if (block.getBlock() == Blocks.FARMLAND) return true;
         return false;

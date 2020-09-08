@@ -1,6 +1,17 @@
 package com.minecraftabnormals.environmental.common.block;
 
-import net.minecraft.block.*;
+import java.util.Random;
+
+import javax.annotation.Nullable;
+
+import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.BushBlock;
+import net.minecraft.block.IGrowable;
+import net.minecraft.block.IWaterLoggable;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItemUseContext;
@@ -9,6 +20,7 @@ import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.DoubleBlockHalf;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -21,13 +33,7 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.IPlantable;
-
-import javax.annotation.Nullable;
-
-import com.minecraftabnormals.environmental.core.other.EnvironmentalTags;
-import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
-
-import java.util.Random;
+import net.minecraftforge.common.Tags;
 
 public class RiceBlock extends BushBlock implements IWaterLoggable, IGrowable, IPlantable {
     protected static final VoxelShape SHAPE_SHORT = Block.makeCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 4.0D, 13.0D);
@@ -50,7 +56,7 @@ public class RiceBlock extends BushBlock implements IWaterLoggable, IGrowable, I
     @Override
     protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
         Block block = state.getBlock();
-        if (worldIn.getFluidState(pos).getLevel() == 8 && block.isIn(EnvironmentalTags.Blocks.CATTAIL_PLANTABLE_ON))
+        if (worldIn.getFluidState(pos).getLevel() == 8 && (block.isIn(Tags.Blocks.DIRT) || block.isIn(BlockTags.SAND)))
             return true;
         else if (block.getBlock() == Blocks.FARMLAND) return true;
         return false;
