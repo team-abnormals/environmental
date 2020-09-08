@@ -7,7 +7,7 @@ import com.google.common.collect.ImmutableMultimap.Builder;
 import com.google.common.collect.Multimap;
 import com.minecraftabnormals.environmental.client.model.ArchitectBeltModel;
 import com.minecraftabnormals.environmental.core.Environmental;
-import com.minecraftabnormals.environmental.core.other.EnvironmentalArmorMaterials;
+import com.minecraftabnormals.environmental.core.other.EnvironmentalTiers;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEnchantments;
 
 import net.minecraft.client.renderer.entity.model.BipedModel;
@@ -26,7 +26,7 @@ import net.minecraftforge.common.ForgeMod;
 public class ArchitectBeltItem extends ArmorItem {
 
 	public ArchitectBeltItem(Properties properties) {
-		super(EnvironmentalArmorMaterials.EXPLORER, EquipmentSlotType.LEGS, properties);
+		super(EnvironmentalTiers.Armor.EXPLORER, EquipmentSlotType.LEGS, properties);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })

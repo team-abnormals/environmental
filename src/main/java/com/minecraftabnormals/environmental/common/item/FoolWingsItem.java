@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import com.minecraftabnormals.environmental.client.model.FoolWingsModel;
 import com.minecraftabnormals.environmental.core.Environmental;
-import com.minecraftabnormals.environmental.core.other.EnvironmentalArmorMaterials;
+import com.minecraftabnormals.environmental.core.other.EnvironmentalTiers;
 
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.Entity;
@@ -26,7 +26,7 @@ public class FoolWingsItem extends ArmorItem {
 	private static HashMap<UUID, Boolean> hasJumpedMap = new HashMap<UUID, Boolean>();
 
 	public FoolWingsItem(Properties properties) {
-		super(EnvironmentalArmorMaterials.EXPLORER, EquipmentSlotType.CHEST, properties);
+		super(EnvironmentalTiers.Armor.EXPLORER, EquipmentSlotType.CHEST, properties);
 	}
 
 	@Override

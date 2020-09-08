@@ -26,10 +26,13 @@ import com.minecraftabnormals.environmental.core.registry.EnvironmentalVillagers
 import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
 
 import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.client.renderer.texture.AtlasTexture;
+import net.minecraft.inventory.container.PlayerContainer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -98,6 +101,7 @@ public class Environmental
         DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> 
         {
             modEventBus.addListener(this::setupClient);
+            modEventBus.addListener(this::stitchTextures);
             modEventBus.addListener(this::registerItemColors);
         });
 
@@ -205,6 +209,15 @@ public class Environmental
                 markAsLoginPacket().
                 consumer(FMLHandshakeHandler.biConsumerFor((__, msg, ctx) -> SSyncBackpackTypeMessage.handleLogin(msg, ctx))).
                 add();
+    }
+    
+    private void stitchTextures(TextureStitchEvent.Pre event) {
+        AtlasTexture texture = event.getMap();
+        if (PlayerContainer.LOCATION_BLOCKS_TEXTURE.equals(texture.getTextureLocation())) {
+            event.addSprite(new ResourceLocation(Environmental.MODID, "item/slabfish_sweater_slot"));
+            event.addSprite(new ResourceLocation(Environmental.MODID, "item/slabfish_backpack_slot"));
+            event.addSprite(new ResourceLocation(Environmental.MODID, "item/slabfish_backpack_type_slot"));
+        }
     }
 
     @OnlyIn(Dist.CLIENT)

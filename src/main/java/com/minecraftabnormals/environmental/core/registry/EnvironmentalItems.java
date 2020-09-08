@@ -9,9 +9,8 @@ import com.minecraftabnormals.environmental.common.item.SlabfishBucketItem;
 import com.minecraftabnormals.environmental.common.item.ThiefHoodItem;
 import com.minecraftabnormals.environmental.common.item.WandererBootsItem;
 import com.minecraftabnormals.environmental.core.Environmental;
-import com.minecraftabnormals.environmental.core.other.EnvironmentalArmorMaterials;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalFoods;
-import com.minecraftabnormals.environmental.core.other.EnvironmentalItemTier;
+import com.minecraftabnormals.environmental.core.other.EnvironmentalTiers;
 import com.teamabnormals.abnormals_core.common.items.AbnormalsMusicDiscItem;
 import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
 
@@ -36,7 +35,7 @@ public class EnvironmentalItems {
     public static final RegistryObject<Item> FOOL_WINGS		 	 = HELPER.createItem("fool_wings", () -> new FoolWingsItem(new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
     public static final RegistryObject<Item> ARCHITECT_BELT 	 = HELPER.createItem("architect_belt", () -> new ArchitectBeltItem(new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
     public static final RegistryObject<Item> WANDERER_BOOTS		 = HELPER.createItem("wanderer_boots", () -> new WandererBootsItem(new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
-    public static final RegistryObject<Item> EXECUTIONER_CLEAVER = HELPER.createItem("executioner_cleaver", () -> new ExecutionerCleaverItem(EnvironmentalItemTier.EXECUTIONER, 6.5f, -3.1F, new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
+    public static final RegistryObject<Item> EXECUTIONER_CLEAVER = HELPER.createItem("executioner_cleaver", () -> new ExecutionerCleaverItem(EnvironmentalTiers.Item.EXECUTIONER, 6.5f, -3.1F, new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
 
     public static final RegistryObject<Item> CHERRIES           = HELPER.createItem("cherries", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).food(EnvironmentalFoods.CHERRIES)));
     public static final RegistryObject<Item> CHERRY_PIE         = HELPER.createItem("cherry_pie", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).food(EnvironmentalFoods.CHERRY_PIE)));
@@ -50,7 +49,7 @@ public class EnvironmentalItems {
     public static final RegistryObject<Item> MUD_BRICK 		= HELPER.createItem("mud_brick", () -> new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
     
     public static final RegistryObject<Item> YAK_HAIR 		= HELPER.createItem("yak_hair", () -> new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
-    public static final RegistryObject<Item> YAK_PANTS 		= HELPER.createItem("yak_pants", () -> new ArmorItem(EnvironmentalArmorMaterials.YAK, EquipmentSlotType.LEGS, new Item.Properties().group(ItemGroup.COMBAT)));
+    public static final RegistryObject<Item> YAK_PANTS 		= HELPER.createItem("yak_pants", () -> new ArmorItem(EnvironmentalTiers.Armor.YAK, EquipmentSlotType.LEGS, new Item.Properties().group(ItemGroup.COMBAT)));
 
     public static final RegistryObject<Item> WILLOW_BOAT 	= HELPER.createBoatItem("willow", EnvironmentalBlocks.WILLOW_PLANKS);
     public static final RegistryObject<Item> WISTERIA_BOAT 	= HELPER.createBoatItem("wisteria", EnvironmentalBlocks.WISTERIA_PLANKS);
