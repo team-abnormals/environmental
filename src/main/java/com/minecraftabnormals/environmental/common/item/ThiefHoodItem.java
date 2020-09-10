@@ -14,6 +14,7 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
@@ -47,8 +48,9 @@ public class ThiefHoodItem extends ArmorItem {
 
 	@SubscribeEvent
 	public static void playerNameEvent(PlayerEvent.NameFormat event) {
-		if (event.getPlayer().getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() == EnvironmentalItems.THIEF_HOOD.get()) {
-			event.setDisplayname(new StringTextComponent("???"));
+		ItemStack stack = event.getPlayer().getItemStackFromSlot(EquipmentSlotType.HEAD);
+		if (stack.getItem() == EnvironmentalItems.THIEF_HOOD.get()) {
+			event.setDisplayname(stack.hasDisplayName() ? new StringTextComponent(stack.getDisplayName().getString()).mergeStyle(TextFormatting.ITALIC) : new StringTextComponent("???"));
 		}
 	}
 
