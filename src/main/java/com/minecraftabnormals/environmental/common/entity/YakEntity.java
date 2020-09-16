@@ -29,6 +29,7 @@ import net.minecraft.entity.ai.goal.FollowParentGoal;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
+import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.ResetAngerGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
@@ -81,8 +82,8 @@ public class YakEntity extends AnimalEntity implements IForgeShearable, IShearab
 	protected void registerGoals() {
 		this.eatGrassGoal = new EatGrassGoal(this);
 		this.goalSelector.addGoal(0, new SwimGoal(this));
-		this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setCallsForHelp(YakEntity.class));
 //		this.goalSelector.addGoal(1, new YakChargeGoal(this));
+		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0D, false));
 		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
 		this.goalSelector.addGoal(3, new TemptGoal(this, 1.1D, Ingredient.fromItems(Items.WHEAT), false));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
@@ -205,7 +206,7 @@ public class YakEntity extends AnimalEntity implements IForgeShearable, IShearab
 	}
 
 	public static AttributeModifierMap.MutableAttribute registerAttributes() {
-		return AnimalEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 25.0D).createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.2F).createMutableAttribute(Attributes.ATTACK_DAMAGE, 3.0F);
+		return AnimalEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 25.0D).createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.2F).createMutableAttribute(Attributes.ATTACK_DAMAGE, 3.0F).createMutableAttribute(Attributes.ATTACK_KNOCKBACK, 1.2F);
 	}
 
 	@Override
