@@ -12,6 +12,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.IShearable;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.Pose;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -24,6 +25,7 @@ import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
 import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -45,7 +47,8 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IForgeShearable;
 
-public class YakEntity extends AnimalEntity implements IForgeShearable {
+@SuppressWarnings("deprecation")
+public class YakEntity extends AnimalEntity implements IForgeShearable, IShearable {
 	private static final DataParameter<Boolean> SHEARED = EntityDataManager.createKey(YakEntity.class, DataSerializers.BOOLEAN);
 	private int timer;
 	private EatGrassGoal eatGrassGoal;
@@ -223,5 +226,20 @@ public class YakEntity extends AnimalEntity implements IForgeShearable {
 	@Override
 	public ItemStack getPickedResult(RayTraceResult target) {
 		return new ItemStack(EnvironmentalItems.YAK_SPAWN_EGG.get());
+	}
+
+	@Override
+	public void shear(SoundCategory category) {
+		this.world.playMovingSound((PlayerEntity) null, this, SoundEvents.ENTITY_SHEEP_SHEAR, category, 1.0F, 1.0F);
+		this.setSheared(true);
+		int i = 4 + this.rand.nextInt(12);
+
+		for (int j = 0; j < i; ++j) {
+			ItemEntity itementity = this.entityDropItem(EnvironmentalItems.YAK_HAIR.get(), 1);
+			if (itementity != null) {
+				itementity.setMotion(itementity.getMotion().add((double) ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.1F), (double) (this.rand.nextFloat() * 0.05F), (double) ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.1F)));
+			}
+		}
+
 	}
 }
