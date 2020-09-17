@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:apple",
+    "minecraft:sweet_berries",
+    "#forge:fruits/cherry"
+  ],
+  "optional": [
+    "#forge:fruits/strawberry"
+  ]
+}
