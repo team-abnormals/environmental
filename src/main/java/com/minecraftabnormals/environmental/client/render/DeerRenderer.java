@@ -17,7 +17,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class DeerRenderer extends MobRenderer<DeerEntity, DeerModel<DeerEntity>> {
 
     public DeerRenderer(EntityRendererManager renderManager) {
-        super(renderManager, new DeerModel<>(), 1.0F);
+        super(renderManager, new DeerModel<>(), 0.75F);
         this.addLayer(new DeerMarkingsRenderLayer<>(this));
     }
     
