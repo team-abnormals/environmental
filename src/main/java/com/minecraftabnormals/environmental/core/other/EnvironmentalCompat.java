@@ -23,6 +23,7 @@ public class EnvironmentalCompat {
     public static void registerCompostables() {
     	DataUtils.registerCompostable(EnvironmentalItems.YAK_HAIR.get(), 0.30F);
     	DataUtils.registerCompostable(EnvironmentalBlocks.YAK_HAIR_BLOCK.get(), 0.85F);
+    	DataUtils.registerCompostable(EnvironmentalBlocks.YAK_HAIR_RUG.get(), 0.50F);
 
         DataUtils.registerCompostable(EnvironmentalBlocks.WILLOW_LEAVES.get(), 0.30F);
         DataUtils.registerCompostable(EnvironmentalBlocks.WILLOW_SAPLING.get(), 0.30F);
@@ -99,7 +100,8 @@ public class EnvironmentalCompat {
 
     public static void registerFlammables() {
         DataUtils.registerFlammable(EnvironmentalBlocks.YAK_HAIR_BLOCK.get(), 30, 60);
-        
+        DataUtils.registerFlammable(EnvironmentalBlocks.YAK_HAIR_RUG.get(), 30, 60);
+
         DataUtils.registerFlammable(EnvironmentalBlocks.GRASS_THATCH.get(), 60, 20);
         DataUtils.registerFlammable(EnvironmentalBlocks.GRASS_THATCH_STAIRS.get(), 60, 20);
         DataUtils.registerFlammable(EnvironmentalBlocks.GRASS_THATCH_SLAB.get(), 60, 20);

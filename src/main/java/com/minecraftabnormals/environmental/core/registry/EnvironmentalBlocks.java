@@ -17,6 +17,7 @@ import com.minecraftabnormals.environmental.common.block.MudBlock;
 import com.minecraftabnormals.environmental.common.block.MyceliumSproutsBlock;
 import com.minecraftabnormals.environmental.common.block.PottedCartwheelBlock;
 import com.minecraftabnormals.environmental.common.block.RiceBlock;
+import com.minecraftabnormals.environmental.common.block.RugBlock;
 import com.minecraftabnormals.environmental.common.block.SawmillBlock;
 import com.minecraftabnormals.environmental.common.block.SlabfishEffigyBlock;
 import com.minecraftabnormals.environmental.common.block.TallDeadBushBlock;
@@ -151,6 +152,7 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> PODZOL_PATH 		= HELPER.createBlock("podzol_path", () -> new GrassPathBlock(EnvironmentalProperties.PODZOL_PATH), ItemGroup.DECORATIONS);
 	public static final RegistryObject<Block> MYCELIUM_PATH 	= HELPER.createBlock("mycelium_path", () -> new GrassPathBlock(EnvironmentalProperties.MYCELIUM_PATH), ItemGroup.DECORATIONS);
 	public static final RegistryObject<Block> YAK_HAIR_BLOCK	= HELPER.createBlock("yak_hair_block", () -> new ThatchBlock(EnvironmentalProperties.YAK_HAIR_BLOCK), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> YAK_HAIR_RUG		= HELPER.createBlock("yak_hair_rug", () -> new RugBlock(EnvironmentalProperties.YAK_HAIR_BLOCK), ItemGroup.BUILDING_BLOCKS);
 
     public static final RegistryObject<Block> GRASS_THATCH               	= HELPER.createBlock("grass_thatch", () -> new ThatchBlock(EnvironmentalProperties.GRASS_THATCH), ItemGroup.BUILDING_BLOCKS);
     public static final RegistryObject<Block> GRASS_THATCH_SLAB          	= HELPER.createBlock("grass_thatch_slab", () -> new ThatchSlabBlock(EnvironmentalProperties.GRASS_THATCH), ItemGroup.BUILDING_BLOCKS);
