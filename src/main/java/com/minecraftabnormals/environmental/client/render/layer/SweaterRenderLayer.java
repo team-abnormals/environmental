@@ -28,6 +28,9 @@ public class SweaterRenderLayer<E extends SlabfishEntity, M extends EntityModel<
         if (!slabby.hasSweater()) return;
 
         SweaterType sweaterType = SlabfishManager.get(slabby.getEntityWorld()).getSweaterType(slabby.getSweater());
+        if(sweaterType == SlabfishManager.EMPTY_SWEATER)
+            return;
+
         Minecraft.getInstance().getTextureManager().bindTexture(sweaterType.getTextureLocation());
         IVertexBuilder ivertexbuilder = bufferIn.getBuffer(RenderType.getEntityCutoutNoCull(sweaterType.getTextureLocation()));
         this.getEntityModel().setRotationAngles(slabby, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
