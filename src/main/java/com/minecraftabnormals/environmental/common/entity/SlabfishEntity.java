@@ -198,6 +198,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         this.slabfishBackpack.read(compound);
         this.updateSweater();
         this.updateBackpack();
+        this.setHasBackpack(!this.slabfishBackpack.getStackInSlot(1).isEmpty() && this.slabfishBackpack.getStackInSlot(1).getItem().isIn(Tags.Items.CHESTS_WOODEN));
     }
 
     // GENERAL //
