@@ -5,9 +5,11 @@ import java.lang.reflect.InvocationTargetException;
 import com.google.common.collect.ImmutableSet;
 import com.minecraftabnormals.environmental.core.Environmental;
 
+import net.minecraft.entity.ai.brain.task.GiveHeroGiftsTask;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.entity.merchant.villager.VillagerTrades;
 import net.minecraft.entity.villager.IVillagerType;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.village.PointOfInterestType;
 import net.minecraft.world.biome.Biomes;
@@ -50,6 +52,9 @@ public class EnvironmentalVillagers {
 		IVillagerType.BY_BIOME.put(EnvironmentalBiomes.BLOSSOM_HILLS.get(), blossom);
 		IVillagerType.BY_BIOME.put(EnvironmentalBiomes.BLOSSOM_HIGHLANDS.get(), blossom);
 		IVillagerType.BY_BIOME.put(EnvironmentalBiomes.BLOSSOM_VALLEYS.get(), blossom);
+		
+		GiveHeroGiftsTask.GIFTS.put(CERAMIST.get(), new ResourceLocation(Environmental.MODID, "gameplay/hero_of_the_village/ceramist_gift"));
+		GiveHeroGiftsTask.GIFTS.put(CARPENTER.get(), new ResourceLocation(Environmental.MODID, "gameplay/hero_of_the_village/carpenter_gift"));
 	}
 
 	public static void registerPOIs() {
