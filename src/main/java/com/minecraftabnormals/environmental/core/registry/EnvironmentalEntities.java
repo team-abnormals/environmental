@@ -49,24 +49,28 @@ public class EnvironmentalEntities {
             ForgeRegistries.BIOMES.getValues().stream().forEach(EnvironmentalEntities::removeSpawns);
         }
 
-        EntitySpawnPlacementRegistry.register(EnvironmentalEntities.SLABFISH.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canAnimalSpawn);
+        EntitySpawnPlacementRegistry.register(EnvironmentalEntities.SLABFISH.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, DuckEntity::canDuckSpawn);
         EntitySpawnPlacementRegistry.register(EnvironmentalEntities.YAK.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canAnimalSpawn);
-        EntitySpawnPlacementRegistry.register(EnvironmentalEntities.DUCK.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canAnimalSpawn);
+        EntitySpawnPlacementRegistry.register(EnvironmentalEntities.DUCK.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, DuckEntity::canDuckSpawn);
         EntitySpawnPlacementRegistry.register(EnvironmentalEntities.DEER.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canAnimalSpawn);
     }
 
     private static void processSpawning(Biome biome) {
         if (biome.getCategory() == Category.SWAMP) {
-            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(EnvironmentalEntities.SLABFISH.get(), 40, 2, 4));
-            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(EnvironmentalEntities.DUCK.get(), 10, 4, 4));
+            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(EnvironmentalEntities.SLABFISH.get(), 6, 2, 4));
+            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(EnvironmentalEntities.DUCK.get(), 8, 3, 5));
+        }
+        
+        if (biome.getCategory() == Category.RIVER) {
+            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(EnvironmentalEntities.DUCK.get(), 8, 3, 5));
         }
         
         if (biome.getCategory() == Category.FOREST) {
-            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(EnvironmentalEntities.DEER.get(), 10, 4, 4));
+            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(EnvironmentalEntities.DEER.get(), 10, 1, 4));
         }
 		
 		if(biome.getCategory() == Category.EXTREME_HILLS)
-            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(YAK.get(), 50, 2, 4));
+            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(YAK.get(), 25, 2, 4));
     }
     
     private static void removeSpawns(Biome biome) {

@@ -1,10 +1,13 @@
 package com.minecraftabnormals.environmental.common.entity;
 
+import java.util.Random;
+
 import com.minecraftabnormals.environmental.core.other.EnvironmentalTags;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEntities;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntitySize;
@@ -12,6 +15,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.Pose;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.BreedGoal;
@@ -30,6 +34,7 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.pathfinding.PathNodeType;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
@@ -37,6 +42,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
@@ -98,6 +104,10 @@ public class DuckEntity extends AnimalEntity {
           this.entityDropItem(Items.EGG);
           this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
        }
+    }
+    
+    public static boolean canDuckSpawn(EntityType<? extends AnimalEntity> animal, IWorld worldIn, SpawnReason reason, BlockPos pos, Random random) {
+    	return (worldIn.getBlockState(pos.down()).isIn(Blocks.GRASS_BLOCK) || worldIn.getFluidState(pos.down()).isTagged(FluidTags.WATER)) && worldIn.getLightSubtracted(pos, 0) > 8;
     }
     
     @Override
