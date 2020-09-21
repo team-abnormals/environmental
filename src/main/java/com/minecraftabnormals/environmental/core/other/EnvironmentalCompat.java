@@ -25,6 +25,9 @@ public class EnvironmentalCompat {
     	DataUtils.registerCompostable(EnvironmentalBlocks.YAK_HAIR_BLOCK.get(), 0.85F);
     	DataUtils.registerCompostable(EnvironmentalBlocks.YAK_HAIR_RUG.get(), 0.50F);
 
+        DataUtils.registerCompostable(EnvironmentalBlocks.LARGE_LILY_PAD.get(), 0.85F);
+        DataUtils.registerCompostable(EnvironmentalBlocks.GIANT_LILY_PAD.get(), 1.0F);
+
         DataUtils.registerCompostable(EnvironmentalBlocks.WILLOW_LEAVES.get(), 0.30F);
         DataUtils.registerCompostable(EnvironmentalBlocks.WILLOW_SAPLING.get(), 0.30F);
         DataUtils.registerCompostable(EnvironmentalBlocks.WILLOW_LEAF_CARPET.get(), 0.30F);
