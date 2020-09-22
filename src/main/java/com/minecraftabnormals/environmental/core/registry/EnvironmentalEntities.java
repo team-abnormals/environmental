@@ -3,8 +3,16 @@ package com.minecraftabnormals.environmental.core.registry;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.minecraftabnormals.environmental.client.render.*;
-import com.minecraftabnormals.environmental.common.entity.*;
+import com.minecraftabnormals.environmental.client.render.DeerRenderer;
+import com.minecraftabnormals.environmental.client.render.DuckEggRenderer;
+import com.minecraftabnormals.environmental.client.render.DuckRenderer;
+import com.minecraftabnormals.environmental.client.render.SlabfishRenderer;
+import com.minecraftabnormals.environmental.client.render.YakRenderer;
+import com.minecraftabnormals.environmental.common.entity.DeerEntity;
+import com.minecraftabnormals.environmental.common.entity.DuckEggEntity;
+import com.minecraftabnormals.environmental.common.entity.DuckEntity;
+import com.minecraftabnormals.environmental.common.entity.SlabfishEntity;
+import com.minecraftabnormals.environmental.common.entity.YakEntity;
 import com.minecraftabnormals.environmental.core.Environmental;
 import com.minecraftabnormals.environmental.core.EnvironmentalConfig;
 import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
@@ -32,6 +40,8 @@ public class EnvironmentalEntities {
     public static final RegistryObject<EntityType<DuckEntity>> DUCK = HELPER.createLivingEntity("duck", DuckEntity::new, EntityClassification.CREATURE, 0.5F, 0.8F);
     public static final RegistryObject<EntityType<DeerEntity>> DEER = HELPER.createLivingEntity("deer", DeerEntity::new, EntityClassification.CREATURE, 1.1F, 1.8F);
     public static final RegistryObject<EntityType<YakEntity>> YAK = HELPER.createLivingEntity("yak", YakEntity::new, EntityClassification.CREATURE, 1.0F, 1.5F);
+	public static final RegistryObject<EntityType<DuckEggEntity>> DUCK_EGG = HELPER.createEntity("duck_egg", DuckEggEntity::new, DuckEggEntity::new, EntityClassification.MISC, 0.25F, 0.25F);
+
 //	public static final RegistryObject<EntityType<AxolotlEntity>> AXOLOTL = HELPER.createLivingEntity("axolotl", AxolotlEntity::new, EntityClassification.CREATURE, 0.6F, 0.5F));
 
     @OnlyIn(Dist.CLIENT)
@@ -40,7 +50,7 @@ public class EnvironmentalEntities {
         RenderingRegistry.registerEntityRenderingHandler(DUCK.get(), DuckRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(DEER.get(), DeerRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(YAK.get(), YakRenderer::new);
-        //RenderingRegistry.registerEntityRenderingHandler((EntityType<? extends AxolotlEntity>)AXOLOTL.get(), AxolotlRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(DUCK_EGG.get(), DuckEggRenderer::new);
     }
 
     public static void registerSpawns() {

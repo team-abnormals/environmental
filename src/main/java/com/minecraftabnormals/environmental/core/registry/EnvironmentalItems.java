@@ -1,6 +1,7 @@
 package com.minecraftabnormals.environmental.core.registry;
 
 import com.minecraftabnormals.environmental.common.item.ArchitectBeltItem;
+import com.minecraftabnormals.environmental.common.item.DuckEggItem;
 import com.minecraftabnormals.environmental.common.item.ExecutionerCleaverItem;
 import com.minecraftabnormals.environmental.common.item.FoolWingsItem;
 import com.minecraftabnormals.environmental.common.item.GiantLilyPadItem;
@@ -43,8 +44,10 @@ public class EnvironmentalItems {
     public static final RegistryObject<Item> APPLE_PIE 	        = HELPER.createItem("apple_pie", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).food(EnvironmentalFoods.APPLE_PIE)));
     public static final RegistryObject<Item> VENISON            = HELPER.createItem("venison", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).food(EnvironmentalFoods.VENISON)));
     public static final RegistryObject<Item> COOKED_VENISON     = HELPER.createItem("cooked_venison", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).food(EnvironmentalFoods.COOKED_VENISON)));
+    
     public static final RegistryObject<Item> DUCK            	= HELPER.createItem("duck", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).food(EnvironmentalFoods.DUCK)));
     public static final RegistryObject<Item> COOKED_DUCK     	= HELPER.createItem("cooked_duck", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).food(EnvironmentalFoods.COOKED_DUCK)));
+	public static final RegistryObject<Item> DUCK_EGG 			= HELPER.createItem("duck_egg", () -> new DuckEggItem(new Item.Properties().maxStackSize(16).group(ItemGroup.MISC)));
 
     public static final RegistryObject<Item> MUD_BALL 		= HELPER.createItem("mud_ball", () -> new MudBallItem(new Item.Properties().group(ItemGroup.MATERIALS)));
     public static final RegistryObject<Item> MUD_BRICK 		= HELPER.createItem("mud_brick", () -> new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
@@ -77,7 +80,7 @@ public class EnvironmentalItems {
     public static final RegistryObject<Item> LARGE_LILY_PAD	= HELPER.createItem("large_lily_pad", () -> new LargeLilyPadItem(new Item.Properties().group(ItemGroup.DECORATIONS)));
     public static final RegistryObject<Item> GIANT_LILY_PAD	= HELPER.createItem("giant_lily_pad", () -> new GiantLilyPadItem(new Item.Properties().group(ItemGroup.DECORATIONS)));
     
-//    public static final RegistryObject<Item> AXOLOTL_BUCKET = HELPER.createItem("axolotl_bucket", () -> new AxolotlBucketItem(() -> EnvironmentalEntities.AXOLOTL.get(), () -> Fluids.WATER, new Item.Properties().group(ItemGroup.MISC).maxStackSize(1)));
+//  public static final RegistryObject<Item> AXOLOTL_BUCKET = HELPER.createItem("axolotl_bucket", () -> new AxolotlBucketItem(() -> EnvironmentalEntities.AXOLOTL.get(), () -> Fluids.WATER, new Item.Properties().group(ItemGroup.MISC).maxStackSize(1)));
     public static final RegistryObject<Item> SLABFISH_BUCKET = HELPER.createItem("slabfish_bucket", () -> new SlabfishBucketItem(() -> EnvironmentalEntities.SLABFISH.get(), () -> Fluids.WATER, new Item.Properties().group(ItemGroup.MISC).maxStackSize(1)));
 
     public static final RegistryObject<Item> SLABFISH_SPAWN_EGG = HELPER.createSpawnEggItem("slabfish", () -> EnvironmentalEntities.SLABFISH.get(), 6263617, 13940616);
@@ -85,5 +88,5 @@ public class EnvironmentalItems {
     public static final RegistryObject<Item> DEER_SPAWN_EGG     = HELPER.createSpawnEggItem("deer", () -> EnvironmentalEntities.DEER.get(), 10057035, 15190442);
     public static final RegistryObject<Item> YAK_SPAWN_EGG = HELPER.createSpawnEggItem("yak", () -> EnvironmentalEntities.YAK.get(), 5392966, 8607802);
 
-//	  public static final RegistryObject<Item> AXOLOTL_SPAWN_EGG = HELPER.createSpawnEggItem("axolotl", () -> EnvironmentalEntities.AXOLOTL.get(), 6263617, 13940616);
+//	public static final RegistryObject<Item> AXOLOTL_SPAWN_EGG = HELPER.createSpawnEggItem("axolotl", () -> EnvironmentalEntities.AXOLOTL.get(), 6263617, 13940616);
 }
