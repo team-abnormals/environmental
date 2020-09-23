@@ -8,7 +8,7 @@ import net.minecraft.tags.ItemTags;
 
 public class EnvironmentalTags {
     public static class Items {
-        public static final ITag.INamedTag<Item> SUSHI                  = createWrapperTag("sushi");
+        public static final ITag.INamedTag<Item> SUSHI = createWrapperTag("sushi");
 
         public static final ITag.INamedTag<Item> DUCK_BREEDING_ITEMS    = createWrapperTag("duck_breeding_items");
         public static final ITag.INamedTag<Item> DEER_BREEDING_ITEMS    = createWrapperTag("deer_breeding_items");

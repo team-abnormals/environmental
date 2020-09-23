@@ -3,6 +3,7 @@ package com.minecraftabnormals.environmental.core;
 import org.apache.commons.lang3.tuple.Pair;
 
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -81,13 +82,11 @@ public class EnvironmentalConfig {
     }
     
     public static void onConfigReload(final ModConfig.ModConfigEvent event) {
-		for (Biome biome : ForgeRegistries.BIOMES.getValues()) {
-			Biome.Category category = biome.getCategory();
-			
-			if(category == Biome.Category.DESERT) replaceFogValue(biome, EnvironmentalConfig.COMMON.desertFog);
-			if(category == Biome.Category.JUNGLE) replaceFogValue(biome, EnvironmentalConfig.COMMON.jungleFog);
-			if(category == Biome.Category.ICY) replaceFogValue(biome, EnvironmentalConfig.COMMON.snowyFog);
-			if(category == Biome.Category.SWAMP) replaceFogValue(biome, EnvironmentalConfig.COMMON.swampFog);
+		for (Biome biome : ForgeRegistries.BIOMES.getValues()) {			
+			if(biome.getCategory() == Biome.Category.DESERT) replaceFogValue(biome, EnvironmentalConfig.COMMON.desertFog);
+			if(BiomeDictionary.hasType(biome, BiomeDictionary.Type.JUNGLE)) replaceFogValue(biome, EnvironmentalConfig.COMMON.jungleFog);
+			if(BiomeDictionary.hasType(biome, BiomeDictionary.Type.SNOWY)) replaceFogValue(biome, EnvironmentalConfig.COMMON.snowyFog);
+			if(BiomeDictionary.hasType(biome, BiomeDictionary.Type.SWAMP)) replaceFogValue(biome, EnvironmentalConfig.COMMON.swampFog);
 		}
 	}
     
