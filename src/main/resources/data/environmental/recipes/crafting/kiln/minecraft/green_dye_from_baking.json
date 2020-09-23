@@ -9,12 +9,10 @@
   "conditions": [
     {
       "type": "forge:not",
-      "values": [
-        {
-          "type": "abnormals_core:quark_flag",
-          "flag": "midori"
-        }
-      ]
+      "value": {
+        "type": "abnormals_core:quark_flag",
+        "flag": "midori"
+      }
     }
   ]
 } 

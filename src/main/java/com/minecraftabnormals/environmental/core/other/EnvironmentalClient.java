@@ -1,17 +1,6 @@
 package com.minecraftabnormals.environmental.core.other;
 
 import java.util.Arrays;
-import java.util.logging.LogRecord;
-
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.Marker;
-import org.apache.logging.log4j.core.Filter;
-import org.apache.logging.log4j.core.LogEvent;
-import org.apache.logging.log4j.core.Logger;
-import org.apache.logging.log4j.core.LoggerContext;
-import org.apache.logging.log4j.core.filter.AbstractFilter;
-import org.apache.logging.log4j.core.filter.CompositeFilter;
-import org.apache.logging.log4j.core.filter.ThresholdFilter;
 
 import com.minecraftabnormals.environmental.core.Environmental;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
@@ -24,7 +13,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.ItemColors;
-import net.minecraft.client.util.ClientRecipeBook;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.BlockItem;
@@ -196,49 +184,5 @@ public class EnvironmentalClient {
 
 		DataUtils.registerBlockItemColor(itemColors, (color, items) -> GrassColors.get(0.5D, 1.0D), Arrays.asList(EnvironmentalBlocks.GIANT_TALL_GRASS));
 		DataUtils.registerBlockItemColor(itemColors, (color, items) -> FoliageColors.get(0.5D, 1.0D), Arrays.asList(EnvironmentalBlocks.WILLOW_LEAVES, EnvironmentalBlocks.WILLOW_LEAF_CARPET, EnvironmentalBlocks.HANGING_WILLOW_LEAVES));
-	}
-
-	public static void removeRecipeBookWarnings() {
-		LoggerContext loggerContext = ((Logger) ClientRecipeBook.field_241555_k_).getContext();
-		Filter logFilter = loggerContext.getConfiguration().getFilter();
-		Filter filterToRemove = null;
-
-		if (logFilter instanceof CompositeFilter) {
-			CompositeFilter compositeFilter = (CompositeFilter) logFilter;
-			Filter[] filters = compositeFilter.getFiltersArray();
-			for (Filter filter : filters) {
-				if (filter instanceof ThresholdFilter) {
-					filterToRemove = filter;
-				}
-			}
-		}
-
-		if (filterToRemove != null) {
-			loggerContext.removeFilter(filterToRemove);
-			loggerContext.addFilter(new SilentRecipeBookFilter());
-		}
-	}
-
-	static class SilentRecipeBookFilter extends AbstractFilter implements java.util.logging.Filter {
-
-		@Override
-		public boolean isLoggable(LogRecord record) {
-			return false;
-		}
-
-		@Override
-		public Result filter(LogEvent event) {
-			return Result.DENY;
-		}
-
-		@Override
-		public Result filter(Logger logger, Level level, Marker marker, String msg, Object p0) {
-			return Result.DENY;
-		}
-
-		@Override
-		public Result filter(Logger logger, Level level, Marker marker, String msg, Object... params) {
-			return Result.DENY;
-		}
 	}
 }

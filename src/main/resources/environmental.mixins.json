@@ -10,6 +10,7 @@
     "DoublePlantBlockMixin"
   ],
   "client": [
+    "ClientRecipeBookMixin"
   ],
   "injectors": {
     "defaultRequire": 1
