@@ -1,0 +1,15 @@
+{
+  "type": "environmental:baking",
+  "ingredient": {
+    "item": "quark:dirty_glass"
+  },
+  "result": "minecraft:glass",
+  "experience": 0.1,
+  "cookingtime": 100,
+  "conditions": [
+    {
+      "type": "abnormals_core:quark_flag",
+      "flag": "glass_shard"
+    }
+  ]
+}

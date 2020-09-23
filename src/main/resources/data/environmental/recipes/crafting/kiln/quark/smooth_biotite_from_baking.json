@@ -1,0 +1,15 @@
+{
+  "type": "environmental:baking",
+  "ingredient": {
+    "item": "quark:biotite_block"
+  },
+  "result": "quark:smooth_biotite",
+  "experience": 0.1,
+  "cookingtime": 100,
+  "conditions": [
+    {
+      "type": "abnormals_core:quark_flag",
+      "flag": "biotite"
+    }
+  ]
+}

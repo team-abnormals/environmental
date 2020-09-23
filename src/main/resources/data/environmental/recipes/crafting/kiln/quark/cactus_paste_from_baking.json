@@ -1,0 +1,15 @@
+{
+  "type": "environmental:baking",
+  "ingredient": {
+    "item": "minecraft:cactus"
+  },
+  "result": "quark:cactus_paste",
+  "experience": 1.0,
+  "cookingtime": 100,
+  "conditions": [
+    {
+      "type": "abnormals_core:quark_flag",
+      "flag": "midori"
+    }
+  ]
+}
