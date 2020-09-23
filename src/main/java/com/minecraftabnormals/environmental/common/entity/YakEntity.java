@@ -16,8 +16,6 @@ import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.IAngerable;
 import net.minecraft.entity.IShearable;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.Pose;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -93,7 +91,7 @@ public class YakEntity extends AnimalEntity implements IForgeShearable, IShearab
 		this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
 
 		this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, 10, true, false, this::func_233680_b_));
-		this.targetSelector.addGoal(1, new AngerGoal(this).setCallsForHelp(YakEntity.class));
+		this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setCallsForHelp());
 		this.targetSelector.addGoal(2, new ResetAngerGoal<>(this, true));
 	}
 
@@ -187,6 +185,14 @@ public class YakEntity extends AnimalEntity implements IForgeShearable, IShearab
 //			return this.timer > 0 ? ((float) Math.PI / 5F) : this.rotationPitch * ((float) Math.PI / 180F);
 //		}
 //	}
+	
+	@Override
+	public void eatGrassBonus() {
+		this.setSheared(false);
+		if (this.isChild()) {
+			this.addGrowth(60);
+		}	
+	}
 
 	public boolean getSheared() {
 		return this.dataManager.get(SHEARED);
@@ -315,21 +321,5 @@ public class YakEntity extends AnimalEntity implements IForgeShearable, IShearab
 
 	public boolean func_230292_f_(PlayerEntity p_230292_1_) {
 		return this.func_233680_b_(p_230292_1_);
-	}
-
-	class AngerGoal extends HurtByTargetGoal {
-		AngerGoal(YakEntity entity) {
-			super(entity);
-		}
-
-		public boolean shouldContinueExecuting() {
-			return YakEntity.this.func_233678_J__() && super.shouldContinueExecuting();
-		}
-
-		protected void setAttackTarget(MobEntity mobIn, LivingEntity targetIn) {
-			if (mobIn instanceof YakEntity && this.goalOwner.canEntityBeSeen(targetIn)) {
-				mobIn.setAttackTarget(targetIn);
-			}
-		}
 	}
 }

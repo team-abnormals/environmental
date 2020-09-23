@@ -38,7 +38,7 @@ public class YakPantsItem extends ArmorItem {
 		
 		if (wearingPants && entity.getRidingEntity() instanceof LivingEntity) {
 			LivingEntity mount = (LivingEntity)entity.getRidingEntity();
-			mount.addPotionEffect(new EffectInstance(Effects.REGENERATION, 60, 2));
+			mount.addPotionEffect(new EffectInstance(Effects.REGENERATION, 60));
 			mount.addPotionEffect(new EffectInstance(Effects.SPEED, 60, 1));
 		}
 	}

@@ -1,6 +1,5 @@
 {
-  "parent": "block/block",
-	"credit": "Made with Blockbench",
+  "parent": "block/thin_block",
 	"textures": {
 		"particle": "environmental:block/yak_hair_block_end",
 		"end": "environmental:block/yak_hair_block_end",
