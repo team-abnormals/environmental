@@ -173,6 +173,9 @@ public class EnvironmentalTrades {
 
 		if (event.getType() == VillagerProfession.FARMER) {
 			novice.add(new TradeUtils.EmeraldsForItemsTrade(EnvironmentalItems.RICE.get(), 23, 1, 6, 1));
+			apprentice.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.CHERRIES.get(), 1, 6, 16, 5));
+			apprentice.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.APPLE_PIE.get(), 1, 5, 12, 5));
+			apprentice.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.CHERRY_PIE.get(), 1, 6, 12, 5));
 		}
 
 		if (event.getType() == VillagerProfession.FISHERMAN) {
