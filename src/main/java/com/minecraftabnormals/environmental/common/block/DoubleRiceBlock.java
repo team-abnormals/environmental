@@ -10,6 +10,7 @@ import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.FarmlandBlock;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.IWaterLoggable;
 import net.minecraft.entity.LivingEntity;
@@ -80,7 +81,7 @@ public class DoubleRiceBlock extends Block implements IGrowable, IWaterLoggable,
         Block block = state.getBlock();
         if (worldIn.getFluidState(pos).getLevel() == 8 && (block.isIn(Tags.Blocks.DIRT) || block.isIn(BlockTags.SAND)))
             return true;
-        else if (block.getBlock() == Blocks.FARMLAND) return true;
+        else if (block instanceof FarmlandBlock) return true;
         return false;
     }
 
