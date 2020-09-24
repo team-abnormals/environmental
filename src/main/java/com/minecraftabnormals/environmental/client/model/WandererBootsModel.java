@@ -48,10 +48,9 @@ public class WandererBootsModel<T extends LivingEntity> extends BipedModel<T> {
 		
 		matrixStack.push();
 		matrixStack.scale(1.1F, 1.0F, 1.1F);
-		matrixStack.pop();
-		
 		this.leftLeg.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
 		this.rightLeg.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+		matrixStack.pop();
 	}
 
 	public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {

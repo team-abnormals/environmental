@@ -78,7 +78,6 @@ public class CattailSproutsBlock extends BushBlock implements IWaterLoggable, IG
         worldIn.setBlockState(pos, EnvironmentalBlocks.CATTAIL.get().getDefaultState().with(WATERLOGGED, state.get(WATERLOGGED)));
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
         super.tick(state, worldIn, pos, random);
@@ -96,7 +95,6 @@ public class CattailSproutsBlock extends BushBlock implements IWaterLoggable, IG
         return this.isValidGround(world.getBlockState(pos.down()), world, pos);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public FluidState getFluidState(BlockState state) {
         return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);

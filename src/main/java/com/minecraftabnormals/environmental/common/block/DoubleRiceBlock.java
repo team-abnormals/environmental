@@ -114,7 +114,6 @@ public class DoubleRiceBlock extends Block implements IGrowable, IWaterLoggable,
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn,
                                              BlockRayTraceResult hit) {
         int i = state.get(AGE);
@@ -155,7 +154,6 @@ public class DoubleRiceBlock extends Block implements IGrowable, IWaterLoggable,
     }
 
 
-    @SuppressWarnings("deprecation")
     @Override
     public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
         super.tick(state, worldIn, pos, random);
@@ -196,7 +194,6 @@ public class DoubleRiceBlock extends Block implements IGrowable, IWaterLoggable,
         worldIn.setBlockState(pos.up(), this.getDefaultState().with(HALF, DoubleBlockHalf.UPPER).with(WATERLOGGED, Boolean.valueOf(ifluidstateUp.isTagged(FluidTags.WATER) && ifluidstateUp.getLevel() == 8)), 3);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public FluidState getFluidState(BlockState state) {
         return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
