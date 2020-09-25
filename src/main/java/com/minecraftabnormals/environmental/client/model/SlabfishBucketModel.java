@@ -30,7 +30,6 @@ import java.util.Random;
  *
  * @author Ocelot
  */
-@SuppressWarnings("deprecation")
 public class SlabfishBucketModel implements IBakedModel
 {
     private final IBakedModel model;

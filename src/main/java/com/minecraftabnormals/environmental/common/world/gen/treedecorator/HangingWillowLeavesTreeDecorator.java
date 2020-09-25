@@ -27,7 +27,6 @@ public class HangingWillowLeavesTreeDecorator extends TreeDecorator {
         });
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void func_225576_a_(IWorld world, Random rand, List<BlockPos> logPositions, List<BlockPos> leavesPositions, Set<BlockPos> changedBlocks, MutableBoundingBox boundsIn) {
         for (BlockPos pos : leavesPositions) {

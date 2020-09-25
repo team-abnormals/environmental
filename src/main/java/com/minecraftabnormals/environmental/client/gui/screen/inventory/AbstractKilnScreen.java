@@ -43,7 +43,6 @@ public abstract class AbstractKilnScreen<T extends AbstractFurnaceContainer> ext
         this.func_230459_a_(matrixStack, mouseX, mouseY);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int x, int y) {
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);

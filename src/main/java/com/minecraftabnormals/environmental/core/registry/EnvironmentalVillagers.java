@@ -95,7 +95,6 @@ public class EnvironmentalVillagers {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	private static void addToPool(ResourceLocation pool, ResourceLocation toAdd, int weight) {
 		JigsawPattern old = JigsawManager.REGISTRY.get(pool);
 		List<JigsawPiece> shuffled = old.getShuffledPieces(new Random());

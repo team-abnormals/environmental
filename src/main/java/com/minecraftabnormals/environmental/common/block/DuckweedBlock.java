@@ -43,7 +43,6 @@ public class DuckweedBlock extends BushBlock implements IGrowable {
         return PlantType.WATER;
     }
 
-    @SuppressWarnings("deprecation")
     public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
         return worldIn.getBlockState(pos.up()).isAir();
     }

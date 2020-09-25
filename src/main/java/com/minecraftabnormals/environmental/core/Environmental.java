@@ -50,7 +50,6 @@ import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 
-@SuppressWarnings("deprecation")
 @Mod(Environmental.MODID)
 @Mod.EventBusSubscriber(modid = Environmental.MODID)
 public class Environmental
