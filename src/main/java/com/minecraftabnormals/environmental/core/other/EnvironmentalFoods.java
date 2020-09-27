@@ -16,6 +16,9 @@ public class EnvironmentalFoods {
     public static final Food DUCK = (new Food.Builder()).hunger(4).saturation(0.1F).effect(() -> new EffectInstance(Effects.HUNGER, 600, 0), 0.3F).meat().build();
     public static final Food COOKED_DUCK = (new Food.Builder()).hunger(8).saturation(0.3F).meat().build();
 	
+	public static final Food FRIED_EGG = (new Food.Builder()).hunger(3).saturation(0.6F).build();
+	public static final Food SCRAMBLED_EGGS = (new Food.Builder()).hunger(6).saturation(0.6F).build();
+	
     public static final Food RICE_BALL = new Food.Builder().hunger(4).saturation(0.5F).build();
 
     public static final Food COD_KELP_ROLL = new Food.Builder().hunger(3).saturation(0.7F).fastToEat().build();

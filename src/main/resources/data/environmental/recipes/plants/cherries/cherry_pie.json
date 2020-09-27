@@ -14,7 +14,7 @@
       "item": "minecraft:sugar"
     },
     {
-      "item": "minecraft:egg"
+      "tag": "forge:eggs"
     }
   ],
   "result": {

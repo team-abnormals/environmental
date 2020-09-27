@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TTT",
+    "TTT",
+    "TTT"
+  ],
+  "key": {
+    "T": {
+      "item": "minecraft:egg"
+    }
+  },
+  "result": {
+    "item": "environmental:chicken_egg_crate"
+  },
+  "conditions": [
+    {
+      "type": "abnormals_core:quark_flag",
+      "flag": "apple_crate"
+    }
+  ]
+}

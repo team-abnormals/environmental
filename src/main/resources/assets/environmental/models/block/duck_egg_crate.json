@@ -1,0 +1,8 @@
+{
+    "parent": "block/cube_bottom_top",
+    "textures": {
+        "top": "environmental:block/duck_egg_crate_top",
+        "bottom": "environmental:block/duck_egg_crate_bottom",
+        "side": "environmental:block/duck_egg_crate_side"
+    }
+}

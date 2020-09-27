@@ -7,6 +7,7 @@ import com.minecraftabnormals.environmental.common.item.FoolWingsItem;
 import com.minecraftabnormals.environmental.common.item.GiantLilyPadItem;
 import com.minecraftabnormals.environmental.common.item.LargeLilyPadItem;
 import com.minecraftabnormals.environmental.common.item.MudBallItem;
+import com.minecraftabnormals.environmental.common.item.ScrambledEggsItem;
 import com.minecraftabnormals.environmental.common.item.SlabfishBucketItem;
 import com.minecraftabnormals.environmental.common.item.ThiefHoodItem;
 import com.minecraftabnormals.environmental.common.item.WandererBootsItem;
@@ -48,6 +49,9 @@ public class EnvironmentalItems {
     public static final RegistryObject<Item> DUCK            	= HELPER.createItem("duck", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).food(EnvironmentalFoods.DUCK)));
     public static final RegistryObject<Item> COOKED_DUCK     	= HELPER.createItem("cooked_duck", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).food(EnvironmentalFoods.COOKED_DUCK)));
 	public static final RegistryObject<Item> DUCK_EGG 			= HELPER.createItem("duck_egg", () -> new DuckEggItem(new Item.Properties().maxStackSize(16).group(ItemGroup.MISC)));
+	
+    public static final RegistryObject<Item> FRIED_EGG            	= HELPER.createItem("fried_egg", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).food(EnvironmentalFoods.FRIED_EGG)));
+    public static final RegistryObject<Item> SCRAMBLED_EGGS            	= HELPER.createItem("scrambled_eggs", () -> new ScrambledEggsItem(new Item.Properties().maxStackSize(1).group(ItemGroup.FOOD).food(EnvironmentalFoods.SCRAMBLED_EGGS)));
 
     public static final RegistryObject<Item> MUD_BALL 		= HELPER.createItem("mud_ball", () -> new MudBallItem(new Item.Properties().group(ItemGroup.MATERIALS)));
     public static final RegistryObject<Item> MUD_BRICK 		= HELPER.createItem("mud_brick", () -> new Item(new Item.Properties().group(ItemGroup.MATERIALS)));

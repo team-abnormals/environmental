@@ -1,0 +1,57 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "environmental:block/hay_nest"
+      }
+    },
+    {
+      "when": {
+        "eggs": "1"
+      },
+      "apply": {
+        "model": "environmental:block/one_chicken_egg"
+      }
+    },
+    {
+      "when": {
+        "eggs": "2"
+      },
+      "apply": {
+        "model": "environmental:block/two_chicken_eggs"
+      }
+    },
+    {
+      "when": {
+        "eggs": "3"
+      },
+      "apply": {
+        "model": "environmental:block/three_chicken_eggs"
+      }
+    },
+    {
+      "when": {
+        "eggs": "4"
+      },
+      "apply": {
+        "model": "environmental:block/four_chicken_eggs"
+      }
+    },
+    {
+      "when": {
+        "eggs": "5"
+      },
+      "apply": {
+        "model": "environmental:block/five_chicken_eggs"
+      }
+    },
+    {
+      "when": {
+        "eggs": "6"
+      },
+      "apply": {
+        "model": "environmental:block/six_chicken_eggs"
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+	"textures": {
+		"eggs": "environmental:block/duck_eggs",
+		"particle": "#eggs"
+	},
+	"elements": [
+		{
+			"from": [6, 1, 5],
+			"to": [9, 4, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [14, 9, 13]},
+			"faces": {
+				"north": {"uv": [3, 7, 6, 10], "rotation": 180, "texture": "#eggs"},
+				"east": {"uv": [0, 7, 3, 12], "rotation": 90, "texture": "#eggs"},
+				"south": {"uv": [3, 7, 6, 10], "rotation": 180, "texture": "#eggs"},
+				"west": {"uv": [0, 7, 3, 12], "rotation": 270, "texture": "#eggs"},
+				"up": {"uv": [0, 7, 3, 12], "texture": "#eggs"}
+			}
+		}
+	]
+}

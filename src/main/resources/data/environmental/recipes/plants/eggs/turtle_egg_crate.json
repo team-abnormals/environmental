@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TTT",
+    "TTT",
+    "TTT"
+  ],
+  "key": {
+    "T": {
+      "item": "minecraft:turtle_egg"
+    }
+  },
+  "result": {
+    "item": "environmental:turtle_egg_crate"
+  },
+  "conditions": [
+    {
+      "type": "abnormals_core:quark_flag",
+      "flag": "apple_crate"
+    }
+  ]
+}

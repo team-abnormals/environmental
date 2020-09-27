@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "tag": "forge:eggs"
+  },
+  "result": "environmental:fried_egg",
+  "experience": 0.35,
+  "cookingtime": 100
+}
