@@ -280,6 +280,17 @@
 	"block.environmental.duckweed_thatch_slab": "Laje de palha de lentilha",
 	"block.environmental.duckweed_thatch_stairs": "Escadas de palha de lentilha",
 	"block.environmental.duckweed_thatch_vertical_slab": "Laje vertical de palha de lentilha",
+	
+	"block.environmental.twig_nest": "Ninho de gravetos",
+	"block.environmental.twig_chicken_nest": "Ninho de gravetos com ovos de galinha",
+	"block.environmental.twig_duck_nest": "Ninho de gravetos com ovos de pato",
+	"block.environmental.hay_nest": "Ninho de feno",
+	"block.environmental.hay_chicken_nest": "Ninho de feno com ovos de galinha",
+	"block.environmental.hay_duck_nest": "Ninho de feno com ovos de pato",
+	
+	"block.environmental.chicken_egg_crate": "Caixa de ovos de galinha",
+	"block.environmental.duck_egg_crate": "Caixa de ovos de pato",
+	"block.environmental.turtle_egg_crate": "Caixa de ovos de tartaruga",
 		
 	"item.environmental.wanderer_boots": "Botas do ambulante",
 	"item.environmental.architect_belt": "Cinto do arquiteto",
@@ -304,6 +315,11 @@
 	"item.environmental.cooked_venison": "Carne de cervo assada",
 	"item.environmental.duck": "Pato cru",
   	"item.environmental.cooked_duck": "Pato assado",
+	"item.environmental.duck_egg": "Ovo de pato",
+	
+	"item.minecraft.egg": "Ovo de galinha",
+	"item.environmental.fried_egg": "Ovo frito",
+	"item.environmental.scrambled_eggs": "Ovos mexidos",
 	
 	"item.environmental.cod_kelp_roll": "Rolo de alga de bacalhau",
 	"item.environmental.tropical_fish_kelp_roll": "Rolo de alga de peixe tropical",
