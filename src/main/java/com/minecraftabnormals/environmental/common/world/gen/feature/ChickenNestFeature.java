@@ -22,7 +22,7 @@ public class ChickenNestFeature extends Feature<NoFeatureConfig> {
 	}
 
 	public boolean func_230362_a_(ISeedReader worldIn, StructureManager manager, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
-		BlockState blockstate = EnvironmentalBlocks.TWIG_NEST_WITH_CHICKEN_EGGS.get().getDefaultState().with(BirdNestBlock.EGGS, 2 + rand.nextInt(3));
+		BlockState blockstate = EnvironmentalBlocks.TWIG_CHICKEN_NEST.get().getDefaultState().with(BirdNestBlock.EGGS, 2 + rand.nextInt(3));
 
 		int i = worldIn.getHeight(Heightmap.Type.WORLD_SURFACE, pos.getX(), pos.getZ());
 		BlockPos blockpos = new BlockPos(pos.getX(), i, pos.getZ());

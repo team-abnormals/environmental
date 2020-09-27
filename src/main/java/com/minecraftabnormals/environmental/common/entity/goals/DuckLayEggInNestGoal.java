@@ -39,13 +39,13 @@ public class DuckLayEggInNestGoal extends MoveToBlockGoal {
 			Block block = blockstate.getBlock();
 
 			if (block instanceof EmptyNestBlock) {
-				this.duck.world.setBlockState(blockpos, ((EmptyNestBlock)block).getNest(EnvironmentalItems.DUCK_EGG.get()).getDefaultState(), 2);
+				this.duck.world.setBlockState(blockpos, ((EmptyNestBlock)block).getNest(EnvironmentalItems.DUCK_EGG.get()).getDefaultState(), 3);
 				this.resetBird();
 			}
 			else if (block instanceof BirdNestBlock && ((BirdNestBlock)block).getEgg() == EnvironmentalItems.DUCK_EGG.get()) {
 				int i = blockstate.get(BirdNestBlock.EGGS);
 				if (i < 6) {
-					this.duck.world.setBlockState(blockpos, blockstate.with(BirdNestBlock.EGGS, Integer.valueOf(i + 1)), 2);
+					this.duck.world.setBlockState(blockpos, blockstate.with(BirdNestBlock.EGGS, Integer.valueOf(i + 1)), 3);
 					this.resetBird();
 				}
 			}

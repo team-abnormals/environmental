@@ -134,11 +134,11 @@ public class EnvironmentalCompat {
         DataUtils.registerFlammable(EnvironmentalBlocks.DUCKWEED_THATCH_VERTICAL_SLAB.get(), 60, 20);
         
         DataUtils.registerFlammable(EnvironmentalBlocks.TWIG_NEST.get(), 60, 20);
-        DataUtils.registerFlammable(EnvironmentalBlocks.TWIG_NEST_WITH_CHICKEN_EGGS.get(), 60, 20);
-        DataUtils.registerFlammable(EnvironmentalBlocks.TWIG_NEST_WITH_DUCK_EGGS.get(), 60, 20);
+        DataUtils.registerFlammable(EnvironmentalBlocks.TWIG_CHICKEN_NEST.get(), 60, 20);
+        DataUtils.registerFlammable(EnvironmentalBlocks.TWIG_DUCK_NEST.get(), 60, 20);
         DataUtils.registerFlammable(EnvironmentalBlocks.HAY_NEST.get(), 60, 20);
-        DataUtils.registerFlammable(EnvironmentalBlocks.HAY_NEST_WITH_CHICKEN_EGGS.get(), 60, 20);
-        DataUtils.registerFlammable(EnvironmentalBlocks.HAY_NEST_WITH_DUCK_EGGS.get(), 60, 20);
+        DataUtils.registerFlammable(EnvironmentalBlocks.HAY_CHICKEN_NEST.get(), 60, 20);
+        DataUtils.registerFlammable(EnvironmentalBlocks.HAY_DUCK_NEST.get(), 60, 20);
         
         DataUtils.registerFlammable(EnvironmentalBlocks.CHICKEN_EGG_CRATE.get(), 5, 20);
         DataUtils.registerFlammable(EnvironmentalBlocks.DUCK_EGG_CRATE.get(), 5, 20);

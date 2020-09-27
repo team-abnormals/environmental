@@ -59,16 +59,16 @@ public class BirdNestBlock extends ContainerBlock {
 					if (!player.abilities.isCreativeMode) {
 						itemstack.shrink(1);
 					}
-					worldIn.setBlockState(pos, state.with(EGGS, Integer.valueOf(i + 1)), 2);
+					worldIn.setBlockState(pos, state.with(EGGS, Integer.valueOf(i + 1)), 3);
 				}
 			}
 			else {
 				spawnAsEntity(worldIn, pos, new ItemStack(this.egg.get()));
 
 				if (i > 1)
-					worldIn.setBlockState(pos, state.with(EGGS, Integer.valueOf(i - 1)), 2);
+					worldIn.setBlockState(pos, state.with(EGGS, Integer.valueOf(i - 1)), 3);
 				else
-					worldIn.setBlockState(pos, this.getEmptyNest().getDefaultState(), 2);
+					worldIn.setBlockState(pos, this.getEmptyNest().getDefaultState(), 3);
 			}
 			return ActionResultType.func_233537_a_(worldIn.isRemote);
 		}
@@ -103,5 +103,15 @@ public class BirdNestBlock extends ContainerBlock {
 
 	public EmptyNestBlock getEmptyNest() {
 		return this.emptyNest;
+	}
+	
+	@Override
+	public boolean hasComparatorInputOverride(BlockState state) {
+		return true;
+	}
+
+	@Override
+	public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos) {
+		return blockState.get(EGGS);
 	}
 }

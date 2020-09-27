@@ -6,13 +6,13 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:egg"
+          "name": "environmental:duck_egg"
         }
       ],
       "conditions": [
         {
           "condition": "minecraft:block_state_property",
-          "block": "environmental:hay_nest_with_chicken_eggs",
+          "block": "environmental:hay_duck_nest",
           "properties": {
             "eggs": "1"
           }
@@ -33,13 +33,13 @@
 			  "function": "minecraft:explosion_decay"
 			}
 		  ],
-          "name": "minecraft:egg"
+          "name": "environmental:duck_egg"
         }
       ],
       "conditions": [
         {
           "condition": "minecraft:block_state_property",
-          "block": "environmental:hay_nest_with_chicken_eggs",
+          "block": "environmental:hay_duck_nest",
           "properties": {
             "eggs": "2"
           }
@@ -60,13 +60,13 @@
 			  "function": "minecraft:explosion_decay"
 			}
 		  ],
-          "name": "minecraft:egg"
+          "name": "environmental:duck_egg"
         }
       ],
       "conditions": [
         {
           "condition": "minecraft:block_state_property",
-          "block": "environmental:hay_nest_with_chicken_eggs",
+          "block": "environmental:hay_duck_nest",
           "properties": {
             "eggs": "3"
           }
@@ -87,13 +87,13 @@
 			  "function": "minecraft:explosion_decay"
 			}
 		  ],
-          "name": "minecraft:egg"
+          "name": "environmental:duck_egg"
         }
       ],
       "conditions": [
         {
           "condition": "minecraft:block_state_property",
-          "block": "environmental:hay_nest_with_chicken_eggs",
+          "block": "environmental:hay_duck_nest",
           "properties": {
             "eggs": "4"
           }
@@ -114,13 +114,13 @@
 			  "function": "minecraft:explosion_decay"
 			}
 		  ],
-          "name": "minecraft:egg"
+          "name": "environmental:duck_egg"
         }
       ],
       "conditions": [
         {
           "condition": "minecraft:block_state_property",
-          "block": "environmental:hay_nest_with_chicken_eggs",
+          "block": "environmental:hay_duck_nest",
           "properties": {
             "eggs": "5"
           }
@@ -141,13 +141,13 @@
 			  "function": "minecraft:explosion_decay"
 			}
 		  ],
-          "name": "minecraft:egg"
+          "name": "environmental:duck_egg"
         }
       ],
       "conditions": [
         {
           "condition": "minecraft:block_state_property",
-          "block": "environmental:hay_nest_with_chicken_eggs",
+          "block": "environmental:hay_duck_nest",
           "properties": {
             "eggs": "6"
           }

@@ -151,12 +151,12 @@ public class EnvironmentalBlocks {
     
     // Eggs //
     
-	public static final RegistryObject<Block> TWIG_NEST 			= HELPER.createBlock("twig_nest", () -> new EmptyNestBlock(EnvironmentalProperties.TWIG_NEST), ItemGroup.DECORATIONS);
-	public static final RegistryObject<Block> TWIG_NEST_WITH_CHICKEN_EGGS 			= HELPER.createBlockNoItem("twig_nest_with_chicken_eggs", () -> new BirdNestBlock(() -> Items.EGG, (EmptyNestBlock)TWIG_NEST.get(), EnvironmentalProperties.TWIG_NEST));
-	public static final RegistryObject<Block> TWIG_NEST_WITH_DUCK_EGGS 			= HELPER.createBlockNoItem("twig_nest_with_duck_eggs", () -> new BirdNestBlock(EnvironmentalItems.DUCK_EGG, (EmptyNestBlock)TWIG_NEST.get(), EnvironmentalProperties.TWIG_NEST));
+	public static final RegistryObject<Block> TWIG_NEST 		= HELPER.createBlock("twig_nest", () -> new EmptyNestBlock(EnvironmentalProperties.TWIG_NEST), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> TWIG_CHICKEN_NEST = HELPER.createBlockNoItem("twig_chicken_nest", () -> new BirdNestBlock(() -> Items.EGG, (EmptyNestBlock)TWIG_NEST.get(), EnvironmentalProperties.TWIG_NEST));
+	public static final RegistryObject<Block> TWIG_DUCK_NEST 	= HELPER.createBlockNoItem("twig_duck_nest", () -> new BirdNestBlock(EnvironmentalItems.DUCK_EGG, (EmptyNestBlock)TWIG_NEST.get(), EnvironmentalProperties.TWIG_NEST));
 	public static final RegistryObject<Block> HAY_NEST 			= HELPER.createBlock("hay_nest", () -> new EmptyNestBlock(EnvironmentalProperties.HAY_NEST), ItemGroup.DECORATIONS);
-	public static final RegistryObject<Block> HAY_NEST_WITH_CHICKEN_EGGS 			= HELPER.createBlockNoItem("hay_nest_with_chicken_eggs", () -> new BirdNestBlock(() -> Items.EGG, (EmptyNestBlock)HAY_NEST.get(), EnvironmentalProperties.HAY_NEST));
-	public static final RegistryObject<Block> HAY_NEST_WITH_DUCK_EGGS 			= HELPER.createBlockNoItem("hay_nest_with_duck_eggs", () -> new BirdNestBlock(EnvironmentalItems.DUCK_EGG, (EmptyNestBlock)HAY_NEST.get(), EnvironmentalProperties.HAY_NEST));
+	public static final RegistryObject<Block> HAY_CHICKEN_NEST 	= HELPER.createBlockNoItem("hay_chicken_nest", () -> new BirdNestBlock(() -> Items.EGG, (EmptyNestBlock)HAY_NEST.get(), EnvironmentalProperties.HAY_NEST));
+	public static final RegistryObject<Block> HAY_DUCK_NEST 	= HELPER.createBlockNoItem("hay_duck_nest", () -> new BirdNestBlock(EnvironmentalItems.DUCK_EGG, (EmptyNestBlock)HAY_NEST.get(), EnvironmentalProperties.HAY_NEST));
     
 	public static final RegistryObject<Block> CHICKEN_EGG_CRATE = HELPER.createCompatBlock("quark", "chicken_egg_crate", () -> new Block(Block.Properties.create(Material.WOOD, MaterialColor.WHITE_TERRACOTTA).hardnessAndResistance(1.5F).sound(SoundType.WOOD)), ItemGroup.DECORATIONS);
 	public static final RegistryObject<Block> DUCK_EGG_CRATE = HELPER.createCompatBlock("quark", "duck_egg_crate", () -> new Block(Block.Properties.create(Material.WOOD, MaterialColor.LIGHT_BLUE).hardnessAndResistance(1.5F).sound(SoundType.WOOD)), ItemGroup.DECORATIONS);

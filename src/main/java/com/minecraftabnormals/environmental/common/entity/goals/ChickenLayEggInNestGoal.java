@@ -39,13 +39,13 @@ public class ChickenLayEggInNestGoal extends MoveToBlockGoal {
 			Block block = blockstate.getBlock();
 
 			if (block instanceof EmptyNestBlock) {
-				this.chicken.world.setBlockState(blockpos, ((EmptyNestBlock)block).getNest(Items.EGG).getDefaultState(), 2);
+				this.chicken.world.setBlockState(blockpos, ((EmptyNestBlock)block).getNest(Items.EGG).getDefaultState(), 3);
 				this.resetBird();
 			}
 			else if (block instanceof BirdNestBlock && ((BirdNestBlock)block).getEgg() == Items.EGG) {
 				int i = blockstate.get(BirdNestBlock.EGGS);
 				if (i < 6) {
-					this.chicken.world.setBlockState(blockpos, blockstate.with(BirdNestBlock.EGGS, Integer.valueOf(i + 1)), 2);
+					this.chicken.world.setBlockState(blockpos, blockstate.with(BirdNestBlock.EGGS, Integer.valueOf(i + 1)), 3);
 					this.resetBird();
 				}
 			}

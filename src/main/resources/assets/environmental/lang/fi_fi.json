@@ -286,11 +286,11 @@
 	"block.environmental.duckweed_thatch_vertical_slab": "Pystysuora sorsanlimaskalaatta",
 	
 	"block.environmental.twig_nest": "Risupesä",
-	"block.environmental.twig_nest_with_chicken_eggs": "Kananmunia risupesässä",
-	"block.environmental.twig_nest_with_duck_eggs": "Sorsan munia risupesässä",
+	"block.environmental.twig_chicken_nest": "Kananmunia risupesässä",
+	"block.environmental.twig_duck_nest": "Sorsan munia risupesässä",
 	"block.environmental.hay_nest": "Heinäpesä",
-	"block.environmental.hay_nest_with_chicken_eggs": "Kananmunia heinäpesässä",
-	"block.environmental.hay_nest_with_duck_eggs": "Sorsan munia heinäpesässä",
+	"block.environmental.hay_chicken_nest": "Kananmunia heinäpesässä",
+	"block.environmental.hay_duck_nest": "Sorsan munia heinäpesässä",
 	
 	"block.environmental.chicken_egg_crate": "Laatikko kananmunia",
 	"block.environmental.duck_egg_crate": "Laatikko sorsan munia",

@@ -63,7 +63,7 @@ public class EmptyNestBlock extends Block {
 				if (!player.abilities.isCreativeMode && !worldIn.isRemote) {
 					itemstack.shrink(1);
 				}
-				worldIn.setBlockState(pos, nest.getDefaultState(), 2);
+				worldIn.setBlockState(pos, nest.getDefaultState(), 3);
 
 				return ActionResultType.func_233537_a_(worldIn.isRemote);
 			}
