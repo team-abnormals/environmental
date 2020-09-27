@@ -54,6 +54,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.TickRangeConverter;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -67,9 +68,9 @@ public class YakEntity extends AnimalEntity implements IForgeShearable, IShearab
 	private static final UUID SPEED_UUID = UUID.fromString("49455A49-7EC5-45BA-B886-3B90B23A1718");
 	private static final AttributeModifier ATTACKING_SPEED_BOOST = new AttributeModifier(SPEED_UUID, "Attacking speed boost", 0.05D, AttributeModifier.Operation.ADDITION);
 
-	private UUID lastHurtBy;
-	private int timer;
 	private EatGrassGoal eatGrassGoal;
+	private UUID lastHurtBy;
+	private int grassEatTimer;
 
 	public YakEntity(EntityType<? extends YakEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -117,7 +118,7 @@ public class YakEntity extends AnimalEntity implements IForgeShearable, IShearab
 
 	@Override
 	protected void updateAITasks() {
-		this.timer = this.eatGrassGoal.getEatingGrassTimer();
+		this.grassEatTimer = this.eatGrassGoal.getEatingGrassTimer();
 		ModifiableAttributeInstance modifiableattributeinstance = this.getAttribute(Attributes.MOVEMENT_SPEED);
 		if (this.func_233678_J__()) {
 			if (!this.isChild() && !modifiableattributeinstance.hasModifier(ATTACKING_SPEED_BOOST)) {
@@ -137,17 +138,16 @@ public class YakEntity extends AnimalEntity implements IForgeShearable, IShearab
 
 	@Override
 	public void livingTick() {
-		if (this.world.isRemote) {
-			this.timer = Math.max(0, this.timer - 1);
+		if (this.world.isRemote && this.grassEatTimer > 0) {
+			this.grassEatTimer--;
 		}
-
 		super.livingTick();
 	}
 
 	@Override
 	public void handleStatusUpdate(byte id) {
 		if (id == 10) {
-			this.timer = 40;
+			this.grassEatTimer = 40;
 		} else {
 			super.handleStatusUpdate(id);
 		}
@@ -166,24 +166,23 @@ public class YakEntity extends AnimalEntity implements IForgeShearable, IShearab
 		}
 	}
 
-//	public float getHeadRotationPointY(float partialTicks) {
-//		if (this.timer <= 0) {
-//			return 0.0F;
-//		} else if (this.timer >= 4 && this.timer <= 36) {
-//			return 1.0F;
-//		} else {
-//			return this.timer < 4 ? ((float) this.timer - partialTicks) / 4.0F : -((float) (this.timer - 40) - partialTicks) / 4.0F;
-//		}
-//	}
-//
-//	public float getHeadRotationAngleX(float partialTicks) {
-//		if (this.timer > 4 && this.timer <= 36) {
-//			float f = ((float) (this.timer - 4) - partialTicks) / 32.0F;
-//			return ((float) Math.PI / 5F) + 0.21991149F * MathHelper.sin(f * 28.7F);
-//		} else {
-//			return this.timer > 0 ? ((float) Math.PI / 5F) : this.rotationPitch * ((float) Math.PI / 180F);
-//		}
-//	}
+	public float getHeadEatingOffset(float partialTicks) {
+		if (this.grassEatTimer <= 0) {
+			return 0.0F;
+		} else if (this.grassEatTimer >= 4 && this.grassEatTimer <= 36) {
+			return 1.0F;
+		} else {
+			return this.grassEatTimer < 4 ? ((float) this.grassEatTimer - partialTicks) / 4.0F : -((float) (this.grassEatTimer - 40) - partialTicks) / 4.0F;
+		}
+	}
+
+	public float getHeadPitch(float partialTicks) {
+		if (this.grassEatTimer > 4 && this.grassEatTimer <= 36) {
+			return ((float) Math.PI / 5F) + 0.22F * MathHelper.sin((((float) (this.grassEatTimer - 4) - partialTicks) / 32.0F) * 28.7F);
+		} else {
+			return this.grassEatTimer > 0 ? ((float) Math.PI / 5F) : this.rotationPitch * ((float) Math.PI / 180F);
+		}
+	}
 	
 	@Override
 	public void eatGrassBonus() {
