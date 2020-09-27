@@ -284,6 +284,17 @@
 	"block.environmental.duckweed_thatch_slab": "Duckweed Thatch Slab",
 	"block.environmental.duckweed_thatch_stairs": "Duckweed Thatch Stairs",
 	"block.environmental.duckweed_thatch_vertical_slab": "Duckweed Thatch Vertical Slab",
+	
+	"block.environmental.twig_nest": "Twig Nest",
+	"block.environmental.twig_nest_with_chicken_eggs": "Twig Nest with Chicken Eggs",
+	"block.environmental.twig_nest_with_duck_eggs": "Twig Nest with Duck Eggs",
+	"block.environmental.hay_nest": "Hay Nest",
+	"block.environmental.hay_nest_with_chicken_eggs": "Hay Nest with Chicken Eggs",
+	"block.environmental.hay_nest_with_duck_eggs": "Hay Nest with Duck Eggs",
+	
+	"block.environmental.chicken_egg_crate": "Chicken Egg Crate",
+	"block.environmental.duck_egg_crate": "Duck Egg Crate",
+	"block.environmental.turtle_egg_crate": "Turtle Egg Crate",
 		
 	"item.environmental.wanderer_boots": "Wanderer's Boots",
 	"item.environmental.architect_belt": "Architect's Belt",
@@ -309,6 +320,10 @@
 	"item.environmental.duck": "Raw Duck",
   "item.environmental.cooked_duck": "Cooked Duck",
   "item.environmental.duck_egg": "Duck Egg",
+	
+	"item.minecraft.egg": "Chicken Egg",
+	"item.environmental.fried_egg": "Fried Egg",
+	"item.environmental.scrambled_eggs": "Scrambled Eggs",
 	
 	"item.environmental.cod_kelp_roll": "Cod Kelp Roll",
 	"item.environmental.tropical_fish_kelp_roll": "Tropical Fish Kelp Roll",

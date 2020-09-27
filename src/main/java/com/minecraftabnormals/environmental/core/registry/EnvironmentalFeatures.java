@@ -3,8 +3,10 @@ package com.minecraftabnormals.environmental.core.registry;
 import com.minecraftabnormals.environmental.common.world.EnvironmentalBiomeFeatures;
 import com.minecraftabnormals.environmental.common.world.gen.feature.BigWisteriaTreeFeature;
 import com.minecraftabnormals.environmental.common.world.gen.feature.CattailsFeature;
+import com.minecraftabnormals.environmental.common.world.gen.feature.ChickenNestFeature;
 import com.minecraftabnormals.environmental.common.world.gen.feature.DenseCattailsFeature;
 import com.minecraftabnormals.environmental.common.world.gen.feature.DirectionalFlowersFeature;
+import com.minecraftabnormals.environmental.common.world.gen.feature.DuckNestFeature;
 import com.minecraftabnormals.environmental.common.world.gen.feature.FallenLeavesFeature;
 import com.minecraftabnormals.environmental.common.world.gen.feature.RiceFeature;
 import com.minecraftabnormals.environmental.common.world.gen.feature.WisteriaTreeFeature;
@@ -35,6 +37,9 @@ public class EnvironmentalFeatures {
     public static final RegistryObject<Feature<NoFeatureConfig>> DENSE_CATTAILS = FEATURES.register("dense_cattails", () -> new DenseCattailsFeature(NoFeatureConfig.field_236558_a_));
     public static final RegistryObject<Feature<NoFeatureConfig>> RICE = FEATURES.register("rice", () -> new RiceFeature(NoFeatureConfig.field_236558_a_));
     
+    public static final RegistryObject<Feature<NoFeatureConfig>> DUCK_NEST = FEATURES.register("duck_nest", () -> new DuckNestFeature(NoFeatureConfig.field_236558_a_));
+    public static final RegistryObject<Feature<NoFeatureConfig>> CHICKEN_NEST = FEATURES.register("chicken_nest", () -> new ChickenNestFeature(NoFeatureConfig.field_236558_a_));
+    
     public static final RegistryObject<Feature<BaseTreeFeatureConfig>> WISTERIA_TREE = FEATURES.register("wisteria_tree", () -> new WisteriaTreeFeature(BaseTreeFeatureConfig.CODEC_BASE_TREE_FEATURE_CONFIG));
     public static final RegistryObject<Feature<BaseTreeFeatureConfig>> BIG_WISTERIA_TREE = FEATURES.register("big_wisteria_tree", () -> new BigWisteriaTreeFeature(BaseTreeFeatureConfig.CODEC_BASE_TREE_FEATURE_CONFIG));
 
@@ -62,6 +67,7 @@ public class EnvironmentalFeatures {
 
         if (biome.getTempCategory() != Biome.TempCategory.COLD && (biome.getCategory() == Biome.Category.SWAMP || biome.getCategory() == Biome.Category.RIVER)) {
             EnvironmentalBiomeFeatures.addCattails(biome);
+            EnvironmentalBiomeFeatures.addDuckNests(biome);
         }
 
         if (biome.getCategory() == Biome.Category.SAVANNA) {
@@ -104,6 +110,7 @@ public class EnvironmentalFeatures {
             if (biome == Biomes.DARK_FOREST || biome == Biomes.DARK_FOREST_HILLS) {
                 EnvironmentalBiomeFeatures.addShortFlower(EnvironmentalBlocks.BLUEBELL.get().getDefaultState(), biome, 3);
             }
+            EnvironmentalBiomeFeatures.addChickenNests(biome);
         }
 
         if (biome.getCategory() == Biome.Category.ICY) {

@@ -2,6 +2,7 @@ package com.minecraftabnormals.environmental.common.entity;
 
 import java.util.Random;
 
+import com.minecraftabnormals.environmental.common.entity.goals.DuckLayEggInNestGoal;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalTags;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEntities;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
@@ -63,6 +64,7 @@ public class DuckEntity extends AnimalEntity {
     protected void registerGoals() {
        this.goalSelector.addGoal(0, new SwimGoal(this));
        this.goalSelector.addGoal(1, new PanicGoal(this, 1.4D));
+       this.goalSelector.addGoal(2, new DuckLayEggInNestGoal(this, 1.0D));
        this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
        this.goalSelector.addGoal(3, new TemptGoal(this, 1.0D, false, Ingredient.fromTag(EnvironmentalTags.Items.DUCK_BREEDING_ITEMS)));
        this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));

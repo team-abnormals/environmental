@@ -1,5 +1,6 @@
 package com.minecraftabnormals.environmental.core.registry;
 
+import com.minecraftabnormals.environmental.common.block.BirdNestBlock;
 import com.minecraftabnormals.environmental.common.block.CartwheelBlock;
 import com.minecraftabnormals.environmental.common.block.CattailBlock;
 import com.minecraftabnormals.environmental.common.block.CattailSproutsBlock;
@@ -7,6 +8,7 @@ import com.minecraftabnormals.environmental.common.block.CherryLeavesBlock;
 import com.minecraftabnormals.environmental.common.block.DoubleCattailBlock;
 import com.minecraftabnormals.environmental.common.block.DoubleRiceBlock;
 import com.minecraftabnormals.environmental.common.block.DuckweedBlock;
+import com.minecraftabnormals.environmental.common.block.EmptyNestBlock;
 import com.minecraftabnormals.environmental.common.block.GiantLilyPadBlock;
 import com.minecraftabnormals.environmental.common.block.HangingWillowLeavesBlock;
 import com.minecraftabnormals.environmental.common.block.HangingWisteriaLeavesBlock;
@@ -79,6 +81,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.entity.item.PaintingType;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.Items;
 import net.minecraft.potion.Effects;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
@@ -147,6 +150,19 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> GIANT_TALL_GRASS 	= HELPER.createBlock("giant_tall_grass", () -> new DoublePlantBlock(Block.Properties.from(Blocks.TALL_GRASS)), ItemGroup.DECORATIONS);
     public static final RegistryObject<Block> TALL_DEAD_BUSH 	= HELPER.createBlock("tall_dead_bush", () -> new TallDeadBushBlock(EnvironmentalProperties.TALL_DEAD_BUSH), ItemGroup.DECORATIONS);
     
+    // Eggs //
+    
+	public static final RegistryObject<Block> TWIG_NEST 			= HELPER.createBlock("twig_nest", () -> new EmptyNestBlock(EnvironmentalProperties.TWIG_NEST), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> TWIG_NEST_WITH_CHICKEN_EGGS 			= HELPER.createBlockNoItem("twig_nest_with_chicken_eggs", () -> new BirdNestBlock(() -> Items.EGG, (EmptyNestBlock)TWIG_NEST.get(), EnvironmentalProperties.TWIG_NEST));
+	public static final RegistryObject<Block> TWIG_NEST_WITH_DUCK_EGGS 			= HELPER.createBlockNoItem("twig_nest_with_duck_eggs", () -> new BirdNestBlock(EnvironmentalItems.DUCK_EGG, (EmptyNestBlock)TWIG_NEST.get(), EnvironmentalProperties.TWIG_NEST));
+	public static final RegistryObject<Block> HAY_NEST 			= HELPER.createBlock("hay_nest", () -> new EmptyNestBlock(EnvironmentalProperties.HAY_NEST), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> HAY_NEST_WITH_CHICKEN_EGGS 			= HELPER.createBlockNoItem("hay_nest_with_chicken_eggs", () -> new BirdNestBlock(() -> Items.EGG, (EmptyNestBlock)HAY_NEST.get(), EnvironmentalProperties.HAY_NEST));
+	public static final RegistryObject<Block> HAY_NEST_WITH_DUCK_EGGS 			= HELPER.createBlockNoItem("hay_nest_with_duck_eggs", () -> new BirdNestBlock(EnvironmentalItems.DUCK_EGG, (EmptyNestBlock)HAY_NEST.get(), EnvironmentalProperties.HAY_NEST));
+    
+	public static final RegistryObject<Block> CHICKEN_EGG_CRATE = HELPER.createCompatBlock("quark", "chicken_egg_crate", () -> new Block(Block.Properties.create(Material.WOOD, MaterialColor.WHITE_TERRACOTTA).hardnessAndResistance(1.5F).sound(SoundType.WOOD)), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> DUCK_EGG_CRATE = HELPER.createCompatBlock("quark", "duck_egg_crate", () -> new Block(Block.Properties.create(Material.WOOD, MaterialColor.LIGHT_BLUE).hardnessAndResistance(1.5F).sound(SoundType.WOOD)), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> TURTLE_EGG_CRATE = HELPER.createCompatBlock("quark", "turtle_egg_crate", () -> new Block(Block.Properties.create(Material.WOOD, MaterialColor.SAND).hardnessAndResistance(1.5F).sound(SoundType.WOOD)), ItemGroup.DECORATIONS);
+	
 	// Decorations //
 	
 	public static final RegistryObject<Block> PODZOL_PATH 		= HELPER.createBlock("podzol_path", () -> new GrassPathBlock(EnvironmentalProperties.PODZOL_PATH), ItemGroup.DECORATIONS);

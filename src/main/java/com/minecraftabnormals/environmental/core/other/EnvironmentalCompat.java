@@ -52,6 +52,9 @@ public class EnvironmentalCompat {
         DataUtils.registerCompostable(EnvironmentalBlocks.TALL_CATTAIL.get(), 0.65F);
         DataUtils.registerCompostable(EnvironmentalBlocks.GIANT_TALL_GRASS.get(), 0.65F);
         DataUtils.registerCompostable(EnvironmentalBlocks.MYCELIUM_SPROUTS.get(), 0.50F);
+        
+        DataUtils.registerCompostable(EnvironmentalBlocks.TWIG_NEST.get(), 0.65F);
+        DataUtils.registerCompostable(EnvironmentalBlocks.HAY_NEST.get(), 0.65F);
 
         DataUtils.registerCompostable(EnvironmentalBlocks.CATTAIL_THATCH.get(), 0.65F);
         DataUtils.registerCompostable(EnvironmentalBlocks.CATTAIL_THATCH_SLAB.get(), 0.65F);
@@ -129,6 +132,17 @@ public class EnvironmentalCompat {
         DataUtils.registerFlammable(EnvironmentalBlocks.DUCKWEED_THATCH_STAIRS.get(), 60, 20);
         DataUtils.registerFlammable(EnvironmentalBlocks.DUCKWEED_THATCH_SLAB.get(), 60, 20);
         DataUtils.registerFlammable(EnvironmentalBlocks.DUCKWEED_THATCH_VERTICAL_SLAB.get(), 60, 20);
+        
+        DataUtils.registerFlammable(EnvironmentalBlocks.TWIG_NEST.get(), 60, 20);
+        DataUtils.registerFlammable(EnvironmentalBlocks.TWIG_NEST_WITH_CHICKEN_EGGS.get(), 60, 20);
+        DataUtils.registerFlammable(EnvironmentalBlocks.TWIG_NEST_WITH_DUCK_EGGS.get(), 60, 20);
+        DataUtils.registerFlammable(EnvironmentalBlocks.HAY_NEST.get(), 60, 20);
+        DataUtils.registerFlammable(EnvironmentalBlocks.HAY_NEST_WITH_CHICKEN_EGGS.get(), 60, 20);
+        DataUtils.registerFlammable(EnvironmentalBlocks.HAY_NEST_WITH_DUCK_EGGS.get(), 60, 20);
+        
+        DataUtils.registerFlammable(EnvironmentalBlocks.CHICKEN_EGG_CRATE.get(), 5, 20);
+        DataUtils.registerFlammable(EnvironmentalBlocks.DUCK_EGG_CRATE.get(), 5, 20);
+        DataUtils.registerFlammable(EnvironmentalBlocks.TURTLE_EGG_CRATE.get(), 5, 20);
         
         DataUtils.registerFlammable(EnvironmentalBlocks.WILLOW_LEAVES.get(), 30, 60);
         DataUtils.registerFlammable(EnvironmentalBlocks.HANGING_WILLOW_LEAVES.get(), 30, 60);
