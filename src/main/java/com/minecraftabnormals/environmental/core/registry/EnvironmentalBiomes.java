@@ -110,7 +110,7 @@ public class EnvironmentalBiomes {
     				BIOME_WATER_FOG_MAP.put(biome, biome.getWaterFogColor());
         		biome.field_235052_p_.waterColor = waterColor;
         		biome.field_235052_p_.waterFogColor = fogColor;
-        	} else {
+        	} else if (!BIOME_WATER_MAP.isEmpty() && !BIOME_WATER_FOG_MAP.isEmpty()) {
         		biome.field_235052_p_.waterColor = BIOME_WATER_MAP.get(biome);
         		biome.field_235052_p_.waterFogColor = BIOME_WATER_FOG_MAP.get(biome);
         	}
