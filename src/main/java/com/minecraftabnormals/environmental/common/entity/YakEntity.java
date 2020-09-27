@@ -59,7 +59,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.IForgeShearable;
 
-@SuppressWarnings("deprecation")
 public class YakEntity extends AnimalEntity implements IForgeShearable, IShearable, IAngerable {
 	private static final DataParameter<Boolean> SHEARED = EntityDataManager.createKey(YakEntity.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Integer> ANGER_TIME = EntityDataManager.createKey(YakEntity.class, DataSerializers.VARINT);

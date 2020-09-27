@@ -1,5 +1,7 @@
 package com.minecraftabnormals.environmental.core.registry;
 
+import java.util.HashMap;
+
 import com.minecraftabnormals.environmental.common.world.EnvironmentalBiomeBuilders;
 import com.minecraftabnormals.environmental.common.world.biome.blossom.BlossomHighlandsBiome;
 import com.minecraftabnormals.environmental.common.world.biome.blossom.BlossomHillsBiome;
@@ -58,5 +60,60 @@ public class EnvironmentalBiomes {
     	BiomeDictionary.addTypes(Biomes.WARPED_FOREST, Type.HOT, Type.DRY, Type.FOREST, Type.NETHER);
     	BiomeDictionary.addTypes(Biomes.SOUL_SAND_VALLEY, Type.HOT, Type.DRY, Type.NETHER);
     	BiomeDictionary.addTypes(Biomes.BASALT_DELTAS, Type.HOT, Type.DRY, Type.NETHER);
+    }
+    
+    private static final HashMap<Biome, Integer> BIOME_WATER_MAP = new HashMap<>();
+    private static final HashMap<Biome, Integer> BIOME_WATER_FOG_MAP = new HashMap<>();
+    
+	public static void replaceBiomeFogColors() {
+		for (Biome biome : ForgeRegistries.BIOMES.getValues()) {			
+			if(biome.getCategory() == Biome.Category.DESERT) 
+				replaceFogValue(biome, EnvironmentalConfig.COMMON.desertFog.get());
+			if(BiomeDictionary.hasType(biome, BiomeDictionary.Type.JUNGLE)) 
+				replaceFogValue(biome, EnvironmentalConfig.COMMON.jungleFog.get());
+			if(BiomeDictionary.hasType(biome, BiomeDictionary.Type.SNOWY)) 
+				replaceFogValue(biome, EnvironmentalConfig.COMMON.snowyFog.get());
+			if(BiomeDictionary.hasType(biome, BiomeDictionary.Type.SWAMP)) 
+				replaceFogValue(biome, EnvironmentalConfig.COMMON.swampFog.get());
+		}
+	}
+	
+	public static void replaceBiomeWaterColors() {
+		replaceWaterColors(0x44AFF5, Biomes.PLAINS, Biomes.SUNFLOWER_PLAINS);
+		replaceWaterColors(0x32A598, Biomes.DESERT);
+		
+		replaceWaterColors(0x1787D4, 0x1165b0, Biomes.OCEAN);
+		replaceWaterColors(0x1787D4, 0x1463a5, Biomes.DEEP_OCEAN);
+		
+		replaceWaterColors(0x905957, Biomes.NETHER_WASTES, Biomes.SOUL_SAND_VALLEY, Biomes.WARPED_FOREST, Biomes.CRIMSON_FOREST, Biomes.BASALT_DELTAS);
+		replaceWaterColors(0x62529e, Biomes.THE_END, Biomes.SMALL_END_ISLANDS, Biomes.END_BARRENS, Biomes.END_MIDLANDS, Biomes.END_HIGHLANDS);
+	}
+    
+    private static void replaceFogValue(Biome biome, int color) {
+    	if (EnvironmentalConfig.COMMON.customFogColors.get()) {
+    		biome.field_235052_p_.fogColor = color;
+    	} else {
+    		biome.field_235052_p_.fogColor = 12638463;
+    	}
+    }
+    
+    private static void replaceWaterColors(int color, Biome... biomes) {
+    	replaceWaterColors(color, color, biomes);
+    }
+    
+    private static void replaceWaterColors(int waterColor, int fogColor, Biome... biomes) {
+    	for (Biome biome : biomes) {
+    		if (EnvironmentalConfig.COMMON.bedrockWaterColors.get()) {
+    			if (!BIOME_WATER_MAP.containsKey(biome))
+    				BIOME_WATER_MAP.put(biome, biome.getWaterColor());
+    			if (!BIOME_WATER_FOG_MAP.containsKey(biome))
+    				BIOME_WATER_FOG_MAP.put(biome, biome.getWaterFogColor());
+        		biome.field_235052_p_.waterColor = waterColor;
+        		biome.field_235052_p_.waterFogColor = fogColor;
+        	} else {
+        		biome.field_235052_p_.waterColor = BIOME_WATER_MAP.get(biome);
+        		biome.field_235052_p_.waterFogColor = BIOME_WATER_FOG_MAP.get(biome);
+        	}
+    	}
     }
 }

@@ -58,7 +58,6 @@ public class SlabfishEffigyBlock extends ContainerBlock implements IWaterLoggabl
         return ActionResultType.PASS;
     }
 
-    @SuppressWarnings("deprecation")
     public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             TileEntity tileentity = worldIn.getTileEntity(pos);
@@ -79,7 +78,6 @@ public class SlabfishEffigyBlock extends ContainerBlock implements IWaterLoggabl
         return true;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public FluidState getFluidState(BlockState state) {
         return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
@@ -122,7 +120,6 @@ public class SlabfishEffigyBlock extends ContainerBlock implements IWaterLoggabl
         return state.with(HORIZONTAL_FACING, rot.rotate(state.get(HORIZONTAL_FACING)));
     }
 
-    @SuppressWarnings("deprecation")
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
         return state.rotate(mirrorIn.toRotation(state.get(HORIZONTAL_FACING)));
     }

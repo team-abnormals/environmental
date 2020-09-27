@@ -39,7 +39,6 @@ public class SawmillScreen extends ContainerScreen<SawmillContainer> {
         this.func_230459_a_(stack, mouseX, mouseY);
     }
 
-	@SuppressWarnings("deprecation")
 	@Override
     protected void drawGuiContainerBackgroundLayer(MatrixStack stack, float p_230450_2_, int p_230450_3_, int p_230450_4_) {
         this.renderBackground(stack);

@@ -349,7 +349,6 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         return this.isPartying;
     }
 
-    @SuppressWarnings("deprecation")
     public void onDeath(DamageSource cause) {
         if (net.minecraftforge.common.ForgeHooks.onLivingDeath(this, cause)) return;
         if (!this.removed && !this.dead) {

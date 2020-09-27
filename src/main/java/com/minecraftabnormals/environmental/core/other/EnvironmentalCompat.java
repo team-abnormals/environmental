@@ -229,7 +229,6 @@ public class EnvironmentalCompat {
         });
     }
     
-    @SuppressWarnings("deprecation")
     public static void registerUnusedDispenseBehaviors() {
         // TODO make these work properly with tags or smth
         for(Item item : SlabfishEntity.getSweaterMap().keySet()) {

@@ -17,7 +17,6 @@ import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-@SuppressWarnings("deprecation")
 @OnlyIn(Dist.CLIENT)
 public class DuckEggRenderer<T extends Entity & IRendersAsItem> extends EntityRenderer<T> {
 	private final net.minecraft.client.renderer.ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();

@@ -52,20 +52,21 @@ public class FoolWingsItem extends ArmorItem {
 
 		if (event.getEntityLiving() instanceof PlayerEntity && hasJumpedMap.containsKey(uuid)) {
 			PlayerEntity player = (PlayerEntity) event.getEntityLiving();
-			boolean wearingWings = player.getItemStackFromSlot(EquipmentSlotType.CHEST).getItem() instanceof FoolWingsItem;
-			boolean hasJumped = hasJumpedMap.get(uuid);
+			ItemStack stack = player.getItemStackFromSlot(EquipmentSlotType.CHEST);
 
-			if (player.isOnGround()) hasJumpedMap.put(uuid, false);
-			if (!wearingWings) return;
+			if (player.isOnGround()) 
+				hasJumpedMap.put(uuid, false);
+			if (!(stack.getItem() instanceof FoolWingsItem)) 
+				return;
 
-			if (!player.isOnGround() && !hasJumped && !player.isElytraFlying() && !player.abilities.isFlying) {
+			if (!player.isOnGround() && !hasJumpedMap.get(uuid) && !player.isElytraFlying() && !player.abilities.isFlying) {
 				if (player.isJumping && player.getMotion().getY() < 0) {
 					player.setMotion(player.getMotion().getX(), 0.5D, player.getMotion().getZ());
 					hasJumpedMap.put(uuid, true);
 					player.playSound(SoundEvents.ENTITY_ENDER_DRAGON_FLAP, 0.4F, 2.0F);
-					if (!player.abilities.isCreativeMode) {
-						player.getItemStackFromSlot(EquipmentSlotType.CHEST).attemptDamageItem(1, player.world.rand, null);
-					}
+					stack.damageItem(1, player, (p_233654_0_) -> {
+						p_233654_0_.sendBreakAnimation(EquipmentSlotType.CHEST);
+					});
 				}
 
 			}

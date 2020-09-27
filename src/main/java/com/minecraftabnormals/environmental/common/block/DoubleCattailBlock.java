@@ -10,6 +10,7 @@ import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.FarmlandBlock;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.IWaterLoggable;
 import net.minecraft.entity.LivingEntity;
@@ -77,7 +78,7 @@ public class DoubleCattailBlock extends Block implements IGrowable, IWaterLoggab
 
     protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
         Block block = state.getBlock();
-        return block.isIn(Tags.Blocks.DIRT) || block.isIn(BlockTags.SAND);
+        return block.isIn(Tags.Blocks.DIRT) || block.isIn(BlockTags.SAND) || block instanceof FarmlandBlock;
     }
 
     @Override
@@ -109,7 +110,6 @@ public class DoubleCattailBlock extends Block implements IGrowable, IWaterLoggab
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         int i = state.get(AGE);
         boolean flag = i == 1;
@@ -180,7 +180,6 @@ public class DoubleCattailBlock extends Block implements IGrowable, IWaterLoggab
     }
 
 
-    @SuppressWarnings("deprecation")
     @Override
     public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
         super.tick(state, worldIn, pos, random);
@@ -221,7 +220,6 @@ public class DoubleCattailBlock extends Block implements IGrowable, IWaterLoggab
         worldIn.setBlockState(pos.up(), this.getDefaultState().with(HALF, DoubleBlockHalf.UPPER).with(WATERLOGGED, Boolean.valueOf(ifluidstateUp.isTagged(FluidTags.WATER) && ifluidstateUp.getLevel() == 8)).with(FAKE_WATERLOGGED, Boolean.valueOf(worldIn.getFluidState(pos).isTagged(FluidTags.WATER) && worldIn.getFluidState(pos).getLevel() == 8)), 3);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public FluidState getFluidState(BlockState state) {
         return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);

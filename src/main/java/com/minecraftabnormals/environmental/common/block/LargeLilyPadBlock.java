@@ -80,7 +80,6 @@ public class LargeLilyPadBlock extends BushBlock implements IPlantable {
 		return true;
 	}
 
-	@SuppressWarnings("deprecation")
 	public static boolean isValidPosAndAir(BlockState state, World world, BlockPos pos) {
 		return state.isValidPosition(world, pos) && world.getBlockState(pos).isAir();
 	}

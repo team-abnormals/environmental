@@ -16,7 +16,6 @@ import net.minecraft.world.gen.IWorldGenerationBaseReader;
 import net.minecraft.world.gen.IWorldGenerationReader;
 import net.minecraftforge.common.IPlantable;
 
-@SuppressWarnings("deprecation")
 public class WisteriaTreeUtils {
 
     public static int getLengthByNeighbors(IWorldGenerationReader world, Random random, BlockPos pos) {

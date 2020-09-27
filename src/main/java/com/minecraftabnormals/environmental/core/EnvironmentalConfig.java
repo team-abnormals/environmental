@@ -2,13 +2,12 @@ package com.minecraftabnormals.environmental.core;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import net.minecraft.world.biome.Biome;
-import net.minecraftforge.common.BiomeDictionary;
+import com.minecraftabnormals.environmental.core.registry.EnvironmentalBiomes;
+
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.registries.ForgeRegistries;
 
 @EventBusSubscriber(modid = Environmental.MODID)
 public class EnvironmentalConfig {
@@ -29,11 +28,13 @@ public class EnvironmentalConfig {
         public final ConfigValue<Boolean> limitFarmAnimalSpawns;
         public final ConfigValue<Boolean> biomeVariantsAlwaysSpawn;
 
-        public final ConfigValue<Boolean> customFogs;
+        public final ConfigValue<Boolean> customFogColors;
         public final ConfigValue<Integer> desertFog;
         public final ConfigValue<Integer> jungleFog;
         public final ConfigValue<Integer> snowyFog;
         public final ConfigValue<Integer> swampFog;
+        
+        public final ConfigValue<Boolean> bedrockWaterColors;
 
         Common(ForgeConfigSpec.Builder builder) {
         	builder.push("worldgen");
@@ -54,9 +55,10 @@ public class EnvironmentalConfig {
             		generateGiantMushroomsInSwamps = builder.define("Giant Mushroom generation in Swamps", true);
             		generateGiantTallGrass = builder.define("Giant Tall Grass generation", true);
             	builder.pop();
-            	builder.push("fog");
-            		customFogs = builder.define("Enable Custom Fogs", true);
-            		builder.push("values");
+            	builder.push("ambience");
+            		bedrockWaterColors = builder.define("Enable Bedrock water colors", true);
+            		customFogColors = builder.define("Enable custom fog colors", true);
+            		builder.push("fogs");
             			desertFog = builder.define("Desert Fog decimal value", 14539186);
             			jungleFog = builder.define("Jungle Fog decimal value", 11591080);
             			snowyFog = builder.define("Snowy Fog decimal value", 16777215);
@@ -82,19 +84,7 @@ public class EnvironmentalConfig {
     }
     
     public static void onConfigReload(final ModConfig.ModConfigEvent event) {
-		for (Biome biome : ForgeRegistries.BIOMES.getValues()) {			
-			if(biome.getCategory() == Biome.Category.DESERT) replaceFogValue(biome, EnvironmentalConfig.COMMON.desertFog);
-			if(BiomeDictionary.hasType(biome, BiomeDictionary.Type.JUNGLE)) replaceFogValue(biome, EnvironmentalConfig.COMMON.jungleFog);
-			if(BiomeDictionary.hasType(biome, BiomeDictionary.Type.SNOWY)) replaceFogValue(biome, EnvironmentalConfig.COMMON.snowyFog);
-			if(BiomeDictionary.hasType(biome, BiomeDictionary.Type.SWAMP)) replaceFogValue(biome, EnvironmentalConfig.COMMON.swampFog);
-		}
+		EnvironmentalBiomes.replaceBiomeFogColors();
+		EnvironmentalBiomes.replaceBiomeWaterColors();
 	}
-    
-    private static void replaceFogValue(Biome biome, ConfigValue<Integer> config) {
-    	if (EnvironmentalConfig.COMMON.customFogs.get()) {
-    		biome.field_235052_p_.fogColor = config.get();
-    	} else {
-    		biome.field_235052_p_.fogColor = 12638463;
-    	}
-    }
 }
