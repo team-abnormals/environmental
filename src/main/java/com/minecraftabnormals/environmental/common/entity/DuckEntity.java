@@ -3,6 +3,7 @@ package com.minecraftabnormals.environmental.common.entity;
 import java.util.Random;
 
 import com.minecraftabnormals.environmental.common.entity.goals.DuckLayEggInNestGoal;
+import com.minecraftabnormals.environmental.common.entity.goals.DuckSwimGoal;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalTags;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEntities;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
@@ -25,7 +26,6 @@ import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
 import net.minecraft.entity.ai.goal.PanicGoal;
 import net.minecraft.entity.ai.goal.RandomWalkingGoal;
-import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -62,7 +62,7 @@ public class DuckEntity extends AnimalEntity {
 
     @Override
     protected void registerGoals() {
-       this.goalSelector.addGoal(0, new SwimGoal(this));
+       this.goalSelector.addGoal(0, new DuckSwimGoal(this));
        this.goalSelector.addGoal(1, new PanicGoal(this, 1.4D));
        this.goalSelector.addGoal(2, new DuckLayEggInNestGoal(this, 1.0D));
        this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
@@ -87,9 +87,9 @@ public class DuckEntity extends AnimalEntity {
        super.livingTick();
        this.oFlap = this.wingRotation;
        this.oFlapSpeed = this.destPos;
-       this.destPos = (float)((double)this.destPos + (double)(this.onGround ? -1 : 4) * 0.3D);
+       this.destPos = (float)((double)this.destPos + (double)(this.onGround || this.inWater ? -1 : 4) * 0.3D);
        this.destPos = MathHelper.clamp(this.destPos, 0.0F, 1.0F);
-       if (!this.onGround && this.wingRotDelta < 1.0F) {
+       if (!this.onGround && !this.inWater && this.wingRotDelta < 1.0F) {
           this.wingRotDelta = 1.0F;
        }
 
@@ -113,7 +113,7 @@ public class DuckEntity extends AnimalEntity {
     
     @Override
     protected float getWaterSlowDown() {
-        return 0.95F;
+        return 0.9F;
     }
 
     @Override
