@@ -17,6 +17,7 @@ import com.minecraftabnormals.environmental.core.Environmental;
 import com.minecraftabnormals.environmental.core.EnvironmentalConfig;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEntities;
+import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -161,14 +162,15 @@ public class EnvironmentalEvents {
         }
 
         if (projectileEntity instanceof ProjectileItemEntity) {
-            ProjectileItemEntity snowball = (ProjectileItemEntity) projectileEntity;
+            ProjectileItemEntity projectileitem = (ProjectileItemEntity) projectileEntity;
             if (event.getRayTraceResult().getType() == RayTraceResult.Type.ENTITY) {
                 EntityRayTraceResult entity = (EntityRayTraceResult) event.getRayTraceResult();
                 if (entity.getEntity() instanceof SlabfishEntity) {
                     SlabfishEntity slabfish = (SlabfishEntity) entity.getEntity();
-                    if (snowball.getItem().getItem() == Items.SNOWBALL)
+                    Item item = projectileitem.getItem().getItem();
+                    if (item == Items.SNOWBALL)
                         slabfish.setSlabfishOverlay(SlabfishOverlay.SNOWY);
-                    if (snowball.getItem().getItem() == Items.EGG) slabfish.setSlabfishOverlay(SlabfishOverlay.EGG);
+                    else if (item == Items.EGG || item == EnvironmentalItems.DUCK_EGG.get()) slabfish.setSlabfishOverlay(SlabfishOverlay.EGG);
                 }
             }
         }
