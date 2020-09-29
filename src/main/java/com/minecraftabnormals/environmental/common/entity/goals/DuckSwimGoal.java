@@ -23,11 +23,11 @@ public class DuckSwimGoal extends Goal {
 		double d0 = this.duck.func_233571_b_(FluidTags.WATER);
 		double d1 = motion.y;
 		
-		if (d0 > 0.3D) {
+		if (!this.duck.isChild() && d0 > 0.3D || this.duck.isChild() && d0 > 0.15D) {
 			if (d1 < 0.0D)
 				d1 = 0.0D;
 			else
-				d1 = motion.y + (double)(motion.y < (double)0.12F ? 0.02F : 0.0F);
+				d1 = motion.y + (double)(motion.y < (double)0.12F ? 0.03F : 0.0F);
 		}
 		
 		this.duck.setMotion(motion.x, d1, motion.z);
