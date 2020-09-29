@@ -106,12 +106,13 @@ public class Environmental
 
         modEventBus.addListener((ModConfig.ModConfigEvent event) -> 
         {
-			if (event.getConfig().getSpec() == EnvironmentalConfig.COMMON_SPEC) {
+			if (event.getConfig().getSpec() == EnvironmentalConfig.CLIENT_SPEC) {
 				EnvironmentalConfig.onConfigReload(event);
 			}
 		});
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, EnvironmentalConfig.COMMON_SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, EnvironmentalConfig.CLIENT_SPEC);
     }
 
     private void setupCommon(final FMLCommonSetupEvent event) 

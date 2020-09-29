@@ -4,7 +4,6 @@ import com.minecraftabnormals.environmental.core.registry.EnvironmentalEntities;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
 
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.IRendersAsItem;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.ProjectileItemEntity;
 import net.minecraft.item.Item;
@@ -21,7 +20,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.FMLPlayMessages;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-public class DuckEggEntity extends ProjectileItemEntity implements IRendersAsItem {
+public class DuckEggEntity extends ProjectileItemEntity {
 
    public DuckEggEntity(EntityType<? extends DuckEggEntity> type, World worldIn) {
       super(type, worldIn);

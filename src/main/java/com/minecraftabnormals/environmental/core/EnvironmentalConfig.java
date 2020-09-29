@@ -4,6 +4,8 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalBiomes;
 
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -28,14 +30,6 @@ public class EnvironmentalConfig {
         public final ConfigValue<Boolean> limitFarmAnimalSpawns;
         public final ConfigValue<Boolean> biomeVariantsAlwaysSpawn;
 
-        public final ConfigValue<Boolean> customFogColors;
-        public final ConfigValue<Integer> desertFog;
-        public final ConfigValue<Integer> jungleFog;
-        public final ConfigValue<Integer> snowyFog;
-        public final ConfigValue<Integer> swampFog;
-        
-        public final ConfigValue<Boolean> bedrockWaterColors;
-
         Common(ForgeConfigSpec.Builder builder) {
         	builder.push("worldgen");
             	builder.push("biomes");
@@ -53,17 +47,7 @@ public class EnvironmentalConfig {
             	builder.push("features");
             		generateExtraWisterias = builder.define("Wisteria Tree generation out of Flower Forests", false);
             		generateGiantMushroomsInSwamps = builder.define("Giant Mushroom generation in Swamps", true);
-            		generateGiantTallGrass = builder.define("Giant Tall Grass generation", true);
-            	builder.pop();
-            	builder.push("ambience");
-            		bedrockWaterColors = builder.define("Enable Bedrock water colors", true);
-            		customFogColors = builder.define("Enable custom fog colors", true);
-            		builder.push("fogs");
-            			desertFog = builder.define("Desert Fog decimal value", 14539186);
-            			jungleFog = builder.define("Jungle Fog decimal value", 11591080);
-            			snowyFog = builder.define("Snowy Fog decimal value", 16777215);
-            			swampFog = builder.define("Swamp Fog decimal value", 11595468);
-            		builder.pop();
+            		generateGiantTallGrass = builder.define("Giant Tall Grass generation", true);            	
             	builder.pop();
             builder.pop();
             
@@ -74,15 +58,47 @@ public class EnvironmentalConfig {
         }
     }
     
-    public static final ForgeConfigSpec COMMON_SPEC;
-    public static final Common COMMON;
+    public static class Client {
 
-    static {
-        final Pair<Common, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(Common::new);
-        COMMON_SPEC = specPair.getRight();
-        COMMON = specPair.getLeft();
+        public final ConfigValue<Boolean> customFogColors;
+        public final ConfigValue<Integer> desertFog;
+        public final ConfigValue<Integer> jungleFog;
+        public final ConfigValue<Integer> snowyFog;
+        public final ConfigValue<Integer> swampFog;
+        
+        public final ConfigValue<Boolean> bedrockWaterColors;
+    
+        Client(ForgeConfigSpec.Builder builder) {
+        	builder.push("ambience");
+	    		bedrockWaterColors = builder.define("Enable Bedrock water colors", true);
+	    		customFogColors = builder.define("Enable custom fog colors", true);
+	    		builder.push("fogs");
+	    			desertFog = builder.define("Desert Fog decimal value", 14539186);
+	    			jungleFog = builder.define("Jungle Fog decimal value", 11591080);
+	    			snowyFog = builder.define("Snowy Fog decimal value", 16777215);
+	    			swampFog = builder.define("Swamp Fog decimal value", 11595468);
+	    		builder.pop();
+        	builder.pop();
+        }
     }
     
+    public static final ForgeConfigSpec COMMON_SPEC;
+    public static final Common COMMON;
+    
+    public static final ForgeConfigSpec CLIENT_SPEC;
+    public static final Client CLIENT;
+
+    static {
+        final Pair<Common, ForgeConfigSpec> commonSpecPair = new ForgeConfigSpec.Builder().configure(Common::new);
+        COMMON_SPEC = commonSpecPair.getRight();
+        COMMON = commonSpecPair.getLeft();
+        
+        final Pair<Client, ForgeConfigSpec> clientSpecPair = new ForgeConfigSpec.Builder().configure(Client::new);
+        CLIENT_SPEC = clientSpecPair.getRight();
+        CLIENT = clientSpecPair.getLeft();
+    }
+    
+    @OnlyIn(Dist.CLIENT)
     public static void onConfigReload(final ModConfig.ModConfigEvent event) {
 		EnvironmentalBiomes.replaceBiomeFogColors();
 		EnvironmentalBiomes.replaceBiomeWaterColors();
