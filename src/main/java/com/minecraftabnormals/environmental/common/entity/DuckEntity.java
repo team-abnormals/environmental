@@ -2,7 +2,6 @@ package com.minecraftabnormals.environmental.common.entity;
 
 import java.util.Random;
 
-import com.minecraftabnormals.environmental.common.entity.goals.DuckEatItemsGoal;
 import com.minecraftabnormals.environmental.common.entity.goals.DuckLayEggInNestGoal;
 import com.minecraftabnormals.environmental.common.entity.goals.DuckSwimGoal;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalTags;

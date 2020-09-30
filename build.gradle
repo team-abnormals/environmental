@@ -11,10 +11,6 @@ buildscript {
     }
 }
 
-plugins {
-  id "com.wynprice.cursemaven" version "2.1.1"
-}
-
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
@@ -39,6 +35,7 @@ minecraft {
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
             arg "-mixin.config=environmental.mixins.json"
+            jvmArg "-Dmixin.env.disableRefMap=true"
             mods {
                 environmental {
                     source sourceSets.main
@@ -50,6 +47,7 @@ minecraft {
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
             arg "-mixin.config=environmental.mixins.json"
+            jvmArg "-Dmixin.env.disableRefMap=true"
             mods {
                 environmental {
                     source sourceSets.main
@@ -72,7 +70,7 @@ minecraft {
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.16.1-32.0.88'
-    implementation fg.deobf("curse.maven:abnormals-core:3043251")
+    implementation fg.deobf("curse.maven:abnormals-core:3063658")
     
     compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
@@ -87,6 +85,9 @@ repositories {
 		name = "ModMaven"
 		url = "https://modmaven.k-4u.nl"
 	}
+	maven {
+    url = "https://www.cursemaven.com"
+  }
 }
 
 jar {
