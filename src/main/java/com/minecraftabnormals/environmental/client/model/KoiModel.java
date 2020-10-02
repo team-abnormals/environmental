@@ -1,11 +1,12 @@
 package com.minecraftabnormals.environmental.client.model;
 
 import com.google.common.collect.ImmutableList;
+import com.minecraftabnormals.environmental.common.entity.KoiEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.entity.Entity;
+import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -14,7 +15,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * Created using Tabula 8.0.0
  */
 @OnlyIn(Dist.CLIENT)
-public class KoiModel<T extends Entity> extends EntityModel<T> {
+public class KoiModel<T extends KoiEntity> extends EntityModel<T> {
+    
     public ModelRenderer Body1;
     public ModelRenderer Body2;
     public ModelRenderer TopFin1;
@@ -26,7 +28,7 @@ public class KoiModel<T extends Entity> extends EntityModel<T> {
     public ModelRenderer Tail;
     public ModelRenderer TopFin2;
     public ModelRenderer BottomFin;
-
+    
     public KoiModel() {
         this.textureWidth = 64;
         this.textureHeight = 32;
@@ -79,17 +81,19 @@ public class KoiModel<T extends Entity> extends EntityModel<T> {
         this.Body1.addChild(this.TopFin1);
         this.Body1.addChild(this.Whisker2);
     }
-
+    
     @Override
-    public void render(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) { 
-        ImmutableList.of(this.Body1).forEach((modelRenderer) -> { 
-            modelRenderer.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
-        });
+    public void render(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
+        ImmutableList.of(this.Body1).forEach((modelRenderer) -> modelRenderer.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha));
     }
-
+    
     @Override
-    public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {}
-
+    public void setRotationAngles(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+        setRotateAngle(Body1, Body1.rotateAngleX, MathHelper.sin(0.6F * ageInTicks) * 0.3F * limbSwingAmount, Body1.rotateAngleZ);
+        setRotateAngle(Body2, Body2.rotateAngleX, MathHelper.cos(0.6F * ageInTicks) * 0.6F * limbSwingAmount, Body2.rotateAngleZ);
+        setRotateAngle(Tail, Tail.rotateAngleX, MathHelper.sin(0.6F * ageInTicks) * 0.75F * limbSwingAmount, Tail.rotateAngleZ);
+    }
+    
     /**
      * This is a helper function from Tabula to set the rotation of model parts
      */

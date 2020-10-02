@@ -22,4 +22,6 @@ public class EnvironmentalSounds {
 
     public static final RegistryObject<SoundEvent> SLABRAVE     = HELPER.createSoundEvent("music.record.slabrave");
     public static final RegistryObject<SoundEvent> LEAVING_HOME = HELPER.createSoundEvent("music.record.leaving_home");
+    
+    public static final RegistryObject<SoundEvent> ENTITY_KOI_FLOP = HELPER.createSoundEvent("entity.koi.flop");
 }
