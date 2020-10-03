@@ -303,7 +303,6 @@
 	"item.environmental.executioner_cleaver": "Executioner's Cleaver",
 	
 	"item.environmental.slabfish_spawn_egg": "Slabfish Spawn Egg",
-	"item.environmental.axolotl_spawn_egg": "Axolotl Spawn Egg",
 	"item.environmental.butterfly_spawn_egg": "Butterfly Spawn Egg",
 	"item.environmental.duck_spawn_egg": "Duck Spawn Egg",
 	"item.environmental.deer_spawn_egg": "Deer Spawn Egg",
@@ -340,7 +339,6 @@
 	
 	"item.environmental.squid_ink_risotto": "Squid Ink Risotto",
 	
-	"item.environmental.axolotl_bucket": "Bucket of Axolotl",
 	"item.environmental.slabfish_bucket": "Bucket of Slabfish",
 	"item.environmental.koi_bucket": "Bucket of Koi",
 	"item.environmental.bottled_butterfly": "Bottled Butterfly",
@@ -364,7 +362,6 @@
 	"item.environmental.music_disc_leaving_home.desc": "hatsondogs - Leaving Home",
   
 	"entity.environmental.slabfish": "Slabfish",
-	"entity.environmental.axolotl": "Axolotl",
 	"entity.environmental.duck": "Duck",
 	"entity.environmental.butterfly": "Butterfly",
 	"entity.environmental.deer": "Deer",
@@ -396,10 +393,7 @@
   
   "enchantment.environmental.travelling": "Travelling",
   "enchantment.environmental.travelling.desc": "Increases Movement Speed by 5% per level",
-	
-	"advancements.husbandry.equip_axolotl.title": "Lost in the Sea, but not alone!",
-	"advancements.husbandry.equip_axolotl.description": "Have an Axolotl latch onto you and get healed!",
-	
+
 	"advancements.husbandry.breed_all_slabfish.title": "Funky Genetics",
 	"advancements.husbandry.breed_all_slabfish.description": "Breed all Slabfish variants!",
 	

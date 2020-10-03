@@ -88,7 +88,6 @@ public class EnvironmentalItems {
     public static final RegistryObject<Item> LARGE_LILY_PAD	= HELPER.createItem("large_lily_pad", () -> new LargeLilyPadItem(new Item.Properties().group(ItemGroup.DECORATIONS)));
     public static final RegistryObject<Item> GIANT_LILY_PAD	= HELPER.createItem("giant_lily_pad", () -> new GiantLilyPadItem(new Item.Properties().group(ItemGroup.DECORATIONS)));
     
-//  public static final RegistryObject<Item> AXOLOTL_BUCKET = HELPER.createItem("axolotl_bucket", () -> new AxolotlBucketItem(() -> EnvironmentalEntities.AXOLOTL.get(), () -> Fluids.WATER, new Item.Properties().group(ItemGroup.MISC).maxStackSize(1)));
     public static final RegistryObject<Item> SLABFISH_BUCKET = HELPER.createItem("slabfish_bucket", () -> new SlabfishBucketItem(() -> EnvironmentalEntities.SLABFISH.get(), () -> Fluids.WATER, new Item.Properties().group(ItemGroup.MISC).maxStackSize(1)));
     public static final RegistryObject<Item> KOI_BUCKET = HELPER.createItem("koi_bucket", () -> new KoiBucketItem(() -> EnvironmentalEntities.KOI.get(), () -> Fluids.WATER, new Item.Properties().group(ItemGroup.MISC).maxStackSize(1)));
 
@@ -97,5 +96,4 @@ public class EnvironmentalItems {
     public static final RegistryObject<Item> DEER_SPAWN_EGG     = HELPER.createSpawnEggItem("deer", () -> EnvironmentalEntities.DEER.get(), 10057035, 15190442);
     public static final RegistryObject<Item> YAK_SPAWN_EGG = HELPER.createSpawnEggItem("yak", () -> EnvironmentalEntities.YAK.get(), 5392966, 8607802);
     public static final RegistryObject<Item> KOI_SPAWN_EGG = HELPER.createSpawnEggItem("koi", () -> EnvironmentalEntities.KOI.get(), 5392966, 16754947);
-//	public static final RegistryObject<Item> AXOLOTL_SPAWN_EGG = HELPER.createSpawnEggItem("axolotl", () -> EnvironmentalEntities.AXOLOTL.get(), 6263617, 13940616);
 }
