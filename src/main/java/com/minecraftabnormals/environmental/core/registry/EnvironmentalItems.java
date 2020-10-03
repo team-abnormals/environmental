@@ -47,6 +47,8 @@ public class EnvironmentalItems {
     public static final RegistryObject<Item> VENISON            = HELPER.createItem("venison", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).food(EnvironmentalFoods.VENISON)));
     public static final RegistryObject<Item> COOKED_VENISON     = HELPER.createItem("cooked_venison", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).food(EnvironmentalFoods.COOKED_VENISON)));
     
+    public static final RegistryObject<Item> KOI 	= HELPER.createItem("koi", () -> new Item(new Item.Properties().group(ItemGroup.MISC)));
+    
     public static final RegistryObject<Item> DUCK            	= HELPER.createItem("duck", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).food(EnvironmentalFoods.DUCK)));
     public static final RegistryObject<Item> COOKED_DUCK     	= HELPER.createItem("cooked_duck", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).food(EnvironmentalFoods.COOKED_DUCK)));
 	public static final RegistryObject<Item> DUCK_EGG 			= HELPER.createItem("duck_egg", () -> new DuckEggItem(new Item.Properties().maxStackSize(16).group(ItemGroup.MISC)));
@@ -71,6 +73,7 @@ public class EnvironmentalItems {
     public static final RegistryObject<Item> SQUID_INK_RISOTTO  = HELPER.createItem("squid_ink_risotto", () -> new SoupItem(new Item.Properties().maxStackSize(1).food(EnvironmentalFoods.SQUID_INK_RISOTTO).group(ItemGroup.FOOD)));
 
     public static final RegistryObject<Item> COD_KELP_ROLL              = HELPER.createItem("cod_kelp_roll", () -> new Item(new Item.Properties().food(EnvironmentalFoods.COD_KELP_ROLL).group(ItemGroup.FOOD)));
+    public static final RegistryObject<Item> KOI_KELP_ROLL              = HELPER.createItem("koi_kelp_roll", () -> new Item(new Item.Properties().food(EnvironmentalFoods.KOI_KELP_ROLL).group(ItemGroup.FOOD)));
     public static final RegistryObject<Item> TROPICAL_FISH_KELP_ROLL    = HELPER.createItem("tropical_fish_kelp_roll", () -> new Item(new Item.Properties().food(EnvironmentalFoods.TROPICAL_FISH_KELP_ROLL).group(ItemGroup.FOOD)));
     public static final RegistryObject<Item> CRAB_KELP_ROLL             = HELPER.createCompatItem("quark", "crab_kelp_roll", new Item.Properties().food(EnvironmentalFoods.CRAB_KELP_ROLL), ItemGroup.FOOD);
     public static final RegistryObject<Item> PIKE_KELP_ROLL             = HELPER.createCompatItem("upgrade_aquatic", "pike_kelp_roll", new Item.Properties().food(EnvironmentalFoods.PIKE_KELP_ROLL), ItemGroup.FOOD);

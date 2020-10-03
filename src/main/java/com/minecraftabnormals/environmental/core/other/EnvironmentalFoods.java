@@ -22,6 +22,7 @@ public class EnvironmentalFoods {
     public static final Food RICE_BALL = new Food.Builder().hunger(4).saturation(0.5F).build();
 
     public static final Food COD_KELP_ROLL = new Food.Builder().hunger(3).saturation(0.7F).fastToEat().build();
+    public static final Food KOI_KELP_ROLL = new Food.Builder().hunger(5).saturation(1.2F).fastToEat().build();
     public static final Food TROPICAL_FISH_KELP_ROLL = new Food.Builder().hunger(4).saturation(1.3F).fastToEat().build();
     public static final Food CRAB_KELP_ROLL = new Food.Builder().hunger(6).saturation(0.7F).fastToEat().build();
     public static final Food PIKE_KELP_ROLL = new Food.Builder().hunger(5).saturation(0.9F).fastToEat().build();

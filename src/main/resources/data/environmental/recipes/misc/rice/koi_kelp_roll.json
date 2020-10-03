@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "rice_seafood",
+  "ingredients": [
+    {
+      "item": "environmental:rice_ball"
+    },
+    {
+      "item": "minecraft:dried_kelp"
+    },
+    {
+      "item": "environmental:koi"
+    }
+  ],
+    "result": {
+        "item": "environmental:koi_kelp_roll",
+        "count": 2
+    }
+}
