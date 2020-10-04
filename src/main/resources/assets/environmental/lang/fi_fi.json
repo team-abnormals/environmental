@@ -2,7 +2,7 @@
 	"block.environmental.kiln": "Polttouuni",
 	"block.environmental.sawmill": "Saha",
 	
-  "block.environmental.mud": "Muta",
+	"block.environmental.mud": "Muta",
 	"block.environmental.mud_bricks": "Mutatiili",
 	"block.environmental.mud_brick_slab": "Mutatiililaatta",
 	"block.environmental.mud_brick_stairs": "Mutatiiliportaat",
@@ -308,6 +308,7 @@
 	"item.environmental.duck_spawn_egg": "Luo sorsa",
 	"item.environmental.deer_spawn_egg": "Luo peura",
 	"item.environmental.yak_spawn_egg": "Luo jakki",
+	"item.environmental.koi_spawn_egg": "Luo koikarppi",
 	
 	"item.environmental.yak_hair": "Jakin karva",
 	"item.environmental.yak_pants": "Jakkihousut",
@@ -325,8 +326,11 @@
 	"item.environmental.fried_egg": "Paistettu muna",
 	"item.environmental.scrambled_eggs": "Munakokkeli",
 	
+	"item.environmental.koi": "Koikarppi",
+	
 	"item.environmental.cod_kelp_roll": "Ahvenlevärulla",
 	"item.environmental.tropical_fish_kelp_roll": "Trooppinen kalalevärulla",
+		"item.environmental.koi_kelp_roll": "Koikarppilevärulla",
 	"item.environmental.crab_kelp_roll": "Taskurapulevärulla",
 	"item.environmental.pike_kelp_roll": "Haukilevärulla",
 	
@@ -338,6 +342,7 @@
 	
 	"item.environmental.axolotl_bucket": "Aksolotli ämpärissä",
 	"item.environmental.slabfish_bucket": "Laattakala ämpärissä",
+	"item.environmental.koi_bucket": "Koikarppi ämpärissä",
 	"item.environmental.bottled_butterfly": "Perhonen pullossa",
 	
 	"item.environmental.mud_ball": "Mutapallo",
@@ -364,6 +369,7 @@
 	"entity.environmental.butterfly": "Perhonen",
 	"entity.environmental.deer": "Peura",
 	"entity.environmental.yak": "Jakki",
+	"entity.environmental.koi": "Koikarppi",
 	
 	"entity.minecraft.villager.environmental.ceramist": "Keraamikko",
 	"entity.minecraft.villager.environmental.carpenter": "Puuseppä",
@@ -412,6 +418,8 @@
 	"subtitles.entity.slabfish.backpack": "Laattakalalle puetaan reppu",
 	"subtitles.entity.slabfish.sweater": "Laattakalalle puetaan villapaita",
 	
+	"subtitles.entity.koi.flop": "Koikarppi sätkii",
+		
 	"entity.environmental.slabfish.baby": "Poikanen",
 	
 	"entity.environmental.slabfish.type.swamp": "Suo",
