@@ -17,6 +17,7 @@ import net.minecraft.world.IWorldReader;
 
 public class ChickenLayEggInNestGoal extends MoveToBlockGoal {
 	private final ChickenEntity chicken;
+	private int eggCounter;
 
 	public ChickenLayEggInNestGoal(ChickenEntity chickenIn, double speedIn) {
 		super(chickenIn, speedIn, 16);
@@ -31,22 +32,28 @@ public class ChickenLayEggInNestGoal extends MoveToBlockGoal {
 		return 40;
 	}
 
+	public void startExecuting() {
+		this.eggCounter = 30;
+	}
+
 	public void tick() {
 		super.tick();
 		if (this.getIsAboveDestination() && !this.chicken.isChild() && !this.chicken.isChickenJockey() && this.chicken.timeUntilNextEgg < 800) {
-			BlockPos blockpos = this.destinationBlock.up();
-			BlockState blockstate = this.chicken.world.getBlockState(blockpos);
-			Block block = blockstate.getBlock();
+			if (--this.eggCounter <= 0) {
+				BlockPos blockpos = this.destinationBlock.up();
+				BlockState blockstate = this.chicken.world.getBlockState(blockpos);
+				Block block = blockstate.getBlock();
 
-			if (block instanceof EmptyNestBlock) {
-				this.chicken.world.setBlockState(blockpos, ((EmptyNestBlock)block).getNest(Items.EGG).getDefaultState(), 3);
-				this.resetBird();
-			}
-			else if (block instanceof BirdNestBlock && ((BirdNestBlock)block).getEgg() == Items.EGG) {
-				int i = blockstate.get(BirdNestBlock.EGGS);
-				if (i < 6) {
-					this.chicken.world.setBlockState(blockpos, blockstate.with(BirdNestBlock.EGGS, Integer.valueOf(i + 1)), 3);
+				if (block instanceof EmptyNestBlock) {
+					this.chicken.world.setBlockState(blockpos, ((EmptyNestBlock)block).getNest(Items.EGG).getDefaultState(), 3);
 					this.resetBird();
+				}
+				else if (block instanceof BirdNestBlock && ((BirdNestBlock)block).getEgg() == Items.EGG) {
+					int i = blockstate.get(BirdNestBlock.EGGS);
+					if (i < 6) {
+						this.chicken.world.setBlockState(blockpos, blockstate.with(BirdNestBlock.EGGS, Integer.valueOf(i + 1)), 3);
+						this.resetBird();
+					}
 				}
 			}
 		}
@@ -57,11 +64,11 @@ public class ChickenLayEggInNestGoal extends MoveToBlockGoal {
 		this.chicken.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
 		this.chicken.timeUntilNextEgg = random.nextInt(6000) + 6000;
 	}
-	
+
 	protected boolean shouldMoveTo(IWorldReader worldIn, BlockPos pos) {
 		BlockState blockstate = this.chicken.world.getBlockState(pos.up());
 		Block block = blockstate.getBlock();
-		
+
 		if (block instanceof EmptyNestBlock || (block instanceof BirdNestBlock && ((BirdNestBlock)block).getEgg() == Items.EGG && blockstate.get(BirdNestBlock.EGGS) < 6)) {
 			if (this.chicken.timeUntilNextEgg < 800) {
 				return true;
