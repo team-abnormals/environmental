@@ -64,30 +64,42 @@ public class DuckModel<T extends DuckEntity> extends AgeableModel<T> {
 	@Override
 	public void setLivingAnimations(T entityIn, float limbSwing, float limbSwingAmount, float partialTick) {
 		super.setLivingAnimations(entityIn, limbSwing, limbSwingAmount, partialTick);
+
 		float f = entityIn.getWingRotation(partialTick);
-		
 		this.rightWing.rotateAngleZ = f;
 		this.leftWing.rotateAngleZ = -f;
+
+		if (entityIn.isEating()) {
+			this.head.rotateAngleX = entityIn.getHeadLean(partialTick) * 2.5F;
+		}
 	}
 
 	@Override
 	public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.head.rotateAngleX = headPitch * ((float)Math.PI / 180F);
-		this.head.rotateAngleY = netHeadYaw * ((float)Math.PI / 180F);
+		float f = ageInTicks - (float)entityIn.ticksExisted;
+		float f1 = entityIn.getHeadLean(f);
+		float f2 = 1.0F - f1;
+
+		this.head.rotateAngleX = headPitch * ((float)Math.PI / 180F) * f2;
+		this.head.rotateAngleX += f1 * 1.4F + MathHelper.cos(ageInTicks) * 0.15F * f1;
+		this.head.rotateAngleY = netHeadYaw * ((float)Math.PI / 180F) * f2;
+		
+		this.head.rotationPointY = 16.0F + f1;
+		this.head.rotationPointZ = -3.0F - f1;
 
 		if (!entityIn.isInWater()) {
 			this.rightLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
 			this.leftLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
-			
+
 			this.rightLeg.rotationPointY = 20.0F;
 			this.leftLeg.rotationPointY = 20.0F;
 		}
 		else {
-			float f = !entityIn.isChild() ? 0.2F : 0.4F;
-			
-			this.rightLeg.rotateAngleX = 0.5F + MathHelper.cos(ageInTicks * f) * 0.8F * (limbSwingAmount + 0.2F);
-			this.leftLeg.rotateAngleX = 0.5F + MathHelper.cos(ageInTicks * f + (float)Math.PI) * 0.8F * (limbSwingAmount + 0.2F);
-			
+			float f3 = !entityIn.isChild() ? 0.2F : 0.4F;
+
+			this.rightLeg.rotateAngleX = 0.5F + MathHelper.cos(ageInTicks * f3) * 0.8F * (limbSwingAmount + 0.2F);
+			this.leftLeg.rotateAngleX = 0.5F + MathHelper.cos(ageInTicks * f3 + (float)Math.PI) * 0.8F * (limbSwingAmount + 0.2F);
+
 			this.rightLeg.rotationPointY = 18.0F;
 			this.leftLeg.rotationPointY = 18.0F;
 		}
