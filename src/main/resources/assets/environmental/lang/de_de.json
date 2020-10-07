@@ -303,11 +303,11 @@
 	"item.environmental.executioner_cleaver": "Hackmesser des Henkers",
 	
 	"item.environmental.slabfish_spawn_egg": "Stufenfisch-Spawn-Ei",
-	"item.environmental.axolotl_spawn_egg": "Axolotl-Spawn-Ei",
 	"item.environmental.butterfly_spawn_egg": "Schmetterlings-Spawn-Ei",
 	"item.environmental.duck_spawn_egg": "Enten-Spawn-Ei",
 	"item.environmental.deer_spawn_egg": "Hirsch-Spawn-Ei",
 	"item.environmental.yak_spawn_egg": "Yak-Spawn-Ei",
+	"item.environmental.koi_spawn_egg": "Koi-Spawn-Ei",
 	
 	"item.environmental.yak_hair": "Yakhaare",
 	"item.environmental.yak_pants": "Yakhaarenhose",
@@ -325,8 +325,11 @@
 	"item.environmental.fried_egg": "Spiegelei",
 	"item.environmental.scrambled_eggs": "Rührei",
 	
+	"item.environmental.koi": "Koi",
+	
 	"item.environmental.cod_kelp_roll": "Kabeljauseetangrolle",
 	"item.environmental.tropical_fish_kelp_roll": "Tropenfischseetangrolle",
+	"item.environmental.koi_kelp_roll": "Koiseetangrolle",
 	"item.environmental.crab_kelp_roll": "Krabbenseetangrolle",
 	"item.environmental.pike_kelp_roll": "Hechtseetangrolle",
 	
@@ -336,8 +339,8 @@
 	
 	"item.environmental.squid_ink_risotto": "Tintenbeutelrisotto",
 	
-	"item.environmental.axolotl_bucket": "Axolotleimer",
 	"item.environmental.slabfish_bucket": "Stufenfischeimer",
+	"item.environmental.koi_bucket": "Koieimer",
 	"item.environmental.bottled_butterfly": "Schmetterlingsflasche",
 	
 	"item.environmental.mud_ball": "Schlammball",
@@ -359,11 +362,11 @@
 	"item.environmental.music_disc_leaving_home.desc": "hatsondogs - Leaving Home",
   
 	"entity.environmental.slabfish": "Stufenfisch",
-	"entity.environmental.axolotl": "Axolotl",
 	"entity.environmental.duck": "Ente",
 	"entity.environmental.butterfly": "Schmetterling",
 	"entity.environmental.deer": "Hirsch",
 	"entity.environmental.yak": "Yak",
+	"entity.environmental.koi": "Koi",
 	
 	"entity.minecraft.villager.environmental.ceramist": "Keramiker",
 	"entity.minecraft.villager.environmental.carpenter": "Zimmermann",
@@ -391,9 +394,6 @@
   "enchantment.environmental.travelling": "Reisen",
   "enchantment.environmental.travelling.desc": "Erhöht die Schnelligkeit um 5% pro Stufe",
 	
-	"advancements.husbandry.equip_axolotl.title": "Auf See verloren, aber nicht allein!",
-	"advancements.husbandry.equip_axolotl.description": "Verheile dich mit einem Axolotl!",
-	
 	"advancements.husbandry.breed_all_slabfish.title": "Irre Genetik",
 	"advancements.husbandry.breed_all_slabfish.description": "Vermehre alle Stufenfischvariante!",
 	
@@ -411,6 +411,8 @@
 	"subtitles.entity.slabfish.transform": "Stufenfisch verwandelt",
 	"subtitles.entity.slabfish.backpack": "Rucksack angelegt",
 	"subtitles.entity.slabfish.sweater": "Pulli angelegt",
+	
+	"subtitles.entity.koi.flop": "Koi platscht",
 	
 	"entity.environmental.slabfish.baby": "Baby",
 	
