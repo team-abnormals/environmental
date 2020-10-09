@@ -1,5 +1,5 @@
 {
-    "parent": "environmental:block/vertical_slab",
+    "parent": "abnormals_core:block/vertical_slab",
     "textures": {
         "side": "environmental:block/mud_bricks",
         "top": "environmental:block/mud_bricks",

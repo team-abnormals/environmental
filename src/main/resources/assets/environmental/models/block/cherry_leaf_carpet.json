@@ -1,5 +1,5 @@
 {
-    "parent": "environmental:block/leaf_carpet",
+    "parent": "abnormals_core:block/leaf_carpet",
     "textures": {
         "all": "environmental:block/cherry_leaves"
     }
