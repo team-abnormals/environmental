@@ -10,7 +10,7 @@
 	"block.environmental.mud_brick_vertical_slab": "Baldosa vertical de ladrillos de barro",
 	"block.environmental.chiseled_mud_bricks": "Ladrillos de barro cincelados",
 	
-	"block.environmental.slabfish_effigy": "Efigie de pez baldosa",
+	"block.environmental.slabfish_effigy": "Efigie de pezlosa",
 	
 	"block.environmental.chiseled_bricks": "Ladrillos cincelados",
 	
@@ -302,12 +302,12 @@
 	"item.environmental.thief_hood": "Capucha del ladrón",
 	"item.environmental.executioner_cleaver": "Cuchilla del verdugo",
 	
-	"item.environmental.slabfish_spawn_egg": "Generar pez baldosa",
-	"item.environmental.axolotl_spawn_egg": "Generar ajolote",
+	"item.environmental.slabfish_spawn_egg": "Generar pezlosa",
 	"item.environmental.butterfly_spawn_egg": "Generar mariposa",
 	"item.environmental.duck_spawn_egg": "Generar pato",
 	"item.environmental.deer_spawn_egg": "Generar ciervo",
 	"item.environmental.yak_spawn_egg": "Generar yak",
+	"item.environmental.koi_spawn_egg": "Generar koi",
 	
 	"item.environmental.yak_hair": "Pelo de yak",
 	"item.environmental.yak_pants": "Pantalones de yak",
@@ -324,9 +324,12 @@
 	"item.minecraft.egg": "Huevo de gallina",
 	"item.environmental.fried_egg": "Huevo frito",
 	"item.environmental.scrambled_eggs": "Huevos revueltos",
+
+	"item.environmental.koi": "Koi",
 	
 	"item.environmental.cod_kelp_roll": "Rollo de algas de bacalao",
 	"item.environmental.tropical_fish_kelp_roll": "Rollo de algas de pez tropical",
+	"item.environmental.koi_kelp_roll": "Rollo de algas de koi",
 	"item.environmental.crab_kelp_roll": "Rollo de algas de cangrejo",
 	"item.environmental.pike_kelp_roll": "Rollo de algas de lucio",
 	
@@ -336,8 +339,8 @@
 	
 	"item.environmental.squid_ink_risotto": "Risotto de tinta de calamar",
 
-	"item.environmental.axolotl_bucket": "Balde con ajolote",
-	"item.environmental.slabfish_bucket": "Balde con pez baldosa",
+	"item.environmental.slabfish_bucket": "Balde con pezlosa",
+	"item.environmental.koi_bucket": "Balde con koi",
 	"item.environmental.bottled_butterfly": "Botella con mariposa",
 	
 	"item.environmental.mud_ball": "Bola de barro",
@@ -358,12 +361,12 @@
 	"item.environmental.music_disc_leaving_home": "Disco",
 	"item.environmental.music_disc_leaving_home.desc": "hatsondogs - Leaving Home",
 
-	"entity.environmental.slabfish": "Pez baldosa",
-	"entity.environmental.axolotl": "Ajolote",
+	"entity.environmental.slabfish": "Pezlosa",
 	"entity.environmental.duck": "Pato",
 	"entity.environmental.butterfly": "Mariposa",
 	"entity.environmental.deer": "Ciervo",
 	"entity.environmental.yak": "Yak",
+	"entity.environmental.koi": "Koi",
 	
 	"entity.minecraft.villager.environmental.ceramist": "Alfarero",
 	"entity.minecraft.villager.environmental.carpenter": "Carpintero",
@@ -391,26 +394,25 @@
   "enchantment.environmental.travelling": "Andanza",
   "enchantment.environmental.travelling.desc": "Incrementa la velocidad de movimiento un 5% por nivel",
 
-	"advancements.husbandry.equip_axolotl.title": "¡Perdidos en el mar, pero juntos!",
-	"advancements.husbandry.equip_axolotl.description": "¡Dejá que se te pegue un ajolote y te cure!",
-
 	"advancements.husbandry.breed_all_slabfish.title": "Genes únicos",
-	"advancements.husbandry.breed_all_slabfish.description": "¡Hacé que se reproduzcan todos los tipos de peces baldosa!",
+	"advancements.husbandry.breed_all_slabfish.description": "¡Hacé que se reproduzcan todos los tipos de pezlosas!",
 
 	"advancements.husbandry.backpack_slabfish.title": "Primer día del cole",
-	"advancements.husbandry.backpack_slabfish.description": "Dale una mochila a un pez baldosa",
+	"advancements.husbandry.backpack_slabfish.description": "Dale una mochila a un pezlosa",
 
 	"advancements.adventure.find_natural_slabfish.title": "¡Vienen en distintos colores!",
-	"advancements.adventure.find_natural_slabfish.description": "Encontrá todas los tipos naturales de peces baldosa",
+	"advancements.adventure.find_natural_slabfish.description": "Encontrá todas los tipos naturales de pezlosa",
 
-	"subtitles.entity.slabfish.burp": "Eructo de pez baldosa",
-	"subtitles.entity.slabfish.death": "Pez baldosa muere",
-	"subtitles.entity.slabfish.step": "Pasos de pez baldosa",
-	"subtitles.entity.slabfish.hurt": "Pez baldosa herido",
-	"subtitles.entity.slabfish.eat": "Pez baldosa come",
-	"subtitles.entity.slabfish.transform": "Pez baldosa se transforma",
+	"subtitles.entity.slabfish.burp": "Eructo de pezlosa",
+	"subtitles.entity.slabfish.death": "Pezlosa muere",
+	"subtitles.entity.slabfish.step": "Pasos de pezlosa",
+	"subtitles.entity.slabfish.hurt": "Pezlosa herido",
+	"subtitles.entity.slabfish.eat": "Pezlosa come",
+	"subtitles.entity.slabfish.transform": "Pezlosa se transforma",
 	"subtitles.entity.slabfish.backpack": "Mochila equipada",
 	"subtitles.entity.slabfish.sweater": "Suéter equipado",
+
+	"subtitles.entity.koi.flop": "Koi aletea",
 	
 	"entity.environmental.slabfish.baby": "Bebé",
 
@@ -490,8 +492,8 @@
 	"entity.environmental.slabfish.backpack.green": "Mochila verde",
 	"entity.environmental.slabfish.backpack.red": "Mochila roja",
 	"entity.environmental.slabfish.backpack.black": "Mochila negra",
-	"entity.environmental.slabfish.backpack.snake_block": "Crecimiento pegajoso",
-	"entity.environmental.slabfish.backpack.gore": "Crecimiento sangriento",
+	"entity.environmental.slabfish.backpack.snake_block": "Bulto pegajoso",
+	"entity.environmental.slabfish.backpack.gore": "Bulto sangriento",
 	"entity.environmental.slabfish.backpack.ocelot": "Hielera",
 	
 	"entity.environmental.slabfish.sweater.white": "Suéter blanco",
