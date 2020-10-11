@@ -62,7 +62,7 @@ public class EnvironmentalTrades {
 
 	@SubscribeEvent
 	public static void onCarpenterTradesEvent(VillagerTradesEvent event) {
-		String[] defaultRemoved = new String[] { "crimson", "warped", "poise" };
+		String[] defaultRemoved = new String[] { "crimson", "warped", "poise", "aspen", "grimwood", "morado", "kousa" };
 		List<ITrade> novice = event.getTrades().get(1);
 		List<ITrade> apprentice = event.getTrades().get(2);
 		List<ITrade> journeyman = event.getTrades().get(3);
@@ -73,13 +73,13 @@ public class EnvironmentalTrades {
 
 			// NOVICE //
 			for (Item item : ItemTags.PLANKS.getAllElements()) {
-				if (notOnBlacklist(item, new String[] { "vertical", "crimson", "warped", "poise" })) {
+				if (notOnBlacklist(item, new String[] { "vertical" }, defaultRemoved)) {
 					novice.add(new TradeUtils.EmeraldsForItemsTrade(item, 24, 1, 16, 3));
 				}
 			}
 
-			for (Item item : ItemTags.field_232912_o_.getAllElements()) {
-				if (notOnBlacklist(item, new String[] { "stripped", "_wood" })) {
+			for (Item item : ItemTags.LOGS.getAllElements()) {
+				if (notOnBlacklist(item, new String[] { "stripped", "_wood", }, defaultRemoved)) {
 					novice.add(new TradeUtils.EmeraldsForItemsTrade(item, 6, 1, 16, 4));
 				}
 			}
@@ -99,7 +99,9 @@ public class EnvironmentalTrades {
 
 			// JOURNEYMAN //
 			for (Item item : ItemTags.SAPLINGS.getAllElements()) {
-				journeyman.add(new TradeUtils.EmeraldsForItemsTrade(item, 8, 1, 16, 10));
+				if (notOnBlacklist(item, defaultRemoved)) {
+					journeyman.add(new TradeUtils.EmeraldsForItemsTrade(item, 8, 1, 16, 10));
+				}
 			}
 
 			for (Item item : ItemTags.WOODEN_DOORS.getAllElements()) {
@@ -120,6 +122,18 @@ public class EnvironmentalTrades {
 
 	private static boolean notOnBlacklist(Item item, String[] items) {
 		for (String name : items) {
+			if (item.getRegistryName().toString().contains(name))
+				return false;
+		}
+		return true;
+	}
+	
+	private static boolean notOnBlacklist(Item item, String[] items, String[] items2) {
+		for (String name : items) {
+			if (item.getRegistryName().toString().contains(name))
+				return false;
+		}
+		for (String name : items2) {
 			if (item.getRegistryName().toString().contains(name))
 				return false;
 		}
