@@ -2,14 +2,9 @@ package com.minecraftabnormals.environmental.core;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.minecraftabnormals.environmental.core.registry.EnvironmentalBiomes;
-
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.config.ModConfig;
 
 @EventBusSubscriber(modid = Environmental.MODID)
 public class EnvironmentalConfig {
@@ -58,49 +53,12 @@ public class EnvironmentalConfig {
         }
     }
     
-    public static class Client {
-
-        public final ConfigValue<Boolean> customFogColors;
-        public final ConfigValue<Integer> desertFog;
-        public final ConfigValue<Integer> jungleFog;
-        public final ConfigValue<Integer> snowyFog;
-        public final ConfigValue<Integer> swampFog;
-        
-        public final ConfigValue<Boolean> bedrockWaterColors;
-    
-        Client(ForgeConfigSpec.Builder builder) {
-        	builder.push("ambience");
-	    		bedrockWaterColors = builder.define("Enable Bedrock water colors", true);
-	    		customFogColors = builder.define("Enable custom fog colors", true);
-	    		builder.push("fogs");
-	    			desertFog = builder.define("Desert Fog decimal value", 14539186);
-	    			jungleFog = builder.define("Jungle Fog decimal value", 11591080);
-	    			snowyFog = builder.define("Snowy Fog decimal value", 16777215);
-	    			swampFog = builder.define("Swamp Fog decimal value", 11595468);
-	    		builder.pop();
-        	builder.pop();
-        }
-    }
-    
     public static final ForgeConfigSpec COMMON_SPEC;
     public static final Common COMMON;
-    
-    public static final ForgeConfigSpec CLIENT_SPEC;
-    public static final Client CLIENT;
 
     static {
         final Pair<Common, ForgeConfigSpec> commonSpecPair = new ForgeConfigSpec.Builder().configure(Common::new);
         COMMON_SPEC = commonSpecPair.getRight();
         COMMON = commonSpecPair.getLeft();
-        
-        final Pair<Client, ForgeConfigSpec> clientSpecPair = new ForgeConfigSpec.Builder().configure(Client::new);
-        CLIENT_SPEC = clientSpecPair.getRight();
-        CLIENT = clientSpecPair.getLeft();
     }
-    
-    @OnlyIn(Dist.CLIENT)
-    public static void onConfigReload(final ModConfig.ModConfigEvent event) {
-		EnvironmentalBiomes.replaceBiomeFogColors();
-		EnvironmentalBiomes.replaceBiomeWaterColors();
-	}
 }
