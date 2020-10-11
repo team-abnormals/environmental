@@ -57,6 +57,8 @@ public class EnvironmentalBiomes {
     	BiomeDictionary.addTypes(Biomes.BAMBOO_JUNGLE, Type.HOT, Type.WET, Type.JUNGLE, Type.FOREST, Type.RARE, Type.OVERWORLD);
     	BiomeDictionary.addTypes(Biomes.BAMBOO_JUNGLE_HILLS, Type.HOT, Type.WET, Type.JUNGLE, Type.FOREST, Type.RARE, Type.HILLS, Type.OVERWORLD);
     
+    	BiomeDictionary.addTypes(Biomes.DEEP_FROZEN_OCEAN, Type.COLD);
+
     	BiomeDictionary.addTypes(Biomes.NETHER_WASTES, Type.WASTELAND);
     	BiomeDictionary.addTypes(Biomes.CRIMSON_FOREST, Type.HOT, Type.DRY, Type.FOREST, Type.NETHER);
     	BiomeDictionary.addTypes(Biomes.WARPED_FOREST, Type.HOT, Type.DRY, Type.FOREST, Type.NETHER);
