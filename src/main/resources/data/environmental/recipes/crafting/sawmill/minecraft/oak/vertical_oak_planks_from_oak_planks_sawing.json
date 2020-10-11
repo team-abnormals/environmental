@@ -1,14 +1,14 @@
 {
   "type": "environmental:sawing",
   "ingredient": {
-    "tag": "minecraft:oak_logs"
+    "item": "minecraft:oak_planks"
   },
-  "result": "quark:oak_ladder",
-  "count": 8,
+  "result": "quark:vertical_oak_planks",
+  "count": 1,
   "conditions":[
     {
       "type":"abnormals_core:quark_flag",
-      "flag":"variant_ladders"
+      "flag":"vertical_planks"
     }
   ]
 }

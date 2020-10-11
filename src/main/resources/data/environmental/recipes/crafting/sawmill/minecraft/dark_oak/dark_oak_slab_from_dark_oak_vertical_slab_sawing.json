@@ -1,14 +1,14 @@
 {
   "type": "environmental:sawing",
   "ingredient": {
-    "tag": "minecraft:oak_logs"
+    "item": "minecraft:dark_oak_vertical_slab"
   },
-  "result": "quark:oak_ladder",
-  "count": 8,
+  "result": "quark:dark_oak_slab",
+  "count": 1,
   "conditions":[
     {
       "type":"abnormals_core:quark_flag",
-      "flag":"variant_ladders"
+      "flag":"vertical_slabs"
     }
   ]
 }

@@ -1,8 +1,0 @@
-{
-  "type": "environmental:sawing",
-  "ingredient": {
-    "tag": "minecraft:crimson_stems"
-  },
-  "result": "minecraft:stick",
-  "count": 8
-}
