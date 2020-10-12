@@ -114,8 +114,7 @@ public class DoubleRiceBlock extends Block implements IGrowable, IWaterLoggable,
     }
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn,
-                                             BlockRayTraceResult hit) {
+    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         int i = state.get(AGE);
         boolean flag = i == 7;
         if (!flag && player.getHeldItem(handIn).getItem() == Items.BONE_MEAL) {
@@ -124,8 +123,7 @@ public class DoubleRiceBlock extends Block implements IGrowable, IWaterLoggable,
             Random rand = new Random();
             int j = 1 + rand.nextInt(3);
             spawnAsEntity(worldIn, pos, new ItemStack(EnvironmentalItems.RICE.get(), j));
-            worldIn.playSound((PlayerEntity) null, pos, SoundEvents.BLOCK_CROP_BREAK,
-                    SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
+            worldIn.playSound((PlayerEntity) null, pos, SoundEvents.BLOCK_CROP_BREAK, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
             if (state.get(HALF) == DoubleBlockHalf.UPPER) {
                 worldIn.setBlockState(pos.down(), EnvironmentalBlocks.RICE.get().getDefaultState().with(WATERLOGGED, worldIn.getBlockState(pos.down()).get(WATERLOGGED)).with(RiceBlock.AGE, Integer.valueOf(0)), 2);
                 worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 2);
@@ -149,7 +147,6 @@ public class DoubleRiceBlock extends Block implements IGrowable, IWaterLoggable,
             } else {
                 worldIn.setBlockState(pos.up(), worldIn.getBlockState(pos.up()).with(AGE, i + 1));
             }
-
         }
     }
 
