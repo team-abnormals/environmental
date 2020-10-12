@@ -25,12 +25,15 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.goal.NonTamedTargetGoal;
 import net.minecraft.entity.monster.HuskEntity;
 import net.minecraft.entity.monster.SkeletonEntity;
 import net.minecraft.entity.monster.StrayEntity;
 import net.minecraft.entity.monster.ZombieEntity;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.entity.passive.MooshroomEntity;
+import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PotionEntity;
 import net.minecraft.entity.projectile.ProjectileItemEntity;
@@ -288,10 +291,14 @@ public class EnvironmentalEvents {
 	public static void onEnterChunk(EnteringChunk event) {
 		if(event.getEntity() instanceof ChickenEntity) {
 			ChickenEntity chicken = (ChickenEntity)event.getEntity();
-
 			if(!chicken.goalSelector.goals.stream().anyMatch((goal) -> goal.getGoal() instanceof ChickenLayEggInNestGoal)) {
 				chicken.goalSelector.addGoal(2, new ChickenLayEggInNestGoal(chicken, 1.0D));
 			}
+		}
+		
+		if(event.getEntity() instanceof WolfEntity) {
+			WolfEntity wolf = (WolfEntity)event.getEntity();
+			wolf.targetSelector.addGoal(4, new NonTamedTargetGoal<>(wolf, AnimalEntity.class, false, (entity) -> entity.getType() == EnvironmentalEntities.DEER.get()));
 		}
 	}
 }
