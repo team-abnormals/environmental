@@ -53,8 +53,8 @@ public class EnvironmentalItems {
     public static final RegistryObject<Item> COOKED_DUCK     	= HELPER.createItem("cooked_duck", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).food(EnvironmentalFoods.COOKED_DUCK)));
 	public static final RegistryObject<Item> DUCK_EGG 			= HELPER.createItem("duck_egg", () -> new DuckEggItem(new Item.Properties().maxStackSize(16).group(ItemGroup.MISC)));
 	
-    public static final RegistryObject<Item> FRIED_EGG            	= HELPER.createItem("fried_egg", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).food(EnvironmentalFoods.FRIED_EGG)));
-    public static final RegistryObject<Item> SCRAMBLED_EGGS            	= HELPER.createItem("scrambled_eggs", () -> new ScrambledEggsItem(new Item.Properties().maxStackSize(1).group(ItemGroup.FOOD).food(EnvironmentalFoods.SCRAMBLED_EGGS)));
+    public static final RegistryObject<Item> FRIED_EGG          = HELPER.createItem("fried_egg", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).food(EnvironmentalFoods.FRIED_EGG)));
+    public static final RegistryObject<Item> SCRAMBLED_EGGS     = HELPER.createItem("scrambled_eggs", () -> new ScrambledEggsItem(new Item.Properties().maxStackSize(1).group(ItemGroup.FOOD).food(EnvironmentalFoods.SCRAMBLED_EGGS)));
 
     public static final RegistryObject<Item> MUD_BALL 		= HELPER.createItem("mud_ball", () -> new MudBallItem(new Item.Properties().group(ItemGroup.MATERIALS)));
     public static final RegistryObject<Item> MUD_BRICK 		= HELPER.createItem("mud_brick", () -> new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
@@ -82,8 +82,8 @@ public class EnvironmentalItems {
     public static final RegistryObject<Item> PUFFERFISH_RICE_CAKE   = HELPER.createItem("pufferfish_rice_cake", () -> new Item(new Item.Properties().food(EnvironmentalFoods.PUFFERFISH_RICE_CAKE).group(ItemGroup.FOOD)));
     public static final RegistryObject<Item> LIONFISH_RICE_CAKE     = HELPER.createCompatItem("upgrade_aquatic", "lionfish_rice_cake", new Item.Properties().food(EnvironmentalFoods.LIONFISH_RICE_CAKE), ItemGroup.FOOD);
 
-    public static final RegistryObject<Item> MUSIC_DISC_SLABRAVE        = HELPER.createItem("music_disc_slabrave", () -> new AbnormalsMusicDiscItem(12, () -> EnvironmentalSounds.SLABRAVE.get(), new Item.Properties().maxStackSize(1).group(ItemGroup.MISC).rarity(Rarity.RARE)));
-    public static final RegistryObject<Item> MUSIC_DISC_LEAVING_HOME    = HELPER.createItem("music_disc_leaving_home", () -> new AbnormalsMusicDiscItem(12, () -> EnvironmentalSounds.LEAVING_HOME.get(), new Item.Properties().maxStackSize(1).group(ItemGroup.MISC).rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> MUSIC_DISC_LEAVING_HOME    = HELPER.createItem("music_disc_leaving_home", () -> new AbnormalsMusicDiscItem(14, () -> EnvironmentalSounds.LEAVING_HOME.get(), new Item.Properties().maxStackSize(1).group(ItemGroup.MISC).rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> MUSIC_DISC_SLABRAVE        = HELPER.createItem("music_disc_slabrave", () -> new AbnormalsMusicDiscItem(15, () -> EnvironmentalSounds.SLABRAVE.get(), new Item.Properties().maxStackSize(1).group(ItemGroup.MISC).rarity(Rarity.RARE)));
 
     public static final RegistryObject<Item> LARGE_LILY_PAD	= HELPER.createItem("large_lily_pad", () -> new LargeLilyPadItem(new Item.Properties().group(ItemGroup.DECORATIONS)));
     public static final RegistryObject<Item> GIANT_LILY_PAD	= HELPER.createItem("giant_lily_pad", () -> new GiantLilyPadItem(new Item.Properties().group(ItemGroup.DECORATIONS)));
