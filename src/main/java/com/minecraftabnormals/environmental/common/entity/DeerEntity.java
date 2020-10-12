@@ -3,6 +3,7 @@ package com.minecraftabnormals.environmental.common.entity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.function.Predicate;
 
 import javax.annotation.Nullable;
 
@@ -15,6 +16,7 @@ import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DoublePlantBlock;
 import net.minecraft.entity.AgeableEntity;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.SpawnReason;
@@ -22,6 +24,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.entity.ai.goal.BreedGoal;
 import net.minecraft.entity.ai.goal.FollowParentGoal;
 import net.minecraft.entity.ai.goal.LookAtGoal;
@@ -47,6 +50,7 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
@@ -61,6 +65,9 @@ public class DeerEntity extends AnimalEntity {
 	private static final DataParameter<Integer> DEER_COAT_COLOR = EntityDataManager.createKey(DeerEntity.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> DEER_COAT_TYPE = EntityDataManager.createKey(DeerEntity.class, DataSerializers.VARINT);
 	private static final DataParameter<Boolean> HAS_ANTLERS = EntityDataManager.createKey(DeerEntity.class, DataSerializers.BOOLEAN);
+	private static final Predicate<Entity> SHOULD_AVOID = (entity) -> {
+		return !entity.isDiscrete() && EntityPredicates.CAN_AI_TARGET.test(entity);
+	};
 
 	private static final UUID SPEED_MODIFIER = UUID.fromString("a21208ef-5399-4341-800f-d5a9152afe98");
 	private int floweringTime;
@@ -77,6 +84,9 @@ public class DeerEntity extends AnimalEntity {
 		this.goalSelector.addGoal(1, new PanicGoal(this, 2.0D));
 		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
 		this.goalSelector.addGoal(3, new TemptGoal(this, 1.25D, false, Ingredient.fromTag(EnvironmentalTags.Items.DEER_TEMPTATION_ITEMS)));
+		this.goalSelector.addGoal(4, new AvoidEntityGoal<>(this, PlayerEntity.class, 16.0F, 1.6D, 1.4D, (player) -> {
+			return SHOULD_AVOID.test(player);
+		}));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
 		this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
 		this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 6.0F));
