@@ -3,7 +3,7 @@
   "ingredient": {
     "tag": "minecraft:oak_logs"
   },
-  "result": "quark:oak_ladder",
+  "result": "minecraft:ladder",
   "count": 8,
   "conditions":[
     {

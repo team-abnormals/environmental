@@ -3,7 +3,7 @@
   "ingredient": {
     "item": "minecraft:oak_planks"
   },
-  "result": "quark:oak_ladder",
+  "result": "minecraft:ladder",
   "count": 2,
   "conditions":[
     {
