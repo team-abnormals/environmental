@@ -41,6 +41,8 @@ public class EnvironmentalFeatureConfigs {
 
     public static final BlockState CHERRY_LOG = EnvironmentalBlocks.CHERRY_LOG.get().getDefaultState();
     public static final BlockState CHERRY_LEAVES = EnvironmentalBlocks.CHERRY_LEAVES.get().getDefaultState();
+    
+    public static final BlockState TALL_DEAD_BUSH = EnvironmentalBlocks.TALL_DEAD_BUSH.get().getDefaultState();
 
     public static final BlockState WISTERIA_LOG = EnvironmentalBlocks.WISTERIA_LOG.get().getDefaultState();
     public static final BlockState BLUE_WISTERIA_LEAVES = EnvironmentalBlocks.BLUE_WISTERIA_LEAVES.get().getDefaultState().with(WisteriaLeavesBlock.DISTANCE, 1);
@@ -59,6 +61,7 @@ public class EnvironmentalFeatureConfigs {
     public static final BlockState PURPLE_HANGING_WISTERIA_LEAVES_BOTTOM = EnvironmentalBlocks.PURPLE_HANGING_WISTERIA_LEAVES.get().getDefaultState().with(HangingWisteriaLeavesBlock.HALF, DoubleBlockHalf.LOWER);
 
     public static final BlockClusterFeatureConfig CHERRY_BLOSSOM_FOREST_FLOWER_CONFIG = (new BlockClusterFeatureConfig.Builder((new WeightedBlockStateProvider()).addWeightedBlockstate(Blocks.POPPY.getDefaultState(), 2).addWeightedBlockstate(Blocks.RED_TULIP.getDefaultState(), 2).addWeightedBlockstate(Blocks.WHITE_TULIP.getDefaultState(), 1).addWeightedBlockstate(Blocks.PINK_TULIP.getDefaultState(), 3).addWeightedBlockstate(Blocks.ORANGE_TULIP.getDefaultState(), 1).addWeightedBlockstate(Blocks.LILY_OF_THE_VALLEY.getDefaultState(), 1), SimpleBlockPlacer.field_236447_c_)).tries(64).build();
+    public static final BlockClusterFeatureConfig TALL_DEAD_BUSH_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(TALL_DEAD_BUSH), new DoublePlantBlockPlacer())).tries(64).func_227317_b_().build();
 
     public static final BlockClusterFeatureConfig WHITE_DELPHINIUM = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(EnvironmentalBlocks.WHITE_DELPHINIUM.get().getDefaultState()), new DoublePlantBlockPlacer())).tries(64).func_227317_b_().build();
     public static final BlockClusterFeatureConfig PINK_DELPHINIUM = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(EnvironmentalBlocks.PINK_DELPHINIUM.get().getDefaultState()), new DoublePlantBlockPlacer())).tries(64).func_227317_b_().build();

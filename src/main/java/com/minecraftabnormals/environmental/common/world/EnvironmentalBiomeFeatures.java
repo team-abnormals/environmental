@@ -74,6 +74,10 @@ public class EnvironmentalBiomeFeatures {
         biomeIn.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Feature.DISK.withConfiguration(new SphereReplaceConfig(EnvironmentalFeatureConfigs.MUD, 5, 2, Lists.newArrayList(Blocks.DIRT.getDefaultState(), Blocks.GRASS_BLOCK.getDefaultState(),EnvironmentalFeatureConfigs.MUD))).withPlacement(Placement.COUNT_TOP_SOLID.configure(new FrequencyConfig(1))));
     }
     
+    public static void addTallDeadBush(Biome biomeIn, int count) {
+        biomeIn.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_PATCH.withConfiguration(EnvironmentalFeatureConfigs.TALL_DEAD_BUSH_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_32.configure(new FrequencyConfig(count))));
+    }
+    
     public static void addDuckNests(Biome biomeIn) {
         biomeIn.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.DUCK_NEST.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceConfig(32))));
     }

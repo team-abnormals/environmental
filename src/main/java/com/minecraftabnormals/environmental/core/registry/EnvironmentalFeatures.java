@@ -69,6 +69,14 @@ public class EnvironmentalFeatures {
             EnvironmentalBiomeFeatures.addCattails(biome);
             EnvironmentalBiomeFeatures.addDuckNests(biome);
         }
+        
+        if(biome.getCategory() == Biome.Category.DESERT) {
+        	EnvironmentalBiomeFeatures.addTallDeadBush(biome, 1);
+        }
+        
+        if (biome.getCategory() == Biome.Category.MESA) {
+        	EnvironmentalBiomeFeatures.addTallDeadBush(biome, 6);
+        }
 
         if (biome.getCategory() == Biome.Category.SAVANNA) {
             EnvironmentalBiomeFeatures.addGiantTallGrass(biome, 3);
