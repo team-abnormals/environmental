@@ -56,7 +56,17 @@ public class EnvironmentalBiomeFeatures {
     }
 
     public static void addMarshMushrooms(Biome biome) {
-        biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.HUGE_BROWN_MUSHROOM.withConfiguration(DefaultBiomeFeatures.BIG_BROWN_MUSHROOM).withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(0, 0.32F, 1))));
+        BlockState BROWN_MUSHROOM_CAP = Blocks.BROWN_MUSHROOM_BLOCK.getDefaultState().with(HugeMushroomBlock.UP, Boolean.valueOf(true)).with(HugeMushroomBlock.DOWN, Boolean.valueOf(false));
+        if (EnhancedMushrooms.isInstalled()) {
+            BigMushroomFeatureConfig BROWN_MUSHROOM_CONFIG = (
+                    new BigMushroomFeatureConfig(
+                            new SimpleBlockStateProvider(BROWN_MUSHROOM_CAP),
+                            new SimpleBlockStateProvider(EnhancedMushrooms.BROWN_MUSHROOM_STEM.getDefaultState()),
+                            3));
+            biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.HUGE_BROWN_MUSHROOM.withConfiguration(BROWN_MUSHROOM_CONFIG).withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(0, 0.32F, 1))));
+        } else {
+            biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.HUGE_BROWN_MUSHROOM.withConfiguration(DefaultBiomeFeatures.BIG_BROWN_MUSHROOM).withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(0, 0.32F, 1))));
+        }
     }
 
     public static void addMarshVegetation(Biome biome) {
