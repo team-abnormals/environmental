@@ -17,7 +17,6 @@ import com.minecraftabnormals.environmental.core.Environmental;
 import com.minecraftabnormals.environmental.core.EnvironmentalConfig;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEntities;
-import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -25,6 +24,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.NonTamedTargetGoal;
 import net.minecraft.entity.monster.HuskEntity;
 import net.minecraft.entity.monster.SkeletonEntity;
@@ -33,6 +33,7 @@ import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.entity.passive.MooshroomEntity;
+import net.minecraft.entity.passive.OcelotEntity;
 import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PotionEntity;
@@ -63,6 +64,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.EntityEvent.EnteringChunk;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
@@ -173,7 +175,7 @@ public class EnvironmentalEvents {
                     Item item = projectileitem.getItem().getItem();
                     if (item == Items.SNOWBALL)
                         slabfish.setSlabfishOverlay(SlabfishOverlay.SNOWY);
-                    else if (item == Items.EGG || item == EnvironmentalItems.DUCK_EGG.get()) slabfish.setSlabfishOverlay(SlabfishOverlay.EGG);
+                    else if (item.isIn(Tags.Items.EGGS)) slabfish.setSlabfishOverlay(SlabfishOverlay.EGG);
                 }
             }
         }
@@ -295,10 +297,13 @@ public class EnvironmentalEvents {
 				chicken.goalSelector.addGoal(2, new ChickenLayEggInNestGoal(chicken, 1.0D));
 			}
 		}
-		
-		if(event.getEntity() instanceof WolfEntity) {
+		else if(event.getEntity() instanceof WolfEntity) {
 			WolfEntity wolf = (WolfEntity)event.getEntity();
 			wolf.targetSelector.addGoal(4, new NonTamedTargetGoal<>(wolf, AnimalEntity.class, false, (entity) -> entity.getType() == EnvironmentalEntities.DEER.get()));
+		}
+		else if(event.getEntity() instanceof OcelotEntity) {
+			OcelotEntity ocelot = (OcelotEntity)event.getEntity();
+			ocelot.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(ocelot, AnimalEntity.class, 10, false, false, (entity) -> entity.getType() == EnvironmentalEntities.DUCK.get()));
 		}
 	}
 }
