@@ -1,15 +1,19 @@
 package com.minecraftabnormals.environmental.common.item;
 
 import com.minecraftabnormals.environmental.core.Environmental;
+import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.IArmorMaterial;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.util.NonNullList;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -41,5 +45,10 @@ public class YakPantsItem extends ArmorItem {
 			mount.addPotionEffect(new EffectInstance(Effects.REGENERATION, 60));
 			mount.addPotionEffect(new EffectInstance(Effects.SPEED, 60, 1));
 		}
+	}
+	
+	@Override
+	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+		ItemStackUtils.fillAfterItemForGroup(this.asItem(), Items.TURTLE_HELMET, group, items);
 	}
 }

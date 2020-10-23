@@ -169,8 +169,8 @@ public class DeerEntity extends AnimalEntity {
 			if (item == Items.MELON_SLICE) {
 				this.floweringTime += 200;
 				this.particleCloud(ParticleTypes.HAPPY_VILLAGER);
-				return ActionResultType.SUCCESS;
 				this.consumeItemFromStack(player, stack);
+				return ActionResultType.SUCCESS;
 			} else if (item == Items.GLISTERING_MELON_SLICE) {
 				this.floweringTime += 600;
 				this.particleCloud(ParticleTypes.HAPPY_VILLAGER);
