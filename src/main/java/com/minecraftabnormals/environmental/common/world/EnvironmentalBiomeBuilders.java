@@ -9,7 +9,7 @@ public class EnvironmentalBiomeBuilders {
     public static final Biome.Builder MARSH         = createMarshBiome(-0.25F, 0.0F);
     public static final Biome.Builder BLOSSOM_WOODS = createBlossomBiome(0.1F, 0.2F);
     public static final Biome.Builder BLOSSOM_HILLS = createBlossomBiome(0.45F, 0.3F);
-    public static final Biome.Builder BLOSSOM_HIGHLANDS = createBlossomBiome(1.4F, 0.25F);
+    public static final Biome.Builder BLOSSOM_HIGHLANDS = createBlossomBiome(1.9F, 0.2F);
     public static final Biome.Builder BLOSSOM_VALLEYS 	= createBlossomBiome(0.1F, 0.01F);
     
     private static Biome.Builder createMarshBiome(float depth, float scale) {

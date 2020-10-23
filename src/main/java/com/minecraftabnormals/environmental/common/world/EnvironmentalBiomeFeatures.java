@@ -144,11 +144,13 @@ public class EnvironmentalBiomeFeatures {
     public static void addCherryTrees(Biome biomeIn) {
         biomeIn.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.withConfiguration(new MultipleRandomFeatureConfig(ImmutableList.of(Feature.field_236291_c_.withConfiguration(EnvironmentalFeatureConfigs.CHERRY_TREE_CONFIG).withChance(0.1F)), Feature.field_236291_c_.withConfiguration(EnvironmentalFeatureConfigs.CHERRY_TREE_WITH_FEW_BEEHIVES_CONFIG))).withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(7, 0.1F, 1))));
 		biomeIn.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.FALLEN_LEAVES.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(64))));
+		biomeIn.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.field_236291_c_.withConfiguration(DefaultBiomeFeatures.BIRCH_TREE_CONFIG_CLASH).withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(1, 0.2F, 2))));
     }
     
     public static void addValleyCherryTrees(Biome biomeIn) {
         biomeIn.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.withConfiguration(new MultipleRandomFeatureConfig(ImmutableList.of(Feature.field_236291_c_.withConfiguration(EnvironmentalFeatureConfigs.CHERRY_TREE_CONFIG).withChance(0.1F)), Feature.field_236291_c_.withConfiguration(EnvironmentalFeatureConfigs.CHERRY_TREE_WITH_MORE_BEEHIVES_CONFIG))).withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(0, 0.1F, 1))));
 		biomeIn.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.FALLEN_LEAVES.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(4))));
+		biomeIn.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.field_236291_c_.withConfiguration(DefaultBiomeFeatures.BIRCH_TREE_CONFIG_CLASH).withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(0, 0.02F, 1))));
     }
     
     public static void addGrass(Biome biomeIn) {
