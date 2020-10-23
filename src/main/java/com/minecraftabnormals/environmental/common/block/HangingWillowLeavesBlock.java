@@ -90,16 +90,9 @@ public class HangingWillowLeavesBlock extends Block implements IForgeShearable {
     }
 
     @Override
-    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-        if (ItemStackUtils.isInGroup(this.asItem(), group)) {
-            int targetIndex = ItemStackUtils.findIndexOfItem(Items.VINE, items);
-            if (targetIndex != -1) {
-                items.add(targetIndex + 1, new ItemStack(this));
-            } else {
-                super.fillItemGroup(group, items);
-            }
-        }
-    }
+	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+		ItemStackUtils.fillAfterItemForGroup(this.asItem(), Items.VINE, group, items);
+	}
 
     @Override
     @Nullable
