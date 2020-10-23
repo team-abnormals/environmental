@@ -51,14 +51,7 @@ public class TallDeadBushBlock extends DoublePlantBlock implements net.minecraft
 
 	@Override
 	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-		if (ItemStackUtils.isInGroup(this.asItem(), group)) {
-			int targetIndex = ItemStackUtils.findIndexOfItem(Items.LARGE_FERN, items);
-			if (targetIndex != -1) {
-				items.add(targetIndex + 1, new ItemStack(this));
-			} else {
-				super.fillItemGroup(group, items);
-			}
-		}
+		ItemStackUtils.fillAfterItemForGroup(this.asItem(), Items.LARGE_FERN, group, items);
 	}
 
 	@Override
@@ -88,6 +81,5 @@ public class TallDeadBushBlock extends DoublePlantBlock implements net.minecraft
 				world.playEvent(player, 2001, blockpos, Block.getStateId(blockstate));
 			}
 		}
-
 	}
 }

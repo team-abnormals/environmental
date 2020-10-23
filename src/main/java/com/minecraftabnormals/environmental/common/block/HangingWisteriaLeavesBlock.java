@@ -6,6 +6,9 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
@@ -13,6 +16,7 @@ import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Direction;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -25,6 +29,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.IForgeShearable;
 
 import javax.annotation.Nullable;
+
+import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
+
 import java.util.Random;
 
 public class HangingWisteriaLeavesBlock extends Block implements IForgeShearable {
@@ -104,17 +111,6 @@ public class HangingWisteriaLeavesBlock extends Block implements IForgeShearable
         return block == getDefaultState().with(HALF, DoubleBlockHalf.UPPER).getBlock() || block.isIn(BlockTags.LEAVES) || block.isIn(BlockTags.LOGS);
     }
 
-    /*
-    @Override
-    public boolean removedByPlayer(BlockState state, World world, BlockPos pos, PlayerEntity player, boolean willHarvest, IFluidState fluid) {
-        if (world.getBlockState(pos.down()) == getDefaultState().with(HALF, DoubleBlockHalf.LOWER)) {
-            world.removeBlock(pos.down(), false);
-        }
-        world.removeBlock(pos, false);
-        return false;
-    }
-    */
-
     @Override
     @Nullable
     public BlockState getStateForPlacement(BlockItemUseContext context) {
@@ -129,4 +125,9 @@ public class HangingWisteriaLeavesBlock extends Block implements IForgeShearable
         }
         return null;
     }
+    
+    @Override
+	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+		ItemStackUtils.fillAfterItemForGroup(this.asItem(), Items.VINE, group, items);
+	}
 }
