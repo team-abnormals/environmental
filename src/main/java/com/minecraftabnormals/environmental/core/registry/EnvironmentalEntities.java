@@ -61,8 +61,8 @@ public class EnvironmentalEntities {
 
     private static void processSpawning(Biome biome) {
         if (biome.getCategory() == Category.SWAMP) {
-            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(EnvironmentalEntities.SLABFISH.get(), 7, 2, 4));
-            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(EnvironmentalEntities.DUCK.get(), 8, 3, 5));
+            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(EnvironmentalEntities.SLABFISH.get(), 8, 2, 4));
+            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(EnvironmentalEntities.DUCK.get(), 5, 3, 5));
         }
         
         if (biome.getCategory() == Category.RIVER) {
