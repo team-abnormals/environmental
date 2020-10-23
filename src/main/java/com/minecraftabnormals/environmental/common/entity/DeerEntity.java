@@ -170,9 +170,11 @@ public class DeerEntity extends AnimalEntity {
 				this.floweringTime += 200;
 				this.particleCloud(ParticleTypes.HAPPY_VILLAGER);
 				return ActionResultType.SUCCESS;
+				this.consumeItemFromStack(player, stack);
 			} else if (item == Items.GLISTERING_MELON_SLICE) {
 				this.floweringTime += 600;
 				this.particleCloud(ParticleTypes.HAPPY_VILLAGER);
+				this.consumeItemFromStack(player, stack);
 				return ActionResultType.SUCCESS;
 			} else if (this.floweringTime > 0 && item.isIn(ItemTags.FLOWERS) && item instanceof BlockItem) {
 				BlockItem block = (BlockItem) item;
@@ -180,6 +182,7 @@ public class DeerEntity extends AnimalEntity {
 					flowers.add(block.getBlock().getDefaultState());
 					this.particleCloud(ParticleTypes.HAPPY_VILLAGER);
 				}
+				this.consumeItemFromStack(player, stack);
 				return ActionResultType.SUCCESS;
 			}
 		}
