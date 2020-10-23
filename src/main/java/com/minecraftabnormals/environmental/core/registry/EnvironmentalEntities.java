@@ -61,20 +61,20 @@ public class EnvironmentalEntities {
 
     private static void processSpawning(Biome biome) {
         if (biome.getCategory() == Category.SWAMP) {
-            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(EnvironmentalEntities.SLABFISH.get(), 6, 2, 4));
+            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(EnvironmentalEntities.SLABFISH.get(), 7, 2, 4));
             biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(EnvironmentalEntities.DUCK.get(), 8, 3, 5));
         }
         
         if (biome.getCategory() == Category.RIVER) {
-            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(EnvironmentalEntities.DUCK.get(), 8, 3, 5));
+            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(EnvironmentalEntities.DUCK.get(), 6, 2, 4));
         }
         
         if (biome.getCategory() == Category.FOREST) {
-            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(EnvironmentalEntities.DEER.get(), 10, 1, 4));
+            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(EnvironmentalEntities.DEER.get(), 12, 1, 4));
         }
 		
 		if(biome.getCategory() == Category.EXTREME_HILLS)
-            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(YAK.get(), 25, 2, 4));
+            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(YAK.get(), 23, 2, 4));
     }
     
     private static void removeSpawns(Biome biome) {
