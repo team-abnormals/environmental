@@ -299,11 +299,11 @@
 	"item.environmental.executioner_cleaver": "Cutelo do executor",
 	
 	"item.environmental.slabfish_spawn_egg": "Ovo gerador de peixe-laje",
-	"item.environmental.axolotl_spawn_egg": "Ovo gerador de axolote",
 	"item.environmental.butterfly_spawn_egg": "Ovo gerador de borboleta",
 	"item.environmental.duck_spawn_egg": "Ovo gerador de pato",
 	"item.environmental.deer_spawn_egg": "Ovo gerador de veado",
 	"item.environmental.yak_spawn_egg": "Ovo gerador de iaque",
+	"item.environmental.koi_spawn_egg": "Ovo gerador de koi",
 	
 	"item.environmental.yak_hair": "Pelo de iaque",
 	"item.environmental.yak_pants": "Calças de iaque",
@@ -321,6 +321,8 @@
 	"item.environmental.fried_egg": "Ovo frito",
 	"item.environmental.scrambled_eggs": "Ovos mexidos",
 	
+	"item.environmental.koi": "Koi",
+	
 	"item.environmental.cod_kelp_roll": "Rolo de alga de bacalhau",
 	"item.environmental.tropical_fish_kelp_roll": "Rolo de alga de peixe tropical",
 	"item.environmental.crab_kelp_roll": "Rolo de alga de caranguejo",
@@ -332,8 +334,8 @@
 	
 	"item.environmental.squid_ink_risotto": "Risoto de tinta de lula",
 	
-	"item.environmental.axolotl_bucket": "Balde com axolote",
 	"item.environmental.slabfish_bucket": "Balde com peixe-laje",
+	"item.environmental.koi_bucket": "Balde com koi",
 	"item.environmental.bottled_butterfly": "Borboleta engarrafada",
 	
 	"item.environmental.mud_ball": "Bola de lama",
@@ -355,11 +357,11 @@
 	"item.environmental.music_disc_leaving_home.desc": "hatsondogs - Leaving Home",
   
 	"entity.environmental.slabfish": "Peixe-laje",
-	"entity.environmental.axolotl": "Axolote",
 	"entity.environmental.duck": "Pato",
 	"entity.environmental.butterfly": "Borboleta",
 	"entity.environmental.deer": "Cervo",
 	"entity.environmental.yak": "Iaque",
+	"entity.environmental.koi": "Koi",
 	
 	"entity.minecraft.villager.environmental.ceramist": "Ceramista",
 	"entity.minecraft.villager.environmental.carpenter": "Carpinteiro",
@@ -387,9 +389,6 @@
   	"enchantment.environmental.travelling": "Viajando",
   	"enchantment.environmental.travelling.desc": "Aumenta a velocidade de movimento em 5% por nível",
 	
-	"advancements.husbandry.equip_axolotl.title": "Perdido no mar, mas não sozinho!",
-	"advancements.husbandry.equip_axolotl.description": "Seja curado por um axolote que se prendeu a você!",
-	
 	"advancements.husbandry.breed_all_slabfish.title": "Genética Esquisita",
 	"advancements.husbandry.breed_all_slabfish.description": "Acasale todas as variações de peixe-laje!",
 	
@@ -407,6 +406,8 @@
   	"subtitles.entity.slabfish.transform": "Peixe-laje se transforma",
 	"subtitles.entity.slabfish.backpack": "Mochila equipada",
 	"subtitles.entity.slabfish.sweater": "Suéter equipado",
+	
+	"subtitles.entity.koi.flop": "Koi saltitando",
 
 	"entity.environmental.slabfish.baby": "Bebê",
 	
