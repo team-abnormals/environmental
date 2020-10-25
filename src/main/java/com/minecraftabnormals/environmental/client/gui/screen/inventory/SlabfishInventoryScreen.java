@@ -40,8 +40,8 @@ public class SlabfishInventoryScreen extends ContainerScreen<SlabfishInventoryCo
         if (this.slabfish.hasBackpack()) {
             this.blit(matrixStack, i + 79, j + 17, 0, this.ySize, 5 * 18, 54);
 
-            SlabfishType slabfishType = this.slabfishManager.getSlabfishType(this.slabfish.getSlabfishType());
-            if (slabfishType.getCustomBackpack() == null || !this.slabfishManager.hasBackpackType(slabfishType.getCustomBackpack()))
+            SlabfishType slabfishType = this.slabfishManager.getSlabfishType(this.slabfish.getSlabfishType()).orElse(SlabfishManager.DEFAULT_SLABFISH);
+            if (slabfishType.getCustomBackpack() == null || !this.slabfishManager.getBackpackType(slabfishType.getCustomBackpack()).isPresent())
                 this.blit(matrixStack, i + 7, j + 53, 0, 220, 18, 18);
         }
 

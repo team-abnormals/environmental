@@ -1,11 +1,5 @@
 package com.minecraftabnormals.environmental.common.entity;
 
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-import javax.annotation.Nullable;
-
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.minecraftabnormals.environmental.common.entity.goals.SlabbyBreedGoal;
@@ -28,29 +22,14 @@ import com.minecraftabnormals.environmental.core.registry.EnvironmentalEntities;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalSounds;
 import com.teamabnormals.abnormals_core.core.library.api.IBucketableEntity;
-
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.AgeableEntity;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntitySize;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ILivingEntityData;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.Pose;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.AvoidEntityGoal;
-import net.minecraft.entity.ai.goal.LookAtGoal;
-import net.minecraft.entity.ai.goal.LookRandomlyGoal;
-import net.minecraft.entity.ai.goal.RandomWalkingGoal;
-import net.minecraft.entity.ai.goal.SitGoal;
-import net.minecraft.entity.ai.goal.SwimGoal;
-import net.minecraft.entity.ai.goal.TemptGoal;
+import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.item.BoatEntity;
 import net.minecraft.entity.item.ItemEntity;
@@ -79,16 +58,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EntityPredicates;
-import net.minecraft.util.Hand;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.Util;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
@@ -100,6 +70,11 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.fml.network.PacketDistributor;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class SlabfishEntity extends TameableEntity implements IInventoryChangedListener, IBucketableEntity {
 
@@ -128,8 +103,8 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
     public boolean isPartying = false;
     BlockPos jukeboxPosition;
 
-    public SlabfishEntity(EntityType<? extends SlabfishEntity> type, World worldIn) {
-        super(type, worldIn);
+    public SlabfishEntity(EntityType<? extends SlabfishEntity> event, World worldIn) {
+        super(event, worldIn);
         this.setPathPriority(PathNodeType.WATER, 0.0F);
         this.slabfishBackpack = new SlabfishInventory(this);
         this.slabfishBackpack.addListener(this);
@@ -209,9 +184,9 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         Item item = stack.getItem();
 
         SlabfishManager slabfishManager = SlabfishManager.get(this.world);
-        SlabfishType slabfishType = slabfishManager.getSlabfishType(this.getSlabfishType());
+        SlabfishType slabfishType = slabfishManager.getSlabfishType(this.getSlabfishType()).orElse(SlabfishManager.DEFAULT_SLABFISH);
         
-        if (this.hasBackpack() && (slabfishType.getCustomBackpack() == null || !slabfishManager.hasBackpackType(slabfishType.getCustomBackpack())) && slabfishManager.hasBackpackType(stack) && !slabfishManager.getBackpackType(stack).getRegistryName().equals(this.getBackpack())) {
+        if (this.hasBackpack() && (slabfishType.getCustomBackpack() == null || !slabfishManager.getBackpackType(slabfishType.getCustomBackpack()).isPresent()) && slabfishManager.getBackpackType(stack).isPresent() && !slabfishManager.getBackpackType(stack).orElse(SlabfishManager.BROWN_BACKPACK).getRegistryName().equals(this.getBackpack())) {
             if (!this.world.isRemote()) {
                 ItemStack previousBackpack = this.slabfishBackpack.getStackInSlot(2);
 
@@ -225,7 +200,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
             }
             return ActionResultType.SUCCESS;
             
-        } else if (slabfishManager.hasSweaterType(stack) && !player.isSecondaryUseActive() && (!this.hasSweater() || !slabfishManager.getSweaterType(stack).getRegistryName().equals(this.getSweater()))) {
+        } else if (slabfishManager.getSweaterType(stack).isPresent() && !player.isSecondaryUseActive() && (!this.hasSweater() || !slabfishManager.getSweaterType(stack).orElse(SlabfishManager.EMPTY_SWEATER).getRegistryName().equals(this.getSweater()))) {
             if (!this.world.isRemote()) {
                 ItemStack previousSweater = this.slabfishBackpack.getStackInSlot(0);
 
@@ -586,13 +561,13 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         if (!this.world.isRemote() && name != null && !this.getSlabfishType().equals(SlabfishManager.GHOST)) {
             super.setCustomName(name);
             SlabfishManager slabfishManager = SlabfishManager.get(this.world);
-            SlabfishType currentType = slabfishManager.getSlabfishType(this.getSlabfishType());
-            SlabfishType newType = slabfishManager.getSlabfishType(SlabfishConditionContext.of(this));
-            if(!currentType.isTradable() && newType.isTradable())
-                return;
-            if (newType.getRegistryName() != this.getSlabfishType()) {
-                this.setSlabfishType(newType.getRegistryName());
-            }
+            SlabfishType currentType = slabfishManager.getSlabfishType(this.getSlabfishType()).orElse(SlabfishManager.DEFAULT_SLABFISH);
+            slabfishManager.getSlabfishType(SlabfishConditionContext.rename(this)).ifPresent(newType->{
+                if(!currentType.isTradable() && newType.isTradable())
+                    return;
+                if (newType.getRegistryName() != this.getSlabfishType())
+                    this.setSlabfishType(newType.getRegistryName());
+            });
         }
     }
 
@@ -606,13 +581,14 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         UUID uuid = lightningBolt.getUniqueID();
         if (!this.world.isRemote() && !uuid.equals(this.lightningUUID) && !this.getSlabfishType().equals(SlabfishManager.GHOST)) {
             SlabfishManager slabfishManager = SlabfishManager.get(this.world);
-            SlabfishType currentType = slabfishManager.getSlabfishType(this.getSlabfishType());
-            SlabfishType newType = slabfishManager.getSlabfishType(SlabfishConditionContext.lightning(this));
-            if(!currentType.isTradable() && newType.isTradable())
-                return;
-            this.setSlabfishType(newType.getRegistryName());
-            this.lightningUUID = uuid;
-            this.playSound(SoundEvents.ENTITY_LIGHTNING_BOLT_THUNDER, 2.0F, 1.0F);
+            SlabfishType currentType = slabfishManager.getSlabfishType(this.getSlabfishType()).orElse(SlabfishManager.DEFAULT_SLABFISH);
+            slabfishManager.getSlabfishType(SlabfishConditionContext.lightning(this)).ifPresent(newType->{
+                if(!currentType.isTradable() && newType.isTradable())
+                    return;
+                this.setSlabfishType(newType.getRegistryName());
+                this.lightningUUID = uuid;
+                this.playSound(SoundEvents.ENTITY_LIGHTNING_BOLT_THUNDER, 2.0F, 1.0F);
+            });
         }
     }
 
@@ -620,8 +596,8 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
         return this.dataManager.get(SLABFISH_TYPE);
     }
 
-    public void setSlabfishType(ResourceLocation type) {
-        this.dataManager.set(SLABFISH_TYPE, type);
+    public void setSlabfishType(ResourceLocation event) {
+        this.dataManager.set(SLABFISH_TYPE, event);
         this.updateBackpack();
     }
 
@@ -647,23 +623,23 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
         SlabfishManager slabfishManager = SlabfishManager.get(world);
         SlabfishRarity rarity = SlabfishRarity.byChance(world.getRandom().nextFloat());
-        ResourceLocation type = reason == SpawnReason.BUCKET ? slabfishManager.getRandomSlabfishType(slabfishType -> slabfishType.isModLoaded() && slabfishType.isTradable() && slabfishType.getRarity() == rarity, world.getRandom()).getRegistryName() : slabfishManager.getSlabfishType(__ -> true, SlabfishConditionContext.of(this)).getRegistryName();
+        ResourceLocation event = reason == SpawnReason.BUCKET ? slabfishManager.getRandomSlabfishType(slabfishType -> slabfishType.isModLoaded() && slabfishType.isTradable() && slabfishType.getRarity() == rarity, world.getRandom()).orElse(SlabfishManager.DEFAULT_SLABFISH).getRegistryName() : slabfishManager.getSlabfishType(SlabfishConditionContext.spawned(this)).orElse(SlabfishManager.DEFAULT_SLABFISH).getRegistryName();
 
         if (spawnDataIn instanceof SlabfishEntity.SlabfishData) {
-            type = ((SlabfishEntity.SlabfishData) spawnDataIn).type;
+            event = ((SlabfishEntity.SlabfishData) spawnDataIn).event;
         } else if (!this.isFromBucket()) {
-            spawnDataIn = new SlabfishEntity.SlabfishData(type);
+            spawnDataIn = new SlabfishEntity.SlabfishData(event);
         }
 
-        this.setSlabfishType(type);
+        this.setSlabfishType(event);
         return spawnDataIn;
     }
 
     public static class SlabfishData extends AgeableData implements ILivingEntityData {
-        public final ResourceLocation type;
+        public final ResourceLocation event;
 
-        public SlabfishData(ResourceLocation type) {
-            this.type = type;
+        public SlabfishData(ResourceLocation event) {
+            this.event = event;
         }
     }
 
@@ -704,7 +680,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
     private void updateSweater() {
         if (!this.world.isRemote()) {
             ItemStack sweaterStack = this.slabfishBackpack.getStackInSlot(0);
-            SweaterType sweaterType = SlabfishManager.get(this.world).getSweaterType(sweaterStack);
+            SweaterType sweaterType = SlabfishManager.get(this.world).getSweaterType(sweaterStack).orElse(SlabfishManager.EMPTY_SWEATER);
             if (!sweaterType.isEmpty()) {
                 this.setSweater(sweaterType.getRegistryName());
             } else {
@@ -716,16 +692,16 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
     private void updateBackpack() {
         if (!this.world.isRemote()) {
             SlabfishManager slabfishManager = SlabfishManager.get(this.world);
-            SlabfishType slabfishType = slabfishManager.getSlabfishType(this.getSlabfishType());
+            SlabfishType slabfishType = slabfishManager.getSlabfishType(this.getSlabfishType()).orElse(SlabfishManager.DEFAULT_SLABFISH);
             ResourceLocation backpackType = slabfishType.getCustomBackpack();
 
-            if (backpackType != null && slabfishManager.hasBackpackType(backpackType)) {
+            if (backpackType != null && slabfishManager.getBackpackType(backpackType).isPresent()) {
                 this.setBackpack(backpackType);
                 if (!this.slabfishBackpack.getStackInSlot(2).isEmpty())
                     this.entityDropItem(this.slabfishBackpack.removeStackFromSlot(2));
             } else {
                 ItemStack backpackColorStack = this.slabfishBackpack.getStackInSlot(2);
-                this.setBackpack(SlabfishManager.get(this.world).getBackpackType(backpackColorStack).getRegistryName());
+                this.setBackpack(SlabfishManager.get(this.world).getBackpackType(backpackColorStack).orElse(SlabfishManager.BROWN_BACKPACK).getRegistryName());
             }
         }
     }

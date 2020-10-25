@@ -19,7 +19,7 @@ import java.lang.reflect.Type;
 import java.util.function.Predicate;
 
 /**
- * <p>A single type of slabfish that exists.</p>
+ * <p>A single event of slabfish that exists.</p>
  *
  * @author Ocelot
  */
@@ -50,7 +50,7 @@ public class SlabfishType implements Predicate<SlabfishConditionContext> {
      * Creates a new {@link SlabfishType} from the specified {@link PacketBuffer} on the client side.
      *
      * @param buf The buffer to read from
-     * @return A new slabfish type created from the data in the buffer
+     * @return A new slabfish event created from the data in the buffer
      */
     @OnlyIn(Dist.CLIENT)
     public static SlabfishType readFrom(PacketBuffer buf) {
@@ -80,7 +80,7 @@ public class SlabfishType implements Predicate<SlabfishConditionContext> {
     }
 
     /**
-     * Sets the registry name of this slabfish type.
+     * Sets the registry name of this slabfish event.
      *
      * @param registryName The new registry name for this slabfish
      */
@@ -92,7 +92,7 @@ public class SlabfishType implements Predicate<SlabfishConditionContext> {
     }
 
     /**
-     * @return The display name to use when showing this type
+     * @return The display name to use when showing this event
      */
     public ITextComponent getDisplayName() {
         return displayName;
@@ -114,7 +114,7 @@ public class SlabfishType implements Predicate<SlabfishConditionContext> {
     }
 
     /**
-     * @return The type of backpack this slabfish should use
+     * @return The event of backpack this slabfish should use
      */
     @Nullable
     public ResourceLocation getCustomBackpack() {
@@ -136,7 +136,7 @@ public class SlabfishType implements Predicate<SlabfishConditionContext> {
     }
 
     /**
-     * @return Whether or not this type should be loaded only if a mod with a provided name is loaded
+     * @return Whether or not this event should be loaded only if a mod with a provided name is loaded
      */
     public boolean isModLoaded() {
         return modLoaded;
@@ -178,7 +178,7 @@ public class SlabfishType implements Predicate<SlabfishConditionContext> {
     }
 
     /**
-     * <p>Deserializes a slabfish type from JSON.</p>
+     * <p>Deserializes a slabfish event from JSON.</p>
      *
      * @author Ocelot
      */
@@ -194,7 +194,7 @@ public class SlabfishType implements Predicate<SlabfishConditionContext> {
         }
 
         @Override
-        public SlabfishType deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException {
+        public SlabfishType deserialize(JsonElement json, Type event, JsonDeserializationContext context) throws JsonParseException {
             JsonObject jsonObject = json.getAsJsonObject();
             if (!jsonObject.has("rarity"))
                 throw new JsonSyntaxException("'rarity' is required");

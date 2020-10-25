@@ -31,7 +31,7 @@ import java.util.Random;
  * @author Ocelot
  */
 public class SlabfishConditionContext {
-    private final boolean struckByLightning;
+    private final Event event;
     private final LazyValue<Random> random;
     private final LazyValue<String> name;
     private final LazyValue<BlockPos> pos;
@@ -48,9 +48,9 @@ public class SlabfishConditionContext {
     private final LazyValue<Boolean> breederInsomnia;
     private final Pair<SlabfishType, SlabfishType> parents;
 
-    private SlabfishConditionContext(SlabfishEntity slabfish, boolean struckByLightning, @Nullable ServerPlayerEntity breeder, @Nullable SlabfishEntity parent1, @Nullable SlabfishEntity parent2) {
+    private SlabfishConditionContext(SlabfishEntity slabfish, Event event, @Nullable ServerPlayerEntity breeder, @Nullable SlabfishEntity parent1, @Nullable SlabfishEntity parent2) {
         ServerWorld world = (ServerWorld) slabfish.getEntityWorld();
-        this.struckByLightning = struckByLightning;
+        this.event = event;
         this.random = new LazyValue<>(world::getRandom);
         this.name = new LazyValue<>(() -> slabfish.getDisplayName().getString().trim());
         this.pos = new LazyValue<>(() -> new BlockPos(slabfish.getPositionVec()));
@@ -68,17 +68,27 @@ public class SlabfishConditionContext {
         this.slabfishType = new LazyValue<>(slabfish::getSlabfishType);
         this.breederInsomnia = new LazyValue<>(() -> breeder != null && breeder.getStats().getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)) >= 72000 && world.isNightTime());
         SlabfishManager slabfishManager = SlabfishManager.get(world);
-        this.parents = parent1 != null && parent2 != null ? new ImmutablePair<>(slabfishManager.getSlabfishType(parent1.getSlabfishType()), slabfishManager.getSlabfishType(parent2.getSlabfishType())) : null;
+        this.parents = parent1 != null && parent2 != null ? new ImmutablePair<>(slabfishManager.getSlabfishType(parent1.getSlabfishType()).orElse(SlabfishManager.DEFAULT_SLABFISH), slabfishManager.getSlabfishType(parent2.getSlabfishType()).orElse(SlabfishManager.DEFAULT_SLABFISH)) : null;
     }
 
     /**
-     * Fetches a new context for the specified entity.
+     * Fetches a new context for the specified entity when spawned.
      *
      * @param slabfish The entity to focus on
      * @return A new context with that slabfish as the focus
      */
-    public static SlabfishConditionContext of(SlabfishEntity slabfish) {
-        return new SlabfishConditionContext(slabfish, false, null, null, null);
+    public static SlabfishConditionContext spawned(SlabfishEntity slabfish) {
+        return new SlabfishConditionContext(slabfish, Event.SPAWN, null, null, null);
+    }
+
+    /**
+     * Fetches a new context for the specified entity when renamed.
+     *
+     * @param slabfish The entity to focus on
+     * @return A new context with that slabfish as the focus
+     */
+    public static SlabfishConditionContext rename(SlabfishEntity slabfish) {
+        return new SlabfishConditionContext(slabfish, Event.RENAME, null, null, null);
     }
 
     /**
@@ -88,7 +98,7 @@ public class SlabfishConditionContext {
      * @return A new context with that slabfish as the focus
      */
     public static SlabfishConditionContext lightning(SlabfishEntity slabfish) {
-        return new SlabfishConditionContext(slabfish, true, null, null, null);
+        return new SlabfishConditionContext(slabfish, Event.LIGHTNING, null, null, null);
     }
 
     /**
@@ -101,14 +111,11 @@ public class SlabfishConditionContext {
      * @return A new context with that slabfish as the focus
      */
     public static SlabfishConditionContext breeding(SlabfishEntity slabfish, @Nullable ServerPlayerEntity breeder, SlabfishEntity parent1, SlabfishEntity parent2) {
-        return new SlabfishConditionContext(slabfish, false, breeder, parent1, parent2);
+        return new SlabfishConditionContext(slabfish, Event.BREED, breeder, parent1, parent2);
     }
 
-    /**
-     * @return Whether or not the slabfish was struck by lightning
-     */
-    public boolean isStruckByLightning() {
-        return struckByLightning;
+    public Event getAction() {
+        return event;
     }
 
     /**
@@ -225,5 +232,12 @@ public class SlabfishConditionContext {
     @Nullable
     public Pair<SlabfishType, SlabfishType> getParentTypes() {
         return this.parents;
+    }
+
+    /**
+     * The type a context can be fired under.
+     */
+    public enum Event {
+        SPAWN, RENAME, LIGHTNING, BREED
     }
 }

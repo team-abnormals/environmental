@@ -52,8 +52,8 @@ public class SlabfishInventoryContainer extends Container {
                         if (this.getSlotIndex() != 2)
                             return true;
                         SlabfishManager slabfishManager = SlabfishManager.get(slabfish.getEntityWorld());
-                        SlabfishType slabfishType = slabfishManager.getSlabfishType(slabfish.getSlabfishType());
-                        return slabfish.hasBackpack() && (slabfishType.getCustomBackpack() == null || !slabfishManager.hasBackpackType(slabfishType.getCustomBackpack()));
+                        SlabfishType slabfishType = slabfishManager.getSlabfishType(slabfish.getSlabfishType()).orElse(SlabfishManager.DEFAULT_SLABFISH);
+                        return slabfish.hasBackpack() && (slabfishType.getCustomBackpack() == null || !slabfishManager.getBackpackType(slabfishType.getCustomBackpack()).isPresent());
                     }
                 }).setBackground(PlayerContainer.LOCATION_BLOCKS_TEXTURE, SLOT_INDEX_NAMES[i]);
             }

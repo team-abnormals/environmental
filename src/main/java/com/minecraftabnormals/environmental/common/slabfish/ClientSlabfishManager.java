@@ -3,10 +3,7 @@ package com.minecraftabnormals.environmental.common.slabfish;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -64,66 +61,38 @@ public final class ClientSlabfishManager implements SlabfishManager {
     }
 
     @Override
-    public SlabfishType getSlabfishType(ResourceLocation registryName) {
-        return this.slabfishTypes.getOrDefault(registryName, DEFAULT_SLABFISH);
+    public Optional<SlabfishType> getSlabfishType(ResourceLocation registryName) {
+        return Optional.ofNullable(this.slabfishTypes.get(registryName));
     }
 
     @Override
-    public SweaterType getSweaterType(ResourceLocation registryName) {
-        return this.sweaterTypes.getOrDefault(registryName, EMPTY_SWEATER);
+    public Optional<SweaterType> getSweaterType(ResourceLocation registryName) {
+        return Optional.ofNullable(this.sweaterTypes.get(registryName));
     }
 
     @Override
-    public BackpackType getBackpackType(ResourceLocation registryName) {
-        return this.backpackTypes.getOrDefault(registryName, BROWN_BACKPACK);
+    public Optional<BackpackType> getBackpackType(ResourceLocation registryName) {
+        return Optional.ofNullable(this.backpackTypes.get(registryName));
     }
 
     @Override
-    public SlabfishType getSlabfishType(Predicate<SlabfishType> predicate, SlabfishConditionContext context) {
+    public Optional<SlabfishType> getSlabfishType(Predicate<SlabfishType> predicate, SlabfishConditionContext context) {
         throw new UnsupportedOperationException("Client does not have access to select random slabfish");
     }
 
     @Override
-    public SweaterType getSweaterType(ItemStack stack) {
-        if (this.sweaterTypes.isEmpty())
-            return EMPTY_SWEATER;
-        return this.sweaterTypes.values().stream().filter(sweaterType -> sweaterType.test(stack)).findFirst().orElse(EMPTY_SWEATER);
+    public Optional<SweaterType> getSweaterType(ItemStack stack) {
+        return this.sweaterTypes.values().stream().filter(sweaterType -> sweaterType.test(stack)).findFirst();
     }
 
     @Override
-    public BackpackType getBackpackType(ItemStack stack) {
-        if (this.backpackTypes.isEmpty())
-            return BROWN_BACKPACK;
-        return this.backpackTypes.values().stream().filter(backpackType -> backpackType.test(stack)).findFirst().orElse(BROWN_BACKPACK);
+    public Optional<BackpackType> getBackpackType(ItemStack stack) {
+        return this.backpackTypes.values().stream().filter(backpackType -> backpackType.test(stack)).findFirst();
     }
 
     @Override
-    public SlabfishType getRandomSlabfishType(Predicate<SlabfishType> predicate, Random random) {
+    public Optional<SlabfishType> getRandomSlabfishType(Predicate<SlabfishType> predicate, Random random) {
         throw new UnsupportedOperationException("Client does not have access to select random slabfish");
-    }
-
-    @Override
-    public boolean hasSweaterType(ResourceLocation registryName) {
-        return this.sweaterTypes.containsKey(registryName);
-    }
-
-    @Override
-    public boolean hasBackpackType(ResourceLocation registryName) {
-        return this.backpackTypes.containsKey(registryName);
-    }
-
-    @Override
-    public boolean hasSweaterType(ItemStack stack) {
-        if (this.sweaterTypes.isEmpty())
-            return false;
-        return this.sweaterTypes.values().stream().anyMatch(sweaterType -> sweaterType.test(stack));
-    }
-
-    @Override
-    public boolean hasBackpackType(ItemStack stack) {
-        if (this.backpackTypes.isEmpty())
-            return false;
-        return this.backpackTypes.values().stream().anyMatch(backpackType -> backpackType.test(stack));
     }
 
     @Override

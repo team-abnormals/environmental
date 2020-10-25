@@ -7,6 +7,13 @@
   "mod": "atmospheric",
   "conditions": [
     {
+      "type": "event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
       "type": "or",
       "conditions": [
         {

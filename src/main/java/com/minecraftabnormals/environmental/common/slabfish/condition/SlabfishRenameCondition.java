@@ -51,6 +51,6 @@ public class SlabfishRenameCondition implements SlabfishCondition {
 
     @Override
     public boolean test(SlabfishConditionContext context) {
-        return this.pattern.matcher(context.getName()).matches();
+        return context.getAction() == SlabfishConditionContext.Event.RENAME && this.pattern.matcher(context.getName()).matches();
     }
 }

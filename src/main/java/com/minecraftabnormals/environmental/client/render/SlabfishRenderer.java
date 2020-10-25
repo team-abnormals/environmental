@@ -40,7 +40,7 @@ public class SlabfishRenderer extends MobRenderer<SlabfishEntity, SlabfishModel<
         if (p_230496_3_) {
             return RenderType.func_239268_f_(texture);
         } else if (p_230496_2_) {
-            return SlabfishManager.get(slabby.world).getSlabfishType(slabby.getSlabfishType()).isTranslucent() ? RenderType.getEntityTranslucent(texture) : this.entityModel.getRenderType(texture);
+            return SlabfishManager.get(slabby.world).getSlabfishType(slabby.getSlabfishType()).orElse(SlabfishManager.DEFAULT_SLABFISH).isTranslucent() ? RenderType.getEntityTranslucent(texture) : this.entityModel.getRenderType(texture);
         } else {
             return p_230496_4_ ? RenderType.getOutline(texture) : null;
         }

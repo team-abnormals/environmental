@@ -85,7 +85,7 @@ public class SlabfishBucketItem extends BucketItem {
             SlabfishManager slabfishManager = SlabfishManager.get(worldIn);
 
             if (compoundnbt.contains("SlabfishType", Constants.NBT.TAG_STRING)) {
-                SlabfishType slabfishType = slabfishManager.getSlabfishType(LOCATION_CACHE.computeIfAbsent(compoundnbt.getString("SlabfishType"), ResourceLocation::new));
+                SlabfishType slabfishType = slabfishManager.getSlabfishType(LOCATION_CACHE.computeIfAbsent(compoundnbt.getString("SlabfishType"), ResourceLocation::new)).orElse(SlabfishManager.DEFAULT_SLABFISH);
                 if (slabfishType != SlabfishManager.DEFAULT_SLABFISH)
                     tooltip.add(slabfishType.getDisplayName().deepCopy().mergeStyle(TextFormatting.ITALIC, slabfishType.getRarity().getFormatting()));
             }
@@ -93,7 +93,7 @@ public class SlabfishBucketItem extends BucketItem {
                 tooltip.add((new TranslationTextComponent("entity.environmental.slabfish.baby").mergeStyle(TextFormatting.ITALIC, TextFormatting.GRAY)));
             }
             if (compoundnbt.contains("BackpackType", Constants.NBT.TAG_STRING)) {
-                BackpackType backpackType = slabfishManager.getBackpackType(LOCATION_CACHE.computeIfAbsent(compoundnbt.getString("BackpackType"), ResourceLocation::new));
+                BackpackType backpackType = slabfishManager.getBackpackType(LOCATION_CACHE.computeIfAbsent(compoundnbt.getString("BackpackType"), ResourceLocation::new)).orElse(SlabfishManager.BROWN_BACKPACK);
                 tooltip.add(backpackType.getDisplayName().deepCopy().mergeStyle(TextFormatting.ITALIC, TextFormatting.GRAY));
             }
 
@@ -107,7 +107,7 @@ public class SlabfishBucketItem extends BucketItem {
                     int index = slotNbt.getByte("Slot") & 255;
                     if (index == 0) {
                         ItemStack slotStack = ItemStack.read(slotNbt);
-                        SWEATER_TYPE_CACHE.setRight(slabfishManager.hasSweaterType(slotStack) ? slabfishManager.getSweaterType(slotStack) : SlabfishManager.EMPTY_SWEATER);
+                        SWEATER_TYPE_CACHE.setRight(slabfishManager.getSweaterType(slotStack).orElse(SlabfishManager.EMPTY_SWEATER));
                         break;
                     }
                 }

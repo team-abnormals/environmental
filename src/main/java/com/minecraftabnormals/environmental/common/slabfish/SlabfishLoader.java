@@ -21,10 +21,7 @@ import net.minecraftforge.fml.network.PacketDistributor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.function.Predicate;
 
 /**
@@ -115,69 +112,39 @@ public class SlabfishLoader extends JsonReloadListener implements SlabfishManage
     }
 
     @Override
-    public SlabfishType getSlabfishType(ResourceLocation registryName) {
-        return this.slabfishTypes.getOrDefault(registryName, DEFAULT_SLABFISH);
+    public Optional<SlabfishType> getSlabfishType(ResourceLocation registryName) {
+        return Optional.ofNullable(this.slabfishTypes.get(registryName));
     }
 
     @Override
-    public SweaterType getSweaterType(ResourceLocation registryName) {
-        return this.sweaterTypes.getOrDefault(registryName, EMPTY_SWEATER);
+    public Optional<SweaterType> getSweaterType(ResourceLocation registryName) {
+        return Optional.ofNullable(this.sweaterTypes.get(registryName));
     }
 
     @Override
-    public BackpackType getBackpackType(ResourceLocation registryName) {
-        return this.backpackTypes.getOrDefault(registryName, BROWN_BACKPACK);
+    public Optional<BackpackType> getBackpackType(ResourceLocation registryName) {
+        return Optional.ofNullable(this.backpackTypes.get(registryName));
     }
 
     @Override
-    public SlabfishType getSlabfishType(Predicate<SlabfishType> predicate, SlabfishConditionContext context) {
-        return this.slabfishTypes.values().stream().filter(slabfishType -> predicate.test(slabfishType) && slabfishType.test(context)).max(Comparator.comparingInt(SlabfishType::getPriority)).orElse(DEFAULT_SLABFISH);
+    public Optional<SlabfishType> getSlabfishType(Predicate<SlabfishType> predicate, SlabfishConditionContext context) {
+        return this.slabfishTypes.values().stream().filter(slabfishType -> slabfishType != DEFAULT_SLABFISH && predicate.test(slabfishType) && slabfishType.test(context)).max(Comparator.comparingInt(SlabfishType::getPriority));
     }
 
     @Override
-    public SweaterType getSweaterType(ItemStack stack) {
-        if (this.sweaterTypes.isEmpty())
-            return EMPTY_SWEATER;
-        return this.sweaterTypes.values().stream().filter(sweaterType -> sweaterType.test(stack)).findFirst().orElse(EMPTY_SWEATER);
+    public Optional<SweaterType> getSweaterType(ItemStack stack) {
+        return this.sweaterTypes.values().stream().filter(sweaterType -> sweaterType != EMPTY_SWEATER && sweaterType.test(stack)).findFirst();
     }
 
     @Override
-    public BackpackType getBackpackType(ItemStack stack) {
-        if (this.backpackTypes.isEmpty())
-            return BROWN_BACKPACK;
-        return this.backpackTypes.values().stream().filter(backpackType -> backpackType.test(stack)).findFirst().orElse(BROWN_BACKPACK);
+    public Optional<BackpackType> getBackpackType(ItemStack stack) {
+        return this.backpackTypes.values().stream().filter(backpackType -> backpackType.test(stack)).findFirst();
     }
 
     @Override
-    public SlabfishType getRandomSlabfishType(Predicate<SlabfishType> predicate, Random random) {
-        if (this.slabfishTypes.isEmpty())
-            return DEFAULT_SLABFISH;
+    public Optional<SlabfishType> getRandomSlabfishType(Predicate<SlabfishType> predicate, Random random) {
         SlabfishType[] slabfishTypes = this.slabfishTypes.values().stream().filter(predicate).toArray(SlabfishType[]::new);
-        return slabfishTypes.length == 0 ? DEFAULT_SLABFISH : slabfishTypes[random.nextInt(slabfishTypes.length)];
-    }
-
-    @Override
-    public boolean hasSweaterType(ResourceLocation registryName) {
-        return this.sweaterTypes.containsKey(registryName);
-    }
-
-    @Override
-    public boolean hasBackpackType(ResourceLocation registryName) {
-        return this.backpackTypes.containsKey(registryName);
-    }
-
-    @Override
-    public boolean hasSweaterType(ItemStack stack) {
-        if (this.sweaterTypes.isEmpty())
-            return false;
-        return this.sweaterTypes.values().stream().anyMatch(sweaterType -> sweaterType.test(stack));
-    }
-
-    @Override
-    public boolean hasBackpackType(ItemStack stack) {
-        if (this.backpackTypes.isEmpty())
-            return false;
-        return this.backpackTypes.values().stream().anyMatch(backpackType -> backpackType.test(stack));
+        return slabfishTypes.length == 0 ? Optional.empty() : Optional.of(slabfishTypes[random.nextInt(slabfishTypes.length)]);
     }
 
     @Override

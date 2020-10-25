@@ -6,6 +6,13 @@
   "mod": "autumnity",
   "conditions": [
     {
+      "type": "event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
       "type": "or",
       "conditions": [
         {

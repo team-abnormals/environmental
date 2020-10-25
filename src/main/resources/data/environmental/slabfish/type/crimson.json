@@ -6,6 +6,13 @@
   },
   "conditions": [
     {
+      "type": "event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
       "type": "biome",
       "biome": "minecraft:crimson_forest"
     }

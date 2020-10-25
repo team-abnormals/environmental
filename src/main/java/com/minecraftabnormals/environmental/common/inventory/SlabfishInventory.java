@@ -25,15 +25,15 @@ public class SlabfishInventory extends DynamicInventory {
     public boolean isItemValidForSlot(int index, ItemStack stack) {
         switch (index) {
             case 0:
-                return SlabfishManager.get(this.slabfish.getEntityWorld()).hasSweaterType(stack);
+                return SlabfishManager.get(this.slabfish.getEntityWorld()).getSweaterType(stack).isPresent();
             case 1:
                 return stack.getItem().isIn(Tags.Items.CHESTS_WOODEN);
             case 2:
                 SlabfishManager slabfishManager = SlabfishManager.get(this.slabfish.getEntityWorld());
-                if (!slabfishManager.hasBackpackType(stack))
+                if (!slabfishManager.getBackpackType(stack).isPresent())
                     return false;
-                SlabfishType slabfishType = slabfishManager.getSlabfishType(this.slabfish.getSlabfishType());
-                return this.slabfish.hasBackpack() && (slabfishType.getCustomBackpack() == null || !slabfishManager.hasBackpackType(slabfishType.getCustomBackpack()));
+                SlabfishType slabfishType = slabfishManager.getSlabfishType(this.slabfish.getSlabfishType()).orElse(SlabfishManager.DEFAULT_SLABFISH);
+                return this.slabfish.hasBackpack() && (slabfishType.getCustomBackpack() == null || !slabfishManager.getBackpackType(slabfishType.getCustomBackpack()).isPresent());
             default:
                 return super.isItemValidForSlot(index, stack);
         }

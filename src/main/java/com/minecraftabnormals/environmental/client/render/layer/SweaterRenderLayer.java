@@ -27,7 +27,7 @@ public class SweaterRenderLayer<E extends SlabfishEntity, M extends EntityModel<
     public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, E slabby, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         if (!slabby.hasSweater()) return;
 
-        SweaterType sweaterType = SlabfishManager.get(slabby.getEntityWorld()).getSweaterType(slabby.getSweater());
+        SweaterType sweaterType = SlabfishManager.get(slabby.getEntityWorld()).getSweaterType(slabby.getSweater()).orElse(SlabfishManager.EMPTY_SWEATER);
         if(sweaterType == SlabfishManager.EMPTY_SWEATER)
             return;
 

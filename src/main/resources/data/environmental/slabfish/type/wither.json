@@ -6,6 +6,12 @@
   },
   "conditions": [
     {
+      "type": "event",
+      "events": [
+        "breed"
+      ]
+    },
+    {
       "type": "parents",
       "parentA": "environmental:skeleton",
       "parentB": "environmental:skeleton"
