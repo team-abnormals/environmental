@@ -17,10 +17,6 @@ import java.util.List;
 public class SlabfishBiomeCondition implements SlabfishCondition {
     private final ResourceLocation[] biomes;
 
-    public SlabfishBiomeCondition() {
-        this.biomes = new ResourceLocation[0];
-    }
-
     private SlabfishBiomeCondition(ResourceLocation biomeRegistryName) {
         if (ForgeRegistries.BIOMES.containsKey(biomeRegistryName)) {
             this.biomes = new ResourceLocation[]{biomeRegistryName};
@@ -80,11 +76,6 @@ public class SlabfishBiomeCondition implements SlabfishCondition {
         }
 
         throw new JsonSyntaxException("Either 'biome' or 'category' and 'tempCategory' must be present.");
-    }
-
-    @Override
-    public SlabfishConditionType getType() {
-        return SlabfishConditionType.BIOME;
     }
 
     @Override

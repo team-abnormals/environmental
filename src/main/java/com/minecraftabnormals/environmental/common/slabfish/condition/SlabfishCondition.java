@@ -2,6 +2,9 @@ package com.minecraftabnormals.environmental.common.slabfish.condition;
 
 import com.google.gson.*;
 import com.minecraftabnormals.environmental.common.slabfish.SlabfishType;
+import com.minecraftabnormals.environmental.core.registry.EnvironmentalRegistries;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import java.lang.reflect.Type;
 import java.util.function.Predicate;
@@ -22,32 +25,43 @@ public interface SlabfishCondition extends Predicate<SlabfishConditionContext> {
     boolean test(SlabfishConditionContext context);
 
     /**
-     * @return The type of condition this is
-     */
-    SlabfishConditionType getType();
-
-    /**
      * <p>Deserializes a {@link SlabfishCondition} from JSON.</p>
      *
      * @author Ocelot
      */
     class Deserializer implements JsonDeserializer<SlabfishCondition> {
-        private static SlabfishConditionType deserializeType(JsonElement element) {
-            if (!element.isJsonPrimitive() || !element.getAsJsonPrimitive().isString())
-                throw new JsonSyntaxException("Slabfish condition type expected to be a string");
-            String name = element.getAsString();
-            for (SlabfishConditionType type : SlabfishConditionType.values())
-                if (type.name().equalsIgnoreCase(name))
-                    return type;
-            throw new JsonSyntaxException("Invalid slabfish condition type: " + name);
-        }
-
         @Override
         public SlabfishCondition deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
             JsonObject jsonObject = json.getAsJsonObject();
             if (!jsonObject.has("type"))
                 throw new JsonSyntaxException("Slabfish condition type is required");
-            return deserializeType(jsonObject.get("type")).deserialize(jsonObject, context);
+
+            ResourceLocation type = context.deserialize(jsonObject.get("type"), ResourceLocation.class);
+            if (!EnvironmentalRegistries.SLABFISH_CONDITIONS.containsKey(type))
+                throw new JsonSyntaxException("Invalid slabfish condition type: " + type);
+
+            Factory factory = EnvironmentalRegistries.SLABFISH_CONDITIONS.getValue(type);
+            if (factory == null)
+                throw new JsonSyntaxException("Invalid slabfish condition type: " + type);
+
+            return factory.create(jsonObject, context);
         }
+    }
+
+    /**
+     * <p>Creates new slabfish conditions from JSON.</p>
+     *
+     * @author Ocelot
+     */
+    interface Factory extends IForgeRegistryEntry<Factory> {
+        /**
+         * Creates a new condition from the specified json with the provided context
+         *
+         * @param json    The json to parse
+         * @param context The JSON context
+         * @return A new slabfish condition
+         * @throws JsonParseException If there is any issue with the json
+         */
+        SlabfishCondition create(JsonObject json, JsonDeserializationContext context) throws JsonParseException;
     }
 }

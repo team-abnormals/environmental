@@ -5,14 +5,14 @@
   },
   "conditions": [
     {
-      "type": "event",
+      "type": "environmental:event",
       "events": [
         "spawn",
         "breed"
       ]
     },
     {
-      "type": "biome",
+      "type": "environmental:biome",
       "category": "icy"
     }
   ]

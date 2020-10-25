@@ -24,11 +24,6 @@ public class SlabfishRaidCondition implements SlabfishCondition {
     }
 
     @Override
-    public SlabfishConditionType getType() {
-        return SlabfishConditionType.RAID;
-    }
-
-    @Override
     public boolean test(SlabfishConditionContext context) {
         return context.isInRaid();
     }

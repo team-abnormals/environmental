@@ -31,11 +31,6 @@ public class SlabfishDimensionCondition implements SlabfishCondition {
     }
 
     @Override
-    public SlabfishConditionType getType() {
-        return SlabfishConditionType.DIMENSION;
-    }
-
-    @Override
     public boolean test(SlabfishConditionContext context) {
         return context.getDimension().equals(this.dimensionRegistryName);
     }

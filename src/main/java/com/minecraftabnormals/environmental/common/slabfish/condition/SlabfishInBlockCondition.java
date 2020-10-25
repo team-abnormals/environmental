@@ -41,11 +41,6 @@ public class SlabfishInBlockCondition implements SlabfishCondition {
     }
 
     @Override
-    public SlabfishConditionType getType() {
-        return SlabfishConditionType.IN_BLOCK;
-    }
-
-    @Override
     public boolean test(SlabfishConditionContext context) {
         return this.block != null ? context.isInBlock(this.block) : context.isInBlock(this.tag);
     }

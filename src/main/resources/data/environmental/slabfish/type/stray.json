@@ -6,18 +6,18 @@
   },
   "conditions": [
     {
-      "type": "event",
+      "type": "environmental:event",
       "events": [
         "breed"
       ]
     },
     {
-      "type": "parents",
+      "type": "environmental:parents",
       "parentA": "environmental:skeleton",
       "parentB": "environmental:skeleton"
     },
     {
-      "type": "biome",
+      "type": "environmental:biome",
       "category": "icy"
     }
   ]

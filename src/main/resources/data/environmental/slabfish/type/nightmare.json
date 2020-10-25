@@ -6,17 +6,17 @@
   },
   "conditions": [
     {
-      "type": "event",
+      "type": "environmental:event",
       "events": [
         "spawn",
         "breed"
       ]
     },
     {
-      "type": "insomnia"
+      "type": "environmental:insomnia"
     },
     {
-      "type": "time",
+      "type": "environmental:time",
       "time": "night"
     }
   ]

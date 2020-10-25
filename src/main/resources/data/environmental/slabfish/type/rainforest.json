@@ -7,37 +7,37 @@
   "mod": "atmospheric",
   "conditions": [
     {
-      "type": "event",
+      "type": "environmental:event",
       "events": [
         "spawn",
         "breed"
       ]
     },
     {
-      "type": "or",
+      "type": "environmental:or",
       "conditions": [
         {
-          "type": "biome",
+          "type": "environmental:biome",
           "biome": "atmospheric:rainforest"
         },
         {
-          "type": "biome",
+          "type": "environmental:biome",
           "biome": "atmospheric:rainforest_mountains"
         },
         {
-          "type": "biome",
+          "type": "environmental:biome",
           "biome": "atmospheric:rainforest_plateau"
         },
         {
-          "type": "biome",
+          "type": "environmental:biome",
           "biome": "atmospheric:sparse_rainforest_plateau"
         },
         {
-          "type": "biome",
+          "type": "environmental:biome",
           "biome": "atmospheric:rainforest_basin"
         },
         {
-          "type": "biome",
+          "type": "environmental:biome",
           "biome": "atmospheric:sparse_rainforest_basin"
         }
       ]

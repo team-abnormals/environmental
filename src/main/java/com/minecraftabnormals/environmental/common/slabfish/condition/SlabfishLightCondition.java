@@ -51,11 +51,6 @@ public class SlabfishLightCondition implements SlabfishCondition {
     }
 
     @Override
-    public SlabfishConditionType getType() {
-        return SlabfishConditionType.LIGHT_LEVEL;
-    }
-
-    @Override
     public boolean test(SlabfishConditionContext context) {
         return this.lightGetter.apply(context) >= this.minLight && this.lightGetter.apply(context) <= this.maxLight;
     }

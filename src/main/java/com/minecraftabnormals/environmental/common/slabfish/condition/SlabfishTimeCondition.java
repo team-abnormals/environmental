@@ -27,11 +27,6 @@ public class SlabfishTimeCondition implements SlabfishCondition {
     }
 
     @Override
-    public SlabfishConditionType getType() {
-        return SlabfishConditionType.TIME;
-    }
-
-    @Override
     public boolean test(SlabfishConditionContext context) {
         return this.day ? context.isDay() : context.isNight();
     }

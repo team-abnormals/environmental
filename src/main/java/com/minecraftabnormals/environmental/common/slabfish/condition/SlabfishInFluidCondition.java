@@ -36,11 +36,6 @@ public class SlabfishInFluidCondition implements SlabfishCondition {
     }
 
     @Override
-    public SlabfishConditionType getType() {
-        return SlabfishConditionType.IN_FLUID;
-    }
-
-    @Override
     public boolean test(SlabfishConditionContext context) {
         return context.isInFluid(this.tag);
     }

@@ -34,11 +34,6 @@ public class SlabfishHeightCondition implements SlabfishCondition {
     }
 
     @Override
-    public SlabfishConditionType getType() {
-        return SlabfishConditionType.HEIGHT;
-    }
-
-    @Override
     public boolean test(SlabfishConditionContext context) {
         return context.getPos().getY() >= this.minHeight && context.getPos().getY() <= this.maxHeight;
     }

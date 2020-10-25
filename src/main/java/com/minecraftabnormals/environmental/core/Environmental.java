@@ -1,30 +1,15 @@
 package com.minecraftabnormals.environmental.core;
 
-import static com.teamabnormals.abnormals_core.core.AbnormalsCore.NETWORK_PROTOCOL;
-
 import com.minecraftabnormals.environmental.client.gui.screen.inventory.KilnScreen;
 import com.minecraftabnormals.environmental.client.gui.screen.inventory.SawmillScreen;
-import com.minecraftabnormals.environmental.common.network.message.CAcknowledgeEnvironmentalMessage;
-import com.minecraftabnormals.environmental.common.network.message.EnvironmentalLoginMessage;
-import com.minecraftabnormals.environmental.common.network.message.SOpenSlabfishInventoryMessage;
-import com.minecraftabnormals.environmental.common.network.message.SSyncBackpackTypeMessage;
-import com.minecraftabnormals.environmental.common.network.message.SSyncSlabfishTypeMessage;
-import com.minecraftabnormals.environmental.common.network.message.SSyncSweaterTypeMessage;
+import com.minecraftabnormals.environmental.common.network.message.*;
 import com.minecraftabnormals.environmental.common.slabfish.SlabfishLoader;
+import com.minecraftabnormals.environmental.common.slabfish.condition.SlabfishCondition;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalClient;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalCompat;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalData;
-import com.minecraftabnormals.environmental.core.registry.EnvironmentalBiomes;
-import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
-import com.minecraftabnormals.environmental.core.registry.EnvironmentalContainerTypes;
-import com.minecraftabnormals.environmental.core.registry.EnvironmentalEnchantments;
-import com.minecraftabnormals.environmental.core.registry.EnvironmentalEntities;
-import com.minecraftabnormals.environmental.core.registry.EnvironmentalFeatures;
-import com.minecraftabnormals.environmental.core.registry.EnvironmentalParticles;
-import com.minecraftabnormals.environmental.core.registry.EnvironmentalRecipes;
-import com.minecraftabnormals.environmental.core.registry.EnvironmentalVillagers;
+import com.minecraftabnormals.environmental.core.registry.*;
 import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
-
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.inventory.container.PlayerContainer;
@@ -35,6 +20,7 @@ import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
@@ -49,11 +35,13 @@ import net.minecraftforge.fml.network.FMLHandshakeHandler;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
+import net.minecraftforge.registries.RegistryBuilder;
+
+import static com.teamabnormals.abnormals_core.core.AbnormalsCore.NETWORK_PROTOCOL;
 
 @Mod(Environmental.MODID)
 @Mod.EventBusSubscriber(modid = Environmental.MODID)
-public class Environmental
-{
+public class Environmental {
     public static final String MODID = "environmental";
     public static final RegistryHelper REGISTRY_HELPER = new RegistryHelper(MODID);
 
@@ -69,8 +57,7 @@ public class Environmental
             .serverAcceptedVersions(NETWORK_PROTOCOL::equals)
             .simpleChannel();
 
-    public Environmental()
-    {
+    public Environmental() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         MinecraftForge.EVENT_BUS.register(this);
 
@@ -86,7 +73,7 @@ public class Environmental
         EnvironmentalBlocks.PAINTINGS.register(modEventBus);
         EnvironmentalBiomes.BIOMES.register(modEventBus);
         EnvironmentalFeatures.FEATURES.register(modEventBus);
-        
+
         EnvironmentalVillagers.POI_TYPES.register(modEventBus);
         EnvironmentalVillagers.PROFESSIONS.register(modEventBus);
 
@@ -95,44 +82,45 @@ public class Environmental
 
         EnvironmentalParticles.PARTICLE_TYPES.register(modEventBus);
         EnvironmentalEnchantments.ENCHANTMENTS.register(modEventBus);
-        
+
+        EnvironmentalSlabfishConditions.SLABFISH_CONDITIONS.register(modEventBus);
+
         modEventBus.addListener(this::setupCommon);
-        DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> 
+        modEventBus.addListener(this::registerRegistries);
+        DistExecutor.runWhenOn(Dist.CLIENT, () -> () ->
         {
             modEventBus.addListener(this::setupClient);
             modEventBus.addListener(this::stitchTextures);
             modEventBus.addListener(this::registerItemColors);
         });
-        
+
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, EnvironmentalConfig.COMMON_SPEC);
     }
 
-    private void setupCommon(final FMLCommonSetupEvent event) 
-    {
-    	DeferredWorkQueue.runLater(() -> 
-    	{
-    		EnvironmentalCompat.registerCompostables();
-    		EnvironmentalCompat.registerFlammables();
+    private void setupCommon(final FMLCommonSetupEvent event) {
+        DeferredWorkQueue.runLater(() ->
+        {
+            EnvironmentalCompat.registerCompostables();
+            EnvironmentalCompat.registerFlammables();
             EnvironmentalCompat.registerDispenserBehaviors();
 
             EnvironmentalData.registerDataSerializers();
-            
-    		EnvironmentalBiomes.addBiomeTypes();
-    		EnvironmentalBiomes.addVanillaBiomeTypes();
-    		EnvironmentalBiomes.addBiomesToGeneration();
-    		EnvironmentalFeatures.generateFeatures();
-    		
-    		EnvironmentalVillagers.registerVillagerTypes();
-    		EnvironmentalVillagers.registerPOIs();
-    		
-    		EnvironmentalEntities.registerSpawns();
-    		EnvironmentalEntities.registerAttributes();
+
+            EnvironmentalBiomes.addBiomeTypes();
+            EnvironmentalBiomes.addVanillaBiomeTypes();
+            EnvironmentalBiomes.addBiomesToGeneration();
+            EnvironmentalFeatures.generateFeatures();
+
+            EnvironmentalVillagers.registerVillagerTypes();
+            EnvironmentalVillagers.registerPOIs();
+
+            EnvironmentalEntities.registerSpawns();
+            EnvironmentalEntities.registerAttributes();
         });
     }
 
     @OnlyIn(Dist.CLIENT)
-    private void setupClient(final FMLClientSetupEvent event)
-    {
+    private void setupClient(final FMLClientSetupEvent event) {
         EnvironmentalEntities.registerRendering();
         DeferredWorkQueue.runLater(() ->
         {
@@ -143,8 +131,7 @@ public class Environmental
         });
     }
 
-    private void setupPlayMessages()
-    {
+    private void setupPlayMessages() {
         PLAY.messageBuilder(SSyncSlabfishTypeMessage.class, 0, NetworkDirection.PLAY_TO_CLIENT).
                 encoder(SSyncSlabfishTypeMessage::serialize).
                 decoder(SSyncSlabfishTypeMessage::deserialize).
@@ -169,8 +156,7 @@ public class Environmental
                 .add();
     }
 
-    private void setupLoginMessages()
-    {
+    private void setupLoginMessages() {
         LOGIN.messageBuilder(CAcknowledgeEnvironmentalMessage.class, 99, NetworkDirection.LOGIN_TO_SERVER).
                 loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex).
                 encoder(CAcknowledgeEnvironmentalMessage::serialize).
@@ -202,7 +188,11 @@ public class Environmental
                 consumer(FMLHandshakeHandler.biConsumerFor((__, msg, ctx) -> SSyncBackpackTypeMessage.handleLogin(msg, ctx))).
                 add();
     }
-    
+
+    private void registerRegistries(RegistryEvent.NewRegistry event) {
+        new RegistryBuilder<SlabfishCondition.Factory>().setName(new ResourceLocation(MODID, "slabfish_condition")).setType(SlabfishCondition.Factory.class).setDefaultKey(new ResourceLocation(MODID, "impossible")).create();
+    }
+
     private void stitchTextures(TextureStitchEvent.Pre event) {
         AtlasTexture texture = event.getMap();
         if (PlayerContainer.LOCATION_BLOCKS_TEXTURE.equals(texture.getTextureLocation())) {
@@ -213,14 +203,12 @@ public class Environmental
     }
 
     @OnlyIn(Dist.CLIENT)
-    private void registerItemColors(ColorHandlerEvent.Item event)
-    {
+    private void registerItemColors(ColorHandlerEvent.Item event) {
         REGISTRY_HELPER.processSpawnEggColors(event);
     }
 
     @SubscribeEvent
-    public void onEvent(AddReloadListenerEvent event)
-    {
+    public void onEvent(AddReloadListenerEvent event) {
         event.addListener(new SlabfishLoader());
     }
 }

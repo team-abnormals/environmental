@@ -30,11 +30,6 @@ public class SlabfishAndCondition implements SlabfishCondition {
     }
 
     @Override
-    public SlabfishConditionType getType() {
-        return SlabfishConditionType.OR;
-    }
-
-    @Override
     public boolean test(SlabfishConditionContext context) {
         for (SlabfishCondition condition : this.conditions)
             if (!condition.test(context))

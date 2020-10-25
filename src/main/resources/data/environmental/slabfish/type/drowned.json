@@ -6,23 +6,23 @@
   },
   "conditions": [
     {
-      "type": "event",
+      "type": "environmental:event",
       "events": [
         "spawn",
         "breed"
       ]
     },
     {
-      "type": "biome",
+      "type": "environmental:biome",
       "category": "ocean"
     },
     {
-      "type": "height",
+      "type": "environmental:height",
       "min": 0,
       "max": 50
     },
     {
-      "type": "in_fluid",
+      "type": "environmental:in_fluid",
       "tag": "minecraft:water"
     }
   ]

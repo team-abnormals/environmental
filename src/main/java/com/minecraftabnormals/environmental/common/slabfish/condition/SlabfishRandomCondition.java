@@ -30,11 +30,6 @@ public class SlabfishRandomCondition implements SlabfishCondition {
     }
 
     @Override
-    public SlabfishConditionType getType() {
-        return SlabfishConditionType.RANDOM;
-    }
-
-    @Override
     public boolean test(SlabfishConditionContext context) {
         return context.getRandom().nextFloat() <= this.chance;
     }

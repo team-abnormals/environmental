@@ -40,11 +40,6 @@ public class SlabfishParentCondition implements SlabfishCondition {
     }
 
     @Override
-    public SlabfishConditionType getType() {
-        return SlabfishConditionType.PARENTS;
-    }
-
-    @Override
     public boolean test(SlabfishConditionContext context) {
         Pair<SlabfishType, SlabfishType> parentTypes = context.getParentTypes();
         if (parentTypes == null)

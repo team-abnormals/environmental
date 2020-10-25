@@ -24,11 +24,6 @@ public class SlabfishImpossibleCondition implements SlabfishCondition {
     }
 
     @Override
-    public SlabfishConditionType getType() {
-        return SlabfishConditionType.IMPOSSIBLE;
-    }
-
-    @Override
     public boolean test(SlabfishConditionContext context) {
         return false;
     }

@@ -6,25 +6,25 @@
   "mod": "autumnity",
   "conditions": [
     {
-      "type": "event",
+      "type": "environmental:event",
       "events": [
         "spawn",
         "breed"
       ]
     },
     {
-      "type": "or",
+      "type": "environmental:or",
       "conditions": [
         {
-          "type": "biome",
+          "type": "environmental:biome",
           "biome": "autumnity:maple_forest"
         },
         {
-          "type": "biome",
+          "type": "environmental:biome",
           "biome": "autumnity:maple_forest_hills"
         },
         {
-          "type": "biome",
+          "type": "environmental:biome",
           "biome": "autumnity:pumpkin_fields"
         }
       ]

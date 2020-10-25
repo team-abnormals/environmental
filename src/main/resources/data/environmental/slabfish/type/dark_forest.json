@@ -6,21 +6,21 @@
   },
   "conditions": [
     {
-      "type": "event",
+      "type": "environmental:event",
       "events": [
         "spawn",
         "breed"
       ]
     },
     {
-      "type": "or",
+      "type": "environmental:or",
       "conditions": [
         {
-          "type": "biome",
+          "type": "environmental:biome",
           "biome": "minecraft:dark_forest"
         },
         {
-          "type": "biome",
+          "type": "environmental:biome",
           "biome": "minecraft:dark_forest_hills"
         }
       ]

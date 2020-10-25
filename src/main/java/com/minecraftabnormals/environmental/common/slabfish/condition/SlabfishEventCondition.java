@@ -47,11 +47,6 @@ public class SlabfishEventCondition implements SlabfishCondition {
     }
 
     @Override
-    public SlabfishConditionType getType() {
-        return SlabfishConditionType.EVENT;
-    }
-
-    @Override
     public boolean test(SlabfishConditionContext context) {
         return ((this.events >> context.getAction().ordinal()) & 1) > 0;
     }

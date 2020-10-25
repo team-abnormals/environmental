@@ -24,11 +24,6 @@ public class SlabfishInsomniaCondition implements SlabfishCondition {
     }
 
     @Override
-    public SlabfishConditionType getType() {
-        return SlabfishConditionType.INSOMNIA;
-    }
-
-    @Override
     public boolean test(SlabfishConditionContext context) {
         return context.isBreederInsomnia();
     }

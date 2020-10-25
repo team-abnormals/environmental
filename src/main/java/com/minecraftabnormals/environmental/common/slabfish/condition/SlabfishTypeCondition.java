@@ -31,11 +31,6 @@ public class SlabfishTypeCondition implements SlabfishCondition {
     }
 
     @Override
-    public SlabfishConditionType getType() {
-        return SlabfishConditionType.SLABFISH_TYPE;
-    }
-
-    @Override
     public boolean test(SlabfishConditionContext context) {
         for (ResourceLocation slabfishType : this.slabfishTypes)
             if (slabfishType.equals(context.getSlabfishType()))
