@@ -6,6 +6,7 @@ import com.minecraftabnormals.environmental.common.slabfish.condition.SlabfishCo
 import com.minecraftabnormals.environmental.common.slabfish.condition.SlabfishConditionContext;
 
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.LazyValue;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
@@ -30,6 +31,7 @@ public class SlabfishType implements Predicate<SlabfishConditionContext> {
     private final boolean modLoaded;
     private final int priority;
     private final SlabfishCondition[] conditions;
+    private final LazyValue<ResourceLocation> textureLocation = new LazyValue<>(() -> new ResourceLocation(this.getRegistryName().getNamespace(), "textures/entity/slabfish/type/" + this.getRegistryName().getPath() + ".png"));
     private ResourceLocation registryName;
     private ITextComponent displayName;
 
@@ -94,6 +96,14 @@ public class SlabfishType implements Predicate<SlabfishConditionContext> {
      */
     public ITextComponent getDisplayName() {
         return displayName;
+    }
+
+    /**
+     * @return The location of the texture for this backpack
+     */
+    @OnlyIn(Dist.CLIENT)
+    public ResourceLocation getTextureLocation() {
+        return this.textureLocation.getValue();
     }
 
     /**

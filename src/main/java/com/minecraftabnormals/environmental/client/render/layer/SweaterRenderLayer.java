@@ -31,10 +31,9 @@ public class SweaterRenderLayer<E extends SlabfishEntity, M extends EntityModel<
         if(sweaterType == SlabfishManager.EMPTY_SWEATER)
             return;
 
-        Minecraft.getInstance().getTextureManager().bindTexture(sweaterType.getTextureLocation());
-        IVertexBuilder ivertexbuilder = bufferIn.getBuffer(RenderType.getEntityCutoutNoCull(sweaterType.getTextureLocation()));
+        IVertexBuilder builder = bufferIn.getBuffer(RenderType.getEntityCutoutNoCull(sweaterType.getTextureLocation()));
         this.getEntityModel().setRotationAngles(slabby, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-        this.getEntityModel().render(matrixStackIn, ivertexbuilder, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+        this.getEntityModel().render(matrixStackIn, builder, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
     }
 
 }

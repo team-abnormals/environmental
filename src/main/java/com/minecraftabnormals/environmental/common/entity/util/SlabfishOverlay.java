@@ -1,6 +1,9 @@
 package com.minecraftabnormals.environmental.common.entity.util;
 
+import com.minecraftabnormals.environmental.core.Environmental;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.LazyValue;
+import net.minecraft.util.ResourceLocation;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -11,19 +14,27 @@ public enum SlabfishOverlay implements IStringSerializable {
     SNOWY(2, "snow"),
     EGG(3, "egg");
 
-    private static final SlabfishOverlay[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(SlabfishOverlay::getId)).toArray((array) -> {
-        return new SlabfishOverlay[array];
-    });
+    private static final SlabfishOverlay[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(SlabfishOverlay::getId)).toArray(SlabfishOverlay[]::new);
     private final int id;
     private final String name;
+    private final LazyValue<ResourceLocation> textureLocation = new LazyValue<>(() -> new ResourceLocation(Environmental.MODID, "textures/entity/slabfish/overlay/" + this.getString() + "_backpack.png"));
 
-    private SlabfishOverlay(int idIn, String name) {
-        this.id = idIn;
+    SlabfishOverlay(int id, String name) {
+        this.id = id;
         this.name = name;
     }
 
     public int getId() {
         return this.id;
+    }
+
+    @Override
+    public String getString() {
+        return this.name;
+    }
+
+    public ResourceLocation getTextureLocation() {
+        return this.textureLocation.getValue();
     }
 
     public static SlabfishOverlay byId(int id) {
@@ -40,10 +51,5 @@ public enum SlabfishOverlay implements IStringSerializable {
             }
         }
         return type;
-    }
-
-    @Override
-    public String getString() {
-        return this.name;
     }
 }

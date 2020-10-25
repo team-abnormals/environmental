@@ -29,8 +29,8 @@ public class BackpackRenderLayer<E extends SlabfishEntity, M extends EntityModel
 
         BackpackType backpackType = SlabfishManager.get(slabby.getEntityWorld()).getBackpackType(slabby.getBackpack());
         Minecraft.getInstance().getTextureManager().bindTexture(backpackType.getTextureLocation());
-        IVertexBuilder ivertexbuilder = bufferIn.getBuffer(RenderType.getEntityCutoutNoCull(backpackType.getTextureLocation()));
+        IVertexBuilder builder = bufferIn.getBuffer(RenderType.getEntityCutoutNoCull(backpackType.getTextureLocation()));
         this.getEntityModel().setRotationAngles(slabby, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-        this.getEntityModel().render(matrixStackIn, ivertexbuilder, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+        this.getEntityModel().render(matrixStackIn, builder, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
     }
 }

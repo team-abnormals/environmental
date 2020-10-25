@@ -28,11 +28,9 @@ public class OverlayRenderLayer<E extends SlabfishEntity, M extends EntityModel<
     public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, E slabfish, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         if (slabfish.getSlabfishOverlay() == SlabfishOverlay.NONE) return;
 
-        ResourceLocation texture = new ResourceLocation(Environmental.MODID, "textures/entity/slabfish/overlay/" + slabfish.getSlabfishOverlay().getString() + ".png");
-        Minecraft.getInstance().getTextureManager().bindTexture(texture);
-        IVertexBuilder ivertexbuilder = bufferIn.getBuffer(RenderType.getEntityCutoutNoCull(texture));
+        IVertexBuilder builder = bufferIn.getBuffer(RenderType.getEntityCutoutNoCull(slabfish.getSlabfishOverlay().getTextureLocation()));
         this.getEntityModel().setRotationAngles(slabfish, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-        this.getEntityModel().render(matrixStackIn, ivertexbuilder, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+        this.getEntityModel().render(matrixStackIn, builder, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
     }
 
 }
