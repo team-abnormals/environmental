@@ -81,8 +81,6 @@ public class Environmental {
         EnvironmentalRecipes.Serailizers.RECIPE_SERIALIZERS.register(modEventBus);
 
         EnvironmentalParticles.PARTICLE_TYPES.register(modEventBus);
-        EnvironmentalEnchantments.ENCHANTMENTS.register(modEventBus);
-
         EnvironmentalSlabfishConditions.SLABFISH_CONDITIONS.register(modEventBus);
 
         modEventBus.addListener(this::setupCommon);
