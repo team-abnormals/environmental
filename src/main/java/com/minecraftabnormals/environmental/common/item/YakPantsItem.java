@@ -16,6 +16,7 @@ import net.minecraft.potion.Effects;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 @EventBusSubscriber(modid = Environmental.MODID)
@@ -32,21 +33,21 @@ public class YakPantsItem extends ArmorItem {
 		boolean wearingPants = legsStack.getItem() instanceof YakPantsItem;
 		if (entity instanceof PlayerEntity) {
 			float defaultHeight = 0.6F;
-			float ugpradedHeight = 1.1F;
-			if (wearingPants && entity.stepHeight < ugpradedHeight) {
-				entity.stepHeight = ugpradedHeight;
-			} else if (entity.stepHeight > defaultHeight) {
+			float upgradedHeight = 1.1F;
+			if (wearingPants && entity.stepHeight < upgradedHeight) {
+				entity.stepHeight = upgradedHeight;
+			} else if (!ModList.get().isLoaded("step") && entity.stepHeight > defaultHeight) {
 				entity.stepHeight = defaultHeight;
 			}
 		}
-		
+
 		if (wearingPants && entity.getRidingEntity() instanceof LivingEntity) {
 			LivingEntity mount = (LivingEntity)entity.getRidingEntity();
 			mount.addPotionEffect(new EffectInstance(Effects.REGENERATION, 60));
 			mount.addPotionEffect(new EffectInstance(Effects.SPEED, 60, 1));
 		}
 	}
-	
+
 	@Override
 	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
 		ItemStackUtils.fillAfterItemForGroup(this.asItem(), Items.TURTLE_HELMET, group, items);
