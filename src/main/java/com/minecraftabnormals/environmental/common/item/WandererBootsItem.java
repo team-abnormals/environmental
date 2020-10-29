@@ -42,11 +42,10 @@ public class WandererBootsItem extends ArmorItem {
 		super(EnvironmentalTiers.Armor.EXPLORER, EquipmentSlotType.FEET, properties);
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack stack, EquipmentSlotType armorSlot, A _default) {
-		return (A) new WandererBootsModel(1.0F);
+		return WandererBootsModel.get(1.0F);
 	}
 
 	@Override

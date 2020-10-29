@@ -29,11 +29,10 @@ public class ThiefHoodItem extends ArmorItem {
 		super(EnvironmentalTiers.Armor.EXPLORER, EquipmentSlotType.HEAD, properties);
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack stack, EquipmentSlotType armorSlot, A _default) {
-		return (A) new ThiefHoodModel(1.0F);
+		return ThiefHoodModel.get(1.0F);
 	}
 
 	@Override

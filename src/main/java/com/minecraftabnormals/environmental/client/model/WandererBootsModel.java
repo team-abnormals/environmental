@@ -9,11 +9,15 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * WandererBootsModel - Farcr
  */
 @OnlyIn(Dist.CLIENT)
 public class WandererBootsModel<T extends LivingEntity> extends BipedModel<T> {
+	private static final Map<Float, WandererBootsModel<?>> MODEL_CACHE = new HashMap<>();
 	private final ModelRenderer leftLeg;
 	private final ModelRenderer leftToe;
 	private final ModelRenderer rightLeg;
@@ -57,5 +61,10 @@ public class WandererBootsModel<T extends LivingEntity> extends BipedModel<T> {
 		modelRenderer.rotateAngleX = x;
 		modelRenderer.rotateAngleY = y;
 		modelRenderer.rotateAngleZ = z;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static <A extends BipedModel<?>> A get(float modelSize) {
+		return (A) MODEL_CACHE.computeIfAbsent(modelSize, WandererBootsModel::new);
 	}
 }

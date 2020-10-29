@@ -9,11 +9,14 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * ArchitectBeltModel - Farcr
  */
-@OnlyIn(Dist.CLIENT)
 public class ArchitectBeltModel<T extends LivingEntity> extends BipedModel<T> {
+	private static final Map<Float, ArchitectBeltModel<?>> MODEL_CACHE = new HashMap<>();
 	private final ModelRenderer rightKnee;
 	private final ModelRenderer belt;
 	private final ModelRenderer pouch;
@@ -59,5 +62,10 @@ public class ArchitectBeltModel<T extends LivingEntity> extends BipedModel<T> {
 		modelRenderer.rotateAngleX = x;
 		modelRenderer.rotateAngleY = y;
 		modelRenderer.rotateAngleZ = z;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static <A extends BipedModel<?>> A get(float modelSize) {
+		return (A) MODEL_CACHE.computeIfAbsent(modelSize, ArchitectBeltModel::new);
 	}
 }

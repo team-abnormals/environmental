@@ -43,11 +43,10 @@ public class ArchitectBeltItem extends ArmorItem {
 		super(EnvironmentalTiers.Armor.EXPLORER, EquipmentSlotType.LEGS, properties);
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack stack, EquipmentSlotType armorSlot, A _default) {
-		return (A) new ArchitectBeltModel(1.0F);
+		return ArchitectBeltModel.get(1.0F);
 	}
 	
 	@Override

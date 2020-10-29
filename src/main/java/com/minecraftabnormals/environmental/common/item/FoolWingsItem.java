@@ -35,11 +35,10 @@ public class FoolWingsItem extends ArmorItem {
 		return true;
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack stack, EquipmentSlotType armorSlot, A _default) {
-		return (A) new FoolWingsModel(1.0F);
+		return FoolWingsModel.get(1.0F);
 	}
 
 	@Override
