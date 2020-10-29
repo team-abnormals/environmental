@@ -26,7 +26,7 @@ public class BackpackOverlayRenderLayer<E extends SlabfishEntity, M extends Enti
         if (slabfish.getSlabfishOverlay() == SlabfishOverlay.NONE || slabfish.getSlabfishOverlay() == SlabfishOverlay.EGG || !slabfish.hasBackpack())
             return;
 
-        IVertexBuilder builder = bufferIn.getBuffer(RenderType.getEntityCutoutNoCull(slabfish.getSlabfishOverlay().getTextureLocation()));
+        IVertexBuilder builder = bufferIn.getBuffer(RenderType.getEntityCutoutNoCull(slabfish.getSlabfishOverlay().getBackpackTextureLocation()));
         this.getEntityModel().setRotationAngles(slabfish, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
         this.getEntityModel().render(matrixStackIn, builder, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
     }

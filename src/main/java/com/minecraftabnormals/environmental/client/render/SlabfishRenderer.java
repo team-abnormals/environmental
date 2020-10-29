@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Quaternion;
+import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -58,7 +59,7 @@ public class SlabfishRenderer extends MobRenderer<SlabfishEntity, SlabfishModel<
         if (slabfish.func_233684_eK_() || slabfish.getRidingEntity() != null) matrixStack.translate(0F, 0.3125F, 0F);
         if (slabfish.isInWater()) {
             matrixStack.translate(0F, slabfish.isChild() ? -0.8F : -0.4F, 0.5F);
-            matrixStack.rotate(new Quaternion(90F, 0, 0, true));
+            matrixStack.rotate(Vector3f.XP.rotation((float) (Math.PI / 2)));
         }
     }
 }
