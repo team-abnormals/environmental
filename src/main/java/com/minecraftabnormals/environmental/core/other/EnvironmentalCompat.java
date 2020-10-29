@@ -1,7 +1,6 @@
 package com.minecraftabnormals.environmental.core.other;
 
 import com.minecraftabnormals.environmental.common.entity.DuckEggEntity;
-import com.minecraftabnormals.environmental.common.entity.SlabfishEntity;
 import com.minecraftabnormals.environmental.core.Environmental;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
@@ -11,15 +10,12 @@ import net.minecraft.block.DispenserBlock;
 import net.minecraft.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.dispenser.IBlockSource;
 import net.minecraft.dispenser.IPosition;
-import net.minecraft.dispenser.OptionalDispenseBehavior;
 import net.minecraft.dispenser.ProjectileDispenseBehavior;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.BucketItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.Util;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -246,8 +242,8 @@ public class EnvironmentalCompat {
     }
     
     public static void registerUnusedDispenseBehaviors() {
-        // TODO make these work properly with tags or smth
-        for(Item item : SlabfishEntity.getSweaterMap().keySet()) {
+        /* 
+         for(Item item : SlabfishEntity.getSweaterMap().keySet()) {
             DispenserBlock.registerDispenseBehavior(item, new OptionalDispenseBehavior() {
                 @Override
                 protected ItemStack dispenseStack(IBlockSource source, ItemStack stack) {
@@ -279,5 +275,6 @@ public class EnvironmentalCompat {
                 return super.dispenseStack(source, stack);
             }
         });
+         */
     }
 }

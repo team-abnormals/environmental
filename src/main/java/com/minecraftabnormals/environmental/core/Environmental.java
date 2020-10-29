@@ -1,5 +1,7 @@
 package com.minecraftabnormals.environmental.core;
 
+import static com.teamabnormals.abnormals_core.core.AbnormalsCore.NETWORK_PROTOCOL;
+
 import com.minecraftabnormals.environmental.client.gui.screen.inventory.KilnScreen;
 import com.minecraftabnormals.environmental.client.gui.screen.inventory.SawmillScreen;
 import com.minecraftabnormals.environmental.common.network.message.*;
@@ -10,6 +12,7 @@ import com.minecraftabnormals.environmental.core.other.EnvironmentalCompat;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalData;
 import com.minecraftabnormals.environmental.core.registry.*;
 import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
+
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.inventory.container.PlayerContainer;
@@ -36,8 +39,6 @@ import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 import net.minecraftforge.registries.RegistryBuilder;
-
-import static com.teamabnormals.abnormals_core.core.AbnormalsCore.NETWORK_PROTOCOL;
 
 @Mod(Environmental.MODID)
 @Mod.EventBusSubscriber(modid = Environmental.MODID)
