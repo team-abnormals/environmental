@@ -39,7 +39,7 @@ public enum SlabfishOverlay implements IStringSerializable {
     }
 
     public ResourceLocation getBackpackTextureLocation() {
-        return this.textureLocation.getValue();
+        return this.backpackTextureLocation.getValue();
     }
 
     public static SlabfishOverlay byId(int id) {
