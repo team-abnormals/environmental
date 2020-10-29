@@ -1,12 +1,9 @@
 package com.minecraftabnormals.environmental.common.item;
 
-import java.util.HashMap;
-import java.util.UUID;
-
 import com.minecraftabnormals.environmental.client.model.FoolWingsModel;
+import com.minecraftabnormals.environmental.common.network.message.CFlapMessage;
 import com.minecraftabnormals.environmental.core.Environmental;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalTiers;
-
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -20,10 +17,14 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.network.PacketDistributor;
+
+import java.util.HashMap;
+import java.util.UUID;
 
 @EventBusSubscriber(modid = Environmental.MODID)
 public class FoolWingsItem extends ArmorItem {
-	private static HashMap<UUID, Boolean> hasJumpedMap = new HashMap<UUID, Boolean>();
+	private static final HashMap<UUID, Boolean> hasJumpedMap = new HashMap<>();
 
 	public FoolWingsItem(Properties properties) {
 		super(EnvironmentalTiers.Armor.EXPLORER, EquipmentSlotType.CHEST, properties);
@@ -48,30 +49,36 @@ public class FoolWingsItem extends ArmorItem {
 
 	@SubscribeEvent
 	public static void onLivingUpdate(LivingUpdateEvent event) {
-		UUID uuid = event.getEntityLiving().getUniqueID();
+		if (!event.getEntityLiving().world.isRemote())
+			return;
 
-		if (event.getEntityLiving() instanceof PlayerEntity && hasJumpedMap.containsKey(uuid)) {
+		if (event.getEntityLiving() instanceof PlayerEntity) {
 			PlayerEntity player = (PlayerEntity) event.getEntityLiving();
+			UUID uuid = player.getUniqueID();
 			ItemStack stack = player.getItemStackFromSlot(EquipmentSlotType.CHEST);
 
-			if (player.isOnGround()) 
+			if (!hasJumpedMap.containsKey(uuid) || player.isOnGround())
 				hasJumpedMap.put(uuid, false);
-			if (!(stack.getItem() instanceof FoolWingsItem)) 
+			if (!(stack.getItem() instanceof FoolWingsItem))
 				return;
 
-			if (!player.isOnGround() && !hasJumpedMap.get(uuid) && !player.isElytraFlying() && !player.abilities.isFlying) {
-				if (player.isJumping && player.getMotion().getY() < 0) {
+			if (!player.isOnGround() && !player.isElytraFlying() && !player.abilities.isFlying) {
+				if (player.isJumping && !hasJumpedMap.get(uuid) && player.getMotion().getY() < 0) {
+					player.playSound(SoundEvents.ENTITY_ENDER_DRAGON_FLAP, 0.4F, 2.0F);
 					player.setMotion(player.getMotion().getX(), 0.5D, player.getMotion().getZ());
 					hasJumpedMap.put(uuid, true);
-					player.playSound(SoundEvents.ENTITY_ENDER_DRAGON_FLAP, 0.4F, 2.0F);
-					stack.damageItem(1, player, (p_233654_0_) -> {
-						p_233654_0_.sendBreakAnimation(EquipmentSlotType.CHEST);
-					});
+					Environmental.PLAY.send(PacketDistributor.SERVER.noArg(), new CFlapMessage());
 				}
-
 			}
-		} else if (event.getEntityLiving() instanceof PlayerEntity) {
-			hasJumpedMap.put(uuid, false);
 		}
+	}
+
+	public static void tryJump(PlayerEntity player) {
+		ItemStack stack = player.getItemStackFromSlot(EquipmentSlotType.CHEST);
+		if (!(stack.getItem() instanceof FoolWingsItem))
+			return;
+
+		player.playSound(SoundEvents.ENTITY_ENDER_DRAGON_FLAP, 0.4F, 2.0F);
+		stack.damageItem(1, player, p -> p.sendBreakAnimation(EquipmentSlotType.CHEST));
 	}
 }

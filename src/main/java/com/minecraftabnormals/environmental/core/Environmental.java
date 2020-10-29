@@ -152,6 +152,11 @@ public class Environmental {
                 .encoder(SOpenSlabfishInventoryMessage::serialize).decoder(SOpenSlabfishInventoryMessage::deserialize)
                 .consumer(SOpenSlabfishInventoryMessage::handle)
                 .add();
+
+        PLAY.messageBuilder(CFlapMessage.class, 4, NetworkDirection.PLAY_TO_SERVER)
+                .encoder(CFlapMessage::serialize).decoder(CFlapMessage::deserialize)
+                .consumer(CFlapMessage::handle)
+                .add();
     }
 
     private void setupLoginMessages() {
