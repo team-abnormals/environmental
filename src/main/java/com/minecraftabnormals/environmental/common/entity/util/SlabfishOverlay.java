@@ -17,7 +17,8 @@ public enum SlabfishOverlay implements IStringSerializable {
     private static final SlabfishOverlay[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(SlabfishOverlay::getId)).toArray(SlabfishOverlay[]::new);
     private final int id;
     private final String name;
-    private final LazyValue<ResourceLocation> textureLocation = new LazyValue<>(() -> new ResourceLocation(Environmental.MODID, "textures/entity/slabfish/overlay/" + this.getString() + "_backpack.png"));
+    private final LazyValue<ResourceLocation> textureLocation = new LazyValue<>(() -> new ResourceLocation(Environmental.MODID, "textures/entity/slabfish/overlay/" + this.getString() + ".png"));
+    private final LazyValue<ResourceLocation> backpackTextureLocation = new LazyValue<>(() -> new ResourceLocation(Environmental.MODID, "textures/entity/slabfish/overlay/" + this.getString() + "_backpack.png"));
 
     SlabfishOverlay(int id, String name) {
         this.id = id;
@@ -34,6 +35,10 @@ public enum SlabfishOverlay implements IStringSerializable {
     }
 
     public ResourceLocation getTextureLocation() {
+        return this.textureLocation.getValue();
+    }
+
+    public ResourceLocation getBackpackTextureLocation() {
         return this.textureLocation.getValue();
     }
 
