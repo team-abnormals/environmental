@@ -67,7 +67,7 @@ public class ThiefHoodModel<T extends LivingEntity> extends BipedModel<T> {
 
 	@Override
 	protected Iterable<ModelRenderer> getBodyParts() {
-		return ImmutableList.of(this.body, this.rightArm, this.bipedLeftArm);
+		return ImmutableList.of(this.body, this.rightArm, this.leftArm);
 	}
 
 	public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {

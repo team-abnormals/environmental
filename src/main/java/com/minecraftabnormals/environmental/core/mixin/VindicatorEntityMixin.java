@@ -58,6 +58,7 @@ public abstract class VindicatorEntityMixin extends AbstractIllagerEntity {
 		int bladeChance = 5 - this.world.getDifficulty().getId();
 		if (this.getRaid() == null && this.world.rand.nextInt(bladeChance) == 0) {
 			this.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(EnvironmentalItems.EXECUTIONER_CLEAVER.get()));
+			this.inventoryArmorDropChances[EquipmentSlotType.MAINHAND.getIndex()] = 1.0F;
 		}
 	}
 }

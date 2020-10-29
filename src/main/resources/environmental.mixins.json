@@ -8,7 +8,9 @@
     "VindicatorEntityMixin",
     "LilyPadBlockMixin",
     "DoublePlantBlockMixin",
-    "PlayerEntityMixin"
+    "PlayerEntityMixin",
+    "AbstractSkeletonEntityMixin",
+    "WitherSkeletonEntityMixin"
   ],
   "client": [
     "ClientRecipeBookMixin"

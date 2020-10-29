@@ -61,6 +61,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
@@ -98,49 +99,54 @@ public class EnvironmentalEvents {
 	@SubscribeEvent
 	public static void livingSpawnEvent(LivingSpawnEvent.CheckSpawn event) {
 		Entity entity = event.getEntity();
+		IWorld world = event.getWorld();
+		Random random = world.getRandom();
+
 		boolean naturalSpawn = event.getSpawnReason() == SpawnReason.NATURAL;
 		boolean chunkGenSpawn = event.getSpawnReason() == SpawnReason.CHUNK_GENERATION;
 		boolean validSpawn = naturalSpawn || chunkGenSpawn;
+
 		boolean replaceVariants = EnvironmentalConfig.COMMON.biomeVariantsAlwaysSpawn.get();
 
-		if (replaceVariants && validSpawn && entity.getPosY() > 60 && entity.getType() == EntityType.ZOMBIE) {
-			ZombieEntity zombie = (ZombieEntity) event.getEntity();
-			if (event.getWorld().getBiome(entity.getPosition()).getCategory() == Biome.Category.DESERT) {
+		if (replaceVariants && validSpawn && entity.getPosY() > 60) {
+			if (entity.getType() == EntityType.ZOMBIE) {
+				ZombieEntity zombie = (ZombieEntity) entity;
+				if (world.getBiome(entity.getPosition()).getCategory() == Biome.Category.DESERT) {
 
-				HuskEntity husk = EntityType.HUSK.create(event.getWorld().getWorld());
-				husk.setChild(zombie.isChild());
-				for (EquipmentSlotType slot : EquipmentSlotType.values())
-					zombie.setItemStackToSlot(slot, zombie.getItemStackFromSlot(slot));
-				husk.setLocationAndAngles(zombie.getPosX(), zombie.getPosY(), zombie.getPosZ(), zombie.rotationYaw, zombie.rotationPitch);
+					HuskEntity husk = EntityType.HUSK.create(world.getWorld());
+					husk.setChild(zombie.isChild());
+					for (EquipmentSlotType slot : EquipmentSlotType.values())
+						zombie.setItemStackToSlot(slot, zombie.getItemStackFromSlot(slot));
+					husk.setLocationAndAngles(zombie.getPosX(), zombie.getPosY(), zombie.getPosZ(), zombie.rotationYaw, zombie.rotationPitch);
 
-				event.getWorld().addEntity(husk);
-				event.getEntity().remove();
+					world.addEntity(husk);
+					entity.remove();
+				}
 			}
-		}
 
-		if (replaceVariants && validSpawn && entity.getPosY() > 60 && entity.getType() == EntityType.SKELETON) {
-			SkeletonEntity zombie = (SkeletonEntity) event.getEntity();
-			if (event.getWorld().getBiome(entity.getPosition()).getCategory() == Biome.Category.ICY) {
+			if (entity.getType() == EntityType.SKELETON) {
+				SkeletonEntity skeleton = (SkeletonEntity) entity;
+				if (world.getBiome(entity.getPosition()).getCategory() == Biome.Category.ICY) {
 
-				StrayEntity husk = EntityType.STRAY.create(event.getWorld().getWorld());
-				for (EquipmentSlotType slot : EquipmentSlotType.values())
-					zombie.setItemStackToSlot(slot, zombie.getItemStackFromSlot(slot));
-				husk.setLocationAndAngles(zombie.getPosX(), zombie.getPosY(), zombie.getPosZ(), zombie.rotationYaw, zombie.rotationPitch);
+					StrayEntity stray = EntityType.STRAY.create(world.getWorld());
+					for (EquipmentSlotType slot : EquipmentSlotType.values())
+						skeleton.setItemStackToSlot(slot, skeleton.getItemStackFromSlot(slot));
+					stray.setLocationAndAngles(skeleton.getPosX(), skeleton.getPosY(), skeleton.getPosZ(), skeleton.rotationYaw, skeleton.rotationPitch);
 
-				event.getWorld().addEntity(husk);
-				event.getEntity().remove();
+					world.addEntity(stray);
+					entity.remove();
+				}
 			}
 		}
 
 		if (validSpawn && entity.getType() == EntityType.MOOSHROOM) {
 			MooshroomEntity mooshroom = (MooshroomEntity) event.getEntity();
-			Random random = new Random();
 			if (random.nextInt(3) == 0) {
 				MooshroomEntity brownMooshroom = EntityType.MOOSHROOM.create(event.getWorld().getWorld());
 				brownMooshroom.setLocationAndAngles(mooshroom.getPosX(), mooshroom.getPosY(), mooshroom.getPosZ(), mooshroom.rotationYaw, mooshroom.rotationPitch);
 				brownMooshroom.setMooshroomType(MooshroomEntity.Type.BROWN);
-				event.getWorld().addEntity(brownMooshroom);
-				event.getEntity().remove();
+				world.addEntity(brownMooshroom);
+				entity.remove();
 			}
 		}
 	}
