@@ -1,12 +1,11 @@
 package com.minecraftabnormals.environmental.common.network.message;
 
-import com.minecraftabnormals.environmental.common.network.ServerNetworkHandler;
-import net.minecraft.network.PacketBuffer;
-import net.minecraftforge.fml.network.FMLHandshakeHandler;
-import net.minecraftforge.fml.network.NetworkEvent;
-
-import java.util.UUID;
 import java.util.function.Supplier;
+
+import com.minecraftabnormals.environmental.common.network.ServerNetworkHandler;
+
+import net.minecraft.network.PacketBuffer;
+import net.minecraftforge.fml.network.NetworkEvent;
 
 public class CFlapMessage
 {

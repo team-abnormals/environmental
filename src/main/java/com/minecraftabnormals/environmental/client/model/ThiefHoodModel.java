@@ -1,5 +1,6 @@
 package com.minecraftabnormals.environmental.client.model;
 
+import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -51,16 +52,22 @@ public class ThiefHoodModel<T extends LivingEntity> extends BipedModel<T> {
     }
     
 	@Override
-	public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
+	public void render(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha){
 		this.head.copyModelAngles(this.bipedHead);
 		this.rightArm.copyModelAngles(this.bipedRightArm);
 		this.leftArm.copyModelAngles(this.bipedLeftArm);
 		this.body.copyModelAngles(this.bipedBody);
-		
-		this.head.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
-		this.body.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
-		this.leftArm.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
-		this.rightArm.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);	
+		super.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+	}
+
+	@Override
+	protected Iterable<ModelRenderer> getHeadParts() {
+		return ImmutableList.of(this.head);
+	}
+
+	@Override
+	protected Iterable<ModelRenderer> getBodyParts() {
+		return ImmutableList.of(this.body, this.rightArm, this.bipedLeftArm);
 	}
 
 	public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
