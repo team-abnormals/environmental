@@ -18,18 +18,18 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class DuckEggRenderer<T extends Entity & IRendersAsItem> extends EntityRenderer<T> {
+public class ProjectileItemRenderer<T extends Entity & IRendersAsItem> extends EntityRenderer<T> {
 	private final net.minecraft.client.renderer.ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
 	private final float scale;
 	private final boolean field_229126_f_;
 
-	public DuckEggRenderer(EntityRendererManager p_i226035_1_, float p_i226035_3_, boolean p_i226035_4_) {
+	public ProjectileItemRenderer(EntityRendererManager p_i226035_1_, float p_i226035_3_, boolean p_i226035_4_) {
 		super(p_i226035_1_);
 		this.scale = p_i226035_3_;
 		this.field_229126_f_ = p_i226035_4_;
 	}
 
-	public DuckEggRenderer(EntityRendererManager renderManagerIn) {
+	public ProjectileItemRenderer(EntityRendererManager renderManagerIn) {
 		this(renderManagerIn, 1.0F, false);
 	}
 
