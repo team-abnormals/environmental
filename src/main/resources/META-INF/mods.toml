@@ -7,8 +7,8 @@ license="https://github.com/minecraftabnormals/Environmental/blob/master/LICENSE
     modId="environmental"
     version="${file.jarVersion}"
     logoFile="logo.png"
-    authors="Farcr, Bagel, and Jackson"
-    credits="hatsondogs, Five, Echolite, Ocelot"
+    authors="bageldotjpg, Farcr"
+    credits="hatsondogs, Jackson, Ocelot, Echolite, and five"
     displayName="Environmental"
     description='''Expanding the environment. New wood, new blocks, new friends.'''
 
@@ -29,6 +29,6 @@ license="https://github.com/minecraftabnormals/Environmental/blob/master/LICENSE
 [[dependencies.environmental]]
     modId="abnormals_core"
     mandatory=true
-    versionRange="[2.0.3,)"
+    versionRange="[2.0.7,)"
     ordering="AFTER"
     side="BOTH"

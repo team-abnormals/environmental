@@ -86,7 +86,7 @@ public class Environmental {
 
         modEventBus.addListener(this::setupCommon);
         modEventBus.addListener(this::registerRegistries);
-        DistExecutor.runWhenOn(Dist.CLIENT, () -> () ->
+		DistExecutor.runWhenOn(Dist.CLIENT, () -> () ->
         {
             modEventBus.addListener(this::setupClient);
             modEventBus.addListener(this::stitchTextures);
@@ -102,7 +102,8 @@ public class Environmental {
             EnvironmentalCompat.registerCompostables();
             EnvironmentalCompat.registerFlammables();
             EnvironmentalCompat.registerDispenserBehaviors();
-
+            EnvironmentalCompat.registerLootInjectors();
+            
             EnvironmentalData.registerDataSerializers();
 
             EnvironmentalBiomes.addBiomeTypes();

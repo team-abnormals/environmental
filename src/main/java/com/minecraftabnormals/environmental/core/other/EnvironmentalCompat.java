@@ -5,6 +5,7 @@ import com.minecraftabnormals.environmental.common.entity.MudBallEntity;
 import com.minecraftabnormals.environmental.core.Environmental;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
+import com.teamabnormals.abnormals_core.core.registry.LootInjectionRegistry;
 import com.teamabnormals.abnormals_core.core.utils.DataUtils;
 
 import net.minecraft.block.DispenserBlock;
@@ -16,11 +17,18 @@ import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.BucketItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.loot.LootTables;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EnvironmentalCompat {
 
+	public static void registerLootInjectors() {
+		LootInjectionRegistry.LootInjector injector = new LootInjectionRegistry.LootInjector(Environmental.MODID);
+		injector.registerLootInjection(injector.buildLootPool("shipwreck_supply", 1, 0), LootTables.CHESTS_SHIPWRECK_SUPPLY);
+		injector.registerLootInjection(injector.buildLootPool("simple_dungeon", 1, 0), LootTables.CHESTS_SIMPLE_DUNGEON);
+	}
+	
 	public static void registerCompostables() {
 		DataUtils.registerCompostable(EnvironmentalItems.YAK_HAIR.get(), 0.30F);
 		DataUtils.registerCompostable(EnvironmentalBlocks.YAK_HAIR_BLOCK.get(), 0.85F);

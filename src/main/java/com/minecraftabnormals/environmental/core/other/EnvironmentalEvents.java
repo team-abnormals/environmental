@@ -3,11 +3,9 @@ package com.minecraftabnormals.environmental.core.other;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.Set;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 import com.minecraftabnormals.environmental.common.block.HangingWisteriaLeavesBlock;
 import com.minecraftabnormals.environmental.common.entity.SlabfishEntity;
 import com.minecraftabnormals.environmental.common.entity.goals.ChickenLayEggInNestGoal;
@@ -44,9 +42,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.ShovelItem;
-import net.minecraft.loot.LootPool;
-import net.minecraft.loot.LootTables;
-import net.minecraft.loot.TableLootEntry;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
@@ -54,7 +49,6 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtils;
 import net.minecraft.potion.Potions;
 import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -66,7 +60,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.EntityEvent.EnteringChunk;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -80,24 +73,15 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 @EventBusSubscriber(modid = Environmental.MODID)
 public class EnvironmentalEvents {
-	private static final Set<ResourceLocation> RICE_SHIPWRECK_LOOT_INJECTIONS = Sets.newHashSet(LootTables.CHESTS_SHIPWRECK_SUPPLY);
 
 	@SubscribeEvent
-	public static void onInjectLoot(LootTableLoadEvent event) {
-		if (RICE_SHIPWRECK_LOOT_INJECTIONS.contains(event.getName())) {
-			LootPool pool = LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(Environmental.MODID, "injections/rice_shipwreck")).weight(1).quality(0)).name("rice_shipwreck").build();
-			event.getTable().addPool(pool);
-		}
-	}
-
-	@SubscribeEvent
-	public static void onEntityInteract(PlayerEvent.BreakSpeed event) {
+	public static void onEvent(PlayerEvent.BreakSpeed event) {
 		if (event.getState().getBlock() instanceof HangingWisteriaLeavesBlock && event.getPlayer().getHeldItemMainhand().getItem() == Items.SHEARS)
 			event.setNewSpeed(15.0F);
 	}
 
 	@SubscribeEvent
-	public static void livingSpawnEvent(LivingSpawnEvent.CheckSpawn event) {
+	public static void onEvent(LivingSpawnEvent.CheckSpawn event) {
 		Entity entity = event.getEntity();
 		IWorld world = event.getWorld();
 		Random random = world.getRandom();
@@ -152,7 +136,7 @@ public class EnvironmentalEvents {
 	}
 
 	@SubscribeEvent
-	public static void onThrowableImpact(final ProjectileImpactEvent.Throwable event) {
+	public static void onEvent(final ProjectileImpactEvent.Throwable event) {
 		ThrowableEntity projectileEntity = event.getThrowable();
 
 		if (projectileEntity instanceof PotionEntity) {
@@ -191,7 +175,7 @@ public class EnvironmentalEvents {
 	protected static final Map<Block, BlockState> HOE_LOOKUP = Maps.newHashMap(ImmutableMap.of(Blocks.GRASS_BLOCK, Blocks.FARMLAND.getDefaultState(), Blocks.GRASS_PATH, Blocks.FARMLAND.getDefaultState(), Blocks.DIRT, Blocks.FARMLAND.getDefaultState(), Blocks.COARSE_DIRT, Blocks.DIRT.getDefaultState()));
 
 	@SubscribeEvent
-	public static void underwaterHoe(UseHoeEvent event) {
+	public static void onEvent(UseHoeEvent event) {
 		ItemStack hoe = event.getContext().getItem();
 
 		// if (event.getResult() == Result.ALLOW) {
@@ -217,7 +201,7 @@ public class EnvironmentalEvents {
 	}
 
 	@SubscribeEvent
-	public static void rightClickBlock(RightClickBlock event) {
+	public static void onEvent(RightClickBlock event) {
 		World world = event.getWorld();
 		BlockPos pos = event.getPos();
 		BlockState state = world.getBlockState(pos);
@@ -238,7 +222,7 @@ public class EnvironmentalEvents {
 	}
 
 	@SubscribeEvent
-	public static void onInteractWithEntity(PlayerInteractEvent.EntityInteract event) {
+	public static void onEvent(PlayerInteractEvent.EntityInteract event) {
 		ItemStack stack = event.getItemStack();
 		Entity target = event.getTarget();
 		if (target instanceof SlabfishEntity && stack.getItem() == Items.NAME_TAG) {
@@ -253,7 +237,7 @@ public class EnvironmentalEvents {
 
 	@Deprecated
 	@SubscribeEvent
-	public static void onSlabfishDeath(LivingDeathEvent event) {
+	public static void onEvent(LivingDeathEvent event) {
 		if (event.getEntity() instanceof SlabfishEntity) {
 			SlabfishEntity entity = (SlabfishEntity) event.getEntity();
 			if (entity.getEntityWorld().getBiome(new BlockPos(entity.getPositionVec())) == Biomes.SOUL_SAND_VALLEY) {
@@ -297,7 +281,7 @@ public class EnvironmentalEvents {
 	}
 
 	@SubscribeEvent
-	public static void onEnterChunk(EnteringChunk event) {
+	public static void onEvent(EnteringChunk event) {
 		if (event.getEntity() instanceof ChickenEntity) {
 			ChickenEntity chicken = (ChickenEntity) event.getEntity();
 			if (!chicken.goalSelector.goals.stream().anyMatch((goal) -> goal.getGoal() instanceof ChickenLayEggInNestGoal)) {
