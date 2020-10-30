@@ -15,6 +15,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -26,7 +27,7 @@ public class YakPantsItem extends ArmorItem {
 		super(materialIn, slot, builderIn);
 	}
 
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public static void onLivingUpdate(LivingUpdateEvent event) {
 		LivingEntity entity = event.getEntityLiving();
 		ItemStack legsStack = entity.getItemStackFromSlot(EquipmentSlotType.LEGS);
