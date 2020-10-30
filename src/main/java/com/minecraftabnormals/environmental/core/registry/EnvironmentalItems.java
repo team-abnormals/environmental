@@ -1,17 +1,5 @@
 package com.minecraftabnormals.environmental.core.registry;
 
-import com.minecraftabnormals.environmental.common.item.ArchitectBeltItem;
-import com.minecraftabnormals.environmental.common.item.DuckEggItem;
-import com.minecraftabnormals.environmental.common.item.ExecutionerCleaverItem;
-import com.minecraftabnormals.environmental.common.item.FoolWingsItem;
-import com.minecraftabnormals.environmental.common.item.GiantLilyPadItem;
-import com.minecraftabnormals.environmental.common.item.LargeLilyPadItem;
-import com.minecraftabnormals.environmental.common.item.MudBallItem;
-import com.minecraftabnormals.environmental.common.item.ScrambledEggsItem;
-import com.minecraftabnormals.environmental.common.item.SlabfishBucketItem;
-import com.minecraftabnormals.environmental.common.item.ThiefHoodItem;
-import com.minecraftabnormals.environmental.common.item.WandererBootsItem;
-import com.minecraftabnormals.environmental.common.item.YakPantsItem;
 import com.minecraftabnormals.environmental.common.item.*;
 import com.minecraftabnormals.environmental.core.Environmental;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalFoods;
@@ -36,7 +24,6 @@ public class EnvironmentalItems {
     public static final RegistryHelper HELPER = Environmental.REGISTRY_HELPER;
 
     public static final RegistryObject<Item> THIEF_HOOD			 = HELPER.createItem("thief_hood", () -> new ThiefHoodItem(new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
-    public static final RegistryObject<Item> FOOL_WINGS		 	 = HELPER.createItem("fool_wings", () -> new FoolWingsItem(new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
     public static final RegistryObject<Item> ARCHITECT_BELT 	 = HELPER.createItem("architect_belt", () -> new ArchitectBeltItem(new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
     public static final RegistryObject<Item> WANDERER_BOOTS		 = HELPER.createItem("wanderer_boots", () -> new WandererBootsItem(new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
     public static final RegistryObject<Item> EXECUTIONER_CLEAVER = HELPER.createItem("executioner_cleaver", () -> new ExecutionerCleaverItem(EnvironmentalTiers.Item.EXECUTIONER, 6.5f, -3.1F, new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
