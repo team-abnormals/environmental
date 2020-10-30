@@ -30,7 +30,7 @@ public abstract class WitherSkeletonEntityMixin extends AbstractSkeletonEntity {
 		Random random = this.world.getRandom();
 		int difficultyChance = difficulty.getDifficulty().getId() + 1;
 
-		if (random.nextInt(difficultyChance) == 0) {
+		if (random.nextInt(difficultyChance) != 0) {
 			this.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(Items.STONE_AXE));
 		}
 

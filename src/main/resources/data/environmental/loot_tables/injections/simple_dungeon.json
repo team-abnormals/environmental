@@ -17,6 +17,21 @@
             }
           ],
           "name": "environmental:thief_hood"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 5.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "environmental:rice"
         }
       ]
     }
