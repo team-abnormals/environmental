@@ -74,7 +74,8 @@ public class Environmental {
         EnvironmentalBlocks.PAINTINGS.register(modEventBus);
         EnvironmentalBiomes.BIOMES.register(modEventBus);
         EnvironmentalFeatures.FEATURES.register(modEventBus);
-
+        EnvironmentalAttributes.ATTRIBUTES.register(modEventBus);
+        
         EnvironmentalVillagers.POI_TYPES.register(modEventBus);
         EnvironmentalVillagers.PROFESSIONS.register(modEventBus);
 

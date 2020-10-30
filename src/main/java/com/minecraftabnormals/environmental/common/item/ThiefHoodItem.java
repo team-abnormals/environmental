@@ -1,18 +1,25 @@
 package com.minecraftabnormals.environmental.common.item;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.Nullable;
 
+import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.ImmutableMultimap.Builder;
+import com.google.common.collect.Multimap;
 import com.minecraftabnormals.environmental.client.model.ThiefHoodModel;
 import com.minecraftabnormals.environmental.core.Environmental;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalTiers;
+import com.minecraftabnormals.environmental.core.registry.EnvironmentalAttributes;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
 
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.attributes.Attribute;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.monster.EndermanEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -34,7 +41,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 @EventBusSubscriber(modid = Environmental.MODID)
 public class ThiefHoodItem extends ArmorItem {
-	public static final String NBT_TAG = "ThiefHoodUses";
+	private static final String NBT_TAG = "ThiefHoodUses";
 
 	public ThiefHoodItem(Properties properties) {
 		super(EnvironmentalTiers.Armor.EXPLORER, EquipmentSlotType.HEAD, properties);
@@ -54,6 +61,19 @@ public class ThiefHoodItem extends ArmorItem {
 	@Override
 	public boolean isEnderMask(ItemStack stack, PlayerEntity player, EndermanEntity endermanEntity) {
 		return true;
+	}
+	
+	@Override
+	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType slot, ItemStack stack) {
+		Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
+		builder.putAll(super.getAttributeModifiers(this.getEquipmentSlot()));
+		UUID uuid = UUID.fromString("1D45B301-E65D-47A2-B63F-6EC5FCAC9316");
+
+		int uses = Math.round(stack.getOrCreateTag().getFloat(NBT_TAG));
+		double increase = 0.15D * getIncreaseForUses(uses);
+
+		builder.put(EnvironmentalAttributes.STEALTH.get(), new AttributeModifier(uuid, "Stealth", increase, AttributeModifier.Operation.ADDITION));
+		return slot == this.slot ? builder.build() : super.getAttributeModifiers(slot);
 	}
 
 	@SubscribeEvent

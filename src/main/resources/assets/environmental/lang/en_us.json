@@ -387,6 +387,7 @@
 	"gui.environmental.category.sawing": "Sawing",
 
   "generic.reachDistance": "Reach Distance",
+  "attribute.name.generic.stealth": "Stealth",
   
   "enchantment.environmental.reaching": "Reaching",
   "enchantment.environmental.reaching.desc": "Increases Reach Distance by 1 block per level",
