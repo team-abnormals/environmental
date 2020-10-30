@@ -10,7 +10,8 @@
     "DoublePlantBlockMixin",
     "PlayerEntityMixin",
     "AbstractSkeletonEntityMixin",
-    "WitherSkeletonEntityMixin"
+    "WitherSkeletonEntityMixin",
+    "LivingEntityMixin"
   ],
   "client": [
     "ClientRecipeBookMixin"

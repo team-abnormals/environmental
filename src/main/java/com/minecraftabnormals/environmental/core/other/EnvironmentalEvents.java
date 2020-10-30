@@ -21,6 +21,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.NonTamedTargetGoal;
@@ -79,7 +80,7 @@ public class EnvironmentalEvents {
 		if (event.getState().getBlock() instanceof HangingWisteriaLeavesBlock && event.getPlayer().getHeldItemMainhand().getItem() == Items.SHEARS)
 			event.setNewSpeed(15.0F);
 	}
-
+	
 	@SubscribeEvent
 	public static void onEvent(LivingSpawnEvent.CheckSpawn event) {
 		Entity entity = event.getEntity();
@@ -235,45 +236,46 @@ public class EnvironmentalEvents {
 		}
 	}
 
-	@Deprecated
 	@SubscribeEvent
 	public static void onEvent(LivingDeathEvent event) {
-		if (event.getEntity() instanceof SlabfishEntity) {
-			SlabfishEntity entity = (SlabfishEntity) event.getEntity();
-			if (entity.getEntityWorld().getBiome(new BlockPos(entity.getPositionVec())) == Biomes.SOUL_SAND_VALLEY) {
-				if (!entity.getSlabfishType().equals(SlabfishManager.GHOST)) {
-					if (entity.getEntityWorld().isRemote()) {
-						Random rand = new Random();
-
+		LivingEntity entity = event.getEntityLiving();
+		World world = entity.getEntityWorld();
+		Random rand = new Random();
+		
+		if (entity instanceof SlabfishEntity) {
+			SlabfishEntity slabfish = (SlabfishEntity) event.getEntity();
+			if (world.getBiome(new BlockPos(entity.getPositionVec())) == Biomes.SOUL_SAND_VALLEY) {
+				if (!slabfish.getSlabfishType().equals(SlabfishManager.GHOST)) {
+					if (world.isRemote()) {
 						for (int i = 0; i < 7; ++i) {
 							double d0 = rand.nextGaussian() * 0.02D;
 							double d1 = rand.nextGaussian() * 0.02D;
 							double d2 = rand.nextGaussian() * 0.02D;
-							entity.world.addParticle(ParticleTypes.SOUL, entity.getPosXRandom(1.0D), entity.getPosYRandom() + 0.5D, entity.getPosZRandom(1.0D), d0, d1, d2);
+							world.addParticle(ParticleTypes.SOUL, entity.getPosXRandom(1.0D), entity.getPosYRandom() + 0.5D, entity.getPosZRandom(1.0D), d0, d1, d2);
 						}
 					}
 
-					if (!entity.getEntityWorld().isRemote()) {
-						SlabfishEntity ghost = EnvironmentalEntities.SLABFISH.get().create(entity.world);
+					if (!world.isRemote()) {
+						SlabfishEntity ghost = EnvironmentalEntities.SLABFISH.get().create(world);
 						if (ghost == null)
 							return;
 
 						ghost.addPotionEffect(new EffectInstance(Effects.LEVITATION, 140, 0, false, false));
 						ghost.addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 140, 0, false, false));
-						entity.getEntityWorld().playSound(null, new BlockPos(entity.getPositionVec()), SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.NEUTRAL, 1, 1);
+						world.playSound(null, new BlockPos(entity.getPositionVec()), SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.NEUTRAL, 1, 1);
 
-						ghost.setPosition(entity.getPosX(), entity.getPosY(), entity.getPosZ());
-						ghost.setLocationAndAngles(entity.getPosX(), entity.getPosY(), entity.getPosZ(), entity.rotationYaw, entity.rotationPitch);
-						ghost.setNoAI(entity.isAIDisabled());
-						ghost.setGrowingAge(entity.getGrowingAge());
+						ghost.setPosition(slabfish.getPosX(), slabfish.getPosY(), slabfish.getPosZ());
+						ghost.setLocationAndAngles(slabfish.getPosX(), slabfish.getPosY(), slabfish.getPosZ(), slabfish.rotationYaw, slabfish.rotationPitch);
+						ghost.setNoAI(slabfish.isAIDisabled());
+						ghost.setGrowingAge(slabfish.getGrowingAge());
 						ghost.setSlabfishType(SlabfishManager.GHOST);
 						ghost.setFire(0);
-						if (entity.hasCustomName()) {
+						if (slabfish.hasCustomName()) {
 							ghost.setCustomName(entity.getCustomName());
 							ghost.setCustomNameVisible(entity.isCustomNameVisible());
 						}
 
-						entity.getEntityWorld().addEntity(ghost);
+						world.addEntity(ghost);
 					}
 				}
 			}

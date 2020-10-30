@@ -1,22 +1,32 @@
 package com.minecraftabnormals.environmental.common.item;
 
+import java.util.List;
+
+import javax.annotation.Nullable;
+
 import com.minecraftabnormals.environmental.client.model.ThiefHoodModel;
 import com.minecraftabnormals.environmental.core.Environmental;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalTiers;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
 
 import net.minecraft.client.renderer.entity.model.BipedModel;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.monster.EndermanEntity;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -24,6 +34,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 @EventBusSubscriber(modid = Environmental.MODID)
 public class ThiefHoodItem extends ArmorItem {
+	public static final String NBT_TAG = "ThiefHoodUses";
 
 	public ThiefHoodItem(Properties properties) {
 		super(EnvironmentalTiers.Armor.EXPLORER, EquipmentSlotType.HEAD, properties);
@@ -39,7 +50,7 @@ public class ThiefHoodItem extends ArmorItem {
 	public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type) {
 		return Environmental.MODID + ":textures/models/armor/thief_hood.png";
 	}
-	
+
 	@Override
 	public boolean isEnderMask(ItemStack stack, PlayerEntity player, EndermanEntity endermanEntity) {
 		return true;
@@ -60,5 +71,41 @@ public class ThiefHoodItem extends ArmorItem {
 				((PlayerEntity) event.getEntityLiving()).refreshDisplayName();
 			}
 		}
+	}
+
+	@SubscribeEvent
+	public static void onEvent(LivingDeathEvent event) {
+		LivingEntity entity = event.getEntityLiving();
+
+		if (event.getSource().getTrueSource() instanceof LivingEntity && entity instanceof MonsterEntity) {
+			LivingEntity attacker = (LivingEntity) event.getSource().getTrueSource();
+			ItemStack stack = attacker.getItemStackFromSlot(EquipmentSlotType.HEAD);
+			if (stack.getItem() instanceof ThiefHoodItem) {
+				CompoundNBT tag = stack.getOrCreateTag();
+				tag.putInt(NBT_TAG, tag.getInt(NBT_TAG) + 1);
+			}
+		}
+	}
+
+	@Override
+	@OnlyIn(Dist.CLIENT)
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+		CompoundNBT compound = stack.getOrCreateTag();
+		int uses = compound.getInt(NBT_TAG);
+		tooltip.add((new StringTextComponent(Integer.toString(uses) + " monsters killed")).mergeStyle(TextFormatting.GRAY));
+		//TODO: Detection range attribute
+	}
+
+	public static int getIncreaseForUses(int uses) {
+		int increase = 1;
+		if (uses >= 10)
+			increase += 1;
+		if (uses >= 50)
+			increase += 1;
+		if (uses >= 100)
+			increase += 1;
+		if (uses >= 500)
+			increase += 1;
+		return increase;
 	}
 }
