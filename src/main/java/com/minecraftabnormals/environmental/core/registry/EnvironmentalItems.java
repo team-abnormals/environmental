@@ -24,6 +24,7 @@ public class EnvironmentalItems {
     public static final RegistryHelper HELPER = Environmental.REGISTRY_HELPER;
 
     public static final RegistryObject<Item> THIEF_HOOD			 = HELPER.createItem("thief_hood", () -> new ThiefHoodItem(new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
+    public static final RegistryObject<Item> HEALER_POUCH		 = HELPER.createItem("healer_pouch", () -> new HealerPouchItem(new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
     public static final RegistryObject<Item> ARCHITECT_BELT 	 = HELPER.createItem("architect_belt", () -> new ArchitectBeltItem(new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
     public static final RegistryObject<Item> WANDERER_BOOTS		 = HELPER.createItem("wanderer_boots", () -> new WandererBootsItem(new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));
     public static final RegistryObject<Item> EXECUTIONER_CLEAVER = HELPER.createItem("executioner_cleaver", () -> new ExecutionerCleaverItem(EnvironmentalTiers.Item.EXECUTIONER, 6.5f, -3.1F, new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT)));

@@ -112,7 +112,7 @@ public class ThiefHoodItem extends ArmorItem {
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		CompoundNBT compound = stack.getOrCreateTag();
 		int uses = compound.getInt(NBT_TAG);
-		tooltip.add((new StringTextComponent(Integer.toString(uses) + " monsters killed")).mergeStyle(TextFormatting.GRAY));
+		tooltip.add((new StringTextComponent(Integer.toString(uses) + " monsters slain")).mergeStyle(TextFormatting.GRAY));
 		//TODO: Detection range attribute
 	}
 
