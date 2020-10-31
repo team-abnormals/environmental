@@ -1,5 +1,5 @@
 {
-  "parent": "forge:item/default-tool",
+  "parent": "minecraft:item/handheld",
   "loader": "forge:separate-perspective",
   "base": {
     "parent": "environmental:item/executioner_cleaver_handheld"
