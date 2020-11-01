@@ -387,6 +387,7 @@
 	"gui.environmental.category.sawing": "Serrando",
 
   "generic.reachDistance": "Distancia de alcance",
+  "attribute.name.generic.stealth": "Sigilo",
   
   "enchantment.environmental.reaching": "Alcance",
   "enchantment.environmental.reaching.desc": "Incrementa la distancia de alcance 1 bloque por nivel",
