@@ -16,7 +16,7 @@ import com.minecraftabnormals.environmental.common.inventory.SlabfishInventory;
 import com.minecraftabnormals.environmental.common.slabfish.SlabfishManager;
 import com.minecraftabnormals.environmental.common.slabfish.SlabfishType;
 import com.minecraftabnormals.environmental.core.Environmental;
-import com.minecraftabnormals.environmental.core.registry.EnvironmentalContainerTypes;
+import com.minecraftabnormals.environmental.core.registry.EnvironmentalContainers;
 
 public class SlabfishInventoryContainer extends Container {
 
@@ -30,7 +30,7 @@ public class SlabfishInventoryContainer extends Container {
     private final SlabfishEntity slabfish;
 
     public SlabfishInventoryContainer(int windowId, PlayerInventory playerInventory, @Nullable SlabfishInventory slabfishInventory, @Nullable SlabfishEntity slabfish) {
-        super(EnvironmentalContainerTypes.SLABFISH_INVENTORY.get(), windowId);
+        super(EnvironmentalContainers.SLABFISH_INVENTORY.get(), windowId);
         this.slabfishInventory = slabfishInventory;
         this.slabfish = slabfish;
         if (slabfishInventory != null && slabfish != null) {

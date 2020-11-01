@@ -3,7 +3,7 @@ package com.minecraftabnormals.environmental.common.inventory.container;
 import com.google.common.collect.Lists;
 import com.minecraftabnormals.environmental.common.item.crafting.SawingRecipe;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
-import com.minecraftabnormals.environmental.core.registry.EnvironmentalContainerTypes;
+import com.minecraftabnormals.environmental.core.registry.EnvironmentalContainers;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalRecipes;
 
 import net.minecraft.entity.player.PlayerEntity;
@@ -49,7 +49,7 @@ public class SawmillContainer extends Container {
     }
 
     public SawmillContainer(int windowId, PlayerInventory playerInventory, final IWorldPosCallable worldPos) {
-        super(EnvironmentalContainerTypes.SAWMILL.get(), windowId);
+        super(EnvironmentalContainers.SAWMILL.get(), windowId);
         this.worldPosCallable = worldPos;
         this.world = playerInventory.player.world;
         this.inputInventorySlot = this.addSlot(new Slot(this.inputInventory, 0, 20, 33));
@@ -154,7 +154,7 @@ public class SawmillContainer extends Container {
     }
 
     public ContainerType<?> getType() {
-        return EnvironmentalContainerTypes.SAWMILL.get();
+        return EnvironmentalContainers.SAWMILL.get();
     }
 
     public void setInventoryUpdateListener(Runnable listenerIn) {

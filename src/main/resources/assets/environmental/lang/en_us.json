@@ -380,6 +380,8 @@
 	"biome.environmental.blossom_highlands": "Blossom Highlands",
 	"biome.environmental.blossom_valleys": "Blossom Valleys",
 	
+	"effect.environmental.panic": "Panic",
+	
 	"container.kiln": "Kiln",
 	"container.sawmill": "Sawmill",
 	
@@ -388,12 +390,6 @@
 
   "generic.reachDistance": "Reach Distance",
   "attribute.name.generic.stealth": "Stealth",
-  
-  "enchantment.environmental.reaching": "Reaching",
-  "enchantment.environmental.reaching.desc": "Increases Reach Distance by 1 block per level",
-  
-  "enchantment.environmental.travelling": "Travelling",
-  "enchantment.environmental.travelling.desc": "Increases Movement Speed by 5% per level",
 
 	"advancements.husbandry.breed_all_slabfish.title": "Funky Genetics",
 	"advancements.husbandry.breed_all_slabfish.description": "Breed all Slabfish variants!",

@@ -11,7 +11,8 @@
     "PlayerEntityMixin",
     "AbstractSkeletonEntityMixin",
     "WitherSkeletonEntityMixin",
-    "LivingEntityMixin"
+    "LivingEntityMixin",
+    "MobEntityMixin"
   ],
   "client": [
     "ClientRecipeBookMixin"

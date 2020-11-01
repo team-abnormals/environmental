@@ -2,18 +2,14 @@ package com.minecraftabnormals.environmental.core;
 
 import static com.teamabnormals.abnormals_core.core.AbnormalsCore.NETWORK_PROTOCOL;
 
-import com.minecraftabnormals.environmental.client.gui.screen.inventory.KilnScreen;
-import com.minecraftabnormals.environmental.client.gui.screen.inventory.SawmillScreen;
 import com.minecraftabnormals.environmental.common.network.message.*;
 import com.minecraftabnormals.environmental.common.slabfish.SlabfishLoader;
 import com.minecraftabnormals.environmental.common.slabfish.condition.SlabfishCondition;
-import com.minecraftabnormals.environmental.core.other.EnvironmentalClient;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalCompat;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalData;
 import com.minecraftabnormals.environmental.core.registry.*;
 import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
 
-import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.inventory.container.PlayerContainer;
 import net.minecraft.util.ResourceLocation;
@@ -75,20 +71,17 @@ public class Environmental {
         EnvironmentalBiomes.BIOMES.register(modEventBus);
         EnvironmentalFeatures.FEATURES.register(modEventBus);
         EnvironmentalAttributes.ATTRIBUTES.register(modEventBus);
-        
+        EnvironmentalEffects.EFFECTS.register(modEventBus);
         EnvironmentalVillagers.POI_TYPES.register(modEventBus);
         EnvironmentalVillagers.PROFESSIONS.register(modEventBus);
-
-        EnvironmentalContainerTypes.CONTAINER_TYPES.register(modEventBus);
+        EnvironmentalContainers.CONTAINER_TYPES.register(modEventBus);
         EnvironmentalRecipes.Serailizers.RECIPE_SERIALIZERS.register(modEventBus);
-
         EnvironmentalParticles.PARTICLE_TYPES.register(modEventBus);
         EnvironmentalSlabfishConditions.SLABFISH_CONDITIONS.register(modEventBus);
 
         modEventBus.addListener(this::setupCommon);
         modEventBus.addListener(this::registerRegistries);
-		DistExecutor.runWhenOn(Dist.CLIENT, () -> () ->
-        {
+		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
             modEventBus.addListener(this::setupClient);
             modEventBus.addListener(this::stitchTextures);
             modEventBus.addListener(this::registerItemColors);
@@ -98,23 +91,18 @@ public class Environmental {
     }
 
     private void setupCommon(final FMLCommonSetupEvent event) {
-        DeferredWorkQueue.runLater(() ->
-        {
+        DeferredWorkQueue.runLater(() -> {
             EnvironmentalCompat.registerCompostables();
             EnvironmentalCompat.registerFlammables();
             EnvironmentalCompat.registerDispenserBehaviors();
             EnvironmentalCompat.registerLootInjectors();
-            
             EnvironmentalData.registerDataSerializers();
-
             EnvironmentalBiomes.addBiomeTypes();
             EnvironmentalBiomes.addVanillaBiomeTypes();
             EnvironmentalBiomes.addBiomesToGeneration();
             EnvironmentalFeatures.generateFeatures();
-
             EnvironmentalVillagers.registerVillagerTypes();
             EnvironmentalVillagers.registerPOIs();
-
             EnvironmentalEntities.registerSpawns();
             EnvironmentalEntities.registerAttributes();
         });
@@ -122,34 +110,32 @@ public class Environmental {
 
     @OnlyIn(Dist.CLIENT)
     private void setupClient(final FMLClientSetupEvent event) {
-        EnvironmentalEntities.registerRendering();
-        DeferredWorkQueue.runLater(() ->
-        {
-            EnvironmentalClient.setRenderLayers();
-            EnvironmentalClient.registerBlockColors();
-            ScreenManager.registerFactory(EnvironmentalContainerTypes.KILN.get(), KilnScreen::new);
-            ScreenManager.registerFactory(EnvironmentalContainerTypes.SAWMILL.get(), SawmillScreen::new);
+        DeferredWorkQueue.runLater(() -> {
+        	EnvironmentalEntities.registerRendering();
+            EnvironmentalCompat.setRenderLayers();
+            EnvironmentalCompat.registerBlockColors();
+            EnvironmentalContainers.registerScreenFactories();
         });
     }
 
     private void setupPlayMessages() {
-        PLAY.messageBuilder(SSyncSlabfishTypeMessage.class, 0, NetworkDirection.PLAY_TO_CLIENT).
-                encoder(SSyncSlabfishTypeMessage::serialize).
-                decoder(SSyncSlabfishTypeMessage::deserialize).
-                consumer(SSyncSlabfishTypeMessage::handlePlay).
-                add();
+        PLAY.messageBuilder(SSyncSlabfishTypeMessage.class, 0, NetworkDirection.PLAY_TO_CLIENT)
+        		.encoder(SSyncSlabfishTypeMessage::serialize)
+                .decoder(SSyncSlabfishTypeMessage::deserialize)
+                .consumer(SSyncSlabfishTypeMessage::handlePlay)
+                .add();
 
-        PLAY.messageBuilder(SSyncSweaterTypeMessage.class, 1, NetworkDirection.PLAY_TO_CLIENT).
-                encoder(SSyncSweaterTypeMessage::serialize).
-                decoder(SSyncSweaterTypeMessage::deserialize).
-                consumer(SSyncSweaterTypeMessage::handlePlay).
-                add();
+        PLAY.messageBuilder(SSyncSweaterTypeMessage.class, 1, NetworkDirection.PLAY_TO_CLIENT)
+                .encoder(SSyncSweaterTypeMessage::serialize)
+                .decoder(SSyncSweaterTypeMessage::deserialize)
+                .consumer(SSyncSweaterTypeMessage::handlePlay)
+                .add();
 
-        PLAY.messageBuilder(SSyncBackpackTypeMessage.class, 2, NetworkDirection.PLAY_TO_CLIENT).
-                encoder(SSyncBackpackTypeMessage::serialize).
-                decoder(SSyncBackpackTypeMessage::deserialize).
-                consumer(SSyncBackpackTypeMessage::handlePlay).
-                add();
+        PLAY.messageBuilder(SSyncBackpackTypeMessage.class, 2, NetworkDirection.PLAY_TO_CLIENT)
+                .encoder(SSyncBackpackTypeMessage::serialize)
+                .decoder(SSyncBackpackTypeMessage::deserialize)
+                .consumer(SSyncBackpackTypeMessage::handlePlay)
+                .add();
 
         PLAY.messageBuilder(SOpenSlabfishInventoryMessage.class, 3, NetworkDirection.PLAY_TO_CLIENT)
                 .encoder(SOpenSlabfishInventoryMessage::serialize).decoder(SOpenSlabfishInventoryMessage::deserialize)
@@ -158,36 +144,36 @@ public class Environmental {
     }
 
     private void setupLoginMessages() {
-        LOGIN.messageBuilder(CAcknowledgeEnvironmentalMessage.class, 99, NetworkDirection.LOGIN_TO_SERVER).
-                loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex).
-                encoder(CAcknowledgeEnvironmentalMessage::serialize).
-                decoder(CAcknowledgeEnvironmentalMessage::deserialize).
-                consumer(FMLHandshakeHandler.indexFirst(CAcknowledgeEnvironmentalMessage::handle)).
-                add();
+        LOGIN.messageBuilder(CAcknowledgeEnvironmentalMessage.class, 99, NetworkDirection.LOGIN_TO_SERVER)
+                .loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex)
+                .encoder(CAcknowledgeEnvironmentalMessage::serialize)
+                .decoder(CAcknowledgeEnvironmentalMessage::deserialize)
+                .consumer(FMLHandshakeHandler.indexFirst(CAcknowledgeEnvironmentalMessage::handle))
+                .add();
 
-        LOGIN.messageBuilder(SSyncSlabfishTypeMessage.class, 0, NetworkDirection.LOGIN_TO_CLIENT).
-                loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex).
-                encoder(SSyncSlabfishTypeMessage::serialize).
-                decoder(SSyncSlabfishTypeMessage::deserialize).
-                markAsLoginPacket().
-                consumer(FMLHandshakeHandler.biConsumerFor((__, msg, ctx) -> SSyncSlabfishTypeMessage.handleLogin(msg, ctx))).
-                add();
+        LOGIN.messageBuilder(SSyncSlabfishTypeMessage.class, 0, NetworkDirection.LOGIN_TO_CLIENT)
+                .loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex)
+                .encoder(SSyncSlabfishTypeMessage::serialize)
+                .decoder(SSyncSlabfishTypeMessage::deserialize)
+                .markAsLoginPacket()
+                .consumer(FMLHandshakeHandler.biConsumerFor((__, msg, ctx) -> SSyncSlabfishTypeMessage.handleLogin(msg, ctx)))
+                .add();
 
-        LOGIN.messageBuilder(SSyncSweaterTypeMessage.class, 1, NetworkDirection.LOGIN_TO_CLIENT).
-                loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex).
-                encoder(SSyncSweaterTypeMessage::serialize).
-                decoder(SSyncSweaterTypeMessage::deserialize).
-                markAsLoginPacket().
-                consumer(FMLHandshakeHandler.biConsumerFor((__, msg, ctx) -> SSyncSweaterTypeMessage.handleLogin(msg, ctx))).
-                add();
+        LOGIN.messageBuilder(SSyncSweaterTypeMessage.class, 1, NetworkDirection.LOGIN_TO_CLIENT)
+                .loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex)
+                .encoder(SSyncSweaterTypeMessage::serialize)
+                .decoder(SSyncSweaterTypeMessage::deserialize)
+                .markAsLoginPacket()
+                .consumer(FMLHandshakeHandler.biConsumerFor((__, msg, ctx) -> SSyncSweaterTypeMessage.handleLogin(msg, ctx)))
+                .add();
 
-        LOGIN.messageBuilder(SSyncBackpackTypeMessage.class, 2, NetworkDirection.LOGIN_TO_CLIENT).
-                loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex).
-                encoder(SSyncBackpackTypeMessage::serialize).
-                decoder(SSyncBackpackTypeMessage::deserialize).
-                markAsLoginPacket().
-                consumer(FMLHandshakeHandler.biConsumerFor((__, msg, ctx) -> SSyncBackpackTypeMessage.handleLogin(msg, ctx))).
-                add();
+        LOGIN.messageBuilder(SSyncBackpackTypeMessage.class, 2, NetworkDirection.LOGIN_TO_CLIENT)
+                .loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex)
+                .encoder(SSyncBackpackTypeMessage::serialize)
+                .decoder(SSyncBackpackTypeMessage::deserialize)
+                .markAsLoginPacket()
+                .consumer(FMLHandshakeHandler.biConsumerFor((__, msg, ctx) -> SSyncBackpackTypeMessage.handleLogin(msg, ctx)))
+                .add();
     }
 
     private void registerRegistries(RegistryEvent.NewRegistry event) {
