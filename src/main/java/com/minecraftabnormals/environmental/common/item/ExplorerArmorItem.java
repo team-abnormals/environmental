@@ -23,4 +23,11 @@ public class ExplorerArmorItem extends DyeableArmorItem {
 		if ("overlay".equals(type)) return Environmental.MODID + ":textures/models/armor/" + armor + "_overlay.png";
 		else return Environmental.MODID + ":textures/models/armor/" + armor + ".png";
 	}
+	
+	@Override
+	public int getColor(ItemStack stack) {
+		if (!hasColor(stack))
+            return 0x77533F;
+        return super.getColor(stack);
+	}
 }
