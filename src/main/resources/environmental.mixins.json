@@ -5,7 +5,6 @@
   "minVersion": "0.8",
   "refmap": "environmental.refmap.json",
   "mixins": [
-    "VindicatorEntityMixin",
     "LilyPadBlockMixin",
     "DoublePlantBlockMixin",
     "PlayerEntityMixin",
