@@ -298,7 +298,7 @@
 		
 	"item.environmental.wanderer_boots": "Botas del nómada",
 	"item.environmental.architect_belt": "Cinturón del arquitecto",
-	"item.environmental.fool_wings": "Alas del necio",
+	"item.environmental.healer_pouch": "Bolsa del curador",
 	"item.environmental.thief_hood": "Capucha del ladrón",
 	"item.environmental.executioner_cleaver": "Cuchilla del verdugo",
 	
@@ -367,6 +367,9 @@
 	"entity.environmental.deer": "Ciervo",
 	"entity.environmental.yak": "Yak",
 	"entity.environmental.koi": "Koi",
+
+	"entity.environmental.duck_egg": "Huevo de pato",
+	"entity.environmental.mud_ball": "Bola de barro",
 	
 	"entity.minecraft.villager.environmental.ceramist": "Alfarero",
 	"entity.minecraft.villager.environmental.carpenter": "Carpintero",
@@ -379,6 +382,8 @@
 	"biome.environmental.blossom_hills": "Colinas florecientes",
 	"biome.environmental.blossom_highlands": "Elevaciones florecientes",
 	"biome.environmental.blossom_valleys": "Valles florecientes",
+
+	"effect.environmental.panic": "Pánico",
 	
 	"container.kiln": "Kiln",
 	"container.sawmill": "Acerradero",
