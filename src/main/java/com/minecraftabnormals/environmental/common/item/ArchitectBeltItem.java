@@ -10,18 +10,15 @@ import com.google.common.collect.ImmutableMultimap.Builder;
 import com.google.common.collect.Multimap;
 import com.minecraftabnormals.environmental.client.model.ArchitectBeltModel;
 import com.minecraftabnormals.environmental.core.Environmental;
-import com.minecraftabnormals.environmental.core.other.EnvironmentalTiers;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
 
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.text.ITextComponent;
@@ -36,22 +33,17 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 @EventBusSubscriber(modid = Environmental.MODID)
-public class ArchitectBeltItem extends ArmorItem {
+public class ArchitectBeltItem extends ExplorerArmorItem {
 	private static final String NBT_TAG = "ArchitectBeltUses";
 	
 	public ArchitectBeltItem(Properties properties) {
-		super(EnvironmentalTiers.Armor.EXPLORER, EquipmentSlotType.LEGS, properties);
+		super(EquipmentSlotType.LEGS, properties);
 	}
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack stack, EquipmentSlotType armorSlot, A _default) {
 		return ArchitectBeltModel.get(1.0F);
-	}
-	
-	@Override
-	public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type) {
-		return Environmental.MODID + ":textures/models/armor/architect_belt.png";
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package com.minecraftabnormals.environmental.common.entity;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -59,12 +61,14 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 public class DeerEntity extends AnimalEntity {
 	private static final DataParameter<Integer> DEER_COAT_COLOR = EntityDataManager.createKey(DeerEntity.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> DEER_COAT_TYPE = EntityDataManager.createKey(DeerEntity.class, DataSerializers.VARINT);
 	private static final DataParameter<Boolean> HAS_ANTLERS = EntityDataManager.createKey(DeerEntity.class, DataSerializers.BOOLEAN);
+	
 	private static final Predicate<Entity> SHOULD_AVOID = (entity) -> {
 		return !entity.isDiscrete() && EntityPredicates.CAN_AI_TARGET.test(entity);
 	};
@@ -242,12 +246,24 @@ public class DeerEntity extends AnimalEntity {
 	@Override
 	public DeerEntity createChild(AgeableEntity ageable) {
 		DeerEntity entity = EnvironmentalEntities.DEER.get().create(this.world);
-
-		entity.setCoatColor(((DeerEntity) ageable).getCoatColor());
-		entity.setCoatType(this.getCoatType());
+		
+        if (this.isHolidayDeer()) {
+        	entity.setCoatColor(DeerCoatColors.HOLIDAY.getId());
+        } else {
+        	entity.setCoatColor(((DeerEntity) ageable).getCoatColor());
+        }
+        
+        entity.setCoatType(this.getCoatType());
 		entity.setHasAntlers(rand.nextBoolean());
 
 		return entity;
+	}
+	
+	public boolean isHolidayDeer() {
+		LocalDate localdate = LocalDate.now();
+		int day = localdate.get(ChronoField.DAY_OF_MONTH);
+        int month = localdate.get(ChronoField.MONTH_OF_YEAR);
+		return (month == 12 && day >= 21 && day <= 31) && this.rand.nextFloat() < 0.5F && this.world.getBiome(this.getPosition()).getCategory() == Biome.Category.ICY;
 	}
 
 	public static AttributeModifierMap.MutableAttribute registerAttributes() {
@@ -263,8 +279,12 @@ public class DeerEntity extends AnimalEntity {
 	@Override
 	public ILivingEntityData onInitialSpawn(IWorld worldIn, DifficultyInstance difficulty, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
 		spawnDataIn = super.onInitialSpawn(world, difficulty, reason, spawnDataIn, dataTag);
-
-		this.setCoatColor(rand.nextInt(DeerCoatColors.values().length));
+		if (this.isHolidayDeer()) {
+			this.setCoatColor(DeerCoatColors.HOLIDAY.getId());
+        } else {
+    		this.setCoatColor(rand.nextInt(2));
+        }
+		
 		this.setCoatType(rand.nextInt(DeerCoatTypes.values().length));
 		this.setHasAntlers(rand.nextBoolean());
 

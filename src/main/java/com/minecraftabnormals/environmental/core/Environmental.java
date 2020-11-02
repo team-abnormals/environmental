@@ -2,7 +2,12 @@ package com.minecraftabnormals.environmental.core;
 
 import static com.teamabnormals.abnormals_core.core.AbnormalsCore.NETWORK_PROTOCOL;
 
-import com.minecraftabnormals.environmental.common.network.message.*;
+import com.minecraftabnormals.environmental.common.network.message.CAcknowledgeEnvironmentalMessage;
+import com.minecraftabnormals.environmental.common.network.message.EnvironmentalLoginMessage;
+import com.minecraftabnormals.environmental.common.network.message.SOpenSlabfishInventoryMessage;
+import com.minecraftabnormals.environmental.common.network.message.SSyncBackpackTypeMessage;
+import com.minecraftabnormals.environmental.common.network.message.SSyncSlabfishTypeMessage;
+import com.minecraftabnormals.environmental.common.network.message.SSyncSweaterTypeMessage;
 import com.minecraftabnormals.environmental.common.slabfish.SlabfishLoader;
 import com.minecraftabnormals.environmental.common.slabfish.condition.SlabfishCondition;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalCompat;
@@ -12,6 +17,7 @@ import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
 
 import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.inventory.container.PlayerContainer;
+import net.minecraft.item.IDyeableArmorItem;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -192,6 +198,9 @@ public class Environmental {
     @OnlyIn(Dist.CLIENT)
     private void registerItemColors(ColorHandlerEvent.Item event) {
         REGISTRY_HELPER.processSpawnEggColors(event);
+        event.getItemColors().register(
+        		(stack, color) -> color > 0 ? -1 : ((IDyeableArmorItem)stack.getItem()).getColor(stack),
+        				EnvironmentalItems.THIEF_HOOD.get(), EnvironmentalItems.HEALER_POUCH.get(), EnvironmentalItems.ARCHITECT_BELT.get(), EnvironmentalItems.WANDERER_BOOTS.get());
     }
 
     @SubscribeEvent

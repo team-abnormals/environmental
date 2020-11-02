@@ -39,7 +39,7 @@ public class HealerPouchModel<T extends LivingEntity> extends BipedModel<T> {
 	public void render(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
 		this.body.copyModelAngles(this.bipedBody);
 		matrixStackIn.push();
-		matrixStackIn.scale(1.01F, 1.01F, 1.01F);
+		matrixStackIn.scale(1.01F, 1.01F, 1.02F);
 		super.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
 		matrixStackIn.pop();
 	}

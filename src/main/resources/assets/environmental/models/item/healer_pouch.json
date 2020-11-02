@@ -1,6 +1,7 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "environmental:item/healer_pouch"
+        "layer0": "environmental:item/healer_pouch",
+        "layer1": "environmental:item/healer_pouch_overlay"
     }
 }

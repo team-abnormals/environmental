@@ -10,13 +10,11 @@ import com.google.common.collect.ImmutableMultimap.Builder;
 import com.google.common.collect.Multimap;
 import com.minecraftabnormals.environmental.client.model.ThiefHoodModel;
 import com.minecraftabnormals.environmental.core.Environmental;
-import com.minecraftabnormals.environmental.core.other.EnvironmentalTiers;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalAttributes;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
 
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -24,7 +22,6 @@ import net.minecraft.entity.monster.EndermanEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.text.ITextComponent;
@@ -40,22 +37,17 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 @EventBusSubscriber(modid = Environmental.MODID)
-public class ThiefHoodItem extends ArmorItem {
+public class ThiefHoodItem extends ExplorerArmorItem {
 	private static final String NBT_TAG = "ThiefHoodUses";
 
 	public ThiefHoodItem(Properties properties) {
-		super(EnvironmentalTiers.Armor.EXPLORER, EquipmentSlotType.HEAD, properties);
+		super(EquipmentSlotType.HEAD, properties);
 	}
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack stack, EquipmentSlotType armorSlot, A _default) {
 		return ThiefHoodModel.get(1.0F);
-	}
-
-	@Override
-	public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type) {
-		return Environmental.MODID + ":textures/models/armor/thief_hood.png";
 	}
 
 	@Override

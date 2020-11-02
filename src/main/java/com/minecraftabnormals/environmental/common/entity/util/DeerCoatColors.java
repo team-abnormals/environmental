@@ -4,10 +4,10 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 public enum DeerCoatColors {
-    BROWN(0), RED(1);
+    BROWN(0), RED(1), HOLIDAY(2);
 
-    private static final DeerCoatColors[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(DeerCoatColors::getId)).toArray((p_234255_0_) -> {
-        return new DeerCoatColors[p_234255_0_];
+    private static final DeerCoatColors[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(DeerCoatColors::getId)).toArray((index) -> {
+        return new DeerCoatColors[index];
     });
     
     private final int id;

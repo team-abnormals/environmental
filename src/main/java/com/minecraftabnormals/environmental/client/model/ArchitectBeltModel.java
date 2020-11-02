@@ -47,7 +47,10 @@ public class ArchitectBeltModel<T extends LivingEntity> extends BipedModel<T> {
 		this.belt.copyModelAngles(this.bipedBody);
 		this.rightKnee.copyModelAngles(this.bipedRightLeg);
 		this.leftKnee.copyModelAngles(this.bipedLeftLeg);
+		matrixStackIn.push();
+		matrixStackIn.scale(1.0F, 1.0F, 1.01F);
 		super.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+		matrixStackIn.pop();
 	}
 
 	@Override

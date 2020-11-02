@@ -368,6 +368,9 @@
 	"entity.environmental.yak": "Yak",
 	"entity.environmental.koi": "Koi",
 	
+	"entity.environmental.duck_egg": "Duck Egg",
+	"entity.environmental.mud_ball": "Mud Ball",
+	
 	"entity.minecraft.villager.environmental.ceramist": "Ceramist",
 	"entity.minecraft.villager.environmental.carpenter": "Carpenter",
 	

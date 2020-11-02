@@ -6,16 +6,13 @@ import javax.annotation.Nullable;
 
 import com.minecraftabnormals.environmental.client.model.HealerPouchModel;
 import com.minecraftabnormals.environmental.core.Environmental;
-import com.minecraftabnormals.environmental.core.other.EnvironmentalTiers;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEffects;
 
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.potion.EffectInstance;
@@ -31,22 +28,17 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 @EventBusSubscriber(modid = Environmental.MODID)
-public class HealerPouchItem extends ArmorItem {
+public class HealerPouchItem extends ExplorerArmorItem {
 	private static final String NBT_TAG = "HealerPouchUses";
 	
 	public HealerPouchItem(Properties properties) {
-		super(EnvironmentalTiers.Armor.EXPLORER, EquipmentSlotType.CHEST, properties);
+		super(EquipmentSlotType.CHEST, properties);
 	}
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack stack, EquipmentSlotType armorSlot, A _default) {
 		return HealerPouchModel.get(1.0F);
-	}
-	
-	@Override
-	public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type) {
-		return Environmental.MODID + ":textures/models/armor/healer_pouch.png";
 	}
 	
 	@Override
