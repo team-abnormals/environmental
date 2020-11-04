@@ -24,6 +24,10 @@ public class EnvironmentalConfig {
         
         public final ConfigValue<Boolean> limitFarmAnimalSpawns;
         public final ConfigValue<Boolean> biomeVariantsAlwaysSpawn;
+        
+        public final ConfigValue<Boolean> blockOnlyNaturalSpawns;
+        public final ConfigValue<Integer> koiSerenityRange;
+        public final ConfigValue<Boolean> serenityEffect;
 
         Common(ForgeConfigSpec.Builder builder) {
         	builder.push("worldgen");
@@ -49,6 +53,11 @@ public class EnvironmentalConfig {
             builder.push("entities");
             limitFarmAnimalSpawns = builder.comment("Make farm animals spawn in less biomes to allow new mobs to take their place and diversify biome spawns").define("Limit farm animal spawns", true);
             biomeVariantsAlwaysSpawn = builder.comment("Make biome variants of mobs like Husk always spawn in place of their original in their biomes").define("Biome variants always spawn", true);
+                builder.push("koi");
+                    blockOnlyNaturalSpawns = builder.comment("Make Koi only block natural spawns").define("Block only natural spawns", true);
+                    koiSerenityRange = builder.comment("Radius of Serenity effect in blocks").define("Serenity range (radius)", 64);
+                    serenityEffect = builder.comment("If Koi exude Serenity as a potion effect").define("Serenity potion effect", true);
+                builder.pop();
             builder.pop();
         }
     }
