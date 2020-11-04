@@ -4,12 +4,12 @@ issueTrackerURL="https://github.com/minecraftabnormals/Environmental/issues"
 license="https://github.com/minecraftabnormals/Environmental/blob/master/LICENSE.txt"
 
 [[mods]]
-    modId="environmental"
-    version="${file.jarVersion}"
+    modId="${id}"
+    version="${version}"
+    displayName="${name}"
     logoFile="logo.png"
     authors="bageldotjpg, Farcr"
     credits="hatsondogs, Jackson, Ocelot, Echolite, and five"
-    displayName="Environmental"
     description='''Expanding the environment. New wood, new blocks, new friends.'''
 
 [[dependencies.environmental]]
