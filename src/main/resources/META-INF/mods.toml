@@ -4,9 +4,9 @@ issueTrackerURL="https://github.com/minecraftabnormals/Environmental/issues"
 license="https://github.com/minecraftabnormals/Environmental/blob/master/LICENSE.txt"
 
 [[mods]]
-    modId="${id}"
-    version="${version}"
-    displayName="${name}"
+    modId="environmental"
+    version="${file.jarVersion}"
+    displayName="Environmental"
     logoFile="logo.png"
     authors="bageldotjpg, Farcr"
     credits="hatsondogs, Jackson, Ocelot, Echolite, and five"

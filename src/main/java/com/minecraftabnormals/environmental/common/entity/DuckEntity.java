@@ -2,8 +2,9 @@ package com.minecraftabnormals.environmental.common.entity;
 
 import java.util.Random;
 
-import com.minecraftabnormals.environmental.common.entity.goals.DuckLayEggInNestGoal;
+import com.minecraftabnormals.environmental.api.IEggLayingEntity;
 import com.minecraftabnormals.environmental.common.entity.goals.DuckSwimGoal;
+import com.minecraftabnormals.environmental.common.entity.goals.LayEggInNestGoal;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalTags;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEntities;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
@@ -29,6 +30,7 @@ import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
@@ -51,7 +53,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-public class DuckEntity extends AnimalEntity {
+public class DuckEntity extends AnimalEntity implements IEggLayingEntity {
 	private static final DataParameter<Integer> EATING = EntityDataManager.createKey(DuckEntity.class, DataSerializers.VARINT);
 	private float wingRotation;
 	private float destPos;
@@ -72,7 +74,7 @@ public class DuckEntity extends AnimalEntity {
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new DuckSwimGoal(this));
 		this.goalSelector.addGoal(1, new PanicGoal(this, 1.4D));
-		this.goalSelector.addGoal(2, new DuckLayEggInNestGoal(this, 1.0D));
+		this.goalSelector.addGoal(2, new LayEggInNestGoal(this, 1.0D));
 		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
 		this.goalSelector.addGoal(3, new TemptGoal(this, 1.0D, false, Ingredient.fromTag(EnvironmentalTags.Items.DUCK_BREEDING_ITEMS)));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
@@ -138,7 +140,7 @@ public class DuckEntity extends AnimalEntity {
 			// Egg laying
 			if (this.isAlive() && !this.isChild() && !this.inWater && !this.isDuckJockey() && --this.timeUntilNextEgg <= 0) {
 				this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-				this.entityDropItem(EnvironmentalItems.DUCK_EGG.get());
+				this.entityDropItem(this.getEggItem());
 				this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
 			}
 
@@ -278,5 +280,25 @@ public class DuckEntity extends AnimalEntity {
 	@Override
 	public ItemStack getPickedResult(RayTraceResult target) {
 		return new ItemStack(EnvironmentalItems.DUCK_SPAWN_EGG.get());
+	}
+	
+	@Override
+	public int getEggTimer() {
+		return this.timeUntilNextEgg;
+	}
+
+	@Override
+	public void setEggTimer(int time) {
+		this.timeUntilNextEgg = time;
+	}
+
+	@Override
+	public boolean isBirdJockey() {
+		return this.isDuckJockey();
+	}
+
+	@Override
+	public Item getEggItem() {
+		return EnvironmentalItems.DUCK_EGG.get();
 	}
 }

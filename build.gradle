@@ -91,16 +91,6 @@ dependencies {
     runtimeOnly fg.deobf("mezz.jei:jei-${project.minecraft}:${project.jei}")
 }
 
-processResources {
-    inputs.property "name", project.modName
-    inputs.property "version", project.modVersion
-    inputs.property "id", project.modId
-    filesMatching(["META-INF/mods.toml", "pack.mcmeta"]) {
-        expand "name": project.modName, "version": project.modVersion, "id": project.modId
-    }
-}
-
-
 jar {
     manifest {
         attributes([

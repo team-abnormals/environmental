@@ -9,7 +9,7 @@ import com.google.common.collect.Maps;
 import com.minecraftabnormals.environmental.common.block.HangingWisteriaLeavesBlock;
 import com.minecraftabnormals.environmental.common.entity.KoiEntity;
 import com.minecraftabnormals.environmental.common.entity.SlabfishEntity;
-import com.minecraftabnormals.environmental.common.entity.goals.ChickenLayEggInNestGoal;
+import com.minecraftabnormals.environmental.common.entity.goals.LayEggInNestGoal;
 import com.minecraftabnormals.environmental.common.entity.util.SlabfishOverlay;
 import com.minecraftabnormals.environmental.common.slabfish.SlabfishManager;
 import com.minecraftabnormals.environmental.core.Environmental;
@@ -309,8 +309,8 @@ public class EnvironmentalEvents {
 	public static void onEvent(EnteringChunk event) {
 		if (event.getEntity() instanceof ChickenEntity) {
 			ChickenEntity chicken = (ChickenEntity) event.getEntity();
-			if (!chicken.goalSelector.goals.stream().anyMatch((goal) -> goal.getGoal() instanceof ChickenLayEggInNestGoal)) {
-				chicken.goalSelector.addGoal(2, new ChickenLayEggInNestGoal(chicken, 1.0D));
+			if (!chicken.goalSelector.goals.stream().anyMatch((goal) -> goal.getGoal() instanceof LayEggInNestGoal)) {
+				chicken.goalSelector.addGoal(2, new LayEggInNestGoal(chicken, 1.0D));
 			}
 		} else if (event.getEntity() instanceof WolfEntity) {
 			WolfEntity wolf = (WolfEntity) event.getEntity();
