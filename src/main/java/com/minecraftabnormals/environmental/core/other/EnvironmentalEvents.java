@@ -7,19 +7,22 @@ import java.util.Random;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.minecraftabnormals.environmental.common.block.HangingWisteriaLeavesBlock;
+import com.minecraftabnormals.environmental.common.entity.KoiEntity;
 import com.minecraftabnormals.environmental.common.entity.SlabfishEntity;
-import com.minecraftabnormals.environmental.common.entity.goals.ChickenLayEggInNestGoal;
+import com.minecraftabnormals.environmental.common.entity.goals.LayEggInNestGoal;
 import com.minecraftabnormals.environmental.common.entity.util.SlabfishOverlay;
 import com.minecraftabnormals.environmental.common.slabfish.SlabfishManager;
 import com.minecraftabnormals.environmental.core.Environmental;
 import com.minecraftabnormals.environmental.core.EnvironmentalConfig;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEntities;
+import com.teamabnormals.abnormals_core.core.utils.MathUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
@@ -69,6 +72,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
+import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
@@ -92,46 +96,65 @@ public class EnvironmentalEvents {
 		boolean validSpawn = naturalSpawn || chunkGenSpawn;
 
 		boolean replaceVariants = EnvironmentalConfig.COMMON.biomeVariantsAlwaysSpawn.get();
-
-		if (replaceVariants && validSpawn && entity.getPosY() > 60) {
-			if (entity.getType() == EntityType.ZOMBIE) {
-				ZombieEntity zombie = (ZombieEntity) entity;
-				if (world.getBiome(entity.getPosition()).getCategory() == Biome.Category.DESERT) {
-
-					HuskEntity husk = EntityType.HUSK.create(world.getWorld());
-					husk.setChild(zombie.isChild());
-					for (EquipmentSlotType slot : EquipmentSlotType.values())
-						zombie.setItemStackToSlot(slot, zombie.getItemStackFromSlot(slot));
-					husk.setLocationAndAngles(zombie.getPosX(), zombie.getPosY(), zombie.getPosZ(), zombie.rotationYaw, zombie.rotationPitch);
-
-					world.addEntity(husk);
-					entity.remove();
+		
+		if(event.getResult() != Event.Result.DENY) {
+			if (replaceVariants && validSpawn && entity.getPosY() > 60) {
+				if (entity.getType() == EntityType.ZOMBIE) {
+					ZombieEntity zombie = (ZombieEntity) entity;
+					if (world.getBiome(entity.getPosition()).getCategory() == Biome.Category.DESERT) {
+						
+						HuskEntity husk = EntityType.HUSK.create(world.getWorld());
+						husk.setChild(zombie.isChild());
+						for (EquipmentSlotType slot : EquipmentSlotType.values())
+							zombie.setItemStackToSlot(slot, zombie.getItemStackFromSlot(slot));
+						husk.setLocationAndAngles(zombie.getPosX(), zombie.getPosY(), zombie.getPosZ(), zombie.rotationYaw, zombie.rotationPitch);
+						
+						world.addEntity(husk);
+						entity.remove();
+					}
+				}
+				
+				if (entity.getType() == EntityType.SKELETON) {
+					SkeletonEntity skeleton = (SkeletonEntity) entity;
+					if (world.getBiome(entity.getPosition()).getCategory() == Biome.Category.ICY) {
+						
+						StrayEntity stray = EntityType.STRAY.create(world.getWorld());
+						for (EquipmentSlotType slot : EquipmentSlotType.values())
+							skeleton.setItemStackToSlot(slot, skeleton.getItemStackFromSlot(slot));
+						stray.setLocationAndAngles(skeleton.getPosX(), skeleton.getPosY(), skeleton.getPosZ(), skeleton.rotationYaw, skeleton.rotationPitch);
+						
+						world.addEntity(stray);
+						entity.remove();
+					}
 				}
 			}
-
-			if (entity.getType() == EntityType.SKELETON) {
-				SkeletonEntity skeleton = (SkeletonEntity) entity;
-				if (world.getBiome(entity.getPosition()).getCategory() == Biome.Category.ICY) {
-
-					StrayEntity stray = EntityType.STRAY.create(world.getWorld());
-					for (EquipmentSlotType slot : EquipmentSlotType.values())
-						skeleton.setItemStackToSlot(slot, skeleton.getItemStackFromSlot(slot));
-					stray.setLocationAndAngles(skeleton.getPosX(), skeleton.getPosY(), skeleton.getPosZ(), skeleton.rotationYaw, skeleton.rotationPitch);
-
-					world.addEntity(stray);
+			
+			if (validSpawn && entity.getType() == EntityType.MOOSHROOM) {
+				MooshroomEntity mooshroom = (MooshroomEntity) event.getEntity();
+				if (random.nextInt(3) == 0) {
+					MooshroomEntity brownMooshroom = EntityType.MOOSHROOM.create(event.getWorld().getWorld());
+					brownMooshroom.setLocationAndAngles(mooshroom.getPosX(), mooshroom.getPosY(), mooshroom.getPosZ(), mooshroom.rotationYaw, mooshroom.rotationPitch);
+					brownMooshroom.setMooshroomType(MooshroomEntity.Type.BROWN);
+					world.addEntity(brownMooshroom);
 					entity.remove();
 				}
 			}
 		}
-
-		if (validSpawn && entity.getType() == EntityType.MOOSHROOM) {
-			MooshroomEntity mooshroom = (MooshroomEntity) event.getEntity();
-			if (random.nextInt(3) == 0) {
-				MooshroomEntity brownMooshroom = EntityType.MOOSHROOM.create(event.getWorld().getWorld());
-				brownMooshroom.setLocationAndAngles(mooshroom.getPosX(), mooshroom.getPosY(), mooshroom.getPosZ(), mooshroom.rotationYaw, mooshroom.rotationPitch);
-				brownMooshroom.setMooshroomType(MooshroomEntity.Type.BROWN);
-				world.addEntity(brownMooshroom);
-				entity.remove();
+		
+		//Koi stuff
+		
+		boolean blockOnlyNaturalSpawns = EnvironmentalConfig.COMMON.blockOnlyNaturalSpawns.get();
+		
+		if(blockOnlyNaturalSpawns && event.isSpawner()) return;
+		if(!EnvironmentalTags.EntityTypes.SERENITY_WHITELIST.contains(entity.getType())) {
+			if(entity.getType().getClassification() == EntityClassification.MONSTER) {
+				int range = EnvironmentalConfig.COMMON.koiSerenityRange.get();
+				for(Entity koi : world.getEntitiesWithinAABB(KoiEntity.class, entity.getBoundingBox().grow(range))) {
+					if (MathUtils.distanceBetweenPoints2d(entity.getPosX(), entity.getPosZ(), koi.getPosX(), koi.getPosZ()) <= range) {
+						event.setResult(Event.Result.DENY);
+						break;
+					}
+				}
 			}
 		}
 	}
@@ -286,8 +309,8 @@ public class EnvironmentalEvents {
 	public static void onEvent(EnteringChunk event) {
 		if (event.getEntity() instanceof ChickenEntity) {
 			ChickenEntity chicken = (ChickenEntity) event.getEntity();
-			if (!chicken.goalSelector.goals.stream().anyMatch((goal) -> goal.getGoal() instanceof ChickenLayEggInNestGoal)) {
-				chicken.goalSelector.addGoal(2, new ChickenLayEggInNestGoal(chicken, 1.0D));
+			if (!chicken.goalSelector.goals.stream().anyMatch((goal) -> goal.getGoal() instanceof LayEggInNestGoal)) {
+				chicken.goalSelector.addGoal(2, new LayEggInNestGoal(chicken, 1.0D));
 			}
 		} else if (event.getEntity() instanceof WolfEntity) {
 			WolfEntity wolf = (WolfEntity) event.getEntity();
