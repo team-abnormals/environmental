@@ -158,16 +158,38 @@
       "rolls": 1.0,
       "entries": [
         {
-          "type": "minecraft:item",
-		  "conditions": [
-			{
-			  "condition": "minecraft:match_tool",
-			  "predicate": {
-				"item": "minecraft:shears"
-			  }
-			}
-		  ],
-          "name": "environmental:twig_nest"
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:match_tool",
+                  "predicate": {
+                    "item": "minecraft:shears"
+                  }
+                }
+              ],
+              "name": "environmental:twig_nest"
+            },
+            {
+              "type": "minecraft:item",
+              "functions": [
+                {
+                  "function": "minecraft:set_count",
+                  "count": {
+                    "min": 1.0,
+                    "max": 3.0,
+                    "type": "minecraft:uniform"
+                  }
+                },
+                {
+                  "function": "minecraft:explosion_decay"
+                }
+              ],
+              "name": "minecraft:stick"
+            }
+          ]
         }
       ]
     }
