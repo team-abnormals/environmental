@@ -141,7 +141,7 @@ public class DuckEntity extends AnimalEntity implements IEggLayingEntity {
 			if (this.isAlive() && !this.isChild() && !this.inWater && !this.isDuckJockey() && --this.timeUntilNextEgg <= 0) {
 				this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
 				this.entityDropItem(this.getEggItem());
-				this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
+				this.timeUntilNextEgg = this.getNextEggTime(this.rand);
 			}
 
 			// Eating
@@ -300,5 +300,10 @@ public class DuckEntity extends AnimalEntity implements IEggLayingEntity {
 	@Override
 	public Item getEggItem() {
 		return EnvironmentalItems.DUCK_EGG.get();
+	}
+	
+	@Override
+	public int getNextEggTime(Random rand) {
+		return rand.nextInt(6000) + 6000;
 	}
 }

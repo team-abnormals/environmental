@@ -1,5 +1,7 @@
 package com.minecraftabnormals.environmental.api;
 
+import java.util.Random;
+
 import net.minecraft.item.Item;
 
 public interface IEggLayingEntity {
@@ -7,4 +9,5 @@ public interface IEggLayingEntity {
 	void setEggTimer(int time);
 	boolean isBirdJockey();
 	Item getEggItem();
+	int getNextEggTime(Random rand);
 }
