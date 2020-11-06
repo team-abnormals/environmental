@@ -37,8 +37,9 @@ public class EnvironmentalFeatures {
     public static final RegistryObject<Feature<NoFeatureConfig>> DENSE_CATTAILS = FEATURES.register("dense_cattails", () -> new DenseCattailsFeature(NoFeatureConfig.field_236558_a_));
     public static final RegistryObject<Feature<NoFeatureConfig>> RICE = FEATURES.register("rice", () -> new RiceFeature(NoFeatureConfig.field_236558_a_));
     
-    public static final RegistryObject<Feature<NoFeatureConfig>> DUCK_NEST = FEATURES.register("duck_nest", () -> new DuckNestFeature(NoFeatureConfig.field_236558_a_));
     public static final RegistryObject<Feature<NoFeatureConfig>> CHICKEN_NEST = FEATURES.register("chicken_nest", () -> new ChickenNestFeature(NoFeatureConfig.field_236558_a_));
+    public static final RegistryObject<Feature<NoFeatureConfig>> DUCK_NEST = FEATURES.register("duck_nest", () -> new DuckNestFeature(NoFeatureConfig.field_236558_a_));
+    public static final RegistryObject<Feature<NoFeatureConfig>> TURKEY_NEST = FEATURES.register("turkey_nest", () -> new ChickenNestFeature(NoFeatureConfig.field_236558_a_));
     
     public static final RegistryObject<Feature<BaseTreeFeatureConfig>> WISTERIA_TREE = FEATURES.register("wisteria_tree", () -> new WisteriaTreeFeature(BaseTreeFeatureConfig.CODEC_BASE_TREE_FEATURE_CONFIG));
     public static final RegistryObject<Feature<BaseTreeFeatureConfig>> BIG_WISTERIA_TREE = FEATURES.register("big_wisteria_tree", () -> new BigWisteriaTreeFeature(BaseTreeFeatureConfig.CODEC_BASE_TREE_FEATURE_CONFIG));
@@ -118,9 +119,15 @@ public class EnvironmentalFeatures {
             if (biome == Biomes.DARK_FOREST || biome == Biomes.DARK_FOREST_HILLS) {
                 EnvironmentalBiomeFeatures.addShortFlower(EnvironmentalBlocks.BLUEBELL.get().getDefaultState(), biome, 3);
             }
-            EnvironmentalBiomeFeatures.addChickenNests(biome);
         }
 
+        if (biome.getRegistryName().getNamespace() == "autumnity") {
+            EnvironmentalBiomeFeatures.addTurkeyNests(biome);
+        }
+        else if (biome.getCategory() == Biome.Category.FOREST) {
+            EnvironmentalBiomeFeatures.addChickenNests(biome);
+        }
+        
         if (biome.getCategory() == Biome.Category.ICY) {
             if (wisterias) EnvironmentalBiomeFeatures.addWisteriaTree(biome, WisteriaColor.BLUE, 0, 0.001F, true);
         }

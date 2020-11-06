@@ -80,17 +80,24 @@ import net.minecraft.block.WallBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.entity.item.PaintingType;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
 import net.minecraft.potion.Effects;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.ObjectHolder;
 
 @Mod.EventBusSubscriber(modid = Environmental.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class EnvironmentalBlocks {
 
+	// Compat //
+	@ObjectHolder("autumnity:turkey_egg")
+	public static Item TURKEY_EGG;
+	
     public static final RegistryHelper HELPER = Environmental.REGISTRY_HELPER;
     public static final DeferredRegister<PaintingType> PAINTINGS = DeferredRegister.create(ForgeRegistries.PAINTING_TYPES, Environmental.MODID);
 
@@ -154,12 +161,15 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> TWIG_NEST 		= HELPER.createBlock("twig_nest", () -> new EmptyNestBlock(EnvironmentalProperties.TWIG_NEST), ItemGroup.DECORATIONS);
 	public static final RegistryObject<Block> TWIG_CHICKEN_NEST = HELPER.createBlockNoItem("twig_chicken_nest", () -> new BirdNestBlock(() -> Items.EGG, (EmptyNestBlock)TWIG_NEST.get(), EnvironmentalProperties.TWIG_NEST));
 	public static final RegistryObject<Block> TWIG_DUCK_NEST 	= HELPER.createBlockNoItem("twig_duck_nest", () -> new BirdNestBlock(EnvironmentalItems.DUCK_EGG, (EmptyNestBlock)TWIG_NEST.get(), EnvironmentalProperties.TWIG_NEST));
+	public static final RegistryObject<Block> TWIG_TURKEY_NEST 	= HELPER.createBlockNoItem("twig_turkey_nest", () -> new BirdNestBlock(() -> TURKEY_EGG, (EmptyNestBlock)TWIG_NEST.get(), EnvironmentalProperties.TWIG_NEST));
 	public static final RegistryObject<Block> HAY_NEST 			= HELPER.createBlock("hay_nest", () -> new EmptyNestBlock(EnvironmentalProperties.HAY_NEST), ItemGroup.DECORATIONS);
 	public static final RegistryObject<Block> HAY_CHICKEN_NEST 	= HELPER.createBlockNoItem("hay_chicken_nest", () -> new BirdNestBlock(() -> Items.EGG, (EmptyNestBlock)HAY_NEST.get(), EnvironmentalProperties.HAY_NEST));
 	public static final RegistryObject<Block> HAY_DUCK_NEST 	= HELPER.createBlockNoItem("hay_duck_nest", () -> new BirdNestBlock(EnvironmentalItems.DUCK_EGG, (EmptyNestBlock)HAY_NEST.get(), EnvironmentalProperties.HAY_NEST));
+	public static final RegistryObject<Block> HAY_TURKEY_NEST 	= HELPER.createBlockNoItem("hay_turkey_nest", () -> new BirdNestBlock(() -> TURKEY_EGG, (EmptyNestBlock)HAY_NEST.get(), EnvironmentalProperties.HAY_NEST));
     
 	public static final RegistryObject<Block> CHICKEN_EGG_CRATE = HELPER.createCompatBlock("quark", "chicken_egg_crate", () -> new Block(Block.Properties.create(Material.WOOD, MaterialColor.WHITE_TERRACOTTA).hardnessAndResistance(1.5F).sound(SoundType.WOOD)), ItemGroup.DECORATIONS);
 	public static final RegistryObject<Block> DUCK_EGG_CRATE = HELPER.createCompatBlock("quark", "duck_egg_crate", () -> new Block(Block.Properties.create(Material.WOOD, MaterialColor.LIGHT_BLUE).hardnessAndResistance(1.5F).sound(SoundType.WOOD)), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> TURKEY_EGG_CRATE = HELPER.createBlock("turkey_egg_crate", () -> new Block(Block.Properties.create(Material.WOOD, MaterialColor.WHITE_TERRACOTTA).hardnessAndResistance(1.5F).sound(SoundType.WOOD)), ModList.get().isLoaded("quark") && ModList.get().isLoaded("autumnity") ? ItemGroup.DECORATIONS : null);
 	public static final RegistryObject<Block> TURTLE_EGG_CRATE = HELPER.createCompatBlock("quark", "turtle_egg_crate", () -> new Block(Block.Properties.create(Material.WOOD, MaterialColor.SAND).hardnessAndResistance(1.5F).sound(SoundType.WOOD)), ItemGroup.DECORATIONS);
 	
 	// Decorations //

@@ -1,0 +1,20 @@
+{
+	"textures": {
+		"eggs": "environmental:block/turkey_eggs",
+		"particle": "#eggs"
+	},
+	"elements": [
+		{
+			"from": [5, 1, 5],
+			"to": [9, 7, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [13, 9, 13]},
+			"faces": {
+				"north": {"uv": [0, 0, 4, 6], "texture": "#eggs"},
+				"east": {"uv": [0, 0, 4, 6], "texture": "#eggs"},
+				"south": {"uv": [0, 0, 4, 6], "texture": "#eggs"},
+				"west": {"uv": [0, 0, 4, 6], "texture": "#eggs"},
+				"up": {"uv": [4, 0, 8, 4], "texture": "#eggs"}
+			}
+		}
+	]
+}

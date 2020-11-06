@@ -53,6 +53,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtils;
 import net.minecraft.potion.Potions;
 import net.minecraft.util.Direction;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -75,10 +76,13 @@ import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.registries.ForgeRegistries;
 
 @EventBusSubscriber(modid = Environmental.MODID)
 public class EnvironmentalEvents {
 
+	private static final ResourceLocation TURKEY_NAME = new ResourceLocation("autumnity", "turkey");
+	
 	@SubscribeEvent
 	public static void onEvent(PlayerEvent.BreakSpeed event) {
 		if (event.getState().getBlock() instanceof HangingWisteriaLeavesBlock && event.getPlayer().getHeldItemMainhand().getItem() == Items.SHEARS)
@@ -311,6 +315,11 @@ public class EnvironmentalEvents {
 			ChickenEntity chicken = (ChickenEntity) event.getEntity();
 			if (!chicken.goalSelector.goals.stream().anyMatch((goal) -> goal.getGoal() instanceof LayEggInNestGoal)) {
 				chicken.goalSelector.addGoal(2, new LayEggInNestGoal(chicken, 1.0D));
+			}
+		} else if (event.getEntity().getType() == ForgeRegistries.ENTITIES.getValue(TURKEY_NAME)) {
+			AnimalEntity turkey = (AnimalEntity) event.getEntity();
+			if (!turkey.goalSelector.goals.stream().anyMatch((goal) -> goal.getGoal() instanceof LayEggInNestGoal)) {
+				turkey.goalSelector.addGoal(5, new LayEggInNestGoal(turkey, 1.0D));
 			}
 		} else if (event.getEntity() instanceof WolfEntity) {
 			WolfEntity wolf = (WolfEntity) event.getEntity();
