@@ -12,6 +12,7 @@ import net.minecraft.block.ContainerBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
@@ -54,7 +55,7 @@ public class BirdNestBlock extends ContainerBlock {
 		if (player.isAllowEdit()) {
 			int i = state.get(EGGS);
 			ItemStack itemstack = player.getHeldItem(handIn);
-			if (itemstack.getItem() == this.egg.get()) {
+			if (this.egg.get() != Items.AIR && itemstack.getItem() == this.egg.get()) {
 				if (i < 6) {
 					if (!player.abilities.isCreativeMode) {
 						itemstack.shrink(1);

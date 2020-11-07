@@ -198,11 +198,5 @@
     {
       "function": "minecraft:explosion_decay"
     }
-  ],
-  "conditions": [
-    {
-      "type": "forge:mod_loaded",
-      "modid": "autumnity"
-    }
   ]
 }

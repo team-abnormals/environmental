@@ -11,6 +11,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
@@ -59,7 +60,7 @@ public class EmptyNestBlock extends Block {
 				}
 			}
 
-			if (nest != null) {
+			if (nest != null && ((BirdNestBlock) nest).getEgg() != Items.AIR) {
 				if (!player.abilities.isCreativeMode && !worldIn.isRemote) {
 					itemstack.shrink(1);
 				}
