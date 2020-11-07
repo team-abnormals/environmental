@@ -1,34 +1,12 @@
 package com.minecraftabnormals.environmental.core.registry;
 
-import com.minecraftabnormals.environmental.common.block.BirdNestBlock;
-import com.minecraftabnormals.environmental.common.block.CartwheelBlock;
-import com.minecraftabnormals.environmental.common.block.CattailBlock;
-import com.minecraftabnormals.environmental.common.block.CattailSproutsBlock;
-import com.minecraftabnormals.environmental.common.block.CherryLeavesBlock;
-import com.minecraftabnormals.environmental.common.block.DoubleCattailBlock;
-import com.minecraftabnormals.environmental.common.block.DoubleRiceBlock;
-import com.minecraftabnormals.environmental.common.block.DuckweedBlock;
-import com.minecraftabnormals.environmental.common.block.EmptyNestBlock;
-import com.minecraftabnormals.environmental.common.block.GiantLilyPadBlock;
-import com.minecraftabnormals.environmental.common.block.HangingWillowLeavesBlock;
-import com.minecraftabnormals.environmental.common.block.HangingWisteriaLeavesBlock;
-import com.minecraftabnormals.environmental.common.block.KilnBlock;
-import com.minecraftabnormals.environmental.common.block.LargeLilyPadBlock;
-import com.minecraftabnormals.environmental.common.block.LotusFlowerBlock;
-import com.minecraftabnormals.environmental.common.block.MudBlock;
-import com.minecraftabnormals.environmental.common.block.MyceliumSproutsBlock;
-import com.minecraftabnormals.environmental.common.block.PottedCartwheelBlock;
-import com.minecraftabnormals.environmental.common.block.RiceBlock;
-import com.minecraftabnormals.environmental.common.block.RugBlock;
-import com.minecraftabnormals.environmental.common.block.SawmillBlock;
-import com.minecraftabnormals.environmental.common.block.SlabfishEffigyBlock;
-import com.minecraftabnormals.environmental.common.block.TallDeadBushBlock;
-import com.minecraftabnormals.environmental.common.block.WisteriaLeavesBlock;
+import com.minecraftabnormals.environmental.common.block.*;
 import com.minecraftabnormals.environmental.common.world.gen.feature.trees.CherryTree;
 import com.minecraftabnormals.environmental.common.world.gen.feature.trees.WillowTree;
 import com.minecraftabnormals.environmental.common.world.gen.feature.trees.WisteriaTree;
 import com.minecraftabnormals.environmental.common.world.gen.util.WisteriaColor;
 import com.minecraftabnormals.environmental.core.Environmental;
+import com.minecraftabnormals.environmental.core.other.EnvironmentalCompat;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalProperties;
 import com.mojang.datafixers.util.Pair;
 import com.teamabnormals.abnormals_core.common.blocks.AbnormalsBeehiveBlock;
@@ -47,57 +25,25 @@ import com.teamabnormals.abnormals_core.common.blocks.thatch.ThatchBlock;
 import com.teamabnormals.abnormals_core.common.blocks.thatch.ThatchSlabBlock;
 import com.teamabnormals.abnormals_core.common.blocks.thatch.ThatchStairsBlock;
 import com.teamabnormals.abnormals_core.common.blocks.thatch.ThatchVerticalSlabBlock;
-import com.teamabnormals.abnormals_core.common.blocks.wood.AbnormalsLeavesBlock;
-import com.teamabnormals.abnormals_core.common.blocks.wood.AbnormalsLogBlock;
-import com.teamabnormals.abnormals_core.common.blocks.wood.AbnormalsSaplingBlock;
-import com.teamabnormals.abnormals_core.common.blocks.wood.AbnormalsWoodButtonBlock;
-import com.teamabnormals.abnormals_core.common.blocks.wood.PlanksBlock;
-import com.teamabnormals.abnormals_core.common.blocks.wood.StrippedLogBlock;
-import com.teamabnormals.abnormals_core.common.blocks.wood.StrippedWoodBlock;
-import com.teamabnormals.abnormals_core.common.blocks.wood.WoodBlock;
-import com.teamabnormals.abnormals_core.common.blocks.wood.WoodDoorBlock;
-import com.teamabnormals.abnormals_core.common.blocks.wood.WoodFenceBlock;
-import com.teamabnormals.abnormals_core.common.blocks.wood.WoodFenceGateBlock;
-import com.teamabnormals.abnormals_core.common.blocks.wood.WoodPressurePlateBlock;
-import com.teamabnormals.abnormals_core.common.blocks.wood.WoodSlabBlock;
-import com.teamabnormals.abnormals_core.common.blocks.wood.WoodStairsBlock;
-import com.teamabnormals.abnormals_core.common.blocks.wood.WoodTrapDoorBlock;
+import com.teamabnormals.abnormals_core.common.blocks.wood.*;
 import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
 
-import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.*;
 import net.minecraft.block.AbstractBlock.Properties;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.ChainBlock;
-import net.minecraft.block.DoublePlantBlock;
-import net.minecraft.block.FlowerPotBlock;
-import net.minecraft.block.GrassPathBlock;
-import net.minecraft.block.LanternBlock;
-import net.minecraft.block.PressurePlateBlock;
-import net.minecraft.block.SlabBlock;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.WallBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.entity.item.PaintingType;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
 import net.minecraft.potion.Effects;
-import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.ObjectHolder;
 
 @Mod.EventBusSubscriber(modid = Environmental.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class EnvironmentalBlocks {
 
-	// Compat //
-	@ObjectHolder("autumnity:turkey_egg")
-	public static Item TURKEY_EGG;
-	
     public static final RegistryHelper HELPER = Environmental.REGISTRY_HELPER;
     public static final DeferredRegister<PaintingType> PAINTINGS = DeferredRegister.create(ForgeRegistries.PAINTING_TYPES, Environmental.MODID);
 
@@ -161,11 +107,11 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> TWIG_NEST 		= HELPER.createBlock("twig_nest", () -> new EmptyNestBlock(EnvironmentalProperties.TWIG_NEST), ItemGroup.DECORATIONS);
 	public static final RegistryObject<Block> TWIG_CHICKEN_NEST = HELPER.createBlockNoItem("twig_chicken_nest", () -> new BirdNestBlock(() -> Items.EGG, (EmptyNestBlock)TWIG_NEST.get(), EnvironmentalProperties.TWIG_NEST));
 	public static final RegistryObject<Block> TWIG_DUCK_NEST 	= HELPER.createBlockNoItem("twig_duck_nest", () -> new BirdNestBlock(EnvironmentalItems.DUCK_EGG, (EmptyNestBlock)TWIG_NEST.get(), EnvironmentalProperties.TWIG_NEST));
-	public static final RegistryObject<Block> TWIG_TURKEY_NEST 	= HELPER.createBlockNoItem("twig_turkey_nest", () -> new BirdNestBlock(() -> TURKEY_EGG, (EmptyNestBlock)TWIG_NEST.get(), EnvironmentalProperties.TWIG_NEST));
+	public static final RegistryObject<Block> TWIG_TURKEY_NEST 	= HELPER.createBlockNoItem("twig_turkey_nest", () -> new BirdNestBlock(() -> EnvironmentalCompat.TURKEY_EGG, (EmptyNestBlock)TWIG_NEST.get(), EnvironmentalProperties.TWIG_NEST));
 	public static final RegistryObject<Block> HAY_NEST 			= HELPER.createBlock("hay_nest", () -> new EmptyNestBlock(EnvironmentalProperties.HAY_NEST), ItemGroup.DECORATIONS);
 	public static final RegistryObject<Block> HAY_CHICKEN_NEST 	= HELPER.createBlockNoItem("hay_chicken_nest", () -> new BirdNestBlock(() -> Items.EGG, (EmptyNestBlock)HAY_NEST.get(), EnvironmentalProperties.HAY_NEST));
 	public static final RegistryObject<Block> HAY_DUCK_NEST 	= HELPER.createBlockNoItem("hay_duck_nest", () -> new BirdNestBlock(EnvironmentalItems.DUCK_EGG, (EmptyNestBlock)HAY_NEST.get(), EnvironmentalProperties.HAY_NEST));
-	public static final RegistryObject<Block> HAY_TURKEY_NEST 	= HELPER.createBlockNoItem("hay_turkey_nest", () -> new BirdNestBlock(() -> TURKEY_EGG, (EmptyNestBlock)HAY_NEST.get(), EnvironmentalProperties.HAY_NEST));
+	public static final RegistryObject<Block> HAY_TURKEY_NEST 	= HELPER.createBlockNoItem("hay_turkey_nest", () -> new BirdNestBlock(() -> EnvironmentalCompat.TURKEY_EGG, (EmptyNestBlock)HAY_NEST.get(), EnvironmentalProperties.HAY_NEST));
     
 	public static final RegistryObject<Block> CHICKEN_EGG_CRATE = HELPER.createCompatBlock("quark", "chicken_egg_crate", () -> new Block(Block.Properties.create(Material.WOOD, MaterialColor.WHITE_TERRACOTTA).hardnessAndResistance(1.5F).sound(SoundType.WOOD)), ItemGroup.DECORATIONS);
 	public static final RegistryObject<Block> DUCK_EGG_CRATE = HELPER.createCompatBlock("quark", "duck_egg_crate", () -> new Block(Block.Properties.create(Material.WOOD, MaterialColor.LIGHT_BLUE).hardnessAndResistance(1.5F).sound(SoundType.WOOD)), ItemGroup.DECORATIONS);

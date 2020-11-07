@@ -26,7 +26,8 @@ public class EnvironmentalConfig {
         public final ConfigValue<Boolean> biomeVariantsAlwaysSpawn;
         
         public final ConfigValue<Boolean> blockOnlyNaturalSpawns;
-        public final ConfigValue<Integer> koiSerenityRange;
+        public final ConfigValue<Integer> koiHorizontalSerenityRange;
+        public final ConfigValue<Integer> koiVerticalSerenityRange;
         public final ConfigValue<Boolean> serenityEffect;
 
         Common(ForgeConfigSpec.Builder builder) {
@@ -55,7 +56,8 @@ public class EnvironmentalConfig {
             biomeVariantsAlwaysSpawn = builder.comment("Make biome variants of mobs like Husk always spawn in place of their original in their biomes").define("Biome variants always spawn", true);
                 builder.push("koi");
                     blockOnlyNaturalSpawns = builder.comment("Make Koi only block natural spawns").define("Block only natural spawns", true);
-                    koiSerenityRange = builder.comment("Radius of Serenity effect in blocks").define("Serenity range (radius)", 64);
+                    koiHorizontalSerenityRange = builder.comment("Horizontal radius of Serenity effect in blocks").define("Horizontal serenity range (radius)", 16);
+                    koiVerticalSerenityRange = builder.comment("Vertical radius of Serenity effect in blocks").define("Vertical serenity range (radius)", 8);
                     serenityEffect = builder.comment("If Koi exude Serenity as a potion effect").define("Serenity potion effect", true);
                 builder.pop();
             builder.pop();

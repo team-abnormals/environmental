@@ -75,13 +75,12 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBloc
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.registries.ForgeRegistries;
 
 @EventBusSubscriber(modid = Environmental.MODID)
 public class EnvironmentalEvents {
-
-	private static final ResourceLocation TURKEY_NAME = new ResourceLocation("autumnity", "turkey");
 	
 	@SubscribeEvent
 	public static void onEvent(PlayerEvent.BreakSpeed event) {
@@ -152,9 +151,10 @@ public class EnvironmentalEvents {
 		if(blockOnlyNaturalSpawns && event.isSpawner()) return;
 		if(!EnvironmentalTags.EntityTypes.SERENITY_WHITELIST.contains(entity.getType())) {
 			if(entity.getType().getClassification() == EntityClassification.MONSTER) {
-				int range = EnvironmentalConfig.COMMON.koiSerenityRange.get();
-				for(Entity koi : world.getEntitiesWithinAABB(KoiEntity.class, entity.getBoundingBox().grow(range))) {
-					if (MathUtils.distanceBetweenPoints2d(entity.getPosX(), entity.getPosZ(), koi.getPosX(), koi.getPosZ()) <= range) {
+				int horizontalRange = EnvironmentalConfig.COMMON.koiHorizontalSerenityRange.get();
+				int verticalRange = EnvironmentalConfig.COMMON.koiVerticalSerenityRange.get();
+				for(Entity koi : world.getEntitiesWithinAABB(KoiEntity.class, entity.getBoundingBox().grow(horizontalRange, verticalRange, horizontalRange))) {
+					if (MathUtils.distanceBetweenPoints2d(entity.getPosX(), entity.getPosZ(), koi.getPosX(), koi.getPosZ()) <= horizontalRange) {
 						event.setResult(Event.Result.DENY);
 						break;
 					}
@@ -309,24 +309,28 @@ public class EnvironmentalEvents {
 		}
 	}
 
+	public static final String AUTUMNITY = "autumnity";
+	public static final ResourceLocation TURKEY_NAME = new ResourceLocation(AUTUMNITY, "turkey");
+	
 	@SubscribeEvent
 	public static void onEvent(EnteringChunk event) {
-		if (event.getEntity() instanceof ChickenEntity) {
-			ChickenEntity chicken = (ChickenEntity) event.getEntity();
+		Entity entity = event.getEntity();
+		if (entity instanceof ChickenEntity) {
+			ChickenEntity chicken = (ChickenEntity) entity;
 			if (!chicken.goalSelector.goals.stream().anyMatch((goal) -> goal.getGoal() instanceof LayEggInNestGoal)) {
 				chicken.goalSelector.addGoal(2, new LayEggInNestGoal(chicken, 1.0D));
 			}
-		} else if (event.getEntity().getType() == ForgeRegistries.ENTITIES.getValue(TURKEY_NAME)) {
-			AnimalEntity turkey = (AnimalEntity) event.getEntity();
+		} else if (entity.getType() != null && (ModList.get().isLoaded(AUTUMNITY) && entity.getType() == ForgeRegistries.ENTITIES.getValue(TURKEY_NAME))) {
+			AnimalEntity turkey = (AnimalEntity) entity;
 			if (!turkey.goalSelector.goals.stream().anyMatch((goal) -> goal.getGoal() instanceof LayEggInNestGoal)) {
 				turkey.goalSelector.addGoal(5, new LayEggInNestGoal(turkey, 1.0D));
 			}
-		} else if (event.getEntity() instanceof WolfEntity) {
-			WolfEntity wolf = (WolfEntity) event.getEntity();
-			wolf.targetSelector.addGoal(4, new NonTamedTargetGoal<>(wolf, AnimalEntity.class, false, (entity) -> entity.getType() == EnvironmentalEntities.DEER.get()));
-		} else if (event.getEntity() instanceof OcelotEntity) {
-			OcelotEntity ocelot = (OcelotEntity) event.getEntity();
-			ocelot.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(ocelot, AnimalEntity.class, 10, false, false, (entity) -> entity.getType() == EnvironmentalEntities.DUCK.get()));
+		} else if (entity instanceof WolfEntity) {
+			WolfEntity wolf = (WolfEntity) entity;
+			wolf.targetSelector.addGoal(4, new NonTamedTargetGoal<>(wolf, AnimalEntity.class, false, (targetEntity) -> targetEntity.getType() == EnvironmentalEntities.DEER.get()));
+		} else if (entity instanceof OcelotEntity) {
+			OcelotEntity ocelot = (OcelotEntity) entity;
+			ocelot.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(ocelot, AnimalEntity.class, 10, false, false, (targetEntity) -> targetEntity.getType() == EnvironmentalEntities.DUCK.get()));
 		}
 	}
 }

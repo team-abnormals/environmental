@@ -22,7 +22,6 @@ public class EnvironmentalTags {
     }
     
     public static class EntityTypes {
-    
         public static final ITag.INamedTag<EntityType<?>> SERENITY_WHITELIST = createWrapperEntityTag("serenity_whitelist");
     }
     
