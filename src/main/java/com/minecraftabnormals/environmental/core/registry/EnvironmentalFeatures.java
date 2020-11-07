@@ -121,7 +121,7 @@ public class EnvironmentalFeatures {
             }
         }
 
-        if (biome.getRegistryName().getNamespace() == "autumnity") {
+        if (biome.getRegistryName().toString().contains("maple") || biome.getRegistryName().toString().contains("pumpkin_fields")) {
             EnvironmentalBiomeFeatures.addTurkeyNests(biome);
         }
         else if (biome.getCategory() == Biome.Category.FOREST) {
