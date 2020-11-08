@@ -61,6 +61,49 @@ public class EnvironmentalTrades {
 	}
 
 	@SubscribeEvent
+	public static void onVillagerTradesEvent(VillagerTradesEvent event) {
+		List<ITrade> novice = event.getTrades().get(1);
+		List<ITrade> apprentice = event.getTrades().get(2);
+		List<ITrade> journeyman = event.getTrades().get(3);
+		List<ITrade> expert = event.getTrades().get(4);
+		List<ITrade> master = event.getTrades().get(5);
+
+		if (event.getType() == VillagerProfession.FARMER) {
+			novice.add(new TradeUtils.EmeraldsForItemsTrade(EnvironmentalItems.RICE.get(), 23, 1, 6, 1));
+			apprentice.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.CHERRIES.get(), 1, 6, 16, 5));
+			apprentice.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.APPLE_PIE.get(), 1, 5, 12, 5));
+			apprentice.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.CHERRY_PIE.get(), 1, 6, 12, 5));
+		}
+
+		if (event.getType() == VillagerProfession.FISHERMAN) {
+			apprentice.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.COD_KELP_ROLL.get(), 5, 2, 6, 15));
+			apprentice.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.SALMON_RICE_CAKE.get(), 5, 2, 6, 15));
+			expert.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.PUFFERFISH_RICE_CAKE.get(), 3, 4, 5, 30));
+			master.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.TROPICAL_FISH_KELP_ROLL.get(), 3, 4, 5, 30));
+
+			if (ModList.get().isLoaded("upgrade_aquatic")) {
+				expert.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.PIKE_KELP_ROLL.get(), 4, 1, 3, 25));
+				master.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.LIONFISH_RICE_CAKE.get(), 3, 4, 5, 30));
+			}
+
+			if (ModList.get().isLoaded("quark")) {
+				expert.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.CRAB_KELP_ROLL.get(), 4, 1, 3, 25));
+			}
+		}
+
+		if (event.getType() == VillagerProfession.MASON) {
+			master.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.ARCHITECT_BELT.get(), 24, 1, 1, 5));
+		}
+
+		if (event.getType() == VillagerProfession.BUTCHER) {
+			novice.add(new TradeUtils.EmeraldsForItemsTrade(EnvironmentalItems.DUCK.get(), 18, 1, 16, 2));
+			apprentice.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.COOKED_DUCK.get(), 1, 6, 16, 5));
+			journeyman.add(new TradeUtils.EmeraldsForItemsTrade(EnvironmentalItems.VENISON.get(), 12, 1, 16, 20));
+			journeyman.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.COOKED_VENISON.get(), 1, 5, 16, 10));
+		}
+	}
+
+	@SubscribeEvent
 	public static void onCarpenterTradesEvent(VillagerTradesEvent event) {
 		String[] defaultRemoved = new String[] { "crimson", "warped", "poise", "aspen", "grimwood", "morado", "kousa" };
 		List<ITrade> novice = event.getTrades().get(1);
@@ -174,41 +217,6 @@ public class EnvironmentalTrades {
 			for (Block chiseled_terracotta_brick : chisled_terracotta_bricks)
 				expert.add(new TradeUtils.ItemsForEmeraldsTrade(chiseled_terracotta_brick, 1, 1, 12, 15));
 
-			master.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.ARCHITECT_BELT.get(), 24, 1, 1, 5));
-		}
-	}
-
-	@SubscribeEvent
-	public static void onVillagerTradesEvent(VillagerTradesEvent event) {
-		List<ITrade> novice = event.getTrades().get(1);
-		List<ITrade> apprentice = event.getTrades().get(2);
-		List<ITrade> expert = event.getTrades().get(4);
-		List<ITrade> master = event.getTrades().get(5);
-
-		if (event.getType() == VillagerProfession.FARMER) {
-			novice.add(new TradeUtils.EmeraldsForItemsTrade(EnvironmentalItems.RICE.get(), 23, 1, 6, 1));
-			apprentice.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.CHERRIES.get(), 1, 6, 16, 5));
-			apprentice.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.APPLE_PIE.get(), 1, 5, 12, 5));
-			apprentice.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.CHERRY_PIE.get(), 1, 6, 12, 5));
-		}
-
-		if (event.getType() == VillagerProfession.FISHERMAN) {
-			apprentice.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.COD_KELP_ROLL.get(), 5, 2, 6, 15));
-			apprentice.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.SALMON_RICE_CAKE.get(), 5, 2, 6, 15));
-			expert.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.PUFFERFISH_RICE_CAKE.get(), 3, 4, 5, 30));
-			master.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.TROPICAL_FISH_KELP_ROLL.get(), 3, 4, 5, 30));
-
-			if (ModList.get().isLoaded("upgrade_aquatic")) {
-				expert.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.PIKE_KELP_ROLL.get(), 4, 1, 3, 25));
-				master.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.LIONFISH_RICE_CAKE.get(), 3, 4, 5, 30));
-			}
-
-			if (ModList.get().isLoaded("quark")) {
-				expert.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.CRAB_KELP_ROLL.get(), 4, 1, 3, 25));
-			}
-		}
-		
-		if (event.getType() == VillagerProfession.MASON) {
 			master.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.ARCHITECT_BELT.get(), 24, 1, 1, 5));
 		}
 	}
