@@ -2,6 +2,8 @@ package com.minecraftabnormals.environmental.common.block;
 
 import javax.annotation.Nullable;
 
+import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
+import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -13,12 +15,15 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -275,5 +280,10 @@ public class GiantLilyPadBlock extends BushBlock implements IPlantable {
 		public String getString() {
 			return this.heightName;
 		}
+	}
+
+	@Override
+	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+		ItemStackUtils.fillAfterItemForGroup(this.asItem(), EnvironmentalBlocks.LARGE_LILY_PAD.get().asItem(), group, items);
 	}
 }
