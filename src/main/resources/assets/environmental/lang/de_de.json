@@ -288,11 +288,11 @@
 	"block.environmental.twig_nest": "Zweignest",
 	"block.environmental.twig_chicken_nest": "Zweignest mit Hühnereiern",
 	"block.environmental.twig_duck_nest": "Zweignest mit Enteneiern",
-	"block.environmental.twig_turkey_nest": "Zweignest mit Truthahneiern",
+	"block.environmental.twig_turkey_nest": "Zweignest mit Puteneiern",
 	"block.environmental.hay_nest": "Heunest",
 	"block.environmental.hay_chicken_nest": "Heunest mit Hühnereiern",
 	"block.environmental.hay_duck_nest": "Heunest mit Enteneiern",
-	"block.environmental.hay_turkey_nest": "Heunest mit Truthahneiern",
+	"block.environmental.hay_turkey_nest": "Heunest mit Puteneiern",
 	
 	"block.environmental.chicken_egg_crate": "Hühnereikiste",
 	"block.environmental.duck_egg_crate": "Enteneikiste",
