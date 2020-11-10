@@ -36,14 +36,14 @@ public class KoiEntity extends BucketableWaterMobEntity {
 	public KoiEntity(EntityType<? extends BucketableWaterMobEntity> type, World world) {
 		super(type, world);
 		this.moveController = new MoveHelperController(this);
-		this.setPathPriority(PathNodeType.WATER, 0.6F);
+		this.setPathPriority(PathNodeType.WATER, 0.4F);
 	}
 
 	@Override
 	protected void registerGoals() {
 		super.registerGoals();
 		this.goalSelector.addGoal(0, new PanicGoal(this, 4.25D));
-		this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, PlayerEntity.class, 8.0F, 1.6, 1.4, EntityPredicates.NOT_SPECTATING::test));
+		this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, PlayerEntity.class, 5.0F, 1.6, 1.4, EntityPredicates.NOT_SPECTATING::test));
 		this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 1.0, 50));
 	}
 
@@ -65,11 +65,35 @@ public class KoiEntity extends BucketableWaterMobEntity {
 			super.travel(travelVector);
 		}
 	}
-
+	
+	@Override
+	public void tick() {
+		super.tick();
+		Vector3d vector3d = this.getMotion();
+		if(MathHelper.abs((float) vector3d.y) >= 0.01) {
+			this.rotationPitch = (float) (MathHelper.atan2(vector3d.y, MathHelper.sqrt(horizontalMag(vector3d))) * (double) (180F / (float) Math.PI));
+		} else {
+			this.rotationPitch = 0;
+		}
+		this.rotationPitch = normalizeRotation(this.prevRotationPitch, this.rotationPitch);
+	}
+	
+	protected static float normalizeRotation(float prevRot, float rot) {
+		while(rot - prevRot < -180.0F) {
+			prevRot -= 360.0F;
+		}
+		
+		while(rot - prevRot >= 180.0F) {
+			prevRot += 360.0F;
+		}
+		
+		return MathHelper.lerp(0.2F, prevRot, rot);
+	}
+	
 	@Override
 	public void livingTick() {
 		if (!this.isInWater() && this.onGround && this.collidedVertically) {
-			this.setMotion(this.getMotion().add(((this.rand.nextFloat() * 2.0F - 1.0F) * 0.05F), 0.4F, ((this.rand.nextFloat() * 2.0F - 1.0F) * 0.05F)));
+			this.setMotion(this.getMotion().add(((this.rand.nextFloat() * 2.0F - 1.0F) * 0.05F), 0.45F, ((this.rand.nextFloat() * 2.0F - 1.0F) * 0.05F)));
 			this.onGround = false;
 			this.isAirBorne = true;
 			this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getSoundPitch());
@@ -138,7 +162,7 @@ public class KoiEntity extends BucketableWaterMobEntity {
 				double d2 = this.posZ - this.koi.getPosZ();
 				double d3 = MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
 				d1 = d1 / d3;
-				if (d0 >= 0.0001 || d0 <= -0.0001 || d1 >= 0.0001 || d1 <= -0.0001) {
+				if (d0 != 0 || d1 != 0) {
 					float f = (float) (MathHelper.atan2(d2, d0) * (double) (180F / (float) Math.PI)) - 90.0F;
 					this.koi.rotationYaw = this.limitAngle(this.koi.rotationYaw, f, 15.0F);
 					this.koi.renderYawOffset = this.koi.rotationYaw;
