@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "autumnity:turkey_egg"
+          "name": "minecraft:egg"
         }
       ],
       "conditions": [
@@ -33,7 +33,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "autumnity:turkey_egg"
+          "name": "minecraft:egg"
         }
       ],
       "conditions": [
@@ -60,7 +60,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "autumnity:turkey_egg"
+          "name": "minecraft:egg"
         }
       ],
       "conditions": [
@@ -87,7 +87,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "autumnity:turkey_egg"
+          "name": "minecraft:egg"
         }
       ],
       "conditions": [
@@ -114,7 +114,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "autumnity:turkey_egg"
+          "name": "minecraft:egg"
         }
       ],
       "conditions": [
@@ -141,7 +141,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "autumnity:turkey_egg"
+          "name": "minecraft:egg"
         }
       ],
       "conditions": [
