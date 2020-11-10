@@ -1,9 +1,5 @@
 package com.minecraftabnormals.environmental.core.other;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.minecraftabnormals.environmental.common.block.HangingWisteriaLeavesBlock;
@@ -17,26 +13,17 @@ import com.minecraftabnormals.environmental.core.EnvironmentalConfig;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEntities;
 import com.teamabnormals.abnormals_core.core.utils.MathUtils;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityClassification;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.NonTamedTargetGoal;
 import net.minecraft.entity.monster.HuskEntity;
 import net.minecraft.entity.monster.SkeletonEntity;
 import net.minecraft.entity.monster.StrayEntity;
 import net.minecraft.entity.monster.ZombieEntity;
-import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.ChickenEntity;
-import net.minecraft.entity.passive.MooshroomEntity;
-import net.minecraft.entity.passive.OcelotEntity;
-import net.minecraft.entity.passive.WolfEntity;
+import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PotionEntity;
 import net.minecraft.entity.projectile.ProjectileItemEntity;
@@ -47,11 +34,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionUtils;
-import net.minecraft.potion.Potions;
+import net.minecraft.potion.*;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
@@ -75,9 +58,11 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBloc
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 @EventBusSubscriber(modid = Environmental.MODID)
 public class EnvironmentalEvents {
@@ -309,18 +294,17 @@ public class EnvironmentalEvents {
 		}
 	}
 
-	public static final String AUTUMNITY = "autumnity";
-	public static final ResourceLocation TURKEY_NAME = new ResourceLocation(AUTUMNITY, "turkey");
-	
 	@SubscribeEvent
 	public static void onEvent(EnteringChunk event) {
 		Entity entity = event.getEntity();
+		EntityType<?> entityType = entity.getType();
+		ResourceLocation entityName = entityType.getRegistryName();
 		if (entity instanceof ChickenEntity) {
 			ChickenEntity chicken = (ChickenEntity) entity;
 			if (!chicken.goalSelector.goals.stream().anyMatch((goal) -> goal.getGoal() instanceof LayEggInNestGoal)) {
 				chicken.goalSelector.addGoal(2, new LayEggInNestGoal(chicken, 1.0D));
 			}
-		} else if (entity.getType() != null && (ModList.get().isLoaded(AUTUMNITY) && entity.getType() == ForgeRegistries.ENTITIES.getValue(TURKEY_NAME))) {
+		} else if (entityType != null && entityName.getNamespace() == "autumnity" && entityName.getPath() == "turkey") {
 			AnimalEntity turkey = (AnimalEntity) entity;
 			if (!turkey.goalSelector.goals.stream().anyMatch((goal) -> goal.getGoal() instanceof LayEggInNestGoal)) {
 				turkey.goalSelector.addGoal(5, new LayEggInNestGoal(turkey, 1.0D));
