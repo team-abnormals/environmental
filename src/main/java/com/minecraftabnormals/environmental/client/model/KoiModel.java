@@ -89,9 +89,15 @@ public class KoiModel<T extends KoiEntity> extends EntityModel<T> {
     
     @Override
     public void setRotationAngles(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        setRotateAngle(Body1, Body1.rotateAngleX, MathHelper.sin(0.6F * ageInTicks) * 0.3F * limbSwingAmount, Body1.rotateAngleZ);
-        setRotateAngle(Body2, Body2.rotateAngleX, MathHelper.cos(0.6F * ageInTicks) * 0.6F * limbSwingAmount, Body2.rotateAngleZ);
-        setRotateAngle(Tail, Tail.rotateAngleX, MathHelper.sin(0.6F * ageInTicks) * 0.75F * limbSwingAmount, Tail.rotateAngleZ);
+        if(entity.isInWater()) {
+            setRotateAngle(Body1, Body1.rotateAngleX, MathHelper.sin(0.6F * ageInTicks) * 0.3F * limbSwingAmount, Body1.rotateAngleZ);
+            setRotateAngle(Body2, Body2.rotateAngleX, MathHelper.cos(0.6F * ageInTicks) * 0.7F * limbSwingAmount, Body2.rotateAngleZ);
+            setRotateAngle(Tail, Tail.rotateAngleX, MathHelper.sin(0.6F * ageInTicks) * 0.75F * limbSwingAmount, Tail.rotateAngleZ);
+        } else {
+            setRotateAngle(Body1, Body1.rotateAngleX, -MathHelper.sin(0.6F * ageInTicks) * 0.45F, Body1.rotateAngleZ);
+            setRotateAngle(Body2, Body2.rotateAngleX, MathHelper.cos(0.6F * ageInTicks) * 0.2F, Body2.rotateAngleZ);
+            setRotateAngle(Tail, Tail.rotateAngleX, -MathHelper.sin(0.6F * ageInTicks) * 0.3F, Tail.rotateAngleZ);
+        }
     }
     
     /**
