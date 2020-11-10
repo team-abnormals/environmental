@@ -4,17 +4,18 @@ import com.minecraftabnormals.environmental.core.EnvironmentalConfig;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEffects;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalSounds;
-import com.teamabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
-
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.MoverType;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.entity.ai.goal.PanicGoal;
 import net.minecraft.entity.ai.goal.RandomSwimmingGoal;
+import net.minecraft.entity.passive.fish.AbstractFishEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigator;
@@ -26,14 +27,18 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
-public class KoiEntity extends BucketableWaterMobEntity {
+import java.util.Random;
 
-	public KoiEntity(EntityType<? extends BucketableWaterMobEntity> type, World world) {
+public class KoiEntity extends AbstractFishEntity {
+
+	public KoiEntity(EntityType<? extends AbstractFishEntity> type, World world) {
 		super(type, world);
 		this.moveController = new MoveHelperController(this);
 		this.setPathPriority(PathNodeType.WATER, 0.6F);
@@ -109,12 +114,16 @@ public class KoiEntity extends BucketableWaterMobEntity {
 	}
 
 	@Override
-	public ItemStack getBucket() {
+	public ItemStack getFishBucket() {
 		return new ItemStack(EnvironmentalItems.KOI_BUCKET.get(), 1);
 	}
 
 	public static AttributeModifierMap.MutableAttribute registerAttributes() {
 		return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 10);
+	}
+
+	public static boolean canKoiSpawn(EntityType<? extends AbstractFishEntity> type, IWorld worldIn, SpawnReason reason, BlockPos pos, Random randomIn) {
+		return worldIn.getBlockState(pos).isIn(Blocks.WATER) && worldIn.getBlockState(pos.up()).isIn(Blocks.WATER) && pos.getY() > 55;
 	}
 
 	static class MoveHelperController extends MovementController {
