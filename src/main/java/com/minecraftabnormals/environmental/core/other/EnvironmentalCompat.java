@@ -163,9 +163,12 @@ public class EnvironmentalCompat {
 		DataUtils.registerFlammable(EnvironmentalBlocks.TWIG_NEST.get(), 60, 20);
 		DataUtils.registerFlammable(EnvironmentalBlocks.TWIG_CHICKEN_NEST.get(), 60, 20);
 		DataUtils.registerFlammable(EnvironmentalBlocks.TWIG_DUCK_NEST.get(), 60, 20);
+		DataUtils.registerFlammable(EnvironmentalBlocks.TWIG_TURKEY_NEST.get(), 60, 20);
+
 		DataUtils.registerFlammable(EnvironmentalBlocks.HAY_NEST.get(), 60, 20);
 		DataUtils.registerFlammable(EnvironmentalBlocks.HAY_CHICKEN_NEST.get(), 60, 20);
 		DataUtils.registerFlammable(EnvironmentalBlocks.HAY_DUCK_NEST.get(), 60, 20);
+		DataUtils.registerFlammable(EnvironmentalBlocks.HAY_TURKEY_NEST.get(), 60, 20);
 
 		DataUtils.registerFlammable(EnvironmentalBlocks.CHICKEN_EGG_CRATE.get(), 5, 20);
 		DataUtils.registerFlammable(EnvironmentalBlocks.DUCK_EGG_CRATE.get(), 5, 20);

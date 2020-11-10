@@ -89,10 +89,21 @@ public class EnvironmentalVillagers {
 		DesertVillagePools.init();
 		TaigaVillagePools.init();
 
-		for (String biome : new String[] { "plains", "snowy", "savanna", "desert", "taiga" }) {
-			addToPool(new ResourceLocation("village/" + biome + "/houses"), new ResourceLocation(Environmental.MODID, "village/ceramist_house_" + biome + "_1"), 5);
-			addToPool(new ResourceLocation("village/" + biome + "/houses"), new ResourceLocation(Environmental.MODID, "village/carpenter_house_" + biome + "_1"), 5);
-		}
+		addVillagerHouse("ceramist", "plains", 2);
+		addVillagerHouse("ceramist", "snowy", 4);
+		addVillagerHouse("ceramist", "savanna", 6);
+		addVillagerHouse("ceramist", "desert", 5);
+		addVillagerHouse("ceramist", "taiga", 7);
+
+		addVillagerHouse("carpenter", "plains", 10);
+		addVillagerHouse("carpenter", "snowy", 11);
+		addVillagerHouse("carpenter", "savanna", 7);
+		addVillagerHouse("carpenter", "desert", 9);
+		addVillagerHouse("carpenter", "taiga", 5);
+	}
+
+	private static void addVillagerHouse(String type, String biome, int weight) {
+		addToPool(new ResourceLocation("village/" + biome + "/houses"), new ResourceLocation(Environmental.MODID, "village/" + type + "_house_" + biome + "_1"), 5);
 	}
 
 	private static void addToPool(ResourceLocation pool, ResourceLocation toAdd, int weight) {
