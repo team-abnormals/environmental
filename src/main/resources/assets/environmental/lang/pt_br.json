@@ -284,9 +284,11 @@
 	"block.environmental.twig_nest": "Ninho de gravetos",
 	"block.environmental.twig_chicken_nest": "Ninho de gravetos com ovos de galinha",
 	"block.environmental.twig_duck_nest": "Ninho de gravetos com ovos de pato",
+	"block.environmental.twig_turkey_nest": "Ninho de gravetos com ovos de peru",
 	"block.environmental.hay_nest": "Ninho de feno",
 	"block.environmental.hay_chicken_nest": "Ninho de feno com ovos de galinha",
 	"block.environmental.hay_duck_nest": "Ninho de feno com ovos de pato",
+	"block.environmental.hay_turkey_nest": "Ninho de feno com ovos de peru",
 	
 	"block.environmental.chicken_egg_crate": "Caixa de ovos de galinha",
 	"block.environmental.duck_egg_crate": "Caixa de ovos de pato",
@@ -294,7 +296,7 @@
 		
 	"item.environmental.wanderer_boots": "Botas do ambulante",
 	"item.environmental.architect_belt": "Cinto do arquiteto",
-	"item.environmental.fool_wings": "Asas do tolo",
+	"item.environmental.healer_pouch": "Bolsa do curandeiro",
 	"item.environmental.thief_hood": "Capuz do ladrão",
 	"item.environmental.executioner_cleaver": "Cutelo do executor",
 	
@@ -374,6 +376,9 @@
 	"biome.environmental.blossom_hills": "Colinas do bosque florado",
 	"biome.environmental.blossom_highlands": "Planaltos do bosque florado",
 	"biome.environmental.blossom_valleys": "Vales do bosque florado",
+	
+	"effect.environmental.panic": "Pânico",
+	"effect.environmental.serenity": "Serenidade",
 	
 	"container.kiln": "Estufa",
 	"container.sawmill": "Serraria",
