@@ -69,7 +69,7 @@ public class WisteriaLeavesBlock extends Block implements IForgeShearable {
     }
 
     private static BlockState updateDistance(BlockState state, IWorld worldIn, BlockPos pos) {
-        int i = 7;
+        int i = 8;
         BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
 
         for (Direction direction : Direction.values()) {
