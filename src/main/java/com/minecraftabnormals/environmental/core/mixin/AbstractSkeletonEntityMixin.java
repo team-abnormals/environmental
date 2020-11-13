@@ -2,6 +2,7 @@ package com.minecraftabnormals.environmental.core.mixin;
 
 import java.util.Random;
 
+import net.minecraft.world.DimensionType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -30,11 +31,11 @@ public abstract class AbstractSkeletonEntityMixin extends MonsterEntity {
 		Random random = this.world.getRandom();
 		int difficultyChance = difficulty.getDifficulty().getId() + 1;
 
-		if (random.nextInt(difficultyChance) == 0) {
+		if (this.world.func_234922_V_() != DimensionType.THE_NETHER && random.nextInt(difficultyChance) == 0) {
 			this.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(random.nextInt(difficultyChance) == 0 ? Items.WOODEN_SWORD : Items.WOODEN_AXE));
 		}
 
-		if (Math.random() < 0.035F) {
+		if (Math.random() < 0.025F) {
 			this.setItemStackToSlot(EquipmentSlotType.HEAD, new ItemStack(EnvironmentalItems.THIEF_HOOD.get()));
 			this.inventoryArmorDropChances[EquipmentSlotType.HEAD.getIndex()] = 1.0F;
 		}
