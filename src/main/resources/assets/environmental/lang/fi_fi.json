@@ -49,7 +49,7 @@
 	"block.environmental.willow_sign": "Pajukyltti",
 	"block.environmental.willow_chest": "Pajuarkku",
 	"block.environmental.willow_trapped_chest": "Ansoitettu pajuarkku",
-	"block.environmental.willow_beehive": "Keinotekoinen pajumehiläispesä",
+	"block.environmental.willow_beehive": "Pajumehiläispesä",
 	
 	"block.environmental.cherry_planks": "Kirsikkapuulankut",
 	"block.environmental.cherry_slab": "Kirsikkapuulaatta",
@@ -75,7 +75,7 @@
 	"block.environmental.cherry_sign": "Kirsikkapuukyltti",
 	"block.environmental.cherry_chest": "Kirsikkapuuarkku",
 	"block.environmental.cherry_trapped_chest": "Ansoitettu kirsikkapuuarkku",
-	"block.environmental.cherry_beehive": "Keinotekoinen kirsikkapuumehiläispesä",
+	"block.environmental.cherry_beehive": "Kirsikkapuumehiläispesä",
 	
     "block.environmental.wisteria_log": "Sinisadehalko",
     "block.environmental.stripped_wisteria_log": "Kuorittu sinisadehalko",
@@ -97,7 +97,7 @@
     "block.environmental.wisteria_vertical_slab": "Pystysuora sinisadelaatta",
     "block.environmental.wisteria_chest": "Sinisadearkku",
 	"block.environmental.wisteria_trapped_chest": "Ansoitettu sinisadearkku",
-	"block.environmental.wisteria_beehive": "Keinotekoinen sinisademehiläispesä",
+	"block.environmental.wisteria_beehive": "Sinisademehiläispesä",
 	
     "block.environmental.blue_wisteria_leaves": "Siniset sinisateenlehdet",
     "block.environmental.pink_wisteria_leaves": "Vaaleanpunaiset sinisateenlehdet",
@@ -300,7 +300,7 @@
 		
 	"item.environmental.wanderer_boots": "Kulkurin saappaat",
 	"item.environmental.architect_belt": "Arkkitehdin vyö",
-	"item.environmental.fool_wings": "Houkan siivet",
+	"item.environmental.healer_pouch": "Parantajan pussi",
 	"item.environmental.thief_hood": "Varkaan huppu",
 	"item.environmental.executioner_cleaver": "Pyövelin kirves",
 	
@@ -373,6 +373,9 @@
 	"entity.environmental.yak": "Jakki",
 	"entity.environmental.koi": "Koikarppi",
 	
+	"entity.environmental.duck_egg": "Sorsan muna",
+	"entity.environmental.mud_ball": "Mutapallo",
+	
 	"entity.minecraft.villager.environmental.ceramist": "Keraamikko",
 	"entity.minecraft.villager.environmental.carpenter": "Puuseppä",
 	
@@ -385,6 +388,9 @@
 	"biome.environmental.blossom_highlands": "Kirsikkaylämaat",
 	"biome.environmental.blossom_valleys": "Kirsikkalaaksot",
 	
+	"effect.environmental.panic": "Paniikki",
+	"effect.environmental.serenity": "Rauha",
+	
 	"container.kiln": "Polttouuni",
 	"container.sawmill": "Saha",
 	
@@ -392,6 +398,7 @@
 	"gui.environmental.category.sawing": "Sahaaminen",
 
 	"generic.reachDistance": "Ylettymisetäisyys",
+	"attribute.name.generic.stealth": "Salamyhkäisyys",
   
 	"enchantment.environmental.reaching": "Yletys",
 	"enchantment.environmental.reaching.desc": "Kasvattaa ylettymisetäisyyttä 1 kuutiolla per taso",
