@@ -9,6 +9,7 @@ import com.minecraftabnormals.environmental.common.world.gen.feature.Directional
 import com.minecraftabnormals.environmental.common.world.gen.feature.DuckNestFeature;
 import com.minecraftabnormals.environmental.common.world.gen.feature.FallenLeavesFeature;
 import com.minecraftabnormals.environmental.common.world.gen.feature.RiceFeature;
+import com.minecraftabnormals.environmental.common.world.gen.feature.TurkeyNestFeature;
 import com.minecraftabnormals.environmental.common.world.gen.feature.WisteriaTreeFeature;
 import com.minecraftabnormals.environmental.common.world.gen.util.WisteriaColor;
 import com.minecraftabnormals.environmental.core.Environmental;
@@ -39,7 +40,7 @@ public class EnvironmentalFeatures {
     
     public static final RegistryObject<Feature<NoFeatureConfig>> CHICKEN_NEST = FEATURES.register("chicken_nest", () -> new ChickenNestFeature(NoFeatureConfig.field_236558_a_));
     public static final RegistryObject<Feature<NoFeatureConfig>> DUCK_NEST = FEATURES.register("duck_nest", () -> new DuckNestFeature(NoFeatureConfig.field_236558_a_));
-    public static final RegistryObject<Feature<NoFeatureConfig>> TURKEY_NEST = FEATURES.register("turkey_nest", () -> new ChickenNestFeature(NoFeatureConfig.field_236558_a_));
+    public static final RegistryObject<Feature<NoFeatureConfig>> TURKEY_NEST = FEATURES.register("turkey_nest", () -> new TurkeyNestFeature(NoFeatureConfig.field_236558_a_));
     
     public static final RegistryObject<Feature<BaseTreeFeatureConfig>> WISTERIA_TREE = FEATURES.register("wisteria_tree", () -> new WisteriaTreeFeature(BaseTreeFeatureConfig.CODEC_BASE_TREE_FEATURE_CONFIG));
     public static final RegistryObject<Feature<BaseTreeFeatureConfig>> BIG_WISTERIA_TREE = FEATURES.register("big_wisteria_tree", () -> new BigWisteriaTreeFeature(BaseTreeFeatureConfig.CODEC_BASE_TREE_FEATURE_CONFIG));
