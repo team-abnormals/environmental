@@ -16,6 +16,7 @@ import net.minecraft.entity.villager.IVillagerType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.village.PointOfInterestType;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.feature.jigsaw.JigsawManager;
 import net.minecraft.world.gen.feature.jigsaw.JigsawPattern;
@@ -46,31 +47,25 @@ public class EnvironmentalVillagers {
 
 	public static void registerVillagerTypes() {
 		VillagerTrades.VILLAGER_DEFAULT_TRADES.isEmpty();
-		
-		IVillagerType iceSpikes = IVillagerType.register(Environmental.MODID + ":ice_spikes");
-		IVillagerType blossom = IVillagerType.register(Environmental.MODID + ":blossom");
-		IVillagerType forest = IVillagerType.register(Environmental.MODID + ":forest");
-		IVillagerType flowerForest = IVillagerType.register(Environmental.MODID + ":flower_forest");
-		
-		IVillagerType.BY_BIOME.put(Biomes.ICE_SPIKES, iceSpikes);
+		registerVillagerType(createType("ice_spikes"), Biomes.ICE_SPIKES);
+		registerVillagerType(createType("flower_forest"), Biomes.FLOWER_FOREST);
+		registerVillagerType(createType("blossom"), EnvironmentalBiomes.BLOSSOM_WOODS.get(), EnvironmentalBiomes.BLOSSOM_HILLS.get(), EnvironmentalBiomes.BLOSSOM_HIGHLANDS.get(), EnvironmentalBiomes.BLOSSOM_VALLEYS.get());
+		registerVillagerType(createType("forest"), Biomes.FOREST, Biomes.BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS, Biomes.TALL_BIRCH_FOREST, Biomes.TALL_BIRCH_HILLS);
 
-		IVillagerType.BY_BIOME.put(Biomes.FOREST, forest);
-		IVillagerType.BY_BIOME.put(Biomes.BIRCH_FOREST, forest);
-		IVillagerType.BY_BIOME.put(Biomes.BIRCH_FOREST_HILLS, forest);
-		IVillagerType.BY_BIOME.put(Biomes.TALL_BIRCH_FOREST, forest);
-		IVillagerType.BY_BIOME.put(Biomes.TALL_BIRCH_HILLS, forest);
-
-		IVillagerType.BY_BIOME.put(Biomes.FLOWER_FOREST, flowerForest);
-		
-		IVillagerType.BY_BIOME.put(EnvironmentalBiomes.BLOSSOM_WOODS.get(), blossom);
-		IVillagerType.BY_BIOME.put(EnvironmentalBiomes.BLOSSOM_HILLS.get(), blossom);
-		IVillagerType.BY_BIOME.put(EnvironmentalBiomes.BLOSSOM_HIGHLANDS.get(), blossom);
-		IVillagerType.BY_BIOME.put(EnvironmentalBiomes.BLOSSOM_VALLEYS.get(), blossom);
-		
 		GiveHeroGiftsTask.GIFTS.put(CERAMIST.get(), new ResourceLocation(Environmental.MODID, "gameplay/hero_of_the_village/ceramist_gift"));
 		GiveHeroGiftsTask.GIFTS.put(CARPENTER.get(), new ResourceLocation(Environmental.MODID, "gameplay/hero_of_the_village/carpenter_gift"));
 
 		setupVillagerHouses();
+	}
+
+	private static IVillagerType createType(String type) {
+		return IVillagerType.register(Environmental.MODID + ":" + type);
+	}
+
+	private static void registerVillagerType(IVillagerType type, Biome... biomes) {
+		for (Biome biome : biomes) {
+			IVillagerType.BY_BIOME.put(biome, type);
+		}
 	}
 
 	public static void registerPOIs() {

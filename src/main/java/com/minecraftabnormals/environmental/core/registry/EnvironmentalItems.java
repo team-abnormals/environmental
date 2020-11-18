@@ -34,7 +34,7 @@ public class EnvironmentalItems {
     public static final RegistryObject<Item> VENISON            = HELPER.createItem("venison", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).food(EnvironmentalFoods.VENISON)));
     public static final RegistryObject<Item> COOKED_VENISON     = HELPER.createItem("cooked_venison", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).food(EnvironmentalFoods.COOKED_VENISON)));
     
-    public static final RegistryObject<Item> KOI 	= HELPER.createItem("koi", () -> new Item(new Item.Properties().group(ItemGroup.MISC)));
+    public static final RegistryObject<Item> KOI 	= HELPER.createItem("koi", () -> new Item(new Item.Properties().food(EnvironmentalFoods.KOI).group(ItemGroup.MISC)));
     
     public static final RegistryObject<Item> DUCK            	= HELPER.createItem("duck", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).food(EnvironmentalFoods.DUCK)));
     public static final RegistryObject<Item> COOKED_DUCK     	= HELPER.createItem("cooked_duck", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).food(EnvironmentalFoods.COOKED_DUCK)));
