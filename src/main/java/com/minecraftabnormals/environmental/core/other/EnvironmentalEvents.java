@@ -29,16 +29,10 @@ import net.minecraft.entity.projectile.PotionEntity;
 import net.minecraft.entity.projectile.ProjectileItemEntity;
 import net.minecraft.entity.projectile.ThrowableEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.ShovelItem;
+import net.minecraft.item.*;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.*;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.EntityRayTraceResult;
@@ -55,7 +49,6 @@ import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
-import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -66,13 +59,13 @@ import java.util.Random;
 
 @EventBusSubscriber(modid = Environmental.MODID)
 public class EnvironmentalEvents {
-	
+
 	@SubscribeEvent
 	public static void onEvent(PlayerEvent.BreakSpeed event) {
 		if (event.getState().getBlock() instanceof HangingWisteriaLeavesBlock && event.getPlayer().getHeldItemMainhand().getItem() == Items.SHEARS)
 			event.setNewSpeed(15.0F);
 	}
-	
+
 	@SubscribeEvent
 	public static void onEvent(LivingSpawnEvent.CheckSpawn event) {
 		Entity entity = event.getEntity();
@@ -84,39 +77,39 @@ public class EnvironmentalEvents {
 		boolean validSpawn = naturalSpawn || chunkGenSpawn;
 
 		boolean replaceVariants = EnvironmentalConfig.COMMON.biomeVariantsAlwaysSpawn.get();
-		
-		if(event.getResult() != Event.Result.DENY) {
+
+		if (event.getResult() != Event.Result.DENY) {
 			if (replaceVariants && validSpawn && entity.getPosY() > 60) {
 				if (entity.getType() == EntityType.ZOMBIE) {
 					ZombieEntity zombie = (ZombieEntity) entity;
 					if (world.getBiome(entity.getPosition()).getCategory() == Biome.Category.DESERT) {
-						
+
 						HuskEntity husk = EntityType.HUSK.create(world.getWorld());
 						husk.setChild(zombie.isChild());
 						for (EquipmentSlotType slot : EquipmentSlotType.values())
 							zombie.setItemStackToSlot(slot, zombie.getItemStackFromSlot(slot));
 						husk.setLocationAndAngles(zombie.getPosX(), zombie.getPosY(), zombie.getPosZ(), zombie.rotationYaw, zombie.rotationPitch);
-						
+
 						world.addEntity(husk);
 						entity.remove();
 					}
 				}
-				
+
 				if (entity.getType() == EntityType.SKELETON) {
 					SkeletonEntity skeleton = (SkeletonEntity) entity;
 					if (world.getBiome(entity.getPosition()).getCategory() == Biome.Category.ICY) {
-						
+
 						StrayEntity stray = EntityType.STRAY.create(world.getWorld());
 						for (EquipmentSlotType slot : EquipmentSlotType.values())
 							skeleton.setItemStackToSlot(slot, skeleton.getItemStackFromSlot(slot));
 						stray.setLocationAndAngles(skeleton.getPosX(), skeleton.getPosY(), skeleton.getPosZ(), skeleton.rotationYaw, skeleton.rotationPitch);
-						
+
 						world.addEntity(stray);
 						entity.remove();
 					}
 				}
 			}
-			
+
 			if (validSpawn && entity.getType() == EntityType.MOOSHROOM) {
 				MooshroomEntity mooshroom = (MooshroomEntity) event.getEntity();
 				if (random.nextInt(3) == 0) {
@@ -128,17 +121,17 @@ public class EnvironmentalEvents {
 				}
 			}
 		}
-		
+
 		//Koi stuff
-		
+
 		boolean blockOnlyNaturalSpawns = EnvironmentalConfig.COMMON.blockOnlyNaturalSpawns.get();
-		
-		if(blockOnlyNaturalSpawns && event.isSpawner()) return;
-		if(!EnvironmentalTags.EntityTypes.SERENITY_WHITELIST.contains(entity.getType())) {
-			if(entity.getType().getClassification() == EntityClassification.MONSTER) {
+
+		if (blockOnlyNaturalSpawns && event.isSpawner()) return;
+		if (!EnvironmentalTags.EntityTypes.SERENITY_WHITELIST.contains(entity.getType())) {
+			if (entity.getType().getClassification() == EntityClassification.MONSTER) {
 				int horizontalRange = EnvironmentalConfig.COMMON.koiHorizontalSerenityRange.get();
 				int verticalRange = EnvironmentalConfig.COMMON.koiVerticalSerenityRange.get();
-				for(Entity koi : world.getEntitiesWithinAABB(KoiEntity.class, entity.getBoundingBox().grow(horizontalRange, verticalRange, horizontalRange))) {
+				for (Entity koi : world.getEntitiesWithinAABB(KoiEntity.class, entity.getBoundingBox().grow(horizontalRange, verticalRange, horizontalRange))) {
 					if (MathUtils.distanceBetweenPoints2d(entity.getPosX(), entity.getPosZ(), koi.getPosX(), koi.getPosZ()) <= horizontalRange) {
 						event.setResult(Event.Result.DENY);
 						break;
@@ -188,32 +181,6 @@ public class EnvironmentalEvents {
 	protected static final Map<Block, BlockState> HOE_LOOKUP = Maps.newHashMap(ImmutableMap.of(Blocks.GRASS_BLOCK, Blocks.FARMLAND.getDefaultState(), Blocks.GRASS_PATH, Blocks.FARMLAND.getDefaultState(), Blocks.DIRT, Blocks.FARMLAND.getDefaultState(), Blocks.COARSE_DIRT, Blocks.DIRT.getDefaultState()));
 
 	@SubscribeEvent
-	public static void onEvent(UseHoeEvent event) {
-		ItemStack hoe = event.getContext().getItem();
-
-		// if (event.getResult() == Result.ALLOW) {
-		World world = event.getContext().getWorld();
-		BlockPos blockpos = event.getContext().getPos();
-		if (event.getContext().getFace() != Direction.DOWN) {
-			BlockState blockstate = HOE_LOOKUP.get(world.getBlockState(blockpos).getBlock());
-			if (blockstate != null) {
-				PlayerEntity playerentity = event.getPlayer();
-				world.playSound(playerentity, blockpos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
-				playerentity.swingArm(event.getContext().getHand());
-				if (!world.isRemote) {
-					world.setBlockState(blockpos, blockstate, 11);
-					if (playerentity != null) {
-						hoe.damageItem(1, playerentity, (anim) -> {
-							anim.sendBreakAnimation(event.getContext().getHand());
-						});
-					}
-				}
-			}
-		}
-		// }
-	}
-
-	@SubscribeEvent
 	public static void onEvent(RightClickBlock event) {
 		World world = event.getWorld();
 		BlockPos pos = event.getPos();
@@ -224,12 +191,27 @@ public class EnvironmentalEvents {
 
 		if (event.getFace() != Direction.DOWN && item instanceof ShovelItem && !player.isSpectator() && world.isAirBlock(pos.up())) {
 			if (state.isIn(Blocks.PODZOL) || state.isIn(Blocks.MYCELIUM)) {
-				player.swingArm(event.getHand());
 				world.playSound(player, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
-				event.getItemStack().damageItem(1, player, (damage) -> {
+				stack.damageItem(1, player, (damage) -> {
 					damage.sendBreakAnimation(event.getHand());
 				});
 				world.setBlockState(pos, state.isIn(Blocks.PODZOL) ? EnvironmentalBlocks.PODZOL_PATH.get().getDefaultState() : EnvironmentalBlocks.MYCELIUM_PATH.get().getDefaultState(), 11);
+				event.setCancellationResult(ActionResultType.func_233537_a_(world.isRemote()));
+				event.setCanceled(true);
+			}
+		}
+
+		if (event.getFace() != Direction.DOWN) {
+			BlockState blockstate = HOE_LOOKUP.get(world.getBlockState(pos).getBlock());
+			if (blockstate != null && item instanceof HoeItem) {
+				PlayerEntity playerentity = event.getPlayer();
+				world.playSound(playerentity, pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+				world.setBlockState(pos, blockstate, 11);
+				stack.damageItem(1, playerentity, (anim) -> {
+					anim.sendBreakAnimation(event.getHand());
+				});
+				event.setCancellationResult(ActionResultType.func_233537_a_(world.isRemote()));
+				event.setCanceled(true);
 			}
 		}
 	}
@@ -253,7 +235,7 @@ public class EnvironmentalEvents {
 		LivingEntity entity = event.getEntityLiving();
 		World world = entity.getEntityWorld();
 		Random rand = new Random();
-		
+
 		if (entity instanceof SlabfishEntity) {
 			SlabfishEntity slabfish = (SlabfishEntity) event.getEntity();
 			if (world.getBiome(new BlockPos(entity.getPositionVec())) == Biomes.SOUL_SAND_VALLEY) {
