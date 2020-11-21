@@ -36,11 +36,10 @@ import net.minecraftforge.registries.RegistryBuilder;
 
 import java.util.Optional;
 
-import static com.teamabnormals.abnormals_core.core.AbnormalsCore.NETWORK_PROTOCOL;
-
 @Mod(Environmental.MODID)
 @Mod.EventBusSubscriber(modid = Environmental.MODID)
 public class Environmental {
+	public static final String NETWORK_PROTOCOL = "1";
 	public static final String MODID = "environmental";
 	public static final RegistryHelper REGISTRY_HELPER = new RegistryHelper(MODID);
 
