@@ -20,7 +20,7 @@ public class EnvironmentalFoods {
 	public static final Food SCRAMBLED_EGGS = (new Food.Builder()).hunger(6).saturation(0.6F).build();
 	
     public static final Food RICE_BALL = new Food.Builder().hunger(4).saturation(0.5F).build();
-    public static final Food KOI = new Food.Builder().hunger(1).saturation(0.1F).fastToEat().build();
+    public static final Food KOI = new Food.Builder().hunger(1).saturation(0.1F).build();
 
     public static final Food COD_KELP_ROLL = new Food.Builder().hunger(3).saturation(0.7F).fastToEat().build();
     public static final Food KOI_KELP_ROLL = new Food.Builder().hunger(5).saturation(1.2F).fastToEat().build();
