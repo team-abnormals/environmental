@@ -19,7 +19,7 @@ import com.minecraftabnormals.environmental.common.slabfish.SweaterType;
 import com.minecraftabnormals.environmental.common.slabfish.condition.SlabfishConditionContext;
 import com.minecraftabnormals.environmental.core.Environmental;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalCriteriaTriggers;
-import com.minecraftabnormals.environmental.core.other.EnvironmentalData;
+import com.minecraftabnormals.environmental.core.other.EnvironmentalDataSerializers;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalTags;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEntities;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
@@ -83,13 +83,13 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 
 public class SlabfishEntity extends TameableEntity implements IInventoryChangedListener, IBucketableEntity {
 
-	private static final DataParameter<ResourceLocation> SLABFISH_TYPE = EntityDataManager.createKey(SlabfishEntity.class, EnvironmentalData.RESOURCE_LOCATION);
+	private static final DataParameter<ResourceLocation> SLABFISH_TYPE = EntityDataManager.createKey(SlabfishEntity.class, EnvironmentalDataSerializers.RESOURCE_LOCATION);
 	private static final DataParameter<Integer> SLABFISH_OVERLAY = EntityDataManager.createKey(SlabfishEntity.class, DataSerializers.VARINT);
 	private static final DataParameter<Boolean> FROM_BUCKET = EntityDataManager.createKey(SlabfishEntity.class, DataSerializers.BOOLEAN);
 
-	private static final DataParameter<ResourceLocation> BACKPACK = EntityDataManager.createKey(SlabfishEntity.class, EnvironmentalData.RESOURCE_LOCATION);
+	private static final DataParameter<ResourceLocation> BACKPACK = EntityDataManager.createKey(SlabfishEntity.class, EnvironmentalDataSerializers.RESOURCE_LOCATION);
 	private static final DataParameter<Boolean> HAS_BACKPACK = EntityDataManager.createKey(SlabfishEntity.class, DataSerializers.BOOLEAN);
-	private static final DataParameter<ResourceLocation> SWEATER = EntityDataManager.createKey(SlabfishEntity.class, EnvironmentalData.RESOURCE_LOCATION);
+	private static final DataParameter<ResourceLocation> SWEATER = EntityDataManager.createKey(SlabfishEntity.class, EnvironmentalDataSerializers.RESOURCE_LOCATION);
 
 	public static final EntitySize SIZE_SWIMMING = EntitySize.fixed(0.7F, 0.6F);
 	public static final EntitySize SIZE_SITTING = EntitySize.fixed(0.45F, 0.6F);
