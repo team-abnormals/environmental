@@ -50,9 +50,9 @@ public class EnvironmentalEntities {
     }
 
     public static void registerSpawns() {
-        ForgeRegistries.BIOMES.getValues().stream().forEach(EnvironmentalEntities::processSpawning);
+        ForgeRegistries.BIOMES.getValues().forEach(EnvironmentalEntities::processSpawning);
         if(EnvironmentalConfig.COMMON.limitFarmAnimalSpawns.get()) {
-            ForgeRegistries.BIOMES.getValues().stream().forEach(EnvironmentalEntities::removeSpawns);
+            ForgeRegistries.BIOMES.getValues().forEach(EnvironmentalEntities::removeSpawns);
         }
 
         EntitySpawnPlacementRegistry.register(EnvironmentalEntities.SLABFISH.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, DuckEntity::canDuckSpawn);
@@ -65,19 +65,18 @@ public class EnvironmentalEntities {
     private static void processSpawning(Biome biome) {
         if (biome.getCategory() == Category.SWAMP) {
             biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(EnvironmentalEntities.SLABFISH.get(), 8, 2, 4));
-            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(EnvironmentalEntities.DUCK.get(), 5, 3, 5));
         }
         
-        if (biome.getCategory() == Category.RIVER) {
-            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(EnvironmentalEntities.DUCK.get(), 6, 2, 4));
+        if (biome.getCategory() == Category.RIVER || biome.getCategory() == Category.SWAMP) {
+            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(EnvironmentalEntities.DUCK.get(), 5, 2, 4));
         }
         
         if (biome.getCategory() == Category.FOREST) {
-            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(EnvironmentalEntities.DEER.get(), 12, 1, 4));
+            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(EnvironmentalEntities.DEER.get(), 16, 1, 4));
         }
 		
 		if(biome.getCategory() == Category.EXTREME_HILLS)
-            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(YAK.get(), 23, 2, 4));
+            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(YAK.get(), 20, 2, 4));
     }
     
     private static void removeSpawns(Biome biome) {
