@@ -1,0 +1,23 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "item": "atmospheric:morado_planks"
+  },
+  "result": "atmospheric:morado_vertical_slab",
+  "count": 2,
+  "conditions":[
+    {
+      "type":"forge:and",
+      "values": [
+        {
+          "type":"forge:mod_loaded",
+          "modid":"atmospheric"
+        },
+        {
+          "type":"abnormals_core:quark_flag",
+          "flag":"vertical_slabs"
+        }
+      ]
+    }
+  ]
+}
