@@ -1,10 +1,5 @@
 package com.minecraftabnormals.environmental.common.entity;
 
-import java.util.List;
-import java.util.UUID;
-
-import javax.annotation.Nullable;
-
 import com.minecraftabnormals.environmental.common.entity.goals.SlabbyBreedGoal;
 import com.minecraftabnormals.environmental.common.entity.goals.SlabbyFollowParentGoal;
 import com.minecraftabnormals.environmental.common.entity.goals.SlabbyGrabItemGoal;
@@ -25,7 +20,6 @@ import com.minecraftabnormals.environmental.core.registry.EnvironmentalEntities;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalSounds;
 import com.teamabnormals.abnormals_core.core.library.api.IBucketableEntity;
-
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -81,6 +75,11 @@ import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
 public class SlabfishEntity extends TameableEntity implements IInventoryChangedListener, IBucketableEntity {
 
 	private static final DataParameter<ResourceLocation> SLABFISH_TYPE = EntityDataManager.createKey(SlabfishEntity.class, EnvironmentalDataSerializers.RESOURCE_LOCATION);
@@ -108,8 +107,8 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 	public boolean isPartying = false;
 	BlockPos jukeboxPosition;
 
-	public SlabfishEntity(EntityType<? extends SlabfishEntity> event, World worldIn) {
-		super(event, worldIn);
+	public SlabfishEntity(EntityType<? extends SlabfishEntity> type, World worldIn) {
+		super(type, worldIn);
 		this.setPathPriority(PathNodeType.WATER, 0.0F);
 		this.slabfishBackpack = new SlabfishInventory(this);
 		this.slabfishBackpack.addListener(this);
@@ -610,8 +609,8 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 		return this.dataManager.get(SLABFISH_TYPE);
 	}
 
-	public void setSlabfishType(ResourceLocation event) {
-		this.dataManager.set(SLABFISH_TYPE, event);
+	public void setSlabfishType(ResourceLocation type) {
+		this.dataManager.set(SLABFISH_TYPE, type);
 		this.updateBackpack();
 	}
 
@@ -637,25 +636,28 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 			return spawnDataIn;
 		}
 
-		SlabfishManager slabfishManager = SlabfishManager.get(world);
-		SlabfishRarity rarity = SlabfishRarity.byChance(world.getRandom().nextFloat());
-		ResourceLocation event = reason == SpawnReason.BUCKET ? slabfishManager.getRandomSlabfishType(slabfishType -> slabfishType.isModLoaded() && slabfishType.isTradable() && slabfishType.getRarity() == rarity, world.getRandom()).orElse(SlabfishManager.DEFAULT_SLABFISH).getRegistryName() : slabfishManager.getSlabfishType(SlabfishConditionContext.spawned(this)).orElse(SlabfishManager.DEFAULT_SLABFISH).getRegistryName();
-
 		if (spawnDataIn instanceof SlabfishEntity.SlabfishData) {
-			event = ((SlabfishEntity.SlabfishData) spawnDataIn).event;
-		} else if (!this.isFromBucket()) {
-			spawnDataIn = new SlabfishEntity.SlabfishData(event);
+			this.setSlabfishType(((SlabfishEntity.SlabfishData) spawnDataIn).type);
+			return spawnDataIn;
 		}
 
-		this.setSlabfishType(event);
+		SlabfishManager slabfishManager = SlabfishManager.get(world);
+		SlabfishRarity rarity = SlabfishRarity.byChance(world.getRandom().nextFloat());
+		Optional<SlabfishType> type = reason == SpawnReason.BUCKET ? slabfishManager.getRandomSlabfishType(s -> s.isModLoaded() && s.isTradable() && s.getRarity() == rarity, world.getRandom()) : slabfishManager.getSlabfishType(SlabfishConditionContext.spawned(this));
+
+		if (!this.isFromBucket()) {
+			spawnDataIn = new SlabfishData(type.orElse(SlabfishManager.DEFAULT_SLABFISH).getRegistryName());
+		}
+
+		this.setSlabfishType(type.orElse(SlabfishManager.DEFAULT_SLABFISH).getRegistryName());
 		return spawnDataIn;
 	}
 
 	public static class SlabfishData extends AgeableData implements ILivingEntityData {
-		public final ResourceLocation event;
+		public final ResourceLocation type;
 
-		public SlabfishData(ResourceLocation event) {
-			this.event = event;
+		public SlabfishData(ResourceLocation type) {
+			this.type = type;
 		}
 	}
 
