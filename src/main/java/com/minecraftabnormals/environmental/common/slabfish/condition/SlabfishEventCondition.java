@@ -48,6 +48,6 @@ public class SlabfishEventCondition implements SlabfishCondition {
 
     @Override
     public boolean test(SlabfishConditionContext context) {
-        return ((this.events >> context.getAction().ordinal()) & 1) > 0;
+        return ((this.events >> context.getEvent().ordinal()) & 1) > 0;
     }
 }

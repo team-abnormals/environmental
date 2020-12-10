@@ -180,7 +180,7 @@ public class YakEntity extends AnimalEntity implements IForgeShearable, IShearab
 		if (this.grassEatTimer > 4 && this.grassEatTimer <= 36) {
 			return ((float) Math.PI / 5F) + 0.22F * MathHelper.sin((((float) (this.grassEatTimer - 4) - partialTicks) / 32.0F) * 28.7F);
 		} else {
-			return this.grassEatTimer > 0 ? ((float) Math.PI / 5F) : this.rotationPitch * ((float) Math.PI / 180F);
+			return this.grassEatTimer > 0 ? ((float) Math.PI / 5F) : MathHelper.lerp(partialTicks, this.prevRotationPitch, this.rotationPitch) * ((float) Math.PI / 180F);
 		}
 	}
 	
