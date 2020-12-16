@@ -51,6 +51,7 @@ public class EnvironmentalBlocks {
 	
 	public static final RegistryObject<PaintingType> SNAKE_BLOCK 			= PAINTINGS.register("snake_block", () -> new PaintingType(32, 32));
 	public static final RegistryObject<PaintingType> SOMETHING_IN_THE_WATER = PAINTINGS.register("something_in_the_water", () -> new PaintingType(48, 32));
+	public static final RegistryObject<PaintingType> FIGURE			        = PAINTINGS.register("figure", () -> new PaintingType(16, 32));
 	
     // Crafting //
 	
