@@ -1,7 +1,6 @@
 package com.minecraftabnormals.environmental.common.item;
 
 import com.minecraftabnormals.environmental.common.entity.DuckEggEntity;
-
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.EggItem;
 import net.minecraft.item.ItemStack;
@@ -17,7 +16,7 @@ public class DuckEggItem extends EggItem {
 	public DuckEggItem(Properties builder) {
 		super(builder);
 	}
-	
+
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		ItemStack itemstack = playerIn.getHeldItem(handIn);
@@ -31,7 +30,7 @@ public class DuckEggItem extends EggItem {
 		playerIn.addStat(Stats.ITEM_USED.get(this));
 		if (!playerIn.abilities.isCreativeMode) {
 			itemstack.shrink(1);
-		}	
+		}
 		return ActionResult.func_233538_a_(itemstack, worldIn.isRemote());
 	}
 }

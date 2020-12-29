@@ -2,7 +2,6 @@ package com.minecraftabnormals.environmental.client.model;
 
 import com.google.common.collect.ImmutableList;
 import com.minecraftabnormals.environmental.common.entity.DuckEntity;
-
 import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.util.math.MathHelper;
@@ -33,7 +32,7 @@ public class DuckModel<T extends DuckEntity> extends AgeableModel<T> {
 		this.body = new ModelRenderer(this, 0, 0);
 		this.body.setRotationPoint(0.0F, 20.0F, 0.0F);
 		this.body.setTextureOffset(14, 0).addBox(-3.0F, -4.0F, 0.0F, 6.0F, 8.0F, 5.0F, 0.0F, 0.0F, 0.0F);
-		this.setRotateAngle(body, ((float)Math.PI / 2.0F), 0.0F, 0.0F);
+		this.setRotateAngle(body, ((float) Math.PI / 2.0F), 0.0F, 0.0F);
 
 		this.leftWing = new ModelRenderer(this, 0, 0);
 		this.leftWing.setRotationPoint(3.5F, 15.0F, -1.0F);
@@ -76,29 +75,28 @@ public class DuckModel<T extends DuckEntity> extends AgeableModel<T> {
 
 	@Override
 	public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		float f = ageInTicks - (float)entityIn.ticksExisted;
+		float f = ageInTicks - (float) entityIn.ticksExisted;
 		float f1 = entityIn.getHeadLean(f);
 		float f2 = 1.0F - f1;
 
-		this.head.rotateAngleX = headPitch * ((float)Math.PI / 180F) * f2;
+		this.head.rotateAngleX = headPitch * ((float) Math.PI / 180F) * f2;
 		this.head.rotateAngleX += f1 * 1.4F + MathHelper.cos(ageInTicks) * 0.15F * f1;
-		this.head.rotateAngleY = netHeadYaw * ((float)Math.PI / 180F) * f2;
-		
+		this.head.rotateAngleY = netHeadYaw * ((float) Math.PI / 180F) * f2;
+
 		this.head.rotationPointY = 16.0F + f1;
 		this.head.rotationPointZ = -3.0F - f1;
 
 		if (!entityIn.isInWater()) {
 			this.rightLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-			this.leftLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
+			this.leftLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
 
 			this.rightLeg.rotationPointY = 20.0F;
 			this.leftLeg.rotationPointY = 20.0F;
-		}
-		else {
+		} else {
 			float f3 = !entityIn.isChild() ? 0.2F : 0.4F;
 
 			this.rightLeg.rotateAngleX = 0.5F + MathHelper.cos(ageInTicks * f3) * 0.8F * (limbSwingAmount + 0.2F);
-			this.leftLeg.rotateAngleX = 0.5F + MathHelper.cos(ageInTicks * f3 + (float)Math.PI) * 0.8F * (limbSwingAmount + 0.2F);
+			this.leftLeg.rotateAngleX = 0.5F + MathHelper.cos(ageInTicks * f3 + (float) Math.PI) * 0.8F * (limbSwingAmount + 0.2F);
 
 			this.rightLeg.rotationPointY = 18.0F;
 			this.leftLeg.rotationPointY = 18.0F;

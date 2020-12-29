@@ -13,14 +13,14 @@ import java.util.function.BiFunction;
  * @author Ocelot
  */
 public class SimpleSlabfishConditionFactory extends ForgeRegistryEntry<SlabfishCondition.Factory> implements SlabfishCondition.Factory {
-    private final BiFunction<JsonObject, JsonDeserializationContext, SlabfishCondition> jsonDeserializer;
+	private final BiFunction<JsonObject, JsonDeserializationContext, SlabfishCondition> jsonDeserializer;
 
-    public SimpleSlabfishConditionFactory(BiFunction<JsonObject, JsonDeserializationContext, SlabfishCondition> jsonDeserializer) {
-        this.jsonDeserializer = jsonDeserializer;
-    }
+	public SimpleSlabfishConditionFactory(BiFunction<JsonObject, JsonDeserializationContext, SlabfishCondition> jsonDeserializer) {
+		this.jsonDeserializer = jsonDeserializer;
+	}
 
-    @Override
-    public SlabfishCondition create(JsonObject json, JsonDeserializationContext context) throws JsonParseException {
-        return this.jsonDeserializer.apply(json, context);
-    }
+	@Override
+	public SlabfishCondition create(JsonObject json, JsonDeserializationContext context) throws JsonParseException {
+		return this.jsonDeserializer.apply(json, context);
+	}
 }

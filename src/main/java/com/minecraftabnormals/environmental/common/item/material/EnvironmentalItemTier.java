@@ -1,10 +1,10 @@
 package com.minecraftabnormals.environmental.common.item.material;
 
-import java.util.function.Supplier;
-
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.LazyValue;
+
+import java.util.function.Supplier;
 
 public class EnvironmentalItemTier implements IItemTier {
 	private final int harvestLevel;

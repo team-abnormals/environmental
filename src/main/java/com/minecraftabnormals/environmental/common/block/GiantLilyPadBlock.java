@@ -199,50 +199,50 @@ public class GiantLilyPadBlock extends BushBlock implements IPlantable {
 		if (!revert) {
 			switch (position) {
 
-			case NORTH:
-				return pos.offset(Direction.NORTH);
-			case EAST:
-				return pos.offset(Direction.EAST);
-			case SOUTH:
-				return pos.offset(Direction.SOUTH);
-			case WEST:
-				return pos.offset(Direction.WEST);
+				case NORTH:
+					return pos.offset(Direction.NORTH);
+				case EAST:
+					return pos.offset(Direction.EAST);
+				case SOUTH:
+					return pos.offset(Direction.SOUTH);
+				case WEST:
+					return pos.offset(Direction.WEST);
 
-			case NORTHEAST:
-				return pos.offset(Direction.NORTH).offset(Direction.EAST);
-			case NORTHWEST:
-				return pos.offset(Direction.NORTH).offset(Direction.WEST);
-			case SOUTHEAST:
-				return pos.offset(Direction.SOUTH).offset(Direction.EAST);
-			case SOUTHWEST:
-				return pos.offset(Direction.SOUTH).offset(Direction.WEST);
-			case CENTER:
-			default:
-				return pos;
+				case NORTHEAST:
+					return pos.offset(Direction.NORTH).offset(Direction.EAST);
+				case NORTHWEST:
+					return pos.offset(Direction.NORTH).offset(Direction.WEST);
+				case SOUTHEAST:
+					return pos.offset(Direction.SOUTH).offset(Direction.EAST);
+				case SOUTHWEST:
+					return pos.offset(Direction.SOUTH).offset(Direction.WEST);
+				case CENTER:
+				default:
+					return pos;
 			}
 		} else {
 			switch (position) {
 
-			case NORTH:
-				return pos.offset(Direction.SOUTH);
-			case EAST:
-				return pos.offset(Direction.WEST);
-			case SOUTH:
-				return pos.offset(Direction.NORTH);
-			case WEST:
-				return pos.offset(Direction.EAST);
+				case NORTH:
+					return pos.offset(Direction.SOUTH);
+				case EAST:
+					return pos.offset(Direction.WEST);
+				case SOUTH:
+					return pos.offset(Direction.NORTH);
+				case WEST:
+					return pos.offset(Direction.EAST);
 
-			case NORTHEAST:
-				return pos.offset(Direction.SOUTH).offset(Direction.WEST);
-			case NORTHWEST:
-				return pos.offset(Direction.SOUTH).offset(Direction.EAST);
-			case SOUTHEAST:
-				return pos.offset(Direction.NORTH).offset(Direction.WEST);
-			case SOUTHWEST:
-				return pos.offset(Direction.NORTH).offset(Direction.EAST);
-			case CENTER:
-			default:
-				return pos;
+				case NORTHEAST:
+					return pos.offset(Direction.SOUTH).offset(Direction.WEST);
+				case NORTHWEST:
+					return pos.offset(Direction.SOUTH).offset(Direction.EAST);
+				case SOUTHEAST:
+					return pos.offset(Direction.NORTH).offset(Direction.WEST);
+				case SOUTHWEST:
+					return pos.offset(Direction.NORTH).offset(Direction.EAST);
+				case CENTER:
+				default:
+					return pos;
 			}
 		}
 	}
@@ -253,14 +253,14 @@ public class GiantLilyPadBlock extends BushBlock implements IPlantable {
 	}
 
 	public static enum LilyPadPosition implements IStringSerializable {
-		CENTER("center"), 
-		NORTH("north"), 
-		NORTHEAST("northeast"), 
-		EAST("east"), 
-		SOUTHEAST("southeast"), 
-		SOUTH("south"), 
-		SOUTHWEST("southwest"), 
-		WEST("west"), 
+		CENTER("center"),
+		NORTH("north"),
+		NORTHEAST("northeast"),
+		EAST("east"),
+		SOUTHEAST("southeast"),
+		SOUTH("south"),
+		SOUTHWEST("southwest"),
+		WEST("west"),
 		NORTHWEST("northwest");
 
 		private final String heightName;

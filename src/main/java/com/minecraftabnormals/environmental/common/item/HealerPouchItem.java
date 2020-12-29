@@ -1,13 +1,8 @@
 package com.minecraftabnormals.environmental.common.item;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import com.minecraftabnormals.environmental.client.model.HealerPouchModel;
 import com.minecraftabnormals.environmental.core.Environmental;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEffects;
-
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
@@ -27,10 +22,13 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
+import javax.annotation.Nullable;
+import java.util.List;
+
 @EventBusSubscriber(modid = Environmental.MODID)
 public class HealerPouchItem extends ExplorerArmorItem {
 	private static final String NBT_TAG = "HealerPouchUses";
-	
+
 	public HealerPouchItem(Properties properties) {
 		super(EquipmentSlotType.CHEST, properties);
 	}
@@ -40,7 +38,7 @@ public class HealerPouchItem extends ExplorerArmorItem {
 	public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack stack, EquipmentSlotType armorSlot, A _default) {
 		return HealerPouchModel.get(1.0F);
 	}
-	
+
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
@@ -48,7 +46,7 @@ public class HealerPouchItem extends ExplorerArmorItem {
 		int uses = compoundnbt.getInt(NBT_TAG);
 		tooltip.add((new StringTextComponent(uses + " adrenaline boosts")).mergeStyle(TextFormatting.GRAY));
 	}
-	
+
 	@SubscribeEvent
 	public static void onEvent(LivingHurtEvent event) {
 		LivingEntity entity = event.getEntityLiving();
@@ -73,9 +71,9 @@ public class HealerPouchItem extends ExplorerArmorItem {
 				}
 			}
 		}
-		
+
 	}
-	
+
 	public static int getIncreaseForUses(int uses) {
 		int increase = 1;
 		if (uses >= 10)

@@ -21,76 +21,76 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TranslationTextComponent;
 
 public class BakingCategory implements IRecipeCategory<BakingRecipe> {
-    public static final ResourceLocation BAKING = new ResourceLocation(Environmental.MODID, "baking");
-    private final IDrawableAnimated animatedFlame;
-    private final IDrawableAnimated arrow;
+	public static final ResourceLocation BAKING = new ResourceLocation(Environmental.MODID, "baking");
+	private final IDrawableAnimated animatedFlame;
+	private final IDrawableAnimated arrow;
 
-    private static final int inputSlot = 0;
-    private static final int outputSlot = 2;
+	private static final int inputSlot = 0;
+	private static final int outputSlot = 2;
 
-    private final IDrawable background;
-    private final IDrawable icon;
-    private final String localizedName;
+	private final IDrawable background;
+	private final IDrawable icon;
+	private final String localizedName;
 
-    public BakingCategory(IGuiHelper guiHelper) {
-        this.background = guiHelper.createDrawable(EnvironmentalPlugin.RECIPE_GUI_ENVIRONMENTAL, 0, 114, 82, 54);
-        this.icon = guiHelper.createDrawableIngredient(new ItemStack(EnvironmentalBlocks.KILN.get()));
-        this.localizedName = I18n.format("gui." + Environmental.MODID + ".category.baking");
-        IDrawableStatic staticFlame = guiHelper.createDrawable(EnvironmentalPlugin.RECIPE_GUI_ENVIRONMENTAL, 82, 114, 14, 14);
-        this.animatedFlame = guiHelper.createAnimatedDrawable(staticFlame, 300, IDrawableAnimated.StartDirection.TOP, true);
-        this.arrow = guiHelper.drawableBuilder(EnvironmentalPlugin.RECIPE_GUI_ENVIRONMENTAL, 82, 128, 24, 17).buildAnimated(100, IDrawableAnimated.StartDirection.LEFT, false);
-    }
+	public BakingCategory(IGuiHelper guiHelper) {
+		this.background = guiHelper.createDrawable(EnvironmentalPlugin.RECIPE_GUI_ENVIRONMENTAL, 0, 114, 82, 54);
+		this.icon = guiHelper.createDrawableIngredient(new ItemStack(EnvironmentalBlocks.KILN.get()));
+		this.localizedName = I18n.format("gui." + Environmental.MODID + ".category.baking");
+		IDrawableStatic staticFlame = guiHelper.createDrawable(EnvironmentalPlugin.RECIPE_GUI_ENVIRONMENTAL, 82, 114, 14, 14);
+		this.animatedFlame = guiHelper.createAnimatedDrawable(staticFlame, 300, IDrawableAnimated.StartDirection.TOP, true);
+		this.arrow = guiHelper.drawableBuilder(EnvironmentalPlugin.RECIPE_GUI_ENVIRONMENTAL, 82, 128, 24, 17).buildAnimated(100, IDrawableAnimated.StartDirection.LEFT, false);
+	}
 
-    @Override
-    public void draw(BakingRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
-        this.animatedFlame.draw(matrixStack, 1, 20);
-        this.arrow.draw(matrixStack, 24, 18);
-        float experience = recipe.getExperience();
-        if (experience > 0.0F) {
-            TranslationTextComponent experienceString = new TranslationTextComponent("gui.jei.category.smelting.experience", experience);
-            Minecraft minecraft = Minecraft.getInstance();
-            FontRenderer fontRenderer = minecraft.fontRenderer;
-            int stringWidth = fontRenderer.getStringPropertyWidth(experienceString);
-            fontRenderer.func_243248_b(matrixStack, experienceString, (float) (this.background.getWidth() - stringWidth), 0.0F, -8355712);
-        }
-    }
+	@Override
+	public void draw(BakingRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
+		this.animatedFlame.draw(matrixStack, 1, 20);
+		this.arrow.draw(matrixStack, 24, 18);
+		float experience = recipe.getExperience();
+		if (experience > 0.0F) {
+			TranslationTextComponent experienceString = new TranslationTextComponent("gui.jei.category.smelting.experience", experience);
+			Minecraft minecraft = Minecraft.getInstance();
+			FontRenderer fontRenderer = minecraft.fontRenderer;
+			int stringWidth = fontRenderer.getStringPropertyWidth(experienceString);
+			fontRenderer.func_243248_b(matrixStack, experienceString, (float) (this.background.getWidth() - stringWidth), 0.0F, -8355712);
+		}
+	}
 
-    @Override
-    public ResourceLocation getUid() {
-        return BAKING;
-    }
+	@Override
+	public ResourceLocation getUid() {
+		return BAKING;
+	}
 
-    @Override
-    public Class<? extends BakingRecipe> getRecipeClass() {
-        return BakingRecipe.class;
-    }
+	@Override
+	public Class<? extends BakingRecipe> getRecipeClass() {
+		return BakingRecipe.class;
+	}
 
-    @Override
-    public String getTitle() {
-        return this.localizedName;
-    }
+	@Override
+	public String getTitle() {
+		return this.localizedName;
+	}
 
-    @Override
-    public IDrawable getBackground() {
-        return this.background;
-    }
+	@Override
+	public IDrawable getBackground() {
+		return this.background;
+	}
 
-    @Override
-    public IDrawable getIcon() {
-        return this.icon;
-    }
+	@Override
+	public IDrawable getIcon() {
+		return this.icon;
+	}
 
-    @Override
-    public void setIngredients(BakingRecipe recipe, IIngredients ingredients) {
-        ingredients.setInputIngredients(recipe.getIngredients());
-        ingredients.setOutput(VanillaTypes.ITEM, recipe.getRecipeOutput());
-    }
+	@Override
+	public void setIngredients(BakingRecipe recipe, IIngredients ingredients) {
+		ingredients.setInputIngredients(recipe.getIngredients());
+		ingredients.setOutput(VanillaTypes.ITEM, recipe.getRecipeOutput());
+	}
 
-    @Override
-    public void setRecipe(IRecipeLayout recipeLayout, BakingRecipe recipe, IIngredients ingredients) {
-        IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
-        guiItemStacks.init(inputSlot, true, 0, 0);
-        guiItemStacks.init(outputSlot, false, 60, 18);
-        guiItemStacks.set(ingredients);
-    }
+	@Override
+	public void setRecipe(IRecipeLayout recipeLayout, BakingRecipe recipe, IIngredients ingredients) {
+		IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
+		guiItemStacks.init(inputSlot, true, 0, 0);
+		guiItemStacks.init(outputSlot, false, 60, 18);
+		guiItemStacks.set(ingredients);
+	}
 }

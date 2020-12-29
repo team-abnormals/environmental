@@ -1,10 +1,5 @@
 package com.minecraftabnormals.environmental.common.item;
 
-import java.util.List;
-import java.util.UUID;
-
-import javax.annotation.Nullable;
-
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableMultimap.Builder;
 import com.google.common.collect.Multimap;
@@ -12,7 +7,6 @@ import com.minecraftabnormals.environmental.client.model.ThiefHoodModel;
 import com.minecraftabnormals.environmental.core.Environmental;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalAttributes;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
-
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
@@ -36,6 +30,10 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.UUID;
+
 @EventBusSubscriber(modid = Environmental.MODID)
 public class ThiefHoodItem extends ExplorerArmorItem {
 	private static final String NBT_TAG = "ThiefHoodUses";
@@ -54,7 +52,7 @@ public class ThiefHoodItem extends ExplorerArmorItem {
 	public boolean isEnderMask(ItemStack stack, PlayerEntity player, EndermanEntity endermanEntity) {
 		return true;
 	}
-	
+
 	@Override
 	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType slot, ItemStack stack) {
 		Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();

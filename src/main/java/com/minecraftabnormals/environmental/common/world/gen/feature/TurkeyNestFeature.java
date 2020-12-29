@@ -1,11 +1,8 @@
 package com.minecraftabnormals.environmental.common.world.gen.feature;
 
-import java.util.Random;
-
 import com.minecraftabnormals.environmental.common.block.BirdNestBlock;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.mojang.serialization.Codec;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -14,7 +11,8 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.structure.StructureManager;
+
+import java.util.Random;
 
 public class TurkeyNestFeature extends Feature<NoFeatureConfig> {
 	public TurkeyNestFeature(Codec<NoFeatureConfig> config) {
@@ -30,7 +28,7 @@ public class TurkeyNestFeature extends Feature<NoFeatureConfig> {
 
 		if (worldIn.isAirBlock(blockpos) && worldIn.getBlockState(blockpos.down()).getBlock() == Blocks.GRASS_BLOCK) {
 			worldIn.setBlockState(blockpos, blockstate, 2);
-			
+
 			return true;
 		}
 

@@ -1,33 +1,17 @@
 package com.minecraftabnormals.environmental.common.entity;
 
-import java.util.Random;
-
 import com.minecraftabnormals.environmental.api.IEggLayingEntity;
 import com.minecraftabnormals.environmental.common.entity.goals.DuckSwimGoal;
 import com.minecraftabnormals.environmental.common.entity.goals.LayEggInNestGoal;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalTags;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEntities;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.AgeableEntity;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntitySize;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.Pose;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.BreedGoal;
-import net.minecraft.entity.ai.goal.FollowParentGoal;
-import net.minecraft.entity.ai.goal.LookAtGoal;
-import net.minecraft.entity.ai.goal.LookRandomlyGoal;
-import net.minecraft.entity.ai.goal.PanicGoal;
-import net.minecraft.entity.ai.goal.RandomWalkingGoal;
-import net.minecraft.entity.ai.goal.TemptGoal;
+import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -53,6 +37,8 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
+
+import java.util.Random;
 
 public class DuckEntity extends AnimalEntity implements IEggLayingEntity {
 	private static final DataParameter<Integer> EATING = EntityDataManager.createKey(DuckEntity.class, DataSerializers.VARINT);
@@ -102,19 +88,19 @@ public class DuckEntity extends AnimalEntity implements IEggLayingEntity {
 	@Override
 	public void livingTick() {
 		super.livingTick();
-		
+
 		double d0 = this.func_233571_b_(FluidTags.WATER);
 		boolean flag = !this.isChild() && d0 > 0.3D || this.isChild() && d0 > 0.15D;
 
 		// Wing rotation
 		this.oFlap = this.wingRotation;
 		this.oFlapSpeed = this.destPos;
-		this.destPos = (float)((double)this.destPos + (double)(this.onGround || this.inWater ? -1 : 4) * 0.3D);
+		this.destPos = (float) ((double) this.destPos + (double) (this.onGround || this.inWater ? -1 : 4) * 0.3D);
 		this.destPos = MathHelper.clamp(this.destPos, 0.0F, 1.0F);
 		if (!this.onGround && !flag && this.wingRotDelta < 1.0F) {
 			this.wingRotDelta = 1.0F;
 		}
-		this.wingRotDelta = (float)((double)this.wingRotDelta * 0.9D);
+		this.wingRotDelta = (float) ((double) this.wingRotDelta * 0.9D);
 		this.wingRotation += this.wingRotDelta * 2.0F;
 
 		// Eating animation
@@ -151,8 +137,7 @@ public class DuckEntity extends AnimalEntity implements IEggLayingEntity {
 					this.setEatingTime(this.getEatingTime() - 1);
 				else
 					this.setEatingTime(0);
-			}
-			else if (!this.isInLove() && this.rand.nextInt(300) == 0 && this.inWater) {
+			} else if (!this.isInLove() && this.rand.nextInt(300) == 0 && this.inWater) {
 				this.setEatingTime(40 + this.rand.nextInt(20));
 			}
 		}
@@ -169,7 +154,7 @@ public class DuckEntity extends AnimalEntity implements IEggLayingEntity {
 	public float getHeadLean(float partialTicks) {
 		return MathHelper.lerp(partialTicks, this.prevHeadLean, this.headLean);
 	}
-	
+
 	public boolean isEating() {
 		return this.getEatingTime() > 0;
 	}
@@ -251,11 +236,11 @@ public class DuckEntity extends AnimalEntity implements IEggLayingEntity {
 	@Override
 	public void updatePassenger(Entity passenger) {
 		super.updatePassenger(passenger);
-		float f = MathHelper.sin(this.renderYawOffset * ((float)Math.PI / 180F));
-		float f1 = MathHelper.cos(this.renderYawOffset * ((float)Math.PI / 180F));
-		passenger.setPosition(this.getPosX() + (double)(0.1F * f), this.getPosYHeight(0.5D) + passenger.getYOffset() + 0.0D, this.getPosZ() - (double)(0.1F * f1));
+		float f = MathHelper.sin(this.renderYawOffset * ((float) Math.PI / 180F));
+		float f1 = MathHelper.cos(this.renderYawOffset * ((float) Math.PI / 180F));
+		passenger.setPosition(this.getPosX() + (double) (0.1F * f), this.getPosYHeight(0.5D) + passenger.getYOffset() + 0.0D, this.getPosZ() - (double) (0.1F * f1));
 		if (passenger instanceof LivingEntity) {
-			((LivingEntity)passenger).renderYawOffset = this.renderYawOffset;
+			((LivingEntity) passenger).renderYawOffset = this.renderYawOffset;
 		}
 
 	}
@@ -282,7 +267,7 @@ public class DuckEntity extends AnimalEntity implements IEggLayingEntity {
 	public ItemStack getPickedResult(RayTraceResult target) {
 		return new ItemStack(EnvironmentalItems.DUCK_SPAWN_EGG.get());
 	}
-	
+
 	@Override
 	public int getEggTimer() {
 		return this.timeUntilNextEgg;
@@ -302,7 +287,7 @@ public class DuckEntity extends AnimalEntity implements IEggLayingEntity {
 	public Item getEggItem() {
 		return EnvironmentalItems.DUCK_EGG.get();
 	}
-	
+
 	@Override
 	public int getNextEggTime(Random rand) {
 		return rand.nextInt(6000) + 6000;

@@ -3,14 +3,14 @@ package com.minecraftabnormals.environmental.common.block;
 import net.minecraft.util.IStringSerializable;
 
 public enum LilyPadPosition implements IStringSerializable {
-	CENTER("center"), 
-	NORTH("north"), 
+	CENTER("center"),
+	NORTH("north"),
 	NORTHEAST("northeast"),
-	EAST("east"), 
+	EAST("east"),
 	SOUTHEAST("southeast"),
-	SOUTH("south"), 
+	SOUTH("south"),
 	SOUTHWEST("southwest"),
-	WEST("west"), 
+	WEST("west"),
 	NORTHWEST("northwest");
 
 	private final String heightName;

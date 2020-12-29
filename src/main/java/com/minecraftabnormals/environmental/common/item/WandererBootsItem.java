@@ -1,17 +1,11 @@
 package com.minecraftabnormals.environmental.common.item;
 
-import java.util.List;
-import java.util.UUID;
-
-import javax.annotation.Nullable;
-
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableMultimap.Builder;
 import com.google.common.collect.Multimap;
 import com.minecraftabnormals.environmental.client.model.WandererBootsModel;
 import com.minecraftabnormals.environmental.core.Environmental;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
-
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
@@ -31,10 +25,14 @@ import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.UUID;
+
 @EventBusSubscriber(modid = Environmental.MODID)
 public class WandererBootsItem extends ExplorerArmorItem {
 	public static final String NBT_TAG = "WandererBootsUses";
-	
+
 	public WandererBootsItem(Properties properties) {
 		super(EquipmentSlotType.FEET, properties);
 	}
@@ -63,7 +61,7 @@ public class WandererBootsItem extends ExplorerArmorItem {
 		if (event.getEntityLiving().getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == EnvironmentalItems.WANDERER_BOOTS.get() && event.getEntityLiving().fallDistance < 6)
 			event.setDamageMultiplier(0);
 	}
-	
+
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
@@ -71,7 +69,7 @@ public class WandererBootsItem extends ExplorerArmorItem {
 		int uses = Math.round(compound.getFloat(NBT_TAG));
 		tooltip.add((new StringTextComponent(Integer.toString(uses) + " meters travelled")).mergeStyle(TextFormatting.GRAY));
 	}
-	
+
 	public static int getIncreaseForUses(int uses) {
 		int increase = 1;
 		if (uses >= 1000)

@@ -85,7 +85,7 @@ public class EnvironmentalEvents {
 					ZombieEntity zombie = (ZombieEntity) entity;
 					if (world.getBiome(entity.getPosition()).getCategory() == Biome.Category.DESERT) {
 
-						HuskEntity husk = EntityType.HUSK.create((World)world);
+						HuskEntity husk = EntityType.HUSK.create((World) world);
 						husk.setChild(zombie.isChild());
 						for (EquipmentSlotType slot : EquipmentSlotType.values())
 							zombie.setItemStackToSlot(slot, zombie.getItemStackFromSlot(slot));
@@ -99,7 +99,7 @@ public class EnvironmentalEvents {
 				if (entity.getType() == EntityType.SKELETON) {
 					SkeletonEntity skeleton = (SkeletonEntity) entity;
 					if (world.getBiome(entity.getPosition()).getCategory() == Biome.Category.ICY) {
-						StrayEntity stray = EntityType.STRAY.create((World)world);
+						StrayEntity stray = EntityType.STRAY.create((World) world);
 						for (EquipmentSlotType slot : EquipmentSlotType.values())
 							skeleton.setItemStackToSlot(slot, skeleton.getItemStackFromSlot(slot));
 						stray.setLocationAndAngles(skeleton.getPosX(), skeleton.getPosY(), skeleton.getPosZ(), skeleton.rotationYaw, skeleton.rotationPitch);
@@ -113,7 +113,7 @@ public class EnvironmentalEvents {
 			if (validSpawn && entity.getType() == EntityType.MOOSHROOM) {
 				MooshroomEntity mooshroom = (MooshroomEntity) event.getEntity();
 				if (random.nextInt(3) == 0) {
-					MooshroomEntity brownMooshroom = EntityType.MOOSHROOM.create((World)world);
+					MooshroomEntity brownMooshroom = EntityType.MOOSHROOM.create((World) world);
 					brownMooshroom.setLocationAndAngles(mooshroom.getPosX(), mooshroom.getPosY(), mooshroom.getPosZ(), mooshroom.rotationYaw, mooshroom.rotationPitch);
 					brownMooshroom.setMooshroomType(MooshroomEntity.Type.BROWN);
 					world.addEntity(brownMooshroom);

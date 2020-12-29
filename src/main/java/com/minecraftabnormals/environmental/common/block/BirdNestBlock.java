@@ -1,14 +1,7 @@
 package com.minecraftabnormals.environmental.common.block;
 
-import java.util.function.Supplier;
-
 import com.minecraftabnormals.environmental.common.tile.BirdNestTileEntity;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.ContainerBlock;
+import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -27,6 +20,8 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+
+import java.util.function.Supplier;
 
 public class BirdNestBlock extends ContainerBlock {
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 3.0D, 16.0D);
@@ -62,8 +57,7 @@ public class BirdNestBlock extends ContainerBlock {
 					}
 					worldIn.setBlockState(pos, state.with(EGGS, Integer.valueOf(i + 1)), 3);
 				}
-			}
-			else {
+			} else {
 				spawnAsEntity(worldIn, pos, new ItemStack(this.egg.get()));
 
 				if (i > 1)
@@ -72,8 +66,7 @@ public class BirdNestBlock extends ContainerBlock {
 					worldIn.setBlockState(pos, this.getEmptyNest().getDefaultState(), 3);
 			}
 			return ActionResultType.func_233537_a_(worldIn.isRemote);
-		}
-		else {
+		} else {
 			return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
 		}
 	}
@@ -82,7 +75,7 @@ public class BirdNestBlock extends ContainerBlock {
 		return new ItemStack(this.getEgg());
 	}
 
-	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos){
+	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
 		return worldIn.getBlockState(pos.down()).getMaterial().isSolid();
 	}
 
@@ -105,7 +98,7 @@ public class BirdNestBlock extends ContainerBlock {
 	public EmptyNestBlock getEmptyNest() {
 		return this.emptyNest;
 	}
-	
+
 	@Override
 	public boolean hasComparatorInputOverride(BlockState state) {
 		return true;

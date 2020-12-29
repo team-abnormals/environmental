@@ -1,9 +1,6 @@
 package com.minecraftabnormals.environmental.common.item.material;
 
-import java.util.function.Supplier;
-
 import com.minecraftabnormals.environmental.core.Environmental;
-
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.crafting.Ingredient;
@@ -12,8 +9,10 @@ import net.minecraft.util.SoundEvent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import java.util.function.Supplier;
+
 public class EnvironmentalArmorMaterial implements IArmorMaterial {
-	private static final int[] MAX_DAMAGE_ARRAY = new int[] { 13, 15, 16, 11 };
+	private static final int[] MAX_DAMAGE_ARRAY = new int[]{13, 15, 16, 11};
 	private final String name;
 	private final int maxDamageFactor;
 	private final int[] damageReductionAmountArray;

@@ -1,11 +1,8 @@
 package com.minecraftabnormals.environmental.common.entity.goals;
 
-import java.util.Random;
-
 import com.minecraftabnormals.environmental.api.IEggLayingEntity;
 import com.minecraftabnormals.environmental.common.block.BirdNestBlock;
 import com.minecraftabnormals.environmental.common.block.EmptyNestBlock;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.CreatureEntity;
@@ -14,6 +11,8 @@ import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
+
+import java.util.Random;
 
 public class LayEggInNestGoal extends MoveToBlockGoal {
 	private final AnimalEntity bird;

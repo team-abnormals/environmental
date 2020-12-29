@@ -275,7 +275,6 @@ public class EnvironmentalCompat {
 	}
 
 
-
 	public static void setRenderLayers() {
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.SLABFISH_EFFIGY.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.ICE_LANTERN.get(), RenderType.getCutout());

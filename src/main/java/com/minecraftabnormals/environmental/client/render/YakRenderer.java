@@ -11,14 +11,14 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class YakRenderer extends MobRenderer<YakEntity, YakModel<YakEntity>> {
-    public YakRenderer(EntityRendererManager renderManagerIn) {
-        super(renderManagerIn, new YakModel<>(), 0.8F);
-    }
+	public YakRenderer(EntityRendererManager renderManagerIn) {
+		super(renderManagerIn, new YakModel<>(), 0.8F);
+	}
 
-    @Override
-    public ResourceLocation getEntityTexture(YakEntity entity) {
-        if(entity.getSheared())
-            return new ResourceLocation(Environmental.MODID, "textures/entity/yak/yak_sheared.png");
-        return new ResourceLocation(Environmental.MODID, "textures/entity/yak/yak.png");
-    }
+	@Override
+	public ResourceLocation getEntityTexture(YakEntity entity) {
+		if (entity.getSheared())
+			return new ResourceLocation(Environmental.MODID, "textures/entity/yak/yak_sheared.png");
+		return new ResourceLocation(Environmental.MODID, "textures/entity/yak/yak.png");
+	}
 }

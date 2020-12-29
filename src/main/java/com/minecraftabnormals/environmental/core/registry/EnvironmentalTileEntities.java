@@ -14,13 +14,13 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 @Mod.EventBusSubscriber(modid = Environmental.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class EnvironmentalTileEntities {
-    public static final TileEntitySubRegistryHelper HELPER = Environmental.REGISTRY_HELPER.getTileEntitySubHelper();
+	public static final TileEntitySubRegistryHelper HELPER = Environmental.REGISTRY_HELPER.getTileEntitySubHelper();
 
-    public static final RegistryObject<TileEntityType<SlabfishEffigyTileEntity>> SLABFISH_EFFIGY = HELPER.createTileEntity("slabfish_effigy", SlabfishEffigyTileEntity::new, () -> new Block[]{EnvironmentalBlocks.SLABFISH_EFFIGY.get()});
-    public static final RegistryObject<TileEntityType<KilnTileEntity>> KILN = HELPER.createTileEntity("kiln", KilnTileEntity::new, () -> new Block[]{EnvironmentalBlocks.KILN.get()});
-    public static final RegistryObject<TileEntityType<BirdNestTileEntity>> BIRD_NEST = HELPER.createTileEntity("bird_nest", BirdNestTileEntity::new, () -> collectBlocks(BirdNestBlock.class));
-    
-    private static Block[] collectBlocks(Class<? extends Block> blockClass) {
+	public static final RegistryObject<TileEntityType<SlabfishEffigyTileEntity>> SLABFISH_EFFIGY = HELPER.createTileEntity("slabfish_effigy", SlabfishEffigyTileEntity::new, () -> new Block[]{EnvironmentalBlocks.SLABFISH_EFFIGY.get()});
+	public static final RegistryObject<TileEntityType<KilnTileEntity>> KILN = HELPER.createTileEntity("kiln", KilnTileEntity::new, () -> new Block[]{EnvironmentalBlocks.KILN.get()});
+	public static final RegistryObject<TileEntityType<BirdNestTileEntity>> BIRD_NEST = HELPER.createTileEntity("bird_nest", BirdNestTileEntity::new, () -> collectBlocks(BirdNestBlock.class));
+
+	private static Block[] collectBlocks(Class<? extends Block> blockClass) {
 		return ForgeRegistries.BLOCKS.getValues().stream().filter(blockClass::isInstance).toArray(Block[]::new);
 	}
 }

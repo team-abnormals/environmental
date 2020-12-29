@@ -1,40 +1,18 @@
 package com.minecraftabnormals.environmental.common.entity;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoField;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import java.util.function.Predicate;
-
-import javax.annotation.Nullable;
-
 import com.minecraftabnormals.environmental.common.entity.util.DeerCoatColors;
 import com.minecraftabnormals.environmental.common.entity.util.DeerCoatTypes;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalTags;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEntities;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DoublePlantBlock;
-import net.minecraft.entity.AgeableEntity;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ILivingEntityData;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.AvoidEntityGoal;
-import net.minecraft.entity.ai.goal.BreedGoal;
-import net.minecraft.entity.ai.goal.FollowParentGoal;
-import net.minecraft.entity.ai.goal.LookAtGoal;
-import net.minecraft.entity.ai.goal.LookRandomlyGoal;
-import net.minecraft.entity.ai.goal.PanicGoal;
-import net.minecraft.entity.ai.goal.SwimGoal;
-import net.minecraft.entity.ai.goal.TemptGoal;
-import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
+import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
@@ -50,27 +28,29 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EntityPredicates;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.network.NetworkHooks;
 
+import javax.annotation.Nullable;
+import java.time.LocalDate;
+import java.time.temporal.ChronoField;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import java.util.function.Predicate;
+
 public class DeerEntity extends AnimalEntity {
 	private static final DataParameter<Integer> DEER_COAT_COLOR = EntityDataManager.createKey(DeerEntity.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> DEER_COAT_TYPE = EntityDataManager.createKey(DeerEntity.class, DataSerializers.VARINT);
 	private static final DataParameter<Boolean> HAS_ANTLERS = EntityDataManager.createKey(DeerEntity.class, DataSerializers.BOOLEAN);
-	
+
 	private static final Predicate<Entity> SHOULD_AVOID = (entity) -> {
 		return !entity.isDiscrete() && EntityPredicates.CAN_AI_TARGET.test(entity);
 	};
@@ -246,23 +226,23 @@ public class DeerEntity extends AnimalEntity {
 	@Override
 	public AgeableEntity func_241840_a(ServerWorld world, AgeableEntity ageable) {
 		DeerEntity entity = EnvironmentalEntities.DEER.get().create(world);
-		
-        if (this.isHolidayDeer()) {
-        	entity.setCoatColor(DeerCoatColors.HOLIDAY.getId());
-        } else {
-        	entity.setCoatColor(((DeerEntity) ageable).getCoatColor());
-        }
-        
-        entity.setCoatType(this.getCoatType());
+
+		if (this.isHolidayDeer()) {
+			entity.setCoatColor(DeerCoatColors.HOLIDAY.getId());
+		} else {
+			entity.setCoatColor(((DeerEntity) ageable).getCoatColor());
+		}
+
+		entity.setCoatType(this.getCoatType());
 		entity.setHasAntlers(rand.nextBoolean());
 
 		return entity;
 	}
-	
+
 	public boolean isHolidayDeer() {
 		LocalDate localdate = LocalDate.now();
 		int day = localdate.get(ChronoField.DAY_OF_MONTH);
-        int month = localdate.get(ChronoField.MONTH_OF_YEAR);
+		int month = localdate.get(ChronoField.MONTH_OF_YEAR);
 		return (month == 12 && day >= 21 && day <= 31) && this.rand.nextFloat() < 0.5F && this.world.getBiome(this.getPosition()).getCategory() == Biome.Category.ICY;
 	}
 
@@ -281,10 +261,10 @@ public class DeerEntity extends AnimalEntity {
 		spawnDataIn = super.onInitialSpawn(worldIn, difficulty, reason, spawnDataIn, dataTag);
 		if (this.isHolidayDeer()) {
 			this.setCoatColor(DeerCoatColors.HOLIDAY.getId());
-        } else {
-    		this.setCoatColor(rand.nextInt(2));
-        }
-		
+		} else {
+			this.setCoatColor(rand.nextInt(2));
+		}
+
 		this.setCoatType(rand.nextInt(DeerCoatTypes.values().length));
 		this.setHasAntlers(rand.nextBoolean());
 
