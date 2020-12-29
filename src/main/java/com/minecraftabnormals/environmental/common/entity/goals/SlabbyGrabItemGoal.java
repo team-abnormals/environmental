@@ -35,7 +35,7 @@ public class SlabbyGrabItemGoal extends Goal implements IInventoryChangedListene
     }
 
     public boolean shouldExecute() {
-        if (!this.slabfish.hasBackpack() || this.slabfish.backpackFull || this.slabfish.func_233685_eM_()) {
+        if (!this.slabfish.hasBackpack() || this.slabfish.backpackFull || this.slabfish.isSitting()) {
             return false;
         } else {
             List<ItemEntity> list = this.slabfish.world.getEntitiesWithinAABB(ItemEntity.class, this.slabfish.getBoundingBox().grow(12.0D, 4.0D, 12.0D));

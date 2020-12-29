@@ -46,7 +46,7 @@ public class HealerPouchItem extends ExplorerArmorItem {
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		CompoundNBT compoundnbt = stack.getOrCreateTag();
 		int uses = compoundnbt.getInt(NBT_TAG);
-		tooltip.add((new StringTextComponent(Integer.toString(uses) + " adrenaline boosts")).mergeStyle(TextFormatting.GRAY));
+		tooltip.add((new StringTextComponent(uses + " adrenaline boosts")).mergeStyle(TextFormatting.GRAY));
 	}
 	
 	@SubscribeEvent

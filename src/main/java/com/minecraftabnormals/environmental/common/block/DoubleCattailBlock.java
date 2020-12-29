@@ -1,18 +1,8 @@
 package com.minecraftabnormals.environmental.common.block;
 
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
+import com.minecraftabnormals.abnormals_core.core.util.item.filling.TargetedItemGroupFiller;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
-import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.FarmlandBlock;
-import net.minecraft.block.IGrowable;
-import net.minecraft.block.IWaterLoggable;
+import net.minecraft.block.*;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
@@ -30,12 +20,7 @@ import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.MathHelper;
@@ -51,6 +36,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.Tags;
 
+import javax.annotation.Nullable;
+import java.util.Random;
+
 public class DoubleCattailBlock extends Block implements IGrowable, IWaterLoggable {
 	public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -59,6 +47,8 @@ public class DoubleCattailBlock extends Block implements IGrowable, IWaterLoggab
 
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D);
 	protected static final VoxelShape SHAPE_TOP = Block.makeCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 14.0D, 13.0D);
+
+	private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(() -> Items.LARGE_FERN);
 
 	public DoubleCattailBlock(Properties properties) {
 		super(properties);
@@ -88,8 +78,7 @@ public class DoubleCattailBlock extends Block implements IGrowable, IWaterLoggab
 		} else {
 			BlockState blockstate = worldIn.getBlockState(pos.down());
 			if (state.getBlock() != this)
-				this.isValidGround(worldIn.getBlockState(pos.down()), worldIn, pos); // Forge: This function is called during world gen and placement, before this
-																						// block is set, so if we are not 'here' then assume it's the pre-check.
+				this.isValidGround(worldIn.getBlockState(pos.down()), worldIn, pos);
 			return blockstate.getBlock() == this && blockstate.get(HALF) == DoubleBlockHalf.LOWER;
 		}
 	}
@@ -99,15 +88,15 @@ public class DoubleCattailBlock extends Block implements IGrowable, IWaterLoggab
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		FluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
 		BlockPos blockpos = context.getPos();
-		return context.getWorld().getBlockState(blockpos.up()).isReplaceable(context) ? super.getStateForPlacement(context).with(WATERLOGGED, Boolean.valueOf(ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8)).with(FAKE_WATERLOGGED, Boolean.valueOf(ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8)) : null;
+		return context.getWorld().getBlockState(blockpos.up()).isReplaceable(context) ? super.getStateForPlacement(context).with(WATERLOGGED, ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8).with(FAKE_WATERLOGGED, Boolean.valueOf(ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8)) : null;
 	}
 
 	public static void placeAt(IWorld worldIn, BlockPos pos, int flags) {
 		FluidState ifluidstate = worldIn.getFluidState(pos);
 		FluidState ifluidstateUp = worldIn.getFluidState(pos.up());
-		boolean applyFakeWaterLogging = Boolean.valueOf(ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8) || Boolean.valueOf(ifluidstateUp.isTagged(FluidTags.WATER) && ifluidstateUp.getLevel() == 8) ? true : false;
-		worldIn.setBlockState(pos, EnvironmentalBlocks.TALL_CATTAIL.get().getDefaultState().with(HALF, DoubleBlockHalf.LOWER).with(WATERLOGGED, Boolean.valueOf(ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8)).with(FAKE_WATERLOGGED, applyFakeWaterLogging), flags);
-		worldIn.setBlockState(pos.up(), EnvironmentalBlocks.TALL_CATTAIL.get().getDefaultState().with(HALF, DoubleBlockHalf.UPPER).with(WATERLOGGED, Boolean.valueOf(ifluidstateUp.isTagged(FluidTags.WATER) && ifluidstateUp.getLevel() == 8)).with(FAKE_WATERLOGGED, applyFakeWaterLogging), flags);
+		boolean applyFakeWaterLogging = ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8 || ifluidstateUp.isTagged(FluidTags.WATER) && ifluidstateUp.getLevel() == 8;
+		worldIn.setBlockState(pos, EnvironmentalBlocks.TALL_CATTAIL.get().getDefaultState().with(HALF, DoubleBlockHalf.LOWER).with(WATERLOGGED, ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8).with(FAKE_WATERLOGGED, applyFakeWaterLogging), flags);
+		worldIn.setBlockState(pos.up(), EnvironmentalBlocks.TALL_CATTAIL.get().getDefaultState().with(HALF, DoubleBlockHalf.UPPER).with(WATERLOGGED, ifluidstateUp.isTagged(FluidTags.WATER) && ifluidstateUp.getLevel() == 8).with(FAKE_WATERLOGGED, applyFakeWaterLogging), flags);
 	}
 
 	@Override
@@ -135,14 +124,7 @@ public class DoubleCattailBlock extends Block implements IGrowable, IWaterLoggab
 
 	@Override
 	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-		if (ItemStackUtils.isInGroup(this.asItem(), group)) {
-			int targetIndex = ItemStackUtils.findIndexOfItem(Items.LARGE_FERN, items);
-			if (targetIndex != -1) {
-				items.add(targetIndex + 1, new ItemStack(this));
-			} else {
-				super.fillItemGroup(group, items);
-			}
-		}
+		FILLER.fillItem(this.asItem(), group, items);
 	}
 
 	@Override

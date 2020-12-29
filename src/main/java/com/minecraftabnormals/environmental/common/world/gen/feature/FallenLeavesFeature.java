@@ -19,7 +19,8 @@ public class FallenLeavesFeature extends Feature<NoFeatureConfig> {
 		super(config);
 	}
 
-	public boolean func_230362_a_(ISeedReader worldIn, StructureManager manager, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+	@Override
+	public boolean generate(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 		int i = 0;
 		BlockState blockstate = EnvironmentalBlocks.CHERRY_LEAF_CARPET.get().getDefaultState();
 

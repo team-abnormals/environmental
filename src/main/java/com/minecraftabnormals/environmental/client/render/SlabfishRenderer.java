@@ -38,7 +38,7 @@ public class SlabfishRenderer extends MobRenderer<SlabfishEntity, SlabfishModel<
     protected RenderType func_230496_a_(SlabfishEntity slabby, boolean p_230496_2_, boolean p_230496_3_, boolean p_230496_4_) {
         ResourceLocation texture = this.getEntityTexture(slabby);
         if (p_230496_3_) {
-            return RenderType.func_239268_f_(texture);
+            return RenderType.getItemEntityTranslucentCull(texture);
         } else if (p_230496_2_) {
             return SlabfishManager.get(slabby.world).getSlabfishType(slabby.getSlabfishType()).orElse(SlabfishManager.DEFAULT_SLABFISH).isTranslucent() ? RenderType.getEntityTranslucent(texture) : this.entityModel.getRenderType(texture);
         } else {
@@ -55,7 +55,7 @@ public class SlabfishRenderer extends MobRenderer<SlabfishEntity, SlabfishModel<
     @Override
     protected void preRenderCallback(SlabfishEntity slabfish, MatrixStack matrixStack, float partialTickTime) {
         this.entityModel.partialTicks = partialTickTime;
-        if (slabfish.func_233684_eK_() || slabfish.getRidingEntity() != null) matrixStack.translate(0F, 0.3125F, 0F);
+        if (slabfish.isEntitySleeping() || slabfish.getRidingEntity() != null) matrixStack.translate(0F, 0.3125F, 0F);
         if (slabfish.isInWater()) {
             matrixStack.translate(0F, slabfish.isChild() ? -0.8F : -0.4F, 0.5F);
             matrixStack.rotate(Vector3f.XP.rotation((float) (Math.PI / 2)));

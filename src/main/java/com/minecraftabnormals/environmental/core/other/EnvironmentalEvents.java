@@ -2,6 +2,7 @@ package com.minecraftabnormals.environmental.core.other;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import com.minecraftabnormals.abnormals_core.core.util.MathUtil;
 import com.minecraftabnormals.environmental.common.block.HangingWisteriaLeavesBlock;
 import com.minecraftabnormals.environmental.common.entity.KoiEntity;
 import com.minecraftabnormals.environmental.common.entity.SlabfishEntity;
@@ -12,7 +13,6 @@ import com.minecraftabnormals.environmental.core.Environmental;
 import com.minecraftabnormals.environmental.core.EnvironmentalConfig;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEntities;
-import com.teamabnormals.abnormals_core.core.utils.MathUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -55,6 +55,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
 
 @EventBusSubscriber(modid = Environmental.MODID)
@@ -84,7 +85,7 @@ public class EnvironmentalEvents {
 					ZombieEntity zombie = (ZombieEntity) entity;
 					if (world.getBiome(entity.getPosition()).getCategory() == Biome.Category.DESERT) {
 
-						HuskEntity husk = EntityType.HUSK.create(world.getWorld());
+						HuskEntity husk = EntityType.HUSK.create((World)world);
 						husk.setChild(zombie.isChild());
 						for (EquipmentSlotType slot : EquipmentSlotType.values())
 							zombie.setItemStackToSlot(slot, zombie.getItemStackFromSlot(slot));
@@ -98,8 +99,7 @@ public class EnvironmentalEvents {
 				if (entity.getType() == EntityType.SKELETON) {
 					SkeletonEntity skeleton = (SkeletonEntity) entity;
 					if (world.getBiome(entity.getPosition()).getCategory() == Biome.Category.ICY) {
-
-						StrayEntity stray = EntityType.STRAY.create(world.getWorld());
+						StrayEntity stray = EntityType.STRAY.create((World)world);
 						for (EquipmentSlotType slot : EquipmentSlotType.values())
 							skeleton.setItemStackToSlot(slot, skeleton.getItemStackFromSlot(slot));
 						stray.setLocationAndAngles(skeleton.getPosX(), skeleton.getPosY(), skeleton.getPosZ(), skeleton.rotationYaw, skeleton.rotationPitch);
@@ -113,7 +113,7 @@ public class EnvironmentalEvents {
 			if (validSpawn && entity.getType() == EntityType.MOOSHROOM) {
 				MooshroomEntity mooshroom = (MooshroomEntity) event.getEntity();
 				if (random.nextInt(3) == 0) {
-					MooshroomEntity brownMooshroom = EntityType.MOOSHROOM.create(event.getWorld().getWorld());
+					MooshroomEntity brownMooshroom = EntityType.MOOSHROOM.create((World)world);
 					brownMooshroom.setLocationAndAngles(mooshroom.getPosX(), mooshroom.getPosY(), mooshroom.getPosZ(), mooshroom.rotationYaw, mooshroom.rotationPitch);
 					brownMooshroom.setMooshroomType(MooshroomEntity.Type.BROWN);
 					world.addEntity(brownMooshroom);
@@ -132,7 +132,7 @@ public class EnvironmentalEvents {
 				int horizontalRange = EnvironmentalConfig.COMMON.koiHorizontalSerenityRange.get();
 				int verticalRange = EnvironmentalConfig.COMMON.koiVerticalSerenityRange.get();
 				for (Entity koi : world.getEntitiesWithinAABB(KoiEntity.class, entity.getBoundingBox().grow(horizontalRange, verticalRange, horizontalRange))) {
-					if (MathUtils.distanceBetweenPoints2d(entity.getPosX(), entity.getPosZ(), koi.getPosX(), koi.getPosZ()) <= horizontalRange) {
+					if (MathUtil.distanceBetweenPoints2d(entity.getPosX(), entity.getPosZ(), koi.getPosX(), koi.getPosZ()) <= horizontalRange) {
 						event.setResult(Event.Result.DENY);
 						break;
 					}
@@ -238,7 +238,7 @@ public class EnvironmentalEvents {
 
 		if (entity instanceof SlabfishEntity) {
 			SlabfishEntity slabfish = (SlabfishEntity) event.getEntity();
-			if (world.getBiome(new BlockPos(entity.getPositionVec())) == Biomes.SOUL_SAND_VALLEY) {
+			if (world.func_242406_i(new BlockPos(entity.getPositionVec())).equals(Optional.of(Biomes.SOUL_SAND_VALLEY))) {
 				if (!slabfish.getSlabfishType().equals(SlabfishManager.GHOST)) {
 					if (world.isRemote()) {
 						for (int i = 0; i < 7; ++i) {

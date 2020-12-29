@@ -49,6 +49,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
@@ -273,8 +274,8 @@ public class DuckEntity extends AnimalEntity implements IEggLayingEntity {
 	}
 
 	@Override
-	public DuckEntity createChild(AgeableEntity ageable) {
-		return EnvironmentalEntities.DUCK.get().create(this.world);
+	public AgeableEntity func_241840_a(ServerWorld world, AgeableEntity ageable) {
+		return EnvironmentalEntities.DUCK.get().create(world);
 	}
 
 	@Override

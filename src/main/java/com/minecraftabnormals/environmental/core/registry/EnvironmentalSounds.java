@@ -1,7 +1,7 @@
 package com.minecraftabnormals.environmental.core.registry;
 
+import com.minecraftabnormals.abnormals_core.core.util.registry.SoundSubRegistryHelper;
 import com.minecraftabnormals.environmental.core.Environmental;
-import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = Environmental.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class EnvironmentalSounds {
 
-    public static final RegistryHelper HELPER = Environmental.REGISTRY_HELPER;
+    public static final SoundSubRegistryHelper HELPER = Environmental.REGISTRY_HELPER.getSoundSubHelper();
 
     public static final RegistryObject<SoundEvent> ENTITY_SLABFISH_BURP         = HELPER.createSoundEvent("entity.slabfish.burp");
     public static final RegistryObject<SoundEvent> ENTITY_SLABFISH_DEATH        = HELPER.createSoundEvent("entity.slabfish.death");

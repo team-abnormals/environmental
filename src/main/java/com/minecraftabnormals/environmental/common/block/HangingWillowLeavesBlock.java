@@ -1,6 +1,6 @@
 package com.minecraftabnormals.environmental.common.block;
 
-import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
+import com.minecraftabnormals.abnormals_core.core.util.item.filling.TargetedItemGroupFiller;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -29,6 +29,7 @@ import java.util.Random;
 
 public class HangingWillowLeavesBlock extends Block implements IForgeShearable {
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0, 7.0, 2.0, 14.0, 16.0, 14.0);
+	private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(() -> Items.VINE);
 
 	public HangingWillowLeavesBlock(Block.Properties properties) {
 		super(properties);
@@ -87,7 +88,7 @@ public class HangingWillowLeavesBlock extends Block implements IForgeShearable {
 
 	@Override
 	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-		ItemStackUtils.fillAfterItemForGroup(this.asItem(), Items.VINE, group, items);
+		FILLER.fillItem(this.asItem(), group, items);
 	}
 
 	@Override

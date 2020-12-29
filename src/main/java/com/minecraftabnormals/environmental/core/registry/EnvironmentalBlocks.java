@@ -1,5 +1,16 @@
 package com.minecraftabnormals.environmental.core.registry;
 
+import com.minecraftabnormals.abnormals_core.common.blocks.*;
+import com.minecraftabnormals.abnormals_core.common.blocks.chest.AbnormalsChestBlock;
+import com.minecraftabnormals.abnormals_core.common.blocks.chest.AbnormalsTrappedChestBlock;
+import com.minecraftabnormals.abnormals_core.common.blocks.sign.AbnormalsStandingSignBlock;
+import com.minecraftabnormals.abnormals_core.common.blocks.sign.AbnormalsWallSignBlock;
+import com.minecraftabnormals.abnormals_core.common.blocks.thatch.ThatchBlock;
+import com.minecraftabnormals.abnormals_core.common.blocks.thatch.ThatchSlabBlock;
+import com.minecraftabnormals.abnormals_core.common.blocks.thatch.ThatchStairsBlock;
+import com.minecraftabnormals.abnormals_core.common.blocks.thatch.ThatchVerticalSlabBlock;
+import com.minecraftabnormals.abnormals_core.common.blocks.wood.*;
+import com.minecraftabnormals.abnormals_core.core.util.registry.BlockSubRegistryHelper;
 import com.minecraftabnormals.environmental.common.block.*;
 import com.minecraftabnormals.environmental.common.world.gen.feature.trees.CherryTree;
 import com.minecraftabnormals.environmental.common.world.gen.feature.trees.WillowTree;
@@ -9,25 +20,6 @@ import com.minecraftabnormals.environmental.core.Environmental;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalCompat;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalProperties;
 import com.mojang.datafixers.util.Pair;
-import com.teamabnormals.abnormals_core.common.blocks.AbnormalsBeehiveBlock;
-import com.teamabnormals.abnormals_core.common.blocks.AbnormalsFlowerBlock;
-import com.teamabnormals.abnormals_core.common.blocks.AbnormalsLadderBlock;
-import com.teamabnormals.abnormals_core.common.blocks.AbnormalsStairsBlock;
-import com.teamabnormals.abnormals_core.common.blocks.AbnormalsTallFlowerBlock;
-import com.teamabnormals.abnormals_core.common.blocks.BookshelfBlock;
-import com.teamabnormals.abnormals_core.common.blocks.LeafCarpetBlock;
-import com.teamabnormals.abnormals_core.common.blocks.VerticalSlabBlock;
-import com.teamabnormals.abnormals_core.common.blocks.chest.AbnormalsChestBlock;
-import com.teamabnormals.abnormals_core.common.blocks.chest.AbnormalsTrappedChestBlock;
-import com.teamabnormals.abnormals_core.common.blocks.sign.AbnormalsStandingSignBlock;
-import com.teamabnormals.abnormals_core.common.blocks.sign.AbnormalsWallSignBlock;
-import com.teamabnormals.abnormals_core.common.blocks.thatch.ThatchBlock;
-import com.teamabnormals.abnormals_core.common.blocks.thatch.ThatchSlabBlock;
-import com.teamabnormals.abnormals_core.common.blocks.thatch.ThatchStairsBlock;
-import com.teamabnormals.abnormals_core.common.blocks.thatch.ThatchVerticalSlabBlock;
-import com.teamabnormals.abnormals_core.common.blocks.wood.*;
-import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
-
 import net.minecraft.block.*;
 import net.minecraft.block.AbstractBlock.Properties;
 import net.minecraft.block.material.Material;
@@ -44,7 +36,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 @Mod.EventBusSubscriber(modid = Environmental.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class EnvironmentalBlocks {
 
-    public static final RegistryHelper HELPER = Environmental.REGISTRY_HELPER;
+    public static final BlockSubRegistryHelper HELPER = Environmental.REGISTRY_HELPER.getBlockSubHelper();
     public static final DeferredRegister<PaintingType> PAINTINGS = DeferredRegister.create(ForgeRegistries.PAINTING_TYPES, Environmental.MODID);
 
 	// Paintings //
@@ -141,18 +133,18 @@ public class EnvironmentalBlocks {
 
     // Flowers //
 
-    public static final RegistryObject<Block> CARTWHEEL 			= HELPER.createBlock("cartwheel", () -> new CartwheelBlock(Effects.LEVITATION, 3, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
-    public static final RegistryObject<Block> BLUEBELL 				= HELPER.createBlock("bluebell", () -> new AbnormalsFlowerBlock(Effects.HUNGER, 8, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
-    public static final RegistryObject<Block> VIOLET 				= HELPER.createBlock("violet", () -> new AbnormalsFlowerBlock(Effects.INVISIBILITY, 9, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
-    public static final RegistryObject<Block> DIANTHUS 				= HELPER.createBlock("dianthus", () -> new AbnormalsFlowerBlock(Effects.STRENGTH, 7, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
-    public static final RegistryObject<Block> RED_LOTUS_FLOWER 		= HELPER.createBlock("red_lotus_flower", () -> new LotusFlowerBlock(EnvironmentalParticles.RED_LOTUS_BLOSSOM::get, Effects.SLOW_FALLING, 5, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
-    public static final RegistryObject<Block> WHITE_LOTUS_FLOWER 	= HELPER.createBlock("white_lotus_flower", () -> new LotusFlowerBlock(EnvironmentalParticles.WHITE_LOTUS_BLOSSOM::get, Effects.SLOW_FALLING, 5, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
-    public static final RegistryObject<Block> YELLOW_HIBISCUS 		= HELPER.createBlock("yellow_hibiscus", () -> new AbnormalsFlowerBlock(Effects.GLOWING, 8, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
-    public static final RegistryObject<Block> ORANGE_HIBISCUS 		= HELPER.createBlock("orange_hibiscus", () -> new AbnormalsFlowerBlock(Effects.GLOWING, 8, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
-    public static final RegistryObject<Block> RED_HIBISCUS 			= HELPER.createBlock("red_hibiscus", () -> new AbnormalsFlowerBlock(Effects.GLOWING, 8, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
-    public static final RegistryObject<Block> PINK_HIBISCUS 		= HELPER.createBlock("pink_hibiscus", () -> new AbnormalsFlowerBlock(Effects.GLOWING, 8, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
-    public static final RegistryObject<Block> MAGENTA_HIBISCUS 		= HELPER.createBlock("magenta_hibiscus", () -> new AbnormalsFlowerBlock(Effects.GLOWING, 8, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
-    public static final RegistryObject<Block> PURPLE_HIBISCUS 		= HELPER.createBlock("purple_hibiscus", () -> new AbnormalsFlowerBlock(Effects.GLOWING, 8, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
+    public static final RegistryObject<Block> CARTWHEEL 			= HELPER.createBlock("cartwheel", () -> new CartwheelBlock(() -> Effects.LEVITATION, 3, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
+    public static final RegistryObject<Block> BLUEBELL 				= HELPER.createBlock("bluebell", () -> new AbnormalsFlowerBlock(() -> Effects.HUNGER, 8, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
+    public static final RegistryObject<Block> VIOLET 				= HELPER.createBlock("violet", () -> new AbnormalsFlowerBlock(() -> Effects.INVISIBILITY, 9, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
+    public static final RegistryObject<Block> DIANTHUS 				= HELPER.createBlock("dianthus", () -> new AbnormalsFlowerBlock(() -> Effects.STRENGTH, 7, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
+    public static final RegistryObject<Block> RED_LOTUS_FLOWER 		= HELPER.createBlock("red_lotus_flower", () -> new LotusFlowerBlock(EnvironmentalParticles.RED_LOTUS_BLOSSOM::get, () -> Effects.SLOW_FALLING, 5, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
+    public static final RegistryObject<Block> WHITE_LOTUS_FLOWER 	= HELPER.createBlock("white_lotus_flower", () -> new LotusFlowerBlock(EnvironmentalParticles.WHITE_LOTUS_BLOSSOM::get, () -> Effects.SLOW_FALLING, 5, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
+    public static final RegistryObject<Block> YELLOW_HIBISCUS 		= HELPER.createBlock("yellow_hibiscus", () -> new AbnormalsFlowerBlock(() -> Effects.GLOWING, 8, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
+    public static final RegistryObject<Block> ORANGE_HIBISCUS 		= HELPER.createBlock("orange_hibiscus", () -> new AbnormalsFlowerBlock(() -> Effects.GLOWING, 8, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
+    public static final RegistryObject<Block> RED_HIBISCUS 			= HELPER.createBlock("red_hibiscus", () -> new AbnormalsFlowerBlock(() -> Effects.GLOWING, 8, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
+    public static final RegistryObject<Block> PINK_HIBISCUS 		= HELPER.createBlock("pink_hibiscus", () -> new AbnormalsFlowerBlock(() -> Effects.GLOWING, 8, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
+    public static final RegistryObject<Block> MAGENTA_HIBISCUS 		= HELPER.createBlock("magenta_hibiscus", () -> new AbnormalsFlowerBlock(() -> Effects.GLOWING, 8, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
+    public static final RegistryObject<Block> PURPLE_HIBISCUS 		= HELPER.createBlock("purple_hibiscus", () -> new AbnormalsFlowerBlock(() -> Effects.GLOWING, 8, EnvironmentalProperties.FLOWER), ItemGroup.DECORATIONS);
 
     public static final RegistryObject<Block> POTTED_CARTWHEEL 			= HELPER.createBlockNoItem("potted_cartwheel", () -> new PottedCartwheelBlock(CARTWHEEL.get(), EnvironmentalProperties.FLOWER_POT));
     public static final RegistryObject<Block> POTTED_BLUEBELL 			= HELPER.createBlockNoItem("potted_bluebell", () -> new FlowerPotBlock(BLUEBELL.get(), EnvironmentalProperties.FLOWER_POT));

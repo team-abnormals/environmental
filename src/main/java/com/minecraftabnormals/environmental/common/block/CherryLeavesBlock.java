@@ -3,7 +3,7 @@ package com.minecraftabnormals.environmental.common.block;
 import java.util.Random;
 
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalParticles;
-import com.teamabnormals.abnormals_core.common.blocks.wood.AbnormalsLeavesBlock;
+import com.minecraftabnormals.abnormals_core.common.blocks.wood.AbnormalsLeavesBlock;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;

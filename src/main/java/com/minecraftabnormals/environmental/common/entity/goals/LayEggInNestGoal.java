@@ -52,7 +52,7 @@ public class LayEggInNestGoal extends MoveToBlockGoal {
 				} else if (block instanceof BirdNestBlock && ((BirdNestBlock) block).getEgg() == this.eggLayer.getEggItem()) {
 					int i = blockstate.get(BirdNestBlock.EGGS);
 					if (i < 6) {
-						this.bird.world.setBlockState(blockpos, blockstate.with(BirdNestBlock.EGGS, Integer.valueOf(i + 1)), 3);
+						this.bird.world.setBlockState(blockpos, blockstate.with(BirdNestBlock.EGGS, i + 1), 3);
 						this.resetBird();
 					}
 				}

@@ -20,7 +20,7 @@ public class CattailsFeature extends Feature<NoFeatureConfig> {
     }
 
     @Override
-    public boolean func_230362_a_(ISeedReader world, StructureManager p_230362_2_, ChunkGenerator p_230362_3_, Random random, BlockPos pos, NoFeatureConfig p_230362_6_) {
+    public boolean generate(ISeedReader world, ChunkGenerator p_230362_3_, Random random, BlockPos pos, NoFeatureConfig p_230362_6_) {
         boolean place = false;
         for (int i = 0; i < 512; ++i) {
             BlockPos placePos = pos.add(random.nextInt(8) - random.nextInt(4), random.nextInt(4) - random.nextInt(4), random.nextInt(8) - random.nextInt(4));

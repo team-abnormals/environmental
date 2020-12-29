@@ -29,7 +29,7 @@ public abstract class AbstractKilnScreen<T extends AbstractFurnaceContainer> ext
         this.addButton(new ImageButton(this.guiLeft + 20, this.height / 2 - 49, 20, 18, 0, 0, 19, BUTTON_TEXTURE, (p_214087_1_) -> {
             ((ImageButton) p_214087_1_).setPosition(this.guiLeft + 20, this.height / 2 - 49);
         }));
-        this.titleX = (this.xSize - this.font.func_238414_a_(this.title)) / 2;
+        this.titleX = (this.xSize - this.font.getStringPropertyWidth(this.title)) / 2;
     }
 
     public void tick() {
@@ -40,7 +40,7 @@ public abstract class AbstractKilnScreen<T extends AbstractFurnaceContainer> ext
     public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
-        this.func_230459_a_(matrixStack, mouseX, mouseY);
+        this.renderHoveredTooltip(matrixStack, mouseX, mouseY);
     }
 
     @Override

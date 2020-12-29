@@ -15,6 +15,7 @@ import com.minecraftabnormals.environmental.common.entity.SlabfishEntity;
 import com.minecraftabnormals.environmental.common.slabfish.SlabfishManager;
 import com.minecraftabnormals.environmental.common.slabfish.SlabfishType;
 import com.minecraftabnormals.environmental.common.slabfish.condition.SlabfishConditionContext;
+import net.minecraft.world.server.ServerWorld;
 
 import java.util.EnumSet;
 import java.util.List;
@@ -86,7 +87,7 @@ public class SlabbyBreedGoal extends Goal {
 
     @Deprecated
     protected void spawnBaby() {
-        SlabfishEntity slabby = this.animal.createChild(this.targetMate);
+        SlabfishEntity slabby = this.animal.func_241840_a((ServerWorld)this.world, this.targetMate);
 
         final net.minecraftforge.event.entity.living.BabyEntitySpawnEvent event = new net.minecraftforge.event.entity.living.BabyEntitySpawnEvent(animal, targetMate, slabby);
         final boolean cancelled = net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event);

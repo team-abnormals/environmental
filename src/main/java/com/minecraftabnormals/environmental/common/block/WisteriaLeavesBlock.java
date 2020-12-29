@@ -1,6 +1,6 @@
 package com.minecraftabnormals.environmental.common.block;
 
-import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
+import com.minecraftabnormals.abnormals_core.core.util.item.filling.TargetedItemGroupFiller;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
@@ -30,6 +30,7 @@ import java.util.Random;
 public class WisteriaLeavesBlock extends Block implements IForgeShearable {
     public static final IntegerProperty DISTANCE = IntegerProperty.create("distance", 1, 8);
     public static final BooleanProperty PERSISTENT = BlockStateProperties.PERSISTENT;
+    private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(() -> Items.DARK_OAK_LEAVES);
 
     public WisteriaLeavesBlock(Block.Properties properties) {
         super(properties);
@@ -73,14 +74,14 @@ public class WisteriaLeavesBlock extends Block implements IForgeShearable {
         BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
 
         for (Direction direction : Direction.values()) {
-            blockpos$mutable.func_239622_a_(pos, direction);
+            blockpos$mutable.setAndMove(pos, direction);
             i = Math.min(i, getDistance(worldIn.getBlockState(blockpos$mutable)) + 1);
             if (i == 1) {
                 break;
             }
         }
 
-        return state.with(DISTANCE, Integer.valueOf(i));
+        return state.with(DISTANCE, i);
     }
 
     private static int getDistance(BlockState neighbor) {
@@ -121,7 +122,7 @@ public class WisteriaLeavesBlock extends Block implements IForgeShearable {
     }
 
     @Override
-	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-		ItemStackUtils.fillAfterItemForGroup(this.asItem(), Items.DARK_OAK_LEAVES, group, items);
-	}
+    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+        FILLER.fillItem(this.asItem(), group, items);
+    }
 }

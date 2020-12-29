@@ -3,7 +3,7 @@ package com.minecraftabnormals.environmental.common.block;
 import java.util.Random;
 
 import com.google.common.base.Supplier;
-import com.teamabnormals.abnormals_core.common.blocks.AbnormalsFlowerBlock;
+import com.minecraftabnormals.abnormals_core.common.blocks.AbnormalsFlowerBlock;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.particles.IParticleData;
@@ -16,7 +16,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class LotusFlowerBlock extends AbnormalsFlowerBlock {
 	private Supplier<IParticleData> particle;
 
-    public LotusFlowerBlock(Supplier<IParticleData> particle, Effect stewEffect, int stewEffectDuration, Properties properties) {
+    public LotusFlowerBlock(Supplier<IParticleData> particle, Supplier<Effect> stewEffect, int stewEffectDuration, Properties properties) {
         super(stewEffect, stewEffectDuration, properties);
         this.particle = particle;
     }

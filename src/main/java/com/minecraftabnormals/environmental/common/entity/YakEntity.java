@@ -158,7 +158,7 @@ public class YakEntity extends AnimalEntity implements IForgeShearable, IShearab
 		ItemStack itemstack = p_230254_1_.getHeldItem(p_230254_2_);
 		if (itemstack.getItem() == Items.BUCKET && !this.isChild()) {
 			p_230254_1_.playSound(SoundEvents.ENTITY_COW_MILK, 1.0F, 1.0F);
-			ItemStack itemstack1 = DrinkHelper.func_241445_a_(itemstack, p_230254_1_, Items.MILK_BUCKET.getDefaultInstance());
+			ItemStack itemstack1 = DrinkHelper.fill(itemstack, p_230254_1_, Items.MILK_BUCKET.getDefaultInstance());
 			p_230254_1_.setHeldItem(p_230254_2_, itemstack1);
 			return ActionResultType.func_233537_a_(this.world.isRemote);
 		} else {
@@ -263,8 +263,8 @@ public class YakEntity extends AnimalEntity implements IForgeShearable, IShearab
 	}
 
 	@Override
-	public YakEntity createChild(AgeableEntity ageableEntity) {
-		return EnvironmentalEntities.YAK.get().create(this.world);
+	public AgeableEntity func_241840_a(ServerWorld world, AgeableEntity ageable) {
+		return EnvironmentalEntities.YAK.get().create(world);
 	}
 
 	@Override
@@ -314,7 +314,7 @@ public class YakEntity extends AnimalEntity implements IForgeShearable, IShearab
 
 	@Override
 	public void func_230258_H__() {
-		this.setAngerTime(ANGER_RANGE.func_233018_a_(this.rand));
+		this.setAngerTime(ANGER_RANGE.getRandomWithinRange(this.rand));
 	}
 
 	public boolean func_230292_f_(PlayerEntity p_230292_1_) {

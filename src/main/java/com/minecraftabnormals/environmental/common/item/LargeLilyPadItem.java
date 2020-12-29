@@ -53,7 +53,7 @@ public class LargeLilyPadItem extends BlockItem {
                 if ((ifluidstate.getFluid() == Fluids.WATER) && LargeLilyPadBlock.checkPositions(worldIn, blockpos1, this.getBlock().getDefaultState())) {
 
                     // special case for handling block placement with water lilies
-                    net.minecraftforge.common.util.BlockSnapshot blocksnapshot = net.minecraftforge.common.util.BlockSnapshot.create(worldIn, blockpos1);
+                    net.minecraftforge.common.util.BlockSnapshot blocksnapshot = net.minecraftforge.common.util.BlockSnapshot.create(worldIn.getDimensionKey(), worldIn, blockpos1);
                     if (!worldIn.isRemote())
                     	LargeLilyPadBlock.placeAt(worldIn, blockpos1, this.getBlock().getDefaultState(), 18);
                     if (net.minecraftforge.event.ForgeEventFactory.onBlockPlace(playerIn, blocksnapshot, net.minecraft.util.Direction.UP)) {

@@ -7,6 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.ResourceLocation;
 
 public class EnvironmentalTags {
     public static class Items {
@@ -26,10 +27,10 @@ public class EnvironmentalTags {
     }
     
     private static ITag.INamedTag<Item> createWrapperItemTag(String tagName) {
-    	return ItemTags.makeWrapperTag(Environmental.MODID + ":" + tagName);
+    	return ItemTags.createOptional(new ResourceLocation(Environmental.MODID, tagName));
     }
     
     private static ITag.INamedTag<EntityType<?>> createWrapperEntityTag(String tagName) {
-        return EntityTypeTags.func_232896_a_(Environmental.MODID + ":" + tagName);
+        return EntityTypeTags.createOptional(new ResourceLocation(Environmental.MODID, tagName));
     }
 }

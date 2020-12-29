@@ -6,9 +6,7 @@ import java.util.Comparator;
 public enum DeerCoatColors {
     BROWN(0), RED(1), HOLIDAY(2);
 
-    private static final DeerCoatColors[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(DeerCoatColors::getId)).toArray((index) -> {
-        return new DeerCoatColors[index];
-    });
+    private static final DeerCoatColors[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(DeerCoatColors::getId)).toArray(DeerCoatColors[]::new);
     
     private final int id;
 

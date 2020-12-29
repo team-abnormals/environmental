@@ -36,7 +36,7 @@ public class SawmillScreen extends ContainerScreen<SawmillContainer> {
     @Override
     public void render(MatrixStack stack, int mouseX, int mouseY, float partialTicks) {
         super.render(stack, mouseX, mouseY, partialTicks);
-        this.func_230459_a_(stack, mouseX, mouseY);
+        this.renderHoveredTooltip(stack, mouseX, mouseY);
     }
 
 	@Override
@@ -57,8 +57,8 @@ public class SawmillScreen extends ContainerScreen<SawmillContainer> {
     }
 
     @Override
-    protected void func_230459_a_(MatrixStack stack, int mouseX, int mouseY) {
-        super.func_230459_a_(stack, mouseX, mouseY);
+    protected void renderHoveredTooltip(MatrixStack stack, int mouseX, int mouseY) {
+        super.renderHoveredTooltip(stack, mouseX, mouseY);
         if (this.hasItemsInInputSlot) {
             int i = this.guiLeft + 52;
             int j = this.guiTop + 14;

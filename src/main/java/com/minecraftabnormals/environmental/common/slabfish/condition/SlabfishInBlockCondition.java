@@ -37,7 +37,7 @@ public class SlabfishInBlockCondition implements SlabfishCondition {
             throw new JsonSyntaxException("Either 'block' or 'tag' can be present.");
         if (!json.has("block") && !json.has("tag"))
             throw new JsonSyntaxException("Either 'block' or 'tag' must be present.");
-        return new SlabfishInBlockCondition(json.has("tag") ? null : ForgeRegistries.BLOCKS.getValue(new ResourceLocation(json.get("block").getAsString())), json.has("tag") ? TagCollectionManager.func_232928_e_().func_232923_a_().get(new ResourceLocation(json.get("tag").getAsString())) : null);
+        return new SlabfishInBlockCondition(json.has("tag") ? null : ForgeRegistries.BLOCKS.getValue(new ResourceLocation(json.get("block").getAsString())), json.has("tag") ? TagCollectionManager.getManager().getBlockTags().get(new ResourceLocation(json.get("tag").getAsString())) : null);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.minecraftabnormals.environmental.common.block;
 
-import com.teamabnormals.abnormals_core.common.blocks.AbnormalsFlowerBlock;
+import com.minecraftabnormals.abnormals_core.common.blocks.AbnormalsFlowerBlock;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -10,10 +10,12 @@ import net.minecraft.potion.Effect;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 
+import java.util.function.Supplier;
+
 public class CartwheelBlock extends AbnormalsFlowerBlock {
     public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 
-    public CartwheelBlock(Effect effect, int effectDuration, Properties properties) {
+    public CartwheelBlock(Supplier<Effect> effect, int effectDuration, Properties properties) {
         super(effect, effectDuration, properties);
     }
 

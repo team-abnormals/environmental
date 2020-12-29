@@ -32,7 +32,7 @@ public class SlabfishInFluidCondition implements SlabfishCondition {
     public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context) {
         if (!json.has("tag"))
             throw new JsonSyntaxException("'tag' must be present.");
-        return new SlabfishInFluidCondition(TagCollectionManager.func_232928_e_().func_232926_c_().get(new ResourceLocation(json.get("tag").getAsString())));
+        return new SlabfishInFluidCondition(TagCollectionManager.getManager().getFluidTags().get(new ResourceLocation(json.get("tag").getAsString())));
     }
 
     @Override

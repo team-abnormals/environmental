@@ -35,8 +35,8 @@ public abstract class MobEntityMixin extends LivingEntity {
 		int difficultyChance = difficulty.getDifficulty().getId() + 1;
 		if (this.getEntityWorld() instanceof ServerWorld) {
 			ServerWorld world = (ServerWorld) this.getEntityWorld();
-			boolean isStronghold = world.func_241112_a_().func_235010_a_(this.getPosition(), true, Structure.field_236375_k_).isValid();
-			boolean isMineshaft = world.func_241112_a_().func_235010_a_(this.getPosition(), true, Structure.field_236367_c_).isValid();
+			boolean isStronghold = world.func_241112_a_().getStructureStart(this.getPosition(), true, Structure.STRONGHOLD).isValid();
+			boolean isMineshaft = world.func_241112_a_().getStructureStart(this.getPosition(), true, Structure.MINESHAFT).isValid();
 			if ((isStronghold || isMineshaft) && Math.random() < difficultyChance * 0.025F) {
 				this.setItemStackToSlot(EquipmentSlotType.CHEST, new ItemStack(EnvironmentalItems.HEALER_POUCH.get()));
 				this.inventoryArmorDropChances[EquipmentSlotType.CHEST.getIndex()] = 1.0F;

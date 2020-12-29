@@ -50,8 +50,8 @@ public class BakingCategory implements IRecipeCategory<BakingRecipe> {
             TranslationTextComponent experienceString = new TranslationTextComponent("gui.jei.category.smelting.experience", experience);
             Minecraft minecraft = Minecraft.getInstance();
             FontRenderer fontRenderer = minecraft.fontRenderer;
-            int stringWidth = fontRenderer.func_238414_a_(experienceString);
-            fontRenderer.func_238422_b_(matrixStack, experienceString, (float) (this.background.getWidth() - stringWidth), 0.0F, -8355712);
+            int stringWidth = fontRenderer.getStringPropertyWidth(experienceString);
+            fontRenderer.func_243248_b(matrixStack, experienceString, (float) (this.background.getWidth() - stringWidth), 0.0F, -8355712);
         }
     }
 

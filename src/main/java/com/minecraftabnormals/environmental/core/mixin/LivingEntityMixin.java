@@ -39,7 +39,7 @@ public abstract class LivingEntityMixin extends Entity {
 				if (modifiers.isEmpty())
 					return;
 				double attribute = modifiers.stream().mapToDouble(AttributeModifier::getAmount).sum();
-				value *= 1.0D - (attribute > 0.0D ? attribute : 0.0D);
+				value *= 1.0D - Math.max(attribute, 0.0D);
 			}
 		}
 		cir.setReturnValue(value);

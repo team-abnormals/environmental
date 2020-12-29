@@ -17,7 +17,7 @@ apply plugin: "maven-publish"
 apply plugin: "org.spongepowered.mixin"
 
 mixin {
-    add sourceSets.main, "environmental.refmap.json"
+    add sourceSets.main, project.modId + ".refmap.json"
 }
 
 version = "${project.minecraft}-${project.modVersion}"
@@ -68,6 +68,14 @@ minecraft {
     }
 }
 
+dependencies {
+    minecraft "net.minecraftforge:forge:${project.minecraft}-${project.forge}"
+    implementation fg.deobf("curse.maven:abnormals_core-382216:${project.abnormalsCore}")
+
+    compileOnly fg.deobf("mezz.jei:jei-${project.minecraft}:${project.jei}:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-${project.minecraft}:${project.jei}")
+}
+
 repositories {
     maven {
         name = "Progwml6 maven"
@@ -83,25 +91,17 @@ repositories {
     }
 }
 
-dependencies {
-    minecraft "net.minecraftforge:forge:${project.minecraft}-${project.forge}"
-    implementation fg.deobf("curse.maven:abnormals-core:${project.abnormalsCore}")
-    
-    compileOnly fg.deobf("mezz.jei:jei-${project.minecraft}:${project.jei}:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-${project.minecraft}:${project.jei}")
-}
-
 jar {
     manifest {
         attributes([
-            "Specification-Title": project.name,
-            "Specification-Vendor": "Team Abnormals",
-            "Specification-Version": "1",
-            "Implementation-Title": project.name,
-            "Implementation-Version": project.modVersion,
-            "Implementation-Vendor": "Team Abnormals",
-            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-            "MixinConfigs": "environmental.mixins.json"
+                "Specification-Title"     : project.modName,
+                "Specification-Vendor"    : "Team Abnormals",
+                "Specification-Version"   : "1",
+                "Implementation-Title"    : project.modName,
+                "Implementation-Version"  : project.modVersion,
+                "Implementation-Vendor"   : "Team Abnormals",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                "MixinConfigs"            : project.modId + ".mixins.json"
         ])
     }
 }

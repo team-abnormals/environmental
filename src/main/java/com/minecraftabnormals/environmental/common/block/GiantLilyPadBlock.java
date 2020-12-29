@@ -1,14 +1,8 @@
 package com.minecraftabnormals.environmental.common.block;
 
-import javax.annotation.Nullable;
-
+import com.minecraftabnormals.abnormals_core.core.util.item.filling.TargetedItemGroupFiller;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
-import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.BushBlock;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -17,7 +11,6 @@ import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
@@ -35,9 +28,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.PlantType;
 
+import javax.annotation.Nullable;
+
 public class GiantLilyPadBlock extends BushBlock implements IPlantable {
 	protected static final VoxelShape GIANT_LILY_PAD_AABB = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 1.5D, 16.0D);
 	public static final EnumProperty<LilyPadPosition> POSITION = EnumProperty.create("position", LilyPadPosition.class);
+	private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(() -> EnvironmentalBlocks.LARGE_LILY_PAD.get().asItem());
 
 	public GiantLilyPadBlock(AbstractBlock.Properties builder) {
 		super(builder);
@@ -284,6 +280,6 @@ public class GiantLilyPadBlock extends BushBlock implements IPlantable {
 
 	@Override
 	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-		ItemStackUtils.fillAfterItemForGroup(this.asItem(), EnvironmentalBlocks.LARGE_LILY_PAD.get().asItem(), group, items);
+		FILLER.fillItem(this.asItem(), group, items);
 	}
 }

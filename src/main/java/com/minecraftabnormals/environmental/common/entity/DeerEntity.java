@@ -59,9 +59,11 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.IServerWorld;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 public class DeerEntity extends AnimalEntity {
@@ -87,9 +89,7 @@ public class DeerEntity extends AnimalEntity {
 		this.goalSelector.addGoal(0, new SwimGoal(this));
 		this.goalSelector.addGoal(1, new PanicGoal(this, 2.5D));
 		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
-		this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, PlayerEntity.class, 22.0F, 2.0D, 2.7D, (player) -> {
-			return SHOULD_AVOID.test(player);
-		}));
+		this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, PlayerEntity.class, 22.0F, 2.0D, 2.7D, SHOULD_AVOID::test));
 		this.goalSelector.addGoal(4, new TemptGoal(this, 1.25D, false, Ingredient.fromTag(EnvironmentalTags.Items.DEER_TEMPTATION_ITEMS)));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
 		this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
@@ -244,8 +244,8 @@ public class DeerEntity extends AnimalEntity {
 	}
 
 	@Override
-	public DeerEntity createChild(AgeableEntity ageable) {
-		DeerEntity entity = EnvironmentalEntities.DEER.get().create(this.world);
+	public AgeableEntity func_241840_a(ServerWorld world, AgeableEntity ageable) {
+		DeerEntity entity = EnvironmentalEntities.DEER.get().create(world);
 		
         if (this.isHolidayDeer()) {
         	entity.setCoatColor(DeerCoatColors.HOLIDAY.getId());
@@ -277,8 +277,8 @@ public class DeerEntity extends AnimalEntity {
 
 	@Nullable
 	@Override
-	public ILivingEntityData onInitialSpawn(IWorld worldIn, DifficultyInstance difficulty, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
-		spawnDataIn = super.onInitialSpawn(world, difficulty, reason, spawnDataIn, dataTag);
+	public ILivingEntityData onInitialSpawn(IServerWorld worldIn, DifficultyInstance difficulty, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
+		spawnDataIn = super.onInitialSpawn(worldIn, difficulty, reason, spawnDataIn, dataTag);
 		if (this.isHolidayDeer()) {
 			this.setCoatColor(DeerCoatColors.HOLIDAY.getId());
         } else {

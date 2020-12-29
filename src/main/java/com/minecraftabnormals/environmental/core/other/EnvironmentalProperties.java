@@ -97,13 +97,17 @@ public class EnvironmentalProperties {
         private static AbstractBlock.Properties createLeaves(MaterialColor color) {
             return AbstractBlock.Properties.create(Material.LEAVES, color).harvestTool(ToolType.HOE).notSolid().hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT).setAllowsSpawn(PropertyExtensions::allowsSpawnOnLeaves).setSuffocates(PropertyExtensions::isntSolid).setBlocksVision(PropertyExtensions::isntSolid);
         }
+
+		private static AbstractBlock.Properties createLeafCarpet(MaterialColor color) {
+			return AbstractBlock.Properties.create(Material.CARPET, color).hardnessAndResistance(0.0F).sound(SoundType.PLANT).harvestTool(ToolType.HOE).notSolid();
+		}
         
-        private static Boolean allowsSpawnOnLeaves(BlockState state, IBlockReader access, BlockPos pos, EntityType<?> entity) {
+        private static boolean allowsSpawnOnLeaves(BlockState state, IBlockReader access, BlockPos pos, EntityType<?> entity) {
             return entity == EntityType.OCELOT || entity == EntityType.PARROT;
         }
 
-        private static Boolean alwaysAllowSpawn(BlockState state, IBlockReader reader, BlockPos pos, EntityType<?> entity) {
-            return (boolean) true;
+        private static boolean alwaysAllowSpawn(BlockState state, IBlockReader reader, BlockPos pos, EntityType<?> entity) {
+            return true;
         }
 
         private static boolean needsPostProcessing(BlockState state, IBlockReader reader, BlockPos pos) {

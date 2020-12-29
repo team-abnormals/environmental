@@ -15,6 +15,6 @@ public class CherryTree extends Tree {
 
     @Nullable
     protected ConfiguredFeature<BaseTreeFeatureConfig, ?> getTreeFeature(Random randomIn, boolean beehive) {
-        return Feature.field_236291_c_.withConfiguration(beehive ? EnvironmentalFeatureConfigs.CHERRY_TREE_WITH_MORE_BEEHIVES_CONFIG : EnvironmentalFeatureConfigs.CHERRY_TREE_CONFIG);
+        return Feature.TREE.withConfiguration(beehive ? EnvironmentalFeatureConfigs.CHERRY_TREE_WITH_MORE_BEEHIVES_CONFIG : EnvironmentalFeatureConfigs.CHERRY_TREE_CONFIG);
     }
 }

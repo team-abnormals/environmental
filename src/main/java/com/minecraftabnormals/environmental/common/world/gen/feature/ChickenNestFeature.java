@@ -21,7 +21,8 @@ public class ChickenNestFeature extends Feature<NoFeatureConfig> {
 		super(config);
 	}
 
-	public boolean func_230362_a_(ISeedReader worldIn, StructureManager manager, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+	@Override
+	public boolean generate(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 		BlockState blockstate = EnvironmentalBlocks.TWIG_CHICKEN_NEST.get().getDefaultState().with(BirdNestBlock.EGGS, 2 + rand.nextInt(3));
 
 		int i = worldIn.getHeight(Heightmap.Type.WORLD_SURFACE, pos.getX(), pos.getZ());

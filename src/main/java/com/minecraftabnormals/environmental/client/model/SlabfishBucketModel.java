@@ -60,9 +60,9 @@ public class SlabfishBucketModel implements IBakedModel
     }
 
     @Override
-    public boolean func_230044_c_()
+    public boolean isSideLit()
     {
-        return this.model.func_230044_c_();
+        return this.model.isSideLit();
     }
 
     @Override
@@ -102,7 +102,7 @@ public class SlabfishBucketModel implements IBakedModel
 
         @Nullable
         @Override
-        public IBakedModel func_239290_a_(IBakedModel model, ItemStack stack, @Nullable ClientWorld world, @Nullable LivingEntity entity)
+        public IBakedModel getOverrideModel(IBakedModel model, ItemStack stack, @Nullable ClientWorld world, @Nullable LivingEntity entity)
         {
             if (stack.getTag() != null && stack.getTag().contains("SlabfishType", Constants.NBT.TAG_STRING))
             {

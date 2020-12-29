@@ -130,7 +130,7 @@ public class SweaterType implements Predicate<ItemStack> {
 
             ITextComponent displayName = jsonObject.has("displayName") ? context.deserialize(jsonObject.get("displayName"), ITextComponent.class) : null;
             Item item = jsonObject.has("item") && ForgeRegistries.ITEMS.containsKey(new ResourceLocation(jsonObject.get("item").getAsString())) ? ForgeRegistries.ITEMS.getValue(new ResourceLocation(jsonObject.get("item").getAsString())) : null;
-            ITag<Item> tag = jsonObject.has("tag") ? TagCollectionManager.func_232928_e_().func_232925_b_().get(new ResourceLocation(jsonObject.get("tag").getAsString())) : null;
+            ITag<Item> tag = jsonObject.has("tag") ? TagCollectionManager.getManager().getItemTags().get(new ResourceLocation(jsonObject.get("tag").getAsString())) : null;
             Ingredient ingredient = item != null ? Ingredient.fromItems(item) : tag != null ? Ingredient.fromTag(tag) : Ingredient.EMPTY;
 
             return new SweaterType(displayName, ingredient);

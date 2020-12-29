@@ -1,5 +1,6 @@
 package com.minecraftabnormals.environmental.common.entity;
 
+import com.minecraftabnormals.abnormals_core.core.api.IBucketableEntity;
 import com.minecraftabnormals.environmental.common.entity.goals.SlabbyBreedGoal;
 import com.minecraftabnormals.environmental.common.entity.goals.SlabbyFollowParentGoal;
 import com.minecraftabnormals.environmental.common.entity.goals.SlabbyGrabItemGoal;
@@ -19,7 +20,6 @@ import com.minecraftabnormals.environmental.core.other.EnvironmentalTags;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEntities;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalSounds;
-import com.teamabnormals.abnormals_core.core.library.api.IBucketableEntity;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -61,8 +61,9 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.Tags;
@@ -269,7 +270,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 			this.remove();
 			return ActionResultType.SUCCESS;
 
-		} else if (item.isIn(ItemTags.field_232907_V_)) {
+		} else if (item.isIn(ItemTags.CREEPER_DROP_MUSIC_DISCS)) {
 			this.consumeItemFromStack(player, stack);
 			this.playBurpSound();
 			this.particleCloud(ParticleTypes.NOTE);
@@ -296,14 +297,14 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 			world.playSound(this.getPosX(), this.getPosY(), this.getPosZ(), EnvironmentalSounds.ENTITY_SLABFISH_EAT.get(), SoundCategory.NEUTRAL, 1F, 1F, true);
 			return ActionResultType.SUCCESS;
 
-		} else if (!this.func_233685_eM_() && this.hasBackpack() && player.isSecondaryUseActive() && !this.isInWater()) {
+		} else if (!this.isSitting() && this.hasBackpack() && player.isSecondaryUseActive() && !this.isInWater()) {
 			this.setTamed(true);
 			this.setOwnerId(player.getUniqueID());
 			if (!world.isRemote())
 				this.func_233687_w_(true);
 			return ActionResultType.SUCCESS;
 
-		} else if (this.func_233685_eM_() && player.isSecondaryUseActive()) {
+		} else if (this.isSitting() && player.isSecondaryUseActive()) {
 			if (!world.isRemote())
 				this.func_233687_w_(false);
 			this.setTamed(false);
@@ -342,7 +343,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 			}
 
 			if (entity != null) {
-				entity.onKillEntity(this);
+				entity.func_241847_a((ServerWorld) this.world, this);
 			}
 
 			if (this.isSleeping()) {
@@ -376,7 +377,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 			this.jukeboxPosition = null;
 		}
 
-		if (!this.func_233684_eK_())
+		if (!this.isEntitySleeping())
 			this.setTamed(false);
 		if (this.getRidingEntity() != null && this.getRidingEntity().isSneaking())
 			this.stopRiding();
@@ -513,8 +514,8 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 	// STATS //
 
 	@Override
-	public SlabfishEntity createChild(AgeableEntity ageable) {
-		SlabfishEntity baby = EnvironmentalEntities.SLABFISH.get().create(this.world);
+	public SlabfishEntity func_241840_a(ServerWorld world, AgeableEntity ageable) {
+		SlabfishEntity baby = EnvironmentalEntities.SLABFISH.get().create(world);
 		if (baby == null)
 			return null;
 		baby.setSlabfishType(this.getSlabfishType());
@@ -533,12 +534,12 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
 	@Override
 	public EntitySize getSize(Pose pose) {
-		return this.isInWater() ? this.isChild() ? SIZE_SWIMMING_CHILD : SIZE_SWIMMING : (this.func_233684_eK_() || this.getRidingEntity() != null) ? this.isChild() ? SIZE_SITTING_CHILD : SIZE_SITTING : super.getSize(pose);
+		return this.isInWater() ? this.isChild() ? SIZE_SWIMMING_CHILD : SIZE_SWIMMING : (this.isEntitySleeping() || this.getRidingEntity() != null) ? this.isChild() ? SIZE_SITTING_CHILD : SIZE_SITTING : super.getSize(pose);
 	}
 
 	@Override
 	protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
-		return this.func_233684_eK_() ? sizeIn.height * 0.6F : this.isInWater() ? (this.isChild() ? sizeIn.height * 1.4F : sizeIn.height * 0.855F) : sizeIn.height * 0.8F;
+		return this.isEntitySleeping() ? sizeIn.height * 0.6F : this.isInWater() ? (this.isChild() ? sizeIn.height * 1.4F : sizeIn.height * 0.855F) : sizeIn.height * 0.8F;
 	}
 
 	@Override
@@ -590,10 +591,10 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 	}
 
 	@Override
-	public void onStruckByLightning(LightningBoltEntity lightningBolt) {
+	public void func_241841_a(ServerWorld world, LightningBoltEntity lightningBolt) {
 		UUID uuid = lightningBolt.getUniqueID();
-		if (!this.world.isRemote() && !uuid.equals(this.lightningUUID) && !this.getSlabfishType().equals(SlabfishManager.GHOST)) {
-			SlabfishManager slabfishManager = SlabfishManager.get(this.world);
+		if (!world.isRemote() && !uuid.equals(this.lightningUUID) && !this.getSlabfishType().equals(SlabfishManager.GHOST)) {
+			SlabfishManager slabfishManager = SlabfishManager.get(world);
 			SlabfishType currentType = slabfishManager.getSlabfishType(this.getSlabfishType()).orElse(SlabfishManager.DEFAULT_SLABFISH);
 			slabfishManager.getSlabfishType(SlabfishConditionContext.lightning(this)).ifPresent(newType -> {
 				if (!currentType.isTradable() && newType.isTradable())
@@ -616,7 +617,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
 	@Nullable
 	@Override
-	public ILivingEntityData onInitialSpawn(IWorld world, DifficultyInstance difficulty, SpawnReason reason, ILivingEntityData spawnDataIn, CompoundNBT dataTag) {
+	public ILivingEntityData onInitialSpawn(IServerWorld world, DifficultyInstance difficulty, SpawnReason reason, ILivingEntityData spawnDataIn, CompoundNBT dataTag) {
 		spawnDataIn = super.onInitialSpawn(world, difficulty, reason, spawnDataIn, dataTag);
 
 		if (dataTag != null && dataTag.contains("SlabfishType", Constants.NBT.TAG_STRING)) {
@@ -657,6 +658,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 		public final ResourceLocation type;
 
 		public SlabfishData(ResourceLocation type) {
+			super(0.2F);
 			this.type = type;
 		}
 	}
