@@ -190,8 +190,8 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> WILLOW_BUTTON = HELPER.createBlock("willow_button", () -> new AbnormalsWoodButtonBlock(EnvironmentalProperties.WILLOW_BUTTON), ItemGroup.REDSTONE);
 	public static final Pair<RegistryObject<AbnormalsStandingSignBlock>, RegistryObject<AbnormalsWallSignBlock>> WILLOW_SIGNS = HELPER.createSignBlock("willow", MaterialColor.GREEN);
 
-	public static final RegistryObject<Block> WILLOW_LEAVES = HELPER.createBlock("willow_leaves", () -> new AbnormalsLeavesBlock(EnvironmentalProperties.WILLOW_LEAVES), ItemGroup.DECORATIONS);
-	public static final RegistryObject<Block> HANGING_WILLOW_LEAVES = HELPER.createBlock("hanging_willow_leaves", () -> new HangingWillowLeavesBlock(EnvironmentalProperties.WILLOW_LEAVES), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> WILLOW_LEAVES = HELPER.createBlock("willow_leaves", () -> new AbnormalsLeavesBlock(EnvironmentalProperties.createLeaves(MaterialColor.GREEN)), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> HANGING_WILLOW_LEAVES = HELPER.createBlock("hanging_willow_leaves", () -> new HangingWillowLeavesBlock(EnvironmentalProperties.createLeaves(MaterialColor.GREEN)), ItemGroup.DECORATIONS);
 	public static final RegistryObject<Block> WILLOW_SAPLING = HELPER.createBlock("willow_sapling", () -> new AbnormalsSaplingBlock(new WillowTree(), EnvironmentalProperties.WILLOW_SAPLING), ItemGroup.DECORATIONS);
 	public static final RegistryObject<Block> POTTED_WILLOW_SAPLING = HELPER.createBlockNoItem("potted_willow_sapling", () -> new FlowerPotBlock(EnvironmentalBlocks.WILLOW_SAPLING.get(), EnvironmentalProperties.FLOWER_POT));
 
@@ -199,7 +199,7 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> WILLOW_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "willow_vertical_slab", () -> new VerticalSlabBlock(EnvironmentalProperties.WILLOW_PLANKS), ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<Block> WILLOW_LADDER = HELPER.createCompatBlock("quark", "willow_ladder", () -> new AbnormalsLadderBlock(EnvironmentalProperties.WILLOW_LADDER), ItemGroup.DECORATIONS);
 	public static final RegistryObject<Block> WILLOW_BOOKSHELF = HELPER.createCompatBlock("quark", "willow_bookshelf", () -> new BookshelfBlock(EnvironmentalProperties.WILLOW_BOOKSHELF), ItemGroup.BUILDING_BLOCKS);
-	public static final RegistryObject<Block> WILLOW_LEAF_CARPET = HELPER.createCompatBlock("quark", "willow_leaf_carpet", () -> new LeafCarpetBlock(EnvironmentalProperties.WILLOW_LEAVES.notSolid()), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> WILLOW_LEAF_CARPET = HELPER.createCompatBlock("quark", "willow_leaf_carpet", () -> new LeafCarpetBlock(EnvironmentalProperties.createLeafCarpet(MaterialColor.GREEN)), ItemGroup.DECORATIONS);
 	public static final RegistryObject<Block> WILLOW_BEEHIVE = HELPER.createCompatBlock("buzzier_bees", "willow_beehive", () -> new AbnormalsBeehiveBlock(Properties.from(Blocks.BEEHIVE)), ItemGroup.DECORATIONS);
 	public static final Pair<RegistryObject<AbnormalsChestBlock>, RegistryObject<AbnormalsTrappedChestBlock>> WILLOW_CHESTS = HELPER.createCompatChestBlocks("willow", MaterialColor.GREEN);
 
@@ -220,7 +220,7 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> CHERRY_BUTTON = HELPER.createBlock("cherry_button", () -> new AbnormalsWoodButtonBlock(EnvironmentalProperties.CHERRY_BUTTON), ItemGroup.REDSTONE);
 	public static final Pair<RegistryObject<AbnormalsStandingSignBlock>, RegistryObject<AbnormalsWallSignBlock>> CHERRY_SIGNS = HELPER.createSignBlock("cherry", MaterialColor.RED);
 
-	public static final RegistryObject<Block> CHERRY_LEAVES = HELPER.createBlock("cherry_leaves", () -> new CherryLeavesBlock(EnvironmentalProperties.CHERRY_LEAVES), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> CHERRY_LEAVES = HELPER.createBlock("cherry_leaves", () -> new CherryLeavesBlock(EnvironmentalProperties.createLeaves(MaterialColor.PINK)), ItemGroup.DECORATIONS);
 	public static final RegistryObject<Block> CHERRY_SAPLING = HELPER.createBlock("cherry_sapling", () -> new AbnormalsSaplingBlock(new CherryTree(), EnvironmentalProperties.CHERRY_SAPLING), ItemGroup.DECORATIONS);
 	public static final RegistryObject<Block> POTTED_CHERRY_SAPLING = HELPER.createBlockNoItem("potted_cherry_sapling", () -> new FlowerPotBlock(EnvironmentalBlocks.CHERRY_SAPLING.get(), EnvironmentalProperties.FLOWER_POT));
 
@@ -228,7 +228,7 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> CHERRY_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "cherry_vertical_slab", () -> new VerticalSlabBlock(EnvironmentalProperties.CHERRY_PLANKS), ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<Block> CHERRY_LADDER = HELPER.createCompatBlock("quark", "cherry_ladder", () -> new AbnormalsLadderBlock(EnvironmentalProperties.CHERRY_LADDER), ItemGroup.DECORATIONS);
 	public static final RegistryObject<Block> CHERRY_BOOKSHELF = HELPER.createCompatBlock("quark", "cherry_bookshelf", () -> new BookshelfBlock(EnvironmentalProperties.CHERRY_BOOKSHELF), ItemGroup.BUILDING_BLOCKS);
-	public static final RegistryObject<Block> CHERRY_LEAF_CARPET = HELPER.createBlock("cherry_leaf_carpet", () -> new LeafCarpetBlock(EnvironmentalProperties.CHERRY_LEAVES.notSolid()), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> CHERRY_LEAF_CARPET = HELPER.createBlock("cherry_leaf_carpet", () -> new LeafCarpetBlock(EnvironmentalProperties.createLeafCarpet(MaterialColor.PINK)), ItemGroup.DECORATIONS);
 	public static final RegistryObject<Block> CHERRY_BEEHIVE = HELPER.createCompatBlock("buzzier_bees", "cherry_beehive", () -> new AbnormalsBeehiveBlock(Properties.from(Blocks.BEEHIVE)), ItemGroup.DECORATIONS);
 	public static final Pair<RegistryObject<AbnormalsChestBlock>, RegistryObject<AbnormalsTrappedChestBlock>> CHERRY_CHESTS = HELPER.createCompatChestBlocks("cherry", MaterialColor.RED);
 
@@ -251,14 +251,14 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> WISTERIA_BUTTON = HELPER.createBlock("wisteria_button", () -> new AbnormalsWoodButtonBlock(EnvironmentalProperties.WISTERIA_BUTTON), ItemGroup.REDSTONE);
 	public static final Pair<RegistryObject<AbnormalsStandingSignBlock>, RegistryObject<AbnormalsWallSignBlock>> WISTERIA_SIGNS = HELPER.createSignBlock("wisteria", MaterialColor.WHITE_TERRACOTTA);
 
-	public static final RegistryObject<Block> PINK_WISTERIA_LEAVES = HELPER.createBlock("pink_wisteria_leaves", () -> new WisteriaLeavesBlock(EnvironmentalProperties.PINK_WISTERIA_LEAVES), ItemGroup.DECORATIONS);
-	public static final RegistryObject<Block> BLUE_WISTERIA_LEAVES = HELPER.createBlock("blue_wisteria_leaves", () -> new WisteriaLeavesBlock(EnvironmentalProperties.BLUE_WISTERIA_LEAVES), ItemGroup.DECORATIONS);
-	public static final RegistryObject<Block> PURPLE_WISTERIA_LEAVES = HELPER.createBlock("purple_wisteria_leaves", () -> new WisteriaLeavesBlock(EnvironmentalProperties.PURPLE_WISTERIA_LEAVES), ItemGroup.DECORATIONS);
-	public static final RegistryObject<Block> WHITE_WISTERIA_LEAVES = HELPER.createBlock("white_wisteria_leaves", () -> new WisteriaLeavesBlock(EnvironmentalProperties.WHITE_WISTERIA_LEAVES), ItemGroup.DECORATIONS);
-	public static final RegistryObject<Block> PINK_HANGING_WISTERIA_LEAVES = HELPER.createBlock("pink_hanging_wisteria_leaves", () -> new HangingWisteriaLeavesBlock(EnvironmentalProperties.PINK_WISTERIA_LEAVES), ItemGroup.DECORATIONS);
-	public static final RegistryObject<Block> BLUE_HANGING_WISTERIA_LEAVES = HELPER.createBlock("blue_hanging_wisteria_leaves", () -> new HangingWisteriaLeavesBlock(EnvironmentalProperties.BLUE_WISTERIA_LEAVES), ItemGroup.DECORATIONS);
-	public static final RegistryObject<Block> PURPLE_HANGING_WISTERIA_LEAVES = HELPER.createBlock("purple_hanging_wisteria_leaves", () -> new HangingWisteriaLeavesBlock(EnvironmentalProperties.PURPLE_WISTERIA_LEAVES), ItemGroup.DECORATIONS);
-	public static final RegistryObject<Block> WHITE_HANGING_WISTERIA_LEAVES = HELPER.createBlock("white_hanging_wisteria_leaves", () -> new HangingWisteriaLeavesBlock(EnvironmentalProperties.WHITE_WISTERIA_LEAVES), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> PINK_WISTERIA_LEAVES = HELPER.createBlock("pink_wisteria_leaves", () -> new WisteriaLeavesBlock(EnvironmentalProperties.createLeaves(MaterialColor.PINK)), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> BLUE_WISTERIA_LEAVES = HELPER.createBlock("blue_wisteria_leaves", () -> new WisteriaLeavesBlock(EnvironmentalProperties.createLeaves(MaterialColor.BLUE)), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> PURPLE_WISTERIA_LEAVES = HELPER.createBlock("purple_wisteria_leaves", () -> new WisteriaLeavesBlock(EnvironmentalProperties.createLeaves(MaterialColor.PURPLE)), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> WHITE_WISTERIA_LEAVES = HELPER.createBlock("white_wisteria_leaves", () -> new WisteriaLeavesBlock(EnvironmentalProperties.createLeaves(MaterialColor.SNOW)), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> PINK_HANGING_WISTERIA_LEAVES = HELPER.createBlock("pink_hanging_wisteria_leaves", () -> new HangingWisteriaLeavesBlock(EnvironmentalProperties.createLeaves(MaterialColor.PINK)), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> BLUE_HANGING_WISTERIA_LEAVES = HELPER.createBlock("blue_hanging_wisteria_leaves", () -> new HangingWisteriaLeavesBlock(EnvironmentalProperties.createLeaves(MaterialColor.BLUE)), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> PURPLE_HANGING_WISTERIA_LEAVES = HELPER.createBlock("purple_hanging_wisteria_leaves", () -> new HangingWisteriaLeavesBlock(EnvironmentalProperties.createLeaves(MaterialColor.PURPLE)), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> WHITE_HANGING_WISTERIA_LEAVES = HELPER.createBlock("white_hanging_wisteria_leaves", () -> new HangingWisteriaLeavesBlock(EnvironmentalProperties.createLeaves(MaterialColor.SNOW)), ItemGroup.DECORATIONS);
 	public static final RegistryObject<Block> PINK_WISTERIA_SAPLING = HELPER.createBlock("pink_wisteria_sapling", () -> new AbnormalsSaplingBlock(new WisteriaTree(WisteriaColor.PINK), EnvironmentalProperties.WISTERIA_SAPLING), ItemGroup.DECORATIONS);
 	public static final RegistryObject<Block> BLUE_WISTERIA_SAPLING = HELPER.createBlock("blue_wisteria_sapling", () -> new AbnormalsSaplingBlock(new WisteriaTree(WisteriaColor.BLUE), EnvironmentalProperties.WISTERIA_SAPLING), ItemGroup.DECORATIONS);
 	public static final RegistryObject<Block> PURPLE_WISTERIA_SAPLING = HELPER.createBlock("purple_wisteria_sapling", () -> new AbnormalsSaplingBlock(new WisteriaTree(WisteriaColor.PURPLE), EnvironmentalProperties.WISTERIA_SAPLING), ItemGroup.DECORATIONS);
@@ -272,10 +272,10 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> WISTERIA_LADDER = HELPER.createCompatBlock("quark", "wisteria_ladder", () -> new AbnormalsLadderBlock(EnvironmentalProperties.WISTERIA_LADDER), ItemGroup.DECORATIONS);
 	public static final RegistryObject<Block> VERTICAL_WISTERIA_PLANKS = HELPER.createCompatBlock("quark", "vertical_wisteria_planks", () -> new Block(EnvironmentalProperties.WISTERIA_PLANKS), ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<Block> WISTERIA_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "wisteria_vertical_slab", () -> new VerticalSlabBlock(EnvironmentalProperties.WISTERIA_PLANKS), ItemGroup.BUILDING_BLOCKS);
-	public static final RegistryObject<Block> PINK_WISTERIA_LEAF_CARPET = HELPER.createCompatBlock("quark", "pink_wisteria_leaf_carpet", () -> new LeafCarpetBlock(EnvironmentalProperties.PINK_WISTERIA_LEAVES), ItemGroup.DECORATIONS);
-	public static final RegistryObject<Block> BLUE_WISTERIA_LEAF_CARPET = HELPER.createCompatBlock("quark", "blue_wisteria_leaf_carpet", () -> new LeafCarpetBlock(EnvironmentalProperties.BLUE_WISTERIA_LEAVES), ItemGroup.DECORATIONS);
-	public static final RegistryObject<Block> PURPLE_WISTERIA_LEAF_CARPET = HELPER.createCompatBlock("quark", "purple_wisteria_leaf_carpet", () -> new LeafCarpetBlock(EnvironmentalProperties.PURPLE_WISTERIA_LEAVES), ItemGroup.DECORATIONS);
-	public static final RegistryObject<Block> WHITE_WISTERIA_LEAF_CARPET = HELPER.createCompatBlock("quark", "white_wisteria_leaf_carpet", () -> new LeafCarpetBlock(EnvironmentalProperties.WHITE_WISTERIA_LEAVES), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> PINK_WISTERIA_LEAF_CARPET = HELPER.createCompatBlock("quark", "pink_wisteria_leaf_carpet", () -> new LeafCarpetBlock(EnvironmentalProperties.createLeafCarpet(MaterialColor.PINK)), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> BLUE_WISTERIA_LEAF_CARPET = HELPER.createCompatBlock("quark", "blue_wisteria_leaf_carpet", () -> new LeafCarpetBlock(EnvironmentalProperties.createLeafCarpet(MaterialColor.BLUE)), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> PURPLE_WISTERIA_LEAF_CARPET = HELPER.createCompatBlock("quark", "purple_wisteria_leaf_carpet", () -> new LeafCarpetBlock(EnvironmentalProperties.createLeafCarpet(MaterialColor.PURPLE)), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> WHITE_WISTERIA_LEAF_CARPET = HELPER.createCompatBlock("quark", "white_wisteria_leaf_carpet", () -> new LeafCarpetBlock(EnvironmentalProperties.createLeafCarpet(MaterialColor.SNOW)), ItemGroup.DECORATIONS);
 	public static final RegistryObject<Block> WISTERIA_BEEHIVE = HELPER.createCompatBlock("buzzier_bees", "wisteria_beehive", () -> new AbnormalsBeehiveBlock(Properties.from(Blocks.BEEHIVE)), ItemGroup.DECORATIONS);
 	public static final Pair<RegistryObject<AbnormalsChestBlock>, RegistryObject<AbnormalsTrappedChestBlock>> WISTERIA_CHESTS = HELPER.createCompatChestBlocks("wisteria", MaterialColor.WHITE_TERRACOTTA);
 
