@@ -110,11 +110,11 @@ public class DoubleCattailBlock extends Block implements IGrowable, IWaterLoggab
 			int j = 1 + rand.nextInt(3);
 			spawnAsEntity(worldIn, pos, new ItemStack(EnvironmentalBlocks.CATTAIL_SPROUTS.get(), j));
 			worldIn.playSound((PlayerEntity) null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
-			worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(0)), 2);
+			worldIn.setBlockState(pos, state.with(AGE, 0), 2);
 			if (state.get(HALF) == DoubleBlockHalf.UPPER) {
-				worldIn.setBlockState(pos.down(), worldIn.getBlockState(pos.down()).with(AGE, Integer.valueOf(0)), 2);
+				worldIn.setBlockState(pos.down(), worldIn.getBlockState(pos.down()).with(AGE, 0), 2);
 			} else {
-				worldIn.setBlockState(pos.up(), worldIn.getBlockState(pos.up()).with(AGE, Integer.valueOf(0)), 2);
+				worldIn.setBlockState(pos.up(), worldIn.getBlockState(pos.up()).with(AGE, 0), 2);
 			}
 			return ActionResultType.SUCCESS;
 		} else {
@@ -147,9 +147,9 @@ public class DoubleCattailBlock extends Block implements IGrowable, IWaterLoggab
 		int i = state.get(AGE);
 		int chance = worldIn.getBlockState(pos.down().down()).isFertile(worldIn, pos.down().down()) ? 15 : 17;
 		if (state.get(HALF) == DoubleBlockHalf.UPPER && i < 1 && worldIn.getBlockState(pos.down().down()).getBlock() == Blocks.FARMLAND && worldIn.getLightSubtracted(pos.up(), 0) >= 9 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, random.nextInt(chance) == 0)) {
-			worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(i + 1)), 2);
+			worldIn.setBlockState(pos, state.with(AGE, i + 1), 2);
 			if (worldIn.getBlockState(pos.down()).getBlock() == this && worldIn.getBlockState(pos.down()).get(AGE) == 0) {
-				worldIn.setBlockState(pos.down(), worldIn.getBlockState(pos.down()).with(AGE, Integer.valueOf(i + 1)), 2);
+				worldIn.setBlockState(pos.down(), worldIn.getBlockState(pos.down()).with(AGE, i + 1), 2);
 				net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
 			}
 		}
@@ -179,7 +179,7 @@ public class DoubleCattailBlock extends Block implements IGrowable, IWaterLoggab
 	public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
 		if (!worldIn.isRemote) {
 			if (player.isCreative()) {
-				func_241471_b_(worldIn, pos, state, player);
+				removeBottomHalf(worldIn, pos, state, player);
 			} else {
 				spawnDrops(state, worldIn, pos, (TileEntity) null, player, player.getHeldItemMainhand());
 			}
@@ -187,13 +187,25 @@ public class DoubleCattailBlock extends Block implements IGrowable, IWaterLoggab
 		super.onBlockHarvested(worldIn, pos, state, player);
 	}
 
-	protected static void func_241471_b_(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+	@Override
+	public void harvestBlock(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {
+		super.harvestBlock(worldIn, player, pos, Blocks.AIR.getDefaultState(), te, stack);
+	}
+
+	protected static void removeBottomHalf(World world, BlockPos pos, BlockState state, PlayerEntity player) {
 		DoubleBlockHalf doubleblockhalf = state.get(HALF);
 		if (doubleblockhalf == DoubleBlockHalf.UPPER) {
 			BlockPos blockpos = pos.down();
 			BlockState blockstate = world.getBlockState(blockpos);
 			if (blockstate.getBlock() == state.getBlock() && blockstate.get(HALF) == DoubleBlockHalf.LOWER) {
-				world.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 35);
+				world.setBlockState(blockpos, world.getFluidState(blockpos).getLevel() == 8 ? Blocks.WATER.getDefaultState() : Blocks.AIR.getDefaultState(), 51);
+				world.playEvent(player, 2001, blockpos, Block.getStateId(blockstate));
+			}
+		} else if (doubleblockhalf == DoubleBlockHalf.LOWER) {
+			BlockPos blockpos = pos.up();
+			BlockState blockstate = world.getBlockState(blockpos);
+			if (blockstate.getBlock() == state.getBlock() && blockstate.get(HALF) == DoubleBlockHalf.UPPER) {
+				world.setBlockState(blockpos, world.getFluidState(blockpos).getLevel() == 8 ? Blocks.WATER.getDefaultState() : Blocks.AIR.getDefaultState(), 51);
 				world.playEvent(player, 2001, blockpos, Block.getStateId(blockstate));
 			}
 		}
@@ -202,7 +214,7 @@ public class DoubleCattailBlock extends Block implements IGrowable, IWaterLoggab
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
 		FluidState ifluidstateUp = worldIn.getFluidState(pos.up());
-		worldIn.setBlockState(pos.up(), this.getDefaultState().with(HALF, DoubleBlockHalf.UPPER).with(WATERLOGGED, Boolean.valueOf(ifluidstateUp.isTagged(FluidTags.WATER) && ifluidstateUp.getLevel() == 8)).with(FAKE_WATERLOGGED, Boolean.valueOf(worldIn.getFluidState(pos).isTagged(FluidTags.WATER) && worldIn.getFluidState(pos).getLevel() == 8)), 3);
+		worldIn.setBlockState(pos.up(), this.getDefaultState().with(HALF, DoubleBlockHalf.UPPER).with(WATERLOGGED, ifluidstateUp.isTagged(FluidTags.WATER) && ifluidstateUp.getLevel() == 8).with(FAKE_WATERLOGGED, worldIn.getFluidState(pos).isTagged(FluidTags.WATER) && worldIn.getFluidState(pos).getLevel() == 8), 3);
 	}
 
 	@Override

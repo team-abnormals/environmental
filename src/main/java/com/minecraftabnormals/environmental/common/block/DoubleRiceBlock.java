@@ -18,6 +18,7 @@ import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -146,9 +147,9 @@ public class DoubleRiceBlock extends Block implements IGrowable, IWaterLoggable,
 		int i = state.get(AGE);
 		int chance = worldIn.getBlockState(pos.down().down()).isFertile(worldIn, pos.down().down()) ? 6 : 8;
 		if (state.get(HALF) == DoubleBlockHalf.UPPER && i < 7 && (worldIn.getBlockState(pos.down().down()).getBlock() == Blocks.FARMLAND || worldIn.getFluidState(pos.down()).getLevel() == 8) && worldIn.getLightSubtracted(pos.up(), 0) >= 9 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, random.nextInt(chance) == 0)) {
-			worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(i + 1)), 2);
+			worldIn.setBlockState(pos, state.with(AGE, i + 1), 2);
 			if (worldIn.getBlockState(pos.down()).getBlock() == this && worldIn.getBlockState(pos.down()).get(AGE) == 6) {
-				worldIn.setBlockState(pos.down(), worldIn.getBlockState(pos.down()).with(AGE, Integer.valueOf(i + 1)), 2);
+				worldIn.setBlockState(pos.down(), worldIn.getBlockState(pos.down()).with(AGE, i + 1), 2);
 			}
 			net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
 		}
@@ -214,5 +215,41 @@ public class DoubleRiceBlock extends Block implements IGrowable, IWaterLoggable,
 	@Override
 	public BlockState getPlant(IBlockReader world, BlockPos pos) {
 		return EnvironmentalBlocks.TALL_RICE.get().getDefaultState();
+	}
+
+	@Override
+	public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
+		if (!worldIn.isRemote) {
+			if (player.isCreative()) {
+				removeBottomHalf(worldIn, pos, state, player);
+			} else {
+				spawnDrops(state, worldIn, pos, (TileEntity) null, player, player.getHeldItemMainhand());
+			}
+		}
+		super.onBlockHarvested(worldIn, pos, state, player);
+	}
+
+	@Override
+	public void harvestBlock(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {
+		super.harvestBlock(worldIn, player, pos, Blocks.AIR.getDefaultState(), te, stack);
+	}
+
+	protected static void removeBottomHalf(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+		DoubleBlockHalf doubleblockhalf = state.get(HALF);
+		if (doubleblockhalf == DoubleBlockHalf.UPPER) {
+			BlockPos blockpos = pos.down();
+			BlockState blockstate = world.getBlockState(blockpos);
+			if (blockstate.getBlock() == state.getBlock() && blockstate.get(HALF) == DoubleBlockHalf.LOWER) {
+				world.setBlockState(blockpos, world.getFluidState(blockpos).getLevel() == 8 ? Blocks.WATER.getDefaultState() : Blocks.AIR.getDefaultState(), 51);
+				world.playEvent(player, 2001, blockpos, Block.getStateId(blockstate));
+			}
+		} else if (doubleblockhalf == DoubleBlockHalf.LOWER) {
+			BlockPos blockpos = pos.up();
+			BlockState blockstate = world.getBlockState(blockpos);
+			if (blockstate.getBlock() == state.getBlock() && blockstate.get(HALF) == DoubleBlockHalf.UPPER) {
+				world.setBlockState(blockpos, world.getFluidState(blockpos).getLevel() == 8 ? Blocks.WATER.getDefaultState() : Blocks.AIR.getDefaultState(), 51);
+				world.playEvent(player, 2001, blockpos, Block.getStateId(blockstate));
+			}
+		}
 	}
 }

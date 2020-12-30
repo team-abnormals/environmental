@@ -90,6 +90,7 @@ public class RiceBlock extends BushBlock implements IWaterLoggable, IGrowable, I
 		int newAge = state.get(AGE) + MathHelper.nextInt(worldIn.rand, 2, 5);
 		if (newAge > 7) newAge = 7;
 		if (newAge <= 5 || !worldIn.getBlockState(pos.up()).isAir()) {
+			if (newAge > 5) newAge = 5;
 			worldIn.setBlockState(pos, state.with(AGE, newAge));
 		} else {
 			DoubleRiceBlock doubleplantblock = (DoubleRiceBlock) (EnvironmentalBlocks.TALL_RICE.get());

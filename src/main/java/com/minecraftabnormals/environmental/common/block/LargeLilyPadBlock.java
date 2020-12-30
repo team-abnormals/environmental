@@ -167,7 +167,7 @@ public class LargeLilyPadBlock extends BushBlock implements IPlantable {
 		BlockPos blockpos = posToBlockPos(position, pos, false);
 		BlockState blockstate = world.getBlockState(blockpos);
 		if (blockstate.getBlock() == state.getBlock() && blockstate.get(POSITION) == position) {
-			world.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 35);
+			world.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 51);
 			world.playEvent(player, 2001, blockpos, Block.getStateId(blockstate));
 		}
 	}
