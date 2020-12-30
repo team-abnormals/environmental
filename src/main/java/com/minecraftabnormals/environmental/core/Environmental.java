@@ -89,6 +89,7 @@ public class Environmental {
 		event.enqueueWork(() -> {
 			EnvironmentalCompat.registerCompat();
 			EnvironmentalEntities.registerAttributes();
+			EnvironmentalEntities.registerSpawns();
 			EnvironmentalBiomes.addBiomeTypes();
 			EnvironmentalBiomes.addBiomesToGeneration();
 			EnvironmentalVillagers.registerVillagerTypes();

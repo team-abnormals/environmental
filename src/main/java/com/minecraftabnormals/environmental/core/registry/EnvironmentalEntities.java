@@ -11,11 +11,18 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.MobSpawnInfo;
 import net.minecraft.world.gen.Heightmap;
+import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
+import net.minecraftforge.common.world.MobSpawnInfoBuilder;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @EventBusSubscriber(modid = Environmental.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class EnvironmentalEntities {
@@ -42,50 +49,11 @@ public class EnvironmentalEntities {
 	}
 
 	public static void registerSpawns() {
-		ForgeRegistries.BIOMES.getValues().forEach(EnvironmentalEntities::processSpawning);
-		if (EnvironmentalConfig.COMMON.limitFarmAnimalSpawns.get()) {
-			ForgeRegistries.BIOMES.getValues().forEach(EnvironmentalEntities::removeSpawns);
-		}
-
 		EntitySpawnPlacementRegistry.register(EnvironmentalEntities.SLABFISH.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, DuckEntity::canDuckSpawn);
 		EntitySpawnPlacementRegistry.register(EnvironmentalEntities.YAK.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canAnimalSpawn);
 		EntitySpawnPlacementRegistry.register(EnvironmentalEntities.DUCK.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, DuckEntity::canDuckSpawn);
 		EntitySpawnPlacementRegistry.register(EnvironmentalEntities.DEER.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canAnimalSpawn);
 		EntitySpawnPlacementRegistry.register(EnvironmentalEntities.KOI.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, KoiEntity::canKoiSpawn);
-	}
-
-	private static void processSpawning(Biome biome) {
-//        if (biome.getCategory() == Category.SWAMP) {
-//            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(EnvironmentalEntities.SLABFISH.get(), 8, 2, 4));
-//        }
-//
-//        if (biome.getCategory() == Category.RIVER || biome.getCategory() == Category.SWAMP) {
-//            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(EnvironmentalEntities.DUCK.get(), 5, 2, 4));
-//        }
-//
-//        if (biome.getCategory() == Category.FOREST) {
-//            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(EnvironmentalEntities.DEER.get(), 16, 1, 4));
-//        }
-//
-//		if(biome.getCategory() == Category.EXTREME_HILLS)
-//            biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(YAK.get(), 20, 2, 4));
-	}
-
-	private static void removeSpawns(Biome biome) {
-//        List<Biome.SpawnListEntry> entrysToRemove = new ArrayList<>();
-//        for(Biome.SpawnListEntry entry : biome.getSpawns(EntityClassification.CREATURE)) {
-//            if(biome.getCategory() != Biome.Category.FOREST) {
-//                if (entry.entityType == EntityType.PIG || entry.entityType == EntityType.CHICKEN) {
-//                    entrysToRemove.add(entry);
-//                }
-//            }
-//            if(biome.getCategory() != Biome.Category.PLAINS) {
-//                if (entry.entityType == EntityType.COW || entry.entityType == EntityType.SHEEP) {
-//                    entrysToRemove.add(entry);
-//                }
-//            }
-//        };
-//        biome.getSpawns(EntityClassification.CREATURE).removeAll(entrysToRemove);
 	}
 
 	public static void registerAttributes() {

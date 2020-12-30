@@ -41,7 +41,9 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
+import net.minecraft.world.biome.MobSpawnInfo;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.world.MobSpawnInfoBuilder;
 import net.minecraftforge.event.entity.EntityEvent.EnteringChunk;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -49,17 +51,53 @@ import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 
 @EventBusSubscriber(modid = Environmental.MODID)
 public class EnvironmentalEvents {
+
+	@SubscribeEvent
+	public static void onBiomeLoad(BiomeLoadingEvent event) {
+		MobSpawnInfoBuilder spawns = event.getSpawns();
+
+		if (event.getCategory() == Biome.Category.SWAMP)
+			spawns.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(EnvironmentalEntities.SLABFISH.get(), 8, 2, 4));
+
+		if (event.getCategory() == Biome.Category.RIVER || event.getCategory() == Biome.Category.SWAMP)
+			spawns.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(EnvironmentalEntities.DUCK.get(), 5, 2, 4));
+
+		if (event.getCategory() == Biome.Category.FOREST)
+			spawns.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(EnvironmentalEntities.DEER.get(), 16, 1, 4));
+
+		if (event.getCategory() == Biome.Category.EXTREME_HILLS)
+			spawns.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(EnvironmentalEntities.YAK.get(), 20, 2, 4));
+
+		if (EnvironmentalConfig.COMMON.limitFarmAnimalSpawns.get())
+			removeSpawns(event);
+	}
+
+	private static void removeSpawns(BiomeLoadingEvent event) {
+		MobSpawnInfoBuilder spawns = event.getSpawns();
+		List<MobSpawnInfo.Spawners> entrysToRemove = new ArrayList<>();
+		for(MobSpawnInfo.Spawners entry : spawns.getSpawner(EntityClassification.CREATURE)) {
+			if(event.getCategory() != Biome.Category.FOREST) {
+				if (entry.type == EntityType.PIG || entry.type == EntityType.CHICKEN) {
+					entrysToRemove.add(entry);
+				}
+			}
+			if(event.getCategory() != Biome.Category.PLAINS) {
+				if (entry.type == EntityType.COW || entry.type == EntityType.SHEEP) {
+					entrysToRemove.add(entry);
+				}
+			}
+		};
+		spawns.getSpawner(EntityClassification.CREATURE).removeAll(entrysToRemove);
+	}
 
 	@SubscribeEvent
 	public static void onEvent(PlayerEvent.BreakSpeed event) {
