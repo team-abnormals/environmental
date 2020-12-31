@@ -160,16 +160,16 @@ public class EnvironmentalBiomeFeatures {
 		DefaultBiomeFeatures.withFrozenTopLayer(builder);
 		DefaultBiomeFeatures.withNormalMushroomGeneration(builder);
 		DefaultBiomeFeatures.withTallGrass(builder);
-		DefaultBiomeFeatures.withJungleGrass(builder);
 		DefaultBiomeFeatures.withSwampSugarcaneAndPumpkin(builder);
 		DefaultBiomeFeatures.withFossils(builder);
+
+		if (EnvironmentalConfig.COMMON.generateGiantTallGrass.get())
+			builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_GIANT_TALL_GRASS_MARSH);
 
 		EnvironmentalBiomeFeatures.withMudDisks(builder);
 		EnvironmentalBiomeFeatures.withMarshVegetation(builder);
 		EnvironmentalBiomeFeatures.withMarshPonds(builder);
 
-		if (EnvironmentalConfig.COMMON.generateGiantTallGrass.get())
-			builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_GIANT_TALL_GRASS_MARSH);
 	}
 
 	public static void withBaseBlossomFeatures(BiomeGenerationSettingsBuilder builder) {
@@ -253,13 +253,13 @@ public class EnvironmentalBiomeFeatures {
 		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_BLUE_ORCHID);
 		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_CORNFLOWER);
 		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_DIANTHUS);
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_GRASS_MARSH);
 		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_WATERLILLY_MARSH);
+		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_GRASS_MARSH);
 		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_TALL_GRASS_MARSH);
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.SEAGRASS_MARSH);
 		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_RICE);
 		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_CATTAILS_DENSE);
 		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_DUCKWEED_MARSH);
+		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.SEAGRASS_MARSH);
 	}
 
 	public static void removeSwampTrees(BiomeGenerationSettingsBuilder builder) {
