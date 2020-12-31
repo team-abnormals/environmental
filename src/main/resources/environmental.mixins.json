@@ -8,6 +8,7 @@
     "AbstractSkeletonEntityMixin",
     "ChickenEntityMixin",
     "DoublePlantBlockMixin",
+    "GrassBlockMixin",
     "LilyPadBlockMixin",
     "LivingEntityMixin",
     "MobEntityMixin",
