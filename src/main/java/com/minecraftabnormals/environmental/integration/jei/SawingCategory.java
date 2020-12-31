@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 public class SawingCategory implements IRecipeCategory<SawingRecipe> {
-	public static final ResourceLocation SAWING = new ResourceLocation(Environmental.MODID, "sawing");
+	public static final ResourceLocation SAWING = new ResourceLocation(Environmental.MOD_ID, "sawing");
 
 	private static final int inputSlot = 0;
 	private static final int outputSlot = 1;
@@ -31,7 +31,7 @@ public class SawingCategory implements IRecipeCategory<SawingRecipe> {
 		ResourceLocation location = EnvironmentalPlugin.RECIPE_GUI_ENVIRONMENTAL;
 		background = guiHelper.createDrawable(location, 0, 220, width, height);
 		icon = guiHelper.createDrawableIngredient(new ItemStack(EnvironmentalBlocks.SAWMILL.get()));
-		this.localizedName = I18n.format("gui." + Environmental.MODID + ".category.sawing");
+		this.localizedName = I18n.format("gui." + Environmental.MOD_ID + ".category.sawing");
 	}
 
 	@Override

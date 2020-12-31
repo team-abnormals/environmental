@@ -24,22 +24,22 @@ public interface SlabfishManager {
 	/**
 	 * The default slabfish that exists if there are no other slabfish types to choose from.
 	 */
-	SlabfishType DEFAULT_SLABFISH = new SlabfishType(SlabfishRarity.COMMON, new TranslationTextComponent("entity." + Environmental.MODID + ".slabfish.type.swamp"), null, false, true, true, -1, new SlabfishCondition[0]).setRegistryName(new ResourceLocation(Environmental.MODID, "swamp"));
+	SlabfishType DEFAULT_SLABFISH = new SlabfishType(SlabfishRarity.COMMON, new TranslationTextComponent("entity." + Environmental.MOD_ID + ".slabfish.type.swamp"), null, false, true, true, -1, new SlabfishCondition[0]).setRegistryName(new ResourceLocation(Environmental.MOD_ID, "swamp"));
 
 	/**
 	 * The default sweater that exists if there are no other sweater types to choose from.
 	 */
-	SweaterType EMPTY_SWEATER = new SweaterType(null, Ingredient.EMPTY).setRegistryName(new ResourceLocation(Environmental.MODID, "empty"));
+	SweaterType EMPTY_SWEATER = new SweaterType(null, Ingredient.EMPTY).setRegistryName(new ResourceLocation(Environmental.MOD_ID, "empty"));
 
 	/**
 	 * The default backpack that exists if there are no other backpack types to choose from.
 	 */
-	BackpackType BROWN_BACKPACK = new BackpackType(null, Ingredient.EMPTY).setRegistryName(new ResourceLocation(Environmental.MODID, "brown"));
+	BackpackType BROWN_BACKPACK = new BackpackType(null, Ingredient.EMPTY).setRegistryName(new ResourceLocation(Environmental.MOD_ID, "brown"));
 
 	/**
 	 * The id for the ghost slabfish. Used for custom functionality.
 	 */
-	ResourceLocation GHOST = new ResourceLocation(Environmental.MODID, "ghost");
+	ResourceLocation GHOST = new ResourceLocation(Environmental.MOD_ID, "ghost");
 
 	/**
 	 * Fetches the slabfish manager for the specified side.

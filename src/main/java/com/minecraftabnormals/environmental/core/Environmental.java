@@ -35,20 +35,20 @@ import net.minecraftforge.registries.RegistryBuilder;
 
 import java.util.Optional;
 
-@Mod(Environmental.MODID)
-@Mod.EventBusSubscriber(modid = Environmental.MODID)
+@Mod(Environmental.MOD_ID)
+@Mod.EventBusSubscriber(modid = Environmental.MOD_ID)
 public class Environmental {
 	public static final String NETWORK_PROTOCOL = "1";
-	public static final String MODID = "environmental";
-	public static final RegistryHelper REGISTRY_HELPER = new RegistryHelper(MODID);
+	public static final String MOD_ID = "environmental";
+	public static final RegistryHelper REGISTRY_HELPER = new RegistryHelper(MOD_ID);
 
-	public static final SimpleChannel PLAY = NetworkRegistry.ChannelBuilder.named(new ResourceLocation(MODID, "play"))
+	public static final SimpleChannel PLAY = NetworkRegistry.ChannelBuilder.named(new ResourceLocation(MOD_ID, "play"))
 			.networkProtocolVersion(() -> NETWORK_PROTOCOL)
 			.clientAcceptedVersions(NETWORK_PROTOCOL::equals)
 			.serverAcceptedVersions(NETWORK_PROTOCOL::equals)
 			.simpleChannel();
 
-	public static final SimpleChannel LOGIN = NetworkRegistry.ChannelBuilder.named(new ResourceLocation(MODID, "login"))
+	public static final SimpleChannel LOGIN = NetworkRegistry.ChannelBuilder.named(new ResourceLocation(MOD_ID, "login"))
 			.networkProtocolVersion(() -> NETWORK_PROTOCOL)
 			.clientAcceptedVersions(NETWORK_PROTOCOL::equals)
 			.serverAcceptedVersions(NETWORK_PROTOCOL::equals)
@@ -122,15 +122,15 @@ public class Environmental {
 	}
 
 	private void registerRegistries(RegistryEvent.NewRegistry event) {
-		new RegistryBuilder<SlabfishCondition.Factory>().setName(new ResourceLocation(MODID, "slabfish_condition")).setType(SlabfishCondition.Factory.class).setDefaultKey(new ResourceLocation(MODID, "impossible")).create();
+		new RegistryBuilder<SlabfishCondition.Factory>().setName(new ResourceLocation(MOD_ID, "slabfish_condition")).setType(SlabfishCondition.Factory.class).setDefaultKey(new ResourceLocation(MOD_ID, "impossible")).create();
 	}
 
 	private void stitchTextures(TextureStitchEvent.Pre event) {
 		AtlasTexture texture = event.getMap();
 		if (PlayerContainer.LOCATION_BLOCKS_TEXTURE.equals(texture.getTextureLocation())) {
-			event.addSprite(new ResourceLocation(Environmental.MODID, "item/slabfish_sweater_slot"));
-			event.addSprite(new ResourceLocation(Environmental.MODID, "item/slabfish_backpack_slot"));
-			event.addSprite(new ResourceLocation(Environmental.MODID, "item/slabfish_backpack_type_slot"));
+			event.addSprite(new ResourceLocation(Environmental.MOD_ID, "item/slabfish_sweater_slot"));
+			event.addSprite(new ResourceLocation(Environmental.MOD_ID, "item/slabfish_backpack_slot"));
+			event.addSprite(new ResourceLocation(Environmental.MOD_ID, "item/slabfish_backpack_type_slot"));
 		}
 	}
 

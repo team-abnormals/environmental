@@ -29,7 +29,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
 
-@EventBusSubscriber(modid = Environmental.MODID)
+@EventBusSubscriber(modid = Environmental.MOD_ID)
 public class WandererBootsItem extends ExplorerArmorItem {
 	public static final String NBT_TAG = "WandererBootsUses";
 

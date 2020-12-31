@@ -34,8 +34,8 @@ import java.util.Random;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class EnvironmentalVillagers {
-	public static final DeferredRegister<VillagerProfession> PROFESSIONS = DeferredRegister.create(ForgeRegistries.PROFESSIONS, Environmental.MODID);
-	public static final DeferredRegister<PointOfInterestType> POI_TYPES = DeferredRegister.create(ForgeRegistries.POI_TYPES, Environmental.MODID);
+	public static final DeferredRegister<VillagerProfession> PROFESSIONS = DeferredRegister.create(ForgeRegistries.PROFESSIONS, Environmental.MOD_ID);
+	public static final DeferredRegister<PointOfInterestType> POI_TYPES = DeferredRegister.create(ForgeRegistries.POI_TYPES, Environmental.MOD_ID);
 
 	public static final RegistryObject<PointOfInterestType> KILN = POI_TYPES.register("kiln", () -> new PointOfInterestType("ceramist", PointOfInterestType.getAllStates(EnvironmentalBlocks.KILN.get()), 1, 1));
 	public static final RegistryObject<PointOfInterestType> SAWMILL = POI_TYPES.register("sawmill", () -> new PointOfInterestType("carpenter", PointOfInterestType.getAllStates(EnvironmentalBlocks.SAWMILL.get()), 1, 1));
@@ -50,14 +50,14 @@ public class EnvironmentalVillagers {
 		registerVillagerType(createType("blossom"), EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), EnvironmentalBiomes.BLOSSOM_HILLS.getKey(), EnvironmentalBiomes.BLOSSOM_HIGHLANDS.getKey(), EnvironmentalBiomes.BLOSSOM_VALLEYS.getKey());
 		registerVillagerType(createType("forest"), Biomes.FOREST, Biomes.BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS, Biomes.TALL_BIRCH_FOREST, Biomes.TALL_BIRCH_HILLS);
 
-		GiveHeroGiftsTask.GIFTS.put(CERAMIST.get(), new ResourceLocation(Environmental.MODID, "gameplay/hero_of_the_village/ceramist_gift"));
-		GiveHeroGiftsTask.GIFTS.put(CARPENTER.get(), new ResourceLocation(Environmental.MODID, "gameplay/hero_of_the_village/carpenter_gift"));
+		GiveHeroGiftsTask.GIFTS.put(CERAMIST.get(), new ResourceLocation(Environmental.MOD_ID, "gameplay/hero_of_the_village/ceramist_gift"));
+		GiveHeroGiftsTask.GIFTS.put(CARPENTER.get(), new ResourceLocation(Environmental.MOD_ID, "gameplay/hero_of_the_village/carpenter_gift"));
 
 		setupVillagerHouses();
 	}
 
 	private static VillagerType createType(String type) {
-		return VillagerType.register(Environmental.MODID + ":" + type);
+		return VillagerType.register(Environmental.MOD_ID + ":" + type);
 	}
 
 	private static void registerVillagerType(VillagerType type, RegistryKey<Biome>... biomes) {
@@ -96,7 +96,7 @@ public class EnvironmentalVillagers {
 	}
 
 	private static void addVillagerHouse(String type, String biome, int weight) {
-		addToPool(new ResourceLocation("village/" + biome + "/houses"), new ResourceLocation(Environmental.MODID, "village/" + type + "_house_" + biome + "_1"), 5);
+		addToPool(new ResourceLocation("village/" + biome + "/houses"), new ResourceLocation(Environmental.MOD_ID, "village/" + type + "_house_" + biome + "_1"), 5);
 	}
 
 	private static void addToPool(ResourceLocation pool, ResourceLocation toAdd, int weight) {

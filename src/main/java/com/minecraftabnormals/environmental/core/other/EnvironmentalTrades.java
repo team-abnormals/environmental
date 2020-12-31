@@ -19,7 +19,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 
-@Mod.EventBusSubscriber(modid = Environmental.MODID)
+@Mod.EventBusSubscriber(modid = Environmental.MOD_ID)
 public class EnvironmentalTrades {
 
 	@SubscribeEvent

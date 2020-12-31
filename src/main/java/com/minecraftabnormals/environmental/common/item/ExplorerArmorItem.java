@@ -19,8 +19,8 @@ public class ExplorerArmorItem extends DyeableArmorItem {
 	}
 
 	public static String getCorrectTexture(String armor, String type) {
-		if ("overlay".equals(type)) return Environmental.MODID + ":textures/models/armor/" + armor + "_overlay.png";
-		else return Environmental.MODID + ":textures/models/armor/" + armor + ".png";
+		if ("overlay".equals(type)) return Environmental.MOD_ID + ":textures/models/armor/" + armor + "_overlay.png";
+		else return Environmental.MOD_ID + ":textures/models/armor/" + armor + ".png";
 	}
 
 	@Override

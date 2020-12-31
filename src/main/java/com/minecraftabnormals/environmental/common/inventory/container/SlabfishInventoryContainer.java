@@ -20,9 +20,9 @@ import javax.annotation.Nullable;
 public class SlabfishInventoryContainer extends Container {
 
 	private static final ResourceLocation[] SLOT_INDEX_NAMES = {
-			new ResourceLocation(Environmental.MODID, "item/slabfish_sweater_slot"),
-			new ResourceLocation(Environmental.MODID, "item/slabfish_backpack_slot"),
-			new ResourceLocation(Environmental.MODID, "item/slabfish_backpack_type_slot")
+			new ResourceLocation(Environmental.MOD_ID, "item/slabfish_sweater_slot"),
+			new ResourceLocation(Environmental.MOD_ID, "item/slabfish_backpack_slot"),
+			new ResourceLocation(Environmental.MOD_ID, "item/slabfish_backpack_type_slot")
 	};
 
 	private final IInventory slabfishInventory;

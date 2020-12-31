@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-@Mod.EventBusSubscriber(modid = Environmental.MODID)
+@Mod.EventBusSubscriber(modid = Environmental.MOD_ID)
 public class EnvironmentalBiomeFeatures {
 
 	@SubscribeEvent

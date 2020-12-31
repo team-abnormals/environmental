@@ -5,7 +5,7 @@ import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import org.apache.commons.lang3.tuple.Pair;
 
-@EventBusSubscriber(modid = Environmental.MODID)
+@EventBusSubscriber(modid = Environmental.MOD_ID)
 public class EnvironmentalConfig {
 
 	public static class Common {

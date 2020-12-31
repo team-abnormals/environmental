@@ -17,7 +17,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class SlabfishInventoryScreen extends ContainerScreen<SlabfishInventoryContainer> {
 
-	private static final ResourceLocation SLABFISH_GUI_TEXTURE = new ResourceLocation(Environmental.MODID, "textures/gui/container/slabfish.png");
+	private static final ResourceLocation SLABFISH_GUI_TEXTURE = new ResourceLocation(Environmental.MOD_ID, "textures/gui/container/slabfish.png");
 	private final SlabfishManager slabfishManager;
 	private final SlabfishEntity slabfish;
 

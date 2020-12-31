@@ -61,7 +61,7 @@ public class EnvironmentalArmorMaterial implements IArmorMaterial {
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public String getName() {
-		return Environmental.MODID + ":" + this.name;
+		return Environmental.MOD_ID + ":" + this.name;
 	}
 
 	@Override

@@ -20,7 +20,7 @@ import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
 public class SawmillScreen extends ContainerScreen<SawmillContainer> {
-	private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(Environmental.MODID, "textures/gui/container/sawmill.png");
+	private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(Environmental.MOD_ID, "textures/gui/container/sawmill.png");
 	private float sliderProgress;
 	private boolean clickedOnSroll;
 	private int recipeIndexOffset;

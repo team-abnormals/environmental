@@ -26,10 +26,10 @@ public class EnvironmentalTags {
 	}
 
 	private static ITag.INamedTag<Item> createWrapperItemTag(String tagName) {
-		return ItemTags.createOptional(new ResourceLocation(Environmental.MODID, tagName));
+		return ItemTags.createOptional(new ResourceLocation(Environmental.MOD_ID, tagName));
 	}
 
 	private static ITag.INamedTag<EntityType<?>> createWrapperEntityTag(String tagName) {
-		return EntityTypeTags.createOptional(new ResourceLocation(Environmental.MODID, tagName));
+		return EntityTypeTags.createOptional(new ResourceLocation(Environmental.MOD_ID, tagName));
 	}
 }

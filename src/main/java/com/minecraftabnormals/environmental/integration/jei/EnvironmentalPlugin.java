@@ -33,11 +33,11 @@ import java.util.Map;
 @JeiPlugin
 public class EnvironmentalPlugin implements IModPlugin {
 
-	public static final ResourceLocation RECIPE_GUI_ENVIRONMENTAL = new ResourceLocation(Environmental.MODID, "textures/gui/jei.png");
+	public static final ResourceLocation RECIPE_GUI_ENVIRONMENTAL = new ResourceLocation(Environmental.MOD_ID, "textures/gui/jei.png");
 
 	@Override
 	public ResourceLocation getPluginUid() {
-		return new ResourceLocation(Environmental.MODID, Environmental.MODID);
+		return new ResourceLocation(Environmental.MOD_ID, Environmental.MOD_ID);
 	}
 
 	@Override

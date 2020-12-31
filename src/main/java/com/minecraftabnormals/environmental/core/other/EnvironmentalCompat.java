@@ -43,7 +43,7 @@ public class EnvironmentalCompat {
 	}
 
 	public static void registerLootInjectors() {
-		LootInjectionRegistry.LootInjector injector = new LootInjectionRegistry.LootInjector(Environmental.MODID);
+		LootInjectionRegistry.LootInjector injector = new LootInjectionRegistry.LootInjector(Environmental.MOD_ID);
 		injector.addLootInjection(injector.buildLootPool("shipwreck_supply", 1, 0), LootTables.CHESTS_SHIPWRECK_SUPPLY);
 		injector.addLootInjection(injector.buildLootPool("simple_dungeon", 1, 0), LootTables.CHESTS_SIMPLE_DUNGEON);
 	}

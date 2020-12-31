@@ -21,7 +21,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TranslationTextComponent;
 
 public class BakingCategory implements IRecipeCategory<BakingRecipe> {
-	public static final ResourceLocation BAKING = new ResourceLocation(Environmental.MODID, "baking");
+	public static final ResourceLocation BAKING = new ResourceLocation(Environmental.MOD_ID, "baking");
 	private final IDrawableAnimated animatedFlame;
 	private final IDrawableAnimated arrow;
 
@@ -35,7 +35,7 @@ public class BakingCategory implements IRecipeCategory<BakingRecipe> {
 	public BakingCategory(IGuiHelper guiHelper) {
 		this.background = guiHelper.createDrawable(EnvironmentalPlugin.RECIPE_GUI_ENVIRONMENTAL, 0, 114, 82, 54);
 		this.icon = guiHelper.createDrawableIngredient(new ItemStack(EnvironmentalBlocks.KILN.get()));
-		this.localizedName = I18n.format("gui." + Environmental.MODID + ".category.baking");
+		this.localizedName = I18n.format("gui." + Environmental.MOD_ID + ".category.baking");
 		IDrawableStatic staticFlame = guiHelper.createDrawable(EnvironmentalPlugin.RECIPE_GUI_ENVIRONMENTAL, 82, 114, 14, 14);
 		this.animatedFlame = guiHelper.createAnimatedDrawable(staticFlame, 300, IDrawableAnimated.StartDirection.TOP, true);
 		this.arrow = guiHelper.drawableBuilder(EnvironmentalPlugin.RECIPE_GUI_ENVIRONMENTAL, 82, 128, 24, 17).buildAnimated(100, IDrawableAnimated.StartDirection.LEFT, false);

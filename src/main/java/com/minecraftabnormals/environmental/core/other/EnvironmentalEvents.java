@@ -59,7 +59,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 
-@EventBusSubscriber(modid = Environmental.MODID)
+@EventBusSubscriber(modid = Environmental.MOD_ID)
 public class EnvironmentalEvents {
 
 	@SubscribeEvent

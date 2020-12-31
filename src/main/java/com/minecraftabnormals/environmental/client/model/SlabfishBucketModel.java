@@ -33,7 +33,7 @@ public class SlabfishBucketModel implements IBakedModel {
 	private final ItemOverrideList overrideList;
 
 	public SlabfishBucketModel(ModelManager modelManager) {
-		this.model = modelManager.getModel(new ResourceLocation(Environmental.MODID, "models/item/slabfish_bucket/swamp"));
+		this.model = modelManager.getModel(new ResourceLocation(Environmental.MOD_ID, "models/item/slabfish_bucket/swamp"));
 		this.overrideList = new Overrides(modelManager);
 	}
 
@@ -80,7 +80,7 @@ public class SlabfishBucketModel implements IBakedModel {
 
 		private Overrides(ModelManager modelManager) {
 			this.modelManager = modelManager;
-			this.model = modelManager.getModel(new ResourceLocation(Environmental.MODID, "item/slabfish_bucket/swamp"));
+			this.model = modelManager.getModel(new ResourceLocation(Environmental.MOD_ID, "item/slabfish_bucket/swamp"));
 			this.locationCache = new HashMap<>();
 			this.modelLocations = new HashMap<>();
 			for (ResourceLocation location : Minecraft.getInstance().getResourceManager().getAllResourceLocations("models/item/slabfish_bucket", s -> s.endsWith(".json")))

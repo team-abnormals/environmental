@@ -33,9 +33,9 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.OptionalInt;
 
-@Mod.EventBusSubscriber(modid = Environmental.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = Environmental.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class EnvironmentalFeatures {
-	public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, Environmental.MODID);
+	public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, Environmental.MOD_ID);
 
 	public static final RegistryObject<Feature<BlockClusterFeatureConfig>> DIRECTIONAL_FLOWER = FEATURES.register("directional_flower", () -> new DirectionalFlowersFeature<>(BlockClusterFeatureConfig.field_236587_a_));
 	public static final RegistryObject<Feature<NoFeatureConfig>> FALLEN_LEAVES = FEATURES.register("fallen_leaves", () -> new FallenLeavesFeature(NoFeatureConfig.field_236558_a_));
@@ -227,7 +227,7 @@ public class EnvironmentalFeatures {
 		public static final ConfiguredFeature<?, ?> LAKE_WATER_MARSH = Feature.LAKE.withConfiguration(new BlockStateFeatureConfig(Blocks.WATER.getDefaultState())).withPlacement(Placement.WATER_LAKE.configure(new ChanceConfig(48)));
 
 		private static <FC extends IFeatureConfig> void register(String name, ConfiguredFeature<FC, ?> configuredFeature) {
-			Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(Environmental.MODID, name), configuredFeature);
+			Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(Environmental.MOD_ID, name), configuredFeature);
 		}
 
 		public static void registerConfiguredFeatures() {

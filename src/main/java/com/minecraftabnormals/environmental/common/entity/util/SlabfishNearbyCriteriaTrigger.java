@@ -19,7 +19,7 @@ import net.minecraft.util.ResourceLocation;
  */
 public class SlabfishNearbyCriteriaTrigger extends AbstractCriterionTrigger<SlabfishNearbyCriteriaTrigger.Instance> {
 
-	private static final ResourceLocation ID = new ResourceLocation(Environmental.MODID, "slabfish");
+	private static final ResourceLocation ID = new ResourceLocation(Environmental.MOD_ID, "slabfish");
 
 	public ResourceLocation getId() {
 		return ID;

@@ -10,7 +10,7 @@ import net.minecraftforge.eventbus.api.Event.Result;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
-@EventBusSubscriber(modid = Environmental.MODID, value = Dist.CLIENT)
+@EventBusSubscriber(modid = Environmental.MOD_ID, value = Dist.CLIENT)
 public class EnvironmentalClientEvents {
 
 	@SubscribeEvent

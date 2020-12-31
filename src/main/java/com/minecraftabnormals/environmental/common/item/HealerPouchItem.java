@@ -25,7 +25,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import javax.annotation.Nullable;
 import java.util.List;
 
-@EventBusSubscriber(modid = Environmental.MODID)
+@EventBusSubscriber(modid = Environmental.MOD_ID)
 public class HealerPouchItem extends ExplorerArmorItem {
 	private static final String NBT_TAG = "HealerPouchUses";
 

@@ -14,7 +14,7 @@ public enum DeerCoatTypes {
 	private static final DeerCoatTypes[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(DeerCoatTypes::getId)).toArray(DeerCoatTypes[]::new);
 
 	private final int id;
-	private final LazyValue<ResourceLocation> textureLocation = new LazyValue<>(() -> new ResourceLocation(Environmental.MODID, "textures/entity/deer/deer_markings_" + this.name().toLowerCase() + ".png"));
+	private final LazyValue<ResourceLocation> textureLocation = new LazyValue<>(() -> new ResourceLocation(Environmental.MOD_ID, "textures/entity/deer/deer_markings_" + this.name().toLowerCase() + ".png"));
 
 	DeerCoatTypes(int id) {
 		this.id = id;

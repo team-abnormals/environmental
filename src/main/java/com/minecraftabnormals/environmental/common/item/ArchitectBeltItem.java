@@ -30,7 +30,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
 
-@EventBusSubscriber(modid = Environmental.MODID)
+@EventBusSubscriber(modid = Environmental.MOD_ID)
 public class ArchitectBeltItem extends ExplorerArmorItem {
 	private static final String NBT_TAG = "ArchitectBeltUses";
 

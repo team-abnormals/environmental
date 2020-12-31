@@ -21,7 +21,7 @@ public class KoiRenderer extends MobRenderer<KoiEntity, KoiModel<KoiEntity>> {
 
 	@Override
 	public ResourceLocation getEntityTexture(KoiEntity entity) {
-		return new ResourceLocation(Environmental.MODID, "textures/entity/koi.png");
+		return new ResourceLocation(Environmental.MOD_ID, "textures/entity/koi.png");
 	}
 
 	@Override
