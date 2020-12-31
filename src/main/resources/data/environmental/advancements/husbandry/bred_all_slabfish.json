@@ -5,10 +5,10 @@
       "item": "minecraft:tropical_fish"
     },
     "title": {
-      "translate": "advancements.husbandry.breed_all_slabfish.title"
+      "translate": "advancements.husbandry.bred_all_slabfish.title"
     },
     "description": {
-      "translate": "advancements.husbandry.breed_all_slabfish.description"
+      "translate": "advancements.husbandry.bred_all_slabfish.description"
     },
     "frame": "challenge",
     "show_toast": true,
