@@ -152,17 +152,18 @@ public class EnvironmentalFeatures {
 		public static final ConfiguredFeature<?, ?> PATCH_CATTAILS = EnvironmentalFeatures.CATTAILS.get().withConfiguration(new NoFeatureConfig()).withPlacement(Features.Placements.PATCH_PLACEMENT.func_242731_b((12)));
 		public static final ConfiguredFeature<?, ?> PATCH_TALL_DEAD_BUSH = Feature.RANDOM_PATCH.withConfiguration(Configs.TALL_DEAD_BUSH_CONFIG).withPlacement(Features.Placements.PATCH_PLACEMENT.func_242731_b((1)));
 		public static final ConfiguredFeature<?, ?> PATCH_TALL_DEAD_BUSH_MESA = Feature.RANDOM_PATCH.withConfiguration(Configs.TALL_DEAD_BUSH_CONFIG).withPlacement(Features.Placements.PATCH_PLACEMENT.func_242731_b((6)));
-		public static final ConfiguredFeature<?, ?> PATCH_WHITE_DELPHINIUM = Feature.RANDOM_PATCH.withConfiguration(Configs.WHITE_DELPHINIUM);
-		public static final ConfiguredFeature<?, ?> PATCH_PINK_DELPHINIUM = Feature.RANDOM_PATCH.withConfiguration(Configs.PINK_DELPHINIUM);
-		public static final ConfiguredFeature<?, ?> PATCH_PURPLE_DELPHINIUM = Feature.RANDOM_PATCH.withConfiguration(Configs.PURPLE_DELPHINIUM);
-		public static final ConfiguredFeature<?, ?> PATCH_BLUE_DELPHINIUM = Feature.RANDOM_PATCH.withConfiguration(Configs.BLUE_DELPHINIUM);
-		public static final ConfiguredFeature<?, ?> PATCH_DELPHINIUMS = Feature.SIMPLE_RANDOM_SELECTOR.withConfiguration(new SingleRandomFeature(ImmutableList.of(() -> PATCH_WHITE_DELPHINIUM, () -> PATCH_PINK_DELPHINIUM, () -> PATCH_PURPLE_DELPHINIUM, () -> PATCH_BLUE_DELPHINIUM))).withPlacement(Features.Placements.PATCH_PLACEMENT.func_242731_b(12));
 		public static final ConfiguredFeature<?, ?> PATCH_GIANT_TALL_GRASS_PLAINS = Feature.RANDOM_PATCH.withConfiguration(Configs.GIANT_TALL_GRASS_CONFIG).withPlacement(Features.Placements.VEGETATION_PLACEMENT).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242731_b(1);
 		public static final ConfiguredFeature<?, ?> PATCH_GIANT_TALL_GRASS_SAVANNA = Feature.RANDOM_PATCH.withConfiguration(Configs.GIANT_TALL_GRASS_CONFIG).withPlacement(Features.Placements.VEGETATION_PLACEMENT).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242731_b(3);
 		public static final ConfiguredFeature<?, ?> PATCH_GIANT_TALL_GRASS_JUNGLE = Feature.RANDOM_PATCH.withConfiguration(Configs.GIANT_TALL_GRASS_CONFIG).withPlacement(Features.Placements.VEGETATION_PLACEMENT).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242731_b(4);
 		public static final ConfiguredFeature<?, ?> PATCH_GIANT_TALL_GRASS_MARSH = Feature.RANDOM_PATCH.withConfiguration(Configs.GIANT_TALL_GRASS_CONFIG).withPlacement(Features.Placements.VEGETATION_PLACEMENT).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242731_b(50);
 		public static final ConfiguredFeature<?, ?> PATCH_SUGAR_CANE_BLOSSOM = Feature.RANDOM_PATCH.withConfiguration(Features.Configs.SUGAR_CANE_PATCH_CONFIG).withPlacement(Features.Placements.PATCH_PLACEMENT.func_242731_b(12));
 		public static final ConfiguredFeature<?, ?> PATCH_GRASS_BLOSSOM_WOODS = Feature.RANDOM_PATCH.withConfiguration(Features.Configs.GRASS_PATCH_CONFIG).withPlacement(Features.Placements.PATCH_PLACEMENT.func_242731_b(8));
+		public static final ConfiguredFeature<?, ?> PATCH_WHITE_DELPHINIUM = Feature.RANDOM_PATCH.withConfiguration(Configs.WHITE_DELPHINIUM);
+		public static final ConfiguredFeature<?, ?> PATCH_PINK_DELPHINIUM = Feature.RANDOM_PATCH.withConfiguration(Configs.PINK_DELPHINIUM);
+		public static final ConfiguredFeature<?, ?> PATCH_PURPLE_DELPHINIUM = Feature.RANDOM_PATCH.withConfiguration(Configs.PURPLE_DELPHINIUM);
+		public static final ConfiguredFeature<?, ?> PATCH_BLUE_DELPHINIUM = Feature.RANDOM_PATCH.withConfiguration(Configs.BLUE_DELPHINIUM);
+		public static final ConfiguredFeature<?, ?> PATCH_DELPHINIUMS = Feature.SIMPLE_RANDOM_SELECTOR.withConfiguration(new SingleRandomFeature(ImmutableList.of(() -> PATCH_WHITE_DELPHINIUM, () -> PATCH_PINK_DELPHINIUM, () -> PATCH_PURPLE_DELPHINIUM, () -> PATCH_BLUE_DELPHINIUM))).withPlacement(Features.Placements.PATCH_PLACEMENT.func_242731_b(12));
+		public static final ConfiguredFeature<?, ?> PATCH_BIRD_OF_PARADISE = Feature.RANDOM_PATCH.withConfiguration(Configs.BIRD_OF_PARADISE_CONFIG).withPlacement(Features.Placements.PATCH_PLACEMENT.func_242731_b(5));
 
 		public static final ConfiguredFeature<?, ?> FLOWER_BLUE_ORCHID = Feature.FLOWER.withConfiguration(Configs.BLUE_ORCHID_CONFIG).withPlacement(Features.Placements.VEGETATION_PLACEMENT).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242731_b(1);
 		public static final ConfiguredFeature<?, ?> FLOWER_CORNFLOWER = Feature.FLOWER.withConfiguration(Configs.CORNFLOWER_CONFIG).withPlacement(Features.Placements.VEGETATION_PLACEMENT).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242731_b(1);
@@ -173,7 +174,6 @@ public class EnvironmentalFeatures {
 		public static final ConfiguredFeature<?, ?> FLOWER_ALLIUM = Feature.FLOWER.withConfiguration(Configs.ALLIUM_CONFIG).withPlacement(Features.Placements.VEGETATION_PLACEMENT).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242731_b(3);
 		public static final ConfiguredFeature<?, ?> FLOWER_VIOLET = Feature.FLOWER.withConfiguration(Configs.VIOLET_CONFIG).withPlacement(Features.Placements.VEGETATION_PLACEMENT).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242731_b(4);
 		public static final ConfiguredFeature<?, ?> FLOWER_BLUEBELL = Feature.FLOWER.withConfiguration(Configs.BLUEBELL_CONFIG).withPlacement(Features.Placements.VEGETATION_PLACEMENT).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242731_b(3);
-		public static final ConfiguredFeature<?, ?> FLOWER_BIRD_OF_PARADISE = Feature.FLOWER.withConfiguration(Configs.BIRD_OF_PARADISE_CONFIG).withPlacement(Features.Placements.VEGETATION_PLACEMENT).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242731_b(5);
 		public static final ConfiguredFeature<?, ?> FLOWER_YELLOW_HIBISCUS = Feature.FLOWER.withConfiguration(Configs.YELLOW_HIBISCUS_CONFIG).withPlacement(Features.Placements.VEGETATION_PLACEMENT).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242731_b(1);
 		public static final ConfiguredFeature<?, ?> FLOWER_ORANGE_HIBISCUS = Feature.FLOWER.withConfiguration(Configs.ORANGE_HIBISCUS_CONFIG).withPlacement(Features.Placements.VEGETATION_PLACEMENT).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242731_b(1);
 		public static final ConfiguredFeature<?, ?> FLOWER_RED_HIBISCUS = Feature.FLOWER.withConfiguration(Configs.RED_HIBISCUS_CONFIG).withPlacement(Features.Placements.VEGETATION_PLACEMENT).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242731_b(1);
@@ -242,17 +242,18 @@ public class EnvironmentalFeatures {
 			register("patch_cattails_dense", PATCH_CATTAILS_DENSE);
 			register("patch_tall_dead_bush", PATCH_TALL_DEAD_BUSH);
 			register("patch_tall_dead_bush_mesa", PATCH_TALL_DEAD_BUSH_MESA);
-			register("patch_white_delphinium", PATCH_WHITE_DELPHINIUM);
-			register("patch_pink_delphinium", PATCH_PINK_DELPHINIUM);
-			register("patch_purple_delphinium", PATCH_PURPLE_DELPHINIUM);
-			register("patch_blue_delphinium", PATCH_BLUE_DELPHINIUM);
-			register("patch_delphiniums", PATCH_DELPHINIUMS);
 			register("patch_giant_tall_grass_plains", PATCH_GIANT_TALL_GRASS_PLAINS);
 			register("patch_giant_tall_grass_savanna", PATCH_GIANT_TALL_GRASS_SAVANNA);
 			register("patch_giant_tall_grass_jungle", PATCH_GIANT_TALL_GRASS_JUNGLE);
 			register("patch_giant_tall_grass_marsh", PATCH_GIANT_TALL_GRASS_MARSH);
 			register("patch_sugar_cane_blossom", PATCH_SUGAR_CANE_BLOSSOM);
 			register("patch_grass_blossom_woods", PATCH_GRASS_BLOSSOM_WOODS);
+			register("patch_white_delphinium", PATCH_WHITE_DELPHINIUM);
+			register("patch_pink_delphinium", PATCH_PINK_DELPHINIUM);
+			register("patch_purple_delphinium", PATCH_PURPLE_DELPHINIUM);
+			register("patch_blue_delphinium", PATCH_BLUE_DELPHINIUM);
+			register("patch_delphiniums", PATCH_DELPHINIUMS);
+			register("patch_bird_of_paradise", PATCH_BIRD_OF_PARADISE);
 
 			register("flower_blue_orchid", FLOWER_BLUE_ORCHID);
 			register("flower_cornflower", FLOWER_CORNFLOWER);
@@ -263,7 +264,6 @@ public class EnvironmentalFeatures {
 			register("flower_allium", FLOWER_ALLIUM);
 			register("flower_violet", FLOWER_VIOLET);
 			register("flower_bluebell", FLOWER_BLUEBELL);
-			register("flower_bird_of_paradise", FLOWER_BIRD_OF_PARADISE);
 			register("flower_yellow_hibiscus", FLOWER_YELLOW_HIBISCUS);
 			register("flower_orange_hibiscus", FLOWER_ORANGE_HIBISCUS);
 			register("flower_red_hibiscus", FLOWER_RED_HIBISCUS);

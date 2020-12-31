@@ -127,7 +127,7 @@ public class EnvironmentalBiomeFeatures {
 		if (event.getCategory() == Biome.Category.JUNGLE) {
 			if (EnvironmentalConfig.COMMON.generateGiantTallGrass.get())
 				generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_GIANT_TALL_GRASS_JUNGLE);
-			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_BIRD_OF_PARADISE);
+			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_BIRD_OF_PARADISE);
 
 			if (DataUtil.matchesKeys(biome, Biomes.JUNGLE_EDGE, Biomes.MODIFIED_JUNGLE_EDGE))
 				generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_YELLOW_HIBISCUS);
