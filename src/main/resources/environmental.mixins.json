@@ -12,6 +12,7 @@
     "LilyPadBlockMixin",
     "LivingEntityMixin",
     "MobEntityMixin",
+    "MyceliumBlockMixin",
     "PlayerEntityMixin",
     "WitherSkeletonEntityMixin"
   ],
