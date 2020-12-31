@@ -17,7 +17,6 @@
     "WitherSkeletonEntityMixin"
   ],
   "client": [
-    "BiomeMixin",
     "ClientRecipeBookMixin"
   ],
   "injectors": {
