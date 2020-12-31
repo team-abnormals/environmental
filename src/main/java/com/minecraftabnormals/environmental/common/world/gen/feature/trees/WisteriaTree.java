@@ -1,6 +1,5 @@
 package com.minecraftabnormals.environmental.common.world.gen.feature.trees;
 
-import com.minecraftabnormals.environmental.common.world.EnvironmentalFeatureConfigs;
 import com.minecraftabnormals.environmental.common.world.gen.util.WisteriaColor;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalFeatures;
 import net.minecraft.block.trees.Tree;
@@ -21,13 +20,13 @@ public class WisteriaTree extends Tree {
 		switch (color) {
 			case PURPLE:
 			default:
-				return beehive ? EnvironmentalFeatureConfigs.PURPLE_WISTERIA_TREE_WITH_MORE_BEEHIVES_CONFIG : EnvironmentalFeatureConfigs.PURPLE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG;
+				return beehive ? EnvironmentalFeatures.Configs.PURPLE_WISTERIA_TREE_WITH_MORE_BEEHIVES_CONFIG : EnvironmentalFeatures.Configs.PURPLE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG;
 			case WHITE:
-				return beehive ? EnvironmentalFeatureConfigs.WHITE_WISTERIA_TREE_WITH_MORE_BEEHIVES_CONFIG : EnvironmentalFeatureConfigs.WHITE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG;
+				return beehive ? EnvironmentalFeatures.Configs.WHITE_WISTERIA_TREE_WITH_MORE_BEEHIVES_CONFIG : EnvironmentalFeatures.Configs.WHITE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG;
 			case PINK:
-				return beehive ? EnvironmentalFeatureConfigs.PINK_WISTERIA_TREE_WITH_MORE_BEEHIVES_CONFIG : EnvironmentalFeatureConfigs.PINK_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG;
+				return beehive ? EnvironmentalFeatures.Configs.PINK_WISTERIA_TREE_WITH_MORE_BEEHIVES_CONFIG : EnvironmentalFeatures.Configs.PINK_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG;
 			case BLUE:
-				return beehive ? EnvironmentalFeatureConfigs.BLUE_WISTERIA_TREE_WITH_MORE_BEEHIVES_CONFIG : EnvironmentalFeatureConfigs.BLUE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG;
+				return beehive ? EnvironmentalFeatures.Configs.BLUE_WISTERIA_TREE_WITH_MORE_BEEHIVES_CONFIG : EnvironmentalFeatures.Configs.BLUE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG;
 		}
 	}
 

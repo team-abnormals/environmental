@@ -4,25 +4,15 @@ import com.minecraftabnormals.abnormals_core.core.util.registry.EntitySubRegistr
 import com.minecraftabnormals.environmental.client.render.*;
 import com.minecraftabnormals.environmental.common.entity.*;
 import com.minecraftabnormals.environmental.core.Environmental;
-import com.minecraftabnormals.environmental.core.EnvironmentalConfig;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.MobSpawnInfo;
 import net.minecraft.world.gen.Heightmap;
-import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
-import net.minecraftforge.common.world.MobSpawnInfoBuilder;
-import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.registries.ForgeRegistries;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @EventBusSubscriber(modid = Environmental.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class EnvironmentalEntities {

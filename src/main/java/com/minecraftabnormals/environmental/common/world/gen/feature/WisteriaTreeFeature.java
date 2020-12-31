@@ -1,7 +1,7 @@
 package com.minecraftabnormals.environmental.common.world.gen.feature;
 
-import com.minecraftabnormals.environmental.common.world.EnvironmentalFeatureConfigs;
 import com.minecraftabnormals.environmental.common.world.gen.util.WisteriaTreeUtils;
+import com.minecraftabnormals.environmental.core.registry.EnvironmentalFeatures;
 import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
 import net.minecraft.tags.BlockTags;
@@ -27,21 +27,21 @@ public class WisteriaTreeFeature extends Feature<BaseTreeFeatureConfig> {
 	@Override
 	public boolean generate(ISeedReader world, ChunkGenerator generator, Random random, BlockPos pos, BaseTreeFeatureConfig config) {
 
-		if (config.leavesProvider.getBlockState(random, pos) == EnvironmentalFeatureConfigs.BLUE_WISTERIA_LEAVES) {
-			VINE_UPPER = () -> EnvironmentalFeatureConfigs.BLUE_HANGING_WISTERIA_LEAVES_TOP;
-			VINE_LOWER = () -> EnvironmentalFeatureConfigs.BLUE_HANGING_WISTERIA_LEAVES_BOTTOM;
+		if (config.leavesProvider.getBlockState(random, pos) == EnvironmentalFeatures.States.BLUE_WISTERIA_LEAVES) {
+			VINE_UPPER = () -> EnvironmentalFeatures.States.BLUE_HANGING_WISTERIA_LEAVES_TOP;
+			VINE_LOWER = () -> EnvironmentalFeatures.States.BLUE_HANGING_WISTERIA_LEAVES_BOTTOM;
 		}
-		if (config.leavesProvider.getBlockState(random, pos) == EnvironmentalFeatureConfigs.PINK_WISTERIA_LEAVES) {
-			VINE_UPPER = () -> EnvironmentalFeatureConfigs.PINK_HANGING_WISTERIA_LEAVES_TOP;
-			VINE_LOWER = () -> EnvironmentalFeatureConfigs.PINK_HANGING_WISTERIA_LEAVES_BOTTOM;
+		if (config.leavesProvider.getBlockState(random, pos) == EnvironmentalFeatures.States.PINK_WISTERIA_LEAVES) {
+			VINE_UPPER = () -> EnvironmentalFeatures.States.PINK_HANGING_WISTERIA_LEAVES_TOP;
+			VINE_LOWER = () -> EnvironmentalFeatures.States.PINK_HANGING_WISTERIA_LEAVES_BOTTOM;
 		}
-		if (config.leavesProvider.getBlockState(random, pos) == EnvironmentalFeatureConfigs.PURPLE_WISTERIA_LEAVES) {
-			VINE_UPPER = () -> EnvironmentalFeatureConfigs.PURPLE_HANGING_WISTERIA_LEAVES_TOP;
-			VINE_LOWER = () -> EnvironmentalFeatureConfigs.PURPLE_HANGING_WISTERIA_LEAVES_BOTTOM;
+		if (config.leavesProvider.getBlockState(random, pos) == EnvironmentalFeatures.States.PURPLE_WISTERIA_LEAVES) {
+			VINE_UPPER = () -> EnvironmentalFeatures.States.PURPLE_HANGING_WISTERIA_LEAVES_TOP;
+			VINE_LOWER = () -> EnvironmentalFeatures.States.PURPLE_HANGING_WISTERIA_LEAVES_BOTTOM;
 		}
-		if (config.leavesProvider.getBlockState(random, pos) == EnvironmentalFeatureConfigs.WHITE_WISTERIA_LEAVES) {
-			VINE_UPPER = () -> EnvironmentalFeatureConfigs.WHITE_HANGING_WISTERIA_LEAVES_TOP;
-			VINE_LOWER = () -> EnvironmentalFeatureConfigs.WHITE_HANGING_WISTERIA_LEAVES_BOTTOM;
+		if (config.leavesProvider.getBlockState(random, pos) == EnvironmentalFeatures.States.WHITE_WISTERIA_LEAVES) {
+			VINE_UPPER = () -> EnvironmentalFeatures.States.WHITE_HANGING_WISTERIA_LEAVES_TOP;
+			VINE_LOWER = () -> EnvironmentalFeatures.States.WHITE_HANGING_WISTERIA_LEAVES_BOTTOM;
 		}
 
 		int height = random.nextInt(7) + 5;

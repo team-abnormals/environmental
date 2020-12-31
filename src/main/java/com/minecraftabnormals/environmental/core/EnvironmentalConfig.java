@@ -9,7 +9,6 @@ import org.apache.commons.lang3.tuple.Pair;
 public class EnvironmentalConfig {
 
 	public static class Common {
-		public final ConfigValue<Boolean> generateExtraWisterias;
 		public final ConfigValue<Boolean> generateGiantMushroomsInSwamps;
 		public final ConfigValue<Boolean> generateGiantTallGrass;
 
@@ -44,7 +43,6 @@ public class EnvironmentalConfig {
 			builder.pop();
 			builder.pop();
 			builder.push("features");
-			generateExtraWisterias = builder.define("Wisteria Tree generation out of Flower Forests", false);
 			generateGiantMushroomsInSwamps = builder.define("Giant Mushroom generation in Swamps", true);
 			generateGiantTallGrass = builder.define("Giant Tall Grass generation", true);
 			builder.pop();

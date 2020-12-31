@@ -94,6 +94,7 @@ public class Environmental {
 			EnvironmentalBiomes.addBiomesToGeneration();
 			EnvironmentalVillagers.registerVillagerTypes();
 			EnvironmentalVillagers.registerPOIs();
+			EnvironmentalFeatures.Configured.registerConfiguredFeatures();
 		});
 	}
 

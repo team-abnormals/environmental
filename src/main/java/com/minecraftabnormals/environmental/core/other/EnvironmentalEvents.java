@@ -37,13 +37,12 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.world.IServerWorld;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
-import net.minecraft.world.biome.MobSpawnInfo;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.world.MobSpawnInfoBuilder;
 import net.minecraftforge.event.entity.EntityEvent.EnteringChunk;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -51,53 +50,17 @@ import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
-import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Random;
 
 @EventBusSubscriber(modid = Environmental.MODID)
 public class EnvironmentalEvents {
-
-	@SubscribeEvent
-	public static void onBiomeLoad(BiomeLoadingEvent event) {
-		MobSpawnInfoBuilder spawns = event.getSpawns();
-
-		if (event.getCategory() == Biome.Category.SWAMP)
-			spawns.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(EnvironmentalEntities.SLABFISH.get(), 8, 2, 4));
-
-		if (event.getCategory() == Biome.Category.RIVER || event.getCategory() == Biome.Category.SWAMP)
-			spawns.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(EnvironmentalEntities.DUCK.get(), 5, 2, 4));
-
-		if (event.getCategory() == Biome.Category.FOREST)
-			spawns.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(EnvironmentalEntities.DEER.get(), 16, 1, 4));
-
-		if (event.getCategory() == Biome.Category.EXTREME_HILLS)
-			spawns.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(EnvironmentalEntities.YAK.get(), 20, 2, 4));
-
-		if (EnvironmentalConfig.COMMON.limitFarmAnimalSpawns.get())
-			removeSpawns(event);
-	}
-
-	private static void removeSpawns(BiomeLoadingEvent event) {
-		MobSpawnInfoBuilder spawns = event.getSpawns();
-		List<MobSpawnInfo.Spawners> entrysToRemove = new ArrayList<>();
-		for(MobSpawnInfo.Spawners entry : spawns.getSpawner(EntityClassification.CREATURE)) {
-			if(event.getCategory() != Biome.Category.FOREST) {
-				if (entry.type == EntityType.PIG || entry.type == EntityType.CHICKEN) {
-					entrysToRemove.add(entry);
-				}
-			}
-			if(event.getCategory() != Biome.Category.PLAINS) {
-				if (entry.type == EntityType.COW || entry.type == EntityType.SHEEP) {
-					entrysToRemove.add(entry);
-				}
-			}
-		};
-		spawns.getSpawner(EntityClassification.CREATURE).removeAll(entrysToRemove);
-	}
 
 	@SubscribeEvent
 	public static void onEvent(PlayerEvent.BreakSpeed event) {
@@ -117,13 +80,15 @@ public class EnvironmentalEvents {
 
 		boolean replaceVariants = EnvironmentalConfig.COMMON.biomeVariantsAlwaysSpawn.get();
 
-		if (event.getResult() != Event.Result.DENY) {
+		if (event.getResult() != Event.Result.DENY && world instanceof IServerWorld) {
+			IServerWorld serverWorld = (IServerWorld) world;
 			if (replaceVariants && validSpawn && entity.getPosY() > 60) {
 				if (entity.getType() == EntityType.ZOMBIE) {
 					ZombieEntity zombie = (ZombieEntity) entity;
 					if (world.getBiome(entity.getPosition()).getCategory() == Biome.Category.DESERT) {
 
-						HuskEntity husk = EntityType.HUSK.create((World) world);
+
+						HuskEntity husk = EntityType.HUSK.create(serverWorld.getWorld());
 						husk.setChild(zombie.isChild());
 						for (EquipmentSlotType slot : EquipmentSlotType.values())
 							zombie.setItemStackToSlot(slot, zombie.getItemStackFromSlot(slot));
@@ -137,7 +102,7 @@ public class EnvironmentalEvents {
 				if (entity.getType() == EntityType.SKELETON) {
 					SkeletonEntity skeleton = (SkeletonEntity) entity;
 					if (world.getBiome(entity.getPosition()).getCategory() == Biome.Category.ICY) {
-						StrayEntity stray = EntityType.STRAY.create((World) world);
+						StrayEntity stray = EntityType.STRAY.create(serverWorld.getWorld());
 						for (EquipmentSlotType slot : EquipmentSlotType.values())
 							skeleton.setItemStackToSlot(slot, skeleton.getItemStackFromSlot(slot));
 						stray.setLocationAndAngles(skeleton.getPosX(), skeleton.getPosY(), skeleton.getPosZ(), skeleton.rotationYaw, skeleton.rotationPitch);
@@ -151,7 +116,7 @@ public class EnvironmentalEvents {
 			if (validSpawn && entity.getType() == EntityType.MOOSHROOM) {
 				MooshroomEntity mooshroom = (MooshroomEntity) event.getEntity();
 				if (random.nextInt(3) == 0) {
-					MooshroomEntity brownMooshroom = EntityType.MOOSHROOM.create((World) world);
+					MooshroomEntity brownMooshroom = EntityType.MOOSHROOM.create(serverWorld.getWorld());
 					brownMooshroom.setLocationAndAngles(mooshroom.getPosX(), mooshroom.getPosY(), mooshroom.getPosZ(), mooshroom.rotationYaw, mooshroom.rotationPitch);
 					brownMooshroom.setMooshroomType(MooshroomEntity.Type.BROWN);
 					world.addEntity(brownMooshroom);
@@ -159,8 +124,6 @@ public class EnvironmentalEvents {
 				}
 			}
 		}
-
-		//Koi stuff
 
 		boolean blockOnlyNaturalSpawns = EnvironmentalConfig.COMMON.blockOnlyNaturalSpawns.get();
 
