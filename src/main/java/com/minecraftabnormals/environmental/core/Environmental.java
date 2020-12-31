@@ -64,6 +64,7 @@ public class Environmental {
 		REGISTRY_HELPER.register(bus);
 		EnvironmentalBlocks.PAINTINGS.register(bus);
 		EnvironmentalFeatures.FEATURES.register(bus);
+		EnvironmentalFeatures.TREE_DECORATORS.register(bus);
 		EnvironmentalAttributes.ATTRIBUTES.register(bus);
 		EnvironmentalEffects.EFFECTS.register(bus);
 		EnvironmentalVillagers.POI_TYPES.register(bus);

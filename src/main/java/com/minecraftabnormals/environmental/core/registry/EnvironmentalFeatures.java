@@ -291,7 +291,7 @@ public class EnvironmentalFeatures {
 
 			register("cherry", CHERRY);
 			register("cherry_bees_0002", CHERRY_BEES_0002);
-			register("cherry_bees_005", CHERRY_BEES_0002);
+			register("cherry_bees_005", CHERRY_BEES_005);
 
 			register("willow_tree", WILLOW_TREE);
 			register("marsh_oak", MARSH_OAK);

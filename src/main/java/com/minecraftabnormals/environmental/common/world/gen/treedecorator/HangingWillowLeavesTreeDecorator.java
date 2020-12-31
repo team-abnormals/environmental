@@ -1,6 +1,7 @@
 package com.minecraftabnormals.environmental.common.world.gen.treedecorator;
 
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
+import com.minecraftabnormals.environmental.core.registry.EnvironmentalFeatures;
 import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
@@ -13,17 +14,16 @@ import java.util.Random;
 import java.util.Set;
 
 public class HangingWillowLeavesTreeDecorator extends TreeDecorator {
-	public static final Codec<HangingWillowLeavesTreeDecorator> field_236870_a_;
+	public static final Codec<HangingWillowLeavesTreeDecorator> CODEC;
 	public static final HangingWillowLeavesTreeDecorator field_236871_b_ = new HangingWillowLeavesTreeDecorator();
 
+	@Override
 	protected TreeDecoratorType<?> func_230380_a_() {
-		return TreeDecoratorType.LEAVE_VINE;
+		return EnvironmentalFeatures.HANGING_WILLOW_LEAVES.get();
 	}
 
 	static {
-		field_236870_a_ = Codec.unit(() -> {
-			return field_236871_b_;
-		});
+		CODEC = Codec.unit(() -> field_236871_b_);
 	}
 
 	@Override
