@@ -222,8 +222,8 @@ public class EnvironmentalBiomeFeatures {
 	}
 
 	public static void withBlossomWoodsVegetation(BiomeGenerationSettingsBuilder builder) {
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.CHERRY_TREE);
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FALLEN_CHERRY_LEAVES);
+		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.CHERRY_TREE_BLOSSOM_WOODS);
+		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FALLEN_CHERRY_LEAVES_BLOSSOM_WOODS);
 		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.BIRCH_TREE_BLOSSOM_WOODS);
 		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.BAMBOO_BLOSSOM_WOODS);
 		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.BAMBOO_LIGHT_BLOSSOM_WOODS);
@@ -231,9 +231,9 @@ public class EnvironmentalBiomeFeatures {
 	}
 
 	public static void withBlossomValleysVegetation(BiomeGenerationSettingsBuilder builder) {
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.CHERRY_TREE_VALLEY);
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FALLEN_CHERRY_LEAVES_VALLEY);
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.BIRCH_TREE_BLOSSOM_VALLEY);
+		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.CHERRY_TREE_BLOSSOM_VALLEYS);
+		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FALLEN_CHERRY_LEAVES_BLOSSOM_VALLEYS);
+		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.BIRCH_TREE_BLOSSOM_VALLEYS);
 		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.BAMBOO_BLOSSOM_VALLEYS);
 		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.BAMBOO_LIGHT_BLOSSOM_VALLEYS);
 		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_WHITE_LOTUS);

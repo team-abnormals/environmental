@@ -23,7 +23,6 @@ import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.foliageplacer.BlobFoliagePlacer;
 import net.minecraft.world.gen.foliageplacer.FancyFoliagePlacer;
 import net.minecraft.world.gen.placement.*;
-import net.minecraft.world.gen.treedecorator.CocoaTreeDecorator;
 import net.minecraft.world.gen.treedecorator.LeaveVineTreeDecorator;
 import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
 import net.minecraft.world.gen.trunkplacer.FancyTrunkPlacer;
@@ -198,23 +197,23 @@ public class EnvironmentalFeatures {
 		public static final ConfiguredFeature<?, ?> PINK_WISTERIA_TREE_BIG = EnvironmentalFeatures.BIG_WISTERIA_TREE.get().withConfiguration(Configs.PINK_WISTERIA_TREE_WITH_BEEHIVES_CONFIG);
 		public static final ConfiguredFeature<?, ?> PURPLE_WISTERIA_TREE_BIG = EnvironmentalFeatures.BIG_WISTERIA_TREE.get().withConfiguration(Configs.PURPLE_WISTERIA_TREE_WITH_BEEHIVES_CONFIG);
 
-		public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> CHERRY = Feature.TREE.withConfiguration(Configs.CHERRY_TREE_CONFIG);
-		public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> CHERRY_BEES_0002 = Feature.TREE.withConfiguration(Configs.CHERRY_TREE_WITH_FEW_BEEHIVES_CONFIG);
-		public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> CHERRY_BEES_005 = Feature.TREE.withConfiguration(Configs.CHERRY_TREE_WITH_MORE_BEEHIVES_CONFIG);
+		public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> CHERRY_TREE = Feature.TREE.withConfiguration(Configs.CHERRY_TREE_CONFIG);
+		public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> CHERRY_TREE_BEES_0002 = Feature.TREE.withConfiguration(Configs.CHERRY_TREE_WITH_FEW_BEEHIVES_CONFIG);
+		public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> CHERRY_TREE_BEES_005 = Feature.TREE.withConfiguration(Configs.CHERRY_TREE_WITH_MORE_BEEHIVES_CONFIG);
 
 		public static final ConfiguredFeature<?, ?> WILLOW_TREE = Feature.TREE.withConfiguration(Configs.WILLOW_TREE_CONFIG).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.COUNT_EXTRA.configure(new AtSurfaceWithExtraConfig(3, 0.1F, 1)));
 		public static final ConfiguredFeature<?, ?> MARSH_OAK = Feature.RANDOM_SELECTOR.withConfiguration(new MultipleRandomFeatureConfig(ImmutableList.of(Features.FANCY_OAK.withChance(0.33333334F)), Features.OAK)).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.COUNT_EXTRA.configure(new AtSurfaceWithExtraConfig(0, 0.25F, 1)));
 		public static final ConfiguredFeature<?, ?> SWAMP_OAK = Feature.RANDOM_SELECTOR.withConfiguration(new MultipleRandomFeatureConfig(ImmutableList.of(Features.FANCY_OAK.withChance(0.33333334F)), Features.OAK)).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.COUNT_EXTRA.configure(new AtSurfaceWithExtraConfig(0, 0.05F, 1)));
 		public static final ConfiguredFeature<?, ?> WISTERIA_TREE = Feature.RANDOM_SELECTOR.withConfiguration(new MultipleRandomFeatureConfig(ImmutableList.of(BLUE_WISTERIA_TREE.withChance(0.15F), WHITE_WISTERIA_TREE.withChance(0.15F), PINK_WISTERIA_TREE.withChance(0.15F)), PURPLE_WISTERIA_TREE)).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.COUNT_EXTRA.configure(new AtSurfaceWithExtraConfig(2, 0.0075F, 1)));
 		public static final ConfiguredFeature<?, ?> WISTERIA_TREE_BIG = Feature.RANDOM_SELECTOR.withConfiguration(new MultipleRandomFeatureConfig(ImmutableList.of(BLUE_WISTERIA_TREE_BIG.withChance(0.5F), WHITE_WISTERIA_TREE_BIG.withChance(0.5F), PINK_WISTERIA_TREE_BIG.withChance(0.5F)), PURPLE_WISTERIA_TREE_BIG)).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.COUNT_EXTRA.configure(new AtSurfaceWithExtraConfig(1, 0.0075F, 1)));
-		public static final ConfiguredFeature<?, ?> CHERRY_TREE = Feature.RANDOM_SELECTOR.withConfiguration(new MultipleRandomFeatureConfig(ImmutableList.of(CHERRY.withChance(0.1F)), CHERRY_BEES_0002)).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.COUNT_EXTRA.configure(new AtSurfaceWithExtraConfig(8, 0.1F, 1)));
-		public static final ConfiguredFeature<?, ?> CHERRY_TREE_VALLEY = Feature.RANDOM_SELECTOR.withConfiguration(new MultipleRandomFeatureConfig(ImmutableList.of(CHERRY.withChance(0.1F)), CHERRY_BEES_005)).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.COUNT_EXTRA.configure(new AtSurfaceWithExtraConfig(0, 0.1F, 1)));
+		public static final ConfiguredFeature<?, ?> CHERRY_TREE_BLOSSOM_WOODS = Feature.RANDOM_SELECTOR.withConfiguration(new MultipleRandomFeatureConfig(ImmutableList.of(CHERRY_TREE.withChance(0.1F)), CHERRY_TREE_BEES_0002)).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.COUNT_EXTRA.configure(new AtSurfaceWithExtraConfig(8, 0.1F, 1)));
+		public static final ConfiguredFeature<?, ?> CHERRY_TREE_BLOSSOM_VALLEYS = Feature.RANDOM_SELECTOR.withConfiguration(new MultipleRandomFeatureConfig(ImmutableList.of(CHERRY_TREE.withChance(0.1F)), CHERRY_TREE_BEES_005)).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.COUNT_EXTRA.configure(new AtSurfaceWithExtraConfig(0, 0.1F, 1)));
 		public static final ConfiguredFeature<?, ?> BIRCH_TREE_BLOSSOM_WOODS = Features.BIRCH_TALL.withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.COUNT_EXTRA.configure(new AtSurfaceWithExtraConfig(1, 0.02F, 2)));
-		public static final ConfiguredFeature<?, ?> BIRCH_TREE_BLOSSOM_VALLEY = Features.BIRCH_TALL.withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.COUNT_EXTRA.configure(new AtSurfaceWithExtraConfig(0, 0.02F, 1)));
+		public static final ConfiguredFeature<?, ?> BIRCH_TREE_BLOSSOM_VALLEYS = Features.BIRCH_TALL.withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.COUNT_EXTRA.configure(new AtSurfaceWithExtraConfig(0, 0.02F, 1)));
 		public static final ConfiguredFeature<?, ?> HUGE_BROWN_MUSHROOM_MARSH = Features.HUGE_BROWN_MUSHROOM.withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.COUNT_EXTRA.configure(new AtSurfaceWithExtraConfig(0, 0.32F, 1)));
 
-		public static final ConfiguredFeature<?, ?> FALLEN_CHERRY_LEAVES = EnvironmentalFeatures.FALLEN_LEAVES.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Features.Placements.PATCH_PLACEMENT.func_242731_b(64));
-		public static final ConfiguredFeature<?, ?> FALLEN_CHERRY_LEAVES_VALLEY = EnvironmentalFeatures.FALLEN_LEAVES.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Features.Placements.PATCH_PLACEMENT.func_242731_b(4));
+		public static final ConfiguredFeature<?, ?> FALLEN_CHERRY_LEAVES_BLOSSOM_WOODS = EnvironmentalFeatures.FALLEN_LEAVES.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Features.Placements.PATCH_PLACEMENT.func_242731_b(64));
+		public static final ConfiguredFeature<?, ?> FALLEN_CHERRY_LEAVES_BLOSSOM_VALLEYS = EnvironmentalFeatures.FALLEN_LEAVES.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Features.Placements.PATCH_PLACEMENT.func_242731_b(4));
 
 		public static final ConfiguredFeature<?, ?> BAMBOO_BLOSSOM_WOODS = Feature.BAMBOO.withConfiguration(new ProbabilityConfig(0.0F)).withPlacement(Features.Placements.BAMBOO_PLACEMENT).square().withPlacement(Placement.COUNT_NOISE_BIASED.configure(new TopSolidWithNoiseConfig(11, 5.0D, 0.2D)));
 		public static final ConfiguredFeature<?, ?> BAMBOO_LIGHT_BLOSSOM_WOODS = Feature.BAMBOO.withConfiguration(new ProbabilityConfig(0.0F)).withPlacement(Features.Placements.PATCH_PLACEMENT.func_242731_b(20));
@@ -289,21 +288,21 @@ public class EnvironmentalFeatures {
 			register("wisteria_tree", WISTERIA_TREE);
 			register("wisteria_tree_big", WISTERIA_TREE_BIG);
 
-			register("cherry", CHERRY);
-			register("cherry_bees_0002", CHERRY_BEES_0002);
-			register("cherry_bees_005", CHERRY_BEES_005);
+			register("cherry_tree", CHERRY_TREE);
+			register("cherry_tree_bees_0002", CHERRY_TREE_BEES_0002);
+			register("cherry_tree_bees_005", CHERRY_TREE_BEES_005);
 
 			register("willow_tree", WILLOW_TREE);
 			register("marsh_oak", MARSH_OAK);
 			register("swamp_oak", SWAMP_OAK);
-			register("cherry_tree", CHERRY_TREE);
-			register("cherry_tree_valley", CHERRY_TREE_VALLEY);
+			register("cherry_tree_blossom_woods", CHERRY_TREE_BLOSSOM_WOODS);
+			register("cherry_tree_blossom_valleys", CHERRY_TREE_BLOSSOM_VALLEYS);
 			register("birch_tree_blossom_woods", BIRCH_TREE_BLOSSOM_WOODS);
-			register("birch_tree_blossom_valley", BIRCH_TREE_BLOSSOM_VALLEY);
+			register("birch_tree_blossom_valleys", BIRCH_TREE_BLOSSOM_VALLEYS);
 			register("huge_brown_mushroom_marsh", HUGE_BROWN_MUSHROOM_MARSH);
 
-			register("fallen_cherry_leaves", FALLEN_CHERRY_LEAVES);
-			register("fallen_cherry_leaves_valley", FALLEN_CHERRY_LEAVES_VALLEY);
+			register("fallen_cherry_leaves_blossom_woods", FALLEN_CHERRY_LEAVES_BLOSSOM_WOODS);
+			register("fallen_cherry_leaves_blossom_valleys", FALLEN_CHERRY_LEAVES_BLOSSOM_VALLEYS);
 
 			register("bamboo_blossom_woods", BAMBOO_BLOSSOM_WOODS);
 			register("bamboo_light_blossom_woods", BAMBOO_LIGHT_BLOSSOM_WOODS);
