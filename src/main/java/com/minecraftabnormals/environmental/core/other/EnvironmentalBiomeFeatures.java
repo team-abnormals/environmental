@@ -92,7 +92,7 @@ public class EnvironmentalBiomeFeatures {
 		if (event.getCategory() == Biome.Category.MUSHROOM)
 			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_MYCELIUM_SPROUTS);
 
-		if (DataUtil.matchesKeys(biome, Biomes.FROZEN_RIVER) && (event.getCategory() == Biome.Category.SWAMP || event.getCategory() == Biome.Category.RIVER)) {
+		if (!DataUtil.matchesKeys(biome, Biomes.FROZEN_RIVER) && (event.getCategory() == Biome.Category.SWAMP || event.getCategory() == Biome.Category.RIVER)) {
 			EnvironmentalBiomeFeatures.withCattails(generation);
 			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.NEST_DUCK);
 		}
