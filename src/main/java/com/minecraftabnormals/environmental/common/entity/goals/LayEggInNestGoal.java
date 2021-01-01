@@ -70,7 +70,7 @@ public class LayEggInNestGoal extends MoveToBlockGoal {
 
 	private void resetBird() {
 		Random random = bird.getRNG();
-		this.bird.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
+		this.bird.playSound(this.eggLayer.getEggLayingSound(), 1.0F, (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
 		this.eggLayer.setEggTimer(this.eggLayer.getNextEggTime(random));
 	}
 

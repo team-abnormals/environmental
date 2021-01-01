@@ -1,8 +1,9 @@
 package com.minecraftabnormals.environmental.api;
 
-import net.minecraft.item.Item;
-
 import java.util.Random;
+
+import net.minecraft.item.Item;
+import net.minecraft.util.SoundEvent;
 
 public interface IEggLayingEntity {
 	int getEggTimer();
@@ -14,4 +15,6 @@ public interface IEggLayingEntity {
 	Item getEggItem();
 
 	int getNextEggTime(Random rand);
+	
+	SoundEvent getEggLayingSound();
 }

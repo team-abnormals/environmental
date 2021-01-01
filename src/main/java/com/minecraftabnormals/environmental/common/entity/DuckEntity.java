@@ -6,6 +6,8 @@ import com.minecraftabnormals.environmental.common.entity.goals.LayEggInNestGoal
 import com.minecraftabnormals.environmental.core.other.EnvironmentalTags;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEntities;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
+import com.minecraftabnormals.environmental.core.registry.EnvironmentalSounds;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
@@ -196,6 +198,12 @@ public class DuckEntity extends AnimalEntity implements IEggLayingEntity {
 		return SoundEvents.ENTITY_CHICKEN_DEATH;
 	}
 
+	@Override
+	public SoundEvent getEggLayingSound()
+	{
+		return EnvironmentalSounds.ENTITY_DUCK_EGG.get();
+	}
+	
 	@Override
 	protected void playStepSound(BlockPos pos, BlockState blockIn) {
 		this.playSound(SoundEvents.ENTITY_CHICKEN_STEP, 0.15F, 1.0F);

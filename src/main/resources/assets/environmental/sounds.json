@@ -114,5 +114,12 @@
       }
     ],
     "subtitle": "subtitles.entity.koi.flop"
+  },
+  "entity.duck.egg": {
+    "category": "entity",
+    "sounds": [
+      "minecraft:mob/chicken/plop"
+    ],
+    "subtitle": "subtitles.entity.duck.egg"
   }
 }
