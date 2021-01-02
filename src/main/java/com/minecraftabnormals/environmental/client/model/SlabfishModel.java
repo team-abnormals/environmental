@@ -2,6 +2,8 @@ package com.minecraftabnormals.environmental.client.model;
 
 import com.google.common.collect.ImmutableList;
 import com.minecraftabnormals.environmental.common.entity.SlabfishEntity;
+import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -17,7 +19,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  */
 @OnlyIn(Dist.CLIENT)
 public class SlabfishModel<E extends SlabfishEntity> extends AgeableModel<E> {
-	Entity entity;
+	SlabfishEntity entity;
 	public ModelRenderer body;
 	public ModelRenderer rightLeg;
 	public ModelRenderer leftLeg;
@@ -65,9 +67,6 @@ public class SlabfishModel<E extends SlabfishEntity> extends AgeableModel<E> {
 		this.body.addChild(this.backpack);
 	}
 
-	/**
-	 * This is a helper function from Tabula to set the rotation of model parts
-	 */
 	public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
 		modelRenderer.rotateAngleX = x;
 		modelRenderer.rotateAngleY = y;
@@ -77,6 +76,8 @@ public class SlabfishModel<E extends SlabfishEntity> extends AgeableModel<E> {
 	@Override
 	public void setRotationAngles(E entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.entity = entityIn;
+
+		this.fin.showModel = !entityIn.hasBackpack();
 
 		if (!entityIn.isInWater()) {
 			if (entityIn.isPartying()) {
