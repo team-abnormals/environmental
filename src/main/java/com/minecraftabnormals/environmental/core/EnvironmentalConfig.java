@@ -53,7 +53,7 @@ public class EnvironmentalConfig {
 			biomeVariantsAlwaysSpawn = builder.comment("Make biome variants of mobs like Husk always spawn in place of their original in their biomes").define("Biome variants always spawn", true);
 			builder.push("koi");
 			blockOnlyNaturalSpawns = builder.comment("Make Koi only block natural spawns").define("Block only natural spawns", true);
-			koiHorizontalSerenityRange = builder.comment("Horizontal radius of Serenity effect in blocks").define("Horizontal serenity range (radius)", 16);
+			koiHorizontalSerenityRange = builder.comment("Horizontal radius of Serenity effect in blocks").define("Horizontal serenity range (radius)", 32);
 			koiVerticalSerenityRange = builder.comment("Vertical radius of Serenity effect in blocks").define("Vertical serenity range (radius)", 8);
 			serenityEffect = builder.comment("If Koi exude Serenity as a potion effect").define("Serenity potion effect", true);
 			builder.pop();
