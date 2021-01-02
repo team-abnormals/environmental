@@ -3,6 +3,7 @@ package com.minecraftabnormals.environmental.core.other;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.minecraftabnormals.abnormals_core.core.util.MathUtil;
+import com.minecraftabnormals.environmental.api.IEggLayingEntity;
 import com.minecraftabnormals.environmental.common.block.HangingWisteriaLeavesBlock;
 import com.minecraftabnormals.environmental.common.entity.KoiEntity;
 import com.minecraftabnormals.environmental.common.entity.SlabfishEntity;
@@ -280,17 +281,10 @@ public class EnvironmentalEvents {
 	@SubscribeEvent
 	public static void onEvent(EnteringChunk event) {
 		Entity entity = event.getEntity();
-		EntityType<?> entityType = entity.getType();
-		ResourceLocation entityName = entityType.getRegistryName();
-		if (entity instanceof ChickenEntity) {
-			ChickenEntity chicken = (ChickenEntity) entity;
-			if (!chicken.goalSelector.goals.stream().anyMatch((goal) -> goal.getGoal() instanceof LayEggInNestGoal)) {
-				chicken.goalSelector.addGoal(2, new LayEggInNestGoal(chicken, 1.0D));
-			}
-		} else if (entityType != null && entityName.getNamespace() == "autumnity" && entityName.getPath() == "turkey") {
-			AnimalEntity turkey = (AnimalEntity) entity;
-			if (!turkey.goalSelector.goals.stream().anyMatch((goal) -> goal.getGoal() instanceof LayEggInNestGoal)) {
-				turkey.goalSelector.addGoal(5, new LayEggInNestGoal(turkey, 1.0D));
+		if (entity instanceof IEggLayingEntity && entity instanceof AnimalEntity) {
+			AnimalEntity eggLayer = (AnimalEntity) entity;
+			if (eggLayer.goalSelector.goals.stream().noneMatch((goal) -> goal.getGoal() instanceof LayEggInNestGoal)) {
+				eggLayer.goalSelector.addGoal(3, new LayEggInNestGoal(eggLayer, 1.0D));
 			}
 		} else if (entity instanceof WolfEntity) {
 			WolfEntity wolf = (WolfEntity) entity;
