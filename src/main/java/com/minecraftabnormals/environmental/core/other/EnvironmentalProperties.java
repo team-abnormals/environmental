@@ -62,8 +62,8 @@ public class EnvironmentalProperties {
 	public static final AbstractBlock.Properties YAK_HAIR_RUG = AbstractBlock.Properties.create(Material.CARPET, MaterialColor.BROWN).hardnessAndResistance(0.1F).sound(SoundType.CLOTH).notSolid().harvestTool(ToolType.HOE);
 
 	public static final AbstractBlock.Properties ICE_BRICKS = AbstractBlock.Properties.create(Material.ICE).slipperiness(0.99F).hardnessAndResistance(1.0F, 2.0F).sound(SoundType.GLASS);
-	public static final AbstractBlock.Properties ICE_LANTERN = AbstractBlock.Properties.create(Material.ICE).setRequiresTool().hardnessAndResistance(3.5F).sound(SoundType.LANTERN).setLightLevel((state) -> 12).notSolid();
-	public static final AbstractBlock.Properties ICE_CHAIN = AbstractBlock.Properties.create(Material.ICE, MaterialColor.AIR).setRequiresTool().hardnessAndResistance(5.0F, 6.0F).sound(SoundType.CHAIN).notSolid();
+	public static final AbstractBlock.Properties ICE_LANTERN = AbstractBlock.Properties.create(Material.ICE).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(3.5F).sound(SoundType.LANTERN).setLightLevel((state) -> 12).notSolid();
+	public static final AbstractBlock.Properties ICE_CHAIN = AbstractBlock.Properties.create(Material.ICE, MaterialColor.AIR).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(5.0F, 6.0F).sound(SoundType.CHAIN).notSolid();
 
 	public static final AbstractBlock.Properties GRASS_THATCH = AbstractBlock.Properties.create(Material.ORGANIC, MaterialColor.YELLOW).hardnessAndResistance(0.5F).sound(SoundType.PLANT).notSolid().harvestTool(ToolType.HOE);
 	public static final AbstractBlock.Properties DUCKWEED_THATCH = AbstractBlock.Properties.create(Material.ORGANIC, MaterialColor.GREEN).hardnessAndResistance(0.5F).sound(SoundType.PLANT).notSolid().harvestTool(ToolType.HOE);
