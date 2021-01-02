@@ -107,7 +107,8 @@ public class KoiEntity extends AbstractFishEntity {
 			int horizontalRange = EnvironmentalConfig.COMMON.koiHorizontalSerenityRange.get();
 			int verticalRange = EnvironmentalConfig.COMMON.koiVerticalSerenityRange.get();
 			for (PlayerEntity player : world.getEntitiesWithinAABB(PlayerEntity.class, this.getBoundingBox().grow(horizontalRange, verticalRange, horizontalRange))) {
-				player.addPotionEffect(new EffectInstance(EnvironmentalEffects.SERENITY.get(), 100, 0, false, false));
+				if (!world.isRemote())
+					player.addPotionEffect(new EffectInstance(EnvironmentalEffects.SERENITY.get(), 100, 0, false, false));
 			}
 		}
 		super.livingTick();
@@ -133,13 +134,8 @@ public class KoiEntity extends AbstractFishEntity {
 	}
 
 	@Override
-	public ItemStack getPickedResult(RayTraceResult target) {
-		return new ItemStack(EnvironmentalItems.KOI_SPAWN_EGG.get());
-	}
-
-	@Override
 	public ItemStack getFishBucket() {
-		return new ItemStack(EnvironmentalItems.KOI_BUCKET.get(), 1);
+		return new ItemStack(EnvironmentalItems.KOI_BUCKET.get());
 	}
 
 	public static AttributeModifierMap.MutableAttribute registerAttributes() {
