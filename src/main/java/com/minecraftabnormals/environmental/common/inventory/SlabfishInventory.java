@@ -45,7 +45,7 @@ public class SlabfishInventory extends DynamicInventory {
 
 	@Override
 	public int getSizeInventory() {
-		return 3 + (this.slabfish.hasBackpack() ? 15 : 0);
+		return 3 + (this.getStackInSlot(1).getItem().isIn(Tags.Items.CHESTS_WOODEN) ? 15 : 0);
 	}
 
 	@Override
