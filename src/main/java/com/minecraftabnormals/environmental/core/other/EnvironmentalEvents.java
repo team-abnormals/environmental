@@ -2,6 +2,7 @@ package com.minecraftabnormals.environmental.core.other;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.minecraftabnormals.abnormals_core.core.util.MathUtil;
 import com.minecraftabnormals.environmental.api.IEggLayingEntity;
 import com.minecraftabnormals.environmental.common.block.HangingWisteriaLeavesBlock;
@@ -55,10 +56,12 @@ import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
+import java.util.Set;
 
 @EventBusSubscriber(modid = Environmental.MOD_ID)
 public class EnvironmentalEvents {
@@ -181,6 +184,7 @@ public class EnvironmentalEvents {
 	}
 
 	protected static final Map<Block, BlockState> HOE_LOOKUP = Maps.newHashMap(ImmutableMap.of(Blocks.GRASS_BLOCK, Blocks.FARMLAND.getDefaultState(), Blocks.GRASS_PATH, Blocks.FARMLAND.getDefaultState(), Blocks.DIRT, Blocks.FARMLAND.getDefaultState(), Blocks.COARSE_DIRT, Blocks.DIRT.getDefaultState()));
+	protected static final Set<Block> DIRT_SPREADABLES = Sets.newHashSet(Blocks.GRASS_BLOCK, Blocks.MYCELIUM);
 
 	@SubscribeEvent
 	public static void onEvent(RightClickBlock event) {
@@ -190,30 +194,44 @@ public class EnvironmentalEvents {
 		PlayerEntity player = event.getPlayer();
 		ItemStack stack = event.getItemStack();
 		Item item = stack.getItem();
-
-		if (event.getFace() != Direction.DOWN && item instanceof ShovelItem && !player.isSpectator() && world.isAirBlock(pos.up())) {
-			if (state.isIn(Blocks.PODZOL) || state.isIn(Blocks.MYCELIUM)) {
-				world.playSound(player, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
-				stack.damageItem(1, player, (damage) -> {
-					damage.sendBreakAnimation(event.getHand());
-				});
-				world.setBlockState(pos, state.isIn(Blocks.PODZOL) ? EnvironmentalBlocks.PODZOL_PATH.get().getDefaultState() : EnvironmentalBlocks.MYCELIUM_PATH.get().getDefaultState(), 11);
+		if (item == Items.BONE_MEAL && state.getBlock() == Blocks.DIRT) {
+			ArrayList<BlockState> potentialStates = new ArrayList<>();
+			for (BlockPos blockpos : BlockPos.getAllInBoxMutable(pos.add(-1, -1, -1), pos.add(1, 1, 1))) {
+				Block block = world.getBlockState(blockpos).getBlock();
+				if (DIRT_SPREADABLES.contains(block) && !potentialStates.contains(block.getDefaultState())) {
+					potentialStates.add(block.getDefaultState());
+				}
+			}
+			if (!potentialStates.isEmpty()) {
+				world.setBlockState(pos, potentialStates.get(world.getRandom().nextInt(potentialStates.size())), 3);
+				if (!world.isRemote()) world.playEvent(2005, pos, 0);
+				if (!player.isCreative()) stack.shrink(1);
 				event.setCancellationResult(ActionResultType.func_233537_a_(world.isRemote()));
 				event.setCanceled(true);
 			}
-		}
-
-		if (event.getFace() != Direction.DOWN) {
-			BlockState blockstate = HOE_LOOKUP.get(world.getBlockState(pos).getBlock());
-			if (blockstate != null && item instanceof HoeItem) {
-				PlayerEntity playerentity = event.getPlayer();
-				world.playSound(playerentity, pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
-				world.setBlockState(pos, blockstate, 11);
-				stack.damageItem(1, playerentity, (anim) -> {
-					anim.sendBreakAnimation(event.getHand());
-				});
-				event.setCancellationResult(ActionResultType.func_233537_a_(world.isRemote()));
-				event.setCanceled(true);
+		} else if (event.getFace() != Direction.DOWN) {
+			if (item instanceof ShovelItem && !player.isSpectator() && world.isAirBlock(pos.up())){
+				if (state.isIn(Blocks.PODZOL) || state.isIn(Blocks.MYCELIUM)) {
+					world.playSound(player, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
+					stack.damageItem(1, player, (damage) -> {
+						damage.sendBreakAnimation(event.getHand());
+					});
+					world.setBlockState(pos, state.isIn(Blocks.PODZOL) ? EnvironmentalBlocks.PODZOL_PATH.get().getDefaultState() : EnvironmentalBlocks.MYCELIUM_PATH.get().getDefaultState(), 11);
+					event.setCancellationResult(ActionResultType.func_233537_a_(world.isRemote()));
+					event.setCanceled(true);
+				}
+			} else {
+				BlockState blockstate = HOE_LOOKUP.get(world.getBlockState(pos).getBlock());
+				if (blockstate != null && item instanceof HoeItem) {
+					PlayerEntity playerentity = event.getPlayer();
+					world.playSound(playerentity, pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+					world.setBlockState(pos, blockstate, 11);
+					stack.damageItem(1, playerentity, (anim) -> {
+						anim.sendBreakAnimation(event.getHand());
+					});
+					event.setCancellationResult(ActionResultType.func_233537_a_(world.isRemote()));
+					event.setCanceled(true);
+				}
 			}
 		}
 	}
