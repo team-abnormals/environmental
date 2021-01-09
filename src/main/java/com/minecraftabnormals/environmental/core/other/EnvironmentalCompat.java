@@ -5,6 +5,7 @@ import com.minecraftabnormals.abnormals_core.core.util.DataUtil;
 import com.minecraftabnormals.environmental.common.entity.DuckEggEntity;
 import com.minecraftabnormals.environmental.common.entity.MudBallEntity;
 import com.minecraftabnormals.environmental.core.Environmental;
+import com.minecraftabnormals.environmental.core.EnvironmentalConfig;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
 import net.minecraft.block.BlockState;
@@ -44,8 +45,9 @@ public class EnvironmentalCompat {
 
 	public static void registerLootInjectors() {
 		LootInjectionRegistry.LootInjector injector = new LootInjectionRegistry.LootInjector(Environmental.MOD_ID);
-		injector.addLootInjection(injector.buildLootPool("shipwreck_supply", 1, 0), LootTables.CHESTS_SHIPWRECK_SUPPLY);
 		injector.addLootInjection(injector.buildLootPool("simple_dungeon", 1, 0), LootTables.CHESTS_SIMPLE_DUNGEON);
+		if (EnvironmentalConfig.COMMON.generateRice.get())
+			injector.addLootInjection(injector.buildLootPool("shipwreck_supply", 1, 0), LootTables.CHESTS_SHIPWRECK_SUPPLY);
 	}
 
 	public static void registerCompostables() {

@@ -78,8 +78,10 @@ public class EnvironmentalBiomeFeatures {
 			if (DataUtil.matchesKeys(biome, Biomes.FLOWER_FOREST)) {
 				generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_CARTWHEEL);
 				generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_DELPHINIUMS);
-				generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.WISTERIA_TREE);
-				generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.WISTERIA_TREE_BIG);
+				if (EnvironmentalConfig.COMMON.generateWisteriaTrees.get()) {
+					generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.WISTERIA_TREE);
+					generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.WISTERIA_TREE_BIG);
+				}
 			}
 			if (DataUtil.matchesKeys(biome, Biomes.DARK_FOREST, Biomes.DARK_FOREST_HILLS)) {
 				generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_BLUEBELL);
@@ -129,18 +131,20 @@ public class EnvironmentalBiomeFeatures {
 				generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_GIANT_TALL_GRASS_JUNGLE);
 			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_BIRD_OF_PARADISE);
 
-			if (DataUtil.matchesKeys(biome, Biomes.JUNGLE_EDGE, Biomes.MODIFIED_JUNGLE_EDGE))
-				generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_YELLOW_HIBISCUS);
-			if (DataUtil.matchesKeys(biome, Biomes.BAMBOO_JUNGLE_HILLS))
-				generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_ORANGE_HIBISCUS);
-			if (DataUtil.matchesKeys(biome, Biomes.JUNGLE))
-				generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_PINK_HIBISCUS);
-			if (DataUtil.matchesKeys(biome, Biomes.MODIFIED_JUNGLE))
-				generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_RED_HIBISCUS);
-			if (DataUtil.matchesKeys(biome, Biomes.BAMBOO_JUNGLE))
-				generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_MAGENTA_HIBISCUS);
-			if (DataUtil.matchesKeys(biome, Biomes.JUNGLE_HILLS))
-				generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_PURPLE_HIBISCUS);
+			if (EnvironmentalConfig.COMMON.generateHibiscus.get()) {
+				if (DataUtil.matchesKeys(biome, Biomes.JUNGLE_EDGE, Biomes.MODIFIED_JUNGLE_EDGE))
+					generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_YELLOW_HIBISCUS);
+				if (DataUtil.matchesKeys(biome, Biomes.BAMBOO_JUNGLE_HILLS))
+					generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_ORANGE_HIBISCUS);
+				if (DataUtil.matchesKeys(biome, Biomes.JUNGLE))
+					generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_PINK_HIBISCUS);
+				if (DataUtil.matchesKeys(biome, Biomes.MODIFIED_JUNGLE))
+					generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_RED_HIBISCUS);
+				if (DataUtil.matchesKeys(biome, Biomes.BAMBOO_JUNGLE))
+					generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_MAGENTA_HIBISCUS);
+				if (DataUtil.matchesKeys(biome, Biomes.JUNGLE_HILLS))
+					generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_PURPLE_HIBISCUS);
+			}
 		}
 
 		if (EnvironmentalConfig.COMMON.limitFarmAnimalSpawns.get())
@@ -201,7 +205,7 @@ public class EnvironmentalBiomeFeatures {
 	}
 
 	public static void withMushrooms(BiomeGenerationSettingsBuilder builder) {
-		if (EnvironmentalConfig.COMMON.generateGiantMushroomsInSwamps.get()) {
+		if (EnvironmentalConfig.COMMON.generateGiantMushrooms.get()) {
 			builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Features.MUSHROOM_FIELD_VEGETATION);
 		}
 	}
@@ -256,10 +260,11 @@ public class EnvironmentalBiomeFeatures {
 		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_WATERLILLY_MARSH);
 		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_GRASS_MARSH);
 		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_TALL_GRASS_MARSH);
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_RICE);
 		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_CATTAILS_DENSE);
 		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_DUCKWEED_MARSH);
 		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.SEAGRASS_MARSH);
+		if (EnvironmentalConfig.COMMON.generateRice.get())
+			builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_RICE);
 	}
 
 	public static void removeSwampTrees(BiomeGenerationSettingsBuilder builder) {

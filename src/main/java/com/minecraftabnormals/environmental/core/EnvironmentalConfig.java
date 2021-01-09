@@ -9,8 +9,12 @@ import org.apache.commons.lang3.tuple.Pair;
 public class EnvironmentalConfig {
 
 	public static class Common {
-		public final ConfigValue<Boolean> generateGiantMushroomsInSwamps;
+		public final ConfigValue<Boolean> generateGiantMushrooms;
 		public final ConfigValue<Boolean> generateGiantTallGrass;
+		public final ConfigValue<Boolean> generateWisteriaTrees;
+		public final ConfigValue<Boolean> generateRice;
+		public final ConfigValue<Boolean> generateDelphiniums;
+		public final ConfigValue<Boolean> generateHibiscus;
 
 		public final ConfigValue<Integer> marshWeight;
 		public final ConfigValue<Integer> mushroomMarshWeight;
@@ -43,14 +47,18 @@ public class EnvironmentalConfig {
 			builder.pop();
 			builder.pop();
 			builder.push("features");
-			generateGiantMushroomsInSwamps = builder.define("Giant Mushroom generation in Swamps", true);
+			generateGiantMushrooms = builder.define("Giant Mushroom generation in Swamps", true);
+			generateRice = builder.define("Rice generation in Marshes", true);
 			generateGiantTallGrass = builder.define("Giant Tall Grass generation", true);
+			generateWisteriaTrees = builder.define("Wisteria Tree generation in Flower Forests", true);
+			generateDelphiniums = builder.define("Delphinium generation in Flower Forests", true);
+			generateHibiscus = builder.define("Hibiscus generation in Jungles", true);
 			builder.pop();
 			builder.pop();
 
 			builder.push("entities");
 			limitFarmAnimalSpawns = builder.comment("Make farm animals spawn in less biomes to allow new mobs to take their place and diversify biome spawns").define("Limit farm animal spawns", true);
-			biomeVariantsAlwaysSpawn = builder.comment("Make biome variants of mobs like Husk always spawn in place of their original in their biomes").define("Biome variants always spawn", true);
+			biomeVariantsAlwaysSpawn = builder.comment("Make biome variants of mobs like Husks always spawn in place of their original in their biomes").define("Biome variants always spawn", true);
 			builder.push("koi");
 			blockOnlyNaturalSpawns = builder.comment("Make Koi only block natural spawns").define("Block only natural spawns", true);
 			koiHorizontalSerenityRange = builder.comment("Horizontal radius of Serenity effect in blocks").define("Horizontal serenity range (radius)", 32);
