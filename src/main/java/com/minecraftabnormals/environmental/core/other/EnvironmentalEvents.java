@@ -203,8 +203,10 @@ public class EnvironmentalEvents {
 				}
 			}
 			if (!potentialStates.isEmpty()) {
-				world.setBlockState(pos, potentialStates.get(world.getRandom().nextInt(potentialStates.size())), 3);
-				if (!world.isRemote()) world.playEvent(2005, pos, 0);
+				if (!world.isRemote()) {
+					world.playEvent(2005, pos, 0);
+					world.setBlockState(pos, potentialStates.get(world.getRandom().nextInt(potentialStates.size())), 3);
+				}
 				if (!player.isCreative()) stack.shrink(1);
 				event.setCancellationResult(ActionResultType.func_233537_a_(world.isRemote()));
 				event.setCanceled(true);
