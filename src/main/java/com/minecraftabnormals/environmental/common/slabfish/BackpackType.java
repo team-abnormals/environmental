@@ -27,7 +27,7 @@ import java.util.function.Predicate;
  */
 public class BackpackType implements Predicate<ItemStack> {
 	private final Ingredient ingredient;
-	private final LazyValue<ResourceLocation> textureLocation = new LazyValue<>(() -> new ResourceLocation(this.getRegistryName().getNamespace(), "textures/entity/slabfish/backpack/" + this.getRegistryName().getPath() + ".png"));
+	private final LazyValue<ResourceLocation> textureLocation = new LazyValue<>(() -> new ResourceLocation(this.getRegistryName().getNamespace(), "backpack/" + this.getRegistryName().getPath()));
 	private ResourceLocation registryName;
 	private ITextComponent displayName;
 

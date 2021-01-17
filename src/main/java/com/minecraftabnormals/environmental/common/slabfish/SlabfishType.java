@@ -30,7 +30,7 @@ public class SlabfishType implements Predicate<SlabfishConditionContext> {
 	private final boolean modLoaded;
 	private final int priority;
 	private final SlabfishCondition[] conditions;
-	private final LazyValue<ResourceLocation> textureLocation = new LazyValue<>(() -> new ResourceLocation(this.getRegistryName().getNamespace(), "textures/entity/slabfish/type/" + this.getRegistryName().getPath() + ".png"));
+	private final LazyValue<ResourceLocation> textureLocation = new LazyValue<>(() -> new ResourceLocation(this.getRegistryName().getNamespace(), "type/" + this.getRegistryName().getPath()));
 	private ResourceLocation registryName;
 	private ITextComponent displayName;
 

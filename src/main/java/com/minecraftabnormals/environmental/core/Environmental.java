@@ -1,6 +1,7 @@
 package com.minecraftabnormals.environmental.core;
 
 import com.minecraftabnormals.abnormals_core.core.util.registry.RegistryHelper;
+import com.minecraftabnormals.environmental.client.render.SlabfishSpriteUploader;
 import com.minecraftabnormals.environmental.common.network.message.*;
 import com.minecraftabnormals.environmental.common.slabfish.SlabfishLoader;
 import com.minecraftabnormals.environmental.common.slabfish.condition.SlabfishCondition;
@@ -78,6 +79,7 @@ public class Environmental {
 		bus.addListener(this::setupCommon);
 		bus.addListener(this::registerRegistries);
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
+			SlabfishSpriteUploader.init(bus);
 			bus.addListener(this::setupClient);
 			bus.addListener(this::stitchTextures);
 			bus.addListener(this::registerItemColors);

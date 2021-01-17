@@ -6,7 +6,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.entity.Entity;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -19,7 +19,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  */
 @OnlyIn(Dist.CLIENT)
 public class SlabfishModel<E extends SlabfishEntity> extends AgeableModel<E> {
-	SlabfishEntity entity;
+
 	public ModelRenderer body;
 	public ModelRenderer rightLeg;
 	public ModelRenderer leftLeg;
@@ -27,7 +27,8 @@ public class SlabfishModel<E extends SlabfishEntity> extends AgeableModel<E> {
 	public ModelRenderer leftArm;
 	public ModelRenderer fin;
 	public ModelRenderer backpack;
-	public float partialTicks;
+	public TextureAtlasSprite sprite;
+	private float partialTicks;
 
 	public SlabfishModel() {
 		this.textureWidth = 32;
@@ -74,9 +75,13 @@ public class SlabfishModel<E extends SlabfishEntity> extends AgeableModel<E> {
 	}
 
 	@Override
-	public void setRotationAngles(E entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.entity = entityIn;
+	public void setLivingAnimations(E entity, float limbSwing, float limbSwingAmount, float partialTicks) {
+		super.setLivingAnimations(entity, limbSwing, limbSwingAmount, partialTicks);
+		this.partialTicks = partialTicks;
+	}
 
+	@Override
+	public void setRotationAngles(E entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.fin.showModel = !entityIn.hasBackpack();
 
 		if (!entityIn.isInWater()) {
@@ -98,6 +103,11 @@ public class SlabfishModel<E extends SlabfishEntity> extends AgeableModel<E> {
 			this.rightArm.rotateAngleZ = ageInTicks;
 			this.leftArm.rotateAngleZ = -ageInTicks;
 		}
+	}
+
+	@Override
+	public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+		super.render(matrixStack, this.sprite.wrapBuffer(buffer), packedLight, packedOverlay, red, green, blue, alpha);
 	}
 
 	@Override

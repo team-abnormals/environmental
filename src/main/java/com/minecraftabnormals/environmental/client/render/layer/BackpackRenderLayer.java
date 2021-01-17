@@ -1,5 +1,7 @@
 package com.minecraftabnormals.environmental.client.render.layer;
 
+import com.minecraftabnormals.environmental.client.model.SlabfishModel;
+import com.minecraftabnormals.environmental.client.render.SlabfishSpriteUploader;
 import com.minecraftabnormals.environmental.common.entity.SlabfishEntity;
 import com.minecraftabnormals.environmental.common.slabfish.BackpackType;
 import com.minecraftabnormals.environmental.common.slabfish.SlabfishManager;
@@ -11,23 +13,25 @@ import net.minecraft.client.renderer.entity.IEntityRenderer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class BackpackRenderLayer<E extends SlabfishEntity, M extends EntityModel<E>> extends LayerRenderer<E, M> {
+public class BackpackRenderLayer<E extends SlabfishEntity, M extends SlabfishModel<E>> extends LayerRenderer<E, M> {
 
 	public BackpackRenderLayer(IEntityRenderer<E, M> entityRenderer) {
 		super(entityRenderer);
 	}
 
 	@Override
-	public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, E slabby, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+	public void render(MatrixStack matrixStack, IRenderTypeBuffer buffer, int packedLightIn, E slabby, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 		if (!slabby.hasBackpack()) return;
 
 		BackpackType backpackType = SlabfishManager.get(slabby.getEntityWorld()).getBackpackType(slabby.getBackpack()).orElse(SlabfishManager.BROWN_BACKPACK);
-		IVertexBuilder builder = bufferIn.getBuffer(RenderType.getEntityCutoutNoCull(backpackType.getTextureLocation()));
+		IVertexBuilder builder = buffer.getBuffer(RenderType.getEntityCutoutNoCull(SlabfishSpriteUploader.ATLAS_LOCATION));
+		this.getEntityModel().sprite = SlabfishSpriteUploader.instance().getSprite(backpackType.getTextureLocation());
 		this.getEntityModel().setRotationAngles(slabby, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-		this.getEntityModel().render(matrixStackIn, builder, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+		this.getEntityModel().render(matrixStack, builder, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
 	}
 }
