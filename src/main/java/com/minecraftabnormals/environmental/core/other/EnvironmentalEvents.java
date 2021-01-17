@@ -194,7 +194,7 @@ public class EnvironmentalEvents {
 		PlayerEntity player = event.getPlayer();
 		ItemStack stack = event.getItemStack();
 		Item item = stack.getItem();
-		if (item == Items.BONE_MEAL && state.getBlock() == Blocks.DIRT) {
+		if (item == Items.BONE_MEAL && state.getBlock() == Blocks.DIRT && world.getBlockState(pos.up()).propagatesSkylightDown(world, pos)) {
 			ArrayList<BlockState> potentialStates = new ArrayList<>();
 			for (BlockPos blockpos : BlockPos.getAllInBoxMutable(pos.add(-1, -1, -1), pos.add(1, 1, 1))) {
 				Block block = world.getBlockState(blockpos).getBlock();
