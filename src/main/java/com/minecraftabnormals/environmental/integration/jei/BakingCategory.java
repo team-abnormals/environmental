@@ -1,9 +1,13 @@
 package com.minecraftabnormals.environmental.integration.jei;
 
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 import com.minecraftabnormals.environmental.common.item.crafting.BakingRecipe;
 import com.minecraftabnormals.environmental.core.Environmental;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.mojang.blaze3d.matrix.MatrixStack;
+import mezz.jei.api.constants.ModIds;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -23,7 +27,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 public class BakingCategory implements IRecipeCategory<BakingRecipe> {
 	public static final ResourceLocation BAKING = new ResourceLocation(Environmental.MOD_ID, "baking");
 	private final IDrawableAnimated animatedFlame;
-	private final IDrawableAnimated arrow;
+	protected final LoadingCache<BakingRecipe, IDrawableAnimated> cachedArrows;
 
 	private static final int inputSlot = 0;
 	private static final int outputSlot = 2;
@@ -38,20 +42,52 @@ public class BakingCategory implements IRecipeCategory<BakingRecipe> {
 		this.localizedName = I18n.format("gui." + Environmental.MOD_ID + ".category.baking");
 		IDrawableStatic staticFlame = guiHelper.createDrawable(EnvironmentalPlugin.RECIPE_GUI_ENVIRONMENTAL, 82, 114, 14, 14);
 		this.animatedFlame = guiHelper.createAnimatedDrawable(staticFlame, 300, IDrawableAnimated.StartDirection.TOP, true);
-		this.arrow = guiHelper.drawableBuilder(EnvironmentalPlugin.RECIPE_GUI_ENVIRONMENTAL, 82, 128, 24, 17).buildAnimated(100, IDrawableAnimated.StartDirection.LEFT, false);
+		this.cachedArrows = CacheBuilder.newBuilder()
+				.maximumSize(25)
+				.build(new CacheLoader<BakingRecipe, IDrawableAnimated>() {
+					@Override
+					public IDrawableAnimated load(BakingRecipe key) {
+						int cookTime = key.getCookTime();
+						if (cookTime <= 0) {
+							cookTime = 100;
+						}
+						return guiHelper.drawableBuilder(new ResourceLocation(ModIds.JEI_ID, "textures/gui/gui_vanilla.png"), 82, 128, 24, 17)
+								.buildAnimated(cookTime, IDrawableAnimated.StartDirection.LEFT, false);
+					}
+				});
 	}
 
 	@Override
 	public void draw(BakingRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
-		this.animatedFlame.draw(matrixStack, 1, 20);
-		this.arrow.draw(matrixStack, 24, 18);
+		animatedFlame.draw(matrixStack, 1, 20);
+
+		IDrawableAnimated arrow = cachedArrows.getUnchecked(recipe);
+		arrow.draw(matrixStack, 24, 18);
+
+		drawExperience(recipe, matrixStack, 0);
+		drawCookTime(recipe, matrixStack, 45);
+	}
+
+	protected void drawExperience(BakingRecipe recipe, MatrixStack matrixStack, int y) {
 		float experience = recipe.getExperience();
-		if (experience > 0.0F) {
+		if (experience > 0) {
 			TranslationTextComponent experienceString = new TranslationTextComponent("gui.jei.category.smelting.experience", experience);
 			Minecraft minecraft = Minecraft.getInstance();
 			FontRenderer fontRenderer = minecraft.fontRenderer;
 			int stringWidth = fontRenderer.getStringPropertyWidth(experienceString);
-			fontRenderer.func_243248_b(matrixStack, experienceString, (float) (this.background.getWidth() - stringWidth), 0.0F, -8355712);
+			fontRenderer.func_243248_b(matrixStack, experienceString, background.getWidth() - stringWidth, y, 0xFF808080);
+		}
+	}
+
+	protected void drawCookTime(BakingRecipe recipe, MatrixStack matrixStack, int y) {
+		int cookTime = recipe.getCookTime();
+		if (cookTime > 0) {
+			int cookTimeSeconds = cookTime / 20;
+			TranslationTextComponent timeString = new TranslationTextComponent("gui.jei.category.smelting.time.seconds", cookTimeSeconds);
+			Minecraft minecraft = Minecraft.getInstance();
+			FontRenderer fontRenderer = minecraft.fontRenderer;
+			int stringWidth = fontRenderer.getStringPropertyWidth(timeString);
+			fontRenderer.func_243248_b(matrixStack, timeString, background.getWidth() - stringWidth, y, 0xFF808080);
 		}
 	}
 
