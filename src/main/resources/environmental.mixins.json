@@ -9,6 +9,7 @@
     "ChickenEntityMixin",
     "DoublePlantBlockMixin",
     "GrassBlockMixin",
+    "HoeItemMixin",
     "LilyPadBlockMixin",
     "LivingEntityMixin",
     "MobEntityMixin",
