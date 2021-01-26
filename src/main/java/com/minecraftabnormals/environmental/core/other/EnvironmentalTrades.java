@@ -80,6 +80,7 @@ public class EnvironmentalTrades {
 			apprentice.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.SALMON_RICE_CAKE.get(), 5, 2, 6, 15));
 			expert.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.PUFFERFISH_RICE_CAKE.get(), 3, 4, 5, 30));
 			master.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.TROPICAL_FISH_KELP_ROLL.get(), 3, 4, 5, 30));
+			master.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.KOI_KELP_ROLL.get(), 3, 5, 5, 30));
 
 			if (ModList.get().isLoaded("upgrade_aquatic")) {
 				expert.add(new TradeUtils.ItemsForEmeraldsTrade(EnvironmentalItems.PIKE_KELP_ROLL.get(), 4, 1, 3, 25));

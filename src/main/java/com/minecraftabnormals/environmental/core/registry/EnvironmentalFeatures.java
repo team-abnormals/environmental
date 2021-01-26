@@ -9,6 +9,7 @@ import com.minecraftabnormals.environmental.common.world.gen.feature.Directional
 import com.minecraftabnormals.environmental.common.world.gen.feature.DuckNestFeature;
 import com.minecraftabnormals.environmental.common.world.gen.feature.FallenLeavesFeature;
 import com.minecraftabnormals.environmental.common.world.gen.feature.RiceFeature;
+import com.minecraftabnormals.environmental.common.world.gen.feature.TurkeyNestFeature;
 import com.minecraftabnormals.environmental.common.world.gen.feature.WisteriaTreeFeature;
 import com.minecraftabnormals.environmental.common.world.gen.util.WisteriaColor;
 import com.minecraftabnormals.environmental.core.Environmental;
@@ -39,7 +40,7 @@ public class EnvironmentalFeatures {
     
     public static final RegistryObject<Feature<NoFeatureConfig>> CHICKEN_NEST = FEATURES.register("chicken_nest", () -> new ChickenNestFeature(NoFeatureConfig.field_236558_a_));
     public static final RegistryObject<Feature<NoFeatureConfig>> DUCK_NEST = FEATURES.register("duck_nest", () -> new DuckNestFeature(NoFeatureConfig.field_236558_a_));
-    public static final RegistryObject<Feature<NoFeatureConfig>> TURKEY_NEST = FEATURES.register("turkey_nest", () -> new ChickenNestFeature(NoFeatureConfig.field_236558_a_));
+    public static final RegistryObject<Feature<NoFeatureConfig>> TURKEY_NEST = FEATURES.register("turkey_nest", () -> new TurkeyNestFeature(NoFeatureConfig.field_236558_a_));
     
     public static final RegistryObject<Feature<BaseTreeFeatureConfig>> WISTERIA_TREE = FEATURES.register("wisteria_tree", () -> new WisteriaTreeFeature(BaseTreeFeatureConfig.CODEC_BASE_TREE_FEATURE_CONFIG));
     public static final RegistryObject<Feature<BaseTreeFeatureConfig>> BIG_WISTERIA_TREE = FEATURES.register("big_wisteria_tree", () -> new BigWisteriaTreeFeature(BaseTreeFeatureConfig.CODEC_BASE_TREE_FEATURE_CONFIG));
@@ -95,13 +96,20 @@ public class EnvironmentalFeatures {
         if (biome.getCategory() == Biome.Category.JUNGLE) {
             EnvironmentalBiomeFeatures.addGiantTallGrass(biome, 5);
             EnvironmentalBiomeFeatures.addDoubleFlower(EnvironmentalBlocks.BIRD_OF_PARADISE.get().getDefaultState(), biome, 5);
-            EnvironmentalBiomeFeatures.addShortFlower(EnvironmentalBlocks.YELLOW_HIBISCUS.get().getDefaultState(), biome, 1);
-            EnvironmentalBiomeFeatures.addShortFlower(EnvironmentalBlocks.ORANGE_HIBISCUS.get().getDefaultState(), biome, 1);
-            EnvironmentalBiomeFeatures.addShortFlower(EnvironmentalBlocks.RED_HIBISCUS.get().getDefaultState(), biome, 1);
-            EnvironmentalBiomeFeatures.addShortFlower(EnvironmentalBlocks.PINK_HIBISCUS.get().getDefaultState(), biome, 1);
-            EnvironmentalBiomeFeatures.addShortFlower(EnvironmentalBlocks.MAGENTA_HIBISCUS.get().getDefaultState(), biome, 1);
-            EnvironmentalBiomeFeatures.addShortFlower(EnvironmentalBlocks.PURPLE_HIBISCUS.get().getDefaultState(), biome, 1);
             if (wisterias) EnvironmentalBiomeFeatures.addWisteriaTree(biome, WisteriaColor.PINK, 0, 0.1F, true);
+
+            if (biome == Biomes.JUNGLE_EDGE || biome == Biomes.MODIFIED_JUNGLE_EDGE)
+                EnvironmentalBiomeFeatures.addShortFlower(EnvironmentalBlocks.YELLOW_HIBISCUS.get().getDefaultState(), biome, 1);
+            if (biome == Biomes.BAMBOO_JUNGLE_HILLS)
+                EnvironmentalBiomeFeatures.addShortFlower(EnvironmentalBlocks.ORANGE_HIBISCUS.get().getDefaultState(), biome, 1);
+            if (biome == Biomes.JUNGLE)
+                EnvironmentalBiomeFeatures.addShortFlower(EnvironmentalBlocks.PINK_HIBISCUS.get().getDefaultState(), biome, 1);
+            if (biome == Biomes.MODIFIED_JUNGLE)
+                EnvironmentalBiomeFeatures.addShortFlower(EnvironmentalBlocks.RED_HIBISCUS.get().getDefaultState(), biome, 1);
+            if (biome == Biomes.BAMBOO_JUNGLE)
+                EnvironmentalBiomeFeatures.addShortFlower(EnvironmentalBlocks.MAGENTA_HIBISCUS.get().getDefaultState(), biome, 1);
+            if (biome == Biomes.JUNGLE_HILLS)
+                EnvironmentalBiomeFeatures.addShortFlower(EnvironmentalBlocks.PURPLE_HIBISCUS.get().getDefaultState(), biome, 1);
         }
 
         if (biome.getCategory() == Biome.Category.PLAINS) {
@@ -114,7 +122,7 @@ public class EnvironmentalFeatures {
             if (biome == Biomes.FLOWER_FOREST) {
                 EnvironmentalBiomeFeatures.addDirectionalFlower(EnvironmentalBlocks.CARTWHEEL.get().getDefaultState(), biome, 5);
                 EnvironmentalBiomeFeatures.addDelphiniums(biome, 12);
-                EnvironmentalBiomeFeatures.addWisteriaTreesBeehive(biome, 2, 0.01F, false);
+                EnvironmentalBiomeFeatures.addWisteriaTreesBeehive(biome, 2, 0.0075F, false);
             }
             if (biome == Biomes.DARK_FOREST || biome == Biomes.DARK_FOREST_HILLS) {
                 EnvironmentalBiomeFeatures.addShortFlower(EnvironmentalBlocks.BLUEBELL.get().getDefaultState(), biome, 3);

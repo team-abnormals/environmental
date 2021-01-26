@@ -49,7 +49,7 @@ public final class BlossomHillsBiome extends AbnormalsBiome {
         this.addSpawn(EntityClassification.CREATURE, new Biome.SpawnListEntry(EntityType.COW, 8, 4, 4));
         this.addSpawn(EntityClassification.CREATURE, new Biome.SpawnListEntry(EntityType.PANDA, 80, 1, 2));
 
-        this.addSpawn(EntityClassification.WATER_AMBIENT, new Biome.SpawnListEntry(EnvironmentalEntities.KOI.get(), 16, 1, 4));
+        this.addSpawn(EntityClassification.WATER_AMBIENT, new Biome.SpawnListEntry(EnvironmentalEntities.KOI.get(), 12, 1, 3));
 
         this.addSpawn(EntityClassification.AMBIENT, new Biome.SpawnListEntry(EntityType.BAT, 10, 8, 8));
 
