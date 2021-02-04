@@ -1,4 +1,4 @@
-package com.minecraftabnormals.environmental.common.item;
+package com.minecraftabnormals.environmental.common.item.explorer;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableMultimap.Builder;
@@ -8,7 +8,6 @@ import com.minecraftabnormals.environmental.core.Environmental;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalAttributes;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
 import net.minecraft.client.renderer.entity.model.BipedModel;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -18,10 +17,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -30,8 +27,6 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
-import javax.annotation.Nullable;
-import java.util.List;
 import java.util.UUID;
 
 @EventBusSubscriber(modid = Environmental.MOD_ID)
@@ -98,24 +93,17 @@ public class ThiefHoodItem extends ExplorerArmorItem {
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
-	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-		CompoundNBT compound = stack.getOrCreateTag();
-		int uses = compound.getInt(NBT_TAG);
-		tooltip.add((new StringTextComponent(Integer.toString(uses) + " monsters slain")).mergeStyle(TextFormatting.GRAY));
-		//TODO: Detection range attribute
+	public String getUsesTag() {
+		return NBT_TAG;
 	}
 
-	public static int getIncreaseForUses(int uses) {
-		int increase = 1;
-		if (uses >= 10)
-			increase += 1;
-		if (uses >= 50)
-			increase += 1;
-		if (uses >= 100)
-			increase += 1;
-		if (uses >= 500)
-			increase += 1;
-		return increase;
+	@Override
+	public String getDescriptionString() {
+		return "monsters slain";
+	}
+
+	@Override
+	public int[] getLevelCaps() {
+		return new int[]{0, 10, 50, 100, 500};
 	}
 }

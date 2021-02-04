@@ -1,6 +1,6 @@
 package com.minecraftabnormals.environmental.core.mixin;
 
-import com.minecraftabnormals.environmental.common.item.WandererBootsItem;
+import com.minecraftabnormals.environmental.common.item.explorer.WandererBootsItem;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;

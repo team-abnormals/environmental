@@ -1,4 +1,4 @@
-package com.minecraftabnormals.environmental.common.item;
+package com.minecraftabnormals.environmental.common.item.explorer;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableMultimap.Builder;
@@ -63,23 +63,17 @@ public class WandererBootsItem extends ExplorerArmorItem {
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
-	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-		CompoundNBT compound = stack.getOrCreateTag();
-		int uses = Math.round(compound.getFloat(NBT_TAG));
-		tooltip.add((new StringTextComponent(Integer.toString(uses) + " meters travelled")).mergeStyle(TextFormatting.GRAY));
+	public String getUsesTag() {
+		return NBT_TAG;
 	}
 
-	public static int getIncreaseForUses(int uses) {
-		int increase = 1;
-		if (uses >= 1000)
-			increase += 1;
-		if (uses >= 5000)
-			increase += 1;
-		if (uses >= 10000)
-			increase += 1;
-		if (uses >= 50000)
-			increase += 1;
-		return increase;
+	@Override
+	public String getDescriptionString() {
+		return "meters travelled";
+	}
+
+	@Override
+	public int[] getLevelCaps() {
+		return new int[]{0, 1000, 5000, 10000, 50000};
 	}
 }

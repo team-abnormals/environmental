@@ -4,6 +4,10 @@ import com.minecraftabnormals.abnormals_core.common.items.AbnormalsMusicDiscItem
 import com.minecraftabnormals.abnormals_core.common.items.AbnormalsSpawnEggItem;
 import com.minecraftabnormals.abnormals_core.core.util.registry.ItemSubRegistryHelper;
 import com.minecraftabnormals.environmental.common.item.*;
+import com.minecraftabnormals.environmental.common.item.explorer.ArchitectBeltItem;
+import com.minecraftabnormals.environmental.common.item.explorer.HealerPouchItem;
+import com.minecraftabnormals.environmental.common.item.explorer.ThiefHoodItem;
+import com.minecraftabnormals.environmental.common.item.explorer.WandererBootsItem;
 import com.minecraftabnormals.environmental.core.Environmental;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalFoods;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalTiers;

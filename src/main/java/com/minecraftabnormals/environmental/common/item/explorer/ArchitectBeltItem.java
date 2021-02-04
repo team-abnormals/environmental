@@ -1,4 +1,4 @@
-package com.minecraftabnormals.environmental.common.item;
+package com.minecraftabnormals.environmental.common.item.explorer;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableMultimap.Builder;
@@ -58,14 +58,6 @@ public class ArchitectBeltItem extends ExplorerArmorItem {
 		return slot == this.slot ? builder.build() : super.getAttributeModifiers(slot);
 	}
 
-	@Override
-	@OnlyIn(Dist.CLIENT)
-	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-		CompoundNBT compoundnbt = stack.getOrCreateTag();
-		int uses = compoundnbt.getInt(NBT_TAG);
-		tooltip.add((new StringTextComponent(Integer.toString(uses) + " blocks placed")).mergeStyle(TextFormatting.GRAY));
-	}
-
 	@SubscribeEvent
 	public static void placeBlockEvent(BlockEvent.EntityPlaceEvent event) {
 		if (event.getEntity() instanceof PlayerEntity) {
@@ -78,16 +70,18 @@ public class ArchitectBeltItem extends ExplorerArmorItem {
 		}
 	}
 
-	public static int getIncreaseForUses(int uses) {
-		int increase = 1;
-		if (uses >= 100)
-			increase += 1;
-		if (uses >= 500)
-			increase += 1;
-		if (uses >= 2500)
-			increase += 1;
-		if (uses >= 10000)
-			increase += 1;
-		return increase;
+	@Override
+	public String getUsesTag() {
+		return NBT_TAG;
+	}
+
+	@Override
+	public String getDescriptionString() {
+		return "blocks placed";
+	}
+
+	@Override
+	public int[] getLevelCaps() {
+		return new int[]{0, 100, 500, 2500, 1000};
 	}
 }

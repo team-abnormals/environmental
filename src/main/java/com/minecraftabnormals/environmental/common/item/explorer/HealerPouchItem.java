@@ -1,4 +1,4 @@
-package com.minecraftabnormals.environmental.common.item;
+package com.minecraftabnormals.environmental.common.item.explorer;
 
 import com.minecraftabnormals.environmental.client.model.HealerPouchModel;
 import com.minecraftabnormals.environmental.core.Environmental;
@@ -39,14 +39,6 @@ public class HealerPouchItem extends ExplorerArmorItem {
 		return HealerPouchModel.get(1.0F);
 	}
 
-	@Override
-	@OnlyIn(Dist.CLIENT)
-	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-		CompoundNBT compoundnbt = stack.getOrCreateTag();
-		int uses = compoundnbt.getInt(NBT_TAG);
-		tooltip.add((new StringTextComponent(uses + " adrenaline boosts")).mergeStyle(TextFormatting.GRAY));
-	}
-
 	@SubscribeEvent
 	public static void onEvent(LivingHurtEvent event) {
 		LivingEntity entity = event.getEntityLiving();
@@ -57,7 +49,7 @@ public class HealerPouchItem extends ExplorerArmorItem {
 				PlayerEntity player = (PlayerEntity) event.getEntityLiving();
 				if (!player.getCooldownTracker().hasCooldown(stack.getItem())) {
 					CompoundNBT tag = stack.getOrCreateTag();
-					int increase = getIncreaseForUses(tag.getInt(NBT_TAG));
+					int increase = ((HealerPouchItem) stack.getItem()).getIncreaseForUses(tag.getInt(NBT_TAG));
 					int panicSeconds = 4 * increase;
 					player.addPotionEffect(new EffectInstance(Effects.REGENERATION, 20 * panicSeconds, increase > 2 ? 1 : 0));
 					player.addPotionEffect(new EffectInstance(EnvironmentalEffects.PANIC.get(), 20 * panicSeconds, 0));
@@ -74,16 +66,18 @@ public class HealerPouchItem extends ExplorerArmorItem {
 
 	}
 
-	public static int getIncreaseForUses(int uses) {
-		int increase = 1;
-		if (uses >= 10)
-			increase += 1;
-		if (uses >= 50)
-			increase += 1;
-		if (uses >= 100)
-			increase += 1;
-		if (uses >= 250)
-			increase += 1;
-		return increase;
+	@Override
+	public String getUsesTag() {
+		return NBT_TAG;
+	}
+
+	@Override
+	public String getDescriptionString() {
+		return "adrenaline boosts";
+	}
+
+	@Override
+	public int[] getLevelCaps() {
+		return new int[]{0, 10, 50, 100, 250};
 	}
 }

@@ -1,6 +1,6 @@
 package com.minecraftabnormals.environmental.core.mixin;
 
-import com.minecraftabnormals.environmental.common.item.ThiefHoodItem;
+import com.minecraftabnormals.environmental.common.item.explorer.ThiefHoodItem;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalAttributes;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
