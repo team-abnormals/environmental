@@ -22,7 +22,7 @@ public abstract class AbstractSkeletonEntityMixin extends MonsterEntity {
 
 	@Inject(method = "setEquipmentBasedOnDifficulty", at = @At("TAIL"))
 	private void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty, CallbackInfo info) {
-		if (Math.random() < 0.025F) {
+		if (Math.random() < 0.01F) {
 			this.setItemStackToSlot(EquipmentSlotType.HEAD, new ItemStack(EnvironmentalItems.THIEF_HOOD.get()));
 			this.inventoryArmorDropChances[EquipmentSlotType.HEAD.getIndex()] = 1.0F;
 		}
