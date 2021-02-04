@@ -315,7 +315,6 @@
 	"item.environmental.yak_pants": "Yak Pants",
 	
 	"item.environmental.cattail_seeds": "Cattail Seeds",
-	"item.environmental.rice_ball": "Rice Ball",
   
 	"item.environmental.venison": "Raw Venison",
 	"item.environmental.cooked_venison": "Cooked Venison",
@@ -370,7 +369,7 @@
 	"entity.environmental.yak": "Yak",
 	"entity.environmental.koi": "Koi",
 	
-	"entity.environmental.duck_egg": "Duck Egg",
+	"entity.environmental.duck_egg": "Thrown Duck Egg",
 	"entity.environmental.mud_ball": "Mud Ball",
 	
 	"entity.minecraft.villager.environmental.ceramist": "Ceramist",

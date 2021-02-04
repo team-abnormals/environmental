@@ -3,13 +3,16 @@
   "group": "rice_seafood",
   "ingredients": [
     {
-      "item": "environmental:rice_ball"
-    },
-    {
       "item": "minecraft:dried_kelp"
     },
     {
       "item": "minecraft:pufferfish"
+    },
+    {
+      "tag": "forge:crops/rice"
+    },
+    {
+      "tag": "forge:crops/rice"
     }
   ],
     "result": {

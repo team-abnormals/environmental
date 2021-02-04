@@ -50,7 +50,6 @@ public class EnvironmentalItems {
 	public static final RegistryObject<Item> CATTAIL_SEEDS = HELPER.createItem("cattail_seeds", () -> new BlockNamedItem(EnvironmentalBlocks.CATTAIL_SPROUTS.get(), new Item.Properties().group(ItemGroup.MATERIALS)));
 	public static final RegistryObject<Item> DUCKWEED = HELPER.createItem("duckweed", () -> new LilyPadItem(EnvironmentalBlocks.DUCKWEED.get(), new Item.Properties().group(ItemGroup.DECORATIONS)));
 	public static final RegistryObject<Item> RICE = HELPER.createItem("rice", () -> new BlockItem(EnvironmentalBlocks.RICE.get(), new Item.Properties().group(ItemGroup.MISC)));
-	public static final RegistryObject<Item> RICE_BALL = HELPER.createItem("rice_ball", () -> new Item(new Item.Properties().food(EnvironmentalFoods.RICE_BALL).group(ItemGroup.FOOD)));
 	public static final RegistryObject<Item> SQUID_INK_RISOTTO = HELPER.createItem("squid_ink_risotto", () -> new SoupItem(new Item.Properties().maxStackSize(1).food(EnvironmentalFoods.SQUID_INK_RISOTTO).group(ItemGroup.FOOD)));
 
 	public static final RegistryObject<Item> COD_KELP_ROLL = HELPER.createItem("cod_kelp_roll", () -> new Item(new Item.Properties().food(EnvironmentalFoods.COD_KELP_ROLL).group(ItemGroup.FOOD)));
