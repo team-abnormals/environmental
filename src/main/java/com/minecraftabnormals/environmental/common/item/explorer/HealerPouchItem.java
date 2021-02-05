@@ -54,7 +54,7 @@ public class HealerPouchItem extends ExplorerArmorItem {
 					player.addPotionEffect(new EffectInstance(Effects.REGENERATION, 20 * panicSeconds, increase > 2 ? 1 : 0));
 					player.addPotionEffect(new EffectInstance(EnvironmentalEffects.PANIC.get(), 20 * panicSeconds, 0));
 					player.getCooldownTracker().setCooldown(stack.getItem(), 20 * (panicSeconds + (10 - increase * 2)));
-					tag.putInt(NBT_TAG, tag.getInt(NBT_TAG) + 1);
+					((HealerPouchItem) stack.getItem()).levelUp(stack, player);
 				}
 			} else {
 				if (entity.world.getRandom().nextInt(entity.world.getDifficulty().getId() + 3) != 0) {

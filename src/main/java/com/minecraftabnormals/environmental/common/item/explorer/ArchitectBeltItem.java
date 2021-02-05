@@ -63,9 +63,8 @@ public class ArchitectBeltItem extends ExplorerArmorItem {
 		if (event.getEntity() instanceof PlayerEntity) {
 			PlayerEntity player = (PlayerEntity) event.getEntity();
 			ItemStack stack = player.getItemStackFromSlot(EquipmentSlotType.LEGS);
-			if (stack.getItem() == EnvironmentalItems.ARCHITECT_BELT.get()) {
-				int uses = stack.getOrCreateTag().getInt(NBT_TAG);
-				stack.getOrCreateTag().putInt(NBT_TAG, uses + 1);
+			if (stack.getItem() instanceof ArchitectBeltItem) {
+				((ArchitectBeltItem) stack.getItem()).levelUp(stack, player);
 			}
 		}
 	}

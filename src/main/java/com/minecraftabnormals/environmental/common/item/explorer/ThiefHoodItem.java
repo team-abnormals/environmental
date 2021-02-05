@@ -9,6 +9,7 @@ import com.minecraftabnormals.environmental.core.registry.EnvironmentalAttribute
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.monster.EndermanEntity;
@@ -81,13 +82,11 @@ public class ThiefHoodItem extends ExplorerArmorItem {
 	@SubscribeEvent
 	public static void onEvent(LivingDeathEvent event) {
 		LivingEntity entity = event.getEntityLiving();
-
-		if (event.getSource().getTrueSource() instanceof LivingEntity && entity instanceof MonsterEntity) {
+		if (event.getSource().getTrueSource() instanceof LivingEntity && entity instanceof MobEntity) {
 			LivingEntity attacker = (LivingEntity) event.getSource().getTrueSource();
 			ItemStack stack = attacker.getItemStackFromSlot(EquipmentSlotType.HEAD);
 			if (stack.getItem() instanceof ThiefHoodItem) {
-				CompoundNBT tag = stack.getOrCreateTag();
-				tag.putInt(NBT_TAG, tag.getInt(NBT_TAG) + 1);
+				((ThiefHoodItem)stack.getItem()).levelUp(stack, attacker);
 			}
 		}
 	}
