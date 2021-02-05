@@ -2,9 +2,12 @@ package com.minecraftabnormals.environmental.common.item.explorer;
 
 import com.minecraftabnormals.environmental.api.IExplorerArmorItem;
 import com.minecraftabnormals.environmental.core.Environmental;
+import com.minecraftabnormals.environmental.core.other.EnvironmentalCriteriaTriggers;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalTiers;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.DyeableArmorItem;
 import net.minecraft.item.ItemStack;
@@ -30,6 +33,19 @@ public abstract class ExplorerArmorItem extends DyeableArmorItem implements IExp
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type) {
 		return getCorrectTexture(this.getRegistryName().getPath(), type);
+	}
+
+	@Override
+	public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
+		super.onArmorTick(stack, world, player);
+		if (stack.getTag() != null && this.getIncreaseForUses(this.getUses(stack.getTag())) == 5) {
+			if (player instanceof ServerPlayerEntity) {
+				ServerPlayerEntity serverplayerentity = (ServerPlayerEntity) player;
+				if (!world.isRemote()) {
+					EnvironmentalCriteriaTriggers.UPGRADE_GEAR.trigger(serverplayerentity, this);
+				}
+			}
+		}
 	}
 
 	public static String getCorrectTexture(String armor, String type) {
