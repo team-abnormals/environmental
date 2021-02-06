@@ -50,6 +50,7 @@ public class EnvironmentalFeatures {
 	public static final RegistryObject<Feature<NoFeatureConfig>> DUCK_NEST = FEATURES.register("duck_nest", () -> new DuckNestFeature(NoFeatureConfig.field_236558_a_));
 	public static final RegistryObject<Feature<NoFeatureConfig>> TURKEY_NEST = FEATURES.register("turkey_nest", () -> new TurkeyNestFeature(NoFeatureConfig.field_236558_a_));
 
+	public static final RegistryObject<Feature<BaseTreeFeatureConfig>> CHERRY_TREE = FEATURES.register("cherry_tree", () -> new CherryTreeFeature(BaseTreeFeatureConfig.CODEC));
 	public static final RegistryObject<Feature<BaseTreeFeatureConfig>> WISTERIA_TREE = FEATURES.register("wisteria_tree", () -> new WisteriaTreeFeature(BaseTreeFeatureConfig.CODEC));
 	public static final RegistryObject<Feature<BaseTreeFeatureConfig>> BIG_WISTERIA_TREE = FEATURES.register("big_wisteria_tree", () -> new BigWisteriaTreeFeature(BaseTreeFeatureConfig.CODEC));
 
@@ -118,7 +119,7 @@ public class EnvironmentalFeatures {
 
 		public static final BaseTreeFeatureConfig WILLOW_TREE_CONFIG = (new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(States.WILLOW_LOG), new SimpleBlockStateProvider(States.WILLOW_LEAVES), new BlobFoliagePlacer(FeatureSpread.func_242252_a(3), FeatureSpread.func_242252_a(0), 3), new StraightTrunkPlacer(5, 3, 0), new TwoLayerFeature(1, 0, 1))).setMaxWaterDepth(1).setDecorators(ImmutableList.of(LeaveVineTreeDecorator.field_236871_b_, HangingWillowLeavesTreeDecorator.field_236871_b_)).build();
 
-		public static final BaseTreeFeatureConfig CHERRY_TREE_CONFIG = (new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(States.CHERRY_LOG), new SimpleBlockStateProvider(States.CHERRY_LEAVES), new FancyFoliagePlacer(FeatureSpread.func_242252_a(2), FeatureSpread.func_242252_a(4), 4), new FancyTrunkPlacer(3, 11, 0), new TwoLayerFeature(0, 0, 0, OptionalInt.of(4)))).setIgnoreVines().func_236702_a_(Heightmap.Type.MOTION_BLOCKING).build();
+		public static final BaseTreeFeatureConfig CHERRY_TREE_CONFIG = (new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(States.CHERRY_LOG), new SimpleBlockStateProvider(States.CHERRY_LEAVES), new FancyFoliagePlacer(FeatureSpread.func_242252_a(0), FeatureSpread.func_242252_a(0), 0), new FancyTrunkPlacer(0, 0, 0), new TwoLayerFeature(0, 0, 0, OptionalInt.of(0)))).setIgnoreVines().func_236702_a_(Heightmap.Type.MOTION_BLOCKING).build();
 		public static final BaseTreeFeatureConfig CHERRY_TREE_WITH_FEW_BEEHIVES_CONFIG = CHERRY_TREE_CONFIG.func_236685_a_(ImmutableList.of(Features.Placements.BEES_0002_PLACEMENT));
 		public static final BaseTreeFeatureConfig CHERRY_TREE_WITH_BEEHIVES_CONFIG = CHERRY_TREE_CONFIG.func_236685_a_(ImmutableList.of(Features.Placements.BEES_002_PLACEMENT));
 		public static final BaseTreeFeatureConfig CHERRY_TREE_WITH_MORE_BEEHIVES_CONFIG = CHERRY_TREE_CONFIG.func_236685_a_(ImmutableList.of(Features.Placements.BEES_005_PLACEMENT));
@@ -197,9 +198,9 @@ public class EnvironmentalFeatures {
 		public static final ConfiguredFeature<?, ?> PINK_WISTERIA_TREE_BIG = EnvironmentalFeatures.BIG_WISTERIA_TREE.get().withConfiguration(Configs.PINK_WISTERIA_TREE_WITH_BEEHIVES_CONFIG);
 		public static final ConfiguredFeature<?, ?> PURPLE_WISTERIA_TREE_BIG = EnvironmentalFeatures.BIG_WISTERIA_TREE.get().withConfiguration(Configs.PURPLE_WISTERIA_TREE_WITH_BEEHIVES_CONFIG);
 
-		public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> CHERRY_TREE = Feature.TREE.withConfiguration(Configs.CHERRY_TREE_CONFIG);
-		public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> CHERRY_TREE_BEES_0002 = Feature.TREE.withConfiguration(Configs.CHERRY_TREE_WITH_FEW_BEEHIVES_CONFIG);
-		public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> CHERRY_TREE_BEES_005 = Feature.TREE.withConfiguration(Configs.CHERRY_TREE_WITH_MORE_BEEHIVES_CONFIG);
+		public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> CHERRY_TREE = EnvironmentalFeatures.CHERRY_TREE.get().withConfiguration(Configs.CHERRY_TREE_CONFIG);
+		public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> CHERRY_TREE_BEES_0002 = EnvironmentalFeatures.CHERRY_TREE.get().withConfiguration(Configs.CHERRY_TREE_WITH_FEW_BEEHIVES_CONFIG);
+		public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> CHERRY_TREE_BEES_005 = EnvironmentalFeatures.CHERRY_TREE.get().withConfiguration(Configs.CHERRY_TREE_WITH_MORE_BEEHIVES_CONFIG);
 
 		public static final ConfiguredFeature<?, ?> WILLOW_TREE = Feature.TREE.withConfiguration(Configs.WILLOW_TREE_CONFIG).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.COUNT_EXTRA.configure(new AtSurfaceWithExtraConfig(3, 0.1F, 1)));
 		public static final ConfiguredFeature<?, ?> MARSH_OAK = Feature.RANDOM_SELECTOR.withConfiguration(new MultipleRandomFeatureConfig(ImmutableList.of(Features.FANCY_OAK.withChance(0.33333334F)), Features.OAK)).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.COUNT_EXTRA.configure(new AtSurfaceWithExtraConfig(0, 0.25F, 1)));
