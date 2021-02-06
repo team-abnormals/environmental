@@ -62,14 +62,6 @@
               }
             }
           },
-          "environmental:rice_ball": {
-            "trigger": "minecraft:consume_item",
-            "conditions": {
-              "item": {
-                "item": "environmental:rice_ball"
-              }
-            }
-          },
           "environmental:squid_ink_risotto": {
             "trigger": "minecraft:consume_item",
             "conditions": {
