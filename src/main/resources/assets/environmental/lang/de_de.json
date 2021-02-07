@@ -10,7 +10,7 @@
 	"block.environmental.mud_brick_vertical_slab": "Vertikale Schlammziegelstufe",
 	"block.environmental.chiseled_mud_bricks": "Gemeißelte Schlammziegel",
 	
-	"block.environmental.slabfish_effigy": "Stufenfischbildnis",
+	"block.environmental.slabfish_effigy": "Slabfishbildnis",
 	
 	"block.environmental.chiseled_bricks": "Gemeißelte Ziegelsteine",
 	
@@ -304,7 +304,7 @@
 	"item.environmental.thief_hood": "Kapuze des Diebes",
 	"item.environmental.executioner_cleaver": "Hackmesser des Henkers",
 	
-	"item.environmental.slabfish_spawn_egg": "Stufenfisch-Spawn-Ei",
+	"item.environmental.slabfish_spawn_egg": "Slabfish-Spawn-Ei",
 	"item.environmental.butterfly_spawn_egg": "Schmetterlings-Spawn-Ei",
 	"item.environmental.duck_spawn_egg": "Enten-Spawn-Ei",
 	"item.environmental.deer_spawn_egg": "Hirsch-Spawn-Ei",
@@ -341,7 +341,7 @@
 	
 	"item.environmental.squid_ink_risotto": "Tintenbeutelrisotto",
 	
-	"item.environmental.slabfish_bucket": "Stufenfischeimer",
+	"item.environmental.slabfish_bucket": "Slabfisheimer",
 	"item.environmental.koi_bucket": "Koieimer",
 	"item.environmental.bottled_butterfly": "Schmetterlingsflasche",
 	
@@ -363,7 +363,7 @@
 	"item.environmental.music_disc_leaving_home": "Schallplatte",
 	"item.environmental.music_disc_leaving_home.desc": "hatsondogs - Leaving Home",
   
-	"entity.environmental.slabfish": "Stufenfisch",
+	"entity.environmental.slabfish": "Slabfish",
 	"entity.environmental.duck": "Ente",
 	"entity.environmental.butterfly": "Schmetterling",
 	"entity.environmental.deer": "Hirsch",
@@ -401,17 +401,17 @@
 	"advancements.husbandry.bred_all_slabfish.description": "Vermehre alle Stufenfischvariante!",
 	
 	"advancements.husbandry.backpack_slabfish.title": "Der Anfang des Schuljahres",
-	"advancements.husbandry.backpack_slabfish.description": "Gib einem Stufenfisch einen Rucksack",
+	"advancements.husbandry.backpack_slabfish.description": "Gib einem Slabfish einen Rucksack",
 	
 	"advancements.adventure.find_natural_slabfish.title": "Sie kommen in verschiedenen Farben!",
-	"advancements.adventure.find_natural_slabfish.description": "Finde alle natürliche Stufenfischvariante",
+	"advancements.adventure.find_natural_slabfish.description": "Finde alle natürliche Slabfishvariante",
 	
-	"subtitles.entity.slabfish.burp": "Stufenfisch rülpst",
-	"subtitles.entity.slabfish.death": "Stufenfisch stirbt",
-	"subtitles.entity.slabfish.step": "Stufenfisch läuft",
-	"subtitles.entity.slabfish.hurt": "Stufenfisch nimmt Schaden",
-	"subtitles.entity.slabfish.eat": "Stufenfisch frisst",
-	"subtitles.entity.slabfish.transform": "Stufenfisch verwandelt",
+	"subtitles.entity.slabfish.burp": "Slabfish rülpst",
+	"subtitles.entity.slabfish.death": "Slabfish stirbt",
+	"subtitles.entity.slabfish.step": "Slabfish läuft",
+	"subtitles.entity.slabfish.hurt": "Slabfish nimmt Schaden",
+	"subtitles.entity.slabfish.eat": "Slabfish frisst",
+	"subtitles.entity.slabfish.transform": "Slabfish verwandelt",
 	"subtitles.entity.slabfish.backpack": "Rucksack angelegt",
 	"subtitles.entity.slabfish.sweater": "Pulli angelegt",
 	
