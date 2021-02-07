@@ -11,30 +11,30 @@ import net.minecraft.util.ResourceLocation;
  * @author Ocelot
  */
 public class SlabfishTypeCondition implements SlabfishCondition {
-    private final ResourceLocation[] slabfishTypes;
+	private final ResourceLocation[] slabfishTypes;
 
-    private SlabfishTypeCondition(ResourceLocation[] slabfishTypes) {
-        this.slabfishTypes = slabfishTypes;
-    }
+	private SlabfishTypeCondition(ResourceLocation[] slabfishTypes) {
+		this.slabfishTypes = slabfishTypes;
+	}
 
-    /**
-     * Creates a new {@link SlabfishTypeCondition} from the specified json.
-     *
-     * @param json    The json to deserialize
-     * @param context The context of the json deserialization
-     * @return A new slabfish condition from that json
-     */
-    public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context) {
-        if (!json.has("slabfishTypes"))
-            throw new JsonSyntaxException("'slabfishTypes' must be present.");
-        return new SlabfishTypeCondition(context.deserialize(json.get("slabfishTypes"), ResourceLocation[].class));
-    }
+	/**
+	 * Creates a new {@link SlabfishTypeCondition} from the specified json.
+	 *
+	 * @param json    The json to deserialize
+	 * @param context The context of the json deserialization
+	 * @return A new slabfish condition from that json
+	 */
+	public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context) {
+		if (!json.has("slabfishTypes"))
+			throw new JsonSyntaxException("'slabfishTypes' must be present.");
+		return new SlabfishTypeCondition(context.deserialize(json.get("slabfishTypes"), ResourceLocation[].class));
+	}
 
-    @Override
-    public boolean test(SlabfishConditionContext context) {
-        for (ResourceLocation slabfishType : this.slabfishTypes)
-            if (slabfishType.equals(context.getSlabfishType()))
-                return true;
-        return false;
-    }
+	@Override
+	public boolean test(SlabfishConditionContext context) {
+		for (ResourceLocation slabfishType : this.slabfishTypes)
+			if (slabfishType.equals(context.getSlabfishType()))
+				return true;
+		return false;
+	}
 }

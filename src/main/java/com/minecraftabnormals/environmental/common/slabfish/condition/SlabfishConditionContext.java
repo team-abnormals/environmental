@@ -63,7 +63,7 @@ public class SlabfishConditionContext {
 		this.lightTypes = new HashMap<>();
 		for (LightType lightType : LightType.values())
 			this.lightTypes.put(lightType, new LazyValue<>(() -> world.getLightFor(lightType, this.pos.getValue())));
-		this.dimension = new LazyValue<>(() -> world.func_234923_W_().func_240901_a_());
+		this.dimension = new LazyValue<>(() -> world.getDimensionKey().getLocation());
 		this.slabfishType = new LazyValue<>(slabfish::getSlabfishType);
 		this.breederInsomnia = new LazyValue<>(() -> breeder != null && breeder.getStats().getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)) >= 72000 && world.isNightTime());
 		SlabfishManager slabfishManager = SlabfishManager.get(world);

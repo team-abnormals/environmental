@@ -70,31 +70,31 @@ public class KoiEntity extends AbstractFishEntity {
 			super.travel(travelVector);
 		}
 	}
-	
+
 	@Override
 	public void tick() {
 		super.tick();
 		Vector3d vector3d = this.getMotion();
-		if(MathHelper.abs((float) vector3d.y) >= 0.01) {
+		if (MathHelper.abs((float) vector3d.y) >= 0.01) {
 			this.rotationPitch = (float) (MathHelper.atan2(vector3d.y, MathHelper.sqrt(horizontalMag(vector3d))) * (double) (180F / (float) Math.PI));
 		} else {
 			this.rotationPitch = 0;
 		}
 		this.rotationPitch = normalizeRotation(this.prevRotationPitch, this.rotationPitch);
 	}
-	
+
 	protected static float normalizeRotation(float prevRot, float rot) {
-		while(rot - prevRot < -180.0F) {
+		while (rot - prevRot < -180.0F) {
 			prevRot -= 360.0F;
 		}
-		
-		while(rot - prevRot >= 180.0F) {
+
+		while (rot - prevRot >= 180.0F) {
 			prevRot += 360.0F;
 		}
-		
+
 		return MathHelper.lerp(0.2F, prevRot, rot);
 	}
-	
+
 	@Override
 	public void livingTick() {
 		if (!this.isInWater() && this.onGround && this.collidedVertically) {
@@ -107,7 +107,8 @@ public class KoiEntity extends AbstractFishEntity {
 			int horizontalRange = EnvironmentalConfig.COMMON.koiHorizontalSerenityRange.get();
 			int verticalRange = EnvironmentalConfig.COMMON.koiVerticalSerenityRange.get();
 			for (PlayerEntity player : world.getEntitiesWithinAABB(PlayerEntity.class, this.getBoundingBox().grow(horizontalRange, verticalRange, horizontalRange))) {
-				player.addPotionEffect(new EffectInstance(EnvironmentalEffects.SERENITY.get(), 100, 0, false, false));
+				if (!world.isRemote())
+					player.addPotionEffect(new EffectInstance(EnvironmentalEffects.SERENITY.get(), 100, 0, false, false));
 			}
 		}
 		super.livingTick();
@@ -133,13 +134,8 @@ public class KoiEntity extends AbstractFishEntity {
 	}
 
 	@Override
-	public ItemStack getPickedResult(RayTraceResult target) {
-		return new ItemStack(EnvironmentalItems.KOI_SPAWN_EGG.get());
-	}
-
-	@Override
 	public ItemStack getFishBucket() {
-		return new ItemStack(EnvironmentalItems.KOI_BUCKET.get(), 1);
+		return new ItemStack(EnvironmentalItems.KOI_BUCKET.get());
 	}
 
 	public static AttributeModifierMap.MutableAttribute registerAttributes() {

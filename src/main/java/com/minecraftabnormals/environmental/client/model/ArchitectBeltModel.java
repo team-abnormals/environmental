@@ -1,15 +1,14 @@
 package com.minecraftabnormals.environmental.client.model;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * ArchitectBeltModel - Farcr

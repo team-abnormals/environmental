@@ -315,7 +315,6 @@
 	"item.environmental.yak_pants": "Yak Pants",
 	
 	"item.environmental.cattail_seeds": "Cattail Seeds",
-	"item.environmental.rice_ball": "Rice Ball",
   
 	"item.environmental.venison": "Raw Venison",
 	"item.environmental.cooked_venison": "Cooked Venison",
@@ -370,7 +369,7 @@
 	"entity.environmental.yak": "Yak",
 	"entity.environmental.koi": "Koi",
 	
-	"entity.environmental.duck_egg": "Duck Egg",
+	"entity.environmental.duck_egg": "Thrown Duck Egg",
 	"entity.environmental.mud_ball": "Mud Ball",
 	
 	"entity.minecraft.villager.environmental.ceramist": "Ceramist",
@@ -397,14 +396,29 @@
 	"generic.reachDistance": "Reach Distance",
 	"attribute.name.generic.stealth": "Stealth",
 
-	"advancements.husbandry.breed_all_slabfish.title": "Funky Genetics",
-	"advancements.husbandry.breed_all_slabfish.description": "Breed all Slabfish variants!",
+	"advancements.husbandry.bred_all_slabfish.title": "Funky Genetics",
+	"advancements.husbandry.bred_all_slabfish.description": "Breed all Slabfish variants!",
 	
 	"advancements.husbandry.backpack_slabfish.title": "First Day of School",
 	"advancements.husbandry.backpack_slabfish.description": "Give a Slabfish a backpack",
 	
 	"advancements.adventure.find_natural_slabfish.title": "They Come in Different Colors!",
 	"advancements.adventure.find_natural_slabfish.description": "Find all natural Slabfish variants",
+
+	"advancements.adventure.obtain_explorer_gear.title": "Swiper, No Swiping!",
+	"advancements.adventure.obtain_explorer_gear.description": "Obtain one piece of Explorer's Gear",
+
+	"advancements.adventure.upgrade_thief_hood.title": "Smooth Criminal",
+	"advancements.adventure.upgrade_thief_hood.description": "Grab the Thief's Hood rarely from Skeletons or Wither Skeletons and completely level it up",
+
+	"advancements.adventure.upgrade_healer_pouch.title": "Panic! At the Stronghold",
+	"advancements.adventure.upgrade_healer_pouch.description": "Collect the Healer's Pouch rarely from mobs in Strongholds or Mineshafts and completely level it up",
+
+	"advancements.adventure.upgrade_architect_belt.title": "Can We Fix It?",
+	"advancements.adventure.upgrade_architect_belt.description": "Buy the Architect's Belt from a master Mason, Carpenter, or Ceramist and completely level it up",
+
+	"advancements.adventure.upgrade_wanderer_boots.title": "Boots with the Fur",
+	"advancements.adventure.upgrade_wanderer_boots.description": "Receive the Wanderer's Boots from a Wandering Trader after buying out its stock and completely level it up",
 	
 	"subtitles.entity.slabfish.burp": "Slabfish burps",
 	"subtitles.entity.slabfish.death": "Slabfish dies",
@@ -416,6 +430,8 @@
 	"subtitles.entity.slabfish.sweater": "Sweater equips",
 	
 	"subtitles.entity.koi.flop": "Koi flops",
+	
+	"subtitles.entity.duck.egg": "Duck plops",
 	
 	"entity.environmental.slabfish.baby": "Baby",
 	

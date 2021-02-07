@@ -1,6 +1,6 @@
 package com.minecraftabnormals.environmental.common.block;
 
-import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
+import com.minecraftabnormals.abnormals_core.core.util.item.filling.TargetedItemGroupFiller;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -36,6 +36,7 @@ public class HangingWisteriaLeavesBlock extends Block implements IForgeShearable
 	public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
 	protected static final VoxelShape WISTERIA_VINE_TOP = Block.makeCuboidShape(1, 0, 1, 15, 16, 15);
 	protected static final VoxelShape WISTERIA_VINE_BOTTOM = Block.makeCuboidShape(4, 0, 4, 12, 16, 12);
+	private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(() -> Items.VINE);
 
 	public HangingWisteriaLeavesBlock(Block.Properties properties) {
 		super(properties);
@@ -126,6 +127,6 @@ public class HangingWisteriaLeavesBlock extends Block implements IForgeShearable
 
 	@Override
 	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-		ItemStackUtils.fillAfterItemForGroup(this.asItem(), Items.VINE, group, items);
+		FILLER.fillItem(this.asItem(), group, items);
 	}
 }

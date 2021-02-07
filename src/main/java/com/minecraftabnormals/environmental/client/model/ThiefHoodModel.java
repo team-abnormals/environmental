@@ -3,7 +3,6 @@ package com.minecraftabnormals.environmental.client.model;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
@@ -25,8 +24,8 @@ public class ThiefHoodModel<T extends LivingEntity> extends BipedModel<T> {
 	private final ModelRenderer rightArm;
 	private final ModelRenderer leftArm;
 
-    public ThiefHoodModel(float modelSize) {
-    	super(modelSize, 0.0F, 64, 32);
+	public ThiefHoodModel(float modelSize) {
+		super(modelSize, 0.0F, 64, 32);
 
 		this.head = new ModelRenderer(this);
 		this.head.setRotationPoint(0.0F, 0.0F, 0.0F);
@@ -49,10 +48,10 @@ public class ThiefHoodModel<T extends LivingEntity> extends BipedModel<T> {
 		this.leftArm = new ModelRenderer(this);
 		this.leftArm.setRotationPoint(5.0F, 0.0F, 0.0F);
 		this.leftArm.setTextureOffset(0, 19).addBox(-1.75F, -2.9F, -2.5F, 5.0F, 8.0F, 5.0F, 0.0F, true);
-    }
-    
+	}
+
 	@Override
-	public void render(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha){
+	public void render(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
 		this.head.copyModelAngles(this.bipedHead);
 		this.rightArm.copyModelAngles(this.bipedRightArm);
 		this.leftArm.copyModelAngles(this.bipedLeftArm);

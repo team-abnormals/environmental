@@ -1,0 +1,183 @@
+{
+  "advancement": "minecraft:husbandry/balanced_diet",
+  "modifiers": [
+    {
+      "type": "criteria",
+      "config": {
+        "mode": "modify",
+        "criteria": {
+          "environmental:duck": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "item": "environmental:duck"
+              }
+            }
+          },
+          "environmental:cooked_duck": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "item": "environmental:cooked_duck"
+              }
+            }
+          },
+          "environmental:cherries": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "item": "environmental:cherries"
+              }
+            }
+          },
+          "environmental:cherry_pie": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "item": "environmental:cherry_pie"
+              }
+            }
+          },
+          "environmental:apple_pie": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "item": "environmental:apple_pie"
+              }
+            }
+          },
+          "environmental:venison": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "item": "environmental:venison"
+              }
+            }
+          },
+          "environmental:cooked_venison": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "item": "environmental:cooked_venison"
+              }
+            }
+          },
+          "environmental:squid_ink_risotto": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "item": "environmental:squid_ink_risotto"
+              }
+            }
+          },
+          "environmental:cod_kelp_roll": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "item": "environmental:cod_kelp_roll"
+              }
+            }
+          },
+          "environmental:tropical_fish_kelp_roll": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "item": "environmental:tropical_fish_kelp_roll"
+              }
+            }
+          },
+          "environmental:salmon_rice_cake": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "item": "environmental:salmon_rice_cake"
+              }
+            }
+          },
+          "environmental:pufferfish_rice_cake": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "item": "environmental:pufferfish_rice_cake"
+              }
+            }
+          },
+          "environmental:fried_egg": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "item": "environmental:fried_egg"
+              }
+            }
+          },
+          "environmental:scrambled_eggs": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "item": "environmental:scrambled_eggs"
+              }
+            }
+          },
+          "environmental:koi": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "item": "environmental:koi"
+              }
+            }
+          }
+        },
+        "requirements": [
+          [
+            "environmental:duck"
+          ],
+          [
+            "environmental:cooked_duck"
+          ],
+          [
+            "environmental:cherries"
+          ],
+          [
+            "environmental:cherry_pie"
+          ],
+          [
+            "environmental:apple_pie"
+          ],
+          [
+            "environmental:venison"
+          ],
+          [
+            "environmental:cooked_venison"
+          ],
+          [
+            "environmental:rice_ball"
+          ],
+          [
+            "environmental:squid_ink_risotto"
+          ],
+          [
+            "environmental:cod_kelp_roll"
+          ],
+          [
+            "environmental:tropical_fish_kelp_roll"
+          ],
+          [
+            "environmental:salmon_rice_cake"
+          ],
+          [
+            "environmental:pufferfish_rice_cake"
+          ],
+          [
+            "environmental:fried_egg"
+          ],
+          [
+            "environmental:scrambled_eggs"
+          ],
+          [
+            "environmental:koi"
+          ]
+        ]
+      }
+    }
+  ]
+}

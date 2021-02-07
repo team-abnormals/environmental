@@ -1,16 +1,11 @@
 package com.minecraftabnormals.environmental.common.item;
 
+import com.minecraftabnormals.abnormals_core.core.util.item.filling.TargetedItemGroupFiller;
 import com.minecraftabnormals.environmental.core.Environmental;
-import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
-
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.IArmorMaterial;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.item.*;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.NonNullList;
@@ -20,8 +15,9 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
-@EventBusSubscriber(modid = Environmental.MODID)
+@EventBusSubscriber(modid = Environmental.MOD_ID)
 public class YakPantsItem extends ArmorItem {
+	private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(() -> Items.TURTLE_HELMET);
 
 	public YakPantsItem(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builderIn) {
 		super(materialIn, slot, builderIn);
@@ -43,7 +39,7 @@ public class YakPantsItem extends ArmorItem {
 		}
 
 		if (wearingPants && entity.getRidingEntity() instanceof LivingEntity) {
-			LivingEntity mount = (LivingEntity)entity.getRidingEntity();
+			LivingEntity mount = (LivingEntity) entity.getRidingEntity();
 			mount.addPotionEffect(new EffectInstance(Effects.REGENERATION, 60));
 			mount.addPotionEffect(new EffectInstance(Effects.SPEED, 60, 1));
 		}
@@ -51,6 +47,6 @@ public class YakPantsItem extends ArmorItem {
 
 	@Override
 	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-		ItemStackUtils.fillAfterItemForGroup(this.asItem(), Items.TURTLE_HELMET, group, items);
+		FILLER.fillItem(this, group, items);
 	}
 }

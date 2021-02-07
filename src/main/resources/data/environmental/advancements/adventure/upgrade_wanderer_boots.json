@@ -1,0 +1,26 @@
+{
+  "parent": "environmental:adventure/obtain_explorer_gear",
+  "display": {
+    "icon": {
+      "item": "environmental:wanderer_boots"
+    },
+    "title": {
+      "translate": "advancements.adventure.upgrade_wanderer_boots.title"
+    },
+    "description": {
+      "translate": "advancements.adventure.upgrade_wanderer_boots.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "upgrade": {
+      "trigger": "environmental:upgrade_gear",
+      "conditions": {
+        "item": "environmental:wanderer_boots"
+      }
+    }
+  }
+}

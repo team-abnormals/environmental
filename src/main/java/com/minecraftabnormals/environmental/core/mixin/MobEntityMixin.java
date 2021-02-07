@@ -1,14 +1,6 @@
 package com.minecraftabnormals.environmental.core.mixin;
 
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
-
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
@@ -18,6 +10,12 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.server.ServerWorld;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(MobEntity.class)
 public abstract class MobEntityMixin extends LivingEntity {
@@ -35,9 +33,9 @@ public abstract class MobEntityMixin extends LivingEntity {
 		int difficultyChance = difficulty.getDifficulty().getId() + 1;
 		if (this.getEntityWorld() instanceof ServerWorld) {
 			ServerWorld world = (ServerWorld) this.getEntityWorld();
-			boolean isStronghold = world.func_241112_a_().func_235010_a_(this.getPosition(), true, Structure.field_236375_k_).isValid();
-			boolean isMineshaft = world.func_241112_a_().func_235010_a_(this.getPosition(), true, Structure.field_236367_c_).isValid();
-			if ((isStronghold || isMineshaft) && Math.random() < difficultyChance * 0.025F) {
+			boolean isStronghold = world.func_241112_a_().getStructureStart(this.getPosition(), true, Structure.STRONGHOLD).isValid();
+			boolean isMineshaft = world.func_241112_a_().getStructureStart(this.getPosition(), true, Structure.MINESHAFT).isValid();
+			if ((isStronghold || isMineshaft) && Math.random() < difficultyChance * 0.01F) {
 				this.setItemStackToSlot(EquipmentSlotType.CHEST, new ItemStack(EnvironmentalItems.HEALER_POUCH.get()));
 				this.inventoryArmorDropChances[EquipmentSlotType.CHEST.getIndex()] = 1.0F;
 			}

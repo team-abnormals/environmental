@@ -11,7 +11,7 @@ import net.minecraftforge.registries.DeferredRegister;
  * @author Ocelot
  */
 public class EnvironmentalSlabfishConditions {
-	public static final DeferredRegister<SlabfishCondition.Factory> SLABFISH_CONDITIONS = DeferredRegister.create(SlabfishCondition.Factory.class, Environmental.MODID);
+	public static final DeferredRegister<SlabfishCondition.Factory> SLABFISH_CONDITIONS = DeferredRegister.create(SlabfishCondition.Factory.class, Environmental.MOD_ID);
 
 	public static final RegistryObject<SimpleSlabfishConditionFactory> IMPOSSIBLE = SLABFISH_CONDITIONS.register("impossible", () -> new SimpleSlabfishConditionFactory(SlabfishImpossibleCondition::deserialize));
 	public static final RegistryObject<SimpleSlabfishConditionFactory> AND = SLABFISH_CONDITIONS.register("and", () -> new SimpleSlabfishConditionFactory(SlabfishAndCondition::deserialize));

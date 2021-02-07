@@ -2,6 +2,9 @@ package com.minecraftabnormals.environmental.core.other;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
+import com.minecraftabnormals.abnormals_core.core.util.MathUtil;
+import com.minecraftabnormals.environmental.api.IEggLayingEntity;
 import com.minecraftabnormals.environmental.common.block.HangingWisteriaLeavesBlock;
 import com.minecraftabnormals.environmental.common.entity.KoiEntity;
 import com.minecraftabnormals.environmental.common.entity.SlabfishEntity;
@@ -12,7 +15,6 @@ import com.minecraftabnormals.environmental.core.Environmental;
 import com.minecraftabnormals.environmental.core.EnvironmentalConfig;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEntities;
-import com.teamabnormals.abnormals_core.core.utils.MathUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -23,20 +25,30 @@ import net.minecraft.entity.monster.HuskEntity;
 import net.minecraft.entity.monster.SkeletonEntity;
 import net.minecraft.entity.monster.StrayEntity;
 import net.minecraft.entity.monster.ZombieEntity;
-import net.minecraft.entity.passive.*;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.MooshroomEntity;
+import net.minecraft.entity.passive.OcelotEntity;
+import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PotionEntity;
 import net.minecraft.entity.projectile.ProjectileItemEntity;
 import net.minecraft.entity.projectile.ThrowableEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.item.ShovelItem;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.*;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Direction;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.world.IServerWorld;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -53,11 +65,9 @@ import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
-@EventBusSubscriber(modid = Environmental.MODID)
+@EventBusSubscriber(modid = Environmental.MOD_ID)
 public class EnvironmentalEvents {
 
 	@SubscribeEvent
@@ -78,13 +88,15 @@ public class EnvironmentalEvents {
 
 		boolean replaceVariants = EnvironmentalConfig.COMMON.biomeVariantsAlwaysSpawn.get();
 
-		if (event.getResult() != Event.Result.DENY) {
+		if (event.getResult() != Event.Result.DENY && world instanceof IServerWorld) {
+			IServerWorld serverWorld = (IServerWorld) world;
 			if (replaceVariants && validSpawn && entity.getPosY() > 60) {
 				if (entity.getType() == EntityType.ZOMBIE) {
 					ZombieEntity zombie = (ZombieEntity) entity;
 					if (world.getBiome(entity.getPosition()).getCategory() == Biome.Category.DESERT) {
 
-						HuskEntity husk = EntityType.HUSK.create(world.getWorld());
+
+						HuskEntity husk = EntityType.HUSK.create(serverWorld.getWorld());
 						husk.setChild(zombie.isChild());
 						for (EquipmentSlotType slot : EquipmentSlotType.values())
 							zombie.setItemStackToSlot(slot, zombie.getItemStackFromSlot(slot));
@@ -98,8 +110,7 @@ public class EnvironmentalEvents {
 				if (entity.getType() == EntityType.SKELETON) {
 					SkeletonEntity skeleton = (SkeletonEntity) entity;
 					if (world.getBiome(entity.getPosition()).getCategory() == Biome.Category.ICY) {
-
-						StrayEntity stray = EntityType.STRAY.create(world.getWorld());
+						StrayEntity stray = EntityType.STRAY.create(serverWorld.getWorld());
 						for (EquipmentSlotType slot : EquipmentSlotType.values())
 							skeleton.setItemStackToSlot(slot, skeleton.getItemStackFromSlot(slot));
 						stray.setLocationAndAngles(skeleton.getPosX(), skeleton.getPosY(), skeleton.getPosZ(), skeleton.rotationYaw, skeleton.rotationPitch);
@@ -113,7 +124,7 @@ public class EnvironmentalEvents {
 			if (validSpawn && entity.getType() == EntityType.MOOSHROOM) {
 				MooshroomEntity mooshroom = (MooshroomEntity) event.getEntity();
 				if (random.nextInt(3) == 0) {
-					MooshroomEntity brownMooshroom = EntityType.MOOSHROOM.create(event.getWorld().getWorld());
+					MooshroomEntity brownMooshroom = EntityType.MOOSHROOM.create(serverWorld.getWorld());
 					brownMooshroom.setLocationAndAngles(mooshroom.getPosX(), mooshroom.getPosY(), mooshroom.getPosZ(), mooshroom.rotationYaw, mooshroom.rotationPitch);
 					brownMooshroom.setMooshroomType(MooshroomEntity.Type.BROWN);
 					world.addEntity(brownMooshroom);
@@ -121,8 +132,6 @@ public class EnvironmentalEvents {
 				}
 			}
 		}
-
-		//Koi stuff
 
 		boolean blockOnlyNaturalSpawns = EnvironmentalConfig.COMMON.blockOnlyNaturalSpawns.get();
 
@@ -132,7 +141,7 @@ public class EnvironmentalEvents {
 				int horizontalRange = EnvironmentalConfig.COMMON.koiHorizontalSerenityRange.get();
 				int verticalRange = EnvironmentalConfig.COMMON.koiVerticalSerenityRange.get();
 				for (Entity koi : world.getEntitiesWithinAABB(KoiEntity.class, entity.getBoundingBox().grow(horizontalRange, verticalRange, horizontalRange))) {
-					if (MathUtils.distanceBetweenPoints2d(entity.getPosX(), entity.getPosZ(), koi.getPosX(), koi.getPosZ()) <= horizontalRange) {
+					if (MathUtil.distanceBetweenPoints2d(entity.getPosX(), entity.getPosZ(), koi.getPosX(), koi.getPosZ()) <= horizontalRange) {
 						event.setResult(Event.Result.DENY);
 						break;
 					}
@@ -178,7 +187,7 @@ public class EnvironmentalEvents {
 		}
 	}
 
-	protected static final Map<Block, BlockState> HOE_LOOKUP = Maps.newHashMap(ImmutableMap.of(Blocks.GRASS_BLOCK, Blocks.FARMLAND.getDefaultState(), Blocks.GRASS_PATH, Blocks.FARMLAND.getDefaultState(), Blocks.DIRT, Blocks.FARMLAND.getDefaultState(), Blocks.COARSE_DIRT, Blocks.DIRT.getDefaultState()));
+	protected static final Set<Block> DIRT_SPREADABLES = Sets.newHashSet(Blocks.GRASS_BLOCK, Blocks.MYCELIUM);
 
 	@SubscribeEvent
 	public static void onEvent(RightClickBlock event) {
@@ -188,30 +197,34 @@ public class EnvironmentalEvents {
 		PlayerEntity player = event.getPlayer();
 		ItemStack stack = event.getItemStack();
 		Item item = stack.getItem();
-
-		if (event.getFace() != Direction.DOWN && item instanceof ShovelItem && !player.isSpectator() && world.isAirBlock(pos.up())) {
-			if (state.isIn(Blocks.PODZOL) || state.isIn(Blocks.MYCELIUM)) {
-				world.playSound(player, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
-				stack.damageItem(1, player, (damage) -> {
-					damage.sendBreakAnimation(event.getHand());
-				});
-				world.setBlockState(pos, state.isIn(Blocks.PODZOL) ? EnvironmentalBlocks.PODZOL_PATH.get().getDefaultState() : EnvironmentalBlocks.MYCELIUM_PATH.get().getDefaultState(), 11);
+		if (item == Items.BONE_MEAL && state.getBlock() == Blocks.DIRT && world.getBlockState(pos.up()).propagatesSkylightDown(world, pos)) {
+			ArrayList<BlockState> potentialStates = new ArrayList<>();
+			for (BlockPos blockpos : BlockPos.getAllInBoxMutable(pos.add(-1, -1, -1), pos.add(1, 1, 1))) {
+				Block block = world.getBlockState(blockpos).getBlock();
+				if (DIRT_SPREADABLES.contains(block) && !potentialStates.contains(block.getDefaultState())) {
+					potentialStates.add(block.getDefaultState());
+				}
+			}
+			if (!potentialStates.isEmpty()) {
+				if (!world.isRemote()) {
+					world.playEvent(2005, pos, 0);
+					world.setBlockState(pos, potentialStates.get(world.getRandom().nextInt(potentialStates.size())), 3);
+				}
+				if (!player.isCreative()) stack.shrink(1);
 				event.setCancellationResult(ActionResultType.func_233537_a_(world.isRemote()));
 				event.setCanceled(true);
 			}
-		}
-
-		if (event.getFace() != Direction.DOWN) {
-			BlockState blockstate = HOE_LOOKUP.get(world.getBlockState(pos).getBlock());
-			if (blockstate != null && item instanceof HoeItem) {
-				PlayerEntity playerentity = event.getPlayer();
-				world.playSound(playerentity, pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
-				world.setBlockState(pos, blockstate, 11);
-				stack.damageItem(1, playerentity, (anim) -> {
-					anim.sendBreakAnimation(event.getHand());
-				});
-				event.setCancellationResult(ActionResultType.func_233537_a_(world.isRemote()));
-				event.setCanceled(true);
+		} else if (event.getFace() != Direction.DOWN) {
+			if (item instanceof ShovelItem && !player.isSpectator() && world.isAirBlock(pos.up())){
+				if (state.isIn(Blocks.PODZOL) || state.isIn(Blocks.MYCELIUM)) {
+					world.playSound(player, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
+					stack.damageItem(1, player, (damage) -> {
+						damage.sendBreakAnimation(event.getHand());
+					});
+					world.setBlockState(pos, state.isIn(Blocks.PODZOL) ? EnvironmentalBlocks.PODZOL_PATH.get().getDefaultState() : EnvironmentalBlocks.MYCELIUM_PATH.get().getDefaultState(), 11);
+					event.setCancellationResult(ActionResultType.func_233537_a_(world.isRemote()));
+					event.setCanceled(true);
+				}
 			}
 		}
 	}
@@ -238,7 +251,7 @@ public class EnvironmentalEvents {
 
 		if (entity instanceof SlabfishEntity) {
 			SlabfishEntity slabfish = (SlabfishEntity) event.getEntity();
-			if (world.getBiome(new BlockPos(entity.getPositionVec())) == Biomes.SOUL_SAND_VALLEY) {
+			if (world.func_242406_i(new BlockPos(entity.getPositionVec())).equals(Optional.of(Biomes.SOUL_SAND_VALLEY))) {
 				if (!slabfish.getSlabfishType().equals(SlabfishManager.GHOST)) {
 					if (world.isRemote()) {
 						for (int i = 0; i < 7; ++i) {
@@ -279,17 +292,10 @@ public class EnvironmentalEvents {
 	@SubscribeEvent
 	public static void onEvent(EnteringChunk event) {
 		Entity entity = event.getEntity();
-		EntityType<?> entityType = entity.getType();
-		ResourceLocation entityName = entityType.getRegistryName();
-		if (entity instanceof ChickenEntity) {
-			ChickenEntity chicken = (ChickenEntity) entity;
-			if (!chicken.goalSelector.goals.stream().anyMatch((goal) -> goal.getGoal() instanceof LayEggInNestGoal)) {
-				chicken.goalSelector.addGoal(2, new LayEggInNestGoal(chicken, 1.0D));
-			}
-		} else if (entityType != null && entityName.getNamespace() == "autumnity" && entityName.getPath() == "turkey") {
-			AnimalEntity turkey = (AnimalEntity) entity;
-			if (!turkey.goalSelector.goals.stream().anyMatch((goal) -> goal.getGoal() instanceof LayEggInNestGoal)) {
-				turkey.goalSelector.addGoal(5, new LayEggInNestGoal(turkey, 1.0D));
+		if (entity instanceof IEggLayingEntity && entity instanceof AnimalEntity) {
+			AnimalEntity eggLayer = (AnimalEntity) entity;
+			if (eggLayer.goalSelector.goals.stream().noneMatch((goal) -> goal.getGoal() instanceof LayEggInNestGoal)) {
+				eggLayer.goalSelector.addGoal(3, new LayEggInNestGoal(eggLayer, 1.0D));
 			}
 		} else if (entity instanceof WolfEntity) {
 			WolfEntity wolf = (WolfEntity) entity;

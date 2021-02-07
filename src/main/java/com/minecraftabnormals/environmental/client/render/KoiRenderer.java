@@ -4,7 +4,6 @@ import com.minecraftabnormals.environmental.client.model.KoiModel;
 import com.minecraftabnormals.environmental.common.entity.KoiEntity;
 import com.minecraftabnormals.environmental.core.Environmental;
 import com.mojang.blaze3d.matrix.MatrixStack;
-
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
@@ -22,7 +21,7 @@ public class KoiRenderer extends MobRenderer<KoiEntity, KoiModel<KoiEntity>> {
 
 	@Override
 	public ResourceLocation getEntityTexture(KoiEntity entity) {
-		return new ResourceLocation(Environmental.MODID, "textures/entity/koi.png");
+		return new ResourceLocation(Environmental.MOD_ID, "textures/entity/koi.png");
 	}
 
 	@Override

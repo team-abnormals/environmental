@@ -1,14 +1,7 @@
 package com.minecraftabnormals.environmental.common.block;
 
-import javax.annotation.Nullable;
-
-import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
-
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.DoublePlantBlock;
+import com.minecraftabnormals.abnormals_core.core.util.item.filling.TargetedItemGroupFiller;
+import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -24,9 +17,12 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.PlantType;
 
+import javax.annotation.Nullable;
+
 public class TallDeadBushBlock extends DoublePlantBlock implements net.minecraftforge.common.IForgeShearable {
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D);
 	protected static final VoxelShape SHAPE_TOP = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
+	private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(() -> Items.LARGE_FERN);
 
 	public TallDeadBushBlock(AbstractBlock.Properties builder) {
 		super(builder);
@@ -51,7 +47,7 @@ public class TallDeadBushBlock extends DoublePlantBlock implements net.minecraft
 
 	@Override
 	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-		ItemStackUtils.fillAfterItemForGroup(this.asItem(), Items.LARGE_FERN, group, items);
+		FILLER.fillItem(this.asItem(), group, items);
 	}
 
 	@Override

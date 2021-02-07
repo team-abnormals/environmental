@@ -3,13 +3,16 @@
   "group": "rice_seafood",
   "ingredients": [
     {
-      "item": "environmental:rice_ball"
-    },
-    {
       "item": "minecraft:dried_kelp"
     },
     {
       "item": "upgrade_aquatic:lionfish"
+    },
+    {
+      "tag": "forge:crops/rice"
+    },
+    {
+      "tag": "forge:crops/rice"
     }
   ],
     "result": {

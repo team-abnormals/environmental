@@ -22,7 +22,7 @@ public abstract class WitherSkeletonEntityMixin extends AbstractSkeletonEntity {
 
 	@Inject(method = "setEquipmentBasedOnDifficulty", at = @At("TAIL"))
 	private void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty, CallbackInfo info) {
-		if (Math.random() < 0.05F) {
+		if (Math.random() < 0.025F) {
 			this.setItemStackToSlot(EquipmentSlotType.HEAD, new ItemStack(EnvironmentalItems.THIEF_HOOD.get()));
 			this.inventoryArmorDropChances[EquipmentSlotType.HEAD.getIndex()] = 1.0F;
 		}
