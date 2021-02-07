@@ -315,7 +315,6 @@
 	"item.environmental.yak_pants": "Pantalones de yak",
 
 	"item.environmental.cattail_seeds": "Semillas de totora",
-	"item.environmental.rice_ball": "Bola de arroz",
 
 	"item.environmental.venison": "Venado crudo",
 	"item.environmental.cooked_venison": "Venado cocinado",
@@ -370,7 +369,7 @@
 	"entity.environmental.yak": "Yak",
 	"entity.environmental.koi": "Koi",
 
-	"entity.environmental.duck_egg": "Huevo de pato",
+	"entity.environmental.duck_egg": "Huevo de pato lanzado",
 	"entity.environmental.mud_ball": "Bola de barro",
 
 	"entity.minecraft.villager.environmental.ceramist": "Alfarero",
@@ -405,6 +404,21 @@
 
 	"advancements.adventure.find_natural_slabfish.title": "¡Vienen en distintos colores!",
 	"advancements.adventure.find_natural_slabfish.description": "Encontrá todas los tipos naturales de pezlosa",
+
+	"advancements.adventure.obtain_explorer_gear.title": "¡No te lo lleves!",
+	"advancements.adventure.obtain_explorer_gear.description": "Obtené alguna pieza del equipo de explorador",
+
+	"advancements.adventure.upgrade_thief_hood.title": "Criminal delicado",
+	"advancements.adventure.upgrade_thief_hood.description": "Sacale la capucha del ladrón a un esqueleto o un esqueleto del Wither y subí al máximo su nivel",
+
+	"advancements.adventure.upgrade_healer_pouch.title": "¡Pánico! en la mina",
+	"advancements.adventure.upgrade_healer_pouch.description": "Conseguí la bolsa del curador matando monstruos en minas abandonadas o en fortalezas del portal al End y subí al máximo su nivel",
+
+	"advancements.adventure.upgrade_architect_belt.title": "¿Podemos arreglarlo?",
+	"advancements.adventure.upgrade_architect_belt.description": "Comprale el cinturón del arquitecto a un albañil, un carpintero o un alfarero y subí al máximo su nivel",
+
+	"advancements.adventure.upgrade_wanderer_boots.title": "Botas de piel",
+	"advancements.adventure.upgrade_wanderer_boots.description": "Recibí las botas del nómada al comprar todos los artículos de un comerciante nómada y subí al máximo su nivel",
 
 	"subtitles.entity.slabfish.burp": "Eructo de pezlosa",
 	"subtitles.entity.slabfish.death": "Pezlosa muere",
