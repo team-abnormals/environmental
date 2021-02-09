@@ -6,6 +6,9 @@
     "#forge:fruits/cherry"
   ],
   "optional": [
-    "#forge:fruits/strawberry"
+    {
+      "id": "#forge:fruits/strawberry",
+      "required": false
+    }
   ]
 }
