@@ -110,7 +110,7 @@ public class EnvironmentalTrades {
 		String[] defaultRemoved = new String[]{"crimson", "warped", "poise", "aspen", "grimwood", "morado", "kousa"};
 
 		for (Item item : ItemTags.PLANKS.getAllElements()) {
-			if (notOnBlacklist(item, new String[]{"vertical"}, defaultRemoved)) {
+			if (notOnBlacklist(item, new String[]{"vertical", "stained"}, defaultRemoved)) {
 				TradeUtil.addVillagerTrades(event, EnvironmentalVillagers.CARPENTER.get(), TradeUtil.NOVICE, new AbnormalsTrade(item, 24, 1, 16, 3));
 			}
 		}
