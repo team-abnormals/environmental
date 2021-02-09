@@ -799,7 +799,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 		super.dropInventory();
 		if (this.hasBackpack()) {
 			if (this.slabfishBackpack != null) {
-				for (int i = 1; i < this.slabfishBackpack.getSizeInventory(); ++i) {
+				for (int i = this.slabfishBackpack.getSizeInventory(); i > 0; --i) {
 					ItemStack itemstack = this.slabfishBackpack.removeStackFromSlot(i);
 					if (!itemstack.isEmpty() && !EnchantmentHelper.hasVanishingCurse(itemstack)) {
 						this.entityDropItem(itemstack);
