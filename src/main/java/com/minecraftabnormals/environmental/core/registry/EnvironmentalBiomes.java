@@ -48,7 +48,6 @@ public class EnvironmentalBiomes {
 		BiomeDictionary.addTypes(BLOSSOM_VALLEYS.getKey(), Type.OVERWORLD, Type.FOREST, Type.RARE, Type.PLAINS);
 
 		BiomeDictionary.addTypes(Biomes.DEEP_FROZEN_OCEAN, Type.SNOWY);
-		BiomeDictionary.addTypes(Biomes.NETHER_WASTES, Type.WASTELAND);
 	}
 
 	private static Biome createMarshBiome() {
