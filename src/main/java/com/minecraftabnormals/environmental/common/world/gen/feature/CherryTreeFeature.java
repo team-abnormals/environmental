@@ -24,16 +24,14 @@ public class CherryTreeFeature extends Feature<BaseTreeFeatureConfig> {
 
 	@Override
 	public boolean generate(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos position, BaseTreeFeatureConfig config) {
-		int height = 4 + rand.nextInt(3) + rand.nextInt(2);
+		int height = 5 + rand.nextInt(3) + rand.nextInt(3);
 		boolean flag = true;
 
 		if (position.getY() >= 1 && position.getY() + height + 1 <= worldIn.getHeight()) {
 			for (int j = position.getY(); j <= position.getY() + 1 + height; ++j) {
 				int k = 1;
-				if (j == position.getY())
-					k = 0;
-				if (j >= position.getY() + 1 + height - 2)
-					k = 2;
+				if (j == position.getY()) k = 0;
+				if (j >= position.getY() + 1 + height - 2) k = 2;
 				BlockPos.Mutable blockpos$mutableblockpos = new BlockPos.Mutable();
 				for (int l = position.getX() - k; l <= position.getX() + k && flag; ++l) {
 					for (int i1 = position.getZ() - k; i1 <= position.getZ() + k && flag; ++i1) {
@@ -62,6 +60,19 @@ public class CherryTreeFeature extends Feature<BaseTreeFeatureConfig> {
 						this.placeLogAt(worldIn, blockpos, Direction.UP, rand, config);
 					}
 				}
+
+				Plane.HORIZONTAL.getDirectionValues().forEach(direction -> {
+					BlockPos stumpPos = position.offset(direction);
+					if (TreeUtil.isAirOrLeaves(worldIn, stumpPos) && isDirtAt(worldIn, stumpPos.down())) {
+						this.placeLogAt(worldIn, stumpPos, Direction.UP, rand, config);
+						BlockPos sideStumpPos = stumpPos.offset(direction.rotateY());
+						if (rand.nextBoolean() && isDirtAt(worldIn, sideStumpPos.down()) && TreeUtil.isAirOrLeaves(worldIn, sideStumpPos))
+							this.placeLogAt(worldIn, sideStumpPos, Direction.UP, rand, config);
+						if (rand.nextBoolean() && TreeUtil.isAirOrLeaves(worldIn, stumpPos.up()))
+							this.placeLogAt(worldIn, stumpPos.up(), Direction.UP, rand, config);
+					}
+				});
+
 
 				Plane.HORIZONTAL.getDirectionValues().forEach(direction -> {
 					int newHeight = rand.nextBoolean() ? height + rand.nextInt(2) : height - rand.nextInt(2);
@@ -120,7 +131,9 @@ public class CherryTreeFeature extends Feature<BaseTreeFeatureConfig> {
 				} else {
 					logZ -= rand.nextInt(2);
 				}
+				
 			}
+
 			logY += 1;
 		}
 		return blockpos.offset(direction);
