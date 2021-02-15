@@ -3,7 +3,6 @@ package com.minecraftabnormals.environmental.client.gui.screen.inventory;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.client.gui.widget.button.ImageButton;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.AbstractFurnaceContainer;
 import net.minecraft.util.ResourceLocation;
@@ -13,8 +12,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public abstract class AbstractKilnScreen<T extends AbstractFurnaceContainer> extends ContainerScreen<T> {
-	private static final ResourceLocation BUTTON_TEXTURE = new ResourceLocation("textures/gui/recipe_button.png");
-
 	private final ResourceLocation guiTexture;
 
 	public AbstractKilnScreen(T screenContainer, PlayerInventory inv, ITextComponent titleIn, ResourceLocation guiTexture) {
@@ -25,9 +22,6 @@ public abstract class AbstractKilnScreen<T extends AbstractFurnaceContainer> ext
 	@Override
 	public void init() {
 		super.init();
-		this.addButton(new ImageButton(this.guiLeft + 20, this.height / 2 - 49, 20, 18, 0, 0, 19, BUTTON_TEXTURE, (p_214087_1_) -> {
-			((ImageButton) p_214087_1_).setPosition(this.guiLeft + 20, this.height / 2 - 49);
-		}));
 		this.titleX = (this.xSize - this.font.getStringPropertyWidth(this.title)) / 2;
 	}
 
