@@ -24,7 +24,7 @@ public class CherryTreeFeature extends Feature<BaseTreeFeatureConfig> {
 
 	@Override
 	public boolean generate(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos position, BaseTreeFeatureConfig config) {
-		int height = 5 + rand.nextInt(3) + rand.nextInt(3);
+		int height = 5 + rand.nextInt(3) + rand.nextInt(3) + rand.nextInt(3);
 		boolean flag = true;
 
 		if (position.getY() >= 1 && position.getY() + height + 1 <= worldIn.getHeight()) {
