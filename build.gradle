@@ -71,10 +71,9 @@ minecraft {
 dependencies {
     minecraft "net.minecraftforge:forge:${project.minecraft}-${project.forge}"
     implementation fg.deobf("curse.maven:abnormals_core-382216:${project.abnormalsCore}")
-    implementation fg.deobf("curse.maven:autumnity-365045:3154935")
 
-    compileOnly fg.deobf("mezz.jei:jei-${project.minecraft}:${project.jei}:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-${project.minecraft}:${project.jei}")
+    compileOnly fg.deobf("mezz.jei:jei-1.16.4:${project.jei}:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-1.16.4:${project.jei}")
 }
 
 repositories {
