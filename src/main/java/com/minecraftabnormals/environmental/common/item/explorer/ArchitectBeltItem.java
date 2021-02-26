@@ -81,6 +81,6 @@ public class ArchitectBeltItem extends ExplorerArmorItem {
 
 	@Override
 	public int[] getLevelCaps() {
-		return new int[]{0, 100, 500, 2500, 1000};
+		return new int[]{0, 100, 500, 1000, 2500};
 	}
 }
