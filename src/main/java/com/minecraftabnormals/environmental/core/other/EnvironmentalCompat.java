@@ -196,6 +196,9 @@ public class EnvironmentalCompat {
 		DataUtil.registerFlammable(EnvironmentalBlocks.WILLOW_VERTICAL_SLAB.get(), 5, 20);
 		DataUtil.registerFlammable(EnvironmentalBlocks.WILLOW_BOOKSHELF.get(), 30, 20);
 		DataUtil.registerFlammable(EnvironmentalBlocks.WILLOW_BEEHIVE.get(), 5, 20);
+		DataUtil.registerFlammable(EnvironmentalBlocks.WILLOW_POST.get(), 5, 20);
+		DataUtil.registerFlammable(EnvironmentalBlocks.STRIPPED_WILLOW_POST.get(), 5, 20);
+		DataUtil.registerFlammable(EnvironmentalBlocks.WILLOW_HEDGE.get(), 5, 20);
 
 		DataUtil.registerFlammable(EnvironmentalBlocks.CHERRY_LEAVES.get(), 30, 60);
 		DataUtil.registerFlammable(EnvironmentalBlocks.CHERRY_LOG.get(), 5, 5);
@@ -213,6 +216,9 @@ public class EnvironmentalCompat {
 		DataUtil.registerFlammable(EnvironmentalBlocks.CHERRY_BOOKSHELF.get(), 30, 20);
 		DataUtil.registerFlammable(EnvironmentalBlocks.CHERRY_CRATE.get(), 5, 20);
 		DataUtil.registerFlammable(EnvironmentalBlocks.CHERRY_BEEHIVE.get(), 5, 20);
+		DataUtil.registerFlammable(EnvironmentalBlocks.CHERRY_POST.get(), 5, 20);
+		DataUtil.registerFlammable(EnvironmentalBlocks.STRIPPED_CHERRY_POST.get(), 5, 20);
+		DataUtil.registerFlammable(EnvironmentalBlocks.CHERRY_HEDGE.get(), 5, 20);
 
 		DataUtil.registerFlammable(EnvironmentalBlocks.GIANT_TALL_GRASS.get(), 60, 100);
 		DataUtil.registerFlammable(EnvironmentalBlocks.MYCELIUM_SPROUTS.get(), 60, 100);
@@ -247,6 +253,12 @@ public class EnvironmentalCompat {
 		DataUtil.registerFlammable(EnvironmentalBlocks.WISTERIA_VERTICAL_SLAB.get(), 5, 20);
 		DataUtil.registerFlammable(EnvironmentalBlocks.WISTERIA_BOOKSHELF.get(), 30, 20);
 		DataUtil.registerFlammable(EnvironmentalBlocks.WISTERIA_BEEHIVE.get(), 5, 20);
+		DataUtil.registerFlammable(EnvironmentalBlocks.WISTERIA_POST.get(), 5, 20);
+		DataUtil.registerFlammable(EnvironmentalBlocks.STRIPPED_WISTERIA_POST.get(), 5, 20);
+		DataUtil.registerFlammable(EnvironmentalBlocks.PINK_WISTERIA_HEDGE.get(), 5, 20);
+		DataUtil.registerFlammable(EnvironmentalBlocks.BLUE_WISTERIA_HEDGE.get(), 5, 20);
+		DataUtil.registerFlammable(EnvironmentalBlocks.PURPLE_WISTERIA_HEDGE.get(), 5, 20);
+		DataUtil.registerFlammable(EnvironmentalBlocks.WHITE_WISTERIA_HEDGE.get(), 5, 20);
 	}
 
 	public static void registerDispenserBehaviors() {
