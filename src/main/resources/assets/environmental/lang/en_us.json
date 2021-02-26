@@ -49,6 +49,9 @@
 	"block.environmental.willow_sign": "Willow Sign",
 	"block.environmental.willow_chest": "Willow Chest",
 	"block.environmental.willow_trapped_chest": "Willow Trapped Chest",
+	"block.environmental.willow_post": "Willow Post",
+	"block.environmental.stripped_willow_post": "Stripped Willow Post",
+	"block.environmental.willow_hedge": "Willow Hedge",
 	"block.environmental.willow_beehive": "Willow Beehive",
 	
 	"block.environmental.cherry_planks": "Cherry Planks",
@@ -75,6 +78,9 @@
 	"block.environmental.cherry_sign": "Cherry Sign",
 	"block.environmental.cherry_chest": "Cherry Chest",
 	"block.environmental.cherry_trapped_chest": "Cherry Trapped Chest",
+	"block.environmental.cherry_post": "Cherry Post",
+	"block.environmental.stripped_cherry_post": "Stripped Cherry Post",
+	"block.environmental.cherry_hedge": "Cherry Hedge",
 	"block.environmental.cherry_beehive": "Cherry Beehive",
 	
 	"block.environmental.wisteria_log": "Wisteria Log",
@@ -97,6 +103,8 @@
 	"block.environmental.wisteria_vertical_slab": "Wisteria Vertical Slab",
 	"block.environmental.wisteria_chest": "Wisteria Chest",
 	"block.environmental.wisteria_trapped_chest": "Wisteria Trapped Chest",
+	"block.environmental.wisteria_post": "Wisteria Post",
+	"block.environmental.stripped_wisteria_post": "Stripped Wisteria Post",
 	"block.environmental.wisteria_beehive": "Wisteria Beehive",
 	
 	"block.environmental.blue_wisteria_leaves": "Blue Wisteria Leaves",
@@ -119,6 +127,11 @@
 	"block.environmental.purple_wisteria_leaf_carpet": "Purple Wisteria Leaf Carpet",
 	"block.environmental.white_wisteria_leaf_carpet": "White Wisteria Leaf Carpet",
 
+	"block.environmental.blue_wisteria_hedge": "Blue Wisteria Hedge",
+	"block.environmental.pink_wisteria_hedge": "Pink Wisteria Hedge",
+	"block.environmental.purple_wisteria_hedge": "Purple Wisteria Hedge",
+	"block.environmental.white_wisteria_hedge": "White Wisteria Hedge",
+	
 	"block.environmental.terracotta_bricks": "Terracotta Bricks",	
 	"block.environmental.white_terracotta_bricks": "White Terracotta Bricks",
 	"block.environmental.orange_terracotta_bricks": "Orange Terracotta Bricks",
