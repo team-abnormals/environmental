@@ -49,6 +49,9 @@
 	"block.environmental.willow_sign": "Letrero de sauce",
 	"block.environmental.willow_chest": "Cofre de sauce",
 	"block.environmental.willow_trapped_chest": "Cofre trampa de sauce",
+	"block.environmental.willow_post": "Poste de sauce",
+	"block.environmental.stripped_willow_post": "Poste de sauce sin corteza",
+	"block.environmental.willow_hedge": "Seto de sauce",
 	"block.environmental.willow_beehive": "Apiario de abejas de sauce",
 
 	"block.environmental.cherry_planks": "Madera de cerezo",
@@ -75,6 +78,9 @@
 	"block.environmental.cherry_sign": "Letrero de cerezo",
 	"block.environmental.cherry_chest": "Cofre de cerezo",
 	"block.environmental.cherry_trapped_chest": "Cofre trampa de cerezo",
+	"block.environmental.cherry_post": "Poste de cerezo",
+	"block.environmental.stripped_cherry_post": "Poste de cerezo sin corteza",
+	"block.environmental.cherry_hedge": "Seto de cerezo",
 	"block.environmental.cherry_beehive": "Apiario de abejas de cerezo",
 
 	"block.environmental.wisteria_log": "Tronco de glicina",
@@ -97,6 +103,8 @@
 	"block.environmental.wisteria_vertical_slab": "Losa vertical de glicina ",
 	"block.environmental.wisteria_chest": "Cofre de glicina",
 	"block.environmental.wisteria_trapped_chest": "Cofre trampa de glicina",
+	"block.environmental.wisteria_post": "Poste de glicina",
+	"block.environmental.stripped_wisteria_post": "Poste de glicina sin corteza",
 	"block.environmental.wisteria_beehive": "Apiario de abejas de glicina",
 
 	"block.environmental.blue_wisteria_leaves": "Hojas de glicina azules",
@@ -118,6 +126,11 @@
 	"block.environmental.pink_wisteria_leaf_carpet": "Alfombra de hojas de glicina rosas",
 	"block.environmental.purple_wisteria_leaf_carpet": "Alfombra de hojas de glicina moradas",
 	"block.environmental.white_wisteria_leaf_carpet": "Alfombra de hojas de glicina blancas",
+
+	"block.environmental.blue_wisteria_hedge": "Seto de glicina azul",
+	"block.environmental.pink_wisteria_hedge": "Seto de glicina rosa",
+	"block.environmental.purple_wisteria_hedge": "Seto de glicina morado",
+	"block.environmental.white_wisteria_hedge": "Seto de glicina blanco",
 
 	"block.environmental.terracotta_bricks": "Ladrillos de terracota",
 	"block.environmental.white_terracotta_bricks": "Ladrillos de terracota blanca",
@@ -418,7 +431,7 @@
 	"advancements.adventure.upgrade_architect_belt.description": "Cómprale el cinturón del arquitecto a un albañil, un carpintero o un alfarero y sube al máximo su nivel",
 
 	"advancements.adventure.upgrade_wanderer_boots.title": "Botas de piel",
-	"advancements.adventure.upgrade_wanderer_boots.description": "Recibe las botas del nómada al comprar todos los artículos de un comerciante nómada y sube al máximo su nivel",
+	"advancements.adventure.upgrade_wanderer_boots.description": "Recibe las botas del nómada de un comerciante nómada y sube al máximo su nivel",
 
 	"subtitles.entity.slabfish.burp": "Pezlosa eructando",
 	"subtitles.entity.slabfish.death": "Pezlosa muerto",
