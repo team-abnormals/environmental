@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "environmental:dianthus"
+          "name": "environmental:willow_chest"
         }
       ],
       "conditions": [
