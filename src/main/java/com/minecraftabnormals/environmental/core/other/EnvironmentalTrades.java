@@ -3,6 +3,7 @@ package com.minecraftabnormals.environmental.core.other;
 import com.minecraftabnormals.abnormals_core.core.util.TradeUtil;
 import com.minecraftabnormals.abnormals_core.core.util.TradeUtil.AbnormalsTrade;
 import com.minecraftabnormals.environmental.core.Environmental;
+import com.minecraftabnormals.environmental.core.EnvironmentalConfig;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalVillagers;
@@ -26,7 +27,6 @@ public class EnvironmentalTrades {
 	public static void onWandererTradesEvent(WandererTradesEvent event) {
 		TradeUtil.addWandererTrades(event,
 				new AbnormalsTrade(1, EnvironmentalItems.CATTAIL_SEEDS.get(), 1, 6, 1),
-				new AbnormalsTrade(1, EnvironmentalItems.RICE.get(), 1, 12, 1),
 				new AbnormalsTrade(1, EnvironmentalItems.DUCKWEED.get(), 2, 6, 1),
 
 				new AbnormalsTrade(5, EnvironmentalBlocks.WILLOW_SAPLING.get().asItem(), 1, 8, 1),
@@ -50,6 +50,9 @@ public class EnvironmentalTrades {
 				new AbnormalsTrade(1, EnvironmentalBlocks.PURPLE_HIBISCUS.get().asItem(), 1, 12, 1)
 		);
 
+		if (EnvironmentalConfig.COMMON.generateRice.get())
+			TradeUtil.addWandererTrades(event, new AbnormalsTrade(1, EnvironmentalItems.RICE.get(), 1, 12, 1));
+
 		TradeUtil.addRareWandererTrades(event,
 				new AbnormalsTrade(5, EnvironmentalItems.SLABFISH_BUCKET.get(), 1, 4, 1),
 				new AbnormalsTrade(24, EnvironmentalItems.WANDERER_BOOTS.get(), 1, 1, 1)
@@ -58,9 +61,9 @@ public class EnvironmentalTrades {
 
 	@SubscribeEvent
 	public static void onVillagerTradesEvent(VillagerTradesEvent event) {
-		TradeUtil.addVillagerTrades(event, VillagerProfession.FARMER, TradeUtil.NOVICE,
-				new AbnormalsTrade(EnvironmentalItems.RICE.get(), 23, 1, 6, 1)
-		);
+		if (EnvironmentalConfig.COMMON.generateRice.get())
+			TradeUtil.addVillagerTrades(event, VillagerProfession.FARMER, TradeUtil.NOVICE, new AbnormalsTrade(EnvironmentalItems.RICE.get(), 23, 1, 6, 1));
+
 		TradeUtil.addVillagerTrades(event, VillagerProfession.FARMER, TradeUtil.APPRENTICE,
 				new AbnormalsTrade(1, EnvironmentalItems.CHERRIES.get(), 6, 16, 5),
 				new AbnormalsTrade(1, EnvironmentalItems.APPLE_PIE.get(), 5, 12, 5),
