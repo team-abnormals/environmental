@@ -9,15 +9,13 @@ import com.minecraftabnormals.environmental.core.registry.EnvironmentalAttribute
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.monster.EndermanEntity;
-import net.minecraft.entity.monster.MonsterEntity;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.api.distmarker.Dist;
@@ -80,9 +78,9 @@ public class ThiefHoodItem extends ExplorerArmorItem {
 	}
 
 	@SubscribeEvent
-	public static void onEvent(LivingDeathEvent event) {
+	public static void livingDeathEvent(LivingDeathEvent event) {
 		LivingEntity entity = event.getEntityLiving();
-		if (event.getSource().getTrueSource() instanceof LivingEntity && entity instanceof MobEntity) {
+		if (event.getSource().getTrueSource() instanceof LivingEntity && entity instanceof IMob) {
 			LivingEntity attacker = (LivingEntity) event.getSource().getTrueSource();
 			ItemStack stack = attacker.getItemStackFromSlot(EquipmentSlotType.HEAD);
 			if (stack.getItem() instanceof ThiefHoodItem) {
