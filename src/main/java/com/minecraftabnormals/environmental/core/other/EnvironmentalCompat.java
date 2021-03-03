@@ -88,7 +88,10 @@ public class EnvironmentalCompat {
 
 		DataUtil.registerCompostable(EnvironmentalBlocks.TWIG_NEST.get(), 0.65F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.HAY_NEST.get(), 0.65F);
-
+		
+		DataUtil.registerCompostable(EnvironmentalItems.TRUFFLE.get(), 0.65F);
+		DataUtil.registerCompostable(EnvironmentalBlocks.TRUFFLE_CRATE.get(), 1.0F);
+		
 		DataUtil.registerCompostable(EnvironmentalBlocks.CATTAIL_THATCH.get(), 0.65F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.CATTAIL_THATCH_SLAB.get(), 0.65F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.CATTAIL_THATCH_STAIRS.get(), 0.65F);
@@ -179,7 +182,9 @@ public class EnvironmentalCompat {
 		DataUtil.registerFlammable(EnvironmentalBlocks.CHICKEN_EGG_CRATE.get(), 5, 20);
 		DataUtil.registerFlammable(EnvironmentalBlocks.DUCK_EGG_CRATE.get(), 5, 20);
 		DataUtil.registerFlammable(EnvironmentalBlocks.TURTLE_EGG_CRATE.get(), 5, 20);
-
+		
+		DataUtil.registerFlammable(EnvironmentalBlocks.TRUFFLE_CRATE.get(), 5, 20);
+		
 		DataUtil.registerFlammable(EnvironmentalBlocks.WILLOW_LEAVES.get(), 30, 60);
 		DataUtil.registerFlammable(EnvironmentalBlocks.HANGING_WILLOW_LEAVES.get(), 30, 60);
 		DataUtil.registerFlammable(EnvironmentalBlocks.WILLOW_LOG.get(), 5, 5);

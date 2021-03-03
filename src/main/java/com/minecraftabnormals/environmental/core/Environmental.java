@@ -6,6 +6,7 @@ import com.minecraftabnormals.environmental.common.network.message.*;
 import com.minecraftabnormals.environmental.common.slabfish.SlabfishLoader;
 import com.minecraftabnormals.environmental.common.slabfish.condition.SlabfishCondition;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalCompat;
+import com.minecraftabnormals.environmental.core.other.EnvironmentalDataProcessors;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalDataSerializers;
 import com.minecraftabnormals.environmental.core.registry.*;
 import net.minecraft.client.renderer.texture.AtlasTexture;
@@ -68,6 +69,7 @@ public class Environmental {
 		EnvironmentalFeatures.TREE_DECORATORS.register(bus);
 		EnvironmentalAttributes.ATTRIBUTES.register(bus);
 		EnvironmentalEffects.EFFECTS.register(bus);
+		EnvironmentalEffects.POTIONS.register(bus);
 		EnvironmentalVillagers.POI_TYPES.register(bus);
 		EnvironmentalVillagers.PROFESSIONS.register(bus);
 		EnvironmentalContainers.CONTAINER_TYPES.register(bus);
@@ -98,6 +100,8 @@ public class Environmental {
 			EnvironmentalVillagers.registerVillagerTypes();
 			EnvironmentalVillagers.registerPOIs();
 			EnvironmentalFeatures.Configured.registerConfiguredFeatures();
+			EnvironmentalDataProcessors.registerTrackedData();
+			EnvironmentalEffects.registerBrewingRecipes();
 		});
 	}
 

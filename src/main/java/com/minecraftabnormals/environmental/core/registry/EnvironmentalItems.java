@@ -41,6 +41,10 @@ public class EnvironmentalItems {
 	public static final RegistryObject<Item> FRIED_EGG = HELPER.createItem("fried_egg", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).food(EnvironmentalFoods.FRIED_EGG)));
 	public static final RegistryObject<Item> SCRAMBLED_EGGS = HELPER.createItem("scrambled_eggs", () -> new ScrambledEggsItem(new Item.Properties().maxStackSize(1).group(ItemGroup.FOOD).food(EnvironmentalFoods.SCRAMBLED_EGGS)));
 
+	public static final RegistryObject<Item> TRUFFLE = HELPER.createItem("truffle", () -> new Item(new Item.Properties().food(EnvironmentalFoods.TRUFFLE).group(ItemGroup.FOOD)));
+	public static final RegistryObject<Item> TRUFFLE_PUREE = HELPER.createItem("truffle_puree", () -> new SoupItem((new Item.Properties()).maxStackSize(1).food(EnvironmentalFoods.TRUFFLE_PUREE).group(ItemGroup.FOOD)));
+	public static final RegistryObject<Item> TRUFFLE_PIE = HELPER.createItem("truffle_pie", () -> new Item(new Item.Properties().food(EnvironmentalFoods.TRUFFLE_PIE).group(ItemGroup.FOOD)));
+	
 	public static final RegistryObject<Item> MUD_BALL = HELPER.createItem("mud_ball", () -> new MudBallItem(new Item.Properties().group(ItemGroup.MATERIALS)));
 	public static final RegistryObject<Item> MUD_BRICK = HELPER.createItem("mud_brick", () -> new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
 
@@ -65,7 +69,7 @@ public class EnvironmentalItems {
 	public static final RegistryObject<Item> SALMON_RICE_CAKE = HELPER.createItem("salmon_rice_cake", () -> new Item(new Item.Properties().food(EnvironmentalFoods.SALMON_RICE_CAKE).group(ItemGroup.FOOD)));
 	public static final RegistryObject<Item> PUFFERFISH_RICE_CAKE = HELPER.createItem("pufferfish_rice_cake", () -> new Item(new Item.Properties().food(EnvironmentalFoods.PUFFERFISH_RICE_CAKE).group(ItemGroup.FOOD)));
 	public static final RegistryObject<Item> LIONFISH_RICE_CAKE = HELPER.createCompatItem("upgrade_aquatic", "lionfish_rice_cake", new Item.Properties().food(EnvironmentalFoods.LIONFISH_RICE_CAKE), ItemGroup.FOOD);
-
+	
 	public static final RegistryObject<Item> MUSIC_DISC_LEAVING_HOME = HELPER.createItem("music_disc_leaving_home", () -> new AbnormalsMusicDiscItem(14, EnvironmentalSounds.LEAVING_HOME, new Item.Properties().maxStackSize(1).group(ItemGroup.MISC).rarity(Rarity.RARE)));
 	public static final RegistryObject<Item> MUSIC_DISC_SLABRAVE = HELPER.createItem("music_disc_slabrave", () -> new AbnormalsMusicDiscItem(15, EnvironmentalSounds.SLABRAVE, new Item.Properties().maxStackSize(1).group(ItemGroup.MISC).rarity(Rarity.RARE)));
 

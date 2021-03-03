@@ -86,6 +86,8 @@ public class EnvironmentalProperties {
 	public static final AbstractBlock.Properties GREEN_TERRACOTTA_BRICKS = AbstractBlock.Properties.create(Material.ROCK, MaterialColor.GREEN_TERRACOTTA).setRequiresTool().hardnessAndResistance(1.25F, 4.2F);
 	public static final AbstractBlock.Properties RED_TERRACOTTA_BRICKS = AbstractBlock.Properties.create(Material.ROCK, MaterialColor.RED_TERRACOTTA).setRequiresTool().hardnessAndResistance(1.25F, 4.2F);
 	public static final AbstractBlock.Properties BLACK_TERRACOTTA_BRICKS = AbstractBlock.Properties.create(Material.ROCK, MaterialColor.BLACK_TERRACOTTA).setRequiresTool().hardnessAndResistance(1.25F, 4.2F);
+	
+	public static final AbstractBlock.Properties BURIED_TRUFFLE = AbstractBlock.Properties.create(Material.EARTH, MaterialColor.DIRT).harvestTool(ToolType.SHOVEL).hardnessAndResistance(0.6F).sound(SoundType.GROUND);
 
 	public static AbstractBlock.Properties createLeaves(MaterialColor color) {
 		return AbstractBlock.Properties.create(Material.LEAVES, color).harvestTool(ToolType.HOE).notSolid().hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT).setAllowsSpawn(EnvironmentalProperties::allowsSpawnOnLeaves).setSuffocates(EnvironmentalProperties::isntSolid).setBlocksVision(EnvironmentalProperties::isntSolid);

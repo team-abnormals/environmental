@@ -146,6 +146,8 @@ public class EnvironmentalBiomeFeatures {
 					generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_PURPLE_HIBISCUS);
 			}
 		}
+		
+		generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.BURIED_TRUFFLE);
 
 		if (EnvironmentalConfig.COMMON.limitFarmAnimalSpawns.get())
 			removeSpawns(event);

@@ -273,7 +273,7 @@
 	
 	"block.environmental.cherry_crate": "Laatikko kirsikoita",
 	"block.environmental.yak_hair_block": "Jakin karvakuutio",
-	 "block.environmental.yak_hair_rug": "Jakin karvamatto",
+	"block.environmental.yak_hair_rug": "Jakin karvamatto",
 	
 	"block.environmental.rice_sack": "Säkki riisiä",
 	"block.environmental.rice": "Riisi",
@@ -297,7 +297,10 @@
 	"block.environmental.chicken_egg_crate": "Laatikko kananmunia",
 	"block.environmental.duck_egg_crate": "Laatikko sorsan munia",
 	"block.environmental.turtle_egg_crate": "Laatikko kilpikonnan munia",
-		
+	
+	"block.environmental.buried_truffle": "Tryffeli mullassa",
+	"block.environmental.truffle_crate": "Laatikko tryffeleitä",
+	
 	"item.environmental.wanderer_boots": "Kulkurin saappaat",
 	"item.environmental.architect_belt": "Arkkitehdin vyö",
 	"item.environmental.healer_pouch": "Parantajan pussi",
@@ -332,7 +335,7 @@
 	
 	"item.environmental.cod_kelp_roll": "Turskalevärulla",
 	"item.environmental.tropical_fish_kelp_roll": "Trooppinen kalalevärulla",
-		"item.environmental.koi_kelp_roll": "Koikarppilevärulla",
+	"item.environmental.koi_kelp_roll": "Koikarppilevärulla",
 	"item.environmental.crab_kelp_roll": "Taskurapulevärulla",
 	"item.environmental.pike_kelp_roll": "Haukilevärulla",
 	
@@ -354,6 +357,10 @@
 	"item.environmental.cherries": "Kirsikoita",
 	"item.environmental.cherry_pie": "Kirsikkapiirakka",
 	"item.environmental.apple_pie": "Omenapiirakka",
+	
+	"item.environmental.truffle": "Tryffeli",
+	"item.environmental.truffle_puree": "Tryffelipyree",
+	"item.environmental.truffle_pie": "Tryffelipiirakka",
 	
 	"item.environmental.willow_boat": "Pajuvene",
 	"item.environmental.cherry_boat": "Kirsikkapuuvene",
@@ -390,6 +397,18 @@
 	
 	"effect.environmental.panic": "Paniikki",
 	"effect.environmental.serenity": "Rauha",
+	
+	"item.minecraft.potion.effect.vitality": "Eloisuuden taikajuoma",
+	"item.minecraft.potion.effect.vitality_strong": "Eloisuuden taikajuoma",
+	
+	"item.minecraft.splash_potion.effect.vitality": "Roiskahtava eloisuuden taikajuoma",
+	"item.minecraft.splash_potion.effect.vitality_strong": "Roiskahtava eloisuuden taikajuoma",
+	
+	"item.minecraft.lingering_potion.effect.vitality": "Viipyvä eloisuuden taikajuoma",
+	"item.minecraft.lingering_potion.effect.vitality_strong": "Viipyvä eloisuuden taikajuoma",
+	
+	"item.minecraft.tipped_arrow.effect.vitality": "Eloisuuden nuoli",
+	"item.minecraft.tipped_arrow.effect.vitality_strong": "Eloisuuden nuoli",
 	
 	"container.kiln": "Polttouuni",
 	"container.sawmill": "Saha",

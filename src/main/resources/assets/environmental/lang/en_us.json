@@ -310,6 +310,9 @@
 	"block.environmental.chicken_egg_crate": "Chicken Egg Crate",
 	"block.environmental.duck_egg_crate": "Duck Egg Crate",
 	"block.environmental.turtle_egg_crate": "Turtle Egg Crate",
+	
+	"block.environmental.buried_truffle": "Buried Truffle",
+	"block.environmental.truffle_crate": "Truffle Crate",
 		
 	"item.environmental.wanderer_boots": "Wanderer's Boots",
 	"item.environmental.architect_belt": "Architect's Belt",
@@ -365,6 +368,10 @@
 	"item.environmental.cherry_pie": "Cherry Pie",
 	"item.environmental.apple_pie": "Apple Pie",
 	
+	"item.environmental.truffle": "Truffle",
+	"item.environmental.truffle_puree": "Truffle Purée",
+	"item.environmental.truffle_pie": "Truffle Pie",
+	
 	"item.environmental.willow_boat": "Willow Boat",
 	"item.environmental.cherry_boat": "Cherry Boat",
 	"item.environmental.wisteria_boat": "Wisteria Boat",
@@ -399,6 +406,18 @@
 	
 	"effect.environmental.panic": "Panic",
 	"effect.environmental.serenity": "Serenity",
+	
+	"item.minecraft.potion.effect.vitality": "Potion of Vitality",
+	"item.minecraft.potion.effect.vitality_strong": "Potion of Vitality",
+	
+	"item.minecraft.splash_potion.effect.vitality": "Splash Potion of Vitality",
+	"item.minecraft.splash_potion.effect.vitality_strong": "Splash Potion of Vitality",
+	
+	"item.minecraft.lingering_potion.effect.vitality": "Lingering Potion of Vitality",
+	"item.minecraft.lingering_potion.effect.vitality_strong": "Lingering Potion of Vitality",
+	
+	"item.minecraft.tipped_arrow.effect.vitality": "Arrow of Vitality",
+	"item.minecraft.tipped_arrow.effect.vitality_strong": "Arrow of Vitality",
 	
 	"container.kiln": "Kiln",
 	"container.sawmill": "Sawmill",
