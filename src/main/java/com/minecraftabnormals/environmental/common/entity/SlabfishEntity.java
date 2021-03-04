@@ -292,8 +292,8 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 			return ActionResultType.SUCCESS;
 
 		} else if (Ingredient.fromTag(EnvironmentalTags.Items.SLABFISH_FOODS).test(stack)) {
-			this.consumeItemFromStack(player, stack);
 			stack.onItemUseFinish(this.world, this);
+			this.consumeItemFromStack(player, stack);
 			world.playSound(this.getPosX(), this.getPosY(), this.getPosZ(), EnvironmentalSounds.ENTITY_SLABFISH_EAT.get(), SoundCategory.NEUTRAL, 1F, 1F, true);
 			return ActionResultType.SUCCESS;
 
