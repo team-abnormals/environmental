@@ -10,7 +10,7 @@
 	"block.environmental.mud_brick_vertical_slab": "Losa vertical de ladrillos de barro",
 	"block.environmental.chiseled_mud_bricks": "Ladrillos de barro grabados",
 
-	"block.environmental.slabfish_effigy": "Efigie de pezlosa",
+	"block.environmental.slabfish_effigy": "Efigie de slabfish",
 
 	"block.environmental.chiseled_bricks": "Ladrillos grabados",
 
@@ -292,11 +292,11 @@
 	"block.environmental.rice": "Arroz",
 	"block.environmental.tall_rice": "Arroz",
 
-	"block.environmental.duckweed": "Lentejas de agua",
-	"block.environmental.duckweed_thatch": "Paja de lentejas de agua",
-	"block.environmental.duckweed_thatch_slab": "Losa de paja de lentejas de agua",
-	"block.environmental.duckweed_thatch_stairs": "Escaleras de paja de lentejas de agua",
-	"block.environmental.duckweed_thatch_vertical_slab": "Losa vertical de paja de lentejas de agua",
+	"block.environmental.duckweed": "Lenteja de agua",
+	"block.environmental.duckweed_thatch": "Paja de lenteja de agua",
+	"block.environmental.duckweed_thatch_slab": "Losa de paja de lenteja de agua",
+	"block.environmental.duckweed_thatch_stairs": "Escaleras de paja de lenteja de agua",
+	"block.environmental.duckweed_thatch_vertical_slab": "Losa vertical de paja de lenteja de agua",
 
 	"block.environmental.twig_nest": "Nido de ramitas",
 	"block.environmental.twig_chicken_nest": "Nido de ramitas con huevos de gallina",
@@ -311,13 +311,16 @@
 	"block.environmental.duck_egg_crate": "Cajón de huevos de pato",
 	"block.environmental.turtle_egg_crate": "Cajón de huevos de tortuga",
 
+	"block.environmental.buried_truffle": "Trufa enterrada",
+	"block.environmental.truffle_crate": "Cajón de trufas",
+
 	"item.environmental.wanderer_boots": "Botas del nómada",
 	"item.environmental.architect_belt": "Cinturón del arquitecto",
 	"item.environmental.healer_pouch": "Bolsa del curador",
 	"item.environmental.thief_hood": "Capucha del ladrón",
 	"item.environmental.executioner_cleaver": "Cuchilla del verdugo",
 
-	"item.environmental.slabfish_spawn_egg": "Generar pezlosa",
+	"item.environmental.slabfish_spawn_egg": "Generar slabfish",
 	"item.environmental.butterfly_spawn_egg": "Generar mariposa",
 	"item.environmental.duck_spawn_egg": "Generar pato",
 	"item.environmental.deer_spawn_egg": "Generar ciervo",
@@ -353,7 +356,7 @@
 
 	"item.environmental.squid_ink_risotto": "Risotto de tinta de calamar",
 
-	"item.environmental.slabfish_bucket": "Cubeta con pezlosa",
+	"item.environmental.slabfish_bucket": "Cubeta con slabfish",
 	"item.environmental.koi_bucket": "Cubeta con koi",
 	"item.environmental.bottled_butterfly": "Botella con mariposa",
 
@@ -365,6 +368,10 @@
 	"item.environmental.cherry_pie": "Pastel de cereza",
 	"item.environmental.apple_pie": "Pastel de manzana",
 
+	"item.environmental.truffle": "Trufa",
+	"item.environmental.truffle_puree": "Puré de trufa",
+	"item.environmental.truffle_pie": "Pastel de trufa",
+
 	"item.environmental.willow_boat": "Bote de sauce",
 	"item.environmental.cherry_boat": "Bote de cerezo",
 	"item.environmental.wisteria_boat": "Bote de glicina",
@@ -375,7 +382,7 @@
 	"item.environmental.music_disc_leaving_home": "Disco",
 	"item.environmental.music_disc_leaving_home.desc": "hatsondogs - Leaving Home",
 
-	"entity.environmental.slabfish": "Pezlosa",
+	"entity.environmental.slabfish": "Slabfish",
 	"entity.environmental.duck": "Pato",
 	"entity.environmental.butterfly": "Mariposa",
 	"entity.environmental.deer": "Ciervo",
@@ -392,13 +399,25 @@
 	"biome.environmental.mushroom_marsh": "Marisma fúngica",
 	"biome.environmental.mire": "Ciénaga",
 
-	"biome.environmental.blossom_woods": "Bosque floreciente",
-	"biome.environmental.blossom_hills": "Colinas florecientes",
-	"biome.environmental.blossom_highlands": "Elevaciones florecientes",
-	"biome.environmental.blossom_valleys": "Valles florecientes",
+	"biome.environmental.blossom_woods": "Bosque florecido",
+	"biome.environmental.blossom_hills": "Colinas florecidas",
+	"biome.environmental.blossom_highlands": "Elevaciones florecidas",
+	"biome.environmental.blossom_valleys": "Valle florecido",
 
 	"effect.environmental.panic": "Pánico",
 	"effect.environmental.serenity": "Serenidad",
+
+	"item.minecraft.potion.effect.vitality": "Poción de vitalidad",
+	"item.minecraft.potion.effect.vitality_strong": "Poción de vitalidad",
+
+	"item.minecraft.splash_potion.effect.vitality": "Poción arrojadiza de vitalidad",
+	"item.minecraft.splash_potion.effect.vitality_strong": "Poción arrojadiza de vitalidad",
+
+	"item.minecraft.lingering_potion.effect.vitality": "Poción persistente de vitalidad",
+	"item.minecraft.lingering_potion.effect.vitality_strong": "Poción persistente de vitalidad",
+
+	"item.minecraft.tipped_arrow.effect.vitality": "Flecha de vitalidad",
+	"item.minecraft.tipped_arrow.effect.vitality_strong": "Flecha de vitalidad",
 
 	"container.kiln": "Horno de alfarería",
 	"container.sawmill": "Aserradero",
@@ -410,13 +429,13 @@
 	"attribute.name.generic.stealth": "Sigilo",
 
 	"advancements.husbandry.bred_all_slabfish.title": "Genes únicos",
-	"advancements.husbandry.bred_all_slabfish.description": "¡Haz que se reproduzcan todos los tipos de pezlosa!",
+	"advancements.husbandry.bred_all_slabfish.description": "¡Haz que se reproduzcan todos los tipos de slabfish!",
 
 	"advancements.husbandry.backpack_slabfish.title": "Primer día del cole",
-	"advancements.husbandry.backpack_slabfish.description": "Dale una mochila a un pezlosa",
+	"advancements.husbandry.backpack_slabfish.description": "Dale una mochila a un slabfish",
 
 	"advancements.adventure.find_natural_slabfish.title": "¡Vienen en distintos colores!",
-	"advancements.adventure.find_natural_slabfish.description": "Encuentra todas los tipos naturales de pezlosa",
+	"advancements.adventure.find_natural_slabfish.description": "Encuentra todas los tipos naturales de slabfish",
 
 	"advancements.adventure.obtain_explorer_gear.title": "¡No te lo lleves!",
 	"advancements.adventure.obtain_explorer_gear.description": "Obtén alguna pieza del equipo de explorador",
@@ -433,12 +452,12 @@
 	"advancements.adventure.upgrade_wanderer_boots.title": "Botas de piel",
 	"advancements.adventure.upgrade_wanderer_boots.description": "Recibe las botas del nómada de un comerciante nómada y sube al máximo su nivel",
 
-	"subtitles.entity.slabfish.burp": "Pezlosa eructando",
-	"subtitles.entity.slabfish.death": "Pezlosa muerto",
-	"subtitles.entity.slabfish.step": "Pasos de pezlosa",
-	"subtitles.entity.slabfish.hurt": "Pezlosa herido",
-	"subtitles.entity.slabfish.eat": "Pezlosa comiendo",
-	"subtitles.entity.slabfish.transform": "Pezlosa transformándose",
+	"subtitles.entity.slabfish.burp": "Slabfish eructando",
+	"subtitles.entity.slabfish.death": "Slabfish muerto",
+	"subtitles.entity.slabfish.step": "Pasos de slabfish",
+	"subtitles.entity.slabfish.hurt": "Slabfish herido",
+	"subtitles.entity.slabfish.eat": "Slabfish comiendo",
+	"subtitles.entity.slabfish.transform": "Slabfish transformándose",
 	"subtitles.entity.slabfish.backpack": "Mochila equipada",
 	"subtitles.entity.slabfish.sweater": "Suéter equipado",
 
@@ -470,7 +489,7 @@
 
 	"entity.environmental.slabfish.type.marsh": "Marisma",
 	"entity.environmental.slabfish.type.mire": "Ciénaga",
-	"entity.environmental.slabfish.type.blossom": "Floreciente",
+	"entity.environmental.slabfish.type.blossom": "Florecido",
 	"entity.environmental.slabfish.type.maple": "Bosque de arce",
 	"entity.environmental.slabfish.type.rainforest": "Selva",
 	"entity.environmental.slabfish.type.dunes": "Dunas",
