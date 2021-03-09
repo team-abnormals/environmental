@@ -50,8 +50,6 @@ public class EnvironmentalFeatures {
 	public static final RegistryObject<Feature<NoFeatureConfig>> CHICKEN_NEST = FEATURES.register("chicken_nest", () -> new ChickenNestFeature(NoFeatureConfig.field_236558_a_));
 	public static final RegistryObject<Feature<NoFeatureConfig>> DUCK_NEST = FEATURES.register("duck_nest", () -> new DuckNestFeature(NoFeatureConfig.field_236558_a_));
 	public static final RegistryObject<Feature<NoFeatureConfig>> TURKEY_NEST = FEATURES.register("turkey_nest", () -> new TurkeyNestFeature(NoFeatureConfig.field_236558_a_));
-	
-	public static final RegistryObject<Feature<NoFeatureConfig>> BURIED_TRUFFLE = FEATURES.register("buried_truffle", () -> new BuriedTruffleFeature(NoFeatureConfig.field_236558_a_));
 
 	public static final RegistryObject<Feature<BaseTreeFeatureConfig>> CHERRY_TREE = FEATURES.register("cherry_tree", () -> new CherryTreeFeature(BaseTreeFeatureConfig.CODEC));
 	public static final RegistryObject<Feature<BaseTreeFeatureConfig>> WISTERIA_TREE = FEATURES.register("wisteria_tree", () -> new WisteriaTreeFeature(BaseTreeFeatureConfig.CODEC));
@@ -230,8 +228,6 @@ public class EnvironmentalFeatures {
 		public static final ConfiguredFeature<?, ?> NEST_CHICKEN = EnvironmentalFeatures.CHICKEN_NEST.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Features.Placements.HEIGHTMAP_SPREAD_DOUBLE_PLACEMENT.chance(32));
 		public static final ConfiguredFeature<?, ?> NEST_DUCK = EnvironmentalFeatures.DUCK_NEST.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Features.Placements.HEIGHTMAP_SPREAD_DOUBLE_PLACEMENT.chance(32));
 		public static final ConfiguredFeature<?, ?> NEST_TURKEY = EnvironmentalFeatures.TURKEY_NEST.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Features.Placements.HEIGHTMAP_SPREAD_DOUBLE_PLACEMENT.chance(32));
-		
-		public static final ConfiguredFeature<?, ?> BURIED_TRUFFLE = EnvironmentalFeatures.BURIED_TRUFFLE.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Features.Placements.HEIGHTMAP_SPREAD_DOUBLE_PLACEMENT.chance(8));
 
 		public static final ConfiguredFeature<?, ?> SPRING_WATER_MARSH = Feature.SPRING_FEATURE.withConfiguration(new LiquidsConfig(Fluids.WATER.getDefaultState(), true, 4, 1, ImmutableSet.of(Blocks.STONE, Blocks.GRANITE, Blocks.DIORITE, Blocks.ANDESITE))).withPlacement(Placement.RANGE_BIASED.configure(new TopSolidRangeConfig(8, 8, 256))).square().func_242731_b(128);
 		public static final ConfiguredFeature<?, ?> LAKE_WATER_MARSH = Feature.LAKE.withConfiguration(new BlockStateFeatureConfig(Blocks.WATER.getDefaultState())).withPlacement(Placement.WATER_LAKE.configure(new ChanceConfig(48)));
@@ -321,8 +317,6 @@ public class EnvironmentalFeatures {
 			register("nest_chicken", NEST_CHICKEN);
 			register("nest_duck", NEST_DUCK);
 			register("nest_turkey", NEST_TURKEY);
-			
-			register("buried_truffle", BURIED_TRUFFLE);
 
 			register("spring_water_marsh", SPRING_WATER_MARSH);
 			register("lake_water_marsh", LAKE_WATER_MARSH);

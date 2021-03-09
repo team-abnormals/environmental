@@ -351,19 +351,24 @@ public class EnvironmentalEvents {
 			int trufflehuntingtime = data.getValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME);
 			BlockPos trufflepos = data.getValue(EnvironmentalDataProcessors.TRUFFLE_POS);
 
-			if (trufflehuntingtime == 0 || world.getBlockState(trufflepos).getBlock() != EnvironmentalBlocks.BURIED_TRUFFLE.get())
+			if (trufflehuntingtime == 0 || (data.getValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET) && world.getBlockState(trufflepos).getBlock() != EnvironmentalBlocks.BURIED_TRUFFLE.get())) {
 				data.setValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET, false);
 
-			if (trufflehuntingtime > 0) {
-				data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, trufflehuntingtime - 1);
+				if (trufflehuntingtime > 0)
+					data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, Math.max(-400, -trufflehuntingtime));
 			}
-			else if (trufflehuntingtime < 0) {
-				data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, trufflehuntingtime + 1);
-				if (world.isRemote() && data.getValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET) && trufflehuntingtime % 10 == 0) {
-					double d0 = random.nextGaussian() * 0.02D;
-					double d1 = random.nextGaussian() * 0.02D;
-					double d2 = random.nextGaussian() * 0.02D;
-					world.addParticle(EnvironmentalParticles.PIG_FINDS_TRUFFLE.get(), entity.getPosXRandom(1.0D), entity.getPosYRandom() + 0.5D, entity.getPosZRandom(1.0D), d0, d1, d2);
+			else {
+				if (trufflehuntingtime > 0) {
+					data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, trufflehuntingtime - 1);
+				}
+				else if (trufflehuntingtime < 0) {
+					data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, trufflehuntingtime + 1);
+					if (world.isRemote() && data.getValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET) && trufflehuntingtime % 10 == 0) {
+						double d0 = random.nextGaussian() * 0.02D;
+						double d1 = random.nextGaussian() * 0.02D;
+						double d2 = random.nextGaussian() * 0.02D;
+						world.addParticle(EnvironmentalParticles.PIG_FINDS_TRUFFLE.get(), entity.getPosXRandom(1.0D), entity.getPosYRandom() + 0.5D, entity.getPosZRandom(1.0D), d0, d1, d2);
+					}
 				}
 			}
 		}
