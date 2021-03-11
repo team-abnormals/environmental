@@ -121,5 +121,23 @@
       "minecraft:mob/chicken/plop"
     ],
     "subtitle": "subtitles.entity.duck.egg"
+  },
+  "entity.pig.sniff": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name":"environmental:entity/pig/sniff1",
+        "volume":0.3
+      },
+      {
+        "name":"environmental:entity/pig/sniff2",
+        "volume":0.3
+      },
+      {
+        "name":"environmental:entity/pig/sniff3",
+        "volume":0.3
+      }
+    ],
+    "subtitle": "subtitles.entity.pig.sniff"
   }
 }

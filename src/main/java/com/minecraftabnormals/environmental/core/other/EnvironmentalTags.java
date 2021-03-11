@@ -1,14 +1,21 @@
 package com.minecraftabnormals.environmental.core.other;
 
 import com.minecraftabnormals.environmental.core.Environmental;
+
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 
 public class EnvironmentalTags {
+	public static class Blocks {
+		public static final ITag.INamedTag<Block> GRASS_LIKE = createWrapperBlockTag("grass_like");
+	}
+	
 	public static class Items {
 		public static final ITag.INamedTag<Item> SUSHI = createWrapperItemTag("sushi");
 
@@ -25,6 +32,10 @@ public class EnvironmentalTags {
 		public static final ITag.INamedTag<EntityType<?>> SERENITY_WHITELIST = createWrapperEntityTag("serenity_whitelist");
 	}
 
+	private static ITag.INamedTag<Block> createWrapperBlockTag(String tagName) {
+		return BlockTags.createOptional(new ResourceLocation(Environmental.MOD_ID, tagName));
+	}
+	
 	private static ITag.INamedTag<Item> createWrapperItemTag(String tagName) {
 		return ItemTags.createOptional(new ResourceLocation(Environmental.MOD_ID, tagName));
 	}

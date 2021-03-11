@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:grass_block",
+    "minecraft:podzol",
+    "minecraft:mycelium"
+  ],
+  "optional": [
+    "quark:glowcelium",
+    "atmospheric:crustose"
+  ]
+}

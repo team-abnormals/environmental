@@ -17,6 +17,7 @@ import com.minecraftabnormals.environmental.core.EnvironmentalConfig;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEntities;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalParticles;
+import com.minecraftabnormals.environmental.core.registry.EnvironmentalSounds;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -346,7 +347,7 @@ public class EnvironmentalEvents {
 		World world = entity.getEntityWorld();
 		Random random = world.getRandom();
 
-		if (entity instanceof PigEntity) {
+		if (entity instanceof PigEntity && entity.isAlive()) {
 			IDataManager data = ((IDataManager) entity);
 			int trufflehuntingtime = data.getValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME);
 			BlockPos trufflepos = data.getValue(EnvironmentalDataProcessors.TRUFFLE_POS);
@@ -360,6 +361,9 @@ public class EnvironmentalEvents {
 			else {
 				if (trufflehuntingtime > 0) {
 					data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, trufflehuntingtime - 1);
+					if (!world.isRemote() && data.getValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET) && trufflehuntingtime % 30 == 0) {
+						entity.playSound(EnvironmentalSounds.ENTITY_PIG_SNIFF.get(), 1.0F, (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
+					}
 				}
 				else if (trufflehuntingtime < 0) {
 					data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, trufflehuntingtime + 1);

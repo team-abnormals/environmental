@@ -6,6 +6,7 @@ import java.util.List;
 import com.google.common.collect.Lists;
 import com.minecraftabnormals.abnormals_core.common.world.storage.tracking.IDataManager;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalDataProcessors;
+import com.minecraftabnormals.environmental.core.other.EnvironmentalTags;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
 
 import net.minecraft.block.BlockState;
@@ -70,18 +71,21 @@ public class HuntTruffleGoal extends Goal {
 	}
 
 	private boolean findTruffle() {
-		int radius = 48;
+		int range = 80;
 		int height = 16;
 		BlockPos blockpos = this.pig.getPosition();
 		BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
 
 		List<BlockPos> truffleblocks = Lists.newArrayList();
-		
-		for(int y = -height; y < height; ++y) {
-			for(int i = 0; i < radius; ++i) {
+
+		for(int i = 0; i < range; ++i) {
+			boolean flag = false;
+			
+			for(int y = -height; y < height; ++y) {
 				for(int x = 0; x <= i; x = x > 0 ? -x : 1 - x) {
 					for(int z = x < i && x > -i ? i : 0; z <= i; z = z > 0 ? -z : 1 - z) {
 						blockpos$mutable.setAndOffset(blockpos, x, y - 1, z);
+						
 						if (this.pig.isWithinHomeDistanceFromPosition(blockpos$mutable)) {
 							if (this.isTruffle(this.pig.world, blockpos$mutable)) {
 								this.data.setValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET, true);
@@ -89,6 +93,11 @@ public class HuntTruffleGoal extends Goal {
 								return true;
 							}
 							else if (this.isSuitableForTruffle(this.pig.world, blockpos$mutable)) {
+								if (i <= 48 && !flag) {
+									flag = true;
+									truffleblocks.clear();
+								}
+
 								truffleblocks.add(blockpos$mutable.toImmutable());
 							}
 						}
@@ -106,7 +115,7 @@ public class HuntTruffleGoal extends Goal {
 
 			return true;
 		}
-		
+
 		return false;
 	}
 
@@ -121,7 +130,14 @@ public class HuntTruffleGoal extends Goal {
 		for(Direction direction : Direction.values()) {
 			BlockState blockstate = worldIn.getBlockState(pos.offset(direction));
 
-			if (!blockstate.isIn(Tags.Blocks.DIRT)) {
+			if (direction == Direction.UP) {
+				if (!blockstate.isIn(EnvironmentalTags.Blocks.GRASS_LIKE)) {
+					if (!blockstate.isIn(Tags.Blocks.DIRT) || !worldIn.getBlockState(pos.up()).isIn(EnvironmentalTags.Blocks.GRASS_LIKE)) {
+						return false;
+					}
+				}
+			}
+			else if (!blockstate.isIn(Tags.Blocks.DIRT)) {
 				return false;
 			}
 		}

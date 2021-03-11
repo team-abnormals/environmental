@@ -26,4 +26,6 @@ public class EnvironmentalSounds {
 	public static final RegistryObject<SoundEvent> ENTITY_KOI_FLOP = HELPER.createSoundEvent("entity.koi.flop");
 	
 	public static final RegistryObject<SoundEvent> ENTITY_DUCK_EGG = HELPER.createSoundEvent("entity.duck.egg");
+	
+	public static final RegistryObject<SoundEvent> ENTITY_PIG_SNIFF = HELPER.createSoundEvent("entity.pig.sniff");
 }
