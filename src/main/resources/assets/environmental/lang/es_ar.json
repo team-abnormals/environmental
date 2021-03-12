@@ -399,10 +399,10 @@
 	"biome.environmental.mushroom_marsh": "Marisma fúngica",
 	"biome.environmental.mire": "Ciénaga",
 
-	"biome.environmental.blossom_woods": "Bosque florecido",
-	"biome.environmental.blossom_hills": "Colinas florecidas",
-	"biome.environmental.blossom_highlands": "Elevaciones florecidas",
-	"biome.environmental.blossom_valleys": "Valle florecido",
+	"biome.environmental.blossom_woods": "Bosque florido",
+	"biome.environmental.blossom_hills": "Colinas floridas",
+	"biome.environmental.blossom_highlands": "Elevaciones floridas",
+	"biome.environmental.blossom_valleys": "Valle florido",
 
 	"effect.environmental.panic": "Pánico",
 	"effect.environmental.serenity": "Serenidad",
@@ -489,7 +489,7 @@
 
 	"entity.environmental.slabfish.type.marsh": "Marisma",
 	"entity.environmental.slabfish.type.mire": "Ciénaga",
-	"entity.environmental.slabfish.type.blossom": "Florecido",
+	"entity.environmental.slabfish.type.blossom": "Florido",
 	"entity.environmental.slabfish.type.maple": "Bosque de arce",
 	"entity.environmental.slabfish.type.rainforest": "Selva",
 	"entity.environmental.slabfish.type.dunes": "Dunas",
