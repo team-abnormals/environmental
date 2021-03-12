@@ -54,11 +54,10 @@ public class HuntTruffleGoal extends Goal {
 
 	public void tick() {
 		BlockPos blockpos = this.data.getValue(EnvironmentalDataProcessors.TRUFFLE_POS);
-		this.pig.getLookController().setLookPosition(blockpos.getX(), blockpos.getY(), blockpos.getZ(), (float)(this.pig.getHorizontalFaceSpeed() + 20), (float)this.pig.getVerticalFaceSpeed());
-		this.pig.rotationPitch = 0.0F;
+		this.pig.getLookController().setLookPosition(blockpos.getX() + 0.5D, blockpos.getY() + 0.5D, blockpos.getZ() + 0.5D, (float)(this.pig.getHorizontalFaceSpeed() + 20), (float)this.pig.getVerticalFaceSpeed());
 		if (blockpos.withinDistance(this.pig.getPositionVec(), 4.0D)) {
 			if (this.data.getValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME) > 0)
-				this.data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, -400);
+				this.data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, -800);
 		}
 		else {
 			this.moveToTruffle();
@@ -106,7 +105,7 @@ public class HuntTruffleGoal extends Goal {
 			}
 		}
 
-		if (truffleblocks.size() > 0) {
+		if (this.pig.world.getDimensionType().isNatural() && truffleblocks.size() > 0) {
 			BlockPos trufflepos = truffleblocks.get(this.pig.getRNG().nextInt(truffleblocks.size()));
 
 			this.pig.world.setBlockState(trufflepos, EnvironmentalBlocks.BURIED_TRUFFLE.get().getDefaultState(), 3);
