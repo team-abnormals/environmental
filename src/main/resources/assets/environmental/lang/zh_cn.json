@@ -4,10 +4,10 @@
 	
 	"block.environmental.mud": "泥巴",
 	"block.environmental.mud_bricks": "泥巴砖块",
-	"block.environmental.mud_brick_slab": "泥巴砖块台阶",
-	"block.environmental.mud_brick_stairs": "泥巴砖块楼梯",
-	"block.environmental.mud_brick_wall": "泥巴砖块墙",
-	"block.environmental.mud_brick_vertical_slab": "泥巴砖块竖直台阶",
+	"block.environmental.mud_brick_slab": "泥巴砖台阶",
+	"block.environmental.mud_brick_stairs": "泥巴砖楼梯",
+	"block.environmental.mud_brick_wall": "泥巴砖墙",
+	"block.environmental.mud_brick_vertical_slab": "泥巴砖竖直台阶",
 	"block.environmental.chiseled_mud_bricks": "錾制泥巴砖块",
 	
 	"block.environmental.slabfish_effigy": "板鱼雕像",
@@ -15,10 +15,10 @@
 	"block.environmental.chiseled_bricks": "錾制砖块",
 	
 	"block.environmental.ice_bricks": "冰砖块",
-	"block.environmental.ice_brick_slab": "冰砖块台阶",
-	"block.environmental.ice_brick_stairs": "冰砖块楼梯",
-	"block.environmental.ice_brick_wall": "冰砖块围墙",
-	"block.environmental.ice_brick_vertical_slab": "冰砖块竖直台阶",
+	"block.environmental.ice_brick_slab": "冰砖台阶",
+	"block.environmental.ice_brick_stairs": "冰砖楼梯",
+	"block.environmental.ice_brick_wall": "冰砖围墙",
+	"block.environmental.ice_brick_vertical_slab": "冰砖竖直台阶",
 	"block.environmental.chiseled_ice_bricks": "錾制冰砖块",
 	
 	"block.environmental.ice_lantern": "冰灯笼",
