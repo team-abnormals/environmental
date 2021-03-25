@@ -5,15 +5,15 @@
         "model": "environmental:block/podzol_path"
       },
       {
-        "model": "nvironmental:block/podzol_path",
+        "model": "environmental:block/podzol_path",
         "y": 90
       },
       {
-        "model": "nvironmental:block/podzol_path",
+        "model": "environmental:block/podzol_path",
         "y": 180
       },
       {
-        "model": "nvironmental:block/podzol_path",
+        "model": "environmental:block/podzol_path",
         "y": 270
       }
     ]
