@@ -1,16 +1,17 @@
-modLoader="javafml"
-loaderVersion="[32,)"
-issueTrackerURL="https://github.com/team-abnormals/environmental/issues"
-license="https://github.com/team-abnormals/environmental/blob/main/LICENSE.txt"
+modLoader = "javafml"
+loaderVersion = "[32,)"
+issueTrackerURL = "https://github.com/team-abnormals/environmental/issues"
+license = "https://github.com/team-abnormals/environmental/blob/main/LICENSE.txt"
 
 [[mods]]
-    modId="environmental"
-    version="${file.jarVersion}"
-    logoFile="logo.png"
-    authors="Team Abnormals"
-    credits="bageldotjpg, Farcr, hatsondogs, Jackson, Ocelot, Echolite, and five"
-    displayName="Environmental"
-    description='''
+    modId = "environmental"
+    version = "${file.jarVersion}"
+    logoFile = "logo.png"
+    itemIcon = "environmental:wanderer_boots"
+    authors = "Team Abnormals"
+    credits = "bageldotjpg, Farcr, hatsondogs, Jackson, Ocelot, Echolite, and five"
+    displayName = "Environmental"
+    description = '''
     Expanding the environment. New wood, new blocks, new friends.
     '''
 
