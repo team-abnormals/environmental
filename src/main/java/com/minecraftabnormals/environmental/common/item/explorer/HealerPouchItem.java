@@ -63,7 +63,6 @@ public class HealerPouchItem extends ExplorerArmorItem {
 				}
 			}
 		}
-
 	}
 
 	@Override
