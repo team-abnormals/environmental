@@ -185,17 +185,17 @@ public class DuckEntity extends AnimalEntity implements IEggLayingEntity {
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return SoundEvents.ENTITY_CHICKEN_AMBIENT;
+		return EnvironmentalSounds.ENTITY_DUCK_AMBIENT.get();
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundEvents.ENTITY_CHICKEN_HURT;
+		return EnvironmentalSounds.ENTITY_DUCK_HURT.get();
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return SoundEvents.ENTITY_CHICKEN_DEATH;
+		return EnvironmentalSounds.ENTITY_DUCK_DEATH.get();
 	}
 
 	@Override
@@ -206,7 +206,7 @@ public class DuckEntity extends AnimalEntity implements IEggLayingEntity {
 	
 	@Override
 	protected void playStepSound(BlockPos pos, BlockState blockIn) {
-		this.playSound(SoundEvents.ENTITY_CHICKEN_STEP, 0.15F, 1.0F);
+		this.playSound(EnvironmentalSounds.ENTITY_DUCK_STEP.get(), 0.15F, 1.0F);
 	}
 
 	@Override

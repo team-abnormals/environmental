@@ -452,20 +452,23 @@
 	"advancements.adventure.upgrade_wanderer_boots.title": "Boots with the Fur",
 	"advancements.adventure.upgrade_wanderer_boots.description": "Receive the Wanderer's Boots rarely from a Wandering Trader and completely level it up",
 	
-	"subtitles.entity.slabfish.burp": "Slabfish burps",
-	"subtitles.entity.slabfish.death": "Slabfish dies",
-	"subtitles.entity.slabfish.step": "Slabfish steps",
-	"subtitles.entity.slabfish.hurt": "Slabfish hurts",
-	"subtitles.entity.slabfish.eat": "Slabfish eats",
-	"subtitles.entity.slabfish.transform": "Slabfish transforms",
-	"subtitles.entity.slabfish.backpack": "Backpack equips",
-	"subtitles.entity.slabfish.sweater": "Sweater equips",
+	"subtitles.environmental.entity.slabfish.burp": "Slabfish burps",
+	"subtitles.environmental.entity.slabfish.death": "Slabfish dies",
+	"subtitles.environmental.entity.slabfish.step": "Slabfish steps",
+	"subtitles.environmental.entity.slabfish.hurt": "Slabfish hurts",
+	"subtitles.environmental.entity.slabfish.eat": "Slabfish eats",
+	"subtitles.environmental.entity.slabfish.transform": "Slabfish transforms",
+	"subtitles.environmental.entity.slabfish.backpack": "Backpack equips",
+	"subtitles.environmental.entity.slabfish.sweater": "Sweater equips",
 	
-	"subtitles.entity.koi.flop": "Koi flops",
-	
-	"subtitles.entity.duck.egg": "Duck plops",
-	
-	"subtitles.entity.pig.sniff": "Pig sniffs",
+	"subtitles.environmental.entity.koi.flop": "Koi flops",
+
+	"subtitles.environmental.entity.duck.ambient": "Duck quacks",
+	"subtitles.environmental.entity.duck.death": "Duck dies",
+	"subtitles.environmental.entity.duck.egg": "Duck plops",
+	"subtitles.environmental.entity.duck.hurt": "Duck hurts",
+
+	"subtitles.environmental.entity.pig.sniff": "Pig sniffs",
 	
 	"entity.environmental.slabfish.baby": "Baby",
 	
