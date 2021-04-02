@@ -1,6 +1,7 @@
 package com.minecraftabnormals.environmental.core.registry;
 
 import com.google.common.collect.ImmutableSet;
+import com.minecraftabnormals.abnormals_core.core.util.DataUtil;
 import com.minecraftabnormals.environmental.core.Environmental;
 import com.mojang.datafixers.util.Either;
 import com.mojang.datafixers.util.Pair;
@@ -45,10 +46,12 @@ public class EnvironmentalVillagers {
 
 	public static void registerVillagerTypes() {
 		VillagerTrades.VILLAGER_DEFAULT_TRADES.isEmpty();
+
 		registerVillagerType(createType("ice_spikes"), Biomes.ICE_SPIKES);
 		registerVillagerType(createType("flower_forest"), Biomes.FLOWER_FOREST);
 		registerVillagerType(createType("blossom"), EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), EnvironmentalBiomes.BLOSSOM_HILLS.getKey(), EnvironmentalBiomes.BLOSSOM_HIGHLANDS.getKey(), EnvironmentalBiomes.BLOSSOM_VALLEYS.getKey());
-		registerVillagerType(createType("forest"), Biomes.FOREST, Biomes.BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS, Biomes.TALL_BIRCH_FOREST, Biomes.TALL_BIRCH_HILLS);
+		registerVillagerType(createType("forest"), Biomes.FOREST, Biomes.WOODED_HILLS, Biomes.BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS, Biomes.TALL_BIRCH_FOREST, Biomes.TALL_BIRCH_HILLS);
+		registerVillagerType(createType("marsh"), EnvironmentalBiomes.MARSH.getKey(), EnvironmentalBiomes.MUSHROOM_MARSH.getKey());
 
 		GiveHeroGiftsTask.GIFTS.put(CERAMIST.get(), new ResourceLocation(Environmental.MOD_ID, "gameplay/hero_of_the_village/ceramist_gift"));
 		GiveHeroGiftsTask.GIFTS.put(CARPENTER.get(), new ResourceLocation(Environmental.MOD_ID, "gameplay/hero_of_the_village/carpenter_gift"));
@@ -60,6 +63,7 @@ public class EnvironmentalVillagers {
 		return VillagerType.register(Environmental.MOD_ID + ":" + type);
 	}
 
+	@SafeVarargs
 	private static void registerVillagerType(VillagerType type, RegistryKey<Biome>... biomes) {
 		for (RegistryKey<Biome> biome : biomes) {
 			VillagerType.BY_BIOME.put(biome, type);
@@ -96,16 +100,6 @@ public class EnvironmentalVillagers {
 	}
 
 	private static void addVillagerHouse(String type, String biome, int weight) {
-		addToPool(new ResourceLocation("village/" + biome + "/houses"), new ResourceLocation(Environmental.MOD_ID, "village/" + type + "_house_" + biome + "_1"), 5);
-	}
-
-	private static void addToPool(ResourceLocation pool, ResourceLocation toAdd, int weight) {
-		JigsawPattern old = WorldGenRegistries.JIGSAW_POOL.getOrDefault(pool);
-		List<JigsawPiece> shuffled = old.getShuffledPieces(new Random());
-		List<Pair<JigsawPiece, Integer>> newPieces = new ArrayList<>();
-		for (JigsawPiece p : shuffled) newPieces.add(new Pair<>(p, 1));
-		newPieces.add(Pair.of(new LegacySingleJigsawPiece(Either.left(toAdd), () -> ProcessorLists.field_244101_a, JigsawPattern.PlacementBehaviour.RIGID), weight));
-		ResourceLocation name = old.getName();
-		Registry.register(WorldGenRegistries.JIGSAW_POOL, pool, new JigsawPattern(pool, name, newPieces));
+		DataUtil.addToJigsawPattern(new ResourceLocation("village/" + biome + "/houses"), JigsawPiece.func_242859_b(Environmental.MOD_ID + ":village/" + type + "_house_" + biome + "_1").apply(JigsawPattern.PlacementBehaviour.RIGID), weight);
 	}
 }
