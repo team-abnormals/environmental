@@ -452,20 +452,20 @@
 	"advancements.adventure.upgrade_wanderer_boots.title": "Botas de piel",
 	"advancements.adventure.upgrade_wanderer_boots.description": "Recibí las botas del nómada de un comerciante nómada y subí al máximo su nivel",
 
-	"subtitles.entity.slabfish.burp": "Eructo de slabfish",
-	"subtitles.entity.slabfish.death": "Slabfish muere",
-	"subtitles.entity.slabfish.step": "Pasos de slabfish",
-	"subtitles.entity.slabfish.hurt": "Slabfish herido",
-	"subtitles.entity.slabfish.eat": "Slabfish come",
-	"subtitles.entity.slabfish.transform": "Slabfish se transforma",
-	"subtitles.entity.slabfish.backpack": "Mochila equipada",
-	"subtitles.entity.slabfish.sweater": "Suéter equipado",
+	"subtitles.environmental.entity.slabfish.burp": "Eructo de slabfish",
+	"subtitles.environmental.entity.slabfish.death": "Slabfish muere",
+	"subtitles.environmental.entity.slabfish.step": "Pasos de slabfish",
+	"subtitles.environmental.entity.slabfish.hurt": "Slabfish herido",
+	"subtitles.environmental.entity.slabfish.eat": "Slabfish come",
+	"subtitles.environmental.entity.slabfish.transform": "Slabfish se transforma",
+	"subtitles.environmental.entity.slabfish.backpack": "Mochila equipada",
+	"subtitles.environmental.entity.slabfish.sweater": "Suéter equipado",
 
-	"subtitles.entity.koi.flop": "Koi aletea",
+	"subtitles.environmental.entity.koi.flop": "Koi aletea",
 
-	"subtitles.entity.duck.egg": "Un pato pone un huevo",
+	"subtitles.environmental.entity.duck.egg": "Un pato pone un huevo",
 
-	"subtitles.entity.pig.sniff": "Chancho olfatea",
+	"subtitles.environmental.entity.pig.sniff": "Chancho olfatea",
 
 	"entity.environmental.slabfish.baby": "Bebé",
 
