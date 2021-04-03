@@ -463,7 +463,10 @@
 
 	"subtitles.environmental.entity.koi.flop": "Koi aleteando",
 
+	"subtitles.environmental.entity.duck.ambient": "Graznido de pato",
+	"subtitles.environmental.entity.duck.death": "Pato muerto",
 	"subtitles.environmental.entity.duck.egg": "Pato poniendo un huevo",
+	"subtitles.environmental.entity.duck.hurt": "Pato herido",
 
 	"subtitles.environmental.entity.pig.sniff": "Cerdo olfateando",
 
