@@ -18,7 +18,8 @@
     "WitherSkeletonEntityMixin"
   ],
   "client": [
-    "ClientRecipeBookMixin"
+    "ClientRecipeBookMixin",
+    "ClientWorldMixin"
   ],
   "injectors": {
     "defaultRequire": 1
