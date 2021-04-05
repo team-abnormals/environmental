@@ -84,4 +84,5 @@ public class EnvironmentalItems {
 	public static final RegistryObject<AbnormalsSpawnEggItem> DEER_SPAWN_EGG = HELPER.createSpawnEggItem("deer", EnvironmentalEntities.DEER::get, 10057035, 15190442);
 	public static final RegistryObject<AbnormalsSpawnEggItem> YAK_SPAWN_EGG = HELPER.createSpawnEggItem("yak", EnvironmentalEntities.YAK::get, 5392966, 8607802);
 	public static final RegistryObject<AbnormalsSpawnEggItem> KOI_SPAWN_EGG = HELPER.createSpawnEggItem("koi", EnvironmentalEntities.KOI::get, 5392966, 16754947);
+	public static final RegistryObject<AbnormalsSpawnEggItem> FENNEC_FOX_SPAWN_EGG = HELPER.createSpawnEggItem("fennec_fox", EnvironmentalEntities.FENNEC_FOX::get, 0xFBDB9E, 0xFFFFFF);
 }

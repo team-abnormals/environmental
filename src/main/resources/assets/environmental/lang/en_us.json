@@ -326,7 +326,8 @@
 	"item.environmental.deer_spawn_egg": "Deer Spawn Egg",
 	"item.environmental.yak_spawn_egg": "Yak Spawn Egg",
 	"item.environmental.koi_spawn_egg": "Koi Spawn Egg",
-	
+	"item.environmental.fennec_fox_spawn_egg": "Fennec Fox Spawn Egg",
+
 	"item.environmental.yak_hair": "Yak Hair",
 	"item.environmental.yak_pants": "Yak Pants",
 	
@@ -388,7 +389,8 @@
 	"entity.environmental.deer": "Deer",
 	"entity.environmental.yak": "Yak",
 	"entity.environmental.koi": "Koi",
-	
+	"entity.environmental.fennec_fox": "Fennec Fox",
+
 	"entity.environmental.duck_egg": "Thrown Duck Egg",
 	"entity.environmental.mud_ball": "Mud Ball",
 	
