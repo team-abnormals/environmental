@@ -24,25 +24,22 @@ public class SlabbyPraiseEffigyGoal extends Goal {
 	@Override
 	public boolean shouldExecute() {
 		this.effigyPos = this.slabfish.getEffigy();
-
 		if (this.effigyPos == null)
 			return false;
-		else if (!this.slabfish.hasBackpack())
+
+		BlockState state = this.slabfish.world.getBlockState(this.effigyPos);
+		if (!(state.getBlock() instanceof SlabfishEffigyBlock)) {
+			this.slabfish.setEffigy(null);
+			return false;
+		}
+
+		if (!this.slabfish.hasBackpack())
 			return false;
 		else if (this.slabfish.isSitting())
 			return false;
 		else if (isBackpackEmpty())
 			return false;
-		else if (!this.slabfish.world.isNightTime())
-			return false;
-		else {
-			BlockState state = this.slabfish.world.getBlockState(this.effigyPos);
-			if (!(state.getBlock() instanceof SlabfishEffigyBlock)) {
-				this.slabfish.setEffigy(null);
-				return false;
-			}
-			return true;
-		}
+		else return this.slabfish.world.isNightTime();
 	}
 
 	@Override
