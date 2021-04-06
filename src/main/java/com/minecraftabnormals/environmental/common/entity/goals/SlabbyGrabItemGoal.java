@@ -44,7 +44,7 @@ public class SlabbyGrabItemGoal extends Goal implements IInventoryChangedListene
 			this.slabfish.getNavigator().clearPath();
 
 			for (ItemEntity item1 : list) {
-				if (!canPickupItem(this.slabfish.slabfishBackpack, item1.getItem()))
+				if (item1.getThrowerId() == this.slabfish.getUniqueID()|| !canPickupItem(this.slabfish.slabfishBackpack, item1.getItem()))
 					continue;
 				double d1 = this.slabfish.getDistanceSq(item1);
 				if (d1 < d0) {

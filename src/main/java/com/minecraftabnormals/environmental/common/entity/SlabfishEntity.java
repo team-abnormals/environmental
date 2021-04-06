@@ -4,6 +4,7 @@ import com.minecraftabnormals.abnormals_core.core.api.IBucketableEntity;
 import com.minecraftabnormals.environmental.common.entity.goals.SlabbyBreedGoal;
 import com.minecraftabnormals.environmental.common.entity.goals.SlabbyFollowParentGoal;
 import com.minecraftabnormals.environmental.common.entity.goals.SlabbyGrabItemGoal;
+import com.minecraftabnormals.environmental.common.entity.goals.SlabbyPraiseEffigyGoal;
 import com.minecraftabnormals.environmental.common.entity.util.SlabfishOverlay;
 import com.minecraftabnormals.environmental.common.entity.util.SlabfishRarity;
 import com.minecraftabnormals.environmental.common.inventory.SlabfishInventory;
@@ -43,6 +44,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.NBTUtil;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -86,6 +88,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 	private static final DataParameter<ResourceLocation> SLABFISH_TYPE = EntityDataManager.createKey(SlabfishEntity.class, EnvironmentalDataSerializers.RESOURCE_LOCATION);
 	private static final DataParameter<Integer> SLABFISH_OVERLAY = EntityDataManager.createKey(SlabfishEntity.class, DataSerializers.VARINT);
 	private static final DataParameter<Boolean> FROM_BUCKET = EntityDataManager.createKey(SlabfishEntity.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Optional<BlockPos>> EFFIGY = EntityDataManager.createKey(SlabfishEntity.class, DataSerializers.OPTIONAL_BLOCK_POS);
 
 	private static final DataParameter<ResourceLocation> BACKPACK = EntityDataManager.createKey(SlabfishEntity.class, EnvironmentalDataSerializers.RESOURCE_LOCATION);
 	private static final DataParameter<Boolean> HAS_BACKPACK = EntityDataManager.createKey(SlabfishEntity.class, DataSerializers.BOOLEAN);
@@ -124,8 +127,10 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
 	@Override
 	protected void registerGoals() {
-		this.goalSelector.addGoal(0, new SwimGoal(this));
-		this.goalSelector.addGoal(2, new SitGoal(this));
+		this.goalSelector.addGoal(1, new SwimGoal(this));
+		this.goalSelector.addGoal(1, new SitGoal(this));
+
+		this.goalSelector.addGoal(2, new SlabbyPraiseEffigyGoal(this));
 
 		this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, LivingEntity.class, entity -> EntityTypeTags.RAIDERS.contains(entity.getType()), 15.0F, 1.0D, 1.5D, EntityPredicates.CAN_AI_TARGET::test));
 
@@ -144,6 +149,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 		this.getDataManager().register(SLABFISH_TYPE, SlabfishManager.DEFAULT_SLABFISH.getRegistryName());
 		this.getDataManager().register(SLABFISH_OVERLAY, 0);
 		this.getDataManager().register(FROM_BUCKET, false);
+		this.getDataManager().register(EFFIGY, Optional.empty());
 
 		this.getDataManager().register(BACKPACK, SlabfishManager.BROWN_BACKPACK.getRegistryName());
 		this.getDataManager().register(HAS_BACKPACK, false);
@@ -158,6 +164,10 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 		if (this.hasBackpack())
 			compound.putString("BackpackType", this.getBackpack().toString());
 		compound.putBoolean("FromBucket", this.isFromBucket());
+
+		if (this.getEffigy() != null) {
+			compound.put("Effigy", NBTUtil.writeBlockPos(this.getEffigy()));
+		}
 
 		this.slabfishBackpack.write(compound);
 	}
@@ -174,6 +184,10 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 		this.setSlabfishOverlay(SlabfishOverlay.byId(compound.getInt("SlabfishOverlay")));
 		this.setBackpack(compound.contains("BackpackType", Constants.NBT.TAG_STRING) ? new ResourceLocation(compound.getString("BackpackType")) : SlabfishManager.BROWN_BACKPACK.getRegistryName());
 		this.setFromBucket(compound.getBoolean("FromBucket"));
+
+		if (compound.contains("Effigy", Constants.NBT.TAG_COMPOUND)) {
+			this.setEffigy(NBTUtil.readBlockPos(compound.getCompound("Effigy")));
+		}
 
 		this.slabfishBackpack.read(compound);
 		this.updateSweater();
@@ -762,6 +776,15 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 		this.dataManager.set(SLABFISH_OVERLAY, typeId.getId());
 	}
 
+	public void setEffigy(@Nullable BlockPos beamTarget) {
+		this.getDataManager().set(EFFIGY, Optional.ofNullable(beamTarget));
+	}
+
+	@Nullable
+	public BlockPos getEffigy() {
+		return this.getDataManager().get(EFFIGY).orElse(null);
+	}
+
 	// INVENTORY //
 
 	public void openGui(ServerPlayerEntity player) {
@@ -811,8 +834,10 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
 	@Override
 	protected void updateEquipmentIfNeeded(ItemEntity itemEntity) {
-		ItemStack itemstack = itemEntity.getItem();
+		if (itemEntity.getThrowerId() == this.getUniqueID())
+			return;
 
+		ItemStack itemstack = itemEntity.getItem();
 		if (this.hasBackpack()) {
 			ItemStack stack = this.slabfishBackpack.addItem(itemstack, 3, this.slabfishBackpack.getSizeInventory());
 			if (!ItemStack.areItemStacksEqual(itemstack, stack))
