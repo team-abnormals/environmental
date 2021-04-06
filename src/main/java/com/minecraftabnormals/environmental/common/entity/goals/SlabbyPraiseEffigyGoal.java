@@ -85,6 +85,7 @@ public class SlabbyPraiseEffigyGoal extends Goal {
 			ItemEntity item = new ItemEntity(this.slabfish.world, this.slabfish.getPosX(), this.slabfish.getPosYEye(), this.slabfish.getPosZ(), stack);
 			item.setNoDespawn();
 			item.setThrowerId(this.slabfish.getUniqueID());
+			item.getPersistentData().putBoolean("EffigyItem", true);
 
 			this.slabfish.getLookController().setLookPosition(pos.getX() + 0.5, pos.getY() - 1F, pos.getZ() + 0.5);
 			float f8 = MathHelper.sin(this.slabfish.rotationPitch * ((float) Math.PI / 180F));

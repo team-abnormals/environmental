@@ -839,7 +839,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
 	@Override
 	protected void updateEquipmentIfNeeded(ItemEntity itemEntity) {
-		if (itemEntity.getThrowerId() == this.getUniqueID())
+		if (itemEntity.getPersistentData().getBoolean("EffigyItem") || itemEntity.getThrowerId() == this.getUniqueID())
 			return;
 
 		ItemStack itemstack = itemEntity.getItem();
