@@ -6,9 +6,9 @@ import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.pathfinding.Path;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 
 import java.util.EnumSet;
+import java.util.stream.Stream;
 
 public class SlabbyFindEffigyGoal extends Goal {
     private final SlabfishEntity slabfish;
@@ -29,28 +29,22 @@ public class SlabbyFindEffigyGoal extends Goal {
             return false;
 
         AxisAlignedBB aabb = this.slabfish.getBoundingBox().grow(12.0D, 4.0D, 12.0D);
-        Iterable<BlockPos> blocks = BlockPos.getAllInBoxMutable(new BlockPos(MathHelper.floor(aabb.minX), MathHelper.floor(aabb.minY), MathHelper.floor(aabb.minZ)), new BlockPos(MathHelper.floor(aabb.maxX), MathHelper.floor(aabb.maxY), MathHelper.floor(aabb.maxZ)));
+        Stream<BlockPos> blocks = BlockPos.getAllInBox(aabb);
 
         this.slabfish.getNavigator().clearPath();
 
-        BlockPos effigyPos = null;
-        double closest = Double.MAX_VALUE;
-        for (BlockPos pos : blocks) {
-            if (!(this.slabfish.world.getBlockState(pos).getBlock() instanceof SlabfishEffigyBlock))
-                continue;
-            double distance = this.slabfish.getDistanceSq(pos.getX(), pos.getY(), pos.getZ());
+        blocks.filter(pos -> this.slabfish.world.getBlockState(pos).getBlock() instanceof SlabfishEffigyBlock).forEach(pos -> {
+            double distance = this.slabfish.getDistanceSq(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
+            double closest = this.effigyPos == null ? Double.MAX_VALUE : this.slabfish.getDistanceSq(this.effigyPos.getX() + 0.5, this.effigyPos.getY(), this.effigyPos.getZ() + 0.5);
             if (distance < closest) {
-                closest = distance;
-                effigyPos = pos.toImmutable();
-            }
-        }
+                if (this.slabfish.getNavigator().getPathToPos(this.effigyPos, 0) == null)
+                    return;
 
-        if (effigyPos == null)
-            return false;
-        else {
-            this.effigyPos = effigyPos;
-            return true;
-        }
+                this.effigyPos = pos.toImmutable();
+            }
+        });
+
+        return this.effigyPos != null;
     }
 
     @Override
