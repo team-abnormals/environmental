@@ -37,7 +37,11 @@ public class SlabbyPraiseEffigyGoal extends Goal {
 			return false;
 		else {
 			BlockState state = this.slabfish.world.getBlockState(this.effigyPos);
-			return state.getBlock() instanceof SlabfishEffigyBlock;
+			if (!(state.getBlock() instanceof SlabfishEffigyBlock)) {
+				this.slabfish.setEffigy(null);
+				return false;
+			}
+			return true;
 		}
 	}
 
