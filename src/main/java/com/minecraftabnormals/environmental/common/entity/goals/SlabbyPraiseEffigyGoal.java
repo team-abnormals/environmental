@@ -3,11 +3,13 @@ package com.minecraftabnormals.environmental.common.entity.goals;
 import com.minecraftabnormals.environmental.common.block.SlabfishEffigyBlock;
 import com.minecraftabnormals.environmental.common.entity.SlabfishEntity;
 import net.minecraft.block.BlockState;
+import net.minecraft.command.arguments.EntityAnchorArgument;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.vector.Vector3d;
 
 import java.util.EnumSet;
 import java.util.Random;
@@ -39,6 +41,8 @@ public class SlabbyPraiseEffigyGoal extends Goal {
 			return false;
 		else if (isBackpackEmpty())
 			return false;
+		else if (state.get(SlabfishEffigyBlock.POWERED))
+			return false;
 		else return this.slabfish.world.isNightTime();
 	}
 
@@ -67,8 +71,9 @@ public class SlabbyPraiseEffigyGoal extends Goal {
 				return;
 
 			this.slabfish.getNavigator().tryMoveToXYZ(this.effigyPos.getX() + 0.5, this.effigyPos.getY(), this.effigyPos.getZ() + 0.5, 1.1D);
+			this.slabfish.lookAt(EntityAnchorArgument.Type.EYES, new Vector3d(this.effigyPos.getX() + 0.5, this.effigyPos.getY() - 1, this.effigyPos.getZ() + 0.5));
+
 			if (this.slabfish.getDistanceSq(this.effigyPos.getX() + 0.5, this.effigyPos.getY(), this.effigyPos.getZ() + 0.5) < 3.5D) {
-				this.slabfish.getLookController().setLookPosition(this.effigyPos.getX() + 0.5, this.effigyPos.getY() - 1, this.effigyPos.getZ() + 0.5);
 				this.slabfish.getNavigator().clearPath();
 				this.throwItems(this.effigyPos);
 			}
@@ -77,6 +82,7 @@ public class SlabbyPraiseEffigyGoal extends Goal {
 
 	private void throwItems(BlockPos pos) {
 		Random rand = this.slabfish.getRNG();
+
 		for (int i = 3; i < this.slabfish.slabfishBackpack.getSizeInventory(); i++) {
 			ItemStack stack = this.slabfish.slabfishBackpack.getStackInSlot(i);
 			if (stack.isEmpty())
@@ -87,7 +93,6 @@ public class SlabbyPraiseEffigyGoal extends Goal {
 			item.setThrowerId(this.slabfish.getUniqueID());
 			item.getPersistentData().putBoolean("EffigyItem", true);
 
-			this.slabfish.getLookController().setLookPosition(pos.getX() + 0.5, pos.getY() - 1F, pos.getZ() + 0.5);
 			float f8 = MathHelper.sin(this.slabfish.rotationPitch * ((float) Math.PI / 180F));
 			float f2 = MathHelper.cos(this.slabfish.rotationPitch * ((float) Math.PI / 180F));
 			float f3 = MathHelper.sin(this.slabfish.rotationYaw * ((float) Math.PI / 180F));
