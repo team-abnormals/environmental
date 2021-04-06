@@ -2,6 +2,7 @@ package com.minecraftabnormals.environmental.common.entity;
 
 import com.minecraftabnormals.abnormals_core.core.api.IBucketableEntity;
 import com.minecraftabnormals.environmental.common.entity.goals.SlabbyBreedGoal;
+import com.minecraftabnormals.environmental.common.entity.goals.SlabbyFindEffigyGoal;
 import com.minecraftabnormals.environmental.common.entity.goals.SlabbyFollowParentGoal;
 import com.minecraftabnormals.environmental.common.entity.goals.SlabbyGrabItemGoal;
 import com.minecraftabnormals.environmental.common.entity.goals.SlabbyPraiseEffigyGoal;
@@ -20,6 +21,7 @@ import com.minecraftabnormals.environmental.core.other.EnvironmentalDataSerializ
 import com.minecraftabnormals.environmental.core.other.EnvironmentalTags;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEntities;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
+import com.minecraftabnormals.environmental.core.registry.EnvironmentalParticles;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalSounds;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.BlockState;
@@ -66,6 +68,8 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.Tags;
@@ -130,6 +134,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 		this.goalSelector.addGoal(1, new SwimGoal(this));
 		this.goalSelector.addGoal(1, new SitGoal(this));
 
+		this.goalSelector.addGoal(2, new SlabbyFindEffigyGoal(this));
 		this.goalSelector.addGoal(2, new SlabbyPraiseEffigyGoal(this));
 
 		this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, LivingEntity.class, entity -> EntityTypeTags.RAIDERS.contains(entity.getType()), 15.0F, 1.0D, 1.5D, EntityPredicates.CAN_AI_TARGET::test));
@@ -294,7 +299,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 		} else if (Ingredient.fromTag(ItemTags.FISHES).test(stack) && stack.isFood() && this.getHealth() < this.getMaxHealth()) {
 			this.consumeItemFromStack(player, stack);
 			world.playSound(this.getPosX(), this.getPosY(), this.getPosZ(), EnvironmentalSounds.ENTITY_SLABFISH_EAT.get(), SoundCategory.NEUTRAL, 1F, 1F, true);
-			this.heal((float) item.getFood().getHealing());
+			this.heal(item.getFood().getHealing());
 			this.particleCloud(ParticleTypes.COMPOSTER);
 			return ActionResultType.SUCCESS;
 
@@ -908,6 +913,15 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 	}
 
 	// MISC //
+
+
+	@OnlyIn(Dist.CLIENT)
+	@Override
+	public void handleStatusUpdate(byte id) {
+		if (id == 8) {
+			this.particleCloud(EnvironmentalParticles.SLABFISH_FINDS_EFFIGY.get());
+		} else super.handleStatusUpdate(id);
+	}
 
 	@Override
 	public IPacket<?> createSpawnPacket() {
