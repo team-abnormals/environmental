@@ -75,12 +75,12 @@ public class SlabbyPraiseEffigyGoal extends Goal {
 
 			if (this.slabfish.getDistanceSq(this.effigyPos.getX() + 0.5, this.effigyPos.getY(), this.effigyPos.getZ() + 0.5) < 3.5D) {
 				this.slabfish.getNavigator().clearPath();
-				this.throwItems(this.effigyPos);
+				this.throwItems();
 			}
 		}
 	}
 
-	private void throwItems(BlockPos pos) {
+	private void throwItems() {
 		Random rand = this.slabfish.getRNG();
 
 		for (int i = 3; i < this.slabfish.slabfishBackpack.getSizeInventory(); i++) {
