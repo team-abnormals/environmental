@@ -37,7 +37,7 @@ public class SlabbyFindEffigyGoal extends Goal {
             double distance = this.slabfish.getDistanceSq(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
             double closest = this.effigyPos == null ? Double.MAX_VALUE : this.slabfish.getDistanceSq(this.effigyPos.getX() + 0.5, this.effigyPos.getY(), this.effigyPos.getZ() + 0.5);
             if (distance < closest) {
-                if (this.slabfish.getNavigator().getPathToPos(this.effigyPos, 0) == null)
+                if (this.slabfish.getNavigator().getPathToPos(pos, 0) == null)
                     return;
 
                 this.effigyPos = pos.toImmutable();
