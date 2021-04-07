@@ -99,8 +99,10 @@ public class EnvironmentalBiomeFeatures {
 			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.NEST_DUCK);
 		}
 
-		if (event.getCategory() == Biome.Category.DESERT)
+		if (event.getCategory() == Biome.Category.DESERT) {
 			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_TALL_DEAD_BUSH);
+			spawns.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(EnvironmentalEntities.FENNEC_FOX.get(), 8, 2, 4));
+		}
 
 		if (event.getCategory() == Biome.Category.MESA)
 			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_TALL_DEAD_BUSH_MESA);

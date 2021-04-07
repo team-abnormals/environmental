@@ -452,20 +452,23 @@
 	"advancements.adventure.upgrade_wanderer_boots.title": "Botas de piel",
 	"advancements.adventure.upgrade_wanderer_boots.description": "Recibe las botas del ambulante de un vendedor ambulante y sube al máximo su nivel",
 
-	"subtitles.entity.slabfish.burp": "Pez losa eructa",
-	"subtitles.entity.slabfish.death": "Pez losa muere",
-	"subtitles.entity.slabfish.step": "Pasos de pez losa",
-	"subtitles.entity.slabfish.hurt": "Pez losa herido",
-	"subtitles.entity.slabfish.eat": "Pez losa come",
-	"subtitles.entity.slabfish.transform": "Pez losa se transforma",
-	"subtitles.entity.slabfish.backpack": "Mochila equipada",
-	"subtitles.entity.slabfish.sweater": "Suéter equipado",
+	"subtitles.environmental.entity.slabfish.burp": "Pez losa eructa",
+	"subtitles.environmental.entity.slabfish.death": "Pez losa muere",
+	"subtitles.environmental.entity.slabfish.step": "Pasos de pez losa",
+	"subtitles.environmental.entity.slabfish.hurt": "Pez losa herido",
+	"subtitles.environmental.entity.slabfish.eat": "Pez losa come",
+	"subtitles.environmental.entity.slabfish.transform": "Pez losa se transforma",
+	"subtitles.environmental.entity.slabfish.backpack": "Mochila equipada",
+	"subtitles.environmental.entity.slabfish.sweater": "Suéter equipado",
 
-	"subtitles.entity.koi.flop": "Koi chapotea",
+	"subtitles.environmental.entity.koi.flop": "Koi chapotea",
 
-	"subtitles.entity.duck.egg": "Un pato pone un huevo",
+	"subtitles.environmental.entity.duck.ambient": "Graznido de pato",
+	"subtitles.environmental.entity.duck.death": "Pato muere",
+	"subtitles.environmental.entity.duck.egg": "Un pato pone un huevo",
+	"subtitles.environmental.entity.duck.hurt": "Pato herido",
 
-	"subtitles.entity.pig.sniff": "Cerdo olfatea",
+	"subtitles.environmental.entity.pig.sniff": "Cerdo olfatea",
 
 	"entity.environmental.slabfish.baby": "Bebé",
 
