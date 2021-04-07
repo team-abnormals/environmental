@@ -16,13 +16,10 @@ import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
@@ -58,14 +55,6 @@ public class ThiefHoodItem extends ExplorerArmorItem {
 
 		builder.put(EnvironmentalAttributes.STEALTH.get(), new AttributeModifier(uuid, "Stealth", increase, AttributeModifier.Operation.ADDITION));
 		return slot == this.slot ? builder.build() : super.getAttributeModifiers(slot);
-	}
-
-	@SubscribeEvent
-	public static void playerNameEvent(PlayerEvent.NameFormat event) {
-		ItemStack stack = event.getPlayer().getItemStackFromSlot(EquipmentSlotType.HEAD);
-		if (stack.getItem() == EnvironmentalItems.THIEF_HOOD.get()) {
-			event.setDisplayname(stack.hasDisplayName() ? new StringTextComponent(stack.getDisplayName().getString()).mergeStyle(TextFormatting.ITALIC) : new StringTextComponent("???"));
-		}
 	}
 
 	@SubscribeEvent
