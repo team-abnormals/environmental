@@ -288,10 +288,6 @@
 	"block.environmental.yak_hair_block": "Yakhaarenblock",
 	"block.environmental.yak_hair_rug": "Yakhaarenteppich",
 	
-	"block.environmental.rice_sack": "Reissack",
-	"block.environmental.rice": "Reis",
-	"block.environmental.tall_rice": "Reis",
-	
 	"block.environmental.duckweed": "Wasserlinse",
 	"block.environmental.duckweed_thatch": "Wasserlinsenreetblock",
 	"block.environmental.duckweed_thatch_slab": "Wasserlinsenreetstufe",
@@ -344,18 +340,6 @@
 	"item.environmental.scrambled_eggs": "Rührei",
 	
 	"item.environmental.koi": "Koi",
-	
-	"item.environmental.cod_kelp_roll": "Kabeljauseetangrolle",
-	"item.environmental.tropical_fish_kelp_roll": "Tropenfischseetangrolle",
-	"item.environmental.koi_kelp_roll": "Koiseetangrolle",
-	"item.environmental.crab_kelp_roll": "Krabbenseetangrolle",
-	"item.environmental.pike_kelp_roll": "Hechtseetangrolle",
-	
-	"item.environmental.salmon_rice_cake": "Lachsreiswaffel",
-	"item.environmental.pufferfish_rice_cake": "Kugelfischreiswaffel",
-	"item.environmental.lionfish_rice_cake": "Rotfeuerfischreiswaffel",
-	
-	"item.environmental.squid_ink_risotto": "Tintenbeutelrisotto",
 	
 	"item.environmental.slabfish_bucket": "Slabfisheimer",
 	"item.environmental.koi_bucket": "Koieimer",
