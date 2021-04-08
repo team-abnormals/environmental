@@ -49,6 +49,9 @@
 	"block.environmental.willow_sign": "Weidenholzschild",
 	"block.environmental.willow_chest": "Weidenholztruhe",
 	"block.environmental.willow_trapped_chest": "Redstone-Weidenholztruhe",
+	"block.environmental.willow_post": "Weidenholzpfahl",
+	"block.environmental.stripped_willow_post": "Entrindeter Weidenholzpfahl",
+	"block.environmental.willow_hedge": "Weidenhecke",
 	"block.environmental.willow_beehive": "Weidenholzbienenstock",
 	
 	"block.environmental.cherry_planks": "Kirschholzbretter",
@@ -75,6 +78,9 @@
 	"block.environmental.cherry_sign": "Kirschholzschild",
 	"block.environmental.cherry_chest": "Kirschholztruhe",
 	"block.environmental.cherry_trapped_chest": "Redstone-Kirschholztruhe",
+	"block.environmental.cherry_post": "Kirschholzpfahl",
+	"block.environmental.stripped_cherry_post": "Entrindeter Kirschholzpfahl",
+	"block.environmental.cherry_hedge": "Kirschhecke",
 	"block.environmental.cherry_beehive": "Kirschholzbienenstock",
 	
 	"block.environmental.wisteria_log": "Glyzinenstamm",
@@ -97,6 +103,8 @@
 	"block.environmental.wisteria_vertical_slab": "Vertikale Glyzinenholzstufe",
 	"block.environmental.wisteria_chest": "Glyzinenholztruhe",
 	"block.environmental.wisteria_trapped_chest": "Redstone-Glyzinenholztruhe",
+	"block.environmental.wisteria_post": "Glyzinenholzpfahl",
+	"block.environmental.stripped_wisteria_post": "Entrindeter Glyzinenholzpfahl",
 	"block.environmental.wisteria_beehive": "Glyzinenholzbienenstock",
 	
 	"block.environmental.blue_wisteria_leaves": "Blaues Glyzinenlaub",
@@ -118,6 +126,11 @@
 	"block.environmental.pink_wisteria_leaf_carpet": "Rosa Glyzinenlaubteppich",
 	"block.environmental.purple_wisteria_leaf_carpet": "Violetter Glyzinenlaubteppich",
 	"block.environmental.white_wisteria_leaf_carpet": "Weißer Glyzinenlaubteppich",
+	
+	"block.environmental.blue_wisteria_hedge": "Blaue Glyzinenhecke",
+	"block.environmental.pink_wisteria_hedge": "Rosa Glyzinenhecke",
+	"block.environmental.purple_wisteria_hedge": "Violette Glyzinenhecke",
+	"block.environmental.white_wisteria_hedge": "Weiße Glyzinenhecke",
 	
 	"block.environmental.terracotta_bricks": "Keramikziegel",	
 	"block.environmental.white_terracotta_bricks": "Weiße Keramikziegel",
@@ -297,7 +310,10 @@
 	"block.environmental.chicken_egg_crate": "Hühnereikiste",
 	"block.environmental.duck_egg_crate": "Enteneikiste",
 	"block.environmental.turtle_egg_crate": "Schildkröteneikiste",
-		
+	
+	"block.environmental.buried_truffle": "Erdverlegte Trüffel",
+	"block.environmental.truffle_crate": "Trüffelkiste",
+	
 	"item.environmental.wanderer_boots": "Stiefel des Wanderers",
 	"item.environmental.architect_belt": "Gürtel des Architekten",
 	"item.environmental.healer_pouch": "Tasche des Heilers",
@@ -310,12 +326,12 @@
 	"item.environmental.deer_spawn_egg": "Hirsch-Spawn-Ei",
 	"item.environmental.yak_spawn_egg": "Yak-Spawn-Ei",
 	"item.environmental.koi_spawn_egg": "Koi-Spawn-Ei",
+	"item.environmental.fennec_fox_spawn_egg": "Fennek-Spawn-Ei",
 	
 	"item.environmental.yak_hair": "Yakhaare",
 	"item.environmental.yak_pants": "Yakhaarenhose",
 	
 	"item.environmental.cattail_seeds": "Rohrkolbensamen",
-	"item.environmental.rice_ball": "Reisball",
   
 	"item.environmental.venison": "Rohes Wildfleisch",
 	"item.environmental.cooked_venison": "Gebratenes Wildfleisch",
@@ -353,6 +369,10 @@
 	"item.environmental.cherry_pie": "Kirschkuchen",
 	"item.environmental.apple_pie": "Apfelkuchen",
 	
+	"item.environmental.truffle": "Trüffel",
+	"item.environmental.truffle_puree": "Trüffelpüree",
+	"item.environmental.truffle_pie": "Trüffeltorte",
+	
 	"item.environmental.willow_boat": "Weidenholzboot",
 	"item.environmental.cherry_boat": "Kirschholzboot",
 	"item.environmental.wisteria_boat": "Glyzinenholzboot",
@@ -369,8 +389,9 @@
 	"entity.environmental.deer": "Hirsch",
 	"entity.environmental.yak": "Yak",
 	"entity.environmental.koi": "Koi",
+	"entity.environmental.fennec_fox": "Fennek",
 	
-	"entity.environmental.duck_egg": "Entenei",
+	"entity.environmental.duck_egg": "Geworfenes Entenei",
 	"entity.environmental.mud_ball": "Schlammball",
 	
 	"entity.minecraft.villager.environmental.ceramist": "Keramiker",
@@ -388,6 +409,18 @@
 	"effect.environmental.panic": "Panik",
 	"effect.environmental.serenity": "Klarheit",
 	
+	"item.minecraft.potion.effect.vitality": "Trank der Vitalität",
+	"item.minecraft.potion.effect.vitality_strong": "Trank der Vitalität",
+
+	"item.minecraft.splash_potion.effect.vitality": "Wurftrank der Vitalität",
+	"item.minecraft.splash_potion.effect.vitality_strong": "Wurftrank der Vitalität",
+
+	"item.minecraft.lingering_potion.effect.vitality": "Verweiltrank der Vitalität",
+	"item.minecraft.lingering_potion.effect.vitality_strong": "Verweiltrank der Vitalität",
+
+	"item.minecraft.tipped_arrow.effect.vitality": "Pfeil der Vitalität",
+	"item.minecraft.tipped_arrow.effect.vitality_strong": "Pfeil der Vitalität",
+	
 	"container.kiln": "Brennofen",
 	"container.sawmill": "Sägewerk",
 	
@@ -397,8 +430,8 @@
 	"generic.reachDistance": "Reichentfernung",
 	"attribute.name.generic.stealth": "Heimlichkeit",
 	
-	"advancements.husbandry.breed_all_slabfish.title": "Irre Genetik",
-	"advancements.husbandry.breed_all_slabfish.description": "Vermehre alle Slabfishvariante!",
+	"advancements.husbandry.bred_all_slabfish.title": "Irre Genetik",
+	"advancements.husbandry.bred_all_slabfish.description": "Vermehre alle Slabfishvariante!",
 	
 	"advancements.husbandry.backpack_slabfish.title": "Der Anfang des Schuljahres",
 	"advancements.husbandry.backpack_slabfish.description": "Gib einem Slabfish einen Rucksack",
@@ -406,16 +439,38 @@
 	"advancements.adventure.find_natural_slabfish.title": "Sie kommen in verschiedenen Farben!",
 	"advancements.adventure.find_natural_slabfish.description": "Finde alle natürliche Slabfishvariante",
 	
-	"subtitles.entity.slabfish.burp": "Slabfish rülpst",
-	"subtitles.entity.slabfish.death": "Slabfish stirbt",
-	"subtitles.entity.slabfish.step": "Slabfish läuft",
-	"subtitles.entity.slabfish.hurt": "Slabfish nimmt Schaden",
-	"subtitles.entity.slabfish.eat": "Slabfish frisst",
-	"subtitles.entity.slabfish.transform": "Slabfish verwandelt",
-	"subtitles.entity.slabfish.backpack": "Rucksack angelegt",
-	"subtitles.entity.slabfish.sweater": "Pulli angelegt",
+	"advancements.adventure.obtain_explorer_gear.title": "Swiper, Nicht Klauen!",
+	"advancements.adventure.obtain_explorer_gear.description": "Beschaff einen Teil der Rüstung des Entdeckers",
+
+	"advancements.adventure.upgrade_thief_hood.title": "Smooth Criminal",
+	"advancements.adventure.upgrade_thief_hood.description": "Beschaff die Kapuze des Diebes von Skeletten",
+
+	"advancements.adventure.upgrade_healer_pouch.title": "Panic! At the Stronghold",
+	"advancements.adventure.upgrade_healer_pouch.description": "Finde die Tasche des Heilers in Strongholds",
+
+	"advancements.adventure.upgrade_architect_belt.title": "Können wir das schaffen?",
+	"advancements.adventure.upgrade_architect_belt.description": "Kaufe den Gürtel des Architekten von Dorfbewohnern",
+
+	"advancements.adventure.upgrade_wanderer_boots.title": "Boots with the Fur",
+	"advancements.adventure.upgrade_wanderer_boots.description": "Erhälte die Stiefel des Wanderers vom Fahrender Händler",
 	
-	"subtitles.entity.koi.flop": "Koi platscht",
+	"subtitles.environmental.entity.slabfish.burp": "Slabfish rülpst",
+	"subtitles.environmental.entity.slabfish.death": "Slabfish stirbt",
+	"subtitles.environmental.entity.slabfish.step": "Slabfish läuft",
+	"subtitles.environmental.entity.slabfish.hurt": "Slabfish nimmt Schaden",
+	"subtitles.environmental.entity.slabfish.eat": "Slabfish frisst",
+	"subtitles.environmental.entity.slabfish.transform": "Slabfish verwandelt",
+	"subtitles.environmental.entity.slabfish.backpack": "Rucksack angelegt",
+	"subtitles.environmental.entity.slabfish.sweater": "Pulli angelegt",
+	
+	"subtitles.environmental.entity.koi.flop": "Koi platscht",
+	
+	"subtitles.environmental.entity.duck.ambient": "Ente quakt",
+	"subtitles.environmental.entity.duck.death": "Ente stirbt",
+	"subtitles.environmental.entity.duck.egg": "Ente legt Ei",
+	"subtitles.environmental.entity.duck.hurt": "Ente nimmt Schaden",
+	
+	"subtitles.environmental.entity.pig.sniff": "Schwein schnieft",
 	
 	"entity.environmental.slabfish.baby": "Baby",
 	
