@@ -6,11 +6,18 @@
   },
   "conditions": [
     {
-      "type": "height",
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:height",
       "max": 20
     },
     {
-      "type": "light_level",
+      "type": "environmental:light_level",
       "value": 0
     }
   ]

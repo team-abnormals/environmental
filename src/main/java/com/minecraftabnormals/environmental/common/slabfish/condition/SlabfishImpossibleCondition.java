@@ -9,27 +9,22 @@ import com.google.gson.JsonObject;
  * @author Ocelot
  */
 public class SlabfishImpossibleCondition implements SlabfishCondition {
-    public SlabfishImpossibleCondition() {
-    }
+	public SlabfishImpossibleCondition() {
+	}
 
-    /**
-     * Creates a new {@link SlabfishImpossibleCondition} from the specified json.
-     *
-     * @param json    The json to deserialize
-     * @param context The context of the json deserialization
-     * @return A new slabfish condition from that json
-     */
-    public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context) {
-        return new SlabfishImpossibleCondition();
-    }
+	/**
+	 * Creates a new {@link SlabfishImpossibleCondition} from the specified json.
+	 *
+	 * @param json    The json to deserialize
+	 * @param context The context of the json deserialization
+	 * @return A new slabfish condition from that json
+	 */
+	public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context) {
+		return new SlabfishImpossibleCondition();
+	}
 
-    @Override
-    public SlabfishConditionType getType() {
-        return SlabfishConditionType.IMPOSSIBLE;
-    }
-
-    @Override
-    public boolean test(SlabfishConditionContext context) {
-        return false;
-    }
+	@Override
+	public boolean test(SlabfishConditionContext context) {
+		return false;
+	}
 }

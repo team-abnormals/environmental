@@ -1,6 +1,7 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "environmental:item/architect_belt"
+        "layer0": "environmental:item/architect_belt",
+        "layer1": "environmental:item/architect_belt_overlay"
     }
 }

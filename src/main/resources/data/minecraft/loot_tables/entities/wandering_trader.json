@@ -2,25 +2,6 @@
   "type": "minecraft:entity",
   "pools": [
     {
-      "rolls": 1,
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "environmental:wanderer_boots"
-        }
-      ],
-      "conditions": [
-        {
-          "condition": "minecraft:killed_by_player"
-        },
-        {
-          "condition": "minecraft:random_chance_with_looting",
-          "chance": 0.25,
-          "looting_multiplier": 0.5
-        }
-      ]
-    },
-    {
       "rolls": 1.0,
       "entries": [
         {

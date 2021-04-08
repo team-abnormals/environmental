@@ -6,14 +6,21 @@
   },
   "conditions": [
     {
-      "type": "or",
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:or",
       "conditions": [
         {
-          "type": "biome",
+          "type": "environmental:biome",
           "biome": "minecraft:bamboo_jungle"
         },
         {
-          "type": "biome",
+          "type": "environmental:biome",
           "biome": "minecraft:bamboo_jungle_hills"
         }
       ]

@@ -1,15 +1,13 @@
 package com.minecraftabnormals.environmental.core.mixin;
 
+import com.minecraftabnormals.environmental.core.registry.EnvironmentalRecipes;
+import net.minecraft.client.util.ClientRecipeBook;
+import net.minecraft.client.util.RecipeBookCategories;
+import net.minecraft.item.crafting.IRecipe;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import com.minecraftabnormals.environmental.core.registry.EnvironmentalRecipes;
-
-import net.minecraft.client.util.ClientRecipeBook;
-import net.minecraft.client.util.RecipeBookCategories;
-import net.minecraft.item.crafting.IRecipe;
 
 @Mixin(ClientRecipeBook.class)
 public class ClientRecipeBookMixin {

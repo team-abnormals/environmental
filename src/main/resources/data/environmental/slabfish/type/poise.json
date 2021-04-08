@@ -7,7 +7,14 @@
   "mod": "endergetic",
   "conditions": [
     {
-      "type": "biome",
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:biome",
       "biome": "endergetic:poise_forest"
     }
   ]

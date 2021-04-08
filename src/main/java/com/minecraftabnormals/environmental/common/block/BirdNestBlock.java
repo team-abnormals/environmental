@@ -1,17 +1,11 @@
 package com.minecraftabnormals.environmental.common.block;
 
-import java.util.function.Supplier;
-
 import com.minecraftabnormals.environmental.common.tile.BirdNestTileEntity;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.ContainerBlock;
+import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
@@ -27,6 +21,8 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
+import java.util.function.Supplier;
+
 public class BirdNestBlock extends ContainerBlock {
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 3.0D, 16.0D);
 	public static final IntegerProperty EGGS = IntegerProperty.create("eggs", 1, 6);
@@ -39,7 +35,7 @@ public class BirdNestBlock extends ContainerBlock {
 		this.emptyNest = emptyNestIn;
 		this.emptyNest.addNest(this.egg, this);
 
-		this.setDefaultState(this.stateContainer.getBaseState().with(EGGS, Integer.valueOf(1)));
+		this.setDefaultState(this.stateContainer.getBaseState().with(EGGS, 1));
 	}
 
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
@@ -54,25 +50,23 @@ public class BirdNestBlock extends ContainerBlock {
 		if (player.isAllowEdit()) {
 			int i = state.get(EGGS);
 			ItemStack itemstack = player.getHeldItem(handIn);
-			if (itemstack.getItem() == this.egg.get()) {
+			if (this.egg.get() != Items.AIR && itemstack.getItem() == this.egg.get()) {
 				if (i < 6) {
 					if (!player.abilities.isCreativeMode) {
 						itemstack.shrink(1);
 					}
-					worldIn.setBlockState(pos, state.with(EGGS, Integer.valueOf(i + 1)), 3);
+					worldIn.setBlockState(pos, state.with(EGGS, i + 1), 3);
 				}
-			}
-			else {
+			} else {
 				spawnAsEntity(worldIn, pos, new ItemStack(this.egg.get()));
 
 				if (i > 1)
-					worldIn.setBlockState(pos, state.with(EGGS, Integer.valueOf(i - 1)), 3);
+					worldIn.setBlockState(pos, state.with(EGGS, i - 1), 3);
 				else
 					worldIn.setBlockState(pos, this.getEmptyNest().getDefaultState(), 3);
 			}
 			return ActionResultType.func_233537_a_(worldIn.isRemote);
-		}
-		else {
+		} else {
 			return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
 		}
 	}
@@ -81,8 +75,15 @@ public class BirdNestBlock extends ContainerBlock {
 		return new ItemStack(this.getEgg());
 	}
 
-	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos){
+	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
 		return worldIn.getBlockState(pos.down()).getMaterial().isSolid();
+	}
+
+	@Override
+	public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
+		super.onBlockHarvested(worldIn, pos, state, player);
+		if (!worldIn.isRemote && !player.isCreative() && this.getEgg() != null && state.get(EGGS) > 0)
+			spawnAsEntity(worldIn, pos, new ItemStack(this.getEgg(), state.get(EGGS)));
 	}
 
 	public TileEntity createNewTileEntity(IBlockReader worldIn) {
@@ -104,7 +105,7 @@ public class BirdNestBlock extends ContainerBlock {
 	public EmptyNestBlock getEmptyNest() {
 		return this.emptyNest;
 	}
-	
+
 	@Override
 	public boolean hasComparatorInputOverride(BlockState state) {
 		return true;

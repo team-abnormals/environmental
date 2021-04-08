@@ -2,7 +2,6 @@
   "replace": false,
   "values": [
     "#minecraft:fishes",
-    "#environmental:slabfish_breeding_items",
-    "#environmental:sushi"
+    "#environmental:slabfish_breeding_items"
   ]
 }

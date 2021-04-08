@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "minecraft:tropical_fish",
-    "environmental:tropical_fish_kelp_roll"
+    "minecraft:tropical_fish"
   ]
 }

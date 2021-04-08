@@ -5,7 +5,7 @@
   },
   "conditions": [
     {
-      "type": "impossible"
+      "type": "environmental:impossible"
     }
   ]
 }

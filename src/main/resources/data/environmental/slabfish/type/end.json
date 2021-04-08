@@ -5,7 +5,14 @@
   },
   "conditions": [
     {
-      "type": "dimension",
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:dimension",
       "dimension": "minecraft:the_end"
     }
   ]

@@ -1,0 +1,25 @@
+{
+  "advancement": "minecraft:husbandry/plant_seed",
+  "modifiers": [
+    {
+      "type": "indexed_requirements",
+      "config": {
+        "mode": "modify",
+        "index": 0,
+        "criteria": {
+          "environmental:cattail_sprouts": {
+            "trigger": "minecraft:placed_block",
+            "conditions": {
+              "block": "environmental:cattail_sprouts"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "environmental:cattail_sprouts"
+          ]
+        ]
+      }
+    }
+  ]
+}

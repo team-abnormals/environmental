@@ -1,6 +1,0 @@
-{
-    "parent": "block/crop",
-    "textures": {
-        "crop": "environmental:block/rice_stage6_top"
-    }
-}

@@ -6,7 +6,10 @@
   },
   "conditions": [
     {
-      "type": "lightning"
+      "type": "environmental:event",
+      "events": [
+        "lightning"
+      ]
     }
   ]
 }

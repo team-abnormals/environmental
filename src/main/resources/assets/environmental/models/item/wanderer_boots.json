@@ -1,6 +1,7 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "environmental:item/wanderer_boots"
+        "layer0": "environmental:item/wanderer_boots",
+        "layer1": "environmental:item/wanderer_boots_overlay"
     }
 }

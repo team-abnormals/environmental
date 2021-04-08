@@ -2,13 +2,13 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "minecraft:dirt"
+      "tag": "forge:buckets/water"
     },
     {
       "item": "minecraft:dirt"
     },
     {
-      "item": "minecraft:water_bucket"
+      "item": "minecraft:dirt"
     },
     {
       "item": "minecraft:dirt"

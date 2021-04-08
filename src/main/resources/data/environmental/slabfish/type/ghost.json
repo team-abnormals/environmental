@@ -6,7 +6,7 @@
   "translucent": true,
   "conditions": [
     {
-      "type": "impossible"
+      "type": "environmental:impossible"
     }
   ]
 }

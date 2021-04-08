@@ -5,14 +5,21 @@
   },
   "conditions": [
     {
-      "type": "or",
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:or",
       "conditions": [
         {
-          "type": "biome",
+          "type": "environmental:biome",
           "biome": "environmental:marsh"
         },
         {
-          "type": "biome",
+          "type": "environmental:biome",
           "biome": "environmental:mushroom_marsh"
         }
       ]

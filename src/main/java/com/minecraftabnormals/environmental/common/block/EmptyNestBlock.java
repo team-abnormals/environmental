@@ -1,16 +1,13 @@
 package com.minecraftabnormals.environmental.common.block;
 
-import java.util.Map;
-import java.util.function.Supplier;
-
 import com.google.common.collect.Maps;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
@@ -23,6 +20,9 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
+import java.util.Map;
+import java.util.function.Supplier;
+
 public class EmptyNestBlock extends Block {
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 3.0D, 16.0D);
 	private final Map<Supplier<? extends Item>, Block> NESTS = Maps.newHashMap();
@@ -31,8 +31,7 @@ public class EmptyNestBlock extends Block {
 		super(properties);
 	}
 
-	public void addNest(Supplier<? extends Item> egg, Block nest)
-	{
+	public void addNest(Supplier<? extends Item> egg, Block nest) {
 		NESTS.put(egg, nest);
 	}
 
@@ -49,17 +48,17 @@ public class EmptyNestBlock extends Block {
 
 			ItemStack itemstack = player.getHeldItem(handIn);
 			Item item = itemstack.getItem();
-			
+
 			Block nest = null;
-			
-			for(Supplier<? extends Item> supplier : NESTS.keySet()) {
+
+			for (Supplier<? extends Item> supplier : NESTS.keySet()) {
 				if (item == supplier.get()) {
 					nest = NESTS.get(supplier);
 					break;
 				}
 			}
 
-			if (nest != null) {
+			if (nest != null && ((BirdNestBlock) nest).getEgg() != Items.AIR) {
 				if (!player.abilities.isCreativeMode && !worldIn.isRemote) {
 					itemstack.shrink(1);
 				}
@@ -69,28 +68,25 @@ public class EmptyNestBlock extends Block {
 			}
 
 			return ActionResultType.CONSUME;
-		}
-		else {
+		} else {
 			return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
 		}
 	}
 
-	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos){
+	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
 		return worldIn.getBlockState(pos.down()).getMaterial().isSolid();
 	}
-	
-	public Block getNest(Item item)
-	{
+
+	public Block getNest(Item item) {
 		Block nest = null;
-		
-		for(Supplier<? extends Item> supplier : NESTS.keySet()) {
-			if (item == supplier.get())
-			{
+
+		for (Supplier<? extends Item> supplier : NESTS.keySet()) {
+			if (item == supplier.get()) {
 				nest = NESTS.get(supplier);
 				break;
 			}
 		}
-		
+
 		return nest;
 	}
 }
