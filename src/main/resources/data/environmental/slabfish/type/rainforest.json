@@ -1,35 +1,43 @@
 {
   "rarity": "epic",
+  "priority": 1,
   "displayName": {
     "translate": "entity.environmental.slabfish.type.rainforest"
   },
   "mod": "atmospheric",
   "conditions": [
     {
-      "type": "or",
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:or",
       "conditions": [
         {
-          "type": "biome",
+          "type": "environmental:biome",
           "biome": "atmospheric:rainforest"
         },
         {
-          "type": "biome",
+          "type": "environmental:biome",
           "biome": "atmospheric:rainforest_mountains"
         },
         {
-          "type": "biome",
+          "type": "environmental:biome",
           "biome": "atmospheric:rainforest_plateau"
         },
         {
-          "type": "biome",
+          "type": "environmental:biome",
           "biome": "atmospheric:sparse_rainforest_plateau"
         },
         {
-          "type": "biome",
+          "type": "environmental:biome",
           "biome": "atmospheric:rainforest_basin"
         },
         {
-          "type": "biome",
+          "type": "environmental:biome",
           "biome": "atmospheric:sparse_rainforest_basin"
         }
       ]

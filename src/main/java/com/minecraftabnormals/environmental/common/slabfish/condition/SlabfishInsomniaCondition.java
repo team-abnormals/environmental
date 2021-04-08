@@ -9,27 +9,22 @@ import com.google.gson.JsonObject;
  * @author Ocelot
  */
 public class SlabfishInsomniaCondition implements SlabfishCondition {
-    private SlabfishInsomniaCondition() {
-    }
+	private SlabfishInsomniaCondition() {
+	}
 
-    /**
-     * Creates a new {@link SlabfishInsomniaCondition} from the specified json.
-     *
-     * @param json    The json to deserialize
-     * @param context The context of the json deserialization
-     * @return A new slabfish condition from that json
-     */
-    public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context) {
-        return new SlabfishInsomniaCondition();
-    }
+	/**
+	 * Creates a new {@link SlabfishInsomniaCondition} from the specified json.
+	 *
+	 * @param json    The json to deserialize
+	 * @param context The context of the json deserialization
+	 * @return A new slabfish condition from that json
+	 */
+	public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context) {
+		return new SlabfishInsomniaCondition();
+	}
 
-    @Override
-    public SlabfishConditionType getType() {
-        return SlabfishConditionType.INSOMNIA;
-    }
-
-    @Override
-    public boolean test(SlabfishConditionContext context) {
-        return context.isBreederInsomnia();
-    }
+	@Override
+	public boolean test(SlabfishConditionContext context) {
+		return context.isBreederInsomnia();
+	}
 }

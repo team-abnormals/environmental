@@ -1,24 +1,22 @@
 package com.minecraftabnormals.environmental.common.block;
 
-import javax.annotation.Nullable;
-
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.BushBlock;
+import com.minecraftabnormals.abnormals_core.core.util.item.filling.TargetedItemGroupFiller;
+import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -30,9 +28,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.PlantType;
 
+import javax.annotation.Nullable;
+
 public class GiantLilyPadBlock extends BushBlock implements IPlantable {
 	protected static final VoxelShape GIANT_LILY_PAD_AABB = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 1.5D, 16.0D);
 	public static final EnumProperty<LilyPadPosition> POSITION = EnumProperty.create("position", LilyPadPosition.class);
+	private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(() -> EnvironmentalBlocks.LARGE_LILY_PAD.get().asItem());
 
 	public GiantLilyPadBlock(AbstractBlock.Properties builder) {
 		super(builder);
@@ -184,7 +185,7 @@ public class GiantLilyPadBlock extends BushBlock implements IPlantable {
 		BlockPos blockpos = posToBlockPos(position, pos, false);
 		BlockState blockstate = world.getBlockState(blockpos);
 		if (blockstate.getBlock() == state.getBlock() && blockstate.get(POSITION) == position) {
-			world.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 35);
+			world.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 51);
 			world.playEvent(player, 2001, blockpos, Block.getStateId(blockstate));
 		}
 	}
@@ -198,50 +199,50 @@ public class GiantLilyPadBlock extends BushBlock implements IPlantable {
 		if (!revert) {
 			switch (position) {
 
-			case NORTH:
-				return pos.offset(Direction.NORTH);
-			case EAST:
-				return pos.offset(Direction.EAST);
-			case SOUTH:
-				return pos.offset(Direction.SOUTH);
-			case WEST:
-				return pos.offset(Direction.WEST);
+				case NORTH:
+					return pos.offset(Direction.NORTH);
+				case EAST:
+					return pos.offset(Direction.EAST);
+				case SOUTH:
+					return pos.offset(Direction.SOUTH);
+				case WEST:
+					return pos.offset(Direction.WEST);
 
-			case NORTHEAST:
-				return pos.offset(Direction.NORTH).offset(Direction.EAST);
-			case NORTHWEST:
-				return pos.offset(Direction.NORTH).offset(Direction.WEST);
-			case SOUTHEAST:
-				return pos.offset(Direction.SOUTH).offset(Direction.EAST);
-			case SOUTHWEST:
-				return pos.offset(Direction.SOUTH).offset(Direction.WEST);
-			case CENTER:
-			default:
-				return pos;
+				case NORTHEAST:
+					return pos.offset(Direction.NORTH).offset(Direction.EAST);
+				case NORTHWEST:
+					return pos.offset(Direction.NORTH).offset(Direction.WEST);
+				case SOUTHEAST:
+					return pos.offset(Direction.SOUTH).offset(Direction.EAST);
+				case SOUTHWEST:
+					return pos.offset(Direction.SOUTH).offset(Direction.WEST);
+				case CENTER:
+				default:
+					return pos;
 			}
 		} else {
 			switch (position) {
 
-			case NORTH:
-				return pos.offset(Direction.SOUTH);
-			case EAST:
-				return pos.offset(Direction.WEST);
-			case SOUTH:
-				return pos.offset(Direction.NORTH);
-			case WEST:
-				return pos.offset(Direction.EAST);
+				case NORTH:
+					return pos.offset(Direction.SOUTH);
+				case EAST:
+					return pos.offset(Direction.WEST);
+				case SOUTH:
+					return pos.offset(Direction.NORTH);
+				case WEST:
+					return pos.offset(Direction.EAST);
 
-			case NORTHEAST:
-				return pos.offset(Direction.SOUTH).offset(Direction.WEST);
-			case NORTHWEST:
-				return pos.offset(Direction.SOUTH).offset(Direction.EAST);
-			case SOUTHEAST:
-				return pos.offset(Direction.NORTH).offset(Direction.WEST);
-			case SOUTHWEST:
-				return pos.offset(Direction.NORTH).offset(Direction.EAST);
-			case CENTER:
-			default:
-				return pos;
+				case NORTHEAST:
+					return pos.offset(Direction.SOUTH).offset(Direction.WEST);
+				case NORTHWEST:
+					return pos.offset(Direction.SOUTH).offset(Direction.EAST);
+				case SOUTHEAST:
+					return pos.offset(Direction.NORTH).offset(Direction.WEST);
+				case SOUTHWEST:
+					return pos.offset(Direction.NORTH).offset(Direction.EAST);
+				case CENTER:
+				default:
+					return pos;
 			}
 		}
 	}
@@ -252,14 +253,14 @@ public class GiantLilyPadBlock extends BushBlock implements IPlantable {
 	}
 
 	public static enum LilyPadPosition implements IStringSerializable {
-		CENTER("center"), 
-		NORTH("north"), 
-		NORTHEAST("northeast"), 
-		EAST("east"), 
-		SOUTHEAST("southeast"), 
-		SOUTH("south"), 
-		SOUTHWEST("southwest"), 
-		WEST("west"), 
+		CENTER("center"),
+		NORTH("north"),
+		NORTHEAST("northeast"),
+		EAST("east"),
+		SOUTHEAST("southeast"),
+		SOUTH("south"),
+		SOUTHWEST("southwest"),
+		WEST("west"),
 		NORTHWEST("northwest");
 
 		private final String heightName;
@@ -275,5 +276,10 @@ public class GiantLilyPadBlock extends BushBlock implements IPlantable {
 		public String getString() {
 			return this.heightName;
 		}
+	}
+
+	@Override
+	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+		FILLER.fillItem(this.asItem(), group, items);
 	}
 }

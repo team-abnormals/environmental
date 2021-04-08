@@ -1,0 +1,23 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "item": "autumnity:maple_vertical_slab"
+  },
+  "result": "autumnity:maple_slab",
+  "count": 1,
+  "conditions":[
+    {
+      "type":"forge:and",
+      "values": [
+        {
+          "type":"forge:mod_loaded",
+          "modid":"autumnity"
+        },
+        {
+          "type":"abnormals_core:quark_flag",
+          "flag":"vertical_slabs"
+        }
+      ]
+    }
+  ]
+}

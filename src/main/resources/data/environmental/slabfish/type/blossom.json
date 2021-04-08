@@ -6,22 +6,29 @@
   },
   "conditions": [
     {
-      "type": "or",
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:or",
       "conditions": [
         {
-          "type": "biome",
+          "type": "environmental:biome",
           "biome": "environmental:blossom_woods"
         },
         {
-          "type": "biome",
+          "type": "environmental:biome",
           "biome": "environmental:blossom_hills"
         },
         {
-          "type": "biome",
+          "type": "environmental:biome",
           "biome": "environmental:blossom_highlands"
         },
         {
-          "type": "biome",
+          "type": "environmental:biome",
           "biome": "environmental:blossom_valleys"
         }
       ]

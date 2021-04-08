@@ -6,15 +6,40 @@
   },
   "conditions": [
     {
-      "type": "or",
+      "type": "environmental:or",
       "conditions": [
         {
-          "type": "lightning",
-          "slabfishType": "environmental:brown_mushroom"
+          "type": "environmental:and",
+          "conditions": [
+            {
+              "type": "environmental:event",
+              "events": [
+                "lightning"
+              ]
+            },
+            {
+              "type": "environmental:slabfish_type",
+              "slabfishTypes": [
+                "environmental:brown_mushroom"
+              ]
+            }
+          ]
         },
         {
-          "type": "biome",
-          "category": "mushroom"
+          "type": "environmental:and",
+          "conditions": [
+            {
+              "type": "environmental:event",
+              "events": [
+                "spawn",
+                "breed"
+              ]
+            },
+            {
+              "type": "environmental:biome",
+              "category": "mushroom"
+            }
+          ]
         }
       ]
     }

@@ -5,9 +5,17 @@
   "minVersion": "0.8",
   "refmap": "environmental.refmap.json",
   "mixins": [
-    "VindicatorEntityMixin",
+    "AbstractSkeletonEntityMixin",
+    "ChickenEntityMixin",
+    "DoublePlantBlockMixin",
+    "GrassBlockMixin",
+    "HoeItemMixin",
     "LilyPadBlockMixin",
-    "DoublePlantBlockMixin"
+    "LivingEntityMixin",
+    "MobEntityMixin",
+    "MyceliumBlockMixin",
+    "PlayerEntityMixin",
+    "WitherSkeletonEntityMixin"
   ],
   "client": [
     "ClientRecipeBookMixin"

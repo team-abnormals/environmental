@@ -6,12 +6,18 @@
   },
   "conditions": [
     {
-      "type": "parents",
+      "type": "environmental:event",
+      "events": [
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:parents",
       "parentA": "environmental:skeleton",
       "parentB": "environmental:skeleton"
     },
     {
-      "type": "dimension",
+      "type": "environmental:dimension",
       "dimension": "minecraft:the_nether"
     }
   ]

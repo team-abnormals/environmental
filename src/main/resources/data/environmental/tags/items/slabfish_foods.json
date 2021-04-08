@@ -1,11 +1,18 @@
 {
   "replace": false,
   "values": [
-    "minecraft:chorus_fruit"
-  ],
-  "optional": [
-    "atmospheric:passionfruit",
-    "atmospheric:shimmering_passionfruit",
-    "endergetic:bollom_fruit"
+    "minecraft:chorus_fruit",
+    {
+      "id": "atmospheric:passionfruit",
+      "required": false
+    },
+    {
+      "id": "atmospheric:shimmering_passionfruit",
+      "required": false
+    },
+    {
+      "id": "endergetic:bolloom_fruit",
+      "required": false
+    }
   ]
 }

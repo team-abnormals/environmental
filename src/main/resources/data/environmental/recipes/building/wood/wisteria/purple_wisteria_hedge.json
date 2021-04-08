@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "L",
+    "W"
+  ],
+  "key": {
+    "L": {
+      "item": "environmental:purple_wisteria_leaves"
+    },
+    "W": {
+      "tag": "environmental:wisteria_logs"
+    }
+  },
+  "result": {
+    "item": "environmental:purple_wisteria_hedge",
+    "count": 2
+  },
+  "conditions": [
+    {
+      "type": "abnormals_core:quark_flag",
+      "flag": "hedges"
+    }
+  ]
+}

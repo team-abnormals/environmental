@@ -6,8 +6,16 @@
   },
   "conditions": [
     {
-      "type": "lightning",
-      "slabfishType": "environmental:mushroom"
+      "type": "environmental:event",
+      "events": [
+        "lightning"
+      ]
+    },
+    {
+      "type": "environmental:slabfish_type",
+      "slabfishTypes": [
+        "environmental:mushroom"
+      ]
     }
   ]
 }

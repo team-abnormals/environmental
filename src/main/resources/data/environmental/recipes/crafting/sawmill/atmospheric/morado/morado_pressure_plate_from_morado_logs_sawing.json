@@ -1,0 +1,14 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "atmospheric:morado_logs"
+  },
+  "result": "atmospheric:morado_pressure_plate",
+  "count": 2,
+  "conditions":[
+    {
+      "type":"forge:mod_loaded",
+      "modid":"atmospheric"
+    }
+  ]
+}

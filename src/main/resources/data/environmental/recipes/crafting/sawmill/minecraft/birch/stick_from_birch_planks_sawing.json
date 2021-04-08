@@ -1,8 +1,0 @@
-{
-  "type": "environmental:sawing",
-  "ingredient": {
-    "item": "minecraft:birch_planks"
-  },
-  "result": "minecraft:stick",
-  "count": 2
-}

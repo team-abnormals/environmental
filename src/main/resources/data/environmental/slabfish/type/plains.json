@@ -5,7 +5,14 @@
   },
   "conditions": [
     {
-      "type": "biome",
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:biome",
       "category": "plains"
     }
   ]

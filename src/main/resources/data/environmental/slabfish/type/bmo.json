@@ -7,7 +7,7 @@
   "tradable": false,
   "conditions": [
     {
-      "type": "rename",
+      "type": "environmental:rename",
       "names": [
         "bmo",
         "beemo",

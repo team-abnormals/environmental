@@ -2,7 +2,7 @@
 	"block.environmental.kiln": "Polttouuni",
 	"block.environmental.sawmill": "Saha",
 	
-  "block.environmental.mud": "Muta",
+	"block.environmental.mud": "Muta",
 	"block.environmental.mud_bricks": "Mutatiili",
 	"block.environmental.mud_brick_slab": "Mutatiililaatta",
 	"block.environmental.mud_brick_stairs": "Mutatiiliportaat",
@@ -49,7 +49,7 @@
 	"block.environmental.willow_sign": "Pajukyltti",
 	"block.environmental.willow_chest": "Pajuarkku",
 	"block.environmental.willow_trapped_chest": "Ansoitettu pajuarkku",
-	"block.environmental.willow_beehive": "Keinotekoinen pajumehiläispesä",
+	"block.environmental.willow_beehive": "Pajumehiläispesä",
 	
 	"block.environmental.cherry_planks": "Kirsikkapuulankut",
 	"block.environmental.cherry_slab": "Kirsikkapuulaatta",
@@ -75,7 +75,7 @@
 	"block.environmental.cherry_sign": "Kirsikkapuukyltti",
 	"block.environmental.cherry_chest": "Kirsikkapuuarkku",
 	"block.environmental.cherry_trapped_chest": "Ansoitettu kirsikkapuuarkku",
-	"block.environmental.cherry_beehive": "Keinotekoinen kirsikkapuumehiläispesä",
+	"block.environmental.cherry_beehive": "Kirsikkapuumehiläispesä",
 	
     "block.environmental.wisteria_log": "Sinisadehalko",
     "block.environmental.stripped_wisteria_log": "Kuorittu sinisadehalko",
@@ -97,7 +97,7 @@
     "block.environmental.wisteria_vertical_slab": "Pystysuora sinisadelaatta",
     "block.environmental.wisteria_chest": "Sinisadearkku",
 	"block.environmental.wisteria_trapped_chest": "Ansoitettu sinisadearkku",
-	"block.environmental.wisteria_beehive": "Keinotekoinen sinisademehiläispesä",
+	"block.environmental.wisteria_beehive": "Sinisademehiläispesä",
 	
     "block.environmental.blue_wisteria_leaves": "Siniset sinisateenlehdet",
     "block.environmental.pink_wisteria_leaves": "Vaaleanpunaiset sinisateenlehdet",
@@ -138,22 +138,22 @@
 	"block.environmental.black_terracotta_bricks": "Musta terrakottatiili",
 	
 	"block.environmental.terracotta_brick_stairs": "Terrakottatiiliportaat",	
-	"block.environmental.white_terracotta_brick_stairs": "Valkoinen terrakottatiiliportaat",
-	"block.environmental.orange_terracotta_brick_stairs": "Oranssi terrakottatiiliportaat",
-	"block.environmental.magenta_terracotta_brick_stairs": "Purppura terrakottatiiliportaat",
-	"block.environmental.light_blue_terracotta_brick_stairs": "Vaaleansininen terrakottatiiliportaat",
-	"block.environmental.yellow_terracotta_brick_stairs": "Keltainen terrakottatiiliportaat",
-	"block.environmental.lime_terracotta_brick_stairs": "Limetinvihreä terrakottatiiliportaat",
-	"block.environmental.pink_terracotta_brick_stairs": "Vaaleanpunainen terrakottatiiliportaat",
-	"block.environmental.gray_terracotta_brick_stairs": "Harmaa terrakottatiiliportaat",
-	"block.environmental.light_gray_terracotta_brick_stairs": "Vaaleanharmaa terrakottatiiliportaat",
-	"block.environmental.cyan_terracotta_brick_stairs": "Syaani terrakottatiiliportaat",
-	"block.environmental.purple_terracotta_brick_stairs": "Violetti terrakottatiiliportaat",
-	"block.environmental.blue_terracotta_brick_stairs": "Sininen terrakottatiiliportaat",
-	"block.environmental.brown_terracotta_brick_stairs": "Ruskea terrakottatiiliportaat",
-	"block.environmental.green_terracotta_brick_stairs": "Vihreä terrakottatiiliportaat",
-	"block.environmental.red_terracotta_brick_stairs": "Punainen terrakottatiiliportaat",
-	"block.environmental.black_terracotta_brick_stairs": "Musta terrakottatiiliportaat",
+	"block.environmental.white_terracotta_brick_stairs": "Valkoiset terrakottatiiliportaat",
+	"block.environmental.orange_terracotta_brick_stairs": "Oranssit terrakottatiiliportaat",
+	"block.environmental.magenta_terracotta_brick_stairs": "Purppurat terrakottatiiliportaat",
+	"block.environmental.light_blue_terracotta_brick_stairs": "Vaaleansiniset terrakottatiiliportaat",
+	"block.environmental.yellow_terracotta_brick_stairs": "Keltaiset terrakottatiiliportaat",
+	"block.environmental.lime_terracotta_brick_stairs": "Limetinvihreät terrakottatiiliportaat",
+	"block.environmental.pink_terracotta_brick_stairs": "Vaaleanpunaiset terrakottatiiliportaat",
+	"block.environmental.gray_terracotta_brick_stairs": "Harmaat terrakottatiiliportaat",
+	"block.environmental.light_gray_terracotta_brick_stairs": "Vaaleanharmaat terrakottatiiliportaat",
+	"block.environmental.cyan_terracotta_brick_stairs": "Syaanit terrakottatiiliportaat",
+	"block.environmental.purple_terracotta_brick_stairs": "Violetit terrakottatiiliportaat",
+	"block.environmental.blue_terracotta_brick_stairs": "Siniset terrakottatiiliportaat",
+	"block.environmental.brown_terracotta_brick_stairs": "Ruskeat terrakottatiiliportaat",
+	"block.environmental.green_terracotta_brick_stairs": "Vihreät terrakottatiiliportaat",
+	"block.environmental.red_terracotta_brick_stairs": "Punaiset terrakottatiiliportaat",
+	"block.environmental.black_terracotta_brick_stairs": "Mustat terrakottatiiliportaat",
 	
 	"block.environmental.terracotta_brick_slab": "Terrakottatiililaatta",	
 	"block.environmental.white_terracotta_brick_slab": "Valkoinen terrakottatiililaatta",
@@ -241,7 +241,7 @@
 	"block.environmental.cattail_thatch_slab": "Osmankäämilaatta",
 	"block.environmental.cattail_thatch_stairs": "Osmankäämiportaat",
 	"block.environmental.cattail_thatch_vertical_slab": "Pystysuora osmankäämilaatta",
-	"block.environmental.cattail_seed_sack": "Osmankäämin siemensäkki",
+	"block.environmental.cattail_seed_sack": "Säkki osmankäämin siemeniä",
 		  
     "block.environmental.blue_delphinium": "Sininen ritarinkannus",
     "block.environmental.pink_delphinium": "Vaaleanpunainen ritarinkannus",
@@ -273,9 +273,9 @@
 	
 	"block.environmental.cherry_crate": "Laatikko kirsikoita",
 	"block.environmental.yak_hair_block": "Jakin karvakuutio",
-	 "block.environmental.yak_hair_rug": "Jakin karvamatto",
+	"block.environmental.yak_hair_rug": "Jakin karvamatto",
 	
-	"block.environmental.rice_sack": "Riisisäkki",
+	"block.environmental.rice_sack": "Säkki riisiä",
 	"block.environmental.rice": "Riisi",
 	"block.environmental.tall_rice": "Pitkä riisi",
 	
@@ -288,26 +288,32 @@
 	"block.environmental.twig_nest": "Risupesä",
 	"block.environmental.twig_chicken_nest": "Kananmunia risupesässä",
 	"block.environmental.twig_duck_nest": "Sorsan munia risupesässä",
+	"block.environmental.twig_turkey_nest": "Kalkkunan munia risupesässä",
 	"block.environmental.hay_nest": "Heinäpesä",
 	"block.environmental.hay_chicken_nest": "Kananmunia heinäpesässä",
 	"block.environmental.hay_duck_nest": "Sorsan munia heinäpesässä",
+	"block.environmental.hay_turkey_nest": "Kalkkunan munia heinäpesässä",
 	
 	"block.environmental.chicken_egg_crate": "Laatikko kananmunia",
 	"block.environmental.duck_egg_crate": "Laatikko sorsan munia",
 	"block.environmental.turtle_egg_crate": "Laatikko kilpikonnan munia",
-		
+	
+	"block.environmental.buried_truffle": "Tryffeli mullassa",
+	"block.environmental.truffle_crate": "Laatikko tryffeleitä",
+	
 	"item.environmental.wanderer_boots": "Kulkurin saappaat",
 	"item.environmental.architect_belt": "Arkkitehdin vyö",
-	"item.environmental.fool_wings": "Houkan siivet",
+	"item.environmental.healer_pouch": "Parantajan pussi",
 	"item.environmental.thief_hood": "Varkaan huppu",
 	"item.environmental.executioner_cleaver": "Pyövelin kirves",
 	
 	"item.environmental.slabfish_spawn_egg": "Luo laattakala",
 	"item.environmental.axolotl_spawn_egg": "Luo aksolotli",
-	"item.environmental.butterfly_spawn_egg": "Luo mehiläinen",
+	"item.environmental.butterfly_spawn_egg": "Luo perhonen",
 	"item.environmental.duck_spawn_egg": "Luo sorsa",
 	"item.environmental.deer_spawn_egg": "Luo peura",
 	"item.environmental.yak_spawn_egg": "Luo jakki",
+	"item.environmental.koi_spawn_egg": "Luo koikarppi",
 	
 	"item.environmental.yak_hair": "Jakin karva",
 	"item.environmental.yak_pants": "Jakkihousut",
@@ -325,8 +331,11 @@
 	"item.environmental.fried_egg": "Paistettu muna",
 	"item.environmental.scrambled_eggs": "Munakokkeli",
 	
-	"item.environmental.cod_kelp_roll": "Ahvenlevärulla",
+	"item.environmental.koi": "Koikarppi",
+	
+	"item.environmental.cod_kelp_roll": "Turskalevärulla",
 	"item.environmental.tropical_fish_kelp_roll": "Trooppinen kalalevärulla",
+	"item.environmental.koi_kelp_roll": "Koikarppilevärulla",
 	"item.environmental.crab_kelp_roll": "Taskurapulevärulla",
 	"item.environmental.pike_kelp_roll": "Haukilevärulla",
 	
@@ -338,6 +347,7 @@
 	
 	"item.environmental.axolotl_bucket": "Aksolotli ämpärissä",
 	"item.environmental.slabfish_bucket": "Laattakala ämpärissä",
+	"item.environmental.koi_bucket": "Koikarppi ämpärissä",
 	"item.environmental.bottled_butterfly": "Perhonen pullossa",
 	
 	"item.environmental.mud_ball": "Mutapallo",
@@ -347,6 +357,10 @@
 	"item.environmental.cherries": "Kirsikoita",
 	"item.environmental.cherry_pie": "Kirsikkapiirakka",
 	"item.environmental.apple_pie": "Omenapiirakka",
+	
+	"item.environmental.truffle": "Tryffeli",
+	"item.environmental.truffle_puree": "Tryffelipyree",
+	"item.environmental.truffle_pie": "Tryffelipiirakka",
 	
 	"item.environmental.willow_boat": "Pajuvene",
 	"item.environmental.cherry_boat": "Kirsikkapuuvene",
@@ -364,6 +378,10 @@
 	"entity.environmental.butterfly": "Perhonen",
 	"entity.environmental.deer": "Peura",
 	"entity.environmental.yak": "Jakki",
+	"entity.environmental.koi": "Koikarppi",
+	
+	"entity.environmental.duck_egg": "Sorsan muna",
+	"entity.environmental.mud_ball": "Mutapallo",
 	
 	"entity.minecraft.villager.environmental.ceramist": "Keraamikko",
 	"entity.minecraft.villager.environmental.carpenter": "Puuseppä",
@@ -377,6 +395,21 @@
 	"biome.environmental.blossom_highlands": "Kirsikkaylämaat",
 	"biome.environmental.blossom_valleys": "Kirsikkalaaksot",
 	
+	"effect.environmental.panic": "Paniikki",
+	"effect.environmental.serenity": "Rauha",
+	
+	"item.minecraft.potion.effect.vitality": "Eloisuuden taikajuoma",
+	"item.minecraft.potion.effect.vitality_strong": "Eloisuuden taikajuoma",
+	
+	"item.minecraft.splash_potion.effect.vitality": "Roiskahtava eloisuuden taikajuoma",
+	"item.minecraft.splash_potion.effect.vitality_strong": "Roiskahtava eloisuuden taikajuoma",
+	
+	"item.minecraft.lingering_potion.effect.vitality": "Viipyvä eloisuuden taikajuoma",
+	"item.minecraft.lingering_potion.effect.vitality_strong": "Viipyvä eloisuuden taikajuoma",
+	
+	"item.minecraft.tipped_arrow.effect.vitality": "Eloisuuden nuoli",
+	"item.minecraft.tipped_arrow.effect.vitality_strong": "Eloisuuden nuoli",
+	
 	"container.kiln": "Polttouuni",
 	"container.sawmill": "Saha",
 	
@@ -384,6 +417,7 @@
 	"gui.environmental.category.sawing": "Sahaaminen",
 
 	"generic.reachDistance": "Ylettymisetäisyys",
+	"attribute.name.generic.stealth": "Salamyhkäisyys",
   
 	"enchantment.environmental.reaching": "Yletys",
 	"enchantment.environmental.reaching.desc": "Kasvattaa ylettymisetäisyyttä 1 kuutiolla per taso",
@@ -394,8 +428,8 @@
 	"advancements.husbandry.equip_axolotl.title": "Eksysksissä merellä, mutta ei yksin!",
 	"advancements.husbandry.equip_axolotl.description": "Anna aksolotlin tarttua sinuun ja parantaa sinua!",
 	
-	"advancements.husbandry.breed_all_slabfish.title": "Epävakaata genetiikkaa",
-	"advancements.husbandry.breed_all_slabfish.description": "Parita kaikki laattakalarodut!",
+	"advancements.husbandry.bred_all_slabfish.title": "Epävakaata genetiikkaa",
+	"advancements.husbandry.bred_all_slabfish.description": "Parita kaikki laattakalarodut!",
 	
 	"advancements.husbandry.backpack_slabfish.title": "Ensimmäinen koulupäivä",
 	"advancements.husbandry.backpack_slabfish.description": "Anna laattakalalle reppu",
@@ -411,6 +445,12 @@
 	"subtitles.entity.slabfish.transform": "Laattakala muuntautuu",
 	"subtitles.entity.slabfish.backpack": "Laattakalalle puetaan reppu",
 	"subtitles.entity.slabfish.sweater": "Laattakalalle puetaan villapaita",
+	
+	"subtitles.entity.koi.flop": "Koikarppi sätkii",
+	
+	"subtitles.entity.pig.sniff": "Sika nuuhkii",
+		
+	"subtitles.entity.duck.egg": "Sorsa munii",
 	
 	"entity.environmental.slabfish.baby": "Poikanen",
 	

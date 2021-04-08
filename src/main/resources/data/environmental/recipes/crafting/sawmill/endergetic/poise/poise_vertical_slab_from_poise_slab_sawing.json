@@ -1,0 +1,23 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "item": "endergetic:poise_slab"
+  },
+  "result": "endergetic:poise_vertical_slab",
+  "count": 1,
+  "conditions":[
+    {
+      "type":"forge:and",
+      "values": [
+        {
+          "type":"forge:mod_loaded",
+          "modid":"endergetic"
+        },
+        {
+          "type":"abnormals_core:quark_flag",
+          "flag":"vertical_slabs"
+        }
+      ]
+    }
+  ]
+}

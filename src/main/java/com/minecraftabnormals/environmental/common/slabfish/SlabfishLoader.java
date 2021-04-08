@@ -9,7 +9,6 @@ import com.minecraftabnormals.environmental.common.network.message.SSyncSweaterT
 import com.minecraftabnormals.environmental.common.slabfish.condition.SlabfishCondition;
 import com.minecraftabnormals.environmental.common.slabfish.condition.SlabfishConditionContext;
 import com.minecraftabnormals.environmental.core.Environmental;
-
 import net.minecraft.client.resources.JsonReloadListener;
 import net.minecraft.item.ItemStack;
 import net.minecraft.profiler.IProfiler;
@@ -21,10 +20,7 @@ import net.minecraftforge.fml.network.PacketDistributor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.function.Predicate;
 
 /**
@@ -33,165 +29,135 @@ import java.util.function.Predicate;
  * @author Ocelot
  */
 public class SlabfishLoader extends JsonReloadListener implements SlabfishManager {
-    private static final Logger LOGGER = LogManager.getLogger();
-    private static final Gson GSON = new GsonBuilder()
-            .registerTypeAdapter(ResourceLocation.class, new ResourceLocation.Serializer())
-            .registerTypeAdapter(ITextComponent.class, new ITextComponent.Serializer())
-            .registerTypeAdapter(SlabfishType.class, new SlabfishType.Deserializer())
-            .registerTypeAdapter(SlabfishCondition.class, new SlabfishCondition.Deserializer())
-            .registerTypeAdapter(SweaterType.class, new SweaterType.Deserializer())
-            .registerTypeAdapter(BackpackType.class, new BackpackType.Deserializer())
-            .create();
+	private static final Logger LOGGER = LogManager.getLogger();
+	private static final Gson GSON = new GsonBuilder()
+			.registerTypeAdapter(ResourceLocation.class, new ResourceLocation.Serializer())
+			.registerTypeAdapter(ITextComponent.class, new ITextComponent.Serializer())
+			.registerTypeAdapter(SlabfishType.class, new SlabfishType.Deserializer())
+			.registerTypeAdapter(SlabfishCondition.class, new SlabfishCondition.Deserializer())
+			.registerTypeAdapter(SweaterType.class, new SweaterType.Deserializer())
+			.registerTypeAdapter(BackpackType.class, new BackpackType.Deserializer())
+			.create();
 
-    static SlabfishLoader instance;
+	static SlabfishLoader instance;
 
-    private final Map<ResourceLocation, SlabfishType> slabfishTypes;
-    private final Map<ResourceLocation, SweaterType> sweaterTypes;
-    private final Map<ResourceLocation, BackpackType> backpackTypes;
+	private final Map<ResourceLocation, SlabfishType> slabfishTypes;
+	private final Map<ResourceLocation, SweaterType> sweaterTypes;
+	private final Map<ResourceLocation, BackpackType> backpackTypes;
 
-    public SlabfishLoader() {
-        super(GSON, "slabfish");
-        this.slabfishTypes = new HashMap<>();
-        this.sweaterTypes = new HashMap<>();
-        this.backpackTypes = new HashMap<>();
-        instance = this;
-    }
+	public SlabfishLoader() {
+		super(GSON, "slabfish");
+		this.slabfishTypes = new HashMap<>();
+		this.sweaterTypes = new HashMap<>();
+		this.backpackTypes = new HashMap<>();
+		instance = this;
+	}
 
-    @Override
-    protected void apply(Map<ResourceLocation, JsonElement> object, IResourceManager resourceManager, IProfiler profiler) {
-        Map<ResourceLocation, SlabfishType> parsedSlabfishTypes = new HashMap<>();
-        Map<ResourceLocation, SweaterType> parsedSweaterTypes = new HashMap<>();
-        Map<ResourceLocation, BackpackType> parsedBackpackTypes = new HashMap<>();
+	@Override
+	protected void apply(Map<ResourceLocation, JsonElement> object, IResourceManager resourceManager, IProfiler profiler) {
+		Map<ResourceLocation, SlabfishType> parsedSlabfishTypes = new HashMap<>();
+		Map<ResourceLocation, SweaterType> parsedSweaterTypes = new HashMap<>();
+		Map<ResourceLocation, BackpackType> parsedBackpackTypes = new HashMap<>();
 
-        // Force this to exist if there is no overriding JSON
-        parsedBackpackTypes.put(BROWN_BACKPACK.getRegistryName(), BROWN_BACKPACK);
+		// Force this to exist if there is no overriding JSON
+		parsedBackpackTypes.put(BROWN_BACKPACK.getRegistryName(), BROWN_BACKPACK);
 
-        object.forEach(((location, json) ->
-        {
-            if (location.getPath().startsWith("type")) {
-                ResourceLocation registryName = new ResourceLocation(location.getNamespace(), location.getPath().substring("type/".length()));
-                try {
-                    parsedSlabfishTypes.put(registryName, GSON.fromJson(json, SlabfishType.class).setRegistryName(registryName));
-                } catch (Exception e) {
-                    LOGGER.error("Parsing error loading custom slabfish " + registryName, e);
-                }
-            } else if (location.getPath().startsWith("sweater")) {
-                ResourceLocation registryName = new ResourceLocation(location.getNamespace(), location.getPath().substring("sweater/".length()));
-                try {
-                    parsedSweaterTypes.put(registryName, GSON.fromJson(json, SweaterType.class).setRegistryName(registryName));
-                } catch (Exception e) {
-                    LOGGER.error("Parsing error loading custom sweater " + registryName, e);
-                }
-            } else if (location.getPath().startsWith("backpack")) {
-                ResourceLocation registryName = new ResourceLocation(location.getNamespace(), location.getPath().substring("backpack/".length()));
-                try {
-                    parsedBackpackTypes.put(registryName, GSON.fromJson(json, BackpackType.class).setRegistryName(registryName));
-                } catch (Exception e) {
-                    LOGGER.error("Parsing error loading custom backpack " + registryName, e);
-                }
-            }
-        }));
+		object.forEach(((location, json) ->
+		{
+			if (location.getPath().startsWith("type")) {
+				ResourceLocation registryName = new ResourceLocation(location.getNamespace(), location.getPath().substring("type/".length()));
+				try {
+					parsedSlabfishTypes.put(registryName, GSON.fromJson(json, SlabfishType.class).setRegistryName(registryName));
+				} catch (Exception e) {
+					LOGGER.error("Parsing error loading custom slabfish " + registryName, e);
+				}
+			} else if (location.getPath().startsWith("sweater")) {
+				ResourceLocation registryName = new ResourceLocation(location.getNamespace(), location.getPath().substring("sweater/".length()));
+				try {
+					parsedSweaterTypes.put(registryName, GSON.fromJson(json, SweaterType.class).setRegistryName(registryName));
+				} catch (Exception e) {
+					LOGGER.error("Parsing error loading custom sweater " + registryName, e);
+				}
+			} else if (location.getPath().startsWith("backpack")) {
+				ResourceLocation registryName = new ResourceLocation(location.getNamespace(), location.getPath().substring("backpack/".length()));
+				try {
+					parsedBackpackTypes.put(registryName, GSON.fromJson(json, BackpackType.class).setRegistryName(registryName));
+				} catch (Exception e) {
+					LOGGER.error("Parsing error loading custom backpack " + registryName, e);
+				}
+			}
+		}));
 
-        LOGGER.info("Loaded " + parsedSlabfishTypes.size() + " Slabfish Types");
-        LOGGER.info("Loaded " + parsedSweaterTypes.size() + " Sweater Types");
-        LOGGER.info("Loaded " + parsedBackpackTypes.size() + " Backpack Types");
+		LOGGER.info("Loaded " + parsedSlabfishTypes.size() + " Slabfish Types");
+		LOGGER.info("Loaded " + parsedSweaterTypes.size() + " Sweater Types");
+		LOGGER.info("Loaded " + parsedBackpackTypes.size() + " Backpack Types");
 
-        this.slabfishTypes.clear();
-        this.slabfishTypes.put(DEFAULT_SLABFISH.getRegistryName(), DEFAULT_SLABFISH);
-        this.slabfishTypes.putAll(parsedSlabfishTypes);
+		this.slabfishTypes.clear();
+		this.slabfishTypes.put(DEFAULT_SLABFISH.getRegistryName(), DEFAULT_SLABFISH);
+		this.slabfishTypes.putAll(parsedSlabfishTypes);
 
-        this.sweaterTypes.clear();
-        this.sweaterTypes.put(EMPTY_SWEATER.getRegistryName(), EMPTY_SWEATER);
-        this.sweaterTypes.putAll(parsedSweaterTypes);
+		this.sweaterTypes.clear();
+		this.sweaterTypes.put(EMPTY_SWEATER.getRegistryName(), EMPTY_SWEATER);
+		this.sweaterTypes.putAll(parsedSweaterTypes);
 
-        this.backpackTypes.clear();
-        this.backpackTypes.putAll(parsedBackpackTypes);
+		this.backpackTypes.clear();
+		this.backpackTypes.putAll(parsedBackpackTypes);
 
-        if (EffectiveSide.get().isServer()) {
-            Environmental.PLAY.send(PacketDistributor.ALL.noArg(), new SSyncSlabfishTypeMessage());
-            Environmental.PLAY.send(PacketDistributor.ALL.noArg(), new SSyncSweaterTypeMessage());
-            Environmental.PLAY.send(PacketDistributor.ALL.noArg(), new SSyncBackpackTypeMessage());
-        }
-    }
+		if (EffectiveSide.get().isServer()) {
+			Environmental.PLAY.send(PacketDistributor.ALL.noArg(), new SSyncSlabfishTypeMessage());
+			Environmental.PLAY.send(PacketDistributor.ALL.noArg(), new SSyncSweaterTypeMessage());
+			Environmental.PLAY.send(PacketDistributor.ALL.noArg(), new SSyncBackpackTypeMessage());
+		}
+	}
 
-    @Override
-    public SlabfishType getSlabfishType(ResourceLocation registryName) {
-        return this.slabfishTypes.getOrDefault(registryName, DEFAULT_SLABFISH);
-    }
+	@Override
+	public Optional<SlabfishType> getSlabfishType(ResourceLocation registryName) {
+		return Optional.ofNullable(this.slabfishTypes.get(registryName));
+	}
 
-    @Override
-    public SweaterType getSweaterType(ResourceLocation registryName) {
-        return this.sweaterTypes.getOrDefault(registryName, EMPTY_SWEATER);
-    }
+	@Override
+	public Optional<SweaterType> getSweaterType(ResourceLocation registryName) {
+		return Optional.ofNullable(this.sweaterTypes.get(registryName));
+	}
 
-    @Override
-    public BackpackType getBackpackType(ResourceLocation registryName) {
-        return this.backpackTypes.getOrDefault(registryName, BROWN_BACKPACK);
-    }
+	@Override
+	public Optional<BackpackType> getBackpackType(ResourceLocation registryName) {
+		return Optional.ofNullable(this.backpackTypes.get(registryName));
+	}
 
-    @Override
-    public SlabfishType getSlabfishType(Predicate<SlabfishType> predicate, SlabfishConditionContext context) {
-        return this.slabfishTypes.values().stream().filter(slabfishType -> predicate.test(slabfishType) && slabfishType.test(context)).max(Comparator.comparingInt(SlabfishType::getPriority)).orElse(DEFAULT_SLABFISH);
-    }
+	@Override
+	public Optional<SlabfishType> getSlabfishType(Predicate<SlabfishType> predicate, SlabfishConditionContext context) {
+		return this.slabfishTypes.values().stream().filter(slabfishType -> slabfishType != DEFAULT_SLABFISH && predicate.test(slabfishType) && slabfishType.test(context)).max(Comparator.comparingInt(SlabfishType::getPriority));
+	}
 
-    @Override
-    public SweaterType getSweaterType(ItemStack stack) {
-        if (this.sweaterTypes.isEmpty())
-            return EMPTY_SWEATER;
-        return this.sweaterTypes.values().stream().filter(sweaterType -> sweaterType.test(stack)).findFirst().orElse(EMPTY_SWEATER);
-    }
+	@Override
+	public Optional<SweaterType> getSweaterType(ItemStack stack) {
+		return this.sweaterTypes.values().stream().filter(sweaterType -> sweaterType != EMPTY_SWEATER && sweaterType.test(stack)).findFirst();
+	}
 
-    @Override
-    public BackpackType getBackpackType(ItemStack stack) {
-        if (this.backpackTypes.isEmpty())
-            return BROWN_BACKPACK;
-        return this.backpackTypes.values().stream().filter(backpackType -> backpackType.test(stack)).findFirst().orElse(BROWN_BACKPACK);
-    }
+	@Override
+	public Optional<BackpackType> getBackpackType(ItemStack stack) {
+		return this.backpackTypes.values().stream().filter(backpackType -> backpackType.test(stack)).findFirst();
+	}
 
-    @Override
-    public SlabfishType getRandomSlabfishType(Predicate<SlabfishType> predicate, Random random) {
-        if (this.slabfishTypes.isEmpty())
-            return DEFAULT_SLABFISH;
-        SlabfishType[] slabfishTypes = this.slabfishTypes.values().stream().filter(predicate).toArray(SlabfishType[]::new);
-        return slabfishTypes.length == 0 ? DEFAULT_SLABFISH : slabfishTypes[random.nextInt(slabfishTypes.length)];
-    }
+	@Override
+	public Optional<SlabfishType> getRandomSlabfishType(Predicate<SlabfishType> predicate, Random random) {
+		SlabfishType[] slabfishTypes = this.slabfishTypes.values().stream().filter(predicate).toArray(SlabfishType[]::new);
+		return slabfishTypes.length == 0 ? Optional.empty() : Optional.of(slabfishTypes[random.nextInt(slabfishTypes.length)]);
+	}
 
-    @Override
-    public boolean hasSweaterType(ResourceLocation registryName) {
-        return this.sweaterTypes.containsKey(registryName);
-    }
+	@Override
+	public SlabfishType[] getAllSlabfishTypes() {
+		return this.slabfishTypes.values().toArray(new SlabfishType[0]);
+	}
 
-    @Override
-    public boolean hasBackpackType(ResourceLocation registryName) {
-        return this.backpackTypes.containsKey(registryName);
-    }
+	@Override
+	public SweaterType[] getAllSweaterTypes() {
+		return this.sweaterTypes.values().toArray(new SweaterType[0]);
+	}
 
-    @Override
-    public boolean hasSweaterType(ItemStack stack) {
-        if (this.sweaterTypes.isEmpty())
-            return false;
-        return this.sweaterTypes.values().stream().anyMatch(sweaterType -> sweaterType.test(stack));
-    }
-
-    @Override
-    public boolean hasBackpackType(ItemStack stack) {
-        if (this.backpackTypes.isEmpty())
-            return false;
-        return this.backpackTypes.values().stream().anyMatch(backpackType -> backpackType.test(stack));
-    }
-
-    @Override
-    public SlabfishType[] getAllSlabfishTypes() {
-        return this.slabfishTypes.values().toArray(new SlabfishType[0]);
-    }
-
-    @Override
-    public SweaterType[] getAllSweaterTypes() {
-        return this.sweaterTypes.values().toArray(new SweaterType[0]);
-    }
-
-    @Override
-    public BackpackType[] getAllBackpackTypes() {
-        return this.backpackTypes.values().toArray(new BackpackType[0]);
-    }
+	@Override
+	public BackpackType[] getAllBackpackTypes() {
+		return this.backpackTypes.values().toArray(new BackpackType[0]);
+	}
 }

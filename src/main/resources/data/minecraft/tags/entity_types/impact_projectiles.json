@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "environmental:mud_ball",
+    "environmental:duck_egg"
+  ]
+}

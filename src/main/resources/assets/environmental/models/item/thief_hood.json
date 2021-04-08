@@ -1,6 +1,7 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "environmental:item/thief_hood"
+        "layer0": "environmental:item/thief_hood",
+        "layer1": "environmental:item/thief_hood_overlay"
     }
 }
