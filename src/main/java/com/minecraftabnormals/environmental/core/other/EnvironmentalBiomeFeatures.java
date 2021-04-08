@@ -265,8 +265,6 @@ public class EnvironmentalBiomeFeatures {
 		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_CATTAILS_DENSE);
 		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_DUCKWEED_MARSH);
 		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.SEAGRASS_MARSH);
-		if (EnvironmentalConfig.COMMON.generateRice.get())
-			builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_RICE);
 	}
 
 	public static void removeSwampTrees(BiomeGenerationSettingsBuilder builder) {

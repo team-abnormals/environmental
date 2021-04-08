@@ -5,7 +5,6 @@ import com.minecraftabnormals.abnormals_core.core.util.DataUtil;
 import com.minecraftabnormals.environmental.common.entity.DuckEggEntity;
 import com.minecraftabnormals.environmental.common.entity.MudBallEntity;
 import com.minecraftabnormals.environmental.core.Environmental;
-import com.minecraftabnormals.environmental.core.EnvironmentalConfig;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
 import net.minecraft.block.Block;
@@ -34,7 +33,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Supplier;
 
 public class EnvironmentalCompat {
 	public static final Item TURKEY_EGG = ForgeRegistries.ITEMS.getValue(new ResourceLocation("autumnity", "turkey_egg"));
@@ -49,8 +47,6 @@ public class EnvironmentalCompat {
 	public static void registerLootInjectors() {
 		LootInjectionRegistry.LootInjector injector = new LootInjectionRegistry.LootInjector(Environmental.MOD_ID);
 		injector.addLootInjection(injector.buildLootPool("simple_dungeon", 1, 0), LootTables.CHESTS_SIMPLE_DUNGEON);
-		if (EnvironmentalConfig.COMMON.generateRice.get())
-			injector.addLootInjection(injector.buildLootPool("shipwreck_supply", 1, 0), LootTables.CHESTS_SHIPWRECK_SUPPLY);
 	}
 
 	public static void registerCompostables() {
@@ -75,8 +71,6 @@ public class EnvironmentalCompat {
 		DataUtil.registerCompostable(EnvironmentalItems.APPLE_PIE.get(), 1.0F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.CHERRY_CRATE.get(), 1.0F);
 
-		DataUtil.registerCompostable(EnvironmentalItems.RICE.get(), 0.30F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.RICE_SACK.get(), 1.0F);
 		DataUtil.registerCompostable(EnvironmentalItems.CATTAIL_SEEDS.get(), 0.30F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.CATTAIL_SEED_SACK.get(), 1.0F);
 
@@ -88,10 +82,10 @@ public class EnvironmentalCompat {
 
 		DataUtil.registerCompostable(EnvironmentalBlocks.TWIG_NEST.get(), 0.65F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.HAY_NEST.get(), 0.65F);
-		
+
 		DataUtil.registerCompostable(EnvironmentalItems.TRUFFLE.get(), 0.65F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.TRUFFLE_CRATE.get(), 1.0F);
-		
+
 		DataUtil.registerCompostable(EnvironmentalBlocks.CATTAIL_THATCH.get(), 0.65F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.CATTAIL_THATCH_SLAB.get(), 0.65F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.CATTAIL_THATCH_STAIRS.get(), 0.65F);
@@ -151,7 +145,6 @@ public class EnvironmentalCompat {
 		DataUtil.registerFlammable(EnvironmentalBlocks.YAK_HAIR_BLOCK.get(), 30, 60);
 		DataUtil.registerFlammable(EnvironmentalBlocks.YAK_HAIR_RUG.get(), 30, 60);
 
-		DataUtil.registerFlammable(EnvironmentalBlocks.RICE_SACK.get(), 30, 60);
 		DataUtil.registerFlammable(EnvironmentalBlocks.CATTAIL_SEED_SACK.get(), 30, 60);
 
 		DataUtil.registerFlammable(EnvironmentalBlocks.GRASS_THATCH.get(), 60, 20);
@@ -182,9 +175,9 @@ public class EnvironmentalCompat {
 		DataUtil.registerFlammable(EnvironmentalBlocks.CHICKEN_EGG_CRATE.get(), 5, 20);
 		DataUtil.registerFlammable(EnvironmentalBlocks.DUCK_EGG_CRATE.get(), 5, 20);
 		DataUtil.registerFlammable(EnvironmentalBlocks.TURTLE_EGG_CRATE.get(), 5, 20);
-		
+
 		DataUtil.registerFlammable(EnvironmentalBlocks.TRUFFLE_CRATE.get(), 5, 20);
-		
+
 		DataUtil.registerFlammable(EnvironmentalBlocks.WILLOW_LEAVES.get(), 30, 60);
 		DataUtil.registerFlammable(EnvironmentalBlocks.HANGING_WILLOW_LEAVES.get(), 30, 60);
 		DataUtil.registerFlammable(EnvironmentalBlocks.WILLOW_LOG.get(), 5, 5);
@@ -310,8 +303,6 @@ public class EnvironmentalCompat {
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.GIANT_TALL_GRASS.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.LARGE_LILY_PAD.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.GIANT_LILY_PAD.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.RICE.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.TALL_RICE.get(), RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.DUCKWEED.get(), RenderType.getCutout());
 
 		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CATTAIL_SPROUTS.get(), RenderType.getCutout());

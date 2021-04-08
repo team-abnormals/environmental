@@ -57,19 +57,7 @@ public class EnvironmentalItems {
 
 	public static final RegistryObject<Item> CATTAIL_SEEDS = HELPER.createItem("cattail_seeds", () -> new BlockNamedItem(EnvironmentalBlocks.CATTAIL_SPROUTS.get(), new Item.Properties().group(ItemGroup.MATERIALS)));
 	public static final RegistryObject<Item> DUCKWEED = HELPER.createItem("duckweed", () -> new LilyPadItem(EnvironmentalBlocks.DUCKWEED.get(), new Item.Properties().group(ItemGroup.DECORATIONS)));
-	public static final RegistryObject<Item> RICE = HELPER.createItem("rice", () -> new BlockItem(EnvironmentalBlocks.RICE.get(), new Item.Properties().group(ItemGroup.MISC)));
-	public static final RegistryObject<Item> SQUID_INK_RISOTTO = HELPER.createItem("squid_ink_risotto", () -> new SoupItem(new Item.Properties().maxStackSize(1).food(EnvironmentalFoods.SQUID_INK_RISOTTO).group(ItemGroup.FOOD)));
 
-	public static final RegistryObject<Item> COD_KELP_ROLL = HELPER.createItem("cod_kelp_roll", () -> new Item(new Item.Properties().food(EnvironmentalFoods.COD_KELP_ROLL).group(ItemGroup.FOOD)));
-	public static final RegistryObject<Item> KOI_KELP_ROLL = HELPER.createItem("koi_kelp_roll", () -> new Item(new Item.Properties().food(EnvironmentalFoods.KOI_KELP_ROLL).group(ItemGroup.FOOD)));
-	public static final RegistryObject<Item> TROPICAL_FISH_KELP_ROLL = HELPER.createItem("tropical_fish_kelp_roll", () -> new Item(new Item.Properties().food(EnvironmentalFoods.TROPICAL_FISH_KELP_ROLL).group(ItemGroup.FOOD)));
-	public static final RegistryObject<Item> CRAB_KELP_ROLL = HELPER.createCompatItem("quark", "crab_kelp_roll", new Item.Properties().food(EnvironmentalFoods.CRAB_KELP_ROLL), ItemGroup.FOOD);
-	public static final RegistryObject<Item> PIKE_KELP_ROLL = HELPER.createCompatItem("upgrade_aquatic", "pike_kelp_roll", new Item.Properties().food(EnvironmentalFoods.PIKE_KELP_ROLL), ItemGroup.FOOD);
-
-	public static final RegistryObject<Item> SALMON_RICE_CAKE = HELPER.createItem("salmon_rice_cake", () -> new Item(new Item.Properties().food(EnvironmentalFoods.SALMON_RICE_CAKE).group(ItemGroup.FOOD)));
-	public static final RegistryObject<Item> PUFFERFISH_RICE_CAKE = HELPER.createItem("pufferfish_rice_cake", () -> new Item(new Item.Properties().food(EnvironmentalFoods.PUFFERFISH_RICE_CAKE).group(ItemGroup.FOOD)));
-	public static final RegistryObject<Item> LIONFISH_RICE_CAKE = HELPER.createCompatItem("upgrade_aquatic", "lionfish_rice_cake", new Item.Properties().food(EnvironmentalFoods.LIONFISH_RICE_CAKE), ItemGroup.FOOD);
-	
 	public static final RegistryObject<Item> MUSIC_DISC_LEAVING_HOME = HELPER.createItem("music_disc_leaving_home", () -> new AbnormalsMusicDiscItem(6, EnvironmentalSounds.LEAVING_HOME, new Item.Properties().maxStackSize(1).group(ItemGroup.MISC).rarity(Rarity.RARE)));
 	public static final RegistryObject<Item> MUSIC_DISC_SLABRAVE = HELPER.createItem("music_disc_slabrave", () -> new AbnormalsMusicDiscItem(15, EnvironmentalSounds.SLABRAVE, new Item.Properties().maxStackSize(1).group(ItemGroup.MISC).rarity(Rarity.RARE)));
 

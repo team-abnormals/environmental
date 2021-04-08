@@ -14,16 +14,13 @@
       "item": "environmental:truffle"
     },
     {
-      "tag": "forge:crops/rice"
-    },
-    {
-      "tag": "forge:crops/rice"
+      "tag": "forge:milk"
     },
     {
       "item": "minecraft:bowl"
     }
   ],
   "result": {
-  "item": "environmental:truffle_puree"
+    "item": "environmental:truffle_puree"
   }
 }

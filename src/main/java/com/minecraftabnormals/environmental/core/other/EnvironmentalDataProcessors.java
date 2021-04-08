@@ -4,7 +4,6 @@ import com.minecraftabnormals.abnormals_core.common.world.storage.tracking.DataP
 import com.minecraftabnormals.abnormals_core.common.world.storage.tracking.TrackedData;
 import com.minecraftabnormals.abnormals_core.common.world.storage.tracking.TrackedDataManager;
 import com.minecraftabnormals.environmental.core.Environmental;
-
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 

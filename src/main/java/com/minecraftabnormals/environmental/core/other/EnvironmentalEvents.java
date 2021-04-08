@@ -18,7 +18,6 @@ import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEntities;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalParticles;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalSounds;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -29,11 +28,7 @@ import net.minecraft.entity.monster.HuskEntity;
 import net.minecraft.entity.monster.SkeletonEntity;
 import net.minecraft.entity.monster.StrayEntity;
 import net.minecraft.entity.monster.ZombieEntity;
-import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.MooshroomEntity;
-import net.minecraft.entity.passive.OcelotEntity;
-import net.minecraft.entity.passive.PigEntity;
-import net.minecraft.entity.passive.WolfEntity;
+import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PotionEntity;
 import net.minecraft.entity.projectile.ProjectileItemEntity;
@@ -78,13 +73,13 @@ import java.util.*;
 public class EnvironmentalEvents {
 
 	@SubscribeEvent
-	public static void onEvent(PlayerEvent.BreakSpeed event) {
+	public static void onPlayerBreak(PlayerEvent.BreakSpeed event) {
 		if (event.getState().getBlock() instanceof HangingWisteriaLeavesBlock && event.getPlayer().getHeldItemMainhand().getItem() == Items.SHEARS)
 			event.setNewSpeed(15.0F);
 	}
 
 	@SubscribeEvent
-	public static void onEvent(LivingSpawnEvent.CheckSpawn event) {
+	public static void onLivingSpawn(LivingSpawnEvent.CheckSpawn event) {
 		Entity entity = event.getEntity();
 		IWorld world = event.getWorld();
 		Random random = world.getRandom();
@@ -158,7 +153,7 @@ public class EnvironmentalEvents {
 	}
 
 	@SubscribeEvent
-	public static void onEvent(final ProjectileImpactEvent.Throwable event) {
+	public static void onProjectileImpact(final ProjectileImpactEvent.Throwable event) {
 		ThrowableEntity projectileEntity = event.getThrowable();
 
 		if (projectileEntity instanceof PotionEntity) {
@@ -170,7 +165,7 @@ public class EnvironmentalEvents {
 			if (potion == Potions.WATER && list.isEmpty()) {
 				AxisAlignedBB axisalignedbb = potionEntity.getBoundingBox().grow(2.0D, 1.0D, 2.0D);
 				List<SlabfishEntity> slabs = potionEntity.world.getEntitiesWithinAABB(SlabfishEntity.class, axisalignedbb);
-				if (slabs != null && slabs.size() > 0) {
+				if (!slabs.isEmpty()) {
 					for (SlabfishEntity slabfish : slabs) {
 						slabfish.setSlabfishOverlay(SlabfishOverlay.NONE);
 					}
@@ -197,7 +192,7 @@ public class EnvironmentalEvents {
 	protected static final Set<Block> DIRT_SPREADABLES = Sets.newHashSet(Blocks.GRASS_BLOCK, Blocks.MYCELIUM);
 
 	@SubscribeEvent
-	public static void onEvent(RightClickBlock event) {
+	public static void onRightClickBlock(RightClickBlock event) {
 		World world = event.getWorld();
 		BlockPos pos = event.getPos();
 		BlockState state = world.getBlockState(pos);
@@ -222,7 +217,7 @@ public class EnvironmentalEvents {
 				event.setCanceled(true);
 			}
 		} else if (event.getFace() != Direction.DOWN) {
-			if (item instanceof ShovelItem && !player.isSpectator() && world.isAirBlock(pos.up())){
+			if (item instanceof ShovelItem && !player.isSpectator() && world.isAirBlock(pos.up())) {
 				if (state.isIn(Blocks.PODZOL) || state.isIn(Blocks.MYCELIUM)) {
 					world.playSound(player, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
 					stack.damageItem(1, player, (damage) -> {
@@ -237,7 +232,7 @@ public class EnvironmentalEvents {
 	}
 
 	@SubscribeEvent
-	public static void onEvent(PlayerInteractEvent.EntityInteract event) {
+	public static void onEntityInteract(PlayerInteractEvent.EntityInteract event) {
 		ItemStack stack = event.getItemStack();
 		Entity target = event.getTarget();
 		World world = event.getWorld();
@@ -251,7 +246,8 @@ public class EnvironmentalEvents {
 				}
 			}
 		}
-		else if (target instanceof PigEntity && stack.getItem() == Items.GOLDEN_CARROT) {
+
+		if (target instanceof PigEntity && stack.getItem() == Items.GOLDEN_CARROT) {
 			if (target.isAlive() && !((PigEntity) target).isChild()) {
 				IDataManager data = ((IDataManager) target);
 				if (data.getValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME) == 0) {
@@ -259,7 +255,7 @@ public class EnvironmentalEvents {
 					if (!event.getPlayer().isCreative()) stack.shrink(1);
 
 					if (world.isRemote()) {
-						for(int i = 0; i < 7; ++i) {
+						for (int i = 0; i < 7; ++i) {
 							double d0 = random.nextGaussian() * 0.02D;
 							double d1 = random.nextGaussian() * 0.02D;
 							double d2 = random.nextGaussian() * 0.02D;
@@ -275,7 +271,7 @@ public class EnvironmentalEvents {
 	}
 
 	@SubscribeEvent
-	public static void onEvent(LivingDeathEvent event) {
+	public static void onLivingDeath(LivingDeathEvent event) {
 		LivingEntity entity = event.getEntityLiving();
 		World world = entity.getEntityWorld();
 		Random rand = new Random();
@@ -321,7 +317,7 @@ public class EnvironmentalEvents {
 	}
 
 	@SubscribeEvent
-	public static void onEvent(EnteringChunk event) {
+	public static void onEnterChunk(EnteringChunk event) {
 		Entity entity = event.getEntity();
 		if (entity instanceof IEggLayingEntity && entity instanceof AnimalEntity) {
 			AnimalEntity eggLayer = (AnimalEntity) entity;
@@ -342,32 +338,29 @@ public class EnvironmentalEvents {
 	}
 
 	@SubscribeEvent
-	public static void onEvent(LivingEvent.LivingUpdateEvent event) {
+	public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
 		Entity entity = event.getEntity();
 		World world = entity.getEntityWorld();
 		Random random = world.getRandom();
 
 		if (entity instanceof PigEntity && entity.isAlive()) {
 			IDataManager data = ((IDataManager) entity);
-			int trufflehuntingtime = data.getValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME);
-			BlockPos trufflepos = data.getValue(EnvironmentalDataProcessors.TRUFFLE_POS);
+			int huntingTime = data.getValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME);
+			BlockPos trufflePos = data.getValue(EnvironmentalDataProcessors.TRUFFLE_POS);
 
-			if (trufflehuntingtime == 0 || (data.getValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET) && world.getBlockState(trufflepos).getBlock() != EnvironmentalBlocks.BURIED_TRUFFLE.get())) {
+			if (huntingTime == 0 || (data.getValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET) && world.getBlockState(trufflePos).getBlock() != EnvironmentalBlocks.BURIED_TRUFFLE.get())) {
 				data.setValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET, false);
-
-				if (trufflehuntingtime > 0)
-					data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, Math.max(-400, -trufflehuntingtime));
-			}
-			else {
-				if (trufflehuntingtime > 0) {
-					data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, trufflehuntingtime - 1);
-					if (!world.isRemote() && data.getValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET) && trufflehuntingtime % 30 == 0) {
+				if (huntingTime > 0)
+					data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, Math.max(-400, -huntingTime));
+			} else {
+				if (huntingTime > 0) {
+					data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, huntingTime - 1);
+					if (!world.isRemote() && data.getValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET) && huntingTime % 30 == 0) {
 						entity.playSound(EnvironmentalSounds.ENTITY_PIG_SNIFF.get(), 1.0F, (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
 					}
-				}
-				else if (trufflehuntingtime < 0) {
-					data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, trufflehuntingtime + 1);
-					if (world.isRemote() && data.getValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET) && trufflehuntingtime % 10 == 0) {
+				} else if (huntingTime < 0) {
+					data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, huntingTime + 1);
+					if (world.isRemote() && data.getValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET) && huntingTime % 10 == 0) {
 						double d0 = random.nextGaussian() * 0.02D;
 						double d1 = random.nextGaussian() * 0.02D;
 						double d2 = random.nextGaussian() * 0.02D;

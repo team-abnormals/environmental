@@ -3,17 +3,10 @@ package com.minecraftabnormals.environmental.core.registry;
 import com.minecraftabnormals.abnormals_core.common.potion.AbnormalsEffect;
 import com.minecraftabnormals.environmental.common.potion.PanicEffect;
 import com.minecraftabnormals.environmental.core.Environmental;
-
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.item.Items;
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.EffectType;
-import net.minecraft.potion.Effects;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionBrewing;
-import net.minecraft.potion.Potions;
+import net.minecraft.potion.*;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;

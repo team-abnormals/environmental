@@ -45,7 +45,6 @@ public class EnvironmentalFeatures {
 
 	public static final RegistryObject<Feature<NoFeatureConfig>> CATTAILS = FEATURES.register("cattails", () -> new CattailsFeature(NoFeatureConfig.field_236558_a_));
 	public static final RegistryObject<Feature<NoFeatureConfig>> DENSE_CATTAILS = FEATURES.register("dense_cattails", () -> new DenseCattailsFeature(NoFeatureConfig.field_236558_a_));
-	public static final RegistryObject<Feature<NoFeatureConfig>> RICE = FEATURES.register("rice", () -> new RiceFeature(NoFeatureConfig.field_236558_a_));
 
 	public static final RegistryObject<Feature<NoFeatureConfig>> CHICKEN_NEST = FEATURES.register("chicken_nest", () -> new ChickenNestFeature(NoFeatureConfig.field_236558_a_));
 	public static final RegistryObject<Feature<NoFeatureConfig>> DUCK_NEST = FEATURES.register("duck_nest", () -> new DuckNestFeature(NoFeatureConfig.field_236558_a_));
@@ -150,7 +149,6 @@ public class EnvironmentalFeatures {
 		public static final ConfiguredFeature<?, ?> PATCH_GRASS_MARSH = Feature.RANDOM_PATCH.withConfiguration(Features.Configs.GRASS_PATCH_CONFIG).withPlacement(Features.Placements.PATCH_PLACEMENT.func_242731_b(5));
 		public static final ConfiguredFeature<?, ?> PATCH_WATERLILLY_MARSH = Feature.RANDOM_PATCH.withConfiguration(Configs.LILY_PAD_CONFIG).withPlacement(Features.Placements.PATCH_PLACEMENT.func_242731_b(1));
 		public static final ConfiguredFeature<?, ?> PATCH_TALL_GRASS_MARSH = Feature.RANDOM_PATCH.withConfiguration(Features.Configs.TALL_GRASS_CONFIG).withPlacement(Features.Placements.PATCH_PLACEMENT.func_242731_b(128));
-		public static final ConfiguredFeature<?, ?> PATCH_RICE = EnvironmentalFeatures.RICE.get().withConfiguration(new NoFeatureConfig()).withPlacement(Features.Placements.PATCH_PLACEMENT.func_242731_b((2)));
 		public static final ConfiguredFeature<?, ?> PATCH_DUCKWEED_SWAMP = Feature.RANDOM_PATCH.withConfiguration(Configs.DUCKWEED_CONFIG).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.COUNT_EXTRA.configure(new AtSurfaceWithExtraConfig(0, 0.15F, 1)));
 		public static final ConfiguredFeature<?, ?> PATCH_DUCKWEED_MARSH = Feature.RANDOM_PATCH.withConfiguration(Configs.DUCKWEED_CONFIG).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.COUNT_EXTRA.configure(new AtSurfaceWithExtraConfig(0, 0.15F, 1)));
 		public static final ConfiguredFeature<?, ?> PATCH_MYCELIUM_SPROUTS = Feature.RANDOM_PATCH.withConfiguration(Configs.MYCELIUM_SPROUTS_CONFIG).withPlacement(Features.Placements.PATCH_PLACEMENT).withPlacement(Features.Placements.PATCH_PLACEMENT.func_242731_b(5));
@@ -240,7 +238,6 @@ public class EnvironmentalFeatures {
 			register("patch_grass_marsh", PATCH_GRASS_MARSH);
 			register("patch_waterlilly_marsh", PATCH_WATERLILLY_MARSH);
 			register("patch_tall_grass_marsh", PATCH_TALL_GRASS_MARSH);
-			register("patch_rice", PATCH_RICE);
 			register("patch_duckweed_swamp", PATCH_DUCKWEED_SWAMP);
 			register("patch_duckweed_marsh", PATCH_DUCKWEED_MARSH);
 			register("patch_mycelium_sprouts", PATCH_MYCELIUM_SPROUTS);

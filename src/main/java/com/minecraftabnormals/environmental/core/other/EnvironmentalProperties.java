@@ -39,7 +39,6 @@ public class EnvironmentalProperties {
 	public static final AbstractBlock.Properties WISTERIA_SAPLING = AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0.0F).sound(SoundType.PLANT);
 
 	public static final AbstractBlock.Properties CATTAIL = AbstractBlock.Properties.create(Material.TALL_PLANTS).hardnessAndResistance(0.0F).doesNotBlockMovement().tickRandomly().sound(SoundType.WET_GRASS);
-	public static final AbstractBlock.Properties RICE = AbstractBlock.Properties.create(Material.TALL_PLANTS).hardnessAndResistance(0.0F).doesNotBlockMovement().tickRandomly().sound(SoundType.CROP);
 
 	public static final AbstractBlock.Properties DUCKWEED = AbstractBlock.Properties.create(Material.PLANTS).hardnessAndResistance(0.0F).doesNotBlockMovement().sound(SoundType.CROP);
 	public static final AbstractBlock.Properties MYCELIUM_SPROUTS = AbstractBlock.Properties.create(Material.TALL_PLANTS, MaterialColor.PURPLE).doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.NETHER_SPROUT);

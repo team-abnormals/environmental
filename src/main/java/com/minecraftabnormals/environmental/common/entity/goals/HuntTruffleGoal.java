@@ -1,14 +1,10 @@
 package com.minecraftabnormals.environmental.common.entity.goals;
 
-import java.util.EnumSet;
-import java.util.List;
-
 import com.google.common.collect.Lists;
 import com.minecraftabnormals.abnormals_core.common.world.storage.tracking.IDataManager;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalDataProcessors;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalTags;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.ai.goal.Goal;
@@ -17,6 +13,9 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.Tags;
+
+import java.util.EnumSet;
+import java.util.List;
 
 public class HuntTruffleGoal extends Goal {
 	private final PigEntity pig;

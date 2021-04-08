@@ -1,11 +1,7 @@
 package com.minecraftabnormals.environmental.common.entity;
 
 import com.minecraftabnormals.abnormals_core.core.api.IBucketableEntity;
-import com.minecraftabnormals.environmental.common.entity.goals.SlabbyBreedGoal;
-import com.minecraftabnormals.environmental.common.entity.goals.SlabbyFindEffigyGoal;
-import com.minecraftabnormals.environmental.common.entity.goals.SlabbyFollowParentGoal;
-import com.minecraftabnormals.environmental.common.entity.goals.SlabbyGrabItemGoal;
-import com.minecraftabnormals.environmental.common.entity.goals.SlabbyPraiseEffigyGoal;
+import com.minecraftabnormals.environmental.common.entity.goals.*;
 import com.minecraftabnormals.environmental.common.entity.util.SlabfishOverlay;
 import com.minecraftabnormals.environmental.common.entity.util.SlabfishRarity;
 import com.minecraftabnormals.environmental.common.inventory.SlabfishInventory;
@@ -55,7 +51,6 @@ import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ItemParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.pathfinding.PathNodeType;
-import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.ItemTags;
@@ -303,12 +298,12 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 			this.particleCloud(ParticleTypes.COMPOSTER);
 			return ActionResultType.SUCCESS;
 
-		} else if (Ingredient.fromTag(EnvironmentalTags.Items.SUSHI).test(stack)) {
-			this.consumeItemFromStack(player, stack);
-			this.playBurpSound();
-			this.addPotionEffect(new EffectInstance(Effects.SPEED, 3600, 2, true, true));
-			this.particleCloud(ParticleTypes.CLOUD);
-			return ActionResultType.SUCCESS;
+//		} else if (Ingredient.fromTag(EnvironmentalTags.Items.SUSHI).test(stack)) {
+//			this.consumeItemFromStack(player, stack);
+//			this.playBurpSound();
+//			this.addPotionEffect(new EffectInstance(Effects.SPEED, 3600, 2, true, true));
+//			this.particleCloud(ParticleTypes.CLOUD);
+//			return ActionResultType.SUCCESS;
 
 		} else if (Ingredient.fromTag(EnvironmentalTags.Items.SLABFISH_FOODS).test(stack)) {
 			stack.onItemUseFinish(this.world, this);

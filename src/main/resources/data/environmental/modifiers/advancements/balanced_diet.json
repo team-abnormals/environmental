@@ -62,54 +62,6 @@
               }
             }
           },
-          "environmental:squid_ink_risotto": {
-            "trigger": "minecraft:consume_item",
-            "conditions": {
-              "item": {
-                "item": "environmental:squid_ink_risotto"
-              }
-            }
-          },
-          "environmental:cod_kelp_roll": {
-            "trigger": "minecraft:consume_item",
-            "conditions": {
-              "item": {
-                "item": "environmental:cod_kelp_roll"
-              }
-            }
-          },
-          "environmental:tropical_fish_kelp_roll": {
-            "trigger": "minecraft:consume_item",
-            "conditions": {
-              "item": {
-                "item": "environmental:tropical_fish_kelp_roll"
-              }
-            }
-          },
-          "environmental:salmon_rice_cake": {
-            "trigger": "minecraft:consume_item",
-            "conditions": {
-              "item": {
-                "item": "environmental:salmon_rice_cake"
-              }
-            }
-          },
-          "environmental:pufferfish_rice_cake": {
-            "trigger": "minecraft:consume_item",
-            "conditions": {
-              "item": {
-                "item": "environmental:pufferfish_rice_cake"
-              }
-            }
-          },
-          "environmental:fried_egg": {
-            "trigger": "minecraft:consume_item",
-            "conditions": {
-              "item": {
-                "item": "environmental:fried_egg"
-              }
-            }
-          },
           "environmental:scrambled_eggs": {
             "trigger": "minecraft:consume_item",
             "conditions": {
@@ -148,21 +100,6 @@
           ],
           [
             "environmental:cooked_venison"
-          ],
-          [
-            "environmental:squid_ink_risotto"
-          ],
-          [
-            "environmental:cod_kelp_roll"
-          ],
-          [
-            "environmental:tropical_fish_kelp_roll"
-          ],
-          [
-            "environmental:salmon_rice_cake"
-          ],
-          [
-            "environmental:pufferfish_rice_cake"
           ],
           [
             "environmental:fried_egg"

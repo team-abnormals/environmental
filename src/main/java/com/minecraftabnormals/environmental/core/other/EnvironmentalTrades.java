@@ -3,7 +3,6 @@ package com.minecraftabnormals.environmental.core.other;
 import com.minecraftabnormals.abnormals_core.core.util.TradeUtil;
 import com.minecraftabnormals.abnormals_core.core.util.TradeUtil.AbnormalsTrade;
 import com.minecraftabnormals.environmental.core.Environmental;
-import com.minecraftabnormals.environmental.core.EnvironmentalConfig;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalVillagers;
@@ -50,9 +49,6 @@ public class EnvironmentalTrades {
 				new AbnormalsTrade(1, EnvironmentalBlocks.PURPLE_HIBISCUS.get().asItem(), 1, 12, 1)
 		);
 
-		if (EnvironmentalConfig.COMMON.generateRice.get())
-			TradeUtil.addWandererTrades(event, new AbnormalsTrade(1, EnvironmentalItems.RICE.get(), 1, 12, 1));
-
 		TradeUtil.addRareWandererTrades(event,
 				new AbnormalsTrade(5, EnvironmentalItems.SLABFISH_BUCKET.get(), 1, 4, 1),
 				new AbnormalsTrade(24, EnvironmentalItems.WANDERER_BOOTS.get(), 1, 1, 1)
@@ -61,35 +57,10 @@ public class EnvironmentalTrades {
 
 	@SubscribeEvent
 	public static void onVillagerTradesEvent(VillagerTradesEvent event) {
-		if (EnvironmentalConfig.COMMON.generateRice.get())
-			TradeUtil.addVillagerTrades(event, VillagerProfession.FARMER, TradeUtil.NOVICE, new AbnormalsTrade(EnvironmentalItems.RICE.get(), 23, 1, 6, 1));
-
 		TradeUtil.addVillagerTrades(event, VillagerProfession.FARMER, TradeUtil.APPRENTICE,
 				new AbnormalsTrade(1, EnvironmentalItems.CHERRIES.get(), 6, 16, 5),
 				new AbnormalsTrade(1, EnvironmentalItems.APPLE_PIE.get(), 5, 12, 5),
 				new AbnormalsTrade(1, EnvironmentalItems.CHERRY_PIE.get(), 6, 12, 5)
-		);
-
-		TradeUtil.addVillagerTrades(event, VillagerProfession.FISHERMAN, TradeUtil.APPRENTICE,
-				new AbnormalsTrade(5, EnvironmentalItems.COD_KELP_ROLL.get(), 2, 6, 15),
-				new AbnormalsTrade(5, EnvironmentalItems.SALMON_RICE_CAKE.get(), 2, 6, 15)
-		);
-		TradeUtil.addVillagerTrades(event, VillagerProfession.FISHERMAN, TradeUtil.EXPERT,
-				new AbnormalsTrade(3, EnvironmentalItems.PUFFERFISH_RICE_CAKE.get(), 4, 5, 30)
-		);
-		TradeUtil.addVillagerTrades(event, VillagerProfession.FISHERMAN, TradeUtil.MASTER,
-				new AbnormalsTrade(3, EnvironmentalItems.TROPICAL_FISH_KELP_ROLL.get(), 4, 5, 30),
-				new AbnormalsTrade(3, EnvironmentalItems.KOI_KELP_ROLL.get(), 5, 5, 30)
-		);
-
-		TradeUtil.addCompatVillagerTrades(event, "upgrade_aquatic", VillagerProfession.FISHERMAN, TradeUtil.EXPERT,
-				new AbnormalsTrade(4, EnvironmentalItems.PIKE_KELP_ROLL.get(), 1, 3, 25)
-		);
-		TradeUtil.addCompatVillagerTrades(event, "upgrade_aquatic", VillagerProfession.FISHERMAN, TradeUtil.MASTER,
-				new AbnormalsTrade(3, EnvironmentalItems.LIONFISH_RICE_CAKE.get(), 4, 5, 30)
-		);
-		TradeUtil.addCompatVillagerTrades(event, "quark", VillagerProfession.FISHERMAN, TradeUtil.EXPERT,
-				new AbnormalsTrade(4, EnvironmentalItems.CRAB_KELP_ROLL.get(), 1, 3, 25)
 		);
 
 		TradeUtil.addVillagerTrades(event, VillagerProfession.MASON, TradeUtil.MASTER,

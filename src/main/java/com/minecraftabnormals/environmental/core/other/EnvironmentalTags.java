@@ -1,7 +1,6 @@
 package com.minecraftabnormals.environmental.core.other;
 
 import com.minecraftabnormals.environmental.core.Environmental;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
@@ -17,8 +16,6 @@ public class EnvironmentalTags {
 	}
 	
 	public static class Items {
-		public static final ITag.INamedTag<Item> SUSHI = createWrapperItemTag("sushi");
-
 		public static final ITag.INamedTag<Item> DUCK_BREEDING_ITEMS = createWrapperItemTag("duck_breeding_items");
 		public static final ITag.INamedTag<Item> DEER_BREEDING_ITEMS = createWrapperItemTag("deer_breeding_items");
 		public static final ITag.INamedTag<Item> DEER_TEMPTATION_ITEMS = createWrapperItemTag("deer_temptation_items");
