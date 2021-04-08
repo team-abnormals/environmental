@@ -57,6 +57,7 @@ import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.entity.EntityEvent.EnteringChunk;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
+import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
@@ -311,6 +312,23 @@ public class EnvironmentalEvents {
 
 						world.addEntity(ghost);
 					}
+				}
+			}
+		}
+	}
+
+	@SubscribeEvent
+	public static void onBabySpawn(BabyEntitySpawnEvent event) {
+		if (event.getParentA() instanceof PigEntity && event.getParentB() instanceof PigEntity) {
+			PigEntity pig = (PigEntity) event.getParentA();
+			World world = pig.getEntityWorld();
+			int piglets = world.rand.nextInt(4);
+			for (int i = 0; i < piglets; ++i) {
+				PigEntity baby = EntityType.PIG.create(world);
+				if (baby != null) {
+					baby.setChild(true);
+					baby.setLocationAndAngles(pig.getPosX(), pig.getPosY(), pig.getPosZ(), 0.0F, 0.0F);
+					world.addEntity(baby);
 				}
 			}
 		}
