@@ -288,10 +288,6 @@
 	"block.environmental.yak_hair_block": "Bloque de pelo de yak",
 	"block.environmental.yak_hair_rug": "Tapete de pelo de yak",
 
-	"block.environmental.rice_sack": "Saco de arroz",
-	"block.environmental.rice": "Arroz",
-	"block.environmental.tall_rice": "Arroz",
-
 	"block.environmental.duckweed": "Lenteja de agua",
 	"block.environmental.duckweed_thatch": "Paja de lenteja de agua",
 	"block.environmental.duckweed_thatch_slab": "Baldosa de paja de lenteja de agua",
@@ -326,6 +322,7 @@
 	"item.environmental.deer_spawn_egg": "Generar ciervo",
 	"item.environmental.yak_spawn_egg": "Generar yak",
 	"item.environmental.koi_spawn_egg": "Generar koi",
+	"item.environmental.fennec_fox_spawn_egg": "Generar zorro fénec",
 
 	"item.environmental.yak_hair": "Pelo de yak",
 	"item.environmental.yak_pants": "Pantalones de yak",
@@ -343,19 +340,6 @@
 	"item.environmental.scrambled_eggs": "Huevos revueltos",
 
 	"item.environmental.koi": "Koi",
-
-	"item.environmental.cod_kelp_roll": "Rollo de algas de bacalao",
-	"item.environmental.tropical_fish_kelp_roll": "Rollo de algas de pez tropical",
-	"item.environmental.koi_kelp_roll": "Rollo de algas de koi",
-	"item.environmental.crab_kelp_roll": "Rollo de algas de cangrejo",
-	"item.environmental.pike_kelp_roll": "Rollo de algas de lucio",
-
-	"item.environmental.salmon_rice_cake": "Torta de arroz de salmón",
-	"item.environmental.pufferfish_rice_cake": "Torta de arroz de pez globo",
-	"item.environmental.lionfish_rice_cake": "Torta de arroz de pez león",
-
-	"item.environmental.squid_ink_risotto": "Risotto de tinta de calamar",
-
 	"item.environmental.slabfish_bucket": "Balde con slabfish",
 	"item.environmental.koi_bucket": "Balde con koi",
 	"item.environmental.bottled_butterfly": "Botella con mariposa",
@@ -388,6 +372,7 @@
 	"entity.environmental.deer": "Ciervo",
 	"entity.environmental.yak": "Yak",
 	"entity.environmental.koi": "Koi",
+	"entity.environmental.fennec_fox": "Zorro fénec",
 
 	"entity.environmental.duck_egg": "Huevo de pato lanzado",
 	"entity.environmental.mud_ball": "Bola de barro",
