@@ -11,11 +11,8 @@ import com.minecraftabnormals.environmental.core.other.EnvironmentalDataSerializ
 import com.minecraftabnormals.environmental.core.registry.*;
 import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.inventory.container.PlayerContainer;
-import net.minecraft.item.IDyeableArmorItem;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
@@ -84,7 +81,6 @@ public class Environmental {
 			SlabfishSpriteUploader.init(bus);
 			bus.addListener(this::setupClient);
 			bus.addListener(this::stitchTextures);
-			bus.addListener(this::registerItemColors);
 		});
 
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, EnvironmentalConfig.COMMON_SPEC);
@@ -93,7 +89,6 @@ public class Environmental {
 	private void setupCommon(final FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
 			EnvironmentalCompat.registerCompat();
-			EnvironmentalEntities.registerAttributes();
 			EnvironmentalEntities.registerSpawns();
 			EnvironmentalBiomes.addBiomeTypes();
 			EnvironmentalBiomes.addBiomesToGeneration();
@@ -139,13 +134,6 @@ public class Environmental {
 			event.addSprite(new ResourceLocation(Environmental.MOD_ID, "item/slabfish_backpack_slot"));
 			event.addSprite(new ResourceLocation(Environmental.MOD_ID, "item/slabfish_backpack_type_slot"));
 		}
-	}
-
-	@OnlyIn(Dist.CLIENT)
-	private void registerItemColors(ColorHandlerEvent.Item event) {
-		event.getItemColors().register(
-				(stack, color) -> color > 0 ? -1 : ((IDyeableArmorItem) stack.getItem()).getColor(stack),
-				EnvironmentalItems.THIEF_HOOD.get(), EnvironmentalItems.HEALER_POUCH.get(), EnvironmentalItems.ARCHITECT_BELT.get(), EnvironmentalItems.WANDERER_BOOTS.get());
 	}
 
 	@SubscribeEvent
