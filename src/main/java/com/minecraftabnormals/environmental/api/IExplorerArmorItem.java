@@ -8,8 +8,9 @@ import net.minecraft.world.World;
 
 public interface IExplorerArmorItem {
 	String getUsesTag();
-	String getDescriptionString();
+
 	int getIncreaseForUses(int uses);
+
 	int[] getLevelCaps();
 
 	default int levelUp(ItemStack stack, LivingEntity entity) {

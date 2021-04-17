@@ -13,10 +13,7 @@ import net.minecraft.item.DyeableArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.*;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -72,7 +69,7 @@ public abstract class ExplorerArmorItem extends DyeableArmorItem implements IExp
 		else counter = new StringTextComponent(String.valueOf(uses));
 		counter.mergeStyle(getFormattingForLevel(uses));
 
-		IFormattableTextComponent description = (new StringTextComponent(" " + this.getDescriptionString())).mergeStyle(TextFormatting.GRAY);
+		IFormattableTextComponent description = new StringTextComponent(" ").append(this.getDescription()).mergeStyle(TextFormatting.GRAY);
 		tooltip.add(counter.append(description));
 	}
 
@@ -93,6 +90,10 @@ public abstract class ExplorerArmorItem extends DyeableArmorItem implements IExp
 
 	public int getUses(CompoundNBT nbt) {
 		return nbt.getInt(this.getUsesTag());
+	}
+
+	public IFormattableTextComponent getDescription() {
+		return new TranslationTextComponent(this.getTranslationKey() + ".desc");
 	}
 
 	public TextFormatting getFormattingForLevel(int uses) {

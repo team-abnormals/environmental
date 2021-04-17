@@ -311,10 +311,13 @@
 	"block.environmental.truffle_crate": "Truffle Crate",
 		
 	"item.environmental.wanderer_boots": "Wanderer's Boots",
+	"item.environmental.wanderer_boots.desc": "Blocks Travelled",
 	"item.environmental.architect_belt": "Architect's Belt",
+	"item.environmental.architect_belt.desc": "Blocks Placed",
 	"item.environmental.healer_pouch": "Healer's Pouch",
+	"item.environmental.healer_pouch.desc": "Adrenaline Boosts",
 	"item.environmental.thief_hood": "Thief's Hood",
-	"item.environmental.executioner_cleaver": "Executioner's Cleaver",
+	"item.environmental.thief_hood.desc": "Monsters Slain",
 	
 	"item.environmental.slabfish_spawn_egg": "Slabfish Spawn Egg",
 	"item.environmental.butterfly_spawn_egg": "Butterfly Spawn Egg",
@@ -368,7 +371,7 @@
   
 	"entity.environmental.slabfish": "Slabfish",
 	"entity.environmental.duck": "Duck",
-	"entity.environmental.butterfly": "Butterfly",
+	"entity.environmental.butterfly": "Butterfly",M
 	"entity.environmental.deer": "Deer",
 	"entity.environmental.yak": "Yak",
 	"entity.environmental.koi": "Koi",

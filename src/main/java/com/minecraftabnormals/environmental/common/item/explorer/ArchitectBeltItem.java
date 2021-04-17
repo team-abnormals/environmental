@@ -66,11 +66,6 @@ public class ArchitectBeltItem extends ExplorerArmorItem {
 	}
 
 	@Override
-	public String getDescriptionString() {
-		return "blocks placed";
-	}
-
-	@Override
 	public int[] getLevelCaps() {
 		return new int[]{0, 100, 500, 1000, 2500};
 	}

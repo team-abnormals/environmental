@@ -60,11 +60,6 @@ public class WandererBootsItem extends ExplorerArmorItem {
 	}
 
 	@Override
-	public String getDescriptionString() {
-		return "meters travelled";
-	}
-
-	@Override
 	public int[] getLevelCaps() {
 		return new int[]{0, 1000, 5000, 10000, 50000};
 	}

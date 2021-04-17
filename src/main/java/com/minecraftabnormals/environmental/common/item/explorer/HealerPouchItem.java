@@ -63,11 +63,6 @@ public class HealerPouchItem extends ExplorerArmorItem {
 	}
 
 	@Override
-	public String getDescriptionString() {
-		return "adrenaline boosts";
-	}
-
-	@Override
 	public int[] getLevelCaps() {
 		return new int[]{0, 10, 50, 100, 250};
 	}

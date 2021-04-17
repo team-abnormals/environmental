@@ -73,7 +73,7 @@ public class ThiefHoodItem extends ExplorerArmorItem {
 			LivingEntity attacker = (LivingEntity) event.getSource().getTrueSource();
 			ItemStack stack = attacker.getItemStackFromSlot(EquipmentSlotType.HEAD);
 			if (stack.getItem() instanceof ThiefHoodItem) {
-				((ThiefHoodItem)stack.getItem()).levelUp(stack, attacker);
+				((ThiefHoodItem) stack.getItem()).levelUp(stack, attacker);
 			}
 		}
 	}
@@ -81,11 +81,6 @@ public class ThiefHoodItem extends ExplorerArmorItem {
 	@Override
 	public String getUsesTag() {
 		return NBT_TAG;
-	}
-
-	@Override
-	public String getDescriptionString() {
-		return "monsters slain";
 	}
 
 	@Override
