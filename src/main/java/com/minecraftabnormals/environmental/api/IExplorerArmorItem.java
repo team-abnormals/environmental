@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 
 public interface IExplorerArmorItem {
 	String getUsesTag();
-	String getDescriptionString();
+	String getDescriptionKey();
 	int getIncreaseForUses(int uses);
 	int[] getLevelCaps();
 

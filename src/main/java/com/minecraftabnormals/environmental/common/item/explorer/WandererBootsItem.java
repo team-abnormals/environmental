@@ -60,8 +60,8 @@ public class WandererBootsItem extends ExplorerArmorItem {
 	}
 
 	@Override
-	public String getDescriptionString() {
-		return "meters travelled";
+	public String getDescriptionKey() {
+		return "item.environmental.wanderer_boots.description";
 	}
 
 	@Override

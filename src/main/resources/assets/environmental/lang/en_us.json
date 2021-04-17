@@ -311,9 +311,13 @@
 	"block.environmental.truffle_crate": "Truffle Crate",
 		
 	"item.environmental.wanderer_boots": "Wanderer's Boots",
+	"item.environmental.wanderer_boots.description": "meters travelled",
 	"item.environmental.architect_belt": "Architect's Belt",
+	"item.environmental.architect_belt.description": "blocks placed",
 	"item.environmental.healer_pouch": "Healer's Pouch",
+	"item.environmental.healer_pouch.description": "adrenaline boosts",
 	"item.environmental.thief_hood": "Thief's Hood",
+	"item.environmental.thief_hood.description": "monsters slain",
 	"item.environmental.executioner_cleaver": "Executioner's Cleaver",
 	
 	"item.environmental.slabfish_spawn_egg": "Slabfish Spawn Egg",

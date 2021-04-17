@@ -63,8 +63,8 @@ public class HealerPouchItem extends ExplorerArmorItem {
 	}
 
 	@Override
-	public String getDescriptionString() {
-		return "adrenaline boosts";
+	public String getDescriptionKey() {
+		return "item.environmental.healer_pouch.description";
 	}
 
 	@Override

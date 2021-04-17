@@ -66,8 +66,8 @@ public class ArchitectBeltItem extends ExplorerArmorItem {
 	}
 
 	@Override
-	public String getDescriptionString() {
-		return "blocks placed";
+	public String getDescriptionKey() {
+		return "item.environmental.architect_belt.description";
 	}
 
 	@Override

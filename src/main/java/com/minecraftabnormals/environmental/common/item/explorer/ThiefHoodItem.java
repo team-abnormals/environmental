@@ -84,8 +84,8 @@ public class ThiefHoodItem extends ExplorerArmorItem {
 	}
 
 	@Override
-	public String getDescriptionString() {
-		return "monsters slain";
+	public String getDescriptionKey() {
+		return "item.environmental.thief_hood.description";
 	}
 
 	@Override
