@@ -5,10 +5,10 @@
       "item": "environmental:healer_pouch"
     },
     "title": {
-      "translate": "advancements.adventure.upgrade_healer_pouch.title"
+      "translate": "advancements.environmental.adventure.upgrade_healer_pouch.title"
     },
     "description": {
-      "translate": "advancements.adventure.upgrade_healer_pouch.description"
+      "translate": "advancements.environmental.adventure.upgrade_healer_pouch.description"
     },
     "frame": "goal",
     "show_toast": true,

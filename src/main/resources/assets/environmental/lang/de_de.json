@@ -414,29 +414,29 @@
 	"generic.reachDistance": "Reichentfernung",
 	"attribute.name.generic.stealth": "Heimlichkeit",
 	
-	"advancements.husbandry.bred_all_slabfish.title": "Irre Genetik",
-	"advancements.husbandry.bred_all_slabfish.description": "Vermehre alle Slabfishvariante!",
+	"advancements.environmental.husbandry.bred_all_slabfish.title": "Irre Genetik",
+	"advancements.environmental.husbandry.bred_all_slabfish.description": "Vermehre alle Slabfishvariante!",
 	
-	"advancements.husbandry.backpack_slabfish.title": "Der Anfang des Schuljahres",
-	"advancements.husbandry.backpack_slabfish.description": "Gib einem Slabfish einen Rucksack",
+	"advancements.environmental.husbandry.backpack_slabfish.title": "Der Anfang des Schuljahres",
+	"advancements.environmental.husbandry.backpack_slabfish.description": "Gib einem Slabfish einen Rucksack",
 	
-	"advancements.adventure.find_natural_slabfish.title": "Sie kommen in verschiedenen Farben!",
-	"advancements.adventure.find_natural_slabfish.description": "Finde alle natürliche Slabfishvariante",
+	"advancements.environmental.adventure.find_natural_slabfish.title": "Sie kommen in verschiedenen Farben!",
+	"advancements.environmental.adventure.find_natural_slabfish.description": "Finde alle natürliche Slabfishvariante",
 	
-	"advancements.adventure.obtain_explorer_gear.title": "Swiper, Nicht Klauen!",
-	"advancements.adventure.obtain_explorer_gear.description": "Beschaff einen Teil der Rüstung des Entdeckers",
+	"advancements.environmental.adventure.obtain_explorer_gear.title": "Swiper, Nicht Klauen!",
+	"advancements.environmental.adventure.obtain_explorer_gear.description": "Beschaff einen Teil der Rüstung des Entdeckers",
 
-	"advancements.adventure.upgrade_thief_hood.title": "Smooth Criminal",
-	"advancements.adventure.upgrade_thief_hood.description": "Beschaff die Kapuze des Diebes von Skeletten",
+	"advancements.environmental.adventure.upgrade_thief_hood.title": "Smooth Criminal",
+	"advancements.environmental.adventure.upgrade_thief_hood.description": "Beschaff die Kapuze des Diebes von Skeletten",
 
-	"advancements.adventure.upgrade_healer_pouch.title": "Panic! At the Stronghold",
-	"advancements.adventure.upgrade_healer_pouch.description": "Finde die Tasche des Heilers in Strongholds",
+	"advancements.environmental.adventure.upgrade_healer_pouch.title": "Panic! At the Stronghold",
+	"advancements.environmental.adventure.upgrade_healer_pouch.description": "Finde die Tasche des Heilers in Strongholds",
 
-	"advancements.adventure.upgrade_architect_belt.title": "Können wir das schaffen?",
-	"advancements.adventure.upgrade_architect_belt.description": "Kaufe den Gürtel des Architekten von Dorfbewohnern",
+	"advancements.environmental.adventure.upgrade_architect_belt.title": "Können wir das schaffen?",
+	"advancements.environmental.adventure.upgrade_architect_belt.description": "Kaufe den Gürtel des Architekten von Dorfbewohnern",
 
-	"advancements.adventure.upgrade_wanderer_boots.title": "Boots with the Fur",
-	"advancements.adventure.upgrade_wanderer_boots.description": "Erhälte die Stiefel des Wanderers vom Fahrender Händler",
+	"advancements.environmental.adventure.upgrade_wanderer_boots.title": "Boots with the Fur",
+	"advancements.environmental.adventure.upgrade_wanderer_boots.description": "Erhälte die Stiefel des Wanderers vom Fahrender Händler",
 	
 	"subtitles.environmental.entity.slabfish.burp": "Slabfish rülpst",
 	"subtitles.environmental.entity.slabfish.death": "Slabfish stirbt",

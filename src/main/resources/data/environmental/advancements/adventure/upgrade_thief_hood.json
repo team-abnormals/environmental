@@ -5,10 +5,10 @@
       "item": "environmental:thief_hood"
     },
     "title": {
-      "translate": "advancements.adventure.upgrade_thief_hood.title"
+      "translate": "advancements.environmental.adventure.upgrade_thief_hood.title"
     },
     "description": {
-      "translate": "advancements.adventure.upgrade_thief_hood.description"
+      "translate": "advancements.environmental.adventure.upgrade_thief_hood.description"
     },
     "frame": "goal",
     "show_toast": true,

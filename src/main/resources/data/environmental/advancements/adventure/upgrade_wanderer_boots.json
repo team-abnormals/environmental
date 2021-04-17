@@ -5,10 +5,10 @@
       "item": "environmental:wanderer_boots"
     },
     "title": {
-      "translate": "advancements.adventure.upgrade_wanderer_boots.title"
+      "translate": "advancements.environmental.adventure.upgrade_wanderer_boots.title"
     },
     "description": {
-      "translate": "advancements.adventure.upgrade_wanderer_boots.description"
+      "translate": "advancements.environmental.adventure.upgrade_wanderer_boots.description"
     },
     "frame": "goal",
     "show_toast": true,

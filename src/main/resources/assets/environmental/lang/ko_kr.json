@@ -397,14 +397,14 @@
 	"generic.reachDistance": "도달 거리",
 	"attribute.name.generic.stealth": "은신",
 
-	"advancements.husbandry.bred_all_slabfish.title": "파격적 유전학",
-	"advancements.husbandry.bred_all_slabfish.description": "모든 종류의 슬랩피시를 교배시키세요!",
+	"advancements.environmental.husbandry.bred_all_slabfish.title": "파격적 유전학",
+	"advancements.environmental.husbandry.bred_all_slabfish.description": "모든 종류의 슬랩피시를 교배시키세요!",
 	
-	"advancements.husbandry.backpack_slabfish.title": "등교 첫날",
-	"advancements.husbandry.backpack_slabfish.description": "슬랩피시에게 배낭을 매어 주세요",
+	"advancements.environmental.husbandry.backpack_slabfish.title": "등교 첫날",
+	"advancements.environmental.husbandry.backpack_slabfish.description": "슬랩피시에게 배낭을 매어 주세요",
 	
-	"advancements.adventure.find_natural_slabfish.title": "각양각색",
-	"advancements.adventure.find_natural_slabfish.description": "모든 자연산 슬랩피시를 발견하세요",
+	"advancements.environmental.adventure.find_natural_slabfish.title": "각양각색",
+	"advancements.environmental.adventure.find_natural_slabfish.description": "모든 자연산 슬랩피시를 발견하세요",
 	
 	"subtitles.entity.slabfish.burp": "슬랩피시가 트림함",
 	"subtitles.entity.slabfish.death": "슬랩피시가 죽음",

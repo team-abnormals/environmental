@@ -413,29 +413,29 @@
 	"generic.reachDistance": "Distancia de alcance",
 	"attribute.name.generic.stealth": "Sigilo",
 
-	"advancements.husbandry.bred_all_slabfish.title": "Genes únicos",
-	"advancements.husbandry.bred_all_slabfish.description": "¡Haz que se reproduzcan todos los tipos de slabfish!",
+	"advancements.environmental.husbandry.bred_all_slabfish.title": "Genes únicos",
+	"advancements.environmental.husbandry.bred_all_slabfish.description": "¡Haz que se reproduzcan todos los tipos de slabfish!",
 
-	"advancements.husbandry.backpack_slabfish.title": "Primer día del cole",
-	"advancements.husbandry.backpack_slabfish.description": "Dale una mochila a un slabfish",
+	"advancements.environmental.husbandry.backpack_slabfish.title": "Primer día del cole",
+	"advancements.environmental.husbandry.backpack_slabfish.description": "Dale una mochila a un slabfish",
 
-	"advancements.adventure.find_natural_slabfish.title": "¡Vienen en distintos colores!",
-	"advancements.adventure.find_natural_slabfish.description": "Encuentra todas los tipos naturales de slabfish",
+	"advancements.environmental.adventure.find_natural_slabfish.title": "¡Vienen en distintos colores!",
+	"advancements.environmental.adventure.find_natural_slabfish.description": "Encuentra todas los tipos naturales de slabfish",
 
-	"advancements.adventure.obtain_explorer_gear.title": "¡No te lo lleves!",
-	"advancements.adventure.obtain_explorer_gear.description": "Obtén alguna pieza del equipo de explorador",
+	"advancements.environmental.adventure.obtain_explorer_gear.title": "¡No te lo lleves!",
+	"advancements.environmental.adventure.obtain_explorer_gear.description": "Obtén alguna pieza del equipo de explorador",
 
-	"advancements.adventure.upgrade_thief_hood.title": "Criminal delicado",
-	"advancements.adventure.upgrade_thief_hood.description": "Consigue la capucha del ladrón de un esqueleto o un esqueleto del Wither y sube al máximo su nivel",
+	"advancements.environmental.adventure.upgrade_thief_hood.title": "Criminal delicado",
+	"advancements.environmental.adventure.upgrade_thief_hood.description": "Consigue la capucha del ladrón de un esqueleto o un esqueleto del Wither y sube al máximo su nivel",
 
-	"advancements.adventure.upgrade_healer_pouch.title": "¡Pánico! en la mina",
-	"advancements.adventure.upgrade_healer_pouch.description": "Consigue la bolsa del curador matando monstruos en minas abandonadas o en fortalezas del portal al End y sube al máximo su nivel",
+	"advancements.environmental.adventure.upgrade_healer_pouch.title": "¡Pánico! en la mina",
+	"advancements.environmental.adventure.upgrade_healer_pouch.description": "Consigue la bolsa del curador matando monstruos en minas abandonadas o en fortalezas del portal al End y sube al máximo su nivel",
 
-	"advancements.adventure.upgrade_architect_belt.title": "¿Podemos arreglarlo?",
-	"advancements.adventure.upgrade_architect_belt.description": "Cómprale el cinturón del arquitecto a un albañil, un carpintero o un alfarero y sube al máximo su nivel",
+	"advancements.environmental.adventure.upgrade_architect_belt.title": "¿Podemos arreglarlo?",
+	"advancements.environmental.adventure.upgrade_architect_belt.description": "Cómprale el cinturón del arquitecto a un albañil, un carpintero o un alfarero y sube al máximo su nivel",
 
-	"advancements.adventure.upgrade_wanderer_boots.title": "Botas de piel",
-	"advancements.adventure.upgrade_wanderer_boots.description": "Recibe las botas del nómada de un comerciante nómada y sube al máximo su nivel",
+	"advancements.environmental.adventure.upgrade_wanderer_boots.title": "Botas de piel",
+	"advancements.environmental.adventure.upgrade_wanderer_boots.description": "Recibe las botas del nómada de un comerciante nómada y sube al máximo su nivel",
 
 	"subtitles.environmental.entity.slabfish.burp": "Slabfish eructando",
 	"subtitles.environmental.entity.slabfish.death": "Slabfish muerto",

@@ -394,14 +394,14 @@
   	"enchantment.environmental.travelling": "Viajando",
   	"enchantment.environmental.travelling.desc": "Aumenta a velocidade de movimento em 5% por nível",
 	
-	"advancements.husbandry.bred_all_slabfish.title": "Genética Esquisita",
-	"advancements.husbandry.bred_all_slabfish.description": "Acasale todas as variações de peixe-laje!",
+	"advancements.environmental.husbandry.bred_all_slabfish.title": "Genética Esquisita",
+	"advancements.environmental.husbandry.bred_all_slabfish.description": "Acasale todas as variações de peixe-laje!",
 	
-	"advancements.husbandry.backpack_slabfish.title": "Primeiro dia de aula",
-	"advancements.husbandry.backpack_slabfish.description": "Dê uma mochila a um peixe-laje",
+	"advancements.environmental.husbandry.backpack_slabfish.title": "Primeiro dia de aula",
+	"advancements.environmental.husbandry.backpack_slabfish.description": "Dê uma mochila a um peixe-laje",
 
-	"advancements.adventure.find_natural_slabfish.title": "De todas as cores!",
-	"advancements.adventure.find_natural_slabfish.description": "Encontre todas as variações naturais de peixe-laje",
+	"advancements.environmental.adventure.find_natural_slabfish.title": "De todas as cores!",
+	"advancements.environmental.adventure.find_natural_slabfish.description": "Encontre todas as variações naturais de peixe-laje",
 	
 	"subtitles.entity.slabfish.burp": "Peixe-laje arrota",
 	"subtitles.entity.slabfish.death": "Peixe-laje morre",

@@ -409,29 +409,29 @@
 	"generic.reachDistance": "攻撃のリーチ",
 	"attribute.name.generic.stealth": "ステルス",
 
-	"advancements.husbandry.bred_all_slabfish.title": "臆病な遺伝",
-	"advancements.husbandry.bred_all_slabfish.description": "すべての種類のスラブフィッシュを繁殖させる！",
+	"advancements.environmental.husbandry.bred_all_slabfish.title": "臆病な遺伝",
+	"advancements.environmental.husbandry.bred_all_slabfish.description": "すべての種類のスラブフィッシュを繁殖させる！",
 	
-	"advancements.husbandry.backpack_slabfish.title": "学校の最初の日",
-	"advancements.husbandry.backpack_slabfish.description": "スラブフィッシュにバックパックをあげる",
+	"advancements.environmental.husbandry.backpack_slabfish.title": "学校の最初の日",
+	"advancements.environmental.husbandry.backpack_slabfish.description": "スラブフィッシュにバックパックをあげる",
 	
-	"advancements.adventure.find_natural_slabfish.title": "いろんな色があるよ！",
-	"advancements.adventure.find_natural_slabfish.description": "すべての種類の天然のスラブフィッシュを見つける",
+	"advancements.environmental.adventure.find_natural_slabfish.title": "いろんな色があるよ！",
+	"advancements.environmental.adventure.find_natural_slabfish.description": "すべての種類の天然のスラブフィッシュを見つける",
 
-	"advancements.adventure.obtain_explorer_gear.title": "いじわるしないで！",
-	"advancements.adventure.obtain_explorer_gear.description": "冒険者の装備の内の1つを手に入れる",
+	"advancements.environmental.adventure.obtain_explorer_gear.title": "いじわるしないで！",
+	"advancements.environmental.adventure.obtain_explorer_gear.description": "冒険者の装備の内の1つを手に入れる",
 
-	"advancements.adventure.upgrade_thief_hood.title": "抜け目ない犯罪者",
-	"advancements.adventure.upgrade_thief_hood.description": "稀にスケルトンやウィザースケルトンから手に入る泥棒の頭巾を手に入れ、完全にレベルアップさせる",
+	"advancements.environmental.adventure.upgrade_thief_hood.title": "抜け目ない犯罪者",
+	"advancements.environmental.adventure.upgrade_thief_hood.description": "稀にスケルトンやウィザースケルトンから手に入る泥棒の頭巾を手に入れ、完全にレベルアップさせる",
 
-	"advancements.adventure.upgrade_healer_pouch.title": "要塞がパニック！",
-	"advancements.adventure.upgrade_healer_pouch.description": "稀に要塞や廃坑のモブから手に入る治療師のポーチを集め、完全にレベルアップさせる",
+	"advancements.environmental.adventure.upgrade_healer_pouch.title": "要塞がパニック！",
+	"advancements.environmental.adventure.upgrade_healer_pouch.description": "稀に要塞や廃坑のモブから手に入る治療師のポーチを集め、完全にレベルアップさせる",
 
-	"advancements.adventure.upgrade_architect_belt.title": "これ直せるかな？",
-	"advancements.adventure.upgrade_architect_belt.description": "建築家のベルトを達人の石工、大工、陶芸家の内の誰かから買い、完全にレベルアップさせる",
+	"advancements.environmental.adventure.upgrade_architect_belt.title": "これ直せるかな？",
+	"advancements.environmental.adventure.upgrade_architect_belt.description": "建築家のベルトを達人の石工、大工、陶芸家の内の誰かから買い、完全にレベルアップさせる",
 
-	"advancements.adventure.upgrade_wanderer_boots.title": "毛皮付きブーツ",
-	"advancements.adventure.upgrade_wanderer_boots.description": "稀に行商人から放浪者のブーツを受け取り、完全にレベルアップさせる",
+	"advancements.environmental.adventure.upgrade_wanderer_boots.title": "毛皮付きブーツ",
+	"advancements.environmental.adventure.upgrade_wanderer_boots.description": "稀に行商人から放浪者のブーツを受け取り、完全にレベルアップさせる",
 	
 	"subtitles.entity.slabfish.burp": "スラブフィッシュがゲップする",
 	"subtitles.entity.slabfish.death": "スラブフィッシュが死ぬ",

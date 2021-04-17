@@ -89,17 +89,17 @@
 	"biome.environmental.mushroom_marsh": "Marsh o' the Shrooms",
 	"biome.environmental.mire": "Swine's Paradise",
 	
-	"advancements.husbandry.equip_axolotl.title": "Lost at sea, but nevarrr without a crew",
-	"advancements.husbandry.equip_axolotl.description": "Have yerr sea dog grab you to feel bettar",
+	"advancements.environmental.husbandry.equip_axolotl.title": "Lost at sea, but nevarrr without a crew",
+	"advancements.environmental.husbandry.equip_axolotl.description": "Have yerr sea dog grab you to feel bettar",
 	
-	"advancements.husbandry.bred_all_slabfish.title": "Fishy Shenanigans",
-	"advancements.husbandry.bred_all_slabfish.description": "Captcharrr every one of tha funny lookin' fellers",
+	"advancements.environmental.husbandry.bred_all_slabfish.title": "Fishy Shenanigans",
+	"advancements.environmental.husbandry.bred_all_slabfish.description": "Captcharrr every one of tha funny lookin' fellers",
 	
-	"advancements.husbandry.backpack_slabfish.title": "First Day of School",
-	"advancements.husbandry.backpack_slabfish.description": "Give a Slabfish a backpack",
+	"advancements.environmental.husbandry.backpack_slabfish.title": "First Day of School",
+	"advancements.environmental.husbandry.backpack_slabfish.description": "Give a Slabfish a backpack",
 	
-	"advancements.adventure.find_natural_slabfish.title": "They be lookin' fishy...",
-	"advancements.adventure.find_natural_slabfish.description": "Splore the seven seas 'til you find all the funny lookin' fellers",
+	"advancements.environmental.adventure.find_natural_slabfish.title": "They be lookin' fishy...",
+	"advancements.environmental.adventure.find_natural_slabfish.description": "Splore the seven seas 'til you find all the funny lookin' fellers",
 	
 	"subtitles.entity.slabfish.burp": "Funny lookin' feller had a satisfyin' meal",
 	"subtitles.entity.slabfish.death": "Funny lookin' feller walked the plank",

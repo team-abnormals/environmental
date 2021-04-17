@@ -425,17 +425,17 @@
 	"enchantment.environmental.travelling": "Matkustus",
 	"enchantment.environmental.travelling.desc": "Kasvattaa liikkumisnopeutta 5% per taso",
 	
-	"advancements.husbandry.equip_axolotl.title": "Eksysksissä merellä, mutta ei yksin!",
-	"advancements.husbandry.equip_axolotl.description": "Anna aksolotlin tarttua sinuun ja parantaa sinua!",
+	"advancements.environmental.husbandry.equip_axolotl.title": "Eksysksissä merellä, mutta ei yksin!",
+	"advancements.environmental.husbandry.equip_axolotl.description": "Anna aksolotlin tarttua sinuun ja parantaa sinua!",
 	
-	"advancements.husbandry.bred_all_slabfish.title": "Epävakaata genetiikkaa",
-	"advancements.husbandry.bred_all_slabfish.description": "Parita kaikki laattakalarodut!",
+	"advancements.environmental.husbandry.bred_all_slabfish.title": "Epävakaata genetiikkaa",
+	"advancements.environmental.husbandry.bred_all_slabfish.description": "Parita kaikki laattakalarodut!",
 	
-	"advancements.husbandry.backpack_slabfish.title": "Ensimmäinen koulupäivä",
-	"advancements.husbandry.backpack_slabfish.description": "Anna laattakalalle reppu",
+	"advancements.environmental.husbandry.backpack_slabfish.title": "Ensimmäinen koulupäivä",
+	"advancements.environmental.husbandry.backpack_slabfish.description": "Anna laattakalalle reppu",
 	
-	"advancements.adventure.find_natural_slabfish.title": "Niitä on erivärisiä!",
-	"advancements.adventure.find_natural_slabfish.description": "Löydä kaikki luonnolliset laattakalarodut",
+	"advancements.environmental.adventure.find_natural_slabfish.title": "Niitä on erivärisiä!",
+	"advancements.environmental.adventure.find_natural_slabfish.description": "Löydä kaikki luonnolliset laattakalarodut",
 	
 	"subtitles.entity.slabfish.burp": "Laattakala röyhtäisee",
 	"subtitles.entity.slabfish.death": "Laattakala kuolee",

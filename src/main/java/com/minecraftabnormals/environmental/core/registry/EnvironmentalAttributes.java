@@ -10,5 +10,5 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class EnvironmentalAttributes {
 	public static final DeferredRegister<Attribute> ATTRIBUTES = DeferredRegister.create(ForgeRegistries.ATTRIBUTES, Environmental.MOD_ID);
 
-	public static final RegistryObject<Attribute> STEALTH = ATTRIBUTES.register("stealth", () -> new RangedAttribute("attribute.name.generic.stealth", 0.0D, 0.0D, 1.0D));
+	public static final RegistryObject<Attribute> STEALTH = ATTRIBUTES.register("stealth", () -> new RangedAttribute("attribute.environmental.name.generic.stealth", 0.0D, 0.0D, 1.0D));
 }

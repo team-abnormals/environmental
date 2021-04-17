@@ -5,10 +5,10 @@
       "item": "environmental:willow_boat"
     },
     "title": {
-      "translate": "advancements.adventure.find_natural_slabfish.title"
+      "translate": "advancements.environmental.adventure.find_natural_slabfish.title"
     },
     "description": {
-      "translate": "advancements.adventure.find_natural_slabfish.description"
+      "translate": "advancements.environmental.adventure.find_natural_slabfish.description"
     },
     "frame": "task",
     "show_toast": true,

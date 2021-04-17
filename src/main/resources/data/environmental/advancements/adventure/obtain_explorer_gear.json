@@ -5,10 +5,10 @@
       "item": "minecraft:rabbit_hide"
     },
     "title": {
-      "translate": "advancements.adventure.obtain_explorer_gear.title"
+      "translate": "advancements.environmental.adventure.obtain_explorer_gear.title"
     },
     "description": {
-      "translate": "advancements.adventure.obtain_explorer_gear.description"
+      "translate": "advancements.environmental.adventure.obtain_explorer_gear.description"
     },
     "frame": "task",
     "show_toast": true,

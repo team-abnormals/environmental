@@ -397,14 +397,14 @@
 	"generic.reachDistance": "Достичь дистанции",
 	"attribute.name.generic.stealth": "Скрытность",
 
-	"advancements.husbandry.bred_all_slabfish.title": "Весёлая генетика",
-	"advancements.husbandry.bred_all_slabfish.description": "Разведите все варианты Плиторыбов!",
+	"advancements.environmental.husbandry.bred_all_slabfish.title": "Весёлая генетика",
+	"advancements.environmental.husbandry.bred_all_slabfish.description": "Разведите все варианты Плиторыбов!",
 	
-	"advancements.husbandry.backpack_slabfish.title": "Первый день в школе",
-	"advancements.husbandry.backpack_slabfish.description": "Дайте рюкзак Плиторыбу",
+	"advancements.environmental.husbandry.backpack_slabfish.title": "Первый день в школе",
+	"advancements.environmental.husbandry.backpack_slabfish.description": "Дайте рюкзак Плиторыбу",
 	
-	"advancements.adventure.find_natural_slabfish.title": "Они бывают разных цветов!",
-	"advancements.adventure.find_natural_slabfish.description": "Найдите все варианты натуральных Плиторыбов",
+	"advancements.environmental.adventure.find_natural_slabfish.title": "Они бывают разных цветов!",
+	"advancements.environmental.adventure.find_natural_slabfish.description": "Найдите все варианты натуральных Плиторыбов",
 	
 	"subtitles.entity.slabfish.burp": "Плиторыб отрыгивает",
 	"subtitles.entity.slabfish.death": "Плиторыб умирает",
