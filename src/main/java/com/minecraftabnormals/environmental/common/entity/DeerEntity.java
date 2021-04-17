@@ -4,7 +4,6 @@ import com.minecraftabnormals.environmental.common.entity.util.DeerCoatColors;
 import com.minecraftabnormals.environmental.common.entity.util.DeerCoatTypes;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalTags;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEntities;
-import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DoublePlantBlock;
 import net.minecraft.entity.*;
@@ -21,7 +20,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.IPacket;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -30,13 +28,11 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 import java.time.LocalDate;
@@ -68,7 +64,7 @@ public class DeerEntity extends AnimalEntity {
 		this.goalSelector.addGoal(1, new PanicGoal(this, 2.5D));
 		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
 		this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, PlayerEntity.class, 22.0F, 2.0D, 2.7D, SHOULD_AVOID::test));
-		this.goalSelector.addGoal(4, new TemptGoal(this, 1.25D, false, Ingredient.fromTag(EnvironmentalTags.Items.DEER_TEMPTATION_ITEMS)));
+		this.goalSelector.addGoal(4, new TemptGoal(this, 1.25D, false, Ingredient.fromTag(EnvironmentalTags.Items.DEER_TEMPT_ITEMS)));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
 		this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
 		this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 6.0F));
@@ -218,7 +214,7 @@ public class DeerEntity extends AnimalEntity {
 
 	@Override
 	public boolean isBreedingItem(ItemStack stack) {
-		return stack.getItem().isIn(EnvironmentalTags.Items.DEER_BREEDING_ITEMS);
+		return stack.getItem().isIn(EnvironmentalTags.Items.DEER_FOOD);
 	}
 
 	@Override

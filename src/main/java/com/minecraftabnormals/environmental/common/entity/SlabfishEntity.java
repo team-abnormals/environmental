@@ -136,7 +136,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
 		this.goalSelector.addGoal(4, new SlabbyBreedGoal(this, 1.0D));
 		this.goalSelector.addGoal(5, new SlabbyGrabItemGoal(this, 1.1D));
-		this.goalSelector.addGoal(6, new TemptGoal(this, 1.0D, false, Ingredient.fromTag(EnvironmentalTags.Items.SLABFISH_TEMPTATION_ITEMS)));
+		this.goalSelector.addGoal(6, new TemptGoal(this, 1.0D, false, Ingredient.fromTag(EnvironmentalTags.Items.SLABFISH_TEMPT_ITEMS)));
 		this.goalSelector.addGoal(8, new SlabbyFollowParentGoal(this, 1.1D));
 		this.goalSelector.addGoal(9, new RandomWalkingGoal(this, 1.0D));
 		this.goalSelector.addGoal(10, new LookAtGoal(this, PlayerEntity.class, 6.0F));
@@ -305,7 +305,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 //			this.particleCloud(ParticleTypes.CLOUD);
 //			return ActionResultType.SUCCESS;
 
-		} else if (Ingredient.fromTag(EnvironmentalTags.Items.SLABFISH_FOODS).test(stack)) {
+		} else if (Ingredient.fromTag(EnvironmentalTags.Items.SLABFISH_SNACKS).test(stack)) {
 			stack.onItemUseFinish(this.world, this);
 			this.consumeItemFromStack(player, stack);
 			world.playSound(this.getPosX(), this.getPosY(), this.getPosZ(), EnvironmentalSounds.ENTITY_SLABFISH_EAT.get(), SoundCategory.NEUTRAL, 1F, 1F, true);
@@ -543,7 +543,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
 	@Override
 	public boolean isBreedingItem(ItemStack stack) {
-		return Ingredient.fromTag(EnvironmentalTags.Items.SLABFISH_BREEDING_ITEMS).test(stack);
+		return Ingredient.fromTag(EnvironmentalTags.Items.SLABFISH_FOOD).test(stack);
 	}
 
 	@Override

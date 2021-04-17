@@ -64,7 +64,7 @@ public class DuckEntity extends AnimalEntity implements IEggLayingEntity {
 		this.goalSelector.addGoal(1, new PanicGoal(this, 1.4D));
 		this.goalSelector.addGoal(2, new LayEggInNestGoal(this, 1.0D));
 		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
-		this.goalSelector.addGoal(3, new TemptGoal(this, 1.0D, false, Ingredient.fromTag(EnvironmentalTags.Items.DUCK_BREEDING_ITEMS)));
+		this.goalSelector.addGoal(3, new TemptGoal(this, 1.0D, false, Ingredient.fromTag(EnvironmentalTags.Items.DUCK_FOOD)));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
 		this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 1.0D));
 		this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 6.0F));
@@ -210,7 +210,7 @@ public class DuckEntity extends AnimalEntity implements IEggLayingEntity {
 
 	@Override
 	public boolean isBreedingItem(ItemStack stack) {
-		return Ingredient.fromTag(EnvironmentalTags.Items.DUCK_BREEDING_ITEMS).test(stack);
+		return Ingredient.fromTag(EnvironmentalTags.Items.DUCK_FOOD).test(stack);
 	}
 
 	@Override

@@ -38,8 +38,8 @@ public class SlabfishNearbyCriteriaTrigger extends AbstractCriterionTrigger<Slab
 	public static class Instance extends CriterionInstance {
 		private final ResourceLocation slabfishType;
 
-		public Instance(EntityPredicate.AndPredicate p_i231560_1_, ResourceLocation slabfishType) {
-			super(SlabfishNearbyCriteriaTrigger.ID, p_i231560_1_);
+		public Instance(EntityPredicate.AndPredicate predicate, ResourceLocation slabfishType) {
+			super(SlabfishNearbyCriteriaTrigger.ID, predicate);
 			this.slabfishType = slabfishType;
 		}
 

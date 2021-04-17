@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:bread",
+    {
+      "id": "#forge:crops/rice",
+      "required": false
+    }
+  ]
+}

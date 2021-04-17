@@ -139,7 +139,7 @@ public class EnvironmentalEvents {
 		boolean blockOnlyNaturalSpawns = EnvironmentalConfig.COMMON.blockOnlyNaturalSpawns.get();
 
 		if (blockOnlyNaturalSpawns && event.isSpawner()) return;
-		if (!EnvironmentalTags.EntityTypes.SERENITY_WHITELIST.contains(entity.getType())) {
+		if (!EnvironmentalTags.EntityTypes.UNAFFECTED_BY_SERENITY.contains(entity.getType())) {
 			if (entity.getType().getClassification() == EntityClassification.MONSTER) {
 				int horizontalRange = EnvironmentalConfig.COMMON.koiHorizontalSerenityRange.get();
 				int verticalRange = EnvironmentalConfig.COMMON.koiVerticalSerenityRange.get();
