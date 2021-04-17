@@ -51,13 +51,11 @@ public class DeerEntity extends AnimalEntity {
 	private static final DataParameter<Integer> DEER_COAT_TYPE = EntityDataManager.createKey(DeerEntity.class, DataSerializers.VARINT);
 	private static final DataParameter<Boolean> HAS_ANTLERS = EntityDataManager.createKey(DeerEntity.class, DataSerializers.BOOLEAN);
 
-	private static final Predicate<Entity> SHOULD_AVOID = (entity) -> {
-		return !entity.isDiscrete() && EntityPredicates.CAN_AI_TARGET.test(entity);
-	};
+	private static final Predicate<Entity> SHOULD_AVOID = (entity) -> !entity.isDiscrete() && EntityPredicates.CAN_AI_TARGET.test(entity);
 
 	private static final UUID SPEED_MODIFIER = UUID.fromString("a21208ef-5399-4341-800f-d5a9152afe98");
 	private int floweringTime;
-	private List<BlockState> flowers = new ArrayList<>();
+	private final List<BlockState> flowers = new ArrayList<>();
 
 	public DeerEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -250,11 +248,6 @@ public class DeerEntity extends AnimalEntity {
 		return AnimalEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 10.0D).createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.15D);
 	}
 
-	@Override
-	public ItemStack getPickedResult(RayTraceResult target) {
-		return new ItemStack(EnvironmentalItems.DEER_SPAWN_EGG.get());
-	}
-
 	@Nullable
 	@Override
 	public ILivingEntityData onInitialSpawn(IServerWorld worldIn, DifficultyInstance difficulty, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
@@ -269,10 +262,5 @@ public class DeerEntity extends AnimalEntity {
 		this.setHasAntlers(rand.nextBoolean());
 
 		return super.onInitialSpawn(worldIn, difficulty, reason, spawnDataIn, dataTag);
-	}
-
-	@Override
-	public IPacket<?> createSpawnPacket() {
-		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 }
