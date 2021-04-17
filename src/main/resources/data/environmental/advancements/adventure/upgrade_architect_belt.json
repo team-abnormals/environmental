@@ -1,0 +1,26 @@
+{
+  "parent": "environmental:adventure/obtain_explorer_gear",
+  "display": {
+    "icon": {
+      "item": "environmental:architect_belt"
+    },
+    "title": {
+      "translate": "advancements.adventure.upgrade_architect_belt.title"
+    },
+    "description": {
+      "translate": "advancements.adventure.upgrade_architect_belt.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "upgrade": {
+      "trigger": "environmental:upgrade_gear",
+      "conditions": {
+        "item": "environmental:architect_belt"
+      }
+    }
+  }
+}

@@ -9,6 +9,7 @@ import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.FoxEntity;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -23,6 +24,7 @@ public class EnvironmentalEntities {
 	public static final RegistryObject<EntityType<DeerEntity>> DEER = HELPER.createLivingEntity("deer", DeerEntity::new, EntityClassification.CREATURE, 1.1F, 1.8F);
 	public static final RegistryObject<EntityType<YakEntity>> YAK = HELPER.createLivingEntity("yak", YakEntity::new, EntityClassification.CREATURE, 1.0F, 1.5F);
 	public static final RegistryObject<EntityType<KoiEntity>> KOI = HELPER.createLivingEntity("koi", KoiEntity::new, EntityClassification.WATER_AMBIENT, 0.75F, 0.4F);
+	public static final RegistryObject<EntityType<FennecFoxEntity>> FENNEC_FOX = HELPER.createLivingEntity("fennec_fox", FennecFoxEntity::new, EntityClassification.CREATURE, 0.75F, 0.5F);
 
 	public static final RegistryObject<EntityType<DuckEggEntity>> DUCK_EGG = HELPER.createEntity("duck_egg", DuckEggEntity::new, DuckEggEntity::new, EntityClassification.MISC, 0.25F, 0.25F);
 	public static final RegistryObject<EntityType<MudBallEntity>> MUD_BALL = HELPER.createEntity("mud_ball", MudBallEntity::new, MudBallEntity::new, EntityClassification.MISC, 0.25F, 0.25F);
@@ -33,17 +35,19 @@ public class EnvironmentalEntities {
 		RenderingRegistry.registerEntityRenderingHandler(DEER.get(), DeerRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(YAK.get(), YakRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(KOI.get(), KoiRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(FENNEC_FOX.get(), FennecFoxRenderer::new);
 
 		RenderingRegistry.registerEntityRenderingHandler(DUCK_EGG.get(), ProjectileItemRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(MUD_BALL.get(), ProjectileItemRenderer::new);
 	}
 
 	public static void registerSpawns() {
-		EntitySpawnPlacementRegistry.register(EnvironmentalEntities.SLABFISH.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, DuckEntity::canDuckSpawn);
-		EntitySpawnPlacementRegistry.register(EnvironmentalEntities.YAK.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canAnimalSpawn);
-		EntitySpawnPlacementRegistry.register(EnvironmentalEntities.DUCK.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, DuckEntity::canDuckSpawn);
-		EntitySpawnPlacementRegistry.register(EnvironmentalEntities.DEER.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canAnimalSpawn);
-		EntitySpawnPlacementRegistry.register(EnvironmentalEntities.KOI.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, KoiEntity::canKoiSpawn);
+		EntitySpawnPlacementRegistry.register(SLABFISH.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, DuckEntity::canDuckSpawn);
+		EntitySpawnPlacementRegistry.register(YAK.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canAnimalSpawn);
+		EntitySpawnPlacementRegistry.register(DUCK.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, DuckEntity::canDuckSpawn);
+		EntitySpawnPlacementRegistry.register(DEER.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canAnimalSpawn);
+		EntitySpawnPlacementRegistry.register(KOI.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, KoiEntity::canKoiSpawn);
+		EntitySpawnPlacementRegistry.register(FENNEC_FOX.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canAnimalSpawn);
 	}
 
 	public static void registerAttributes() {
@@ -52,5 +56,6 @@ public class EnvironmentalEntities {
 		GlobalEntityTypeAttributes.put(DUCK.get(), DuckEntity.registerAttributes().create());
 		GlobalEntityTypeAttributes.put(YAK.get(), YakEntity.registerAttributes().create());
 		GlobalEntityTypeAttributes.put(KOI.get(), KoiEntity.registerAttributes().create());
+		GlobalEntityTypeAttributes.put(FENNEC_FOX.get(), FoxEntity.func_234192_eI_().create());
 	}
 }

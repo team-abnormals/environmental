@@ -12,7 +12,6 @@ public class EnvironmentalConfig {
 		public final ConfigValue<Boolean> generateGiantMushrooms;
 		public final ConfigValue<Boolean> generateGiantTallGrass;
 		public final ConfigValue<Boolean> generateWisteriaTrees;
-		public final ConfigValue<Boolean> generateRice;
 		public final ConfigValue<Boolean> generateDelphiniums;
 		public final ConfigValue<Boolean> generateHibiscus;
 
@@ -48,7 +47,6 @@ public class EnvironmentalConfig {
 			builder.pop();
 			builder.push("features");
 			generateGiantMushrooms = builder.define("Giant Mushroom generation in Swamps", true);
-			generateRice = builder.define("Rice generation in Marshes", true);
 			generateGiantTallGrass = builder.define("Giant Tall Grass generation", true);
 			generateWisteriaTrees = builder.define("Wisteria Tree generation in Flower Forests", true);
 			generateDelphiniums = builder.define("Delphinium generation in Flower Forests", true);

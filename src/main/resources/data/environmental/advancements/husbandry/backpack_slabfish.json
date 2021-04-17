@@ -16,7 +16,7 @@
     "hidden": false
   },
 	"criteria": {
-		"honey_apple": {
+		"backpack_slabfish": {
 			"trigger": "environmental:backpack_slabfish"
 		}
 	}

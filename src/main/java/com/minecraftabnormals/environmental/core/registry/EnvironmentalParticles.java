@@ -14,4 +14,6 @@ public class EnvironmentalParticles {
 	public static final RegistryObject<BasicParticleType> CHERRY_BLOSSOM = PARTICLE_TYPES.register("cherry_blossom", () -> new BasicParticleType(false));
 	public static final RegistryObject<BasicParticleType> RED_LOTUS_BLOSSOM = PARTICLE_TYPES.register("red_lotus_blossom", () -> new BasicParticleType(true));
 	public static final RegistryObject<BasicParticleType> WHITE_LOTUS_BLOSSOM = PARTICLE_TYPES.register("white_lotus_blossom", () -> new BasicParticleType(true));
+	public static final RegistryObject<BasicParticleType> PIG_FINDS_TRUFFLE = PARTICLE_TYPES.register("pig_finds_truffle", () -> new BasicParticleType(true));
+	public static final RegistryObject<BasicParticleType> SLABFISH_FINDS_EFFIGY = PARTICLE_TYPES.register("slabfish_finds_effigy", () -> new BasicParticleType(true));
 }

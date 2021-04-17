@@ -24,7 +24,7 @@
       "entity/fish/hurt3",
       "entity/fish/hurt4"
     ],
-    "subtitle": "subtitles.entity.slabfish.death"
+    "subtitle": "subtitles.environmental.entity.slabfish.death"
   },
   "entity.slabfish.step": {
     "category": "neutral",
@@ -46,7 +46,7 @@
         "volume": 0.3
       }
     ],
-    "subtitle": "subtitles.entity.slabfish.step"
+    "subtitle": "subtitles.environmental.entity.slabfish.step"
   },
   "entity.slabfish.hurt": {
     "sounds": [
@@ -55,13 +55,13 @@
       "entity/fish/hurt3",
       "entity/fish/hurt4"
     ],
-    "subtitle": "subtitles.entity.slabfish.hurt"
+    "subtitle": "subtitles.environmental.entity.slabfish.hurt"
   },
   "entity.slabfish.transform": {
     "sounds": [
       "random/fizz"
     ],
-    "subtitle": "subtitles.entity.slabfish.transform"
+    "subtitle": "subtitles.environmental.entity.slabfish.transform"
   },
   "entity.slabfish.eat": {
     "sounds": [
@@ -69,19 +69,19 @@
       "random/eat2",
       "random/eat3"
     ],
-    "subtitle": "subtitles.entity.slabfish.eat"
+    "subtitle": "subtitles.environmental.entity.slabfish.eat"
   },
   "entity.slabfish.burp": {
     "sounds": [
       "random/burp"
     ],
-    "subtitle": "subtitles.entity.slabfish.burp"
+    "subtitle": "subtitles.environmental.entity.slabfish.burp"
   },
   "entity.slabfish.backpack": {
     "sounds": [
       "mob/horse/leather"
     ],
-    "subtitle": "subtitles.entity.slabfish.backpack"
+    "subtitle": "subtitles.environmental.entity.slabfish.backpack"
   },
   "entity.slabfish.sweater": {
     "sounds": [
@@ -92,34 +92,75 @@
       "item/armor/equip_leather5",
       "item/armor/equip_leather6"
     ],
-    "subtitle": "subtitles.entity.slabfish.sweater"
+    "subtitle": "subtitles.environmental.entity.slabfish.sweater"
   },
   "entity.koi.flop": {
     "sounds": [
       {
-        "name":"entity/fish/flop1",
-        "volume":0.3
+        "name": "entity/fish/flop1",
+        "volume": 0.3
       },
       {
-        "name":"entity/fish/flop2",
-        "volume":0.3
+        "name": "entity/fish/flop2",
+        "volume": 0.3
       },
       {
-        "name":"entity/fish/flop3",
-        "volume":0.3
+        "name": "entity/fish/flop3",
+        "volume": 0.3
       },
       {
-        "name":"entity/fish/flop4",
-        "volume":0.3
+        "name": "entity/fish/flop4",
+        "volume": 0.3
       }
     ],
-    "subtitle": "subtitles.entity.koi.flop"
+    "subtitle": "subtitles.environmental.entity.koi.flop"
+  },
+  "entity.duck.ambient": {
+    "sounds": [
+      "environmental:mob/duck/say1",
+      "environmental:mob/duck/say2"
+    ],
+    "subtitle": "subtitles.environmental.entity.duck.ambient"
+  },
+  "entity.duck.death": {
+    "sounds": [
+      "environmental:mob/duck/hurt1"
+    ],
+    "subtitle": "subtitles.environmental.entity.duck.death"
+  },
+  "entity.duck.hurt": {
+    "sounds": [
+      "environmental:mob/duck/hurt1"
+    ],
+    "subtitle": "subtitles.environmental.entity.duck.hurt"
+  },
+  "entity.duck.step": {
+    "sounds": [
+      "environmental:mob/duck/step1"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
   },
   "entity.duck.egg": {
-    "category": "entity",
     "sounds": [
-      "minecraft:mob/chicken/plop"
+      "mob/chicken/plop"
     ],
-    "subtitle": "subtitles.entity.duck.egg"
+    "subtitle": "subtitles.environmental.entity.duck.egg"
+  },
+  "entity.pig.sniff": {
+    "sounds": [
+      {
+        "name": "environmental:mob/pig/sniff1",
+        "volume": 0.3
+      },
+      {
+        "name": "environmental:mob/pig/sniff2",
+        "volume": 0.3
+      },
+      {
+        "name": "environmental:mob/pig/sniff3",
+        "volume": 0.3
+      }
+    ],
+    "subtitle": "subtitles.environmental.entity.pig.sniff"
   }
 }

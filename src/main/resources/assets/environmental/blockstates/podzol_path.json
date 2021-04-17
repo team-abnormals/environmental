@@ -1,5 +1,21 @@
 {
-    "variants": {
-        "": { "model": "environmental:block/podzol_path" }
-    }
+  "variants": {
+    "": [
+      {
+        "model": "environmental:block/podzol_path"
+      },
+      {
+        "model": "environmental:block/podzol_path",
+        "y": 90
+      },
+      {
+        "model": "environmental:block/podzol_path",
+        "y": 180
+      },
+      {
+        "model": "environmental:block/podzol_path",
+        "y": 270
+      }
+    ]
+  }
 }

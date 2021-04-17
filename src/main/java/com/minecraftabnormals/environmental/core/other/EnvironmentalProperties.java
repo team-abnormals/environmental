@@ -39,7 +39,6 @@ public class EnvironmentalProperties {
 	public static final AbstractBlock.Properties WISTERIA_SAPLING = AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0.0F).sound(SoundType.PLANT);
 
 	public static final AbstractBlock.Properties CATTAIL = AbstractBlock.Properties.create(Material.TALL_PLANTS).hardnessAndResistance(0.0F).doesNotBlockMovement().tickRandomly().sound(SoundType.WET_GRASS);
-	public static final AbstractBlock.Properties RICE = AbstractBlock.Properties.create(Material.TALL_PLANTS).hardnessAndResistance(0.0F).doesNotBlockMovement().tickRandomly().sound(SoundType.CROP);
 
 	public static final AbstractBlock.Properties DUCKWEED = AbstractBlock.Properties.create(Material.PLANTS).hardnessAndResistance(0.0F).doesNotBlockMovement().sound(SoundType.CROP);
 	public static final AbstractBlock.Properties MYCELIUM_SPROUTS = AbstractBlock.Properties.create(Material.TALL_PLANTS, MaterialColor.PURPLE).doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.NETHER_SPROUT);
@@ -52,8 +51,8 @@ public class EnvironmentalProperties {
 	public static final AbstractBlock.Properties DELPHINIUMS = AbstractBlock.Properties.create(Material.TALL_PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT);
 	public static final AbstractBlock.Properties FLOWER_POT = AbstractBlock.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.0F).notSolid();
 
-	public static final AbstractBlock.Properties MYCELIUM_PATH = AbstractBlock.Properties.create(Material.EARTH, MaterialColor.PURPLE).hardnessAndResistance(0.65F).sound(SoundType.PLANT).setBlocksVision(EnvironmentalProperties::isntSolid).setBlocksVision(EnvironmentalProperties::isntSolid);
-	public static final AbstractBlock.Properties PODZOL_PATH = AbstractBlock.Properties.create(Material.EARTH, MaterialColor.OBSIDIAN).hardnessAndResistance(0.65F).sound(SoundType.PLANT).setBlocksVision(EnvironmentalProperties::isntSolid).setBlocksVision(EnvironmentalProperties::isntSolid);
+	public static final AbstractBlock.Properties MYCELIUM_PATH = AbstractBlock.Properties.create(Material.EARTH, MaterialColor.PURPLE).hardnessAndResistance(0.65F).sound(SoundType.PLANT).harvestTool(ToolType.SHOVEL).setBlocksVision(EnvironmentalProperties::isntSolid).setBlocksVision(EnvironmentalProperties::isntSolid);
+	public static final AbstractBlock.Properties PODZOL_PATH = AbstractBlock.Properties.create(Material.EARTH, MaterialColor.OBSIDIAN).hardnessAndResistance(0.65F).sound(SoundType.PLANT).harvestTool(ToolType.SHOVEL).setBlocksVision(EnvironmentalProperties::isntSolid).setBlocksVision(EnvironmentalProperties::isntSolid);
 
 	public static final AbstractBlock.Properties MUD = AbstractBlock.Properties.create(Material.EARTH, MaterialColor.DIRT).hardnessAndResistance(0.5F).sound(SoundType.SLIME).harvestTool(ToolType.SHOVEL).speedFactor(0.2F).setAllowsSpawn(EnvironmentalProperties::alwaysAllowSpawn).setOpaque(EnvironmentalProperties::needsPostProcessing).setBlocksVision(EnvironmentalProperties::needsPostProcessing);
 	public static final AbstractBlock.Properties MUD_BRICKS = AbstractBlock.Properties.create(Material.ROCK, MaterialColor.BROWN).hardnessAndResistance(1.5F, 2.5F).sound(SoundType.STONE);
@@ -61,7 +60,7 @@ public class EnvironmentalProperties {
 	public static final AbstractBlock.Properties YAK_HAIR_BLOCK = AbstractBlock.Properties.create(Material.WOOL, MaterialColor.BROWN).hardnessAndResistance(0.8F).sound(SoundType.CLOTH).notSolid().harvestTool(ToolType.HOE);
 	public static final AbstractBlock.Properties YAK_HAIR_RUG = AbstractBlock.Properties.create(Material.CARPET, MaterialColor.BROWN).hardnessAndResistance(0.1F).sound(SoundType.CLOTH).notSolid().harvestTool(ToolType.HOE);
 
-	public static final AbstractBlock.Properties ICE_BRICKS = AbstractBlock.Properties.create(Material.ICE).slipperiness(0.99F).hardnessAndResistance(1.0F, 2.0F).sound(SoundType.GLASS);
+	public static final AbstractBlock.Properties ICE_BRICKS = AbstractBlock.Properties.create(Material.ICE).slipperiness(0.99F).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(1.0F, 2.0F).sound(SoundType.GLASS);
 	public static final AbstractBlock.Properties ICE_LANTERN = AbstractBlock.Properties.create(Material.ICE).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(3.5F).sound(SoundType.LANTERN).setLightLevel((state) -> 12).notSolid();
 	public static final AbstractBlock.Properties ICE_CHAIN = AbstractBlock.Properties.create(Material.ICE, MaterialColor.AIR).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(5.0F, 6.0F).sound(SoundType.CHAIN).notSolid();
 
@@ -86,6 +85,8 @@ public class EnvironmentalProperties {
 	public static final AbstractBlock.Properties GREEN_TERRACOTTA_BRICKS = AbstractBlock.Properties.create(Material.ROCK, MaterialColor.GREEN_TERRACOTTA).setRequiresTool().hardnessAndResistance(1.25F, 4.2F);
 	public static final AbstractBlock.Properties RED_TERRACOTTA_BRICKS = AbstractBlock.Properties.create(Material.ROCK, MaterialColor.RED_TERRACOTTA).setRequiresTool().hardnessAndResistance(1.25F, 4.2F);
 	public static final AbstractBlock.Properties BLACK_TERRACOTTA_BRICKS = AbstractBlock.Properties.create(Material.ROCK, MaterialColor.BLACK_TERRACOTTA).setRequiresTool().hardnessAndResistance(1.25F, 4.2F);
+	
+	public static final AbstractBlock.Properties BURIED_TRUFFLE = AbstractBlock.Properties.create(Material.EARTH, MaterialColor.DIRT).harvestTool(ToolType.SHOVEL).hardnessAndResistance(0.6F).sound(SoundType.GROUND);
 
 	public static AbstractBlock.Properties createLeaves(MaterialColor color) {
 		return AbstractBlock.Properties.create(Material.LEAVES, color).harvestTool(ToolType.HOE).notSolid().hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT).setAllowsSpawn(EnvironmentalProperties::allowsSpawnOnLeaves).setSuffocates(EnvironmentalProperties::isntSolid).setBlocksVision(EnvironmentalProperties::isntSolid);

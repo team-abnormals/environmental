@@ -12,20 +12,11 @@
             "conditions": {
               "block": "environmental:cattail_sprouts"
             }
-          },
-          "environmental:rice": {
-            "trigger": "minecraft:placed_block",
-            "conditions": {
-              "block": "environmental:rice"
-            }
           }
         },
         "requirements": [
           [
             "environmental:cattail_sprouts"
-          ],
-          [
-            "environmental:rice"
           ]
         ]
       }

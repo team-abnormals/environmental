@@ -1,36 +1,37 @@
-modLoader="javafml"
-loaderVersion="[32,)"
-issueTrackerURL="https://github.com/team-abnormals/environmental/issues"
-license="https://github.com/team-abnormals/environmental/blob/main/LICENSE.txt"
+modLoader = "javafml"
+loaderVersion = "[32,)"
+issueTrackerURL = "https://github.com/team-abnormals/environmental/issues"
+license = "https://github.com/team-abnormals/environmental/blob/main/LICENSE.txt"
 
 [[mods]]
-    modId="environmental"
-    version="${file.jarVersion}"
-    logoFile="logo.png"
-    authors="Team Abnormals"
-    credits="bageldotjpg, Farcr, hatsondogs, Jackson, Ocelot, Echolite, and five"
-    displayName="Environmental"
-    description='''
+    modId = "environmental"
+    version = "${file.jarVersion}"
+    logoFile = "logo.png"
+    itemIcon = "environmental:wanderer_boots"
+    authors = "Team Abnormals"
+    credits = "bageldotjpg, Farcr, hatsondogs, Jackson, Ocelot, Echolite, and five"
+    displayName = "Environmental"
+    description = '''
     Expanding the environment. New wood, new blocks, new friends.
     '''
 
 [[dependencies.environmental]]
     modId = "minecraft"
     mandatory = true
-    versionRange = "[1.16.3,1.17)"
+    versionRange = "[1.16.5,1.17)"
     ordering = "NONE"
     side = "BOTH"
 
 [[dependencies.environmental]]
     modId = "forge"
     mandatory = true
-    versionRange = "[34.1.42,)"
+    versionRange = "[36.1.0,)"
     ordering = "NONE"
     side = "BOTH"
 
 [[dependencies.environmental]]
     modId = "abnormals_core"
     mandatory = true
-    versionRange = "[3.0.6,)"
+    versionRange = "[3.1.1,)"
     ordering = "AFTER"
     side = "BOTH"

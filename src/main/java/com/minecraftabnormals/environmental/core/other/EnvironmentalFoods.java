@@ -18,7 +18,11 @@ public class EnvironmentalFoods {
 
 	public static final Food FRIED_EGG = (new Food.Builder()).hunger(3).saturation(0.6F).build();
 	public static final Food SCRAMBLED_EGGS = (new Food.Builder()).hunger(6).saturation(0.6F).build();
-
+	
+	public static final Food TRUFFLE = new Food.Builder().hunger(4).saturation(0.1F).setAlwaysEdible().effect(() -> new EffectInstance(Effects.HEALTH_BOOST, 2400), 1.0F).build();
+	public static final Food TRUFFLE_PUREE = new Food.Builder().hunger(20).saturation(0.5F).setAlwaysEdible().effect(() -> new EffectInstance(Effects.HEALTH_BOOST, 6000), 1.0F).effect(() -> new EffectInstance(Effects.RESISTANCE, 1200), 1.0F).effect(() -> new EffectInstance(Effects.SPEED, 1200), 1.0F).build();
+	public static final Food TRUFFLE_PIE = new Food.Builder().hunger(15).saturation(0.6F).setAlwaysEdible().effect(() -> new EffectInstance(Effects.HEALTH_BOOST, 3600), 1.0F).effect(() -> new EffectInstance(Effects.HASTE, 1200), 1.0F).effect(() -> new EffectInstance(Effects.STRENGTH, 1200), 1.0F).effect(() -> new EffectInstance(Effects.ABSORPTION, 1200), 1.0F).build();
+	
 	public static final Food RICE_BALL = new Food.Builder().hunger(4).saturation(0.5F).build();
 	public static final Food KOI = new Food.Builder().hunger(1).saturation(0.1F).build();
 

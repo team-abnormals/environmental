@@ -23,9 +23,6 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class EnvironmentalVillagers {
@@ -40,10 +37,12 @@ public class EnvironmentalVillagers {
 
 	public static void registerVillagerTypes() {
 		VillagerTrades.VILLAGER_DEFAULT_TRADES.isEmpty();
+
 		registerVillagerType(createType("ice_spikes"), Biomes.ICE_SPIKES);
 		registerVillagerType(createType("flower_forest"), Biomes.FLOWER_FOREST);
 		registerVillagerType(createType("blossom"), EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), EnvironmentalBiomes.BLOSSOM_HILLS.getKey(), EnvironmentalBiomes.BLOSSOM_HIGHLANDS.getKey(), EnvironmentalBiomes.BLOSSOM_VALLEYS.getKey());
-		registerVillagerType(createType("forest"), Biomes.FOREST, Biomes.BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS, Biomes.TALL_BIRCH_FOREST, Biomes.TALL_BIRCH_HILLS);
+		registerVillagerType(createType("forest"), Biomes.FOREST, Biomes.WOODED_HILLS, Biomes.BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS, Biomes.TALL_BIRCH_FOREST, Biomes.TALL_BIRCH_HILLS);
+		registerVillagerType(createType("marsh"), EnvironmentalBiomes.MARSH.getKey(), EnvironmentalBiomes.MUSHROOM_MARSH.getKey());
 
 		GiveHeroGiftsTask.GIFTS.put(CERAMIST.get(), new ResourceLocation(Environmental.MOD_ID, "gameplay/hero_of_the_village/ceramist_gift"));
 		GiveHeroGiftsTask.GIFTS.put(CARPENTER.get(), new ResourceLocation(Environmental.MOD_ID, "gameplay/hero_of_the_village/carpenter_gift"));
@@ -55,6 +54,7 @@ public class EnvironmentalVillagers {
 		return VillagerType.register(Environmental.MOD_ID + ":" + type);
 	}
 
+	@SafeVarargs
 	private static void registerVillagerType(VillagerType type, RegistryKey<Biome>... biomes) {
 		for (RegistryKey<Biome> biome : biomes) {
 			VillagerType.BY_BIOME.put(biome, type);

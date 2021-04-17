@@ -1,6 +1,6 @@
 package com.minecraftabnormals.environmental.core.mixin;
 
-import com.minecraftabnormals.environmental.common.item.WandererBootsItem;
+import com.minecraftabnormals.environmental.common.item.explorer.WandererBootsItem;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -26,8 +26,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 		if (l > 0 && this.isOnGround()) {
 			ItemStack stack = this.getItemStackFromSlot(EquipmentSlotType.FEET);
 			if (stack.getItem() instanceof WandererBootsItem) {
-				float uses = stack.getOrCreateTag().getFloat(WandererBootsItem.NBT_TAG);
-				stack.getOrCreateTag().putFloat(WandererBootsItem.NBT_TAG, uses + l);
+				((WandererBootsItem) stack.getItem()).levelUp(stack, this);
 			}
 		}
 	}

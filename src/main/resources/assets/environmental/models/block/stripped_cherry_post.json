@@ -1,0 +1,6 @@
+{
+  "parent": "abnormals_core:block/post",
+  "textures": {
+    "texture": "environmental:block/stripped_cherry_log"
+  }
+}

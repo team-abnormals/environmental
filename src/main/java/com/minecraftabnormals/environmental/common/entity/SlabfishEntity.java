@@ -1,9 +1,7 @@
 package com.minecraftabnormals.environmental.common.entity;
 
 import com.minecraftabnormals.abnormals_core.core.api.IBucketableEntity;
-import com.minecraftabnormals.environmental.common.entity.goals.SlabbyBreedGoal;
-import com.minecraftabnormals.environmental.common.entity.goals.SlabbyFollowParentGoal;
-import com.minecraftabnormals.environmental.common.entity.goals.SlabbyGrabItemGoal;
+import com.minecraftabnormals.environmental.common.entity.goals.*;
 import com.minecraftabnormals.environmental.common.entity.util.SlabfishOverlay;
 import com.minecraftabnormals.environmental.common.entity.util.SlabfishRarity;
 import com.minecraftabnormals.environmental.common.inventory.SlabfishInventory;
@@ -19,6 +17,7 @@ import com.minecraftabnormals.environmental.core.other.EnvironmentalDataSerializ
 import com.minecraftabnormals.environmental.core.other.EnvironmentalTags;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEntities;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
+import com.minecraftabnormals.environmental.core.registry.EnvironmentalParticles;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalSounds;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.BlockState;
@@ -43,6 +42,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.NBTUtil;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -51,7 +51,6 @@ import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ItemParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.pathfinding.PathNodeType;
-import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.ItemTags;
@@ -64,6 +63,8 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.Tags;
@@ -86,6 +87,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 	private static final DataParameter<ResourceLocation> SLABFISH_TYPE = EntityDataManager.createKey(SlabfishEntity.class, EnvironmentalDataSerializers.RESOURCE_LOCATION);
 	private static final DataParameter<Integer> SLABFISH_OVERLAY = EntityDataManager.createKey(SlabfishEntity.class, DataSerializers.VARINT);
 	private static final DataParameter<Boolean> FROM_BUCKET = EntityDataManager.createKey(SlabfishEntity.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Optional<BlockPos>> EFFIGY = EntityDataManager.createKey(SlabfishEntity.class, DataSerializers.OPTIONAL_BLOCK_POS);
 
 	private static final DataParameter<ResourceLocation> BACKPACK = EntityDataManager.createKey(SlabfishEntity.class, EnvironmentalDataSerializers.RESOURCE_LOCATION);
 	private static final DataParameter<Boolean> HAS_BACKPACK = EntityDataManager.createKey(SlabfishEntity.class, DataSerializers.BOOLEAN);
@@ -124,8 +126,11 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
 	@Override
 	protected void registerGoals() {
-		this.goalSelector.addGoal(0, new SwimGoal(this));
-		this.goalSelector.addGoal(2, new SitGoal(this));
+		this.goalSelector.addGoal(1, new SwimGoal(this));
+		this.goalSelector.addGoal(1, new SitGoal(this));
+
+		this.goalSelector.addGoal(2, new SlabbyFindEffigyGoal(this));
+		this.goalSelector.addGoal(2, new SlabbyPraiseEffigyGoal(this));
 
 		this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, LivingEntity.class, entity -> EntityTypeTags.RAIDERS.contains(entity.getType()), 15.0F, 1.0D, 1.5D, EntityPredicates.CAN_AI_TARGET::test));
 
@@ -144,6 +149,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 		this.getDataManager().register(SLABFISH_TYPE, SlabfishManager.DEFAULT_SLABFISH.getRegistryName());
 		this.getDataManager().register(SLABFISH_OVERLAY, 0);
 		this.getDataManager().register(FROM_BUCKET, false);
+		this.getDataManager().register(EFFIGY, Optional.empty());
 
 		this.getDataManager().register(BACKPACK, SlabfishManager.BROWN_BACKPACK.getRegistryName());
 		this.getDataManager().register(HAS_BACKPACK, false);
@@ -158,6 +164,10 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 		if (this.hasBackpack())
 			compound.putString("BackpackType", this.getBackpack().toString());
 		compound.putBoolean("FromBucket", this.isFromBucket());
+
+		if (this.getEffigy() != null) {
+			compound.put("Effigy", NBTUtil.writeBlockPos(this.getEffigy()));
+		}
 
 		this.slabfishBackpack.write(compound);
 	}
@@ -174,6 +184,10 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 		this.setSlabfishOverlay(SlabfishOverlay.byId(compound.getInt("SlabfishOverlay")));
 		this.setBackpack(compound.contains("BackpackType", Constants.NBT.TAG_STRING) ? new ResourceLocation(compound.getString("BackpackType")) : SlabfishManager.BROWN_BACKPACK.getRegistryName());
 		this.setFromBucket(compound.getBoolean("FromBucket"));
+
+		if (compound.contains("Effigy", Constants.NBT.TAG_COMPOUND)) {
+			this.setEffigy(NBTUtil.readBlockPos(compound.getCompound("Effigy")));
+		}
 
 		this.slabfishBackpack.read(compound);
 		this.updateSweater();
@@ -280,20 +294,20 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 		} else if (Ingredient.fromTag(ItemTags.FISHES).test(stack) && stack.isFood() && this.getHealth() < this.getMaxHealth()) {
 			this.consumeItemFromStack(player, stack);
 			world.playSound(this.getPosX(), this.getPosY(), this.getPosZ(), EnvironmentalSounds.ENTITY_SLABFISH_EAT.get(), SoundCategory.NEUTRAL, 1F, 1F, true);
-			this.heal((float) item.getFood().getHealing());
+			this.heal(item.getFood().getHealing());
 			this.particleCloud(ParticleTypes.COMPOSTER);
 			return ActionResultType.SUCCESS;
 
-		} else if (Ingredient.fromTag(EnvironmentalTags.Items.SUSHI).test(stack)) {
-			this.consumeItemFromStack(player, stack);
-			this.playBurpSound();
-			this.addPotionEffect(new EffectInstance(Effects.SPEED, 3600, 2, true, true));
-			this.particleCloud(ParticleTypes.CLOUD);
-			return ActionResultType.SUCCESS;
+//		} else if (Ingredient.fromTag(EnvironmentalTags.Items.SUSHI).test(stack)) {
+//			this.consumeItemFromStack(player, stack);
+//			this.playBurpSound();
+//			this.addPotionEffect(new EffectInstance(Effects.SPEED, 3600, 2, true, true));
+//			this.particleCloud(ParticleTypes.CLOUD);
+//			return ActionResultType.SUCCESS;
 
 		} else if (Ingredient.fromTag(EnvironmentalTags.Items.SLABFISH_FOODS).test(stack)) {
-			this.consumeItemFromStack(player, stack);
 			stack.onItemUseFinish(this.world, this);
+			this.consumeItemFromStack(player, stack);
 			world.playSound(this.getPosX(), this.getPosY(), this.getPosZ(), EnvironmentalSounds.ENTITY_SLABFISH_EAT.get(), SoundCategory.NEUTRAL, 1F, 1F, true);
 			return ActionResultType.SUCCESS;
 
@@ -762,6 +776,15 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 		this.dataManager.set(SLABFISH_OVERLAY, typeId.getId());
 	}
 
+	public void setEffigy(@Nullable BlockPos beamTarget) {
+		this.getDataManager().set(EFFIGY, Optional.ofNullable(beamTarget));
+	}
+
+	@Nullable
+	public BlockPos getEffigy() {
+		return this.getDataManager().get(EFFIGY).orElse(null);
+	}
+
 	// INVENTORY //
 
 	public void openGui(ServerPlayerEntity player) {
@@ -799,7 +822,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 		super.dropInventory();
 		if (this.hasBackpack()) {
 			if (this.slabfishBackpack != null) {
-				for (int i = 1; i < this.slabfishBackpack.getSizeInventory(); ++i) {
+				for (int i = this.slabfishBackpack.getSizeInventory(); i > 0; --i) {
 					ItemStack itemstack = this.slabfishBackpack.removeStackFromSlot(i);
 					if (!itemstack.isEmpty() && !EnchantmentHelper.hasVanishingCurse(itemstack)) {
 						this.entityDropItem(itemstack);
@@ -811,8 +834,10 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
 	@Override
 	protected void updateEquipmentIfNeeded(ItemEntity itemEntity) {
-		ItemStack itemstack = itemEntity.getItem();
+		if (itemEntity.getPersistentData().getBoolean("EffigyItem") || itemEntity.getThrowerId() == this.getUniqueID())
+			return;
 
+		ItemStack itemstack = itemEntity.getItem();
 		if (this.hasBackpack()) {
 			ItemStack stack = this.slabfishBackpack.addItem(itemstack, 3, this.slabfishBackpack.getSizeInventory());
 			if (!ItemStack.areItemStacksEqual(itemstack, stack))
@@ -883,6 +908,15 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 	}
 
 	// MISC //
+
+
+	@OnlyIn(Dist.CLIENT)
+	@Override
+	public void handleStatusUpdate(byte id) {
+		if (id == 8) {
+			this.particleCloud(EnvironmentalParticles.SLABFISH_FINDS_EFFIGY.get());
+		} else super.handleStatusUpdate(id);
+	}
 
 	@Override
 	public IPacket<?> createSpawnPacket() {

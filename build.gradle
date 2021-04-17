@@ -1,8 +1,7 @@
 buildscript {
     repositories {
         maven { url = "https://files.minecraftforge.net/maven" }
-        maven { url = "https://dist.creeper.host/Sponge/maven" }
-        jcenter()
+        maven { url = "https://repo.spongepowered.org/repository/maven-public/" }
         mavenCentral()
     }
     dependencies {
@@ -70,8 +69,7 @@ minecraft {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${project.minecraft}-${project.forge}"
-    implementation fg.deobf("curse.maven:abnormals_core-382216:${project.abnormalsCore}")
-    implementation fg.deobf("curse.maven:autumnity-365045:3154935")
+    implementation fg.deobf("com.minecraftabnormals:abnormals-core:${project.minecraft}-${project.abnormalsCore}")
 
     compileOnly fg.deobf("mezz.jei:jei-${project.minecraft}:${project.jei}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${project.minecraft}:${project.jei}")
@@ -79,16 +77,13 @@ dependencies {
 
 repositories {
     maven {
-        name = "Progwml6 maven"
-        url = "https://dvs1.progwml6.com/files/maven/"
+        url "https://maven.jaackson.me"
     }
     maven {
-        name = "ModMaven"
-        url = "https://modmaven.k-4u.nl"
+        url "https://dvs1.progwml6.com/files/maven/"
     }
     maven {
-        name = "CurseForge"
-        url = "https://www.cursemaven.com"
+        url "https://modmaven.k-4u.nl"
     }
 }
 

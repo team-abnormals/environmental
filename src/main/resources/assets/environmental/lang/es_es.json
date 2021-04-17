@@ -10,7 +10,7 @@
 	"block.environmental.mud_brick_vertical_slab": "Losa vertical de ladrillos de barro",
 	"block.environmental.chiseled_mud_bricks": "Ladrillos de barro cincelados",
 
-	"block.environmental.slabfish_effigy": "Efigie de pezlosa",
+	"block.environmental.slabfish_effigy": "Efigie de pez losa",
 
 	"block.environmental.chiseled_bricks": "Ladrillos cincelados",
 
@@ -21,10 +21,10 @@
 	"block.environmental.ice_brick_vertical_slab": "Losa vertical de ladrillos de hielo",
 	"block.environmental.chiseled_ice_bricks": "Ladrillos de hielo cincelados",
 
-	"block.environmental.ice_lantern": "Farolillo de hielo",
+	"block.environmental.ice_lantern": "Farol de hielo",
 	"block.environmental.ice_chain": "Cadena de hielo",
 
-	"block.environmental.willow_planks": "Madera de sauce",
+	"block.environmental.willow_planks": "Tablones de sauce",
 	"block.environmental.willow_slab": "Losa de sauce",
 	"block.environmental.willow_stairs": "Escaleras de sauce",
 	"block.environmental.willow_fence": "Valla de sauce",
@@ -42,16 +42,19 @@
 	"block.environmental.willow_sapling": "Brote de sauce",
 	"block.environmental.willow_leaves": "Hojas de sauce",
 	"block.environmental.hanging_willow_leaves": "Hojas colgantes de sauce",
-	"block.environmental.vertical_willow_planks": "Madera vertical de sauce",
+	"block.environmental.vertical_willow_planks": "Tablones de sauce verticales",
 	"block.environmental.willow_vertical_slab": "Losa vertical de sauce",
 	"block.environmental.willow_leaf_carpet": "Alfombra de hojas de sauce",
 	"block.environmental.potted_willow_sapling": "Maceta con brote de sauce",
 	"block.environmental.willow_sign": "Cartel de sauce",
 	"block.environmental.willow_chest": "Cofre de sauce",
 	"block.environmental.willow_trapped_chest": "Cofre trampa de sauce",
+	"block.environmental.willow_post": "Poste de sauce",
+	"block.environmental.stripped_willow_post": "Poste de sauce sin corteza",
+	"block.environmental.willow_hedge": "Seto de sauce",
 	"block.environmental.willow_beehive": "Apiario de sauce",
 
-	"block.environmental.cherry_planks": "Madera de cerezo",
+	"block.environmental.cherry_planks": "Tablones de cerezo",
 	"block.environmental.cherry_slab": "Losa de cerezo",
 	"block.environmental.cherry_stairs": "Escaleras de cerezo",
 	"block.environmental.cherry_fence": "Valla de cerezo",
@@ -68,20 +71,23 @@
 	"block.environmental.stripped_cherry_wood": "Leño de cerezo sin corteza",
 	"block.environmental.cherry_sapling": "Brote de cerezo",
 	"block.environmental.cherry_leaves": "Hojas de cerezo",
-	"block.environmental.vertical_cherry_planks": "Madera vertical de cerezo",
+	"block.environmental.vertical_cherry_planks": "Tablones de cerezo verticales",
 	"block.environmental.cherry_vertical_slab": "Losa vertical de cerezo",
 	"block.environmental.cherry_leaf_carpet": "Alfombra de hojas de cerezo",
 	"block.environmental.potted_cherry_sapling": "Maceta con brote de cerezo",
 	"block.environmental.cherry_sign": "Cartel de cerezo",
 	"block.environmental.cherry_chest": "Cofre de cerezo",
 	"block.environmental.cherry_trapped_chest": "Cofre trampa de cerezo",
+	"block.environmental.cherry_post": "Poste de cerezo",
+	"block.environmental.stripped_cherry_post": "Poste de cerezo sin corteza",
+	"block.environmental.cherry_hedge": "Seto de cerezo",
 	"block.environmental.cherry_beehive": "Apiario de cerezo",
 
 	"block.environmental.wisteria_log": "Tronco de glicina",
 	"block.environmental.stripped_wisteria_log": "Tronco de glicina sin corteza",
 	"block.environmental.wisteria_wood": "Leño de glicina",
 	"block.environmental.stripped_wisteria_wood": "Leño de glicina sin corteza",
-	"block.environmental.wisteria_planks": "Madera de glicina",
+	"block.environmental.wisteria_planks": "Tablones de glicina",
 	"block.environmental.wisteria_stairs": "Escaleras de glicina",
 	"block.environmental.wisteria_slab": "Losa de glicina",
 	"block.environmental.wisteria_fence": "Valla de glicina",
@@ -93,10 +99,12 @@
 	"block.environmental.wisteria_sign": "Cartel de glicina",
 	"block.environmental.wisteria_bookshelf": "Librería de glicina",
 	"block.environmental.wisteria_ladder": "Escalera de mano de glicina",
-	"block.environmental.vertical_wisteria_planks": "Madera vertical de glicina",
+	"block.environmental.vertical_wisteria_planks": "Tablones de glicina verticales",
 	"block.environmental.wisteria_vertical_slab": "Losa vertical de glicina ",
 	"block.environmental.wisteria_chest": "Cofre de glicina",
 	"block.environmental.wisteria_trapped_chest": "Cofre trampa de glicina",
+	"block.environmental.wisteria_post": "Poste de glicina",
+	"block.environmental.stripped_wisteria_post": "Poste de glicina sin corteza",
 	"block.environmental.wisteria_beehive": "Apiario de glicina",
 
 	"block.environmental.blue_wisteria_leaves": "Hojas de glicina azules",
@@ -118,6 +126,11 @@
 	"block.environmental.pink_wisteria_leaf_carpet": "Alfombra de hojas de glicina rosas",
 	"block.environmental.purple_wisteria_leaf_carpet": "Alfombra de hojas de glicina moradas",
 	"block.environmental.white_wisteria_leaf_carpet": "Alfombra de hojas de glicina blancas",
+
+	"block.environmental.blue_wisteria_hedge": "Seto de glicina azul",
+	"block.environmental.pink_wisteria_hedge": "Seto de glicina rosa",
+	"block.environmental.purple_wisteria_hedge": "Seto de glicina morado",
+	"block.environmental.white_wisteria_hedge": "Seto de glicina blanco",
 
 	"block.environmental.terracotta_bricks": "Ladrillos de terracota",
 	"block.environmental.white_terracotta_bricks": "Ladrillos de terracota blanca",
@@ -275,15 +288,11 @@
 	"block.environmental.yak_hair_block": "Bloque de pelo de yak",
 	"block.environmental.yak_hair_rug": "Tapete de pelo de yak",
 
-	"block.environmental.rice_sack": "Saco de arroz",
-	"block.environmental.rice": "Arroz",
-	"block.environmental.tall_rice": "Arroz",
-
-	"block.environmental.duckweed": "Lentejas de agua",
-	"block.environmental.duckweed_thatch": "Paja de lentejas de agua",
-	"block.environmental.duckweed_thatch_slab": "Losa de paja de lentejas de agua",
-	"block.environmental.duckweed_thatch_stairs": "Escaleras de paja de lentejas de agua",
-	"block.environmental.duckweed_thatch_vertical_slab": "Losa vertical de paja de lentejas de agua",
+	"block.environmental.duckweed": "Lenteja de agua",
+	"block.environmental.duckweed_thatch": "Paja de lenteja de agua",
+	"block.environmental.duckweed_thatch_slab": "Losa de paja de lenteja de agua",
+	"block.environmental.duckweed_thatch_stairs": "Escaleras de paja de lenteja de agua",
+	"block.environmental.duckweed_thatch_vertical_slab": "Losa vertical de paja de lenteja de agua",
 
 	"block.environmental.twig_nest": "Nido de ramitas",
 	"block.environmental.twig_chicken_nest": "Nido de ramitas con huevos de gallina",
@@ -298,24 +307,27 @@
 	"block.environmental.duck_egg_crate": "Cajón de huevos de pato",
 	"block.environmental.turtle_egg_crate": "Cajón de huevos de tortuga",
 
+	"block.environmental.buried_truffle": "Trufa enterrada",
+	"block.environmental.truffle_crate": "Cajón de trufas",
+
 	"item.environmental.wanderer_boots": "Botas del ambulante",
 	"item.environmental.architect_belt": "Cinturón del arquitecto",
 	"item.environmental.healer_pouch": "Bolsa del curador",
 	"item.environmental.thief_hood": "Capucha del ladrón",
 	"item.environmental.executioner_cleaver": "Cuchilla del verdugo",
 
-	"item.environmental.slabfish_spawn_egg": "Generar pezlosa",
+	"item.environmental.slabfish_spawn_egg": "Generar pez losa",
 	"item.environmental.butterfly_spawn_egg": "Generar mariposa",
 	"item.environmental.duck_spawn_egg": "Generar pato",
 	"item.environmental.deer_spawn_egg": "Generar ciervo",
 	"item.environmental.yak_spawn_egg": "Generar yak",
 	"item.environmental.koi_spawn_egg": "Generar koi",
+	"item.environmental.fennec_fox_spawn_egg": "Generar zorro fénec",
 
 	"item.environmental.yak_hair": "Pelo de yak",
 	"item.environmental.yak_pants": "Pantalones de yak",
 
 	"item.environmental.cattail_seeds": "Semillas de totora",
-	"item.environmental.rice_ball": "Bola de arroz",
 
 	"item.environmental.venison": "Venado crudo",
 	"item.environmental.cooked_venison": "Venado cocinado",
@@ -328,20 +340,7 @@
 	"item.environmental.scrambled_eggs": "Huevos revueltos",
 
 	"item.environmental.koi": "Koi",
-
-	"item.environmental.cod_kelp_roll": "Rollo de algas de bacalao",
-	"item.environmental.tropical_fish_kelp_roll": "Rollo de algas de pez tropical",
-	"item.environmental.koi_kelp_roll": "Rollo de algas de koi",
-	"item.environmental.crab_kelp_roll": "Rollo de algas de cangrejo",
-	"item.environmental.pike_kelp_roll": "Rollo de algas de lucio",
-
-	"item.environmental.salmon_rice_cake": "Pastel de arroz de salmón",
-	"item.environmental.pufferfish_rice_cake": "Pastel de arroz de pez globo",
-	"item.environmental.lionfish_rice_cake": "Pastel de arroz de pez león",
-
-	"item.environmental.squid_ink_risotto": "Risotto de tinta de calamar",
-
-	"item.environmental.slabfish_bucket": "Cubo con pezlosa",
+	"item.environmental.slabfish_bucket": "Cubo con pez losa",
 	"item.environmental.koi_bucket": "Cubo con koi",
 	"item.environmental.bottled_butterfly": "Frasco con mariposa",
 
@@ -353,6 +352,10 @@
 	"item.environmental.cherry_pie": "Tarta de cereza",
 	"item.environmental.apple_pie": "Tarta de manzana",
 
+	"item.environmental.truffle": "Trufa",
+	"item.environmental.truffle_puree": "Puré de trufa",
+	"item.environmental.truffle_pie": "Tarta de trufa",
+
 	"item.environmental.willow_boat": "Barca de sauce",
 	"item.environmental.cherry_boat": "Barca de cerezo",
 	"item.environmental.wisteria_boat": "Barca de glicina",
@@ -363,14 +366,15 @@
 	"item.environmental.music_disc_leaving_home": "Disco de música",
 	"item.environmental.music_disc_leaving_home.desc": "hatsondogs - Leaving Home",
 
-	"entity.environmental.slabfish": "Pezlosa",
+	"entity.environmental.slabfish": "Pez losa",
 	"entity.environmental.duck": "Pato",
 	"entity.environmental.butterfly": "Mariposa",
 	"entity.environmental.deer": "Ciervo",
 	"entity.environmental.yak": "Yak",
 	"entity.environmental.koi": "Koi",
+	"entity.environmental.fennec_fox": "Zorro fénec",
 
-	"entity.environmental.duck_egg": "Huevo de pato",
+	"entity.environmental.duck_egg": "Huevo de pato lanzado",
 	"entity.environmental.mud_ball": "Bola de barro",
 
 	"entity.minecraft.villager.environmental.ceramist": "Alfarero",
@@ -380,13 +384,25 @@
 	"biome.environmental.mushroom_marsh": "Marisma de champiñones",
 	"biome.environmental.mire": "Ciénaga",
 
-	"biome.environmental.blossom_woods": "Bosque floreciente",
-	"biome.environmental.blossom_hills": "Colinas florecientes",
-	"biome.environmental.blossom_highlands": "Elevaciones florecientes",
-	"biome.environmental.blossom_valleys": "Valles florecientes",
+	"biome.environmental.blossom_woods": "Bosque florecido",
+	"biome.environmental.blossom_hills": "Colinas florecidas",
+	"biome.environmental.blossom_highlands": "Elevaciones florecidas",
+	"biome.environmental.blossom_valleys": "Valle florecido",
 
 	"effect.environmental.panic": "Pánico",
 	"effect.environmental.serenity": "Serenidad",
+
+	"item.minecraft.potion.effect.vitality": "Poción de vitalidad",
+	"item.minecraft.potion.effect.vitality_strong": "Poción de vitalidad",
+
+	"item.minecraft.splash_potion.effect.vitality": "Poción de vitalidad arrojadiza",
+	"item.minecraft.splash_potion.effect.vitality_strong": "Poción de vitalidad arrojadiza",
+
+	"item.minecraft.lingering_potion.effect.vitality": "Poción de vitalidad persistente",
+	"item.minecraft.lingering_potion.effect.vitality_strong": "Poción de vitalidad persistente",
+
+	"item.minecraft.tipped_arrow.effect.vitality": "Flecha de vitalidad",
+	"item.minecraft.tipped_arrow.effect.vitality_strong": "Flecha de vitalidad",
 
 	"container.kiln": "Horno de alfarería",
 	"container.sawmill": "Aserradero",
@@ -398,24 +414,46 @@
 	"attribute.name.generic.stealth": "Sigilo",
 
 	"advancements.husbandry.bred_all_slabfish.title": "Genes únicos",
-	"advancements.husbandry.bred_all_slabfish.description": "¡Haz que se reproduzcan todos los tipos de pezlosa!",
+	"advancements.husbandry.bred_all_slabfish.description": "¡Haz que se reproduzcan todos los tipos de pez losa!",
 
 	"advancements.husbandry.backpack_slabfish.title": "Primer día del cole",
-	"advancements.husbandry.backpack_slabfish.description": "Dale una mochila a un pezlosa",
+	"advancements.husbandry.backpack_slabfish.description": "Dale una mochila a un pez losa",
 
 	"advancements.adventure.find_natural_slabfish.title": "¡Vienen en distintos colores!",
-	"advancements.adventure.find_natural_slabfish.description": "Encuentra todas los tipos naturales de pezlosa",
+	"advancements.adventure.find_natural_slabfish.description": "Encuentra todas los tipos naturales de pez losa",
 
-	"subtitles.entity.slabfish.burp": "Pezlosa eructa",
-	"subtitles.entity.slabfish.death": "Pezlosa muere",
-	"subtitles.entity.slabfish.step": "Pasos de pezlosa",
-	"subtitles.entity.slabfish.hurt": "Pezlosa herido",
-	"subtitles.entity.slabfish.eat": "Pezlosa come",
-	"subtitles.entity.slabfish.transform": "Pezlosa se transforma",
-	"subtitles.entity.slabfish.backpack": "Mochila equipada",
-	"subtitles.entity.slabfish.sweater": "Suéter equipado",
+	"advancements.adventure.obtain_explorer_gear.title": "¡Swiper, no robes!",
+	"advancements.adventure.obtain_explorer_gear.description": "Obtén alguna parte del equipo de explorador",
 
-	"subtitles.entity.koi.flop": "Koi chapotea",
+	"advancements.adventure.upgrade_thief_hood.title": "Criminal delicado",
+	"advancements.adventure.upgrade_thief_hood.description": "Quítale la capucha del ladrón a un esqueleto o un esqueleto Wither y sube al máximo su nivel",
+
+	"advancements.adventure.upgrade_healer_pouch.title": "¡Pánico! en la mina",
+	"advancements.adventure.upgrade_healer_pouch.description": "Consigue la bolsa del curador matando monstruos en minas abandonadas o en fortalezas del portal al End y sube al máximo su nivel",
+
+	"advancements.adventure.upgrade_architect_belt.title": "¿Podemos arreglarlo?",
+	"advancements.adventure.upgrade_architect_belt.description": "Cómprale el cinturón del arquitecto a un albañil, un carpintero o un alfarero y sube al máximo su nivel",
+
+	"advancements.adventure.upgrade_wanderer_boots.title": "Botas de piel",
+	"advancements.adventure.upgrade_wanderer_boots.description": "Recibe las botas del ambulante de un vendedor ambulante y sube al máximo su nivel",
+
+	"subtitles.environmental.entity.slabfish.burp": "Pez losa eructa",
+	"subtitles.environmental.entity.slabfish.death": "Pez losa muere",
+	"subtitles.environmental.entity.slabfish.step": "Pasos de pez losa",
+	"subtitles.environmental.entity.slabfish.hurt": "Pez losa herido",
+	"subtitles.environmental.entity.slabfish.eat": "Pez losa come",
+	"subtitles.environmental.entity.slabfish.transform": "Pez losa se transforma",
+	"subtitles.environmental.entity.slabfish.backpack": "Mochila equipada",
+	"subtitles.environmental.entity.slabfish.sweater": "Suéter equipado",
+
+	"subtitles.environmental.entity.koi.flop": "Koi chapotea",
+
+	"subtitles.environmental.entity.duck.ambient": "Graznido de pato",
+	"subtitles.environmental.entity.duck.death": "Pato muere",
+	"subtitles.environmental.entity.duck.egg": "Un pato pone un huevo",
+	"subtitles.environmental.entity.duck.hurt": "Pato herido",
+
+	"subtitles.environmental.entity.pig.sniff": "Cerdo olfatea",
 
 	"entity.environmental.slabfish.baby": "Bebé",
 
@@ -441,7 +479,7 @@
 
 	"entity.environmental.slabfish.type.marsh": "Marisma",
 	"entity.environmental.slabfish.type.mire": "Ciénaga",
-	"entity.environmental.slabfish.type.blossom": "Floreciente",
+	"entity.environmental.slabfish.type.blossom": "Florecido",
 	"entity.environmental.slabfish.type.maple": "Bosque de arce",
 	"entity.environmental.slabfish.type.rainforest": "Selva",
 	"entity.environmental.slabfish.type.dunes": "Dunas",

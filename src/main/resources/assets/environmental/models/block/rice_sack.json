@@ -1,9 +1,0 @@
-{
-    "parent": "block/cube_bottom_top",
-    "textures": {
-        "top": "environmental:block/rice_sack_top",
-        "bottom": "environmental:block/rice_sack_bottom",
-        "side": "environmental:block/rice_sack_side"
-    }
-}
-

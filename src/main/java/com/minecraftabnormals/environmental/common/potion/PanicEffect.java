@@ -23,15 +23,13 @@ public class PanicEffect extends Effect {
 
 	@Override
 	public void applyAttributesModifiersToEntity(LivingEntity entity, AttributeModifierManager attributeMapIn, int amplifier) {
-		if (entity instanceof PlayerEntity) {
-			float amount = 20.0F - ((PlayerEntity) entity).getHealth();
-			for (Entry<Attribute, AttributeModifier> entry : this.getAttributeModifierMap().entrySet()) {
-				ModifiableAttributeInstance iattributeinstance = attributeMapIn.createInstanceIfAbsent(entry.getKey());
-				if (iattributeinstance != null) {
-					AttributeModifier attributemodifier = entry.getValue();
-					iattributeinstance.removeModifier(attributemodifier);
-					iattributeinstance.applyPersistentModifier(new AttributeModifier(attributemodifier.getID(), this.getName() + " " + amplifier, amount * this.getAttributeModifierAmount(amplifier, attributemodifier), attributemodifier.getOperation()));
-				}
+		float amount = entity.getMaxHealth() - entity.getHealth();
+		for (Entry<Attribute, AttributeModifier> entry : this.getAttributeModifierMap().entrySet()) {
+			ModifiableAttributeInstance iattributeinstance = attributeMapIn.createInstanceIfAbsent(entry.getKey());
+			if (iattributeinstance != null) {
+				AttributeModifier attributemodifier = entry.getValue();
+				iattributeinstance.removeModifier(attributemodifier);
+				iattributeinstance.applyPersistentModifier(new AttributeModifier(attributemodifier.getID(), this.getName() + " " + amplifier, amount * this.getAttributeModifierAmount(amplifier, attributemodifier), attributemodifier.getOperation()));
 			}
 		}
 	}

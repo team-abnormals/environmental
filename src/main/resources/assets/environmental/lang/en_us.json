@@ -49,6 +49,9 @@
 	"block.environmental.willow_sign": "Willow Sign",
 	"block.environmental.willow_chest": "Willow Chest",
 	"block.environmental.willow_trapped_chest": "Willow Trapped Chest",
+	"block.environmental.willow_post": "Willow Post",
+	"block.environmental.stripped_willow_post": "Stripped Willow Post",
+	"block.environmental.willow_hedge": "Willow Hedge",
 	"block.environmental.willow_beehive": "Willow Beehive",
 	
 	"block.environmental.cherry_planks": "Cherry Planks",
@@ -75,6 +78,9 @@
 	"block.environmental.cherry_sign": "Cherry Sign",
 	"block.environmental.cherry_chest": "Cherry Chest",
 	"block.environmental.cherry_trapped_chest": "Cherry Trapped Chest",
+	"block.environmental.cherry_post": "Cherry Post",
+	"block.environmental.stripped_cherry_post": "Stripped Cherry Post",
+	"block.environmental.cherry_hedge": "Cherry Hedge",
 	"block.environmental.cherry_beehive": "Cherry Beehive",
 	
 	"block.environmental.wisteria_log": "Wisteria Log",
@@ -97,6 +103,8 @@
 	"block.environmental.wisteria_vertical_slab": "Wisteria Vertical Slab",
 	"block.environmental.wisteria_chest": "Wisteria Chest",
 	"block.environmental.wisteria_trapped_chest": "Wisteria Trapped Chest",
+	"block.environmental.wisteria_post": "Wisteria Post",
+	"block.environmental.stripped_wisteria_post": "Stripped Wisteria Post",
 	"block.environmental.wisteria_beehive": "Wisteria Beehive",
 	
 	"block.environmental.blue_wisteria_leaves": "Blue Wisteria Leaves",
@@ -119,6 +127,11 @@
 	"block.environmental.purple_wisteria_leaf_carpet": "Purple Wisteria Leaf Carpet",
 	"block.environmental.white_wisteria_leaf_carpet": "White Wisteria Leaf Carpet",
 
+	"block.environmental.blue_wisteria_hedge": "Blue Wisteria Hedge",
+	"block.environmental.pink_wisteria_hedge": "Pink Wisteria Hedge",
+	"block.environmental.purple_wisteria_hedge": "Purple Wisteria Hedge",
+	"block.environmental.white_wisteria_hedge": "White Wisteria Hedge",
+	
 	"block.environmental.terracotta_bricks": "Terracotta Bricks",	
 	"block.environmental.white_terracotta_bricks": "White Terracotta Bricks",
 	"block.environmental.orange_terracotta_bricks": "Orange Terracotta Bricks",
@@ -274,11 +287,7 @@
 	"block.environmental.cherry_crate": "Cherry Crate",
 	"block.environmental.yak_hair_block": "Yak Hair Block",
 	"block.environmental.yak_hair_rug": "Yak Hair Rug",
-	
-	"block.environmental.rice_sack": "Rice Sack",
-	"block.environmental.rice": "Rice",
-	"block.environmental.tall_rice": "Rice",
-	
+
 	"block.environmental.duckweed": "Duckweed",
 	"block.environmental.duckweed_thatch": "Duckweed Thatch",
 	"block.environmental.duckweed_thatch_slab": "Duckweed Thatch Slab",
@@ -297,6 +306,9 @@
 	"block.environmental.chicken_egg_crate": "Chicken Egg Crate",
 	"block.environmental.duck_egg_crate": "Duck Egg Crate",
 	"block.environmental.turtle_egg_crate": "Turtle Egg Crate",
+	
+	"block.environmental.buried_truffle": "Buried Truffle",
+	"block.environmental.truffle_crate": "Truffle Crate",
 		
 	"item.environmental.wanderer_boots": "Wanderer's Boots",
 	"item.environmental.architect_belt": "Architect's Belt",
@@ -310,12 +322,12 @@
 	"item.environmental.deer_spawn_egg": "Deer Spawn Egg",
 	"item.environmental.yak_spawn_egg": "Yak Spawn Egg",
 	"item.environmental.koi_spawn_egg": "Koi Spawn Egg",
-	
+	"item.environmental.fennec_fox_spawn_egg": "Fennec Fox Spawn Egg",
+
 	"item.environmental.yak_hair": "Yak Hair",
 	"item.environmental.yak_pants": "Yak Pants",
 	
 	"item.environmental.cattail_seeds": "Cattail Seeds",
-	"item.environmental.rice_ball": "Rice Ball",
   
 	"item.environmental.venison": "Raw Venison",
 	"item.environmental.cooked_venison": "Cooked Venison",
@@ -328,19 +340,6 @@
 	"item.environmental.scrambled_eggs": "Scrambled Eggs",
 	
 	"item.environmental.koi": "Koi",
-	
-	"item.environmental.cod_kelp_roll": "Cod Kelp Roll",
-	"item.environmental.tropical_fish_kelp_roll": "Tropical Fish Kelp Roll",
-	"item.environmental.koi_kelp_roll": "Koi Kelp Roll",
-	"item.environmental.crab_kelp_roll": "Crab Kelp Roll",
-	"item.environmental.pike_kelp_roll": "Pike Kelp Roll",
-	
-	"item.environmental.salmon_rice_cake": "Salmon Rice Cake",
-	"item.environmental.pufferfish_rice_cake": "Pufferfish Rice Cake",
-	"item.environmental.lionfish_rice_cake": "Lionfish Rice Cake",
-	
-	"item.environmental.squid_ink_risotto": "Squid Ink Risotto",
-	
 	"item.environmental.slabfish_bucket": "Bucket of Slabfish",
 	"item.environmental.koi_bucket": "Bucket of Koi",
 	"item.environmental.bottled_butterfly": "Bottled Butterfly",
@@ -352,6 +351,10 @@
 	"item.environmental.cherries": "Cherries",
 	"item.environmental.cherry_pie": "Cherry Pie",
 	"item.environmental.apple_pie": "Apple Pie",
+	
+	"item.environmental.truffle": "Truffle",
+	"item.environmental.truffle_puree": "Truffle Purée",
+	"item.environmental.truffle_pie": "Truffle Pie",
 	
 	"item.environmental.willow_boat": "Willow Boat",
 	"item.environmental.cherry_boat": "Cherry Boat",
@@ -369,8 +372,9 @@
 	"entity.environmental.deer": "Deer",
 	"entity.environmental.yak": "Yak",
 	"entity.environmental.koi": "Koi",
-	
-	"entity.environmental.duck_egg": "Duck Egg",
+	"entity.environmental.fennec_fox": "Fennec Fox",
+
+	"entity.environmental.duck_egg": "Thrown Duck Egg",
 	"entity.environmental.mud_ball": "Mud Ball",
 	
 	"entity.minecraft.villager.environmental.ceramist": "Ceramist",
@@ -387,6 +391,18 @@
 	
 	"effect.environmental.panic": "Panic",
 	"effect.environmental.serenity": "Serenity",
+	
+	"item.minecraft.potion.effect.vitality": "Potion of Vitality",
+	"item.minecraft.potion.effect.vitality_strong": "Potion of Vitality",
+	
+	"item.minecraft.splash_potion.effect.vitality": "Splash Potion of Vitality",
+	"item.minecraft.splash_potion.effect.vitality_strong": "Splash Potion of Vitality",
+	
+	"item.minecraft.lingering_potion.effect.vitality": "Lingering Potion of Vitality",
+	"item.minecraft.lingering_potion.effect.vitality_strong": "Lingering Potion of Vitality",
+	
+	"item.minecraft.tipped_arrow.effect.vitality": "Arrow of Vitality",
+	"item.minecraft.tipped_arrow.effect.vitality_strong": "Arrow of Vitality",
 	
 	"container.kiln": "Kiln",
 	"container.sawmill": "Sawmill",
@@ -405,19 +421,39 @@
 	
 	"advancements.adventure.find_natural_slabfish.title": "They Come in Different Colors!",
 	"advancements.adventure.find_natural_slabfish.description": "Find all natural Slabfish variants",
+
+	"advancements.adventure.obtain_explorer_gear.title": "Swiper, No Swiping!",
+	"advancements.adventure.obtain_explorer_gear.description": "Obtain one piece of Explorer's Gear",
+
+	"advancements.adventure.upgrade_thief_hood.title": "Smooth Criminal",
+	"advancements.adventure.upgrade_thief_hood.description": "Grab the Thief's Hood rarely from Skeletons or Wither Skeletons and completely level it up",
+
+	"advancements.adventure.upgrade_healer_pouch.title": "Panic! At the Stronghold",
+	"advancements.adventure.upgrade_healer_pouch.description": "Collect the Healer's Pouch rarely from mobs in Strongholds or Mineshafts and completely level it up",
+
+	"advancements.adventure.upgrade_architect_belt.title": "Can We Fix It?",
+	"advancements.adventure.upgrade_architect_belt.description": "Buy the Architect's Belt from a master Mason, Carpenter, or Ceramist and completely level it up",
+
+	"advancements.adventure.upgrade_wanderer_boots.title": "Boots with the Fur",
+	"advancements.adventure.upgrade_wanderer_boots.description": "Receive the Wanderer's Boots rarely from a Wandering Trader and completely level it up",
 	
-	"subtitles.entity.slabfish.burp": "Slabfish burps",
-	"subtitles.entity.slabfish.death": "Slabfish dies",
-	"subtitles.entity.slabfish.step": "Slabfish steps",
-	"subtitles.entity.slabfish.hurt": "Slabfish hurts",
-	"subtitles.entity.slabfish.eat": "Slabfish eats",
-	"subtitles.entity.slabfish.transform": "Slabfish transforms",
-	"subtitles.entity.slabfish.backpack": "Backpack equips",
-	"subtitles.entity.slabfish.sweater": "Sweater equips",
+	"subtitles.environmental.entity.slabfish.burp": "Slabfish burps",
+	"subtitles.environmental.entity.slabfish.death": "Slabfish dies",
+	"subtitles.environmental.entity.slabfish.step": "Slabfish steps",
+	"subtitles.environmental.entity.slabfish.hurt": "Slabfish hurts",
+	"subtitles.environmental.entity.slabfish.eat": "Slabfish eats",
+	"subtitles.environmental.entity.slabfish.transform": "Slabfish transforms",
+	"subtitles.environmental.entity.slabfish.backpack": "Backpack equips",
+	"subtitles.environmental.entity.slabfish.sweater": "Sweater equips",
 	
-	"subtitles.entity.koi.flop": "Koi flops",
-	
-	"subtitles.entity.duck.egg": "Duck plops",
+	"subtitles.environmental.entity.koi.flop": "Koi flops",
+
+	"subtitles.environmental.entity.duck.ambient": "Duck quacks",
+	"subtitles.environmental.entity.duck.death": "Duck dies",
+	"subtitles.environmental.entity.duck.egg": "Duck plops",
+	"subtitles.environmental.entity.duck.hurt": "Duck hurts",
+
+	"subtitles.environmental.entity.pig.sniff": "Pig sniffs",
 	
 	"entity.environmental.slabfish.baby": "Baby",
 	

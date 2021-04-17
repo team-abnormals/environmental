@@ -26,7 +26,6 @@ public class EnvironmentalTrades {
 	public static void onWandererTradesEvent(WandererTradesEvent event) {
 		TradeUtil.addWandererTrades(event,
 				new AbnormalsTrade(1, EnvironmentalItems.CATTAIL_SEEDS.get(), 1, 6, 1),
-				new AbnormalsTrade(1, EnvironmentalItems.RICE.get(), 1, 12, 1),
 				new AbnormalsTrade(1, EnvironmentalItems.DUCKWEED.get(), 2, 6, 1),
 
 				new AbnormalsTrade(5, EnvironmentalBlocks.WILLOW_SAPLING.get().asItem(), 1, 8, 1),
@@ -58,35 +57,10 @@ public class EnvironmentalTrades {
 
 	@SubscribeEvent
 	public static void onVillagerTradesEvent(VillagerTradesEvent event) {
-		TradeUtil.addVillagerTrades(event, VillagerProfession.FARMER, TradeUtil.NOVICE,
-				new AbnormalsTrade(EnvironmentalItems.RICE.get(), 23, 1, 6, 1)
-		);
 		TradeUtil.addVillagerTrades(event, VillagerProfession.FARMER, TradeUtil.APPRENTICE,
 				new AbnormalsTrade(1, EnvironmentalItems.CHERRIES.get(), 6, 16, 5),
 				new AbnormalsTrade(1, EnvironmentalItems.APPLE_PIE.get(), 5, 12, 5),
 				new AbnormalsTrade(1, EnvironmentalItems.CHERRY_PIE.get(), 6, 12, 5)
-		);
-
-		TradeUtil.addVillagerTrades(event, VillagerProfession.FISHERMAN, TradeUtil.APPRENTICE,
-				new AbnormalsTrade(5, EnvironmentalItems.COD_KELP_ROLL.get(), 2, 6, 15),
-				new AbnormalsTrade(5, EnvironmentalItems.SALMON_RICE_CAKE.get(), 2, 6, 15)
-		);
-		TradeUtil.addVillagerTrades(event, VillagerProfession.FISHERMAN, TradeUtil.EXPERT,
-				new AbnormalsTrade(3, EnvironmentalItems.PUFFERFISH_RICE_CAKE.get(), 4, 5, 30)
-		);
-		TradeUtil.addVillagerTrades(event, VillagerProfession.FISHERMAN, TradeUtil.MASTER,
-				new AbnormalsTrade(3, EnvironmentalItems.TROPICAL_FISH_KELP_ROLL.get(), 4, 5, 30),
-				new AbnormalsTrade(3, EnvironmentalItems.KOI_KELP_ROLL.get(), 5, 5, 30)
-		);
-
-		TradeUtil.addCompatVillagerTrades(event, "upgrade_aquatic", VillagerProfession.FISHERMAN, TradeUtil.EXPERT,
-				new AbnormalsTrade(4, EnvironmentalItems.PIKE_KELP_ROLL.get(), 1, 3, 25)
-		);
-		TradeUtil.addCompatVillagerTrades(event, "upgrade_aquatic", VillagerProfession.FISHERMAN, TradeUtil.MASTER,
-				new AbnormalsTrade(3, EnvironmentalItems.LIONFISH_RICE_CAKE.get(), 4, 5, 30)
-		);
-		TradeUtil.addCompatVillagerTrades(event, "quark", VillagerProfession.FISHERMAN, TradeUtil.EXPERT,
-				new AbnormalsTrade(4, EnvironmentalItems.CRAB_KELP_ROLL.get(), 1, 3, 25)
 		);
 
 		TradeUtil.addVillagerTrades(event, VillagerProfession.MASON, TradeUtil.MASTER,
@@ -110,7 +84,7 @@ public class EnvironmentalTrades {
 		String[] defaultRemoved = new String[]{"crimson", "warped", "poise", "aspen", "grimwood", "morado", "kousa"};
 
 		for (Item item : ItemTags.PLANKS.getAllElements()) {
-			if (notOnBlacklist(item, new String[]{"vertical"}, defaultRemoved)) {
+			if (notOnBlacklist(item, new String[]{"vertical", "stained"}, defaultRemoved)) {
 				TradeUtil.addVillagerTrades(event, EnvironmentalVillagers.CARPENTER.get(), TradeUtil.NOVICE, new AbnormalsTrade(item, 24, 1, 16, 3));
 			}
 		}
@@ -162,7 +136,7 @@ public class EnvironmentalTrades {
 		Block[] chiseled_terracotta_bricks = new Block[]{EnvironmentalBlocks.CHISELED_WHITE_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_ORANGE_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_MAGENTA_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_LIGHT_BLUE_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_YELLOW_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_LIME_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_PINK_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_GRAY_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_LIGHT_GRAY_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_CYAN_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_PURPLE_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_BLUE_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_BROWN_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_GREEN_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_RED_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_BLACK_TERRACOTTA_BRICKS.get()};
 
 		TradeUtil.addVillagerTrades(event, EnvironmentalVillagers.CERAMIST.get(), TradeUtil.NOVICE,
-				new AbnormalsTrade(EnvironmentalItems.MUD_BALL.get(), 16, 1, 16, 2),
+				new AbnormalsTrade(EnvironmentalItems.MUD_BALL.get(), 10, 1, 16, 2),
 				new AbnormalsTrade(1, EnvironmentalItems.MUD_BRICK.get(), 10, 16, 1)
 		);
 		TradeUtil.addVillagerTrades(event, EnvironmentalVillagers.CERAMIST.get(), TradeUtil.APPRENTICE,
