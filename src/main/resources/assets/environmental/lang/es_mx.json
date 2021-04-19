@@ -311,13 +311,15 @@
 	"block.environmental.truffle_crate": "Cajón de trufas",
 
 	"item.environmental.wanderer_boots": "Botas del nómada",
+	"item.environmental.wanderer_boots.desc": "Bloques viajados",
 	"item.environmental.architect_belt": "Cinturón del arquitecto",
+	"item.environmental.architect_belt.desc": "Bloques colocados",
 	"item.environmental.healer_pouch": "Bolsa del curador",
+	"item.environmental.healer_pouch.desc": "Picos de adrenalina",
 	"item.environmental.thief_hood": "Capucha del ladrón",
-	"item.environmental.executioner_cleaver": "Cuchilla del verdugo",
+	"item.environmental.thief_hood.desc": "Monstruos asesinados",
 
 	"item.environmental.slabfish_spawn_egg": "Generar slabfish",
-	"item.environmental.butterfly_spawn_egg": "Generar mariposa",
 	"item.environmental.duck_spawn_egg": "Generar pato",
 	"item.environmental.deer_spawn_egg": "Generar ciervo",
 	"item.environmental.yak_spawn_egg": "Generar yak",
@@ -342,7 +344,6 @@
 	"item.environmental.koi": "Koi",
 	"item.environmental.slabfish_bucket": "Cubeta con slabfish",
 	"item.environmental.koi_bucket": "Cubeta con koi",
-	"item.environmental.bottled_butterfly": "Botella con mariposa",
 
 	"item.environmental.mud_ball": "Bola de barro",
 	"item.environmental.mud_brick": "Ladrillo de barro",
@@ -368,7 +369,6 @@
 
 	"entity.environmental.slabfish": "Slabfish",
 	"entity.environmental.duck": "Pato",
-	"entity.environmental.butterfly": "Mariposa",
 	"entity.environmental.deer": "Ciervo",
 	"entity.environmental.yak": "Yak",
 	"entity.environmental.koi": "Koi",
@@ -382,7 +382,6 @@
 
 	"biome.environmental.marsh": "Marisma",
 	"biome.environmental.mushroom_marsh": "Marisma fúngica",
-	"biome.environmental.mire": "Ciénaga",
 
 	"biome.environmental.blossom_woods": "Bosque florecido",
 	"biome.environmental.blossom_hills": "Colinas florecidas",
@@ -410,8 +409,7 @@
 	"gui.environmental.category.baking": "Horneando",
 	"gui.environmental.category.sawing": "Aserrando",
 
-	"generic.reachDistance": "Distancia de alcance",
-	"attribute.name.generic.stealth": "Sigilo",
+	"attribute.environmental.name.generic.stealth": "Sigilo",
 
 	"advancements.environmental.husbandry.bred_all_slabfish.title": "Genes únicos",
 	"advancements.environmental.husbandry.bred_all_slabfish.description": "¡Haz que se reproduzcan todos los tipos de slabfish!",
@@ -419,20 +417,17 @@
 	"advancements.environmental.husbandry.backpack_slabfish.title": "Primer día del cole",
 	"advancements.environmental.husbandry.backpack_slabfish.description": "Dale una mochila a un slabfish",
 
-	"advancements.environmental.adventure.find_natural_slabfish.title": "¡Vienen en distintos colores!",
-	"advancements.environmental.adventure.find_natural_slabfish.description": "Encuentra todas los tipos naturales de slabfish",
-
 	"advancements.environmental.adventure.obtain_explorer_gear.title": "¡No te lo lleves!",
 	"advancements.environmental.adventure.obtain_explorer_gear.description": "Obtén alguna pieza del equipo de explorador",
 
 	"advancements.environmental.adventure.upgrade_thief_hood.title": "Criminal delicado",
-	"advancements.environmental.adventure.upgrade_thief_hood.description": "Consigue la capucha del ladrón de un esqueleto o un esqueleto del Wither y sube al máximo su nivel",
+	"advancements.environmental.adventure.upgrade_thief_hood.description": "Consigue la capucha del ladrón de un esqueleto y sube al máximo su nivel",
 
 	"advancements.environmental.adventure.upgrade_healer_pouch.title": "¡Pánico! en la mina",
 	"advancements.environmental.adventure.upgrade_healer_pouch.description": "Consigue la bolsa del curador matando monstruos en minas abandonadas o en fortalezas del portal al End y sube al máximo su nivel",
 
-	"advancements.environmental.adventure.upgrade_architect_belt.title": "¿Podemos arreglarlo?",
-	"advancements.environmental.adventure.upgrade_architect_belt.description": "Cómprale el cinturón del arquitecto a un albañil, un carpintero o un alfarero y sube al máximo su nivel",
+	"advancements.environmental.adventure.upgrade_architect_belt.title": "Podemos arreglarlo",
+	"advancements.environmental.adventure.upgrade_architect_belt.description": "Cómprale el cinturón del arquitecto a un albañil, carpintero o alfarero y sube al máximo su nivel",
 
 	"advancements.environmental.adventure.upgrade_wanderer_boots.title": "Botas de piel",
 	"advancements.environmental.adventure.upgrade_wanderer_boots.description": "Recibe las botas del nómada de un comerciante nómada y sube al máximo su nivel",
