@@ -186,7 +186,7 @@
 	"block.environmental.red_terracotta_brick_slab": "Czerwona terakotowa ceglana płyta",
 	"block.environmental.black_terracotta_brick_slab": "Czarna terakotowa ceglana płyta",
 	
-	"block.environmental.terracotta_brick_vertical_slab": "terakotowa ceglana płyta",	
+	"block.environmental.terracotta_brick_vertical_slab": "Pionowa terakotowa ceglana płyta",	
 	"block.environmental.white_terracotta_brick_vertical_slab": "Pionowa biała terakotowa ceglana płyta",
 	"block.environmental.orange_terracotta_brick_vertical_slab": "Pionowa pomarańczowa terakotowa ceglana płyta",
 	"block.environmental.magenta_terracotta_brick_vertical_slab": "Pionowa karmazynowa terakotowa ceglana płyta",
@@ -306,6 +306,9 @@
 	"block.environmental.chicken_egg_crate": "Skrzynka kurzych jajek",
 	"block.environmental.duck_egg_crate": "Skrzynka kaczych jajek",
 	"block.environmental.turtle_egg_crate": "Skrzynka żółwich jajek",
+    
+    "block.environmental.buried_truffle": "Zakopana trufla",
+	"block.environmental.truffle_crate": "Skrzynka trufli",
 		
 	"item.environmental.wanderer_boots": "Buty wędrowca",
 	"item.environmental.architect_belt": "Pas architekta",
@@ -319,6 +322,7 @@
 	"item.environmental.deer_spawn_egg": "Jajo przyzywające jelenia",
 	"item.environmental.yak_spawn_egg": "Jajo przyzywające jaka",
 	"item.environmental.koi_spawn_egg": "Jajo przyzywające koi",
+    "item.environmental.fennec_fox_spawn_egg": "Jajo przyzywające fenka",
 	
 	"item.environmental.yak_hair": "Włosie jaka",
 	"item.environmental.yak_pants": "Spodnie jaka",
@@ -336,7 +340,6 @@
 	"item.environmental.scrambled_eggs": "Jajecznica",
 	
 	"item.environmental.koi": "Koi",
-	
 	"item.environmental.slabfish_bucket": "Wiadro z płytorybem",
 	"item.environmental.koi_bucket": "Wiadro z koi",
 	"item.environmental.bottled_butterfly": "Motyl w butelce",
@@ -348,6 +351,10 @@
 	"item.environmental.cherries": "Wiśnie",
 	"item.environmental.cherry_pie": "Placek wiśniowy",
 	"item.environmental.apple_pie": "Jabłecznik",
+    
+    "item.environmental.truffle": "Trufla",
+	"item.environmental.truffle_puree": "Purée z trufli",
+	"item.environmental.truffle_pie": "Placek truflowy",
 	
 	"item.environmental.willow_boat": "Wierzbowa łódka",
 	"item.environmental.cherry_boat": "Wiśniowa łódka",
@@ -365,6 +372,7 @@
 	"entity.environmental.deer": "Jeleń",
 	"entity.environmental.yak": "Jak",
 	"entity.environmental.koi": "Koi",
+    "entity.environmental.fennec_fox": "Fenek",
 	
 	"entity.environmental.duck_egg": "Rzucone kacze jajko",
 	"entity.environmental.mud_ball": "Kulka błota",
@@ -374,7 +382,6 @@
 	
 	"biome.environmental.marsh": "Mokradło",
 	"biome.environmental.mushroom_marsh": "Grzybowe mokradło",
-	"biome.environmental.mire": "Bajoro",
 	
 	"biome.environmental.blossom_woods": "Kwitnące lasy",
 	"biome.environmental.blossom_hills": "Kwitnące wzgórza",
@@ -383,6 +390,18 @@
 	
 	"effect.environmental.panic": "Panika",
 	"effect.environmental.serenity": "Pokój ducha",
+    
+    "item.minecraft.potion.effect.vitality": "Mikstura witalności",
+	"item.minecraft.potion.effect.vitality_strong": "Mikstura witalności",
+	
+	"item.minecraft.splash_potion.effect.vitality": "Miotana mikstura witalności",
+	"item.minecraft.splash_potion.effect.vitality_strong": "Miotana mikstura witalności",
+	
+	"item.minecraft.lingering_potion.effect.vitality": "Trwała mikstura witalności",
+	"item.minecraft.lingering_potion.effect.vitality_strong": "Trwała mikstura witalności",
+	
+	"item.minecraft.tipped_arrow.effect.vitality": "Strzała witalności",
+	"item.minecraft.tipped_arrow.effect.vitality_strong": "Strzała witalności",
 	
 	"container.kiln": "Suszarnia",
 	"container.sawmill": "Piła",
@@ -390,32 +409,28 @@
 	"gui.environmental.category.baking": "Wypiekanie",
 	"gui.environmental.category.sawing": "Piłowanie",
 
-	"generic.reachDistance": "Odległość zasięgu",
 	"attribute.name.generic.stealth": "Przebiegłość",
 
-	"advancements.husbandry.bred_all_slabfish.title": "Odjechana genetyka",
-	"advancements.husbandry.bred_all_slabfish.description": "Rozmnóż wszystkie warianty płytoryba",
+	"advancements.environmental.husbandry.bred_all_slabfish.title": "Odjechana genetyka",
+	"advancements.environmental.husbandry.bred_all_slabfish.description": "Rozmnóż wszystkie warianty płytoryba",
 	
-	"advancements.husbandry.backpack_slabfish.title": "Pierwszy dzień w szkole",
-	"advancements.husbandry.backpack_slabfish.description": "Daj płytorybowi plecak",
-	
-	"advancements.adventure.find_natural_slabfish.title": "Są w różnych kolorach!",
-	"advancements.adventure.find_natural_slabfish.description": "Znajdź wszystkie naturalne warianty płytoryba",
+	"advancements.environmental.husbandry.backpack_slabfish.title": "Pierwszy dzień w szkole",
+	"advancements.environmental.husbandry.backpack_slabfish.description": "Daj płytorybowi plecak",
 
-	"advancements.adventure.obtain_explorer_gear.title": "Rabuś, nie kradnij!",
-	"advancements.adventure.obtain_explorer_gear.description": "Zdobądź jeden element wyposażenia odkrywcy",
+	"advancements.environmental.adventure.obtain_explorer_gear.title": "Rabuś, nie kradnij!",
+	"advancements.environmental.adventure.obtain_explorer_gear.description": "Zdobądź jeden element wyposażenia odkrywcy",
 
-	"advancements.adventure.upgrade_thief_hood.title": "Typ niepokorny",
-	"advancements.adventure.upgrade_thief_hood.description": "Zdobądź kaptur złodzieja od szkieleta lub witherowego szkieleta i maksymalnie go ulepsz",
+	"advancements.environmental.adventure.upgrade_thief_hood.title": "Typ niepokorny",
+	"advancements.environmental.adventure.upgrade_thief_hood.description": "Zdobądź kaptur złodzieja od szkieleta lub witherowego szkieleta i maksymalnie go ulepsz",
 
-	"advancements.adventure.upgrade_healer_pouch.title": "Jesteś lekiem na całe zło",
-	"advancements.adventure.upgrade_healer_pouch.description": "Znajdź sakiewkę uzdrowiciela w twierdzy lub kopalni i maksymalnie ją ulepsz",
+	"advancements.environmental.adventure.upgrade_healer_pouch.title": "Jesteś lekiem na całe zło",
+	"advancements.environmental.adventure.upgrade_healer_pouch.description": "Znajdź sakiewkę uzdrowiciela w twierdzy lub kopalni i maksymalnie ją ulepsz",
 
-	"advancements.adventure.upgrade_architect_belt.title": "Zbudujemy dom na piasku",
-	"advancements.adventure.upgrade_architect_belt.description": "Kup pas architekta od kamieniarza, ceramisty lub cieśli i maksymalnie go ulepsz",
+	"advancements.environmental.adventure.upgrade_architect_belt.title": "Zbudujemy dom na piasku",
+	"advancements.environmental.adventure.upgrade_architect_belt.description": "Kup pas architekta od kamieniarza, ceramisty lub cieśli i maksymalnie go ulepsz",
 
-	"advancements.adventure.upgrade_wanderer_boots.title": "Ale zanim pójdę...",
-	"advancements.adventure.upgrade_wanderer_boots.description": "Otrzymaj buty wędrowcy od wędrownego handlarza i maksymalnie je ulepsz",
+	"advancements.environmental.adventure.upgrade_wanderer_boots.title": "Ale zanim pójdę...",
+	"advancements.environmental.adventure.upgrade_wanderer_boots.description": "Otrzymaj buty wędrowcy od wędrownego handlarza i maksymalnie je ulepsz",
 	
 	"subtitles.entity.slabfish.burp": "Płytoryb beka",
 	"subtitles.entity.slabfish.death": "Płytoryb ginie",
@@ -428,8 +443,13 @@
 	
 	"subtitles.entity.koi.flop": "Koi pluska",
 	
-	"subtitles.entity.duck.egg": "Kaczka znosi jajko",
-	
+    "subtitles.environmental.entity.duck.ambient": "Kaczka kwacze",
+	"subtitles.environmental.entity.duck.death": "Kaczka ginie",
+	"subtitles.environmental.entity.duck.egg": "Kaczka znosi jajko",
+	"subtitles.environmental.entity.duck.hurt": "Kaczka cierpi",
+
+	"subtitles.environmental.entity.pig.sniff": "Świnia wącha",
+    
 	"entity.environmental.slabfish.baby": "Mały",
 	
 	"entity.environmental.slabfish.type.swamp": "Bagno",
