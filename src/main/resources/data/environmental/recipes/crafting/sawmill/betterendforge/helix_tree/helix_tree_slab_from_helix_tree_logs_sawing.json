@@ -1,0 +1,14 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "betterendforge:helix_tree_logs"
+  },
+  "result": "betterendforge:helix_tree_slab",
+  "count": 8,
+  "conditions":[
+    {
+      "type":"forge:mod_loaded",
+      "modid":"betterendforge"
+    }
+  ]
+}

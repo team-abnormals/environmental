@@ -1,0 +1,14 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "item": "byg:holly_planks"
+  },
+  "result": "byg:holly_button",
+  "count": 1,
+  "conditions":[
+    {
+      "type":"forge:mod_loaded",
+      "modid":"byg"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "item": "betterendforge:umbrella_tree_planks"
+  },
+  "result": "betterendforge:umbrella_tree_stairs",
+  "count": 1,
+  "conditions":[
+    {
+      "type":"forge:mod_loaded",
+      "modid":"betterendforge"
+    }
+  ]
+}

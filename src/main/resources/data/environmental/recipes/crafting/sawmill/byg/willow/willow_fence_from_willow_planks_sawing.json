@@ -1,0 +1,14 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "item": "byg:willow_planks"
+  },
+  "result": "byg:willow_fence",
+  "count": 1,
+  "conditions":[
+    {
+      "type":"forge:mod_loaded",
+      "modid":"byg"
+    }
+  ]
+}

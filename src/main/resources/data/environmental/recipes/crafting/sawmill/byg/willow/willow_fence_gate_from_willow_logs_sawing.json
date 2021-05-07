@@ -1,0 +1,14 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "byg:willow_logs"
+  },
+  "result": "byg:willow_fence_gate",
+  "count": 1,
+  "conditions":[
+    {
+      "type":"forge:mod_loaded",
+      "modid":"byg"
+    }
+  ]
+}

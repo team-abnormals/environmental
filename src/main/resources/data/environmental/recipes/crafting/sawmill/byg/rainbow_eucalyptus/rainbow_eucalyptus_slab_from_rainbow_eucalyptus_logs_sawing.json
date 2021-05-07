@@ -1,0 +1,14 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "byg:rainbow_eucalyptus_logs"
+  },
+  "result": "byg:rainbow_eucalyptus_slab",
+  "count": 8,
+  "conditions":[
+    {
+      "type":"forge:mod_loaded",
+      "modid":"byg"
+    }
+  ]
+}

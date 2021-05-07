@@ -1,0 +1,14 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "betterendforge:jellyshroom_logs"
+  },
+  "result": "betterendforge:jellyshroom_pressure_plate",
+  "count": 2,
+  "conditions":[
+    {
+      "type":"forge:mod_loaded",
+      "modid":"betterendforge"
+    }
+  ]
+}

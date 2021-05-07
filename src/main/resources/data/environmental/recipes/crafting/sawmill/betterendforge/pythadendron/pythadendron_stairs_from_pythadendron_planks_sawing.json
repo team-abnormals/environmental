@@ -1,0 +1,14 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "item": "betterendforge:pythadendron_planks"
+  },
+  "result": "betterendforge:pythadendron_stairs",
+  "count": 1,
+  "conditions":[
+    {
+      "type":"forge:mod_loaded",
+      "modid":"betterendforge"
+    }
+  ]
+}

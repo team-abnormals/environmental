@@ -1,0 +1,14 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "betterendforge:lacugrove_logs"
+  },
+  "result": "betterendforge:lacugrove_button",
+  "count": 4,
+  "conditions":[
+    {
+      "type":"forge:mod_loaded",
+      "modid":"betterendforge"
+    }
+  ]
+}

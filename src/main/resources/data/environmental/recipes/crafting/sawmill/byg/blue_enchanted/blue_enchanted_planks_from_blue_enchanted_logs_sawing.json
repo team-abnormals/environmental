@@ -1,0 +1,14 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "byg:blue_enchanted_logs"
+  },
+  "result": "byg:blue_enchanted_planks",
+  "count": 4,
+  "conditions":[
+    {
+      "type":"forge:mod_loaded",
+      "modid":"byg"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "biomesoplenty:magic_logs"
+  },
+  "result": "biomesoplenty:magic_slab",
+  "count": 8,
+  "conditions":[
+    {
+      "type":"forge:mod_loaded",
+      "modid":"biomesoplenty"
+    }
+  ]
+}

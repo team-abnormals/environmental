@@ -1,0 +1,14 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "biomesoplenty:palm_logs"
+  },
+  "result": "biomesoplenty:palm_trapdoor",
+  "count": 1,
+  "conditions":[
+    {
+      "type":"forge:mod_loaded",
+      "modid":"biomesoplenty"
+    }
+  ]
+}

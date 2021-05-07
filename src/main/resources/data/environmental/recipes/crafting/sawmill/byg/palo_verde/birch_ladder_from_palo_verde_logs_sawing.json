@@ -1,0 +1,23 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "byg:palo_verde_logs"
+  },
+  "result": "quark:birch_ladder",
+  "count": 8,
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "byg"
+        },
+        {
+          "type": "abnormals_core:quark_flag",
+          "flag": "variant_ladders"
+        }
+      ]
+    }
+  ]
+}

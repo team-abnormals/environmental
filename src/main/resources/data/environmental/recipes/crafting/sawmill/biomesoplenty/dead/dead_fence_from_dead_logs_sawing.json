@@ -1,0 +1,14 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "biomesoplenty:dead_logs"
+  },
+  "result": "biomesoplenty:dead_fence",
+  "count": 4,
+  "conditions":[
+    {
+      "type":"forge:mod_loaded",
+      "modid":"biomesoplenty"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "item": "quark:blue_stained_planks"
+  },
+  "result": "quark:blue_stained_planks_vertical_slab",
+  "count": 2,
+  "conditions":[
+    {
+      "type":"abnormals_core:quark_flag",
+      "flag":"stained_planks"
+    }
+  ]
+}

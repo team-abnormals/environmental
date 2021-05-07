@@ -1,0 +1,23 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "byg:palo_verde_logs"
+  },
+  "result": "quark:vertical_birch_planks",
+  "count": 4,
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "byg"
+        },
+        {
+          "type": "abnormals_core:quark_flag",
+          "flag": "vertical_planks"
+        }
+      ]
+    }
+  ]
+}
