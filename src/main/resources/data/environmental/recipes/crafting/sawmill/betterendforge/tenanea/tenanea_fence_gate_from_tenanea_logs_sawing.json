@@ -3,7 +3,7 @@
   "ingredient": {
     "tag": "betterendforge:tenanea_logs"
   },
-  "result": "betterendforge:tenanea_fence_gate",
+  "result": "betterendforge:tenanea_gate",
   "count": 1,
   "conditions":[
     {

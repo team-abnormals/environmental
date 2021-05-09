@@ -3,7 +3,7 @@
   "ingredient": {
     "tag": "betterendforge:lacugrove_logs"
   },
-  "result": "betterendforge:lacugrove_fence_gate",
+  "result": "betterendforge:lacugrove_gate",
   "count": 1,
   "conditions":[
     {

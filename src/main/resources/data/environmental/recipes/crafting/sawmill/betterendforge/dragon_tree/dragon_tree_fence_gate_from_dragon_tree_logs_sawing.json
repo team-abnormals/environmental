@@ -3,7 +3,7 @@
   "ingredient": {
     "tag": "betterendforge:dragon_tree_logs"
   },
-  "result": "betterendforge:dragon_tree_fence_gate",
+  "result": "betterendforge:dragon_tree_gate",
   "count": 1,
   "conditions":[
     {

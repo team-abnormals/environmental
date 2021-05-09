@@ -3,7 +3,7 @@
   "ingredient": {
     "tag": "betterendforge:helix_tree_logs"
   },
-  "result": "betterendforge:helix_tree_fence_gate",
+  "result": "betterendforge:helix_tree_gate",
   "count": 1,
   "conditions":[
     {

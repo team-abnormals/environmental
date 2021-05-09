@@ -3,7 +3,7 @@
   "ingredient": {
     "tag": "betterendforge:jellyshroom_logs"
   },
-  "result": "betterendforge:jellyshroom_fence_gate",
+  "result": "betterendforge:jellyshroom_gate",
   "count": 1,
   "conditions":[
     {

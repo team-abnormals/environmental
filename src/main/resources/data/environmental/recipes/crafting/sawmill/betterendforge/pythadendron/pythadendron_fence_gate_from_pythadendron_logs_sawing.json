@@ -3,7 +3,7 @@
   "ingredient": {
     "tag": "betterendforge:pythadendron_logs"
   },
-  "result": "betterendforge:pythadendron_fence_gate",
+  "result": "betterendforge:pythadendron_gate",
   "count": 1,
   "conditions":[
     {
