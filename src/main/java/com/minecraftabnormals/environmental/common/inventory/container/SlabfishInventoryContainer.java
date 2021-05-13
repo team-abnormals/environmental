@@ -104,22 +104,21 @@ public class SlabfishInventoryContainer extends Container {
 				return ItemStack.EMPTY;
 			} else if (this.getSlot(2).isItemValid(slotStack) && !this.getSlot(2).getHasStack() && !this.mergeItemStack(slotStack, 2, 3, false)) {
 				return ItemStack.EMPTY;
-			} else if (i <= 3 || !this.mergeItemStack(slotStack, 3, i, false)) {
-				int j = i + 27;
-				int k = j + 9;
-				if (index >= j && index < k) {
-					if (!this.mergeItemStack(slotStack, i, j, false)) {
-						return ItemStack.EMPTY;
-					}
-				} else if (index >= i && index < j) {
-					if (!this.mergeItemStack(slotStack, j, k, false)) {
-						return ItemStack.EMPTY;
-					}
-				} else if (!this.mergeItemStack(slotStack, j, j, false)) {
-					return ItemStack.EMPTY;
-				}
+			}else if (inventorySize <= 3 || !this.mergeItemStack(slotStack, 3, inventorySize, false)) {
 
-				return ItemStack.EMPTY;
+				int firstInvSlot = 18;
+				int firstHotbSlot = 45;
+				int lastHotbSlot = 53;
+
+				if (index >= firstHotbSlot && index <= lastHotbSlot) { //clicked item is in hotbar
+					if (this.mergeItemStack(slotStack, firstInvSlot, firstHotbSlot, false)) { //move to inventory
+						return ItemStack.EMPTY;
+					}
+				} else if (index >= inventorySize && index < firstHotbSlot) { //clicked item is in the inventory
+					if (!this.mergeItemStack(slotStack, firstHotbSlot, lastHotbSlot + 1, false)) { //move to hotbar
+						return ItemStack.EMPTY;
+					}
+				}
 			}
 
 			if (slotStack.isEmpty()) {
