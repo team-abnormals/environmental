@@ -1,0 +1,23 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "item": "upgrade_aquatic:driftwood_planks"
+  },
+  "result": "decorative_blocks_abnormals:driftwood_support",
+  "count": 1,
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "decorative_blocks_abnormals"
+        },
+        {
+          "type": "forge:mod_loaded",
+          "modid": "upgrade_aquatic"
+        }
+      ]
+    }
+  ]
+}

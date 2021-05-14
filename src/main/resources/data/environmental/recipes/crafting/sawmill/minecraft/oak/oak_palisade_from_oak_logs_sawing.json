@@ -1,0 +1,14 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "minecraft:oak_logs"
+  },
+  "result": "decorative_blocks:oak_palisade",
+  "count": 4,
+  "conditions":[
+    {
+      "type":"forge:mod_loaded",
+      "modid":"decorative_blocks"
+    }
+  ]
+}

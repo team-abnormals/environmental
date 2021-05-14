@@ -1,0 +1,14 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "item": "minecraft:oak_planks"
+  },
+  "result": "decorative_blocks:oak_seat",
+  "count": 1,
+  "conditions":[
+    {
+      "type":"forge:mod_loaded",
+      "modid":"decorative_blocks"
+    }
+  ]
+}

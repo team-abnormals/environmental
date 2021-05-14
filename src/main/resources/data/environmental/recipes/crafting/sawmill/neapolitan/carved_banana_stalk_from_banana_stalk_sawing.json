@@ -1,0 +1,14 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "item": "neapolitan:banana_stalk"
+  },
+  "result": "neapolitan:carved_banana_stalk",
+  "count": 1,
+  "conditions":[
+    {
+      "type":"forge:mod_loaded",
+      "modid":"neapolitan"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "item": "minecraft:stripped_warped_stem"
+  },
+  "result": "decorative_blocks:warped_beam",
+  "count": 1,
+  "conditions":[
+    {
+      "type":"forge:mod_loaded",
+      "modid":"decorative_blocks"
+    }
+  ]
+}

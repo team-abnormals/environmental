@@ -1,0 +1,14 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "item": "minecraft:warped_planks"
+  },
+  "result": "decorative_blocks:warped_support",
+  "count": 1,
+  "conditions":[
+    {
+      "type":"forge:mod_loaded",
+      "modid":"decorative_blocks"
+    }
+  ]
+}

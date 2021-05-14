@@ -1,0 +1,14 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "item": "minecraft:stripped_jungle_log"
+  },
+  "result": "decorative_blocks:jungle_beam",
+  "count": 1,
+  "conditions":[
+    {
+      "type":"forge:mod_loaded",
+      "modid":"decorative_blocks"
+    }
+  ]
+}
