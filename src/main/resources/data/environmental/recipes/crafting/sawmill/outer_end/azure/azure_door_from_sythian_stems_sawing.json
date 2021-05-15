@@ -1,0 +1,14 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "outer_end:azure_stems"
+  },
+  "result": "outer_end:azure_door",
+  "count": 2,
+  "conditions":[
+    {
+      "type":"forge:mod_loaded",
+      "modid":"outer_end"
+    }
+  ]
+}

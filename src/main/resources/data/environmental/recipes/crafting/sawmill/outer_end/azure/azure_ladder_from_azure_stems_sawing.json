@@ -1,0 +1,23 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "outer_end:azure_stems"
+  },
+  "result": "outer_end:azure_ladder",
+  "count": 8,
+  "conditions":[
+    {
+      "type":"forge:and",
+      "values": [
+        {
+          "type":"forge:mod_loaded",
+          "modid":"outer_end"
+        },
+        {
+          "type":"abnormals_core:quark_flag",
+          "flag":"variant_ladders"
+        }
+      ]
+    }
+  ]
+}

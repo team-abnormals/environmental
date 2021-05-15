@@ -1,0 +1,14 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "tag": "outer_end:azure_stems"
+  },
+  "result": "outer_end:azure_slab",
+  "count": 8,
+  "conditions":[
+    {
+      "type":"forge:mod_loaded",
+      "modid":"outer_end"
+    }
+  ]
+}

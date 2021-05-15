@@ -1,0 +1,23 @@
+{
+  "type": "environmental:sawing",
+  "ingredient": {
+    "item": "outer_end:azure_planks"
+  },
+  "result": "outer_end:azure_vertical_slab",
+  "count": 2,
+  "conditions":[
+    {
+      "type":"forge:and",
+      "values": [
+        {
+          "type":"forge:mod_loaded",
+          "modid":"outer_end"
+        },
+        {
+          "type":"abnormals_core:quark_flag",
+          "flag":"vertical_slabs"
+        }
+      ]
+    }
+  ]
+}
