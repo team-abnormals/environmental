@@ -11,6 +11,7 @@ import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.Tags;
 
@@ -21,6 +22,8 @@ public class HuntTruffleGoal extends Goal {
 	private final PigEntity pig;
 	private final IDataManager data;
 	private int runDelay;
+	private int lookTimer;
+	private Vector3d lookVector;
 
 	public HuntTruffleGoal(PigEntity pigIn) {
 		this.pig = pigIn;
@@ -48,24 +51,36 @@ public class HuntTruffleGoal extends Goal {
 	}
 
 	public void startExecuting() {
+		this.lookVector = new Vector3d(1.0D, 0.0D, 1.0D);
 		this.moveToTruffle();
 	}
 
 	public void tick() {
+		int trufflehuntingtime = this.data.getValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME);
 		BlockPos blockpos = this.data.getValue(EnvironmentalDataProcessors.TRUFFLE_POS);
-		this.pig.getLookController().setLookPosition(blockpos.getX() + 0.5D, blockpos.getY() + 0.5D, blockpos.getZ() + 0.5D, (float)(this.pig.getHorizontalFaceSpeed() + 20), (float)this.pig.getVerticalFaceSpeed());
+		Vector3d pigpos = this.pig.getPositionVec();
+		
+		Vector3d vector3d = new Vector3d((blockpos.getX() + 0.5D) - pigpos.getX(), 0.0D, (blockpos.getZ() + 0.5D) - pigpos.getZ()).normalize();
+		
+		this.pig.getLookController().setLookPosition(pigpos.getX() + vector3d.getX() * this.lookVector.getX(), this.pig.getPosY() - 0.6D + this.lookVector.getY(), pigpos.getZ() + vector3d.getZ() * this.lookVector.getZ(), (float)(this.pig.getHorizontalFaceSpeed() + 20), (float)this.pig.getVerticalFaceSpeed());
+		
 		if (blockpos.withinDistance(this.pig.getPositionVec(), 4.0D)) {
-			if (this.data.getValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME) > 0)
+			if (trufflehuntingtime > 0)
 				this.data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, -800);
 		}
 		else {
+			if (this.lookTimer-- <= 0) {
+				this.lookTimer = 18 + this.pig.getRNG().nextInt(9);
+				this.lookVector = new Vector3d((double)this.pig.getRNG().nextFloat() * 1.2D, (double)this.pig.getRNG().nextFloat() * 0.4D, (double)this.pig.getRNG().nextFloat() * 1.2D);
+			}
+			
 			this.moveToTruffle();
 		}
 	}
 
 	private void moveToTruffle() {
 		BlockPos blockpos = this.data.getValue(EnvironmentalDataProcessors.TRUFFLE_POS);
-		this.pig.getNavigator().tryMoveToXYZ((double)((float)blockpos.getX()) + 0.5D, (double)(blockpos.getY() + 1), (double)((float)blockpos.getZ()) + 0.5D, 1.2D);
+		this.pig.getNavigator().tryMoveToXYZ((double)((float)blockpos.getX()) + 0.5D, (double)(blockpos.getY() + 1), (double)((float)blockpos.getZ()) + 0.5D, 1.1D);
 	}
 
 	private boolean findTruffle() {

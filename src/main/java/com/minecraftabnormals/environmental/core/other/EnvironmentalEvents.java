@@ -363,22 +363,22 @@ public class EnvironmentalEvents {
 
 		if (entity instanceof PigEntity && entity.isAlive()) {
 			IDataManager data = ((IDataManager) entity);
-			int huntingTime = data.getValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME);
-			BlockPos trufflePos = data.getValue(EnvironmentalDataProcessors.TRUFFLE_POS);
+			int huntingtime = data.getValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME);
+			BlockPos trufflepos = data.getValue(EnvironmentalDataProcessors.TRUFFLE_POS);
 
-			if (huntingTime == 0 || (data.getValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET) && world.getBlockState(trufflePos).getBlock() != EnvironmentalBlocks.BURIED_TRUFFLE.get())) {
+			if (huntingtime == 0 || (data.getValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET) && world.getBlockState(trufflepos).getBlock() != EnvironmentalBlocks.BURIED_TRUFFLE.get())) {
 				data.setValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET, false);
-				if (huntingTime > 0)
-					data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, Math.max(-400, -huntingTime));
+				if (huntingtime > 0)
+					data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, Math.max(-400, -huntingtime));
 			} else {
-				if (huntingTime > 0) {
-					data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, huntingTime - 1);
-					if (!world.isRemote() && data.getValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET) && huntingTime % 30 == 0) {
+				if (huntingtime > 0) {
+					data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, huntingtime - 1);
+					if (!world.isRemote() && data.getValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET) && huntingtime % 30 == 0) {
 						entity.playSound(EnvironmentalSounds.ENTITY_PIG_SNIFF.get(), 1.0F, (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
 					}
-				} else if (huntingTime < 0) {
-					data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, huntingTime + 1);
-					if (world.isRemote() && data.getValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET) && huntingTime % 10 == 0) {
+				} else if (huntingtime < 0) {
+					data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, huntingtime + 1);
+					if (world.isRemote() && data.getValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET) && huntingtime % 10 == 0) {
 						double d0 = random.nextGaussian() * 0.02D;
 						double d1 = random.nextGaussian() * 0.02D;
 						double d2 = random.nextGaussian() * 0.02D;
