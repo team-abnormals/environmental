@@ -448,6 +448,11 @@
 	"subtitles.environmental.entity.duck.egg": "Duck plops",
 	"subtitles.environmental.entity.duck.hurt": "Duck hurts",
 
+	"subtitles.environmental.entity.yak.ambient": "Yak grunts",
+	"subtitles.environmental.entity.yak.death": "Yak dies",
+	"subtitles.environmental.entity.yak.hurt": "Yak hurts",
+	"subtitles.environmental.entity.yak.milk": "Yak gets milked",
+
 	"subtitles.environmental.entity.pig.sniff": "Pig sniffs",
 	
 	"entity.environmental.slabfish.baby": "Baby",

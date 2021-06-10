@@ -3,6 +3,7 @@ package com.minecraftabnormals.environmental.common.entity;
 import com.minecraftabnormals.environmental.common.item.YakPantsItem;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEntities;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
+import com.minecraftabnormals.environmental.core.registry.EnvironmentalSounds;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -131,7 +132,7 @@ public class YakEntity extends AnimalEntity implements IForgeShearable, IShearab
 	public ActionResultType func_230254_b_(PlayerEntity p_230254_1_, Hand p_230254_2_) {
 		ItemStack itemstack = p_230254_1_.getHeldItem(p_230254_2_);
 		if (itemstack.getItem() == Items.BUCKET && !this.isChild()) {
-			p_230254_1_.playSound(SoundEvents.ENTITY_COW_MILK, 1.0F, 1.0F);
+			p_230254_1_.playSound(EnvironmentalSounds.ENTITY_YAK_MILK.get(), 1.0F, 1.0F);
 			ItemStack itemstack1 = DrinkHelper.fill(itemstack, p_230254_1_, Items.MILK_BUCKET.getDefaultInstance());
 			p_230254_1_.setHeldItem(p_230254_2_, itemstack1);
 			return ActionResultType.func_233537_a_(this.world.isRemote);
@@ -189,17 +190,17 @@ public class YakEntity extends AnimalEntity implements IForgeShearable, IShearab
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return SoundEvents.ENTITY_COW_AMBIENT;
+		return EnvironmentalSounds.ENTITY_YAK_AMBIENT.get();
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundEvents.ENTITY_COW_HURT;
+		return EnvironmentalSounds.ENTITY_YAK_HURT.get();
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return SoundEvents.ENTITY_COW_DEATH;
+		return EnvironmentalSounds.ENTITY_YAK_DEATH.get();
 	}
 
 	@Override

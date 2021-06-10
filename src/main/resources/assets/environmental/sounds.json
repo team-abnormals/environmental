@@ -162,5 +162,34 @@
       }
     ],
     "subtitle": "subtitles.environmental.entity.pig.sniff"
+  },
+  "entity.yak.ambient": {
+    "sounds": [
+      "environmental:mob/yak/say1",
+      "environmental:mob/yak/say2"
+    ],
+    "subtitle": "subtitles.environmental.entity.yak.ambient"
+  },
+  "entity.yak.death": {
+    "sounds": [
+      "environmental:mob/yak/hurt1",
+      "environmental:mob/yak/hurt2"
+    ],
+    "subtitle": "subtitles.environmental.entity.yak.death"
+  },
+  "entity.yak.hurt": {
+    "sounds": [
+      "environmental:mob/yak/hurt1",
+      "environmental:mob/yak/hurt2"
+    ],
+    "subtitle": "subtitles.environmental.entity.yak.hurt"
+  },
+  "entity.yak.milk": {
+    "sounds": [
+      "entity/cow/milk1",
+      "entity/cow/milk2",
+      "entity/cow/milk3"
+    ],
+    "subtitle": "subtitles.environmental.entity.yak.milk"
   }
 }

@@ -30,6 +30,11 @@ public class EnvironmentalSounds {
 	public static final RegistryObject<SoundEvent> ENTITY_DUCK_HURT = HELPER.createSoundEvent("entity.duck.hurt");
 	public static final RegistryObject<SoundEvent> ENTITY_DUCK_DEATH = HELPER.createSoundEvent("entity.duck.death");
 	public static final RegistryObject<SoundEvent> ENTITY_DUCK_EGG = HELPER.createSoundEvent("entity.duck.egg");
-	
+
+	public static final RegistryObject<SoundEvent> ENTITY_YAK_AMBIENT = HELPER.createSoundEvent("entity.yak.ambient");
+	public static final RegistryObject<SoundEvent> ENTITY_YAK_MILK = HELPER.createSoundEvent("entity.yak.milk");
+	public static final RegistryObject<SoundEvent> ENTITY_YAK_HURT = HELPER.createSoundEvent("entity.yak.hurt");
+	public static final RegistryObject<SoundEvent> ENTITY_YAK_DEATH = HELPER.createSoundEvent("entity.yak.death");
+
 	public static final RegistryObject<SoundEvent> ENTITY_PIG_SNIFF = HELPER.createSoundEvent("entity.pig.sniff");
 }
