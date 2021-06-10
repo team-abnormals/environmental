@@ -251,7 +251,7 @@ public class DeerEntity extends AnimalEntity {
 		if (this.isHolidayDeer()) {
 			this.setCoatColor(DeerCoatColors.HOLIDAY.getId());
 		} else {
-			this.setCoatColor(rand.nextInt(2));
+			this.setCoatColor(rand.nextInt(DeerCoatColors.values().length - 1));
 		}
 
 		this.setCoatType(rand.nextInt(DeerCoatTypes.values().length));

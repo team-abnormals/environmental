@@ -6,15 +6,15 @@ import net.minecraft.util.ResourceLocation;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Locale;
 
 public enum DeerCoatTypes {
-	NONE(0),
-	WHITE_SPOTS(1);
+	NONE(0), SPOTTED(1);
 
 	private static final DeerCoatTypes[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(DeerCoatTypes::getId)).toArray(DeerCoatTypes[]::new);
 
 	private final int id;
-	private final LazyValue<ResourceLocation> textureLocation = new LazyValue<>(() -> new ResourceLocation(Environmental.MOD_ID, "textures/entity/deer/deer_markings_" + this.name().toLowerCase() + ".png"));
+	private final LazyValue<ResourceLocation> textureLocation = new LazyValue<>(() -> new ResourceLocation(Environmental.MOD_ID, "textures/entity/deer/" + this.name().toLowerCase(Locale.ROOT) + "_overlay.png"));
 
 	DeerCoatTypes(int id) {
 		this.id = id;
