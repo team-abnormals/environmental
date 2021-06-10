@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(modid = Environmental.MOD_ID)
-public class EnvironmentalBiomeFeatures {
+public class EnvironmentalGeneration {
 
 	@SubscribeEvent
 	public static void onBiomeLoad(BiomeLoadingEvent event) {
@@ -37,9 +37,9 @@ public class EnvironmentalBiomeFeatures {
 		MobSpawnInfoBuilder spawns = event.getSpawns();
 
 		if (DataUtil.matchesKeys(biome, EnvironmentalBiomes.MARSH.getKey(), EnvironmentalBiomes.MUSHROOM_MARSH.getKey())) {
-			EnvironmentalBiomeFeatures.withMarshFeatures(generation);
+			EnvironmentalGeneration.withMarshFeatures(generation);
 			if (DataUtil.matchesKeys(biome, EnvironmentalBiomes.MUSHROOM_MARSH.getKey()))
-				EnvironmentalBiomeFeatures.withMarshMushrooms(generation);
+				EnvironmentalGeneration.withMarshMushrooms(generation);
 
 			DefaultBiomeFeatures.withPassiveMobs(spawns);
 			DefaultBiomeFeatures.withBatsAndHostiles(spawns);
@@ -47,9 +47,9 @@ public class EnvironmentalBiomeFeatures {
 
 		if (DataUtil.matchesKeys(biome, EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), EnvironmentalBiomes.BLOSSOM_HILLS.getKey(), EnvironmentalBiomes.BLOSSOM_HIGHLANDS.getKey(), EnvironmentalBiomes.BLOSSOM_VALLEYS.getKey())) {
 			if (DataUtil.matchesKeys(biome, EnvironmentalBiomes.BLOSSOM_VALLEYS.getKey()))
-				EnvironmentalBiomeFeatures.withBlossomValleysFeatures(generation);
+				EnvironmentalGeneration.withBlossomValleysFeatures(generation);
 			else
-				EnvironmentalBiomeFeatures.withBlossomWoodsFeatures(generation);
+				EnvironmentalGeneration.withBlossomWoodsFeatures(generation);
 
 			DefaultBiomeFeatures.withPassiveMobs(spawns);
 			DefaultBiomeFeatures.withBatsAndHostiles(spawns);
@@ -61,10 +61,10 @@ public class EnvironmentalBiomeFeatures {
 			spawns.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(EnvironmentalEntities.SLABFISH.get(), 8, 2, 4));
 
 		if (DataUtil.matchesKeys(biome, Biomes.SWAMP, Biomes.SWAMP_HILLS)) {
-			EnvironmentalBiomeFeatures.removeSwampTrees(generation);
-			EnvironmentalBiomeFeatures.withMushrooms(generation);
-			EnvironmentalBiomeFeatures.withCattails(generation);
-			EnvironmentalBiomeFeatures.withMudDisks(generation);
+			EnvironmentalGeneration.removeSwampTrees(generation);
+			EnvironmentalGeneration.withMushrooms(generation);
+			EnvironmentalGeneration.withCattails(generation);
+			EnvironmentalGeneration.withMudDisks(generation);
 			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.SWAMP_OAK);
 			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.WILLOW_TREE);
 			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_DUCKWEED_SWAMP);
@@ -95,13 +95,13 @@ public class EnvironmentalBiomeFeatures {
 			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_MYCELIUM_SPROUTS);
 
 		if (!DataUtil.matchesKeys(biome, Biomes.FROZEN_RIVER) && (event.getCategory() == Biome.Category.SWAMP || event.getCategory() == Biome.Category.RIVER)) {
-			EnvironmentalBiomeFeatures.withCattails(generation);
+			EnvironmentalGeneration.withCattails(generation);
 			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.NEST_DUCK);
 		}
 
 		if (event.getCategory() == Biome.Category.DESERT) {
 			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_TALL_DEAD_BUSH);
-			spawns.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(EnvironmentalEntities.FENNEC_FOX.get(), 8, 2, 4));
+			//spawns.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(EnvironmentalEntities.FENNEC_FOX.get(), 8, 2, 4));
 		}
 
 		if (event.getCategory() == Biome.Category.MESA)
@@ -172,9 +172,9 @@ public class EnvironmentalBiomeFeatures {
 		if (EnvironmentalConfig.COMMON.generateGiantTallGrass.get())
 			builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_GIANT_TALL_GRASS_MARSH);
 
-		EnvironmentalBiomeFeatures.withMudDisks(builder);
-		EnvironmentalBiomeFeatures.withMarshVegetation(builder);
-		EnvironmentalBiomeFeatures.withMarshPonds(builder);
+		EnvironmentalGeneration.withMudDisks(builder);
+		EnvironmentalGeneration.withMarshVegetation(builder);
+		EnvironmentalGeneration.withMarshPonds(builder);
 
 	}
 
@@ -193,17 +193,17 @@ public class EnvironmentalBiomeFeatures {
 		DefaultBiomeFeatures.withLavaAndWaterSprings(builder);
 		DefaultBiomeFeatures.withFrozenTopLayer(builder);
 
-		EnvironmentalBiomeFeatures.withBlossomVegetation(builder);
+		EnvironmentalGeneration.withBlossomVegetation(builder);
 	}
 
 	public static void withBlossomWoodsFeatures(BiomeGenerationSettingsBuilder builder) {
-		EnvironmentalBiomeFeatures.withBaseBlossomFeatures(builder);
-		EnvironmentalBiomeFeatures.withBlossomWoodsVegetation(builder);
+		EnvironmentalGeneration.withBaseBlossomFeatures(builder);
+		EnvironmentalGeneration.withBlossomWoodsVegetation(builder);
 	}
 
 	public static void withBlossomValleysFeatures(BiomeGenerationSettingsBuilder builder) {
-		EnvironmentalBiomeFeatures.withBaseBlossomFeatures(builder);
-		EnvironmentalBiomeFeatures.withBlossomValleysVegetation(builder);
+		EnvironmentalGeneration.withBaseBlossomFeatures(builder);
+		EnvironmentalGeneration.withBlossomValleysVegetation(builder);
 	}
 
 	public static void withMushrooms(BiomeGenerationSettingsBuilder builder) {
