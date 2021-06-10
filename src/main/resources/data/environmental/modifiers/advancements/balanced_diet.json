@@ -94,11 +94,11 @@
               }
             }
           },
-          "environmental:truffle_puree": {
+          "environmental:truffle_mash": {
             "trigger": "minecraft:consume_item",
             "conditions": {
               "item": {
-                "item": "environmental:truffle_puree"
+                "item": "environmental:truffle_mash"
               }
             }
           },
@@ -146,7 +146,7 @@
             "environmental:truffle"
           ],
           [
-            "environmental:truffle_puree"
+            "environmental:truffle_mash"
           ],
           [
             "environmental:truffle_pie"
