@@ -7,6 +7,14 @@
     {
       "id": "#forge:fruits/strawberry",
       "required": false
+    },
+    {
+      "id": "#forge:fruits/tomato",
+      "required": false
+    },
+    {
+      "id": "#forge:vegetables/tomato",
+      "required": false
     }
   ]
 }
