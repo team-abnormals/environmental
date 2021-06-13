@@ -1,8 +1,10 @@
 package com.minecraftabnormals.environmental.client.model;
 
+import com.google.common.collect.ImmutableList;
 import com.minecraftabnormals.environmental.common.entity.DeerEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
+import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.util.math.MathHelper;
@@ -15,7 +17,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * @param <E>
  */
 @OnlyIn(Dist.CLIENT)
-public class DeerModel<E extends DeerEntity> extends EntityModel<E> {
+public class DeerModel<E extends DeerEntity> extends AgeableModel<E> {
 	protected E entity;
 
 	public final ModelRenderer body;
@@ -32,6 +34,7 @@ public class DeerModel<E extends DeerEntity> extends EntityModel<E> {
 	public final ModelRenderer leg4;
 
 	public DeerModel() {
+		super(false, 12.0F, 4.0F);
 		textureWidth = 64;
 		textureHeight = 64;
 
@@ -119,13 +122,17 @@ public class DeerModel<E extends DeerEntity> extends EntityModel<E> {
 			antler2.showModel = true;
 		}
 
-		head.render(matrixStack, buffer, packedLight, packedOverlay);
-		body.render(matrixStack, buffer, packedLight, packedOverlay);
-		neck.render(matrixStack, buffer, packedLight, packedOverlay);
-		leg1.render(matrixStack, buffer, packedLight, packedOverlay);
-		leg2.render(matrixStack, buffer, packedLight, packedOverlay);
-		leg3.render(matrixStack, buffer, packedLight, packedOverlay);
-		leg4.render(matrixStack, buffer, packedLight, packedOverlay);
+		super.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	@Override
+	protected Iterable<ModelRenderer> getHeadParts() {
+		return ImmutableList.of(head);
+	}
+
+	@Override
+	protected Iterable<ModelRenderer> getBodyParts() {
+		return ImmutableList.of(neck, body, leg1, leg2, leg3, leg4);
 	}
 
 	public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
