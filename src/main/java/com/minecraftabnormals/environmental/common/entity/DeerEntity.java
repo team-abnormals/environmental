@@ -191,7 +191,12 @@ public class DeerEntity extends AnimalEntity {
 	}
 
 	private void setCoatType(int id) {
-		this.dataManager.set(DEER_COAT_TYPE, id);
+		int color = this.getCoatColor();
+		if (color == 2 && id == 1) {
+			this.dataManager.set(DEER_COAT_TYPE, 0);
+		} else {
+			this.dataManager.set(DEER_COAT_TYPE, id);
+		}
 	}
 
 	public int getCoatType() {
