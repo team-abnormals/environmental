@@ -516,6 +516,7 @@
 	"entity.environmental.slabfish.type.bmo": "BMO",
 	"entity.environmental.slabfish.type.ocelot": "WALL-E",
 	"entity.environmental.slabfish.type.eve": "EVE",
+	"entity.environmental.slabfish.type.minion": "Minion",
 	
 	"entity.environmental.slabfish.backpack.white": "White Backpack",
 	"entity.environmental.slabfish.backpack.orange": "Orange Backpack",

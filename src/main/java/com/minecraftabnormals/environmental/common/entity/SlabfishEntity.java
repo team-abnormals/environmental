@@ -71,6 +71,7 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent;
 import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.fml.network.PacketDistributor;
@@ -136,7 +137,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
 		this.goalSelector.addGoal(4, new SlabbyBreedGoal(this, 1.0D));
 		this.goalSelector.addGoal(5, new SlabbyGrabItemGoal(this, 1.1D));
-		this.goalSelector.addGoal(6, new TemptGoal(this, 1.0D, false, Ingredient.fromTag(EnvironmentalTags.Items.SLABFISH_TEMPT_ITEMS)));
+		this.goalSelector.addGoal(6, new TemptGoal(this, 1.0D, false, Ingredient.fromTag(EnvironmentalTags.Items.SLABFISH_TAME_ITEMS)));
 		this.goalSelector.addGoal(8, new SlabbyFollowParentGoal(this, 1.1D));
 		this.goalSelector.addGoal(9, new RandomWalkingGoal(this, 1.0D));
 		this.goalSelector.addGoal(10, new LookAtGoal(this, PlayerEntity.class, 6.0F));
@@ -205,63 +206,131 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 		SlabfishManager slabfishManager = SlabfishManager.get(this.world);
 		SlabfishType slabfishType = slabfishManager.getSlabfishType(this.getSlabfishType()).orElse(SlabfishManager.DEFAULT_SLABFISH);
 
-		if (this.hasBackpack() && (slabfishType.getCustomBackpack() == null || !slabfishManager.getBackpackType(slabfishType.getCustomBackpack()).isPresent()) && slabfishManager.getBackpackType(stack).isPresent() && !slabfishManager.getBackpackType(stack).orElse(SlabfishManager.BROWN_BACKPACK).getRegistryName().equals(this.getBackpack())) {
-			if (!this.world.isRemote()) {
-				ItemStack previousBackpack = this.slabfishBackpack.getStackInSlot(2);
+		if (this.isTamed()) {
+			if (this.hasBackpack() && (slabfishType.getCustomBackpack() == null || !slabfishManager.getBackpackType(slabfishType.getCustomBackpack()).isPresent()) && slabfishManager.getBackpackType(stack).isPresent() && !slabfishManager.getBackpackType(stack).orElse(SlabfishManager.BROWN_BACKPACK).getRegistryName().equals(this.getBackpack())) {
+				if (!this.world.isRemote()) {
+					ItemStack previousBackpack = this.slabfishBackpack.getStackInSlot(2);
 
-				if (!previousBackpack.isEmpty()) {
-					InventoryHelper.spawnItemStack(this.world, this.getPosX(), this.getPosY(), this.getPosZ(), previousBackpack.copy());
-					this.slabfishBackpack.removeStackFromSlot(2);
+					if (!previousBackpack.isEmpty()) {
+						InventoryHelper.spawnItemStack(this.world, this.getPosX(), this.getPosY(), this.getPosZ(), previousBackpack.copy());
+						this.slabfishBackpack.removeStackFromSlot(2);
+					}
+
+					this.slabfishBackpack.setInventorySlotContents(2, new ItemStack(item));
+					this.consumeItemFromStack(player, stack);
 				}
-
-				this.slabfishBackpack.setInventorySlotContents(2, new ItemStack(item));
-				this.consumeItemFromStack(player, stack);
+				return ActionResultType.SUCCESS;
 			}
-			return ActionResultType.SUCCESS;
 
-		} else if (slabfishManager.getSweaterType(stack).isPresent() && !player.isSecondaryUseActive() && (!this.hasSweater() || !slabfishManager.getSweaterType(stack).orElse(SlabfishManager.EMPTY_SWEATER).getRegistryName().equals(this.getSweater()))) {
-			if (!this.world.isRemote()) {
+			if (slabfishManager.getSweaterType(stack).isPresent() && !player.isSecondaryUseActive() && (!this.hasSweater() || !slabfishManager.getSweaterType(stack).orElse(SlabfishManager.EMPTY_SWEATER).getRegistryName().equals(this.getSweater()))) {
+				if (!this.world.isRemote()) {
+					ItemStack previousSweater = this.slabfishBackpack.getStackInSlot(0);
+					if (!previousSweater.isEmpty()) {
+						InventoryHelper.spawnItemStack(this.world, this.getPosX(), this.getPosY(), this.getPosZ(), previousSweater.copy());
+						this.slabfishBackpack.removeStackFromSlot(0);
+					}
+					this.slabfishBackpack.setInventorySlotContents(0, new ItemStack(item));
+					this.consumeItemFromStack(player, stack);
+				}
+				return ActionResultType.SUCCESS;
+			}
+
+			if (item.isIn(Tags.Items.CHESTS_WOODEN) && !this.hasBackpack()) {
+				if (!this.world.isRemote()) {
+					this.slabfishBackpack.setInventorySlotContents(1, new ItemStack(item));
+					this.consumeItemFromStack(player, stack);
+					if (player instanceof ServerPlayerEntity)
+						EnvironmentalCriteriaTriggers.BACKPACK_SLABFISH.trigger((ServerPlayerEntity) player);
+				}
+				return ActionResultType.SUCCESS;
+			}
+
+			if (item == Items.SHEARS && this.hasSweater() && !player.isSecondaryUseActive()) {
 				ItemStack previousSweater = this.slabfishBackpack.getStackInSlot(0);
-
 				if (!previousSweater.isEmpty()) {
 					InventoryHelper.spawnItemStack(this.world, this.getPosX(), this.getPosY(), this.getPosZ(), previousSweater.copy());
 					this.slabfishBackpack.removeStackFromSlot(0);
 				}
+				return ActionResultType.SUCCESS;
+			}
 
-				this.slabfishBackpack.setInventorySlotContents(0, new ItemStack(item));
+			if (player.isSecondaryUseActive() && item == Items.SHEARS && this.hasBackpack()) {
+				this.dropBackpack();
+				return ActionResultType.SUCCESS;
+			}
+
+			if (this.isBreedingItem(stack) && this.getHealth() < this.getMaxHealth()) {
 				this.consumeItemFromStack(player, stack);
+				world.playSound(this.getPosX(), this.getPosY(), this.getPosZ(), EnvironmentalSounds.ENTITY_SLABFISH_EAT.get(), SoundCategory.NEUTRAL, 1F, 1F, true);
+				this.heal(item.getFood().getHealing());
+				this.particleCloud(ParticleTypes.COMPOSTER);
+				return ActionResultType.SUCCESS;
 			}
-			return ActionResultType.SUCCESS;
 
-		} else if (item.isIn(Tags.Items.CHESTS_WOODEN) && !this.hasBackpack()) {
-			if (!this.world.isRemote()) {
-				this.slabfishBackpack.setInventorySlotContents(1, new ItemStack(item));
+			if (Ingredient.fromTag(EnvironmentalTags.Items.SLABFISH_SNACKS).test(stack)) {
+				stack.onItemUseFinish(this.world, this);
 				this.consumeItemFromStack(player, stack);
-				if (player instanceof ServerPlayerEntity)
-					EnvironmentalCriteriaTriggers.BACKPACK_SLABFISH.trigger((ServerPlayerEntity) player);
+				world.playSound(this.getPosX(), this.getPosY(), this.getPosZ(), EnvironmentalSounds.ENTITY_SLABFISH_EAT.get(), SoundCategory.NEUTRAL, 1F, 1F, true);
+				return ActionResultType.SUCCESS;
 			}
-			return ActionResultType.SUCCESS;
 
-		} else if (item == Items.RABBIT_FOOT && !player.isBeingRidden()) {
-			this.consumeItemFromStack(player, stack);
-			this.startRiding(player);
-			this.playSound(SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-			this.particleCloud(ParticleTypes.CAMPFIRE_COSY_SMOKE);
-			return ActionResultType.SUCCESS;
+			if (this.isBreedingItem(stack)) {
+				int i = this.getGrowingAge();
+				if (!this.world.isRemote && i == 0 && this.canFallInLove()) {
+					this.consumeItemFromStack(player, stack);
+					this.setInLove(player);
+					return ActionResultType.SUCCESS;
+				}
 
-		} else if (item == Items.SHEARS && this.hasSweater() && !player.isSecondaryUseActive()) {
-			ItemStack previousSweater = this.slabfishBackpack.getStackInSlot(0);
-			if (!previousSweater.isEmpty()) {
-				InventoryHelper.spawnItemStack(this.world, this.getPosX(), this.getPosY(), this.getPosZ(), previousSweater.copy());
-				this.slabfishBackpack.removeStackFromSlot(0);
+				if (this.isChild()) {
+					this.consumeItemFromStack(player, stack);
+					this.ageUp((int) ((float) (-i / 20) * 0.1F), true);
+					return ActionResultType.func_233537_a_(this.world.isRemote);
+				}
+
+				if (this.world.isRemote) {
+					return ActionResultType.CONSUME;
+				}
 			}
-			return ActionResultType.SUCCESS;
 
-		} else if (player.isSecondaryUseActive() && item == Items.SHEARS && this.hasBackpack()) {
-			this.dropBackpack();
-			return ActionResultType.SUCCESS;
+			if (!this.isSitting() && this.isOwner(player) && player.isSecondaryUseActive() && !this.isInWater()) {
+				this.setOwnerId(player.getUniqueID());
+				if (!world.isRemote())
+					this.func_233687_w_(true);
+				return ActionResultType.SUCCESS;
+			}
 
-		} else if (item == Items.WATER_BUCKET && this.isAlive()) {
+			if (this.isSitting() && this.isOwner(player) && player.isSecondaryUseActive()) {
+				if (!world.isRemote())
+					this.func_233687_w_(false);
+				return ActionResultType.SUCCESS;
+			}
+
+			if (!player.isSecondaryUseActive()) {
+				if (!world.isRemote()) {
+					openGui((ServerPlayerEntity) player);
+				}
+				return ActionResultType.SUCCESS;
+			}
+
+		}
+		if (item.isIn(EnvironmentalTags.Items.SLABFISH_TAME_ITEMS)) {
+			if (!player.abilities.isCreativeMode) {
+				stack.shrink(1);
+			}
+
+			if (this.rand.nextInt(3) == 0 && !ForgeEventFactory.onAnimalTame(this, player)) {
+				this.setTamedBy(player);
+				this.func_233687_w_(true);
+				this.world.setEntityState(this, (byte) 7);
+			} else {
+				this.world.setEntityState(this, (byte) 6);
+			}
+
+			return ActionResultType.SUCCESS;
+		}
+
+		if (item == Items.WATER_BUCKET && this.isAlive()) {
 			if (this.getGrowingAge() < 0) {
 				return ActionResultType.FAIL;
 			}
@@ -283,55 +352,17 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 			}
 			this.remove();
 			return ActionResultType.SUCCESS;
+		}
 
-		} else if (item.isIn(ItemTags.CREEPER_DROP_MUSIC_DISCS)) {
+		if (item.isIn(ItemTags.CREEPER_DROP_MUSIC_DISCS)) {
 			this.consumeItemFromStack(player, stack);
 			this.playBurpSound();
 			this.particleCloud(ParticleTypes.NOTE);
 			this.dropItem(EnvironmentalItems.MUSIC_DISC_SLABRAVE.get());
 			return ActionResultType.SUCCESS;
-
-		} else if (Ingredient.fromTag(ItemTags.FISHES).test(stack) && stack.isFood() && this.getHealth() < this.getMaxHealth()) {
-			this.consumeItemFromStack(player, stack);
-			world.playSound(this.getPosX(), this.getPosY(), this.getPosZ(), EnvironmentalSounds.ENTITY_SLABFISH_EAT.get(), SoundCategory.NEUTRAL, 1F, 1F, true);
-			this.heal(item.getFood().getHealing());
-			this.particleCloud(ParticleTypes.COMPOSTER);
-			return ActionResultType.SUCCESS;
-
-//		} else if (Ingredient.fromTag(EnvironmentalTags.Items.SUSHI).test(stack)) {
-//			this.consumeItemFromStack(player, stack);
-//			this.playBurpSound();
-//			this.addPotionEffect(new EffectInstance(Effects.SPEED, 3600, 2, true, true));
-//			this.particleCloud(ParticleTypes.CLOUD);
-//			return ActionResultType.SUCCESS;
-
-		} else if (Ingredient.fromTag(EnvironmentalTags.Items.SLABFISH_SNACKS).test(stack)) {
-			stack.onItemUseFinish(this.world, this);
-			this.consumeItemFromStack(player, stack);
-			world.playSound(this.getPosX(), this.getPosY(), this.getPosZ(), EnvironmentalSounds.ENTITY_SLABFISH_EAT.get(), SoundCategory.NEUTRAL, 1F, 1F, true);
-			return ActionResultType.SUCCESS;
-
-		} else if (!this.isSitting() && this.hasBackpack() && player.isSecondaryUseActive() && !this.isInWater()) {
-			this.setTamed(true);
-			this.setOwnerId(player.getUniqueID());
-			if (!world.isRemote())
-				this.func_233687_w_(true);
-			return ActionResultType.SUCCESS;
-
-		} else if (this.isSitting() && player.isSecondaryUseActive()) {
-			if (!world.isRemote())
-				this.func_233687_w_(false);
-			this.setTamed(false);
-			return ActionResultType.SUCCESS;
-
-		} else if (!player.isSecondaryUseActive()) {
-			if (!world.isRemote()) {
-				openGui((ServerPlayerEntity) player);
-			}
-			return ActionResultType.SUCCESS;
-		} else {
-			return super.func_230254_b_(player, hand);
 		}
+
+		return super.func_230254_b_(player, hand);
 	}
 
 	@Override
@@ -391,8 +422,6 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 			this.jukeboxPosition = null;
 		}
 
-		if (!this.isEntitySleeping())
-			this.setTamed(false);
 		if (this.getRidingEntity() != null && this.getRidingEntity().isSneaking())
 			this.stopRiding();
 		if (this.isInWater() && this.getRidingEntity() != null)
@@ -543,7 +572,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
 	@Override
 	public boolean isBreedingItem(ItemStack stack) {
-		return Ingredient.fromTag(EnvironmentalTags.Items.SLABFISH_FOOD).test(stack);
+		return !Ingredient.fromTag(EnvironmentalTags.Items.SLABFISH_TAME_ITEMS).test(stack) && Ingredient.fromTag(EnvironmentalTags.Items.SLABFISH_FOOD).test(stack);
 	}
 
 	@Override

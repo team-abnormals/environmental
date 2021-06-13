@@ -1,0 +1,20 @@
+{
+  "rarity": "uncommon",
+  "priority": 10,
+  "displayName": {
+    "translate": "entity.environmental.slabfish.type.minion"
+  },
+  "tradable": false,
+  "conditions": [
+    {
+      "type": "environmental:rename",
+      "names": [
+        "five",
+        "paradiscal",
+        "minion",
+        "bob",
+        "dave"
+      ]
+    }
+  ]
+}
