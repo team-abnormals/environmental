@@ -10,7 +10,7 @@
 	"block.environmental.mud_brick_vertical_slab": "Lastra verticale di mattoni di fango",
 	"block.environmental.chiseled_mud_bricks": "Mattoni di fango cesellati",
 	
-	"block.environmental.slabfish_effigy": "Effigie di pesce lastra",
+	"block.environmental.slabfish_effigy": "Effigie di slabfish",
 	
 	"block.environmental.chiseled_bricks": "Mattoni cesellati",
 	
@@ -319,7 +319,7 @@
 	"item.environmental.thief_hood": "Cappuccio del ladro",
 	"item.environmental.thief_hood.desc": "Mostri uccisi",
 	
-	"item.environmental.slabfish_spawn_egg": "Uovo generatore di pesce lastra",
+	"item.environmental.slabfish_spawn_egg": "Uovo generatore di slabfish",
 	"item.environmental.duck_spawn_egg": "Uovo generatore di anatra",
 	"item.environmental.deer_spawn_egg": "Uovo generatore di cervo",
 	"item.environmental.yak_spawn_egg": "Uovo generatore di yak",
@@ -342,8 +342,8 @@
 	"item.environmental.scrambled_eggs": "Uova strapazzate",
 	
 	"item.environmental.koi": "Koi",
-	"item.environmental.slabfish_bucket": "Secchio di pesce lastra",
-	"item.environmental.koi_bucket": "Secchio di koi",
+	"item.environmental.slabfish_bucket": "Secchio con slabfish",
+	"item.environmental.koi_bucket": "Secchio con koi",
 
 	"item.environmental.mud_ball": "Palla di fango",
 	"item.environmental.mud_brick": "Mattone di fango",
@@ -367,7 +367,7 @@
 	"item.environmental.music_disc_leaving_home": "Disco musicale",
 	"item.environmental.music_disc_leaving_home.desc": "hatsondogs - Leaving Home",
   
-	"entity.environmental.slabfish": "Pesce lastra",
+	"entity.environmental.slabfish": "Slabfish",
 	"entity.environmental.duck": "Anatra",
 	"entity.environmental.deer": "Cervo",
 	"entity.environmental.yak": "Yak",
@@ -412,10 +412,10 @@
 	"attribute.environmental.name.generic.stealth": "Stealth",
 
 	"advancements.environmental.husbandry.bred_all_slabfish.title": "Genetica bizzarra",
-	"advancements.environmental.husbandry.bred_all_slabfish.description": "Alleva tutte le varianti di pesce lastra!",
+	"advancements.environmental.husbandry.bred_all_slabfish.description": "Alleva tutte le varianti di slabfish!",
 	
 	"advancements.environmental.husbandry.backpack_slabfish.title": "Primo giorno di scuola",
-	"advancements.environmental.husbandry.backpack_slabfish.description": "Dai uno zaino a un pesce lastra",
+	"advancements.environmental.husbandry.backpack_slabfish.description": "Dai uno zaino ad un slabfish",
 
 	"advancements.environmental.adventure.obtain_explorer_gear.title": "Swiper, No Swiping!",
 	"advancements.environmental.adventure.obtain_explorer_gear.description": "Ottieni un pezzo di attrezzatura dell'esploratore",
@@ -432,12 +432,12 @@
 	"advancements.environmental.adventure.upgrade_wanderer_boots.title": "Stivali con della pelliccia",
 	"advancements.environmental.adventure.upgrade_wanderer_boots.description": "Ricevi i stivali del viandante raramente da un mercante ambulante e livellalo completamente ",
 	
-	"subtitles.environmental.entity.slabfish.burp": "Pesce lastra rutta",
-	"subtitles.environmental.entity.slabfish.death": "Pesce lastra muore",
-	"subtitles.environmental.entity.slabfish.step": "Passi di pesce lastra",
-	"subtitles.environmental.entity.slabfish.hurt": "Pesce lastra ferito",
-	"subtitles.environmental.entity.slabfish.eat": "Pesce lastra mangia",
-	"subtitles.environmental.entity.slabfish.transform": "Pesce lastra si trasforma",
+	"subtitles.environmental.entity.slabfish.burp": "Slabfish rutta",
+	"subtitles.environmental.entity.slabfish.death": "Slabfish muore",
+	"subtitles.environmental.entity.slabfish.step": "Passi di Slabfish",
+	"subtitles.environmental.entity.slabfish.hurt": "Slabfish ferito",
+	"subtitles.environmental.entity.slabfish.eat": "Slabfish mangia",
+	"subtitles.environmental.entity.slabfish.transform": "Slabfish si trasforma",
 	"subtitles.environmental.entity.slabfish.backpack": "Equipaggia lo zaino",
 	"subtitles.environmental.entity.slabfish.sweater": "Equipaggia il maglione",
 	
@@ -488,7 +488,7 @@
 	"entity.environmental.slabfish.type.crimson": "Cremisi",
 	"entity.environmental.slabfish.type.warped": "Distorto",
 	"entity.environmental.slabfish.type.soul_sand_valley": "Valle di sabbia delle anime",
-	"entity.environmental.slabfish.type.basalt_deltas": "Delta di basalto",
+	"entity.environmental.slabfish.type.basalt_deltas": "Delta del basalto",
 
 	"entity.environmental.slabfish.type.end": "End",
 	"entity.environmental.slabfish.type.chorus": "Pianura di chorus",
