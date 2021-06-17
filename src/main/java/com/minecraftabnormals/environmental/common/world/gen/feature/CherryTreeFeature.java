@@ -65,9 +65,12 @@ public class CherryTreeFeature extends Feature<BaseTreeFeatureConfig> {
 					BlockPos stumpPos = position.offset(direction);
 					if (TreeUtil.isAirOrLeaves(worldIn, stumpPos) && isDirtAt(worldIn, stumpPos.down())) {
 						this.placeLogAt(worldIn, stumpPos, Direction.UP, rand, config);
+						TreeUtil.setDirtAt(worldIn, stumpPos.down());
 						BlockPos sideStumpPos = stumpPos.offset(direction.rotateY());
-						if (rand.nextBoolean() && isDirtAt(worldIn, sideStumpPos.down()) && TreeUtil.isAirOrLeaves(worldIn, sideStumpPos))
+						if (rand.nextBoolean() && isDirtAt(worldIn, sideStumpPos.down()) && TreeUtil.isAirOrLeaves(worldIn, sideStumpPos)) {
 							this.placeLogAt(worldIn, sideStumpPos, Direction.UP, rand, config);
+							TreeUtil.setDirtAt(worldIn, sideStumpPos.down());
+						}
 						if (rand.nextBoolean() && TreeUtil.isAirOrLeaves(worldIn, stumpPos.up()))
 							this.placeLogAt(worldIn, stumpPos.up(), Direction.UP, rand, config);
 					}
