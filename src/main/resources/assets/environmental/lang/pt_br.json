@@ -260,9 +260,9 @@
 	"block.environmental.cartwheel": "Catavento",
 	"block.environmental.bluebell": "Jacinto-silvestre",
 	"block.environmental.violet": "Violeta",
-	"block.environmental.red_lotus_flower": "Lótus vermelho",
-	"block.environmental.white_lotus_flower": "Lótus branco",
-	"block.environmental.dianthus" : "Cravo",
+	"block.environmental.red_lotus_flower": "Flor de lótus vermelha",
+	"block.environmental.white_lotus_flower": "Flor de lótus branca",
+	"block.environmental.dianthus" : "Dianthus",
 	"block.environmental.bird_of_paradise": "Ave do paraíso",
 	"block.environmental.yellow_hibiscus": "Hibisco amarelo",
 	"block.environmental.orange_hibiscus": "Hibisco laranja",
@@ -324,7 +324,7 @@
 	"item.environmental.duck_spawn_egg": "Ovo gerador de pato",
 	"item.environmental.deer_spawn_egg": "Ovo gerador de cervo",
 	"item.environmental.yak_spawn_egg": "Ovo gerador de iaque",
-	"item.environmental.koi_spawn_egg": "Ovo gerador de koi",
+	"item.environmental.koi_spawn_egg": "Ovo gerador de carpa-ornamental",
 	"item.environmental.fennec_fox_spawn_egg": "Ovo gerador de feneco",
 	
 	"item.environmental.yak_hair": "Pelo de iaque",
@@ -342,9 +342,9 @@
 	"item.environmental.fried_egg": "Ovo frito",
 	"item.environmental.scrambled_eggs": "Ovos mexidos",
 	
-	"item.environmental.koi": "Koi",
+	"item.environmental.koi": "Carpa-ornamental",
 	"item.environmental.slabfish_bucket": "Balde com peixe-laje",
-	"item.environmental.koi_bucket": "Balde com koi",
+	"item.environmental.koi_bucket": "Balde com carpa-ornamental",
 	
 	"item.environmental.mud_ball": "Bola de lama",
 	"item.environmental.mud_brick": "Tijolo de lama",
@@ -372,7 +372,7 @@
 	"entity.environmental.duck": "Pato",
 	"entity.environmental.deer": "Cervo",
 	"entity.environmental.yak": "Iaque",
-	"entity.environmental.koi": "Koi",
+	"entity.environmental.koi": "Carpa-ornamental",
 	"entity.environmental.fennec_fox": "Feneco",
 	
 	"entity.minecraft.villager.environmental.ceramist": "Ceramista",
@@ -439,7 +439,7 @@
 	"subtitles.entity.slabfish.backpack": "Mochila equipada",
 	"subtitles.entity.slabfish.sweater": "Suéter equipado",
 	
-	"subtitles.entity.koi.flop": "Koi saltitando",
+	"subtitles.entity.koi.flop": "Carpa-ornamental saltitando",
 	
 	"subtitles.environmental.entity.duck.ambient": "Pato grasnando",
 	"subtitles.environmental.entity.duck.death": "Pato morre",
