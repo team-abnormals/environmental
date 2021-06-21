@@ -262,7 +262,7 @@
 	"block.environmental.violet": "Violeta",
 	"block.environmental.red_lotus_flower": "Flor de lótus vermelha",
 	"block.environmental.white_lotus_flower": "Flor de lótus branca",
-	"block.environmental.dianthus" : "Dianthus",
+	"block.environmental.dianthus": "Dianthus",
 	"block.environmental.bird_of_paradise": "Ave do paraíso",
 	"block.environmental.yellow_hibiscus": "Hibisco amarelo",
 	"block.environmental.orange_hibiscus": "Hibisco laranja",
@@ -360,7 +360,7 @@
 		
 	"item.environmental.willow_boat": "Bote de salgueiro",
 	"item.environmental.cherry_boat": "Bote de cerejeira",
-	"item.environmental.wisteria_boat": "Bote de wistéria",
+	"item.environmental.wisteria_boat": "Bote de glicínia",
 	
 	"item.environmental.music_disc_slabrave": "Disco de música",
 	"item.environmental.music_disc_slabrave.desc": "Mista Jub - Slabrave",
