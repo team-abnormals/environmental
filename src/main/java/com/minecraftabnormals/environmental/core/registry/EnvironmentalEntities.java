@@ -33,21 +33,21 @@ public class EnvironmentalEntities {
 
 	public static void registerSpawns() {
 		EntitySpawnPlacementRegistry.register(SLABFISH.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, DuckEntity::canDuckSpawn);
-		EntitySpawnPlacementRegistry.register(YAK.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canAnimalSpawn);
+		EntitySpawnPlacementRegistry.register(YAK.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::checkAnimalSpawnRules);
 		EntitySpawnPlacementRegistry.register(DUCK.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, DuckEntity::canDuckSpawn);
-		EntitySpawnPlacementRegistry.register(DEER.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canAnimalSpawn);
+		EntitySpawnPlacementRegistry.register(DEER.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::checkAnimalSpawnRules);
 		EntitySpawnPlacementRegistry.register(KOI.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, KoiEntity::canKoiSpawn);
-		EntitySpawnPlacementRegistry.register(FENNEC_FOX.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canAnimalSpawn);
+		EntitySpawnPlacementRegistry.register(FENNEC_FOX.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::checkAnimalSpawnRules);
 	}
 
 	@SubscribeEvent
 	public static void registerAttributes(EntityAttributeCreationEvent event) {
-		event.put(SLABFISH.get(), SlabfishEntity.registerAttributes().create());
-		event.put(DEER.get(), DeerEntity.registerAttributes().create());
-		event.put(DUCK.get(), DuckEntity.registerAttributes().create());
-		event.put(YAK.get(), YakEntity.registerAttributes().create());
-		event.put(KOI.get(), KoiEntity.registerAttributes().create());
-		event.put(FENNEC_FOX.get(), FoxEntity.func_234192_eI_().create());
+		event.put(SLABFISH.get(), SlabfishEntity.registerAttributes().build());
+		event.put(DEER.get(), DeerEntity.registerAttributes().build());
+		event.put(DUCK.get(), DuckEntity.registerAttributes().build());
+		event.put(YAK.get(), YakEntity.registerAttributes().build());
+		event.put(KOI.get(), KoiEntity.registerAttributes().build());
+		event.put(FENNEC_FOX.get(), FoxEntity.createAttributes().build());
 	}
 
 	public static void registerRendering() {

@@ -13,6 +13,8 @@ import org.spongepowered.asm.mixin.Mixin;
 
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 @Mixin(MyceliumBlock.class)
 public class MyceliumBlockMixin extends SpreadableSnowyDirtBlock implements IGrowable {
 
@@ -21,32 +23,32 @@ public class MyceliumBlockMixin extends SpreadableSnowyDirtBlock implements IGro
 	}
 
 	@Override
-	public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
-		return worldIn.getBlockState(pos.up()).isAir();
+	public boolean isValidBonemealTarget(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
+		return worldIn.getBlockState(pos.above()).isAir();
 	}
 
 	@Override
-	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(World worldIn, Random rand, BlockPos pos, BlockState state) {
 		return true;
 	}
 
 	@Override
-	public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
-		BlockPos blockpos = pos.up();
+	public void performBonemeal(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
+		BlockPos blockpos = pos.above();
 
 		for (int i = 0; i < 128; ++i) {
 			BlockPos newPos = blockpos;
 
 			for (int j = 0; j < i / 16; ++j) {
-				newPos = newPos.add(rand.nextInt(3) - 1, (rand.nextInt(3) - 1) * rand.nextInt(3) / 2, rand.nextInt(3) - 1);
-				if (!worldIn.getBlockState(newPos.down()).isIn(this) || worldIn.getBlockState(newPos).hasOpaqueCollisionShape(worldIn, newPos)) {
+				newPos = newPos.offset(rand.nextInt(3) - 1, (rand.nextInt(3) - 1) * rand.nextInt(3) / 2, rand.nextInt(3) - 1);
+				if (!worldIn.getBlockState(newPos.below()).is(this) || worldIn.getBlockState(newPos).isCollisionShapeFullBlock(worldIn, newPos)) {
 					break;
 				}
 			}
 
 			if (worldIn.getBlockState(newPos).isAir()) {
-				if (EnvironmentalBlocks.MYCELIUM_SPROUTS.get().getDefaultState().isValidPosition(worldIn, newPos)) {
-					worldIn.setBlockState(newPos, EnvironmentalBlocks.MYCELIUM_SPROUTS.get().getDefaultState(), 3);
+				if (EnvironmentalBlocks.MYCELIUM_SPROUTS.get().defaultBlockState().canSurvive(worldIn, newPos)) {
+					worldIn.setBlock(newPos, EnvironmentalBlocks.MYCELIUM_SPROUTS.get().defaultBlockState(), 3);
 				}
 			}
 		}

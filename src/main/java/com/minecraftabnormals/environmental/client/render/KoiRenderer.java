@@ -20,19 +20,19 @@ public class KoiRenderer extends MobRenderer<KoiEntity, KoiModel<KoiEntity>> {
 	}
 
 	@Override
-	public ResourceLocation getEntityTexture(KoiEntity entity) {
+	public ResourceLocation getTextureLocation(KoiEntity entity) {
 		return new ResourceLocation(Environmental.MOD_ID, "textures/entity/koi.png");
 	}
 
 	@Override
-	public void applyRotations(KoiEntity entityLiving, MatrixStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
-		super.applyRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
-		matrixStackIn.rotate(Vector3f.XP.rotationDegrees(MathHelper.lerp(partialTicks, entityLiving.prevRotationPitch, entityLiving.rotationPitch)));
+	public void setupRotations(KoiEntity entityLiving, MatrixStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
+		super.setupRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
+		matrixStackIn.mulPose(Vector3f.XP.rotationDegrees(MathHelper.lerp(partialTicks, entityLiving.xRotO, entityLiving.xRot)));
 		float f = 4.3F * MathHelper.sin(0.6F * ageInTicks);
 		if (!entityLiving.isInWater()) {
-			matrixStackIn.rotate(Vector3f.YP.rotationDegrees(f));
+			matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(f));
 			matrixStackIn.translate((double) 0.1F, (double) 0.1F, (double) -0.1F);
-			matrixStackIn.rotate(Vector3f.ZP.rotationDegrees(90.0F));
+			matrixStackIn.mulPose(Vector3f.ZP.rotationDegrees(90.0F));
 		}
 	}
 }

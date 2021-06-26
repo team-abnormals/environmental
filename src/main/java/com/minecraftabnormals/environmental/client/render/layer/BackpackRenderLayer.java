@@ -26,10 +26,10 @@ public class BackpackRenderLayer<E extends SlabfishEntity, M extends SlabfishMod
 	public void render(MatrixStack matrixStack, IRenderTypeBuffer buffer, int packedLightIn, E slabby, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 		if (!slabby.hasBackpack()) return;
 
-		BackpackType backpackType = SlabfishManager.get(slabby.getEntityWorld()).getBackpackType(slabby.getBackpack()).orElse(SlabfishManager.BROWN_BACKPACK);
-		IVertexBuilder builder = buffer.getBuffer(RenderType.getEntityCutoutNoCull(SlabfishSpriteUploader.ATLAS_LOCATION));
-		this.getEntityModel().sprite = SlabfishSpriteUploader.instance().getSprite(backpackType.getTextureLocation());
-		this.getEntityModel().setRotationAngles(slabby, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-		this.getEntityModel().render(matrixStack, builder, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+		BackpackType backpackType = SlabfishManager.get(slabby.getCommandSenderWorld()).getBackpackType(slabby.getBackpack()).orElse(SlabfishManager.BROWN_BACKPACK);
+		IVertexBuilder builder = buffer.getBuffer(RenderType.entityCutoutNoCull(SlabfishSpriteUploader.ATLAS_LOCATION));
+		this.getParentModel().sprite = SlabfishSpriteUploader.instance().getSprite(backpackType.getTextureLocation());
+		this.getParentModel().setupAnim(slabby, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+		this.getParentModel().renderToBuffer(matrixStack, builder, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
 	}
 }

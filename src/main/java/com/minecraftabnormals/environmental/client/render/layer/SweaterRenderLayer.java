@@ -26,14 +26,14 @@ public class SweaterRenderLayer<E extends SlabfishEntity, M extends SlabfishMode
 	public void render(MatrixStack matrixStack, IRenderTypeBuffer buffer, int packedLightIn, E slabby, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 		if (!slabby.hasSweater()) return;
 
-		SweaterType sweaterType = SlabfishManager.get(slabby.getEntityWorld()).getSweaterType(slabby.getSweater()).orElse(SlabfishManager.EMPTY_SWEATER);
+		SweaterType sweaterType = SlabfishManager.get(slabby.getCommandSenderWorld()).getSweaterType(slabby.getSweater()).orElse(SlabfishManager.EMPTY_SWEATER);
 		if (sweaterType == SlabfishManager.EMPTY_SWEATER)
 			return;
 
-		IVertexBuilder builder = buffer.getBuffer(RenderType.getEntityCutoutNoCull(SlabfishSpriteUploader.ATLAS_LOCATION));
-		this.getEntityModel().sprite = SlabfishSpriteUploader.instance().getSprite(sweaterType.getTextureLocation());
-		this.getEntityModel().setRotationAngles(slabby, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-		this.getEntityModel().render(matrixStack, builder, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+		IVertexBuilder builder = buffer.getBuffer(RenderType.entityCutoutNoCull(SlabfishSpriteUploader.ATLAS_LOCATION));
+		this.getParentModel().sprite = SlabfishSpriteUploader.instance().getSprite(sweaterType.getTextureLocation());
+		this.getParentModel().setupAnim(slabby, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+		this.getParentModel().renderToBuffer(matrixStack, builder, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
 	}
 
 }

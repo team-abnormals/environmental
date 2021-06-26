@@ -15,6 +15,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
+import net.minecraft.item.Item.Properties;
+
 @EventBusSubscriber(modid = Environmental.MOD_ID)
 public class YakPantsItem extends ArmorItem {
 	private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(() -> Items.TURTLE_HELMET);
@@ -26,27 +28,27 @@ public class YakPantsItem extends ArmorItem {
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public static void onLivingUpdate(LivingUpdateEvent event) {
 		LivingEntity entity = event.getEntityLiving();
-		ItemStack legsStack = entity.getItemStackFromSlot(EquipmentSlotType.LEGS);
+		ItemStack legsStack = entity.getItemBySlot(EquipmentSlotType.LEGS);
 		boolean wearingPants = legsStack.getItem() instanceof YakPantsItem;
 		if (entity instanceof PlayerEntity) {
 			float defaultHeight = 0.6F;
 			float upgradedHeight = 1.1F;
-			if (wearingPants && entity.stepHeight < upgradedHeight) {
-				entity.stepHeight = upgradedHeight;
-			} else if (!ModList.get().isLoaded("step") && entity.stepHeight > defaultHeight) {
-				entity.stepHeight = defaultHeight;
+			if (wearingPants && entity.maxUpStep < upgradedHeight) {
+				entity.maxUpStep = upgradedHeight;
+			} else if (!ModList.get().isLoaded("step") && entity.maxUpStep > defaultHeight) {
+				entity.maxUpStep = defaultHeight;
 			}
 		}
 
-		if (wearingPants && entity.getRidingEntity() instanceof LivingEntity) {
-			LivingEntity mount = (LivingEntity) entity.getRidingEntity();
-			mount.addPotionEffect(new EffectInstance(Effects.REGENERATION, 60));
-			mount.addPotionEffect(new EffectInstance(Effects.SPEED, 60, 1));
+		if (wearingPants && entity.getVehicle() instanceof LivingEntity) {
+			LivingEntity mount = (LivingEntity) entity.getVehicle();
+			mount.addEffect(new EffectInstance(Effects.REGENERATION, 60));
+			mount.addEffect(new EffectInstance(Effects.MOVEMENT_SPEED, 60, 1));
 		}
 	}
 
 	@Override
-	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
 		FILLER.fillItem(this, group, items);
 	}
 }

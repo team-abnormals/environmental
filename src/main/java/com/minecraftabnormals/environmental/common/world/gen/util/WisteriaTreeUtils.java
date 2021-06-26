@@ -21,8 +21,8 @@ public class WisteriaTreeUtils {
 		int length = random.nextInt(6); // max 4
 		for (Direction direction : Direction.values()) {
 			if (direction != Direction.UP && direction != Direction.DOWN) {
-				if (isAir(world, pos.offset(direction))) length++; // max 2 min 1
-				else if (isLeaves(world, pos.offset(direction))) length--; // max 4 min 2
+				if (isAir(world, pos.relative(direction))) length++; // max 2 min 1
+				else if (isLeaves(world, pos.relative(direction))) length--; // max 4 min 2
 			}
 		}
 		return length;
@@ -30,36 +30,36 @@ public class WisteriaTreeUtils {
 
 	public static boolean isAir(IWorldGenerationBaseReader worldIn, BlockPos pos) {
 		if (!(worldIn instanceof net.minecraft.world.IBlockReader)) // FORGE: Redirect to state method when possible
-			return worldIn.hasBlockState(pos, BlockState::isAir);
-		else return worldIn.hasBlockState(pos, state -> state.isAir((net.minecraft.world.IBlockReader) worldIn, pos));
+			return worldIn.isStateAtPosition(pos, BlockState::isAir);
+		else return worldIn.isStateAtPosition(pos, state -> state.isAir((net.minecraft.world.IBlockReader) worldIn, pos));
 	}
 
 	public static boolean isLeaves(IWorldGenerationBaseReader worldIn, BlockPos pos) {
-		return worldIn.hasBlockState(pos, (p_214579_0_) -> {
-			return p_214579_0_.isIn(BlockTags.LEAVES);
+		return worldIn.isStateAtPosition(pos, (p_214579_0_) -> {
+			return p_214579_0_.is(BlockTags.LEAVES);
 		});
 	}
 
 	public static boolean isAirOrLeavesOrVines(IWorldGenerationBaseReader worldIn, BlockPos pos) {
 		if (!(worldIn instanceof net.minecraft.world.IWorldReader)) // FORGE: Redirect to state method when possible
-			return worldIn.hasBlockState(pos, (state) -> {
-				return state.isAir() || state.isIn(BlockTags.LEAVES);
+			return worldIn.isStateAtPosition(pos, (state) -> {
+				return state.isAir() || state.is(BlockTags.LEAVES);
 			});
 		else
-			return worldIn.hasBlockState(pos, state -> state.canBeReplacedByLeaves((net.minecraft.world.IWorldReader) worldIn, pos));
+			return worldIn.isStateAtPosition(pos, state -> state.canBeReplacedByLeaves((net.minecraft.world.IWorldReader) worldIn, pos));
 	}
 
 	public static boolean isLog(IWorldGenerationBaseReader worldIn, BlockPos pos) {
-		return worldIn.hasBlockState(pos, (p_214579_0_) -> {
-			return p_214579_0_.isIn(BlockTags.LOGS);
+		return worldIn.isStateAtPosition(pos, (p_214579_0_) -> {
+			return p_214579_0_.is(BlockTags.LOGS);
 		});
 	}
 
 	public static boolean isAirOrLeaves(IWorldGenerationBaseReader worldIn, BlockPos pos) {
 		if (worldIn instanceof net.minecraft.world.IWorldReader) // FORGE: Redirect to state method when possible
-			return worldIn.hasBlockState(pos, state -> state.canBeReplacedByLeaves((net.minecraft.world.IWorldReader) worldIn, pos));
-		return worldIn.hasBlockState(pos, (state) -> {
-			return state.isAir() || state.isIn(BlockTags.LEAVES);
+			return worldIn.isStateAtPosition(pos, state -> state.canBeReplacedByLeaves((net.minecraft.world.IWorldReader) worldIn, pos));
+		return worldIn.isStateAtPosition(pos, (state) -> {
+			return state.isAir() || state.is(BlockTags.LEAVES);
 		});
 	}
 
@@ -79,12 +79,12 @@ public class WisteriaTreeUtils {
 					break;
 				case 4:
 					if (WisteriaTreeUtils.isAir(world, pos)) placeLeafAt(world, pos, leaf);
-					if (WisteriaTreeUtils.isAir(world, pos.down())) placeLeafAt(world, pos.down(), leaf);
+					if (WisteriaTreeUtils.isAir(world, pos.below())) placeLeafAt(world, pos.below(), leaf);
 					break;
 				case 5:
 					if (WisteriaTreeUtils.isAir(world, pos)) placeLeafAt(world, pos, leaf);
-					if (WisteriaTreeUtils.isAir(world, pos.down())) placeLeafAt(world, pos.down(), leaf);
-					if (WisteriaTreeUtils.isAir(world, pos.down(2))) placeLeafAt(world, pos.down(2), leaf);
+					if (WisteriaTreeUtils.isAir(world, pos.below())) placeLeafAt(world, pos.below(), leaf);
+					if (WisteriaTreeUtils.isAir(world, pos.below(2))) placeLeafAt(world, pos.below(2), leaf);
 					break;
 			}
 		}
@@ -97,13 +97,13 @@ public class WisteriaTreeUtils {
 	}
 
 	public static void setForcedState(IWorldWriter worldIn, BlockPos pos, BlockState state) {
-		worldIn.setBlockState(pos, state, 18);
+		worldIn.setBlock(pos, state, 18);
 	}
 
 	public static void setDirtAt(IWorld worldIn, BlockPos pos) {
 		Block block = worldIn.getBlockState(pos).getBlock();
 		if (block == Blocks.GRASS_BLOCK || block == Blocks.FARMLAND) {
-			setForcedState(worldIn, pos, Blocks.DIRT.getDefaultState());
+			setForcedState(worldIn, pos, Blocks.DIRT.defaultBlockState());
 		}
 	}
 

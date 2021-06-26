@@ -22,24 +22,24 @@ public abstract class ChickenEntityMixin extends AnimalEntity implements IEggLay
 	}
 
 	@Shadow
-	public int timeUntilNextEgg;
+	public int eggTime;
 
 	@Shadow
-	public boolean chickenJockey;
+	public boolean isChickenJockey;
 
 	@Override
 	public int getEggTimer() {
-		return this.timeUntilNextEgg;
+		return this.eggTime;
 	}
 
 	@Override
 	public void setEggTimer(int time) {
-		this.timeUntilNextEgg = time;
+		this.eggTime = time;
 	}
 
 	@Override
 	public boolean isBirdJockey() {
-		return this.chickenJockey;
+		return this.isChickenJockey;
 	}
 
 	@Override
@@ -54,6 +54,6 @@ public abstract class ChickenEntityMixin extends AnimalEntity implements IEggLay
 	
 	@Override
 	public SoundEvent getEggLayingSound() {
-		return SoundEvents.ENTITY_CHICKEN_EGG;
+		return SoundEvents.CHICKEN_EGG;
 	}
 }

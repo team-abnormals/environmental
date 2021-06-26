@@ -30,9 +30,9 @@ public final class SlabfishSpriteUploader extends SpriteUploader {
 	}
 
 	@Override
-	protected Stream<ResourceLocation> getResourceLocations() {
+	protected Stream<ResourceLocation> getResourcesToLoad() {
 		IResourceManager resourceManager = Minecraft.getInstance().getResourceManager();
-		return resourceManager.getAllResourceLocations("textures/entity/slabfish", file -> file.endsWith(".png")).stream().map(location -> new ResourceLocation(location.getNamespace(), location.getPath().substring("textures/entity/slabfish/".length(), location.getPath().length() - 4)));
+		return resourceManager.listResources("textures/entity/slabfish", file -> file.endsWith(".png")).stream().map(location -> new ResourceLocation(location.getNamespace(), location.getPath().substring("textures/entity/slabfish/".length(), location.getPath().length() - 4)));
 	}
 
 	@Override
@@ -51,7 +51,7 @@ public final class SlabfishSpriteUploader extends SpriteUploader {
 			spriteUploader = new SlabfishSpriteUploader(Minecraft.getInstance().getTextureManager());
 			IResourceManager resourceManager = Minecraft.getInstance().getResourceManager();
 			if (resourceManager instanceof IReloadableResourceManager) {
-				((IReloadableResourceManager) resourceManager).addReloadListener(spriteUploader);
+				((IReloadableResourceManager) resourceManager).registerReloadListener(spriteUploader);
 			}
 		});
 	}

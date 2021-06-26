@@ -94,7 +94,7 @@ public class EnvironmentalPlugin implements IModPlugin {
 	public static Results getAllRecipes() {
 
 		Results results = new Results();
-		ClientWorld world = Minecraft.getInstance().world;
+		ClientWorld world = Minecraft.getInstance().level;
 		RecipeManager recipeManager = world.getRecipeManager();
 
 		results.bakingRecipes.addAll(getRecipes(recipeManager, EnvironmentalRecipes.RecipeTypes.BAKING));
@@ -105,7 +105,7 @@ public class EnvironmentalPlugin implements IModPlugin {
 
 	@SuppressWarnings("unchecked")
 	private static <C extends IInventory, T extends IRecipe<C>> Collection<T> getRecipes(RecipeManager recipeManager, IRecipeType<T> recipeType) {
-		Map<ResourceLocation, IRecipe<C>> recipesMap = recipeManager.getRecipes(recipeType);
+		Map<ResourceLocation, IRecipe<C>> recipesMap = recipeManager.byType(recipeType);
 		return (Collection<T>) recipesMap.values();
 	}
 

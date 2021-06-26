@@ -21,20 +21,20 @@ public class SlabfishInventory extends DynamicInventory {
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int index, ItemStack stack) {
+	public boolean canPlaceItem(int index, ItemStack stack) {
 		switch (index) {
 			case 0:
-				return SlabfishManager.get(this.slabfish.getEntityWorld()).getSweaterType(stack).isPresent();
+				return SlabfishManager.get(this.slabfish.getCommandSenderWorld()).getSweaterType(stack).isPresent();
 			case 1:
-				return stack.getItem().isIn(Tags.Items.CHESTS_WOODEN);
+				return stack.getItem().is(Tags.Items.CHESTS_WOODEN);
 			case 2:
-				SlabfishManager slabfishManager = SlabfishManager.get(this.slabfish.getEntityWorld());
+				SlabfishManager slabfishManager = SlabfishManager.get(this.slabfish.getCommandSenderWorld());
 				if (!slabfishManager.getBackpackType(stack).isPresent())
 					return false;
 				SlabfishType slabfishType = slabfishManager.getSlabfishType(this.slabfish.getSlabfishType()).orElse(SlabfishManager.DEFAULT_SLABFISH);
 				return this.slabfish.hasBackpack() && (slabfishType.getCustomBackpack() == null || !slabfishManager.getBackpackType(slabfishType.getCustomBackpack()).isPresent());
 			default:
-				return super.isItemValidForSlot(index, stack);
+				return super.canPlaceItem(index, stack);
 		}
 	}
 
@@ -44,12 +44,12 @@ public class SlabfishInventory extends DynamicInventory {
 	}
 
 	@Override
-	public int getSizeInventory() {
-		return 3 + (this.slabfish.hasBackpack() || this.getStackInSlot(1).getItem().isIn(Tags.Items.CHESTS_WOODEN) ? 15 : 0);
+	public int getContainerSize() {
+		return 3 + (this.slabfish.hasBackpack() || this.getItem(1).getItem().is(Tags.Items.CHESTS_WOODEN) ? 15 : 0);
 	}
 
 	@Override
-	public boolean isUsableByPlayer(PlayerEntity player) {
-		return this.slabfish.isAlive() && player.getDistanceSq(this.slabfish) <= 64.0;
+	public boolean stillValid(PlayerEntity player) {
+		return this.slabfish.isAlive() && player.distanceToSqr(this.slabfish) <= 64.0;
 	}
 }

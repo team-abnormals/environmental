@@ -31,7 +31,7 @@ public class SawingCategory implements IRecipeCategory<SawingRecipe> {
 		ResourceLocation location = EnvironmentalPlugin.RECIPE_GUI_ENVIRONMENTAL;
 		background = guiHelper.createDrawable(location, 0, 220, width, height);
 		icon = guiHelper.createDrawableIngredient(new ItemStack(EnvironmentalBlocks.SAWMILL.get()));
-		this.localizedName = I18n.format("gui." + Environmental.MOD_ID + ".category.sawing");
+		this.localizedName = I18n.get("gui." + Environmental.MOD_ID + ".category.sawing");
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class SawingCategory implements IRecipeCategory<SawingRecipe> {
 	@Override
 	public void setIngredients(SawingRecipe recipe, IIngredients ingredients) {
 		ingredients.setInputIngredients(recipe.getIngredients());
-		ingredients.setOutput(VanillaTypes.ITEM, recipe.getRecipeOutput());
+		ingredients.setOutput(VanillaTypes.ITEM, recipe.getResultItem());
 	}
 
 	@Override

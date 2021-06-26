@@ -10,6 +10,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class CherryLeavesBlock extends AbnormalsLeavesBlock {
 
 	public CherryLeavesBlock(Properties properties) {
@@ -27,8 +29,8 @@ public class CherryLeavesBlock extends AbnormalsLeavesBlock {
 		double d2 = (color & 255) / 255.0F;
 
 		if (rand.nextInt(50) == 0) {
-			BlockPos blockpos = pos.down();
-			if (worldIn.isAirBlock(blockpos)) {
+			BlockPos blockpos = pos.below();
+			if (worldIn.isEmptyBlock(blockpos)) {
 				double d3 = (double) ((float) pos.getX() + rand.nextFloat());
 				double d4 = (double) pos.getY() - 0.05D;
 				double d6 = (double) ((float) pos.getZ() + rand.nextFloat());

@@ -11,18 +11,20 @@ import net.minecraft.state.StateContainer;
 
 import java.util.function.Supplier;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class CartwheelBlock extends AbnormalsFlowerBlock {
-	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
+	public static final DirectionProperty FACING = HorizontalBlock.FACING;
 
 	public CartwheelBlock(Supplier<Effect> effect, int effectDuration, Properties properties) {
 		super(effect, effectDuration, properties);
 	}
 
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
+		return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
 	}
 
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(FACING);
 	}
 }

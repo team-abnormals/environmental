@@ -7,7 +7,7 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 
 public class MyceliumSproutsBlock extends BushBlock {
-	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 3.0D, 14.0D);
+	protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 3.0D, 14.0D);
 
 	public MyceliumSproutsBlock(AbstractBlock.Properties properties) {
 		super(properties);
@@ -17,8 +17,8 @@ public class MyceliumSproutsBlock extends BushBlock {
 		return SHAPE;
 	}
 
-	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
-		return state.isIn(Blocks.MYCELIUM) || super.isValidGround(state, worldIn, pos);
+	protected boolean mayPlaceOn(BlockState state, IBlockReader worldIn, BlockPos pos) {
+		return state.is(Blocks.MYCELIUM) || super.mayPlaceOn(state, worldIn, pos);
 	}
 
 	public AbstractBlock.OffsetType getOffsetType() {

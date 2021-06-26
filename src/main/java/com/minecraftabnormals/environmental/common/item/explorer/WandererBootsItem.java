@@ -21,6 +21,8 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 import java.util.UUID;
 
+import net.minecraft.item.Item.Properties;
+
 @EventBusSubscriber(modid = Environmental.MOD_ID)
 public class WandererBootsItem extends ExplorerArmorItem {
 	public static final String NBT_TAG = "WandererBootsUses";
@@ -38,19 +40,19 @@ public class WandererBootsItem extends ExplorerArmorItem {
 	@Override
 	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType slot, ItemStack stack) {
 		Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-		builder.putAll(super.getAttributeModifiers(this.getEquipmentSlot()));
+		builder.putAll(super.getDefaultAttributeModifiers(this.getSlot()));
 		UUID uuid = UUID.fromString("845DB27C-C624-495F-8C9F-6020A9A58B6B");
 
 		int uses = Math.round(stack.getOrCreateTag().getFloat(NBT_TAG));
 		double increase = 0.15F + (0.05F * getIncreaseForUses(uses));
 
 		builder.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(uuid, "Speed modifier", increase, AttributeModifier.Operation.MULTIPLY_BASE));
-		return slot == this.slot ? builder.build() : super.getAttributeModifiers(slot);
+		return slot == this.slot ? builder.build() : super.getDefaultAttributeModifiers(slot);
 	}
 
 	@SubscribeEvent
 	public static void onFallEvent(LivingFallEvent event) {
-		if (event.getEntityLiving().getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == EnvironmentalItems.WANDERER_BOOTS.get() && event.getEntityLiving().fallDistance < 6)
+		if (event.getEntityLiving().getItemBySlot(EquipmentSlotType.FEET).getItem() == EnvironmentalItems.WANDERER_BOOTS.get() && event.getEntityLiving().fallDistance < 6)
 			event.setDamageMultiplier(0);
 	}
 

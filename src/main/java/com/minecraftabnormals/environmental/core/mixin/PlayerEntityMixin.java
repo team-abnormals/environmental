@@ -20,11 +20,11 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 		super(type, worldIn);
 	}
 
-	@Inject(at = @At(value = "FIELD", target = "Lnet/minecraft/entity/player/PlayerEntity;onGround:Z", shift = At.Shift.AFTER), method = "addMovementStat")
+	@Inject(at = @At(value = "FIELD", target = "Lnet/minecraft/entity/player/PlayerEntity;onGround:Z", shift = At.Shift.AFTER), method = "checkMovementStatistics")
 	private void addMovementStat(double xDis, double yDis, double zDis, CallbackInfo info) {
 		float l = Math.round(MathHelper.sqrt(xDis * xDis + zDis * zDis) * 100.0F) / 100.0F;
 		if (l > 0 && this.isOnGround()) {
-			ItemStack stack = this.getItemStackFromSlot(EquipmentSlotType.FEET);
+			ItemStack stack = this.getItemBySlot(EquipmentSlotType.FEET);
 			if (stack.getItem() instanceof WandererBootsItem) {
 				((WandererBootsItem) stack.getItem()).levelUp(stack, this);
 			}

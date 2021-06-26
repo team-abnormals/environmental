@@ -36,8 +36,8 @@ public interface IExplorerArmorItem {
 	}
 
 	default void playEffects(int level, LivingEntity entity) {
-		World world = entity.getEntityWorld();
-		world.playSound(null, entity.getPosX(), entity.getPosY(), entity.getPosZ(), SoundEvents.ENTITY_PLAYER_LEVELUP, entity.getSoundCategory(), level * 0.20F, 1.0F);
+		World world = entity.getCommandSenderWorld();
+		world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.PLAYER_LEVELUP, entity.getSoundSource(), level * 0.20F, 1.0F);
 //		IParticleData particle = ParticleTypes.HEART;
 //		if (level == 5) particle = ParticleTypes.FLAME;
 //		Random rand = entity.getRNG();

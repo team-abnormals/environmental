@@ -16,6 +16,8 @@ import net.minecraft.world.server.ServerWorld;
 import java.util.List;
 import java.util.function.Supplier;
 
+import net.minecraft.item.Item.Properties;
+
 public class KoiBucketItem extends BucketItem {
 
 	private final Supplier<EntityType<? extends KoiEntity>> entityType;
@@ -26,7 +28,7 @@ public class KoiBucketItem extends BucketItem {
 	}
 
 	@Override
-	public void onLiquidPlaced(World worldIn, ItemStack p_203792_2_, BlockPos pos) {
+	public void checkExtraContent(World worldIn, ItemStack p_203792_2_, BlockPos pos) {
 		if (worldIn instanceof ServerWorld) {
 			this.placeEntity((ServerWorld) worldIn, p_203792_2_, pos);
 		}
@@ -40,7 +42,7 @@ public class KoiBucketItem extends BucketItem {
 	}
 
 	@Override
-	public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-		super.addInformation(stack, worldIn, tooltip, flagIn);
+	public void appendHoverText(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+		super.appendHoverText(stack, worldIn, tooltip, flagIn);
 	}
 }

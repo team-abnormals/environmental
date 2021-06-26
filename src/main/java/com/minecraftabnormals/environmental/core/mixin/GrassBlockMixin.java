@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 @Mixin(GrassBlock.class)
 public abstract class GrassBlockMixin extends Block {
 
@@ -22,12 +24,12 @@ public abstract class GrassBlockMixin extends Block {
 		super(properties);
 	}
 
-	@Redirect(method = "grow", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/biome/BiomeGenerationSettings;getFlowerFeatures()Ljava/util/List;"))
+	@Redirect(method = "performBonemeal", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/biome/BiomeGenerationSettings;getFlowerFeatures()Ljava/util/List;"))
 	private List<ConfiguredFeature<?, ?>> getFlowerFeatures(BiomeGenerationSettings biomeGenerationSettings) {
-		return biomeGenerationSettings.getFeatures().stream().flatMap(Collection::stream).map(Supplier::get).flatMap(ConfiguredFeature::func_242768_d).filter((configuredFeature) -> configuredFeature.feature == Feature.FLOWER).collect(ImmutableList.toImmutableList());
+		return biomeGenerationSettings.features().stream().flatMap(Collection::stream).map(Supplier::get).flatMap(ConfiguredFeature::getFeatures).filter((configuredFeature) -> configuredFeature.feature == Feature.FLOWER).collect(ImmutableList.toImmutableList());
 	}
 
-	@Redirect(method = "grow", at = @At(value = "INVOKE", target = "Ljava/util/List;get(I)Ljava/lang/Object;"))
+	@Redirect(method = "performBonemeal", at = @At(value = "INVOKE", target = "Ljava/util/List;get(I)Ljava/lang/Object;"))
 	private Object get(List list, int index) {
 		return list.get(new Random().nextInt(list.size()));
 	}

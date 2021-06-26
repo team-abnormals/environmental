@@ -12,7 +12,7 @@ import java.util.Random;
 public class WillowTree extends Tree {
 
 	@Nullable
-	protected ConfiguredFeature<BaseTreeFeatureConfig, ?> getTreeFeature(Random randomIn, boolean p_225546_2_) {
-		return Feature.TREE.withConfiguration(EnvironmentalFeatures.Configs.WILLOW_TREE_CONFIG);
+	protected ConfiguredFeature<BaseTreeFeatureConfig, ?> getConfiguredFeature(Random randomIn, boolean p_225546_2_) {
+		return Feature.TREE.configured(EnvironmentalFeatures.Configs.WILLOW_TREE_CONFIG);
 	}
 }

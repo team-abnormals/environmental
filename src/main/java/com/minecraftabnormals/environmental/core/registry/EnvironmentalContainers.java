@@ -20,7 +20,7 @@ public class EnvironmentalContainers {
 	public static final RegistryObject<ContainerType<SlabfishInventoryContainer>> SLABFISH_INVENTORY = CONTAINER_TYPES.register("slabfish_inventory", () -> new ContainerType<>(SlabfishInventoryContainer::new));
 
 	public static void registerScreenFactories() {
-		ScreenManager.registerFactory(EnvironmentalContainers.KILN.get(), KilnScreen::new);
-		ScreenManager.registerFactory(EnvironmentalContainers.SAWMILL.get(), SawmillScreen::new);
+		ScreenManager.register(EnvironmentalContainers.KILN.get(), KilnScreen::new);
+		ScreenManager.register(EnvironmentalContainers.SAWMILL.get(), SawmillScreen::new);
 	}
 }

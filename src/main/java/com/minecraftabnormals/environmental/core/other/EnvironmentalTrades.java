@@ -83,37 +83,37 @@ public class EnvironmentalTrades {
 	public static void onCarpenterTradesEvent(VillagerTradesEvent event) {
 		String[] defaultRemoved = new String[]{"crimson", "warped", "poise", "aspen", "grimwood", "morado", "kousa"};
 
-		for (Item item : ItemTags.PLANKS.getAllElements()) {
+		for (Item item : ItemTags.PLANKS.getValues()) {
 			if (notOnBlacklist(item, new String[]{"vertical", "stained"}, defaultRemoved)) {
 				TradeUtil.addVillagerTrades(event, EnvironmentalVillagers.CARPENTER.get(), TradeUtil.NOVICE, new AbnormalsTrade(item, 24, 1, 16, 3));
 			}
 		}
 
-		for (Item item : ItemTags.LOGS.getAllElements()) {
+		for (Item item : ItemTags.LOGS.getValues()) {
 			if (notOnBlacklist(item, new String[]{"stripped", "_wood",}, defaultRemoved)) {
 				TradeUtil.addVillagerTrades(event, EnvironmentalVillagers.CARPENTER.get(), TradeUtil.NOVICE, new AbnormalsTrade(item, 6, 1, 16, 4));
 			}
 		}
 
-		for (Item item : ItemTags.SIGNS.getAllElements()) {
+		for (Item item : ItemTags.SIGNS.getValues()) {
 			if (notOnBlacklist(item, defaultRemoved)) {
 				TradeUtil.addVillagerTrades(event, EnvironmentalVillagers.CARPENTER.get(), TradeUtil.APPRENTICE, new AbnormalsTrade(1, item, 3, 4, 10));
 			}
 		}
 
-		for (Item item : ItemTags.WOODEN_TRAPDOORS.getAllElements()) {
+		for (Item item : ItemTags.WOODEN_TRAPDOORS.getValues()) {
 			if (notOnBlacklist(item, defaultRemoved)) {
 				TradeUtil.addVillagerTrades(event, EnvironmentalVillagers.CARPENTER.get(), TradeUtil.APPRENTICE, new AbnormalsTrade(1, item, 4, 8, 10));
 			}
 		}
 
-		for (Item item : ItemTags.SAPLINGS.getAllElements()) {
+		for (Item item : ItemTags.SAPLINGS.getValues()) {
 			if (notOnBlacklist(item, defaultRemoved)) {
 				TradeUtil.addVillagerTrades(event, EnvironmentalVillagers.CARPENTER.get(), TradeUtil.JOURNEYMAN, new AbnormalsTrade(item, 8, 1, 16, 10));
 			}
 		}
 
-		for (Item item : ItemTags.WOODEN_DOORS.getAllElements()) {
+		for (Item item : ItemTags.WOODEN_DOORS.getValues()) {
 			if (notOnBlacklist(item, defaultRemoved)) {
 				TradeUtil.addVillagerTrades(event, EnvironmentalVillagers.CARPENTER.get(), TradeUtil.JOURNEYMAN, new AbnormalsTrade(1, item, 2, 8, 15));
 			}

@@ -19,11 +19,11 @@ public class FennecFoxRenderer extends MobRenderer<FennecFoxEntity, FennecFoxMod
         this.addLayer(new FennecFoxHeldItemLayer(this));
     }
 
-    protected void applyRotations(FennecFoxEntity entity, MatrixStack stack, float ageInTicks, float rotationYaw, float partialTicks) {
-        super.applyRotations(entity, stack, ageInTicks, rotationYaw, partialTicks);
-        if (entity.func_213480_dY() || entity.isStuck()) {
-            float f = -MathHelper.lerp(partialTicks, entity.prevRotationPitch, entity.rotationPitch);
-            stack.rotate(Vector3f.XP.rotationDegrees(f));
+    protected void setupRotations(FennecFoxEntity entity, MatrixStack stack, float ageInTicks, float rotationYaw, float partialTicks) {
+        super.setupRotations(entity, stack, ageInTicks, rotationYaw, partialTicks);
+        if (entity.isPouncing() || entity.isFaceplanted()) {
+            float f = -MathHelper.lerp(partialTicks, entity.xRotO, entity.xRot);
+            stack.mulPose(Vector3f.XP.rotationDegrees(f));
         }
 
     }
@@ -31,7 +31,7 @@ public class FennecFoxRenderer extends MobRenderer<FennecFoxEntity, FennecFoxMod
     /**
      * Returns the location of an entity's texture.
      */
-    public ResourceLocation getEntityTexture(FennecFoxEntity entity) {
+    public ResourceLocation getTextureLocation(FennecFoxEntity entity) {
         return TEXTURE;
     }
 }

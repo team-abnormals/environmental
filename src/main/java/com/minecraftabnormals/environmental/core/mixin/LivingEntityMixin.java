@@ -25,11 +25,11 @@ public abstract class LivingEntityMixin extends Entity {
 		super(entityTypeIn, worldIn);
 	}
 
-	@Inject(method = "getVisibilityMultiplier", at = @At("TAIL"), cancellable = true)
+	@Inject(method = "getVisibilityPercent", at = @At("TAIL"), cancellable = true)
 	private void getVisibilityMultiplier(@Nullable Entity lookingEntity, CallbackInfoReturnable<Double> cir) {
 		double value = cir.getReturnValue();
 		if (lookingEntity != null) {
-			ItemStack stack = ((LivingEntity) (Object) this).getItemStackFromSlot(EquipmentSlotType.HEAD);
+			ItemStack stack = ((LivingEntity) (Object) this).getItemBySlot(EquipmentSlotType.HEAD);
 			Item item = stack.getItem();
 			if (item instanceof ThiefHoodItem) {
 				Collection<AttributeModifier> modifiers = stack.getAttributeModifiers(EquipmentSlotType.HEAD).get(EnvironmentalAttributes.STEALTH.get());

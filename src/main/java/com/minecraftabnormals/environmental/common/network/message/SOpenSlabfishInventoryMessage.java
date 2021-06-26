@@ -19,7 +19,7 @@ public class SOpenSlabfishInventoryMessage {
 	}
 
 	public SOpenSlabfishInventoryMessage(SlabfishEntity slabfishEntity, int windowId) {
-		this(slabfishEntity.getEntityId(), windowId);
+		this(slabfishEntity.getId(), windowId);
 	}
 
 	public static void serialize(SOpenSlabfishInventoryMessage message, PacketBuffer buffer) {

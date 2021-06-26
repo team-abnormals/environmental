@@ -129,7 +129,7 @@ public class Environmental {
 
 	private void stitchTextures(TextureStitchEvent.Pre event) {
 		AtlasTexture texture = event.getMap();
-		if (PlayerContainer.LOCATION_BLOCKS_TEXTURE.equals(texture.getTextureLocation())) {
+		if (PlayerContainer.BLOCK_ATLAS.equals(texture.location())) {
 			event.addSprite(new ResourceLocation(Environmental.MOD_ID, "item/slabfish_sweater_slot"));
 			event.addSprite(new ResourceLocation(Environmental.MOD_ID, "item/slabfish_backpack_slot"));
 			event.addSprite(new ResourceLocation(Environmental.MOD_ID, "item/slabfish_backpack_type_slot"));

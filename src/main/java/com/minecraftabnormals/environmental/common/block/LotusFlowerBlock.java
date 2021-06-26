@@ -12,6 +12,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class LotusFlowerBlock extends AbnormalsFlowerBlock {
 	private Supplier<IParticleData> particle;
 
@@ -31,7 +33,7 @@ public class LotusFlowerBlock extends AbnormalsFlowerBlock {
 			double y = pos.getY() + 0.25D + (rand.nextFloat() * 0.05F);
 			double z = pos.getZ() + 0.25D + offsetZ;
 
-			if (worldIn.isRemote && worldIn.getGameTime() % 9 == 0)
+			if (worldIn.isClientSide && worldIn.getGameTime() % 9 == 0)
 				worldIn.addParticle(this.particle.get(), x, y, z, 0.03D, 0.0D, 0.03D);
 		}
 	}

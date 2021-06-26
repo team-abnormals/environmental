@@ -19,15 +19,15 @@ public class ClientNetworkHandler {
 		PlayerEntity player = Minecraft.getInstance().player;
 
 		if (player != null) {
-			World world = player.world;
-			Entity entity = world.getEntityByID(packet.getEntityId());
+			World world = player.level;
+			Entity entity = world.getEntity(packet.getEntityId());
 
 			if (entity instanceof SlabfishEntity) {
 				SlabfishEntity slabfish = (SlabfishEntity) entity;
 
 				SlabfishInventoryContainer container = new SlabfishInventoryContainer(packet.getWindowId(), player.inventory, slabfish.slabfishBackpack, slabfish);
-				player.openContainer = container;
-				Minecraft.getInstance().displayGuiScreen(new SlabfishInventoryScreen(container, player.inventory, slabfish));
+				player.containerMenu = container;
+				Minecraft.getInstance().setScreen(new SlabfishInventoryScreen(container, player.inventory, slabfish));
 			}
 		}
 	}

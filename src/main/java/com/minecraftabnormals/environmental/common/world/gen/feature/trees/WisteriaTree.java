@@ -31,7 +31,7 @@ public class WisteriaTree extends Tree {
 	}
 
 	@Nullable
-	protected ConfiguredFeature<BaseTreeFeatureConfig, ?> getTreeFeature(Random randomIn, boolean beehive) {
-		return randomIn.nextInt(10) == 0 ? EnvironmentalFeatures.BIG_WISTERIA_TREE.get().withConfiguration(setConfigByColor(color, beehive)) : EnvironmentalFeatures.WISTERIA_TREE.get().withConfiguration(setConfigByColor(color, beehive));
+	protected ConfiguredFeature<BaseTreeFeatureConfig, ?> getConfiguredFeature(Random randomIn, boolean beehive) {
+		return randomIn.nextInt(10) == 0 ? EnvironmentalFeatures.BIG_WISTERIA_TREE.get().configured(setConfigByColor(color, beehive)) : EnvironmentalFeatures.WISTERIA_TREE.get().configured(setConfigByColor(color, beehive));
 	}
 }

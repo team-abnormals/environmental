@@ -46,7 +46,7 @@ public class EnvironmentalCompat {
 
 	public static void registerLootInjectors() {
 		LootInjectionRegistry.LootInjector injector = new LootInjectionRegistry.LootInjector(Environmental.MOD_ID);
-		injector.addLootInjection(injector.buildLootPool("simple_dungeon", 1, 0), LootTables.CHESTS_SIMPLE_DUNGEON);
+		injector.addLootInjection(injector.buildLootPool("simple_dungeon", 1, 0), LootTables.SIMPLE_DUNGEON);
 	}
 
 	public static void registerCompostables() {
@@ -260,27 +260,27 @@ public class EnvironmentalCompat {
 	}
 
 	public static void registerDispenserBehaviors() {
-		DispenserBlock.registerDispenseBehavior(EnvironmentalItems.DUCK_EGG.get(), new ProjectileDispenseBehavior() {
-			protected ProjectileEntity getProjectileEntity(World worldIn, IPosition position, ItemStack stackIn) {
-				return new DuckEggEntity(worldIn, position.getX(), position.getY(), position.getZ());
+		DispenserBlock.registerBehavior(EnvironmentalItems.DUCK_EGG.get(), new ProjectileDispenseBehavior() {
+			protected ProjectileEntity getProjectile(World worldIn, IPosition position, ItemStack stackIn) {
+				return new DuckEggEntity(worldIn, position.x(), position.y(), position.z());
 			}
 		});
 
-		DispenserBlock.registerDispenseBehavior(EnvironmentalItems.MUD_BALL.get(), new ProjectileDispenseBehavior() {
-			protected ProjectileEntity getProjectileEntity(World worldIn, IPosition position, ItemStack stackIn) {
-				return new MudBallEntity(worldIn, position.getX(), position.getY(), position.getZ());
+		DispenserBlock.registerBehavior(EnvironmentalItems.MUD_BALL.get(), new ProjectileDispenseBehavior() {
+			protected ProjectileEntity getProjectile(World worldIn, IPosition position, ItemStack stackIn) {
+				return new MudBallEntity(worldIn, position.x(), position.y(), position.z());
 			}
 		});
 
-		DispenserBlock.registerDispenseBehavior(EnvironmentalItems.SLABFISH_BUCKET.get(), new DefaultDispenseItemBehavior() {
+		DispenserBlock.registerBehavior(EnvironmentalItems.SLABFISH_BUCKET.get(), new DefaultDispenseItemBehavior() {
 			@Override
-			protected ItemStack dispenseStack(IBlockSource source, ItemStack stack) {
+			protected ItemStack execute(IBlockSource source, ItemStack stack) {
 				BucketItem bucket = (BucketItem) stack.getItem();
-				BlockPos pos = source.getBlockPos().offset(source.getBlockState().get(DispenserBlock.FACING));
-				World world = source.getWorld();
+				BlockPos pos = source.getPos().relative(source.getBlockState().getValue(DispenserBlock.FACING));
+				World world = source.getLevel();
 
-				if (bucket.tryPlaceContainedLiquid(null, world, pos, null)) {
-					bucket.onLiquidPlaced(world, stack, pos);
+				if (bucket.emptyBucket(null, world, pos, null)) {
+					bucket.checkExtraContent(world, stack, pos);
 					return new ItemStack(Items.BUCKET);
 				} else {
 					return super.dispense(source, stack);
@@ -291,132 +291,132 @@ public class EnvironmentalCompat {
 
 
 	public static void setRenderLayers() {
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.SLABFISH_EFFIGY.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.ICE_LANTERN.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.ICE_CHAIN.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.SAWMILL.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.TALL_DEAD_BUSH.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.YAK_HAIR_BLOCK.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.YAK_HAIR_RUG.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.SLABFISH_EFFIGY.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.ICE_LANTERN.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.ICE_CHAIN.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.SAWMILL.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.TALL_DEAD_BUSH.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.YAK_HAIR_BLOCK.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.YAK_HAIR_RUG.get(), RenderType.cutout());
 
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.MYCELIUM_SPROUTS.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.GIANT_TALL_GRASS.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.LARGE_LILY_PAD.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.GIANT_LILY_PAD.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.DUCKWEED.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.MYCELIUM_SPROUTS.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.GIANT_TALL_GRASS.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.LARGE_LILY_PAD.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.GIANT_LILY_PAD.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.DUCKWEED.get(), RenderType.cutout());
 
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CATTAIL_SPROUTS.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CATTAIL.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.TALL_CATTAIL.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_CATTAIL.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CATTAIL_SPROUTS.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CATTAIL.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.TALL_CATTAIL.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_CATTAIL.get(), RenderType.cutout());
 
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.GRASS_THATCH.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.GRASS_THATCH_SLAB.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.GRASS_THATCH_STAIRS.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.GRASS_THATCH_VERTICAL_SLAB.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.GRASS_THATCH.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.GRASS_THATCH_SLAB.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.GRASS_THATCH_STAIRS.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.GRASS_THATCH_VERTICAL_SLAB.get(), RenderType.cutout());
 
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CATTAIL_THATCH.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CATTAIL_THATCH_SLAB.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CATTAIL_THATCH_STAIRS.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CATTAIL_THATCH_VERTICAL_SLAB.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CATTAIL_THATCH.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CATTAIL_THATCH_SLAB.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CATTAIL_THATCH_STAIRS.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CATTAIL_THATCH_VERTICAL_SLAB.get(), RenderType.cutout());
 
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.DUCKWEED_THATCH.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.DUCKWEED_THATCH_SLAB.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.DUCKWEED_THATCH_STAIRS.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.DUCKWEED_THATCH_VERTICAL_SLAB.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.DUCKWEED_THATCH.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.DUCKWEED_THATCH_SLAB.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.DUCKWEED_THATCH_STAIRS.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.DUCKWEED_THATCH_VERTICAL_SLAB.get(), RenderType.cutout());
 
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CARTWHEEL.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.VIOLET.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.RED_LOTUS_FLOWER.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WHITE_LOTUS_FLOWER.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.DIANTHUS.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.BLUEBELL.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.YELLOW_HIBISCUS.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.ORANGE_HIBISCUS.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.RED_HIBISCUS.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.PINK_HIBISCUS.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.MAGENTA_HIBISCUS.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.PURPLE_HIBISCUS.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.BIRD_OF_PARADISE.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CARTWHEEL.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.VIOLET.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.RED_LOTUS_FLOWER.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WHITE_LOTUS_FLOWER.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.DIANTHUS.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.BLUEBELL.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.YELLOW_HIBISCUS.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.ORANGE_HIBISCUS.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.RED_HIBISCUS.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.PINK_HIBISCUS.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.MAGENTA_HIBISCUS.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.PURPLE_HIBISCUS.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.BIRD_OF_PARADISE.get(), RenderType.cutout());
 
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_CARTWHEEL.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_VIOLET.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_RED_LOTUS_FLOWER.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_WHITE_LOTUS_FLOWER.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_DIANTHUS.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_BLUEBELL.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_YELLOW_HIBISCUS.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_ORANGE_HIBISCUS.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_RED_HIBISCUS.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_PINK_HIBISCUS.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_MAGENTA_HIBISCUS.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_PURPLE_HIBISCUS.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_BIRD_OF_PARADISE.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_CARTWHEEL.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_VIOLET.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_RED_LOTUS_FLOWER.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_WHITE_LOTUS_FLOWER.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_DIANTHUS.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_BLUEBELL.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_YELLOW_HIBISCUS.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_ORANGE_HIBISCUS.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_RED_HIBISCUS.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_PINK_HIBISCUS.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_MAGENTA_HIBISCUS.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_PURPLE_HIBISCUS.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_BIRD_OF_PARADISE.get(), RenderType.cutout());
 
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WILLOW_DOOR.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WILLOW_TRAPDOOR.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WILLOW_LADDER.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WILLOW_POST.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.STRIPPED_WILLOW_POST.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WILLOW_LEAVES.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.HANGING_WILLOW_LEAVES.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WILLOW_LEAF_CARPET.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WILLOW_HEDGE.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WILLOW_SAPLING.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_WILLOW_SAPLING.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WILLOW_DOOR.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WILLOW_TRAPDOOR.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WILLOW_LADDER.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WILLOW_POST.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.STRIPPED_WILLOW_POST.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WILLOW_LEAVES.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.HANGING_WILLOW_LEAVES.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WILLOW_LEAF_CARPET.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WILLOW_HEDGE.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WILLOW_SAPLING.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_WILLOW_SAPLING.get(), RenderType.cutout());
 
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CHERRY_DOOR.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CHERRY_TRAPDOOR.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CHERRY_LADDER.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CHERRY_POST.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.STRIPPED_CHERRY_POST.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CHERRY_LEAVES.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CHERRY_LEAF_CARPET.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CHERRY_HEDGE.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CHERRY_SAPLING.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_CHERRY_SAPLING.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CHERRY_DOOR.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CHERRY_TRAPDOOR.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CHERRY_LADDER.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CHERRY_POST.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.STRIPPED_CHERRY_POST.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CHERRY_LEAVES.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CHERRY_LEAF_CARPET.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CHERRY_HEDGE.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.CHERRY_SAPLING.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_CHERRY_SAPLING.get(), RenderType.cutout());
 
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WISTERIA_DOOR.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WISTERIA_TRAPDOOR.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WISTERIA_LADDER.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WISTERIA_POST.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.STRIPPED_WISTERIA_POST.get(), RenderType.getCutoutMipped());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WISTERIA_DOOR.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WISTERIA_TRAPDOOR.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WISTERIA_LADDER.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WISTERIA_POST.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.STRIPPED_WISTERIA_POST.get(), RenderType.cutoutMipped());
 
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WHITE_WISTERIA_LEAVES.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WHITE_HANGING_WISTERIA_LEAVES.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WHITE_WISTERIA_LEAF_CARPET.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WHITE_WISTERIA_HEDGE.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WHITE_WISTERIA_SAPLING.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WHITE_DELPHINIUM.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_WHITE_WISTERIA_SAPLING.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_WHITE_DELPHINIUM.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WHITE_WISTERIA_LEAVES.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WHITE_HANGING_WISTERIA_LEAVES.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WHITE_WISTERIA_LEAF_CARPET.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WHITE_WISTERIA_HEDGE.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WHITE_WISTERIA_SAPLING.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.WHITE_DELPHINIUM.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_WHITE_WISTERIA_SAPLING.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_WHITE_DELPHINIUM.get(), RenderType.cutout());
 
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.BLUE_WISTERIA_LEAVES.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.BLUE_HANGING_WISTERIA_LEAVES.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.BLUE_WISTERIA_LEAF_CARPET.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.BLUE_WISTERIA_HEDGE.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.BLUE_WISTERIA_SAPLING.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.BLUE_DELPHINIUM.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_BLUE_WISTERIA_SAPLING.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_BLUE_DELPHINIUM.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.BLUE_WISTERIA_LEAVES.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.BLUE_HANGING_WISTERIA_LEAVES.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.BLUE_WISTERIA_LEAF_CARPET.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.BLUE_WISTERIA_HEDGE.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.BLUE_WISTERIA_SAPLING.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.BLUE_DELPHINIUM.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_BLUE_WISTERIA_SAPLING.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_BLUE_DELPHINIUM.get(), RenderType.cutout());
 
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.PINK_WISTERIA_LEAVES.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.PINK_HANGING_WISTERIA_LEAVES.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.PINK_WISTERIA_LEAF_CARPET.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.PINK_WISTERIA_HEDGE.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.PINK_WISTERIA_SAPLING.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.PINK_DELPHINIUM.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_PINK_WISTERIA_SAPLING.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_PINK_DELPHINIUM.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.PINK_WISTERIA_LEAVES.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.PINK_HANGING_WISTERIA_LEAVES.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.PINK_WISTERIA_LEAF_CARPET.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.PINK_WISTERIA_HEDGE.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.PINK_WISTERIA_SAPLING.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.PINK_DELPHINIUM.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_PINK_WISTERIA_SAPLING.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_PINK_DELPHINIUM.get(), RenderType.cutout());
 
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.PURPLE_WISTERIA_LEAVES.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.PURPLE_HANGING_WISTERIA_LEAVES.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.PURPLE_WISTERIA_LEAF_CARPET.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.PURPLE_WISTERIA_HEDGE.get(), RenderType.getCutoutMipped());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.PURPLE_WISTERIA_SAPLING.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.PURPLE_DELPHINIUM.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_PURPLE_WISTERIA_SAPLING.get(), RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_PURPLE_DELPHINIUM.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.PURPLE_WISTERIA_LEAVES.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.PURPLE_HANGING_WISTERIA_LEAVES.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.PURPLE_WISTERIA_LEAF_CARPET.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.PURPLE_WISTERIA_HEDGE.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.PURPLE_WISTERIA_SAPLING.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.PURPLE_DELPHINIUM.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_PURPLE_WISTERIA_SAPLING.get(), RenderType.cutout());
+		RenderTypeLookup.setRenderLayer(EnvironmentalBlocks.POTTED_PURPLE_DELPHINIUM.get(), RenderType.cutout());
 	}
 
 	public static void registerBlockColors() {
@@ -427,14 +427,14 @@ public class EnvironmentalCompat {
 		List<RegistryObject<Block>> foliageColors = Arrays.asList(EnvironmentalBlocks.WILLOW_LEAVES, EnvironmentalBlocks.WILLOW_LEAF_CARPET, EnvironmentalBlocks.HANGING_WILLOW_LEAVES, EnvironmentalBlocks.WILLOW_HEDGE);
 		List<RegistryObject<Block>> waterLilyColors = Arrays.asList(EnvironmentalBlocks.LARGE_LILY_PAD, EnvironmentalBlocks.GIANT_LILY_PAD);
 
-		DataUtil.registerBlockColor(blockColors, (x, world, pos, u) -> world != null && pos != null ? BiomeColors.getGrassColor(world, pos) : GrassColors.get(0.5D, 1.0D), grassColors);
-		DataUtil.registerBlockColor(blockColors, (x, world, pos, u) -> world != null && pos != null ? BiomeColors.getFoliageColor(world, pos) : FoliageColors.get(0.5D, 1.0D), foliageColors);
+		DataUtil.registerBlockColor(blockColors, (x, world, pos, u) -> world != null && pos != null ? BiomeColors.getAverageGrassColor(world, pos) : GrassColors.get(0.5D, 1.0D), grassColors);
+		DataUtil.registerBlockColor(blockColors, (x, world, pos, u) -> world != null && pos != null ? BiomeColors.getAverageFoliageColor(world, pos) : FoliageColors.get(0.5D, 1.0D), foliageColors);
 		DataUtil.registerBlockColor(blockColors, (x, world, pos, u) -> world != null && pos != null ? 2129968 : 7455580, waterLilyColors);
 
 		DataUtil.registerBlockItemColor(itemColors, (color, items) -> GrassColors.get(0.5D, 1.0D), grassColors);
 		DataUtil.registerBlockItemColor(itemColors, (color, items) -> FoliageColors.get(0.5D, 1.0D), foliageColors);
 		DataUtil.registerBlockItemColor(itemColors, (block, tintIndex) -> {
-			BlockState blockstate = ((BlockItem) block.getItem()).getBlock().getDefaultState();
+			BlockState blockstate = ((BlockItem) block.getItem()).getBlock().defaultBlockState();
 			return blockColors.getColor(blockstate, null, null, tintIndex);
 		}, waterLilyColors);
 

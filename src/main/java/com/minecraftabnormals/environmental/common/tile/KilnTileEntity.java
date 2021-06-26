@@ -19,11 +19,11 @@ public class KilnTileEntity extends AbstractFurnaceTileEntity {
 		return new TranslationTextComponent("container.kiln");
 	}
 
-	protected int getBurnTime(ItemStack fuel) {
-		return super.getBurnTime(fuel) / 2;
+	protected int getBurnDuration(ItemStack fuel) {
+		return super.getBurnDuration(fuel) / 2;
 	}
 
 	protected Container createMenu(int id, PlayerInventory player) {
-		return new KilnContainer(id, player, this, this.furnaceData);
+		return new KilnContainer(id, player, this, this.dataAccess);
 	}
 }

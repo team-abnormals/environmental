@@ -30,52 +30,54 @@ import net.minecraftforge.common.Tags;
 import javax.annotation.Nullable;
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class CattailBlock extends BushBlock implements IWaterLoggable, IGrowable {
-	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
+	protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(() -> Items.SEA_PICKLE);
 
 	public CattailBlock(Properties properties) {
 		super(properties);
-		this.setDefaultState(this.getDefaultState().with(WATERLOGGED, true));
+		this.registerDefaultState(this.defaultBlockState().setValue(WATERLOGGED, true));
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(WATERLOGGED);
 	}
 
 	@Override
-	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
+	protected boolean mayPlaceOn(BlockState state, IBlockReader worldIn, BlockPos pos) {
 		Block block = state.getBlock();
-		return block.isIn(Tags.Blocks.DIRT) || block.isIn(BlockTags.SAND) || block instanceof FarmlandBlock;
+		return block.is(Tags.Blocks.DIRT) || block.is(BlockTags.SAND) || block instanceof FarmlandBlock;
 	}
 
 	public void placeAt(IWorld worldIn, BlockPos pos, int flags) {
 		Random rand = new Random();
 		int type = rand.nextInt(3);
 
-		BlockState seeds = EnvironmentalBlocks.CATTAIL_SPROUTS.get().getDefaultState();
-		BlockState cattail = EnvironmentalBlocks.CATTAIL.get().getDefaultState();
+		BlockState seeds = EnvironmentalBlocks.CATTAIL_SPROUTS.get().defaultBlockState();
+		BlockState cattail = EnvironmentalBlocks.CATTAIL.get().defaultBlockState();
 
-		boolean waterlogged = worldIn.hasWater(pos);
+		boolean waterlogged = worldIn.isWaterAt(pos);
 		if (type == 0) {
-			worldIn.setBlockState(pos, seeds.with(WATERLOGGED, waterlogged), flags);
+			worldIn.setBlock(pos, seeds.setValue(WATERLOGGED, waterlogged), flags);
 		} else if (type == 1) {
-			worldIn.setBlockState(pos, cattail.with(WATERLOGGED, waterlogged), flags);
+			worldIn.setBlock(pos, cattail.setValue(WATERLOGGED, waterlogged), flags);
 		} else {
 			DoubleCattailBlock.placeAt(worldIn, pos, flags);
 		}
 	}
 
 	@Override
-	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
 		FILLER.fillItem(this.asItem(), group, items);
 	}
 
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
 		Vector3d vec3d = state.getOffset(worldIn, pos);
-		return SHAPE.withOffset(vec3d.x, vec3d.y, vec3d.z);
+		return SHAPE.move(vec3d.x, vec3d.y, vec3d.z);
 	}
 
 	public Block.OffsetType getOffsetType() {
@@ -84,15 +86,15 @@ public class CattailBlock extends BushBlock implements IWaterLoggable, IGrowable
 
 	@Nullable
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		FluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
-		boolean flag = ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8;
-		return this.getDefaultState().with(WATERLOGGED, flag);
+		FluidState ifluidstate = context.getLevel().getFluidState(context.getClickedPos());
+		boolean flag = ifluidstate.is(FluidTags.WATER) && ifluidstate.getAmount() == 8;
+		return this.defaultBlockState().setValue(WATERLOGGED, flag);
 	}
 
-	public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
 		DoubleCattailBlock doubleplantblock = (DoubleCattailBlock) (EnvironmentalBlocks.TALL_CATTAIL.get());
-		FluidState ifluidstateUp = worldIn.getFluidState(pos.up());
-		if (doubleplantblock.getDefaultState().isValidPosition(worldIn, pos) && (worldIn.isAirBlock(pos.up()) || (ifluidstateUp.isTagged(FluidTags.WATER) && ifluidstateUp.getLevel() == 8))) {
+		FluidState ifluidstateUp = worldIn.getFluidState(pos.above());
+		if (doubleplantblock.defaultBlockState().canSurvive(worldIn, pos) && (worldIn.isEmptyBlock(pos.above()) || (ifluidstateUp.is(FluidTags.WATER) && ifluidstateUp.getAmount() == 8))) {
 			DoubleCattailBlock.placeAt(worldIn, pos, 2);
 		}
 	}
@@ -100,10 +102,10 @@ public class CattailBlock extends BushBlock implements IWaterLoggable, IGrowable
 	@Override
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
 		super.tick(state, worldIn, pos, random);
-		int chance = worldIn.getBlockState(pos.down()).isFertile(worldIn, pos.down()) ? 15 : 17;
-		if (worldIn.getLightSubtracted(pos.up(), 0) >= 9 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, random.nextInt(chance) == 0)) {
+		int chance = worldIn.getBlockState(pos.below()).isFertile(worldIn, pos.below()) ? 15 : 17;
+		if (worldIn.getRawBrightness(pos.above(), 0) >= 9 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, random.nextInt(chance) == 0)) {
 			DoubleCattailBlock doubleplantblock = (DoubleCattailBlock) (EnvironmentalBlocks.TALL_CATTAIL.get());
-			if (doubleplantblock.getDefaultState().isValidPosition(worldIn, pos) && worldIn.isAirBlock(pos.up()) && worldIn.getBlockState(pos.down()).getBlock() == Blocks.FARMLAND) {
+			if (doubleplantblock.defaultBlockState().canSurvive(worldIn, pos) && worldIn.isEmptyBlock(pos.above()) && worldIn.getBlockState(pos.below()).getBlock() == Blocks.FARMLAND) {
 				DoubleCattailBlock.placeAt(worldIn, pos, 2);
 				net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
 			}
@@ -111,39 +113,39 @@ public class CattailBlock extends BushBlock implements IWaterLoggable, IGrowable
 	}
 
 	@Override
-	public boolean isReplaceable(BlockState state, BlockItemUseContext useContext) {
+	public boolean canBeReplaced(BlockState state, BlockItemUseContext useContext) {
 		return false;
 	}
 
 	@Override
-	public boolean isValidPosition(BlockState state, IWorldReader world, BlockPos pos) {
-		return this.isValidGround(world.getBlockState(pos.down()), world, pos);
+	public boolean canSurvive(BlockState state, IWorldReader world, BlockPos pos) {
+		return this.mayPlaceOn(world.getBlockState(pos.below()), world, pos);
 	}
 
 	@Override
 	public FluidState getFluidState(BlockState state) {
-		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
+		return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
 	}
 
 	@Override
-	public BlockState updatePostPlacement(BlockState state, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-		if (!state.isValidPosition(worldIn, currentPos)) {
-			return Blocks.AIR.getDefaultState();
+	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+		if (!state.canSurvive(worldIn, currentPos)) {
+			return Blocks.AIR.defaultBlockState();
 		} else {
-			if (state.get(WATERLOGGED)) {
-				worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+			if (state.getValue(WATERLOGGED)) {
+				worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
 			}
-			return super.updatePostPlacement(state, facing, facingState, worldIn, currentPos, facingPos);
+			return super.updateShape(state, facing, facingState, worldIn, currentPos, facingPos);
 		}
 	}
 
 	@Override
-	public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
 		return true;
 	}
 
 	@Override
-	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(World worldIn, Random rand, BlockPos pos, BlockState state) {
 		return true;
 	}
 }

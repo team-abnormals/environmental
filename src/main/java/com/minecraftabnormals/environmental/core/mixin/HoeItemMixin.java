@@ -11,8 +11,8 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(HoeItem.class)
 public abstract class HoeItemMixin {
 
-	@Redirect(method = "onItemUse", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;isAirBlock(Lnet/minecraft/util/math/BlockPos;)Z"))
-	private boolean onItemUse(World world, BlockPos pos) {
-		return world.isAirBlock(pos) || world.getBlockState(pos).isIn(Blocks.WATER);
+	@Redirect(method = "useOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;isEmptyBlock(Lnet/minecraft/util/math/BlockPos;)Z"))
+	private boolean useOn(World world, BlockPos pos) {
+		return world.isEmptyBlock(pos) || world.getBlockState(pos).is(Blocks.WATER);
 	}
 }

@@ -25,31 +25,31 @@ public class HealerPouchModel<T extends LivingEntity> extends BipedModel<T> {
 		super(modelSize, 0.0F, 32, 32);
 
 		body = new ModelRenderer(this);
-		body.setRotationPoint(0.0F, 0.0F, 0.0F);
-		body.setTextureOffset(0, 16).addBox(-4.5F, -0.5F, -2.5F, 9.0F, 9.0F, 5.0F, 0.0F, false);
+		body.setPos(0.0F, 0.0F, 0.0F);
+		body.texOffs(0, 16).addBox(-4.5F, -0.5F, -2.5F, 9.0F, 9.0F, 5.0F, 0.0F, false);
 
 		pouch = new ModelRenderer(this);
-		pouch.setRotationPoint(-1.0F, 23.0F, -1.0F);
+		pouch.setPos(-1.0F, 23.0F, -1.0F);
 		body.addChild(pouch);
-		pouch.setTextureOffset(0, 3).addBox(-2.5F, -22.5F, 3.5F, 7.0F, 9.0F, 4.0F, 0.0F, false);
+		pouch.texOffs(0, 3).addBox(-2.5F, -22.5F, 3.5F, 7.0F, 9.0F, 4.0F, 0.0F, false);
 	}
 
 	@Override
-	public void render(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-		this.body.copyModelAngles(this.bipedBody);
-		matrixStackIn.push();
+	public void renderToBuffer(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
+		this.body.copyFrom(this.body);
+		matrixStackIn.pushPose();
 		matrixStackIn.scale(1.01F, 1.01F, 1.02F);
-		super.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
-		matrixStackIn.pop();
+		super.renderToBuffer(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+		matrixStackIn.popPose();
 	}
 
 	@Override
-	protected Iterable<ModelRenderer> getHeadParts() {
+	protected Iterable<ModelRenderer> headParts() {
 		return ImmutableList.of();
 	}
 
 	@Override
-	protected Iterable<ModelRenderer> getBodyParts() {
+	protected Iterable<ModelRenderer> bodyParts() {
 		return ImmutableList.of(this.body);
 	}
 

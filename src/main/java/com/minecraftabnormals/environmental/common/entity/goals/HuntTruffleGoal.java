@@ -28,10 +28,10 @@ public class HuntTruffleGoal extends Goal {
 	public HuntTruffleGoal(PigEntity pigIn) {
 		this.pig = pigIn;
 		this.data = (IDataManager) this.pig;
-		this.setMutexFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.JUMP, Goal.Flag.LOOK));
+		this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.JUMP, Goal.Flag.LOOK));
 	}
 
-	public boolean shouldExecute() {
+	public boolean canUse() {
 		if (this.runDelay > 0) {
 			--this.runDelay;
 			return false;
@@ -46,11 +46,11 @@ public class HuntTruffleGoal extends Goal {
 		}
 	}
 
-	public boolean shouldContinueExecuting() {
+	public boolean canContinueToUse() {
 		return this.data.getValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET) && this.data.getValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME) != 0;
 	}
 
-	public void startExecuting() {
+	public void start() {
 		this.lookVector = new Vector3d(1.0D, 0.0D, 1.0D);
 		this.moveToTruffle();
 	}
@@ -58,20 +58,20 @@ public class HuntTruffleGoal extends Goal {
 	public void tick() {
 		int trufflehuntingtime = this.data.getValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME);
 		BlockPos blockpos = this.data.getValue(EnvironmentalDataProcessors.TRUFFLE_POS);
-		Vector3d pigpos = this.pig.getPositionVec();
+		Vector3d pigpos = this.pig.position();
 		
-		Vector3d vector3d = new Vector3d((blockpos.getX() + 0.5D) - pigpos.getX(), 0.0D, (blockpos.getZ() + 0.5D) - pigpos.getZ()).normalize();
+		Vector3d vector3d = new Vector3d((blockpos.getX() + 0.5D) - pigpos.x(), 0.0D, (blockpos.getZ() + 0.5D) - pigpos.z()).normalize();
 		
-		this.pig.getLookController().setLookPosition(pigpos.getX() + vector3d.getX() * this.lookVector.getX(), this.pig.getPosY() - 0.6D + this.lookVector.getY(), pigpos.getZ() + vector3d.getZ() * this.lookVector.getZ(), (float)(this.pig.getHorizontalFaceSpeed() + 20), (float)this.pig.getVerticalFaceSpeed());
+		this.pig.getLookControl().setLookAt(pigpos.x() + vector3d.x() * this.lookVector.x(), this.pig.getY() - 0.6D + this.lookVector.y(), pigpos.z() + vector3d.z() * this.lookVector.z(), (float)(this.pig.getMaxHeadYRot() + 20), (float)this.pig.getMaxHeadXRot());
 		
-		if (blockpos.withinDistance(this.pig.getPositionVec(), 4.0D)) {
+		if (blockpos.closerThan(this.pig.position(), 4.0D)) {
 			if (trufflehuntingtime > 0)
 				this.data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, -800);
 		}
 		else {
 			if (this.lookTimer-- <= 0) {
-				this.lookTimer = 18 + this.pig.getRNG().nextInt(9);
-				this.lookVector = new Vector3d((double)this.pig.getRNG().nextFloat() * 1.2D, (double)this.pig.getRNG().nextFloat() * 0.4D, (double)this.pig.getRNG().nextFloat() * 1.2D);
+				this.lookTimer = 18 + this.pig.getRandom().nextInt(9);
+				this.lookVector = new Vector3d((double)this.pig.getRandom().nextFloat() * 1.2D, (double)this.pig.getRandom().nextFloat() * 0.4D, (double)this.pig.getRandom().nextFloat() * 1.2D);
 			}
 			
 			this.moveToTruffle();
@@ -80,13 +80,13 @@ public class HuntTruffleGoal extends Goal {
 
 	private void moveToTruffle() {
 		BlockPos blockpos = this.data.getValue(EnvironmentalDataProcessors.TRUFFLE_POS);
-		this.pig.getNavigator().tryMoveToXYZ((double)((float)blockpos.getX()) + 0.5D, (double)(blockpos.getY() + 1), (double)((float)blockpos.getZ()) + 0.5D, 1.1D);
+		this.pig.getNavigation().moveTo((double)((float)blockpos.getX()) + 0.5D, (double)(blockpos.getY() + 1), (double)((float)blockpos.getZ()) + 0.5D, 1.1D);
 	}
 
 	private boolean findTruffle() {
 		int range = 80;
 		int height = 16;
-		BlockPos blockpos = this.pig.getPosition();
+		BlockPos blockpos = this.pig.blockPosition();
 		BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
 
 		List<BlockPos> truffleblocks = Lists.newArrayList();
@@ -97,21 +97,21 @@ public class HuntTruffleGoal extends Goal {
 			for(int y = -height; y < height; ++y) {
 				for(int x = 0; x <= i; x = x > 0 ? -x : 1 - x) {
 					for(int z = x < i && x > -i ? i : 0; z <= i; z = z > 0 ? -z : 1 - z) {
-						blockpos$mutable.setAndOffset(blockpos, x, y - 1, z);
+						blockpos$mutable.setWithOffset(blockpos, x, y - 1, z);
 						
-						if (this.pig.isWithinHomeDistanceFromPosition(blockpos$mutable)) {
-							if (this.isTruffle(this.pig.world, blockpos$mutable)) {
+						if (this.pig.isWithinRestriction(blockpos$mutable)) {
+							if (this.isTruffle(this.pig.level, blockpos$mutable)) {
 								this.data.setValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET, true);
 								this.data.setValue(EnvironmentalDataProcessors.TRUFFLE_POS, blockpos$mutable);
 								return true;
 							}
-							else if (this.isSuitableForTruffle(this.pig.world, blockpos$mutable)) {
+							else if (this.isSuitableForTruffle(this.pig.level, blockpos$mutable)) {
 								if (i <= 48 && !flag) {
 									flag = true;
 									truffleblocks.clear();
 								}
 
-								truffleblocks.add(blockpos$mutable.toImmutable());
+								truffleblocks.add(blockpos$mutable.immutable());
 							}
 						}
 					}
@@ -119,10 +119,10 @@ public class HuntTruffleGoal extends Goal {
 			}
 		}
 
-		if (this.pig.world.getDimensionType().isNatural() && truffleblocks.size() > 0) {
-			BlockPos trufflepos = truffleblocks.get(this.pig.getRNG().nextInt(truffleblocks.size()));
+		if (this.pig.level.dimensionType().natural() && truffleblocks.size() > 0) {
+			BlockPos trufflepos = truffleblocks.get(this.pig.getRandom().nextInt(truffleblocks.size()));
 
-			this.pig.world.setBlockState(trufflepos, EnvironmentalBlocks.BURIED_TRUFFLE.get().getDefaultState(), 3);
+			this.pig.level.setBlock(trufflepos, EnvironmentalBlocks.BURIED_TRUFFLE.get().defaultBlockState(), 3);
 			this.data.setValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET, true);
 			this.data.setValue(EnvironmentalDataProcessors.TRUFFLE_POS, trufflepos);
 
@@ -141,16 +141,16 @@ public class HuntTruffleGoal extends Goal {
 			return false;
 
 		for(Direction direction : Direction.values()) {
-			BlockState blockstate = worldIn.getBlockState(pos.offset(direction));
+			BlockState blockstate = worldIn.getBlockState(pos.relative(direction));
 
 			if (direction == Direction.UP) {
-				if (!blockstate.isIn(EnvironmentalTags.Blocks.GRASS_LIKE)) {
-					if (!blockstate.isIn(Tags.Blocks.DIRT) || !worldIn.getBlockState(pos.up()).isIn(EnvironmentalTags.Blocks.GRASS_LIKE)) {
+				if (!blockstate.is(EnvironmentalTags.Blocks.GRASS_LIKE)) {
+					if (!blockstate.is(Tags.Blocks.DIRT) || !worldIn.getBlockState(pos.above()).is(EnvironmentalTags.Blocks.GRASS_LIKE)) {
 						return false;
 					}
 				}
 			}
-			else if (!blockstate.isIn(Tags.Blocks.DIRT)) {
+			else if (!blockstate.is(Tags.Blocks.DIRT)) {
 				return false;
 			}
 		}

@@ -51,16 +51,16 @@ public class EnvironmentalBiomes {
 	}
 
 	private static Biome createMarshBiome() {
-		return (new Biome.Builder()).precipitation(Biome.RainType.RAIN).category(Biome.Category.SWAMP).depth(-0.25F).scale(0.0F).temperature(0.8F).downfall(0.9F).setEffects((new BiomeAmbience.Builder()).setWaterColor(6134398).setWaterFogColor(2302743).setFogColor(12638463).withSkyColor(getSkyColorWithTemperatureModifier(0.75F)).withGrassColor(6263617).withFoliageColor(6975545).setMoodSound(MoodSoundAmbience.DEFAULT_CAVE).build()).withMobSpawnSettings(new MobSpawnInfo.Builder().copy()).withGenerationSettings((new BiomeGenerationSettings.Builder()).withSurfaceBuilder(ConfiguredSurfaceBuilders.field_244178_j).build()).build();
+		return (new Biome.Builder()).precipitation(Biome.RainType.RAIN).biomeCategory(Biome.Category.SWAMP).depth(-0.25F).scale(0.0F).temperature(0.8F).downfall(0.9F).specialEffects((new BiomeAmbience.Builder()).waterColor(6134398).waterFogColor(2302743).fogColor(12638463).skyColor(getSkyColorWithTemperatureModifier(0.75F)).grassColorOverride(6263617).foliageColorOverride(6975545).ambientMoodSound(MoodSoundAmbience.LEGACY_CAVE_SETTINGS).build()).mobSpawnSettings(new MobSpawnInfo.Builder().build()).generationSettings((new BiomeGenerationSettings.Builder()).surfaceBuilder(ConfiguredSurfaceBuilders.GRASS).build()).build();
 	}
 
 	private static Biome createBlossomBiome(float depth, float scale) {
-		return (new Biome.Builder()).precipitation(Biome.RainType.RAIN).category(Biome.Category.FOREST).depth(depth).scale(scale).temperature(0.75F).downfall(0.8F).setEffects((new BiomeAmbience.Builder()).setWaterColor(5216182).setWaterFogColor(335411).setFogColor(12638463).withSkyColor(getSkyColorWithTemperatureModifier(0.75F)).setMoodSound(MoodSoundAmbience.DEFAULT_CAVE).build()).withMobSpawnSettings(new MobSpawnInfo.Builder().copy()).withGenerationSettings((new BiomeGenerationSettings.Builder()).withSurfaceBuilder(ConfiguredSurfaceBuilders.field_244178_j).build()).build();
+		return (new Biome.Builder()).precipitation(Biome.RainType.RAIN).biomeCategory(Biome.Category.FOREST).depth(depth).scale(scale).temperature(0.75F).downfall(0.8F).specialEffects((new BiomeAmbience.Builder()).waterColor(5216182).waterFogColor(335411).fogColor(12638463).skyColor(getSkyColorWithTemperatureModifier(0.75F)).ambientMoodSound(MoodSoundAmbience.LEGACY_CAVE_SETTINGS).build()).mobSpawnSettings(new MobSpawnInfo.Builder().build()).generationSettings((new BiomeGenerationSettings.Builder()).surfaceBuilder(ConfiguredSurfaceBuilders.GRASS).build()).build();
 	}
 
 	private static int getSkyColorWithTemperatureModifier(float temperature) {
 		float lvt_1_1_ = temperature / 3.0F;
 		lvt_1_1_ = MathHelper.clamp(lvt_1_1_, -1.0F, 1.0F);
-		return MathHelper.hsvToRGB(0.62222224F - lvt_1_1_ * 0.05F, 0.5F + lvt_1_1_ * 0.1F, 1.0F);
+		return MathHelper.hsvToRgb(0.62222224F - lvt_1_1_ * 0.05F, 0.5F + lvt_1_1_ * 0.1F, 1.0F);
 	}
 }

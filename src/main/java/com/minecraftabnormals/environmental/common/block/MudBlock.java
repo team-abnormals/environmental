@@ -11,7 +11,7 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 
 public class MudBlock extends Block {
-	protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 13.0D, 16.0D);
+	protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 13.0D, 16.0D);
 
 	public MudBlock(AbstractBlock.Properties properties) {
 		super(properties);
@@ -23,17 +23,17 @@ public class MudBlock extends Block {
 	}
 
 	@Override
-	public VoxelShape getCollisionShape(BlockState state, IBlockReader reader, BlockPos pos) {
-		return VoxelShapes.fullCube();
+	public VoxelShape getBlockSupportShape(BlockState state, IBlockReader reader, BlockPos pos) {
+		return VoxelShapes.block();
 	}
 
 	@Override
-	public VoxelShape getRayTraceShape(BlockState state, IBlockReader reader, BlockPos pos, ISelectionContext context) {
-		return VoxelShapes.fullCube();
+	public VoxelShape getVisualShape(BlockState state, IBlockReader reader, BlockPos pos, ISelectionContext context) {
+		return VoxelShapes.block();
 	}
 
 	@Override
-	public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
+	public boolean isPathfindable(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
 		return false;
 	}
 }

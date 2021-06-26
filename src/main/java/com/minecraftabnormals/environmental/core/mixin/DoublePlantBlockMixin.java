@@ -11,6 +11,8 @@ import org.spongepowered.asm.mixin.Mixin;
 
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 @Mixin(DoublePlantBlock.class)
 public class DoublePlantBlockMixin extends Block implements IGrowable {
 
@@ -19,19 +21,19 @@ public class DoublePlantBlockMixin extends Block implements IGrowable {
 	}
 
 	@Override
-	public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
 		return this == Blocks.TALL_GRASS;
 	}
 
 	@Override
-	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(World worldIn, Random rand, BlockPos pos, BlockState state) {
 		return this == Blocks.TALL_GRASS;
 	}
 
 	@Override
-	public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
 		DoublePlantBlock giantTallGrass = (DoublePlantBlock) EnvironmentalBlocks.GIANT_TALL_GRASS.get();
-		if (state.get(DoublePlantBlock.HALF) == DoubleBlockHalf.LOWER) giantTallGrass.placeAt(worldIn, pos, 2);
-		else giantTallGrass.placeAt(worldIn, pos.down(), 2);
+		if (state.getValue(DoublePlantBlock.HALF) == DoubleBlockHalf.LOWER) giantTallGrass.placeAt(worldIn, pos, 2);
+		else giantTallGrass.placeAt(worldIn, pos.below(), 2);
 	}
 }

@@ -14,7 +14,7 @@ public class BakingRecipe extends AbstractCookingRecipe {
 		super(EnvironmentalRecipes.RecipeTypes.BAKING, p_i50022_1_, p_i50022_2_, p_i50022_3_, p_i50022_4_, p_i50022_5_, p_i50022_6_);
 	}
 
-	public ItemStack getIcon() {
+	public ItemStack getToastSymbol() {
 		return new ItemStack(EnvironmentalBlocks.KILN.get());
 	}
 

@@ -41,8 +41,8 @@ public class EnvironmentalGeneration {
 			if (DataUtil.matchesKeys(biome, EnvironmentalBiomes.MUSHROOM_MARSH.getKey()))
 				EnvironmentalGeneration.withMarshMushrooms(generation);
 
-			DefaultBiomeFeatures.withPassiveMobs(spawns);
-			DefaultBiomeFeatures.withBatsAndHostiles(spawns);
+			DefaultBiomeFeatures.farmAnimals(spawns);
+			DefaultBiomeFeatures.commonSpawns(spawns);
 		}
 
 		if (DataUtil.matchesKeys(biome, EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), EnvironmentalBiomes.BLOSSOM_HILLS.getKey(), EnvironmentalBiomes.BLOSSOM_HIGHLANDS.getKey(), EnvironmentalBiomes.BLOSSOM_VALLEYS.getKey())) {
@@ -51,101 +51,101 @@ public class EnvironmentalGeneration {
 			else
 				EnvironmentalGeneration.withBlossomWoodsFeatures(generation);
 
-			DefaultBiomeFeatures.withPassiveMobs(spawns);
-			DefaultBiomeFeatures.withBatsAndHostiles(spawns);
-			spawns.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(EntityType.PANDA, 80, 1, 2));
-			spawns.withSpawner(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(EnvironmentalEntities.KOI.get(), 12, 1, 3));
+			DefaultBiomeFeatures.farmAnimals(spawns);
+			DefaultBiomeFeatures.commonSpawns(spawns);
+			spawns.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(EntityType.PANDA, 80, 1, 2));
+			spawns.addSpawn(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(EnvironmentalEntities.KOI.get(), 12, 1, 3));
 		}
 
 		if (event.getCategory() == Biome.Category.SWAMP)
-			spawns.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(EnvironmentalEntities.SLABFISH.get(), 8, 2, 4));
+			spawns.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(EnvironmentalEntities.SLABFISH.get(), 8, 2, 4));
 
 		if (DataUtil.matchesKeys(biome, Biomes.SWAMP, Biomes.SWAMP_HILLS)) {
 			EnvironmentalGeneration.removeSwampTrees(generation);
 			EnvironmentalGeneration.withMushrooms(generation);
 			EnvironmentalGeneration.withCattails(generation);
 			EnvironmentalGeneration.withMudDisks(generation);
-			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.SWAMP_OAK);
-			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.WILLOW_TREE);
-			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_DUCKWEED_SWAMP);
+			generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.SWAMP_OAK);
+			generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.WILLOW_TREE);
+			generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_DUCKWEED_SWAMP);
 		}
 
 		if (event.getCategory() == Biome.Category.RIVER || event.getCategory() == Biome.Category.SWAMP)
-			spawns.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(EnvironmentalEntities.DUCK.get(), 5, 2, 4));
+			spawns.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(EnvironmentalEntities.DUCK.get(), 5, 2, 4));
 
 		if (event.getCategory() == Biome.Category.FOREST) {
-			spawns.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(EnvironmentalEntities.DEER.get(), 16, 1, 4));
+			spawns.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(EnvironmentalEntities.DEER.get(), 16, 1, 4));
 			if (DataUtil.matchesKeys(biome, Biomes.FLOWER_FOREST)) {
-				generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_CARTWHEEL);
-				generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_DELPHINIUMS);
+				generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_CARTWHEEL);
+				generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_DELPHINIUMS);
 				if (EnvironmentalConfig.COMMON.generateWisteriaTrees.get()) {
-					generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.WISTERIA_TREE);
-					generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.WISTERIA_TREE_BIG);
+					generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.WISTERIA_TREE);
+					generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.WISTERIA_TREE_BIG);
 				}
 			}
 			if (DataUtil.matchesKeys(biome, Biomes.DARK_FOREST, Biomes.DARK_FOREST_HILLS)) {
-				generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_BLUEBELL);
+				generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_BLUEBELL);
 			}
 		}
 
 		if (event.getCategory() == Biome.Category.EXTREME_HILLS)
-			spawns.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(EnvironmentalEntities.YAK.get(), 20, 2, 4));
+			spawns.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(EnvironmentalEntities.YAK.get(), 20, 2, 4));
 
 		if (event.getCategory() == Biome.Category.MUSHROOM)
-			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_MYCELIUM_SPROUTS);
+			generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_MYCELIUM_SPROUTS);
 
 		if (!DataUtil.matchesKeys(biome, Biomes.FROZEN_RIVER) && (event.getCategory() == Biome.Category.SWAMP || event.getCategory() == Biome.Category.RIVER)) {
 			EnvironmentalGeneration.withCattails(generation);
-			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.NEST_DUCK);
+			generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.NEST_DUCK);
 		}
 
 		if (event.getCategory() == Biome.Category.DESERT) {
-			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_TALL_DEAD_BUSH);
+			generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_TALL_DEAD_BUSH);
 			//spawns.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(EnvironmentalEntities.FENNEC_FOX.get(), 8, 2, 4));
 		}
 
 		if (event.getCategory() == Biome.Category.MESA)
-			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_TALL_DEAD_BUSH_MESA);
+			generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_TALL_DEAD_BUSH_MESA);
 
 		if (event.getCategory() == Biome.Category.SAVANNA) {
-			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_ALLIUM);
+			generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_ALLIUM);
 			if (EnvironmentalConfig.COMMON.generateGiantTallGrass.get())
-				generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_GIANT_TALL_GRASS_SAVANNA);
+				generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_GIANT_TALL_GRASS_SAVANNA);
 		}
 
 		if (event.getCategory() == Biome.Category.TAIGA)
-			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_VIOLET);
+			generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_VIOLET);
 
 		if (biome.toString().contains("rosewood") && EnvironmentalConfig.COMMON.generateGiantTallGrass.get())
-			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_GIANT_TALL_GRASS_SAVANNA);
+			generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_GIANT_TALL_GRASS_SAVANNA);
 
 		if (event.getCategory() == Biome.Category.PLAINS && EnvironmentalConfig.COMMON.generateGiantTallGrass.get())
-			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_GIANT_TALL_GRASS_PLAINS);
+			generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_GIANT_TALL_GRASS_PLAINS);
 
 		if (biome.toString().contains("maple") || biome.toString().contains("pumpkin_fields")) {
-			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.NEST_TURKEY);
+			generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.NEST_TURKEY);
 		} else if (event.getCategory() == Biome.Category.FOREST) {
-			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.NEST_CHICKEN);
+			generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.NEST_CHICKEN);
 		}
 
 		if (event.getCategory() == Biome.Category.JUNGLE) {
 			if (EnvironmentalConfig.COMMON.generateGiantTallGrass.get())
-				generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_GIANT_TALL_GRASS_JUNGLE);
-			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_BIRD_OF_PARADISE);
+				generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_GIANT_TALL_GRASS_JUNGLE);
+			generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_BIRD_OF_PARADISE);
 
 			if (EnvironmentalConfig.COMMON.generateHibiscus.get()) {
 				if (DataUtil.matchesKeys(biome, Biomes.JUNGLE_EDGE, Biomes.MODIFIED_JUNGLE_EDGE))
-					generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_YELLOW_HIBISCUS);
+					generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_YELLOW_HIBISCUS);
 				if (DataUtil.matchesKeys(biome, Biomes.BAMBOO_JUNGLE_HILLS))
-					generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_ORANGE_HIBISCUS);
+					generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_ORANGE_HIBISCUS);
 				if (DataUtil.matchesKeys(biome, Biomes.JUNGLE))
-					generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_PINK_HIBISCUS);
+					generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_PINK_HIBISCUS);
 				if (DataUtil.matchesKeys(biome, Biomes.MODIFIED_JUNGLE))
-					generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_RED_HIBISCUS);
+					generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_RED_HIBISCUS);
 				if (DataUtil.matchesKeys(biome, Biomes.BAMBOO_JUNGLE))
-					generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_MAGENTA_HIBISCUS);
+					generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_MAGENTA_HIBISCUS);
 				if (DataUtil.matchesKeys(biome, Biomes.JUNGLE_HILLS))
-					generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_PURPLE_HIBISCUS);
+					generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_PURPLE_HIBISCUS);
 			}
 		}
 
@@ -154,23 +154,23 @@ public class EnvironmentalGeneration {
 	}
 
 	public static void withMarshFeatures(BiomeGenerationSettingsBuilder builder) {
-		builder.withStructure(StructureFeatures.SWAMP_HUT);
-		builder.withStructure(StructureFeatures.MINESHAFT);
-		builder.withStructure(StructureFeatures.RUINED_PORTAL_SWAMP);
+		builder.addStructureStart(StructureFeatures.SWAMP_HUT);
+		builder.addStructureStart(StructureFeatures.MINESHAFT);
+		builder.addStructureStart(StructureFeatures.RUINED_PORTAL_SWAMP);
 
-		DefaultBiomeFeatures.withCavesAndCanyons(builder);
-		DefaultBiomeFeatures.withMonsterRoom(builder);
-		DefaultBiomeFeatures.withCommonOverworldBlocks(builder);
-		DefaultBiomeFeatures.withOverworldOres(builder);
-		DefaultBiomeFeatures.withClayDisks(builder);
-		DefaultBiomeFeatures.withFrozenTopLayer(builder);
-		DefaultBiomeFeatures.withNormalMushroomGeneration(builder);
-		DefaultBiomeFeatures.withTallGrass(builder);
-		DefaultBiomeFeatures.withSwampSugarcaneAndPumpkin(builder);
-		DefaultBiomeFeatures.withFossils(builder);
+		DefaultBiomeFeatures.addDefaultCarvers(builder);
+		DefaultBiomeFeatures.addDefaultMonsterRoom(builder);
+		DefaultBiomeFeatures.addDefaultUndergroundVariety(builder);
+		DefaultBiomeFeatures.addDefaultOres(builder);
+		DefaultBiomeFeatures.addSwampClayDisk(builder);
+		DefaultBiomeFeatures.addSurfaceFreezing(builder);
+		DefaultBiomeFeatures.addDefaultMushrooms(builder);
+		DefaultBiomeFeatures.addSavannaGrass(builder);
+		DefaultBiomeFeatures.addSwampExtraVegetation(builder);
+		DefaultBiomeFeatures.addFossilDecoration(builder);
 
 		if (EnvironmentalConfig.COMMON.generateGiantTallGrass.get())
-			builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_GIANT_TALL_GRASS_MARSH);
+			builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_GIANT_TALL_GRASS_MARSH);
 
 		EnvironmentalGeneration.withMudDisks(builder);
 		EnvironmentalGeneration.withMarshVegetation(builder);
@@ -179,19 +179,19 @@ public class EnvironmentalGeneration {
 	}
 
 	public static void withBaseBlossomFeatures(BiomeGenerationSettingsBuilder builder) {
-		DefaultBiomeFeatures.withStrongholdAndMineshaft(builder);
-		builder.withStructure(StructureFeatures.RUINED_PORTAL);
+		DefaultBiomeFeatures.addDefaultOverworldLandStructures(builder);
+		builder.addStructureStart(StructureFeatures.RUINED_PORTAL_STANDARD);
 
-		DefaultBiomeFeatures.withCavesAndCanyons(builder);
-		DefaultBiomeFeatures.withMonsterRoom(builder);
-		DefaultBiomeFeatures.withCommonOverworldBlocks(builder);
-		DefaultBiomeFeatures.withOverworldOres(builder);
-		DefaultBiomeFeatures.withDisks(builder);
-		DefaultBiomeFeatures.withNormalMushroomGeneration(builder);
-		DefaultBiomeFeatures.withTallGrass(builder);
-		DefaultBiomeFeatures.withLavaAndWaterLakes(builder);
-		DefaultBiomeFeatures.withLavaAndWaterSprings(builder);
-		DefaultBiomeFeatures.withFrozenTopLayer(builder);
+		DefaultBiomeFeatures.addDefaultCarvers(builder);
+		DefaultBiomeFeatures.addDefaultMonsterRoom(builder);
+		DefaultBiomeFeatures.addDefaultUndergroundVariety(builder);
+		DefaultBiomeFeatures.addDefaultOres(builder);
+		DefaultBiomeFeatures.addDefaultSoftDisks(builder);
+		DefaultBiomeFeatures.addDefaultMushrooms(builder);
+		DefaultBiomeFeatures.addSavannaGrass(builder);
+		DefaultBiomeFeatures.addDefaultLakes(builder);
+		DefaultBiomeFeatures.addDefaultSprings(builder);
+		DefaultBiomeFeatures.addSurfaceFreezing(builder);
 
 		EnvironmentalGeneration.withBlossomVegetation(builder);
 	}
@@ -208,63 +208,63 @@ public class EnvironmentalGeneration {
 
 	public static void withMushrooms(BiomeGenerationSettingsBuilder builder) {
 		if (EnvironmentalConfig.COMMON.generateGiantMushrooms.get()) {
-			builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Features.MUSHROOM_FIELD_VEGETATION);
+			builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Features.MUSHROOM_FIELD_VEGETATION);
 		}
 	}
 
 	public static void withMarshMushrooms(BiomeGenerationSettingsBuilder builder) {
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.HUGE_BROWN_MUSHROOM_MARSH);
+		builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.HUGE_BROWN_MUSHROOM_MARSH);
 	}
 
 	public static void withMudDisks(BiomeGenerationSettingsBuilder builder) {
-		builder.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, EnvironmentalFeatures.Configured.DISK_MUD);
+		builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, EnvironmentalFeatures.Configured.DISK_MUD);
 	}
 
 	public static void withBlossomVegetation(BiomeGenerationSettingsBuilder builder) {
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_SUGAR_CANE_BLOSSOM);
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_BLOSSOM_WOODS);
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_TALL_BLOSSOM_WOODS);
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_GRASS_BLOSSOM_WOODS);
+		builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_SUGAR_CANE_BLOSSOM);
+		builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_BLOSSOM_WOODS);
+		builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_TALL_BLOSSOM_WOODS);
+		builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_GRASS_BLOSSOM_WOODS);
 	}
 
 	public static void withBlossomWoodsVegetation(BiomeGenerationSettingsBuilder builder) {
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.CHERRY_TREE_BLOSSOM_WOODS);
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FALLEN_CHERRY_LEAVES_BLOSSOM_WOODS);
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.BIRCH_TREE_BLOSSOM_WOODS);
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.BAMBOO_BLOSSOM_WOODS);
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.BAMBOO_LIGHT_BLOSSOM_WOODS);
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_RED_LOTUS);
+		builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.CHERRY_TREE_BLOSSOM_WOODS);
+		builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FALLEN_CHERRY_LEAVES_BLOSSOM_WOODS);
+		builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.BIRCH_TREE_BLOSSOM_WOODS);
+		builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.BAMBOO_BLOSSOM_WOODS);
+		builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.BAMBOO_LIGHT_BLOSSOM_WOODS);
+		builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_RED_LOTUS);
 	}
 
 	public static void withBlossomValleysVegetation(BiomeGenerationSettingsBuilder builder) {
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.CHERRY_TREE_BLOSSOM_VALLEYS);
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FALLEN_CHERRY_LEAVES_BLOSSOM_VALLEYS);
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.BIRCH_TREE_BLOSSOM_VALLEYS);
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.BAMBOO_BLOSSOM_VALLEYS);
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.BAMBOO_LIGHT_BLOSSOM_VALLEYS);
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_WHITE_LOTUS);
+		builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.CHERRY_TREE_BLOSSOM_VALLEYS);
+		builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FALLEN_CHERRY_LEAVES_BLOSSOM_VALLEYS);
+		builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.BIRCH_TREE_BLOSSOM_VALLEYS);
+		builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.BAMBOO_BLOSSOM_VALLEYS);
+		builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.BAMBOO_LIGHT_BLOSSOM_VALLEYS);
+		builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_WHITE_LOTUS);
 	}
 
 	public static void withMarshPonds(BiomeGenerationSettingsBuilder builder) {
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.SPRING_WATER_MARSH);
-		builder.withFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, EnvironmentalFeatures.Configured.LAKE_WATER_MARSH);
+		builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.SPRING_WATER_MARSH);
+		builder.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, EnvironmentalFeatures.Configured.LAKE_WATER_MARSH);
 	}
 
 	public static void withCattails(BiomeGenerationSettingsBuilder builder) {
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_CATTAILS);
+		builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_CATTAILS);
 	}
 
 	public static void withMarshVegetation(BiomeGenerationSettingsBuilder builder) {
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.MARSH_OAK);
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_BLUE_ORCHID);
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_CORNFLOWER);
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_DIANTHUS);
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_WATERLILLY_MARSH);
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_GRASS_MARSH);
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_TALL_GRASS_MARSH);
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_CATTAILS_DENSE);
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_DUCKWEED_MARSH);
-		builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.SEAGRASS_MARSH);
+		builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.MARSH_OAK);
+		builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_BLUE_ORCHID);
+		builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_CORNFLOWER);
+		builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_DIANTHUS);
+		builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_WATERLILLY_MARSH);
+		builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_GRASS_MARSH);
+		builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_TALL_GRASS_MARSH);
+		builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_CATTAILS_DENSE);
+		builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_DUCKWEED_MARSH);
+		builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.SEAGRASS_MARSH);
 	}
 
 	public static void removeSwampTrees(BiomeGenerationSettingsBuilder builder) {
@@ -280,7 +280,7 @@ public class EnvironmentalGeneration {
 						if (decorated2.feature == Feature.TREE) {
 							if (decorated2.config instanceof BaseTreeFeatureConfig) {
 								BaseTreeFeatureConfig tree = (BaseTreeFeatureConfig) decorated2.config;
-								if (tree.decorators.contains(LeaveVineTreeDecorator.field_236871_b_) && tree.maxWaterDepth == 1) {
+								if (tree.decorators.contains(LeaveVineTreeDecorator.INSTANCE) && tree.maxWaterDepth == 1) {
 									toRemove.add(configuredFeatureSupplier);
 								}
 							}

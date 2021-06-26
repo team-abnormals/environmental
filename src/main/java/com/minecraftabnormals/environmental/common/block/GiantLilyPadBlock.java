@@ -31,7 +31,7 @@ import net.minecraftforge.common.PlantType;
 import javax.annotation.Nullable;
 
 public class GiantLilyPadBlock extends BushBlock implements IPlantable {
-	protected static final VoxelShape GIANT_LILY_PAD_AABB = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 1.5D, 16.0D);
+	protected static final VoxelShape GIANT_LILY_PAD_AABB = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 1.5D, 16.0D);
 	public static final EnumProperty<LilyPadPosition> POSITION = EnumProperty.create("position", LilyPadPosition.class);
 	private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(() -> EnvironmentalBlocks.LARGE_LILY_PAD.get().asItem());
 
@@ -59,48 +59,48 @@ public class GiantLilyPadBlock extends BushBlock implements IPlantable {
 //	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(POSITION);
 	}
 
 	public static void placeAt(World world, BlockPos pos, BlockState state, int flags) {
-		world.setBlockState(pos, state.with(POSITION, LilyPadPosition.CENTER), flags);
+		world.setBlock(pos, state.setValue(POSITION, LilyPadPosition.CENTER), flags);
 
-		world.setBlockState(pos.offset(Direction.NORTH), state.with(POSITION, LilyPadPosition.NORTH), flags);
-		world.setBlockState(pos.offset(Direction.EAST), state.with(POSITION, LilyPadPosition.EAST), flags);
-		world.setBlockState(pos.offset(Direction.SOUTH), state.with(POSITION, LilyPadPosition.SOUTH), flags);
-		world.setBlockState(pos.offset(Direction.WEST), state.with(POSITION, LilyPadPosition.WEST), flags);
+		world.setBlock(pos.relative(Direction.NORTH), state.setValue(POSITION, LilyPadPosition.NORTH), flags);
+		world.setBlock(pos.relative(Direction.EAST), state.setValue(POSITION, LilyPadPosition.EAST), flags);
+		world.setBlock(pos.relative(Direction.SOUTH), state.setValue(POSITION, LilyPadPosition.SOUTH), flags);
+		world.setBlock(pos.relative(Direction.WEST), state.setValue(POSITION, LilyPadPosition.WEST), flags);
 
-		world.setBlockState(pos.offset(Direction.NORTH).offset(Direction.EAST), state.with(POSITION, LilyPadPosition.NORTHEAST), flags);
-		world.setBlockState(pos.offset(Direction.SOUTH).offset(Direction.EAST), state.with(POSITION, LilyPadPosition.SOUTHEAST), flags);
-		world.setBlockState(pos.offset(Direction.SOUTH).offset(Direction.WEST), state.with(POSITION, LilyPadPosition.SOUTHWEST), flags);
-		world.setBlockState(pos.offset(Direction.NORTH).offset(Direction.WEST), state.with(POSITION, LilyPadPosition.NORTHWEST), flags);
+		world.setBlock(pos.relative(Direction.NORTH).relative(Direction.EAST), state.setValue(POSITION, LilyPadPosition.NORTHEAST), flags);
+		world.setBlock(pos.relative(Direction.SOUTH).relative(Direction.EAST), state.setValue(POSITION, LilyPadPosition.SOUTHEAST), flags);
+		world.setBlock(pos.relative(Direction.SOUTH).relative(Direction.WEST), state.setValue(POSITION, LilyPadPosition.SOUTHWEST), flags);
+		world.setBlock(pos.relative(Direction.NORTH).relative(Direction.WEST), state.setValue(POSITION, LilyPadPosition.NORTHWEST), flags);
 	}
 
 	public static boolean checkPositions(World world, BlockPos pos, BlockState state) {
-		if (!isValidPosAndAir(state.with(POSITION, LilyPadPosition.NORTH), world, pos.offset(Direction.NORTH)))
+		if (!isValidPosAndAir(state.setValue(POSITION, LilyPadPosition.NORTH), world, pos.relative(Direction.NORTH)))
 			return false;
-		if (!isValidPosAndAir(state.with(POSITION, LilyPadPosition.EAST), world, pos.offset(Direction.EAST)))
+		if (!isValidPosAndAir(state.setValue(POSITION, LilyPadPosition.EAST), world, pos.relative(Direction.EAST)))
 			return false;
-		if (!isValidPosAndAir(state.with(POSITION, LilyPadPosition.SOUTH), world, pos.offset(Direction.SOUTH)))
+		if (!isValidPosAndAir(state.setValue(POSITION, LilyPadPosition.SOUTH), world, pos.relative(Direction.SOUTH)))
 			return false;
-		if (!isValidPosAndAir(state.with(POSITION, LilyPadPosition.WEST), world, pos.offset(Direction.WEST)))
+		if (!isValidPosAndAir(state.setValue(POSITION, LilyPadPosition.WEST), world, pos.relative(Direction.WEST)))
 			return false;
 
-		if (!isValidPosAndAir(state.with(POSITION, LilyPadPosition.NORTHEAST), world, posToBlockPos(LilyPadPosition.NORTHEAST, pos, false)))
+		if (!isValidPosAndAir(state.setValue(POSITION, LilyPadPosition.NORTHEAST), world, posToBlockPos(LilyPadPosition.NORTHEAST, pos, false)))
 			return false;
-		if (!isValidPosAndAir(state.with(POSITION, LilyPadPosition.SOUTHEAST), world, pos.offset(Direction.SOUTH).offset(Direction.EAST)))
+		if (!isValidPosAndAir(state.setValue(POSITION, LilyPadPosition.SOUTHEAST), world, pos.relative(Direction.SOUTH).relative(Direction.EAST)))
 			return false;
-		if (!isValidPosAndAir(state.with(POSITION, LilyPadPosition.SOUTHWEST), world, pos.offset(Direction.SOUTH).offset(Direction.WEST)))
+		if (!isValidPosAndAir(state.setValue(POSITION, LilyPadPosition.SOUTHWEST), world, pos.relative(Direction.SOUTH).relative(Direction.WEST)))
 			return false;
-		if (!isValidPosAndAir(state.with(POSITION, LilyPadPosition.NORTHWEST), world, pos.offset(Direction.NORTH).offset(Direction.WEST)))
+		if (!isValidPosAndAir(state.setValue(POSITION, LilyPadPosition.NORTHWEST), world, pos.relative(Direction.NORTH).relative(Direction.WEST)))
 			return false;
 
 		return true;
 	}
 
 	public static boolean isValidPosAndAir(BlockState state, World world, BlockPos pos) {
-		return state.isValidPosition(world, pos) && world.getBlockState(pos).isAir();
+		return state.canSurvive(world, pos) && world.getBlockState(pos).isAir();
 	}
 
 	@Override
@@ -109,52 +109,52 @@ public class GiantLilyPadBlock extends BushBlock implements IPlantable {
 	}
 
 	@Override
-	public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
-		super.onFallenUpon(worldIn, pos, entityIn, fallDistance * 0.25F);
+	public void fallOn(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
+		super.fallOn(worldIn, pos, entityIn, fallDistance * 0.25F);
 	}
 
 	@Override
-	public void onLanded(IBlockReader worldIn, Entity entityIn) {
+	public void updateEntityAfterFallOn(IBlockReader worldIn, Entity entityIn) {
 		if (entityIn.isSuppressingBounce()) {
-			super.onLanded(worldIn, entityIn);
+			super.updateEntityAfterFallOn(worldIn, entityIn);
 		} else {
 			this.bounce(entityIn);
 		}
 	}
 
 	private void bounce(Entity entity) {
-		Vector3d vector3d = entity.getMotion();
+		Vector3d vector3d = entity.getDeltaMovement();
 		if (vector3d.y < 0.0D) {
 			double d0 = entity instanceof LivingEntity ? 1.5D : 1.2D;
-			entity.setMotion(vector3d.x, -vector3d.y * d0, vector3d.z);
+			entity.setDeltaMovement(vector3d.x, -vector3d.y * d0, vector3d.z);
 		}
 	}
 
 	@Override
-	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
+	protected boolean mayPlaceOn(BlockState state, IBlockReader worldIn, BlockPos pos) {
 		FluidState fluidstate = worldIn.getFluidState(pos);
-		FluidState fluidstate1 = worldIn.getFluidState(pos.up());
-		return (fluidstate.getFluid() == Fluids.WATER || state.getMaterial() == Material.ICE) && fluidstate1.getFluid() == Fluids.EMPTY;
+		FluidState fluidstate1 = worldIn.getFluidState(pos.above());
+		return (fluidstate.getType() == Fluids.WATER || state.getMaterial() == Material.ICE) && fluidstate1.getType() == Fluids.EMPTY;
 	}
 
 	@Override
-	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-		BlockPos blockpos = pos.down();
+	public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
+		BlockPos blockpos = pos.below();
 		if (state.getBlock() == this) {
 			return worldIn.getBlockState(blockpos).canSustainPlant(worldIn, blockpos, Direction.UP, this);
 		}
-		return this.isValidGround(worldIn.getBlockState(blockpos), worldIn, blockpos);
+		return this.mayPlaceOn(worldIn.getBlockState(blockpos), worldIn, blockpos);
 	}
 
-	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-		return (!stateIn.isValidPosition(worldIn, currentPos) || !this.isConnected(stateIn, worldIn, currentPos)) ? Blocks.AIR.getDefaultState() : super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+		return (!stateIn.canSurvive(worldIn, currentPos) || !this.isConnected(stateIn, worldIn, currentPos)) ? Blocks.AIR.defaultBlockState() : super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 	}
 
 	public boolean isConnected(BlockState state, IBlockReader worldIn, BlockPos pos) {
-		LilyPadPosition position = state.get(POSITION);
+		LilyPadPosition position = state.getValue(POSITION);
 		pos = posToBlockPos(position, pos, true);
 		for (LilyPadPosition newPosition : LilyPadPosition.values()) {
-			if (worldIn.getBlockState(posToBlockPos(newPosition, pos, false)).isIn(this.getBlock()) && worldIn.getBlockState(posToBlockPos(newPosition, pos, false)).get(POSITION) == newPosition) {
+			if (worldIn.getBlockState(posToBlockPos(newPosition, pos, false)).is(this.getBlock()) && worldIn.getBlockState(posToBlockPos(newPosition, pos, false)).getValue(POSITION) == newPosition) {
 			} else
 				return false;
 		}
@@ -162,19 +162,19 @@ public class GiantLilyPadBlock extends BushBlock implements IPlantable {
 	}
 
 	@Override
-	public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
-		if (!worldIn.isRemote) {
+	public void playerWillDestroy(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
+		if (!worldIn.isClientSide) {
 			if (player.isCreative()) {
 				removeEachBlock(worldIn, pos, state, player);
 			} else {
-				spawnDrops(state, worldIn, pos, (TileEntity) null, player, player.getHeldItemMainhand());
+				dropResources(state, worldIn, pos, (TileEntity) null, player, player.getMainHandItem());
 			}
 		}
-		super.onBlockHarvested(worldIn, pos, state, player);
+		super.playerWillDestroy(worldIn, pos, state, player);
 	}
 
 	private static void removeEachBlock(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-		LilyPadPosition position = state.get(POSITION);
+		LilyPadPosition position = state.getValue(POSITION);
 		pos = posToBlockPos(position, pos, true);
 		for (LilyPadPosition lilyPadPos : LilyPadPosition.values()) {
 			removeBlock(lilyPadPos, world, pos, state, player);
@@ -184,15 +184,15 @@ public class GiantLilyPadBlock extends BushBlock implements IPlantable {
 	private static void removeBlock(LilyPadPosition position, World world, BlockPos pos, BlockState state, PlayerEntity player) {
 		BlockPos blockpos = posToBlockPos(position, pos, false);
 		BlockState blockstate = world.getBlockState(blockpos);
-		if (blockstate.getBlock() == state.getBlock() && blockstate.get(POSITION) == position) {
-			world.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 51);
-			world.playEvent(player, 2001, blockpos, Block.getStateId(blockstate));
+		if (blockstate.getBlock() == state.getBlock() && blockstate.getValue(POSITION) == position) {
+			world.setBlock(blockpos, Blocks.AIR.defaultBlockState(), 51);
+			world.levelEvent(player, 2001, blockpos, Block.getId(blockstate));
 		}
 	}
 
 	@Override
-	public void harvestBlock(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {
-		super.harvestBlock(worldIn, player, pos, Blocks.AIR.getDefaultState(), te, stack);
+	public void playerDestroy(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {
+		super.playerDestroy(worldIn, player, pos, Blocks.AIR.defaultBlockState(), te, stack);
 	}
 
 	public static BlockPos posToBlockPos(LilyPadPosition position, BlockPos pos, boolean revert) {
@@ -200,22 +200,22 @@ public class GiantLilyPadBlock extends BushBlock implements IPlantable {
 			switch (position) {
 
 				case NORTH:
-					return pos.offset(Direction.NORTH);
+					return pos.relative(Direction.NORTH);
 				case EAST:
-					return pos.offset(Direction.EAST);
+					return pos.relative(Direction.EAST);
 				case SOUTH:
-					return pos.offset(Direction.SOUTH);
+					return pos.relative(Direction.SOUTH);
 				case WEST:
-					return pos.offset(Direction.WEST);
+					return pos.relative(Direction.WEST);
 
 				case NORTHEAST:
-					return pos.offset(Direction.NORTH).offset(Direction.EAST);
+					return pos.relative(Direction.NORTH).relative(Direction.EAST);
 				case NORTHWEST:
-					return pos.offset(Direction.NORTH).offset(Direction.WEST);
+					return pos.relative(Direction.NORTH).relative(Direction.WEST);
 				case SOUTHEAST:
-					return pos.offset(Direction.SOUTH).offset(Direction.EAST);
+					return pos.relative(Direction.SOUTH).relative(Direction.EAST);
 				case SOUTHWEST:
-					return pos.offset(Direction.SOUTH).offset(Direction.WEST);
+					return pos.relative(Direction.SOUTH).relative(Direction.WEST);
 				case CENTER:
 				default:
 					return pos;
@@ -224,22 +224,22 @@ public class GiantLilyPadBlock extends BushBlock implements IPlantable {
 			switch (position) {
 
 				case NORTH:
-					return pos.offset(Direction.SOUTH);
+					return pos.relative(Direction.SOUTH);
 				case EAST:
-					return pos.offset(Direction.WEST);
+					return pos.relative(Direction.WEST);
 				case SOUTH:
-					return pos.offset(Direction.NORTH);
+					return pos.relative(Direction.NORTH);
 				case WEST:
-					return pos.offset(Direction.EAST);
+					return pos.relative(Direction.EAST);
 
 				case NORTHEAST:
-					return pos.offset(Direction.SOUTH).offset(Direction.WEST);
+					return pos.relative(Direction.SOUTH).relative(Direction.WEST);
 				case NORTHWEST:
-					return pos.offset(Direction.SOUTH).offset(Direction.EAST);
+					return pos.relative(Direction.SOUTH).relative(Direction.EAST);
 				case SOUTHEAST:
-					return pos.offset(Direction.NORTH).offset(Direction.WEST);
+					return pos.relative(Direction.NORTH).relative(Direction.WEST);
 				case SOUTHWEST:
-					return pos.offset(Direction.NORTH).offset(Direction.EAST);
+					return pos.relative(Direction.NORTH).relative(Direction.EAST);
 				case CENTER:
 				default:
 					return pos;
@@ -270,16 +270,16 @@ public class GiantLilyPadBlock extends BushBlock implements IPlantable {
 		}
 
 		public String toString() {
-			return this.getString();
+			return this.getSerializedName();
 		}
 
-		public String getString() {
+		public String getSerializedName() {
 			return this.heightName;
 		}
 	}
 
 	@Override
-	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
 		FILLER.fillItem(this.asItem(), group, items);
 	}
 }

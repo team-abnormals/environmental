@@ -24,74 +24,74 @@ import javax.annotation.Nullable;
 
 public class SawmillBlock extends Block {
 	private static final TranslationTextComponent CONTAINER_NAME = new TranslationTextComponent("container.sawmill");
-	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
+	public static final DirectionProperty FACING = HorizontalBlock.FACING;
 	public static final VoxelShape[] SHAPES = new VoxelShape[]{
-			VoxelShapes.or(makeCuboidShape(0.0D, 0.0D, 9.0D, 16.0D, 16.0D, 16.0D), makeCuboidShape(7.0D, 0.0D, 0.0D, 9.0D, 2.0D, 9.0D)),
-			VoxelShapes.or(makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 7.0D), makeCuboidShape(7.0D, 0.0D, 7.0D, 9.0D, 2.0D, 16.0D)),
-			VoxelShapes.or(makeCuboidShape(9.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D), makeCuboidShape(0.0D, 0.0D, 7.0D, 9.0D, 2.0D, 9.0D)),
-			VoxelShapes.or(makeCuboidShape(0.0D, 0.0D, 0.0D, 7.0D, 16.0D, 16.0D), makeCuboidShape(7.0D, 0.0D, 7.0D, 16.0D, 2.0D, 9.0D))
+			VoxelShapes.or(box(0.0D, 0.0D, 9.0D, 16.0D, 16.0D, 16.0D), box(7.0D, 0.0D, 0.0D, 9.0D, 2.0D, 9.0D)),
+			VoxelShapes.or(box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 7.0D), box(7.0D, 0.0D, 7.0D, 9.0D, 2.0D, 16.0D)),
+			VoxelShapes.or(box(9.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D), box(0.0D, 0.0D, 7.0D, 9.0D, 2.0D, 9.0D)),
+			VoxelShapes.or(box(0.0D, 0.0D, 0.0D, 7.0D, 16.0D, 16.0D), box(7.0D, 0.0D, 7.0D, 16.0D, 2.0D, 9.0D))
 	};
 
 	public SawmillBlock(AbstractBlock.Properties propertiesIn) {
 		super(propertiesIn);
-		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
+		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
 	}
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
+		return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
 	}
 
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		if (worldIn.isRemote) {
+	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+		if (worldIn.isClientSide) {
 			return ActionResultType.SUCCESS;
 		} else {
-			player.openContainer(state.getContainer(worldIn, pos));
-			player.addStat(Stats.INTERACT_WITH_STONECUTTER);
+			player.openMenu(state.getMenuProvider(worldIn, pos));
+			player.awardStat(Stats.INTERACT_WITH_STONECUTTER);
 			return ActionResultType.CONSUME;
 		}
 	}
 
 	@Nullable
-	public INamedContainerProvider getContainer(BlockState state, World worldIn, BlockPos pos) {
+	public INamedContainerProvider getMenuProvider(BlockState state, World worldIn, BlockPos pos) {
 		return new SimpleNamedContainerProvider((p_220283_2_, p_220283_3_, p_220283_4_) -> {
-			return new SawmillContainer(p_220283_2_, p_220283_3_, IWorldPosCallable.of(worldIn, pos));
+			return new SawmillContainer(p_220283_2_, p_220283_3_, IWorldPosCallable.create(worldIn, pos));
 		}, CONTAINER_NAME);
 	}
 
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		return SHAPES[state.get(FACING).getIndex() - 2];
+		return SHAPES[state.getValue(FACING).get3DDataValue() - 2];
 	}
 
 	@Override
-	public boolean isTransparent(BlockState state) {
+	public boolean useShapeForLightOcclusion(BlockState state) {
 		return true;
 	}
 
 	@Override
-	public BlockRenderType getRenderType(BlockState state) {
+	public BlockRenderType getRenderShape(BlockState state) {
 		return BlockRenderType.MODEL;
 	}
 
 	@Override
 	public BlockState rotate(BlockState state, Rotation rot) {
-		return state.with(FACING, rot.rotate(state.get(FACING)));
+		return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
 	}
 
 	@Override
 	public BlockState mirror(BlockState state, Mirror mirrorIn) {
-		return state.rotate(mirrorIn.toRotation(state.get(FACING)));
+		return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(FACING);
 	}
 
 	@Override
-	public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
+	public boolean isPathfindable(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
 		return false;
 	}
 }

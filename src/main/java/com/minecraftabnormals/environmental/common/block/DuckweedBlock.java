@@ -22,7 +22,7 @@ import net.minecraftforge.common.PlantType;
 import java.util.Random;
 
 public class DuckweedBlock extends BushBlock implements IGrowable {
-	protected static final VoxelShape DUCKWEED_AABB = Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 1.5D, 15.0D);
+	protected static final VoxelShape DUCKWEED_AABB = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 1.5D, 15.0D);
 	private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(() -> Items.LILY_PAD);
 
 	public DuckweedBlock(Block.Properties builder) {
@@ -34,9 +34,9 @@ public class DuckweedBlock extends BushBlock implements IGrowable {
 	}
 
 	@Override
-	public boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
+	public boolean mayPlaceOn(BlockState state, IBlockReader worldIn, BlockPos pos) {
 		FluidState ifluidstate = worldIn.getFluidState(pos);
-		return ifluidstate.getFluid() == Fluids.WATER;
+		return ifluidstate.getType() == Fluids.WATER;
 	}
 
 	@Override
@@ -44,22 +44,22 @@ public class DuckweedBlock extends BushBlock implements IGrowable {
 		return PlantType.WATER;
 	}
 
-	public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
-		return worldIn.getBlockState(pos.up()).isAir();
+	public boolean isValidBonemealTarget(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
+		return worldIn.getBlockState(pos.above()).isAir();
 	}
 
-	public boolean canUseBonemeal(World world, Random random, BlockPos blockPos, BlockState blockState) {
+	public boolean isBonemealSuccess(World world, Random random, BlockPos blockPos, BlockState blockState) {
 		return true;
 	}
 
-	public void grow(ServerWorld world, Random random, BlockPos blockPos, BlockState state) {
+	public void performBonemeal(ServerWorld world, Random random, BlockPos blockPos, BlockState state) {
 		label:
 		for (int x = 0; x < 64; ++x) {
 			BlockPos newBlockPos = blockPos;
 			for (int y = 0; y < x / 16; ++y) {
-				newBlockPos = newBlockPos.add(random.nextInt(3) - 1, 0, random.nextInt(3) - 1);
-				if (state.isValidPosition(world, newBlockPos) && world.isAirBlock(newBlockPos)) {
-					world.setBlockState(newBlockPos, state);
+				newBlockPos = newBlockPos.offset(random.nextInt(3) - 1, 0, random.nextInt(3) - 1);
+				if (state.canSurvive(world, newBlockPos) && world.isEmptyBlock(newBlockPos)) {
+					world.setBlockAndUpdate(newBlockPos, state);
 					break label;
 				}
 			}
@@ -67,7 +67,7 @@ public class DuckweedBlock extends BushBlock implements IGrowable {
 	}
 
 	@Override
-	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
 		FILLER.fillItem(this.asItem(), group, items);
 	}
 }

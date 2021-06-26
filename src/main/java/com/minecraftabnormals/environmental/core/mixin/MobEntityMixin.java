@@ -22,22 +22,22 @@ public abstract class MobEntityMixin extends LivingEntity {
 
 	@Shadow
 	@Final
-	protected float[] inventoryArmorDropChances;
+	protected float[] armorDropChances;
 
 	protected MobEntityMixin(EntityType<? extends LivingEntity> type, World worldIn) {
 		super(type, worldIn);
 	}
 
-	@Inject(method = "setEquipmentBasedOnDifficulty", at = @At("TAIL"))
+	@Inject(method = "populateDefaultEquipmentSlots", at = @At("TAIL"))
 	private void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty, CallbackInfo info) {
 		int difficultyChance = difficulty.getDifficulty().getId() + 1;
-		if (this.getEntityWorld() instanceof ServerWorld) {
-			ServerWorld world = (ServerWorld) this.getEntityWorld();
-			boolean isStronghold = world.func_241112_a_().getStructureStart(this.getPosition(), true, Structure.STRONGHOLD).isValid();
-			boolean isMineshaft = world.func_241112_a_().getStructureStart(this.getPosition(), true, Structure.MINESHAFT).isValid();
+		if (this.getCommandSenderWorld() instanceof ServerWorld) {
+			ServerWorld world = (ServerWorld) this.getCommandSenderWorld();
+			boolean isStronghold = world.structureFeatureManager().getStructureAt(this.blockPosition(), true, Structure.STRONGHOLD).isValid();
+			boolean isMineshaft = world.structureFeatureManager().getStructureAt(this.blockPosition(), true, Structure.MINESHAFT).isValid();
 			if ((isStronghold || isMineshaft) && Math.random() < difficultyChance * 0.01F) {
-				this.setItemStackToSlot(EquipmentSlotType.CHEST, new ItemStack(EnvironmentalItems.HEALER_POUCH.get()));
-				this.inventoryArmorDropChances[EquipmentSlotType.CHEST.getIndex()] = 1.0F;
+				this.setItemSlot(EquipmentSlotType.CHEST, new ItemStack(EnvironmentalItems.HEALER_POUCH.get()));
+				this.armorDropChances[EquipmentSlotType.CHEST.getIndex()] = 1.0F;
 			}
 		}
 	}

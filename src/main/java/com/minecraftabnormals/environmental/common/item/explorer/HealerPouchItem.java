@@ -17,6 +17,8 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
+import net.minecraft.item.Item.Properties;
+
 @EventBusSubscriber(modid = Environmental.MOD_ID)
 public class HealerPouchItem extends ExplorerArmorItem {
 	private static final String NBT_TAG = "HealerPouchUses";
@@ -34,24 +36,24 @@ public class HealerPouchItem extends ExplorerArmorItem {
 	@SubscribeEvent
 	public static void onEvent(LivingHurtEvent event) {
 		LivingEntity entity = event.getEntityLiving();
-		ItemStack stack = entity.getItemStackFromSlot(EquipmentSlotType.CHEST);
+		ItemStack stack = entity.getItemBySlot(EquipmentSlotType.CHEST);
 
-		if (stack.getItem() instanceof HealerPouchItem && event.getSource().getTrueSource() instanceof LivingEntity) {
+		if (stack.getItem() instanceof HealerPouchItem && event.getSource().getEntity() instanceof LivingEntity) {
 			if (entity instanceof PlayerEntity) {
 				PlayerEntity player = (PlayerEntity) event.getEntityLiving();
-				if (!player.getCooldownTracker().hasCooldown(stack.getItem())) {
+				if (!player.getCooldowns().isOnCooldown(stack.getItem())) {
 					CompoundNBT tag = stack.getOrCreateTag();
 					int increase = ((HealerPouchItem) stack.getItem()).getIncreaseForUses(tag.getInt(NBT_TAG));
 					int panicSeconds = 4 * increase;
-					player.addPotionEffect(new EffectInstance(Effects.REGENERATION, 20 * panicSeconds, increase > 2 ? 1 : 0));
-					player.addPotionEffect(new EffectInstance(EnvironmentalEffects.PANIC.get(), 20 * panicSeconds, 0));
-					player.getCooldownTracker().setCooldown(stack.getItem(), 20 * (panicSeconds + (10 - increase * 2)));
+					player.addEffect(new EffectInstance(Effects.REGENERATION, 20 * panicSeconds, increase > 2 ? 1 : 0));
+					player.addEffect(new EffectInstance(EnvironmentalEffects.PANIC.get(), 20 * panicSeconds, 0));
+					player.getCooldowns().addCooldown(stack.getItem(), 20 * (panicSeconds + (10 - increase * 2)));
 					((HealerPouchItem) stack.getItem()).levelUp(stack, player);
 				}
 			} else {
-				if (entity.world.getRandom().nextInt(entity.world.getDifficulty().getId() + 3) != 0) {
+				if (entity.level.getRandom().nextInt(entity.level.getDifficulty().getId() + 3) != 0) {
 					entity.heal(4.0F);
-					entity.addPotionEffect(new EffectInstance(EnvironmentalEffects.PANIC.get(), 120, 0));
+					entity.addEffect(new EffectInstance(EnvironmentalEffects.PANIC.get(), 120, 0));
 				}
 			}
 		}

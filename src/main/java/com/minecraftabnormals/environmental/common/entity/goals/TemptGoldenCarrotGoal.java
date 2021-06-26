@@ -11,7 +11,7 @@ public class TemptGoldenCarrotGoal extends TemptGoal {
 		super(creatureIn, speedIn, scaredByPlayerMovementIn, temptItemsIn);
 	}
 
-	public boolean shouldExecute() {
-		return ((IDataManager) this.creature).getValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME) == 0 && super.shouldExecute();
+	public boolean canUse() {
+		return ((IDataManager) this.mob).getValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME) == 0 && super.canUse();
 	}
 }

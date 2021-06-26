@@ -25,6 +25,8 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 import java.util.UUID;
 
+import net.minecraft.item.Item.Properties;
+
 @EventBusSubscriber(modid = Environmental.MOD_ID)
 public class ThiefHoodItem extends ExplorerArmorItem {
 	private static final String NBT_TAG = "ThiefHoodUses";
@@ -47,14 +49,14 @@ public class ThiefHoodItem extends ExplorerArmorItem {
 	@Override
 	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType slot, ItemStack stack) {
 		Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-		builder.putAll(super.getAttributeModifiers(this.getEquipmentSlot()));
+		builder.putAll(super.getDefaultAttributeModifiers(this.getSlot()));
 		UUID uuid = UUID.fromString("1D45B301-E65D-47A2-B63F-6EC5FCAC9316");
 
 		int uses = Math.round(stack.getOrCreateTag().getFloat(NBT_TAG));
 		double increase = 0.15D * getIncreaseForUses(uses);
 
 		builder.put(EnvironmentalAttributes.STEALTH.get(), new AttributeModifier(uuid, "Stealth", increase, AttributeModifier.Operation.ADDITION));
-		return slot == this.slot ? builder.build() : super.getAttributeModifiers(slot);
+		return slot == this.slot ? builder.build() : super.getDefaultAttributeModifiers(slot);
 	}
 
 	@SubscribeEvent
@@ -69,9 +71,9 @@ public class ThiefHoodItem extends ExplorerArmorItem {
 	@SubscribeEvent
 	public static void livingDeathEvent(LivingDeathEvent event) {
 		LivingEntity entity = event.getEntityLiving();
-		if (event.getSource().getTrueSource() instanceof LivingEntity && entity instanceof IMob) {
-			LivingEntity attacker = (LivingEntity) event.getSource().getTrueSource();
-			ItemStack stack = attacker.getItemStackFromSlot(EquipmentSlotType.HEAD);
+		if (event.getSource().getEntity() instanceof LivingEntity && entity instanceof IMob) {
+			LivingEntity attacker = (LivingEntity) event.getSource().getEntity();
+			ItemStack stack = attacker.getItemBySlot(EquipmentSlotType.HEAD);
 			if (stack.getItem() instanceof ThiefHoodItem) {
 				((ThiefHoodItem) stack.getItem()).levelUp(stack, attacker);
 			}

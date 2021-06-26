@@ -20,16 +20,16 @@ public class SlabbyPraiseEffigyGoal extends Goal {
 
 	public SlabbyPraiseEffigyGoal(SlabfishEntity slabfish) {
 		this.slabfish = slabfish;
-		this.setMutexFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK, Goal.Flag.JUMP));
+		this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK, Goal.Flag.JUMP));
 	}
 
 	@Override
-	public boolean shouldExecute() {
+	public boolean canUse() {
 		this.effigyPos = this.slabfish.getEffigy();
 		if (this.effigyPos == null)
 			return false;
 
-		BlockState state = this.slabfish.world.getBlockState(this.effigyPos);
+		BlockState state = this.slabfish.level.getBlockState(this.effigyPos);
 		if (!(state.getBlock() instanceof SlabfishEffigyBlock)) {
 			this.slabfish.setEffigy(null);
 			return false;
@@ -37,78 +37,78 @@ public class SlabbyPraiseEffigyGoal extends Goal {
 
 		if (!this.slabfish.hasBackpack())
 			return false;
-		else if (this.slabfish.isSitting())
+		else if (this.slabfish.isOrderedToSit())
 			return false;
 		else if (isBackpackEmpty())
 			return false;
-		else if (state.get(SlabfishEffigyBlock.POWERED))
+		else if (state.getValue(SlabfishEffigyBlock.POWERED))
 			return false;
-		else return this.slabfish.world.isNightTime();
+		else return this.slabfish.level.isNight();
 	}
 
 	@Override
-	public boolean shouldContinueExecuting() {
-		return this.slabfish.hasBackpack() && !isBackpackEmpty() && !this.slabfish.isSitting() && this.effigyPos != null && this.slabfish.world.isNightTime();
+	public boolean canContinueToUse() {
+		return this.slabfish.hasBackpack() && !isBackpackEmpty() && !this.slabfish.isOrderedToSit() && this.effigyPos != null && this.slabfish.level.isNight();
 	}
 
 	@Override
-	public void startExecuting() {
+	public void start() {
 		if (this.effigyPos != null) {
-			this.slabfish.getNavigator().tryMoveToXYZ(this.effigyPos.getX(), this.effigyPos.getY(), this.effigyPos.getZ(), 1.1F);
+			this.slabfish.getNavigation().moveTo(this.effigyPos.getX(), this.effigyPos.getY(), this.effigyPos.getZ(), 1.1F);
 		}
 	}
 
 	@Override
-	public void resetTask() {
-		this.slabfish.getNavigator().clearPath();
+	public void stop() {
+		this.slabfish.getNavigation().stop();
 	}
 
 	@Override
 	public void tick() {
 		if (this.effigyPos != null) {
-			BlockState state = this.slabfish.world.getBlockState(this.effigyPos);
+			BlockState state = this.slabfish.level.getBlockState(this.effigyPos);
 			if (!(state.getBlock() instanceof SlabfishEffigyBlock))
 				return;
 
-			this.slabfish.getNavigator().tryMoveToXYZ(this.effigyPos.getX() + 0.5, this.effigyPos.getY(), this.effigyPos.getZ() + 0.5, 1.1D);
+			this.slabfish.getNavigation().moveTo(this.effigyPos.getX() + 0.5, this.effigyPos.getY(), this.effigyPos.getZ() + 0.5, 1.1D);
 			this.slabfish.lookAt(EntityAnchorArgument.Type.EYES, new Vector3d(this.effigyPos.getX() + 0.5, this.effigyPos.getY() - 1, this.effigyPos.getZ() + 0.5));
 
-			if (this.slabfish.getDistanceSq(this.effigyPos.getX() + 0.5, this.effigyPos.getY(), this.effigyPos.getZ() + 0.5) < 3.5D) {
-				this.slabfish.getNavigator().clearPath();
+			if (this.slabfish.distanceToSqr(this.effigyPos.getX() + 0.5, this.effigyPos.getY(), this.effigyPos.getZ() + 0.5) < 3.5D) {
+				this.slabfish.getNavigation().stop();
 				this.throwItems();
 			}
 		}
 	}
 
 	private void throwItems() {
-		Random rand = this.slabfish.getRNG();
+		Random rand = this.slabfish.getRandom();
 
-		for (int i = 3; i < this.slabfish.slabfishBackpack.getSizeInventory(); i++) {
-			ItemStack stack = this.slabfish.slabfishBackpack.getStackInSlot(i);
+		for (int i = 3; i < this.slabfish.slabfishBackpack.getContainerSize(); i++) {
+			ItemStack stack = this.slabfish.slabfishBackpack.getItem(i);
 			if (stack.isEmpty())
 				continue;
 
-			ItemEntity item = new ItemEntity(this.slabfish.world, this.slabfish.getPosX(), this.slabfish.getPosYEye(), this.slabfish.getPosZ(), stack);
-			item.setNoDespawn();
-			item.setThrowerId(this.slabfish.getUniqueID());
+			ItemEntity item = new ItemEntity(this.slabfish.level, this.slabfish.getX(), this.slabfish.getEyeY(), this.slabfish.getZ(), stack);
+			item.setExtendedLifetime();
+			item.setThrower(this.slabfish.getUUID());
 			item.getPersistentData().putBoolean("EffigyItem", true);
 
-			float f8 = MathHelper.sin(this.slabfish.rotationPitch * ((float) Math.PI / 180F));
-			float f2 = MathHelper.cos(this.slabfish.rotationPitch * ((float) Math.PI / 180F));
-			float f3 = MathHelper.sin(this.slabfish.rotationYaw * ((float) Math.PI / 180F));
-			float f4 = MathHelper.cos(this.slabfish.rotationYaw * ((float) Math.PI / 180F));
+			float f8 = MathHelper.sin(this.slabfish.xRot * ((float) Math.PI / 180F));
+			float f2 = MathHelper.cos(this.slabfish.xRot * ((float) Math.PI / 180F));
+			float f3 = MathHelper.sin(this.slabfish.yRot * ((float) Math.PI / 180F));
+			float f4 = MathHelper.cos(this.slabfish.yRot * ((float) Math.PI / 180F));
 			float f5 = rand.nextFloat() * ((float) Math.PI * 2F);
 			float f6 = 0.02F * rand.nextFloat();
-			item.setMotion((double) (-f3 * f2 * 0.3F) + Math.cos(f5) * (double) f6, -f8 * 0.3F + 0.1F + (rand.nextFloat() - rand.nextFloat()) * 0.1F, (double) (f4 * f2 * 0.3F) + Math.sin(f5) * (double) f6);
+			item.setDeltaMovement((double) (-f3 * f2 * 0.3F) + Math.cos(f5) * (double) f6, -f8 * 0.3F + 0.1F + (rand.nextFloat() - rand.nextFloat()) * 0.1F, (double) (f4 * f2 * 0.3F) + Math.sin(f5) * (double) f6);
 
-			this.slabfish.world.addEntity(item);
-			this.slabfish.slabfishBackpack.setInventorySlotContents(i, ItemStack.EMPTY);
+			this.slabfish.level.addFreshEntity(item);
+			this.slabfish.slabfishBackpack.setItem(i, ItemStack.EMPTY);
 		}
 	}
 
 	private boolean isBackpackEmpty() {
-		for (int i = 3; i < this.slabfish.slabfishBackpack.getSizeInventory(); i++) {
-			ItemStack stack = this.slabfish.slabfishBackpack.getStackInSlot(i);
+		for (int i = 3; i < this.slabfish.slabfishBackpack.getContainerSize(); i++) {
+			ItemStack stack = this.slabfish.slabfishBackpack.getItem(i);
 			if (!stack.isEmpty())
 				return false;
 		}

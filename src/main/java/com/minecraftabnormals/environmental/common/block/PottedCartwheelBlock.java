@@ -14,17 +14,19 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class PottedCartwheelBlock extends FlowerPotBlock {
-	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
+	public static final DirectionProperty FACING = HorizontalBlock.FACING;
 
 	public PottedCartwheelBlock(Block flower, Properties properties) {
 		super(flower, properties);
-		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
+		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
 	}
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
+		return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
 	}
 
 	@Override
@@ -34,11 +36,11 @@ public class PottedCartwheelBlock extends FlowerPotBlock {
 
 	@Override
 	public BlockState mirror(BlockState state, Mirror mirrorIn) {
-		return state.rotate(mirrorIn.toRotation(state.get(FACING)));
+		return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(FACING);
 	}
 }

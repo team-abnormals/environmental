@@ -21,6 +21,8 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 import java.util.UUID;
 
+import net.minecraft.item.Item.Properties;
+
 @EventBusSubscriber(modid = Environmental.MOD_ID)
 public class ArchitectBeltItem extends ExplorerArmorItem {
 	private static final String NBT_TAG = "ArchitectBeltUses";
@@ -38,7 +40,7 @@ public class ArchitectBeltItem extends ExplorerArmorItem {
 	@Override
 	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType slot, ItemStack stack) {
 		Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-		builder.putAll(super.getAttributeModifiers(this.getEquipmentSlot()));
+		builder.putAll(super.getDefaultAttributeModifiers(this.getSlot()));
 		UUID uuid = UUID.fromString("D8499B04-0E66-4726-AB29-64469D734E0D");
 
 		int uses = stack.getTag().getInt(NBT_TAG);
@@ -46,14 +48,14 @@ public class ArchitectBeltItem extends ExplorerArmorItem {
 
 		builder.put(ForgeMod.REACH_DISTANCE.get(), new AttributeModifier(uuid, "Reach modifier", increase, AttributeModifier.Operation.ADDITION));
 
-		return slot == this.slot ? builder.build() : super.getAttributeModifiers(slot);
+		return slot == this.slot ? builder.build() : super.getDefaultAttributeModifiers(slot);
 	}
 
 	@SubscribeEvent
 	public static void placeBlockEvent(BlockEvent.EntityPlaceEvent event) {
 		if (event.getEntity() instanceof PlayerEntity) {
 			PlayerEntity player = (PlayerEntity) event.getEntity();
-			ItemStack stack = player.getItemStackFromSlot(EquipmentSlotType.LEGS);
+			ItemStack stack = player.getItemBySlot(EquipmentSlotType.LEGS);
 			if (stack.getItem() instanceof ArchitectBeltItem) {
 				((ArchitectBeltItem) stack.getItem()).levelUp(stack, player);
 			}

@@ -19,19 +19,19 @@ public class FennecFoxHeldItemLayer extends LayerRenderer<FennecFoxEntity, Fenne
 
 	public void render(MatrixStack stack, IRenderTypeBuffer buffer, int packedLight, FennecFoxEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 		boolean sleeping = entity.isSleeping();
-		boolean child = entity.isChild();
-		stack.push();
+		boolean child = entity.isBaby();
+		stack.pushPose();
 		if (child) {
 			stack.scale(0.75F, 0.75F, 0.75F);
 			stack.translate(0.0D, 0.5D, 0.209375F);
 		}
 
-		stack.translate((this.getEntityModel()).head.rotationPointX / 16.0F, (this.getEntityModel()).head.rotationPointY / 16.0F, (this.getEntityModel()).head.rotationPointZ / 16.0F);
-		float f1 = entity.func_213475_v(partialTicks);
-		stack.rotate(Vector3f.ZP.rotation(f1));
-		stack.rotate(Vector3f.YP.rotationDegrees(netHeadYaw));
-		stack.rotate(Vector3f.XP.rotationDegrees(headPitch));
-		if (entity.isChild()) {
+		stack.translate((this.getParentModel()).head.x / 16.0F, (this.getParentModel()).head.y / 16.0F, (this.getParentModel()).head.z / 16.0F);
+		float f1 = entity.getHeadRollAngle(partialTicks);
+		stack.mulPose(Vector3f.ZP.rotation(f1));
+		stack.mulPose(Vector3f.YP.rotationDegrees(netHeadYaw));
+		stack.mulPose(Vector3f.XP.rotationDegrees(headPitch));
+		if (entity.isBaby()) {
 			if (sleeping) {
 				stack.translate(0.4F, 0.26F, 0.15F);
 			} else {
@@ -43,13 +43,13 @@ public class FennecFoxHeldItemLayer extends LayerRenderer<FennecFoxEntity, Fenne
 			stack.translate(0.06F, 0.27F, -0.5D);
 		}
 
-		stack.rotate(Vector3f.XP.rotationDegrees(90.0F));
+		stack.mulPose(Vector3f.XP.rotationDegrees(90.0F));
 		if (sleeping) {
-			stack.rotate(Vector3f.ZP.rotationDegrees(90.0F));
+			stack.mulPose(Vector3f.ZP.rotationDegrees(90.0F));
 		}
 
-		ItemStack itemstack = entity.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
-		Minecraft.getInstance().getFirstPersonRenderer().renderItemSide(entity, itemstack, ItemCameraTransforms.TransformType.GROUND, false, stack, buffer, packedLight);
-		stack.pop();
+		ItemStack itemstack = entity.getItemBySlot(EquipmentSlotType.MAINHAND);
+		Minecraft.getInstance().getItemInHandRenderer().renderItem(entity, itemstack, ItemCameraTransforms.TransformType.GROUND, false, stack, buffer, packedLight);
+		stack.popPose();
 	}
 }

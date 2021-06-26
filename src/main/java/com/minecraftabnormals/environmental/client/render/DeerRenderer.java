@@ -22,7 +22,7 @@ public class DeerRenderer extends MobRenderer<DeerEntity, DeerModel<DeerEntity>>
 	}
 
 	@Override
-	public ResourceLocation getEntityTexture(DeerEntity entity) {
+	public ResourceLocation getTextureLocation(DeerEntity entity) {
 		DeerCoatColors coatType = DeerCoatColors.byId(entity.getCoatColor());
 		return new ResourceLocation(Environmental.MOD_ID, "textures/entity/deer/" + coatType.name().toLowerCase(Locale.ROOT) + ".png");
 	}
