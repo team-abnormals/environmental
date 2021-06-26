@@ -443,6 +443,10 @@
 	
 	"subtitles.environmental.entity.koi.flop": "Koi flops",
 
+	"subtitles.environmental.entity.deer.ambient": "Deer bleats",
+	"subtitles.environmental.entity.deer.death": "Deer dies",
+	"subtitles.environmental.entity.deer.hurt": "Deer hurts",
+
 	"subtitles.environmental.entity.duck.ambient": "Duck quacks",
 	"subtitles.environmental.entity.duck.death": "Duck dies",
 	"subtitles.environmental.entity.duck.egg": "Duck plops",

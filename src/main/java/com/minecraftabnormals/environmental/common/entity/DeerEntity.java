@@ -4,6 +4,7 @@ import com.minecraftabnormals.environmental.common.entity.util.DeerCoatColors;
 import com.minecraftabnormals.environmental.common.entity.util.DeerCoatTypes;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalTags;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEntities;
+import com.minecraftabnormals.environmental.core.registry.EnvironmentalSounds;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DoublePlantBlock;
 import net.minecraft.entity.*;
@@ -169,17 +170,21 @@ public class DeerEntity extends AnimalEntity {
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return SoundEvents.ENTITY_FOX_AMBIENT;
+		return EnvironmentalSounds.ENTITY_DEER_AMBIENT.get();
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundEvents.ENTITY_FOX_HURT;
+		return EnvironmentalSounds.ENTITY_DEER_HURT.get();
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return SoundEvents.ENTITY_FOX_DEATH;
+		return EnvironmentalSounds.ENTITY_DEER_DEATH.get();
+	}
+
+	protected void playStepSound(BlockPos pos, BlockState blockIn) {
+		this.playSound(EnvironmentalSounds.ENTITY_DEER_STEP.get(), 0.15F, 1.0F);
 	}
 
 	private void setCoatColor(int id) {

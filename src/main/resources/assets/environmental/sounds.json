@@ -115,6 +115,53 @@
     ],
     "subtitle": "subtitles.environmental.entity.koi.flop"
   },
+  "entity.deer.ambient": {
+    "sounds": [
+      {
+        "name": "environmental:mob/deer/say1",
+        "volume": 0.3
+      },
+      {
+        "name": "environmental:mob/deer/say2",
+        "volume": 0.3
+      }
+    ],
+    "subtitle": "subtitles.environmental.entity.deer.ambient"
+  },
+  "entity.deer.death": {
+    "sounds": [
+      {
+        "name": "environmental:mob/deer/hurt1",
+        "volume": 0.3
+      },
+      {
+        "name": "environmental:mob/deer/hurt2",
+        "volume": 0.3
+      },
+      {
+        "name": "environmental:mob/deer/hurt3",
+        "volume": 0.3
+      }
+    ],
+    "subtitle": "subtitles.environmental.entity.deer.death"
+  },
+  "entity.deer.hurt": {
+    "sounds": [
+      {
+        "name": "environmental:mob/deer/hurt1",
+        "volume": 0.3
+      },
+      {
+        "name": "environmental:mob/deer/hurt2",
+        "volume": 0.3
+      },
+      {
+        "name": "environmental:mob/deer/hurt3",
+        "volume": 0.3
+      }
+    ],
+    "subtitle": "subtitles.environmental.entity.deer.hurt"
+  },
   "entity.duck.ambient": {
     "sounds": [
       "environmental:mob/duck/say1",
