@@ -44,8 +44,8 @@ public class EnvironmentalVillagers {
 		registerVillagerType(createType("forest"), Biomes.FOREST, Biomes.WOODED_HILLS, Biomes.BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS, Biomes.TALL_BIRCH_FOREST, Biomes.TALL_BIRCH_HILLS);
 		registerVillagerType(createType("marsh"), EnvironmentalBiomes.MARSH.getKey(), EnvironmentalBiomes.MUSHROOM_MARSH.getKey());
 
-		GiveHeroGiftsTask.gifts.put(CERAMIST.get(), new ResourceLocation(Environmental.MOD_ID, "gameplay/hero_of_the_village/ceramist_gift"));
-		GiveHeroGiftsTask.gifts.put(CARPENTER.get(), new ResourceLocation(Environmental.MOD_ID, "gameplay/hero_of_the_village/carpenter_gift"));
+		DataUtil.registerVillagerGift(CERAMIST.get());
+		DataUtil.registerVillagerGift(CARPENTER.get());
 
 		setupVillagerHouses();
 	}
@@ -58,15 +58,6 @@ public class EnvironmentalVillagers {
 	private static void registerVillagerType(VillagerType type, RegistryKey<Biome>... biomes) {
 		for (RegistryKey<Biome> biome : biomes) {
 			VillagerType.BY_BIOME.put(biome, type);
-		}
-	}
-
-	public static void registerPOIs() {
-		try {
-			ObfuscationReflectionHelper.findMethod(PointOfInterestType.class, "registerBlockStates", PointOfInterestType.class).invoke(null, KILN.get());
-			ObfuscationReflectionHelper.findMethod(PointOfInterestType.class, "registerBlockStates", PointOfInterestType.class).invoke(null, SAWMILL.get());
-		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			throw new RuntimeException(e);
 		}
 	}
 
