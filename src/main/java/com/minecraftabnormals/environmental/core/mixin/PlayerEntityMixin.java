@@ -26,7 +26,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 		if (l > 0 && this.isOnGround()) {
 			ItemStack stack = this.getItemBySlot(EquipmentSlotType.FEET);
 			if (stack.getItem() instanceof WandererBootsItem) {
-				((WandererBootsItem) stack.getItem()).levelUp(stack, this);
+				((WandererBootsItem) stack.getItem()).levelUp(stack, this, l);
 			}
 		}
 	}

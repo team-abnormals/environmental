@@ -13,6 +13,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
@@ -20,8 +21,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 import java.util.UUID;
-
-import net.minecraft.item.Item.Properties;
 
 @EventBusSubscriber(modid = Environmental.MOD_ID)
 public class WandererBootsItem extends ExplorerArmorItem {
@@ -56,6 +55,13 @@ public class WandererBootsItem extends ExplorerArmorItem {
 			event.setDamageMultiplier(0);
 	}
 
+	public float getIncreaseForUses(float uses) {
+		int increase = 0;
+		for (int level : this.getLevelCaps())
+			if (uses >= level) increase += 1;
+		return increase;
+	}
+
 	@Override
 	public String getUsesTag() {
 		return NBT_TAG;
@@ -66,8 +72,16 @@ public class WandererBootsItem extends ExplorerArmorItem {
 		return new int[]{0, 1000, 5000, 10000, 50000};
 	}
 
-	@Override
-	public int levelUp(ItemStack stack, LivingEntity entity) {
-		return super.levelUp(stack, entity, true);
+	public float levelUp(ItemStack stack, LivingEntity entity, float increase) {
+		CompoundNBT tag = stack.getOrCreateTag();
+		float uses = tag.getFloat(this.getUsesTag());
+		float level = this.getIncreaseForUses(uses);
+
+		tag.putFloat(this.getUsesTag(), uses + increase);
+
+		float newLevel = this.getIncreaseForUses(uses + increase);
+		if (newLevel > level) this.playEffects(newLevel, entity);
+
+		return newLevel;
 	}
 }

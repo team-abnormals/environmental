@@ -66,12 +66,6 @@ public class WandererBootsModel<T extends LivingEntity> extends BipedModel<T> {
 		return ImmutableList.of(this.leftBoot, this.rightBoot);
 	}
 
-	public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-		modelRenderer.xRot = x;
-		modelRenderer.yRot = y;
-		modelRenderer.zRot = z;
-	}
-
 	@SuppressWarnings("unchecked")
 	public static <A extends BipedModel<?>> A get(float modelSize) {
 		return (A) MODEL_CACHE.computeIfAbsent(modelSize, WandererBootsModel::new);
