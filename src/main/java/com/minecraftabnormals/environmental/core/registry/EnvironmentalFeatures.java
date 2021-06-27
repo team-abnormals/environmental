@@ -121,7 +121,6 @@ public class EnvironmentalFeatures {
 
 		public static final BaseTreeFeatureConfig CHERRY_TREE_CONFIG = (new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(States.CHERRY_LOG), new SimpleBlockStateProvider(States.CHERRY_LEAVES), new FancyFoliagePlacer(FeatureSpread.fixed(0), FeatureSpread.fixed(0), 0), new FancyTrunkPlacer(0, 0, 0), new TwoLayerFeature(0, 0, 0, OptionalInt.of(0)))).ignoreVines().heightmap(Heightmap.Type.MOTION_BLOCKING).build();
 		public static final BaseTreeFeatureConfig CHERRY_TREE_WITH_FEW_BEEHIVES_CONFIG = CHERRY_TREE_CONFIG.withDecorators(ImmutableList.of(Features.Placements.BEEHIVE_0002));
-		public static final BaseTreeFeatureConfig CHERRY_TREE_WITH_BEEHIVES_CONFIG = CHERRY_TREE_CONFIG.withDecorators(ImmutableList.of(Features.Placements.BEEHIVE_002));
 		public static final BaseTreeFeatureConfig CHERRY_TREE_WITH_MORE_BEEHIVES_CONFIG = CHERRY_TREE_CONFIG.withDecorators(ImmutableList.of(Features.Placements.BEEHIVE_005));
 
 		public static final BaseTreeFeatureConfig BLUE_WISTERIA_TREE_CONFIG = (new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(States.WISTERIA_LOG), new SimpleBlockStateProvider(States.BLUE_WISTERIA_LEAVES), new BlobFoliagePlacer(FeatureSpread.fixed(0), FeatureSpread.fixed(0), 0), new StraightTrunkPlacer(0, 0, 0), new TwoLayerFeature(0, 0, 0))).maxWaterDepth(1).build();
@@ -146,176 +145,91 @@ public class EnvironmentalFeatures {
 	}
 
 	public static final class Configured {
-		public static final ConfiguredFeature<?, ?> PATCH_GRASS_MARSH = Feature.RANDOM_PATCH.configured(Features.Configs.DEFAULT_GRASS_CONFIG).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count(5));
-		public static final ConfiguredFeature<?, ?> PATCH_WATERLILLY_MARSH = Feature.RANDOM_PATCH.configured(Configs.LILY_PAD_CONFIG).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count(1));
-		public static final ConfiguredFeature<?, ?> PATCH_TALL_GRASS_MARSH = Feature.RANDOM_PATCH.configured(Features.Configs.TALL_GRASS_CONFIG).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count(128));
-		public static final ConfiguredFeature<?, ?> PATCH_DUCKWEED_SWAMP = Feature.RANDOM_PATCH.configured(Configs.DUCKWEED_CONFIG).decorated(Features.Placements.HEIGHTMAP_SQUARE).decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(0, 0.15F, 1)));
-		public static final ConfiguredFeature<?, ?> PATCH_DUCKWEED_MARSH = Feature.RANDOM_PATCH.configured(Configs.DUCKWEED_CONFIG).decorated(Features.Placements.HEIGHTMAP_SQUARE).decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(0, 0.15F, 1)));
-		public static final ConfiguredFeature<?, ?> PATCH_MYCELIUM_SPROUTS = Feature.RANDOM_PATCH.configured(Configs.MYCELIUM_SPROUTS_CONFIG).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count(5));
-		public static final ConfiguredFeature<?, ?> PATCH_CATTAILS_DENSE = EnvironmentalFeatures.DENSE_CATTAILS.get().configured(new NoFeatureConfig()).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count((8)));
-		public static final ConfiguredFeature<?, ?> PATCH_CATTAILS = EnvironmentalFeatures.CATTAILS.get().configured(new NoFeatureConfig()).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count((12)));
-		public static final ConfiguredFeature<?, ?> PATCH_TALL_DEAD_BUSH = Feature.RANDOM_PATCH.configured(Configs.TALL_DEAD_BUSH_CONFIG).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count((1)));
-		public static final ConfiguredFeature<?, ?> PATCH_TALL_DEAD_BUSH_MESA = Feature.RANDOM_PATCH.configured(Configs.TALL_DEAD_BUSH_CONFIG).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count((6)));
-		public static final ConfiguredFeature<?, ?> PATCH_GIANT_TALL_GRASS_PLAINS = Feature.RANDOM_PATCH.configured(Configs.GIANT_TALL_GRASS_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(1);
-		public static final ConfiguredFeature<?, ?> PATCH_GIANT_TALL_GRASS_SAVANNA = Feature.RANDOM_PATCH.configured(Configs.GIANT_TALL_GRASS_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(3);
-		public static final ConfiguredFeature<?, ?> PATCH_GIANT_TALL_GRASS_JUNGLE = Feature.RANDOM_PATCH.configured(Configs.GIANT_TALL_GRASS_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(4);
-		public static final ConfiguredFeature<?, ?> PATCH_GIANT_TALL_GRASS_MARSH = Feature.RANDOM_PATCH.configured(Configs.GIANT_TALL_GRASS_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(65);
-		public static final ConfiguredFeature<?, ?> PATCH_SUGAR_CANE_BLOSSOM = Feature.RANDOM_PATCH.configured(Features.Configs.SUGAR_CANE_CONFIG).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count(12));
-		public static final ConfiguredFeature<?, ?> PATCH_GRASS_BLOSSOM_WOODS = Feature.RANDOM_PATCH.configured(Features.Configs.DEFAULT_GRASS_CONFIG).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count(8));
-		public static final ConfiguredFeature<?, ?> PATCH_WHITE_DELPHINIUM = Feature.RANDOM_PATCH.configured(Configs.WHITE_DELPHINIUM);
-		public static final ConfiguredFeature<?, ?> PATCH_PINK_DELPHINIUM = Feature.RANDOM_PATCH.configured(Configs.PINK_DELPHINIUM);
-		public static final ConfiguredFeature<?, ?> PATCH_PURPLE_DELPHINIUM = Feature.RANDOM_PATCH.configured(Configs.PURPLE_DELPHINIUM);
-		public static final ConfiguredFeature<?, ?> PATCH_BLUE_DELPHINIUM = Feature.RANDOM_PATCH.configured(Configs.BLUE_DELPHINIUM);
-		public static final ConfiguredFeature<?, ?> PATCH_DELPHINIUMS = Feature.SIMPLE_RANDOM_SELECTOR.configured(new SingleRandomFeature(ImmutableList.of(() -> PATCH_WHITE_DELPHINIUM, () -> PATCH_PINK_DELPHINIUM, () -> PATCH_PURPLE_DELPHINIUM, () -> PATCH_BLUE_DELPHINIUM))).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count(12));
-		public static final ConfiguredFeature<?, ?> PATCH_BIRD_OF_PARADISE = Feature.RANDOM_PATCH.configured(Configs.BIRD_OF_PARADISE_CONFIG).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count(5));
+		public static final ConfiguredFeature<?, ?> PATCH_GRASS_MARSH = register("patch_grass_marsh", Feature.RANDOM_PATCH.configured(Features.Configs.DEFAULT_GRASS_CONFIG).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count(5)));
+		public static final ConfiguredFeature<?, ?> PATCH_WATERLILLY_MARSH = register("patch_waterlilly_marsh", Feature.RANDOM_PATCH.configured(Configs.LILY_PAD_CONFIG).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count(1)));
+		public static final ConfiguredFeature<?, ?> PATCH_TALL_GRASS_MARSH = register("patch_tall_grass_marsh", Feature.RANDOM_PATCH.configured(Features.Configs.TALL_GRASS_CONFIG).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count(128)));
+		public static final ConfiguredFeature<?, ?> PATCH_DUCKWEED_SWAMP = register("patch_duckweed_swamp", Feature.RANDOM_PATCH.configured(Configs.DUCKWEED_CONFIG).decorated(Features.Placements.HEIGHTMAP_SQUARE).decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(0, 0.15F, 1))));
+		public static final ConfiguredFeature<?, ?> PATCH_DUCKWEED_MARSH = register("patch_duckweed_marsh", Feature.RANDOM_PATCH.configured(Configs.DUCKWEED_CONFIG).decorated(Features.Placements.HEIGHTMAP_SQUARE).decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(0, 0.15F, 1))));
+		public static final ConfiguredFeature<?, ?> PATCH_MYCELIUM_SPROUTS = register("patch_mycelium_sprouts", Feature.RANDOM_PATCH.configured(Configs.MYCELIUM_SPROUTS_CONFIG).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count(5)));
+		public static final ConfiguredFeature<?, ?> PATCH_CATTAILS_DENSE = register("patch_cattails", EnvironmentalFeatures.DENSE_CATTAILS.get().configured(new NoFeatureConfig()).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count((8))));
+		public static final ConfiguredFeature<?, ?> PATCH_CATTAILS = register("patch_cattails_dense", EnvironmentalFeatures.CATTAILS.get().configured(new NoFeatureConfig()).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count((12))));
+		public static final ConfiguredFeature<?, ?> PATCH_TALL_DEAD_BUSH = register("patch_tall_dead_bush", Feature.RANDOM_PATCH.configured(Configs.TALL_DEAD_BUSH_CONFIG).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count((1))));
+		public static final ConfiguredFeature<?, ?> PATCH_TALL_DEAD_BUSH_MESA = register("patch_tall_dead_bush_mesa", Feature.RANDOM_PATCH.configured(Configs.TALL_DEAD_BUSH_CONFIG).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count((6))));
+		public static final ConfiguredFeature<?, ?> PATCH_GIANT_TALL_GRASS_PLAINS = register("patch_giant_tall_grass_plains", Feature.RANDOM_PATCH.configured(Configs.GIANT_TALL_GRASS_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(1));
+		public static final ConfiguredFeature<?, ?> PATCH_GIANT_TALL_GRASS_SAVANNA = register("patch_giant_tall_grass_savanna", Feature.RANDOM_PATCH.configured(Configs.GIANT_TALL_GRASS_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(3));
+		public static final ConfiguredFeature<?, ?> PATCH_GIANT_TALL_GRASS_JUNGLE = register("patch_giant_tall_grass_jungle", Feature.RANDOM_PATCH.configured(Configs.GIANT_TALL_GRASS_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(4));
+		public static final ConfiguredFeature<?, ?> PATCH_GIANT_TALL_GRASS_MARSH = register("patch_giant_tall_grass_marsh", Feature.RANDOM_PATCH.configured(Configs.GIANT_TALL_GRASS_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(65));
+		public static final ConfiguredFeature<?, ?> PATCH_SUGAR_CANE_BLOSSOM = register("patch_sugar_cane_blossom", Feature.RANDOM_PATCH.configured(Features.Configs.SUGAR_CANE_CONFIG).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count(12)));
+		public static final ConfiguredFeature<?, ?> PATCH_GRASS_BLOSSOM_WOODS = register("patch_grass_blossom_woods", Feature.RANDOM_PATCH.configured(Features.Configs.DEFAULT_GRASS_CONFIG).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count(8)));
+		public static final ConfiguredFeature<?, ?> PATCH_WHITE_DELPHINIUM = register("patch_white_delphinium", Feature.RANDOM_PATCH.configured(Configs.WHITE_DELPHINIUM));
+		public static final ConfiguredFeature<?, ?> PATCH_PINK_DELPHINIUM = register("patch_pink_delphinium", Feature.RANDOM_PATCH.configured(Configs.PINK_DELPHINIUM));
+		public static final ConfiguredFeature<?, ?> PATCH_PURPLE_DELPHINIUM = register("patch_purple_delphinium", Feature.RANDOM_PATCH.configured(Configs.PURPLE_DELPHINIUM));
+		public static final ConfiguredFeature<?, ?> PATCH_BLUE_DELPHINIUM = register("patch_blue_delphinium", Feature.RANDOM_PATCH.configured(Configs.BLUE_DELPHINIUM));
+		public static final ConfiguredFeature<?, ?> PATCH_DELPHINIUMS = register("patch_delphiniums", Feature.SIMPLE_RANDOM_SELECTOR.configured(new SingleRandomFeature(ImmutableList.of(() -> PATCH_WHITE_DELPHINIUM, () -> PATCH_PINK_DELPHINIUM, () -> PATCH_PURPLE_DELPHINIUM, () -> PATCH_BLUE_DELPHINIUM))).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count(12)));
+		public static final ConfiguredFeature<?, ?> PATCH_BIRD_OF_PARADISE = register("patch_bird_of_paradise", Feature.RANDOM_PATCH.configured(Configs.BIRD_OF_PARADISE_CONFIG).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count(5)));
 
-		public static final ConfiguredFeature<?, ?> FLOWER_BLUE_ORCHID = Feature.FLOWER.configured(Configs.BLUE_ORCHID_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(1);
-		public static final ConfiguredFeature<?, ?> FLOWER_CORNFLOWER = Feature.FLOWER.configured(Configs.CORNFLOWER_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(1);
-		public static final ConfiguredFeature<?, ?> FLOWER_DIANTHUS = Feature.FLOWER.configured(Configs.DIANTHUS_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(3);
-		public static final ConfiguredFeature<?, ?> FLOWER_CARTWHEEL = EnvironmentalFeatures.DIRECTIONAL_FLOWER.get().configured(Configs.CARTWHEEL_CONFIG).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count(5));
-		public static final ConfiguredFeature<?, ?> FLOWER_RED_LOTUS = Feature.FLOWER.configured(Configs.RED_LOTUS_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(3);
-		public static final ConfiguredFeature<?, ?> FLOWER_WHITE_LOTUS = Feature.FLOWER.configured(Configs.WHITE_LOTUS_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(3);
-		public static final ConfiguredFeature<?, ?> FLOWER_ALLIUM = Feature.FLOWER.configured(Configs.ALLIUM_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(3);
-		public static final ConfiguredFeature<?, ?> FLOWER_VIOLET = Feature.FLOWER.configured(Configs.VIOLET_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(4);
-		public static final ConfiguredFeature<?, ?> FLOWER_BLUEBELL = Feature.FLOWER.configured(Configs.BLUEBELL_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(3);
-		public static final ConfiguredFeature<?, ?> FLOWER_YELLOW_HIBISCUS = Feature.FLOWER.configured(Configs.YELLOW_HIBISCUS_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(1);
-		public static final ConfiguredFeature<?, ?> FLOWER_ORANGE_HIBISCUS = Feature.FLOWER.configured(Configs.ORANGE_HIBISCUS_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(1);
-		public static final ConfiguredFeature<?, ?> FLOWER_RED_HIBISCUS = Feature.FLOWER.configured(Configs.RED_HIBISCUS_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(1);
-		public static final ConfiguredFeature<?, ?> FLOWER_PINK_HIBISCUS = Feature.FLOWER.configured(Configs.PINK_HIBISCUS_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(1);
-		public static final ConfiguredFeature<?, ?> FLOWER_MAGENTA_HIBISCUS = Feature.FLOWER.configured(Configs.MAGENTA_HIBISCUS_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(1);
-		public static final ConfiguredFeature<?, ?> FLOWER_PURPLE_HIBISCUS = Feature.FLOWER.configured(Configs.PURPLE_HIBISCUS_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(1);
-		public static final ConfiguredFeature<?, ?> FLOWER_BLOSSOM_WOODS = Feature.FLOWER.configured(Configs.CHERRY_BLOSSOM_FOREST_FLOWER_CONFIG).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count((4)));
-		public static final ConfiguredFeature<?, ?> FLOWER_TALL_BLOSSOM_WOODS = Feature.SIMPLE_RANDOM_SELECTOR.configured(new SingleRandomFeature(ImmutableList.of(() -> Feature.RANDOM_PATCH.configured((new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(Blocks.ROSE_BUSH.defaultBlockState()), new DoublePlantBlockPlacer())).tries(64).noProjection().build()), () -> Feature.RANDOM_PATCH.configured((new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(Blocks.PEONY.defaultBlockState()), new DoublePlantBlockPlacer())).tries(64).noProjection().build()), () -> Feature.RANDOM_PATCH.configured((new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(Blocks.LILAC.defaultBlockState()), new DoublePlantBlockPlacer())).tries(64).noProjection().build())))).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count((6)));
+		public static final ConfiguredFeature<?, ?> FLOWER_BLUE_ORCHID = register("flower_blue_orchid", Feature.FLOWER.configured(Configs.BLUE_ORCHID_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(1));
+		public static final ConfiguredFeature<?, ?> FLOWER_CORNFLOWER = register("flower_cornflower", Feature.FLOWER.configured(Configs.CORNFLOWER_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(1));
+		public static final ConfiguredFeature<?, ?> FLOWER_DIANTHUS = register("flower_dianthus", Feature.FLOWER.configured(Configs.DIANTHUS_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(3));
+		public static final ConfiguredFeature<?, ?> FLOWER_CARTWHEEL = register("flower_cartwheel", EnvironmentalFeatures.DIRECTIONAL_FLOWER.get().configured(Configs.CARTWHEEL_CONFIG).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count(5)));
+		public static final ConfiguredFeature<?, ?> FLOWER_RED_LOTUS = register("flower_red_lotus", Feature.FLOWER.configured(Configs.RED_LOTUS_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(3));
+		public static final ConfiguredFeature<?, ?> FLOWER_WHITE_LOTUS = register("flower_white_lotus", Feature.FLOWER.configured(Configs.WHITE_LOTUS_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(3));
+		public static final ConfiguredFeature<?, ?> FLOWER_ALLIUM = register("flower_allium", Feature.FLOWER.configured(Configs.ALLIUM_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(3));
+		public static final ConfiguredFeature<?, ?> FLOWER_VIOLET = register("flower_violet", Feature.FLOWER.configured(Configs.VIOLET_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(4));
+		public static final ConfiguredFeature<?, ?> FLOWER_BLUEBELL = register("flower_bluebell", Feature.FLOWER.configured(Configs.BLUEBELL_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(3));
+		public static final ConfiguredFeature<?, ?> FLOWER_YELLOW_HIBISCUS = register("flower_yellow_hibiscus", Feature.FLOWER.configured(Configs.YELLOW_HIBISCUS_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(1));
+		public static final ConfiguredFeature<?, ?> FLOWER_ORANGE_HIBISCUS = register("flower_orange_hibiscus", Feature.FLOWER.configured(Configs.ORANGE_HIBISCUS_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(1));
+		public static final ConfiguredFeature<?, ?> FLOWER_RED_HIBISCUS = register("flower_red_hibiscus", Feature.FLOWER.configured(Configs.RED_HIBISCUS_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(1));
+		public static final ConfiguredFeature<?, ?> FLOWER_PINK_HIBISCUS = register("flower_pink_hibiscus", Feature.FLOWER.configured(Configs.PINK_HIBISCUS_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(1));
+		public static final ConfiguredFeature<?, ?> FLOWER_MAGENTA_HIBISCUS = register("flower_magenta_hibiscus", Feature.FLOWER.configured(Configs.MAGENTA_HIBISCUS_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(1));
+		public static final ConfiguredFeature<?, ?> FLOWER_PURPLE_HIBISCUS = register("flower_purple_hibiscus", Feature.FLOWER.configured(Configs.PURPLE_HIBISCUS_CONFIG).decorated(Features.Placements.ADD_32).decorated(Features.Placements.HEIGHTMAP_SQUARE).count(1));
+		public static final ConfiguredFeature<?, ?> FLOWER_BLOSSOM_WOODS = register("flower_blossom_woods", Feature.FLOWER.configured(Configs.CHERRY_BLOSSOM_FOREST_FLOWER_CONFIG).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count((4))));
+		public static final ConfiguredFeature<?, ?> FLOWER_TALL_BLOSSOM_WOODS = register("flower_tall_blossom_woods", Feature.SIMPLE_RANDOM_SELECTOR.configured(new SingleRandomFeature(ImmutableList.of(() -> Feature.RANDOM_PATCH.configured((new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(Blocks.ROSE_BUSH.defaultBlockState()), new DoublePlantBlockPlacer())).tries(64).noProjection().build()), () -> Feature.RANDOM_PATCH.configured((new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(Blocks.PEONY.defaultBlockState()), new DoublePlantBlockPlacer())).tries(64).noProjection().build()), () -> Feature.RANDOM_PATCH.configured((new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(Blocks.LILAC.defaultBlockState()), new DoublePlantBlockPlacer())).tries(64).noProjection().build())))).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count((6))));
 
-		public static final ConfiguredFeature<?, ?> BLUE_WISTERIA_TREE = EnvironmentalFeatures.WISTERIA_TREE.get().configured(Configs.BLUE_WISTERIA_TREE_WITH_BEEHIVES_CONFIG);
-		public static final ConfiguredFeature<?, ?> BLUE_WISTERIA_TREE_BIG = EnvironmentalFeatures.BIG_WISTERIA_TREE.get().configured(Configs.BLUE_WISTERIA_TREE_WITH_BEEHIVES_CONFIG);
-		public static final ConfiguredFeature<?, ?> WHITE_WISTERIA_TREE = EnvironmentalFeatures.WISTERIA_TREE.get().configured(Configs.WHITE_WISTERIA_TREE_WITH_BEEHIVES_CONFIG);
-		public static final ConfiguredFeature<?, ?> WHITE_WISTERIA_TREE_BIG = EnvironmentalFeatures.BIG_WISTERIA_TREE.get().configured(Configs.WHITE_WISTERIA_TREE_WITH_BEEHIVES_CONFIG);
-		public static final ConfiguredFeature<?, ?> PINK_WISTERIA_TREE = EnvironmentalFeatures.WISTERIA_TREE.get().configured(Configs.PINK_WISTERIA_TREE_WITH_BEEHIVES_CONFIG);
-		public static final ConfiguredFeature<?, ?> PINK_WISTERIA_TREE_BIG = EnvironmentalFeatures.BIG_WISTERIA_TREE.get().configured(Configs.PINK_WISTERIA_TREE_WITH_BEEHIVES_CONFIG);
-		public static final ConfiguredFeature<?, ?> PURPLE_WISTERIA_TREE = EnvironmentalFeatures.WISTERIA_TREE.get().configured(Configs.PURPLE_WISTERIA_TREE_WITH_BEEHIVES_CONFIG);
-		public static final ConfiguredFeature<?, ?> PURPLE_WISTERIA_TREE_BIG = EnvironmentalFeatures.BIG_WISTERIA_TREE.get().configured(Configs.PURPLE_WISTERIA_TREE_WITH_BEEHIVES_CONFIG);
-		public static final ConfiguredFeature<?, ?> WISTERIA_TREE = Feature.RANDOM_SELECTOR.configured(new MultipleRandomFeatureConfig(ImmutableList.of(BLUE_WISTERIA_TREE.weighted(0.15F), WHITE_WISTERIA_TREE.weighted(0.15F), PINK_WISTERIA_TREE.weighted(0.15F)), PURPLE_WISTERIA_TREE)).decorated(Features.Placements.HEIGHTMAP_SQUARE).decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(2, 0.0075F, 1)));
-		public static final ConfiguredFeature<?, ?> WISTERIA_TREE_BIG = Feature.RANDOM_SELECTOR.configured(new MultipleRandomFeatureConfig(ImmutableList.of(BLUE_WISTERIA_TREE_BIG.weighted(0.5F), WHITE_WISTERIA_TREE_BIG.weighted(0.5F), PINK_WISTERIA_TREE_BIG.weighted(0.5F)), PURPLE_WISTERIA_TREE_BIG)).decorated(Features.Placements.HEIGHTMAP_SQUARE).decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(1, 0.0075F, 1)));
+		public static final ConfiguredFeature<?, ?> BLUE_WISTERIA_TREE = register("blue_wisteria_tree", EnvironmentalFeatures.WISTERIA_TREE.get().configured(Configs.BLUE_WISTERIA_TREE_WITH_BEEHIVES_CONFIG));
+		public static final ConfiguredFeature<?, ?> BLUE_WISTERIA_TREE_BIG = register("blue_wisteria_tree_big", EnvironmentalFeatures.BIG_WISTERIA_TREE.get().configured(Configs.BLUE_WISTERIA_TREE_WITH_BEEHIVES_CONFIG));
+		public static final ConfiguredFeature<?, ?> WHITE_WISTERIA_TREE = register("white_wisteria_tree", EnvironmentalFeatures.WISTERIA_TREE.get().configured(Configs.WHITE_WISTERIA_TREE_WITH_BEEHIVES_CONFIG));
+		public static final ConfiguredFeature<?, ?> WHITE_WISTERIA_TREE_BIG = register("white_wisteria_tree_big", EnvironmentalFeatures.BIG_WISTERIA_TREE.get().configured(Configs.WHITE_WISTERIA_TREE_WITH_BEEHIVES_CONFIG));
+		public static final ConfiguredFeature<?, ?> PINK_WISTERIA_TREE = register("pink_wisteria_tree", EnvironmentalFeatures.WISTERIA_TREE.get().configured(Configs.PINK_WISTERIA_TREE_WITH_BEEHIVES_CONFIG));
+		public static final ConfiguredFeature<?, ?> PINK_WISTERIA_TREE_BIG = register("pink_wisteria_tree_big", EnvironmentalFeatures.BIG_WISTERIA_TREE.get().configured(Configs.PINK_WISTERIA_TREE_WITH_BEEHIVES_CONFIG));
+		public static final ConfiguredFeature<?, ?> PURPLE_WISTERIA_TREE = register("purple_wisteria_tree", EnvironmentalFeatures.WISTERIA_TREE.get().configured(Configs.PURPLE_WISTERIA_TREE_WITH_BEEHIVES_CONFIG));
+		public static final ConfiguredFeature<?, ?> PURPLE_WISTERIA_TREE_BIG = register("purple_wisteria_tree_big", EnvironmentalFeatures.BIG_WISTERIA_TREE.get().configured(Configs.PURPLE_WISTERIA_TREE_WITH_BEEHIVES_CONFIG));
+		public static final ConfiguredFeature<?, ?> WISTERIA_TREE = register("wisteria_tree", Feature.RANDOM_SELECTOR.configured(new MultipleRandomFeatureConfig(ImmutableList.of(BLUE_WISTERIA_TREE.weighted(0.15F), WHITE_WISTERIA_TREE.weighted(0.15F), PINK_WISTERIA_TREE.weighted(0.15F)), PURPLE_WISTERIA_TREE)).decorated(Features.Placements.HEIGHTMAP_SQUARE).decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(2, 0.0075F, 1))));
+		public static final ConfiguredFeature<?, ?> WISTERIA_TREE_BIG = register("wisteria_tree_big", Feature.RANDOM_SELECTOR.configured(new MultipleRandomFeatureConfig(ImmutableList.of(BLUE_WISTERIA_TREE_BIG.weighted(0.5F), WHITE_WISTERIA_TREE_BIG.weighted(0.5F), PINK_WISTERIA_TREE_BIG.weighted(0.5F)), PURPLE_WISTERIA_TREE_BIG)).decorated(Features.Placements.HEIGHTMAP_SQUARE).decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(1, 0.0075F, 1))));
 
-		public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> CHERRY_TREE = EnvironmentalFeatures.CHERRY_TREE.get().configured(Configs.CHERRY_TREE_CONFIG);
-		public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> CHERRY_TREE_BEES_0002 = EnvironmentalFeatures.CHERRY_TREE.get().configured(Configs.CHERRY_TREE_WITH_FEW_BEEHIVES_CONFIG);
-		public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> CHERRY_TREE_BEES_005 = EnvironmentalFeatures.CHERRY_TREE.get().configured(Configs.CHERRY_TREE_WITH_MORE_BEEHIVES_CONFIG);
+		public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> CHERRY_TREE = register("cherry_tree", EnvironmentalFeatures.CHERRY_TREE.get().configured(Configs.CHERRY_TREE_CONFIG));
+		public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> CHERRY_TREE_BEES_0002 = register("cherry_tree_bees_0002", EnvironmentalFeatures.CHERRY_TREE.get().configured(Configs.CHERRY_TREE_WITH_FEW_BEEHIVES_CONFIG));
+		public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> CHERRY_TREE_BEES_005 = register("cherry_tree_bees_005", EnvironmentalFeatures.CHERRY_TREE.get().configured(Configs.CHERRY_TREE_WITH_MORE_BEEHIVES_CONFIG));
 
-		public static final ConfiguredFeature<?, ?> WILLOW_TREE = Feature.TREE.configured(Configs.WILLOW_TREE_CONFIG).decorated(Features.Placements.HEIGHTMAP_SQUARE).decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(3, 0.1F, 1)));
-		public static final ConfiguredFeature<?, ?> MARSH_OAK = Feature.RANDOM_SELECTOR.configured(new MultipleRandomFeatureConfig(ImmutableList.of(Features.FANCY_OAK.weighted(0.33333334F)), Features.OAK)).decorated(Features.Placements.HEIGHTMAP_SQUARE).decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(0, 0.25F, 1)));
-		public static final ConfiguredFeature<?, ?> SWAMP_OAK = Feature.RANDOM_SELECTOR.configured(new MultipleRandomFeatureConfig(ImmutableList.of(Features.FANCY_OAK.weighted(0.33333334F)), Features.OAK)).decorated(Features.Placements.HEIGHTMAP_SQUARE).decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(0, 0.05F, 1)));
-		public static final ConfiguredFeature<?, ?> CHERRY_TREE_BLOSSOM_WOODS = Feature.RANDOM_SELECTOR.configured(new MultipleRandomFeatureConfig(ImmutableList.of(CHERRY_TREE.weighted(0.1F)), CHERRY_TREE_BEES_0002)).decorated(Features.Placements.HEIGHTMAP_SQUARE).decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(8, 0.1F, 1)));
-		public static final ConfiguredFeature<?, ?> CHERRY_TREE_BLOSSOM_VALLEYS = Feature.RANDOM_SELECTOR.configured(new MultipleRandomFeatureConfig(ImmutableList.of(CHERRY_TREE.weighted(0.1F)), CHERRY_TREE_BEES_005)).decorated(Features.Placements.HEIGHTMAP_SQUARE).decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(0, 0.1F, 1)));
-		public static final ConfiguredFeature<?, ?> BIRCH_TREE_BLOSSOM_WOODS = Features.BIRCH_TALL.decorated(Features.Placements.HEIGHTMAP_SQUARE).decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(1, 0.02F, 2)));
-		public static final ConfiguredFeature<?, ?> BIRCH_TREE_BLOSSOM_VALLEYS = Features.BIRCH_TALL.decorated(Features.Placements.HEIGHTMAP_SQUARE).decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(0, 0.02F, 1)));
-		public static final ConfiguredFeature<?, ?> HUGE_BROWN_MUSHROOM_MARSH = Features.HUGE_BROWN_MUSHROOM.decorated(Features.Placements.HEIGHTMAP_SQUARE).decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(0, 0.32F, 1)));
+		public static final ConfiguredFeature<?, ?> WILLOW_TREE = register("willow_tree", Feature.TREE.configured(Configs.WILLOW_TREE_CONFIG).decorated(Features.Placements.HEIGHTMAP_SQUARE).decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(3, 0.1F, 1))));
+		public static final ConfiguredFeature<?, ?> MARSH_OAK = register("marsh_oak", Feature.RANDOM_SELECTOR.configured(new MultipleRandomFeatureConfig(ImmutableList.of(Features.FANCY_OAK.weighted(0.33333334F)), Features.OAK)).decorated(Features.Placements.HEIGHTMAP_SQUARE).decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(0, 0.25F, 1))));
+		public static final ConfiguredFeature<?, ?> SWAMP_OAK = register("swamp_oak", Feature.RANDOM_SELECTOR.configured(new MultipleRandomFeatureConfig(ImmutableList.of(Features.FANCY_OAK.weighted(0.33333334F)), Features.OAK)).decorated(Features.Placements.HEIGHTMAP_SQUARE).decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(0, 0.05F, 1))));
+		public static final ConfiguredFeature<?, ?> CHERRY_TREE_BLOSSOM_WOODS = register("cherry_tree_blossom_woods", Feature.RANDOM_SELECTOR.configured(new MultipleRandomFeatureConfig(ImmutableList.of(CHERRY_TREE.weighted(0.1F)), CHERRY_TREE_BEES_0002)).decorated(Features.Placements.HEIGHTMAP_SQUARE).decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(8, 0.1F, 1))));
+		public static final ConfiguredFeature<?, ?> CHERRY_TREE_BLOSSOM_VALLEYS = register("cherry_tree_blossom_valleys", Feature.RANDOM_SELECTOR.configured(new MultipleRandomFeatureConfig(ImmutableList.of(CHERRY_TREE.weighted(0.1F)), CHERRY_TREE_BEES_005)).decorated(Features.Placements.HEIGHTMAP_SQUARE).decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(0, 0.1F, 1))));
+		public static final ConfiguredFeature<?, ?> BIRCH_TREE_BLOSSOM_WOODS = register("birch_tree_blossom_woods", Features.BIRCH_TALL.decorated(Features.Placements.HEIGHTMAP_SQUARE).decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(1, 0.02F, 2))));
+		public static final ConfiguredFeature<?, ?> BIRCH_TREE_BLOSSOM_VALLEYS = register("birch_tree_blossom_valleys", Features.BIRCH_TALL.decorated(Features.Placements.HEIGHTMAP_SQUARE).decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(0, 0.02F, 1))));
+		public static final ConfiguredFeature<?, ?> HUGE_BROWN_MUSHROOM_MARSH = register("huge_brown_mushroom_marsh", Features.HUGE_BROWN_MUSHROOM.decorated(Features.Placements.HEIGHTMAP_SQUARE).decorated(Placement.COUNT_EXTRA.configured(new AtSurfaceWithExtraConfig(0, 0.32F, 1))));
 
-		public static final ConfiguredFeature<?, ?> FALLEN_CHERRY_LEAVES_BLOSSOM_WOODS = EnvironmentalFeatures.FALLEN_LEAVES.get().configured(IFeatureConfig.NONE).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count(64));
-		public static final ConfiguredFeature<?, ?> FALLEN_CHERRY_LEAVES_BLOSSOM_VALLEYS = EnvironmentalFeatures.FALLEN_LEAVES.get().configured(IFeatureConfig.NONE).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count(4));
+		public static final ConfiguredFeature<?, ?> FALLEN_CHERRY_LEAVES_BLOSSOM_WOODS = register("fallen_cherry_leaves_blossom_woods", EnvironmentalFeatures.FALLEN_LEAVES.get().configured(IFeatureConfig.NONE).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count(64)));
+		public static final ConfiguredFeature<?, ?> FALLEN_CHERRY_LEAVES_BLOSSOM_VALLEYS = register("fallen_cherry_leaves_blossom_valleys", EnvironmentalFeatures.FALLEN_LEAVES.get().configured(IFeatureConfig.NONE).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count(4)));
 
-		public static final ConfiguredFeature<?, ?> BAMBOO_BLOSSOM_WOODS = Feature.BAMBOO.configured(new ProbabilityConfig(0.0F)).decorated(Features.Placements.HEIGHTMAP_WORLD_SURFACE).squared().decorated(Placement.COUNT_NOISE_BIASED.configured(new TopSolidWithNoiseConfig(11, 5.0D, 0.2D)));
-		public static final ConfiguredFeature<?, ?> BAMBOO_LIGHT_BLOSSOM_WOODS = Feature.BAMBOO.configured(new ProbabilityConfig(0.0F)).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count(20));
-		public static final ConfiguredFeature<?, ?> BAMBOO_BLOSSOM_VALLEYS = Feature.BAMBOO.configured(new ProbabilityConfig(0.0F)).decorated(Features.Placements.HEIGHTMAP_WORLD_SURFACE).squared().decorated(Placement.COUNT_NOISE_BIASED.configured(new TopSolidWithNoiseConfig(2, 5.0D, 0.2D)));
-		public static final ConfiguredFeature<?, ?> BAMBOO_LIGHT_BLOSSOM_VALLEYS = Feature.BAMBOO.configured(new ProbabilityConfig(0.0F)).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count(2));
+		public static final ConfiguredFeature<?, ?> BAMBOO_BLOSSOM_WOODS = register("bamboo_blossom_woods", Feature.BAMBOO.configured(new ProbabilityConfig(0.0F)).decorated(Features.Placements.HEIGHTMAP_WORLD_SURFACE).squared().decorated(Placement.COUNT_NOISE_BIASED.configured(new TopSolidWithNoiseConfig(11, 5.0D, 0.2D))));
+		public static final ConfiguredFeature<?, ?> BAMBOO_LIGHT_BLOSSOM_WOODS = register("bamboo_light_blossom_woods", Feature.BAMBOO.configured(new ProbabilityConfig(0.0F)).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count(20)));
+		public static final ConfiguredFeature<?, ?> BAMBOO_BLOSSOM_VALLEYS = register("bamboo_blossom_valleys", Feature.BAMBOO.configured(new ProbabilityConfig(0.0F)).decorated(Features.Placements.HEIGHTMAP_WORLD_SURFACE).squared().decorated(Placement.COUNT_NOISE_BIASED.configured(new TopSolidWithNoiseConfig(2, 5.0D, 0.2D))));
+		public static final ConfiguredFeature<?, ?> BAMBOO_LIGHT_BLOSSOM_VALLEYS = register("bamboo_light_blossom_valleys", Feature.BAMBOO.configured(new ProbabilityConfig(0.0F)).decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE.count(2)));
 
-		public static final ConfiguredFeature<?, ?> SEAGRASS_MARSH = Feature.SEAGRASS.configured(new ProbabilityConfig(0.6F)).count(128).decorated(Features.Placements.TOP_SOLID_HEIGHTMAP_SQUARE);
-		public static final ConfiguredFeature<?, ?> DISK_MUD = Feature.DISK.configured(new SphereReplaceConfig(States.MUD, FeatureSpread.of(4, 1), 1, ImmutableList.of(Blocks.DIRT.defaultBlockState(), Blocks.GRASS_BLOCK.defaultBlockState(), States.MUD))).decorated(Features.Placements.TOP_SOLID_HEIGHTMAP_SQUARE);
+		public static final ConfiguredFeature<?, ?> SEAGRASS_MARSH = register("seagrass_marsh", Feature.SEAGRASS.configured(new ProbabilityConfig(0.6F)).count(128).decorated(Features.Placements.TOP_SOLID_HEIGHTMAP_SQUARE));
+		public static final ConfiguredFeature<?, ?> DISK_MUD = register("disk_mud", Feature.DISK.configured(new SphereReplaceConfig(States.MUD, FeatureSpread.of(4, 1), 1, ImmutableList.of(Blocks.DIRT.defaultBlockState(), Blocks.GRASS_BLOCK.defaultBlockState(), States.MUD))).decorated(Features.Placements.TOP_SOLID_HEIGHTMAP_SQUARE));
 
-		public static final ConfiguredFeature<?, ?> NEST_CHICKEN = EnvironmentalFeatures.CHICKEN_NEST.get().configured(IFeatureConfig.NONE).decorated(Features.Placements.HEIGHTMAP_DOUBLE.chance(32));
-		public static final ConfiguredFeature<?, ?> NEST_DUCK = EnvironmentalFeatures.DUCK_NEST.get().configured(IFeatureConfig.NONE).decorated(Features.Placements.HEIGHTMAP_DOUBLE.chance(32));
-		public static final ConfiguredFeature<?, ?> NEST_TURKEY = EnvironmentalFeatures.TURKEY_NEST.get().configured(IFeatureConfig.NONE).decorated(Features.Placements.HEIGHTMAP_DOUBLE.chance(32));
+		public static final ConfiguredFeature<?, ?> NEST_CHICKEN = register("nest_chicken", EnvironmentalFeatures.CHICKEN_NEST.get().configured(IFeatureConfig.NONE).decorated(Features.Placements.HEIGHTMAP_DOUBLE.chance(32)));
+		public static final ConfiguredFeature<?, ?> NEST_DUCK = register("nest_duck", EnvironmentalFeatures.DUCK_NEST.get().configured(IFeatureConfig.NONE).decorated(Features.Placements.HEIGHTMAP_DOUBLE.chance(32)));
+		public static final ConfiguredFeature<?, ?> NEST_TURKEY = register("nest_turkey", EnvironmentalFeatures.TURKEY_NEST.get().configured(IFeatureConfig.NONE).decorated(Features.Placements.HEIGHTMAP_DOUBLE.chance(32)));
 
-		public static final ConfiguredFeature<?, ?> SPRING_WATER_MARSH = Feature.SPRING.configured(new LiquidsConfig(Fluids.WATER.defaultFluidState(), true, 4, 1, ImmutableSet.of(Blocks.STONE, Blocks.GRANITE, Blocks.DIORITE, Blocks.ANDESITE))).decorated(Placement.RANGE_BIASED.configured(new TopSolidRangeConfig(8, 8, 256))).squared().count(128);
-		public static final ConfiguredFeature<?, ?> LAKE_WATER_MARSH = Feature.LAKE.configured(new BlockStateFeatureConfig(Blocks.WATER.defaultBlockState())).decorated(Placement.WATER_LAKE.configured(new ChanceConfig(48)));
+		public static final ConfiguredFeature<?, ?> SPRING_WATER_MARSH = register("spring_water_marsh", Feature.SPRING.configured(new LiquidsConfig(Fluids.WATER.defaultFluidState(), true, 4, 1, ImmutableSet.of(Blocks.STONE, Blocks.GRANITE, Blocks.DIORITE, Blocks.ANDESITE))).decorated(Placement.RANGE_BIASED.configured(new TopSolidRangeConfig(8, 8, 256))).squared().count(128));
+		public static final ConfiguredFeature<?, ?> LAKE_WATER_MARSH = register("lake_water_marsh", Feature.LAKE.configured(new BlockStateFeatureConfig(Blocks.WATER.defaultBlockState())).decorated(Placement.WATER_LAKE.configured(new ChanceConfig(48))));
 
-		private static <FC extends IFeatureConfig> void register(String name, ConfiguredFeature<FC, ?> configuredFeature) {
-			Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(Environmental.MOD_ID, name), configuredFeature);
-		}
-
-		public static void registerConfiguredFeatures() {
-			register("patch_grass_marsh", PATCH_GRASS_MARSH);
-			register("patch_waterlilly_marsh", PATCH_WATERLILLY_MARSH);
-			register("patch_tall_grass_marsh", PATCH_TALL_GRASS_MARSH);
-			register("patch_duckweed_swamp", PATCH_DUCKWEED_SWAMP);
-			register("patch_duckweed_marsh", PATCH_DUCKWEED_MARSH);
-			register("patch_mycelium_sprouts", PATCH_MYCELIUM_SPROUTS);
-			register("patch_cattails", PATCH_CATTAILS);
-			register("patch_cattails_dense", PATCH_CATTAILS_DENSE);
-			register("patch_tall_dead_bush", PATCH_TALL_DEAD_BUSH);
-			register("patch_tall_dead_bush_mesa", PATCH_TALL_DEAD_BUSH_MESA);
-			register("patch_giant_tall_grass_plains", PATCH_GIANT_TALL_GRASS_PLAINS);
-			register("patch_giant_tall_grass_savanna", PATCH_GIANT_TALL_GRASS_SAVANNA);
-			register("patch_giant_tall_grass_jungle", PATCH_GIANT_TALL_GRASS_JUNGLE);
-			register("patch_giant_tall_grass_marsh", PATCH_GIANT_TALL_GRASS_MARSH);
-			register("patch_sugar_cane_blossom", PATCH_SUGAR_CANE_BLOSSOM);
-			register("patch_grass_blossom_woods", PATCH_GRASS_BLOSSOM_WOODS);
-			register("patch_white_delphinium", PATCH_WHITE_DELPHINIUM);
-			register("patch_pink_delphinium", PATCH_PINK_DELPHINIUM);
-			register("patch_purple_delphinium", PATCH_PURPLE_DELPHINIUM);
-			register("patch_blue_delphinium", PATCH_BLUE_DELPHINIUM);
-			register("patch_delphiniums", PATCH_DELPHINIUMS);
-			register("patch_bird_of_paradise", PATCH_BIRD_OF_PARADISE);
-
-			register("flower_blue_orchid", FLOWER_BLUE_ORCHID);
-			register("flower_cornflower", FLOWER_CORNFLOWER);
-			register("flower_dianthus", FLOWER_DIANTHUS);
-			register("flower_cartwheel", FLOWER_CARTWHEEL);
-			register("flower_red_lotus", FLOWER_RED_LOTUS);
-			register("flower_white_lotus", FLOWER_WHITE_LOTUS);
-			register("flower_allium", FLOWER_ALLIUM);
-			register("flower_violet", FLOWER_VIOLET);
-			register("flower_bluebell", FLOWER_BLUEBELL);
-			register("flower_yellow_hibiscus", FLOWER_YELLOW_HIBISCUS);
-			register("flower_orange_hibiscus", FLOWER_ORANGE_HIBISCUS);
-			register("flower_red_hibiscus", FLOWER_RED_HIBISCUS);
-			register("flower_pink_hibiscus", FLOWER_PINK_HIBISCUS);
-			register("flower_magenta_hibiscus", FLOWER_MAGENTA_HIBISCUS);
-			register("flower_purple_hibiscus", FLOWER_PURPLE_HIBISCUS);
-			register("flower_blossom_woods", FLOWER_BLOSSOM_WOODS);
-			register("flower_tall_blossom_woods", FLOWER_TALL_BLOSSOM_WOODS);
-
-			register("blue_wisteria_tree", BLUE_WISTERIA_TREE);
-			register("blue_wisteria_tree_big", BLUE_WISTERIA_TREE_BIG);
-			register("white_wisteria_tree", WHITE_WISTERIA_TREE);
-			register("white_wisteria_tree_big", WHITE_WISTERIA_TREE_BIG);
-			register("pink_wisteria_tree", PINK_WISTERIA_TREE);
-			register("pink_wisteria_tree_big", PINK_WISTERIA_TREE_BIG);
-			register("purple_wisteria_tree", PURPLE_WISTERIA_TREE);
-			register("purple_wisteria_tree_big", PURPLE_WISTERIA_TREE_BIG);
-			register("wisteria_tree", WISTERIA_TREE);
-			register("wisteria_tree_big", WISTERIA_TREE_BIG);
-
-			register("cherry_tree", CHERRY_TREE);
-			register("cherry_tree_bees_0002", CHERRY_TREE_BEES_0002);
-			register("cherry_tree_bees_005", CHERRY_TREE_BEES_005);
-
-			register("willow_tree", WILLOW_TREE);
-			register("marsh_oak", MARSH_OAK);
-			register("swamp_oak", SWAMP_OAK);
-			register("cherry_tree_blossom_woods", CHERRY_TREE_BLOSSOM_WOODS);
-			register("cherry_tree_blossom_valleys", CHERRY_TREE_BLOSSOM_VALLEYS);
-			register("birch_tree_blossom_woods", BIRCH_TREE_BLOSSOM_WOODS);
-			register("birch_tree_blossom_valleys", BIRCH_TREE_BLOSSOM_VALLEYS);
-			register("huge_brown_mushroom_marsh", HUGE_BROWN_MUSHROOM_MARSH);
-
-			register("fallen_cherry_leaves_blossom_woods", FALLEN_CHERRY_LEAVES_BLOSSOM_WOODS);
-			register("fallen_cherry_leaves_blossom_valleys", FALLEN_CHERRY_LEAVES_BLOSSOM_VALLEYS);
-
-			register("bamboo_blossom_woods", BAMBOO_BLOSSOM_WOODS);
-			register("bamboo_light_blossom_woods", BAMBOO_LIGHT_BLOSSOM_WOODS);
-			register("bamboo_blossom_valleys", BAMBOO_BLOSSOM_VALLEYS);
-			register("bamboo_light_blossom_valleys", BAMBOO_LIGHT_BLOSSOM_VALLEYS);
-
-			register("seagrass_marsh", SEAGRASS_MARSH);
-			register("disk_mud", DISK_MUD);
-
-			register("nest_chicken", NEST_CHICKEN);
-			register("nest_duck", NEST_DUCK);
-			register("nest_turkey", NEST_TURKEY);
-
-			register("spring_water_marsh", SPRING_WATER_MARSH);
-			register("lake_water_marsh", LAKE_WATER_MARSH);
+		private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> register(String name, ConfiguredFeature<FC, ?> configuredFeature) {
+			return Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(Environmental.MOD_ID, name), configuredFeature);
 		}
 	}
 }
