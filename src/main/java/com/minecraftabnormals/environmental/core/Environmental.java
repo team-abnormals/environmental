@@ -59,6 +59,7 @@ public class Environmental {
 
 		this.setupPlayMessages();
 		this.setupLoginMessages();
+		EnvironmentalDataProcessors.registerTrackedData();
 
 		REGISTRY_HELPER.register(bus);
 		EnvironmentalBlocks.PAINTINGS.register(bus);
@@ -94,9 +95,8 @@ public class Environmental {
 			EnvironmentalBiomes.addBiomesToGeneration();
 			EnvironmentalVillagers.registerVillagerTypes();
 			EnvironmentalVillagers.registerPOIs();
-			EnvironmentalFeatures.Configured.registerConfiguredFeatures();
-			EnvironmentalDataProcessors.registerTrackedData();
 			EnvironmentalEffects.registerBrewingRecipes();
+			EnvironmentalFeatures.Configured.registerConfiguredFeatures();
 		});
 	}
 
