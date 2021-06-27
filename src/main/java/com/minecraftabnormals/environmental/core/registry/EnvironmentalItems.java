@@ -2,6 +2,7 @@ package com.minecraftabnormals.environmental.core.registry;
 
 import com.minecraftabnormals.abnormals_core.common.items.AbnormalsMusicDiscItem;
 import com.minecraftabnormals.abnormals_core.common.items.AbnormalsSpawnEggItem;
+import com.minecraftabnormals.abnormals_core.common.items.FuelItem;
 import com.minecraftabnormals.abnormals_core.core.util.registry.ItemSubRegistryHelper;
 import com.minecraftabnormals.environmental.common.item.*;
 import com.minecraftabnormals.environmental.common.item.explorer.ArchitectBeltItem;
@@ -48,7 +49,7 @@ public class EnvironmentalItems {
 	public static final RegistryObject<Item> MUD_BALL = HELPER.createItem("mud_ball", () -> new MudBallItem(new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
 	public static final RegistryObject<Item> MUD_BRICK = HELPER.createItem("mud_brick", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
 
-	public static final RegistryObject<Item> YAK_HAIR = HELPER.createItem("yak_hair", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
+	public static final RegistryObject<Item> YAK_HAIR = HELPER.createItem("yak_hair", () -> new FuelItem(25, new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
 	public static final RegistryObject<Item> YAK_PANTS = HELPER.createItem("yak_pants", () -> new YakPantsItem(EnvironmentalTiers.Armor.YAK, EquipmentSlotType.LEGS, new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
 
 	public static final RegistryObject<Item> WILLOW_BOAT = HELPER.createBoatItem("willow", EnvironmentalBlocks.WILLOW_PLANKS);
