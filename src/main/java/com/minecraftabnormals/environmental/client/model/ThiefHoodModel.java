@@ -18,55 +18,55 @@ import java.util.Map;
 @OnlyIn(Dist.CLIENT)
 public class ThiefHoodModel<T extends LivingEntity> extends BipedModel<T> {
 	private static final Map<Float, ThiefHoodModel<?>> MODEL_CACHE = new HashMap<>();
-	private final ModelRenderer head;
-	private final ModelRenderer headBack;
-	private final ModelRenderer body;
-	private final ModelRenderer rightArm;
-	private final ModelRenderer leftArm;
+	private final ModelRenderer hood;
+	private final ModelRenderer hoodBack;
+	private final ModelRenderer pauldron;
+	private final ModelRenderer rightShoulder;
+	private final ModelRenderer leftShoulder;
 
 	public ThiefHoodModel(float modelSize) {
 		super(modelSize, 0.0F, 64, 32);
 
-		this.head = new ModelRenderer(this);
-		this.head.setPos(0.0F, 0.0F, 0.0F);
-		this.head.texOffs(0, 0).addBox(-4.5F, -9.5F, -4.5F, 9.0F, 10.0F, 9.0F, 0.0F, false);
+		this.hood = new ModelRenderer(this);
+		this.hood.setPos(0.0F, 0.0F, 0.0F);
+		this.hood.texOffs(0, 0).addBox(-4.5F, -9.5F, -4.5F, 9.0F, 10.0F, 9.0F, 0.0F, false);
 
-		this.headBack = new ModelRenderer(this);
-		this.headBack.setPos(0.0F, 0.0F, 0.0F);
-		this.head.addChild(headBack);
-		this.setRotationAngle(headBack, -0.2618F, 0.0F, 0.0F);
-		this.headBack.texOffs(46, 12).addBox(-3.5F, -10.25F, 1.7247F, 7.0F, 2.0F, 2.0F, 0.0F, false);
+		this.hoodBack = new ModelRenderer(this);
+		this.hoodBack.setPos(0.0F, 0.0F, 0.0F);
+		this.hood.addChild(hoodBack);
+		this.setRotationAngle(hoodBack, -0.2618F, 0.0F, 0.0F);
+		this.hoodBack.texOffs(46, 12).addBox(-3.5F, -10.25F, 1.7247F, 7.0F, 2.0F, 2.0F, 0.0F, false);
 
-		this.body = new ModelRenderer(this);
-		this.body.setPos(0.0F, 0.0F, 0.0F);
-		this.body.texOffs(20, 19).addBox(-4.5F, 0.0F, -2.5F, 9.0F, 8.0F, 5.0F, 0.0F, false);
+		this.pauldron = new ModelRenderer(this);
+		this.pauldron.setPos(0.0F, 0.0F, 0.0F);
+		this.pauldron.texOffs(20, 19).addBox(-4.5F, 0.0F, -2.5F, 9.0F, 8.0F, 5.0F, 0.0F, false);
 
-		this.rightArm = new ModelRenderer(this);
-		this.rightArm.setPos(-5.0F, 0.0F, 0.0F);
-		this.rightArm.texOffs(0, 19).addBox(-3.25F, -2.9F, -2.5F, 5.0F, 8.0F, 5.0F, 0.0F, false);
+		this.rightShoulder = new ModelRenderer(this);
+		this.rightShoulder.setPos(-5.0F, 0.0F, 0.0F);
+		this.rightShoulder.texOffs(0, 19).addBox(-3.25F, -2.9F, -2.5F, 5.0F, 8.0F, 5.0F, 0.0F, false);
 
-		this.leftArm = new ModelRenderer(this);
-		this.leftArm.setPos(5.0F, 0.0F, 0.0F);
-		this.leftArm.texOffs(0, 19).addBox(-1.75F, -2.9F, -2.5F, 5.0F, 8.0F, 5.0F, 0.0F, true);
+		this.leftShoulder = new ModelRenderer(this);
+		this.leftShoulder.setPos(5.0F, 0.0F, 0.0F);
+		this.leftShoulder.texOffs(0, 19).addBox(-1.75F, -2.9F, -2.5F, 5.0F, 8.0F, 5.0F, 0.0F, true);
 	}
 
 	@Override
 	public void renderToBuffer(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-		this.head.copyFrom(this.head);
-		this.rightArm.copyFrom(this.rightArm);
-		this.leftArm.copyFrom(this.leftArm);
-		this.body.copyFrom(this.body);
+		this.hood.copyFrom(this.head);
+		this.rightShoulder.copyFrom(this.rightArm);
+		this.leftShoulder.copyFrom(this.leftArm);
+		this.pauldron.copyFrom(this.body);
 		super.renderToBuffer(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
 	}
 
 	@Override
 	protected Iterable<ModelRenderer> headParts() {
-		return ImmutableList.of(this.head);
+		return ImmutableList.of(this.hood);
 	}
 
 	@Override
 	protected Iterable<ModelRenderer> bodyParts() {
-		return ImmutableList.of(this.body, this.rightArm, this.leftArm);
+		return ImmutableList.of(this.pauldron, this.rightShoulder, this.leftShoulder);
 	}
 
 	public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
