@@ -145,6 +145,16 @@
     ],
     "subtitle": "subtitles.environmental.entity.deer.death"
   },
+  "entity.deer.step": {
+    "sounds": [
+      "mob/sheep/step1",
+      "mob/sheep/step2",
+      "mob/sheep/step3",
+      "mob/sheep/step4",
+      "mob/sheep/step5"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
   "entity.deer.hurt": {
     "sounds": [
       {
