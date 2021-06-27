@@ -443,10 +443,19 @@
 
 	"subtitles.environmental.entity.koi.flop": "Koi aletea",
 
+	"subtitles.environmental.entity.deer.ambient": "Balido de ciervo",
+	"subtitles.environmental.entity.deer.death": "Ciervo muere",
+	"subtitles.environmental.entity.deer.hurt": "Ciervo herido",
+
 	"subtitles.environmental.entity.duck.ambient": "Graznido de pato",
 	"subtitles.environmental.entity.duck.death": "Pato muere",
 	"subtitles.environmental.entity.duck.egg": "Un pato pone un huevo",
 	"subtitles.environmental.entity.duck.hurt": "Pato herido",
+
+	"subtitles.environmental.entity.yak.ambient": "Gruñido de yak",
+	"subtitles.environmental.entity.yak.death": "Yak muere",
+	"subtitles.environmental.entity.yak.hurt": "Yak herido",
+	"subtitles.environmental.entity.yak.milk": "Yak ordeñado",
 
 	"subtitles.environmental.entity.pig.sniff": "Chancho olfatea",
 
@@ -511,6 +520,7 @@
 	"entity.environmental.slabfish.type.bmo": "BMO",
 	"entity.environmental.slabfish.type.ocelot": "WALL-E",
 	"entity.environmental.slabfish.type.eve": "EVA",
+	"entity.environmental.slabfish.type.minion": "Minion",
 
 	"entity.environmental.slabfish.backpack.white": "Mochila blanca",
 	"entity.environmental.slabfish.backpack.orange": "Mochila naranja",
