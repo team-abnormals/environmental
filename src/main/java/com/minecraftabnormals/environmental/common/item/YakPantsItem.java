@@ -12,14 +12,16 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
-import net.minecraft.item.Item.Properties;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 @EventBusSubscriber(modid = Environmental.MOD_ID)
 public class YakPantsItem extends ArmorItem {
 	private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(() -> Items.TURTLE_HELMET);
+	private static final Set<UUID> APPLIED_UUIDS = new HashSet<>();
 
 	public YakPantsItem(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builderIn) {
 		super(materialIn, slot, builderIn);
@@ -30,13 +32,17 @@ public class YakPantsItem extends ArmorItem {
 		LivingEntity entity = event.getEntityLiving();
 		ItemStack legsStack = entity.getItemBySlot(EquipmentSlotType.LEGS);
 		boolean wearingPants = legsStack.getItem() instanceof YakPantsItem;
+
 		if (entity instanceof PlayerEntity) {
+			UUID entityUUID = entity.getUUID();
 			float defaultHeight = 0.6F;
 			float upgradedHeight = 1.1F;
 			if (wearingPants && entity.maxUpStep < upgradedHeight) {
 				entity.maxUpStep = upgradedHeight;
-			} else if (!ModList.get().isLoaded("step") && entity.maxUpStep > defaultHeight) {
+				APPLIED_UUIDS.add(entityUUID);
+			} else if (APPLIED_UUIDS.contains(entityUUID) && entity.maxUpStep > defaultHeight) {
 				entity.maxUpStep = defaultHeight;
+				APPLIED_UUIDS.remove(entityUUID);
 			}
 		}
 
