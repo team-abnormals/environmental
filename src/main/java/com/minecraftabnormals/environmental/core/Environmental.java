@@ -8,6 +8,7 @@ import com.minecraftabnormals.environmental.common.slabfish.condition.SlabfishCo
 import com.minecraftabnormals.environmental.core.other.EnvironmentalCompat;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalDataProcessors;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalDataSerializers;
+import com.minecraftabnormals.environmental.core.other.EnvironmentalPouchEquipping;
 import com.minecraftabnormals.environmental.core.registry.*;
 import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.inventory.container.PlayerContainer;
@@ -89,6 +90,7 @@ public class Environmental {
 
 	private void setupCommon(final FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
+			EnvironmentalPouchEquipping.setupPouchStructures();
 			EnvironmentalCompat.registerCompat();
 			EnvironmentalEntities.registerSpawns();
 			EnvironmentalBiomes.addBiomeTypes();
