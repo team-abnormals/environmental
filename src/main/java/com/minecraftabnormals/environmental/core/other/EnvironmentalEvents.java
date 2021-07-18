@@ -24,6 +24,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.NonTamedTargetGoal;
+import net.minecraft.entity.ai.goal.PrioritizedGoal;
 import net.minecraft.entity.monster.HuskEntity;
 import net.minecraft.entity.monster.SkeletonEntity;
 import net.minecraft.entity.monster.StrayEntity;
@@ -55,7 +56,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.event.entity.EntityEvent.EnteringChunk;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -69,6 +70,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 @EventBusSubscriber(modid = Environmental.MOD_ID)
 public class EnvironmentalEvents {
@@ -335,7 +337,7 @@ public class EnvironmentalEvents {
 	}
 
 	@SubscribeEvent
-	public static void onEnterChunk(EnteringChunk event) {
+	public static void onEntityJoinWorld(EntityJoinWorldEvent event) {
 		Entity entity = event.getEntity();
 		if (entity instanceof IEggLayingEntity && entity instanceof AnimalEntity) {
 			AnimalEntity eggLayer = (AnimalEntity) entity;
@@ -350,8 +352,11 @@ public class EnvironmentalEvents {
 			ocelot.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(ocelot, AnimalEntity.class, 10, false, false, (targetEntity) -> targetEntity.getType() == EnvironmentalEntities.DUCK.get()));
 		} else if (entity instanceof PigEntity) {
 			PigEntity pig = (PigEntity) entity;
-			pig.goalSelector.addGoal(2, new HuntTruffleGoal(pig));
-			pig.goalSelector.addGoal(4, new TemptGoldenCarrotGoal(pig, 1.2D, false, Ingredient.of(Items.GOLDEN_CARROT)));
+			Set<PrioritizedGoal> goals = pig.goalSelector.availableGoals;
+			if (goals.stream().noneMatch((goal) -> goal.getGoal() instanceof HuntTruffleGoal))
+				pig.goalSelector.addGoal(2, new HuntTruffleGoal(pig));
+			if (goals.stream().noneMatch((goal) -> goal.getGoal() instanceof TemptGoldenCarrotGoal))
+				pig.goalSelector.addGoal(4, new TemptGoldenCarrotGoal(pig, 1.2D, false, Ingredient.of(Items.GOLDEN_CARROT)));
 		}
 	}
 
