@@ -20,8 +20,8 @@ public class EnvironmentalFoods {
 	public static final Food SCRAMBLED_EGGS = (new Food.Builder()).nutrition(6).saturationMod(0.6F).build();
 
 	public static final Food TRUFFLE = new Food.Builder().nutrition(4).saturationMod(0.1F).alwaysEat().effect(() -> new EffectInstance(Effects.HEALTH_BOOST, 2400), 1.0F).build();
-	public static final Food TRUFFLE_MASH = new Food.Builder().nutrition(20).saturationMod(0.5F).alwaysEat().effect(() -> new EffectInstance(Effects.HEALTH_BOOST, 6000), 1.0F).effect(() -> new EffectInstance(Effects.DAMAGE_RESISTANCE, 1200), 1.0F).effect(() -> new EffectInstance(Effects.MOVEMENT_SPEED, 1200), 1.0F).build();
-	public static final Food TRUFFLE_PIE = new Food.Builder().nutrition(15).saturationMod(0.6F).alwaysEat().effect(() -> new EffectInstance(Effects.HEALTH_BOOST, 3600), 1.0F).effect(() -> new EffectInstance(Effects.DIG_SPEED, 1200), 1.0F).effect(() -> new EffectInstance(Effects.DAMAGE_BOOST, 1200), 1.0F).effect(() -> new EffectInstance(Effects.ABSORPTION, 1200), 1.0F).build();
+	public static final Food TRUFFLE_MASH = new Food.Builder().nutrition(20).saturationMod(0.5F).alwaysEat().effect(() -> new EffectInstance(Effects.HEALTH_BOOST, 6000), 1.0F).build();
+	public static final Food TRUFFLE_PIE = new Food.Builder().nutrition(15).saturationMod(0.6F).alwaysEat().effect(() -> new EffectInstance(Effects.HEALTH_BOOST, 3600), 1.0F).build();
 
 	public static final Food KOI = new Food.Builder().nutrition(1).saturationMod(0.1F).build();
 }
