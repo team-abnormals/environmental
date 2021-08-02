@@ -1,5 +1,6 @@
 package com.minecraftabnormals.environmental.core;
 
+import com.minecraftabnormals.abnormals_core.core.annotations.ConfigKey;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -9,26 +10,60 @@ import org.apache.commons.lang3.tuple.Pair;
 public class EnvironmentalConfig {
 
 	public static class Common {
+
+		@ConfigKey("generate_giant_mushrooms")
 		public final ConfigValue<Boolean> generateGiantMushrooms;
+
+		@ConfigKey("generate_giant_tall_grass")
 		public final ConfigValue<Boolean> generateGiantTallGrass;
+
+		@ConfigKey("generate_wisteria_trees")
 		public final ConfigValue<Boolean> generateWisteriaTrees;
+
+		@ConfigKey("generate_delphiniums")
 		public final ConfigValue<Boolean> generateDelphiniums;
+
+		@ConfigKey("generate_hibiscus")
 		public final ConfigValue<Boolean> generateHibiscus;
 
+
+		@ConfigKey("marsh_weight")
 		public final ConfigValue<Integer> marshWeight;
+
+		@ConfigKey("mushroom_marsh_weight")
 		public final ConfigValue<Integer> mushroomMarshWeight;
 
+
+		@ConfigKey("blossom_woods_weight")
 		public final ConfigValue<Integer> blossomWoodsWeight;
+
+		@ConfigKey("blossom_hills_weight")
 		public final ConfigValue<Integer> blossomHillsWeight;
+
+		@ConfigKey("blossom_highlands_weight")
 		public final ConfigValue<Integer> blossomHighlandsWeight;
+
+		@ConfigKey("blossom_valleys_weight")
 		public final ConfigValue<Integer> blossomValleysWeight;
 
+
+		@ConfigKey("limit_farm_animal_spawns")
 		public final ConfigValue<Boolean> limitFarmAnimalSpawns;
+
+		@ConfigKey("biome_variants_always_spawn")
 		public final ConfigValue<Boolean> biomeVariantsAlwaysSpawn;
 
+
+		@ConfigKey("koi_only_block_natural_spawns")
 		public final ConfigValue<Boolean> blockOnlyNaturalSpawns;
+
+		@ConfigKey("koi_horizontal_serenity_range")
 		public final ConfigValue<Integer> koiHorizontalSerenityRange;
+
+		@ConfigKey("koi_vertical_serenity_range")
 		public final ConfigValue<Integer> koiVerticalSerenityRange;
+
+		@ConfigKey("koi_give_serenity")
 		public final ConfigValue<Boolean> serenityEffect;
 
 		Common(ForgeConfigSpec.Builder builder) {

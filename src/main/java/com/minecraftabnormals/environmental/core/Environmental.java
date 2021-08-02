@@ -1,5 +1,6 @@
 package com.minecraftabnormals.environmental.core;
 
+import com.minecraftabnormals.abnormals_core.core.util.DataUtil;
 import com.minecraftabnormals.abnormals_core.core.util.registry.RegistryHelper;
 import com.minecraftabnormals.environmental.client.render.SlabfishSpriteUploader;
 import com.minecraftabnormals.environmental.common.network.message.*;
@@ -85,6 +86,7 @@ public class Environmental {
 		});
 
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, EnvironmentalConfig.COMMON_SPEC);
+		DataUtil.registerConfigCondition(Environmental.MOD_ID, EnvironmentalConfig.COMMON);
 	}
 
 	private void setupCommon(final FMLCommonSetupEvent event) {
