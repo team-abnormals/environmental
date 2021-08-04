@@ -70,7 +70,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 import java.util.*;
-import java.util.stream.Stream;
 
 @EventBusSubscriber(modid = Environmental.MOD_ID)
 public class EnvironmentalEvents {

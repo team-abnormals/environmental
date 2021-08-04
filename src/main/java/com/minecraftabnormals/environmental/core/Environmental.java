@@ -76,18 +76,19 @@ public class Environmental {
 		EnvironmentalSlabfishConditions.SLABFISH_CONDITIONS.register(bus);
 		EnvironmentalDataSerializers.SERIALIZERS.register(bus);
 
-		bus.addListener(this::setupCommon);
+		bus.addListener(this::commonSetup);
+		bus.addListener(this::clientSetup);
 		bus.addListener(this::registerRegistries);
+
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
 			SlabfishSpriteUploader.init(bus);
-			bus.addListener(this::setupClient);
 			bus.addListener(this::stitchTextures);
 		});
 
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, EnvironmentalConfig.COMMON_SPEC);
 	}
 
-	private void setupCommon(final FMLCommonSetupEvent event) {
+	private void commonSetup(FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
 			EnvironmentalCompat.registerCompat();
 			EnvironmentalEntities.registerSpawns();
@@ -98,7 +99,7 @@ public class Environmental {
 		});
 	}
 
-	private void setupClient(final FMLClientSetupEvent event) {
+	private void clientSetup(FMLClientSetupEvent event) {
 		EnvironmentalEntities.registerRendering();
 		EnvironmentalCompat.setRenderLayers();
 		event.enqueueWork(() -> {

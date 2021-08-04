@@ -23,8 +23,6 @@ import net.minecraft.world.World;
 
 import java.util.function.Supplier;
 
-import net.minecraft.block.AbstractBlock.Properties;
-
 public class BirdNestBlock extends ContainerBlock {
 	protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 3.0D, 16.0D);
 	public static final IntegerProperty EGGS = IntegerProperty.create("eggs", 1, 6);

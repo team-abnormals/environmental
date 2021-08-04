@@ -15,8 +15,6 @@ import org.spongepowered.asm.mixin.Mixin;
 
 import java.util.Random;
 
-import net.minecraft.block.AbstractBlock.Properties;
-
 @Mixin(LilyPadBlock.class)
 public class LilyPadBlockMixin extends Block implements IGrowable {
 

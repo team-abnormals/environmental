@@ -14,8 +14,6 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 
-import net.minecraft.block.AbstractBlock.Properties;
-
 public class PottedCartwheelBlock extends FlowerPotBlock {
 	public static final DirectionProperty FACING = HorizontalBlock.FACING;
 

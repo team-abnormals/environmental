@@ -11,8 +11,6 @@ import net.minecraft.state.StateContainer;
 
 import java.util.function.Supplier;
 
-import net.minecraft.block.AbstractBlock.Properties;
-
 public class CartwheelBlock extends AbnormalsFlowerBlock {
 	public static final DirectionProperty FACING = HorizontalBlock.FACING;
 

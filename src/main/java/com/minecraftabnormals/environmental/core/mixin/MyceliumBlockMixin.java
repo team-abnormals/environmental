@@ -13,8 +13,6 @@ import org.spongepowered.asm.mixin.Mixin;
 
 import java.util.Random;
 
-import net.minecraft.block.AbstractBlock.Properties;
-
 @Mixin(MyceliumBlock.class)
 public class MyceliumBlockMixin extends SpreadableSnowyDirtBlock implements IGrowable {
 

@@ -8,8 +8,10 @@ license = "https://github.com/team-abnormals/environmental/blob/main/LICENSE.txt
     version = "${file.jarVersion}"
     logoFile = "logo.png"
     itemIcon = "environmental:wanderer_boots"
+    configBackground = "environmental:textures/block/mud.png"
     authors = "Team Abnormals"
-    credits = "bageldotjpg, Farcr, hatsondogs, Jackson, Ocelot, Echolite, and five"
+    credits = "bageldotjpg, Farcr, hatsondogs, Jackson, Ocelot, Echolite, five"
+    displayURL = "https://www.teamabnormals.com/mods/environmental"
     displayName = "Environmental"
     description = '''
     Expanding the environment. New wood, new blocks, new friends.
@@ -25,7 +27,7 @@ license = "https://github.com/team-abnormals/environmental/blob/main/LICENSE.txt
 [[dependencies.environmental]]
     modId = "forge"
     mandatory = true
-    versionRange = "[36.1.0,)"
+    versionRange = "[36.2.0,)"
     ordering = "NONE"
     side = "BOTH"
 

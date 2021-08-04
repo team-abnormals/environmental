@@ -11,8 +11,6 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 
-import net.minecraft.item.Item.Properties;
-
 public class DuckEggItem extends EggItem {
 
 	public DuckEggItem(Properties builder) {

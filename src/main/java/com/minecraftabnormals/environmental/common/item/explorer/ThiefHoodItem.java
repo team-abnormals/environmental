@@ -25,8 +25,6 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 import java.util.UUID;
 
-import net.minecraft.item.Item.Properties;
-
 @EventBusSubscriber(modid = Environmental.MOD_ID)
 public class ThiefHoodItem extends ExplorerArmorItem {
 	private static final String NBT_TAG = "ThiefHoodUses";

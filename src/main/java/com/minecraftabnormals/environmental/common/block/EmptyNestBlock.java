@@ -23,8 +23,6 @@ import net.minecraft.world.World;
 import java.util.Map;
 import java.util.function.Supplier;
 
-import net.minecraft.block.AbstractBlock.Properties;
-
 public class EmptyNestBlock extends Block {
 	protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 3.0D, 16.0D);
 	private final Map<Supplier<? extends Item>, Block> NESTS = Maps.newHashMap();

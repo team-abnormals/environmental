@@ -15,8 +15,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
 
-import net.minecraft.block.AbstractBlock.Properties;
-
 @Mixin(GrassBlock.class)
 public abstract class GrassBlockMixin extends Block {
 
