@@ -55,7 +55,7 @@ public class Environmental {
 
 	public Environmental() {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-		MinecraftForge.EVENT_BUS.register(this);
+		ModLoadingContext context = ModLoadingContext.get();
 
 		this.setupPlayMessages();
 		this.setupLoginMessages();
@@ -75,6 +75,7 @@ public class Environmental {
 		EnvironmentalParticles.PARTICLE_TYPES.register(bus);
 		EnvironmentalSlabfishConditions.SLABFISH_CONDITIONS.register(bus);
 		EnvironmentalDataSerializers.SERIALIZERS.register(bus);
+		MinecraftForge.EVENT_BUS.register(this);
 
 		bus.addListener(this::commonSetup);
 		bus.addListener(this::clientSetup);
@@ -85,7 +86,7 @@ public class Environmental {
 			bus.addListener(this::stitchTextures);
 		});
 
-		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, EnvironmentalConfig.COMMON_SPEC);
+		context.registerConfig(ModConfig.Type.COMMON, EnvironmentalConfig.COMMON_SPEC);
 	}
 
 	private void commonSetup(FMLCommonSetupEvent event) {

@@ -5,12 +5,16 @@ import com.google.common.collect.ImmutableMultimap.Builder;
 import com.google.common.collect.Multimap;
 import com.minecraftabnormals.environmental.client.model.ArchitectBeltModel;
 import com.minecraftabnormals.environmental.core.Environmental;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.renderer.entity.model.BipedModel;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -51,11 +55,14 @@ public class ArchitectBeltItem extends ExplorerArmorItem {
 
 	@SubscribeEvent
 	public static void placeBlockEvent(BlockEvent.EntityPlaceEvent event) {
-		if (event.getEntity() instanceof PlayerEntity) {
-			PlayerEntity player = (PlayerEntity) event.getEntity();
+		Entity entity = event.getEntity();
+		BlockState state = event.getState();
+		if (entity instanceof PlayerEntity && !state.is(Blocks.FROSTED_ICE)) {
+			PlayerEntity player = (PlayerEntity) entity;
 			ItemStack stack = player.getItemBySlot(EquipmentSlotType.LEGS);
-			if (stack.getItem() instanceof ArchitectBeltItem) {
-				((ArchitectBeltItem) stack.getItem()).levelUp(stack, player);
+			Item item = stack.getItem();
+			if (item instanceof ArchitectBeltItem) {
+				((ArchitectBeltItem) item).levelUp(stack, player);
 			}
 		}
 	}

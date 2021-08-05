@@ -9,6 +9,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.Direction.Plane;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldWriter;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.IWorldGenerationReader;
@@ -164,10 +165,10 @@ public class CherryTreeFeature extends Feature<BaseTreeFeatureConfig> {
 
 	private void placeLeafAt(IWorldGenerationReader world, BlockPos pos, Random rand, BaseTreeFeatureConfig config) {
 		if (TreeUtil.isAirOrLeaves(world, pos)) {
-			if (config.leavesProvider.getState(rand, pos).hasProperty(LeavesBlock.DISTANCE)) {
-				TreeUtil.setForcedState(world, pos, config.leavesProvider.getState(rand, pos).setValue(LeavesBlock.DISTANCE, 1));
-			} else {
-				TreeUtil.setForcedState(world, pos, config.leavesProvider.getState(rand, pos));
+			BlockState state = config.leavesProvider.getState(rand, pos);
+			TreeUtil.setForcedState(world, pos, state);
+			if (state.hasProperty(LeavesBlock.DISTANCE)) {
+				LeavesBlock.updateDistance(state, (IWorld) world, pos);
 			}
 		}
 	}

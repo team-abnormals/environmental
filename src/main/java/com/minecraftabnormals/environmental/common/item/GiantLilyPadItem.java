@@ -18,6 +18,8 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.RayTraceContext;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.BlockSnapshot;
+import net.minecraftforge.event.ForgeEventFactory;
 
 public class GiantLilyPadItem extends BlockItem {
 	public GiantLilyPadItem(Item.Properties builder) {
@@ -47,10 +49,10 @@ public class GiantLilyPadItem extends BlockItem {
 				if ((ifluidstate.getType() == Fluids.WATER) && GiantLilyPadBlock.checkPositions(worldIn, blockpos1, this.getBlock().defaultBlockState())) {
 
 					// special case for handling block placement with water lilies
-					net.minecraftforge.common.util.BlockSnapshot blocksnapshot = net.minecraftforge.common.util.BlockSnapshot.create(worldIn.dimension(), worldIn, blockpos1);
+					BlockSnapshot blocksnapshot = BlockSnapshot.create(worldIn.dimension(), worldIn, blockpos1);
 					if (!worldIn.isClientSide())
 						GiantLilyPadBlock.placeAt(worldIn, blockpos1, this.getBlock().defaultBlockState(), 18);
-					if (net.minecraftforge.event.ForgeEventFactory.onBlockPlace(playerIn, blocksnapshot, net.minecraft.util.Direction.UP)) {
+					if (ForgeEventFactory.onBlockPlace(playerIn, blocksnapshot, net.minecraft.util.Direction.UP)) {
 						blocksnapshot.restore(true, false);
 						return ActionResult.fail(itemstack);
 					}
