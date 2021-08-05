@@ -2,6 +2,7 @@ package com.minecraftabnormals.environmental.common.block;
 
 import com.minecraftabnormals.abnormals_core.core.util.item.filling.TargetedItemGroupFiller;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
+import com.minecraftabnormals.environmental.core.registry.EnvironmentalSounds;
 import net.minecraft.block.*;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -109,7 +110,7 @@ public class DoubleCattailBlock extends Block implements IGrowable, IWaterLoggab
 			Random rand = new Random();
 			int j = 1 + rand.nextInt(3);
 			popResource(worldIn, pos, new ItemStack(EnvironmentalBlocks.CATTAIL_SPROUTS.get(), j));
-			worldIn.playSound((PlayerEntity) null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.random.nextFloat() * 0.4F);
+			worldIn.playSound(null, pos, EnvironmentalSounds.CATTAIL_PICK_SEEDS.get(), SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.random.nextFloat() * 0.4F);
 			worldIn.setBlock(pos, state.setValue(AGE, 0), 2);
 			if (state.getValue(HALF) == DoubleBlockHalf.UPPER) {
 				worldIn.setBlock(pos.below(), worldIn.getBlockState(pos.below()).setValue(AGE, 0), 2);
@@ -181,7 +182,7 @@ public class DoubleCattailBlock extends Block implements IGrowable, IWaterLoggab
 			if (player.isCreative()) {
 				removeBottomHalf(worldIn, pos, state, player);
 			} else {
-				dropResources(state, worldIn, pos, (TileEntity) null, player, player.getMainHandItem());
+				dropResources(state, worldIn, pos, null, player, player.getMainHandItem());
 			}
 		}
 		super.playerWillDestroy(worldIn, pos, state, player);

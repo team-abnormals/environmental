@@ -114,7 +114,7 @@ public class KoiEntity extends AbstractFishEntity {
 	}
 
 	public SoundEvent getFlopSound() {
-		return EnvironmentalSounds.ENTITY_KOI_FLOP.get();
+		return EnvironmentalSounds.KOI_FLOP.get();
 	}
 
 	@Override

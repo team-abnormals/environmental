@@ -59,8 +59,8 @@ public class EnvironmentalItems {
 	public static final RegistryObject<Item> CATTAIL_SEEDS = HELPER.createItem("cattail_seeds", () -> new BlockNamedItem(EnvironmentalBlocks.CATTAIL_SPROUTS.get(), new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
 	public static final RegistryObject<Item> DUCKWEED = HELPER.createItem("duckweed", () -> new LilyPadItem(EnvironmentalBlocks.DUCKWEED.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
 
-	public static final RegistryObject<Item> MUSIC_DISC_LEAVING_HOME = HELPER.createItem("music_disc_leaving_home", () -> new AbnormalsMusicDiscItem(6, EnvironmentalSounds.LEAVING_HOME, new Item.Properties().stacksTo(1).tab(ItemGroup.TAB_MISC).rarity(Rarity.RARE)));
-	public static final RegistryObject<Item> MUSIC_DISC_SLABRAVE = HELPER.createItem("music_disc_slabrave", () -> new AbnormalsMusicDiscItem(15, EnvironmentalSounds.SLABRAVE, new Item.Properties().stacksTo(1).tab(ItemGroup.TAB_MISC).rarity(Rarity.RARE)));
+	public static final RegistryObject<Item> MUSIC_DISC_LEAVING_HOME = HELPER.createItem("music_disc_leaving_home", () -> new AbnormalsMusicDiscItem(6, EnvironmentalSounds.MUSIC_DISC_LEAVING_HOME, new Item.Properties().stacksTo(1).tab(ItemGroup.TAB_MISC).rarity(Rarity.RARE)));
+	public static final RegistryObject<Item> MUSIC_DISC_SLABRAVE = HELPER.createItem("music_disc_slabrave", () -> new AbnormalsMusicDiscItem(15, EnvironmentalSounds.MUSIC_DISC_SLABRAVE, new Item.Properties().stacksTo(1).tab(ItemGroup.TAB_MISC).rarity(Rarity.RARE)));
 
 	public static final RegistryObject<Item> LARGE_LILY_PAD = HELPER.createItem("large_lily_pad", () -> new LargeLilyPadItem(new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
 	public static final RegistryObject<Item> GIANT_LILY_PAD = HELPER.createItem("giant_lily_pad", () -> new GiantLilyPadItem(new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));

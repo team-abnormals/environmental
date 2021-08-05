@@ -170,21 +170,21 @@ public class DeerEntity extends AnimalEntity {
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return EnvironmentalSounds.ENTITY_DEER_AMBIENT.get();
+		return EnvironmentalSounds.DEER_AMBIENT.get();
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return EnvironmentalSounds.ENTITY_DEER_HURT.get();
+		return EnvironmentalSounds.DEER_HURT.get();
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return EnvironmentalSounds.ENTITY_DEER_DEATH.get();
+		return EnvironmentalSounds.DEER_DEATH.get();
 	}
 
 	protected void playStepSound(BlockPos pos, BlockState blockIn) {
-		this.playSound(EnvironmentalSounds.ENTITY_DEER_STEP.get(), 0.15F, 1.0F);
+		this.playSound(EnvironmentalSounds.DEER_STEP.get(), 0.15F, 1.0F);
 	}
 
 	private void setCoatColor(int id) {

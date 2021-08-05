@@ -261,7 +261,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
 			if (this.isFood(stack) && this.getHealth() < this.getMaxHealth()) {
 				this.usePlayerItem(player, stack);
-				level.playLocalSound(this.getX(), this.getY(), this.getZ(), EnvironmentalSounds.ENTITY_SLABFISH_EAT.get(), SoundCategory.NEUTRAL, 1F, 1F, true);
+				level.playLocalSound(this.getX(), this.getY(), this.getZ(), EnvironmentalSounds.SLABFISH_EAT.get(), SoundCategory.NEUTRAL, 1F, 1F, true);
 				this.heal(item.getFoodProperties().getNutrition());
 				this.particleCloud(ParticleTypes.COMPOSTER);
 				return ActionResultType.SUCCESS;
@@ -270,7 +270,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 			if (Ingredient.of(EnvironmentalTags.Items.SLABFISH_SNACKS).test(stack)) {
 				stack.finishUsingItem(this.level, this);
 				this.usePlayerItem(player, stack);
-				level.playLocalSound(this.getX(), this.getY(), this.getZ(), EnvironmentalSounds.ENTITY_SLABFISH_EAT.get(), SoundCategory.NEUTRAL, 1F, 1F, true);
+				level.playLocalSound(this.getX(), this.getY(), this.getZ(), EnvironmentalSounds.SLABFISH_EAT.get(), SoundCategory.NEUTRAL, 1F, 1F, true);
 				return ActionResultType.SUCCESS;
 			}
 
@@ -509,29 +509,29 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return EnvironmentalSounds.ENTITY_SLABFISH_HURT.get();
+		return EnvironmentalSounds.SLABFISH_HURT.get();
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return EnvironmentalSounds.ENTITY_SLABFISH_DEATH.get();
+		return EnvironmentalSounds.SLABFISH_DEATH.get();
 	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, BlockState blockIn) {
-		this.playSound(EnvironmentalSounds.ENTITY_SLABFISH_STEP.get(), 0.15F, 1.0F);
+		this.playSound(EnvironmentalSounds.SLABFISH_STEP.get(), 0.15F, 1.0F);
 	}
 
 	protected void playBackpackSound() {
-		this.playSound(EnvironmentalSounds.ENTITY_SLABFISH_BACKPACK.get(), 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+		this.playSound(EnvironmentalSounds.SLABFISH_BACKPACK.get(), 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
 	}
 
 	protected void playSweaterSound() {
-		this.playSound(EnvironmentalSounds.ENTITY_SLABFISH_SWEATER.get(), 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+		this.playSound(EnvironmentalSounds.SLABFISH_SWEATER.get(), 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
 	}
 
 	protected void playBurpSound() {
-		this.playSound(EnvironmentalSounds.ENTITY_SLABFISH_BURP.get(), 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+		this.playSound(EnvironmentalSounds.SLABFISH_BURP.get(), 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
 	}
 
 	private void doParticle(World world, double p_226397_2_, double p_226397_4_, double p_226397_6_, double p_226397_8_, double p_226397_10_, IParticleData p_226397_12_) {
@@ -629,7 +629,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 	}
 
 	public void playTransformSound() {
-		this.playSound(EnvironmentalSounds.ENTITY_SLABFISH_TRANSFORM.get(), 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+		this.playSound(EnvironmentalSounds.SLABFISH_TRANSFORM.get(), 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
 		this.particleCloud(ParticleTypes.CAMPFIRE_COSY_SMOKE);
 	}
 

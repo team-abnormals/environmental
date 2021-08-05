@@ -378,7 +378,7 @@ public class EnvironmentalEvents {
 				if (huntingtime > 0) {
 					data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, huntingtime - 1);
 					if (!world.isClientSide() && data.getValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET) && huntingtime % 30 == 0) {
-						entity.playSound(EnvironmentalSounds.ENTITY_PIG_SNIFF.get(), 1.0F, (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
+						entity.playSound(EnvironmentalSounds.PIG_SNIFF.get(), 1.0F, (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
 					}
 				} else if (huntingtime < 0) {
 					data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, huntingtime + 1);

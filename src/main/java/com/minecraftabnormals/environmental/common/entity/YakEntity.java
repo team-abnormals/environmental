@@ -132,7 +132,7 @@ public class YakEntity extends AnimalEntity implements IForgeShearable, IShearab
 	public ActionResultType mobInteract(PlayerEntity p_230254_1_, Hand p_230254_2_) {
 		ItemStack itemstack = p_230254_1_.getItemInHand(p_230254_2_);
 		if (itemstack.getItem() == Items.BUCKET && !this.isBaby()) {
-			p_230254_1_.playSound(EnvironmentalSounds.ENTITY_YAK_MILK.get(), 1.0F, 1.0F);
+			p_230254_1_.playSound(EnvironmentalSounds.YAK_MILK.get(), 1.0F, 1.0F);
 			ItemStack itemstack1 = DrinkHelper.createFilledResult(itemstack, p_230254_1_, Items.MILK_BUCKET.getDefaultInstance());
 			p_230254_1_.setItemInHand(p_230254_2_, itemstack1);
 			return ActionResultType.sidedSuccess(this.level.isClientSide);
@@ -190,17 +190,17 @@ public class YakEntity extends AnimalEntity implements IForgeShearable, IShearab
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return EnvironmentalSounds.ENTITY_YAK_AMBIENT.get();
+		return EnvironmentalSounds.YAK_AMBIENT.get();
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return EnvironmentalSounds.ENTITY_YAK_HURT.get();
+		return EnvironmentalSounds.YAK_HURT.get();
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return EnvironmentalSounds.ENTITY_YAK_DEATH.get();
+		return EnvironmentalSounds.YAK_DEATH.get();
 	}
 
 	@Override
