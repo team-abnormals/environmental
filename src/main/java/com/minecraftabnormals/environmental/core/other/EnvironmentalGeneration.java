@@ -20,6 +20,7 @@ import net.minecraft.world.gen.treedecorator.LeaveVineTreeDecorator;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.common.world.MobSpawnInfoBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -30,8 +31,8 @@ import java.util.function.Supplier;
 @Mod.EventBusSubscriber(modid = Environmental.MOD_ID)
 public class EnvironmentalGeneration {
 
-	@SubscribeEvent
-	public static void onBiomeLoad(BiomeLoadingEvent event) {
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
+	public static void onEarlyBiomeLoad(BiomeLoadingEvent event) {
 		ResourceLocation biome = event.getName();
 		BiomeGenerationSettingsBuilder generation = event.getGeneration();
 		MobSpawnInfoBuilder spawns = event.getSpawns();
@@ -56,6 +57,13 @@ public class EnvironmentalGeneration {
 			spawns.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(EntityType.PANDA, 80, 1, 2));
 			spawns.addSpawn(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(EnvironmentalEntities.KOI.get(), 12, 1, 3));
 		}
+	}
+
+	@SubscribeEvent
+	public static void onBiomeLoad(BiomeLoadingEvent event) {
+		ResourceLocation biome = event.getName();
+		BiomeGenerationSettingsBuilder generation = event.getGeneration();
+		MobSpawnInfoBuilder spawns = event.getSpawns();
 
 		if (event.getCategory() == Biome.Category.SWAMP)
 			spawns.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(EnvironmentalEntities.SLABFISH.get(), 8, 2, 4));
