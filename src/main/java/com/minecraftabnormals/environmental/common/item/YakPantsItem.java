@@ -36,7 +36,7 @@ public class YakPantsItem extends ArmorItem {
 		if (entity instanceof PlayerEntity) {
 			UUID entityUUID = entity.getUUID();
 			float defaultHeight = 0.6F;
-			float upgradedHeight = 1.1F;
+			float upgradedHeight = 1.0F;
 			if (wearingPants && entity.maxUpStep < upgradedHeight) {
 				entity.maxUpStep = upgradedHeight;
 				APPLIED_UUIDS.add(entityUUID);

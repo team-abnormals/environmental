@@ -60,7 +60,7 @@ public class EnvironmentalConfig {
 			builder.pop();
 
 			builder.push("items");
-			builder.push("healer_pouch");
+			builder.push("healers_pouch");
 			healerPouchStructures = builder.comment("Structures that can spawn mobs wearing a Healer's Pouch").define("Healer's Pouch structures", Lists.newArrayList("minecraft:mineshaft", "minecraft:stronghold"));
 			builder.pop();
 			builder.pop();
