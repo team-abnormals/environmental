@@ -73,7 +73,7 @@
 	"block.environmental.cherry_leaves": "Wiśniowe liście",
 	"block.environmental.vertical_cherry_planks": "Pionowe wiśniowe deski",
 	"block.environmental.cherry_vertical_slab": "Pionowa wiśniowa płyta",
-	"block.environmental.cherry_leaf_carpet": "Warstwa wiśniowych liśći",
+	"block.environmental.cherry_leaf_carpet": "Warstwa wiśniowych liści",
 	"block.environmental.potted_cherry_sapling": "Sadzonka wiśni w doniczce",
 	"block.environmental.cherry_sign": "Wiśniowa tabliczka",
 	"block.environmental.cherry_chest": "Wiśniowa skrzynia",
@@ -459,7 +459,7 @@
 
 	"subtitles.environmental.entity.pig.sniff": "Świnia wącha",
     
-    "subtitles.environmental.item.cattails.pick": "Ożypałka zrzuca nasiona",
+    "subtitles.environmental.item.cattails.pick": "Zrywanie nasion ożypałki",
     
 	"entity.environmental.slabfish.baby": "Mały",
 	
