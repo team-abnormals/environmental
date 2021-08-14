@@ -41,6 +41,8 @@ import net.minecraft.item.Items;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.pathfinding.FlyingPathNavigator;
+import net.minecraft.pathfinding.GroundPathNavigator;
 import net.minecraft.potion.*;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
@@ -354,7 +356,7 @@ public class EnvironmentalEvents {
 			Set<PrioritizedGoal> goals = pig.goalSelector.availableGoals;
 			if (goals.stream().noneMatch((goal) -> goal.getGoal() instanceof HuntTruffleGoal))
 				pig.goalSelector.addGoal(2, new HuntTruffleGoal(pig));
-			if (goals.stream().noneMatch((goal) -> goal.getGoal() instanceof TemptGoldenCarrotGoal))
+			if ((pig.getNavigation() instanceof GroundPathNavigator || pig.getNavigation() instanceof FlyingPathNavigator) && goals.stream().noneMatch((goal) -> goal.getGoal() instanceof TemptGoldenCarrotGoal))
 				pig.goalSelector.addGoal(4, new TemptGoldenCarrotGoal(pig, 1.2D, false, Ingredient.of(Items.GOLDEN_CARROT)));
 		}
 	}
