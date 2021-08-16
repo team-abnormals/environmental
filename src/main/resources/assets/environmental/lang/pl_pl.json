@@ -73,7 +73,7 @@
 	"block.environmental.cherry_leaves": "Wiśniowe liście",
 	"block.environmental.vertical_cherry_planks": "Pionowe wiśniowe deski",
 	"block.environmental.cherry_vertical_slab": "Pionowa wiśniowa płyta",
-	"block.environmental.cherry_leaf_carpet": "Warstwa wiśniowych liśći",
+	"block.environmental.cherry_leaf_carpet": "Warstwa wiśniowych liści",
 	"block.environmental.potted_cherry_sapling": "Sadzonka wiśni w doniczce",
 	"block.environmental.cherry_sign": "Wiśniowa tabliczka",
 	"block.environmental.cherry_chest": "Wiśniowa skrzynia",
@@ -311,13 +311,15 @@
 	"block.environmental.truffle_crate": "Skrzynka trufli",
 		
 	"item.environmental.wanderer_boots": "Buty wędrowca",
+	"item.environmental.wanderer_boots.desc": "bloków pokonano",
 	"item.environmental.architect_belt": "Pas architekta",
+	"item.environmental.architect_belt.desc": "umieszczonych bloków",
 	"item.environmental.healer_pouch": "Sakiewka uzdrowiciela",
+	"item.environmental.healer_pouch.desc": "zastrzyków adrenaliny",
 	"item.environmental.thief_hood": "Kaptur złodzieja",
-	"item.environmental.executioner_cleaver": "Tasak kata",
+	"item.environmental.thief_hood.desc": "zabitych potworów",
 	
 	"item.environmental.slabfish_spawn_egg": "Jajo przyzywające płytoryba",
-	"item.environmental.butterfly_spawn_egg": "Jajo przyzywające motyla",
 	"item.environmental.duck_spawn_egg": "Jajo przyzywające kaczkę",
 	"item.environmental.deer_spawn_egg": "Jajo przyzywające jelenia",
 	"item.environmental.yak_spawn_egg": "Jajo przyzywające jaka",
@@ -342,7 +344,6 @@
 	"item.environmental.koi": "Koi",
 	"item.environmental.slabfish_bucket": "Wiadro z płytorybem",
 	"item.environmental.koi_bucket": "Wiadro z koi",
-	"item.environmental.bottled_butterfly": "Motyl w butelce",
 	
 	"item.environmental.mud_ball": "Kulka błota",
 	"item.environmental.mud_brick": "Błotna cegła",
@@ -353,7 +354,7 @@
 	"item.environmental.apple_pie": "Jabłecznik",
     
     "item.environmental.truffle": "Trufla",
-	"item.environmental.truffle_mash": "Mash z trufli",
+	"item.environmental.truffle_mash": "Papka z trufli",
 	"item.environmental.truffle_pie": "Placek truflowy",
 	
 	"item.environmental.willow_boat": "Wierzbowa łódka",
@@ -368,7 +369,6 @@
   
 	"entity.environmental.slabfish": "Płytoryb",
 	"entity.environmental.duck": "Kaczka",
-	"entity.environmental.butterfly": "Motyl",
 	"entity.environmental.deer": "Jeleń",
 	"entity.environmental.yak": "Jak",
 	"entity.environmental.koi": "Koi",
@@ -442,13 +442,24 @@
 	"subtitles.entity.slabfish.sweater": "Założono sweter",
 	
 	"subtitles.entity.koi.flop": "Koi pluska",
+    
+    "subtitles.environmental.entity.deer.ambient": "Jeleń ryczy",
+	"subtitles.environmental.entity.deer.death": "Jeleń ginie",
+	"subtitles.environmental.entity.deer.hurt": "Jeleń cierpi",
 	
     "subtitles.environmental.entity.duck.ambient": "Kaczka kwacze",
 	"subtitles.environmental.entity.duck.death": "Kaczka ginie",
 	"subtitles.environmental.entity.duck.egg": "Kaczka znosi jajko",
 	"subtitles.environmental.entity.duck.hurt": "Kaczka cierpi",
+    
+    "subtitles.environmental.entity.yak.ambient": "Jak pomrukuje",
+	"subtitles.environmental.entity.yak.death": "Jak ginie",
+	"subtitles.environmental.entity.yak.hurt": "Jak cierpi",
+	"subtitles.environmental.entity.yak.milk": "Dojenie jaka",
 
 	"subtitles.environmental.entity.pig.sniff": "Świnia wącha",
+    
+    "subtitles.environmental.item.cattails.pick": "Zrywanie nasion ożypałki",
     
 	"entity.environmental.slabfish.baby": "Mały",
 	
@@ -511,6 +522,7 @@
 	"entity.environmental.slabfish.type.bmo": "BMO",
 	"entity.environmental.slabfish.type.ocelot": "WALL-E",
 	"entity.environmental.slabfish.type.eve": "EVA",
+	"entity.environmental.slabfish.type.minion": "Minionek",
 	
 	"entity.environmental.slabfish.backpack.white": "Biały plecak",
 	"entity.environmental.slabfish.backpack.orange": "Pomarańczowy plecak",
