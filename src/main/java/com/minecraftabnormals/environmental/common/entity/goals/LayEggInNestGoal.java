@@ -77,10 +77,6 @@ public class LayEggInNestGoal extends MoveToBlockGoal {
 		BlockState blockstate = this.bird.level.getBlockState(pos.above());
 		Block block = blockstate.getBlock();
 
-		if (block instanceof EmptyNestBlock || (block instanceof BirdNestBlock && ((BirdNestBlock) block).getEgg() == this.eggLayer.getEggItem() && blockstate.getValue(BirdNestBlock.EGGS) < 6)) {
-			return true;
-		}
-
-		return false;
+		return block instanceof EmptyNestBlock || (block instanceof BirdNestBlock && ((BirdNestBlock) block).getEgg() == this.eggLayer.getEggItem() && blockstate.getValue(BirdNestBlock.EGGS) < 6);
 	}
 }

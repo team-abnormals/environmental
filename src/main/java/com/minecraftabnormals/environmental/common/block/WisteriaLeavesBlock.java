@@ -102,9 +102,9 @@ public class WisteriaLeavesBlock extends Block implements IForgeShearable {
 				BlockPos blockpos = pos.below();
 				BlockState blockstate = worldIn.getBlockState(blockpos);
 				if (!blockstate.canOcclude() || !blockstate.isFaceSturdy(worldIn, blockpos, Direction.UP)) {
-					double d0 = (double) ((float) pos.getX() + rand.nextFloat());
+					double d0 = (float) pos.getX() + rand.nextFloat();
 					double d1 = (double) pos.getY() - 0.05D;
-					double d2 = (double) ((float) pos.getZ() + rand.nextFloat());
+					double d2 = (float) pos.getZ() + rand.nextFloat();
 					worldIn.addParticle(ParticleTypes.DRIPPING_WATER, d0, d1, d2, 0.0D, 0.0D, 0.0D);
 				}
 			}

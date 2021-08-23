@@ -15,6 +15,6 @@ public interface IEggLayingEntity {
 	Item getEggItem();
 
 	int getNextEggTime(Random rand);
-	
+
 	SoundEvent getEggLayingSound();
 }

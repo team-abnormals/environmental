@@ -10,8 +10,8 @@ import net.minecraftforge.fml.network.NetworkEvent;
 import java.util.function.Supplier;
 
 public class SOpenSlabfishInventoryMessage {
-	private int entityId;
-	private int windowId;
+	private final int entityId;
+	private final int windowId;
 
 	private SOpenSlabfishInventoryMessage(int entityId, int windowId) {
 		this.entityId = entityId;

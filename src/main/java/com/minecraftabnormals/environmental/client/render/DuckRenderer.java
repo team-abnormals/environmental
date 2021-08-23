@@ -26,7 +26,7 @@ public class DuckRenderer extends MobRenderer<DuckEntity, DuckModel<DuckEntity>>
 	@Override
 	protected void setupRotations(DuckEntity entityLiving, MatrixStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
 		if (entityLiving.isInWater())
-			matrixStackIn.translate(0.0D, (double) (MathHelper.cos(ageInTicks * 0.08F) * 0.02F), 0.0D);
+			matrixStackIn.translate(0.0D, MathHelper.cos(ageInTicks * 0.08F) * 0.02F, 0.0D);
 
 		super.setupRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
 	}

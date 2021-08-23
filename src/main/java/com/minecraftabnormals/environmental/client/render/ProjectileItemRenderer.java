@@ -42,7 +42,7 @@ public class ProjectileItemRenderer<T extends Entity & IRendersAsItem> extends E
 		matrixStackIn.scale(this.scale, this.scale, this.scale);
 		matrixStackIn.mulPose(this.entityRenderDispatcher.cameraOrientation());
 		matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(180.0F));
-		this.itemRenderer.renderStatic(((IRendersAsItem) entityIn).getItem(), ItemCameraTransforms.TransformType.GROUND, packedLightIn, OverlayTexture.NO_OVERLAY, matrixStackIn, bufferIn);
+		this.itemRenderer.renderStatic(entityIn.getItem(), ItemCameraTransforms.TransformType.GROUND, packedLightIn, OverlayTexture.NO_OVERLAY, matrixStackIn, bufferIn);
 		matrixStackIn.popPose();
 		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
 	}

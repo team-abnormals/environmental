@@ -29,9 +29,9 @@ public class CherryLeavesBlock extends AbnormalsLeavesBlock {
 		if (rand.nextInt(50) == 0) {
 			BlockPos blockpos = pos.below();
 			if (worldIn.isEmptyBlock(blockpos)) {
-				double d3 = (double) ((float) pos.getX() + rand.nextFloat());
+				double d3 = (float) pos.getX() + rand.nextFloat();
 				double d4 = (double) pos.getY() - 0.05D;
-				double d6 = (double) ((float) pos.getZ() + rand.nextFloat());
+				double d6 = (float) pos.getZ() + rand.nextFloat();
 				worldIn.addParticle(EnvironmentalParticles.CHERRY_BLOSSOM.get(), d3, d4, d6, d0, d1, d2);
 			}
 		}

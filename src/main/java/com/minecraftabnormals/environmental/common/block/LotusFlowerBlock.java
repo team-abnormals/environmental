@@ -13,7 +13,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.Random;
 
 public class LotusFlowerBlock extends AbnormalsFlowerBlock {
-	private Supplier<IParticleData> particle;
+	private final Supplier<IParticleData> particle;
 
 	public LotusFlowerBlock(Supplier<IParticleData> particle, Supplier<Effect> stewEffect, int stewEffectDuration, Properties properties) {
 		super(stewEffect, stewEffectDuration, properties);

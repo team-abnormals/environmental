@@ -45,7 +45,7 @@ public class EnvironmentalItems {
 	public static final RegistryObject<Item> TRUFFLE = HELPER.createItem("truffle", () -> new Item(new Item.Properties().food(EnvironmentalFoods.TRUFFLE).tab(ItemGroup.TAB_FOOD)));
 	public static final RegistryObject<Item> TRUFFLE_MASH = HELPER.createItem("truffle_mash", () -> new SoupItem((new Item.Properties()).stacksTo(1).food(EnvironmentalFoods.TRUFFLE_MASH).tab(ItemGroup.TAB_FOOD)));
 	public static final RegistryObject<Item> TRUFFLE_PIE = HELPER.createItem("truffle_pie", () -> new Item(new Item.Properties().food(EnvironmentalFoods.TRUFFLE_PIE).tab(ItemGroup.TAB_FOOD)));
-	
+
 	public static final RegistryObject<Item> MUD_BALL = HELPER.createItem("mud_ball", () -> new MudBallItem(new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
 	public static final RegistryObject<Item> MUD_BRICK = HELPER.createItem("mud_brick", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
 

@@ -31,7 +31,7 @@ public class KoiRenderer extends MobRenderer<KoiEntity, KoiModel<KoiEntity>> {
 		float f = 4.3F * MathHelper.sin(0.6F * ageInTicks);
 		if (!entityLiving.isInWater()) {
 			matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(f));
-			matrixStackIn.translate((double) 0.1F, (double) 0.1F, (double) -0.1F);
+			matrixStackIn.translate(0.1F, 0.1F, -0.1F);
 			matrixStackIn.mulPose(Vector3f.ZP.rotationDegrees(90.0F));
 		}
 	}

@@ -548,7 +548,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 	private void dropItem(IItemProvider item) {
 		ItemEntity itementity = this.spawnAtLocation(item, 0);
 		if (itementity != null) {
-			itementity.setDeltaMovement(itementity.getDeltaMovement().add((double) ((this.random.nextFloat() - this.random.nextFloat()) * 0.1F), (double) (this.random.nextFloat() * 0.05F), (double) ((this.random.nextFloat() - this.random.nextFloat()) * 0.1F)));
+			itementity.setDeltaMovement(itementity.getDeltaMovement().add((this.random.nextFloat() - this.random.nextFloat()) * 0.1F, this.random.nextFloat() * 0.05F, (this.random.nextFloat() - this.random.nextFloat()) * 0.1F));
 		}
 	}
 

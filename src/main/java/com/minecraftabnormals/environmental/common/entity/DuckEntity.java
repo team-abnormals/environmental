@@ -198,11 +198,10 @@ public class DuckEntity extends AnimalEntity implements IEggLayingEntity {
 	}
 
 	@Override
-	public SoundEvent getEggLayingSound()
-	{
+	public SoundEvent getEggLayingSound() {
 		return EnvironmentalSounds.DUCK_EGG.get();
 	}
-	
+
 	@Override
 	protected void playStepSound(BlockPos pos, BlockState blockIn) {
 		this.playSound(EnvironmentalSounds.DUCK_STEP.get(), 0.15F, 1.0F);

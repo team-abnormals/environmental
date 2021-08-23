@@ -26,7 +26,7 @@ public class DuckSwimGoal extends Goal {
 			if (d1 < -0.02D) {
 				d1 *= 0.3F;
 			} else if (!this.duck.isBaby() && d0 > 0.31D || this.duck.isBaby() && d0 > 0.16) {
-				d1 += (double) (motion.y < (double) 0.12F ? 0.03F : 0.0F);
+				d1 += motion.y < (double) 0.12F ? 0.03F : 0.0F;
 			} else if (d1 < 0.0D) {
 				d1 = 0.0D;
 			}

@@ -93,10 +93,7 @@ public class GiantLilyPadBlock extends BushBlock implements IPlantable {
 			return false;
 		if (!isValidPosAndAir(state.setValue(POSITION, LilyPadPosition.SOUTHWEST), world, pos.relative(Direction.SOUTH).relative(Direction.WEST)))
 			return false;
-		if (!isValidPosAndAir(state.setValue(POSITION, LilyPadPosition.NORTHWEST), world, pos.relative(Direction.NORTH).relative(Direction.WEST)))
-			return false;
-
-		return true;
+		return isValidPosAndAir(state.setValue(POSITION, LilyPadPosition.NORTHWEST), world, pos.relative(Direction.NORTH).relative(Direction.WEST));
 	}
 
 	public static boolean isValidPosAndAir(BlockState state, World world, BlockPos pos) {
@@ -167,7 +164,7 @@ public class GiantLilyPadBlock extends BushBlock implements IPlantable {
 			if (player.isCreative()) {
 				removeEachBlock(worldIn, pos, state, player);
 			} else {
-				dropResources(state, worldIn, pos, (TileEntity) null, player, player.getMainHandItem());
+				dropResources(state, worldIn, pos, null, player, player.getMainHandItem());
 			}
 		}
 		super.playerWillDestroy(worldIn, pos, state, player);
@@ -252,7 +249,7 @@ public class GiantLilyPadBlock extends BushBlock implements IPlantable {
 		return PlantType.WATER;
 	}
 
-	public static enum LilyPadPosition implements IStringSerializable {
+	public enum LilyPadPosition implements IStringSerializable {
 		CENTER("center"),
 		NORTH("north"),
 		NORTHEAST("northeast"),
@@ -265,7 +262,7 @@ public class GiantLilyPadBlock extends BushBlock implements IPlantable {
 
 		private final String heightName;
 
-		private LilyPadPosition(String nameIn) {
+		LilyPadPosition(String nameIn) {
 			this.heightName = nameIn;
 		}
 

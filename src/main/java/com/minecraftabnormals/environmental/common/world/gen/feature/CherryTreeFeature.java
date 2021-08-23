@@ -135,7 +135,7 @@ public class CherryTreeFeature extends Feature<BaseTreeFeatureConfig> {
 				} else {
 					logZ -= rand.nextInt(2);
 				}
-				
+
 			}
 
 			logY += 1;

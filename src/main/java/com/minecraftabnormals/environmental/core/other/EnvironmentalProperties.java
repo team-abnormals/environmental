@@ -85,7 +85,7 @@ public class EnvironmentalProperties {
 	public static final AbstractBlock.Properties GREEN_TERRACOTTA_BRICKS = AbstractBlock.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_GREEN).requiresCorrectToolForDrops().strength(1.25F, 4.2F);
 	public static final AbstractBlock.Properties RED_TERRACOTTA_BRICKS = AbstractBlock.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_RED).requiresCorrectToolForDrops().strength(1.25F, 4.2F);
 	public static final AbstractBlock.Properties BLACK_TERRACOTTA_BRICKS = AbstractBlock.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_BLACK).requiresCorrectToolForDrops().strength(1.25F, 4.2F);
-	
+
 	public static final AbstractBlock.Properties BURIED_TRUFFLE = AbstractBlock.Properties.of(Material.DIRT, MaterialColor.DIRT).harvestTool(ToolType.SHOVEL).strength(0.6F).sound(SoundType.GRAVEL);
 
 	public static AbstractBlock.Properties createLeaves(MaterialColor color) {

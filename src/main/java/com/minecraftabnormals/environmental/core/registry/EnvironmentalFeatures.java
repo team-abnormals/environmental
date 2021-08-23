@@ -1,4 +1,3 @@
-  
 package com.minecraftabnormals.environmental.core.registry;
 
 import com.google.common.collect.ImmutableList;

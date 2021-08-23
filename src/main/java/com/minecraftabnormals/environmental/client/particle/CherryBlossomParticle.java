@@ -31,8 +31,8 @@ public class CherryBlossomParticle extends SpriteTexturedParticle {
 			this.remove();
 		} else {
 			this.move(this.xd, this.yd, this.zd);
-			this.yd -= (double) 0.002F;
-			this.yd = Math.max(this.yd, (double) -0.1F);
+			this.yd -= 0.002F;
+			this.yd = Math.max(this.yd, -0.1F);
 
 			this.oRoll = this.roll;
 			if (!this.onGround) {

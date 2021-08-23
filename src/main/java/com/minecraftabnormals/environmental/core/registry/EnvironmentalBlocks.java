@@ -104,12 +104,12 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> CHICKEN_EGG_CRATE = HELPER.createCompatBlock("quark", "chicken_egg_crate", () -> new Block(Block.Properties.of(Material.WOOD, MaterialColor.TERRACOTTA_WHITE).strength(1.5F).sound(SoundType.WOOD)), ItemGroup.TAB_DECORATIONS);
 	public static final RegistryObject<Block> DUCK_EGG_CRATE = HELPER.createCompatBlock("quark", "duck_egg_crate", () -> new Block(Block.Properties.of(Material.WOOD, MaterialColor.COLOR_LIGHT_BLUE).strength(1.5F).sound(SoundType.WOOD)), ItemGroup.TAB_DECORATIONS);
 	public static final RegistryObject<Block> TURTLE_EGG_CRATE = HELPER.createCompatBlock("quark", "turtle_egg_crate", () -> new Block(Block.Properties.of(Material.WOOD, MaterialColor.SAND).strength(1.5F).sound(SoundType.WOOD)), ItemGroup.TAB_DECORATIONS);
-	
+
 	// Truffle
-	
+
 	public static final RegistryObject<Block> BURIED_TRUFFLE = HELPER.createBlock("buried_truffle", () -> new Block(EnvironmentalProperties.BURIED_TRUFFLE), ItemGroup.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> TRUFFLE_CRATE = HELPER.createCompatBlock("quark", "truffle_crate", () -> new Block(Block.Properties.of(Material.WOOD, MaterialColor.TERRACOTTA_BROWN).strength(1.5F).sound(SoundType.WOOD)), ItemGroup.TAB_DECORATIONS);
-	
+
 	// Decorations //
 
 	public static final RegistryObject<Block> PODZOL_PATH = HELPER.createBlock("podzol_path", () -> new GrassPathBlock(EnvironmentalProperties.PODZOL_PATH), ItemGroup.TAB_DECORATIONS);

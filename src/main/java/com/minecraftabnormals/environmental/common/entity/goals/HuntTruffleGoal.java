@@ -39,8 +39,7 @@ public class HuntTruffleGoal extends Goal {
 			this.runDelay = 20;
 			if (this.data.getValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET)) {
 				return true;
-			}
-			else {
+			} else {
 				return this.data.getValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME) > 0 && this.findTruffle();
 			}
 		}
@@ -59,28 +58,27 @@ public class HuntTruffleGoal extends Goal {
 		int trufflehuntingtime = this.data.getValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME);
 		BlockPos blockpos = this.data.getValue(EnvironmentalDataProcessors.TRUFFLE_POS);
 		Vector3d pigpos = this.pig.position();
-		
+
 		Vector3d vector3d = new Vector3d((blockpos.getX() + 0.5D) - pigpos.x(), 0.0D, (blockpos.getZ() + 0.5D) - pigpos.z()).normalize();
-		
-		this.pig.getLookControl().setLookAt(pigpos.x() + vector3d.x() * this.lookVector.x(), this.pig.getY() - 0.6D + this.lookVector.y(), pigpos.z() + vector3d.z() * this.lookVector.z(), (float)(this.pig.getMaxHeadYRot() + 20), (float)this.pig.getMaxHeadXRot());
-		
+
+		this.pig.getLookControl().setLookAt(pigpos.x() + vector3d.x() * this.lookVector.x(), this.pig.getY() - 0.6D + this.lookVector.y(), pigpos.z() + vector3d.z() * this.lookVector.z(), (float) (this.pig.getMaxHeadYRot() + 20), (float) this.pig.getMaxHeadXRot());
+
 		if (blockpos.closerThan(this.pig.position(), 4.0D)) {
 			if (trufflehuntingtime > 0)
 				this.data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, -800);
-		}
-		else {
+		} else {
 			if (this.lookTimer-- <= 0) {
 				this.lookTimer = 18 + this.pig.getRandom().nextInt(9);
-				this.lookVector = new Vector3d((double)this.pig.getRandom().nextFloat() * 1.2D, (double)this.pig.getRandom().nextFloat() * 0.4D, (double)this.pig.getRandom().nextFloat() * 1.2D);
+				this.lookVector = new Vector3d((double) this.pig.getRandom().nextFloat() * 1.2D, (double) this.pig.getRandom().nextFloat() * 0.4D, (double) this.pig.getRandom().nextFloat() * 1.2D);
 			}
-			
+
 			this.moveToTruffle();
 		}
 	}
 
 	private void moveToTruffle() {
 		BlockPos blockpos = this.data.getValue(EnvironmentalDataProcessors.TRUFFLE_POS);
-		this.pig.getNavigation().moveTo((double)((float)blockpos.getX()) + 0.5D, (double)(blockpos.getY() + 1), (double)((float)blockpos.getZ()) + 0.5D, 1.1D);
+		this.pig.getNavigation().moveTo((double) ((float) blockpos.getX()) + 0.5D, blockpos.getY() + 1, (double) ((float) blockpos.getZ()) + 0.5D, 1.1D);
 	}
 
 	private boolean findTruffle() {
@@ -91,21 +89,20 @@ public class HuntTruffleGoal extends Goal {
 
 		List<BlockPos> truffleblocks = Lists.newArrayList();
 
-		for(int i = 0; i < range; ++i) {
+		for (int i = 0; i < range; ++i) {
 			boolean flag = false;
-			
-			for(int y = -height; y < height; ++y) {
-				for(int x = 0; x <= i; x = x > 0 ? -x : 1 - x) {
-					for(int z = x < i && x > -i ? i : 0; z <= i; z = z > 0 ? -z : 1 - z) {
+
+			for (int y = -height; y < height; ++y) {
+				for (int x = 0; x <= i; x = x > 0 ? -x : 1 - x) {
+					for (int z = x < i && x > -i ? i : 0; z <= i; z = z > 0 ? -z : 1 - z) {
 						blockpos$mutable.setWithOffset(blockpos, x, y - 1, z);
-						
+
 						if (this.pig.isWithinRestriction(blockpos$mutable)) {
 							if (this.isTruffle(this.pig.level, blockpos$mutable)) {
 								this.data.setValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET, true);
 								this.data.setValue(EnvironmentalDataProcessors.TRUFFLE_POS, blockpos$mutable);
 								return true;
-							}
-							else if (this.isSuitableForTruffle(this.pig.level, blockpos$mutable)) {
+							} else if (this.isSuitableForTruffle(this.pig.level, blockpos$mutable)) {
 								if (i <= 48 && !flag) {
 									flag = true;
 									truffleblocks.clear();
@@ -140,7 +137,7 @@ public class HuntTruffleGoal extends Goal {
 		if (worldIn.getBlockState(pos).getBlock() != Blocks.DIRT)
 			return false;
 
-		for(Direction direction : Direction.values()) {
+		for (Direction direction : Direction.values()) {
 			BlockState blockstate = worldIn.getBlockState(pos.relative(direction));
 
 			if (direction == Direction.UP) {
@@ -149,8 +146,7 @@ public class HuntTruffleGoal extends Goal {
 						return false;
 					}
 				}
-			}
-			else if (!blockstate.is(Tags.Blocks.DIRT)) {
+			} else if (!blockstate.is(Tags.Blocks.DIRT)) {
 				return false;
 			}
 		}

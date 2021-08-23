@@ -103,7 +103,7 @@ public class DeerModel<E extends DeerEntity> extends AgeableModel<E> {
 	public void setupAnim(E entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.entity = entity;
 
-		this.head.xRot = headPitch * ((float)Math.PI / 180F);
+		this.head.xRot = headPitch * ((float) Math.PI / 180F);
 		this.head.yRot = netHeadYaw * ((float) Math.PI / 180F);
 		this.leg4.xRot = MathHelper.cos(limbSwing * 0.6662F) * 1.0F * limbSwingAmount;
 		this.leg3.xRot = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.0F * limbSwingAmount;

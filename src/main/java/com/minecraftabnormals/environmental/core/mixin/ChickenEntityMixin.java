@@ -51,7 +51,7 @@ public abstract class ChickenEntityMixin extends AnimalEntity implements IEggLay
 	public int getNextEggTime(Random rand) {
 		return rand.nextInt(6000) + 6000;
 	}
-	
+
 	@Override
 	public SoundEvent getEggLayingSound() {
 		return SoundEvents.CHICKEN_EGG;

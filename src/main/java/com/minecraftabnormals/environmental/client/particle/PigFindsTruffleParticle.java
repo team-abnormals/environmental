@@ -11,9 +11,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class PigFindsTruffleParticle extends SpriteTexturedParticle {
 	private PigFindsTruffleParticle(ClientWorld world, double x, double y, double z) {
 		super(world, x, y, z, 0.0D, 0.0D, 0.0D);
-		this.xd *= (double)0.01F;
-		this.yd *= (double)0.01F;
-		this.zd *= (double)0.01F;
+		this.xd *= 0.01F;
+		this.yd *= 0.01F;
+		this.zd *= 0.01F;
 		this.yd += 0.1D;
 		this.quadSize *= 1.5F;
 		this.lifetime = 16;
@@ -25,7 +25,7 @@ public class PigFindsTruffleParticle extends SpriteTexturedParticle {
 	}
 
 	public float getQuadSize(float scaleFactor) {
-		return this.quadSize * MathHelper.clamp(((float)this.age + scaleFactor) / (float)this.lifetime * 32.0F, 0.0F, 1.0F);
+		return this.quadSize * MathHelper.clamp(((float) this.age + scaleFactor) / (float) this.lifetime * 32.0F, 0.0F, 1.0F);
 	}
 
 	public void tick() {
@@ -41,12 +41,12 @@ public class PigFindsTruffleParticle extends SpriteTexturedParticle {
 				this.zd *= 1.1D;
 			}
 
-			this.xd *= (double)0.86F;
-			this.yd *= (double)0.86F;
-			this.zd *= (double)0.86F;
+			this.xd *= 0.86F;
+			this.yd *= 0.86F;
+			this.zd *= 0.86F;
 			if (this.onGround) {
-				this.xd *= (double)0.7F;
-				this.zd *= (double)0.7F;
+				this.xd *= 0.7F;
+				this.zd *= 0.7F;
 			}
 
 		}

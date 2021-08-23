@@ -12,6 +12,7 @@ public interface IExplorerArmorItem {
 	int getIncreaseForUses(int uses);
 
 	int[] getLevelCaps();
+
 	default int levelUp(ItemStack stack, LivingEntity entity) {
 		CompoundNBT tag = stack.getOrCreateTag();
 		int uses = tag.getInt(this.getUsesTag());

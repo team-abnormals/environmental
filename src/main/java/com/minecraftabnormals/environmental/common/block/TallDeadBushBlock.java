@@ -56,7 +56,7 @@ public class TallDeadBushBlock extends DoublePlantBlock implements net.minecraft
 			if (player.isCreative()) {
 				breakWithoutDrops(worldIn, pos, state, player);
 			} else {
-				dropResources(state, worldIn, pos, (TileEntity) null, player, player.getMainHandItem());
+				dropResources(state, worldIn, pos, null, player, player.getMainHandItem());
 			}
 		}
 		super.playerWillDestroy(worldIn, pos, state, player);

@@ -31,7 +31,8 @@ public class WisteriaTreeUtils {
 	public static boolean isAir(IWorldGenerationBaseReader worldIn, BlockPos pos) {
 		if (!(worldIn instanceof net.minecraft.world.IBlockReader)) // FORGE: Redirect to state method when possible
 			return worldIn.isStateAtPosition(pos, BlockState::isAir);
-		else return worldIn.isStateAtPosition(pos, state -> state.isAir((net.minecraft.world.IBlockReader) worldIn, pos));
+		else
+			return worldIn.isStateAtPosition(pos, state -> state.isAir((net.minecraft.world.IBlockReader) worldIn, pos));
 	}
 
 	public static boolean isLeaves(IWorldGenerationBaseReader worldIn, BlockPos pos) {

@@ -67,7 +67,7 @@ public class SawmillContainer extends Container {
 				worldPos.execute((p_216954_1_, p_216954_2_) -> {
 					long l = p_216954_1_.getGameTime();
 					if (SawmillContainer.this.lastOnTake != l) {
-						p_216954_1_.playSound((PlayerEntity) null, p_216954_2_, SoundEvents.UI_STONECUTTER_TAKE_RESULT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+						p_216954_1_.playSound(null, p_216954_2_, SoundEvents.UI_STONECUTTER_TAKE_RESULT, SoundCategory.BLOCKS, 1.0F, 1.0F);
 						SawmillContainer.this.lastOnTake = l;
 					}
 

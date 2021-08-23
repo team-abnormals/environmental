@@ -315,7 +315,6 @@ public class EnvironmentalGeneration {
 				}
 			}
 		}
-		;
 		spawns.getSpawner(EntityClassification.CREATURE).removeAll(entrysToRemove);
 	}
 }

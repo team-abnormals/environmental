@@ -254,14 +254,14 @@ public class YakEntity extends AnimalEntity implements IForgeShearable, IShearab
 
 	@Override
 	public void shear(SoundCategory category) {
-		this.level.playSound((PlayerEntity) null, this, SoundEvents.SHEEP_SHEAR, category, 1.0F, 1.0F);
+		this.level.playSound(null, this, SoundEvents.SHEEP_SHEAR, category, 1.0F, 1.0F);
 		this.setSheared(true);
 		int i = 4 + this.random.nextInt(12);
 
 		for (int j = 0; j < i; ++j) {
 			ItemEntity itementity = this.spawnAtLocation(EnvironmentalItems.YAK_HAIR.get(), 1);
 			if (itementity != null) {
-				itementity.setDeltaMovement(itementity.getDeltaMovement().add((double) ((this.random.nextFloat() - this.random.nextFloat()) * 0.1F), (double) (this.random.nextFloat() * 0.05F), (double) ((this.random.nextFloat() - this.random.nextFloat()) * 0.1F)));
+				itementity.setDeltaMovement(itementity.getDeltaMovement().add((this.random.nextFloat() - this.random.nextFloat()) * 0.1F, this.random.nextFloat() * 0.05F, (this.random.nextFloat() - this.random.nextFloat()) * 0.1F));
 			}
 		}
 

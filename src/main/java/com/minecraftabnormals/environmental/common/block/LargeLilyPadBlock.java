@@ -75,10 +75,7 @@ public class LargeLilyPadBlock extends BushBlock implements IPlantable {
 			return false;
 		if (!isValidPosAndAir(state.setValue(POSITION, LilyPadPosition.SOUTHEAST), world, pos.relative(Direction.EAST)))
 			return false;
-		if (!isValidPosAndAir(state.setValue(POSITION, LilyPadPosition.NORTHWEST), world, pos.relative(Direction.NORTH)))
-			return false;
-
-		return true;
+		return isValidPosAndAir(state.setValue(POSITION, LilyPadPosition.NORTHWEST), world, pos.relative(Direction.NORTH));
 	}
 
 	public static boolean isValidPosAndAir(BlockState state, World world, BlockPos pos) {
@@ -149,7 +146,7 @@ public class LargeLilyPadBlock extends BushBlock implements IPlantable {
 			if (player.isCreative()) {
 				removeEachBlock(worldIn, pos, state, player);
 			} else {
-				dropResources(state, worldIn, pos, (TileEntity) null, player, player.getMainHandItem());
+				dropResources(state, worldIn, pos, null, player, player.getMainHandItem());
 			}
 		}
 		super.playerWillDestroy(worldIn, pos, state, player);
@@ -218,7 +215,7 @@ public class LargeLilyPadBlock extends BushBlock implements IPlantable {
 
 		private final String heightName;
 
-		private LilyPadPosition(String nameIn) {
+		LilyPadPosition(String nameIn) {
 			this.heightName = nameIn;
 		}
 

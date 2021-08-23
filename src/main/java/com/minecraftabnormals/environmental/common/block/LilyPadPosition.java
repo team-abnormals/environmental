@@ -15,7 +15,7 @@ public enum LilyPadPosition implements IStringSerializable {
 
 	private final String heightName;
 
-	private LilyPadPosition(String nameIn) {
+	LilyPadPosition(String nameIn) {
 		this.heightName = nameIn;
 	}
 

@@ -10,7 +10,7 @@ public enum DeerCoatColors {
 
 	private final int id;
 
-	private DeerCoatColors(int id) {
+	DeerCoatColors(int id) {
 		this.id = id;
 	}
 

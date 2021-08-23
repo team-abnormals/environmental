@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
 import java.util.Random;
 
 public class WisteriaTree extends Tree {
-	private WisteriaColor color;
+	private final WisteriaColor color;
 
 	public WisteriaTree(WisteriaColor colorIn) {
 		color = colorIn;
