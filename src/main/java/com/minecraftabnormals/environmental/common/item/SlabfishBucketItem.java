@@ -59,7 +59,7 @@ public class SlabfishBucketItem extends BucketItem {
 	}
 
 	private void placeEntity(ServerWorld worldIn, ItemStack stack, BlockPos pos) {
-		Entity entity = this.entityType.get().spawn(worldIn, stack, (PlayerEntity) null, pos, SpawnReason.BUCKET, true, false);
+		Entity entity = this.entityType.get().spawn(worldIn, stack, null, pos, SpawnReason.BUCKET, true, false);
 		if (entity != null) {
 			((SlabfishEntity) entity).setFromBucket(true);
 		}

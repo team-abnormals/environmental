@@ -57,7 +57,6 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
@@ -137,7 +136,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
 		this.goalSelector.addGoal(4, new SlabbyBreedGoal(this, 1.0D));
 		this.goalSelector.addGoal(5, new SlabbyGrabItemGoal(this, 1.1D));
-		this.goalSelector.addGoal(6, new TemptGoal(this, 1.0D, false, Ingredient.of(EnvironmentalTags.Items.SLABFISH_TAME_ITEMS)));
+		this.goalSelector.addGoal(6, new TemptGoal(this, 1.0D, false, Ingredient.of(EnvironmentalTags.Items.SLABFISH_FOOD)));
 		this.goalSelector.addGoal(8, new SlabbyFollowParentGoal(this, 1.1D));
 		this.goalSelector.addGoal(9, new RandomWalkingGoal(this, 1.0D));
 		this.goalSelector.addGoal(10, new LookAtGoal(this, PlayerEntity.class, 6.0F));
@@ -205,6 +204,30 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
 		SlabfishManager slabfishManager = SlabfishManager.get(this.level);
 		SlabfishType slabfishType = slabfishManager.getSlabfishType(this.getSlabfishType()).orElse(SlabfishManager.DEFAULT_SLABFISH);
+
+		if (item == Items.WATER_BUCKET && this.isAlive()) {
+			if (this.getAge() < 0) {
+				return ActionResultType.FAIL;
+			}
+			if (this.hasBackpack())
+				this.dropBackpack();
+			this.playSound(SoundEvents.BUCKET_FILL_FISH, 1.0F, 1.0F);
+			stack.shrink(1);
+			ItemStack stack1 = this.getBucket();
+			this.setBucketData(stack1);
+
+			if (!this.level.isClientSide) {
+				CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayerEntity) player, stack1);
+			}
+
+			if (stack.isEmpty()) {
+				player.setItemInHand(hand, stack1);
+			} else if (!player.inventory.add(stack1)) {
+				player.drop(stack1, false);
+			}
+			this.remove();
+			return ActionResultType.SUCCESS;
+		}
 
 		if (this.isTame()) {
 			if (this.hasBackpack() && (slabfishType.getCustomBackpack() == null || !slabfishManager.getBackpackType(slabfishType.getCustomBackpack()).isPresent()) && slabfishManager.getBackpackType(stack).isPresent() && !slabfishManager.getBackpackType(stack).orElse(SlabfishManager.BROWN_BACKPACK).getRegistryName().equals(this.getBackpack())) {
@@ -313,8 +336,7 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 				return ActionResultType.SUCCESS;
 			}
 
-		}
-		if (item.is(EnvironmentalTags.Items.SLABFISH_TAME_ITEMS)) {
+		} else if (item.is(EnvironmentalTags.Items.SLABFISH_TAME_ITEMS)) {
 			if (!player.abilities.instabuild) {
 				stack.shrink(1);
 			}
@@ -327,30 +349,6 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 				this.level.broadcastEntityEvent(this, (byte) 6);
 			}
 
-			return ActionResultType.SUCCESS;
-		}
-
-		if (item == Items.WATER_BUCKET && this.isAlive()) {
-			if (this.getAge() < 0) {
-				return ActionResultType.FAIL;
-			}
-			if (this.hasBackpack())
-				this.dropBackpack();
-			this.playSound(SoundEvents.BUCKET_FILL_FISH, 1.0F, 1.0F);
-			stack.shrink(1);
-			ItemStack stack1 = this.getBucket();
-			this.setBucketData(stack1);
-
-			if (!this.level.isClientSide) {
-				CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayerEntity) player, stack1);
-			}
-
-			if (stack.isEmpty()) {
-				player.setItemInHand(hand, stack1);
-			} else if (!player.inventory.add(stack1)) {
-				player.drop(stack1, false);
-			}
-			this.remove();
 			return ActionResultType.SUCCESS;
 		}
 
@@ -566,11 +564,6 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 	}
 
 	@Override
-	public ItemStack getPickedResult(RayTraceResult target) {
-		return new ItemStack(EnvironmentalItems.SLABFISH_SPAWN_EGG.get());
-	}
-
-	@Override
 	public boolean isFood(ItemStack stack) {
 		return !Ingredient.of(EnvironmentalTags.Items.SLABFISH_TAME_ITEMS).test(stack) && Ingredient.of(EnvironmentalTags.Items.SLABFISH_FOOD).test(stack);
 	}
@@ -668,6 +661,10 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 				this.setHealth(dataTag.getFloat("Health"));
 			if (dataTag.contains("Age"))
 				this.setAge(dataTag.getInt("Age"));
+			if (dataTag.contains("Owner")) {
+				this.setTame(true);
+				this.setOwnerUUID(dataTag.getUUID("Owner"));
+			}
 			this.setSlabfishType(new ResourceLocation(dataTag.getString("SlabfishType")));
 
 			if (dataTag.contains("BackpackType", Constants.NBT.TAG_STRING))
@@ -730,6 +727,9 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 
 		compound.putFloat("Health", this.getHealth());
 		compound.putInt("Age", this.getAge());
+
+		if (this.getOwnerUUID() != null && this.isTame())
+			compound.putUUID("Owner", this.getOwnerUUID());
 
 		compound.putString("SlabfishType", this.getSlabfishType().toString());
 		if (this.hasBackpack())

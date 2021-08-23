@@ -7,9 +7,14 @@ import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+
+import java.util.Collection;
+import java.util.List;
 
 /**
  * ModelSlabfish - Farcr
@@ -83,6 +88,7 @@ public class SlabfishModel<E extends SlabfishEntity> extends AgeableModel<E> {
 	@Override
 	public void setupAnim(E entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.fin.visible = !entityIn.hasBackpack();
+		this.body.zRot = 0.1F * MathHelper.sin(limbSwing * 0.5F) * 1.25F * limbSwingAmount;
 
 		if (!entityIn.isInWater()) {
 			if (entityIn.isPartying()) {
