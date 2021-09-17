@@ -22,7 +22,7 @@ public class EnvironmentalTags {
 
 		public static final ITag.INamedTag<Item> SLABFISH_SNACKS = createWrapperItemTag("slabfish_snacks");
 		public static final ITag.INamedTag<Item> SLABFISH_FOOD = createWrapperItemTag("slabfish_food");
-		public static final ITag.INamedTag<Item> SLABFISH_TEMPT_ITEMS = createWrapperItemTag("slabfish_tempt_items");
+		public static final ITag.INamedTag<Item> SLABFISH_TAME_ITEMS = createWrapperItemTag("slabfish_tame_items");
 	}
 
 	public static class EntityTypes {

@@ -48,24 +48,24 @@ public class SlabfishConditionContext {
 	private final Pair<SlabfishType, SlabfishType> parents;
 
 	private SlabfishConditionContext(SlabfishEntity slabfish, Event event, @Nullable ServerPlayerEntity breeder, @Nullable SlabfishEntity parent1, @Nullable SlabfishEntity parent2) {
-		ServerWorld world = (ServerWorld) slabfish.getEntityWorld();
+		ServerWorld world = (ServerWorld) slabfish.getCommandSenderWorld();
 		this.event = event;
 		this.random = new LazyValue<>(world::getRandom);
 		this.name = new LazyValue<>(() -> slabfish.getDisplayName().getString().trim());
-		this.pos = new LazyValue<>(() -> new BlockPos(slabfish.getPositionVec()));
-		this.biome = new LazyValue<>(() -> world.getBiome(this.pos.getValue()));
-		this.inRaid = new LazyValue<>(() -> world.findRaid(this.pos.getValue()) != null);
-		this.inBlock = new LazyValue<>(() -> world.getBlockState(this.pos.getValue()));
-		this.inFluid = new LazyValue<>(() -> world.getFluidState(this.pos.getValue()));
-		this.dayTime = new LazyValue<>(world::isDaytime);
-		this.nightTime = new LazyValue<>(world::isNightTime);
-		this.light = new LazyValue<>(() -> world.getLight(this.pos.getValue()));
+		this.pos = new LazyValue<>(() -> new BlockPos(slabfish.position()));
+		this.biome = new LazyValue<>(() -> world.getBiome(this.pos.get()));
+		this.inRaid = new LazyValue<>(() -> world.getRaidAt(this.pos.get()) != null);
+		this.inBlock = new LazyValue<>(() -> world.getBlockState(this.pos.get()));
+		this.inFluid = new LazyValue<>(() -> world.getFluidState(this.pos.get()));
+		this.dayTime = new LazyValue<>(world::isDay);
+		this.nightTime = new LazyValue<>(world::isNight);
+		this.light = new LazyValue<>(() -> world.getMaxLocalRawBrightness(this.pos.get()));
 		this.lightTypes = new HashMap<>();
 		for (LightType lightType : LightType.values())
-			this.lightTypes.put(lightType, new LazyValue<>(() -> world.getLightFor(lightType, this.pos.getValue())));
-		this.dimension = new LazyValue<>(() -> world.getDimensionKey().getLocation());
+			this.lightTypes.put(lightType, new LazyValue<>(() -> world.getBrightness(lightType, this.pos.get())));
+		this.dimension = new LazyValue<>(() -> world.dimension().location());
 		this.slabfishType = new LazyValue<>(slabfish::getSlabfishType);
-		this.breederInsomnia = new LazyValue<>(() -> breeder != null && breeder.getStats().getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)) >= 72000 && world.isNightTime());
+		this.breederInsomnia = new LazyValue<>(() -> breeder != null && breeder.getStats().getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)) >= 72000 && world.isNight());
 		SlabfishManager slabfishManager = SlabfishManager.get(world);
 		this.parents = parent1 != null && parent2 != null ? new ImmutablePair<>(slabfishManager.getSlabfishType(parent1.getSlabfishType()).orElse(SlabfishManager.DEFAULT_SLABFISH), slabfishManager.getSlabfishType(parent2.getSlabfishType()).orElse(SlabfishManager.DEFAULT_SLABFISH)) : null;
 	}
@@ -124,77 +124,77 @@ public class SlabfishConditionContext {
 	 * @return The slabfish world random number generator
 	 */
 	public Random getRandom() {
-		return this.random.getValue();
+		return this.random.get();
 	}
 
 	/**
 	 * @return The name of the slabfish
 	 */
 	public String getName() {
-		return this.name.getValue();
+		return this.name.get();
 	}
 
 	/**
 	 * @return The position of the slabfish
 	 */
 	public BlockPos getPos() {
-		return this.pos.getValue();
+		return this.pos.get();
 	}
 
 	/**
 	 * @return The biome the slabfish is in
 	 */
 	public Biome getBiome() {
-		return this.biome.getValue();
+		return this.biome.get();
 	}
 
 	/**
 	 * @return Whether or not it is currently day
 	 */
 	public boolean isDay() {
-		return this.dayTime.getValue();
+		return this.dayTime.get();
 	}
 
 	/**
 	 * @return Whether or not it is currently night
 	 */
 	public boolean isNight() {
-		return this.nightTime.getValue();
+		return this.nightTime.get();
 	}
 
 	/**
 	 * @return Whether or not a raid is currently ongoing
 	 */
 	public boolean isInRaid() {
-		return this.inRaid.getValue();
+		return this.inRaid.get();
 	}
 
 	/**
 	 * @return Whether or not the slabfish is currently in water
 	 */
 	public boolean isInBlock(Block block) {
-		return this.inBlock.getValue().isIn(block);
+		return this.inBlock.get().is(block);
 	}
 
 	/**
 	 * @return Whether or not the slabfish is currently in that tag
 	 */
 	public boolean isInBlock(ITag<Block> tag) {
-		return this.inBlock.getValue().isIn(tag);
+		return this.inBlock.get().is(tag);
 	}
 
 	/**
 	 * @return Whether or not the slabfish is currently in that tag
 	 */
 	public boolean isInFluid(ITag<Fluid> tag) {
-		return this.inFluid.getValue().isTagged(tag);
+		return this.inFluid.get().is(tag);
 	}
 
 	/**
 	 * @return The light value at the slabfish position
 	 */
 	public int getLight() {
-		return this.light.getValue();
+		return this.light.get();
 	}
 
 	/**
@@ -204,28 +204,28 @@ public class SlabfishConditionContext {
 	 * @return The sky light value at the slabfish position
 	 */
 	public int getLightFor(LightType lightType) {
-		return this.lightTypes.get(lightType).getValue();
+		return this.lightTypes.get(lightType).get();
 	}
 
 	/**
 	 * @return The dimension the slabfish is in
 	 */
 	public ResourceLocation getDimension() {
-		return this.dimension.getValue();
+		return this.dimension.get();
 	}
 
 	/**
 	 * @return The type of slabfish this slabfish was before trying to undergo a change
 	 */
 	public ResourceLocation getSlabfishType() {
-		return this.slabfishType.getValue();
+		return this.slabfishType.get();
 	}
 
 	/**
 	 * @return Whether or not the player that bred the two slabfish together has insomnia
 	 */
 	public boolean isBreederInsomnia() {
-		return this.breederInsomnia.getValue();
+		return this.breederInsomnia.get();
 	}
 
 	/**

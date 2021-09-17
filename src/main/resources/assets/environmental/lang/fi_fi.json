@@ -49,6 +49,9 @@
 	"block.environmental.willow_sign": "Pajukyltti",
 	"block.environmental.willow_chest": "Pajuarkku",
 	"block.environmental.willow_trapped_chest": "Ansoitettu pajuarkku",
+	"block.environmental.willow_post": "Pajutolppa",
+	"block.environmental.stripped_willow_post": "Kuorittu pajutolppa",
+	"block.environmental.willow_hedge": "Pajupensasaita",
 	"block.environmental.willow_beehive": "Pajumehiläispesä",
 	
 	"block.environmental.cherry_planks": "Kirsikkapuulankut",
@@ -75,6 +78,9 @@
 	"block.environmental.cherry_sign": "Kirsikkapuukyltti",
 	"block.environmental.cherry_chest": "Kirsikkapuuarkku",
 	"block.environmental.cherry_trapped_chest": "Ansoitettu kirsikkapuuarkku",
+	"block.environmental.cherry_post": "Kirsikkapuutolppa",
+	"block.environmental.stripped_cherry_post": "Kuorittu kirsikkapuutolppa",
+	"block.environmental.cherry_hedge": "Kirsikkapuupensasaita",
 	"block.environmental.cherry_beehive": "Kirsikkapuumehiläispesä",
 	
     "block.environmental.wisteria_log": "Sinisadehalko",
@@ -97,6 +103,8 @@
     "block.environmental.wisteria_vertical_slab": "Pystysuora sinisadelaatta",
     "block.environmental.wisteria_chest": "Sinisadearkku",
 	"block.environmental.wisteria_trapped_chest": "Ansoitettu sinisadearkku",
+	"block.environmental.wisteria_post": "Sinisadetolppa",
+	"block.environmental.stripped_wisteria_post": "Kuorittu sinisadetolppa",
 	"block.environmental.wisteria_beehive": "Sinisademehiläispesä",
 	
     "block.environmental.blue_wisteria_leaves": "Siniset sinisateenlehdet",
@@ -118,7 +126,12 @@
     "block.environmental.pink_wisteria_leaf_carpet": "Vaaleanpunainen sinisateenlehtimatto",
     "block.environmental.purple_wisteria_leaf_carpet": "Violetti sinisateenlehtimatto",
     "block.environmental.white_wisteria_leaf_carpet": "Valkoinen sinisateenlehtimatto",
-  
+
+	"block.environmental.blue_wisteria_hedge": "Sininen sinisadepensasaita",
+	"block.environmental.pink_wisteria_hedge": "Vaaleanpunainen sinisadepensasaita",
+	"block.environmental.purple_wisteria_hedge": "Violetti sinisadepensasaita",
+	"block.environmental.white_wisteria_hedge": "Valkoinen sinisadepensasaita",
+	
 	"block.environmental.terracotta_bricks": "Terrakottatiili",	
 	"block.environmental.white_terracotta_bricks": "Valkoinen terrakottatiili",
 	"block.environmental.orange_terracotta_bricks": "Oranssi terrakottatiili",
@@ -275,10 +288,6 @@
 	"block.environmental.yak_hair_block": "Jakin karvakuutio",
 	"block.environmental.yak_hair_rug": "Jakin karvamatto",
 	
-	"block.environmental.rice_sack": "Säkki riisiä",
-	"block.environmental.rice": "Riisi",
-	"block.environmental.tall_rice": "Pitkä riisi",
-	
 	"block.environmental.duckweed": "Sorsanlimaska",
 	"block.environmental.duckweed_thatch": "Sorsanlimaskakuutio",
 	"block.environmental.duckweed_thatch_slab": "Sorsanlimaskalaatta",
@@ -302,24 +311,25 @@
 	"block.environmental.truffle_crate": "Laatikko tryffeleitä",
 	
 	"item.environmental.wanderer_boots": "Kulkurin saappaat",
+	"item.environmental.wanderer_boots.desc": "kuutiota kuljettu",
 	"item.environmental.architect_belt": "Arkkitehdin vyö",
+	"item.environmental.architect_belt.desc": "kuutiota sijoitettu",
 	"item.environmental.healer_pouch": "Parantajan pussi",
+	"item.environmental.healer_pouch.desc": "adrenaliiniryöppyä",
 	"item.environmental.thief_hood": "Varkaan huppu",
-	"item.environmental.executioner_cleaver": "Pyövelin kirves",
+	"item.environmental.thief_hood.desc": "hirviötä surmattu",
 	
 	"item.environmental.slabfish_spawn_egg": "Luo laattakala",
-	"item.environmental.axolotl_spawn_egg": "Luo aksolotli",
-	"item.environmental.butterfly_spawn_egg": "Luo perhonen",
 	"item.environmental.duck_spawn_egg": "Luo sorsa",
 	"item.environmental.deer_spawn_egg": "Luo peura",
 	"item.environmental.yak_spawn_egg": "Luo jakki",
 	"item.environmental.koi_spawn_egg": "Luo koikarppi",
+	"item.environmental.fennec_fox_spawn_egg": "Luo aavikkokettu",
 	
 	"item.environmental.yak_hair": "Jakin karva",
 	"item.environmental.yak_pants": "Jakkihousut",
 	
 	"item.environmental.cattail_seeds": "Osmankäämin siemenet",
-    "item.environmental.rice_ball": "Riisipallo",
   
 	"item.environmental.venison": "Raaka peuranliha",
 	"item.environmental.cooked_venison": "Paistettu peuranliha",
@@ -332,23 +342,8 @@
 	"item.environmental.scrambled_eggs": "Munakokkeli",
 	
 	"item.environmental.koi": "Koikarppi",
-	
-	"item.environmental.cod_kelp_roll": "Turskalevärulla",
-	"item.environmental.tropical_fish_kelp_roll": "Trooppinen kalalevärulla",
-	"item.environmental.koi_kelp_roll": "Koikarppilevärulla",
-	"item.environmental.crab_kelp_roll": "Taskurapulevärulla",
-	"item.environmental.pike_kelp_roll": "Haukilevärulla",
-	
-	"item.environmental.salmon_rice_cake": "Lohilevärulla",
-	"item.environmental.pufferfish_rice_cake": "Pallokalalevärulla",
-	"item.environmental.lionfish_rice_cake": "Leijonakalalevärulla",
-	
-	"item.environmental.squid_ink_risotto": "Musta risotto",
-	
-	"item.environmental.axolotl_bucket": "Aksolotli ämpärissä",
 	"item.environmental.slabfish_bucket": "Laattakala ämpärissä",
 	"item.environmental.koi_bucket": "Koikarppi ämpärissä",
-	"item.environmental.bottled_butterfly": "Perhonen pullossa",
 	
 	"item.environmental.mud_ball": "Mutapallo",
 	"item.environmental.mud_brick": "Mutatiili",
@@ -373,14 +368,13 @@
 	"item.environmental.music_disc_leaving_home.desc": "hatsondogs - Leaving Home",
   
 	"entity.environmental.slabfish": "Laattakala",
-	"entity.environmental.axolotl": "Aksolotli",
 	"entity.environmental.duck": "Sorsa",
-	"entity.environmental.butterfly": "Perhonen",
 	"entity.environmental.deer": "Peura",
 	"entity.environmental.yak": "Jakki",
 	"entity.environmental.koi": "Koikarppi",
+	"entity.environmental.fennec_fox": "Aavikkokettu",
 	
-	"entity.environmental.duck_egg": "Sorsan muna",
+	"entity.environmental.duck_egg": "Heitetty sorsan muna",
 	"entity.environmental.mud_ball": "Mutapallo",
 	
 	"entity.minecraft.villager.environmental.ceramist": "Keraamikko",
@@ -388,7 +382,6 @@
 	
 	"biome.environmental.marsh": "Marski",
 	"biome.environmental.mushroom_marsh": "Sienimarski",
-	"biome.environmental.mire": "Letto",
 	
 	"biome.environmental.blossom_woods": "Kirsikkametsä",
 	"biome.environmental.blossom_hills": "Kirsikkametsäkukkulat",
@@ -416,41 +409,57 @@
 	"gui.environmental.category.baking": "Poltto",
 	"gui.environmental.category.sawing": "Sahaaminen",
 
-	"generic.reachDistance": "Ylettymisetäisyys",
 	"attribute.name.generic.stealth": "Salamyhkäisyys",
-  
-	"enchantment.environmental.reaching": "Yletys",
-	"enchantment.environmental.reaching.desc": "Kasvattaa ylettymisetäisyyttä 1 kuutiolla per taso",
-  
-	"enchantment.environmental.travelling": "Matkustus",
-	"enchantment.environmental.travelling.desc": "Kasvattaa liikkumisnopeutta 5% per taso",
 	
-	"advancements.environmental.husbandry.equip_axolotl.title": "Eksysksissä merellä, mutta ei yksin!",
-	"advancements.environmental.husbandry.equip_axolotl.description": "Anna aksolotlin tarttua sinuun ja parantaa sinua!",
-	
-	"advancements.environmental.husbandry.bred_all_slabfish.title": "Epävakaata genetiikkaa",
+	"advancements.environmental.husbandry.bred_all_slabfish.title": "Epävakaa perimä",
 	"advancements.environmental.husbandry.bred_all_slabfish.description": "Parita kaikki laattakalarodut!",
 	
 	"advancements.environmental.husbandry.backpack_slabfish.title": "Ensimmäinen koulupäivä",
 	"advancements.environmental.husbandry.backpack_slabfish.description": "Anna laattakalalle reppu",
+
+	"advancements.environmental.adventure.obtain_explorer_gear.title": "Kunnon varusteet",
+	"advancements.environmental.adventure.obtain_explorer_gear.description": "Löydä jokin seikkailijan varuste",
+
+	"advancements.environmental.adventure.upgrade_thief_hood.title": "Lipevä rikollinen",
+	"advancements.environmental.adventure.upgrade_thief_hood.description": "Nappaa varkaan huppu luurangolta tai wither-luurangolta ja kehitä se maksimitasolle",
+
+	"advancements.environmental.adventure.upgrade_healer_pouch.title": "Juokse henkesi edestä",
+	"advancements.environmental.adventure.upgrade_healer_pouch.description": "Hanki parantajan pussi linnoituksen tai kaivoksen hirviöltä ja kehitä se maksimitasolle",
+
+	"advancements.environmental.adventure.upgrade_architect_belt.title": "Kaikki korjataan!",
+	"advancements.environmental.adventure.upgrade_architect_belt.description": "Osta arkkitehdin vyö mestarimuurarilta, -puusepältä tai -keraamikolta ja kehitä se maksimitasolle",
+
+	"advancements.environmental.adventure.upgrade_wanderer_boots.title": "Reissumies",
+	"advancements.environmental.adventure.upgrade_wanderer_boots.description": "Saa kulkurin saappaat kulkukauppiaalta ja kehitä ne maksimitasolle",
 	
-	"advancements.environmental.adventure.find_natural_slabfish.title": "Niitä on erivärisiä!",
-	"advancements.environmental.adventure.find_natural_slabfish.description": "Löydä kaikki luonnolliset laattakalarodut",
+	"subtitles.environmental.entity.slabfish.burp": "Laattakala röyhtäisee",
+	"subtitles.environmental.entity.slabfish.death": "Laattakala kuolee",
+	"subtitles.environmental.entity.slabfish.step": "Laattakala astelee",
+	"subtitles.environmental.entity.slabfish.hurt": "Laattakala vahingoittuu",
+	"subtitles.environmental.entity.slabfish.eat": "Laattakala syö",
+	"subtitles.environmental.entity.slabfish.transform": "Laattakala muuntautuu",
+	"subtitles.environmental.entity.slabfish.backpack": "Laattakalalle puetaan reppu",
+	"subtitles.environmental.entity.slabfish.sweater": "Laattakalalle puetaan villapaita",
 	
-	"subtitles.entity.slabfish.burp": "Laattakala röyhtäisee",
-	"subtitles.entity.slabfish.death": "Laattakala kuolee",
-	"subtitles.entity.slabfish.step": "Laattakala astelee",
-	"subtitles.entity.slabfish.hurt": "Laattakala vahingoittuu",
-	"subtitles.entity.slabfish.eat": "Laattakala syö",
-	"subtitles.entity.slabfish.transform": "Laattakala muuntautuu",
-	"subtitles.entity.slabfish.backpack": "Laattakalalle puetaan reppu",
-	"subtitles.entity.slabfish.sweater": "Laattakalalle puetaan villapaita",
+	"subtitles.environmental.entity.koi.flop": "Koikarppi sätkii",
+
+	"subtitles.environmental.entity.deer.ambient": "Peura määkii",
+	"subtitles.environmental.entity.deer.death": "Peura kuolee",
+	"subtitles.environmental.entity.deer.hurt": "Peura vahingoittuu",
+
+	"subtitles.environmental.entity.duck.ambient": "Sorsa vaakkuu",
+	"subtitles.environmental.entity.duck.death": "Sorsa kuolee",
+	"subtitles.environmental.entity.duck.egg": "Sorsa munii",
+	"subtitles.environmental.entity.duck.hurt": "Sorsa vahingoittuu",
+
+	"subtitles.environmental.entity.yak.ambient": "Jakki puhisee",
+	"subtitles.environmental.entity.yak.death": "Jakki kuolee",
+	"subtitles.environmental.entity.yak.hurt": "Jakki vahingoittuu",
+	"subtitles.environmental.entity.yak.milk": "Jakkia lypsetään",
 	
-	"subtitles.entity.koi.flop": "Koikarppi sätkii",
+	"subtitles.environmental.entity.pig.sniff": "Sika nuuhkii",
 	
-	"subtitles.entity.pig.sniff": "Sika nuuhkii",
-		
-	"subtitles.entity.duck.egg": "Sorsa munii",
+	"subtitles.environmental.item.cattails.pick": "Osmankäämit popsahtavat",
 	
 	"entity.environmental.slabfish.baby": "Poikanen",
 	
@@ -513,6 +522,7 @@
 	"entity.environmental.slabfish.type.bmo": "BMO",
 	"entity.environmental.slabfish.type.ocelot": "WALL-E",
 	"entity.environmental.slabfish.type.eve": "EVE",
+	"entity.environmental.slabfish.type.minion": "Kätyri",
 	
 	"entity.environmental.slabfish.backpack.white": "Valkoinen reppu",
 	"entity.environmental.slabfish.backpack.orange": "Oranssi reppu",

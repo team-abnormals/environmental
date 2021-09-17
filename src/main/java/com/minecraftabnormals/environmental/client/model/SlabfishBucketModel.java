@@ -43,8 +43,8 @@ public class SlabfishBucketModel implements IBakedModel {
 	}
 
 	@Override
-	public boolean isAmbientOcclusion() {
-		return this.model.isAmbientOcclusion();
+	public boolean useAmbientOcclusion() {
+		return this.model.useAmbientOcclusion();
 	}
 
 	@Override
@@ -53,18 +53,18 @@ public class SlabfishBucketModel implements IBakedModel {
 	}
 
 	@Override
-	public boolean isSideLit() {
-		return this.model.isSideLit();
+	public boolean usesBlockLight() {
+		return this.model.usesBlockLight();
 	}
 
 	@Override
-	public boolean isBuiltInRenderer() {
-		return this.model.isBuiltInRenderer();
+	public boolean isCustomRenderer() {
+		return this.model.isCustomRenderer();
 	}
 
 	@Override
-	public TextureAtlasSprite getParticleTexture() {
-		return this.model.getParticleTexture();
+	public TextureAtlasSprite getParticleIcon() {
+		return this.model.getParticleIcon();
 	}
 
 	@Override
@@ -83,13 +83,13 @@ public class SlabfishBucketModel implements IBakedModel {
 			this.model = modelManager.getModel(new ResourceLocation(Environmental.MOD_ID, "item/slabfish_bucket/swamp"));
 			this.locationCache = new HashMap<>();
 			this.modelLocations = new HashMap<>();
-			for (ResourceLocation location : Minecraft.getInstance().getResourceManager().getAllResourceLocations("models/item/slabfish_bucket", s -> s.endsWith(".json")))
+			for (ResourceLocation location : Minecraft.getInstance().getResourceManager().listResources("models/item/slabfish_bucket", s -> s.endsWith(".json")))
 				this.modelLocations.put(new ResourceLocation(location.getNamespace(), location.getPath().substring("models/item/slabfish_bucket/".length(), location.getPath().length() - ".json".length())), new ResourceLocation(location.getNamespace(), location.getPath().substring("models/".length(), location.getPath().length() - ".json".length())));
 		}
 
 		@Nullable
 		@Override
-		public IBakedModel getOverrideModel(IBakedModel model, ItemStack stack, @Nullable ClientWorld world, @Nullable LivingEntity entity) {
+		public IBakedModel resolve(IBakedModel model, ItemStack stack, @Nullable ClientWorld world, @Nullable LivingEntity entity) {
 			if (stack.getTag() != null && stack.getTag().contains("SlabfishType", Constants.NBT.TAG_STRING)) {
 				ResourceLocation slabfishType = SlabfishManager.get(LogicalSide.CLIENT).getSlabfishType(this.locationCache.computeIfAbsent(stack.getTag().getString("SlabfishType"), ResourceLocation::new)).orElse(SlabfishManager.DEFAULT_SLABFISH).getRegistryName();
 				if (this.modelLocations.containsKey(slabfishType))

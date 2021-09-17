@@ -18,17 +18,17 @@ public class FallenLeavesFeature extends Feature<NoFeatureConfig> {
 	}
 
 	@Override
-	public boolean generate(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+	public boolean place(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 		int i = 0;
-		BlockState blockstate = EnvironmentalBlocks.CHERRY_LEAF_CARPET.get().getDefaultState();
+		BlockState blockstate = EnvironmentalBlocks.CHERRY_LEAF_CARPET.get().defaultBlockState();
 
 		for (int x = -3; x <= 3; ++x) {
 			for (int z = -3; z <= 3; ++z) {
 				if (Math.abs(x) < 2 || Math.abs(z) < 2) {
 					for (int y = -3; y <= 3; ++y) {
-						BlockPos blockpos = pos.add(x, y, z);
-						if (rand.nextInt(3) > 0 && worldIn.isAirBlock(blockpos) && blockpos.getY() < worldIn.getHeight() && worldIn.getBlockState(blockpos.down()).getBlock() == Blocks.GRASS_BLOCK) {
-							worldIn.setBlockState(blockpos, blockstate, 2);
+						BlockPos blockpos = pos.offset(x, y, z);
+						if (rand.nextInt(3) > 0 && worldIn.isEmptyBlock(blockpos) && blockpos.getY() < worldIn.getMaxBuildHeight() && worldIn.getBlockState(blockpos.below()).getBlock() == Blocks.GRASS_BLOCK) {
+							worldIn.setBlock(blockpos, blockstate, 2);
 							++i;
 						}
 					}

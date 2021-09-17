@@ -19,15 +19,15 @@ public class DuckRenderer extends MobRenderer<DuckEntity, DuckModel<DuckEntity>>
 	}
 
 	@Override
-	public ResourceLocation getEntityTexture(DuckEntity entity) {
+	public ResourceLocation getTextureLocation(DuckEntity entity) {
 		return new ResourceLocation(Environmental.MOD_ID, "textures/entity/duck.png");
 	}
 
 	@Override
-	protected void applyRotations(DuckEntity entityLiving, MatrixStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
+	protected void setupRotations(DuckEntity entityLiving, MatrixStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
 		if (entityLiving.isInWater())
-			matrixStackIn.translate(0.0D, (double) (MathHelper.cos(ageInTicks * 0.08F) * 0.02F), 0.0D);
+			matrixStackIn.translate(0.0D, MathHelper.cos(ageInTicks * 0.08F) * 0.02F, 0.0D);
 
-		super.applyRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
+		super.setupRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
 	}
 }

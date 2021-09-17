@@ -24,7 +24,7 @@ import net.minecraft.world.World;
 import java.util.function.Supplier;
 
 public class BirdNestBlock extends ContainerBlock {
-	protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 3.0D, 16.0D);
+	protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 3.0D, 16.0D);
 	public static final IntegerProperty EGGS = IntegerProperty.create("eggs", 1, 6);
 	private final Supplier<? extends Item> egg;
 	private final EmptyNestBlock emptyNest;
@@ -35,66 +35,66 @@ public class BirdNestBlock extends ContainerBlock {
 		this.emptyNest = emptyNestIn;
 		this.emptyNest.addNest(this.egg, this);
 
-		this.setDefaultState(this.stateContainer.getBaseState().with(EGGS, 1));
+		this.registerDefaultState(this.stateDefinition.any().setValue(EGGS, 1));
 	}
 
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
 		return SHAPE;
 	}
 
-	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-		return !stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+		return !stateIn.canSurvive(worldIn, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 	}
 
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		if (player.isAllowEdit()) {
-			int i = state.get(EGGS);
-			ItemStack itemstack = player.getHeldItem(handIn);
+	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+		if (player.mayBuild()) {
+			int i = state.getValue(EGGS);
+			ItemStack itemstack = player.getItemInHand(handIn);
 			if (this.egg.get() != Items.AIR && itemstack.getItem() == this.egg.get()) {
 				if (i < 6) {
-					if (!player.abilities.isCreativeMode) {
+					if (!player.abilities.instabuild) {
 						itemstack.shrink(1);
 					}
-					worldIn.setBlockState(pos, state.with(EGGS, i + 1), 3);
+					worldIn.setBlock(pos, state.setValue(EGGS, i + 1), 3);
 				}
 			} else {
-				spawnAsEntity(worldIn, pos, new ItemStack(this.egg.get()));
+				popResource(worldIn, pos, new ItemStack(this.egg.get()));
 
 				if (i > 1)
-					worldIn.setBlockState(pos, state.with(EGGS, i - 1), 3);
+					worldIn.setBlock(pos, state.setValue(EGGS, i - 1), 3);
 				else
-					worldIn.setBlockState(pos, this.getEmptyNest().getDefaultState(), 3);
+					worldIn.setBlock(pos, this.getEmptyNest().defaultBlockState(), 3);
 			}
-			return ActionResultType.func_233537_a_(worldIn.isRemote);
+			return ActionResultType.sidedSuccess(worldIn.isClientSide);
 		} else {
-			return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+			return super.use(state, worldIn, pos, player, handIn, hit);
 		}
 	}
 
-	public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state) {
+	public ItemStack getCloneItemStack(IBlockReader worldIn, BlockPos pos, BlockState state) {
 		return new ItemStack(this.getEgg());
 	}
 
-	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-		return worldIn.getBlockState(pos.down()).getMaterial().isSolid();
+	public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
+		return worldIn.getBlockState(pos.below()).getMaterial().isSolid();
 	}
 
 	@Override
-	public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
-		super.onBlockHarvested(worldIn, pos, state, player);
-		if (!worldIn.isRemote && !player.isCreative() && this.getEgg() != null && state.get(EGGS) > 0)
-			spawnAsEntity(worldIn, pos, new ItemStack(this.getEgg(), state.get(EGGS)));
+	public void playerWillDestroy(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
+		super.playerWillDestroy(worldIn, pos, state, player);
+		if (!worldIn.isClientSide && !player.isCreative() && this.getEgg() != null && state.getValue(EGGS) > 0)
+			popResource(worldIn, pos, new ItemStack(this.getEgg(), state.getValue(EGGS)));
 	}
 
-	public TileEntity createNewTileEntity(IBlockReader worldIn) {
+	public TileEntity newBlockEntity(IBlockReader worldIn) {
 		return new BirdNestTileEntity();
 	}
 
-	public BlockRenderType getRenderType(BlockState state) {
+	public BlockRenderType getRenderShape(BlockState state) {
 		return BlockRenderType.MODEL;
 	}
 
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(EGGS);
 	}
 
@@ -107,12 +107,12 @@ public class BirdNestBlock extends ContainerBlock {
 	}
 
 	@Override
-	public boolean hasComparatorInputOverride(BlockState state) {
+	public boolean hasAnalogOutputSignal(BlockState state) {
 		return true;
 	}
 
 	@Override
-	public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos) {
-		return blockState.get(EGGS);
+	public int getAnalogOutputSignal(BlockState blockState, World worldIn, BlockPos pos) {
+		return blockState.getValue(EGGS);
 	}
 }

@@ -25,7 +25,7 @@ public enum DeerCoatTypes {
 	}
 
 	public ResourceLocation getTextureLocation() {
-		return this.textureLocation.getValue();
+		return this.textureLocation.get();
 	}
 
 	public static DeerCoatTypes byId(int id) {

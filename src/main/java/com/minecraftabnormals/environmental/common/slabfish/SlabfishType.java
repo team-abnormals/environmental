@@ -54,7 +54,7 @@ public class SlabfishType implements Predicate<SlabfishConditionContext> {
 	@OnlyIn(Dist.CLIENT)
 	public static SlabfishType readFrom(PacketBuffer buf) {
 		ResourceLocation registryName = buf.readResourceLocation();
-		ITextComponent displayName = buf.readTextComponent();
+		ITextComponent displayName = buf.readComponent();
 		ResourceLocation customBackpack = buf.readBoolean() ? buf.readResourceLocation() : null;
 		boolean translucent = buf.readBoolean();
 		SlabfishRarity rarity = SlabfishRarity.byId(buf.readVarInt());
@@ -102,7 +102,7 @@ public class SlabfishType implements Predicate<SlabfishConditionContext> {
 	 */
 	@OnlyIn(Dist.CLIENT)
 	public ResourceLocation getTextureLocation() {
-		return this.textureLocation.getValue();
+		return this.textureLocation.get();
 	}
 
 	/**
@@ -155,7 +155,7 @@ public class SlabfishType implements Predicate<SlabfishConditionContext> {
 	 */
 	public void writeTo(PacketBuffer buf) {
 		buf.writeResourceLocation(this.registryName);
-		buf.writeTextComponent(this.displayName);
+		buf.writeComponent(this.displayName);
 		buf.writeBoolean(this.customBackpack != null);
 		if (this.customBackpack != null)
 			buf.writeResourceLocation(this.customBackpack);

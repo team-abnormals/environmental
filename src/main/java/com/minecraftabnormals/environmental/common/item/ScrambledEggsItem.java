@@ -11,8 +11,8 @@ public class ScrambledEggsItem extends SoupItem {
 		super(properties);
 	}
 
-	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
+	public ItemStack finishUsingItem(ItemStack stack, World worldIn, LivingEntity entityLiving) {
 		entityLiving.heal(2.0F);
-		return super.onItemUseFinish(stack, worldIn, entityLiving);
+		return super.finishUsingItem(stack, worldIn, entityLiving);
 	}
 }

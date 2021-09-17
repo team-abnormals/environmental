@@ -23,25 +23,25 @@ public class LilyPadBlockMixin extends Block implements IGrowable {
 	}
 
 	@Override
-	public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
 		return true;
 	}
 
 	@Override
-	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(World worldIn, Random rand, BlockPos pos, BlockState state) {
 		return true;
 	}
 
 	@Override
-	public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
 		if (rand.nextInt(3) == 0) {
 			if (rand.nextBoolean()) {
-				if (LargeLilyPadBlock.checkPositions(worldIn, pos, EnvironmentalBlocks.LARGE_LILY_PAD.get().getDefaultState())) {
-					LargeLilyPadBlock.placeAt(worldIn, pos, EnvironmentalBlocks.LARGE_LILY_PAD.get().getDefaultState(), 2);
+				if (LargeLilyPadBlock.checkPositions(worldIn, pos, EnvironmentalBlocks.LARGE_LILY_PAD.get().defaultBlockState())) {
+					LargeLilyPadBlock.placeAt(worldIn, pos, EnvironmentalBlocks.LARGE_LILY_PAD.get().defaultBlockState(), 2);
 				}
 			} else {
-				if (GiantLilyPadBlock.checkPositions(worldIn, pos, EnvironmentalBlocks.GIANT_LILY_PAD.get().getDefaultState())) {
-					GiantLilyPadBlock.placeAt(worldIn, pos, EnvironmentalBlocks.GIANT_LILY_PAD.get().getDefaultState(), 2);
+				if (GiantLilyPadBlock.checkPositions(worldIn, pos, EnvironmentalBlocks.GIANT_LILY_PAD.get().defaultBlockState())) {
+					GiantLilyPadBlock.placeAt(worldIn, pos, EnvironmentalBlocks.GIANT_LILY_PAD.get().defaultBlockState(), 2);
 				}
 			}
 		}

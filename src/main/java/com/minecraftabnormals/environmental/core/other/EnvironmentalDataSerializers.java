@@ -23,7 +23,7 @@ public class EnvironmentalDataSerializers {
 		}
 
 		@Override
-		public ResourceLocation copyValue(ResourceLocation value) {
+		public ResourceLocation copy(ResourceLocation value) {
 			return new ResourceLocation(value.getNamespace(), value.getPath());
 		}
 	};

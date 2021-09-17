@@ -24,42 +24,42 @@ public class LayEggInNestGoal extends MoveToBlockGoal {
 		this.eggLayer = (IEggLayingEntity) birdIn;
 	}
 
-	public boolean shouldExecute() {
-		return !this.bird.isChild() && !this.eggLayer.isBirdJockey() && this.eggLayer.getEggTimer() < 400 && super.shouldExecute();
+	public boolean canUse() {
+		return !this.bird.isBaby() && !this.eggLayer.isBirdJockey() && this.eggLayer.getEggTimer() < 400 && super.canUse();
 	}
 
-	public boolean shouldContinueExecuting() {
-		return super.shouldContinueExecuting() && !this.bird.isChild() && !this.eggLayer.isBirdJockey() && this.eggLayer.getEggTimer() < 400;
+	public boolean canContinueToUse() {
+		return super.canContinueToUse() && !this.bird.isBaby() && !this.eggLayer.isBirdJockey() && this.eggLayer.getEggTimer() < 400;
 	}
 
-	protected int getRunDelay(CreatureEntity creatureIn) {
+	protected int nextStartTick(CreatureEntity creatureIn) {
 		return 40;
 	}
 
-	public void startExecuting() {
-		super.startExecuting();
+	public void start() {
+		super.start();
 		this.eggCounter = 30;
 	}
 
 	public void tick() {
 		super.tick();
-		if (this.getIsAboveDestination()) {
+		if (this.isReachedTarget()) {
 			if (this.eggCounter > 0) {
 				this.eggCounter--;
 			}
 
 			if (this.eggCounter <= 0) {
-				BlockPos blockpos = this.destinationBlock.up();
-				BlockState blockstate = this.bird.world.getBlockState(blockpos);
+				BlockPos blockpos = this.blockPos.above();
+				BlockState blockstate = this.bird.level.getBlockState(blockpos);
 				Block block = blockstate.getBlock();
 
 				if (block instanceof EmptyNestBlock) {
-					this.bird.world.setBlockState(blockpos, ((EmptyNestBlock) block).getNest(this.eggLayer.getEggItem()).getDefaultState(), 3);
+					this.bird.level.setBlock(blockpos, ((EmptyNestBlock) block).getNest(this.eggLayer.getEggItem()).defaultBlockState(), 3);
 					this.resetBird();
 				} else if (block instanceof BirdNestBlock && ((BirdNestBlock) block).getEgg() == this.eggLayer.getEggItem()) {
-					int i = blockstate.get(BirdNestBlock.EGGS);
+					int i = blockstate.getValue(BirdNestBlock.EGGS);
 					if (i < 6) {
-						this.bird.world.setBlockState(blockpos, blockstate.with(BirdNestBlock.EGGS, i + 1), 3);
+						this.bird.level.setBlock(blockpos, blockstate.setValue(BirdNestBlock.EGGS, i + 1), 3);
 						this.resetBird();
 					}
 				}
@@ -68,19 +68,15 @@ public class LayEggInNestGoal extends MoveToBlockGoal {
 	}
 
 	private void resetBird() {
-		Random random = bird.getRNG();
+		Random random = bird.getRandom();
 		this.bird.playSound(this.eggLayer.getEggLayingSound(), 1.0F, (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
 		this.eggLayer.setEggTimer(this.eggLayer.getNextEggTime(random));
 	}
 
-	protected boolean shouldMoveTo(IWorldReader worldIn, BlockPos pos) {
-		BlockState blockstate = this.bird.world.getBlockState(pos.up());
+	protected boolean isValidTarget(IWorldReader worldIn, BlockPos pos) {
+		BlockState blockstate = this.bird.level.getBlockState(pos.above());
 		Block block = blockstate.getBlock();
 
-		if (block instanceof EmptyNestBlock || (block instanceof BirdNestBlock && ((BirdNestBlock) block).getEgg() == this.eggLayer.getEggItem() && blockstate.get(BirdNestBlock.EGGS) < 6)) {
-			return true;
-		}
-
-		return false;
+		return block instanceof EmptyNestBlock || (block instanceof BirdNestBlock && ((BirdNestBlock) block).getEgg() == this.eggLayer.getEggItem() && blockstate.getValue(BirdNestBlock.EGGS) < 6);
 	}
 }

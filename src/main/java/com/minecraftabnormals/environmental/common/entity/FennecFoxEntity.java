@@ -17,20 +17,20 @@ public class FennecFoxEntity extends FoxEntity {
 
 	@Override
 	protected float getStandingEyeHeight(Pose pose, EntitySize size) {
-		return this.isChild() ? size.height * 0.45F : 0.375F;
+		return this.isBaby() ? size.height * 0.45F : 0.375F;
 	}
 
 	@Override
-	protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty) {
-		if (this.rand.nextFloat() < 0.2F) {
-			float f = this.rand.nextFloat();
+	protected void populateDefaultEquipmentSlots(DifficultyInstance difficulty) {
+		if (this.random.nextFloat() < 0.2F) {
+			float f = this.random.nextFloat();
 			ItemStack stack;
 			if (f < 0.05F) {
 				stack = new ItemStack(Items.EMERALD);
 			} else if (f < 0.2F) {
 				stack = new ItemStack(Items.GOLD_INGOT);
 			} else if (f < 0.4F) {
-				stack = this.rand.nextBoolean() ? new ItemStack(Items.RABBIT_FOOT) : new ItemStack(Items.RABBIT_HIDE);
+				stack = this.random.nextBoolean() ? new ItemStack(Items.RABBIT_FOOT) : new ItemStack(Items.RABBIT_HIDE);
 			} else if (f < 0.6F) {
 				stack = new ItemStack(Items.GREEN_DYE);
 			} else if (f < 0.8F) {
@@ -39,7 +39,7 @@ public class FennecFoxEntity extends FoxEntity {
 				stack = new ItemStack(Items.BONE);
 			}
 
-			this.setItemStackToSlot(EquipmentSlotType.MAINHAND, stack);
+			this.setItemSlot(EquipmentSlotType.MAINHAND, stack);
 		}
 	}
 }

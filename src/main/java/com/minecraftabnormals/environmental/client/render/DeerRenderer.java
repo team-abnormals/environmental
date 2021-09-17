@@ -5,7 +5,6 @@ import com.minecraftabnormals.environmental.client.render.layer.DeerMarkingsRend
 import com.minecraftabnormals.environmental.common.entity.DeerEntity;
 import com.minecraftabnormals.environmental.common.entity.util.DeerCoatColors;
 import com.minecraftabnormals.environmental.core.Environmental;
-import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
@@ -23,13 +22,8 @@ public class DeerRenderer extends MobRenderer<DeerEntity, DeerModel<DeerEntity>>
 	}
 
 	@Override
-	public ResourceLocation getEntityTexture(DeerEntity entity) {
+	public ResourceLocation getTextureLocation(DeerEntity entity) {
 		DeerCoatColors coatType = DeerCoatColors.byId(entity.getCoatColor());
 		return new ResourceLocation(Environmental.MOD_ID, "textures/entity/deer/" + coatType.name().toLowerCase(Locale.ROOT) + ".png");
-	}
-
-	@Override
-	protected void preRenderCallback(DeerEntity entity, MatrixStack matrixStack, float partialTickTime) {
-		if (entity.isChild()) matrixStack.scale(0.5F, 0.5F, 0.5F);
 	}
 }

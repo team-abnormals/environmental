@@ -24,6 +24,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.NonTamedTargetGoal;
+import net.minecraft.entity.ai.goal.PrioritizedGoal;
 import net.minecraft.entity.monster.HuskEntity;
 import net.minecraft.entity.monster.SkeletonEntity;
 import net.minecraft.entity.monster.StrayEntity;
@@ -55,7 +56,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.event.entity.EntityEvent.EnteringChunk;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -75,7 +76,7 @@ public class EnvironmentalEvents {
 
 	@SubscribeEvent
 	public static void onPlayerBreak(PlayerEvent.BreakSpeed event) {
-		if (event.getState().getBlock() instanceof HangingWisteriaLeavesBlock && event.getPlayer().getHeldItemMainhand().getItem() == Items.SHEARS)
+		if (event.getState().getBlock() instanceof HangingWisteriaLeavesBlock && event.getPlayer().getMainHandItem().getItem() == Items.SHEARS)
 			event.setNewSpeed(15.0F);
 	}
 
@@ -93,32 +94,32 @@ public class EnvironmentalEvents {
 
 		if (event.getResult() != Event.Result.DENY && world instanceof IServerWorld) {
 			IServerWorld serverWorld = (IServerWorld) world;
-			if (replaceVariants && validSpawn && entity.getPosY() > 60) {
+			if (replaceVariants && validSpawn && entity.getY() > 60) {
 				if (entity.getType() == EntityType.ZOMBIE) {
 					ZombieEntity zombie = (ZombieEntity) entity;
-					if (world.getBiome(entity.getPosition()).getCategory() == Biome.Category.DESERT) {
+					if (world.getBiome(entity.blockPosition()).getBiomeCategory() == Biome.Category.DESERT) {
 
 
-						HuskEntity husk = EntityType.HUSK.create(serverWorld.getWorld());
-						husk.setChild(zombie.isChild());
+						HuskEntity husk = EntityType.HUSK.create(serverWorld.getLevel());
+						husk.setBaby(zombie.isBaby());
 						for (EquipmentSlotType slot : EquipmentSlotType.values())
-							zombie.setItemStackToSlot(slot, zombie.getItemStackFromSlot(slot));
-						husk.setLocationAndAngles(zombie.getPosX(), zombie.getPosY(), zombie.getPosZ(), zombie.rotationYaw, zombie.rotationPitch);
+							zombie.setItemSlot(slot, zombie.getItemBySlot(slot));
+						husk.moveTo(zombie.getX(), zombie.getY(), zombie.getZ(), zombie.yRot, zombie.xRot);
 
-						world.addEntity(husk);
+						world.addFreshEntity(husk);
 						entity.remove();
 					}
 				}
 
 				if (entity.getType() == EntityType.SKELETON) {
 					SkeletonEntity skeleton = (SkeletonEntity) entity;
-					if (world.getBiome(entity.getPosition()).getCategory() == Biome.Category.ICY) {
-						StrayEntity stray = EntityType.STRAY.create(serverWorld.getWorld());
+					if (world.getBiome(entity.blockPosition()).getBiomeCategory() == Biome.Category.ICY) {
+						StrayEntity stray = EntityType.STRAY.create(serverWorld.getLevel());
 						for (EquipmentSlotType slot : EquipmentSlotType.values())
-							skeleton.setItemStackToSlot(slot, skeleton.getItemStackFromSlot(slot));
-						stray.setLocationAndAngles(skeleton.getPosX(), skeleton.getPosY(), skeleton.getPosZ(), skeleton.rotationYaw, skeleton.rotationPitch);
+							skeleton.setItemSlot(slot, skeleton.getItemBySlot(slot));
+						stray.moveTo(skeleton.getX(), skeleton.getY(), skeleton.getZ(), skeleton.yRot, skeleton.xRot);
 
-						world.addEntity(stray);
+						world.addFreshEntity(stray);
 						entity.remove();
 					}
 				}
@@ -127,10 +128,10 @@ public class EnvironmentalEvents {
 			if (validSpawn && entity.getType() == EntityType.MOOSHROOM) {
 				MooshroomEntity mooshroom = (MooshroomEntity) event.getEntity();
 				if (random.nextInt(3) == 0) {
-					MooshroomEntity brownMooshroom = EntityType.MOOSHROOM.create(serverWorld.getWorld());
-					brownMooshroom.setLocationAndAngles(mooshroom.getPosX(), mooshroom.getPosY(), mooshroom.getPosZ(), mooshroom.rotationYaw, mooshroom.rotationPitch);
-					brownMooshroom.setMooshroomType(MooshroomEntity.Type.BROWN);
-					world.addEntity(brownMooshroom);
+					MooshroomEntity brownMooshroom = EntityType.MOOSHROOM.create(serverWorld.getLevel());
+					brownMooshroom.moveTo(mooshroom.getX(), mooshroom.getY(), mooshroom.getZ(), mooshroom.yRot, mooshroom.xRot);
+					brownMooshroom.setMushroomType(MooshroomEntity.Type.BROWN);
+					world.addFreshEntity(brownMooshroom);
 					entity.remove();
 				}
 			}
@@ -140,11 +141,11 @@ public class EnvironmentalEvents {
 
 		if (blockOnlyNaturalSpawns && event.isSpawner()) return;
 		if (!EnvironmentalTags.EntityTypes.UNAFFECTED_BY_SERENITY.contains(entity.getType())) {
-			if (entity.getType().getClassification() == EntityClassification.MONSTER) {
+			if (entity.getType().getCategory() == EntityClassification.MONSTER) {
 				int horizontalRange = EnvironmentalConfig.COMMON.koiHorizontalSerenityRange.get();
 				int verticalRange = EnvironmentalConfig.COMMON.koiVerticalSerenityRange.get();
-				for (Entity koi : world.getEntitiesWithinAABB(KoiEntity.class, entity.getBoundingBox().grow(horizontalRange, verticalRange, horizontalRange))) {
-					if (MathUtil.distanceBetweenPoints2d(entity.getPosX(), entity.getPosZ(), koi.getPosX(), koi.getPosZ()) <= horizontalRange) {
+				for (Entity koi : world.getEntitiesOfClass(KoiEntity.class, entity.getBoundingBox().inflate(horizontalRange, verticalRange, horizontalRange))) {
+					if (MathUtil.distanceBetweenPoints2d(entity.getX(), entity.getZ(), koi.getX(), koi.getZ()) <= horizontalRange) {
 						event.setResult(Event.Result.DENY);
 						break;
 					}
@@ -160,12 +161,12 @@ public class EnvironmentalEvents {
 		if (projectileEntity instanceof PotionEntity) {
 			PotionEntity potionEntity = ((PotionEntity) projectileEntity);
 			ItemStack itemstack = potionEntity.getItem();
-			Potion potion = PotionUtils.getPotionFromItem(itemstack);
-			List<EffectInstance> list = PotionUtils.getEffectsFromStack(itemstack);
+			Potion potion = PotionUtils.getPotion(itemstack);
+			List<EffectInstance> list = PotionUtils.getMobEffects(itemstack);
 
 			if (potion == Potions.WATER && list.isEmpty()) {
-				AxisAlignedBB axisalignedbb = potionEntity.getBoundingBox().grow(2.0D, 1.0D, 2.0D);
-				List<SlabfishEntity> slabs = potionEntity.world.getEntitiesWithinAABB(SlabfishEntity.class, axisalignedbb);
+				AxisAlignedBB axisalignedbb = potionEntity.getBoundingBox().inflate(2.0D, 1.0D, 2.0D);
+				List<SlabfishEntity> slabs = potionEntity.level.getEntitiesOfClass(SlabfishEntity.class, axisalignedbb);
 				if (!slabs.isEmpty()) {
 					for (SlabfishEntity slabfish : slabs) {
 						slabfish.setSlabfishOverlay(SlabfishOverlay.NONE);
@@ -183,7 +184,7 @@ public class EnvironmentalEvents {
 					Item item = projectileitem.getItem().getItem();
 					if (item == Items.SNOWBALL)
 						slabfish.setSlabfishOverlay(SlabfishOverlay.SNOWY);
-					else if (item.isIn(Tags.Items.EGGS))
+					else if (item.is(Tags.Items.EGGS))
 						slabfish.setSlabfishOverlay(SlabfishOverlay.EGG);
 				}
 			}
@@ -200,32 +201,32 @@ public class EnvironmentalEvents {
 		PlayerEntity player = event.getPlayer();
 		ItemStack stack = event.getItemStack();
 		Item item = stack.getItem();
-		if (item == Items.BONE_MEAL && state.getBlock() == Blocks.DIRT && world.getBlockState(pos.up()).propagatesSkylightDown(world, pos)) {
+		if (item == Items.BONE_MEAL && state.getBlock() == Blocks.DIRT && world.getBlockState(pos.above()).propagatesSkylightDown(world, pos)) {
 			ArrayList<BlockState> potentialStates = new ArrayList<>();
-			for (BlockPos blockpos : BlockPos.getAllInBoxMutable(pos.add(-1, -1, -1), pos.add(1, 1, 1))) {
+			for (BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
 				Block block = world.getBlockState(blockpos).getBlock();
-				if (DIRT_SPREADABLES.contains(block) && !potentialStates.contains(block.getDefaultState())) {
-					potentialStates.add(block.getDefaultState());
+				if (DIRT_SPREADABLES.contains(block) && !potentialStates.contains(block.defaultBlockState())) {
+					potentialStates.add(block.defaultBlockState());
 				}
 			}
 			if (!potentialStates.isEmpty()) {
-				if (!world.isRemote()) {
-					world.playEvent(2005, pos, 0);
-					world.setBlockState(pos, potentialStates.get(world.getRandom().nextInt(potentialStates.size())), 3);
+				if (!world.isClientSide()) {
+					world.levelEvent(2005, pos, 0);
+					world.setBlock(pos, potentialStates.get(world.getRandom().nextInt(potentialStates.size())), 3);
 				}
 				if (!player.isCreative()) stack.shrink(1);
-				event.setCancellationResult(ActionResultType.func_233537_a_(world.isRemote()));
+				event.setCancellationResult(ActionResultType.sidedSuccess(world.isClientSide()));
 				event.setCanceled(true);
 			}
 		} else if (event.getFace() != Direction.DOWN) {
-			if (item instanceof ShovelItem && !player.isSpectator() && world.isAirBlock(pos.up())) {
-				if (state.isIn(Blocks.PODZOL) || state.isIn(Blocks.MYCELIUM)) {
-					world.playSound(player, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
-					stack.damageItem(1, player, (damage) -> {
-						damage.sendBreakAnimation(event.getHand());
+			if (item instanceof ShovelItem && !player.isSpectator() && world.isEmptyBlock(pos.above())) {
+				if (state.is(Blocks.PODZOL) || state.is(Blocks.MYCELIUM)) {
+					world.playSound(player, pos, SoundEvents.SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
+					stack.hurtAndBreak(1, player, (damage) -> {
+						damage.broadcastBreakEvent(event.getHand());
 					});
-					world.setBlockState(pos, state.isIn(Blocks.PODZOL) ? EnvironmentalBlocks.PODZOL_PATH.get().getDefaultState() : EnvironmentalBlocks.MYCELIUM_PATH.get().getDefaultState(), 11);
-					event.setCancellationResult(ActionResultType.func_233537_a_(world.isRemote()));
+					world.setBlock(pos, state.is(Blocks.PODZOL) ? EnvironmentalBlocks.PODZOL_PATH.get().defaultBlockState() : EnvironmentalBlocks.MYCELIUM_PATH.get().defaultBlockState(), 11);
+					event.setCancellationResult(ActionResultType.sidedSuccess(world.isClientSide()));
 					event.setCanceled(true);
 				}
 			}
@@ -241,30 +242,30 @@ public class EnvironmentalEvents {
 
 		if (target instanceof SlabfishEntity && stack.getItem() == Items.NAME_TAG) {
 			SlabfishEntity slabby = (SlabfishEntity) event.getTarget();
-			if (stack.hasDisplayName()) {
-				if (!slabby.hasCustomName() || slabby.getCustomName() == null || !slabby.getCustomName().getString().equals(stack.getDisplayName().getString())) {
+			if (stack.hasCustomHoverName()) {
+				if (!slabby.hasCustomName() || slabby.getCustomName() == null || !slabby.getCustomName().getString().equals(stack.getHoverName().getString())) {
 					slabby.playTransformSound();
 				}
 			}
 		}
 
 		if (target instanceof PigEntity && stack.getItem() == Items.GOLDEN_CARROT) {
-			if (target.isAlive() && !((PigEntity) target).isChild()) {
+			if (target.isAlive() && !((PigEntity) target).isBaby()) {
 				IDataManager data = ((IDataManager) target);
 				if (data.getValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME) == 0) {
 					data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, 4800);
 					if (!event.getPlayer().isCreative()) stack.shrink(1);
 
-					if (world.isRemote()) {
+					if (world.isClientSide()) {
 						for (int i = 0; i < 7; ++i) {
 							double d0 = random.nextGaussian() * 0.02D;
 							double d1 = random.nextGaussian() * 0.02D;
 							double d2 = random.nextGaussian() * 0.02D;
-							world.addParticle(EnvironmentalParticles.PIG_FINDS_TRUFFLE.get(), target.getPosXRandom(1.0D), target.getPosYRandom() + 0.5D, target.getPosZRandom(1.0D), d0, d1, d2);
+							world.addParticle(EnvironmentalParticles.PIG_FINDS_TRUFFLE.get(), target.getRandomX(1.0D), target.getRandomY() + 0.5D, target.getRandomZ(1.0D), d0, d1, d2);
 						}
 					}
 
-					event.setCancellationResult(ActionResultType.func_233537_a_(world.isRemote()));
+					event.setCancellationResult(ActionResultType.sidedSuccess(world.isClientSide()));
 					event.setCanceled(true);
 				}
 			}
@@ -274,43 +275,43 @@ public class EnvironmentalEvents {
 	@SubscribeEvent
 	public static void onLivingDeath(LivingDeathEvent event) {
 		LivingEntity entity = event.getEntityLiving();
-		World world = entity.getEntityWorld();
+		World world = entity.getCommandSenderWorld();
 		Random rand = new Random();
 
 		if (entity instanceof SlabfishEntity) {
 			SlabfishEntity slabfish = (SlabfishEntity) event.getEntity();
-			if (world.func_242406_i(new BlockPos(entity.getPositionVec())).equals(Optional.of(Biomes.SOUL_SAND_VALLEY))) {
+			if (world.getBiomeName(new BlockPos(entity.position())).equals(Optional.of(Biomes.SOUL_SAND_VALLEY))) {
 				if (!slabfish.getSlabfishType().equals(SlabfishManager.GHOST)) {
-					if (world.isRemote()) {
+					if (world.isClientSide()) {
 						for (int i = 0; i < 7; ++i) {
 							double d0 = rand.nextGaussian() * 0.02D;
 							double d1 = rand.nextGaussian() * 0.02D;
 							double d2 = rand.nextGaussian() * 0.02D;
-							world.addParticle(ParticleTypes.SOUL, entity.getPosXRandom(1.0D), entity.getPosYRandom() + 0.5D, entity.getPosZRandom(1.0D), d0, d1, d2);
+							world.addParticle(ParticleTypes.SOUL, entity.getRandomX(1.0D), entity.getRandomY() + 0.5D, entity.getRandomZ(1.0D), d0, d1, d2);
 						}
 					}
 
-					if (!world.isRemote()) {
+					if (!world.isClientSide()) {
 						SlabfishEntity ghost = EnvironmentalEntities.SLABFISH.get().create(world);
 						if (ghost == null)
 							return;
 
-						ghost.addPotionEffect(new EffectInstance(Effects.LEVITATION, 140, 0, false, false));
-						ghost.addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 140, 0, false, false));
-						world.playSound(null, new BlockPos(entity.getPositionVec()), SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.NEUTRAL, 1, 1);
+						ghost.addEffect(new EffectInstance(Effects.LEVITATION, 140, 0, false, false));
+						ghost.addEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 140, 0, false, false));
+						world.playSound(null, new BlockPos(entity.position()), SoundEvents.ENCHANTMENT_TABLE_USE, SoundCategory.NEUTRAL, 1, 1);
 
-						ghost.setPosition(slabfish.getPosX(), slabfish.getPosY(), slabfish.getPosZ());
-						ghost.setLocationAndAngles(slabfish.getPosX(), slabfish.getPosY(), slabfish.getPosZ(), slabfish.rotationYaw, slabfish.rotationPitch);
-						ghost.setNoAI(slabfish.isAIDisabled());
-						ghost.setGrowingAge(slabfish.getGrowingAge());
+						ghost.setPos(slabfish.getX(), slabfish.getY(), slabfish.getZ());
+						ghost.moveTo(slabfish.getX(), slabfish.getY(), slabfish.getZ(), slabfish.yRot, slabfish.xRot);
+						ghost.setNoAi(slabfish.isNoAi());
+						ghost.setAge(slabfish.getAge());
 						ghost.setSlabfishType(SlabfishManager.GHOST);
-						ghost.setFire(0);
+						ghost.setSecondsOnFire(0);
 						if (slabfish.hasCustomName()) {
 							ghost.setCustomName(entity.getCustomName());
 							ghost.setCustomNameVisible(entity.isCustomNameVisible());
 						}
 
-						world.addEntity(ghost);
+						world.addFreshEntity(ghost);
 					}
 				}
 			}
@@ -321,25 +322,25 @@ public class EnvironmentalEvents {
 	public static void onBabySpawn(BabyEntitySpawnEvent event) {
 		if (event.getParentA() instanceof PigEntity && event.getParentB() instanceof PigEntity) {
 			PigEntity pig = (PigEntity) event.getParentA();
-			World world = pig.getEntityWorld();
-			int piglets = world.rand.nextInt(4);
+			World world = pig.getCommandSenderWorld();
+			int piglets = world.random.nextInt(4);
 			for (int i = 0; i < piglets; ++i) {
 				PigEntity baby = EntityType.PIG.create(world);
 				if (baby != null) {
-					baby.setChild(true);
-					baby.setLocationAndAngles(pig.getPosX(), pig.getPosY(), pig.getPosZ(), 0.0F, 0.0F);
-					world.addEntity(baby);
+					baby.setBaby(true);
+					baby.moveTo(pig.getX(), pig.getY(), pig.getZ(), 0.0F, 0.0F);
+					world.addFreshEntity(baby);
 				}
 			}
 		}
 	}
 
 	@SubscribeEvent
-	public static void onEnterChunk(EnteringChunk event) {
+	public static void onEntityJoinWorld(EntityJoinWorldEvent event) {
 		Entity entity = event.getEntity();
 		if (entity instanceof IEggLayingEntity && entity instanceof AnimalEntity) {
 			AnimalEntity eggLayer = (AnimalEntity) entity;
-			if (eggLayer.goalSelector.goals.stream().noneMatch((goal) -> goal.getGoal() instanceof LayEggInNestGoal)) {
+			if (eggLayer.goalSelector.availableGoals.stream().noneMatch((goal) -> goal.getGoal() instanceof LayEggInNestGoal)) {
 				eggLayer.goalSelector.addGoal(3, new LayEggInNestGoal(eggLayer, 1.0D));
 			}
 		} else if (entity instanceof WolfEntity) {
@@ -350,15 +351,18 @@ public class EnvironmentalEvents {
 			ocelot.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(ocelot, AnimalEntity.class, 10, false, false, (targetEntity) -> targetEntity.getType() == EnvironmentalEntities.DUCK.get()));
 		} else if (entity instanceof PigEntity) {
 			PigEntity pig = (PigEntity) entity;
-			pig.goalSelector.addGoal(2, new HuntTruffleGoal(pig));
-			pig.goalSelector.addGoal(4, new TemptGoldenCarrotGoal(pig, 1.2D, false, Ingredient.fromItems(Items.GOLDEN_CARROT)));
+			Set<PrioritizedGoal> goals = pig.goalSelector.availableGoals;
+			if (goals.stream().noneMatch((goal) -> goal.getGoal() instanceof HuntTruffleGoal))
+				pig.goalSelector.addGoal(2, new HuntTruffleGoal(pig));
+			if (goals.stream().noneMatch((goal) -> goal.getGoal() instanceof TemptGoldenCarrotGoal))
+				pig.goalSelector.addGoal(4, new TemptGoldenCarrotGoal(pig, 1.2D, false, Ingredient.of(Items.GOLDEN_CARROT)));
 		}
 	}
 
 	@SubscribeEvent
 	public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
 		Entity entity = event.getEntity();
-		World world = entity.getEntityWorld();
+		World world = entity.getCommandSenderWorld();
 		Random random = world.getRandom();
 
 		if (entity instanceof PigEntity && entity.isAlive()) {
@@ -373,16 +377,16 @@ public class EnvironmentalEvents {
 			} else {
 				if (huntingtime > 0) {
 					data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, huntingtime - 1);
-					if (!world.isRemote() && data.getValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET) && huntingtime % 30 == 0) {
-						entity.playSound(EnvironmentalSounds.ENTITY_PIG_SNIFF.get(), 1.0F, (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
+					if (!world.isClientSide() && data.getValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET) && huntingtime % 30 == 0) {
+						entity.playSound(EnvironmentalSounds.PIG_SNIFF.get(), 1.0F, (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
 					}
 				} else if (huntingtime < 0) {
 					data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, huntingtime + 1);
-					if (world.isRemote() && data.getValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET) && huntingtime % 10 == 0) {
+					if (world.isClientSide() && data.getValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET) && huntingtime % 10 == 0) {
 						double d0 = random.nextGaussian() * 0.02D;
 						double d1 = random.nextGaussian() * 0.02D;
 						double d2 = random.nextGaussian() * 0.02D;
-						world.addParticle(EnvironmentalParticles.PIG_FINDS_TRUFFLE.get(), entity.getPosXRandom(1.0D), entity.getPosYRandom() + 0.5D, entity.getPosZRandom(1.0D), d0, d1, d2);
+						world.addParticle(EnvironmentalParticles.PIG_FINDS_TRUFFLE.get(), entity.getRandomX(1.0D), entity.getRandomY() + 0.5D, entity.getRandomZ(1.0D), d0, d1, d2);
 					}
 				}
 			}

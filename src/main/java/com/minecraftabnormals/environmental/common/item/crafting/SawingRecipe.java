@@ -15,10 +15,10 @@ public class SawingRecipe extends SingleItemRecipe {
 	}
 
 	public boolean matches(IInventory inv, World worldIn) {
-		return this.ingredient.test(inv.getStackInSlot(0));
+		return this.ingredient.test(inv.getItem(0));
 	}
 
-	public ItemStack getIcon() {
+	public ItemStack getToastSymbol() {
 		return new ItemStack(EnvironmentalBlocks.SAWMILL.get());
 	}
 }

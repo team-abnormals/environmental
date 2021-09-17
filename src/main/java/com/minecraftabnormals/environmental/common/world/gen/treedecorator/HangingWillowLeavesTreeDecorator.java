@@ -15,23 +15,23 @@ import java.util.Set;
 
 public class HangingWillowLeavesTreeDecorator extends TreeDecorator {
 	public static final Codec<HangingWillowLeavesTreeDecorator> CODEC;
-	public static final HangingWillowLeavesTreeDecorator field_236871_b_ = new HangingWillowLeavesTreeDecorator();
+	public static final HangingWillowLeavesTreeDecorator INSTANCE = new HangingWillowLeavesTreeDecorator();
 
 	@Override
-	protected TreeDecoratorType<?> func_230380_a_() {
+	protected TreeDecoratorType<?> type() {
 		return EnvironmentalFeatures.HANGING_WILLOW_LEAVES.get();
 	}
 
 	static {
-		CODEC = Codec.unit(() -> field_236871_b_);
+		CODEC = Codec.unit(() -> INSTANCE);
 	}
 
 	@Override
-	public void func_225576_a_(ISeedReader world, Random rand, List<BlockPos> logPositions, List<BlockPos> leavesPositions, Set<BlockPos> changedBlocks, MutableBoundingBox boundsIn) {
+	public void place(ISeedReader world, Random rand, List<BlockPos> logPositions, List<BlockPos> leavesPositions, Set<BlockPos> changedBlocks, MutableBoundingBox boundsIn) {
 		for (BlockPos pos : leavesPositions) {
-			if (world.getBlockState(pos.down()).isAir()) {
+			if (world.getBlockState(pos.below()).isAir()) {
 				if (rand.nextInt(2) == 0) {
-					world.setBlockState(pos.down(), EnvironmentalBlocks.HANGING_WILLOW_LEAVES.get().getDefaultState(), 3);
+					world.setBlock(pos.below(), EnvironmentalBlocks.HANGING_WILLOW_LEAVES.get().defaultBlockState(), 3);
 				}
 			}
 		}

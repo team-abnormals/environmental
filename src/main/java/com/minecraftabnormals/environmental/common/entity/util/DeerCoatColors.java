@@ -4,13 +4,13 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 public enum DeerCoatColors {
-	CREAMY(0), CHESTNUT(1), GRAY(2), HOLIDAY(25);
+	CREAMY(0), CHESTNUT(1), GRAY(2), HOLIDAY(3);
 
 	private static final DeerCoatColors[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(DeerCoatColors::getId)).toArray(DeerCoatColors[]::new);
 
 	private final int id;
 
-	private DeerCoatColors(int id) {
+	DeerCoatColors(int id) {
 		this.id = id;
 	}
 

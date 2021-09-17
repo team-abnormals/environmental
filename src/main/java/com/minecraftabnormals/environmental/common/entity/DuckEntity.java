@@ -42,7 +42,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 import java.util.Random;
 
 public class DuckEntity extends AnimalEntity implements IEggLayingEntity {
-	private static final DataParameter<Integer> EATING = EntityDataManager.createKey(DuckEntity.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> EATING = EntityDataManager.defineId(DuckEntity.class, DataSerializers.INT);
 	private float wingRotation;
 	private float destPos;
 	private float oFlapSpeed;
@@ -50,12 +50,12 @@ public class DuckEntity extends AnimalEntity implements IEggLayingEntity {
 	private float wingRotDelta = 1.0F;
 	private float headLean;
 	private float prevHeadLean;
-	public int timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
+	public int timeUntilNextEgg = this.random.nextInt(6000) + 6000;
 	public boolean duckJockey;
 
 	public DuckEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
 		super(type, worldIn);
-		this.setPathPriority(PathNodeType.WATER, 0.0F);
+		this.setPathfindingMalus(PathNodeType.WATER, 0.0F);
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class DuckEntity extends AnimalEntity implements IEggLayingEntity {
 		this.goalSelector.addGoal(1, new PanicGoal(this, 1.4D));
 		this.goalSelector.addGoal(2, new LayEggInNestGoal(this, 1.0D));
 		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
-		this.goalSelector.addGoal(3, new TemptGoal(this, 1.0D, false, Ingredient.fromTag(EnvironmentalTags.Items.DUCK_FOOD)));
+		this.goalSelector.addGoal(3, new TemptGoal(this, 1.0D, false, Ingredient.of(EnvironmentalTags.Items.DUCK_FOOD)));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
 		this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 1.0D));
 		this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 6.0F));
@@ -72,31 +72,31 @@ public class DuckEntity extends AnimalEntity implements IEggLayingEntity {
 	}
 
 	@Override
-	protected void registerData() {
-		super.registerData();
-		this.dataManager.register(EATING, 0);
+	protected void defineSynchedData() {
+		super.defineSynchedData();
+		this.entityData.define(EATING, 0);
 	}
 
 	@Override
 	protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
-		return this.isChild() ? sizeIn.height * 0.85F : sizeIn.height * 0.92F;
+		return this.isBaby() ? sizeIn.height * 0.85F : sizeIn.height * 0.92F;
 	}
 
 	public static AttributeModifierMap.MutableAttribute registerAttributes() {
-		return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 4.0D).createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.25D);
+		return MobEntity.createMobAttributes().add(Attributes.MAX_HEALTH, 4.0D).add(Attributes.MOVEMENT_SPEED, 0.25D);
 	}
 
 	@Override
-	public void livingTick() {
-		super.livingTick();
+	public void aiStep() {
+		super.aiStep();
 
-		double d0 = this.func_233571_b_(FluidTags.WATER);
-		boolean flag = !this.isChild() && d0 > 0.3D || this.isChild() && d0 > 0.15D;
+		double d0 = this.getFluidHeight(FluidTags.WATER);
+		boolean flag = !this.isBaby() && d0 > 0.3D || this.isBaby() && d0 > 0.15D;
 
 		// Wing rotation
 		this.oFlap = this.wingRotation;
 		this.oFlapSpeed = this.destPos;
-		this.destPos = (float) ((double) this.destPos + (double) (this.onGround || this.inWater ? -1 : 4) * 0.3D);
+		this.destPos = (float) ((double) this.destPos + (double) (this.onGround || this.wasTouchingWater ? -1 : 4) * 0.3D);
 		this.destPos = MathHelper.clamp(this.destPos, 0.0F, 1.0F);
 		if (!this.onGround && !flag && this.wingRotDelta < 1.0F) {
 			this.wingRotDelta = 1.0F;
@@ -119,27 +119,27 @@ public class DuckEntity extends AnimalEntity implements IEggLayingEntity {
 		}
 
 		// Motion
-		Vector3d vector3d = this.getMotion();
+		Vector3d vector3d = this.getDeltaMovement();
 		if (!this.onGround && vector3d.y < 0.0D) {
-			this.setMotion(vector3d.mul(1.0D, 0.6D, 1.0D));
+			this.setDeltaMovement(vector3d.multiply(1.0D, 0.6D, 1.0D));
 		}
 
-		if (!this.world.isRemote) {
+		if (!this.level.isClientSide) {
 			// Egg laying
-			if (this.isAlive() && !this.isChild() && !this.inWater && !this.isDuckJockey() && --this.timeUntilNextEgg <= 0) {
-				this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-				this.entityDropItem(this.getEggItem());
-				this.timeUntilNextEgg = this.getNextEggTime(this.rand);
+			if (this.isAlive() && !this.isBaby() && !this.wasTouchingWater && !this.isDuckJockey() && --this.timeUntilNextEgg <= 0) {
+				this.playSound(SoundEvents.CHICKEN_EGG, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+				this.spawnAtLocation(this.getEggItem());
+				this.timeUntilNextEgg = this.getNextEggTime(this.random);
 			}
 
 			// Eating
 			if (this.isEating()) {
-				if (this.inWater && !this.isInLove())
+				if (this.wasTouchingWater && !this.isInLove())
 					this.setEatingTime(this.getEatingTime() - 1);
 				else
 					this.setEatingTime(0);
-			} else if (!this.isInLove() && this.rand.nextInt(300) == 0 && this.inWater) {
-				this.setEatingTime(40 + this.rand.nextInt(20));
+			} else if (!this.isInLove() && this.random.nextInt(300) == 0 && this.wasTouchingWater) {
+				this.setEatingTime(40 + this.random.nextInt(20));
 			}
 		}
 	}
@@ -161,15 +161,15 @@ public class DuckEntity extends AnimalEntity implements IEggLayingEntity {
 	}
 
 	public int getEatingTime() {
-		return this.dataManager.get(EATING);
+		return this.entityData.get(EATING);
 	}
 
 	public void setEatingTime(int eatingTimeIn) {
-		this.dataManager.set(EATING, eatingTimeIn);
+		this.entityData.set(EATING, eatingTimeIn);
 	}
 
 	public static boolean canDuckSpawn(EntityType<? extends AnimalEntity> animal, IWorld worldIn, SpawnReason reason, BlockPos pos, Random random) {
-		return (worldIn.getBlockState(pos.down()).isIn(Blocks.GRASS_BLOCK) || worldIn.getFluidState(pos.down()).isTagged(FluidTags.WATER)) && worldIn.getLightSubtracted(pos, 0) > 8;
+		return (worldIn.getBlockState(pos.below()).is(Blocks.GRASS_BLOCK) || worldIn.getFluidState(pos.below()).is(FluidTags.WATER)) && worldIn.getRawBrightness(pos, 0) > 8;
 	}
 
 	@Override
@@ -178,49 +178,48 @@ public class DuckEntity extends AnimalEntity implements IEggLayingEntity {
 	}
 
 	@Override
-	public boolean onLivingFall(float distance, float damageMultiplier) {
+	public boolean causeFallDamage(float distance, float damageMultiplier) {
 		return false;
 	}
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return EnvironmentalSounds.ENTITY_DUCK_AMBIENT.get();
+		return EnvironmentalSounds.DUCK_AMBIENT.get();
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return EnvironmentalSounds.ENTITY_DUCK_HURT.get();
+		return EnvironmentalSounds.DUCK_HURT.get();
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return EnvironmentalSounds.ENTITY_DUCK_DEATH.get();
+		return EnvironmentalSounds.DUCK_DEATH.get();
 	}
 
 	@Override
-	public SoundEvent getEggLayingSound()
-	{
-		return EnvironmentalSounds.ENTITY_DUCK_EGG.get();
+	public SoundEvent getEggLayingSound() {
+		return EnvironmentalSounds.DUCK_EGG.get();
 	}
-	
+
 	@Override
 	protected void playStepSound(BlockPos pos, BlockState blockIn) {
-		this.playSound(EnvironmentalSounds.ENTITY_DUCK_STEP.get(), 0.15F, 1.0F);
+		this.playSound(EnvironmentalSounds.DUCK_STEP.get(), 0.15F, 1.0F);
 	}
 
 	@Override
-	public boolean isBreedingItem(ItemStack stack) {
-		return Ingredient.fromTag(EnvironmentalTags.Items.DUCK_FOOD).test(stack);
+	public boolean isFood(ItemStack stack) {
+		return Ingredient.of(EnvironmentalTags.Items.DUCK_FOOD).test(stack);
 	}
 
 	@Override
-	protected int getExperiencePoints(PlayerEntity player) {
-		return this.isDuckJockey() ? 10 : super.getExperiencePoints(player);
+	protected int getExperienceReward(PlayerEntity player) {
+		return this.isDuckJockey() ? 10 : super.getExperienceReward(player);
 	}
 
 	@Override
-	public void readAdditional(CompoundNBT compound) {
-		super.readAdditional(compound);
+	public void readAdditionalSaveData(CompoundNBT compound) {
+		super.readAdditionalSaveData(compound);
 		this.duckJockey = compound.getBoolean("IsDuckJockey");
 		if (compound.contains("EggLayTime")) {
 			this.timeUntilNextEgg = compound.getInt("EggLayTime");
@@ -229,25 +228,25 @@ public class DuckEntity extends AnimalEntity implements IEggLayingEntity {
 	}
 
 	@Override
-	public void writeAdditional(CompoundNBT compound) {
-		super.writeAdditional(compound);
+	public void addAdditionalSaveData(CompoundNBT compound) {
+		super.addAdditionalSaveData(compound);
 		compound.putBoolean("IsDuckJockey", this.duckJockey);
 		compound.putInt("EggLayTime", this.timeUntilNextEgg);
 	}
 
 	@Override
-	public boolean canDespawn(double distanceToClosestPlayer) {
+	public boolean removeWhenFarAway(double distanceToClosestPlayer) {
 		return this.isDuckJockey();
 	}
 
 	@Override
-	public void updatePassenger(Entity passenger) {
-		super.updatePassenger(passenger);
-		float f = MathHelper.sin(this.renderYawOffset * ((float) Math.PI / 180F));
-		float f1 = MathHelper.cos(this.renderYawOffset * ((float) Math.PI / 180F));
-		passenger.setPosition(this.getPosX() + (double) (0.1F * f), this.getPosYHeight(0.5D) + passenger.getYOffset() + 0.0D, this.getPosZ() - (double) (0.1F * f1));
+	public void positionRider(Entity passenger) {
+		super.positionRider(passenger);
+		float f = MathHelper.sin(this.yBodyRot * ((float) Math.PI / 180F));
+		float f1 = MathHelper.cos(this.yBodyRot * ((float) Math.PI / 180F));
+		passenger.setPos(this.getX() + (double) (0.1F * f), this.getY(0.5D) + passenger.getMyRidingOffset() + 0.0D, this.getZ() - (double) (0.1F * f1));
 		if (passenger instanceof LivingEntity) {
-			((LivingEntity) passenger).renderYawOffset = this.renderYawOffset;
+			((LivingEntity) passenger).yBodyRot = this.yBodyRot;
 		}
 
 	}
@@ -261,12 +260,12 @@ public class DuckEntity extends AnimalEntity implements IEggLayingEntity {
 	}
 
 	@Override
-	public IPacket<?> createSpawnPacket() {
+	public IPacket<?> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 
 	@Override
-	public AgeableEntity func_241840_a(ServerWorld world, AgeableEntity ageable) {
+	public AgeableEntity getBreedOffspring(ServerWorld world, AgeableEntity ageable) {
 		return EnvironmentalEntities.DUCK.get().create(world);
 	}
 

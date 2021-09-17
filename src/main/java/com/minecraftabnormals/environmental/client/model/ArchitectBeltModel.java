@@ -24,41 +24,41 @@ public class ArchitectBeltModel<T extends LivingEntity> extends BipedModel<T> {
 		super(modelSize, 0.0F, 32, 32);
 
 		this.belt = new ModelRenderer(this);
-		this.belt.setRotationPoint(0.0F, 0.0F, 0.0F);
-		this.belt.setTextureOffset(0, 13).addBox(-4.5F, 0.0F, -2.5F, 9.0F, 14.0F, 5.0F, 0.0F, false);
+		this.belt.setPos(0.0F, 0.0F, 0.0F);
+		this.belt.texOffs(0, 13).addBox(-4.5F, 0.0F, -2.5F, 9.0F, 14.0F, 5.0F, 0.0F, false);
 
 		this.pouch = new ModelRenderer(this);
-		this.pouch.setRotationPoint(6.0F, 8.0F, -1.0F);
+		this.pouch.setPos(6.0F, 8.0F, -1.0F);
 		this.belt.addChild(this.pouch);
-		this.pouch.setTextureOffset(0, 0).addBox(-2.0F, 0.0F, -1.0F, 2.0F, 5.0F, 4.0F, 0.0F, false);
+		this.pouch.texOffs(0, 0).addBox(-2.0F, 0.0F, -1.0F, 2.0F, 5.0F, 4.0F, 0.0F, false);
 
 		this.rightKnee = new ModelRenderer(this);
-		this.rightKnee.setRotationPoint(-2.0F, 12.0F, 0.0F);
-		this.rightKnee.setTextureOffset(12, 0).addBox(-2.5F, 1.5F, -2.5F, 5.0F, 5.0F, 5.0F, -0.2F, false);
+		this.rightKnee.setPos(-2.0F, 12.0F, 0.0F);
+		this.rightKnee.texOffs(12, 0).addBox(-2.5F, 1.5F, -2.5F, 5.0F, 5.0F, 5.0F, -0.2F, false);
 
 		this.leftKnee = new ModelRenderer(this);
-		this.leftKnee.setRotationPoint(2.0F, 12.0F, 0.0F);
-		this.leftKnee.setTextureOffset(12, 0).addBox(-2.5F, 1.5F, -2.5F, 5.0F, 5.0F, 5.0F, -0.2F, true);
+		this.leftKnee.setPos(2.0F, 12.0F, 0.0F);
+		this.leftKnee.texOffs(12, 0).addBox(-2.5F, 1.5F, -2.5F, 5.0F, 5.0F, 5.0F, -0.2F, true);
 	}
 
 	@Override
-	public void render(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-		this.belt.copyModelAngles(this.bipedBody);
-		this.rightKnee.copyModelAngles(this.bipedRightLeg);
-		this.leftKnee.copyModelAngles(this.bipedLeftLeg);
-		matrixStackIn.push();
+	public void renderToBuffer(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
+		this.belt.copyFrom(this.body);
+		this.rightKnee.copyFrom(this.rightLeg);
+		this.leftKnee.copyFrom(this.leftLeg);
+		matrixStackIn.pushPose();
 		matrixStackIn.scale(1.0F, 1.0F, 1.01F);
-		super.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
-		matrixStackIn.pop();
+		super.renderToBuffer(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+		matrixStackIn.popPose();
 	}
 
 	@Override
-	protected Iterable<ModelRenderer> getHeadParts() {
+	protected Iterable<ModelRenderer> headParts() {
 		return ImmutableList.of();
 	}
 
 	@Override
-	protected Iterable<ModelRenderer> getBodyParts() {
+	protected Iterable<ModelRenderer> bodyParts() {
 		return ImmutableList.of(this.belt, this.rightKnee, this.leftKnee);
 	}
 

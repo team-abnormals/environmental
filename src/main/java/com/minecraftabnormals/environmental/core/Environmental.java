@@ -55,10 +55,11 @@ public class Environmental {
 
 	public Environmental() {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-		MinecraftForge.EVENT_BUS.register(this);
+		ModLoadingContext context = ModLoadingContext.get();
 
 		this.setupPlayMessages();
 		this.setupLoginMessages();
+		EnvironmentalDataProcessors.registerTrackedData();
 
 		REGISTRY_HELPER.register(bus);
 		EnvironmentalBlocks.PAINTINGS.register(bus);
@@ -74,33 +75,32 @@ public class Environmental {
 		EnvironmentalParticles.PARTICLE_TYPES.register(bus);
 		EnvironmentalSlabfishConditions.SLABFISH_CONDITIONS.register(bus);
 		EnvironmentalDataSerializers.SERIALIZERS.register(bus);
+		MinecraftForge.EVENT_BUS.register(this);
 
-		bus.addListener(this::setupCommon);
+		bus.addListener(this::commonSetup);
+		bus.addListener(this::clientSetup);
 		bus.addListener(this::registerRegistries);
+
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
 			SlabfishSpriteUploader.init(bus);
-			bus.addListener(this::setupClient);
 			bus.addListener(this::stitchTextures);
 		});
 
-		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, EnvironmentalConfig.COMMON_SPEC);
+		context.registerConfig(ModConfig.Type.COMMON, EnvironmentalConfig.COMMON_SPEC);
 	}
 
-	private void setupCommon(final FMLCommonSetupEvent event) {
+	private void commonSetup(FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
 			EnvironmentalCompat.registerCompat();
 			EnvironmentalEntities.registerSpawns();
 			EnvironmentalBiomes.addBiomeTypes();
 			EnvironmentalBiomes.addBiomesToGeneration();
 			EnvironmentalVillagers.registerVillagerTypes();
-			EnvironmentalVillagers.registerPOIs();
-			EnvironmentalFeatures.Configured.registerConfiguredFeatures();
-			EnvironmentalDataProcessors.registerTrackedData();
 			EnvironmentalEffects.registerBrewingRecipes();
 		});
 	}
 
-	private void setupClient(final FMLClientSetupEvent event) {
+	private void clientSetup(FMLClientSetupEvent event) {
 		EnvironmentalEntities.registerRendering();
 		EnvironmentalCompat.setRenderLayers();
 		event.enqueueWork(() -> {
@@ -129,7 +129,7 @@ public class Environmental {
 
 	private void stitchTextures(TextureStitchEvent.Pre event) {
 		AtlasTexture texture = event.getMap();
-		if (PlayerContainer.LOCATION_BLOCKS_TEXTURE.equals(texture.getTextureLocation())) {
+		if (PlayerContainer.BLOCK_ATLAS.equals(texture.location())) {
 			event.addSprite(new ResourceLocation(Environmental.MOD_ID, "item/slabfish_sweater_slot"));
 			event.addSprite(new ResourceLocation(Environmental.MOD_ID, "item/slabfish_backpack_slot"));
 			event.addSprite(new ResourceLocation(Environmental.MOD_ID, "item/slabfish_backpack_type_slot"));

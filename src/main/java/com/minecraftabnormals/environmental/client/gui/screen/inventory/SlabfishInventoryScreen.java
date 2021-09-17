@@ -23,34 +23,34 @@ public class SlabfishInventoryScreen extends ContainerScreen<SlabfishInventoryCo
 
 	public SlabfishInventoryScreen(SlabfishInventoryContainer screenContainer, PlayerInventory playerInventory, SlabfishEntity slabfish) {
 		super(screenContainer, playerInventory, slabfish.getDisplayName());
-		this.slabfishManager = SlabfishManager.get(slabfish.getEntityWorld());
+		this.slabfishManager = SlabfishManager.get(slabfish.getCommandSenderWorld());
 		this.slabfish = slabfish;
 		this.passEvents = false;
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
+	protected void renderBg(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
 		RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.getMinecraft().getTextureManager().bindTexture(SLABFISH_GUI_TEXTURE);
-		int i = (this.width - this.xSize) / 2;
-		int j = (this.height - this.ySize) / 2;
-		this.blit(matrixStack, i, j, 0, 0, this.xSize, this.ySize);
+		this.getMinecraft().getTextureManager().bind(SLABFISH_GUI_TEXTURE);
+		int i = (this.width - this.imageWidth) / 2;
+		int j = (this.height - this.imageHeight) / 2;
+		this.blit(matrixStack, i, j, 0, 0, this.imageWidth, this.imageHeight);
 
 		if (this.slabfish.hasBackpack()) {
-			this.blit(matrixStack, i + 79, j + 17, 0, this.ySize, 5 * 18, 54);
+			this.blit(matrixStack, i + 79, j + 17, 0, this.imageHeight, 5 * 18, 54);
 
 			SlabfishType slabfishType = this.slabfishManager.getSlabfishType(this.slabfish.getSlabfishType()).orElse(SlabfishManager.DEFAULT_SLABFISH);
 			if (slabfishType.getCustomBackpack() == null || !this.slabfishManager.getBackpackType(slabfishType.getCustomBackpack()).isPresent())
 				this.blit(matrixStack, i + 7, j + 53, 0, 220, 18, 18);
 		}
 
-		InventoryScreen.drawEntityOnScreen(i + 51, j + 60, 32, i + 51 - mouseX, j + 25 - mouseY, this.slabfish);
+		InventoryScreen.renderEntityInInventory(i + 51, j + 60, 32, i + 51 - mouseX, j + 25 - mouseY, this.slabfish);
 	}
 
 	@Override
 	public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
 		this.renderBackground(matrixStack);
 		super.render(matrixStack, mouseX, mouseY, partialTicks);
-		this.renderHoveredTooltip(matrixStack, mouseX, mouseY);
+		this.renderTooltip(matrixStack, mouseX, mouseY);
 	}
 }

@@ -20,21 +20,21 @@ public class BirdNestTileEntity extends TileEntity implements ITickableTileEntit
 	}
 
 	public void tick() {
-		if (this.world != null && !this.world.isRemote) {
-			BlockState blockstate = this.world.getBlockState(this.pos);
+		if (this.level != null && !this.level.isClientSide) {
+			BlockState blockstate = this.level.getBlockState(this.worldPosition);
 
-			int i = blockstate.get(BirdNestBlock.EGGS);
-			BlockPos blockpos = pos.down();
+			int i = blockstate.getValue(BirdNestBlock.EGGS);
+			BlockPos blockpos = worldPosition.below();
 			BirdNestBlock block = (BirdNestBlock) blockstate.getBlock();
 
-			if (this.world.getBlockState(blockpos).hasTileEntity()) {
-				TileEntity tileentity = this.world.getTileEntity(blockpos);
+			if (this.level.getBlockState(blockpos).hasTileEntity()) {
+				TileEntity tileentity = this.level.getBlockEntity(blockpos);
 				if (tileentity instanceof HopperTileEntity) {
-					if (!((HopperTileEntity) tileentity).isOnTransferCooldown() && insertEggToHopper(tileentity, new ItemStack(block.getEgg()))) {
+					if (!((HopperTileEntity) tileentity).isOnCooldown() && insertEggToHopper(tileentity, new ItemStack(block.getEgg()))) {
 						if (i > 1)
-							this.world.setBlockState(this.pos, blockstate.with(BirdNestBlock.EGGS, Integer.valueOf(i - 1)), 2);
+							this.level.setBlock(this.worldPosition, blockstate.setValue(BirdNestBlock.EGGS, Integer.valueOf(i - 1)), 2);
 						else
-							this.world.setBlockState(this.pos, block.getEmptyNest().getDefaultState(), 2);
+							this.level.setBlock(this.worldPosition, block.getEmptyNest().defaultBlockState(), 2);
 					}
 				}
 			}
@@ -53,8 +53,8 @@ public class BirdNestTileEntity extends TileEntity implements ITickableTileEntit
 			return false;
 		}
 
-		if (!hopper.mayTransfer()) {
-			hopper.setTransferCooldown(8);
+		if (!hopper.isOnCustomCooldown()) {
+			hopper.setCooldown(8);
 		}
 
 		return true;

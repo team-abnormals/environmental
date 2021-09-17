@@ -17,7 +17,7 @@ public class EnvironmentalClientEvents {
 	public static void renderNameplate(RenderNameplateEvent event) {
 		if (event.getEntity() instanceof LivingEntity) {
 			LivingEntity entity = (LivingEntity) event.getEntity();
-			if (entity.getItemStackFromSlot(EquipmentSlotType.HEAD).getItem() == EnvironmentalItems.THIEF_HOOD.get()) {
+			if (entity.getItemBySlot(EquipmentSlotType.HEAD).getItem() == EnvironmentalItems.THIEF_HOOD.get()) {
 				event.setResult(Result.DENY);
 			}
 		}

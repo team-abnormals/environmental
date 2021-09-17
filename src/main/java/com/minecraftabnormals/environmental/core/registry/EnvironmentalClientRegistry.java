@@ -29,7 +29,7 @@ public class EnvironmentalClientRegistry {
 
 	@SubscribeEvent
 	public static void registerParticleFactorys(ParticleFactoryRegisterEvent event) {
-		ParticleManager manager = Minecraft.getInstance().particles;
+		ParticleManager manager = Minecraft.getInstance().particleEngine;
 		registerParticleFactory(manager, EnvironmentalParticles.KILN_SMOKE, KilnSmokeParticle.Factory::new);
 		registerParticleFactory(manager, EnvironmentalParticles.CHERRY_BLOSSOM, CherryBlossomParticle.Factory::new);
 		registerParticleFactory(manager, EnvironmentalParticles.RED_LOTUS_BLOSSOM, LotusBlossomParticle.Factory::new);
@@ -40,7 +40,7 @@ public class EnvironmentalClientRegistry {
 
 	@SubscribeEvent
 	public static void onEvent(ModelRegistryEvent event) {
-		for (ResourceLocation location : Minecraft.getInstance().getResourceManager().getAllResourceLocations("models/item/slabfish_bucket", s -> s.endsWith(".json")))
+		for (ResourceLocation location : Minecraft.getInstance().getResourceManager().listResources("models/item/slabfish_bucket", s -> s.endsWith(".json")))
 			ModelLoader.addSpecialModel(new ResourceLocation(location.getNamespace(), location.getPath().substring("models/".length(), location.getPath().length() - ".json".length())));
 	}
 
@@ -55,7 +55,7 @@ public class EnvironmentalClientRegistry {
 	}
 
 	private static <T extends IParticleData> void registerParticleFactory(ParticleManager manager, RegistryObject<BasicParticleType> particleTypeIn, IParticleMetaFactory<BasicParticleType> particleMetaFactoryIn) {
-		if (checkForNonNull(particleTypeIn)) manager.registerFactory(particleTypeIn.get(), particleMetaFactoryIn);
+		if (checkForNonNull(particleTypeIn)) manager.register(particleTypeIn.get(), particleMetaFactoryIn);
 	}
 
 	private static boolean checkForNonNull(RegistryObject<BasicParticleType> registryObject) {

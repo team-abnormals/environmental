@@ -1,21 +1,28 @@
 {
-  "music.record.slabrave": {
+  "music_disc.slabrave": {
     "category": "master",
     "sounds": [
       {
-        "name": "environmental:record/slabrave",
+        "name": "environmental:records/slabrave",
         "stream": true
       }
     ]
   },
-  "music.record.leaving_home": {
+  "music_disc.leaving_home": {
     "category": "master",
     "sounds": [
       {
-        "name": "environmental:record/leaving_home",
+        "name": "environmental:records/leaving_home",
         "stream": true
       }
     ]
+  },
+  "item.cattail_seeds.pick_from_plant": {
+    "sounds": [
+      "item/sweet_berries/pick_from_bush1",
+      "item/sweet_berries/pick_from_bush2"
+    ],
+    "subtitle": "subtitles.environmental.item.cattails.pick"
   },
   "entity.slabfish.death": {
     "sounds": [
@@ -114,6 +121,63 @@
       }
     ],
     "subtitle": "subtitles.environmental.entity.koi.flop"
+  },
+  "entity.deer.ambient": {
+    "sounds": [
+      {
+        "name": "environmental:mob/deer/say1",
+        "volume": 0.3
+      },
+      {
+        "name": "environmental:mob/deer/say2",
+        "volume": 0.3
+      }
+    ],
+    "subtitle": "subtitles.environmental.entity.deer.ambient"
+  },
+  "entity.deer.death": {
+    "sounds": [
+      {
+        "name": "environmental:mob/deer/hurt1",
+        "volume": 0.3
+      },
+      {
+        "name": "environmental:mob/deer/hurt2",
+        "volume": 0.3
+      },
+      {
+        "name": "environmental:mob/deer/hurt3",
+        "volume": 0.3
+      }
+    ],
+    "subtitle": "subtitles.environmental.entity.deer.death"
+  },
+  "entity.deer.step": {
+    "sounds": [
+      "mob/sheep/step1",
+      "mob/sheep/step2",
+      "mob/sheep/step3",
+      "mob/sheep/step4",
+      "mob/sheep/step5"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "entity.deer.hurt": {
+    "sounds": [
+      {
+        "name": "environmental:mob/deer/hurt1",
+        "volume": 0.3
+      },
+      {
+        "name": "environmental:mob/deer/hurt2",
+        "volume": 0.3
+      },
+      {
+        "name": "environmental:mob/deer/hurt3",
+        "volume": 0.3
+      }
+    ],
+    "subtitle": "subtitles.environmental.entity.deer.hurt"
   },
   "entity.duck.ambient": {
     "sounds": [

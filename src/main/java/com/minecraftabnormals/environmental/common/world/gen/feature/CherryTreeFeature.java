@@ -9,6 +9,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.Direction.Plane;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldWriter;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.IWorldGenerationReader;
@@ -23,11 +24,11 @@ public class CherryTreeFeature extends Feature<BaseTreeFeatureConfig> {
 	}
 
 	@Override
-	public boolean generate(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos position, BaseTreeFeatureConfig config) {
+	public boolean place(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos position, BaseTreeFeatureConfig config) {
 		int height = 5 + rand.nextInt(3) + rand.nextInt(3) + rand.nextInt(3);
 		boolean flag = true;
 
-		if (position.getY() >= 1 && position.getY() + height + 1 <= worldIn.getHeight()) {
+		if (position.getY() >= 1 && position.getY() + height + 1 <= worldIn.getMaxBuildHeight()) {
 			for (int j = position.getY(); j <= position.getY() + 1 + height; ++j) {
 				int k = 1;
 				if (j == position.getY()) k = 0;
@@ -35,8 +36,8 @@ public class CherryTreeFeature extends Feature<BaseTreeFeatureConfig> {
 				BlockPos.Mutable blockpos$mutableblockpos = new BlockPos.Mutable();
 				for (int l = position.getX() - k; l <= position.getX() + k && flag; ++l) {
 					for (int i1 = position.getZ() - k; i1 <= position.getZ() + k && flag; ++i1) {
-						if (j >= 0 && j < worldIn.getHeight()) {
-							if (!TreeUtil.isAirOrLeaves(worldIn, blockpos$mutableblockpos.setPos(l, j, i1)))
+						if (j >= 0 && j < worldIn.getMaxBuildHeight()) {
+							if (!TreeUtil.isAirOrLeaves(worldIn, blockpos$mutableblockpos.set(l, j, i1)))
 								flag = false;
 						} else
 							flag = false;
@@ -46,9 +47,9 @@ public class CherryTreeFeature extends Feature<BaseTreeFeatureConfig> {
 
 			if (!flag) {
 				return false;
-			} else if (isDirtAt(worldIn, position.down()) && position.getY() < worldIn.getHeight()) {
+			} else if (isGrassOrDirt(worldIn, position.below()) && position.getY() < worldIn.getMaxBuildHeight()) {
 				// base log
-				TreeUtil.setDirtAt(worldIn, position.down());
+				TreeUtil.setDirtAt(worldIn, position.below());
 
 				int logX = position.getX();
 				int logZ = position.getZ();
@@ -61,24 +62,27 @@ public class CherryTreeFeature extends Feature<BaseTreeFeatureConfig> {
 					}
 				}
 
-				Plane.HORIZONTAL.getDirectionValues().forEach(direction -> {
-					BlockPos stumpPos = position.offset(direction);
-					if (TreeUtil.isAirOrLeaves(worldIn, stumpPos) && isDirtAt(worldIn, stumpPos.down())) {
+				Plane.HORIZONTAL.stream().forEach(direction -> {
+					BlockPos stumpPos = position.relative(direction);
+					if (TreeUtil.isAirOrLeaves(worldIn, stumpPos) && isGrassOrDirt(worldIn, stumpPos.below())) {
 						this.placeLogAt(worldIn, stumpPos, Direction.UP, rand, config);
-						BlockPos sideStumpPos = stumpPos.offset(direction.rotateY());
-						if (rand.nextBoolean() && isDirtAt(worldIn, sideStumpPos.down()) && TreeUtil.isAirOrLeaves(worldIn, sideStumpPos))
+						TreeUtil.setDirtAt(worldIn, stumpPos.below());
+						BlockPos sideStumpPos = stumpPos.relative(direction.getClockWise());
+						if (rand.nextBoolean() && isGrassOrDirt(worldIn, sideStumpPos.below()) && TreeUtil.isAirOrLeaves(worldIn, sideStumpPos)) {
 							this.placeLogAt(worldIn, sideStumpPos, Direction.UP, rand, config);
-						if (rand.nextBoolean() && TreeUtil.isAirOrLeaves(worldIn, stumpPos.up()))
-							this.placeLogAt(worldIn, stumpPos.up(), Direction.UP, rand, config);
+							TreeUtil.setDirtAt(worldIn, sideStumpPos.below());
+						}
+						if (rand.nextBoolean() && TreeUtil.isAirOrLeaves(worldIn, stumpPos.above()))
+							this.placeLogAt(worldIn, stumpPos.above(), Direction.UP, rand, config);
 					}
 				});
 
 
-				Plane.HORIZONTAL.getDirectionValues().forEach(direction -> {
+				Plane.HORIZONTAL.stream().forEach(direction -> {
 					int newHeight = rand.nextBoolean() ? height + rand.nextInt(2) : height - rand.nextInt(2);
 					BlockPos newPos = this.createCherryBranch(newHeight, worldIn, position, direction, rand, config);
 					for (int i = 0; i < 5; ++i) {
-						this.createCherryLeaves(worldIn, newPos.up(2).down(i), rand, i, config);
+						this.createCherryLeaves(worldIn, newPos.above(2).below(i), rand, i, config);
 					}
 				});
 				return true;
@@ -96,12 +100,12 @@ public class CherryTreeFeature extends Feature<BaseTreeFeatureConfig> {
 		for (int k3 = -leafSize; k3 <= leafSize; ++k3) {
 			for (int j4 = -leafSize; j4 <= leafSize; ++j4) {
 				if (level == 2) {
-					this.placeLeafAt(worldIn, newPos.add(k3, 0, j4), rand, config);
+					this.placeLeafAt(worldIn, newPos.offset(k3, 0, j4), rand, config);
 				} else {
 					if (level > 0 && level < 4 && (Math.abs(k3) != leafSize || Math.abs(j4) != leafSize)) {
-						this.placeLeafAt(worldIn, newPos.add(k3, 0, j4), rand, config);
+						this.placeLeafAt(worldIn, newPos.offset(k3, 0, j4), rand, config);
 					} else if (rand.nextInt(4) == 0) {
-						this.placeLeafAt(worldIn, newPos.add(k3, 0, j4), rand, config);
+						this.placeLeafAt(worldIn, newPos.offset(k3, 0, j4), rand, config);
 					}
 				}
 			}
@@ -131,12 +135,12 @@ public class CherryTreeFeature extends Feature<BaseTreeFeatureConfig> {
 				} else {
 					logZ -= rand.nextInt(2);
 				}
-				
+
 			}
 
 			logY += 1;
 		}
-		return blockpos.offset(direction);
+		return blockpos.relative(direction);
 	}
 
 	private void createHorizontalLog(IWorldGenerationReader worldIn, BlockPos pos, Direction direction, Random rand, BaseTreeFeatureConfig config) {
@@ -145,8 +149,8 @@ public class CherryTreeFeature extends Feature<BaseTreeFeatureConfig> {
 		int logZ = pos.getZ();
 
 		for (int k3 = 0; k3 < 1; ++k3) {
-			logX += direction.getXOffset();
-			logZ += direction.getZOffset();
+			logX += direction.getStepX();
+			logZ += direction.getStepZ();
 			BlockPos blockpos1 = new BlockPos(logX, logY, logZ);
 			if (TreeUtil.isAirOrLeaves(worldIn, blockpos1)) {
 				this.placeLogAt(worldIn, blockpos1, Direction.UP, rand, config);
@@ -155,16 +159,16 @@ public class CherryTreeFeature extends Feature<BaseTreeFeatureConfig> {
 	}
 
 	private void placeLogAt(IWorldWriter worldIn, BlockPos pos, Direction direction, Random rand, BaseTreeFeatureConfig config) {
-		BlockState logState = config.trunkProvider.getBlockState(rand, pos).with(RotatedPillarBlock.AXIS, direction.getAxis());
+		BlockState logState = config.trunkProvider.getState(rand, pos).setValue(RotatedPillarBlock.AXIS, direction.getAxis());
 		TreeUtil.setForcedState(worldIn, pos, logState);
 	}
 
 	private void placeLeafAt(IWorldGenerationReader world, BlockPos pos, Random rand, BaseTreeFeatureConfig config) {
 		if (TreeUtil.isAirOrLeaves(world, pos)) {
-			if (config.leavesProvider.getBlockState(rand, pos).hasProperty(LeavesBlock.DISTANCE)) {
-				TreeUtil.setForcedState(world, pos, config.leavesProvider.getBlockState(rand, pos).with(LeavesBlock.DISTANCE, 1));
-			} else {
-				TreeUtil.setForcedState(world, pos, config.leavesProvider.getBlockState(rand, pos));
+			BlockState state = config.leavesProvider.getState(rand, pos);
+			TreeUtil.setForcedState(world, pos, state);
+			if (state.hasProperty(LeavesBlock.DISTANCE)) {
+				LeavesBlock.updateDistance(state, (IWorld) world, pos);
 			}
 		}
 	}

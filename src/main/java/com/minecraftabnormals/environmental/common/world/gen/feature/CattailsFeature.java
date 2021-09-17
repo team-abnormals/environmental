@@ -18,14 +18,14 @@ public class CattailsFeature extends Feature<NoFeatureConfig> {
 	}
 
 	@Override
-	public boolean generate(ISeedReader world, ChunkGenerator p_230362_3_, Random random, BlockPos pos, NoFeatureConfig p_230362_6_) {
+	public boolean place(ISeedReader world, ChunkGenerator p_230362_3_, Random random, BlockPos pos, NoFeatureConfig p_230362_6_) {
 		boolean place = false;
 		for (int i = 0; i < 512; ++i) {
-			BlockPos placePos = pos.add(random.nextInt(8) - random.nextInt(4), random.nextInt(4) - random.nextInt(4), random.nextInt(8) - random.nextInt(4));
-			if (i == 0 && !world.hasWater(placePos)) {
+			BlockPos placePos = pos.offset(random.nextInt(8) - random.nextInt(4), random.nextInt(4) - random.nextInt(4), random.nextInt(8) - random.nextInt(4));
+			if (i == 0 && !world.isWaterAt(placePos)) {
 				return false;
 			}
-			if ((world.hasWater(placePos) || world.isAirBlock(placePos)) && world.isAirBlock(placePos.up()) && EnvironmentalBlocks.CATTAIL.get().getDefaultState().isValidPosition(world, placePos)) {
+			if ((world.isWaterAt(placePos) || world.isEmptyBlock(placePos)) && world.isEmptyBlock(placePos.above()) && EnvironmentalBlocks.CATTAIL.get().defaultBlockState().canSurvive(world, placePos)) {
 				((CattailBlock) EnvironmentalBlocks.CATTAIL.get()).placeAt(world, placePos, 2);
 				place = true;
 			}

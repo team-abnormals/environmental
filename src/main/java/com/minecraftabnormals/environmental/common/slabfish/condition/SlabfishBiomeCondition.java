@@ -28,7 +28,7 @@ public class SlabfishBiomeCondition implements SlabfishCondition {
 	private SlabfishBiomeCondition(@Nullable Biome.Category biomeCategory) {
 		List<ResourceLocation> validBiomes = new ArrayList<>();
 		for (Biome biome : ForgeRegistries.BIOMES)
-			if (biomeCategory == null || biome.getCategory() == biomeCategory)
+			if (biomeCategory == null || biome.getBiomeCategory() == biomeCategory)
 				validBiomes.add(biome.getRegistryName());
 		this.biomes = validBiomes.toArray(new ResourceLocation[0]);
 	}

@@ -34,18 +34,18 @@ import java.util.Random;
 
 public class HangingWisteriaLeavesBlock extends Block implements IForgeShearable {
 	public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
-	protected static final VoxelShape WISTERIA_VINE_TOP = Block.makeCuboidShape(1, 0, 1, 15, 16, 15);
-	protected static final VoxelShape WISTERIA_VINE_BOTTOM = Block.makeCuboidShape(4, 0, 4, 12, 16, 12);
+	protected static final VoxelShape WISTERIA_VINE_TOP = Block.box(1, 0, 1, 15, 16, 15);
+	protected static final VoxelShape WISTERIA_VINE_BOTTOM = Block.box(4, 0, 4, 12, 16, 12);
 	private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(() -> Items.VINE);
 
 	public HangingWisteriaLeavesBlock(Block.Properties properties) {
 		super(properties);
-		setDefaultState(stateContainer.getBaseState().with(HALF, DoubleBlockHalf.UPPER));
+		registerDefaultState(stateDefinition.any().setValue(HALF, DoubleBlockHalf.UPPER));
 	}
 
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		if (state.get(HALF) == DoubleBlockHalf.UPPER) return WISTERIA_VINE_TOP;
-		if (state.get(HALF) == DoubleBlockHalf.LOWER) return WISTERIA_VINE_BOTTOM;
+		if (state.getValue(HALF) == DoubleBlockHalf.UPPER) return WISTERIA_VINE_TOP;
+		if (state.getValue(HALF) == DoubleBlockHalf.LOWER) return WISTERIA_VINE_BOTTOM;
 		else return VoxelShapes.empty();
 	}
 
@@ -56,35 +56,35 @@ public class HangingWisteriaLeavesBlock extends Block implements IForgeShearable
 
 	@Override
 	public void neighborChanged(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean moving) {
-		if (state == getDefaultState().with(HALF, DoubleBlockHalf.UPPER)) {
-			if (world.getBlockState(pos.up()) == Blocks.AIR.getDefaultState()) {
+		if (state == defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER)) {
+			if (world.getBlockState(pos.above()) == Blocks.AIR.defaultBlockState()) {
 				world.removeBlock(pos, false);
 			}
-		} else if (state == getDefaultState().with(HALF, DoubleBlockHalf.LOWER)) {
-			if (world.getBlockState(pos.up()) == Blocks.AIR.getDefaultState()) {
+		} else if (state == defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER)) {
+			if (world.getBlockState(pos.above()) == Blocks.AIR.defaultBlockState()) {
 				world.removeBlock(pos, false);
 			}
 		}
 	}
 
-	public int getOpacity(BlockState state, IBlockReader worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state, IBlockReader worldIn, BlockPos pos) {
 		return 1;
 	}
 
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(HALF);
 	}
 
 	@OnlyIn(Dist.CLIENT)
 	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-		if (worldIn.isRainingAt(pos.up())) {
+		if (worldIn.isRainingAt(pos.above())) {
 			if (rand.nextInt(15) == 1) {
-				BlockPos blockpos = pos.down();
+				BlockPos blockpos = pos.below();
 				BlockState blockstate = worldIn.getBlockState(blockpos);
-				if (!blockstate.isSolid() || !blockstate.isSolidSide(worldIn, blockpos, Direction.UP)) {
-					double d0 = (double) ((float) pos.getX() + rand.nextFloat());
+				if (!blockstate.canOcclude() || !blockstate.isFaceSturdy(worldIn, blockpos, Direction.UP)) {
+					double d0 = (float) pos.getX() + rand.nextFloat();
 					double d1 = (double) pos.getY() - 0.05D;
-					double d2 = (double) ((float) pos.getZ() + rand.nextFloat());
+					double d2 = (float) pos.getZ() + rand.nextFloat();
 					worldIn.addParticle(ParticleTypes.DRIPPING_WATER, d0, d1, d2, 0.0D, 0.0D, 0.0D);
 				}
 			}
@@ -106,27 +106,27 @@ public class HangingWisteriaLeavesBlock extends Block implements IForgeShearable
 	}
 
 	protected boolean isStateValid(World worldIn, BlockPos pos) {
-		Block block = worldIn.getBlockState(pos.up()).getBlock();
-		return block == getDefaultState().with(HALF, DoubleBlockHalf.UPPER).getBlock() || block.isIn(BlockTags.LEAVES) || block.isIn(BlockTags.LOGS);
+		Block block = worldIn.getBlockState(pos.above()).getBlock();
+		return block == defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER).getBlock() || block.is(BlockTags.LEAVES) || block.is(BlockTags.LOGS);
 	}
 
 	@Override
 	@Nullable
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		World world = context.getWorld();
-		BlockPos pos = context.getPos();
+		World world = context.getLevel();
+		BlockPos pos = context.getClickedPos();
 		if (isStateValid(world, pos)) {
-			if (world.getBlockState(pos.up()) == getDefaultState().with(HALF, DoubleBlockHalf.UPPER)) {
-				return getDefaultState().with(HALF, DoubleBlockHalf.LOWER);
-			} else if (world.getBlockState(pos.up()) == getDefaultState().with(HALF, DoubleBlockHalf.LOWER)) {
+			if (world.getBlockState(pos.above()) == defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER)) {
+				return defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER);
+			} else if (world.getBlockState(pos.above()) == defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER)) {
 				return null;
-			} else return getDefaultState().with(HALF, DoubleBlockHalf.UPPER);
+			} else return defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER);
 		}
 		return null;
 	}
 
 	@Override
-	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
 		FILLER.fillItem(this.asItem(), group, items);
 	}
 }

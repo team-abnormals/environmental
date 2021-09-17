@@ -58,7 +58,7 @@ public interface SlabfishManager {
 	 * @return The slabfish manager for that side
 	 */
 	static SlabfishManager get(IWorldReader world) {
-		return world.isRemote() ? ClientSlabfishManager.INSTANCE : SlabfishLoader.instance;
+		return world.isClientSide() ? ClientSlabfishManager.INSTANCE : SlabfishLoader.instance;
 	}
 
 	/**

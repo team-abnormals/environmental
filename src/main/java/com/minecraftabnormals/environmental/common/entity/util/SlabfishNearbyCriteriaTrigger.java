@@ -25,14 +25,14 @@ public class SlabfishNearbyCriteriaTrigger extends AbstractCriterionTrigger<Slab
 		return ID;
 	}
 
-	public SlabfishNearbyCriteriaTrigger.Instance deserializeTrigger(JsonObject json, EntityPredicate.AndPredicate predicate, ConditionArrayParser parser) {
+	public SlabfishNearbyCriteriaTrigger.Instance createInstance(JsonObject json, EntityPredicate.AndPredicate predicate, ConditionArrayParser parser) {
 		if (!json.has("slabfish") || !json.get("slabfish").isJsonPrimitive() || !json.get("slabfish").getAsJsonPrimitive().isString())
 			throw new JsonSyntaxException("'slabfish' required as string");
 		return new SlabfishNearbyCriteriaTrigger.Instance(predicate, new ResourceLocation(json.get("slabfish").getAsString()));
 	}
 
 	public void trigger(ServerPlayerEntity player, SlabfishEntity slabfish) {
-		this.triggerListeners(player, instance -> instance.slabfishType.equals(slabfish.getSlabfishType()));
+		this.trigger(player, instance -> instance.slabfishType.equals(slabfish.getSlabfishType()));
 	}
 
 	public static class Instance extends CriterionInstance {
@@ -44,8 +44,8 @@ public class SlabfishNearbyCriteriaTrigger extends AbstractCriterionTrigger<Slab
 		}
 
 		@Override
-		public JsonObject serialize(ConditionArraySerializer serializer) {
-			JsonObject jsonobject = super.serialize(serializer);
+		public JsonObject serializeToJson(ConditionArraySerializer serializer) {
+			JsonObject jsonobject = super.serializeToJson(serializer);
 			jsonobject.addProperty("block", this.slabfishType.toString());
 			return jsonobject;
 		}

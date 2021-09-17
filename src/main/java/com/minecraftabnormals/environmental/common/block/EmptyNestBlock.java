@@ -24,7 +24,7 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 public class EmptyNestBlock extends Block {
-	protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 3.0D, 16.0D);
+	protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 3.0D, 16.0D);
 	private final Map<Supplier<? extends Item>, Block> NESTS = Maps.newHashMap();
 
 	public EmptyNestBlock(Properties properties) {
@@ -39,14 +39,14 @@ public class EmptyNestBlock extends Block {
 		return SHAPE;
 	}
 
-	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-		return !stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+		return !stateIn.canSurvive(worldIn, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 	}
 
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		if (player.isAllowEdit()) {
+	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+		if (player.mayBuild()) {
 
-			ItemStack itemstack = player.getHeldItem(handIn);
+			ItemStack itemstack = player.getItemInHand(handIn);
 			Item item = itemstack.getItem();
 
 			Block nest = null;
@@ -59,22 +59,22 @@ public class EmptyNestBlock extends Block {
 			}
 
 			if (nest != null && ((BirdNestBlock) nest).getEgg() != Items.AIR) {
-				if (!player.abilities.isCreativeMode && !worldIn.isRemote) {
+				if (!player.abilities.instabuild && !worldIn.isClientSide) {
 					itemstack.shrink(1);
 				}
-				worldIn.setBlockState(pos, nest.getDefaultState(), 3);
+				worldIn.setBlock(pos, nest.defaultBlockState(), 3);
 
-				return ActionResultType.func_233537_a_(worldIn.isRemote);
+				return ActionResultType.sidedSuccess(worldIn.isClientSide);
 			}
 
 			return ActionResultType.CONSUME;
 		} else {
-			return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+			return super.use(state, worldIn, pos, player, handIn, hit);
 		}
 	}
 
-	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-		return worldIn.getBlockState(pos.down()).getMaterial().isSolid();
+	public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
+		return worldIn.getBlockState(pos.below()).getMaterial().isSolid();
 	}
 
 	public Block getNest(Item item) {

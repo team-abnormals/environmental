@@ -17,22 +17,22 @@ public class DirectionalFlowersFeature<U extends BlockClusterFeatureConfig> exte
 	}
 
 	@Override
-	public boolean isValidPosition(IWorld world, BlockPos pos, U config) {
+	public boolean isValid(IWorld world, BlockPos pos, U config) {
 		return !config.blacklist.contains(world.getBlockState(pos));
 	}
 
 	@Override
-	public int getFlowerCount(U config) {
-		return config.tryCount;
+	public int getCount(U config) {
+		return config.tries;
 	}
 
 	@Override
-	public BlockPos getNearbyPos(Random rand, BlockPos pos, U config) {
-		return pos.add(rand.nextInt(config.xSpread) - rand.nextInt(config.xSpread), rand.nextInt(config.ySpread) - rand.nextInt(config.ySpread), rand.nextInt(config.zSpread) - rand.nextInt(config.zSpread));
+	public BlockPos getPos(Random rand, BlockPos pos, U config) {
+		return pos.offset(rand.nextInt(config.xspread) - rand.nextInt(config.xspread), rand.nextInt(config.yspread) - rand.nextInt(config.yspread), rand.nextInt(config.zspread) - rand.nextInt(config.zspread));
 	}
 
 	@Override
-	public BlockState getFlowerToPlace(Random rand, BlockPos pos, U config) {
-		return config.stateProvider.getBlockState(rand, pos).with(CartwheelBlock.FACING, Direction.Plane.HORIZONTAL.random(rand));
+	public BlockState getRandomFlower(Random rand, BlockPos pos, U config) {
+		return config.stateProvider.getState(rand, pos).setValue(CartwheelBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(rand));
 	}
 }

@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(DefaultBiomeFeatures.class)
 public class DefaultBiomeFeaturesMixin {
 
-	@Redirect(method = "withLavaAndWaterLakes", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/biome/BiomeGenerationSettings$Builder;withFeature(Lnet/minecraft/world/gen/GenerationStage$Decoration;Lnet/minecraft/world/gen/feature/ConfiguredFeature;)Lnet/minecraft/world/biome/BiomeGenerationSettings$Builder;"))
+	@Redirect(method = "addDefaultLakes", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/biome/BiomeGenerationSettings$Builder;addFeature(Lnet/minecraft/world/gen/GenerationStage$Decoration;Lnet/minecraft/world/gen/feature/ConfiguredFeature;)Lnet/minecraft/world/biome/BiomeGenerationSettings$Builder;"))
 	private static BiomeGenerationSettings.Builder addLakes(BiomeGenerationSettings.Builder biome, GenerationStage.Decoration stage, ConfiguredFeature<?, ?> feature) {
 		return biome;
 	}

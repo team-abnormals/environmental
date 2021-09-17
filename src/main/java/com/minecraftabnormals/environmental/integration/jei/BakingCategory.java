@@ -39,7 +39,7 @@ public class BakingCategory implements IRecipeCategory<BakingRecipe> {
 	public BakingCategory(IGuiHelper guiHelper) {
 		this.background = guiHelper.createDrawable(EnvironmentalPlugin.RECIPE_GUI_ENVIRONMENTAL, 0, 114, 82, 54);
 		this.icon = guiHelper.createDrawableIngredient(new ItemStack(EnvironmentalBlocks.KILN.get()));
-		this.localizedName = I18n.format("gui." + Environmental.MOD_ID + ".category.baking");
+		this.localizedName = I18n.get("gui." + Environmental.MOD_ID + ".category.baking");
 		IDrawableStatic staticFlame = guiHelper.createDrawable(EnvironmentalPlugin.RECIPE_GUI_ENVIRONMENTAL, 82, 114, 14, 14);
 		this.animatedFlame = guiHelper.createAnimatedDrawable(staticFlame, 300, IDrawableAnimated.StartDirection.TOP, true);
 		this.cachedArrows = CacheBuilder.newBuilder()
@@ -47,7 +47,7 @@ public class BakingCategory implements IRecipeCategory<BakingRecipe> {
 				.build(new CacheLoader<BakingRecipe, IDrawableAnimated>() {
 					@Override
 					public IDrawableAnimated load(BakingRecipe key) {
-						int cookTime = key.getCookTime();
+						int cookTime = key.getCookingTime();
 						if (cookTime <= 0) {
 							cookTime = 100;
 						}
@@ -73,21 +73,21 @@ public class BakingCategory implements IRecipeCategory<BakingRecipe> {
 		if (experience > 0) {
 			TranslationTextComponent experienceString = new TranslationTextComponent("gui.jei.category.smelting.experience", experience);
 			Minecraft minecraft = Minecraft.getInstance();
-			FontRenderer fontRenderer = minecraft.fontRenderer;
-			int stringWidth = fontRenderer.getStringPropertyWidth(experienceString);
-			fontRenderer.func_243248_b(matrixStack, experienceString, background.getWidth() - stringWidth, y, 0xFF808080);
+			FontRenderer fontRenderer = minecraft.font;
+			int stringWidth = fontRenderer.width(experienceString);
+			fontRenderer.draw(matrixStack, experienceString, background.getWidth() - stringWidth, y, 0xFF808080);
 		}
 	}
 
 	protected void drawCookTime(BakingRecipe recipe, MatrixStack matrixStack, int y) {
-		int cookTime = recipe.getCookTime();
+		int cookTime = recipe.getCookingTime();
 		if (cookTime > 0) {
 			int cookTimeSeconds = cookTime / 20;
 			TranslationTextComponent timeString = new TranslationTextComponent("gui.jei.category.smelting.time.seconds", cookTimeSeconds);
 			Minecraft minecraft = Minecraft.getInstance();
-			FontRenderer fontRenderer = minecraft.fontRenderer;
-			int stringWidth = fontRenderer.getStringPropertyWidth(timeString);
-			fontRenderer.func_243248_b(matrixStack, timeString, background.getWidth() - stringWidth, y, 0xFF808080);
+			FontRenderer fontRenderer = minecraft.font;
+			int stringWidth = fontRenderer.width(timeString);
+			fontRenderer.draw(matrixStack, timeString, background.getWidth() - stringWidth, y, 0xFF808080);
 		}
 	}
 
@@ -119,7 +119,7 @@ public class BakingCategory implements IRecipeCategory<BakingRecipe> {
 	@Override
 	public void setIngredients(BakingRecipe recipe, IIngredients ingredients) {
 		ingredients.setInputIngredients(recipe.getIngredients());
-		ingredients.setOutput(VanillaTypes.ITEM, recipe.getRecipeOutput());
+		ingredients.setOutput(VanillaTypes.ITEM, recipe.getResultItem());
 	}
 
 	@Override

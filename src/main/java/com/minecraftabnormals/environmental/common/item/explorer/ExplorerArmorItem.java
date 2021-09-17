@@ -38,7 +38,7 @@ public abstract class ExplorerArmorItem extends DyeableArmorItem implements IExp
 		if (stack.getTag() != null && this.getIncreaseForUses(this.getUses(stack.getTag())) == 5) {
 			if (player instanceof ServerPlayerEntity) {
 				ServerPlayerEntity serverplayerentity = (ServerPlayerEntity) player;
-				if (!world.isRemote()) {
+				if (!world.isClientSide()) {
 					EnvironmentalCriteriaTriggers.UPGRADE_GEAR.trigger(serverplayerentity, this);
 				}
 			}
@@ -52,14 +52,14 @@ public abstract class ExplorerArmorItem extends DyeableArmorItem implements IExp
 
 	@Override
 	public int getColor(ItemStack stack) {
-		if (!hasColor(stack))
+		if (!hasCustomColor(stack))
 			return 0x77533F;
 		return super.getColor(stack);
 	}
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+	public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		CompoundNBT nbt = stack.getOrCreateTag();
 		int uses = this.getUses(nbt);
 		int nextLevel = this.getLevelsUntilUpgrade(uses);
@@ -67,9 +67,9 @@ public abstract class ExplorerArmorItem extends DyeableArmorItem implements IExp
 		IFormattableTextComponent counter;
 		if (nextLevel != 0) counter = new StringTextComponent(uses + "/" + nextLevel);
 		else counter = new StringTextComponent(String.valueOf(uses));
-		counter.mergeStyle(getFormattingForLevel(uses));
+		counter.withStyle(getFormattingForLevel(uses));
 
-		IFormattableTextComponent description = new StringTextComponent(" ").append(this.getDescription()).mergeStyle(TextFormatting.GRAY);
+		IFormattableTextComponent description = new StringTextComponent(" ").append(this.getDescription()).withStyle(TextFormatting.GRAY);
 		tooltip.add(counter.append(description));
 	}
 
@@ -93,7 +93,7 @@ public abstract class ExplorerArmorItem extends DyeableArmorItem implements IExp
 	}
 
 	public IFormattableTextComponent getDescription() {
-		return new TranslationTextComponent(this.getTranslationKey() + ".desc");
+		return new TranslationTextComponent(this.getDescriptionId() + ".desc");
 	}
 
 	public TextFormatting getFormattingForLevel(int uses) {

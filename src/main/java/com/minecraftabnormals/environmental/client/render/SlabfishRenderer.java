@@ -29,36 +29,36 @@ public class SlabfishRenderer extends MobRenderer<SlabfishEntity, SlabfishModel<
 	}
 
 	@Override
-	public ResourceLocation getEntityTexture(SlabfishEntity slabby) {
+	public ResourceLocation getTextureLocation(SlabfishEntity slabby) {
 		return SlabfishSpriteUploader.ATLAS_LOCATION;
 	}
 
 	@Override
-	protected RenderType func_230496_a_(SlabfishEntity slabby, boolean p_230496_2_, boolean p_230496_3_, boolean p_230496_4_) {
-		ResourceLocation texture = this.getEntityTexture(slabby);
+	protected RenderType getRenderType(SlabfishEntity slabby, boolean p_230496_2_, boolean p_230496_3_, boolean p_230496_4_) {
+		ResourceLocation texture = this.getTextureLocation(slabby);
 		if (p_230496_3_) {
-			return RenderType.getItemEntityTranslucentCull(texture);
+			return RenderType.itemEntityTranslucentCull(texture);
 		} else if (p_230496_2_) {
-			return SlabfishManager.get(slabby.world).getSlabfishType(slabby.getSlabfishType()).orElse(SlabfishManager.DEFAULT_SLABFISH).isTranslucent() ? RenderType.getEntityTranslucent(texture) : this.entityModel.getRenderType(texture);
+			return SlabfishManager.get(slabby.level).getSlabfishType(slabby.getSlabfishType()).orElse(SlabfishManager.DEFAULT_SLABFISH).isTranslucent() ? RenderType.entityTranslucent(texture) : this.model.renderType(texture);
 		} else {
-			return p_230496_4_ ? RenderType.getOutline(texture) : null;
+			return p_230496_4_ ? RenderType.outline(texture) : null;
 		}
 	}
 
-	protected float handleRotationFloat(SlabfishEntity livingBase, float partialTicks) {
+	protected float getBob(SlabfishEntity livingBase, float partialTicks) {
 		float f = MathHelper.lerp(partialTicks, livingBase.oFlap, livingBase.wingRotation);
 		float f1 = MathHelper.lerp(partialTicks, livingBase.oFlapSpeed, livingBase.destPos);
 		return (MathHelper.sin(f) + 1.0F) * f1;
 	}
 
 	@Override
-	protected void preRenderCallback(SlabfishEntity slabfish, MatrixStack matrixStack, float partialTickTime) {
-		this.entityModel.sprite = SlabfishSpriteUploader.instance().getSprite(SlabfishManager.get(slabfish.world).getSlabfishType(slabfish.getSlabfishType()).orElse(SlabfishManager.DEFAULT_SLABFISH).getTextureLocation());
-		if (slabfish.isEntitySleeping() || slabfish.getRidingEntity() != null)
-			matrixStack.translate(0F, slabfish.isChild() ? 0.15625F : 0.3125F, 0F);
+	protected void scale(SlabfishEntity slabfish, MatrixStack matrixStack, float partialTickTime) {
+		this.model.sprite = SlabfishSpriteUploader.instance().getSprite(SlabfishManager.get(slabfish.level).getSlabfishType(slabfish.getSlabfishType()).orElse(SlabfishManager.DEFAULT_SLABFISH).getTextureLocation());
+		if (slabfish.isInSittingPose() || slabfish.getVehicle() != null)
+			matrixStack.translate(0F, slabfish.isBaby() ? 0.15625F : 0.3125F, 0F);
 		if (slabfish.isInWater()) {
-			matrixStack.translate(0F, slabfish.isChild() ? -0.8F : -0.4F, 0.5F);
-			matrixStack.rotate(Vector3f.XP.rotation((float) (Math.PI / 2)));
+			matrixStack.translate(0F, slabfish.isBaby() ? -0.8F : -0.4F, 0.5F);
+			matrixStack.mulPose(Vector3f.XP.rotation((float) (Math.PI / 2)));
 		}
 	}
 }

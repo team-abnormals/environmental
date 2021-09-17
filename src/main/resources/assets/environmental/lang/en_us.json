@@ -443,6 +443,10 @@
 	
 	"subtitles.environmental.entity.koi.flop": "Koi flops",
 
+	"subtitles.environmental.entity.deer.ambient": "Deer bleats",
+	"subtitles.environmental.entity.deer.death": "Deer dies",
+	"subtitles.environmental.entity.deer.hurt": "Deer hurts",
+
 	"subtitles.environmental.entity.duck.ambient": "Duck quacks",
 	"subtitles.environmental.entity.duck.death": "Duck dies",
 	"subtitles.environmental.entity.duck.egg": "Duck plops",
@@ -454,6 +458,8 @@
 	"subtitles.environmental.entity.yak.milk": "Yak gets milked",
 
 	"subtitles.environmental.entity.pig.sniff": "Pig sniffs",
+
+	"subtitles.environmental.item.cattails.pick": "Cattails pop",
 	
 	"entity.environmental.slabfish.baby": "Baby",
 	
@@ -516,6 +522,7 @@
 	"entity.environmental.slabfish.type.bmo": "BMO",
 	"entity.environmental.slabfish.type.ocelot": "WALL-E",
 	"entity.environmental.slabfish.type.eve": "EVE",
+	"entity.environmental.slabfish.type.minion": "Minion",
 	
 	"entity.environmental.slabfish.backpack.white": "White Backpack",
 	"entity.environmental.slabfish.backpack.orange": "Orange Backpack",

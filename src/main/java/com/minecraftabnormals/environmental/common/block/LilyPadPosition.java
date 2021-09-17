@@ -15,15 +15,15 @@ public enum LilyPadPosition implements IStringSerializable {
 
 	private final String heightName;
 
-	private LilyPadPosition(String nameIn) {
+	LilyPadPosition(String nameIn) {
 		this.heightName = nameIn;
 	}
 
 	public String toString() {
-		return this.getString();
+		return this.getSerializedName();
 	}
 
-	public String getString() {
+	public String getSerializedName() {
 		return this.heightName;
 	}
 }

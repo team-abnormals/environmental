@@ -45,8 +45,8 @@ public class SweaterType implements Predicate<ItemStack> {
 	@OnlyIn(Dist.CLIENT)
 	public static SweaterType readFrom(PacketBuffer buf) {
 		ResourceLocation registryName = buf.readResourceLocation();
-		ITextComponent displayName = buf.readTextComponent();
-		Ingredient ingredient = Ingredient.read(buf);
+		ITextComponent displayName = buf.readComponent();
+		Ingredient ingredient = Ingredient.fromNetwork(buf);
 		return new SweaterType(displayName, ingredient).setRegistryName(registryName);
 	}
 
@@ -93,7 +93,7 @@ public class SweaterType implements Predicate<ItemStack> {
 	 */
 	@OnlyIn(Dist.CLIENT)
 	public ResourceLocation getTextureLocation() {
-		return this.textureLocation.getValue();
+		return this.textureLocation.get();
 	}
 
 	/**
@@ -103,8 +103,8 @@ public class SweaterType implements Predicate<ItemStack> {
 	 */
 	public void writeTo(PacketBuffer buf) {
 		buf.writeResourceLocation(this.registryName);
-		buf.writeTextComponent(this.displayName);
-		this.ingredient.write(buf);
+		buf.writeComponent(this.displayName);
+		this.ingredient.toNetwork(buf);
 	}
 
 	@Override
@@ -112,7 +112,7 @@ public class SweaterType implements Predicate<ItemStack> {
 		return "SweaterType{" +
 				"registryName=" + registryName +
 				", displayName=" + displayName.getString() +
-				", ingredient=" + Arrays.toString(ingredient.getMatchingStacks()) +
+				", ingredient=" + Arrays.toString(ingredient.getItems()) +
 				'}';
 	}
 
@@ -130,8 +130,8 @@ public class SweaterType implements Predicate<ItemStack> {
 
 			ITextComponent displayName = jsonObject.has("displayName") ? context.deserialize(jsonObject.get("displayName"), ITextComponent.class) : null;
 			Item item = jsonObject.has("item") && ForgeRegistries.ITEMS.containsKey(new ResourceLocation(jsonObject.get("item").getAsString())) ? ForgeRegistries.ITEMS.getValue(new ResourceLocation(jsonObject.get("item").getAsString())) : null;
-			ITag<Item> tag = jsonObject.has("tag") ? TagCollectionManager.getManager().getItemTags().get(new ResourceLocation(jsonObject.get("tag").getAsString())) : null;
-			Ingredient ingredient = item != null ? Ingredient.fromItems(item) : tag != null ? Ingredient.fromTag(tag) : Ingredient.EMPTY;
+			ITag<Item> tag = jsonObject.has("tag") ? TagCollectionManager.getInstance().getItems().getTag(new ResourceLocation(jsonObject.get("tag").getAsString())) : null;
+			Ingredient ingredient = item != null ? Ingredient.of(item) : tag != null ? Ingredient.of(tag) : Ingredient.EMPTY;
 
 			return new SweaterType(displayName, ingredient);
 		}

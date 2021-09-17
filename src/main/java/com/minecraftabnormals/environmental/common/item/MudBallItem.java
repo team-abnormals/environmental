@@ -14,21 +14,21 @@ public class MudBallItem extends Item {
 		super(builder);
 	}
 
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-		ItemStack itemstack = playerIn.getHeldItem(handIn);
-		if (!playerIn.abilities.isCreativeMode) {
+	public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+		ItemStack itemstack = playerIn.getItemInHand(handIn);
+		if (!playerIn.abilities.instabuild) {
 			itemstack.shrink(1);
 		}
 
-		worldIn.playSound((PlayerEntity) null, playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosZ(), SoundEvents.BLOCK_SLIME_BLOCK_BREAK, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
-		if (!worldIn.isRemote) {
+		worldIn.playSound(null, playerIn.getX(), playerIn.getY(), playerIn.getZ(), SoundEvents.SLIME_BLOCK_BREAK, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
+		if (!worldIn.isClientSide) {
 			MudBallEntity mudballentity = new MudBallEntity(worldIn, playerIn);
 			mudballentity.setItem(new ItemStack(EnvironmentalItems.MUD_BALL.get()));
-			mudballentity.func_234612_a_(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 0.6F, 1.0F);
-			worldIn.addEntity(mudballentity);
+			mudballentity.shootFromRotation(playerIn, playerIn.xRot, playerIn.yRot, 0.0F, 0.6F, 1.0F);
+			worldIn.addFreshEntity(mudballentity);
 		}
 
-		playerIn.addStat(Stats.ITEM_USED.get(this));
+		playerIn.awardStat(Stats.ITEM_USED.get(this));
 		return new ActionResult<>(ActionResultType.SUCCESS, itemstack);
 	}
 }

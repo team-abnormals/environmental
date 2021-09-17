@@ -45,8 +45,8 @@ public class BackpackType implements Predicate<ItemStack> {
 	@OnlyIn(Dist.CLIENT)
 	public static BackpackType readFrom(PacketBuffer buf) {
 		ResourceLocation registryName = buf.readResourceLocation();
-		ITextComponent displayName = buf.readTextComponent();
-		Ingredient ingredient = buf.readBoolean() ? Ingredient.read(buf) : null;
+		ITextComponent displayName = buf.readComponent();
+		Ingredient ingredient = buf.readBoolean() ? Ingredient.fromNetwork(buf) : null;
 		return new BackpackType(displayName, ingredient).setRegistryName(registryName);
 	}
 
@@ -86,7 +86,7 @@ public class BackpackType implements Predicate<ItemStack> {
 	 */
 	@OnlyIn(Dist.CLIENT)
 	public ResourceLocation getTextureLocation() {
-		return this.textureLocation.getValue();
+		return this.textureLocation.get();
 	}
 
 	/**
@@ -96,10 +96,10 @@ public class BackpackType implements Predicate<ItemStack> {
 	 */
 	public void writeTo(PacketBuffer buf) {
 		buf.writeResourceLocation(this.registryName);
-		buf.writeTextComponent(this.displayName);
+		buf.writeComponent(this.displayName);
 		buf.writeBoolean(this.ingredient != null);
 		if (this.ingredient != null)
-			this.ingredient.write(buf);
+			this.ingredient.toNetwork(buf);
 	}
 
 	@Override
@@ -107,7 +107,7 @@ public class BackpackType implements Predicate<ItemStack> {
 		return "BackpackType{" +
 				"registryName=" + registryName +
 				", displayName=" + displayName.getString() +
-				", ingredient=" + (ingredient == null ? null : Arrays.toString(ingredient.getMatchingStacks())) +
+				", ingredient=" + (ingredient == null ? null : Arrays.toString(ingredient.getItems())) +
 				'}';
 	}
 
@@ -125,8 +125,8 @@ public class BackpackType implements Predicate<ItemStack> {
 
 			ITextComponent displayName = jsonObject.has("displayName") ? context.deserialize(jsonObject.get("displayName"), ITextComponent.class) : null;
 			Item item = jsonObject.has("item") && ForgeRegistries.ITEMS.containsKey(new ResourceLocation(jsonObject.get("item").getAsString())) ? ForgeRegistries.ITEMS.getValue(new ResourceLocation(jsonObject.get("item").getAsString())) : null;
-			ITag<Item> tag = jsonObject.has("tag") ? TagCollectionManager.getManager().getItemTags().get(new ResourceLocation(jsonObject.get("tag").getAsString())) : null;
-			Ingredient ingredient = item != null ? Ingredient.fromItems(item) : tag != null ? Ingredient.fromTag(tag) : null;
+			ITag<Item> tag = jsonObject.has("tag") ? TagCollectionManager.getInstance().getItems().getTag(new ResourceLocation(jsonObject.get("tag").getAsString())) : null;
+			Ingredient ingredient = item != null ? Ingredient.of(item) : tag != null ? Ingredient.of(tag) : null;
 
 			return new BackpackType(displayName, ingredient);
 		}

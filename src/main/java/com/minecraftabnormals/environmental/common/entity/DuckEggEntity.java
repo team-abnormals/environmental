@@ -38,38 +38,38 @@ public class DuckEggEntity extends ProjectileItemEntity {
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public void handleStatusUpdate(byte id) {
+	public void handleEntityEvent(byte id) {
 		if (id == 3) {
 			for (int i = 0; i < 8; ++i) {
-				this.world.addParticle(new ItemParticleData(ParticleTypes.ITEM, this.getItem()), this.getPosX(), this.getPosY(), this.getPosZ(), ((double) this.rand.nextFloat() - 0.5D) * 0.08D, ((double) this.rand.nextFloat() - 0.5D) * 0.08D, ((double) this.rand.nextFloat() - 0.5D) * 0.08D);
+				this.level.addParticle(new ItemParticleData(ParticleTypes.ITEM, this.getItem()), this.getX(), this.getY(), this.getZ(), ((double) this.random.nextFloat() - 0.5D) * 0.08D, ((double) this.random.nextFloat() - 0.5D) * 0.08D, ((double) this.random.nextFloat() - 0.5D) * 0.08D);
 			}
 		}
 	}
 
 	@Override
-	protected void onEntityHit(EntityRayTraceResult result) {
-		super.onEntityHit(result);
-		result.getEntity().attackEntityFrom(DamageSource.causeThrownDamage(this, this.func_234616_v_()), 0.0F);
+	protected void onHitEntity(EntityRayTraceResult result) {
+		super.onHitEntity(result);
+		result.getEntity().hurt(DamageSource.thrown(this, this.getOwner()), 0.0F);
 	}
 
 	@Override
-	protected void onImpact(RayTraceResult result) {
-		super.onImpact(result);
-		if (!this.world.isRemote) {
-			if (this.rand.nextInt(8) == 0) {
+	protected void onHit(RayTraceResult result) {
+		super.onHit(result);
+		if (!this.level.isClientSide) {
+			if (this.random.nextInt(8) == 0) {
 				int i = 1;
-				if (this.rand.nextInt(32) == 0) {
+				if (this.random.nextInt(32) == 0) {
 					i = 4;
 				}
 
 				for (int j = 0; j < i; ++j) {
-					DuckEntity chickenentity = EnvironmentalEntities.DUCK.get().create(this.world);
-					chickenentity.setGrowingAge(-24000);
-					chickenentity.setLocationAndAngles(this.getPosX(), this.getPosY(), this.getPosZ(), this.rotationYaw, 0.0F);
-					this.world.addEntity(chickenentity);
+					DuckEntity chickenentity = EnvironmentalEntities.DUCK.get().create(this.level);
+					chickenentity.setAge(-24000);
+					chickenentity.moveTo(this.getX(), this.getY(), this.getZ(), this.yRot, 0.0F);
+					this.level.addFreshEntity(chickenentity);
 				}
 			}
-			this.world.setEntityState(this, (byte) 3);
+			this.level.broadcastEntityEvent(this, (byte) 3);
 			this.remove();
 		}
 	}
@@ -85,7 +85,7 @@ public class DuckEggEntity extends ProjectileItemEntity {
 	}
 
 	@Override
-	public IPacket<?> createSpawnPacket() {
+	public IPacket<?> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 }

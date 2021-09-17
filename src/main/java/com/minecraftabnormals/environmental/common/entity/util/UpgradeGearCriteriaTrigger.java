@@ -19,14 +19,14 @@ public class UpgradeGearCriteriaTrigger extends AbstractCriterionTrigger<Upgrade
 		return ID;
 	}
 
-	public UpgradeGearCriteriaTrigger.Instance deserializeTrigger(JsonObject json, EntityPredicate.AndPredicate predicate, ConditionArrayParser parser) {
+	public UpgradeGearCriteriaTrigger.Instance createInstance(JsonObject json, EntityPredicate.AndPredicate predicate, ConditionArrayParser parser) {
 		if (!json.has("item") || !json.get("item").isJsonPrimitive() || !json.get("item").getAsJsonPrimitive().isString())
 			throw new JsonSyntaxException("'item' required as string");
 		return new UpgradeGearCriteriaTrigger.Instance(predicate, new ResourceLocation(json.get("item").getAsString()));
 	}
 
 	public void trigger(ServerPlayerEntity player, Item item) {
-		this.triggerListeners(player, instance -> instance.item.equals(item.getRegistryName()));
+		this.trigger(player, instance -> instance.item.equals(item.getRegistryName()));
 	}
 
 	public static class Instance extends CriterionInstance {
@@ -38,8 +38,8 @@ public class UpgradeGearCriteriaTrigger extends AbstractCriterionTrigger<Upgrade
 		}
 
 		@Override
-		public JsonObject serialize(ConditionArraySerializer serializer) {
-			JsonObject jsonobject = super.serialize(serializer);
+		public JsonObject serializeToJson(ConditionArraySerializer serializer) {
+			JsonObject jsonobject = super.serializeToJson(serializer);
 			jsonobject.addProperty("item", this.item.toString());
 			return jsonobject;
 		}

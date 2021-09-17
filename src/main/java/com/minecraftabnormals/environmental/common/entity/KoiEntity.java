@@ -39,31 +39,31 @@ public class KoiEntity extends AbstractFishEntity {
 
 	public KoiEntity(EntityType<? extends AbstractFishEntity> type, World world) {
 		super(type, world);
-		this.moveController = new MoveHelperController(this);
-		this.setPathPriority(PathNodeType.WATER, 0.4F);
+		this.moveControl = new MoveHelperController(this);
+		this.setPathfindingMalus(PathNodeType.WATER, 0.4F);
 	}
 
 	@Override
 	protected void registerGoals() {
 		super.registerGoals();
 		this.goalSelector.addGoal(0, new PanicGoal(this, 4.25D));
-		this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, PlayerEntity.class, 5.0F, 1.6, 1.4, EntityPredicates.NOT_SPECTATING::test));
+		this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, PlayerEntity.class, 5.0F, 1.6, 1.4, EntityPredicates.NO_SPECTATORS::test));
 		this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 1.0, 50));
 	}
 
 	@Override
-	protected PathNavigator createNavigator(World worldIn) {
+	protected PathNavigator createNavigation(World worldIn) {
 		return new SwimmerPathNavigator(this, worldIn);
 	}
 
 	@Override
 	public void travel(Vector3d travelVector) {
-		if (this.isServerWorld() && this.isInWater()) {
+		if (this.isEffectiveAi() && this.isInWater()) {
 			this.moveRelative(0.01F, travelVector);
-			this.move(MoverType.SELF, this.getMotion());
-			this.setMotion(this.getMotion().scale(0.9));
-			if (this.getAttackTarget() == null) {
-				this.setMotion(this.getMotion().add(0.0D, -0.005D, 0.0D));
+			this.move(MoverType.SELF, this.getDeltaMovement());
+			this.setDeltaMovement(this.getDeltaMovement().scale(0.9));
+			if (this.getTarget() == null) {
+				this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.005D, 0.0D));
 			}
 		} else {
 			super.travel(travelVector);
@@ -73,13 +73,13 @@ public class KoiEntity extends AbstractFishEntity {
 	@Override
 	public void tick() {
 		super.tick();
-		Vector3d vector3d = this.getMotion();
+		Vector3d vector3d = this.getDeltaMovement();
 		if (MathHelper.abs((float) vector3d.y) >= 0.01) {
-			this.rotationPitch = (float) (MathHelper.atan2(vector3d.y, MathHelper.sqrt(horizontalMag(vector3d))) * (double) (180F / (float) Math.PI));
+			this.xRot = (float) (MathHelper.atan2(vector3d.y, MathHelper.sqrt(getHorizontalDistanceSqr(vector3d))) * (double) (180F / (float) Math.PI));
 		} else {
-			this.rotationPitch = 0;
+			this.xRot = 0;
 		}
-		this.rotationPitch = normalizeRotation(this.prevRotationPitch, this.rotationPitch);
+		this.xRot = normalizeRotation(this.xRotO, this.xRot);
 	}
 
 	protected static float normalizeRotation(float prevRot, float rot) {
@@ -95,54 +95,54 @@ public class KoiEntity extends AbstractFishEntity {
 	}
 
 	@Override
-	public void livingTick() {
-		if (!this.isInWater() && this.onGround && this.collidedVertically) {
-			this.setMotion(this.getMotion().add(((this.rand.nextFloat() * 2.0F - 1.0F) * 0.05F), 0.45F, ((this.rand.nextFloat() * 2.0F - 1.0F) * 0.05F)));
+	public void aiStep() {
+		if (!this.isInWater() && this.onGround && this.verticalCollision) {
+			this.setDeltaMovement(this.getDeltaMovement().add(((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), 0.45F, ((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
 			this.onGround = false;
-			this.isAirBorne = true;
-			this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getSoundPitch());
+			this.hasImpulse = true;
+			this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
 		}
-		if (world.getGameTime() % 20 == 0 && EnvironmentalConfig.COMMON.serenityEffect.get()) {
+		if (level.getGameTime() % 20 == 0 && EnvironmentalConfig.COMMON.serenityEffect.get()) {
 			int horizontalRange = EnvironmentalConfig.COMMON.koiHorizontalSerenityRange.get();
 			int verticalRange = EnvironmentalConfig.COMMON.koiVerticalSerenityRange.get();
-			for (PlayerEntity player : world.getEntitiesWithinAABB(PlayerEntity.class, this.getBoundingBox().grow(horizontalRange, verticalRange, horizontalRange))) {
-				if (!world.isRemote())
-					player.addPotionEffect(new EffectInstance(EnvironmentalEffects.SERENITY.get(), 100, 0, false, false));
+			for (PlayerEntity player : level.getEntitiesOfClass(PlayerEntity.class, this.getBoundingBox().inflate(horizontalRange, verticalRange, horizontalRange))) {
+				if (!level.isClientSide())
+					player.addEffect(new EffectInstance(EnvironmentalEffects.SERENITY.get(), 100, 0, false, false));
 			}
 		}
-		super.livingTick();
+		super.aiStep();
 	}
 
 	public SoundEvent getFlopSound() {
-		return EnvironmentalSounds.ENTITY_KOI_FLOP.get();
+		return EnvironmentalSounds.KOI_FLOP.get();
 	}
 
 	@Override
 	public SoundEvent getAmbientSound() {
-		return SoundEvents.ENTITY_COD_AMBIENT;
+		return SoundEvents.COD_AMBIENT;
 	}
 
 	@Override
 	public SoundEvent getDeathSound() {
-		return SoundEvents.ENTITY_COD_DEATH;
+		return SoundEvents.COD_DEATH;
 	}
 
 	@Override
 	public SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundEvents.ENTITY_COD_HURT;
+		return SoundEvents.COD_HURT;
 	}
 
 	@Override
-	public ItemStack getFishBucket() {
+	public ItemStack getBucketItemStack() {
 		return new ItemStack(EnvironmentalItems.KOI_BUCKET.get());
 	}
 
 	public static AttributeModifierMap.MutableAttribute registerAttributes() {
-		return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 10);
+		return MobEntity.createMobAttributes().add(Attributes.MAX_HEALTH, 10);
 	}
 
 	public static boolean canKoiSpawn(EntityType<? extends AbstractFishEntity> type, IWorld worldIn, SpawnReason reason, BlockPos pos, Random randomIn) {
-		return worldIn.getBlockState(pos).isIn(Blocks.WATER) && worldIn.getBlockState(pos.up()).isIn(Blocks.WATER) && pos.getY() > 55;
+		return worldIn.getBlockState(pos).is(Blocks.WATER) && worldIn.getBlockState(pos.above()).is(Blocks.WATER) && pos.getY() > 55;
 	}
 
 	static class MoveHelperController extends MovementController {
@@ -156,25 +156,25 @@ public class KoiEntity extends AbstractFishEntity {
 
 		@Override
 		public void tick() {
-			if (this.koi.areEyesInFluid(FluidTags.WATER)) {
-				this.koi.setMotion(this.koi.getMotion().add(0.0D, 0.005D, 0.0D));
+			if (this.koi.isEyeInFluid(FluidTags.WATER)) {
+				this.koi.setDeltaMovement(this.koi.getDeltaMovement().add(0.0D, 0.005D, 0.0D));
 			}
 
-			if (this.action == MovementController.Action.MOVE_TO && !this.koi.getNavigator().noPath()) {
-				double d0 = this.posX - this.koi.getPosX();
-				double d1 = this.posY - this.koi.getPosY();
-				double d2 = this.posZ - this.koi.getPosZ();
+			if (this.operation == MovementController.Action.MOVE_TO && !this.koi.getNavigation().isDone()) {
+				double d0 = this.wantedX - this.koi.getX();
+				double d1 = this.wantedY - this.koi.getY();
+				double d2 = this.wantedZ - this.koi.getZ();
 				double d3 = MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
 				d1 = d1 / d3;
 				if (d0 != 0 || d1 != 0) {
 					float f = (float) (MathHelper.atan2(d2, d0) * (double) (180F / (float) Math.PI)) - 90.0F;
-					this.koi.rotationYaw = this.limitAngle(this.koi.rotationYaw, f, 15.0F);
-					this.koi.renderYawOffset = this.koi.rotationYaw;
-					this.koi.rotationYawHead = this.koi.rotationYaw;
+					this.koi.yRot = this.rotlerp(this.koi.yRot, f, 15.0F);
+					this.koi.yBodyRot = this.koi.yRot;
+					this.koi.yHeadRot = this.koi.yRot;
 				}
-				float f1 = (float) (this.speed * this.koi.getAttribute(Attributes.MOVEMENT_SPEED).getValue());
-				this.koi.setAIMoveSpeed(MathHelper.lerp(0.125F, this.koi.getAIMoveSpeed(), f1));
-				this.koi.setMotion(this.koi.getMotion().add(0.0D, (double) this.koi.getAIMoveSpeed() * d1 * 0.03D, 0.0D));
+				float f1 = (float) (this.speedModifier * this.koi.getAttribute(Attributes.MOVEMENT_SPEED).getValue());
+				this.koi.setSpeed(MathHelper.lerp(0.125F, this.koi.getSpeed(), f1));
+				this.koi.setDeltaMovement(this.koi.getDeltaMovement().add(0.0D, (double) this.koi.getSpeed() * d1 * 0.03D, 0.0D));
 				// this.koi.setMoveVertical((float) (this.koi.getAIMoveSpeed() * d1 * 0.03F));
 			}
 		}

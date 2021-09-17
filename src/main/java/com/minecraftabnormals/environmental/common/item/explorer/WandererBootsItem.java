@@ -13,6 +13,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
@@ -38,20 +39,27 @@ public class WandererBootsItem extends ExplorerArmorItem {
 	@Override
 	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType slot, ItemStack stack) {
 		Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-		builder.putAll(super.getAttributeModifiers(this.getEquipmentSlot()));
+		builder.putAll(super.getDefaultAttributeModifiers(this.getSlot()));
 		UUID uuid = UUID.fromString("845DB27C-C624-495F-8C9F-6020A9A58B6B");
 
 		int uses = Math.round(stack.getOrCreateTag().getFloat(NBT_TAG));
 		double increase = 0.15F + (0.05F * getIncreaseForUses(uses));
 
 		builder.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(uuid, "Speed modifier", increase, AttributeModifier.Operation.MULTIPLY_BASE));
-		return slot == this.slot ? builder.build() : super.getAttributeModifiers(slot);
+		return slot == this.slot ? builder.build() : super.getDefaultAttributeModifiers(slot);
 	}
 
 	@SubscribeEvent
 	public static void onFallEvent(LivingFallEvent event) {
-		if (event.getEntityLiving().getItemStackFromSlot(EquipmentSlotType.FEET).getItem() == EnvironmentalItems.WANDERER_BOOTS.get() && event.getEntityLiving().fallDistance < 6)
+		if (event.getEntityLiving().getItemBySlot(EquipmentSlotType.FEET).getItem() == EnvironmentalItems.WANDERER_BOOTS.get() && event.getEntityLiving().fallDistance < 6)
 			event.setDamageMultiplier(0);
+	}
+
+	public float getIncreaseForUses(float uses) {
+		int increase = 0;
+		for (int level : this.getLevelCaps())
+			if (uses >= level) increase += 1;
+		return increase;
 	}
 
 	@Override
@@ -64,8 +72,16 @@ public class WandererBootsItem extends ExplorerArmorItem {
 		return new int[]{0, 1000, 5000, 10000, 50000};
 	}
 
-	@Override
-	public int levelUp(ItemStack stack, LivingEntity entity) {
-		return super.levelUp(stack, entity, true);
+	public float levelUp(ItemStack stack, LivingEntity entity, float increase) {
+		CompoundNBT tag = stack.getOrCreateTag();
+		float uses = tag.getFloat(this.getUsesTag());
+		float level = this.getIncreaseForUses(uses);
+
+		tag.putFloat(this.getUsesTag(), uses + increase);
+
+		float newLevel = this.getIncreaseForUses(uses + increase);
+		if (newLevel > level) this.playEffects(newLevel, entity);
+
+		return newLevel;
 	}
 }

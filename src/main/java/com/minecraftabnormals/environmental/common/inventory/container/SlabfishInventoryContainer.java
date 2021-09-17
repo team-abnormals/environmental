@@ -33,34 +33,34 @@ public class SlabfishInventoryContainer extends Container {
 		this.slabfishInventory = slabfishInventory;
 		this.slabfish = slabfish;
 		if (slabfishInventory != null && slabfish != null) {
-			slabfishInventory.openInventory(playerInventory.player);
+			slabfishInventory.startOpen(playerInventory.player);
 			for (int i = 0; i < 3; i++) {
 				this.addSlot(new Slot(slabfishInventory, i, 8, 18 + i * 18) {
 					@Override
-					public boolean isItemValid(ItemStack stack) {
-						return slabfishInventory.isItemValidForSlot(this.getSlotIndex(), stack);
+					public boolean mayPlace(ItemStack stack) {
+						return slabfishInventory.canPlaceItem(this.getSlotIndex(), stack);
 					}
 
 					@Override
-					public int getSlotStackLimit() {
+					public int getMaxStackSize() {
 						return slabfishInventory.getSlotStackLimit(this.getSlotIndex());
 					}
 
 					@Override
-					public boolean isEnabled() {
+					public boolean isActive() {
 						if (this.getSlotIndex() != 2)
 							return true;
-						SlabfishManager slabfishManager = SlabfishManager.get(slabfish.getEntityWorld());
+						SlabfishManager slabfishManager = SlabfishManager.get(slabfish.getCommandSenderWorld());
 						SlabfishType slabfishType = slabfishManager.getSlabfishType(slabfish.getSlabfishType()).orElse(SlabfishManager.DEFAULT_SLABFISH);
 						return slabfish.hasBackpack() && (slabfishType.getCustomBackpack() == null || !slabfishManager.getBackpackType(slabfishType.getCustomBackpack()).isPresent());
 					}
-				}).setBackground(PlayerContainer.LOCATION_BLOCKS_TEXTURE, SLOT_INDEX_NAMES[i]);
+				}).setBackground(PlayerContainer.BLOCK_ATLAS, SLOT_INDEX_NAMES[i]);
 			}
 			for (int k = 0; k < 3; ++k) {
 				for (int l = 0; l < 5; ++l) {
 					this.addSlot(new Slot(slabfishInventory, 3 + l + k * 5, 80 + l * 18, 18 + k * 18) {
 						@Override
-						public boolean isEnabled() {
+						public boolean isActive() {
 							return slabfish.hasBackpack();
 						}
 					});
@@ -82,40 +82,40 @@ public class SlabfishInventoryContainer extends Container {
 	}
 
 	@Override
-	public boolean canInteractWith(PlayerEntity player) {
-		return this.slabfishInventory.isUsableByPlayer(player) && this.slabfish.isAlive() && this.slabfish.getDistance(player) < 8.0F;
+	public boolean stillValid(PlayerEntity player) {
+		return this.slabfishInventory.stillValid(player) && this.slabfish.isAlive() && this.slabfish.distanceTo(player) < 8.0F;
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(PlayerEntity player, int index) {
+	public ItemStack quickMoveStack(PlayerEntity player, int index) {
 		ItemStack itemstack = ItemStack.EMPTY;
-		Slot slot = this.inventorySlots.get(index);
-		if (slot != null && slot.getHasStack()) {
-			ItemStack slotStack = slot.getStack();
+		Slot slot = this.slots.get(index);
+		if (slot != null && slot.hasItem()) {
+			ItemStack slotStack = slot.getItem();
 			itemstack = slotStack.copy();
-			int i = this.slabfishInventory.getSizeInventory();
+			int i = this.slabfishInventory.getContainerSize();
 			if (index < i) {
-				if (!this.mergeItemStack(slotStack, i, this.inventorySlots.size(), true)) {
+				if (!this.moveItemStackTo(slotStack, i, this.slots.size(), true)) {
 					return ItemStack.EMPTY;
 				}
-			} else if (this.getSlot(0).isItemValid(slotStack) && !this.getSlot(0).getHasStack() && !this.mergeItemStack(slotStack, 0, 1, false)) {
+			} else if (this.getSlot(0).mayPlace(slotStack) && !this.getSlot(0).hasItem() && !this.moveItemStackTo(slotStack, 0, 1, false)) {
 				return ItemStack.EMPTY;
-			} else if (this.getSlot(1).isItemValid(slotStack) && !this.getSlot(1).getHasStack() && !this.mergeItemStack(slotStack, 1, 2, false)) {
+			} else if (this.getSlot(1).mayPlace(slotStack) && !this.getSlot(1).hasItem() && !this.moveItemStackTo(slotStack, 1, 2, false)) {
 				return ItemStack.EMPTY;
-			} else if (this.getSlot(2).isItemValid(slotStack) && !this.getSlot(2).getHasStack() && !this.mergeItemStack(slotStack, 2, 3, false)) {
+			} else if (this.getSlot(2).mayPlace(slotStack) && !this.getSlot(2).hasItem() && !this.moveItemStackTo(slotStack, 2, 3, false)) {
 				return ItemStack.EMPTY;
-			} else if (i <= 3 || !this.mergeItemStack(slotStack, 3, i, false)) {
+			} else if (i <= 3 || !this.moveItemStackTo(slotStack, 3, i, false)) {
 				int j = i + 27;
 				int k = j + 9;
 				if (index >= j && index < k) {
-					if (!this.mergeItemStack(slotStack, i, j, false)) {
+					if (!this.moveItemStackTo(slotStack, i, j, false)) {
 						return ItemStack.EMPTY;
 					}
 				} else if (index >= i && index < j) {
-					if (!this.mergeItemStack(slotStack, j, k, false)) {
+					if (!this.moveItemStackTo(slotStack, j, k, false)) {
 						return ItemStack.EMPTY;
 					}
-				} else if (!this.mergeItemStack(slotStack, j, j, false)) {
+				} else if (!this.moveItemStackTo(slotStack, j, j, false)) {
 					return ItemStack.EMPTY;
 				}
 
@@ -123,9 +123,9 @@ public class SlabfishInventoryContainer extends Container {
 			}
 
 			if (slotStack.isEmpty()) {
-				slot.putStack(ItemStack.EMPTY);
+				slot.set(ItemStack.EMPTY);
 			} else {
-				slot.onSlotChanged();
+				slot.setChanged();
 			}
 		}
 
@@ -133,9 +133,9 @@ public class SlabfishInventoryContainer extends Container {
 	}
 
 	@Override
-	public void onContainerClosed(PlayerEntity player) {
-		super.onContainerClosed(player);
+	public void removed(PlayerEntity player) {
+		super.removed(player);
 		this.slabfish.playersUsing--;
-		this.slabfishInventory.closeInventory(player);
+		this.slabfishInventory.stopOpen(player);
 	}
 }

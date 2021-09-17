@@ -20,14 +20,14 @@ public class TurkeyNestFeature extends Feature<NoFeatureConfig> {
 	}
 
 	@Override
-	public boolean generate(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
-		BlockState blockstate = EnvironmentalBlocks.TWIG_TURKEY_NEST.get().getDefaultState().with(BirdNestBlock.EGGS, 2 + rand.nextInt(3));
+	public boolean place(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+		BlockState blockstate = EnvironmentalBlocks.TWIG_TURKEY_NEST.get().defaultBlockState().setValue(BirdNestBlock.EGGS, 2 + rand.nextInt(3));
 
 		int i = worldIn.getHeight(Heightmap.Type.WORLD_SURFACE, pos.getX(), pos.getZ());
 		BlockPos blockpos = new BlockPos(pos.getX(), i, pos.getZ());
 
-		if (worldIn.isAirBlock(blockpos) && worldIn.getBlockState(blockpos.down()).getBlock() == Blocks.GRASS_BLOCK) {
-			worldIn.setBlockState(blockpos, blockstate, 2);
+		if (worldIn.isEmptyBlock(blockpos) && worldIn.getBlockState(blockpos.below()).getBlock() == Blocks.GRASS_BLOCK) {
+			worldIn.setBlock(blockpos, blockstate, 2);
 
 			return true;
 		}

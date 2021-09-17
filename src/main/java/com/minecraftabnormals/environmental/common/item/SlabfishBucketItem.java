@@ -48,32 +48,32 @@ public class SlabfishBucketItem extends BucketItem {
 		this.entityType = entityType;
 	}
 
-	public void onLiquidPlaced(World worldIn, ItemStack p_203792_2_, BlockPos pos) {
+	public void checkExtraContent(World worldIn, ItemStack p_203792_2_, BlockPos pos) {
 		if (worldIn instanceof ServerWorld) {
 			this.placeEntity((ServerWorld) worldIn, p_203792_2_, pos);
 		}
 	}
 
 	protected void playEmptySound(@Nullable PlayerEntity player, IWorld worldIn, BlockPos pos) {
-		worldIn.playSound(player, pos, SoundEvents.ITEM_BUCKET_EMPTY_FISH, SoundCategory.NEUTRAL, 1.0F, 1.0F);
+		worldIn.playSound(player, pos, SoundEvents.BUCKET_EMPTY_FISH, SoundCategory.NEUTRAL, 1.0F, 1.0F);
 	}
 
 	private void placeEntity(ServerWorld worldIn, ItemStack stack, BlockPos pos) {
-		Entity entity = this.entityType.get().spawn(worldIn, stack, (PlayerEntity) null, pos, SpawnReason.BUCKET, true, false);
+		Entity entity = this.entityType.get().spawn(worldIn, stack, null, pos, SpawnReason.BUCKET, true, false);
 		if (entity != null) {
 			((SlabfishEntity) entity).setFromBucket(true);
 		}
 	}
 
 	@Override
-	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
 		FILLER.fillItem(this, group, items);
 	}
 
 	@Deprecated
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+	public void appendHoverText(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		CompoundNBT compoundnbt = stack.getTag();
 		if (compoundnbt != null) {
 			SlabfishManager slabfishManager = SlabfishManager.get(worldIn);
@@ -81,14 +81,14 @@ public class SlabfishBucketItem extends BucketItem {
 			if (compoundnbt.contains("SlabfishType", Constants.NBT.TAG_STRING)) {
 				SlabfishType slabfishType = slabfishManager.getSlabfishType(LOCATION_CACHE.computeIfAbsent(compoundnbt.getString("SlabfishType"), ResourceLocation::new)).orElse(SlabfishManager.DEFAULT_SLABFISH);
 				if (slabfishType != SlabfishManager.DEFAULT_SLABFISH)
-					tooltip.add(slabfishType.getDisplayName().deepCopy().mergeStyle(TextFormatting.ITALIC, slabfishType.getRarity().getFormatting()));
+					tooltip.add(slabfishType.getDisplayName().copy().withStyle(TextFormatting.ITALIC, slabfishType.getRarity().getFormatting()));
 			}
 			if (compoundnbt.contains("Age", Constants.NBT.TAG_ANY_NUMERIC) && compoundnbt.getInt("Age") < 0) {
-				tooltip.add((new TranslationTextComponent("entity.environmental.slabfish.baby").mergeStyle(TextFormatting.ITALIC, TextFormatting.GRAY)));
+				tooltip.add((new TranslationTextComponent("entity.environmental.slabfish.baby").withStyle(TextFormatting.ITALIC, TextFormatting.GRAY)));
 			}
 			if (compoundnbt.contains("BackpackType", Constants.NBT.TAG_STRING)) {
 				BackpackType backpackType = slabfishManager.getBackpackType(LOCATION_CACHE.computeIfAbsent(compoundnbt.getString("BackpackType"), ResourceLocation::new)).orElse(SlabfishManager.BROWN_BACKPACK);
-				tooltip.add(backpackType.getDisplayName().deepCopy().mergeStyle(TextFormatting.ITALIC, TextFormatting.GRAY));
+				tooltip.add(backpackType.getDisplayName().copy().withStyle(TextFormatting.ITALIC, TextFormatting.GRAY));
 			}
 
 			if (!compoundnbt.equals(SWEATER_TYPE_CACHE.getLeft())) {
@@ -100,7 +100,7 @@ public class SlabfishBucketItem extends BucketItem {
 					CompoundNBT slotNbt = list.getCompound(i);
 					int index = slotNbt.getByte("Slot") & 255;
 					if (index == 0) {
-						ItemStack slotStack = ItemStack.read(slotNbt);
+						ItemStack slotStack = ItemStack.of(slotNbt);
 						SWEATER_TYPE_CACHE.setRight(slabfishManager.getSweaterType(slotStack).orElse(SlabfishManager.EMPTY_SWEATER));
 						break;
 					}
@@ -108,7 +108,7 @@ public class SlabfishBucketItem extends BucketItem {
 			}
 
 			if (!SlabfishManager.EMPTY_SWEATER.equals(SWEATER_TYPE_CACHE.getRight()))
-				tooltip.add(SWEATER_TYPE_CACHE.getRight().getDisplayName().deepCopy().mergeStyle(TextFormatting.ITALIC, TextFormatting.GRAY));
+				tooltip.add(SWEATER_TYPE_CACHE.getRight().getDisplayName().copy().withStyle(TextFormatting.ITALIC, TextFormatting.GRAY));
 		}
 	}
 }
