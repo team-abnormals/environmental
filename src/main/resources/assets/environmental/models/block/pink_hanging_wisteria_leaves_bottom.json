@@ -1,6 +1,6 @@
 {
-    "parent": "environmental:block/hanging_wisteria_leaves_bottom",
+    "parent": "environmental:block/wisteria_vines",
     "textures": {
-        "all": "environmental:block/pink_hanging_wisteria_leaves_bottom"
+        "cross": "environmental:block/pink_wisteria_vines_bottom"
     }
 }

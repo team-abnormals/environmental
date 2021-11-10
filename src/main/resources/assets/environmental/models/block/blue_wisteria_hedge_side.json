@@ -1,6 +1,6 @@
 {
   "parent": "abnormals_core:block/hedge_side",
   "textures": {
-    "leaf": "environmental:block/blue_wisteria_leaves"
+    "leaf": "environmental:block/blue_wisteria_flowers"
   }
 }

@@ -1,6 +1,6 @@
 {
     "parent": "block/leaves",
     "textures": {
-        "all": "environmental:block/white_wisteria_leaves"
+        "all": "environmental:block/white_wisteria_flowers"
     }
 }

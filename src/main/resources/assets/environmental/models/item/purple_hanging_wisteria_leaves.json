@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "environmental:block/purple_hanging_wisteria_leaves_bottom"
+        "layer0": "environmental:block/purple_wisteria_vines_bottom"
     }
 }

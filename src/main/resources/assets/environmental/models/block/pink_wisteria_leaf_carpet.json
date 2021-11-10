@@ -1,6 +1,6 @@
 {   
     "parent": "abnormals_core:block/leaf_carpet",
     "textures": {
-        "all": "environmental:block/pink_wisteria_leaves"
+        "all": "environmental:block/pink_wisteria_flowers"
     }
 }
