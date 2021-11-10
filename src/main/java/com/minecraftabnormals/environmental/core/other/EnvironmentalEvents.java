@@ -16,6 +16,7 @@ import com.minecraftabnormals.environmental.core.Environmental;
 import com.minecraftabnormals.environmental.core.EnvironmentalConfig;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEntities;
+import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalParticles;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalSounds;
 import net.minecraft.block.Block;
@@ -25,6 +26,7 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.NonTamedTargetGoal;
 import net.minecraft.entity.ai.goal.PrioritizedGoal;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.monster.HuskEntity;
 import net.minecraft.entity.monster.SkeletonEntity;
 import net.minecraft.entity.monster.StrayEntity;
@@ -40,6 +42,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.*;
 import net.minecraft.util.ActionResultType;
@@ -50,6 +53,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.vector.Vector3i;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
@@ -198,6 +202,7 @@ public class EnvironmentalEvents {
 		World world = event.getWorld();
 		BlockPos pos = event.getPos();
 		BlockState state = world.getBlockState(pos);
+		Direction face = event.getFace();
 		PlayerEntity player = event.getPlayer();
 		ItemStack stack = event.getItemStack();
 		Item item = stack.getItem();
@@ -218,6 +223,21 @@ public class EnvironmentalEvents {
 				event.setCancellationResult(ActionResultType.sidedSuccess(world.isClientSide()));
 				event.setCanceled(true);
 			}
+		} else if (item instanceof ShovelItem && !player.isSpectator() && state.is(EnvironmentalBlocks.BURIED_TRUFFLE.get())) {
+			Vector3i vector3i = face.getNormal();
+			double d0 = pos.getX() + 0.5D + 0.625D * vector3i.getX();
+			double d1 = pos.getY() + 0.375D + 0.625D * vector3i.getY();
+			double d2 = pos.getZ() + 0.5D + 0.625D * vector3i.getZ();
+			ItemEntity itementity = new ItemEntity(world, d0, d1, d2, new ItemStack(EnvironmentalItems.TRUFFLE.get()));
+			world.addFreshEntity(itementity);
+
+			world.playSound(player, pos, EnvironmentalSounds.SHOVEL_DIG.get(), SoundCategory.BLOCKS, 1.0F, 1.0F);
+			stack.hurtAndBreak(1, player, (damage) -> {
+				damage.broadcastBreakEvent(event.getHand());
+			});
+			world.setBlock(pos, Blocks.DIRT.defaultBlockState(), 11);
+			event.setCancellationResult(ActionResultType.sidedSuccess(world.isClientSide()));
+			event.setCanceled(true);
 		} else if (event.getFace() != Direction.DOWN) {
 			if (item instanceof ShovelItem && !player.isSpectator() && world.isEmptyBlock(pos.above())) {
 				if (state.is(Blocks.PODZOL) || state.is(Blocks.MYCELIUM)) {
@@ -253,15 +273,24 @@ public class EnvironmentalEvents {
 			if (target.isAlive() && !((PigEntity) target).isBaby()) {
 				IDataManager data = ((IDataManager) target);
 				if (data.getValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME) == 0) {
-					data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, 4800);
-					if (!event.getPlayer().isCreative()) stack.shrink(1);
+					if (world.dimensionType().natural()) {
+						data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, 4800);
+						if (!event.getPlayer().isCreative()) stack.shrink(1);
 
-					if (world.isClientSide()) {
+						if (world.isClientSide()) {
+							for (int i = 0; i < 7; ++i) {
+								double d0 = random.nextGaussian() * 0.02D;
+								double d1 = random.nextGaussian() * 0.02D;
+								double d2 = random.nextGaussian() * 0.02D;
+								world.addParticle(EnvironmentalParticles.PIG_FINDS_TRUFFLE.get(), target.getRandomX(1.0D), target.getRandomY() + 0.5D, target.getRandomZ(1.0D), d0, d1, d2);
+							}
+						}
+					} else if (world.isClientSide()) {
 						for (int i = 0; i < 7; ++i) {
 							double d0 = random.nextGaussian() * 0.02D;
 							double d1 = random.nextGaussian() * 0.02D;
 							double d2 = random.nextGaussian() * 0.02D;
-							world.addParticle(EnvironmentalParticles.PIG_FINDS_TRUFFLE.get(), target.getRandomX(1.0D), target.getRandomY() + 0.5D, target.getRandomZ(1.0D), d0, d1, d2);
+							world.addParticle(ParticleTypes.SMOKE, target.getRandomX(1.0D), target.getRandomY() + 0.5D, target.getRandomZ(1.0D), d0, d1, d2);
 						}
 					}
 
@@ -377,9 +406,6 @@ public class EnvironmentalEvents {
 			} else {
 				if (huntingtime > 0) {
 					data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, huntingtime - 1);
-					if (!world.isClientSide() && data.getValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET) && huntingtime % 30 == 0) {
-						entity.playSound(EnvironmentalSounds.PIG_SNIFF.get(), 1.0F, (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
-					}
 				} else if (huntingtime < 0) {
 					data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, huntingtime + 1);
 					if (world.isClientSide() && data.getValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET) && huntingtime % 10 == 0) {
@@ -389,6 +415,13 @@ public class EnvironmentalEvents {
 						world.addParticle(EnvironmentalParticles.PIG_FINDS_TRUFFLE.get(), entity.getRandomX(1.0D), entity.getRandomY() + 0.5D, entity.getRandomZ(1.0D), d0, d1, d2);
 					}
 				}
+			}
+
+			int sniffsoundtime = data.getValue(EnvironmentalDataProcessors.SNIFF_SOUND_TIME);
+			data.setValue(EnvironmentalDataProcessors.SNIFF_SOUND_TIME, sniffsoundtime + 1);
+			if (!world.isClientSide() && data.getValue(EnvironmentalDataProcessors.LOOKING_FOR_TRUFFLE) && random.nextInt(60) < sniffsoundtime) {
+				entity.playSound(EnvironmentalSounds.PIG_SNIFF.get(), 1.0F, (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
+				data.setValue(EnvironmentalDataProcessors.SNIFF_SOUND_TIME, -20);
 			}
 		}
 	}

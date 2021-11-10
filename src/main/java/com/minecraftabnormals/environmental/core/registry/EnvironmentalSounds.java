@@ -40,6 +40,7 @@ public class EnvironmentalSounds {
 	public static final RegistryObject<SoundEvent> PIG_SNIFF = HELPER.createSoundEvent("entity.pig.sniff");
 
 	public static final RegistryObject<SoundEvent> CATTAIL_PICK_SEEDS = HELPER.createSoundEvent("item.cattail_seeds.pick_from_plant");
+	public static final RegistryObject<SoundEvent> SHOVEL_DIG = HELPER.createSoundEvent("item.shovel.dig");
 
 	public static final RegistryObject<SoundEvent> MUSIC_DISC_SLABRAVE = HELPER.createSoundEvent("music_disc.slabrave");
 	public static final RegistryObject<SoundEvent> MUSIC_DISC_LEAVING_HOME = HELPER.createSoundEvent("music_disc.leaving_home");

@@ -24,6 +24,15 @@
     ],
     "subtitle": "subtitles.environmental.item.cattails.pick"
   },
+  "item.shovel.dig": {
+    "sounds": [
+      "item/shovel/flatten1",
+      "item/shovel/flatten2",
+      "item/shovel/flatten3",
+      "item/shovel/flatten4"
+    ],
+    "subtitle": "subtitles.environmental.item.shovel.dig"
+  },
   "entity.slabfish.death": {
     "sounds": [
       "entity/fish/hurt1",
@@ -214,15 +223,15 @@
     "sounds": [
       {
         "name": "environmental:mob/pig/sniff1",
-        "volume": 0.3
+        "volume": 0.4
       },
       {
         "name": "environmental:mob/pig/sniff2",
-        "volume": 0.3
+        "volume": 0.4
       },
       {
         "name": "environmental:mob/pig/sniff3",
-        "volume": 0.3
+        "volume": 0.4
       }
     ],
     "subtitle": "subtitles.environmental.entity.pig.sniff"

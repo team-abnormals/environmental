@@ -52,6 +52,11 @@ public class HuntTruffleGoal extends Goal {
 	public void start() {
 		this.lookVector = new Vector3d(1.0D, 0.0D, 1.0D);
 		this.moveToTruffle();
+		this.data.setValue(EnvironmentalDataProcessors.LOOKING_FOR_TRUFFLE, true);
+	}
+
+	public void stop() {
+		this.data.setValue(EnvironmentalDataProcessors.LOOKING_FOR_TRUFFLE, false);
 	}
 
 	public void tick() {
@@ -82,6 +87,9 @@ public class HuntTruffleGoal extends Goal {
 	}
 
 	private boolean findTruffle() {
+		if (!this.pig.level.dimensionType().natural())
+			return false;
+
 		int range = 80;
 		int height = 16;
 		BlockPos blockpos = this.pig.blockPosition();
@@ -116,7 +124,7 @@ public class HuntTruffleGoal extends Goal {
 			}
 		}
 
-		if (this.pig.level.dimensionType().natural() && truffleblocks.size() > 0) {
+		if (truffleblocks.size() > 0) {
 			BlockPos trufflepos = truffleblocks.get(this.pig.getRandom().nextInt(truffleblocks.size()));
 
 			this.pig.level.setBlock(trufflepos, EnvironmentalBlocks.BURIED_TRUFFLE.get().defaultBlockState(), 3);
