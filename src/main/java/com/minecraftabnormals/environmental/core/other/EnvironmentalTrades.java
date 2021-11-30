@@ -81,7 +81,7 @@ public class EnvironmentalTrades {
 
 	@SubscribeEvent
 	public static void onCarpenterTradesEvent(VillagerTradesEvent event) {
-		String[] defaultRemoved = new String[]{"crimson", "warped", "poise", "aspen", "grimwood", "morado", "kousa"};
+		String[] defaultRemoved = new String[]{"crimson", "warped", "poise", "aspen", "crustose", "grimwood", "morado", "kousa"};
 
 		for (Item item : ItemTags.PLANKS.getValues()) {
 			if (notOnBlacklist(item, new String[]{"vertical", "stained"}, defaultRemoved)) {
@@ -125,7 +125,7 @@ public class EnvironmentalTrades {
 				new AbnormalsTrade(Items.GOLDEN_AXE, 1, 7, 1, 20)
 		);
 
-		TradeUtil.addVillagerTrades(event, EnvironmentalVillagers.CERAMIST.get(), TradeUtil.MASTER, new AbnormalsTrade(24, EnvironmentalItems.ARCHITECT_BELT.get(), 1, 1, 5));
+		TradeUtil.addVillagerTrades(event, EnvironmentalVillagers.CARPENTER.get(), TradeUtil.MASTER, new AbnormalsTrade(24, EnvironmentalItems.ARCHITECT_BELT.get(), 1, 1, 5));
 	}
 
 	@SubscribeEvent
