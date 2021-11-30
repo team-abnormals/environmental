@@ -377,8 +377,8 @@
 	"entity.environmental.duck_egg": "Thrown Duck Egg",
 	"entity.environmental.mud_ball": "Mud Ball",
 	
-	"entity.minecraft.villager.environmental.ceramist": "Ceramist",
-	"entity.minecraft.villager.environmental.carpenter": "Carpenter",
+	"entity.minecraft.villager.environmental:ceramist": "Ceramist",
+	"entity.minecraft.villager.environmental:carpenter": "Carpenter",
 	
 	"biome.environmental.marsh": "Marsh",
 	"biome.environmental.mushroom_marsh": "Mushroom Marsh",
@@ -472,6 +472,7 @@
 	"entity.environmental.slabfish.type.badlands": "Badlands",
 	"entity.environmental.slabfish.type.taiga": "Taiga",
 	"entity.environmental.slabfish.type.forest": "Forest",
+	"entity.environmental.slabfish.type.snowy": "Snowy",
 	"entity.environmental.slabfish.type.plains": "Plains",
 	"entity.environmental.slabfish.type.river": "River",
 	"entity.environmental.slabfish.type.ice_spikes": "Ice Spikes",
