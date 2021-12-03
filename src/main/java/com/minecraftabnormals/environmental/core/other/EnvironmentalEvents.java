@@ -181,7 +181,7 @@ public class EnvironmentalEvents {
 
 		if (projectileEntity instanceof ProjectileItemEntity) {
 			ProjectileItemEntity projectileitem = (ProjectileItemEntity) projectileEntity;
-			if (event.getRayTraceResult().getType() == RayTraceResult.Type.ENTITY) {
+			if (event.getRayTraceResult() != null && event.getRayTraceResult().getType() == RayTraceResult.Type.ENTITY) {
 				EntityRayTraceResult entity = (EntityRayTraceResult) event.getRayTraceResult();
 				if (entity.getEntity() instanceof SlabfishEntity) {
 					SlabfishEntity slabfish = (SlabfishEntity) entity.getEntity();
