@@ -45,7 +45,7 @@
 	"block.environmental.vertical_willow_planks": "Assi verticali di salice",
 	"block.environmental.willow_vertical_slab": "Lastra verticale di salice",
 	"block.environmental.willow_leaf_carpet": "Tappeto di foglie di salice",
-	"block.environmental.potted_willow_sapling": "Arboscello di salice in vaso",
+	"block.environmental.potted_willow_sapling": "Vaso con arboscello di salice",
 	"block.environmental.willow_sign": "Cartello di salice",
 	"block.environmental.willow_chest": "Baule di salice",
 	"block.environmental.willow_trapped_chest": "Baule trappola di salice",
@@ -74,7 +74,7 @@
 	"block.environmental.vertical_cherry_planks": "Assi verticali di ciliegio",
 	"block.environmental.cherry_vertical_slab": "Lastra verticale di ciliegio",
 	"block.environmental.cherry_leaf_carpet": "Tappeto di foglie di ciliegio",
-	"block.environmental.potted_cherry_sapling": "Arboscello di ciliegio in vaso",
+	"block.environmental.potted_cherry_sapling": "Vaso con arboscello di ciliegio",
 	"block.environmental.cherry_sign": "Cartello di ciliegio",
 	"block.environmental.cherry_chest": "Baule di ciliegio",
 	"block.environmental.cherry_trapped_chest": "Baule trappola di ciliegio",
@@ -281,7 +281,7 @@
 	"block.environmental.giant_tall_grass": "Erba alta gigante",
 	"block.environmental.tall_dead_bush": "Arbusto secco alto",
 	
-	"block.environmental.large_lily_pad": "Ninfea grande,
+	"block.environmental.large_lily_pad": "Ninfea grande",
 	"block.environmental.giant_lily_pad": "Ninfea gigante",
 	
 	"block.environmental.cherry_crate": "Cassa di ciliegie",
@@ -442,6 +442,10 @@
 	"subtitles.environmental.entity.slabfish.sweater": "Equipaggia il maglione",
 	
 	"subtitles.environmental.entity.koi.flop": "Koi si dibatte",
+	
+	"subtitles.environmental.entity.deer.ambient": "Cervo bela",
+	"subtitles.environmental.entity.deer.death": "Cervo muore",
+	"subtitles.environmental.entity.deer.hurt": "Cervo ferito",
 
 	"subtitles.environmental.entity.duck.ambient": "Anatra fa qua qua",
 	"subtitles.environmental.entity.duck.death": "Anatra muore",
@@ -454,6 +458,8 @@
 	"subtitles.environmental.entity.yak.milk": "Yak munto",
 
 	"subtitles.environmental.entity.pig.sniff": "Maiale annusa",
+	
+	"subtitles.environmental.item.cattails.pick": "Coda di gatto scoppia",
 	
 	"entity.environmental.slabfish.baby": "Neonato",
 	
@@ -516,6 +522,7 @@
 	"entity.environmental.slabfish.type.bmo": "BMO",
 	"entity.environmental.slabfish.type.ocelot": "WALL-E",
 	"entity.environmental.slabfish.type.eve": "EVE",
+	"entity.environmental.slabfish.type.minion": "Minion",
 	
 	"entity.environmental.slabfish.backpack.white": "Zaino bianco",
 	"entity.environmental.slabfish.backpack.orange": "Zaino arancione",
