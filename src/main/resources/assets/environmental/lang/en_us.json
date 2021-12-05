@@ -377,8 +377,8 @@
 	"entity.environmental.duck_egg": "Thrown Duck Egg",
 	"entity.environmental.mud_ball": "Mud Ball",
 	
-	"entity.minecraft.villager.environmental:ceramist": "Ceramist",
-	"entity.minecraft.villager.environmental:carpenter": "Carpenter",
+	"entity.minecraft.villager.environmental.ceramist": "Ceramist",
+	"entity.minecraft.villager.environmental.carpenter": "Carpenter",
 	
 	"biome.environmental.marsh": "Marsh",
 	"biome.environmental.mushroom_marsh": "Mushroom Marsh",
