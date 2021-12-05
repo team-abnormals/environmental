@@ -13,6 +13,8 @@ import net.minecraft.stats.Stats;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
@@ -87,8 +89,8 @@ public class SlabbyBreedGoal extends Goal {
 	protected void spawnBaby() {
 		SlabfishEntity slabby = this.animal.getBreedOffspring((ServerWorld) this.world, this.targetMate);
 
-		final net.minecraftforge.event.entity.living.BabyEntitySpawnEvent event = new net.minecraftforge.event.entity.living.BabyEntitySpawnEvent(animal, targetMate, slabby);
-		final boolean cancelled = net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event);
+		final BabyEntitySpawnEvent event = new BabyEntitySpawnEvent(animal, targetMate, slabby);
+		final boolean cancelled = MinecraftForge.EVENT_BUS.post(event);
 		slabby = (SlabfishEntity) event.getChild();
 		if (cancelled) {
 			//Reset the "inLove" state for the animals
@@ -99,14 +101,9 @@ public class SlabbyBreedGoal extends Goal {
 			return;
 		}
 		if (slabby != null) {
-			ServerPlayerEntity serverplayerentity = this.animal.getLoveCause();
-			if (serverplayerentity == null && this.targetMate.getLoveCause() != null) {
-				serverplayerentity = this.targetMate.getLoveCause();
-			}
-
-			if (serverplayerentity != null) {
-				serverplayerentity.awardStat(Stats.ANIMALS_BRED);
-				CriteriaTriggers.BRED_ANIMALS.trigger(serverplayerentity, this.animal, this.targetMate, slabby);
+			ServerPlayerEntity player = this.animal.getLoveCause();
+			if (player == null && this.targetMate.getLoveCause() != null) {
+				player = this.targetMate.getLoveCause();
 			}
 
 			this.animal.setAge(6000);
@@ -118,6 +115,11 @@ public class SlabbyBreedGoal extends Goal {
 
 			SlabfishType slabfishType = SlabfishManager.get(this.world).getSlabfishType(SlabfishConditionContext.breeding(slabby, this.animal.getLoveCause(), this.animal, this.targetMate)).orElse(SlabfishManager.DEFAULT_SLABFISH);
 			slabby.setSlabfishType(slabfishType.getRegistryName());
+
+			if (player != null) {
+				player.awardStat(Stats.ANIMALS_BRED);
+				CriteriaTriggers.BRED_ANIMALS.trigger(player, this.animal, this.targetMate, slabby);
+			}
 
 			this.world.addFreshEntity(slabby);
 			this.world.broadcastEntityEvent(this.animal, (byte) 18);
