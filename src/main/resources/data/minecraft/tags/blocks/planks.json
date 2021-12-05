@@ -6,6 +6,8 @@
     "environmental:cherry_planks",
     "environmental:vertical_cherry_planks",
     "environmental:wisteria_planks",
-    "environmental:vertical_wisteria_planks"
+    "environmental:vertical_wisteria_planks",
+
+    "endergetic:vertical_poise_planks"
   ]
 }
