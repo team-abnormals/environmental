@@ -1,9 +1,9 @@
 {
   "type": "environmental:sawing",
   "ingredient": {
-    "item": "atmospheric:aspen_planks"
+    "item": "bamboo_blocks:bamboo_planks"
   },
-  "result": "atmospheric:vertical_aspen_planks",
+  "result": "bamboo_blocks:vertical_bamboo_planks",
   "count": 1,
   "conditions":[
     {
@@ -11,7 +11,7 @@
       "values": [
         {
           "type":"forge:mod_loaded",
-          "modid":"atmospheric"
+          "modid":"bamboo_blocks"
         },
         {
           "type":"abnormals_core:quark_flag",
