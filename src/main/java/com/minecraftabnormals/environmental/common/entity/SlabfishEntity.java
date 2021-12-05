@@ -229,6 +229,14 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 			return ActionResultType.SUCCESS;
 		}
 
+		if (item.is(ItemTags.CREEPER_DROP_MUSIC_DISCS)) {
+			this.usePlayerItem(player, stack);
+			this.playBurpSound();
+			this.particleCloud(ParticleTypes.NOTE);
+			this.dropItem(EnvironmentalItems.MUSIC_DISC_SLABRAVE.get());
+			return ActionResultType.SUCCESS;
+		}
+
 		if (this.isTame()) {
 			if (this.hasBackpack() && (slabfishType.getCustomBackpack() == null || !slabfishManager.getBackpackType(slabfishType.getCustomBackpack()).isPresent()) && slabfishManager.getBackpackType(stack).isPresent() && !slabfishManager.getBackpackType(stack).orElse(SlabfishManager.BROWN_BACKPACK).getRegistryName().equals(this.getBackpack())) {
 				if (!this.level.isClientSide()) {
@@ -349,14 +357,6 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 				this.level.broadcastEntityEvent(this, (byte) 6);
 			}
 
-			return ActionResultType.SUCCESS;
-		}
-
-		if (item.is(ItemTags.CREEPER_DROP_MUSIC_DISCS)) {
-			this.usePlayerItem(player, stack);
-			this.playBurpSound();
-			this.particleCloud(ParticleTypes.NOTE);
-			this.dropItem(EnvironmentalItems.MUSIC_DISC_SLABRAVE.get());
 			return ActionResultType.SUCCESS;
 		}
 
