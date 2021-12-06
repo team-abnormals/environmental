@@ -557,9 +557,14 @@ public class SlabfishEntity extends TameableEntity implements IInventoryChangedL
 	@Override
 	public SlabfishEntity getBreedOffspring(ServerWorld world, AgeableEntity ageable) {
 		SlabfishEntity baby = EnvironmentalEntities.SLABFISH.get().create(world);
-		if (baby == null)
-			return null;
-		baby.setSlabfishType(this.getSlabfishType());
+		UUID uuid = this.getOwnerUUID();
+		if (baby != null) {
+			baby.setSlabfishType(this.getSlabfishType());
+			if (uuid != null) {
+				baby.setOwnerUUID(uuid);
+				baby.setTame(true);
+			}
+		}
 		return baby;
 	}
 
