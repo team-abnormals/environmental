@@ -5,10 +5,10 @@
   },
   "result": "quark:birch_vertical_slab",
   "count": 2,
-  "conditions":[
+  "conditions": [
     {
-      "type":"abnormals_core:quark_flag",
-      "flag":"vertical_slabs"
+      "type": "abnormals_core:quark_flag",
+      "flag": "vertical_slabs"
     }
   ]
 }

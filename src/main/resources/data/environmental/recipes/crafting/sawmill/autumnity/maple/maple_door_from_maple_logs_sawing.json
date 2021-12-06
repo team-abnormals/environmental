@@ -5,10 +5,10 @@
   },
   "result": "autumnity:maple_door",
   "count": 2,
-  "conditions":[
+  "conditions": [
     {
-      "type":"forge:mod_loaded",
-      "modid":"autumnity"
+      "type": "forge:mod_loaded",
+      "modid": "autumnity"
     }
   ]
 }

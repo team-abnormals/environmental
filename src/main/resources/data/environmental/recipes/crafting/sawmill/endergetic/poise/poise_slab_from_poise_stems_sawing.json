@@ -5,10 +5,10 @@
   },
   "result": "endergetic:poise_slab",
   "count": 8,
-  "conditions":[
+  "conditions": [
     {
-      "type":"forge:mod_loaded",
-      "modid":"endergetic"
+      "type": "forge:mod_loaded",
+      "modid": "endergetic"
     }
   ]
 }

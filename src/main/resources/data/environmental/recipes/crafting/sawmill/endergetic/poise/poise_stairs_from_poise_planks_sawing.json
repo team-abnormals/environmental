@@ -5,10 +5,10 @@
   },
   "result": "endergetic:poise_stairs",
   "count": 1,
-  "conditions":[
+  "conditions": [
     {
-      "type":"forge:mod_loaded",
-      "modid":"endergetic"
+      "type": "forge:mod_loaded",
+      "modid": "endergetic"
     }
   ]
 }

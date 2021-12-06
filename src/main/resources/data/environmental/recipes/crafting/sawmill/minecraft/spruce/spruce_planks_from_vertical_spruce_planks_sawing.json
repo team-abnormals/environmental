@@ -5,10 +5,10 @@
   },
   "result": "minecraft:spruce_planks",
   "count": 1,
-  "conditions":[
+  "conditions": [
     {
-      "type":"abnormals_core:quark_flag",
-      "flag":"vertical_planks"
+      "type": "abnormals_core:quark_flag",
+      "flag": "vertical_planks"
     }
   ]
 }

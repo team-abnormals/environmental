@@ -5,17 +5,17 @@
   },
   "result": "bamboo_blocks:vertical_bamboo_planks",
   "count": 1,
-  "conditions":[
+  "conditions": [
     {
-      "type":"forge:and",
+      "type": "forge:and",
       "values": [
         {
-          "type":"forge:mod_loaded",
-          "modid":"bamboo_blocks"
+          "type": "forge:mod_loaded",
+          "modid": "bamboo_blocks"
         },
         {
-          "type":"abnormals_core:quark_flag",
-          "flag":"vertical_planks"
+          "type": "abnormals_core:quark_flag",
+          "flag": "vertical_planks"
         }
       ]
     }

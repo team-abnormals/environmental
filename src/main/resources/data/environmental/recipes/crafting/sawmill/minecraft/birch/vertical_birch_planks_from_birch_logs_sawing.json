@@ -5,10 +5,10 @@
   },
   "result": "quark:vertical_birch_planks",
   "count": 4,
-  "conditions":[
+  "conditions": [
     {
-      "type":"abnormals_core:quark_flag",
-      "flag":"vertical_planks"
+      "type": "abnormals_core:quark_flag",
+      "flag": "vertical_planks"
     }
   ]
 }

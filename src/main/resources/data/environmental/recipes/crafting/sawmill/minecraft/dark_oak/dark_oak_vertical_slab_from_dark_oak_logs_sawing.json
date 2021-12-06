@@ -5,10 +5,10 @@
   },
   "result": "quark:dark_oak_vertical_slab",
   "count": 8,
-  "conditions":[
+  "conditions": [
     {
-      "type":"abnormals_core:quark_flag",
-      "flag":"vertical_slabs"
+      "type": "abnormals_core:quark_flag",
+      "flag": "vertical_slabs"
     }
   ]
 }

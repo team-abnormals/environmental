@@ -5,10 +5,10 @@
   },
   "result": "atmospheric:morado_door",
   "count": 2,
-  "conditions":[
+  "conditions": [
     {
-      "type":"forge:mod_loaded",
-      "modid":"atmospheric"
+      "type": "forge:mod_loaded",
+      "modid": "atmospheric"
     }
   ]
 }

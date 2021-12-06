@@ -5,10 +5,10 @@
   },
   "result": "environmental:wisteria_slab",
   "count": 1,
-  "conditions":[
+  "conditions": [
     {
-      "type":"abnormals_core:quark_flag",
-      "flag":"vertical_slabs"
+      "type": "abnormals_core:quark_flag",
+      "flag": "vertical_slabs"
     }
   ]
 }

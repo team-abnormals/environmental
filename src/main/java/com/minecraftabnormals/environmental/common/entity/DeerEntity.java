@@ -33,6 +33,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biome.RainType;
 import net.minecraft.world.server.ServerWorld;
 
 import javax.annotation.Nullable;
@@ -245,9 +246,8 @@ public class DeerEntity extends AnimalEntity {
 
 	public boolean isHolidayDeer() {
 		LocalDate localdate = LocalDate.now();
-		int day = localdate.get(ChronoField.DAY_OF_MONTH);
 		int month = localdate.get(ChronoField.MONTH_OF_YEAR);
-		return (month == 12 && day >= 21 && day <= 31) && this.random.nextFloat() < 0.5F && this.level.getBiome(this.blockPosition()).getBiomeCategory() == Biome.Category.ICY;
+		return (month == 12) && this.random.nextFloat() < 0.5F && this.level.getBiome(this.blockPosition()).getPrecipitation() == RainType.SNOW;
 	}
 
 	public static AttributeModifierMap.MutableAttribute registerAttributes() {

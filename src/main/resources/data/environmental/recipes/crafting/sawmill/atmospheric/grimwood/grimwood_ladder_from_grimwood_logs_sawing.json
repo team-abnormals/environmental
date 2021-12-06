@@ -5,17 +5,17 @@
   },
   "result": "atmospheric:grimwood_ladder",
   "count": 8,
-  "conditions":[
+  "conditions": [
     {
-      "type":"forge:and",
+      "type": "forge:and",
       "values": [
         {
-          "type":"forge:mod_loaded",
-          "modid":"atmospheric"
+          "type": "forge:mod_loaded",
+          "modid": "atmospheric"
         },
         {
-          "type":"abnormals_core:quark_flag",
-          "flag":"variant_ladders"
+          "type": "abnormals_core:quark_flag",
+          "flag": "variant_ladders"
         }
       ]
     }

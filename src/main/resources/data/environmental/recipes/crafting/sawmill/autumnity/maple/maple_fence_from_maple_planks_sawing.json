@@ -5,10 +5,10 @@
   },
   "result": "autumnity:maple_fence",
   "count": 1,
-  "conditions":[
+  "conditions": [
     {
-      "type":"forge:mod_loaded",
-      "modid":"autumnity"
+      "type": "forge:mod_loaded",
+      "modid": "autumnity"
     }
   ]
 }

@@ -5,17 +5,17 @@
   },
   "result": "endergetic:poise_vertical_slab",
   "count": 1,
-  "conditions":[
+  "conditions": [
     {
-      "type":"forge:and",
+      "type": "forge:and",
       "values": [
         {
-          "type":"forge:mod_loaded",
-          "modid":"endergetic"
+          "type": "forge:mod_loaded",
+          "modid": "endergetic"
         },
         {
-          "type":"abnormals_core:quark_flag",
-          "flag":"vertical_slabs"
+          "type": "abnormals_core:quark_flag",
+          "flag": "vertical_slabs"
         }
       ]
     }

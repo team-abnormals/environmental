@@ -5,10 +5,10 @@
   },
   "result": "upgrade_aquatic:river_fence",
   "count": 4,
-  "conditions":[
+  "conditions": [
     {
-      "type":"forge:mod_loaded",
-      "modid":"upgrade_aquatic"
+      "type": "forge:mod_loaded",
+      "modid": "upgrade_aquatic"
     }
   ]
 }

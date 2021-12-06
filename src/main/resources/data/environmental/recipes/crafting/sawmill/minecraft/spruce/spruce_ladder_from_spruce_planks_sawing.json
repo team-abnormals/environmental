@@ -5,10 +5,10 @@
   },
   "result": "quark:spruce_ladder",
   "count": 2,
-  "conditions":[
+  "conditions": [
     {
-      "type":"abnormals_core:quark_flag",
-      "flag":"variant_ladders"
+      "type": "abnormals_core:quark_flag",
+      "flag": "variant_ladders"
     }
   ]
 }

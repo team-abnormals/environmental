@@ -5,17 +5,17 @@
   },
   "result": "autumnity:maple_vertical_slab",
   "count": 2,
-  "conditions":[
+  "conditions": [
     {
-      "type":"forge:and",
+      "type": "forge:and",
       "values": [
         {
-          "type":"forge:mod_loaded",
-          "modid":"autumnity"
+          "type": "forge:mod_loaded",
+          "modid": "autumnity"
         },
         {
-          "type":"abnormals_core:quark_flag",
-          "flag":"vertical_slabs"
+          "type": "abnormals_core:quark_flag",
+          "flag": "vertical_slabs"
         }
       ]
     }
