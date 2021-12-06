@@ -2,6 +2,7 @@ package com.minecraftabnormals.environmental.client.render;
 
 import com.minecraftabnormals.environmental.client.model.DeerModel;
 import com.minecraftabnormals.environmental.client.render.layer.DeerMarkingsRenderLayer;
+import com.minecraftabnormals.environmental.client.render.layer.RedNoseReindeerLayer;
 import com.minecraftabnormals.environmental.common.entity.DeerEntity;
 import com.minecraftabnormals.environmental.common.entity.util.DeerCoatColors;
 import com.minecraftabnormals.environmental.core.Environmental;
@@ -19,6 +20,7 @@ public class DeerRenderer extends MobRenderer<DeerEntity, DeerModel<DeerEntity>>
 	public DeerRenderer(EntityRendererManager renderManager) {
 		super(renderManager, new DeerModel<>(), 0.75F);
 		this.addLayer(new DeerMarkingsRenderLayer<>(this));
+		this.addLayer(new RedNoseReindeerLayer<>(this));
 	}
 
 	@Override

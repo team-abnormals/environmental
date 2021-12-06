@@ -32,7 +32,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.RainType;
 import net.minecraft.world.server.ServerWorld;
 
@@ -217,10 +216,13 @@ public class DeerEntity extends AnimalEntity {
 		return this.entityData.get(HAS_ANTLERS);
 	}
 
-	public void setDeerData(DeerCoatColors coatColor, DeerCoatTypes coatType, boolean antlers) {
-		this.setCoatColor(coatColor.getId());
-		this.setCoatType(coatType.getId());
-		this.setHasAntlers(antlers);
+	private void setHoliday() {
+		this.setCoatColor(DeerCoatColors.HOLIDAY.getId());
+		this.setHasAntlers(true);
+	}
+
+	public boolean isHoliday() {
+		return this.getCoatColor() == DeerCoatColors.HOLIDAY.getId();
 	}
 
 	@Override
@@ -231,23 +233,25 @@ public class DeerEntity extends AnimalEntity {
 	@Override
 	public AgeableEntity getBreedOffspring(ServerWorld world, AgeableEntity ageable) {
 		DeerEntity entity = EnvironmentalEntities.DEER.get().create(world);
-
-		if (this.isHolidayDeer()) {
-			entity.setCoatColor(DeerCoatColors.HOLIDAY.getId());
-		} else {
-			entity.setCoatColor(((DeerEntity) ageable).getCoatColor());
+		DeerEntity parent = (DeerEntity) ageable;
+		if (entity != null) {
+			entity.setCoatColor(random.nextBoolean() ? parent.getCoatColor() : this.getCoatColor());
+			entity.setCoatType(random.nextBoolean() ? parent.getCoatType() : this.getCoatType());
+			entity.setHasAntlers(random.nextBoolean());
+			if (this.isHolidayCriteria())
+				entity.setHoliday();
 		}
-
-		entity.setCoatType(this.getCoatType());
-		entity.setHasAntlers(random.nextBoolean());
 
 		return entity;
 	}
 
-	public boolean isHolidayDeer() {
-		LocalDate localdate = LocalDate.now();
-		int month = localdate.get(ChronoField.MONTH_OF_YEAR);
-		return (month == 12) && this.random.nextFloat() < 0.5F && this.level.getBiome(this.blockPosition()).getPrecipitation() == RainType.SNOW;
+	public boolean isHolidayCriteria() {
+		if (this.random.nextInt(9) == 0) {
+			LocalDate localdate = LocalDate.now();
+			int month = localdate.get(ChronoField.MONTH_OF_YEAR);
+			return month == 12 && this.level.getBiome(this.blockPosition()).getPrecipitation() == RainType.SNOW;
+		}
+		return false;
 	}
 
 	public static AttributeModifierMap.MutableAttribute registerAttributes() {
@@ -258,15 +262,11 @@ public class DeerEntity extends AnimalEntity {
 	@Override
 	public ILivingEntityData finalizeSpawn(IServerWorld worldIn, DifficultyInstance difficulty, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
 		spawnDataIn = super.finalizeSpawn(worldIn, difficulty, reason, spawnDataIn, dataTag);
-		if (this.isHolidayDeer()) {
-			this.setCoatColor(DeerCoatColors.HOLIDAY.getId());
-		} else {
-			this.setCoatColor(random.nextInt(DeerCoatColors.values().length - 1));
-		}
-
+		this.setCoatColor(random.nextInt(DeerCoatColors.values().length - 1));
 		this.setCoatType(random.nextInt(DeerCoatTypes.values().length));
 		this.setHasAntlers(random.nextBoolean());
-
+		if (this.isHolidayCriteria())
+			this.setHoliday();
 		return super.finalizeSpawn(worldIn, difficulty, reason, spawnDataIn, dataTag);
 	}
 }
