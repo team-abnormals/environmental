@@ -105,21 +105,18 @@ public class SlabfishInventoryContainer extends Container {
 			} else if (this.getSlot(2).mayPlace(slotStack) && !this.getSlot(2).hasItem() && !this.moveItemStackTo(slotStack, 2, 3, false)) {
 				return ItemStack.EMPTY;
 			} else if (i <= 3 || !this.moveItemStackTo(slotStack, 3, i, false)) {
-				int j = i + 27;
-				int k = j + 9;
-				if (index >= j && index < k) {
-					if (!this.moveItemStackTo(slotStack, i, j, false)) {
+				int firstInvSlot = 18;
+				int firstHotbarSlot = 45;
+				int lastHotbarSlot = 53;
+				if (index >= firstHotbarSlot && index <= lastHotbarSlot) {
+					if (!this.moveItemStackTo(slotStack, firstInvSlot, firstHotbarSlot, false)) {
 						return ItemStack.EMPTY;
 					}
-				} else if (index >= i && index < j) {
-					if (!this.moveItemStackTo(slotStack, j, k, false)) {
+				} else if (index >= i && index < firstHotbarSlot) {
+					if (!this.moveItemStackTo(slotStack, firstHotbarSlot, lastHotbarSlot + 1, false)) {
 						return ItemStack.EMPTY;
 					}
-				} else if (!this.moveItemStackTo(slotStack, j, j, false)) {
-					return ItemStack.EMPTY;
 				}
-
-				return ItemStack.EMPTY;
 			}
 
 			if (slotStack.isEmpty()) {

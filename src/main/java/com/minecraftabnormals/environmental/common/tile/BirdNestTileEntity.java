@@ -32,7 +32,7 @@ public class BirdNestTileEntity extends TileEntity implements ITickableTileEntit
 				if (tileentity instanceof HopperTileEntity) {
 					if (!((HopperTileEntity) tileentity).isOnCooldown() && insertEggToHopper(tileentity, new ItemStack(block.getEgg()))) {
 						if (i > 1)
-							this.level.setBlock(this.worldPosition, blockstate.setValue(BirdNestBlock.EGGS, Integer.valueOf(i - 1)), 2);
+							this.level.setBlock(this.worldPosition, blockstate.setValue(BirdNestBlock.EGGS, i - 1), 2);
 						else
 							this.level.setBlock(this.worldPosition, block.getEmptyNest().defaultBlockState(), 2);
 					}
