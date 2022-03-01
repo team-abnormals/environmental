@@ -294,14 +294,14 @@
 	"block.environmental.duckweed_thatch_stairs": "Roof o' Davy Jones's Beard Stairs",
 	"block.environmental.duckweed_thatch_vertical_slab": "Roof o' Davy Jones's Beard Standin' Slab",
 
-	"block.environmental.twig_nest": "Nest o' fallen timber",
-	"block.environmental.twig_chicken_nest": "Timber nest w' fowl's cackle fruits",
-	"block.environmental.twig_duck_nest": "Timber nest w' water fowl's cackle fruits",
-	"block.environmental.twig_turkey_nest": "Timber nest w' foul fowl's cackle fruits",
-	"block.environmental.hay_nest": "Nest o' hay",
-	"block.environmental.hay_chicken_nest": "Timber nest w' fowl's cackle fruits",
-	"block.environmental.hay_duck_nest": "Timber nest w' water fowl's cackle fruits",
-	"block.environmental.hay_turkey_nest": "Timber nest w' foul fowl's cackle fruits",
+	"block.environmental.twig_nest": "Fowl's vessel o' fallen timber",
+	"block.environmental.twig_chicken_nest": "Fowl's vessel w' cackle fruit",
+	"block.environmental.twig_duck_nest": "Waterfowl's vessel w' cackle fruit",
+	"block.environmental.twig_turkey_nest": "Fall fowl's vessel w' cackle fruit",
+	"block.environmental.hay_nest": "Fowl's vessel o' hops",
+	"block.environmental.hay_chicken_nest": "Hops vessl o' fowl's cackle fruit",
+	"block.environmental.hay_duck_nest": "Hops vessel o' waterfowl's cackle fruit",
+	"block.environmental.hay_turkey_nest": "Hops vessel o' foul fowl's cackle fruit",
 
 	"block.environmental.chicken_egg_crate": "Crate o' fowl's cackle fruits",
 	"block.environmental.duck_egg_crate": "Crate o' waterfowl's cackle fruits",
@@ -338,8 +338,8 @@
 	"item.environmental.duck_egg": "Cackle Fruit o' waterfowl",
 
 	"item.minecraft.egg": "Fowl's cackle fruit",
-	"item.environmental.fried_egg": "Charred eggs",
-	"item.environmental.scrambled_eggs": "Stirred eggs",
+	"item.environmental.fried_egg": "Charred cackle fruit",
+	"item.environmental.scrambled_eggs": "Rumbled cackle fruit",
 
 	"item.environmental.koi": "Fish o' dragons",
 	"item.environmental.slabfish_bucket": "Pail o' Courier o' the Swamp",
