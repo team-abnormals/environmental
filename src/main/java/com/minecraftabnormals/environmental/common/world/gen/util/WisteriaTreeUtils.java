@@ -98,7 +98,7 @@ public class WisteriaTreeUtils {
 	}
 
 	public static void setForcedState(IWorldWriter worldIn, BlockPos pos, BlockState state) {
-		worldIn.setBlock(pos, state, 18);
+		worldIn.setBlock(pos, state, 19);
 	}
 
 	public static void setDirtAt(IWorld worldIn, BlockPos pos) {
