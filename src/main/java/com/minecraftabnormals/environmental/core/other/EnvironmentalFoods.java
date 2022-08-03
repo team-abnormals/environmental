@@ -16,9 +16,6 @@ public class EnvironmentalFoods {
 	public static final Food DUCK = (new Food.Builder()).nutrition(4).saturationMod(0.1F).effect(() -> new EffectInstance(Effects.HUNGER, 600, 0), 0.3F).meat().build();
 	public static final Food COOKED_DUCK = (new Food.Builder()).nutrition(8).saturationMod(0.3F).meat().build();
 
-	public static final Food FRIED_EGG = (new Food.Builder()).nutrition(3).saturationMod(0.6F).build();
-	public static final Food SCRAMBLED_EGGS = (new Food.Builder()).nutrition(6).saturationMod(0.6F).build();
-
 	public static final Food TRUFFLE = new Food.Builder().nutrition(4).saturationMod(0.1F).alwaysEat().effect(() -> new EffectInstance(Effects.HEALTH_BOOST, 2400), 1.0F).build();
 	public static final Food TRUFFLE_MASH = new Food.Builder().nutrition(20).saturationMod(0.5F).alwaysEat().effect(() -> new EffectInstance(Effects.HEALTH_BOOST, 6000), 1.0F).build();
 	public static final Food TRUFFLE_PIE = new Food.Builder().nutrition(15).saturationMod(0.6F).alwaysEat().effect(() -> new EffectInstance(Effects.HEALTH_BOOST, 3600), 1.0F).build();

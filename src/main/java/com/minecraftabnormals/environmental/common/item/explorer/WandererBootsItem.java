@@ -22,6 +22,8 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 import java.util.UUID;
 
+import net.minecraft.item.Item.Properties;
+
 @EventBusSubscriber(modid = Environmental.MOD_ID)
 public class WandererBootsItem extends ExplorerArmorItem {
 	public static final String NBT_TAG = "WandererBootsUses";

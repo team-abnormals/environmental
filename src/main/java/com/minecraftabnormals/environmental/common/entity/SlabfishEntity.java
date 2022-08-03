@@ -82,6 +82,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import net.minecraft.entity.AgeableEntity.AgeableData;
+
 public class SlabfishEntity extends TameableEntity implements IInventoryChangedListener, IBucketableEntity {
 
 	private static final DataParameter<ResourceLocation> SLABFISH_TYPE = EntityDataManager.defineId(SlabfishEntity.class, EnvironmentalDataSerializers.RESOURCE_LOCATION);

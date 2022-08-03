@@ -16,6 +16,8 @@ import net.minecraft.world.server.ServerWorld;
 import java.util.List;
 import java.util.function.Supplier;
 
+import net.minecraft.item.Item.Properties;
+
 public class KoiBucketItem extends BucketItem {
 
 	private final Supplier<EntityType<? extends KoiEntity>> entityType;

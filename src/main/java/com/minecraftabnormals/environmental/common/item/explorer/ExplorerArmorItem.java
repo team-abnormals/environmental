@@ -21,6 +21,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nullable;
 import java.util.List;
 
+import net.minecraft.item.Item.Properties;
+
 public abstract class ExplorerArmorItem extends DyeableArmorItem implements IExplorerArmorItem {
 
 	public ExplorerArmorItem(EquipmentSlotType slot, Properties properties) {

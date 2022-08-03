@@ -6,7 +6,7 @@
   "refmap": "environmental.refmap.json",
   "mixins": [
     "AbstractSkeletonEntityMixin",
-    "ChickenEntityMixin",
+    "com.teamabnormals.incubation.core.mixin.ChickenEntityMixin",
     "DoublePlantBlockMixin",
     "GrassBlockMixin",
     "HoeItemMixin",

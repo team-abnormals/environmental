@@ -1,11 +1,11 @@
-package com.minecraftabnormals.environmental.api;
+package com.teamabnormals.incubation.core.api;
 
 import net.minecraft.item.Item;
 import net.minecraft.util.SoundEvent;
 
 import java.util.Random;
 
-public interface IEggLayingEntity {
+public interface EggLayer {
 	int getEggTimer();
 
 	void setEggTimer(int time);

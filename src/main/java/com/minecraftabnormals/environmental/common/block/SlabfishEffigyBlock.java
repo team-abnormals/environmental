@@ -21,6 +21,8 @@ import net.minecraft.world.server.ServerWorld;
 
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class SlabfishEffigyBlock extends HorizontalBlock implements IWaterLoggable {
 	protected static final VoxelShape SHAPE = Block.box(3.0D, 0.0D, 3.0D, 13.0D, 16.0D, 13.0D);
 	public static final BooleanProperty POWERED = BlockStateProperties.POWERED;

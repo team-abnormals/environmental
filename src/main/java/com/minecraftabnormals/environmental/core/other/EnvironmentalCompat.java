@@ -35,8 +35,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class EnvironmentalCompat {
-	public static final Item TURKEY_EGG = ForgeRegistries.ITEMS.getValue(new ResourceLocation("autumnity", "turkey_egg"));
-
 	public static void registerCompat() {
 		registerLootInjectors();
 		registerCompostables();
@@ -80,8 +78,7 @@ public class EnvironmentalCompat {
 		DataUtil.registerCompostable(EnvironmentalBlocks.GIANT_TALL_GRASS.get(), 0.65F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.MYCELIUM_SPROUTS.get(), 0.50F);
 
-		DataUtil.registerCompostable(EnvironmentalBlocks.TWIG_NEST.get(), 0.65F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.HAY_NEST.get(), 0.65F);
+
 
 		DataUtil.registerCompostable(EnvironmentalItems.TRUFFLE.get(), 0.65F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.TRUFFLE_CRATE.get(), 1.0F);
@@ -162,19 +159,7 @@ public class EnvironmentalCompat {
 		DataUtil.registerFlammable(EnvironmentalBlocks.DUCKWEED_THATCH_SLAB.get(), 60, 20);
 		DataUtil.registerFlammable(EnvironmentalBlocks.DUCKWEED_THATCH_VERTICAL_SLAB.get(), 60, 20);
 
-		DataUtil.registerFlammable(EnvironmentalBlocks.TWIG_NEST.get(), 60, 20);
-		DataUtil.registerFlammable(EnvironmentalBlocks.TWIG_CHICKEN_NEST.get(), 60, 20);
-		DataUtil.registerFlammable(EnvironmentalBlocks.TWIG_DUCK_NEST.get(), 60, 20);
-		DataUtil.registerFlammable(EnvironmentalBlocks.TWIG_TURKEY_NEST.get(), 60, 20);
 
-		DataUtil.registerFlammable(EnvironmentalBlocks.HAY_NEST.get(), 60, 20);
-		DataUtil.registerFlammable(EnvironmentalBlocks.HAY_CHICKEN_NEST.get(), 60, 20);
-		DataUtil.registerFlammable(EnvironmentalBlocks.HAY_DUCK_NEST.get(), 60, 20);
-		DataUtil.registerFlammable(EnvironmentalBlocks.HAY_TURKEY_NEST.get(), 60, 20);
-
-		DataUtil.registerFlammable(EnvironmentalBlocks.CHICKEN_EGG_CRATE.get(), 5, 20);
-		DataUtil.registerFlammable(EnvironmentalBlocks.DUCK_EGG_CRATE.get(), 5, 20);
-		DataUtil.registerFlammable(EnvironmentalBlocks.TURTLE_EGG_CRATE.get(), 5, 20);
 
 		DataUtil.registerFlammable(EnvironmentalBlocks.TRUFFLE_CRATE.get(), 5, 20);
 

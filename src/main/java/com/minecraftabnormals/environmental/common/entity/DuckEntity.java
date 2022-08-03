@@ -1,12 +1,11 @@
 package com.minecraftabnormals.environmental.common.entity;
 
-import com.minecraftabnormals.environmental.api.IEggLayingEntity;
 import com.minecraftabnormals.environmental.common.entity.goals.DuckSwimGoal;
-import com.minecraftabnormals.environmental.common.entity.goals.LayEggInNestGoal;
 import com.minecraftabnormals.environmental.core.other.EnvironmentalTags;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalEntities;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalItems;
 import com.minecraftabnormals.environmental.core.registry.EnvironmentalSounds;
+import com.teamabnormals.incubation.core.api.EggLayer;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
@@ -41,7 +40,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 import java.util.Random;
 
-public class DuckEntity extends AnimalEntity implements IEggLayingEntity {
+public class DuckEntity extends AnimalEntity implements EggLayer {
 	private static final DataParameter<Integer> EATING = EntityDataManager.defineId(DuckEntity.class, DataSerializers.INT);
 	private float wingRotation;
 	private float destPos;
@@ -62,7 +61,6 @@ public class DuckEntity extends AnimalEntity implements IEggLayingEntity {
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new DuckSwimGoal(this));
 		this.goalSelector.addGoal(1, new PanicGoal(this, 1.4D));
-		this.goalSelector.addGoal(2, new LayEggInNestGoal(this, 1.0D));
 		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
 		this.goalSelector.addGoal(3, new TemptGoal(this, 1.0D, false, Ingredient.of(EnvironmentalTags.Items.DUCK_FOOD)));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));

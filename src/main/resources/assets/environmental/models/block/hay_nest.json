@@ -1,6 +1,0 @@
-{
-    "parent": "environmental:block/twig_nest",
-	"textures": {
-		"nest": "environmental:block/hay_nest"
-	}
-}

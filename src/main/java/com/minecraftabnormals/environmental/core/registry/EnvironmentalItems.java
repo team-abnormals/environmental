@@ -39,9 +39,6 @@ public class EnvironmentalItems {
 	public static final RegistryObject<Item> COOKED_DUCK = HELPER.createItem("cooked_duck", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_FOOD).food(EnvironmentalFoods.COOKED_DUCK)));
 	public static final RegistryObject<Item> DUCK_EGG = HELPER.createItem("duck_egg", () -> new DuckEggItem(new Item.Properties().stacksTo(16).tab(ItemGroup.TAB_MISC)));
 
-	public static final RegistryObject<Item> FRIED_EGG = HELPER.createItem("fried_egg", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_FOOD).food(EnvironmentalFoods.FRIED_EGG)));
-	public static final RegistryObject<Item> SCRAMBLED_EGGS = HELPER.createItem("scrambled_eggs", () -> new ScrambledEggsItem(new Item.Properties().stacksTo(1).tab(ItemGroup.TAB_FOOD).food(EnvironmentalFoods.SCRAMBLED_EGGS)));
-
 	public static final RegistryObject<Item> TRUFFLE = HELPER.createItem("truffle", () -> new Item(new Item.Properties().food(EnvironmentalFoods.TRUFFLE).tab(ItemGroup.TAB_FOOD)));
 	public static final RegistryObject<Item> TRUFFLE_MASH = HELPER.createItem("truffle_mash", () -> new SoupItem((new Item.Properties()).stacksTo(1).food(EnvironmentalFoods.TRUFFLE_MASH).tab(ItemGroup.TAB_FOOD)));
 	public static final RegistryObject<Item> TRUFFLE_PIE = HELPER.createItem("truffle_pie", () -> new Item(new Item.Properties().food(EnvironmentalFoods.TRUFFLE_PIE).tab(ItemGroup.TAB_FOOD)));

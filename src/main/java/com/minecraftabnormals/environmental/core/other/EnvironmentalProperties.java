@@ -44,8 +44,6 @@ public class EnvironmentalProperties {
 	public static final AbstractBlock.Properties MYCELIUM_SPROUTS = AbstractBlock.Properties.of(Material.REPLACEABLE_PLANT, MaterialColor.COLOR_PURPLE).noCollission().instabreak().sound(SoundType.NETHER_SPROUTS);
 	public static final AbstractBlock.Properties TALL_DEAD_BUSH = AbstractBlock.Properties.of(Material.REPLACEABLE_PLANT, MaterialColor.WOOD).noCollission().instabreak().sound(SoundType.GRASS);
 
-	public static final AbstractBlock.Properties TWIG_NEST = AbstractBlock.Properties.of(Material.GRASS, MaterialColor.COLOR_BROWN).strength(0.5F).sound(SoundType.GRASS);
-	public static final AbstractBlock.Properties HAY_NEST = AbstractBlock.Properties.of(Material.GRASS, MaterialColor.COLOR_YELLOW).strength(0.5F).sound(SoundType.GRASS);
 
 	public static final AbstractBlock.Properties FLOWER = AbstractBlock.Properties.of(Material.PLANT).noOcclusion().noCollission().instabreak().sound(SoundType.GRASS);
 	public static final AbstractBlock.Properties DELPHINIUMS = AbstractBlock.Properties.of(Material.REPLACEABLE_PLANT).noCollission().strength(0.0F).sound(SoundType.GRASS);

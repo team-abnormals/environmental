@@ -11,6 +11,8 @@ import org.spongepowered.asm.mixin.Mixin;
 
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 @Mixin(DoublePlantBlock.class)
 public class DoublePlantBlockMixin extends Block implements IGrowable {
 

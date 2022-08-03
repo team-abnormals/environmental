@@ -80,6 +80,7 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> TALL_CATTAIL = HELPER.createBlock("tall_cattail", () -> new DoubleCattailBlock(EnvironmentalProperties.CATTAIL), ItemGroup.TAB_DECORATIONS);
 	public static final RegistryObject<Block> POTTED_CATTAIL = HELPER.createBlockNoItem("potted_cattail", () -> new FlowerPotBlock(EnvironmentalBlocks.CATTAIL.get(), EnvironmentalProperties.FLOWER_POT));
 	public static final RegistryObject<Block> CATTAIL_SEED_SACK = HELPER.createCompatBlock("quark", "cattail_seed_sack", () -> new Block(Block.Properties.of(Material.WOOL, MaterialColor.TERRACOTTA_WHITE).strength(0.5F).sound(SoundType.WOOL)), ItemGroup.TAB_DECORATIONS);
+
 	// Foliage //
 
 	public static final RegistryObject<Block> DUCKWEED = HELPER.createBlockNoItem("duckweed", () -> new DuckweedBlock(EnvironmentalProperties.DUCKWEED));
@@ -90,25 +91,11 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> GIANT_TALL_GRASS = HELPER.createBlock("giant_tall_grass", () -> new DoublePlantBlock(Block.Properties.copy(Blocks.TALL_GRASS)), ItemGroup.TAB_DECORATIONS);
 	public static final RegistryObject<Block> TALL_DEAD_BUSH = HELPER.createBlock("tall_dead_bush", () -> new TallDeadBushBlock(EnvironmentalProperties.TALL_DEAD_BUSH), ItemGroup.TAB_DECORATIONS);
 
-	// Eggs //
-
-	public static final RegistryObject<Block> TWIG_NEST = HELPER.createBlock("twig_nest", () -> new EmptyNestBlock(EnvironmentalProperties.TWIG_NEST), ItemGroup.TAB_DECORATIONS);
-	public static final RegistryObject<Block> TWIG_CHICKEN_NEST = HELPER.createBlockNoItem("twig_chicken_nest", () -> new BirdNestBlock(() -> Items.EGG, (EmptyNestBlock) TWIG_NEST.get(), EnvironmentalProperties.TWIG_NEST));
-	public static final RegistryObject<Block> TWIG_DUCK_NEST = HELPER.createBlockNoItem("twig_duck_nest", () -> new BirdNestBlock(EnvironmentalItems.DUCK_EGG, (EmptyNestBlock) TWIG_NEST.get(), EnvironmentalProperties.TWIG_NEST));
-	public static final RegistryObject<Block> TWIG_TURKEY_NEST = HELPER.createBlockNoItem("twig_turkey_nest", () -> new BirdNestBlock(() -> EnvironmentalCompat.TURKEY_EGG, (EmptyNestBlock) TWIG_NEST.get(), EnvironmentalProperties.TWIG_NEST));
-	public static final RegistryObject<Block> HAY_NEST = HELPER.createBlock("hay_nest", () -> new EmptyNestBlock(EnvironmentalProperties.HAY_NEST), ItemGroup.TAB_DECORATIONS);
-	public static final RegistryObject<Block> HAY_CHICKEN_NEST = HELPER.createBlockNoItem("hay_chicken_nest", () -> new BirdNestBlock(() -> Items.EGG, (EmptyNestBlock) HAY_NEST.get(), EnvironmentalProperties.HAY_NEST));
-	public static final RegistryObject<Block> HAY_DUCK_NEST = HELPER.createBlockNoItem("hay_duck_nest", () -> new BirdNestBlock(EnvironmentalItems.DUCK_EGG, (EmptyNestBlock) HAY_NEST.get(), EnvironmentalProperties.HAY_NEST));
-	public static final RegistryObject<Block> HAY_TURKEY_NEST = HELPER.createBlockNoItem("hay_turkey_nest", () -> new BirdNestBlock(() -> EnvironmentalCompat.TURKEY_EGG, (EmptyNestBlock) HAY_NEST.get(), EnvironmentalProperties.HAY_NEST));
-
-	public static final RegistryObject<Block> CHICKEN_EGG_CRATE = HELPER.createCompatBlock("quark", "chicken_egg_crate", () -> new Block(Block.Properties.of(Material.WOOD, MaterialColor.TERRACOTTA_WHITE).strength(1.5F).sound(SoundType.WOOD)), ItemGroup.TAB_DECORATIONS);
-	public static final RegistryObject<Block> DUCK_EGG_CRATE = HELPER.createCompatBlock("quark", "duck_egg_crate", () -> new Block(Block.Properties.of(Material.WOOD, MaterialColor.COLOR_LIGHT_BLUE).strength(1.5F).sound(SoundType.WOOD)), ItemGroup.TAB_DECORATIONS);
-	public static final RegistryObject<Block> TURTLE_EGG_CRATE = HELPER.createCompatBlock("quark", "turtle_egg_crate", () -> new Block(Block.Properties.of(Material.WOOD, MaterialColor.SAND).strength(1.5F).sound(SoundType.WOOD)), ItemGroup.TAB_DECORATIONS);
-
-	// Truffle
+	// Misc //
 
 	public static final RegistryObject<Block> BURIED_TRUFFLE = HELPER.createBlock("buried_truffle", () -> new Block(EnvironmentalProperties.BURIED_TRUFFLE), ItemGroup.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> TRUFFLE_CRATE = HELPER.createCompatBlock("quark", "truffle_crate", () -> new Block(Block.Properties.of(Material.WOOD, MaterialColor.TERRACOTTA_BROWN).strength(1.5F).sound(SoundType.WOOD)), ItemGroup.TAB_DECORATIONS);
+	public static final RegistryObject<Block> DUCK_EGG_CRATE = HELPER.createCompatBlock("incubation", "duck_egg_crate", () -> new Block(Block.Properties.of(Material.WOOD, MaterialColor.COLOR_LIGHT_BLUE).strength(1.5F).sound(SoundType.WOOD)), ItemGroup.TAB_DECORATIONS);
 
 	// Decorations //
 

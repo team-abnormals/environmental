@@ -104,7 +104,6 @@ public class EnvironmentalGeneration {
 
 		if (!DataUtil.matchesKeys(biome, Biomes.FROZEN_RIVER) && (event.getCategory() == Biome.Category.SWAMP || event.getCategory() == Biome.Category.RIVER)) {
 			EnvironmentalGeneration.withCattails(generation);
-			generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.NEST_DUCK);
 		}
 
 		if (event.getCategory() == Biome.Category.DESERT) {
@@ -129,12 +128,6 @@ public class EnvironmentalGeneration {
 
 		if (event.getCategory() == Biome.Category.PLAINS && EnvironmentalConfig.COMMON.generateGiantTallGrass.get())
 			generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_GIANT_TALL_GRASS_PLAINS);
-
-		if (biome.toString().contains("maple") || biome.toString().contains("pumpkin_fields")) {
-			generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.NEST_TURKEY);
-		} else if (event.getCategory() == Biome.Category.FOREST) {
-			generation.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.NEST_CHICKEN);
-		}
 
 		if (event.getCategory() == Biome.Category.JUNGLE) {
 			if (EnvironmentalConfig.COMMON.generateGiantTallGrass.get())
