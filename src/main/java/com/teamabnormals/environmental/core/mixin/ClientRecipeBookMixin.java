@@ -15,7 +15,7 @@ public class ClientRecipeBookMixin {
 	//TODO: Remove, add recipe book
 	@Inject(at = @At("HEAD"), method = "getCategory", cancellable = true)
 	private static void getCategory(Recipe<?> recipe, CallbackInfoReturnable<RecipeBookCategories> cir) {
-		if (recipe.getType() == EnvironmentalRecipeTypes.BAKING.get() || recipe.getType() == EnvironmentalRecipeTypes.SAWING.get()) {
+		if (recipe.getType() == EnvironmentalRecipeTypes.BAKING.get()) {
 			cir.setReturnValue(RecipeBookCategories.UNKNOWN);
 		}
 	}
