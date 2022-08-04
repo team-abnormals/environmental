@@ -1,8 +1,0 @@
-{
-  "parent": "blueprint:block/vertical_slab",
-  "textures": {
-    "bottom": "environmental:block/white_terracotta_bricks",
-    "top": "environmental:block/white_terracotta_bricks",
-    "side": "environmental:block/white_terracotta_bricks"
-  }
-}

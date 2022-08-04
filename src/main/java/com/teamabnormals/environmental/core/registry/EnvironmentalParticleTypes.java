@@ -10,7 +10,6 @@ import net.minecraftforge.registries.RegistryObject;
 public class EnvironmentalParticleTypes {
 	public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, Environmental.MOD_ID);
 
-	public static final RegistryObject<SimpleParticleType> KILN_SMOKE = PARTICLE_TYPES.register("kiln_smoke", () -> new SimpleParticleType(true));
 	public static final RegistryObject<SimpleParticleType> CHERRY_BLOSSOM = PARTICLE_TYPES.register("cherry_blossom", () -> new SimpleParticleType(false));
 	public static final RegistryObject<SimpleParticleType> RED_LOTUS_BLOSSOM = PARTICLE_TYPES.register("red_lotus_blossom", () -> new SimpleParticleType(true));
 	public static final RegistryObject<SimpleParticleType> WHITE_LOTUS_BLOSSOM = PARTICLE_TYPES.register("white_lotus_blossom", () -> new SimpleParticleType(true));

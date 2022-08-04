@@ -30,7 +30,6 @@ public class EnvironmentalClientRegistry {
 	@SubscribeEvent
 	public static void registerParticleFactorys(ParticleFactoryRegisterEvent event) {
 		ParticleEngine manager = Minecraft.getInstance().particleEngine;
-		registerParticleFactory(manager, EnvironmentalParticleTypes.KILN_SMOKE, KilnSmokeParticle.Factory::new);
 		registerParticleFactory(manager, EnvironmentalParticleTypes.CHERRY_BLOSSOM, CherryBlossomParticle.Factory::new);
 		registerParticleFactory(manager, EnvironmentalParticleTypes.RED_LOTUS_BLOSSOM, LotusBlossomParticle.Factory::new);
 		registerParticleFactory(manager, EnvironmentalParticleTypes.WHITE_LOTUS_BLOSSOM, LotusBlossomParticle.Factory::new);

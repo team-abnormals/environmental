@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "environmental:block/magenta_terracotta_bricks",
-    "top": "environmental:block/magenta_terracotta_bricks",
-    "side": "environmental:block/magenta_terracotta_bricks"
-  }
-}

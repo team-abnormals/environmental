@@ -1,23 +1,6 @@
 {
   "replace": false,
   "values": [
-    "environmental:mud_brick_wall",
-	"environmental:terracotta_brick_wall",
-	"environmental:white_terracotta_brick_wall",
-    "environmental:orange_terracotta_brick_wall",
-    "environmental:magenta_terracotta_brick_wall",
-    "environmental:light_blue_terracotta_brick_wall",
-    "environmental:yellow_terracotta_brick_wall",
-    "environmental:lime_terracotta_brick_wall",
-    "environmental:pink_terracotta_brick_wall",
-    "environmental:gray_terracotta_brick_wall",
-    "environmental:light_gray_terracotta_brick_wall",
-    "environmental:cyan_terracotta_brick_wall",
-    "environmental:purple_terracotta_brick_wall",
-    "environmental:blue_terracotta_brick_wall",
-    "environmental:brown_terracotta_brick_wall",
-    "environmental:green_terracotta_brick_wall",
-    "environmental:red_terracotta_brick_wall",
-    "environmental:black_terracotta_brick_wall"
+    "environmental:mud_brick_wall"
   ]
 }

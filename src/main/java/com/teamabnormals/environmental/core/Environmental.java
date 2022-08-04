@@ -6,15 +6,12 @@ import com.teamabnormals.environmental.client.renderer.entity.*;
 import com.teamabnormals.environmental.client.resources.SlabfishSpriteUploader;
 import com.teamabnormals.environmental.common.network.message.*;
 import com.teamabnormals.environmental.common.slabfish.SlabfishLoader;
-import com.teamabnormals.environmental.common.slabfish.SlabfishProvider;
 import com.teamabnormals.environmental.core.other.EnvironmentalCompat;
 import com.teamabnormals.environmental.core.other.EnvironmentalDataProcessors;
 import com.teamabnormals.environmental.core.other.EnvironmentalDataSerializers;
 import com.teamabnormals.environmental.core.other.EnvironmentalModelLayers;
 import com.teamabnormals.environmental.core.registry.*;
 import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures.EnvironmentalConfiguredFeatures;
-import com.teamabnormals.environmental.core.registry.EnvironmentalRecipes.EnvironmentalRecipeSerializers;
-import com.teamabnormals.environmental.core.registry.EnvironmentalRecipes.EnvironmentalRecipeTypes;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.data.DataGenerator;
@@ -60,6 +57,7 @@ public class Environmental {
 	public Environmental() {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 		ModLoadingContext context = ModLoadingContext.get();
+		MinecraftForge.EVENT_BUS.register(this);
 
 		this.setupPlayMessages();
 		this.setupLoginMessages();
@@ -73,15 +71,10 @@ public class Environmental {
 		EnvironmentalAttributes.ATTRIBUTES.register(bus);
 		EnvironmentalMobEffects.MOB_EFFECTS.register(bus);
 		EnvironmentalMobEffects.POTIONS.register(bus);
-		EnvironmentalVillagers.POI_TYPES.register(bus);
-		EnvironmentalVillagers.PROFESSIONS.register(bus);
 		EnvironmentalMenuTypes.MENU_TYPES.register(bus);
-		EnvironmentalRecipeSerializers.RECIPE_SERIALIZERS.register(bus);
-		EnvironmentalRecipeTypes.RECIPE_TYPES.register(bus);
 		EnvironmentalParticleTypes.PARTICLE_TYPES.register(bus);
 		EnvironmentalSlabfishConditions.SLABFISH_CONDITIONS.register(bus);
 		EnvironmentalDataSerializers.DATA_SERIALIZERS.register(bus);
-		MinecraftForge.EVENT_BUS.register(this);
 
 		bus.addListener(this::commonSetup);
 		bus.addListener(this::clientSetup);
@@ -111,7 +104,6 @@ public class Environmental {
 		EnvironmentalCompat.setRenderLayers();
 		event.enqueueWork(() -> {
 			EnvironmentalCompat.registerBlockColors();
-			EnvironmentalMenuTypes.registerScreenFactories();
 		});
 	}
 

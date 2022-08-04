@@ -15,9 +15,6 @@
     "PlayerEntityMixin",
     "WitherSkeletonEntityMixin"
   ],
-  "client": [
-    "ClientRecipeBookMixin"
-  ],
   "injectors": {
     "defaultRequire": 1
   }

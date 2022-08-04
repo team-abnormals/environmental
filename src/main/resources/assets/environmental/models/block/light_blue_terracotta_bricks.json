@@ -1,6 +1,0 @@
-{
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "environmental:block/light_blue_terracotta_bricks"
-    }
-}

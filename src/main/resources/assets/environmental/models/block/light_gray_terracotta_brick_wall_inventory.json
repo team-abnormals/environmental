@@ -1,6 +1,0 @@
-{
-    "parent": "block/wall_inventory",
-    "textures": {
-        "wall": "environmental:block/light_gray_terracotta_bricks"
-    }
-}

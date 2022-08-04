@@ -78,40 +78,6 @@ public class EnvironmentalTrades {
 		);
 	}
 
-	@SubscribeEvent
-	public static void onCeramistTradesEvent(VillagerTradesEvent event) {
-		Block[] terracottas = new Block[]{Blocks.WHITE_TERRACOTTA, Blocks.ORANGE_TERRACOTTA, Blocks.MAGENTA_TERRACOTTA, Blocks.LIGHT_BLUE_TERRACOTTA, Blocks.YELLOW_TERRACOTTA, Blocks.LIME_TERRACOTTA, Blocks.PINK_TERRACOTTA, Blocks.GRAY_TERRACOTTA, Blocks.LIGHT_GRAY_TERRACOTTA, Blocks.CYAN_TERRACOTTA, Blocks.PURPLE_TERRACOTTA, Blocks.BLUE_TERRACOTTA, Blocks.BROWN_TERRACOTTA, Blocks.GREEN_TERRACOTTA, Blocks.RED_TERRACOTTA, Blocks.BLACK_TERRACOTTA};
-		Block[] glazed_terracottas = new Block[]{Blocks.WHITE_GLAZED_TERRACOTTA, Blocks.ORANGE_GLAZED_TERRACOTTA, Blocks.MAGENTA_GLAZED_TERRACOTTA, Blocks.LIGHT_BLUE_GLAZED_TERRACOTTA, Blocks.YELLOW_GLAZED_TERRACOTTA, Blocks.LIME_GLAZED_TERRACOTTA, Blocks.PINK_GLAZED_TERRACOTTA, Blocks.GRAY_GLAZED_TERRACOTTA, Blocks.LIGHT_GRAY_GLAZED_TERRACOTTA, Blocks.CYAN_GLAZED_TERRACOTTA, Blocks.PURPLE_GLAZED_TERRACOTTA, Blocks.BLUE_GLAZED_TERRACOTTA, Blocks.BROWN_GLAZED_TERRACOTTA, Blocks.GREEN_GLAZED_TERRACOTTA, Blocks.RED_GLAZED_TERRACOTTA, Blocks.BLACK_GLAZED_TERRACOTTA};
-		Block[] terracotta_bricks = new Block[]{EnvironmentalBlocks.WHITE_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.ORANGE_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.MAGENTA_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.LIGHT_BLUE_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.YELLOW_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.LIME_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.PINK_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.GRAY_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.LIGHT_GRAY_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CYAN_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.PURPLE_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.BLUE_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.BROWN_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.GREEN_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.RED_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.BLACK_TERRACOTTA_BRICKS.get()};
-		Block[] chiseled_terracotta_bricks = new Block[]{EnvironmentalBlocks.CHISELED_WHITE_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_ORANGE_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_MAGENTA_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_LIGHT_BLUE_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_YELLOW_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_LIME_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_PINK_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_GRAY_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_LIGHT_GRAY_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_CYAN_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_PURPLE_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_BLUE_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_BROWN_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_GREEN_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_RED_TERRACOTTA_BRICKS.get(), EnvironmentalBlocks.CHISELED_BLACK_TERRACOTTA_BRICKS.get()};
-
-		TradeUtil.addVillagerTrades(event, EnvironmentalVillagers.CERAMIST.get(), TradeUtil.NOVICE,
-				new BlueprintTrade(EnvironmentalItems.MUD_BALL.get(), 10, 1, 16, 2),
-				new BlueprintTrade(1, EnvironmentalItems.MUD_BRICK.get(), 10, 16, 1)
-		);
-		TradeUtil.addVillagerTrades(event, EnvironmentalVillagers.CERAMIST.get(), TradeUtil.APPRENTICE,
-				new BlueprintTrade(1, Items.FLOWER_POT, 1, 10, 2),
-				new BlueprintTrade(1, EnvironmentalBlocks.SLABFISH_EFFIGY.get().asItem(), 1, 10, 2),
-				new BlueprintTrade(1, EnvironmentalBlocks.CHISELED_BRICKS.get().asItem(), 4, 16, 10)
-		);
-
-		for (Block terracotta : terracottas)
-			TradeUtil.addVillagerTrades(event, EnvironmentalVillagers.CERAMIST.get(), TradeUtil.JOURNEYMAN, new BlueprintTrade(terracotta.asItem(), 1, 1, 12, 15));
-		for (Block glazed_terracotta : glazed_terracottas)
-			TradeUtil.addVillagerTrades(event, EnvironmentalVillagers.CERAMIST.get(), TradeUtil.JOURNEYMAN, new BlueprintTrade(glazed_terracotta.asItem(), 1, 1, 12, 15));
-
-		for (Block terracotta_brick : terracotta_bricks)
-			TradeUtil.addVillagerTrades(event, EnvironmentalVillagers.CERAMIST.get(), TradeUtil.EXPERT, new BlueprintTrade(1, terracotta_brick.asItem(), 1, 12, 15));
-		for (Block chiseled_terracotta_brick : chiseled_terracotta_bricks)
-			TradeUtil.addVillagerTrades(event, EnvironmentalVillagers.CERAMIST.get(), TradeUtil.EXPERT, new BlueprintTrade(1, chiseled_terracotta_brick.asItem(), 1, 12, 15));
-
-		TradeUtil.addVillagerTrades(event, EnvironmentalVillagers.CERAMIST.get(), TradeUtil.MASTER, new BlueprintTrade(24, EnvironmentalItems.ARCHITECT_BELT.get(), 1, 1, 5));
-
-		TradeUtil.addCompatVillagerTrades(event, "buzzier_bees", EnvironmentalVillagers.CERAMIST.get(), TradeUtil.APPRENTICE,
-				new BlueprintTrade(3, ForgeRegistries.ITEMS.getValue(new ResourceLocation("buzzier_bees", "honey_pot")), 1, 10, 6)
-		);
-	}
-
 	private static boolean notOnBlacklist(Item item, String[] items) {
 		for (String name : items) {
 			if (item.getRegistryName().toString().contains(name))

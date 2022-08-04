@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "environmental:light_gray_terracotta_bricks"
-  },
-  "result": "environmental:light_gray_terracotta_brick_slab",
-  "count": 2
-}

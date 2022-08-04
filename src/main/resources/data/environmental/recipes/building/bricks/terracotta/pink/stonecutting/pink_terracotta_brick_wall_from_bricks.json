@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "environmental:pink_terracotta_bricks"
-  },
-  "result": "environmental:pink_terracotta_brick_wall",
-  "count": 1
-}
