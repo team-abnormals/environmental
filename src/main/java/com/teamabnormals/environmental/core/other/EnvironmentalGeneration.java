@@ -66,7 +66,6 @@ public class EnvironmentalGeneration {
 			spawns.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EnvironmentalEntityTypes.SLABFISH.get(), 8, 2, 4));
 
 		if (DataUtil.matchesKeys(biome, Biomes.SWAMP)) {
-			EnvironmentalGeneration.removeSwampTrees(generation);
 			EnvironmentalGeneration.withMushrooms(generation);
 			EnvironmentalGeneration.withCattails(generation);
 			EnvironmentalGeneration.withMudDisks(generation);
@@ -247,32 +246,6 @@ public class EnvironmentalGeneration {
 //		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_CATTAILS_DENSE);
 //		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_DUCKWEED_MARSH);
 //		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.SEAGRASS_MARSH);
-	}
-
-	//TODO: Replace with JSON?
-	public static void removeSwampTrees(BiomeGenerationSettingsBuilder generation) {
-//		for (GenerationStep.Decoration stage : GenerationStep.Decoration.values()) {
-//			List<Supplier<ConfiguredFeature<?, ?>>> toRemove = new ArrayList<>();
-//			List<Supplier<ConfiguredFeature<?, ?>>> configuredFeatures = generation.getFeatures(stage);
-//			for (Supplier<ConfiguredFeature<?, ?>> configuredFeatureSupplier : configuredFeatures) {
-//				FeatureConfiguration config = configuredFeatureSupplier.get().config;
-//				if (config instanceof DecoratedFeatureConfiguration) {
-//					ConfiguredFeature<?, ?> decorated = ((DecoratedFeatureConfiguration) config).feature.get();
-//					if (decorated.config instanceof DecoratedFeatureConfiguration) {
-//						ConfiguredFeature<?, ?> decorated2 = ((DecoratedFeatureConfiguration) decorated.config).feature.get();
-//						if (decorated2.feature == Feature.TREE) {
-//							if (decorated2.config instanceof TreeConfiguration) {
-//								TreeConfiguration tree = (TreeConfiguration) decorated2.config;
-//								if (tree.decorators.contains(LeaveVineDecorator.INSTANCE) && tree.maxWaterDepth == 1) {
-//									toRemove.add(configuredFeatureSupplier);
-//								}
-//							}
-//						}
-//					}
-//				}
-//			}
-//			toRemove.forEach(configuredFeatures::remove);
-//		}
 	}
 
 	private static void removeSpawns(BiomeLoadingEvent event) {

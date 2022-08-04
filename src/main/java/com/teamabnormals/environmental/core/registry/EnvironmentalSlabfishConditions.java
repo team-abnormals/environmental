@@ -1,10 +1,15 @@
 package com.teamabnormals.environmental.core.registry;
 
 import com.teamabnormals.environmental.common.slabfish.condition.*;
-import com.teamabnormals.environmental.common.slabfish.condition.SlabfishCondition.Factory;
+import com.teamabnormals.environmental.common.slabfish.condition.SlabfishCondition.SlabfishConditionFactory;
 import com.teamabnormals.environmental.core.Environmental;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.RegistryBuilder;
 import net.minecraftforge.registries.RegistryObject;
+
+import java.util.function.Supplier;
 
 /**
  * <p>Registers all inbuilt slabfish condition types.</p>
@@ -12,8 +17,8 @@ import net.minecraftforge.registries.RegistryObject;
  * @author Ocelot
  */
 public class EnvironmentalSlabfishConditions {
-	//TODO: Use proper creation
-	public static final DeferredRegister<Factory> SLABFISH_CONDITIONS = DeferredRegister.create(Factory.class, Environmental.MOD_ID);
+	public static final DeferredRegister<SlabfishConditionFactory> SLABFISH_CONDITIONS = DeferredRegister.create(new ResourceLocation(Environmental.MOD_ID, "slabfish_condition"), Environmental.MOD_ID);
+	public static final Supplier<IForgeRegistry<SlabfishConditionFactory>> SLABFISH_CONDITIONS_REGISTRY = SLABFISH_CONDITIONS.makeRegistry(SlabfishConditionFactory.class, () -> new RegistryBuilder<SlabfishConditionFactory>().setType(SlabfishConditionFactory.class).setDefaultKey(new ResourceLocation(Environmental.MOD_ID, "impossible")));
 
 	public static final RegistryObject<SimpleSlabfishConditionFactory> IMPOSSIBLE = SLABFISH_CONDITIONS.register("impossible", () -> new SimpleSlabfishConditionFactory(SlabfishImpossibleCondition::deserialize));
 	public static final RegistryObject<SimpleSlabfishConditionFactory> AND = SLABFISH_CONDITIONS.register("and", () -> new SimpleSlabfishConditionFactory(SlabfishAndCondition::deserialize));

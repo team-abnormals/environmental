@@ -2,7 +2,7 @@ package com.teamabnormals.environmental.common.slabfish.condition;
 
 import com.google.gson.*;
 import com.teamabnormals.environmental.common.slabfish.SlabfishType;
-import com.teamabnormals.environmental.core.registry.EnvironmentalRegistries;
+import com.teamabnormals.environmental.core.registry.EnvironmentalSlabfishConditions;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
@@ -37,10 +37,10 @@ public interface SlabfishCondition extends Predicate<SlabfishConditionContext> {
 				throw new JsonSyntaxException("Slabfish condition type is required");
 
 			ResourceLocation type = context.deserialize(jsonObject.get("type"), ResourceLocation.class);
-			if (!EnvironmentalRegistries.SLABFISH_CONDITIONS.containsKey(type))
+			if (!EnvironmentalSlabfishConditions.SLABFISH_CONDITIONS_REGISTRY.get().containsKey(type))
 				throw new JsonSyntaxException("Invalid slabfish condition type: " + type);
 
-			Factory factory = EnvironmentalRegistries.SLABFISH_CONDITIONS.getValue(type);
+			SlabfishConditionFactory factory = EnvironmentalSlabfishConditions.SLABFISH_CONDITIONS_REGISTRY.get().getValue(type);
 			if (factory == null)
 				throw new JsonSyntaxException("Invalid slabfish condition type: " + type);
 
@@ -53,7 +53,7 @@ public interface SlabfishCondition extends Predicate<SlabfishConditionContext> {
 	 *
 	 * @author Ocelot
 	 */
-	interface Factory extends IForgeRegistryEntry<Factory> {
+	interface SlabfishConditionFactory extends IForgeRegistryEntry<SlabfishConditionFactory> {
 		/**
 		 * Creates a new condition from the specified json with the provided context
 		 *
