@@ -8,7 +8,7 @@
   "cookingtime": 100,
   "conditions": [
     {
-      "type": "abnormals_core:quark_flag",
+      "type": "blueprint:quark_flag",
       "flag": "biotite"
     }
   ]

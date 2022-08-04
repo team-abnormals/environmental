@@ -1,5 +1,5 @@
 {
-  "parent": "abnormals_core:block/vertical_slab",
+  "parent": "blueprint:block/vertical_slab",
   "textures": {
     "bottom": "environmental:block/black_terracotta_bricks",
     "top": "environmental:block/black_terracotta_bricks",

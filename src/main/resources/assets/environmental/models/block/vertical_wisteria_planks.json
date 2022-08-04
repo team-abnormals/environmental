@@ -1,5 +1,5 @@
 {
-    "parent": "abnormals_core:block/vertical_planks",
+    "parent": "blueprint:block/vertical_planks",
     "textures": {
         "all": "environmental:block/wisteria_planks"
     }

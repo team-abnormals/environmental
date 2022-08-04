@@ -1,15 +1,12 @@
 {
   "required": true,
-  "package": "com.minecraftabnormals.environmental.core.mixin",
+  "package": "com.teamabnormals.environmental.core.mixin",
   "compatibilityLevel": "JAVA_8",
   "minVersion": "0.8",
   "refmap": "environmental.refmap.json",
   "mixins": [
     "AbstractSkeletonEntityMixin",
-    "com.teamabnormals.incubation.core.mixin.ChickenEntityMixin",
     "DoublePlantBlockMixin",
-    "GrassBlockMixin",
-    "HoeItemMixin",
     "LilyPadBlockMixin",
     "LivingEntityMixin",
     "MobEntityMixin",

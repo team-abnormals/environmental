@@ -8,7 +8,7 @@
   "cookingtime": 200,
   "conditions": [
     {
-      "type": "abnormals_core:quark_flag",
+      "type": "blueprint:quark_flag",
       "flag": "soul_sandstone"
     }
   ]

@@ -20,20 +20,20 @@ license = "https://github.com/team-abnormals/environmental/blob/main/LICENSE.txt
 [[dependencies.environmental]]
     modId = "minecraft"
     mandatory = true
-    versionRange = "[1.16.5,1.17)"
+    versionRange = "[1.18.2,1.19)"
     ordering = "NONE"
     side = "BOTH"
 
 [[dependencies.environmental]]
     modId = "forge"
     mandatory = true
-    versionRange = "[36.2.0,)"
+    versionRange = "[40.1.0,)"
     ordering = "NONE"
     side = "BOTH"
 
 [[dependencies.environmental]]
-    modId = "abnormals_core"
+    modId = "blueprint"
     mandatory = true
-    versionRange = "[3.2.0,)"
+    versionRange = "[5.4.1,)"
     ordering = "AFTER"
     side = "BOTH"

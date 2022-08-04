@@ -14,7 +14,7 @@
           "modid": "bamboo_blocks"
         },
         {
-          "type": "abnormals_core:quark_flag",
+          "type": "blueprint:quark_flag",
           "flag": "variant_ladders"
         }
       ]

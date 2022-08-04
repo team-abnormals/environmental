@@ -1,5 +1,5 @@
 {
-    "parent": "abnormals_core:block/vertical_slab",
+    "parent": "blueprint:block/vertical_slab",
     "textures": {
         "side": "environmental:block/cherry_planks",
         "top": "environmental:block/cherry_planks",
