@@ -1,7 +1,0 @@
-{
-    "variants": {
-        "type=bottom": { "model": "environmental:block/ice_brick_slab" },
-        "type=top": { "model": "environmental:block/ice_brick_slab_top" },
-        "type=double": { "model": "environmental:block/ice_bricks" }
-    }
-}

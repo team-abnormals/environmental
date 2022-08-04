@@ -13,17 +13,7 @@
 	"block.environmental.slabfish_effigy": "슬랩피시 모형",
 	
 	"block.environmental.chiseled_bricks": "조각된 벽돌",
-	
-	"block.environmental.ice_bricks": "얼음 벽돌",
-	"block.environmental.ice_brick_slab": "얼음 벽돌 반 블록",
-	"block.environmental.ice_brick_stairs": "얼음 벽돌 계단",
-	"block.environmental.ice_brick_wall": "얼음 벽돌 담장",
-	"block.environmental.ice_brick_vertical_slab": "얼음 벽돌 세로 반 블록",
-	"block.environmental.chiseled_ice_bricks": "조각된 얼음 벽돌",
-	
-	"block.environmental.ice_lantern": "얼음 랜턴",
-	"block.environmental.ice_chain": "얼음 사슬",
-	
+
 	"block.environmental.willow_planks": "버드나무 판자",
 	"block.environmental.willow_slab": "버드나무 반 블록",
 	"block.environmental.willow_stairs": "버드나무 계단",

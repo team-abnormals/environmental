@@ -2,7 +2,6 @@
   "replace": false,
   "values": [
     "environmental:mud_brick_wall",
-    "environmental:ice_brick_wall",
 	"environmental:terracotta_brick_wall",
 	"environmental:white_terracotta_brick_wall",
     "environmental:orange_terracotta_brick_wall",

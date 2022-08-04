@@ -13,17 +13,7 @@
 	"block.environmental.slabfish_effigy": "Фигурка Плиторыба",
 	
 	"block.environmental.chiseled_bricks": "Резные кирпичи",
-	
-	"block.environmental.ice_bricks": "Ледовые кирпичи",
-	"block.environmental.ice_brick_slab": "Плита из ледовых кирпичей",
-	"block.environmental.ice_brick_stairs": "Лестница из ледовых кирпичей",
-	"block.environmental.ice_brick_wall": "Ограда из ледяных кирпичей",
-	"block.environmental.ice_brick_vertical_slab": "Вертикальная плита из ледовых кирпичей",
-	"block.environmental.chiseled_ice_bricks": "Резные ледовые кирпичи",
-	
-	"block.environmental.ice_lantern": "Ледовый светильник",
-	"block.environmental.ice_chain": "Ледовая цепь",
-	
+
 	"block.environmental.willow_planks": "Ивовые доски",
 	"block.environmental.willow_slab": "Ивовая плита",
 	"block.environmental.willow_stairs": "Ивовые ступеньки",

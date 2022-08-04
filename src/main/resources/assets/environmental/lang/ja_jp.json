@@ -13,17 +13,7 @@
 	"block.environmental.slabfish_effigy": "スラブフィッシュの彫像",
 	
 	"block.environmental.chiseled_bricks": "模様入りのレンガ",
-	
-	"block.environmental.ice_bricks": "氷レンガ",
-	"block.environmental.ice_brick_slab": "氷レンガのハーフブロック",
-	"block.environmental.ice_brick_stairs": "氷レンガの階段",
-	"block.environmental.ice_brick_wall": "氷レンガの塀",
-	"block.environmental.ice_brick_vertical_slab": "氷レンガの縦ハーフブロック",
-	"block.environmental.chiseled_ice_bricks": "模様入りの氷レンガ",
-	
-	"block.environmental.ice_lantern": "氷のランタン",
-	"block.environmental.ice_chain": "氷の鎖",
-	
+
 	"block.environmental.willow_planks": "ヤナギの木材",
 	"block.environmental.willow_slab": "ヤナギのハーフブロック",
 	"block.environmental.willow_stairs": "ヤナギの階段",

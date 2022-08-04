@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:packed_ice"
-  },
-  "result": "environmental:ice_brick_stairs",
-  "count": 1
-}

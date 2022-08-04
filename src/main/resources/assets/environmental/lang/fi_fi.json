@@ -13,17 +13,7 @@
 	"block.environmental.slabfish_effigy": "Laattakala-veistos",
 	
 	"block.environmental.chiseled_bricks": "Kaiverrettu tiili",
-	
-	"block.environmental.ice_bricks": "Jäätiili",
-	"block.environmental.ice_brick_slab": "Jäätiililaatta",
-	"block.environmental.ice_brick_stairs": "Jäätiiliportaat",
-	"block.environmental.ice_brick_wall": "Jäätiilimuuri",
-	"block.environmental.ice_brick_vertical_slab": "Pystysuora jäätiililaatta",
-	"block.environmental.chiseled_ice_bricks": "Kaiverrettu jäätiili",
-	
-	"block.environmental.ice_lantern": "Jäälyhty",
-	"block.environmental.ice_chain": "Jääketju",
-	
+
 	"block.environmental.willow_planks": "Pajulankut",
 	"block.environmental.willow_slab": "Pajulaatta",
 	"block.environmental.willow_stairs": "Pajuportaat",

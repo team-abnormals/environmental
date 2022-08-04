@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "environmental:ice_bricks"
-  },
-  "result": "environmental:chiseled_ice_bricks",
-  "count": 1
-}

@@ -13,17 +13,7 @@
 	"block.environmental.slabfish_effigy": "Slabfishbildnis",
 	
 	"block.environmental.chiseled_bricks": "Gemeißelte Ziegelsteine",
-	
-	"block.environmental.ice_bricks": "Eisziegel",
-	"block.environmental.ice_brick_slab": "Eisziegelstufe",
-	"block.environmental.ice_brick_stairs": "Eisziegeltreppe",
-	"block.environmental.ice_brick_wall": "Eisziegelmauer",
-	"block.environmental.ice_brick_vertical_slab": "Vertikale Eisziegelstufe",
-	"block.environmental.chiseled_ice_bricks": "Gemeißelte Eisziegel",
-	
-	"block.environmental.ice_lantern": "Eislaterne",
-	"block.environmental.ice_chain": "Eiskette",
-	
+
 	"block.environmental.willow_planks": "Weidenholzbretter",
 	"block.environmental.willow_slab": "Weidenholzstufe",
 	"block.environmental.willow_stairs": "Weidenholztreppe",

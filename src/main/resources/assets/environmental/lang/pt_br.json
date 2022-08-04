@@ -13,17 +13,7 @@
 	"block.environmental.slabfish_effigy": "Efígie de peixe-laje",
 	
 	"block.environmental.chiseled_bricks": "Tijolos talhados",
-	
-	"block.environmental.ice_bricks": "Tijolos de gelo",
-	"block.environmental.ice_brick_slab": "Laje de tijolos de gelo",
-	"block.environmental.ice_brick_stairs": "Escadas de tijolos de gelo",
-	"block.environmental.ice_brick_wall": "Muro de tijolos de gelo",
-	"block.environmental.ice_brick_vertical_slab": "Laje vertical de tijolos de gelo",
-	"block.environmental.chiseled_ice_bricks": "Tijolos de gelo talhados",
-	
-	"block.environmental.ice_lantern": "Lampião de gelo",
-	"block.environmental.ice_chain": "Corrente de gelo",
-	
+
 	"block.environmental.willow_planks": "Tábuas de salgueiro",
 	"block.environmental.willow_slab": "Laje de salgueiro",
 	"block.environmental.willow_stairs": "Escadas de salgueiro",

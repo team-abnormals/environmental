@@ -1,7 +1,0 @@
-{
-    "parent": "block/chain",
-    "textures": {
-        "all": "environmental:block/ice_chain",
-        "particle": "environmental:block/ice_chain"
-    }
-}
