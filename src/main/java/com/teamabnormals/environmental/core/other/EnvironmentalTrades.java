@@ -7,7 +7,6 @@ import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
 import com.teamabnormals.environmental.core.registry.EnvironmentalVillagers;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -77,55 +76,6 @@ public class EnvironmentalTrades {
 				new BlueprintTrade(EnvironmentalItems.VENISON.get(), 12, 1, 16, 20),
 				new BlueprintTrade(1, EnvironmentalItems.COOKED_VENISON.get(), 5, 16, 10)
 		);
-	}
-
-	@SubscribeEvent
-	public static void onCarpenterTradesEvent(VillagerTradesEvent event) {
-		String[] defaultRemoved = new String[]{"crimson", "warped", "poise", "aspen", "crustose", "grimwood", "morado", "kousa"};
-
-		for (Item item : ForgeRegistries.ITEMS.tags().getTag(ItemTags.PLANKS)) {
-			if (notOnBlacklist(item, new String[]{"vertical", "stained"}, defaultRemoved)) {
-				TradeUtil.addVillagerTrades(event, EnvironmentalVillagers.CARPENTER.get(), TradeUtil.NOVICE, new BlueprintTrade(item, 24, 1, 16, 3));
-			}
-		}
-
-		for (Item item : ForgeRegistries.ITEMS.tags().getTag(ItemTags.LOGS_THAT_BURN)) {
-			if (notOnBlacklist(item, new String[]{"stripped", "_wood",}, defaultRemoved)) {
-				TradeUtil.addVillagerTrades(event, EnvironmentalVillagers.CARPENTER.get(), TradeUtil.NOVICE, new BlueprintTrade(item, 6, 1, 16, 4));
-			}
-		}
-
-		for (Item item : ForgeRegistries.ITEMS.tags().getTag(ItemTags.SIGNS)) {
-			if (notOnBlacklist(item, defaultRemoved)) {
-				TradeUtil.addVillagerTrades(event, EnvironmentalVillagers.CARPENTER.get(), TradeUtil.APPRENTICE, new BlueprintTrade(1, item, 3, 4, 10));
-			}
-		}
-
-		for (Item item : ForgeRegistries.ITEMS.tags().getTag(ItemTags.WOODEN_TRAPDOORS)) {
-			if (notOnBlacklist(item, defaultRemoved)) {
-				TradeUtil.addVillagerTrades(event, EnvironmentalVillagers.CARPENTER.get(), TradeUtil.APPRENTICE, new BlueprintTrade(1, item, 4, 8, 10));
-			}
-		}
-
-		for (Item item : ForgeRegistries.ITEMS.tags().getTag(ItemTags.SAPLINGS)) {
-			if (notOnBlacklist(item, defaultRemoved)) {
-				TradeUtil.addVillagerTrades(event, EnvironmentalVillagers.CARPENTER.get(), TradeUtil.JOURNEYMAN, new BlueprintTrade(item, 8, 1, 16, 10));
-			}
-		}
-
-		for (Item item : ForgeRegistries.ITEMS.tags().getTag(ItemTags.WOODEN_DOORS)) {
-			if (notOnBlacklist(item, defaultRemoved)) {
-				TradeUtil.addVillagerTrades(event, EnvironmentalVillagers.CARPENTER.get(), TradeUtil.JOURNEYMAN, new BlueprintTrade(1, item, 2, 8, 15));
-			}
-		}
-
-		TradeUtil.addVillagerTrades(event, EnvironmentalVillagers.CARPENTER.get(), TradeUtil.EXPERT,
-				new BlueprintTrade(Items.STICK, 23, 1, 16, 3),
-				new BlueprintTrade(Items.IRON_AXE, 1, 6, 8, 10),
-				new BlueprintTrade(Items.GOLDEN_AXE, 1, 7, 1, 20)
-		);
-
-		TradeUtil.addVillagerTrades(event, EnvironmentalVillagers.CARPENTER.get(), TradeUtil.MASTER, new BlueprintTrade(24, EnvironmentalItems.ARCHITECT_BELT.get(), 1, 1, 5));
 	}
 
 	@SubscribeEvent

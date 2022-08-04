@@ -1,8 +1,0 @@
-{
-  "type": "environmental:sawing",
-  "ingredient": {
-    "tag": "environmental:cherry_logs"
-  },
-  "result": "environmental:cherry_slab",
-  "count": 8
-}

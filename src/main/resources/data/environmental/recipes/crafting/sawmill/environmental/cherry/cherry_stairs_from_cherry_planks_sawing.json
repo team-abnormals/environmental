@@ -1,8 +1,0 @@
-{
-  "type": "environmental:sawing",
-  "ingredient": {
-    "item": "environmental:cherry_planks"
-  },
-  "result": "environmental:cherry_stairs",
-  "count": 1
-}

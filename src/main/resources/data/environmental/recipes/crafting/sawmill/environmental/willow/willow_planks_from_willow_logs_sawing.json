@@ -1,8 +1,0 @@
-{
-  "type": "environmental:sawing",
-  "ingredient": {
-    "tag": "environmental:willow_logs"
-  },
-  "result": "environmental:willow_planks",
-  "count": 4
-}

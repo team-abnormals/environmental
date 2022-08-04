@@ -1,8 +1,0 @@
-{
-  "type": "environmental:sawing",
-  "ingredient": {
-    "tag": "minecraft:spruce_logs"
-  },
-  "result": "minecraft:spruce_trapdoor",
-  "count": 1
-}

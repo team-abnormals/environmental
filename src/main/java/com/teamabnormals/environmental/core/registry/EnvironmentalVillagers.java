@@ -26,10 +26,8 @@ public class EnvironmentalVillagers {
 	public static final DeferredRegister<PoiType> POI_TYPES = DeferredRegister.create(ForgeRegistries.POI_TYPES, Environmental.MOD_ID);
 
 	public static final RegistryObject<PoiType> KILN = POI_TYPES.register("kiln", () -> new PoiType("ceramist", PoiType.getBlockStates(EnvironmentalBlocks.KILN.get()), 1, 1));
-	public static final RegistryObject<PoiType> SAWMILL = POI_TYPES.register("sawmill", () -> new PoiType("carpenter", PoiType.getBlockStates(EnvironmentalBlocks.SAWMILL.get()), 1, 1));
 
 	public static final RegistryObject<VillagerProfession> CERAMIST = PROFESSIONS.register("ceramist", () -> new VillagerProfession("environmental:ceramist", KILN.get(), ImmutableSet.of(), ImmutableSet.of(), SoundEvents.VILLAGER_WORK_BUTCHER));
-	public static final RegistryObject<VillagerProfession> CARPENTER = PROFESSIONS.register("carpenter", () -> new VillagerProfession("environmental:carpenter", SAWMILL.get(), ImmutableSet.of(), ImmutableSet.of(), SoundEvents.VILLAGER_WORK_MASON));
 
 	public static void registerVillagerTypes() {
 		VillagerTrades.TRADES.isEmpty();
@@ -41,7 +39,6 @@ public class EnvironmentalVillagers {
 		registerVillagerType(createType("marsh"), EnvironmentalBiomes.MARSH.getKey(), EnvironmentalBiomes.MUSHROOM_MARSH.getKey());
 
 		DataUtil.registerVillagerGift(CERAMIST.get());
-		DataUtil.registerVillagerGift(CARPENTER.get());
 
 		setupVillagerHouses();
 	}
@@ -69,12 +66,6 @@ public class EnvironmentalVillagers {
 		addVillagerHouse("ceramist", "savanna", 6);
 		addVillagerHouse("ceramist", "desert", 5);
 		addVillagerHouse("ceramist", "taiga", 7);
-
-		addVillagerHouse("carpenter", "plains", 10);
-		addVillagerHouse("carpenter", "snowy", 11);
-		addVillagerHouse("carpenter", "savanna", 7);
-		addVillagerHouse("carpenter", "desert", 9);
-		addVillagerHouse("carpenter", "taiga", 5);
 	}
 
 	private static void addVillagerHouse(String type, String biome, int weight) {

@@ -1,8 +1,0 @@
-{
-  "type": "environmental:sawing",
-  "ingredient": {
-    "item": "minecraft:dark_oak_planks"
-  },
-  "result": "minecraft:dark_oak_fence",
-  "count": 1
-}

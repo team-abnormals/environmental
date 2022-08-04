@@ -1,7 +1,6 @@
 {
 	"block.environmental.kiln": "Kiln",
-	"block.environmental.sawmill": "Sawmill",
-	
+
 	"block.environmental.mud": "Mud",
 	"block.environmental.mud_bricks": "Mud Bricks",
 	"block.environmental.mud_brick_slab": "Mud Brick Slab",
@@ -378,8 +377,7 @@
 	"entity.environmental.mud_ball": "Mud Ball",
 	
 	"entity.minecraft.villager.environmental.ceramist": "Ceramist",
-	"entity.minecraft.villager.environmental.carpenter": "Carpenter",
-	
+
 	"biome.environmental.marsh": "Marsh",
 	"biome.environmental.mushroom_marsh": "Mushroom Marsh",
 
@@ -404,10 +402,8 @@
 	"item.minecraft.tipped_arrow.effect.vitality_strong": "Arrow of Vitality",
 	
 	"container.kiln": "Kiln",
-	"container.sawmill": "Sawmill",
-	
+
 	"gui.environmental.category.baking": "Baking",
-	"gui.environmental.category.sawing": "Sawing",
 
 	"attribute.environmental.name.generic.stealth": "Stealth",
 
@@ -427,7 +423,7 @@
 	"advancements.environmental.adventure.upgrade_healer_pouch.description": "Collect the Healer's Pouch rarely from mobs in Strongholds or Mineshafts and completely level it up",
 
 	"advancements.environmental.adventure.upgrade_architect_belt.title": "Can We Fix It?",
-	"advancements.environmental.adventure.upgrade_architect_belt.description": "Buy the Architect's Belt from a master Mason, Carpenter, or Ceramist and completely level it up",
+	"advancements.environmental.adventure.upgrade_architect_belt.description": "Buy the Architect's Belt from a master Mason or Ceramist and completely level it up",
 
 	"advancements.environmental.adventure.upgrade_wanderer_boots.title": "Boots with the Fur",
 	"advancements.environmental.adventure.upgrade_wanderer_boots.description": "Receive the Wanderer's Boots rarely from a Wandering Trader and completely level it up",

@@ -1,8 +1,0 @@
-{
-  "type": "environmental:sawing",
-  "ingredient": {
-    "item": "environmental:wisteria_planks"
-  },
-  "result": "environmental:wisteria_slab",
-  "count": 2
-}

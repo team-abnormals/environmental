@@ -1,8 +1,0 @@
-{
-  "type": "environmental:sawing",
-  "ingredient": {
-    "tag": "environmental:cherry_logs"
-  },
-  "result": "environmental:cherry_trapdoor",
-  "count": 1
-}

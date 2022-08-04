@@ -1,8 +1,0 @@
-{
-  "type": "environmental:sawing",
-  "ingredient": {
-    "tag": "minecraft:warped_stems"
-  },
-  "result": "minecraft:warped_button",
-  "count": 4
-}

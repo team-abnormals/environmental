@@ -47,7 +47,6 @@ public class EnvironmentalBlocks {
 	// Crafting //
 
 	public static final RegistryObject<Block> KILN = HELPER.createBlock("kiln", () -> new KilnBlock(Properties.copy(Blocks.SMOKER)), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> SAWMILL = HELPER.createBlock("sawmill", () -> new SawmillBlock(Properties.copy(Blocks.STONECUTTER).noOcclusion()), CreativeModeTab.TAB_DECORATIONS);
 
 	// Building //
 
