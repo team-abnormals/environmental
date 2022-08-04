@@ -74,6 +74,7 @@ public class EnvironmentalItems {
 	public static final RegistryObject<ForgeSpawnEggItem> DEER_SPAWN_EGG = HELPER.createSpawnEggItem("deer", EnvironmentalEntityTypes.DEER::get, 10057035, 15190442);
 	public static final RegistryObject<ForgeSpawnEggItem> YAK_SPAWN_EGG = HELPER.createSpawnEggItem("yak", EnvironmentalEntityTypes.YAK::get, 5392966, 8607802);
 	public static final RegistryObject<ForgeSpawnEggItem> KOI_SPAWN_EGG = HELPER.createSpawnEggItem("koi", EnvironmentalEntityTypes.KOI::get, 5392966, 16754947);
+	//TODO: Finish!
 	//public static final RegistryObject<BlueprintSpawnEggItem> FENNEC_FOX_SPAWN_EGG = HELPER.createSpawnEggItem("fennec_fox", EnvironmentalEntities.FENNEC_FOX::get, 0xFBDB9E, 0xFFFFFF);
 
 	public static final class EnvironmentalFoods {

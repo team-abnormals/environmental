@@ -5,18 +5,11 @@ import com.teamabnormals.blueprint.core.util.TradeUtil.BlueprintTrade;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
-import com.teamabnormals.environmental.core.registry.EnvironmentalVillagers;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.npc.VillagerProfession;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.registries.ForgeRegistries;
 
 @EventBusSubscriber(modid = Environmental.MOD_ID)
 public class EnvironmentalTrades {
@@ -76,25 +69,5 @@ public class EnvironmentalTrades {
 				new BlueprintTrade(EnvironmentalItems.VENISON.get(), 12, 1, 16, 20),
 				new BlueprintTrade(1, EnvironmentalItems.COOKED_VENISON.get(), 5, 16, 10)
 		);
-	}
-
-	private static boolean notOnBlacklist(Item item, String[] items) {
-		for (String name : items) {
-			if (item.getRegistryName().toString().contains(name))
-				return false;
-		}
-		return true;
-	}
-
-	private static boolean notOnBlacklist(Item item, String[] items, String[] items2) {
-		for (String name : items) {
-			if (item.getRegistryName().toString().contains(name))
-				return false;
-		}
-		for (String name : items2) {
-			if (item.getRegistryName().toString().contains(name))
-				return false;
-		}
-		return true;
 	}
 }

@@ -7,6 +7,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
+//TODO: Seperate Tag classes & generate
 public class EnvironmentalTags {
 	public static class Blocks {
 		public static final TagKey<Block> GRASS_LIKE = blockTag("grass_like");

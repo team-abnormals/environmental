@@ -8,9 +8,7 @@
 	"block.environmental.chiseled_mud_bricks": "Chiseled Mud Bricks",
 	
 	"block.environmental.slabfish_effigy": "Slabfish Effigy",
-	
-	"block.environmental.chiseled_bricks": "Chiseled Bricks",
-	
+
 	"block.environmental.willow_planks": "Willow Planks",
 	"block.environmental.willow_slab": "Willow Slab",
 	"block.environmental.willow_stairs": "Willow Stairs",
@@ -205,18 +203,13 @@
 	"item.environmental.cooked_duck": "Cooked Duck",
 	"item.environmental.duck_egg": "Duck Egg",
 
-	"item.minecraft.egg": "Chicken Egg",
-	"item.environmental.fried_egg": "Fried Egg",
-	"item.environmental.scrambled_eggs": "Scrambled Eggs",
-	
 	"item.environmental.koi": "Koi",
 	"item.environmental.slabfish_bucket": "Bucket of Slabfish",
 	"item.environmental.koi_bucket": "Bucket of Koi",
 
 	"item.environmental.mud_ball": "Mud Ball",
 	"item.environmental.mud_brick": "Mud Brick",
-	"item.environmental.mud_bucket": "Mud Bucket",
-	
+
 	"item.environmental.cherries": "Cherries",
 	"item.environmental.cherry_pie": "Cherry Pie",
 	"item.environmental.apple_pie": "Apple Pie",
@@ -267,8 +260,6 @@
 
 	"item.minecraft.tipped_arrow.effect.vitality": "Arrow of Vitality",
 	"item.minecraft.tipped_arrow.effect.vitality_strong": "Arrow of Vitality",
-
-	"gui.environmental.category.baking": "Baking",
 
 	"attribute.environmental.name.generic.stealth": "Stealth",
 

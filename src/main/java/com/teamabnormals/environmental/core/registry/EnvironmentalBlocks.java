@@ -33,6 +33,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+//TODO: Verify and update properties
 @EventBusSubscriber(modid = Environmental.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class EnvironmentalBlocks {
 
@@ -41,6 +42,7 @@ public class EnvironmentalBlocks {
 
 	// Paintings //
 
+	//TODO: Seperate registry
 	public static final RegistryObject<Motive> SLABFISH = PAINTINGS.register("slabfish", () -> new Motive(32, 32));
 	public static final RegistryObject<Motive> SNAKE_BLOCK = PAINTINGS.register("snake_block", () -> new Motive(32, 32));
 	public static final RegistryObject<Motive> SOMETHING_IN_THE_WATER = PAINTINGS.register("something_in_the_water", () -> new Motive(48, 32));

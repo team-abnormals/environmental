@@ -163,6 +163,7 @@ public class Duck extends Animal implements EggLayer {
 		this.entityData.set(EATING, eatingTimeIn);
 	}
 
+	//TODO: water_animal_spawnable_on
 	public static boolean canDuckSpawn(EntityType<? extends Animal> animal, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, Random random) {
 		return (worldIn.getBlockState(pos.below()).is(Blocks.GRASS_BLOCK) || worldIn.getFluidState(pos.below()).is(FluidTags.WATER)) && worldIn.getRawBrightness(pos, 0) > 8;
 	}
