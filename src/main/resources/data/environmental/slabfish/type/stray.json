@@ -17,8 +17,21 @@
       "parentB": "environmental:skeleton"
     },
     {
-      "type": "environmental:biome",
-      "category": "icy"
+      "type": "environmental:or",
+      "conditions": [
+        {
+          "type": "environmental:biome",
+          "biome": "minecraft:snowy_plains"
+        },
+        {
+          "type": "environmental:biome",
+          "biome": "minecraft:ice_spikes"
+        },
+        {
+          "type": "environmental:biome",
+          "tag": "minecraft:is_mountain"
+        }
+      ]
     }
   ]
 }

@@ -13,7 +13,7 @@
     },
     {
       "type": "environmental:biome",
-      "category": "mesa"
+      "tag": "minecraft:is_badlands"
     }
   ]
 }

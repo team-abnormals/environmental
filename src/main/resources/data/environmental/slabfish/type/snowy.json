@@ -12,8 +12,29 @@
       ]
     },
     {
-      "type": "environmental:biome",
-      "category": "icy"
+      "type": "environmental:or",
+      "conditions": [
+        {
+          "type": "environmental:biome",
+          "biome": "minecraft:snowy_plains"
+        },
+        {
+          "type": "environmental:biome",
+          "biome": "minecraft:frozen_river"
+        },
+        {
+          "type": "environmental:biome",
+          "biome": "minecraft:snowy_beach"
+        },
+        {
+          "type": "environmental:biome",
+          "biome": "minecraft:snowy_taiga"
+        },
+        {
+          "type": "environmental:biome",
+          "tag": "minecraft:is_mountain"
+        }
+      ]
     }
   ]
 }

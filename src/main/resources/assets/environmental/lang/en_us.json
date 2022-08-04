@@ -340,7 +340,7 @@
 	"item.environmental.wisteria_boat": "Wisteria Boat",
 	
 	"item.environmental.music_disc_slabrave": "Music Disc",
-	"item.environmental.music_disc_slabrave.desc": "Mista Jub - Slabrave",
+	"item.environmental.music_disc_slabrave.desc": "RENREN - Slabrave",
 	
 	"item.environmental.music_disc_leaving_home": "Music Disc",
 	"item.environmental.music_disc_leaving_home.desc": "hatsondogs - Leaving Home",
@@ -451,7 +451,7 @@
 	"entity.environmental.slabfish.type.plains": "Plains",
 	"entity.environmental.slabfish.type.river": "River",
 	"entity.environmental.slabfish.type.ice_spikes": "Ice Spikes",
-	"entity.environmental.slabfish.type.mountain": "Mountain",
+	"entity.environmental.slabfish.type.hill": "Hill",
 	"entity.environmental.slabfish.type.mushroom": "Mushroom",  
 	"entity.environmental.slabfish.type.bamboo": "Bamboo Jungle",
 	"entity.environmental.slabfish.type.dark_forest": "Dark Forest",
@@ -461,7 +461,6 @@
 	"entity.environmental.slabfish.type.warm_ocean": "Warm Ocean",
   
 	"entity.environmental.slabfish.type.marsh": "Marsh",
-	"entity.environmental.slabfish.type.mire": "Mire",
 	"entity.environmental.slabfish.type.blossom": "Blossom",
 	"entity.environmental.slabfish.type.maple": "Maple Forest",
 	"entity.environmental.slabfish.type.rainforest": "Rainforest",
@@ -493,9 +492,8 @@
 	"entity.environmental.slabfish.type.gore": "Gore",
 	"entity.environmental.slabfish.type.snake_block": "Snake Block",
 	"entity.environmental.slabfish.type.jackson": "Jackson",
-	"entity.environmental.slabfish.type.mista_jub": "Mista Jub",
+	"entity.environmental.slabfish.type.renren": "RENREN",
 	"entity.environmental.slabfish.type.smelly": "Smelly",
-	"entity.environmental.slabfish.type.squart": "Squarticus",
 	"entity.environmental.slabfish.type.bmo": "BMO",
 	"entity.environmental.slabfish.type.ocelot": "WALL-E",
 	"entity.environmental.slabfish.type.eve": "EVE",

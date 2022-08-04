@@ -13,7 +13,7 @@
     },
     {
       "type": "environmental:biome",
-      "category": "jungle"
+      "tag": "minecraft:is_jungle"
     }
   ]
 }

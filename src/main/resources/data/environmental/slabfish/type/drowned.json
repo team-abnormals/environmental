@@ -14,11 +14,10 @@
     },
     {
       "type": "environmental:biome",
-      "category": "ocean"
+      "tag": "minecraft:is_ocean"
     },
     {
       "type": "environmental:height",
-      "min": 0,
       "max": 50
     },
     {

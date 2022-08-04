@@ -21,19 +21,11 @@
         },
         {
           "type": "environmental:biome",
-          "biome": "atmospheric:dunes_hills"
-        },
-        {
-          "type": "environmental:biome",
           "biome": "atmospheric:petrified_dunes"
         },
         {
           "type": "environmental:biome",
           "biome": "atmospheric:rocky_dunes"
-        },
-        {
-          "type": "environmental:biome",
-          "biome": "atmospheric:rocky_dunes_hills"
         },
         {
           "type": "environmental:biome",

@@ -13,7 +13,7 @@
     },
     {
       "type": "environmental:biome",
-      "category": "ocean"
+      "tag": "minecraft:is_ocean"
     }
   ]
 }

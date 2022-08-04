@@ -21,10 +21,6 @@
         },
         {
           "type": "environmental:biome",
-          "biome": "autumnity:maple_forest_hills"
-        },
-        {
-          "type": "environmental:biome",
           "biome": "autumnity:pumpkin_fields"
         }
       ]

@@ -13,7 +13,7 @@
     },
     {
       "type": "environmental:biome",
-      "category": "beach"
+      "tag": "minecraft:is_beach"
     }
   ]
 }

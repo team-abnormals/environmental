@@ -42,6 +42,6 @@ public class SlabfishBiomeCondition implements SlabfishCondition {
 
 	@Override
 	public boolean test(SlabfishConditionContext context) {
-		return this.biome != null ? context.getBiome().getRegistryName().equals(this.biome.getRegistryName()) : this.tag != null && ForgeRegistries.BIOMES.tags().getTag(this.tag).contains(context.getBiome());
+		return this.biome != null ? context.getBiome().is(this.biome.getRegistryName()) : this.tag != null && context.getBiome().is(this.tag);
 	}
 }

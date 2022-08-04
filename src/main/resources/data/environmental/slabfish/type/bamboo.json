@@ -13,17 +13,8 @@
       ]
     },
     {
-      "type": "environmental:or",
-      "conditions": [
-        {
-          "type": "environmental:biome",
-          "biome": "minecraft:bamboo_jungle"
-        },
-        {
-          "type": "environmental:biome",
-          "biome": "minecraft:bamboo_jungle_hills"
-        }
-      ]
+      "type": "environmental:biome",
+      "biome": "minecraft:bamboo_jungle"
     }
   ]
 }

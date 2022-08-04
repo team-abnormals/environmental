@@ -14,7 +14,7 @@
     },
     {
       "type": "environmental:height",
-      "min": 200
+      "min": 256
     }
   ]
 }

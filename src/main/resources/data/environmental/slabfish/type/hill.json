@@ -1,7 +1,7 @@
 {
   "rarity": "uncommon",
   "displayName": {
-    "translate": "entity.environmental.slabfish.type.mountain"
+    "translate": "entity.environmental.slabfish.type.hill"
   },
   "conditions": [
     {
@@ -13,7 +13,7 @@
     },
     {
       "type": "environmental:biome",
-      "category": "extreme_hills"
+      "tag": "minecraft:is_hill"
     }
   ]
 }

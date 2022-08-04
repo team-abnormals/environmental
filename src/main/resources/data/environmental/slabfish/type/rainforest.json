@@ -22,15 +22,7 @@
         },
         {
           "type": "environmental:biome",
-          "biome": "atmospheric:rainforest_mountains"
-        },
-        {
-          "type": "environmental:biome",
-          "biome": "atmospheric:rainforest_plateau"
-        },
-        {
-          "type": "environmental:biome",
-          "biome": "atmospheric:sparse_rainforest_plateau"
+          "biome": "atmospheric:sparse_rainforest"
         },
         {
           "type": "environmental:biome",

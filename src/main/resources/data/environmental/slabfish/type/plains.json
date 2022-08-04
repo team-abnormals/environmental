@@ -12,8 +12,21 @@
       ]
     },
     {
-      "type": "environmental:biome",
-      "category": "plains"
+      "type": "environmental:or",
+      "conditions": [
+        {
+          "type": "environmental:biome",
+          "biome": "minecraft:plains"
+        },
+        {
+          "type": "environmental:biome",
+          "biome": "minecraft:sunflower_plains"
+        },
+        {
+          "type": "environmental:biome",
+          "biome": "minecraft:meadow"
+        }
+      ]
     }
   ]
 }

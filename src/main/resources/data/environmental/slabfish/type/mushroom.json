@@ -37,7 +37,7 @@
             },
             {
               "type": "environmental:biome",
-              "category": "mushroom"
+              "biome": "minecraft:mushroom_fields"
             }
           ]
         }

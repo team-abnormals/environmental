@@ -4,6 +4,7 @@ import com.teamabnormals.environmental.common.entity.animal.slabfish.Slabfish;
 import com.teamabnormals.environmental.common.slabfish.SlabfishManager;
 import com.teamabnormals.environmental.common.slabfish.SlabfishType;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -34,7 +35,7 @@ public class SlabfishConditionContext {
 	private final LazyLoadedValue<Random> random;
 	private final LazyLoadedValue<String> name;
 	private final LazyLoadedValue<BlockPos> pos;
-	private final LazyLoadedValue<Biome> biome;
+	private final LazyLoadedValue<Holder<Biome>> biome;
 	private final LazyLoadedValue<Boolean> inRaid;
 	private final LazyLoadedValue<BlockState> inBlock;
 	private final LazyLoadedValue<FluidState> inFluid;
@@ -53,7 +54,7 @@ public class SlabfishConditionContext {
 		this.random = new LazyLoadedValue<>(world::getRandom);
 		this.name = new LazyLoadedValue<>(() -> slabfish.getDisplayName().getString().trim());
 		this.pos = new LazyLoadedValue<>(() -> new BlockPos(slabfish.position()));
-		this.biome = new LazyLoadedValue<>(() -> world.getBiome(this.pos.get()).value());
+		this.biome = new LazyLoadedValue<>(() -> world.getBiome(this.pos.get()));
 		this.inRaid = new LazyLoadedValue<>(() -> world.getRaidAt(this.pos.get()) != null);
 		this.inBlock = new LazyLoadedValue<>(() -> world.getBlockState(this.pos.get()));
 		this.inFluid = new LazyLoadedValue<>(() -> world.getFluidState(this.pos.get()));
@@ -144,7 +145,7 @@ public class SlabfishConditionContext {
 	/**
 	 * @return The biome the slabfish is in
 	 */
-	public Biome getBiome() {
+	public Holder<Biome> getBiome() {
 		return this.biome.get();
 	}
 
