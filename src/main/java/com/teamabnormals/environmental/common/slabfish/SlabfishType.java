@@ -4,6 +4,7 @@ import com.google.gson.*;
 import com.teamabnormals.environmental.common.entity.animal.slabfish.SlabfishRarity;
 import com.teamabnormals.environmental.common.slabfish.condition.SlabfishCondition;
 import com.teamabnormals.environmental.common.slabfish.condition.SlabfishConditionContext;
+import com.teamabnormals.environmental.core.Environmental;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
@@ -15,6 +16,8 @@ import net.minecraftforge.fml.ModList;
 
 import javax.annotation.Nullable;
 import java.lang.reflect.Type;
+import java.util.Locale;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 /**
@@ -34,7 +37,8 @@ public class SlabfishType implements Predicate<SlabfishConditionContext> {
 	private ResourceLocation registryName;
 	private Component displayName;
 
-	public SlabfishType(SlabfishRarity rarity, @Nullable Component displayName, @Nullable ResourceLocation customBackpack, boolean translucent, boolean tradable, boolean modLoaded, int priority, SlabfishCondition[] conditions) {
+	public SlabfishType(ResourceLocation registryName, SlabfishRarity rarity, @Nullable Component displayName, @Nullable ResourceLocation customBackpack, boolean translucent, boolean tradable, boolean modLoaded, int priority, SlabfishCondition[] conditions) {
+		this.registryName = registryName;
 		this.rarity = rarity;
 		this.displayName = displayName;
 		this.customBackpack = customBackpack;
@@ -46,7 +50,7 @@ public class SlabfishType implements Predicate<SlabfishConditionContext> {
 	}
 
 	/**
-	 * Creates a new {@link SlabfishType} from the specified {@link PacketBuffer} on the client side.
+	 * Creates a new {@link SlabfishType} from the specified {@link FriendlyByteBuf} on the client side.
 	 *
 	 * @param buf The buffer to read from
 	 * @return A new slabfish type created from the data in the buffer
@@ -60,7 +64,7 @@ public class SlabfishType implements Predicate<SlabfishConditionContext> {
 		SlabfishRarity rarity = SlabfishRarity.byId(buf.readVarInt());
 		boolean modLoaded = buf.readBoolean();
 		int priority = buf.readVarInt();
-		return new SlabfishType(rarity, displayName, customBackpack, translucent, false, modLoaded, priority, new SlabfishCondition[0]).setRegistryName(registryName);
+		return new SlabfishType(registryName, rarity, displayName, customBackpack, translucent, false, modLoaded, priority, new SlabfishCondition[0]);
 	}
 
 	@Override
@@ -149,7 +153,7 @@ public class SlabfishType implements Predicate<SlabfishConditionContext> {
 	}
 
 	/**
-	 * Writes this {@link SlabfishType} into the specified {@link PacketBuffer} for syncing with clients.
+	 * Writes this {@link SlabfishType} into the specified {@link FriendlyByteBuf} for syncing with clients.
 	 *
 	 * @param buf The buffer to write into
 	 */
@@ -174,6 +178,41 @@ public class SlabfishType implements Predicate<SlabfishConditionContext> {
 				", modLoaded=" + modLoaded +
 				", priority=" + priority +
 				'}';
+	}
+
+	public JsonObject serializeToJson() {
+		JsonObject json = new JsonObject();
+
+		json.addProperty("rarity", this.rarity.toString().toLowerCase(Locale.ROOT));
+
+		if (this.getPriority() != -1)
+			json.addProperty("priority", this.priority);
+
+		if (!this.tradable)
+			json.addProperty("tradable", this.tradable);
+
+		json.add("displayName", Component.Serializer.toJsonTree(this.displayName));
+
+		if (this.translucent)
+			json.addProperty("translucent", this.translucent);
+
+		if (!this.modLoaded)
+			json.addProperty("mod_loaded", this.modLoaded);
+
+//		JsonObject jsonobject1 = new JsonObject();
+//		json.add("conditions", jsonobject1);
+//		JsonArray jsonarray1 = new JsonArray();
+//		for (SlabfishCondition astring : this.conditions) {
+//			jsonarray1.add(astring.toString());
+//		}
+
+		return json;
+	}
+
+	public SlabfishType save(Consumer<SlabfishType> consumer, ResourceLocation location) {
+		SlabfishType type = new SlabfishType(location, this.rarity, this.displayName, this.customBackpack, this.translucent, this.tradable, this.modLoaded, this.priority, this.conditions);
+		consumer.accept(type);
+		return type;
 	}
 
 	/**
@@ -207,7 +246,7 @@ public class SlabfishType implements Predicate<SlabfishConditionContext> {
 			int priority = jsonObject.has("priority") ? jsonObject.get("priority").getAsInt() : 0;
 			SlabfishCondition[] conditions = jsonObject.has("conditions") ? context.deserialize(jsonObject.get("conditions"), SlabfishCondition[].class) : new SlabfishCondition[0];
 
-			return new SlabfishType(rarity, displayName, customBackpack, translucent, tradable, modLoaded, priority, conditions);
+			return new SlabfishType(new ResourceLocation(Environmental.MOD_ID, "slabfish"), rarity, displayName, customBackpack, translucent, tradable, modLoaded, priority, conditions);
 		}
 	}
 }
