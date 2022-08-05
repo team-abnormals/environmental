@@ -6,6 +6,7 @@ import com.teamabnormals.environmental.common.slabfish.BackpackType;
 import com.teamabnormals.environmental.common.slabfish.SlabfishManager;
 import com.teamabnormals.environmental.common.slabfish.SlabfishType;
 import com.teamabnormals.environmental.common.slabfish.SweaterType;
+import com.teamabnormals.environmental.core.registry.EnvironmentalSlabfishTypes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -46,14 +47,17 @@ public class SlabfishBucketItem extends MobBucketItem {
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
+		if (worldIn == null)
+			return;
+
 		CompoundTag tag = stack.getTag();
 		if (tag != null) {
 			SlabfishManager slabfishManager = SlabfishManager.get(worldIn);
 
 			if (tag.contains("SlabfishType", Tag.TAG_STRING)) {
-				SlabfishType slabfishType = slabfishManager.getSlabfishType(LOCATION_CACHE.computeIfAbsent(tag.getString("SlabfishType"), ResourceLocation::new)).orElse(SlabfishManager.DEFAULT_SLABFISH);
-				if (slabfishType != SlabfishManager.DEFAULT_SLABFISH)
-					tooltip.add(slabfishType.getDisplayName().copy().withStyle(ChatFormatting.ITALIC, slabfishType.getRarity().getFormatting()));
+				SlabfishType slabfishType = EnvironmentalSlabfishTypes.registryAccess().getOptional(LOCATION_CACHE.computeIfAbsent(tag.getString("SlabfishType"), ResourceLocation::new)).orElse(EnvironmentalSlabfishTypes.SWAMP.get());
+				if (slabfishType != EnvironmentalSlabfishTypes.SWAMP.get())
+					tooltip.add(slabfishType.getDisplayName().copy().withStyle(ChatFormatting.ITALIC, SlabfishType.RARITIES.get(slabfishType.getRarity()).getSecond()));
 			}
 			if (tag.contains("Age", Tag.TAG_ANY_NUMERIC) && tag.getInt("Age") < 0) {
 				tooltip.add((new TranslatableComponent("entity.environmental.slabfish.baby").withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY)));

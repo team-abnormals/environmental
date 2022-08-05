@@ -1,7 +1,7 @@
 package com.teamabnormals.environmental.common.slabfish.condition;
 
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.teamabnormals.environmental.core.registry.EnvironmentalSlabfishConditions;
 
 /**
  * <p>A {@link SlabfishCondition} that returns <code>false</code>.</p>
@@ -9,22 +9,19 @@ import com.google.gson.JsonObject;
  * @author Ocelot
  */
 public class SlabfishImpossibleCondition implements SlabfishCondition {
-	public SlabfishImpossibleCondition() {
-	}
 
-	/**
-	 * Creates a new {@link SlabfishImpossibleCondition} from the specified json.
-	 *
-	 * @param json    The json to deserialize
-	 * @param context The context of the json deserialization
-	 * @return A new slabfish condition from that json
-	 */
-	public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context) {
-		return new SlabfishImpossibleCondition();
-	}
+    public static final Codec<SlabfishImpossibleCondition> CODEC = Codec.unit(SlabfishImpossibleCondition::new);
 
-	@Override
-	public boolean test(SlabfishConditionContext context) {
-		return false;
-	}
+    public SlabfishImpossibleCondition() {
+    }
+
+    @Override
+    public boolean test(SlabfishConditionContext context) {
+        return false;
+    }
+
+    @Override
+    public SlabfishConditionType getType() {
+        return EnvironmentalSlabfishConditions.IMPOSSIBLE.get();
+    }
 }

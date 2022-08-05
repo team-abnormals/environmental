@@ -1,9 +1,12 @@
 package com.teamabnormals.environmental.common.slabfish.condition;
 
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.teamabnormals.environmental.core.registry.EnvironmentalSlabfishConditions;
 import net.minecraft.resources.ResourceLocation;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * <p>A {@link SlabfishCondition} that returns <code>true</code> if the slabfish type is the same as any of the specified.</p>
@@ -11,30 +14,31 @@ import net.minecraft.resources.ResourceLocation;
  * @author Ocelot
  */
 public class SlabfishTypeCondition implements SlabfishCondition {
-	private final ResourceLocation[] slabfishTypes;
 
-	private SlabfishTypeCondition(ResourceLocation[] slabfishTypes) {
-		this.slabfishTypes = slabfishTypes;
-	}
+    public static final Codec<SlabfishTypeCondition> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+        ResourceLocation.CODEC.listOf().xmap(list -> list.toArray(ResourceLocation[]::new), Arrays::asList).fieldOf("types").forGetter(SlabfishTypeCondition::getTypes)
+    ).apply(instance, SlabfishTypeCondition::new));
 
-	/**
-	 * Creates a new {@link SlabfishTypeCondition} from the specified json.
-	 *
-	 * @param json    The json to deserialize
-	 * @param context The context of the json deserialization
-	 * @return A new slabfish condition from that json
-	 */
-	public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context) {
-		if (!json.has("slabfishTypes"))
-			throw new JsonSyntaxException("'slabfishTypes' must be present.");
-		return new SlabfishTypeCondition(context.deserialize(json.get("slabfishTypes"), ResourceLocation[].class));
-	}
+    private final ResourceLocation[] types;
 
-	@Override
-	public boolean test(SlabfishConditionContext context) {
-		for (ResourceLocation slabfishType : this.slabfishTypes)
-			if (slabfishType.equals(context.getSlabfishType()))
-				return true;
-		return false;
-	}
+    private SlabfishTypeCondition(ResourceLocation[] types) {
+        this.types = types;
+    }
+
+    public ResourceLocation[] getTypes() {
+        return types;
+    }
+
+    @Override
+    public boolean test(SlabfishConditionContext context) {
+        for (ResourceLocation slabfishType : this.types)
+            if (slabfishType.equals(context.getSlabfishType()))
+                return true;
+        return false;
+    }
+
+    @Override
+    public SlabfishConditionType getType() {
+        return EnvironmentalSlabfishConditions.SLABFISH_TYPE.get();
+    }
 }

@@ -1,9 +1,17 @@
 package com.teamabnormals.environmental.common.slabfish.condition;
 
 import com.google.gson.*;
+import com.mojang.datafixers.util.Either;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.teamabnormals.environmental.core.registry.EnvironmentalSlabfishConditions;
+import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.level.LightLayer;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
+import java.util.Locale;
+import java.util.Optional;
 import java.util.function.Function;
 
 /**
@@ -12,46 +20,62 @@ import java.util.function.Function;
  * @author Ocelot
  */
 public class SlabfishLightCondition implements SlabfishCondition {
-	private final Function<SlabfishConditionContext, Integer> lightGetter;
-	private final int minLight;
-	private final int maxLight;
 
-	private SlabfishLightCondition(int minLight, int maxLight, @Nullable LightLayer lightType) {
-		this.lightGetter = context -> lightType == null ? context.getLight() : context.getLightFor(lightType);
-		this.minLight = minLight;
-		this.maxLight = maxLight;
-	}
-
-	private static LightLayer deserializeLightType(JsonElement element) throws JsonParseException {
-		if (!element.isJsonPrimitive() || !element.getAsJsonPrimitive().isString())
-			throw new JsonSyntaxException("Light type expected to be a string");
-		String name = element.getAsString();
+	private static final Codec<LightLayer> LIGHT_LAYER_CODEC = Codec.STRING.comapFlatMap(name -> {
 		for (LightLayer lightType : LightLayer.values())
 			if (lightType.name().equalsIgnoreCase(name))
-				return lightType;
-		throw new JsonSyntaxException("Invalid light type: " + name);
+				return DataResult.success(lightType);
+		return DataResult.error("Invalid light type: " + name);
+	}, lightLayer -> lightLayer.name().toLowerCase(Locale.ROOT));
+
+	private static final Codec<SlabfishLightCondition> VALUE_CODEC = RecordCodecBuilder.create(instance -> instance.group(
+		Codec.INT.fieldOf("value").forGetter(SlabfishLightCondition::getMax),
+		SlabfishLightCondition.LIGHT_LAYER_CODEC.optionalFieldOf("light_type").forGetter(c -> Optional.ofNullable(c.getLightLayer()))
+	).apply(instance, (value, light) -> new SlabfishLightCondition(value, value, light.orElse(null))));
+
+	private static final Codec<SlabfishLightCondition> MIN_MAX_CODEC = RecordCodecBuilder.create(instance -> instance.group(
+		Codec.INT.optionalFieldOf("min", Integer.MIN_VALUE).forGetter(SlabfishLightCondition::getMin),
+		Codec.INT.optionalFieldOf("max", Integer.MAX_VALUE).forGetter(SlabfishLightCondition::getMax),
+		SlabfishLightCondition.LIGHT_LAYER_CODEC.optionalFieldOf("light_type").forGetter(c -> Optional.ofNullable(c.getLightLayer()))
+	).apply(instance, (min, max, light) -> new SlabfishLightCondition(min, max, light.orElse(null))));
+
+	public static final Codec<SlabfishLightCondition> CODEC = ExtraCodecs.xor(SlabfishLightCondition.VALUE_CODEC, SlabfishLightCondition.MIN_MAX_CODEC).xmap(
+		c -> c.left().isPresent() ? c.left().get() : c.right().orElse(null),
+		c -> c.getMin() == c.getMax() ? Either.left(c) : Either.right(c)
+	);
+
+	private final int min;
+	private final int max;
+	private final LightLayer lightLayer;
+	private final Function<SlabfishConditionContext, Integer> lightGetter;
+
+	private SlabfishLightCondition(int min, int max, @Nullable LightLayer lightLayer) {
+		this.min = min;
+		this.max = max;
+		this.lightLayer = lightLayer;
+		this.lightGetter = context -> lightLayer == null ? context.getLight() : context.getLightFor(lightLayer);
 	}
 
-	/**
-	 * Creates a new {@link SlabfishLightCondition} from the specified json.
-	 *
-	 * @param json    The json to deserialize
-	 * @param context The context of the json deserialization
-	 * @return A new slabfish condition from that json
-	 */
-	public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context) {
-		if ((json.has("min") || json.has("max")) && json.has("value"))
-			throw new JsonSyntaxException("Either 'min' and 'max' or 'value' can be present.");
-		if (!json.has("min") && !json.has("max") && !json.has("value"))
-			throw new JsonSyntaxException("Either 'min' and 'max' or 'value' must be present.");
-		LightLayer lightType = null;
-		if (json.has("lightType"))
-			lightType = deserializeLightType(json.get("lightType"));
-		return json.has("value") ? new SlabfishLightCondition(json.get("value").getAsInt(), json.get("value").getAsInt(), lightType) : new SlabfishLightCondition(json.has("min") ? json.get("min").getAsInt() : Integer.MIN_VALUE, json.has("max") ? json.get("max").getAsInt() : Integer.MAX_VALUE, lightType);
+	public int getMin() {
+		return min;
+	}
+
+	public int getMax() {
+		return max;
+	}
+
+	@Nullable
+	public LightLayer getLightLayer() {
+		return lightLayer;
 	}
 
 	@Override
 	public boolean test(SlabfishConditionContext context) {
-		return this.lightGetter.apply(context) >= this.minLight && this.lightGetter.apply(context) <= this.maxLight;
+		return this.lightGetter.apply(context) >= this.min && this.lightGetter.apply(context) <= this.max;
+	}
+
+	@Override
+	public SlabfishConditionType getType() {
+		return EnvironmentalSlabfishConditions.LIGHT_LEVEL.get();
 	}
 }

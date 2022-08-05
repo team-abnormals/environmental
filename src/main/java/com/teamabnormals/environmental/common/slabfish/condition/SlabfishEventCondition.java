@@ -1,6 +1,11 @@
 package com.teamabnormals.environmental.common.slabfish.condition;
 
-import com.google.gson.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.teamabnormals.environmental.core.registry.EnvironmentalSlabfishConditions;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * <p>A {@link SlabfishCondition} that returns <code>true</code> if spawned under the specified actions.</p>
@@ -8,46 +13,37 @@ import com.google.gson.*;
  * @author Ocelot
  */
 public class SlabfishEventCondition implements SlabfishCondition {
-	private final byte events;
 
-	public SlabfishEventCondition(SlabfishConditionContext.Event[] events) {
-		byte flag = 0;
-		for (SlabfishConditionContext.Event event : events)
-			flag |= (1 << event.ordinal());
-		this.events = flag;
-	}
+    public static final Codec<SlabfishEventCondition> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+        SlabfishConditionContext.Event.CODEC.listOf().xmap(list -> list.toArray(SlabfishConditionContext.Event[]::new), Arrays::asList).fieldOf("events").forGetter(SlabfishEventCondition::getEvents)
+    ).apply(instance, SlabfishEventCondition::new));
 
-	private static SlabfishConditionContext.Event deserializeEvent(JsonElement element) {
-		if (!element.isJsonPrimitive() || !element.getAsJsonPrimitive().isString())
-			throw new JsonSyntaxException("Slabfish condition event expected to be a string");
-		String name = element.getAsString();
-		for (SlabfishConditionContext.Event event : SlabfishConditionContext.Event.values())
-			if (event.name().equalsIgnoreCase(name))
-				return event;
-		throw new JsonSyntaxException("Invalid slabfish condition event type: " + name);
-	}
+    private final SlabfishConditionContext.Event[] events;
+    private final byte flag;
 
-	/**
-	 * Creates a new {@link SlabfishEventCondition} from the specified json.
-	 *
-	 * @param json    The json to deserialize
-	 * @param context The context of the json deserialization
-	 * @return A new slabfish condition from that json
-	 */
-	public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context) {
-		if (!json.has("events"))
-			throw new JsonSyntaxException("'events' must be present.");
+    public SlabfishEventCondition(SlabfishConditionContext.Event[] events) {
+        this.events = events;
+        byte flag = 0;
+        for (SlabfishConditionContext.Event event : events)
+            flag |= (1 << event.ordinal());
+        this.flag = flag;
+    }
 
-		JsonArray eventsJson = json.getAsJsonArray("events");
-		SlabfishConditionContext.Event[] events = new SlabfishConditionContext.Event[eventsJson.size()];
-		for (int i = 0; i < eventsJson.size(); i++)
-			events[i] = deserializeEvent(eventsJson.get(i));
+    public SlabfishConditionContext.Event[] getEvents() {
+        return events;
+    }
 
-		return new SlabfishEventCondition(events);
-	}
+    public byte getFlag() {
+        return flag;
+    }
 
-	@Override
-	public boolean test(SlabfishConditionContext context) {
-		return ((this.events >> context.getEvent().ordinal()) & 1) > 0;
-	}
+    @Override
+    public boolean test(SlabfishConditionContext context) {
+        return ((this.flag >> context.getEvent().ordinal()) & 1) > 0;
+    }
+
+    @Override
+    public SlabfishConditionType getType() {
+        return EnvironmentalSlabfishConditions.EVENT.get();
+    }
 }

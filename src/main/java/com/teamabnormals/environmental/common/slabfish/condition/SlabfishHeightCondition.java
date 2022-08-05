@@ -3,6 +3,13 @@ package com.teamabnormals.environmental.common.slabfish.condition;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import com.mojang.datafixers.util.Either;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.teamabnormals.environmental.core.registry.EnvironmentalSlabfishConditions;
+import net.minecraft.util.ExtraCodecs;
+
+import java.util.Optional;
 
 /**
  * <p>A {@link SlabfishCondition} that returns <code>true</code> if the slabfish within the height range specified.</p>
@@ -10,31 +17,44 @@ import com.google.gson.JsonSyntaxException;
  * @author Ocelot
  */
 public class SlabfishHeightCondition implements SlabfishCondition {
-	private final int minHeight;
-	private final int maxHeight;
 
-	private SlabfishHeightCondition(int minHeight, int maxHeight) {
-		this.minHeight = minHeight;
-		this.maxHeight = maxHeight;
+	private static final Codec<SlabfishHeightCondition> VALUE_CODEC = RecordCodecBuilder.create(instance -> instance.group(
+		Codec.INT.fieldOf("value").forGetter(SlabfishHeightCondition::getMax)
+	).apply(instance, value -> new SlabfishHeightCondition(value, value)));
+
+	private static final Codec<SlabfishHeightCondition> MIN_MAX_CODEC = RecordCodecBuilder.create(instance -> instance.group(
+		Codec.INT.optionalFieldOf("min", Integer.MIN_VALUE).forGetter(SlabfishHeightCondition::getMin),
+		Codec.INT.optionalFieldOf("max", Integer.MAX_VALUE).forGetter(SlabfishHeightCondition::getMax)
+	).apply(instance, SlabfishHeightCondition::new));
+
+	public static final Codec<SlabfishHeightCondition> CODEC = ExtraCodecs.xor(SlabfishHeightCondition.VALUE_CODEC, SlabfishHeightCondition.MIN_MAX_CODEC).xmap(
+		c -> c.left().isPresent() ? c.left().get() : c.right().orElse(null),
+		c -> c.getMin() == c.getMax() ? Either.left(c) : Either.right(c)
+	);
+
+	private final int min;
+	private final int max;
+
+	private SlabfishHeightCondition(int min, int max) {
+		this.min = min;
+		this.max = max;
 	}
 
-	/**
-	 * Creates a new {@link SlabfishHeightCondition} from the specified json.
-	 *
-	 * @param json    The json to deserialize
-	 * @param context The context of the json deserialization
-	 * @return A new slabfish condition from that json
-	 */
-	public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context) {
-		if ((json.has("min") || json.has("max")) && json.has("value"))
-			throw new JsonSyntaxException("Either 'min' and 'max' or 'value' can be present.");
-		if (!json.has("min") && !json.has("max") && !json.has("value"))
-			throw new JsonSyntaxException("Either 'min' and 'max' or 'value' must be present.");
-		return json.has("value") ? new SlabfishHeightCondition(json.get("value").getAsInt(), json.get("value").getAsInt()) : new SlabfishHeightCondition(json.has("min") ? json.get("min").getAsInt() : Integer.MIN_VALUE, json.has("max") ? json.get("max").getAsInt() : Integer.MAX_VALUE);
+	public int getMin() {
+		return min;
+	}
+
+	public int getMax() {
+		return max;
 	}
 
 	@Override
 	public boolean test(SlabfishConditionContext context) {
-		return context.getPos().getY() >= this.minHeight && context.getPos().getY() <= this.maxHeight;
+		return context.getPos().getY() >= this.min && context.getPos().getY() <= this.max;
+	}
+
+	@Override
+	public SlabfishConditionType getType() {
+		return EnvironmentalSlabfishConditions.HEIGHT.get();
 	}
 }

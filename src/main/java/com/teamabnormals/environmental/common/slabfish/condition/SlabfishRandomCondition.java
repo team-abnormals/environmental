@@ -3,6 +3,9 @@ package com.teamabnormals.environmental.common.slabfish.condition;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.teamabnormals.environmental.core.registry.EnvironmentalSlabfishConditions;
 
 /**
  * <p>A {@link SlabfishCondition} that returns <code>true</code> if the player that bred two slabfish together has insomnia.</p>
@@ -10,27 +13,28 @@ import com.google.gson.JsonSyntaxException;
  * @author Ocelot
  */
 public class SlabfishRandomCondition implements SlabfishCondition {
+
+	public static final Codec<SlabfishRandomCondition> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+		Codec.FLOAT.fieldOf("chance").forGetter(SlabfishRandomCondition::getChance)
+	).apply(instance, SlabfishRandomCondition::new));
+
 	private final float chance;
 
 	private SlabfishRandomCondition(float chance) {
 		this.chance = chance;
 	}
 
-	/**
-	 * Creates a new {@link SlabfishRandomCondition} from the specified json.
-	 *
-	 * @param json    The json to deserialize
-	 * @param context The context of the json deserialization
-	 * @return A new slabfish condition from that json
-	 */
-	public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context) {
-		if (!json.has("chance"))
-			throw new JsonSyntaxException("'chance' must be present.");
-		return new SlabfishRandomCondition(json.get("chance").getAsFloat());
+	public float getChance() {
+		return chance;
 	}
 
 	@Override
 	public boolean test(SlabfishConditionContext context) {
 		return context.getRandom().nextFloat() <= this.chance;
+	}
+
+	@Override
+	public SlabfishConditionType getType() {
+		return EnvironmentalSlabfishConditions.RANDOM.get();
 	}
 }

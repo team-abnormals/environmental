@@ -3,6 +3,9 @@ package com.teamabnormals.environmental.common.slabfish.condition;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.teamabnormals.environmental.core.registry.EnvironmentalSlabfishConditions;
 import net.minecraft.resources.ResourceLocation;
 
 /**
@@ -11,27 +14,28 @@ import net.minecraft.resources.ResourceLocation;
  * @author Ocelot
  */
 public class SlabfishDimensionCondition implements SlabfishCondition {
-	private final ResourceLocation dimensionRegistryName;
 
-	private SlabfishDimensionCondition(ResourceLocation dimensionRegistryName) {
-		this.dimensionRegistryName = dimensionRegistryName;
+	public static final Codec<SlabfishDimensionCondition> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+		ResourceLocation.CODEC.fieldOf("dimension").forGetter(SlabfishDimensionCondition::getDimension)
+	).apply(instance, SlabfishDimensionCondition::new));
+
+	private final ResourceLocation dimension;
+
+	private SlabfishDimensionCondition(ResourceLocation dimension) {
+		this.dimension = dimension;
 	}
 
-	/**
-	 * Creates a new {@link SlabfishDimensionCondition} from the specified json.
-	 *
-	 * @param json    The json to deserialize
-	 * @param context The context of the json deserialization
-	 * @return A new slabfish condition from that json
-	 */
-	public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context) {
-		if (!json.has("dimension"))
-			throw new JsonSyntaxException("'dimension' is required");
-		return new SlabfishDimensionCondition(context.deserialize(json.get("dimension"), ResourceLocation.class));
+	public ResourceLocation getDimension() {
+		return dimension;
 	}
 
 	@Override
 	public boolean test(SlabfishConditionContext context) {
-		return context.getDimension().equals(this.dimensionRegistryName);
+		return context.getDimension().equals(this.dimension);
+	}
+
+	@Override
+	public SlabfishConditionType getType() {
+		return EnvironmentalSlabfishConditions.DIMENSION.get();
 	}
 }

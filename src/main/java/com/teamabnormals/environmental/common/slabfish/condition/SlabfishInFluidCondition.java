@@ -1,14 +1,14 @@
 package com.teamabnormals.environmental.common.slabfish.condition;
 
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
-import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
+import com.mojang.datafixers.util.Either;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.teamabnormals.environmental.core.registry.EnvironmentalSlabfishConditions;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 
 /**
  * <p>A {@link SlabfishCondition} that returns <code>true</code> if the slabfish is inside of the specified block or block tag.</p>
@@ -16,27 +16,39 @@ import javax.annotation.Nullable;
  * @author Ocelot
  */
 public class SlabfishInFluidCondition implements SlabfishCondition {
-	private final TagKey<Fluid> tag;
 
-	private SlabfishInFluidCondition(@Nullable TagKey<Fluid> tag) {
-		this.tag = tag;
-	}
+    public static final Codec<SlabfishInFluidCondition> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+        Codec.either(ForgeRegistries.FLUIDS.getCodec(), TagKey.hashedCodec(ForgeRegistries.FLUIDS.getRegistryKey())).fieldOf("fluid").forGetter(c -> {
+            if (c.getFluid() != null) return Either.left(c.getFluid());
+            else return Either.right(c.getTag());
+        })
+    ).apply(instance, (either) -> new SlabfishInFluidCondition(either.left().orElse(null), either.right().orElse(null))));
 
-	/**
-	 * Creates a new {@link SlabfishInFluidCondition} from the specified json.
-	 *
-	 * @param json    The json to deserialize
-	 * @param context The context of the json deserialization
-	 * @return A new slabfish condition from that json
-	 */
-	public static SlabfishCondition deserialize(JsonObject json, JsonDeserializationContext context) {
-		if (!json.has("tag"))
-			throw new JsonSyntaxException("'tag' must be present.");
-		return new SlabfishInFluidCondition(TagKey.create(Registry.FLUID_REGISTRY, new ResourceLocation(json.get("tag").getAsString())));
-	}
+    private final Fluid fluid;
+    private final TagKey<Fluid> tag;
 
-	@Override
-	public boolean test(SlabfishConditionContext context) {
-		return context.isInFluid(this.tag);
-	}
+    private SlabfishInFluidCondition(@Nullable Fluid fluid, @Nullable TagKey<Fluid> tag) {
+        this.fluid = fluid;
+        this.tag = tag;
+    }
+
+    @Nullable
+    public Fluid getFluid() {
+        return fluid;
+    }
+
+    @Nullable
+    public TagKey<Fluid> getTag() {
+        return tag;
+    }
+
+    @Override
+    public boolean test(SlabfishConditionContext context) {
+        return this.fluid != null ? context.isInFluid(this.fluid) : context.isInFluid(this.tag);
+    }
+
+    @Override
+    public SlabfishConditionType getType() {
+        return EnvironmentalSlabfishConditions.IN_FLUID.get();
+    }
 }

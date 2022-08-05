@@ -1,7 +1,7 @@
 package com.teamabnormals.environmental.client.model;
 
-import com.teamabnormals.environmental.common.slabfish.SlabfishManager;
 import com.teamabnormals.environmental.core.Environmental;
+import com.teamabnormals.environmental.core.registry.EnvironmentalSlabfishTypes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -15,13 +15,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.fml.LogicalSide;
 
 import javax.annotation.Nullable;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 /**
  * <p>Super hack that selects models for slabfish buckets based </p>
@@ -91,7 +87,7 @@ public class SlabfishBucketModel implements BakedModel {
 		@Override
 		public BakedModel resolve(BakedModel model, ItemStack stack, @Nullable ClientLevel world, @Nullable LivingEntity entity, int p_173469_) {
 			if (stack.getTag() != null && stack.getTag().contains("SlabfishType", Tag.TAG_STRING)) {
-				ResourceLocation slabfishType = SlabfishManager.get(LogicalSide.CLIENT).getSlabfishType(this.locationCache.computeIfAbsent(stack.getTag().getString("SlabfishType"), ResourceLocation::new)).orElse(SlabfishManager.DEFAULT_SLABFISH).getRegistryName();
+				ResourceLocation slabfishType = Objects.requireNonNull(EnvironmentalSlabfishTypes.registryAccess().getOptional(this.locationCache.computeIfAbsent(stack.getTag().getString("SlabfishType"), ResourceLocation::new)).orElse(EnvironmentalSlabfishTypes.SWAMP.get())).registryName();
 				if (this.modelLocations.containsKey(slabfishType))
 					return this.modelManager.getModel(this.modelLocations.get(slabfishType));
 			}

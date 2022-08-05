@@ -6,6 +6,7 @@ import com.teamabnormals.environmental.client.renderer.entity.*;
 import com.teamabnormals.environmental.client.resources.SlabfishSpriteUploader;
 import com.teamabnormals.environmental.common.network.message.*;
 import com.teamabnormals.environmental.common.slabfish.SlabfishLoader;
+import com.teamabnormals.environmental.common.slabfish.SlabfishTypeProvider;
 import com.teamabnormals.environmental.core.other.EnvironmentalCompat;
 import com.teamabnormals.environmental.core.other.EnvironmentalDataProcessors;
 import com.teamabnormals.environmental.core.other.EnvironmentalDataSerializers;
@@ -73,7 +74,8 @@ public class Environmental {
 		EnvironmentalMobEffects.POTIONS.register(bus);
 		EnvironmentalMenuTypes.MENU_TYPES.register(bus);
 		EnvironmentalParticleTypes.PARTICLE_TYPES.register(bus);
-		EnvironmentalSlabfishConditions.SLABFISH_CONDITIONS.register(bus);
+		EnvironmentalSlabfishConditions.BUILTIN_SLABFISH_CONDITIONS.register(bus);
+		EnvironmentalSlabfishTypes.BUILTIN_SLABFISH_TYPES.register(bus);
 		EnvironmentalDataSerializers.DATA_SERIALIZERS.register(bus);
 
 		bus.addListener(this::commonSetup);
@@ -112,22 +114,20 @@ public class Environmental {
 		ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
 		if (event.includeServer()) {
-			//generator.addProvider(new SlabfishProvider(generator, MOD_ID, existingFileHelper));
+			generator.addProvider(new SlabfishTypeProvider(generator, existingFileHelper));
 		}
 	}
 
 	private void setupPlayMessages() {
-		PLAY.registerMessage(0, SSyncSlabfishTypeMessage.class, SSyncSlabfishTypeMessage::serialize, SSyncSlabfishTypeMessage::deserialize, SSyncSlabfishTypeMessage::handlePlay, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
-		PLAY.registerMessage(1, SSyncSweaterTypeMessage.class, SSyncSweaterTypeMessage::serialize, SSyncSweaterTypeMessage::deserialize, SSyncSweaterTypeMessage::handlePlay, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
-		PLAY.registerMessage(2, SSyncBackpackTypeMessage.class, SSyncBackpackTypeMessage::serialize, SSyncBackpackTypeMessage::deserialize, SSyncBackpackTypeMessage::handlePlay, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
-		PLAY.registerMessage(3, SOpenSlabfishInventoryMessage.class, SOpenSlabfishInventoryMessage::serialize, SOpenSlabfishInventoryMessage::deserialize, SOpenSlabfishInventoryMessage::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+		PLAY.registerMessage(0, SSyncSweaterTypeMessage.class, SSyncSweaterTypeMessage::serialize, SSyncSweaterTypeMessage::deserialize, SSyncSweaterTypeMessage::handlePlay, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+		PLAY.registerMessage(1, SSyncBackpackTypeMessage.class, SSyncBackpackTypeMessage::serialize, SSyncBackpackTypeMessage::deserialize, SSyncBackpackTypeMessage::handlePlay, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+		PLAY.registerMessage(2, SOpenSlabfishInventoryMessage.class, SOpenSlabfishInventoryMessage::serialize, SOpenSlabfishInventoryMessage::deserialize, SOpenSlabfishInventoryMessage::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
 	}
 
 	private void setupLoginMessages() {
 		LOGIN.messageBuilder(CAcknowledgeEnvironmentalMessage.class, 99, NetworkDirection.LOGIN_TO_SERVER).loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex).encoder(CAcknowledgeEnvironmentalMessage::serialize).decoder(CAcknowledgeEnvironmentalMessage::deserialize).consumer(HandshakeHandler.indexFirst(CAcknowledgeEnvironmentalMessage::handle)).add();
-		LOGIN.messageBuilder(SSyncSlabfishTypeMessage.class, 0, NetworkDirection.LOGIN_TO_CLIENT).loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex).encoder(SSyncSlabfishTypeMessage::serialize).decoder(SSyncSlabfishTypeMessage::deserialize).markAsLoginPacket().consumer(HandshakeHandler.biConsumerFor((__, msg, ctx) -> SSyncSlabfishTypeMessage.handleLogin(msg, ctx))).add();
-		LOGIN.messageBuilder(SSyncSweaterTypeMessage.class, 1, NetworkDirection.LOGIN_TO_CLIENT).loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex).encoder(SSyncSweaterTypeMessage::serialize).decoder(SSyncSweaterTypeMessage::deserialize).markAsLoginPacket().consumer(HandshakeHandler.biConsumerFor((__, msg, ctx) -> SSyncSweaterTypeMessage.handleLogin(msg, ctx))).add();
-		LOGIN.messageBuilder(SSyncBackpackTypeMessage.class, 2, NetworkDirection.LOGIN_TO_CLIENT).loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex).encoder(SSyncBackpackTypeMessage::serialize).decoder(SSyncBackpackTypeMessage::deserialize).markAsLoginPacket().consumer(HandshakeHandler.biConsumerFor((__, msg, ctx) -> SSyncBackpackTypeMessage.handleLogin(msg, ctx))).add();
+		LOGIN.messageBuilder(SSyncSweaterTypeMessage.class, 0, NetworkDirection.LOGIN_TO_CLIENT).loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex).encoder(SSyncSweaterTypeMessage::serialize).decoder(SSyncSweaterTypeMessage::deserialize).markAsLoginPacket().consumer(HandshakeHandler.biConsumerFor((__, msg, ctx) -> SSyncSweaterTypeMessage.handleLogin(msg, ctx))).add();
+		LOGIN.messageBuilder(SSyncBackpackTypeMessage.class, 1, NetworkDirection.LOGIN_TO_CLIENT).loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex).encoder(SSyncBackpackTypeMessage::serialize).decoder(SSyncBackpackTypeMessage::deserialize).markAsLoginPacket().consumer(HandshakeHandler.biConsumerFor((__, msg, ctx) -> SSyncBackpackTypeMessage.handleLogin(msg, ctx))).add();
 	}
 
 	private void stitchTextures(TextureStitchEvent.Pre event) {

@@ -4,6 +4,7 @@ import com.teamabnormals.environmental.common.entity.animal.slabfish.Slabfish;
 import com.teamabnormals.environmental.common.slabfish.DynamicInventory;
 import com.teamabnormals.environmental.common.slabfish.SlabfishManager;
 import com.teamabnormals.environmental.common.slabfish.SlabfishType;
+import com.teamabnormals.environmental.core.registry.EnvironmentalSlabfishTypes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.Tags;
@@ -31,8 +32,10 @@ public class SlabfishInventory extends DynamicInventory {
 				SlabfishManager slabfishManager = SlabfishManager.get(this.slabfish.getCommandSenderWorld());
 				if (!slabfishManager.getBackpackType(stack).isPresent())
 					return false;
-				SlabfishType slabfishType = slabfishManager.getSlabfishType(this.slabfish.getSlabfishType()).orElse(SlabfishManager.DEFAULT_SLABFISH);
-				return this.slabfish.hasBackpack() && (slabfishType.getCustomBackpack() == null || !slabfishManager.getBackpackType(slabfishType.getCustomBackpack()).isPresent());
+
+				SlabfishType slabfishType = EnvironmentalSlabfishTypes.registryAccess().getOptional(this.slabfish.getSlabfishType()).orElse(EnvironmentalSlabfishTypes.SWAMP.get());
+
+				return this.slabfish.hasBackpack() && (slabfishType.getBackpack() == null || !slabfishManager.getBackpackType(slabfishType.getBackpack()).isPresent());
 			default:
 				return super.canPlaceItem(index, stack);
 		}
