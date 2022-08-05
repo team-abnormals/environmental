@@ -37,4 +37,5 @@ public class EnvironmentalSlabfishConditions {
     public static final RegistryObject<SlabfishConditionType> IN_BLOCK = BUILTIN_SLABFISH_CONDITIONS.register("in_block", () -> new SlabfishConditionType(SlabfishInBlockCondition.CODEC));
     public static final RegistryObject<SlabfishConditionType> IN_FLUID = BUILTIN_SLABFISH_CONDITIONS.register("in_fluid", () -> new SlabfishConditionType(SlabfishInFluidCondition.CODEC));
     public static final RegistryObject<SlabfishConditionType> EVENT = BUILTIN_SLABFISH_CONDITIONS.register("event", () -> new SlabfishConditionType(SlabfishEventCondition.CODEC));
+    public static final RegistryObject<SlabfishConditionType> MOD_LOADED = BUILTIN_SLABFISH_CONDITIONS.register("mod_loaded", () -> new SlabfishConditionType(SlabfishModLoadedCondition.CODEC));
 }
