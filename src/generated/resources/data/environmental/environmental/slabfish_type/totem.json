@@ -1,0 +1,15 @@
+{
+  "weight": 2,
+  "conditions": [
+    {
+      "events": [
+        "spawn",
+        "breed"
+      ],
+      "type": "environmental:event"
+    },
+    {
+      "type": "environmental:raid"
+    }
+  ]
+}

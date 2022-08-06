@@ -1,0 +1,20 @@
+{
+  "weight": 2,
+  "conditions": [
+    {
+      "events": [
+        "breed"
+      ],
+      "type": "environmental:event"
+    },
+    {
+      "parent": "environmental:skeleton",
+      "partner": "environmental:skeleton",
+      "type": "environmental:breed"
+    },
+    {
+      "dimension": "minecraft:the_nether",
+      "type": "environmental:dimension"
+    }
+  ]
+}

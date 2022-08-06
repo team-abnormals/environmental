@@ -1,0 +1,43 @@
+{
+  "weight": 2,
+  "conditions": [
+    {
+      "conditions": [
+        {
+          "conditions": [
+            {
+              "events": [
+                "lightning"
+              ],
+              "type": "environmental:event"
+            },
+            {
+              "types": [
+                "environmental:mushroom"
+              ],
+              "type": "environmental:slabfish_type"
+            }
+          ],
+          "type": "environmental:and"
+        },
+        {
+          "conditions": [
+            {
+              "events": [
+                "spawn",
+                "breed"
+              ],
+              "type": "environmental:event"
+            },
+            {
+              "biome": "minecraft:mushroom_fields",
+              "type": "environmental:in_biome"
+            }
+          ],
+          "type": "environmental:and"
+        }
+      ],
+      "type": "environmental:or"
+    }
+  ]
+}

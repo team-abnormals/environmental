@@ -21,7 +21,7 @@ public class SlabfishEventCondition implements SlabfishCondition {
     private final SlabfishConditionContext.Event[] events;
     private final byte flag;
 
-    public SlabfishEventCondition(SlabfishConditionContext.Event[] events) {
+    public SlabfishEventCondition(SlabfishConditionContext.Event... events) {
         this.events = events;
         byte flag = 0;
         for (SlabfishConditionContext.Event event : events)

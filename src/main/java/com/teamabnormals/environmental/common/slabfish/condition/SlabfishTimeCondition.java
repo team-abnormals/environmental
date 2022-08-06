@@ -17,7 +17,7 @@ public class SlabfishTimeCondition implements SlabfishCondition {
 
     private final SlabfishConditionContext.Time time;
 
-    private SlabfishTimeCondition(SlabfishConditionContext.Time time) {
+    public SlabfishTimeCondition(SlabfishConditionContext.Time time) {
         this.time = time;
     }
 

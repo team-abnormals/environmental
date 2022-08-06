@@ -1,0 +1,18 @@
+{
+  "conditions": [
+    {
+      "events": [
+        "spawn",
+        "breed"
+      ],
+      "type": "environmental:event"
+    },
+    {
+      "type": "environmental:insomnia"
+    },
+    {
+      "time": "night",
+      "type": "environmental:time"
+    }
+  ]
+}

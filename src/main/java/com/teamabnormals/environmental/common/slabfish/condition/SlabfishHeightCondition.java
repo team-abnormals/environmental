@@ -1,15 +1,10 @@
 package com.teamabnormals.environmental.common.slabfish.condition;
 
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSlabfishConditions;
 import net.minecraft.util.ExtraCodecs;
-
-import java.util.Optional;
 
 /**
  * <p>A {@link SlabfishCondition} that returns <code>true</code> if the slabfish within the height range specified.</p>
@@ -35,7 +30,7 @@ public class SlabfishHeightCondition implements SlabfishCondition {
 	private final int min;
 	private final int max;
 
-	private SlabfishHeightCondition(int min, int max) {
+	public SlabfishHeightCondition(int min, int max) {
 		this.min = min;
 		this.max = max;
 	}

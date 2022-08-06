@@ -27,9 +27,17 @@ public class SlabfishInFluidCondition implements SlabfishCondition {
     private final Fluid fluid;
     private final TagKey<Fluid> tag;
 
-    private SlabfishInFluidCondition(@Nullable Fluid fluid, @Nullable TagKey<Fluid> tag) {
+    public SlabfishInFluidCondition(@Nullable Fluid fluid, @Nullable TagKey<Fluid> tag) {
         this.fluid = fluid;
         this.tag = tag;
+    }
+
+    public SlabfishInFluidCondition(Fluid fluid) {
+        this(fluid, null);
+    }
+
+    public SlabfishInFluidCondition(TagKey<Fluid> tag) {
+        this(null, tag);
     }
 
     @Nullable

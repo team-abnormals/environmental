@@ -21,7 +21,7 @@ public class SlabfishDimensionCondition implements SlabfishCondition {
 
 	private final ResourceLocation dimension;
 
-	private SlabfishDimensionCondition(ResourceLocation dimension) {
+	public SlabfishDimensionCondition(ResourceLocation dimension) {
 		this.dimension = dimension;
 	}
 

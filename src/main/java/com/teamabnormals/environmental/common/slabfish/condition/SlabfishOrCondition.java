@@ -19,7 +19,7 @@ public class SlabfishOrCondition implements SlabfishCondition {
 
     private final SlabfishCondition[] conditions;
 
-    public SlabfishOrCondition(SlabfishCondition[] conditions) {
+    public SlabfishOrCondition(SlabfishCondition... conditions) {
         this.conditions = conditions;
     }
 

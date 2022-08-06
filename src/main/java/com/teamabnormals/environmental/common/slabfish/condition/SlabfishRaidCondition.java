@@ -12,7 +12,7 @@ public class SlabfishRaidCondition implements SlabfishCondition {
 
     public static final Codec<SlabfishRaidCondition> CODEC = Codec.unit(SlabfishRaidCondition::new);
 
-    private SlabfishRaidCondition() {
+    public SlabfishRaidCondition() {
     }
 
 

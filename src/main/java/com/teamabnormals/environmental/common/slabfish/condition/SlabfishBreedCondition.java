@@ -26,7 +26,7 @@ public class SlabfishBreedCondition implements SlabfishCondition {
     @Nullable
     private final ResourceLocation partner;
 
-    private SlabfishBreedCondition(ResourceLocation parent, @Nullable ResourceLocation partner) {
+    public SlabfishBreedCondition(ResourceLocation parent, @Nullable ResourceLocation partner) {
         this.parent = parent;
         this.partner = partner;
     }

@@ -21,7 +21,7 @@ public class SlabfishTypeCondition implements SlabfishCondition {
 
     private final ResourceLocation[] types;
 
-    private SlabfishTypeCondition(ResourceLocation[] types) {
+    public SlabfishTypeCondition(ResourceLocation... types) {
         this.types = types;
     }
 

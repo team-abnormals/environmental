@@ -1,0 +1,19 @@
+{
+  "weight": 2,
+  "conditions": [
+    {
+      "events": [
+        "spawn",
+        "breed"
+      ],
+      "type": "environmental:event"
+    },
+    {
+      "type": "environmental:height",
+      "value": {
+        "min": 256,
+        "max": 512
+      }
+    }
+  ]
+}

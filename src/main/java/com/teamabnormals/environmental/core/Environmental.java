@@ -114,7 +114,7 @@ public class Environmental {
 		ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
 		if (event.includeServer()) {
-			generator.addProvider(new SlabfishTypeProvider(generator, existingFileHelper));
+			generator.addProvider(new SlabfishTypeProvider(generator, MOD_ID, existingFileHelper));
 		}
 	}
 

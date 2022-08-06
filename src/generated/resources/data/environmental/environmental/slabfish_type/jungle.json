@@ -1,0 +1,15 @@
+{
+  "conditions": [
+    {
+      "events": [
+        "spawn",
+        "breed"
+      ],
+      "type": "environmental:event"
+    },
+    {
+      "biome": "#minecraft:is_jungle",
+      "type": "environmental:in_biome"
+    }
+  ]
+}

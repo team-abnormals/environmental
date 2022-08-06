@@ -14,7 +14,7 @@ public class SlabfishInsomniaCondition implements SlabfishCondition {
 
 	public static final Codec<SlabfishInsomniaCondition> CODEC = Codec.unit(SlabfishInsomniaCondition::new);
 
-	private SlabfishInsomniaCondition() {
+	public SlabfishInsomniaCondition() {
 	}
 
 	@Override

@@ -1,0 +1,11 @@
+{
+  "weight": 2,
+  "conditions": [
+    {
+      "events": [
+        "lightning"
+      ],
+      "type": "environmental:event"
+    }
+  ]
+}

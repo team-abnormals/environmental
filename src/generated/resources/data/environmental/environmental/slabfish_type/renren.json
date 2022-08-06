@@ -1,0 +1,15 @@
+{
+  "weight": 10,
+  "conditions": [
+    {
+      "type": "environmental:rename",
+      "value": {
+        "names": [
+          "ren",
+          "renren",
+          "slabrave"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "conditions": [
+    {
+      "events": [
+        "spawn",
+        "breed"
+      ],
+      "type": "environmental:event"
+    },
+    {
+      "biome": "#minecraft:is_taiga",
+      "type": "environmental:in_biome"
+    }
+  ]
+}

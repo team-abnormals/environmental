@@ -1,0 +1,14 @@
+{
+  "conditions": [
+    {
+      "events": [
+        "spawn",
+        "breed"
+      ],
+      "type": "environmental:event"
+    },
+    {
+      "type": "environmental:impossible"
+    }
+  ]
+}

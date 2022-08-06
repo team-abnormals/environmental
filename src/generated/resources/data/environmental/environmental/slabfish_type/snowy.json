@@ -1,0 +1,36 @@
+{
+  "conditions": [
+    {
+      "events": [
+        "spawn",
+        "breed"
+      ],
+      "type": "environmental:event"
+    },
+    {
+      "conditions": [
+        {
+          "biome": "minecraft:snowy_plains",
+          "type": "environmental:in_biome"
+        },
+        {
+          "biome": "minecraft:snowy_beach",
+          "type": "environmental:in_biome"
+        },
+        {
+          "biome": "minecraft:snowy_taiga",
+          "type": "environmental:in_biome"
+        },
+        {
+          "biome": "minecraft:frozen_river",
+          "type": "environmental:in_biome"
+        },
+        {
+          "biome": "#minecraft:is_mountain",
+          "type": "environmental:in_biome"
+        }
+      ],
+      "type": "environmental:or"
+    }
+  ]
+}

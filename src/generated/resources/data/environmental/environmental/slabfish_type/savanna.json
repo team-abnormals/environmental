@@ -1,0 +1,15 @@
+{
+  "conditions": [
+    {
+      "events": [
+        "spawn",
+        "breed"
+      ],
+      "type": "environmental:event"
+    },
+    {
+      "biome": "#forge:is_savanna",
+      "type": "environmental:in_biome"
+    }
+  ]
+}

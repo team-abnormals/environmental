@@ -49,7 +49,7 @@ public class SlabfishLightCondition implements SlabfishCondition {
 	private final LightLayer lightLayer;
 	private final Function<SlabfishConditionContext, Integer> lightGetter;
 
-	private SlabfishLightCondition(int min, int max, @Nullable LightLayer lightLayer) {
+	public SlabfishLightCondition(int min, int max, @Nullable LightLayer lightLayer) {
 		this.min = min;
 		this.max = max;
 		this.lightLayer = lightLayer;

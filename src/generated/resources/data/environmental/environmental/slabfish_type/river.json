@@ -1,0 +1,15 @@
+{
+  "conditions": [
+    {
+      "events": [
+        "spawn",
+        "breed"
+      ],
+      "type": "environmental:event"
+    },
+    {
+      "biome": "minecraft:river",
+      "type": "environmental:in_biome"
+    }
+  ]
+}

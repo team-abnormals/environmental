@@ -4,6 +4,7 @@ import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSlabfishConditions;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -40,6 +41,10 @@ public class SlabfishInBiomeCondition implements SlabfishCondition {
 
 	public SlabfishInBiomeCondition(Biome biome) {
 		this(biome, null);
+	}
+
+	public SlabfishInBiomeCondition(ResourceKey<Biome> biome) {
+		this(ForgeRegistries.BIOMES.getValue(biome.location()), null);
 	}
 
 	@Nullable

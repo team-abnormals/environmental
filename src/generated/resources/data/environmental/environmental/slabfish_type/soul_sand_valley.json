@@ -1,0 +1,16 @@
+{
+  "weight": 1,
+  "conditions": [
+    {
+      "events": [
+        "spawn",
+        "breed"
+      ],
+      "type": "environmental:event"
+    },
+    {
+      "biome": "minecraft:soul_sand_valley",
+      "type": "environmental:in_biome"
+    }
+  ]
+}

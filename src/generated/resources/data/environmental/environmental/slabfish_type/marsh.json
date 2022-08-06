@@ -1,0 +1,24 @@
+{
+  "conditions": [
+    {
+      "events": [
+        "spawn",
+        "breed"
+      ],
+      "type": "environmental:event"
+    },
+    {
+      "conditions": [
+        {
+          "biome": "environmental:marsh",
+          "type": "environmental:in_biome"
+        },
+        {
+          "biome": "environmental:mushroom_marsh",
+          "type": "environmental:in_biome"
+        }
+      ],
+      "type": "environmental:or"
+    }
+  ]
+}
