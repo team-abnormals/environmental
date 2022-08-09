@@ -5,6 +5,7 @@ import net.minecraft.world.item.Item;
 
 import java.util.Random;
 
+//TODO: Remove so the mod works lol
 public interface EggLayer {
 	int getEggTimer();
 

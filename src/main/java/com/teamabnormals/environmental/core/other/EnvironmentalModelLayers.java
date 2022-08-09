@@ -10,6 +10,7 @@ public class EnvironmentalModelLayers {
 	public static final ModelLayerLocation FENNEC_FOX = register("fennec_fox");
 	public static final ModelLayerLocation KOI = register("koi");
 	public static final ModelLayerLocation SLABFISH = register("slabfish");
+	public static final ModelLayerLocation TAPIR = register("tapir");
 	public static final ModelLayerLocation YAK = register("yak");
 
 	public static final ModelLayerLocation THIEF_HOOD = register("thief_hood", "armor");
