@@ -33,6 +33,7 @@ public class SlabbyGrabItemGoal extends Goal implements ContainerListener {
 		return false;
 	}
 
+	@Override
 	public boolean canUse() {
 		if (!this.slabfish.hasBackpack() || this.slabfish.backpackFull || this.slabfish.isOrderedToSit()) {
 			return false;
@@ -62,10 +63,12 @@ public class SlabbyGrabItemGoal extends Goal implements ContainerListener {
 		}
 	}
 
+	@Override
 	public boolean canContinueToUse() {
 		return this.slabfish.hasBackpack() && !this.slabfish.backpackFull && this.itemEntity != null && this.itemEntity.isAlive();
 	}
 
+	@Override
 	public void start() {
 		this.delayCounter = 0;
 		if (!this.listening) {
@@ -74,13 +77,15 @@ public class SlabbyGrabItemGoal extends Goal implements ContainerListener {
 		}
 	}
 
+	@Override
 	public void stop() {
 		this.itemEntity = null;
 	}
 
+	@Override
 	public void tick() {
 		if (--this.delayCounter <= 0) {
-			this.delayCounter = 10;
+			this.delayCounter = this.adjustedTickDelay(10);
 			Path path = this.slabfish.getNavigation().createPath(itemEntity, 0);
 			if (path != null) {
 				this.slabfish.getNavigation().moveTo(path, this.moveSpeed);

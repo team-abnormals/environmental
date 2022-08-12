@@ -26,7 +26,7 @@ public class SlabbyBreedGoal extends Goal {
 	private final Class<? extends Slabfish> mateClass;
 	protected final Level world;
 	protected Slabfish targetMate;
-	private int spawnBabyDelay;
+	private int loveTime;
 	private final double moveSpeed;
 
 	public SlabbyBreedGoal(Slabfish animal, double speedIn) {
@@ -41,6 +41,7 @@ public class SlabbyBreedGoal extends Goal {
 		this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
 	}
 
+	@Override
 	public boolean canUse() {
 		if (!this.animal.isInLove()) {
 			return false;
@@ -50,20 +51,23 @@ public class SlabbyBreedGoal extends Goal {
 		}
 	}
 
+	@Override
 	public boolean canContinueToUse() {
-		return this.targetMate.isAlive() && this.targetMate.isInLove() && this.spawnBabyDelay < 60;
+		return this.targetMate.isAlive() && this.targetMate.isInLove() && this.loveTime < 60;
 	}
 
+	@Override
 	public void stop() {
 		this.targetMate = null;
-		this.spawnBabyDelay = 0;
+		this.loveTime = 0;
 	}
 
+	@Override
 	public void tick() {
 		this.animal.getLookControl().setLookAt(this.targetMate, 10.0F, (float) this.animal.getMaxHeadXRot());
 		this.animal.getNavigation().moveTo(this.targetMate, this.moveSpeed);
-		++this.spawnBabyDelay;
-		if (this.spawnBabyDelay >= 60 && this.animal.distanceToSqr(this.targetMate) < 9.0D) {
+		++this.loveTime;
+		if (this.loveTime >= this.adjustedTickDelay(60) && this.animal.distanceToSqr(this.targetMate) < 9.0D) {
 			this.spawnBaby();
 		}
 
