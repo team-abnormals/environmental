@@ -16,7 +16,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class DuckRenderer extends MobRenderer<Duck, DuckModel<Duck>> {
 
 	public DuckRenderer(EntityRendererProvider.Context context) {
-		super(context, new DuckModel<>(context.bakeLayer(EnvironmentalModelLayers.DUCK)), 0.45F);
+		super(context, new DuckModel<>(context.bakeLayer(EnvironmentalModelLayers.DUCK)), 0.3F);
 	}
 
 	@Override

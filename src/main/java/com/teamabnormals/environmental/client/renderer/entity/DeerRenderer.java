@@ -19,7 +19,7 @@ import java.util.Locale;
 public class DeerRenderer extends MobRenderer<Deer, DeerModel<Deer>> {
 
 	public DeerRenderer(EntityRendererProvider.Context context) {
-		super(context, new DeerModel<>(context.bakeLayer(EnvironmentalModelLayers.DEER)), 0.75F);
+		super(context, new DeerModel<>(context.bakeLayer(EnvironmentalModelLayers.DEER)), 0.7F);
 		this.addLayer(new DeerMarkingsRenderLayer<>(this));
 		this.addLayer(new RedNoseReindeerLayer<>(this));
 	}
