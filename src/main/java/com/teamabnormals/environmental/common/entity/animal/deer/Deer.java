@@ -168,6 +168,11 @@ public class Deer extends Animal {
 	}
 
 	@Override
+	protected float getStandingEyeHeight(Pose pose, EntityDimensions dimensions) {
+		return dimensions.height * 0.9F;
+	}
+
+	@Override
 	protected SoundEvent getAmbientSound() {
 		return EnvironmentalSoundEvents.DEER_AMBIENT.get();
 	}
