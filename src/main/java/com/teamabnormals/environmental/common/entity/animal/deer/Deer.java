@@ -1,8 +1,19 @@
 package com.teamabnormals.environmental.common.entity.animal.deer;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoField;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import java.util.function.Predicate;
+
+import javax.annotation.Nullable;
+
+import com.teamabnormals.environmental.common.entity.ai.goal.DeerGrazeGoal;
 import com.teamabnormals.environmental.core.other.EnvironmentalTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSoundEvents;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
@@ -13,17 +24,34 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.Mth;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.EntitySelector;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.world.entity.ai.goal.BreedGoal;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.FollowParentGoal;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.PanicGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.TemptGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -36,17 +64,10 @@ import net.minecraft.world.level.biome.Biome.Precipitation;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-import javax.annotation.Nullable;
-import java.time.LocalDate;
-import java.time.temporal.ChronoField;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import java.util.function.Predicate;
-
 public class Deer extends Animal {
 	private static final EntityDataAccessor<Integer> DEER_COAT_COLOR = SynchedEntityData.defineId(Deer.class, EntityDataSerializers.INT);
 	private static final EntityDataAccessor<Integer> DEER_COAT_TYPE = SynchedEntityData.defineId(Deer.class, EntityDataSerializers.INT);
+	private static final EntityDataAccessor<Integer> TARGET_NECK_ANGLE = SynchedEntityData.defineId(Wolf.class, EntityDataSerializers.INT);
 	private static final EntityDataAccessor<Boolean> HAS_ANTLERS = SynchedEntityData.defineId(Deer.class, EntityDataSerializers.BOOLEAN);
 
 	private static final Predicate<Entity> SHOULD_AVOID = (entity) -> !entity.isDiscrete() && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(entity);
@@ -54,6 +75,8 @@ public class Deer extends Animal {
 	private static final UUID SPEED_MODIFIER = UUID.fromString("a21208ef-5399-4341-800f-d5a9152afe98");
 	private int floweringTime;
 	private final List<BlockState> flowers = new ArrayList<>();
+	private float neckAngle = 15F;
+	private float neckAngleO = 15F;
 
 	public Deer(EntityType<? extends Animal> type, Level worldIn) {
 		super(type, worldIn);
@@ -68,9 +91,10 @@ public class Deer extends Animal {
 		this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, Player.class, 22.0F, 2.0D, 2.7D, SHOULD_AVOID::test));
 		this.goalSelector.addGoal(4, new TemptGoal(this, 1.25D, Ingredient.of(EnvironmentalTags.Items.DEER_TEMPT_ITEMS), false));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
-		this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
-		this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
-		this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
+		this.goalSelector.addGoal(5, new DeerGrazeGoal(this));
+		this.goalSelector.addGoal(6, new WaterAvoidingRandomStrollGoal(this, 1.0D));
+		this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
+		this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
 	}
 
 	@Override
@@ -78,6 +102,7 @@ public class Deer extends Animal {
 		super.defineSynchedData();
 		this.entityData.define(DEER_COAT_COLOR, 0);
 		this.entityData.define(DEER_COAT_TYPE, 0);
+		this.entityData.define(TARGET_NECK_ANGLE, 15);
 		this.entityData.define(HAS_ANTLERS, true);
 	}
 
@@ -126,6 +151,24 @@ public class Deer extends Animal {
 				this.flowers.clear();
 				if (this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(floweringModifier))
 					this.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(floweringModifier);
+			}
+		}
+	}
+
+	@Override
+	public void tick() {
+		super.tick();
+
+		if (this.level.isClientSide) {
+			int i = this.getTargetNeckAngle();
+			this.neckAngleO = this.neckAngle;
+			float f = this.neckAngle + (i - this.neckAngle) * 0.3F;
+			boolean flag = this.neckAngle < i;
+			boolean flag1 = f > i;
+			if (flag == flag1) {
+				this.neckAngle = i;
+			} else {
+				this.neckAngle = f;
 			}
 		}
 	}
@@ -187,8 +230,21 @@ public class Deer extends Animal {
 		return EnvironmentalSoundEvents.DEER_DEATH.get();
 	}
 
+	@Override
 	protected void playStepSound(BlockPos pos, BlockState blockIn) {
 		this.playSound(EnvironmentalSoundEvents.DEER_STEP.get(), 0.15F, 1.0F);
+	}
+
+	private int getTargetNeckAngle() {
+		return this.entityData.get(TARGET_NECK_ANGLE);
+	}
+
+	public void setTargetNeckAngle(int angle) {
+		this.entityData.set(TARGET_NECK_ANGLE, angle);
+	}
+
+	public float getNeckAngle(float partialTicks) {
+		return Mth.lerp(partialTicks, this.neckAngleO, this.neckAngle);
 	}
 
 	private void setCoatColor(int id) {
@@ -239,9 +295,9 @@ public class Deer extends Animal {
 		Deer entity = EnvironmentalEntityTypes.DEER.get().create(world);
 		Deer parent = (Deer) ageable;
 		if (entity != null) {
-			entity.setCoatColor(random.nextBoolean() ? parent.getCoatColor() : this.getCoatColor());
-			entity.setCoatType(random.nextBoolean() ? parent.getCoatType() : this.getCoatType());
-			entity.setHasAntlers(random.nextBoolean());
+			entity.setCoatColor(this.random.nextBoolean() ? parent.getCoatColor() : this.getCoatColor());
+			entity.setCoatType(this.random.nextBoolean() ? parent.getCoatType() : this.getCoatType());
+			entity.setHasAntlers(this.random.nextBoolean());
 			if (this.isHolidayCriteria())
 				entity.setHoliday();
 		}
@@ -249,7 +305,7 @@ public class Deer extends Animal {
 		return entity;
 	}
 
-	public boolean isHolidayCriteria() {
+	private boolean isHolidayCriteria() {
 		if (this.random.nextInt(9) == 0) {
 			LocalDate localdate = LocalDate.now();
 			int month = localdate.get(ChronoField.MONTH_OF_YEAR);
@@ -266,9 +322,9 @@ public class Deer extends Animal {
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
 		spawnDataIn = super.finalizeSpawn(worldIn, difficulty, reason, spawnDataIn, dataTag);
-		this.setCoatColor(random.nextInt(DeerCoatColors.values().length - 1));
-		this.setCoatType(random.nextInt(DeerCoatTypes.values().length));
-		this.setHasAntlers(random.nextBoolean());
+		this.setCoatColor(this.random.nextInt(DeerCoatColors.values().length - 1));
+		this.setCoatType(this.random.nextInt(DeerCoatTypes.values().length));
+		this.setHasAntlers(this.random.nextBoolean());
 		if (this.isHolidayCriteria())
 			this.setHoliday();
 		return super.finalizeSpawn(worldIn, difficulty, reason, spawnDataIn, dataTag);
