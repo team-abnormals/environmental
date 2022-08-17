@@ -64,7 +64,7 @@ public class Environmental {
 		EnvironmentalDataProcessors.registerTrackedData();
 
 		REGISTRY_HELPER.register(bus);
-		EnvironmentalBlocks.PAINTINGS.register(bus);
+		EnvironmentalPaintingTypes.PAINTING_TYPES.register(bus);
 		EnvironmentalFeatures.FEATURES.register(bus);
 		EnvironmentalFeatures.TREE_DECORATORS.register(bus);
 		EnvironmentalConfiguredFeatures.CONFIGURED_FEATURES.register(bus);
@@ -152,6 +152,7 @@ public class Environmental {
 		event.registerLayerDefinition(EnvironmentalModelLayers.KOI, KoiModel::createBodyLayer);
 		event.registerLayerDefinition(EnvironmentalModelLayers.SLABFISH, SlabfishModel::createBodyLayer);
 		event.registerLayerDefinition(EnvironmentalModelLayers.YAK, YakModel::createBodyLayer);
+		event.registerLayerDefinition(EnvironmentalModelLayers.TAPIR, TapirModel::createBodyLayer);
 
 		event.registerLayerDefinition(EnvironmentalModelLayers.THIEF_HOOD, ThiefHoodModel::createBodyLayer);
 		event.registerLayerDefinition(EnvironmentalModelLayers.HEALER_POUCH, HealerPouchModel::createBodyLayer);
@@ -167,6 +168,7 @@ public class Environmental {
 		event.registerEntityRenderer(EnvironmentalEntityTypes.YAK.get(), YakRenderer::new);
 		event.registerEntityRenderer(EnvironmentalEntityTypes.KOI.get(), KoiRenderer::new);
 		event.registerEntityRenderer(EnvironmentalEntityTypes.FENNEC_FOX.get(), FennecFoxRenderer::new);
+		event.registerEntityRenderer(EnvironmentalEntityTypes.TAPIR.get(), TapirRenderer::new);
 
 		event.registerEntityRenderer(EnvironmentalEntityTypes.DUCK_EGG.get(), ThrownItemRenderer::new);
 		event.registerEntityRenderer(EnvironmentalEntityTypes.MUD_BALL.get(), ThrownItemRenderer::new);
