@@ -9,6 +9,7 @@ import java.util.function.Predicate;
 
 import javax.annotation.Nullable;
 
+import com.teamabnormals.environmental.common.entity.ai.goal.DeerAvoidEntityGoal;
 import com.teamabnormals.environmental.common.entity.ai.goal.DeerGrazeGoal;
 import com.teamabnormals.environmental.core.other.EnvironmentalTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
@@ -41,7 +42,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.BreedGoal;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.FollowParentGoal;
@@ -70,13 +70,15 @@ public class Deer extends Animal {
 	private static final EntityDataAccessor<Integer> TARGET_NECK_ANGLE = SynchedEntityData.defineId(Wolf.class, EntityDataSerializers.INT);
 	private static final EntityDataAccessor<Boolean> HAS_ANTLERS = SynchedEntityData.defineId(Deer.class, EntityDataSerializers.BOOLEAN);
 
-	private static final Predicate<Entity> SHOULD_AVOID = (entity) -> !entity.isDiscrete() && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(entity);
+	private static final EntityDimensions GRAZING_DIMENSIONS = EntityDimensions.scalable(0.8F, 1.2F);
 
 	private static final UUID SPEED_MODIFIER = UUID.fromString("a21208ef-5399-4341-800f-d5a9152afe98");
 	private int floweringTime;
 	private final List<BlockState> flowers = new ArrayList<>();
 	private float neckAngle = 15F;
 	private float neckAngleO = 15F;
+	private float sprintAmount;
+	private float sprintAmountO;
 
 	public Deer(EntityType<? extends Animal> type, Level worldIn) {
 		super(type, worldIn);
@@ -86,13 +88,13 @@ public class Deer extends Animal {
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new FloatGoal(this));
-		this.goalSelector.addGoal(1, new PanicGoal(this, 2.5D));
+		this.goalSelector.addGoal(1, new PanicGoal(this, 1.75D));
 		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
-		this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, Player.class, 22.0F, 2.0D, 2.7D, SHOULD_AVOID::test));
+		this.goalSelector.addGoal(3, new DeerAvoidEntityGoal(this));
 		this.goalSelector.addGoal(4, new TemptGoal(this, 1.25D, Ingredient.of(EnvironmentalTags.Items.DEER_TEMPT_ITEMS), false));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
 		this.goalSelector.addGoal(5, new DeerGrazeGoal(this));
-		this.goalSelector.addGoal(6, new WaterAvoidingRandomStrollGoal(this, 1.0D));
+		this.goalSelector.addGoal(6, new WaterAvoidingRandomStrollGoal(this, 0.8D));
 		this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
 		this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
 	}
@@ -131,19 +133,19 @@ public class Deer extends Animal {
 				this.floweringTime -= 1;
 				if (!this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(floweringModifier))
 					this.getAttribute(Attributes.MOVEMENT_SPEED).addTransientModifier(floweringModifier);
-				if (!flowers.isEmpty() && this.level.getGameTime() % 30 == 0) {
+				if (!this.flowers.isEmpty() && this.level.getGameTime() % 30 == 0) {
 					BlockPos position = this.blockPosition();
-					BlockState state = flowers.get(random.nextInt(flowers.size()));
+					BlockState state = this.flowers.get(this.random.nextInt(this.flowers.size()));
 
 					if (state.getBlock() instanceof DoublePlantBlock) {
-						if (state.canSurvive(level, position) && level.isEmptyBlock(position) && level.isEmptyBlock(position.above())) {
-							DoublePlantBlock.placeAt(level, state, position, 2);
-							level.levelEvent(2005, position, 0);
+						if (state.canSurvive(this.level, position) && this.level.isEmptyBlock(position) && this.level.isEmptyBlock(position.above())) {
+							DoublePlantBlock.placeAt(this.level, state, position, 2);
+							this.level.levelEvent(2005, position, 0);
 						}
 					} else {
-						if (state.canSurvive(level, position) && level.isEmptyBlock(position)) {
-							level.setBlock(position, state, 3);
-							level.levelEvent(2005, position, 0);
+						if (state.canSurvive(this.level, position) && this.level.isEmptyBlock(position)) {
+							this.level.setBlock(position, state, 3);
+							this.level.levelEvent(2005, position, 0);
 						}
 					}
 				}
@@ -156,20 +158,38 @@ public class Deer extends Animal {
 	}
 
 	@Override
+	public void customServerAiStep() {
+		this.setSprinting(this.getMoveControl().hasWanted() && this.getMoveControl().getSpeedModifier() >= 1.75D);
+		super.customServerAiStep();
+	}
+
+	@Override
 	public void tick() {
 		super.tick();
 
 		if (this.level.isClientSide) {
-			int i = this.getTargetNeckAngle();
-			this.neckAngleO = this.neckAngle;
-			float f = this.neckAngle + (i - this.neckAngle) * 0.3F;
-			boolean flag = this.neckAngle < i;
-			boolean flag1 = f > i;
-			if (flag == flag1) {
-				this.neckAngle = i;
-			} else {
-				this.neckAngle = f;
-			}
+			this.updateNeckAngle();
+			this.updateSprintAnimation();
+		}
+	}
+
+	private void updateNeckAngle() {
+		int i = this.getTargetNeckAngle();
+		this.neckAngleO = this.neckAngle;
+		float f = this.neckAngle + (i - this.neckAngle) * 0.3F;
+		if (this.neckAngle < i == f > i) {
+			this.neckAngle = i;
+		} else {
+			this.neckAngle = f;
+		}
+	}
+
+	private void updateSprintAnimation() {
+		this.sprintAmountO = this.sprintAmount;
+		if (this.isSprinting()) {
+			this.sprintAmount = Math.min(1.0F, this.sprintAmount + 0.2F);
+		} else {
+			this.sprintAmount = Math.max(0.0F, this.sprintAmount - 0.2F);
 		}
 	}
 
@@ -212,7 +232,16 @@ public class Deer extends Animal {
 
 	@Override
 	protected float getStandingEyeHeight(Pose pose, EntityDimensions dimensions) {
-		return dimensions.height * 0.9F;
+		return this.isGrazing() ? dimensions.height * 0.3F : dimensions.height * 0.95F;
+	}
+
+	@Override
+	public EntityDimensions getDimensions(Pose pose) {
+		if (this.isGrazing()) {
+			return GRAZING_DIMENSIONS.scale(this.getScale());
+		} else {
+			return super.getDimensions(pose);
+		}
 	}
 
 	@Override
@@ -235,6 +264,15 @@ public class Deer extends Animal {
 		this.playSound(EnvironmentalSoundEvents.DEER_STEP.get(), 0.15F, 1.0F);
 	}
 
+	@Override
+	public void onSyncedDataUpdated(EntityDataAccessor<?> key) {
+		if (TARGET_NECK_ANGLE.equals(key)) {
+			this.refreshDimensions();
+		}
+
+		super.onSyncedDataUpdated(key);
+	}
+
 	private int getTargetNeckAngle() {
 		return this.entityData.get(TARGET_NECK_ANGLE);
 	}
@@ -243,8 +281,16 @@ public class Deer extends Animal {
 		this.entityData.set(TARGET_NECK_ANGLE, angle);
 	}
 
-	public float getNeckAngle(float partialTicks) {
-		return Mth.lerp(partialTicks, this.neckAngleO, this.neckAngle);
+	public float getNeckAngle(float partialTick) {
+		return Mth.lerp(partialTick, this.neckAngleO, this.neckAngle);
+	}
+
+	private boolean isGrazing() {
+		return this.getTargetNeckAngle() >= 90;
+	}
+
+	public float getSprintAmount(float partialTick) {
+		return Mth.lerp(partialTick, this.sprintAmountO, this.sprintAmount);
 	}
 
 	private void setCoatColor(int id) {
@@ -315,7 +361,7 @@ public class Deer extends Animal {
 	}
 
 	public static AttributeSupplier.Builder registerAttributes() {
-		return Animal.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0D).add(Attributes.MOVEMENT_SPEED, 0.15D);
+		return Animal.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0D).add(Attributes.MOVEMENT_SPEED, 0.2D);
 	}
 
 	@Nullable

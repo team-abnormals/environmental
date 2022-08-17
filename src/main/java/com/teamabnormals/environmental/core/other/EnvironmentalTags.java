@@ -25,6 +25,7 @@ public class EnvironmentalTags {
 
 	public static class EntityTypes {
 		public static final TagKey<EntityType<?>> UNAFFECTED_BY_SERENITY = entityTypeTag("unaffected_by_serenity");
+		public static final TagKey<EntityType<?>> SCARES_DEER = entityTypeTag("scares_deer");
 	}
 
 	private static TagKey<Block> blockTag(String tagName) {
