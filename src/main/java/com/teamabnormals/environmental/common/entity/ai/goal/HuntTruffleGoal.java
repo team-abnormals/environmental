@@ -31,12 +31,13 @@ public class HuntTruffleGoal extends Goal {
 		this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.JUMP, Goal.Flag.LOOK));
 	}
 
+	@Override
 	public boolean canUse() {
 		if (this.runDelay > 0) {
 			--this.runDelay;
 			return false;
 		} else {
-			this.runDelay = 20;
+			this.runDelay = this.adjustedTickDelay(20);
 			if (this.data.getValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET)) {
 				return true;
 			} else {
@@ -45,20 +46,24 @@ public class HuntTruffleGoal extends Goal {
 		}
 	}
 
+	@Override
 	public boolean canContinueToUse() {
 		return this.data.getValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET) && this.data.getValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME) != 0;
 	}
 
+	@Override
 	public void start() {
 		this.lookVector = new Vec3(1.0D, 0.0D, 1.0D);
 		this.moveToTruffle();
 		this.data.setValue(EnvironmentalDataProcessors.LOOKING_FOR_TRUFFLE, true);
 	}
 
+	@Override
 	public void stop() {
 		this.data.setValue(EnvironmentalDataProcessors.LOOKING_FOR_TRUFFLE, false);
 	}
 
+	@Override
 	public void tick() {
 		int trufflehuntingtime = this.data.getValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME);
 		BlockPos blockpos = this.data.getValue(EnvironmentalDataProcessors.TRUFFLE_POS);
@@ -73,7 +78,7 @@ public class HuntTruffleGoal extends Goal {
 				this.data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, -800);
 		} else {
 			if (this.lookTimer-- <= 0) {
-				this.lookTimer = 18 + this.pig.getRandom().nextInt(9);
+				this.lookTimer = this.adjustedTickDelay(18 + this.pig.getRandom().nextInt(9));
 				this.lookVector = new Vec3((double) this.pig.getRandom().nextFloat() * 1.2D, (double) this.pig.getRandom().nextFloat() * 0.4D, (double) this.pig.getRandom().nextFloat() * 1.2D);
 			}
 

@@ -18,6 +18,7 @@ public class SlabbyFollowParentGoal extends Goal {
 		this.setFlags(EnumSet.of(Goal.Flag.MOVE));
 	}
 
+	@Override
 	public boolean canUse() {
 		if (this.childAnimal.getAge() >= 0) {
 			return false;
@@ -49,6 +50,7 @@ public class SlabbyFollowParentGoal extends Goal {
 		}
 	}
 
+	@Override
 	public boolean canContinueToUse() {
 		if (this.childAnimal.getAge() >= 0) {
 			return false;
@@ -60,17 +62,20 @@ public class SlabbyFollowParentGoal extends Goal {
 		}
 	}
 
+	@Override
 	public void start() {
 		this.delayCounter = 0;
 	}
 
+	@Override
 	public void stop() {
 		this.parentAnimal = null;
 	}
 
+	@Override
 	public void tick() {
 		if (--this.delayCounter <= 0) {
-			this.delayCounter = 10;
+			this.delayCounter = this.adjustedTickDelay(10);
 			this.childAnimal.getNavigation().moveTo(this.parentAnimal, this.moveSpeed);
 		}
 	}

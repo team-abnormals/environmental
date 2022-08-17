@@ -24,7 +24,7 @@ public class EnvironmentalEntityTypes {
 
 	public static final RegistryObject<EntityType<Slabfish>> SLABFISH = HELPER.createLivingEntity("slabfish", Slabfish::new, MobCategory.CREATURE, 0.45F, 0.9F);
 	public static final RegistryObject<EntityType<Duck>> DUCK = HELPER.createLivingEntity("duck", Duck::new, MobCategory.CREATURE, 0.5F, 0.8F);
-	public static final RegistryObject<EntityType<Deer>> DEER = HELPER.createLivingEntity("deer", Deer::new, MobCategory.CREATURE, 1.1F, 1.8F);
+	public static final RegistryObject<EntityType<Deer>> DEER = HELPER.createLivingEntity("deer", Deer::new, MobCategory.CREATURE, 0.8F, 1.6F);
 	public static final RegistryObject<EntityType<Yak>> YAK = HELPER.createLivingEntity("yak", Yak::new, MobCategory.CREATURE, 1.0F, 1.5F);
 	public static final RegistryObject<EntityType<Koi>> KOI = HELPER.createLivingEntity("koi", Koi::new, MobCategory.WATER_AMBIENT, 0.75F, 0.4F);
 	public static final RegistryObject<EntityType<FennecFox>> FENNEC_FOX = HELPER.createLivingEntity("fennec_fox", FennecFox::new, MobCategory.CREATURE, 0.75F, 0.5F);

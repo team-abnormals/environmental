@@ -13,10 +13,17 @@ public class DuckSwimGoal extends Goal {
 		entityIn.getNavigation().setCanFloat(true);
 	}
 
+	@Override
 	public boolean canUse() {
 		return this.duck.isInWater() || this.duck.isInLava();
 	}
 
+	@Override
+	public boolean requiresUpdateEveryTick() {
+		return true;
+	}
+
+	@Override
 	public void tick() {
 		Vec3 motion = this.duck.getDeltaMovement();
 		double d0 = this.duck.getFluidHeight(FluidTags.WATER);
