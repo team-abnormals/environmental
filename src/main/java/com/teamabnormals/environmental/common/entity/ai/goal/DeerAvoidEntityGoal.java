@@ -10,6 +10,7 @@ import com.teamabnormals.environmental.core.other.EnvironmentalTags;
 
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
@@ -25,14 +26,27 @@ public class DeerAvoidEntityGoal extends Goal {
 	@Nullable
 	private LivingEntity toAvoid;
 	private boolean running;
+	private Vec3 avoidEntityOldPos;
 	private final TargetingConditions avoidEntityTargeting;
 
 	public DeerAvoidEntityGoal(Deer deerIn) {
 		this.deer = deerIn;
 		this.level = deerIn.getLevel();
 		this.pathNav = deerIn.getNavigation();
-		Predicate<LivingEntity> avoidPredicate = (entity) -> entity.getType().is(EnvironmentalTags.EntityTypes.SCARES_DEER) && this.deer.getSensing().hasLineOfSight(entity) && !entity.isDiscrete() && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(entity);
-		this.avoidEntityTargeting = TargetingConditions.forCombat().range(8.0D).selector(avoidPredicate);
+		Predicate<LivingEntity> avoidPredicate = (entity) -> {
+			if (!entity.getType().is(EnvironmentalTags.EntityTypes.SCARES_DEER)) {
+				return false;
+			} else if (entity.isDiscrete() || !EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(entity)) {
+				return false;
+			} else if (this.deer.isTrusting() && entity instanceof TamableAnimal && ((TamableAnimal) entity).isTame()) {
+				return false;
+			} else if (entity.getType().is(EnvironmentalTags.EntityTypes.ALWAYS_SCARES_DEER)) {
+				return true;
+			} else {
+				return !this.deer.isTrusting();
+			}
+		};
+		this.avoidEntityTargeting = TargetingConditions.forCombat().range(10.0D).selector(avoidPredicate);
 		this.setFlags(EnumSet.of(Goal.Flag.MOVE));
 	}
 
@@ -53,13 +67,14 @@ public class DeerAvoidEntityGoal extends Goal {
 		} else if (!this.toAvoid.isAlive()) {
 			return false;
 		} else {
-			return this.deer.distanceToSqr(this.toAvoid) <= 64.0F;
+			return this.deer.distanceToSqr(this.toAvoid) <= 100.0F;
 		}
 	}
 
 	@Override
 	public void start() {
 		this.running = false;
+		this.avoidEntityOldPos = this.toAvoid.position();
 	}
 
 	@Override
@@ -72,9 +87,14 @@ public class DeerAvoidEntityGoal extends Goal {
 		if (this.pathNav.isDone())
 			this.flee();
 
-		if (!this.running && this.deer.distanceToSqr(this.toAvoid) <= 36.0F) {
-			this.running = true;
-			this.deer.getNavigation().setSpeedModifier(1.75F);
+		if (!this.running) {
+			boolean flag = this.toAvoid.distanceToSqr(this.avoidEntityOldPos) >= 0.0625D;
+			if ((flag && this.deer.distanceToSqr(this.toAvoid) <= 49.0F) || (!flag && this.deer.distanceToSqr(this.toAvoid) <= 9.0F)) {
+				this.running = true;
+				this.deer.getNavigation().setSpeedModifier(1.75F);
+			}
+
+			this.avoidEntityOldPos = this.toAvoid.position();
 		}
 	}
 
@@ -87,7 +107,7 @@ public class DeerAvoidEntityGoal extends Goal {
 	}
 
 	private LivingEntity getNearestScaryEntity() {
-		LivingEntity entity = this.level.getNearestEntity(this.level.getEntitiesOfClass(LivingEntity.class, this.deer.getBoundingBox().inflate(8.0D, 4.0D, 8.0D), (p_148124_) -> {
+		LivingEntity entity = this.level.getNearestEntity(this.level.getEntitiesOfClass(LivingEntity.class, this.deer.getBoundingBox().inflate(10.0D, 4.0D, 10.0D), (p_148124_) -> {
 			return true;
 		}), this.avoidEntityTargeting, this.deer, this.deer.getX(), this.deer.getY(), this.deer.getZ());
 		return entity;

@@ -5,12 +5,12 @@ import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.function.Predicate;
 
 import javax.annotation.Nullable;
 
 import com.teamabnormals.environmental.common.entity.ai.goal.DeerAvoidEntityGoal;
 import com.teamabnormals.environmental.common.entity.ai.goal.DeerGrazeGoal;
+import com.teamabnormals.environmental.common.entity.ai.goal.DeerTemptGoal;
 import com.teamabnormals.environmental.core.other.EnvironmentalTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSoundEvents;
@@ -31,9 +31,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AgeableMob;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
-import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.Pose;
@@ -69,6 +67,7 @@ public class Deer extends Animal {
 	private static final EntityDataAccessor<Integer> DEER_COAT_TYPE = SynchedEntityData.defineId(Deer.class, EntityDataSerializers.INT);
 	private static final EntityDataAccessor<Integer> TARGET_NECK_ANGLE = SynchedEntityData.defineId(Wolf.class, EntityDataSerializers.INT);
 	private static final EntityDataAccessor<Boolean> HAS_ANTLERS = SynchedEntityData.defineId(Deer.class, EntityDataSerializers.BOOLEAN);
+	private static final EntityDataAccessor<Boolean> TRUSTING = SynchedEntityData.defineId(Deer.class, EntityDataSerializers.BOOLEAN);
 
 	private static final EntityDimensions GRAZING_DIMENSIONS = EntityDimensions.scalable(0.8F, 1.2F);
 
@@ -79,6 +78,8 @@ public class Deer extends Animal {
 	private float neckAngleO = 15F;
 	private float sprintAmount;
 	private float sprintAmountO;
+	@Nullable
+	private TemptGoal temptGoal;
 
 	public Deer(EntityType<? extends Animal> type, Level worldIn) {
 		super(type, worldIn);
@@ -87,12 +88,13 @@ public class Deer extends Animal {
 
 	@Override
 	protected void registerGoals() {
+		this.temptGoal = new DeerTemptGoal(this, 0.6D, 1.1D, Ingredient.of(EnvironmentalTags.Items.DEER_TEMPT_ITEMS));
 		this.goalSelector.addGoal(0, new FloatGoal(this));
 		this.goalSelector.addGoal(1, new PanicGoal(this, 1.75D));
-		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
+		this.goalSelector.addGoal(2, new BreedGoal(this, 0.8D));
 		this.goalSelector.addGoal(3, new DeerAvoidEntityGoal(this));
-		this.goalSelector.addGoal(4, new TemptGoal(this, 1.25D, Ingredient.of(EnvironmentalTags.Items.DEER_TEMPT_ITEMS), false));
-		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
+		this.goalSelector.addGoal(4, this.temptGoal);
+		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
 		this.goalSelector.addGoal(5, new DeerGrazeGoal(this));
 		this.goalSelector.addGoal(6, new WaterAvoidingRandomStrollGoal(this, 0.8D));
 		this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
@@ -106,6 +108,7 @@ public class Deer extends Animal {
 		this.entityData.define(DEER_COAT_TYPE, 0);
 		this.entityData.define(TARGET_NECK_ANGLE, 15);
 		this.entityData.define(HAS_ANTLERS, true);
+		this.entityData.define(TRUSTING, false);
 	}
 
 	@Override
@@ -114,6 +117,7 @@ public class Deer extends Animal {
 		compound.putInt("CoatColor", this.getCoatColor());
 		compound.putInt("CoatType", this.getCoatType());
 		compound.putBoolean("Antlers", this.hasAntlers());
+		compound.putBoolean("Trusting", this.isTrusting());
 	}
 
 	@Override
@@ -122,6 +126,7 @@ public class Deer extends Animal {
 		this.setCoatColor(compound.getInt("CoatColor"));
 		this.setCoatType(compound.getInt("CoatType"));
 		this.setHasAntlers(compound.getBoolean("Antlers"));
+		this.setTrusting(compound.getBoolean("Trusting"));
 	}
 
 	@Override
@@ -167,10 +172,8 @@ public class Deer extends Animal {
 	public void tick() {
 		super.tick();
 
-		if (this.level.isClientSide) {
-			this.updateNeckAngle();
-			this.updateSprintAnimation();
-		}
+		this.updateNeckAngle();
+		this.updateSprintAnimation();
 	}
 
 	private void updateNeckAngle() {
@@ -193,21 +196,30 @@ public class Deer extends Animal {
 		}
 	}
 
-	private void particleCloud(ParticleOptions particle) {
-		for (int i = 0; i < 7; ++i) {
-			double d0 = this.random.nextGaussian() * 0.02D;
-			double d1 = this.random.nextGaussian() * 0.02D;
-			double d2 = this.random.nextGaussian() * 0.02D;
-			this.level.addParticle(particle, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d0, d1, d2);
-		}
-	}
-
 	@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 		Item item = stack.getItem();
 
-		if (!this.isBaby()) {
+		if (!this.isTrusting()) {
+			if ((this.temptGoal == null || this.temptGoal.isRunning()) && this.isFood(stack)) {
+				if (!this.level.isClientSide) {
+					this.usePlayerItem(player, hand, stack);
+					if (this.random.nextInt(3) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player)) {
+						this.setTrusting(true);
+						this.spawnTrustingParticles(true);
+						this.level.broadcastEntityEvent(this, (byte)4);
+					} else {
+						this.spawnTrustingParticles(false);
+						this.level.broadcastEntityEvent(this, (byte)6);
+					}
+				}
+
+				return InteractionResult.sidedSuccess(this.level.isClientSide);
+			} else {
+				return InteractionResult.PASS;
+			}
+		} else if (!this.isBaby()) {
 			if (stack.is(Items.MELON_SLICE)) {
 				this.floweringTime += 200;
 				this.particleCloud(ParticleTypes.HAPPY_VILLAGER);
@@ -220,14 +232,49 @@ public class Deer extends Animal {
 				return InteractionResult.SUCCESS;
 			} else if (this.floweringTime > 0 && stack.is(ItemTags.FLOWERS) && item instanceof BlockItem block) {
 				if (!this.flowers.contains(block.getBlock().defaultBlockState())) {
-					flowers.add(block.getBlock().defaultBlockState());
+					this.flowers.add(block.getBlock().defaultBlockState());
 					this.particleCloud(ParticleTypes.HAPPY_VILLAGER);
 				}
 				this.usePlayerItem(player, hand, stack);
 				return InteractionResult.SUCCESS;
 			}
 		}
+
 		return super.mobInteract(player, hand);
+	}
+
+	@Override
+	public void handleEntityEvent(byte id) {
+		if (id == 4) {
+			this.spawnTrustingParticles(true);
+		} else if (id == 6) {
+			this.spawnTrustingParticles(false);
+		} else {
+			super.handleEntityEvent(id);
+		}
+	}
+
+	private void particleCloud(ParticleOptions particle) {
+		for (int i = 0; i < 7; ++i) {
+			double d0 = this.random.nextGaussian() * 0.02D;
+			double d1 = this.random.nextGaussian() * 0.02D;
+			double d2 = this.random.nextGaussian() * 0.02D;
+			this.level.addParticle(particle, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d0, d1, d2);
+		}
+	}
+
+	private void spawnTrustingParticles(boolean trusts) {
+		ParticleOptions particleoptions = ParticleTypes.HEART;
+		if (!trusts) {
+			particleoptions = ParticleTypes.SMOKE;
+		}
+
+		for(int i = 0; i < 7; ++i) {
+			double d0 = this.random.nextGaussian() * 0.02D;
+			double d1 = this.random.nextGaussian() * 0.02D;
+			double d2 = this.random.nextGaussian() * 0.02D;
+			this.level.addParticle(particleoptions, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d0, d1, d2);
+		}
 	}
 
 	@Override
@@ -322,6 +369,14 @@ public class Deer extends Animal {
 		return this.entityData.get(HAS_ANTLERS);
 	}
 
+	private void setTrusting(boolean trusting) {
+		this.entityData.set(TRUSTING, trusting);
+	}
+
+	public boolean isTrusting() {
+		return this.entityData.get(TRUSTING);
+	}
+
 	private void setHoliday() {
 		this.setCoatColor(DeerCoatColors.HOLIDAY.getId());
 		this.setHasAntlers(true);
@@ -339,11 +394,12 @@ public class Deer extends Animal {
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob ageable) {
 		Deer entity = EnvironmentalEntityTypes.DEER.get().create(world);
-		Deer parent = (Deer) ageable;
+		Deer partner = (Deer) ageable;
 		if (entity != null) {
-			entity.setCoatColor(this.random.nextBoolean() ? parent.getCoatColor() : this.getCoatColor());
-			entity.setCoatType(this.random.nextBoolean() ? parent.getCoatType() : this.getCoatType());
+			entity.setCoatColor(this.random.nextBoolean() ? partner.getCoatColor() : this.getCoatColor());
+			entity.setCoatType(this.random.nextBoolean() ? partner.getCoatType() : this.getCoatType());
 			entity.setHasAntlers(this.random.nextBoolean());
+			entity.setTrusting(this.isTrusting() || partner.isTrusting());
 			if (this.isHolidayCriteria())
 				entity.setHoliday();
 		}

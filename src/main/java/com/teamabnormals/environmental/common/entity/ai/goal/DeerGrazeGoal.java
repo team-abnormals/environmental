@@ -28,7 +28,7 @@ public class DeerGrazeGoal extends Goal {
 
 	@Override
 	public void start() {
-		this.grazeTime = 40 + this.deer.getRandom().nextInt(100);
+		this.grazeTime = this.adjustedTickDelay(40 + this.deer.getRandom().nextInt(100));
 		this.deer.setTargetNeckAngle(130);
 	}
 
