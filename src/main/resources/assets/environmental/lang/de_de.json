@@ -10,7 +10,7 @@
 	"block.environmental.mud_brick_vertical_slab": "Vertikale Schlammziegelstufe",
 	"block.environmental.chiseled_mud_bricks": "Gemeißelte Schlammziegel",
 	
-	"block.environmental.slabfish_effigy": "Slabfishbildnis",
+	"block.environmental.slabfish_effigy": "Slabfischgötze",
 	
 	"block.environmental.chiseled_bricks": "Gemeißelte Ziegelsteine",
 
@@ -275,8 +275,8 @@
 	"block.environmental.giant_lily_pad": "Riesiges Seerosenblatt",
 	
 	"block.environmental.cherry_crate": "Kirschkiste",
-	"block.environmental.yak_hair_block": "Yakhaarenblock",
-	"block.environmental.yak_hair_rug": "Yakhaarenteppich",
+	"block.environmental.yak_hair_block": "Yakhaarblock",
+	"block.environmental.yak_hair_rug": "Yakhaarteppich",
 	
 	"block.environmental.duckweed": "Wasserlinse",
 	"block.environmental.duckweed_thatch": "Wasserlinsenreetblock",
@@ -297,7 +297,7 @@
 	"block.environmental.duck_egg_crate": "Enteneikiste",
 	"block.environmental.turtle_egg_crate": "Schildkröteneikiste",
 	
-	"block.environmental.buried_truffle": "Erdverlegte Trüffel",
+	"block.environmental.buried_truffle": "Trüffelerde",
 	"block.environmental.truffle_crate": "Trüffelkiste",
 	
 	"item.environmental.wanderer_boots": "Stiefel des Wanderers",
@@ -306,7 +306,7 @@
 	"item.environmental.thief_hood": "Kapuze des Diebes",
 	"item.environmental.executioner_cleaver": "Hackmesser des Henkers",
 	
-	"item.environmental.slabfish_spawn_egg": "Slabfish-Spawn-Ei",
+	"item.environmental.slabfish_spawn_egg": "Slabfisch-Spawn-Ei",
 	"item.environmental.butterfly_spawn_egg": "Schmetterlings-Spawn-Ei",
 	"item.environmental.duck_spawn_egg": "Enten-Spawn-Ei",
 	"item.environmental.deer_spawn_egg": "Hirsch-Spawn-Ei",
@@ -315,12 +315,12 @@
 	"item.environmental.fennec_fox_spawn_egg": "Fennek-Spawn-Ei",
 	
 	"item.environmental.yak_hair": "Yakhaare",
-	"item.environmental.yak_pants": "Yakhaarenhose",
+	"item.environmental.yak_pants": "Yakhaarhose",
 	
 	"item.environmental.cattail_seeds": "Rohrkolbensamen",
   
-	"item.environmental.venison": "Rohes Wildfleisch",
-	"item.environmental.cooked_venison": "Gebratenes Wildfleisch",
+	"item.environmental.venison": "Rohes Rehfleisch",
+	"item.environmental.cooked_venison": "Gebratenes Rehfleisch",
 	"item.environmental.duck": "Rohes Entenfleisch",
 	"item.environmental.cooked_duck": "Gebratenes Entenfleisch",
 	"item.environmental.duck_egg": "Entenei",
@@ -331,11 +331,11 @@
 	
 	"item.environmental.koi": "Koi",
 	
-	"item.environmental.slabfish_bucket": "Slabfisheimer",
+	"item.environmental.slabfish_bucket": "Slabfischeimer",
 	"item.environmental.koi_bucket": "Koieimer",
 	"item.environmental.bottled_butterfly": "Schmetterlingsflasche",
 	
-	"item.environmental.mud_ball": "Schlammball",
+	"item.environmental.mud_ball": "Schlammklumpen",
 	"item.environmental.mud_brick": "Schlammziegel",
 	"item.environmental.mud_bucket": "Schlammeimer",
 	
@@ -352,7 +352,7 @@
 	"item.environmental.wisteria_boat": "Glyzinenholzboot",
 	
 	"item.environmental.music_disc_slabrave": "Schallplatte",
-	"item.environmental.music_disc_slabrave.desc": "Mista Jub - Slabrave",
+	"item.environmental.music_disc_slabrave.desc": "RENREN - Slabrave",
 	
 	"item.environmental.music_disc_leaving_home": "Schallplatte",
 	"item.environmental.music_disc_leaving_home.desc": "hatsondogs - Leaving Home",
@@ -371,8 +371,8 @@
 	"entity.minecraft.villager.environmental.ceramist": "Keramiker",
 	"entity.minecraft.villager.environmental.carpenter": "Zimmermann",
 	
-	"biome.environmental.marsh": "Marsch",
-	"biome.environmental.mushroom_marsh": "Pilzmarsch",
+	"biome.environmental.marsh": "Moor",
+	"biome.environmental.mushroom_marsh": "Pilzmoor",
 	"biome.environmental.mire": "Morast",
 	
 	"biome.environmental.blossom_woods": "Blütenwald",
@@ -381,7 +381,7 @@
 	"biome.environmental.blossom_valleys": "Blütentäler",
 	
 	"effect.environmental.panic": "Panik",
-	"effect.environmental.serenity": "Klarheit",
+	"effect.environmental.serenity": "Seelenfrieden",
 	
 	"item.minecraft.potion.effect.vitality": "Trank der Vitalität",
 	"item.minecraft.potion.effect.vitality_strong": "Trank der Vitalität",
@@ -401,28 +401,28 @@
 	"gui.environmental.category.baking": "Brennen",
 	"gui.environmental.category.sawing": "Sägen",
 
-	"generic.reachDistance": "Reichentfernung",
+	"generic.reachDistance": "Reichweite",
 	"attribute.name.generic.stealth": "Heimlichkeit",
 	
 	"advancements.environmental.husbandry.bred_all_slabfish.title": "Irre Genetik",
-	"advancements.environmental.husbandry.bred_all_slabfish.description": "Vermehre alle Slabfishvariante!",
+	"advancements.environmental.husbandry.bred_all_slabfish.description": "Züchte alle Slabfischarten!",
 	
-	"advancements.environmental.husbandry.backpack_slabfish.title": "Der Anfang des Schuljahres",
-	"advancements.environmental.husbandry.backpack_slabfish.description": "Gib einem Slabfish einen Rucksack",
+	"advancements.environmental.husbandry.backpack_slabfish.title": "Erster Schultag!",
+	"advancements.environmental.husbandry.backpack_slabfish.description": "Gib einem Slabfisch einen Rucksack",
 
 	"advancements.environmental.adventure.obtain_explorer_gear.title": "Swiper, Nicht Klauen!",
 	"advancements.environmental.adventure.obtain_explorer_gear.description": "Beschaff einen Teil der Rüstung des Entdeckers",
 
-	"advancements.environmental.adventure.upgrade_thief_hood.title": "Smooth Criminal",
+	"advancements.environmental.adventure.upgrade_thief_hood.title": "Gediegener Dieb",
 	"advancements.environmental.adventure.upgrade_thief_hood.description": "Beschaff die Kapuze des Diebes von Skeletten",
 
-	"advancements.environmental.adventure.upgrade_healer_pouch.title": "Panic! At the Stronghold",
+	"advancements.environmental.adventure.upgrade_healer_pouch.title": "Panik! In der Festung!",
 	"advancements.environmental.adventure.upgrade_healer_pouch.description": "Finde die Tasche des Heilers in Strongholds",
 
 	"advancements.environmental.adventure.upgrade_architect_belt.title": "Können wir das schaffen?",
 	"advancements.environmental.adventure.upgrade_architect_belt.description": "Kaufe den Gürtel des Architekten von Dorfbewohnern",
 
-	"advancements.environmental.adventure.upgrade_wanderer_boots.title": "Boots with the Fur",
+	"advancements.environmental.adventure.upgrade_wanderer_boots.title": "Siebenmeilenstiefel",
 	"advancements.environmental.adventure.upgrade_wanderer_boots.description": "Erhälte die Stiefel des Wanderers vom Fahrender Händler",
 	
 	"subtitles.environmental.entity.slabfish.burp": "Slabfish rülpst",

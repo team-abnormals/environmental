@@ -16,6 +16,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class FennecFoxModel<E extends FennecFox> extends AgeableListModel<E> {
 	public final ModelPart head;
+	public final ModelPart rightEar;
+	public final ModelPart leftEar;
 	private final ModelPart body;
 	private final ModelPart legBackRight;
 	private final ModelPart legBackLeft;
@@ -26,6 +28,8 @@ public class FennecFoxModel<E extends FennecFox> extends AgeableListModel<E> {
 
 	public FennecFoxModel(ModelPart root) {
 		this.head = root.getChild("head");
+		this.rightEar = root.getChild("rightEar");
+		this.leftEar = root.getChild("leftEar");
 		this.body = root.getChild("body");
 		this.tail = this.body.getChild("tail");
 		this.legBackRight = root.getChild("legBackRight");
@@ -38,6 +42,8 @@ public class FennecFoxModel<E extends FennecFox> extends AgeableListModel<E> {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition root = meshdefinition.getRoot();
 		PartDefinition head = root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-2.5F, -1.0F, -5.0F, 7.0F, 5.0F, 5.0F, false).texOffs(0, 10).addBox(-0.5F, 2.0F, -8.0F, 3.0F, 2.0F, 3.0F, false), PartPose.offsetAndRotation(-1.0F, 16.0F, -3.0F, 0.0F, 0.0F, 0.0F));
+		PartDefinition rightEar = root.addOrReplaceChild("rightEar", CubeListBuilder.create().texOffs(24, 0).addBox(-3.0F, -8.0F, -1.0F, 3.0F, 6.0F, 1.0F, false), PartPose.offsetAndRotation(1.0F, 1.0F, -1.0F, 0.0F, -0.4363F, -0.4363F));
+		PartDefinition leftEar = root.addOrReplaceChild("leftEar", CubeListBuilder.create().texOffs(32, 0).addBox(0.0F, -8.0F, -1.0F, 3.0F, 6.0F, 1.0F, false), PartPose.offsetAndRotation(1.0F, 1.0F, -1.0F, 0.0F, 0.4363F, 0.4363F));
 		PartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create().texOffs(12, 10).addBox(-2.5F, 2.0F, -3.0F, 5.0F, 6.0F, 4.0F, false), PartPose.offsetAndRotation(0.0F, 18.0F, -5.0F, 1.5708F, 0.0F, 0.0F));
 		PartDefinition tail = body.addOrReplaceChild("tail", CubeListBuilder.create().texOffs(0, 15).addBox(-3.5F, 0.0F, -1.0F, 3.0F, 8.0F, 3.0F, false), PartPose.offsetAndRotation(2.0F, 8.0F, -1.0F, -0.0524F, 0.0F, 0.0F));
 		PartDefinition legBackRight = root.addOrReplaceChild("legBackRight", CubeListBuilder.create().texOffs(28, 20).addBox(-3.0F, 0.5F, -1.0F, 2.0F, 4.0F, 2.0F, false), PartPose.offsetAndRotation(0.5F, 19.5F, 2.0F, 0.0F, 0.0F, 0.0F));
@@ -149,11 +155,5 @@ public class FennecFoxModel<E extends FennecFox> extends AgeableListModel<E> {
 	@Override
 	protected Iterable<ModelPart> bodyParts() {
 		return ImmutableList.of(this.body, this.legBackRight, this.legBackLeft, this.legFrontRight, this.legFrontLeft);
-	}
-
-	public void setRotationAngle(ModelPart ModelPart, float x, float y, float z) {
-		ModelPart.xRot = x;
-		ModelPart.yRot = y;
-		ModelPart.zRot = z;
 	}
 }
