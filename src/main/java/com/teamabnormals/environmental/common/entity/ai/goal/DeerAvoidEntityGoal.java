@@ -26,7 +26,6 @@ public class DeerAvoidEntityGoal extends Goal {
 	@Nullable
 	private LivingEntity toAvoid;
 	private boolean running;
-	private Vec3 avoidEntityOldPos;
 	private final TargetingConditions avoidEntityTargeting;
 
 	public DeerAvoidEntityGoal(Deer deerIn) {
@@ -38,9 +37,7 @@ public class DeerAvoidEntityGoal extends Goal {
 				return false;
 			} else if (entity.isDiscrete() || !EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(entity)) {
 				return false;
-			} else if (this.deer.isTrusting() && entity instanceof TamableAnimal && ((TamableAnimal) entity).isTame()) {
-				return false;
-			} else if (entity.getType().is(EnvironmentalTags.EntityTypes.ALWAYS_SCARES_DEER)) {
+			} else if (entity.getType().is(EnvironmentalTags.EntityTypes.ALWAYS_SCARES_DEER) && (!(entity instanceof TamableAnimal) || !((TamableAnimal) entity).isTame())) {
 				return true;
 			} else {
 				return !this.deer.isTrusting();
@@ -74,7 +71,7 @@ public class DeerAvoidEntityGoal extends Goal {
 	@Override
 	public void start() {
 		this.running = false;
-		this.avoidEntityOldPos = this.toAvoid.position();
+		this.flee();
 	}
 
 	@Override
@@ -87,19 +84,14 @@ public class DeerAvoidEntityGoal extends Goal {
 		if (this.pathNav.isDone())
 			this.flee();
 
-		if (!this.running) {
-			boolean flag = this.toAvoid.distanceToSqr(this.avoidEntityOldPos) >= 0.0625D;
-			if ((flag && this.deer.distanceToSqr(this.toAvoid) <= 49.0F) || (!flag && this.deer.distanceToSqr(this.toAvoid) <= 9.0F)) {
-				this.running = true;
-				this.deer.getNavigation().setSpeedModifier(1.75F);
-			}
-
-			this.avoidEntityOldPos = this.toAvoid.position();
+		if (!this.running && this.deer.distanceToSqr(this.toAvoid) <= 25.0F) {
+			this.running = true;
+			this.deer.getNavigation().setSpeedModifier(1.75F);
 		}
 	}
 
 	private void flee() {
-		Vec3 vec3 = DefaultRandomPos.getPosAway(this.deer, 16, 7, this.toAvoid.position());
+		Vec3 vec3 = DefaultRandomPos.getPosAway(this.deer, 12, 6, this.toAvoid.position());
 		if (vec3 != null && this.toAvoid.distanceToSqr(vec3.x, vec3.y, vec3.z) >= this.toAvoid.distanceToSqr(this.deer)) {
 			Path path = this.pathNav.createPath(vec3.x, vec3.y, vec3.z, 0);
 			this.pathNav.moveTo(path, this.running ? 1.75F : 1.2D);

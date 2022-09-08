@@ -10,6 +10,7 @@ import javax.annotation.Nullable;
 
 import com.teamabnormals.environmental.common.entity.ai.goal.DeerAvoidEntityGoal;
 import com.teamabnormals.environmental.common.entity.ai.goal.DeerGrazeGoal;
+import com.teamabnormals.environmental.common.entity.ai.goal.DeerRunFromAttackerGoal;
 import com.teamabnormals.environmental.common.entity.ai.goal.DeerTemptGoal;
 import com.teamabnormals.environmental.core.other.EnvironmentalTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
@@ -44,7 +45,6 @@ import net.minecraft.world.entity.ai.goal.BreedGoal;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.FollowParentGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.PanicGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
@@ -90,11 +90,11 @@ public class Deer extends Animal {
 	protected void registerGoals() {
 		this.temptGoal = new DeerTemptGoal(this, 0.6D, 1.1D, Ingredient.of(EnvironmentalTags.Items.DEER_TEMPT_ITEMS));
 		this.goalSelector.addGoal(0, new FloatGoal(this));
-		this.goalSelector.addGoal(1, new PanicGoal(this, 1.75D));
-		this.goalSelector.addGoal(2, new BreedGoal(this, 0.8D));
-		this.goalSelector.addGoal(3, new DeerAvoidEntityGoal(this));
+		this.goalSelector.addGoal(1, new DeerRunFromAttackerGoal(this));
+		this.goalSelector.addGoal(2, new DeerAvoidEntityGoal(this));
+		this.goalSelector.addGoal(3, new BreedGoal(this, 0.8D));
 		this.goalSelector.addGoal(4, this.temptGoal);
-		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
+		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.2D));
 		this.goalSelector.addGoal(5, new DeerGrazeGoal(this));
 		this.goalSelector.addGoal(6, new WaterAvoidingRandomStrollGoal(this, 0.8D));
 		this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
@@ -164,7 +164,7 @@ public class Deer extends Animal {
 
 	@Override
 	public void customServerAiStep() {
-		this.setSprinting(this.getMoveControl().hasWanted() && this.getMoveControl().getSpeedModifier() >= 1.75D);
+		this.setSprinting(!this.isInWater() && this.getMoveControl().hasWanted() && this.getMoveControl().getSpeedModifier() >= 1.75D);
 		super.customServerAiStep();
 	}
 
@@ -177,8 +177,8 @@ public class Deer extends Animal {
 	}
 
 	private void updateNeckAngle() {
-		int i = this.getTargetNeckAngle();
 		this.neckAngleO = this.neckAngle;
+		int i = this.getTargetNeckAngle();
 		float f = this.neckAngle + (i - this.neckAngle) * 0.3F;
 		if (this.neckAngle < i == f > i) {
 			this.neckAngle = i;
