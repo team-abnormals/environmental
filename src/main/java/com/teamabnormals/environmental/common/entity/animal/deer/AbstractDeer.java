@@ -1,7 +1,10 @@
 package com.teamabnormals.environmental.common.entity.animal.deer;
 
+import java.util.function.Predicate;
+
 import javax.annotation.Nullable;
 
+import com.teamabnormals.environmental.core.other.EnvironmentalTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSoundEvents;
 
 import net.minecraft.core.BlockPos;
@@ -14,21 +17,37 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.TamableAnimal;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 
 public abstract class AbstractDeer extends Animal {
-	private static final EntityDataAccessor<Integer> TARGET_NECK_ANGLE = SynchedEntityData.defineId(Wolf.class, EntityDataSerializers.INT);
+	private static final EntityDataAccessor<Integer> TARGET_NECK_ANGLE = SynchedEntityData.defineId(AbstractDeer.class, EntityDataSerializers.INT);
 	private static final EntityDataAccessor<Boolean> HAS_ANTLERS = SynchedEntityData.defineId(AbstractDeer.class, EntityDataSerializers.BOOLEAN);
 
 	private static final EntityDimensions GRAZING_DIMENSIONS = EntityDimensions.scalable(0.8F, 1.2F);
+
+	private static final Predicate<LivingEntity> AVOID_ENTITY_PREDICATE = (entity) -> {
+		return entity.getType().is(EnvironmentalTags.EntityTypes.SCARES_DEER) && !entity.isDiscrete() && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(entity);
+	};
+	private static final Predicate<LivingEntity> TRUSTING_AVOID_ENTITY_PREDICATE = (entity) -> {
+		if (!entity.getType().is(EnvironmentalTags.EntityTypes.SCARES_TRUSTING_DEER) || (entity instanceof TamableAnimal && ((TamableAnimal) entity).isTame())) {
+			return false;
+		} else {
+			return !entity.isDiscrete() && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(entity);
+		}
+	};
+	private static final TargetingConditions AVOID_ENTITY_TARGETING = TargetingConditions.forCombat().range(10.0D).selector(AVOID_ENTITY_PREDICATE);
+	private static final TargetingConditions TRUSTING_AVOID_ENTITY_TARGETING = TargetingConditions.forCombat().range(10.0D).selector(TRUSTING_AVOID_ENTITY_PREDICATE);
 
 	private float neckAngle;
 	private float neckAngleO;
@@ -171,6 +190,12 @@ public abstract class AbstractDeer extends Animal {
 
 	public boolean isTrusting() {
 		return false;
+	}
+
+	public LivingEntity getNearestScaryEntity() {
+		return this.level.getNearestEntity(this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(10.0D, 4.0D, 10.0D), (p_148124_) -> {
+			return true;
+		}), this.isTrusting() ? TRUSTING_AVOID_ENTITY_TARGETING : AVOID_ENTITY_TARGETING, this, this.getX(), this.getY(), this.getZ());
 	}
 
 	@Nullable

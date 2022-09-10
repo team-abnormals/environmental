@@ -9,6 +9,7 @@ import java.util.UUID;
 import javax.annotation.Nullable;
 
 import com.teamabnormals.environmental.common.entity.ai.goal.DeerAvoidEntityGoal;
+import com.teamabnormals.environmental.common.entity.ai.goal.DeerFollowParentGoal;
 import com.teamabnormals.environmental.common.entity.ai.goal.DeerGrazeGoal;
 import com.teamabnormals.environmental.common.entity.ai.goal.DeerRunFromAttackerGoal;
 import com.teamabnormals.environmental.common.entity.ai.goal.DeerTemptGoal;
@@ -37,7 +38,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.BreedGoal;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.FollowParentGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.TemptGoal;
@@ -56,9 +56,9 @@ import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class Deer extends AbstractDeer {
-	private static final EntityDataAccessor<Integer> DEER_COAT_COLOR = SynchedEntityData.defineId(AbstractDeer.class, EntityDataSerializers.INT);
-	private static final EntityDataAccessor<Integer> DEER_COAT_TYPE = SynchedEntityData.defineId(AbstractDeer.class, EntityDataSerializers.INT);
-	private static final EntityDataAccessor<Boolean> TRUSTING = SynchedEntityData.defineId(AbstractDeer.class, EntityDataSerializers.BOOLEAN);
+	private static final EntityDataAccessor<Integer> DEER_COAT_COLOR = SynchedEntityData.defineId(Deer.class, EntityDataSerializers.INT);
+	private static final EntityDataAccessor<Integer> DEER_COAT_TYPE = SynchedEntityData.defineId(Deer.class, EntityDataSerializers.INT);
+	private static final EntityDataAccessor<Boolean> TRUSTING = SynchedEntityData.defineId(Deer.class, EntityDataSerializers.BOOLEAN);
 
 	private static final UUID SPEED_MODIFIER = UUID.fromString("a21208ef-5399-4341-800f-d5a9152afe98");
 	private int floweringTime;
@@ -79,7 +79,7 @@ public class Deer extends AbstractDeer {
 		this.goalSelector.addGoal(2, new DeerAvoidEntityGoal(this));
 		this.goalSelector.addGoal(3, new BreedGoal(this, 0.8D));
 		this.goalSelector.addGoal(4, this.temptGoal);
-		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.2D));
+		this.goalSelector.addGoal(4, new DeerFollowParentGoal(this));
 		this.goalSelector.addGoal(5, new DeerGrazeGoal(this));
 		this.goalSelector.addGoal(6, new WaterAvoidingRandomStrollGoal(this, 0.8D));
 		this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));

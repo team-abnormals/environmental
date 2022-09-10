@@ -10,7 +10,6 @@ import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.FollowParentGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
@@ -28,11 +27,10 @@ public class ZombieDeer extends AbstractDeer {
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new FloatGoal(this));
-		this.goalSelector.addGoal(1, new FollowParentGoal(this, 1.2D));
-		this.goalSelector.addGoal(2, new DeerGrazeGoal(this));
-		this.goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 0.8D));
-		this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 6.0F));
-		this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
+		this.goalSelector.addGoal(1, new DeerGrazeGoal(this));
+		this.goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 0.8D));
+		this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 6.0F));
+		this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
 	}
 
 	public static AttributeSupplier.Builder registerAttributes() {

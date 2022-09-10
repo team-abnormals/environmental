@@ -4,6 +4,6 @@
     "minecraft:player",
     "minecraft:villager",
     "minecraft:wandering_trader",
-    "#environmental:always_scares_deer"
+    "#environmental:scares_trusting_deer"
   ]
 }
