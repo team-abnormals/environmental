@@ -165,6 +165,7 @@ public class Environmental {
 		event.registerEntityRenderer(EnvironmentalEntityTypes.SLABFISH.get(), SlabfishRenderer::new);
 		event.registerEntityRenderer(EnvironmentalEntityTypes.DUCK.get(), DuckRenderer::new);
 		event.registerEntityRenderer(EnvironmentalEntityTypes.DEER.get(), DeerRenderer::new);
+		event.registerEntityRenderer(EnvironmentalEntityTypes.ZOMBIE_DEER.get(), ZombieDeerRenderer::new);
 		event.registerEntityRenderer(EnvironmentalEntityTypes.YAK.get(), YakRenderer::new);
 		event.registerEntityRenderer(EnvironmentalEntityTypes.KOI.get(), KoiRenderer::new);
 		event.registerEntityRenderer(EnvironmentalEntityTypes.FENNEC_FOX.get(), FennecFoxRenderer::new);

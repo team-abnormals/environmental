@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 
 import javax.annotation.Nullable;
 
-import com.teamabnormals.environmental.common.entity.animal.deer.Deer;
+import com.teamabnormals.environmental.common.entity.animal.deer.AbstractDeer;
 import com.teamabnormals.environmental.core.other.EnvironmentalTags;
 
 import net.minecraft.world.entity.EntitySelector;
@@ -20,7 +20,7 @@ import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.phys.Vec3;
 
 public class DeerAvoidEntityGoal extends Goal {
-	private final Deer deer;
+	private final AbstractDeer deer;
 	private final Level level;
 	private final PathNavigation pathNav;
 	@Nullable
@@ -28,7 +28,7 @@ public class DeerAvoidEntityGoal extends Goal {
 	private boolean running;
 	private final TargetingConditions avoidEntityTargeting;
 
-	public DeerAvoidEntityGoal(Deer deerIn) {
+	public DeerAvoidEntityGoal(AbstractDeer deerIn) {
 		this.deer = deerIn;
 		this.level = deerIn.getLevel();
 		this.pathNav = deerIn.getNavigation();

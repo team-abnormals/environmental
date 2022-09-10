@@ -3,7 +3,7 @@ package com.teamabnormals.environmental.client.model;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.teamabnormals.environmental.common.entity.animal.deer.Deer;
+import com.teamabnormals.environmental.common.entity.animal.deer.AbstractDeer;
 import net.minecraft.client.model.AgeableListModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -18,7 +18,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * @param <E>
  */
 @OnlyIn(Dist.CLIENT)
-public class DeerModel<E extends Deer> extends AgeableListModel<E> {
+public class DeerModel<E extends AbstractDeer> extends AgeableListModel<E> {
 	private boolean hasAntlers;
 	private float neckAngle;
 	private float sprintAmount;

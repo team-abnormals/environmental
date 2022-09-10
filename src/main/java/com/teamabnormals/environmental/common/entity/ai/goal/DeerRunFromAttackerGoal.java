@@ -2,7 +2,7 @@ package com.teamabnormals.environmental.common.entity.ai.goal;
 
 import java.util.EnumSet;
 
-import com.teamabnormals.environmental.common.entity.animal.deer.Deer;
+import com.teamabnormals.environmental.common.entity.animal.deer.AbstractDeer;
 
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.LivingEntity;
@@ -13,10 +13,10 @@ import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.phys.Vec3;
 
 public class DeerRunFromAttackerGoal extends Goal {
-	private final Deer deer;
+	private final AbstractDeer deer;
 	private final PathNavigation pathNav;
 
-	public DeerRunFromAttackerGoal(Deer deerIn) {
+	public DeerRunFromAttackerGoal(AbstractDeer deerIn) {
 		this.deer = deerIn;
 		this.pathNav = deerIn.getNavigation();
 		this.setFlags(EnumSet.of(Goal.Flag.MOVE));
