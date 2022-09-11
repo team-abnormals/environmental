@@ -4,7 +4,6 @@ import com.teamabnormals.environmental.client.model.DeerModel;
 import com.teamabnormals.environmental.common.entity.animal.deer.ZombieDeer;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.other.EnvironmentalModelLayers;
-
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;

@@ -1,5 +1,6 @@
 package com.teamabnormals.environmental.common.levelgen.feature;
 
+import com.google.common.collect.Sets;
 import com.mojang.serialization.Codec;
 import com.teamabnormals.blueprint.core.util.TreeUtil;
 import com.teamabnormals.environmental.common.levelgen.util.WisteriaTreeUtil;
@@ -15,6 +16,7 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 
 import java.util.Random;
+import java.util.Set;
 import java.util.function.Supplier;
 
 public class BigWisteriaTreeFeature extends Feature<TreeConfiguration> {
@@ -31,6 +33,8 @@ public class BigWisteriaTreeFeature extends Feature<TreeConfiguration> {
 		Random random = context.random();
 		BlockPos pos = context.origin();
 		TreeConfiguration config = context.config();
+
+		Set<BlockPos> logPosSet = Sets.newHashSet();
 
 		if (config.foliageProvider.getState(random, pos) == EnvironmentalFeatures.States.BLUE_WISTERIA_LEAVES) {
 			VINE_UPPER = () -> EnvironmentalFeatures.States.BLUE_HANGING_WISTERIA_LEAVES_TOP;
@@ -84,7 +88,8 @@ public class BigWisteriaTreeFeature extends Feature<TreeConfiguration> {
 					int size = random.nextInt(3) + 5;
 					for (int j = 1; j <= size; j++) {
 						position = position.offset(random.nextInt(2) - (xNeg ? 1 : 0), random.nextInt(2), random.nextInt(2) - (zNeg ? 1 : 0));
-						TreeUtil.setForcedState(world, position, config.trunkProvider.getState(random, pos));
+						TreeUtil.placeLogAt(world, position, random, config);
+						logPosSet.add(position.immutable());
 						if (j == size) {
 							for (int y = 4; y > -4; --y) {
 								for (int x = 4; x > -4; --x) {
@@ -114,6 +119,7 @@ public class BigWisteriaTreeFeature extends Feature<TreeConfiguration> {
 				for (int i2 = 0; i2 < height; ++i2) {
 					if (WisteriaTreeUtil.isAirOrLeavesOrReplaceable(world, pos.above(i2))) {
 						TreeUtil.placeLogAt(world, pos.above(i2), random, config);
+						logPosSet.add(pos.above(i2).immutable());
 					}
 				}
 
@@ -128,6 +134,7 @@ public class BigWisteriaTreeFeature extends Feature<TreeConfiguration> {
 					}
 				}
 
+				TreeUtil.updateLeaves(world, logPosSet);
 				return true;
 			} else {
 				return false;

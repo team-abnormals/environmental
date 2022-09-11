@@ -1,5 +1,6 @@
 package com.teamabnormals.environmental.common.levelgen.feature;
 
+import com.google.common.collect.Sets;
 import com.mojang.serialization.Codec;
 import com.teamabnormals.blueprint.core.util.TreeUtil;
 import net.minecraft.core.BlockPos;
@@ -12,8 +13,11 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 
 import java.util.Random;
+import java.util.Set;
 
 public class CherryTreeFeature extends Feature<TreeConfiguration> {
+	private Set<BlockPos> logPosSet;
+
 	public CherryTreeFeature(Codec<TreeConfiguration> config) {
 		super(config);
 	}
@@ -28,6 +32,7 @@ public class CherryTreeFeature extends Feature<TreeConfiguration> {
 		int height = 5 + rand.nextInt(3) + rand.nextInt(3) + rand.nextInt(3);
 		boolean flag = true;
 
+		this.logPosSet = Sets.newHashSet();
 		if (position.getY() >= 1 && position.getY() + height + 1 <= worldIn.getMaxBuildHeight()) {
 			for (int j = position.getY(); j <= position.getY() + 1 + height; ++j) {
 				int k = 1;
@@ -57,6 +62,7 @@ public class CherryTreeFeature extends Feature<TreeConfiguration> {
 					BlockPos blockpos = new BlockPos(logX, logY, logZ);
 					if (TreeUtil.isAirOrLeaves(worldIn, blockpos)) {
 						TreeUtil.placeLogAt(worldIn, blockpos.above(), rand, config);
+						logPosSet.add(blockpos.above().immutable());
 					}
 				}
 
@@ -64,13 +70,18 @@ public class CherryTreeFeature extends Feature<TreeConfiguration> {
 					BlockPos stumpPos = position.relative(direction);
 					if (TreeUtil.isAirOrLeaves(worldIn, stumpPos) && isGrassOrDirt(worldIn, stumpPos.below())) {
 						TreeUtil.placeLogAt(worldIn, stumpPos, rand, config);
+						logPosSet.add(stumpPos.immutable());
 						TreeUtil.setDirtAt(worldIn, stumpPos.below());
 						BlockPos sideStumpPos = stumpPos.relative(direction.getClockWise());
 						if (rand.nextBoolean() && isGrassOrDirt(worldIn, sideStumpPos.below()) && TreeUtil.isAirOrLeaves(worldIn, sideStumpPos)) {
 							TreeUtil.placeLogAt(worldIn, sideStumpPos, rand, config);
+							logPosSet.add(sideStumpPos.immutable());
 							TreeUtil.setDirtAt(worldIn, sideStumpPos.below());
 						}
-						if (rand.nextBoolean() && TreeUtil.isAirOrLeaves(worldIn, stumpPos.above())) TreeUtil.placeLogAt(worldIn, stumpPos.above(), rand, config);
+						if (rand.nextBoolean() && TreeUtil.isAirOrLeaves(worldIn, stumpPos.above())) {
+							TreeUtil.placeLogAt(worldIn, stumpPos.above(), rand, config);
+							logPosSet.add(stumpPos.above().immutable());
+						}
 					}
 				});
 
@@ -81,6 +92,8 @@ public class CherryTreeFeature extends Feature<TreeConfiguration> {
 						this.createCherryLeaves(worldIn, newPos.above(2).below(i), rand, i, config);
 					}
 				});
+
+				TreeUtil.updateLeaves(worldIn, this.logPosSet);
 				return true;
 			} else {
 				return false;
@@ -150,6 +163,7 @@ public class CherryTreeFeature extends Feature<TreeConfiguration> {
 			BlockPos blockpos1 = new BlockPos(logX, logY, logZ);
 			if (TreeUtil.isAirOrLeaves(worldIn, blockpos1)) {
 				TreeUtil.placeLogAt(worldIn, blockpos1.above(), rand, config);
+				logPosSet.add(blockpos1.above().immutable());
 			}
 		}
 	}

@@ -1,11 +1,6 @@
 package com.teamabnormals.environmental.common.entity.ai.goal;
 
-import java.util.EnumSet;
-
-import javax.annotation.Nullable;
-
 import com.teamabnormals.environmental.common.entity.animal.deer.AbstractDeer;
-
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
@@ -13,6 +8,9 @@ import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.util.DefaultRandomPos;
 import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.phys.Vec3;
+
+import javax.annotation.Nullable;
+import java.util.EnumSet;
 
 public class DeerAvoidEntityGoal extends Goal {
 	private final AbstractDeer deer;

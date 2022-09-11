@@ -1,13 +1,12 @@
 package com.teamabnormals.environmental.common.entity.ai.goal;
 
-import java.util.EnumSet;
-
 import com.teamabnormals.environmental.common.entity.animal.deer.AbstractDeer;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+
+import java.util.EnumSet;
 
 public class DeerGrazeGoal extends Goal {
 	private final AbstractDeer deer;

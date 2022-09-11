@@ -1,7 +1,6 @@
 package com.teamabnormals.environmental.common.entity.ai.goal;
 
 import com.teamabnormals.environmental.common.entity.animal.deer.AbstractDeer;
-
 import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.item.crafting.Ingredient;
 

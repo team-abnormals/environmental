@@ -2,13 +2,11 @@ package com.teamabnormals.environmental.common.entity.ai.goal;
 
 import com.teamabnormals.environmental.common.entity.animal.deer.AbstractDeer;
 import com.teamabnormals.environmental.common.entity.animal.deer.Deer;
-
 import net.minecraft.world.entity.ai.goal.FollowParentGoal;
 
 public class DeerFollowParentGoal extends FollowParentGoal {
 
-	public DeerFollowParentGoal(Deer deer)
-	{
+	public DeerFollowParentGoal(Deer deer) {
 		super(deer, 1.2D);
 	}
 

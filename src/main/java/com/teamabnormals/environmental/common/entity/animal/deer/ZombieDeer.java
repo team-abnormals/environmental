@@ -2,7 +2,6 @@ package com.teamabnormals.environmental.common.entity.animal.deer;
 
 import com.teamabnormals.environmental.common.entity.ai.goal.DeerGrazeGoal;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
-
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;

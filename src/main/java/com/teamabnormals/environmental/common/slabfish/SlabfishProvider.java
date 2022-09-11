@@ -6,7 +6,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mojang.logging.LogUtils;
 import com.teamabnormals.environmental.core.Environmental;
-import net.minecraft.advancements.Advancement;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
@@ -14,7 +13,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.Tag.Builder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.slf4j.Logger;
-import org.spongepowered.asm.util.IConsumer;
 
 import javax.annotation.Nullable;
 import java.io.IOException;
