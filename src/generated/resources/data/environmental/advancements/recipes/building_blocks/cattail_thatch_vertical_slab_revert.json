@@ -1,0 +1,46 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "flag": "vertical_slabs",
+          "type": "blueprint:quark_flag"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "environmental:cattail_thatch_vertical_slab_revert"
+          ]
+        },
+        "criteria": {
+          "has_cattail_thatch_vertical_slab": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "environmental:cattail_thatch_vertical_slab"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "environmental:cattail_thatch_vertical_slab_revert"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "has_cattail_thatch_vertical_slab",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}

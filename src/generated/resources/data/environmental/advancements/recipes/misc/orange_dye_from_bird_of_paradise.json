@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "environmental:orange_dye_from_bird_of_paradise"
+    ]
+  },
+  "criteria": {
+    "has_bird_of_paradise": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "environmental:bird_of_paradise"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "environmental:orange_dye_from_bird_of_paradise"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_bird_of_paradise",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "environmental:lime_dye_from_dianthus"
+    ]
+  },
+  "criteria": {
+    "has_dianthus": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "environmental:dianthus"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "environmental:lime_dye_from_dianthus"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_dianthus",
+      "has_the_recipe"
+    ]
+  ]
+}

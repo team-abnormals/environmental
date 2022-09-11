@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "environmental:blue_dye_from_bluebell"
+    ]
+  },
+  "criteria": {
+    "has_bluebell": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "environmental:bluebell"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "environmental:blue_dye_from_bluebell"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_bluebell",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "flag": "hedges",
+          "type": "blueprint:quark_flag"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "group": "hedge",
+        "pattern": [
+          "#",
+          "L"
+        ],
+        "key": {
+          "#": {
+            "item": "environmental:purple_wisteria_leaves"
+          },
+          "L": {
+            "tag": "environmental:wisteria_logs"
+          }
+        },
+        "result": {
+          "item": "environmental:purple_wisteria_hedge",
+          "count": 2
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "flag": "vertical_slabs",
+          "type": "blueprint:quark_flag"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shapeless",
+        "ingredients": [
+          {
+            "item": "environmental:grass_thatch_slab"
+          }
+        ],
+        "result": {
+          "item": "environmental:grass_thatch_vertical_slab"
+        }
+      }
+    }
+  ]
+}

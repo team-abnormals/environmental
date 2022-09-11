@@ -1,0 +1,25 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "modid": "incubation",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shapeless",
+        "ingredients": [
+          {
+            "item": "environmental:duck_egg_crate"
+          }
+        ],
+        "result": {
+          "item": "environmental:duck_egg",
+          "count": 9
+        }
+      }
+    }
+  ]
+}

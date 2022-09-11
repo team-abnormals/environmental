@@ -14,6 +14,12 @@ public class EnvironmentalTags {
 	}
 
 	public static class Items {
+		public static final TagKey<Item> WILLOW_LOGS = itemTag("willow_logs");
+		public static final TagKey<Item> WISTERIA_LOGS = itemTag("wisteria_logs");
+		public static final TagKey<Item> CHERRY_LOGS = itemTag("cherry_logs");
+
+		public static final TagKey<Item> FRUITS_CHERRY = TagUtil.itemTag("forge", "fruits/cherry");
+
 		public static final TagKey<Item> DUCK_FOOD = itemTag("duck_food");
 		public static final TagKey<Item> DEER_FOOD = itemTag("deer_food");
 		public static final TagKey<Item> DEER_TEMPT_ITEMS = itemTag("deer_tempt_items");

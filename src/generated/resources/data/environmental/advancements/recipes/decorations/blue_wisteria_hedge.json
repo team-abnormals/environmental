@@ -1,0 +1,46 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "flag": "hedges",
+          "type": "blueprint:quark_flag"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "environmental:blue_wisteria_hedge"
+          ]
+        },
+        "criteria": {
+          "has_blue_wisteria_leaves": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "environmental:blue_wisteria_leaves"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "environmental:blue_wisteria_hedge"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "has_blue_wisteria_leaves",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}

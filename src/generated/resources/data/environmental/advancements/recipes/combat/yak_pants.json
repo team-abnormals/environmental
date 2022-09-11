@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "environmental:yak_pants"
+    ]
+  },
+  "criteria": {
+    "has_yak_hair": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "environmental:yak_hair"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "environmental:yak_pants"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_yak_hair",
+      "has_the_recipe"
+    ]
+  ]
+}

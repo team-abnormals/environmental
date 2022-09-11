@@ -1,0 +1,29 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "flag": "leaf_carpet",
+          "type": "blueprint:quark_flag"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "group": "leaf_carpet",
+        "pattern": [
+          "##"
+        ],
+        "key": {
+          "#": {
+            "item": "environmental:pink_wisteria_leaves"
+          }
+        },
+        "result": {
+          "item": "environmental:pink_wisteria_leaf_carpet",
+          "count": 3
+        }
+      }
+    }
+  ]
+}

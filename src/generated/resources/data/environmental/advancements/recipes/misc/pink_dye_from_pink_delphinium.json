@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "environmental:pink_dye_from_pink_delphinium"
+    ]
+  },
+  "criteria": {
+    "has_pink_delphinium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "environmental:pink_delphinium"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "environmental:pink_dye_from_pink_delphinium"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_pink_delphinium",
+      "has_the_recipe"
+    ]
+  ]
+}

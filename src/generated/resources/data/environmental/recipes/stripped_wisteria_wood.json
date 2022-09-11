@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "bark",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "environmental:stripped_wisteria_log"
+    }
+  },
+  "result": {
+    "item": "environmental:stripped_wisteria_wood",
+    "count": 3
+  }
+}

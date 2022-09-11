@@ -1,0 +1,31 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "flag": "vertical_planks",
+          "type": "blueprint:quark_flag"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "group": "vertical_planks",
+        "pattern": [
+          "#",
+          "#",
+          "#"
+        ],
+        "key": {
+          "#": {
+            "item": "environmental:willow_planks"
+          }
+        },
+        "result": {
+          "item": "environmental:vertical_willow_planks",
+          "count": 3
+        }
+      }
+    }
+  ]
+}
