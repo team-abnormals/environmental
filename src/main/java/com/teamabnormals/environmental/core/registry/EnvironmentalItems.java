@@ -3,6 +3,7 @@ package com.teamabnormals.environmental.core.registry;
 import com.teamabnormals.blueprint.common.item.BlueprintMobBucketItem;
 import com.teamabnormals.blueprint.common.item.BlueprintRecordItem;
 import com.teamabnormals.blueprint.common.item.FuelItem;
+import com.teamabnormals.blueprint.core.util.registry.AbstractSubRegistryHelper;
 import com.teamabnormals.blueprint.core.util.registry.ItemSubRegistryHelper;
 import com.teamabnormals.environmental.common.item.*;
 import com.teamabnormals.environmental.common.item.explorer.ArchitectBeltItem;
@@ -11,6 +12,7 @@ import com.teamabnormals.environmental.common.item.explorer.ThiefHoodItem;
 import com.teamabnormals.environmental.common.item.explorer.WandererBootsItem;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.other.EnvironmentalTiers;
+import com.teamabnormals.environmental.integration.boatload.EnvironmentalBoatTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -19,6 +21,7 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.ForgeSpawnEggItem;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -54,9 +57,20 @@ public class EnvironmentalItems {
 	public static final RegistryObject<Item> YAK_PANTS = HELPER.createItem("yak_pants", () -> new YakPantsItem(EnvironmentalTiers.Armor.YAK, EquipmentSlot.LEGS, new Item.Properties().tab(CreativeModeTab.TAB_COMBAT)));
 
 	public static final RegistryObject<Item> WILLOW_BOAT = HELPER.createBoatItem("willow", EnvironmentalBlocks.WILLOW_PLANKS);
+	public static final RegistryObject<Item> WILLOW_CHEST_BOAT = HELPER.createItem("willow_chest_boat", ModList.get().isLoaded("boatload") ? EnvironmentalBoatTypes.WILLOW_CHEST_BOAT : () -> new Item(new Item.Properties().tab(AbstractSubRegistryHelper.areModsLoaded("boatload") ? CreativeModeTab.TAB_TRANSPORTATION : null)));
+	public static final RegistryObject<Item> WILLOW_FURNACE_BOAT = HELPER.createItem("willow_furnace_boat", ModList.get().isLoaded("boatload") ? EnvironmentalBoatTypes.WILLOW_FURNACE_BOAT : () -> new Item(new Item.Properties().tab(AbstractSubRegistryHelper.areModsLoaded("boatload") ? CreativeModeTab.TAB_TRANSPORTATION : null)));
+	public static final RegistryObject<Item> LARGE_WILLOW_BOAT = HELPER.createItem("large_willow_boat", ModList.get().isLoaded("boatload") ? EnvironmentalBoatTypes.LARGE_WILLOW_BOAT : () -> new Item(new Item.Properties().tab(AbstractSubRegistryHelper.areModsLoaded("boatload") ? CreativeModeTab.TAB_TRANSPORTATION : null)));
+	
 	public static final RegistryObject<Item> WISTERIA_BOAT = HELPER.createBoatItem("wisteria", EnvironmentalBlocks.WISTERIA_PLANKS);
+	public static final RegistryObject<Item> WISTERIA_CHEST_BOAT = HELPER.createItem("wisteria_chest_boat", ModList.get().isLoaded("boatload") ? EnvironmentalBoatTypes.WISTERIA_CHEST_BOAT : () -> new Item(new Item.Properties().tab(AbstractSubRegistryHelper.areModsLoaded("boatload") ? CreativeModeTab.TAB_TRANSPORTATION : null)));
+	public static final RegistryObject<Item> WISTERIA_FURNACE_BOAT = HELPER.createItem("wisteria_furnace_boat", ModList.get().isLoaded("boatload") ? EnvironmentalBoatTypes.WISTERIA_FURNACE_BOAT : () -> new Item(new Item.Properties().tab(AbstractSubRegistryHelper.areModsLoaded("boatload") ? CreativeModeTab.TAB_TRANSPORTATION : null)));
+	public static final RegistryObject<Item> LARGE_WISTERIA_BOAT = HELPER.createItem("large_wisteria_boat", ModList.get().isLoaded("boatload") ? EnvironmentalBoatTypes.LARGE_WISTERIA_BOAT : () -> new Item(new Item.Properties().tab(AbstractSubRegistryHelper.areModsLoaded("boatload") ? CreativeModeTab.TAB_TRANSPORTATION : null)));
+	
 	public static final RegistryObject<Item> CHERRY_BOAT = HELPER.createBoatItem("cherry", EnvironmentalBlocks.CHERRY_PLANKS);
-
+	public static final RegistryObject<Item> CHERRY_CHEST_BOAT = HELPER.createItem("cherry_chest_boat", ModList.get().isLoaded("boatload") ? EnvironmentalBoatTypes.CHERRY_CHEST_BOAT : () -> new Item(new Item.Properties().tab(AbstractSubRegistryHelper.areModsLoaded("boatload") ? CreativeModeTab.TAB_TRANSPORTATION : null)));
+	public static final RegistryObject<Item> CHERRY_FURNACE_BOAT = HELPER.createItem("cherry_furnace_boat", ModList.get().isLoaded("boatload") ? EnvironmentalBoatTypes.CHERRY_FURNACE_BOAT : () -> new Item(new Item.Properties().tab(AbstractSubRegistryHelper.areModsLoaded("boatload") ? CreativeModeTab.TAB_TRANSPORTATION : null)));
+	public static final RegistryObject<Item> LARGE_CHERRY_BOAT = HELPER.createItem("large_cherry_boat", ModList.get().isLoaded("boatload") ? EnvironmentalBoatTypes.LARGE_CHERRY_BOAT : () -> new Item(new Item.Properties().tab(AbstractSubRegistryHelper.areModsLoaded("boatload") ? CreativeModeTab.TAB_TRANSPORTATION : null)));
+	
 	public static final RegistryObject<Item> CATTAIL_SEEDS = HELPER.createItem("cattail_seeds", () -> new ItemNameBlockItem(EnvironmentalBlocks.CATTAIL_SPROUTS.get(), new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
 	public static final RegistryObject<Item> DUCKWEED = HELPER.createItem("duckweed", () -> new WaterLilyBlockItem(EnvironmentalBlocks.DUCKWEED.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
 
