@@ -13,6 +13,7 @@ import com.teamabnormals.environmental.core.other.EnvironmentalDataSerializers;
 import com.teamabnormals.environmental.core.other.EnvironmentalModelLayers;
 import com.teamabnormals.environmental.core.registry.*;
 import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures.EnvironmentalConfiguredFeatures;
+import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures.EnvironmentalPlacedFeatures;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.data.DataGenerator;
@@ -69,6 +70,7 @@ public class Environmental {
 		EnvironmentalFeatures.FEATURES.register(bus);
 		EnvironmentalFeatures.TREE_DECORATORS.register(bus);
 		EnvironmentalConfiguredFeatures.CONFIGURED_FEATURES.register(bus);
+		EnvironmentalPlacedFeatures.PLACED_FEATURES.register(bus);
 		EnvironmentalAttributes.ATTRIBUTES.register(bus);
 		EnvironmentalMobEffects.MOB_EFFECTS.register(bus);
 		EnvironmentalMobEffects.POTIONS.register(bus);
