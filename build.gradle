@@ -60,6 +60,7 @@ minecraft {
             property "forge.logging.console.level", "debug"
             property "mixin.env.remapRefMap", "true"
             property "mixin.env.refMapRemappingFile", "${projectDir}/build/createSrgToMcp/output.srg"
+            property "blueprint.indev", "true"
             args "--mod", project.modId, "--all", "--output", file("src/generated/resources/"), "--existing", file("src/main/resources")
             mods {
                 environmental {
@@ -78,6 +79,8 @@ dependencies {
     minecraft "net.minecraftforge:forge:${project.minecraft}-${project.forge}"
     implementation fg.deobf("com.teamabnormals:blueprint:${project.minecraft}-${project.blueprint}")
 
+    compileOnly fg.deobf("curse.maven:incubation-361718:3898465")
+    compileOnly fg.deobf("com.teamabnormals:boatload:${project.minecraft}-${project.boatload}")
     compileOnly fg.deobf("mezz.jei:jei-${project.minecraft}:${project.jei}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${project.minecraft}:${project.jei}")
 
@@ -88,6 +91,7 @@ repositories {
     maven { url "https://maven.jaackson.me" }
     maven { url "https://dvs1.progwml6.com/files/maven/" }
     maven { url "https://modmaven.k-4u.nl" }
+    maven { url "https://www.cursemaven.com" }
 }
 
 jar {

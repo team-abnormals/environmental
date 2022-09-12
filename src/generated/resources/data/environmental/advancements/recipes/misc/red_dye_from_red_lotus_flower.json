@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "environmental:red_dye_from_red_lotus_flower"
+    ]
+  },
+  "criteria": {
+    "has_red_lotus_flower": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "environmental:red_lotus_flower"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "environmental:red_dye_from_red_lotus_flower"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_red_lotus_flower",
+      "has_the_recipe"
+    ]
+  ]
+}

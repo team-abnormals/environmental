@@ -1,0 +1,53 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "values": [
+            {
+              "flag": "variant_chests",
+              "type": "blueprint:quark_flag"
+            },
+            {
+              "flag": "wood_to_chest_recipes",
+              "type": "blueprint:quark_flag"
+            }
+          ],
+          "type": "forge:and"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "environmental:cherry_chest_wood"
+          ]
+        },
+        "criteria": {
+          "has_lots_of_items": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "slots": {
+                "occupied": {
+                  "min": 10
+                }
+              }
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "environmental:cherry_chest_wood"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "has_lots_of_items",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}

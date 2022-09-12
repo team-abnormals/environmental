@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "environmental:grass_thatch_stairs"
+    ]
+  },
+  "criteria": {
+    "has_grass_thatch": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "environmental:grass_thatch"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "environmental:grass_thatch_stairs"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_grass_thatch",
+      "has_the_recipe"
+    ]
+  ]
+}

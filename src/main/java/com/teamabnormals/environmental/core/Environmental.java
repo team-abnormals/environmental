@@ -6,12 +6,14 @@ import com.teamabnormals.environmental.client.renderer.entity.*;
 import com.teamabnormals.environmental.client.resources.SlabfishSpriteUploader;
 import com.teamabnormals.environmental.common.network.message.*;
 import com.teamabnormals.environmental.common.slabfish.SlabfishLoader;
+import com.teamabnormals.environmental.core.data.server.EnvironmentalRecipeProvider;
 import com.teamabnormals.environmental.core.other.EnvironmentalCompat;
 import com.teamabnormals.environmental.core.other.EnvironmentalDataProcessors;
 import com.teamabnormals.environmental.core.other.EnvironmentalDataSerializers;
 import com.teamabnormals.environmental.core.other.EnvironmentalModelLayers;
 import com.teamabnormals.environmental.core.registry.*;
 import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures.EnvironmentalConfiguredFeatures;
+import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures.EnvironmentalPlacedFeatures;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.data.DataGenerator;
@@ -68,6 +70,7 @@ public class Environmental {
 		EnvironmentalFeatures.FEATURES.register(bus);
 		EnvironmentalFeatures.TREE_DECORATORS.register(bus);
 		EnvironmentalConfiguredFeatures.CONFIGURED_FEATURES.register(bus);
+		EnvironmentalPlacedFeatures.PLACED_FEATURES.register(bus);
 		EnvironmentalAttributes.ATTRIBUTES.register(bus);
 		EnvironmentalMobEffects.MOB_EFFECTS.register(bus);
 		EnvironmentalMobEffects.POTIONS.register(bus);
@@ -112,6 +115,7 @@ public class Environmental {
 		ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
 		if (event.includeServer()) {
+			generator.addProvider(new EnvironmentalRecipeProvider(generator));
 			//generator.addProvider(new SlabfishProvider(generator, MOD_ID, existingFileHelper));
 		}
 	}

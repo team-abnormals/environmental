@@ -1,0 +1,46 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "modid": "incubation",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "environmental:duck_egg"
+          ]
+        },
+        "criteria": {
+          "has_duck_egg_crate": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "environmental:duck_egg_crate"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "environmental:duck_egg"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "has_duck_egg_crate",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}

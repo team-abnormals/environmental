@@ -1,0 +1,46 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "flag": "vertical_slabs",
+          "type": "blueprint:quark_flag"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "environmental:willow_vertical_slab_revert"
+          ]
+        },
+        "criteria": {
+          "has_willow_vertical_slab": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "environmental:willow_vertical_slab"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "environmental:willow_vertical_slab_revert"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "has_willow_vertical_slab",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}

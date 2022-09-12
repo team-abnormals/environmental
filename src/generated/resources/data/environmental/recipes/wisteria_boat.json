@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "boat",
+  "pattern": [
+    "# #",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "environmental:wisteria_planks"
+    }
+  },
+  "result": {
+    "item": "environmental:wisteria_boat"
+  }
+}

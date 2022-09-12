@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "environmental:white_dye_from_white_lotus_flower"
+    ]
+  },
+  "criteria": {
+    "has_white_lotus_flower": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "environmental:white_lotus_flower"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "environmental:white_dye_from_white_lotus_flower"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_white_lotus_flower",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "environmental:purple_dye_from_violet"
+    ]
+  },
+  "criteria": {
+    "has_violet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "environmental:violet"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "environmental:purple_dye_from_violet"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_violet",
+      "has_the_recipe"
+    ]
+  ]
+}

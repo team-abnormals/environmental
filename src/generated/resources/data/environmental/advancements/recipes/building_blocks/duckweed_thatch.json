@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "environmental:duckweed_thatch"
+    ]
+  },
+  "criteria": {
+    "has_duckweed": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "environmental:duckweed"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "environmental:duckweed_thatch"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_duckweed",
+      "has_the_recipe"
+    ]
+  ]
+}

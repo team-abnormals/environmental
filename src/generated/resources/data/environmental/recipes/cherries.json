@@ -1,0 +1,25 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "flag": "apple_crate",
+          "type": "blueprint:quark_flag"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shapeless",
+        "ingredients": [
+          {
+            "item": "environmental:cherry_crate"
+          }
+        ],
+        "result": {
+          "item": "environmental:cherries",
+          "count": 9
+        }
+      }
+    }
+  ]
+}

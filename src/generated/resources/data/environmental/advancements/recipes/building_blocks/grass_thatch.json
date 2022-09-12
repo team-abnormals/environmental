@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "environmental:grass_thatch"
+    ]
+  },
+  "criteria": {
+    "has_grass": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:grass"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "environmental:grass_thatch"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_grass",
+      "has_the_recipe"
+    ]
+  ]
+}

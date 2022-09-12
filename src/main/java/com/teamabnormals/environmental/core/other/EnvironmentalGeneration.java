@@ -5,6 +5,7 @@ import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.EnvironmentalConfig;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBiomes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
+import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures.EnvironmentalPlacedFeatures;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.biome.OverworldBiomes;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
@@ -80,7 +81,7 @@ public class EnvironmentalGeneration {
 		if (event.getCategory() == Biome.BiomeCategory.FOREST) {
 			spawns.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EnvironmentalEntityTypes.DEER.get(), 16, 1, 4));
 			if (DataUtil.matchesKeys(biome, Biomes.FLOWER_FOREST)) {
-//				generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_CARTWHEEL);
+				generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_CARTWHEEL.getHolder().get());
 //				generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_DELPHINIUMS);
 				if (EnvironmentalConfig.COMMON.generateWisteriaTrees.get()) {
 //					generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.WISTERIA_TREE);
@@ -88,7 +89,7 @@ public class EnvironmentalGeneration {
 				}
 			}
 			if (DataUtil.matchesKeys(biome, Biomes.DARK_FOREST)) {
-//				generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_BLUEBELL);
+				generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_BLUEBELL.getHolder().get());
 			}
 		}
 
@@ -111,13 +112,13 @@ public class EnvironmentalGeneration {
 //			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_TALL_DEAD_BUSH_MESA);
 
 		if (event.getCategory() == Biome.BiomeCategory.SAVANNA) {
-//			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_ALLIUM);
+			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_ALLIUM.getHolder().get());
 //			if (EnvironmentalConfig.COMMON.generateGiantTallGrass.get())
 //				generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_GIANT_TALL_GRASS_SAVANNA);
 		}
 
-//		if (event.getCategory() == Biome.BiomeCategory.TAIGA)
-//			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_VIOLET);
+		if (event.getCategory() == Biome.BiomeCategory.TAIGA)
+			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_VIOLET.getHolder().get());
 
 //		if (biome.toString().contains("rosewood") && EnvironmentalConfig.COMMON.generateGiantTallGrass.get())
 //			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_GIANT_TALL_GRASS_SAVANNA);
@@ -131,18 +132,10 @@ public class EnvironmentalGeneration {
 //			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_BIRD_OF_PARADISE);
 
 			if (EnvironmentalConfig.COMMON.generateHibiscus.get()) {
-//				if (DataUtil.matchesKeys(biome, Biomes.JUNGLE_EDGE, Biomes.MODIFIED_JUNGLE_EDGE))
-//					generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_YELLOW_HIBISCUS);
-//				if (DataUtil.matchesKeys(biome, Biomes.BAMBOO_JUNGLE_HILLS))
-//					generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_ORANGE_HIBISCUS);
-//				if (DataUtil.matchesKeys(biome, Biomes.JUNGLE))
-//					generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_PINK_HIBISCUS);
-//				if (DataUtil.matchesKeys(biome, Biomes.MODIFIED_JUNGLE))
-//					generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_RED_HIBISCUS);
-//				if (DataUtil.matchesKeys(biome, Biomes.BAMBOO_JUNGLE))
-//					generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_MAGENTA_HIBISCUS);
-//				if (DataUtil.matchesKeys(biome, Biomes.JUNGLE_HILLS))
-//					generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_PURPLE_HIBISCUS);
+				if (DataUtil.matchesKeys(biome, Biomes.JUNGLE))
+					generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_HIBISCUS_COOL.getHolder().get());
+				if (DataUtil.matchesKeys(biome, Biomes.SPARSE_JUNGLE))
+					generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_HIBISCUS_WARM.getHolder().get());
 			}
 		}
 
@@ -164,8 +157,6 @@ public class EnvironmentalGeneration {
 
 		EnvironmentalGeneration.withMudDisks(generation);
 		EnvironmentalGeneration.withMarshVegetation(generation);
-		EnvironmentalGeneration.withMarshPonds(generation);
-
 	}
 
 	public static void withBaseBlossomFeatures(BiomeGenerationSettingsBuilder generation) {
@@ -198,7 +189,7 @@ public class EnvironmentalGeneration {
 	}
 
 	public static void withMudDisks(BiomeGenerationSettingsBuilder generation) {
-//		generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, EnvironmentalFeatures.Configured.DISK_MUD);
+		generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, EnvironmentalPlacedFeatures.DISK_MUD.getHolder().get());
 	}
 
 	public static void withBlossomVegetation(BiomeGenerationSettingsBuilder generation) {
@@ -214,7 +205,7 @@ public class EnvironmentalGeneration {
 //		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.BIRCH_TREE_BLOSSOM_WOODS);
 //		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.BAMBOO_BLOSSOM_WOODS);
 //		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.BAMBOO_LIGHT_BLOSSOM_WOODS);
-//		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_RED_LOTUS);
+		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_RED_LOTUS.getHolder().get());
 	}
 
 	public static void withBlossomValleysVegetation(BiomeGenerationSettingsBuilder generation) {
@@ -223,12 +214,7 @@ public class EnvironmentalGeneration {
 //		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.BIRCH_TREE_BLOSSOM_VALLEYS);
 //		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.BAMBOO_BLOSSOM_VALLEYS);
 //		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.BAMBOO_LIGHT_BLOSSOM_VALLEYS);
-//		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_WHITE_LOTUS);
-	}
-
-	public static void withMarshPonds(BiomeGenerationSettingsBuilder generation) {
-//		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.SPRING_WATER_MARSH);
-//		generation.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, EnvironmentalFeatures.Configured.LAKE_WATER_MARSH);
+		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_WHITE_LOTUS.getHolder().get());
 	}
 
 	public static void withCattails(BiomeGenerationSettingsBuilder generation) {
@@ -237,15 +223,15 @@ public class EnvironmentalGeneration {
 
 	public static void withMarshVegetation(BiomeGenerationSettingsBuilder generation) {
 //		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.MARSH_OAK);
-//		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_BLUE_ORCHID);
-//		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_CORNFLOWER);
-//		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.FLOWER_DIANTHUS);
+		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_BLUE_ORCHID.getHolder().get());
+		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_CORNFLOWER.getHolder().get());
+		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_DIANTHUS.getHolder().get());
 //		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_WATERLILLY_MARSH);
 //		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_GRASS_MARSH);
 //		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_TALL_GRASS_MARSH);
 //		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_CATTAILS_DENSE);
 //		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_DUCKWEED_MARSH);
-//		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.SEAGRASS_MARSH);
+		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.SEAGRASS_MARSH.getHolder().get());
 	}
 
 	private static void removeSpawns(BiomeLoadingEvent event) {

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "environmental:red_dye_from_red_hibiscus"
+    ]
+  },
+  "criteria": {
+    "has_red_hibiscus": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "environmental:red_hibiscus"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "environmental:red_dye_from_red_hibiscus"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_red_hibiscus",
+      "has_the_recipe"
+    ]
+  ]
+}

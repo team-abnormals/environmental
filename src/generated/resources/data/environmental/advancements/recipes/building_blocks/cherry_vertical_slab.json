@@ -1,0 +1,46 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "flag": "vertical_slabs",
+          "type": "blueprint:quark_flag"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "environmental:cherry_vertical_slab"
+          ]
+        },
+        "criteria": {
+          "has_cherry_planks": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "environmental:cherry_planks"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "environmental:cherry_vertical_slab"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "has_cherry_planks",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}

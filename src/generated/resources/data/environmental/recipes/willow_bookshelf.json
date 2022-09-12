@@ -1,0 +1,42 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "values": [
+            {
+              "modid": "woodworks",
+              "type": "forge:mod_loaded"
+            },
+            {
+              "flag": "variant_bookshelves",
+              "type": "blueprint:quark_flag"
+            }
+          ],
+          "type": "forge:or"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "group": "wooden_bookshelf",
+        "pattern": [
+          "###",
+          "XXX",
+          "###"
+        ],
+        "key": {
+          "#": {
+            "item": "environmental:willow_planks"
+          },
+          "X": {
+            "item": "minecraft:book"
+          }
+        },
+        "result": {
+          "item": "environmental:willow_bookshelf"
+        }
+      }
+    }
+  ]
+}

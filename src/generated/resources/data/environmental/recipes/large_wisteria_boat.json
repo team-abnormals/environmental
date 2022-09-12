@@ -1,0 +1,32 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "modid": "boatload",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "group": "large_boat",
+        "pattern": [
+          "#B#",
+          "###"
+        ],
+        "key": {
+          "#": {
+            "item": "environmental:wisteria_planks"
+          },
+          "B": {
+            "item": "environmental:wisteria_boat"
+          }
+        },
+        "result": {
+          "item": "environmental:large_wisteria_boat"
+        }
+      }
+    }
+  ]
+}

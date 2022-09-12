@@ -1,0 +1,46 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "flag": "apple_crate",
+          "type": "blueprint:quark_flag"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "environmental:cherry_crate"
+          ]
+        },
+        "criteria": {
+          "has_cherries": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "environmental:cherries"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "environmental:cherry_crate"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "has_cherries",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "flag": "berry_sack",
+          "type": "blueprint:quark_flag"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "environmental:cattail_seeds"
+          ]
+        },
+        "criteria": {
+          "has_cattail_seed_sack": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "environmental:cattail_seed_sack"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "environmental:cattail_seeds"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "has_cattail_seed_sack",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "values": [
+            {
+              "modid": "woodworks",
+              "type": "forge:mod_loaded"
+            },
+            {
+              "flag": "variant_ladders",
+              "type": "blueprint:quark_flag"
+            }
+          ],
+          "type": "forge:or"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "group": "wooden_ladder",
+        "pattern": [
+          "S S",
+          "S#S",
+          "S S"
+        ],
+        "key": {
+          "#": {
+            "item": "environmental:willow_planks"
+          },
+          "S": {
+            "item": "minecraft:stick"
+          }
+        },
+        "result": {
+          "item": "environmental:willow_ladder",
+          "count": 4
+        }
+      }
+    }
+  ]
+}

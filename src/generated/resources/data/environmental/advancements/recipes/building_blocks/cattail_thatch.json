@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "environmental:cattail_thatch"
+    ]
+  },
+  "criteria": {
+    "has_cattail": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "environmental:cattail"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "environmental:cattail_thatch"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cattail",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -221,7 +221,16 @@
 	"item.environmental.truffle_pie": "Truffle Pie",
 	
 	"item.environmental.willow_boat": "Willow Boat",
+	"item.environmental.willow_furnace_boat": "Willow Boat with Furnace",
+	"item.environmental.willow_chest_boat": "Willow Boat with Chest",
+	"item.environmental.large_willow_boat": "Large Willow Boat",
 	"item.environmental.cherry_boat": "Cherry Boat",
+	"item.environmental.cherry_furnace_boat": "Cherry Boat with Furnace",
+	"item.environmental.cherry_chest_boat": "Cherry Boat with Chest",
+	"item.environmental.large_cherry_boat": "Large Cherry Boat",
+	"item.environmental.wisteria_furnace_boat": "Wisteria Boat with Furnace",
+	"item.environmental.wisteria_chest_boat": "Wisteria Boat with Chest",
+	"item.environmental.large_wisteria_boat": "Large Wisteria Boat",
 	"item.environmental.wisteria_boat": "Wisteria Boat",
 	
 	"item.environmental.music_disc_slabrave": "Music Disc",

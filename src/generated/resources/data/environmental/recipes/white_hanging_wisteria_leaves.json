@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "environmental:white_wisteria_leaves"
+    }
+  },
+  "result": {
+    "item": "environmental:white_hanging_wisteria_leaves",
+    "count": 3
+  }
+}

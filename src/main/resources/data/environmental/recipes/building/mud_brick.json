@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "environmental:mud_ball"
-  },
-  "result": "environmental:mud_brick",
-  "experience": 0.3,
-  "cookingtime": 200
-}

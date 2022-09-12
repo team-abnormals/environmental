@@ -5,7 +5,6 @@ import com.teamabnormals.environmental.core.other.EnvironmentalTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSoundEvents;
-import com.teamabnormals.incubation.core.api.EggLayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -37,7 +36,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Random;
 
-public class Duck extends Animal implements EggLayer {
+public class Duck extends Animal {
 	private static final EntityDataAccessor<Integer> EATING = SynchedEntityData.defineId(Duck.class, EntityDataSerializers.INT);
 	private float wingRotation;
 	private float destPos;
@@ -123,8 +122,8 @@ public class Duck extends Animal implements EggLayer {
 			// Egg laying
 			if (this.isAlive() && !this.isBaby() && !this.wasTouchingWater && !this.isDuckJockey() && --this.timeUntilNextEgg <= 0) {
 				this.playSound(SoundEvents.CHICKEN_EGG, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
-				this.spawnAtLocation(this.getEggItem());
-				this.timeUntilNextEgg = this.getNextEggTime(this.random);
+				this.spawnAtLocation(EnvironmentalItems.DUCK_EGG.get());
+				this.timeUntilNextEgg = this.getRandomNextEggTime(this.random);
 			}
 
 			// Eating
@@ -194,11 +193,6 @@ public class Duck extends Animal implements EggLayer {
 	}
 
 	@Override
-	public SoundEvent getEggLayingSound() {
-		return EnvironmentalSoundEvents.DUCK_EGG.get();
-	}
-
-	@Override
 	protected void playStepSound(BlockPos pos, BlockState blockIn) {
 		this.playSound(EnvironmentalSoundEvents.DUCK_STEP.get(), 0.15F, 1.0F);
 	}
@@ -260,28 +254,7 @@ public class Duck extends Animal implements EggLayer {
 		return EnvironmentalEntityTypes.DUCK.get().create(world);
 	}
 
-	@Override
-	public int getEggTimer() {
-		return this.timeUntilNextEgg;
-	}
-
-	@Override
-	public void setEggTimer(int time) {
-		this.timeUntilNextEgg = time;
-	}
-
-	@Override
-	public boolean isBirdJockey() {
-		return this.isDuckJockey();
-	}
-
-	@Override
-	public Item getEggItem() {
-		return EnvironmentalItems.DUCK_EGG.get();
-	}
-
-	@Override
-	public int getNextEggTime(Random rand) {
+	public int getRandomNextEggTime(Random rand) {
 		return rand.nextInt(6000) + 6000;
 	}
 }
