@@ -1,13 +1,16 @@
 package com.teamabnormals.environmental.client.model;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.teamabnormals.environmental.common.entity.animal.deer.AbstractDeer;
+
 import net.minecraft.client.model.AgeableListModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
-import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -33,9 +36,13 @@ public class DeerModel<E extends AbstractDeer> extends AgeableListModel<E> {
 	public final ModelPart leftFrontLeg;
 	public final ModelPart rightHindLeg;
 	public final ModelPart leftHindLeg;
+	public final ModelPart rightFrontBabyLeg;
+	public final ModelPart leftFrontBabyLeg;
+	public final ModelPart rightHindBabyLeg;
+	public final ModelPart leftHindBabyLeg;
 
 	public DeerModel(ModelPart root) {
-		super(false, 6.0F, 2.5F);
+		super(true, 14.5F, 2.0F);
 		this.body = root.getChild("body");
 		this.tail = this.body.getChild("tail");
 		this.neck = root.getChild("neck");
@@ -46,6 +53,10 @@ public class DeerModel<E extends AbstractDeer> extends AgeableListModel<E> {
 		this.leftFrontLeg = root.getChild("left_front_leg");
 		this.rightHindLeg = root.getChild("right_hind_leg");
 		this.leftHindLeg = root.getChild("left_hind_leg");
+		this.rightFrontBabyLeg = root.getChild("right_front_baby_leg");
+		this.leftFrontBabyLeg = root.getChild("left_front_baby_leg");
+		this.rightHindBabyLeg = root.getChild("right_hind_baby_leg");
+		this.leftHindBabyLeg = root.getChild("left_hind_baby_leg");
 	}
 
 	public static LayerDefinition createBodyLayer() {
@@ -63,6 +74,11 @@ public class DeerModel<E extends AbstractDeer> extends AgeableListModel<E> {
 		root.addOrReplaceChild("left_front_leg", CubeListBuilder.create().texOffs(20, 25).addBox(-2.5F, 0.0F, -2.0F, 3.0F, 10.0F, 3.0F, false), PartPose.offsetAndRotation(3.5F, 14.0F, -5.0F, 0.0F, 0.0F, 0.0F));
 		root.addOrReplaceChild("right_hind_leg", CubeListBuilder.create().texOffs(20, 25).addBox(-0.5F, 0.0F, -2.0F, 3.0F, 10.0F, 3.0F, true), PartPose.offsetAndRotation(-3.5F, 14.0F, 6.0F, 0.0F, 0.0F, 0.0F));
 		root.addOrReplaceChild("left_hind_leg", CubeListBuilder.create().texOffs(20, 25).addBox(-2.5F, 0.0F, -2.0F, 3.0F, 10.0F, 3.0F, false), PartPose.offsetAndRotation(3.5F, 14.0F, 6.0F, 0.0F, 0.0F, 0.0F));
+		CubeDeformation cubedeformation = new CubeDeformation(0.0F, 3.0F, 0.0F);
+		root.addOrReplaceChild("right_front_baby_leg", CubeListBuilder.create().texOffs(20, 25).mirror().addBox(-0.5F, 0.0F, -2.0F, 3.0F, 10.0F, 3.0F, cubedeformation), PartPose.offsetAndRotation(-3.5F, 14.0F, -5.0F, 0.0F, 0.0F, 0.0F));
+		root.addOrReplaceChild("left_front_baby_leg", CubeListBuilder.create().texOffs(20, 25).addBox(-2.5F, 0.0F, -2.0F, 3.0F, 10.0F, 3.0F, cubedeformation), PartPose.offsetAndRotation(3.5F, 14.0F, -5.0F, 0.0F, 0.0F, 0.0F));
+		root.addOrReplaceChild("right_hind_baby_leg", CubeListBuilder.create().texOffs(20, 25).mirror().addBox(-0.5F, 0.0F, -2.0F, 3.0F, 10.0F, 3.0F, cubedeformation), PartPose.offsetAndRotation(-3.5F, 14.0F, 6.0F, 0.0F, 0.0F, 0.0F));
+		root.addOrReplaceChild("left_hind_baby_leg", CubeListBuilder.create().texOffs(20, 25).addBox(-2.5F, 0.0F, -2.0F, 3.0F, 10.0F, 3.0F, cubedeformation), PartPose.offsetAndRotation(3.5F, 14.0F, 6.0F, 0.0F, 0.0F, 0.0F));
 		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
 
@@ -71,37 +87,52 @@ public class DeerModel<E extends AbstractDeer> extends AgeableListModel<E> {
 		this.hasAntlers = entity.hasAntlers();
 		this.neckAngle = entity.getNeckAngle(partialTick);
 		this.sprintAmount = entity.getSprintAmount(partialTick);
+
+		boolean flag = this.young;
+		boolean flag1 = this.hasAntlers && !flag;
+		this.rightAntler.visible = flag1;
+		this.leftAntler.visible = flag1;
+		this.rightFrontLeg.visible = !flag;
+		this.leftFrontLeg.visible = !flag;
+		this.rightHindLeg.visible = !flag;
+		this.leftHindLeg.visible = !flag;
+		this.rightFrontBabyLeg.visible = flag;
+		this.leftFrontBabyLeg.visible = flag;
+		this.rightHindBabyLeg.visible = flag;
+		this.leftHindBabyLeg.visible = flag;
+
+		this.body.y = flag ? 8F : 14F;
+		this.neck.y = flag ? 4F : 10F;
 	}
 
 	@Override
 	public void setupAnim(E entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		float f = this.neckAngle * Mth.DEG_TO_RAD;
-		float f1 = this.young ? 0.5F : 1.0F;
-		float f2 = Mth.clamp((this.neckAngle - 90F) / 40F, 0F, 1F);
-		float f3 = 1F - f2;
-		float f4 = 1F - this.sprintAmount;
+		float f1 = Mth.clamp((this.neckAngle - 90F) / 40F, 0F, 1F);
+		float f2 = 1F - f1;
+		float f3 = 1F - this.sprintAmount;
 
 		this.neck.xRot = f;
 		this.body.xRot = Mth.cos(limbSwing * 0.6662F) * 0.25F * limbSwingAmount * this.sprintAmount;
 
-		this.neck.y = 10F + (float) Math.tan(this.body.xRot) * 7F;
+		this.neck.y += (float) Math.tan(this.body.xRot) * 7F;
 		this.neck.z = -7F - (float) Math.tan(this.body.xRot) * 4F;
-		this.head.y = 2F - f1 * 11F * Mth.cos(f) + this.neck.y;
-		this.head.z = 1.5F - f1 * 12F * Mth.sin(f) + this.neck.z;
+		this.head.y = 2F - (this.young ? 0.7F : 1.0F) * 11F * Mth.cos(f) + this.neck.y;
+		this.head.z = 1.5F - (this.young ? 0.6F : 1.0F) * 12F * Mth.sin(f) + this.neck.z;
 
-		this.head.xRot = f3 * headPitch * Mth.DEG_TO_RAD;
-		this.head.xRot += f2 * (Mth.sin(ageInTicks * 0.7F) * 0.2F + 0.6F);
-		this.head.yRot = f3 * netHeadYaw * Mth.DEG_TO_RAD;
+		this.head.xRot = f2 * headPitch * Mth.DEG_TO_RAD;
+		this.head.xRot += f1 * (Mth.sin(ageInTicks * 0.7F) * 0.15F + 0.65F);
+		this.head.yRot = f2 * netHeadYaw * Mth.DEG_TO_RAD;
 
 		this.rightFrontLeg.y = 14F + (float) Math.tan(this.body.xRot) * 5F;
 		this.leftFrontLeg.y = this.rightFrontLeg.y;
 		this.rightHindLeg.y = 14F - (float) Math.tan(this.body.xRot) * 6F;
 		this.leftHindLeg.y = this.rightHindLeg.y;
 
-		this.rightHindLeg.xRot = f4 * Mth.cos(limbSwing * 0.6662F) * 1.2F * limbSwingAmount;
-		this.leftHindLeg.xRot = f4 * Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.2F * limbSwingAmount;
-		this.rightFrontLeg.xRot = f4 * Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.2F * limbSwingAmount;
-		this.leftFrontLeg.xRot = f4 * Mth.cos(limbSwing * 0.6662F) * 1.2F * limbSwingAmount;
+		this.rightHindLeg.xRot = f3 * Mth.cos(limbSwing * 0.6662F) * 1.2F * limbSwingAmount;
+		this.leftHindLeg.xRot = f3 * Mth.cos(limbSwing * 0.6662F + Mth.PI) * 1.2F * limbSwingAmount;
+		this.rightFrontLeg.xRot = f3 * Mth.cos(limbSwing * 0.6662F + Mth.PI) * 1.2F * limbSwingAmount;
+		this.leftFrontLeg.xRot = f3 * Mth.cos(limbSwing * 0.6662F) * 1.2F * limbSwingAmount;
 
 		if (this.sprintAmount > 0F) {
 			this.rightFrontLeg.xRot += (-Mth.PI / 6F + Mth.cos(ageInTicks * 0.6662F + Mth.PI)) * limbSwingAmount * this.sprintAmount;
@@ -109,15 +140,17 @@ public class DeerModel<E extends AbstractDeer> extends AgeableListModel<E> {
 			this.rightHindLeg.xRot += (Mth.PI / 6F + Mth.cos(ageInTicks * 0.6662F + 0.6F)) * limbSwingAmount * this.sprintAmount;
 			this.leftHindLeg.xRot += (Mth.PI / 6F + Mth.cos(ageInTicks * 0.6662F)) * limbSwingAmount * this.sprintAmount;
 		}
-	}
 
-	@Override
-	public void renderToBuffer(PoseStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		boolean flag = this.hasAntlers && !this.young;
-		this.rightAntler.visible = flag;
-		this.leftAntler.visible = flag;
-
-		super.renderToBuffer(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+		if (this.young) {
+			this.rightFrontBabyLeg.copyFrom(this.rightFrontLeg);
+			this.leftFrontBabyLeg.copyFrom(this.leftFrontLeg);
+			this.rightHindBabyLeg.copyFrom(this.rightHindLeg);
+			this.leftHindBabyLeg.copyFrom(this.leftHindLeg);
+			this.rightFrontBabyLeg.y -= 3F;
+			this.leftFrontBabyLeg.y -= 3F;
+			this.rightHindBabyLeg.y -= 3F;
+			this.leftHindBabyLeg.y -= 3F;
+		}
 	}
 
 	@Override
@@ -127,7 +160,7 @@ public class DeerModel<E extends AbstractDeer> extends AgeableListModel<E> {
 
 	@Override
 	protected Iterable<ModelPart> bodyParts() {
-		return ImmutableList.of(this.neck, this.body, this.leftFrontLeg, this.rightFrontLeg, this.leftHindLeg, this.rightHindLeg);
+		return ImmutableList.of(this.neck, this.body, this.leftFrontLeg, this.rightFrontLeg, this.leftHindLeg, this.rightHindLeg, this.leftFrontBabyLeg, this.rightFrontBabyLeg, this.leftHindBabyLeg, this.rightHindBabyLeg);
 	}
 
 }

@@ -64,15 +64,15 @@ public class Deer extends AbstractDeer {
 	protected void registerGoals() {
 		this.temptGoal = new DeerTemptGoal(this, 0.6D, 1.1D, Ingredient.of(EnvironmentalTags.Items.DEER_TEMPT_ITEMS));
 		this.goalSelector.addGoal(0, new FloatGoal(this));
-		this.goalSelector.addGoal(1, new DeerRunFromAttackerGoal(this));
-		this.goalSelector.addGoal(2, new DeerAvoidEntityGoal(this));
-		this.goalSelector.addGoal(3, new BreedGoal(this, 0.8D));
-		this.goalSelector.addGoal(4, this.temptGoal);
-		this.goalSelector.addGoal(4, new DeerFollowParentGoal(this));
-		this.goalSelector.addGoal(5, new DeerGrazeGoal(this));
-		this.goalSelector.addGoal(6, new WaterAvoidingRandomStrollGoal(this, 0.8D));
-		this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
-		this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
+		this.goalSelector.addGoal(1, new DeerFollowParentGoal(this));
+		this.goalSelector.addGoal(2, new DeerRunFromAttackerGoal(this));
+		this.goalSelector.addGoal(3, new DeerAvoidEntityGoal(this));
+		this.goalSelector.addGoal(4, new BreedGoal(this, 0.8D));
+		this.goalSelector.addGoal(5, this.temptGoal);
+		this.goalSelector.addGoal(6, new DeerGrazeGoal(this));
+		this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 0.8D));
+		this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 6.0F));
+		this.goalSelector.addGoal(9, new RandomLookAroundGoal(this));
 	}
 
 	@Override
