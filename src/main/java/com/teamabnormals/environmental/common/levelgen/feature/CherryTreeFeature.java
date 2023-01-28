@@ -61,7 +61,7 @@ public class CherryTreeFeature extends Feature<TreeConfiguration> {
 					int logY = position.getY() + k1;
 					BlockPos blockpos = new BlockPos(logX, logY, logZ);
 					if (TreeUtil.isAirOrLeaves(worldIn, blockpos)) {
-						TreeUtil.placeLogAt(worldIn, blockpos.above(), rand, config);
+						TreeUtil.placeLogAt(worldIn, blockpos, rand, config);
 						logPosSet.add(blockpos.above().immutable());
 					}
 				}
@@ -162,8 +162,8 @@ public class CherryTreeFeature extends Feature<TreeConfiguration> {
 			logZ += direction.getStepZ();
 			BlockPos blockpos1 = new BlockPos(logX, logY, logZ);
 			if (TreeUtil.isAirOrLeaves(worldIn, blockpos1)) {
-				TreeUtil.placeLogAt(worldIn, blockpos1.above(), rand, config);
-				logPosSet.add(blockpos1.above().immutable());
+				TreeUtil.placeLogAt(worldIn, blockpos1, rand, config);
+				logPosSet.add(blockpos1.immutable());
 			}
 		}
 	}

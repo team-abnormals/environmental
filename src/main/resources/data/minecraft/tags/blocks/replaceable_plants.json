@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "environmental:hanging_willow_leaves",
+    "environmental:hanging_pink_wisteria_leaves",
+    "environmental:hanging_blue_wisteria_leaves",
+    "environmental:hanging_purple_wisteria_leaves",
+    "environmental:hanging_white_wisteria_leaves"
+  ]
+}

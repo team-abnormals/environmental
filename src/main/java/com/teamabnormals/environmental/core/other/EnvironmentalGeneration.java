@@ -35,16 +35,13 @@ public class EnvironmentalGeneration {
 		BiomeGenerationSettingsBuilder generation = event.getGeneration();
 		MobSpawnSettingsBuilder spawns = event.getSpawns();
 
-		if (DataUtil.matchesKeys(biome, EnvironmentalBiomes.MARSH.getKey(), EnvironmentalBiomes.MUSHROOM_MARSH.getKey())) {
+		if (DataUtil.matchesKeys(biome, EnvironmentalBiomes.MARSH.getKey())) {
 			EnvironmentalGeneration.withMarshFeatures(generation);
-			if (DataUtil.matchesKeys(biome, EnvironmentalBiomes.MUSHROOM_MARSH.getKey()))
-				EnvironmentalGeneration.withMarshMushrooms(generation);
-
 			BiomeDefaultFeatures.farmAnimals(spawns);
 			BiomeDefaultFeatures.commonSpawns(spawns);
 		}
 
-		if (DataUtil.matchesKeys(biome, EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), EnvironmentalBiomes.BLOSSOM_HILLS.getKey(), EnvironmentalBiomes.BLOSSOM_HIGHLANDS.getKey(), EnvironmentalBiomes.BLOSSOM_VALLEYS.getKey())) {
+		if (DataUtil.matchesKeys(biome, EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), EnvironmentalBiomes.BLOSSOM_VALLEYS.getKey())) {
 			if (DataUtil.matchesKeys(biome, EnvironmentalBiomes.BLOSSOM_VALLEYS.getKey()))
 				EnvironmentalGeneration.withBlossomValleysFeatures(generation);
 			else
@@ -84,8 +81,7 @@ public class EnvironmentalGeneration {
 				generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_CARTWHEEL.getHolder().get());
 //				generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.PATCH_DELPHINIUMS);
 				if (EnvironmentalConfig.COMMON.generateWisteriaTrees.get()) {
-//					generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.WISTERIA_TREE);
-//					generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalFeatures.Configured.WISTERIA_TREE_BIG);
+					generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.TREES_WISTERIA.getHolder().get());
 				}
 			}
 			if (DataUtil.matchesKeys(biome, Biomes.DARK_FOREST)) {
@@ -157,6 +153,7 @@ public class EnvironmentalGeneration {
 
 		EnvironmentalGeneration.withMudDisks(generation);
 		EnvironmentalGeneration.withMarshVegetation(generation);
+		EnvironmentalGeneration.withMarshMushrooms(generation);
 	}
 
 	public static void withBaseBlossomFeatures(BiomeGenerationSettingsBuilder generation) {

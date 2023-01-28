@@ -10,8 +10,11 @@ import com.teamabnormals.environmental.core.Environmental;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
+import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.AquaticPlacements;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
+import net.minecraft.data.worldgen.placement.TreePlacements;
+import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -21,6 +24,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration.TreeConfigurationBuilder;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
@@ -84,21 +88,28 @@ public class EnvironmentalFeatures {
 	}
 
 	public static final class Configs {
+		private static final BeehiveDecorator BEEHIVE_0002 = new BeehiveDecorator(0.002F);
+		private static final BeehiveDecorator BEEHIVE_002 = new BeehiveDecorator(0.02F);
 		private static final BeehiveDecorator BEEHIVE_005 = new BeehiveDecorator(0.05F);
 
 		public static final TreeConfiguration CHERRY = createCherry().build();
+		public static final TreeConfiguration CHERRY_BEES_0002 = createCherry().decorators(List.of(BEEHIVE_0002)).build();
 		public static final TreeConfiguration CHERRY_BEES_005 = createCherry().decorators(List.of(BEEHIVE_005)).build();
 
 		public static final TreeConfiguration WHITE_WISTERIA = createWhiteWisteria().build();
+		public static final TreeConfiguration WHITE_WISTERIA_BEES_002 = createWhiteWisteria().decorators(List.of(BEEHIVE_002)).build();
 		public static final TreeConfiguration WHITE_WISTERIA_BEES_005 = createWhiteWisteria().decorators(List.of(BEEHIVE_005)).build();
 
 		public static final TreeConfiguration BLUE_WISTERIA = createBlueWisteria().build();
+		public static final TreeConfiguration BLUE_WISTERIA_BEES_002 = createBlueWisteria().decorators(List.of(BEEHIVE_002)).build();
 		public static final TreeConfiguration BLUE_WISTERIA_BEES_005 = createBlueWisteria().decorators(List.of(BEEHIVE_005)).build();
 
 		public static final TreeConfiguration PURPLE_WISTERIA = createPurpleWisteria().build();
+		public static final TreeConfiguration PURPLE_WISTERIA_BEES_002 = createPurpleWisteria().decorators(List.of(BEEHIVE_002)).build();
 		public static final TreeConfiguration PURPLE_WISTERIA_BEES_005 = createPurpleWisteria().decorators(List.of(BEEHIVE_005)).build();
 
 		public static final TreeConfiguration PINK_WISTERIA = createPinkWisteria().build();
+		public static final TreeConfiguration PINK_WISTERIA_BEES_002 = createPinkWisteria().decorators(List.of(BEEHIVE_002)).build();
 		public static final TreeConfiguration PINK_WISTERIA_BEES_005 = createPinkWisteria().decorators(List.of(BEEHIVE_005)).build();
 
 //		public static final RandomPatchConfiguration CHERRY_BLOSSOM_FOREST_FLOWER_CONFIG = (new RandomPatchConfiguration.GrassConfigurationBuilder((new WeightedStateProvider()).add(Blocks.POPPY.defaultBlockState(), 2).add(Blocks.RED_TULIP.defaultBlockState(), 2).add(Blocks.WHITE_TULIP.defaultBlockState(), 1).add(Blocks.DANDELION.defaultBlockState(), 1).add(Blocks.PINK_TULIP.defaultBlockState(), 3).add(Blocks.ORANGE_TULIP.defaultBlockState(), 1).add(Blocks.LILY_OF_THE_VALLEY.defaultBlockState(), 1), SimpleBlockPlacer.INSTANCE)).tries(64).build();
@@ -108,16 +119,6 @@ public class EnvironmentalFeatures {
 //		public static final RandomPatchConfiguration PURPLE_DELPHINIUM = (new RandomPatchConfiguration.GrassConfigurationBuilder(new SimpleStateProvider(EnvironmentalBlocks.PURPLE_DELPHINIUM.get().defaultBlockState()), new DoublePlantPlacer())).tries(64).noProjection().build();
 //		public static final RandomPatchConfiguration BLUE_DELPHINIUM = (new RandomPatchConfiguration.GrassConfigurationBuilder(new SimpleStateProvider(EnvironmentalBlocks.BLUE_DELPHINIUM.get().defaultBlockState()), new DoublePlantPlacer())).tries(64).noProjection().build();
 //
-//		public static final RandomPatchConfiguration CARTWHEEL_CONFIG = (new RandomPatchConfiguration.GrassConfigurationBuilder(new SimpleStateProvider(EnvironmentalBlocks.CARTWHEEL.get().defaultBlockState()), SimpleBlockPlacer.INSTANCE)).tries(32).build();
-//		public static final RandomPatchConfiguration BLUE_ORCHID_CONFIG = (new RandomPatchConfiguration.GrassConfigurationBuilder(new SimpleStateProvider(Blocks.BLUE_ORCHID.defaultBlockState()), new SimpleBlockPlacer())).tries(64).build();
-//		public static final RandomPatchConfiguration CORNFLOWER_CONFIG = (new RandomPatchConfiguration.GrassConfigurationBuilder(new SimpleStateProvider(Blocks.CORNFLOWER.defaultBlockState()), new SimpleBlockPlacer())).tries(64).build();
-//		public static final RandomPatchConfiguration DIANTHUS_CONFIG = (new RandomPatchConfiguration.GrassConfigurationBuilder(new SimpleStateProvider(EnvironmentalBlocks.DIANTHUS.get().defaultBlockState()), new SimpleBlockPlacer())).tries(64).build();
-//		public static final RandomPatchConfiguration BLUEBELL_CONFIG = (new RandomPatchConfiguration.GrassConfigurationBuilder(new SimpleStateProvider(EnvironmentalBlocks.BLUEBELL.get().defaultBlockState()), new SimpleBlockPlacer())).tries(32).build();
-//		public static final RandomPatchConfiguration ALLIUM_CONFIG = (new RandomPatchConfiguration.GrassConfigurationBuilder(new SimpleStateProvider(Blocks.ALLIUM.defaultBlockState()), new SimpleBlockPlacer())).tries(32).build();
-//		public static final RandomPatchConfiguration VIOLET_CONFIG = (new RandomPatchConfiguration.GrassConfigurationBuilder(new SimpleStateProvider(EnvironmentalBlocks.VIOLET.get().defaultBlockState()), new SimpleBlockPlacer())).tries(32).build();
-//		public static final RandomPatchConfiguration WHITE_LOTUS_CONFIG = (new RandomPatchConfiguration.GrassConfigurationBuilder(new SimpleStateProvider(EnvironmentalBlocks.WHITE_LOTUS_FLOWER.get().defaultBlockState()), new SimpleBlockPlacer())).tries(32).build();
-//		public static final RandomPatchConfiguration RED_LOTUS_CONFIG = (new RandomPatchConfiguration.GrassConfigurationBuilder(new SimpleStateProvider(EnvironmentalBlocks.RED_LOTUS_FLOWER.get().defaultBlockState()), new SimpleBlockPlacer())).tries(32).build();
-//
 // 		public static final RandomPatchConfiguration BIRD_OF_PARADISE_CONFIG = (new RandomPatchConfiguration.GrassConfigurationBuilder(new SimpleStateProvider(EnvironmentalBlocks.BIRD_OF_PARADISE.get().defaultBlockState()), DoublePlantPlacer.INSTANCE)).tries(64).noProjection().build();
 //
 //		public static final RandomPatchConfiguration LILY_PAD_CONFIG = (new RandomPatchConfiguration.GrassConfigurationBuilder(new SimpleStateProvider(Blocks.LILY_PAD.defaultBlockState()), SimpleBlockPlacer.INSTANCE)).tries(10).build();
@@ -126,31 +127,6 @@ public class EnvironmentalFeatures {
 //		public static final RandomPatchConfiguration MYCELIUM_SPROUTS_CONFIG = (new RandomPatchConfiguration.GrassConfigurationBuilder(new SimpleStateProvider(EnvironmentalBlocks.MYCELIUM_SPROUTS.get().defaultBlockState()), SimpleBlockPlacer.INSTANCE)).tries(32).build();
 //		public static final RandomPatchConfiguration TALL_DEAD_BUSH_CONFIG = (new RandomPatchConfiguration.GrassConfigurationBuilder(new SimpleStateProvider(States.TALL_DEAD_BUSH), new DoublePlantPlacer())).tries(64).noProjection().build();
 //
-//		public static final TreeConfiguration WILLOW_TREE_CONFIG = (new TreeConfiguration.TreeConfigurationBuilder(new SimpleStateProvider(States.WILLOW_LOG), new SimpleStateProvider(States.WILLOW_LEAVES), new BlobFoliagePlacer(UniformInt.fixed(3), UniformInt.fixed(0), 3), new StraightTrunkPlacer(5, 3, 0), new TwoLayersFeatureSize(1, 0, 1))).maxWaterDepth(1).decorators(ImmutableList.of(LeaveVineDecorator.INSTANCE, HangingWillowLeavesTreeDecorator.INSTANCE)).build();
-//
-//		public static final TreeConfiguration CHERRY_TREE_CONFIG = (new TreeConfiguration.TreeConfigurationBuilder(new SimpleStateProvider(States.CHERRY_LOG), new SimpleStateProvider(States.CHERRY_LEAVES), new FancyFoliagePlacer(UniformInt.fixed(0), UniformInt.fixed(0), 0), new FancyTrunkPlacer(0, 0, 0), new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(0)))).ignoreVines().heightmap(Heightmap.Types.MOTION_BLOCKING).build();
-//		public static final TreeConfiguration CHERRY_TREE_WITH_FEW_BEEHIVES_CONFIG = CHERRY_TREE_CONFIG.withDecorators(ImmutableList.of(Features.Decorators.BEEHIVE_0002));
-//		public static final TreeConfiguration CHERRY_TREE_WITH_MORE_BEEHIVES_CONFIG = CHERRY_TREE_CONFIG.withDecorators(ImmutableList.of(Features.Decorators.BEEHIVE_005));
-//
-//		public static final TreeConfiguration BLUE_WISTERIA_TREE_CONFIG = (new TreeConfiguration.TreeConfigurationBuilder(new SimpleStateProvider(States.WISTERIA_LOG), new SimpleStateProvider(States.BLUE_WISTERIA_LEAVES), new BlobFoliagePlacer(UniformInt.fixed(0), UniformInt.fixed(0), 0), new StraightTrunkPlacer(0, 0, 0), new TwoLayersFeatureSize(0, 0, 0))).maxWaterDepth(1).build();
-//		public static final TreeConfiguration BLUE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG = BLUE_WISTERIA_TREE_CONFIG.withDecorators(ImmutableList.of(Features.Decorators.BEEHIVE_0002));
-//		public static final TreeConfiguration BLUE_WISTERIA_TREE_WITH_BEEHIVES_CONFIG = BLUE_WISTERIA_TREE_CONFIG.withDecorators(ImmutableList.of(Features.Decorators.BEEHIVE_002));
-//		public static final TreeConfiguration BLUE_WISTERIA_TREE_WITH_MORE_BEEHIVES_CONFIG = BLUE_WISTERIA_TREE_CONFIG.withDecorators(ImmutableList.of(Features.Decorators.BEEHIVE_005));
-//
-//		public static final TreeConfiguration PINK_WISTERIA_TREE_CONFIG = (new TreeConfiguration.TreeConfigurationBuilder(new SimpleStateProvider(States.WISTERIA_LOG), new SimpleStateProvider(States.PINK_WISTERIA_LEAVES), new BlobFoliagePlacer(UniformInt.fixed(0), UniformInt.fixed(0), 0), new StraightTrunkPlacer(0, 0, 0), new TwoLayersFeatureSize(0, 0, 0))).maxWaterDepth(1).build();
-//		public static final TreeConfiguration PINK_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG = PINK_WISTERIA_TREE_CONFIG.withDecorators(ImmutableList.of(Features.Decorators.BEEHIVE_0002));
-//		public static final TreeConfiguration PINK_WISTERIA_TREE_WITH_BEEHIVES_CONFIG = PINK_WISTERIA_TREE_CONFIG.withDecorators(ImmutableList.of(Features.Decorators.BEEHIVE_002));
-//		public static final TreeConfiguration PINK_WISTERIA_TREE_WITH_MORE_BEEHIVES_CONFIG = PINK_WISTERIA_TREE_CONFIG.withDecorators(ImmutableList.of(Features.Decorators.BEEHIVE_005));
-//
-//		public static final TreeConfiguration PURPLE_WISTERIA_TREE_CONFIG = (new TreeConfiguration.TreeConfigurationBuilder(new SimpleStateProvider(States.WISTERIA_LOG), new SimpleStateProvider(States.PURPLE_WISTERIA_LEAVES), new BlobFoliagePlacer(UniformInt.fixed(0), UniformInt.fixed(0), 0), new StraightTrunkPlacer(0, 0, 0), new TwoLayersFeatureSize(0, 0, 0))).maxWaterDepth(1).build();
-//		public static final TreeConfiguration PURPLE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG = PURPLE_WISTERIA_TREE_CONFIG.withDecorators(ImmutableList.of(Features.Decorators.BEEHIVE_0002));
-//		public static final TreeConfiguration PURPLE_WISTERIA_TREE_WITH_BEEHIVES_CONFIG = PURPLE_WISTERIA_TREE_CONFIG.withDecorators(ImmutableList.of(Features.Decorators.BEEHIVE_002));
-//		public static final TreeConfiguration PURPLE_WISTERIA_TREE_WITH_MORE_BEEHIVES_CONFIG = PURPLE_WISTERIA_TREE_CONFIG.withDecorators(ImmutableList.of(Features.Decorators.BEEHIVE_005));
-//
-//		public static final TreeConfiguration WHITE_WISTERIA_TREE_CONFIG = (new TreeConfiguration.TreeConfigurationBuilder(new SimpleStateProvider(States.WISTERIA_LOG), new SimpleStateProvider(States.WHITE_WISTERIA_LEAVES), new BlobFoliagePlacer(UniformInt.fixed(0), UniformInt.fixed(0), 0), new StraightTrunkPlacer(0, 0, 0), new TwoLayersFeatureSize(0, 0, 0))).maxWaterDepth(1).build();
-//		public static final TreeConfiguration WHITE_WISTERIA_TREE_WITH_FEW_BEEHIVES_CONFIG = WHITE_WISTERIA_TREE_CONFIG.withDecorators(ImmutableList.of(Features.Decorators.BEEHIVE_0002));
-//		public static final TreeConfiguration WHITE_WISTERIA_TREE_WITH_BEEHIVES_CONFIG = WHITE_WISTERIA_TREE_CONFIG.withDecorators(ImmutableList.of(Features.Decorators.BEEHIVE_002));
-//		public static final TreeConfiguration WHITE_WISTERIA_TREE_WITH_MORE_BEEHIVES_CONFIG = WHITE_WISTERIA_TREE_CONFIG.withDecorators(ImmutableList.of(Features.Decorators.BEEHIVE_005));
 
 		private static TreeConfigurationBuilder createCherry() {
 			return createCustomTree(EnvironmentalBlocks.CHERRY_LOG.get().defaultBlockState(), EnvironmentalBlocks.CHERRY_LEAVES.get().defaultBlockState());
@@ -186,25 +162,22 @@ public class EnvironmentalFeatures {
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> CHERRY_BEES_005 = register("cherry_bees_005", () -> new ConfiguredFeature<>(EnvironmentalFeatures.CHERRY_TREE.get(), Configs.CHERRY_BEES_005));
 
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> WHITE_WISTERIA = register("white_wisteria", () -> new ConfiguredFeature<>(EnvironmentalFeatures.WISTERIA_TREE.get(), Configs.WHITE_WISTERIA));
+		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> WHITE_WISTERIA_BEES_002 = register("white_wisteria_bees_002", () -> new ConfiguredFeature<>(EnvironmentalFeatures.WISTERIA_TREE.get(), Configs.WHITE_WISTERIA_BEES_002));
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> WHITE_WISTERIA_BEES_005 = register("white_wisteria_bees_005", () -> new ConfiguredFeature<>(EnvironmentalFeatures.WISTERIA_TREE.get(), Configs.WHITE_WISTERIA_BEES_005));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> BIG_WHITE_WISTERIA = register("big_white_wisteria", () -> new ConfiguredFeature<>(EnvironmentalFeatures.BIG_WISTERIA_TREE.get(), Configs.WHITE_WISTERIA));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> BIG_WHITE_WISTERIA_BEES_005 = register("big_white_wisteria_bees_005", () -> new ConfiguredFeature<>(EnvironmentalFeatures.WISTERIA_TREE.get(), Configs.WHITE_WISTERIA_BEES_005));
 
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> BLUE_WISTERIA = register("blue_wisteria", () -> new ConfiguredFeature<>(EnvironmentalFeatures.WISTERIA_TREE.get(), Configs.BLUE_WISTERIA));
+		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> BLUE_WISTERIA_BEES_002 = register("blue_wisteria_bees_002", () -> new ConfiguredFeature<>(EnvironmentalFeatures.WISTERIA_TREE.get(), Configs.BLUE_WISTERIA_BEES_002));
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> BLUE_WISTERIA_BEES_005 = register("blue_wisteria_bees_005", () -> new ConfiguredFeature<>(EnvironmentalFeatures.WISTERIA_TREE.get(), Configs.BLUE_WISTERIA_BEES_005));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> BIG_BLUE_WISTERIA = register("big_blue_wisteria", () -> new ConfiguredFeature<>(EnvironmentalFeatures.BIG_WISTERIA_TREE.get(), Configs.BLUE_WISTERIA));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> BIG_BLUE_WISTERIA_BEES_005 = register("big_blue_wisteria_bees_005", () -> new ConfiguredFeature<>(EnvironmentalFeatures.WISTERIA_TREE.get(), Configs.BLUE_WISTERIA_BEES_005));
 
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> PURPLE_WISTERIA = register("purple_wisteria", () -> new ConfiguredFeature<>(EnvironmentalFeatures.WISTERIA_TREE.get(), Configs.PURPLE_WISTERIA));
+		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> PURPLE_WISTERIA_BEES_002 = register("purple_wisteria_bees_002", () -> new ConfiguredFeature<>(EnvironmentalFeatures.WISTERIA_TREE.get(), Configs.PURPLE_WISTERIA_BEES_002));
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> PURPLE_WISTERIA_BEES_005 = register("purple_wisteria_bees_005", () -> new ConfiguredFeature<>(EnvironmentalFeatures.WISTERIA_TREE.get(), Configs.PURPLE_WISTERIA_BEES_005));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> BIG_PURPLE_WISTERIA = register("big_purple_wisteria", () -> new ConfiguredFeature<>(EnvironmentalFeatures.BIG_WISTERIA_TREE.get(), Configs.PURPLE_WISTERIA));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> BIG_PURPLE_WISTERIA_BEES_005 = register("big_purple_wisteria_bees_005", () -> new ConfiguredFeature<>(EnvironmentalFeatures.WISTERIA_TREE.get(), Configs.PURPLE_WISTERIA_BEES_005));
 
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> PINK_WISTERIA = register("pink_wisteria", () -> new ConfiguredFeature<>(EnvironmentalFeatures.WISTERIA_TREE.get(), Configs.PINK_WISTERIA));
+		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> PINK_WISTERIA_BEES_002 = register("pink_wisteria_bees_002", () -> new ConfiguredFeature<>(EnvironmentalFeatures.WISTERIA_TREE.get(), Configs.PINK_WISTERIA_BEES_002));
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> PINK_WISTERIA_BEES_005 = register("pink_wisteria_bees_005", () -> new ConfiguredFeature<>(EnvironmentalFeatures.WISTERIA_TREE.get(), Configs.PINK_WISTERIA_BEES_005));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> BIG_PINK_WISTERIA = register("big_pink_wisteria", () -> new ConfiguredFeature<>(EnvironmentalFeatures.BIG_WISTERIA_TREE.get(), Configs.PINK_WISTERIA));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> BIG_PINK_WISTERIA_BEES_005 = register("big_pink_wisteria_bees_005", () -> new ConfiguredFeature<>(EnvironmentalFeatures.WISTERIA_TREE.get(), Configs.PINK_WISTERIA_BEES_005));
 
+		public static final RegistryObject<ConfiguredFeature<RandomFeatureConfiguration, ?>> TREES_WISTERIA = register("trees_wisteria", () -> new ConfiguredFeature<>(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(EnvironmentalPlacedFeatures.PINK_WISTERIA_BEES_002.getHolder().get(), 0.25F), new WeightedPlacedFeature(EnvironmentalPlacedFeatures.BLUE_WISTERIA_BEES_002.getHolder().get(), 0.25F), new WeightedPlacedFeature(EnvironmentalPlacedFeatures.PURPLE_WISTERIA_BEES_002.getHolder().get(), 0.25F)), EnvironmentalPlacedFeatures.WHITE_WISTERIA_BEES_002.getHolder().get())));
 
 		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> FLOWER_BLUE_ORCHID = register("flower_blue_orchid", () -> new ConfiguredFeature<>(Feature.FLOWER, new RandomPatchConfiguration(64, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.BLUE_ORCHID))))));
 		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> FLOWER_CORNFLOWER = register("flower_cornflower", () -> new ConfiguredFeature<>(Feature.FLOWER, new RandomPatchConfiguration(64, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.CORNFLOWER))))));
@@ -215,8 +188,8 @@ public class EnvironmentalFeatures {
 		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> FLOWER_RED_LOTUS = register("flower_red_lotus", () -> new ConfiguredFeature<>(Feature.FLOWER, new RandomPatchConfiguration(64, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(EnvironmentalBlocks.RED_LOTUS_FLOWER.get()))))));
 		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> FLOWER_WHITE_LOTUS = register("flower_white_lotus", () -> new ConfiguredFeature<>(Feature.FLOWER, new RandomPatchConfiguration(64, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(EnvironmentalBlocks.WHITE_LOTUS_FLOWER.get()))))));
 
-		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> FLOWER_HIBISCUS_WARM = register("flower_hibiscus_warm", () -> new ConfiguredFeature<>(Feature.FLOWER, new RandomPatchConfiguration(64, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder().add(EnvironmentalBlocks.RED_HIBISCUS.get().defaultBlockState(), 1).add(EnvironmentalBlocks.ORANGE_HIBISCUS.get().defaultBlockState(), 2).add(EnvironmentalBlocks.YELLOW_HIBISCUS.get().defaultBlockState(), 3)))))));
-		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> FLOWER_HIBISCUS_COOL = register("flower_hibiscus_cool", () -> new ConfiguredFeature<>(Feature.FLOWER, new RandomPatchConfiguration(64, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder().add(EnvironmentalBlocks.PURPLE_HIBISCUS.get().defaultBlockState(), 1).add(EnvironmentalBlocks.MAGENTA_HIBISCUS.get().defaultBlockState(), 2).add(EnvironmentalBlocks.PINK_HIBISCUS.get().defaultBlockState(), 3)))))));
+		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> FLOWER_HIBISCUS_WARM = register("flower_hibiscus_warm", () -> new ConfiguredFeature<>(Feature.FLOWER, new RandomPatchConfiguration(128, 7, 3, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder().add(EnvironmentalBlocks.RED_HIBISCUS.get().defaultBlockState(), 1).add(EnvironmentalBlocks.ORANGE_HIBISCUS.get().defaultBlockState(), 2).add(EnvironmentalBlocks.YELLOW_HIBISCUS.get().defaultBlockState(), 3)))))));
+		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> FLOWER_HIBISCUS_COOL = register("flower_hibiscus_cool", () -> new ConfiguredFeature<>(Feature.FLOWER, new RandomPatchConfiguration(128, 7, 3, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder().add(EnvironmentalBlocks.PURPLE_HIBISCUS.get().defaultBlockState(), 1).add(EnvironmentalBlocks.MAGENTA_HIBISCUS.get().defaultBlockState(), 2).add(EnvironmentalBlocks.PINK_HIBISCUS.get().defaultBlockState(), 3)))))));
 
 		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> FLOWER_CARTWHEEL = register("flower_cartwheel", () -> new ConfiguredFeature<>(Feature.FLOWER, new RandomPatchConfiguration(64, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder().add(EnvironmentalBlocks.CARTWHEEL.get().defaultBlockState().setValue(CartwheelBlock.FACING, Direction.NORTH), 1).add(EnvironmentalBlocks.CARTWHEEL.get().defaultBlockState().setValue(CartwheelBlock.FACING, Direction.SOUTH), 1).add(EnvironmentalBlocks.CARTWHEEL.get().defaultBlockState().setValue(CartwheelBlock.FACING, Direction.EAST), 1).add(EnvironmentalBlocks.CARTWHEEL.get().defaultBlockState().setValue(CartwheelBlock.FACING, Direction.WEST), 1)))))));
 
@@ -244,32 +217,18 @@ public class EnvironmentalFeatures {
 //		public static final ConfiguredFeature<?, ?> PATCH_DELPHINIUMS = register("patch_delphiniums", Feature.SIMPLE_RANDOM_SELECTOR.configured(new SimpleRandomFeatureConfiguration(ImmutableList.of(() -> PATCH_WHITE_DELPHINIUM, () -> PATCH_PINK_DELPHINIUM, () -> PATCH_PURPLE_DELPHINIUM, () -> PATCH_BLUE_DELPHINIUM))).decorated(Features.Decorators.HEIGHTMAP_DOUBLE_SQUARE.count(12)));
 //		public static final ConfiguredFeature<?, ?> PATCH_BIRD_OF_PARADISE = register("patch_bird_of_paradise", Feature.RANDOM_PATCH.configured(Configs.BIRD_OF_PARADISE_CONFIG).decorated(Features.Decorators.HEIGHTMAP_DOUBLE_SQUARE.count(5)));
 //
-//		public static final ConfiguredFeature<?, ?> FLOWER_CARTWHEEL = register("flower_cartwheel", EnvironmentalFeatures.DIRECTIONAL_FLOWER.get().configured(Configs.CARTWHEEL_CONFIG).decorated(Features.Decorators.HEIGHTMAP_DOUBLE_SQUARE.count(5)));
-//		public static final ConfiguredFeature<?, ?> FLOWER_RED_LOTUS = register("flower_red_lotus", Feature.FLOWER.configured(Configs.RED_LOTUS_CONFIG).decorated(Features.Decorators.ADD_32).decorated(Features.Decorators.HEIGHTMAP_SQUARE).count(3));
-//		public static final ConfiguredFeature<?, ?> FLOWER_WHITE_LOTUS = register("flower_white_lotus", Feature.FLOWER.configured(Configs.WHITE_LOTUS_CONFIG).decorated(Features.Decorators.ADD_32).decorated(Features.Decorators.HEIGHTMAP_SQUARE).count(3));
-//		public static final ConfiguredFeature<?, ?> FLOWER_ALLIUM = register("flower_allium", Feature.FLOWER.configured(Configs.ALLIUM_CONFIG).decorated(Features.Decorators.ADD_32).decorated(Features.Decorators.HEIGHTMAP_SQUARE).count(3));
-//		public static final ConfiguredFeature<?, ?> FLOWER_VIOLET = register("flower_violet", Feature.FLOWER.configured(Configs.VIOLET_CONFIG).decorated(Features.Decorators.ADD_32).decorated(Features.Decorators.HEIGHTMAP_SQUARE).count(4));
-//		public static final ConfiguredFeature<?, ?> FLOWER_BLUEBELL = register("flower_bluebell", Feature.FLOWER.configured(Configs.BLUEBELL_CONFIG).decorated(Features.Decorators.ADD_32).decorated(Features.Decorators.HEIGHTMAP_SQUARE).count(3));
 //		public static final ConfiguredFeature<?, ?> FLOWER_BLOSSOM_WOODS = register("flower_blossom_woods", Feature.FLOWER.configured(Configs.CHERRY_BLOSSOM_FOREST_FLOWER_CONFIG).decorated(Features.Decorators.HEIGHTMAP_DOUBLE_SQUARE.count((4))));
 //		public static final ConfiguredFeature<?, ?> FLOWER_TALL_BLOSSOM_WOODS = register("flower_tall_blossom_woods", Feature.SIMPLE_RANDOM_SELECTOR.configured(new SimpleRandomFeatureConfiguration(ImmutableList.of(() -> Feature.RANDOM_PATCH.configured((new RandomPatchConfiguration.GrassConfigurationBuilder(new SimpleStateProvider(Blocks.ROSE_BUSH.defaultBlockState()), new DoublePlantPlacer())).tries(64).noProjection().build()), () -> Feature.RANDOM_PATCH.configured((new RandomPatchConfiguration.GrassConfigurationBuilder(new SimpleStateProvider(Blocks.PEONY.defaultBlockState()), new DoublePlantPlacer())).tries(64).noProjection().build()), () -> Feature.RANDOM_PATCH.configured((new RandomPatchConfiguration.GrassConfigurationBuilder(new SimpleStateProvider(Blocks.LILAC.defaultBlockState()), new DoublePlantPlacer())).tries(64).noProjection().build())))).decorated(Features.Decorators.HEIGHTMAP_DOUBLE_SQUARE.count((6))));
-//
-//		public static final ConfiguredFeature<?, ?> BLUE_WISTERIA_TREE = register("blue_wisteria_tree", EnvironmentalFeatures.WISTERIA_TREE.get().configured(Configs.BLUE_WISTERIA_TREE_WITH_BEEHIVES_CONFIG));
-//		public static final ConfiguredFeature<?, ?> BLUE_WISTERIA_TREE_BIG = register("blue_wisteria_tree_big", EnvironmentalFeatures.BIG_WISTERIA_TREE.get().configured(Configs.BLUE_WISTERIA_TREE_WITH_BEEHIVES_CONFIG));
-//		public static final ConfiguredFeature<?, ?> WHITE_WISTERIA_TREE = register("white_wisteria_tree", EnvironmentalFeatures.WISTERIA_TREE.get().configured(Configs.WHITE_WISTERIA_TREE_WITH_BEEHIVES_CONFIG));
-//		public static final ConfiguredFeature<?, ?> WHITE_WISTERIA_TREE_BIG = register("white_wisteria_tree_big", EnvironmentalFeatures.BIG_WISTERIA_TREE.get().configured(Configs.WHITE_WISTERIA_TREE_WITH_BEEHIVES_CONFIG));
-//		public static final ConfiguredFeature<?, ?> PINK_WISTERIA_TREE = register("pink_wisteria_tree", EnvironmentalFeatures.WISTERIA_TREE.get().configured(Configs.PINK_WISTERIA_TREE_WITH_BEEHIVES_CONFIG));
-//		public static final ConfiguredFeature<?, ?> PINK_WISTERIA_TREE_BIG = register("pink_wisteria_tree_big", EnvironmentalFeatures.BIG_WISTERIA_TREE.get().configured(Configs.PINK_WISTERIA_TREE_WITH_BEEHIVES_CONFIG));
-//		public static final ConfiguredFeature<?, ?> PURPLE_WISTERIA_TREE = register("purple_wisteria_tree", EnvironmentalFeatures.WISTERIA_TREE.get().configured(Configs.PURPLE_WISTERIA_TREE_WITH_BEEHIVES_CONFIG));
-//		public static final ConfiguredFeature<?, ?> PURPLE_WISTERIA_TREE_BIG = register("purple_wisteria_tree_big", EnvironmentalFeatures.BIG_WISTERIA_TREE.get().configured(Configs.PURPLE_WISTERIA_TREE_WITH_BEEHIVES_CONFIG));
-//		public static final ConfiguredFeature<?, ?> WISTERIA_TREE = register("wisteria_tree", Feature.RANDOM_SELECTOR.configured(new RandomFeatureConfiguration(ImmutableList.of(BLUE_WISTERIA_TREE.weighted(0.15F), WHITE_WISTERIA_TREE.weighted(0.15F), PINK_WISTERIA_TREE.weighted(0.15F)), PURPLE_WISTERIA_TREE)).decorated(Features.Decorators.HEIGHTMAP_SQUARE).decorated(FeatureDecorator.COUNT_EXTRA.configured(new FrequencyWithExtraChanceDecoratorConfiguration(2, 0.0075F, 1))));
-//		public static final ConfiguredFeature<?, ?> WISTERIA_TREE_BIG = register("wisteria_tree_big", Feature.RANDOM_SELECTOR.configured(new RandomFeatureConfiguration(ImmutableList.of(BLUE_WISTERIA_TREE_BIG.weighted(0.5F), WHITE_WISTERIA_TREE_BIG.weighted(0.5F), PINK_WISTERIA_TREE_BIG.weighted(0.5F)), PURPLE_WISTERIA_TREE_BIG)).decorated(Features.Decorators.HEIGHTMAP_SQUARE).decorated(FeatureDecorator.COUNT_EXTRA.configured(new FrequencyWithExtraChanceDecoratorConfiguration(1, 0.0075F, 1))));
-//
+
 //		public static final ConfiguredFeature<TreeConfiguration, ?> CHERRY_TREE = register("cherry_tree", EnvironmentalFeatures.CHERRY_TREE.get().configured(Configs.CHERRY_TREE_CONFIG));
 //		public static final ConfiguredFeature<TreeConfiguration, ?> CHERRY_TREE_BEES_0002 = register("cherry_tree_bees_0002", EnvironmentalFeatures.CHERRY_TREE.get().configured(Configs.CHERRY_TREE_WITH_FEW_BEEHIVES_CONFIG));
 //		public static final ConfiguredFeature<TreeConfiguration, ?> CHERRY_TREE_BEES_005 = register("cherry_tree_bees_005", EnvironmentalFeatures.CHERRY_TREE.get().configured(Configs.CHERRY_TREE_WITH_MORE_BEEHIVES_CONFIG));
-//
-//		public static final ConfiguredFeature<?, ?> MARSH_OAK = register("marsh_oak", Feature.RANDOM_SELECTOR.configured(new RandomFeatureConfiguration(ImmutableList.of(Features.FANCY_OAK.weighted(0.33333334F)), Features.OAK)).decorated(Features.Decorators.HEIGHTMAP_SQUARE).decorated(FeatureDecorator.COUNT_EXTRA.configured(new FrequencyWithExtraChanceDecoratorConfiguration(0, 0.25F, 1))));
-//		public static final ConfiguredFeature<?, ?> SWAMP_OAK = register("swamp_oak", Feature.RANDOM_SELECTOR.configured(new RandomFeatureConfiguration(ImmutableList.of(Features.FANCY_OAK.weighted(0.33333334F)), Features.OAK)).decorated(Features.Decorators.HEIGHTMAP_SQUARE).decorated(FeatureDecorator.COUNT_EXTRA.configured(new FrequencyWithExtraChanceDecoratorConfiguration(0, 0.05F, 1))));
+
+
+		public static final RegistryObject<ConfiguredFeature<RandomFeatureConfiguration, ?>> SWAMP_OAK = register("swamp_oak", () -> new ConfiguredFeature<>(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(TreePlacements.FANCY_OAK_CHECKED, 0.33333334F)), TreePlacements.OAK_CHECKED)));
+
+		//		public static final ConfiguredFeature<?, ?> MARSH_OAK = register("marsh_oak", Feature.RANDOM_SELECTOR.configured(new RandomFeatureConfiguration(ImmutableList.of(Features.FANCY_OAK.weighted(0.33333334F)), Features.OAK)).decorated(Features.Decorators.HEIGHTMAP_SQUARE).decorated(FeatureDecorator.COUNT_EXTRA.configured(new FrequencyWithExtraChanceDecoratorConfiguration(0, 0.25F, 1))));
+		//		public static final ConfiguredFeature<?, ?> SWAMP_OAK = register("swamp_oak", Feature.RANDOM_SELECTOR.configured(new RandomFeatureConfiguration(ImmutableList.of(Features.FANCY_OAK.weighted(0.33333334F)), Features.OAK)).decorated(Features.Decorators.HEIGHTMAP_SQUARE).decorated(FeatureDecorator.COUNT_EXTRA.configured(new FrequencyWithExtraChanceDecoratorConfiguration(0, 0.05F, 1))));
 //		public static final ConfiguredFeature<?, ?> CHERRY_TREE_BLOSSOM_WOODS = register("cherry_tree_blossom_woods", Feature.RANDOM_SELECTOR.configured(new RandomFeatureConfiguration(ImmutableList.of(CHERRY_TREE.weighted(0.1F)), CHERRY_TREE_BEES_0002)).decorated(Features.Decorators.HEIGHTMAP_SQUARE).decorated(FeatureDecorator.COUNT_EXTRA.configured(new FrequencyWithExtraChanceDecoratorConfiguration(8, 0.1F, 1))));
 //		public static final ConfiguredFeature<?, ?> CHERRY_TREE_BLOSSOM_VALLEYS = register("cherry_tree_blossom_valleys", Feature.RANDOM_SELECTOR.configured(new RandomFeatureConfiguration(ImmutableList.of(CHERRY_TREE.weighted(0.1F)), CHERRY_TREE_BEES_005)).decorated(Features.Decorators.HEIGHTMAP_SQUARE).decorated(FeatureDecorator.COUNT_EXTRA.configured(new FrequencyWithExtraChanceDecoratorConfiguration(0, 0.1F, 1))));
 //		public static final ConfiguredFeature<?, ?> BIRCH_TREE_BLOSSOM_WOODS = register("birch_tree_blossom_woods", Features.BIRCH_TALL.decorated(Features.Decorators.HEIGHTMAP_SQUARE).decorated(FeatureDecorator.COUNT_EXTRA.configured(new FrequencyWithExtraChanceDecoratorConfiguration(1, 0.02F, 2))));
@@ -287,7 +246,9 @@ public class EnvironmentalFeatures {
 //		public static final ConfiguredFeature<?, ?> SEAGRASS_MARSH = register("seagrass_marsh", Feature.SEAGRASS.configured(new ProbabilityFeatureConfiguration(0.6F)).count(128).decorated(Features.Decorators.TOP_SOLID_HEIGHTMAP_SQUARE));
 		public static final RegistryObject<ConfiguredFeature<ProbabilityFeatureConfiguration, ?>> SEAGRASS_MID = register("seagrass_mid", () -> new ConfiguredFeature<>(Feature.SEAGRASS, new ProbabilityFeatureConfiguration(0.6F)));
 		public static final RegistryObject<ConfiguredFeature<DiskConfiguration, ?>> DISK_MUD = register("disk_mud", () -> new ConfiguredFeature<>(Feature.DISK, new DiskConfiguration(EnvironmentalBlocks.MUD.get().defaultBlockState(), UniformInt.of(1, 4), 1, List.of(Blocks.DIRT.defaultBlockState(), EnvironmentalBlocks.MUD.get().defaultBlockState()))));
-//
+
+		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> PATCH_GIANT_TALL_GRASS = register("patch_giant_tall_grass", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(EnvironmentalBlocks.GIANT_TALL_GRASS.get())))));
+
 //		public static final ConfiguredFeature<?, ?> SPRING_WATER_MARSH = register("spring_water_marsh", Feature.SPRING.configured(new SpringConfiguration(Fluids.WATER.defaultFluidState(), true, 4, 1, ImmutableSet.of(Blocks.STONE, Blocks.GRANITE, Blocks.DIORITE, Blocks.ANDESITE))).decorated(FeatureDecorator.RANGE_BIASED.configured(new RangeDecoratorConfiguration(8, 8, 256))).squared().count(128));
 //		public static final ConfiguredFeature<?, ?> LAKE_WATER_MARSH = register("lake_water_marsh", Feature.LAKE.configured(new BlockStateConfiguration(Blocks.WATER.defaultBlockState())).decorated(FeatureDecorator.WATER_LAKE.configured(new ChanceDecoratorConfiguration(48))));
 
@@ -318,6 +279,13 @@ public class EnvironmentalFeatures {
 
 		public static final RegistryObject<PlacedFeature> FLOWER_HIBISCUS_WARM = register("flower_hibiscus_warm", EnvironmentalConfiguredFeatures.FLOWER_HIBISCUS_WARM, RarityFilter.onAverageOnceEvery(16), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 		public static final RegistryObject<PlacedFeature> FLOWER_HIBISCUS_COOL = register("flower_hibiscus_cool", EnvironmentalConfiguredFeatures.FLOWER_HIBISCUS_COOL, RarityFilter.onAverageOnceEvery(16), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
+
+		public static final RegistryObject<PlacedFeature> WHITE_WISTERIA_BEES_002 = register("white_wisteria_bees_002", EnvironmentalConfiguredFeatures.WHITE_WISTERIA_BEES_002, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
+		public static final RegistryObject<PlacedFeature> PINK_WISTERIA_BEES_002 = register("pink_wisteria_bees_002", EnvironmentalConfiguredFeatures.PINK_WISTERIA_BEES_002, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
+		public static final RegistryObject<PlacedFeature> PURPLE_WISTERIA_BEES_002 = register("purple_wisteria_bees_002", EnvironmentalConfiguredFeatures.PURPLE_WISTERIA_BEES_002, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
+		public static final RegistryObject<PlacedFeature> BLUE_WISTERIA_BEES_002 = register("blue_wisteria_bees_002", EnvironmentalConfiguredFeatures.BLUE_WISTERIA_BEES_002, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
+
+		public static final RegistryObject<PlacedFeature> TREES_WISTERIA = register("trees_flower_forest", EnvironmentalConfiguredFeatures.TREES_WISTERIA, VegetationPlacements.treePlacement(PlacementUtils.countExtra(2, 0.01F, 1)));
 
 		private static RegistryObject<PlacedFeature> register(String name, RegistryObject<? extends ConfiguredFeature<?, ?>> feature, PlacementModifier... placementModifiers) {
 			return register(name, feature, List.of(placementModifiers));

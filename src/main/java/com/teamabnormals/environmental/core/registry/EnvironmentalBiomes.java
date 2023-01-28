@@ -13,19 +13,13 @@ public class EnvironmentalBiomes {
 	private static final BiomeSubRegistryHelper HELPER = Environmental.REGISTRY_HELPER.getBiomeSubHelper();
 
 	public static final BiomeSubRegistryHelper.KeyedBiome MARSH = HELPER.createBiome("marsh", EnvironmentalBiomes::createMarshBiome);
-	public static final BiomeSubRegistryHelper.KeyedBiome MUSHROOM_MARSH = HELPER.createBiome("mushroom_marsh", EnvironmentalBiomes::createMarshBiome);
 
 	public static final BiomeSubRegistryHelper.KeyedBiome BLOSSOM_WOODS = HELPER.createBiome("blossom_woods", EnvironmentalBiomes::createBlossomBiome);
-	public static final BiomeSubRegistryHelper.KeyedBiome BLOSSOM_HILLS = HELPER.createBiome("blossom_hills", EnvironmentalBiomes::createBlossomBiome);
-	public static final BiomeSubRegistryHelper.KeyedBiome BLOSSOM_HIGHLANDS = HELPER.createBiome("blossom_highlands", EnvironmentalBiomes::createBlossomBiome);
 	public static final BiomeSubRegistryHelper.KeyedBiome BLOSSOM_VALLEYS = HELPER.createBiome("blossom_valleys", EnvironmentalBiomes::createBlossomBiome);
 
 	public static void addBiomeTypes() {
 		BiomeDictionary.addTypes(MARSH.getKey(), Type.OVERWORLD, Type.PLAINS, Type.WET, Type.SWAMP);
-		BiomeDictionary.addTypes(MUSHROOM_MARSH.getKey(), Type.OVERWORLD, Type.RARE, Type.WET, Type.PLAINS, Type.SWAMP);
 		BiomeDictionary.addTypes(BLOSSOM_WOODS.getKey(), Type.OVERWORLD, Type.FOREST, Type.RARE);
-		BiomeDictionary.addTypes(BLOSSOM_HILLS.getKey(), Type.OVERWORLD, Type.FOREST, Type.RARE, Type.HILLS);
-		BiomeDictionary.addTypes(BLOSSOM_HIGHLANDS.getKey(), Type.OVERWORLD, Type.FOREST, Type.RARE, Type.MOUNTAIN);
 		BiomeDictionary.addTypes(BLOSSOM_VALLEYS.getKey(), Type.OVERWORLD, Type.FOREST, Type.RARE, Type.PLAINS);
 
 		BiomeDictionary.addTypes(Biomes.DEEP_FROZEN_OCEAN, Type.SNOWY);

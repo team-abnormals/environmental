@@ -20,16 +20,11 @@ public class WisteriaTree extends AbstractTreeGrower {
 
 	@Nullable
 	protected Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(Random random, boolean beehive) {
-		return this.getFeatureForColor(this.color, random.nextInt(10) == 0, beehive).getHolder().get();
+		return this.getFeatureForColor(this.color, beehive).getHolder().get();
 	}
 
-	private RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> getFeatureForColor(WisteriaColor color, boolean big, boolean beehive) {
-		return !big ? switch (color) {
-			case PURPLE -> beehive ? EnvironmentalConfiguredFeatures.BIG_PURPLE_WISTERIA_BEES_005 : EnvironmentalConfiguredFeatures.BIG_PURPLE_WISTERIA;
-			case WHITE -> beehive ? EnvironmentalConfiguredFeatures.BIG_WHITE_WISTERIA_BEES_005 : EnvironmentalConfiguredFeatures.BIG_WHITE_WISTERIA;
-			case PINK -> beehive ? EnvironmentalConfiguredFeatures.BIG_PINK_WISTERIA_BEES_005 : EnvironmentalConfiguredFeatures.BIG_PINK_WISTERIA;
-			case BLUE -> beehive ? EnvironmentalConfiguredFeatures.BIG_BLUE_WISTERIA_BEES_005 : EnvironmentalConfiguredFeatures.BIG_BLUE_WISTERIA;
-		} : switch (color) {
+	private RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> getFeatureForColor(WisteriaColor color, boolean beehive) {
+		return switch (color) {
 			case PURPLE -> beehive ? EnvironmentalConfiguredFeatures.PURPLE_WISTERIA_BEES_005 : EnvironmentalConfiguredFeatures.PURPLE_WISTERIA;
 			case WHITE -> beehive ? EnvironmentalConfiguredFeatures.WHITE_WISTERIA_BEES_005 : EnvironmentalConfiguredFeatures.WHITE_WISTERIA;
 			case PINK -> beehive ? EnvironmentalConfiguredFeatures.PINK_WISTERIA_BEES_005 : EnvironmentalConfiguredFeatures.PINK_WISTERIA;
