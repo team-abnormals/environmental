@@ -33,6 +33,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class EnvironmentalCompat {
+	
 	public static void registerCompat() {
 		registerLootInjectors();
 		registerCompostables();
