@@ -1,11 +1,11 @@
 package com.teamabnormals.environmental.common.entity.ai.goal;
 
-import java.util.EnumSet;
-
 import com.teamabnormals.environmental.common.entity.animal.deer.AbstractDeer;
 import com.teamabnormals.environmental.common.entity.animal.deer.Deer;
 import net.minecraft.world.entity.ai.goal.FollowParentGoal;
 import net.minecraft.world.entity.ai.goal.Goal;
+
+import java.util.EnumSet;
 
 public class DeerFollowParentGoal extends FollowParentGoal {
 
