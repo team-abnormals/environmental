@@ -15,70 +15,66 @@ import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-/**
- * ModelKoi - Undefined
- * Created using Tabula 8.0.0
- */
 @OnlyIn(Dist.CLIENT)
 public class KoiModel<T extends Koi> extends EntityModel<T> {
-	public ModelPart Body1;
-	public ModelPart Body2;
-	public ModelPart TopFin1;
-	public ModelPart Nose;
-	public ModelPart Whisker1;
-	public ModelPart Whisker2;
-	public ModelPart RightFin;
-	public ModelPart LeftFin;
-	public ModelPart Tail;
-	public ModelPart TopFin2;
-	public ModelPart BottomFin;
+	public ModelPart front;
+	public ModelPart back;
+	public ModelPart frontTopFin;
+	public ModelPart nose;
+	public ModelPart rightWhisker;
+	public ModelPart leftWhisker;
+	public ModelPart rightFin;
+	public ModelPart leftFin;
+	public ModelPart tail;
+	public ModelPart backTopFin;
+	public ModelPart bottomFin;
 
 	public KoiModel(ModelPart root) {
-		this.Body1 = root.getChild("Body1");
-		this.Whisker1 = this.Body1.getChild("Whisker1");
-		this.Nose = this.Body1.getChild("Nose");
-		this.LeftFin = this.Body1.getChild("LeftFin");
-		this.Body2 = this.Body1.getChild("Body2");
-		this.Tail = this.Body2.getChild("Tail");
-		this.BottomFin = this.Body2.getChild("BottomFin");
-		this.TopFin2 = this.Body2.getChild("TopFin2");
-		this.RightFin = this.Body1.getChild("RightFin");
-		this.TopFin1 = this.Body1.getChild("TopFin1");
-		this.Whisker2 = this.Body1.getChild("Whisker2");
+		this.front = root.getChild("front");
+		this.rightWhisker = this.front.getChild("right_whisker");
+		this.nose = this.front.getChild("nose");
+		this.leftFin = this.front.getChild("left_fin");
+		this.back = this.front.getChild("back");
+		this.tail = this.back.getChild("tail");
+		this.bottomFin = this.back.getChild("bottom_fin");
+		this.backTopFin = this.back.getChild("back_top_fin");
+		this.rightFin = this.front.getChild("right_fin");
+		this.frontTopFin = this.front.getChild("front_top_fin");
+		this.leftWhisker = this.front.getChild("left_whisker");
 	}
 
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition root = meshdefinition.getRoot();
-		PartDefinition Body1 = root.addOrReplaceChild("Body1", CubeListBuilder.create().texOffs(0, 0).addBox(-1.5F, -2.0F, -8.0F, 3.0F, 4.0F, 8.0F, false), PartPose.offsetAndRotation(0.0F, 21.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-		PartDefinition Whisker1 = Body1.addOrReplaceChild("Whisker1", CubeListBuilder.create().texOffs(0, 4).addBox(-3.0F, 0.0F, 0.0F, 3.0F, 1.0F, 0.0F, false), PartPose.offsetAndRotation(-1.5F, 0.0F, -8.5F, 0.0F, 0.7853982F, -0.2617994F));
-		PartDefinition Nose = Body1.addOrReplaceChild("Nose", CubeListBuilder.create().texOffs(0, 0).addBox(-1.5F, -1.0F, -9.0F, 3.0F, 3.0F, 1.0F, false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-		PartDefinition LeftFin = Body1.addOrReplaceChild("LeftFin", CubeListBuilder.create().texOffs(-6, 12).addBox(0.0F, 0.0F, 0.0F, 3.0F, 0.0F, 6.0F, true), PartPose.offsetAndRotation(1.0F, 1.0F, -5.0F, 0.0F, 0.2617994F, 0.7853982F));
-		PartDefinition Body2 = Body1.addOrReplaceChild("Body2", CubeListBuilder.create().texOffs(0, 12).addBox(-1.5F, -2.0F, 0.0F, 3.0F, 4.0F, 8.0F, false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-		PartDefinition Tail = Body2.addOrReplaceChild("Tail", CubeListBuilder.create().texOffs(0, 16).addBox(0.0F, -2.5F, 0.0F, 0.0F, 5.0F, 8.0F, false), PartPose.offsetAndRotation(0.0F, 0.0F, 8.0F, 0.0F, 0.0F, 0.0F));
-		PartDefinition BottomFin = Body2.addOrReplaceChild("BottomFin", CubeListBuilder.create().texOffs(14, -3).addBox(0.0F, 0.0F, -4.0F, 0.0F, 3.0F, 8.0F, false), PartPose.offsetAndRotation(0.0F, 2.0F, 4.0F, 0.0F, 0.0F, 0.0F));
-		PartDefinition TopFin2 = Body2.addOrReplaceChild("TopFin2", CubeListBuilder.create().texOffs(32, -8).addBox(0.0F, -3.0F, -4.0F, 0.0F, 3.0F, 8.0F, false), PartPose.offsetAndRotation(0.0F, -2.0F, 4.0F, 0.0F, 0.0F, 0.0F));
-		PartDefinition RightFin = Body1.addOrReplaceChild("RightFin", CubeListBuilder.create().texOffs(-6, 12).addBox(-3.0F, 0.0F, 0.0F, 3.0F, 0.0F, 6.0F, false), PartPose.offsetAndRotation(-1.0F, 1.0F, -5.0F, 0.0F, -0.2617994F, -0.7853982F));
-		PartDefinition TopFin1 = Body1.addOrReplaceChild("TopFin1", CubeListBuilder.create().texOffs(14, -8).addBox(0.0F, -3.0F, -4.0F, 0.0F, 3.0F, 8.0F, false), PartPose.offsetAndRotation(0.0F, -2.0F, -4.0F, 0.0F, 0.0F, 0.0F));
-		PartDefinition Whisker2 = Body1.addOrReplaceChild("Whisker2", CubeListBuilder.create().texOffs(0, 4).addBox(0.0F, 0.0F, 0.0F, 3.0F, 1.0F, 0.0F, true), PartPose.offsetAndRotation(1.5F, 0.0F, -8.5F, 0.0F, -0.7853982F, 0.2617994F));
+		PartDefinition front = root.addOrReplaceChild("front", CubeListBuilder.create().texOffs(0, 0).addBox(-1.5F, -2.0F, -8.0F, 3.0F, 4.0F, 8.0F, false), PartPose.offsetAndRotation(0.0F, 21.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+		PartDefinition leftWhisker = front.addOrReplaceChild("left_whisker", CubeListBuilder.create().texOffs(0, 4).addBox(-3.0F, 0.0F, 0.0F, 3.0F, 1.0F, 0.0F, false), PartPose.offsetAndRotation(-1.5F, 0.0F, -8.5F, 0.0F, 0.7853982F, -0.2617994F));
+		PartDefinition nose = front.addOrReplaceChild("nose", CubeListBuilder.create().texOffs(0, 0).addBox(-1.5F, -1.0F, -9.0F, 3.0F, 3.0F, 1.0F, false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+		PartDefinition leftFin = front.addOrReplaceChild("left_fin", CubeListBuilder.create().texOffs(-6, 12).addBox(0.0F, 0.0F, 0.0F, 3.0F, 0.0F, 6.0F, true), PartPose.offsetAndRotation(1.0F, 1.0F, -5.0F, 0.0F, 0.2617994F, 0.7853982F));
+		PartDefinition back = front.addOrReplaceChild("back", CubeListBuilder.create().texOffs(0, 12).addBox(-1.5F, -2.0F, 0.0F, 3.0F, 4.0F, 8.0F, false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+		PartDefinition tail = back.addOrReplaceChild("tail", CubeListBuilder.create().texOffs(0, 16).addBox(0.0F, -2.5F, 0.0F, 0.0F, 5.0F, 8.0F, false), PartPose.offsetAndRotation(0.0F, 0.0F, 8.0F, 0.0F, 0.0F, 0.0F));
+		PartDefinition bottomFin = back.addOrReplaceChild("bottom_fin", CubeListBuilder.create().texOffs(14, -3).addBox(0.0F, 0.0F, -4.0F, 0.0F, 3.0F, 8.0F, false), PartPose.offsetAndRotation(0.0F, 2.0F, 4.0F, 0.0F, 0.0F, 0.0F));
+		PartDefinition backTopFin = back.addOrReplaceChild("back_top_fin", CubeListBuilder.create().texOffs(32, -8).addBox(0.0F, -3.0F, -4.0F, 0.0F, 3.0F, 8.0F, false), PartPose.offsetAndRotation(0.0F, -2.0F, 4.0F, 0.0F, 0.0F, 0.0F));
+		PartDefinition rightFin = front.addOrReplaceChild("right_fin", CubeListBuilder.create().texOffs(-6, 12).addBox(-3.0F, 0.0F, 0.0F, 3.0F, 0.0F, 6.0F, false), PartPose.offsetAndRotation(-1.0F, 1.0F, -5.0F, 0.0F, -0.2617994F, -0.7853982F));
+		PartDefinition frontTopFin = front.addOrReplaceChild("front_top_fin", CubeListBuilder.create().texOffs(14, -8).addBox(0.0F, -3.0F, -4.0F, 0.0F, 3.0F, 8.0F, false), PartPose.offsetAndRotation(0.0F, -2.0F, -4.0F, 0.0F, 0.0F, 0.0F));
+		PartDefinition rightWhisker = front.addOrReplaceChild("right_whisker", CubeListBuilder.create().texOffs(0, 4).addBox(0.0F, 0.0F, 0.0F, 3.0F, 1.0F, 0.0F, true), PartPose.offsetAndRotation(1.5F, 0.0F, -8.5F, 0.0F, -0.7853982F, 0.2617994F));
 		return LayerDefinition.create(meshdefinition, 64, 32);
 	}
 
 	@Override
 	public void renderToBuffer(PoseStack matrixStackIn, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-		ImmutableList.of(this.Body1).forEach((modelRenderer) -> modelRenderer.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha));
+		ImmutableList.of(this.front).forEach((modelRenderer) -> modelRenderer.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha));
 	}
 
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		if (entity.isInWater()) {
-			setRotateAngle(Body1, Body1.xRot, Mth.sin(0.6F * ageInTicks) * 0.3F * limbSwingAmount, Body1.zRot);
-			setRotateAngle(Body2, Body2.xRot, Mth.cos(0.6F * ageInTicks) * 0.7F * limbSwingAmount, Body2.zRot);
-			setRotateAngle(Tail, Tail.xRot, Mth.sin(0.6F * ageInTicks) * 0.75F * limbSwingAmount, Tail.zRot);
+			setRotateAngle(front, front.xRot, Mth.sin(0.6F * ageInTicks) * 0.3F * limbSwingAmount, front.zRot);
+			setRotateAngle(back, back.xRot, Mth.cos(0.6F * ageInTicks) * 0.7F * limbSwingAmount, back.zRot);
+			setRotateAngle(tail, tail.xRot, Mth.sin(0.6F * ageInTicks) * 0.75F * limbSwingAmount, tail.zRot);
 		} else {
-			setRotateAngle(Body1, Body1.xRot, -Mth.sin(0.6F * ageInTicks) * 0.45F, Body1.zRot);
-			setRotateAngle(Body2, Body2.xRot, Mth.cos(0.6F * ageInTicks) * 0.2F, Body2.zRot);
-			setRotateAngle(Tail, Tail.xRot, -Mth.sin(0.6F * ageInTicks) * 0.3F, Tail.zRot);
+			setRotateAngle(front, front.xRot, -Mth.sin(0.6F * ageInTicks) * 0.45F, front.zRot);
+			setRotateAngle(back, back.xRot, Mth.cos(0.6F * ageInTicks) * 0.2F, back.zRot);
+			setRotateAngle(tail, tail.xRot, -Mth.sin(0.6F * ageInTicks) * 0.3F, tail.zRot);
 		}
 	}
 

@@ -29,9 +29,6 @@ public class FennecFoxRenderer extends MobRenderer<FennecFox, FennecFoxModel<Fen
 
 	}
 
-	/**
-	 * Returns the location of an entity's texture.
-	 */
 	public ResourceLocation getTextureLocation(FennecFox entity) {
 		return TEXTURE;
 	}

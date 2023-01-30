@@ -29,10 +29,10 @@ public class DuckModel<T extends Duck> extends AgeableListModel<T> {
 	public DuckModel(ModelPart root) {
 		this.head = root.getChild("head");
 		this.body = root.getChild("body");
-		this.rightLeg = root.getChild("rightLeg");
-		this.leftLeg = root.getChild("leftLeg");
-		this.rightWing = root.getChild("rightWing");
-		this.leftWing = root.getChild("leftWing");
+		this.rightLeg = root.getChild("right_leg");
+		this.leftLeg = root.getChild("left_leg");
+		this.rightWing = root.getChild("right_wing");
+		this.leftWing = root.getChild("left_wing");
 	}
 
 	public static LayerDefinition createBodyLayer() {
@@ -40,10 +40,10 @@ public class DuckModel<T extends Duck> extends AgeableListModel<T> {
 		PartDefinition root = meshdefinition.getRoot();
 		PartDefinition head = root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-2.0F, -6.0F, -2.0F, 4.0F, 8.0F, 3.0F, false).texOffs(0, 11).addBox(-1.5F, -4.0F, -5.0F, 3.0F, 2.0F, 3.0F, false), PartPose.offsetAndRotation(0.0F, 16.0F, -3.0F, 0.0F, 0.0F, 0.0F));
 		PartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create().texOffs(14, 0).addBox(-3.0F, -4.0F, 0.0F, 6.0F, 8.0F, 5.0F, false), PartPose.offsetAndRotation(0.0F, 20.0F, 0.0F, 1.5707964F, 0.0F, 0.0F));
-		PartDefinition rightLeg = root.addOrReplaceChild("rightLeg", CubeListBuilder.create().texOffs(36, 0).addBox(-1.5F, 0.0F, -3.0F, 3.0F, 4.0F, 3.0F, false), PartPose.offsetAndRotation(-1.5F, 20.0F, 1.0F, 0.0F, 0.0F, 0.0F));
-		PartDefinition leftLeg = root.addOrReplaceChild("leftLeg", CubeListBuilder.create().texOffs(48, 0).addBox(-1.5F, 0.0F, -3.0F, 3.0F, 4.0F, 3.0F, false), PartPose.offsetAndRotation(1.5F, 20.0F, 1.0F, 0.0F, 0.0F, 0.0F));
-		PartDefinition rightWing = root.addOrReplaceChild("rightWing", CubeListBuilder.create().texOffs(14, 13).addBox(-0.5F, 0.0F, -3.0F, 1.0F, 5.0F, 6.0F, false), PartPose.offsetAndRotation(-3.5F, 15.0F, -1.0F, 0.0F, 0.0F, 0.0F));
-		PartDefinition leftWing = root.addOrReplaceChild("leftWing", CubeListBuilder.create().texOffs(30, 13).addBox(-0.5F, 0.0F, -3.0F, 1.0F, 5.0F, 6.0F, false), PartPose.offsetAndRotation(3.5F, 15.0F, -1.0F, 0.0F, 0.0F, 0.0F));
+		PartDefinition rightLeg = root.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(36, 0).addBox(-1.5F, 0.0F, -3.0F, 3.0F, 4.0F, 3.0F, false), PartPose.offsetAndRotation(-1.5F, 20.0F, 1.0F, 0.0F, 0.0F, 0.0F));
+		PartDefinition leftLeg = root.addOrReplaceChild("left_leg", CubeListBuilder.create().texOffs(48, 0).addBox(-1.5F, 0.0F, -3.0F, 3.0F, 4.0F, 3.0F, false), PartPose.offsetAndRotation(1.5F, 20.0F, 1.0F, 0.0F, 0.0F, 0.0F));
+		PartDefinition rightWing = root.addOrReplaceChild("right_wing", CubeListBuilder.create().texOffs(14, 13).addBox(-0.5F, 0.0F, -3.0F, 1.0F, 5.0F, 6.0F, false), PartPose.offsetAndRotation(-3.5F, 15.0F, -1.0F, 0.0F, 0.0F, 0.0F));
+		PartDefinition leftWing = root.addOrReplaceChild("left_wing", CubeListBuilder.create().texOffs(30, 13).addBox(-0.5F, 0.0F, -3.0F, 1.0F, 5.0F, 6.0F, false), PartPose.offsetAndRotation(3.5F, 15.0F, -1.0F, 0.0F, 0.0F, 0.0F));
 		return LayerDefinition.create(meshdefinition, 64, 32);
 	}
 
@@ -96,11 +96,5 @@ public class DuckModel<T extends Duck> extends AgeableListModel<T> {
 			this.rightLeg.y = 18.0F;
 			this.leftLeg.y = 18.0F;
 		}
-	}
-
-	public void setRotateAngle(ModelPart modelRenderer, float x, float y, float z) {
-		modelRenderer.xRot = x;
-		modelRenderer.yRot = y;
-		modelRenderer.zRot = z;
 	}
 }
