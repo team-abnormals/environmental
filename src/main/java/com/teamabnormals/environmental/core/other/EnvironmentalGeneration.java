@@ -20,12 +20,12 @@ import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.common.world.MobSpawnSettingsBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Mod.EventBusSubscriber(modid = Environmental.MOD_ID)
+@EventBusSubscriber(modid = Environmental.MOD_ID)
 public class EnvironmentalGeneration {
 
 	@SubscribeEvent
@@ -39,10 +39,8 @@ public class EnvironmentalGeneration {
 
 		if (DataUtil.matchesKeys(biome, Biomes.SWAMP)) {
 			EnvironmentalGeneration.withMushrooms(generation);
-			EnvironmentalGeneration.withCattails(generation);
 			EnvironmentalGeneration.withMudDisks(generation);
 			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.TREES_SWAMP.getHolder().get());
-//			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.WILLOW_TREE);
 			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_DUCKWEED.getHolder().get());
 		}
 
