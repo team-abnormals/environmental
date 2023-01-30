@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.teamabnormals.blueprint.common.world.storage.tracking.IDataManager;
 import com.teamabnormals.environmental.core.other.EnvironmentalDataProcessors;
 import com.teamabnormals.environmental.core.other.EnvironmentalTags;
+import com.teamabnormals.environmental.core.other.tags.EnvironmentalBlockTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -154,8 +155,8 @@ public class HuntTruffleGoal extends Goal {
 			BlockState blockstate = worldIn.getBlockState(pos.relative(direction));
 
 			if (direction == Direction.UP) {
-				if (!blockstate.is(EnvironmentalTags.Blocks.GRASS_LIKE)) {
-					if (!blockstate.is(BlockTags.DIRT) || !worldIn.getBlockState(pos.above()).is(EnvironmentalTags.Blocks.GRASS_LIKE)) {
+				if (!blockstate.is(EnvironmentalBlockTags.GRASS_LIKE)) {
+					if (!blockstate.is(BlockTags.DIRT) || !worldIn.getBlockState(pos.above()).is(EnvironmentalBlockTags.GRASS_LIKE)) {
 						return false;
 					}
 				}

@@ -9,9 +9,6 @@ import net.minecraft.world.level.block.Block;
 
 //TODO: Seperate Tag classes & generate
 public class EnvironmentalTags {
-	public static class Blocks {
-		public static final TagKey<Block> GRASS_LIKE = blockTag("grass_like");
-	}
 
 	public static class Items {
 		public static final TagKey<Item> WILLOW_LOGS = itemTag("willow_logs");
@@ -33,10 +30,6 @@ public class EnvironmentalTags {
 		public static final TagKey<EntityType<?>> UNAFFECTED_BY_SERENITY = entityTypeTag("unaffected_by_serenity");
 		public static final TagKey<EntityType<?>> SCARES_DEER = entityTypeTag("scares_deer");
 		public static final TagKey<EntityType<?>> SCARES_TRUSTING_DEER = entityTypeTag("scares_trusting_deer");
-	}
-
-	private static TagKey<Block> blockTag(String tagName) {
-		return TagUtil.blockTag(Environmental.MOD_ID, tagName);
 	}
 
 	private static TagKey<Item> itemTag(String tagName) {

@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "environmental:willow_sign",
+    "environmental:wisteria_sign",
+    "environmental:cherry_sign"
+  ]
+}

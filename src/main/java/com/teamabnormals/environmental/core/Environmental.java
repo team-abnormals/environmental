@@ -7,6 +7,7 @@ import com.teamabnormals.environmental.client.resources.SlabfishSpriteUploader;
 import com.teamabnormals.environmental.common.network.message.*;
 import com.teamabnormals.environmental.common.slabfish.SlabfishLoader;
 import com.teamabnormals.environmental.core.data.server.EnvironmentalRecipeProvider;
+import com.teamabnormals.environmental.core.data.server.tags.EnvironmentalBlockTagsProvider;
 import com.teamabnormals.environmental.core.other.EnvironmentalCompat;
 import com.teamabnormals.environmental.core.other.EnvironmentalDataProcessors;
 import com.teamabnormals.environmental.core.other.EnvironmentalDataSerializers;
@@ -112,10 +113,11 @@ public class Environmental {
 
 	private void dataSetup(GatherDataEvent event) {
 		DataGenerator generator = event.getGenerator();
-		ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
+		ExistingFileHelper helper = event.getExistingFileHelper();
 
 		if (event.includeServer()) {
 			generator.addProvider(new EnvironmentalRecipeProvider(generator));
+			generator.addProvider(new EnvironmentalBlockTagsProvider(generator, helper));
 			//generator.addProvider(new SlabfishProvider(generator, MOD_ID, existingFileHelper));
 		}
 	}

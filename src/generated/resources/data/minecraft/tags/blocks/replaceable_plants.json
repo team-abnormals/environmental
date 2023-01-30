@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "environmental:hanging_willow_leaves",
+    "environmental:pink_hanging_wisteria_leaves",
+    "environmental:blue_hanging_wisteria_leaves",
+    "environmental:purple_hanging_wisteria_leaves",
+    "environmental:white_hanging_wisteria_leaves",
+    "environmental:giant_tall_grass",
+    "environmental:mycelium_sprouts",
+    "environmental:tall_dead_bush",
+    "environmental:bird_of_paradise",
+    "environmental:pink_delphinium",
+    "environmental:blue_delphinium",
+    "environmental:purple_delphinium",
+    "environmental:white_delphinium"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "environmental:mud",
+    "environmental:buried_truffle",
+    "environmental:podzol_path",
+    "environmental:mycelium_path"
+  ]
+}
