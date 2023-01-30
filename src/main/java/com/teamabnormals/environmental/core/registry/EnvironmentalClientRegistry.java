@@ -37,7 +37,7 @@ public class EnvironmentalClientRegistry {
 		registerParticleFactory(manager, EnvironmentalParticleTypes.RED_LOTUS_BLOSSOM, LotusBlossomParticle.Factory::new);
 		registerParticleFactory(manager, EnvironmentalParticleTypes.WHITE_LOTUS_BLOSSOM, LotusBlossomParticle.Factory::new);
 		registerParticleFactory(manager, EnvironmentalParticleTypes.PIG_FINDS_TRUFFLE, PigFindsTruffleParticle.Factory::new);
-		registerParticleFactory(manager, EnvironmentalParticleTypes.SLABFISH_FINDS_EFFIGY, SlabfishEffigyParticle.Factory::new); // TODO should probably give this it's own renderer
+		registerParticleFactory(manager, EnvironmentalParticleTypes.SLABFISH_FINDS_EFFIGY, SlabfishEffigyParticle.Factory::new);
 	}
 
 	@SubscribeEvent

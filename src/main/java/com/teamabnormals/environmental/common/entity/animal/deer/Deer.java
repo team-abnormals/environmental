@@ -1,7 +1,7 @@
 package com.teamabnormals.environmental.common.entity.animal.deer;
 
 import com.teamabnormals.environmental.common.entity.ai.goal.*;
-import com.teamabnormals.environmental.core.other.EnvironmentalTags;
+import com.teamabnormals.environmental.core.other.tags.EnvironmentalItemTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
@@ -62,7 +62,7 @@ public class Deer extends AbstractDeer {
 
 	@Override
 	protected void registerGoals() {
-		this.temptGoal = new DeerTemptGoal(this, 0.6D, 1.1D, Ingredient.of(EnvironmentalTags.Items.DEER_TEMPT_ITEMS));
+		this.temptGoal = new DeerTemptGoal(this, 0.6D, 1.1D, Ingredient.of(EnvironmentalItemTags.DEER_TEMPT_ITEMS));
 		this.goalSelector.addGoal(0, new FloatGoal(this));
 		this.goalSelector.addGoal(1, new DeerFollowParentGoal(this));
 		this.goalSelector.addGoal(2, new DeerRunFromAttackerGoal(this));
@@ -261,7 +261,7 @@ public class Deer extends AbstractDeer {
 
 	@Override
 	public boolean isFood(ItemStack stack) {
-		return stack.is(EnvironmentalTags.Items.DEER_FOOD);
+		return stack.is(EnvironmentalItemTags.DEER_FOOD);
 	}
 
 	@Override

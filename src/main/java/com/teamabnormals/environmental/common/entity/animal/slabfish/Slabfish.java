@@ -11,7 +11,7 @@ import com.teamabnormals.environmental.common.slabfish.condition.SlabfishConditi
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.other.EnvironmentalCriteriaTriggers;
 import com.teamabnormals.environmental.core.other.EnvironmentalDataSerializers;
-import com.teamabnormals.environmental.core.other.EnvironmentalTags;
+import com.teamabnormals.environmental.core.other.tags.EnvironmentalItemTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
 import com.teamabnormals.environmental.core.registry.EnvironmentalParticleTypes;
@@ -132,7 +132,7 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 
 		this.goalSelector.addGoal(4, new SlabbyBreedGoal(this, 1.0D));
 		this.goalSelector.addGoal(5, new SlabbyGrabItemGoal(this, 1.1D));
-		this.goalSelector.addGoal(6, new TemptGoal(this, 1.0D, Ingredient.of(EnvironmentalTags.Items.SLABFISH_FOOD), false));
+		this.goalSelector.addGoal(6, new TemptGoal(this, 1.0D, Ingredient.of(EnvironmentalItemTags.SLABFISH_FOOD), false));
 		this.goalSelector.addGoal(8, new SlabbyFollowParentGoal(this, 1.1D));
 		this.goalSelector.addGoal(9, new RandomStrollGoal(this, 1.0D));
 		this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, 6.0F));
@@ -276,7 +276,7 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 				return InteractionResult.SUCCESS;
 			}
 
-			if (Ingredient.of(EnvironmentalTags.Items.SLABFISH_SNACKS).test(stack)) {
+			if (Ingredient.of(EnvironmentalItemTags.SLABFISH_SNACKS).test(stack)) {
 				stack.finishUsingItem(this.level, this);
 				this.usePlayerItem(player, hand, stack);
 				level.playLocalSound(this.getX(), this.getY(), this.getZ(), EnvironmentalSoundEvents.SLABFISH_EAT.get(), SoundSource.NEUTRAL, 1F, 1F, true);
@@ -322,7 +322,7 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 				return InteractionResult.SUCCESS;
 			}
 
-		} else if (stack.is(EnvironmentalTags.Items.SLABFISH_TAME_ITEMS)) {
+		} else if (stack.is(EnvironmentalItemTags.SLABFISH_TAME_ITEMS)) {
 			if (!player.getAbilities().instabuild) {
 				stack.shrink(1);
 			}
@@ -548,7 +548,7 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 
 	@Override
 	public boolean isFood(ItemStack stack) {
-		return !Ingredient.of(EnvironmentalTags.Items.SLABFISH_TAME_ITEMS).test(stack) && Ingredient.of(EnvironmentalTags.Items.SLABFISH_FOOD).test(stack);
+		return !Ingredient.of(EnvironmentalItemTags.SLABFISH_TAME_ITEMS).test(stack) && Ingredient.of(EnvironmentalItemTags.SLABFISH_FOOD).test(stack);
 	}
 
 	@Override

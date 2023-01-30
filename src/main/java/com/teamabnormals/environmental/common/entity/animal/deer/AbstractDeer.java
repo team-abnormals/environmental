@@ -1,6 +1,6 @@
 package com.teamabnormals.environmental.common.entity.animal.deer;
 
-import com.teamabnormals.environmental.core.other.EnvironmentalTags;
+import com.teamabnormals.environmental.core.other.tags.EnvironmentalEntityTypeTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -28,10 +28,10 @@ public abstract class AbstractDeer extends Animal {
 	private static final EntityDimensions GRAZING_DIMENSIONS = EntityDimensions.scalable(0.8F, 1.2F);
 
 	private static final Predicate<LivingEntity> AVOID_ENTITY_PREDICATE = (entity) -> {
-		return entity.getType().is(EnvironmentalTags.EntityTypes.SCARES_DEER) && !entity.isDiscrete() && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(entity);
+		return entity.getType().is(EnvironmentalEntityTypeTags.SCARES_DEER) && !entity.isDiscrete() && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(entity);
 	};
 	private static final Predicate<LivingEntity> TRUSTING_AVOID_ENTITY_PREDICATE = (entity) -> {
-		if (!entity.getType().is(EnvironmentalTags.EntityTypes.SCARES_TRUSTING_DEER) || (entity instanceof TamableAnimal && ((TamableAnimal) entity).isTame())) {
+		if (!entity.getType().is(EnvironmentalEntityTypeTags.SCARES_TRUSTING_DEER) || (entity instanceof TamableAnimal && ((TamableAnimal) entity).isTame())) {
 			return false;
 		} else {
 			return !entity.isDiscrete() && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(entity);

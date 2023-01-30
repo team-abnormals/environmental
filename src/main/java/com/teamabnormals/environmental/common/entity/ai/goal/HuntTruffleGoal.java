@@ -3,7 +3,6 @@ package com.teamabnormals.environmental.common.entity.ai.goal;
 import com.google.common.collect.Lists;
 import com.teamabnormals.blueprint.common.world.storage.tracking.IDataManager;
 import com.teamabnormals.environmental.core.other.EnvironmentalDataProcessors;
-import com.teamabnormals.environmental.core.other.EnvironmentalTags;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalBlockTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.core.BlockPos;

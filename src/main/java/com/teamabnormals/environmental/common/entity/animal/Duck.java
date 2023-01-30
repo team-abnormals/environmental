@@ -1,7 +1,8 @@
 package com.teamabnormals.environmental.common.entity.animal;
 
 import com.teamabnormals.environmental.common.entity.ai.goal.DuckSwimGoal;
-import com.teamabnormals.environmental.core.other.EnvironmentalTags;
+import com.teamabnormals.environmental.core.other.tags.EnvironmentalBlockTags;
+import com.teamabnormals.environmental.core.other.tags.EnvironmentalItemTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSoundEvents;
@@ -26,7 +27,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
@@ -57,7 +57,7 @@ public class Duck extends Animal {
 		this.goalSelector.addGoal(0, new DuckSwimGoal(this));
 		this.goalSelector.addGoal(1, new PanicGoal(this, 1.4D));
 		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
-		this.goalSelector.addGoal(3, new TemptGoal(this, 1.0D, Ingredient.of(EnvironmentalTags.Items.DUCK_FOOD), false));
+		this.goalSelector.addGoal(3, new TemptGoal(this, 1.0D, Ingredient.of(EnvironmentalItemTags.DUCK_FOOD), false));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
 		this.goalSelector.addGoal(5, new RandomStrollGoal(this, 1.0D));
 		this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
@@ -161,9 +161,8 @@ public class Duck extends Animal {
 		this.entityData.set(EATING, eatingTimeIn);
 	}
 
-	//TODO: water_animal_spawnable_on
 	public static boolean canDuckSpawn(EntityType<? extends Animal> animal, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, Random random) {
-		return (worldIn.getBlockState(pos.below()).is(Blocks.GRASS_BLOCK) || worldIn.getFluidState(pos.below()).is(FluidTags.WATER)) && worldIn.getRawBrightness(pos, 0) > 8;
+		return worldIn.getBlockState(pos.below()).is(EnvironmentalBlockTags.WATER_ANIMALS_SPAWNABLE_ON) && isBrightEnoughToSpawn(worldIn, pos);
 	}
 
 	@Override
@@ -198,7 +197,7 @@ public class Duck extends Animal {
 
 	@Override
 	public boolean isFood(ItemStack stack) {
-		return Ingredient.of(EnvironmentalTags.Items.DUCK_FOOD).test(stack);
+		return Ingredient.of(EnvironmentalItemTags.DUCK_FOOD).test(stack);
 	}
 
 	@Override

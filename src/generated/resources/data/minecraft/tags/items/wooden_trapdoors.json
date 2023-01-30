@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "environmental:willow_trapdoor",
+    "environmental:wisteria_trapdoor",
+    "environmental:cherry_trapdoor"
+  ]
+}

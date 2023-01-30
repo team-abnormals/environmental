@@ -7,7 +7,7 @@ import com.teamabnormals.environmental.client.resources.SlabfishSpriteUploader;
 import com.teamabnormals.environmental.common.network.message.*;
 import com.teamabnormals.environmental.common.slabfish.SlabfishLoader;
 import com.teamabnormals.environmental.core.data.server.EnvironmentalRecipeProvider;
-import com.teamabnormals.environmental.core.data.server.tags.EnvironmentalBlockTagsProvider;
+import com.teamabnormals.environmental.core.data.server.tags.*;
 import com.teamabnormals.environmental.core.other.EnvironmentalCompat;
 import com.teamabnormals.environmental.core.other.EnvironmentalDataProcessors;
 import com.teamabnormals.environmental.core.other.EnvironmentalDataSerializers;
@@ -18,6 +18,7 @@ import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures.Envir
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraftforge.api.distmarker.Dist;
@@ -116,8 +117,13 @@ public class Environmental {
 		ExistingFileHelper helper = event.getExistingFileHelper();
 
 		if (event.includeServer()) {
+			EnvironmentalBlockTagsProvider blockTags = new EnvironmentalBlockTagsProvider(generator, helper);
+			generator.addProvider(blockTags);
+			generator.addProvider(new EnvironmentalItemTagsProvider(generator, blockTags, helper));
+			generator.addProvider(new EnvironmentalEntityTypeTagsProvider(generator, helper));
+			generator.addProvider(new EnvironmentalStructureTagsProvider(generator, helper));
+			generator.addProvider(new EnvironmentalBiomeTagsProvider(generator, helper));
 			generator.addProvider(new EnvironmentalRecipeProvider(generator));
-			generator.addProvider(new EnvironmentalBlockTagsProvider(generator, helper));
 			//generator.addProvider(new SlabfishProvider(generator, MOD_ID, existingFileHelper));
 		}
 	}

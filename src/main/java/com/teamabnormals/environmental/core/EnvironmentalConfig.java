@@ -1,12 +1,9 @@
 package com.teamabnormals.environmental.core;
 
-import com.google.common.collect.Lists;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import org.apache.commons.lang3.tuple.Pair;
-
-import java.util.List;
 
 @EventBusSubscriber(modid = Environmental.MOD_ID)
 public class EnvironmentalConfig {
@@ -21,8 +18,6 @@ public class EnvironmentalConfig {
 		public final ConfigValue<Boolean> limitFarmAnimalSpawns;
 		public final ConfigValue<Boolean> biomeVariantsAlwaysSpawn;
 
-		public final ConfigValue<List<String>> healerPouchStructures;
-
 		public final ConfigValue<Boolean> blockOnlyNaturalSpawns;
 		public final ConfigValue<Integer> koiHorizontalSerenityRange;
 		public final ConfigValue<Integer> koiVerticalSerenityRange;
@@ -36,12 +31,6 @@ public class EnvironmentalConfig {
 			generateWisteriaTrees = builder.define("Wisteria Tree generation in Flower Forests", true);
 			generateDelphiniums = builder.define("Delphinium generation in Flower Forests", true);
 			generateHibiscus = builder.define("Hibiscus generation in Jungles", true);
-			builder.pop();
-			builder.pop();
-
-			builder.push("items");
-			builder.push("healers_pouch");
-			healerPouchStructures = builder.comment("Structures that can spawn mobs wearing a Healer's Pouch").define("Healer's Pouch structures", Lists.newArrayList("minecraft:mineshaft", "minecraft:stronghold"));
 			builder.pop();
 			builder.pop();
 

@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "environmental:willow_boat",
+    "environmental:wisteria_boat",
+    "environmental:cherry_boat"
+  ]
+}
