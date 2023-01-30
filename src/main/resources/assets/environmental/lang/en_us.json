@@ -326,7 +326,10 @@
 
 	"subtitles.environmental.item.cattails.pick": "Cattails pop",
 	"subtitles.environmental.item.shovel.dig": "Shovel digs",
-	
+
+	"subtitles.environmental.block.large_lily_pad.bounce": "Large Lily Pad splashes",
+	"subtitles.environmental.block.giant_lily_pad.bounce": "Giant Lily Pad splashes",
+
 	"entity.environmental.slabfish.baby": "Baby",
 	
 	"entity.environmental.slabfish.type.swamp": "Swamp",
