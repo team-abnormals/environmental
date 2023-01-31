@@ -1,0 +1,64 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "values": [
+            {
+              "type": "blueprint:and",
+              "values": [
+                {
+                  "type": "forge:mod_loaded",
+                  "modid": "woodworks"
+                },
+                {
+                  "type": "woodworks:config",
+                  "value": "wooden_ladders"
+                }
+              ]
+            },
+            {
+              "flag": "variant_ladders",
+              "type": "blueprint:quark_flag"
+            }
+          ],
+          "type": "forge:or"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "environmental:cherry_ladder"
+          ]
+        },
+        "criteria": {
+          "has_stick": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "minecraft:stick"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "environmental:cherry_ladder"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "has_stick",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}
