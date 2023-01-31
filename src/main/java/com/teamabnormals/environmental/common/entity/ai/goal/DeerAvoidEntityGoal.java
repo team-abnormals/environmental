@@ -42,7 +42,7 @@ public class DeerAvoidEntityGoal extends Goal {
 		} else if (!this.toAvoid.isAlive()) {
 			return false;
 		} else {
-			return this.deer.distanceToSqr(this.toAvoid) <= 100.0F;
+			return this.deer.distanceToSqr(this.toAvoid) <= 256.0F;
 		}
 	}
 
@@ -62,9 +62,9 @@ public class DeerAvoidEntityGoal extends Goal {
 		if (this.pathNav.isDone())
 			this.flee();
 
-		if (!this.running && this.deer.distanceToSqr(this.toAvoid) <= 25.0F) {
+		if (!this.running && this.deer.distanceToSqr(this.toAvoid) <= 36.0F) {
 			this.running = true;
-			this.deer.getNavigation().setSpeedModifier(1.75F);
+			this.deer.getNavigation().setSpeedModifier(1.8F);
 		}
 	}
 
@@ -72,7 +72,7 @@ public class DeerAvoidEntityGoal extends Goal {
 		Vec3 vec3 = DefaultRandomPos.getPosAway(this.deer, 12, 6, this.toAvoid.position());
 		if (vec3 != null && this.toAvoid.distanceToSqr(vec3.x, vec3.y, vec3.z) >= this.toAvoid.distanceToSqr(this.deer)) {
 			Path path = this.pathNav.createPath(vec3.x, vec3.y, vec3.z, 0);
-			this.pathNav.moveTo(path, this.running ? 1.75F : 1.2D);
+			this.pathNav.moveTo(path, this.running ? 1.8F : 1.2D);
 		}
 	}
 }

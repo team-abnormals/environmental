@@ -20,6 +20,8 @@ public class DeerModel<E extends AbstractDeer> extends AgeableListModel<E> {
 	private boolean hasAntlers;
 	private float neckAngle;
 	private float sprintAmount;
+	private float hopAmount;
+	private float hopAngle;
 
 	public final ModelPart body;
 	public final ModelPart tail;
@@ -81,7 +83,9 @@ public class DeerModel<E extends AbstractDeer> extends AgeableListModel<E> {
 	public void prepareMobModel(E entity, float limbSwing, float limbSwingAmount, float partialTick) {
 		this.hasAntlers = entity.hasAntlers();
 		this.neckAngle = entity.getNeckAngle(partialTick);
-		this.sprintAmount = entity.getSprintAmount(partialTick);
+		this.hopAngle = entity.getHopAngle(partialTick);
+		this.hopAmount = entity.getHopAmount(partialTick);
+		this.sprintAmount = entity.getSprintAmount(partialTick) *  (1F - this.hopAmount);
 
 		boolean flag = this.young;
 		boolean flag1 = this.hasAntlers && !flag;
@@ -102,38 +106,49 @@ public class DeerModel<E extends AbstractDeer> extends AgeableListModel<E> {
 
 	@Override
 	public void setupAnim(E entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		float f = this.neckAngle * Mth.DEG_TO_RAD;
-		float f1 = Mth.clamp((this.neckAngle - 90F) / 40F, 0F, 1F);
-		float f2 = 1F - f1;
-		float f3 = 1F - this.sprintAmount;
+		float neckanglerad = this.neckAngle * Mth.DEG_TO_RAD;
+		float eatamount = Mth.clamp((this.neckAngle - 90F) / 40F, 0F, 1F);
+		float noeatamount = 1F - eatamount;
+		float noanimamount = Math.min(1F - this.sprintAmount, 1F - this.hopAmount);
 
-		this.neck.xRot = f;
+		this.neck.xRot = neckanglerad;
 		this.body.xRot = Mth.cos(limbSwing * 0.6662F) * 0.25F * limbSwingAmount * this.sprintAmount;
+
+		if (this.hopAngle != 0F) {
+			this.body.xRot += this.hopAngle;
+		}
 
 		this.neck.y += (float) Math.tan(this.body.xRot) * 7F;
 		this.neck.z = -7F - (float) Math.tan(this.body.xRot) * 4F;
-		this.head.y = 2F - (this.young ? 0.7F : 1.0F) * 11F * Mth.cos(f) + this.neck.y;
-		this.head.z = 1.5F - (this.young ? 0.6F : 1.0F) * 12F * Mth.sin(f) + this.neck.z;
+		this.head.y = 2F - (this.young ? 0.7F : 1.0F) * 11F * Mth.cos(neckanglerad) + this.neck.y;
+		this.head.z = 1.5F - (this.young ? 0.6F : 1.0F) * 12F * Mth.sin(neckanglerad) + this.neck.z;
 
-		this.head.xRot = f2 * headPitch * Mth.DEG_TO_RAD;
-		this.head.xRot += f1 * (Mth.sin(ageInTicks * 0.7F) * 0.15F + 0.65F);
-		this.head.yRot = f2 * netHeadYaw * Mth.DEG_TO_RAD;
+		this.head.xRot = headPitch * Mth.DEG_TO_RAD * noeatamount;
+		this.head.xRot += (Mth.sin(ageInTicks * 0.7F) * 0.15F + 0.65F) * eatamount;
+		this.head.yRot = netHeadYaw * Mth.DEG_TO_RAD * noeatamount;
 
 		this.rightFrontLeg.y = 14F + (float) Math.tan(this.body.xRot) * 5F;
 		this.leftFrontLeg.y = this.rightFrontLeg.y;
 		this.rightHindLeg.y = 14F - (float) Math.tan(this.body.xRot) * 6F;
 		this.leftHindLeg.y = this.rightHindLeg.y;
 
-		this.rightHindLeg.xRot = f3 * Mth.cos(limbSwing * 0.6662F) * 1.2F * limbSwingAmount;
-		this.leftHindLeg.xRot = f3 * Mth.cos(limbSwing * 0.6662F + Mth.PI) * 1.2F * limbSwingAmount;
-		this.rightFrontLeg.xRot = f3 * Mth.cos(limbSwing * 0.6662F + Mth.PI) * 1.2F * limbSwingAmount;
-		this.leftFrontLeg.xRot = f3 * Mth.cos(limbSwing * 0.6662F) * 1.2F * limbSwingAmount;
+		this.rightHindLeg.xRot = Mth.cos(limbSwing * 0.6662F) * 1.2F * limbSwingAmount * noanimamount;
+		this.leftHindLeg.xRot = Mth.cos(limbSwing * 0.6662F + Mth.PI) * 1.2F * limbSwingAmount * noanimamount;
+		this.rightFrontLeg.xRot = Mth.cos(limbSwing * 0.6662F + Mth.PI) * 1.2F * limbSwingAmount * noanimamount;
+		this.leftFrontLeg.xRot = Mth.cos(limbSwing * 0.6662F) * 1.2F * limbSwingAmount * noanimamount;
 
 		if (this.sprintAmount > 0F) {
 			this.rightFrontLeg.xRot += (-Mth.PI / 6F + Mth.cos(ageInTicks * 0.6662F + Mth.PI)) * limbSwingAmount * this.sprintAmount;
 			this.leftFrontLeg.xRot += (-Mth.PI / 6F + Mth.cos(ageInTicks * 0.6662F + Mth.PI + 0.6F)) * limbSwingAmount * this.sprintAmount;
 			this.rightHindLeg.xRot += (Mth.PI / 6F + Mth.cos(ageInTicks * 0.6662F + 0.6F)) * limbSwingAmount * this.sprintAmount;
 			this.leftHindLeg.xRot += (Mth.PI / 6F + Mth.cos(ageInTicks * 0.6662F)) * limbSwingAmount * this.sprintAmount;
+		}
+
+		if (this.hopAngle != 0F) {
+			this.rightFrontLeg.xRot += -this.hopAngle * 3F;
+			this.leftFrontLeg.xRot += -this.hopAngle * 3F * 0.85F;
+			this.rightHindLeg.xRot += -this.hopAngle * 2.5F * 0.85F;
+			this.leftHindLeg.xRot += -this.hopAngle * 2.5F;
 		}
 
 		if (this.young) {

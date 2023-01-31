@@ -1,12 +1,29 @@
 package com.teamabnormals.environmental.common.entity.animal.deer;
 
-import com.teamabnormals.environmental.common.entity.ai.goal.*;
+import java.time.LocalDate;
+import java.time.temporal.ChronoField;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import javax.annotation.Nullable;
+
+import com.teamabnormals.environmental.common.entity.ai.goal.DeerAvoidEntityGoal;
+import com.teamabnormals.environmental.common.entity.ai.goal.DeerFollowParentGoal;
+import com.teamabnormals.environmental.common.entity.ai.goal.DeerFrolicGoal;
+import com.teamabnormals.environmental.common.entity.ai.goal.DeerGrazeGoal;
+import com.teamabnormals.environmental.common.entity.ai.goal.DeerRunFromAttackerGoal;
+import com.teamabnormals.environmental.common.entity.ai.goal.DeerTemptGoal;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalItemTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
+
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -19,11 +36,14 @@ import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.BreedGoal;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.TemptGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
@@ -37,27 +57,18 @@ import net.minecraft.world.level.biome.Biome.Precipitation;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-import javax.annotation.Nullable;
-import java.time.LocalDate;
-import java.time.temporal.ChronoField;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 public class Deer extends AbstractDeer {
 	private static final EntityDataAccessor<Integer> DEER_COAT_COLOR = SynchedEntityData.defineId(Deer.class, EntityDataSerializers.INT);
 	private static final EntityDataAccessor<Integer> DEER_COAT_TYPE = SynchedEntityData.defineId(Deer.class, EntityDataSerializers.INT);
+	private static final EntityDataAccessor<Integer> FLOWERING_TIME = SynchedEntityData.defineId(Deer.class, EntityDataSerializers.INT);
 	private static final EntityDataAccessor<Boolean> TRUSTING = SynchedEntityData.defineId(Deer.class, EntityDataSerializers.BOOLEAN);
 
-	private static final UUID SPEED_MODIFIER = UUID.fromString("a21208ef-5399-4341-800f-d5a9152afe98");
-	private int floweringTime;
 	private final List<BlockState> flowers = new ArrayList<>();
 	@Nullable
 	private TemptGoal temptGoal;
 
 	public Deer(EntityType<? extends Animal> type, Level level) {
 		super(type, level);
-		this.floweringTime = 0;
 	}
 
 	@Override
@@ -68,11 +79,12 @@ public class Deer extends AbstractDeer {
 		this.goalSelector.addGoal(2, new DeerRunFromAttackerGoal(this));
 		this.goalSelector.addGoal(3, new DeerAvoidEntityGoal(this));
 		this.goalSelector.addGoal(4, new BreedGoal(this, 0.8D));
-		this.goalSelector.addGoal(5, this.temptGoal);
-		this.goalSelector.addGoal(6, new DeerGrazeGoal(this));
-		this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 0.8D));
-		this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 6.0F));
-		this.goalSelector.addGoal(9, new RandomLookAroundGoal(this));
+		this.goalSelector.addGoal(5, new DeerFrolicGoal(this));
+		this.goalSelector.addGoal(6, this.temptGoal);
+		this.goalSelector.addGoal(7, new DeerGrazeGoal(this));
+		this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 0.8D));
+		this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 6.0F));
+		this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
 	}
 
 	@Override
@@ -80,6 +92,7 @@ public class Deer extends AbstractDeer {
 		super.defineSynchedData();
 		this.entityData.define(DEER_COAT_COLOR, 0);
 		this.entityData.define(DEER_COAT_TYPE, 0);
+		this.entityData.define(FLOWERING_TIME, 0);
 		this.entityData.define(TRUSTING, false);
 	}
 
@@ -89,6 +102,15 @@ public class Deer extends AbstractDeer {
 		compound.putInt("CoatColor", this.getCoatColor());
 		compound.putInt("CoatType", this.getCoatType());
 		compound.putBoolean("Trusting", this.isTrusting());
+
+		compound.putInt("FloweringTime", this.getFloweringTime());
+		ListTag listtag = new ListTag();
+		for(BlockState blockstate : this.flowers) {
+			if (blockstate != null) {
+				listtag.add(NbtUtils.writeBlockState(blockstate));
+			}
+		}
+		compound.put("Flowers", listtag);
 	}
 
 	@Override
@@ -97,6 +119,15 @@ public class Deer extends AbstractDeer {
 		this.setCoatColor(compound.getInt("CoatColor"));
 		this.setCoatType(compound.getInt("CoatType"));
 		this.setTrusting(compound.getBoolean("Trusting"));
+
+		this.setFloweringTime(compound.getInt("FloweringTime"));
+		ListTag listtag = compound.getList("Flowers", 10);
+		for(int i = 0; i < listtag.size(); ++i) {
+			BlockState blockstate = NbtUtils.readBlockState(listtag.getCompound(i));
+			if (blockstate != null && !blockstate.isAir()) {
+				this.flowers.add(blockstate);
+			}
+		}
 	}
 
 	public static AttributeSupplier.Builder registerAttributes() {
@@ -106,34 +137,15 @@ public class Deer extends AbstractDeer {
 	@Override
 	public void aiStep() {
 		super.aiStep();
-		if (!this.level.isClientSide) {
-			AttributeModifier floweringModifier = new AttributeModifier(SPEED_MODIFIER, "Flowering speed boost", 0.07F,
-					Operation.ADDITION);
-			if (this.floweringTime > 0) {
-				this.floweringTime -= 1;
-				if (!this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(floweringModifier))
-					this.getAttribute(Attributes.MOVEMENT_SPEED).addTransientModifier(floweringModifier);
-				if (!this.flowers.isEmpty() && this.level.getGameTime() % 30 == 0) {
-					BlockPos position = this.blockPosition();
-					BlockState state = this.flowers.get(this.random.nextInt(this.flowers.size()));
-
-					if (state.getBlock() instanceof DoublePlantBlock) {
-						if (state.canSurvive(this.level, position) && this.level.isEmptyBlock(position)
-								&& this.level.isEmptyBlock(position.above())) {
-							DoublePlantBlock.placeAt(this.level, state, position, 2);
-							this.level.levelEvent(2005, position, 0);
-						}
-					} else {
-						if (state.canSurvive(this.level, position) && this.level.isEmptyBlock(position)) {
-							this.level.setBlock(position, state, 3);
-							this.level.levelEvent(2005, position, 0);
-						}
-					}
-				}
+		if (this.level.isClientSide) {
+			if (this.getFloweringTime() > 0 && this.tickCount % 16 == 0)
+				this.level.addParticle(ParticleTypes.HAPPY_VILLAGER, this.getRandomX(1.0D), this.getRandomY(), this.getRandomZ(1.0D), 0.0D, 0.0D, 0.0D);
+		} else {
+			int floweringtime = this.getFloweringTime();
+			if (floweringtime > 0) {
+				this.setFloweringTime(floweringtime - 1);
 			} else {
 				this.flowers.clear();
-				if (this.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(floweringModifier))
-					this.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(floweringModifier);
 			}
 		}
 	}
@@ -142,16 +154,37 @@ public class Deer extends AbstractDeer {
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 		Item item = stack.getItem();
+		boolean flag = player.isCreative() || this.temptGoal == null || this.temptGoal.isRunning();
+
+		if (!this.isBaby() && (this.isTrusting() || flag)) {
+			if (stack.is(Items.MELON_SLICE)) {
+				this.setFloweringTime(this.getFloweringTime() + 200);
+				this.particleCloud(ParticleTypes.HAPPY_VILLAGER);
+				this.usePlayerItem(player, hand, stack);
+				return InteractionResult.SUCCESS;
+			} else if (stack.is(Items.GLISTERING_MELON_SLICE)) {
+				this.setFloweringTime(this.getFloweringTime() + 600);
+				this.particleCloud(ParticleTypes.HAPPY_VILLAGER);
+				this.usePlayerItem(player, hand, stack);
+				return InteractionResult.SUCCESS;
+			} else if (this.getFloweringTime() > 0 && stack.is(ItemTags.FLOWERS) && item instanceof BlockItem block) {
+				if (!this.flowers.contains(block.getBlock().defaultBlockState())) {
+					this.flowers.add(block.getBlock().defaultBlockState());
+					this.particleCloud(ParticleTypes.HAPPY_VILLAGER);
+				}
+				this.usePlayerItem(player, hand, stack);
+				return InteractionResult.SUCCESS;
+			}
+		}
 
 		if (!this.isTrusting()) {
-			if ((this.temptGoal == null || this.temptGoal.isRunning()) && this.isFood(stack)) {
+			if (flag && this.isFood(stack)) {
 				if (!this.level.isClientSide) {
 					this.usePlayerItem(player, hand, stack);
-					if (this.random.nextInt(3) == 0
-							&& !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player)) {
+					if (this.random.nextInt(3) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player)) {
 						this.setTrusting(true);
 						this.spawnTrustingParticles(true);
-						this.level.broadcastEntityEvent(this, (byte) 4);
+						this.level.broadcastEntityEvent(this, (byte) 5);
 					} else {
 						this.spawnTrustingParticles(false);
 						this.level.broadcastEntityEvent(this, (byte) 6);
@@ -162,33 +195,31 @@ public class Deer extends AbstractDeer {
 			} else {
 				return InteractionResult.PASS;
 			}
-		} else if (!this.isBaby()) {
-			if (stack.is(Items.MELON_SLICE)) {
-				this.floweringTime += 200;
-				this.particleCloud(ParticleTypes.HAPPY_VILLAGER);
-				this.usePlayerItem(player, hand, stack);
-				return InteractionResult.SUCCESS;
-			} else if (stack.is(Items.GLISTERING_MELON_SLICE)) {
-				this.floweringTime += 600;
-				this.particleCloud(ParticleTypes.HAPPY_VILLAGER);
-				this.usePlayerItem(player, hand, stack);
-				return InteractionResult.SUCCESS;
-			} else if (this.floweringTime > 0 && stack.is(ItemTags.FLOWERS) && item instanceof BlockItem block) {
-				if (!this.flowers.contains(block.getBlock().defaultBlockState())) {
-					this.flowers.add(block.getBlock().defaultBlockState());
-					this.particleCloud(ParticleTypes.HAPPY_VILLAGER);
+		} else {
+			return super.mobInteract(player, hand);
+		}
+	}
+
+	public void spawnFlower() {
+		if (!this.flowers.isEmpty()) {
+			BlockPos pos = this.blockPosition();
+			BlockState state = this.flowers.get(this.random.nextInt(this.flowers.size()));
+
+			if (state.getBlock() instanceof DoublePlantBlock) {
+				if (state.canSurvive(this.level, pos) && this.level.isEmptyBlock(pos) && this.level.isEmptyBlock(pos.above())) {
+					DoublePlantBlock.placeAt(this.level, state, pos, 2);
+					this.spawnBoneMealParticles(state, pos);
 				}
-				this.usePlayerItem(player, hand, stack);
-				return InteractionResult.SUCCESS;
+			} else if (state.canSurvive(this.level, pos) && this.level.isEmptyBlock(pos)) {
+				this.level.setBlock(pos, state, 3);
+				this.spawnBoneMealParticles(state, pos);
 			}
 		}
-
-		return super.mobInteract(player, hand);
 	}
 
 	@Override
 	public void handleEntityEvent(byte id) {
-		if (id == 4) {
+		if (id == 5) {
 			this.spawnTrustingParticles(true);
 		} else if (id == 6) {
 			this.spawnTrustingParticles(false);
@@ -219,6 +250,34 @@ public class Deer extends AbstractDeer {
 			this.level.addParticle(particleoptions, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d0, d1, d2);
 		}
 	}
+	
+	private void spawnBoneMealParticles(BlockState blockstate, BlockPos blockpos) {
+		int amount = 15;
+		double d0 = 0.5D;
+		double d1;
+		if (blockstate.isSolidRender(this.level, blockpos)) {
+			blockpos = blockpos.above();
+			amount *= 3;
+			d0 = 3.0D;
+			d1 = 1.0D;
+		} else {
+			d1 = blockstate.getShape(this.level, blockpos).max(Direction.Axis.Y);
+		}
+
+		((ServerLevel) this.level).sendParticles(ParticleTypes.HAPPY_VILLAGER, (double)blockpos.getX() + 0.5D, (double)blockpos.getY() + 0.5D, (double)blockpos.getZ() + 0.5D, 0, 0.0D, 0.0D, 0.0D, 0.0D);
+		Random random = this.level.getRandom();
+
+		for(int i = 0; i < amount; ++i) {
+			double d2 = random.nextGaussian() * 0.02D;
+			double d3 = random.nextGaussian() * 0.02D;
+			double d4 = random.nextGaussian() * 0.02D;
+			double d5 = 0.5D - d0;
+			double d6 = (double)blockpos.getX() + d5 + random.nextDouble() * d0 * 2.0D;
+			double d7 = (double)blockpos.getY() + random.nextDouble() * d1;
+			double d8 = (double)blockpos.getZ() + d5 + random.nextDouble() * d0 * 2.0D;
+			((ServerLevel) this.level).sendParticles(ParticleTypes.HAPPY_VILLAGER, d6, d7, d8, 0, d2, d3, d4, 0.0D);
+		}
+	}
 
 	private void setCoatColor(int id) {
 		this.entityData.set(DEER_COAT_COLOR, id);
@@ -239,6 +298,18 @@ public class Deer extends AbstractDeer {
 
 	public int getCoatType() {
 		return this.entityData.get(DEER_COAT_TYPE);
+	}
+
+	public boolean isSpreadingFlowers() {
+		return this.getFloweringTime() > 0 && !this.flowers.isEmpty();
+	}
+
+	private int getFloweringTime() {
+		return this.entityData.get(FLOWERING_TIME);
+	}
+
+	private void setFloweringTime(int ticks) {
+		this.entityData.set(FLOWERING_TIME, ticks);
 	}
 
 	private void setTrusting(boolean trusting) {
@@ -284,8 +355,7 @@ public class Deer extends AbstractDeer {
 		if (this.random.nextInt(9) == 0) {
 			LocalDate localdate = LocalDate.now();
 			int month = localdate.get(ChronoField.MONTH_OF_YEAR);
-			return month == 12
-					&& this.level.getBiome(this.blockPosition()).value().getPrecipitation() == Precipitation.SNOW;
+			return month == 12 && this.level.getBiome(this.blockPosition()).value().getPrecipitation() == Precipitation.SNOW;
 		}
 		return false;
 	}

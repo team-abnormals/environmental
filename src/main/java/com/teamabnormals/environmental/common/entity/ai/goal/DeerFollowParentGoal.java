@@ -17,7 +17,7 @@ public class DeerFollowParentGoal extends FollowParentGoal {
 	@Override
 	public void tick() {
 		if (--this.timeToRecalcPath <= 0) {
-			boolean flag = this.parent.isSprinting() || ((AbstractDeer) this.animal).getNearestScaryEntity() != null;
+			boolean flag = this.parent.isSprinting() || ((Deer) this.parent).isSpreadingFlowers() || ((AbstractDeer) this.animal).getNearestScaryEntity() != null;
 			this.timeToRecalcPath = this.adjustedTickDelay(10);
 			this.animal.getNavigation().moveTo(this.parent, flag ? 1.75F : 1.2F);
 		}

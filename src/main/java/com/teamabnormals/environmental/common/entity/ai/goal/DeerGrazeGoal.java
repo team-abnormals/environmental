@@ -22,13 +22,14 @@ public class DeerGrazeGoal extends Goal {
 	@Override
 	public boolean canUse() {
 		BlockPos blockpos = this.deer.blockPosition().below();
-		return this.deer.getRandom().nextInt(400) == 0 && this.level.getBlockState(blockpos).is(Blocks.GRASS_BLOCK);
+		return this.deer.getRandom().nextInt(350) == 0 && this.level.getBlockState(blockpos).is(Blocks.GRASS_BLOCK);
 	}
 
 	@Override
 	public void start() {
 		this.grazeTime = this.adjustedTickDelay(40 + this.deer.getRandom().nextInt(100));
 		this.deer.setTargetNeckAngle(130);
+		this.deer.getNavigation().stop();
 	}
 
 	@Override
@@ -36,11 +37,13 @@ public class DeerGrazeGoal extends Goal {
 		this.deer.resetTargetNeckAngle();
 	}
 
+	@Override
 	public boolean canContinueToUse() {
 		BlockPos blockpos = this.deer.blockPosition().below();
 		return this.grazeTime > 0 && this.level.getBlockState(blockpos).is(Blocks.GRASS_BLOCK);
 	}
 
+	@Override
 	public void tick() {
 		--this.grazeTime;
 	}

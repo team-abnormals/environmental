@@ -44,6 +44,11 @@ public abstract class AbstractDeer extends Animal {
 	private float neckAngleO;
 	private float sprintAmount;
 	private float sprintAmountO;
+	private int hopProgress;
+	private float hopAmount;
+	private float hopAmountO;
+	private float hopAngle;
+	private float hopAngleO;
 
 	public AbstractDeer(EntityType<? extends Animal> type, Level level) {
 		super(type, level);
@@ -82,6 +87,7 @@ public abstract class AbstractDeer extends Animal {
 
 		this.updateNeckAngle();
 		this.updateSprintAnimation();
+		this.updateHopAmimation();
 	}
 
 	private void updateNeckAngle() {
@@ -98,9 +104,42 @@ public abstract class AbstractDeer extends Animal {
 	private void updateSprintAnimation() {
 		this.sprintAmountO = this.sprintAmount;
 		if (this.isSprinting()) {
-			this.sprintAmount = Math.min(1.0F, this.sprintAmount + 0.2F);
+			this.sprintAmount = Math.min(1.0F, this.sprintAmount + 0.1F);
 		} else {
-			this.sprintAmount = Math.max(0.0F, this.sprintAmount - 0.2F);
+			this.sprintAmount = Math.max(0.0F, this.sprintAmount - 0.1F);
+		}
+	}
+
+	private void updateHopAmimation() {
+		this.hopAmountO = this.hopAmount;
+		this.hopAngleO = this.hopAngle;
+
+		if (this.hopProgress != 3) {
+			--this.hopProgress;
+		} else if (this.hopProgress > 0 && this.isOnGround()) {
+			this.hopProgress = 2;
+		}
+
+		if (this.hopProgress >= 3) {
+			if (this.hopProgress > 3) {
+				this.hopAngle = Math.max(-0.2F, this.hopAngle - 0.18F);
+			} else {
+				this.hopAngle = Math.min(0.2F, this.hopAngle + 0.08F);
+			}
+
+			this.hopAmount = Math.min(1.0F, this.hopAmount + 0.25F);
+		} else {
+			if (this.hopAngle > 0.0F) {
+				this.hopAngle = Math.max(0.0F, this.hopAngle - 0.05F);
+			} else if (this.hopAngle < 0.0F) {
+				this.hopAngle = Math.min(0.0F, this.hopAngle + 0.05F);
+			}
+		}
+
+		if (this.hopProgress > 0) {
+			this.hopAmount = Math.min(1.0F, this.hopAmount + 0.25F);
+		} else {
+			this.hopAmount = Math.max(0.0F, this.hopAmount - 0.25F);
 		}
 	}
 
@@ -147,6 +186,15 @@ public abstract class AbstractDeer extends Animal {
 		super.onSyncedDataUpdated(key);
 	}
 
+	@Override
+	public void handleEntityEvent(byte id) {
+		if (id == 4) {
+			this.hopProgress = 10;
+		} else {
+			super.handleEntityEvent(id);
+		}
+	}
+
 	private int getTargetNeckAngle() {
 		return this.entityData.get(TARGET_NECK_ANGLE);
 	}
@@ -169,6 +217,14 @@ public abstract class AbstractDeer extends Animal {
 
 	public float getSprintAmount(float partialTick) {
 		return Mth.lerp(partialTick, this.sprintAmountO, this.sprintAmount);
+	}
+
+	public float getHopAmount(float partialTick) {
+		return Mth.lerp(partialTick, this.hopAmountO, this.hopAmount);
+	}
+
+	public float getHopAngle(float partialTick) {
+		return Mth.lerp(partialTick, this.hopAngleO, this.hopAngle);
 	}
 
 	public void setHasAntlers(boolean antlers) {

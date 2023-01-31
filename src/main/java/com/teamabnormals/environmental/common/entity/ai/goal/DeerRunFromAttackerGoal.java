@@ -24,7 +24,7 @@ public class DeerRunFromAttackerGoal extends Goal {
 	@Override
 	public boolean canUse() {
 		LivingEntity attacker = this.deer.getLastHurtByMob();
-		return attacker != null && attacker.isAlive() && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(attacker) && this.deer.distanceToSqr(attacker) <= 100.0F;
+		return attacker != null && attacker.isAlive() && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(attacker) && this.deer.distanceToSqr(attacker) <= 256.0F;
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class DeerRunFromAttackerGoal extends Goal {
 		Vec3 vec3 = DefaultRandomPos.getPosAway(this.deer, 12, 6, attacker.position());
 		if (vec3 != null && attacker.distanceToSqr(vec3.x, vec3.y, vec3.z) >= attacker.distanceToSqr(this.deer)) {
 			Path path = this.pathNav.createPath(vec3.x, vec3.y, vec3.z, 0);
-			this.pathNav.moveTo(path, 1.75F);
+			this.pathNav.moveTo(path, 1.8F);
 		}
 	}
 }
