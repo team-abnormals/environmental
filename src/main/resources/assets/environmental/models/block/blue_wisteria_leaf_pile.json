@@ -1,0 +1,6 @@
+{
+  "parent": "blueprint:block/leaf_pile",
+  "textures": {
+    "all": "environmental:block/blue_wisteria_flowers"
+  }
+}

@@ -191,7 +191,7 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> CHERRY_BOOKSHELF = HELPER.createCompatFuelBlock("woodworks", "cherry_bookshelf", () -> new BookshelfBlock(EnvironmentalProperties.CHERRY.bookshelf()), 300, CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> CHERRY_LADDER = HELPER.createCompatFuelBlock("woodworks", "cherry_ladder", () -> new BlueprintLadderBlock(EnvironmentalProperties.CHERRY.ladder()), 300, CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> CHERRY_BEEHIVE = HELPER.createCompatBlock("woodworks", "cherry_beehive", () -> new BlueprintBeehiveBlock(EnvironmentalProperties.CHERRY.beehive()), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> CHERRY_LEAF_PILE = HELPER.createCompatBlock("woodworks", "cherry_leaf_pile", () -> new LeafPileBlock(EnvironmentalProperties.CHERRY.leafPile()), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> CHERRY_LEAF_PILE = HELPER.createBlock("cherry_leaf_pile", () -> new LeafPileBlock(EnvironmentalProperties.CHERRY.leafPile()), CreativeModeTab.TAB_DECORATIONS);
 	public static final Pair<RegistryObject<BlueprintChestBlock>, RegistryObject<BlueprintTrappedChestBlock>> CHERRY_CHESTS = HELPER.createCompatChestBlocks("woodworks", "cherry", MaterialColor.TERRACOTTA_RED);
 
 	public static final RegistryObject<Block> VERTICAL_CHERRY_PLANKS = HELPER.createCompatBlock("quark", "vertical_cherry_planks", () -> new Block(EnvironmentalProperties.CHERRY.planks()), CreativeModeTab.TAB_BUILDING_BLOCKS);

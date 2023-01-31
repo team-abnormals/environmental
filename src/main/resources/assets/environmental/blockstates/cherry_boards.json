@@ -1,0 +1,14 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "environmental:block/cherry_boards_horizontal",
+      "y": 270
+    },
+    "axis=y": {
+      "model": "environmental:block/cherry_boards"
+    },
+    "axis=z": {
+      "model": "environmental:block/cherry_boards_horizontal"
+    }
+  }
+}
