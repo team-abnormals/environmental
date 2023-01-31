@@ -32,7 +32,7 @@ public class EnvironmentalBiomes {
 	private static Biome marsh() {
 		BiomeGenerationSettings.Builder generation = new BiomeGenerationSettings.Builder();
 		MobSpawnSettings.Builder spawns = new MobSpawnSettings.Builder();
-		//EnvironmentalGeneration.withMarshFeatures(generation);
+		EnvironmentalGeneration.withMarshFeatures(generation);
 		BiomeDefaultFeatures.farmAnimals(spawns);
 		BiomeDefaultFeatures.commonSpawns(spawns);
 		return (new Biome.BiomeBuilder()).precipitation(Biome.Precipitation.RAIN).biomeCategory(Biome.BiomeCategory.SWAMP).temperature(0.8F).downfall(0.9F).specialEffects((new BiomeSpecialEffects.Builder()).waterColor(6134398).waterFogColor(2302743).fogColor(12638463).skyColor(getSkyColorWithTemperatureModifier(0.75F)).grassColorOverride(6263617).foliageColorOverride(6975545).ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS).build()).mobSpawnSettings(spawns.build()).generationSettings(generation.build()).build();
@@ -40,13 +40,13 @@ public class EnvironmentalBiomes {
 
 	private static Biome blossomWoods() {
 		BiomeGenerationSettings.Builder generation = new BiomeGenerationSettings.Builder();
-		//EnvironmentalGeneration.withBlossomWoodsFeatures(generation);
+		EnvironmentalGeneration.withBlossomWoodsFeatures(generation);
 		return blossomBiome(generation);
 	}
 
 	private static Biome blossomValleys() {
 		BiomeGenerationSettings.Builder generation = new BiomeGenerationSettings.Builder();
-		//EnvironmentalGeneration.withBlossomValleysFeatures(generation);
+		EnvironmentalGeneration.withBlossomValleysFeatures(generation);
 		return blossomBiome(generation);
 	}
 

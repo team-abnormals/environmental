@@ -112,13 +112,13 @@ public class EnvironmentalGeneration {
 	}
 
 	public static void withMarshFeatures(BiomeGenerationSettings.Builder generation) {
+		BiomeDefaultFeatures.addFossilDecoration(generation);
 		OverworldBiomes.globalOverworldGeneration(generation);
+		BiomeDefaultFeatures.addSavannaGrass(generation);
 		BiomeDefaultFeatures.addDefaultOres(generation);
 		BiomeDefaultFeatures.addSwampClayDisk(generation);
 		BiomeDefaultFeatures.addDefaultMushrooms(generation);
-		BiomeDefaultFeatures.addSavannaGrass(generation);
 		BiomeDefaultFeatures.addSwampExtraVegetation(generation);
-		BiomeDefaultFeatures.addFossilDecoration(generation);
 
 		EnvironmentalGeneration.withMudDisks(generation);
 		EnvironmentalGeneration.withMarshVegetation(generation);
@@ -130,11 +130,15 @@ public class EnvironmentalGeneration {
 
 	public static void withBaseBlossomFeatures(BiomeGenerationSettings.Builder generation) {
 		OverworldBiomes.globalOverworldGeneration(generation);
+		BiomeDefaultFeatures.addSavannaGrass(generation);
 		BiomeDefaultFeatures.addDefaultOres(generation);
+		BiomeDefaultFeatures.addForestFlowers(generation);
 		BiomeDefaultFeatures.addDefaultSoftDisks(generation);
 		BiomeDefaultFeatures.addDefaultMushrooms(generation);
-		BiomeDefaultFeatures.addSavannaGrass(generation);
-		EnvironmentalGeneration.withBlossomVegetation(generation);
+		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_SUGAR_CANE_BLOSSOM.getHolder().get());
+		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_BLOSSOM_WOODS.getHolder().get());
+		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_GRASS_BLOSSOM_WOODS.getHolder().get());
+
 	}
 
 	public static void withBlossomWoodsFeatures(BiomeGenerationSettings.Builder generation) {
@@ -159,13 +163,6 @@ public class EnvironmentalGeneration {
 
 	public static void withMudDisks(BiomeGenerationSettings.Builder generation) {
 		generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, EnvironmentalPlacedFeatures.DISK_MUD.getHolder().get());
-	}
-
-	public static void withBlossomVegetation(BiomeGenerationSettings.Builder generation) {
-		BiomeDefaultFeatures.addForestFlowers(generation);
-		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_SUGAR_CANE_BLOSSOM.getHolder().get());
-		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_BLOSSOM_WOODS.getHolder().get());
-		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_GRASS_BLOSSOM_WOODS.getHolder().get());
 	}
 
 	public static void withBlossomWoodsVegetation(BiomeGenerationSettings.Builder generation) {
