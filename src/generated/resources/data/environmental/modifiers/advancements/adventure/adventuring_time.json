@@ -1,10 +1,10 @@
 {
-  "advancement": "minecraft:adventure/adventuring_time",
+  "selector": "minecraft:adventure/adventuring_time",
+  "priority": "normal",
   "modifiers": [
     {
       "type": "criteria",
       "config": {
-        "mode": "modify",
         "criteria": {
           "environmental:marsh": {
             "trigger": "minecraft:location",
@@ -14,35 +14,11 @@
               }
             }
           },
-          "environmental:mushroom_marsh": {
-            "trigger": "minecraft:location",
-            "conditions": {
-              "location": {
-                "biome": "environmental:mushroom_marsh"
-              }
-            }
-          },
           "environmental:blossom_woods": {
             "trigger": "minecraft:location",
             "conditions": {
               "location": {
                 "biome": "environmental:blossom_woods"
-              }
-            }
-          },
-          "environmental:blossom_hills": {
-            "trigger": "minecraft:location",
-            "conditions": {
-              "location": {
-                "biome": "environmental:blossom_hills"
-              }
-            }
-          },
-          "environmental:blossom_highlands": {
-            "trigger": "minecraft:location",
-            "conditions": {
-              "location": {
-                "biome": "environmental:blossom_highlands"
               }
             }
           },
@@ -60,21 +36,13 @@
             "environmental:marsh"
           ],
           [
-            "environmental:mushroom_marsh"
-          ],
-          [
             "environmental:blossom_woods"
-          ],
-          [
-            "environmental:blossom_hills"
-          ],
-          [
-            "environmental:blossom_highlands"
           ],
           [
             "environmental:blossom_valleys"
           ]
-        ]
+        ],
+        "should_replace_requirements": false
       }
     }
   ]

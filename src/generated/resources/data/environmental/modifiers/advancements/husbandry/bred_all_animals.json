@@ -1,11 +1,10 @@
 {
-  "advancement": "minecraft:husbandry/bred_all_animals",
+  "selector": "minecraft:husbandry/bred_all_animals",
+  "priority": "normal",
   "modifiers": [
     {
-      "type": "indexed_requirements",
+      "type": "criteria",
       "config": {
-        "mode": "modify",
-        "index": 0,
         "criteria": {
           "environmental:slabfish": {
             "trigger": "minecraft:bred_animals",
@@ -21,20 +20,6 @@
               ]
             }
           },
-          "environmental:deer": {
-            "trigger": "minecraft:bred_animals",
-            "conditions": {
-              "child": [
-                {
-                  "condition": "minecraft:entity_properties",
-                  "predicate": {
-                    "type": "environmental:deer"
-                  },
-                  "entity": "this"
-                }
-              ]
-            }
-          },
           "environmental:duck": {
             "trigger": "minecraft:bred_animals",
             "conditions": {
@@ -43,6 +28,20 @@
                   "condition": "minecraft:entity_properties",
                   "predicate": {
                     "type": "environmental:duck"
+                  },
+                  "entity": "this"
+                }
+              ]
+            }
+          },
+          "environmental:deer": {
+            "trigger": "minecraft:bred_animals",
+            "conditions": {
+              "child": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "predicate": {
+                    "type": "environmental:deer"
                   },
                   "entity": "this"
                 }
@@ -69,15 +68,16 @@
             "environmental:slabfish"
           ],
           [
-            "environmental:deer"
+            "environmental:duck"
           ],
           [
-            "environmental:duck"
+            "environmental:deer"
           ],
           [
             "environmental:yak"
           ]
-        ]
+        ],
+        "should_replace_requirements": false
       }
     }
   ]
