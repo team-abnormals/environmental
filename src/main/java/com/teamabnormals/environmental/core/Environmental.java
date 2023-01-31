@@ -6,6 +6,7 @@ import com.teamabnormals.environmental.client.renderer.entity.*;
 import com.teamabnormals.environmental.client.resources.SlabfishSpriteUploader;
 import com.teamabnormals.environmental.common.network.message.*;
 import com.teamabnormals.environmental.common.slabfish.SlabfishLoader;
+import com.teamabnormals.environmental.core.data.server.EnvironmentalLootTableProvider;
 import com.teamabnormals.environmental.core.data.server.EnvironmentalRecipeProvider;
 import com.teamabnormals.environmental.core.data.server.modifiers.EnvironmentalAdvancementModifierProvider;
 import com.teamabnormals.environmental.core.data.server.modifiers.EnvironmentalModdedBiomeSliceProvider;
@@ -128,6 +129,7 @@ public class Environmental {
 			generator.addProvider(new EnvironmentalRecipeProvider(generator));
 			generator.addProvider(new EnvironmentalAdvancementModifierProvider(generator));
 			generator.addProvider(new EnvironmentalModdedBiomeSliceProvider(generator));
+			generator.addProvider(new EnvironmentalLootTableProvider(generator));
 			//generator.addProvider(new SlabfishProvider(generator, MOD_ID, existingFileHelper));
 		}
 	}
