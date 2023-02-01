@@ -248,7 +248,6 @@ public abstract class AbstractDeer extends Animal {
 	@Nullable
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
-		spawnDataIn = super.finalizeSpawn(worldIn, difficulty, reason, spawnDataIn, dataTag);
 		this.setHasAntlers(this.random.nextBoolean());
 		return super.finalizeSpawn(worldIn, difficulty, reason, spawnDataIn, dataTag);
 	}

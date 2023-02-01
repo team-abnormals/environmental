@@ -1,22 +1,8 @@
 package com.teamabnormals.environmental.common.entity.animal.deer;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoField;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
-import com.teamabnormals.environmental.common.entity.ai.goal.DeerAvoidEntityGoal;
-import com.teamabnormals.environmental.common.entity.ai.goal.DeerFollowParentGoal;
-import com.teamabnormals.environmental.common.entity.ai.goal.DeerFrolicGoal;
-import com.teamabnormals.environmental.common.entity.ai.goal.DeerGrazeGoal;
-import com.teamabnormals.environmental.common.entity.ai.goal.DeerRunFromAttackerGoal;
-import com.teamabnormals.environmental.common.entity.ai.goal.DeerTemptGoal;
+import com.teamabnormals.environmental.common.entity.ai.goal.*;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalItemTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
@@ -38,12 +24,7 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.BreedGoal;
-import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
-import net.minecraft.world.entity.ai.goal.TemptGoal;
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
@@ -57,6 +38,13 @@ import net.minecraft.world.level.biome.Biome.Precipitation;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
+
+import javax.annotation.Nullable;
+import java.time.LocalDate;
+import java.time.temporal.ChronoField;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class Deer extends AbstractDeer {
 	private static final EntityDataAccessor<Integer> DEER_COAT_COLOR = SynchedEntityData.defineId(Deer.class, EntityDataSerializers.INT);
@@ -109,7 +97,7 @@ public class Deer extends AbstractDeer {
 		compound.putInt("FloweringTime", this.floweringTime);
 		compound.putInt("FlowerAmount", this.getFlowerAmount());
 		ListTag listtag = new ListTag();
-		for(BlockState blockstate : this.flowers) {
+		for (BlockState blockstate : this.flowers) {
 			if (blockstate != null) {
 				listtag.add(NbtUtils.writeBlockState(blockstate));
 			}
@@ -127,7 +115,7 @@ public class Deer extends AbstractDeer {
 		this.floweringTime = compound.getInt("FloweringTime");
 		this.setFlowerAmount(compound.getInt("FlowerAmount"));
 		ListTag listtag = compound.getList("Flowers", 10);
-		for(int i = 0; i < listtag.size(); ++i) {
+		for (int i = 0; i < listtag.size(); ++i) {
 			BlockState blockstate = NbtUtils.readBlockState(listtag.getCompound(i));
 			if (blockstate != null && !blockstate.isAir()) {
 				this.flowers.add(blockstate);
@@ -265,7 +253,7 @@ public class Deer extends AbstractDeer {
 			this.level.addParticle(particleoptions, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d0, d1, d2);
 		}
 	}
-	
+
 	private void spawnBoneMealParticles(BlockState blockstate, BlockPos blockpos) {
 		int amount = 15;
 		double d0 = 0.5D;
@@ -279,17 +267,17 @@ public class Deer extends AbstractDeer {
 			d1 = blockstate.getShape(this.level, blockpos).max(Direction.Axis.Y);
 		}
 
-		((ServerLevel) this.level).sendParticles(ParticleTypes.HAPPY_VILLAGER, (double)blockpos.getX() + 0.5D, (double)blockpos.getY() + 0.5D, (double)blockpos.getZ() + 0.5D, 0, 0.0D, 0.0D, 0.0D, 0.0D);
+		((ServerLevel) this.level).sendParticles(ParticleTypes.HAPPY_VILLAGER, (double) blockpos.getX() + 0.5D, (double) blockpos.getY() + 0.5D, (double) blockpos.getZ() + 0.5D, 0, 0.0D, 0.0D, 0.0D, 0.0D);
 		Random random = this.level.getRandom();
 
-		for(int i = 0; i < amount; ++i) {
+		for (int i = 0; i < amount; ++i) {
 			double d2 = random.nextGaussian() * 0.02D;
 			double d3 = random.nextGaussian() * 0.02D;
 			double d4 = random.nextGaussian() * 0.02D;
 			double d5 = 0.5D - d0;
-			double d6 = (double)blockpos.getX() + d5 + random.nextDouble() * d0 * 2.0D;
-			double d7 = (double)blockpos.getY() + random.nextDouble() * d1;
-			double d8 = (double)blockpos.getZ() + d5 + random.nextDouble() * d0 * 2.0D;
+			double d6 = (double) blockpos.getX() + d5 + random.nextDouble() * d0 * 2.0D;
+			double d7 = (double) blockpos.getY() + random.nextDouble() * d1;
+			double d8 = (double) blockpos.getZ() + d5 + random.nextDouble() * d0 * 2.0D;
 			((ServerLevel) this.level).sendParticles(ParticleTypes.HAPPY_VILLAGER, d6, d7, d8, 0, d2, d3, d4, 0.0D);
 		}
 	}
@@ -378,11 +366,27 @@ public class Deer extends AbstractDeer {
 	@Nullable
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
-		spawnDataIn = super.finalizeSpawn(worldIn, difficulty, reason, spawnDataIn, dataTag);
-		this.setCoatColor(this.random.nextInt(DeerCoatColors.values().length - 1));
+		int deerCoatColor;
+		if (spawnDataIn instanceof DeerSpawnGroupData deerSpawnGroupData) {
+			deerCoatColor = deerSpawnGroupData.coatColor;
+		} else {
+			deerCoatColor = this.random.nextInt(DeerCoatColors.values().length - 1);
+			spawnDataIn = new DeerSpawnGroupData(deerCoatColor);
+		}
+
+		this.setCoatColor(deerCoatColor);
 		this.setCoatType(this.random.nextInt(DeerCoatTypes.values().length));
 		if (this.isHolidayCriteria())
 			this.setHoliday();
 		return super.finalizeSpawn(worldIn, difficulty, reason, spawnDataIn, dataTag);
+	}
+
+	public static class DeerSpawnGroupData extends AgeableMobGroupData implements SpawnGroupData {
+		public final int coatColor;
+
+		public DeerSpawnGroupData(int coatColor) {
+			super(0.3F);
+			this.coatColor = coatColor;
+		}
 	}
 }
