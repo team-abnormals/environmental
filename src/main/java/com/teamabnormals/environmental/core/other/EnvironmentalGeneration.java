@@ -48,7 +48,7 @@ public class EnvironmentalGeneration {
 			spawns.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EnvironmentalEntityTypes.DUCK.get(), 5, 2, 4));
 
 		if (event.getCategory() == Biome.BiomeCategory.FOREST) {
-			spawns.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EnvironmentalEntityTypes.DEER.get(), 16, 1, 4));
+			spawns.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EnvironmentalEntityTypes.DEER.get(), 16, 2, 4));
 			if (DataUtil.matchesKeys(biome, Biomes.FLOWER_FOREST)) {
 				generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_CARTWHEEL.getHolder().get());
 				generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_DELPHINIUMS.getHolder().get());
