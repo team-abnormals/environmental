@@ -85,7 +85,7 @@ public class DeerModel<E extends AbstractDeer> extends AgeableListModel<E> {
 		this.neckAngle = entity.getNeckAngle(partialTick);
 		this.hopAngle = entity.getHopAngle(partialTick);
 		this.hopAmount = entity.getHopAmount(partialTick);
-		this.sprintAmount = entity.getSprintAmount(partialTick) *  (1F - this.hopAmount);
+		this.sprintAmount = entity.getSprintAmount(partialTick) * (1F - this.hopAmount);
 
 		boolean flag = this.young;
 		boolean flag1 = this.hasAntlers && !flag;

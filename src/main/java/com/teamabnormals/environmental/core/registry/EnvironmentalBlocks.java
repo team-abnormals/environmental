@@ -261,6 +261,4 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> WHITE_WISTERIA_HEDGE = HELPER.createCompatFuelBlock("quark", "white_wisteria_hedge", () -> new HedgeBlock(EnvironmentalProperties.WISTERIA.log()), 300, CreativeModeTab.TAB_DECORATIONS);
 
 
-
-
 }

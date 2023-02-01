@@ -4,7 +4,6 @@ import com.teamabnormals.blueprint.core.util.TagUtil;
 import com.teamabnormals.environmental.core.Environmental;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
 
 public class EnvironmentalBiomeTags {
 	public static final TagKey<Biome> HAS_HUSK = biomeTag("has_monster/husk");

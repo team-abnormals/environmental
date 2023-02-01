@@ -35,7 +35,7 @@ public abstract class MobEntityMixin extends LivingEntity {
 	}
 
 	@Inject(method = "populateDefaultEquipmentSlots", at = @At("TAIL"))
-	private void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty, CallbackInfo info) {
+	private void populateDefaultEquipmentSlots(DifficultyInstance difficulty, CallbackInfo info) {
 		int difficultyChance = difficulty.getDifficulty().getId() + 1;
 		if (this.getCommandSenderWorld() instanceof ServerLevel serverLevel) {
 			Optional<Named<ConfiguredStructureFeature<?, ?>>> structures = serverLevel.registryAccess().registryOrThrow(Registry.CONFIGURED_STRUCTURE_FEATURE_REGISTRY).getTag(EnvironmentalStructureTags.HAS_HEALER_POUCH);

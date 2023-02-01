@@ -87,10 +87,10 @@ public class EnvironmentalModdedBiomeSliceProvider extends ModdedBiomeSliceProvi
 		}
 
 		private void addPeaks(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> p_187178_, Climate.Parameter p_187179_) {
-			for(int i = 0; i < this.temperatures.length; ++i) {
+			for (int i = 0; i < this.temperatures.length; ++i) {
 				Climate.Parameter climate$parameter = this.temperatures[i];
 
-				for(int j = 0; j < this.humidities.length; ++j) {
+				for (int j = 0; j < this.humidities.length; ++j) {
 					Climate.Parameter climate$parameter1 = this.humidities[j];
 					ResourceKey<Biome> resourcekey = this.pickMiddleBiome(i, j, p_187179_);
 					ResourceKey<Biome> resourcekey1 = this.pickMiddleBiomeOrBadlandsIfHot(i, j, p_187179_);
@@ -116,10 +116,10 @@ public class EnvironmentalModdedBiomeSliceProvider extends ModdedBiomeSliceProvi
 		}
 
 		private void addHighSlice(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> p_187198_, Climate.Parameter p_187199_) {
-			for(int i = 0; i < this.temperatures.length; ++i) {
+			for (int i = 0; i < this.temperatures.length; ++i) {
 				Climate.Parameter climate$parameter = this.temperatures[i];
 
-				for(int j = 0; j < this.humidities.length; ++j) {
+				for (int j = 0; j < this.humidities.length; ++j) {
 					Climate.Parameter climate$parameter1 = this.humidities[j];
 					ResourceKey<Biome> resourcekey = this.pickMiddleBiome(i, j, p_187199_);
 					ResourceKey<Biome> resourcekey1 = this.pickMiddleBiomeOrBadlandsIfHot(i, j, p_187199_);
@@ -151,10 +151,10 @@ public class EnvironmentalModdedBiomeSliceProvider extends ModdedBiomeSliceProvi
 			this.addSurfaceBiome(p_187218_, this.FULL_RANGE, this.FULL_RANGE, this.coastContinentalness, Climate.Parameter.span(this.erosions[0], this.erosions[2]), p_187219_, 0.0F, VANILLA);
 			this.addSurfaceBiome(p_187218_, this.UNFROZEN_RANGE, this.FULL_RANGE, Climate.Parameter.span(this.nearInlandContinentalness, this.farInlandContinentalness), this.erosions[6], p_187219_, 0.0F, EnvironmentalBiomes.MARSH.getKey());
 
-			for(int i = 0; i < this.temperatures.length; ++i) {
+			for (int i = 0; i < this.temperatures.length; ++i) {
 				Climate.Parameter climate$parameter = this.temperatures[i];
 
-				for(int j = 0; j < this.humidities.length; ++j) {
+				for (int j = 0; j < this.humidities.length; ++j) {
 					Climate.Parameter climate$parameter1 = this.humidities[j];
 					ResourceKey<Biome> resourcekey = this.pickMiddleBiome(i, j, p_187219_);
 					ResourceKey<Biome> resourcekey1 = this.pickMiddleBiomeOrBadlandsIfHot(i, j, p_187219_);
@@ -201,10 +201,10 @@ public class EnvironmentalModdedBiomeSliceProvider extends ModdedBiomeSliceProvi
 			this.addSurfaceBiome(p_187229_, this.FULL_RANGE, this.FULL_RANGE, this.coastContinentalness, Climate.Parameter.span(this.erosions[0], this.erosions[2]), p_187230_, 0.0F, VANILLA);
 			this.addSurfaceBiome(p_187229_, this.UNFROZEN_RANGE, this.FULL_RANGE, Climate.Parameter.span(this.nearInlandContinentalness, this.farInlandContinentalness), this.erosions[6], p_187230_, 0.0F, EnvironmentalBiomes.MARSH.getKey());
 
-			for(int i = 0; i < this.temperatures.length; ++i) {
+			for (int i = 0; i < this.temperatures.length; ++i) {
 				Climate.Parameter climate$parameter = this.temperatures[i];
 
-				for(int j = 0; j < this.humidities.length; ++j) {
+				for (int j = 0; j < this.humidities.length; ++j) {
 					Climate.Parameter climate$parameter1 = this.humidities[j];
 					ResourceKey<Biome> resourcekey = this.pickMiddleBiome(i, j, p_187230_);
 					ResourceKey<Biome> resourcekey1 = this.pickMiddleBiomeOrBadlandsIfHot(i, j, p_187230_);
@@ -242,10 +242,10 @@ public class EnvironmentalModdedBiomeSliceProvider extends ModdedBiomeSliceProvi
 			this.addSurfaceBiome(p_187238_, this.UNFROZEN_RANGE, this.FULL_RANGE, Climate.Parameter.span(this.inlandContinentalness, this.farInlandContinentalness), this.erosions[6], p_187239_, 0.0F, EnvironmentalBiomes.MARSH.getKey());
 			this.addSurfaceBiome(p_187238_, this.FROZEN_RANGE, this.FULL_RANGE, Climate.Parameter.span(this.inlandContinentalness, this.farInlandContinentalness), this.erosions[6], p_187239_, 0.0F, VANILLA);
 
-			for(int i = 0; i < this.temperatures.length; ++i) {
+			for (int i = 0; i < this.temperatures.length; ++i) {
 				Climate.Parameter climate$parameter = this.temperatures[i];
 
-				for(int j = 0; j < this.humidities.length; ++j) {
+				for (int j = 0; j < this.humidities.length; ++j) {
 					Climate.Parameter climate$parameter1 = this.humidities[j];
 					ResourceKey<Biome> resourcekey = this.pickMiddleBiomeOrBadlandsIfHot(i, j, p_187239_);
 					this.addSurfaceBiome(p_187238_, climate$parameter, climate$parameter1, Climate.Parameter.span(this.midInlandContinentalness, this.farInlandContinentalness), Climate.Parameter.span(this.erosions[0], this.erosions[1]), p_187239_, 0.0F, resourcekey);
