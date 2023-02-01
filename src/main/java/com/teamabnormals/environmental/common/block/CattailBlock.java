@@ -52,19 +52,14 @@ public class CattailBlock extends BushBlock implements SimpleWaterloggedBlock, B
 	}
 
 	public void placeAt(LevelAccessor worldIn, BlockPos pos, int flags) {
-		Random rand = new Random();
-		int type = rand.nextInt(3);
-
-		BlockState seeds = EnvironmentalBlocks.CATTAIL_SPROUTS.get().defaultBlockState();
-		BlockState cattail = EnvironmentalBlocks.CATTAIL.get().defaultBlockState();
-
+		int type = worldIn.getRandom().nextInt(6);
 		boolean waterlogged = worldIn.isWaterAt(pos);
-		if (type == 0) {
-			worldIn.setBlock(pos, seeds.setValue(WATERLOGGED, waterlogged), flags);
-		} else if (type == 1) {
-			worldIn.setBlock(pos, cattail.setValue(WATERLOGGED, waterlogged), flags);
+		if (waterlogged || type > 2) {
+			DoubleCattailBlock.placeAt(worldIn, pos, flags, waterlogged);
+		} else if (type > 0) {
+			worldIn.setBlock(pos, EnvironmentalBlocks.CATTAIL.get().defaultBlockState().setValue(WATERLOGGED, false), flags);
 		} else {
-			DoubleCattailBlock.placeAt(worldIn, pos, flags);
+			worldIn.setBlock(pos, EnvironmentalBlocks.CATTAIL_SPROUTS.get().defaultBlockState().setValue(WATERLOGGED, false), flags);
 		}
 	}
 
@@ -100,12 +95,11 @@ public class CattailBlock extends BushBlock implements SimpleWaterloggedBlock, B
 	@Override
 	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, Random random) {
 		super.tick(state, worldIn, pos, random);
-		int chance = worldIn.getBlockState(pos.below()).isFertile(worldIn, pos.below()) ? 15 : 17;
-		if (worldIn.getRawBrightness(pos.above(), 0) >= 9 && ForgeHooks.onCropsGrowPre(worldIn, pos, state, random.nextInt(chance) == 0)) {
-			DoubleCattailBlock doubleplantblock = (DoubleCattailBlock) (EnvironmentalBlocks.TALL_CATTAIL.get());
-			if (doubleplantblock.defaultBlockState().canSurvive(worldIn, pos) && worldIn.isEmptyBlock(pos.above()) && worldIn.getBlockState(pos.below()).getBlock() == Blocks.FARMLAND) {
+		if (worldIn.getRawBrightness(pos.above(), 0) >= 9 && state.getValue(WATERLOGGED) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, random.nextInt(15) == 0)) {
+			DoubleCattailBlock tallCattail = (DoubleCattailBlock) (EnvironmentalBlocks.TALL_CATTAIL.get());
+			if (tallCattail.defaultBlockState().canSurvive(worldIn, pos) && worldIn.isEmptyBlock(pos.above())) {
 				DoubleCattailBlock.placeAt(worldIn, pos, 2);
-				net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
+				ForgeHooks.onCropsGrowPost(worldIn, pos, state);
 			}
 		}
 	}

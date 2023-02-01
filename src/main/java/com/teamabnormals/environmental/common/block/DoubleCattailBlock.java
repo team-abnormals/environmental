@@ -39,6 +39,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.ForgeHooks;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -94,12 +95,16 @@ public class DoubleCattailBlock extends Block implements BonemealableBlock, Simp
 		return context.getLevel().getBlockState(blockpos.above()).canBeReplaced(context) ? super.getStateForPlacement(context).setValue(WATERLOGGED, ifluidstate.is(FluidTags.WATER) && ifluidstate.getAmount() == 8).setValue(FAKE_WATERLOGGED, Boolean.valueOf(ifluidstate.is(FluidTags.WATER) && ifluidstate.getAmount() == 8)) : null;
 	}
 
-	public static void placeAt(LevelAccessor worldIn, BlockPos pos, int flags) {
+	public static void placeAt(LevelAccessor level, BlockPos pos, int flags) {
+		placeAt(level, pos, flags, false);
+	}
+
+	public static void placeAt(LevelAccessor worldIn, BlockPos pos, int flags, boolean seeds) {
 		FluidState ifluidstate = worldIn.getFluidState(pos);
 		FluidState ifluidstateUp = worldIn.getFluidState(pos.above());
 		boolean applyFakeWaterLogging = ifluidstate.is(FluidTags.WATER) && ifluidstate.getAmount() == 8 || ifluidstateUp.is(FluidTags.WATER) && ifluidstateUp.getAmount() == 8;
-		worldIn.setBlock(pos, EnvironmentalBlocks.TALL_CATTAIL.get().defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER).setValue(WATERLOGGED, ifluidstate.is(FluidTags.WATER) && ifluidstate.getAmount() == 8).setValue(FAKE_WATERLOGGED, applyFakeWaterLogging), flags);
-		worldIn.setBlock(pos.above(), EnvironmentalBlocks.TALL_CATTAIL.get().defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER).setValue(WATERLOGGED, ifluidstateUp.is(FluidTags.WATER) && ifluidstateUp.getAmount() == 8).setValue(FAKE_WATERLOGGED, applyFakeWaterLogging), flags);
+		worldIn.setBlock(pos, EnvironmentalBlocks.TALL_CATTAIL.get().defaultBlockState().setValue(AGE, seeds ? 1 : 0).setValue(HALF, DoubleBlockHalf.LOWER).setValue(WATERLOGGED, ifluidstate.is(FluidTags.WATER) && ifluidstate.getAmount() == 8).setValue(FAKE_WATERLOGGED, applyFakeWaterLogging), flags);
+		worldIn.setBlock(pos.above(), EnvironmentalBlocks.TALL_CATTAIL.get().defaultBlockState().setValue(AGE, seeds ? 1 : 0).setValue(HALF, DoubleBlockHalf.UPPER).setValue(WATERLOGGED, ifluidstateUp.is(FluidTags.WATER) && ifluidstateUp.getAmount() == 8).setValue(FAKE_WATERLOGGED, applyFakeWaterLogging), flags);
 	}
 
 	@Override
@@ -148,12 +153,11 @@ public class DoubleCattailBlock extends Block implements BonemealableBlock, Simp
 	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, Random random) {
 		super.tick(state, worldIn, pos, random);
 		int i = state.getValue(AGE);
-		int chance = worldIn.getBlockState(pos.below().below()).isFertile(worldIn, pos.below().below()) ? 15 : 17;
-		if (state.getValue(HALF) == DoubleBlockHalf.UPPER && i < 1 && worldIn.getBlockState(pos.below().below()).getBlock() == Blocks.FARMLAND && worldIn.getRawBrightness(pos.above(), 0) >= 9 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, random.nextInt(chance) == 0)) {
+		if (state.getValue(HALF) == DoubleBlockHalf.UPPER && i < 1 && state.getValue(FAKE_WATERLOGGED) && !state.getValue(WATERLOGGED) && worldIn.getBlockState(pos.below().below()).is(BlockTags.DIRT) && worldIn.getRawBrightness(pos.above(), 0) >= 9 && ForgeHooks.onCropsGrowPre(worldIn, pos, state, random.nextInt(15) == 0)) {
 			worldIn.setBlock(pos, state.setValue(AGE, i + 1), 2);
 			if (worldIn.getBlockState(pos.below()).getBlock() == this && worldIn.getBlockState(pos.below()).getValue(AGE) == 0) {
 				worldIn.setBlock(pos.below(), worldIn.getBlockState(pos.below()).setValue(AGE, i + 1), 2);
-				net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
+				ForgeHooks.onCropsGrowPost(worldIn, pos, state);
 			}
 		}
 	}
@@ -232,12 +236,14 @@ public class DoubleCattailBlock extends Block implements BonemealableBlock, Simp
 
 	@Override
 	public boolean isValidBonemealTarget(BlockGetter worldIn, BlockPos pos, BlockState state, boolean isClient) {
-		return state.getValue(AGE) < 1;
+		boolean upper = state.getValue(HALF) == DoubleBlockHalf.UPPER;
+		return state.getValue(AGE) < 1 && state.getValue(FAKE_WATERLOGGED) && upper ? !state.getValue(WATERLOGGED) : !worldIn.getBlockState(pos.above()).getValue(WATERLOGGED);
 	}
 
 	@Override
 	public boolean isBonemealSuccess(Level worldIn, Random rand, BlockPos pos, BlockState state) {
-		return state.getValue(AGE) < 1;
+		boolean upper = state.getValue(HALF) == DoubleBlockHalf.UPPER;
+		return state.getValue(AGE) < 1 && state.getValue(FAKE_WATERLOGGED) && upper ? !state.getValue(WATERLOGGED) : !worldIn.getBlockState(pos.above()).getValue(WATERLOGGED);
 	}
 
 	@Override

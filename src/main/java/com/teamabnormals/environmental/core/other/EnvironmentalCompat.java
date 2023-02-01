@@ -78,7 +78,6 @@ public class EnvironmentalCompat {
 		DataUtil.registerCompostable(EnvironmentalBlocks.GIANT_TALL_GRASS.get(), 0.65F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.MYCELIUM_SPROUTS.get(), 0.50F);
 
-
 		DataUtil.registerCompostable(EnvironmentalItems.TRUFFLE.get(), 0.65F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.TRUFFLE_CRATE.get(), 1.0F);
 
