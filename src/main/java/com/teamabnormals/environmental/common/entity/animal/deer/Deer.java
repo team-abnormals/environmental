@@ -55,6 +55,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome.Precipitation;
 import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class Deer extends AbstractDeer {
@@ -223,6 +224,8 @@ public class Deer extends AbstractDeer {
 				}
 			} else if (state.canSurvive(this.level, pos) && this.level.isEmptyBlock(pos)) {
 				this.level.setBlock(pos, state, 3);
+				SoundType sound = state.getSoundType();
+				this.playSound(sound.getPlaceSound(), (sound.getVolume() + 1.0F) / 4.0F, sound.getPitch() * 0.8F);
 				this.setFlowerAmount(this.getFlowerAmount() - 1);
 				this.spawnBoneMealParticles(state, pos);
 			}
