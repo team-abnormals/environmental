@@ -171,9 +171,11 @@ public class Deer extends AbstractDeer {
 				if (!this.flowers.contains(block.getBlock().defaultBlockState())) {
 					this.flowers.add(block.getBlock().defaultBlockState());
 					this.particleCloud(ParticleTypes.HAPPY_VILLAGER);
+					this.usePlayerItem(player, hand, stack);
+					return InteractionResult.SUCCESS;
+				} else {
+					return InteractionResult.PASS;
 				}
-				this.usePlayerItem(player, hand, stack);
-				return InteractionResult.SUCCESS;
 			}
 		}
 
