@@ -35,16 +35,9 @@ import java.util.List;
 public class EnvironmentalCompat {
 
 	public static void registerCompat() {
-		registerLootInjectors();
 		registerCompostables();
 		registerFlammables();
 		registerDispenserBehaviors();
-	}
-
-	//TODO: Replace with Loot Modifiers
-	public static void registerLootInjectors() {
-//		LootInjectionRegistry.LootInjector injector = new LootInjectionRegistry.LootInjector(Environmental.MOD_ID);
-//		injector.addLootInjection(injector.buildLootPool("simple_dungeon", 1, 0), BuiltInLootTables.SIMPLE_DUNGEON);
 	}
 
 	public static void registerCompostables() {
@@ -156,7 +149,7 @@ public class EnvironmentalCompat {
 		DataUtil.registerFlammable(EnvironmentalBlocks.DUCKWEED_THATCH_STAIRS.get(), 60, 20);
 		DataUtil.registerFlammable(EnvironmentalBlocks.DUCKWEED_THATCH_SLAB.get(), 60, 20);
 		DataUtil.registerFlammable(EnvironmentalBlocks.DUCKWEED_THATCH_VERTICAL_SLAB.get(), 60, 20);
-		
+
 		DataUtil.registerFlammable(EnvironmentalBlocks.TRUFFLE_CRATE.get(), 5, 20);
 
 		DataUtil.registerFlammable(EnvironmentalBlocks.WILLOW_LEAVES.get(), 30, 60);

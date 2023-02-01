@@ -9,6 +9,7 @@ import com.teamabnormals.environmental.common.slabfish.SlabfishLoader;
 import com.teamabnormals.environmental.core.data.server.EnvironmentalLootTableProvider;
 import com.teamabnormals.environmental.core.data.server.EnvironmentalRecipeProvider;
 import com.teamabnormals.environmental.core.data.server.modifiers.EnvironmentalAdvancementModifierProvider;
+import com.teamabnormals.environmental.core.data.server.modifiers.EnvironmentalLootModifierProvider;
 import com.teamabnormals.environmental.core.data.server.modifiers.EnvironmentalModdedBiomeSliceProvider;
 import com.teamabnormals.environmental.core.data.server.tags.*;
 import com.teamabnormals.environmental.core.other.EnvironmentalCompat;
@@ -21,7 +22,6 @@ import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures.Envir
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraftforge.api.distmarker.Dist;
@@ -59,8 +59,6 @@ public class Environmental {
 	public static final SimpleChannel PLAY = NetworkRegistry.ChannelBuilder.named(new ResourceLocation(MOD_ID, "play")).networkProtocolVersion(() -> NETWORK_PROTOCOL).clientAcceptedVersions(NETWORK_PROTOCOL::equals).serverAcceptedVersions(NETWORK_PROTOCOL::equals).simpleChannel();
 	public static final SimpleChannel LOGIN = NetworkRegistry.ChannelBuilder.named(new ResourceLocation(MOD_ID, "login")).networkProtocolVersion(() -> NETWORK_PROTOCOL).clientAcceptedVersions(NETWORK_PROTOCOL::equals).serverAcceptedVersions(NETWORK_PROTOCOL::equals).simpleChannel();
 
-	//TODO: Grass bonemeal flower mixin
-	//TODO: Hoe underwater mixin
 	public Environmental() {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 		ModLoadingContext context = ModLoadingContext.get();
@@ -130,6 +128,7 @@ public class Environmental {
 			generator.addProvider(new EnvironmentalAdvancementModifierProvider(generator));
 			generator.addProvider(new EnvironmentalModdedBiomeSliceProvider(generator));
 			generator.addProvider(new EnvironmentalLootTableProvider(generator));
+			generator.addProvider(new EnvironmentalLootModifierProvider(generator));
 			//generator.addProvider(new SlabfishProvider(generator, MOD_ID, existingFileHelper));
 		}
 	}
