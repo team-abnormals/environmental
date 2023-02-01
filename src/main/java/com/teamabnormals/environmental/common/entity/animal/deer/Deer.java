@@ -60,15 +60,17 @@ import net.minecraft.world.level.block.state.BlockState;
 public class Deer extends AbstractDeer {
 	private static final EntityDataAccessor<Integer> DEER_COAT_COLOR = SynchedEntityData.defineId(Deer.class, EntityDataSerializers.INT);
 	private static final EntityDataAccessor<Integer> DEER_COAT_TYPE = SynchedEntityData.defineId(Deer.class, EntityDataSerializers.INT);
-	private static final EntityDataAccessor<Integer> FLOWERING_TIME = SynchedEntityData.defineId(Deer.class, EntityDataSerializers.INT);
+	private static final EntityDataAccessor<Integer> FLOWER_AMOUNT = SynchedEntityData.defineId(Deer.class, EntityDataSerializers.INT);
 	private static final EntityDataAccessor<Boolean> TRUSTING = SynchedEntityData.defineId(Deer.class, EntityDataSerializers.BOOLEAN);
 
+	private int floweringTime;
 	private final List<BlockState> flowers = new ArrayList<>();
 	@Nullable
 	private TemptGoal temptGoal;
 
 	public Deer(EntityType<? extends Animal> type, Level level) {
 		super(type, level);
+		this.floweringTime = 0;
 	}
 
 	@Override
@@ -92,7 +94,7 @@ public class Deer extends AbstractDeer {
 		super.defineSynchedData();
 		this.entityData.define(DEER_COAT_COLOR, 0);
 		this.entityData.define(DEER_COAT_TYPE, 0);
-		this.entityData.define(FLOWERING_TIME, 0);
+		this.entityData.define(FLOWER_AMOUNT, 0);
 		this.entityData.define(TRUSTING, false);
 	}
 
@@ -103,7 +105,8 @@ public class Deer extends AbstractDeer {
 		compound.putInt("CoatType", this.getCoatType());
 		compound.putBoolean("Trusting", this.isTrusting());
 
-		compound.putInt("FloweringTime", this.getFloweringTime());
+		compound.putInt("FloweringTime", this.floweringTime);
+		compound.putInt("FlowerAmount", this.getFlowerAmount());
 		ListTag listtag = new ListTag();
 		for(BlockState blockstate : this.flowers) {
 			if (blockstate != null) {
@@ -120,7 +123,8 @@ public class Deer extends AbstractDeer {
 		this.setCoatType(compound.getInt("CoatType"));
 		this.setTrusting(compound.getBoolean("Trusting"));
 
-		this.setFloweringTime(compound.getInt("FloweringTime"));
+		this.floweringTime = compound.getInt("FloweringTime");
+		this.setFlowerAmount(compound.getInt("FlowerAmount"));
 		ListTag listtag = compound.getList("Flowers", 10);
 		for(int i = 0; i < listtag.size(); ++i) {
 			BlockState blockstate = NbtUtils.readBlockState(listtag.getCompound(i));
@@ -138,13 +142,14 @@ public class Deer extends AbstractDeer {
 	public void aiStep() {
 		super.aiStep();
 		if (this.level.isClientSide) {
-			if (this.getFloweringTime() > 0 && this.tickCount % 16 == 0)
+			if (this.getFlowerAmount() > 0 && this.tickCount % 16 == 0)
 				this.level.addParticle(ParticleTypes.HAPPY_VILLAGER, this.getRandomX(1.0D), this.getRandomY(), this.getRandomZ(1.0D), 0.0D, 0.0D, 0.0D);
 		} else {
-			int floweringtime = this.getFloweringTime();
-			if (floweringtime > 0) {
-				this.setFloweringTime(floweringtime - 1);
-			} else {
+			if (this.floweringTime > 0)
+				--this.floweringTime;
+
+			if ((this.floweringTime <= 0 && this.getFlowerAmount() > 0) || (this.getFlowerAmount() <= 0 && !this.flowers.isEmpty())) {
+				this.setFlowerAmount(0);
 				this.flowers.clear();
 			}
 		}
@@ -158,18 +163,21 @@ public class Deer extends AbstractDeer {
 
 		if (!this.isBaby() && (this.isTrusting() || flag)) {
 			if (stack.is(Items.MELON_SLICE)) {
-				this.setFloweringTime(this.getFloweringTime() + 200);
+				this.setFlowerAmount(this.getFlowerAmount() + 10);
+				this.floweringTime += 2400;
 				this.particleCloud(ParticleTypes.HAPPY_VILLAGER);
 				this.usePlayerItem(player, hand, stack);
 				return InteractionResult.SUCCESS;
 			} else if (stack.is(Items.GLISTERING_MELON_SLICE)) {
-				this.setFloweringTime(this.getFloweringTime() + 600);
+				this.setFlowerAmount(this.getFlowerAmount() + 30);
+				this.floweringTime += 2400;
 				this.particleCloud(ParticleTypes.HAPPY_VILLAGER);
 				this.usePlayerItem(player, hand, stack);
 				return InteractionResult.SUCCESS;
-			} else if (this.getFloweringTime() > 0 && stack.is(ItemTags.FLOWERS) && item instanceof BlockItem block) {
+			} else if (this.getFlowerAmount() > 0 && stack.is(ItemTags.FLOWERS) && item instanceof BlockItem block) {
 				if (!this.flowers.contains(block.getBlock().defaultBlockState())) {
 					this.flowers.add(block.getBlock().defaultBlockState());
+					this.floweringTime = Math.max(600, this.floweringTime);
 					this.particleCloud(ParticleTypes.HAPPY_VILLAGER);
 					this.usePlayerItem(player, hand, stack);
 					return InteractionResult.SUCCESS;
@@ -203,17 +211,19 @@ public class Deer extends AbstractDeer {
 	}
 
 	public void spawnFlower() {
-		if (!this.flowers.isEmpty()) {
+		if (this.isSpreadingFlowers()) {
 			BlockPos pos = this.blockPosition();
 			BlockState state = this.flowers.get(this.random.nextInt(this.flowers.size()));
 
 			if (state.getBlock() instanceof DoublePlantBlock) {
 				if (state.canSurvive(this.level, pos) && this.level.isEmptyBlock(pos) && this.level.isEmptyBlock(pos.above())) {
 					DoublePlantBlock.placeAt(this.level, state, pos, 2);
+					this.setFlowerAmount(this.getFlowerAmount() - 1);
 					this.spawnBoneMealParticles(state, pos);
 				}
 			} else if (state.canSurvive(this.level, pos) && this.level.isEmptyBlock(pos)) {
 				this.level.setBlock(pos, state, 3);
+				this.setFlowerAmount(this.getFlowerAmount() - 1);
 				this.spawnBoneMealParticles(state, pos);
 			}
 		}
@@ -303,15 +313,15 @@ public class Deer extends AbstractDeer {
 	}
 
 	public boolean isSpreadingFlowers() {
-		return this.getFloweringTime() > 0 && !this.flowers.isEmpty();
+		return this.getFlowerAmount() > 0 && !this.flowers.isEmpty();
 	}
 
-	private int getFloweringTime() {
-		return this.entityData.get(FLOWERING_TIME);
+	private int getFlowerAmount() {
+		return this.entityData.get(FLOWER_AMOUNT);
 	}
 
-	private void setFloweringTime(int ticks) {
-		this.entityData.set(FLOWERING_TIME, ticks);
+	private void setFlowerAmount(int amount) {
+		this.entityData.set(FLOWER_AMOUNT, amount);
 	}
 
 	private void setTrusting(boolean trusting) {
