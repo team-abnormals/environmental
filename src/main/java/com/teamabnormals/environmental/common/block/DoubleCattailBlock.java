@@ -71,7 +71,7 @@ public class DoubleCattailBlock extends Block implements BonemealableBlock, Simp
 	}
 
 	protected boolean isValidGround(BlockState state, BlockGetter worldIn, BlockPos pos) {
-		return state.is(BlockTags.DIRT) || state.is(BlockTags.SAND);
+		return state.is(BlockTags.DIRT) || state.is(BlockTags.SAND) || state.is(Blocks.FARMLAND);
 	}
 
 	@Override
