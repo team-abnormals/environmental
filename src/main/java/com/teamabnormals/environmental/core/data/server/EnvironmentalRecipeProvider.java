@@ -105,7 +105,7 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 		ShapedRecipeBuilder.shaped(EnvironmentalBlocks.MUD.get(), 4).define('#', EnvironmentalItems.MUD_BALL.get()).pattern("##").pattern("##").unlockedBy("has_mud_ball", has(EnvironmentalItems.MUD_BALL.get())).save(consumer);
 		oneToOneConversionRecipeBuilder(EnvironmentalItems.MUD_BALL.get(), EnvironmentalBlocks.MUD.get(), 4).group("mud_ball").save(consumer);
 		ShapelessRecipeBuilder.shapeless(EnvironmentalItems.MUD_BALL.get(), 16).requires(BlueprintItemTags.BUCKETS_WATER).requires(Blocks.DIRT, 8).group("mud_ball").unlockedBy("has_dirt", has(Blocks.DIRT)).save(consumer, getModConversionRecipeName(EnvironmentalItems.MUD_BALL.get(), Blocks.DIRT));
-		SimpleCookingRecipeBuilder.smelting(Ingredient.of(EnvironmentalItems.MUD_BALL.get()), EnvironmentalItems.MUD_BRICK.get(), 0.35F, 200).unlockedBy("has_mud_ball", has(EnvironmentalItems.MUD_BALL.get())).save(consumer);
+		SimpleCookingRecipeBuilder.smelting(Ingredient.of(EnvironmentalItems.MUD_BALL.get()), EnvironmentalItems.MUD_BRICK.get(), 0.3F, 200).unlockedBy("has_mud_ball", has(EnvironmentalItems.MUD_BALL.get())).save(consumer);
 		ShapedRecipeBuilder.shaped(EnvironmentalBlocks.SLABFISH_EFFIGY.get()).define('#', EnvironmentalItems.MUD_BRICK.get()).pattern("# #").pattern(" # ").unlockedBy("has_mud_brick", has(EnvironmentalItems.MUD_BRICK.get())).save(consumer);
 		generateRecipes(consumer, EnvironmentalBlockFamilies.MUD_BRICKS_FAMILY);
 		verticalSlabRecipes(consumer, EnvironmentalBlockFamilies.MUD_BRICKS_FAMILY, EnvironmentalBlocks.MUD_BRICK_VERTICAL_SLAB.get());
