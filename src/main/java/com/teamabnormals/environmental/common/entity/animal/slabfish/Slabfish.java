@@ -658,7 +658,7 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 		public final ResourceLocation type;
 
 		public SlabfishData(ResourceLocation type) {
-			super(0.2F);
+			super(true);
 			this.type = type;
 		}
 	}
