@@ -24,7 +24,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  */
 @OnlyIn(Dist.CLIENT)
 public class SlabfishModel<E extends Slabfish> extends AgeableListModel<E> {
-
 	public ModelPart body;
 	public ModelPart rightLeg;
 	public ModelPart leftLeg;
@@ -81,7 +80,6 @@ public class SlabfishModel<E extends Slabfish> extends AgeableListModel<E> {
 			this.leftArm.zRot = -ageInTicks;
 			this.rightLeg.xRot = (entityIn.isInSittingPose() || entityIn.getVehicle() != null) ? -1.57F : Mth.cos(limbSwing * 0.6662F) * 1.5F * limbSwingAmount;
 			this.leftLeg.xRot = (entityIn.isInSittingPose() || entityIn.getVehicle() != null) ? -1.57F : Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.5F * limbSwingAmount;
-
 		} else {
 			this.rightLeg.xRot = Mth.cos(limbSwing * 0.6662F) * 1.7F * limbSwingAmount;
 			this.leftLeg.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.7F * limbSwingAmount;

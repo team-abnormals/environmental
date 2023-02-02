@@ -59,7 +59,7 @@ public class SlabfishRenderer extends MobRenderer<Slabfish, SlabfishModel<Slabfi
 		if (slabfish.isInSittingPose() || slabfish.getVehicle() != null)
 			matrixStack.translate(0F, slabfish.isBaby() ? 0.15625F : 0.3125F, 0F);
 		if (slabfish.isInWater()) {
-			matrixStack.translate(0F, slabfish.isBaby() ? -0.8F : -0.4F, 0.5F);
+			matrixStack.translate(0F, -0.35, slabfish.isBaby() ? 0.25F : 0.5F);
 			matrixStack.mulPose(Vector3f.XP.rotation((float) (Math.PI / 2)));
 		}
 	}
