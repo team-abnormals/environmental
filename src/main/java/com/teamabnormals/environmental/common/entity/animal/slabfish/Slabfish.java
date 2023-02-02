@@ -263,7 +263,7 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 				return InteractionResult.SUCCESS;
 			}
 
-			if (player.isSecondaryUseActive() && item == Items.SHEARS && this.hasBackpack()) {
+			if (player.isSecondaryUseActive() && stack.is(Tags.Items.SHEARS) && this.hasBackpack()) {
 				this.dropBackpack();
 				return InteractionResult.SUCCESS;
 			}
@@ -421,10 +421,9 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 		List<Player> playerList = this.level.getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(5.0D, 5.0D, 5.0D));
 
 		for (Player player : playerList) {
-			if (player instanceof ServerPlayer) {
-				ServerPlayer serverplayerentity = (ServerPlayer) player;
+			if (player instanceof ServerPlayer serverPlayer) {
 				if (!this.level.isClientSide()) {
-					EnvironmentalCriteriaTriggers.SLABFISH.trigger(serverplayerentity, this);
+					EnvironmentalCriteriaTriggers.SLABFISH.trigger(serverPlayer, this);
 				}
 			}
 		}
