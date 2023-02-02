@@ -201,7 +201,7 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 		SlabfishManager slabfishManager = SlabfishManager.get(this.level);
 		SlabfishType slabfishType = slabfishManager.getSlabfishType(this.getSlabfishType()).orElse(SlabfishManager.DEFAULT_SLABFISH);
 
-		if (item == Items.WATER_BUCKET && this.isAlive() && this.getAge() < 0) {
+		if (item == Items.WATER_BUCKET && this.isAlive()) {
 			if (this.hasBackpack())
 				this.dropBackpack();
 			return Bucketable.bucketMobPickup(player, hand, this).get();
