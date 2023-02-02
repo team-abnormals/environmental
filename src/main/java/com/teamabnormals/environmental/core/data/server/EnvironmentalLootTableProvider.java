@@ -68,6 +68,9 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 	}
 
 	private static class EnvironmentalBlockLoot extends BlockLoot {
+		private static final LootItemCondition.Builder HAS_SILK_TOUCH = MatchTool.toolMatches(ItemPredicate.Builder.item().hasEnchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.Ints.atLeast(1))));
+		private static final LootItemCondition.Builder HAS_NO_SHEARS_OR_SILK_TOUCH = MatchTool.toolMatches(ItemPredicate.Builder.item().of(Items.SHEARS)).or(HAS_SILK_TOUCH).invert();
+
 		private static final float[] NORMAL_LEAVES_SAPLING_CHANCES = new float[]{0.05F, 0.0625F, 0.083333336F, 0.1F};
 
 		@Override
@@ -214,7 +217,7 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.add(CHERRY_CHESTS.getFirst().get(), BlockLoot::createNameableBlockEntityTable);
 			this.add(CHERRY_CHESTS.getSecond().get(), BlockLoot::createNameableBlockEntityTable);
 			this.add(CHERRY_BOOKSHELF.get(), (block) -> createSingleItemTableWithSilkTouch(block, Items.BOOK, ConstantValue.exactly(3.0F)));
-			this.add(CHERRY_LEAVES.get(), (block) -> createLeavesDrops(block, CHERRY_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+			this.add(CHERRY_LEAVES.get(), (block) -> createCherryLeavesDrop(block, CHERRY_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 
 			this.dropSelf(WISTERIA_PLANKS.get());
 			this.dropSelf(VERTICAL_WISTERIA_PLANKS.get());
@@ -273,6 +276,10 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.add(BLUE_HANGING_WISTERIA_LEAVES.get(), BlockLoot::createShearsOnlyDrop);
 			this.add(PURPLE_HANGING_WISTERIA_LEAVES.get(), BlockLoot::createShearsOnlyDrop);
 			this.add(WHITE_HANGING_WISTERIA_LEAVES.get(), BlockLoot::createShearsOnlyDrop);
+		}
+
+		protected static LootTable.Builder createCherryLeavesDrop(Block block, Block sapling, float... saplingChances) {
+			return createLeavesDrops(block, sapling, saplingChances).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(HAS_NO_SHEARS_OR_SILK_TOUCH).add(applyExplosionDecay(block, LootItem.lootTableItem(EnvironmentalItems.CHERRIES.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, 0.05F, 0.055555557F, 0.0625F, 0.08333334F, 0.25F))));
 		}
 
 //		protected static LootTable.Builder createLeafPileDrops(Block block) {
