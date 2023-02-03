@@ -9,6 +9,7 @@ import com.teamabnormals.environmental.common.entity.ai.goal.TemptGoldenCarrotGo
 import com.teamabnormals.environmental.common.entity.animal.Koi;
 import com.teamabnormals.environmental.common.entity.animal.slabfish.Slabfish;
 import com.teamabnormals.environmental.common.entity.animal.slabfish.SlabfishOverlay;
+import com.teamabnormals.environmental.common.slabfish.BuiltInSlabfishTypes;
 import com.teamabnormals.environmental.common.slabfish.SlabfishManager;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.EnvironmentalConfig;
@@ -300,7 +301,7 @@ public class EnvironmentalEvents {
 		Level world = entity.getCommandSenderWorld();
 		Random rand = new Random();
 
-		if (entity instanceof Slabfish) {
+		if (entity instanceof Slabfish && EnvironmentalSlabfishTypes.registryAccess().get(BuiltInSlabfishTypes.GHOST) != null) {
 			Slabfish slabfish = (Slabfish) event.getEntity();
 			if (world.getBiome(entity.blockPosition()).is(Biomes.SOUL_SAND_VALLEY)) {
 				if (!slabfish.getSlabfishType().equals(SlabfishManager.GHOST)) {
@@ -326,7 +327,7 @@ public class EnvironmentalEvents {
 						ghost.moveTo(slabfish.getX(), slabfish.getY(), slabfish.getZ(), slabfish.getYRot(), slabfish.getXRot());
 						ghost.setNoAi(slabfish.isNoAi());
 						ghost.setAge(slabfish.getAge());
-						ghost.setSlabfishType(EnvironmentalSlabfishTypes.GHOST.get().registryName());
+						ghost.setSlabfishType(BuiltInSlabfishTypes.GHOST.location());
 						ghost.setSecondsOnFire(0);
 						if (slabfish.hasCustomName()) {
 							ghost.setCustomName(entity.getCustomName());

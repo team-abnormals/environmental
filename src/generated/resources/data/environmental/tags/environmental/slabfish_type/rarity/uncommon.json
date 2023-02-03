@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "environmental:beach",
+    "environmental:desert",
+    "environmental:forest",
+    "environmental:hill",
+    "environmental:ocean",
+    "environmental:plains",
+    "environmental:river",
+    "environmental:savanna",
+    "environmental:taiga",
+    "#environmental:secret"
+  ]
+}

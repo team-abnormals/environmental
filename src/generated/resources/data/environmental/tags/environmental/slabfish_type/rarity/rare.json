@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "environmental:blossom",
+    "environmental:cave",
+    "environmental:dark_forest",
+    "environmental:flower_forest",
+    "environmental:jungle",
+    "environmental:nether",
+    "environmental:warm_ocean",
+    "environmental:frozen_ocean",
+    "environmental:badlands",
+    "environmental:bamboo"
+  ]
+}

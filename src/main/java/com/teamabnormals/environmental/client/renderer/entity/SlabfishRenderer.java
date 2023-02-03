@@ -10,7 +10,7 @@ import com.teamabnormals.environmental.client.renderer.entity.layers.SweaterRend
 import com.teamabnormals.environmental.client.resources.SlabfishSpriteUploader;
 import com.teamabnormals.environmental.common.entity.animal.slabfish.Slabfish;
 import com.teamabnormals.environmental.core.other.EnvironmentalModelLayers;
-import com.teamabnormals.environmental.core.other.EnvironmentalSlabfishTypeTags;
+import com.teamabnormals.environmental.core.other.tags.EnvironmentalSlabfishTypeTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSlabfishTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

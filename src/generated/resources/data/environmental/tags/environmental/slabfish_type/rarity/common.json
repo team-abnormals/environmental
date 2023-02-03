@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "environmental:swamp",
+    "environmental:marsh"
+  ]
+}

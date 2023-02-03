@@ -12,10 +12,6 @@
         {
           "biome": "environmental:marsh",
           "type": "environmental:in_biome"
-        },
-        {
-          "biome": "environmental:mushroom_marsh",
-          "type": "environmental:in_biome"
         }
       ],
       "type": "environmental:or"

@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "environmental:chorus",
+    "environmental:crimson",
+    "environmental:drowned",
+    "environmental:end",
+    "environmental:mushroom",
+    "environmental:nightmare",
+    "environmental:skeleton",
+    "environmental:soul_sand_valley",
+    "environmental:totem",
+    "environmental:warped"
+  ]
+}

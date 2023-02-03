@@ -126,12 +126,13 @@ public class Environmental {
 			generator.addProvider(new EnvironmentalEntityTypeTagsProvider(generator, helper));
 			generator.addProvider(new EnvironmentalStructureTagsProvider(generator, helper));
 			generator.addProvider(new EnvironmentalBiomeTagsProvider(generator, helper));
+			generator.addProvider(new EnvironmentalSlabfishTypeTagsProvider(generator, helper));
 			generator.addProvider(new EnvironmentalRecipeProvider(generator));
 			generator.addProvider(new EnvironmentalAdvancementModifierProvider(generator));
 			generator.addProvider(new EnvironmentalModdedBiomeSliceProvider(generator));
 			generator.addProvider(new EnvironmentalLootTableProvider(generator));
 			generator.addProvider(new EnvironmentalLootModifierProvider(generator));
-			generator.addProvider(new SlabfishTypeProvider(generator, MOD_ID, helper));
+			generator.addProvider(new SlabfishTypeProvider(generator, MOD_ID));
 		}
 	}
 

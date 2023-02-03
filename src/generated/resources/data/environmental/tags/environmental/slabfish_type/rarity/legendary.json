@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "environmental:basalt_deltas",
+    "environmental:brown_mushroom",
+    "environmental:ice_spikes",
+    "environmental:sky",
+    "environmental:wither",
+    "environmental:stray",
+    "environmental:ghost"
+  ]
+}

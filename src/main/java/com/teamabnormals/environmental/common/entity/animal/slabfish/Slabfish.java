@@ -11,7 +11,7 @@ import com.teamabnormals.environmental.common.slabfish.condition.SlabfishConditi
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.other.EnvironmentalCriteriaTriggers;
 import com.teamabnormals.environmental.core.other.EnvironmentalDataSerializers;
-import com.teamabnormals.environmental.core.other.EnvironmentalSlabfishTypeTags;
+import com.teamabnormals.environmental.core.other.tags.EnvironmentalSlabfishTypeTags;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalItemTags;
 import com.teamabnormals.environmental.core.registry.*;
 import net.minecraft.core.BlockPos;
@@ -596,7 +596,7 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 			SlabfishType currentType = EnvironmentalSlabfishTypes.registryAccess().getOptional(this.getSlabfishType()).orElse(EnvironmentalSlabfishTypes.SWAMP.get());
 
 			slabfishManager.getSlabfishType(SlabfishConditionContext.rename(this)).ifPresent(newType -> {
-				if (!currentType.is(EnvironmentalSlabfishTypeTags.TRADEABLE) && newType.is(EnvironmentalSlabfishTypeTags.TRADEABLE))
+				if (currentType.is(EnvironmentalSlabfishTypeTags.UNTRADABLE) && !newType.is(EnvironmentalSlabfishTypeTags.UNTRADABLE))
 					return;
 				if (newType.registryName() != this.getSlabfishType())
 					this.setSlabfishType(newType.registryName());
@@ -617,7 +617,7 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 			SlabfishType currentType = EnvironmentalSlabfishTypes.registryAccess().getOptional(this.getSlabfishType()).orElse(EnvironmentalSlabfishTypes.SWAMP.get());
 
 			slabfishManager.getSlabfishType(SlabfishConditionContext.lightning(this)).ifPresent(newType -> {
-				if (!currentType.is(EnvironmentalSlabfishTypeTags.TRADEABLE) && newType.is(EnvironmentalSlabfishTypeTags.TRADEABLE))
+				if (!currentType.is(EnvironmentalSlabfishTypeTags.UNTRADABLE) && newType.is(EnvironmentalSlabfishTypeTags.UNTRADABLE))
 					return;
 				this.setSlabfishType(newType.registryName());
 				this.lightningUUID = uuid;
@@ -706,7 +706,7 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 		} else {
 			SlabfishManager slabfishManager = SlabfishManager.get(this.level);
 			TagKey<SlabfishType> rarity = SlabfishType.getRandomRarity(this.level.getRandom().nextFloat());
-			SlabfishType type = slabfishManager.getRandomSlabfishType(s -> s.isModLoaded() && s.is(EnvironmentalSlabfishTypeTags.TRADEABLE) && s.is(rarity), this.level.getRandom()).orElse(EnvironmentalSlabfishTypes.SWAMP.get());
+			SlabfishType type = slabfishManager.getRandomSlabfishType(s -> s.isModLoaded() && !s.is(EnvironmentalSlabfishTypeTags.UNTRADABLE) && s.is(rarity), this.level.getRandom()).orElse(EnvironmentalSlabfishTypes.SWAMP.get());
 			this.setSlabfishType(type.registryName());
 		}
 	}
