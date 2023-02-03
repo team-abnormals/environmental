@@ -31,7 +31,6 @@ public class EnvironmentalSlabfishTypes {
     public static final Supplier<IForgeRegistry<SlabfishType>> SLABFISH_TYPES = BUILTIN_SLABFISH_TYPES.makeRegistry(SlabfishType.class, () -> new RegistryBuilder<SlabfishType>().setDefaultKey(new ResourceLocation(Environmental.MOD_ID, "swamp")).disableSaving().dataPackRegistry(SlabfishType.CODEC, SlabfishType.NETWORK_CODEC));
 
     public static final RegistryObject<SlabfishType> SWAMP = BUILTIN_SLABFISH_TYPES.register("swamp", () -> SlabfishType.builder().setWeight(-1).build());
-    public static final RegistryObject<SlabfishType> GHOST = BUILTIN_SLABFISH_TYPES.register("ghost", () -> SlabfishType.builder().addCondition(new SlabfishImpossibleCondition()).build());
 
     public static Registry<SlabfishType> registryAccess() {
         if (EffectiveSide.get().isServer()) {

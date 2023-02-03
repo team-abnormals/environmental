@@ -1,0 +1,24 @@
+{
+  "conditions": [
+    {
+      "events": [
+        "spawn",
+        "breed"
+      ],
+      "type": "environmental:event"
+    },
+    {
+      "conditions": [
+        {
+          "mod_id": "atmospheric",
+          "type": "environmental:mod_loaded"
+        },
+        {
+          "biome": "#atmospheric:is_rainforest",
+          "type": "environmental:in_biome"
+        }
+      ],
+      "type": "environmental:and"
+    }
+  ]
+}

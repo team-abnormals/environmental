@@ -1,0 +1,24 @@
+{
+  "conditions": [
+    {
+      "events": [
+        "spawn",
+        "breed"
+      ],
+      "type": "environmental:event"
+    },
+    {
+      "conditions": [
+        {
+          "mod_id": "autumnity",
+          "type": "environmental:mod_loaded"
+        },
+        {
+          "biome": "#autumnity:is_maple",
+          "type": "environmental:in_biome"
+        }
+      ],
+      "type": "environmental:and"
+    }
+  ]
+}

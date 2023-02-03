@@ -63,7 +63,16 @@ public interface BuiltInSlabfishTypes {
 	ResourceKey<SlabfishType> SMELLY = createKey("smelly");
 	ResourceKey<SlabfishType> SNAKE_BLOCK = createKey("snake_block");
 
-	private static ResourceKey<SlabfishType> createKey(String name) {
-		return ResourceKey.create(EnvironmentalSlabfishTypes.SLABFISH_TYPES_REGISTRY, new ResourceLocation(Environmental.MOD_ID, name));
+	ResourceKey<SlabfishType> RAINFOREST = createKey("atmospheric", "rainforest");
+	ResourceKey<SlabfishType> DUNES = createKey("atmospheric", "dunes");
+	ResourceKey<SlabfishType> MAPLE = createKey("autumnity", "maple");
+	ResourceKey<SlabfishType> POISE = createKey("endergetic", "poise");
+
+	private static ResourceKey<SlabfishType> createKey(String namespace, String path) {
+		return ResourceKey.create(EnvironmentalSlabfishTypes.SLABFISH_TYPES_REGISTRY, new ResourceLocation(namespace, path));
+	}
+
+	private static ResourceKey<SlabfishType> createKey(String path) {
+		return createKey(Environmental.MOD_ID, path);
 	}
 }

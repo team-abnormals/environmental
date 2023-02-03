@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "autumnity:maple_forest",
+      "required": false
+    },
+    {
+      "id": "autumnity:pumpkin_fields",
+      "required": false
+    }
+  ]
+}

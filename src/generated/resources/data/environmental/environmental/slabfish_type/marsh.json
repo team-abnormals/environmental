@@ -8,13 +8,8 @@
       "type": "environmental:event"
     },
     {
-      "conditions": [
-        {
-          "biome": "environmental:marsh",
-          "type": "environmental:in_biome"
-        }
-      ],
-      "type": "environmental:or"
+      "biome": "environmental:marsh",
+      "type": "environmental:in_biome"
     }
   ]
 }

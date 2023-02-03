@@ -1,0 +1,24 @@
+{
+  "conditions": [
+    {
+      "events": [
+        "spawn",
+        "breed"
+      ],
+      "type": "environmental:event"
+    },
+    {
+      "conditions": [
+        {
+          "mod_id": "endergetic",
+          "type": "environmental:mod_loaded"
+        },
+        {
+          "biome": "#endergetic:is_poise",
+          "type": "environmental:in_biome"
+        }
+      ],
+      "type": "environmental:and"
+    }
+  ]
+}

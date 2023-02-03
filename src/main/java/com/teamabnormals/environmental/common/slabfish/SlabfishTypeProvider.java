@@ -8,6 +8,7 @@ import com.teamabnormals.environmental.common.slabfish.condition.*;
 import com.teamabnormals.environmental.common.slabfish.condition.SlabfishConditionContext.Event;
 import com.teamabnormals.environmental.common.slabfish.condition.SlabfishConditionContext.Time;
 import com.teamabnormals.environmental.core.Environmental;
+import com.teamabnormals.environmental.core.other.tags.EnvironmentalBiomeTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBiomes;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
@@ -53,7 +54,7 @@ public class SlabfishTypeProvider implements DataProvider, BuiltInSlabfishTypes 
 		this.addBasicSlabfish(HILL, new SlabfishInBiomeCondition(BiomeTags.IS_HILL));
 		this.addBasicSlabfish(ICE_SPIKES, 1, new SlabfishInBiomeCondition(Biomes.ICE_SPIKES));
 		this.addBasicSlabfish(JUNGLE, new SlabfishInBiomeCondition(BiomeTags.IS_JUNGLE));
-		this.addBasicSlabfish(MARSH, new SlabfishOrCondition(new SlabfishInBiomeCondition(EnvironmentalBiomes.MARSH.get())));
+		this.addBasicSlabfish(MARSH, new SlabfishInBiomeCondition(EnvironmentalBiomes.MARSH.get()));
 		this.addBasicSlabfish(PLAINS, 1, new SlabfishOrCondition(new SlabfishInBiomeCondition(Biomes.PLAINS), new SlabfishInBiomeCondition(Biomes.SUNFLOWER_PLAINS), new SlabfishInBiomeCondition(Biomes.MEADOW)));
 		this.addBasicSlabfish(SAVANNA, new SlabfishInBiomeCondition(BlueprintBiomeTags.IS_SAVANNA));
 		this.addBasicSlabfish(SNOWY, new SlabfishOrCondition(new SlabfishInBiomeCondition(Biomes.SNOWY_PLAINS), new SlabfishInBiomeCondition(Biomes.SNOWY_BEACH), new SlabfishInBiomeCondition(Biomes.SNOWY_TAIGA), new SlabfishInBiomeCondition(Biomes.FROZEN_RIVER), new SlabfishInBiomeCondition(BiomeTags.IS_MOUNTAIN)));
@@ -75,10 +76,10 @@ public class SlabfishTypeProvider implements DataProvider, BuiltInSlabfishTypes 
 		this.addBasicSlabfish(CHORUS, 1, new SlabfishInBiomeCondition(Biomes.END_HIGHLANDS));
 
 		this.add(MUSHROOM, SlabfishType.builder().setWeight(2).addCondition(new SlabfishOrCondition(new SlabfishAndCondition(new SlabfishEventCondition(Event.LIGHTNING), new SlabfishTypeCondition(new ResourceLocation(Environmental.MOD_ID, "mushroom"))), new SlabfishAndCondition(new SlabfishEventCondition(Event.SPAWN, Event.BREED), new SlabfishInBiomeCondition(Biomes.MUSHROOM_FIELDS)))).build());
-		this.add(BROWN_MUSHROOM, SlabfishType.builder().setWeight(2).addCondition(new SlabfishEventCondition(Event.LIGHTNING)).addCondition(new SlabfishTypeCondition(new ResourceLocation(Environmental.MOD_ID, "mushroom"))).build());
+		this.add(BROWN_MUSHROOM, SlabfishType.builder().setWeight(2).addCondition(new SlabfishEventCondition(Event.LIGHTNING)).addCondition(new SlabfishTypeCondition(BuiltInSlabfishTypes.MUSHROOM.location())).build());
 		this.add(SKELETON, SlabfishType.builder().setWeight(2).addCondition(new SlabfishEventCondition(Event.LIGHTNING)).build());
-		this.add(STRAY, SlabfishType.builder().setWeight(2).addCondition(new SlabfishEventCondition(Event.BREED)).addCondition(new SlabfishBreedCondition(new ResourceLocation(this.getModID(), "skeleton"), new ResourceLocation(this.getModID(), "skeleton"))).addCondition(new SlabfishOrCondition(new SlabfishInBiomeCondition(Biomes.SNOWY_PLAINS), new SlabfishInBiomeCondition(Biomes.SNOWY_BEACH), new SlabfishInBiomeCondition(Biomes.SNOWY_TAIGA), new SlabfishInBiomeCondition(Biomes.FROZEN_RIVER), new SlabfishInBiomeCondition(BiomeTags.IS_MOUNTAIN))).build());
-		this.add(WITHER, SlabfishType.builder().setWeight(2).addCondition(new SlabfishEventCondition(Event.BREED)).addCondition(new SlabfishBreedCondition(new ResourceLocation(this.getModID(), "skeleton"), new ResourceLocation(this.getModID(), "skeleton"))).addCondition(new SlabfishDimensionCondition(DimensionType.NETHER_LOCATION.location())).build());
+		this.add(STRAY, SlabfishType.builder().setWeight(2).addCondition(new SlabfishEventCondition(Event.BREED)).addCondition(new SlabfishBreedCondition(BuiltInSlabfishTypes.SKELETON.location(), BuiltInSlabfishTypes.SKELETON.location())).addCondition(new SlabfishOrCondition(new SlabfishInBiomeCondition(Biomes.SNOWY_PLAINS), new SlabfishInBiomeCondition(Biomes.SNOWY_BEACH), new SlabfishInBiomeCondition(Biomes.SNOWY_TAIGA), new SlabfishInBiomeCondition(Biomes.FROZEN_RIVER), new SlabfishInBiomeCondition(BiomeTags.IS_MOUNTAIN))).build());
+		this.add(WITHER, SlabfishType.builder().setWeight(2).addCondition(new SlabfishEventCondition(Event.BREED)).addCondition(new SlabfishBreedCondition(BuiltInSlabfishTypes.SKELETON.location(), BuiltInSlabfishTypes.SKELETON.location())).addCondition(new SlabfishDimensionCondition(DimensionType.NETHER_LOCATION.location())).build());
 		this.addBasicSlabfish(CAVE, 2, new SlabfishHeightCondition(-64, 20), new SlabfishLightCondition(0, 0, LightLayer.SKY));
 		this.addBasicSlabfish(GHOST, new SlabfishImpossibleCondition());
 		this.addBasicSlabfish(SKY, 2, new SlabfishHeightCondition(256, 512));
@@ -96,6 +97,11 @@ public class SlabfishTypeProvider implements DataProvider, BuiltInSlabfishTypes 
 		this.addRenameSlabfish(RENREN, new String[]{"ren", "renren", "slabrave"});
 		this.addRenameSlabfish(SMELLY, new String[]{"smelly", "stinky", "smellysox", "thefaceofgaming"});
 		this.add(SNAKE_BLOCK, SlabfishType.builder().setWeight(10).setBackpack(new ResourceLocation(this.getModID(), "snake_block")).addCondition(new SlabfishRenameCondition(new String[]{"snake", "snake block", "snakeblock"}, false)).build());
+
+		this.addBasicSlabfish(RAINFOREST, new SlabfishAndCondition(new SlabfishModLoadedCondition("atmospheric"), new SlabfishInBiomeCondition(EnvironmentalBiomeTags.IS_RAINFOREST)));
+		this.addBasicSlabfish(DUNES, new SlabfishAndCondition(new SlabfishModLoadedCondition("atmospheric"), new SlabfishInBiomeCondition(EnvironmentalBiomeTags.IS_DUNES)));
+		this.addBasicSlabfish(MAPLE, new SlabfishAndCondition(new SlabfishModLoadedCondition("autumnity"), new SlabfishInBiomeCondition(EnvironmentalBiomeTags.IS_MAPLE)));
+		this.addBasicSlabfish(POISE, new SlabfishAndCondition(new SlabfishModLoadedCondition("endergetic"), new SlabfishInBiomeCondition(EnvironmentalBiomeTags.IS_POISE)));
 	}
 
 	protected void add(ResourceKey<SlabfishType> key, SlabfishType type) {
