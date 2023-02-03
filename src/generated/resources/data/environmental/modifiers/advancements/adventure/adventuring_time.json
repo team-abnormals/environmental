@@ -1,0 +1,49 @@
+{
+  "selector": "minecraft:adventure/adventuring_time",
+  "priority": "normal",
+  "modifiers": [
+    {
+      "type": "criteria",
+      "config": {
+        "criteria": {
+          "environmental:marsh": {
+            "trigger": "minecraft:location",
+            "conditions": {
+              "location": {
+                "biome": "environmental:marsh"
+              }
+            }
+          },
+          "environmental:blossom_woods": {
+            "trigger": "minecraft:location",
+            "conditions": {
+              "location": {
+                "biome": "environmental:blossom_woods"
+              }
+            }
+          },
+          "environmental:blossom_valleys": {
+            "trigger": "minecraft:location",
+            "conditions": {
+              "location": {
+                "biome": "environmental:blossom_valleys"
+              }
+            }
+          }
+        },
+        "requirements": [
+          [
+            "environmental:marsh"
+          ],
+          [
+            "environmental:blossom_woods"
+          ],
+          [
+            "environmental:blossom_valleys"
+          ]
+        ],
+        "should_replace_requirements": false
+      }
+    }
+  ]
+}

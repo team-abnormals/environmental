@@ -1,0 +1,46 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "flag": "leaf_carpet",
+          "type": "blueprint:quark_flag"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "environmental:purple_wisteria_leaf_carpet"
+          ]
+        },
+        "criteria": {
+          "has_purple_wisteria_leaves": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "environmental:purple_wisteria_leaves"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "environmental:purple_wisteria_leaf_carpet"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "has_purple_wisteria_leaves",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}

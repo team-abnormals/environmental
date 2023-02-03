@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "environmental:willow_chest",
+    "environmental:willow_trapped_chest",
+    "environmental:wisteria_chest",
+    "environmental:wisteria_trapped_chest",
+    "environmental:cherry_chest",
+    "environmental:cherry_trapped_chest"
+  ]
+}

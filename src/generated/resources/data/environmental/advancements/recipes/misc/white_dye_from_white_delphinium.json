@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "environmental:white_dye_from_white_delphinium"
+    ]
+  },
+  "criteria": {
+    "has_white_delphinium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "environmental:white_delphinium"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "environmental:white_dye_from_white_delphinium"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_white_delphinium",
+      "has_the_recipe"
+    ]
+  ]
+}

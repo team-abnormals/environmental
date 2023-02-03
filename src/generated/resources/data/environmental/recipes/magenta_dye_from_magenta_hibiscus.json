@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "magenta_dye",
+  "ingredients": [
+    {
+      "item": "environmental:magenta_hibiscus"
+    }
+  ],
+  "result": {
+    "item": "minecraft:magenta_dye"
+  }
+}

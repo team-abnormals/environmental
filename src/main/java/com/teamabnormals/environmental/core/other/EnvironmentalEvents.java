@@ -12,6 +12,8 @@ import com.teamabnormals.environmental.common.entity.animal.slabfish.SlabfishOve
 import com.teamabnormals.environmental.common.slabfish.SlabfishManager;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.EnvironmentalConfig;
+import com.teamabnormals.environmental.core.other.tags.EnvironmentalBiomeTags;
+import com.teamabnormals.environmental.core.other.tags.EnvironmentalEntityTypeTags;
 import com.teamabnormals.environmental.core.registry.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -19,7 +21,6 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -100,8 +101,7 @@ public class EnvironmentalEvents {
 			if (replaceVariants && validSpawn && entity.getY() > 60) {
 				if (entity.getType() == EntityType.ZOMBIE) {
 					Zombie zombie = (Zombie) entity;
-					//TODO: Tag for Husk biomes instead
-					if (world.getBiome(entity.blockPosition()).is(BiomeTags.HAS_VILLAGE_DESERT)) {
+					if (world.getBiome(entity.blockPosition()).is(EnvironmentalBiomeTags.HAS_HUSK)) {
 						Husk husk = EntityType.HUSK.create(serverWorld.getLevel());
 						husk.setBaby(zombie.isBaby());
 						for (EquipmentSlot slot : EquipmentSlot.values())
@@ -115,8 +115,7 @@ public class EnvironmentalEvents {
 
 				if (entity.getType() == EntityType.SKELETON) {
 					Skeleton skeleton = (Skeleton) entity;
-					//TODO: Tag for Stray biomes instead
-					if (world.getBiome(entity.blockPosition()).is(BiomeTags.HAS_VILLAGE_SNOWY)) {
+					if (world.getBiome(entity.blockPosition()).is(EnvironmentalBiomeTags.HAS_STRAY)) {
 						Stray stray = EntityType.STRAY.create(serverWorld.getLevel());
 						for (EquipmentSlot slot : EquipmentSlot.values())
 							skeleton.setItemSlot(slot, skeleton.getItemBySlot(slot));
@@ -143,7 +142,7 @@ public class EnvironmentalEvents {
 		boolean blockOnlyNaturalSpawns = EnvironmentalConfig.COMMON.blockOnlyNaturalSpawns.get();
 
 		if (blockOnlyNaturalSpawns && event.isSpawner()) return;
-		if (!entity.getType().is(EnvironmentalTags.EntityTypes.UNAFFECTED_BY_SERENITY)) {
+		if (!entity.getType().is(EnvironmentalEntityTypeTags.UNAFFECTED_BY_SERENITY)) {
 			if (entity.getType().getCategory() == MobCategory.MONSTER) {
 				int horizontalRange = EnvironmentalConfig.COMMON.koiHorizontalSerenityRange.get();
 				int verticalRange = EnvironmentalConfig.COMMON.koiVerticalSerenityRange.get();

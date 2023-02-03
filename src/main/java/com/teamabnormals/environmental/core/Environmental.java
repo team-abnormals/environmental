@@ -7,12 +7,19 @@ import com.teamabnormals.environmental.client.resources.SlabfishSpriteUploader;
 import com.teamabnormals.environmental.common.network.message.*;
 import com.teamabnormals.environmental.common.slabfish.SlabfishLoader;
 import com.teamabnormals.environmental.common.slabfish.SlabfishTypeProvider;
+import com.teamabnormals.environmental.core.data.server.EnvironmentalLootTableProvider;
+import com.teamabnormals.environmental.core.data.server.EnvironmentalRecipeProvider;
+import com.teamabnormals.environmental.core.data.server.modifiers.EnvironmentalAdvancementModifierProvider;
+import com.teamabnormals.environmental.core.data.server.modifiers.EnvironmentalLootModifierProvider;
+import com.teamabnormals.environmental.core.data.server.modifiers.EnvironmentalModdedBiomeSliceProvider;
+import com.teamabnormals.environmental.core.data.server.tags.*;
 import com.teamabnormals.environmental.core.other.EnvironmentalCompat;
 import com.teamabnormals.environmental.core.other.EnvironmentalDataProcessors;
 import com.teamabnormals.environmental.core.other.EnvironmentalDataSerializers;
 import com.teamabnormals.environmental.core.other.EnvironmentalModelLayers;
 import com.teamabnormals.environmental.core.registry.*;
 import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures.EnvironmentalConfiguredFeatures;
+import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures.EnvironmentalPlacedFeatures;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.data.DataGenerator;
@@ -53,8 +60,6 @@ public class Environmental {
 	public static final SimpleChannel PLAY = NetworkRegistry.ChannelBuilder.named(new ResourceLocation(MOD_ID, "play")).networkProtocolVersion(() -> NETWORK_PROTOCOL).clientAcceptedVersions(NETWORK_PROTOCOL::equals).serverAcceptedVersions(NETWORK_PROTOCOL::equals).simpleChannel();
 	public static final SimpleChannel LOGIN = NetworkRegistry.ChannelBuilder.named(new ResourceLocation(MOD_ID, "login")).networkProtocolVersion(() -> NETWORK_PROTOCOL).clientAcceptedVersions(NETWORK_PROTOCOL::equals).serverAcceptedVersions(NETWORK_PROTOCOL::equals).simpleChannel();
 
-	//TODO: Grass bonemeal flower mixin
-	//TODO: Hoe underwater mixin
 	public Environmental() {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 		ModLoadingContext context = ModLoadingContext.get();
@@ -69,6 +74,7 @@ public class Environmental {
 		EnvironmentalFeatures.FEATURES.register(bus);
 		EnvironmentalFeatures.TREE_DECORATORS.register(bus);
 		EnvironmentalConfiguredFeatures.CONFIGURED_FEATURES.register(bus);
+		EnvironmentalPlacedFeatures.PLACED_FEATURES.register(bus);
 		EnvironmentalAttributes.ATTRIBUTES.register(bus);
 		EnvironmentalMobEffects.MOB_EFFECTS.register(bus);
 		EnvironmentalMobEffects.POTIONS.register(bus);
@@ -111,10 +117,21 @@ public class Environmental {
 
 	private void dataSetup(GatherDataEvent event) {
 		DataGenerator generator = event.getGenerator();
-		ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
+		ExistingFileHelper helper = event.getExistingFileHelper();
 
 		if (event.includeServer()) {
-			generator.addProvider(new SlabfishTypeProvider(generator, MOD_ID, existingFileHelper));
+			EnvironmentalBlockTagsProvider blockTags = new EnvironmentalBlockTagsProvider(generator, helper);
+			generator.addProvider(blockTags);
+			generator.addProvider(new EnvironmentalItemTagsProvider(generator, blockTags, helper));
+			generator.addProvider(new EnvironmentalEntityTypeTagsProvider(generator, helper));
+			generator.addProvider(new EnvironmentalStructureTagsProvider(generator, helper));
+			generator.addProvider(new EnvironmentalBiomeTagsProvider(generator, helper));
+			generator.addProvider(new EnvironmentalRecipeProvider(generator));
+			generator.addProvider(new EnvironmentalAdvancementModifierProvider(generator));
+			generator.addProvider(new EnvironmentalModdedBiomeSliceProvider(generator));
+			generator.addProvider(new EnvironmentalLootTableProvider(generator));
+			generator.addProvider(new EnvironmentalLootModifierProvider(generator));
+			generator.addProvider(new SlabfishTypeProvider(generator, MOD_ID, helper));
 		}
 	}
 
@@ -165,6 +182,7 @@ public class Environmental {
 		event.registerEntityRenderer(EnvironmentalEntityTypes.SLABFISH.get(), SlabfishRenderer::new);
 		event.registerEntityRenderer(EnvironmentalEntityTypes.DUCK.get(), DuckRenderer::new);
 		event.registerEntityRenderer(EnvironmentalEntityTypes.DEER.get(), DeerRenderer::new);
+		event.registerEntityRenderer(EnvironmentalEntityTypes.ZOMBIE_DEER.get(), ZombieDeerRenderer::new);
 		event.registerEntityRenderer(EnvironmentalEntityTypes.YAK.get(), YakRenderer::new);
 		event.registerEntityRenderer(EnvironmentalEntityTypes.KOI.get(), KoiRenderer::new);
 		event.registerEntityRenderer(EnvironmentalEntityTypes.FENNEC_FOX.get(), FennecFoxRenderer::new);

@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#environmental:willow_logs",
+    "#environmental:wisteria_logs",
+    "#environmental:cherry_logs"
+  ]
+}

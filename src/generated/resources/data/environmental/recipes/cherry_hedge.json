@@ -1,0 +1,33 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "flag": "hedges",
+          "type": "blueprint:quark_flag"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "group": "hedge",
+        "pattern": [
+          "#",
+          "L"
+        ],
+        "key": {
+          "#": {
+            "item": "environmental:cherry_leaves"
+          },
+          "L": {
+            "tag": "environmental:cherry_logs"
+          }
+        },
+        "result": {
+          "item": "environmental:cherry_hedge",
+          "count": 2
+        }
+      }
+    }
+  ]
+}

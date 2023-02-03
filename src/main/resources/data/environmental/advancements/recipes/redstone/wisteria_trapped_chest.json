@@ -1,0 +1,64 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "values": [
+            {
+              "type": "blueprint:and",
+              "values": [
+                {
+                  "type": "forge:mod_loaded",
+                  "modid": "woodworks"
+                },
+                {
+                  "type": "woodworks:config",
+                  "value": "wooden_chests"
+                }
+              ]
+            },
+            {
+              "flag": "variant_chests",
+              "type": "blueprint:quark_flag"
+            }
+          ],
+          "type": "forge:or"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "environmental:wisteria_trapped_chest"
+          ]
+        },
+        "criteria": {
+          "has_tripwire_hook": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "minecraft:tripwire_hook"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "environmental:wisteria_trapped_chest"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "has_tripwire_hook",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}

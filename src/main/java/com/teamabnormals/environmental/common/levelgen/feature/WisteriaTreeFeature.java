@@ -1,7 +1,9 @@
 package com.teamabnormals.environmental.common.levelgen.feature;
 
+import com.google.common.collect.Sets;
 import com.mojang.serialization.Codec;
 import com.teamabnormals.blueprint.core.util.TreeUtil;
+import com.teamabnormals.environmental.common.block.HangingWisteriaLeavesBlock;
 import com.teamabnormals.environmental.common.levelgen.util.WisteriaTreeUtil;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures;
@@ -11,16 +13,16 @@ import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 
 import java.util.Random;
-import java.util.function.Supplier;
+import java.util.Set;
 
 public class WisteriaTreeFeature extends Feature<TreeConfiguration> {
-	private Supplier<BlockState> VINE_UPPER;
-	private Supplier<BlockState> VINE_LOWER;
+	private Set<BlockPos> logPosSet;
 
 	public WisteriaTreeFeature(Codec<TreeConfiguration> configFactoryIn) {
 		super(configFactoryIn);
@@ -33,23 +35,12 @@ public class WisteriaTreeFeature extends Feature<TreeConfiguration> {
 		BlockPos pos = context.origin();
 		TreeConfiguration config = context.config();
 
-		if (config.foliageProvider.getState(random, pos) == EnvironmentalFeatures.States.BLUE_WISTERIA_LEAVES) {
-			VINE_UPPER = () -> EnvironmentalFeatures.States.BLUE_HANGING_WISTERIA_LEAVES_TOP;
-			VINE_LOWER = () -> EnvironmentalFeatures.States.BLUE_HANGING_WISTERIA_LEAVES_BOTTOM;
-		}
-		if (config.foliageProvider.getState(random, pos) == EnvironmentalFeatures.States.PINK_WISTERIA_LEAVES) {
-			VINE_UPPER = () -> EnvironmentalFeatures.States.PINK_HANGING_WISTERIA_LEAVES_TOP;
-			VINE_LOWER = () -> EnvironmentalFeatures.States.PINK_HANGING_WISTERIA_LEAVES_BOTTOM;
-		}
-		if (config.foliageProvider.getState(random, pos) == EnvironmentalFeatures.States.PURPLE_WISTERIA_LEAVES) {
-			VINE_UPPER = () -> EnvironmentalFeatures.States.PURPLE_HANGING_WISTERIA_LEAVES_TOP;
-			VINE_LOWER = () -> EnvironmentalFeatures.States.PURPLE_HANGING_WISTERIA_LEAVES_BOTTOM;
-		}
-		if (config.foliageProvider.getState(random, pos) == EnvironmentalFeatures.States.WHITE_WISTERIA_LEAVES) {
-			VINE_UPPER = () -> EnvironmentalFeatures.States.WHITE_HANGING_WISTERIA_LEAVES_TOP;
-			VINE_LOWER = () -> EnvironmentalFeatures.States.WHITE_HANGING_WISTERIA_LEAVES_BOTTOM;
+		if (random.nextInt(5) == 0 && EnvironmentalFeatures.BIG_WISTERIA_TREE.get().place(context)) {
+			return true;
 		}
 
+		BlockState vine = getHangingWisteriaLeavesState(random, pos, config);
+		this.logPosSet = Sets.newHashSet();
 		int height = random.nextInt(7) + 5;
 		boolean flag = true;
 		if (pos.getY() >= 1 && pos.getY() + height + 1 <= world.getMaxBuildHeight()) {
@@ -89,7 +80,7 @@ public class WisteriaTreeFeature extends Feature<TreeConfiguration> {
 									if (place && random.nextInt(Math.abs(y) + 1) != 0) {
 										place = false;
 										if (random.nextInt(4) == 0 && !TreeUtil.isLog(world, leafPos)) {
-											WisteriaTreeUtil.placeVines(world, random, leafPos, config.foliageProvider.getState(random, pos), VINE_LOWER.get(), VINE_UPPER.get());
+											WisteriaTreeUtil.placeVines(world, random, leafPos, config.foliageProvider.getState(random, pos));
 										}
 									}
 								}
@@ -102,7 +93,8 @@ public class WisteriaTreeFeature extends Feature<TreeConfiguration> {
 				}
 				for (int i2 = 0; i2 < height; ++i2) {
 					if (TreeUtil.isAirOrLeaves(world, pos.above(i2))) {
-						TreeUtil.setForcedState(world, pos.above(i2), config.trunkProvider.getState(random, pos));
+						TreeUtil.placeLogAt(world, pos.above(i2), random, config);
+						logPosSet.add(pos.above(i2).immutable());
 					}
 				}
 				placeBranch(world, random, pos.below(), pos.above(height).getY(), config);
@@ -113,12 +105,13 @@ public class WisteriaTreeFeature extends Feature<TreeConfiguration> {
 				for (BlockPos blockpos : BlockPos.betweenClosed(startPos.getX() - 10, startPos.getY() - 10, startPos.getZ() - 10, startPos.getX() + 10, startPos.getY() + 10, startPos.getZ() + 10)) {
 					if (Feature.isAir(world, blockpos) && isLeaves(world, blockpos.above(), config, random) && random.nextInt(4) == 0) {
 						if (Feature.isAir(world, blockpos))
-							TreeUtil.setForcedState(world, blockpos, VINE_UPPER.get());
+							TreeUtil.setForcedState(world, blockpos, vine.setValue(HangingWisteriaLeavesBlock.HALF, DoubleBlockHalf.UPPER));
 						if (Feature.isAir(world, blockpos.below()) && random.nextInt(2) == 0)
-							TreeUtil.setForcedState(world, blockpos.below(), VINE_LOWER.get());
+							TreeUtil.setForcedState(world, blockpos.below(), vine.setValue(HangingWisteriaLeavesBlock.HALF, DoubleBlockHalf.LOWER));
 					}
 				}
 
+				WisteriaTreeUtil.updateLeaves(world, this.logPosSet);
 				return true;
 			} else {
 				return false;
@@ -154,12 +147,31 @@ public class WisteriaTreeFeature extends Feature<TreeConfiguration> {
 			BlockPos placePos = startPos;
 			for (int y = (treeHeight - heightOffset); y <= treeHeight; ++y) {
 				placePos = new BlockPos(startPos.getX(), y, startPos.getZ());
-				if (WisteriaTreeUtil.isAirOrLeavesOrReplaceable(world, placePos))
-					TreeUtil.setForcedState(world, placePos, config.trunkProvider.getState(random, pos));
+				if (WisteriaTreeUtil.isAirOrLeavesOrReplaceable(world, placePos)) {
+					TreeUtil.placeLogAt(world, placePos, random, config);
+					logPosSet.add(placePos.immutable());
+				}
 			}
 			WisteriaTreeUtil.placeLeafAt(world, placePos.above(), config.foliageProvider.getState(random, pos));
 			if (vines)
-				WisteriaTreeUtil.placeVines(world, random, startPos.below(), config.foliageProvider.getState(random, pos), VINE_LOWER.get(), VINE_UPPER.get());
+				WisteriaTreeUtil.placeVines(world, random, startPos.below(), config.foliageProvider.getState(random, pos));
 		}
+	}
+
+	public static BlockState getHangingWisteriaLeavesState(Random random, BlockPos pos, TreeConfiguration config) {
+		BlockState leafState = config.foliageProvider.getState(random, pos);
+		if (leafState.is(EnvironmentalBlocks.PINK_WISTERIA_LEAVES.get())) {
+			return EnvironmentalBlocks.PINK_HANGING_WISTERIA_LEAVES.get().defaultBlockState();
+		}
+
+		if (leafState.is(EnvironmentalBlocks.BLUE_WISTERIA_LEAVES.get())) {
+			return EnvironmentalBlocks.BLUE_HANGING_WISTERIA_LEAVES.get().defaultBlockState();
+		}
+
+		if (leafState.is(EnvironmentalBlocks.PURPLE_WISTERIA_LEAVES.get())) {
+			return EnvironmentalBlocks.PURPLE_HANGING_WISTERIA_LEAVES.get().defaultBlockState();
+		}
+
+		return EnvironmentalBlocks.WHITE_HANGING_WISTERIA_LEAVES.get().defaultBlockState();
 	}
 }

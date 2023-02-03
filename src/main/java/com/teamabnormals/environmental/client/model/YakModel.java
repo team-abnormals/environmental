@@ -11,8 +11,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 /**
  * YakModel - Hatsondogs
  * Created using Blockbench
- *
- * @param <E>
  */
 @OnlyIn(Dist.CLIENT)
 public class YakModel<E extends Yak> extends QuadrupedModel<E> {

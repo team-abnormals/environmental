@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "environmental:willow_ladder",
+    "environmental:wisteria_ladder",
+    "environmental:cherry_ladder"
+  ]
+}

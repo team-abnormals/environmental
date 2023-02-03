@@ -1,9 +1,12 @@
 package com.teamabnormals.environmental.common.levelgen.feature;
 
+import com.google.common.collect.Sets;
 import com.mojang.serialization.Codec;
 import com.teamabnormals.blueprint.core.util.TreeUtil;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.Direction.Plane;
 import net.minecraft.world.level.LevelSimulatedRW;
 import net.minecraft.world.level.WorldGenLevel;
@@ -12,32 +15,38 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 
 import java.util.Random;
+import java.util.Set;
 
 public class CherryTreeFeature extends Feature<TreeConfiguration> {
+	private Set<BlockPos> logPosSet;
+
 	public CherryTreeFeature(Codec<TreeConfiguration> config) {
 		super(config);
 	}
 
 	@Override
 	public boolean place(FeaturePlaceContext<TreeConfiguration> context) {
-		WorldGenLevel worldIn = context.level();
-		Random rand = context.random();
-		BlockPos position = context.origin();
+		WorldGenLevel level = context.level();
+		Random random = context.random();
+		BlockPos pos = context.origin();
 		TreeConfiguration config = context.config();
 
-		int height = 5 + rand.nextInt(3) + rand.nextInt(3) + rand.nextInt(3);
+		int height = 5 + random.nextInt(3) + random.nextInt(2) + random.nextInt(2);
 		boolean flag = true;
 
-		if (position.getY() >= 1 && position.getY() + height + 1 <= worldIn.getMaxBuildHeight()) {
-			for (int j = position.getY(); j <= position.getY() + 1 + height; ++j) {
+		this.logPosSet = Sets.newHashSet();
+		if (pos.getY() >= level.getMinBuildHeight() && pos.getY() + height + 1 <= level.getMaxBuildHeight()) {
+			for (int j = pos.getY(); j <= pos.getY() + 1 + height; ++j) {
 				int k = 1;
-				if (j == position.getY()) k = 0;
-				if (j >= position.getY() + 1 + height - 2) k = 2;
-				BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-				for (int l = position.getX() - k; l <= position.getX() + k && flag; ++l) {
-					for (int i1 = position.getZ() - k; i1 <= position.getZ() + k && flag; ++i1) {
-						if (j >= 0 && j < worldIn.getMaxBuildHeight()) {
-							if (!TreeUtil.isAirOrLeaves(worldIn, blockpos$mutableblockpos.set(l, j, i1))) flag = false;
+				if (j == pos.getY())
+					k = 0;
+				if (j >= pos.getY() + 1 + height - 2)
+					k = 2;
+				MutableBlockPos mutablePos = new MutableBlockPos();
+				for (int l = pos.getX() - k; l <= pos.getX() + k && flag; ++l) {
+					for (int i1 = pos.getZ() - k; i1 <= pos.getZ() + k && flag; ++i1) {
+						if (j >= 0 && j < level.getMaxBuildHeight()) {
+							if (!TreeUtil.isAirOrLeaves(level, mutablePos.set(l, j, i1))) flag = false;
 						} else flag = false;
 					}
 				}
@@ -45,42 +54,49 @@ public class CherryTreeFeature extends Feature<TreeConfiguration> {
 
 			if (!flag) {
 				return false;
-			} else if (isGrassOrDirt(worldIn, position.below()) && position.getY() < worldIn.getMaxBuildHeight()) {
-				// base log
-				TreeUtil.setDirtAt(worldIn, position.below());
+			} else if (isGrassOrDirt(level, pos.below()) && pos.getY() < level.getMaxBuildHeight()) {
+				TreeUtil.setDirtAt(level, pos.below());
 
-				int logX = position.getX();
-				int logZ = position.getZ();
+				int logX = pos.getX();
+				int logZ = pos.getZ();
 
-				for (int k1 = 0; k1 < height; ++k1) {
-					int logY = position.getY() + k1;
+				for (int k = 0; k < height; ++k) {
+					int logY = pos.getY() + k;
 					BlockPos blockpos = new BlockPos(logX, logY, logZ);
-					if (TreeUtil.isAirOrLeaves(worldIn, blockpos)) {
-						TreeUtil.placeLogAt(worldIn, blockpos.above(), rand, config);
+					if (TreeUtil.isAirOrLeaves(level, blockpos)) {
+						TreeUtil.placeLogAt(level, blockpos, random, config);
+						logPosSet.add(blockpos.above().immutable());
 					}
 				}
 
 				Plane.HORIZONTAL.stream().forEach(direction -> {
-					BlockPos stumpPos = position.relative(direction);
-					if (TreeUtil.isAirOrLeaves(worldIn, stumpPos) && isGrassOrDirt(worldIn, stumpPos.below())) {
-						TreeUtil.placeLogAt(worldIn, stumpPos, rand, config);
-						TreeUtil.setDirtAt(worldIn, stumpPos.below());
+					BlockPos stumpPos = pos.relative(direction);
+					if (TreeUtil.isAirOrLeaves(level, stumpPos) && isGrassOrDirt(level, stumpPos.below())) {
+						TreeUtil.placeLogAt(level, stumpPos, random, config);
+						logPosSet.add(stumpPos.immutable());
+						TreeUtil.setDirtAt(level, stumpPos.below());
 						BlockPos sideStumpPos = stumpPos.relative(direction.getClockWise());
-						if (rand.nextBoolean() && isGrassOrDirt(worldIn, sideStumpPos.below()) && TreeUtil.isAirOrLeaves(worldIn, sideStumpPos)) {
-							TreeUtil.placeLogAt(worldIn, sideStumpPos, rand, config);
-							TreeUtil.setDirtAt(worldIn, sideStumpPos.below());
+						if (random.nextBoolean() && isGrassOrDirt(level, sideStumpPos.below()) && TreeUtil.isAirOrLeaves(level, sideStumpPos)) {
+							TreeUtil.placeLogAt(level, sideStumpPos, random, config);
+							logPosSet.add(sideStumpPos.immutable());
+							TreeUtil.setDirtAt(level, sideStumpPos.below());
 						}
-						if (rand.nextBoolean() && TreeUtil.isAirOrLeaves(worldIn, stumpPos.above())) TreeUtil.placeLogAt(worldIn, stumpPos.above(), rand, config);
+						if (random.nextBoolean() && TreeUtil.isAirOrLeaves(level, stumpPos.above())) {
+							TreeUtil.placeLogAt(level, stumpPos.above(), random, config);
+							logPosSet.add(stumpPos.above().immutable());
+						}
 					}
 				});
 
 				Plane.HORIZONTAL.stream().forEach(direction -> {
-					int newHeight = rand.nextBoolean() ? height + rand.nextInt(2) : height - rand.nextInt(2);
-					BlockPos newPos = this.createCherryBranch(newHeight, worldIn, position, direction, rand, config);
+					int newHeight = random.nextBoolean() ? height + random.nextInt(2) : height - random.nextInt(2);
+					BlockPos newPos = this.createCherryBranch(newHeight, level, pos, direction, random, config);
 					for (int i = 0; i < 5; ++i) {
-						this.createCherryLeaves(worldIn, newPos.above(2).below(i), rand, i, config);
+						this.createCherryLeaves(level, newPos.above(2).below(i), random, i, config);
 					}
 				});
+
+				TreeUtil.updateLeaves(level, this.logPosSet);
 				return true;
 			} else {
 				return false;
@@ -91,17 +107,25 @@ public class CherryTreeFeature extends Feature<TreeConfiguration> {
 		}
 	}
 
-	private void createCherryLeaves(LevelSimulatedRW worldIn, BlockPos newPos, Random rand, int level, TreeConfiguration config) {
+	private void createCherryLeaves(LevelSimulatedRW level, BlockPos pos, Random random, int leafLevel, TreeConfiguration config) {
 		int leafSize = 2;
-		for (int k3 = -leafSize; k3 <= leafSize; ++k3) {
-			for (int j4 = -leafSize; j4 <= leafSize; ++j4) {
-				if (level == 2) {
-					TreeUtil.placeLeafAt(worldIn, newPos.offset(k3, 0, j4), rand, config);
+		for (int k = -leafSize; k <= leafSize; ++k) {
+			for (int j = -leafSize; j <= leafSize; ++j) {
+				if (leafLevel == 2) {
+					TreeUtil.placeLeafAt(level, pos.offset(k, 0, j), random, config);
 				} else {
-					if (level > 0 && level < 4 && (Math.abs(k3) != leafSize || Math.abs(j4) != leafSize)) {
-						TreeUtil.placeLeafAt(worldIn, newPos.offset(k3, 0, j4), rand, config);
-					} else if (rand.nextInt(4) == 0) {
-						TreeUtil.placeLeafAt(worldIn, newPos.offset(k3, 0, j4), rand, config);
+					if (leafLevel > 1 && leafLevel < 4 && (Math.abs(k) != leafSize || Math.abs(j) != leafSize)) {
+						TreeUtil.placeLeafAt(level, pos.offset(k, 0, j), random, config);
+					} else if ((leafLevel == 1 || leafLevel == 4) && (Math.abs(k) <= 1 && Math.abs(j) <= 1)) {
+						if ((!(Math.abs(k) == 1 && Math.abs(j) == 1 && leafLevel == 4) && !(Math.abs(k) == 2 && Math.abs(j) == 2)) || random.nextBoolean()) {
+							TreeUtil.placeLeafAt(level, pos.offset(k, 0, j), random, config);
+						}
+					} else if (leafLevel == 1) {
+						if (random.nextInt(3) == 0 && ((Math.abs(k) == 1 && Math.abs(j) == 2) || (Math.abs(k) == 2 && Math.abs(j) == 1))) {
+							TreeUtil.placeLeafAt(level, pos.offset(k, 0, j), random, config);
+						} else if (random.nextInt(4) != 0 && ((Math.abs(k) == 0 && Math.abs(j) == 2) || (Math.abs(k) == 2 && Math.abs(j) == 0))) {
+							TreeUtil.placeLeafAt(level, pos.offset(k, 0, j), random, config);
+						}
 					}
 				}
 			}
@@ -117,39 +141,37 @@ public class CherryTreeFeature extends Feature<TreeConfiguration> {
 
 		for (int i = 0; i < length; i++) {
 			blockpos = new BlockPos(logX, logY, logZ);
-
 			this.createHorizontalLog(worldIn, blockpos, direction, rand, config);
-			if (direction == Direction.EAST || direction == Direction.WEST) {
-				if (direction == Direction.EAST) {
-					logX += rand.nextInt(2);
-				} else {
-					logX -= rand.nextInt(2);
-				}
+			if (rand.nextInt(4) != 0)
+				logY++;
+			if (direction.getAxis() == Axis.X) {
+				logX += rand.nextInt(2) * direction.getAxisDirection().getStep();
 			} else {
-				if (direction == Direction.SOUTH) {
-					logZ += rand.nextInt(2);
-				} else {
-					logZ -= rand.nextInt(2);
-				}
-
+				logZ += rand.nextInt(2) * direction.getAxisDirection().getStep();
 			}
-
-			logY += 1;
 		}
+
+		for (int i = 0; i < 3; i++) {
+			blockpos = new BlockPos(logX, logY, logZ);
+			this.createHorizontalLog(worldIn, blockpos, direction, rand, config);
+			logY++;
+		}
+
 		return blockpos.relative(direction);
 	}
 
-	private void createHorizontalLog(LevelSimulatedRW worldIn, BlockPos pos, Direction direction, Random rand, TreeConfiguration config) {
+	private void createHorizontalLog(LevelSimulatedRW level, BlockPos pos, Direction direction, Random random, TreeConfiguration config) {
 		int logX = pos.getX();
 		int logY = pos.getY();
 		int logZ = pos.getZ();
 
-		for (int k3 = 0; k3 < 1; ++k3) {
+		for (int i = 0; i < 1; ++i) {
 			logX += direction.getStepX();
 			logZ += direction.getStepZ();
-			BlockPos blockpos1 = new BlockPos(logX, logY, logZ);
-			if (TreeUtil.isAirOrLeaves(worldIn, blockpos1)) {
-				TreeUtil.placeLogAt(worldIn, blockpos1.above(), rand, config);
+			BlockPos logPos = new BlockPos(logX, logY, logZ);
+			if (TreeUtil.isAirOrLeaves(level, logPos)) {
+				TreeUtil.placeLogAt(level, logPos, random, config);
+				logPosSet.add(logPos.immutable());
 			}
 		}
 	}

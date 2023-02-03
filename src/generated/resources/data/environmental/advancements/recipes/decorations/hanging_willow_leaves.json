@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "environmental:hanging_willow_leaves"
+    ]
+  },
+  "criteria": {
+    "has_willow_leaves": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "environmental:willow_leaves"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "environmental:hanging_willow_leaves"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_willow_leaves",
+      "has_the_recipe"
+    ]
+  ]
+}

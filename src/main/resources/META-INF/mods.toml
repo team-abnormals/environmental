@@ -34,6 +34,6 @@ license = "https://github.com/team-abnormals/environmental/blob/main/LICENSE.txt
 [[dependencies.environmental]]
     modId = "blueprint"
     mandatory = true
-    versionRange = "[5.4.1,)"
+    versionRange = "[5.5.0,)"
     ordering = "AFTER"
     side = "BOTH"

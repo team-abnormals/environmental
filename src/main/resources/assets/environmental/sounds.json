@@ -33,6 +33,32 @@
     ],
     "subtitle": "subtitles.environmental.item.shovel.dig"
   },
+  "block.large_lily_pad.bounce": {
+    "sounds": [
+      {
+        "name": "environmental:block/lily_pad/splash1",
+        "volume": 0.55
+      },
+      {
+        "name": "environmental:block/lily_pad/splash2",
+        "volume": 0.55
+      }
+    ],
+    "subtitle": "subtitles.environmental.block.large_lily_pad.bounce"
+  },
+  "block.giant_lily_pad.bounce": {
+    "sounds": [
+      {
+        "name": "environmental:block/lily_pad/splash3",
+        "volume": 0.55
+      },
+      {
+        "name": "environmental:block/lily_pad/splash4",
+        "volume": 0.55
+      }
+    ],
+    "subtitle": "subtitles.environmental.block.giant_lily_pad.bounce"
+  },
   "entity.slabfish.death": {
     "sounds": [
       "entity/fish/hurt1",

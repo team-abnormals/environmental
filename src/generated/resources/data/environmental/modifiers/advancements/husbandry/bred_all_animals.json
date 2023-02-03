@@ -1,0 +1,84 @@
+{
+  "selector": "minecraft:husbandry/bred_all_animals",
+  "priority": "normal",
+  "modifiers": [
+    {
+      "type": "criteria",
+      "config": {
+        "criteria": {
+          "environmental:slabfish": {
+            "trigger": "minecraft:bred_animals",
+            "conditions": {
+              "child": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "predicate": {
+                    "type": "environmental:slabfish"
+                  },
+                  "entity": "this"
+                }
+              ]
+            }
+          },
+          "environmental:duck": {
+            "trigger": "minecraft:bred_animals",
+            "conditions": {
+              "child": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "predicate": {
+                    "type": "environmental:duck"
+                  },
+                  "entity": "this"
+                }
+              ]
+            }
+          },
+          "environmental:deer": {
+            "trigger": "minecraft:bred_animals",
+            "conditions": {
+              "child": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "predicate": {
+                    "type": "environmental:deer"
+                  },
+                  "entity": "this"
+                }
+              ]
+            }
+          },
+          "environmental:yak": {
+            "trigger": "minecraft:bred_animals",
+            "conditions": {
+              "child": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "predicate": {
+                    "type": "environmental:yak"
+                  },
+                  "entity": "this"
+                }
+              ]
+            }
+          }
+        },
+        "requirements": [
+          [
+            "environmental:slabfish"
+          ],
+          [
+            "environmental:duck"
+          ],
+          [
+            "environmental:deer"
+          ],
+          [
+            "environmental:yak"
+          ]
+        ],
+        "should_replace_requirements": false
+      }
+    }
+  ]
+}

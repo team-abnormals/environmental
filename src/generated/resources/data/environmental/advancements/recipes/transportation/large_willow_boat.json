@@ -1,0 +1,46 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "modid": "boatload",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "environmental:large_willow_boat"
+          ]
+        },
+        "criteria": {
+          "has_willow_boat": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "environmental:willow_boat"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "environmental:large_willow_boat"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "has_willow_boat",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}

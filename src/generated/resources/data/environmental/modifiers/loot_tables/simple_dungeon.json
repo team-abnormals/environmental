@@ -1,0 +1,20 @@
+{
+  "selector": "minecraft:chests/simple_dungeon",
+  "priority": "normal",
+  "modifiers": [
+    {
+      "type": "entries",
+      "config": {
+        "replace": false,
+        "index": 0,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "weight": 10,
+            "name": "environmental:thief_hood"
+          }
+        ]
+      }
+    }
+  ]
+}

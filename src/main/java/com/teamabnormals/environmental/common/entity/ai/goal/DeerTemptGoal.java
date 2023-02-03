@@ -1,15 +1,14 @@
 package com.teamabnormals.environmental.common.entity.ai.goal;
 
-import com.teamabnormals.environmental.common.entity.animal.deer.Deer;
-
+import com.teamabnormals.environmental.common.entity.animal.deer.AbstractDeer;
 import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.item.crafting.Ingredient;
 
 public class DeerTemptGoal extends TemptGoal {
-	private final Deer deer;
+	private final AbstractDeer deer;
 	private final double speedModifierTrusting;
 
-	public DeerTemptGoal(Deer deerIn, double speedModifier, double speedModifierTrustingIn, Ingredient temptItems) {
+	public DeerTemptGoal(AbstractDeer deerIn, double speedModifier, double speedModifierTrustingIn, Ingredient temptItems) {
 		super(deerIn, speedModifier, temptItems, false);
 		this.deer = deerIn;
 		this.speedModifierTrusting = speedModifierTrustingIn;
@@ -25,7 +24,7 @@ public class DeerTemptGoal extends TemptGoal {
 	@Override
 	public void stop() {
 		super.stop();
-		this.deer.setTargetNeckAngle(15);
+		this.deer.resetTargetNeckAngle();
 	}
 
 	@Override
@@ -33,7 +32,7 @@ public class DeerTemptGoal extends TemptGoal {
 		super.tick();
 		if (this.deer.isTrusting()) {
 			this.mob.getNavigation().setSpeedModifier(this.speedModifierTrusting);
-			this.deer.setTargetNeckAngle(15);
+			this.deer.resetTargetNeckAngle();
 		}
 	}
 }

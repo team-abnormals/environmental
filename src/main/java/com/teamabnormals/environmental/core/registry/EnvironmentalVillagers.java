@@ -16,9 +16,9 @@ public class EnvironmentalVillagers {
 
 		registerVillagerType(createType("ice_spikes"), Biomes.ICE_SPIKES);
 		registerVillagerType(createType("flower_forest"), Biomes.FLOWER_FOREST);
-		registerVillagerType(createType("blossom"), EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), EnvironmentalBiomes.BLOSSOM_HILLS.getKey(), EnvironmentalBiomes.BLOSSOM_HIGHLANDS.getKey(), EnvironmentalBiomes.BLOSSOM_VALLEYS.getKey());
+		registerVillagerType(createType("blossom"), EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), EnvironmentalBiomes.BLOSSOM_VALLEYS.getKey());
 		registerVillagerType(createType("forest"), Biomes.FOREST, Biomes.BIRCH_FOREST, Biomes.OLD_GROWTH_BIRCH_FOREST);
-		registerVillagerType(createType("marsh"), EnvironmentalBiomes.MARSH.getKey(), EnvironmentalBiomes.MUSHROOM_MARSH.getKey());
+		registerVillagerType(createType("marsh"), EnvironmentalBiomes.MARSH.getKey());
 	}
 
 	private static VillagerType createType(String type) {

@@ -2,9 +2,11 @@ package com.teamabnormals.environmental.common.block;
 
 import com.teamabnormals.blueprint.core.util.item.filling.TargetedItemCategoryFiller;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
+import com.teamabnormals.environmental.core.registry.EnvironmentalSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -35,32 +37,13 @@ import net.minecraftforge.common.PlantType;
 import javax.annotation.Nullable;
 
 public class GiantLilyPadBlock extends BushBlock implements IPlantable {
-	protected static final VoxelShape GIANT_LILY_PAD_AABB = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 1.5D, 16.0D);
+	protected static final VoxelShape GIANT_LILY_PAD_AABB = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 3.2001D, 16.0D);
 	public static final EnumProperty<LilyPadPosition> POSITION = EnumProperty.create("position", LilyPadPosition.class);
 	private static final TargetedItemCategoryFiller FILLER = new TargetedItemCategoryFiller(() -> EnvironmentalBlocks.LARGE_LILY_PAD.get().asItem());
 
 	public GiantLilyPadBlock(BlockBehaviour.Properties builder) {
 		super(builder);
 	}
-
-//	@SuppressWarnings("deprecation")
-//	@Override
-//	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
-//		super.onEntityCollision(state, worldIn, pos, entityIn);
-//		if (entityIn.isSuppressingBounce()) {
-//			super.onLanded(worldIn, entityIn);
-//		} else {
-//			this.bounce(entityIn);
-//		}
-//	}
-//
-//	public void bounce(Entity entity) {
-//		Vector3d vector3d = entity.getMotion();
-//		if (vector3d.y < 0.0D) {
-//			double d0 = entity instanceof LivingEntity ? 1.5D : 1.2D;
-//			entity.setMotion(vector3d.x, -vector3d.y * d0, vector3d.z);
-//		}
-//	}
 
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
@@ -111,23 +94,35 @@ public class GiantLilyPadBlock extends BushBlock implements IPlantable {
 
 	@Override
 	public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
-		super.fallOn(level, state, pos, entity, fallDistance * 0.25F);
+		super.fallOn(level, state, pos, entity, 0.0F);
 	}
 
 	@Override
-	public void updateEntityAfterFallOn(BlockGetter worldIn, Entity entityIn) {
-		if (entityIn.isSuppressingBounce()) {
-			super.updateEntityAfterFallOn(worldIn, entityIn);
+	public void updateEntityAfterFallOn(BlockGetter level, Entity entity) {
+		if (entity.isSuppressingBounce()) {
+			super.updateEntityAfterFallOn(level, entity);
 		} else {
-			this.bounce(entityIn);
+			this.bounce(entity);
 		}
 	}
 
 	private void bounce(Entity entity) {
 		Vec3 vector3d = entity.getDeltaMovement();
 		if (vector3d.y < 0.0D) {
-			double d0 = entity instanceof LivingEntity ? 1.5D : 1.2D;
+			double d0 = entity instanceof LivingEntity ? 1.4D : 1.0D;
 			entity.setDeltaMovement(vector3d.x, -vector3d.y * d0, vector3d.z);
+			if (vector3d.y < -0.1D) {
+				entity.getLevel().playSound(entity instanceof Player player ? player : null, entity.getX(), entity.getY(), entity.getZ(), EnvironmentalSoundEvents.GIANT_LILY_PAD_BOUNCE.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
+			}
+		}
+	}
+
+	@Override
+	public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
+		if (entity.isSuppressingBounce()) {
+			super.updateEntityAfterFallOn(level, entity);
+		} else {
+			this.bounce(entity);
 		}
 	}
 

@@ -4,9 +4,11 @@
   "compatibilityLevel": "JAVA_8",
   "minVersion": "0.8",
   "refmap": "environmental.refmap.json",
+  "plugin": "com.teamabnormals.environmental.core.mixin.EnvironmentalMixinPlugin",
   "mixins": [
     "AbstractSkeletonEntityMixin",
     "DoublePlantBlockMixin",
+    "DuckMixin",
     "LilyPadBlockMixin",
     "LivingEntityMixin",
     "MobEntityMixin",

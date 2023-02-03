@@ -1,0 +1,31 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "flag": "wooden_posts",
+          "type": "blueprint:quark_flag"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "group": "wooden_post",
+        "pattern": [
+          "#",
+          "#",
+          "#"
+        ],
+        "key": {
+          "#": {
+            "item": "environmental:stripped_wisteria_wood"
+          }
+        },
+        "result": {
+          "item": "environmental:stripped_wisteria_post",
+          "count": 8
+        }
+      }
+    }
+  ]
+}

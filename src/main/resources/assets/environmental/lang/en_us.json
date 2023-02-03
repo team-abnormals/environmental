@@ -38,6 +38,8 @@
 	"block.environmental.stripped_willow_post": "Stripped Willow Post",
 	"block.environmental.willow_hedge": "Willow Hedge",
 	"block.environmental.willow_beehive": "Willow Beehive",
+	"block.environmental.willow_boards": "Willow Boards",
+	"block.environmental.willow_leaf_pile": "Pile of Willow Leaves",
 	
 	"block.environmental.cherry_planks": "Cherry Planks",
 	"block.environmental.cherry_slab": "Cherry Slab",
@@ -67,6 +69,8 @@
 	"block.environmental.stripped_cherry_post": "Stripped Cherry Post",
 	"block.environmental.cherry_hedge": "Cherry Hedge",
 	"block.environmental.cherry_beehive": "Cherry Beehive",
+	"block.environmental.cherry_boards": "Cherry Boards",
+	"block.environmental.cherry_leaf_pile": "Pile of Cherry Leaves",
 	
 	"block.environmental.wisteria_log": "Wisteria Log",
 	"block.environmental.stripped_wisteria_log": "Stripped Wisteria Log",
@@ -91,6 +95,7 @@
 	"block.environmental.wisteria_post": "Wisteria Post",
 	"block.environmental.stripped_wisteria_post": "Stripped Wisteria Post",
 	"block.environmental.wisteria_beehive": "Wisteria Beehive",
+	"block.environmental.wisteria_boards": "Wisteria Boards",
 	
 	"block.environmental.blue_wisteria_leaves": "Blue Wisteria Leaves",
 	"block.environmental.pink_wisteria_leaves": "Pink Wisteria Leaves",
@@ -106,6 +111,11 @@
 	"block.environmental.pink_wisteria_sapling": "Pink Wisteria Sapling",
 	"block.environmental.purple_wisteria_sapling": "Purple Wisteria Sapling",
 	"block.environmental.white_wisteria_sapling": "White Wisteria Sapling",
+
+	"block.environmental.blue_wisteria_leaf_pile": "Pile of Blue Wisteria Leaves",
+	"block.environmental.pink_wisteria_leaf_pile": "Pile of Pink Wisteria Leaves",
+	"block.environmental.purple_wisteria_leaf_pile": "Pile of Purple Wisteria Leaves",
+	"block.environmental.white_wisteria_leaf_pile": "Pile of White Wisteria Leaves",
 
 	"block.environmental.blue_wisteria_leaf_carpet": "Blue Wisteria Leaf Carpet",
 	"block.environmental.pink_wisteria_leaf_carpet": "Pink Wisteria Leaf Carpet",
@@ -188,6 +198,7 @@
 	"item.environmental.slabfish_spawn_egg": "Slabfish Spawn Egg",
 	"item.environmental.duck_spawn_egg": "Duck Spawn Egg",
 	"item.environmental.deer_spawn_egg": "Deer Spawn Egg",
+	"item.environmental.zombie_deer_spawn_egg": "Zombie Deer Spawn Egg",
 	"item.environmental.yak_spawn_egg": "Yak Spawn Egg",
 	"item.environmental.koi_spawn_egg": "Koi Spawn Egg",
 	"item.environmental.fennec_fox_spawn_egg": "Fennec Fox Spawn Egg",
@@ -220,7 +231,16 @@
 	"item.environmental.truffle_pie": "Truffle Pie",
 	
 	"item.environmental.willow_boat": "Willow Boat",
+	"item.environmental.willow_furnace_boat": "Willow Boat with Furnace",
+	"item.environmental.willow_chest_boat": "Willow Boat with Chest",
+	"item.environmental.large_willow_boat": "Large Willow Boat",
 	"item.environmental.cherry_boat": "Cherry Boat",
+	"item.environmental.cherry_furnace_boat": "Cherry Boat with Furnace",
+	"item.environmental.cherry_chest_boat": "Cherry Boat with Chest",
+	"item.environmental.large_cherry_boat": "Large Cherry Boat",
+	"item.environmental.wisteria_furnace_boat": "Wisteria Boat with Furnace",
+	"item.environmental.wisteria_chest_boat": "Wisteria Boat with Chest",
+	"item.environmental.large_wisteria_boat": "Large Wisteria Boat",
 	"item.environmental.wisteria_boat": "Wisteria Boat",
 	
 	"item.environmental.music_disc_slabrave": "Music Disc",
@@ -232,6 +252,7 @@
 	"entity.environmental.slabfish": "Slabfish",
 	"entity.environmental.duck": "Duck",
 	"entity.environmental.deer": "Deer",
+	"entity.environmental.zombie_deer": "Zombie Deer",
 	"entity.environmental.yak": "Yak",
 	"entity.environmental.koi": "Koi",
 	"entity.environmental.fennec_fox": "Fennec Fox",
@@ -315,7 +336,10 @@
 
 	"subtitles.environmental.item.cattails.pick": "Cattails pop",
 	"subtitles.environmental.item.shovel.dig": "Shovel digs",
-	
+
+	"subtitles.environmental.block.large_lily_pad.bounce": "Large Lily Pad splashes",
+	"subtitles.environmental.block.giant_lily_pad.bounce": "Giant Lily Pad splashes",
+
 	"entity.environmental.slabfish.baby": "Baby",
 	
 	"entity.environmental.slabfish.type.swamp": "Swamp",

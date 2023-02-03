@@ -1,0 +1,30 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "flag": "vertical_slabs",
+          "type": "blueprint:quark_flag"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "#",
+          "#",
+          "#"
+        ],
+        "key": {
+          "#": {
+            "item": "environmental:wisteria_planks"
+          }
+        },
+        "result": {
+          "item": "environmental:wisteria_vertical_slab",
+          "count": 6
+        }
+      }
+    }
+  ]
+}

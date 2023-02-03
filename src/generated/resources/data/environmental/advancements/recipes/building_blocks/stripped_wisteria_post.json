@@ -1,0 +1,46 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "flag": "wooden_posts",
+          "type": "blueprint:quark_flag"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "environmental:stripped_wisteria_post"
+          ]
+        },
+        "criteria": {
+          "has_stripped_wisteria_wood": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "environmental:stripped_wisteria_wood"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "environmental:stripped_wisteria_post"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "has_stripped_wisteria_wood",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}

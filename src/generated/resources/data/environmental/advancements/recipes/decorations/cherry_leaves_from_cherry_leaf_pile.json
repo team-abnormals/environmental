@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "environmental:cherry_leaves_from_cherry_leaf_pile"
+    ]
+  },
+  "criteria": {
+    "has_cherry_leaf_pile": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "environmental:cherry_leaf_pile"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "environmental:cherry_leaves_from_cherry_leaf_pile"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cherry_leaf_pile",
+      "has_the_recipe"
+    ]
+  ]
+}

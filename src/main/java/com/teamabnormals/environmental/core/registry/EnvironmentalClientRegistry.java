@@ -1,7 +1,10 @@
 package com.teamabnormals.environmental.core.registry;
 
 import com.teamabnormals.environmental.client.model.SlabfishBucketModel;
-import com.teamabnormals.environmental.client.particle.*;
+import com.teamabnormals.environmental.client.particle.CherryBlossomParticle;
+import com.teamabnormals.environmental.client.particle.LotusBlossomParticle;
+import com.teamabnormals.environmental.client.particle.PigFindsTruffleParticle;
+import com.teamabnormals.environmental.client.particle.SlabfishEffigyParticle;
 import com.teamabnormals.environmental.core.Environmental;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleEngine;
@@ -34,7 +37,7 @@ public class EnvironmentalClientRegistry {
 		registerParticleFactory(manager, EnvironmentalParticleTypes.RED_LOTUS_BLOSSOM, LotusBlossomParticle.Factory::new);
 		registerParticleFactory(manager, EnvironmentalParticleTypes.WHITE_LOTUS_BLOSSOM, LotusBlossomParticle.Factory::new);
 		registerParticleFactory(manager, EnvironmentalParticleTypes.PIG_FINDS_TRUFFLE, PigFindsTruffleParticle.Factory::new);
-		registerParticleFactory(manager, EnvironmentalParticleTypes.SLABFISH_FINDS_EFFIGY, SlabfishEffigyParticle.Factory::new); // TODO should probably give this it's own renderer
+		registerParticleFactory(manager, EnvironmentalParticleTypes.SLABFISH_FINDS_EFFIGY, SlabfishEffigyParticle.Factory::new);
 	}
 
 	@SubscribeEvent

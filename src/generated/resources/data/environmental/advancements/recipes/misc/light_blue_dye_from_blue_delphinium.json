@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "environmental:light_blue_dye_from_blue_delphinium"
+    ]
+  },
+  "criteria": {
+    "has_blue_delphinium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "environmental:blue_delphinium"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "environmental:light_blue_dye_from_blue_delphinium"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_blue_delphinium",
+      "has_the_recipe"
+    ]
+  ]
+}

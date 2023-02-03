@@ -1,0 +1,46 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "flag": "vertical_planks",
+          "type": "blueprint:quark_flag"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "environmental:vertical_willow_planks_revert"
+          ]
+        },
+        "criteria": {
+          "has_vertical_willow_planks": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "environmental:vertical_willow_planks"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "environmental:vertical_willow_planks_revert"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "has_vertical_willow_planks",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}

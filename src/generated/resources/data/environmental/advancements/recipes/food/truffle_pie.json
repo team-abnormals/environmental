@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "environmental:truffle_pie"
+    ]
+  },
+  "criteria": {
+    "has_truffle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "environmental:truffle"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "environmental:truffle_pie"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_truffle",
+      "has_the_recipe"
+    ]
+  ]
+}

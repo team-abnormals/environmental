@@ -1,9 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "minecraft:player",
-    "minecraft:villager",
-    "minecraft:wandering_trader",
-    "#environmental:always_scares_deer"
-  ]
-}

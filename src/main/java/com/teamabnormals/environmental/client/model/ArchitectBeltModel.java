@@ -22,19 +22,19 @@ public class ArchitectBeltModel extends HumanoidModel<LivingEntity> {
 
 	public ArchitectBeltModel(ModelPart root) {
 		super(root);
-		this.rightKnee = root.getChild("rightKnee");
+		this.rightKnee = root.getChild("right_knee");
 		this.belt = root.getChild("belt");
 		this.pouch = this.belt.getChild("pouch");
-		this.leftKnee = root.getChild("leftKnee");
+		this.leftKnee = root.getChild("left_knee");
 	}
 
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = HumanoidModel.createMesh(CubeDeformation.NONE, 0.0F);
 		PartDefinition root = meshdefinition.getRoot();
-		PartDefinition rightKnee = root.addOrReplaceChild("rightKnee", CubeListBuilder.create().texOffs(12, 0).addBox(-2.5F, 1.5F, -2.5F, 5.0F, 5.0F, 5.0F, false), PartPose.offsetAndRotation(-2.0F, 12.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+		PartDefinition rightKnee = root.addOrReplaceChild("right_knee", CubeListBuilder.create().texOffs(12, 0).addBox(-2.5F, 1.5F, -2.5F, 5.0F, 5.0F, 5.0F, false), PartPose.offsetAndRotation(-2.0F, 12.0F, 0.0F, 0.0F, 0.0F, 0.0F));
 		PartDefinition belt = root.addOrReplaceChild("belt", CubeListBuilder.create().texOffs(0, 13).addBox(-4.5F, 0.0F, -2.5F, 9.0F, 14.0F, 5.0F, false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
 		PartDefinition pouch = belt.addOrReplaceChild("pouch", CubeListBuilder.create().texOffs(0, 0).addBox(-2.0F, 0.0F, -1.0F, 2.0F, 5.0F, 4.0F, false), PartPose.offsetAndRotation(6.0F, 8.0F, -1.0F, 0.0F, 0.0F, 0.0F));
-		PartDefinition leftKnee = root.addOrReplaceChild("leftKnee", CubeListBuilder.create().texOffs(12, 0).addBox(-2.5F, 1.5F, -2.5F, 5.0F, 5.0F, 5.0F, true), PartPose.offsetAndRotation(2.0F, 12.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+		PartDefinition leftKnee = root.addOrReplaceChild("left_knee", CubeListBuilder.create().texOffs(12, 0).addBox(-2.5F, 1.5F, -2.5F, 5.0F, 5.0F, 5.0F, true), PartPose.offsetAndRotation(2.0F, 12.0F, 0.0F, 0.0F, 0.0F, 0.0F));
 		return LayerDefinition.create(meshdefinition, 32, 32);
 	}
 

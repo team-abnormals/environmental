@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "environmental:grass_thatch_from_grass"
+    ]
+  },
+  "criteria": {
+    "has_tall_grass": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:tall_grass"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "environmental:grass_thatch_from_grass"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_tall_grass",
+      "has_the_recipe"
+    ]
+  ]
+}

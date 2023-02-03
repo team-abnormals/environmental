@@ -27,20 +27,20 @@ public class ThiefHoodModel extends HumanoidModel<LivingEntity> {
 	public ThiefHoodModel(ModelPart root) {
 		super(root);
 		this.hood = root.getChild("hood");
-		this.hoodBack = this.hood.getChild("hoodBack");
+		this.hoodBack = this.hood.getChild("hood_back");
 		this.pauldron = root.getChild("pauldron");
-		this.rightShoulder = root.getChild("rightShoulder");
-		this.leftShoulder = root.getChild("leftShoulder");
+		this.rightShoulder = root.getChild("right_shoulder");
+		this.leftShoulder = root.getChild("left_shoulder");
 	}
 
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = HumanoidModel.createMesh(CubeDeformation.NONE, 0.0F);
 		PartDefinition root = meshdefinition.getRoot();
 		PartDefinition hood = root.addOrReplaceChild("hood", CubeListBuilder.create().texOffs(0, 0).addBox(-4.5F, -9.5F, -4.5F, 9.0F, 10.0F, 9.0F, false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-		PartDefinition hoodBack = hood.addOrReplaceChild("hoodBack", CubeListBuilder.create().texOffs(46, 12).addBox(-3.5F, -10.25F, 1.7247F, 7.0F, 2.0F, 2.0F, false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -0.2618F, 0.0F, 0.0F));
+		PartDefinition hoodBack = hood.addOrReplaceChild("hood_back", CubeListBuilder.create().texOffs(46, 12).addBox(-3.5F, -10.25F, 1.7247F, 7.0F, 2.0F, 2.0F, false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -0.2618F, 0.0F, 0.0F));
 		PartDefinition pauldron = root.addOrReplaceChild("pauldron", CubeListBuilder.create().texOffs(20, 19).addBox(-4.5F, 0.0F, -2.5F, 9.0F, 8.0F, 5.0F, false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-		PartDefinition rightShoulder = root.addOrReplaceChild("rightShoulder", CubeListBuilder.create().texOffs(0, 19).addBox(-3.25F, -2.9F, -2.5F, 5.0F, 8.0F, 5.0F, false), PartPose.offsetAndRotation(-5.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-		PartDefinition leftShoulder = root.addOrReplaceChild("leftShoulder", CubeListBuilder.create().texOffs(0, 19).addBox(-1.75F, -2.9F, -2.5F, 5.0F, 8.0F, 5.0F, true), PartPose.offsetAndRotation(5.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+		PartDefinition rightShoulder = root.addOrReplaceChild("right_shoulder", CubeListBuilder.create().texOffs(0, 19).addBox(-3.25F, -2.9F, -2.5F, 5.0F, 8.0F, 5.0F, false), PartPose.offsetAndRotation(-5.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+		PartDefinition leftShoulder = root.addOrReplaceChild("left_shoulder", CubeListBuilder.create().texOffs(0, 19).addBox(-1.75F, -2.9F, -2.5F, 5.0F, 8.0F, 5.0F, true), PartPose.offsetAndRotation(5.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
 		return LayerDefinition.create(meshdefinition, 64, 32);
 	}
 

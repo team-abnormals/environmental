@@ -1,0 +1,46 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "flag": "leaf_carpet",
+          "type": "blueprint:quark_flag"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "environmental:cherry_leaf_carpet"
+          ]
+        },
+        "criteria": {
+          "has_cherry_leaves": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "environmental:cherry_leaves"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "environmental:cherry_leaf_carpet"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "has_cherry_leaves",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}

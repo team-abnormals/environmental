@@ -1,8 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "environmental:willow_vertical_slab",
-    "environmental:cherry_vertical_slab",
-    "environmental:wisteria_vertical_slab"
-  ]
-}

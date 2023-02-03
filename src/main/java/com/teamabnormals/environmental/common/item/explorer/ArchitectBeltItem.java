@@ -63,9 +63,8 @@ public class ArchitectBeltItem extends ExplorerArmorItem {
 	@SubscribeEvent
 	public static void placeBlockEvent(BlockEvent.EntityPlaceEvent event) {
 		Entity entity = event.getEntity();
-		BlockState state = event.getState();
-		if (entity instanceof Player && !state.is(Blocks.FROSTED_ICE)) {
-			Player player = (Player) entity;
+		BlockState state = event.getPlacedBlock();
+		if (entity instanceof Player player && !state.is(Blocks.WATER)) {
 			ItemStack stack = player.getItemBySlot(EquipmentSlot.LEGS);
 			Item item = stack.getItem();
 			if (item instanceof ArchitectBeltItem) {

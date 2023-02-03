@@ -1,0 +1,159 @@
+{
+  "selector": "minecraft:husbandry/balanced_diet",
+  "priority": "normal",
+  "modifiers": [
+    {
+      "type": "criteria",
+      "config": {
+        "criteria": {
+          "environmental:cherries": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "items": [
+                  "environmental:cherries"
+                ]
+              }
+            }
+          },
+          "environmental:cherry_pie": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "items": [
+                  "environmental:cherry_pie"
+                ]
+              }
+            }
+          },
+          "environmental:apple_pie": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "items": [
+                  "environmental:apple_pie"
+                ]
+              }
+            }
+          },
+          "environmental:venison": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "items": [
+                  "environmental:venison"
+                ]
+              }
+            }
+          },
+          "environmental:cooked_venison": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "items": [
+                  "environmental:cooked_venison"
+                ]
+              }
+            }
+          },
+          "environmental:koi": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "items": [
+                  "environmental:koi"
+                ]
+              }
+            }
+          },
+          "environmental:duck": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "items": [
+                  "environmental:duck"
+                ]
+              }
+            }
+          },
+          "environmental:cooked_duck": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "items": [
+                  "environmental:cooked_duck"
+                ]
+              }
+            }
+          },
+          "environmental:truffle": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "items": [
+                  "environmental:truffle"
+                ]
+              }
+            }
+          },
+          "environmental:truffle_mash": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "items": [
+                  "environmental:truffle_mash"
+                ]
+              }
+            }
+          },
+          "environmental:truffle_pie": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "items": [
+                  "environmental:truffle_pie"
+                ]
+              }
+            }
+          }
+        },
+        "requirements": [
+          [
+            "environmental:cherries"
+          ],
+          [
+            "environmental:cherry_pie"
+          ],
+          [
+            "environmental:apple_pie"
+          ],
+          [
+            "environmental:venison"
+          ],
+          [
+            "environmental:cooked_venison"
+          ],
+          [
+            "environmental:koi"
+          ],
+          [
+            "environmental:duck"
+          ],
+          [
+            "environmental:cooked_duck"
+          ],
+          [
+            "environmental:truffle"
+          ],
+          [
+            "environmental:truffle_mash"
+          ],
+          [
+            "environmental:truffle_pie"
+          ]
+        ],
+        "should_replace_requirements": false
+      }
+    }
+  ]
+}

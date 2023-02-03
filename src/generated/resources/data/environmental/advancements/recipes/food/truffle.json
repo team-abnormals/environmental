@@ -1,0 +1,46 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "flag": "golden_apple_crate",
+          "type": "blueprint:quark_flag"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "environmental:truffle"
+          ]
+        },
+        "criteria": {
+          "has_truffle_crate": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "environmental:truffle_crate"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "environmental:truffle"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "has_truffle_crate",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}

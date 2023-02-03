@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "environmental:willow_leaf_pile",
+    "environmental:pink_wisteria_leaf_pile",
+    "environmental:blue_wisteria_leaf_pile",
+    "environmental:purple_wisteria_leaf_pile",
+    "environmental:white_wisteria_leaf_pile",
+    "environmental:cherry_leaf_pile"
+  ]
+}

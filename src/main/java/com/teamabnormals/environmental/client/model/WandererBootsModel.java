@@ -25,19 +25,19 @@ public class WandererBootsModel extends HumanoidModel<LivingEntity> {
 
 	public WandererBootsModel(ModelPart root) {
 		super(root);
-		this.leftBoot = root.getChild("leftBoot");
-		this.leftToe = this.leftBoot.getChild("leftToe");
-		this.rightBoot = root.getChild("rightBoot");
-		this.rightToe = this.rightBoot.getChild("rightToe");
+		this.leftBoot = root.getChild("left_boot");
+		this.leftToe = this.leftBoot.getChild("left_toe");
+		this.rightBoot = root.getChild("right_boot");
+		this.rightToe = this.rightBoot.getChild("right_toe");
 	}
 
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = HumanoidModel.createMesh(CubeDeformation.NONE, 0.0F);
 		PartDefinition root = meshdefinition.getRoot();
-		PartDefinition leftBoot = root.addOrReplaceChild("leftBoot", CubeListBuilder.create().texOffs(0, 0).addBox(-2.5F, 1.75F, -2.5F, 5.0F, 11.0F, 5.0F, true), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-		PartDefinition leftToe = leftBoot.addOrReplaceChild("leftToe", CubeListBuilder.create().texOffs(20, 13).addBox(-2.5F, 10.75F, -3.5F, 5.0F, 2.0F, 1.0F, true), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-		PartDefinition rightBoot = root.addOrReplaceChild("rightBoot", CubeListBuilder.create().texOffs(0, 0).addBox(-2.5F, 1.75F, -2.5F, 5.0F, 11.0F, 5.0F, false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-		PartDefinition rightToe = rightBoot.addOrReplaceChild("rightToe", CubeListBuilder.create().texOffs(20, 13).addBox(-2.5F, 10.75F, -3.5F, 5.0F, 2.0F, 1.0F, false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+		PartDefinition leftBoot = root.addOrReplaceChild("left_boot", CubeListBuilder.create().texOffs(0, 0).addBox(-2.5F, 1.75F, -2.5F, 5.0F, 11.0F, 5.0F, true), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+		PartDefinition leftToe = leftBoot.addOrReplaceChild("left_toe", CubeListBuilder.create().texOffs(20, 13).addBox(-2.5F, 10.75F, -3.5F, 5.0F, 2.0F, 1.0F, true), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+		PartDefinition rightBoot = root.addOrReplaceChild("right_boot", CubeListBuilder.create().texOffs(0, 0).addBox(-2.5F, 1.75F, -2.5F, 5.0F, 11.0F, 5.0F, false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+		PartDefinition rightToe = rightBoot.addOrReplaceChild("right_toe", CubeListBuilder.create().texOffs(20, 13).addBox(-2.5F, 10.75F, -3.5F, 5.0F, 2.0F, 1.0F, false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
 		return LayerDefinition.create(meshdefinition, 32, 16);
 	}
 

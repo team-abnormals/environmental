@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "environmental:cooked_duck_from_smoking"
+    ]
+  },
+  "criteria": {
+    "has_duck": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "environmental:duck"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "environmental:cooked_duck_from_smoking"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_duck",
+      "has_the_recipe"
+    ]
+  ]
+}

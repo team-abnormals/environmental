@@ -21,7 +21,9 @@
       "conditions": {
         "items": [
           {
-            "item": "environmental:thief_hood"
+            "items": [
+              "environmental:thief_hood"
+            ]
           }
         ]
       }
@@ -31,7 +33,9 @@
       "conditions": {
         "items": [
           {
-            "item": "environmental:healer_pouch"
+            "items": [
+              "environmental:healer_pouch"
+            ]
           }
         ]
       }
@@ -41,7 +45,9 @@
       "conditions": {
         "items": [
           {
-            "item": "environmental:architect_belt"
+            "items": [
+              "environmental:architect_belt"
+            ]
           }
         ]
       }
@@ -51,7 +57,9 @@
       "conditions": {
         "items": [
           {
-            "item": "environmental:wanderer_boots"
+            "items": [
+              "environmental:wanderer_boots"
+            ]
           }
         ]
       }

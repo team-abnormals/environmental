@@ -1,0 +1,24 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "flag": "vertical_slabs",
+          "type": "blueprint:quark_flag"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shapeless",
+        "ingredients": [
+          {
+            "item": "environmental:willow_slab"
+          }
+        ],
+        "result": {
+          "item": "environmental:willow_vertical_slab"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "environmental:cooked_venison_from_smoking"
+    ]
+  },
+  "criteria": {
+    "has_venison": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "environmental:venison"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "environmental:cooked_venison_from_smoking"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_venison",
+      "has_the_recipe"
+    ]
+  ]
+}

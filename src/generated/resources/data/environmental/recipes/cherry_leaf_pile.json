@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "leaf_pile",
+  "ingredients": [
+    {
+      "item": "environmental:cherry_leaves"
+    }
+  ],
+  "result": {
+    "item": "environmental:cherry_leaf_pile",
+    "count": 4
+  }
+}

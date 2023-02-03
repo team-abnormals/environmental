@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "environmental:pink_dye_from_cartwheel"
+    ]
+  },
+  "criteria": {
+    "has_cartwheel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "environmental:cartwheel"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "environmental:pink_dye_from_cartwheel"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cartwheel",
+      "has_the_recipe"
+    ]
+  ]
+}
