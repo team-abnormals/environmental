@@ -151,13 +151,13 @@ public class Deer extends AbstractDeer {
 
 		if (!this.isBaby() && (this.isTrusting() || flag)) {
 			if (stack.is(Items.MELON_SLICE)) {
-				this.setFlowerAmount(this.getFlowerAmount() + 10);
+				this.setFlowerAmount(this.getFlowerAmount() + 6);
 				this.floweringTime += 2400;
 				this.particleCloud(ParticleTypes.HAPPY_VILLAGER);
 				this.usePlayerItem(player, hand, stack);
 				return InteractionResult.SUCCESS;
 			} else if (stack.is(Items.GLISTERING_MELON_SLICE)) {
-				this.setFlowerAmount(this.getFlowerAmount() + 30);
+				this.setFlowerAmount(this.getFlowerAmount() + 20);
 				this.floweringTime += 2400;
 				this.particleCloud(ParticleTypes.HAPPY_VILLAGER);
 				this.usePlayerItem(player, hand, stack);
