@@ -1,5 +1,6 @@
 {
   "rarity": "common",
+  "priority": 1,
   "displayName": {
     "translate": "entity.environmental.slabfish.type.marsh"
   },
@@ -12,17 +13,8 @@
       ]
     },
     {
-      "type": "environmental:or",
-      "conditions": [
-        {
-          "type": "environmental:biome",
-          "biome": "environmental:marsh"
-        },
-        {
-          "type": "environmental:biome",
-          "biome": "environmental:mushroom_marsh"
-        }
-      ]
+      "type": "environmental:biome",
+      "biome": "environmental:marsh"
     }
   ]
 }

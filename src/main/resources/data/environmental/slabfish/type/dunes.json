@@ -13,25 +13,8 @@
       ]
     },
     {
-      "type": "environmental:or",
-      "conditions": [
-        {
-          "type": "environmental:biome",
-          "biome": "atmospheric:dunes"
-        },
-        {
-          "type": "environmental:biome",
-          "biome": "atmospheric:petrified_dunes"
-        },
-        {
-          "type": "environmental:biome",
-          "biome": "atmospheric:rocky_dunes"
-        },
-        {
-          "type": "environmental:biome",
-          "biome": "atmospheric:flourishing_dunes"
-        }
-      ]
+      "type": "environmental:biome",
+      "tag": "atmospheric:is_dunes"
     }
   ]
 }

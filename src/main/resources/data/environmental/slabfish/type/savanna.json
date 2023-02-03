@@ -12,21 +12,8 @@
       ]
     },
     {
-      "type": "environmental:or",
-      "conditions": [
-        {
-          "type": "environmental:biome",
-          "biome": "minecraft:savanna"
-        },
-        {
-          "type": "environmental:biome",
-          "biome": "minecraft:savanna_plateau"
-        },
-        {
-          "type": "environmental:biome",
-          "biome": "minecraft:windswept_savanna"
-        }
-      ]
+      "type": "environmental:biome",
+      "tag": "forge:is_savanna"
     }
   ]
 }

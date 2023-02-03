@@ -29,7 +29,15 @@
         },
         {
           "type": "environmental:biome",
-          "tag": "minecraft:is_mountain"
+          "biome": "minecraft:frozen_river"
+        },
+        {
+          "type": "environmental:biome",
+          "biome": "minecraft:snowy_beach"
+        },
+        {
+          "type": "environmental:biome",
+          "biome": "minecraft:snowy_taiga"
         },
         {
           "type": "environmental:biome",
