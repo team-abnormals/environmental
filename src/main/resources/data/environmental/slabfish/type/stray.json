@@ -30,6 +30,18 @@
         {
           "type": "environmental:biome",
           "tag": "minecraft:is_mountain"
+        },
+        {
+          "type": "environmental:biome",
+          "biome": "minecraft:frozen_peaks"
+        },
+        {
+          "type": "environmental:biome",
+          "biome": "minecraft:jagged_peaks"
+        },
+        {
+          "type": "environmental:biome",
+          "biome": "minecraft:snowy_slopes"
         }
       ]
     }
