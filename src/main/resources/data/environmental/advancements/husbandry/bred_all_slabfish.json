@@ -51,6 +51,10 @@
     "warped": { "trigger": "minecraft:bred_animals", "conditions": { "child": { "type": "environmental:slabfish", "nbt": "{SlabfishType:\"environmental:warped\"}" } } },
     "soul_sand_valley": { "trigger": "minecraft:bred_animals", "conditions": { "child": { "type": "environmental:slabfish", "nbt": "{SlabfishType:\"environmental:soul_sand_valley\"}" } } },
     "basalt_deltas": { "trigger": "minecraft:bred_animals", "conditions": { "child": { "type": "environmental:slabfish", "nbt": "{SlabfishType:\"environmental:basalt_deltas\"}" } } },
-    "blossom": { "trigger": "minecraft:bred_animals", "conditions": { "child": { "type": "environmental:slabfish", "nbt": "{SlabfishType:\"environmental:blossom\"}" } } }
+    "blossom": { "trigger": "minecraft:bred_animals", "conditions": { "child": { "type": "environmental:slabfish", "nbt": "{SlabfishType:\"environmental:blossom\"}" } } },
+    "mountain": { "trigger": "minecraft:bred_animals", "conditions": { "child": { "type": "environmental:slabfish", "nbt": "{SlabfishType:\"environmental:mountain\"}" } } },
+    "deepslate": { "trigger": "minecraft:bred_animals", "conditions": { "child": { "type": "environmental:slabfish", "nbt": "{SlabfishType:\"environmental:deepslate\"}" } } },
+    "dripstone_caves": { "trigger": "minecraft:bred_animals", "conditions": { "child": { "type": "environmental:slabfish", "nbt": "{SlabfishType:\"environmental:dripstone_caves\"}" } } },
+    "lush_caves": { "trigger": "minecraft:bred_animals", "conditions": { "child": { "type": "environmental:slabfish", "nbt": "{SlabfishType:\"environmental:lush_caves\"}" } } }
   }
 }

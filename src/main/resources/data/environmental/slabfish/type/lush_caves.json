@@ -1,0 +1,20 @@
+{
+  "rarity": "rare",
+  "priority": 5,
+  "displayName": {
+    "translate": "entity.environmental.slabfish.type.lush_caves"
+  },
+  "conditions": [
+    {
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:biome",
+      "biome": "minecraft:lush_caves"
+    }
+  ]
+}

@@ -1,8 +1,8 @@
 {
-  "rarity": "uncommon",
-  "priority": 2,
+  "rarity": "rare",
+  "priority": 3,
   "displayName": {
-    "translate": "entity.environmental.slabfish.type.cave"
+    "translate": "entity.environmental.slabfish.type.deepslate"
   },
   "conditions": [
     {
@@ -14,7 +14,7 @@
     },
     {
       "type": "environmental:height",
-      "max": 48
+      "max": 0
     },
     {
       "type": "environmental:light_level",
