@@ -87,7 +87,7 @@ public abstract class AbstractDeer extends Animal {
 
 		this.updateNeckAngle();
 		this.updateSprintAnimation();
-		this.updateHopAmimation();
+		this.updateHopAnimation();
 	}
 
 	private void updateNeckAngle() {
@@ -110,13 +110,13 @@ public abstract class AbstractDeer extends Animal {
 		}
 	}
 
-	private void updateHopAmimation() {
+	private void updateHopAnimation() {
 		this.hopAmountO = this.hopAmount;
 		this.hopAngleO = this.hopAngle;
 
 		if (this.hopProgress != 3) {
 			--this.hopProgress;
-		} else if (this.hopProgress > 0 && this.isOnGround()) {
+		} else if (this.isOnGround() || this.isInWaterOrBubble()) {
 			this.hopProgress = 2;
 		}
 

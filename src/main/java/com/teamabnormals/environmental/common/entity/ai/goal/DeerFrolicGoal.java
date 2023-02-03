@@ -27,13 +27,6 @@ public class DeerFrolicGoal extends Goal {
 	@Override
 	public boolean canContinueToUse() {
 		return this.deer.isSpreadingFlowers() || !this.deer.getNavigation().isDone();
-		/*
-		if (!this.deer.isSpreadingFlowers() && this.deer.getNavigation().isDone()) {
-			return false;
-		} else {
-			return !this.deer.isInWater();
-		}
-		 */
 	}
 
 	@Override
