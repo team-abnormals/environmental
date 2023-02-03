@@ -395,18 +395,6 @@
 	"entity.environmental.slabfish.type.totem": "Totem",
 	"entity.environmental.slabfish.type.ghost": "Ghost",
 	"entity.environmental.slabfish.type.nightmare": "Nightmare",
-
-	"entity.environmental.slabfish.type.bagel": "Bagel",
-	"entity.environmental.slabfish.type.cameron": "Cameron",
-	"entity.environmental.slabfish.type.gore": "Gore",
-	"entity.environmental.slabfish.type.snake_block": "Snake Block",
-	"entity.environmental.slabfish.type.jackson": "Jackson",
-	"entity.environmental.slabfish.type.renren": "RENREN",
-	"entity.environmental.slabfish.type.smelly": "Smelly",
-	"entity.environmental.slabfish.type.bmo": "BMO",
-	"entity.environmental.slabfish.type.ocelot": "WALL-E",
-	"entity.environmental.slabfish.type.eve": "EVE",
-	"entity.environmental.slabfish.type.minion": "Minion",
 	
 	"entity.environmental.slabfish.backpack.white": "White Backpack",
 	"entity.environmental.slabfish.backpack.orange": "Orange Backpack",
@@ -424,9 +412,6 @@
 	"entity.environmental.slabfish.backpack.green": "Green Backpack",
 	"entity.environmental.slabfish.backpack.red": "Red Backpack",
 	"entity.environmental.slabfish.backpack.black": "Black Backpack",
-	"entity.environmental.slabfish.backpack.snake_block": "Gooey Growth",
-	"entity.environmental.slabfish.backpack.gore": "Gorey Growth",
-	"entity.environmental.slabfish.backpack.ocelot": "Cooler",
 	
 	"entity.environmental.slabfish.sweater.white": "White Sweater",
 	"entity.environmental.slabfish.sweater.orange": "Orange Sweater",
