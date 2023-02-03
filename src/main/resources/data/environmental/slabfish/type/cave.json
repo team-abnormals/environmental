@@ -19,6 +19,10 @@
     {
       "type": "environmental:light_level",
       "value": 0
+    },
+    {
+      "type": "environmental:dimension",
+      "dimension": "minecraft:overworld"
     }
   ]
 }

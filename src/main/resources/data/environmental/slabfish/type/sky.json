@@ -15,6 +15,10 @@
     {
       "type": "environmental:height",
       "min": 256
+    },
+    {
+      "type": "environmental:dimension",
+      "dimension": "minecraft:overworld"
     }
   ]
 }
