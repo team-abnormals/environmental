@@ -237,13 +237,13 @@ public class DoubleCattailBlock extends Block implements BonemealableBlock, Simp
 	@Override
 	public boolean isValidBonemealTarget(BlockGetter worldIn, BlockPos pos, BlockState state, boolean isClient) {
 		boolean upper = state.getValue(HALF) == DoubleBlockHalf.UPPER;
-		return state.getValue(AGE) < 1 && state.getValue(FAKE_WATERLOGGED) && upper ? !state.getValue(WATERLOGGED) : !worldIn.getBlockState(pos.above()).getValue(WATERLOGGED);
+		return state.getValue(AGE) < 1 && state.getValue(FAKE_WATERLOGGED) && (upper ? !state.getValue(WATERLOGGED) : !worldIn.getBlockState(pos.above()).getValue(WATERLOGGED));
 	}
 
 	@Override
 	public boolean isBonemealSuccess(Level worldIn, Random rand, BlockPos pos, BlockState state) {
 		boolean upper = state.getValue(HALF) == DoubleBlockHalf.UPPER;
-		return state.getValue(AGE) < 1 && state.getValue(FAKE_WATERLOGGED) && upper ? !state.getValue(WATERLOGGED) : !worldIn.getBlockState(pos.above()).getValue(WATERLOGGED);
+		return state.getValue(AGE) < 1 && state.getValue(FAKE_WATERLOGGED) && (upper ? !state.getValue(WATERLOGGED) : !worldIn.getBlockState(pos.above()).getValue(WATERLOGGED));
 	}
 
 	@Override

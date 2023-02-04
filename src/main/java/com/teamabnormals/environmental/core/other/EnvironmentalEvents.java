@@ -223,7 +223,7 @@ public class EnvironmentalEvents {
 			double d0 = pos.getX() + 0.5D + 0.625D * vector3i.getX();
 			double d1 = pos.getY() + 0.375D + 0.625D * vector3i.getY();
 			double d2 = pos.getZ() + 0.5D + 0.625D * vector3i.getZ();
-			
+
 			int count = 1;
 			int fortuneLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_FORTUNE, stack);
 			if (fortuneLevel > 0) {
