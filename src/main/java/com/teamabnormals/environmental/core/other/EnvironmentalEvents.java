@@ -47,6 +47,8 @@ import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -221,7 +223,14 @@ public class EnvironmentalEvents {
 			double d0 = pos.getX() + 0.5D + 0.625D * vector3i.getX();
 			double d1 = pos.getY() + 0.375D + 0.625D * vector3i.getY();
 			double d2 = pos.getZ() + 0.5D + 0.625D * vector3i.getZ();
-			ItemEntity itementity = new ItemEntity(world, d0, d1, d2, new ItemStack(EnvironmentalItems.TRUFFLE.get()));
+			
+			int count = 1;
+			int fortuneLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_FORTUNE, stack);
+			if (fortuneLevel > 0) {
+				count += Math.max(0, world.getRandom().nextInt(fortuneLevel + 2) - 1);
+			}
+
+			ItemEntity itementity = new ItemEntity(world, d0, d1, d2, new ItemStack(EnvironmentalItems.TRUFFLE.get(), count));
 			world.addFreshEntity(itementity);
 
 			world.playSound(player, pos, EnvironmentalSoundEvents.SHOVEL_DIG.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
