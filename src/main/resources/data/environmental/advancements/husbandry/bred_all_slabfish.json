@@ -55,6 +55,8 @@
     "mountain": { "trigger": "minecraft:bred_animals", "conditions": { "child": { "type": "environmental:slabfish", "nbt": "{SlabfishType:\"environmental:mountain\"}" } } },
     "deepslate": { "trigger": "minecraft:bred_animals", "conditions": { "child": { "type": "environmental:slabfish", "nbt": "{SlabfishType:\"environmental:deepslate\"}" } } },
     "dripstone_caves": { "trigger": "minecraft:bred_animals", "conditions": { "child": { "type": "environmental:slabfish", "nbt": "{SlabfishType:\"environmental:dripstone_caves\"}" } } },
-    "lush_caves": { "trigger": "minecraft:bred_animals", "conditions": { "child": { "type": "environmental:slabfish", "nbt": "{SlabfishType:\"environmental:lush_caves\"}" } } }
+    "lush_caves": { "trigger": "minecraft:bred_animals", "conditions": { "child": { "type": "environmental:slabfish", "nbt": "{SlabfishType:\"environmental:lush_caves\"}" } } },
+    "deep_dark": { "trigger": "minecraft:bred_animals", "conditions": { "child": { "type": "environmental:slabfish", "nbt": "{SlabfishType:\"environmental:deep_dark\"}" } } },
+    "mangrove": { "trigger": "minecraft:bred_animals", "conditions": { "child": { "type": "environmental:slabfish", "nbt": "{SlabfishType:\"environmental:mangrove\"}" } } }
   }
 }

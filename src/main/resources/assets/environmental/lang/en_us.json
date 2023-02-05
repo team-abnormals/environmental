@@ -353,6 +353,7 @@
 	"entity.environmental.slabfish.type.dark_forest": "Dark Forest",
 	"entity.environmental.slabfish.type.flower_forest": "Flower Forest",
 	"entity.environmental.slabfish.type.beach": "Beach",
+	"entity.environmental.slabfish.type.mangrove": "Mangrove",
 
 	"entity.environmental.slabfish.type.river": "River",
 	"entity.environmental.slabfish.type.ocean": "Ocean",
@@ -364,6 +365,7 @@
 	"entity.environmental.slabfish.type.deepslate": "Deepslate",
 	"entity.environmental.slabfish.type.dripstone_caves": "Dripstone Caves",
 	"entity.environmental.slabfish.type.lush_caves": "Lush Caves",
+	"entity.environmental.slabfish.type.deep_dark": "Deep Dark",
   
 	"entity.environmental.slabfish.type.marsh": "Marsh",
 	"entity.environmental.slabfish.type.blossom": "Blossom",

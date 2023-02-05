@@ -1,0 +1,20 @@
+{
+  "rarity": "common",
+  "priority": 1,
+  "displayName": {
+    "translate": "entity.environmental.slabfish.type.mangrove"
+  },
+  "conditions": [
+    {
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:biome",
+      "biome": "minecraft:mangrove_swamp"
+    }
+  ]
+}
