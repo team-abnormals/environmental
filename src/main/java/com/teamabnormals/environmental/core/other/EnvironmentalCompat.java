@@ -343,7 +343,7 @@ public class EnvironmentalCompat {
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.WILLOW_HEDGE.get(), RenderType.cutoutMipped());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.WILLOW_SAPLING.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.POTTED_WILLOW_SAPLING.get(), RenderType.cutout());
-		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.WILLOW_LEAF_PILE.get(), RenderType.cutoutMipped());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.WILLOW_LEAF_PILE.get(), RenderType.cutout());
 
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.CHERRY_DOOR.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.CHERRY_TRAPDOOR.get(), RenderType.cutout());
@@ -355,7 +355,7 @@ public class EnvironmentalCompat {
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.CHERRY_HEDGE.get(), RenderType.cutoutMipped());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.CHERRY_SAPLING.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.POTTED_CHERRY_SAPLING.get(), RenderType.cutout());
-		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.CHERRY_LEAF_PILE.get(), RenderType.cutoutMipped());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.CHERRY_LEAF_PILE.get(), RenderType.cutout());
 
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.WISTERIA_DOOR.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.WISTERIA_TRAPDOOR.get(), RenderType.cutout());
@@ -371,7 +371,7 @@ public class EnvironmentalCompat {
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.WHITE_DELPHINIUM.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.POTTED_WHITE_WISTERIA_SAPLING.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.POTTED_WHITE_DELPHINIUM.get(), RenderType.cutout());
-		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.WHITE_WISTERIA_LEAF_PILE.get(), RenderType.cutoutMipped());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.WHITE_WISTERIA_LEAF_PILE.get(), RenderType.cutout());
 
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.BLUE_WISTERIA_LEAVES.get(), RenderType.cutoutMipped());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.BLUE_HANGING_WISTERIA_LEAVES.get(), RenderType.cutoutMipped());
@@ -381,7 +381,7 @@ public class EnvironmentalCompat {
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.BLUE_DELPHINIUM.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.POTTED_BLUE_WISTERIA_SAPLING.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.POTTED_BLUE_DELPHINIUM.get(), RenderType.cutout());
-		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.BLUE_WISTERIA_LEAF_PILE.get(), RenderType.cutoutMipped());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.BLUE_WISTERIA_LEAF_PILE.get(), RenderType.cutout());
 
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.PINK_WISTERIA_LEAVES.get(), RenderType.cutoutMipped());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.PINK_HANGING_WISTERIA_LEAVES.get(), RenderType.cutoutMipped());
@@ -391,7 +391,7 @@ public class EnvironmentalCompat {
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.PINK_DELPHINIUM.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.POTTED_PINK_WISTERIA_SAPLING.get(), RenderType.cutoutMipped());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.POTTED_PINK_DELPHINIUM.get(), RenderType.cutout());
-		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.PINK_WISTERIA_LEAF_PILE.get(), RenderType.cutoutMipped());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.PINK_WISTERIA_LEAF_PILE.get(), RenderType.cutout());
 
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.PURPLE_WISTERIA_LEAVES.get(), RenderType.cutoutMipped());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.PURPLE_HANGING_WISTERIA_LEAVES.get(), RenderType.cutoutMipped());
@@ -401,7 +401,7 @@ public class EnvironmentalCompat {
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.PURPLE_DELPHINIUM.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.POTTED_PURPLE_WISTERIA_SAPLING.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.POTTED_PURPLE_DELPHINIUM.get(), RenderType.cutout());
-		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.PURPLE_WISTERIA_LEAF_PILE.get(), RenderType.cutoutMipped());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.PURPLE_WISTERIA_LEAF_PILE.get(), RenderType.cutout());
 	}
 
 	public static void registerBlockColors() {
