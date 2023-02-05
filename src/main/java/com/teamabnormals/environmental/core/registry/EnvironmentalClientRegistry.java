@@ -1,10 +1,6 @@
 package com.teamabnormals.environmental.core.registry;
 
 import com.teamabnormals.environmental.client.model.SlabfishBucketModel;
-import com.teamabnormals.environmental.client.particle.CherryBlossomParticle;
-import com.teamabnormals.environmental.client.particle.LotusBlossomParticle;
-import com.teamabnormals.environmental.client.particle.PigFindsTruffleParticle;
-import com.teamabnormals.environmental.client.particle.SlabfishEffigyParticle;
 import com.teamabnormals.environmental.core.Environmental;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.ModelResourceLocation;
@@ -14,22 +10,12 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
-import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 @OnlyIn(Dist.CLIENT)
 @EventBusSubscriber(modid = Environmental.MOD_ID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
 public class EnvironmentalClientRegistry {
-
-	@SubscribeEvent
-	public static void registerParticleFactorys(RegisterParticleProvidersEvent event) {
-		event.register(EnvironmentalParticleTypes.CHERRY_BLOSSOM.get(), CherryBlossomParticle.Factory::new);
-		event.register(EnvironmentalParticleTypes.RED_LOTUS_BLOSSOM.get(), LotusBlossomParticle.Factory::new);
-		event.register(EnvironmentalParticleTypes.WHITE_LOTUS_BLOSSOM.get(), LotusBlossomParticle.Factory::new);
-		event.register(EnvironmentalParticleTypes.PIG_FINDS_TRUFFLE.get(), PigFindsTruffleParticle.Factory::new);
-		event.register(EnvironmentalParticleTypes.SLABFISH_FINDS_EFFIGY.get(), SlabfishEffigyParticle.Factory::new);
-	}
 
 	@SubscribeEvent
 	public static void onEvent(ModelEvent.RegisterAdditional event) {
