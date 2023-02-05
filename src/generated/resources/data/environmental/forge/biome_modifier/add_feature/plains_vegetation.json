@@ -1,0 +1,9 @@
+{
+  "type": "forge:add_features",
+  "biomes": [
+    "minecraft:plains",
+    "minecraft:sunflower_plains"
+  ],
+  "features": "environmental:patch_giant_tall_grass_plains",
+  "step": "vegetal_decoration"
+}

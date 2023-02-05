@@ -6,7 +6,9 @@ import com.teamabnormals.environmental.core.registry.EnvironmentalBiomes;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BiomeTagsProvider;
 import net.minecraft.tags.BiomeTags;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 public class EnvironmentalBiomeTagsProvider extends BiomeTagsProvider {
@@ -25,7 +27,15 @@ public class EnvironmentalBiomeTagsProvider extends BiomeTagsProvider {
 		this.tag(BiomeTags.WATER_ON_MAP_OUTLINES).add(EnvironmentalBiomes.MARSH.get());
 		this.tag(BiomeTags.HAS_CLOSER_WATER_FOG).add(EnvironmentalBiomes.MARSH.get());
 
+		this.tag(EnvironmentalBiomeTags.HAS_SLABFISH).addTag(Tags.Biomes.IS_SWAMP);
+		this.tag(EnvironmentalBiomeTags.HAS_DUCK).add(Biomes.RIVER).addTag(Tags.Biomes.IS_SWAMP);
+		this.tag(EnvironmentalBiomeTags.HAS_DEER).addTag(BiomeTags.IS_FOREST);
+		this.tag(EnvironmentalBiomeTags.HAS_YAK).addTag(BiomeTags.IS_HILL);
+
 		this.tag(EnvironmentalBiomeTags.HAS_HUSK).add(Biomes.DESERT);
 		this.tag(EnvironmentalBiomeTags.HAS_STRAY).add(Biomes.SNOWY_PLAINS, Biomes.ICE_SPIKES);
+
+		this.tag(EnvironmentalBiomeTags.HAS_CATTAILS).add(Biomes.RIVER).addTag(Tags.Biomes.IS_SWAMP);
+
 	}
 }

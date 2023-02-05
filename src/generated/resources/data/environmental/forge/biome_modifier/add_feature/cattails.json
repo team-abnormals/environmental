@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#environmental:has_feature/cattails",
+  "features": "environmental:cattails",
+  "step": "vegetal_decoration"
+}

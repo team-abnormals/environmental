@@ -9,6 +9,7 @@ import com.teamabnormals.environmental.common.slabfish.SlabfishLoader;
 import com.teamabnormals.environmental.core.data.server.EnvironmentalLootTableProvider;
 import com.teamabnormals.environmental.core.data.server.EnvironmentalRecipeProvider;
 import com.teamabnormals.environmental.core.data.server.modifiers.EnvironmentalAdvancementModifierProvider;
+import com.teamabnormals.environmental.core.data.server.modifiers.EnvironmentalBiomeModifierProvider;
 import com.teamabnormals.environmental.core.data.server.modifiers.EnvironmentalLootModifierProvider;
 import com.teamabnormals.environmental.core.data.server.modifiers.EnvironmentalModdedBiomeSliceProvider;
 import com.teamabnormals.environmental.core.data.server.tags.*;
@@ -22,7 +23,6 @@ import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures.Envir
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.tags.PaintingVariantTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraftforge.api.distmarker.Dist;
@@ -130,6 +130,7 @@ public class Environmental {
 		generator.addProvider(includeServer, new EnvironmentalModdedBiomeSliceProvider(generator));
 		generator.addProvider(includeServer, new EnvironmentalLootTableProvider(generator));
 		generator.addProvider(includeServer, new EnvironmentalLootModifierProvider(generator));
+		generator.addProvider(includeServer, EnvironmentalBiomeModifierProvider.create(generator, helper));
 		//generator.addProvider(new SlabfishProvider(generator, MOD_ID, existingFileHelper));
 	}
 

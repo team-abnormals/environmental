@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#environmental:has_animal/deer",
+  "spawners": {
+    "type": "environmental:deer",
+    "maxCount": 4,
+    "minCount": 4,
+    "weight": 16
+  }
+}

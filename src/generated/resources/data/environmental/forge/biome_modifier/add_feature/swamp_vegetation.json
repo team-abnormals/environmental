@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_features",
+  "biomes": "minecraft:swamp",
+  "features": [
+    "environmental:huge_swamp_mushrooms",
+    "environmental:trees_swamp",
+    "environmental:patch_duckweed"
+  ],
+  "step": "vegetal_decoration"
+}

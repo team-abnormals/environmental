@@ -4,6 +4,9 @@ import com.teamabnormals.blueprint.core.util.registry.BiomeSubRegistryHelper;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.other.EnvironmentalGeneration;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
+import net.minecraft.sounds.Music;
+import net.minecraft.sounds.Musics;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -25,7 +28,9 @@ public class EnvironmentalBiomes {
 		EnvironmentalGeneration.withMarshFeatures(generation);
 		BiomeDefaultFeatures.farmAnimals(spawns);
 		BiomeDefaultFeatures.commonSpawns(spawns);
-		return (new Biome.BiomeBuilder()).precipitation(Biome.Precipitation.RAIN).temperature(0.8F).downfall(0.9F).specialEffects((new BiomeSpecialEffects.Builder()).waterColor(6134398).waterFogColor(2302743).fogColor(12638463).skyColor(getSkyColorWithTemperatureModifier(0.75F)).grassColorOverride(6263617).foliageColorOverride(6975545).ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS).build()).mobSpawnSettings(spawns.build()).generationSettings(generation.build()).build();
+		spawns.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.FROG, 10, 2, 5));
+		Music music = Musics.createGameMusic(SoundEvents.MUSIC_BIOME_SWAMP);
+		return (new Biome.BiomeBuilder()).precipitation(Biome.Precipitation.RAIN).temperature(0.8F).downfall(0.9F).specialEffects((new BiomeSpecialEffects.Builder()).waterColor(6134398).waterFogColor(2302743).fogColor(12638463).skyColor(getSkyColorWithTemperatureModifier(0.75F)).grassColorOverride(6263617).foliageColorOverride(6975545).ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS).backgroundMusic(music).build()).mobSpawnSettings(spawns.build()).generationSettings(generation.build()).build();
 	}
 
 	private static Biome blossomWoods() {
