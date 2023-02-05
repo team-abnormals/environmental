@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "chest_boat",
+  "ingredients": [
+    {
+      "item": "minecraft:chest"
+    },
+    {
+      "item": "environmental:wisteria_boat"
+    }
+  ],
+  "result": {
+    "item": "environmental:wisteria_chest_boat"
+  }
+}
