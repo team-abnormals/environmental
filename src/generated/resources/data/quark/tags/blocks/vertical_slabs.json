@@ -3,6 +3,6 @@
     "environmental:grass_thatch_vertical_slab",
     "environmental:cattail_thatch_vertical_slab",
     "environmental:duckweed_thatch_vertical_slab",
-    "environmental:mud_brick_vertical_slab"
+    "environmental:smooth_mud_vertical_slab"
   ]
 }

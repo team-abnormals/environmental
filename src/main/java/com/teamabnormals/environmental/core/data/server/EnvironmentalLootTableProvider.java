@@ -112,12 +112,11 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.dropPottedContents(POTTED_WHITE_DELPHINIUM.get());
 			this.dropPottedContents(POTTED_CATTAIL.get());
 
-			this.add(MUD.get(), (block) -> createSingleItemTableWithSilkTouch(block, EnvironmentalItems.MUD_BALL.get(), ConstantValue.exactly(4.0F)));
-			this.dropSelf(MUD_BRICKS.get());
-			this.dropSelf(MUD_BRICK_STAIRS.get());
-			this.dropSelf(MUD_BRICK_WALL.get());
-			this.add(MUD_BRICK_SLAB.get(), BlockLoot::createSlabItemTable);
-			this.add(MUD_BRICK_VERTICAL_SLAB.get(), EnvironmentalBlockLoot::createVerticalSlabItemTable);
+			this.dropSelf(SMOOTH_MUD.get());
+			this.dropSelf(SMOOTH_MUD_STAIRS.get());
+			this.dropSelf(SMOOTH_MUD_WALL.get());
+			this.add(SMOOTH_MUD_SLAB.get(), BlockLoot::createSlabItemTable);
+			this.add(SMOOTH_MUD_VERTICAL_SLAB.get(), EnvironmentalBlockLoot::createVerticalSlabItemTable);
 			this.dropSelf(CHISELED_MUD_BRICKS.get());
 			this.dropSelf(SLABFISH_EFFIGY.get());
 

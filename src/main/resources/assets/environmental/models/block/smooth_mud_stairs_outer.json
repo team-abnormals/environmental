@@ -1,0 +1,8 @@
+{
+    "parent": "block/outer_stairs",
+    "textures": {
+        "bottom": "environmental:block/smooth_mud",
+        "top": "environmental:block/smooth_mud",
+        "side": "environmental:block/smooth_mud"
+    }
+}

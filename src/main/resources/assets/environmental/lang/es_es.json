@@ -3,11 +3,11 @@
 	"block.environmental.sawmill": "Aserradero",
 
 	"block.environmental.mud": "Barro",
-	"block.environmental.mud_bricks": "Ladrillos de barro",
-	"block.environmental.mud_brick_slab": "Losa de ladrillos de barro",
-	"block.environmental.mud_brick_stairs": "Escaleras de ladrillos de barro",
-	"block.environmental.mud_brick_wall": "Muro de ladrillos de barro",
-	"block.environmental.mud_brick_vertical_slab": "Losa vertical de ladrillos de barro",
+	"block.environmental.smooth_mud": "Ladrillos de barro",
+	"block.environmental.smooth_mud_slab": "Losa de ladrillos de barro",
+	"block.environmental.smooth_mud_stairs": "Escaleras de ladrillos de barro",
+	"block.environmental.smooth_mud_wall": "Muro de ladrillos de barro",
+	"block.environmental.smooth_mud_vertical_slab": "Losa vertical de ladrillos de barro",
 	"block.environmental.chiseled_mud_bricks": "Ladrillos de barro cincelados",
 
 	"block.environmental.slabfish_effigy": "Efigie de pez losa",
@@ -336,7 +336,7 @@
 	"item.environmental.koi_bucket": "Cubo con koi",
 
 	"item.environmental.mud_ball": "Bola de barro",
-	"item.environmental.mud_brick": "Ladrillo de barro",
+	"item.environmental.smooth_mud": "Ladrillo de barro",
 	"item.environmental.mud_bucket": "Cubo con barro",
 
 	"item.environmental.cherries": "Cerezas",

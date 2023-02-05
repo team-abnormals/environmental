@@ -1,8 +1,0 @@
-{
-    "parent": "block/inner_stairs",
-    "textures": {
-        "bottom": "environmental:block/mud_bricks",
-        "top": "environmental:block/mud_bricks",
-        "side": "environmental:block/mud_bricks"
-    }
-}

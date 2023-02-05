@@ -3,7 +3,7 @@
   "group": "chest_boat",
   "ingredients": [
     {
-      "item": "minecraft:chest"
+      "tag": "forge:chests/wooden"
     },
     {
       "item": "environmental:cherry_boat"

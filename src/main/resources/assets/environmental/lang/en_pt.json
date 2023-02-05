@@ -2,11 +2,11 @@
 	"block.environmental.kiln": "Bakin' oven",
 
 	"block.environmental.mud": "Swine Bath",
-	"block.environmental.mud_bricks": "Bricks o' Swine Bath",
-	"block.environmental.mud_brick_slab": "Slab o' Bricks o' Swine Bath",
-	"block.environmental.mud_brick_stairs": "Stairs o' Bricks o' Swine Bath",
-	"block.environmental.mud_brick_wall": "Wall o' Bricks o' Swine Bath",
-	"block.environmental.mud_brick_vertical_slab": "Standin' Slab o' Bricks o' Swine Bath",
+	"block.environmental.smooth_mud": "Bricks o' Swine Bath",
+	"block.environmental.smooth_mud_slab": "Slab o' Bricks o' Swine Bath",
+	"block.environmental.smooth_mud_stairs": "Stairs o' Bricks o' Swine Bath",
+	"block.environmental.smooth_mud_wall": "Wall o' Bricks o' Swine Bath",
+	"block.environmental.smooth_mud_vertical_slab": "Standin' Slab o' Bricks o' Swine Bath",
 	"block.environmental.chiseled_mud_bricks": "Carv'd bricks o' Swine Bath",
 
 	"block.environmental.slabfish_effigy": "Altar t' swamp's courier",
@@ -318,7 +318,7 @@
 	"item.environmental.koi_bucket": "Pail o' dragon's fish",
 
 	"item.environmental.mud_ball": "Ball o' filth",
-	"item.environmental.mud_brick": "Brick o' filth",
+	"item.environmental.smooth_mud": "Brick o' filth",
 	"item.environmental.mud_bucket": "Pail o' Swine Bath",
 	"item.environmental.willow_boat": "Willow'n Vessel",
 

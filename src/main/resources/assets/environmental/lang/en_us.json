@@ -1,10 +1,9 @@
 {
-	"block.environmental.mud": "Mud",
-	"block.environmental.mud_bricks": "Mud Bricks",
-	"block.environmental.mud_brick_slab": "Mud Brick Slab",
-	"block.environmental.mud_brick_stairs": "Mud Brick Stairs",
-	"block.environmental.mud_brick_wall": "Mud Brick Wall",
-	"block.environmental.mud_brick_vertical_slab": "Mud Brick Vertical Slab",
+	"block.environmental.smooth_mud": "Smooth Mud",
+	"block.environmental.smooth_mud_slab": "Smooth Mud Slab",
+	"block.environmental.smooth_mud_stairs": "Smooth Mud Stairs",
+	"block.environmental.smooth_mud_wall": "Smooth Mud Wall",
+	"block.environmental.smooth_mud_vertical_slab": "Smooth Mud Vertical Slab",
 	"block.environmental.chiseled_mud_bricks": "Chiseled Mud Bricks",
 	
 	"block.environmental.slabfish_effigy": "Slabfish Effigy",
@@ -220,7 +219,6 @@
 	"item.environmental.koi_bucket": "Bucket of Koi",
 
 	"item.environmental.mud_ball": "Mud Ball",
-	"item.environmental.mud_brick": "Mud Brick",
 
 	"item.environmental.cherries": "Cherries",
 	"item.environmental.cherry_pie": "Cherry Pie",
@@ -262,11 +260,8 @@
 	"entity.environmental.mud_ball": "Mud Ball",
 
 	"biome.environmental.marsh": "Marsh",
-	"biome.environmental.mushroom_marsh": "Mushroom Marsh",
 
 	"biome.environmental.blossom_woods": "Blossom Woods",
-	"biome.environmental.blossom_hills": "Blossom Hills",
-	"biome.environmental.blossom_highlands": "Blossom Highlands",
 	"biome.environmental.blossom_valleys": "Blossom Valleys",
 	
 	"effect.environmental.panic": "Panic",

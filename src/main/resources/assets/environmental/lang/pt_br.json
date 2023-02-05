@@ -3,11 +3,11 @@
 	"block.environmental.sawmill": "Serraria",
 	
   	"block.environmental.mud": "Lama",
-  	"block.environmental.mud_bricks": "Tijolos de lama",
-	"block.environmental.mud_brick_slab": "Laje de tijolos de lama",
-	"block.environmental.mud_brick_stairs": "Escadas de tijolos de lama",
-	"block.environmental.mud_brick_wall": "Muro de tijolos de lama",
-	"block.environmental.mud_brick_vertical_slab": "Laje vertical de tijolos de lama",
+  	"block.environmental.smooth_mud": "Tijolos de lama",
+	"block.environmental.smooth_mud_slab": "Laje de tijolos de lama",
+	"block.environmental.smooth_mud_stairs": "Escadas de tijolos de lama",
+	"block.environmental.smooth_mud_wall": "Muro de tijolos de lama",
+	"block.environmental.smooth_mud_vertical_slab": "Laje vertical de tijolos de lama",
 	"block.environmental.chiseled_mud_bricks": "Tijolos de lama talhados",
 	
 	"block.environmental.slabfish_effigy": "Efígie de peixe-laje",
@@ -337,7 +337,7 @@
 	"item.environmental.koi_bucket": "Balde com carpa-ornamental",
 	
 	"item.environmental.mud_ball": "Bola de lama",
-	"item.environmental.mud_brick": "Tijolo de lama",
+	"item.environmental.smooth_mud": "Tijolo de lama",
 	"item.environmental.mud_bucket": "Balde de lama",
 	
 	"item.environmental.cherries": "Cerejas",

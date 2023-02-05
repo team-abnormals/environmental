@@ -1,10 +1,10 @@
 {
 	"block.environmental.mud": "Muta",
-	"block.environmental.mud_bricks": "Mutatiili",
-	"block.environmental.mud_brick_slab": "Mutatiililaatta",
-	"block.environmental.mud_brick_stairs": "Mutatiiliportaat",
-	"block.environmental.mud_brick_wall": "Mutatiilimuuri",
-	"block.environmental.mud_brick_vertical_slab": "Pystysuora mutatiililaatta",
+	"block.environmental.smooth_mud": "Mutatiili",
+	"block.environmental.smooth_mud_slab": "Mutatiililaatta",
+	"block.environmental.smooth_mud_stairs": "Mutatiiliportaat",
+	"block.environmental.smooth_mud_wall": "Mutatiilimuuri",
+	"block.environmental.smooth_mud_vertical_slab": "Pystysuora mutatiililaatta",
 	"block.environmental.chiseled_mud_bricks": "Kaiverrettu mutatiili",
 	
 	"block.environmental.slabfish_effigy": "Laattakala-veistos",
@@ -209,7 +209,7 @@
 	"item.environmental.koi_bucket": "Koikarppi ämpärissä",
 	
 	"item.environmental.mud_ball": "Mutapallo",
-	"item.environmental.mud_brick": "Mutatiili",
+	"item.environmental.smooth_mud": "Mutatiili",
 	"item.environmental.mud_bucket": "Mutaämpäri",
 	
 	"item.environmental.cherries": "Kirsikoita",

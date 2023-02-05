@@ -104,19 +104,18 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 		generateRecipes(consumer, EnvironmentalBlockFamilies.DUCKWEED_THATCH_FAMILY);
 		verticalSlabRecipes(consumer, EnvironmentalBlockFamilies.DUCKWEED_THATCH_FAMILY, EnvironmentalBlocks.DUCKWEED_THATCH_VERTICAL_SLAB.get());
 
-		ShapedRecipeBuilder.shaped(EnvironmentalBlocks.MUD.get(), 4).define('#', EnvironmentalItems.MUD_BALL.get()).pattern("##").pattern("##").unlockedBy("has_mud_ball", has(EnvironmentalItems.MUD_BALL.get())).save(consumer);
-		oneToOneConversionRecipeBuilder(EnvironmentalItems.MUD_BALL.get(), EnvironmentalBlocks.MUD.get(), 4).group("mud_ball").save(consumer);
+		ShapedRecipeBuilder.shaped(Blocks.MUD, 4).define('#', EnvironmentalItems.MUD_BALL.get()).pattern("##").pattern("##").unlockedBy("has_mud_ball", has(EnvironmentalItems.MUD_BALL.get())).save(consumer);
+		oneToOneConversionRecipeBuilder(EnvironmentalItems.MUD_BALL.get(), Blocks.MUD, 4).group("mud_ball").save(consumer);
 		ShapelessRecipeBuilder.shapeless(EnvironmentalItems.MUD_BALL.get(), 16).requires(BlueprintItemTags.BUCKETS_WATER).requires(Blocks.DIRT, 8).group("mud_ball").unlockedBy("has_dirt", has(Blocks.DIRT)).save(consumer, getModConversionRecipeName(EnvironmentalItems.MUD_BALL.get(), Blocks.DIRT));
-		SimpleCookingRecipeBuilder.smelting(Ingredient.of(EnvironmentalItems.MUD_BALL.get()), EnvironmentalItems.MUD_BRICK.get(), 0.3F, 200).unlockedBy("has_mud_ball", has(EnvironmentalItems.MUD_BALL.get())).save(consumer);
-		ShapedRecipeBuilder.shaped(EnvironmentalBlocks.SLABFISH_EFFIGY.get()).define('#', EnvironmentalItems.MUD_BRICK.get()).pattern("# #").pattern(" # ").unlockedBy("has_mud_brick", has(EnvironmentalItems.MUD_BRICK.get())).save(consumer);
-		ShapedRecipeBuilder.shaped(EnvironmentalBlocks.MUD_BRICKS.get()).define('#', EnvironmentalItems.MUD_BRICK.get()).pattern("##").pattern("##").unlockedBy("has_mud_brick", has(EnvironmentalItems.MUD_BRICK.get())).save(consumer);
-		generateRecipes(consumer, EnvironmentalBlockFamilies.MUD_BRICKS_FAMILY);
-		verticalSlabRecipes(consumer, EnvironmentalBlockFamilies.MUD_BRICKS_FAMILY, EnvironmentalBlocks.MUD_BRICK_VERTICAL_SLAB.get());
-		stonecutterResultFromBase(consumer, EnvironmentalBlocks.MUD_BRICK_SLAB.get(), EnvironmentalBlocks.MUD_BRICKS.get(), 2);
-		stonecutterResultFromBase(consumer, EnvironmentalBlocks.MUD_BRICK_STAIRS.get(), EnvironmentalBlocks.MUD_BRICKS.get());
-		stonecutterResultFromBase(consumer, EnvironmentalBlocks.MUD_BRICK_WALL.get(), EnvironmentalBlocks.MUD_BRICKS.get());
-		conditionalStonecuttingRecipe(consumer, VERTICAL_SLABS, EnvironmentalBlocks.MUD_BRICK_VERTICAL_SLAB.get(), EnvironmentalBlocks.MUD_BRICKS.get(), 2);
-		stonecutterResultFromBase(consumer, EnvironmentalBlocks.CHISELED_MUD_BRICKS.get(), EnvironmentalBlocks.MUD_BRICKS.get());
+		//ShapedRecipeBuilder.shaped(EnvironmentalBlocks.SLABFISH_EFFIGY.get()).define('#', EnvironmentalItems.MUD_BRICK.get()).pattern("# #").pattern(" # ").unlockedBy("has_mud_brick", has(EnvironmentalItems.MUD_BRICK.get())).save(consumer);
+		SimpleCookingRecipeBuilder.smelting(Ingredient.of(Blocks.PACKED_MUD), EnvironmentalBlocks.SMOOTH_MUD.get().asItem(), 0.1F, 200).unlockedBy("has_packed_mud", has(Blocks.PACKED_MUD)).save(consumer);
+		generateRecipes(consumer, EnvironmentalBlockFamilies.SMOOTH_MUD_FAMILY);
+		verticalSlabRecipes(consumer, EnvironmentalBlockFamilies.SMOOTH_MUD_FAMILY, EnvironmentalBlocks.SMOOTH_MUD_VERTICAL_SLAB.get());
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.SMOOTH_MUD_SLAB.get(), EnvironmentalBlocks.SMOOTH_MUD.get(), 2);
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.SMOOTH_MUD_STAIRS.get(), EnvironmentalBlocks.SMOOTH_MUD.get());
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.SMOOTH_MUD_WALL.get(), EnvironmentalBlocks.SMOOTH_MUD.get());
+		conditionalStonecuttingRecipe(consumer, VERTICAL_SLABS, EnvironmentalBlocks.SMOOTH_MUD_VERTICAL_SLAB.get(), EnvironmentalBlocks.SMOOTH_MUD.get(), 2);
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.CHISELED_MUD_BRICKS.get(), Blocks.MUD_BRICKS);
 
 		ShapedRecipeBuilder.shaped(Blocks.BROWN_WOOL).define('#', EnvironmentalItems.YAK_HAIR.get()).pattern("##").pattern("##").unlockedBy("has_yak_hair", has(EnvironmentalItems.YAK_HAIR.get())).save(consumer, new ResourceLocation(Environmental.MOD_ID, getItemName(Blocks.BROWN_WOOL)));
 		nineBlockStorageRecipes(consumer, EnvironmentalItems.YAK_HAIR.get(), EnvironmentalBlocks.YAK_HAIR_BLOCK.get());

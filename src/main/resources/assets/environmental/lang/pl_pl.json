@@ -3,11 +3,11 @@
 	"block.environmental.sawmill": "Piła",
 	
 	"block.environmental.mud": "Błoto",
-	"block.environmental.mud_bricks":"Błotne cegły",
-	"block.environmental.mud_brick_slab":"Błotna ceglana płyta",
-	"block.environmental.mud_brick_stairs":"Błotne ceglane schody",
-	"block.environmental.mud_brick_wall":"Błotny ceglany murek",
-	"block.environmental.mud_brick_vertical_slab": "Pionowa błotna ceglana płyta",
+	"block.environmental.smooth_mud":"Błotne cegły",
+	"block.environmental.smooth_mud_slab":"Błotna ceglana płyta",
+	"block.environmental.smooth_mud_stairs":"Błotne ceglane schody",
+	"block.environmental.smooth_mud_wall":"Błotny ceglany murek",
+	"block.environmental.smooth_mud_vertical_slab": "Pionowa błotna ceglana płyta",
 	"block.environmental.chiseled_mud_bricks": "Rzeźbione błotne cegły",
 	
 	"block.environmental.slabfish_effigy": "Posąg płytoryba",
@@ -336,7 +336,7 @@
 	"item.environmental.koi_bucket": "Wiadro z koi",
 	
 	"item.environmental.mud_ball": "Kulka błota",
-	"item.environmental.mud_brick": "Błotna cegła",
+	"item.environmental.smooth_mud": "Błotna cegła",
 	"item.environmental.mud_bucket": "Wiadro błota",
 	
 	"item.environmental.cherries": "Wiśnie",

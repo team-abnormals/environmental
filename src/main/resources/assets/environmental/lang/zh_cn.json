@@ -3,11 +3,11 @@
 	"block.environmental.sawmill": "锯木机",
 	
 	"block.environmental.mud": "泥巴",
-	"block.environmental.mud_bricks": "泥巴砖块",
-	"block.environmental.mud_brick_slab": "泥巴砖台阶",
-	"block.environmental.mud_brick_stairs": "泥巴砖楼梯",
-	"block.environmental.mud_brick_wall": "泥巴砖墙",
-	"block.environmental.mud_brick_vertical_slab": "泥巴砖竖直台阶",
+	"block.environmental.smooth_mud": "泥巴砖块",
+	"block.environmental.smooth_mud_slab": "泥巴砖台阶",
+	"block.environmental.smooth_mud_stairs": "泥巴砖楼梯",
+	"block.environmental.smooth_mud_wall": "泥巴砖墙",
+	"block.environmental.smooth_mud_vertical_slab": "泥巴砖竖直台阶",
 	"block.environmental.chiseled_mud_bricks": "錾制泥巴砖块",
 	
 	"block.environmental.slabfish_effigy": "板鱼雕像",
@@ -335,7 +335,7 @@
 	"item.environmental.bottled_butterfly": "瓶装蝴蝶",
 	
 	"item.environmental.mud_ball": "泥巴球",
-	"item.environmental.mud_brick": "泥巴砖",
+	"item.environmental.smooth_mud": "泥巴砖",
 	"item.environmental.mud_bucket": "泥巴桶",
 	
 	"item.environmental.cherries": "樱桃",

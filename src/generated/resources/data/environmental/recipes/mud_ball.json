@@ -3,7 +3,7 @@
   "group": "mud_ball",
   "ingredients": [
     {
-      "item": "environmental:mud"
+      "item": "minecraft:mud"
     }
   ],
   "result": {

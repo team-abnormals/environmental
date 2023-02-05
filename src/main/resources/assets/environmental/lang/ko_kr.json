@@ -3,11 +3,11 @@
 	"block.environmental.sawmill": "목재소",
 	
 	"block.environmental.mud": "진흙",
-	"block.environmental.mud_bricks": "진흙 벽돌",
-	"block.environmental.mud_brick_slab": "진흙 벽돌 반 블록",
-	"block.environmental.mud_brick_stairs": "진흙 벽돌 계단",
-	"block.environmental.mud_brick_wall": "진흙 벽돌 담장",
-	"block.environmental.mud_brick_vertical_slab": "진흙 벽돌 세로 반 블록",
+	"block.environmental.smooth_mud": "진흙 벽돌",
+	"block.environmental.smooth_mud_slab": "진흙 벽돌 반 블록",
+	"block.environmental.smooth_mud_stairs": "진흙 벽돌 계단",
+	"block.environmental.smooth_mud_wall": "진흙 벽돌 담장",
+	"block.environmental.smooth_mud_vertical_slab": "진흙 벽돌 세로 반 블록",
 	"block.environmental.chiseled_mud_bricks": "조각된 진흙 벽돌",
 	
 	"block.environmental.slabfish_effigy": "슬랩피시 모형",
@@ -336,7 +336,7 @@
 	"item.environmental.bottled_butterfly": "병에 든 나비",
 	
 	"item.environmental.mud_ball": "진흙덩이",
-	"item.environmental.mud_brick": "진흙 벽돌",
+	"item.environmental.smooth_mud": "진흙 벽돌",
 	"item.environmental.mud_bucket": "진흙 양동이",
 	
 	"item.environmental.cherries": "체리",

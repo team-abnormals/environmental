@@ -1,10 +1,10 @@
 {
   "values": [
-    "environmental:mud_bricks",
-    "environmental:mud_brick_slab",
-    "environmental:mud_brick_stairs",
-    "environmental:mud_brick_wall",
-    "environmental:mud_brick_vertical_slab",
+    "environmental:smooth_mud",
+    "environmental:smooth_mud_slab",
+    "environmental:smooth_mud_stairs",
+    "environmental:smooth_mud_wall",
+    "environmental:smooth_mud_vertical_slab",
     "environmental:chiseled_mud_bricks",
     "environmental:slabfish_effigy"
   ]

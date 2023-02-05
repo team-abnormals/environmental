@@ -1,10 +1,10 @@
 {
 	"block.environmental.mud": "Багно",
-	"block.environmental.mud_bricks": "Лимпач",
-	"block.environmental.mud_brick_slab": "Лимпачева плита",
-	"block.environmental.mud_brick_stairs": "Лимпачеві сходи",
-	"block.environmental.mud_brick_wall": "Лимпачева стіна",
-	"block.environmental.mud_brick_vertical_slab": "Лимпачева вертикальна плита",
+	"block.environmental.smooth_mud": "Лимпач",
+	"block.environmental.smooth_mud_slab": "Лимпачева плита",
+	"block.environmental.smooth_mud_stairs": "Лимпачеві сходи",
+	"block.environmental.smooth_mud_wall": "Лимпачева стіна",
+	"block.environmental.smooth_mud_vertical_slab": "Лимпачева вертикальна плита",
 	"block.environmental.chiseled_mud_bricks": "Точений лимпач",
 	
 	"block.environmental.slabfish_effigy": "Статуя плиториби",
@@ -220,7 +220,7 @@
 	"item.environmental.koi_bucket": "Відро з парчевим коропом",
 
 	"item.environmental.mud_ball": "Багняна кулька",
-	"item.environmental.mud_brick": "Лимпачева цеглина",
+	"item.environmental.smooth_mud": "Лимпачева цеглина",
 	
 	"item.environmental.cherries": "Вишні",
 	"item.environmental.cherry_pie": "Вишневий пиріг",

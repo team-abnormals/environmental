@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_mud_brick_slab": {
+    "has_smooth_mud_slab": {
       "conditions": {
         "items": [
           {
             "items": [
-              "environmental:mud_brick_slab"
+              "environmental:smooth_mud_slab"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_mud_brick_slab",
+      "has_smooth_mud_slab",
       "has_the_recipe"
     ]
   ],

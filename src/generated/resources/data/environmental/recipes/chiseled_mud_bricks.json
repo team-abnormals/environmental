@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "#": {
-      "item": "environmental:mud_brick_slab"
+      "item": "environmental:smooth_mud_slab"
     }
   },
   "pattern": [
