@@ -1,22 +1,16 @@
 {
   "advancements": [
     {
-      "conditions": [
-        {
-          "flag": "leaf_carpet",
-          "type": "blueprint:quark_flag"
-        }
-      ],
       "advancement": {
         "parent": "minecraft:recipes/root",
-        "rewards": {
-          "recipes": [
-            "environmental:white_wisteria_leaf_carpet"
-          ]
-        },
         "criteria": {
+          "has_the_recipe": {
+            "conditions": {
+              "recipe": "environmental:white_wisteria_leaf_carpet"
+            },
+            "trigger": "minecraft:recipe_unlocked"
+          },
           "has_white_wisteria_leaves": {
-            "trigger": "minecraft:inventory_changed",
             "conditions": {
               "items": [
                 {
@@ -25,13 +19,8 @@
                   ]
                 }
               ]
-            }
-          },
-          "has_the_recipe": {
-            "trigger": "minecraft:recipe_unlocked",
-            "conditions": {
-              "recipe": "environmental:white_wisteria_leaf_carpet"
-            }
+            },
+            "trigger": "minecraft:inventory_changed"
           }
         },
         "requirements": [
@@ -39,8 +28,19 @@
             "has_white_wisteria_leaves",
             "has_the_recipe"
           ]
-        ]
-      }
+        ],
+        "rewards": {
+          "recipes": [
+            "environmental:white_wisteria_leaf_carpet"
+          ]
+        }
+      },
+      "conditions": [
+        {
+          "type": "blueprint:quark_flag",
+          "flag": "leaf_carpet"
+        }
+      ]
     }
   ]
 }

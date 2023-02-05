@@ -1,22 +1,10 @@
 {
   "advancements": [
     {
-      "conditions": [
-        {
-          "flag": "apple_crate",
-          "type": "blueprint:quark_flag"
-        }
-      ],
       "advancement": {
         "parent": "minecraft:recipes/root",
-        "rewards": {
-          "recipes": [
-            "environmental:cherry_crate"
-          ]
-        },
         "criteria": {
           "has_cherries": {
-            "trigger": "minecraft:inventory_changed",
             "conditions": {
               "items": [
                 {
@@ -25,13 +13,14 @@
                   ]
                 }
               ]
-            }
+            },
+            "trigger": "minecraft:inventory_changed"
           },
           "has_the_recipe": {
-            "trigger": "minecraft:recipe_unlocked",
             "conditions": {
               "recipe": "environmental:cherry_crate"
-            }
+            },
+            "trigger": "minecraft:recipe_unlocked"
           }
         },
         "requirements": [
@@ -39,8 +28,19 @@
             "has_cherries",
             "has_the_recipe"
           ]
-        ]
-      }
+        ],
+        "rewards": {
+          "recipes": [
+            "environmental:cherry_crate"
+          ]
+        }
+      },
+      "conditions": [
+        {
+          "type": "blueprint:quark_flag",
+          "flag": "apple_crate"
+        }
+      ]
     }
   ]
 }

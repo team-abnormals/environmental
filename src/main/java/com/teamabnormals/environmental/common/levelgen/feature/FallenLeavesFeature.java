@@ -12,6 +12,7 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class FallenLeavesFeature extends Feature<NoneFeatureConfiguration> {
 	public FallenLeavesFeature(Codec<NoneFeatureConfiguration> config) {
@@ -21,7 +22,7 @@ public class FallenLeavesFeature extends Feature<NoneFeatureConfiguration> {
 	@Override
 	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
 		WorldGenLevel worldIn = context.level();
-		Random rand = context.random();
+		RandomSource rand = context.random();
 		BlockPos pos = context.origin();
 
 		int i = 0;

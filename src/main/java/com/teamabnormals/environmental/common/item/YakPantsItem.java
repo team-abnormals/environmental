@@ -9,7 +9,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingTickEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -28,8 +28,8 @@ public class YakPantsItem extends ArmorItem {
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
-	public static void onLivingUpdate(LivingUpdateEvent event) {
-		LivingEntity entity = event.getEntityLiving();
+	public static void onLivingUpdate(LivingTickEvent event) {
+		LivingEntity entity = event.getEntity();
 		ItemStack legsStack = entity.getItemBySlot(EquipmentSlot.LEGS);
 		boolean wearingPants = legsStack.getItem() instanceof YakPantsItem;
 

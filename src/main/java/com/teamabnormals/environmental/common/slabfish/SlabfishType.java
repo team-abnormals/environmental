@@ -7,7 +7,6 @@ import com.teamabnormals.environmental.common.slabfish.condition.SlabfishConditi
 import com.teamabnormals.environmental.core.Environmental;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.LazyLoadedValue;
 import net.minecraftforge.api.distmarker.Dist;
@@ -90,7 +89,7 @@ public class SlabfishType implements Predicate<SlabfishConditionContext> {
 	SlabfishType setRegistryName(ResourceLocation registryName) {
 		this.registryName = registryName;
 		if (this.displayName == null)
-			this.displayName = new TextComponent(registryName.toString());
+			this.displayName = Component.literal(registryName.toString());
 		return this;
 	}
 

@@ -4,7 +4,6 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.teamabnormals.environmental.common.slabfish.condition.SlabfishCondition.SlabfishConditionFactory;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import java.util.function.BiFunction;
 
@@ -13,7 +12,7 @@ import java.util.function.BiFunction;
  *
  * @author Ocelot
  */
-public class SimpleSlabfishConditionFactory extends ForgeRegistryEntry<SlabfishConditionFactory> implements SlabfishConditionFactory {
+public class SimpleSlabfishConditionFactory implements SlabfishConditionFactory {
 	private final BiFunction<JsonObject, JsonDeserializationContext, SlabfishCondition> jsonDeserializer;
 
 	public SimpleSlabfishConditionFactory(BiFunction<JsonObject, JsonDeserializationContext, SlabfishCondition> jsonDeserializer) {

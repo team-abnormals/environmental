@@ -1,15 +1,15 @@
 {
   "type": "minecraft:crafting_shaped",
   "group": "boat",
-  "pattern": [
-    "# #",
-    "###"
-  ],
   "key": {
     "#": {
       "item": "environmental:cherry_planks"
     }
   },
+  "pattern": [
+    "# #",
+    "###"
+  ],
   "result": {
     "item": "environmental:cherry_boat"
   }

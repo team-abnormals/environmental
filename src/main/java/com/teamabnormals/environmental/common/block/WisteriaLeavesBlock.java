@@ -26,6 +26,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.IForgeShearable;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class WisteriaLeavesBlock extends Block implements IForgeShearable {
 	public static final IntegerProperty DISTANCE = IntegerProperty.create("distance", 1, 8);
@@ -43,7 +44,7 @@ public class WisteriaLeavesBlock extends Block implements IForgeShearable {
 	}
 
 	@Override
-	public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, Random random) {
+	public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
 		if (!state.getValue(PERSISTENT) && state.getValue(DISTANCE) == 8) {
 			dropResources(state, worldIn, pos);
 			worldIn.removeBlock(pos, false);
@@ -51,7 +52,7 @@ public class WisteriaLeavesBlock extends Block implements IForgeShearable {
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, Random random) {
+	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
 		worldIn.setBlock(pos, updateDistance(state, worldIn, pos), 3);
 	}
 
@@ -96,7 +97,7 @@ public class WisteriaLeavesBlock extends Block implements IForgeShearable {
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, Random rand) {
+	public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, RandomSource rand) {
 		if (worldIn.isRainingAt(pos.above())) {
 			if (rand.nextInt(15) == 1) {
 				BlockPos blockpos = pos.below();

@@ -59,6 +59,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -363,22 +364,21 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 				livingentity.awardKillScore(this, this.deathScore, cause);
 			}
 
-			if (entity != null) {
-				entity.killed((ServerLevel) this.level, this);
-			}
-
 			if (this.isSleeping()) {
 				this.stopSleeping();
 			}
 
 			this.dead = true;
 			this.getCombatTracker().recheckStatus();
-			if (!this.level.isClientSide) {
-				this.dropAllDeathLoot(cause);
-				this.createWitherRose(livingentity);
-			}
+			if (this.level instanceof ServerLevel serverLevel) {
+				if (entity == null || entity.wasKilled(serverLevel, this)) {
+					this.gameEvent(GameEvent.ENTITY_DIE);
+					this.dropAllDeathLoot(cause);
+					this.createWitherRose(livingentity);
+				}
 
-			this.level.broadcastEntityEvent(this, (byte) 3);
+				this.level.broadcastEntityEvent(this, (byte) 3);
+			}
 			this.setPose(Pose.DYING);
 		}
 	}

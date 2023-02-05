@@ -4,8 +4,8 @@
     {
       "conditions": [
         {
-          "flag": "golden_apple_crate",
-          "type": "blueprint:quark_flag"
+          "type": "blueprint:quark_flag",
+          "flag": "golden_apple_crate"
         }
       ],
       "recipe": {
@@ -16,8 +16,8 @@
           }
         ],
         "result": {
-          "item": "environmental:truffle",
-          "count": 9
+          "count": 9,
+          "item": "environmental:truffle"
         }
       }
     }

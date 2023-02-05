@@ -56,7 +56,8 @@ public class EnvironmentalItemTagsProvider extends ItemTagsProvider {
 		this.copy(BlockTags.SMALL_FLOWERS, ItemTags.SMALL_FLOWERS);
 		this.copy(BlockTags.TALL_FLOWERS, ItemTags.TALL_FLOWERS);
 		this.copy(BlockTags.STANDING_SIGNS, ItemTags.SIGNS);
-		this.tag(ItemTags.BOATS).add(WILLOW_BOAT.get(), WISTERIA_BOAT.get(), CHERRY_BOAT.get());
+		this.tag(ItemTags.BOATS).add(WILLOW_BOAT.getFirst().get(), WISTERIA_BOAT.getFirst().get(), CHERRY_BOAT.getFirst().get());
+		this.tag(ItemTags.CHEST_BOATS).add(WILLOW_BOAT.getSecond().get(), WISTERIA_BOAT.getSecond().get(), CHERRY_BOAT.getSecond().get());
 		this.tag(ItemTags.MUSIC_DISCS).add(MUSIC_DISC_LEAVING_HOME.get(), MUSIC_DISC_SLABRAVE.get());
 		this.tag(ItemTags.FISHES).add(KOI.get());
 

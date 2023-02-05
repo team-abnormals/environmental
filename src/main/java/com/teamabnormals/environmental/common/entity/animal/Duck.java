@@ -16,6 +16,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -32,8 +33,6 @@ import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-
-import java.util.Random;
 
 public class Duck extends Animal {
 	private static final EntityDataAccessor<Integer> EATING = SynchedEntityData.defineId(Duck.class, EntityDataSerializers.INT);
@@ -161,7 +160,7 @@ public class Duck extends Animal {
 		this.entityData.set(EATING, eatingTimeIn);
 	}
 
-	public static boolean canDuckSpawn(EntityType<? extends Animal> animal, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, Random random) {
+	public static boolean canDuckSpawn(EntityType<? extends Animal> animal, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, RandomSource random) {
 		return worldIn.getBlockState(pos.below()).is(EnvironmentalBlockTags.WATER_ANIMALS_SPAWNABLE_ON) && isBrightEnoughToSpawn(worldIn, pos);
 	}
 
@@ -201,8 +200,8 @@ public class Duck extends Animal {
 	}
 
 	@Override
-	protected int getExperienceReward(Player player) {
-		return this.isDuckJockey() ? 10 : super.getExperienceReward(player);
+	public int getExperienceReward() {
+		return this.isDuckJockey() ? 10 : super.getExperienceReward();
 	}
 
 	@Override
@@ -252,7 +251,7 @@ public class Duck extends Animal {
 		return EnvironmentalEntityTypes.DUCK.get().create(world);
 	}
 
-	public int getRandomNextEggTime(Random rand) {
+	public int getRandomNextEggTime(RandomSource rand) {
 		return rand.nextInt(6000) + 6000;
 	}
 }

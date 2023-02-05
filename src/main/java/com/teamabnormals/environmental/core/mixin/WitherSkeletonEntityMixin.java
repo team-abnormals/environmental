@@ -1,6 +1,7 @@
 package com.teamabnormals.environmental.core.mixin;
 
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -21,8 +22,8 @@ public abstract class WitherSkeletonEntityMixin extends AbstractSkeleton {
 	}
 
 	@Inject(method = "populateDefaultEquipmentSlots", at = @At("TAIL"))
-	private void populateDefaultEquipmentSlots(DifficultyInstance difficulty, CallbackInfo info) {
-		if (Math.random() < 0.025F) {
+	private void populateDefaultEquipmentSlots(RandomSource random, DifficultyInstance difficulty, CallbackInfo info) {
+		if (random.nextFloat() < 0.025F) {
 			this.setItemSlot(EquipmentSlot.HEAD, new ItemStack(EnvironmentalItems.THIEF_HOOD.get()));
 			this.armorDropChances[EquipmentSlot.HEAD.getIndex()] = 1.0F;
 		}

@@ -7,7 +7,7 @@
     }
   ],
   "result": {
-    "item": "environmental:mud_ball",
-    "count": 4
+    "count": 4,
+    "item": "environmental:mud_ball"
   }
 }

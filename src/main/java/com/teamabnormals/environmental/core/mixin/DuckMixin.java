@@ -13,6 +13,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 @Mixin(Duck.class)
 public abstract class DuckMixin extends Animal implements EggLayer {
@@ -48,7 +49,7 @@ public abstract class DuckMixin extends Animal implements EggLayer {
 	}
 
 	@Override
-	public int getNextEggTime(Random rand) {
+	public int getNextEggTime(RandomSource rand) {
 		return ((Duck) (Object) this).getRandomNextEggTime(rand);
 	}
 

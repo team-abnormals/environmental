@@ -13,7 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.IItemRenderProperties;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -30,10 +30,10 @@ public class HealerPouchItem extends ExplorerArmorItem {
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public void initializeClient(Consumer<IItemRenderProperties> consumer) {
-		consumer.accept(new IItemRenderProperties() {
+	public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+		consumer.accept(new IClientItemExtensions() {
 			@Override
-			public HumanoidModel<?> getArmorModel(LivingEntity entity, ItemStack stack, EquipmentSlot slot, HumanoidModel<?> properties) {
+			public HumanoidModel<?> getHumanoidArmorModel(LivingEntity entity, ItemStack stack, EquipmentSlot slot, HumanoidModel<?> properties) {
 				return HealerPouchModel.INSTANCE;
 			}
 		});
@@ -41,12 +41,11 @@ public class HealerPouchItem extends ExplorerArmorItem {
 
 	@SubscribeEvent
 	public static void onEvent(LivingHurtEvent event) {
-		LivingEntity entity = event.getEntityLiving();
+		LivingEntity entity = event.getEntity();
 		ItemStack stack = entity.getItemBySlot(EquipmentSlot.CHEST);
 
 		if (stack.getItem() instanceof HealerPouchItem && event.getSource().getEntity() instanceof LivingEntity) {
-			if (entity instanceof Player) {
-				Player player = (Player) event.getEntityLiving();
+			if (entity instanceof Player player) {
 				if (!player.getCooldowns().isOnCooldown(stack.getItem())) {
 					CompoundTag tag = stack.getOrCreateTag();
 					int increase = ((HealerPouchItem) stack.getItem()).getIncreaseForUses(tag.getInt(NBT_TAG));

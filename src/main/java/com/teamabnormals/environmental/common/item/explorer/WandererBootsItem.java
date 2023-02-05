@@ -16,7 +16,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.IItemRenderProperties;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -34,10 +34,10 @@ public class WandererBootsItem extends ExplorerArmorItem {
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public void initializeClient(Consumer<IItemRenderProperties> consumer) {
-		consumer.accept(new IItemRenderProperties() {
+	public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+		consumer.accept(new IClientItemExtensions() {
 			@Override
-			public HumanoidModel<?> getArmorModel(LivingEntity entity, ItemStack stack, EquipmentSlot slot, HumanoidModel<?> properties) {
+			public HumanoidModel<?> getHumanoidArmorModel(LivingEntity entity, ItemStack stack, EquipmentSlot slot, HumanoidModel<?> properties) {
 				return WandererBootsModel.INSTANCE;
 			}
 		});
@@ -58,7 +58,7 @@ public class WandererBootsItem extends ExplorerArmorItem {
 
 	@SubscribeEvent
 	public static void onFallEvent(LivingFallEvent event) {
-		if (event.getEntityLiving().getItemBySlot(EquipmentSlot.FEET).getItem() == EnvironmentalItems.WANDERER_BOOTS.get() && event.getEntityLiving().fallDistance < 6)
+		if (event.getEntity().getItemBySlot(EquipmentSlot.FEET).getItem() == EnvironmentalItems.WANDERER_BOOTS.get() && event.getEntity().fallDistance < 6)
 			event.setDamageMultiplier(0);
 	}
 

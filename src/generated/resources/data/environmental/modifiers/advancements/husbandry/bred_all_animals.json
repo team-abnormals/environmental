@@ -1,66 +1,64 @@
 {
-  "selector": "minecraft:husbandry/bred_all_animals",
-  "priority": "normal",
   "modifiers": [
     {
       "type": "criteria",
       "config": {
         "criteria": {
-          "environmental:slabfish": {
-            "trigger": "minecraft:bred_animals",
-            "conditions": {
-              "child": [
-                {
-                  "condition": "minecraft:entity_properties",
-                  "predicate": {
-                    "type": "environmental:slabfish"
-                  },
-                  "entity": "this"
-                }
-              ]
-            }
-          },
-          "environmental:duck": {
-            "trigger": "minecraft:bred_animals",
-            "conditions": {
-              "child": [
-                {
-                  "condition": "minecraft:entity_properties",
-                  "predicate": {
-                    "type": "environmental:duck"
-                  },
-                  "entity": "this"
-                }
-              ]
-            }
-          },
           "environmental:deer": {
-            "trigger": "minecraft:bred_animals",
             "conditions": {
               "child": [
                 {
                   "condition": "minecraft:entity_properties",
+                  "entity": "this",
                   "predicate": {
                     "type": "environmental:deer"
-                  },
-                  "entity": "this"
+                  }
                 }
               ]
-            }
+            },
+            "trigger": "minecraft:bred_animals"
           },
-          "environmental:yak": {
-            "trigger": "minecraft:bred_animals",
+          "environmental:duck": {
             "conditions": {
               "child": [
                 {
                   "condition": "minecraft:entity_properties",
+                  "entity": "this",
                   "predicate": {
-                    "type": "environmental:yak"
-                  },
-                  "entity": "this"
+                    "type": "environmental:duck"
+                  }
                 }
               ]
-            }
+            },
+            "trigger": "minecraft:bred_animals"
+          },
+          "environmental:slabfish": {
+            "conditions": {
+              "child": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "type": "environmental:slabfish"
+                  }
+                }
+              ]
+            },
+            "trigger": "minecraft:bred_animals"
+          },
+          "environmental:yak": {
+            "conditions": {
+              "child": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "type": "environmental:yak"
+                  }
+                }
+              ]
+            },
+            "trigger": "minecraft:bred_animals"
           }
         },
         "requirements": [
@@ -80,5 +78,7 @@
         "should_replace_requirements": false
       }
     }
-  ]
+  ],
+  "priority": "normal",
+  "selector": "minecraft:husbandry/bred_all_animals"
 }

@@ -12,6 +12,7 @@ import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
@@ -21,7 +22,6 @@ import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 /**
  * <p>Super hack that selects models for slabfish buckets based </p>
@@ -38,7 +38,7 @@ public class SlabfishBucketModel implements BakedModel {
 	}
 
 	@Override
-	public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, Random rand) {
+	public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, RandomSource rand) {
 		return this.model.getQuads(state, side, rand);
 	}
 
@@ -83,7 +83,7 @@ public class SlabfishBucketModel implements BakedModel {
 			this.model = modelManager.getModel(new ResourceLocation(Environmental.MOD_ID, "item/slabfish_bucket/swamp"));
 			this.locationCache = new HashMap<>();
 			this.modelLocations = new HashMap<>();
-			for (ResourceLocation location : Minecraft.getInstance().getResourceManager().listResources("models/item/slabfish_bucket", s -> s.endsWith(".json")))
+			for (ResourceLocation location : Minecraft.getInstance().getResourceManager().listResources("models/item/slabfish_bucket", s -> s.getPath().endsWith(".json")).keySet())
 				this.modelLocations.put(new ResourceLocation(location.getNamespace(), location.getPath().substring("models/item/slabfish_bucket/".length(), location.getPath().length() - ".json".length())), new ResourceLocation(location.getNamespace(), location.getPath().substring("models/".length(), location.getPath().length() - ".json".length())));
 		}
 

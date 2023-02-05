@@ -4,7 +4,7 @@ import com.teamabnormals.environmental.common.entity.animal.slabfish.SlabfishRar
 import com.teamabnormals.environmental.common.slabfish.condition.SlabfishCondition;
 import com.teamabnormals.environmental.common.slabfish.condition.SlabfishConditionContext;
 import com.teamabnormals.environmental.core.Environmental;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -13,6 +13,7 @@ import net.minecraftforge.fml.LogicalSide;
 
 import java.util.Optional;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 import java.util.function.Predicate;
 
 /**
@@ -24,7 +25,7 @@ public interface SlabfishManager {
 	/**
 	 * The default slabfish that exists if there are no other slabfish types to choose from.
 	 */
-	SlabfishType DEFAULT_SLABFISH = new SlabfishType(new ResourceLocation(Environmental.MOD_ID, "swamp"), SlabfishRarity.COMMON, new TranslatableComponent("entity." + Environmental.MOD_ID + ".slabfish.type.swamp"), null, false, true, true, -1, new SlabfishCondition[0]);
+	SlabfishType DEFAULT_SLABFISH = new SlabfishType(new ResourceLocation(Environmental.MOD_ID, "swamp"), SlabfishRarity.COMMON, Component.translatable("entity." + Environmental.MOD_ID + ".slabfish.type.swamp"), null, false, true, true, -1, new SlabfishCondition[0]);
 
 	/**
 	 * The default sweater that exists if there are no other sweater types to choose from.
@@ -127,7 +128,7 @@ public interface SlabfishManager {
 	 * @param random    The random to use for the index
 	 * @return A random slabfish type by that rarity or {@link #DEFAULT_SLABFISH} if there were no results
 	 */
-	Optional<SlabfishType> getRandomSlabfishType(Predicate<SlabfishType> predicate, Random random);
+	Optional<SlabfishType> getRandomSlabfishType(Predicate<SlabfishType> predicate, RandomSource random);
 
 //    /**
 //     * Checks the sweater types for a sweater under the specified registry name.

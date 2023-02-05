@@ -5,9 +5,13 @@ import com.teamabnormals.environmental.common.network.message.SSyncSlabfishTypeM
 import com.teamabnormals.environmental.common.network.message.SSyncSweaterTypeMessage;
 import com.teamabnormals.environmental.common.slabfish.condition.SlabfishConditionContext;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -90,7 +94,7 @@ public final class ClientSlabfishManager implements SlabfishManager {
 	}
 
 	@Override
-	public Optional<SlabfishType> getRandomSlabfishType(Predicate<SlabfishType> predicate, Random random) {
+	public Optional<SlabfishType> getRandomSlabfishType(Predicate<SlabfishType> predicate, RandomSource random) {
 		throw new UnsupportedOperationException("Client does not have access to select random slabfish");
 	}
 

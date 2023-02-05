@@ -4,12 +4,11 @@ import com.teamabnormals.environmental.core.Environmental;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.syncher.EntityDataSerializer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.registries.DataSerializerEntry;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries.Keys;
 
 public class EnvironmentalDataSerializers {
-	public static final DeferredRegister<DataSerializerEntry> DATA_SERIALIZERS = DeferredRegister.create(Keys.DATA_SERIALIZERS, Environmental.MOD_ID);
+	public static final DeferredRegister<EntityDataSerializer<?>> DATA_SERIALIZERS = DeferredRegister.create(Keys.ENTITY_DATA_SERIALIZERS, Environmental.MOD_ID);
 
 	public static final EntityDataSerializer<ResourceLocation> RESOURCE_LOCATION = new EntityDataSerializer<>() {
 		@Override
@@ -29,6 +28,6 @@ public class EnvironmentalDataSerializers {
 	};
 
 	static {
-		DATA_SERIALIZERS.register("resource_location", () -> new DataSerializerEntry(RESOURCE_LOCATION));
+		DATA_SERIALIZERS.register("resource_location", () -> RESOURCE_LOCATION);
 	}
 }

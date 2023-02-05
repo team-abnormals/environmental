@@ -11,6 +11,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.LazyLoadedValue;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
@@ -23,7 +24,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 /**
  * <p>A context used for determining what kinds of slabfish can be spawned.</p>
@@ -32,7 +32,7 @@ import java.util.Random;
  */
 public class SlabfishConditionContext {
 	private final Event event;
-	private final LazyLoadedValue<Random> random;
+	private final LazyLoadedValue<RandomSource> random;
 	private final LazyLoadedValue<String> name;
 	private final LazyLoadedValue<BlockPos> pos;
 	private final LazyLoadedValue<Holder<Biome>> biome;
@@ -124,7 +124,7 @@ public class SlabfishConditionContext {
 	/**
 	 * @return The slabfish world random number generator
 	 */
-	public Random getRandom() {
+	public RandomSource getRandom() {
 		return this.random.get();
 	}
 

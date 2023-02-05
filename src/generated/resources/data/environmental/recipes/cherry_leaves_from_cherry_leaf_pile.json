@@ -1,15 +1,15 @@
 {
   "type": "minecraft:crafting_shaped",
   "group": "leaves",
-  "pattern": [
-    "##",
-    "##"
-  ],
   "key": {
     "#": {
       "item": "environmental:cherry_leaf_pile"
     }
   },
+  "pattern": [
+    "##",
+    "##"
+  ],
   "result": {
     "item": "environmental:cherry_leaves"
   }

@@ -11,6 +11,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -42,7 +43,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeHooks;
 
 import javax.annotation.Nullable;
-import java.util.Random;
 
 public class DoubleCattailBlock extends Block implements BonemealableBlock, SimpleWaterloggedBlock {
 	public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
@@ -114,7 +114,7 @@ public class DoubleCattailBlock extends Block implements BonemealableBlock, Simp
 		if (!flag && player.getItemInHand(handIn).getItem() == Items.BONE_MEAL) {
 			return InteractionResult.PASS;
 		} else if (i > 0) {
-			Random rand = new Random();
+			RandomSource rand = RandomSource.create();
 			int j = 1 + rand.nextInt(3);
 			popResource(worldIn, pos, new ItemStack(EnvironmentalBlocks.CATTAIL_SPROUTS.get(), j));
 			worldIn.playSound(null, pos, EnvironmentalSoundEvents.CATTAIL_PICK_SEEDS.get(), SoundSource.BLOCKS, 1.0F, 0.8F + worldIn.random.nextFloat() * 0.4F);
@@ -136,7 +136,7 @@ public class DoubleCattailBlock extends Block implements BonemealableBlock, Simp
 	}
 
 	@Override
-	public void performBonemeal(ServerLevel worldIn, Random rand, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel worldIn, RandomSource rand, BlockPos pos, BlockState state) {
 		int i = state.getValue(AGE);
 		if (i < 1) {
 			worldIn.setBlockAndUpdate(pos, state.setValue(AGE, i + 1));
@@ -150,7 +150,7 @@ public class DoubleCattailBlock extends Block implements BonemealableBlock, Simp
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, Random random) {
+	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
 		super.tick(state, worldIn, pos, random);
 		int i = state.getValue(AGE);
 		if (state.getValue(HALF) == DoubleBlockHalf.UPPER && i < 1 && state.getValue(FAKE_WATERLOGGED) && !state.getValue(WATERLOGGED) && worldIn.getBlockState(pos.below().below()).is(BlockTags.DIRT) && worldIn.getRawBrightness(pos.above(), 0) >= 9 && ForgeHooks.onCropsGrowPre(worldIn, pos, state, random.nextInt(15) == 0)) {
@@ -241,7 +241,7 @@ public class DoubleCattailBlock extends Block implements BonemealableBlock, Simp
 	}
 
 	@Override
-	public boolean isBonemealSuccess(Level worldIn, Random rand, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(Level worldIn, RandomSource rand, BlockPos pos, BlockState state) {
 		boolean upper = state.getValue(HALF) == DoubleBlockHalf.UPPER;
 		return state.getValue(AGE) < 1 && state.getValue(FAKE_WATERLOGGED) && (upper ? !state.getValue(WATERLOGGED) : !worldIn.getBlockState(pos.above()).getValue(WATERLOGGED));
 	}
@@ -249,11 +249,6 @@ public class DoubleCattailBlock extends Block implements BonemealableBlock, Simp
 	@Override
 	public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos) {
 		return true;
-	}
-
-	@Override
-	public Block.OffsetType getOffsetType() {
-		return Block.OffsetType.XZ;
 	}
 
 	@Override

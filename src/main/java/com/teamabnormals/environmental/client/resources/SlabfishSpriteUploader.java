@@ -8,7 +8,7 @@ import net.minecraft.client.resources.TextureAtlasHolder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ReloadableResourceManager;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 
@@ -31,7 +31,7 @@ public final class SlabfishSpriteUploader extends TextureAtlasHolder {
 	@Override
 	protected Stream<ResourceLocation> getResourcesToLoad() {
 		ResourceManager resourceManager = Minecraft.getInstance().getResourceManager();
-		return resourceManager.listResources("textures/entity/slabfish", file -> file.endsWith(".png")).stream().map(location -> new ResourceLocation(location.getNamespace(), location.getPath().substring("textures/entity/slabfish/".length(), location.getPath().length() - 4)));
+		return resourceManager.listResources("textures/entity/slabfish", file -> file.getPath().endsWith(".png")).keySet().stream().map(location -> new ResourceLocation(location.getNamespace(), location.getPath().substring("textures/entity/slabfish/".length(), location.getPath().length() - 4)));
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public final class SlabfishSpriteUploader extends TextureAtlasHolder {
 	 * @param bus The bus to register on
 	 */
 	public static void init(IEventBus bus) {
-		bus.addListener(EventPriority.NORMAL, false, ColorHandlerEvent.Block.class, event ->
+		bus.addListener(EventPriority.NORMAL, false, RegisterColorHandlersEvent.Block.class, event ->
 		{
 			spriteUploader = new SlabfishSpriteUploader(Minecraft.getInstance().getTextureManager());
 			ResourceManager resourceManager = Minecraft.getInstance().getResourceManager();

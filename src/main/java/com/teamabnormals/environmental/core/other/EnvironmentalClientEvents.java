@@ -5,7 +5,7 @@ import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.RenderNameplateEvent;
+import net.minecraftforge.client.event.RenderNameTagEvent;
 import net.minecraftforge.eventbus.api.Event.Result;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 public class EnvironmentalClientEvents {
 
 	@SubscribeEvent
-	public static void renderNameplate(RenderNameplateEvent event) {
+	public static void renderNameplate(RenderNameTagEvent event) {
 		if (event.getEntity() instanceof LivingEntity entity) {
 			if (entity.getItemBySlot(EquipmentSlot.HEAD).getItem() == EnvironmentalItems.THIEF_HOOD.get()) {
 				event.setResult(Result.DENY);

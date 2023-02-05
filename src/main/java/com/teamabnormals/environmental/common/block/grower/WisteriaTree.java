@@ -10,6 +10,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nullable;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class WisteriaTree extends AbstractTreeGrower {
 	private final WisteriaColor color;
@@ -19,7 +20,7 @@ public class WisteriaTree extends AbstractTreeGrower {
 	}
 
 	@Nullable
-	protected Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(Random random, boolean beehive) {
+	protected Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource random, boolean beehive) {
 		return this.getFeatureForColor(this.color, beehive).getHolder().get();
 	}
 

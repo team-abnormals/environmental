@@ -4,22 +4,22 @@
     {
       "conditions": [
         {
-          "modid": "incubation",
-          "type": "forge:mod_loaded"
+          "type": "forge:mod_loaded",
+          "modid": "incubation"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "###",
-          "###",
-          "###"
-        ],
         "key": {
           "#": {
             "item": "environmental:duck_egg"
           }
         },
+        "pattern": [
+          "###",
+          "###",
+          "###"
+        ],
         "result": {
           "item": "environmental:duck_egg_crate"
         }

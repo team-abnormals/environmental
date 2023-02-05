@@ -4,8 +4,8 @@
     {
       "conditions": [
         {
-          "flag": "berry_sack",
-          "type": "blueprint:quark_flag"
+          "type": "blueprint:quark_flag",
+          "flag": "berry_sack"
         }
       ],
       "recipe": {
@@ -16,8 +16,8 @@
           }
         ],
         "result": {
-          "item": "environmental:cattail_seeds",
-          "count": 9
+          "count": 9,
+          "item": "environmental:cattail_seeds"
         }
       }
     }

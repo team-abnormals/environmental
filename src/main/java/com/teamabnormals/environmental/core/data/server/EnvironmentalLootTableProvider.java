@@ -174,7 +174,7 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.dropSelf(STRIPPED_WILLOW_POST.get());
 			this.dropSelf(WILLOW_HEDGE.get());
 			this.dropSelf(WILLOW_LEAF_CARPET.get());
-			this.add(WILLOW_LEAF_PILE.get(), EnvironmentalBlockLoot::createGlowLichenDrops);
+			this.add(WILLOW_LEAF_PILE.get(), EnvironmentalBlockLoot::createLeafPileDrops);
 			this.dropSelf(WILLOW_SAPLING.get());
 			this.dropPottedContents(POTTED_WILLOW_SAPLING.get());
 			this.dropSelf(WILLOW_LADDER.get());
@@ -206,7 +206,7 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.dropSelf(STRIPPED_CHERRY_POST.get());
 			this.dropSelf(CHERRY_HEDGE.get());
 			this.dropSelf(CHERRY_LEAF_CARPET.get());
-			this.add(CHERRY_LEAF_PILE.get(), EnvironmentalBlockLoot::createGlowLichenDrops);
+			this.add(CHERRY_LEAF_PILE.get(), EnvironmentalBlockLoot::createLeafPileDrops);
 			this.dropSelf(CHERRY_SAPLING.get());
 			this.dropPottedContents(POTTED_CHERRY_SAPLING.get());
 			this.dropSelf(CHERRY_LADDER.get());
@@ -243,10 +243,10 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.dropSelf(BLUE_WISTERIA_LEAF_CARPET.get());
 			this.dropSelf(PURPLE_WISTERIA_LEAF_CARPET.get());
 			this.dropSelf(WHITE_WISTERIA_LEAF_CARPET.get());
-			this.add(PINK_WISTERIA_LEAF_PILE.get(), EnvironmentalBlockLoot::createGlowLichenDrops);
-			this.add(BLUE_WISTERIA_LEAF_PILE.get(), EnvironmentalBlockLoot::createGlowLichenDrops);
-			this.add(PURPLE_WISTERIA_LEAF_PILE.get(), EnvironmentalBlockLoot::createGlowLichenDrops);
-			this.add(WHITE_WISTERIA_LEAF_PILE.get(), EnvironmentalBlockLoot::createGlowLichenDrops);
+			this.add(PINK_WISTERIA_LEAF_PILE.get(), EnvironmentalBlockLoot::createLeafPileDrops);
+			this.add(BLUE_WISTERIA_LEAF_PILE.get(), EnvironmentalBlockLoot::createLeafPileDrops);
+			this.add(PURPLE_WISTERIA_LEAF_PILE.get(), EnvironmentalBlockLoot::createLeafPileDrops);
+			this.add(WHITE_WISTERIA_LEAF_PILE.get(), EnvironmentalBlockLoot::createLeafPileDrops);
 
 			this.dropSelf(PINK_WISTERIA_SAPLING.get());
 			this.dropSelf(BLUE_WISTERIA_SAPLING.get());
@@ -282,9 +282,9 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			return createLeavesDrops(block, sapling, saplingChances).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(HAS_NO_SHEARS_OR_SILK_TOUCH).add(applyExplosionDecay(block, LootItem.lootTableItem(EnvironmentalItems.CHERRIES.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, 0.05F, 0.055555557F, 0.0625F, 0.08333334F, 0.25F))));
 		}
 
-//		protected static LootTable.Builder createLeafPileDrops(Block block) {
-//			return createMultifaceBlockDrops(block, MatchTool.toolMatches(ItemPredicate.Builder.item().of(Tags.Items.SHEARS)));
-//		}
+		protected static LootTable.Builder createLeafPileDrops(Block block) {
+			return createMultifaceBlockDrops(block, MatchTool.toolMatches(ItemPredicate.Builder.item().of(Tags.Items.SHEARS)));
+		}
 
 		protected static LootTable.Builder createVerticalSlabItemTable(Block block) {
 			return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(applyExplosionDecay(block, LootItem.lootTableItem(block).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(VerticalSlabBlock.TYPE, VerticalSlabType.DOUBLE)))))));
@@ -318,7 +318,7 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 
 		@Override
 		public Iterable<EntityType<?>> getKnownEntities() {
-			return ForgeRegistries.ENTITIES.getValues().stream().filter(entity -> ForgeRegistries.ENTITIES.getKey(entity).getNamespace().equals(Environmental.MOD_ID)).collect(Collectors.toSet());
+			return ForgeRegistries.ENTITY_TYPES.getValues().stream().filter(entity -> ForgeRegistries.ENTITY_TYPES.getKey(entity).getNamespace().equals(Environmental.MOD_ID)).collect(Collectors.toSet());
 		}
 	}
 }

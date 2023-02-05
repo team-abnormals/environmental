@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 @Mixin(WaterlilyBlock.class)
 public class LilyPadBlockMixin extends Block implements BonemealableBlock {
@@ -28,12 +29,12 @@ public class LilyPadBlockMixin extends Block implements BonemealableBlock {
 	}
 
 	@Override
-	public boolean isBonemealSuccess(Level worldIn, Random rand, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(Level worldIn, RandomSource rand, BlockPos pos, BlockState state) {
 		return true;
 	}
 
 	@Override
-	public void performBonemeal(ServerLevel worldIn, Random rand, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel worldIn, RandomSource rand, BlockPos pos, BlockState state) {
 		if (rand.nextInt(3) == 0) {
 			if (rand.nextBoolean()) {
 				if (LargeLilyPadBlock.checkPositions(worldIn, pos, EnvironmentalBlocks.LARGE_LILY_PAD.get().defaultBlockState())) {

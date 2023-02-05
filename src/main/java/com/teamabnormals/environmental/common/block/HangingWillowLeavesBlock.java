@@ -26,6 +26,7 @@ import net.minecraftforge.common.IForgeShearable;
 
 import javax.annotation.Nullable;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class HangingWillowLeavesBlock extends Block implements IForgeShearable {
 	protected static final VoxelShape SHAPE = Block.box(2.0, 7.0, 2.0, 14.0, 16.0, 14.0);
@@ -61,7 +62,7 @@ public class HangingWillowLeavesBlock extends Block implements IForgeShearable {
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, Random rand) {
+	public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, RandomSource rand) {
 		if (worldIn.isRainingAt(pos.above())) {
 			if (rand.nextInt(15) == 1) {
 				BlockPos blockpos = pos.below();

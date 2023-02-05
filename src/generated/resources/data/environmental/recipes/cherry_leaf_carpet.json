@@ -4,24 +4,24 @@
     {
       "conditions": [
         {
-          "flag": "leaf_carpet",
-          "type": "blueprint:quark_flag"
+          "type": "blueprint:quark_flag",
+          "flag": "leaf_carpet"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
         "group": "leaf_carpet",
-        "pattern": [
-          "##"
-        ],
         "key": {
           "#": {
             "item": "environmental:cherry_leaves"
           }
         },
+        "pattern": [
+          "##"
+        ],
         "result": {
-          "item": "environmental:cherry_leaf_carpet",
-          "count": 3
+          "count": 3,
+          "item": "environmental:cherry_leaf_carpet"
         }
       }
     }

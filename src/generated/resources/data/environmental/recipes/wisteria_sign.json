@@ -1,11 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
   "group": "wooden_sign",
-  "pattern": [
-    "###",
-    "###",
-    " X "
-  ],
   "key": {
     "#": {
       "item": "environmental:wisteria_planks"
@@ -14,8 +9,13 @@
       "item": "minecraft:stick"
     }
   },
+  "pattern": [
+    "###",
+    "###",
+    " X "
+  ],
   "result": {
-    "item": "environmental:wisteria_sign",
-    "count": 3
+    "count": 3,
+    "item": "environmental:wisteria_sign"
   }
 }

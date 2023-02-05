@@ -30,6 +30,7 @@ import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -41,7 +42,6 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.network.HandshakeHandler;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
@@ -100,7 +100,6 @@ public class Environmental {
 		event.enqueueWork(() -> {
 			EnvironmentalCompat.registerCompat();
 			EnvironmentalEntityTypes.registerSpawns();
-			EnvironmentalBiomes.addBiomeTypes();
 			EnvironmentalVillagers.registerVillagerTypes();
 			EnvironmentalMobEffects.registerBrewingRecipes();
 		});
@@ -117,20 +116,19 @@ public class Environmental {
 		DataGenerator generator = event.getGenerator();
 		ExistingFileHelper helper = event.getExistingFileHelper();
 
-		if (event.includeServer()) {
-			EnvironmentalBlockTagsProvider blockTags = new EnvironmentalBlockTagsProvider(generator, helper);
-			generator.addProvider(blockTags);
-			generator.addProvider(new EnvironmentalItemTagsProvider(generator, blockTags, helper));
-			generator.addProvider(new EnvironmentalEntityTypeTagsProvider(generator, helper));
-			generator.addProvider(new EnvironmentalStructureTagsProvider(generator, helper));
-			generator.addProvider(new EnvironmentalBiomeTagsProvider(generator, helper));
-			generator.addProvider(new EnvironmentalRecipeProvider(generator));
-			generator.addProvider(new EnvironmentalAdvancementModifierProvider(generator));
-			generator.addProvider(new EnvironmentalModdedBiomeSliceProvider(generator));
-			generator.addProvider(new EnvironmentalLootTableProvider(generator));
-			generator.addProvider(new EnvironmentalLootModifierProvider(generator));
-			//generator.addProvider(new SlabfishProvider(generator, MOD_ID, existingFileHelper));
-		}
+		boolean includeServer = event.includeServer();
+		EnvironmentalBlockTagsProvider blockTags = new EnvironmentalBlockTagsProvider(generator, helper);
+		generator.addProvider(includeServer, blockTags);
+		generator.addProvider(includeServer, new EnvironmentalItemTagsProvider(generator, blockTags, helper));
+		generator.addProvider(includeServer, new EnvironmentalEntityTypeTagsProvider(generator, helper));
+		generator.addProvider(includeServer, new EnvironmentalStructureTagsProvider(generator, helper));
+		generator.addProvider(includeServer, new EnvironmentalBiomeTagsProvider(generator, helper));
+		generator.addProvider(includeServer, new EnvironmentalRecipeProvider(generator));
+		generator.addProvider(includeServer, new EnvironmentalAdvancementModifierProvider(generator));
+		generator.addProvider(includeServer, new EnvironmentalModdedBiomeSliceProvider(generator));
+		generator.addProvider(includeServer, new EnvironmentalLootTableProvider(generator));
+		generator.addProvider(includeServer, new EnvironmentalLootModifierProvider(generator));
+		//generator.addProvider(new SlabfishProvider(generator, MOD_ID, existingFileHelper));
 	}
 
 	private void setupPlayMessages() {
@@ -141,10 +139,10 @@ public class Environmental {
 	}
 
 	private void setupLoginMessages() {
-		LOGIN.messageBuilder(CAcknowledgeEnvironmentalMessage.class, 99, NetworkDirection.LOGIN_TO_SERVER).loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex).encoder(CAcknowledgeEnvironmentalMessage::serialize).decoder(CAcknowledgeEnvironmentalMessage::deserialize).consumer(HandshakeHandler.indexFirst(CAcknowledgeEnvironmentalMessage::handle)).add();
-		LOGIN.messageBuilder(SSyncSlabfishTypeMessage.class, 0, NetworkDirection.LOGIN_TO_CLIENT).loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex).encoder(SSyncSlabfishTypeMessage::serialize).decoder(SSyncSlabfishTypeMessage::deserialize).markAsLoginPacket().consumer(HandshakeHandler.biConsumerFor((__, msg, ctx) -> SSyncSlabfishTypeMessage.handleLogin(msg, ctx))).add();
-		LOGIN.messageBuilder(SSyncSweaterTypeMessage.class, 1, NetworkDirection.LOGIN_TO_CLIENT).loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex).encoder(SSyncSweaterTypeMessage::serialize).decoder(SSyncSweaterTypeMessage::deserialize).markAsLoginPacket().consumer(HandshakeHandler.biConsumerFor((__, msg, ctx) -> SSyncSweaterTypeMessage.handleLogin(msg, ctx))).add();
-		LOGIN.messageBuilder(SSyncBackpackTypeMessage.class, 2, NetworkDirection.LOGIN_TO_CLIENT).loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex).encoder(SSyncBackpackTypeMessage::serialize).decoder(SSyncBackpackTypeMessage::deserialize).markAsLoginPacket().consumer(HandshakeHandler.biConsumerFor((__, msg, ctx) -> SSyncBackpackTypeMessage.handleLogin(msg, ctx))).add();
+		LOGIN.messageBuilder(CAcknowledgeEnvironmentalMessage.class, 99, NetworkDirection.LOGIN_TO_SERVER).loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex).encoder(CAcknowledgeEnvironmentalMessage::serialize).decoder(CAcknowledgeEnvironmentalMessage::deserialize).consumerMainThread(HandshakeHandler.indexFirst(CAcknowledgeEnvironmentalMessage::handle)).add();
+		LOGIN.messageBuilder(SSyncSlabfishTypeMessage.class, 0, NetworkDirection.LOGIN_TO_CLIENT).loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex).encoder(SSyncSlabfishTypeMessage::serialize).decoder(SSyncSlabfishTypeMessage::deserialize).markAsLoginPacket().consumerMainThread(HandshakeHandler.biConsumerFor((__, msg, ctx) -> SSyncSlabfishTypeMessage.handleLogin(msg, ctx))).add();
+		LOGIN.messageBuilder(SSyncSweaterTypeMessage.class, 1, NetworkDirection.LOGIN_TO_CLIENT).loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex).encoder(SSyncSweaterTypeMessage::serialize).decoder(SSyncSweaterTypeMessage::deserialize).markAsLoginPacket().consumerMainThread(HandshakeHandler.biConsumerFor((__, msg, ctx) -> SSyncSweaterTypeMessage.handleLogin(msg, ctx))).add();
+		LOGIN.messageBuilder(SSyncBackpackTypeMessage.class, 2, NetworkDirection.LOGIN_TO_CLIENT).loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex).encoder(SSyncBackpackTypeMessage::serialize).decoder(SSyncBackpackTypeMessage::deserialize).markAsLoginPacket().consumerMainThread(HandshakeHandler.biConsumerFor((__, msg, ctx) -> SSyncBackpackTypeMessage.handleLogin(msg, ctx))).add();
 	}
 
 	private void stitchTextures(TextureStitchEvent.Pre event) {

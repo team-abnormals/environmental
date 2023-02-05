@@ -18,7 +18,7 @@ import java.util.function.Supplier;
  */
 public class EnvironmentalSlabfishConditions {
 	public static final DeferredRegister<SlabfishConditionFactory> SLABFISH_CONDITIONS = DeferredRegister.create(new ResourceLocation(Environmental.MOD_ID, "slabfish_condition"), Environmental.MOD_ID);
-	public static final Supplier<IForgeRegistry<SlabfishConditionFactory>> SLABFISH_CONDITIONS_REGISTRY = SLABFISH_CONDITIONS.makeRegistry(SlabfishConditionFactory.class, () -> new RegistryBuilder<SlabfishConditionFactory>().setType(SlabfishConditionFactory.class).setDefaultKey(new ResourceLocation(Environmental.MOD_ID, "impossible")));
+	public static final Supplier<IForgeRegistry<SlabfishConditionFactory>> SLABFISH_CONDITIONS_REGISTRY = SLABFISH_CONDITIONS.makeRegistry(() -> new RegistryBuilder<SlabfishConditionFactory>().setDefaultKey(new ResourceLocation(Environmental.MOD_ID, "impossible")));
 
 	public static final RegistryObject<SimpleSlabfishConditionFactory> IMPOSSIBLE = SLABFISH_CONDITIONS.register("impossible", () -> new SimpleSlabfishConditionFactory(SlabfishImpossibleCondition::deserialize));
 	public static final RegistryObject<SimpleSlabfishConditionFactory> AND = SLABFISH_CONDITIONS.register("and", () -> new SimpleSlabfishConditionFactory(SlabfishAndCondition::deserialize));

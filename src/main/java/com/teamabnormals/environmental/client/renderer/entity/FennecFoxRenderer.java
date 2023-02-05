@@ -17,7 +17,7 @@ public class FennecFoxRenderer extends MobRenderer<FennecFox, FennecFoxModel<Fen
 
 	public FennecFoxRenderer(EntityRendererProvider.Context context) {
 		super(context, new FennecFoxModel<>(context.bakeLayer(EnvironmentalModelLayers.FENNEC_FOX)), 0.4F);
-		this.addLayer(new FennecFoxHeldItemLayer(this));
+		this.addLayer(new FennecFoxHeldItemLayer(this, context.getItemInHandRenderer()));
 	}
 
 	protected void setupRotations(FennecFox entity, PoseStack stack, float ageInTicks, float rotationYaw, float partialTicks) {

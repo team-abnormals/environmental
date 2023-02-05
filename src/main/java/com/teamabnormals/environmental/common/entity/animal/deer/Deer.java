@@ -44,6 +44,7 @@ import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class Deer extends AbstractDeer {
 	private static final EntityDataAccessor<Integer> DEER_COAT_COLOR = SynchedEntityData.defineId(Deer.class, EntityDataSerializers.INT);
@@ -267,7 +268,7 @@ public class Deer extends AbstractDeer {
 		}
 
 		((ServerLevel) this.level).sendParticles(ParticleTypes.HAPPY_VILLAGER, (double) blockpos.getX() + 0.5D, (double) blockpos.getY() + 0.5D, (double) blockpos.getZ() + 0.5D, 0, 0.0D, 0.0D, 0.0D, 0.0D);
-		Random random = this.level.getRandom();
+		RandomSource random = this.level.getRandom();
 
 		for (int i = 0; i < amount; ++i) {
 			double d2 = random.nextGaussian() * 0.02D;

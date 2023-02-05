@@ -30,6 +30,7 @@ import net.minecraftforge.common.ForgeHooks;
 
 import javax.annotation.Nullable;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class CattailBlock extends BushBlock implements SimpleWaterloggedBlock, BonemealableBlock {
 	protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
@@ -84,7 +85,7 @@ public class CattailBlock extends BushBlock implements SimpleWaterloggedBlock, B
 		return this.defaultBlockState().setValue(WATERLOGGED, flag);
 	}
 
-	public void performBonemeal(ServerLevel worldIn, Random rand, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel worldIn, RandomSource rand, BlockPos pos, BlockState state) {
 		DoubleCattailBlock doubleplantblock = (DoubleCattailBlock) (EnvironmentalBlocks.TALL_CATTAIL.get());
 		FluidState ifluidstateUp = worldIn.getFluidState(pos.above());
 		if (doubleplantblock.defaultBlockState().canSurvive(worldIn, pos) && (worldIn.isEmptyBlock(pos.above()) || (ifluidstateUp.is(FluidTags.WATER) && ifluidstateUp.getAmount() == 8))) {
@@ -93,7 +94,7 @@ public class CattailBlock extends BushBlock implements SimpleWaterloggedBlock, B
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, Random random) {
+	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
 		super.tick(state, worldIn, pos, random);
 		if (worldIn.getRawBrightness(pos.above(), 0) >= 9 && state.getValue(WATERLOGGED) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, random.nextInt(15) == 0)) {
 			DoubleCattailBlock tallCattail = (DoubleCattailBlock) (EnvironmentalBlocks.TALL_CATTAIL.get());
@@ -137,7 +138,7 @@ public class CattailBlock extends BushBlock implements SimpleWaterloggedBlock, B
 	}
 
 	@Override
-	public boolean isBonemealSuccess(Level worldIn, Random rand, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(Level worldIn, RandomSource rand, BlockPos pos, BlockState state) {
 		return true;
 	}
 }

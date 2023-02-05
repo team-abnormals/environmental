@@ -1,20 +1,18 @@
 {
-  "selector": "minecraft:husbandry/fishy_business",
-  "priority": "normal",
   "modifiers": [
     {
       "type": "criteria",
       "config": {
         "criteria": {
           "environmental:koi": {
-            "trigger": "minecraft:fishing_rod_hooked",
             "conditions": {
               "item": {
                 "items": [
                   "environmental:koi"
                 ]
               }
-            }
+            },
+            "trigger": "minecraft:fishing_rod_hooked"
           }
         },
         "indexed_requirements": [
@@ -28,5 +26,7 @@
         ]
       }
     }
-  ]
+  ],
+  "priority": "normal",
+  "selector": "minecraft:husbandry/fishy_business"
 }

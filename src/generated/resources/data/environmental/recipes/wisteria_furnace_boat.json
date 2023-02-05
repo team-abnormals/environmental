@@ -4,25 +4,25 @@
     {
       "conditions": [
         {
-          "modid": "boatload",
-          "type": "forge:mod_loaded"
+          "type": "forge:mod_loaded",
+          "modid": "boatload"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
         "group": "furnace_boat",
+        "key": {
+          "B": {
+            "item": "environmental:wisteria_boat"
+          },
+          "F": {
+            "item": "minecraft:furnace"
+          }
+        },
         "pattern": [
           "F",
           "B"
         ],
-        "key": {
-          "F": {
-            "item": "minecraft:furnace"
-          },
-          "B": {
-            "item": "environmental:wisteria_boat"
-          }
-        },
         "result": {
           "item": "environmental:wisteria_furnace_boat"
         }

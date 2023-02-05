@@ -4,22 +4,22 @@
     {
       "conditions": [
         {
-          "flag": "apple_crate",
-          "type": "blueprint:quark_flag"
+          "type": "blueprint:quark_flag",
+          "flag": "apple_crate"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "###",
-          "###",
-          "###"
-        ],
         "key": {
           "#": {
             "item": "environmental:cherries"
           }
         },
+        "pattern": [
+          "###",
+          "###",
+          "###"
+        ],
         "result": {
           "item": "environmental:cherry_crate"
         }

@@ -7,11 +7,12 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 
 import javax.annotation.Nullable;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class CherryTreeGrower extends AbstractTreeGrower {
 
 	@Nullable
-	protected Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(Random random, boolean beehive) {
+	protected Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource random, boolean beehive) {
 		return beehive ? EnvironmentalConfiguredFeatures.CHERRY_BEES_005.getHolder().get() : EnvironmentalConfiguredFeatures.CHERRY.getHolder().get();
 	}
 }

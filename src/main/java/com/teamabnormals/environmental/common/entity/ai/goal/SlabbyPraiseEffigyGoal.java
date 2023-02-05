@@ -13,6 +13,7 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.EnumSet;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class SlabbyPraiseEffigyGoal extends Goal {
 	private final Slabfish slabfish;
@@ -81,7 +82,7 @@ public class SlabbyPraiseEffigyGoal extends Goal {
 	}
 
 	private void throwItems() {
-		Random rand = this.slabfish.getRandom();
+		RandomSource rand = this.slabfish.getRandom();
 
 		for (int i = 3; i < this.slabfish.slabfishBackpack.getContainerSize(); i++) {
 			ItemStack stack = this.slabfish.slabfishBackpack.getItem(i);

@@ -9,6 +9,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class CherryLeavesBlock extends BlueprintLeavesBlock {
 
@@ -17,7 +18,7 @@ public class CherryLeavesBlock extends BlueprintLeavesBlock {
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, Random rand) {
+	public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, RandomSource rand) {
 		super.animateTick(stateIn, worldIn, pos, rand);
 
 		int color = worldIn.getBiome(pos).value().getFoliageColor();

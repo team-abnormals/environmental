@@ -1,16 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "##",
-    "##"
-  ],
   "key": {
     "#": {
       "item": "environmental:cattail"
     }
   },
+  "pattern": [
+    "##",
+    "##"
+  ],
   "result": {
-    "item": "environmental:cattail_thatch",
-    "count": 4
+    "count": 4,
+    "item": "environmental:cattail_thatch"
   }
 }

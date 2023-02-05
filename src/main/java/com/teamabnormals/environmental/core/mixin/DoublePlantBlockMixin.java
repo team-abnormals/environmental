@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import org.spongepowered.asm.mixin.Mixin;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 @Mixin(DoublePlantBlock.class)
 public class DoublePlantBlockMixin extends Block implements BonemealableBlock {
@@ -28,12 +29,12 @@ public class DoublePlantBlockMixin extends Block implements BonemealableBlock {
 	}
 
 	@Override
-	public boolean isBonemealSuccess(Level worldIn, Random rand, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(Level worldIn, RandomSource rand, BlockPos pos, BlockState state) {
 		return this == Blocks.TALL_GRASS;
 	}
 
 	@Override
-	public void performBonemeal(ServerLevel worldIn, Random rand, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel worldIn, RandomSource rand, BlockPos pos, BlockState state) {
 		BlockState giantTallGrass = EnvironmentalBlocks.GIANT_TALL_GRASS.get().defaultBlockState();
 		if (state.getValue(DoublePlantBlock.HALF) == DoubleBlockHalf.LOWER)
 			DoublePlantBlock.placeAt(worldIn, giantTallGrass, pos, 2);

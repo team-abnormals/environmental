@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 @Mixin(MyceliumBlock.class)
 public class MyceliumBlockMixin extends SpreadingSnowyDirtBlock implements BonemealableBlock {
@@ -26,12 +27,12 @@ public class MyceliumBlockMixin extends SpreadingSnowyDirtBlock implements Bonem
 	}
 
 	@Override
-	public boolean isBonemealSuccess(Level worldIn, Random rand, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(Level worldIn, RandomSource rand, BlockPos pos, BlockState state) {
 		return true;
 	}
 
 	@Override
-	public void performBonemeal(ServerLevel worldIn, Random rand, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel worldIn, RandomSource rand, BlockPos pos, BlockState state) {
 		BlockPos blockpos = pos.above();
 
 		for (int i = 0; i < 128; ++i) {

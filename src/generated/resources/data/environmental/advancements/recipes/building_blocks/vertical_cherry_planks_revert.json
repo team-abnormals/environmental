@@ -1,22 +1,16 @@
 {
   "advancements": [
     {
-      "conditions": [
-        {
-          "flag": "vertical_planks",
-          "type": "blueprint:quark_flag"
-        }
-      ],
       "advancement": {
         "parent": "minecraft:recipes/root",
-        "rewards": {
-          "recipes": [
-            "environmental:vertical_cherry_planks_revert"
-          ]
-        },
         "criteria": {
+          "has_the_recipe": {
+            "conditions": {
+              "recipe": "environmental:vertical_cherry_planks_revert"
+            },
+            "trigger": "minecraft:recipe_unlocked"
+          },
           "has_vertical_cherry_planks": {
-            "trigger": "minecraft:inventory_changed",
             "conditions": {
               "items": [
                 {
@@ -25,13 +19,8 @@
                   ]
                 }
               ]
-            }
-          },
-          "has_the_recipe": {
-            "trigger": "minecraft:recipe_unlocked",
-            "conditions": {
-              "recipe": "environmental:vertical_cherry_planks_revert"
-            }
+            },
+            "trigger": "minecraft:inventory_changed"
           }
         },
         "requirements": [
@@ -39,8 +28,19 @@
             "has_vertical_cherry_planks",
             "has_the_recipe"
           ]
-        ]
-      }
+        ],
+        "rewards": {
+          "recipes": [
+            "environmental:vertical_cherry_planks_revert"
+          ]
+        }
+      },
+      "conditions": [
+        {
+          "type": "blueprint:quark_flag",
+          "flag": "vertical_planks"
+        }
+      ]
     }
   ]
 }

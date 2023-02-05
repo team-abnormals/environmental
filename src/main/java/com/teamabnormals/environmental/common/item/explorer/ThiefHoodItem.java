@@ -18,7 +18,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.IItemRenderProperties;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -37,10 +37,10 @@ public class ThiefHoodItem extends ExplorerArmorItem {
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public void initializeClient(Consumer<IItemRenderProperties> consumer) {
-		consumer.accept(new IItemRenderProperties() {
+	public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+		consumer.accept(new IClientItemExtensions() {
 			@Override
-			public HumanoidModel<?> getArmorModel(LivingEntity entity, ItemStack stack, EquipmentSlot slot, HumanoidModel<?> properties) {
+			public HumanoidModel<?> getHumanoidArmorModel(LivingEntity entity, ItemStack stack, EquipmentSlot slot, HumanoidModel<?> properties) {
 				return ThiefHoodModel.INSTANCE;
 			}
 		});
@@ -67,17 +67,16 @@ public class ThiefHoodItem extends ExplorerArmorItem {
 	@SubscribeEvent
 	public static void hoodEquippedEvent(LivingEquipmentChangeEvent event) {
 		if (event.getTo().getItem() == EnvironmentalItems.THIEF_HOOD.get() || event.getFrom().getItem() == EnvironmentalItems.THIEF_HOOD.get()) {
-			if (event.getEntityLiving() instanceof Player) {
-				((Player) event.getEntityLiving()).refreshDisplayName();
+			if (event.getEntity() instanceof Player player) {
+				player.refreshDisplayName();
 			}
 		}
 	}
 
 	@SubscribeEvent
 	public static void livingDeathEvent(LivingDeathEvent event) {
-		LivingEntity entity = event.getEntityLiving();
-		if (event.getSource().getEntity() instanceof LivingEntity && entity instanceof Enemy) {
-			LivingEntity attacker = (LivingEntity) event.getSource().getEntity();
+		LivingEntity entity = event.getEntity();
+		if (event.getSource().getEntity() instanceof LivingEntity attacker && entity instanceof Enemy) {
 			ItemStack stack = attacker.getItemBySlot(EquipmentSlot.HEAD);
 			if (stack.getItem() instanceof ThiefHoodItem) {
 				((ThiefHoodItem) stack.getItem()).levelUp(stack, attacker);

@@ -10,6 +10,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 import java.util.function.Supplier;
 
 public class LotusFlowerBlock extends BlueprintFlowerBlock {
@@ -21,7 +22,7 @@ public class LotusFlowerBlock extends BlueprintFlowerBlock {
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, Random rand) {
+	public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, RandomSource rand) {
 
 		for (int i = 0; i < 3; i++) {
 			double offsetX = rand.nextFloat() * 0.6F;

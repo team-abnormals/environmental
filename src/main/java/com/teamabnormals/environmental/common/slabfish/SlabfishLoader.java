@@ -13,6 +13,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
+import net.minecraft.util.RandomSource;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fml.util.thread.EffectiveSide;
@@ -20,7 +21,10 @@ import net.minecraftforge.network.PacketDistributor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 /**
@@ -141,7 +145,7 @@ public class SlabfishLoader extends SimpleJsonResourceReloadListener implements 
 	}
 
 	@Override
-	public Optional<SlabfishType> getRandomSlabfishType(Predicate<SlabfishType> predicate, Random random) {
+	public Optional<SlabfishType> getRandomSlabfishType(Predicate<SlabfishType> predicate, RandomSource random) {
 		SlabfishType[] slabfishTypes = this.slabfishTypes.values().stream().filter(predicate).toArray(SlabfishType[]::new);
 		return slabfishTypes.length == 0 ? Optional.empty() : Optional.of(slabfishTypes[random.nextInt(slabfishTypes.length)]);
 	}

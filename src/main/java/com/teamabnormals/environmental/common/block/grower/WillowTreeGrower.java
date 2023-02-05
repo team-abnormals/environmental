@@ -7,11 +7,12 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 
 import javax.annotation.Nullable;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class WillowTreeGrower extends AbstractTreeGrower {
 
 	@Nullable
-	protected Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(Random random, boolean beehive) {
+	protected Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource random, boolean beehive) {
 		return EnvironmentalConfiguredFeatures.WILLOW.getHolder().get();
 	}
 }

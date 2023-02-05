@@ -7,7 +7,7 @@
     }
   ],
   "result": {
-    "item": "environmental:willow_planks",
-    "count": 4
+    "count": 4,
+    "item": "environmental:willow_planks"
   }
 }

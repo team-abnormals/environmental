@@ -2,22 +2,21 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "rolls": 1.0,
       "bonus_rolls": 0.0,
       "entries": [
         {
           "type": "minecraft:item",
           "conditions": [
             {
-              "condition": "minecraft:random_chance",
-              "chance": 0.1
+              "chance": 0.1,
+              "condition": "minecraft:random_chance"
             }
           ],
           "functions": [
             {
-              "function": "minecraft:apply_bonus",
               "enchantment": "minecraft:fortune",
               "formula": "minecraft:uniform_bonus_count",
+              "function": "minecraft:apply_bonus",
               "parameters": {
                 "bonusMultiplier": 2
               }
@@ -28,7 +27,8 @@
           ],
           "name": "environmental:cattail_seeds"
         }
-      ]
+      ],
+      "rolls": 1.0
     }
   ]
 }

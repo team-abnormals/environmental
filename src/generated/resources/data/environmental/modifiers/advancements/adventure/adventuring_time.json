@@ -1,34 +1,56 @@
 {
-  "selector": "minecraft:adventure/adventuring_time",
-  "priority": "normal",
   "modifiers": [
     {
       "type": "criteria",
       "config": {
         "criteria": {
-          "environmental:marsh": {
-            "trigger": "minecraft:location",
+          "environmental:blossom_valleys": {
             "conditions": {
-              "location": {
-                "biome": "environmental:marsh"
-              }
-            }
+              "player": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "location": {
+                      "biome": "environmental:blossom_valleys"
+                    }
+                  }
+                }
+              ]
+            },
+            "trigger": "minecraft:location"
           },
           "environmental:blossom_woods": {
-            "trigger": "minecraft:location",
             "conditions": {
-              "location": {
-                "biome": "environmental:blossom_woods"
-              }
-            }
+              "player": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "location": {
+                      "biome": "environmental:blossom_woods"
+                    }
+                  }
+                }
+              ]
+            },
+            "trigger": "minecraft:location"
           },
-          "environmental:blossom_valleys": {
-            "trigger": "minecraft:location",
+          "environmental:marsh": {
             "conditions": {
-              "location": {
-                "biome": "environmental:blossom_valleys"
-              }
-            }
+              "player": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "location": {
+                      "biome": "environmental:marsh"
+                    }
+                  }
+                }
+              ]
+            },
+            "trigger": "minecraft:location"
           }
         },
         "requirements": [
@@ -45,5 +67,7 @@
         "should_replace_requirements": false
       }
     }
-  ]
+  ],
+  "priority": "normal",
+  "selector": "minecraft:adventure/adventuring_time"
 }

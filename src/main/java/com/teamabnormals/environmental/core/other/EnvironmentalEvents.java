@@ -21,6 +21,7 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -60,11 +61,11 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingTickEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -75,7 +76,6 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 
 @EventBusSubscriber(modid = Environmental.MOD_ID)
@@ -83,15 +83,15 @@ public class EnvironmentalEvents {
 
 	@SubscribeEvent
 	public static void onPlayerBreak(PlayerEvent.BreakSpeed event) {
-		if (event.getState().getBlock() instanceof HangingWisteriaLeavesBlock && event.getPlayer().getMainHandItem().getItem() == Items.SHEARS)
+		if (event.getState().getBlock() instanceof HangingWisteriaLeavesBlock && event.getEntity().getMainHandItem().getItem() == Items.SHEARS)
 			event.setNewSpeed(15.0F);
 	}
 
 	@SubscribeEvent
 	public static void onLivingSpawn(LivingSpawnEvent.CheckSpawn event) {
 		Entity entity = event.getEntity();
-		LevelAccessor world = event.getWorld();
-		Random random = world.getRandom();
+		LevelAccessor world = event.getLevel();
+		RandomSource random = world.getRandom();
 
 		boolean naturalSpawn = event.getSpawnReason() == MobSpawnType.NATURAL;
 		boolean chunkGenSpawn = event.getSpawnReason() == MobSpawnType.CHUNK_GENERATION;
@@ -194,11 +194,11 @@ public class EnvironmentalEvents {
 
 	@SubscribeEvent
 	public static void onRightClickBlock(RightClickBlock event) {
-		Level world = event.getWorld();
+		Level world = event.getLevel();
 		BlockPos pos = event.getPos();
 		BlockState state = world.getBlockState(pos);
 		Direction face = event.getFace();
-		Player player = event.getPlayer();
+		Player player = event.getEntity();
 		ItemStack stack = event.getItemStack();
 		Item item = stack.getItem();
 		if (item == Items.BONE_MEAL && state.getBlock() == Blocks.DIRT && world.getBlockState(pos.above()).propagatesSkylightDown(world, pos)) {
@@ -259,8 +259,8 @@ public class EnvironmentalEvents {
 	public static void onEntityInteract(PlayerInteractEvent.EntityInteract event) {
 		ItemStack stack = event.getItemStack();
 		Entity target = event.getTarget();
-		Level world = event.getWorld();
-		Random random = world.getRandom();
+		Level world = event.getLevel();
+		RandomSource random = world.getRandom();
 
 		if (target instanceof Slabfish && stack.getItem() == Items.NAME_TAG) {
 			Slabfish slabby = (Slabfish) event.getTarget();
@@ -277,7 +277,7 @@ public class EnvironmentalEvents {
 				if (data.getValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME) == 0) {
 					if (world.dimensionType().natural()) {
 						data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, 4800);
-						if (!event.getPlayer().isCreative()) stack.shrink(1);
+						if (!event.getEntity().isCreative()) stack.shrink(1);
 
 						if (world.isClientSide()) {
 							for (int i = 0; i < 7; ++i) {
@@ -305,9 +305,9 @@ public class EnvironmentalEvents {
 
 	@SubscribeEvent
 	public static void onLivingDeath(LivingDeathEvent event) {
-		LivingEntity entity = event.getEntityLiving();
+		LivingEntity entity = event.getEntity();
 		Level world = entity.getCommandSenderWorld();
-		Random rand = new Random();
+		RandomSource rand = RandomSource.create();
 
 		if (entity instanceof Slabfish) {
 			Slabfish slabfish = (Slabfish) event.getEntity();
@@ -367,7 +367,7 @@ public class EnvironmentalEvents {
 	}
 
 	@SubscribeEvent
-	public static void onEntityJoinWorld(EntityJoinWorldEvent event) {
+	public static void onEntityJoinWorld(EntityJoinLevelEvent event) {
 		Entity entity = event.getEntity();
 		if (entity instanceof Wolf wolf) {
 			wolf.targetSelector.addGoal(4, new NonTameRandomTargetGoal<>(wolf, Animal.class, false, (targetEntity) -> targetEntity.getType() == EnvironmentalEntityTypes.DEER.get()));
@@ -383,10 +383,10 @@ public class EnvironmentalEvents {
 	}
 
 	@SubscribeEvent
-	public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
+	public static void onLivingUpdate(LivingTickEvent event) {
 		Entity entity = event.getEntity();
 		Level world = entity.getCommandSenderWorld();
-		Random random = world.getRandom();
+		RandomSource random = world.getRandom();
 
 		if (entity instanceof Pig && entity.isAlive()) {
 			IDataManager data = ((IDataManager) entity);

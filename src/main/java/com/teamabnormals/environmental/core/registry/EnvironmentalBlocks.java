@@ -13,6 +13,7 @@ import com.teamabnormals.blueprint.common.block.thatch.ThatchVerticalSlabBlock;
 import com.teamabnormals.blueprint.common.block.wood.*;
 import com.teamabnormals.blueprint.core.util.PropertyUtil;
 import com.teamabnormals.blueprint.core.util.registry.BlockSubRegistryHelper;
+import com.teamabnormals.environmental.common.block.MudBlock;
 import com.teamabnormals.environmental.common.block.*;
 import com.teamabnormals.environmental.common.block.grower.CherryTreeGrower;
 import com.teamabnormals.environmental.common.block.grower.WillowTreeGrower;

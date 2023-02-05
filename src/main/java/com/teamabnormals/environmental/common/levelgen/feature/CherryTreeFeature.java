@@ -15,6 +15,7 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 import java.util.Set;
 
 public class CherryTreeFeature extends Feature<TreeConfiguration> {
@@ -27,7 +28,7 @@ public class CherryTreeFeature extends Feature<TreeConfiguration> {
 	@Override
 	public boolean place(FeaturePlaceContext<TreeConfiguration> context) {
 		WorldGenLevel level = context.level();
-		Random random = context.random();
+		RandomSource random = context.random();
 		BlockPos pos = context.origin();
 		TreeConfiguration config = context.config();
 
@@ -107,7 +108,7 @@ public class CherryTreeFeature extends Feature<TreeConfiguration> {
 		}
 	}
 
-	private void createCherryLeaves(LevelSimulatedRW level, BlockPos pos, Random random, int leafLevel, TreeConfiguration config) {
+	private void createCherryLeaves(LevelSimulatedRW level, BlockPos pos, RandomSource random, int leafLevel, TreeConfiguration config) {
 		int leafSize = 2;
 		for (int k = -leafSize; k <= leafSize; ++k) {
 			for (int j = -leafSize; j <= leafSize; ++j) {
@@ -132,7 +133,7 @@ public class CherryTreeFeature extends Feature<TreeConfiguration> {
 		}
 	}
 
-	private BlockPos createCherryBranch(int height, LevelSimulatedRW worldIn, BlockPos pos, Direction direction, Random rand, TreeConfiguration config) {
+	private BlockPos createCherryBranch(int height, LevelSimulatedRW worldIn, BlockPos pos, Direction direction, RandomSource rand, TreeConfiguration config) {
 		int logX = pos.getX();
 		int logZ = pos.getZ();
 		int logY = pos.getY() + height - 1;
@@ -160,7 +161,7 @@ public class CherryTreeFeature extends Feature<TreeConfiguration> {
 		return blockpos.relative(direction);
 	}
 
-	private void createHorizontalLog(LevelSimulatedRW level, BlockPos pos, Direction direction, Random random, TreeConfiguration config) {
+	private void createHorizontalLog(LevelSimulatedRW level, BlockPos pos, Direction direction, RandomSource random, TreeConfiguration config) {
 		int logX = pos.getX();
 		int logY = pos.getY();
 		int logZ = pos.getZ();

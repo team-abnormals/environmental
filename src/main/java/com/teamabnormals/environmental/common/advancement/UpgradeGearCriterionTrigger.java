@@ -7,6 +7,7 @@ import net.minecraft.advancements.critereon.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class UpgradeGearCriterionTrigger extends SimpleCriterionTrigger<UpgradeGearCriterionTrigger.Instance> {
 	private static final ResourceLocation ID = new ResourceLocation(Environmental.MOD_ID, "upgrade_gear");
@@ -22,7 +23,7 @@ public class UpgradeGearCriterionTrigger extends SimpleCriterionTrigger<UpgradeG
 	}
 
 	public void trigger(ServerPlayer player, Item item) {
-		this.trigger(player, instance -> instance.item.equals(item.getRegistryName()));
+		this.trigger(player, instance -> instance.item.equals(ForgeRegistries.ITEMS.getKey(item)));
 	}
 
 	public static class Instance extends AbstractCriterionTriggerInstance {

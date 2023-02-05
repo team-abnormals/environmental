@@ -20,6 +20,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class SlabfishEffigyBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock {
 	protected static final VoxelShape SHAPE = Block.box(3.0D, 0.0D, 3.0D, 13.0D, 16.0D, 13.0D);
@@ -69,7 +70,7 @@ public class SlabfishEffigyBlock extends HorizontalDirectionalBlock implements S
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, Random rand) {
+	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource rand) {
 		if (state.getValue(POWERED) && !worldIn.hasNeighborSignal(pos)) {
 			worldIn.setBlock(pos, state.cycle(POWERED), 2);
 		}

@@ -1,120 +1,118 @@
 {
-  "selector": "minecraft:husbandry/balanced_diet",
-  "priority": "normal",
   "modifiers": [
     {
       "type": "criteria",
       "config": {
         "criteria": {
-          "environmental:cherries": {
-            "trigger": "minecraft:consume_item",
-            "conditions": {
-              "item": {
-                "items": [
-                  "environmental:cherries"
-                ]
-              }
-            }
-          },
-          "environmental:cherry_pie": {
-            "trigger": "minecraft:consume_item",
-            "conditions": {
-              "item": {
-                "items": [
-                  "environmental:cherry_pie"
-                ]
-              }
-            }
-          },
           "environmental:apple_pie": {
-            "trigger": "minecraft:consume_item",
             "conditions": {
               "item": {
                 "items": [
                   "environmental:apple_pie"
                 ]
               }
-            }
+            },
+            "trigger": "minecraft:consume_item"
           },
-          "environmental:venison": {
-            "trigger": "minecraft:consume_item",
+          "environmental:cherries": {
             "conditions": {
               "item": {
                 "items": [
-                  "environmental:venison"
+                  "environmental:cherries"
                 ]
               }
-            }
+            },
+            "trigger": "minecraft:consume_item"
           },
-          "environmental:cooked_venison": {
-            "trigger": "minecraft:consume_item",
+          "environmental:cherry_pie": {
             "conditions": {
               "item": {
                 "items": [
-                  "environmental:cooked_venison"
+                  "environmental:cherry_pie"
                 ]
               }
-            }
-          },
-          "environmental:koi": {
-            "trigger": "minecraft:consume_item",
-            "conditions": {
-              "item": {
-                "items": [
-                  "environmental:koi"
-                ]
-              }
-            }
-          },
-          "environmental:duck": {
-            "trigger": "minecraft:consume_item",
-            "conditions": {
-              "item": {
-                "items": [
-                  "environmental:duck"
-                ]
-              }
-            }
+            },
+            "trigger": "minecraft:consume_item"
           },
           "environmental:cooked_duck": {
-            "trigger": "minecraft:consume_item",
             "conditions": {
               "item": {
                 "items": [
                   "environmental:cooked_duck"
                 ]
               }
-            }
+            },
+            "trigger": "minecraft:consume_item"
+          },
+          "environmental:cooked_venison": {
+            "conditions": {
+              "item": {
+                "items": [
+                  "environmental:cooked_venison"
+                ]
+              }
+            },
+            "trigger": "minecraft:consume_item"
+          },
+          "environmental:duck": {
+            "conditions": {
+              "item": {
+                "items": [
+                  "environmental:duck"
+                ]
+              }
+            },
+            "trigger": "minecraft:consume_item"
+          },
+          "environmental:koi": {
+            "conditions": {
+              "item": {
+                "items": [
+                  "environmental:koi"
+                ]
+              }
+            },
+            "trigger": "minecraft:consume_item"
           },
           "environmental:truffle": {
-            "trigger": "minecraft:consume_item",
             "conditions": {
               "item": {
                 "items": [
                   "environmental:truffle"
                 ]
               }
-            }
+            },
+            "trigger": "minecraft:consume_item"
           },
           "environmental:truffle_mash": {
-            "trigger": "minecraft:consume_item",
             "conditions": {
               "item": {
                 "items": [
                   "environmental:truffle_mash"
                 ]
               }
-            }
+            },
+            "trigger": "minecraft:consume_item"
           },
           "environmental:truffle_pie": {
-            "trigger": "minecraft:consume_item",
             "conditions": {
               "item": {
                 "items": [
                   "environmental:truffle_pie"
                 ]
               }
-            }
+            },
+            "trigger": "minecraft:consume_item"
+          },
+          "environmental:venison": {
+            "conditions": {
+              "item": {
+                "items": [
+                  "environmental:venison"
+                ]
+              }
+            },
+            "trigger": "minecraft:consume_item"
           }
         },
         "requirements": [
@@ -155,5 +153,7 @@
         "should_replace_requirements": false
       }
     }
-  ]
+  ],
+  "priority": "normal",
+  "selector": "minecraft:husbandry/balanced_diet"
 }

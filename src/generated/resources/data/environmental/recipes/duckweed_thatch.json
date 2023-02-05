@@ -1,16 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "##",
-    "##"
-  ],
   "key": {
     "#": {
       "item": "environmental:duckweed"
     }
   },
+  "pattern": [
+    "##",
+    "##"
+  ],
   "result": {
-    "item": "environmental:duckweed_thatch",
-    "count": 4
+    "count": 4,
+    "item": "environmental:duckweed_thatch"
   }
 }

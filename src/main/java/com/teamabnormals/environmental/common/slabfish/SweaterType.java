@@ -4,7 +4,6 @@ import com.google.gson.*;
 import net.minecraft.core.Registry;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.LazyLoadedValue;
@@ -77,7 +76,7 @@ public class SweaterType implements Predicate<ItemStack> {
 	SweaterType setRegistryName(ResourceLocation registryName) {
 		this.registryName = registryName;
 		if (this.displayName == null)
-			this.displayName = new TextComponent(registryName.toString());
+			this.displayName = Component.literal(registryName.toString());
 		return this;
 	}
 

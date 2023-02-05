@@ -4,17 +4,13 @@
     {
       "conditions": [
         {
-          "flag": "hedges",
-          "type": "blueprint:quark_flag"
+          "type": "blueprint:quark_flag",
+          "flag": "hedges"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
         "group": "hedge",
-        "pattern": [
-          "#",
-          "L"
-        ],
         "key": {
           "#": {
             "item": "environmental:blue_wisteria_leaves"
@@ -23,9 +19,13 @@
             "tag": "environmental:wisteria_logs"
           }
         },
+        "pattern": [
+          "#",
+          "L"
+        ],
         "result": {
-          "item": "environmental:blue_wisteria_hedge",
-          "count": 2
+          "count": 2,
+          "item": "environmental:blue_wisteria_hedge"
         }
       }
     }

@@ -5,6 +5,7 @@ import com.mojang.math.Vector3f;
 import com.teamabnormals.environmental.client.model.FennecFoxModel;
 import com.teamabnormals.environmental.common.entity.animal.FennecFox;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemInHandRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
@@ -13,8 +14,11 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 
 public class FennecFoxHeldItemLayer extends RenderLayer<FennecFox, FennecFoxModel<FennecFox>> {
-	public FennecFoxHeldItemLayer(RenderLayerParent<FennecFox, FennecFoxModel<FennecFox>> renderer) {
+	private final ItemInHandRenderer itemInHandRenderer;
+
+	public FennecFoxHeldItemLayer(RenderLayerParent<FennecFox, FennecFoxModel<FennecFox>> renderer, ItemInHandRenderer itemInHandRenderer) {
 		super(renderer);
+		this.itemInHandRenderer = itemInHandRenderer;
 	}
 
 	public void render(PoseStack stack, MultiBufferSource buffer, int packedLight, FennecFox entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
@@ -49,7 +53,7 @@ public class FennecFoxHeldItemLayer extends RenderLayer<FennecFox, FennecFoxMode
 		}
 
 		ItemStack itemstack = entity.getItemBySlot(EquipmentSlot.MAINHAND);
-		Minecraft.getInstance().getItemInHandRenderer().renderItem(entity, itemstack, ItemTransforms.TransformType.GROUND, false, stack, buffer, packedLight);
+		itemInHandRenderer.renderItem(entity, itemstack, ItemTransforms.TransformType.GROUND, false, stack, buffer, packedLight);
 		stack.popPose();
 	}
 }

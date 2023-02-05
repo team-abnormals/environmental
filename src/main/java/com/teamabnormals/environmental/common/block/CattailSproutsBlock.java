@@ -25,6 +25,7 @@ import net.minecraftforge.common.ForgeHooks;
 
 import javax.annotation.Nullable;
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class CattailSproutsBlock extends BushBlock implements SimpleWaterloggedBlock, BonemealableBlock {
 	protected static final VoxelShape SHAPE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 10.0D, 11.0D);
@@ -66,12 +67,12 @@ public class CattailSproutsBlock extends BushBlock implements SimpleWaterloggedB
 		return this.defaultBlockState().setValue(WATERLOGGED, flag);
 	}
 
-	public void performBonemeal(ServerLevel worldIn, Random rand, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel worldIn, RandomSource rand, BlockPos pos, BlockState state) {
 		worldIn.setBlockAndUpdate(pos, EnvironmentalBlocks.CATTAIL.get().defaultBlockState().setValue(WATERLOGGED, state.getValue(WATERLOGGED)));
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, Random random) {
+	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
 		super.tick(state, worldIn, pos, random);
 		if (worldIn.getRawBrightness(pos.above(), 0) >= 9 && state.getValue(WATERLOGGED) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, random.nextInt(10) == 0)) {
 			if (EnvironmentalBlocks.CATTAIL.get().defaultBlockState().canSurvive(worldIn, pos) && worldIn.isEmptyBlock(pos.above())) {
@@ -109,7 +110,7 @@ public class CattailSproutsBlock extends BushBlock implements SimpleWaterloggedB
 	}
 
 	@Override
-	public boolean isBonemealSuccess(Level worldIn, Random rand, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(Level worldIn, RandomSource rand, BlockPos pos, BlockState state) {
 		return true;
 	}
 }

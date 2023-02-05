@@ -1,15 +1,15 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "###"
-  ],
   "key": {
     "#": {
       "item": "environmental:grass_thatch"
     }
   },
+  "pattern": [
+    "###"
+  ],
   "result": {
-    "item": "environmental:grass_thatch_slab",
-    "count": 6
+    "count": 6,
+    "item": "environmental:grass_thatch_slab"
   }
 }

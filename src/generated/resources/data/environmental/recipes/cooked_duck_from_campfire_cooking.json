@@ -1,9 +1,9 @@
 {
   "type": "minecraft:campfire_cooking",
+  "cookingtime": 600,
+  "experience": 0.35,
   "ingredient": {
     "item": "environmental:duck"
   },
-  "result": "environmental:cooked_duck",
-  "experience": 0.35,
-  "cookingtime": 600
+  "result": "environmental:cooked_duck"
 }

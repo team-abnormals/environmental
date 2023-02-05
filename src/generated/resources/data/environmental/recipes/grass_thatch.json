@@ -1,20 +1,20 @@
 {
   "type": "minecraft:crafting_shaped",
   "group": "grass_thatch",
+  "key": {
+    "G": {
+      "item": "minecraft:grass"
+    },
+    "W": {
+      "item": "minecraft:wheat"
+    }
+  },
   "pattern": [
     "WG",
     "GW"
   ],
-  "key": {
-    "W": {
-      "item": "minecraft:wheat"
-    },
-    "G": {
-      "item": "minecraft:grass"
-    }
-  },
   "result": {
-    "item": "environmental:grass_thatch",
-    "count": 4
+    "count": 4,
+    "item": "environmental:grass_thatch"
   }
 }

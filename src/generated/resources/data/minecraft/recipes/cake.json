@@ -1,10 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "AAA",
-    "BEB",
-    "CCC"
-  ],
   "key": {
     "A": {
       "tag": "forge:buckets/milk"
@@ -19,6 +14,11 @@
       "tag": "forge:eggs"
     }
   },
+  "pattern": [
+    "AAA",
+    "BEB",
+    "CCC"
+  ],
   "result": {
     "item": "minecraft:cake"
   }

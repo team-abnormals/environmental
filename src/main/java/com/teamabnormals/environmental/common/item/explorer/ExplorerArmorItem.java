@@ -7,8 +7,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -20,6 +18,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -32,7 +31,7 @@ public abstract class ExplorerArmorItem extends DyeableArmorItem implements Expl
 
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
-		return getCorrectTexture(this.getRegistryName().getPath(), type);
+		return getCorrectTexture(ForgeRegistries.ITEMS.getKey(this).getPath(), type);
 	}
 
 	@Override
@@ -67,11 +66,11 @@ public abstract class ExplorerArmorItem extends DyeableArmorItem implements Expl
 		int nextLevel = this.getLevelsUntilUpgrade(uses);
 
 		MutableComponent counter;
-		if (nextLevel != 0) counter = new TextComponent(uses + "/" + nextLevel);
-		else counter = new TextComponent(String.valueOf(uses));
+		if (nextLevel != 0) counter = Component.literal(uses + "/" + nextLevel);
+		else counter = Component.literal(String.valueOf(uses));
 		counter.withStyle(getFormattingForLevel(uses));
 
-		MutableComponent description = new TextComponent(" ").append(this.getDescription()).withStyle(ChatFormatting.GRAY);
+		MutableComponent description = Component.literal(" ").append(this.getDescription()).withStyle(ChatFormatting.GRAY);
 		tooltip.add(counter.append(description));
 	}
 
@@ -95,7 +94,7 @@ public abstract class ExplorerArmorItem extends DyeableArmorItem implements Expl
 	}
 
 	public MutableComponent getDescription() {
-		return new TranslatableComponent(this.getDescriptionId() + ".desc");
+		return Component.translatable(this.getDescriptionId() + ".desc");
 	}
 
 	public ChatFormatting getFormattingForLevel(int uses) {

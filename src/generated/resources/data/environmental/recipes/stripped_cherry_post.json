@@ -4,26 +4,26 @@
     {
       "conditions": [
         {
-          "flag": "wooden_posts",
-          "type": "blueprint:quark_flag"
+          "type": "blueprint:quark_flag",
+          "flag": "wooden_posts"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
         "group": "wooden_post",
-        "pattern": [
-          "#",
-          "#",
-          "#"
-        ],
         "key": {
           "#": {
             "item": "environmental:stripped_cherry_wood"
           }
         },
+        "pattern": [
+          "#",
+          "#",
+          "#"
+        ],
         "result": {
-          "item": "environmental:stripped_cherry_post",
-          "count": 8
+          "count": 8,
+          "item": "environmental:stripped_cherry_post"
         }
       }
     }

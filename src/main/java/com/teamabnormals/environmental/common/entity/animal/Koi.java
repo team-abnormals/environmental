@@ -30,6 +30,7 @@ import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class Koi extends AbstractFish {
 
@@ -137,7 +138,7 @@ public class Koi extends AbstractFish {
 		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 10);
 	}
 
-	public static boolean canKoiSpawn(EntityType<? extends AbstractFish> type, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, Random randomIn) {
+	public static boolean canKoiSpawn(EntityType<? extends AbstractFish> type, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, RandomSource randomIn) {
 		return worldIn.getBlockState(pos).is(Blocks.WATER) && worldIn.getBlockState(pos.above()).is(Blocks.WATER) && pos.getY() > 55;
 	}
 

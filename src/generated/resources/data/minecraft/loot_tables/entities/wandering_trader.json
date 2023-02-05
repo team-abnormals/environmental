@@ -2,23 +2,23 @@
   "type": "minecraft:entity",
   "pools": [
     {
-      "rolls": 1.0,
       "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:entity_properties",
+          "entity": "killer",
+          "predicate": {
+            "type": "#minecraft:skeletons"
+          }
+        }
+      ],
       "entries": [
         {
           "type": "minecraft:item",
           "name": "environmental:music_disc_leaving_home"
         }
       ],
-      "conditions": [
-        {
-          "condition": "minecraft:entity_properties",
-          "predicate": {
-            "type": "#minecraft:skeletons"
-          },
-          "entity": "killer"
-        }
-      ]
+      "rolls": 1.0
     }
   ]
 }

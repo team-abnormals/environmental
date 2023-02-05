@@ -37,14 +37,14 @@ public class EnvironmentalAdvancementModifierProvider extends AdvancementModifie
 
 		CriteriaModifier.Builder breedAllAnimals = CriteriaModifier.builder(this.modId);
 		for (EntityType<?> entityType : BREEDABLE_ANIMALS) {
-			breedAllAnimals.addCriterion(ForgeRegistries.ENTITIES.getKey(entityType).getPath(), BredAnimalsTrigger.TriggerInstance.bredAnimals(EntityPredicate.Builder.entity().of(entityType)));
+			breedAllAnimals.addCriterion(ForgeRegistries.ENTITY_TYPES.getKey(entityType).getPath(), BredAnimalsTrigger.TriggerInstance.bredAnimals(EntityPredicate.Builder.entity().of(entityType)));
 		}
 		this.entry("husbandry/bred_all_animals").selects("husbandry/bred_all_animals").addModifier(breedAllAnimals.requirements(RequirementsStrategy.AND).build());
 
 		CriteriaModifier.Builder adventuringTime = CriteriaModifier.builder(this.modId);
 		EnvironmentalBiomes.HELPER.getDeferredRegister().getEntries().forEach(biome -> {
 			ResourceLocation key = ForgeRegistries.BIOMES.getKey(biome.get());
-			adventuringTime.addCriterion(key.getPath(), LocationTrigger.TriggerInstance.located(LocationPredicate.inBiome(ResourceKey.create(Registry.BIOME_REGISTRY, key))));
+			adventuringTime.addCriterion(key.getPath(), PlayerTrigger.TriggerInstance.located(LocationPredicate.inBiome(ResourceKey.create(Registry.BIOME_REGISTRY, key))));
 		});
 		this.entry("adventure/adventuring_time").selects("adventure/adventuring_time").addModifier(adventuringTime.requirements(RequirementsStrategy.AND).build());
 

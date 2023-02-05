@@ -1,5 +1,4 @@
 {
-  "replace": false,
   "values": [
     "environmental:grass_thatch_stairs",
     "environmental:cattail_thatch_stairs",

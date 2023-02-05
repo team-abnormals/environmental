@@ -4,25 +4,25 @@
     {
       "conditions": [
         {
-          "flag": "vertical_slabs",
-          "type": "blueprint:quark_flag"
+          "type": "blueprint:quark_flag",
+          "flag": "vertical_slabs"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "#",
-          "#",
-          "#"
-        ],
         "key": {
           "#": {
             "item": "environmental:grass_thatch"
           }
         },
+        "pattern": [
+          "#",
+          "#",
+          "#"
+        ],
         "result": {
-          "item": "environmental:grass_thatch_vertical_slab",
-          "count": 6
+          "count": 6,
+          "item": "environmental:grass_thatch_vertical_slab"
         }
       }
     }

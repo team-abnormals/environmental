@@ -10,6 +10,7 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class DenseCattailsFeature extends Feature<NoneFeatureConfiguration> {
 
@@ -20,7 +21,7 @@ public class DenseCattailsFeature extends Feature<NoneFeatureConfiguration> {
 	@Override
 	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
 		WorldGenLevel world = context.level();
-		Random random = context.random();
+		RandomSource random = context.random();
 		BlockPos pos = context.origin();
 
 		boolean place = false;

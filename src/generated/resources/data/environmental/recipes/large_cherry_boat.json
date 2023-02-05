@@ -4,17 +4,13 @@
     {
       "conditions": [
         {
-          "modid": "boatload",
-          "type": "forge:mod_loaded"
+          "type": "forge:mod_loaded",
+          "modid": "boatload"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
         "group": "large_boat",
-        "pattern": [
-          "#B#",
-          "###"
-        ],
         "key": {
           "#": {
             "item": "environmental:cherry_planks"
@@ -23,6 +19,10 @@
             "item": "environmental:cherry_boat"
           }
         },
+        "pattern": [
+          "#B#",
+          "###"
+        ],
         "result": {
           "item": "environmental:large_cherry_boat"
         }

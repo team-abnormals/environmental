@@ -6,11 +6,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mojang.logging.LogUtils;
 import com.teamabnormals.environmental.core.Environmental;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
-import net.minecraft.data.HashCache;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.Tag.Builder;
+import net.minecraft.tags.TagBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.slf4j.Logger;
 
@@ -25,7 +25,7 @@ public class SlabfishProvider implements DataProvider {
 	private static final Logger LOGGER = LogUtils.getLogger();
 	private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().create();
 	protected final DataGenerator generator;
-	protected final Map<ResourceLocation, Builder> builders = Maps.newLinkedHashMap();
+	protected final Map<ResourceLocation, TagBuilder> builders = Maps.newLinkedHashMap();
 	protected final String modId;
 	protected final ExistingFileHelper existingFileHelper;
 
@@ -36,7 +36,7 @@ public class SlabfishProvider implements DataProvider {
 	}
 
 	@Override
-	public void run(HashCache directoryCache) throws IOException {
+	public void run(CachedOutput directoryCache) throws IOException {
 		Path path = this.generator.getOutputFolder();
 		Set<ResourceLocation> set = Sets.newHashSet();
 		Consumer<SlabfishType> consumer = (slabfishType) -> {
@@ -46,7 +46,7 @@ public class SlabfishProvider implements DataProvider {
 				Path path1 = createPath(path, slabfishType);
 
 				try {
-					DataProvider.save(GSON, directoryCache, slabfishType.serializeToJson(), path1);
+					DataProvider.saveStable(directoryCache, slabfishType.serializeToJson(), path1);
 				} catch (IOException ioexception) {
 					LOGGER.error("Couldn't save slabfish type {}", path1, ioexception);
 				}

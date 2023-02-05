@@ -7,6 +7,7 @@ import com.teamabnormals.environmental.common.block.HangingWisteriaLeavesBlock;
 import com.teamabnormals.environmental.common.levelgen.util.WisteriaTreeUtil;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.SaplingBlock;
@@ -16,7 +17,6 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 
-import java.util.Random;
 import java.util.Set;
 
 public class BigWisteriaTreeFeature extends Feature<TreeConfiguration> {
@@ -28,7 +28,7 @@ public class BigWisteriaTreeFeature extends Feature<TreeConfiguration> {
 	@Override
 	public boolean place(FeaturePlaceContext<TreeConfiguration> context) {
 		WorldGenLevel world = context.level();
-		Random random = context.random();
+		RandomSource random = context.random();
 		BlockPos pos = context.origin();
 		TreeConfiguration config = context.config();
 
@@ -107,10 +107,9 @@ public class BigWisteriaTreeFeature extends Feature<TreeConfiguration> {
 				BlockPos startPos = pos.above(height);
 
 				for (BlockPos blockpos : BlockPos.betweenClosed(startPos.getX() - 10, startPos.getY() - 10, startPos.getZ() - 10, startPos.getX() + 10, startPos.getY() + 10, startPos.getZ() + 10)) {
-					if (Feature.isAir(world, blockpos) && isLeaves(world, blockpos.above(), config, random) && random.nextInt(4) == 0) {
-						if (Feature.isAir(world, blockpos))
-							TreeUtil.setForcedState(world, blockpos, vine.setValue(HangingWisteriaLeavesBlock.HALF, DoubleBlockHalf.UPPER));
-						if (Feature.isAir(world, blockpos.below()) && random.nextInt(2) == 0)
+					if (world.getBlockState(blockpos).isAir() && isLeaves(world, blockpos.above(), config, random) && random.nextInt(4) == 0) {
+						TreeUtil.setForcedState(world, blockpos, vine.setValue(HangingWisteriaLeavesBlock.HALF, DoubleBlockHalf.UPPER));
+						if (world.getBlockState(blockpos.below()).isAir() && random.nextInt(2) == 0)
 							TreeUtil.setForcedState(world, blockpos.below(), vine.setValue(HangingWisteriaLeavesBlock.HALF, DoubleBlockHalf.LOWER));
 					}
 				}
@@ -126,7 +125,7 @@ public class BigWisteriaTreeFeature extends Feature<TreeConfiguration> {
 	}
 
 
-	public static boolean isLeaves(LevelSimulatedReader worldIn, BlockPos pos, TreeConfiguration config, Random random) {
+	public static boolean isLeaves(LevelSimulatedReader worldIn, BlockPos pos, TreeConfiguration config, RandomSource random) {
 		if (worldIn instanceof net.minecraft.world.level.LevelReader) // FORGE: Redirect to state method when possible
 			return worldIn.isStateAtPosition(pos, state -> state == config.foliageProvider.getState(random, pos));
 		return worldIn.isStateAtPosition(pos, (p_227223_0_) -> {

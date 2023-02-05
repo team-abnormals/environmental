@@ -1,17 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
   "group": "wooden_trapdoor",
-  "pattern": [
-    "###",
-    "###"
-  ],
   "key": {
     "#": {
       "item": "environmental:wisteria_planks"
     }
   },
+  "pattern": [
+    "###",
+    "###"
+  ],
   "result": {
-    "item": "environmental:wisteria_trapdoor",
-    "count": 2
+    "count": 2,
+    "item": "environmental:wisteria_trapdoor"
   }
 }

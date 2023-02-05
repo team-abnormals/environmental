@@ -8,7 +8,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class EnvironmentalMenuTypes {
-	public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, Environmental.MOD_ID);
+	public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(ForgeRegistries.MENU_TYPES, Environmental.MOD_ID);
 
 	public static final RegistryObject<MenuType<SlabfishInventoryMenu>> SLABFISH_INVENTORY = MENU_TYPES.register("slabfish_inventory", () -> new MenuType<>(SlabfishInventoryMenu::new));
 }

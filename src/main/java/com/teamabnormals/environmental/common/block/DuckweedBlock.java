@@ -20,6 +20,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.PlantType;
 
 import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class DuckweedBlock extends BushBlock implements BonemealableBlock {
 	protected static final VoxelShape DUCKWEED_AABB = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 1.5D, 15.0D);
@@ -48,11 +49,11 @@ public class DuckweedBlock extends BushBlock implements BonemealableBlock {
 		return worldIn.getBlockState(pos.above()).isAir();
 	}
 
-	public boolean isBonemealSuccess(Level world, Random random, BlockPos blockPos, BlockState blockState) {
+	public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos blockPos, BlockState blockState) {
 		return true;
 	}
 
-	public void performBonemeal(ServerLevel world, Random random, BlockPos blockPos, BlockState state) {
+	public void performBonemeal(ServerLevel world, RandomSource random, BlockPos blockPos, BlockState state) {
 		label:
 		for (int x = 0; x < 64; ++x) {
 			BlockPos newBlockPos = blockPos;

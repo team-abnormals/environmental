@@ -4,7 +4,6 @@ import com.google.gson.*;
 import com.teamabnormals.environmental.common.slabfish.SlabfishType;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSlabfishConditions;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import java.lang.reflect.Type;
 import java.util.function.Predicate;
@@ -53,7 +52,7 @@ public interface SlabfishCondition extends Predicate<SlabfishConditionContext> {
 	 *
 	 * @author Ocelot
 	 */
-	interface SlabfishConditionFactory extends IForgeRegistryEntry<SlabfishConditionFactory> {
+	interface SlabfishConditionFactory {
 		/**
 		 * Creates a new condition from the specified json with the provided context
 		 *

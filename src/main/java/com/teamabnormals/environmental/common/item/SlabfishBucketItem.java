@@ -12,7 +12,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
@@ -56,7 +55,7 @@ public class SlabfishBucketItem extends MobBucketItem {
 					tooltip.add(slabfishType.getDisplayName().copy().withStyle(ChatFormatting.ITALIC, slabfishType.getRarity().getFormatting()));
 			}
 			if (tag.contains("Age", Tag.TAG_ANY_NUMERIC) && tag.getInt("Age") < 0) {
-				tooltip.add((new TranslatableComponent("entity.environmental.slabfish.baby").withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY)));
+				tooltip.add((Component.translatable("entity.environmental.slabfish.baby").withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY)));
 			}
 			if (tag.contains("BackpackType", Tag.TAG_STRING)) {
 				BackpackType backpackType = slabfishManager.getBackpackType(LOCATION_CACHE.computeIfAbsent(tag.getString("BackpackType"), ResourceLocation::new)).orElse(SlabfishManager.BROWN_BACKPACK);
