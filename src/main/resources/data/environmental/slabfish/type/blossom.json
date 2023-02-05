@@ -21,7 +21,7 @@
         },
         {
           "type": "environmental:biome",
-          "biome": "environmental:blossom_highlands"
+          "biome": "environmental:blossom_valleys"
         }
       ]
     }
