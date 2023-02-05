@@ -20,7 +20,10 @@ public class EnvironmentalBiomeTagsProvider extends BiomeTagsProvider {
 		this.tag(BiomeTags.IS_FOREST).add(EnvironmentalBiomes.BLOSSOM_WOODS.get(), EnvironmentalBiomes.BLOSSOM_VALLEYS.get());
 		this.tag(BiomeTags.HAS_RUINED_PORTAL_SWAMP).add(EnvironmentalBiomes.MARSH.get());
 		this.tag(BiomeTags.HAS_SWAMP_HUT).add(EnvironmentalBiomes.MARSH.get());
-		this.tag(BiomeTags.HAS_STRONGHOLD).add(EnvironmentalBiomes.MARSH.get(), EnvironmentalBiomes.BLOSSOM_WOODS.get(), EnvironmentalBiomes.BLOSSOM_VALLEYS.get());
+		this.tag(BiomeTags.IS_OVERWORLD).add(EnvironmentalBiomes.MARSH.get(), EnvironmentalBiomes.BLOSSOM_WOODS.get(), EnvironmentalBiomes.BLOSSOM_VALLEYS.get());
+		this.tag(BiomeTags.STRONGHOLD_BIASED_TO).add(EnvironmentalBiomes.MARSH.get(), EnvironmentalBiomes.BLOSSOM_WOODS.get(), EnvironmentalBiomes.BLOSSOM_VALLEYS.get());
+		this.tag(BiomeTags.WATER_ON_MAP_OUTLINES).add(EnvironmentalBiomes.MARSH.get());
+		this.tag(BiomeTags.HAS_CLOSER_WATER_FOG).add(EnvironmentalBiomes.MARSH.get());
 
 		this.tag(EnvironmentalBiomeTags.HAS_HUSK).add(Biomes.DESERT);
 		this.tag(EnvironmentalBiomeTags.HAS_STRAY).add(Biomes.SNOWY_PLAINS, Biomes.ICE_SPIKES);

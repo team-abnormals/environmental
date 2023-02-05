@@ -22,6 +22,7 @@ import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures.Envir
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.tags.PaintingVariantTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraftforge.api.distmarker.Dist;
@@ -123,6 +124,7 @@ public class Environmental {
 		generator.addProvider(includeServer, new EnvironmentalEntityTypeTagsProvider(generator, helper));
 		generator.addProvider(includeServer, new EnvironmentalStructureTagsProvider(generator, helper));
 		generator.addProvider(includeServer, new EnvironmentalBiomeTagsProvider(generator, helper));
+		generator.addProvider(includeServer, new EnvironmentalPaintingVariantTagsProvider(generator, helper));
 		generator.addProvider(includeServer, new EnvironmentalRecipeProvider(generator));
 		generator.addProvider(includeServer, new EnvironmentalAdvancementModifierProvider(generator));
 		generator.addProvider(includeServer, new EnvironmentalModdedBiomeSliceProvider(generator));
