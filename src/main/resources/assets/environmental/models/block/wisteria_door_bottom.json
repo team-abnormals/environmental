@@ -1,7 +1,0 @@
-{
-    "parent": "block/door_bottom",
-    "textures": {
-        "bottom": "environmental:block/wisteria_door_bottom",
-        "top": "environmental:block/wisteria_door_top"
-    }
-}
