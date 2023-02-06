@@ -4,7 +4,7 @@
   "features": [
     "environmental:huge_swamp_mushrooms",
     "environmental:trees_swamp",
-    "environmental:patch_duckweed"
+    "environmental:patch_duckweed_swamp"
   ],
   "step": "vegetal_decoration"
 }
