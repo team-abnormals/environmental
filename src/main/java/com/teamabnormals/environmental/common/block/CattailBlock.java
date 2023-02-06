@@ -8,6 +8,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -29,8 +30,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.ForgeHooks;
 
 import javax.annotation.Nullable;
-import java.util.Random;
-import net.minecraft.util.RandomSource;
 
 public class CattailBlock extends BushBlock implements SimpleWaterloggedBlock, BonemealableBlock {
 	protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
@@ -56,7 +55,7 @@ public class CattailBlock extends BushBlock implements SimpleWaterloggedBlock, B
 		int type = worldIn.getRandom().nextInt(6);
 		boolean waterlogged = worldIn.isWaterAt(pos);
 		if (waterlogged || type > 2) {
-			DoubleCattailBlock.placeAt(worldIn, pos, flags, waterlogged);
+			DoubleCattailBlock.placeAt(worldIn, pos, flags, worldIn.getBlockState(pos.below()).is(Blocks.MUD));
 		} else if (type > 0) {
 			worldIn.setBlock(pos, EnvironmentalBlocks.CATTAIL.get().defaultBlockState().setValue(WATERLOGGED, false), flags);
 		} else {

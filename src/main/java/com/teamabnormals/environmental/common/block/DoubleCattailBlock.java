@@ -153,10 +153,10 @@ public class DoubleCattailBlock extends Block implements BonemealableBlock, Simp
 	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
 		super.tick(state, worldIn, pos, random);
 		int i = state.getValue(AGE);
-		if (state.getValue(HALF) == DoubleBlockHalf.UPPER && i < 1 && state.getValue(FAKE_WATERLOGGED) && !state.getValue(WATERLOGGED) && worldIn.getBlockState(pos.below().below()).is(BlockTags.DIRT) && worldIn.getRawBrightness(pos.above(), 0) >= 9 && ForgeHooks.onCropsGrowPre(worldIn, pos, state, random.nextInt(15) == 0)) {
+		if (state.getValue(HALF) == DoubleBlockHalf.LOWER && i < 1 && worldIn.getBlockState(pos.below()).is(Blocks.MUD) && worldIn.getRawBrightness(pos.above(), 0) >= 9 && ForgeHooks.onCropsGrowPre(worldIn, pos, state, random.nextInt(15) == 0)) {
 			worldIn.setBlock(pos, state.setValue(AGE, i + 1), 2);
-			if (worldIn.getBlockState(pos.below()).getBlock() == this && worldIn.getBlockState(pos.below()).getValue(AGE) == 0) {
-				worldIn.setBlock(pos.below(), worldIn.getBlockState(pos.below()).setValue(AGE, i + 1), 2);
+			if (worldIn.getBlockState(pos.above()).getBlock() == this && worldIn.getBlockState(pos.above()).getValue(AGE) == 0) {
+				worldIn.setBlock(pos.above(), worldIn.getBlockState(pos.above()).setValue(AGE, i + 1), 2);
 				ForgeHooks.onCropsGrowPost(worldIn, pos, state);
 			}
 		}
@@ -237,13 +237,13 @@ public class DoubleCattailBlock extends Block implements BonemealableBlock, Simp
 	@Override
 	public boolean isValidBonemealTarget(BlockGetter worldIn, BlockPos pos, BlockState state, boolean isClient) {
 		boolean upper = state.getValue(HALF) == DoubleBlockHalf.UPPER;
-		return state.getValue(AGE) < 1 && state.getValue(FAKE_WATERLOGGED) && (upper ? !state.getValue(WATERLOGGED) : !worldIn.getBlockState(pos.above()).getValue(WATERLOGGED));
+		return state.getValue(AGE) < 1 && (upper ? worldIn.getBlockState(pos.below().below()).is(Blocks.MUD) : worldIn.getBlockState(pos.below()).is(Blocks.MUD));
 	}
 
 	@Override
 	public boolean isBonemealSuccess(Level worldIn, RandomSource rand, BlockPos pos, BlockState state) {
 		boolean upper = state.getValue(HALF) == DoubleBlockHalf.UPPER;
-		return state.getValue(AGE) < 1 && state.getValue(FAKE_WATERLOGGED) && (upper ? !state.getValue(WATERLOGGED) : !worldIn.getBlockState(pos.above()).getValue(WATERLOGGED));
+		return state.getValue(AGE) < 1 && (upper ? worldIn.getBlockState(pos.below().below()).is(Blocks.MUD) : worldIn.getBlockState(pos.below()).is(Blocks.MUD));
 	}
 
 	@Override
