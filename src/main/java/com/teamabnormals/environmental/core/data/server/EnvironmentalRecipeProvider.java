@@ -115,6 +115,7 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 		stonecutterResultFromBase(consumer, EnvironmentalBlocks.SMOOTH_MUD_STAIRS.get(), EnvironmentalBlocks.SMOOTH_MUD.get());
 		stonecutterResultFromBase(consumer, EnvironmentalBlocks.SMOOTH_MUD_WALL.get(), EnvironmentalBlocks.SMOOTH_MUD.get());
 		conditionalStonecuttingRecipe(consumer, VERTICAL_SLABS, EnvironmentalBlocks.SMOOTH_MUD_VERTICAL_SLAB.get(), EnvironmentalBlocks.SMOOTH_MUD.get(), 2);
+		chiseled(consumer, EnvironmentalBlocks.CHISELED_MUD_BRICKS.get(), Blocks.MUD_BRICK_SLAB);
 		stonecutterResultFromBase(consumer, EnvironmentalBlocks.CHISELED_MUD_BRICKS.get(), Blocks.MUD_BRICKS);
 
 		ShapedRecipeBuilder.shaped(Blocks.BROWN_WOOL).define('#', EnvironmentalItems.YAK_HAIR.get()).pattern("##").pattern("##").unlockedBy("has_yak_hair", has(EnvironmentalItems.YAK_HAIR.get())).save(consumer, new ResourceLocation(Environmental.MOD_ID, getItemName(Blocks.BROWN_WOOL)));

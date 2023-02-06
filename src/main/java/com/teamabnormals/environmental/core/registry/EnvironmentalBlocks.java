@@ -259,6 +259,4 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> BLUE_WISTERIA_HEDGE = HELPER.createCompatFuelBlock("quark", "blue_wisteria_hedge", () -> new HedgeBlock(EnvironmentalProperties.WISTERIA.log()), 300, CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> PURPLE_WISTERIA_HEDGE = HELPER.createCompatFuelBlock("quark", "purple_wisteria_hedge", () -> new HedgeBlock(EnvironmentalProperties.WISTERIA.log()), 300, CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> WHITE_WISTERIA_HEDGE = HELPER.createCompatFuelBlock("quark", "white_wisteria_hedge", () -> new HedgeBlock(EnvironmentalProperties.WISTERIA.log()), 300, CreativeModeTab.TAB_DECORATIONS);
-
-
 }
