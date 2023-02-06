@@ -8,15 +8,17 @@ import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.Direction.Plane;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelSimulatedRW;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 
-import java.util.Random;
-import net.minecraft.util.RandomSource;
 import java.util.Set;
+import java.util.function.BiConsumer;
 
 public class CherryTreeFeature extends Feature<TreeConfiguration> {
 	private Set<BlockPos> logPosSet;
@@ -98,6 +100,18 @@ public class CherryTreeFeature extends Feature<TreeConfiguration> {
 				});
 
 				TreeUtil.updateLeaves(level, this.logPosSet);
+
+				Set<BlockPos> set3 = Sets.newHashSet();
+				BiConsumer<BlockPos, BlockState> biconsumer3 = (p_225290_, p_225291_) -> {
+					set3.add(p_225290_.immutable());
+					level.setBlock(p_225290_, p_225291_, 19);
+				};
+
+				if (!config.decorators.isEmpty()) {
+					TreeDecorator.Context decoratorContext = new TreeDecorator.Context(level, biconsumer3, random, this.logPosSet, Sets.newHashSet(), Sets.newHashSet());
+					config.decorators.forEach((decorator) -> decorator.place(decoratorContext));
+				}
+
 				return true;
 			} else {
 				return false;

@@ -18,8 +18,10 @@ import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 
 import java.util.Set;
+import java.util.function.BiConsumer;
 
 public class WisteriaTreeFeature extends Feature<TreeConfiguration> {
 	private Set<BlockPos> logPosSet;
@@ -112,6 +114,18 @@ public class WisteriaTreeFeature extends Feature<TreeConfiguration> {
 				}
 
 				WisteriaTreeUtil.updateLeaves(world, this.logPosSet);
+
+				Set<BlockPos> set3 = Sets.newHashSet();
+				BiConsumer<BlockPos, BlockState> biconsumer3 = (p_225290_, p_225291_) -> {
+					set3.add(p_225290_.immutable());
+					world.setBlock(p_225290_, p_225291_, 19);
+				};
+
+				if (!config.decorators.isEmpty()) {
+					TreeDecorator.Context decoratorContext = new TreeDecorator.Context(world, biconsumer3, random, this.logPosSet, Sets.newHashSet(), Sets.newHashSet());
+					config.decorators.forEach((decorator) -> decorator.place(decoratorContext));
+				}
+
 				return true;
 			} else {
 				return false;
