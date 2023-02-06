@@ -4,13 +4,11 @@
       "advancement": {
         "parent": "minecraft:recipes/root",
         "criteria": {
-          "has_cherry_boat": {
+          "has_boat": {
             "conditions": {
               "items": [
                 {
-                  "items": [
-                    "environmental:cherry_boat"
-                  ]
+                  "tag": "minecraft:boats"
                 }
               ]
             },
@@ -25,7 +23,7 @@
         },
         "requirements": [
           [
-            "has_cherry_boat",
+            "has_boat",
             "has_the_recipe"
           ]
         ],

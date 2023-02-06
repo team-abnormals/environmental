@@ -9,19 +9,15 @@
         }
       ],
       "recipe": {
-        "type": "minecraft:crafting_shaped",
+        "type": "minecraft:crafting_shapeless",
         "group": "furnace_boat",
-        "key": {
-          "B": {
-            "item": "environmental:willow_boat"
-          },
-          "F": {
+        "ingredients": [
+          {
             "item": "minecraft:furnace"
+          },
+          {
+            "item": "environmental:willow_boat"
           }
-        },
-        "pattern": [
-          "F",
-          "B"
         ],
         "result": {
           "item": "environmental:willow_furnace_boat"

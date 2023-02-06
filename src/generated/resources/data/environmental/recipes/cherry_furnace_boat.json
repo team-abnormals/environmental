@@ -9,19 +9,15 @@
         }
       ],
       "recipe": {
-        "type": "minecraft:crafting_shaped",
+        "type": "minecraft:crafting_shapeless",
         "group": "furnace_boat",
-        "key": {
-          "B": {
-            "item": "environmental:cherry_boat"
-          },
-          "F": {
+        "ingredients": [
+          {
             "item": "minecraft:furnace"
+          },
+          {
+            "item": "environmental:cherry_boat"
           }
-        },
-        "pattern": [
-          "F",
-          "B"
         ],
         "result": {
           "item": "environmental:cherry_furnace_boat"
