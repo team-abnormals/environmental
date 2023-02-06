@@ -16,7 +16,6 @@ public class EnvironmentalGeneration {
 		BiomeDefaultFeatures.addSwampClayDisk(generation);
 		BiomeDefaultFeatures.addDefaultMushrooms(generation);
 		BiomeDefaultFeatures.addSwampExtraVegetation(generation);
-		generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, EnvironmentalPlacedFeatures.DISK_MUD.getHolder().get());
 		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.TREES_MARSH.getHolder().get());
 		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_BLUE_ORCHID.getHolder().get());
 		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_CORNFLOWER.getHolder().get());

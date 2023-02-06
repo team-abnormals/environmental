@@ -1,6 +1,9 @@
 {
   "type": "forge:add_features",
-  "biomes": "minecraft:swamp",
+  "biomes": [
+    "minecraft:swamp",
+    "environmental:marsh"
+  ],
   "features": "environmental:disk_mud",
   "step": "underground_ores"
 }

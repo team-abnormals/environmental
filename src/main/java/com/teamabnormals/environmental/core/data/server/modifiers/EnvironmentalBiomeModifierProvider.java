@@ -3,6 +3,7 @@ package com.teamabnormals.environmental.core.data.server.modifiers;
 import com.mojang.serialization.JsonOps;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalBiomeTags;
+import com.teamabnormals.environmental.core.registry.EnvironmentalBiomes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures.EnvironmentalPlacedFeatures;
 import net.minecraft.core.HolderSet;
@@ -59,7 +60,7 @@ public class EnvironmentalBiomeModifierProvider {
 		addModifier(modifiers, "add_feature/tall_dead_bush", new AddFeaturesBiomeModifier(biome(biomeRegistry, Biomes.DESERT), of(placedFeatures, EnvironmentalPlacedFeatures.PATCH_TALL_DEAD_BUSH), GenerationStep.Decoration.VEGETAL_DECORATION));
 		addModifier(modifiers, "add_feature/tall_dead_bush_badlands", new AddFeaturesBiomeModifier(tag(biomeRegistry, BiomeTags.IS_BADLANDS), of(placedFeatures, EnvironmentalPlacedFeatures.PATCH_TALL_DEAD_BUSH_BADLANDS), GenerationStep.Decoration.VEGETAL_DECORATION));
 		addModifier(modifiers, "add_feature/mycelium_sprouts", new AddFeaturesBiomeModifier(biome(biomeRegistry, Biomes.MUSHROOM_FIELDS), of(placedFeatures, EnvironmentalPlacedFeatures.PATCH_MYCELIUM_SPROUTS), GenerationStep.Decoration.VEGETAL_DECORATION));
-		addModifier(modifiers, "add_feature/mud_disks", new AddFeaturesBiomeModifier(biome(biomeRegistry, Biomes.SWAMP), of(placedFeatures, EnvironmentalPlacedFeatures.DISK_MUD), GenerationStep.Decoration.UNDERGROUND_ORES));
+		addModifier(modifiers, "add_feature/mud_disk", new AddFeaturesBiomeModifier(biome(biomeRegistry, Biomes.SWAMP, EnvironmentalBiomes.MARSH.getKey()), of(placedFeatures, EnvironmentalPlacedFeatures.DISK_MUD), GenerationStep.Decoration.UNDERGROUND_ORES));
 
 		addModifier(modifiers, "add_feature/swamp_vegetation", new AddFeaturesBiomeModifier(biome(biomeRegistry, Biomes.SWAMP), of(placedFeatures, EnvironmentalPlacedFeatures.HUGE_SWAMP_MUSHROOMS, EnvironmentalPlacedFeatures.TREES_SWAMP, EnvironmentalPlacedFeatures.PATCH_DUCKWEED_SWAMP), GenerationStep.Decoration.VEGETAL_DECORATION));
 		addModifier(modifiers, "add_feature/flower_forest_vegetation", new AddFeaturesBiomeModifier(biome(biomeRegistry, Biomes.FLOWER_FOREST), of(placedFeatures, EnvironmentalPlacedFeatures.FLOWER_CARTWHEEL, EnvironmentalPlacedFeatures.PATCH_DELPHINIUMS, EnvironmentalPlacedFeatures.TREES_WISTERIA), GenerationStep.Decoration.VEGETAL_DECORATION));
