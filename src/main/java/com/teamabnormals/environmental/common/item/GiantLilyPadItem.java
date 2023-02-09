@@ -19,64 +19,61 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.common.util.BlockSnapshot;
 import net.minecraftforge.event.ForgeEventFactory;
 
 public class GiantLilyPadItem extends BlockItem {
+
 	public GiantLilyPadItem(Item.Properties builder) {
 		super(EnvironmentalBlocks.GIANT_LILY_PAD.get(), builder);
 	}
 
+	@Override
 	public InteractionResult useOn(UseOnContext context) {
 		return InteractionResult.PASS;
 	}
 
-	public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
-		ItemStack itemstack = playerIn.getItemInHand(handIn);
-		HitResult raytraceresult = getPlayerPOVHitResult(worldIn, playerIn, ClipContext.Fluid.SOURCE_ONLY);
-		if (raytraceresult.getType() == HitResult.Type.MISS) {
-			return InteractionResultHolder.pass(itemstack);
+	@Override
+	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+		ItemStack stack = player.getItemInHand(hand);
+		BlockHitResult result = getPlayerPOVHitResult(level, player, ClipContext.Fluid.SOURCE_ONLY);
+		if (result.getType() == HitResult.Type.MISS) {
+			return InteractionResultHolder.pass(stack);
 		} else {
-			if (raytraceresult.getType() == HitResult.Type.BLOCK) {
-				BlockHitResult blockraytraceresult = (BlockHitResult) raytraceresult;
-				BlockPos blockpos = blockraytraceresult.getBlockPos();
-				Direction direction = blockraytraceresult.getDirection();
-				if (!worldIn.mayInteract(playerIn, blockpos) || !playerIn.mayUseItemAt(blockpos.relative(direction), direction, itemstack)) {
-					return InteractionResultHolder.fail(itemstack);
+			if (result.getType() == HitResult.Type.BLOCK) {
+				BlockPos pos = result.getBlockPos();
+				Direction direction = result.getDirection();
+				if (!level.mayInteract(player, pos) || !player.mayUseItemAt(pos.relative(direction), direction, stack)) {
+					return InteractionResultHolder.fail(stack);
 				}
 
-				BlockPos blockpos1 = blockpos.above();
-				FluidState ifluidstate = worldIn.getFluidState(blockpos);
-				if ((ifluidstate.getType() == Fluids.WATER) && GiantLilyPadBlock.checkPositions(worldIn, blockpos1, this.getBlock().defaultBlockState())) {
-
-					// special case for handling block placement with water lilies
-					BlockSnapshot blocksnapshot = BlockSnapshot.create(worldIn.dimension(), worldIn, blockpos1);
-					if (!worldIn.isClientSide())
-						GiantLilyPadBlock.placeAt(worldIn, blockpos1, this.getBlock().defaultBlockState(), 18);
-					if (ForgeEventFactory.onBlockPlace(playerIn, blocksnapshot, net.minecraft.core.Direction.UP)) {
+				BlockPos abovePos = pos.above();
+				if (GiantLilyPadBlock.isValidBlock(level.getBlockState(pos), level, pos) && GiantLilyPadBlock.checkPositions(level, abovePos, this.getBlock().defaultBlockState())) {
+					BlockSnapshot blocksnapshot = BlockSnapshot.create(level.dimension(), level, abovePos);
+					if (!level.isClientSide())
+						GiantLilyPadBlock.placeAt(level, abovePos, this.getBlock().defaultBlockState(), 18);
+					if (ForgeEventFactory.onBlockPlace(player, blocksnapshot, Direction.UP)) {
 						blocksnapshot.restore(true, false);
-						return InteractionResultHolder.fail(itemstack);
+						return InteractionResultHolder.fail(stack);
 					}
 
-					if (playerIn instanceof ServerPlayer) {
-						CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayer) playerIn, blockpos1, itemstack);
+					if (player instanceof ServerPlayer) {
+						CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayer) player, abovePos, stack);
 					}
 
-					if (!playerIn.getAbilities().instabuild) {
-						itemstack.shrink(1);
+					if (!player.getAbilities().instabuild) {
+						stack.shrink(1);
 					}
 
-					playerIn.awardStat(Stats.ITEM_USED.get(this));
-					worldIn.playSound(playerIn, blockpos, SoundEvents.LILY_PAD_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
-					return InteractionResultHolder.success(itemstack);
+					player.awardStat(Stats.ITEM_USED.get(this));
+					level.playSound(player, pos, SoundEvents.LILY_PAD_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
+					return InteractionResultHolder.success(stack);
 				}
 			}
 
-			return InteractionResultHolder.fail(itemstack);
+			return InteractionResultHolder.fail(stack);
 		}
 	}
 }

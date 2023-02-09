@@ -25,7 +25,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.Vec3;
@@ -127,10 +126,12 @@ public class GiantLilyPadBlock extends BushBlock implements IPlantable {
 	}
 
 	@Override
-	protected boolean mayPlaceOn(BlockState state, BlockGetter worldIn, BlockPos pos) {
-		FluidState fluidstate = worldIn.getFluidState(pos);
-		FluidState fluidstate1 = worldIn.getFluidState(pos.above());
-		return (fluidstate.getType() == Fluids.WATER || state.getMaterial() == Material.ICE) && fluidstate1.getType() == Fluids.EMPTY;
+	public boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
+		return isValidBlock(state, level, pos);
+	}
+
+	public static boolean isValidBlock(BlockState state, BlockGetter level, BlockPos pos) {
+		return (level.getFluidState(pos).is(Fluids.WATER) || state.getMaterial() == Material.ICE) && level.getFluidState(pos.above()).is(Fluids.EMPTY);
 	}
 
 	@Override
