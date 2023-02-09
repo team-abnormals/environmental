@@ -24,7 +24,7 @@ public class DeerRunFromAttackerGoal extends Goal {
 	@Override
 	public boolean canUse() {
 		LivingEntity attacker = this.deer.getLastHurtByMob();
-		return attacker != null && attacker.isAlive() && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(attacker) && this.deer.distanceToSqr(attacker) <= 256.0F;
+		return attacker != null && attacker.isAlive() && EntitySelector.NO_SPECTATORS.test(attacker) && this.deer.distanceToSqr(attacker) <= 256.0F;
 	}
 
 	@Override
