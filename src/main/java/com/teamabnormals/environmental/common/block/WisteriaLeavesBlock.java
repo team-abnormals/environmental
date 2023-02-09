@@ -7,6 +7,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -21,62 +22,72 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.IForgeShearable;
-
-import java.util.Random;
-import net.minecraft.util.RandomSource;
 
 public class WisteriaLeavesBlock extends Block implements IForgeShearable {
 	public static final IntegerProperty DISTANCE = IntegerProperty.create("distance", 1, 8);
 	public static final BooleanProperty PERSISTENT = BlockStateProperties.PERSISTENT;
+	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	private static final TargetedItemCategoryFiller FILLER = new TargetedItemCategoryFiller(() -> Items.DARK_OAK_LEAVES);
 
 	public WisteriaLeavesBlock(Block.Properties properties) {
 		super(properties);
-		registerDefaultState(stateDefinition.any().setValue(DISTANCE, 8).setValue(PERSISTENT, false));
+		this.registerDefaultState(this.stateDefinition.any().setValue(DISTANCE, 8).setValue(PERSISTENT, false).setValue(WATERLOGGED, false));
+	}
+
+	@Override
+	public VoxelShape getBlockSupportShape(BlockState state, BlockGetter level, BlockPos pos) {
+		return Shapes.empty();
 	}
 
 	@Override
 	public boolean isRandomlyTicking(BlockState state) {
-		return state.getValue(DISTANCE) == 8 && !state.getValue(PERSISTENT);
+		return state.getValue(DISTANCE) == 7 && !state.getValue(PERSISTENT);
 	}
 
 	@Override
-	public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
+	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
 		if (!state.getValue(PERSISTENT) && state.getValue(DISTANCE) == 8) {
-			dropResources(state, worldIn, pos);
-			worldIn.removeBlock(pos, false);
+			dropResources(state, level, pos);
+			level.removeBlock(pos, false);
 		}
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
-		worldIn.setBlock(pos, updateDistance(state, worldIn, pos), 3);
+	public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+		level.setBlock(pos, updateDistance(state, level, pos), 3);
 	}
 
 	@Override
-	public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state, BlockGetter level, BlockPos pos) {
 		return 1;
 	}
 
 	@Override
-	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
-		int i = getDistance(facingState) + 1;
-		if (i != 1 || stateIn.getValue(DISTANCE) != i) {
-			worldIn.scheduleTick(currentPos, this, 1);
+	public BlockState updateShape(BlockState state, Direction direction, BlockState facingState, LevelAccessor level, BlockPos pos, BlockPos facingPos) {
+		if (state.getValue(WATERLOGGED)) {
+			level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
 		}
-		return stateIn;
+
+		int i = getDistanceAt(facingState) + 1;
+		if (i != 1 || state.getValue(DISTANCE) != i) {
+			level.scheduleTick(pos, this, 1);
+		}
+
+		return state;
 	}
 
-	private static BlockState updateDistance(BlockState state, LevelAccessor worldIn, BlockPos pos) {
+	public static BlockState updateDistance(BlockState state, LevelAccessor level, BlockPos pos) {
 		int i = 8;
-		BlockPos.MutableBlockPos blockpos$mutable = new BlockPos.MutableBlockPos();
+		BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
 
 		for (Direction direction : Direction.values()) {
-			blockpos$mutable.setWithOffset(pos, direction);
-			i = Math.min(i, getDistance(worldIn.getBlockState(blockpos$mutable)) + 1);
+			mutablePos.setWithOffset(pos, direction);
+			i = Math.min(i, getDistanceAt(level.getBlockState(mutablePos)) + 1);
 			if (i == 1) {
 				break;
 			}
@@ -85,28 +96,26 @@ public class WisteriaLeavesBlock extends Block implements IForgeShearable {
 		return state.setValue(DISTANCE, i);
 	}
 
-	private static int getDistance(BlockState neighbor) {
-		if (neighbor.is(BlockTags.LOGS)) {
-			return 0;
-		} else {
-			if (neighbor.getBlock() instanceof WisteriaLeavesBlock) return neighbor.getValue(DISTANCE);
-			if (neighbor.getBlock() instanceof LeavesBlock) return neighbor.getValue(LeavesBlock.DISTANCE);
-			else return 8;
-		}
+	private static int getDistanceAt(BlockState state) {
+		return state.is(BlockTags.LOGS) ? 0 : state.getBlock() instanceof WisteriaLeavesBlock ? state.getValue(DISTANCE) : state.getBlock() instanceof LeavesBlock ? state.getValue(LeavesBlock.DISTANCE) : 8;
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
-	public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, RandomSource rand) {
-		if (worldIn.isRainingAt(pos.above())) {
-			if (rand.nextInt(15) == 1) {
-				BlockPos blockpos = pos.below();
-				BlockState blockstate = worldIn.getBlockState(blockpos);
-				if (!blockstate.canOcclude() || !blockstate.isFaceSturdy(worldIn, blockpos, Direction.UP)) {
-					double d0 = (float) pos.getX() + rand.nextFloat();
+	public FluidState getFluidState(BlockState state) {
+		return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+	}
+
+	@Override
+	public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+		if (level.isRainingAt(pos.above())) {
+			if (random.nextInt(15) == 1) {
+				BlockPos belowPos = pos.below();
+				BlockState belowState = level.getBlockState(belowPos);
+				if (!belowState.canOcclude() || !belowState.isFaceSturdy(level, belowPos, Direction.UP)) {
+					double d0 = (double) pos.getX() + random.nextDouble();
 					double d1 = (double) pos.getY() - 0.05D;
-					double d2 = (float) pos.getZ() + rand.nextFloat();
-					worldIn.addParticle(ParticleTypes.DRIPPING_WATER, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+					double d2 = (double) pos.getZ() + random.nextDouble();
+					level.addParticle(ParticleTypes.DRIPPING_WATER, d0, d1, d2, 0.0D, 0.0D, 0.0D);
 				}
 			}
 		}
@@ -114,12 +123,14 @@ public class WisteriaLeavesBlock extends Block implements IForgeShearable {
 
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-		builder.add(DISTANCE, PERSISTENT);
+		builder.add(DISTANCE, PERSISTENT, WATERLOGGED);
 	}
 
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
-		return updateDistance(defaultBlockState().setValue(PERSISTENT, true), context.getLevel(), context.getClickedPos());
+		FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
+		BlockState state = this.defaultBlockState().setValue(PERSISTENT, true).setValue(WATERLOGGED, fluidState.is(Fluids.WATER));
+		return updateDistance(state, context.getLevel(), context.getClickedPos());
 	}
 
 	@Override
