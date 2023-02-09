@@ -1,10 +1,10 @@
 {
   "type": "forge:add_spawns",
-  "biomes": "#environmental:has_animal/yak",
+  "biomes": "minecraft:meadow",
   "spawners": {
     "type": "environmental:yak",
     "maxCount": 4,
     "minCount": 2,
-    "weight": 8
+    "weight": 2
   }
 }

@@ -1,9 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": [
-    "minecraft:plains",
-    "minecraft:sunflower_plains"
-  ],
+  "biomes": "#environmental:has_animal/cow",
   "features": "environmental:patch_giant_tall_grass_plains",
   "step": "vegetal_decoration"
 }

@@ -160,7 +160,7 @@ public class Duck extends Animal {
 		this.entityData.set(EATING, eatingTimeIn);
 	}
 
-	public static boolean canDuckSpawn(EntityType<? extends Animal> animal, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, RandomSource random) {
+	public static boolean checkDuckSpawnRules(EntityType<? extends Animal> animal, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, RandomSource random) {
 		return worldIn.getBlockState(pos.below()).is(EnvironmentalBlockTags.WATER_ANIMALS_SPAWNABLE_ON) && isBrightEnoughToSpawn(worldIn, pos);
 	}
 

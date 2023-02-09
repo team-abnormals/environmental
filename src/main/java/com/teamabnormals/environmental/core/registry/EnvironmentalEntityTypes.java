@@ -35,11 +35,10 @@ public class EnvironmentalEntityTypes {
 	public static final RegistryObject<EntityType<ThrownDuckEgg>> DUCK_EGG = HELPER.createEntity("duck_egg", ThrownDuckEgg::new, ThrownDuckEgg::new, MobCategory.MISC, 0.25F, 0.25F);
 	public static final RegistryObject<EntityType<ThrownMudBall>> MUD_BALL = HELPER.createEntity("mud_ball", ThrownMudBall::new, ThrownMudBall::new, MobCategory.MISC, 0.25F, 0.25F);
 
-
 	public static void registerSpawns() {
-		SpawnPlacements.register(SLABFISH.get(), SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Duck::canDuckSpawn);
+		SpawnPlacements.register(SLABFISH.get(), SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Duck::checkDuckSpawnRules);
 		SpawnPlacements.register(YAK.get(), SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
-		SpawnPlacements.register(DUCK.get(), SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Duck::canDuckSpawn);
+		SpawnPlacements.register(DUCK.get(), SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Duck::checkDuckSpawnRules);
 		SpawnPlacements.register(DEER.get(), SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
 		SpawnPlacements.register(ZOMBIE_DEER.get(), SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
 		SpawnPlacements.register(KOI.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Koi::canKoiSpawn);

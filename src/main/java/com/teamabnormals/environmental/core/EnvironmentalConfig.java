@@ -9,13 +9,6 @@ import org.apache.commons.lang3.tuple.Pair;
 public class EnvironmentalConfig {
 
 	public static class Common {
-		public final ConfigValue<Boolean> generateGiantMushrooms;
-		public final ConfigValue<Boolean> generateGiantTallGrass;
-		public final ConfigValue<Boolean> generateWisteriaTrees;
-		public final ConfigValue<Boolean> generateDelphiniums;
-		public final ConfigValue<Boolean> generateHibiscus;
-
-		public final ConfigValue<Boolean> limitFarmAnimalSpawns;
 		public final ConfigValue<Boolean> biomeVariantsAlwaysSpawn;
 
 		public final ConfigValue<Boolean> blockOnlyNaturalSpawns;
@@ -24,18 +17,7 @@ public class EnvironmentalConfig {
 		public final ConfigValue<Boolean> serenityEffect;
 
 		Common(ForgeConfigSpec.Builder builder) {
-			builder.push("world");
-			builder.push("generation");
-			generateGiantMushrooms = builder.define("Giant Mushroom generation in Swamps", true);
-			generateGiantTallGrass = builder.define("Giant Tall Grass generation", true);
-			generateWisteriaTrees = builder.define("Wisteria Tree generation in Flower Forests", true);
-			generateDelphiniums = builder.define("Delphinium generation in Flower Forests", true);
-			generateHibiscus = builder.define("Hibiscus generation in Jungles", true);
-			builder.pop();
-			builder.pop();
-
-			builder.push("entities");
-			limitFarmAnimalSpawns = builder.comment("Make farm animals spawn in less biomes to allow new mobs to take their place and diversify biome spawns").define("Limit farm animal spawns", true);
+			builder.push("mobs");
 			biomeVariantsAlwaysSpawn = builder.comment("Make biome variants of mobs like Husks always spawn in place of their original in their biomes").define("Biome variants always spawn", true);
 			builder.push("koi");
 			blockOnlyNaturalSpawns = builder.comment("Make Koi only block natural spawns").define("Block only natural spawns", true);
