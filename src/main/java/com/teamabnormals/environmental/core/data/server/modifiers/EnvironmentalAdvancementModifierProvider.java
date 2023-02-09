@@ -11,6 +11,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -24,7 +25,8 @@ public class EnvironmentalAdvancementModifierProvider extends AdvancementModifie
 
 	@Override
 	protected void registerEntries() {
-		this.entry("nether/all_effects").selects("nether/all_effects").addModifier(new EffectsChangedModifier("all_effects", false, MobEffectsPredicate.effects().and(EnvironmentalMobEffects.PANIC.get()).and(EnvironmentalMobEffects.SERENITY.get())));
+		this.entry("nether/all_effects").selects("nether/all_effects").addModifier(new EffectsChangedModifier("all_effects", false, MobEffectsPredicate.effects().and(MobEffects.HEALTH_BOOST).and(EnvironmentalMobEffects.PANIC.get()).and(EnvironmentalMobEffects.SERENITY.get())));
+		this.entry("nether/all_potions").selects("nether/all_potions").addModifier(new EffectsChangedModifier("all_effects", false, MobEffectsPredicate.effects().and(MobEffects.HEALTH_BOOST)));
 
 		CriteriaModifier.Builder balancedDiet = CriteriaModifier.builder(this.modId);
 		EnvironmentalItems.HELPER.getDeferredRegister().getEntries().forEach(registryObject -> {
