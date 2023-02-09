@@ -17,6 +17,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LeavesBlock;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -28,7 +29,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.IForgeShearable;
 
-public class WisteriaLeavesBlock extends Block implements IForgeShearable {
+public class WisteriaLeavesBlock extends Block implements SimpleWaterloggedBlock, IForgeShearable {
 	public static final IntegerProperty DISTANCE = IntegerProperty.create("distance", 1, 8);
 	public static final BooleanProperty PERSISTENT = BlockStateProperties.PERSISTENT;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -46,7 +47,7 @@ public class WisteriaLeavesBlock extends Block implements IForgeShearable {
 
 	@Override
 	public boolean isRandomlyTicking(BlockState state) {
-		return state.getValue(DISTANCE) == 7 && !state.getValue(PERSISTENT);
+		return state.getValue(DISTANCE) == 8 && !state.getValue(PERSISTENT);
 	}
 
 	@Override
