@@ -14,6 +14,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -43,8 +44,6 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import net.minecraft.util.RandomSource;
 
 public class Deer extends AbstractDeer {
 	private static final EntityDataAccessor<Integer> DEER_COAT_COLOR = SynchedEntityData.defineId(Deer.class, EntityDataSerializers.INT);
@@ -203,15 +202,13 @@ public class Deer extends AbstractDeer {
 		if (this.isSpreadingFlowers()) {
 			BlockPos pos = this.blockPosition();
 			BlockState state = this.flowers.get(this.random.nextInt(this.flowers.size()));
-
-			if (state.getBlock() instanceof DoublePlantBlock) {
-				if (state.canSurvive(this.level, pos) && this.level.isEmptyBlock(pos) && this.level.isEmptyBlock(pos.above())) {
+			boolean tall = state.getBlock() instanceof DoublePlantBlock;
+			if (state.canSurvive(this.level, pos) && this.level.isEmptyBlock(pos) && (!tall || this.level.isEmptyBlock(pos.above()))) {
+				if (!tall) {
+					this.level.setBlock(pos, state, 3);
+				} else {
 					DoublePlantBlock.placeAt(this.level, state, pos, 2);
-					this.setFlowerAmount(this.getFlowerAmount() - 1);
-					this.spawnBoneMealParticles(state, pos);
 				}
-			} else if (state.canSurvive(this.level, pos) && this.level.isEmptyBlock(pos)) {
-				this.level.setBlock(pos, state, 3);
 				SoundType sound = state.getSoundType();
 				this.playSound(sound.getPlaceSound(), (sound.getVolume() + 1.0F) / 4.0F, sound.getPitch() * 0.8F);
 				this.setFlowerAmount(this.getFlowerAmount() - 1);
