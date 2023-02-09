@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockSource;
 import net.minecraft.core.Position;
+import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.core.dispenser.AbstractProjectileDispenseBehavior;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -38,6 +39,14 @@ public class EnvironmentalCompat {
 		registerCompostables();
 		registerFlammables();
 		registerDispenserBehaviors();
+		registerCauldronInteractions();
+	}
+
+	public static void registerCauldronInteractions() {
+		CauldronInteraction.WATER.put(EnvironmentalItems.THIEF_HOOD.get(), CauldronInteraction.DYED_ITEM);
+		CauldronInteraction.WATER.put(EnvironmentalItems.HEALER_POUCH.get(), CauldronInteraction.DYED_ITEM);
+		CauldronInteraction.WATER.put(EnvironmentalItems.ARCHITECT_BELT.get(), CauldronInteraction.DYED_ITEM);
+		CauldronInteraction.WATER.put(EnvironmentalItems.WANDERER_BOOTS.get(), CauldronInteraction.DYED_ITEM);
 	}
 
 	public static void registerCompostables() {
