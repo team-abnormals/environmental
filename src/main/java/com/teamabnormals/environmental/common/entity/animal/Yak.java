@@ -100,7 +100,7 @@ public class Yak extends Animal implements IForgeShearable, Shearable, NeutralMo
 	public void readAdditionalSaveData(CompoundTag compound) {
 		super.readAdditionalSaveData(compound);
 		this.setSheared(compound.getBoolean("Sheared"));
-		this.readPersistentAngerSaveData((ServerLevel) this.level, compound);
+		this.readPersistentAngerSaveData(this.level, compound);
 	}
 
 	@Override
@@ -236,7 +236,7 @@ public class Yak extends Animal implements IForgeShearable, Shearable, NeutralMo
 		world.playSound(null, this, SoundEvents.SHEEP_SHEAR, player == null ? SoundSource.BLOCKS : SoundSource.PLAYERS, 1.0F, 1.0F);
 		if (!world.isClientSide) {
 			this.setSheared(true);
-			if (!(player.getItemBySlot(EquipmentSlot.LEGS).getItem() instanceof YakPantsItem))
+			if (!player.getAbilities().instabuild && !(player.getItemBySlot(EquipmentSlot.LEGS).getItem() instanceof YakPantsItem))
 				this.setTarget(player);
 			int i = 4 + this.random.nextInt(12);
 
