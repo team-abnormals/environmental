@@ -1,6 +1,7 @@
 package com.teamabnormals.environmental.common.entity.animal;
 
 import com.teamabnormals.environmental.common.item.YakPantsItem;
+import com.teamabnormals.environmental.core.other.tags.EnvironmentalItemTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSoundEvents;
@@ -70,7 +71,7 @@ public class Yak extends Animal implements IForgeShearable, Shearable, NeutralMo
 //		this.goalSelector.addGoal(1, new YakChargeGoal(this));
 		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0D, false));
 		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
-		this.goalSelector.addGoal(3, new TemptGoal(this, 1.1D, Ingredient.of(Items.WHEAT), false));
+		this.goalSelector.addGoal(3, new TemptGoal(this, 1.1D, Ingredient.of(EnvironmentalItemTags.YAK_FOOD), false));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
 		this.goalSelector.addGoal(6, this.eatGrassGoal);
 		this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
@@ -151,6 +152,11 @@ public class Yak extends Animal implements IForgeShearable, Shearable, NeutralMo
 		} else {
 			return super.mobInteract(p_230254_1_, p_230254_2_);
 		}
+	}
+
+	@Override
+	public boolean isFood(ItemStack stack) {
+		return Ingredient.of(EnvironmentalItemTags.YAK_FOOD).test(stack);
 	}
 
 	public float getHeadEatingOffset(float partialTicks) {

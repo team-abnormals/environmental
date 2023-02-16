@@ -27,6 +27,7 @@ public class EnvironmentalItemTags {
 	public static final TagKey<Item> SLABFISH_SNACKS = itemTag("slabfish_snacks");
 	public static final TagKey<Item> SLABFISH_FOOD = itemTag("slabfish_food");
 	public static final TagKey<Item> SLABFISH_TAME_ITEMS = itemTag("slabfish_tame_items");
+	public static final TagKey<Item> YAK_FOOD = itemTag("yak_food");
 
 	private static TagKey<Item> itemTag(String tagName) {
 		return TagUtil.itemTag(Environmental.MOD_ID, tagName);
