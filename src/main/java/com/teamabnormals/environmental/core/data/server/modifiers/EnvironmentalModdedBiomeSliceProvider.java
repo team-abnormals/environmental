@@ -26,7 +26,7 @@ public class EnvironmentalModdedBiomeSliceProvider extends ModdedBiomeSliceProvi
 	protected void registerSlices() {
 		List<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> entries = new ArrayList<>();
 		new EnvironmentalBiomeBuilder().addBiomes(entries::add);
-		this.registerSlice("main", 4, new BiomeUtil.MultiNoiseModdedBiomeProvider(new Climate.ParameterList<>(entries)), LevelStem.OVERWORLD.location());
+		this.registerSlice("main", 3, new BiomeUtil.MultiNoiseModdedBiomeProvider(new Climate.ParameterList<>(entries)), LevelStem.OVERWORLD.location());
 	}
 
 	//Modified version of OverworldBiomeBuilder to simplify Environmental's slice
@@ -48,11 +48,36 @@ public class EnvironmentalModdedBiomeSliceProvider extends ModdedBiomeSliceProvi
 		private final Climate.Parameter farInlandContinentalness = Climate.Parameter.span(0.3F, 1.0F);
 		private final ResourceKey<Biome> VANILLA = BlueprintBiomes.ORIGINAL_SOURCE_MARKER.getKey();
 		private final ResourceKey<Biome>[][] OCEANS = new ResourceKey[][]{{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA}, {VANILLA, VANILLA, VANILLA, VANILLA, VANILLA}};
-		private final ResourceKey<Biome>[][] MIDDLE_BIOMES = new ResourceKey[][]{{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA}, {VANILLA, VANILLA, EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), EnvironmentalBiomes.BLOSSOM_VALLEYS.getKey(), EnvironmentalBiomes.BLOSSOM_WOODS.getKey()}, {VANILLA, VANILLA, EnvironmentalBiomes.BLOSSOM_VALLEYS.getKey(), EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), EnvironmentalBiomes.BLOSSOM_WOODS.getKey()}, {VANILLA, VANILLA, EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), VANILLA, VANILLA}, {VANILLA, VANILLA, VANILLA, VANILLA, VANILLA}};
-		private final ResourceKey<Biome>[][] MIDDLE_BIOMES_VARIANT = new ResourceKey[][]{{VANILLA, null, VANILLA, null, null}, {null, null, null, null, null}, {null, null, EnvironmentalBiomes.BLOSSOM_VALLEYS.getKey(), null, null}, {null, null, null, VANILLA, VANILLA}, {null, null, null, null, null}};
-		private final ResourceKey<Biome>[][] PLATEAU_BIOMES = new ResourceKey[][]{{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA}, {VANILLA, VANILLA, EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), EnvironmentalBiomes.BLOSSOM_WOODS.getKey()}, {VANILLA, VANILLA, EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), EnvironmentalBiomes.BLOSSOM_WOODS.getKey()}, {VANILLA, VANILLA, EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), VANILLA, VANILLA}, {VANILLA, VANILLA, VANILLA, VANILLA, VANILLA}};
-		private final ResourceKey<Biome>[][] PLATEAU_BIOMES_VARIANT = new ResourceKey[][]{{null, null, null, null, null}, {null, null, null, null, null}, {null, null, null, null, null}, {null, null, null, null, null}, {null, null, null, null, null}};
-		private final ResourceKey<Biome>[][] SHATTERED_BIOMES = new ResourceKey[][]{{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA}, {VANILLA, VANILLA, VANILLA, EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), EnvironmentalBiomes.BLOSSOM_WOODS.getKey()}, {VANILLA, VANILLA, VANILLA, EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), EnvironmentalBiomes.BLOSSOM_WOODS.getKey()}, {null, null, null, null, null}, {null, null, null, null, null}};
+		private final ResourceKey<Biome>[][] MIDDLE_BIOMES = new ResourceKey[][]{
+				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA},
+				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA},
+				{VANILLA, VANILLA, VANILLA, EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), VANILLA},
+				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA},
+				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA}};
+		private final ResourceKey<Biome>[][] MIDDLE_BIOMES_VARIANT = new ResourceKey[][]{
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, EnvironmentalBiomes.BLOSSOM_VALLEYS.getKey(), null},
+				{null, null, null, null, null},
+				{null, null, null, null, null}};
+		private final ResourceKey<Biome>[][] PLATEAU_BIOMES = new ResourceKey[][]{
+				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA},
+				{VANILLA, VANILLA, VANILLA, EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), EnvironmentalBiomes.BLOSSOM_WOODS.getKey()},
+				{VANILLA, VANILLA, VANILLA, EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), EnvironmentalBiomes.BLOSSOM_WOODS.getKey()},
+				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA},
+				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA}};
+		private final ResourceKey<Biome>[][] PLATEAU_BIOMES_VARIANT = new ResourceKey[][]{
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, EnvironmentalBiomes.BLOSSOM_VALLEYS.getKey(), null},
+				{null, null, null, null, null},
+				{null, null, null, null, null}};
+		private final ResourceKey<Biome>[][] SHATTERED_BIOMES = new ResourceKey[][]{
+				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA},
+				{VANILLA, VANILLA, VANILLA, EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), EnvironmentalBiomes.BLOSSOM_WOODS.getKey()},
+				{VANILLA, VANILLA, VANILLA, EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), EnvironmentalBiomes.BLOSSOM_WOODS.getKey()},
+				{null, null, null, null, null},
+				{null, null, null, null, null}};
 
 		private void addBiomes(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> consumer) {
 			this.addOffCoastBiomes(consumer);
