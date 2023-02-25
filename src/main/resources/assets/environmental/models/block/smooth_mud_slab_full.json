@@ -1,5 +1,5 @@
 {
-  "parent": "block/slab",
+  "parent": "block/cube_bottom_top",
   "textures": {
     "bottom": "environmental:block/smooth_mud_bottom",
     "top": "environmental:block/smooth_mud_top",

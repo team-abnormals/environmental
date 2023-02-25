@@ -1,7 +1,13 @@
 {
-    "variants": {
-        "type=bottom": { "model": "environmental:block/smooth_mud_slab" },
-        "type=top": { "model": "environmental:block/smooth_mud_slab_top" },
-        "type=double": { "model": "environmental:block/smooth_mud" }
+  "variants": {
+    "type=bottom": {
+      "model": "environmental:block/smooth_mud_slab"
+    },
+    "type=top": {
+      "model": "environmental:block/smooth_mud_slab_top"
+    },
+    "type=double": {
+      "model": "environmental:block/smooth_mud_slab_full"
     }
+  }
 }

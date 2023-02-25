@@ -112,8 +112,6 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 		generateRecipes(consumer, EnvironmentalBlockFamilies.SMOOTH_MUD_FAMILY);
 		verticalSlabRecipes(consumer, EnvironmentalBlockFamilies.SMOOTH_MUD_FAMILY, EnvironmentalBlocks.SMOOTH_MUD_VERTICAL_SLAB.get());
 		stonecutterResultFromBase(consumer, EnvironmentalBlocks.SMOOTH_MUD_SLAB.get(), EnvironmentalBlocks.SMOOTH_MUD.get(), 2);
-		stonecutterResultFromBase(consumer, EnvironmentalBlocks.SMOOTH_MUD_STAIRS.get(), EnvironmentalBlocks.SMOOTH_MUD.get());
-		stonecutterResultFromBase(consumer, EnvironmentalBlocks.SMOOTH_MUD_WALL.get(), EnvironmentalBlocks.SMOOTH_MUD.get());
 		conditionalStonecuttingRecipe(consumer, VERTICAL_SLABS, EnvironmentalBlocks.SMOOTH_MUD_VERTICAL_SLAB.get(), EnvironmentalBlocks.SMOOTH_MUD.get(), 2);
 		chiseled(consumer, EnvironmentalBlocks.CHISELED_MUD_BRICKS.get(), Blocks.MUD_BRICK_SLAB);
 		stonecutterResultFromBase(consumer, EnvironmentalBlocks.CHISELED_MUD_BRICKS.get(), Blocks.MUD_BRICKS);

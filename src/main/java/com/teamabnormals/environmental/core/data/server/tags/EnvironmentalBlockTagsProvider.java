@@ -43,7 +43,7 @@ public class EnvironmentalBlockTagsProvider extends BlockTagsProvider {
 		);
 
 		this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
-				SMOOTH_MUD.get(), SMOOTH_MUD_SLAB.get(), SMOOTH_MUD_STAIRS.get(), SMOOTH_MUD_WALL.get(), SMOOTH_MUD_VERTICAL_SLAB.get(), CHISELED_MUD_BRICKS.get(), SLABFISH_EFFIGY.get()
+				SMOOTH_MUD.get(), SMOOTH_MUD_SLAB.get(), SMOOTH_MUD_VERTICAL_SLAB.get(), CHISELED_MUD_BRICKS.get(), SLABFISH_EFFIGY.get()
 		);
 
 		this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(BURIED_TRUFFLE.get(), PODZOL_PATH.get(), MYCELIUM_PATH.get());
@@ -71,8 +71,7 @@ public class EnvironmentalBlockTagsProvider extends BlockTagsProvider {
 		this.tag(BlockTags.OVERWORLD_NATURAL_LOGS).add(WILLOW_LOG.get(), WISTERIA_LOG.get(), CHERRY_LOG.get());
 
 		this.tag(BlockTags.SLABS).add(GRASS_THATCH_SLAB.get(), CATTAIL_THATCH_SLAB.get(), DUCKWEED_THATCH_SLAB.get(), SMOOTH_MUD_SLAB.get());
-		this.tag(BlockTags.STAIRS).add(GRASS_THATCH_STAIRS.get(), CATTAIL_THATCH_STAIRS.get(), DUCKWEED_THATCH_STAIRS.get(), SMOOTH_MUD_STAIRS.get());
-		this.tag(BlockTags.WALLS).add(SMOOTH_MUD_WALL.get());
+		this.tag(BlockTags.STAIRS).add(GRASS_THATCH_STAIRS.get(), CATTAIL_THATCH_STAIRS.get(), DUCKWEED_THATCH_STAIRS.get());
 		this.tag(BlueprintBlockTags.VERTICAL_SLABS).add(GRASS_THATCH_VERTICAL_SLAB.get(), CATTAIL_THATCH_VERTICAL_SLAB.get(), DUCKWEED_THATCH_VERTICAL_SLAB.get(), SMOOTH_MUD_VERTICAL_SLAB.get());
 
 		this.tag(BlockTags.FROG_PREFER_JUMP_TO).add(LARGE_LILY_PAD.get(), GIANT_LILY_PAD.get());

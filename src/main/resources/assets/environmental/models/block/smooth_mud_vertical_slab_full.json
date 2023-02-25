@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "environmental:block/smooth_mud_vertical_slab_bottom",
+    "up": "environmental:block/smooth_mud_vertical_slab_top",
+    "north": "environmental:block/smooth_mud",
+    "south": "environmental:block/smooth_mud",
+    "west": "environmental:block/smooth_mud_vertical_slab_side",
+    "east": "environmental:block/smooth_mud_vertical_slab_side",
+    "particle": "#north"
+  }
+}

@@ -2,8 +2,6 @@
   "values": [
     "environmental:smooth_mud",
     "environmental:smooth_mud_slab",
-    "environmental:smooth_mud_stairs",
-    "environmental:smooth_mud_wall",
     "environmental:smooth_mud_vertical_slab",
     "environmental:chiseled_mud_bricks",
     "environmental:slabfish_effigy"

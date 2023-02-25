@@ -1,8 +1,8 @@
 {
-    "parent": "block/slab_top",
-    "textures": {
-        "bottom": "environmental:block/smooth_mud",
-        "top": "environmental:block/smooth_mud",
-        "side": "environmental:block/smooth_mud"
-    }
+  "parent": "block/slab_top",
+  "textures": {
+    "bottom": "environmental:block/smooth_mud_bottom",
+    "top": "environmental:block/smooth_mud_top",
+    "side": "environmental:block/smooth_mud_slab"
+  }
 }

@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "": { "model": "environmental:block/smooth_mud" }
+  "variants": {
+    "": {
+      "model": "environmental:block/smooth_mud"
     }
+  }
 }
