@@ -11,5 +11,4 @@ public class EnvironmentalPaintingTypes {
 
 	public static final RegistryObject<PaintingVariant> SLABFISH = PAINTING_TYPES.register("slabfish", () -> new PaintingVariant(32, 32));
 	public static final RegistryObject<PaintingVariant> SNAKE_BLOCK = PAINTING_TYPES.register("snake_block", () -> new PaintingVariant(32, 32));
-	public static final RegistryObject<PaintingVariant> SOMETHING_IN_THE_WATER = PAINTING_TYPES.register("something_in_the_water", () -> new PaintingVariant(48, 32));
 }

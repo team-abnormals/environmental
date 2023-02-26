@@ -104,10 +104,10 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 		generateRecipes(consumer, EnvironmentalBlockFamilies.DUCKWEED_THATCH_FAMILY);
 		verticalSlabRecipes(consumer, EnvironmentalBlockFamilies.DUCKWEED_THATCH_FAMILY, EnvironmentalBlocks.DUCKWEED_THATCH_VERTICAL_SLAB.get());
 
-		ShapedRecipeBuilder.shaped(Blocks.MUD).define('#', EnvironmentalItems.MUD_BALL.get()).pattern("##").pattern("##").unlockedBy("has_mud_ball", has(EnvironmentalItems.MUD_BALL.get())).save(consumer);
+		ShapedRecipeBuilder.shaped(Blocks.MUD).define('#', EnvironmentalItems.MUD_BALL.get()).pattern("##").pattern("##").unlockedBy("has_mud_ball", has(EnvironmentalItems.MUD_BALL.get())).save(consumer, new ResourceLocation(Environmental.MOD_ID, RecipeBuilder.getDefaultRecipeId(Blocks.MUD).getPath()));
 		oneToOneConversionRecipeBuilder(EnvironmentalItems.MUD_BALL.get(), Blocks.MUD, 4).group("mud_ball").save(consumer);
-		ShapelessRecipeBuilder.shapeless(EnvironmentalItems.MUD_BALL.get(), 16).requires(BlueprintItemTags.BUCKETS_WATER).requires(Blocks.DIRT, 8).group("mud_ball").unlockedBy("has_dirt", has(Blocks.DIRT)).save(consumer, getModConversionRecipeName(EnvironmentalItems.MUD_BALL.get(), Blocks.DIRT));
-		//ShapedRecipeBuilder.shaped(EnvironmentalBlocks.SLABFISH_EFFIGY.get()).define('#', EnvironmentalItems.MUD_BRICK.get()).pattern("# #").pattern(" # ").unlockedBy("has_mud_brick", has(EnvironmentalItems.MUD_BRICK.get())).save(consumer);
+		ShapelessRecipeBuilder.shapeless(EnvironmentalItems.MUD_BALL.get(), 16).requires(BlueprintItemTags.BUCKETS_WATER).requires(Blocks.DIRT, 4).group("mud_ball").unlockedBy("has_dirt", has(Blocks.DIRT)).save(consumer, getModConversionRecipeName(EnvironmentalItems.MUD_BALL.get(), Blocks.DIRT));
+		ShapedRecipeBuilder.shaped(EnvironmentalBlocks.SLABFISH_EFFIGY.get()).define('#', Blocks.MUD_BRICKS).define('S', Blocks.MUD_BRICK_SLAB).pattern(" S ").pattern("S#S").unlockedBy("has_mud_bricks", has(Blocks.MUD_BRICKS)).save(consumer);
 		SimpleCookingRecipeBuilder.smelting(Ingredient.of(Blocks.PACKED_MUD), EnvironmentalBlocks.SMOOTH_MUD.get().asItem(), 0.1F, 200).unlockedBy("has_packed_mud", has(Blocks.PACKED_MUD)).save(consumer);
 		generateRecipes(consumer, EnvironmentalBlockFamilies.SMOOTH_MUD_FAMILY);
 		verticalSlabRecipes(consumer, EnvironmentalBlockFamilies.SMOOTH_MUD_FAMILY, EnvironmentalBlocks.SMOOTH_MUD_VERTICAL_SLAB.get());

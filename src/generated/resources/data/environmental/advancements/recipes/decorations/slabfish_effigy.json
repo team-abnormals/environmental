@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_mud_ball": {
+    "has_mud_bricks": {
       "conditions": {
         "items": [
           {
             "items": [
-              "environmental:mud_ball"
+              "minecraft:mud_bricks"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:mud"
+        "recipe": "environmental:slabfish_effigy"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_mud_ball",
+      "has_mud_bricks",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:mud"
+      "environmental:slabfish_effigy"
     ]
   }
 }

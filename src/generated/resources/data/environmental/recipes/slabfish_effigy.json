@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:mud_bricks"
+    },
+    "S": {
+      "item": "minecraft:mud_brick_slab"
+    }
+  },
+  "pattern": [
+    " S ",
+    "S#S"
+  ],
+  "result": {
+    "item": "environmental:slabfish_effigy"
+  }
+}

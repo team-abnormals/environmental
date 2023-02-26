@@ -6,7 +6,8 @@ import net.minecraft.data.tags.PaintingVariantTagsProvider;
 import net.minecraft.tags.PaintingVariantTags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
-import static com.teamabnormals.environmental.core.registry.EnvironmentalPaintingTypes.*;
+import static com.teamabnormals.environmental.core.registry.EnvironmentalPaintingTypes.SLABFISH;
+import static com.teamabnormals.environmental.core.registry.EnvironmentalPaintingTypes.SNAKE_BLOCK;
 
 public class EnvironmentalPaintingVariantTagsProvider extends PaintingVariantTagsProvider {
 
@@ -16,6 +17,6 @@ public class EnvironmentalPaintingVariantTagsProvider extends PaintingVariantTag
 
 	@Override
 	public void addTags() {
-		this.tag(PaintingVariantTags.PLACEABLE).add(SOMETHING_IN_THE_WATER.get(), SNAKE_BLOCK.get(), SLABFISH.get());
+		this.tag(PaintingVariantTags.PLACEABLE).add(SNAKE_BLOCK.get(), SLABFISH.get());
 	}
 }
