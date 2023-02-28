@@ -70,7 +70,7 @@ public class Environmental {
 		EnvironmentalDataProcessors.registerTrackedData();
 
 		REGISTRY_HELPER.register(bus);
-		EnvironmentalPaintingTypes.PAINTING_TYPES.register(bus);
+		EnvironmentalPaintingVariants.PAINTING_VARIANTS.register(bus);
 		EnvironmentalFeatures.FEATURES.register(bus);
 		EnvironmentalFeatures.TREE_DECORATORS.register(bus);
 		EnvironmentalConfiguredFeatures.CONFIGURED_FEATURES.register(bus);
