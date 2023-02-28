@@ -28,11 +28,10 @@ public class KoiRenderer extends MobRenderer<Koi, KoiModel<Koi>> {
 	@Override
 	public void setupRotations(Koi entityLiving, PoseStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
 		super.setupRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
-		matrixStackIn.mulPose(Vector3f.XP.rotationDegrees(Mth.lerp(partialTicks, entityLiving.xRotO, entityLiving.getXRot())));
-		float f = 4.3F * Mth.sin(0.6F * ageInTicks);
-		if (!entityLiving.isInWater()) {
-			matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(f));
-			matrixStackIn.translate(0.1F, 0.1F, -0.1F);
+		if (entityLiving.isInWater()) {
+			matrixStackIn.mulPose(Vector3f.XP.rotationDegrees(Mth.lerp(partialTicks, entityLiving.xRotO, entityLiving.getXRot())));
+		} else {
+			matrixStackIn.translate(0.2F, 0.1F, 0.0D);
 			matrixStackIn.mulPose(Vector3f.ZP.rotationDegrees(90.0F));
 		}
 	}
