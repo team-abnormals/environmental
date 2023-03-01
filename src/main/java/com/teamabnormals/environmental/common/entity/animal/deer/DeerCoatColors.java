@@ -1,13 +1,9 @@
 package com.teamabnormals.environmental.common.entity.animal.deer;
 
-import java.util.Arrays;
-import java.util.Comparator;
-
 public enum DeerCoatColors {
 	CREAMY(0), CHESTNUT(1), GRAY(2), HOLIDAY(3);
 
-	private static final DeerCoatColors[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(DeerCoatColors::getId)).toArray(DeerCoatColors[]::new);
-
+	private static final DeerCoatColors[] VALUES = values();
 	private final int id;
 
 	DeerCoatColors(int id) {

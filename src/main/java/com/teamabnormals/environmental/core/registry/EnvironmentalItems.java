@@ -77,8 +77,8 @@ public class EnvironmentalItems {
 	public static final RegistryObject<Item> LARGE_LILY_PAD = HELPER.createItem("large_lily_pad", () -> new LargeLilyPadItem(new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
 	public static final RegistryObject<Item> GIANT_LILY_PAD = HELPER.createItem("giant_lily_pad", () -> new GiantLilyPadItem(new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
 
-	public static final RegistryObject<Item> SLABFISH_BUCKET = HELPER.createItem("slabfish_bucket", () -> new SlabfishBucketItem(EnvironmentalEntityTypes.SLABFISH::get, () -> Fluids.WATER, () -> SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(1)));
-	public static final RegistryObject<Item> KOI_BUCKET = HELPER.createItem("koi_bucket", () -> new BlueprintMobBucketItem(EnvironmentalEntityTypes.KOI, () -> Fluids.WATER, () -> SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(1)));
+	public static final RegistryObject<Item> SLABFISH_BUCKET = HELPER.createItem("slabfish_bucket", () -> new SlabfishBucketItem(new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(1)));
+	public static final RegistryObject<Item> KOI_BUCKET = HELPER.createItem("koi_bucket", () -> new KoiBucketItem(new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(1)));
 
 	public static final RegistryObject<ForgeSpawnEggItem> SLABFISH_SPAWN_EGG = HELPER.createSpawnEggItem("slabfish", EnvironmentalEntityTypes.SLABFISH::get, 6263617, 13940616);
 	public static final RegistryObject<ForgeSpawnEggItem> DUCK_SPAWN_EGG = HELPER.createSpawnEggItem("duck", EnvironmentalEntityTypes.DUCK::get, 1138489, 16754947);
