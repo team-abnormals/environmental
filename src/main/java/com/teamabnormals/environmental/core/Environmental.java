@@ -6,6 +6,7 @@ import com.teamabnormals.environmental.client.renderer.entity.*;
 import com.teamabnormals.environmental.client.resources.SlabfishSpriteUploader;
 import com.teamabnormals.environmental.common.network.message.*;
 import com.teamabnormals.environmental.common.slabfish.SlabfishLoader;
+import com.teamabnormals.environmental.core.data.client.EnvironmentalItemModelProvider;
 import com.teamabnormals.environmental.core.data.server.EnvironmentalLootTableProvider;
 import com.teamabnormals.environmental.core.data.server.EnvironmentalRecipeProvider;
 import com.teamabnormals.environmental.core.data.server.modifiers.EnvironmentalAdvancementModifierProvider;
@@ -13,10 +14,7 @@ import com.teamabnormals.environmental.core.data.server.modifiers.EnvironmentalB
 import com.teamabnormals.environmental.core.data.server.modifiers.EnvironmentalLootModifierProvider;
 import com.teamabnormals.environmental.core.data.server.modifiers.EnvironmentalModdedBiomeSliceProvider;
 import com.teamabnormals.environmental.core.data.server.tags.*;
-import com.teamabnormals.environmental.core.other.EnvironmentalCompat;
-import com.teamabnormals.environmental.core.other.EnvironmentalDataProcessors;
-import com.teamabnormals.environmental.core.other.EnvironmentalDataSerializers;
-import com.teamabnormals.environmental.core.other.EnvironmentalModelLayers;
+import com.teamabnormals.environmental.core.other.*;
 import com.teamabnormals.environmental.core.registry.*;
 import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures.EnvironmentalConfiguredFeatures;
 import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures.EnvironmentalPlacedFeatures;
@@ -108,9 +106,8 @@ public class Environmental {
 	}
 
 	private void clientSetup(FMLClientSetupEvent event) {
-		EnvironmentalCompat.setRenderLayers();
 		event.enqueueWork(() -> {
-			EnvironmentalCompat.registerBlockColors();
+			EnvironmentalClientCompat.registerClientCompat();
 		});
 	}
 
@@ -133,6 +130,9 @@ public class Environmental {
 		generator.addProvider(includeServer, new EnvironmentalLootModifierProvider(generator));
 		generator.addProvider(includeServer, EnvironmentalBiomeModifierProvider.create(generator, helper));
 		//generator.addProvider(new SlabfishProvider(generator, MOD_ID, existingFileHelper));
+
+		boolean includeClient = event.includeClient();
+		generator.addProvider(includeClient, new EnvironmentalItemModelProvider(generator, helper));
 	}
 
 	private void setupPlayMessages() {
