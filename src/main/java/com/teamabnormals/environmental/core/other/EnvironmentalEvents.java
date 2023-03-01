@@ -6,7 +6,7 @@ import com.teamabnormals.blueprint.core.util.MathUtil;
 import com.teamabnormals.environmental.common.block.HangingWisteriaLeavesBlock;
 import com.teamabnormals.environmental.common.entity.ai.goal.HuntTruffleGoal;
 import com.teamabnormals.environmental.common.entity.ai.goal.TemptGoldenCarrotGoal;
-import com.teamabnormals.environmental.common.entity.animal.Koi;
+import com.teamabnormals.environmental.common.entity.animal.koi.Koi;
 import com.teamabnormals.environmental.common.entity.animal.slabfish.Slabfish;
 import com.teamabnormals.environmental.common.entity.animal.slabfish.SlabfishOverlay;
 import com.teamabnormals.environmental.common.slabfish.SlabfishManager;
@@ -418,5 +418,7 @@ public class EnvironmentalEvents {
 				data.setValue(EnvironmentalDataProcessors.SNIFF_SOUND_TIME, -20);
 			}
 		}
+
+
 	}
 }

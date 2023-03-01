@@ -1,14 +1,21 @@
-package com.teamabnormals.environmental.common.entity.animal;
+package com.teamabnormals.environmental.common.entity.animal.koi;
 
 import com.teamabnormals.environmental.core.EnvironmentalConfig;
+import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
 import com.teamabnormals.environmental.core.registry.EnvironmentalMobEffects;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSoundEvents;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
@@ -25,14 +32,21 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.LegacyRandomSource;
+import net.minecraft.world.level.levelgen.WorldgenRandom;
+import net.minecraft.world.level.levelgen.synth.NormalNoise;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.Random;
-import net.minecraft.util.RandomSource;
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class Koi extends AbstractFish {
+	private static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(Koi.class, EntityDataSerializers.INT);
+	private static final NormalNoise NOISE = NormalNoise.create(new WorldgenRandom(new LegacyRandomSource(2345L)), new NormalNoise.NoiseParameters(-3, 1.3D));
 
 	public Koi(EntityType<? extends AbstractFish> type, Level world) {
 		super(type, world);
@@ -46,6 +60,61 @@ public class Koi extends AbstractFish {
 		this.goalSelector.addGoal(0, new PanicGoal(this, 4.25D));
 		this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, Player.class, 5.0F, 1.6, 1.4, EntitySelector.NO_SPECTATORS::test));
 		this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 1.0, 50));
+	}
+
+	@Override
+	protected void defineSynchedData() {
+		super.defineSynchedData();
+		this.entityData.define(BREED, 0);
+	}
+
+	@Override
+	public void addAdditionalSaveData(CompoundTag Tag) {
+		super.addAdditionalSaveData(Tag);
+		Tag.putInt("Variant", this.getVariant());
+	}
+
+	@Override
+	public void readAdditionalSaveData(CompoundTag tag) {
+		super.readAdditionalSaveData(tag);
+		this.setVariant(tag.getInt("Variant"));
+	}
+
+	public void saveToBucketTag(ItemStack stack) {
+		super.saveToBucketTag(stack);
+		CompoundTag compoundtag = stack.getOrCreateTag();
+		compoundtag.putInt("BucketVariantTag", this.getVariant());
+	}
+
+	public void setVariant(int id) {
+		this.entityData.set(BREED, id);
+	}
+
+	public int getVariant() {
+		return this.entityData.get(BREED);
+	}
+
+	@Nullable
+	@Override
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData, @Nullable CompoundTag tag) {
+		spawnGroupData = super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData, tag);
+		if (spawnType == MobSpawnType.BUCKET && tag != null && tag.contains("BucketVariantTag", 3)) {
+			this.setVariant(tag.getInt("BucketVariantTag"));
+			return spawnGroupData;
+		} else {
+			this.setVariant(getNoiseVariant(this.blockPosition()));
+			return spawnGroupData;
+		}
+	}
+
+	public static int getNoiseVariant(BlockPos pos) {
+		double d0 = getNoiseValue(pos, 0.25F);
+		double d1 = Mth.clamp((1.0D + d0) / 2.0D, 0.0D, 0.9999D);
+		return (int) (d1 * (double) KoiBreed.values().length);
+	}
+
+	protected static double getNoiseValue(BlockPos pos, double val) {
+		return NOISE.getValue((double) pos.getX() * val, (double) pos.getY() * val, (double) pos.getZ() * val);
 	}
 
 	@Override

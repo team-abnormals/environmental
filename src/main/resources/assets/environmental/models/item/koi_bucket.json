@@ -1,6 +1,128 @@
 {
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "environmental:item/koi_bucket"
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "environmental:item/koi_bucket/kohaku"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "environmental:variant": 0
+      },
+      "model": "environmental:item/koi_bucket/kohaku"
+    },
+    {
+      "predicate": {
+        "environmental:variant": 1
+      },
+      "model": "environmental:item/koi_bucket/ogon"
+    },
+    {
+      "predicate": {
+        "environmental:variant": 2
+      },
+      "model": "environmental:item/koi_bucket/kigoi"
+    },
+    {
+      "predicate": {
+        "environmental:variant": 3
+      },
+      "model": "environmental:item/koi_bucket/tancho"
+    },
+    {
+      "predicate": {
+        "environmental:variant": 4
+      },
+      "model": "environmental:item/koi_bucket/higoi"
+    },
+    {
+      "predicate": {
+        "environmental:variant": 5
+      },
+      "model": "environmental:item/koi_bucket/chagoi"
+    },
+    {
+      "predicate": {
+        "environmental:variant": 6
+      },
+      "model": "environmental:item/koi_bucket/narumi_asagi"
+    },
+    {
+      "predicate": {
+        "environmental:variant": 7
+      },
+      "model": "environmental:item/koi_bucket/tancho_sanke"
+    },
+    {
+      "predicate": {
+        "environmental:variant": 8
+      },
+      "model": "environmental:item/koi_bucket/platinum_ogon"
+    },
+    {
+      "predicate": {
+        "environmental:variant": 9
+      },
+      "model": "environmental:item/koi_bucket/orenji_ogon"
+    },
+    {
+      "predicate": {
+        "environmental:variant": 10
+      },
+      "model": "environmental:item/koi_bucket/hi_utsuri"
+    },
+    {
+      "predicate": {
+        "environmental:variant": 11
+      },
+      "model": "environmental:item/koi_bucket/magoi"
+    },
+    {
+      "predicate": {
+        "environmental:variant": 12
+      },
+      "model": "environmental:item/koi_bucket/konjo_asagi"
+    },
+    {
+      "predicate": {
+        "environmental:variant": 13
+      },
+      "model": "environmental:item/koi_bucket/ochiba"
+    },
+    {
+      "predicate": {
+        "environmental:variant": 14
+      },
+      "model": "environmental:item/koi_bucket/kumonryu"
+    },
+    {
+      "predicate": {
+        "environmental:variant": 15
+      },
+      "model": "environmental:item/koi_bucket/aka_matsuba"
+    },
+    {
+      "predicate": {
+        "environmental:variant": 16
+      },
+      "model": "environmental:item/koi_bucket/doitsu_chagoi"
+    },
+    {
+      "predicate": {
+        "environmental:variant": 17
+      },
+      "model": "environmental:item/koi_bucket/kin_showa"
+    },
+    {
+      "predicate": {
+        "environmental:variant": 18
+      },
+      "model": "environmental:item/koi_bucket/showa"
+    },
+    {
+      "predicate": {
+        "environmental:variant": 19
+      },
+      "model": "environmental:item/koi_bucket/shiro_utsuri"
     }
+  ]
 }

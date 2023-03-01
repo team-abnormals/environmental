@@ -4,6 +4,7 @@ import com.teamabnormals.blueprint.core.util.registry.EntitySubRegistryHelper;
 import com.teamabnormals.environmental.common.entity.animal.*;
 import com.teamabnormals.environmental.common.entity.animal.deer.Deer;
 import com.teamabnormals.environmental.common.entity.animal.deer.ZombieDeer;
+import com.teamabnormals.environmental.common.entity.animal.koi.Koi;
 import com.teamabnormals.environmental.common.entity.animal.slabfish.Slabfish;
 import com.teamabnormals.environmental.common.entity.projectile.ThrownDuckEgg;
 import com.teamabnormals.environmental.common.entity.projectile.ThrownMudBall;

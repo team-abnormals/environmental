@@ -25,7 +25,7 @@ public class DeerMarkingsRenderLayer<E extends Deer, M extends EntityModel<E>> e
 		if (entity.getCoatType() == 0) return;
 
 		DeerCoatTypes coatType = DeerCoatTypes.byId(entity.getCoatType());
-		VertexConsumer builder = bufferIn.getBuffer(RenderType.entityCutoutNoCull(coatType.getTextureLocation()));
+		VertexConsumer builder = bufferIn.getBuffer(RenderType.entityCutoutNoCull(coatType.getTexture()));
 		this.getParentModel().setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 		this.getParentModel().renderToBuffer(matrixStackIn, builder, packedLightIn, LivingEntityRenderer.getOverlayCoords(entity, 0.0F), 1.0F, 1.0F, 1.0F, 1.0F);
 	}
