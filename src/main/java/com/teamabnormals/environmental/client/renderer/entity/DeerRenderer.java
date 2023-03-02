@@ -2,7 +2,6 @@ package com.teamabnormals.environmental.client.renderer.entity;
 
 import com.teamabnormals.environmental.client.model.DeerModel;
 import com.teamabnormals.environmental.client.renderer.entity.layers.DeerMarkingsRenderLayer;
-import com.teamabnormals.environmental.client.renderer.entity.layers.RedNoseReindeerLayer;
 import com.teamabnormals.environmental.common.entity.animal.deer.Deer;
 import com.teamabnormals.environmental.common.entity.animal.deer.DeerCoatColors;
 import com.teamabnormals.environmental.core.Environmental;
@@ -21,7 +20,6 @@ public class DeerRenderer extends MobRenderer<Deer, DeerModel<Deer>> {
 	public DeerRenderer(EntityRendererProvider.Context context) {
 		super(context, new DeerModel<>(context.bakeLayer(EnvironmentalModelLayers.DEER)), 0.6F);
 		this.addLayer(new DeerMarkingsRenderLayer<>(this));
-		this.addLayer(new RedNoseReindeerLayer<>(this));
 	}
 
 	@Override

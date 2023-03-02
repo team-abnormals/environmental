@@ -17,7 +17,7 @@ import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class EnvironmentalAdvancementModifierProvider extends AdvancementModifierProvider {
-	private static final EntityType<?>[] BREEDABLE_ANIMALS = new EntityType[]{EnvironmentalEntityTypes.SLABFISH.get(), EnvironmentalEntityTypes.DUCK.get(), EnvironmentalEntityTypes.DEER.get(), EnvironmentalEntityTypes.YAK.get()};
+	private static final EntityType<?>[] BREEDABLE_ANIMALS = new EntityType[]{EnvironmentalEntityTypes.SLABFISH.get(), EnvironmentalEntityTypes.DUCK.get(), EnvironmentalEntityTypes.DEER.get(), EnvironmentalEntityTypes.REINDEER.get(), EnvironmentalEntityTypes.YAK.get()};
 
 	public EnvironmentalAdvancementModifierProvider(DataGenerator generator) {
 		super(generator, Environmental.MOD_ID);

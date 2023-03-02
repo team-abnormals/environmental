@@ -1,6 +1,6 @@
 package com.teamabnormals.environmental.common.entity.ai.goal;
 
-import com.teamabnormals.environmental.common.entity.animal.deer.Deer;
+import com.teamabnormals.environmental.common.entity.animal.deer.AbstractDeer;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.util.DefaultRandomPos;
 import net.minecraft.world.level.pathfinder.Path;
@@ -9,12 +9,12 @@ import net.minecraft.world.phys.Vec3;
 import java.util.EnumSet;
 
 public class DeerFrolicGoal extends Goal {
-	private final Deer deer;
+	private final AbstractDeer deer;
 	private int jumpCooldown;
 	private int frolicCooldown;
 	private boolean jumping = false;
 
-	public DeerFrolicGoal(Deer deerIn) {
+	public DeerFrolicGoal(AbstractDeer deerIn) {
 		this.deer = deerIn;
 		this.setFlags(EnumSet.of(Goal.Flag.MOVE));
 	}

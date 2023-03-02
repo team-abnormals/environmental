@@ -29,6 +29,7 @@ public class EnvironmentalBiomeTagsProvider extends BiomeTagsProvider {
 		this.tag(EnvironmentalBiomeTags.HAS_SLABFISH).addTag(Tags.Biomes.IS_SWAMP);
 		this.tag(EnvironmentalBiomeTags.HAS_DUCK).addTag(Tags.Biomes.IS_SWAMP);
 		this.tag(EnvironmentalBiomeTags.HAS_DEER).addTag(BiomeTags.IS_FOREST);
+		this.tag(EnvironmentalBiomeTags.HAS_REINDEER).add(Biomes.SNOWY_PLAINS).add(Biomes.ICE_SPIKES).addTag(BiomeTags.IS_TAIGA);
 		this.tag(EnvironmentalBiomeTags.HAS_YAK).add(Biomes.STONY_PEAKS).addTag(BiomeTags.IS_HILL);
 
 		this.tag(EnvironmentalBiomeTags.HAS_HUSK).add(Biomes.DESERT);

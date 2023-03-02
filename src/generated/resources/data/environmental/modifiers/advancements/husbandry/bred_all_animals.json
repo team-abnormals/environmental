@@ -32,6 +32,20 @@
             },
             "trigger": "minecraft:bred_animals"
           },
+          "environmental:reindeer": {
+            "conditions": {
+              "child": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "type": "environmental:reindeer"
+                  }
+                }
+              ]
+            },
+            "trigger": "minecraft:bred_animals"
+          },
           "environmental:slabfish": {
             "conditions": {
               "child": [
@@ -70,6 +84,9 @@
           ],
           [
             "environmental:deer"
+          ],
+          [
+            "environmental:reindeer"
           ],
           [
             "environmental:yak"
