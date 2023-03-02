@@ -6,6 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class EnvironmentalModelLayers {
 	public static final ModelLayerLocation DEER = register("deer");
+	public static final ModelLayerLocation REINDEER = register("reindeer");
 	public static final ModelLayerLocation DUCK = register("duck");
 	public static final ModelLayerLocation FENNEC_FOX = register("fennec_fox");
 	public static final ModelLayerLocation KOI = register("koi");

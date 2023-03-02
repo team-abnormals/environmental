@@ -2,7 +2,7 @@ package com.teamabnormals.environmental.client.renderer.entity.layers;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.teamabnormals.environmental.common.entity.animal.deer.Deer;
+import com.teamabnormals.environmental.common.entity.animal.deer.Reindeer;
 import com.teamabnormals.environmental.core.Environmental;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -15,10 +15,10 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class RedNoseReindeerLayer<E extends Deer, M extends EntityModel<E>> extends RenderLayer<E, M> {
+public class HolidayReindeerLayer<E extends Reindeer, M extends EntityModel<E>> extends RenderLayer<E, M> {
 	private static final ResourceLocation TEXTURE = new ResourceLocation(Environmental.MOD_ID, "textures/entity/deer/holiday_overlay.png");
 
-	public RedNoseReindeerLayer(RenderLayerParent<E, M> entityRenderer) {
+	public HolidayReindeerLayer(RenderLayerParent<E, M> entityRenderer) {
 		super(entityRenderer);
 	}
 

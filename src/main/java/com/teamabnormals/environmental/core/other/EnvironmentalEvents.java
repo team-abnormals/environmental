@@ -6,6 +6,7 @@ import com.teamabnormals.blueprint.core.util.MathUtil;
 import com.teamabnormals.environmental.common.block.HangingWisteriaLeavesBlock;
 import com.teamabnormals.environmental.common.entity.ai.goal.HuntTruffleGoal;
 import com.teamabnormals.environmental.common.entity.ai.goal.TemptGoldenCarrotGoal;
+import com.teamabnormals.environmental.common.entity.animal.deer.AbstractDeer;
 import com.teamabnormals.environmental.common.entity.animal.koi.Koi;
 import com.teamabnormals.environmental.common.entity.animal.slabfish.Slabfish;
 import com.teamabnormals.environmental.common.entity.animal.slabfish.SlabfishOverlay;
@@ -370,7 +371,7 @@ public class EnvironmentalEvents {
 	public static void onEntityJoinWorld(EntityJoinLevelEvent event) {
 		Entity entity = event.getEntity();
 		if (entity instanceof Wolf wolf) {
-			wolf.targetSelector.addGoal(4, new NonTameRandomTargetGoal<>(wolf, Animal.class, false, (targetEntity) -> targetEntity.getType() == EnvironmentalEntityTypes.DEER.get()));
+			wolf.targetSelector.addGoal(4, new NonTameRandomTargetGoal<>(wolf, Animal.class, false, (targetEntity) -> targetEntity instanceof AbstractDeer));
 		} else if (entity instanceof Ocelot ocelot) {
 			ocelot.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(ocelot, Animal.class, 10, false, false, (targetEntity) -> targetEntity.getType() == EnvironmentalEntityTypes.DUCK.get()));
 		} else if (entity instanceof Pig pig) {

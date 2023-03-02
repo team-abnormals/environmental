@@ -167,6 +167,7 @@ public class Environmental {
 	private void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
 		event.registerLayerDefinition(EnvironmentalModelLayers.DUCK, DuckModel::createBodyLayer);
 		event.registerLayerDefinition(EnvironmentalModelLayers.DEER, DeerModel::createBodyLayer);
+		event.registerLayerDefinition(EnvironmentalModelLayers.REINDEER, ReindeerModel::createBodyLayer);
 		event.registerLayerDefinition(EnvironmentalModelLayers.FENNEC_FOX, FennecFoxModel::createBodyLayer);
 		event.registerLayerDefinition(EnvironmentalModelLayers.KOI, KoiModel::createBodyLayer);
 		event.registerLayerDefinition(EnvironmentalModelLayers.SLABFISH, SlabfishModel::createBodyLayer);
@@ -184,7 +185,7 @@ public class Environmental {
 		event.registerEntityRenderer(EnvironmentalEntityTypes.SLABFISH.get(), SlabfishRenderer::new);
 		event.registerEntityRenderer(EnvironmentalEntityTypes.DUCK.get(), DuckRenderer::new);
 		event.registerEntityRenderer(EnvironmentalEntityTypes.DEER.get(), DeerRenderer::new);
-		event.registerEntityRenderer(EnvironmentalEntityTypes.ZOMBIE_DEER.get(), ZombieDeerRenderer::new);
+		event.registerEntityRenderer(EnvironmentalEntityTypes.REINDEER.get(), ReindeerRenderer::new);
 		event.registerEntityRenderer(EnvironmentalEntityTypes.YAK.get(), YakRenderer::new);
 		event.registerEntityRenderer(EnvironmentalEntityTypes.KOI.get(), KoiRenderer::new);
 		event.registerEntityRenderer(EnvironmentalEntityTypes.FENNEC_FOX.get(), FennecFoxRenderer::new);
