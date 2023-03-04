@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "environmental:block/cup_lichen"
+      },
+      {
+        "model": "environmental:block/cup_lichen",
+        "y": 90
+      },
+      {
+        "model": "environmental:block/cup_lichen",
+        "y": 180
+      },
+      {
+        "model": "environmental:block/cup_lichen",
+        "y": 270
+      }
+    ]
+  }
+}

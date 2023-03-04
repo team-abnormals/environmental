@@ -1,5 +1,6 @@
 package com.teamabnormals.environmental.common.entity.animal.deer;
 
+import com.teamabnormals.environmental.core.other.tags.EnvironmentalItemTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -14,6 +15,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome.Precipitation;
@@ -46,6 +48,11 @@ public class Reindeer extends AbstractDeer {
 	public void readAdditionalSaveData(CompoundTag compound) {
 		super.readAdditionalSaveData(compound);
 		this.setHoliday(compound.getBoolean("Holiday"));
+	}
+
+	@Override
+	public boolean isFood(ItemStack stack) {
+		return stack.is(EnvironmentalItemTags.REINDEER_FOOD);
 	}
 
 	private void setHoliday(boolean isHoliday) {

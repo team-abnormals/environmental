@@ -4,11 +4,13 @@ import com.teamabnormals.blueprint.core.other.tags.BlueprintBlockTags;
 import com.teamabnormals.environmental.core.Environmental;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.common.data.ForgeBlockTagsProvider;
 
 import static com.teamabnormals.environmental.core.other.tags.EnvironmentalBlockTags.*;
 import static com.teamabnormals.environmental.core.registry.EnvironmentalBlocks.*;
@@ -25,7 +27,7 @@ public class EnvironmentalBlockTagsProvider extends BlockTagsProvider {
 				WILLOW_BOARDS.get(), WILLOW_BOOKSHELF.get(), WILLOW_LADDER.get(), WILLOW_BEEHIVE.get(), WILLOW_CHESTS.getFirst().get(), WILLOW_CHESTS.getSecond().get(), WILLOW_HEDGE.get(), WILLOW_POST.get(), STRIPPED_WILLOW_POST.get(),
 				WISTERIA_BOARDS.get(), WISTERIA_BOOKSHELF.get(), WISTERIA_LADDER.get(), WISTERIA_BEEHIVE.get(), WISTERIA_CHESTS.getFirst().get(), WISTERIA_CHESTS.getSecond().get(), PINK_WISTERIA_HEDGE.get(), BLUE_WISTERIA_HEDGE.get(), PURPLE_WISTERIA_HEDGE.get(), WHITE_WISTERIA_HEDGE.get(), WISTERIA_POST.get(), STRIPPED_WISTERIA_POST.get(),
 				CHERRY_BOARDS.get(), CHERRY_BOOKSHELF.get(), CHERRY_LADDER.get(), CHERRY_BEEHIVE.get(), CHERRY_CHESTS.getFirst().get(), CHERRY_CHESTS.getSecond().get(), CHERRY_HEDGE.get(), CHERRY_POST.get(), STRIPPED_CHERRY_POST.get(),
-				CATTAIL_SPROUTS.get(), CATTAIL.get(), TALL_CATTAIL.get(), LARGE_LILY_PAD.get(), GIANT_LILY_PAD.get(), GIANT_TALL_GRASS.get(), MYCELIUM_SPROUTS.get(), TALL_DEAD_BUSH.get(),
+				CATTAIL_SPROUTS.get(), CATTAIL.get(), TALL_CATTAIL.get(), LARGE_LILY_PAD.get(), GIANT_LILY_PAD.get(), GIANT_TALL_GRASS.get(), MYCELIUM_SPROUTS.get(), TALL_DEAD_BUSH.get(), CUP_LICHEN.get(),
 				TRUFFLE_CRATE.get(), DUCK_EGG_CRATE.get(), YAK_HAIR_BLOCK.get(), YAK_HAIR_RUG.get()
 		);
 
@@ -50,7 +52,7 @@ public class EnvironmentalBlockTagsProvider extends BlockTagsProvider {
 
 		this.tag(BlockTags.BEEHIVES).add(WILLOW_BEEHIVE.get(), WISTERIA_BEEHIVE.get(), CHERRY_BEEHIVE.get());
 		this.tag(BlockTags.CLIMBABLE).add(WILLOW_LADDER.get(), WISTERIA_LADDER.get(), CHERRY_LADDER.get());
-		this.tag(BlockTags.FLOWER_POTS).add(POTTED_WILLOW_SAPLING.get(), POTTED_PINK_WISTERIA_SAPLING.get(), POTTED_BLUE_WISTERIA_SAPLING.get(), POTTED_PURPLE_WISTERIA_SAPLING.get(), POTTED_WHITE_WISTERIA_SAPLING.get(), POTTED_CHERRY_SAPLING.get(), POTTED_CARTWHEEL.get(), POTTED_BLUEBELL.get(), POTTED_VIOLET.get(), POTTED_DIANTHUS.get(), POTTED_RED_LOTUS_FLOWER.get(), POTTED_WHITE_LOTUS_FLOWER.get(), POTTED_YELLOW_HIBISCUS.get(), POTTED_ORANGE_HIBISCUS.get(), POTTED_RED_HIBISCUS.get(), POTTED_PINK_HIBISCUS.get(), POTTED_MAGENTA_HIBISCUS.get(), POTTED_PURPLE_HIBISCUS.get(), POTTED_BIRD_OF_PARADISE.get(), POTTED_PINK_DELPHINIUM.get(), POTTED_BLUE_DELPHINIUM.get(), POTTED_PURPLE_DELPHINIUM.get(), POTTED_WHITE_DELPHINIUM.get(), POTTED_CATTAIL.get());
+		this.tag(BlockTags.FLOWER_POTS).add(POTTED_WILLOW_SAPLING.get(), POTTED_PINK_WISTERIA_SAPLING.get(), POTTED_BLUE_WISTERIA_SAPLING.get(), POTTED_PURPLE_WISTERIA_SAPLING.get(), POTTED_WHITE_WISTERIA_SAPLING.get(), POTTED_CHERRY_SAPLING.get(), POTTED_CARTWHEEL.get(), POTTED_BLUEBELL.get(), POTTED_VIOLET.get(), POTTED_DIANTHUS.get(), POTTED_RED_LOTUS_FLOWER.get(), POTTED_WHITE_LOTUS_FLOWER.get(), POTTED_YELLOW_HIBISCUS.get(), POTTED_ORANGE_HIBISCUS.get(), POTTED_RED_HIBISCUS.get(), POTTED_PINK_HIBISCUS.get(), POTTED_MAGENTA_HIBISCUS.get(), POTTED_PURPLE_HIBISCUS.get(), POTTED_BIRD_OF_PARADISE.get(), POTTED_PINK_DELPHINIUM.get(), POTTED_BLUE_DELPHINIUM.get(), POTTED_PURPLE_DELPHINIUM.get(), POTTED_WHITE_DELPHINIUM.get(), POTTED_CATTAIL.get(), POTTED_CUP_LICHEN.get());
 		this.tag(BlockTags.GUARDED_BY_PIGLINS).add(WILLOW_CHESTS.getFirst().get(), WILLOW_CHESTS.getSecond().get(), WISTERIA_CHESTS.getFirst().get(), WISTERIA_CHESTS.getSecond().get(), CHERRY_CHESTS.getFirst().get(), CHERRY_CHESTS.getSecond().get());
 		this.tag(BlockTags.LEAVES).add(WILLOW_LEAVES.get(), PINK_WISTERIA_LEAVES.get(), BLUE_WISTERIA_LEAVES.get(), PURPLE_WISTERIA_LEAVES.get(), WHITE_WISTERIA_LEAVES.get(), CHERRY_LEAVES.get());
 		this.tag(BlockTags.LOGS_THAT_BURN).addTag(WILLOW_LOGS).addTag(WISTERIA_LOGS).addTag(CHERRY_LOGS);
@@ -77,10 +79,12 @@ public class EnvironmentalBlockTagsProvider extends BlockTagsProvider {
 		this.tag(BlockTags.FROG_PREFER_JUMP_TO).add(LARGE_LILY_PAD.get(), GIANT_LILY_PAD.get());
 		this.tag(BlockTags.OCCLUDES_VIBRATION_SIGNALS).add(YAK_HAIR_BLOCK.get());
 		this.tag(BlockTags.DAMPENS_VIBRATIONS).add(YAK_HAIR_BLOCK.get(), YAK_HAIR_RUG.get());
-		this.tag(BlockTags.REPLACEABLE_PLANTS).add(HANGING_WILLOW_LEAVES.get(), PINK_HANGING_WISTERIA_LEAVES.get(), BLUE_HANGING_WISTERIA_LEAVES.get(), PURPLE_HANGING_WISTERIA_LEAVES.get(), WHITE_HANGING_WISTERIA_LEAVES.get(), GIANT_TALL_GRASS.get(), MYCELIUM_SPROUTS.get(), TALL_DEAD_BUSH.get(), BIRD_OF_PARADISE.get(), PINK_DELPHINIUM.get(), BLUE_DELPHINIUM.get(), PURPLE_DELPHINIUM.get(), WHITE_DELPHINIUM.get());
+		this.tag(BlockTags.REPLACEABLE_PLANTS).add(HANGING_WILLOW_LEAVES.get(), PINK_HANGING_WISTERIA_LEAVES.get(), BLUE_HANGING_WISTERIA_LEAVES.get(), PURPLE_HANGING_WISTERIA_LEAVES.get(), WHITE_HANGING_WISTERIA_LEAVES.get(), GIANT_TALL_GRASS.get(), MYCELIUM_SPROUTS.get(), TALL_DEAD_BUSH.get(), CUP_LICHEN.get(), BIRD_OF_PARADISE.get(), PINK_DELPHINIUM.get(), BLUE_DELPHINIUM.get(), PURPLE_DELPHINIUM.get(), WHITE_DELPHINIUM.get());
 
 		this.tag(WATER_ANIMALS_SPAWNABLE_ON).addTag(BlockTags.ANIMALS_SPAWNABLE_ON).add(Blocks.WATER);
 		this.tag(GRASS_LIKE).add(Blocks.GRASS_BLOCK, Blocks.PODZOL, Blocks.MYCELIUM).addOptional(new ResourceLocation("quark", "glowcelium")).addOptional(new ResourceLocation("atmospheric", "crustose"));
+		this.tag(CUP_LICHEN_PLANTABLE_ON).addTag(BlockTags.DIRT).addTag(Tags.Blocks.STONE).addTag(Tags.Blocks.ORES).addTag(BlockTags.LOGS);
+
 		this.tag(WILLOW_LOGS).add(WILLOW_LOG.get(), WILLOW_WOOD.get(), STRIPPED_WILLOW_LOG.get(), STRIPPED_WILLOW_WOOD.get());
 		this.tag(WISTERIA_LOGS).add(WISTERIA_LOG.get(), WISTERIA_WOOD.get(), STRIPPED_WISTERIA_LOG.get(), STRIPPED_WISTERIA_WOOD.get());
 		this.tag(CHERRY_LOGS).add(CHERRY_LOG.get(), CHERRY_WOOD.get(), STRIPPED_CHERRY_LOG.get(), STRIPPED_CHERRY_WOOD.get());

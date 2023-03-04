@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.Block;
 public class EnvironmentalBlockTags {
 	public static final TagKey<Block> GRASS_LIKE = blockTag("grass_like");
 	public static final TagKey<Block> WATER_ANIMALS_SPAWNABLE_ON = blockTag("water_animals_spawnable_on");
+	public static final TagKey<Block> CUP_LICHEN_PLANTABLE_ON = blockTag("cup_lichen_plantable_on");
 
 	public static final TagKey<Block> WILLOW_LOGS = blockTag("willow_logs");
 	public static final TagKey<Block> WISTERIA_LOGS = blockTag("wisteria_logs");
