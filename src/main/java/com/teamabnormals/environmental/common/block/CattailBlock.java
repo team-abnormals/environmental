@@ -68,13 +68,10 @@ public class CattailBlock extends BushBlock implements SimpleWaterloggedBlock, B
 		FILLER.fillItem(this.asItem(), group, items);
 	}
 
+	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
 		Vec3 vec3d = state.getOffset(worldIn, pos);
 		return SHAPE.move(vec3d.x, vec3d.y, vec3d.z);
-	}
-
-	public Block.OffsetType getOffsetType() {
-		return Block.OffsetType.XZ;
 	}
 
 	@Nullable
@@ -84,6 +81,7 @@ public class CattailBlock extends BushBlock implements SimpleWaterloggedBlock, B
 		return this.defaultBlockState().setValue(WATERLOGGED, flag);
 	}
 
+	@Override
 	public void performBonemeal(ServerLevel worldIn, RandomSource rand, BlockPos pos, BlockState state) {
 		DoubleCattailBlock doubleplantblock = (DoubleCattailBlock) (EnvironmentalBlocks.TALL_CATTAIL.get());
 		FluidState ifluidstateUp = worldIn.getFluidState(pos.above());

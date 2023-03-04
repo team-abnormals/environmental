@@ -24,6 +24,7 @@ public class EnvironmentalItemTags {
 	public static final TagKey<Item> DEER_FOOD = itemTag("deer_food");
 	public static final TagKey<Item> DEER_TEMPT_ITEMS = itemTag("deer_tempt_items");
 	public static final TagKey<Item> DEER_PLANTABLES = itemTag("deer_plantables");
+	public static final TagKey<Item> REINDEER_FOOD = itemTag("reindeer_food");
 	public static final TagKey<Item> SLABFISH_SNACKS = itemTag("slabfish_snacks");
 	public static final TagKey<Item> SLABFISH_FOOD = itemTag("slabfish_food");
 	public static final TagKey<Item> SLABFISH_TAME_ITEMS = itemTag("slabfish_tame_items");

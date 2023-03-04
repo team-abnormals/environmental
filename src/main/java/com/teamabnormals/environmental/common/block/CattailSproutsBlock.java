@@ -46,13 +46,10 @@ public class CattailSproutsBlock extends BushBlock implements SimpleWaterloggedB
 		return state.is(BlockTags.DIRT) || state.is(BlockTags.SAND) || state.is(Blocks.FARMLAND);
 	}
 
+	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
 		Vec3 vec3d = state.getOffset(worldIn, pos);
 		return SHAPE.move(vec3d.x, vec3d.y, vec3d.z);
-	}
-
-	public Block.OffsetType getOffsetType() {
-		return Block.OffsetType.XZ;
 	}
 
 	@Override
@@ -67,6 +64,7 @@ public class CattailSproutsBlock extends BushBlock implements SimpleWaterloggedB
 		return this.defaultBlockState().setValue(WATERLOGGED, flag);
 	}
 
+	@Override
 	public void performBonemeal(ServerLevel worldIn, RandomSource rand, BlockPos pos, BlockState state) {
 		worldIn.setBlockAndUpdate(pos, EnvironmentalBlocks.CATTAIL.get().defaultBlockState().setValue(WATERLOGGED, state.getValue(WATERLOGGED)));
 	}
