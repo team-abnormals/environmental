@@ -21,8 +21,8 @@ public class ReindeerModel extends DeerModel<Reindeer> {
 		PartDefinition head = root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(33, 0).addBox(-2.5F, -5.0F, -4.0F, 5.0F, 5.0F, 6.0F, new CubeDeformation(0.05F)).texOffs(32, 25).addBox(-1.5F, -3.0F, -8.0F, 3.0F, 3.0F, 4.0F, false), PartPose.offsetAndRotation(0.0F, 0.0F, -5.75F, 0.0F, 0.0F, 0.0F));
 		head.addOrReplaceChild("right_ear", CubeListBuilder.create().texOffs(33, 0).mirror().addBox(-1.5F, -4.0F, 0.0F, 1.0F, 4.0F, 2.0F), PartPose.offsetAndRotation(-2.0F, -3.0F, 1.0F, 0.0F, -0.7854F, 0.0F));
 		head.addOrReplaceChild("left_ear", CubeListBuilder.create().texOffs(33, 0).addBox(0.5F, -4.0F, 0.0F, 1.0F, 4.0F, 2.0F), PartPose.offsetAndRotation(2.0F, -3.0F, 1.0F, 0.0F, 0.7854F, 0.0F));
-		head.addOrReplaceChild("right_antler", CubeListBuilder.create().texOffs(0, 29).mirror().addBox(-0.5F, -9.0F, 1.0F, 0.0F, 10.0F, 14.0F), PartPose.offsetAndRotation(0.0F, -4.0F, 0.25F, 0.0F, -0.7854F, 0.0F));
-		head.addOrReplaceChild("left_antler", CubeListBuilder.create().texOffs(0, 29).addBox(0.5F, -9.0F, 1.0F, 0.0F, 10.0F, 14.0F), PartPose.offsetAndRotation(0.0F, -4.0F, 0.25F, 0.0F, 0.7854F, 0.0F));
+		head.addOrReplaceChild("right_antler", CubeListBuilder.create().texOffs(0, 28).mirror().addBox(-2.8F, -11.0F, -3.0F, 0.0F, 10.0F, 15.0F), PartPose.offsetAndRotation(1.0F, -4.0F, -0.75F, 0.0F, -0.35F, 0.0F));
+		head.addOrReplaceChild("left_antler", CubeListBuilder.create().texOffs(0, 28).addBox(2.8F, -11.0F, -3.0F, 0.0F, 10.0F, 15.0F), PartPose.offsetAndRotation(-1.0F, -4.0F, -0.75F, 0.0F, 0.35F, 0.0F));
 
 		root.addOrReplaceChild("right_front_leg", CubeListBuilder.create().texOffs(46, 25).mirror().addBox(-0.5F, 0.0F, -2.0F, 3.0F, 10.0F, 3.0F), PartPose.offsetAndRotation(-3.5F, 14.0F, -5.0F, 0.0F, 0.0F, 0.0F));
 		root.addOrReplaceChild("left_front_leg", CubeListBuilder.create().texOffs(46, 25).addBox(-2.5F, 0.0F, -2.0F, 3.0F, 10.0F, 3.0F), PartPose.offsetAndRotation(3.5F, 14.0F, -5.0F, 0.0F, 0.0F, 0.0F));
