@@ -375,11 +375,6 @@ public abstract class AbstractDeer extends Animal {
 	}
 
 	@Override
-	public boolean isFood(ItemStack stack) {
-		return stack.is(EnvironmentalItemTags.DEER_FOOD);
-	}
-
-	@Override
 	protected SoundEvent getAmbientSound() {
 		return EnvironmentalSoundEvents.DEER_AMBIENT.get();
 	}

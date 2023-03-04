@@ -182,6 +182,9 @@
 
 	"block.environmental.buried_truffle": "Buried Truffle",
 	"block.environmental.truffle_crate": "Truffle Crate",
+	
+	"block.environmental.cup_lichen": "Cup Lichen",
+	"block.environmental.potted_cup_lichen": "Potted Cup Lichen",
 		
 	"item.environmental.wanderer_boots": "Wanderer's Boots",
 	"item.environmental.wanderer_boots.desc": "Blocks Travelled",

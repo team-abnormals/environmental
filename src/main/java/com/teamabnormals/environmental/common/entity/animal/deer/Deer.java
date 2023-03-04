@@ -1,5 +1,6 @@
 package com.teamabnormals.environmental.common.entity.animal.deer;
 
+import com.teamabnormals.environmental.core.other.tags.EnvironmentalItemTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -12,6 +13,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 
@@ -44,6 +46,11 @@ public class Deer extends AbstractDeer {
 		super.readAdditionalSaveData(compound);
 		this.setCoatColor(compound.getInt("CoatColor"));
 		this.setCoatType(compound.getInt("CoatType"));
+	}
+
+	@Override
+	public boolean isFood(ItemStack stack) {
+		return stack.is(EnvironmentalItemTags.DEER_FOOD);
 	}
 
 	private void setCoatColor(int id) {
