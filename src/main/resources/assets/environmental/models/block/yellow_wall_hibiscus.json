@@ -1,0 +1,6 @@
+{
+  "parent": "environmental:block/template_wall_hibiscus",
+  "textures": {
+    "hibiscus": "environmental:block/yellow_wall_hibiscus"
+  }
+}

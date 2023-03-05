@@ -152,12 +152,24 @@
 	"block.environmental.white_lotus_flower" : "White Lotus Flower",
 	"block.environmental.dianthus" : "Dianthus",
 	"block.environmental.bird_of_paradise" : "Bird of Paradise",
+	
 	"block.environmental.yellow_hibiscus" : "Yellow Hibiscus",
 	"block.environmental.orange_hibiscus" : "Orange Hibiscus",
 	"block.environmental.red_hibiscus" : "Red Hibiscus",
 	"block.environmental.pink_hibiscus" : "Pink Hibiscus",
 	"block.environmental.magenta_hibiscus" : "Magenta Hibiscus",
 	"block.environmental.purple_hibiscus" : "Purple Hibiscus",
+	
+	"block.environmental.hibiscus_leaves" : "Hibiscus Leaves",
+	"block.environmental.hibiscus_leaf_pile" : "Pile of Hibiscus Leaves",
+	"block.environmental.hibiscus_leaf_carpet" : "Hibiscus Leaf Carpet",
+	
+	"block.environmental.yellow_wall_hibiscus" : "Yellow Wall Hibiscus",
+	"block.environmental.orange_wall_hibiscus" : "Orange Wall Hibiscus",
+	"block.environmental.red_wall_hibiscus" : "Red Wall Hibiscus",
+	"block.environmental.pink_wall_hibiscus" : "Pink Wall Hibiscus",
+	"block.environmental.magenta_wall_hibiscus" : "Magenta Wall Hibiscus",
+	"block.environmental.purple_wall_hibiscus" : "Purple Wall Hibiscus",
 	
 	"block.environmental.podzol_path": "Podzol Path",
 	"block.environmental.mycelium_path": "Mycelium Path",

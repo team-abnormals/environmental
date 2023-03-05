@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "environmental:block/orange_wall_hibiscus",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "environmental:block/orange_wall_hibiscus"
+    },
+    "facing=south": {
+      "model": "environmental:block/orange_wall_hibiscus",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "environmental:block/orange_wall_hibiscus",
+      "y": 270
+    }
+  }
+}

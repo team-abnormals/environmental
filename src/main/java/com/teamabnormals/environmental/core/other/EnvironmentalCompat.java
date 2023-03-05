@@ -131,6 +131,9 @@ public class EnvironmentalCompat {
 		DataUtil.registerCompostable(EnvironmentalBlocks.MAGENTA_HIBISCUS.get(), 0.65F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.PURPLE_HIBISCUS.get(), 0.65F);
 
+		DataUtil.registerCompostable(EnvironmentalBlocks.HIBISCUS_LEAVES.get(), 0.50F);
+		DataUtil.registerCompostable(EnvironmentalBlocks.HIBISCUS_LEAF_CARPET.get(), 0.50F);
+
 		DataUtil.registerCompostable(EnvironmentalBlocks.BLUE_DELPHINIUM.get(), 0.65F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.WHITE_DELPHINIUM.get(), 0.65F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.PINK_DELPHINIUM.get(), 0.65F);
@@ -158,6 +161,10 @@ public class EnvironmentalCompat {
 		DataUtil.registerFlammable(EnvironmentalBlocks.DUCKWEED_THATCH_STAIRS.get(), 60, 20);
 		DataUtil.registerFlammable(EnvironmentalBlocks.DUCKWEED_THATCH_SLAB.get(), 60, 20);
 		DataUtil.registerFlammable(EnvironmentalBlocks.DUCKWEED_THATCH_VERTICAL_SLAB.get(), 60, 20);
+
+		DataUtil.registerFlammable(EnvironmentalBlocks.HIBISCUS_LEAVES.get(), 30, 60);
+		DataUtil.registerFlammable(EnvironmentalBlocks.HIBISCUS_LEAF_CARPET.get(), 30, 60);
+		DataUtil.registerFlammable(EnvironmentalBlocks.HIBISCUS_LEAF_PILE.get(), 30, 60);
 
 		DataUtil.registerFlammable(EnvironmentalBlocks.TRUFFLE_CRATE.get(), 5, 20);
 
