@@ -80,7 +80,17 @@ public class EnvironmentalClientCompat {
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.PINK_HIBISCUS.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.MAGENTA_HIBISCUS.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.PURPLE_HIBISCUS.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.YELLOW_WALL_HIBISCUS.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.ORANGE_WALL_HIBISCUS.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.RED_WALL_HIBISCUS.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.PINK_WALL_HIBISCUS.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.MAGENTA_WALL_HIBISCUS.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.PURPLE_WALL_HIBISCUS.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.BIRD_OF_PARADISE.get(), RenderType.cutout());
+
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.HIBISCUS_LEAVES.get(), RenderType.cutoutMipped());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.HIBISCUS_LEAF_CARPET.get(), RenderType.cutoutMipped());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.HIBISCUS_LEAF_PILE.get(), RenderType.cutout());
 
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.POTTED_CARTWHEEL.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.POTTED_VIOLET.get(), RenderType.cutout());

@@ -77,6 +77,9 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 		oneToOneConversionRecipe(consumer, Items.RED_DYE, EnvironmentalBlocks.RED_HIBISCUS.get(), "red_dye");
 		oneToOneConversionRecipe(consumer, Items.PURPLE_DYE, EnvironmentalBlocks.PURPLE_HIBISCUS.get(), "purple_dye");
 
+		// conditionalLeafPileRecipes(consumer, EnvironmentalBlocks.HIBISCUS_LEAVES.get(), EnvironmentalBlocks.HIBISCUS_LEAF_PILE.get());
+		leafCarpetRecipe(consumer, EnvironmentalBlocks.HIBISCUS_LEAVES.get(), EnvironmentalBlocks.HIBISCUS_LEAF_CARPET.get());
+
 		foodCookingRecipes(consumer, EnvironmentalItems.DUCK.get(), EnvironmentalItems.COOKED_DUCK.get());
 		foodCookingRecipes(consumer, EnvironmentalItems.VENISON.get(), EnvironmentalItems.COOKED_VENISON.get());
 		conditionalNineBlockStorageRecipes(consumer, INCUBATION_LOADED, EnvironmentalItems.DUCK_EGG.get(), EnvironmentalBlocks.DUCK_EGG_CRATE.get());
@@ -128,7 +131,7 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 		ShapedRecipeBuilder.shaped(EnvironmentalBlocks.HANGING_WILLOW_LEAVES.get(), 3).define('#', EnvironmentalBlocks.WILLOW_LEAVES.get()).pattern("#").pattern("#").pattern("#").unlockedBy(getHasName(EnvironmentalBlocks.WILLOW_LEAVES.get()), has(EnvironmentalBlocks.WILLOW_LEAVES.get())).save(consumer);
 		//conditionalLeafPileRecipes(consumer, EnvironmentalBlocks.WILLOW_LEAVES.get(), EnvironmentalBlocks.WILLOW_LEAF_PILE.get());
 		verticalSlabRecipes(consumer, EnvironmentalBlockFamilies.WILLOW_PLANKS_FAMILY, EnvironmentalBlocks.WILLOW_VERTICAL_SLAB.get());
-		leafCarpetRecipe(consumer, EnvironmentalBlocks.WILLOW_LEAVES.get(), EnvironmentalBlocks.WILLOW_LEAF_CARPET.get(), EnvironmentalBlocks.WILLOW_HEDGE.get(), EnvironmentalItemTags.WILLOW_LOGS);
+		leafCarpetAndHedgeRecipe(consumer, EnvironmentalBlocks.WILLOW_LEAVES.get(), EnvironmentalBlocks.WILLOW_LEAF_CARPET.get(), EnvironmentalBlocks.WILLOW_HEDGE.get(), EnvironmentalItemTags.WILLOW_LOGS);
 		woodenBoat(consumer, EnvironmentalItems.WILLOW_BOAT.getFirst().get(), EnvironmentalBlocks.WILLOW_PLANKS.get());
 		chestBoat(consumer, EnvironmentalItems.WILLOW_BOAT.getSecond().get(), EnvironmentalItems.WILLOW_BOAT.getFirst().get());
 		conditionalRecipe(consumer, BOATLOAD_LOADED, ShapelessRecipeBuilder.shapeless(EnvironmentalItems.WILLOW_FURNACE_BOAT.get()).requires(Blocks.FURNACE).requires(EnvironmentalItems.WILLOW_BOAT.getFirst().get()).group("furnace_boat").unlockedBy("has_boat", has(ItemTags.BOATS)));
@@ -158,10 +161,10 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 		//conditionalLeafPileRecipes(consumer, EnvironmentalBlocks.PURPLE_WISTERIA_LEAVES.get(), EnvironmentalBlocks.PURPLE_WISTERIA_LEAF_PILE.get());
 		//conditionalLeafPileRecipes(consumer, EnvironmentalBlocks.WHITE_WISTERIA_LEAVES.get(), EnvironmentalBlocks.WHITE_WISTERIA_LEAF_PILE.get());
 		verticalSlabRecipes(consumer, EnvironmentalBlockFamilies.WISTERIA_PLANKS_FAMILY, EnvironmentalBlocks.WISTERIA_VERTICAL_SLAB.get());
-		leafCarpetRecipe(consumer, EnvironmentalBlocks.PINK_WISTERIA_LEAVES.get(), EnvironmentalBlocks.PINK_WISTERIA_LEAF_CARPET.get(), EnvironmentalBlocks.PINK_WISTERIA_HEDGE.get(), EnvironmentalItemTags.WISTERIA_LOGS);
-		leafCarpetRecipe(consumer, EnvironmentalBlocks.BLUE_WISTERIA_LEAVES.get(), EnvironmentalBlocks.BLUE_WISTERIA_LEAF_CARPET.get(), EnvironmentalBlocks.BLUE_WISTERIA_HEDGE.get(), EnvironmentalItemTags.WISTERIA_LOGS);
-		leafCarpetRecipe(consumer, EnvironmentalBlocks.PURPLE_WISTERIA_LEAVES.get(), EnvironmentalBlocks.PURPLE_WISTERIA_LEAF_CARPET.get(), EnvironmentalBlocks.PURPLE_WISTERIA_HEDGE.get(), EnvironmentalItemTags.WISTERIA_LOGS);
-		leafCarpetRecipe(consumer, EnvironmentalBlocks.WHITE_WISTERIA_LEAVES.get(), EnvironmentalBlocks.WHITE_WISTERIA_LEAF_CARPET.get(), EnvironmentalBlocks.WHITE_WISTERIA_HEDGE.get(), EnvironmentalItemTags.WISTERIA_LOGS);
+		leafCarpetAndHedgeRecipe(consumer, EnvironmentalBlocks.PINK_WISTERIA_LEAVES.get(), EnvironmentalBlocks.PINK_WISTERIA_LEAF_CARPET.get(), EnvironmentalBlocks.PINK_WISTERIA_HEDGE.get(), EnvironmentalItemTags.WISTERIA_LOGS);
+		leafCarpetAndHedgeRecipe(consumer, EnvironmentalBlocks.BLUE_WISTERIA_LEAVES.get(), EnvironmentalBlocks.BLUE_WISTERIA_LEAF_CARPET.get(), EnvironmentalBlocks.BLUE_WISTERIA_HEDGE.get(), EnvironmentalItemTags.WISTERIA_LOGS);
+		leafCarpetAndHedgeRecipe(consumer, EnvironmentalBlocks.PURPLE_WISTERIA_LEAVES.get(), EnvironmentalBlocks.PURPLE_WISTERIA_LEAF_CARPET.get(), EnvironmentalBlocks.PURPLE_WISTERIA_HEDGE.get(), EnvironmentalItemTags.WISTERIA_LOGS);
+		leafCarpetAndHedgeRecipe(consumer, EnvironmentalBlocks.WHITE_WISTERIA_LEAVES.get(), EnvironmentalBlocks.WHITE_WISTERIA_LEAF_CARPET.get(), EnvironmentalBlocks.WHITE_WISTERIA_HEDGE.get(), EnvironmentalItemTags.WISTERIA_LOGS);
 		woodenBoat(consumer, EnvironmentalItems.WISTERIA_BOAT.getFirst().get(), EnvironmentalBlocks.WISTERIA_PLANKS.get());
 		chestBoat(consumer, EnvironmentalItems.WISTERIA_BOAT.getSecond().get(), EnvironmentalItems.WISTERIA_BOAT.getFirst().get());
 		conditionalRecipe(consumer, BOATLOAD_LOADED, ShapelessRecipeBuilder.shapeless(EnvironmentalItems.WISTERIA_FURNACE_BOAT.get()).requires(Blocks.FURNACE).requires(EnvironmentalItems.WISTERIA_BOAT.getFirst().get()).group("furnace_boat").unlockedBy("has_boat", has(ItemTags.BOATS)));
@@ -184,7 +187,7 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 		woodFromLogs(consumer, EnvironmentalBlocks.STRIPPED_CHERRY_WOOD.get(), EnvironmentalBlocks.STRIPPED_CHERRY_LOG.get());
 		leafPileRecipes(consumer, EnvironmentalBlocks.CHERRY_LEAVES.get(), EnvironmentalBlocks.CHERRY_LEAF_PILE.get());
 		verticalSlabRecipes(consumer, EnvironmentalBlockFamilies.CHERRY_PLANKS_FAMILY, EnvironmentalBlocks.CHERRY_VERTICAL_SLAB.get());
-		leafCarpetRecipe(consumer, EnvironmentalBlocks.CHERRY_LEAVES.get(), EnvironmentalBlocks.CHERRY_LEAF_CARPET.get(), EnvironmentalBlocks.CHERRY_HEDGE.get(), EnvironmentalItemTags.CHERRY_LOGS);
+		leafCarpetAndHedgeRecipe(consumer, EnvironmentalBlocks.CHERRY_LEAVES.get(), EnvironmentalBlocks.CHERRY_LEAF_CARPET.get(), EnvironmentalBlocks.CHERRY_HEDGE.get(), EnvironmentalItemTags.CHERRY_LOGS);
 		woodenBoat(consumer, EnvironmentalItems.CHERRY_BOAT.getFirst().get(), EnvironmentalBlocks.CHERRY_PLANKS.get());
 		chestBoat(consumer, EnvironmentalItems.CHERRY_BOAT.getSecond().get(), EnvironmentalItems.CHERRY_BOAT.getFirst().get());
 		conditionalRecipe(consumer, BOATLOAD_LOADED, ShapelessRecipeBuilder.shapeless(EnvironmentalItems.CHERRY_FURNACE_BOAT.get()).requires(Blocks.FURNACE).requires(EnvironmentalItems.CHERRY_BOAT.getFirst().get()).group("furnace_boat").unlockedBy("has_boat", has(ItemTags.BOATS)));
@@ -250,7 +253,11 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 		ShapelessRecipeBuilder.shapeless(chestBoat).requires(Tags.Items.CHESTS_WOODEN).requires(boat).group("chest_boat").unlockedBy("has_boat", has(ItemTags.BOATS)).save(consumer);
 	}
 
-	public static void leafCarpetRecipe(Consumer<FinishedRecipe> consumer, ItemLike leaves, ItemLike leafCarpet, ItemLike hedge, TagKey<Item> logTag) {
+	public static void leafCarpetRecipe(Consumer<FinishedRecipe> consumer, ItemLike leaves, ItemLike leafCarpet) {
+		conditionalRecipe(consumer, LEAF_CARPETS, ShapedRecipeBuilder.shaped(leafCarpet, 3).define('#', leaves).pattern("##").group("leaf_carpet").unlockedBy(getHasName(leaves), has(leaves)));
+	}
+
+	public static void leafCarpetAndHedgeRecipe(Consumer<FinishedRecipe> consumer, ItemLike leaves, ItemLike leafCarpet, ItemLike hedge, TagKey<Item> logTag) {
 		conditionalRecipe(consumer, LEAF_CARPETS, ShapedRecipeBuilder.shaped(leafCarpet, 3).define('#', leaves).pattern("##").group("leaf_carpet").unlockedBy(getHasName(leaves), has(leaves)));
 		conditionalRecipe(consumer, HEDGES, ShapedRecipeBuilder.shaped(hedge, 2).define('#', leaves).define('L', logTag).pattern("#").pattern("L").group("hedge").unlockedBy(getHasName(leaves), has(leaves)));
 	}
