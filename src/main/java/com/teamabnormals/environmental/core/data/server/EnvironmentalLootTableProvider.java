@@ -72,6 +72,7 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 		private static final LootItemCondition.Builder HAS_NO_SHEARS_OR_SILK_TOUCH = MatchTool.toolMatches(ItemPredicate.Builder.item().of(Items.SHEARS)).or(HAS_SILK_TOUCH).invert();
 
 		private static final float[] NORMAL_LEAVES_SAPLING_CHANCES = new float[]{0.05F, 0.0625F, 0.083333336F, 0.1F};
+		private static final float[] HIBISCUS_LEAVES_STICK_CHANCES = new float[]{0.04F, 0.044444446F, 0.05F, 0.066666670F, 0.2F};
 
 		@Override
 		public void addTables() {
@@ -87,6 +88,12 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.dropSelf(PINK_HIBISCUS.get());
 			this.dropSelf(MAGENTA_HIBISCUS.get());
 			this.dropSelf(PURPLE_HIBISCUS.get());
+			this.dropOther(YELLOW_WALL_HIBISCUS.get(), YELLOW_HIBISCUS.get());
+			this.dropOther(ORANGE_WALL_HIBISCUS.get(), ORANGE_HIBISCUS.get());
+			this.dropOther(RED_WALL_HIBISCUS.get(), RED_HIBISCUS.get());
+			this.dropOther(PINK_WALL_HIBISCUS.get(), PINK_HIBISCUS.get());
+			this.dropOther(MAGENTA_WALL_HIBISCUS.get(), MAGENTA_HIBISCUS.get());
+			this.dropOther(PURPLE_WALL_HIBISCUS.get(), PURPLE_HIBISCUS.get());
 			this.add(BIRD_OF_PARADISE.get(), (block) -> createSinglePropConditionTable(block, DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
 			this.add(PINK_DELPHINIUM.get(), (block) -> createSinglePropConditionTable(block, DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
 			this.add(BLUE_DELPHINIUM.get(), (block) -> createSinglePropConditionTable(block, DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
@@ -141,6 +148,10 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.add(CATTAIL_SPROUTS.get(), (block) -> LootTable.lootTable().withPool(LootPool.lootPool().add(applyExplosionDecay(block, LootItem.lootTableItem(EnvironmentalItems.CATTAIL_SEEDS.get()).when(LootItemRandomChanceCondition.randomChance(0.1F)).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE, 2))))));
 			this.add(CATTAIL.get(), (block) -> createShearsDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(EnvironmentalItems.CATTAIL_SEEDS.get()).when(LootItemRandomChanceCondition.randomChance(0.25F)).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE, 2)))));
 			this.add(TALL_CATTAIL.get(), (block) -> createDoublePlantWithOtherDrop(block, CATTAIL.get(), EnvironmentalItems.CATTAIL_SEEDS.get(), 2, 0.5F).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE, 2)));
+
+			this.add(HIBISCUS_LEAVES.get(), (block) -> createSilkTouchOrShearsDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Items.STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, HIBISCUS_LEAVES_STICK_CHANCES))));
+			this.dropSelf(HIBISCUS_LEAF_CARPET.get());
+			this.add(HIBISCUS_LEAF_PILE.get(), EnvironmentalBlockLoot::createLeafPileDrops);
 
 			this.add(MYCELIUM_SPROUTS.get(), BlockLoot::createShearsOnlyDrop);
 			this.add(DUCKWEED.get(), BlockLoot::createShearsOnlyDrop);

@@ -1,0 +1,7 @@
+{
+    "parent": "blueprint:block/leaf_carpet",
+    "textures": {
+        "all": "environmental:block/hibiscus_leaves"
+    }
+}
+

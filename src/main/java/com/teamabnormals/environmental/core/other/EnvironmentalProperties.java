@@ -3,6 +3,7 @@ package com.teamabnormals.environmental.core.other;
 import com.teamabnormals.blueprint.core.util.PropertyUtil;
 import com.teamabnormals.blueprint.core.util.PropertyUtil.WoodSetProperties;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
@@ -21,6 +22,9 @@ public class EnvironmentalProperties {
 	public static final BlockBehaviour.Properties CUP_LICHEN = BlockBehaviour.Properties.of(Material.REPLACEABLE_PLANT, MaterialColor.GLOW_LICHEN).noCollission().instabreak().sound(SoundType.NETHER_SPROUTS);
 
 	public static final BlockBehaviour.Properties DELPHINIUMS = BlockBehaviour.Properties.of(Material.REPLACEABLE_PLANT).noCollission().strength(0.0F).sound(SoundType.GRASS);
+	public static final BlockBehaviour.Properties HIBISCUS_LEAVES = BlockBehaviour.Properties.of(Material.LEAVES).strength(0.4F).randomTicks().sound(SoundType.GRASS).noOcclusion().isValidSpawn(PropertyUtil::ocelotOrParrot).isSuffocating(PropertyUtil::never).isViewBlocking(PropertyUtil::never);
+	public static final BlockBehaviour.Properties HIBISCUS_LEAF_PILE = BlockBehaviour.Properties.of(Material.REPLACEABLE_PLANT).noCollission().strength(0.2F).sound(SoundType.GRASS);
+	public static final BlockBehaviour.Properties HIBISCUS_LEAF_CARPET = BlockBehaviour.Properties.of(Material.CLOTH_DECORATION).strength(0.0F).sound(SoundType.GRASS).noOcclusion();
 
 	public static final BlockBehaviour.Properties MYCELIUM_PATH = BlockBehaviour.Properties.of(Material.DIRT, MaterialColor.COLOR_PURPLE).strength(0.65F).sound(SoundType.GRASS).isViewBlocking(PropertyUtil::never).isViewBlocking(PropertyUtil::never);
 	public static final BlockBehaviour.Properties PODZOL_PATH = BlockBehaviour.Properties.of(Material.DIRT, MaterialColor.PODZOL).strength(0.65F).sound(SoundType.GRASS).isViewBlocking(PropertyUtil::never).isViewBlocking(PropertyUtil::never);
