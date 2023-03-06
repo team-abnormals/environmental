@@ -99,16 +99,16 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> RED_LOTUS_FLOWER = HELPER.createBlock("red_lotus_flower", () -> new LotusFlowerBlock(EnvironmentalParticleTypes.RED_LOTUS_BLOSSOM::get, () -> MobEffects.SLOW_FALLING, 5, PropertyUtil.FLOWER), CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> WHITE_LOTUS_FLOWER = HELPER.createBlock("white_lotus_flower", () -> new LotusFlowerBlock(EnvironmentalParticleTypes.WHITE_LOTUS_BLOSSOM::get, () -> MobEffects.SLOW_FALLING, 5, PropertyUtil.FLOWER), CreativeModeTab.TAB_DECORATIONS);
 
+	public static final RegistryObject<Block> HIBISCUS_LEAVES = HELPER.createBlock("hibiscus_leaves", () -> new HibiscusLeavesBlock(EnvironmentalProperties.HIBISCUS_LEAVES), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> HIBISCUS_LEAF_PILE = HELPER.createCompatBlock("woodworks", "hibiscus_leaf_pile", () -> new LeafPileBlock(EnvironmentalProperties.HIBISCUS_LEAF_PILE), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> HIBISCUS_LEAF_CARPET = HELPER.createCompatBlock("quark", "hibiscus_leaf_carpet", () -> new LeafCarpetBlock(EnvironmentalProperties.HIBISCUS_LEAF_CARPET), CreativeModeTab.TAB_DECORATIONS);
+
 	public static final RegistryObject<Block> YELLOW_WALL_HIBISCUS = HELPER.createBlockNoItem("yellow_wall_hibiscus", WallHibiscusBlock::new);
 	public static final RegistryObject<Block> ORANGE_WALL_HIBISCUS = HELPER.createBlockNoItem("orange_wall_hibiscus", WallHibiscusBlock::new);
 	public static final RegistryObject<Block> RED_WALL_HIBISCUS = HELPER.createBlockNoItem("red_wall_hibiscus", WallHibiscusBlock::new);
 	public static final RegistryObject<Block> PINK_WALL_HIBISCUS = HELPER.createBlockNoItem("pink_wall_hibiscus", WallHibiscusBlock::new);
 	public static final RegistryObject<Block> MAGENTA_WALL_HIBISCUS = HELPER.createBlockNoItem("magenta_wall_hibiscus", WallHibiscusBlock::new);
 	public static final RegistryObject<Block> PURPLE_WALL_HIBISCUS = HELPER.createBlockNoItem("purple_wall_hibiscus", WallHibiscusBlock::new);
-
-	public static final RegistryObject<Block> HIBISCUS_LEAVES = HELPER.createBlock("hibiscus_leaves", () -> new HibiscusLeavesBlock(EnvironmentalProperties.HIBISCUS_LEAVES), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> HIBISCUS_LEAF_PILE = HELPER.createBlock("hibiscus_leaf_pile", () -> new LeafPileBlock(EnvironmentalProperties.HIBISCUS_LEAF_PILE), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> HIBISCUS_LEAF_CARPET = HELPER.createCompatBlock("quark", "hibiscus_leaf_carpet", () -> new LeafCarpetBlock(EnvironmentalProperties.HIBISCUS_LEAF_CARPET), CreativeModeTab.TAB_DECORATIONS);
 
 	public static final RegistryObject<Block> YELLOW_HIBISCUS = HELPER.createStandingAndWallBlock("yellow_hibiscus", HibiscusBlock::new, YELLOW_WALL_HIBISCUS, CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> ORANGE_HIBISCUS = HELPER.createStandingAndWallBlock("orange_hibiscus", HibiscusBlock::new, ORANGE_WALL_HIBISCUS, CreativeModeTab.TAB_DECORATIONS);
