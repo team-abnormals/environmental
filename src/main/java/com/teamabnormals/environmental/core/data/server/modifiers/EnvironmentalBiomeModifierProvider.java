@@ -59,8 +59,6 @@ public class EnvironmentalBiomeModifierProvider {
 
 		addFeature("bluebell", Biomes.DARK_FOREST, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_BLUEBELL);
 		addFeature("violet", BiomeTags.IS_TAIGA, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_VIOLET);
-		addFeature("warm_hibiscus", Biomes.SPARSE_JUNGLE, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_HIBISCUS_WARM);
-		addFeature("cool_hibiscus", Biomes.JUNGLE, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_HIBISCUS_COOL);
 		addFeature("cattails", EnvironmentalBiomeTags.HAS_CATTAILS, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.CATTAILS);
 		addFeature("tall_dead_bush", Biomes.DESERT, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_TALL_DEAD_BUSH);
 		addFeature("tall_dead_bush_badlands", BiomeTags.IS_BADLANDS, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_TALL_DEAD_BUSH_BADLANDS);

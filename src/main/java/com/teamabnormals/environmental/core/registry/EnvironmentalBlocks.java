@@ -23,6 +23,7 @@ import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.other.EnvironmentalProperties;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
@@ -103,19 +104,19 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> HIBISCUS_LEAF_PILE = HELPER.createCompatBlock("woodworks", "hibiscus_leaf_pile", () -> new LeafPileBlock(EnvironmentalProperties.HIBISCUS_LEAF_PILE), CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> HIBISCUS_LEAF_CARPET = HELPER.createCompatBlock("quark", "hibiscus_leaf_carpet", () -> new LeafCarpetBlock(EnvironmentalProperties.HIBISCUS_LEAF_CARPET), CreativeModeTab.TAB_DECORATIONS);
 
-	public static final RegistryObject<Block> YELLOW_WALL_HIBISCUS = HELPER.createBlockNoItem("yellow_wall_hibiscus", WallHibiscusBlock::new);
-	public static final RegistryObject<Block> ORANGE_WALL_HIBISCUS = HELPER.createBlockNoItem("orange_wall_hibiscus", WallHibiscusBlock::new);
-	public static final RegistryObject<Block> RED_WALL_HIBISCUS = HELPER.createBlockNoItem("red_wall_hibiscus", WallHibiscusBlock::new);
-	public static final RegistryObject<Block> PINK_WALL_HIBISCUS = HELPER.createBlockNoItem("pink_wall_hibiscus", WallHibiscusBlock::new);
-	public static final RegistryObject<Block> MAGENTA_WALL_HIBISCUS = HELPER.createBlockNoItem("magenta_wall_hibiscus", WallHibiscusBlock::new);
-	public static final RegistryObject<Block> PURPLE_WALL_HIBISCUS = HELPER.createBlockNoItem("purple_wall_hibiscus", WallHibiscusBlock::new);
+	public static final RegistryObject<Block> YELLOW_WALL_HIBISCUS = HELPER.createBlockNoItem("yellow_wall_hibiscus", () -> new WallHibiscusBlock(DyeColor.YELLOW));
+	public static final RegistryObject<Block> ORANGE_WALL_HIBISCUS = HELPER.createBlockNoItem("orange_wall_hibiscus", () -> new WallHibiscusBlock(DyeColor.ORANGE));
+	public static final RegistryObject<Block> RED_WALL_HIBISCUS = HELPER.createBlockNoItem("red_wall_hibiscus", () -> new WallHibiscusBlock(DyeColor.RED));
+	public static final RegistryObject<Block> PINK_WALL_HIBISCUS = HELPER.createBlockNoItem("pink_wall_hibiscus", () -> new WallHibiscusBlock(DyeColor.PINK));
+	public static final RegistryObject<Block> MAGENTA_WALL_HIBISCUS = HELPER.createBlockNoItem("magenta_wall_hibiscus", () -> new WallHibiscusBlock(DyeColor.MAGENTA));
+	public static final RegistryObject<Block> PURPLE_WALL_HIBISCUS = HELPER.createBlockNoItem("purple_wall_hibiscus", () -> new WallHibiscusBlock(DyeColor.PURPLE));
 
-	public static final RegistryObject<Block> YELLOW_HIBISCUS = HELPER.createStandingAndWallBlock("yellow_hibiscus", HibiscusBlock::new, YELLOW_WALL_HIBISCUS, CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> ORANGE_HIBISCUS = HELPER.createStandingAndWallBlock("orange_hibiscus", HibiscusBlock::new, ORANGE_WALL_HIBISCUS, CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> RED_HIBISCUS = HELPER.createStandingAndWallBlock("red_hibiscus", HibiscusBlock::new, RED_WALL_HIBISCUS, CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> PINK_HIBISCUS = HELPER.createStandingAndWallBlock("pink_hibiscus", HibiscusBlock::new, PINK_WALL_HIBISCUS, CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> MAGENTA_HIBISCUS = HELPER.createStandingAndWallBlock("magenta_hibiscus", HibiscusBlock::new, MAGENTA_WALL_HIBISCUS, CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> PURPLE_HIBISCUS = HELPER.createStandingAndWallBlock("purple_hibiscus", HibiscusBlock::new, PURPLE_WALL_HIBISCUS, CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> YELLOW_HIBISCUS = HELPER.createStandingAndWallBlock("yellow_hibiscus", () -> new HibiscusBlock(DyeColor.YELLOW), YELLOW_WALL_HIBISCUS, CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> ORANGE_HIBISCUS = HELPER.createStandingAndWallBlock("orange_hibiscus", () -> new HibiscusBlock(DyeColor.ORANGE), ORANGE_WALL_HIBISCUS, CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> RED_HIBISCUS = HELPER.createStandingAndWallBlock("red_hibiscus", () -> new HibiscusBlock(DyeColor.RED), RED_WALL_HIBISCUS, CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> PINK_HIBISCUS = HELPER.createStandingAndWallBlock("pink_hibiscus", () -> new HibiscusBlock(DyeColor.PINK), PINK_WALL_HIBISCUS, CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> MAGENTA_HIBISCUS = HELPER.createStandingAndWallBlock("magenta_hibiscus", () -> new HibiscusBlock(DyeColor.MAGENTA), MAGENTA_WALL_HIBISCUS, CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> PURPLE_HIBISCUS = HELPER.createStandingAndWallBlock("purple_hibiscus", () -> new HibiscusBlock(DyeColor.PURPLE), PURPLE_WALL_HIBISCUS, CreativeModeTab.TAB_DECORATIONS);
 
 	public static final RegistryObject<Block> POTTED_CARTWHEEL = HELPER.createBlockNoItem("potted_cartwheel", () -> new PottedCartwheelBlock(CARTWHEEL.get(), PropertyUtil.FLOWER_POT));
 	public static final RegistryObject<Block> POTTED_BLUEBELL = HELPER.createBlockNoItem("potted_bluebell", () -> new FlowerPotBlock(BLUEBELL.get(), PropertyUtil.FLOWER_POT));

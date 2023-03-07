@@ -10,6 +10,9 @@ public class EnvironmentalBlockTags {
 	public static final TagKey<Block> WATER_ANIMALS_SPAWNABLE_ON = blockTag("water_animals_spawnable_on");
 	public static final TagKey<Block> CUP_LICHEN_PLANTABLE_ON = blockTag("cup_lichen_plantable_on");
 
+	public static final TagKey<Block> HIBISCUSES = blockTag("hibiscuses");
+	public static final TagKey<Block> WALL_HIBISCUSES = blockTag("wall_hibiscuses");
+
 	public static final TagKey<Block> WILLOW_LOGS = blockTag("willow_logs");
 	public static final TagKey<Block> WISTERIA_LOGS = blockTag("wisteria_logs");
 	public static final TagKey<Block> CHERRY_LOGS = blockTag("cherry_logs");

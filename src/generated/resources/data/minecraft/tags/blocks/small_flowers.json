@@ -1,22 +1,12 @@
 {
   "values": [
+    "#environmental:hibiscuses",
+    "#environmental:wall_hibiscuses",
     "environmental:cartwheel",
     "environmental:bluebell",
     "environmental:violet",
     "environmental:dianthus",
     "environmental:red_lotus_flower",
-    "environmental:white_lotus_flower",
-    "environmental:yellow_hibiscus",
-    "environmental:orange_hibiscus",
-    "environmental:red_hibiscus",
-    "environmental:pink_hibiscus",
-    "environmental:magenta_hibiscus",
-    "environmental:purple_hibiscus",
-    "environmental:yellow_wall_hibiscus",
-    "environmental:orange_wall_hibiscus",
-    "environmental:red_wall_hibiscus",
-    "environmental:pink_wall_hibiscus",
-    "environmental:magenta_wall_hibiscus",
-    "environmental:purple_wall_hibiscus"
+    "environmental:white_lotus_flower"
   ]
 }
