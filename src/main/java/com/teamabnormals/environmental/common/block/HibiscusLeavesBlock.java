@@ -18,6 +18,7 @@ public class HibiscusLeavesBlock extends BlueprintLeavesBlock implements Bonemea
 
 	public HibiscusLeavesBlock(Properties properties) {
 		super(properties);
+		this.registerDefaultState(this.defaultBlockState().setValue(PERSISTENT, Boolean.valueOf(true)));
 	}
 
 	@Override
@@ -27,7 +28,6 @@ public class HibiscusLeavesBlock extends BlueprintLeavesBlock implements Bonemea
 				return true;
 			}
 		}
-
 		return false;
 	}
 
@@ -39,7 +39,6 @@ public class HibiscusLeavesBlock extends BlueprintLeavesBlock implements Bonemea
 	@Override
 	public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
 		List<BlockPos> validblocks = Lists.newArrayList();
-
 		for (Direction direction : Direction.values()) {
 			BlockPos blockpos = pos.relative(direction);
 			if (level.getBlockState(blockpos).isAir()) {
@@ -47,6 +46,7 @@ public class HibiscusLeavesBlock extends BlueprintLeavesBlock implements Bonemea
 			}
 		}
 
-		level.setBlockAndUpdate(validblocks.get(random.nextInt(validblocks.size())), EnvironmentalBlocks.HIBISCUS_LEAVES.get().defaultBlockState());
+		if (!validblocks.isEmpty())
+			level.setBlockAndUpdate(validblocks.get(random.nextInt(validblocks.size())), EnvironmentalBlocks.HIBISCUS_LEAVES.get().defaultBlockState());
 	}
 }

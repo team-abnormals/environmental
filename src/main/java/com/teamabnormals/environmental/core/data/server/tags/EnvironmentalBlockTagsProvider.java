@@ -57,7 +57,7 @@ public class EnvironmentalBlockTagsProvider extends BlockTagsProvider {
 		this.tag(BlockTags.LOGS_THAT_BURN).addTag(WILLOW_LOGS).addTag(WISTERIA_LOGS).addTag(CHERRY_LOGS);
 		this.tag(BlockTags.PLANKS).add(WILLOW_PLANKS.get(), WISTERIA_PLANKS.get(), CHERRY_PLANKS.get(), VERTICAL_WILLOW_PLANKS.get(), VERTICAL_WISTERIA_PLANKS.get(), VERTICAL_CHERRY_PLANKS.get());
 		this.tag(BlockTags.SAPLINGS).add(WILLOW_SAPLING.get(), PINK_WISTERIA_SAPLING.get(), BLUE_WISTERIA_SAPLING.get(), PURPLE_WISTERIA_SAPLING.get(), WHITE_WISTERIA_SAPLING.get(), CHERRY_SAPLING.get());
-		this.tag(BlockTags.SMALL_FLOWERS).add(CARTWHEEL.get(), BLUEBELL.get(), VIOLET.get(), DIANTHUS.get(), RED_LOTUS_FLOWER.get(), WHITE_LOTUS_FLOWER.get(), YELLOW_HIBISCUS.get(), ORANGE_HIBISCUS.get(), RED_HIBISCUS.get(), PINK_HIBISCUS.get(), MAGENTA_HIBISCUS.get(), PURPLE_HIBISCUS.get(), YELLOW_WALL_HIBISCUS.get(), ORANGE_WALL_HIBISCUS.get(), RED_WALL_HIBISCUS.get(), PINK_WALL_HIBISCUS.get(), MAGENTA_WALL_HIBISCUS.get(), PURPLE_WALL_HIBISCUS.get());
+		this.tag(BlockTags.SMALL_FLOWERS).addTag(HIBISCUSES).addTag(WALL_HIBISCUSES).add(CARTWHEEL.get(), BLUEBELL.get(), VIOLET.get(), DIANTHUS.get(), RED_LOTUS_FLOWER.get(), WHITE_LOTUS_FLOWER.get());
 		this.tag(BlockTags.STANDING_SIGNS).add(WILLOW_SIGNS.getFirst().get(), WISTERIA_SIGNS.getFirst().get(), CHERRY_SIGNS.getFirst().get());
 		this.tag(BlockTags.TALL_FLOWERS).add(BIRD_OF_PARADISE.get(), PINK_DELPHINIUM.get(), BLUE_DELPHINIUM.get(), PURPLE_DELPHINIUM.get(), WHITE_DELPHINIUM.get());
 		this.tag(BlockTags.WALL_SIGNS).add(WILLOW_SIGNS.getSecond().get(), WISTERIA_SIGNS.getSecond().get(), CHERRY_SIGNS.getSecond().get());
@@ -83,6 +83,9 @@ public class EnvironmentalBlockTagsProvider extends BlockTagsProvider {
 		this.tag(WATER_ANIMALS_SPAWNABLE_ON).addTag(BlockTags.ANIMALS_SPAWNABLE_ON).add(Blocks.WATER);
 		this.tag(GRASS_LIKE).add(Blocks.GRASS_BLOCK, Blocks.PODZOL, Blocks.MYCELIUM).addOptional(new ResourceLocation("quark", "glowcelium")).addOptional(new ResourceLocation("atmospheric", "crustose"));
 		this.tag(CUP_LICHEN_PLANTABLE_ON).addTag(BlockTags.DIRT).addTag(Tags.Blocks.STONE).addTag(Tags.Blocks.ORES).addTag(BlockTags.LOGS);
+
+		this.tag(HIBISCUSES).add(YELLOW_HIBISCUS.get(), ORANGE_HIBISCUS.get(), RED_HIBISCUS.get(), PINK_HIBISCUS.get(), MAGENTA_HIBISCUS.get(), PURPLE_HIBISCUS.get());
+		this.tag(WALL_HIBISCUSES).add(YELLOW_WALL_HIBISCUS.get(), ORANGE_WALL_HIBISCUS.get(), RED_WALL_HIBISCUS.get(), PINK_WALL_HIBISCUS.get(), MAGENTA_WALL_HIBISCUS.get(), PURPLE_WALL_HIBISCUS.get());
 
 		this.tag(WILLOW_LOGS).add(WILLOW_LOG.get(), WILLOW_WOOD.get(), STRIPPED_WILLOW_LOG.get(), STRIPPED_WILLOW_WOOD.get());
 		this.tag(WISTERIA_LOGS).add(WISTERIA_LOG.get(), WISTERIA_WOOD.get(), STRIPPED_WISTERIA_LOG.get(), STRIPPED_WISTERIA_WOOD.get());
