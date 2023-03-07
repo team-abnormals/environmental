@@ -87,7 +87,7 @@ public abstract class AbstractDeer extends Animal {
 
 	@Override
 	protected void registerGoals() {
-		this.temptGoal = new DeerTemptGoal(this, 0.6D, 1.1D, Ingredient.of(EnvironmentalItemTags.DEER_TEMPT_ITEMS));
+		this.temptGoal = new DeerTemptGoal(this, 0.6D, 1.1D, this.getTemptItems());
 		this.goalSelector.addGoal(0, new FloatGoal(this));
 		this.goalSelector.addGoal(1, new DeerFollowParentGoal(this));
 		this.goalSelector.addGoal(2, new DeerRunFromAttackerGoal(this));
@@ -233,6 +233,10 @@ public abstract class AbstractDeer extends Animal {
 		} else {
 			return super.mobInteract(player, hand);
 		}
+	}
+
+	public Ingredient getTemptItems() {
+		return Ingredient.of(EnvironmentalItemTags.DEER_TEMPT_ITEMS);
 	}
 
 	public void spawnFlower() {
