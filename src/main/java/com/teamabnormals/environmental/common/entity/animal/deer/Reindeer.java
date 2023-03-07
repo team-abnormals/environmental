@@ -16,6 +16,7 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome.Precipitation;
@@ -55,6 +56,11 @@ public class Reindeer extends AbstractDeer {
 		return stack.is(EnvironmentalItemTags.REINDEER_FOOD);
 	}
 
+	@Override
+	public Ingredient getTemptItems() {
+		return Ingredient.of(EnvironmentalItemTags.REINDEER_TEMPT_ITEMS);
+	}
+
 	private void setHoliday(boolean isHoliday) {
 		this.entityData.set(HOLIDAY, isHoliday);
 	}
@@ -88,6 +94,7 @@ public class Reindeer extends AbstractDeer {
 	@Nullable
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
+		this.setHasAntlers(true);
 		this.setHoliday(this.isHolidayCriteria());
 		return super.finalizeSpawn(worldIn, difficulty, reason, spawnDataIn, dataTag);
 	}
