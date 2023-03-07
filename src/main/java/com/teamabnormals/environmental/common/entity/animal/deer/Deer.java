@@ -101,6 +101,7 @@ public class Deer extends AbstractDeer {
 
 		this.setCoatColor(deerCoatColor);
 		this.setCoatType(this.random.nextInt(DeerCoatTypes.values().length));
+		this.setHasAntlers(this.random.nextBoolean());
 
 		return super.finalizeSpawn(worldIn, difficulty, reason, spawnDataIn, dataTag);
 	}

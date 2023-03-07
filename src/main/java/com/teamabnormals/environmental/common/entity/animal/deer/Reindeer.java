@@ -88,6 +88,7 @@ public class Reindeer extends AbstractDeer {
 	@Nullable
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
+		this.setHasAntlers(true);
 		this.setHoliday(this.isHolidayCriteria());
 		return super.finalizeSpawn(worldIn, difficulty, reason, spawnDataIn, dataTag);
 	}
