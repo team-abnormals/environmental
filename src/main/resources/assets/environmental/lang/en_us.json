@@ -94,6 +94,11 @@
 	"block.environmental.wisteria_beehive": "Wisteria Beehive",
 	"block.environmental.wisteria_boards": "Wisteria Boards",
 	
+	"block.environmental.wisteria_leaves" : "Wisteria Leaves",
+	"block.environmental.wisteria_leaf_pile" : "Pile of Wisteria Leaves",
+	"block.environmental.wisteria_leaf_carpet" : "Wisteria Leaf Carpet",
+	"block.environmental.wisteria_hedge" : "Wisteria Hedge",
+	
 	"block.environmental.blue_wisteria_leaves": "Blue Wisteria Leaves",
 	"block.environmental.pink_wisteria_leaves": "Pink Wisteria Leaves",
 	"block.environmental.purple_wisteria_leaves": "Purple Wisteria Leaves",

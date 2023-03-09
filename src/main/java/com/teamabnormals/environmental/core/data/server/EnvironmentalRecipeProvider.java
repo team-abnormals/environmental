@@ -156,7 +156,7 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 		ShapedRecipeBuilder.shaped(EnvironmentalBlocks.BLUE_HANGING_WISTERIA_LEAVES.get(), 3).define('#', EnvironmentalBlocks.BLUE_WISTERIA_LEAVES.get()).pattern("#").pattern("#").pattern("#").unlockedBy(getHasName(EnvironmentalBlocks.BLUE_WISTERIA_LEAVES.get()), has(EnvironmentalBlocks.BLUE_WISTERIA_LEAVES.get())).save(consumer);
 		ShapedRecipeBuilder.shaped(EnvironmentalBlocks.PURPLE_HANGING_WISTERIA_LEAVES.get(), 3).define('#', EnvironmentalBlocks.PURPLE_WISTERIA_LEAVES.get()).pattern("#").pattern("#").pattern("#").unlockedBy(getHasName(EnvironmentalBlocks.PURPLE_WISTERIA_LEAVES.get()), has(EnvironmentalBlocks.PURPLE_WISTERIA_LEAVES.get())).save(consumer);
 		ShapedRecipeBuilder.shaped(EnvironmentalBlocks.WHITE_HANGING_WISTERIA_LEAVES.get(), 3).define('#', EnvironmentalBlocks.WHITE_WISTERIA_LEAVES.get()).pattern("#").pattern("#").pattern("#").unlockedBy(getHasName(EnvironmentalBlocks.WHITE_WISTERIA_LEAVES.get()), has(EnvironmentalBlocks.WHITE_WISTERIA_LEAVES.get())).save(consumer);
-		//conditionalLeafPileRecipes(consumer, EnvironmentalBlocks.WHITE_WISTERIA_LEAVES.get(), EnvironmentalBlocks.WHITE_WISTERIA_LEAF_PILE.get());
+		//conditionalLeafPileRecipes(consumer, EnvironmentalBlocks.PINK_WISTERIA_LEAVES.get(), EnvironmentalBlocks.PINK_WISTERIA_LEAF_PILE.get());
 		//conditionalLeafPileRecipes(consumer, EnvironmentalBlocks.BLUE_WISTERIA_LEAVES.get(), EnvironmentalBlocks.BLUE_WISTERIA_LEAF_PILE.get());
 		//conditionalLeafPileRecipes(consumer, EnvironmentalBlocks.PURPLE_WISTERIA_LEAVES.get(), EnvironmentalBlocks.PURPLE_WISTERIA_LEAF_PILE.get());
 		//conditionalLeafPileRecipes(consumer, EnvironmentalBlocks.WHITE_WISTERIA_LEAVES.get(), EnvironmentalBlocks.WHITE_WISTERIA_LEAF_PILE.get());
@@ -181,6 +181,9 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 		conditionalRecipe(consumer, WOODEN_POSTS, ShapedRecipeBuilder.shaped(EnvironmentalBlocks.STRIPPED_WISTERIA_POST.get(), 8).define('#', EnvironmentalBlocks.STRIPPED_WISTERIA_WOOD.get()).pattern("#").pattern("#").pattern("#").group("wooden_post").unlockedBy(getHasName(EnvironmentalBlocks.STRIPPED_WISTERIA_WOOD.get()), has(EnvironmentalBlocks.STRIPPED_WISTERIA_WOOD.get())));
 		conditionalRecipe(consumer, WOOD_TO_CHEST_RECIPES, ShapedRecipeBuilder.shaped(EnvironmentalBlocks.WISTERIA_CHESTS.getFirst().get(), 4).define('#', EnvironmentalItemTags.WISTERIA_LOGS).pattern("###").pattern("# #").pattern("###").group("wooden_chest").unlockedBy("has_lots_of_items", new InventoryChangeTrigger.TriggerInstance(EntityPredicate.Composite.ANY, MinMaxBounds.Ints.atLeast(10), MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, new ItemPredicate[0])), new ResourceLocation(RecipeBuilder.getDefaultRecipeId(EnvironmentalBlocks.WISTERIA_CHESTS.getFirst().get()) + "_wood"));
 
+		//conditionalLeafPileRecipes(consumer, EnvironmentalBlocks.WISTERIA_LEAVES.get(), EnvironmentalBlocks.WISTERIA_LEAF_PILE.get());
+		leafCarpetAndHedgeRecipe(consumer, EnvironmentalBlocks.WISTERIA_LEAVES.get(), EnvironmentalBlocks.WISTERIA_LEAF_CARPET.get(), EnvironmentalBlocks.WISTERIA_HEDGE.get(), EnvironmentalItemTags.WISTERIA_LOGS);
+		
 		generateRecipes(consumer, EnvironmentalBlockFamilies.CHERRY_PLANKS_FAMILY);
 		planksFromLogs(consumer, EnvironmentalBlocks.CHERRY_PLANKS.get(), EnvironmentalItemTags.CHERRY_LOGS);
 		woodFromLogs(consumer, EnvironmentalBlocks.CHERRY_WOOD.get(), EnvironmentalBlocks.CHERRY_LOG.get());
