@@ -6,7 +6,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -16,7 +16,6 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -30,8 +29,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.IForgeShearable;
 
 import javax.annotation.Nullable;
-import java.util.Random;
-import net.minecraft.util.RandomSource;
 
 public class HangingWisteriaLeavesBlock extends Block implements IForgeShearable {
 	public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
@@ -41,13 +38,11 @@ public class HangingWisteriaLeavesBlock extends Block implements IForgeShearable
 
 	public HangingWisteriaLeavesBlock(Block.Properties properties) {
 		super(properties);
-		registerDefaultState(stateDefinition.any().setValue(HALF, DoubleBlockHalf.UPPER));
+		this.registerDefaultState(this.stateDefinition.any().setValue(HALF, DoubleBlockHalf.UPPER));
 	}
 
 	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
-		if (state.getValue(HALF) == DoubleBlockHalf.UPPER) return WISTERIA_VINE_TOP;
-		if (state.getValue(HALF) == DoubleBlockHalf.LOWER) return WISTERIA_VINE_BOTTOM;
-		else return Shapes.empty();
+		return state.getValue(HALF) == DoubleBlockHalf.UPPER ? WISTERIA_VINE_TOP : WISTERIA_VINE_BOTTOM;
 	}
 
 	@Override
@@ -57,14 +52,14 @@ public class HangingWisteriaLeavesBlock extends Block implements IForgeShearable
 
 	@Override
 	public void neighborChanged(BlockState state, Level world, BlockPos pos, Block block, BlockPos fromPos, boolean moving) {
-		if (state == defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER)) {
-			if (world.getBlockState(pos.above()) == Blocks.AIR.defaultBlockState()) {
+		if (state.getValue(HALF) == DoubleBlockHalf.UPPER) {
+			if (world.getBlockState(pos.above()).isAir()) {
 				world.removeBlock(pos, false);
+			} else if (world.getBlockState(pos.below()).isAir()) {
+				world.setBlockAndUpdate(pos, state.setValue(HALF, DoubleBlockHalf.LOWER));
 			}
-		} else if (state == defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER)) {
-			if (world.getBlockState(pos.above()) == Blocks.AIR.defaultBlockState()) {
-				world.removeBlock(pos, false);
-			}
+		} else if (world.getBlockState(pos.above()).isAir()) {
+			world.removeBlock(pos, false);
 		}
 	}
 
@@ -99,7 +94,7 @@ public class HangingWisteriaLeavesBlock extends Block implements IForgeShearable
 
 	protected boolean isStateValid(Level worldIn, BlockPos pos) {
 		BlockState state = worldIn.getBlockState(pos.above());
-		return state.getBlock() == defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER).getBlock() || state.is(BlockTags.LEAVES) || state.is(BlockTags.LOGS);
+		return state.is(this) || state.is(BlockTags.LEAVES) || state.is(BlockTags.LOGS);
 	}
 
 	@Override

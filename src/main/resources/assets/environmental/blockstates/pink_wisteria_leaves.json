@@ -1,5 +1,10 @@
 {
-    "variants": {
-        "": { "model": "environmental:block/pink_wisteria_leaves" }
+  "variants": {
+    "half=top": {
+      "model": "environmental:block/pink_wisteria_leaves_top"
+    },
+    "half=bottom": {
+      "model": "environmental:block/pink_wisteria_leaves"
     }
+  }
 }
