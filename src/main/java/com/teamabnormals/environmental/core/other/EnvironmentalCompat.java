@@ -97,7 +97,10 @@ public class EnvironmentalCompat {
 		DataUtil.registerCompostable(EnvironmentalBlocks.GRASS_THATCH_SLAB.get(), 0.65F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.GRASS_THATCH_STAIRS.get(), 0.65F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.GRASS_THATCH_VERTICAL_SLAB.get(), 0.65F);
-
+		
+		DataUtil.registerCompostable(EnvironmentalBlocks.WISTERIA_LEAVES.get(), 0.30F);
+		DataUtil.registerCompostable(EnvironmentalBlocks.WISTERIA_LEAF_CARPET.get(), 0.30F);
+		
 		DataUtil.registerCompostable(EnvironmentalBlocks.BLUE_WISTERIA_LEAVES.get(), 0.30F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.WHITE_WISTERIA_LEAVES.get(), 0.30F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.PINK_WISTERIA_LEAVES.get(), 0.30F);
@@ -216,6 +219,11 @@ public class EnvironmentalCompat {
 		DataUtil.registerFlammable(EnvironmentalBlocks.MYCELIUM_SPROUTS.get(), 60, 100);
 		DataUtil.registerFlammable(EnvironmentalBlocks.TALL_DEAD_BUSH.get(), 60, 100);
 		DataUtil.registerFlammable(EnvironmentalBlocks.CUP_LICHEN.get(), 60, 100);
+
+		DataUtil.registerFlammable(EnvironmentalBlocks.WISTERIA_LEAVES.get(), 30, 60);
+		DataUtil.registerFlammable(EnvironmentalBlocks.WISTERIA_LEAF_CARPET.get(), 30, 60);
+		DataUtil.registerFlammable(EnvironmentalBlocks.WISTERIA_HEDGE.get(), 5, 20);
+		DataUtil.registerFlammable(EnvironmentalBlocks.WISTERIA_LEAF_PILE.get(), 30, 60);
 
 		DataUtil.registerFlammable(EnvironmentalBlocks.BLUE_WISTERIA_LEAVES.get(), 30, 60);
 		DataUtil.registerFlammable(EnvironmentalBlocks.WHITE_WISTERIA_LEAVES.get(), 30, 60);

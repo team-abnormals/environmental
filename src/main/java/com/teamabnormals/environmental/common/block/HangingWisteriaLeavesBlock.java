@@ -97,14 +97,6 @@ public class HangingWisteriaLeavesBlock extends Block implements IForgeShearable
 		return true;
 	}
 
-	public boolean causesSuffocation(BlockState state, BlockGetter worldIn, BlockPos pos) {
-		return false;
-	}
-
-	public boolean canEntitySpawn(BlockState state, BlockGetter worldIn, BlockPos pos, EntityType<?> type) {
-		return type == EntityType.OCELOT || type == EntityType.PARROT;
-	}
-
 	protected boolean isStateValid(Level worldIn, BlockPos pos) {
 		BlockState state = worldIn.getBlockState(pos.above());
 		return state.getBlock() == defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER).getBlock() || state.is(BlockTags.LEAVES) || state.is(BlockTags.LOGS);
@@ -116,11 +108,10 @@ public class HangingWisteriaLeavesBlock extends Block implements IForgeShearable
 		Level world = context.getLevel();
 		BlockPos pos = context.getClickedPos();
 		if (isStateValid(world, pos)) {
-			if (world.getBlockState(pos.above()) == defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER)) {
-				return defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER);
-			} else if (world.getBlockState(pos.above()) == defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER)) {
-				return null;
-			} else return defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER);
+			if (world.getBlockState(pos.above()) == defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER)) {
+				world.setBlockAndUpdate(pos.above(), world.getBlockState(pos.above()).setValue(HALF, DoubleBlockHalf.UPPER));
+			}
+			return defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER);
 		}
 		return null;
 	}

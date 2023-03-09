@@ -136,6 +136,11 @@ public class EnvironmentalClientCompat {
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.WISTERIA_LADDER.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.WISTERIA_POST.get(), RenderType.cutoutMipped());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.STRIPPED_WISTERIA_POST.get(), RenderType.cutoutMipped());
+		
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.WISTERIA_LEAVES.get(), RenderType.cutoutMipped());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.WISTERIA_LEAF_CARPET.get(), RenderType.cutoutMipped());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.WISTERIA_HEDGE.get(), RenderType.cutoutMipped());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.WISTERIA_LEAF_PILE.get(), RenderType.cutout());
 
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.WHITE_WISTERIA_LEAVES.get(), RenderType.cutoutMipped());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.WHITE_HANGING_WISTERIA_LEAVES.get(), RenderType.cutoutMipped());
