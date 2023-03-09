@@ -3,7 +3,6 @@
   "biomes": "minecraft:flower_forest",
   "features": [
     "environmental:flower_cartwheel",
-    "environmental:patch_delphiniums",
     "environmental:trees_wisteria"
   ],
   "step": "vegetal_decoration"
