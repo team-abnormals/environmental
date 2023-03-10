@@ -5,6 +5,7 @@ import com.teamabnormals.environmental.common.block.LargeLilyPadBlock;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -12,9 +13,6 @@ import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.WaterlilyBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
-
-import java.util.Random;
-import net.minecraft.util.RandomSource;
 
 @Mixin(WaterlilyBlock.class)
 public class LilyPadBlockMixin extends Block implements BonemealableBlock {

@@ -183,7 +183,7 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 
 		//conditionalLeafPileRecipes(consumer, EnvironmentalBlocks.WISTERIA_LEAVES.get(), EnvironmentalBlocks.WISTERIA_LEAF_PILE.get());
 		leafCarpetAndHedgeRecipe(consumer, EnvironmentalBlocks.WISTERIA_LEAVES.get(), EnvironmentalBlocks.WISTERIA_LEAF_CARPET.get(), EnvironmentalBlocks.WISTERIA_HEDGE.get(), EnvironmentalItemTags.WISTERIA_LOGS);
-		
+
 		generateRecipes(consumer, EnvironmentalBlockFamilies.CHERRY_PLANKS_FAMILY);
 		planksFromLogs(consumer, EnvironmentalBlocks.CHERRY_PLANKS.get(), EnvironmentalItemTags.CHERRY_LOGS);
 		woodFromLogs(consumer, EnvironmentalBlocks.CHERRY_WOOD.get(), EnvironmentalBlocks.CHERRY_LOG.get());

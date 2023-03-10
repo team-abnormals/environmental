@@ -6,14 +6,13 @@ import com.teamabnormals.environmental.common.slabfish.condition.SlabfishConditi
 import com.teamabnormals.environmental.core.Environmental;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.LevelReader;
 import net.minecraftforge.fml.LogicalSide;
 
 import java.util.Optional;
-import java.util.Random;
-import net.minecraft.util.RandomSource;
 import java.util.function.Predicate;
 
 /**

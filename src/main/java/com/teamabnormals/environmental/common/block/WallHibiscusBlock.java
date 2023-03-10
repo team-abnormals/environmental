@@ -67,7 +67,7 @@ public class WallHibiscusBlock extends AbstractHibiscusBlock {
 		LevelReader level = context.getLevel();
 		BlockPos blockpos = context.getClickedPos();
 
-		for(Direction direction : context.getNearestLookingDirections()) {
+		for (Direction direction : context.getNearestLookingDirections()) {
 			blockstate = blockstate.setValue(FACING, direction);
 			if (blockstate.canSurvive(level, blockpos)) {
 				return blockstate;

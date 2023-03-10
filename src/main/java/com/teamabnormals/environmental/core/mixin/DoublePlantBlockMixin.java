@@ -3,6 +3,7 @@ package com.teamabnormals.environmental.core.mixin;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -12,9 +13,6 @@ import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import org.spongepowered.asm.mixin.Mixin;
-
-import java.util.Random;
-import net.minecraft.util.RandomSource;
 
 @Mixin(DoublePlantBlock.class)
 public class DoublePlantBlockMixin extends Block implements BonemealableBlock {
