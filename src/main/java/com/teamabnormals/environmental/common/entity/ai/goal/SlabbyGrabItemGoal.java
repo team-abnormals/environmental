@@ -42,8 +42,6 @@ public class SlabbyGrabItemGoal extends Goal implements ContainerListener {
 			ItemEntity item = null;
 			double d0 = Double.MAX_VALUE;
 
-			this.slabfish.getNavigation().stop();
-
 			for (ItemEntity item1 : list) {
 				if (item1.getThrower() == this.slabfish.getUUID() || !canPickupItem(this.slabfish.slabfishBackpack, item1.getItem()))
 					continue;
@@ -88,6 +86,7 @@ public class SlabbyGrabItemGoal extends Goal implements ContainerListener {
 			this.delayCounter = this.adjustedTickDelay(10);
 			Path path = this.slabfish.getNavigation().createPath(itemEntity, 0);
 			if (path != null) {
+				this.slabfish.getNavigation().stop();
 				this.slabfish.getNavigation().moveTo(path, this.moveSpeed);
 			}
 		}

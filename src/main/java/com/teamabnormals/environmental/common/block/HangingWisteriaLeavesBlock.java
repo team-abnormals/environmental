@@ -33,7 +33,7 @@ import javax.annotation.Nullable;
 public class HangingWisteriaLeavesBlock extends Block implements IForgeShearable {
 	public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
 	protected static final VoxelShape WISTERIA_VINE_TOP = Block.box(1, 0, 1, 15, 16, 15);
-	protected static final VoxelShape WISTERIA_VINE_BOTTOM = Block.box(4, 0, 4, 12, 16, 12);
+	protected static final VoxelShape WISTERIA_VINE_BOTTOM = Block.box(2, 7, 2, 14, 16, 14);
 	private static final TargetedItemCategoryFiller FILLER = new TargetedItemCategoryFiller(() -> Items.VINE);
 
 	public HangingWisteriaLeavesBlock(Block.Properties properties) {
