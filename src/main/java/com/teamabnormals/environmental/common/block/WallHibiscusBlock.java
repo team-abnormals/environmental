@@ -2,19 +2,19 @@ package com.teamabnormals.environmental.common.block;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-import com.teamabnormals.blueprint.core.util.PropertyUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -23,13 +23,13 @@ import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.function.Supplier;
 
-public class WallHibiscusBlock extends HibiscusBlock {
-	public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
-	private static final Map<Direction, VoxelShape> AABBS = Maps.newEnumMap(ImmutableMap.of(Direction.NORTH, Block.box(3.0D, 3.0D, 0.0D, 13, 13, 1.0D), Direction.SOUTH, Block.box(3.0D, 3.0D, 15.0D, 13.0D, 13.0D, 16.0D), Direction.WEST, Block.box(0.0D, 3.0D, 3.0D, 1.0D, 13.0D, 13.0D), Direction.EAST, Block.box(15.0D, 3.0D, 3.0D, 16.0D, 13.0D, 13.0D)));
+public class WallHibiscusBlock extends AbstractHibiscusBlock {
+	public static final DirectionProperty FACING = BlockStateProperties.FACING;
+	private static final Map<Direction, VoxelShape> AABBS = Maps.newEnumMap(ImmutableMap.of(Direction.NORTH, Block.box(3.0D, 3.0D, 0.0D, 13.0D, 13.0D, 1.0D), Direction.SOUTH, Block.box(3.0D, 3.0D, 15.0D, 13.0D, 13.0D, 16.0D), Direction.WEST, Block.box(0.0D, 3.0D, 3.0D, 1.0D, 13.0D, 13.0D), Direction.EAST, Block.box(15.0D, 3.0D, 3.0D, 16.0D, 13.0D, 13.0D), Direction.UP, Block.box(3.0D, 15.0D, 3.0D, 13.0D, 16.0D, 13.0D), Direction.DOWN, Block.box(3.0D, 0.0D, 3.0D, 13.0D, 1.0D, 13.0D)));
 
-	public WallHibiscusBlock(DyeColor color) {
-		super(color);
-		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
+	public WallHibiscusBlock(Supplier<MobEffect> stewEffect, int stewEffectDuration, Properties properties) {
+		super(stewEffect, stewEffectDuration, properties);
+		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.DOWN));
 	}
 
 	@Override
@@ -40,6 +40,16 @@ public class WallHibiscusBlock extends HibiscusBlock {
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		return AABBS.get(state.getValue(FACING));
+	}
+
+	@Override
+	protected Block getWallHibiscus() {
+		return this;
+	}
+
+	@Override
+	protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
+		return state.getBlock() instanceof LeavesBlock;
 	}
 
 	@Override
@@ -56,14 +66,11 @@ public class WallHibiscusBlock extends HibiscusBlock {
 		BlockState blockstate = this.defaultBlockState();
 		LevelReader level = context.getLevel();
 		BlockPos blockpos = context.getClickedPos();
-		Direction[] adirection = context.getNearestLookingDirections();
 
-		for(Direction direction : adirection) {
-			if (direction.getAxis().isHorizontal()) {
-				blockstate = blockstate.setValue(FACING, direction);
-				if (blockstate.canSurvive(level, blockpos)) {
-					return blockstate;
-				}
+		for(Direction direction : context.getNearestLookingDirections()) {
+			blockstate = blockstate.setValue(FACING, direction);
+			if (blockstate.canSurvive(level, blockpos)) {
+				return blockstate;
 			}
 		}
 

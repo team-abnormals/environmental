@@ -14,6 +14,48 @@
     "facing=west": {
       "model": "environmental:block/red_wall_hibiscus",
       "y": 270
-    }
+    },
+	"facing=up": [
+	  {
+        "model": "environmental:block/red_wall_hibiscus",
+		"x": 270
+      },
+      {
+        "model": "environmental:block/red_wall_hibiscus",
+		"x": 270,
+		"y": 90
+      },
+      {
+        "model": "environmental:block/red_wall_hibiscus",
+		"x": 270,
+        "y": 180
+      },
+      {
+        "model": "environmental:block/red_wall_hibiscus",
+		"x": 270,
+        "y": 270
+      }
+    ],
+	"facing=down": [
+	  {
+        "model": "environmental:block/red_wall_hibiscus",
+		"x": 90
+      },
+      {
+        "model": "environmental:block/red_wall_hibiscus",
+		"x": 90,
+		"y": 90
+      },
+      {
+        "model": "environmental:block/red_wall_hibiscus",
+		"x": 90,
+        "y": 180
+      },
+      {
+        "model": "environmental:block/red_wall_hibiscus",
+		"x": 90,
+        "y": 270
+      }
+    ]
   }
 }
