@@ -38,10 +38,9 @@ public class HangingWisteriaDecorator extends TreeDecorator {
 
 			if (maxLength > 0) {
 				int actualLength = random.nextInt(1 + maxLength);
-				if (actualLength > 0) {
-					for (int i = 1; i <= actualLength; i++) {
-						context.setBlock(pos.below(i), state.setValue(HangingWisteriaLeavesBlock.HALF, i == actualLength ? DoubleBlockHalf.LOWER : DoubleBlockHalf.UPPER));
-					}
+				if (actualLength == 0) actualLength = 1;
+				for (int i = 1; i <= actualLength; i++) {
+					context.setBlock(pos.below(i), state.setValue(HangingWisteriaLeavesBlock.HALF, i == actualLength ? DoubleBlockHalf.LOWER : DoubleBlockHalf.UPPER));
 				}
 			}
 		}
