@@ -17,13 +17,15 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.Random;
 import net.minecraft.util.RandomSource;
 
 public class SlabfishEffigyBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock {
-	protected static final VoxelShape SHAPE = Block.box(3.0D, 0.0D, 3.0D, 13.0D, 16.0D, 13.0D);
+	protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 2.0D, 14.0D);
+	protected static final VoxelShape SLABFISH_SHAPE = Block.box(5.0D, 0.0D, 3.0D, 11.0D, 17.0D, 13.0D);
 	public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
@@ -34,7 +36,7 @@ public class SlabfishEffigyBlock extends HorizontalDirectionalBlock implements S
 
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
-		return SHAPE;
+		return Shapes.or(SHAPE, SLABFISH_SHAPE);
 	}
 
 	@Override
