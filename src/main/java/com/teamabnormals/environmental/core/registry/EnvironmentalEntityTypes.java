@@ -1,7 +1,10 @@
 package com.teamabnormals.environmental.core.registry;
 
 import com.teamabnormals.blueprint.core.util.registry.EntitySubRegistryHelper;
-import com.teamabnormals.environmental.common.entity.animal.*;
+import com.teamabnormals.environmental.common.entity.animal.Duck;
+import com.teamabnormals.environmental.common.entity.animal.FennecFox;
+import com.teamabnormals.environmental.common.entity.animal.Tapir;
+import com.teamabnormals.environmental.common.entity.animal.Yak;
 import com.teamabnormals.environmental.common.entity.animal.deer.Deer;
 import com.teamabnormals.environmental.common.entity.animal.deer.Reindeer;
 import com.teamabnormals.environmental.common.entity.animal.koi.Koi;

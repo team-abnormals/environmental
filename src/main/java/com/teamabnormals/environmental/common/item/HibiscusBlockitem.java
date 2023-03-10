@@ -25,7 +25,7 @@ public class HibiscusBlockitem extends StandingAndWallBlockItem {
 		LevelReader level = context.getLevel();
 		BlockPos blockpos = context.getClickedPos();
 
-		for(Direction direction : context.getNearestLookingDirections()) {
+		for (Direction direction : context.getNearestLookingDirections()) {
 			boolean flag = direction == Direction.DOWN && !(level.getBlockState(blockpos.below()).getBlock() instanceof LeavesBlock);
 			BlockState blockstate2 = flag ? this.getBlock().getStateForPlacement(context) : blockstate;
 			if (blockstate2 != null && blockstate2.canSurvive(level, blockpos)) {

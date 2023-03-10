@@ -46,7 +46,7 @@ public class HibiscusBushFeature extends Feature<NoneFeatureConfiguration> {
 		int size = 2 + random.nextInt(3);
 		BlockPos oldpos = pos;
 
-		for(int i = 0; i < size; ++i) {
+		for (int i = 0; i < size; ++i) {
 			if (canGrowLeavesAt(level, pos)) {
 				int lengthX = i == 0 ? 3 : random.nextInt(2) + 2;
 				int lengthY = random.nextInt(2) + 2;
@@ -86,7 +86,8 @@ public class HibiscusBushFeature extends Feature<NoneFeatureConfiguration> {
 			maxX += 3;
 			minY -= 3;
 			maxY += 3;
-			minZ -= 3;;
+			minZ -= 3;
+			;
 			maxZ += 3;
 
 			for (int x = minX; x <= maxX; ++x) {
