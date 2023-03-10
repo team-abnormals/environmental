@@ -142,15 +142,15 @@ public class Yak extends Animal implements IForgeShearable, Shearable, NeutralMo
 	}
 
 	@Override
-	public InteractionResult mobInteract(Player p_230254_1_, InteractionHand p_230254_2_) {
-		ItemStack itemstack = p_230254_1_.getItemInHand(p_230254_2_);
-		if (itemstack.getItem() == Items.BUCKET && !this.isBaby()) {
-			p_230254_1_.playSound(EnvironmentalSoundEvents.YAK_MILK.get(), 1.0F, 1.0F);
-			ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, p_230254_1_, Items.MILK_BUCKET.getDefaultInstance());
-			p_230254_1_.setItemInHand(p_230254_2_, itemstack1);
+	public InteractionResult mobInteract(Player player, InteractionHand hand) {
+		ItemStack stack = player.getItemInHand(hand);
+		if (stack.is(Items.BUCKET) && !this.isBaby()) {
+			player.playSound(EnvironmentalSoundEvents.YAK_MILK.get(), 1.0F, 1.0F);
+			ItemStack newStack = ItemUtils.createFilledResult(stack, player, Items.MILK_BUCKET.getDefaultInstance());
+			player.setItemInHand(hand, newStack);
 			return InteractionResult.sidedSuccess(this.level.isClientSide);
 		} else {
-			return super.mobInteract(p_230254_1_, p_230254_2_);
+			return super.mobInteract(player, hand);
 		}
 	}
 
