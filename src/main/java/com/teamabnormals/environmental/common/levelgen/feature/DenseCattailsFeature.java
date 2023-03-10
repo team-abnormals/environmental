@@ -4,13 +4,11 @@ import com.mojang.serialization.Codec;
 import com.teamabnormals.environmental.common.block.CattailBlock;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-
-import java.util.Random;
-import net.minecraft.util.RandomSource;
 
 public class DenseCattailsFeature extends Feature<NoneFeatureConfiguration> {
 

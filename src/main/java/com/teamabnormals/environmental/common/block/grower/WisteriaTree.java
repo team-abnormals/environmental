@@ -3,14 +3,13 @@ package com.teamabnormals.environmental.common.block.grower;
 import com.teamabnormals.environmental.common.levelgen.util.WisteriaColor;
 import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures.EnvironmentalConfiguredFeatures;
 import net.minecraft.core.Holder;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nullable;
-import java.util.Random;
-import net.minecraft.util.RandomSource;
 
 public class WisteriaTree extends AbstractTreeGrower {
 	private final WisteriaColor color;

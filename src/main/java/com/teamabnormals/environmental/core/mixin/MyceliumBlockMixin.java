@@ -3,6 +3,7 @@ package com.teamabnormals.environmental.core.mixin;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BonemealableBlock;
@@ -10,9 +11,6 @@ import net.minecraft.world.level.block.MyceliumBlock;
 import net.minecraft.world.level.block.SpreadingSnowyDirtBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
-
-import java.util.Random;
-import net.minecraft.util.RandomSource;
 
 @Mixin(MyceliumBlock.class)
 public class MyceliumBlockMixin extends SpreadingSnowyDirtBlock implements BonemealableBlock {
