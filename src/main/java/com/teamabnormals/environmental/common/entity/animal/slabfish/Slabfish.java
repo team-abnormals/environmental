@@ -1,6 +1,8 @@
 package com.teamabnormals.environmental.common.entity.animal.slabfish;
 
-import com.teamabnormals.environmental.common.entity.ai.goal.*;
+import com.teamabnormals.environmental.common.entity.ai.goal.SlabbyBreedGoal;
+import com.teamabnormals.environmental.common.entity.ai.goal.SlabbyFollowParentGoal;
+import com.teamabnormals.environmental.common.entity.ai.goal.SlabbyGrabItemGoal;
 import com.teamabnormals.environmental.common.inventory.SlabfishInventory;
 import com.teamabnormals.environmental.common.inventory.SlabfishInventoryMenu;
 import com.teamabnormals.environmental.common.network.message.SOpenSlabfishInventoryMessage;
@@ -14,7 +16,6 @@ import com.teamabnormals.environmental.core.other.EnvironmentalDataSerializers;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalItemTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
-import com.teamabnormals.environmental.core.registry.EnvironmentalParticleTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -22,7 +23,6 @@ import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtUtils;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -61,8 +61,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.Tags;
@@ -80,11 +78,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class Slabfish extends TamableAnimal implements ContainerListener, Bucketable {
-
 	private static final EntityDataAccessor<ResourceLocation> SLABFISH_TYPE = SynchedEntityData.defineId(Slabfish.class, EnvironmentalDataSerializers.RESOURCE_LOCATION);
 	private static final EntityDataAccessor<Integer> SLABFISH_OVERLAY = SynchedEntityData.defineId(Slabfish.class, EntityDataSerializers.INT);
 	private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(Slabfish.class, EntityDataSerializers.BOOLEAN);
-	private static final EntityDataAccessor<Optional<BlockPos>> EFFIGY = SynchedEntityData.defineId(Slabfish.class, EntityDataSerializers.OPTIONAL_BLOCK_POS);
 
 	private static final EntityDataAccessor<ResourceLocation> BACKPACK = SynchedEntityData.defineId(Slabfish.class, EnvironmentalDataSerializers.RESOURCE_LOCATION);
 	private static final EntityDataAccessor<Boolean> HAS_BACKPACK = SynchedEntityData.defineId(Slabfish.class, EntityDataSerializers.BOOLEAN);
@@ -126,9 +122,6 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 		this.goalSelector.addGoal(1, new FloatGoal(this));
 		this.goalSelector.addGoal(1, new SitWhenOrderedToGoal(this));
 
-		this.goalSelector.addGoal(2, new SlabbyFindEffigyGoal(this));
-		this.goalSelector.addGoal(2, new SlabbyPraiseEffigyGoal(this));
-
 		this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, LivingEntity.class, entity -> entity.getType().is(EntityTypeTags.RAIDERS), 15.0F, 1.0D, 1.5D, EntitySelector.NO_CREATIVE_OR_SPECTATOR::test));
 
 		this.goalSelector.addGoal(4, new SlabbyBreedGoal(this, 1.0D));
@@ -146,7 +139,6 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 		this.getEntityData().define(SLABFISH_TYPE, SlabfishManager.DEFAULT_SLABFISH.getRegistryName());
 		this.getEntityData().define(SLABFISH_OVERLAY, 0);
 		this.getEntityData().define(FROM_BUCKET, false);
-		this.getEntityData().define(EFFIGY, Optional.empty());
 
 		this.getEntityData().define(BACKPACK, SlabfishManager.BROWN_BACKPACK.getRegistryName());
 		this.getEntityData().define(HAS_BACKPACK, false);
@@ -161,10 +153,6 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 		if (this.hasBackpack())
 			compound.putString("BackpackType", this.getBackpack().toString());
 		compound.putBoolean("FromBucket", this.fromBucket());
-
-		if (this.getEffigy() != null) {
-			compound.put("Effigy", NbtUtils.writeBlockPos(this.getEffigy()));
-		}
 
 		this.slabfishBackpack.write(compound);
 	}
@@ -181,10 +169,6 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 		this.setSlabfishOverlay(SlabfishOverlay.byId(compound.getInt("SlabfishOverlay")));
 		this.setBackpack(compound.contains("BackpackType", Tag.TAG_STRING) ? new ResourceLocation(compound.getString("BackpackType")) : SlabfishManager.BROWN_BACKPACK.getRegistryName());
 		this.setFromBucket(compound.getBoolean("FromBucket"));
-
-		if (compound.contains("Effigy", Tag.TAG_COMPOUND)) {
-			this.setEffigy(NbtUtils.readBlockPos(compound.getCompound("Effigy")));
-		}
 
 		this.slabfishBackpack.read(compound);
 		this.updateSweater();
@@ -809,15 +793,6 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 		this.entityData.set(SLABFISH_OVERLAY, typeId.getId());
 	}
 
-	public void setEffigy(@Nullable BlockPos beamTarget) {
-		this.getEntityData().set(EFFIGY, Optional.ofNullable(beamTarget));
-	}
-
-	@Nullable
-	public BlockPos getEffigy() {
-		return this.getEntityData().get(EFFIGY).orElse(null);
-	}
-
 	// INVENTORY //
 
 	public void openGui(ServerPlayer player) {
@@ -866,7 +841,7 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 
 	@Override
 	protected void pickUpItem(ItemEntity itemEntity) {
-		if (itemEntity.getPersistentData().getBoolean("EffigyItem") || itemEntity.getThrower() == this.getUUID())
+		if (itemEntity.getThrower() == this.getUUID())
 			return;
 
 		ItemStack itemstack = itemEntity.getItem();
@@ -941,15 +916,6 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 	}
 
 	// MISC //
-
-
-	@OnlyIn(Dist.CLIENT)
-	@Override
-	public void handleEntityEvent(byte id) {
-		if (id == 8) {
-			this.particleCloud(EnvironmentalParticleTypes.SLABFISH_FINDS_EFFIGY.get());
-		} else super.handleEntityEvent(id);
-	}
 
 	@Override
 	public ItemStack getBucketItemStack() {

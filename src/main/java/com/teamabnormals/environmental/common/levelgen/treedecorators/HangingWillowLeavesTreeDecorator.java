@@ -19,8 +19,6 @@ public class HangingWillowLeavesTreeDecorator extends TreeDecorator {
 
 	@Override
 	public void place(Context context) {
-
-
 		for (BlockPos pos : context.leaves()) {
 			if (context.level().isStateAtPosition(pos.below(), BlockState::isAir)) {
 				if (context.random().nextInt(2) == 0) {

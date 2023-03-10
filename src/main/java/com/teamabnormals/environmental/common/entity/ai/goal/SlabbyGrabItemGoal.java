@@ -45,7 +45,7 @@ public class SlabbyGrabItemGoal extends Goal implements ContainerListener {
 			this.slabfish.getNavigation().stop();
 
 			for (ItemEntity item1 : list) {
-				if (item1.getPersistentData().getBoolean("EffigyItem") || item1.getThrower() == this.slabfish.getUUID() || !canPickupItem(this.slabfish.slabfishBackpack, item1.getItem()))
+				if (item1.getThrower() == this.slabfish.getUUID() || !canPickupItem(this.slabfish.slabfishBackpack, item1.getItem()))
 					continue;
 				double d1 = this.slabfish.distanceToSqr(item1);
 				if (d1 < d0) {

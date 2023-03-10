@@ -72,7 +72,7 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 		private static final LootItemCondition.Builder HAS_NO_SHEARS_OR_SILK_TOUCH = MatchTool.toolMatches(ItemPredicate.Builder.item().of(Items.SHEARS)).or(HAS_SILK_TOUCH).invert();
 
 		private static final float[] NORMAL_LEAVES_SAPLING_CHANCES = new float[]{0.05F, 0.0625F, 0.083333336F, 0.1F};
-		private static final float[] HIBISCUS_LEAVES_STICK_CHANCES = new float[]{0.04F, 0.044444446F, 0.05F, 0.066666670F, 0.2F};
+		private static final float[] DOUBLE_LEAVES_STICK_CHANCES = new float[]{0.04F, 0.044444446F, 0.05F, 0.066666670F, 0.2F};
 
 		@Override
 		public void addTables() {
@@ -149,7 +149,7 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.add(CATTAIL.get(), (block) -> createShearsDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(EnvironmentalItems.CATTAIL_SEEDS.get()).when(LootItemRandomChanceCondition.randomChance(0.25F)).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE, 2)))));
 			this.add(TALL_CATTAIL.get(), (block) -> createDoublePlantWithOtherDrop(block, CATTAIL.get(), EnvironmentalItems.CATTAIL_SEEDS.get(), 2, 0.5F).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE, 2)));
 
-			this.add(HIBISCUS_LEAVES.get(), (block) -> createSilkTouchOrShearsDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Items.STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, HIBISCUS_LEAVES_STICK_CHANCES))));
+			this.add(HIBISCUS_LEAVES.get(), (block) -> createSilkTouchOrShearsDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Items.STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, DOUBLE_LEAVES_STICK_CHANCES))));
 			this.dropSelf(HIBISCUS_LEAF_CARPET.get());
 			this.add(HIBISCUS_LEAF_PILE.get(), EnvironmentalBlockLoot::createLeafPileDrops);
 
@@ -257,6 +257,11 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.add(BLUE_WISTERIA_LEAF_PILE.get(), EnvironmentalBlockLoot::createLeafPileDrops);
 			this.add(PURPLE_WISTERIA_LEAF_PILE.get(), EnvironmentalBlockLoot::createLeafPileDrops);
 			this.add(WHITE_WISTERIA_LEAF_PILE.get(), EnvironmentalBlockLoot::createLeafPileDrops);
+
+			this.add(WISTERIA_LEAVES.get(), (block) -> createSilkTouchOrShearsDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Items.STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, DOUBLE_LEAVES_STICK_CHANCES))));
+			this.dropSelf(WISTERIA_LEAF_CARPET.get());
+			this.add(WISTERIA_LEAF_PILE.get(), EnvironmentalBlockLoot::createLeafPileDrops);
+			this.dropSelf(WISTERIA_HEDGE.get());
 
 			this.dropSelf(PINK_WISTERIA_SAPLING.get());
 			this.dropSelf(BLUE_WISTERIA_SAPLING.get());

@@ -3,7 +3,6 @@ package com.teamabnormals.environmental.core.registry;
 import com.teamabnormals.environmental.client.particle.CherryBlossomParticle;
 import com.teamabnormals.environmental.client.particle.LotusBlossomParticle;
 import com.teamabnormals.environmental.client.particle.PigFindsTruffleParticle;
-import com.teamabnormals.environmental.client.particle.SlabfishEffigyParticle;
 import com.teamabnormals.environmental.core.Environmental;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -23,7 +22,6 @@ public class EnvironmentalParticleTypes {
 	public static final RegistryObject<SimpleParticleType> RED_LOTUS_BLOSSOM = PARTICLE_TYPES.register("red_lotus_blossom", () -> new SimpleParticleType(true));
 	public static final RegistryObject<SimpleParticleType> WHITE_LOTUS_BLOSSOM = PARTICLE_TYPES.register("white_lotus_blossom", () -> new SimpleParticleType(true));
 	public static final RegistryObject<SimpleParticleType> PIG_FINDS_TRUFFLE = PARTICLE_TYPES.register("pig_finds_truffle", () -> new SimpleParticleType(true));
-	public static final RegistryObject<SimpleParticleType> SLABFISH_FINDS_EFFIGY = PARTICLE_TYPES.register("slabfish_finds_effigy", () -> new SimpleParticleType(true));
 
 	@SubscribeEvent
 	public static void registerParticleFactorys(RegisterParticleProvidersEvent event) {
@@ -31,6 +29,5 @@ public class EnvironmentalParticleTypes {
 		event.register(EnvironmentalParticleTypes.RED_LOTUS_BLOSSOM.get(), LotusBlossomParticle.Factory::new);
 		event.register(EnvironmentalParticleTypes.WHITE_LOTUS_BLOSSOM.get(), LotusBlossomParticle.Factory::new);
 		event.register(EnvironmentalParticleTypes.PIG_FINDS_TRUFFLE.get(), PigFindsTruffleParticle.Factory::new);
-		event.register(EnvironmentalParticleTypes.SLABFISH_FINDS_EFFIGY.get(), SlabfishEffigyParticle.Factory::new);
 	}
 }
