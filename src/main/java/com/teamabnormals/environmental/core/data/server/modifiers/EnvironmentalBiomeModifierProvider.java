@@ -69,7 +69,7 @@ public class EnvironmentalBiomeModifierProvider {
 		addFeature("flower_forest_vegetation", Biomes.FLOWER_FOREST, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_CARTWHEEL, EnvironmentalPlacedFeatures.TREES_WISTERIA);
 		addFeature("savanna_vegetation", BiomeTags.IS_SAVANNA, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_ALLIUM, EnvironmentalPlacedFeatures.PATCH_GIANT_TALL_GRASS_SAVANNA);
 		addFeature("plains_vegetation", EnvironmentalBiomeTags.HAS_COW, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_GIANT_TALL_GRASS_PLAINS);
-		addFeature("jungle_vegetation", BiomeTags.IS_JUNGLE, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_BIRD_OF_PARADISE, EnvironmentalPlacedFeatures.PATCH_GIANT_TALL_GRASS_JUNGLE);
+		addFeature("jungle_vegetation", BiomeTags.IS_JUNGLE, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_BIRD_OF_PARADISE, EnvironmentalPlacedFeatures.PATCH_GIANT_TALL_GRASS_JUNGLE, EnvironmentalPlacedFeatures.HIBISCUS_BUSH);
 
 		return JsonCodecProvider.forDatapackRegistry(generator, existingFileHelper, Environmental.MOD_ID, RegistryOps.create(JsonOps.INSTANCE, ACCESS), ForgeRegistries.Keys.BIOME_MODIFIERS, MODIFIERS);
 	}
