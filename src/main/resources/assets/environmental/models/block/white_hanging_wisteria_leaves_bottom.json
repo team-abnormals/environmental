@@ -1,6 +1,6 @@
 {
-    "parent": "environmental:block/wisteria_vines",
-    "textures": {
-        "cross": "environmental:block/white_wisteria_vines_bottom"
-    }
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "environmental:block/white_wisteria_vines_bottom"
+  }
 }
