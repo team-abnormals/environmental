@@ -1,7 +1,7 @@
 {
   "required": true,
   "package": "com.teamabnormals.environmental.core.mixin",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
   "refmap": "environmental.refmap.json",
   "plugin": "com.teamabnormals.environmental.core.mixin.EnvironmentalMixinPlugin",
