@@ -30,6 +30,7 @@ public class EnvironmentalConfig {
 		public final ConfigValue<Boolean> biomeVariantsAlwaysSpawn;
 
 		public final ConfigValue<List<String>> healerPouchStructures;
+		public final ConfigValue<Boolean> truffleVitalityPotion;
 
 		public final ConfigValue<Boolean> blockOnlyNaturalSpawns;
 		public final ConfigValue<Integer> koiHorizontalSerenityRange;
@@ -62,6 +63,9 @@ public class EnvironmentalConfig {
 			builder.push("items");
 			builder.push("healers_pouch");
 			healerPouchStructures = builder.comment("Structures that can spawn mobs wearing a Healer's Pouch").define("Healer's Pouch structures", Lists.newArrayList("minecraft:mineshaft", "minecraft:stronghold"));
+			builder.pop();
+			builder.push("truffle_vitality_potion");
+			truffleVitalityPotion = builder.comment("Enable using truffles to brew potions of vitality (health boost)").define("Truffle Vitality Potions", true);
 			builder.pop();
 			builder.pop();
 

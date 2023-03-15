@@ -3,6 +3,7 @@ package com.minecraftabnormals.environmental.core.registry;
 import com.minecraftabnormals.abnormals_core.common.potion.AbnormalsEffect;
 import com.minecraftabnormals.environmental.common.potion.PanicEffect;
 import com.minecraftabnormals.environmental.core.Environmental;
+import com.minecraftabnormals.environmental.core.EnvironmentalConfig;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.item.Items;
@@ -24,7 +25,9 @@ public class EnvironmentalEffects {
 	public static final RegistryObject<Potion> VITALITY_STRONG = POTIONS.register("vitality_strong", () -> new Potion(new EffectInstance(Effects.HEALTH_BOOST, 4800, 1)));
 
 	public static void registerBrewingRecipes() {
-		PotionBrewing.addMix(Potions.AWKWARD, EnvironmentalItems.TRUFFLE.get(), VITALITY.get());
-		PotionBrewing.addMix(VITALITY.get(), Items.GLOWSTONE_DUST, VITALITY_STRONG.get());
+		if (EnvironmentalConfig.COMMON.truffleVitalityPotion.get()) {
+			PotionBrewing.addMix(Potions.AWKWARD, EnvironmentalItems.TRUFFLE.get(), VITALITY.get());
+			PotionBrewing.addMix(VITALITY.get(), Items.GLOWSTONE_DUST, VITALITY_STRONG.get());
+		}
 	}
 }
