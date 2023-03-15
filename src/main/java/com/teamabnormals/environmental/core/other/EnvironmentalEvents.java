@@ -352,8 +352,7 @@ public class EnvironmentalEvents {
 
 	@SubscribeEvent
 	public static void onBabySpawn(BabyEntitySpawnEvent event) {
-		if (event.getParentA() instanceof Pig && event.getParentB() instanceof Pig) {
-			Pig pig = (Pig) event.getParentA();
+		if (event.getParentA() instanceof Pig pig && event.getParentB() instanceof Pig) {
 			Level world = pig.getCommandSenderWorld();
 			int piglets = world.random.nextInt(4);
 			for (int i = 0; i < piglets; ++i) {
@@ -371,10 +370,17 @@ public class EnvironmentalEvents {
 	public static void onEntityJoinWorld(EntityJoinLevelEvent event) {
 		Entity entity = event.getEntity();
 		if (entity instanceof Wolf wolf) {
-			wolf.targetSelector.addGoal(4, new NonTameRandomTargetGoal<>(wolf, Animal.class, false, (targetEntity) -> targetEntity instanceof AbstractDeer));
-		} else if (entity instanceof Ocelot ocelot) {
+			wolf.targetSelector.addGoal(5, new NonTameRandomTargetGoal<>(wolf, Animal.class, false, (target) -> {
+				EntityType<?> type = target.getType();
+				return type == EnvironmentalEntityTypes.DEER.get() || type == EnvironmentalEntityTypes.REINDEER.get();
+			}));
+		}
+
+		if (entity instanceof Ocelot ocelot) {
 			ocelot.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(ocelot, Animal.class, 10, false, false, (targetEntity) -> targetEntity.getType() == EnvironmentalEntityTypes.DUCK.get()));
-		} else if (entity instanceof Pig pig) {
+		}
+
+		if (entity instanceof Pig pig) {
 			Set<WrappedGoal> goals = pig.goalSelector.availableGoals;
 			if (goals.stream().noneMatch((goal) -> goal.getGoal() instanceof HuntTruffleGoal))
 				pig.goalSelector.addGoal(2, new HuntTruffleGoal(pig));

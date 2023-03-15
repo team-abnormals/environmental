@@ -6,6 +6,8 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 
 public class EnvironmentalBiomeTags {
+	public static final TagKey<Biome> ONLY_ALLOWS_MUDDY_RABBITS = biomeTag("only_allows_muddy_rabbits");
+
 	public static final TagKey<Biome> HAS_SLABFISH = biomeTag("has_animal/slabfish");
 	public static final TagKey<Biome> HAS_DUCK = biomeTag("has_animal/duck");
 	public static final TagKey<Biome> HAS_DEER = biomeTag("has_animal/deer");
