@@ -1,6 +1,6 @@
 {
   "values": [
-    "minecraft:swamp",
-    "environmental:marsh"
+    "environmental:marsh",
+    "minecraft:swamp"
   ]
 }

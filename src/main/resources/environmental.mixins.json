@@ -15,9 +15,13 @@
     "MyceliumBlockMixin",
     "PigEntityMixin",
     "PlayerEntityMixin",
+    "RabbitMixin",
     "WitherSkeletonEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "client": [
+    "client.RabbitModelMixin"
+  ]
 }
