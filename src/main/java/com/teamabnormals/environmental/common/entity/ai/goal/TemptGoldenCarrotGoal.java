@@ -7,6 +7,7 @@ import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.item.crafting.Ingredient;
 
 public class TemptGoldenCarrotGoal extends TemptGoal {
+
 	public TemptGoldenCarrotGoal(PathfinderMob creatureIn, double speedIn, Ingredient temptItemsIn, boolean scaredByPlayerMovementIn) {
 		super(creatureIn, speedIn, temptItemsIn, scaredByPlayerMovementIn);
 	}

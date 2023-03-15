@@ -5,6 +5,6 @@
     "type": "environmental:yak",
     "maxCount": 4,
     "minCount": 2,
-    "weight": 2
+    "weight": 1
   }
 }
