@@ -1,7 +1,6 @@
 {
   "values": [
-    "minecraft:snowy_plains",
-    "minecraft:ice_spikes",
+    "#forge:is_icy",
     "#minecraft:is_taiga"
   ]
 }
