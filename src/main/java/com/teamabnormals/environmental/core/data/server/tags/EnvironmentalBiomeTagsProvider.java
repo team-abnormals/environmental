@@ -22,7 +22,7 @@ public class EnvironmentalBiomeTagsProvider extends BiomeTagsProvider {
 
 	@Override
 	public void addTags() {
-		this.tag(EnvironmentalBiomes.MARSH.getKey(),
+		this.tag(EnvironmentalBiomes.MARSH.get(),
 				BiomeTags.IS_OVERWORLD,
 				BiomeTags.HAS_MINESHAFT, BiomeTags.STRONGHOLD_BIASED_TO, BiomeTags.HAS_RUINED_PORTAL_SWAMP, BiomeTags.HAS_SWAMP_HUT,
 				BiomeTags.HAS_CLOSER_WATER_FOG, BiomeTags.WATER_ON_MAP_OUTLINES,
@@ -31,13 +31,13 @@ public class EnvironmentalBiomeTagsProvider extends BiomeTagsProvider {
 				EnvironmentalBiomeTags.HAS_MUD_DISK
 		);
 
-		this.tag(EnvironmentalBiomes.BLOSSOM_WOODS.getKey(),
+		this.tag(EnvironmentalBiomes.BLOSSOM_WOODS.get(),
 				BiomeTags.IS_OVERWORLD, BiomeTags.IS_FOREST,
 				BiomeTags.HAS_MINESHAFT, BiomeTags.STRONGHOLD_BIASED_TO,
 				Tags.Biomes.IS_DENSE_OVERWORLD
 		);
 
-		this.tag(EnvironmentalBiomes.BLOSSOM_VALLEYS.getKey(),
+		this.tag(EnvironmentalBiomes.BLOSSOM_VALLEYS.get(),
 				BiomeTags.IS_OVERWORLD, BiomeTags.IS_FOREST,
 				BiomeTags.HAS_MINESHAFT, BiomeTags.STRONGHOLD_BIASED_TO,
 				BlueprintBiomeTags.IS_GRASSLAND, Tags.Biomes.IS_RARE, Tags.Biomes.IS_PLAINS
@@ -46,10 +46,10 @@ public class EnvironmentalBiomeTagsProvider extends BiomeTagsProvider {
 		this.tag(EnvironmentalBiomeTags.HAS_SLABFISH).addTag(Tags.Biomes.IS_SWAMP);
 		this.tag(EnvironmentalBiomeTags.HAS_DUCK).addTag(Tags.Biomes.IS_SWAMP);
 		this.tag(EnvironmentalBiomeTags.HAS_DEER).addTag(BiomeTags.IS_FOREST);
-		this.tag(EnvironmentalBiomeTags.HAS_REINDEER).add(Biomes.SNOWY_PLAINS).add(Biomes.ICE_SPIKES).addTag(BiomeTags.IS_TAIGA);
+		this.tag(EnvironmentalBiomeTags.HAS_REINDEER).addTag(BlueprintBiomeTags.IS_ICY).addTag(BiomeTags.IS_TAIGA);
 		this.tag(EnvironmentalBiomeTags.HAS_YAK).add(Biomes.STONY_PEAKS).addTag(BiomeTags.IS_HILL);
 
-		this.tag(EnvironmentalBiomeTags.HAS_HUSK).add(Biomes.DESERT);
+		this.tag(EnvironmentalBiomeTags.HAS_HUSK).addTag(BlueprintBiomeTags.IS_DESERT);
 		this.tag(EnvironmentalBiomeTags.HAS_STRAY).addTag(BlueprintBiomeTags.IS_ICY);
 
 		this.tag(EnvironmentalBiomeTags.HAS_SHEEP).addTag(BlueprintBiomeTags.IS_GRASSLAND).addTag(BiomeTags.IS_SAVANNA);
@@ -62,7 +62,7 @@ public class EnvironmentalBiomeTagsProvider extends BiomeTagsProvider {
 	}
 
 	@SafeVarargs
-	private void tag(ResourceKey<Biome> biome, TagKey<Biome>... tags) {
+	private void tag(Biome biome, TagKey<Biome>... tags) {
 		for (TagKey<Biome> key : tags) {
 			tag(key).add(biome);
 		}
