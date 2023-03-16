@@ -2,6 +2,10 @@
   "values": [
     "environmental:willow_ladder",
     "environmental:wisteria_ladder",
-    "environmental:cherry_ladder"
+    "environmental:cherry_ladder",
+    "environmental:pink_hanging_wisteria_leaves",
+    "environmental:purple_hanging_wisteria_leaves",
+    "environmental:blue_hanging_wisteria_leaves",
+    "environmental:white_hanging_wisteria_leaves"
   ]
 }
