@@ -4,7 +4,9 @@ import com.teamabnormals.blueprint.core.api.BlueprintRabbitTypes;
 import com.teamabnormals.blueprint.core.api.BlueprintRabbitTypes.BlueprintRabbitType;
 import com.teamabnormals.environmental.core.Environmental;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
+@EventBusSubscriber(modid = Environmental.MOD_ID)
 public class EnvironmentalRabbitTypes {
 	private static final int UNIQUE_OFFSET = 9415;
 
