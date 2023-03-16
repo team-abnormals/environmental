@@ -1,11 +1,15 @@
 package com.teamabnormals.environmental.core.data.server.tags;
 
+import com.teamabnormals.blueprint.core.other.tags.BlueprintBiomeTags;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalBiomeTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBiomes;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BiomeTagsProvider;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BiomeTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -18,13 +22,26 @@ public class EnvironmentalBiomeTagsProvider extends BiomeTagsProvider {
 
 	@Override
 	public void addTags() {
-		this.tag(BiomeTags.IS_FOREST).add(EnvironmentalBiomes.BLOSSOM_WOODS.get(), EnvironmentalBiomes.BLOSSOM_VALLEYS.get());
-		this.tag(BiomeTags.HAS_RUINED_PORTAL_SWAMP).add(EnvironmentalBiomes.MARSH.get());
-		this.tag(BiomeTags.HAS_SWAMP_HUT).add(EnvironmentalBiomes.MARSH.get());
-		this.tag(BiomeTags.IS_OVERWORLD).add(EnvironmentalBiomes.MARSH.get(), EnvironmentalBiomes.BLOSSOM_WOODS.get(), EnvironmentalBiomes.BLOSSOM_VALLEYS.get());
-		this.tag(BiomeTags.STRONGHOLD_BIASED_TO).add(EnvironmentalBiomes.MARSH.get(), EnvironmentalBiomes.BLOSSOM_WOODS.get(), EnvironmentalBiomes.BLOSSOM_VALLEYS.get());
-		this.tag(BiomeTags.WATER_ON_MAP_OUTLINES).add(EnvironmentalBiomes.MARSH.get());
-		this.tag(BiomeTags.HAS_CLOSER_WATER_FOG).add(EnvironmentalBiomes.MARSH.get());
+		this.tag(EnvironmentalBiomes.MARSH.getKey(),
+				BiomeTags.IS_OVERWORLD,
+				BiomeTags.HAS_MINESHAFT, BiomeTags.STRONGHOLD_BIASED_TO, BiomeTags.HAS_RUINED_PORTAL_SWAMP, BiomeTags.HAS_SWAMP_HUT,
+				BiomeTags.HAS_CLOSER_WATER_FOG, BiomeTags.WATER_ON_MAP_OUTLINES,
+				Tags.Biomes.IS_WET_OVERWORLD, Tags.Biomes.IS_SWAMP,
+				EnvironmentalBiomeTags.ONLY_ALLOWS_MUDDY_RABBITS,
+				EnvironmentalBiomeTags.HAS_MUD_DISK
+		);
+
+		this.tag(EnvironmentalBiomes.BLOSSOM_WOODS.getKey(),
+				BiomeTags.IS_OVERWORLD, BiomeTags.IS_FOREST,
+				BiomeTags.HAS_MINESHAFT, BiomeTags.STRONGHOLD_BIASED_TO,
+				Tags.Biomes.IS_DENSE_OVERWORLD
+		);
+
+		this.tag(EnvironmentalBiomes.BLOSSOM_VALLEYS.getKey(),
+				BiomeTags.IS_OVERWORLD, BiomeTags.IS_FOREST,
+				BiomeTags.HAS_MINESHAFT, BiomeTags.STRONGHOLD_BIASED_TO,
+				BlueprintBiomeTags.IS_GRASSLAND, Tags.Biomes.IS_RARE, Tags.Biomes.IS_PLAINS
+		);
 
 		this.tag(EnvironmentalBiomeTags.HAS_SLABFISH).addTag(Tags.Biomes.IS_SWAMP);
 		this.tag(EnvironmentalBiomeTags.HAS_DUCK).addTag(Tags.Biomes.IS_SWAMP);
@@ -33,14 +50,21 @@ public class EnvironmentalBiomeTagsProvider extends BiomeTagsProvider {
 		this.tag(EnvironmentalBiomeTags.HAS_YAK).add(Biomes.STONY_PEAKS).addTag(BiomeTags.IS_HILL);
 
 		this.tag(EnvironmentalBiomeTags.HAS_HUSK).add(Biomes.DESERT);
-		this.tag(EnvironmentalBiomeTags.HAS_STRAY).add(Biomes.SNOWY_PLAINS, Biomes.ICE_SPIKES);
+		this.tag(EnvironmentalBiomeTags.HAS_STRAY).addTag(BlueprintBiomeTags.IS_ICY);
 
-		this.tag(EnvironmentalBiomeTags.HAS_SHEEP).add(Biomes.PLAINS, Biomes.SUNFLOWER_PLAINS, Biomes.MEADOW);
+		this.tag(EnvironmentalBiomeTags.HAS_SHEEP).addTag(BlueprintBiomeTags.IS_GRASSLAND).addTag(BiomeTags.IS_SAVANNA);
+		this.tag(EnvironmentalBiomeTags.HAS_COW).addTag(BlueprintBiomeTags.IS_GRASSLAND).addTag(BiomeTags.IS_SAVANNA);
 		this.tag(EnvironmentalBiomeTags.HAS_PIG).addTag(BiomeTags.IS_FOREST);
-		this.tag(EnvironmentalBiomeTags.HAS_COW).add(Biomes.PLAINS, Biomes.SUNFLOWER_PLAINS);
 		this.tag(EnvironmentalBiomeTags.HAS_CHICKEN).addTag(BiomeTags.IS_FOREST);
 
-		this.tag(EnvironmentalBiomeTags.HAS_CATTAILS).add(Biomes.RIVER).addTag(Tags.Biomes.IS_SWAMP);
-		this.tag(EnvironmentalBiomeTags.HAS_MUD_DISK).add(Biomes.SWAMP, EnvironmentalBiomes.MARSH.getKey());
+		this.tag(EnvironmentalBiomeTags.HAS_CATTAILS).add(Biomes.RIVER, Biomes.SWAMP, Biomes.MANGROVE_SWAMP);
+		this.tag(EnvironmentalBiomeTags.HAS_MUD_DISK).add(Biomes.SWAMP);
+	}
+
+	@SafeVarargs
+	private void tag(ResourceKey<Biome> biome, TagKey<Biome>... tags) {
+		for (TagKey<Biome> key : tags) {
+			tag(key).add(biome);
+		}
 	}
 }

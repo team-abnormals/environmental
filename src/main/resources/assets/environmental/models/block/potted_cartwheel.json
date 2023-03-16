@@ -1,21 +1,15 @@
 {
-	"credit": "Made with Blockbench",
 	"parent": "block/flower_pot_cross",
-	"ambientocclusion": false,
 	"textures": {
 		"cross_flipped": "environmental:block/cartwheel_stem_flipped",
 		"cross": "environmental:block/cartwheel_stem",
 		"back": "environmental:block/cartwheel_back",
-		"front": "environmental:block/cartwheel_front",
-		"particle": "block/flower_pot",
-		"flowerpot": "block/flower_pot",
-		"dirt": "block/dirt"
+		"front": "environmental:block/cartwheel_front"
 	},
 	"elements": [
 		{
 			"from": [8, 4, 1.8],
 			"to": [8, 10, 14.2],
-			"shade": false,
 			"rotation": {"angle": 45, "axis": "y", "origin": [8, 12, 8], "rescale": true},
 			"faces": {
 				"east": {"uv": [0, 8, 16, 16], "texture": "#cross"},
@@ -25,7 +19,6 @@
 		{
 			"from": [8, 4, 1.8],
 			"to": [8, 10, 14.2],
-			"shade": false,
 			"rotation": {"angle": -45, "axis": "y", "origin": [8, 12, 8], "rescale": true},
 			"faces": {
 				"east": {"uv": [0, 8, 16, 16], "texture": "#cross"},
@@ -35,7 +28,6 @@
 		{
 			"from": [1.5, 3, 8.75],
 			"to": [13.5, 15, 8.75],
-			"shade": false,
 			"rotation": {"angle": 22.5, "axis": "x", "origin": [8, 12, 9], "rescale": true},
 			"faces": {
 				"north": {"uv": [0, 0, 16, 16], "texture": "#front"},
