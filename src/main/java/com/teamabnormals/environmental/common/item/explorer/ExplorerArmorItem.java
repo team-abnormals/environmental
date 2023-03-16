@@ -2,7 +2,7 @@ package com.teamabnormals.environmental.common.item.explorer;
 
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.other.EnvironmentalCriteriaTriggers;
-import com.teamabnormals.environmental.core.other.EnvironmentalTiers;
+import com.teamabnormals.environmental.core.other.EnvironmentalTiers.EnvironmentalArmorMaterials;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -26,7 +26,7 @@ import java.util.List;
 public abstract class ExplorerArmorItem extends DyeableArmorItem implements ExplorerArmor {
 
 	public ExplorerArmorItem(EquipmentSlot slot, Properties properties) {
-		super(EnvironmentalTiers.Armor.EXPLORER, slot, properties);
+		super(EnvironmentalArmorMaterials.EXPLORER, slot, properties);
 	}
 
 	@Override
