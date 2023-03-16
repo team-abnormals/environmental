@@ -4,7 +4,7 @@
   "features": [
     "environmental:flower_bird_of_paradise",
     "environmental:patch_giant_tall_grass_jungle",
-    "environmental:patch_hibiscus"
+    "environmental:hibiscus_bush"
   ],
   "step": "vegetal_decoration"
 }

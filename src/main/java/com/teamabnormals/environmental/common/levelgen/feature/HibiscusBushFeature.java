@@ -22,9 +22,9 @@ import net.minecraftforge.registries.ForgeRegistries;
 import java.util.List;
 import java.util.Optional;
 
-public class HibiscusPatchFeature extends Feature<NoneFeatureConfiguration> {
+public class HibiscusBushFeature extends Feature<NoneFeatureConfiguration> {
 
-	public HibiscusPatchFeature(Codec<NoneFeatureConfiguration> config) {
+	public HibiscusBushFeature(Codec<NoneFeatureConfiguration> config) {
 		super(config);
 	}
 
