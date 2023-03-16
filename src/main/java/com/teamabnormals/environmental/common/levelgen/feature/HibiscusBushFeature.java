@@ -7,6 +7,7 @@ import com.teamabnormals.environmental.core.other.tags.EnvironmentalBlockTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
@@ -34,13 +35,16 @@ public class HibiscusBushFeature extends Feature<NoneFeatureConfiguration> {
 		RandomSource random = context.random();
 		BlockPos.MutableBlockPos blockpos = new BlockPos.MutableBlockPos();
 
+		if (random.nextBoolean() && pos.getY() > context.chunkGenerator().getSeaLevel() + 20)
+			return false;
+
 		int bushes = 0;
 
-		for (int i = 0; i < 128 && bushes < 10; ++i) {
-			blockpos.setWithOffset(pos, random.nextInt(10) - random.nextInt(10), random.nextInt(4) - random.nextInt(4), random.nextInt(10) - random.nextInt(10));
+		for (int i = 0; i < 128 && bushes < 6; ++i) {
+			blockpos.setWithOffset(pos, random.nextInt(12) - random.nextInt(12), random.nextInt(4) - random.nextInt(4), random.nextInt(12) - random.nextInt(12));
 			if (canBushGrowAt(level, blockpos)) {
 				placeBush(level, blockpos, random);
-				plantGroundHibiscuses(level, blockpos, random);
+				placeGroundHibiscuses(level, blockpos, random);
 				bushes++;
 			}
 		}
@@ -48,30 +52,53 @@ public class HibiscusBushFeature extends Feature<NoneFeatureConfiguration> {
 		return bushes > 0;
 	}
 
-	private static boolean placeBush(WorldGenLevel level, BlockPos pos, RandomSource random) {
-		double radius = random.nextDouble() + 1.0D;
+	private static void placeBush(WorldGenLevel level, BlockPos pos, RandomSource random) {
+		int maxX = random.nextInt(2) + 1;
+		int maxY = random.nextInt(3);
+		int maxZ = random.nextInt(2) + 1;
 
-		placeLeafBlob(level, pos.above(), random, radius);
-		if (radius > 1.5D && random.nextInt(3) > 0)
-			placeLeafBlob(level, pos.above(2), random, radius * 0.75D);
+		if ((maxX == 2 || maxZ == 2) && maxY == 0)
+			maxY = 1;
 
-		BlockPos.MutableBlockPos blockpos = new BlockPos.MutableBlockPos();
+		int minX = maxX == 2 ? -1 : -random.nextInt(2);
+		int minY = -1;
+		int minZ = maxZ == 2 ? -1 : -random.nextInt(2);
 
-		for (int x = -3; x <= 3; ++x) {
-			for (int y = -1; y <= 6; ++y) {
-				for (int z = -3; z <= 3; ++z) {
-					if (random.nextBoolean()) {
-						blockpos.setWithOffset(pos, x, y, z);
-						plantWallHibiscus(level, blockpos, level.getBlockState(blockpos), random);
-					}
-				}
+		maxX += minX;
+		maxZ += minZ;
+
+		placeLeafCube(level, pos, minX, minY, minZ, maxX, maxY, maxZ);
+
+		if (maxY > 0 && random.nextBoolean()) {
+			int offsetX = random.nextBoolean() ? -1 : 1;
+			int offsetY = random.nextBoolean() ? -1 : 1;
+
+			minX += offsetX;
+			maxX += offsetX;
+			minZ += offsetY;
+			maxZ += offsetY;
+			maxY -= 1;
+
+			if (random.nextBoolean() && maxX - minX > 1) {
+				if (offsetX > 0)
+					minX += 1;
+				else
+					maxX -= 1;
 			}
+			if (random.nextBoolean() && maxZ - minZ > 1) {
+				if (offsetY > 0)
+					minZ += 1;
+				else
+					maxZ -= 1;
+			}
+
+			placeLeafCube(level, pos, minX, minY, minZ, maxX, maxY, maxZ);
 		}
 
-		return true;
+		placeWallHibiscuses(level, pos, random);
 	}
 
-	private static void plantGroundHibiscuses(WorldGenLevel level, BlockPos pos, RandomSource random) {
+	private static void placeGroundHibiscuses(WorldGenLevel level, BlockPos pos, RandomSource random) {
 		BlockPos.MutableBlockPos blockpos = new BlockPos.MutableBlockPos();
 		for (int i = 0; i < 64; ++i) {
 			Optional<Block> block = ForgeRegistries.BLOCKS.tags().getTag(EnvironmentalBlockTags.HIBISCUSES).getRandomElement(random);
@@ -85,49 +112,63 @@ public class HibiscusBushFeature extends Feature<NoneFeatureConfiguration> {
 		}
 	}
 
-	private static void placeLeafBlob(WorldGenLevel level, BlockPos pos, RandomSource random, double radius) {
-		double offsetX = random.nextDouble();
-		double offsetY = -random.nextDouble() * 0.5D;
-		double offsetZ = random.nextDouble();
-
-		for (BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-2, -2, -2), pos.offset(2, 2, 2))) {
-			if (blockpos.distToCenterSqr(pos.getX() + offsetX, pos.getY() + offsetY, pos.getZ() + offsetZ) < radius * radius && isAirOrReplaceablePlant(level, blockpos)) {
+	private static void placeLeafCube(WorldGenLevel level, BlockPos pos, int minX, int minY, int minZ, int maxX, int maxY, int maxZ) {
+		for (BlockPos blockpos : BlockPos.betweenClosed(pos.offset(minX, minY, minZ), pos.offset(maxX, maxY, maxZ))) {
+			if (isAirOrReplaceablePlant(level, blockpos)) {
 				level.setBlock(blockpos, EnvironmentalBlocks.HIBISCUS_LEAVES.get().defaultBlockState(), 4);
 			}
 		}
 	}
 
-	private static void plantWallHibiscus(WorldGenLevel level, BlockPos pos, BlockState state, RandomSource random) {
-		if (state.isAir()) {
-			List<Direction> validdirections = Lists.newArrayList();
-			for (Direction direction : Direction.values()) {
-				if (direction != Direction.UP && level.getBlockState(pos.relative(direction)).is(EnvironmentalBlocks.HIBISCUS_LEAVES.get())) {
-					validdirections.add(direction);
-				}
-			}
+	private static void placeWallHibiscuses(WorldGenLevel level, BlockPos pos, RandomSource random) {
+		BlockPos.MutableBlockPos blockpos = new BlockPos.MutableBlockPos();
+		for (int x = -3; x <= 3; ++x) {
+			for (int y = -1; y <= 3; ++y) {
+				for (int z = -3; z <= 3; ++z) {
+					blockpos.setWithOffset(pos, x, y, z);
+					if (random.nextBoolean() && level.getBlockState(blockpos).isAir()) {
+						List<Direction> validdirections = Lists.newArrayList();
+						for (Direction direction : Direction.values()) {
+							if (direction != Direction.UP && level.getBlockState(blockpos.relative(direction)).is(EnvironmentalBlocks.HIBISCUS_LEAVES.get())) {
+								validdirections.add(direction);
+							}
+						}
 
-			if (!validdirections.isEmpty()) {
-				Direction direction = validdirections.get(random.nextInt(validdirections.size()));
-				ForgeRegistries.BLOCKS.tags().getTag(EnvironmentalBlockTags.WALL_HIBISCUSES).getRandomElement(random).ifPresent((block) -> {
-					level.setBlock(pos, block.defaultBlockState().setValue(WallHibiscusBlock.FACING, direction), 2);
-				});
+						if (!validdirections.isEmpty()) {
+							Direction direction = validdirections.get(random.nextInt(validdirections.size()));
+							ForgeRegistries.BLOCKS.tags().getTag(EnvironmentalBlockTags.WALL_HIBISCUSES).getRandomElement(random).ifPresent((block) -> {
+								level.setBlock(blockpos, block.defaultBlockState().setValue(WallHibiscusBlock.FACING, direction), 2);
+							});
+						}
+					}
+				}
 			}
 		}
 	}
 
 	private static boolean canBushGrowAt(LevelAccessor level, BlockPos pos) {
 		int i = 0;
+		int j = 0;
 		for (BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-1, 0, -1), pos.offset(1, 0, 1))) {
-			if (!isAirOrReplaceablePlant(level, blockpos))
+			if (!isAirOrReplaceablePlant(level, blockpos) && ++i > 1)
 				return false;
-			else if (!isGrassOrDirt(level, blockpos.below()) && ++i > 2)
+			else if (!isGrassOrDirt(level, blockpos.below()) && !hasLeavesAndDirtBelow(level, blockpos, 1) && !hasLeavesAndDirtBelow(level, blockpos, 2) && ++j > 2)
 				return false;
 		}
 		return true;
 	}
 
+	private static boolean hasLeavesAndDirtBelow(LevelAccessor level, BlockPos pos, int depth) {
+		for (int i = 1; i <= depth; ++i) {
+			BlockState state = level.getBlockState(pos.below(i));
+			if (!state.is(BlockTags.LEAVES) || state.getBlock() == EnvironmentalBlocks.HIBISCUS_LEAVES.get())
+				return false;
+		}
+		return isGrassOrDirt(level, pos.below(depth + 1));
+	}
+
 	private static boolean isAirOrReplaceablePlant(LevelAccessor level, BlockPos pos) {
 		BlockState state = level.getBlockState(pos);
-		return state.isAir() || state.getMaterial() == Material.REPLACEABLE_PLANT;
+		return state.isAir() || state.getMaterial() == Material.REPLACEABLE_PLANT || state.is(EnvironmentalBlockTags.HIBISCUSES);
 	}
 }
