@@ -122,7 +122,7 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 		ShapedRecipeBuilder.shaped(Blocks.BROWN_WOOL).define('#', EnvironmentalItems.YAK_HAIR.get()).pattern("##").pattern("##").unlockedBy("has_yak_hair", has(EnvironmentalItems.YAK_HAIR.get())).save(consumer, new ResourceLocation(Environmental.MOD_ID, getItemName(Blocks.BROWN_WOOL)));
 		nineBlockStorageRecipes(consumer, EnvironmentalItems.YAK_HAIR.get(), EnvironmentalBlocks.YAK_HAIR_BLOCK.get());
 		ShapedRecipeBuilder.shaped(EnvironmentalBlocks.YAK_HAIR_RUG.get()).define('#', EnvironmentalItems.YAK_HAIR.get()).pattern("###").unlockedBy("has_yak_hair", has(EnvironmentalItems.YAK_HAIR.get())).save(consumer);
-		ShapedRecipeBuilder.shaped(EnvironmentalItems.YAK_PANTS.get()).define('#', EnvironmentalItems.YAK_HAIR.get()).pattern("###").pattern("# #").pattern("# #").unlockedBy("has_yak_hair", has(EnvironmentalItems.YAK_HAIR.get())).save(consumer);
+		ShapedRecipeBuilder.shaped(EnvironmentalItems.YAK_PANTS.get()).define('#', Items.LEATHER).define('B', EnvironmentalBlocks.YAK_HAIR_BLOCK.get()).pattern("BBB").pattern("# #").pattern("# #").unlockedBy("has_yak_hair", has(EnvironmentalItems.YAK_HAIR.get())).save(consumer);
 
 		generateRecipes(consumer, EnvironmentalBlockFamilies.WILLOW_PLANKS_FAMILY);
 		planksFromLogs(consumer, EnvironmentalBlocks.WILLOW_PLANKS.get(), EnvironmentalItemTags.WILLOW_LOGS);
