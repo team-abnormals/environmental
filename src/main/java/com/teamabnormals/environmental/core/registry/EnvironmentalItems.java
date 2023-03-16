@@ -11,7 +11,7 @@ import com.teamabnormals.environmental.common.item.explorer.HealerPouchItem;
 import com.teamabnormals.environmental.common.item.explorer.ThiefHoodItem;
 import com.teamabnormals.environmental.common.item.explorer.WandererBootsItem;
 import com.teamabnormals.environmental.core.Environmental;
-import com.teamabnormals.environmental.core.other.EnvironmentalTiers;
+import com.teamabnormals.environmental.core.other.EnvironmentalTiers.EnvironmentalArmorMaterials;
 import com.teamabnormals.environmental.integration.boatload.EnvironmentalBoatTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -50,8 +50,8 @@ public class EnvironmentalItems {
 
 	public static final RegistryObject<Item> MUD_BALL = HELPER.createItem("mud_ball", () -> new MudBallItem(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
 
-	public static final RegistryObject<Item> YAK_HAIR = HELPER.createItem("yak_hair", () -> new FuelItem(25, new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-	public static final RegistryObject<Item> YAK_PANTS = HELPER.createItem("yak_pants", () -> new YakPantsItem(EnvironmentalTiers.Armor.YAK, EquipmentSlot.LEGS, new Item.Properties().tab(CreativeModeTab.TAB_COMBAT)));
+	public static final RegistryObject<Item> YAK_HAIR = HELPER.createItem("yak_hair", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+	public static final RegistryObject<Item> YAK_PANTS = HELPER.createItem("yak_pants", () -> new YakPantsItem(EnvironmentalArmorMaterials.YAK, EquipmentSlot.LEGS, new Item.Properties().tab(CreativeModeTab.TAB_COMBAT)));
 
 	public static final Pair<RegistryObject<Item>, RegistryObject<Item>> WILLOW_BOAT = HELPER.createBoatAndChestBoatItem("willow", EnvironmentalBlocks.WILLOW_PLANKS);
 	public static final RegistryObject<Item> WILLOW_FURNACE_BOAT = HELPER.createItem("willow_furnace_boat", ModList.get().isLoaded("boatload") ? EnvironmentalBoatTypes.WILLOW_FURNACE_BOAT : () -> new Item(new Item.Properties().tab(AbstractSubRegistryHelper.areModsLoaded("boatload") ? CreativeModeTab.TAB_TRANSPORTATION : null)));
