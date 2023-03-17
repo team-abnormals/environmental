@@ -84,7 +84,7 @@ public class EnvironmentalEvents {
 
 	@SubscribeEvent
 	public static void onPlayerBreak(PlayerEvent.BreakSpeed event) {
-		if (event.getState().getBlock() instanceof HangingWisteriaLeavesBlock && event.getEntity().getMainHandItem().getItem() == Items.SHEARS)
+		if (event.getState().getBlock() instanceof HangingWisteriaLeavesBlock && event.getEntity().getMainHandItem().is(Tags.Items.SHEARS))
 			event.setNewSpeed(15.0F);
 	}
 
