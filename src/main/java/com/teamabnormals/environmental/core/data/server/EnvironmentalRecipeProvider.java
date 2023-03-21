@@ -70,6 +70,7 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 		oneToOneConversionRecipe(consumer, Items.PURPLE_DYE, EnvironmentalBlocks.VIOLET.get(), "purple_dye");
 		oneToOneConversionRecipe(consumer, Items.RED_DYE, EnvironmentalBlocks.RED_LOTUS_FLOWER.get(), "red_dye");
 		oneToOneConversionRecipe(consumer, Items.WHITE_DYE, EnvironmentalBlocks.WHITE_LOTUS_FLOWER.get(), "white_dye");
+		oneToOneConversionRecipe(consumer, Items.ORANGE_DYE, EnvironmentalBlocks.TASSELFLOWER.get(), "purple_dye");
 		oneToOneConversionRecipe(consumer, Items.MAGENTA_DYE, EnvironmentalBlocks.MAGENTA_HIBISCUS.get(), "magenta_dye");
 		oneToOneConversionRecipe(consumer, Items.ORANGE_DYE, EnvironmentalBlocks.ORANGE_HIBISCUS.get(), "orange_dye");
 		oneToOneConversionRecipe(consumer, Items.PINK_DYE, EnvironmentalBlocks.PINK_HIBISCUS.get(), "pink_dye");

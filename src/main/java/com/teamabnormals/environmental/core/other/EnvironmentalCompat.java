@@ -112,6 +112,7 @@ public class EnvironmentalCompat {
 		DataUtil.registerCompostable(EnvironmentalBlocks.RED_LOTUS_FLOWER.get(), 0.65F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.WHITE_LOTUS_FLOWER.get(), 0.65F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.BLUEBELL.get(), 0.65F);
+		DataUtil.registerCompostable(EnvironmentalBlocks.TASSELFLOWER.get(), 0.65F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.YELLOW_HIBISCUS.get(), 0.65F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.ORANGE_HIBISCUS.get(), 0.65F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.RED_HIBISCUS.get(), 0.65F);
