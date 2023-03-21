@@ -33,6 +33,7 @@ public class EnvironmentalTrades {
 				new BlueprintTrade(1, EnvironmentalBlocks.RED_LOTUS_FLOWER.get().asItem(), 1, 7, 1),
 				new BlueprintTrade(1, EnvironmentalBlocks.WHITE_LOTUS_FLOWER.get().asItem(), 1, 7, 1),
 				new BlueprintTrade(1, EnvironmentalBlocks.DIANTHUS.get().asItem(), 1, 8, 1),
+				new BlueprintTrade(1, EnvironmentalBlocks.TASSELFLOWER.get().asItem(), 1, 8, 1),
 				new BlueprintTrade(1, EnvironmentalBlocks.YELLOW_HIBISCUS.get().asItem(), 1, 12, 1),
 				new BlueprintTrade(1, EnvironmentalBlocks.ORANGE_HIBISCUS.get().asItem(), 1, 12, 1),
 				new BlueprintTrade(1, EnvironmentalBlocks.RED_HIBISCUS.get().asItem(), 1, 12, 1),

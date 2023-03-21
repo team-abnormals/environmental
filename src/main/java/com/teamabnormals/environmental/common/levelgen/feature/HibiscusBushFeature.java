@@ -41,7 +41,7 @@ public class HibiscusBushFeature extends Feature<NoneFeatureConfiguration> {
 		int bushes = 0;
 
 		for (int i = 0; i < 128 && bushes < 6; ++i) {
-			blockpos.setWithOffset(pos, random.nextInt(12) - random.nextInt(12), random.nextInt(4) - random.nextInt(4), random.nextInt(12) - random.nextInt(12));
+			blockpos.setWithOffset(pos, random.nextInt(16) - random.nextInt(16), random.nextInt(4) - random.nextInt(4), random.nextInt(16) - random.nextInt(16));
 			if (canBushGrowAt(level, blockpos)) {
 				placeBush(level, blockpos, random);
 				placeGroundHibiscuses(level, blockpos, random);
