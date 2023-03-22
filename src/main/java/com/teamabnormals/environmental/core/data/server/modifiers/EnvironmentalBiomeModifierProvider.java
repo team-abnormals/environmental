@@ -57,9 +57,14 @@ public class EnvironmentalBiomeModifierProvider {
 		removeSpawnInverted("cow", EnvironmentalBiomeTags.HAS_COW, EntityType.COW);
 		removeSpawnInverted("chicken", EnvironmentalBiomeTags.HAS_CHICKEN, EntityType.CHICKEN);
 
-		addFeature("bluebell", Biomes.DARK_FOREST, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_BLUEBELL);
-		addFeature("violet", BiomeTags.IS_TAIGA, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_VIOLET);
 		addFeature("cattails", EnvironmentalBiomeTags.HAS_CATTAILS, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.CATTAILS);
+		addFeature("bluebell", EnvironmentalBiomeTags.HAS_BLUEBELL, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_BLUEBELL, EnvironmentalPlacedFeatures.FLOWER_BLUEBELL_LARGE);
+		addFeature("violet", EnvironmentalBiomeTags.HAS_VIOLET, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_VIOLET);
+		addFeature("violet_rare", EnvironmentalBiomeTags.HAS_RARE_VIOLET, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_VIOLET_RARE);
+		addFeature("tasselflower", EnvironmentalBiomeTags.HAS_TASSELFLOWER, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_TASSELFLOWER);
+		addFeature("bird_of_paradise", EnvironmentalBiomeTags.HAS_BIRD_OF_PARADISE, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_BIRD_OF_PARADISE);
+		addFeature("hibiscus_bush", EnvironmentalBiomeTags.HAS_HIBISCUS, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.HIBISCUS_BUSH);
+
 		addFeature("tall_dead_bush", Biomes.DESERT, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_TALL_DEAD_BUSH);
 		addFeature("tall_dead_bush_badlands", BiomeTags.IS_BADLANDS, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_TALL_DEAD_BUSH_BADLANDS);
 		addFeature("mycelium_sprouts", Biomes.MUSHROOM_FIELDS, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_MYCELIUM_SPROUTS);
@@ -67,9 +72,9 @@ public class EnvironmentalBiomeModifierProvider {
 
 		addFeature("swamp_vegetation", Biomes.SWAMP, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.HUGE_SWAMP_MUSHROOMS, EnvironmentalPlacedFeatures.TREES_SWAMP, EnvironmentalPlacedFeatures.PATCH_DUCKWEED_SWAMP);
 		addFeature("flower_forest_vegetation", Biomes.FLOWER_FOREST, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_CARTWHEEL, EnvironmentalPlacedFeatures.TREES_WISTERIA);
-		addFeature("savanna_vegetation", BiomeTags.IS_SAVANNA, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_ALLIUM, EnvironmentalPlacedFeatures.TASSELFLOWERS, EnvironmentalPlacedFeatures.PATCH_GIANT_TALL_GRASS_SAVANNA);
+		addFeature("savanna_vegetation", BiomeTags.IS_SAVANNA, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_GIANT_TALL_GRASS_SAVANNA);
 		addFeature("plains_vegetation", EnvironmentalBiomeTags.HAS_COW, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_GIANT_TALL_GRASS_PLAINS);
-		addFeature("jungle_vegetation", BiomeTags.IS_JUNGLE, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_BIRD_OF_PARADISE, EnvironmentalPlacedFeatures.PATCH_GIANT_TALL_GRASS_JUNGLE, EnvironmentalPlacedFeatures.HIBISCUS_BUSH);
+		addFeature("jungle_vegetation", BiomeTags.IS_JUNGLE, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_GIANT_TALL_GRASS_JUNGLE);
 
 		return JsonCodecProvider.forDatapackRegistry(generator, existingFileHelper, Environmental.MOD_ID, RegistryOps.create(JsonOps.INSTANCE, ACCESS), ForgeRegistries.Keys.BIOME_MODIFIERS, MODIFIERS);
 	}

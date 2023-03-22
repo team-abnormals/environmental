@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#environmental:has_feature/has_bird_of_paradise",
+  "features": "environmental:flower_bird_of_paradise",
+  "step": "vegetal_decoration"
+}

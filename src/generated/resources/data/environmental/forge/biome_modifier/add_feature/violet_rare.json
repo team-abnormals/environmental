@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#environmental:has_feature/has_rare_violet",
+  "features": "environmental:flower_violet_rare",
+  "step": "vegetal_decoration"
+}
