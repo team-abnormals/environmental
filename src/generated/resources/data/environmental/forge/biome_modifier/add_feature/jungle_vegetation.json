@@ -1,10 +1,6 @@
 {
   "type": "forge:add_features",
   "biomes": "#minecraft:is_jungle",
-  "features": [
-    "environmental:flower_bird_of_paradise",
-    "environmental:patch_giant_tall_grass_jungle",
-    "environmental:hibiscus_bush"
-  ],
+  "features": "environmental:patch_giant_tall_grass_jungle",
   "step": "vegetal_decoration"
 }

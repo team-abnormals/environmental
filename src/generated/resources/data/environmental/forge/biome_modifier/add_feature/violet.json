@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "#minecraft:is_taiga",
+  "biomes": "#environmental:has_feature/has_violet",
   "features": "environmental:flower_violet",
   "step": "vegetal_decoration"
 }

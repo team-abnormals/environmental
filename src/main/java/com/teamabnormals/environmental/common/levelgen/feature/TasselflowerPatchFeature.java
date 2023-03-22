@@ -1,7 +1,6 @@
 package com.teamabnormals.environmental.common.levelgen.feature;
 
 import com.mojang.serialization.Codec;
-import com.teamabnormals.blueprint.core.util.MathUtil;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -15,9 +14,9 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.material.FluidState;
 
-public class TasselflowersFeature extends Feature<NoneFeatureConfiguration> {
+public class TasselflowerPatchFeature extends Feature<NoneFeatureConfiguration> {
 
-	public TasselflowersFeature(Codec<NoneFeatureConfiguration> config) {
+	public TasselflowerPatchFeature(Codec<NoneFeatureConfiguration> config) {
 		super(config);
 	}
 
@@ -42,7 +41,7 @@ public class TasselflowersFeature extends Feature<NoneFeatureConfiguration> {
 			int x = pos.getX() + Math.round(f);
 			int z = pos.getZ() + Math.round(f1);
 
-			blockpos.set(x, level.getHeight(Heightmap.Types.WORLD_SURFACE, x, z), z);
+			blockpos.set(x, level.getHeight(Heightmap.Types.WORLD_SURFACE_WG, x, z), z);
 			if (level.isEmptyBlock(blockpos) && blockstate.canSurvive(level, blockpos) && !isNextToTasselflower(level, blockpos)) {
 				level.setBlock(blockpos, blockstate, 2);
 				++flowers;
@@ -61,10 +60,9 @@ public class TasselflowersFeature extends Feature<NoneFeatureConfiguration> {
 	}
 
 	private static boolean isNearWater(WorldGenLevel level, BlockPos pos) {
-		int i = 0;
 		for (BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-3, -3, -3), pos.offset(3, 3, 3))) {
 			FluidState ifluidstate = level.getFluidState(blockpos);
-			if (ifluidstate.is(FluidTags.WATER) && ifluidstate.getAmount() == 8 && ++i > 2)
+			if (ifluidstate.is(FluidTags.WATER) && ifluidstate.getAmount() == 8)
 				return true;
 		}
 

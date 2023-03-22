@@ -23,6 +23,13 @@ public class EnvironmentalBiomeTags {
 	public static final TagKey<Biome> HAS_SHEEP = biomeTag("has_animal/sheep");
 
 	public static final TagKey<Biome> HAS_CATTAILS = biomeTag("has_feature/cattails");
+	public static final TagKey<Biome> HAS_BLUEBELL = biomeTag("has_feature/has_bluebell");
+	public static final TagKey<Biome> HAS_VIOLET = biomeTag("has_feature/has_violet");
+	public static final TagKey<Biome> HAS_RARE_VIOLET = biomeTag("has_feature/has_rare_violet");
+	public static final TagKey<Biome> HAS_TASSELFLOWER = biomeTag("has_feature/has_tasselflower");
+	public static final TagKey<Biome> HAS_BIRD_OF_PARADISE = biomeTag("has_feature/has_bird_of_paradise");
+	public static final TagKey<Biome> HAS_HIBISCUS = biomeTag("has_feature/has_hibiscus");
+
 	public static final TagKey<Biome> HAS_MUD_DISK = biomeTag("has_feature/has_mud_disk");
 
 	private static TagKey<Biome> biomeTag(String tagName) {
