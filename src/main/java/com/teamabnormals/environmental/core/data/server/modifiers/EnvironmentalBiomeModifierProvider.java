@@ -1,6 +1,7 @@
 package com.teamabnormals.environmental.core.data.server.modifiers;
 
 import com.mojang.serialization.JsonOps;
+import com.teamabnormals.blueprint.core.other.tags.BlueprintBiomeTags;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalBiomeTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBiomeModifierTypes.InvertedRemoveSpawnsBiomeModifier;
@@ -73,7 +74,7 @@ public class EnvironmentalBiomeModifierProvider {
 		addFeature("swamp_vegetation", Biomes.SWAMP, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.TREES_SWAMP, EnvironmentalPlacedFeatures.PATCH_DUCKWEED_SWAMP);
 		addFeature("flower_forest_vegetation", Biomes.FLOWER_FOREST, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_CARTWHEEL, EnvironmentalPlacedFeatures.TREES_WISTERIA);
 		addFeature("savanna_vegetation", BiomeTags.IS_SAVANNA, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_GIANT_TALL_GRASS_SAVANNA);
-		addFeature("plains_vegetation", EnvironmentalBiomeTags.HAS_COW, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_GIANT_TALL_GRASS_PLAINS);
+		addFeature("plains_vegetation", BlueprintBiomeTags.IS_GRASSLAND, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_GIANT_TALL_GRASS_PLAINS);
 		addFeature("jungle_vegetation", BiomeTags.IS_JUNGLE, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_GIANT_TALL_GRASS_JUNGLE);
 
 		return JsonCodecProvider.forDatapackRegistry(generator, existingFileHelper, Environmental.MOD_ID, RegistryOps.create(JsonOps.INSTANCE, ACCESS), ForgeRegistries.Keys.BIOME_MODIFIERS, MODIFIERS);

@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "#environmental:has_animal/cow",
+  "biomes": "#forge:is_grassland",
   "features": "environmental:patch_giant_tall_grass_plains",
   "step": "vegetal_decoration"
 }
