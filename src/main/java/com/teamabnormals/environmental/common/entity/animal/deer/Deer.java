@@ -95,7 +95,7 @@ public class Deer extends AbstractDeer {
 		if (spawnDataIn instanceof DeerSpawnGroupData deerSpawnGroupData) {
 			deerCoatColor = deerSpawnGroupData.coatColor;
 		} else {
-			deerCoatColor = this.random.nextInt(DeerCoatColors.values().length - 1);
+			deerCoatColor = this.random.nextInt(DeerCoatColors.values().length);
 			spawnDataIn = new DeerSpawnGroupData(deerCoatColor);
 		}
 

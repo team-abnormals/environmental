@@ -14,6 +14,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class ReindeerRenderer extends MobRenderer<Reindeer, DeerModel<Reindeer>> {
+	private static final ResourceLocation LOCATION = new ResourceLocation(Environmental.MOD_ID, "textures/entity/deer/reindeer.png");
+	private static final ResourceLocation HOLIDAY_LOCATION = new ResourceLocation(Environmental.MOD_ID, "textures/entity/deer/reindeer_holiday.png");
 
 	public ReindeerRenderer(EntityRendererProvider.Context context) {
 		super(context, new ReindeerModel(context.bakeLayer(EnvironmentalModelLayers.REINDEER)), 0.6F);
@@ -21,9 +23,7 @@ public class ReindeerRenderer extends MobRenderer<Reindeer, DeerModel<Reindeer>>
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation(Reindeer entity) {
-		if (entity.isHoliday())
-			return new ResourceLocation(Environmental.MOD_ID, "textures/entity/deer/holiday.png");
-		return new ResourceLocation(Environmental.MOD_ID, "textures/entity/deer/reindeer.png");
+	public ResourceLocation getTextureLocation(Reindeer deer) {
+		return deer.isHoliday() ? HOLIDAY_LOCATION : LOCATION;
 	}
 }

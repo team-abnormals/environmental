@@ -16,7 +16,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class HolidayReindeerLayer<E extends Reindeer, M extends EntityModel<E>> extends RenderLayer<E, M> {
-	private static final ResourceLocation TEXTURE = new ResourceLocation(Environmental.MOD_ID, "textures/entity/deer/holiday_overlay.png");
+	private static final ResourceLocation LOCATION = new ResourceLocation(Environmental.MOD_ID, "textures/entity/deer/reindeer_holiday_overlay.png");
 
 	public HolidayReindeerLayer(RenderLayerParent<E, M> entityRenderer) {
 		super(entityRenderer);
@@ -25,7 +25,7 @@ public class HolidayReindeerLayer<E extends Reindeer, M extends EntityModel<E>> 
 	@Override
 	public void render(PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn, E entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 		if (!entity.isHoliday()) return;
-		VertexConsumer builder = bufferIn.getBuffer(RenderType.eyes(TEXTURE));
+		VertexConsumer builder = bufferIn.getBuffer(RenderType.eyes(LOCATION));
 		this.getParentModel().setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 		this.getParentModel().renderToBuffer(matrixStackIn, builder, packedLightIn, LivingEntityRenderer.getOverlayCoords(entity, 0.0F), 1.0F, 1.0F, 1.0F, 1.0F);
 	}
