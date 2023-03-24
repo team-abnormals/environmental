@@ -89,7 +89,6 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 		conditionalNineBlockStorageRecipes(consumer, BERRY_SACK, EnvironmentalItems.CATTAIL_SEEDS.get(), EnvironmentalBlocks.CATTAIL_SEED_SACK.get());
 
 		ShapelessRecipeBuilder.shapeless(Items.STRING).requires(EnvironmentalItems.CATTAIL_SEEDS.get(), 3).unlockedBy("has_cattail_seeds", has(EnvironmentalItems.CATTAIL_SEEDS.get())).save(consumer, getModConversionRecipeName(Items.STRING, EnvironmentalItems.CATTAIL_SEEDS.get()));
-		ShapelessRecipeBuilder.shapeless(EnvironmentalItems.APPLE_PIE.get()).requires(Items.APPLE, 2).requires(Items.SUGAR).requires(BlueprintItemTags.EGGS).unlockedBy("has_apple", has(Items.APPLE)).save(consumer);
 		ShapelessRecipeBuilder.shapeless(EnvironmentalItems.CHERRY_PIE.get()).requires(Ingredient.of(EnvironmentalItemTags.FRUITS_CHERRY), 3).requires(Items.SUGAR).requires(BlueprintItemTags.EGGS).unlockedBy("has_cherry", has(EnvironmentalItemTags.FRUITS_CHERRY)).save(consumer);
 
 		ShapedRecipeBuilder.shaped(EnvironmentalBlocks.GRASS_THATCH.get(), 4).define('W', Items.WHEAT).define('G', Blocks.GRASS).pattern("WG").pattern("GW").group("grass_thatch").unlockedBy("has_grass", has(Blocks.GRASS)).save(consumer);

@@ -4,16 +4,6 @@
       "type": "criteria",
       "config": {
         "criteria": {
-          "environmental:apple_pie": {
-            "conditions": {
-              "item": {
-                "items": [
-                  "environmental:apple_pie"
-                ]
-              }
-            },
-            "trigger": "minecraft:consume_item"
-          },
           "environmental:cherries": {
             "conditions": {
               "item": {
@@ -101,9 +91,6 @@
           ],
           [
             "environmental:cherry_pie"
-          ],
-          [
-            "environmental:apple_pie"
           ],
           [
             "environmental:venison"
