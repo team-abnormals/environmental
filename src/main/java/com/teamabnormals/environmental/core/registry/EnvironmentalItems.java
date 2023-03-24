@@ -33,7 +33,6 @@ public class EnvironmentalItems {
 
 	public static final RegistryObject<Item> CHERRIES = HELPER.createItem("cherries", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(EnvironmentalFoods.CHERRIES)));
 	public static final RegistryObject<Item> CHERRY_PIE = HELPER.createItem("cherry_pie", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(EnvironmentalFoods.CHERRY_PIE)));
-	public static final RegistryObject<Item> APPLE_PIE = HELPER.createItem("apple_pie", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(EnvironmentalFoods.APPLE_PIE)));
 	public static final RegistryObject<Item> VENISON = HELPER.createItem("venison", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(EnvironmentalFoods.VENISON)));
 	public static final RegistryObject<Item> COOKED_VENISON = HELPER.createItem("cooked_venison", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(EnvironmentalFoods.COOKED_VENISON)));
 
@@ -97,7 +96,6 @@ public class EnvironmentalItems {
 	public static final class EnvironmentalFoods {
 		public static final FoodProperties CHERRIES = new FoodProperties.Builder().nutrition(1).saturationMod(0.2F).fast().build();
 		public static final FoodProperties CHERRY_PIE = new FoodProperties.Builder().nutrition(6).saturationMod(0.3F).build();
-		public static final FoodProperties APPLE_PIE = new FoodProperties.Builder().nutrition(10).saturationMod(0.2F).build();
 
 		public static final FoodProperties VENISON = (new FoodProperties.Builder()).nutrition(2).saturationMod(0.3F).meat().build();
 		public static final FoodProperties COOKED_VENISON = (new FoodProperties.Builder()).nutrition(6).saturationMod(0.8F).meat().build();
