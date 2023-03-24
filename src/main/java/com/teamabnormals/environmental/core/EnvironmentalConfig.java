@@ -9,8 +9,6 @@ import org.apache.commons.lang3.tuple.Pair;
 public class EnvironmentalConfig {
 
 	public static class Common {
-		public final ConfigValue<Boolean> biomeVariantsAlwaysSpawn;
-
 		public final ConfigValue<Boolean> blockOnlyNaturalSpawns;
 		public final ConfigValue<Integer> koiHorizontalSerenityRange;
 		public final ConfigValue<Integer> koiVerticalSerenityRange;
@@ -18,7 +16,6 @@ public class EnvironmentalConfig {
 
 		Common(ForgeConfigSpec.Builder builder) {
 			builder.push("mobs");
-			biomeVariantsAlwaysSpawn = builder.comment("Make biome variants of mobs like Husks always spawn in place of their original in their biomes").define("Biome variants always spawn", true);
 			builder.push("koi");
 			blockOnlyNaturalSpawns = builder.comment("Make Koi only block natural spawns").define("Block only natural spawns", true);
 			koiHorizontalSerenityRange = builder.comment("Horizontal radius of Serenity effect in blocks").define("Horizontal serenity range (radius)", 32);

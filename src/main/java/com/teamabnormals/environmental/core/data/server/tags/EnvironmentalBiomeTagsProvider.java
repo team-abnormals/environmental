@@ -6,7 +6,6 @@ import com.teamabnormals.environmental.core.other.tags.EnvironmentalBiomeTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBiomes;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BiomeTagsProvider;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
@@ -48,9 +47,6 @@ public class EnvironmentalBiomeTagsProvider extends BiomeTagsProvider {
 		this.tag(EnvironmentalBiomeTags.HAS_DEER).addTag(BiomeTags.IS_FOREST);
 		this.tag(EnvironmentalBiomeTags.HAS_REINDEER).addTag(BlueprintBiomeTags.IS_ICY).addTag(BiomeTags.IS_TAIGA);
 		this.tag(EnvironmentalBiomeTags.HAS_YAK).add(Biomes.STONY_PEAKS).addTag(BiomeTags.IS_HILL);
-
-		this.tag(EnvironmentalBiomeTags.HAS_HUSK).addTag(BlueprintBiomeTags.IS_DESERT);
-		this.tag(EnvironmentalBiomeTags.HAS_STRAY).addTag(BlueprintBiomeTags.IS_ICY);
 
 		this.tag(EnvironmentalBiomeTags.HAS_SHEEP).addTag(BlueprintBiomeTags.IS_GRASSLAND).addTag(BiomeTags.IS_SAVANNA);
 		this.tag(EnvironmentalBiomeTags.HAS_COW).addTag(BlueprintBiomeTags.IS_GRASSLAND).addTag(BiomeTags.IS_SAVANNA);
