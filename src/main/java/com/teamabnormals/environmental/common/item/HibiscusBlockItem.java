@@ -12,9 +12,9 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 
 import javax.annotation.Nullable;
 
-public class HibiscusBlockitem extends StandingAndWallBlockItem {
+public class HibiscusBlockItem extends StandingAndWallBlockItem {
 
-	public HibiscusBlockitem(Block block, Block wallBlock, Properties properties) {
+	public HibiscusBlockItem(Block block, Block wallBlock, Properties properties) {
 		super(block, wallBlock, properties);
 	}
 
