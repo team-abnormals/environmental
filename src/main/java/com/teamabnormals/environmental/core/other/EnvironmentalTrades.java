@@ -1,15 +1,27 @@
 package com.teamabnormals.environmental.core.other;
 
+import com.google.common.collect.ImmutableMap;
 import com.teamabnormals.blueprint.core.util.TradeUtil;
 import com.teamabnormals.blueprint.core.util.TradeUtil.BlueprintTrade;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.npc.VillagerProfession;
+import net.minecraft.world.entity.npc.VillagerTrades;
+import net.minecraft.world.entity.npc.VillagerTrades.ItemListing;
+import net.minecraft.world.entity.npc.VillagerType;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+
+import java.util.HashMap;
+import java.util.List;
 
 @EventBusSubscriber(modid = Environmental.MOD_ID)
 public class EnvironmentalTrades {
@@ -63,12 +75,34 @@ public class EnvironmentalTrades {
 		TradeUtil.addVillagerTrades(event, VillagerProfession.BUTCHER, TradeUtil.NOVICE,
 				new BlueprintTrade(EnvironmentalItems.DUCK.get(), 18, 1, 16, 2)
 		);
+
 		TradeUtil.addVillagerTrades(event, VillagerProfession.BUTCHER, TradeUtil.APPRENTICE,
 				new BlueprintTrade(1, EnvironmentalItems.COOKED_DUCK.get(), 6, 16, 5)
 		);
+
 		TradeUtil.addVillagerTrades(event, VillagerProfession.BUTCHER, TradeUtil.JOURNEYMAN,
 				new BlueprintTrade(EnvironmentalItems.VENISON.get(), 12, 1, 16, 20),
 				new BlueprintTrade(1, EnvironmentalItems.COOKED_VENISON.get(), 5, 16, 10)
 		);
+
+		if (event.getType().equals(VillagerProfession.FISHERMAN)) {
+			Int2ObjectMap<List<ItemListing>> trades = event.getTrades();
+			for (ItemListing listing : trades.get(TradeUtil.MASTER)) {
+				if (listing instanceof VillagerTrades.EmeraldsForVillagerTypeItem trade) {
+					HashMap<VillagerType, Item> newTrades = new HashMap<>(trade.trades);
+
+					VillagerType marsh = Registry.VILLAGER_TYPE.get(new ResourceLocation(Environmental.MOD_ID, "marsh"));
+					if (!trade.trades.containsKey(marsh)) {
+						newTrades.put(marsh, Items.OAK_BOAT);
+					}
+
+					if (newTrades.get(VillagerType.SWAMP) == Items.DARK_OAK_BOAT) {
+						newTrades.replace(VillagerType.SWAMP, EnvironmentalItems.WILLOW_BOAT.getFirst().get());
+					}
+
+					trade.trades = ImmutableMap.copyOf(newTrades);
+				}
+			}
+		}
 	}
 }
