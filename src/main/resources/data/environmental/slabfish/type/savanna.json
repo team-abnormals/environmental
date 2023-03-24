@@ -13,7 +13,7 @@
     },
     {
       "type": "environmental:biome",
-      "tag": "forge:is_savanna"
+      "tag": "minecraft:is_savanna"
     }
   ]
 }
