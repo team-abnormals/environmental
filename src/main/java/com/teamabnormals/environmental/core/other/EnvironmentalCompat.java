@@ -50,6 +50,7 @@ public class EnvironmentalCompat {
 		DataUtil.registerCompostable(EnvironmentalItems.CHERRIES.get(), 0.30F);
 		DataUtil.registerCompostable(EnvironmentalItems.CHERRY_PIE.get(), 1.0F);
 		DataUtil.registerCompostable(EnvironmentalItems.APPLE_PIE.get(), 1.0F);
+		DataUtil.registerCompostable(EnvironmentalItems.TRUFFLE_PIE.get(), 1.0F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.CHERRY_CRATE.get(), 1.0F);
 
 		DataUtil.registerCompostable(EnvironmentalItems.CATTAIL_SEEDS.get(), 0.30F);
