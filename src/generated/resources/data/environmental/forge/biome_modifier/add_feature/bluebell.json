@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "#environmental:has_feature/has_bluebell",
+  "biomes": "#environmental:has_feature/bluebell",
   "features": [
     "environmental:flower_bluebell",
     "environmental:flower_bluebell_large"
