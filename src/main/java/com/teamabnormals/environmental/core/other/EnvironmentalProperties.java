@@ -10,6 +10,7 @@ import net.minecraft.world.level.material.MaterialColor;
 
 public class EnvironmentalProperties {
 	public static final WoodSetProperties WILLOW = WoodSetProperties.builder(MaterialColor.TERRACOTTA_GREEN).build();
+	public static final WoodSetProperties PINE = WoodSetProperties.builder(MaterialColor.TERRACOTTA_LIGHT_GRAY).build();
 	public static final WoodSetProperties CHERRY = WoodSetProperties.builder(MaterialColor.TERRACOTTA_RED).leavesColor(MaterialColor.COLOR_PINK).build();
 	public static final WoodSetProperties WISTERIA = WoodSetProperties.builder(MaterialColor.TERRACOTTA_WHITE).build();
 

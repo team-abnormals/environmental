@@ -7,6 +7,7 @@ import net.minecraft.world.item.Item;
 
 public class EnvironmentalItemTags {
 	public static final TagKey<Item> WILLOW_LOGS = itemTag("willow_logs");
+	public static final TagKey<Item> PINE_LOGS = itemTag("pine_logs");
 	public static final TagKey<Item> WISTERIA_LOGS = itemTag("wisteria_logs");
 	public static final TagKey<Item> CHERRY_LOGS = itemTag("cherry_logs");
 

@@ -14,6 +14,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Locale;
 
+import static com.teamabnormals.environmental.core.registry.EnvironmentalItems.*;
+
 public class EnvironmentalItemModelProvider extends ItemModelProvider {
 
 	public EnvironmentalItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
@@ -22,20 +24,33 @@ public class EnvironmentalItemModelProvider extends ItemModelProvider {
 
 	@Override
 	protected void registerModels() {
-		this.koiModels();
+		this.generatedItem(
+				PINE_BOAT.getFirst().get(), PINE_BOAT.getSecond().get(), PINE_FURNACE_BOAT.get(), LARGE_PINE_BOAT.get()
+		);
+
+		this.koiBuckets();
 	}
 
-	private void generated(ItemLike item) {
-		basicModel(item, "generated");
+	private void generatedItem(ItemLike... items) {
+		for (ItemLike item : items)
+			item(item, "generated");
 	}
 
-	private void handheld(ItemLike item) {
-		basicModel(item, "handheld");
+	private void handheldItem(ItemLike... items) {
+		for (ItemLike item : items)
+			item(item, "handheld");
 	}
 
-	private void basicModel(ItemLike item, String type) {
+	private void item(ItemLike item, String type) {
 		ResourceLocation itemName = ForgeRegistries.ITEMS.getKey(item.asItem());
 		withExistingParent(itemName.getPath(), "item/" + type).texture("layer0", new ResourceLocation(this.modid, "item/" + itemName.getPath()));
+	}
+
+	private void spawnEggItem(ItemLike... items) {
+		for (ItemLike item : items) {
+			ResourceLocation itemName = ForgeRegistries.ITEMS.getKey(item.asItem());
+			withExistingParent(itemName.getPath(), "item/template_spawn_egg");
+		}
 	}
 
 	private void blockItem(Block block) {
@@ -43,7 +58,7 @@ public class EnvironmentalItemModelProvider extends ItemModelProvider {
 		this.getBuilder(name.getPath()).parent(new UncheckedModelFile(new ResourceLocation(this.modid, "block/" + name.getPath())));
 	}
 
-	private void koiModels() {
+	private void koiBuckets() {
 		for (KoiBreed breed : KoiBreed.values()) {
 			String path = "item/" + ForgeRegistries.ITEMS.getKey(EnvironmentalItems.KOI_BUCKET.get()).getPath() + "/" + breed.name().toLowerCase(Locale.ROOT);
 			withExistingParent(path, "item/generated").texture("layer0", new ResourceLocation(this.modid, path));

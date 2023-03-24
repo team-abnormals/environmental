@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "environmental:block/pine_slab"
+    },
+    "type=double": {
+      "model": "environmental:block/pine_planks"
+    },
+    "type=top": {
+      "model": "environmental:block/pine_slab_top"
+    }
+  }
+}

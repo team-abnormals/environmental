@@ -1,6 +1,7 @@
 {
   "values": [
     "environmental:willow_button",
+    "environmental:pine_button",
     "environmental:wisteria_button",
     "environmental:cherry_button"
   ]

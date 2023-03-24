@@ -6,6 +6,7 @@ import com.teamabnormals.environmental.client.renderer.entity.*;
 import com.teamabnormals.environmental.client.resources.SlabfishSpriteUploader;
 import com.teamabnormals.environmental.common.network.message.*;
 import com.teamabnormals.environmental.common.slabfish.SlabfishLoader;
+import com.teamabnormals.environmental.core.data.client.EnvironmentalBlockStateProvider;
 import com.teamabnormals.environmental.core.data.client.EnvironmentalItemModelProvider;
 import com.teamabnormals.environmental.core.data.server.EnvironmentalLootTableProvider;
 import com.teamabnormals.environmental.core.data.server.EnvironmentalRecipeProvider;
@@ -133,6 +134,7 @@ public class Environmental {
 
 		boolean includeClient = event.includeClient();
 		generator.addProvider(includeClient, new EnvironmentalItemModelProvider(generator, helper));
+		generator.addProvider(includeClient, new EnvironmentalBlockStateProvider(generator, helper));
 	}
 
 	private void setupPlayMessages() {

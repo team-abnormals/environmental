@@ -1,0 +1,14 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "environmental:block/pine_boards_horizontal",
+      "y": 270
+    },
+    "axis=y": {
+      "model": "environmental:block/pine_boards"
+    },
+    "axis=z": {
+      "model": "environmental:block/pine_boards_horizontal"
+    }
+  }
+}

@@ -1,6 +1,7 @@
 {
   "values": [
     "environmental:willow_door",
+    "environmental:pine_door",
     "environmental:wisteria_door",
     "environmental:cherry_door"
   ]

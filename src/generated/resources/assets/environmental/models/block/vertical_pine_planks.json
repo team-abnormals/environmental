@@ -1,0 +1,6 @@
+{
+  "parent": "blueprint:block/vertical_planks",
+  "textures": {
+    "all": "environmental:block/pine_planks"
+  }
+}

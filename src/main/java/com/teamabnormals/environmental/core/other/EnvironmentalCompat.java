@@ -43,6 +43,10 @@ public class EnvironmentalCompat {
 		DataUtil.registerCompostable(EnvironmentalBlocks.WILLOW_LEAF_CARPET.get(), 0.30F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.HANGING_WILLOW_LEAVES.get(), 0.30F);
 
+		DataUtil.registerCompostable(EnvironmentalBlocks.PINE_LEAVES.get(), 0.30F);
+		DataUtil.registerCompostable(EnvironmentalBlocks.PINE_SAPLING.get(), 0.30F);
+		DataUtil.registerCompostable(EnvironmentalBlocks.PINE_LEAF_CARPET.get(), 0.30F);
+
 		DataUtil.registerCompostable(EnvironmentalBlocks.CHERRY_LEAVES.get(), 0.30F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.CHERRY_SAPLING.get(), 0.30F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.CHERRY_LEAF_CARPET.get(), 0.30F);
@@ -175,6 +179,27 @@ public class EnvironmentalCompat {
 		DataUtil.registerFlammable(EnvironmentalBlocks.WILLOW_HEDGE.get(), 5, 20);
 		DataUtil.registerFlammable(EnvironmentalBlocks.WILLOW_LEAF_PILE.get(), 30, 60);
 		DataUtil.registerFlammable(EnvironmentalBlocks.WILLOW_BOARDS.get(), 5, 20);
+
+		DataUtil.registerFlammable(EnvironmentalBlocks.PINE_LEAVES.get(), 30, 60);
+		DataUtil.registerFlammable(EnvironmentalBlocks.PINE_LOG.get(), 5, 5);
+		DataUtil.registerFlammable(EnvironmentalBlocks.PINE_WOOD.get(), 5, 5);
+		DataUtil.registerFlammable(EnvironmentalBlocks.STRIPPED_PINE_LOG.get(), 5, 5);
+		DataUtil.registerFlammable(EnvironmentalBlocks.STRIPPED_PINE_WOOD.get(), 5, 5);
+		DataUtil.registerFlammable(EnvironmentalBlocks.PINE_PLANKS.get(), 5, 20);
+		DataUtil.registerFlammable(EnvironmentalBlocks.PINE_SLAB.get(), 5, 20);
+		DataUtil.registerFlammable(EnvironmentalBlocks.PINE_STAIRS.get(), 5, 20);
+		DataUtil.registerFlammable(EnvironmentalBlocks.PINE_FENCE.get(), 5, 20);
+		DataUtil.registerFlammable(EnvironmentalBlocks.PINE_FENCE_GATE.get(), 5, 20);
+		DataUtil.registerFlammable(EnvironmentalBlocks.VERTICAL_PINE_PLANKS.get(), 5, 20);
+		DataUtil.registerFlammable(EnvironmentalBlocks.PINE_LEAF_CARPET.get(), 30, 60);
+		DataUtil.registerFlammable(EnvironmentalBlocks.PINE_VERTICAL_SLAB.get(), 5, 20);
+		DataUtil.registerFlammable(EnvironmentalBlocks.PINE_BOOKSHELF.get(), 30, 20);
+		DataUtil.registerFlammable(EnvironmentalBlocks.PINE_BEEHIVE.get(), 5, 20);
+		DataUtil.registerFlammable(EnvironmentalBlocks.PINE_POST.get(), 5, 20);
+		DataUtil.registerFlammable(EnvironmentalBlocks.STRIPPED_PINE_POST.get(), 5, 20);
+		DataUtil.registerFlammable(EnvironmentalBlocks.PINE_HEDGE.get(), 5, 20);
+		DataUtil.registerFlammable(EnvironmentalBlocks.PINE_LEAF_PILE.get(), 30, 60);
+		DataUtil.registerFlammable(EnvironmentalBlocks.PINE_BOARDS.get(), 5, 20);
 
 		DataUtil.registerFlammable(EnvironmentalBlocks.CHERRY_LEAVES.get(), 30, 60);
 		DataUtil.registerFlammable(EnvironmentalBlocks.CHERRY_LOG.get(), 5, 5);

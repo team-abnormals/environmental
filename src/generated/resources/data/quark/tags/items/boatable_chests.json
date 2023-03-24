@@ -1,6 +1,7 @@
 {
   "values": [
     "environmental:willow_chest",
+    "environmental:pine_chest",
     "environmental:wisteria_chest",
     "environmental:cherry_chest"
   ]
