@@ -22,9 +22,10 @@ public class DeerMarkingsRenderLayer<E extends Deer, M extends EntityModel<E>> e
 
 	@Override
 	public void render(PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn, E entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-		if (entity.getCoatType() == 0) return;
-
 		DeerCoatTypes coatType = DeerCoatTypes.byId(entity.getCoatType());
+		if (coatType == DeerCoatTypes.NONE)
+			return;
+
 		VertexConsumer builder = bufferIn.getBuffer(RenderType.entityCutoutNoCull(coatType.getTexture()));
 		this.getParentModel().setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 		this.getParentModel().renderToBuffer(matrixStackIn, builder, packedLightIn, LivingEntityRenderer.getOverlayCoords(entity, 0.0F), 1.0F, 1.0F, 1.0F, 1.0F);

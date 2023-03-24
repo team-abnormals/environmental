@@ -1,7 +1,7 @@
 package com.teamabnormals.environmental.common.entity.animal.deer;
 
 public enum DeerCoatColors {
-	CREAMY(0), CHESTNUT(1), GRAY(2), HOLIDAY(3);
+	CREAMY(0), CHESTNUT(1), GRAY(2);
 
 	private static final DeerCoatColors[] VALUES = values();
 	private final int id;
