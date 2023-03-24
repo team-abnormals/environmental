@@ -33,7 +33,7 @@ public class TasselflowerPatchFeature extends Feature<NoneFeatureConfiguration> 
 		int flowers = 0;
 		BlockPos.MutableBlockPos blockpos = new BlockPos.MutableBlockPos();
 
-		for(int i = 0; i < 128; ++i) {
+		for (int i = 0; i < 128; ++i) {
 			float f = random.nextFloat() * 4.0F;
 			float f1 = random.nextFloat() * 4.0F;
 			f *= random.nextBoolean() ? -f : f;

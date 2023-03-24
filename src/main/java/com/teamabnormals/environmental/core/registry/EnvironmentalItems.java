@@ -2,7 +2,6 @@ package com.teamabnormals.environmental.core.registry;
 
 import com.mojang.datafixers.util.Pair;
 import com.teamabnormals.blueprint.common.item.BlueprintRecordItem;
-import com.teamabnormals.blueprint.common.item.FuelItem;
 import com.teamabnormals.blueprint.core.util.registry.AbstractSubRegistryHelper;
 import com.teamabnormals.blueprint.core.util.registry.ItemSubRegistryHelper;
 import com.teamabnormals.environmental.common.item.*;
