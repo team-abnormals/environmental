@@ -3,6 +3,7 @@ package com.teamabnormals.environmental.core.other;
 import com.google.common.collect.Sets;
 import com.teamabnormals.blueprint.common.world.storage.tracking.IDataManager;
 import com.teamabnormals.blueprint.core.util.MathUtil;
+import com.teamabnormals.environmental.common.block.HangingLeavesBlock;
 import com.teamabnormals.environmental.common.block.HangingWisteriaLeavesBlock;
 import com.teamabnormals.environmental.common.entity.ai.goal.HuntTruffleGoal;
 import com.teamabnormals.environmental.common.entity.ai.goal.TemptGoldenCarrotGoal;
@@ -77,7 +78,7 @@ public class EnvironmentalEvents {
 
 	@SubscribeEvent
 	public static void onPlayerBreak(PlayerEvent.BreakSpeed event) {
-		if (event.getState().getBlock() instanceof HangingWisteriaLeavesBlock && event.getEntity().getMainHandItem().is(Tags.Items.SHEARS))
+		if (event.getState().getBlock() instanceof HangingLeavesBlock && event.getEntity().getMainHandItem().is(Tags.Items.SHEARS))
 			event.setNewSpeed(15.0F);
 	}
 
