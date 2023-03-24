@@ -25,7 +25,7 @@ public class MudBallItem extends Item {
 			itemstack.shrink(1);
 		}
 
-		worldIn.playSound(null, playerIn.getX(), playerIn.getY(), playerIn.getZ(), SoundEvents.SLIME_BLOCK_BREAK, SoundSource.NEUTRAL, 0.5F, 0.4F / (worldIn.getRandom().nextFloat() * 0.4F + 0.8F));
+		worldIn.playSound(null, playerIn.getX(), playerIn.getY(), playerIn.getZ(), SoundEvents.MUD_HIT, SoundSource.NEUTRAL, 0.5F, 0.4F / (worldIn.getRandom().nextFloat() * 0.4F + 0.8F));
 		if (!worldIn.isClientSide) {
 			ThrownMudBall mudballentity = new ThrownMudBall(worldIn, playerIn);
 			mudballentity.setItem(new ItemStack(EnvironmentalItems.MUD_BALL.get()));
