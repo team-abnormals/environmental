@@ -29,6 +29,7 @@ public class EnvironmentalItemTagsProvider extends ItemTagsProvider {
 	@Override
 	public void addTags() {
 		this.copy(EnvironmentalBlockTags.WILLOW_LOGS, EnvironmentalItemTags.WILLOW_LOGS);
+		this.copy(EnvironmentalBlockTags.PINE_LOGS, EnvironmentalItemTags.PINE_LOGS);
 		this.copy(EnvironmentalBlockTags.WISTERIA_LOGS, EnvironmentalItemTags.WISTERIA_LOGS);
 		this.copy(EnvironmentalBlockTags.CHERRY_LOGS, EnvironmentalItemTags.CHERRY_LOGS);
 		this.tag(EnvironmentalItemTags.DUCK_FOOD).add(Items.SEAGRASS, EnvironmentalItems.DUCKWEED.get()).addOptionalTag(new ResourceLocation("forge", "crops/rice"));
@@ -62,10 +63,10 @@ public class EnvironmentalItemTagsProvider extends ItemTagsProvider {
 		this.copy(BlockTags.STANDING_SIGNS, ItemTags.SIGNS);
 		this.copy(BlockTags.OVERWORLD_NATURAL_LOGS, ItemTags.OVERWORLD_NATURAL_LOGS);
 		this.copy(BlockTags.DAMPENS_VIBRATIONS, ItemTags.DAMPENS_VIBRATIONS);
-		this.tag(ItemTags.BOATS).add(WILLOW_BOAT.getFirst().get(), WISTERIA_BOAT.getFirst().get(), CHERRY_BOAT.getFirst().get());
-		this.tag(ItemTags.CHEST_BOATS).add(WILLOW_BOAT.getSecond().get(), WISTERIA_BOAT.getSecond().get(), CHERRY_BOAT.getSecond().get());
-		this.tag(BlueprintItemTags.FURNACE_BOATS).add(WILLOW_FURNACE_BOAT.get(), WISTERIA_FURNACE_BOAT.get(), CHERRY_FURNACE_BOAT.get());
-		this.tag(BlueprintItemTags.LARGE_BOATS).add(LARGE_WILLOW_BOAT.get(), LARGE_WISTERIA_BOAT.get(), LARGE_CHERRY_BOAT.get());
+		this.tag(ItemTags.BOATS).add(WILLOW_BOAT.getFirst().get(), PINE_BOAT.getFirst().get(), WISTERIA_BOAT.getFirst().get(), CHERRY_BOAT.getFirst().get());
+		this.tag(ItemTags.CHEST_BOATS).add(WILLOW_BOAT.getSecond().get(), PINE_BOAT.getSecond().get(), WISTERIA_BOAT.getSecond().get(), CHERRY_BOAT.getSecond().get());
+		this.tag(BlueprintItemTags.FURNACE_BOATS).add(WILLOW_FURNACE_BOAT.get(), PINE_FURNACE_BOAT.get(), WISTERIA_FURNACE_BOAT.get(), CHERRY_FURNACE_BOAT.get());
+		this.tag(BlueprintItemTags.LARGE_BOATS).add(LARGE_WILLOW_BOAT.get(), LARGE_PINE_BOAT.get(), LARGE_WISTERIA_BOAT.get(), LARGE_CHERRY_BOAT.get());
 		this.tag(ItemTags.MUSIC_DISCS).add(MUSIC_DISC_LEAVING_HOME.get(), MUSIC_DISC_SLABRAVE.get());
 		this.tag(ItemTags.FISHES).add(KOI.get());
 
@@ -73,7 +74,7 @@ public class EnvironmentalItemTagsProvider extends ItemTagsProvider {
 		this.copy(Tags.Blocks.CHESTS_TRAPPED, Tags.Items.CHESTS_TRAPPED);
 		this.copy(Tags.Blocks.FENCE_GATES_WOODEN, Tags.Items.FENCE_GATES_WOODEN);
 		this.copy(Tags.Blocks.FENCES_WOODEN, Tags.Items.FENCES_WOODEN);
-		this.tag(Tags.Items.BOOKSHELVES).add(WILLOW_BOOKSHELF.get().asItem(), WISTERIA_BOOKSHELF.get().asItem(), CHERRY_BOOKSHELF.get().asItem());
+		this.tag(Tags.Items.BOOKSHELVES).add(WILLOW_BOOKSHELF.get().asItem(), PINE_BOOKSHELF.get().asItem(), WISTERIA_BOOKSHELF.get().asItem(), CHERRY_BOOKSHELF.get().asItem());
 		this.tag(EnvironmentalItemTags.FRUITS).addTag(EnvironmentalItemTags.FRUITS_CHERRY);
 		this.tag(EnvironmentalItemTags.FRUITS_CHERRY).add(CHERRIES.get());
 		this.tag(EnvironmentalItemTags.RAW_DUCK).add(DUCK.get());
@@ -88,7 +89,7 @@ public class EnvironmentalItemTagsProvider extends ItemTagsProvider {
 		this.copy(BlueprintBlockTags.HEDGES, BlueprintItemTags.HEDGES);
 		this.copy(BlueprintBlockTags.VERTICAL_SLABS, BlueprintItemTags.VERTICAL_SLABS);
 		this.copy(BlueprintBlockTags.WOODEN_VERTICAL_SLABS, BlueprintItemTags.WOODEN_VERTICAL_SLABS);
-		this.tag(BlueprintItemTags.BOATABLE_CHESTS).add(WILLOW_CHESTS.getFirst().get().asItem(), WISTERIA_CHESTS.getFirst().get().asItem(), CHERRY_CHESTS.getFirst().get().asItem());
-		this.tag(BlueprintItemTags.REVERTABLE_CHESTS).add(WILLOW_CHESTS.getFirst().get().asItem(), WISTERIA_CHESTS.getFirst().get().asItem(), CHERRY_CHESTS.getFirst().get().asItem());
+		this.tag(BlueprintItemTags.BOATABLE_CHESTS).add(WILLOW_CHESTS.getFirst().get().asItem(), PINE_CHESTS.getFirst().get().asItem(), WISTERIA_CHESTS.getFirst().get().asItem(), CHERRY_CHESTS.getFirst().get().asItem());
+		this.tag(BlueprintItemTags.REVERTABLE_CHESTS).add(WILLOW_CHESTS.getFirst().get().asItem(), PINE_CHESTS.getFirst().get().asItem(), WISTERIA_CHESTS.getFirst().get().asItem(), CHERRY_CHESTS.getFirst().get().asItem());
 	}
 }

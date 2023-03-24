@@ -1,6 +1,7 @@
 {
   "values": [
     "environmental:willow_wall_sign",
+    "environmental:pine_wall_sign",
     "environmental:wisteria_wall_sign",
     "environmental:cherry_wall_sign"
   ]

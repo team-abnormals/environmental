@@ -1,0 +1,6 @@
+{
+  "parent": "blueprint:block/hedge_side",
+  "textures": {
+    "leaf": "environmental:block/pine_leaves"
+  }
+}

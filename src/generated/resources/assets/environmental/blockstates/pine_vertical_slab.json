@@ -1,0 +1,26 @@
+{
+  "variants": {
+    "type=double": {
+      "model": "environmental:block/pine_planks"
+    },
+    "type=east": {
+      "model": "environmental:block/pine_vertical_slab",
+      "uvlock": true,
+      "y": 90
+    },
+    "type=north": {
+      "model": "environmental:block/pine_vertical_slab",
+      "uvlock": true
+    },
+    "type=south": {
+      "model": "environmental:block/pine_vertical_slab",
+      "uvlock": true,
+      "y": 180
+    },
+    "type=west": {
+      "model": "environmental:block/pine_vertical_slab",
+      "uvlock": true,
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "boatload"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shapeless",
+        "group": "furnace_boat",
+        "ingredients": [
+          {
+            "item": "minecraft:furnace"
+          },
+          {
+            "item": "environmental:pine_boat"
+          }
+        ],
+        "result": {
+          "item": "environmental:pine_furnace_boat"
+        }
+      }
+    }
+  ]
+}

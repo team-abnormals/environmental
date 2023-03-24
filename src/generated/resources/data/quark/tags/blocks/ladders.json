@@ -1,6 +1,7 @@
 {
   "values": [
     "environmental:willow_ladder",
+    "environmental:pine_ladder",
     "environmental:wisteria_ladder",
     "environmental:cherry_ladder"
   ]

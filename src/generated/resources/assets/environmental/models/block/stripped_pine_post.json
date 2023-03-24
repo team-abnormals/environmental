@@ -1,0 +1,6 @@
+{
+  "parent": "blueprint:block/post",
+  "textures": {
+    "texture": "environmental:block/stripped_pine_log"
+  }
+}

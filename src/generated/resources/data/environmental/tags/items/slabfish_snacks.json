@@ -12,6 +12,10 @@
     {
       "id": "endergetic:bolloom_fruit",
       "required": false
+    },
+    {
+      "id": "caverns_and_chasms:bejeweled_apple",
+      "required": false
     }
   ]
 }

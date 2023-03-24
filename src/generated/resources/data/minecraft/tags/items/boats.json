@@ -1,6 +1,7 @@
 {
   "values": [
     "environmental:willow_boat",
+    "environmental:pine_boat",
     "environmental:wisteria_boat",
     "environmental:cherry_boat"
   ]

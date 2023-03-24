@@ -200,6 +200,37 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.add(WILLOW_LEAVES.get(), (block) -> createLeavesDrops(block, WILLOW_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 			this.add(HANGING_WILLOW_LEAVES.get(), BlockLoot::createShearsOnlyDrop);
 
+			this.dropSelf(PINE_PLANKS.get());
+			this.dropSelf(VERTICAL_PINE_PLANKS.get());
+			this.dropSelf(PINE_LOG.get());
+			this.dropSelf(PINE_WOOD.get());
+			this.dropSelf(STRIPPED_PINE_LOG.get());
+			this.dropSelf(STRIPPED_PINE_WOOD.get());
+			this.dropSelf(PINE_SIGNS.getFirst().get());
+			this.dropSelf(PINE_PRESSURE_PLATE.get());
+			this.dropSelf(PINE_TRAPDOOR.get());
+			this.dropSelf(PINE_BUTTON.get());
+			this.dropSelf(PINE_STAIRS.get());
+			this.dropSelf(PINE_FENCE.get());
+			this.dropSelf(PINE_FENCE_GATE.get());
+			this.dropSelf(PINE_BOARDS.get());
+			this.dropSelf(PINE_POST.get());
+			this.dropSelf(STRIPPED_PINE_POST.get());
+			this.dropSelf(PINE_HEDGE.get());
+			this.dropSelf(PINE_LEAF_CARPET.get());
+			this.add(PINE_LEAF_PILE.get(), EnvironmentalBlockLoot::createLeafPileDrops);
+			this.dropSelf(PINE_SAPLING.get());
+			this.dropPottedContents(POTTED_PINE_SAPLING.get());
+			this.dropSelf(PINE_LADDER.get());
+			this.add(PINE_SLAB.get(), BlockLoot::createSlabItemTable);
+			this.add(PINE_VERTICAL_SLAB.get(), EnvironmentalBlockLoot::createVerticalSlabItemTable);
+			this.add(PINE_DOOR.get(), BlockLoot::createDoorTable);
+			this.add(PINE_BEEHIVE.get(), BlockLoot::createBeeHiveDrop);
+			this.add(PINE_CHESTS.getFirst().get(), BlockLoot::createNameableBlockEntityTable);
+			this.add(PINE_CHESTS.getSecond().get(), BlockLoot::createNameableBlockEntityTable);
+			this.add(PINE_BOOKSHELF.get(), (block) -> createSingleItemTableWithSilkTouch(block, Items.BOOK, ConstantValue.exactly(3.0F)));
+			this.add(PINE_LEAVES.get(), (block) -> createLeavesDrops(block, PINE_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+			
 			this.dropSelf(CHERRY_PLANKS.get());
 			this.dropSelf(VERTICAL_CHERRY_PLANKS.get());
 			this.dropSelf(CHERRY_LOG.get());
