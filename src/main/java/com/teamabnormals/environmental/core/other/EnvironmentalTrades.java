@@ -91,11 +91,6 @@ public class EnvironmentalTrades {
 				if (listing instanceof VillagerTrades.EmeraldsForVillagerTypeItem trade) {
 					HashMap<VillagerType, Item> newTrades = new HashMap<>(trade.trades);
 
-					VillagerType marsh = Registry.VILLAGER_TYPE.get(new ResourceLocation(Environmental.MOD_ID, "marsh"));
-					if (!trade.trades.containsKey(marsh)) {
-						newTrades.put(marsh, Items.OAK_BOAT);
-					}
-
 					if (newTrades.get(VillagerType.SWAMP) == Items.DARK_OAK_BOAT) {
 						newTrades.replace(VillagerType.SWAMP, EnvironmentalItems.WILLOW_BOAT.getFirst().get());
 					}

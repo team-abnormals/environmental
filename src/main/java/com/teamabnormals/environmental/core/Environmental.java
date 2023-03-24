@@ -99,8 +99,8 @@ public class Environmental {
 	private void commonSetup(FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
 			EnvironmentalCompat.registerCompat();
-			EnvironmentalEntityTypes.registerSpawns();
 			EnvironmentalVillagers.registerVillagerTypes();
+			EnvironmentalEntityTypes.registerSpawns();
 			EnvironmentalMobEffects.registerBrewingRecipes();
 		});
 	}
