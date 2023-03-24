@@ -77,12 +77,12 @@ public class EnvironmentalItems {
 	public static final RegistryObject<Item> SLABFISH_BUCKET = HELPER.createItem("slabfish_bucket", () -> new SlabfishBucketItem(new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(1)));
 	public static final RegistryObject<Item> KOI_BUCKET = HELPER.createItem("koi_bucket", () -> new KoiBucketItem(new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(1)));
 
-	public static final RegistryObject<Item> YELLOW_HIBISCUS = HELPER.createItem("yellow_hibiscus", () -> new HibiscusBlockitem(EnvironmentalBlocks.YELLOW_HIBISCUS.get(), EnvironmentalBlocks.YELLOW_WALL_HIBISCUS.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
-	public static final RegistryObject<Item> ORANGE_HIBISCUS = HELPER.createItem("orange_hibiscus", () -> new HibiscusBlockitem(EnvironmentalBlocks.ORANGE_HIBISCUS.get(), EnvironmentalBlocks.ORANGE_WALL_HIBISCUS.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
-	public static final RegistryObject<Item> RED_HIBISCUS = HELPER.createItem("red_hibiscus", () -> new HibiscusBlockitem(EnvironmentalBlocks.RED_HIBISCUS.get(), EnvironmentalBlocks.RED_WALL_HIBISCUS.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
-	public static final RegistryObject<Item> PINK_HIBISCUS = HELPER.createItem("pink_hibiscus", () -> new HibiscusBlockitem(EnvironmentalBlocks.PINK_HIBISCUS.get(), EnvironmentalBlocks.PINK_WALL_HIBISCUS.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
-	public static final RegistryObject<Item> MAGENTA_HIBISCUS = HELPER.createItem("magenta_hibiscus", () -> new HibiscusBlockitem(EnvironmentalBlocks.MAGENTA_HIBISCUS.get(), EnvironmentalBlocks.MAGENTA_WALL_HIBISCUS.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
-	public static final RegistryObject<Item> PURPLE_HIBISCUS = HELPER.createItem("purple_hibiscus", () -> new HibiscusBlockitem(EnvironmentalBlocks.PURPLE_HIBISCUS.get(), EnvironmentalBlocks.PURPLE_WALL_HIBISCUS.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
+	public static final RegistryObject<Item> YELLOW_HIBISCUS = HELPER.createItem("yellow_hibiscus", () -> new HibiscusBlockItem(EnvironmentalBlocks.YELLOW_HIBISCUS.get(), EnvironmentalBlocks.YELLOW_WALL_HIBISCUS.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
+	public static final RegistryObject<Item> ORANGE_HIBISCUS = HELPER.createItem("orange_hibiscus", () -> new HibiscusBlockItem(EnvironmentalBlocks.ORANGE_HIBISCUS.get(), EnvironmentalBlocks.ORANGE_WALL_HIBISCUS.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
+	public static final RegistryObject<Item> RED_HIBISCUS = HELPER.createItem("red_hibiscus", () -> new HibiscusBlockItem(EnvironmentalBlocks.RED_HIBISCUS.get(), EnvironmentalBlocks.RED_WALL_HIBISCUS.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
+	public static final RegistryObject<Item> PINK_HIBISCUS = HELPER.createItem("pink_hibiscus", () -> new HibiscusBlockItem(EnvironmentalBlocks.PINK_HIBISCUS.get(), EnvironmentalBlocks.PINK_WALL_HIBISCUS.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
+	public static final RegistryObject<Item> MAGENTA_HIBISCUS = HELPER.createItem("magenta_hibiscus", () -> new HibiscusBlockItem(EnvironmentalBlocks.MAGENTA_HIBISCUS.get(), EnvironmentalBlocks.MAGENTA_WALL_HIBISCUS.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
+	public static final RegistryObject<Item> PURPLE_HIBISCUS = HELPER.createItem("purple_hibiscus", () -> new HibiscusBlockItem(EnvironmentalBlocks.PURPLE_HIBISCUS.get(), EnvironmentalBlocks.PURPLE_WALL_HIBISCUS.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
 
 	public static final RegistryObject<ForgeSpawnEggItem> SLABFISH_SPAWN_EGG = HELPER.createSpawnEggItem("slabfish", EnvironmentalEntityTypes.SLABFISH::get, 6263617, 13940616);
 	public static final RegistryObject<ForgeSpawnEggItem> DUCK_SPAWN_EGG = HELPER.createSpawnEggItem("duck", EnvironmentalEntityTypes.DUCK::get, 1138489, 16754947);
@@ -90,8 +90,8 @@ public class EnvironmentalItems {
 	public static final RegistryObject<ForgeSpawnEggItem> REINDEER_SPAWN_EGG = HELPER.createSpawnEggItem("reindeer", EnvironmentalEntityTypes.REINDEER::get, 7360069, 15388873);
 	public static final RegistryObject<ForgeSpawnEggItem> YAK_SPAWN_EGG = HELPER.createSpawnEggItem("yak", EnvironmentalEntityTypes.YAK::get, 5392966, 8607802);
 	public static final RegistryObject<ForgeSpawnEggItem> KOI_SPAWN_EGG = HELPER.createSpawnEggItem("koi", EnvironmentalEntityTypes.KOI::get, 5392966, 16754947);
-	//public static final RegistryObject<ForgeSpawnEggItem> TAPIR_SPAWN_EGG = HELPER.createSpawnEggItem("tapir", EnvironmentalEntityTypes.TAPIR::get, 0x38373D, 0xC6CACE);
-	//public static final RegistryObject<ForgeSpawnEggItem> FENNEC_FOX_SPAWN_EGG = HELPER.createSpawnEggItem("fennec_fox", EnvironmentalEntityTypes.FENNEC_FOX::get, 0xFBDB9E, 0xFFFFFF);
+	public static final RegistryObject<ForgeSpawnEggItem> TAPIR_SPAWN_EGG = HELPER.createSpawnEggItem("tapir", EnvironmentalEntityTypes.TAPIR::get, 0x38373D, 0xC6CACE);
+	public static final RegistryObject<ForgeSpawnEggItem> FENNEC_FOX_SPAWN_EGG = HELPER.createSpawnEggItem("fennec_fox", EnvironmentalEntityTypes.FENNEC_FOX::get, 0xFBDB9E, 0xFFFFFF);
 
 	public static final class EnvironmentalFoods {
 		public static final FoodProperties CHERRIES = new FoodProperties.Builder().nutrition(1).saturationMod(0.1F).fast().build();
