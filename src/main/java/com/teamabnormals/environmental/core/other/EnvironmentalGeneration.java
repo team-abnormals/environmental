@@ -8,7 +8,7 @@ import net.minecraft.world.level.levelgen.GenerationStep;
 
 public class EnvironmentalGeneration {
 
-	public static void withMarshFeatures(BiomeGenerationSettings.Builder generation) {
+	public static void marsh(BiomeGenerationSettings.Builder generation) {
 		BiomeDefaultFeatures.addFossilDecoration(generation);
 		OverworldBiomes.globalOverworldGeneration(generation);
 		BiomeDefaultFeatures.addSavannaGrass(generation);
@@ -29,7 +29,7 @@ public class EnvironmentalGeneration {
 		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_GIANT_TALL_GRASS_MARSH.getHolder().get());
 	}
 
-	public static void withBaseBlossomFeatures(BiomeGenerationSettings.Builder generation) {
+	public static void blossomWoods(BiomeGenerationSettings.Builder generation, boolean valley) {
 		OverworldBiomes.globalOverworldGeneration(generation);
 		BiomeDefaultFeatures.addSavannaGrass(generation);
 		BiomeDefaultFeatures.addDefaultOres(generation);
@@ -41,25 +41,20 @@ public class EnvironmentalGeneration {
 		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_TULIPS.getHolder().get());
 		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_GRASS_BLOSSOM_WOODS.getHolder().get());
 
-	}
-
-	public static void withBlossomWoodsFeatures(BiomeGenerationSettings.Builder generation) {
-		EnvironmentalGeneration.withBaseBlossomFeatures(generation);
-		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.CHERRY_TREES_BLOSSOM_WOODS.getHolder().get());
-		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.BIRCH_TREES_BLOSSOM_WOODS.getHolder().get());
-		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FALLEN_CHERRY_LEAVES_BLOSSOM_WOODS.getHolder().get());
-		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.BAMBOO_BLOSSOM_WOODS.getHolder().get());
-		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.BAMBOO_LIGHT_BLOSSOM_WOODS.getHolder().get());
-		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_RED_LOTUS.getHolder().get());
-	}
-
-	public static void withBlossomValleysFeatures(BiomeGenerationSettings.Builder generation) {
-		EnvironmentalGeneration.withBaseBlossomFeatures(generation);
-		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.CHERRY_TREES_BLOSSOM_VALLEYS.getHolder().get());
-		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.BIRCH_TREES_BLOSSOM_VALLEYS.getHolder().get());
-		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FALLEN_CHERRY_LEAVES_BLOSSOM_VALLEYS.getHolder().get());
-		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.BAMBOO_BLOSSOM_VALLEYS.getHolder().get());
-		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.BAMBOO_LIGHT_BLOSSOM_VALLEYS.getHolder().get());
-		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_WHITE_LOTUS.getHolder().get());
+		if (!valley) {
+			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.CHERRY_TREES_BLOSSOM_WOODS.getHolder().get());
+			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.BIRCH_TREES_BLOSSOM_WOODS.getHolder().get());
+			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FALLEN_CHERRY_LEAVES_BLOSSOM_WOODS.getHolder().get());
+			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.BAMBOO_BLOSSOM_WOODS.getHolder().get());
+			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.BAMBOO_LIGHT_BLOSSOM_WOODS.getHolder().get());
+			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_RED_LOTUS.getHolder().get());
+		} else {
+			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.CHERRY_TREES_BLOSSOM_VALLEYS.getHolder().get());
+			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.BIRCH_TREES_BLOSSOM_VALLEYS.getHolder().get());
+			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FALLEN_CHERRY_LEAVES_BLOSSOM_VALLEYS.getHolder().get());
+			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.BAMBOO_BLOSSOM_VALLEYS.getHolder().get());
+			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.BAMBOO_LIGHT_BLOSSOM_VALLEYS.getHolder().get());
+			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_WHITE_LOTUS.getHolder().get());
+		}
 	}
 }
