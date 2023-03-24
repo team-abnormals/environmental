@@ -94,7 +94,7 @@ public class EnvironmentalItems {
 	//public static final RegistryObject<ForgeSpawnEggItem> FENNEC_FOX_SPAWN_EGG = HELPER.createSpawnEggItem("fennec_fox", EnvironmentalEntityTypes.FENNEC_FOX::get, 0xFBDB9E, 0xFFFFFF);
 
 	public static final class EnvironmentalFoods {
-		public static final FoodProperties CHERRIES = new FoodProperties.Builder().nutrition(1).saturationMod(0.2F).fast().build();
+		public static final FoodProperties CHERRIES = new FoodProperties.Builder().nutrition(1).saturationMod(0.1F).fast().build();
 		public static final FoodProperties CHERRY_PIE = new FoodProperties.Builder().nutrition(6).saturationMod(0.3F).build();
 
 		public static final FoodProperties VENISON = (new FoodProperties.Builder()).nutrition(2).saturationMod(0.3F).meat().build();
