@@ -84,26 +84,6 @@
             },
             "trigger": "minecraft:consume_item"
           },
-          "environmental:truffle_mash": {
-            "conditions": {
-              "item": {
-                "items": [
-                  "environmental:truffle_mash"
-                ]
-              }
-            },
-            "trigger": "minecraft:consume_item"
-          },
-          "environmental:truffle_pie": {
-            "conditions": {
-              "item": {
-                "items": [
-                  "environmental:truffle_pie"
-                ]
-              }
-            },
-            "trigger": "minecraft:consume_item"
-          },
           "environmental:venison": {
             "conditions": {
               "item": {
@@ -142,12 +122,6 @@
           ],
           [
             "environmental:truffle"
-          ],
-          [
-            "environmental:truffle_mash"
-          ],
-          [
-            "environmental:truffle_pie"
           ]
         ],
         "should_replace_requirements": false

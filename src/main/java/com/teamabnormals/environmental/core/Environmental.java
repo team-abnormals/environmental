@@ -76,7 +76,6 @@ public class Environmental {
 		EnvironmentalPlacedFeatures.PLACED_FEATURES.register(bus);
 		EnvironmentalAttributes.ATTRIBUTES.register(bus);
 		EnvironmentalMobEffects.MOB_EFFECTS.register(bus);
-		EnvironmentalMobEffects.POTIONS.register(bus);
 		EnvironmentalMenuTypes.MENU_TYPES.register(bus);
 		EnvironmentalParticleTypes.PARTICLE_TYPES.register(bus);
 		EnvironmentalSlabfishConditions.SLABFISH_CONDITIONS.register(bus);
@@ -102,7 +101,6 @@ public class Environmental {
 			EnvironmentalCompat.registerCompat();
 			EnvironmentalVillagers.registerVillagerTypes();
 			EnvironmentalEntityTypes.registerSpawns();
-			EnvironmentalMobEffects.registerBrewingRecipes();
 		});
 	}
 

@@ -44,8 +44,6 @@ public class EnvironmentalItems {
 	public static final RegistryObject<Item> DUCK_EGG = HELPER.createItem("duck_egg", () -> new DuckEggItem(new Item.Properties().stacksTo(16).tab(CreativeModeTab.TAB_MISC)));
 
 	public static final RegistryObject<Item> TRUFFLE = HELPER.createItem("truffle", () -> new Item(new Item.Properties().food(EnvironmentalFoods.TRUFFLE).tab(CreativeModeTab.TAB_FOOD)));
-	public static final RegistryObject<Item> TRUFFLE_MASH = HELPER.createItem("truffle_mash", () -> new BowlFoodItem((new Item.Properties()).stacksTo(1).food(EnvironmentalFoods.TRUFFLE_MASH).tab(CreativeModeTab.TAB_FOOD)));
-	public static final RegistryObject<Item> TRUFFLE_PIE = HELPER.createItem("truffle_pie", () -> new Item(new Item.Properties().food(EnvironmentalFoods.TRUFFLE_PIE).tab(CreativeModeTab.TAB_FOOD)));
 
 	public static final RegistryObject<Item> MUD_BALL = HELPER.createItem("mud_ball", () -> new MudBallItem(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
 
@@ -107,9 +105,7 @@ public class EnvironmentalItems {
 		public static final FoodProperties DUCK = (new FoodProperties.Builder()).nutrition(4).saturationMod(0.1F).effect(() -> new MobEffectInstance(MobEffects.HUNGER, 600, 0), 0.3F).meat().build();
 		public static final FoodProperties COOKED_DUCK = (new FoodProperties.Builder()).nutrition(8).saturationMod(0.3F).meat().build();
 
-		public static final FoodProperties TRUFFLE = new FoodProperties.Builder().nutrition(4).saturationMod(0.1F).alwaysEat().effect(() -> new MobEffectInstance(MobEffects.HEALTH_BOOST, 2400), 1.0F).build();
-		public static final FoodProperties TRUFFLE_MASH = new FoodProperties.Builder().nutrition(20).saturationMod(0.5F).alwaysEat().effect(() -> new MobEffectInstance(MobEffects.HEALTH_BOOST, 6000), 1.0F).build();
-		public static final FoodProperties TRUFFLE_PIE = new FoodProperties.Builder().nutrition(15).saturationMod(0.6F).alwaysEat().effect(() -> new MobEffectInstance(MobEffects.HEALTH_BOOST, 3600), 1.0F).build();
+		public static final FoodProperties TRUFFLE = new FoodProperties.Builder().nutrition(16).saturationMod(1.2F).build();
 
 		public static final FoodProperties KOI = new FoodProperties.Builder().nutrition(1).saturationMod(0.1F).build();
 	}
