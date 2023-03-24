@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "#environmental:has_feature/has_hibiscus",
+  "biomes": "#environmental:has_feature/hibiscus",
   "features": "environmental:hibiscus_bush",
   "step": "vegetal_decoration"
 }
