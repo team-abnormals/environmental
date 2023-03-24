@@ -3,7 +3,6 @@ package com.teamabnormals.environmental.core.other;
 import com.teamabnormals.blueprint.core.api.BlueprintArmorMaterial;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
-import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Items;
