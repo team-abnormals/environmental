@@ -230,7 +230,7 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.add(PINE_CHESTS.getSecond().get(), BlockLoot::createNameableBlockEntityTable);
 			this.add(PINE_BOOKSHELF.get(), (block) -> createSingleItemTableWithSilkTouch(block, Items.BOOK, ConstantValue.exactly(3.0F)));
 			this.add(PINE_LEAVES.get(), (block) -> createLeavesDrops(block, PINE_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
-			
+
 			this.dropSelf(CHERRY_PLANKS.get());
 			this.dropSelf(VERTICAL_CHERRY_PLANKS.get());
 			this.dropSelf(CHERRY_LOG.get());

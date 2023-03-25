@@ -6,12 +6,10 @@ import com.mojang.serialization.Codec;
 import com.teamabnormals.blueprint.core.util.TreeUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.TreeFeature;
@@ -29,8 +27,15 @@ public abstract class EnvironmentalTreeFeature extends Feature<TreeConfiguration
 	public HashMap<BlockPos, BlockState> specialLogPositions;
 	public HashMap<BlockPos, BlockState> specialFoliagePositions;
 
+	public boolean placeDirt;
+
 	public EnvironmentalTreeFeature(Codec<TreeConfiguration> config) {
+		this(true, config);
+	}
+
+	public EnvironmentalTreeFeature(boolean placeDirt, Codec<TreeConfiguration> config) {
 		super(config);
+		this.placeDirt = placeDirt;
 	}
 
 	@Override
@@ -45,22 +50,39 @@ public abstract class EnvironmentalTreeFeature extends Feature<TreeConfiguration
 		this.specialLogPositions = Maps.newHashMap();
 		this.specialFoliagePositions = Maps.newHashMap();
 
-		if (TreeUtil.isValidGround(level, origin.below(), (SaplingBlock) this.getSapling())) {
+		if (this.canSurvive(level, origin)) {
 			this.doPlace(context);
 
 			for (BlockPos logPos : this.logPositions) {
-				if (!TreeFeature.validTreePos(level, logPos) || logPos.getY() > level.getMaxBuildHeight()) return false;
+				if (!TreeFeature.validTreePos(level, logPos) || logPos.getY() > level.getMaxBuildHeight())
+					return false;
 			}
 
 			for (BlockPos foliagePos : this.foliagePositions) {
-				if (!TreeFeature.validTreePos(level, foliagePos) || foliagePos.getY() > level.getMaxBuildHeight()) return false;
+				if (!TreeFeature.validTreePos(level, foliagePos) || foliagePos.getY() > level.getMaxBuildHeight())
+					return false;
 			}
 
-			setDirtAt(level, random, origin.below(), config);
-			this.logPositions.forEach(logPos -> TreeUtil.setForcedState(level, logPos, this.specialLogPositions.getOrDefault(logPos, config.trunkProvider.getState(random, logPos))));
+			this.doMidPlace(context);
+
+			this.logPositions.forEach(logPos -> {
+				TreeUtil.setForcedState(level, logPos, this.specialLogPositions.getOrDefault(logPos, config.trunkProvider.getState(random, logPos)));
+				if (logPos.getY() == origin.getY() && this.placeDirt) {
+					setDirtAt(level, random, logPos.below(), config);
+				}
+			});
 			this.foliagePositions.forEach(foliagePos -> {
-				if (TreeFeature.validTreePos(level, foliagePos))
-					TreeUtil.setForcedState(level, foliagePos, this.specialFoliagePositions.getOrDefault(foliagePos, config.foliageProvider.getState(random, foliagePos)));
+				if (TreeFeature.validTreePos(level, foliagePos)) {
+					BlockState state = this.specialFoliagePositions.getOrDefault(foliagePos, config.foliageProvider.getState(random, foliagePos));
+
+					if (TreeFeature.isBlockWater(level, foliagePos) && state.hasProperty(BlockStateProperties.WATERLOGGED)) {
+						state = state.setValue(BlockStateProperties.WATERLOGGED, true);
+					}
+
+					if (!state.isAir()) {
+						TreeUtil.setForcedState(level, foliagePos, state);
+					}
+				}
 			});
 
 			TreeUtil.updateLeaves(level, this.logPositions);
@@ -78,13 +100,18 @@ public abstract class EnvironmentalTreeFeature extends Feature<TreeConfiguration
 		}
 	}
 
+	public abstract BlockState getSapling();
 
-	public abstract Block getSapling();
+	public boolean canSurvive(WorldGenLevel level, BlockPos pos) {
+		return this.getSapling().canSurvive(level, pos);
+	}
 
 	public abstract void doPlace(FeaturePlaceContext<TreeConfiguration> context);
 
-	public void doPostPlace(FeaturePlaceContext<TreeConfiguration> context) {
+	public void doMidPlace(FeaturePlaceContext<TreeConfiguration> context) {
+	}
 
+	public void doPostPlace(FeaturePlaceContext<TreeConfiguration> context) {
 	}
 
 	public void addLog(BlockPos pos) {
@@ -106,12 +133,8 @@ public abstract class EnvironmentalTreeFeature extends Feature<TreeConfiguration
 	}
 
 	public static void setDirtAt(WorldGenLevel level, RandomSource random, BlockPos pos, TreeConfiguration config) {
-		if (config.forceDirt || !isDirt(level, pos)) {
+		if (config.forceDirt || level.isStateAtPosition(pos, state -> state.is(Blocks.GRASS_BLOCK) || state.is(Blocks.MYCELIUM))) {
 			TreeUtil.setForcedState(level, pos, config.dirtProvider.getState(random, pos));
 		}
-	}
-
-	public static boolean isDirt(LevelSimulatedReader level, BlockPos pos) {
-		return level.isStateAtPosition(pos, (state) -> Feature.isDirt(state) && !state.is(Blocks.GRASS_BLOCK) && !state.is(Blocks.MYCELIUM));
 	}
 }
