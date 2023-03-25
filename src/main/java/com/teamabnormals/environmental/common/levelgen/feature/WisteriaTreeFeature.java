@@ -1,6 +1,7 @@
 package com.teamabnormals.environmental.common.levelgen.feature;
 
 import com.mojang.serialization.Codec;
+import com.teamabnormals.blueprint.common.block.wood.LogBlock;
 import com.teamabnormals.environmental.common.block.WisteriaLeavesBlock;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.core.BlockPos;
@@ -40,7 +41,7 @@ public class WisteriaTreeFeature extends EnvironmentalTreeFeature {
 		}
 
 		pos.set(pos.below().relative(Plane.HORIZONTAL.getRandomDirection(random)));
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 4; i++) {
 			this.addLog(pos.set(pos.above()));
 		}
 
@@ -50,22 +51,22 @@ public class WisteriaTreeFeature extends EnvironmentalTreeFeature {
 		Set<Direction> directions = Set.of(direction, direction.getOpposite(), direction.getClockWise());
 		directions.forEach(branchDirection -> {
 			BlockPos branchPos = branchDirection == direction ? pos.relative(offset) : pos;
-			if (branchDirection == direction.getOpposite()) {
-				branchPos = branchPos.relative(direction);
-			}
-			createBranch(branchPos.above(random.nextInt(2)), branchDirection, random, config);
+			createBranch(branchPos.relative(branchDirection).above(random.nextInt(2)), branchDirection, random, config);
 		});
 	}
 
 	private void createBranch(BlockPos pos, Direction direction, RandomSource random, TreeConfiguration config) {
-		this.addLog(pos.relative(direction));
-		BlockPos leafPos = pos.relative(direction, 2);
-		this.addLog(leafPos.above());
+		MutableBlockPos mutablePos = new MutableBlockPos();
+		mutablePos.set(pos);
 
-		this.createLeafLayer(leafPos.above(2), false, direction, random, EnvironmentalBlocks.WISTERIA_LEAVES.get().defaultBlockState());
-		this.createLeafLayer(leafPos.above(), true, direction, random, config.foliageProvider.getState(random, pos).setValue(WisteriaLeavesBlock.HALF, Half.TOP));
-		this.createLeafLayer(leafPos, true, direction, random, config.foliageProvider.getState(random, pos));
-		this.createLeafLayer(leafPos.below(), true, direction, random, config.foliageProvider.getState(random, pos), 3);
+		this.addLog(mutablePos);
+		this.addLog(mutablePos.set(mutablePos.relative(direction)));
+		this.addLog(mutablePos.set(mutablePos.relative(direction).above()));
+
+		this.createLeafLayer(mutablePos.above(), false, direction, random, EnvironmentalBlocks.WISTERIA_LEAVES.get().defaultBlockState());
+		this.createLeafLayer(mutablePos, true, direction, random, config.foliageProvider.getState(random, pos).setValue(WisteriaLeavesBlock.HALF, Half.TOP));
+		this.createLeafLayer(mutablePos.below(), true, direction, random, config.foliageProvider.getState(random, pos));
+		this.createLeafLayer(mutablePos.below(2), true, direction, random, config.foliageProvider.getState(random, pos), 3);
 	}
 
 	private void createLeafLayer(BlockPos pos, boolean square, Direction direction, RandomSource random, BlockState state) {
@@ -83,16 +84,6 @@ public class WisteriaTreeFeature extends EnvironmentalTreeFeature {
 						this.addSpecialFoliage(pos.offset(i, 0, k), state);
 					}
 				}
-			}
-		}
-
-		if (!square && direction != null) {
-			if (random.nextInt(3) == 0) {
-				this.addSpecialFoliage(pos.relative(direction.getOpposite(), 1).relative(direction.getClockWise()), state);
-			}
-
-			if (random.nextInt(3) == 0) {
-				this.addSpecialFoliage(pos.relative(direction.getOpposite(), 1).relative(direction.getCounterClockWise()), state);
 			}
 		}
 	}
