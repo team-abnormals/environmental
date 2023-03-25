@@ -1,5 +1,5 @@
 {
-    "parent": "minecraft:block/cross",
+    "parent": "environmental:block/wisteria_vines",
     "textures": {
         "cross": "environmental:block/white_wisteria_vines_top"
     }
