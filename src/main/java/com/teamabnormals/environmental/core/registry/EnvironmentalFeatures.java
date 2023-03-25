@@ -136,7 +136,7 @@ public class EnvironmentalFeatures {
 		}
 
 		private static TreeConfigurationBuilder createWisteriaTree(Block leaves, TreeDecorator... decorators) {
-			return createCustomTree(EnvironmentalBlocks.WISTERIA_LOG.get(), new StraightTrunkPlacer(6, 2, 1), leaves).decorators(List.of(decorators));
+			return createCustomTree(EnvironmentalBlocks.WISTERIA_LOG.get(), new StraightTrunkPlacer(2, 1, 0), leaves).decorators(List.of(decorators));
 		}
 
 		private static TreeConfigurationBuilder createCustomTree(Block log, Block leaves) {

@@ -70,6 +70,10 @@ public abstract class EnvironmentalTreeFeature extends Feature<TreeConfiguration
 				if (logPos.getY() == origin.getY() && this.placeDirt) {
 					setDirtAt(level, random, logPos.below(), config);
 				}
+
+				if (foliagePositions.contains(logPos)) {
+					this.foliagePositions.remove(logPos);
+				}
 			});
 			this.foliagePositions.forEach(foliagePos -> {
 				if (TreeFeature.validTreePos(level, foliagePos)) {

@@ -1,28 +1,18 @@
 package com.teamabnormals.environmental.common.levelgen.feature;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import com.mojang.serialization.Codec;
-import com.teamabnormals.blueprint.common.block.wood.LogBlock;
 import com.teamabnormals.environmental.common.block.WisteriaLeavesBlock;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.Direction.Plane;
-import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Half;
-import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
-import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
-
-import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.Set;
 
 public class WisteriaTreeFeature extends EnvironmentalTreeFeature {
 
@@ -41,36 +31,31 @@ public class WisteriaTreeFeature extends EnvironmentalTreeFeature {
 			this.addLog(origin.above(y));
 		}
 
-		ArrayList<Direction> branchDirections = Lists.newArrayList();
-		Plane.HORIZONTAL.forEach(branchDirections::add);
+		MutableBlockPos pos = new MutableBlockPos();
+		pos.set(origin.above(trunkHeight - 2).relative(Plane.HORIZONTAL.getRandomDirection(random)));
 
-		int branches = 2 + random.nextInt(3 - random.nextInt(2));
-		boolean offset = false;
-
-		for (int i = 0; i < branches; i++) {
-			int down = 2;
-			if (!offset && random.nextBoolean()) {
-				down = 1;
-				offset = true;
-			}
-			Direction direction = branchDirections.get(random.nextInt(branchDirections.size()));
-			this.createBranch(origin.above(trunkHeight).below(down), direction, random, config);
-
-			branchDirections.remove(direction);
+		for (int i = 0; i < 3; i++) {
+			this.addLog(pos.set(pos.above()));
 		}
 
-		this.createLeafClump(origin.above(trunkHeight), null);
-
-		Set<BlockPos> vinePos = Sets.newHashSet();
-		for (BlockPos pos : this.foliagePositions) {
-			if (!this.foliagePositions.contains(pos.below())) {
-				vinePos.add(pos.below(random.nextInt(2)));
-			}
+		pos.set(pos.below().relative(Plane.HORIZONTAL.getRandomDirection(random)));
+		for (int i = 0; i < 4; i++) {
+			this.addLog(pos.set(pos.above()));
 		}
 
-		vinePos.forEach(newPos -> {
-			this.addSpecialFoliage(newPos, config.foliageProvider.getState(random, newPos).setValue(WisteriaLeavesBlock.HALF, Half.TOP));
-			this.addFoliage(newPos.below());
+		Axis axis = Plane.HORIZONTAL.getRandomAxis(random);
+		pos.set(pos.below());
+		Plane.HORIZONTAL.stream().filter(direction -> direction.getAxis() == axis).forEach(direction -> {
+			this.addLog(pos.relative(direction));
+			pos.set(pos.above());
+
+			BlockPos leafPos = pos.relative(direction, 2);
+			this.addLog(leafPos);
+
+			this.createLeafLayer(leafPos.above(), false, direction, random, EnvironmentalBlocks.WISTERIA_LEAVES.get().defaultBlockState());
+			this.createLeafLayer(leafPos, true, direction, random, config.foliageProvider.getState(random, pos).setValue(WisteriaLeavesBlock.HALF, Half.TOP));
+			this.createLeafLayer(leafPos.below(), true, direction, random, config.foliageProvider.getState(random, pos));
+			this.createLeafLayer(leafPos.below(2), true, direction, random, config.foliageProvider.getState(random, pos), 3);
 		});
 	}
 
@@ -81,47 +66,40 @@ public class WisteriaTreeFeature extends EnvironmentalTreeFeature {
 		else if (state.is(EnvironmentalBlocks.BLUE_WISTERIA_LEAVES.get())) state = EnvironmentalBlocks.BLUE_DELPHINIUM.get().defaultBlockState();
 		else if (state.is(EnvironmentalBlocks.PURPLE_WISTERIA_LEAVES.get())) state = EnvironmentalBlocks.PURPLE_DELPHINIUM.get().defaultBlockState();
 		else state = EnvironmentalBlocks.PINK_DELPHINIUM.get().defaultBlockState();
-		Feature.RANDOM_PATCH.place(FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(state))), context.level(), context.chunkGenerator(), context.random(), context.origin());
+		//Feature.RANDOM_PATCH.place(FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(state))), context.level(), context.chunkGenerator(), context.random(), context.origin());
 	}
 
-	@Override
-	public BlockState getSapling() {
-		return EnvironmentalBlocks.BLUE_WISTERIA_SAPLING.get().defaultBlockState();
+	private void createLeafLayer(BlockPos pos, boolean square, Direction direction, RandomSource random, BlockState state) {
+		this.createLeafLayer(pos, square, direction, random, state, 0);
 	}
 
-	private void createBranch(BlockPos pos, Direction direction, RandomSource random, TreeConfiguration config) {
-		MutableBlockPos mutablePos = new MutableBlockPos();
-		mutablePos.set(pos);
-
-		for (int i = 0; i < 3; i++) {
-			this.addSpecialLog(mutablePos.set(mutablePos.relative(direction)), config.trunkProvider.getState(random, mutablePos).setValue(LogBlock.AXIS, direction.getAxis()));
-		}
-
-		this.createLeafClump(mutablePos.above(), direction);
-	}
-
-	private void createLeafLayer(BlockPos pos, boolean square, Direction direction, BlockState state) {
+	private void createLeafLayer(BlockPos pos, boolean square, Direction direction, RandomSource random, BlockState state, int chance) {
 		int leafSize = 1;
 		for (int i = -leafSize; i <= leafSize; ++i) {
 			for (int k = -leafSize; k <= leafSize; ++k) {
-				if (square) {
-					this.addSpecialFoliage(pos.offset(i, 0, k), state);
-				} else if ((Math.abs(i) != leafSize || Math.abs(k) != leafSize)) {
-					this.addSpecialFoliage(pos.offset(i, 0, k), state);
+				if (chance == 0 || random.nextInt(chance) == 0) {
+					if (square) {
+						this.addSpecialFoliage(pos.offset(i, 0, k), state);
+					} else if ((Math.abs(i) != leafSize || Math.abs(k) != leafSize)) {
+						this.addSpecialFoliage(pos.offset(i, 0, k), state);
+					}
 				}
 			}
 		}
 
 		if (!square && direction != null) {
-			this.addSpecialFoliage(pos.relative(direction.getOpposite(), 1).relative(direction.getClockWise()), state);
-			this.addSpecialFoliage(pos.relative(direction.getOpposite(), 1).relative(direction.getCounterClockWise()), state);
-			this.addSpecialFoliage(pos.relative(direction.getOpposite(), 2).relative(direction.getClockWise()), state);
-			this.addSpecialFoliage(pos.relative(direction.getOpposite(), 2).relative(direction.getCounterClockWise()), state);
+			if (random.nextBoolean()) {
+				this.addSpecialFoliage(pos.relative(direction.getOpposite(), 1).relative(direction.getClockWise()), state);
+			}
+
+			if (random.nextBoolean()) {
+				this.addSpecialFoliage(pos.relative(direction.getOpposite(), 1).relative(direction.getCounterClockWise()), state);
+			}
 		}
 	}
 
-	private void createLeafClump(BlockPos pos, @Nullable Direction direction) {
-		createLeafLayer(pos, false, direction, EnvironmentalBlocks.WISTERIA_LEAVES.get().defaultBlockState());
-		createLeafLayer(pos.below(), true, direction, EnvironmentalBlocks.WISTERIA_LEAVES.get().defaultBlockState());
+	@Override
+	public BlockState getSapling() {
+		return EnvironmentalBlocks.BLUE_WISTERIA_SAPLING.get().defaultBlockState();
 	}
 }
