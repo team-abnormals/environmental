@@ -3,6 +3,7 @@
     "minecraft:grass_block",
     "minecraft:podzol",
     "minecraft:mycelium",
+    "minecraft:mud",
     {
       "id": "quark:glowcelium",
       "required": false
