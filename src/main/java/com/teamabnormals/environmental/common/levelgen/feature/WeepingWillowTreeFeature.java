@@ -10,7 +10,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Plane;
 import net.minecraft.core.Vec3i;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 
@@ -58,8 +58,8 @@ public class WeepingWillowTreeFeature extends EnvironmentalTreeFeature {
 	}
 
 	@Override
-	public Block getSapling() {
-		return EnvironmentalBlocks.WILLOW_SAPLING.get();
+	public BlockState getSapling() {
+		return EnvironmentalBlocks.WILLOW_SAPLING.get().defaultBlockState();
 	}
 
 	private void createBranch(BlockPos pos, Direction direction, RandomSource random, TreeConfiguration config) {
@@ -81,10 +81,10 @@ public class WeepingWillowTreeFeature extends EnvironmentalTreeFeature {
 	private void createTipLeafBlob(BlockPos pos, RandomSource random, Direction direction) {
 		BlockPos.MutableBlockPos mutablepos = new BlockPos.MutableBlockPos();
 
-		for(int y = 0; y >= -3; y--) {
+		for (int y = 0; y >= -3; y--) {
 			int r = 2 - y / 2;
-			for(int x = -r; x <= r; x++) {
-				for(int z = -r; z <= r; z++) {
+			for (int x = -r; x <= r; x++) {
+				for (int z = -r; z <= r; z++) {
 					if (Math.abs(x) != r || Math.abs(z) != r || (random.nextInt(2) == 0 && y != 0)) {
 						mutablepos.setWithOffset(pos, x, y, z);
 						this.addFoliage(mutablepos);
@@ -100,8 +100,8 @@ public class WeepingWillowTreeFeature extends EnvironmentalTreeFeature {
 		BlockPos.MutableBlockPos mutablepos = new BlockPos.MutableBlockPos();
 		int i = small ? 1 : 2;
 
-		for(int x = -1; x <= 1; x++) {
-			for(int z = -1; z <= 1; z++) {
+		for (int x = -1; x <= 1; x++) {
+			for (int z = -1; z <= 1; z++) {
 				if (Math.abs(x) != 1 || Math.abs(z) != 1 || random.nextInt(4) == 0) {
 					mutablepos.setWithOffset(pos, x, i, z);
 					this.addFoliage(mutablepos);
@@ -109,7 +109,7 @@ public class WeepingWillowTreeFeature extends EnvironmentalTreeFeature {
 			}
 		}
 
-		for(int y = i - 1; y >= 0; y--) {
+		for (int y = i - 1; y >= 0; y--) {
 			for (int x = -i; x <= i; x++) {
 				for (int z = -i; z <= i; z++) {
 					if (Math.abs(x) != 2 || Math.abs(z) != 2) {

@@ -12,7 +12,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Plane;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -86,8 +85,8 @@ public class WisteriaTreeFeature extends EnvironmentalTreeFeature {
 	}
 
 	@Override
-	public Block getSapling() {
-		return EnvironmentalBlocks.BLUE_WISTERIA_SAPLING.get();
+	public BlockState getSapling() {
+		return EnvironmentalBlocks.BLUE_WISTERIA_SAPLING.get().defaultBlockState();
 	}
 
 	private void createBranch(BlockPos pos, Direction direction, RandomSource random, TreeConfiguration config) {
