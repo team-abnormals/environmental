@@ -19,7 +19,7 @@ public class EnvironmentalBoatTypes {
 
 	public static final Supplier<Item> WILLOW_FURNACE_BOAT = () -> new FurnaceBoatItem(WILLOW);
 	public static final Supplier<Item> LARGE_WILLOW_BOAT = () -> new LargeBoatItem(WILLOW);
-	
+
 	public static final Supplier<Item> PINE_FURNACE_BOAT = () -> new FurnaceBoatItem(PINE);
 	public static final Supplier<Item> LARGE_PINE_BOAT = () -> new LargeBoatItem(PINE);
 

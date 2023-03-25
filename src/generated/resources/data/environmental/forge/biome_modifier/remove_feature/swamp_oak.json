@@ -1,0 +1,6 @@
+{
+  "type": "forge:remove_features",
+  "biomes": "minecraft:swamp",
+  "features": "minecraft:trees_swamp",
+  "steps": "vegetal_decoration"
+}
