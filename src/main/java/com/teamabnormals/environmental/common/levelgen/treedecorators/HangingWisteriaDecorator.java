@@ -24,21 +24,15 @@ public class HangingWisteriaDecorator extends TreeDecorator {
 	public void place(Context context) {
 		LevelSimulatedReader level = context.level();
 		RandomSource random = context.random();
-
 		BlockState state = this.getBlockForLeaf();
+
 		for (BlockPos pos : context.leaves()) {
-			int maxLength = 0;
-			for (int i = 1; i <= 3; i++) {
-				if (level.isStateAtPosition(pos.below(i), BlockState::isAir)) {
-					maxLength++;
-				} else {
-					break;
-				}
+			int maxLength;
+			for (maxLength = 0; maxLength < 2 && level.isStateAtPosition(pos.below(maxLength + 1), BlockState::isAir); maxLength++) {
 			}
 
 			if (maxLength > 0) {
-				int actualLength = random.nextInt(1 + maxLength);
-				if (actualLength == 0) actualLength = 1;
+				int actualLength = Math.max(1, random.nextInt(1 + maxLength));
 				for (int i = 1; i <= actualLength; i++) {
 					context.setBlock(pos.below(i), state.setValue(HangingWisteriaLeavesBlock.HALF, i == actualLength ? DoubleBlockHalf.LOWER : DoubleBlockHalf.UPPER));
 				}
