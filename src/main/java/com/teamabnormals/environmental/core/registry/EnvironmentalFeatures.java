@@ -3,7 +3,7 @@ package com.teamabnormals.environmental.core.registry;
 import com.google.common.collect.ImmutableList;
 import com.teamabnormals.environmental.common.block.CartwheelBlock;
 import com.teamabnormals.environmental.common.levelgen.feature.*;
-import com.teamabnormals.environmental.common.levelgen.treedecorators.HangingWillowLeavesTreeDecorator;
+import com.teamabnormals.environmental.common.levelgen.treedecorators.HangingWillowDecorator;
 import com.teamabnormals.environmental.common.levelgen.treedecorators.HangingWisteriaDecorator;
 import com.teamabnormals.environmental.core.Environmental;
 import net.minecraft.core.*;
@@ -63,8 +63,9 @@ public class EnvironmentalFeatures {
 	public static final RegistryObject<Feature<TreeConfiguration>> WEEPING_WILLOW_TREE = FEATURES.register("weeping_willow_tree", () -> new WeepingWillowTreeFeature(TreeConfiguration.CODEC));
 	public static final RegistryObject<Feature<TreeConfiguration>> CHERRY_TREE = FEATURES.register("cherry_tree", () -> new CherryTreeFeature(TreeConfiguration.CODEC));
 	public static final RegistryObject<Feature<TreeConfiguration>> WISTERIA_TREE = FEATURES.register("wisteria_tree", () -> new WisteriaTreeFeature(TreeConfiguration.CODEC));
+	public static final RegistryObject<Feature<TreeConfiguration>> DELPHINIUM_WISTERIA_TREE = FEATURES.register("delphinium_wisteria_tree", () -> new DelphiniumWisteriaTreeFeature(TreeConfiguration.CODEC));
 
-	public static final RegistryObject<TreeDecoratorType<?>> HANGING_WILLOW_LEAVES = TREE_DECORATORS.register("hanging_willow_leaves", () -> new TreeDecoratorType<>(HangingWillowLeavesTreeDecorator.CODEC));
+	public static final RegistryObject<TreeDecoratorType<?>> HANGING_WILLOW_LEAVES = TREE_DECORATORS.register("hanging_willow_leaves", () -> new TreeDecoratorType<>(HangingWillowDecorator.CODEC));
 	public static final RegistryObject<TreeDecoratorType<?>> HANGING_WISTERIA_LEAVES = TREE_DECORATORS.register("hanging_wisteria_leaves", () -> new TreeDecoratorType<>(HangingWisteriaDecorator.CODEC));
 
 	public static final class Configs {
@@ -72,14 +73,13 @@ public class EnvironmentalFeatures {
 		private static final BeehiveDecorator BEEHIVE_002 = new BeehiveDecorator(0.02F);
 		private static final BeehiveDecorator BEEHIVE_005 = new BeehiveDecorator(0.05F);
 
-
 		private static final HangingWisteriaDecorator HANGING_WHITE_WISTERIA = new HangingWisteriaDecorator(0.05F);
 		private static final HangingWisteriaDecorator HANGING_BLUE_WISTERIA = new HangingWisteriaDecorator(0.25F);
 		private static final HangingWisteriaDecorator HANGING_PURPLE_WISTERIA = new HangingWisteriaDecorator(0.50F);
 		private static final HangingWisteriaDecorator HANGING_PINK_WISTERIA = new HangingWisteriaDecorator(0.75F);
 
-		public static final TreeConfiguration WILLOW = createStraightBlobTree(EnvironmentalBlocks.WILLOW_LOG.get(), EnvironmentalBlocks.WILLOW_LEAVES.get(), 5, 3, 0, 3).decorators(ImmutableList.of(new LeaveVineDecorator(0.25F), HangingWillowLeavesTreeDecorator.INSTANCE)).build();
-		public static final TreeConfiguration WEEPING_WILLOW = createCustomTree(EnvironmentalBlocks.WILLOW_LOG.get(), new StraightTrunkPlacer(12, 2, 0), EnvironmentalBlocks.WILLOW_LEAVES.get()).decorators(ImmutableList.of(new LeaveVineDecorator(0.25F), HangingWillowLeavesTreeDecorator.INSTANCE)).build();
+		public static final TreeConfiguration WILLOW = createStraightBlobTree(EnvironmentalBlocks.WILLOW_LOG.get(), EnvironmentalBlocks.WILLOW_LEAVES.get(), 5, 3, 0, 3).decorators(ImmutableList.of(new LeaveVineDecorator(0.25F), HangingWillowDecorator.INSTANCE)).build();
+		public static final TreeConfiguration WEEPING_WILLOW = createCustomTree(EnvironmentalBlocks.WILLOW_LOG.get(), new StraightTrunkPlacer(12, 2, 0), EnvironmentalBlocks.WILLOW_LEAVES.get()).decorators(ImmutableList.of(new LeaveVineDecorator(0.25F), HangingWillowDecorator.INSTANCE)).build();
 
 		public static final TreeConfiguration BIRCH_BEES_0002 = createStraightBlobTree(Blocks.BIRCH_LOG, Blocks.BIRCH_LEAVES, 5, 2, 6, 2).ignoreVines().decorators(ImmutableList.of(Configs.BEEHIVE_0002)).build();
 
@@ -162,16 +162,16 @@ public class EnvironmentalFeatures {
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> CHERRY_BEES_005 = register("cherry_bees_005", () -> new ConfiguredFeature<>(EnvironmentalFeatures.CHERRY_TREE.get(), Configs.CHERRY_BEES_005));
 
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> WHITE_WISTERIA = register("white_wisteria", () -> new ConfiguredFeature<>(EnvironmentalFeatures.WISTERIA_TREE.get(), Configs.WHITE_WISTERIA));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> WHITE_WISTERIA_BEES_002 = register("white_wisteria_bees_002", () -> new ConfiguredFeature<>(EnvironmentalFeatures.WISTERIA_TREE.get(), Configs.WHITE_WISTERIA_BEES_002));
+		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> WHITE_WISTERIA_BEES_002 = register("white_wisteria_bees_002", () -> new ConfiguredFeature<>(EnvironmentalFeatures.DELPHINIUM_WISTERIA_TREE.get(), Configs.WHITE_WISTERIA_BEES_002));
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> WHITE_WISTERIA_BEES_005 = register("white_wisteria_bees_005", () -> new ConfiguredFeature<>(EnvironmentalFeatures.WISTERIA_TREE.get(), Configs.WHITE_WISTERIA_BEES_005));
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> BLUE_WISTERIA = register("blue_wisteria", () -> new ConfiguredFeature<>(EnvironmentalFeatures.WISTERIA_TREE.get(), Configs.BLUE_WISTERIA));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> BLUE_WISTERIA_BEES_002 = register("blue_wisteria_bees_002", () -> new ConfiguredFeature<>(EnvironmentalFeatures.WISTERIA_TREE.get(), Configs.BLUE_WISTERIA_BEES_002));
+		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> BLUE_WISTERIA_BEES_002 = register("blue_wisteria_bees_002", () -> new ConfiguredFeature<>(EnvironmentalFeatures.DELPHINIUM_WISTERIA_TREE.get(), Configs.BLUE_WISTERIA_BEES_002));
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> BLUE_WISTERIA_BEES_005 = register("blue_wisteria_bees_005", () -> new ConfiguredFeature<>(EnvironmentalFeatures.WISTERIA_TREE.get(), Configs.BLUE_WISTERIA_BEES_005));
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> PURPLE_WISTERIA = register("purple_wisteria", () -> new ConfiguredFeature<>(EnvironmentalFeatures.WISTERIA_TREE.get(), Configs.PURPLE_WISTERIA));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> PURPLE_WISTERIA_BEES_002 = register("purple_wisteria_bees_002", () -> new ConfiguredFeature<>(EnvironmentalFeatures.WISTERIA_TREE.get(), Configs.PURPLE_WISTERIA_BEES_002));
+		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> PURPLE_WISTERIA_BEES_002 = register("purple_wisteria_bees_002", () -> new ConfiguredFeature<>(EnvironmentalFeatures.DELPHINIUM_WISTERIA_TREE.get(), Configs.PURPLE_WISTERIA_BEES_002));
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> PURPLE_WISTERIA_BEES_005 = register("purple_wisteria_bees_005", () -> new ConfiguredFeature<>(EnvironmentalFeatures.WISTERIA_TREE.get(), Configs.PURPLE_WISTERIA_BEES_005));
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> PINK_WISTERIA = register("pink_wisteria", () -> new ConfiguredFeature<>(EnvironmentalFeatures.WISTERIA_TREE.get(), Configs.PINK_WISTERIA));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> PINK_WISTERIA_BEES_002 = register("pink_wisteria_bees_002", () -> new ConfiguredFeature<>(EnvironmentalFeatures.WISTERIA_TREE.get(), Configs.PINK_WISTERIA_BEES_002));
+		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> PINK_WISTERIA_BEES_002 = register("pink_wisteria_bees_002", () -> new ConfiguredFeature<>(EnvironmentalFeatures.DELPHINIUM_WISTERIA_TREE.get(), Configs.PINK_WISTERIA_BEES_002));
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> PINK_WISTERIA_BEES_005 = register("pink_wisteria_bees_005", () -> new ConfiguredFeature<>(EnvironmentalFeatures.WISTERIA_TREE.get(), Configs.PINK_WISTERIA_BEES_005));
 		public static final RegistryObject<ConfiguredFeature<RandomFeatureConfiguration, ?>> TREES_WISTERIA = register("trees_wisteria", () -> new ConfiguredFeature<>(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(EnvironmentalPlacedFeatures.PINK_WISTERIA_BEES_002.getHolder().get(), 0.25F), new WeightedPlacedFeature(EnvironmentalPlacedFeatures.BLUE_WISTERIA_BEES_002.getHolder().get(), 0.25F), new WeightedPlacedFeature(EnvironmentalPlacedFeatures.PURPLE_WISTERIA_BEES_002.getHolder().get(), 0.25F)), EnvironmentalPlacedFeatures.WHITE_WISTERIA_BEES_002.getHolder().get())));
 
@@ -250,7 +250,7 @@ public class EnvironmentalFeatures {
 		public static final RegistryObject<PlacedFeature> PINK_WISTERIA_BEES_002 = register("pink_wisteria_bees_002", EnvironmentalConfiguredFeatures.PINK_WISTERIA_BEES_002, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
 		public static final RegistryObject<PlacedFeature> PURPLE_WISTERIA_BEES_002 = register("purple_wisteria_bees_002", EnvironmentalConfiguredFeatures.PURPLE_WISTERIA_BEES_002, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
 		public static final RegistryObject<PlacedFeature> BLUE_WISTERIA_BEES_002 = register("blue_wisteria_bees_002", EnvironmentalConfiguredFeatures.BLUE_WISTERIA_BEES_002, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
-		public static final RegistryObject<PlacedFeature> TREES_WISTERIA = register("trees_wisteria", EnvironmentalConfiguredFeatures.TREES_WISTERIA, VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.05F, 1)));
+		public static final RegistryObject<PlacedFeature> TREES_WISTERIA = register("trees_wisteria", EnvironmentalConfiguredFeatures.TREES_WISTERIA, VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.1F, 1)));
 
 		public static final RegistryObject<PlacedFeature> WILLOW_CHECKED = register("willow_checked", EnvironmentalConfiguredFeatures.WILLOW, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
 		public static final RegistryObject<PlacedFeature> WEEPING_WILLOW_CHECKED = register("weeping_willow_checked", EnvironmentalConfiguredFeatures.WEEPING_WILLOW, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));

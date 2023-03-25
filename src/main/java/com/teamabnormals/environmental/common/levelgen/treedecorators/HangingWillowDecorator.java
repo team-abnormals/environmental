@@ -8,9 +8,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 
-public class HangingWillowLeavesTreeDecorator extends TreeDecorator {
-	public static final Codec<HangingWillowLeavesTreeDecorator> CODEC;
-	public static final HangingWillowLeavesTreeDecorator INSTANCE = new HangingWillowLeavesTreeDecorator();
+public class HangingWillowDecorator extends TreeDecorator {
+	public static final Codec<HangingWillowDecorator> CODEC;
+	public static final HangingWillowDecorator INSTANCE = new HangingWillowDecorator();
 
 	@Override
 	protected TreeDecoratorType<?> type() {
