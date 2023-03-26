@@ -27,7 +27,7 @@ public class EnvironmentalBlockTagsProvider extends BlockTagsProvider {
 				WISTERIA_BOARDS.get(), WISTERIA_BOOKSHELF.get(), WISTERIA_LADDER.get(), WISTERIA_BEEHIVE.get(), WISTERIA_CHESTS.getFirst().get(), WISTERIA_CHESTS.getSecond().get(), PINK_WISTERIA_HEDGE.get(), BLUE_WISTERIA_HEDGE.get(), PURPLE_WISTERIA_HEDGE.get(), WHITE_WISTERIA_HEDGE.get(), WISTERIA_POST.get(), STRIPPED_WISTERIA_POST.get(),
 				CHERRY_BOARDS.get(), CHERRY_BOOKSHELF.get(), CHERRY_LADDER.get(), CHERRY_BEEHIVE.get(), CHERRY_CHESTS.getFirst().get(), CHERRY_CHESTS.getSecond().get(), CHERRY_HEDGE.get(), CHERRY_POST.get(), STRIPPED_CHERRY_POST.get(),
 				CATTAIL_SPROUTS.get(), CATTAIL.get(), TALL_CATTAIL.get(), LARGE_LILY_PAD.get(), GIANT_LILY_PAD.get(), GIANT_TALL_GRASS.get(), MYCELIUM_SPROUTS.get(), TALL_DEAD_BUSH.get(), CUP_LICHEN.get(),
-				TRUFFLE_CRATE.get(), DUCK_EGG_CRATE.get(), YAK_HAIR_BLOCK.get(), YAK_HAIR_RUG.get()
+				DUCK_EGG_CRATE.get(), YAK_HAIR_BLOCK.get(), YAK_HAIR_RUG.get()
 		);
 
 		this.tag(BlockTags.MINEABLE_WITH_HOE).add(

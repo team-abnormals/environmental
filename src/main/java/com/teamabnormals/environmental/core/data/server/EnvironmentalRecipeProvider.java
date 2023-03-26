@@ -50,7 +50,6 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 	public static final QuarkFlagRecipeCondition WOODEN_POSTS = quarkFlag("wooden_posts");
 	public static final QuarkFlagRecipeCondition BERRY_SACK = quarkFlag("berry_sack");
 	public static final QuarkFlagRecipeCondition APPLE_CRATE = quarkFlag("apple_crate");
-	public static final QuarkFlagRecipeCondition GOLDEN_APPLE_CRATE = quarkFlag("golden_apple_crate");
 	public static final AndCondition WOOD_TO_CHEST_RECIPES = new AndCondition(quarkFlag("variant_chests"), quarkFlag("wood_to_chest_recipes"));
 
 	public EnvironmentalRecipeProvider(DataGenerator generator) {
@@ -85,7 +84,6 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 		foodCookingRecipes(consumer, EnvironmentalItems.VENISON.get(), EnvironmentalItems.COOKED_VENISON.get());
 		conditionalNineBlockStorageRecipes(consumer, INCUBATION_LOADED, EnvironmentalItems.DUCK_EGG.get(), EnvironmentalBlocks.DUCK_EGG_CRATE.get());
 		conditionalNineBlockStorageRecipes(consumer, APPLE_CRATE, EnvironmentalItems.CHERRIES.get(), EnvironmentalBlocks.CHERRY_CRATE.get());
-		conditionalNineBlockStorageRecipes(consumer, GOLDEN_APPLE_CRATE, EnvironmentalItems.TRUFFLE.get(), EnvironmentalBlocks.TRUFFLE_CRATE.get());
 		conditionalNineBlockStorageRecipes(consumer, BERRY_SACK, EnvironmentalItems.CATTAIL_SEEDS.get(), EnvironmentalBlocks.CATTAIL_SEED_SACK.get());
 
 		ShapelessRecipeBuilder.shapeless(Items.STRING).requires(EnvironmentalItems.CATTAIL_SEEDS.get(), 3).unlockedBy("has_cattail_seeds", has(EnvironmentalItems.CATTAIL_SEEDS.get())).save(consumer, getModConversionRecipeName(Items.STRING, EnvironmentalItems.CATTAIL_SEEDS.get()));

@@ -65,7 +65,6 @@ public class EnvironmentalBlocks {
 	// Misc //
 
 	public static final RegistryObject<Block> BURIED_TRUFFLE = HELPER.createBlock("buried_truffle", () -> new Block(EnvironmentalProperties.BURIED_TRUFFLE), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> TRUFFLE_CRATE = HELPER.createCompatBlock("quark", "truffle_crate", () -> new Block(Block.Properties.of(Material.WOOD, MaterialColor.TERRACOTTA_BROWN).strength(1.5F).sound(SoundType.WOOD)), CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> DUCK_EGG_CRATE = HELPER.createCompatBlock("incubation", "duck_egg_crate", () -> new Block(Block.Properties.of(Material.WOOD, MaterialColor.COLOR_LIGHT_BLUE).strength(1.5F).sound(SoundType.WOOD)), CreativeModeTab.TAB_DECORATIONS);
 
 	// Decorations //
