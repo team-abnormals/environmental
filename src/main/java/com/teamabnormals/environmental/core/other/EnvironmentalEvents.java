@@ -30,7 +30,10 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NonTameRandomTargetGoal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
-import net.minecraft.world.entity.animal.*;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.Ocelot;
+import net.minecraft.world.entity.animal.Pig;
+import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
@@ -86,14 +89,6 @@ public class EnvironmentalEvents {
 		Mob entity = event.getEntity();
 		LevelAccessor level = event.getLevel();
 		RandomSource random = level.getRandom();
-
-		if (event.getResult() != Event.Result.DENY && (event.getSpawnReason() == MobSpawnType.NATURAL || event.getSpawnReason() == MobSpawnType.CHUNK_GENERATION)) {
-			if (entity instanceof MushroomCow mooshroom && entity.getType() == EntityType.MOOSHROOM) {
-				if (random.nextInt(5) == 0) {
-					mooshroom.setMushroomType(MushroomCow.MushroomType.BROWN);
-				}
-			}
-		}
 
 		if (!(EnvironmentalConfig.COMMON.blockOnlyNaturalSpawns.get() && event.isSpawner()) && entity.getType().getCategory() == MobCategory.MONSTER && !entity.getType().is(EnvironmentalEntityTypeTags.UNAFFECTED_BY_SERENITY)) {
 			int horizontalRange = EnvironmentalConfig.COMMON.koiHorizontalSerenityRange.get();
