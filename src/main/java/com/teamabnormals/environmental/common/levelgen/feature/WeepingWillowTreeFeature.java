@@ -29,7 +29,7 @@ public class WeepingWillowTreeFeature extends EnvironmentalTreeFeature {
 		RandomSource random = context.random();
 
 		int trunkheight = config.trunkPlacer.getTreeHeight(random);
-		int branches = random.nextInt(3) == 0 ? 2 : 3;
+		int branches = 2 + random.nextInt(2);
 
 		List<Integer> branchheights = Lists.newArrayList(3, 4, 5);
 		List<Direction> branchdirections = Lists.newArrayList();
