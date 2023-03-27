@@ -40,14 +40,14 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> SMOOTH_MUD_SLAB = HELPER.createBlock("smooth_mud_slab", () -> new SlabBlock(EnvironmentalProperties.MUD_BRICKS), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> SMOOTH_MUD_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "smooth_mud_vertical_slab", () -> new DirectionalVerticalSlabBlock(EnvironmentalProperties.MUD_BRICKS), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> CHISELED_MUD_BRICKS = HELPER.createBlock("chiseled_mud_bricks", () -> new Block(EnvironmentalProperties.MUD_BRICKS), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> SLABFISH_EFFIGY = HELPER.createBlock("slabfish_effigy", () -> new SlabfishEffigyBlock(PropertyUtil.FLOWER_POT), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> SLABFISH_EFFIGY = HELPER.createBlock("slabfish_effigy", () -> new SlabfishEffigyBlock(PropertyUtil.flowerPot()), CreativeModeTab.TAB_DECORATIONS);
 
 	// Crops //
 
 	public static final RegistryObject<Block> CATTAIL_SPROUTS = HELPER.createBlockNoItem("cattail_sprouts", () -> new CattailSproutsBlock(EnvironmentalProperties.CATTAIL));
 	public static final RegistryObject<Block> CATTAIL = HELPER.createBlock("cattail", () -> new CattailBlock(EnvironmentalProperties.CATTAIL), CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> TALL_CATTAIL = HELPER.createBlock("tall_cattail", () -> new DoubleCattailBlock(EnvironmentalProperties.CATTAIL), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> POTTED_CATTAIL = HELPER.createBlockNoItem("potted_cattail", () -> new FlowerPotBlock(EnvironmentalBlocks.CATTAIL.get(), PropertyUtil.FLOWER_POT));
+	public static final RegistryObject<Block> POTTED_CATTAIL = HELPER.createBlockNoItem("potted_cattail", () -> new FlowerPotBlock(EnvironmentalBlocks.CATTAIL.get(), PropertyUtil.flowerPot()));
 	public static final RegistryObject<Block> CATTAIL_SEED_SACK = HELPER.createCompatBlock("quark", "cattail_seed_sack", () -> new Block(Block.Properties.of(Material.WOOL, MaterialColor.TERRACOTTA_WHITE).strength(0.5F).sound(SoundType.WOOL)), CreativeModeTab.TAB_DECORATIONS);
 
 	// Foliage //
@@ -60,7 +60,7 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> GIANT_TALL_GRASS = HELPER.createBlock("giant_tall_grass", () -> new DoublePlantBlock(Block.Properties.copy(Blocks.TALL_GRASS)), CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> TALL_DEAD_BUSH = HELPER.createBlock("tall_dead_bush", () -> new TallDeadBushBlock(EnvironmentalProperties.TALL_DEAD_BUSH), CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> CUP_LICHEN = HELPER.createBlock("cup_lichen", () -> new CupLichenBlock(EnvironmentalProperties.CUP_LICHEN), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> POTTED_CUP_LICHEN = HELPER.createBlockNoItem("potted_cup_lichen", () -> new FlowerPotBlock(EnvironmentalBlocks.CUP_LICHEN.get(), PropertyUtil.FLOWER_POT));
+	public static final RegistryObject<Block> POTTED_CUP_LICHEN = HELPER.createBlockNoItem("potted_cup_lichen", () -> new FlowerPotBlock(EnvironmentalBlocks.CUP_LICHEN.get(), PropertyUtil.flowerPot()));
 
 	// Misc //
 
@@ -91,13 +91,13 @@ public class EnvironmentalBlocks {
 
 	// Flowers //
 
-	public static final RegistryObject<Block> CARTWHEEL = HELPER.createBlock("cartwheel", () -> new CartwheelBlock(() -> MobEffects.LEVITATION, 3, PropertyUtil.FLOWER), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> BLUEBELL = HELPER.createBlock("bluebell", () -> new BlueprintFlowerBlock(() -> MobEffects.HUNGER, 8, PropertyUtil.FLOWER), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> VIOLET = HELPER.createBlock("violet", () -> new BlueprintFlowerBlock(() -> MobEffects.INVISIBILITY, 9, PropertyUtil.FLOWER), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> DIANTHUS = HELPER.createBlock("dianthus", () -> new BlueprintFlowerBlock(() -> MobEffects.DAMAGE_BOOST, 7, PropertyUtil.FLOWER), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> RED_LOTUS_FLOWER = HELPER.createBlock("red_lotus_flower", () -> new LotusFlowerBlock(EnvironmentalParticleTypes.RED_LOTUS_BLOSSOM::get, () -> MobEffects.SLOW_FALLING, 5, PropertyUtil.FLOWER), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> WHITE_LOTUS_FLOWER = HELPER.createBlock("white_lotus_flower", () -> new LotusFlowerBlock(EnvironmentalParticleTypes.WHITE_LOTUS_BLOSSOM::get, () -> MobEffects.SLOW_FALLING, 5, PropertyUtil.FLOWER), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> TASSELFLOWER = HELPER.createBlock("tasselflower", () -> new BlueprintFlowerBlock(() -> MobEffects.DIG_SLOWDOWN, 6, PropertyUtil.FLOWER), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> CARTWHEEL = HELPER.createBlock("cartwheel", () -> new CartwheelBlock(() -> MobEffects.LEVITATION, 3, PropertyUtil.flower()), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> BLUEBELL = HELPER.createBlock("bluebell", () -> new BlueprintFlowerBlock(() -> MobEffects.HUNGER, 8, PropertyUtil.flower()), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> VIOLET = HELPER.createBlock("violet", () -> new BlueprintFlowerBlock(() -> MobEffects.INVISIBILITY, 9, PropertyUtil.flower()), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> DIANTHUS = HELPER.createBlock("dianthus", () -> new BlueprintFlowerBlock(() -> MobEffects.DAMAGE_BOOST, 7, PropertyUtil.flower()), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> RED_LOTUS_FLOWER = HELPER.createBlock("red_lotus_flower", () -> new LotusFlowerBlock(EnvironmentalParticleTypes.RED_LOTUS_BLOSSOM::get, () -> MobEffects.SLOW_FALLING, 5, PropertyUtil.flower()), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> WHITE_LOTUS_FLOWER = HELPER.createBlock("white_lotus_flower", () -> new LotusFlowerBlock(EnvironmentalParticleTypes.WHITE_LOTUS_BLOSSOM::get, () -> MobEffects.SLOW_FALLING, 5, PropertyUtil.flower()), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> TASSELFLOWER = HELPER.createBlock("tasselflower", () -> new BlueprintFlowerBlock(() -> MobEffects.DIG_SLOWDOWN, 6, PropertyUtil.flower()), CreativeModeTab.TAB_DECORATIONS);
 
 	public static final RegistryObject<Block> HIBISCUS_LEAVES = HELPER.createBlock("hibiscus_leaves", () -> new HibiscusLeavesBlock(EnvironmentalProperties.HIBISCUS_LEAVES), CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> HIBISCUS_LEAF_PILE = HELPER.createCompatBlock("woodworks", "hibiscus_leaf_pile", () -> new LeafPileBlock(EnvironmentalProperties.HIBISCUS_LEAF_PILE), CreativeModeTab.TAB_DECORATIONS);
@@ -110,26 +110,26 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> MAGENTA_WALL_HIBISCUS = HELPER.createBlockNoItem("magenta_wall_hibiscus", () -> new WallHibiscusBlock(() -> MobEffects.GLOWING, 8, EnvironmentalProperties.WALL_HIBISCUS));
 	public static final RegistryObject<Block> PURPLE_WALL_HIBISCUS = HELPER.createBlockNoItem("purple_wall_hibiscus", () -> new WallHibiscusBlock(() -> MobEffects.GLOWING, 8, EnvironmentalProperties.WALL_HIBISCUS));
 
-	public static final RegistryObject<Block> YELLOW_HIBISCUS = HELPER.createBlockNoItem("yellow_hibiscus", () -> new HibiscusBlock(() -> MobEffects.GLOWING, 8, YELLOW_WALL_HIBISCUS.get(), PropertyUtil.FLOWER));
-	public static final RegistryObject<Block> ORANGE_HIBISCUS = HELPER.createBlockNoItem("orange_hibiscus", () -> new HibiscusBlock(() -> MobEffects.GLOWING, 8, ORANGE_WALL_HIBISCUS.get(), PropertyUtil.FLOWER));
-	public static final RegistryObject<Block> RED_HIBISCUS = HELPER.createBlockNoItem("red_hibiscus", () -> new HibiscusBlock(() -> MobEffects.GLOWING, 8, RED_WALL_HIBISCUS.get(), PropertyUtil.FLOWER));
-	public static final RegistryObject<Block> PINK_HIBISCUS = HELPER.createBlockNoItem("pink_hibiscus", () -> new HibiscusBlock(() -> MobEffects.GLOWING, 8, PINK_WALL_HIBISCUS.get(), PropertyUtil.FLOWER));
-	public static final RegistryObject<Block> MAGENTA_HIBISCUS = HELPER.createBlockNoItem("magenta_hibiscus", () -> new HibiscusBlock(() -> MobEffects.GLOWING, 8, MAGENTA_WALL_HIBISCUS.get(), PropertyUtil.FLOWER));
-	public static final RegistryObject<Block> PURPLE_HIBISCUS = HELPER.createBlockNoItem("purple_hibiscus", () -> new HibiscusBlock(() -> MobEffects.GLOWING, 8, PURPLE_WALL_HIBISCUS.get(), PropertyUtil.FLOWER));
+	public static final RegistryObject<Block> YELLOW_HIBISCUS = HELPER.createBlockNoItem("yellow_hibiscus", () -> new HibiscusBlock(() -> MobEffects.GLOWING, 8, YELLOW_WALL_HIBISCUS.get(), PropertyUtil.flower()));
+	public static final RegistryObject<Block> ORANGE_HIBISCUS = HELPER.createBlockNoItem("orange_hibiscus", () -> new HibiscusBlock(() -> MobEffects.GLOWING, 8, ORANGE_WALL_HIBISCUS.get(), PropertyUtil.flower()));
+	public static final RegistryObject<Block> RED_HIBISCUS = HELPER.createBlockNoItem("red_hibiscus", () -> new HibiscusBlock(() -> MobEffects.GLOWING, 8, RED_WALL_HIBISCUS.get(), PropertyUtil.flower()));
+	public static final RegistryObject<Block> PINK_HIBISCUS = HELPER.createBlockNoItem("pink_hibiscus", () -> new HibiscusBlock(() -> MobEffects.GLOWING, 8, PINK_WALL_HIBISCUS.get(), PropertyUtil.flower()));
+	public static final RegistryObject<Block> MAGENTA_HIBISCUS = HELPER.createBlockNoItem("magenta_hibiscus", () -> new HibiscusBlock(() -> MobEffects.GLOWING, 8, MAGENTA_WALL_HIBISCUS.get(), PropertyUtil.flower()));
+	public static final RegistryObject<Block> PURPLE_HIBISCUS = HELPER.createBlockNoItem("purple_hibiscus", () -> new HibiscusBlock(() -> MobEffects.GLOWING, 8, PURPLE_WALL_HIBISCUS.get(), PropertyUtil.flower()));
 
-	public static final RegistryObject<Block> POTTED_CARTWHEEL = HELPER.createBlockNoItem("potted_cartwheel", () -> new PottedCartwheelBlock(CARTWHEEL.get(), PropertyUtil.FLOWER_POT));
-	public static final RegistryObject<Block> POTTED_BLUEBELL = HELPER.createBlockNoItem("potted_bluebell", () -> new FlowerPotBlock(BLUEBELL.get(), PropertyUtil.FLOWER_POT));
-	public static final RegistryObject<Block> POTTED_VIOLET = HELPER.createBlockNoItem("potted_violet", () -> new FlowerPotBlock(VIOLET.get(), PropertyUtil.FLOWER_POT));
-	public static final RegistryObject<Block> POTTED_DIANTHUS = HELPER.createBlockNoItem("potted_dianthus", () -> new FlowerPotBlock(DIANTHUS.get(), PropertyUtil.FLOWER_POT));
-	public static final RegistryObject<Block> POTTED_RED_LOTUS_FLOWER = HELPER.createBlockNoItem("potted_red_lotus_flower", () -> new FlowerPotBlock(RED_LOTUS_FLOWER.get(), PropertyUtil.FLOWER_POT));
-	public static final RegistryObject<Block> POTTED_WHITE_LOTUS_FLOWER = HELPER.createBlockNoItem("potted_white_lotus_flower", () -> new FlowerPotBlock(WHITE_LOTUS_FLOWER.get(), PropertyUtil.FLOWER_POT));
-	public static final RegistryObject<Block> POTTED_TASSELFLOWER = HELPER.createBlockNoItem("potted_tasselflower", () -> new FlowerPotBlock(TASSELFLOWER.get(), PropertyUtil.FLOWER_POT));
-	public static final RegistryObject<Block> POTTED_YELLOW_HIBISCUS = HELPER.createBlockNoItem("potted_yellow_hibiscus", () -> new FlowerPotBlock(YELLOW_HIBISCUS.get(), PropertyUtil.FLOWER_POT));
-	public static final RegistryObject<Block> POTTED_ORANGE_HIBISCUS = HELPER.createBlockNoItem("potted_orange_hibiscus", () -> new FlowerPotBlock(ORANGE_HIBISCUS.get(), PropertyUtil.FLOWER_POT));
-	public static final RegistryObject<Block> POTTED_RED_HIBISCUS = HELPER.createBlockNoItem("potted_red_hibiscus", () -> new FlowerPotBlock(RED_HIBISCUS.get(), PropertyUtil.FLOWER_POT));
-	public static final RegistryObject<Block> POTTED_PINK_HIBISCUS = HELPER.createBlockNoItem("potted_pink_hibiscus", () -> new FlowerPotBlock(PINK_HIBISCUS.get(), PropertyUtil.FLOWER_POT));
-	public static final RegistryObject<Block> POTTED_MAGENTA_HIBISCUS = HELPER.createBlockNoItem("potted_magenta_hibiscus", () -> new FlowerPotBlock(MAGENTA_HIBISCUS.get(), PropertyUtil.FLOWER_POT));
-	public static final RegistryObject<Block> POTTED_PURPLE_HIBISCUS = HELPER.createBlockNoItem("potted_purple_hibiscus", () -> new FlowerPotBlock(PURPLE_HIBISCUS.get(), PropertyUtil.FLOWER_POT));
+	public static final RegistryObject<Block> POTTED_CARTWHEEL = HELPER.createBlockNoItem("potted_cartwheel", () -> new PottedCartwheelBlock(CARTWHEEL.get(), PropertyUtil.flowerPot()));
+	public static final RegistryObject<Block> POTTED_BLUEBELL = HELPER.createBlockNoItem("potted_bluebell", () -> new FlowerPotBlock(BLUEBELL.get(), PropertyUtil.flowerPot()));
+	public static final RegistryObject<Block> POTTED_VIOLET = HELPER.createBlockNoItem("potted_violet", () -> new FlowerPotBlock(VIOLET.get(), PropertyUtil.flowerPot()));
+	public static final RegistryObject<Block> POTTED_DIANTHUS = HELPER.createBlockNoItem("potted_dianthus", () -> new FlowerPotBlock(DIANTHUS.get(), PropertyUtil.flowerPot()));
+	public static final RegistryObject<Block> POTTED_RED_LOTUS_FLOWER = HELPER.createBlockNoItem("potted_red_lotus_flower", () -> new FlowerPotBlock(RED_LOTUS_FLOWER.get(), PropertyUtil.flowerPot()));
+	public static final RegistryObject<Block> POTTED_WHITE_LOTUS_FLOWER = HELPER.createBlockNoItem("potted_white_lotus_flower", () -> new FlowerPotBlock(WHITE_LOTUS_FLOWER.get(), PropertyUtil.flowerPot()));
+	public static final RegistryObject<Block> POTTED_TASSELFLOWER = HELPER.createBlockNoItem("potted_tasselflower", () -> new FlowerPotBlock(TASSELFLOWER.get(), PropertyUtil.flowerPot()));
+	public static final RegistryObject<Block> POTTED_YELLOW_HIBISCUS = HELPER.createBlockNoItem("potted_yellow_hibiscus", () -> new FlowerPotBlock(YELLOW_HIBISCUS.get(), PropertyUtil.flowerPot()));
+	public static final RegistryObject<Block> POTTED_ORANGE_HIBISCUS = HELPER.createBlockNoItem("potted_orange_hibiscus", () -> new FlowerPotBlock(ORANGE_HIBISCUS.get(), PropertyUtil.flowerPot()));
+	public static final RegistryObject<Block> POTTED_RED_HIBISCUS = HELPER.createBlockNoItem("potted_red_hibiscus", () -> new FlowerPotBlock(RED_HIBISCUS.get(), PropertyUtil.flowerPot()));
+	public static final RegistryObject<Block> POTTED_PINK_HIBISCUS = HELPER.createBlockNoItem("potted_pink_hibiscus", () -> new FlowerPotBlock(PINK_HIBISCUS.get(), PropertyUtil.flowerPot()));
+	public static final RegistryObject<Block> POTTED_MAGENTA_HIBISCUS = HELPER.createBlockNoItem("potted_magenta_hibiscus", () -> new FlowerPotBlock(MAGENTA_HIBISCUS.get(), PropertyUtil.flowerPot()));
+	public static final RegistryObject<Block> POTTED_PURPLE_HIBISCUS = HELPER.createBlockNoItem("potted_purple_hibiscus", () -> new FlowerPotBlock(PURPLE_HIBISCUS.get(), PropertyUtil.flowerPot()));
 
 	// Tall Flowers //
 
@@ -137,13 +137,13 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> BLUE_DELPHINIUM = HELPER.createBlock("blue_delphinium", () -> new BlueprintTallFlowerBlock(EnvironmentalProperties.DELPHINIUMS), CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> PURPLE_DELPHINIUM = HELPER.createBlock("purple_delphinium", () -> new BlueprintTallFlowerBlock(EnvironmentalProperties.DELPHINIUMS), CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> WHITE_DELPHINIUM = HELPER.createBlock("white_delphinium", () -> new BlueprintTallFlowerBlock(EnvironmentalProperties.DELPHINIUMS), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> BIRD_OF_PARADISE = HELPER.createBlock("bird_of_paradise", () -> new BlueprintTallFlowerBlock(PropertyUtil.FLOWER), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> BIRD_OF_PARADISE = HELPER.createBlock("bird_of_paradise", () -> new BlueprintTallFlowerBlock(PropertyUtil.flower()), CreativeModeTab.TAB_DECORATIONS);
 
-	public static final RegistryObject<Block> POTTED_PINK_DELPHINIUM = HELPER.createBlockNoItem("potted_pink_delphinium", () -> new FlowerPotBlock(PINK_DELPHINIUM.get(), PropertyUtil.FLOWER_POT));
-	public static final RegistryObject<Block> POTTED_BLUE_DELPHINIUM = HELPER.createBlockNoItem("potted_blue_delphinium", () -> new FlowerPotBlock(BLUE_DELPHINIUM.get(), PropertyUtil.FLOWER_POT));
-	public static final RegistryObject<Block> POTTED_PURPLE_DELPHINIUM = HELPER.createBlockNoItem("potted_purple_delphinium", () -> new FlowerPotBlock(PURPLE_DELPHINIUM.get(), PropertyUtil.FLOWER_POT));
-	public static final RegistryObject<Block> POTTED_WHITE_DELPHINIUM = HELPER.createBlockNoItem("potted_white_delphinium", () -> new FlowerPotBlock(WHITE_DELPHINIUM.get(), PropertyUtil.FLOWER_POT));
-	public static final RegistryObject<Block> POTTED_BIRD_OF_PARADISE = HELPER.createBlockNoItem("potted_bird_of_paradise", () -> new FlowerPotBlock(BIRD_OF_PARADISE.get(), PropertyUtil.FLOWER_POT));
+	public static final RegistryObject<Block> POTTED_PINK_DELPHINIUM = HELPER.createBlockNoItem("potted_pink_delphinium", () -> new FlowerPotBlock(PINK_DELPHINIUM.get(), PropertyUtil.flowerPot()));
+	public static final RegistryObject<Block> POTTED_BLUE_DELPHINIUM = HELPER.createBlockNoItem("potted_blue_delphinium", () -> new FlowerPotBlock(BLUE_DELPHINIUM.get(), PropertyUtil.flowerPot()));
+	public static final RegistryObject<Block> POTTED_PURPLE_DELPHINIUM = HELPER.createBlockNoItem("potted_purple_delphinium", () -> new FlowerPotBlock(PURPLE_DELPHINIUM.get(), PropertyUtil.flowerPot()));
+	public static final RegistryObject<Block> POTTED_WHITE_DELPHINIUM = HELPER.createBlockNoItem("potted_white_delphinium", () -> new FlowerPotBlock(WHITE_DELPHINIUM.get(), PropertyUtil.flowerPot()));
+	public static final RegistryObject<Block> POTTED_BIRD_OF_PARADISE = HELPER.createBlockNoItem("potted_bird_of_paradise", () -> new FlowerPotBlock(BIRD_OF_PARADISE.get(), PropertyUtil.flowerPot()));
 
 	// Willow //
 
@@ -153,8 +153,8 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> WILLOW_WOOD = HELPER.createBlock("willow_wood", () -> new WoodBlock(STRIPPED_WILLOW_WOOD, EnvironmentalProperties.WILLOW.log()), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> WILLOW_LEAVES = HELPER.createBlock("willow_leaves", () -> new BlueprintLeavesBlock(EnvironmentalProperties.WILLOW.leaves()), CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> HANGING_WILLOW_LEAVES = HELPER.createBlock("hanging_willow_leaves", () -> new HangingLeavesBlock(EnvironmentalProperties.WILLOW.leaves().noCollission()), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> WILLOW_SAPLING = HELPER.createBlock("willow_sapling", () -> new BlueprintSaplingBlock(new WillowTreeGrower(), PropertyUtil.SAPLING), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> POTTED_WILLOW_SAPLING = HELPER.createBlockNoItem("potted_willow_sapling", () -> new FlowerPotBlock(WILLOW_SAPLING.get(), PropertyUtil.FLOWER_POT));
+	public static final RegistryObject<Block> WILLOW_SAPLING = HELPER.createBlock("willow_sapling", () -> new BlueprintSaplingBlock(new WillowTreeGrower(), EnvironmentalProperties.WILLOW.sapling()), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> POTTED_WILLOW_SAPLING = HELPER.createBlockNoItem("potted_willow_sapling", () -> new FlowerPotBlock(WILLOW_SAPLING.get(), PropertyUtil.flowerPot()));
 	public static final RegistryObject<Block> WILLOW_PLANKS = HELPER.createBlock("willow_planks", () -> new PlanksBlock(EnvironmentalProperties.WILLOW.planks()), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> WILLOW_STAIRS = HELPER.createBlock("willow_stairs", () -> new WoodStairBlock(WILLOW_PLANKS.get().defaultBlockState(), EnvironmentalProperties.WILLOW.planks()), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> WILLOW_SLAB = HELPER.createBlock("willow_slab", () -> new WoodSlabBlock(EnvironmentalProperties.WILLOW.planks()), CreativeModeTab.TAB_BUILDING_BLOCKS);
@@ -187,8 +187,8 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> PINE_LOG = HELPER.createBlock("pine_log", () -> new LogBlock(STRIPPED_PINE_LOG, EnvironmentalProperties.PINE.log()), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> PINE_WOOD = HELPER.createBlock("pine_wood", () -> new WoodBlock(STRIPPED_PINE_WOOD, EnvironmentalProperties.PINE.log()), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> PINE_LEAVES = HELPER.createBlock("pine_leaves", () -> new BlueprintLeavesBlock(EnvironmentalProperties.PINE.leaves()), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> PINE_SAPLING = HELPER.createBlock("pine_sapling", () -> new BlueprintSaplingBlock(new SpruceTreeGrower(), PropertyUtil.SAPLING), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> POTTED_PINE_SAPLING = HELPER.createBlockNoItem("potted_pine_sapling", () -> new FlowerPotBlock(PINE_SAPLING.get(), PropertyUtil.FLOWER_POT));
+	public static final RegistryObject<Block> PINE_SAPLING = HELPER.createBlock("pine_sapling", () -> new BlueprintSaplingBlock(new SpruceTreeGrower(), EnvironmentalProperties.PINE.sapling()), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> POTTED_PINE_SAPLING = HELPER.createBlockNoItem("potted_pine_sapling", () -> new FlowerPotBlock(PINE_SAPLING.get(), PropertyUtil.flowerPot()));
 	public static final RegistryObject<Block> PINE_PLANKS = HELPER.createBlock("pine_planks", () -> new PlanksBlock(EnvironmentalProperties.PINE.planks()), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> PINE_STAIRS = HELPER.createBlock("pine_stairs", () -> new WoodStairBlock(PINE_PLANKS.get().defaultBlockState(), EnvironmentalProperties.PINE.planks()), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> PINE_SLAB = HELPER.createBlock("pine_slab", () -> new WoodSlabBlock(EnvironmentalProperties.PINE.planks()), CreativeModeTab.TAB_BUILDING_BLOCKS);
@@ -221,8 +221,8 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> CHERRY_LOG = HELPER.createBlock("cherry_log", () -> new LogBlock(STRIPPED_CHERRY_LOG, EnvironmentalProperties.CHERRY.log()), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> CHERRY_WOOD = HELPER.createBlock("cherry_wood", () -> new WoodBlock(STRIPPED_CHERRY_WOOD, EnvironmentalProperties.CHERRY.log()), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> CHERRY_LEAVES = HELPER.createBlock("cherry_leaves", () -> new CherryLeavesBlock(EnvironmentalProperties.CHERRY.leaves()), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> CHERRY_SAPLING = HELPER.createBlock("cherry_sapling", () -> new BlueprintSaplingBlock(new CherryTreeGrower(), PropertyUtil.SAPLING), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> POTTED_CHERRY_SAPLING = HELPER.createBlockNoItem("potted_cherry_sapling", () -> new FlowerPotBlock(CHERRY_SAPLING.get(), PropertyUtil.FLOWER_POT));
+	public static final RegistryObject<Block> CHERRY_SAPLING = HELPER.createBlock("cherry_sapling", () -> new BlueprintSaplingBlock(new CherryTreeGrower(), EnvironmentalProperties.CHERRY.sapling()), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> POTTED_CHERRY_SAPLING = HELPER.createBlockNoItem("potted_cherry_sapling", () -> new FlowerPotBlock(CHERRY_SAPLING.get(), PropertyUtil.flowerPot()));
 	public static final RegistryObject<Block> CHERRY_PLANKS = HELPER.createBlock("cherry_planks", () -> new PlanksBlock(EnvironmentalProperties.CHERRY.planks()), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> CHERRY_STAIRS = HELPER.createBlock("cherry_stairs", () -> new WoodStairBlock(CHERRY_PLANKS.get().defaultBlockState(), EnvironmentalProperties.CHERRY.planks()), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> CHERRY_SLAB = HELPER.createBlock("cherry_slab", () -> new WoodSlabBlock(EnvironmentalProperties.CHERRY.planks()), CreativeModeTab.TAB_BUILDING_BLOCKS);
@@ -280,14 +280,14 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> BLUE_HANGING_WISTERIA_LEAVES = HELPER.createBlock("blue_hanging_wisteria_leaves", () -> new HangingWisteriaLeavesBlock(EnvironmentalProperties.leaves(MaterialColor.COLOR_BLUE).noCollission()), CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> PURPLE_HANGING_WISTERIA_LEAVES = HELPER.createBlock("purple_hanging_wisteria_leaves", () -> new HangingWisteriaLeavesBlock(EnvironmentalProperties.leaves(MaterialColor.COLOR_PURPLE).noCollission()), CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> WHITE_HANGING_WISTERIA_LEAVES = HELPER.createBlock("white_hanging_wisteria_leaves", () -> new HangingWisteriaLeavesBlock(EnvironmentalProperties.leaves(MaterialColor.SNOW).noCollission()), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> PINK_WISTERIA_SAPLING = HELPER.createBlock("pink_wisteria_sapling", () -> new BlueprintSaplingBlock(new WisteriaTree(WisteriaColor.PINK), PropertyUtil.SAPLING), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> BLUE_WISTERIA_SAPLING = HELPER.createBlock("blue_wisteria_sapling", () -> new BlueprintSaplingBlock(new WisteriaTree(WisteriaColor.BLUE), PropertyUtil.SAPLING), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> PURPLE_WISTERIA_SAPLING = HELPER.createBlock("purple_wisteria_sapling", () -> new BlueprintSaplingBlock(new WisteriaTree(WisteriaColor.PURPLE), PropertyUtil.SAPLING), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> WHITE_WISTERIA_SAPLING = HELPER.createBlock("white_wisteria_sapling", () -> new BlueprintSaplingBlock(new WisteriaTree(WisteriaColor.WHITE), PropertyUtil.SAPLING), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> POTTED_PINK_WISTERIA_SAPLING = HELPER.createBlockNoItem("potted_pink_wisteria_sapling", () -> new FlowerPotBlock(PINK_WISTERIA_SAPLING.get(), PropertyUtil.FLOWER_POT));
-	public static final RegistryObject<Block> POTTED_BLUE_WISTERIA_SAPLING = HELPER.createBlockNoItem("potted_blue_wisteria_sapling", () -> new FlowerPotBlock(BLUE_WISTERIA_SAPLING.get(), PropertyUtil.FLOWER_POT));
-	public static final RegistryObject<Block> POTTED_PURPLE_WISTERIA_SAPLING = HELPER.createBlockNoItem("potted_purple_wisteria_sapling", () -> new FlowerPotBlock(PURPLE_WISTERIA_SAPLING.get(), PropertyUtil.FLOWER_POT));
-	public static final RegistryObject<Block> POTTED_WHITE_WISTERIA_SAPLING = HELPER.createBlockNoItem("potted_white_wisteria_sapling", () -> new FlowerPotBlock(WHITE_WISTERIA_SAPLING.get(), PropertyUtil.FLOWER_POT));
+	public static final RegistryObject<Block> PINK_WISTERIA_SAPLING = HELPER.createBlock("pink_wisteria_sapling", () -> new BlueprintSaplingBlock(new WisteriaTree(WisteriaColor.PINK), EnvironmentalProperties.WISTERIA.sapling()), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> BLUE_WISTERIA_SAPLING = HELPER.createBlock("blue_wisteria_sapling", () -> new BlueprintSaplingBlock(new WisteriaTree(WisteriaColor.BLUE), EnvironmentalProperties.WISTERIA.sapling()), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> PURPLE_WISTERIA_SAPLING = HELPER.createBlock("purple_wisteria_sapling", () -> new BlueprintSaplingBlock(new WisteriaTree(WisteriaColor.PURPLE), EnvironmentalProperties.WISTERIA.sapling()), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> WHITE_WISTERIA_SAPLING = HELPER.createBlock("white_wisteria_sapling", () -> new BlueprintSaplingBlock(new WisteriaTree(WisteriaColor.WHITE), EnvironmentalProperties.WISTERIA.sapling()), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> POTTED_PINK_WISTERIA_SAPLING = HELPER.createBlockNoItem("potted_pink_wisteria_sapling", () -> new FlowerPotBlock(PINK_WISTERIA_SAPLING.get(), PropertyUtil.flowerPot()));
+	public static final RegistryObject<Block> POTTED_BLUE_WISTERIA_SAPLING = HELPER.createBlockNoItem("potted_blue_wisteria_sapling", () -> new FlowerPotBlock(BLUE_WISTERIA_SAPLING.get(), PropertyUtil.flowerPot()));
+	public static final RegistryObject<Block> POTTED_PURPLE_WISTERIA_SAPLING = HELPER.createBlockNoItem("potted_purple_wisteria_sapling", () -> new FlowerPotBlock(PURPLE_WISTERIA_SAPLING.get(), PropertyUtil.flowerPot()));
+	public static final RegistryObject<Block> POTTED_WHITE_WISTERIA_SAPLING = HELPER.createBlockNoItem("potted_white_wisteria_sapling", () -> new FlowerPotBlock(WHITE_WISTERIA_SAPLING.get(), PropertyUtil.flowerPot()));
 
 	public static final RegistryObject<Block> WISTERIA_BOARDS = HELPER.createCompatFuelBlock("woodworks", "wisteria_boards", () -> new RotatedPillarBlock(EnvironmentalProperties.WISTERIA.planks()), 300, CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> WISTERIA_BOOKSHELF = HELPER.createCompatFuelBlock("woodworks", "wisteria_bookshelf", () -> new BookshelfBlock(EnvironmentalProperties.WISTERIA.bookshelf()), 300, CreativeModeTab.TAB_BUILDING_BLOCKS);
