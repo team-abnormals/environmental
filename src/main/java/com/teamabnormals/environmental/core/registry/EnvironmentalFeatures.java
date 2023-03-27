@@ -65,6 +65,8 @@ public class EnvironmentalFeatures {
 	public static final RegistryObject<Feature<TreeConfiguration>> WISTERIA_TREE = FEATURES.register("wisteria_tree", () -> new WisteriaTreeFeature(TreeConfiguration.CODEC));
 	public static final RegistryObject<Feature<TreeConfiguration>> DELPHINIUM_WISTERIA_TREE = FEATURES.register("delphinium_wisteria_tree", () -> new DelphiniumWisteriaTreeFeature(TreeConfiguration.CODEC));
 
+	public static final RegistryObject<Feature<NoneFeatureConfiguration>> WILLOW_TREE_PLACER = FEATURES.register("willow_tree_placer", () -> new WillowTreePlacerFeature(NoneFeatureConfiguration.CODEC));
+
 	public static final RegistryObject<TreeDecoratorType<?>> HANGING_WILLOW_LEAVES = TREE_DECORATORS.register("hanging_willow_leaves", () -> new TreeDecoratorType<>(HangingWillowDecorator.CODEC));
 	public static final RegistryObject<TreeDecoratorType<?>> HANGING_WISTERIA_LEAVES = TREE_DECORATORS.register("hanging_wisteria_leaves", () -> new TreeDecoratorType<>(HangingWisteriaDecorator.CODEC));
 
@@ -79,7 +81,7 @@ public class EnvironmentalFeatures {
 		private static final HangingWisteriaDecorator HANGING_PINK_WISTERIA = new HangingWisteriaDecorator(0.75F);
 
 		public static final TreeConfiguration WILLOW = createStraightBlobTree(EnvironmentalBlocks.WILLOW_LOG.get(), EnvironmentalBlocks.WILLOW_LEAVES.get(), 5, 3, 0, 3).decorators(ImmutableList.of(new LeaveVineDecorator(0.25F), HangingWillowDecorator.INSTANCE)).build();
-		public static final TreeConfiguration WEEPING_WILLOW = createCustomTree(EnvironmentalBlocks.WILLOW_LOG.get(), new StraightTrunkPlacer(12, 2, 0), EnvironmentalBlocks.WILLOW_LEAVES.get()).decorators(ImmutableList.of(new LeaveVineDecorator(0.25F), HangingWillowDecorator.INSTANCE)).build();
+		public static final TreeConfiguration WEEPING_WILLOW = createCustomTree(EnvironmentalBlocks.WILLOW_LOG.get(), new StraightTrunkPlacer(11, 1, 0), EnvironmentalBlocks.WILLOW_LEAVES.get()).decorators(ImmutableList.of(new LeaveVineDecorator(0.35F), HangingWillowDecorator.INSTANCE)).build();
 
 		public static final TreeConfiguration BIRCH_BEES_0002 = createStraightBlobTree(Blocks.BIRCH_LOG, Blocks.BIRCH_LEAVES, 5, 2, 6, 2).ignoreVines().decorators(ImmutableList.of(Configs.BEEHIVE_0002)).build();
 
@@ -153,7 +155,7 @@ public class EnvironmentalFeatures {
 
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> WILLOW = register("willow", () -> new ConfiguredFeature<>(Feature.TREE, Configs.WILLOW));
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> WEEPING_WILLOW = register("weeping_willow", () -> new ConfiguredFeature<>(EnvironmentalFeatures.WEEPING_WILLOW_TREE.get(), Configs.WEEPING_WILLOW));
-		public static final RegistryObject<ConfiguredFeature<RandomFeatureConfiguration, ?>> TREES_SWAMP = register("trees_swamp", () -> new ConfiguredFeature<>(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(EnvironmentalPlacedFeatures.WEEPING_WILLOW_CHECKED.getHolder().get(), 0.15F)), EnvironmentalPlacedFeatures.WILLOW_CHECKED.getHolder().get())));
+		public static final RegistryObject<ConfiguredFeature<NoneFeatureConfiguration, ?>> TREES_WILLOW = register("trees_willow", () -> new ConfiguredFeature<>(EnvironmentalFeatures.WILLOW_TREE_PLACER.get(), NoneFeatureConfiguration.NONE));
 		public static final RegistryObject<ConfiguredFeature<RandomFeatureConfiguration, ?>> MARSH_OAK = register("marsh_oak", () -> new ConfiguredFeature<>(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(TreePlacements.FANCY_OAK_CHECKED, 0.33333334F)), TreePlacements.OAK_CHECKED)));
 
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> BIRCH_BEES_0002 = register("birch_bees_0002", () -> new ConfiguredFeature<>(Feature.TREE, Configs.BIRCH_BEES_0002));
@@ -252,10 +254,8 @@ public class EnvironmentalFeatures {
 		public static final RegistryObject<PlacedFeature> BLUE_WISTERIA_BEES_002 = register("blue_wisteria_bees_002", EnvironmentalConfiguredFeatures.BLUE_WISTERIA_BEES_002, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
 		public static final RegistryObject<PlacedFeature> TREES_WISTERIA = register("trees_wisteria", EnvironmentalConfiguredFeatures.TREES_WISTERIA, VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.1F, 1)));
 
-		public static final RegistryObject<PlacedFeature> WILLOW_CHECKED = register("willow_checked", EnvironmentalConfiguredFeatures.WILLOW, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
-		public static final RegistryObject<PlacedFeature> WEEPING_WILLOW_CHECKED = register("weeping_willow_checked", EnvironmentalConfiguredFeatures.WEEPING_WILLOW, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
 		public static final RegistryObject<PlacedFeature> TREES_MARSH = register("trees_marsh", EnvironmentalConfiguredFeatures.MARSH_OAK, VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.25F, 1)));
-		public static final RegistryObject<PlacedFeature> TREES_SWAMP = register("trees_swamp", EnvironmentalConfiguredFeatures.TREES_SWAMP, PlacementUtils.countExtra(2, 0.1F, 1), InSquarePlacement.spread(), SurfaceWaterDepthFilter.forMaxDepth(2), PlacementUtils.HEIGHTMAP_OCEAN_FLOOR, BiomeFilter.biome(), BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.defaultBlockState(), BlockPos.ZERO)));
+		public static final RegistryObject<PlacedFeature> TREES_SWAMP = register("trees_swamp", EnvironmentalConfiguredFeatures.TREES_WILLOW, PlacementUtils.countExtra(2, 0.1F, 1), InSquarePlacement.spread(), SurfaceWaterDepthFilter.forMaxDepth(2), PlacementUtils.HEIGHTMAP_OCEAN_FLOOR, BiomeFilter.biome(), BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.defaultBlockState(), BlockPos.ZERO)));
 		public static final RegistryObject<PlacedFeature> HUGE_BROWN_MUSHROOM_MARSH = register("huge_brown_mushroom_marsh", EnvironmentalConfiguredFeatures.HUGE_BROWN_MUSHROOM, VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.025F, 1)));
 
 		public static final RegistryObject<PlacedFeature> CHERRY_TREES_BLOSSOM_WOODS = register("cherry_tree_blossom_woods", EnvironmentalConfiguredFeatures.CHERRY_BEES_0002, VegetationPlacements.treePlacement(PlacementUtils.countExtra(8, 0.05F, 1), Blocks.BIRCH_SAPLING));

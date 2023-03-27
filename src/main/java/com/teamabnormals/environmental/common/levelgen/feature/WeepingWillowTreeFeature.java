@@ -31,7 +31,7 @@ public class WeepingWillowTreeFeature extends EnvironmentalTreeFeature {
 		int trunkheight = config.trunkPlacer.getTreeHeight(random);
 		int branches = random.nextInt(3) == 0 ? 2 : 3;
 
-		List<Integer> branchheights = trunkheight > 12 ? Lists.newArrayList(3, 4, 5, 6) : Lists.newArrayList(3, 4, 5);
+		List<Integer> branchheights = Lists.newArrayList(3, 4, 5);
 		List<Direction> branchdirections = Lists.newArrayList();
 		Plane.HORIZONTAL.forEach(branchdirections::add);
 
@@ -54,7 +54,7 @@ public class WeepingWillowTreeFeature extends EnvironmentalTreeFeature {
 				this.addLog(origin.above(i).relative(direction));
 		}
 
-		this.createTipLeafBlob(origin.above(trunkheight).relative(direction), random, direction);
+		this.createTopLeafBlob(origin.above(trunkheight).relative(direction), random, direction);
 	}
 
 	@Override
@@ -78,7 +78,7 @@ public class WeepingWillowTreeFeature extends EnvironmentalTreeFeature {
 		this.createBranchLeafBlob(mutablepos, random, direction, length <= 3);
 	}
 
-	private void createTipLeafBlob(BlockPos pos, RandomSource random, Direction direction) {
+	private void createTopLeafBlob(BlockPos pos, RandomSource random, Direction direction) {
 		BlockPos.MutableBlockPos mutablepos = new BlockPos.MutableBlockPos();
 
 		for (int y = 0; y >= -3; y--) {
