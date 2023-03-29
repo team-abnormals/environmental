@@ -362,11 +362,10 @@
 	"entity.environmental.slabfish.type.cave": "Caverna",
 	"entity.environmental.slabfish.type.deepslate": "Ardesia profonda",
 	"entity.environmental.slabfish.type.dripstone_caves": "Caverne di speleotemi",
-	"entity.environmental.slabfish.type.lush_caves": "Lush Caves",
-	"entity.environmental.slabfish.type.deep_dark": "Deep Dark",
+	"entity.environmental.slabfish.type.lush_caves": "Caverne rigogliose",
+	"entity.environmental.slabfish.type.deep_dark": "Abisso oscuro",
   
 	"entity.environmental.slabfish.type.marsh": "Acquitrino",
-	"entity.environmental.slabfish.type.mire": "Torbiera",
 	"entity.environmental.slabfish.type.blossom": "Fiore",
 	"entity.environmental.slabfish.type.maple": "Foresta d'acero",
 	"entity.environmental.slabfish.type.rainforest": "Foresta pluviale",
@@ -408,9 +407,6 @@
 	"entity.environmental.slabfish.backpack.green": "Zaino verde",
 	"entity.environmental.slabfish.backpack.red": "Zaino rosso",
 	"entity.environmental.slabfish.backpack.black": "Zaino nero",
-	"entity.environmental.slabfish.backpack.snake_block": "Gooey Growth",
-	"entity.environmental.slabfish.backpack.gore": "Gorey Growth",
-	"entity.environmental.slabfish.backpack.ocelot": "Cooler",
 	
 	"entity.environmental.slabfish.sweater.white": "Maglione bianco",
 	"entity.environmental.slabfish.sweater.orange": "Maglione arancione",
