@@ -65,7 +65,6 @@ public class EnvironmentalBiomeModifierProvider {
 		addFeature("cattails", EnvironmentalBiomeTags.HAS_CATTAILS, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.CATTAILS);
 		addFeature("bluebell", EnvironmentalBiomeTags.HAS_BLUEBELL, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_BLUEBELL, EnvironmentalPlacedFeatures.FLOWER_BLUEBELL_LARGE);
 		addFeature("violet", EnvironmentalBiomeTags.HAS_VIOLET, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_VIOLET);
-		addFeature("violet_rare", EnvironmentalBiomeTags.HAS_RARE_VIOLET, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_VIOLET_RARE);
 		addFeature("tasselflower", EnvironmentalBiomeTags.HAS_TASSELFLOWER, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_TASSELFLOWER);
 		addFeature("bird_of_paradise", EnvironmentalBiomeTags.HAS_BIRD_OF_PARADISE, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_BIRD_OF_PARADISE);
 		addFeature("hibiscus_bush", EnvironmentalBiomeTags.HAS_HIBISCUS, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.HIBISCUS_BUSH);

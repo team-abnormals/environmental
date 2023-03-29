@@ -8,11 +8,17 @@ import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.LegacyRandomSource;
+import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.stateproviders.NoiseProvider;
+import net.minecraft.world.level.levelgen.synth.NormalNoise;
+import net.minecraft.world.level.levelgen.synth.NormalNoise.NoiseParameters;
 
 public class LargeBluebellPatchFeature extends Feature<NoneFeatureConfiguration> {
+	private static final NormalNoise NOISE = NormalNoise.create(new WorldgenRandom(new LegacyRandomSource(2345L)), new NormalNoise.NoiseParameters(0, 1.0D));
 
 	public LargeBluebellPatchFeature(Codec<NoneFeatureConfiguration> config) {
 		super(config);
@@ -27,11 +33,12 @@ public class LargeBluebellPatchFeature extends Feature<NoneFeatureConfiguration>
 		int flowers = 0;
 		BlockPos.MutableBlockPos blockpos = new BlockPos.MutableBlockPos();
 
-		for (int x = -10; x <= 10; ++x) {
-			for (int z = -10; z <= 10; ++z) {
+		for (int x = -16; x <= 16; ++x) {
+			for (int z = -16; z <= 16; ++z) {
 				blockpos.set(x + pos.getX(), level.getHeight(Heightmap.Types.WORLD_SURFACE_WG, x + pos.getX(), z + pos.getZ()), z + pos.getZ());
-				double r = blockpos.distSqr(pos);
-				if (random.nextInt(10) > 0 && (r <= 49.0D || (r <= 100.0D && random.nextInt(4) == 0))) {
+				double d0 = getNoiseAtPos(pos, blockpos);
+
+				if (random.nextInt(10) > 0 && blockpos.distSqr(pos) < 324.0D && (d0 > 0.5D || (d0 > 0.05D && random.nextInt(4) == 0))) {
 					BlockState blockstate = EnvironmentalBlocks.BLUEBELL.get().defaultBlockState();
 					if (random.nextInt(6) == 0)
 						blockstate = random.nextInt(3) > 0 ? Blocks.GRASS.defaultBlockState() : Blocks.FERN.defaultBlockState();
@@ -45,5 +52,10 @@ public class LargeBluebellPatchFeature extends Feature<NoneFeatureConfiguration>
 		}
 
 		return flowers > 0;
+	}
+
+	private static double getNoiseAtPos(BlockPos origin, BlockPos pos) {
+		double d0 = NOISE.getValue(pos.getX() * 0.05D, 0.0D, pos.getZ() * 0.05D);
+		return (1.0D - pos.distSqr(origin) / 256.0D) + d0 * 1.35D;
 	}
 }
