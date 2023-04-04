@@ -9,10 +9,10 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 
 public class EnvironmentalProperties {
-	public static final WoodSetProperties WILLOW = WoodSetProperties.builder(MaterialColor.TERRACOTTA_GREEN).build();
-	public static final WoodSetProperties PINE = WoodSetProperties.builder(MaterialColor.TERRACOTTA_LIGHT_GRAY).build();
-	public static final WoodSetProperties CHERRY = WoodSetProperties.builder(MaterialColor.TERRACOTTA_RED).leavesColor(MaterialColor.COLOR_PINK).build();
-	public static final WoodSetProperties WISTERIA = WoodSetProperties.builder(MaterialColor.TERRACOTTA_WHITE).build();
+	public static final WoodSetProperties WILLOW = WoodSetProperties.builder(MaterialColor.TERRACOTTA_GREEN, MaterialColor.WOOD).build();
+	public static final WoodSetProperties PINE = WoodSetProperties.builder(MaterialColor.TERRACOTTA_LIGHT_GRAY, MaterialColor.WOOD).build();
+	public static final WoodSetProperties CHERRY = WoodSetProperties.builder(MaterialColor.TERRACOTTA_RED, MaterialColor.WOOD).leavesColor(MaterialColor.COLOR_PINK).build();
+	public static final WoodSetProperties WISTERIA = WoodSetProperties.builder(MaterialColor.TERRACOTTA_WHITE, MaterialColor.TERRACOTTA_CYAN).build();
 
 	public static final BlockBehaviour.Properties CATTAIL = BlockBehaviour.Properties.of(Material.REPLACEABLE_PLANT).strength(0.0F).noCollission().randomTicks().sound(SoundType.WET_GRASS).offsetType(BlockBehaviour.OffsetType.XZ);
 

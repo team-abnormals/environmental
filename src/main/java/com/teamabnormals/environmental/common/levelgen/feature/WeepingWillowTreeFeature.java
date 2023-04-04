@@ -3,6 +3,7 @@ package com.teamabnormals.environmental.common.levelgen.feature;
 import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
 import com.teamabnormals.blueprint.common.block.wood.LogBlock;
+import com.teamabnormals.blueprint.common.levelgen.feature.BlueprintTreeFeature;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
@@ -16,7 +17,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.TreeConfigurati
 
 import java.util.List;
 
-public class WeepingWillowTreeFeature extends EnvironmentalTreeFeature {
+public class WeepingWillowTreeFeature extends BlueprintTreeFeature {
 
 	public WeepingWillowTreeFeature(Codec<TreeConfiguration> config) {
 		super(config);
@@ -28,38 +29,33 @@ public class WeepingWillowTreeFeature extends EnvironmentalTreeFeature {
 		BlockPos origin = context.origin();
 		RandomSource random = context.random();
 
-		int trunkheight = config.trunkPlacer.getTreeHeight(random);
+		int trunkHeight = config.trunkPlacer.getTreeHeight(random);
 		int branches = 2 + random.nextInt(2);
 
-		List<Integer> branchheights = Lists.newArrayList(3, 4, 5);
-		List<Direction> branchdirections = Lists.newArrayList();
-		Plane.HORIZONTAL.forEach(branchdirections::add);
+		List<Integer> branchHeights = Lists.newArrayList(3, 4, 5);
+		List<Direction> branchDirections = Lists.newArrayList();
+		Plane.HORIZONTAL.forEach(branchDirections::add);
 
 		for (int i = 0; i < branches; i++) {
-			int branchheight = branchheights.get(random.nextInt(branchheights.size()));
-			Direction direction = branchdirections.get(random.nextInt(branchdirections.size()));
+			int branchHeight = branchHeights.get(random.nextInt(branchHeights.size()));
+			Direction direction = branchDirections.get(random.nextInt(branchDirections.size()));
 
-			this.createBranch(origin.above(branchheight), direction, random, config);
+			this.createBranch(origin.above(branchHeight), direction, random, config);
 
-			branchheights.remove(Integer.valueOf(branchheight));
-			branchdirections.remove(direction);
+			branchHeights.remove(Integer.valueOf(branchHeight));
+			branchDirections.remove(direction);
 		}
 
-		Direction direction = branchdirections.get(random.nextInt(branchdirections.size()));
+		Direction direction = branchDirections.get(random.nextInt(branchDirections.size()));
 
-		for (int i = 0; i < trunkheight; i++) {
-			if (i < trunkheight - 5)
+		for (int i = 0; i < trunkHeight; i++) {
+			if (i < trunkHeight - 5)
 				this.addLog(origin.above(i));
 			else
 				this.addLog(origin.above(i).relative(direction));
 		}
 
-		this.createTopLeafBlob(origin.above(trunkheight).relative(direction), random, direction);
-	}
-
-	@Override
-	public BlockState getSapling() {
-		return EnvironmentalBlocks.WILLOW_SAPLING.get().defaultBlockState();
+		this.createTopLeafBlob(origin.above(trunkHeight).relative(direction), random, direction);
 	}
 
 	private void createBranch(BlockPos pos, Direction direction, RandomSource random, TreeConfiguration config) {
@@ -155,4 +151,10 @@ public class WeepingWillowTreeFeature extends EnvironmentalTreeFeature {
 
 		return true;
 	}
+
+	@Override
+	public BlockState getSapling() {
+		return EnvironmentalBlocks.WILLOW_SAPLING.get().defaultBlockState();
+	}
+
 }

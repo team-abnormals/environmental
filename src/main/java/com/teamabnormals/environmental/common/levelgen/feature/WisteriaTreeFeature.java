@@ -2,6 +2,7 @@ package com.teamabnormals.environmental.common.levelgen.feature;
 
 import com.mojang.serialization.Codec;
 import com.teamabnormals.blueprint.common.block.wood.LogBlock;
+import com.teamabnormals.blueprint.common.levelgen.feature.BlueprintTreeFeature;
 import com.teamabnormals.environmental.common.block.WisteriaLeavesBlock;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.core.BlockPos;
@@ -16,7 +17,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.TreeConfigurati
 
 import java.util.Set;
 
-public class WisteriaTreeFeature extends EnvironmentalTreeFeature {
+public class WisteriaTreeFeature extends BlueprintTreeFeature {
 
 	public WisteriaTreeFeature(Codec<TreeConfiguration> config) {
 		super(config);
