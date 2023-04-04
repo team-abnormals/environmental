@@ -106,7 +106,7 @@ public class EnvironmentalFeatures {
 		public static final TreeConfiguration PINK_WISTERIA_BEES_005 = createPinkWisteria().decorators(List.of(HANGING_PINK_WISTERIA, BEEHIVE_005)).build();
 
 		private static TreeConfigurationBuilder createCherry() {
-			return createCustomTree(EnvironmentalBlocks.CHERRY_LOG.get(), EnvironmentalBlocks.CHERRY_LEAVES.get());
+			return createCustomTree(EnvironmentalBlocks.CHERRY_LOG.get(), new StraightTrunkPlacer(5, 2, 1), EnvironmentalBlocks.CHERRY_LEAVES.get());
 		}
 
 		private static TreeConfigurationBuilder createWhiteWisteria() {
