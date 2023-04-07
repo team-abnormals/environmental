@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "#minecraft:is_savanna",
+  "biomes": "#environmental:has_feature/savanna_vegetation",
   "features": [
     "environmental:flower_allium",
     "environmental:patch_giant_tall_grass_savanna"
