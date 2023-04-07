@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "minecraft:dark_forest",
+  "biomes": "#environmental:has_feature/bluebell",
   "features": "environmental:flower_bluebell",
   "step": "vegetal_decoration"
 }
