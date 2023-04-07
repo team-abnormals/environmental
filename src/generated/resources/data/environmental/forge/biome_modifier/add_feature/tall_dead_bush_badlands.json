@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "#minecraft:is_badlands",
+  "biomes": "#environmental:has_feature/tall_dead_bush_badlands",
   "features": "environmental:patch_tall_dead_bush_badlands",
   "step": "vegetal_decoration"
 }
