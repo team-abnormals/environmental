@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "minecraft:swamp",
+  "biomes": "#environmental:has_feature/swamp_vegetation",
   "features": [
     "environmental:huge_swamp_mushrooms",
     "environmental:trees_swamp",
