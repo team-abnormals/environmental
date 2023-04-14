@@ -1,6 +1,6 @@
 {
   "values": [
-    "#minecraft:is_river",
+    "minecraft:river",
     "#forge:is_swamp"
   ]
 }
