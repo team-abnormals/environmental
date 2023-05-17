@@ -49,10 +49,11 @@ public class EnvironmentalBiomeTagsProvider extends BiomeTagsProvider {
 		this.tag(EnvironmentalBiomeTags.HAS_MYCELIUM_SPROUTS).addTag(Tags.Biomes.IS_MUSHROOM);
 		this.tag(EnvironmentalBiomeTags.HAS_MUD_DISK).addTag(Tags.Biomes.IS_SWAMP);
 		
-		this.tag(EnvironmentalBiomeTags.HAS_PLAINS_VEGETATION).addTag(Tags.Biomes.IS_PLAINS);
 		this.tag(EnvironmentalBiomeTags.HAS_FLOWER_FOREST_VEGETATION).add(Biome.FLOWER_FOREST);
+		this.tag(EnvironmentalBiomeTags.HAS_PLAINS_VEGETATION).addTag(Tags.Biomes.IS_PLAINS);
+		this.tag(EnvironmentalBiomeTags.HAS_SAVANNA_VEGETATION).addTag(BiomeTags.IS_SAVANNA);
 		this.tag(EnvironmentalBiomeTags.HAS_JUNGLE_VEGETATION).addTag(BiomeTags.IS_JUNGLE);
 		this.tag(EnvironmentalBiomeTags.HAS_SWAMP_VEGETATION).addTag(Tags.Biomes.IS_SWAMP);
-		this.tag(EnvironmentalBiomeTags.HAS_SAVANNA_VEGETATION).addTag(BiomeTags.IS_SAVANNA);
+		
 	}
 }
