@@ -64,10 +64,10 @@ public class EnvironmentalBiomeModifierProvider {
 		addFeature("mycelium_sprouts", EnvironmentalBiomeTags.HAS_MYCELIUM_SPROUTS, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_MYCELIUM_SPROUTS);
 		addFeature("mud_disk", EnvironmentalBiomeTags.HAS_MUD_DISK, Decoration.UNDERGROUND_ORES, EnvironmentalPlacedFeatures.DISK_MUD);
 
-		addFeature("swamp_vegetation", EnvironmentalBiomeTags.HAS_SWAMP_VEGETATION, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.HUGE_SWAMP_MUSHROOMS, EnvironmentalPlacedFeatures.TREES_SWAMP, EnvironmentalPlacedFeatures.PATCH_DUCKWEED_SWAMP);
 		addFeature("flower_forest_vegetation", EnvironmentalBiomeTags.HAS_FLOWER_FOREST_VEGETATION, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_CARTWHEEL, EnvironmentalPlacedFeatures.PATCH_DELPHINIUMS, EnvironmentalPlacedFeatures.TREES_WISTERIA);
-		addFeature("savanna_vegetation", EnvironmentalBiomeTags.HAS_SAVANNA_VEGETATION, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_ALLIUM, EnvironmentalPlacedFeatures.PATCH_GIANT_TALL_GRASS_SAVANNA);
 		addFeature("plains_vegetation", EnvironmentalBiomeTags.HAS_PLAINS_VEGETATION, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_GIANT_TALL_GRASS_PLAINS);
+		addFeature("savanna_vegetation", EnvironmentalBiomeTags.HAS_SAVANNA_VEGETATION, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_ALLIUM, EnvironmentalPlacedFeatures.PATCH_GIANT_TALL_GRASS_SAVANNA);
+		addFeature("swamp_vegetation", EnvironmentalBiomeTags.HAS_SWAMP_VEGETATION, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.HUGE_SWAMP_MUSHROOMS, EnvironmentalPlacedFeatures.TREES_SWAMP, EnvironmentalPlacedFeatures.PATCH_DUCKWEED_SWAMP);
 		addFeature("jungle_vegetation", EnvironmentalBiomeTags.HAS_JUNGLE_VEGETATION, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_BIRD_OF_PARADISE, EnvironmentalPlacedFeatures.PATCH_GIANT_TALL_GRASS_JUNGLE);
 
 		return JsonCodecProvider.forDatapackRegistry(generator, existingFileHelper, Environmental.MOD_ID, RegistryOps.create(JsonOps.INSTANCE, ACCESS), ForgeRegistries.Keys.BIOME_MODIFIERS, MODIFIERS);
