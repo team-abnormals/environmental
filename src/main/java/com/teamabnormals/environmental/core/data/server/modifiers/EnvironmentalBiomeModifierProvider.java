@@ -49,9 +49,9 @@ public class EnvironmentalBiomeModifierProvider {
 		addSpawn("deer", EnvironmentalBiomeTags.HAS_DEER, new SpawnerData(EnvironmentalEntityTypes.DEER.get(), 16, 4, 4));
 		addSpawn("yak", EnvironmentalBiomeTags.HAS_YAK, new SpawnerData(EnvironmentalEntityTypes.YAK.get(), 8, 2, 4));
 
-		removeSpawnInverted("pig", EnvironmentalBiomeTags.HAS_PIG, EntityType.PIG);
 		removeSpawnInverted("sheep", EnvironmentalBiomeTags.HAS_SHEEP, EntityType.SHEEP);
 		removeSpawnInverted("cow", EnvironmentalBiomeTags.HAS_COW, EntityType.COW);
+		removeSpawnInverted("pig", EnvironmentalBiomeTags.HAS_PIG, EntityType.PIG);
 		removeSpawnInverted("chicken", EnvironmentalBiomeTags.HAS_CHICKEN, EntityType.CHICKEN);
 
 		addFeature("bluebell", EnvironmentalBiomeTags.HAS_BLUEBELL, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_BLUEBELL);
@@ -67,8 +67,8 @@ public class EnvironmentalBiomeModifierProvider {
 		addFeature("flower_forest_vegetation", EnvironmentalBiomeTags.HAS_FLOWER_FOREST_VEGETATION, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_CARTWHEEL, EnvironmentalPlacedFeatures.PATCH_DELPHINIUMS, EnvironmentalPlacedFeatures.TREES_WISTERIA);
 		addFeature("plains_vegetation", EnvironmentalBiomeTags.HAS_PLAINS_VEGETATION, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_GIANT_TALL_GRASS_PLAINS);
 		addFeature("savanna_vegetation", EnvironmentalBiomeTags.HAS_SAVANNA_VEGETATION, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_ALLIUM, EnvironmentalPlacedFeatures.PATCH_GIANT_TALL_GRASS_SAVANNA);
-		addFeature("swamp_vegetation", EnvironmentalBiomeTags.HAS_SWAMP_VEGETATION, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.HUGE_SWAMP_MUSHROOMS, EnvironmentalPlacedFeatures.TREES_SWAMP, EnvironmentalPlacedFeatures.PATCH_DUCKWEED_SWAMP);
 		addFeature("jungle_vegetation", EnvironmentalBiomeTags.HAS_JUNGLE_VEGETATION, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_BIRD_OF_PARADISE, EnvironmentalPlacedFeatures.PATCH_GIANT_TALL_GRASS_JUNGLE);
+		addFeature("swamp_vegetation", EnvironmentalBiomeTags.HAS_SWAMP_VEGETATION, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.HUGE_SWAMP_MUSHROOMS, EnvironmentalPlacedFeatures.TREES_SWAMP, EnvironmentalPlacedFeatures.PATCH_DUCKWEED_SWAMP);
 
 		return JsonCodecProvider.forDatapackRegistry(generator, existingFileHelper, Environmental.MOD_ID, RegistryOps.create(JsonOps.INSTANCE, ACCESS), ForgeRegistries.Keys.BIOME_MODIFIERS, MODIFIERS);
 	}
