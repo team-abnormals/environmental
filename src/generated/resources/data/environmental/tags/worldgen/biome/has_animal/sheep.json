@@ -1,5 +1,7 @@
 {
   "values": [
-    "#forge:is_plains"
+    "minecraft:plains",
+    "minecraft:sunflower_plains",
+    "minecraft:meadow"
   ]
 }

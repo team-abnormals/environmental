@@ -1,6 +1,6 @@
 {
   "values": [
-    "#minecraft:is_mountain",
+    "minecraft:stony_peaks",
     "#minecraft:is_hill"
   ]
 }
