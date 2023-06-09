@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "#environmental:has_feature/mycelium_sprouts",
+  "biomes": "minecraft:mushroom_fields",
   "features": "environmental:patch_mycelium_sprouts",
   "step": "vegetal_decoration"
 }

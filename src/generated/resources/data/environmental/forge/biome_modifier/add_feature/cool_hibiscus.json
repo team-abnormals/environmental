@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "#environmental:has_feature/cool_hibiscus",
+  "biomes": "minecraft:jungle",
   "features": "environmental:flower_hibiscus_cool",
   "step": "vegetal_decoration"
 }

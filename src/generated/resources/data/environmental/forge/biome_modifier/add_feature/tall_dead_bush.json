@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "#environmental:has_feature/tall_dead_bush",
+  "biomes": "minecraft:desert",
   "features": "environmental:patch_tall_dead_bush",
   "step": "vegetal_decoration"
 }

@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "#environmental:has_feature/flower_forest_vegetation",
+  "biomes": "minecraft:flower_forest",
   "features": [
     "environmental:flower_cartwheel",
     "environmental:patch_delphiniums",
