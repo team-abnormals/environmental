@@ -43,6 +43,8 @@
 	"block.environmental.stripped_willow_post": "Poste de sauce sin corteza",
 	"block.environmental.willow_hedge": "Seto de sauce",
 	"block.environmental.willow_beehive": "Apiario de abejas de sauce",
+	"block.environmental.willow_leaf_pile": "Montón de hojas de sauce",
+	"block.environmental.willow_boards": "Tablones de sauce",
 
 	"block.environmental.cherry_planks": "Madera de cerezo",
 	"block.environmental.cherry_slab": "Losa de cerezo",
@@ -72,6 +74,8 @@
 	"block.environmental.stripped_cherry_post": "Poste de cerezo sin corteza",
 	"block.environmental.cherry_hedge": "Seto de cerezo",
 	"block.environmental.cherry_beehive": "Apiario de abejas de cerezo",
+	"block.environmental.cherry_leaf_pile": "Montón de hojas de cerezo",
+	"block.environmental.cherry_boards": "Tablones de cerezo"
 
 	"block.environmental.wisteria_log": "Tronco de glicina",
 	"block.environmental.stripped_wisteria_log": "Tronco de glicina sin corteza",
@@ -96,6 +100,7 @@
 	"block.environmental.wisteria_post": "Poste de glicina",
 	"block.environmental.stripped_wisteria_post": "Poste de glicina sin corteza",
 	"block.environmental.wisteria_beehive": "Apiario de abejas de glicina",
+	"block.environmental.wisteria_boards": "Tablones de glicina",
 
 	"block.environmental.blue_wisteria_leaves": "Hojas de glicina azules",
 	"block.environmental.pink_wisteria_leaves": "Hojas de glicina rosas",
@@ -106,6 +111,11 @@
 	"block.environmental.pink_hanging_wisteria_leaves": "Hojas colgantes de glicina rosas",
 	"block.environmental.purple_hanging_wisteria_leaves": "Hojas colgantes de glicina moradas",
 	"block.environmental.white_hanging_wisteria_leaves": "Hojas colgantes de glicina blancas",
+	
+	"block.environmental.blue_wisteria_leaf_pile": "Montón de hojas de glicina azules",
+	"block.environmental.pink_wisteria_leaf_pile": "Montón de hojas de glicina rosas",
+	"block.environmental.purple_wisteria_leaf_pile": "Montón de hojas de glicina moradas",
+	"block.environmental.white_wisteria_leaf_pile": "Montón de hojas de glicina blancas",
 
 	"block.environmental.blue_wisteria_sapling": "Retoño de glicina azul",
 	"block.environmental.pink_wisteria_sapling": "Retoño de glicina rosa",
@@ -315,7 +325,20 @@
 	"item.environmental.yak_spawn_egg": "Generar yak",
 	"item.environmental.koi_spawn_egg": "Generar koi",
 	"item.environmental.fennec_fox_spawn_egg": "Generar zorro fénec",
-
+	
+	"item.environmental.cherry_furnace_boat": "Bote de cerezo con horno",
+	"item.environmental.cherry_chest_boat": "Bote de cerezo con cofre",
+	"item.environmental.large_cherry_boat": "Bote de cerezo grande",
+	
+	"item.environmental.willow_furnace_boat": "Bote de sauce con horno",
+	"item.environmental.willow_chest_boat": "Bote de sauce con cofre",
+	"item.environmental.large_willow_boat": "Bote de sauce grande",
+	
+	"item.environmental.wisteria_boat": "Bote de glicina grande",
+	"item.environmental.wisteria_furnace_boat": "Bote de glicina con horno",
+	"item.environmental.wisteria_chest_boat": "Bote de glicina con cofre",
+	"item.environmental.large_wisteria_boat": "Bote de glicina grande",
+	
 	"item.environmental.yak_hair": "Pelo de yak",
 	"item.environmental.yak_pants": "Pantalones de yak",
 
