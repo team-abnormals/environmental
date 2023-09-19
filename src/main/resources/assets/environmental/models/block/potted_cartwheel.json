@@ -1,7 +1,6 @@
 {
 	"parent": "block/flower_pot_cross",
 	"textures": {
-		"cross_flipped": "environmental:block/cartwheel_stem_flipped",
 		"cross": "environmental:block/cartwheel_stem",
 		"back": "environmental:block/cartwheel_back",
 		"front": "environmental:block/cartwheel_front"
@@ -13,7 +12,7 @@
 			"rotation": {"angle": 45, "axis": "y", "origin": [8, 12, 8], "rescale": true},
 			"faces": {
 				"east": {"uv": [0, 8, 16, 16], "texture": "#cross"},
-				"west": {"uv": [0, 8, 16, 16], "texture": "#cross_flipped"}
+				"west": {"uv": [16, 8, 0, 16], "texture": "#cross"}
 			}
 		},
 		{
@@ -22,7 +21,7 @@
 			"rotation": {"angle": -45, "axis": "y", "origin": [8, 12, 8], "rescale": true},
 			"faces": {
 				"east": {"uv": [0, 8, 16, 16], "texture": "#cross"},
-				"west": {"uv": [0, 8, 16, 16], "texture": "#cross_flipped"}
+				"west": {"uv": [16, 8, 0, 16], "texture": "#cross"}
 			}
 		},
 		{
@@ -78,13 +77,13 @@
 				"down": {"uv": [6, 5, 10, 6], "texture": "#flowerpot", "cullface": "down"}
 			}
 		},
-        {   
-        	"from": [ 6, 0, 6 ],
-            "to": [ 10, 4, 10 ],
-            "faces": {
-                "down": { "uv": [ 6, 12, 10, 16 ], "texture": "#flowerpot", "cullface": "down" },
-                "up":   { "uv": [ 6, 6, 10, 10 ], "texture": "#dirt" }
-            }
-        }
+		{
+			"from": [6, 0, 6],
+			"to": [10, 4, 10],
+			"faces": {
+				"up": {"uv": [6, 6, 10, 10], "texture": "#dirt"},
+				"down": {"uv": [6, 12, 10, 16], "texture": "#flowerpot", "cullface": "down"}
+			}
+		}
 	]
 }

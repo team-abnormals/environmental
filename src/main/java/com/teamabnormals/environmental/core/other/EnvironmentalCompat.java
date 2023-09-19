@@ -55,12 +55,11 @@ public class EnvironmentalCompat {
 		DataUtil.registerCompostable(EnvironmentalItems.CHERRY_PIE.get(), 1.0F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.CHERRY_CRATE.get(), 1.0F);
 
-		DataUtil.registerCompostable(EnvironmentalItems.CATTAIL_SEEDS.get(), 0.30F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.CATTAIL_SEED_SACK.get(), 1.0F);
+		DataUtil.registerCompostable(EnvironmentalItems.CATTAIL_FLUFF.get(), 0.30F);
+		DataUtil.registerCompostable(EnvironmentalBlocks.CATTAIL_FLUFF_BLOCK.get(), 1.0F);
 
 		DataUtil.registerCompostable(EnvironmentalBlocks.DUCKWEED.get(), 0.65F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.CATTAIL.get(), 0.65F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.TALL_CATTAIL.get(), 0.65F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.GIANT_TALL_GRASS.get(), 0.65F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.MYCELIUM_SPROUTS.get(), 0.50F);
 
@@ -132,7 +131,7 @@ public class EnvironmentalCompat {
 		DataUtil.registerFlammable(EnvironmentalBlocks.YAK_HAIR_BLOCK.get(), 30, 60);
 		DataUtil.registerFlammable(EnvironmentalBlocks.YAK_HAIR_RUG.get(), 30, 60);
 
-		DataUtil.registerFlammable(EnvironmentalBlocks.CATTAIL_SEED_SACK.get(), 30, 60);
+		DataUtil.registerFlammable(EnvironmentalBlocks.CATTAIL_FLUFF_BLOCK.get(), 30, 60);
 
 		DataUtil.registerFlammable(EnvironmentalBlocks.GRASS_THATCH.get(), 60, 20);
 		DataUtil.registerFlammable(EnvironmentalBlocks.GRASS_THATCH_STAIRS.get(), 60, 20);

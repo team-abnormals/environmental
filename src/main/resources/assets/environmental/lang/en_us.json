@@ -161,9 +161,9 @@
 	"block.environmental.purple_wisteria_hedge": "Purple Wisteria Hedge",
 	"block.environmental.white_wisteria_hedge": "White Wisteria Hedge",
 
-	"block.environmental.cattail_sprouts": "Cattail Sprouts",
+	"block.environmental.cattail_sprout": "Cattail Sprout",
 	"block.environmental.cattail": "Cattail",
-	"block.environmental.tall_cattail": "Tall Cattail",
+	"block.environmental.cattail_stalk": "Cattail Stalk",
 	"block.environmental.potted_cattail": "Potted Cattail",
 	
 	"block.environmental.grass_thatch": "Grass Thatch",
@@ -175,7 +175,7 @@
 	"block.environmental.cattail_thatch_slab": "Cattail Thatch Slab",
 	"block.environmental.cattail_thatch_stairs": "Cattail Thatch Stairs",
 	"block.environmental.cattail_thatch_vertical_slab": "Cattail Thatch Vertical Slab",
-	"block.environmental.cattail_seed_sack": "Cattail Seed Sack",
+	"block.environmental.cattail_fluff_block": "Cattail Fluff Block",
 		  
 	"block.environmental.blue_delphinium": "Blue Delphinium",
 	"block.environmental.pink_delphinium": "Pink Delphinium",
@@ -272,7 +272,7 @@
 	"item.environmental.yak_hair": "Yak Hair",
 	"item.environmental.yak_pants": "Yak Pants",
 	
-	"item.environmental.cattail_seeds": "Cattail Seeds",
+	"item.environmental.cattail_fluff": "Cattail Fluff",
   
 	"item.environmental.venison": "Raw Venison",
 	"item.environmental.cooked_venison": "Cooked Venison",

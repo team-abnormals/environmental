@@ -2,6 +2,7 @@ package com.teamabnormals.environmental.core.data.client;
 
 import com.teamabnormals.environmental.common.entity.animal.koi.KoiBreed;
 import com.teamabnormals.environmental.core.Environmental;
+import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
@@ -25,7 +26,8 @@ public class EnvironmentalItemModelProvider extends ItemModelProvider {
 	@Override
 	protected void registerModels() {
 		this.generatedItem(
-				PINE_BOAT.getFirst().get(), PINE_BOAT.getSecond().get(), PINE_FURNACE_BOAT.get(), LARGE_PINE_BOAT.get()
+				PINE_BOAT.getFirst().get(), PINE_BOAT.getSecond().get(), PINE_FURNACE_BOAT.get(), LARGE_PINE_BOAT.get(),
+				CATTAIL_FLUFF.get(), EnvironmentalBlocks.CATTAIL.get()
 		);
 
 		this.koiBuckets();

@@ -27,7 +27,7 @@ public class EnvironmentalTrades {
 	@SubscribeEvent
 	public static void onWandererTradesEvent(WandererTradesEvent event) {
 		TradeUtil.addWandererTrades(event,
-				new BlueprintTrade(1, EnvironmentalItems.CATTAIL_SEEDS.get(), 1, 6, 1),
+				new BlueprintTrade(1, EnvironmentalItems.CATTAIL_FLUFF.get(), 1, 6, 1),
 				new BlueprintTrade(1, EnvironmentalItems.DUCKWEED.get(), 2, 6, 1),
 
 				new BlueprintTrade(5, EnvironmentalBlocks.WILLOW_SAPLING.get().asItem(), 1, 8, 1),

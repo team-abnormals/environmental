@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "cattails=1": {
+      "model": "environmental:block/cattail_sprout_one"
+    },
+    "cattails=2": {
+      "model": "environmental:block/cattail_sprout_two"
+    },
+    "cattails=3": {
+      "model": "environmental:block/cattail_sprout_three"
+    }
+  }
+}

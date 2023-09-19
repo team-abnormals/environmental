@@ -1,0 +1,48 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "environmental:cattail_sprout",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "cattails": "2"
+                  }
+                }
+              ],
+              "count": 2.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "environmental:cattail_sprout",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "cattails": "3"
+                  }
+                }
+              ],
+              "count": 3.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "function": "minecraft:explosion_decay"
+            }
+          ],
+          "name": "environmental:cattail_fluff"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

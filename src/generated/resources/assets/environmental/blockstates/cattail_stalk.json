@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "bottom=false,cattails=1": {
+      "model": "environmental:block/cattail_stalk_middle_one"
+    },
+    "bottom=false,cattails=2": {
+      "model": "environmental:block/cattail_stalk_middle_two"
+    },
+    "bottom=false,cattails=3": {
+      "model": "environmental:block/cattail_stalk_middle_three"
+    },
+    "bottom=true,cattails=1": {
+      "model": "environmental:block/cattail_stalk_bottom_one"
+    },
+    "bottom=true,cattails=2": {
+      "model": "environmental:block/cattail_stalk_bottom_two"
+    },
+    "bottom=true,cattails=3": {
+      "model": "environmental:block/cattail_stalk_bottom_three"
+    }
+  }
+}

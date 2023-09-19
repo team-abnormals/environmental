@@ -1,0 +1,6 @@
+{
+  "parent": "environmental:block/template_cattail_one",
+  "textures": {
+    "cattail": "environmental:block/cattail_head_fluffy"
+  }
+}
