@@ -84,9 +84,9 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 		foodCookingRecipes(consumer, EnvironmentalItems.VENISON.get(), EnvironmentalItems.COOKED_VENISON.get());
 		conditionalNineBlockStorageRecipes(consumer, INCUBATION_LOADED, EnvironmentalItems.DUCK_EGG.get(), EnvironmentalBlocks.DUCK_EGG_CRATE.get());
 		conditionalNineBlockStorageRecipes(consumer, APPLE_CRATE, EnvironmentalItems.CHERRIES.get(), EnvironmentalBlocks.CHERRY_CRATE.get());
-		conditionalNineBlockStorageRecipes(consumer, BERRY_SACK, EnvironmentalItems.CATTAIL_SEEDS.get(), EnvironmentalBlocks.CATTAIL_SEED_SACK.get());
+		nineBlockStorageRecipes(consumer, EnvironmentalItems.CATTAIL_FLUFF.get(), EnvironmentalBlocks.CATTAIL_FLUFF_BLOCK.get());
 
-		ShapelessRecipeBuilder.shapeless(Items.STRING).requires(EnvironmentalItems.CATTAIL_SEEDS.get(), 3).unlockedBy("has_cattail_seeds", has(EnvironmentalItems.CATTAIL_SEEDS.get())).save(consumer, getModConversionRecipeName(Items.STRING, EnvironmentalItems.CATTAIL_SEEDS.get()));
+		ShapelessRecipeBuilder.shapeless(Items.STRING).requires(EnvironmentalItems.CATTAIL_FLUFF.get(), 5).unlockedBy("has_cattail_seeds", has(EnvironmentalItems.CATTAIL_FLUFF.get())).save(consumer, getModConversionRecipeName(Items.STRING, EnvironmentalItems.CATTAIL_FLUFF.get()));
 		ShapelessRecipeBuilder.shapeless(EnvironmentalItems.CHERRY_PIE.get()).requires(Ingredient.of(EnvironmentalItemTags.FRUITS_CHERRY), 3).requires(Items.SUGAR).requires(BlueprintItemTags.EGGS).unlockedBy("has_cherry", has(EnvironmentalItemTags.FRUITS_CHERRY)).save(consumer);
 
 		ShapedRecipeBuilder.shaped(EnvironmentalBlocks.GRASS_THATCH.get(), 4).define('W', Items.WHEAT).define('G', Blocks.GRASS).pattern("WG").pattern("GW").group("grass_thatch").unlockedBy("has_grass", has(Blocks.GRASS)).save(consumer);
@@ -95,7 +95,7 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 		generateRecipes(consumer, EnvironmentalBlockFamilies.GRASS_THATCH_FAMILY);
 		verticalSlabRecipes(consumer, EnvironmentalBlockFamilies.GRASS_THATCH_FAMILY, EnvironmentalBlocks.GRASS_THATCH_VERTICAL_SLAB.get());
 
-		ShapedRecipeBuilder.shaped(EnvironmentalBlocks.CATTAIL_THATCH.get(), 4).define('#', EnvironmentalBlocks.CATTAIL.get()).pattern("##").pattern("##").unlockedBy("has_cattail", has(EnvironmentalBlocks.CATTAIL.get())).save(consumer);
+		ShapedRecipeBuilder.shaped(EnvironmentalBlocks.CATTAIL_THATCH.get()).define('#', EnvironmentalBlocks.CATTAIL.get()).pattern("##").pattern("##").unlockedBy("has_cattail", has(EnvironmentalBlocks.CATTAIL.get())).save(consumer);
 		generateRecipes(consumer, EnvironmentalBlockFamilies.CATTAIL_THATCH_FAMILY);
 		verticalSlabRecipes(consumer, EnvironmentalBlockFamilies.CATTAIL_THATCH_FAMILY, EnvironmentalBlocks.CATTAIL_THATCH_VERTICAL_SLAB.get());
 

@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import com.teamabnormals.blueprint.common.block.VerticalSlabBlock;
 import com.teamabnormals.blueprint.common.block.VerticalSlabBlock.VerticalSlabType;
+import com.teamabnormals.environmental.common.block.CattailBlock;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
 import net.minecraft.advancements.critereon.*;
@@ -18,8 +19,10 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CandleBlock;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.storage.loot.LootContext;
@@ -29,7 +32,6 @@ import net.minecraft.world.level.storage.loot.LootTable.Builder;
 import net.minecraft.world.level.storage.loot.ValidationContext;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
-import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.LootingEnchantFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.functions.SmeltItemFunction;
@@ -146,10 +148,9 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.dropOther(GIANT_LILY_PAD.get(), Blocks.LILY_PAD);
 			this.dropOther(MYCELIUM_PATH.get(), Blocks.DIRT);
 			this.dropOther(PODZOL_PATH.get(), Blocks.DIRT);
-			this.dropOther(CATTAIL_SPROUTS.get(), EnvironmentalItems.CATTAIL_SEEDS.get());
-			this.add(CATTAIL_SPROUTS.get(), (block) -> LootTable.lootTable().withPool(LootPool.lootPool().add(applyExplosionDecay(block, LootItem.lootTableItem(EnvironmentalItems.CATTAIL_SEEDS.get()).when(LootItemRandomChanceCondition.randomChance(0.1F)).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE, 2))))));
-			this.add(CATTAIL.get(), (block) -> createShearsDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(EnvironmentalItems.CATTAIL_SEEDS.get()).when(LootItemRandomChanceCondition.randomChance(0.25F)).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE, 2)))));
-			this.add(TALL_CATTAIL.get(), (block) -> createDoublePlantWithOtherDrop(block, CATTAIL.get(), EnvironmentalItems.CATTAIL_SEEDS.get(), 2, 0.5F).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE, 2)));
+			this.add(CATTAIL_SPROUT.get(), block -> createCattailDrops(block, EnvironmentalItems.CATTAIL_FLUFF.get()));
+			this.add(CATTAIL.get(), block -> createCattailDrops(block, block));
+			this.add(CATTAIL_STALK.get(), block -> createCattailDrops(block, CATTAIL.get()));
 
 			this.add(HIBISCUS_LEAVES.get(), (block) -> createSilkTouchOrShearsDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Items.STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, DOUBLE_LEAVES_STICK_CHANCES))));
 			this.dropSelf(HIBISCUS_LEAF_CARPET.get());
@@ -161,7 +162,7 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.add(TALL_DEAD_BUSH.get(), (block) -> createDoublePlantWithOtherDrop(block, Blocks.DEAD_BUSH, Items.STICK, 2, 0.125F));
 			this.dropSelf(CUP_LICHEN.get());
 
-			this.dropSelf(CATTAIL_SEED_SACK.get());
+			this.dropSelf(CATTAIL_FLUFF_BLOCK.get());
 			this.dropSelf(CHERRY_CRATE.get());
 			this.dropSelf(DUCK_EGG_CRATE.get());
 			this.dropSelf(YAK_HAIR_BLOCK.get());
@@ -323,6 +324,12 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.add(BLUE_HANGING_WISTERIA_LEAVES.get(), BlockLoot::createShearsOnlyDrop);
 			this.add(PURPLE_HANGING_WISTERIA_LEAVES.get(), BlockLoot::createShearsOnlyDrop);
 			this.add(WHITE_HANGING_WISTERIA_LEAVES.get(), BlockLoot::createShearsOnlyDrop);
+		}
+
+		protected static LootTable.Builder createCattailDrops(Block block, ItemLike drop) {
+			return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(applyExplosionDecay(block, LootItem.lootTableItem(drop).apply(List.of(2, 3), (cattails) -> {
+				return SetItemCountFunction.setCount(ConstantValue.exactly((float) cattails.intValue())).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CattailBlock.CATTAILS, cattails)));
+			}))));
 		}
 
 		protected static LootTable.Builder createCherryLeavesDrop(Block block, Block sapling, float... saplingChances) {

@@ -44,11 +44,11 @@ public class EnvironmentalBlocks {
 
 	// Crops //
 
-	public static final RegistryObject<Block> CATTAIL_SPROUTS = HELPER.createBlockNoItem("cattail_sprouts", () -> new CattailSproutsBlock(EnvironmentalProperties.CATTAIL));
+	public static final RegistryObject<Block> CATTAIL_SPROUT = HELPER.createBlockNoItem("cattail_sprout", () -> new CattailSproutBlock(EnvironmentalProperties.CATTAIL));
 	public static final RegistryObject<Block> CATTAIL = HELPER.createBlock("cattail", () -> new CattailBlock(EnvironmentalProperties.CATTAIL), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> TALL_CATTAIL = HELPER.createBlock("tall_cattail", () -> new DoubleCattailBlock(EnvironmentalProperties.CATTAIL), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> CATTAIL_STALK = HELPER.createBlockNoItem("cattail_stalk", () -> new CattailStalkBlock(EnvironmentalProperties.CATTAIL_STALK));
 	public static final RegistryObject<Block> POTTED_CATTAIL = HELPER.createBlockNoItem("potted_cattail", () -> new FlowerPotBlock(EnvironmentalBlocks.CATTAIL.get(), PropertyUtil.flowerPot()));
-	public static final RegistryObject<Block> CATTAIL_SEED_SACK = HELPER.createCompatBlock("quark", "cattail_seed_sack", () -> new Block(Block.Properties.of(Material.WOOL, MaterialColor.TERRACOTTA_WHITE).strength(0.5F).sound(SoundType.WOOL)), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> CATTAIL_FLUFF_BLOCK = HELPER.createBlock("cattail_fluff_block", () -> new Block(Block.Properties.of(Material.WOOL, MaterialColor.TERRACOTTA_WHITE).strength(0.5F).sound(SoundType.WOOL)), CreativeModeTab.TAB_DECORATIONS);
 
 	// Foliage //
 

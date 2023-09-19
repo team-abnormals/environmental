@@ -1,6 +1,0 @@
-{
-    "variants": {
-        "waterlogged=false": { "model": "environmental:block/cattail" },
-        "waterlogged=true": { "model": "environmental:block/cattail_animated" }
-    }
-}

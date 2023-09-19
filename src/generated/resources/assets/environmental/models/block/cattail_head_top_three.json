@@ -1,0 +1,6 @@
+{
+  "parent": "environmental:block/template_cattail_top_three",
+  "textures": {
+    "cattail": "environmental:block/cattail_head"
+  }
+}

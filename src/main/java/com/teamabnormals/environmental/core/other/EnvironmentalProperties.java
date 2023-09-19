@@ -14,7 +14,8 @@ public class EnvironmentalProperties {
 	public static final WoodSetProperties CHERRY = WoodSetProperties.builder(MaterialColor.TERRACOTTA_RED, MaterialColor.WOOD).leavesColor(MaterialColor.COLOR_PINK).build();
 	public static final WoodSetProperties WISTERIA = WoodSetProperties.builder(MaterialColor.TERRACOTTA_WHITE, MaterialColor.TERRACOTTA_CYAN).build();
 
-	public static final BlockBehaviour.Properties CATTAIL = BlockBehaviour.Properties.of(Material.REPLACEABLE_PLANT).strength(0.0F).noCollission().randomTicks().sound(SoundType.WET_GRASS).offsetType(BlockBehaviour.OffsetType.XZ);
+	public static final BlockBehaviour.Properties CATTAIL = BlockBehaviour.Properties.of(Material.PLANT).instabreak().noCollission().randomTicks().sound(SoundType.WET_GRASS).offsetType(BlockBehaviour.OffsetType.XZ);
+	public static final BlockBehaviour.Properties CATTAIL_STALK = BlockBehaviour.Properties.of(Material.PLANT).instabreak().noCollission().sound(SoundType.WET_GRASS).offsetType(BlockBehaviour.OffsetType.XZ);
 
 	public static final BlockBehaviour.Properties DUCKWEED = BlockBehaviour.Properties.of(Material.PLANT).strength(0.0F).noCollission().sound(SoundType.CROP);
 	public static final BlockBehaviour.Properties MYCELIUM_SPROUTS = BlockBehaviour.Properties.of(Material.REPLACEABLE_PLANT, MaterialColor.COLOR_PURPLE).noCollission().instabreak().sound(SoundType.NETHER_SPROUTS).offsetType(BlockBehaviour.OffsetType.XZ);

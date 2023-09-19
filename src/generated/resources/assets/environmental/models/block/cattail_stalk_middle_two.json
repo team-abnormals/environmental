@@ -1,0 +1,6 @@
+{
+  "parent": "environmental:block/template_cattail_stalk_two",
+  "textures": {
+    "stalk": "environmental:block/cattail_stalk_middle"
+  }
+}

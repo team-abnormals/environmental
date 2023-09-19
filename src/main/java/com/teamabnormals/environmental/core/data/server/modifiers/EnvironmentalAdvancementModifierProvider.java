@@ -57,7 +57,7 @@ public class EnvironmentalAdvancementModifierProvider extends AdvancementModifie
 				.addIndexedRequirements(0, false, "koi_bucket", "slabfish_bucket").build());
 
 		this.entry("husbandry/plant_seed").selects("husbandry/plant_seed").addModifier(CriteriaModifier.builder(this.modId)
-				.addCriterion("cattail_sprouts", PlacedBlockTrigger.TriggerInstance.placedBlock(EnvironmentalBlocks.CATTAIL_SPROUTS.get()))
+				.addCriterion("cattail_sprouts", PlacedBlockTrigger.TriggerInstance.placedBlock(EnvironmentalBlocks.CATTAIL_SPROUT.get()))
 				.addIndexedRequirements(0, false, "cattail_sprouts").build());
 	}
 }

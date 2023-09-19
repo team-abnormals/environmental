@@ -8,6 +8,8 @@ import com.teamabnormals.blueprint.common.block.chest.BlueprintTrappedChestBlock
 import com.teamabnormals.blueprint.common.block.sign.BlueprintStandingSignBlock;
 import com.teamabnormals.blueprint.common.block.sign.BlueprintWallSignBlock;
 import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.environmental.common.block.CattailBlock;
+import com.teamabnormals.environmental.common.block.CattailStalkBlock;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.other.EnvironmentalBlockFamilies;
 import net.minecraft.core.Direction;
@@ -52,6 +54,52 @@ public class EnvironmentalBlockStateProvider extends BlockStateProvider {
 		this.planksCompat(PINE_PLANKS.get(), PINE_BOARDS.get(), PINE_LADDER.get(), PINE_BOOKSHELF.get(), PINE_BEEHIVE.get(), PINE_CHESTS, VERTICAL_PINE_PLANKS.get());
 		this.logCompat(PINE_LOG.get(), STRIPPED_PINE_LOG.get(), PINE_POST.get(), STRIPPED_PINE_POST.get());
 		this.leavesCompat(PINE_LEAVES.get(), PINE_LOG.get(), PINE_LEAF_PILE.get(), PINE_HEDGE.get(), PINE_LEAF_CARPET.get());
+
+		this.block(CATTAIL_FLUFF_BLOCK.get());
+		this.cattail(CATTAIL_SPROUT.get(), CATTAIL.get(), CATTAIL_STALK.get());
+	}
+
+	public void cattail(Block cattailSprout, Block cattail, Block cattailStalk) {
+		this.getVariantBuilder(cattailSprout).forAllStatesExcept(state -> ConfiguredModel.builder().modelFile(this.cattailStalkModel(name(cattailSprout), blockTexture(cattailSprout), state.getValue(CattailBlock.CATTAILS))).build(), BlockStateProperties.WATERLOGGED);
+
+		MultiPartBlockStateBuilder cattailBuilder = this.getMultipartBuilder(cattail);
+
+		for (int i = 1; i <= 3; i++) {
+			cattailBuilder
+					.part().modelFile(cattailStalkModel(
+							name(cattail), blockTexture(cattail), i)).addModel().condition(CattailBlock.TOP, false).condition(CattailBlock.CATTAILS, i).end()
+					.part().modelFile(cattailStalkModel(
+							name(cattail) + "_top", suffix(blockTexture(cattail), "_stalk_top"), i)).addModel().condition(CattailBlock.TOP, true).condition(CattailBlock.CATTAILS, i).end()
+					.part().modelFile(cattailHeadModel(
+							name(cattail) + "_head", suffix(blockTexture(cattail), "_head"), false, i)).addModel().condition(CattailBlock.FLUFFY, false).condition(CattailBlock.TOP, false).condition(CattailBlock.CATTAILS, i).end()
+					.part().modelFile(cattailHeadModel(
+							name(cattail) + "_head", suffix(blockTexture(cattail), "_head"), true, i)).addModel().condition(CattailBlock.FLUFFY, false).condition(CattailBlock.TOP, true).condition(CattailBlock.CATTAILS, i).end()
+					.part().modelFile(cattailHeadModel(
+							name(cattail) + "_head_fluffy", suffix(blockTexture(cattail), "_head_fluffy"), false, i)).addModel().condition(CattailBlock.FLUFFY, true).condition(CattailBlock.TOP, false).condition(CattailBlock.CATTAILS, i).end()
+					.part().modelFile(cattailHeadModel(
+							name(cattail) + "_head_fluffy", suffix(blockTexture(cattail), "_head_fluffy"), true, i)).addModel().condition(CattailBlock.FLUFFY, true).condition(CattailBlock.TOP, true).condition(CattailBlock.CATTAILS, i).end();
+		}
+
+
+		this.getVariantBuilder(cattailStalk).forAllStatesExcept(state -> {
+			return ConfiguredModel.builder().modelFile(this.cattailStalkModel(name(cattailStalk) + (state.getValue(CattailStalkBlock.BOTTOM) ? "_bottom" : "_middle"), suffix(blockTexture(cattailStalk), (state.getValue(CattailStalkBlock.BOTTOM) ? "_bottom" : "_middle")), state.getValue(CattailBlock.CATTAILS))).build();
+		}, BlockStateProperties.WATERLOGGED);
+	}
+
+	public ModelFile cattailStalkModel(String name, ResourceLocation texture, int stalks) {
+		String stalkSuffix = stalks == 3 ? "_three" : stalks == 2 ? "_two" : "_one";
+		ModelFile stalkParent = new UncheckedModelFile(new ResourceLocation(Environmental.MOD_ID, "block/template_cattail_stalk" + stalkSuffix));
+		return this.models().getBuilder(name + stalkSuffix).parent(stalkParent).texture("stalk", texture);
+	}
+
+	public ModelFile cattailHeadModel(String name, ResourceLocation texture, boolean top, int stalks) {
+		String stalkSuffix = stalks == 3 ? "_three" : stalks == 2 ? "_two" : "_one";
+		ModelFile cattailParent = new UncheckedModelFile(new ResourceLocation(Environmental.MOD_ID, "block/template_" + (top ? "cattail_top" : "cattail") + stalkSuffix));
+		return this.models().getBuilder(name + (top ? "_top" : "") + stalkSuffix).parent(cattailParent).texture("cattail", texture);
+	}
+
+	private ResourceLocation key(Block block) {
+		return ForgeRegistries.BLOCKS.getKey(block);
 	}
 
 	public void block(Block block) {

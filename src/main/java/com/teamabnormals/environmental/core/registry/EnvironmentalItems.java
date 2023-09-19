@@ -65,7 +65,7 @@ public class EnvironmentalItems {
 	public static final RegistryObject<Item> CHERRY_FURNACE_BOAT = HELPER.createItem("cherry_furnace_boat", ModList.get().isLoaded("boatload") ? EnvironmentalBoatTypes.CHERRY_FURNACE_BOAT : () -> new Item(new Item.Properties().tab(AbstractSubRegistryHelper.areModsLoaded("boatload") ? CreativeModeTab.TAB_TRANSPORTATION : null)));
 	public static final RegistryObject<Item> LARGE_CHERRY_BOAT = HELPER.createItem("large_cherry_boat", ModList.get().isLoaded("boatload") ? EnvironmentalBoatTypes.LARGE_CHERRY_BOAT : () -> new Item(new Item.Properties().tab(AbstractSubRegistryHelper.areModsLoaded("boatload") ? CreativeModeTab.TAB_TRANSPORTATION : null)));
 
-	public static final RegistryObject<Item> CATTAIL_SEEDS = HELPER.createItem("cattail_seeds", () -> new ItemNameBlockItem(EnvironmentalBlocks.CATTAIL_SPROUTS.get(), new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+	public static final RegistryObject<Item> CATTAIL_FLUFF = HELPER.createItem("cattail_fluff", () -> new ItemNameBlockItem(EnvironmentalBlocks.CATTAIL_SPROUT.get(), new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
 	public static final RegistryObject<Item> DUCKWEED = HELPER.createItem("duckweed", () -> new PlaceOnWaterBlockItem(EnvironmentalBlocks.DUCKWEED.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
 
 	public static final RegistryObject<Item> MUSIC_DISC_LEAVING_HOME = HELPER.createItem("music_disc_leaving_home", () -> new BlueprintRecordItem(6, EnvironmentalSoundEvents.MUSIC_DISC_LEAVING_HOME, new Item.Properties().stacksTo(1).tab(CreativeModeTab.TAB_MISC).rarity(Rarity.RARE), 147));

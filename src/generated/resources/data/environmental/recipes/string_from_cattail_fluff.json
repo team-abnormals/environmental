@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "environmental:cattail_fluff"
+    },
+    {
+      "item": "environmental:cattail_fluff"
+    },
+    {
+      "item": "environmental:cattail_fluff"
+    },
+    {
+      "item": "environmental:cattail_fluff"
+    },
+    {
+      "item": "environmental:cattail_fluff"
+    }
+  ],
+  "result": {
+    "item": "minecraft:string"
+  }
+}
