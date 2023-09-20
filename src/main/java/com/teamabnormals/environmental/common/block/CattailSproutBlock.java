@@ -23,9 +23,10 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.common.ForgeHooks;
 
 public class CattailSproutBlock extends BushBlock implements SimpleWaterloggedBlock, BonemealableBlock {
-	protected static final VoxelShape SHAPE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 10.0D, 11.0D);
+	protected static final VoxelShape SHAPE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 6.0D, 11.0D);
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	public static final IntegerProperty CATTAILS = CattailBlock.CATTAILS;
 
@@ -60,6 +61,14 @@ public class CattailSproutBlock extends BushBlock implements SimpleWaterloggedBl
 			return state.cycle(CATTAILS);
 		} else {
 			return super.getStateForPlacement(context).setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
+		}
+	}
+
+	@Override
+	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+		if (ForgeHooks.onCropsGrowPre(level, pos, level.getBlockState(pos), random.nextDouble() < 0.2D)) {
+			level.setBlock(pos, BlockUtil.transferAllBlockStates(state, EnvironmentalBlocks.CATTAIL.get().defaultBlockState()), 2);
+			ForgeHooks.onCropsGrowPost(level, pos, level.getBlockState(pos));
 		}
 	}
 
