@@ -5,6 +5,7 @@ import com.teamabnormals.environmental.common.block.CattailBlock;
 import com.teamabnormals.environmental.common.block.CattailStalkBlock;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
@@ -36,12 +37,17 @@ public class CattailsFeature extends Feature<NoneFeatureConfiguration> {
 
 			int stalkCount = this.getStalkCount(random);
 			BlockState belowState = level.getBlockState(pos.below());
-			if (EnvironmentalBlocks.CATTAIL_STALK.get().defaultBlockState().canSurvive(level, pos) && !belowState.is(EnvironmentalBlocks.CATTAIL_STALK.get()) && (level.isWaterAt(pos) || level.isEmptyBlock(pos)) && (level.isEmptyBlock(pos.above()) || (level.isWaterAt(pos.above()) && level.isEmptyBlock(pos.above(2))))) {
+			if ((belowState.is(BlockTags.DIRT) || belowState.is(BlockTags.SAND) || belowState.is(Blocks.FARMLAND)) && (level.isWaterAt(pos) || level.isEmptyBlock(pos)) && (level.isEmptyBlock(pos.above()) || (level.isWaterAt(pos.above()) && level.isEmptyBlock(pos.above(2))))) {
 				boolean fluffy = belowState.is(Blocks.MUD);
 				level.setBlock(pos, EnvironmentalBlocks.CATTAIL_STALK.get().defaultBlockState().setValue(CattailBlock.CATTAILS, stalkCount).setValue(BlockStateProperties.WATERLOGGED, level.getFluidState(pos).getType() == Fluids.WATER), 2);
 				if (level.isWaterAt(pos.above()) || (level.isEmptyBlock(pos.above(2)) && random.nextBoolean())) {
 					level.setBlock(pos.above(), EnvironmentalBlocks.CATTAIL_STALK.get().defaultBlockState().setValue(CattailBlock.CATTAILS, stalkCount).setValue(CattailStalkBlock.BOTTOM, false).setValue(BlockStateProperties.WATERLOGGED, level.getFluidState(pos.above()).getType() == Fluids.WATER), 2);
-					level.setBlock(pos.above(2), EnvironmentalBlocks.CATTAIL.get().defaultBlockState().setValue(CattailBlock.CATTAILS, stalkCount).setValue(CattailBlock.AGE, 2).setValue(CattailBlock.FLUFFY, fluffy).setValue(BlockStateProperties.WATERLOGGED, level.getFluidState(pos.above(2)).getType() == Fluids.WATER), 2);
+					if (level.isWaterAt(pos.above()) && random.nextInt(3) == 0) {
+						level.setBlock(pos.above(2), EnvironmentalBlocks.CATTAIL_STALK.get().defaultBlockState().setValue(CattailBlock.CATTAILS, stalkCount).setValue(CattailStalkBlock.BOTTOM, false).setValue(BlockStateProperties.WATERLOGGED, level.getFluidState(pos.above(2)).getType() == Fluids.WATER), 2);
+						level.setBlock(pos.above(3), EnvironmentalBlocks.CATTAIL.get().defaultBlockState().setValue(CattailBlock.CATTAILS, stalkCount).setValue(CattailBlock.AGE, 2).setValue(CattailBlock.FLUFFY, fluffy).setValue(BlockStateProperties.WATERLOGGED, level.getFluidState(pos.above(3)).getType() == Fluids.WATER), 2);
+					} else {
+						level.setBlock(pos.above(2), EnvironmentalBlocks.CATTAIL.get().defaultBlockState().setValue(CattailBlock.CATTAILS, stalkCount).setValue(CattailBlock.AGE, 2).setValue(CattailBlock.FLUFFY, fluffy).setValue(BlockStateProperties.WATERLOGGED, level.getFluidState(pos.above(2)).getType() == Fluids.WATER), 2);
+					}
 				} else {
 					level.setBlock(pos.above(), EnvironmentalBlocks.CATTAIL.get().defaultBlockState().setValue(CattailBlock.CATTAILS, stalkCount).setValue(CattailBlock.AGE, 2).setValue(CattailBlock.FLUFFY, fluffy).setValue(BlockStateProperties.WATERLOGGED, level.getFluidState(pos.above()).getType() == Fluids.WATER), 2);
 				}
