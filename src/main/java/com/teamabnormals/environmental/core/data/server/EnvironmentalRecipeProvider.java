@@ -95,7 +95,7 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 		generateRecipes(consumer, EnvironmentalBlockFamilies.GRASS_THATCH_FAMILY);
 		verticalSlabRecipes(consumer, EnvironmentalBlockFamilies.GRASS_THATCH_FAMILY, EnvironmentalBlocks.GRASS_THATCH_VERTICAL_SLAB.get());
 
-		ShapedRecipeBuilder.shaped(EnvironmentalBlocks.CATTAIL_THATCH.get()).define('#', EnvironmentalBlocks.CATTAIL.get()).pattern("##").pattern("##").unlockedBy("has_cattail", has(EnvironmentalBlocks.CATTAIL.get())).save(consumer);
+		ShapedRecipeBuilder.shaped(EnvironmentalBlocks.CATTAIL_THATCH.get(), 4).define('#', EnvironmentalBlocks.CATTAIL.get()).pattern("##").pattern("##").unlockedBy("has_cattail", has(EnvironmentalBlocks.CATTAIL.get())).save(consumer);
 		generateRecipes(consumer, EnvironmentalBlockFamilies.CATTAIL_THATCH_FAMILY);
 		verticalSlabRecipes(consumer, EnvironmentalBlockFamilies.CATTAIL_THATCH_FAMILY, EnvironmentalBlocks.CATTAIL_THATCH_VERTICAL_SLAB.get());
 
