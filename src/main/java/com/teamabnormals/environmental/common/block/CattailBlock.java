@@ -10,6 +10,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -37,6 +38,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.ToolActions;
 
 public class CattailBlock extends BushBlock implements SimpleWaterloggedBlock, BonemealableBlock {
 	protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
@@ -153,13 +155,18 @@ public class CattailBlock extends BushBlock implements SimpleWaterloggedBlock, B
 	@Override
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
 		boolean fluffy = state.getValue(FLUFFY);
-		if (!fluffy && player.getItemInHand(hand).is(Items.BONE_MEAL)) {
+		ItemStack stack = player.getItemInHand(hand);
+		if (!fluffy && stack.is(Items.BONE_MEAL)) {
 			return InteractionResult.PASS;
-		} else if (fluffy) {
-			popResource(level, pos, new ItemStack(EnvironmentalItems.CATTAIL_FLUFF.get(), 2 + level.random.nextInt(2)));
-			level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
-			BlockState newState = state.setValue(FLUFFY, false);
-			level.setBlockAndUpdate(pos, newState);
+		} else if (fluffy && stack.canPerformAction(ToolActions.SHEARS_CARVE)) {
+			if (!level.isClientSide()) {
+				popResource(level, pos, new ItemStack(EnvironmentalItems.CATTAIL_FLUFF.get(), 2 + level.random.nextInt(2)));
+				level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
+				level.setBlockAndUpdate(pos, state.setValue(FLUFFY, false));
+				stack.hurtAndBreak(1, player, (p_55287_) -> p_55287_.broadcastBreakEvent(hand));
+				level.gameEvent(player, GameEvent.SHEAR, pos);
+				player.awardStat(Stats.ITEM_USED.get(Items.SHEARS));
+			}
 			return InteractionResult.sidedSuccess(level.isClientSide);
 		} else {
 			return super.use(state, level, pos, player, hand, result);
