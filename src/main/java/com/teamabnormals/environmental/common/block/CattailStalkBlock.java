@@ -1,6 +1,5 @@
 package com.teamabnormals.environmental.common.block;
 
-import com.teamabnormals.blueprint.core.util.BlockUtil;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -48,7 +47,8 @@ public class CattailStalkBlock extends BushBlock implements SimpleWaterloggedBlo
 
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-		return this.mayPlaceOn(level.getBlockState(pos.below()), level, pos);
+		BlockState aboveState = level.getBlockState(pos.above());
+		return this.mayPlaceOn(level.getBlockState(pos.below()), level, pos) && (aboveState.is(this) || aboveState.is(this.getHeadBlock()));
 	}
 
 	@Override
@@ -110,15 +110,11 @@ public class CattailStalkBlock extends BushBlock implements SimpleWaterloggedBlo
 			level.scheduleTick(pos, this, 1);
 		}
 
-		if (direction == Direction.UP && !facingState.is(this) && !facingState.is(this.getHeadBlock())) {
-			return BlockUtil.transferAllBlockStates(state, this.getHeadBlock().defaultBlockState()).setValue(CattailBlock.TOP, level.getBlockState(pos.below()).is(this));
-		} else {
-			if (state.getValue(WATERLOGGED)) {
-				level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
-			}
-
-			return super.updateShape(state, direction, facingState, level, pos, facingPos);
+		if (state.getValue(WATERLOGGED)) {
+			level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
 		}
+
+		return super.updateShape(state, direction, facingState, level, pos, facingPos);
 	}
 
 	private Optional<BlockPos> getHeadPos(BlockGetter level, BlockPos pos, Block block) {

@@ -150,7 +150,7 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.dropOther(PODZOL_PATH.get(), Blocks.DIRT);
 			this.add(CATTAIL_SPROUT.get(), block -> createCattailDrops(block, EnvironmentalItems.CATTAIL_FLUFF.get()));
 			this.add(CATTAIL.get(), block -> createCattailDrops(block, block));
-			this.add(CATTAIL_STALK.get(), block -> createCattailDrops(block, CATTAIL.get()));
+			this.add(CATTAIL_STALK.get(), noDrop());
 
 			this.add(HIBISCUS_LEAVES.get(), (block) -> createSilkTouchOrShearsDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Items.STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, DOUBLE_LEAVES_STICK_CHANCES))));
 			this.dropSelf(HIBISCUS_LEAF_CARPET.get());
