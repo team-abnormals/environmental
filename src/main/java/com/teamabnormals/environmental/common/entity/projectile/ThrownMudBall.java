@@ -1,7 +1,9 @@
 package com.teamabnormals.environmental.common.entity.projectile;
 
+import com.teamabnormals.blueprint.common.world.storage.tracking.IDataManager;
 import com.teamabnormals.environmental.common.entity.animal.slabfish.Slabfish;
 import com.teamabnormals.environmental.common.entity.animal.slabfish.SlabfishOverlay;
+import com.teamabnormals.environmental.core.other.EnvironmentalDataProcessors;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
 import net.minecraft.core.particles.ItemParticleOption;
@@ -11,6 +13,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -57,6 +60,12 @@ public class ThrownMudBall extends ThrowableItemProjectile {
 			if (entity instanceof Slabfish slabby) {
 				if (slabby.getSlabfishOverlay() != SlabfishOverlay.MUDDY)
 					slabby.setSlabfishOverlay(SlabfishOverlay.MUDDY);
+			}
+
+			if (entity instanceof Pig pig) {
+				IDataManager dataManager = (IDataManager) pig;
+				dataManager.setValue(EnvironmentalDataProcessors.IS_MUDDY, true);
+				dataManager.setValue(EnvironmentalDataProcessors.MUD_DRYING_TIME, dataManager.getValue(EnvironmentalDataProcessors.MUD_DRYING_TIME) + 1200);
 			}
 		}
 
