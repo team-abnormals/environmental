@@ -80,12 +80,7 @@ public class Reindeer extends AbstractDeer {
 	}
 
 	private boolean isHolidayCriteria() {
-		if (this.random.nextInt(9) == 0) {
-			LocalDate localdate = LocalDate.now();
-			int month = localdate.get(ChronoField.MONTH_OF_YEAR);
-			return month == 12 && this.level.getBiome(this.blockPosition()).value().getPrecipitation() == Precipitation.SNOW;
-		}
-		return false;
+		return this.random.nextInt(9) == 0 && LocalDate.now().get(ChronoField.MONTH_OF_YEAR) == 12;
 	}
 
 	@Nullable
