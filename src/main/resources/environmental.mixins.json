@@ -7,16 +7,21 @@
   "plugin": "com.teamabnormals.environmental.core.mixin.EnvironmentalMixinPlugin",
   "mixins": [
     "AbstractSkeletonEntityMixin",
+    "BlockMixin",
     "DoublePlantBlockMixin",
     "DuckMixin",
     "LilyPadBlockMixin",
     "LivingEntityMixin",
     "MobEntityMixin",
+    "MudBlockMixin",
     "MyceliumBlockMixin",
     "PigEntityMixin",
     "PlayerEntityMixin",
     "RabbitMixin",
     "WitherSkeletonEntityMixin"
+  ],
+  "client": [
+    "client.PigRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
