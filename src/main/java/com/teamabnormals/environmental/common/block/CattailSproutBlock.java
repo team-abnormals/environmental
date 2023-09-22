@@ -67,7 +67,7 @@ public class CattailSproutBlock extends BushBlock implements SimpleWaterloggedBl
 	@Override
 	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
 		if (ForgeHooks.onCropsGrowPre(level, pos, level.getBlockState(pos), random.nextDouble() < 0.2D)) {
-			level.setBlock(pos, BlockUtil.transferAllBlockStates(state, EnvironmentalBlocks.CATTAIL.get().defaultBlockState()), 2);
+			level.setBlock(pos, BlockUtil.transferAllBlockStates(state, EnvironmentalBlocks.CATTAIL.get().defaultBlockState().setValue(CattailBlock.AGE, level.getRandom().nextInt(2))), 2);
 			ForgeHooks.onCropsGrowPost(level, pos, level.getBlockState(pos));
 		}
 	}
