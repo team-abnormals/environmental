@@ -3,7 +3,9 @@ package com.teamabnormals.environmental.core.other;
 import com.google.common.collect.Sets;
 import com.teamabnormals.blueprint.common.world.storage.tracking.IDataManager;
 import com.teamabnormals.blueprint.core.util.MathUtil;
+import com.teamabnormals.environmental.common.block.GiantLilyPadBlock;
 import com.teamabnormals.environmental.common.block.HangingLeavesBlock;
+import com.teamabnormals.environmental.common.block.LargeLilyPadBlock;
 import com.teamabnormals.environmental.common.entity.ai.goal.HuntTruffleGoal;
 import com.teamabnormals.environmental.common.entity.ai.goal.TemptGoldenCarrotGoal;
 import com.teamabnormals.environmental.common.entity.animal.koi.Koi;
@@ -54,7 +56,9 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
@@ -460,14 +464,59 @@ public class EnvironmentalEvents {
 	@SubscribeEvent
 	public static void onBonemeal(BonemealEvent event) {
 		Level level = event.getLevel();
-		RandomSource random = level.getRandom();
+		BlockState state = event.getBlock();
 		BlockPos pos = event.getPos();
+		RandomSource random = level.getRandom();
 
-		if (EnvironmentalConfig.COMMON.cactusBobble.get() && event.getBlock().is(EnvironmentalBlockTags.CACTUS_BOBBLE_PLANTABLE_ON)) {
-			if (level.getBlockState(pos.above()).isAir()) {
+		if (EnvironmentalConfig.COMMON.cactusBobble.get() && state.is(EnvironmentalBlockTags.CACTUS_BOBBLE_PLANTABLE_ON) && level.getBlockState(pos.above()).isAir()) {
+			if (!level.isClientSide()) {
 				level.setBlockAndUpdate(pos.above(), EnvironmentalBlocks.CACTUS_BOBBLE.get().defaultBlockState());
-				event.setResult(Result.ALLOW);
 			}
+			event.setResult(Result.ALLOW);
 		}
 
+		if (state.is(Blocks.MYCELIUM) && level.getBlockState(pos.above()).isAir()) {
+			if (!level.isClientSide()) {
+				BlockPos abovePos = pos.above();
+				for (int i = 0; i < 128; ++i) {
+					BlockPos newPos = abovePos;
+
+					for (int j = 0; j < i / 16; ++j) {
+						newPos = newPos.offset(random.nextInt(3) - 1, (random.nextInt(3) - 1) * random.nextInt(3) / 2, random.nextInt(3) - 1);
+						if (!level.getBlockState(newPos.below()).is(Blocks.MYCELIUM) || level.getBlockState(newPos).isCollisionShapeFullBlock(level, newPos)) {
+							break;
+						}
+					}
+
+					if (level.getBlockState(newPos).isAir()) {
+						if (EnvironmentalBlocks.MYCELIUM_SPROUTS.get().defaultBlockState().canSurvive(level, newPos)) {
+							level.setBlock(newPos, EnvironmentalBlocks.MYCELIUM_SPROUTS.get().defaultBlockState(), 3);
+						}
+					}
+				}
+			}
+
+			event.setResult(Result.ALLOW);
+		}
+
+		if (event.getBlock().is(Blocks.TALL_GRASS)) {
+			if (!level.isClientSide()) {
+				DoublePlantBlock.placeAt(level, EnvironmentalBlocks.GIANT_TALL_GRASS.get().defaultBlockState(), state.getValue(DoublePlantBlock.HALF) == DoubleBlockHalf.LOWER ? pos : pos.below(), 2);
+			}
+			event.setResult(Result.ALLOW);
+		}
+
+		if (state.is(Blocks.LILY_PAD)) {
+			if (!level.isClientSide() && random.nextInt(3) == 0) {
+				if (random.nextBoolean()) {
+					if (LargeLilyPadBlock.checkPositions(level, pos, EnvironmentalBlocks.LARGE_LILY_PAD.get().defaultBlockState())) {
+						LargeLilyPadBlock.placeAt(level, pos, EnvironmentalBlocks.LARGE_LILY_PAD.get().defaultBlockState(), 3);
+					}
+				} else if (GiantLilyPadBlock.checkPositions(level, pos, EnvironmentalBlocks.GIANT_LILY_PAD.get().defaultBlockState())) {
+					GiantLilyPadBlock.placeAt(level, pos, EnvironmentalBlocks.GIANT_LILY_PAD.get().defaultBlockState(), 3);
+				}
+			}
+			event.setResult(Result.ALLOW);
+		}
+	}
 }
