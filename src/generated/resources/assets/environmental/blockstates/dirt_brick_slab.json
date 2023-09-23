@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "environmental:block/dirt_brick_slab"
+    },
+    "type=double": {
+      "model": "environmental:block/dirt_bricks"
+    },
+    "type=top": {
+      "model": "environmental:block/dirt_brick_slab_top"
+    }
+  }
+}

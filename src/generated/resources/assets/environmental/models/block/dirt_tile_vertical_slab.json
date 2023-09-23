@@ -1,0 +1,8 @@
+{
+  "parent": "blueprint:block/vertical_slab",
+  "textures": {
+    "bottom": "environmental:block/dirt_tiles",
+    "side": "environmental:block/dirt_tiles",
+    "top": "environmental:block/dirt_tiles"
+  }
+}

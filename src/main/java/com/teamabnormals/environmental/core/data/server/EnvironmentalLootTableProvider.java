@@ -123,6 +123,17 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.dropPottedContents(POTTED_CATTAIL.get());
 			this.dropPottedContents(POTTED_CUP_LICHEN.get());
 
+			this.dropSelf(DIRT_BRICKS.get());
+			this.dropSelf(DIRT_BRICK_STAIRS.get());
+			this.dropSelf(DIRT_BRICK_WALL.get());
+			this.add(DIRT_BRICK_SLAB.get(), BlockLoot::createSlabItemTable);
+			this.add(DIRT_BRICK_VERTICAL_SLAB.get(), EnvironmentalBlockLoot::createVerticalSlabItemTable);
+			this.dropSelf(DIRT_TILES.get());
+			this.dropSelf(DIRT_TILE_STAIRS.get());
+			this.dropSelf(DIRT_TILE_WALL.get());
+			this.add(DIRT_TILE_SLAB.get(), BlockLoot::createSlabItemTable);
+			this.add(DIRT_TILE_VERTICAL_SLAB.get(), EnvironmentalBlockLoot::createVerticalSlabItemTable);
+
 			this.dropSelf(SMOOTH_MUD.get());
 			this.add(SMOOTH_MUD_SLAB.get(), BlockLoot::createSlabItemTable);
 			this.add(SMOOTH_MUD_VERTICAL_SLAB.get(), EnvironmentalBlockLoot::createVerticalSlabItemTable);
