@@ -44,12 +44,12 @@ public class CattailsFeature extends Feature<NoneFeatureConfiguration> {
 					level.setBlock(pos.above(), EnvironmentalBlocks.CATTAIL_STALK.get().defaultBlockState().setValue(CattailBlock.CATTAILS, stalkCount).setValue(CattailStalkBlock.BOTTOM, false).setValue(BlockStateProperties.WATERLOGGED, level.getFluidState(pos.above()).getType() == Fluids.WATER), 2);
 					if (level.isWaterAt(pos.above()) && random.nextInt(3) == 0) {
 						level.setBlock(pos.above(2), EnvironmentalBlocks.CATTAIL_STALK.get().defaultBlockState().setValue(CattailBlock.CATTAILS, stalkCount).setValue(CattailStalkBlock.BOTTOM, false).setValue(BlockStateProperties.WATERLOGGED, level.getFluidState(pos.above(2)).getType() == Fluids.WATER), 2);
-						level.setBlock(pos.above(3), EnvironmentalBlocks.CATTAIL.get().defaultBlockState().setValue(CattailBlock.CATTAILS, stalkCount).setValue(CattailBlock.AGE, 2).setValue(CattailBlock.FLUFFY, fluffy).setValue(BlockStateProperties.WATERLOGGED, level.getFluidState(pos.above(3)).getType() == Fluids.WATER), 2);
+						level.setBlock(pos.above(3), EnvironmentalBlocks.CATTAIL.get().defaultBlockState().setValue(CattailBlock.CATTAILS, stalkCount).setValue(CattailBlock.AGE, 2).setValue(CattailBlock.FLUFFY, fluffy).setValue(BlockStateProperties.WATERLOGGED, level.getFluidState(pos.above(3)).getType() == Fluids.WATER).setValue(CattailBlock.TOP, true), 2);
 					} else {
-						level.setBlock(pos.above(2), EnvironmentalBlocks.CATTAIL.get().defaultBlockState().setValue(CattailBlock.CATTAILS, stalkCount).setValue(CattailBlock.AGE, 2).setValue(CattailBlock.FLUFFY, fluffy).setValue(BlockStateProperties.WATERLOGGED, level.getFluidState(pos.above(2)).getType() == Fluids.WATER), 2);
+						level.setBlock(pos.above(2), EnvironmentalBlocks.CATTAIL.get().defaultBlockState().setValue(CattailBlock.CATTAILS, stalkCount).setValue(CattailBlock.AGE, 2).setValue(CattailBlock.FLUFFY, fluffy).setValue(BlockStateProperties.WATERLOGGED, level.getFluidState(pos.above(2)).getType() == Fluids.WATER).setValue(CattailBlock.TOP, true), 2);
 					}
 				} else {
-					level.setBlock(pos.above(), EnvironmentalBlocks.CATTAIL.get().defaultBlockState().setValue(CattailBlock.CATTAILS, stalkCount).setValue(CattailBlock.AGE, 2).setValue(CattailBlock.FLUFFY, fluffy).setValue(BlockStateProperties.WATERLOGGED, level.getFluidState(pos.above()).getType() == Fluids.WATER), 2);
+					level.setBlock(pos.above(), EnvironmentalBlocks.CATTAIL.get().defaultBlockState().setValue(CattailBlock.CATTAILS, stalkCount).setValue(CattailBlock.AGE, 2).setValue(CattailBlock.FLUFFY, fluffy).setValue(BlockStateProperties.WATERLOGGED, level.getFluidState(pos.above()).getType() == Fluids.WATER).setValue(CattailBlock.TOP, true), 2);
 				}
 				place = true;
 			}
