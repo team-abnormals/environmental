@@ -1,0 +1,26 @@
+{
+  "variants": {
+    "type=double": {
+      "model": "environmental:block/dirt_bricks"
+    },
+    "type=east": {
+      "model": "environmental:block/dirt_brick_vertical_slab",
+      "uvlock": true,
+      "y": 90
+    },
+    "type=north": {
+      "model": "environmental:block/dirt_brick_vertical_slab",
+      "uvlock": true
+    },
+    "type=south": {
+      "model": "environmental:block/dirt_brick_vertical_slab",
+      "uvlock": true,
+      "y": 180
+    },
+    "type=west": {
+      "model": "environmental:block/dirt_brick_vertical_slab",
+      "uvlock": true,
+      "y": 270
+    }
+  }
+}

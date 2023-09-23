@@ -1,4 +1,16 @@
 {
+	"block.environmental.dirt_bricks": "Dirt Bricks",
+	"block.environmental.dirt_brick_slab": "Dirt Brick Slab",
+	"block.environmental.dirt_brick_stairs": "Dirt Brick Stairs",
+	"block.environmental.dirt_brick_wall": "Dirt Brick Wall",
+	"block.environmental.dirt_brick_vertical_slab": "Dirt Brick Vertical Slab",
+
+	"block.environmental.dirt_tiles": "Dirt Tiles",
+	"block.environmental.dirt_tile_slab": "Dirt Tile Slab",
+	"block.environmental.dirt_tile_stairs": "Dirt Tile Stairs",
+	"block.environmental.dirt_tile_wall": "Dirt Tile Wall",
+	"block.environmental.dirt_tile_vertical_slab": "Dirt Tile Vertical Slab",
+	
 	"block.environmental.smooth_mud": "Smooth Mud",
 	"block.environmental.smooth_mud_slab": "Smooth Mud Slab",
 	"block.environmental.smooth_mud_vertical_slab": "Smooth Mud Vertical Slab",

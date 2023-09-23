@@ -13,4 +13,6 @@ public class EnvironmentalBlockFamilies {
 	public static final BlockFamily GRASS_THATCH_FAMILY = new BlockFamily.Builder(GRASS_THATCH.get()).stairs(GRASS_THATCH_STAIRS.get()).slab(GRASS_THATCH_SLAB.get()).getFamily();
 	public static final BlockFamily CATTAIL_THATCH_FAMILY = new BlockFamily.Builder(CATTAIL_THATCH.get()).stairs(CATTAIL_THATCH_STAIRS.get()).slab(CATTAIL_THATCH_SLAB.get()).getFamily();
 	public static final BlockFamily DUCKWEED_THATCH_FAMILY = new BlockFamily.Builder(DUCKWEED_THATCH.get()).stairs(DUCKWEED_THATCH_STAIRS.get()).slab(DUCKWEED_THATCH_SLAB.get()).getFamily();
+	public static final BlockFamily DIRT_BRICK_FAMILY = new BlockFamily.Builder(DIRT_BRICKS.get()).stairs(DIRT_BRICK_STAIRS.get()).slab(DIRT_BRICK_SLAB.get()).wall(DIRT_BRICK_WALL.get()).getFamily();
+	public static final BlockFamily DIRT_TILE_FAMILY = new BlockFamily.Builder(DIRT_TILES.get()).stairs(DIRT_TILE_STAIRS.get()).slab(DIRT_TILE_SLAB.get()).wall(DIRT_TILE_WALL.get()).getFamily();
 }

@@ -103,6 +103,37 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 		generateRecipes(consumer, EnvironmentalBlockFamilies.DUCKWEED_THATCH_FAMILY);
 		verticalSlabRecipes(consumer, EnvironmentalBlockFamilies.DUCKWEED_THATCH_FAMILY, EnvironmentalBlocks.DUCKWEED_THATCH_VERTICAL_SLAB.get());
 
+		ShapedRecipeBuilder.shaped(EnvironmentalBlocks.DIRT_BRICKS.get(), 4).define('#', Blocks.DIRT).pattern("##").pattern("##").unlockedBy(getHasName(Blocks.DIRT), has(Blocks.DIRT)).save(consumer);
+		generateRecipes(consumer, EnvironmentalBlockFamilies.DIRT_BRICK_FAMILY);
+		verticalSlabRecipes(consumer, EnvironmentalBlockFamilies.DIRT_BRICK_FAMILY, EnvironmentalBlocks.DIRT_BRICK_VERTICAL_SLAB.get());
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_BRICK_SLAB.get(), EnvironmentalBlocks.DIRT_BRICKS.get(), 2);
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_BRICK_STAIRS.get(), EnvironmentalBlocks.DIRT_BRICKS.get());
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_BRICK_WALL.get(), EnvironmentalBlocks.DIRT_BRICKS.get());
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_BRICKS.get(), Blocks.DIRT);
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_BRICK_SLAB.get(), Blocks.DIRT, 2);
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_BRICK_STAIRS.get(), Blocks.DIRT);
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_BRICK_WALL.get(), Blocks.DIRT);
+		conditionalStonecuttingRecipe(consumer, VERTICAL_SLABS, EnvironmentalBlocks.DIRT_BRICK_VERTICAL_SLAB.get(), Blocks.DIRT, 2);
+		conditionalStonecuttingRecipe(consumer, VERTICAL_SLABS, EnvironmentalBlocks.DIRT_BRICK_VERTICAL_SLAB.get(), EnvironmentalBlocks.DIRT_BRICKS.get(), 2);
+		
+		ShapedRecipeBuilder.shaped(EnvironmentalBlocks.DIRT_TILES.get(), 4).define('#', EnvironmentalBlocks.DIRT_BRICKS.get()).pattern("##").pattern("##").unlockedBy(getHasName(EnvironmentalBlocks.DIRT_BRICKS.get()), has(EnvironmentalBlocks.DIRT_BRICKS.get())).save(consumer);
+		generateRecipes(consumer, EnvironmentalBlockFamilies.DIRT_TILE_FAMILY);
+		verticalSlabRecipes(consumer, EnvironmentalBlockFamilies.DIRT_TILE_FAMILY, EnvironmentalBlocks.DIRT_TILE_VERTICAL_SLAB.get());
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_TILE_SLAB.get(), EnvironmentalBlocks.DIRT_TILES.get(), 2);
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_TILE_STAIRS.get(), EnvironmentalBlocks.DIRT_TILES.get());
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_TILE_WALL.get(), EnvironmentalBlocks.DIRT_TILES.get());
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_TILES.get(), EnvironmentalBlocks.DIRT_BRICKS.get());
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_TILE_SLAB.get(), EnvironmentalBlocks.DIRT_BRICKS.get(), 2);
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_TILE_STAIRS.get(), EnvironmentalBlocks.DIRT_BRICKS.get());
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_TILE_WALL.get(), EnvironmentalBlocks.DIRT_BRICKS.get());
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_TILES.get(), Blocks.DIRT);
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_TILE_SLAB.get(), Blocks.DIRT, 2);
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_TILE_STAIRS.get(), Blocks.DIRT);
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_TILE_WALL.get(), Blocks.DIRT);
+		conditionalStonecuttingRecipe(consumer, VERTICAL_SLABS, EnvironmentalBlocks.DIRT_TILE_VERTICAL_SLAB.get(), Blocks.DIRT, 2);
+		conditionalStonecuttingRecipe(consumer, VERTICAL_SLABS, EnvironmentalBlocks.DIRT_TILE_VERTICAL_SLAB.get(), EnvironmentalBlocks.DIRT_BRICKS.get(), 2);
+		conditionalStonecuttingRecipe(consumer, VERTICAL_SLABS, EnvironmentalBlocks.DIRT_TILE_VERTICAL_SLAB.get(), EnvironmentalBlocks.DIRT_TILES.get(), 2);
+
 		ShapedRecipeBuilder.shaped(Blocks.MUD).define('#', EnvironmentalItems.MUD_BALL.get()).pattern("##").pattern("##").unlockedBy("has_mud_ball", has(EnvironmentalItems.MUD_BALL.get())).save(consumer, new ResourceLocation(Environmental.MOD_ID, RecipeBuilder.getDefaultRecipeId(Blocks.MUD).getPath()));
 		oneToOneConversionRecipeBuilder(EnvironmentalItems.MUD_BALL.get(), Blocks.MUD, 4).group("mud_ball").save(consumer);
 		ShapelessRecipeBuilder.shapeless(EnvironmentalItems.MUD_BALL.get(), 16).requires(BlueprintItemTags.BUCKETS_WATER).requires(Blocks.DIRT, 4).group("mud_ball").unlockedBy("has_dirt", has(Blocks.DIRT)).save(consumer, getModConversionRecipeName(EnvironmentalItems.MUD_BALL.get(), Blocks.DIRT));

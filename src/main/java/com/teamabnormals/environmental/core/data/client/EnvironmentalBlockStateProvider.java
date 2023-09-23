@@ -46,6 +46,9 @@ public class EnvironmentalBlockStateProvider extends BlockStateProvider {
 
 	@Override
 	protected void registerStatesAndModels() {
+		this.blockFamily(EnvironmentalBlockFamilies.DIRT_BRICK_FAMILY, DIRT_BRICK_VERTICAL_SLAB.get());
+		this.blockFamily(EnvironmentalBlockFamilies.DIRT_TILE_FAMILY, DIRT_TILE_VERTICAL_SLAB.get());
+
 		this.blockFamily(EnvironmentalBlockFamilies.PINE_PLANKS_FAMILY, PINE_VERTICAL_SLAB.get());
 		this.logBlocks(PINE_LOG.get(), PINE_WOOD.get());
 		this.logBlocks(STRIPPED_PINE_LOG.get(), STRIPPED_PINE_WOOD.get());

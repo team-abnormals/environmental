@@ -2,6 +2,8 @@
   "values": [
     "environmental:grass_thatch_stairs",
     "environmental:cattail_thatch_stairs",
-    "environmental:duckweed_thatch_stairs"
+    "environmental:duckweed_thatch_stairs",
+    "environmental:dirt_brick_stairs",
+    "environmental:dirt_tile_stairs"
   ]
 }

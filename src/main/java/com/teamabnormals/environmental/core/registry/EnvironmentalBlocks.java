@@ -36,6 +36,18 @@ public class EnvironmentalBlocks {
 
 	// Mud //
 
+	public static final RegistryObject<Block> DIRT_BRICKS = HELPER.createBlock("dirt_bricks", () -> new Block(EnvironmentalProperties.DIRT_BRICKS), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> DIRT_BRICK_STAIRS = HELPER.createBlock("dirt_brick_stairs", () -> new StairBlock(() -> DIRT_BRICKS.get().defaultBlockState(), EnvironmentalProperties.DIRT_BRICKS), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> DIRT_BRICK_SLAB = HELPER.createBlock("dirt_brick_slab", () -> new SlabBlock(EnvironmentalProperties.DIRT_BRICKS), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> DIRT_BRICK_WALL = HELPER.createBlock("dirt_brick_wall", () -> new WallBlock(EnvironmentalProperties.DIRT_BRICKS), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> DIRT_BRICK_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "dirt_brick_vertical_slab", () -> new VerticalSlabBlock(EnvironmentalProperties.DIRT_BRICKS), CreativeModeTab.TAB_BUILDING_BLOCKS);
+
+	public static final RegistryObject<Block> DIRT_TILES = HELPER.createBlock("dirt_tiles", () -> new Block(EnvironmentalProperties.DIRT_BRICKS), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> DIRT_TILE_STAIRS = HELPER.createBlock("dirt_tile_stairs", () -> new StairBlock(() -> DIRT_TILES.get().defaultBlockState(), EnvironmentalProperties.DIRT_BRICKS), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> DIRT_TILE_SLAB = HELPER.createBlock("dirt_tile_slab", () -> new SlabBlock(EnvironmentalProperties.DIRT_BRICKS), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> DIRT_TILE_WALL = HELPER.createBlock("dirt_tile_wall", () -> new WallBlock(EnvironmentalProperties.DIRT_BRICKS), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> DIRT_TILE_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "dirt_tile_vertical_slab", () -> new VerticalSlabBlock(EnvironmentalProperties.DIRT_BRICKS), CreativeModeTab.TAB_BUILDING_BLOCKS);
+
 	public static final RegistryObject<Block> SMOOTH_MUD = HELPER.createBlock("smooth_mud", () -> new Block(EnvironmentalProperties.MUD_BRICKS), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> SMOOTH_MUD_SLAB = HELPER.createBlock("smooth_mud_slab", () -> new SlabBlock(EnvironmentalProperties.MUD_BRICKS), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> SMOOTH_MUD_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "smooth_mud_vertical_slab", () -> new DirectionalVerticalSlabBlock(EnvironmentalProperties.MUD_BRICKS), CreativeModeTab.TAB_BUILDING_BLOCKS);

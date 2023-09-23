@@ -70,6 +70,7 @@ public class EnvironmentalItemTagsProvider extends ItemTagsProvider {
 		this.tag(BlueprintItemTags.LARGE_BOATS).add(LARGE_WILLOW_BOAT.get(), LARGE_PINE_BOAT.get(), LARGE_WISTERIA_BOAT.get(), LARGE_CHERRY_BOAT.get());
 		this.tag(ItemTags.MUSIC_DISCS).add(MUSIC_DISC_LEAVING_HOME.get(), MUSIC_DISC_SLABRAVE.get());
 		this.tag(ItemTags.FISHES).add(KOI.get());
+		this.copy(BlockTags.DIRT, ItemTags.DIRT);
 
 		this.copy(Tags.Blocks.CHESTS_WOODEN, Tags.Items.CHESTS_WOODEN);
 		this.copy(Tags.Blocks.CHESTS_TRAPPED, Tags.Items.CHESTS_TRAPPED);
