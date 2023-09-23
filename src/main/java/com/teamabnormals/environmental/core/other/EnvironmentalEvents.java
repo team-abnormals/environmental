@@ -12,6 +12,7 @@ import com.teamabnormals.environmental.common.entity.animal.slabfish.SlabfishOve
 import com.teamabnormals.environmental.common.slabfish.SlabfishManager;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.EnvironmentalConfig;
+import com.teamabnormals.environmental.core.other.tags.EnvironmentalBlockTags;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalEntityTypeTags;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalItemTags;
 import com.teamabnormals.environmental.core.registry.*;
@@ -66,10 +67,12 @@ import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingTickEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
+import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.eventbus.api.Event;
+import net.minecraftforge.eventbus.api.Event.Result;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -259,8 +262,8 @@ public class EnvironmentalEvents {
 						player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player, new ItemStack(Items.BUCKET)));
 						player.awardStat(Stats.ITEM_USED.get(stack.getItem()));
 						if (!level.isClientSide) {
-							ServerLevel serverlevel = (ServerLevel)level;
-							for(int i = 0; i < 5; ++i) {
+							ServerLevel serverlevel = (ServerLevel) level;
+							for (int i = 0; i < 5; ++i) {
 								serverlevel.sendParticles(ParticleTypes.SPLASH, target.getX() + level.random.nextDouble(), target.getY() + 1, target.getZ() + level.random.nextDouble(), 1, 0.0D, 0.0D, 0.0D, 1.0D);
 							}
 						}
@@ -453,4 +456,18 @@ public class EnvironmentalEvents {
 			}
 		}
 	}
+
+	@SubscribeEvent
+	public static void onBonemeal(BonemealEvent event) {
+		Level level = event.getLevel();
+		RandomSource random = level.getRandom();
+		BlockPos pos = event.getPos();
+
+		if (EnvironmentalConfig.COMMON.cactusBobble.get() && event.getBlock().is(EnvironmentalBlockTags.CACTUS_BOBBLE_PLANTABLE_ON)) {
+			if (level.getBlockState(pos.above()).isAir()) {
+				level.setBlockAndUpdate(pos.above(), EnvironmentalBlocks.CACTUS_BOBBLE.get().defaultBlockState());
+				event.setResult(Result.ALLOW);
+			}
+		}
+
 }

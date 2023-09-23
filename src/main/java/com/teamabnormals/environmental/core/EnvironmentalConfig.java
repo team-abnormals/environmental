@@ -14,6 +14,8 @@ public class EnvironmentalConfig {
 		public final ConfigValue<Integer> koiVerticalSerenityRange;
 		public final ConfigValue<Boolean> serenityEffect;
 
+		public final ConfigValue<Boolean> cactusBobble;
+
 		Common(ForgeConfigSpec.Builder builder) {
 			builder.push("mobs");
 			builder.push("koi");
@@ -22,6 +24,9 @@ public class EnvironmentalConfig {
 			koiVerticalSerenityRange = builder.comment("Vertical radius of Serenity effect in blocks").define("Vertical serenity range (radius)", 8);
 			serenityEffect = builder.comment("If Koi exude Serenity as a potion effect").define("Serenity potion effect", true);
 			builder.pop();
+			builder.pop();
+			builder.push("blocks");
+			cactusBobble = builder.comment("Cacti generate with a Cactus Bobble on top to prevent natural growth").define("Cactus bobble", true);
 			builder.pop();
 		}
 	}

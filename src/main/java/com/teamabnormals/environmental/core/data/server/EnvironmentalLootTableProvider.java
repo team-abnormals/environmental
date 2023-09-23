@@ -22,7 +22,6 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.CandleBlock;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.storage.loot.LootContext;
@@ -161,6 +160,7 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.add(GIANT_TALL_GRASS.get(), (block) -> createDoublePlantWithOtherDrop(block, Blocks.GRASS, Items.WHEAT_SEEDS, 3, 0.125F));
 			this.add(TALL_DEAD_BUSH.get(), (block) -> createDoublePlantWithOtherDrop(block, Blocks.DEAD_BUSH, Items.STICK, 2, 0.125F));
 			this.dropSelf(CUP_LICHEN.get());
+			this.add(CACTUS_BOBBLE.get(), noDrop());
 
 			this.dropSelf(CATTAIL_FLUFF_BLOCK.get());
 			this.dropSelf(CHERRY_CRATE.get());
