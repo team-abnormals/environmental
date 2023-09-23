@@ -46,7 +46,9 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.entity.projectile.ThrownPotion;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUtils;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
@@ -147,57 +149,49 @@ public class EnvironmentalEvents {
 
 	@SubscribeEvent
 	public static void onRightClickBlock(RightClickBlock event) {
-		Level world = event.getLevel();
+		Level level = event.getLevel();
 		BlockPos pos = event.getPos();
-		BlockState state = world.getBlockState(pos);
+		BlockState state = level.getBlockState(pos);
 		Direction face = event.getFace();
 		Player player = event.getEntity();
 		ItemStack stack = event.getItemStack();
-		Item item = stack.getItem();
-		if (item == Items.BONE_MEAL && state.getBlock() == Blocks.DIRT && world.getBlockState(pos.above()).propagatesSkylightDown(world, pos)) {
-			ArrayList<BlockState> potentialStates = new ArrayList<>();
-			for (BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
-				Block block = world.getBlockState(blockpos).getBlock();
-				if (DIRT_SPREADABLES.contains(block) && !potentialStates.contains(block.defaultBlockState())) {
-					potentialStates.add(block.defaultBlockState());
-				}
+		if (stack.canPerformAction(ToolActions.SHOVEL_DIG) && !player.isSpectator() && state.is(EnvironmentalBlocks.BURIED_TRUFFLE.get())) {
+			level.playSound(player, pos, EnvironmentalSoundEvents.SHOVEL_DIG.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
+			if (!level.isClientSide()) {
+				Vec3i vector3i = face.getNormal();
+				double d0 = pos.getX() + 0.5D + 0.625D * vector3i.getX();
+				double d1 = pos.getY() + 0.375D + 0.625D * vector3i.getY();
+				double d2 = pos.getZ() + 0.5D + 0.625D * vector3i.getZ();
+				ItemEntity itementity = new ItemEntity(level, d0, d1, d2, new ItemStack(EnvironmentalItems.TRUFFLE.get(), 1));
+				level.addFreshEntity(itementity);
+				stack.hurtAndBreak(1, player, (damage) -> {
+					damage.broadcastBreakEvent(event.getHand());
+				});
+				level.setBlock(pos, Blocks.DIRT.defaultBlockState(), 11);
 			}
-			if (!potentialStates.isEmpty()) {
-				if (!world.isClientSide()) {
-					world.levelEvent(2005, pos, 0);
-					world.setBlock(pos, potentialStates.get(world.getRandom().nextInt(potentialStates.size())), 3);
-				}
-				if (!player.isCreative()) stack.shrink(1);
-				event.setCancellationResult(InteractionResult.sidedSuccess(world.isClientSide()));
-				event.setCanceled(true);
-			}
-		} else if (item instanceof ShovelItem && !player.isSpectator() && state.is(EnvironmentalBlocks.BURIED_TRUFFLE.get())) {
-			Vec3i vector3i = face.getNormal();
-			double d0 = pos.getX() + 0.5D + 0.625D * vector3i.getX();
-			double d1 = pos.getY() + 0.375D + 0.625D * vector3i.getY();
-			double d2 = pos.getZ() + 0.5D + 0.625D * vector3i.getZ();
-
-			ItemEntity itementity = new ItemEntity(world, d0, d1, d2, new ItemStack(EnvironmentalItems.TRUFFLE.get(), 1));
-			world.addFreshEntity(itementity);
-
-			world.playSound(player, pos, EnvironmentalSoundEvents.SHOVEL_DIG.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
-			stack.hurtAndBreak(1, player, (damage) -> {
-				damage.broadcastBreakEvent(event.getHand());
-			});
-			world.setBlock(pos, Blocks.DIRT.defaultBlockState(), 11);
-			event.setCancellationResult(InteractionResult.sidedSuccess(world.isClientSide()));
+			event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide()));
 			event.setCanceled(true);
-		} else if (event.getFace() != Direction.DOWN) {
-			if (item instanceof ShovelItem && !player.isSpectator() && world.isEmptyBlock(pos.above())) {
-				if (state.is(Blocks.PODZOL) || state.is(Blocks.MYCELIUM) || state.is(Blocks.DIRT) || state.is(Blocks.COARSE_DIRT) || state.is(Blocks.ROOTED_DIRT)) {
-					world.playSound(player, pos, SoundEvents.SHOVEL_FLATTEN, SoundSource.BLOCKS, 1.0F, 1.0F);
+		} else if (stack.canPerformAction(ToolActions.HOE_TILL) && state.is(EnvironmentalBlocks.DIRT_PATH.get()) && !player.isSpectator() && level.isEmptyBlock(pos.above())) {
+			level.playSound(player, pos, SoundEvents.SHOVEL_FLATTEN, SoundSource.BLOCKS, 1.0F, 1.0F);
+			if (!level.isClientSide()) {
+				stack.hurtAndBreak(1, player, (damage) -> {
+					damage.broadcastBreakEvent(event.getHand());
+				});
+				level.setBlock(pos, Blocks.FARMLAND.defaultBlockState(), 11);
+			}
+			event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide()));
+			event.setCanceled(true);
+		} else if (event.getFace() != Direction.DOWN && stack.canPerformAction(ToolActions.SHOVEL_FLATTEN) && !player.isSpectator() && level.isEmptyBlock(pos.above())) {
+			if (state.is(Blocks.PODZOL) || state.is(Blocks.MYCELIUM) || state.is(Blocks.DIRT) || state.is(Blocks.COARSE_DIRT) || state.is(Blocks.ROOTED_DIRT)) {
+				level.playSound(player, pos, SoundEvents.SHOVEL_FLATTEN, SoundSource.BLOCKS, 1.0F, 1.0F);
+				if (!level.isClientSide) {
 					stack.hurtAndBreak(1, player, (damage) -> {
 						damage.broadcastBreakEvent(event.getHand());
 					});
-					world.setBlock(pos, state.is(Blocks.PODZOL) ? EnvironmentalBlocks.PODZOL_PATH.get().defaultBlockState() : state.is(Blocks.MYCELIUM) ? EnvironmentalBlocks.MYCELIUM_PATH.get().defaultBlockState() : EnvironmentalBlocks.DIRT_PATH.get().defaultBlockState(), 11);
-					event.setCancellationResult(InteractionResult.sidedSuccess(world.isClientSide()));
-					event.setCanceled(true);
+					level.setBlock(pos, state.is(Blocks.PODZOL) ? EnvironmentalBlocks.PODZOL_PATH.get().defaultBlockState() : state.is(Blocks.MYCELIUM) ? EnvironmentalBlocks.MYCELIUM_PATH.get().defaultBlockState() : EnvironmentalBlocks.DIRT_PATH.get().defaultBlockState(), 11);
 				}
+				event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide()));
+				event.setCanceled(true);
 			}
 		}
 	}
@@ -473,6 +467,22 @@ public class EnvironmentalEvents {
 				level.setBlockAndUpdate(pos.above(), EnvironmentalBlocks.CACTUS_BOBBLE.get().defaultBlockState());
 			}
 			event.setResult(Result.ALLOW);
+		}
+
+		if (state.is(Blocks.DIRT) && level.getBlockState(pos.above()).propagatesSkylightDown(level, pos)) {
+			ArrayList<BlockState> potentialStates = new ArrayList<>();
+			for (BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
+				Block block = level.getBlockState(blockpos).getBlock();
+				if (DIRT_SPREADABLES.contains(block) && !potentialStates.contains(block.defaultBlockState())) {
+					potentialStates.add(block.defaultBlockState());
+				}
+			}
+			if (!potentialStates.isEmpty()) {
+				if (!level.isClientSide()) {
+					level.setBlock(pos, potentialStates.get(level.getRandom().nextInt(potentialStates.size())), 3);
+				}
+				event.setResult(Result.ALLOW);
+			}
 		}
 
 		if (state.is(Blocks.MYCELIUM) && level.getBlockState(pos.above()).isAir()) {
