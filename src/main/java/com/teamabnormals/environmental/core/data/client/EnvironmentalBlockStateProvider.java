@@ -57,6 +57,8 @@ public class EnvironmentalBlockStateProvider extends BlockStateProvider {
 
 		this.block(CATTAIL_FLUFF_BLOCK.get());
 		this.cattail(CATTAIL_SPROUT.get(), CATTAIL.get(), CATTAIL_STALK.get());
+
+		this.cactusBobble(CACTUS_BOBBLE.get());
 	}
 
 	public void cattail(Block cattailSprout, Block cattail, Block cattailStalk) {
@@ -291,6 +293,10 @@ public class EnvironmentalBlockStateProvider extends BlockStateProvider {
 	public void leavesBlock(Block leaves) {
 		this.simpleBlock(leaves, models().getBuilder(name(leaves)).parent(new UncheckedModelFile(new ResourceLocation("block/leaves"))).texture("all", blockTexture(leaves)));
 		this.blockItem(leaves);
+	}
+
+	public void cactusBobble(Block cactusBobble) {
+		this.simpleBlock(cactusBobble, models().getBuilder(name(cactusBobble)).parent(new UncheckedModelFile(new ResourceLocation(Environmental.MOD_ID, "block/template_cactus_bobble"))).texture("all", blockTexture(cactusBobble)));
 	}
 
 	public void leafPileBlock(Block leaves, Block leafPile) {

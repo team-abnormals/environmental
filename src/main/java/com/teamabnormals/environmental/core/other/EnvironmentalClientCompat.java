@@ -47,6 +47,7 @@ public class EnvironmentalClientCompat {
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.LARGE_LILY_PAD.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.GIANT_LILY_PAD.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.DUCKWEED.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.CACTUS_BOBBLE.get(), RenderType.cutout());
 
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.CATTAIL_SPROUT.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.CATTAIL.get(), RenderType.cutout());

@@ -61,6 +61,7 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> TALL_DEAD_BUSH = HELPER.createBlock("tall_dead_bush", () -> new TallDeadBushBlock(EnvironmentalProperties.TALL_DEAD_BUSH), CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> CUP_LICHEN = HELPER.createBlock("cup_lichen", () -> new CupLichenBlock(EnvironmentalProperties.CUP_LICHEN), CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> POTTED_CUP_LICHEN = HELPER.createBlockNoItem("potted_cup_lichen", () -> new FlowerPotBlock(EnvironmentalBlocks.CUP_LICHEN.get(), PropertyUtil.flowerPot()));
+	public static final RegistryObject<Block> CACTUS_BOBBLE = HELPER.createBlockNoItem("cactus_bobble", () -> new CactusBobbleBlock(EnvironmentalProperties.CACTUS_BOBBLE));
 
 	// Misc //
 
