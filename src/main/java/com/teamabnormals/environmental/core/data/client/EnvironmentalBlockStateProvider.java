@@ -24,12 +24,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraftforge.client.model.generators.BlockStateProvider;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.client.model.generators.ModelFile.ExistingModelFile;
 import net.minecraftforge.client.model.generators.ModelFile.UncheckedModelFile;
-import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -65,16 +62,16 @@ public class EnvironmentalBlockStateProvider extends BlockStateProvider {
 	}
 
 	public void cattail(Block cattailSprout, Block cattail, Block cattailStalk) {
-		this.getVariantBuilder(cattailSprout).forAllStatesExcept(state -> ConfiguredModel.builder().modelFile(this.cattailStalkModel(name(cattailSprout), blockTexture(cattailSprout), state.getValue(CattailBlock.CATTAILS))).build(), BlockStateProperties.WATERLOGGED);
+		this.getVariantBuilder(cattailSprout).forAllStatesExcept(state -> ConfiguredModel.builder().modelFile(this.cattailStalkModel(name(cattailSprout), blockTexture(cattailSprout), state.getValue(CattailBlock.CATTAILS), false)).build(), BlockStateProperties.WATERLOGGED);
 
 		MultiPartBlockStateBuilder cattailBuilder = this.getMultipartBuilder(cattail);
 
 		for (int i = 1; i <= 3; i++) {
 			cattailBuilder
 					.part().modelFile(cattailStalkModel(
-							name(cattail), blockTexture(cattail), i)).addModel().condition(CattailBlock.TOP, false).condition(CattailBlock.CATTAILS, i).end()
+							name(cattail), blockTexture(cattail), i, false)).addModel().condition(CattailBlock.TOP, false).condition(CattailBlock.CATTAILS, i).end()
 					.part().modelFile(cattailStalkModel(
-							name(cattail) + "_top", suffix(blockTexture(cattail), "_stalk_top"), i)).addModel().condition(CattailBlock.TOP, true).condition(CattailBlock.CATTAILS, i).end()
+							name(cattail) + "_top", suffix(blockTexture(cattail), "_stalk_top"), i, true)).addModel().condition(CattailBlock.TOP, true).condition(CattailBlock.CATTAILS, i).end()
 					.part().modelFile(cattailHeadModel(
 							name(cattail) + "_head", suffix(blockTexture(cattail), "_head"), false, i)).addModel().condition(CattailBlock.FLUFFY, false).condition(CattailBlock.TOP, false).condition(CattailBlock.CATTAILS, i).end()
 					.part().modelFile(cattailHeadModel(
@@ -87,14 +84,23 @@ public class EnvironmentalBlockStateProvider extends BlockStateProvider {
 
 
 		this.getVariantBuilder(cattailStalk).forAllStatesExcept(state -> {
-			return ConfiguredModel.builder().modelFile(this.cattailStalkModel(name(cattailStalk) + (state.getValue(CattailStalkBlock.BOTTOM) ? "_bottom" : "_middle"), suffix(blockTexture(cattailStalk), (state.getValue(CattailStalkBlock.BOTTOM) ? "_bottom" : "_middle")), state.getValue(CattailBlock.CATTAILS))).build();
+			return ConfiguredModel.builder().modelFile(this.cattailStalkModel(name(cattailStalk) + (state.getValue(CattailStalkBlock.BOTTOM) ? "_bottom" : "_middle"), suffix(blockTexture(cattailStalk), (state.getValue(CattailStalkBlock.BOTTOM) ? "_bottom" : "_middle")), state.getValue(CattailBlock.CATTAILS), false)).build();
 		}, BlockStateProperties.WATERLOGGED);
 	}
 
-	public ModelFile cattailStalkModel(String name, ResourceLocation texture, int stalks) {
-		String stalkSuffix = stalks == 3 ? "_three" : stalks == 2 ? "_two" : "_one";
+	public ModelFile cattailStalkModel(String name, ResourceLocation texture, int stalks, boolean top) {
+		String stalkSuffix = getStalkSuffix(stalks);
 		ModelFile stalkParent = new UncheckedModelFile(new ResourceLocation(Environmental.MOD_ID, "block/template_cattail_stalk" + stalkSuffix));
-		return this.models().getBuilder(name + stalkSuffix).parent(stalkParent).texture("stalk", texture);
+		BlockModelBuilder builder = this.models().getBuilder(name + stalkSuffix).parent(stalkParent);
+		for (int i = 1; i <= stalks; i++) {
+			String suffix = getStalkSuffix(i);
+			builder.texture("stalk" + suffix, top ? suffix(texture, suffix) : texture);
+		}
+		return builder;
+	}
+
+	public static String getStalkSuffix(int stalks) {
+		return stalks == 3 ? "_three" : stalks == 2 ? "_two" : "_one";
 	}
 
 	public ModelFile cattailHeadModel(String name, ResourceLocation texture, boolean top, int stalks) {
