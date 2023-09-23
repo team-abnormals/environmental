@@ -11,6 +11,7 @@
     "environmental:dirt_tile_wall",
     "environmental:dirt_tile_vertical_slab",
     "environmental:buried_truffle",
+    "environmental:dirt_path",
     "environmental:podzol_path",
     "environmental:mycelium_path"
   ]

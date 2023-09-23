@@ -189,12 +189,12 @@ public class EnvironmentalEvents {
 			event.setCanceled(true);
 		} else if (event.getFace() != Direction.DOWN) {
 			if (item instanceof ShovelItem && !player.isSpectator() && world.isEmptyBlock(pos.above())) {
-				if (state.is(Blocks.PODZOL) || state.is(Blocks.MYCELIUM)) {
+				if (state.is(Blocks.PODZOL) || state.is(Blocks.MYCELIUM) || state.is(Blocks.DIRT) || state.is(Blocks.COARSE_DIRT) || state.is(Blocks.ROOTED_DIRT)) {
 					world.playSound(player, pos, SoundEvents.SHOVEL_FLATTEN, SoundSource.BLOCKS, 1.0F, 1.0F);
 					stack.hurtAndBreak(1, player, (damage) -> {
 						damage.broadcastBreakEvent(event.getHand());
 					});
-					world.setBlock(pos, state.is(Blocks.PODZOL) ? EnvironmentalBlocks.PODZOL_PATH.get().defaultBlockState() : EnvironmentalBlocks.MYCELIUM_PATH.get().defaultBlockState(), 11);
+					world.setBlock(pos, state.is(Blocks.PODZOL) ? EnvironmentalBlocks.PODZOL_PATH.get().defaultBlockState() : state.is(Blocks.MYCELIUM) ? EnvironmentalBlocks.MYCELIUM_PATH.get().defaultBlockState() : EnvironmentalBlocks.DIRT_PATH.get().defaultBlockState(), 11);
 					event.setCancellationResult(InteractionResult.sidedSuccess(world.isClientSide()));
 					event.setCanceled(true);
 				}
