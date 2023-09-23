@@ -3,6 +3,7 @@ package com.teamabnormals.environmental.core.other;
 import com.teamabnormals.blueprint.core.util.DataUtil;
 import com.teamabnormals.environmental.common.entity.projectile.ThrownDuckEgg;
 import com.teamabnormals.environmental.common.entity.projectile.ThrownMudBall;
+import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
 import net.minecraft.core.BlockPos;
@@ -16,6 +17,7 @@ import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DispenserBlock;
 
 public class EnvironmentalCompat {
@@ -25,6 +27,7 @@ public class EnvironmentalCompat {
 		registerFlammables();
 		registerDispenserBehaviors();
 		registerCauldronInteractions();
+		changeLocalization();
 	}
 
 	public static void registerCauldronInteractions() {
@@ -32,6 +35,10 @@ public class EnvironmentalCompat {
 		CauldronInteraction.WATER.put(EnvironmentalItems.HEALER_POUCH.get(), CauldronInteraction.DYED_ITEM);
 		CauldronInteraction.WATER.put(EnvironmentalItems.ARCHITECT_BELT.get(), CauldronInteraction.DYED_ITEM);
 		CauldronInteraction.WATER.put(EnvironmentalItems.WANDERER_BOOTS.get(), CauldronInteraction.DYED_ITEM);
+	}
+
+	private static void changeLocalization() {
+		DataUtil.changeBlockLocalization(Blocks.DIRT_PATH, Environmental.MOD_ID, "grass_path");
 	}
 
 	public static void registerCompostables() {

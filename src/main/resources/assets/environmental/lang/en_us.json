@@ -235,7 +235,9 @@
 	"block.environmental.potted_pink_hibiscus" : "Potted Pink Hibiscus",
 	"block.environmental.potted_magenta_hibiscus" : "Potted Magenta Hibiscus",
 	"block.environmental.potted_purple_hibiscus" : "Potted Purple Hibiscus",
-	
+
+	"block.environmental.dirt_path": "Dirt Path",
+	"block.environmental.grass_path": "Grass Path",
 	"block.environmental.podzol_path": "Podzol Path",
 	"block.environmental.mycelium_path": "Mycelium Path",
 	"block.environmental.mycelium_sprouts": "Mycelium Sprouts",
