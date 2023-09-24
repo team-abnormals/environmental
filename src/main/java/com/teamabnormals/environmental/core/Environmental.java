@@ -144,33 +144,10 @@ public class Environmental {
 	}
 
 	private void setupLoginMessages() {
-		LOGIN.messageBuilder(CAcknowledgeEnvironmentalMessage.class, 99, NetworkDirection.LOGIN_TO_SERVER)
-				.loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex)
-				.encoder(CAcknowledgeEnvironmentalMessage::encode)
-				.decoder(CAcknowledgeEnvironmentalMessage::decode)
-				.consumerNetworkThread(HandshakeHandler.indexFirst(CAcknowledgeEnvironmentalMessage::handle))
-				.add();
-		LOGIN.messageBuilder(SSyncSlabfishTypeMessage.class, 0, NetworkDirection.LOGIN_TO_CLIENT)
-				.loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex)
-				.encoder(SSyncSlabfishTypeMessage::encode)
-				.decoder(SSyncSlabfishTypeMessage::decode)
-				.markAsLoginPacket()
-				.consumerMainThread(HandshakeHandler.biConsumerFor((__, msg, ctx) -> SSyncSlabfishTypeMessage.handleLogin(msg, ctx)))
-				.add();
-		LOGIN.messageBuilder(SSyncSweaterTypeMessage.class, 1, NetworkDirection.LOGIN_TO_CLIENT)
-				.loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex)
-				.encoder(SSyncSweaterTypeMessage::encode)
-				.decoder(SSyncSweaterTypeMessage::decode)
-				.markAsLoginPacket()
-				.consumerMainThread(HandshakeHandler.biConsumerFor((__, msg, ctx) -> SSyncSweaterTypeMessage.handleLogin(msg, ctx)))
-				.add();
-		LOGIN.messageBuilder(SSyncBackpackTypeMessage.class, 2, NetworkDirection.LOGIN_TO_CLIENT)
-				.loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex)
-				.encoder(SSyncBackpackTypeMessage::encode)
-				.decoder(SSyncBackpackTypeMessage::decode)
-				.markAsLoginPacket()
-				.consumerMainThread(HandshakeHandler.biConsumerFor((__, msg, ctx) -> SSyncBackpackTypeMessage.handleLogin(msg, ctx)))
-				.add();
+		LOGIN.messageBuilder(CAcknowledgeEnvironmentalMessage.class, 99, NetworkDirection.LOGIN_TO_SERVER).loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex).encoder(CAcknowledgeEnvironmentalMessage::encode).decoder(CAcknowledgeEnvironmentalMessage::decode).consumerNetworkThread(HandshakeHandler.indexFirst(CAcknowledgeEnvironmentalMessage::handle)).add();
+		LOGIN.messageBuilder(SSyncSlabfishTypeMessage.class, 0, NetworkDirection.LOGIN_TO_CLIENT).loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex).encoder(SSyncSlabfishTypeMessage::encode).decoder(SSyncSlabfishTypeMessage::decode).markAsLoginPacket().consumerMainThread(HandshakeHandler.biConsumerFor((__, msg, ctx) -> SSyncSlabfishTypeMessage.handleLogin(msg, ctx))).add();
+		LOGIN.messageBuilder(SSyncSweaterTypeMessage.class, 1, NetworkDirection.LOGIN_TO_CLIENT).loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex).encoder(SSyncSweaterTypeMessage::encode).decoder(SSyncSweaterTypeMessage::decode).markAsLoginPacket().consumerMainThread(HandshakeHandler.biConsumerFor((__, msg, ctx) -> SSyncSweaterTypeMessage.handleLogin(msg, ctx))).add();
+		LOGIN.messageBuilder(SSyncBackpackTypeMessage.class, 2, NetworkDirection.LOGIN_TO_CLIENT).loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex).encoder(SSyncBackpackTypeMessage::encode).decoder(SSyncBackpackTypeMessage::decode).markAsLoginPacket().consumerMainThread(HandshakeHandler.biConsumerFor((__, msg, ctx) -> SSyncBackpackTypeMessage.handleLogin(msg, ctx))).add();
 	}
 
 	@SubscribeEvent
