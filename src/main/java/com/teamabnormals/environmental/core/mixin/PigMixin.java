@@ -13,9 +13,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Pig.class)
-public abstract class PigEntityMixin extends Animal {
+public abstract class PigMixin extends Animal {
 
-	protected PigEntityMixin(EntityType<? extends Animal> type, Level worldIn) {
+	protected PigMixin(EntityType<? extends Animal> type, Level worldIn) {
 		super(type, worldIn);
 	}
 

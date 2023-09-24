@@ -25,13 +25,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.Optional;
 
 @Mixin(Mob.class)
-public abstract class MobEntityMixin extends LivingEntity {
+public abstract class MobMixin extends LivingEntity {
 
 	@Shadow
 	@Final
 	protected float[] armorDropChances;
 
-	protected MobEntityMixin(EntityType<? extends LivingEntity> type, Level worldIn) {
+	protected MobMixin(EntityType<? extends LivingEntity> type, Level worldIn) {
 		super(type, worldIn);
 	}
 
