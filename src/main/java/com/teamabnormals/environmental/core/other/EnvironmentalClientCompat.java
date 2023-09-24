@@ -202,7 +202,7 @@ public class EnvironmentalClientCompat {
 		BlockColors blockColors = Minecraft.getInstance().getBlockColors();
 		ItemColors itemColors = Minecraft.getInstance().getItemColors();
 
-		List<RegistryObject<Block>> grassColors = Arrays.asList(EnvironmentalBlocks.GIANT_TALL_GRASS, EnvironmentalBlocks.CATTAIL, EnvironmentalBlocks.CATTAIL_STALK, EnvironmentalBlocks.POTTED_CATTAIL);
+		List<RegistryObject<Block>> grassColors = Arrays.asList(EnvironmentalBlocks.GIANT_TALL_GRASS);
 		List<RegistryObject<Block>> foliageColors = Arrays.asList(
 				EnvironmentalBlocks.WILLOW_LEAVES, EnvironmentalBlocks.WILLOW_LEAF_CARPET, EnvironmentalBlocks.HANGING_WILLOW_LEAVES, EnvironmentalBlocks.WILLOW_HEDGE, EnvironmentalBlocks.WILLOW_LEAF_PILE,
 				EnvironmentalBlocks.PINE_LEAVES, EnvironmentalBlocks.PINE_LEAF_CARPET, EnvironmentalBlocks.PINE_HEDGE, EnvironmentalBlocks.PINE_LEAF_PILE
