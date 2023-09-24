@@ -15,9 +15,8 @@ import java.util.function.Supplier;
  *
  * @author Ocelot
  */
-public class SSyncBackpackTypeMessage implements EnvironmentalLoginMessage {
+public class SSyncBackpackTypeMessage extends EnvironmentalLoginMessage {
 	private final BackpackType[] backpackTypes;
-	private int loginIndex;
 
 	public SSyncBackpackTypeMessage() {
 		this(SlabfishManager.get(LogicalSide.SERVER).getAllBackpackTypes());
@@ -27,13 +26,13 @@ public class SSyncBackpackTypeMessage implements EnvironmentalLoginMessage {
 		this.backpackTypes = backpackTypes;
 	}
 
-	public static void serialize(SSyncBackpackTypeMessage msg, FriendlyByteBuf buf) {
+	public static void encode(SSyncBackpackTypeMessage msg, FriendlyByteBuf buf) {
 		buf.writeVarInt(msg.backpackTypes.length);
 		for (int i = 0; i < msg.backpackTypes.length; i++)
 			msg.backpackTypes[i].writeTo(buf);
 	}
 
-	public static SSyncBackpackTypeMessage deserialize(FriendlyByteBuf buf) {
+	public static SSyncBackpackTypeMessage decode(FriendlyByteBuf buf) {
 		BackpackType[] backpackTypes = new BackpackType[buf.readVarInt()];
 		for (int i = 0; i < backpackTypes.length; i++)
 			backpackTypes[i] = BackpackType.readFrom(buf);
@@ -56,15 +55,5 @@ public class SSyncBackpackTypeMessage implements EnvironmentalLoginMessage {
 	 */
 	public BackpackType[] getBackpackTypes() {
 		return backpackTypes;
-	}
-
-	@Override
-	public int getLoginIndex() {
-		return loginIndex;
-	}
-
-	@Override
-	public void setLoginIndex(int loginIndex) {
-		this.loginIndex = loginIndex;
 	}
 }
