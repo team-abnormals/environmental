@@ -7,21 +7,27 @@ import java.util.function.IntSupplier;
  *
  * @author Ocelot
  */
-public interface EnvironmentalLoginMessage extends IntSupplier {
+public class EnvironmentalLoginMessage implements IntSupplier {
+	private int loginIndex;
+
 	/**
 	 * @return The login index of this message
 	 */
-	int getLoginIndex();
+	public int getLoginIndex() {
+		return this.loginIndex;
+	}
 
 	/**
 	 * Sets the login index for this message
 	 *
 	 * @param loginIndex The new login index
 	 */
-	void setLoginIndex(int loginIndex);
+	public void setLoginIndex(final int loginIndex) {
+		this.loginIndex = loginIndex;
+	}
 
 	@Override
-	default int getAsInt() {
+	public int getAsInt() {
 		return this.getLoginIndex();
 	}
 }

@@ -15,9 +15,8 @@ import java.util.function.Supplier;
  *
  * @author Ocelot
  */
-public class SSyncSlabfishTypeMessage implements EnvironmentalLoginMessage {
+public class SSyncSlabfishTypeMessage extends EnvironmentalLoginMessage {
 	private final SlabfishType[] slabfishTypes;
-	private int loginIndex;
 
 	public SSyncSlabfishTypeMessage() {
 		this(SlabfishManager.get(LogicalSide.SERVER).getAllSlabfishTypes());
@@ -27,13 +26,13 @@ public class SSyncSlabfishTypeMessage implements EnvironmentalLoginMessage {
 		this.slabfishTypes = slabfishTypes;
 	}
 
-	public static void serialize(SSyncSlabfishTypeMessage msg, FriendlyByteBuf buf) {
+	public static void encode(SSyncSlabfishTypeMessage msg, FriendlyByteBuf buf) {
 		buf.writeVarInt(msg.slabfishTypes.length);
 		for (int i = 0; i < msg.slabfishTypes.length; i++)
 			msg.slabfishTypes[i].writeTo(buf);
 	}
 
-	public static SSyncSlabfishTypeMessage deserialize(FriendlyByteBuf buf) {
+	public static SSyncSlabfishTypeMessage decode(FriendlyByteBuf buf) {
 		SlabfishType[] slabfishTypes = new SlabfishType[buf.readVarInt()];
 		for (int i = 0; i < slabfishTypes.length; i++)
 			slabfishTypes[i] = SlabfishType.readFrom(buf);
@@ -56,15 +55,5 @@ public class SSyncSlabfishTypeMessage implements EnvironmentalLoginMessage {
 	 */
 	public SlabfishType[] getSlabfishTypes() {
 		return slabfishTypes;
-	}
-
-	@Override
-	public int getLoginIndex() {
-		return loginIndex;
-	}
-
-	@Override
-	public void setLoginIndex(int loginIndex) {
-		this.loginIndex = loginIndex;
 	}
 }

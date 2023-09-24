@@ -7,31 +7,19 @@ import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
-public class CAcknowledgeEnvironmentalMessage implements EnvironmentalLoginMessage {
-	private int loginIndex;
+public class CAcknowledgeEnvironmentalMessage extends EnvironmentalLoginMessage {
 
 	public CAcknowledgeEnvironmentalMessage() {
 	}
 
-	public static void serialize(CAcknowledgeEnvironmentalMessage msg, FriendlyByteBuf buf) {
+	public static void encode(CAcknowledgeEnvironmentalMessage msg, FriendlyByteBuf buf) {
 	}
 
-	public static CAcknowledgeEnvironmentalMessage deserialize(FriendlyByteBuf buf) {
+	public static CAcknowledgeEnvironmentalMessage decode(FriendlyByteBuf buf) {
 		return new CAcknowledgeEnvironmentalMessage();
 	}
 
 	public static void handle(HandshakeHandler __, CAcknowledgeEnvironmentalMessage msg, Supplier<NetworkEvent.Context> ctx) {
-		ctx.get().enqueueWork(() -> ServerNetworkHandler.handleClientAcknowledgement(msg, ctx));
-		ctx.get().setPacketHandled(true);
-	}
-
-	@Override
-	public int getLoginIndex() {
-		return loginIndex;
-	}
-
-	@Override
-	public void setLoginIndex(int loginIndex) {
-		this.loginIndex = loginIndex;
+		ServerNetworkHandler.handleClientAcknowledgement(msg, ctx);
 	}
 }
