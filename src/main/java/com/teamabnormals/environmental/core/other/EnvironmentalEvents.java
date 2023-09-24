@@ -205,7 +205,7 @@ public class EnvironmentalEvents {
 		Level level = event.getLevel();
 		RandomSource random = level.getRandom();
 
-		if (target instanceof Slabfish slabby && stack.getItem() == Items.NAME_TAG) {
+		if (target instanceof Slabfish slabby && stack.is(Items.NAME_TAG)) {
 			if (stack.hasCustomHoverName()) {
 				if (!slabby.hasCustomName() || slabby.getCustomName() == null || !slabby.getCustomName().getString().equals(stack.getHoverName().getString())) {
 					slabby.playTransformSound();
@@ -213,7 +213,7 @@ public class EnvironmentalEvents {
 			}
 		}
 
-		if (target instanceof Pig && target.isAlive()) {
+		if (target instanceof Pig pig && target.isAlive() && !pig.isLeashed()) {
 			IDataManager data = ((IDataManager) target);
 			if (data.getValue(EnvironmentalDataProcessors.IS_MUDDY)) {
 				ResourceLocation decoration = data.getValue(EnvironmentalDataProcessors.MUDDY_PIG_DECORATION);
@@ -231,10 +231,41 @@ public class EnvironmentalEvents {
 						event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide()));
 						event.setCanceled(true);
 					}
-				} else if (!player.isSecondaryUseActive()) {
-					if (stack.canPerformAction(ToolActions.SHEARS_CARVE)) {
-						level.playSound(null, target, SoundEvents.SNOW_GOLEM_SHEAR, SoundSource.PLAYERS, 1.0F, 1.0F);
-						target.gameEvent(GameEvent.SHEAR, player);
+				} else if (stack.canPerformAction(ToolActions.SHEARS_CARVE)) {
+					level.playSound(null, target, SoundEvents.SNOW_GOLEM_SHEAR, SoundSource.PLAYERS, 1.0F, 1.0F);
+					target.gameEvent(GameEvent.SHEAR, player);
+					ItemStack decorationStack = new ItemStack(ForgeRegistries.ITEMS.getValue(decoration));
+					if (!level.isClientSide()) {
+						ItemEntity item = target.spawnAtLocation(decorationStack, 1.0F);
+						item.setDeltaMovement(item.getDeltaMovement().add((random.nextFloat() - random.nextFloat()) * 0.1F, random.nextFloat() * 0.05F, (random.nextFloat() - random.nextFloat()) * 0.1F));
+						stack.hurtAndBreak(1, player, e -> e.broadcastBreakEvent(hand));
+					}
+					data.setValue(EnvironmentalDataProcessors.MUDDY_PIG_DECORATION, new ResourceLocation("empty"));
+					event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide()));
+					event.setCanceled(true);
+				}
+
+				if (stack.is(Items.WHEAT) && !dried) {
+					level.playSound(null, target, SoundEvents.PACKED_MUD_PLACE, SoundSource.PLAYERS, 1.0F, 1.0F);
+					if (!event.getEntity().isCreative())
+						stack.shrink(1);
+					data.setValue(EnvironmentalDataProcessors.MUD_DRYING_TIME, 0);
+					event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide()));
+					event.setCanceled(true);
+				} else if (stack.is(Items.WATER_BUCKET)) {
+					level.playSound(null, target, SoundEvents.GENERIC_SPLASH, SoundSource.PLAYERS, 1.0F, 1.0F);
+					player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player, new ItemStack(Items.BUCKET)));
+					player.awardStat(Stats.ITEM_USED.get(stack.getItem()));
+					if (!level.isClientSide) {
+						ServerLevel serverlevel = (ServerLevel) level;
+						for (int i = 0; i < 5; ++i) {
+							serverlevel.sendParticles(ParticleTypes.SPLASH, target.getX() + level.random.nextDouble(), target.getY() + 1, target.getZ() + level.random.nextDouble(), 1, 0.0D, 0.0D, 0.0D, 1.0D);
+						}
+					}
+
+					data.setValue(EnvironmentalDataProcessors.IS_MUDDY, false);
+					data.setValue(EnvironmentalDataProcessors.MUD_DRYING_TIME, 0);
+					if (!decoration.equals(new ResourceLocation("empty"))) {
 						ItemStack decorationStack = new ItemStack(ForgeRegistries.ITEMS.getValue(decoration));
 						if (!level.isClientSide()) {
 							ItemEntity item = target.spawnAtLocation(decorationStack, 1.0F);
@@ -242,45 +273,10 @@ public class EnvironmentalEvents {
 							stack.hurtAndBreak(1, player, e -> e.broadcastBreakEvent(hand));
 						}
 						data.setValue(EnvironmentalDataProcessors.MUDDY_PIG_DECORATION, new ResourceLocation("empty"));
-						event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide()));
-						event.setCanceled(true);
 					}
-				}
-
-				if (!player.isSecondaryUseActive()) {
-					if (stack.is(Items.WHEAT) && !dried) {
-						level.playSound(null, target, SoundEvents.PACKED_MUD_PLACE, SoundSource.PLAYERS, 1.0F, 1.0F);
-						if (!event.getEntity().isCreative())
-							stack.shrink(1);
-						data.setValue(EnvironmentalDataProcessors.MUD_DRYING_TIME, 0);
-						event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide()));
-						event.setCanceled(true);
-					} else if (stack.is(Items.WATER_BUCKET)) {
-						level.playSound(null, target, SoundEvents.GENERIC_SPLASH, SoundSource.PLAYERS, 1.0F, 1.0F);
-						player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player, new ItemStack(Items.BUCKET)));
-						player.awardStat(Stats.ITEM_USED.get(stack.getItem()));
-						if (!level.isClientSide) {
-							ServerLevel serverlevel = (ServerLevel) level;
-							for (int i = 0; i < 5; ++i) {
-								serverlevel.sendParticles(ParticleTypes.SPLASH, target.getX() + level.random.nextDouble(), target.getY() + 1, target.getZ() + level.random.nextDouble(), 1, 0.0D, 0.0D, 0.0D, 1.0D);
-							}
-						}
-
-						data.setValue(EnvironmentalDataProcessors.IS_MUDDY, false);
-						data.setValue(EnvironmentalDataProcessors.MUD_DRYING_TIME, 0);
-						if (!decoration.equals(new ResourceLocation("empty"))) {
-							ItemStack decorationStack = new ItemStack(ForgeRegistries.ITEMS.getValue(decoration));
-							if (!level.isClientSide()) {
-								ItemEntity item = target.spawnAtLocation(decorationStack, 1.0F);
-								item.setDeltaMovement(item.getDeltaMovement().add((random.nextFloat() - random.nextFloat()) * 0.1F, random.nextFloat() * 0.05F, (random.nextFloat() - random.nextFloat()) * 0.1F));
-								stack.hurtAndBreak(1, player, e -> e.broadcastBreakEvent(hand));
-							}
-							data.setValue(EnvironmentalDataProcessors.MUDDY_PIG_DECORATION, new ResourceLocation("empty"));
-						}
-						level.playSound(null, target, SoundEvents.BUCKET_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
-						event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide()));
-						event.setCanceled(true);
-					}
+					level.playSound(null, target, SoundEvents.BUCKET_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
+					event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide()));
+					event.setCanceled(true);
 				}
 			}
 
