@@ -179,6 +179,7 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.dropSelf(DUCK_EGG_CRATE.get());
 			this.dropSelf(YAK_HAIR_BLOCK.get());
 			this.dropSelf(YAK_HAIR_RUG.get());
+			this.dropSelf(PINECONE.get());
 
 			this.dropSelf(WILLOW_PLANKS.get());
 			this.dropSelf(VERTICAL_WILLOW_PLANKS.get());

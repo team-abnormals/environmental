@@ -54,6 +54,8 @@ public class EnvironmentalCompat {
 		DataUtil.registerCompostable(EnvironmentalBlocks.PINE_SAPLING.get(), 0.30F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.PINE_LEAF_CARPET.get(), 0.30F);
 
+		DataUtil.registerCompostable(EnvironmentalBlocks.PINECONE.get(), 0.85F);
+
 		DataUtil.registerCompostable(EnvironmentalBlocks.CHERRY_LEAVES.get(), 0.30F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.CHERRY_SAPLING.get(), 0.30F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.CHERRY_LEAF_CARPET.get(), 0.30F);
@@ -201,6 +203,7 @@ public class EnvironmentalCompat {
 		DataUtil.registerFlammable(EnvironmentalBlocks.PINE_HEDGE.get(), 5, 20);
 		DataUtil.registerFlammable(EnvironmentalBlocks.PINE_LEAF_PILE.get(), 30, 60);
 		DataUtil.registerFlammable(EnvironmentalBlocks.PINE_BOARDS.get(), 5, 20);
+		DataUtil.registerFlammable(EnvironmentalBlocks.PINECONE.get(), 5, 20);
 
 		DataUtil.registerFlammable(EnvironmentalBlocks.CHERRY_LEAVES.get(), 30, 60);
 		DataUtil.registerFlammable(EnvironmentalBlocks.CHERRY_LOG.get(), 5, 5);

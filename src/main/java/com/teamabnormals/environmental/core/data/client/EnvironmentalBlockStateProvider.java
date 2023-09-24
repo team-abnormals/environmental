@@ -54,6 +54,7 @@ public class EnvironmentalBlockStateProvider extends BlockStateProvider {
 		this.planksCompat(PINE_PLANKS.get(), PINE_BOARDS.get(), PINE_LADDER.get(), PINE_BOOKSHELF.get(), PINE_BEEHIVE.get(), PINE_CHESTS, VERTICAL_PINE_PLANKS.get());
 		this.logCompat(PINE_LOG.get(), STRIPPED_PINE_LOG.get(), PINE_POST.get(), STRIPPED_PINE_POST.get());
 		this.leavesCompat(PINE_LEAVES.get(), PINE_LOG.get(), PINE_LEAF_PILE.get(), PINE_HEDGE.get(), PINE_LEAF_CARPET.get());
+		this.cubeColumnBlock(PINECONE.get());
 
 		this.block(CATTAIL_FLUFF_BLOCK.get());
 		this.cattail(CATTAIL_SPROUT.get(), CATTAIL.get(), CATTAIL_STALK.get());
@@ -239,6 +240,11 @@ public class EnvironmentalBlockStateProvider extends BlockStateProvider {
 
 	public void cubeBottomTopBlock(Block block, Block parent) {
 		this.simpleBlock(block, models().cubeBottomTop(name(block), suffix(blockTexture(parent), "_side"), suffix(blockTexture(parent), "_bottom"), suffix(blockTexture(block), "_top")));
+		this.blockItem(block);
+	}
+
+	public void cubeColumnBlock(Block block) {
+		this.simpleBlock(block, this.models().cubeColumn(name(block), suffix(blockTexture(block), "_side"), suffix(blockTexture(block), "_end")));
 		this.blockItem(block);
 	}
 
