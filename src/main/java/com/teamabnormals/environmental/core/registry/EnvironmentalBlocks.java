@@ -15,6 +15,7 @@ import com.teamabnormals.blueprint.core.util.PropertyUtil;
 import com.teamabnormals.blueprint.core.util.registry.BlockSubRegistryHelper;
 import com.teamabnormals.environmental.common.block.*;
 import com.teamabnormals.environmental.common.block.grower.CherryTreeGrower;
+import com.teamabnormals.environmental.common.block.grower.PineTreeGrower;
 import com.teamabnormals.environmental.common.block.grower.WillowTreeGrower;
 import com.teamabnormals.environmental.common.block.grower.WisteriaTree;
 import com.teamabnormals.environmental.common.levelgen.util.WisteriaColor;
@@ -201,7 +202,7 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> PINE_LOG = HELPER.createBlock("pine_log", () -> new LogBlock(STRIPPED_PINE_LOG, EnvironmentalProperties.PINE.log()), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> PINE_WOOD = HELPER.createBlock("pine_wood", () -> new WoodBlock(STRIPPED_PINE_WOOD, EnvironmentalProperties.PINE.log()), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> PINE_LEAVES = HELPER.createBlock("pine_leaves", () -> new BlueprintLeavesBlock(EnvironmentalProperties.PINE.leaves()), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> PINE_SAPLING = HELPER.createBlock("pine_sapling", () -> new BlueprintSaplingBlock(new SpruceTreeGrower(), EnvironmentalProperties.PINE.sapling()), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> PINE_SAPLING = HELPER.createBlock("pine_sapling", () -> new BlueprintSaplingBlock(new PineTreeGrower(), EnvironmentalProperties.PINE.sapling()), CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> POTTED_PINE_SAPLING = HELPER.createBlockNoItem("potted_pine_sapling", () -> new FlowerPotBlock(PINE_SAPLING.get(), PropertyUtil.flowerPot()));
 	public static final RegistryObject<Block> PINE_PLANKS = HELPER.createBlock("pine_planks", () -> new PlanksBlock(EnvironmentalProperties.PINE.planks()), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> PINE_STAIRS = HELPER.createBlock("pine_stairs", () -> new WoodStairBlock(PINE_PLANKS.get().defaultBlockState(), EnvironmentalProperties.PINE.planks()), CreativeModeTab.TAB_BUILDING_BLOCKS);
@@ -227,6 +228,8 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> PINE_POST = HELPER.createCompatFuelBlock("quark", "pine_post", () -> new WoodPostBlock(STRIPPED_PINE_POST, EnvironmentalProperties.PINE.log()), 300, CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> PINE_LEAF_CARPET = HELPER.createCompatBlock("quark", "pine_leaf_carpet", () -> new LeafCarpetBlock(EnvironmentalProperties.PINE.leafCarpet()), CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> PINE_HEDGE = HELPER.createCompatFuelBlock("quark", "pine_hedge", () -> new HedgeBlock(EnvironmentalProperties.PINE.log()), 300, CreativeModeTab.TAB_DECORATIONS);
+
+	public static final RegistryObject<Block> PINECONE = HELPER.createBlock("pinecone", () -> new PineconeBlock(Block.Properties.of(Material.WOOD, MaterialColor.DIRT).strength(1.5F).sound(SoundType.WOOD)), CreativeModeTab.TAB_DECORATIONS);
 
 	// Cherry //
 
