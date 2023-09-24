@@ -422,14 +422,17 @@ public class EnvironmentalEvents {
 					data.setValue(EnvironmentalDataProcessors.MUD_DRYING_TIME, mudDryingTime - 1);
 				}
 
-				if (pig.getDeltaMovement().x != 0 || pig.getDeltaMovement().z != 0) {
-					List<LivingEntity> blocks = level.getEntitiesOfClass(LivingEntity.class, pig.getBoundingBox().inflate(0.1F), living -> living.isAlive() && !living.is(pig) && !pig.getPassengers().contains(living) && !living.isSpectator());
+				if (pig.hasControllingPassenger()) {
+					List<LivingEntity> blocks = level.getEntitiesOfClass(LivingEntity.class, pig.getBoundingBox().inflate(0.2F), living -> living.isAlive() && !living.is(pig) && !pig.getPassengers().contains(living) && !living.isSpectator() && !living.isPassenger());
 					if (!blocks.isEmpty()) {
 						for (LivingEntity living : blocks) {
 							Vec3 attackAngleVector = living.position().subtract(pig.position()).normalize();
 							attackAngleVector = new Vec3(attackAngleVector.x, 0.0D, attackAngleVector.z);
 							if (attackAngleVector.dot(pig.getViewVector(1.0F)) > 0.5D) {
-								living.knockback(pig.hasControllingPassenger() ? 0.5F : 0.25F, Mth.sin(pig.getYRot() * ((float)Math.PI / 180F)), -Mth.cos(pig.getYRot() * ((float)Math.PI / 180F)));
+								float x = Mth.sin(pig.getYRot() * ((float)Math.PI / 180F));
+								float z = -Mth.cos(pig.getYRot() * ((float)Math.PI / 180F));
+								living.knockback(0.5F, x, z);
+								pig.knockback(0.25F, -x, -z);
 							}
 						}
 					}
