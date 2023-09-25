@@ -9,11 +9,15 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Plane;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class PineTreeFeature extends BlueprintTreeFeature {
 
@@ -26,8 +30,13 @@ public class PineTreeFeature extends BlueprintTreeFeature {
 		TreeConfiguration config = context.config();
 		BlockPos origin = context.origin();
 		RandomSource random = context.random();
+		WorldGenLevel level = context.level();
 
 		int trunkheight = config.trunkPlacer.getTreeHeight(random);
+
+		float f = random.nextFloat();
+		int leafbranches = f > 0.5F ? 4 : f > 0.25F ? 3 : f > 0.05F ? 2 : 1;
+		int leafheight = trunkheight - leafbranches - 3;
 
 		List<Direction> branchdirections = Lists.newArrayList();
 		Plane.HORIZONTAL.forEach(branchdirections::add);
@@ -36,15 +45,20 @@ public class PineTreeFeature extends BlueprintTreeFeature {
 			BlockPos blockpos = origin.above(y);
 			this.addLog(blockpos);
 
-			if (y >= trunkheight - 6 && y <= trunkheight - 4) {
+			if (y >= leafheight && y <= trunkheight - 4) {
 				Direction direction = branchdirections.get(random.nextInt(branchdirections.size()));
 				branchdirections.remove(direction);
 				this.createBranchWithLeaves(blockpos, direction, random, config);
 			}
 		}
 
-		if (random.nextBoolean())
-			this.createBranch(origin.above(2 + random.nextInt(trunkheight - 9)), Plane.HORIZONTAL.getRandomDirection(random), random, config);
+		int i = 1 + random.nextInt(2);
+		while (i < leafheight - 1) {
+			if (random.nextInt(4) == 0) {
+				this.createBranch(origin.above(i), Plane.HORIZONTAL.getRandomDirection(random), random, config);
+			}
+			i += 2 + random.nextInt(2);
+		}
 
 		this.createTopLeaves(origin.above(trunkheight));
 	}
@@ -69,7 +83,7 @@ public class PineTreeFeature extends BlueprintTreeFeature {
 			for (int z = -1; z <= 1; z++) {
 				mutablepos.setWithOffset(blockpos, x, 0, z);
 				this.addFoliage(mutablepos);
-				if (x == 0 || z == 0) {
+				if ((x == 0 || z == 0)) {
 					this.addFoliage(mutablepos.above());
 				}
 			}
