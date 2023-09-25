@@ -5,6 +5,7 @@ import com.teamabnormals.environmental.common.block.CartwheelBlock;
 import com.teamabnormals.environmental.common.levelgen.feature.*;
 import com.teamabnormals.environmental.common.levelgen.treedecorators.HangingWillowDecorator;
 import com.teamabnormals.environmental.common.levelgen.treedecorators.HangingWisteriaDecorator;
+import com.teamabnormals.environmental.common.levelgen.treedecorators.PineconeDecorator;
 import com.teamabnormals.environmental.core.Environmental;
 import net.minecraft.core.*;
 import net.minecraft.data.worldgen.features.FeatureUtils;
@@ -70,6 +71,7 @@ public class EnvironmentalFeatures {
 
 	public static final RegistryObject<TreeDecoratorType<?>> HANGING_WILLOW_LEAVES = TREE_DECORATORS.register("hanging_willow_leaves", () -> new TreeDecoratorType<>(HangingWillowDecorator.CODEC));
 	public static final RegistryObject<TreeDecoratorType<?>> HANGING_WISTERIA_LEAVES = TREE_DECORATORS.register("hanging_wisteria_leaves", () -> new TreeDecoratorType<>(HangingWisteriaDecorator.CODEC));
+	public static final RegistryObject<TreeDecoratorType<?>> PINECONE = TREE_DECORATORS.register("pinecone", () -> new TreeDecoratorType<>(PineconeDecorator.CODEC));
 
 	public static final class Configs {
 		private static final BeehiveDecorator BEEHIVE_0002 = new BeehiveDecorator(0.002F);
@@ -80,6 +82,8 @@ public class EnvironmentalFeatures {
 		private static final HangingWisteriaDecorator HANGING_BLUE_WISTERIA = new HangingWisteriaDecorator(0.25F);
 		private static final HangingWisteriaDecorator HANGING_PURPLE_WISTERIA = new HangingWisteriaDecorator(0.50F);
 		private static final HangingWisteriaDecorator HANGING_PINK_WISTERIA = new HangingWisteriaDecorator(0.75F);
+
+		private static final PineconeDecorator PINECONE = new PineconeDecorator(0.05F);
 
 		public static final TreeConfiguration SWAMP_OAK = createStraightBlobTree(Blocks.OAK_LOG, Blocks.OAK_LEAVES, 5, 3, 0, 2).decorators(ImmutableList.of(new LeaveVineDecorator(0.25F))).build();
 
@@ -108,7 +112,7 @@ public class EnvironmentalFeatures {
 		public static final TreeConfiguration PINK_WISTERIA_BEES_002 = createPinkWisteria().decorators(List.of(HANGING_PINK_WISTERIA, BEEHIVE_002)).build();
 		public static final TreeConfiguration PINK_WISTERIA_BEES_005 = createPinkWisteria().decorators(List.of(HANGING_PINK_WISTERIA, BEEHIVE_005)).build();
 
-		public static final TreeConfiguration PINE = createCustomTree(EnvironmentalBlocks.PINE_LOG.get(), new StraightTrunkPlacer(11, 1, 0), EnvironmentalBlocks.PINE_LEAVES.get()).build();
+		public static final TreeConfiguration PINE = createCustomTree(EnvironmentalBlocks.PINE_LOG.get(), new StraightTrunkPlacer(12, 2, 0), EnvironmentalBlocks.PINE_LEAVES.get()).decorators(List.of(PINECONE)).build();
 
 		private static TreeConfigurationBuilder createCherry() {
 			return createCustomTree(EnvironmentalBlocks.CHERRY_LOG.get(), new StraightTrunkPlacer(5, 2, 1), EnvironmentalBlocks.CHERRY_LEAVES.get());
