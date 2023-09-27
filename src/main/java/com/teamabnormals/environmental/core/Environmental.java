@@ -78,6 +78,7 @@ public class Environmental {
 		EnvironmentalParticleTypes.PARTICLE_TYPES.register(bus);
 		EnvironmentalSlabfishConditions.SLABFISH_CONDITIONS.register(bus);
 		EnvironmentalDataSerializers.DATA_SERIALIZERS.register(bus);
+		EnvironmentalBiomeModifierTypes.BIOME_MODIFIER_SERIALIZERS.register(bus);
 
 		MinecraftForge.EVENT_BUS.register(this);
 
