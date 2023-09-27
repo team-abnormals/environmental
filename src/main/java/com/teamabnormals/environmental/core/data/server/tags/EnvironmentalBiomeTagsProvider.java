@@ -48,11 +48,6 @@ public class EnvironmentalBiomeTagsProvider extends BiomeTagsProvider {
 		this.tag(EnvironmentalBiomeTags.HAS_REINDEER).addTag(BlueprintBiomeTags.IS_ICY).addTag(BiomeTags.IS_TAIGA);
 		this.tag(EnvironmentalBiomeTags.HAS_YAK).add(Biomes.STONY_PEAKS).addTag(BiomeTags.IS_HILL);
 
-		this.tag(EnvironmentalBiomeTags.HAS_SHEEP).addTag(BlueprintBiomeTags.IS_GRASSLAND).addTag(BiomeTags.IS_SAVANNA);
-		this.tag(EnvironmentalBiomeTags.HAS_COW).addTag(BlueprintBiomeTags.IS_GRASSLAND).addTag(BiomeTags.IS_SAVANNA);
-		this.tag(EnvironmentalBiomeTags.HAS_PIG).addTag(BiomeTags.IS_FOREST);
-		this.tag(EnvironmentalBiomeTags.HAS_CHICKEN).addTag(BiomeTags.IS_FOREST);
-
 		this.tag(EnvironmentalBiomeTags.HAS_CATTAILS).add(Biomes.RIVER, Biomes.SWAMP, Biomes.MANGROVE_SWAMP);
 		this.tag(EnvironmentalBiomeTags.HAS_BLUEBELL).add(Biomes.DARK_FOREST);
 		this.tag(EnvironmentalBiomeTags.HAS_VIOLET).addTag(BiomeTags.IS_TAIGA);
