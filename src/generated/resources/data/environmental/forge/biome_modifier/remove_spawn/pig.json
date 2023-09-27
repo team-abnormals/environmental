@@ -1,5 +1,0 @@
-{
-  "type": "environmental:remove_spawns_inverted",
-  "entity_types": "minecraft:pig",
-  "inverted_biomes": "#environmental:has_animal/pig"
-}
