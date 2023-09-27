@@ -50,8 +50,8 @@ public class EnvironmentalBiomeTagsProvider extends BiomeTagsProvider {
 
 		this.tag(EnvironmentalBiomeTags.HAS_SHEEP).addTag(BlueprintBiomeTags.IS_GRASSLAND).addTag(BiomeTags.IS_SAVANNA);
 		this.tag(EnvironmentalBiomeTags.HAS_COW).addTag(BlueprintBiomeTags.IS_GRASSLAND).addTag(BiomeTags.IS_SAVANNA);
-		this.tag(EnvironmentalBiomeTags.HAS_PIG).addTag(BiomeTags.IS_FOREST);
-		this.tag(EnvironmentalBiomeTags.HAS_CHICKEN).addTag(BiomeTags.IS_FOREST);
+		this.tag(EnvironmentalBiomeTags.HAS_PIG).addTag(BiomeTags.IS_FOREST).addTag(Tags.Biomes.IS_SWAMP);
+		this.tag(EnvironmentalBiomeTags.HAS_CHICKEN).addTag(BiomeTags.IS_FOREST).addTag(BiomeTags.IS_TAIGA).addTag(BiomeTags.IS_JUNGLE);
 
 		this.tag(EnvironmentalBiomeTags.HAS_CATTAILS).add(Biomes.RIVER, Biomes.SWAMP, Biomes.MANGROVE_SWAMP);
 		this.tag(EnvironmentalBiomeTags.HAS_BLUEBELL).add(Biomes.DARK_FOREST);
