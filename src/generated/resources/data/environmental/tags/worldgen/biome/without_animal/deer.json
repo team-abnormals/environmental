@@ -1,0 +1,13 @@
+{
+  "values": [
+    "minecraft:grove",
+    {
+      "id": "atmospheric:aspen_parkland",
+      "required": false
+    },
+    {
+      "id": "atmospheric:grimwoods",
+      "required": false
+    }
+  ]
+}
