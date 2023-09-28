@@ -2,6 +2,7 @@
   "values": [
     "environmental:marsh",
     "environmental:blossom_woods",
-    "environmental:blossom_valleys"
+    "environmental:blossom_valleys",
+    "environmental:pinelands"
   ]
 }

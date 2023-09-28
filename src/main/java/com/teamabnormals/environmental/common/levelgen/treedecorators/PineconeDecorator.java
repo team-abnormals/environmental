@@ -5,6 +5,7 @@ import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
@@ -21,11 +22,12 @@ public class PineconeDecorator extends TreeDecorator {
 
     @Override
     public void place(Context context) {
+        LevelSimulatedReader level = context.level();
         RandomSource random = context.random();
 
         if (!(random.nextFloat() >= this.probability)) {
             List<BlockPos> list = context.leaves().stream().filter((blockpos) -> {
-                return context.level().isStateAtPosition(blockpos.below(), BlockState::isAir);
+                return level.isStateAtPosition(blockpos.below(), BlockState::isAir) && level.isStateAtPosition(blockpos.below(2), BlockState::isAir);
             }).toList();
 
             if (!list.isEmpty()) {
