@@ -85,6 +85,7 @@ public class EnvironmentalBlockTagsProvider extends BlockTagsProvider {
 		this.tag(BlockTags.DAMPENS_VIBRATIONS).add(YAK_HAIR_BLOCK.get(), YAK_HAIR_RUG.get());
 		this.tag(BlockTags.REPLACEABLE_PLANTS).add(HANGING_WILLOW_LEAVES.get(), PINK_HANGING_WISTERIA_LEAVES.get(), BLUE_HANGING_WISTERIA_LEAVES.get(), PURPLE_HANGING_WISTERIA_LEAVES.get(), WHITE_HANGING_WISTERIA_LEAVES.get(), GIANT_TALL_GRASS.get(), MYCELIUM_SPROUTS.get(), TALL_DEAD_BUSH.get(), CUP_LICHEN.get(), BIRD_OF_PARADISE.get(), PINK_DELPHINIUM.get(), BLUE_DELPHINIUM.get(), PURPLE_DELPHINIUM.get(), WHITE_DELPHINIUM.get());
 
+		this.tag(DEER_SPAWNABLE_ON).add(Blocks.GRASS_BLOCK, Blocks.SNOW, Blocks.SNOW_BLOCK);
 		this.tag(WATER_ANIMALS_SPAWNABLE_ON).addTag(BlockTags.ANIMALS_SPAWNABLE_ON).add(Blocks.WATER);
 		this.tag(GRASS_LIKE).add(Blocks.GRASS_BLOCK, Blocks.PODZOL, Blocks.MYCELIUM).addOptional(new ResourceLocation("quark", "glowcelium")).addOptional(new ResourceLocation("atmospheric", "crustose"));
 		this.tag(CUP_LICHEN_PLANTABLE_ON).addTag(BlockTags.DIRT).addTag(Tags.Blocks.STONE).addTag(Tags.Blocks.ORES).addTag(BlockTags.LOGS);

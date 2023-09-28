@@ -1,5 +1,9 @@
 {
   "values": [
-    "#minecraft:is_jungle"
+    "#minecraft:is_jungle",
+    {
+      "id": "#atmospheric:is_rainforest",
+      "required": false
+    }
   ]
 }

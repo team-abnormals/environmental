@@ -1,6 +1,7 @@
 package com.teamabnormals.environmental.common.entity.animal.deer;
 
 import com.teamabnormals.environmental.common.entity.ai.goal.*;
+import com.teamabnormals.environmental.core.other.tags.EnvironmentalBlockTags;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalEntityTypeTags;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalItemTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSoundEvents;
@@ -34,6 +35,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -482,5 +484,9 @@ public abstract class AbstractDeer extends Animal {
 		return this.level.getNearestEntity(this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(10.0D, 4.0D, 10.0D), (p_148124_) -> {
 			return true;
 		}), this.isTrusting() ? TRUSTING_AVOID_ENTITY_TARGETING : AVOID_ENTITY_TARGETING, this, this.getX(), this.getY(), this.getZ());
+	}
+
+	public static boolean checkDeerSpawnRules(EntityType<? extends AbstractDeer> deer, LevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource p_218296_) {
+		return level.getBlockState(pos.below()).is(EnvironmentalBlockTags.DEER_SPAWNABLE_ON) && isBrightEnoughToSpawn(level, pos);
 	}
 }
