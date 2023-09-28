@@ -10,10 +10,7 @@ import com.teamabnormals.environmental.core.data.client.EnvironmentalBlockStateP
 import com.teamabnormals.environmental.core.data.client.EnvironmentalItemModelProvider;
 import com.teamabnormals.environmental.core.data.server.EnvironmentalLootTableProvider;
 import com.teamabnormals.environmental.core.data.server.EnvironmentalRecipeProvider;
-import com.teamabnormals.environmental.core.data.server.modifiers.EnvironmentalAdvancementModifierProvider;
-import com.teamabnormals.environmental.core.data.server.modifiers.EnvironmentalBiomeModifierProvider;
-import com.teamabnormals.environmental.core.data.server.modifiers.EnvironmentalLootModifierProvider;
-import com.teamabnormals.environmental.core.data.server.modifiers.EnvironmentalModdedBiomeSliceProvider;
+import com.teamabnormals.environmental.core.data.server.modifiers.*;
 import com.teamabnormals.environmental.core.data.server.tags.*;
 import com.teamabnormals.environmental.core.other.*;
 import com.teamabnormals.environmental.core.registry.*;
@@ -125,6 +122,7 @@ public class Environmental {
 		generator.addProvider(includeServer, new EnvironmentalPaintingVariantTagsProvider(generator, helper));
 		generator.addProvider(includeServer, new EnvironmentalRecipeProvider(generator));
 		generator.addProvider(includeServer, new EnvironmentalAdvancementModifierProvider(generator));
+		generator.addProvider(includeServer, new EnvironmentalChunkGeneratorModifierProvider(generator));
 		generator.addProvider(includeServer, new EnvironmentalModdedBiomeSliceProvider(generator));
 		generator.addProvider(includeServer, new EnvironmentalLootTableProvider(generator));
 		generator.addProvider(includeServer, new EnvironmentalLootModifierProvider(generator));
