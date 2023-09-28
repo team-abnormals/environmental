@@ -12,6 +12,7 @@ import com.teamabnormals.environmental.common.block.CattailBlock;
 import com.teamabnormals.environmental.common.block.CattailStalkBlock;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.other.EnvironmentalBlockFamilies;
+import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.data.BlockFamily;
@@ -58,6 +59,8 @@ public class EnvironmentalBlockStateProvider extends BlockStateProvider {
 
 		this.block(CATTAIL_FLUFF_BLOCK.get());
 		this.cattail(CATTAIL_SPROUT.get(), CATTAIL.get(), CATTAIL_STALK.get());
+
+		this.directionalBlock(CHERRY_CRATE.get());
 
 		this.cactusBobble(CACTUS_BOBBLE.get());
 	}
