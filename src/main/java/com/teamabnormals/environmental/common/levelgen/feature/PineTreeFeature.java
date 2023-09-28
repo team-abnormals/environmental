@@ -9,15 +9,12 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Plane;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class PineTreeFeature extends BlueprintTreeFeature {
 
@@ -54,7 +51,7 @@ public class PineTreeFeature extends BlueprintTreeFeature {
 
 		int i = 1 + random.nextInt(2);
 		while (i < leafheight - 1) {
-			if (random.nextInt(4) == 0) {
+			if (random.nextInt(8) == 0) {
 				this.createBranch(origin.above(i), Plane.HORIZONTAL.getRandomDirection(random), random, config);
 			}
 			i += 2 + random.nextInt(2);
