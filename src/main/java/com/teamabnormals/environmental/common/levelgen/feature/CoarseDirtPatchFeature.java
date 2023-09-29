@@ -25,7 +25,7 @@ public class CoarseDirtPatchFeature extends Feature<ProbabilityFeatureConfigurat
         int i = 0;
         BlockPos.MutableBlockPos blockpos$mutable = pos.mutable();
         if (rand.nextFloat() < config.probability) {
-            int k = rand.nextInt(6) + 2;
+            int k = rand.nextInt(7) + 1;
             for (int l = pos.getX() - k; l <= pos.getX() + k; ++l) {
                 for (int i1 = pos.getZ() - k; i1 <= pos.getZ() + k; ++i1) {
                     int j1 = l - pos.getX();

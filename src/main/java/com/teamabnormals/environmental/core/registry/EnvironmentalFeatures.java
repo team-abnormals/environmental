@@ -114,7 +114,7 @@ public class EnvironmentalFeatures {
 		public static final TreeConfiguration PINK_WISTERIA_BEES_002 = createPinkWisteria().decorators(List.of(HANGING_PINK_WISTERIA, BEEHIVE_002)).build();
 		public static final TreeConfiguration PINK_WISTERIA_BEES_005 = createPinkWisteria().decorators(List.of(HANGING_PINK_WISTERIA, BEEHIVE_005)).build();
 
-		public static final TreeConfiguration PINE = createCustomTree(EnvironmentalBlocks.PINE_LOG.get(), new StraightTrunkPlacer(11, 2, 0), EnvironmentalBlocks.PINE_LEAVES.get()).decorators(List.of(PINECONE)).build();
+		public static final TreeConfiguration PINE = createCustomTree(EnvironmentalBlocks.PINE_LOG.get(), new StraightTrunkPlacer(10, 3, 1), EnvironmentalBlocks.PINE_LEAVES.get()).decorators(List.of(PINECONE)).build();
 
 		private static TreeConfigurationBuilder createCherry() {
 			return createCustomTree(EnvironmentalBlocks.CHERRY_LOG.get(), new StraightTrunkPlacer(5, 2, 1), EnvironmentalBlocks.CHERRY_LEAVES.get());
