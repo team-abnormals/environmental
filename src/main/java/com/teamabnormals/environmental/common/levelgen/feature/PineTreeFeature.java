@@ -27,34 +27,37 @@ public class PineTreeFeature extends BlueprintTreeFeature {
 		TreeConfiguration config = context.config();
 		BlockPos origin = context.origin();
 		RandomSource random = context.random();
-		WorldGenLevel level = context.level();
 
 		int trunkheight = config.trunkPlacer.getTreeHeight(random);
+		for (int y = 0; y < trunkheight; y++) {
+			this.addLog(origin.above(y));
+		}
 
 		float f = random.nextFloat();
-		int leafbranches = f > 0.5F ? 4 : f > 0.25F ? 3 : f > 0.05F ? 2 : 1;
-		int leafheight = trunkheight - leafbranches - 3;
+		int leafbranches = f > 0.6F ? 4 : f > 0.25F ? 3 : f > 0.05F ? 2 : 1;
 
 		List<Direction> branchdirections = Lists.newArrayList();
 		Plane.HORIZONTAL.forEach(branchdirections::add);
 
-		for (int y = 0; y < trunkheight; y++) {
+		int y = trunkheight - 4;
+		while (y > 0) {
 			BlockPos blockpos = origin.above(y);
-			this.addLog(blockpos);
 
-			if (y >= leafheight && y <= trunkheight - 4) {
+			if (leafbranches > 0) {
 				Direction direction = branchdirections.get(random.nextInt(branchdirections.size()));
 				branchdirections.remove(direction);
 				this.createBranchWithLeaves(blockpos, direction, random, config);
+				leafbranches--;
+			} else if (random.nextInt(8) == 0) {
+				this.createBranch(blockpos, Plane.HORIZONTAL.getRandomDirection(random), random, config);
 			}
-		}
 
-		int i = 1 + random.nextInt(2);
-		while (i < leafheight - 1) {
-			if (random.nextInt(8) == 0) {
-				this.createBranch(origin.above(i), Plane.HORIZONTAL.getRandomDirection(random), random, config);
-			}
-			i += 2 + random.nextInt(2);
+			if (leafbranches == 0)
+				y -= 2 + random.nextInt(2);
+			else if (leafbranches == 1 && random.nextInt(3) == 0)
+				y -= 2;
+			else
+				y--;
 		}
 
 		this.createTopLeaves(origin.above(trunkheight));
@@ -86,7 +89,7 @@ public class PineTreeFeature extends BlueprintTreeFeature {
 			}
 		}
 
-		if (random.nextBoolean()) {
+		if (random.nextInt(3) == 0) {
 			this.addFoliage(blockpos.relative(direction, 2));
 		}
 	}

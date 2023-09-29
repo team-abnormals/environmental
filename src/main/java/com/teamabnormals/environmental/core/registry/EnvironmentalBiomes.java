@@ -65,7 +65,7 @@ public class EnvironmentalBiomes {
 		spawns.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.RABBIT, 4, 2, 3));
 		spawns.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.FOX, 8, 2, 4));
 
-		return biome(Precipitation.RAIN, 0.4F, 0.6F, 4159204, 329011, spawns, generation, null);
+		return biome(Precipitation.RAIN, 0.4F, 0.6F, 9090929, 7185238, 4159204, 329011, 12638463, spawns, generation, null);
 	}
 
 	private static Biome biome(Precipitation precipitation, float temperature, float downfall, int waterColor, int waterFogColor, MobSpawnSettings.Builder spawns, BiomeGenerationSettings.Builder generation, @Nullable Music music) {
