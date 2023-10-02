@@ -67,7 +67,7 @@
 	"block.environmental.cherry_hedge": "Seto de cerezo",
 	"block.environmental.cherry_beehive": "Apiario de abejas de cerezo",
 	"block.environmental.cherry_leaf_pile": "Montón de hojas de cerezo",
-	"block.environmental.cherry_boards": "Tablones de cerezo"
+	"block.environmental.cherry_boards": "Tablones de cerezo",
 
 	"block.environmental.wisteria_log": "Tronco de glicina",
 	"block.environmental.stripped_wisteria_log": "Tronco de glicina sin corteza",
@@ -381,7 +381,7 @@
 	"entity.environmental.slabfish.type.chorus": "Llanura de chorus",
 	"entity.environmental.slabfish.type.poise": "Bosque equilibrado",
 
-	"entity.environmental.slabfish.type.brown_mushroom": "Hongo",
+	"entity.environmental.slabfish.type.mushroom": "Hongo",
 	"entity.environmental.slabfish.type.brown_mushroom": "Hongo café",
 	"entity.environmental.slabfish.type.skeleton": "Esqueleto",
 	"entity.environmental.slabfish.type.stray": "Esqueleto glacial",
