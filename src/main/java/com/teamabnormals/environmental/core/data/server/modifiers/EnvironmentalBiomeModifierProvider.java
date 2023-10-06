@@ -60,7 +60,7 @@ public class EnvironmentalBiomeModifierProvider {
 		addSpawnIgnore("deer", EnvironmentalBiomeTags.HAS_DEER, EnvironmentalBiomeTags.WITHOUT_DEER, new SpawnerData(EnvironmentalEntityTypes.DEER.get(), 16, 4, 4));
 		addSpawn("reindeer", EnvironmentalBiomeTags.HAS_REINDEER, new SpawnerData(EnvironmentalEntityTypes.REINDEER.get(), 16, 4, 4));
 		addSpawn("yak", EnvironmentalBiomeTags.HAS_YAK, new SpawnerData(EnvironmentalEntityTypes.YAK.get(), 8, 4, 4));
-		addSpawn("yak_meadow", Biomes.MEADOW, new SpawnerData(EnvironmentalEntityTypes.YAK.get(), 1, 2, 4));
+		addSpawn("deer_meadow", Biomes.MEADOW, new SpawnerData(EnvironmentalEntityTypes.DEER.get(), 1, 2, 4));
 
 		removeSpawnInvertedIgnore("pig", EnvironmentalBiomeTags.HAS_PIG, Biomes.GROVE, EntityType.PIG);
 		removeSpawnInverted("sheep", EnvironmentalBiomeTags.HAS_SHEEP, EntityType.SHEEP);
