@@ -31,6 +31,16 @@ public class CherryTreeFeature extends BlueprintTreeFeature {
 		}
 
 		Plane.HORIZONTAL.stream().forEach(direction -> {
+			BlockPos stumpPos = origin.relative(direction);
+			if (random.nextInt(3) != 0 && isGrassOrDirt(context.level(), stumpPos.below())) {
+				this.addLog(stumpPos);
+				if (random.nextInt(3) == 0) {
+					this.addLog(stumpPos.above());
+				}
+			}
+		});
+
+		Plane.HORIZONTAL.stream().forEach(direction -> {
 			BlockPos newPos = this.createCherryBranch(origin.above(trunkHeight - random.nextInt(3)), direction, random);
 			for (int i = 0; i < 5; ++i) {
 				this.createCherryLeaves(newPos.above().below(i), random, i);
