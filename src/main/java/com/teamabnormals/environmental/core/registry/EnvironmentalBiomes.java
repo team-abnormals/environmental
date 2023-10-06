@@ -51,7 +51,7 @@ public class EnvironmentalBiomes {
 		spawns.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.PANDA, 1, 1, 2));
 		spawns.addSpawn(MobCategory.WATER_AMBIENT, new MobSpawnSettings.SpawnerData(EnvironmentalEntityTypes.KOI.get(), 8, 1, 1));
 
-		return biome(Precipitation.RAIN, 0.75F, 0.8F, 5216182, 335411, spawns, generation, null);
+		return biome(Precipitation.RAIN, 0.45F, 0.8F, 5216182, 335411, spawns, generation, null);
 	}
 
 	private static Biome pinelands() {

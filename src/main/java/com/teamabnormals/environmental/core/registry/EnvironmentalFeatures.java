@@ -117,7 +117,7 @@ public class EnvironmentalFeatures {
 		public static final TreeConfiguration PINE = createCustomTree(EnvironmentalBlocks.PINE_LOG.get(), new StraightTrunkPlacer(10, 3, 1), EnvironmentalBlocks.PINE_LEAVES.get()).decorators(List.of(PINECONE)).build();
 
 		private static TreeConfigurationBuilder createCherry() {
-			return createCustomTree(EnvironmentalBlocks.CHERRY_LOG.get(), new StraightTrunkPlacer(5, 2, 1), EnvironmentalBlocks.CHERRY_LEAVES.get());
+			return createCustomTree(EnvironmentalBlocks.CHERRY_LOG.get(), new StraightTrunkPlacer(4, 2, 0), EnvironmentalBlocks.CHERRY_LEAVES.get());
 		}
 
 		private static TreeConfigurationBuilder createWhiteWisteria() {

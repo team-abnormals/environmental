@@ -31,22 +31,7 @@ public class CherryTreeFeature extends BlueprintTreeFeature {
 		}
 
 		Plane.HORIZONTAL.stream().forEach(direction -> {
-			BlockPos stumpPos = origin.relative(direction);
-			if (isGrassOrDirt(context.level(), stumpPos.below())) {
-				this.addLog(stumpPos);
-				BlockPos sideStumpPos = stumpPos.relative(direction.getClockWise());
-				if (random.nextBoolean() && isGrassOrDirt(context.level(), sideStumpPos.below())) {
-					this.addLog(sideStumpPos);
-				}
-
-				if (random.nextBoolean()) {
-					this.addLog(stumpPos.above());
-				}
-			}
-		});
-
-		Plane.HORIZONTAL.stream().forEach(direction -> {
-			BlockPos newPos = this.createCherryBranch(origin.above(trunkHeight - random.nextInt(3)), direction, random, config);
+			BlockPos newPos = this.createCherryBranch(origin.above(trunkHeight - random.nextInt(3)), direction, random);
 			for (int i = 0; i < 5; ++i) {
 				this.createCherryLeaves(newPos.above().below(i), random, i);
 			}
@@ -78,10 +63,10 @@ public class CherryTreeFeature extends BlueprintTreeFeature {
 		}
 	}
 
-	private BlockPos createCherryBranch(BlockPos pos, Direction direction, RandomSource random, TreeConfiguration config) {
+	private BlockPos createCherryBranch(BlockPos pos, Direction direction, RandomSource random) {
 		MutableBlockPos mutablePos = new MutableBlockPos(pos.getX(), pos.getY(), pos.getZ());
 
-		int length = 3 + random.nextInt(3) + random.nextInt(3);
+		int length = 2 + random.nextInt(2);
 		for (int i = 0; i < length; i++) {
 			this.addLog(mutablePos.relative(direction));
 			if (random.nextInt(3) != 0) {
