@@ -9,7 +9,6 @@ import com.teamabnormals.environmental.common.levelgen.treedecorators.PineconeDe
 import com.teamabnormals.environmental.core.Environmental;
 import net.minecraft.core.*;
 import net.minecraft.data.worldgen.features.FeatureUtils;
-import net.minecraft.data.worldgen.features.VegetationFeatures;
 import net.minecraft.data.worldgen.placement.AquaticPlacements;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.TreePlacements;
@@ -92,7 +91,7 @@ public class EnvironmentalFeatures {
 		public static final TreeConfiguration WILLOW = createStraightBlobTree(EnvironmentalBlocks.WILLOW_LOG.get(), EnvironmentalBlocks.WILLOW_LEAVES.get(), 5, 3, 0, 3).decorators(ImmutableList.of(new LeaveVineDecorator(0.25F), HangingWillowDecorator.INSTANCE)).build();
 		public static final TreeConfiguration WEEPING_WILLOW = createCustomTree(EnvironmentalBlocks.WILLOW_LOG.get(), new StraightTrunkPlacer(11, 1, 0), EnvironmentalBlocks.WILLOW_LEAVES.get()).decorators(ImmutableList.of(new LeaveVineDecorator(0.35F), HangingWillowDecorator.INSTANCE)).build();
 
-		public static final TreeConfiguration BIRCH_BEES_0002 = createStraightBlobTree(Blocks.BIRCH_LOG, Blocks.BIRCH_LEAVES, 5, 2, 6, 2).ignoreVines().decorators(ImmutableList.of(Configs.BEEHIVE_0002)).build();
+		public static final TreeConfiguration BIRCH_BEES_0002 = createStraightBlobTree(Blocks.BIRCH_LOG, Blocks.BIRCH_LEAVES, 5, 2, 6, 2).ignoreVines().decorators(ImmutableList.of(BEEHIVE_0002)).build();
 
 		public static final TreeConfiguration CHERRY = createCherry().build();
 		public static final TreeConfiguration CHERRY_BEES_0002 = createCherry().decorators(List.of(BEEHIVE_0002)).build();
@@ -114,10 +113,15 @@ public class EnvironmentalFeatures {
 		public static final TreeConfiguration PINK_WISTERIA_BEES_002 = createPinkWisteria().decorators(List.of(HANGING_PINK_WISTERIA, BEEHIVE_002)).build();
 		public static final TreeConfiguration PINK_WISTERIA_BEES_005 = createPinkWisteria().decorators(List.of(HANGING_PINK_WISTERIA, BEEHIVE_005)).build();
 
-		public static final TreeConfiguration PINE = createCustomTree(EnvironmentalBlocks.PINE_LOG.get(), new StraightTrunkPlacer(10, 3, 1), EnvironmentalBlocks.PINE_LEAVES.get()).decorators(List.of(PINECONE)).build();
+		public static final TreeConfiguration PINE = createPine().decorators(List.of(PINECONE)).build();
+		public static final TreeConfiguration PINE_BEES_0002 = createPine().decorators(List.of(PINECONE, BEEHIVE_0002)).build();
 
 		private static TreeConfigurationBuilder createCherry() {
 			return createCustomTree(EnvironmentalBlocks.CHERRY_LOG.get(), new StraightTrunkPlacer(4, 2, 0), EnvironmentalBlocks.CHERRY_LEAVES.get());
+		}
+
+		private static TreeConfigurationBuilder createPine() {
+			return createCustomTree(EnvironmentalBlocks.PINE_LOG.get(), new StraightTrunkPlacer(10, 3, 1), EnvironmentalBlocks.PINE_LEAVES.get());
 		}
 
 		private static TreeConfigurationBuilder createWhiteWisteria() {
@@ -171,7 +175,6 @@ public class EnvironmentalFeatures {
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> SWAMP_OAK = register("swamp_oak", () -> new ConfiguredFeature<>(Feature.TREE, Configs.SWAMP_OAK));
 		public static final RegistryObject<ConfiguredFeature<RandomFeatureConfiguration, ?>> MARSH_OAK = register("marsh_oak", () -> new ConfiguredFeature<>(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(TreePlacements.FANCY_OAK_CHECKED, 0.33333334F)), TreePlacements.OAK_CHECKED)));
 
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> BIRCH_BEES_0002 = register("birch_bees_0002", () -> new ConfiguredFeature<>(Feature.TREE, Configs.BIRCH_BEES_0002));
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> CHERRY = register("cherry", () -> new ConfiguredFeature<>(EnvironmentalFeatures.CHERRY_TREE.get(), Configs.CHERRY));
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> CHERRY_BEES_0002 = register("cherry_bees_0002", () -> new ConfiguredFeature<>(EnvironmentalFeatures.CHERRY_TREE.get(), Configs.CHERRY_BEES_0002));
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> CHERRY_BEES_005 = register("cherry_bees_005", () -> new ConfiguredFeature<>(EnvironmentalFeatures.CHERRY_TREE.get(), Configs.CHERRY_BEES_005));
@@ -191,6 +194,7 @@ public class EnvironmentalFeatures {
 		public static final RegistryObject<ConfiguredFeature<RandomFeatureConfiguration, ?>> TREES_WISTERIA = register("trees_wisteria", () -> new ConfiguredFeature<>(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(EnvironmentalPlacedFeatures.PINK_WISTERIA_BEES_002.getHolder().get(), 0.25F), new WeightedPlacedFeature(EnvironmentalPlacedFeatures.BLUE_WISTERIA_BEES_002.getHolder().get(), 0.25F), new WeightedPlacedFeature(EnvironmentalPlacedFeatures.PURPLE_WISTERIA_BEES_002.getHolder().get(), 0.25F)), EnvironmentalPlacedFeatures.WHITE_WISTERIA_BEES_002.getHolder().get())));
 
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> PINE = register("pine", () -> new ConfiguredFeature<>(EnvironmentalFeatures.PINE_TREE.get(), Configs.PINE));
+		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> PINE_BEES_0002 = register("pine_bees_0002", () -> new ConfiguredFeature<>(EnvironmentalFeatures.PINE_TREE.get(), Configs.PINE_BEES_0002));
 		public static final RegistryObject<ConfiguredFeature<RandomFeatureConfiguration, ?>> TREES_PINELANDS = register("trees_pinelands", () -> new ConfiguredFeature<>(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(TreePlacements.SPRUCE_CHECKED, 0.2F)), EnvironmentalPlacedFeatures.PINE.getHolder().get())));
 
 		public static final RegistryObject<ConfiguredFeature<ProbabilityFeatureConfiguration, ?>> COARSE_DIRT_PATCH = register("coarse_dirt_patch", () -> new ConfiguredFeature<>(EnvironmentalFeatures.COARSE_DIRT_PATCH.get(), new ProbabilityFeatureConfiguration(0.1F)));
@@ -279,8 +283,8 @@ public class EnvironmentalFeatures {
 
 		public static final RegistryObject<PlacedFeature> CHERRY_TREES_BLOSSOM_WOODS = register("cherry_tree_blossom_woods", EnvironmentalConfiguredFeatures.CHERRY_BEES_0002, VegetationPlacements.treePlacement(PlacementUtils.countExtra(8, 0.05F, 1), Blocks.BIRCH_SAPLING));
 		public static final RegistryObject<PlacedFeature> CHERRY_TREES_BLOSSOM_VALLEYS = register("cherry_tree_blossom_valleys", EnvironmentalConfiguredFeatures.CHERRY_BEES_005, VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.2F, 1), Blocks.BIRCH_SAPLING));
-		public static final RegistryObject<PlacedFeature> BIRCH_TREES_BLOSSOM_WOODS = register("birch_tree_blossom_woods", EnvironmentalConfiguredFeatures.BIRCH_BEES_0002, VegetationPlacements.treePlacement(PlacementUtils.countExtra(5, 0.1F, 2), Blocks.BIRCH_SAPLING));
-		public static final RegistryObject<PlacedFeature> BIRCH_TREES_BLOSSOM_VALLEYS = register("birch_tree_blossom_valleys", EnvironmentalConfiguredFeatures.BIRCH_BEES_0002, VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.1F, 1), Blocks.BIRCH_SAPLING));
+		public static final RegistryObject<PlacedFeature> PINE_TREES_BLOSSOM_WOODS = register("pine_trees_blossom_woods", EnvironmentalConfiguredFeatures.PINE_BEES_0002, VegetationPlacements.treePlacement(PlacementUtils.countExtra(5, 0.1F, 2), Blocks.BIRCH_SAPLING));
+		public static final RegistryObject<PlacedFeature> PINE_TREES_BLOSSOM_VALLEYS = register("pine_trees_blossom_valleys", EnvironmentalConfiguredFeatures.PINE_BEES_0002, VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.1F, 1), Blocks.BIRCH_SAPLING));
 
 		public static final RegistryObject<PlacedFeature> FALLEN_CHERRY_LEAVES_BLOSSOM_WOODS = register("fallen_cherry_leaves_blossom_woods", EnvironmentalConfiguredFeatures.FALLEN_CHERRY_LEAVES, CountPlacement.of(3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
 		public static final RegistryObject<PlacedFeature> FALLEN_CHERRY_LEAVES_BLOSSOM_VALLEYS = register("fallen_cherry_leaves_blossom_valleys", EnvironmentalConfiguredFeatures.FALLEN_CHERRY_LEAVES, RarityFilter.onAverageOnceEvery(2), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());

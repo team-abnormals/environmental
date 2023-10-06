@@ -75,7 +75,7 @@ public class EnvironmentalModdedBiomeSliceProvider extends ModdedBiomeSliceProvi
 				{null, null, null, null, null}};
 		private final ResourceKey<Biome>[][] SHATTERED_BIOMES = new ResourceKey[][]{
 				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA},
-				{VANILLA, VANILLA, EnvironmentalBiomes.PINELANDS.getKey(), EnvironmentalBiomes.PINELANDS.getKey(), EnvironmentalBiomes.BLOSSOM_WOODS.getKey()},
+				{VANILLA, VANILLA, EnvironmentalBiomes.PINELANDS.getKey(), EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), EnvironmentalBiomes.BLOSSOM_WOODS.getKey()},
 				{VANILLA, VANILLA, EnvironmentalBiomes.PINELANDS.getKey(), EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), EnvironmentalBiomes.BLOSSOM_WOODS.getKey()},
 				{null, null, null, null, null},
 				{null, null, null, null, null}};
