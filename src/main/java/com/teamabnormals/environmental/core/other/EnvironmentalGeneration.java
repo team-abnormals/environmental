@@ -69,9 +69,9 @@ public class EnvironmentalGeneration {
 		BiomeDefaultFeatures.addDefaultOres(generation);
 		BiomeDefaultFeatures.addDefaultSoftDisks(generation);
 		BiomeDefaultFeatures.addDefaultFlowers(generation);
-		BiomeDefaultFeatures.addDefaultExtraVegetation(generation);
 		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.BROWN_MUSHROOM_TAIGA);
 		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.RED_MUSHROOM_TAIGA);
+		BiomeDefaultFeatures.addDefaultExtraVegetation(generation);
 		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_GRASS_PINELANDS.getHolder().get());
 		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.TREES_PINELANDS.getHolder().get());
 		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.COARSE_DIRT_PATCH.getHolder().get());

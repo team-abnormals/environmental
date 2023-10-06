@@ -9,6 +9,7 @@ import com.teamabnormals.environmental.core.registry.EnvironmentalBiomes;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.biome.Climate;
 import net.minecraft.world.level.dimension.LevelStem;
 
@@ -50,7 +51,7 @@ public class EnvironmentalModdedBiomeSliceProvider extends ModdedBiomeSliceProvi
 		private final ResourceKey<Biome>[][] OCEANS = new ResourceKey[][]{{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA}, {VANILLA, VANILLA, VANILLA, VANILLA, VANILLA}};
 		private final ResourceKey<Biome>[][] MIDDLE_BIOMES = new ResourceKey[][]{
 				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA},
-				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA},
+				{VANILLA, VANILLA, VANILLA, EnvironmentalBiomes.PINELANDS.getKey(), VANILLA},
 				{VANILLA, VANILLA, VANILLA, EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), VANILLA},
 				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA},
 				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA}};
@@ -62,9 +63,9 @@ public class EnvironmentalModdedBiomeSliceProvider extends ModdedBiomeSliceProvi
 				{null, null, null, null, null}};
 		private final ResourceKey<Biome>[][] PLATEAU_BIOMES = new ResourceKey[][]{
 				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA},
+				{VANILLA, VANILLA, VANILLA, EnvironmentalBiomes.PINELANDS.getKey(), EnvironmentalBiomes.PINELANDS.getKey()},
 				{VANILLA, VANILLA, VANILLA, EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), EnvironmentalBiomes.BLOSSOM_WOODS.getKey()},
-				{VANILLA, VANILLA, VANILLA, EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), EnvironmentalBiomes.BLOSSOM_WOODS.getKey()},
-				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA},
+				{VANILLA, VANILLA, VANILLA, EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), VANILLA},
 				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA}};
 		private final ResourceKey<Biome>[][] PLATEAU_BIOMES_VARIANT = new ResourceKey[][]{
 				{null, null, null, null, null},
@@ -74,8 +75,8 @@ public class EnvironmentalModdedBiomeSliceProvider extends ModdedBiomeSliceProvi
 				{null, null, null, null, null}};
 		private final ResourceKey<Biome>[][] SHATTERED_BIOMES = new ResourceKey[][]{
 				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA},
-				{VANILLA, VANILLA, VANILLA, EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), EnvironmentalBiomes.BLOSSOM_WOODS.getKey()},
-				{VANILLA, VANILLA, VANILLA, EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), EnvironmentalBiomes.BLOSSOM_WOODS.getKey()},
+				{VANILLA, VANILLA, EnvironmentalBiomes.PINELANDS.getKey(), EnvironmentalBiomes.PINELANDS.getKey(), EnvironmentalBiomes.BLOSSOM_WOODS.getKey()},
+				{VANILLA, VANILLA, EnvironmentalBiomes.PINELANDS.getKey(), EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), EnvironmentalBiomes.BLOSSOM_WOODS.getKey()},
 				{null, null, null, null, null},
 				{null, null, null, null, null}};
 
