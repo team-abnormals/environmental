@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
+import static com.teamabnormals.environmental.core.registry.EnvironmentalBiomes.*;
+
 public class EnvironmentalModdedBiomeSliceProvider extends ModdedBiomeSliceProvider {
 
 	public EnvironmentalModdedBiomeSliceProvider(DataGenerator dataGenerator) {
@@ -27,7 +29,7 @@ public class EnvironmentalModdedBiomeSliceProvider extends ModdedBiomeSliceProvi
 	protected void registerSlices() {
 		List<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> entries = new ArrayList<>();
 		new EnvironmentalBiomeBuilder().addBiomes(entries::add);
-		this.registerSlice("main", 3, new BiomeUtil.MultiNoiseModdedBiomeProvider(new Climate.ParameterList<>(entries)), LevelStem.OVERWORLD.location());
+		this.registerSlice("main", 4, new BiomeUtil.MultiNoiseModdedBiomeProvider(new Climate.ParameterList<>(entries)), LevelStem.OVERWORLD.location());
 	}
 
 	//Modified version of OverworldBiomeBuilder to simplify Environmental's slice
@@ -51,32 +53,32 @@ public class EnvironmentalModdedBiomeSliceProvider extends ModdedBiomeSliceProvi
 		private final ResourceKey<Biome>[][] OCEANS = new ResourceKey[][]{{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA}, {VANILLA, VANILLA, VANILLA, VANILLA, VANILLA}};
 		private final ResourceKey<Biome>[][] MIDDLE_BIOMES = new ResourceKey[][]{
 				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA},
-				{VANILLA, VANILLA, VANILLA, EnvironmentalBiomes.PINELANDS.getKey(), VANILLA},
-				{VANILLA, VANILLA, VANILLA, EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), VANILLA},
+				{VANILLA, VANILLA, VANILLA, PINELANDS.getKey(), VANILLA},
+				{VANILLA, VANILLA, VANILLA, BLOSSOM_WOODS.getKey(), VANILLA},
 				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA},
 				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA}};
 		private final ResourceKey<Biome>[][] MIDDLE_BIOMES_VARIANT = new ResourceKey[][]{
 				{null, null, null, null, null},
 				{null, null, null, null, null},
-				{null, null, null, EnvironmentalBiomes.BLOSSOM_VALLEYS.getKey(), null},
+				{null, null, null, null, null},
 				{null, null, null, null, null},
 				{null, null, null, null, null}};
 		private final ResourceKey<Biome>[][] PLATEAU_BIOMES = new ResourceKey[][]{
 				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA},
-				{VANILLA, VANILLA, VANILLA, EnvironmentalBiomes.PINELANDS.getKey(), EnvironmentalBiomes.PINELANDS.getKey()},
-				{VANILLA, VANILLA, VANILLA, EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), EnvironmentalBiomes.BLOSSOM_WOODS.getKey()},
-				{VANILLA, VANILLA, VANILLA, EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), VANILLA},
+				{VANILLA, VANILLA, BLOSSOM_WOODS.getKey(), PINELANDS.getKey(), PINELANDS.getKey()},
+				{VANILLA, VANILLA, BLOSSOM_WOODS.getKey(), BLOSSOM_WOODS.getKey(), VANILLA},
+				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA},
 				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA}};
 		private final ResourceKey<Biome>[][] PLATEAU_BIOMES_VARIANT = new ResourceKey[][]{
 				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, EnvironmentalBiomes.BLOSSOM_VALLEYS.getKey(), null},
+				{null, null, null, BLOSSOM_VALLEYS.getKey(), null},
+				{null, null, BLOSSOM_WOODS.getKey(), BLOSSOM_VALLEYS.getKey(), null},
 				{null, null, null, null, null},
 				{null, null, null, null, null}};
 		private final ResourceKey<Biome>[][] SHATTERED_BIOMES = new ResourceKey[][]{
 				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA},
-				{VANILLA, VANILLA, EnvironmentalBiomes.PINELANDS.getKey(), EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), EnvironmentalBiomes.BLOSSOM_WOODS.getKey()},
-				{VANILLA, VANILLA, EnvironmentalBiomes.PINELANDS.getKey(), EnvironmentalBiomes.BLOSSOM_WOODS.getKey(), EnvironmentalBiomes.BLOSSOM_WOODS.getKey()},
+				{VANILLA, VANILLA, PINELANDS.getKey(), VANILLA, VANILLA},
+				{VANILLA, VANILLA, PINELANDS.getKey(), BLOSSOM_WOODS.getKey(), BLOSSOM_WOODS.getKey()},
 				{null, null, null, null, null},
 				{null, null, null, null, null}};
 
@@ -175,7 +177,7 @@ public class EnvironmentalModdedBiomeSliceProvider extends ModdedBiomeSliceProvi
 
 		private void addMidSlice(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> p_187218_, Climate.Parameter p_187219_) {
 			this.addSurfaceBiome(p_187218_, this.FULL_RANGE, this.FULL_RANGE, this.coastContinentalness, Climate.Parameter.span(this.erosions[0], this.erosions[2]), p_187219_, 0.0F, VANILLA);
-			this.addSurfaceBiome(p_187218_, this.UNFROZEN_RANGE, this.FULL_RANGE, Climate.Parameter.span(this.nearInlandContinentalness, this.farInlandContinentalness), this.erosions[6], p_187219_, 0.0F, EnvironmentalBiomes.MARSH.getKey());
+			this.addSurfaceBiome(p_187218_, this.UNFROZEN_RANGE, this.FULL_RANGE, Climate.Parameter.span(this.nearInlandContinentalness, this.farInlandContinentalness), this.erosions[6], p_187219_, 0.0F, MARSH.getKey());
 
 			for (int i = 0; i < this.temperatures.length; ++i) {
 				Climate.Parameter climate$parameter = this.temperatures[i];
@@ -225,7 +227,7 @@ public class EnvironmentalModdedBiomeSliceProvider extends ModdedBiomeSliceProvi
 
 		private void addLowSlice(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> p_187229_, Climate.Parameter p_187230_) {
 			this.addSurfaceBiome(p_187229_, this.FULL_RANGE, this.FULL_RANGE, this.coastContinentalness, Climate.Parameter.span(this.erosions[0], this.erosions[2]), p_187230_, 0.0F, VANILLA);
-			this.addSurfaceBiome(p_187229_, this.UNFROZEN_RANGE, this.FULL_RANGE, Climate.Parameter.span(this.nearInlandContinentalness, this.farInlandContinentalness), this.erosions[6], p_187230_, 0.0F, EnvironmentalBiomes.MARSH.getKey());
+			this.addSurfaceBiome(p_187229_, this.UNFROZEN_RANGE, this.FULL_RANGE, Climate.Parameter.span(this.nearInlandContinentalness, this.farInlandContinentalness), this.erosions[6], p_187230_, 0.0F, MARSH.getKey());
 
 			for (int i = 0; i < this.temperatures.length; ++i) {
 				Climate.Parameter climate$parameter = this.temperatures[i];
@@ -265,7 +267,7 @@ public class EnvironmentalModdedBiomeSliceProvider extends ModdedBiomeSliceProvi
 			this.addSurfaceBiome(p_187238_, this.UNFROZEN_RANGE, this.FULL_RANGE, Climate.Parameter.span(this.coastContinentalness, this.farInlandContinentalness), Climate.Parameter.span(this.erosions[2], this.erosions[5]), p_187239_, 0.0F, VANILLA);
 			this.addSurfaceBiome(p_187238_, this.FROZEN_RANGE, this.FULL_RANGE, this.coastContinentalness, this.erosions[6], p_187239_, 0.0F, VANILLA);
 			this.addSurfaceBiome(p_187238_, this.UNFROZEN_RANGE, this.FULL_RANGE, this.coastContinentalness, this.erosions[6], p_187239_, 0.0F, VANILLA);
-			this.addSurfaceBiome(p_187238_, this.UNFROZEN_RANGE, this.FULL_RANGE, Climate.Parameter.span(this.inlandContinentalness, this.farInlandContinentalness), this.erosions[6], p_187239_, 0.0F, EnvironmentalBiomes.MARSH.getKey());
+			this.addSurfaceBiome(p_187238_, this.UNFROZEN_RANGE, this.FULL_RANGE, Climate.Parameter.span(this.inlandContinentalness, this.farInlandContinentalness), this.erosions[6], p_187239_, 0.0F, MARSH.getKey());
 			this.addSurfaceBiome(p_187238_, this.FROZEN_RANGE, this.FULL_RANGE, Climate.Parameter.span(this.inlandContinentalness, this.farInlandContinentalness), this.erosions[6], p_187239_, 0.0F, VANILLA);
 
 			for (int i = 0; i < this.temperatures.length; ++i) {
@@ -293,7 +295,7 @@ public class EnvironmentalModdedBiomeSliceProvider extends ModdedBiomeSliceProvi
 				ResourceKey<Biome> resourcekey = this.MIDDLE_BIOMES_VARIANT[p_187164_][p_187165_];
 				middleBiome = resourcekey == null ? this.MIDDLE_BIOMES[p_187164_][p_187165_] : resourcekey;
 			}
-			return middleBiome == EnvironmentalBiomes.BLOSSOM_VALLEYS.getKey() && (weirdness.min() >= 4000.0F || weirdness.max() <= -4000F) ? EnvironmentalBiomes.BLOSSOM_WOODS.getKey() : middleBiome;
+			return middleBiome == null && (weirdness.min() >= 4000.0F || weirdness.max() <= -4000F) ? VANILLA : middleBiome;
 		}
 
 		private ResourceKey<Biome> pickMiddleBiomeOrBadlandsIfHot(int p_187192_, int p_187193_, Climate.Parameter p_187194_) {
