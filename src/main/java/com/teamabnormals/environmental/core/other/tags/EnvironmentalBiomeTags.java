@@ -13,6 +13,7 @@ public class EnvironmentalBiomeTags {
 	public static final TagKey<Biome> HAS_DEER = biomeTag("has_animal/deer");
 	public static final TagKey<Biome> HAS_REINDEER = biomeTag("has_animal/reindeer");
 	public static final TagKey<Biome> HAS_YAK = biomeTag("has_animal/yak");
+	public static final TagKey<Biome> HAS_ZEBRA = biomeTag("has_animal/zebra");
 
 	public static final TagKey<Biome> WITHOUT_DEER = biomeTag("without_animal/deer");
 

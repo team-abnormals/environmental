@@ -8,6 +8,7 @@ import com.teamabnormals.environmental.common.block.HangingLeavesBlock;
 import com.teamabnormals.environmental.common.block.LargeLilyPadBlock;
 import com.teamabnormals.environmental.common.entity.ai.goal.HuntTruffleGoal;
 import com.teamabnormals.environmental.common.entity.ai.goal.TemptGoldenCarrotGoal;
+import com.teamabnormals.environmental.common.entity.animal.Zebra;
 import com.teamabnormals.environmental.common.entity.animal.koi.Koi;
 import com.teamabnormals.environmental.common.entity.animal.slabfish.Slabfish;
 import com.teamabnormals.environmental.common.entity.animal.slabfish.SlabfishOverlay;
@@ -74,6 +75,7 @@ import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingTickEvent;
+import net.minecraftforge.event.entity.living.LivingPackSizeEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -112,6 +114,14 @@ public class EnvironmentalEvents {
 					break;
 				}
 			}
+		}
+	}
+
+	@SubscribeEvent
+	public static void onMaxPackSize(LivingPackSizeEvent event) {
+		if (event.getEntity() instanceof Zebra) {
+			System.out.println(event.getMaxPackSize());
+			event.setMaxPackSize(32);
 		}
 	}
 

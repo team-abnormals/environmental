@@ -283,6 +283,7 @@
 	"item.environmental.koi_spawn_egg": "Koi Spawn Egg",
 	"item.environmental.fennec_fox_spawn_egg": "Fennec Fox Spawn Egg",
 	"item.environmental.tapir_spawn_egg": "Tapir Spawn Egg",
+	"item.environmental.zebra_spawn_egg": "Zebra Spawn Egg",
 
 	"item.environmental.yak_hair": "Yak Hair",
 	"item.environmental.yak_pants": "Yak Pants",
@@ -336,6 +337,7 @@
 	"entity.environmental.yak": "Yak",
 	"entity.environmental.fennec_fox": "Fennec Fox",
 	"entity.environmental.tapir": "Tapir",
+	"entity.environmental.zebra": "Zebra",
 
 	"entity.environmental.koi": "Koi",
 	"entity.environmental.koi.type.kohaku": "Kohaku",
