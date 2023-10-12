@@ -23,7 +23,7 @@ public class EnvironmentalBlockTagsProvider extends BlockTagsProvider {
 	public void addTags() {
 		this.tag(BlockTags.MINEABLE_WITH_AXE).add(
 				WILLOW_BOARDS.get(), WILLOW_BOOKSHELF.get(), WILLOW_LADDER.get(), WILLOW_BEEHIVE.get(), WILLOW_CHESTS.getFirst().get(), WILLOW_CHESTS.getSecond().get(), WILLOW_HEDGE.get(), WILLOW_POST.get(), STRIPPED_WILLOW_POST.get(),
-				PINE_BOARDS.get(), PINE_BOOKSHELF.get(), PINE_LADDER.get(), PINE_BEEHIVE.get(), PINE_CHESTS.getFirst().get(), PINE_CHESTS.getSecond().get(), PINE_HEDGE.get(), PINE_POST.get(), STRIPPED_PINE_POST.get(),
+				PINE_BOARDS.get(), PINE_BOOKSHELF.get(), PINE_LADDER.get(), PINE_BEEHIVE.get(), PINE_CHESTS.getFirst().get(), PINE_CHESTS.getSecond().get(), PINE_HEDGE.get(), PINE_POST.get(), STRIPPED_PINE_POST.get(), PINECONE.get(),
 				WISTERIA_BOARDS.get(), WISTERIA_BOOKSHELF.get(), WISTERIA_LADDER.get(), WISTERIA_BEEHIVE.get(), WISTERIA_CHESTS.getFirst().get(), WISTERIA_CHESTS.getSecond().get(), PINK_WISTERIA_HEDGE.get(), BLUE_WISTERIA_HEDGE.get(), PURPLE_WISTERIA_HEDGE.get(), WHITE_WISTERIA_HEDGE.get(), WISTERIA_POST.get(), STRIPPED_WISTERIA_POST.get(),
 				CHERRY_BOARDS.get(), CHERRY_BOOKSHELF.get(), CHERRY_LADDER.get(), CHERRY_BEEHIVE.get(), CHERRY_CHESTS.getFirst().get(), CHERRY_CHESTS.getSecond().get(), CHERRY_HEDGE.get(), CHERRY_POST.get(), STRIPPED_CHERRY_POST.get(),
 				CATTAIL_SPROUT.get(), CATTAIL.get(), LARGE_LILY_PAD.get(), GIANT_LILY_PAD.get(), GIANT_TALL_GRASS.get(), MYCELIUM_SPROUTS.get(), TALL_DEAD_BUSH.get(), CUP_LICHEN.get(),
