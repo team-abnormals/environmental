@@ -19,14 +19,14 @@ public class EnvironmentalChunkGeneratorModifierProvider extends ChunkGeneratorM
 
     @Override
     protected void registerEntries() {
-        ConditionSource isPinelands = isBiome(EnvironmentalBiomes.PINELANDS.getKey());
+        ConditionSource isPineBarrens = isBiome(EnvironmentalBiomes.PINE_BARRENS.getKey());
 
         RuleSource coarseDirt = state(Blocks.COARSE_DIRT.defaultBlockState());
         RuleSource dirt = state(Blocks.DIRT.defaultBlockState());
         RuleSource stone = state(Blocks.STONE.defaultBlockState());
 
         this.entry("environmental_surface_rule").selects("minecraft:overworld")
-                .addModifier(new SurfaceRuleModifier(ifTrue(abovePreliminarySurface(), ifTrue(isPinelands, SurfaceRules.sequence(ifTrue(SurfaceRules.steep(), stone), ifTrue(surfaceNoiseAbove(3.0F), stone)))), false));
+                .addModifier(new SurfaceRuleModifier(ifTrue(abovePreliminarySurface(), ifTrue(isPineBarrens, SurfaceRules.sequence(ifTrue(SurfaceRules.steep(), stone), ifTrue(surfaceNoiseAbove(3.0F), stone)))), false));
     }
 
     private static ConditionSource noiseRange(double low, double high) {

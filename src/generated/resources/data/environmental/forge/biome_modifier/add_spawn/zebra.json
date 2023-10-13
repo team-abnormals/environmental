@@ -3,8 +3,8 @@
   "biomes": "#environmental:has_animal/zebra",
   "spawners": {
     "type": "environmental:zebra",
-    "maxCount": 32,
-    "minCount": 32,
+    "maxCount": 18,
+    "minCount": 12,
     "weight": 1
   }
 }

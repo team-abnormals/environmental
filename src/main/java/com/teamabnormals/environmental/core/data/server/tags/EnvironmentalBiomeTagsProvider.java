@@ -43,7 +43,7 @@ public class EnvironmentalBiomeTagsProvider extends BiomeTagsProvider {
 				BlueprintBiomeTags.IS_GRASSLAND, Tags.Biomes.IS_RARE, Tags.Biomes.IS_PLAINS
 		);
 
-		this.tag(EnvironmentalBiomes.PINELANDS.get(),
+		this.tag(EnvironmentalBiomes.PINE_BARRENS.get(),
 				BiomeTags.IS_OVERWORLD, BiomeTags.IS_TAIGA,
 				BiomeTags.HAS_MINESHAFT, BiomeTags.STRONGHOLD_BIASED_TO, BiomeTags.HAS_RUINED_PORTAL_STANDARD,
 				Tags.Biomes.IS_COLD_OVERWORLD, Tags.Biomes.IS_CONIFEROUS

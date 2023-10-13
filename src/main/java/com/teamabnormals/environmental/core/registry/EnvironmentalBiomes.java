@@ -26,7 +26,7 @@ public class EnvironmentalBiomes {
 	public static final KeyedBiome BLOSSOM_WOODS = HELPER.createBiome("blossom_woods", () -> blossomBiome(false));
 	public static final KeyedBiome BLOSSOM_VALLEYS = HELPER.createBiome("blossom_valleys", () -> blossomBiome(true));
 
-	public static final KeyedBiome PINELANDS = HELPER.createBiome("pinelands", EnvironmentalBiomes::pinelands);
+	public static final KeyedBiome PINE_BARRENS = HELPER.createBiome("pine_barrens", EnvironmentalBiomes::pineBarrens);
 
 	private static Biome marsh() {
 		BiomeGenerationSettings.Builder generation = new BiomeGenerationSettings.Builder();
@@ -54,9 +54,9 @@ public class EnvironmentalBiomes {
 		return biome(Precipitation.RAIN, 0.45F, 0.8F, 5350240, 5216182, 335411, spawns, generation, null);
 	}
 
-	private static Biome pinelands() {
+	private static Biome pineBarrens() {
 		BiomeGenerationSettings.Builder generation = new BiomeGenerationSettings.Builder();
-		EnvironmentalGeneration.pinelands(generation);
+		EnvironmentalGeneration.pineBarrens(generation);
 
 		MobSpawnSettings.Builder spawns = new MobSpawnSettings.Builder();
 		BiomeDefaultFeatures.farmAnimals(spawns);

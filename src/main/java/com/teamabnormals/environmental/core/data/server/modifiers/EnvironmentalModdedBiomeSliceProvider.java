@@ -53,7 +53,7 @@ public class EnvironmentalModdedBiomeSliceProvider extends ModdedBiomeSliceProvi
 		private final ResourceKey<Biome>[][] OCEANS = new ResourceKey[][]{{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA}, {VANILLA, VANILLA, VANILLA, VANILLA, VANILLA}};
 		private final ResourceKey<Biome>[][] MIDDLE_BIOMES = new ResourceKey[][]{
 				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA},
-				{VANILLA, VANILLA, VANILLA, PINELANDS.getKey(), VANILLA},
+				{VANILLA, VANILLA, VANILLA, PINE_BARRENS.getKey(), VANILLA},
 				{VANILLA, VANILLA, VANILLA, BLOSSOM_WOODS.getKey(), VANILLA},
 				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA},
 				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA}};
@@ -65,7 +65,7 @@ public class EnvironmentalModdedBiomeSliceProvider extends ModdedBiomeSliceProvi
 				{null, null, null, null, null}};
 		private final ResourceKey<Biome>[][] PLATEAU_BIOMES = new ResourceKey[][]{
 				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA},
-				{VANILLA, VANILLA, BLOSSOM_WOODS.getKey(), PINELANDS.getKey(), PINELANDS.getKey()},
+				{VANILLA, VANILLA, BLOSSOM_WOODS.getKey(), PINE_BARRENS.getKey(), PINE_BARRENS.getKey()},
 				{VANILLA, VANILLA, BLOSSOM_WOODS.getKey(), BLOSSOM_WOODS.getKey(), VANILLA},
 				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA},
 				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA}};
@@ -77,8 +77,8 @@ public class EnvironmentalModdedBiomeSliceProvider extends ModdedBiomeSliceProvi
 				{null, null, null, null, null}};
 		private final ResourceKey<Biome>[][] SHATTERED_BIOMES = new ResourceKey[][]{
 				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA},
-				{VANILLA, VANILLA, PINELANDS.getKey(), VANILLA, VANILLA},
-				{VANILLA, VANILLA, PINELANDS.getKey(), BLOSSOM_WOODS.getKey(), BLOSSOM_WOODS.getKey()},
+				{VANILLA, VANILLA, PINE_BARRENS.getKey(), VANILLA, VANILLA},
+				{VANILLA, VANILLA, PINE_BARRENS.getKey(), BLOSSOM_WOODS.getKey(), BLOSSOM_WOODS.getKey()},
 				{null, null, null, null, null},
 				{null, null, null, null, null}};
 

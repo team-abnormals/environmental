@@ -52,7 +52,7 @@
             },
             "trigger": "minecraft:location"
           },
-          "environmental:pinelands": {
+          "environmental:pine_barrens": {
             "conditions": {
               "player": [
                 {
@@ -60,7 +60,7 @@
                   "entity": "this",
                   "predicate": {
                     "location": {
-                      "biome": "environmental:pinelands"
+                      "biome": "environmental:pine_barrens"
                     }
                   }
                 }
@@ -80,7 +80,7 @@
             "environmental:blossom_valleys"
           ],
           [
-            "environmental:pinelands"
+            "environmental:pine_barrens"
           ]
         ],
         "should_replace_requirements": false

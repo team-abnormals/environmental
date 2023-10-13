@@ -59,17 +59,17 @@ public class EnvironmentalGeneration {
 		}
 	}
 
-	public static void pinelands(BiomeGenerationSettings.Builder generation) {
+	public static void pineBarrens(BiomeGenerationSettings.Builder generation) {
 		OverworldBiomes.globalOverworldGeneration(generation);
 		BiomeDefaultFeatures.addFerns(generation);
 		BiomeDefaultFeatures.addDefaultOres(generation);
 		BiomeDefaultFeatures.addDefaultSoftDisks(generation);
 		BiomeDefaultFeatures.addDefaultFlowers(generation);
-		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.COARSE_DIRT_PINELANDS.getHolder().get());
-		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.TREES_PINELANDS.getHolder().get());
+		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.COARSE_DIRT_PINE_BARRENS.getHolder().get());
+		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.TREES_PINE_BARRENS.getHolder().get());
 		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.BROWN_MUSHROOM_TAIGA);
 		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.RED_MUSHROOM_TAIGA);
-		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_GRASS_PINELANDS.getHolder().get());
+		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_GRASS_PINE_BARRENS.getHolder().get());
 		// generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_CUP_LICHEN.getHolder().get());
 		BiomeDefaultFeatures.addDefaultExtraVegetation(generation);
 	}
