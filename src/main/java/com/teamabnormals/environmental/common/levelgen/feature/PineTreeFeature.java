@@ -35,6 +35,9 @@ public class PineTreeFeature extends BlueprintTreeFeature {
 
 		float f = random.nextFloat();
 		int leafbranches = f > 0.6F ? 4 : f > 0.25F ? 3 : f > 0.05F ? 2 : 1;
+        
+        if (trunkheight >= 14 && random.nextBoolean())
+            leafbranches++;
 
 		List<Direction> branchdirections = Lists.newArrayList();
 		Plane.HORIZONTAL.forEach(branchdirections::add);
@@ -48,7 +51,12 @@ public class PineTreeFeature extends BlueprintTreeFeature {
 				branchdirections.remove(direction);
 				this.createBranchWithLeaves(blockpos, direction, random, config);
 				leafbranches--;
-			} else if (random.nextInt(8) == 0) {
+
+				if (branchdirections.isEmpty()) {
+					Plane.HORIZONTAL.forEach(branchdirections::add);
+					branchdirections.remove(direction);
+				}
+			} else if (random.nextInt(6) == 0) {
 				this.createBranch(blockpos, Plane.HORIZONTAL.getRandomDirection(random), random, config);
 			}
 
