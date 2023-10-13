@@ -209,11 +209,11 @@ public class EnvironmentalClientCompat {
 		);
 		List<RegistryObject<Block>> waterLilyColors = Arrays.asList(EnvironmentalBlocks.LARGE_LILY_PAD, EnvironmentalBlocks.GIANT_LILY_PAD);
 
-		List<RegistryObject<Block>> foliageItemColors = Arrays.asList(
-				EnvironmentalBlocks.PINE_LEAVES, EnvironmentalBlocks.PINE_LEAF_CARPET, EnvironmentalBlocks.PINE_HEDGE, EnvironmentalBlocks.PINE_LEAF_PILE
-		);
 		List<RegistryObject<Block>> willowFoliageItemColors = Arrays.asList(
 				EnvironmentalBlocks.WILLOW_LEAVES, EnvironmentalBlocks.WILLOW_LEAF_CARPET, EnvironmentalBlocks.HANGING_WILLOW_LEAVES, EnvironmentalBlocks.WILLOW_HEDGE, EnvironmentalBlocks.WILLOW_LEAF_PILE
+		);
+		List<RegistryObject<Block>> pineFoliageItemColors = Arrays.asList(
+				EnvironmentalBlocks.PINE_LEAVES, EnvironmentalBlocks.PINE_LEAF_CARPET, EnvironmentalBlocks.PINE_HEDGE, EnvironmentalBlocks.PINE_LEAF_PILE
 		);
 
 		DataUtil.registerBlockColor(blockColors, (x, world, pos, u) -> world != null && pos != null ? BiomeColors.getAverageGrassColor(world, pos) : GrassColor.get(0.5D, 1.0D), grassColors);
@@ -221,7 +221,7 @@ public class EnvironmentalClientCompat {
 		DataUtil.registerBlockColor(blockColors, (x, world, pos, u) -> world != null && pos != null ? 2129968 : 7455580, waterLilyColors);
 
 		DataUtil.registerBlockItemColor(itemColors, (color, items) -> GrassColor.get(0.5D, 1.0D), grassColors);
-		DataUtil.registerBlockItemColor(itemColors, (color, items) -> FoliageColor.get(0.5D, 1.0D), foliageItemColors);
+		DataUtil.registerBlockItemColor(itemColors, (color, items) -> 6725203, pineFoliageItemColors);
 		DataUtil.registerBlockItemColor(itemColors, (color, items) -> 6975545, willowFoliageItemColors);
 		DataUtil.registerBlockItemColor(itemColors, (block, tintIndex) -> {
 			BlockState blockstate = ((BlockItem) block.getItem()).getBlock().defaultBlockState();
