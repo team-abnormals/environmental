@@ -27,19 +27,33 @@ public class EnvironmentalBiomeTagsProvider extends BiomeTagsProvider {
 		this.tag(BiomeTags.HAS_CLOSER_WATER_FOG).add(EnvironmentalBiomes.MARSH.get());
 
 		this.tag(EnvironmentalBiomeTags.HAS_SLABFISH).addTag(Tags.Biomes.IS_SWAMP);
-		this.tag(EnvironmentalBiomeTags.HAS_DUCK).addTag(Tags.Biomes.IS_SWAMP);
+		this.tag(EnvironmentalBiomeTags.HAS_DUCK).add(Biomes.RIVER).addTag(Tags.Biomes.IS_SWAMP);
 		this.tag(EnvironmentalBiomeTags.HAS_DEER).addTag(BiomeTags.IS_FOREST);
-		this.tag(EnvironmentalBiomeTags.HAS_YAK).add(Biomes.STONY_PEAKS).addTag(BiomeTags.IS_HILL);
+		this.tag(EnvironmentalBiomeTags.HAS_YAK).addTag(BiomeTags.IS_MOUNTAINS).addTag(BiomeTags.IS_HILL);
 
-		this.tag(EnvironmentalBiomeTags.HAS_HUSK).add(Biomes.DESERT);
-		this.tag(EnvironmentalBiomeTags.HAS_STRAY).add(Biomes.SNOWY_PLAINS, Biomes.ICE_SPIKES);
+		this.tag(EnvironmentalBiomeTags.HAS_HUSK).addTag(Biomes.IS_DESERT);
+		this.tag(EnvironmentalBiomeTags.HAS_STRAY).addTag(Tags.Biomes.IS_SNOWY);
 
-		this.tag(EnvironmentalBiomeTags.HAS_SHEEP).add(Biomes.PLAINS, Biomes.SUNFLOWER_PLAINS, Biomes.MEADOW);
+		this.tag(EnvironmentalBiomeTags.HAS_SHEEP).addTag(Tags.Biomes.IS_PLAINS);
+		this.tag(EnvironmentalBiomeTags.HAS_COW).addTag(Tags.Biomes.IS_PLAINS);
 		this.tag(EnvironmentalBiomeTags.HAS_PIG).addTag(BiomeTags.IS_FOREST);
-		this.tag(EnvironmentalBiomeTags.HAS_COW).add(Biomes.PLAINS, Biomes.SUNFLOWER_PLAINS);
 		this.tag(EnvironmentalBiomeTags.HAS_CHICKEN).addTag(BiomeTags.IS_FOREST);
 
+		this.tag(EnvironmentalBiomeTags.HAS_BLUEBELL).addTag(BiomeTags.IS_FOREST);
+		this.tag(EnvironmentalBiomeTags.HAS_VIOLET).addTag(BiomeTags.IS_TAIGA);
+		this.tag(EnvironmentalBiomeTags.HAS_WARM_HIBISCUS).addTag(BiomeTags.IS_JUNGLE);
+		this.tag(EnvironmentalBiomeTags.HAS_COOL_HIBISCUS).addTag(BiomeTags.IS_JUNGLE);
 		this.tag(EnvironmentalBiomeTags.HAS_CATTAILS).add(Biomes.RIVER).addTag(Tags.Biomes.IS_SWAMP);
-		this.tag(EnvironmentalBiomeTags.HAS_MUD_DISK).add(Biomes.SWAMP, EnvironmentalBiomes.MARSH.getKey());
+		this.tag(EnvironmentalBiomeTags.HAS_TALL_DEAD_BUSH).addTag(Biomes.IS_DESERT);
+		this.tag(EnvironmentalBiomeTags.HAS_TALL_DEAD_BUSH_BADLANDS).addTag(Biomes.IS_BADLANDS);
+		this.tag(EnvironmentalBiomeTags.HAS_MYCELIUM_SPROUTS).addTag(Tags.Biomes.IS_MUSHROOM);
+		this.tag(EnvironmentalBiomeTags.HAS_MUD_DISK).addTag(Tags.Biomes.IS_SWAMP);
+		
+		this.tag(EnvironmentalBiomeTags.HAS_FLOWER_FOREST_VEGETATION).add(Biome.FLOWER_FOREST);
+		this.tag(EnvironmentalBiomeTags.HAS_PLAINS_VEGETATION).addTag(Tags.Biomes.IS_PLAINS);
+		this.tag(EnvironmentalBiomeTags.HAS_SAVANNA_VEGETATION).addTag(BiomeTags.IS_SAVANNA);
+		this.tag(EnvironmentalBiomeTags.HAS_JUNGLE_VEGETATION).addTag(BiomeTags.IS_JUNGLE);
+		this.tag(EnvironmentalBiomeTags.HAS_SWAMP_VEGETATION).addTag(Tags.Biomes.IS_SWAMP);
+		
 	}
 }
