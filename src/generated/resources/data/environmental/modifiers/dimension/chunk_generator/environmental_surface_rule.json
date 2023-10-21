@@ -36,13 +36,25 @@
                   "if_true": {
                     "type": "minecraft:noise_threshold",
                     "max_threshold": 1.7976931348623157E308,
-                    "min_threshold": 0.36363636363636365,
+                    "min_threshold": 0.24242424242424243,
                     "noise": "minecraft:surface"
                   },
                   "then_run": {
-                    "type": "minecraft:block",
-                    "result_state": {
-                      "Name": "minecraft:stone"
+                    "type": "minecraft:condition",
+                    "if_true": {
+                      "type": "minecraft:not",
+                      "invert": {
+                        "type": "minecraft:noise_threshold",
+                        "max_threshold": 0.18181818181818182,
+                        "min_threshold": -0.24242424242424243,
+                        "noise": "environmental:pine_barrens_stone"
+                      }
+                    },
+                    "then_run": {
+                      "type": "minecraft:block",
+                      "result_state": {
+                        "Name": "minecraft:stone"
+                      }
                     }
                   }
                 }

@@ -71,6 +71,7 @@ public class Environmental {
 		EnvironmentalFeatures.TREE_DECORATORS.register(bus);
 		EnvironmentalConfiguredFeatures.CONFIGURED_FEATURES.register(bus);
 		EnvironmentalPlacedFeatures.PLACED_FEATURES.register(bus);
+		EnvironmentalNoiseParameters.NOISE_PARAMETERS.register(bus);
 		EnvironmentalAttributes.ATTRIBUTES.register(bus);
 		EnvironmentalMobEffects.MOB_EFFECTS.register(bus);
 		EnvironmentalMenuTypes.MENU_TYPES.register(bus);
