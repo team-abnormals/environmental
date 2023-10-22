@@ -61,18 +61,18 @@ public class EnvironmentalGeneration {
 	}
 
 	public static void pineBarrens(BiomeGenerationSettings.Builder generation) {
-		generation.addFeature(Decoration.LOCAL_MODIFICATIONS, PINE_BARRENS_STONE_RAISER.getHolder().get());
 		OverworldBiomes.globalOverworldGeneration(generation);
 		BiomeDefaultFeatures.addFerns(generation);
 		BiomeDefaultFeatures.addDefaultOres(generation);
 		BiomeDefaultFeatures.addDefaultSoftDisks(generation);
 		BiomeDefaultFeatures.addDefaultFlowers(generation);
+		generation.addFeature(Decoration.LOCAL_MODIFICATIONS, PINE_BARRENS_STONE_RAISER.getHolder().get());
 		generation.addFeature(Decoration.VEGETAL_DECORATION, COARSE_DIRT_PINE_BARRENS.getHolder().get());
 		generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_PINE_BARRENS.getHolder().get());
 		generation.addFeature(Decoration.VEGETAL_DECORATION, VegetationPlacements.BROWN_MUSHROOM_TAIGA);
 		generation.addFeature(Decoration.VEGETAL_DECORATION, VegetationPlacements.RED_MUSHROOM_TAIGA);
 		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_GRASS_PINE_BARRENS.getHolder().get());
-		// generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, PATCH_CUP_LICHEN.getHolder().get());
+		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_CUP_LICHEN.getHolder().get());
 		BiomeDefaultFeatures.addDefaultExtraVegetation(generation);
 	}
 }
