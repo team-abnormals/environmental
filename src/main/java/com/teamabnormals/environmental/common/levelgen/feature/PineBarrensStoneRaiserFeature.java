@@ -68,8 +68,7 @@ public class PineBarrensStoneRaiserFeature extends Feature<NoneFeatureConfigurat
             }
         }
 
-        // Smoothens the raised stone.
-        Raise[][] newraises = new Raise[16][16];
+        // Generates the raised stone after smoothening it.
         for (int x = 1; x < 17; ++x) {
             for (int z = 1; z < 17; ++z) {
                 int minY = raises[x][z].minY;
@@ -91,16 +90,8 @@ public class PineBarrensStoneRaiserFeature extends Feature<NoneFeatureConfigurat
                 else if (i <= -3)
                     maxY = Math.max(maxY - 1, minY);
 
-                newraises[x - 1][z - 1] = new Raise(minY, maxY);
-            }
-        }
-
-        // Actually generates the raised stone.
-        for (int x = 0; x < 16; ++x) {
-            for (int z = 0; z < 16; ++z) {
-                Raise raise = newraises[x][z];
-                for (int y = raise.minY; y < raise.maxY; ++y) {
-                    mutable.set(origin.getX() + x, y, origin.getZ() + z);
+                for (int y = minY; y < maxY; ++y) {
+                    mutable.set(origin.getX() + x - 1, y, origin.getZ() + z - 1);
                     level.setBlock(mutable, Blocks.STONE.defaultBlockState(), 2);
                 }
             }
