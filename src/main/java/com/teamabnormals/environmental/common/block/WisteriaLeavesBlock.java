@@ -1,7 +1,11 @@
 package com.teamabnormals.environmental.common.block;
 
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -22,6 +26,14 @@ public class WisteriaLeavesBlock extends LeavesBlock {
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		super.createBlockStateDefinition(builder);
 		builder.add(HALF);
+	}
+
+	@Override
+	public BlockState updateShape(BlockState state, Direction direction, BlockState offsetState, LevelAccessor level, BlockPos pos, BlockPos offsetPos) {
+		if (direction == Direction.UP)
+			return offsetState.is(EnvironmentalBlocks.WISTERIA_LEAVES.get()) ? state.setValue(HALF, Half.TOP) : state.setValue(HALF, Half.BOTTOM);
+		else
+			return super.updateShape(state, direction, offsetState, level, pos, offsetPos);
 	}
 
 	@Override
