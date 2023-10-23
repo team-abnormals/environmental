@@ -7,7 +7,6 @@ import com.teamabnormals.environmental.common.levelgen.treedecorators.HangingWil
 import com.teamabnormals.environmental.common.levelgen.treedecorators.HangingWisteriaDecorator;
 import com.teamabnormals.environmental.common.levelgen.treedecorators.PineconeDecorator;
 import com.teamabnormals.environmental.core.Environmental;
-import com.teamabnormals.environmental.core.other.tags.EnvironmentalBlockTags;
 import net.minecraft.core.*;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.AquaticPlacements;
@@ -203,7 +202,7 @@ public class EnvironmentalFeatures {
 		public static final RegistryObject<ConfiguredFeature<RandomFeatureConfiguration, ?>> TREES_PINE_BARRENS = register("trees_pine_barrens", () -> new ConfiguredFeature<>(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(TreePlacements.SPRUCE_CHECKED, 0.2F)), EnvironmentalPlacedFeatures.PINE.getHolder().get())));
 
 		public static final RegistryObject<ConfiguredFeature<ProbabilityFeatureConfiguration, ?>> COARSE_DIRT_PINE_BARRENS = register("coarse_dirt_pine_barrens", () -> new ConfiguredFeature<>(EnvironmentalFeatures.COARSE_DIRT_PINE_BARRENS.get(), new ProbabilityFeatureConfiguration(0.1F)));
-		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> PATCH_CUP_LICHEN = register("patch_cup_lichen", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(128, 6, 2, PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(EnvironmentalBlocks.CUP_LICHEN.get())), BlockPredicate.allOf(BlockPredicate.replaceable(), BlockPredicate.matchesTag(Direction.DOWN.getNormal(), EnvironmentalBlockTags.CUP_LICHEN_PLANTABLE_ON))))));
+		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> PATCH_CUP_LICHEN = register("patch_cup_lichen", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(128, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(EnvironmentalBlocks.CUP_LICHEN.get()))))));
 
 		public static final RegistryObject<ConfiguredFeature<NoneFeatureConfiguration, ?>> PINE_BARRENS_STONE_RAISER = register("pine_barrens_stone_raiser", () -> new ConfiguredFeature<>(EnvironmentalFeatures.PINE_BARRENS_STONE_RAISER.get(), NoneFeatureConfiguration.INSTANCE));
 
@@ -304,7 +303,7 @@ public class EnvironmentalFeatures {
 		public static final RegistryObject<PlacedFeature> PINE = register("pine", EnvironmentalConfiguredFeatures.PINE, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
 		public static final RegistryObject<PlacedFeature> TREES_PINE_BARRENS = register("trees_pine_barrens", EnvironmentalConfiguredFeatures.TREES_PINE_BARRENS, VegetationPlacements.treePlacement(PlacementUtils.countExtra(12, 0.1F, 1)));
 
-		public static final RegistryObject<PlacedFeature> COARSE_DIRT_PINE_BARRENS = register("coarse_dirt_pine_barrens", EnvironmentalConfiguredFeatures.COARSE_DIRT_PINE_BARRENS, List.of(CountPlacement.of(32), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+		public static final RegistryObject<PlacedFeature> COARSE_DIRT_PINE_BARRENS = register("coarse_dirt_pine_barrens", EnvironmentalConfiguredFeatures.COARSE_DIRT_PINE_BARRENS, CountPlacement.of(32), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
 		public static final RegistryObject<PlacedFeature> PATCH_CUP_LICHEN = register("patch_cup_lichen", EnvironmentalConfiguredFeatures.PATCH_CUP_LICHEN, RarityFilter.onAverageOnceEvery(32), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 
 		public static final RegistryObject<PlacedFeature> PINE_BARRENS_STONE_RAISER = register("pine_barrens_stone_raiser", EnvironmentalConfiguredFeatures.PINE_BARRENS_STONE_RAISER, PlacementUtils.HEIGHTMAP_TOP_SOLID, BiomeFilter.biome());
