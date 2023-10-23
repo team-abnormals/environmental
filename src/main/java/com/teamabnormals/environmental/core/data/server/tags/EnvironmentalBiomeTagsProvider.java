@@ -46,7 +46,8 @@ public class EnvironmentalBiomeTagsProvider extends BiomeTagsProvider {
 		this.tag(EnvironmentalBiomes.PINE_BARRENS.get(),
 				BiomeTags.IS_OVERWORLD, BiomeTags.IS_TAIGA,
 				BiomeTags.HAS_MINESHAFT, BiomeTags.STRONGHOLD_BIASED_TO, BiomeTags.HAS_RUINED_PORTAL_STANDARD,
-				Tags.Biomes.IS_COLD_OVERWORLD, Tags.Biomes.IS_CONIFEROUS
+				Tags.Biomes.IS_COLD_OVERWORLD, Tags.Biomes.IS_CONIFEROUS,
+				EnvironmentalBiomeTags.HAS_PINE_CABIN
 		);
 
 		this.tag(EnvironmentalBiomeTags.HAS_SLABFISH).addTag(Tags.Biomes.IS_SWAMP);
