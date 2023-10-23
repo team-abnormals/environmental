@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#environmental:has_animal/zebra",
+  "features": "environmental:zebra_dazzle",
+  "step": "vegetal_decoration"
+}
