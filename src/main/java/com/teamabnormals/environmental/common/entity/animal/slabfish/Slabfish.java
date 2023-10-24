@@ -120,10 +120,9 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(1, new FloatGoal(this));
-		this.goalSelector.addGoal(1, new SitWhenOrderedToGoal(this));
-
-		this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, LivingEntity.class, entity -> entity.getType().is(EntityTypeTags.RAIDERS), 15.0F, 1.0D, 1.5D, EntitySelector.NO_CREATIVE_OR_SPECTATOR::test));
-
+		this.goalSelector.addGoal(1, new PanicGoal(this, 1.25D));
+		this.goalSelector.addGoal(2, new SitWhenOrderedToGoal(this));
+		this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, LivingEntity.class, entity -> entity.getType().is(EntityTypeTags.RAIDERS), 15.0F, 1.0D, 1.25D, EntitySelector.NO_CREATIVE_OR_SPECTATOR::test));
 		this.goalSelector.addGoal(4, new SlabbyBreedGoal(this, 1.0D));
 		this.goalSelector.addGoal(5, new SlabbyGrabItemGoal(this, 1.1D));
 		this.goalSelector.addGoal(6, new TemptGoal(this, 1.0D, Ingredient.of(EnvironmentalItemTags.SLABFISH_FOOD), false));
