@@ -54,6 +54,7 @@ public class EnvironmentalTrades {
 
 		TradeUtil.addRareWandererTrades(event,
 				new BlueprintTrade(5, EnvironmentalItems.SLABFISH_BUCKET.get(), 1, 4, 1),
+				new BlueprintTrade(5, EnvironmentalItems.KOI_BUCKET.get(), 1, 4, 1),
 				new BlueprintTrade(24, EnvironmentalItems.WANDERER_BOOTS.get(), 1, 1, 1)
 		);
 	}
