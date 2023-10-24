@@ -1,11 +1,11 @@
 {
-  "name": "environmental:maple_hut",
+  "name": "environmental:log_cabin",
   "fallback": "minecraft:empty",
   "elements": [
     {
       "weight": 1,
       "element": {
-        "location": "environmental:pine_cabin",
+        "location": "environmental:log_cabin",
         "processors": {
           "processors": []
         },
