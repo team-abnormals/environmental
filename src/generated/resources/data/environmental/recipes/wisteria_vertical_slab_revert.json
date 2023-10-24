@@ -12,11 +12,11 @@
         "type": "minecraft:crafting_shapeless",
         "ingredients": [
           {
-            "item": "environmental:wisteria_slab"
+            "item": "environmental:wisteria_vertical_slab"
           }
         ],
         "result": {
-          "item": "environmental:wisteria_vertical_slab"
+          "item": "environmental:wisteria_slab"
         }
       }
     }

@@ -12,7 +12,7 @@
         "type": "minecraft:crafting_shaped",
         "key": {
           "#": {
-            "item": "environmental:wisteria_planks"
+            "item": "environmental:wisteria_slab"
           }
         },
         "pattern": [

@@ -12,7 +12,7 @@
         "type": "minecraft:crafting_shaped",
         "key": {
           "#": {
-            "item": "environmental:dirt_tiles"
+            "item": "environmental:dirt_tile_slab"
           }
         },
         "pattern": [

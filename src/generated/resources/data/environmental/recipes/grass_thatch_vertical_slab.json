@@ -12,7 +12,7 @@
         "type": "minecraft:crafting_shaped",
         "key": {
           "#": {
-            "item": "environmental:grass_thatch"
+            "item": "environmental:grass_thatch_slab"
           }
         },
         "pattern": [

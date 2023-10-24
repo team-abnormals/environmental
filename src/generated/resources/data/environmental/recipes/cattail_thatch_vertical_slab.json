@@ -12,7 +12,7 @@
         "type": "minecraft:crafting_shaped",
         "key": {
           "#": {
-            "item": "environmental:cattail_thatch"
+            "item": "environmental:cattail_thatch_slab"
           }
         },
         "pattern": [

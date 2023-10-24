@@ -12,11 +12,11 @@
         "type": "minecraft:crafting_shapeless",
         "ingredients": [
           {
-            "item": "environmental:cattail_thatch_slab"
+            "item": "environmental:cattail_thatch_vertical_slab"
           }
         ],
         "result": {
-          "item": "environmental:cattail_thatch_vertical_slab"
+          "item": "environmental:cattail_thatch_slab"
         }
       }
     }

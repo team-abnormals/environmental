@@ -12,11 +12,11 @@
         "type": "minecraft:crafting_shapeless",
         "ingredients": [
           {
-            "item": "environmental:dirt_tile_slab"
+            "item": "environmental:dirt_tile_vertical_slab"
           }
         ],
         "result": {
-          "item": "environmental:dirt_tile_vertical_slab"
+          "item": "environmental:dirt_tile_slab"
         }
       }
     }

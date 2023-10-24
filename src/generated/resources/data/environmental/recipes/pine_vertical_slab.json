@@ -12,7 +12,7 @@
         "type": "minecraft:crafting_shaped",
         "key": {
           "#": {
-            "item": "environmental:pine_planks"
+            "item": "environmental:pine_slab"
           }
         },
         "pattern": [

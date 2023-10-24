@@ -12,7 +12,7 @@
         "type": "minecraft:crafting_shaped",
         "key": {
           "#": {
-            "item": "environmental:cherry_planks"
+            "item": "environmental:cherry_slab"
           }
         },
         "pattern": [
