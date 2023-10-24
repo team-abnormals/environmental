@@ -8,11 +8,12 @@ import net.minecraft.world.level.biome.Biome;
 public class EnvironmentalBiomeTags {
 	public static final TagKey<Biome> ONLY_ALLOWS_MUDDY_RABBITS = biomeTag("only_allows_muddy_rabbits");
 
-	public static final TagKey<Biome> HAS_LOG_CABIN = biomeTag("has_structure/log_cabin.nbt");
+	public static final TagKey<Biome> HAS_LOG_CABIN = biomeTag("has_structure/log_cabin");
 
 	public static final TagKey<Biome> HAS_SLABFISH = biomeTag("has_animal/slabfish");
 	public static final TagKey<Biome> HAS_DUCK = biomeTag("has_animal/duck");
 	public static final TagKey<Biome> HAS_DEER = biomeTag("has_animal/deer");
+	public static final TagKey<Biome> HAS_MUDDY_PIG = biomeTag("has_animal/muddy_pig");
 	public static final TagKey<Biome> HAS_REINDEER = biomeTag("has_animal/reindeer");
 	public static final TagKey<Biome> HAS_YAK = biomeTag("has_animal/yak");
 	public static final TagKey<Biome> HAS_ZEBRA = biomeTag("has_animal/zebra");

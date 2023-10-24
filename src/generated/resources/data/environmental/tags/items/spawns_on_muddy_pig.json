@@ -1,0 +1,18 @@
+{
+  "values": [
+    "minecraft:red_tulip",
+    "minecraft:orange_tulip",
+    "minecraft:white_tulip",
+    "minecraft:pink_tulip",
+    "minecraft:blue_orchid",
+    "minecraft:cornflower",
+    "environmental:dianthus",
+    "minecraft:poppy",
+    "minecraft:dandelion",
+    "minecraft:red_mushroom",
+    "minecraft:brown_mushroom",
+    "minecraft:dead_bush",
+    "environmental:cattail",
+    "minecraft:lily_pad"
+  ]
+}

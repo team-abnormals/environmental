@@ -8,13 +8,13 @@ import com.teamabnormals.environmental.common.block.HangingLeavesBlock;
 import com.teamabnormals.environmental.common.block.LargeLilyPadBlock;
 import com.teamabnormals.environmental.common.entity.ai.goal.HuntTruffleGoal;
 import com.teamabnormals.environmental.common.entity.ai.goal.TemptGoldenCarrotGoal;
-import com.teamabnormals.environmental.common.entity.animal.Zebra;
 import com.teamabnormals.environmental.common.entity.animal.koi.Koi;
 import com.teamabnormals.environmental.common.entity.animal.slabfish.Slabfish;
 import com.teamabnormals.environmental.common.entity.animal.slabfish.SlabfishOverlay;
 import com.teamabnormals.environmental.common.slabfish.SlabfishManager;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.EnvironmentalConfig;
+import com.teamabnormals.environmental.core.other.tags.EnvironmentalBiomeTags;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalBlockTags;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalEntityTypeTags;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalItemTags;
@@ -48,6 +48,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.entity.projectile.ThrownPotion;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
@@ -57,6 +58,7 @@ import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -75,13 +77,11 @@ import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingTickEvent;
-import net.minecraftforge.event.entity.living.LivingPackSizeEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
-import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.Event.Result;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -89,6 +89,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @EventBusSubscriber(modid = Environmental.MOD_ID)
@@ -96,8 +97,7 @@ public class EnvironmentalEvents {
 
 	@SubscribeEvent
 	public static void onPlayerBreak(PlayerEvent.BreakSpeed event) {
-		if (event.getState().getBlock() instanceof HangingLeavesBlock && event.getEntity().getMainHandItem().is(Tags.Items.SHEARS))
-			event.setNewSpeed(15.0F);
+		if (event.getState().getBlock() instanceof HangingLeavesBlock && event.getEntity().getMainHandItem().is(Tags.Items.SHEARS)) event.setNewSpeed(15.0F);
 	}
 
 	@SubscribeEvent
@@ -110,18 +110,23 @@ public class EnvironmentalEvents {
 			int verticalRange = EnvironmentalConfig.COMMON.koiVerticalSerenityRange.get();
 			for (Koi koi : level.getEntitiesOfClass(Koi.class, entity.getBoundingBox().inflate(horizontalRange, verticalRange, horizontalRange))) {
 				if (MathUtil.distanceBetweenPoints2d(entity.getX(), entity.getZ(), koi.getX(), koi.getZ()) <= horizontalRange) {
-					event.setResult(Event.Result.DENY);
+					event.setResult(Result.DENY);
 					break;
 				}
 			}
 		}
-	}
 
-	@SubscribeEvent
-	public static void onMaxPackSize(LivingPackSizeEvent event) {
-		if (event.getEntity() instanceof Zebra) {
-			System.out.println(event.getMaxPackSize());
-			event.setMaxPackSize(32);
+		if (event.getResult() != Result.DENY && level instanceof ServerLevelAccessor serverLevel) {
+			RandomSource random = level.getRandom();
+			if (entity.getType() == EntityType.PIG && serverLevel.getBiome(entity.blockPosition()).is(EnvironmentalBiomeTags.HAS_MUDDY_PIG)) {
+				IDataManager data = (IDataManager) entity;
+				data.setValue(EnvironmentalDataProcessors.IS_MUDDY, true);
+				data.setValue(EnvironmentalDataProcessors.MUD_DRYING_TIME, 36000);
+				if (random.nextFloat() < 0.75F) {
+					Optional<Item> item = ForgeRegistries.ITEMS.tags().getTag(EnvironmentalItemTags.SPAWNS_ON_MUDDY_PIG).getRandomElement(random);
+					item.ifPresent(value -> data.setValue(EnvironmentalDataProcessors.MUDDY_PIG_DECORATION, ForgeRegistries.ITEMS.getKey(value)));
+				}
+			}
 		}
 	}
 
@@ -148,10 +153,8 @@ public class EnvironmentalEvents {
 				EntityHitResult entity = (EntityHitResult) event.getRayTraceResult();
 				if (entity.getEntity() instanceof Slabfish slabfish) {
 					ItemStack stack = projectile.getItem();
-					if (stack.is(Items.SNOWBALL))
-						slabfish.setSlabfishOverlay(SlabfishOverlay.SNOWY);
-					else if (stack.is(Tags.Items.EGGS))
-						slabfish.setSlabfishOverlay(SlabfishOverlay.EGG);
+					if (stack.is(Items.SNOWBALL)) slabfish.setSlabfishOverlay(SlabfishOverlay.SNOWY);
+					else if (stack.is(Tags.Items.EGGS)) slabfish.setSlabfishOverlay(SlabfishOverlay.EGG);
 				}
 			}
 		}
@@ -238,8 +241,7 @@ public class EnvironmentalEvents {
 					if (stack.is(EnvironmentalItemTags.MUDDY_PIG_DECORATIONS)) {
 						data.setValue(EnvironmentalDataProcessors.MUDDY_PIG_DECORATION, ForgeRegistries.ITEMS.getKey(stack.getItem()));
 						level.playSound(null, target, dried ? SoundEvents.PACKED_MUD_PLACE : SoundEvents.MUD_PLACE, SoundSource.PLAYERS, 1.0F, 1.0F);
-						if (!event.getEntity().isCreative())
-							stack.shrink(1);
+						if (!event.getEntity().isCreative()) stack.shrink(1);
 						event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide()));
 						event.setCanceled(true);
 					}
@@ -259,8 +261,7 @@ public class EnvironmentalEvents {
 
 				if (stack.is(Items.WHEAT) && !dried) {
 					level.playSound(null, target, SoundEvents.PACKED_MUD_PLACE, SoundSource.PLAYERS, 1.0F, 1.0F);
-					if (!event.getEntity().isCreative())
-						stack.shrink(1);
+					if (!event.getEntity().isCreative()) stack.shrink(1);
 					data.setValue(EnvironmentalDataProcessors.MUD_DRYING_TIME, 0);
 					event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide()));
 					event.setCanceled(true);
@@ -352,8 +353,7 @@ public class EnvironmentalEvents {
 
 					if (!world.isClientSide()) {
 						Slabfish ghost = EnvironmentalEntityTypes.SLABFISH.get().create(world);
-						if (ghost == null)
-							return;
+						if (ghost == null) return;
 
 						ghost.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 140, 0, false, false));
 						ghost.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 140, 0, false, false));
@@ -409,8 +409,7 @@ public class EnvironmentalEvents {
 
 		if (entity instanceof Pig pig) {
 			Set<WrappedGoal> goals = pig.goalSelector.availableGoals;
-			if (goals.stream().noneMatch((goal) -> goal.getGoal() instanceof HuntTruffleGoal))
-				pig.goalSelector.addGoal(2, new HuntTruffleGoal(pig));
+			if (goals.stream().noneMatch((goal) -> goal.getGoal() instanceof HuntTruffleGoal)) pig.goalSelector.addGoal(2, new HuntTruffleGoal(pig));
 			if ((pig.getNavigation() instanceof GroundPathNavigation || pig.getNavigation() instanceof FlyingPathNavigation) && goals.stream().noneMatch((goal) -> goal.getGoal() instanceof TemptGoldenCarrotGoal))
 				pig.goalSelector.addGoal(4, new TemptGoldenCarrotGoal(pig, 1.2D, Ingredient.of(Items.GOLDEN_CARROT), false));
 		}
@@ -439,8 +438,8 @@ public class EnvironmentalEvents {
 							Vec3 attackAngleVector = living.position().subtract(pig.position()).normalize();
 							attackAngleVector = new Vec3(attackAngleVector.x, 0.0D, attackAngleVector.z);
 							if (attackAngleVector.dot(pig.getViewVector(1.0F)) > 0.5D) {
-								float x = Mth.sin(pig.getYRot() * ((float)Math.PI / 180F));
-								float z = -Mth.cos(pig.getYRot() * ((float)Math.PI / 180F));
+								float x = Mth.sin(pig.getYRot() * ((float) Math.PI / 180F));
+								float z = -Mth.cos(pig.getYRot() * ((float) Math.PI / 180F));
 								living.knockback(0.5F, x, z);
 								pig.knockback(0.25F, -x, -z);
 							}
@@ -454,8 +453,7 @@ public class EnvironmentalEvents {
 
 			if (huntingtime == 0 || (data.getValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET) && level.getBlockState(trufflepos).getBlock() != EnvironmentalBlocks.BURIED_TRUFFLE.get())) {
 				data.setValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET, false);
-				if (huntingtime > 0)
-					data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, Math.max(-400, -huntingtime));
+				if (huntingtime > 0) data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, Math.max(-400, -huntingtime));
 			} else {
 				if (huntingtime > 0) {
 					data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, huntingtime - 1);
