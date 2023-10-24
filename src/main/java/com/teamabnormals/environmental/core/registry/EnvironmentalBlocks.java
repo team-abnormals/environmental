@@ -53,7 +53,7 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> SMOOTH_MUD_SLAB = HELPER.createBlock("smooth_mud_slab", () -> new SlabBlock(EnvironmentalProperties.MUD_BRICKS), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> SMOOTH_MUD_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "smooth_mud_vertical_slab", () -> new DirectionalVerticalSlabBlock(EnvironmentalProperties.MUD_BRICKS), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> CHISELED_MUD_BRICKS = HELPER.createBlock("chiseled_mud_bricks", () -> new Block(EnvironmentalProperties.MUD_BRICKS), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> SLABFISH_EFFIGY = HELPER.createBlock("slabfish_effigy", () -> new SlabfishEffigyBlock(PropertyUtil.flowerPot()), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> SLABFISH_EFFIGY = HELPER.createBlock("slabfish_effigy", () -> new SlabfishEffigyBlock(PropertyUtil.flowerPot().sound(SoundType.MUD_BRICKS)), CreativeModeTab.TAB_DECORATIONS);
 
 	// Crops //
 
