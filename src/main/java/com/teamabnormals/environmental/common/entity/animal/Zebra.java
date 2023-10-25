@@ -4,23 +4,68 @@ import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class Zebra extends AbstractHorse {
 
 	public Zebra(EntityType<? extends AbstractHorse> entityType, Level level) {
 		super(entityType, level);
+	}
+
+	@Override
+	protected void randomizeAttributes(RandomSource random) {
+		this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(this.generateRandomMaxHealth(random));
+		this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(this.generateRandomSpeed(random));
+		this.getAttribute(Attributes.JUMP_STRENGTH).setBaseValue(this.generateRandomJumpStrength(random));
+	}
+
+	public static AttributeSupplier.Builder createAttributes() {
+		return AbstractHorse.createBaseHorseAttributes().add(Attributes.ATTACK_DAMAGE, 0.5D);
+	}
+
+	@Override
+	public void tick() {
+		super.tick();
+		if (this.hasControllingPassenger()) {
+			List<LivingEntity> nearby = level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.2F), living -> living.isAlive() && !living.is(this) && !living.isSpectator() && !living.isPassenger());
+			if (!nearby.isEmpty()) {
+				for (LivingEntity living : nearby) {
+					Vec3 attackAngleVector = living.position().subtract(this.position()).normalize();
+					attackAngleVector = new Vec3(attackAngleVector.x, 0.0D, attackAngleVector.z);
+					float x = Mth.sin(this.getYRot() * ((float) Math.PI / 180F));
+					float z = -Mth.cos(this.getYRot() * ((float) Math.PI / 180F));
+					if (attackAngleVector.dot(this.getViewVector(1.0F)) > 0.5D) {
+						this.makeMad();
+						this.doHurtTarget(living);
+						living.knockback(0.25F, x, z);
+						this.knockback(0.15F, -x, -z);
+					} else {
+						this.makeMad();
+						this.doHurtTarget(living);
+						living.knockback(1.5F, -x, -z);
+						this.knockback(0.15F, x, z);
+					}
+				}
+			}
+		}
 	}
 
 	@Override
@@ -102,6 +147,7 @@ public class Zebra extends AbstractHorse {
 		return EnvironmentalEntityTypes.ZEBRA.get().create(level);
 	}
 
+	@Override
 	public double getPassengersRidingOffset() {
 		return super.getPassengersRidingOffset() - 0.175D;
 	}

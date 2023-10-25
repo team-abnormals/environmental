@@ -15,8 +15,6 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Fox;
-import net.minecraft.world.entity.animal.Wolf;
-import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -62,6 +60,6 @@ public class EnvironmentalEntityTypes {
 		event.put(KOI.get(), Koi.registerAttributes().build());
 		event.put(FENNEC_FOX.get(), Fox.createAttributes().build());
 		event.put(TAPIR.get(), Tapir.createAttributes().build());
-		event.put(ZEBRA.get(), Horse.createBaseHorseAttributes().build());
+		event.put(ZEBRA.get(), Zebra.createAttributes().build());
 	}
 }

@@ -28,7 +28,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -69,7 +68,6 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
@@ -421,7 +419,7 @@ public class EnvironmentalEvents {
 		Level level = entity.getCommandSenderWorld();
 		RandomSource random = level.getRandom();
 
-		if (entity instanceof Pig pig && entity.isAlive()) {
+		if (entity instanceof Pig && entity.isAlive()) {
 			IDataManager data = ((IDataManager) entity);
 			if (data.getValue(EnvironmentalDataProcessors.IS_MUDDY)) {
 				int mudDryingTime = data.getValue(EnvironmentalDataProcessors.MUD_DRYING_TIME);
@@ -429,22 +427,6 @@ public class EnvironmentalEvents {
 					data.setValue(EnvironmentalDataProcessors.MUD_DRYING_TIME, mudDryingTime + 1);
 				} else if (mudDryingTime > 0) {
 					data.setValue(EnvironmentalDataProcessors.MUD_DRYING_TIME, mudDryingTime - 1);
-				}
-
-				if (pig.hasControllingPassenger()) {
-					List<LivingEntity> blocks = level.getEntitiesOfClass(LivingEntity.class, pig.getBoundingBox().inflate(0.2F), living -> living.isAlive() && !living.is(pig) && !pig.getPassengers().contains(living) && !living.isSpectator() && !living.isPassenger());
-					if (!blocks.isEmpty()) {
-						for (LivingEntity living : blocks) {
-							Vec3 attackAngleVector = living.position().subtract(pig.position()).normalize();
-							attackAngleVector = new Vec3(attackAngleVector.x, 0.0D, attackAngleVector.z);
-							if (attackAngleVector.dot(pig.getViewVector(1.0F)) > 0.5D) {
-								float x = Mth.sin(pig.getYRot() * ((float) Math.PI / 180F));
-								float z = -Mth.cos(pig.getYRot() * ((float) Math.PI / 180F));
-								living.knockback(0.5F, x, z);
-								pig.knockback(0.25F, -x, -z);
-							}
-						}
-					}
 				}
 			}
 
