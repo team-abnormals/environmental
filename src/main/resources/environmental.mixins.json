@@ -18,6 +18,7 @@
     "PigMixin",
     "PlayerMixin",
     "RabbitMixin",
+	"SurfaceSystemMixin",
     "WitherSkeletonEntityMixin"
   ],
   "client": [
