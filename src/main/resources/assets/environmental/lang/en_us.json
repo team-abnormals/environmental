@@ -375,9 +375,9 @@
 	"effect.environmental.serenity": "Serenity",
 
 	"attribute.environmental.name.generic.stealth": "Stealth",
+	
 	"advancements.environmental.husbandry.place_koi_in_village.title": "What a Koincidence!",
-	"advancements.environmental.husbandry.place_koi_in_village.description": "Place a Bucket of Koi in a Village to protect the Villagers from monster spawns",
-
+	"advancements.environmental.husbandry.place_koi_in_village.description": "Place a Bucket of Koi in a village to protect Villagers from monster spawns",
 
 	"advancements.environmental.husbandry.saddle_pig.title": "A Saddle on a Sow",
 	"advancements.environmental.husbandry.saddle_pig.description": "Equip a Pig with a Saddle",
@@ -398,10 +398,10 @@
 	"advancements.environmental.husbandry.shear_cattail.description": "Shear the fluff off a Cattail so that you can replant more",
 
 	"advancements.environmental.husbandry.feed_deer_flower.title": "Full Bloom",
-	"advancements.environmental.husbandry.feed_deer_flower.description": "Reproduce a flower by feeding a Deer an Apple and any flower",
+	"advancements.environmental.husbandry.feed_deer_flower.description": "Reproduce a flower by feeding a Deer an Apple and then a flower",
 
 	"advancements.environmental.husbandry.truffle_shuffle.title": "Truffle Shuffle",
-	"advancements.environmental.husbandry.truffle_shuffle.description": "Feed a Pig a Golden Carrot to make it locate a Buried Truffle",
+	"advancements.environmental.husbandry.truffle_shuffle.description": "Have a Pig sniff out a Buried Truffle by feeding it a Golden Carrot",
 
 	"advancements.environmental.husbandry.find_truffle.title": "Toil and Truffle",
 	"advancements.environmental.husbandry.find_truffle.description": "Excavate a Buried Truffle",
