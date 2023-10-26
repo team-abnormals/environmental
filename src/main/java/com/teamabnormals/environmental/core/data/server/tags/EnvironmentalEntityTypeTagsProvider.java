@@ -2,6 +2,8 @@ package com.teamabnormals.environmental.core.data.server.tags;
 
 import com.teamabnormals.blueprint.core.other.tags.BlueprintEntityTypeTags;
 import com.teamabnormals.environmental.core.Environmental;
+import com.teamabnormals.environmental.core.other.tags.EnvironmentalEntityTypeTags;
+import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
 import net.minecraft.tags.EntityTypeTags;
@@ -21,6 +23,7 @@ public class EnvironmentalEntityTypeTagsProvider extends EntityTypeTagsProvider 
 	public void addTags() {
 		this.tag(EntityTypeTags.IMPACT_PROJECTILES).add(MUD_BALL.get(), DUCK_EGG.get());
 
+		this.tag(EnvironmentalEntityTypeTags.DEER).add(EnvironmentalEntityTypes.DEER.get(), REINDEER.get());
 		this.tag(SCARES_DEER).add(EntityType.PLAYER, EntityType.VILLAGER, EntityType.WANDERING_TRADER).addTag(SCARES_TRUSTING_DEER);
 		this.tag(SCARES_TRUSTING_DEER).add(EntityType.WOLF).addTag(EntityTypeTags.RAIDERS);
 		this.tag(UNAFFECTED_BY_SERENITY);

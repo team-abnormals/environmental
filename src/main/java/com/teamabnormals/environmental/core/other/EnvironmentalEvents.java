@@ -25,6 +25,7 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -75,6 +76,7 @@ import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingTickEvent;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -317,6 +319,16 @@ public class EnvironmentalEvents {
 					event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide()));
 					event.setCanceled(true);
 				}
+			}
+		}
+	}
+
+
+	@SubscribeEvent
+	public static void onLivingFall(LivingFallEvent event) {
+		if (event.getEntity() instanceof Pig pig && pig.hasControllingPassenger()) {
+			if (event.getDistance() > 3.75F && pig.getControllingPassenger() instanceof ServerPlayer player) {
+				EnvironmentalCriteriaTriggers.WHEN_PIGS_FLY.trigger(player);
 			}
 		}
 	}

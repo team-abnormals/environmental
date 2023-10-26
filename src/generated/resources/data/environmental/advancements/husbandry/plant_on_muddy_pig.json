@@ -1,0 +1,42 @@
+{
+  "parent": "environmental:husbandry/throw_mud_at_pig",
+  "criteria": {
+    "plant_on_muddy_pig": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:pig"
+            }
+          }
+        ],
+        "item": {
+          "tag": "environmental:muddy_pig_decorations"
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.environmental.husbandry.plant_on_muddy_pig.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:red_tulip"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.environmental.husbandry.plant_on_muddy_pig.title"
+    }
+  },
+  "requirements": [
+    [
+      "plant_on_muddy_pig"
+    ]
+  ]
+}

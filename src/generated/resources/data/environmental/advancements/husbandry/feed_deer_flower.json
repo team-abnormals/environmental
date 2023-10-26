@@ -1,0 +1,42 @@
+{
+  "parent": "minecraft:husbandry/root",
+  "criteria": {
+    "feed_deer_flower": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "#environmental:deer"
+            }
+          }
+        ],
+        "item": {
+          "tag": "environmental:deer_plantables"
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.environmental.husbandry.feed_deer_flower.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "environmental:red_lotus_flower"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.environmental.husbandry.feed_deer_flower.title"
+    }
+  },
+  "requirements": [
+    [
+      "feed_deer_flower"
+    ]
+  ]
+}

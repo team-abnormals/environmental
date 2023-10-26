@@ -375,12 +375,42 @@
 	"effect.environmental.serenity": "Serenity",
 
 	"attribute.environmental.name.generic.stealth": "Stealth",
+	"advancements.environmental.husbandry.place_koi_in_village.title": "What a Koincidence!",
+	"advancements.environmental.husbandry.place_koi_in_village.description": "Place a Bucket of Koi in a Village to protect the Villagers from monster spawns",
+
+
+	"advancements.environmental.husbandry.saddle_pig.title": "A Saddle on a Sow",
+	"advancements.environmental.husbandry.saddle_pig.description": "Equip a Pig with a Saddle",
+
+	"advancements.environmental.husbandry.when_pigs_fly.title": "When Pigs Fly",
+	"advancements.environmental.husbandry.when_pigs_fly.description": "Use a Saddle to ride a Pig, and then have the Pig get hurt from fall damage while riding it",
+
+	"advancements.environmental.husbandry.throw_mud_at_pig.title": "Muddy Up",
+	"advancements.environmental.husbandry.throw_mud_at_pig.description": "Throw a Mud Ball at a Pig to make it muddy",
+
+	"advancements.environmental.husbandry.plant_on_muddy_pig.title": "Earth Day",
+	"advancements.environmental.husbandry.plant_on_muddy_pig.description": "Place a decoration on a muddy Pig",
+
+	"advancements.environmental.husbandry.shear_yak_with_pants.title": "Yakety Sax",
+	"advancements.environmental.husbandry.shear_yak_with_pants.description": "Shear a Yak while wearing Yak Pants to prevent its anger",
+
+	"advancements.environmental.husbandry.shear_cattail.title": "Fluff Content",
+	"advancements.environmental.husbandry.shear_cattail.description": "Shear the fluff off a Cattail so that you can replant more",
+
+	"advancements.environmental.husbandry.feed_deer_flower.title": "Full Bloom",
+	"advancements.environmental.husbandry.feed_deer_flower.description": "Reproduce a flower by feeding a Deer an Apple and any flower",
+
+	"advancements.environmental.husbandry.truffle_shuffle.title": "Truffle Shuffle",
+	"advancements.environmental.husbandry.truffle_shuffle.description": "Feed a Pig a Golden Carrot to make it locate a Buried Truffle",
+
+	"advancements.environmental.husbandry.find_truffle.title": "Toil and Truffle",
+	"advancements.environmental.husbandry.find_truffle.description": "Excavate a Buried Truffle",
 
 	"advancements.environmental.husbandry.bred_all_slabfish.title": "Funky Genetics",
 	"advancements.environmental.husbandry.bred_all_slabfish.description": "Breed all Slabfish variants!",
 	
 	"advancements.environmental.husbandry.backpack_slabfish.title": "First Day of School",
-	"advancements.environmental.husbandry.backpack_slabfish.description": "Give a Slabfish a backpack",
+	"advancements.environmental.husbandry.backpack_slabfish.description": "Give a tamed Slabfish a backpack",
 
 	"advancements.environmental.adventure.obtain_explorer_gear.title": "Swiper, No Swiping!",
 	"advancements.environmental.adventure.obtain_explorer_gear.description": "Obtain one piece of Explorer's Gear",

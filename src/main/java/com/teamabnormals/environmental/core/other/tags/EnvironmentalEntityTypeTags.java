@@ -7,6 +7,7 @@ import net.minecraft.world.entity.EntityType;
 
 public class EnvironmentalEntityTypeTags {
 	public static final TagKey<EntityType<?>> UNAFFECTED_BY_SERENITY = entityTypeTag("unaffected_by_serenity");
+	public static final TagKey<EntityType<?>> DEER = entityTypeTag("deer");
 	public static final TagKey<EntityType<?>> SCARES_DEER = entityTypeTag("scares_deer");
 	public static final TagKey<EntityType<?>> SCARES_TRUSTING_DEER = entityTypeTag("scares_trusting_deer");
 

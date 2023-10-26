@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:adventure/sleep_in_bed",
+  "parent": "minecraft:adventure/root",
   "criteria": {
     "architect_belt": {
       "conditions": {
