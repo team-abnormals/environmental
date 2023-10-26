@@ -26,7 +26,7 @@ public class HibiscusBlockItem extends StandingAndWallBlockItem {
 		BlockPos blockpos = context.getClickedPos();
 
 		for (Direction direction : context.getNearestLookingDirections()) {
-			boolean flag = direction == Direction.DOWN && !(level.getBlockState(blockpos.below()).getBlock() instanceof LeavesBlock);
+			boolean flag = direction == Direction.DOWN && (context.getPlayer() == null || !context.getPlayer().isSecondaryUseActive());
 			BlockState blockstate2 = flag ? this.getBlock().getStateForPlacement(context) : blockstate;
 			if (blockstate2 != null && blockstate2.canSurvive(level, blockpos)) {
 				blockstate1 = blockstate2;

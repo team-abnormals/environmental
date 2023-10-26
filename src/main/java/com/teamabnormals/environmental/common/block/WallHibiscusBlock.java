@@ -55,7 +55,8 @@ public class WallHibiscusBlock extends AbstractHibiscusBlock {
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
 		BlockPos blockpos = pos.relative(state.getValue(FACING));
-		return this.mayPlaceOn(level.getBlockState(blockpos), level, blockpos);
+		BlockState otherState = level.getBlockState(blockpos);
+		return this.mayPlaceOn(otherState, level, blockpos) || otherState.isFaceSturdy(level, blockpos, state.getValue(FACING).getOpposite());
 	}
 
 	@Nullable
