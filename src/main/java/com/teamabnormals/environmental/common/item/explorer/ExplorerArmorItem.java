@@ -40,7 +40,7 @@ public abstract class ExplorerArmorItem extends DyeableArmorItem implements Expl
 		if (stack.getTag() != null && this.getIncreaseForUses(this.getUses(stack.getTag())) == 5) {
 			if (player instanceof ServerPlayer serverplayerentity) {
 				if (!world.isClientSide()) {
-					EnvironmentalCriteriaTriggers.UPGRADE_GEAR.trigger(serverplayerentity, this);
+					EnvironmentalCriteriaTriggers.UPGRADE_GEAR.trigger(serverplayerentity, stack);
 				}
 			}
 		}

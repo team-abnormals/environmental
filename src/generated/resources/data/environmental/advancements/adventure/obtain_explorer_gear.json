@@ -1,47 +1,7 @@
 {
   "parent": "minecraft:adventure/sleep_in_bed",
-  "display": {
-    "icon": {
-      "item": "minecraft:rabbit_hide"
-    },
-    "title": {
-      "translate": "advancements.environmental.adventure.obtain_explorer_gear.title"
-    },
-    "description": {
-      "translate": "advancements.environmental.adventure.obtain_explorer_gear.description"
-    },
-    "frame": "task",
-    "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": false
-  },
   "criteria": {
-    "thief_hood": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "environmental:thief_hood"
-            ]
-          }
-        ]
-      }
-    },
-    "healer_pouch": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "environmental:healer_pouch"
-            ]
-          }
-        ]
-      }
-    },
     "architect_belt": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -50,10 +10,34 @@
             ]
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "healer_pouch": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "environmental:healer_pouch"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "thief_hood": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "environmental:thief_hood"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
     },
     "wanderer_boots": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -62,7 +46,23 @@
             ]
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.environmental.adventure.obtain_explorer_gear.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:rabbit_hide"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.environmental.adventure.obtain_explorer_gear.title"
     }
   },
   "requirements": [

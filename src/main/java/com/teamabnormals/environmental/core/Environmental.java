@@ -8,6 +8,7 @@ import com.teamabnormals.environmental.common.network.message.*;
 import com.teamabnormals.environmental.common.slabfish.SlabfishLoader;
 import com.teamabnormals.environmental.core.data.client.EnvironmentalBlockStateProvider;
 import com.teamabnormals.environmental.core.data.client.EnvironmentalItemModelProvider;
+import com.teamabnormals.environmental.core.data.server.EnvironmentalAdvancementProvider;
 import com.teamabnormals.environmental.core.data.server.EnvironmentalLootTableProvider;
 import com.teamabnormals.environmental.core.data.server.EnvironmentalRecipeProvider;
 import com.teamabnormals.environmental.core.data.server.modifiers.*;
@@ -124,6 +125,7 @@ public class Environmental {
 		generator.addProvider(includeServer, new EnvironmentalBiomeTagsProvider(generator, helper));
 		generator.addProvider(includeServer, new EnvironmentalPaintingVariantTagsProvider(generator, helper));
 		generator.addProvider(includeServer, new EnvironmentalRecipeProvider(generator));
+		generator.addProvider(includeServer, new EnvironmentalAdvancementProvider(generator, helper));
 		generator.addProvider(includeServer, new EnvironmentalAdvancementModifierProvider(generator));
 		generator.addProvider(includeServer, new EnvironmentalChunkGeneratorModifierProvider(generator));
 		generator.addProvider(includeServer, new EnvironmentalModdedBiomeSliceProvider(generator));
