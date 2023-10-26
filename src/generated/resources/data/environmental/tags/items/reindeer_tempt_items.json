@@ -1,7 +1,8 @@
 {
   "values": [
-    "minecraft:melon_slice",
-    "minecraft:glistering_melon_slice",
+    "minecraft:apple",
+    "minecraft:golden_apple",
+    "minecraft:enchanted_golden_apple",
     "#environmental:reindeer_food",
     "#environmental:deer_plantables"
   ]

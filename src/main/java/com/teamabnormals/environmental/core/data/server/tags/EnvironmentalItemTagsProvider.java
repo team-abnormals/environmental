@@ -33,11 +33,11 @@ public class EnvironmentalItemTagsProvider extends ItemTagsProvider {
 		this.copy(EnvironmentalBlockTags.WISTERIA_LOGS, EnvironmentalItemTags.WISTERIA_LOGS);
 		this.copy(EnvironmentalBlockTags.CHERRY_LOGS, EnvironmentalItemTags.CHERRY_LOGS);
 		this.tag(EnvironmentalItemTags.DUCK_FOOD).add(Items.SEAGRASS, EnvironmentalItems.DUCKWEED.get()).addOptionalTag(new ResourceLocation("forge", "crops/rice"));
-		this.tag(EnvironmentalItemTags.DEER_FOOD).add(Items.APPLE, Items.SWEET_BERRIES).addTag(EnvironmentalItemTags.FRUITS_CHERRY).addOptionalTag(new ResourceLocation("forge", "fruits/tomato")).addOptionalTag(new ResourceLocation("forge", "vegetables/tomato")).addOptionalTag(new ResourceLocation("forge", "fruits/strawberry"));
+		this.tag(EnvironmentalItemTags.DEER_FOOD).add(Items.SWEET_BERRIES).addTag(EnvironmentalItemTags.FRUITS_CHERRY).addOptionalTag(new ResourceLocation("forge", "fruits/strawberry"));
 		this.tag(EnvironmentalItemTags.DEER_PLANTABLES).addTag(ItemTags.SMALL_FLOWERS).addTag(ItemTags.TALL_FLOWERS);
-		this.tag(EnvironmentalItemTags.DEER_TEMPT_ITEMS).add(Items.MELON_SLICE, Items.GLISTERING_MELON_SLICE).addTag(EnvironmentalItemTags.DEER_FOOD).addTag(EnvironmentalItemTags.DEER_PLANTABLES);
+		this.tag(EnvironmentalItemTags.DEER_TEMPT_ITEMS).add(Items.APPLE, Items.GOLDEN_APPLE, Items.ENCHANTED_GOLDEN_APPLE).addTag(EnvironmentalItemTags.DEER_FOOD).addTag(EnvironmentalItemTags.DEER_PLANTABLES);
 		this.tag(EnvironmentalItemTags.REINDEER_FOOD).add(EnvironmentalBlocks.CUP_LICHEN.get().asItem(), Items.CARROT);
-		this.tag(EnvironmentalItemTags.REINDEER_TEMPT_ITEMS).add(Items.MELON_SLICE, Items.GLISTERING_MELON_SLICE).addTag(EnvironmentalItemTags.REINDEER_FOOD).addTag(EnvironmentalItemTags.DEER_PLANTABLES);
+		this.tag(EnvironmentalItemTags.REINDEER_TEMPT_ITEMS).add(Items.APPLE, Items.GOLDEN_APPLE, Items.ENCHANTED_GOLDEN_APPLE).addTag(EnvironmentalItemTags.REINDEER_FOOD).addTag(EnvironmentalItemTags.DEER_PLANTABLES);
 		this.tag(EnvironmentalItemTags.SLABFISH_FOOD).addTag(ItemTags.FISHES);
 		this.tag(EnvironmentalItemTags.SLABFISH_TAME_ITEMS).add(Items.TROPICAL_FISH);
 		this.tag(EnvironmentalItemTags.SLABFISH_SNACKS).add(Items.CHORUS_FRUIT).addOptional(new ResourceLocation("atmospheric", "passionfruit")).addOptional(new ResourceLocation("atmospheric", "shimmering_passionfruit")).addOptional(new ResourceLocation("endergetic", "bolloom_fruit")).addOptional(new ResourceLocation("caverns_and_chasms", "bejeweled_apple"));

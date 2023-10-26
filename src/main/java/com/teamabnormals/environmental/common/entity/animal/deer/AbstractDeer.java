@@ -189,14 +189,20 @@ public abstract class AbstractDeer extends Animal {
 		boolean flag = player.isCreative() || this.temptGoal == null || this.temptGoal.isRunning();
 
 		if (!this.isBaby() && (this.isTrusting() || flag)) {
-			if (stack.is(Items.MELON_SLICE)) {
-				this.setFlowerAmount(this.getFlowerAmount() + 6);
+			if (stack.is(Items.APPLE)) {
+				this.setFlowerAmount(this.getFlowerAmount() + 8);
 				this.floweringTime += 2400;
 				this.particleCloud(ParticleTypes.HAPPY_VILLAGER);
 				this.usePlayerItem(player, hand, stack);
 				return InteractionResult.SUCCESS;
-			} else if (stack.is(Items.GLISTERING_MELON_SLICE)) {
-				this.setFlowerAmount(this.getFlowerAmount() + 20);
+			} else if (stack.is(Items.GOLDEN_APPLE)) {
+				this.setFlowerAmount(this.getFlowerAmount() + 24);
+				this.floweringTime += 2400;
+				this.particleCloud(ParticleTypes.HAPPY_VILLAGER);
+				this.usePlayerItem(player, hand, stack);
+				return InteractionResult.SUCCESS;
+			} else if (stack.is(Items.ENCHANTED_GOLDEN_APPLE)) {
+				this.setFlowerAmount(this.getFlowerAmount() + 64);
 				this.floweringTime += 2400;
 				this.particleCloud(ParticleTypes.HAPPY_VILLAGER);
 				this.usePlayerItem(player, hand, stack);
