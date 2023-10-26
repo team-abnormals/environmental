@@ -66,7 +66,6 @@ public class EnvironmentalGeneration {
 		BiomeDefaultFeatures.addDefaultOres(generation);
 		BiomeDefaultFeatures.addDefaultSoftDisks(generation);
 		BiomeDefaultFeatures.addDefaultFlowers(generation);
-		generation.addFeature(Decoration.LOCAL_MODIFICATIONS, PINE_BARRENS_STONE_RAISER.getHolder().get());
 		generation.addFeature(Decoration.VEGETAL_DECORATION, COARSE_DIRT_PINE_BARRENS.getHolder().get());
 		generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_PINE_BARRENS.getHolder().get());
 		generation.addFeature(Decoration.VEGETAL_DECORATION, VegetationPlacements.BROWN_MUSHROOM_TAIGA);
