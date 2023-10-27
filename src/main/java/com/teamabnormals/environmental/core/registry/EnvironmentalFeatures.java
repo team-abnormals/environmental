@@ -93,11 +93,17 @@ public class EnvironmentalFeatures {
 		public static final TreeConfiguration WILLOW = createStraightBlobTree(EnvironmentalBlocks.WILLOW_LOG.get(), EnvironmentalBlocks.WILLOW_LEAVES.get(), 5, 3, 0, 3).decorators(ImmutableList.of(new LeaveVineDecorator(0.25F), HangingWillowDecorator.INSTANCE)).build();
 		public static final TreeConfiguration WEEPING_WILLOW = createCustomTree(EnvironmentalBlocks.WILLOW_LOG.get(), new StraightTrunkPlacer(11, 1, 0), EnvironmentalBlocks.WILLOW_LEAVES.get()).decorators(ImmutableList.of(new LeaveVineDecorator(0.35F), HangingWillowDecorator.INSTANCE)).build();
 
-		public static final TreeConfiguration BIRCH_BEES_0002 = createStraightBlobTree(Blocks.BIRCH_LOG, Blocks.BIRCH_LEAVES, 5, 2, 6, 2).ignoreVines().decorators(ImmutableList.of(BEEHIVE_0002)).build();
-
 		public static final TreeConfiguration CHERRY = createCherry().build();
 		public static final TreeConfiguration CHERRY_BEES_0002 = createCherry().decorators(List.of(BEEHIVE_0002)).build();
 		public static final TreeConfiguration CHERRY_BEES_005 = createCherry().decorators(List.of(BEEHIVE_005)).build();
+
+		public static final TreeConfiguration CHEERFUL_CHERRY = createCheerfulCherry().build();
+		public static final TreeConfiguration CHEERFUL_CHERRY_BEES_0002 = createCheerfulCherry().decorators(List.of(BEEHIVE_0002)).build();
+		public static final TreeConfiguration CHEERFUL_CHERRY_BEES_005 = createCheerfulCherry().decorators(List.of(BEEHIVE_005)).build();
+		
+		public static final TreeConfiguration MOODY_CHERRY = createMoodyCherry().build();
+		public static final TreeConfiguration MOODY_CHERRY_BEES_0002 = createMoodyCherry().decorators(List.of(BEEHIVE_0002)).build();
+		public static final TreeConfiguration MOODY_CHERRY_BEES_005 = createMoodyCherry().decorators(List.of(BEEHIVE_005)).build();
 
 		public static final TreeConfiguration WHITE_WISTERIA = createWhiteWisteria().build();
 		public static final TreeConfiguration WHITE_WISTERIA_BEES_002 = createWhiteWisteria().decorators(List.of(HANGING_WHITE_WISTERIA, BEEHIVE_002)).build();
@@ -120,6 +126,14 @@ public class EnvironmentalFeatures {
 
 		private static TreeConfigurationBuilder createCherry() {
 			return createCustomTree(EnvironmentalBlocks.CHERRY_LOG.get(), new StraightTrunkPlacer(4, 2, 0), EnvironmentalBlocks.CHERRY_LEAVES.get());
+		}
+
+		private static TreeConfigurationBuilder createCheerfulCherry() {
+			return createCustomTree(EnvironmentalBlocks.CHERRY_LOG.get(), new StraightTrunkPlacer(4, 1, 0), EnvironmentalBlocks.CHEERFUL_CHERRY_LEAVES.get());
+		}
+
+		private static TreeConfigurationBuilder createMoodyCherry() {
+			return createCustomTree(EnvironmentalBlocks.CHERRY_LOG.get(), new StraightTrunkPlacer(3, 1, 0), EnvironmentalBlocks.MOODY_CHERRY_LEAVES.get());
 		}
 
 		private static TreeConfigurationBuilder createPine() {
@@ -180,6 +194,17 @@ public class EnvironmentalFeatures {
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> CHERRY = register("cherry", () -> new ConfiguredFeature<>(EnvironmentalFeatures.CHERRY_TREE.get(), Configs.CHERRY));
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> CHERRY_BEES_0002 = register("cherry_bees_0002", () -> new ConfiguredFeature<>(EnvironmentalFeatures.CHERRY_TREE.get(), Configs.CHERRY_BEES_0002));
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> CHERRY_BEES_005 = register("cherry_bees_005", () -> new ConfiguredFeature<>(EnvironmentalFeatures.CHERRY_TREE.get(), Configs.CHERRY_BEES_005));
+
+		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> CHEERFUL_CHERRY = register("cheerful_cherry", () -> new ConfiguredFeature<>(EnvironmentalFeatures.CHERRY_TREE.get(), Configs.CHEERFUL_CHERRY));
+		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> CHEERFUL_CHERRY_BEES_0002 = register("cheerful_cherry_bees_0002", () -> new ConfiguredFeature<>(EnvironmentalFeatures.CHERRY_TREE.get(), Configs.CHEERFUL_CHERRY_BEES_0002));
+		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> CHEERFUL_CHERRY_BEES_005 = register("cheerful_cherry_bees_005", () -> new ConfiguredFeature<>(EnvironmentalFeatures.CHERRY_TREE.get(), Configs.CHEERFUL_CHERRY_BEES_005));
+
+		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> MOODY_CHERRY = register("moody_cherry", () -> new ConfiguredFeature<>(EnvironmentalFeatures.CHERRY_TREE.get(), Configs.MOODY_CHERRY));
+		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> MOODY_CHERRY_BEES_0002 = register("moody_cherry_bees_0002", () -> new ConfiguredFeature<>(EnvironmentalFeatures.CHERRY_TREE.get(), Configs.MOODY_CHERRY_BEES_0002));
+		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> MOODY_CHERRY_BEES_005 = register("moody_cherry_bees_005", () -> new ConfiguredFeature<>(EnvironmentalFeatures.CHERRY_TREE.get(), Configs.MOODY_CHERRY_BEES_005));
+
+		public static final RegistryObject<ConfiguredFeature<RandomFeatureConfiguration, ?>> TREES_BLOSSOM_WOODS = register("trees_blossom_woods", () -> new ConfiguredFeature<>(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(EnvironmentalPlacedFeatures.CHEERFUL_CHERRY_BEES_0002.getHolder().get(), 0.3F), new WeightedPlacedFeature(EnvironmentalPlacedFeatures.MOODY_CHERRY_BEES_0002.getHolder().get(), 0.3F)), EnvironmentalPlacedFeatures.CHERRY_BEES_0002.getHolder().get())));
+		public static final RegistryObject<ConfiguredFeature<RandomFeatureConfiguration, ?>> TREES_BLOSSOM_VALLEYS = register("trees_blossom_valleys", () -> new ConfiguredFeature<>(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(EnvironmentalPlacedFeatures.CHEERFUL_CHERRY_BEES_005.getHolder().get(), 0.3F), new WeightedPlacedFeature(EnvironmentalPlacedFeatures.MOODY_CHERRY_BEES_005.getHolder().get(), 0.3F)), EnvironmentalPlacedFeatures.CHERRY_BEES_005.getHolder().get())));
 
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> WHITE_WISTERIA = register("white_wisteria", () -> new ConfiguredFeature<>(EnvironmentalFeatures.WISTERIA_TREE.get(), Configs.WHITE_WISTERIA));
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> WHITE_WISTERIA_BEES_002 = register("white_wisteria_bees_002", () -> new ConfiguredFeature<>(EnvironmentalFeatures.DELPHINIUM_WISTERIA_TREE.get(), Configs.WHITE_WISTERIA_BEES_002));
@@ -288,8 +313,16 @@ public class EnvironmentalFeatures {
 		public static final RegistryObject<PlacedFeature> TREES_SWAMP = register("trees_swamp", EnvironmentalConfiguredFeatures.TREES_SWAMP, PlacementUtils.countExtra(2, 0.1F, 1), InSquarePlacement.spread(), SurfaceWaterDepthFilter.forMaxDepth(2), PlacementUtils.HEIGHTMAP_OCEAN_FLOOR, BiomeFilter.biome(), BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.defaultBlockState(), BlockPos.ZERO)));
 		public static final RegistryObject<PlacedFeature> HUGE_BROWN_MUSHROOM_MARSH = register("huge_brown_mushroom_marsh", EnvironmentalConfiguredFeatures.HUGE_BROWN_MUSHROOM, VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.025F, 1)));
 
-		public static final RegistryObject<PlacedFeature> CHERRY_TREES_BLOSSOM_WOODS = register("cherry_tree_blossom_woods", EnvironmentalConfiguredFeatures.CHERRY_BEES_0002, VegetationPlacements.treePlacement(PlacementUtils.countExtra(8, 0.05F, 1), Blocks.BIRCH_SAPLING));
-		public static final RegistryObject<PlacedFeature> CHERRY_TREES_BLOSSOM_VALLEYS = register("cherry_tree_blossom_valleys", EnvironmentalConfiguredFeatures.CHERRY_BEES_005, VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.2F, 1), Blocks.BIRCH_SAPLING));
+		public static final RegistryObject<PlacedFeature> CHERRY_BEES_0002 = register("cherry_bees_0002", EnvironmentalConfiguredFeatures.CHERRY_BEES_0002, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
+		public static final RegistryObject<PlacedFeature> CHEERFUL_CHERRY_BEES_0002 = register("cheerful_cherry_bees_0002", EnvironmentalConfiguredFeatures.CHEERFUL_CHERRY_BEES_0002, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
+		public static final RegistryObject<PlacedFeature> MOODY_CHERRY_BEES_0002 = register("moody_cherry_bees_0002", EnvironmentalConfiguredFeatures.MOODY_CHERRY_BEES_0002, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
+
+		public static final RegistryObject<PlacedFeature> CHERRY_BEES_005 = register("cherry_bees_005", EnvironmentalConfiguredFeatures.CHERRY_BEES_005, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
+		public static final RegistryObject<PlacedFeature> CHEERFUL_CHERRY_BEES_005 = register("cheerful_cherry_bees_005", EnvironmentalConfiguredFeatures.CHEERFUL_CHERRY_BEES_005, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
+		public static final RegistryObject<PlacedFeature> MOODY_CHERRY_BEES_005 = register("moody_cherry_bees_005", EnvironmentalConfiguredFeatures.MOODY_CHERRY_BEES_005, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
+
+		public static final RegistryObject<PlacedFeature> CHERRY_TREES_BLOSSOM_WOODS = register("cherry_tree_blossom_woods", EnvironmentalConfiguredFeatures.TREES_BLOSSOM_WOODS, VegetationPlacements.treePlacement(PlacementUtils.countExtra(8, 0.05F, 1), Blocks.BIRCH_SAPLING));
+		public static final RegistryObject<PlacedFeature> CHERRY_TREES_BLOSSOM_VALLEYS = register("cherry_tree_blossom_valleys", EnvironmentalConfiguredFeatures.TREES_BLOSSOM_VALLEYS, VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.2F, 1), Blocks.BIRCH_SAPLING));
 		public static final RegistryObject<PlacedFeature> PINE_TREES_BLOSSOM_WOODS = register("pine_trees_blossom_woods", EnvironmentalConfiguredFeatures.PINE_BEES_0002, VegetationPlacements.treePlacement(PlacementUtils.countExtra(5, 0.1F, 2), Blocks.BIRCH_SAPLING));
 		public static final RegistryObject<PlacedFeature> PINE_TREES_BLOSSOM_VALLEYS = register("pine_trees_blossom_valleys", EnvironmentalConfiguredFeatures.PINE_BEES_0002, VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.1F, 1), Blocks.BIRCH_SAPLING));
 

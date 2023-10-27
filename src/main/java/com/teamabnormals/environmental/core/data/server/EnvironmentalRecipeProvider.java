@@ -257,6 +257,12 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 		conditionalRecipe(consumer, WOODEN_POSTS, ShapedRecipeBuilder.shaped(EnvironmentalBlocks.STRIPPED_CHERRY_POST.get(), 8).define('#', EnvironmentalBlocks.STRIPPED_CHERRY_WOOD.get()).pattern("#").pattern("#").pattern("#").group("wooden_post").unlockedBy(getHasName(EnvironmentalBlocks.STRIPPED_CHERRY_WOOD.get()), has(EnvironmentalBlocks.STRIPPED_CHERRY_WOOD.get())));
 		conditionalRecipe(consumer, WOOD_TO_CHEST_RECIPES, ShapedRecipeBuilder.shaped(EnvironmentalBlocks.CHERRY_CHESTS.getFirst().get(), 4).define('#', EnvironmentalItemTags.CHERRY_LOGS).pattern("###").pattern("# #").pattern("###").group("wooden_chest").unlockedBy("has_lots_of_items", new InventoryChangeTrigger.TriggerInstance(EntityPredicate.Composite.ANY, MinMaxBounds.Ints.atLeast(10), MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, new ItemPredicate[0])), new ResourceLocation(RecipeBuilder.getDefaultRecipeId(EnvironmentalBlocks.CHERRY_CHESTS.getFirst().get()) + "_wood"));
 
+		leafPileRecipes(consumer, EnvironmentalBlocks.CHEERFUL_CHERRY_LEAVES.get(), EnvironmentalBlocks.CHEERFUL_CHERRY_LEAF_PILE.get());
+		leafCarpetAndHedgeRecipe(consumer, EnvironmentalBlocks.CHEERFUL_CHERRY_LEAVES.get(), EnvironmentalBlocks.CHEERFUL_CHERRY_LEAF_CARPET.get(), EnvironmentalBlocks.CHEERFUL_CHERRY_HEDGE.get(), EnvironmentalItemTags.CHERRY_LOGS);
+		
+		leafPileRecipes(consumer, EnvironmentalBlocks.MOODY_CHERRY_LEAVES.get(), EnvironmentalBlocks.MOODY_CHERRY_LEAF_PILE.get());
+		leafCarpetAndHedgeRecipe(consumer, EnvironmentalBlocks.MOODY_CHERRY_LEAVES.get(), EnvironmentalBlocks.MOODY_CHERRY_LEAF_CARPET.get(), EnvironmentalBlocks.MOODY_CHERRY_HEDGE.get(), EnvironmentalItemTags.CHERRY_LOGS);
+
 		ShapedRecipeBuilder.shaped(Blocks.CAKE).define('A', BlueprintItemTags.BUCKETS_MILK).define('B', Items.SUGAR).define('C', Items.WHEAT).define('E', BlueprintItemTags.EGGS).pattern("AAA").pattern("BEB").pattern("CCC").unlockedBy("has_egg", has(Items.EGG)).save(consumer);
 		ShapelessRecipeBuilder.shapeless(Items.PUMPKIN_PIE).requires(BlueprintItemTags.PUMPKINS).requires(Items.SUGAR).requires(BlueprintItemTags.EGGS).unlockedBy("has_carved_pumpkin", has(Blocks.CARVED_PUMPKIN)).unlockedBy("has_pumpkin", has(BlueprintItemTags.PUMPKINS)).save(consumer);
 	}

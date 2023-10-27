@@ -260,11 +260,6 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.dropSelf(CHERRY_BOARDS.get());
 			this.dropSelf(CHERRY_POST.get());
 			this.dropSelf(STRIPPED_CHERRY_POST.get());
-			this.dropSelf(CHERRY_HEDGE.get());
-			this.dropSelf(CHERRY_LEAF_CARPET.get());
-			this.add(CHERRY_LEAF_PILE.get(), EnvironmentalBlockLoot::createLeafPileDrops);
-			this.dropSelf(CHERRY_SAPLING.get());
-			this.dropPottedContents(POTTED_CHERRY_SAPLING.get());
 			this.dropSelf(CHERRY_LADDER.get());
 			this.add(CHERRY_SLAB.get(), BlockLoot::createSlabItemTable);
 			this.add(CHERRY_VERTICAL_SLAB.get(), EnvironmentalBlockLoot::createVerticalSlabItemTable);
@@ -273,7 +268,27 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.add(CHERRY_CHESTS.getFirst().get(), BlockLoot::createNameableBlockEntityTable);
 			this.add(CHERRY_CHESTS.getSecond().get(), BlockLoot::createNameableBlockEntityTable);
 			this.add(CHERRY_BOOKSHELF.get(), (block) -> createSingleItemTableWithSilkTouch(block, Items.BOOK, ConstantValue.exactly(3.0F)));
+			
 			this.add(CHERRY_LEAVES.get(), (block) -> createCherryLeavesDrop(block, CHERRY_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+			this.dropSelf(CHERRY_HEDGE.get());
+			this.dropSelf(CHERRY_LEAF_CARPET.get());
+			this.add(CHERRY_LEAF_PILE.get(), EnvironmentalBlockLoot::createLeafPileDrops);
+			this.dropSelf(CHERRY_SAPLING.get());
+			this.dropPottedContents(POTTED_CHERRY_SAPLING.get());
+
+			this.add(CHEERFUL_CHERRY_LEAVES.get(), (block) -> createCherryLeavesDrop(block, CHEERFUL_CHERRY_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+			this.dropSelf(CHEERFUL_CHERRY_HEDGE.get());
+			this.dropSelf(CHEERFUL_CHERRY_LEAF_CARPET.get());
+			this.add(CHEERFUL_CHERRY_LEAF_PILE.get(), EnvironmentalBlockLoot::createLeafPileDrops);
+			this.dropSelf(CHEERFUL_CHERRY_SAPLING.get());
+			this.dropPottedContents(POTTED_CHEERFUL_CHERRY_SAPLING.get());
+			
+			this.add(MOODY_CHERRY_LEAVES.get(), (block) -> createCherryLeavesDrop(block, MOODY_CHERRY_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+			this.dropSelf(MOODY_CHERRY_HEDGE.get());
+			this.dropSelf(MOODY_CHERRY_LEAF_CARPET.get());
+			this.add(MOODY_CHERRY_LEAF_PILE.get(), EnvironmentalBlockLoot::createLeafPileDrops);
+			this.dropSelf(MOODY_CHERRY_SAPLING.get());
+			this.dropPottedContents(POTTED_MOODY_CHERRY_SAPLING.get());
 
 			this.dropSelf(WISTERIA_PLANKS.get());
 			this.dropSelf(VERTICAL_WISTERIA_PLANKS.get());

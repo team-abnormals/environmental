@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "environmental:block/moody_cherry_sapling"
+  }
+}

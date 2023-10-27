@@ -60,6 +60,14 @@ public class EnvironmentalCompat {
 		DataUtil.registerCompostable(EnvironmentalBlocks.CHERRY_SAPLING.get(), 0.30F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.CHERRY_LEAF_CARPET.get(), 0.30F);
 
+		DataUtil.registerCompostable(EnvironmentalBlocks.CHEERFUL_CHERRY_LEAVES.get(), 0.30F);
+		DataUtil.registerCompostable(EnvironmentalBlocks.CHEERFUL_CHERRY_SAPLING.get(), 0.30F);
+		DataUtil.registerCompostable(EnvironmentalBlocks.CHEERFUL_CHERRY_LEAF_CARPET.get(), 0.30F);
+		
+		DataUtil.registerCompostable(EnvironmentalBlocks.MOODY_CHERRY_LEAVES.get(), 0.30F);
+		DataUtil.registerCompostable(EnvironmentalBlocks.MOODY_CHERRY_SAPLING.get(), 0.30F);
+		DataUtil.registerCompostable(EnvironmentalBlocks.MOODY_CHERRY_LEAF_CARPET.get(), 0.30F);
+
 		DataUtil.registerCompostable(EnvironmentalItems.CHERRIES.get(), 0.30F);
 		DataUtil.registerCompostable(EnvironmentalItems.CHERRY_PIE.get(), 1.0F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.CHERRY_CRATE.get(), 1.0F);
@@ -226,6 +234,16 @@ public class EnvironmentalCompat {
 		DataUtil.registerFlammable(EnvironmentalBlocks.CHERRY_HEDGE.get(), 5, 20);
 		DataUtil.registerFlammable(EnvironmentalBlocks.CHERRY_LEAF_PILE.get(), 30, 60);
 		DataUtil.registerFlammable(EnvironmentalBlocks.CHERRY_BOARDS.get(), 5, 20);
+
+		DataUtil.registerFlammable(EnvironmentalBlocks.CHEERFUL_CHERRY_LEAVES.get(), 30, 60);
+		DataUtil.registerFlammable(EnvironmentalBlocks.CHEERFUL_CHERRY_LEAF_CARPET.get(), 30, 60);
+		DataUtil.registerFlammable(EnvironmentalBlocks.CHEERFUL_CHERRY_HEDGE.get(), 5, 20);
+		DataUtil.registerFlammable(EnvironmentalBlocks.CHEERFUL_CHERRY_LEAF_PILE.get(), 30, 60);
+		
+		DataUtil.registerFlammable(EnvironmentalBlocks.MOODY_CHERRY_LEAVES.get(), 30, 60);
+		DataUtil.registerFlammable(EnvironmentalBlocks.MOODY_CHERRY_LEAF_CARPET.get(), 30, 60);
+		DataUtil.registerFlammable(EnvironmentalBlocks.MOODY_CHERRY_HEDGE.get(), 5, 20);
+		DataUtil.registerFlammable(EnvironmentalBlocks.MOODY_CHERRY_LEAF_PILE.get(), 30, 60);
 
 		DataUtil.registerFlammable(EnvironmentalBlocks.GIANT_TALL_GRASS.get(), 60, 100);
 		DataUtil.registerFlammable(EnvironmentalBlocks.MYCELIUM_SPROUTS.get(), 60, 100);

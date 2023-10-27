@@ -146,6 +146,20 @@ public class EnvironmentalClientCompat {
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.POTTED_CHERRY_SAPLING.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.CHERRY_LEAF_PILE.get(), RenderType.cutout());
 
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.CHEERFUL_CHERRY_LEAVES.get(), RenderType.cutoutMipped());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.CHEERFUL_CHERRY_LEAF_CARPET.get(), RenderType.cutoutMipped());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.CHEERFUL_CHERRY_HEDGE.get(), RenderType.cutoutMipped());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.CHEERFUL_CHERRY_SAPLING.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.POTTED_CHEERFUL_CHERRY_SAPLING.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.CHEERFUL_CHERRY_LEAF_PILE.get(), RenderType.cutout());
+
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.MOODY_CHERRY_LEAVES.get(), RenderType.cutoutMipped());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.MOODY_CHERRY_LEAF_CARPET.get(), RenderType.cutoutMipped());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.MOODY_CHERRY_HEDGE.get(), RenderType.cutoutMipped());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.MOODY_CHERRY_SAPLING.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.POTTED_MOODY_CHERRY_SAPLING.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.MOODY_CHERRY_LEAF_PILE.get(), RenderType.cutout());
+
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.WISTERIA_DOOR.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.WISTERIA_TRAPDOOR.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.WISTERIA_LADDER.get(), RenderType.cutout());

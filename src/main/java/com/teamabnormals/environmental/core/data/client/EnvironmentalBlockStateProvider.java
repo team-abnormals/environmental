@@ -56,6 +56,14 @@ public class EnvironmentalBlockStateProvider extends BlockStateProvider {
 		this.logCompat(PINE_LOG.get(), STRIPPED_PINE_LOG.get(), PINE_POST.get(), STRIPPED_PINE_POST.get());
 		this.leavesCompat(PINE_LEAVES.get(), PINE_LOG.get(), PINE_LEAF_PILE.get(), PINE_HEDGE.get(), PINE_LEAF_CARPET.get());
 		this.cubeColumnBlock(PINECONE.get());
+		
+		this.leavesBlock(CHEERFUL_CHERRY_LEAVES.get());
+		this.crossBlockWithPot(CHEERFUL_CHERRY_SAPLING.get(), POTTED_CHEERFUL_CHERRY_SAPLING.get());
+		this.leavesCompat(CHEERFUL_CHERRY_LEAVES.get(), CHERRY_LOG.get(), CHEERFUL_CHERRY_LEAF_PILE.get(), CHEERFUL_CHERRY_HEDGE.get(), CHEERFUL_CHERRY_LEAF_CARPET.get());
+
+		this.leavesBlock(MOODY_CHERRY_LEAVES.get());
+		this.crossBlockWithPot(MOODY_CHERRY_SAPLING.get(), POTTED_MOODY_CHERRY_SAPLING.get());
+		this.leavesCompat(MOODY_CHERRY_LEAVES.get(), CHERRY_LOG.get(), MOODY_CHERRY_LEAF_PILE.get(), MOODY_CHERRY_HEDGE.get(), MOODY_CHERRY_LEAF_CARPET.get());
 
 		this.block(CATTAIL_FLUFF_BLOCK.get());
 		this.cattail(CATTAIL_SPROUT.get(), CATTAIL.get(), CATTAIL_STALK.get());

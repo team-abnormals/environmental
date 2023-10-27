@@ -14,10 +14,7 @@ import com.teamabnormals.blueprint.common.block.wood.*;
 import com.teamabnormals.blueprint.core.util.PropertyUtil;
 import com.teamabnormals.blueprint.core.util.registry.BlockSubRegistryHelper;
 import com.teamabnormals.environmental.common.block.*;
-import com.teamabnormals.environmental.common.block.grower.CherryTreeGrower;
-import com.teamabnormals.environmental.common.block.grower.PineTreeGrower;
-import com.teamabnormals.environmental.common.block.grower.WillowTreeGrower;
-import com.teamabnormals.environmental.common.block.grower.WisteriaTree;
+import com.teamabnormals.environmental.common.block.grower.*;
 import com.teamabnormals.environmental.common.levelgen.util.WisteriaColor;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.other.EnvironmentalProperties;
@@ -236,9 +233,6 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> STRIPPED_CHERRY_WOOD = HELPER.createBlock("stripped_cherry_wood", () -> new StrippedWoodBlock(EnvironmentalProperties.CHERRY.log()), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> CHERRY_LOG = HELPER.createBlock("cherry_log", () -> new LogBlock(STRIPPED_CHERRY_LOG, EnvironmentalProperties.CHERRY.log()), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> CHERRY_WOOD = HELPER.createBlock("cherry_wood", () -> new WoodBlock(STRIPPED_CHERRY_WOOD, EnvironmentalProperties.CHERRY.log()), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> CHERRY_LEAVES = HELPER.createBlock("cherry_leaves", () -> new CherryLeavesBlock(EnvironmentalProperties.CHERRY.leaves()), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> CHERRY_SAPLING = HELPER.createBlock("cherry_sapling", () -> new BlueprintSaplingBlock(new CherryTreeGrower(), EnvironmentalProperties.CHERRY.sapling()), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> POTTED_CHERRY_SAPLING = HELPER.createBlockNoItem("potted_cherry_sapling", () -> new FlowerPotBlock(CHERRY_SAPLING.get(), PropertyUtil.flowerPot()));
 	public static final RegistryObject<Block> CHERRY_PLANKS = HELPER.createBlock("cherry_planks", () -> new PlanksBlock(EnvironmentalProperties.CHERRY.planks()), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> CHERRY_STAIRS = HELPER.createBlock("cherry_stairs", () -> new WoodStairBlock(CHERRY_PLANKS.get().defaultBlockState(), EnvironmentalProperties.CHERRY.planks()), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> CHERRY_SLAB = HELPER.createBlock("cherry_slab", () -> new WoodSlabBlock(EnvironmentalProperties.CHERRY.planks()), CreativeModeTab.TAB_BUILDING_BLOCKS);
@@ -254,15 +248,33 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> CHERRY_BOOKSHELF = HELPER.createCompatFuelBlock("woodworks", "cherry_bookshelf", () -> new BookshelfBlock(EnvironmentalProperties.CHERRY.bookshelf()), 300, CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> CHERRY_LADDER = HELPER.createCompatFuelBlock("woodworks", "cherry_ladder", () -> new BlueprintLadderBlock(EnvironmentalProperties.CHERRY.ladder()), 300, CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> CHERRY_BEEHIVE = HELPER.createCompatBlock("woodworks", "cherry_beehive", () -> new BlueprintBeehiveBlock(EnvironmentalProperties.CHERRY.beehive()), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> CHERRY_LEAF_PILE = HELPER.createBlock("cherry_leaf_pile", () -> new LeafPileBlock(EnvironmentalProperties.CHERRY.leafPile()), CreativeModeTab.TAB_DECORATIONS);
 	public static final Pair<RegistryObject<BlueprintChestBlock>, RegistryObject<BlueprintTrappedChestBlock>> CHERRY_CHESTS = HELPER.createCompatChestBlocks("woodworks", "cherry", MaterialColor.TERRACOTTA_RED);
 
 	public static final RegistryObject<Block> VERTICAL_CHERRY_PLANKS = HELPER.createCompatBlock("quark", "vertical_cherry_planks", () -> new Block(EnvironmentalProperties.CHERRY.planks()), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> CHERRY_VERTICAL_SLAB = HELPER.createCompatFuelBlock("quark", "cherry_vertical_slab", () -> new VerticalSlabBlock(EnvironmentalProperties.CHERRY.planks()), 150, CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> STRIPPED_CHERRY_POST = HELPER.createCompatFuelBlock("quark", "stripped_cherry_post", () -> new WoodPostBlock(EnvironmentalProperties.CHERRY.log()), 300, CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> CHERRY_POST = HELPER.createCompatFuelBlock("quark", "cherry_post", () -> new WoodPostBlock(STRIPPED_CHERRY_POST, EnvironmentalProperties.CHERRY.log()), 300, CreativeModeTab.TAB_DECORATIONS);
+
+	public static final RegistryObject<Block> CHERRY_LEAVES = HELPER.createBlock("cherry_leaves", () -> new CherryLeavesBlock(EnvironmentalProperties.CHERRY.leaves()), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> CHERRY_SAPLING = HELPER.createBlock("cherry_sapling", () -> new BlueprintSaplingBlock(new CherryTreeGrower(), EnvironmentalProperties.CHERRY.sapling()), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> POTTED_CHERRY_SAPLING = HELPER.createBlockNoItem("potted_cherry_sapling", () -> new FlowerPotBlock(CHERRY_SAPLING.get(), PropertyUtil.flowerPot()));
+	public static final RegistryObject<Block> CHERRY_LEAF_PILE = HELPER.createBlock("cherry_leaf_pile", () -> new LeafPileBlock(EnvironmentalProperties.CHERRY.leafPile()), CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> CHERRY_LEAF_CARPET = HELPER.createCompatBlock("quark", "cherry_leaf_carpet", () -> new LeafCarpetBlock(EnvironmentalProperties.CHERRY.leafCarpet()), CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> CHERRY_HEDGE = HELPER.createCompatFuelBlock("quark", "cherry_hedge", () -> new HedgeBlock(EnvironmentalProperties.CHERRY.log()), 300, CreativeModeTab.TAB_DECORATIONS);
+
+	public static final RegistryObject<Block> CHEERFUL_CHERRY_LEAVES = HELPER.createBlock("cheerful_cherry_leaves", () -> new CherryLeavesBlock(EnvironmentalProperties.CHERRY.leaves()), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> CHEERFUL_CHERRY_SAPLING = HELPER.createBlock("cheerful_cherry_sapling", () -> new BlueprintSaplingBlock(new CheerfulCherryTreeGrower(), EnvironmentalProperties.CHERRY.sapling()), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> POTTED_CHEERFUL_CHERRY_SAPLING = HELPER.createBlockNoItem("potted_cheerful_cherry_sapling", () -> new FlowerPotBlock(CHEERFUL_CHERRY_SAPLING.get(), PropertyUtil.flowerPot()));
+	public static final RegistryObject<Block> CHEERFUL_CHERRY_LEAF_PILE = HELPER.createBlock("cheerful_cherry_leaf_pile", () -> new LeafPileBlock(EnvironmentalProperties.CHERRY.leafPile()), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> CHEERFUL_CHERRY_LEAF_CARPET = HELPER.createCompatBlock("quark", "cheerful_cherry_leaf_carpet", () -> new LeafCarpetBlock(EnvironmentalProperties.CHERRY.leafCarpet()), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> CHEERFUL_CHERRY_HEDGE = HELPER.createCompatFuelBlock("quark", "cheerful_cherry_hedge", () -> new HedgeBlock(EnvironmentalProperties.CHERRY.log()), 300, CreativeModeTab.TAB_DECORATIONS);
+
+	public static final RegistryObject<Block> MOODY_CHERRY_LEAVES = HELPER.createBlock("moody_cherry_leaves", () -> new CherryLeavesBlock(EnvironmentalProperties.CHERRY.leaves()), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> MOODY_CHERRY_SAPLING = HELPER.createBlock("moody_cherry_sapling", () -> new BlueprintSaplingBlock(new MoodyCherryTreeGrower(), EnvironmentalProperties.CHERRY.sapling()), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> POTTED_MOODY_CHERRY_SAPLING = HELPER.createBlockNoItem("potted_moody_cherry_sapling", () -> new FlowerPotBlock(MOODY_CHERRY_SAPLING.get(), PropertyUtil.flowerPot()));
+	public static final RegistryObject<Block> MOODY_CHERRY_LEAF_PILE = HELPER.createBlock("moody_cherry_leaf_pile", () -> new LeafPileBlock(EnvironmentalProperties.CHERRY.leafPile()), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> MOODY_CHERRY_LEAF_CARPET = HELPER.createCompatBlock("quark", "moody_cherry_leaf_carpet", () -> new LeafCarpetBlock(EnvironmentalProperties.CHERRY.leafCarpet()), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> MOODY_CHERRY_HEDGE = HELPER.createCompatFuelBlock("quark", "moody_cherry_hedge", () -> new HedgeBlock(EnvironmentalProperties.CHERRY.log()), 300, CreativeModeTab.TAB_DECORATIONS);
 
 	public static final RegistryObject<Block> CHERRY_CRATE = HELPER.createCompatBlock("quark", "cherry_crate", () -> new BlueprintDirectionalBlock(Block.Properties.of(Material.WOOD, MaterialColor.COLOR_RED).strength(1.5F).sound(SoundType.WOOD)), CreativeModeTab.TAB_DECORATIONS);
 

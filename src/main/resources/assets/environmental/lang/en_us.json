@@ -112,6 +112,20 @@
 	"block.environmental.cherry_beehive": "Cherry Beehive",
 	"block.environmental.cherry_boards": "Cherry Boards",
 	"block.environmental.cherry_leaf_pile": "Pile of Cherry Leaves",
+
+	"block.environmental.cheerful_cherry_sapling": "Cheerful Cherry Sapling",
+	"block.environmental.cheerful_cherry_leaves": "Cheerful Cherry Leaves",
+	"block.environmental.cheerful_cherry_leaf_carpet": "Cheerful Cherry Leaf Carpet",
+	"block.environmental.potted_cheerful_cherry_sapling": "Potted Cheerful Cherry Sapling",
+	"block.environmental.cheerful_cherry_hedge": "Cheerful Cherry Hedge",
+	"block.environmental.cheerful_cherry_leaf_pile": "Pile of Cheerful Cherry Leaves",
+	
+	"block.environmental.moody_cherry_sapling": "Moody Cherry Sapling",
+	"block.environmental.moody_cherry_leaves": "Moody Cherry Leaves",
+	"block.environmental.moody_cherry_leaf_carpet": "Moody Cherry Leaf Carpet",
+	"block.environmental.potted_moody_cherry_sapling": "Potted Moody Cherry Sapling",
+	"block.environmental.moody_cherry_hedge": "Moody Cherry Hedge",
+	"block.environmental.moody_cherry_leaf_pile": "Pile of Moody Cherry Leaves",
 	
 	"block.environmental.wisteria_log": "Wisteria Log",
 	"block.environmental.stripped_wisteria_log": "Stripped Wisteria Log",
@@ -375,7 +389,7 @@
 	"effect.environmental.serenity": "Serenity",
 
 	"attribute.environmental.name.generic.stealth": "Stealth",
-	
+
 	"advancements.environmental.husbandry.place_koi_in_village.title": "What a Koincidence!",
 	"advancements.environmental.husbandry.place_koi_in_village.description": "Place a Bucket of Koi in a village to protect Villagers from monster spawns",
 
