@@ -7,12 +7,14 @@ import com.teamabnormals.environmental.core.other.tags.EnvironmentalBlockTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Direction.Plane;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
@@ -115,7 +117,7 @@ public class HibiscusBushFeature extends Feature<NoneFeatureConfiguration> {
 	private static void placeLeafCube(WorldGenLevel level, BlockPos pos, int minX, int minY, int minZ, int maxX, int maxY, int maxZ) {
 		for (BlockPos blockpos : BlockPos.betweenClosed(pos.offset(minX, minY, minZ), pos.offset(maxX, maxY, maxZ))) {
 			if (isAirOrReplaceablePlant(level, blockpos)) {
-				level.setBlock(blockpos, EnvironmentalBlocks.HIBISCUS_LEAVES.get().defaultBlockState(), 4);
+				level.setBlock(blockpos, EnvironmentalBlocks.HIBISCUS_LEAVES.get().defaultBlockState(), 19);
 			}
 		}
 	}
@@ -135,9 +137,9 @@ public class HibiscusBushFeature extends Feature<NoneFeatureConfiguration> {
 						}
 
 						if (!validdirections.isEmpty()) {
-							Direction direction = validdirections.get(random.nextInt(validdirections.size()));
+							Direction direction = validdirections.get(random.nextInt(validdirections.size())).getOpposite();
 							ForgeRegistries.BLOCKS.tags().getTag(EnvironmentalBlockTags.WALL_HIBISCUSES).getRandomElement(random).ifPresent((block) -> {
-								level.setBlock(blockpos, block.defaultBlockState().setValue(WallHibiscusBlock.FACING, direction), 2);
+								level.setBlock(blockpos, block.defaultBlockState().setValue(WallHibiscusBlock.FACE, direction == Direction.UP ? AttachFace.FLOOR : AttachFace.WALL).setValue(WallHibiscusBlock.FACING, direction == Direction.UP ? Plane.HORIZONTAL.getRandomDirection(random) : direction), 2);
 							});
 						}
 					}

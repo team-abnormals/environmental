@@ -1,61 +1,57 @@
 {
   "variants": {
-    "facing=east": {
+    "face=floor,facing=east": {
       "model": "environmental:block/orange_wall_hibiscus",
       "y": 90
     },
-    "facing=north": {
-      "model": "environmental:block/orange_wall_hibiscus"
-    },
-    "facing=south": {
-      "model": "environmental:block/orange_wall_hibiscus",
-      "y": 180
-    },
-    "facing=west": {
+    "face=floor,facing=west": {
       "model": "environmental:block/orange_wall_hibiscus",
       "y": 270
     },
-	"facing=up": [
-	  {
-        "model": "environmental:block/orange_wall_hibiscus",
-		"x": 270
-      },
-      {
-        "model": "environmental:block/orange_wall_hibiscus",
-		"x": 270,
-		"y": 90
-      },
-      {
-        "model": "environmental:block/orange_wall_hibiscus",
-		"x": 270,
-        "y": 180
-      },
-      {
-        "model": "environmental:block/orange_wall_hibiscus",
-		"x": 270,
-        "y": 270
-      }
-    ],
-	"facing=down": [
-	  {
-        "model": "environmental:block/orange_wall_hibiscus",
-		"x": 90
-      },
-      {
-        "model": "environmental:block/orange_wall_hibiscus",
-		"x": 90,
-		"y": 90
-      },
-      {
-        "model": "environmental:block/orange_wall_hibiscus",
-		"x": 90,
-        "y": 180
-      },
-      {
-        "model": "environmental:block/orange_wall_hibiscus",
-		"x": 90,
-        "y": 270
-      }
-    ]
+    "face=floor,facing=south": {
+      "model": "environmental:block/orange_wall_hibiscus",
+      "y": 180
+    },
+    "face=floor,facing=north": {
+      "model": "environmental:block/orange_wall_hibiscus"
+    },
+    "face=wall,facing=east": {
+      "model": "environmental:block/orange_wall_hibiscus",
+      "x": 90,
+      "y": 90
+    },
+    "face=wall,facing=west": {
+      "model": "environmental:block/orange_wall_hibiscus",
+      "x": 90,
+      "y": 270
+    },
+    "face=wall,facing=south": {
+      "model": "environmental:block/orange_wall_hibiscus",
+      "x": 90,
+      "y": 180
+    },
+    "face=wall,facing=north": {
+      "model": "environmental:block/orange_wall_hibiscus",
+      "x": 90
+    },
+    "face=ceiling,facing=east": {
+      "model": "environmental:block/orange_wall_hibiscus",
+      "x": 180,
+      "y": 270
+    },
+    "face=ceiling,facing=west": {
+      "model": "environmental:block/orange_wall_hibiscus",
+      "x": 180,
+      "y": 90
+    },
+    "face=ceiling,facing=south": {
+      "model": "environmental:block/orange_wall_hibiscus",
+      "x": 180
+    },
+    "face=ceiling,facing=north": {
+      "model": "environmental:block/orange_wall_hibiscus",
+      "x": 180,
+      "y": 180
+    }
   }
 }

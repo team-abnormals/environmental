@@ -7,15 +7,15 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.LeavesBlock;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -24,12 +24,14 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 public class WallHibiscusBlock extends AbstractHibiscusBlock {
-	public static final DirectionProperty FACING = BlockStateProperties.FACING;
+	public static final EnumProperty<AttachFace> FACE = BlockStateProperties.ATTACH_FACE;
+	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+
 	private static final Map<Direction, VoxelShape> AABBS = Maps.newEnumMap(ImmutableMap.of(Direction.NORTH, Block.box(3.0D, 3.0D, 0.0D, 13.0D, 13.0D, 1.0D), Direction.SOUTH, Block.box(3.0D, 3.0D, 15.0D, 13.0D, 13.0D, 16.0D), Direction.WEST, Block.box(0.0D, 3.0D, 3.0D, 1.0D, 13.0D, 13.0D), Direction.EAST, Block.box(15.0D, 3.0D, 3.0D, 16.0D, 13.0D, 13.0D), Direction.UP, Block.box(3.0D, 15.0D, 3.0D, 13.0D, 16.0D, 13.0D), Direction.DOWN, Block.box(3.0D, 0.0D, 3.0D, 13.0D, 1.0D, 13.0D)));
 
 	public WallHibiscusBlock(Supplier<MobEffect> stewEffect, int stewEffectDuration, Properties properties) {
 		super(stewEffect, stewEffectDuration, properties);
-		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.DOWN));
+		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(FACE, AttachFace.WALL));
 	}
 
 	@Override
@@ -39,7 +41,7 @@ public class WallHibiscusBlock extends AbstractHibiscusBlock {
 
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-		return AABBS.get(state.getValue(FACING));
+		return AABBS.get(getConnectedDirection(state).getOpposite());
 	}
 
 	@Override
@@ -54,22 +56,27 @@ public class WallHibiscusBlock extends AbstractHibiscusBlock {
 
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-		BlockPos blockpos = pos.relative(state.getValue(FACING));
-		BlockState otherState = level.getBlockState(blockpos);
-		return this.mayPlaceOn(otherState, level, blockpos) || otherState.isFaceSturdy(level, blockpos, state.getValue(FACING).getOpposite());
+		return canAttach(level, pos, getConnectedDirection(state).getOpposite());
+	}
+
+	public boolean canAttach(LevelReader level, BlockPos pos, Direction direction) {
+		BlockPos offsetPos = pos.relative(direction);
+		BlockState offsetState = level.getBlockState(offsetPos);
+		return offsetState.isFaceSturdy(level, offsetPos, direction.getOpposite()) || this.mayPlaceOn(offsetState, level, offsetPos);
 	}
 
 	@Nullable
-	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
-		BlockState blockstate = this.defaultBlockState();
-		LevelReader level = context.getLevel();
-		BlockPos blockpos = context.getClickedPos();
-
 		for (Direction direction : context.getNearestLookingDirections()) {
-			blockstate = blockstate.setValue(FACING, direction);
-			if (blockstate.canSurvive(level, blockpos)) {
-				return blockstate;
+			BlockState state;
+			if (direction.getAxis() == Direction.Axis.Y) {
+				state = this.defaultBlockState().setValue(FACE, direction == Direction.UP ? AttachFace.CEILING : AttachFace.FLOOR).setValue(FACING, context.getHorizontalDirection());
+			} else {
+				state = this.defaultBlockState().setValue(FACE, AttachFace.WALL).setValue(FACING, direction.getOpposite());
+			}
+
+			if (state.canSurvive(context.getLevel(), context.getClickedPos())) {
+				return state;
 			}
 		}
 
@@ -88,6 +95,19 @@ public class WallHibiscusBlock extends AbstractHibiscusBlock {
 
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-		builder.add(FACING);
+		builder.add(FACING, FACE);
+	}
+
+	@Override
+	public BlockState updateShape(BlockState state, Direction direction, BlockState otherState, LevelAccessor level, BlockPos pos, BlockPos otherPos) {
+		return getConnectedDirection(state).getOpposite() == direction && !state.canSurvive(level, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, otherState, level, pos, otherPos);
+	}
+
+	protected static Direction getConnectedDirection(BlockState state) {
+		return switch (state.getValue(FACE)) {
+			case CEILING -> Direction.DOWN;
+			case FLOOR -> Direction.UP;
+			default -> state.getValue(FACING);
+		};
 	}
 }
