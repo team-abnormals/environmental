@@ -9,6 +9,7 @@
     "AbstractSkeletonMixin",
     "BlockColumnFeatureMixin",
     "BlockMixin",
+	"CarvedPumpkinBlockMixin",
     "DuckMixin",
     "LeavesBlockMixin",
     "LivingEntityMixin",

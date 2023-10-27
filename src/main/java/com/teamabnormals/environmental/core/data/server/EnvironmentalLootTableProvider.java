@@ -1,6 +1,7 @@
 package com.teamabnormals.environmental.core.data.server;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
 import com.teamabnormals.blueprint.common.block.VerticalSlabBlock;
 import com.teamabnormals.blueprint.common.block.VerticalSlabBlock.VerticalSlabType;
@@ -16,6 +17,7 @@ import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -44,6 +46,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -268,7 +271,7 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.add(CHERRY_CHESTS.getFirst().get(), BlockLoot::createNameableBlockEntityTable);
 			this.add(CHERRY_CHESTS.getSecond().get(), BlockLoot::createNameableBlockEntityTable);
 			this.add(CHERRY_BOOKSHELF.get(), (block) -> createSingleItemTableWithSilkTouch(block, Items.BOOK, ConstantValue.exactly(3.0F)));
-			
+
 			this.add(CHERRY_LEAVES.get(), (block) -> createCherryLeavesDrop(block, CHERRY_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 			this.dropSelf(CHERRY_HEDGE.get());
 			this.dropSelf(CHERRY_LEAF_CARPET.get());
@@ -282,7 +285,7 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.add(CHEERFUL_CHERRY_LEAF_PILE.get(), EnvironmentalBlockLoot::createLeafPileDrops);
 			this.dropSelf(CHEERFUL_CHERRY_SAPLING.get());
 			this.dropPottedContents(POTTED_CHEERFUL_CHERRY_SAPLING.get());
-			
+
 			this.add(MOODY_CHERRY_LEAVES.get(), (block) -> createCherryLeavesDrop(block, MOODY_CHERRY_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 			this.dropSelf(MOODY_CHERRY_HEDGE.get());
 			this.dropSelf(MOODY_CHERRY_LEAF_CARPET.get());
@@ -384,6 +387,7 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 	}
 
 	private static class EnvironmentalEntityLoot extends EntityLoot {
+		private static final Set<EntityType<?>> SPECIAL_LOOT_TABLE_TYPES = ImmutableSet.of(PINECONE_GOLEM.get());
 
 		@Override
 		public void addTables() {
@@ -396,12 +400,18 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.add(TAPIR.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.PORKCHOP).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))).apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))));
 			this.add(YAK.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(EnvironmentalItems.YAK_HAIR.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 5.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(1.0F, 3.0F))))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.BEEF).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))).apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))));
 			this.add(ZEBRA.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.LEATHER).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))));
+			this.add(PINECONE_GOLEM.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(PINE_SAPLING.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))))));
 			this.add(EntityType.WANDERING_TRADER, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(EnvironmentalItems.MUSIC_DISC_LEAVING_HOME.get())).when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.KILLER, EntityPredicate.Builder.entity().of(EntityTypeTags.SKELETONS)))));
 		}
 
 		@Override
 		public Iterable<EntityType<?>> getKnownEntities() {
 			return ForgeRegistries.ENTITY_TYPES.getValues().stream().filter(entity -> ForgeRegistries.ENTITY_TYPES.getKey(entity).getNamespace().equals(Environmental.MOD_ID)).collect(Collectors.toSet());
+		}
+
+		@Override
+		protected boolean isNonLiving(EntityType<?> entityType) {
+			return !SPECIAL_LOOT_TABLE_TYPES.contains(entityType) && entityType.getCategory() == MobCategory.MISC;
 		}
 	}
 }
