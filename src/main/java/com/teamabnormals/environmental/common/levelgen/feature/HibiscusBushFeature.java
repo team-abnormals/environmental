@@ -139,7 +139,7 @@ public class HibiscusBushFeature extends Feature<NoneFeatureConfiguration> {
 						if (!validdirections.isEmpty()) {
 							Direction direction = validdirections.get(random.nextInt(validdirections.size())).getOpposite();
 							ForgeRegistries.BLOCKS.tags().getTag(EnvironmentalBlockTags.WALL_HIBISCUSES).getRandomElement(random).ifPresent((block) -> {
-								level.setBlock(blockpos, block.defaultBlockState().setValue(WallHibiscusBlock.FACE, direction == Direction.UP ? AttachFace.FLOOR : AttachFace.WALL).setValue(WallHibiscusBlock.FACING, direction == Direction.UP ? Plane.HORIZONTAL.getRandomDirection(random) : direction), 2);
+								level.setBlock(blockpos,  WallHibiscusBlock.setPropertiesForDirection(block.defaultBlockState(), direction, random), 2);
 							});
 						}
 					}

@@ -49,7 +49,7 @@ public class HibiscusLeavesBlock extends BlueprintLeavesBlock implements Bonemea
 		if (!directions.isEmpty()) {
 			Direction direction = directions.get(random.nextInt(directions.size()));
 			ForgeRegistries.BLOCKS.tags().getTag(EnvironmentalBlockTags.WALL_HIBISCUSES).getRandomElement(random).ifPresent((block) -> {
-				level.setBlockAndUpdate(pos.relative(direction), block.defaultBlockState().setValue(WallHibiscusBlock.FACING, direction.getOpposite()));
+				level.setBlockAndUpdate(pos.relative(direction), WallHibiscusBlock.setPropertiesForDirection(block.defaultBlockState(), direction, random));
 			});
 		}
 	}

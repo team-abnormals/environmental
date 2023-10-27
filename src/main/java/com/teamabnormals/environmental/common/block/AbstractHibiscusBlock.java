@@ -42,8 +42,7 @@ public abstract class AbstractHibiscusBlock extends BlueprintFlowerBlock impleme
 		level.setBlockAndUpdate(pos, EnvironmentalBlocks.HIBISCUS_LEAVES.get().defaultBlockState());
 
 		List<Direction> validdirections = Lists.newArrayList();
-		int i = random.nextInt(2) + 1;
-		i += random.nextBoolean() ? 1 : 0;
+		int i = 2 + random.nextInt(2) + random.nextInt(2);
 
 		for (Direction direction : Direction.values()) {
 			BlockPos blockpos = pos.relative(direction);
@@ -54,7 +53,7 @@ public abstract class AbstractHibiscusBlock extends BlueprintFlowerBlock impleme
 
 		for (int j = 0; j < i && !validdirections.isEmpty(); j++) {
 			Direction direction = validdirections.get(random.nextInt(validdirections.size()));
-			level.setBlockAndUpdate(pos.relative(direction), this.getWallHibiscus().defaultBlockState().setValue(WallHibiscusBlock.FACING, direction.getOpposite()));
+			level.setBlockAndUpdate(pos.relative(direction), WallHibiscusBlock.setPropertiesForDirection(this.getWallHibiscus().defaultBlockState(), direction, random));
 			validdirections.remove(direction);
 		}
 	}

@@ -4,6 +4,9 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Direction.Axis;
+import net.minecraft.core.Direction.Plane;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -101,6 +104,10 @@ public class WallHibiscusBlock extends AbstractHibiscusBlock {
 	@Override
 	public BlockState updateShape(BlockState state, Direction direction, BlockState otherState, LevelAccessor level, BlockPos pos, BlockPos otherPos) {
 		return getConnectedDirection(state).getOpposite() == direction && !state.canSurvive(level, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, otherState, level, pos, otherPos);
+	}
+
+	public static BlockState setPropertiesForDirection(BlockState state, Direction direction, RandomSource random) {
+		return state.setValue(WallHibiscusBlock.FACE, direction == Direction.UP ? AttachFace.FLOOR : direction == Direction.DOWN ? AttachFace.CEILING : AttachFace.WALL).setValue(WallHibiscusBlock.FACING, direction.getAxis() == Axis.Y ? Plane.HORIZONTAL.getRandomDirection(random) : direction);
 	}
 
 	protected static Direction getConnectedDirection(BlockState state) {
