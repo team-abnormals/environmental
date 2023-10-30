@@ -12,6 +12,7 @@ import net.minecraft.advancements.critereon.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.loot.BlockLoot;
+import net.minecraft.data.loot.ChestLoot;
 import net.minecraft.data.loot.EntityLoot;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.resources.ResourceLocation;
@@ -33,9 +34,7 @@ import net.minecraft.world.level.storage.loot.LootTable.Builder;
 import net.minecraft.world.level.storage.loot.ValidationContext;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
-import net.minecraft.world.level.storage.loot.functions.LootingEnchantFunction;
-import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
-import net.minecraft.world.level.storage.loot.functions.SmeltItemFunction;
+import net.minecraft.world.level.storage.loot.functions.*;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.*;
@@ -56,7 +55,8 @@ import static com.teamabnormals.environmental.core.registry.EnvironmentalBlocks.
 import static com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes.*;
 
 public class EnvironmentalLootTableProvider extends LootTableProvider {
-	private final List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, Builder>>>, LootContextParamSet>> tables = ImmutableList.of(Pair.of(EnvironmentalBlockLoot::new, LootContextParamSets.BLOCK), Pair.of(EnvironmentalEntityLoot::new, LootContextParamSets.ENTITY));
+	private final List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, Builder>>>, LootContextParamSet>> tables = ImmutableList.of(Pair.of(EnvironmentalBlockLoot::new, LootContextParamSets.BLOCK), Pair.of(EnvironmentalEntityLoot::new, LootContextParamSets.ENTITY), Pair.of(EnvironmentalChestLoot::new, LootContextParamSets.CHEST));
+
 
 	public EnvironmentalLootTableProvider(DataGenerator generator) {
 		super(generator);
@@ -412,6 +412,64 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 		@Override
 		protected boolean isNonLiving(EntityType<?> entityType) {
 			return !SPECIAL_LOOT_TABLE_TYPES.contains(entityType) && entityType.getCategory() == MobCategory.MISC;
+		}
+	}
+
+	private static class EnvironmentalChestLoot extends ChestLoot {
+
+		@Override
+		public void accept(BiConsumer<ResourceLocation, Builder> consumer) {
+			consumer.accept(new ResourceLocation(Environmental.MOD_ID, "chests/log_cabin_junk"), LootTable.lootTable()
+					.withPool(LootPool.lootPool().setRolls(UniformGenerator.between(4.0F, 6.0F))
+							.add(LootItem.lootTableItem(Items.STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 6.0F))))
+							.add(LootItem.lootTableItem(PINE_PLANKS.get()).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(6.0F, 12.0F))))
+							.add(LootItem.lootTableItem(PINE_LOG.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 6.0F))))
+							.add(LootItem.lootTableItem(STRIPPED_PINE_LOG.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 6.0F))))
+							.add(LootItem.lootTableItem(PINE_LEAVES.get()).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 8.0F))))
+					)
+					.withPool(LootPool.lootPool().setRolls(UniformGenerator.between(2.0F, 3.0F))
+							.add(LootItem.lootTableItem(Items.FLOWER_POT).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
+							.add(LootItem.lootTableItem(PINE_TRAPDOOR.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
+							.add(LootItem.lootTableItem(PINE_SAPLING.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
+							.add(LootItem.lootTableItem(PINECONE.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))))
+					)
+			);
+
+			consumer.accept(new ResourceLocation(Environmental.MOD_ID, "chests/log_cabin"), LootTable.lootTable()
+					.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+							.add(LootItem.lootTableItem(Items.STONE_AXE).setWeight(3).apply(EnchantRandomlyFunction.randomApplicableEnchantment()))
+							.add(LootItem.lootTableItem(Items.IRON_AXE))
+					)
+					.withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 2.0F))
+							.add(LootItem.lootTableItem(Items.SHEARS).apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.5F, 0.8F))))
+							.add(LootItem.lootTableItem(Items.FLINT_AND_STEEL).apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.5F, 0.8F))))
+					)
+					.withPool(LootPool.lootPool().setRolls(UniformGenerator.between(5.0F, 6.0F))
+							.add(LootItem.lootTableItem(Items.ROTTEN_FLESH).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
+							.add(LootItem.lootTableItem(Items.STICK).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 6.0F))))
+							.add(LootItem.lootTableItem(EnvironmentalItems.VENISON.get()).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
+							.add(LootItem.lootTableItem(EnvironmentalItems.COOKED_VENISON.get()).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
+							.add(LootItem.lootTableItem(Items.CAMPFIRE).setWeight(3))
+					)
+
+					.withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 2.0F))
+							.add(LootItem.lootTableItem(Items.LEATHER_HELMET).setWeight(3))
+							.add(LootItem.lootTableItem(Items.LEATHER_CHESTPLATE).setWeight(3))
+							.add(LootItem.lootTableItem(Items.LEATHER_LEGGINGS).setWeight(3))
+							.add(LootItem.lootTableItem(Items.LEATHER_BOOTS).setWeight(3))
+							.add(LootItem.lootTableItem(Items.LEATHER_HELMET).apply(EnchantRandomlyFunction.randomApplicableEnchantment()))
+							.add(LootItem.lootTableItem(Items.LEATHER_CHESTPLATE).apply(EnchantRandomlyFunction.randomApplicableEnchantment()))
+							.add(LootItem.lootTableItem(Items.LEATHER_LEGGINGS).apply(EnchantRandomlyFunction.randomApplicableEnchantment()))
+							.add(LootItem.lootTableItem(Items.LEATHER_BOOTS).apply(EnchantRandomlyFunction.randomApplicableEnchantment())))
+			);
+
+
+			consumer.accept(new ResourceLocation(Environmental.MOD_ID, "chests/log_cabin_dispenser"), LootTable.lootTable()
+					.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+							.add(LootItem.lootTableItem(Items.CARVED_PUMPKIN))
+					)
+			);
+
 		}
 	}
 }
