@@ -77,7 +77,7 @@ public class EnvironmentalBiomeModifierProvider {
 		addFeature("tall_dead_bush", Biomes.DESERT, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_TALL_DEAD_BUSH);
 		addFeature("tall_dead_bush_badlands", BiomeTags.IS_BADLANDS, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_TALL_DEAD_BUSH_BADLANDS);
 		addFeature("mycelium_sprouts", Biomes.MUSHROOM_FIELDS, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_MYCELIUM_SPROUTS);
-		addFeature("mud_disk", EnvironmentalBiomeTags.HAS_MUD_DISK, Decoration.UNDERGROUND_ORES, EnvironmentalPlacedFeatures.DISK_MUD);
+		addFeature("mud_disk", EnvironmentalBiomeTags.HAS_MUD_DISK, Decoration.UNDERGROUND_ORES, EnvironmentalPlacedFeatures.ORE_MUD);
 
 		removeFeature("swamp_oak", Biomes.SWAMP, Set.of(Decoration.VEGETAL_DECORATION), VegetationPlacements.TREES_SWAMP);
 		addFeature("swamp_vegetation", Biomes.SWAMP, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.TREES_SWAMP, EnvironmentalPlacedFeatures.PATCH_DUCKWEED_SWAMP);

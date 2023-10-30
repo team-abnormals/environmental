@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
   "biomes": "#environmental:has_feature/mud_disk",
-  "features": "environmental:disk_mud",
+  "features": "environmental:ore_mud",
   "step": "underground_ores"
 }
