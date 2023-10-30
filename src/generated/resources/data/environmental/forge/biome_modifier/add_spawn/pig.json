@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "minecraft:mangrove_swamp",
+  "spawners": {
+    "type": "minecraft:pig",
+    "maxCount": 4,
+    "minCount": 4,
+    "weight": 10
+  }
+}
