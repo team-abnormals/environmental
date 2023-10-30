@@ -29,7 +29,7 @@ import java.util.Optional;
 import static net.minecraft.BlockUtil.getTopConnectedBlock;
 
 public class CattailStalkBlock extends BushBlock implements SimpleWaterloggedBlock, BonemealableBlock {
-	protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
+	protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D);
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	public static final BooleanProperty BOTTOM = BooleanProperty.create("bottom");
 	public static final IntegerProperty CATTAILS = CattailBlock.CATTAILS;
