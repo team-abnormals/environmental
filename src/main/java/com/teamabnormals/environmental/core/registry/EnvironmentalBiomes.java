@@ -63,7 +63,6 @@ public class EnvironmentalBiomes {
 		BiomeDefaultFeatures.commonSpawns(spawns);
 		spawns.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.WOLF, 8, 4, 4));
 		spawns.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.RABBIT, 4, 2, 3));
-		spawns.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.FOX, 8, 2, 4));
 
 		return biome(Precipitation.RAIN, 0.4F, 0.6F, 9090929, 6725203, 4159204, 329011, 12638463, spawns, generation, null);
 	}
