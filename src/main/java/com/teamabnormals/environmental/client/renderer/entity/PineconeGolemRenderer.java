@@ -33,8 +33,8 @@ public class PineconeGolemRenderer extends MobRenderer<PineconeGolem, PineconeGo
         super.setupRotations(pineconeGolem, poseStack, ageInTicks, rotationYaw, partialTicks);
         float limbswing = pineconeGolem.animationPosition - pineconeGolem.animationSpeed * (1.0F - partialTicks);
         float limbswingamount = Math.min(Mth.lerp(partialTicks, pineconeGolem.animationSpeedOld, pineconeGolem.animationSpeed), 1.0F);
-        float rot = Mth.cos(limbswing * 0.6662F + Mth.PI + 0.4F) * 0.2F * limbswingamount;
+        float yRot = Mth.cos(limbswing + Mth.PI) * 0.15F * limbswingamount;
 
-        poseStack.mulPose(Vector3f.YP.rotation(rot));
+        poseStack.mulPose(Vector3f.YP.rotation(yRot));
     }
 }

@@ -1,6 +1,7 @@
 package com.teamabnormals.environmental.common.entity.animal;
 
 import com.teamabnormals.environmental.common.entity.ai.goal.PineconeGolemGrabSaplingGoal;
+import com.teamabnormals.environmental.common.entity.ai.goal.PineconeGolemPlantSaplingGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.ItemTags;
@@ -27,14 +28,15 @@ public class PineconeGolem extends AbstractGolem {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(0, new PineconeGolemGrabSaplingGoal(this, 1.0D));
-        this.goalSelector.addGoal(1, new WaterAvoidingRandomStrollGoal(this, 1.0D));
-        this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 6.0F));
-        this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(0, new PineconeGolemPlantSaplingGoal(this, 1.0D));
+        this.goalSelector.addGoal(1, new PineconeGolemGrabSaplingGoal(this, 1.0D));
+        this.goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 1.0D));
+        this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0D).add(Attributes.MOVEMENT_SPEED, 0.15D);
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0D).add(Attributes.MOVEMENT_SPEED, 0.125D);
     }
 
     @Override
@@ -49,12 +51,16 @@ public class PineconeGolem extends AbstractGolem {
 
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
-        super.playStepSound(pos, state);
     }
 
     @Override
     protected float getStandingEyeHeight(Pose pose, EntityDimensions size) {
-        return size.height * 0.6F;
+        return size.height * 0.5F;
+    }
+
+    @Override
+    public int getMaxHeadXRot() {
+        return 0;
     }
 
     @Override
@@ -68,12 +74,12 @@ public class PineconeGolem extends AbstractGolem {
         double d0 = entity.getX() - entity.xo;
         double d1 = isFlying ? entity.getY() - entity.yo : 0.0D;
         double d2 = entity.getZ() - entity.zo;
-        float f = (float)Math.sqrt(d0 * d0 + d1 * d1 + d2 * d2) * 8.0F;
+        float f = (float) Math.sqrt(d0 * d0 + d1 * d1 + d2 * d2) * 16.0F;
         if (f > 1.0F) {
             f = 1.0F;
         }
 
-        entity.animationSpeed += (f - entity.animationSpeed) * 0.6F;
+        entity.animationSpeed += (f - entity.animationSpeed) * 0.4F;
         entity.animationPosition += entity.animationSpeed;
     }
 

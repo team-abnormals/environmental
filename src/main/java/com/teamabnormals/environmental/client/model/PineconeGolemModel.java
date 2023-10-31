@@ -48,10 +48,10 @@ public class PineconeGolemModel<T extends PineconeGolem> extends HierarchicalMod
             this.rightArm.z = 0F;
             this.leftArm.z = 0F;
 
-            this.rightArm.xRot = 0.8F;
-            this.leftArm.xRot = 0.8F;
-            this.rightArm.yRot = Mth.cos(limbSwing * 0.6662F) * limbSwingAmount + Mth.PI / 2;
-            this.leftArm.yRot = Mth.cos(limbSwing * 0.6662F) * limbSwingAmount - Mth.PI / 2;
+            this.rightArm.xRot = 0.8F + headPitch * Mth.DEG_TO_RAD * 0.3F;
+            this.leftArm.xRot = this.rightArm.xRot;
+            this.rightArm.yRot = Mth.cos(limbSwing) * 0.8F * limbSwingAmount + Mth.PI / 2;
+            this.leftArm.yRot = Mth.cos(limbSwing) * 0.8F * limbSwingAmount - Mth.PI / 2;
         } else {
             this.rightArm.y = 22F;
             this.leftArm.y = 22F;
