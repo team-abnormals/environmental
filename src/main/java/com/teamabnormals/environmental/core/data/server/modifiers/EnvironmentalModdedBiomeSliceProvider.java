@@ -53,7 +53,7 @@ public class EnvironmentalModdedBiomeSliceProvider extends ModdedBiomeSliceProvi
 		private final ResourceKey<Biome>[][] OCEANS = new ResourceKey[][]{{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA}, {VANILLA, VANILLA, VANILLA, VANILLA, VANILLA}};
 		private final ResourceKey<Biome>[][] MIDDLE_BIOMES = new ResourceKey[][]{
 				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA},
-				{VANILLA, VANILLA, VANILLA, PINE_BARRENS.getKey(), VANILLA},
+				{VANILLA, VANILLA, VANILLA, PINE_BARRENS.getKey(), PINE_BARRENS.getKey()},
 				{VANILLA, VANILLA, VANILLA, BLOSSOM_WOODS.getKey(), VANILLA},
 				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA},
 				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA}};
@@ -71,7 +71,7 @@ public class EnvironmentalModdedBiomeSliceProvider extends ModdedBiomeSliceProvi
 				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA}};
 		private final ResourceKey<Biome>[][] PLATEAU_BIOMES_VARIANT = new ResourceKey[][]{
 				{null, null, null, null, null},
-				{null, null, null, BLOSSOM_VALLEYS.getKey(), null},
+				{null, null, null, BLOSSOM_VALLEYS.getKey(), PINE_BARRENS.getKey()},
 				{null, null, BLOSSOM_WOODS.getKey(), BLOSSOM_VALLEYS.getKey(), null},
 				{null, null, null, null, null},
 				{null, null, null, null, null}};
