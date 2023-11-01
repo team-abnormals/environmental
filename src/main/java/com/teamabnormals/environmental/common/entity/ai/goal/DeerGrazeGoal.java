@@ -1,6 +1,8 @@
 package com.teamabnormals.environmental.common.entity.ai.goal;
 
 import com.teamabnormals.environmental.common.entity.animal.deer.AbstractDeer;
+import com.teamabnormals.environmental.common.entity.animal.deer.Reindeer;
+import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.Level;
@@ -21,8 +23,15 @@ public class DeerGrazeGoal extends Goal {
 
 	@Override
 	public boolean canUse() {
-		BlockPos blockpos = this.deer.blockPosition().below();
-		return this.deer.getRandom().nextInt(350) == 0 && this.level.getBlockState(blockpos).is(Blocks.GRASS_BLOCK);
+		if (this.deer.getRandom().nextInt(350) == 0) {
+			BlockPos pos = this.deer.blockPosition();
+			boolean reindeer = this.deer instanceof Reindeer;
+			if (!reindeer) {
+				pos = pos.below();
+			}
+			return this.level.getBlockState(pos).is(reindeer ? EnvironmentalBlocks.CUP_LICHEN.get() : Blocks.GRASS_BLOCK);
+		}
+		return false;
 	}
 
 	@Override
