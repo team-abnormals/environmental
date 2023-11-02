@@ -23,15 +23,16 @@ public class DeerGrazeGoal extends Goal {
 
 	@Override
 	public boolean canUse() {
-		if (this.deer.getRandom().nextInt(350) == 0) {
-			BlockPos pos = this.deer.blockPosition();
-			boolean reindeer = this.deer instanceof Reindeer;
-			if (!reindeer) {
-				pos = pos.below();
-			}
-			return this.level.getBlockState(pos).is(reindeer ? EnvironmentalBlocks.CUP_LICHEN.get() : Blocks.GRASS_BLOCK);
+		return this.deer.getRandom().nextInt(350) == 0 && this.checkState();
+	}
+
+	public boolean checkState() {
+		BlockPos pos = this.deer.blockPosition();
+		boolean reindeer = this.deer instanceof Reindeer;
+		if (!reindeer) {
+			pos = pos.below();
 		}
-		return false;
+		return this.level.getBlockState(pos).is(reindeer ? EnvironmentalBlocks.CUP_LICHEN.get() : Blocks.GRASS_BLOCK);
 	}
 
 	@Override
@@ -48,8 +49,7 @@ public class DeerGrazeGoal extends Goal {
 
 	@Override
 	public boolean canContinueToUse() {
-		BlockPos blockpos = this.deer.blockPosition().below();
-		return this.grazeTime > 0 && this.level.getBlockState(blockpos).is(Blocks.GRASS_BLOCK);
+		return this.grazeTime > 0 && this.checkState();
 	}
 
 	@Override
