@@ -44,6 +44,7 @@ public class EnvironmentalItemTagsProvider extends ItemTagsProvider {
 		this.tag(EnvironmentalItemTags.YAK_FOOD).add(Items.WHEAT);
 		this.tag(EnvironmentalItemTags.MUDDY_PIG_DECORATIONS).addTag(ItemTags.SMALL_FLOWERS).addTag(ItemTags.SAPLINGS).addTag(Tags.Items.MUSHROOMS).add(Items.LILY_PAD, Items.DEAD_BUSH, Items.FERN, Items.BIG_DRIPLEAF, CATTAIL.get().asItem());
 		this.tag(EnvironmentalItemTags.SPAWNS_ON_MUDDY_PIG).add(Items.BLUE_ORCHID, DIANTHUS.get().asItem(), Items.POPPY, Items.DANDELION, Items.RED_MUSHROOM, Items.BROWN_MUSHROOM, CATTAIL.get().asItem(), Items.LILY_PAD);
+		this.tag(EnvironmentalItemTags.MUDDY_PIG_DRYING_ITEMS).add(Items.WHEAT).addOptional(new ResourceLocation("farmersdelight", "straw"));
 
 		this.copy(BlockTags.PLANKS, ItemTags.PLANKS);
 		this.copy(BlockTags.WOODEN_BUTTONS, ItemTags.WOODEN_BUTTONS);

@@ -259,7 +259,7 @@ public class EnvironmentalEvents {
 					event.setCanceled(true);
 				}
 
-				if (stack.is(Items.WHEAT) && !dried) {
+				if (stack.is(EnvironmentalItemTags.MUDDY_PIG_DRYING_ITEMS) && !dried) {
 					level.playSound(null, target, SoundEvents.PACKED_MUD_PLACE, SoundSource.PLAYERS, 1.0F, 1.0F);
 					if (!event.getEntity().isCreative()) stack.shrink(1);
 					data.setValue(EnvironmentalDataProcessors.MUD_DRYING_TIME, 0);

@@ -32,6 +32,7 @@ public class EnvironmentalItemTags {
 	public static final TagKey<Item> SLABFISH_TAME_ITEMS = itemTag("slabfish_tame_items");
 	public static final TagKey<Item> YAK_FOOD = itemTag("yak_food");
 	public static final TagKey<Item> MUDDY_PIG_DECORATIONS = itemTag("muddy_pig_decorations");
+	public static final TagKey<Item> MUDDY_PIG_DRYING_ITEMS = itemTag("muddy_pig_drying_items");
 	public static final TagKey<Item> SPAWNS_ON_MUDDY_PIG = itemTag("spawns_on_muddy_pig");
 
 	private static TagKey<Item> itemTag(String tagName) {

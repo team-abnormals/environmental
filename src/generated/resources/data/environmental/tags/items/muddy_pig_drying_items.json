@@ -1,0 +1,9 @@
+{
+  "values": [
+    "minecraft:wheat",
+    {
+      "id": "farmersdelight:straw",
+      "required": false
+    }
+  ]
+}
