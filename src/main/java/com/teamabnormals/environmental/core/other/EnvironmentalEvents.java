@@ -437,7 +437,7 @@ public class EnvironmentalEvents {
 				int mudDryingTime = data.getValue(EnvironmentalDataProcessors.MUD_DRYING_TIME);
 				if (entity.isInWaterRainOrBubble()) {
 					data.setValue(EnvironmentalDataProcessors.MUD_DRYING_TIME, mudDryingTime + 1);
-				} else if (mudDryingTime > 0) {
+				} else if (mudDryingTime > 0 && level.dimensionType().ultraWarm()) {
 					data.setValue(EnvironmentalDataProcessors.MUD_DRYING_TIME, mudDryingTime - 1);
 				}
 			}
