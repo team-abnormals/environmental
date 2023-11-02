@@ -24,26 +24,32 @@ public class CartwheelFeature extends Feature<SimpleBlockConfiguration> {
 
 		BlockState state = config.toPlace().getState(context.random(), origin);
 		if (origin.getY() >= 160) {
-           for (int y = -16; y < 48; y++) {
-              for (int x = -16; x < 16; x++) {
-                 for (int z = -16; z < 16; z++) {
-					 BlockPos offsetPos = origin.offset(x, y, z);
-					 if (level.getBlockState(offsetPos).is(EnvironmentalBlocks.CARTWHEEL.get())) {
-						 return false;
-					 }
+			for (int y = -16; y < 96; y++) {
+				boolean foundBlock = false;
+				for (int x = -16; x < 16; x++) {
+					for (int z = -16; z < 16; z++) {
+						BlockPos offsetPos = origin.offset(x, y, z);
+						if (level.getBlockState(offsetPos).is(EnvironmentalBlocks.CARTWHEEL.get())) {
+							return false;
+						}
 
-					 if (y > 0) {
-						 if (state.canSurvive(level, offsetPos) && level.isEmptyBlock(offsetPos)) {
-							 placePos = offsetPos;
-						 }
-					 }
-                 }
-              }
-           }
+						if (state.canSurvive(level, offsetPos)) {
+							foundBlock = true;
+							if (y > 0 && level.isEmptyBlock(offsetPos)) {
+								placePos = offsetPos;
+							}
+						}
+					}
+				}
 
-		   if (!state.canSurvive(level, placePos) || !level.isEmptyBlock(placePos)) {
-			   return false;
-		   }
+				if (y > 0 && !foundBlock) {
+					break;
+				}
+			}
+
+			if (!state.canSurvive(level, placePos) || !level.isEmptyBlock(placePos)) {
+				return false;
+			}
 
 			if (state.getBlock() instanceof DoublePlantBlock) {
 				if (!level.isEmptyBlock(placePos.above())) {
