@@ -122,7 +122,7 @@ public class EnvironmentalEvents {
 				IDataManager data = (IDataManager) entity;
 				data.setValue(EnvironmentalDataProcessors.IS_MUDDY, true);
 				data.setValue(EnvironmentalDataProcessors.MUD_DRYING_TIME, 36000);
-				if (random.nextFloat() < 0.75F) {
+				if (random.nextFloat() < 0.2F) {
 					Optional<Item> item = ForgeRegistries.ITEMS.tags().getTag(EnvironmentalItemTags.SPAWNS_ON_MUDDY_PIG).getRandomElement(random);
 					item.ifPresent(value -> data.setValue(EnvironmentalDataProcessors.MUDDY_PIG_DECORATION, ForgeRegistries.ITEMS.getKey(value)));
 				}
