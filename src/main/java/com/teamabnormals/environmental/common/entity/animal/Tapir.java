@@ -3,6 +3,9 @@ package com.teamabnormals.environmental.common.entity.animal;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -31,6 +34,7 @@ import net.minecraft.world.level.pathfinder.PathFinder;
 import net.minecraft.world.level.pathfinder.WalkNodeEvaluator;
 
 public class Tapir extends Animal {
+	private static final EntityDataAccessor<Boolean> HAS_BABY_PATTERN = SynchedEntityData.defineId(Tapir.class, EntityDataSerializers.BOOLEAN);
 
 	public Tapir(EntityType<? extends Tapir> type, Level world) {
 		super(type, world);
@@ -45,6 +49,20 @@ public class Tapir extends Animal {
 		this.goalSelector.addGoal(6, new WaterAvoidingRandomStrollGoal(this, 1.0D));
 		this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
 		this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
+	}
+
+	@Override
+	protected void defineSynchedData() {
+		super.defineSynchedData();
+		this.entityData.define(HAS_BABY_PATTERN, false);
+	}
+
+	public void setHasBabyPattern(boolean hasBabyPattern) {
+		this.entityData.set(HAS_BABY_PATTERN, hasBabyPattern);
+	}
+
+	public boolean hasBabyPattern() {
+		return this.entityData.get(HAS_BABY_PATTERN);
 	}
 
 	// this.pig.getNavigation().moveTo((double) ((float) blockpos.getX()) + 0.5D, blockpos.getY() + 1, (double) ((float) blockpos.getZ()) + 0.5D, 1.1D);
@@ -87,18 +105,22 @@ public class Tapir extends Animal {
 		}
 	}
 
+	@Override
 	protected SoundEvent getAmbientSound() {
 		return SoundEvents.PIG_AMBIENT;
 	}
 
+	@Override
 	protected SoundEvent getHurtSound(DamageSource source) {
 		return SoundEvents.PIG_HURT;
 	}
 
+	@Override
 	protected SoundEvent getDeathSound() {
 		return SoundEvents.PIG_DEATH;
 	}
 
+	@Override
 	protected void playStepSound(BlockPos pos, BlockState state) {
 		this.playSound(SoundEvents.PIG_STEP, 0.15F, 1.0F);
 	}
@@ -107,10 +129,23 @@ public class Tapir extends Animal {
 		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0D).add(Attributes.MOVEMENT_SPEED, 0.25D);
 	}
 
+	@Override
 	public Tapir getBreedOffspring(ServerLevel level, AgeableMob mob) {
-		return EnvironmentalEntityTypes.TAPIR.get().create(level);
+		Tapir child = EnvironmentalEntityTypes.TAPIR.get().create(level);
+		child.setHasBabyPattern(true);
+		return child;
 	}
 
+	@Override
+	protected void ageBoundaryReached() {
+		super.ageBoundaryReached();
+		if (!this.isBaby() && this.random.nextFloat() < 0.9F) {
+			this.setHasBabyPattern(false);
+		}
+	}
+
+
+	@Override
 	public boolean isFood(ItemStack stack) {
 		return stack.is(ItemTags.ANVIL);
 	}
@@ -133,7 +168,6 @@ public class Tapir extends Animal {
 
 	public static class TapirNodeEvaluator extends WalkNodeEvaluator {
 		protected BlockPathTypes evaluateBlockPathType(BlockGetter level, boolean p_33388_, boolean p_33389_, BlockPos p_33390_, BlockPathTypes p_33391_) {
-			System.out.println(p_33391_);
 			return p_33391_ == BlockPathTypes.LEAVES ? BlockPathTypes.WALKABLE : super.evaluateBlockPathType(level, p_33388_, p_33389_, p_33390_, p_33391_);
 		}
 	}

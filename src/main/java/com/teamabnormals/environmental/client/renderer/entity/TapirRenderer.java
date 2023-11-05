@@ -12,13 +12,14 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class TapirRenderer extends MobRenderer<Tapir, TapirModel<Tapir>> {
-	private static final ResourceLocation TAPIR_LOCATION = new ResourceLocation(Environmental.MOD_ID, "textures/entity/tapir.png");
+	private static final ResourceLocation TAPIR = new ResourceLocation(Environmental.MOD_ID, "textures/entity/tapir/tapir.png");
+	private static final ResourceLocation BABY_TAPIR = new ResourceLocation(Environmental.MOD_ID, "textures/entity/tapir/baby_tapir.png");
 
 	public TapirRenderer(EntityRendererProvider.Context context) {
 		super(context, new TapirModel<>(context.bakeLayer(EnvironmentalModelLayers.TAPIR)), 0.7F);
 	}
 
 	public ResourceLocation getTextureLocation(Tapir tapir) {
-		return TAPIR_LOCATION;
+		return tapir.hasBabyPattern() ? BABY_TAPIR : TAPIR;
 	}
 }
