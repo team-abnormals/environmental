@@ -1,6 +1,7 @@
 package com.teamabnormals.environmental.common.entity.animal;
 
 import com.teamabnormals.environmental.common.entity.ai.goal.PineconeGolemGrabSaplingGoal;
+import com.teamabnormals.environmental.common.entity.ai.goal.PineconeGolemLookForSpotGoal;
 import com.teamabnormals.environmental.common.entity.ai.goal.PineconeGolemPlantSaplingGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
@@ -29,10 +30,11 @@ public class PineconeGolem extends AbstractGolem {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new PineconeGolemPlantSaplingGoal(this, 1.0D));
-        this.goalSelector.addGoal(1, new PineconeGolemGrabSaplingGoal(this, 1.0D));
-        this.goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 1.0D));
-        this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 6.0F));
-        this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(1, new PineconeGolemLookForSpotGoal(this, 1.0D));
+        this.goalSelector.addGoal(2, new PineconeGolemGrabSaplingGoal(this, 1.0D));
+        this.goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 1.0D));
+        this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
     }
 
     public static AttributeSupplier.Builder createAttributes() {

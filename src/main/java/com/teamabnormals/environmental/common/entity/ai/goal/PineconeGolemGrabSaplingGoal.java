@@ -1,7 +1,6 @@
 package com.teamabnormals.environmental.common.entity.ai.goal;
 
 import com.teamabnormals.environmental.common.entity.animal.PineconeGolem;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.level.pathfinder.Path;
@@ -26,7 +25,7 @@ public class PineconeGolemGrabSaplingGoal extends Goal {
 
     @Override
     public boolean canUse() {
-        if (!this.golem.getItemBySlot(EquipmentSlot.MAINHAND).isEmpty()) {
+        if (!this.golem.getMainHandItem().isEmpty()) {
             return false;
         } else {
             List<ItemEntity> list = this.golem.getLevel().getEntitiesOfClass(ItemEntity.class, this.golem.getBoundingBox().inflate(12.0D, 4.0D, 12.0D), this.itemPredicate);
@@ -52,7 +51,7 @@ public class PineconeGolemGrabSaplingGoal extends Goal {
 
     @Override
     public boolean canContinueToUse() {
-        return this.golem.getItemBySlot(EquipmentSlot.MAINHAND).isEmpty() && this.itemEntity != null && this.itemEntity.isAlive();
+        return this.golem.getMainHandItem().isEmpty() && this.itemEntity != null && this.itemEntity.isAlive();
     }
 
     @Override
@@ -63,6 +62,7 @@ public class PineconeGolemGrabSaplingGoal extends Goal {
     @Override
     public void stop() {
         this.itemEntity = null;
+        this.golem.getNavigation().stop();
     }
 
     @Override
