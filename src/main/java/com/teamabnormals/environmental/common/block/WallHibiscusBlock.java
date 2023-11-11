@@ -73,7 +73,7 @@ public class WallHibiscusBlock extends AbstractHibiscusBlock {
 		for (Direction direction : context.getNearestLookingDirections()) {
 			BlockState state;
 			if (direction.getAxis() == Direction.Axis.Y) {
-				state = this.defaultBlockState().setValue(FACE, direction == Direction.UP ? AttachFace.CEILING : AttachFace.FLOOR).setValue(FACING, context.getHorizontalDirection());
+				state = this.defaultBlockState().setValue(FACE, direction == Direction.UP ? AttachFace.CEILING : AttachFace.FLOOR).setValue(FACING, context.getHorizontalDirection().getOpposite());
 			} else {
 				state = this.defaultBlockState().setValue(FACE, AttachFace.WALL).setValue(FACING, direction.getOpposite());
 			}
