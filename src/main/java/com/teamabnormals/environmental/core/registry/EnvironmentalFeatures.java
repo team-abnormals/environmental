@@ -301,7 +301,7 @@ public class EnvironmentalFeatures {
 
 		public static final RegistryObject<PlacedFeature> ZEBRA_DAZZLE = register("zebra_dazzle", EnvironmentalConfiguredFeatures.ZEBRA_DAZZLE, RarityFilter.onAverageOnceEvery(128), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 
-		public static final RegistryObject<PlacedFeature> HIBISCUS_BUSH = register("hibiscus_bush", EnvironmentalConfiguredFeatures.HIBISCUS_BUSH, RarityFilter.onAverageOnceEvery(128), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
+		public static final RegistryObject<PlacedFeature> HIBISCUS_BUSH = register("hibiscus_bush", EnvironmentalConfiguredFeatures.HIBISCUS_BUSH, RarityFilter.onAverageOnceEvery(256), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 
 		public static final RegistryObject<PlacedFeature> WHITE_WISTERIA_BEES_002 = register("white_wisteria_bees_002", EnvironmentalConfiguredFeatures.WHITE_WISTERIA_BEES_002, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
 		public static final RegistryObject<PlacedFeature> PINK_WISTERIA_BEES_002 = register("pink_wisteria_bees_002", EnvironmentalConfiguredFeatures.PINK_WISTERIA_BEES_002, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
