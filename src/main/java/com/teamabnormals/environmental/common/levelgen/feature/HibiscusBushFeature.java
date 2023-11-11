@@ -7,14 +7,13 @@ import com.teamabnormals.environmental.core.other.tags.EnvironmentalBlockTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Direction.Plane;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.AttachFace;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
@@ -35,18 +34,28 @@ public class HibiscusBushFeature extends Feature<NoneFeatureConfiguration> {
 		BlockPos pos = context.origin();
 		WorldGenLevel level = context.level();
 		RandomSource random = context.random();
-		BlockPos.MutableBlockPos blockpos = new BlockPos.MutableBlockPos();
+		BlockPos.MutableBlockPos mutablepos = new BlockPos.MutableBlockPos();
 
-		if (random.nextBoolean() && pos.getY() > context.chunkGenerator().getSeaLevel() + 20)
+		if (pos.getY() > context.chunkGenerator().getSeaLevel() + 20 && random.nextBoolean())
 			return false;
 
 		int bushes = 0;
 
-		for (int i = 0; i < 128 && bushes < 6; ++i) {
-			blockpos.setWithOffset(pos, random.nextInt(16) - random.nextInt(16), random.nextInt(4) - random.nextInt(4), random.nextInt(16) - random.nextInt(16));
-			if (canBushGrowAt(level, blockpos)) {
-				placeBush(level, blockpos, random);
-				placeGroundHibiscuses(level, blockpos, random);
+		for (int i = 0; i < 32 && bushes < 6; ++i) {
+			int x = pos.getX() + random.nextInt(16) - random.nextInt(16);
+			int z = pos.getZ() + random.nextInt(16) - random.nextInt(16);
+			mutablepos.set(x, level.getHeight(Heightmap.Types.WORLD_SURFACE_WG, x, z), z);
+
+			for (int j = 0; j < 2; ++j) {
+				if (isNonHibiscusLeaves(level.getBlockState(mutablepos)))
+					mutablepos.move(Direction.UP);
+				else
+					break;
+			}
+
+			if (canBushGrowAt(level, mutablepos)) {
+				placeBush(level, mutablepos, random);
+				placeGroundHibiscuses(level, mutablepos, random);
 				bushes++;
 			}
 		}
@@ -71,7 +80,7 @@ public class HibiscusBushFeature extends Feature<NoneFeatureConfiguration> {
 
 		placeLeafCube(level, pos, minX, minY, minZ, maxX, maxY, maxZ);
 
-		if (maxY > 0 && random.nextBoolean()) {
+		if (maxY > 0 && random.nextInt(3) > 0) {
 			int offsetX = random.nextBoolean() ? -1 : 1;
 			int offsetY = random.nextBoolean() ? -1 : 1;
 
@@ -102,11 +111,11 @@ public class HibiscusBushFeature extends Feature<NoneFeatureConfiguration> {
 
 	private static void placeGroundHibiscuses(WorldGenLevel level, BlockPos pos, RandomSource random) {
 		BlockPos.MutableBlockPos blockpos = new BlockPos.MutableBlockPos();
-		for (int i = 0; i < 64; ++i) {
+		for (int i = 0; i < 80; ++i) {
 			Optional<Block> block = ForgeRegistries.BLOCKS.tags().getTag(EnvironmentalBlockTags.HIBISCUSES).getRandomElement(random);
 			if (block.isPresent()) {
 				BlockState blockstate = block.get().defaultBlockState();
-				blockpos.setWithOffset(pos, random.nextInt(7) - random.nextInt(7), random.nextInt(3) - random.nextInt(3), random.nextInt(7) - random.nextInt(7));
+				blockpos.setWithOffset(pos, random.nextInt(8) - random.nextInt(8), random.nextInt(4) - random.nextInt(4), random.nextInt(8) - random.nextInt(8));
 
 				if (level.getBlockState(blockpos).isAir() && blockstate.canSurvive(level, blockpos))
 					level.setBlock(blockpos, blockstate, 2);
@@ -116,22 +125,22 @@ public class HibiscusBushFeature extends Feature<NoneFeatureConfiguration> {
 
 	private static void placeLeafCube(WorldGenLevel level, BlockPos pos, int minX, int minY, int minZ, int maxX, int maxY, int maxZ) {
 		for (BlockPos blockpos : BlockPos.betweenClosed(pos.offset(minX, minY, minZ), pos.offset(maxX, maxY, maxZ))) {
-			if (isAirOrReplaceablePlant(level, blockpos)) {
+			if (isAirOrPlant(level.getBlockState(blockpos))) {
 				level.setBlock(blockpos, EnvironmentalBlocks.HIBISCUS_LEAVES.get().defaultBlockState(), 19);
 			}
 		}
 	}
 
 	private static void placeWallHibiscuses(WorldGenLevel level, BlockPos pos, RandomSource random) {
-		BlockPos.MutableBlockPos blockpos = new BlockPos.MutableBlockPos();
+		BlockPos.MutableBlockPos mutablepos = new BlockPos.MutableBlockPos();
 		for (int x = -3; x <= 3; ++x) {
-			for (int y = -1; y <= 3; ++y) {
-				for (int z = -3; z <= 3; ++z) {
-					blockpos.setWithOffset(pos, x, y, z);
-					if (random.nextBoolean() && level.getBlockState(blockpos).isAir()) {
+			for (int z = -3; z <= 3; ++z) {
+				for (int y = -1; y <= 3; ++y) {
+					mutablepos.setWithOffset(pos, x, y, z);
+					if (random.nextInt(4) > 0 && level.getBlockState(mutablepos).isAir()) {
 						List<Direction> validdirections = Lists.newArrayList();
 						for (Direction direction : Direction.values()) {
-							if (direction != Direction.UP && level.getBlockState(blockpos.relative(direction)).is(EnvironmentalBlocks.HIBISCUS_LEAVES.get())) {
+							if (direction != Direction.UP && level.getBlockState(mutablepos.relative(direction)).is(EnvironmentalBlocks.HIBISCUS_LEAVES.get())) {
 								validdirections.add(direction);
 							}
 						}
@@ -139,7 +148,7 @@ public class HibiscusBushFeature extends Feature<NoneFeatureConfiguration> {
 						if (!validdirections.isEmpty()) {
 							Direction direction = validdirections.get(random.nextInt(validdirections.size())).getOpposite();
 							ForgeRegistries.BLOCKS.tags().getTag(EnvironmentalBlockTags.WALL_HIBISCUSES).getRandomElement(random).ifPresent((block) -> {
-								level.setBlock(blockpos,  WallHibiscusBlock.setPropertiesForDirection(block.defaultBlockState(), direction, random), 2);
+								level.setBlock(mutablepos, WallHibiscusBlock.setPropertiesForDirection(block.defaultBlockState(), direction, random), 2);
 							});
 						}
 					}
@@ -149,28 +158,29 @@ public class HibiscusBushFeature extends Feature<NoneFeatureConfiguration> {
 	}
 
 	private static boolean canBushGrowAt(LevelAccessor level, BlockPos pos) {
-		int i = 0;
-		int j = 0;
-		for (BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-1, 0, -1), pos.offset(1, 0, 1))) {
-			if (!isAirOrReplaceablePlant(level, blockpos) && ++i > 1)
-				return false;
-			else if (!isGrassOrDirt(level, blockpos.below()) && !hasLeavesAndDirtBelow(level, blockpos, 1) && !hasLeavesAndDirtBelow(level, blockpos, 2) && ++j > 2)
-				return false;
+		BlockPos.MutableBlockPos mutablepos = new BlockPos.MutableBlockPos();
+		for (int x = -1; x <= 1; ++x) {
+			for (int z = -1; z <= 1; ++z) {
+				for (int y = 1; y >= -1; --y) {
+					mutablepos.setWithOffset(pos, x, y, z);
+					if (!isAirOrPlant(level.getBlockState(mutablepos))) {
+						return false;
+					} else if (isGrassOrDirt(level, mutablepos.move(Direction.DOWN)) || isNonHibiscusLeaves(level.getBlockState(mutablepos))) {
+						break;
+					} else if (y == -1) {
+						return false;
+					}
+				}
+			}
 		}
 		return true;
 	}
 
-	private static boolean hasLeavesAndDirtBelow(LevelAccessor level, BlockPos pos, int depth) {
-		for (int i = 1; i <= depth; ++i) {
-			BlockState state = level.getBlockState(pos.below(i));
-			if (!state.is(BlockTags.LEAVES) || state.getBlock() == EnvironmentalBlocks.HIBISCUS_LEAVES.get())
-				return false;
-		}
-		return isGrassOrDirt(level, pos.below(depth + 1));
+	private static boolean isNonHibiscusLeaves(BlockState state) {
+		return state.is(BlockTags.LEAVES) && state.getBlock() != EnvironmentalBlocks.HIBISCUS_LEAVES.get();
 	}
 
-	private static boolean isAirOrReplaceablePlant(LevelAccessor level, BlockPos pos) {
-		BlockState state = level.getBlockState(pos);
-		return state.isAir() || state.getMaterial() == Material.REPLACEABLE_PLANT || state.is(EnvironmentalBlockTags.HIBISCUSES);
+	private static boolean isAirOrPlant(BlockState state) {
+		return state.isAir() || state.getMaterial() == Material.REPLACEABLE_PLANT || state.getMaterial() == Material.PLANT;
 	}
 }
