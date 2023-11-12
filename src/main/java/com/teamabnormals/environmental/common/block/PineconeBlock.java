@@ -51,7 +51,7 @@ public class PineconeBlock extends FallingBlock {
     }
 
     private static void addPossibleSaplingPositions(int x, int y, int z, List<BlockPos> list, ServerLevel level, BlockPos origin, BlockPos.MutableBlockPos mutablepos, boolean[][][] foundpositions) {
-        if (x < 0 || x >= 11 || y < 0 || y >= 11 || z < 0 || z >= 11)
+        if (x < 0 || x >= 9 || y < 0 || y >= 9 || z < 0 || z >= 9)
             return;
         else if (foundpositions[x][y][z])
             return;
