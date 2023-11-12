@@ -44,7 +44,7 @@ public class PineconeGolemPlantSaplingGoal extends Goal {
             --this.nextStartTicks;
             return false;
         } else {
-            this.nextStartTicks = reducedTickDelay(16);
+            this.nextStartTicks = reducedTickDelay(20);
             if (!net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.golem.level, this.golem))
                 return false;
 
@@ -54,14 +54,11 @@ public class PineconeGolemPlantSaplingGoal extends Goal {
                 BlockState blockstate = blockitem.getBlock().defaultBlockState();
                 BlockPos.MutableBlockPos mutablepos = new BlockPos.MutableBlockPos();
 
-                int offsetX = this.golem.getRandom().nextInt(3) - 1;
-                int offsetZ = this.golem.getRandom().nextInt(3) - 1;
-
                 for (int y = 0; y >= -1; y = y < 0 ? -y : -y - 1) {
                     List<BlockPos> list = Lists.newArrayList();
-                    for (int x = -2; x <= 2; x++) {
-                        for (int z = -2; z <= 2; z++) {
-                            list.add(new BlockPos(mutablepos.setWithOffset(this.golem.blockPosition(), x + offsetX, y, z + offsetZ)));
+                    for (int x = -3; x <= 3; x++) {
+                        for (int z = -3; z <= 3; z++) {
+                            list.add(new BlockPos(mutablepos.setWithOffset(this.golem.blockPosition(), x, y, z)));
                         }
                     }
 
@@ -139,8 +136,8 @@ public class PineconeGolemPlantSaplingGoal extends Goal {
     private boolean hasSpaceForTree(BlockPos pos) {
         BlockPos.MutableBlockPos mutablepos = new BlockPos.MutableBlockPos();
         for (int y = -2; y <= 6; y++) {
-            for (int x = -2; x <= 2; x++) {
-                for (int z = -2; z <= 2; z++) {
+            for (int x = -3; x <= 3; x++) {
+                for (int z = -3; z <= 3; z++) {
                     mutablepos.setWithOffset(pos, x, y, z);
                     if ((y > 0 && !TreeFeature.validTreePos(this.golem.level, mutablepos)) || this.golem.level.getBlockState(mutablepos).is(BlockTags.SAPLINGS))
                         return false;

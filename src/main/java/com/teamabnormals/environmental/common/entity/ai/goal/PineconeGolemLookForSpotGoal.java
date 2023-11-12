@@ -7,7 +7,8 @@ import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 public class PineconeGolemLookForSpotGoal extends WaterAvoidingRandomStrollGoal {
 
     public PineconeGolemLookForSpotGoal(PathfinderMob golem, double speed) {
-        super(golem, speed, 0.2F);
+        super(golem, speed);
+        this.interval = 40;
     }
 
     @Override
