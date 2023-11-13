@@ -1,8 +1,9 @@
 package com.teamabnormals.environmental.common.entity.animal;
 
+import com.teamabnormals.environmental.common.entity.ai.goal.HuntFloraGoal;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
+import com.teamabnormals.environmental.core.registry.EnvironmentalParticleTypes;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -33,8 +34,16 @@ import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.level.pathfinder.PathFinder;
 import net.minecraft.world.level.pathfinder.WalkNodeEvaluator;
 
+import java.util.Optional;
+
 public class Tapir extends Animal {
 	private static final EntityDataAccessor<Boolean> HAS_BABY_PATTERN = SynchedEntityData.defineId(Tapir.class, EntityDataSerializers.BOOLEAN);
+
+	private static final EntityDataAccessor<Integer> TRACKING_TIME = SynchedEntityData.defineId(Tapir.class, EntityDataSerializers.INT);
+	private static final EntityDataAccessor<Boolean> IS_TRACKING = SynchedEntityData.defineId(Tapir.class, EntityDataSerializers.BOOLEAN);
+	private static final EntityDataAccessor<Boolean> HAS_TARGET = SynchedEntityData.defineId(Tapir.class, EntityDataSerializers.BOOLEAN);
+	private static final EntityDataAccessor<Optional<BlockPos>> TRACKING_POS = SynchedEntityData.defineId(Tapir.class, EntityDataSerializers.OPTIONAL_BLOCK_POS);
+	private static final EntityDataAccessor<Optional<BlockState>> TRACKING_STATE = SynchedEntityData.defineId(Tapir.class, EntityDataSerializers.BLOCK_STATE);
 
 	public Tapir(EntityType<? extends Tapir> type, Level world) {
 		super(type, world);
@@ -43,6 +52,7 @@ public class Tapir extends Animal {
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new FloatGoal(this));
 		this.goalSelector.addGoal(1, new PanicGoal(this, 1.25D));
+		this.goalSelector.addGoal(2, new HuntFloraGoal(this));
 		this.goalSelector.addGoal(3, new BreedGoal(this, 1.0D));
 		this.goalSelector.addGoal(4, new TemptGoal(this, 1.2D, Ingredient.of(ItemTags.ANVIL), false));
 		this.goalSelector.addGoal(5, new FollowParentGoal(this, 1.1D));
@@ -55,7 +65,49 @@ public class Tapir extends Animal {
 	protected void defineSynchedData() {
 		super.defineSynchedData();
 		this.entityData.define(HAS_BABY_PATTERN, false);
+		this.entityData.define(IS_TRACKING, false);
+		this.entityData.define(HAS_TARGET, false);
+		this.entityData.define(TRACKING_TIME, 0);
+		this.entityData.define(TRACKING_POS, Optional.empty());
+		this.entityData.define(TRACKING_STATE, Optional.empty());
 	}
+
+	public boolean hasTarget() {
+		return this.entityData.get(HAS_TARGET);
+	}
+
+	public void setHasTarget(boolean hasTarget) {
+		this.entityData.set(HAS_TARGET, hasTarget);
+	}
+
+	public void setTrackingPos(BlockPos pos) {
+		this.entityData.set(TRACKING_POS, Optional.of(pos));
+	}
+
+	public Optional<BlockPos> getTrackingPos() {
+		return this.entityData.get(TRACKING_POS);
+	}
+
+	public Optional<BlockState> getTrackingState() {
+		return this.entityData.get(TRACKING_STATE);
+	}
+
+	public void setTrackingState(BlockState state) {
+		this.entityData.set(TRACKING_STATE, Optional.of(state));
+	}
+
+	public int getTrackingTime() {
+		return this.entityData.get(TRACKING_TIME);
+	}
+
+	public void setTrackingTime(int time) {
+		this.entityData.set(TRACKING_TIME, time);
+	}
+
+	public void setTracking(boolean tracking) {
+		this.entityData.set(IS_TRACKING, tracking);
+	}
+
 
 	public void setHasBabyPattern(boolean hasBabyPattern) {
 		this.entityData.set(HAS_BABY_PATTERN, hasBabyPattern);
@@ -65,44 +117,30 @@ public class Tapir extends Animal {
 		return this.entityData.get(HAS_BABY_PATTERN);
 	}
 
-	// this.pig.getNavigation().moveTo((double) ((float) blockpos.getX()) + 0.5D, blockpos.getY() + 1, (double) ((float) blockpos.getZ()) + 0.5D, 1.1D);
-
 	@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 		if (stack.getItem() instanceof BlockItem blockItem) {
-			boolean foundBlock = false;
-			origin:
-			for (int height = 0; height <= 3; height++) {
-				for (int width = 0; width <= 96; width++) {
-					for (int i = -width; i <= width; i++) {
-						for (int j = -height; j <= height; j++) {
-							for (int k = -width; k <= width; k++) {
-								if ((Math.abs(i) == width && Math.abs(j) == height) || (Math.abs(k) == width && Math.abs(j) == height)) {
-									BlockPos position = this.blockPosition().offset(i, j, k);
-									if (level.getBlockState(position).is(blockItem.getBlock())) {
-										this.getNavigation().moveTo((double) ((float) position.getX()) + 0.5D, position.getY() + 1, (double) ((float) position.getZ()) + 0.5D, 1.1D);
-										foundBlock = true;
-										break origin;
-									}
-								}
-							}
-						}
+			if (this.getTrackingTime() == 0) {
+				this.setTrackingState(blockItem.getBlock().defaultBlockState());
+				this.setTrackingTime(4800);
+				if (!player.isCreative())
+					stack.shrink(1);
+
+				if (level.isClientSide()) {
+					for (int i = 0; i < 7; ++i) {
+						double d0 = random.nextGaussian() * 0.02D;
+						double d1 = random.nextGaussian() * 0.02D;
+						double d2 = random.nextGaussian() * 0.02D;
+						level.addParticle(EnvironmentalParticleTypes.PIG_FINDS_TRUFFLE.get(), this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d0, d1, d2);
 					}
 				}
+				return InteractionResult.sidedSuccess(level.isClientSide());
 			}
 
-			for (int p = 0; p < 4; ++p) {
-				double d0 = this.random.nextGaussian() * 0.02D;
-				double d1 = this.random.nextGaussian() * 0.02D;
-				double d2 = this.random.nextGaussian() * 0.02D;
-				this.level.addParticle(foundBlock ? ParticleTypes.HAPPY_VILLAGER : ParticleTypes.LARGE_SMOKE, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d0, d1, d2);
-			}
-
-			return InteractionResult.sidedSuccess(level.isClientSide());
-		} else {
-			return super.mobInteract(player, hand);
 		}
+
+		return super.mobInteract(player, hand);
 	}
 
 	@Override

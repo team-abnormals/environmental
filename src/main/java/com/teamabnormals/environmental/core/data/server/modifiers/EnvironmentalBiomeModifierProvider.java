@@ -57,6 +57,7 @@ public class EnvironmentalBiomeModifierProvider {
 		addSpawn("duck_river", Biomes.RIVER, new SpawnerData(EnvironmentalEntityTypes.DUCK.get(), 1, 1, 2));
 		addSpawnIgnore("deer", EnvironmentalBiomeTags.HAS_DEER, EnvironmentalBiomeTags.WITHOUT_DEER, new SpawnerData(EnvironmentalEntityTypes.DEER.get(), 16, 4, 4));
 		addSpawn("reindeer", EnvironmentalBiomeTags.HAS_REINDEER, new SpawnerData(EnvironmentalEntityTypes.REINDEER.get(), 16, 4, 4));
+		addSpawn("tapir", BiomeTags.IS_JUNGLE, new SpawnerData(EnvironmentalEntityTypes.TAPIR.get(), 10, 2, 2));
 		addSpawn("yak", EnvironmentalBiomeTags.HAS_YAK, new SpawnerData(EnvironmentalEntityTypes.YAK.get(), 8, 4, 4));
 		addSpawn("deer_meadow", Biomes.MEADOW, new SpawnerData(EnvironmentalEntityTypes.DEER.get(), 1, 2, 4));
 		addSpawn("pig", Biomes.MANGROVE_SWAMP, new SpawnerData(EntityType.PIG, 10, 4, 4));
