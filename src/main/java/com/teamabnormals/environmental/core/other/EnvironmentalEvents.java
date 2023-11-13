@@ -118,11 +118,11 @@ public class EnvironmentalEvents {
 
 		if (event.getResult() != Result.DENY && level instanceof ServerLevelAccessor serverLevel) {
 			RandomSource random = level.getRandom();
-			if (entity.getType() == EntityType.PIG && serverLevel.getBiome(entity.blockPosition()).is(EnvironmentalBiomeTags.HAS_MUDDY_PIG)) {
+			if (entity.getType() == EntityType.PIG && EnvironmentalConfig.COMMON.muddyPigs.get() && EnvironmentalConfig.COMMON.naturalMuddyPigs.get() && serverLevel.getBiome(entity.blockPosition()).is(EnvironmentalBiomeTags.HAS_MUDDY_PIG)) {
 				IDataManager data = (IDataManager) entity;
 				data.setValue(EnvironmentalDataProcessors.IS_MUDDY, true);
 				data.setValue(EnvironmentalDataProcessors.MUD_DRYING_TIME, 36000);
-				if (random.nextFloat() < 0.2F) {
+				if (random.nextFloat() < EnvironmentalConfig.COMMON.muddyPigDecorationChance.get()) {
 					Optional<Item> item = ForgeRegistries.ITEMS.tags().getTag(EnvironmentalItemTags.SPAWNS_ON_MUDDY_PIG).getRandomElement(random);
 					item.ifPresent(value -> data.setValue(EnvironmentalDataProcessors.MUDDY_PIG_DECORATION, ForgeRegistries.ITEMS.getKey(value)));
 				}
@@ -230,33 +230,37 @@ public class EnvironmentalEvents {
 
 		if (target instanceof Pig pig && target.isAlive() && !pig.isLeashed()) {
 			IDataManager data = ((IDataManager) target);
-			if (data.getValue(EnvironmentalDataProcessors.IS_MUDDY)) {
+			if (EnvironmentalConfig.COMMON.muddyPigs.get() && data.getValue(EnvironmentalDataProcessors.IS_MUDDY)) {
 				ResourceLocation decoration = data.getValue(EnvironmentalDataProcessors.MUDDY_PIG_DECORATION);
 				boolean dried = data.getValue(EnvironmentalDataProcessors.MUD_DRYING_TIME) <= 0;
 				if (ForgeRegistries.ITEMS.getValue(decoration) == null) {
 					data.setValue(EnvironmentalDataProcessors.MUDDY_PIG_DECORATION, new ResourceLocation("empty"));
 				}
 
-				if (decoration.equals(new ResourceLocation("empty"))) {
-					if (stack.is(EnvironmentalItemTags.MUDDY_PIG_DECORATIONS)) {
-						data.setValue(EnvironmentalDataProcessors.MUDDY_PIG_DECORATION, ForgeRegistries.ITEMS.getKey(stack.getItem()));
-						level.playSound(null, target, dried ? SoundEvents.PACKED_MUD_PLACE : SoundEvents.MUD_PLACE, SoundSource.PLAYERS, 1.0F, 1.0F);
-						if (!event.getEntity().isCreative()) stack.shrink(1);
+				boolean allowDecorating = EnvironmentalConfig.COMMON.decoratableMuddyPigs.get();
+
+				if (allowDecorating) {
+					if (decoration.equals(new ResourceLocation("empty"))) {
+						if (stack.is(EnvironmentalItemTags.MUDDY_PIG_DECORATIONS)) {
+							data.setValue(EnvironmentalDataProcessors.MUDDY_PIG_DECORATION, ForgeRegistries.ITEMS.getKey(stack.getItem()));
+							level.playSound(null, target, dried ? SoundEvents.PACKED_MUD_PLACE : SoundEvents.MUD_PLACE, SoundSource.PLAYERS, 1.0F, 1.0F);
+							if (!event.getEntity().isCreative()) stack.shrink(1);
+							event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide()));
+							event.setCanceled(true);
+						}
+					} else if (stack.canPerformAction(ToolActions.SHEARS_CARVE)) {
+						level.playSound(null, target, SoundEvents.SNOW_GOLEM_SHEAR, SoundSource.PLAYERS, 1.0F, 1.0F);
+						target.gameEvent(GameEvent.SHEAR, player);
+						ItemStack decorationStack = new ItemStack(ForgeRegistries.ITEMS.getValue(decoration));
+						if (!level.isClientSide()) {
+							ItemEntity item = target.spawnAtLocation(decorationStack, 1.0F);
+							item.setDeltaMovement(item.getDeltaMovement().add((random.nextFloat() - random.nextFloat()) * 0.1F, random.nextFloat() * 0.05F, (random.nextFloat() - random.nextFloat()) * 0.1F));
+							stack.hurtAndBreak(1, player, e -> e.broadcastBreakEvent(hand));
+						}
+						data.setValue(EnvironmentalDataProcessors.MUDDY_PIG_DECORATION, new ResourceLocation("empty"));
 						event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide()));
 						event.setCanceled(true);
 					}
-				} else if (stack.canPerformAction(ToolActions.SHEARS_CARVE)) {
-					level.playSound(null, target, SoundEvents.SNOW_GOLEM_SHEAR, SoundSource.PLAYERS, 1.0F, 1.0F);
-					target.gameEvent(GameEvent.SHEAR, player);
-					ItemStack decorationStack = new ItemStack(ForgeRegistries.ITEMS.getValue(decoration));
-					if (!level.isClientSide()) {
-						ItemEntity item = target.spawnAtLocation(decorationStack, 1.0F);
-						item.setDeltaMovement(item.getDeltaMovement().add((random.nextFloat() - random.nextFloat()) * 0.1F, random.nextFloat() * 0.05F, (random.nextFloat() - random.nextFloat()) * 0.1F));
-						stack.hurtAndBreak(1, player, e -> e.broadcastBreakEvent(hand));
-					}
-					data.setValue(EnvironmentalDataProcessors.MUDDY_PIG_DECORATION, new ResourceLocation("empty"));
-					event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide()));
-					event.setCanceled(true);
 				}
 
 				if (stack.is(EnvironmentalItemTags.MUDDY_PIG_DRYING_ITEMS) && !dried) {
@@ -293,7 +297,7 @@ public class EnvironmentalEvents {
 				}
 			}
 
-			if (stack.getItem() == Items.GOLDEN_CARROT && !((Pig) target).isBaby()) {
+			if (stack.is(Items.GOLDEN_CARROT) && !pig.isBaby() && EnvironmentalConfig.COMMON.pigsHuntTruffles.get()) {
 				if (data.getValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME) == 0) {
 					if (level.dimensionType().natural()) {
 						data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, 4800);
@@ -389,15 +393,16 @@ public class EnvironmentalEvents {
 
 	@SubscribeEvent
 	public static void onBabySpawn(BabyEntitySpawnEvent event) {
-		if (event.getParentA() instanceof Pig pig && event.getParentB() instanceof Pig) {
-			Level world = pig.getCommandSenderWorld();
-			int piglets = world.random.nextInt(4);
+		if (event.getParentA() instanceof Pig pig && event.getParentB() instanceof Pig && EnvironmentalConfig.COMMON.largerPigLitters.get()) {
+			Level level = pig.getLevel();
+			int minBonus = EnvironmentalConfig.COMMON.minimumAdditionalPiglets.get();
+			int piglets = minBonus + level.random.nextInt(EnvironmentalConfig.COMMON.maximumAdditionalPiglets.get() + 1 - minBonus);
 			for (int i = 0; i < piglets; ++i) {
-				Pig baby = EntityType.PIG.create(world);
+				Pig baby = EntityType.PIG.create(level);
 				if (baby != null) {
 					baby.setBaby(true);
 					baby.moveTo(pig.getX(), pig.getY(), pig.getZ(), 0.0F, 0.0F);
-					world.addFreshEntity(baby);
+					level.addFreshEntity(baby);
 				}
 			}
 		}
@@ -417,7 +422,7 @@ public class EnvironmentalEvents {
 			ocelot.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(ocelot, Animal.class, 10, false, false, (targetEntity) -> targetEntity.getType() == EnvironmentalEntityTypes.DUCK.get()));
 		}
 
-		if (entity instanceof Pig pig) {
+		if (entity instanceof Pig pig && EnvironmentalConfig.COMMON.pigsHuntTruffles.get()) {
 			Set<WrappedGoal> goals = pig.goalSelector.availableGoals;
 			if (goals.stream().noneMatch((goal) -> goal.getGoal() instanceof HuntTruffleGoal)) pig.goalSelector.addGoal(2, new HuntTruffleGoal(pig));
 			if ((pig.getNavigation() instanceof GroundPathNavigation || pig.getNavigation() instanceof FlyingPathNavigation) && goals.stream().noneMatch((goal) -> goal.getGoal() instanceof TemptGoldenCarrotGoal))
@@ -437,7 +442,7 @@ public class EnvironmentalEvents {
 				int mudDryingTime = data.getValue(EnvironmentalDataProcessors.MUD_DRYING_TIME);
 				if (entity.isInWaterRainOrBubble()) {
 					data.setValue(EnvironmentalDataProcessors.MUD_DRYING_TIME, mudDryingTime + 1);
-				} else if (mudDryingTime > 0 && level.dimensionType().ultraWarm()) {
+				} else if (mudDryingTime > 0 && EnvironmentalConfig.COMMON.muddyPigsDryOverTime.get() && (!EnvironmentalConfig.COMMON.muddyPigsOnlyDryInTheNether.get() || level.dimensionType().ultraWarm())) {
 					data.setValue(EnvironmentalDataProcessors.MUD_DRYING_TIME, mudDryingTime - 1);
 				}
 			}

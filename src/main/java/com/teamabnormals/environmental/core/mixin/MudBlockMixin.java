@@ -3,6 +3,7 @@ package com.teamabnormals.environmental.core.mixin;
 import com.teamabnormals.blueprint.common.world.storage.tracking.IDataManager;
 import com.teamabnormals.environmental.common.entity.animal.slabfish.Slabfish;
 import com.teamabnormals.environmental.common.entity.animal.slabfish.SlabfishOverlay;
+import com.teamabnormals.environmental.core.EnvironmentalConfig;
 import com.teamabnormals.environmental.core.other.EnvironmentalDataProcessors;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
@@ -22,7 +23,7 @@ public class MudBlockMixin extends Block {
 
 	@Override
 	public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-		if (entity instanceof Pig pig) {
+		if (entity instanceof Pig pig && EnvironmentalConfig.COMMON.muddyPigs.get()) {
 			IDataManager dataManager = (IDataManager) pig;
 			dataManager.setValue(EnvironmentalDataProcessors.IS_MUDDY, true);
 			dataManager.setValue(EnvironmentalDataProcessors.MUD_DRYING_TIME, dataManager.getValue(EnvironmentalDataProcessors.MUD_DRYING_TIME) + 300);

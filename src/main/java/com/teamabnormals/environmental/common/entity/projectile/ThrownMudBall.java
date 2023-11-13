@@ -3,6 +3,7 @@ package com.teamabnormals.environmental.common.entity.projectile;
 import com.teamabnormals.blueprint.common.world.storage.tracking.IDataManager;
 import com.teamabnormals.environmental.common.entity.animal.slabfish.Slabfish;
 import com.teamabnormals.environmental.common.entity.animal.slabfish.SlabfishOverlay;
+import com.teamabnormals.environmental.core.EnvironmentalConfig;
 import com.teamabnormals.environmental.core.other.EnvironmentalDataProcessors;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
@@ -62,7 +63,7 @@ public class ThrownMudBall extends ThrowableItemProjectile {
 					slabby.setSlabfishOverlay(SlabfishOverlay.MUDDY);
 			}
 
-			if (entity instanceof Pig pig) {
+			if (entity instanceof Pig pig && EnvironmentalConfig.COMMON.muddyPigs.get()) {
 				IDataManager dataManager = (IDataManager) pig;
 				dataManager.setValue(EnvironmentalDataProcessors.IS_MUDDY, true);
 				dataManager.setValue(EnvironmentalDataProcessors.MUD_DRYING_TIME, dataManager.getValue(EnvironmentalDataProcessors.MUD_DRYING_TIME) + 1200);
