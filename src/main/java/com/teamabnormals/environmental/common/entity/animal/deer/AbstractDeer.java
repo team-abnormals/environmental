@@ -1,6 +1,7 @@
 package com.teamabnormals.environmental.common.entity.animal.deer;
 
 import com.teamabnormals.environmental.common.entity.ai.goal.*;
+import com.teamabnormals.environmental.core.EnvironmentalConfig;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalBlockTags;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalEntityTypeTags;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalItemTags;
@@ -52,7 +53,7 @@ public abstract class AbstractDeer extends Animal {
 	private static final Predicate<LivingEntity> AVOID_ENTITY_PREDICATE = (entity) ->
 			entity.getType().is(EnvironmentalEntityTypeTags.SCARES_DEER) && !entity.isDiscrete() && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(entity);
 	private static final Predicate<LivingEntity> TRUSTING_AVOID_ENTITY_PREDICATE = (entity) -> {
-		if (!entity.getType().is(EnvironmentalEntityTypeTags.SCARES_TRUSTING_DEER) || (entity instanceof TamableAnimal && ((TamableAnimal) entity).isTame())) {
+		if (!entity.getType().is(EnvironmentalEntityTypeTags.SCARES_TRUSTING_DEER) || (entity instanceof TamableAnimal tamableAnimal && tamableAnimal.isTame())) {
 			return false;
 		} else {
 			return !entity.isDiscrete() && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(entity);
@@ -189,7 +190,7 @@ public abstract class AbstractDeer extends Animal {
 		Item item = stack.getItem();
 		boolean flag = player.isCreative() || this.temptGoal == null || this.temptGoal.isRunning();
 
-		if (!this.isBaby() && (this.isTrusting() || flag)) {
+		if (!this.isBaby() && (this.isTrusting() || flag) && EnvironmentalConfig.COMMON.deerFlowerReproducing.get()) {
 			if (stack.is(EnvironmentalItemTags.DEER_FLOWER_ITEMS)) {
 				this.setFlowerAmount(this.getFlowerAmount() + (stack.is(EnvironmentalItemTags.DEER_SUPER_FLOWER_ITEMS) ? 64 : stack.is(EnvironmentalItemTags.DEER_STRONG_FLOWER_ITEMS) ? 16 : 4));
 				this.floweringTime += 2400;

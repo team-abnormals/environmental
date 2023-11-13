@@ -11,6 +11,8 @@ import org.apache.commons.lang3.tuple.Pair;
 public class EnvironmentalConfig {
 
 	public static class Common {
+		public final BooleanValue deerFlowerReproducing;
+
 		public final BooleanValue blockOnlyNaturalSpawns;
 		public final IntValue koiHorizontalSerenityRange;
 		public final IntValue koiVerticalSerenityRange;
@@ -33,6 +35,9 @@ public class EnvironmentalConfig {
 
 		Common(ForgeConfigSpec.Builder builder) {
 			builder.push("mobs");
+			builder.push("deer");
+			deerFlowerReproducing = builder.comment("If Deer can reproduce and spread flowers by feeding them an Apple followed by a flower").define("Deer flower reproducing", true);
+			builder.pop();
 			builder.push("koi");
 			blockOnlyNaturalSpawns = builder.comment("Make Koi only block natural spawns").define("Block only natural spawns", true);
 			koiHorizontalSerenityRange = builder.comment("Horizontal radius of Serenity effect in blocks").defineInRange("Horizontal serenity range (radius)", 32, 0, Integer.MAX_VALUE);
