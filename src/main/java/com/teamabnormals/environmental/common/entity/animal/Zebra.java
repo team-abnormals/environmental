@@ -52,14 +52,9 @@ public class Zebra extends AbstractHorse {
 					attackAngleVector = new Vec3(attackAngleVector.x, 0.0D, attackAngleVector.z);
 					float x = Mth.sin(this.getYRot() * ((float) Math.PI / 180F));
 					float z = -Mth.cos(this.getYRot() * ((float) Math.PI / 180F));
-					if (attackAngleVector.dot(this.getViewVector(1.0F)) > 0.5D) {
+					if (attackAngleVector.dot(this.getViewVector(1.0F)) < 0.5D) {
 						this.makeMad();
-						this.doHurtTarget(living);
-						living.knockback(0.25F, x, z);
-						this.knockback(0.15F, -x, -z);
-					} else {
-						this.makeMad();
-						this.doHurtTarget(living);
+						living.hurt(DamageSource.GENERIC, 1.0F);
 						living.knockback(1.5F, -x, -z);
 						this.knockback(0.15F, x, z);
 					}
