@@ -1,9 +1,7 @@
 {
   "values": [
-    "minecraft:apple",
-    "minecraft:golden_apple",
-    "minecraft:enchanted_golden_apple",
     "#environmental:deer_food",
-    "#environmental:deer_plantables"
+    "#environmental:deer_plantables",
+    "#environmental:deer_flower_items"
   ]
 }

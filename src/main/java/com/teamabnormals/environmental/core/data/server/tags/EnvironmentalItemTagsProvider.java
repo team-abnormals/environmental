@@ -35,9 +35,9 @@ public class EnvironmentalItemTagsProvider extends ItemTagsProvider {
 		this.tag(EnvironmentalItemTags.DUCK_FOOD).add(Items.SEAGRASS, EnvironmentalItems.DUCKWEED.get()).addOptionalTag(new ResourceLocation("forge", "crops/rice"));
 		this.tag(EnvironmentalItemTags.DEER_FOOD).add(Items.SWEET_BERRIES).addTag(EnvironmentalItemTags.FRUITS_CHERRY).addOptionalTag(new ResourceLocation("forge", "fruits/strawberry"));
 		this.tag(EnvironmentalItemTags.DEER_PLANTABLES).addTag(ItemTags.SMALL_FLOWERS).addTag(ItemTags.TALL_FLOWERS);
-		this.tag(EnvironmentalItemTags.DEER_TEMPT_ITEMS).add(Items.APPLE, Items.GOLDEN_APPLE, Items.ENCHANTED_GOLDEN_APPLE).addTag(EnvironmentalItemTags.DEER_FOOD).addTag(EnvironmentalItemTags.DEER_PLANTABLES);
+		this.tag(EnvironmentalItemTags.DEER_TEMPT_ITEMS).addTag(EnvironmentalItemTags.DEER_FOOD).addTag(EnvironmentalItemTags.DEER_PLANTABLES).addTag(EnvironmentalItemTags.DEER_FLOWER_ITEMS);
 		this.tag(EnvironmentalItemTags.REINDEER_FOOD).add(EnvironmentalBlocks.CUP_LICHEN.get().asItem(), Items.CARROT);
-		this.tag(EnvironmentalItemTags.REINDEER_TEMPT_ITEMS).add(Items.APPLE, Items.GOLDEN_APPLE, Items.ENCHANTED_GOLDEN_APPLE).addTag(EnvironmentalItemTags.REINDEER_FOOD).addTag(EnvironmentalItemTags.DEER_PLANTABLES);
+		this.tag(EnvironmentalItemTags.REINDEER_TEMPT_ITEMS).addTag(EnvironmentalItemTags.REINDEER_FOOD).addTag(EnvironmentalItemTags.DEER_PLANTABLES).addTag(EnvironmentalItemTags.DEER_FLOWER_ITEMS);
 		this.tag(EnvironmentalItemTags.SLABFISH_FOOD).addTag(ItemTags.FISHES);
 		this.tag(EnvironmentalItemTags.SLABFISH_TAME_ITEMS).add(Items.TROPICAL_FISH);
 		this.tag(EnvironmentalItemTags.SLABFISH_SNACKS).add(Items.CHORUS_FRUIT).addOptional(new ResourceLocation("atmospheric", "passionfruit")).addOptional(new ResourceLocation("atmospheric", "shimmering_passionfruit")).addOptional(new ResourceLocation("endergetic", "bolloom_fruit")).addOptional(new ResourceLocation("caverns_and_chasms", "bejeweled_apple"));
@@ -45,6 +45,11 @@ public class EnvironmentalItemTagsProvider extends ItemTagsProvider {
 		this.tag(EnvironmentalItemTags.MUDDY_PIG_DECORATIONS).addTag(ItemTags.SMALL_FLOWERS).addTag(ItemTags.SAPLINGS).addTag(Tags.Items.MUSHROOMS).add(Items.LILY_PAD, Items.DEAD_BUSH, Items.FERN, Items.BIG_DRIPLEAF, CATTAIL.get().asItem());
 		this.tag(EnvironmentalItemTags.SPAWNS_ON_MUDDY_PIG).add(Items.BLUE_ORCHID, DIANTHUS.get().asItem(), Items.POPPY, Items.DANDELION, Items.RED_MUSHROOM, Items.BROWN_MUSHROOM, CATTAIL.get().asItem(), Items.LILY_PAD);
 		this.tag(EnvironmentalItemTags.MUDDY_PIG_DRYING_ITEMS).add(Items.WHEAT).addOptional(new ResourceLocation("farmersdelight", "straw"));
+		this.tag(EnvironmentalItemTags.PIG_TRUFFLE_ITEMS).add(Items.GOLDEN_CARROT);
+		this.tag(BlueprintItemTags.PIG_FOOD).addTag(EnvironmentalItemTags.PIG_TRUFFLE_ITEMS);
+		this.tag(EnvironmentalItemTags.DEER_FLOWER_ITEMS).add(Items.APPLE).addTag(EnvironmentalItemTags.DEER_STRONG_FLOWER_ITEMS).addTag(EnvironmentalItemTags.DEER_SUPER_FLOWER_ITEMS);
+		this.tag(EnvironmentalItemTags.DEER_STRONG_FLOWER_ITEMS).add(Items.GOLDEN_APPLE);
+		this.tag(EnvironmentalItemTags.DEER_SUPER_FLOWER_ITEMS).add(Items.ENCHANTED_GOLDEN_APPLE);
 
 		this.copy(BlockTags.PLANKS, ItemTags.PLANKS);
 		this.copy(BlockTags.WOODEN_BUTTONS, ItemTags.WOODEN_BUTTONS);

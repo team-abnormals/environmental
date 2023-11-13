@@ -25,12 +25,16 @@ public class EnvironmentalItemTags {
 	public static final TagKey<Item> DEER_FOOD = itemTag("deer_food");
 	public static final TagKey<Item> DEER_TEMPT_ITEMS = itemTag("deer_tempt_items");
 	public static final TagKey<Item> DEER_PLANTABLES = itemTag("deer_plantables");
+	public static final TagKey<Item> DEER_FLOWER_ITEMS = itemTag("deer_flower_items");
+	public static final TagKey<Item> DEER_STRONG_FLOWER_ITEMS = itemTag("deer_strong_flower_items");
+	public static final TagKey<Item> DEER_SUPER_FLOWER_ITEMS = itemTag("deer_super_flower_items");
 	public static final TagKey<Item> REINDEER_FOOD = itemTag("reindeer_food");
 	public static final TagKey<Item> REINDEER_TEMPT_ITEMS = itemTag("reindeer_tempt_items");
 	public static final TagKey<Item> SLABFISH_SNACKS = itemTag("slabfish_snacks");
 	public static final TagKey<Item> SLABFISH_FOOD = itemTag("slabfish_food");
 	public static final TagKey<Item> SLABFISH_TAME_ITEMS = itemTag("slabfish_tame_items");
 	public static final TagKey<Item> YAK_FOOD = itemTag("yak_food");
+	public static final TagKey<Item> PIG_TRUFFLE_ITEMS = itemTag("pig_truffle_items");
 	public static final TagKey<Item> MUDDY_PIG_DECORATIONS = itemTag("muddy_pig_decorations");
 	public static final TagKey<Item> MUDDY_PIG_DRYING_ITEMS = itemTag("muddy_pig_drying_items");
 	public static final TagKey<Item> SPAWNS_ON_MUDDY_PIG = itemTag("spawns_on_muddy_pig");

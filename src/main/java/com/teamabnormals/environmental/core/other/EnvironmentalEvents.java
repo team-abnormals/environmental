@@ -7,7 +7,6 @@ import com.teamabnormals.environmental.common.block.GiantLilyPadBlock;
 import com.teamabnormals.environmental.common.block.HangingLeavesBlock;
 import com.teamabnormals.environmental.common.block.LargeLilyPadBlock;
 import com.teamabnormals.environmental.common.entity.ai.goal.HuntTruffleGoal;
-import com.teamabnormals.environmental.common.entity.ai.goal.TemptGoldenCarrotGoal;
 import com.teamabnormals.environmental.common.entity.animal.koi.Koi;
 import com.teamabnormals.environmental.common.entity.animal.slabfish.Slabfish;
 import com.teamabnormals.environmental.common.entity.animal.slabfish.SlabfishOverlay;
@@ -38,8 +37,6 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.WrappedGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NonTameRandomTargetGoal;
-import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
-import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Ocelot;
 import net.minecraft.world.entity.animal.Pig;
@@ -55,7 +52,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -297,7 +293,7 @@ public class EnvironmentalEvents {
 				}
 			}
 
-			if (stack.is(Items.GOLDEN_CARROT) && !pig.isBaby() && EnvironmentalConfig.COMMON.pigsHuntTruffles.get()) {
+			if (stack.is(EnvironmentalItemTags.PIG_TRUFFLE_ITEMS) && !pig.isBaby() && EnvironmentalConfig.COMMON.pigsHuntTruffles.get()) {
 				if (data.getValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME) == 0) {
 					if (level.dimensionType().natural()) {
 						data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, 4800);
@@ -425,8 +421,6 @@ public class EnvironmentalEvents {
 		if (entity instanceof Pig pig && EnvironmentalConfig.COMMON.pigsHuntTruffles.get()) {
 			Set<WrappedGoal> goals = pig.goalSelector.availableGoals;
 			if (goals.stream().noneMatch((goal) -> goal.getGoal() instanceof HuntTruffleGoal)) pig.goalSelector.addGoal(2, new HuntTruffleGoal(pig));
-			if ((pig.getNavigation() instanceof GroundPathNavigation || pig.getNavigation() instanceof FlyingPathNavigation) && goals.stream().noneMatch((goal) -> goal.getGoal() instanceof TemptGoldenCarrotGoal))
-				pig.goalSelector.addGoal(4, new TemptGoldenCarrotGoal(pig, 1.2D, Ingredient.of(Items.GOLDEN_CARROT), false));
 		}
 	}
 

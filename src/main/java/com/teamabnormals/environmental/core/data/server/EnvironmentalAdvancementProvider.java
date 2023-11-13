@@ -107,7 +107,7 @@ public class EnvironmentalAdvancementProvider extends AdvancementProvider {
 						ItemPredicate.Builder.item().of(Tags.Items.SHEARS)))
 				.save(consumer, Environmental.MOD_ID + ":husbandry/shear_cattail");
 
-		createAdvancement("feed_deer_flower", "husbandry", new ResourceLocation("husbandry/root"), EnvironmentalBlocks.RED_LOTUS_FLOWER.get(), FrameType.TASK, true, true, false)
+		createAdvancement("feed_deer_flower", "husbandry", new ResourceLocation("husbandry/root"), Items.APPLE, FrameType.TASK, true, true, false)
 				.addCriterion("feed_deer_flower", PlayerInteractTrigger.TriggerInstance.itemUsedOnEntity(
 						ItemPredicate.Builder.item().of(EnvironmentalItemTags.DEER_PLANTABLES),
 						EntityPredicate.Composite.wrap(EntityPredicate.Builder.entity().of(EnvironmentalEntityTypeTags.DEER).build())))

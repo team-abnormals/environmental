@@ -27,7 +27,7 @@
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "environmental:red_lotus_flower"
+      "item": "minecraft:apple"
     },
     "show_toast": true,
     "title": {

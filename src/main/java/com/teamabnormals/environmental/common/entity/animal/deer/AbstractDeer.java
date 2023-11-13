@@ -39,6 +39,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.event.ForgeEventFactory;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -189,20 +190,8 @@ public abstract class AbstractDeer extends Animal {
 		boolean flag = player.isCreative() || this.temptGoal == null || this.temptGoal.isRunning();
 
 		if (!this.isBaby() && (this.isTrusting() || flag)) {
-			if (stack.is(Items.APPLE)) {
-				this.setFlowerAmount(this.getFlowerAmount() + 8);
-				this.floweringTime += 2400;
-				this.particleCloud(ParticleTypes.HAPPY_VILLAGER);
-				this.usePlayerItem(player, hand, stack);
-				return InteractionResult.SUCCESS;
-			} else if (stack.is(Items.GOLDEN_APPLE)) {
-				this.setFlowerAmount(this.getFlowerAmount() + 24);
-				this.floweringTime += 2400;
-				this.particleCloud(ParticleTypes.HAPPY_VILLAGER);
-				this.usePlayerItem(player, hand, stack);
-				return InteractionResult.SUCCESS;
-			} else if (stack.is(Items.ENCHANTED_GOLDEN_APPLE)) {
-				this.setFlowerAmount(this.getFlowerAmount() + 64);
+			if (stack.is(EnvironmentalItemTags.DEER_FLOWER_ITEMS)) {
+				this.setFlowerAmount(this.getFlowerAmount() + (stack.is(EnvironmentalItemTags.DEER_SUPER_FLOWER_ITEMS) ? 64 : stack.is(EnvironmentalItemTags.DEER_STRONG_FLOWER_ITEMS) ? 16 : 4));
 				this.floweringTime += 2400;
 				this.particleCloud(ParticleTypes.HAPPY_VILLAGER);
 				this.usePlayerItem(player, hand, stack);
@@ -224,7 +213,7 @@ public abstract class AbstractDeer extends Animal {
 			if (flag && this.isFood(stack)) {
 				if (!this.level.isClientSide) {
 					this.usePlayerItem(player, hand, stack);
-					if (this.random.nextInt(3) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player)) {
+					if (this.random.nextInt(3) == 0 && !ForgeEventFactory.onAnimalTame(this, player)) {
 						this.setTrusting(true);
 						this.spawnTrustingParticles(true);
 						this.level.broadcastEntityEvent(this, (byte) 5);
