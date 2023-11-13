@@ -195,7 +195,7 @@ public class Environmental {
 		event.registerEntityRenderer(EnvironmentalEntityTypes.REINDEER.get(), ReindeerRenderer::new);
 		event.registerEntityRenderer(EnvironmentalEntityTypes.YAK.get(), YakRenderer::new);
 		event.registerEntityRenderer(EnvironmentalEntityTypes.KOI.get(), KoiRenderer::new);
-		event.registerEntityRenderer(EnvironmentalEntityTypes.FENNEC_FOX.get(), FennecFoxRenderer::new);
+		// event.registerEntityRenderer(EnvironmentalEntityTypes.FENNEC_FOX.get(), FennecFoxRenderer::new);
 		event.registerEntityRenderer(EnvironmentalEntityTypes.TAPIR.get(), TapirRenderer::new);
 		event.registerEntityRenderer(EnvironmentalEntityTypes.ZEBRA.get(), ZebraRenderer::new);
 		event.registerEntityRenderer(EnvironmentalEntityTypes.PINECONE_GOLEM.get(), PineconeGolemRenderer::new);
