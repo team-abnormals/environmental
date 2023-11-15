@@ -173,7 +173,6 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.add(MYCELIUM_SPROUTS.get(), BlockLoot::createShearsOnlyDrop);
 			this.add(DUCKWEED.get(), BlockLoot::createShearsOnlyDrop);
 			this.add(GIANT_TALL_GRASS.get(), (block) -> createDoublePlantWithOtherDrop(block, Blocks.GRASS, Items.WHEAT_SEEDS, 3, 0.125F));
-			this.add(TALL_DEAD_BUSH.get(), (block) -> createDoublePlantWithOtherDrop(block, Blocks.DEAD_BUSH, Items.STICK, 2, 0.125F));
 			this.dropSelf(CUP_LICHEN.get());
 			this.add(CACTUS_BOBBLE.get(), noDrop());
 

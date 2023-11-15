@@ -128,13 +128,13 @@ public class Zebra extends AbstractHorse {
 	@Override
 	@Nullable
 	protected SoundEvent getEatingSound() {
-		return SoundEvents.MULE_EAT;
+		return SoundEvents.HORSE_EAT;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource source) {
 		super.getHurtSound(source);
-		return SoundEvents.MULE_HURT;
+		return SoundEvents.HORSE_HURT;
 	}
 
 	@Override

@@ -1,6 +1,0 @@
-{
-    "parent": "block/cross",
-    "textures": {
-        "cross": "environmental:block/tall_dead_bush_top"
-    }
-}
