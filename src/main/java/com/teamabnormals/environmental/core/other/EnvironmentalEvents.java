@@ -450,7 +450,7 @@ public class EnvironmentalEvents {
 			} else {
 				if (huntingtime > 0) {
 					data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, huntingtime - 1);
-				} else if (huntingtime < 0) {
+				} else {
 					data.setValue(EnvironmentalDataProcessors.TRUFFLE_HUNTING_TIME, huntingtime + 1);
 					if (level.isClientSide() && data.getValue(EnvironmentalDataProcessors.HAS_TRUFFLE_TARGET) && huntingtime % 10 == 0) {
 						double d0 = random.nextGaussian() * 0.02D;

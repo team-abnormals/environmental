@@ -3,6 +3,7 @@ package com.teamabnormals.environmental.common.entity.animal;
 import com.teamabnormals.environmental.common.entity.ai.goal.HuntFloraGoal;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalParticleTypes;
+import com.teamabnormals.environmental.core.registry.EnvironmentalSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -44,6 +45,8 @@ public class Tapir extends Animal {
 	private static final EntityDataAccessor<Boolean> HAS_TARGET = SynchedEntityData.defineId(Tapir.class, EntityDataSerializers.BOOLEAN);
 	private static final EntityDataAccessor<Optional<BlockPos>> TRACKING_POS = SynchedEntityData.defineId(Tapir.class, EntityDataSerializers.OPTIONAL_BLOCK_POS);
 	private static final EntityDataAccessor<Optional<BlockState>> TRACKING_STATE = SynchedEntityData.defineId(Tapir.class, EntityDataSerializers.BLOCK_STATE);
+
+	private int sniffSoundTime;
 
 	public Tapir(EntityType<? extends Tapir> type, Level world) {
 		super(type, world);
@@ -104,10 +107,13 @@ public class Tapir extends Animal {
 		this.entityData.set(TRACKING_TIME, time);
 	}
 
+	public boolean isTracking() {
+		return this.entityData.get(IS_TRACKING);
+	}
+
 	public void setTracking(boolean tracking) {
 		this.entityData.set(IS_TRACKING, tracking);
 	}
-
 
 	public void setHasBabyPattern(boolean hasBabyPattern) {
 		this.entityData.set(HAS_BABY_PATTERN, hasBabyPattern);
@@ -144,8 +150,38 @@ public class Tapir extends Animal {
 	}
 
 	@Override
+	public void aiStep() {
+		super.aiStep();
+
+		int huntingtime = this.getTrackingTime();
+
+		if (huntingtime == 0  || (this.hasTarget() && this.getTrackingPos().isPresent() && this.getTrackingState().isPresent() && !level.getBlockState(this.getTrackingPos().get()).is(this.getTrackingState().get().getBlock()))) {
+			this.setHasTarget(false);
+			if (huntingtime > 0) this.setTrackingTime(Math.max(-400, -huntingtime));
+		} else {
+			if (huntingtime > 0) {
+				this.setTrackingTime(huntingtime - 1);
+			} else {
+				this.setTrackingTime(huntingtime + 1);
+				if (level.isClientSide() && this.hasTarget() && huntingtime % 10 == 0) {
+					double d0 = random.nextGaussian() * 0.02D;
+					double d1 = random.nextGaussian() * 0.02D;
+					double d2 = random.nextGaussian() * 0.02D;
+					level.addParticle(EnvironmentalParticleTypes.PIG_FINDS_TRUFFLE.get(), this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d0, d1, d2);
+				}
+			}
+		}
+
+		this.sniffSoundTime += 1;
+		if (!level.isClientSide() && this.isTracking() && random.nextInt(60) < this.sniffSoundTime) {
+			this.playSound(EnvironmentalSoundEvents.PIG_SNIFF.get(), 1.0F, (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
+			sniffSoundTime = -20;
+		}
+	}
+
+	@Override
 	protected SoundEvent getAmbientSound() {
-		return SoundEvents.PIG_AMBIENT;
+		return this.isTracking() ? null : SoundEvents.PIG_AMBIENT;
 	}
 
 	@Override
@@ -164,7 +200,7 @@ public class Tapir extends Animal {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
-		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0D).add(Attributes.MOVEMENT_SPEED, 0.25D);
+		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0D).add(Attributes.MOVEMENT_SPEED, 0.35D);
 	}
 
 	@Override
@@ -181,7 +217,6 @@ public class Tapir extends Animal {
 			this.setHasBabyPattern(false);
 		}
 	}
-
 
 	@Override
 	public boolean isFood(ItemStack stack) {
