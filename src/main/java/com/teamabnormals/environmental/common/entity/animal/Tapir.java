@@ -31,6 +31,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.level.pathfinder.PathFinder;
 import net.minecraft.world.level.pathfinder.WalkNodeEvaluator;
@@ -83,8 +84,8 @@ public class Tapir extends Animal {
 		this.entityData.set(HAS_TARGET, hasTarget);
 	}
 
-	public void setTrackingPos(BlockPos pos) {
-		this.entityData.set(TRACKING_POS, Optional.of(pos));
+	public void setTrackingPos(Optional<BlockPos> pos) {
+		this.entityData.set(TRACKING_POS, pos);
 	}
 
 	public Optional<BlockPos> getTrackingPos() {
@@ -95,8 +96,8 @@ public class Tapir extends Animal {
 		return this.entityData.get(TRACKING_STATE);
 	}
 
-	public void setTrackingState(BlockState state) {
-		this.entityData.set(TRACKING_STATE, Optional.of(state));
+	public void setTrackingState(Optional<BlockState> state) {
+		this.entityData.set(TRACKING_STATE, state);
 	}
 
 	public int getTrackingTime() {
@@ -126,9 +127,21 @@ public class Tapir extends Animal {
 	@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
-		if (stack.getItem() instanceof BlockItem blockItem) {
-			if (this.getTrackingTime() == 0) {
-				this.setTrackingState(blockItem.getBlock().defaultBlockState());
+		if (stack.getItem() instanceof BlockItem blockItem && this.getTrackingTime() == 0) {
+			BlockState state = blockItem.getBlock().defaultBlockState();
+			Material material = state.getMaterial();
+			if ((material == Material.PLANT
+					|| material == Material.WATER_PLANT
+					|| material == Material.REPLACEABLE_PLANT
+					|| material == Material.REPLACEABLE_FIREPROOF_PLANT
+					|| material == Material.REPLACEABLE_WATER_PLANT
+					|| material == Material.BAMBOO_SAPLING
+					|| material == Material.BAMBOO
+					|| material == Material.LEAVES
+					|| material == Material.CACTUS
+					|| material == Material.MOSS
+			) && this.findNearestTarget(state)) {
+				this.setTrackingState(Optional.of(state));
 				this.setTrackingTime(4800);
 				if (!player.isCreative())
 					stack.shrink(1);
@@ -143,10 +156,33 @@ public class Tapir extends Animal {
 				}
 				return InteractionResult.sidedSuccess(level.isClientSide());
 			}
-
 		}
 
 		return super.mobInteract(player, hand);
+	}
+
+	private boolean findNearestTarget(BlockState state) {
+		BlockPos blockpos = this.blockPosition();
+		for (int height = 0; height <= 5; height++) {
+			for (int width = 0; width <= 96; width++) {
+				for (int i = -width; i <= width; i++) {
+					for (int j = -height; j <= height; j++) {
+						for (int k = -width; k <= width; k++) {
+							if ((Math.abs(i) == width && Math.abs(j) == height) || (Math.abs(k) == width && Math.abs(j) == height)) {
+								BlockPos position = blockpos.offset(i, j, k);
+								if (this.level.getBlockState(position).is(state.getBlock())) {
+									this.setHasTarget(true);
+									this.setTrackingPos(Optional.of(position));
+									return true;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		return false;
 	}
 
 	@Override
@@ -155,9 +191,11 @@ public class Tapir extends Animal {
 
 		int huntingtime = this.getTrackingTime();
 
-		if (huntingtime == 0  || (this.hasTarget() && this.getTrackingPos().isPresent() && this.getTrackingState().isPresent() && !level.getBlockState(this.getTrackingPos().get()).is(this.getTrackingState().get().getBlock()))) {
+		if (huntingtime == 0 || (this.hasTarget() && this.getTrackingPos().isPresent() && this.getTrackingState().isPresent() && !this.level.getBlockState(this.getTrackingPos().get()).is(this.getTrackingState().get().getBlock()))) {
 			this.setHasTarget(false);
-			if (huntingtime > 0) this.setTrackingTime(Math.max(-400, -huntingtime));
+			if (huntingtime > 0) {
+				this.setTrackingTime(Math.max(-400, -huntingtime));
+			}
 		} else {
 			if (huntingtime > 0) {
 				this.setTrackingTime(huntingtime - 1);

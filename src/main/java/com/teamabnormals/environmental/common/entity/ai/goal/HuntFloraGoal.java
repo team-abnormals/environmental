@@ -29,7 +29,7 @@ public class HuntFloraGoal extends Goal {
 			if (this.tapir.hasTarget()) {
 				return true;
 			} else {
-				return this.tapir.getTrackingTime() > 0 && this.tapir.getTrackingState().isPresent() && this.findNearestTarget();
+				return this.tapir.getTrackingTime() > 0 && this.tapir.getTrackingPos().isPresent();
 			}
 		}
 	}
@@ -49,6 +49,8 @@ public class HuntFloraGoal extends Goal {
 	@Override
 	public void stop() {
 		this.tapir.setTracking(false);
+		this.tapir.setTrackingPos(Optional.empty());
+		this.tapir.setTrackingState(Optional.empty());
 	}
 
 	@Override
@@ -83,29 +85,5 @@ public class HuntFloraGoal extends Goal {
 			BlockPos pos = optionalPos.get();
 			this.tapir.getNavigation().moveTo((double) ((float) pos.getX()) + 0.5D, pos.getY() + 1, (double) ((float) pos.getZ()) + 0.5D, 1.1D);
 		}
-	}
-
-	private boolean findNearestTarget() {
-		BlockPos blockpos = this.tapir.blockPosition();
-		for (int height = 0; height <= 3; height++) {
-			for (int width = 0; width <= 96; width++) {
-				for (int i = -width; i <= width; i++) {
-					for (int j = -height; j <= height; j++) {
-						for (int k = -width; k <= width; k++) {
-							if ((Math.abs(i) == width && Math.abs(j) == height) || (Math.abs(k) == width && Math.abs(j) == height)) {
-								BlockPos position = blockpos.offset(i, j, k);
-								if (this.tapir.level.getBlockState(position).is(this.tapir.getTrackingState().get().getBlock())) {
-									this.tapir.setHasTarget(true);
-									this.tapir.setTrackingPos(position);
-									return true;
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-
-		return false;
 	}
 }
