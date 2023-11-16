@@ -47,7 +47,7 @@ public class ShortBambooFeature extends Feature<ProbabilityFeatureConfiguration>
 								if (isDirt(level.getBlockState(podzolPos))) {
 									level.setBlock(podzolPos, Blocks.PODZOL.defaultBlockState(), 2);
 									if (level.getBlockState(podzolPos.above()).isAir() && random.nextBoolean()) {
-										level.setBlock(podzolPos.above(, Blocks.GRASS, 2));
+										level.setBlock(podzolPos.above(), Blocks.GRASS.defaultBlockState(), 2);
 									}
 								}
 							}
