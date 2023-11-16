@@ -5,7 +5,6 @@ import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -16,7 +15,9 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.levelgen.feature.TreeFeature;
@@ -24,7 +25,7 @@ import net.minecraft.world.phys.BlockHitResult;
 
 import java.util.List;
 
-public class PineconeBlock extends WaxedPineconeBlock {
+public class PineconeBlock extends WaxedPineconeBlock implements BonemealableBlock {
 
 	public PineconeBlock(Properties properties) {
 		super(properties);
@@ -35,7 +36,7 @@ public class PineconeBlock extends WaxedPineconeBlock {
 		ItemStack stack = player.getItemInHand(hand);
 		if (stack.is(Items.HONEYCOMB)) {
 			if (player instanceof ServerPlayer) {
-				CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer)player, pos, stack);
+				CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer) player, pos, stack);
 			}
 
 			if (!player.getAbilities().instabuild) {
@@ -54,13 +55,12 @@ public class PineconeBlock extends WaxedPineconeBlock {
 	@Override
 	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
 		if (random.nextInt(3) != 0) {
-
 			BlockState sapling = EnvironmentalBlocks.PINE_SAPLING.get().defaultBlockState();
 			List<BlockPos> list = Lists.newArrayList();
 			addPossibleSaplingPositionsFromNeighbors(4, 4, 4, list, level, pos.offset(-4, -4, -4), new BlockPos.MutableBlockPos(), new boolean[9][9][9]);
 
 			if (!list.isEmpty()) {
-				this.spawnBoneMealParticles(level, this.defaultBlockState(), pos.below(), 4);
+				this.spawnBoneMealParticles(level, this.defaultBlockState(), pos, 15);
 			}
 			for (int i = 0; i < 12; i++) {
 				if (list.isEmpty())
@@ -72,6 +72,35 @@ public class PineconeBlock extends WaxedPineconeBlock {
 					this.spawnBoneMealParticles(level, sapling, blockpos, 15);
 					return;
 				}
+			}
+		}
+	}
+
+	@Override
+	public boolean isValidBonemealTarget(BlockGetter p_50897_, BlockPos p_50898_, BlockState p_50899_, boolean p_50900_) {
+		return true;
+	}
+
+	@Override
+	public boolean isBonemealSuccess(Level p_220878_, RandomSource random, BlockPos p_220880_, BlockState p_220881_) {
+		return random.nextInt(3) != 0;
+	}
+
+	@Override
+	public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
+		BlockState sapling = EnvironmentalBlocks.PINE_SAPLING.get().defaultBlockState();
+		List<BlockPos> list = Lists.newArrayList();
+		addPossibleSaplingPositionsFromNeighbors(4, 4, 4, list, level, pos.offset(-4, -4, -4), new BlockPos.MutableBlockPos(), new boolean[9][9][9]);
+
+		for (int i = 0; i < 12; i++) {
+			if (list.isEmpty())
+				break;
+
+			BlockPos blockpos = list.remove(random.nextInt(list.size()));
+			if (level.isAreaLoaded(blockpos, 1) && hasSpaceForTree(blockpos, level)) {
+				level.setBlockAndUpdate(blockpos, sapling);
+				this.spawnBoneMealParticles(level, sapling, blockpos, 15);
+				return;
 			}
 		}
 	}
