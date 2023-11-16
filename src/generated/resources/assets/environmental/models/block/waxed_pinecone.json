@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "environmental:block/pinecone_end",
+    "side": "environmental:block/pinecone_side"
+  }
+}

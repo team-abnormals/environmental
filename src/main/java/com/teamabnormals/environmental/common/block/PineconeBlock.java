@@ -2,34 +2,53 @@ package com.teamabnormals.environmental.common.block;
 
 import com.google.common.collect.Lists;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.item.FallingBlockEntity;
-import net.minecraft.world.item.BoneMealItem;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.levelgen.feature.TreeFeature;
+import net.minecraft.world.phys.BlockHitResult;
 
 import java.util.List;
 
-public class PineconeBlock extends FallingBlock {
+public class PineconeBlock extends WaxedPineconeBlock {
 
 	public PineconeBlock(Properties properties) {
 		super(properties);
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-		if (canFall(level, pos) && pos.getY() >= level.getMinBuildHeight()) {
-			FallingBlockEntity fallingblockentity = FallingBlockEntity.fall(level, pos, state);
-			this.falling(fallingblockentity);
+	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
+		ItemStack stack = player.getItemInHand(hand);
+		if (stack.is(Items.HONEYCOMB)) {
+			if (player instanceof ServerPlayer) {
+				CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer)player, pos, stack);
+			}
+
+			if (!player.getAbilities().instabuild) {
+				stack.shrink(1);
+			}
+			BlockState newState = EnvironmentalBlocks.WAXED_PINECONE.get().defaultBlockState();
+			level.setBlock(pos, newState, 11);
+			level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, newState));
+			level.levelEvent(player, 3003, pos, 0);
+			return InteractionResult.sidedSuccess(level.isClientSide);
 		}
+
+		return super.use(state, level, pos, player, hand, result);
 	}
 
 	@Override
@@ -122,18 +141,5 @@ public class PineconeBlock extends FallingBlock {
 			}
 		}
 		return true;
-	}
-
-	public static boolean canFall(ServerLevel level, BlockPos pos) {
-		return !supportedFromAbove(level, pos) && isFree(level.getBlockState(pos.below()));
-	}
-
-	public static boolean supportedFromAbove(ServerLevel level, BlockPos pos) {
-		BlockState blockstate = level.getBlockState(pos.above());
-		return Block.isFaceFull(blockstate.getCollisionShape(level, pos.above()), Direction.DOWN) && !(blockstate.getBlock() instanceof FallingBlock);
-	}
-
-	@Override
-	public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
 	}
 }

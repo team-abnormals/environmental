@@ -63,7 +63,7 @@ public class EnvironmentalCompat {
 		DataUtil.registerCompostable(EnvironmentalBlocks.CHEERFUL_CHERRY_LEAVES.get(), 0.30F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.CHEERFUL_CHERRY_SAPLING.get(), 0.30F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.CHEERFUL_CHERRY_LEAF_CARPET.get(), 0.30F);
-		
+
 		DataUtil.registerCompostable(EnvironmentalBlocks.MOODY_CHERRY_LEAVES.get(), 0.30F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.MOODY_CHERRY_SAPLING.get(), 0.30F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.MOODY_CHERRY_LEAF_CARPET.get(), 0.30F);
@@ -239,7 +239,7 @@ public class EnvironmentalCompat {
 		DataUtil.registerFlammable(EnvironmentalBlocks.CHEERFUL_CHERRY_LEAF_CARPET.get(), 30, 60);
 		DataUtil.registerFlammable(EnvironmentalBlocks.CHEERFUL_CHERRY_HEDGE.get(), 5, 20);
 		DataUtil.registerFlammable(EnvironmentalBlocks.CHEERFUL_CHERRY_LEAF_PILE.get(), 30, 60);
-		
+
 		DataUtil.registerFlammable(EnvironmentalBlocks.MOODY_CHERRY_LEAVES.get(), 30, 60);
 		DataUtil.registerFlammable(EnvironmentalBlocks.MOODY_CHERRY_LEAF_CARPET.get(), 30, 60);
 		DataUtil.registerFlammable(EnvironmentalBlocks.MOODY_CHERRY_HEDGE.get(), 5, 20);

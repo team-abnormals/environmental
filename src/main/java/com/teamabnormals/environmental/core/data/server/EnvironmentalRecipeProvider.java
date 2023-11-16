@@ -198,6 +198,8 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 		conditionalRecipe(consumer, WOODEN_POSTS, ShapedRecipeBuilder.shaped(EnvironmentalBlocks.STRIPPED_PINE_POST.get(), 8).define('#', EnvironmentalBlocks.STRIPPED_PINE_WOOD.get()).pattern("#").pattern("#").pattern("#").group("wooden_post").unlockedBy(getHasName(EnvironmentalBlocks.STRIPPED_PINE_WOOD.get()), has(EnvironmentalBlocks.STRIPPED_PINE_WOOD.get())));
 		conditionalRecipe(consumer, WOOD_TO_CHEST_RECIPES, ShapedRecipeBuilder.shaped(EnvironmentalBlocks.PINE_CHESTS.getFirst().get(), 4).define('#', EnvironmentalItemTags.PINE_LOGS).pattern("###").pattern("# #").pattern("###").group("wooden_chest").unlockedBy("has_lots_of_items", new InventoryChangeTrigger.TriggerInstance(EntityPredicate.Composite.ANY, MinMaxBounds.Ints.atLeast(10), MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, new ItemPredicate[0])), new ResourceLocation(RecipeBuilder.getDefaultRecipeId(EnvironmentalBlocks.PINE_CHESTS.getFirst().get()) + "_wood"));
 
+		ShapelessRecipeBuilder.shapeless(EnvironmentalBlocks.WAXED_PINECONE.get()).requires(EnvironmentalBlocks.PINECONE.get()).requires(Items.HONEYCOMB).unlockedBy(getHasName(EnvironmentalBlocks.PINECONE.get()), has(EnvironmentalBlocks.PINECONE.get())).save(consumer, getConversionRecipeName(EnvironmentalBlocks.WAXED_PINECONE.get(), Items.HONEYCOMB));
+
 		generateRecipes(consumer, EnvironmentalBlockFamilies.WISTERIA_PLANKS_FAMILY);
 		planksFromLogs(consumer, EnvironmentalBlocks.WISTERIA_PLANKS.get(), EnvironmentalItemTags.WISTERIA_LOGS);
 		woodFromLogs(consumer, EnvironmentalBlocks.WISTERIA_WOOD.get(), EnvironmentalBlocks.WISTERIA_LOG.get());

@@ -56,7 +56,8 @@ public class EnvironmentalBlockStateProvider extends BlockStateProvider {
 		this.logCompat(PINE_LOG.get(), STRIPPED_PINE_LOG.get(), PINE_POST.get(), STRIPPED_PINE_POST.get());
 		this.leavesCompat(PINE_LEAVES.get(), PINE_LOG.get(), PINE_LEAF_PILE.get(), PINE_HEDGE.get(), PINE_LEAF_CARPET.get());
 		this.cubeColumnBlock(PINECONE.get());
-		
+		this.cubeColumnBlock(WAXED_PINECONE.get(), PINECONE.get());
+
 		this.leavesBlock(CHEERFUL_CHERRY_LEAVES.get());
 		this.crossBlockWithPot(CHEERFUL_CHERRY_SAPLING.get(), POTTED_CHEERFUL_CHERRY_SAPLING.get());
 		this.leavesCompat(CHEERFUL_CHERRY_LEAVES.get(), CHERRY_LOG.get(), CHEERFUL_CHERRY_LEAF_PILE.get(), CHEERFUL_CHERRY_HEDGE.get(), CHEERFUL_CHERRY_LEAF_CARPET.get());
@@ -255,7 +256,11 @@ public class EnvironmentalBlockStateProvider extends BlockStateProvider {
 	}
 
 	public void cubeColumnBlock(Block block) {
-		this.simpleBlock(block, this.models().cubeColumn(name(block), suffix(blockTexture(block), "_side"), suffix(blockTexture(block), "_end")));
+		this.cubeColumnBlock(block, block);
+	}
+
+	public void cubeColumnBlock(Block block, Block parent) {
+		this.simpleBlock(block, this.models().cubeColumn(name(block), suffix(blockTexture(parent), "_side"), suffix(blockTexture(parent), "_end")));
 		this.blockItem(block);
 	}
 
