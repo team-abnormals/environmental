@@ -255,6 +255,7 @@ public class EnvironmentalFeatures {
 		public static final RegistryObject<ConfiguredFeature<OreConfiguration, ?>> ORE_MUD = register("ore_mud", () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(new TagMatchTest(EnvironmentalBlockTags.MUD_REPLACEABLES), Blocks.MUD.defaultBlockState(), 64)));
 
 		public static final RegistryObject<ConfiguredFeature<ProbabilityFeatureConfiguration, ?>> BAMBOO_SHORT = register("bamboo_short", () -> new ConfiguredFeature<>(EnvironmentalFeatures.SHORT_BAMBOO.get(), new ProbabilityFeatureConfiguration(0.0F)));
+		public static final RegistryObject<ConfiguredFeature<ProbabilityFeatureConfiguration, ?>> BAMBOO_SHORT_PODZOL = register("bamboo_short_podzol", () -> new ConfiguredFeature<>(EnvironmentalFeatures.SHORT_BAMBOO.get(), new ProbabilityFeatureConfiguration(0.2F)));
 		public static final RegistryObject<ConfiguredFeature<NoneFeatureConfiguration, ?>> FALLEN_CHERRY_LEAVES = register("fallen_cherry_leaves", () -> new ConfiguredFeature<>(EnvironmentalFeatures.FALLEN_LEAVES.get(), NoneFeatureConfiguration.NONE));
 
 		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> PATCH_MYCELIUM_SPROUTS = register("patch_mycelium_sprouts", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, grassPatch(BlockStateProvider.simple(EnvironmentalBlocks.MYCELIUM_SPROUTS.get()), 32)));
@@ -338,8 +339,8 @@ public class EnvironmentalFeatures {
 		public static final RegistryObject<PlacedFeature> COARSE_DIRT_PINE_BARRENS = register("coarse_dirt_pine_barrens", EnvironmentalConfiguredFeatures.COARSE_DIRT_PINE_BARRENS, CountPlacement.of(32), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
 		public static final RegistryObject<PlacedFeature> PATCH_CUP_LICHEN = register("patch_cup_lichen", EnvironmentalConfiguredFeatures.PATCH_CUP_LICHEN, RarityFilter.onAverageOnceEvery(32), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 
-		public static final RegistryObject<PlacedFeature> BAMBOO_BLOSSOM_WOODS = register("bamboo_blossom_woods", EnvironmentalConfiguredFeatures.BAMBOO_SHORT, NoiseBasedCountPlacement.of(11, 5.0D, 0.2D), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
-		public static final RegistryObject<PlacedFeature> BAMBOO_LIGHT_BLOSSOM_WOODS = register("bamboo_light_blossom_woods", EnvironmentalConfiguredFeatures.BAMBOO_SHORT, RarityFilter.onAverageOnceEvery(1), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
+		public static final RegistryObject<PlacedFeature> BAMBOO_BLOSSOM_WOODS = register("bamboo_blossom_woods", EnvironmentalConfiguredFeatures.BAMBOO_SHORT_PODZOL, NoiseBasedCountPlacement.of(11, 5.0D, 0.2D), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
+		public static final RegistryObject<PlacedFeature> BAMBOO_LIGHT_BLOSSOM_WOODS = register("bamboo_light_blossom_woods", EnvironmentalConfiguredFeatures.BAMBOO_SHORT_PODZOL, RarityFilter.onAverageOnceEvery(1), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 		public static final RegistryObject<PlacedFeature> BAMBOO_BLOSSOM_VALLEYS = register("bamboo_blossom_valleys", EnvironmentalConfiguredFeatures.BAMBOO_SHORT, NoiseBasedCountPlacement.of(5, 5.0D, 0.2D), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
 		public static final RegistryObject<PlacedFeature> BAMBOO_LIGHT_BLOSSOM_VALLEYS = register("bamboo_light_blossom_valleys", EnvironmentalConfiguredFeatures.BAMBOO_SHORT, RarityFilter.onAverageOnceEvery(5), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 

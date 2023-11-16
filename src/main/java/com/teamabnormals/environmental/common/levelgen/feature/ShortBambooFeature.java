@@ -46,6 +46,9 @@ public class ShortBambooFeature extends Feature<ProbabilityFeatureConfiguration>
 								podzolPos.set(xPos, level.getHeight(Heightmap.Types.WORLD_SURFACE, xPos, zPos) - 1, zPos);
 								if (isDirt(level.getBlockState(podzolPos))) {
 									level.setBlock(podzolPos, Blocks.PODZOL.defaultBlockState(), 2);
+									if (level.getBlockState(podzolPos.above()).isAir() && random.nextBoolean()) {
+										level.setBlock(podzolPos.above(, Blocks.GRASS, 2));
+									}
 								}
 							}
 						}
