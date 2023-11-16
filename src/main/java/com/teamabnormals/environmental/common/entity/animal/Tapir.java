@@ -5,13 +5,13 @@ import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalParticleTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSoundEvents;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -23,11 +23,11 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.ai.util.LandRandomPos;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -35,7 +35,9 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.level.pathfinder.PathFinder;
 import net.minecraft.world.level.pathfinder.WalkNodeEvaluator;
+import net.minecraft.world.phys.Vec3;
 
+import javax.annotation.Nullable;
 import java.util.Optional;
 
 public class Tapir extends Animal {
@@ -56,9 +58,7 @@ public class Tapir extends Animal {
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new FloatGoal(this));
 		this.goalSelector.addGoal(1, new PanicGoal(this, 1.25D));
-		this.goalSelector.addGoal(2, new HuntFloraGoal(this));
-		this.goalSelector.addGoal(3, new BreedGoal(this, 1.0D));
-		this.goalSelector.addGoal(4, new TemptGoal(this, 1.2D, Ingredient.of(ItemTags.ANVIL), false));
+		this.goalSelector.addGoal(3, new HuntFloraGoal(this));
 		this.goalSelector.addGoal(5, new FollowParentGoal(this, 1.1D));
 		this.goalSelector.addGoal(6, new WaterAvoidingRandomStrollGoal(this, 1.0D));
 		this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
@@ -129,22 +129,12 @@ public class Tapir extends Animal {
 		ItemStack stack = player.getItemInHand(hand);
 		if (stack.getItem() instanceof BlockItem blockItem && this.getTrackingTime() == 0) {
 			BlockState state = blockItem.getBlock().defaultBlockState();
-			Material material = state.getMaterial();
-			if ((material == Material.PLANT
-					|| material == Material.WATER_PLANT
-					|| material == Material.REPLACEABLE_PLANT
-					|| material == Material.REPLACEABLE_FIREPROOF_PLANT
-					|| material == Material.REPLACEABLE_WATER_PLANT
-					|| material == Material.BAMBOO_SAPLING
-					|| material == Material.BAMBOO
-					|| material == Material.LEAVES
-					|| material == Material.CACTUS
-					|| material == Material.MOSS
-			) && this.findNearestTarget(state)) {
+			if (isFood(stack) && this.findNearestTarget(state)) {
 				this.setTrackingState(Optional.of(state));
 				this.setTrackingTime(4800);
-				if (!player.isCreative())
-					stack.shrink(1);
+				if (this.canFallInLove()) {
+					this.setInLove(player);
+				}
 
 				if (level.isClientSide()) {
 					for (int i = 0; i < 7; ++i) {
@@ -155,6 +145,24 @@ public class Tapir extends Animal {
 					}
 				}
 				return InteractionResult.sidedSuccess(level.isClientSide());
+			} else {
+				this.getLookControl().setLookAt(player.getX(), player.getEyeY(), player.getZ());
+				this.playSound(EnvironmentalSoundEvents.PIG_SNIFF.get(), 1.0F, (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
+
+				this.getNavigation().moveTo(player, 1.0D);
+				Vec3 vec3 = LandRandomPos.getPos(this, 5, 4);
+				if (vec3 != null) {
+					this.getNavigation().moveTo(vec3.x, vec3.y, vec3.z, 1.0D);
+				}
+
+				if (level.isClientSide()) {
+					for (int i = 0; i < 7; ++i) {
+						double d0 = random.nextGaussian() * 0.02D;
+						double d1 = random.nextGaussian() * 0.02D;
+						double d2 = random.nextGaussian() * 0.02D;
+						level.addParticle(ParticleTypes.SMOKE, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d0, d1, d2);
+					}
+				}
 			}
 		}
 
@@ -213,7 +221,7 @@ public class Tapir extends Animal {
 		this.sniffSoundTime += 1;
 		if (!level.isClientSide() && this.isTracking() && random.nextInt(60) < this.sniffSoundTime) {
 			this.playSound(EnvironmentalSoundEvents.PIG_SNIFF.get(), 1.0F, (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
-			sniffSoundTime = -20;
+			this.sniffSoundTime = -20;
 		}
 	}
 
@@ -258,7 +266,23 @@ public class Tapir extends Animal {
 
 	@Override
 	public boolean isFood(ItemStack stack) {
-		return stack.is(ItemTags.ANVIL);
+		if (stack.getItem() instanceof BlockItem blockItem) {
+			BlockState state = blockItem.getBlock().defaultBlockState();
+			Material material = state.getMaterial();
+			return (material == Material.PLANT
+					|| material == Material.WATER_PLANT
+					|| material == Material.REPLACEABLE_PLANT
+					|| material == Material.REPLACEABLE_FIREPROOF_PLANT
+					|| material == Material.REPLACEABLE_WATER_PLANT
+					|| material == Material.BAMBOO_SAPLING
+					|| material == Material.BAMBOO
+					|| material == Material.LEAVES
+					|| material == Material.CACTUS
+					|| material == Material.MOSS
+			);
+		}
+
+		return false;
 	}
 
 	@Override

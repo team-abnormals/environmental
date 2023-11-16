@@ -2,17 +2,27 @@ package com.teamabnormals.environmental.common.entity.ai.goal;
 
 import com.teamabnormals.environmental.common.entity.animal.Tapir;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
+import javax.annotation.Nullable;
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Optional;
 
 public class HuntFloraGoal extends Goal {
 	private final Tapir tapir;
+	private Tapir partner;
 	private int runDelay;
 	private int lookTimer;
+	private int loveTime;
 	private Vec3 lookVector;
+
+	private static final TargetingConditions PARTNER_TARGETING = TargetingConditions.forNonCombat().range(8.0D).ignoreLineOfSight();
 
 	public HuntFloraGoal(Tapir tapir) {
 		this.tapir = tapir;
@@ -48,6 +58,7 @@ public class HuntFloraGoal extends Goal {
 
 	@Override
 	public void stop() {
+		this.tapir.resetLove();
 		this.tapir.setTracking(false);
 		this.tapir.setTrackingPos(Optional.empty());
 		this.tapir.setTrackingState(Optional.empty());
@@ -76,7 +87,39 @@ public class HuntFloraGoal extends Goal {
 
 				this.moveToTarget();
 			}
+
+			if (blockPos.closerThan(this.tapir.blockPosition(), 1.0D)) {
+				if (this.tapir.isInLove()) {
+					if (this.partner == null) {
+						this.partner = this.getFreePartner();
+					}
+
+					if (partner != null && partner.isInLove()) {
+						this.tapir.getLookControl().setLookAt(partner, 10.0F, (float)this.tapir.getMaxHeadXRot());
+						this.loveTime++;
+						if (this.tapir.distanceToSqr(partner) < 3.0D && loveTime > 30) {
+							this.tapir.spawnChildFromBreeding((ServerLevel)this.tapir.level, partner);
+						}
+					}
+				}
+			}
 		}
+	}
+
+	@Nullable
+	private Tapir getFreePartner() {
+		List<? extends Tapir> list = this.tapir.level.getNearbyEntities(Tapir.class, PARTNER_TARGETING, this.tapir, this.tapir.getBoundingBox().inflate(8.0D));
+		double d0 = Double.MAX_VALUE;
+		Tapir animal = null;
+
+		for(Tapir animal1 : list) {
+			if (this.tapir.canMate(animal1) && this.tapir.distanceToSqr(animal1) < d0) {
+				animal = animal1;
+				d0 = this.tapir.distanceToSqr(animal1);
+			}
+		}
+
+		return animal;
 	}
 
 	private void moveToTarget() {
