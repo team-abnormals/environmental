@@ -44,15 +44,15 @@ public class EnvironmentalGeneration {
 		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_GRASS_BLOSSOM_WOODS.getHolder().get());
 
 		if (!valley) {
-			generation.addFeature(Decoration.VEGETAL_DECORATION, CHERRY_TREES_BLOSSOM_WOODS.getHolder().get());
 			generation.addFeature(Decoration.VEGETAL_DECORATION, PINE_TREES_BLOSSOM_WOODS.getHolder().get());
+			generation.addFeature(Decoration.VEGETAL_DECORATION, CHERRY_TREES_BLOSSOM_WOODS.getHolder().get());
 			generation.addFeature(Decoration.VEGETAL_DECORATION, FALLEN_CHERRY_LEAVES_BLOSSOM_WOODS.getHolder().get());
 			generation.addFeature(Decoration.VEGETAL_DECORATION, BAMBOO_BLOSSOM_WOODS.getHolder().get());
 			generation.addFeature(Decoration.VEGETAL_DECORATION, BAMBOO_LIGHT_BLOSSOM_WOODS.getHolder().get());
 			generation.addFeature(Decoration.VEGETAL_DECORATION, FLOWER_RED_LOTUS.getHolder().get());
 		} else {
-			generation.addFeature(Decoration.VEGETAL_DECORATION, CHERRY_TREES_BLOSSOM_VALLEYS.getHolder().get());
 			generation.addFeature(Decoration.VEGETAL_DECORATION, PINE_TREES_BLOSSOM_VALLEYS.getHolder().get());
+			generation.addFeature(Decoration.VEGETAL_DECORATION, CHERRY_TREES_BLOSSOM_VALLEYS.getHolder().get());
 			generation.addFeature(Decoration.VEGETAL_DECORATION, FALLEN_CHERRY_LEAVES_BLOSSOM_VALLEYS.getHolder().get());
 			generation.addFeature(Decoration.VEGETAL_DECORATION, BAMBOO_BLOSSOM_VALLEYS.getHolder().get());
 			generation.addFeature(Decoration.VEGETAL_DECORATION, BAMBOO_LIGHT_BLOSSOM_VALLEYS.getHolder().get());
