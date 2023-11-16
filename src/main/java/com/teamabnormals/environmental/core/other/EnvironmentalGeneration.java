@@ -36,6 +36,7 @@ public class EnvironmentalGeneration {
 		BiomeDefaultFeatures.addSavannaGrass(generation);
 		BiomeDefaultFeatures.addDefaultOres(generation);
 		BiomeDefaultFeatures.addDefaultSoftDisks(generation);
+		generation.addFeature(Decoration.UNDERGROUND_DECORATION, BLOSSOM_WOODS_ROCK.getHolder().get());
 		BiomeDefaultFeatures.addDefaultFlowers(generation);
 		BiomeDefaultFeatures.addDefaultMushrooms(generation);
 		generation.addFeature(Decoration.VEGETAL_DECORATION, FOREST_FLOWERS.getHolder().get());
