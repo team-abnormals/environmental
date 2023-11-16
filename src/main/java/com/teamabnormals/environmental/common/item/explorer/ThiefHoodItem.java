@@ -15,15 +15,21 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingVisibilityEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 
+import javax.annotation.Nullable;
+import java.util.Collection;
 import java.util.UUID;
 import java.util.function.Consumer;
 
@@ -66,7 +72,7 @@ public class ThiefHoodItem extends ExplorerArmorItem {
 
 	@SubscribeEvent
 	public static void hoodEquippedEvent(LivingEquipmentChangeEvent event) {
-		if (event.getTo().getItem() == EnvironmentalItems.THIEF_HOOD.get() || event.getFrom().getItem() == EnvironmentalItems.THIEF_HOOD.get()) {
+		if (event.getTo().is(EnvironmentalItems.THIEF_HOOD.get()) || event.getFrom().is(EnvironmentalItems.THIEF_HOOD.get())) {
 			if (event.getEntity() instanceof Player player) {
 				player.refreshDisplayName();
 			}
@@ -78,8 +84,26 @@ public class ThiefHoodItem extends ExplorerArmorItem {
 		LivingEntity entity = event.getEntity();
 		if (event.getSource().getEntity() instanceof LivingEntity attacker && entity instanceof Enemy) {
 			ItemStack stack = attacker.getItemBySlot(EquipmentSlot.HEAD);
-			if (stack.getItem() instanceof ThiefHoodItem) {
-				((ThiefHoodItem) stack.getItem()).levelUp(stack, attacker);
+			if (stack.getItem() instanceof ThiefHoodItem thiefHoodItem) {
+				thiefHoodItem.levelUp(stack, attacker);
+			}
+		}
+	}
+
+	@SubscribeEvent
+	public static void onLivingVisibility(LivingVisibilityEvent event) {
+		if (event.getLookingEntity() != null) {
+			double attributeValue = 0.0D;
+			for (EquipmentSlot equipmentSlot : EquipmentSlot.values()) {
+				ItemStack stack = event.getEntity().getItemBySlot(equipmentSlot);
+				Collection<AttributeModifier> modifiers = stack.getAttributeModifiers(equipmentSlot).get(EnvironmentalAttributes.STEALTH.get());
+				if (!modifiers.isEmpty()) {
+					attributeValue += modifiers.stream().mapToDouble(AttributeModifier::getAmount).sum();
+				}
+			}
+
+			if (attributeValue > 0.0D) {
+				event.modifyVisibility(Math.max(1.0D - attributeValue, 0.0D));
 			}
 		}
 	}

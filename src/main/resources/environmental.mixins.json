@@ -12,7 +12,6 @@
     "CarvedPumpkinBlockMixin",
     "DuckMixin",
     "LeavesBlockMixin",
-    "LivingEntityMixin",
     "MobMixin",
     "MoveControlMixin",
     "MudBlockMixin",
