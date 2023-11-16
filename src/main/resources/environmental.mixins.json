@@ -9,7 +9,7 @@
     "AbstractSkeletonMixin",
     "BlockColumnFeatureMixin",
     "BlockMixin",
-	"CarvedPumpkinBlockMixin",
+    "CarvedPumpkinBlockMixin",
     "DuckMixin",
     "LeavesBlockMixin",
     "LivingEntityMixin",
@@ -19,7 +19,8 @@
     "PigMixin",
     "PlayerMixin",
     "RabbitMixin",
-	"SurfaceSystemMixin",
+    "ShearsItemMixin",
+    "SurfaceSystemMixin",
     "WitherSkeletonEntityMixin"
   ],
   "client": [

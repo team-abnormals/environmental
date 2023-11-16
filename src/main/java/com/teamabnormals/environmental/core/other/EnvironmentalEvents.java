@@ -4,7 +4,6 @@ import com.google.common.collect.Sets;
 import com.teamabnormals.blueprint.common.world.storage.tracking.IDataManager;
 import com.teamabnormals.blueprint.core.util.MathUtil;
 import com.teamabnormals.environmental.common.block.GiantLilyPadBlock;
-import com.teamabnormals.environmental.common.block.HangingLeavesBlock;
 import com.teamabnormals.environmental.common.block.LargeLilyPadBlock;
 import com.teamabnormals.environmental.common.entity.ai.goal.HuntTruffleGoal;
 import com.teamabnormals.environmental.common.entity.animal.koi.Koi;
@@ -75,7 +74,6 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingTickEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.BonemealEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.eventbus.api.Event.Result;
@@ -90,11 +88,6 @@ import java.util.Set;
 
 @EventBusSubscriber(modid = Environmental.MOD_ID)
 public class EnvironmentalEvents {
-
-	@SubscribeEvent
-	public static void onPlayerBreak(PlayerEvent.BreakSpeed event) {
-		if (event.getState().getBlock() instanceof HangingLeavesBlock && event.getEntity().getMainHandItem().is(Tags.Items.SHEARS)) event.setNewSpeed(15.0F);
-	}
 
 	@SubscribeEvent
 	public static void onLivingSpawn(LivingSpawnEvent.CheckSpawn event) {
