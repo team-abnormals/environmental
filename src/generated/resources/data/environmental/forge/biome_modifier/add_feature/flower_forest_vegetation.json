@@ -1,6 +1,9 @@
 {
   "type": "forge:add_features",
   "biomes": "minecraft:flower_forest",
-  "features": "environmental:trees_wisteria",
+  "features": [
+    "environmental:patch_delphiniums",
+    "environmental:trees_wisteria"
+  ],
   "step": "vegetal_decoration"
 }
