@@ -111,8 +111,8 @@ public abstract class SurfaceSystemMixin {
     private double getNoiseAt(int x, int y) {
         double d0 = this.surfaceNoise.getValue(x, 0.0D, y);
         double d1 = this.pineBarrensStoneNoise.getValue(x, 0.0D, y);
-        double d2 = Math.max(d0 - 2.0D / 8.25D, 0);
-        double d3 = d1 < 0 ? Math.max(-d1 - 2.0D / 8.25D, 0) : Math.max(d1 - 1.5D / 8.25D, 0);
+        double d2 = Math.max(d0 - 3.0D / 8.25D, 0);
+        double d3 = d1 < 0 ? Math.max(-d1 - 1.5D / 8.25D, 0) : Math.max(d1 - 1.5D / 8.25D, 0);
         return Math.min(d2, d3);
     }
 
