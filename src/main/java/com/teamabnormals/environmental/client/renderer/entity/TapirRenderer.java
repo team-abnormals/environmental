@@ -20,6 +20,6 @@ public class TapirRenderer extends MobRenderer<Tapir, TapirModel<Tapir>> {
 	}
 
 	public ResourceLocation getTextureLocation(Tapir tapir) {
-		return tapir.hasBabyPattern() ? BABY_TAPIR : TAPIR;
+		return tapir.hasBabyPattern() || tapir.isBaby() ? BABY_TAPIR : TAPIR;
 	}
 }
