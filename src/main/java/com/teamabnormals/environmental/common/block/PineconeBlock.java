@@ -60,16 +60,16 @@ public class PineconeBlock extends WaxedPineconeBlock implements BonemealableBlo
 			addPossibleSaplingPositionsFromNeighbors(4, 4, 4, list, level, pos.offset(-4, -4, -4), new BlockPos.MutableBlockPos(), new boolean[9][9][9]);
 
 			if (!list.isEmpty()) {
-				this.spawnBoneMealParticles(level, this.defaultBlockState(), pos, 15);
+				this.spawnBoneMealParticles(level, this.defaultBlockState(), pos);
 			}
 			for (int i = 0; i < 12; i++) {
 				if (list.isEmpty())
 					break;
 
 				BlockPos blockpos = list.remove(random.nextInt(list.size()));
-				if (level.isAreaLoaded(blockpos, 1) && level.getMaxLocalRawBrightness(blockpos.above()) >= 9 && hasSpaceForTree(blockpos, level)) {
+				if (level.isAreaLoaded(blockpos, 1) && level.getMaxLocalRawBrightness(blockpos.above()) >= 9 && hasSpaceForTree(blockpos, level, false)) {
 					level.setBlockAndUpdate(blockpos, sapling);
-					this.spawnBoneMealParticles(level, sapling, blockpos, 15);
+					this.spawnBoneMealParticles(level, sapling, blockpos);
 					return;
 				}
 			}
@@ -97,15 +97,16 @@ public class PineconeBlock extends WaxedPineconeBlock implements BonemealableBlo
 				break;
 
 			BlockPos blockpos = list.remove(random.nextInt(list.size()));
-			if (level.isAreaLoaded(blockpos, 1) && hasSpaceForTree(blockpos, level)) {
+			if (level.isAreaLoaded(blockpos, 1) && hasSpaceForTree(blockpos, level, true)) {
 				level.setBlockAndUpdate(blockpos, sapling);
-				this.spawnBoneMealParticles(level, sapling, blockpos, 15);
+				this.spawnBoneMealParticles(level, sapling, blockpos);
 				return;
 			}
 		}
 	}
 
-	private void spawnBoneMealParticles(ServerLevel level, BlockState state, BlockPos pos, int amount) {
+	private void spawnBoneMealParticles(ServerLevel level, BlockState state, BlockPos pos) {
+		int amount = 15;
 		double d0 = 0.5D;
 		double d1;
 		if (state.isSolidRender(level, pos)) {
@@ -158,13 +159,13 @@ public class PineconeBlock extends WaxedPineconeBlock implements BonemealableBlo
 		addPossibleSaplingPositions(x, y, z + 1, list, level, origin, mutablepos, foundpositions);
 	}
 
-	private static boolean hasSpaceForTree(BlockPos pos, ServerLevel level) {
+	private static boolean hasSpaceForTree(BlockPos pos, ServerLevel level, boolean bonemeal) {
 		BlockPos.MutableBlockPos mutablepos = new BlockPos.MutableBlockPos();
 		for (int y = -2; y <= 3; y++) {
 			for (int x = -3; x <= 3; x++) {
 				for (int z = -3; z <= 3; z++) {
 					mutablepos.setWithOffset(pos, x, y, z);
-					if ((y > 0 && !TreeFeature.validTreePos(level, mutablepos)) || level.getBlockState(mutablepos).is(BlockTags.SAPLINGS))
+					if ((y > 0 && !TreeFeature.validTreePos(level, mutablepos) && !bonemeal) || level.getBlockState(mutablepos).is(BlockTags.SAPLINGS))
 						return false;
 				}
 			}
