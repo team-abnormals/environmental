@@ -19,6 +19,8 @@ public class EnvironmentalParticleTypes {
 	public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, Environmental.MOD_ID);
 
 	public static final RegistryObject<SimpleParticleType> CHERRY_BLOSSOM = PARTICLE_TYPES.register("cherry_blossom", () -> new SimpleParticleType(false));
+	public static final RegistryObject<SimpleParticleType> CHEERFUL_CHERRY_BLOSSOM = PARTICLE_TYPES.register("cheerful_cherry_blossom", () -> new SimpleParticleType(false));
+	public static final RegistryObject<SimpleParticleType> MOODY_CHERRY_BLOSSOM = PARTICLE_TYPES.register("moody_cherry_blossom", () -> new SimpleParticleType(false));
 	public static final RegistryObject<SimpleParticleType> RED_LOTUS_BLOSSOM = PARTICLE_TYPES.register("red_lotus_blossom", () -> new SimpleParticleType(true));
 	public static final RegistryObject<SimpleParticleType> WHITE_LOTUS_BLOSSOM = PARTICLE_TYPES.register("white_lotus_blossom", () -> new SimpleParticleType(true));
 	public static final RegistryObject<SimpleParticleType> PIG_FINDS_TRUFFLE = PARTICLE_TYPES.register("pig_finds_truffle", () -> new SimpleParticleType(true));
@@ -26,6 +28,8 @@ public class EnvironmentalParticleTypes {
 	@SubscribeEvent
 	public static void registerParticleFactorys(RegisterParticleProvidersEvent event) {
 		event.register(EnvironmentalParticleTypes.CHERRY_BLOSSOM.get(), CherryBlossomParticle.Factory::new);
+		event.register(EnvironmentalParticleTypes.CHEERFUL_CHERRY_BLOSSOM.get(), CherryBlossomParticle.Factory::new);
+		event.register(EnvironmentalParticleTypes.MOODY_CHERRY_BLOSSOM.get(), CherryBlossomParticle.Factory::new);
 		event.register(EnvironmentalParticleTypes.RED_LOTUS_BLOSSOM.get(), LotusBlossomParticle.Factory::new);
 		event.register(EnvironmentalParticleTypes.WHITE_LOTUS_BLOSSOM.get(), LotusBlossomParticle.Factory::new);
 		event.register(EnvironmentalParticleTypes.PIG_FINDS_TRUFFLE.get(), PigFindsTruffleParticle.Factory::new);

@@ -2,19 +2,22 @@ package com.teamabnormals.environmental.client.particle;
 
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.tags.FluidTags;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class CherryBlossomParticle extends TextureSheetParticle {
 	private final float rotSpeed;
+	private int waterTicks;
+	private boolean isInWater;
 
-	private CherryBlossomParticle(ClientLevel worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double particleRedIn, double particleGreenIn, double particleBlueIn) {
-		super(worldIn, xCoordIn, yCoordIn, zCoordIn);
-		this.quadSize *= 1.2F;
-		int i = (int) (32.0D / (Math.random() * 0.8D + 0.2D));
-		this.lifetime = (int) Math.max((float) i * 1.8F, 2.0F);
+	private CherryBlossomParticle(ClientLevel level, double xCoordIn, double yCoordIn, double zCoordIn) {
+		super(level, xCoordIn, yCoordIn, zCoordIn);
+		this.quadSize *= 1.75F;
+		this.lifetime = 500 + random.nextInt(200) + random.nextInt(200);
 		this.rotSpeed = ((float) Math.random() - 0.5F) * 0.1F;
 		this.roll = (float) Math.random() * ((float) Math.PI * 2F);
 	}
@@ -31,11 +34,18 @@ public class CherryBlossomParticle extends TextureSheetParticle {
 			this.remove();
 		} else {
 			this.move(this.xd, this.yd, this.zd);
-			this.yd -= 0.002F;
-			this.yd = Math.max(this.yd, -0.1F);
+			this.yd -= 0.001F;
+			this.yd = Math.max(this.yd, -0.08F);
 
 			this.oRoll = this.roll;
-			if (!this.onGround) {
+
+			if (!this.isInWater) {
+				this.isInWater = this.level.getBlockState(new BlockPos(this.x, this.y, this.z)).getFluidState().is(FluidTags.WATER);
+			} else {
+				this.waterTicks++;
+			}
+
+			if (!this.onGround && !(this.isInWater && this.waterTicks >= 1)) {
 				this.roll += (float) Math.PI * this.rotSpeed * 1.6F;
 			} else {
 				this.yd = 0.0D;
@@ -52,7 +62,7 @@ public class CherryBlossomParticle extends TextureSheetParticle {
 		}
 
 		public Particle createParticle(SimpleParticleType typeIn, ClientLevel worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-			CherryBlossomParticle particle = new CherryBlossomParticle(worldIn, x, y, z, xSpeed, ySpeed, zSpeed);
+			CherryBlossomParticle particle = new CherryBlossomParticle(worldIn, x, y, z);
 			particle.pickSprite(this.spriteSet);
 			return particle;
 		}
