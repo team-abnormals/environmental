@@ -2,6 +2,7 @@ package com.teamabnormals.environmental.client.renderer.entity.layers;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.teamabnormals.blueprint.common.world.storage.tracking.IDataManager;
+import com.teamabnormals.environmental.core.EnvironmentalConfig;
 import com.teamabnormals.environmental.core.other.EnvironmentalDataProcessors;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.PigModel;
@@ -34,7 +35,7 @@ public class MuddyPigDecorationLayer<T extends Pig> extends RenderLayer<T, PigMo
 		boolean flag = minecraft.shouldEntityAppearGlowing(pig) && pig.isInvisible();
 		IDataManager dataManager = (IDataManager) pig;
 		ResourceLocation flower = dataManager.getValue(EnvironmentalDataProcessors.MUDDY_PIG_DECORATION);
-		if (!flower.equals(new ResourceLocation("empty")) && ForgeRegistries.BLOCKS.getValue(flower) != null && (!pig.isInvisible() || flag)) {
+		if (EnvironmentalConfig.COMMON.muddyPigs.get() && !flower.equals(new ResourceLocation("empty")) && ForgeRegistries.BLOCKS.getValue(flower) != null && (!pig.isInvisible() || flag)) {
 			BlockState state = ForgeRegistries.BLOCKS.getValue(flower).defaultBlockState();
 			int i = LivingEntityRenderer.getOverlayCoords(pig, 0.0F);
 			BakedModel bakedmodel = this.blockRenderer.getBlockModel(state);
