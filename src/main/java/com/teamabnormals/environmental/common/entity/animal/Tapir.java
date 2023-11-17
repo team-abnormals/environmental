@@ -133,7 +133,8 @@ public class Tapir extends Animal {
 				this.setTrackingState(Optional.of(state));
 				this.setTrackingTime(4800);
 				if (this.canFallInLove()) {
-					this.setInLove(player);
+					this.setInLoveTime(600);
+					this.loveCause = player.getUUID();
 				}
 
 				if (level.isClientSide()) {
@@ -141,7 +142,7 @@ public class Tapir extends Animal {
 						double d0 = random.nextGaussian() * 0.02D;
 						double d1 = random.nextGaussian() * 0.02D;
 						double d2 = random.nextGaussian() * 0.02D;
-						level.addParticle(EnvironmentalParticleTypes.PIG_FINDS_TRUFFLE.get(), this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d0, d1, d2);
+						level.addParticle(EnvironmentalParticleTypes.TAPIR_FINDS_FLORA.get(), this.getRandomX(0.5D), this.getRandomY() + 0.25D, this.getRandomZ(0.5D), d0, d1, d2);
 					}
 				}
 				return InteractionResult.sidedSuccess(level.isClientSide());
@@ -213,7 +214,7 @@ public class Tapir extends Animal {
 					double d0 = random.nextGaussian() * 0.02D;
 					double d1 = random.nextGaussian() * 0.02D;
 					double d2 = random.nextGaussian() * 0.02D;
-					level.addParticle(EnvironmentalParticleTypes.PIG_FINDS_TRUFFLE.get(), this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d0, d1, d2);
+					level.addParticle(EnvironmentalParticleTypes.TAPIR_FINDS_FLORA.get(), this.getRandomX(0.4D), this.getRandomY() + 0.25D, this.getRandomZ(0.5D), d0, d1, d2);
 				}
 			}
 		}

@@ -88,7 +88,7 @@ public class HuntFloraGoal extends Goal {
 				this.moveToTarget();
 			}
 
-			if (blockPos.closerThan(this.tapir.blockPosition(), 1.0D)) {
+			if (blockPos.closerThan(this.tapir.blockPosition(), 3.0D)) {
 				if (this.tapir.isInLove()) {
 					if (this.partner == null) {
 						this.partner = this.getFreePartner();

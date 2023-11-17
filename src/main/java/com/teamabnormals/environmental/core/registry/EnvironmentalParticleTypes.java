@@ -24,6 +24,7 @@ public class EnvironmentalParticleTypes {
 	public static final RegistryObject<SimpleParticleType> RED_LOTUS_BLOSSOM = PARTICLE_TYPES.register("red_lotus_blossom", () -> new SimpleParticleType(true));
 	public static final RegistryObject<SimpleParticleType> WHITE_LOTUS_BLOSSOM = PARTICLE_TYPES.register("white_lotus_blossom", () -> new SimpleParticleType(true));
 	public static final RegistryObject<SimpleParticleType> PIG_FINDS_TRUFFLE = PARTICLE_TYPES.register("pig_finds_truffle", () -> new SimpleParticleType(true));
+	public static final RegistryObject<SimpleParticleType> TAPIR_FINDS_FLORA = PARTICLE_TYPES.register("tapir_finds_flora", () -> new SimpleParticleType(true));
 
 	@SubscribeEvent
 	public static void registerParticleFactorys(RegisterParticleProvidersEvent event) {
@@ -33,5 +34,6 @@ public class EnvironmentalParticleTypes {
 		event.register(EnvironmentalParticleTypes.RED_LOTUS_BLOSSOM.get(), LotusBlossomParticle.Factory::new);
 		event.register(EnvironmentalParticleTypes.WHITE_LOTUS_BLOSSOM.get(), LotusBlossomParticle.Factory::new);
 		event.register(EnvironmentalParticleTypes.PIG_FINDS_TRUFFLE.get(), PigFindsTruffleParticle.Factory::new);
+		event.register(EnvironmentalParticleTypes.TAPIR_FINDS_FLORA.get(), PigFindsTruffleParticle.Factory::new);
 	}
 }
