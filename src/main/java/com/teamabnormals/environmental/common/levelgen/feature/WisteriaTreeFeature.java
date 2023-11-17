@@ -1,7 +1,6 @@
 package com.teamabnormals.environmental.common.levelgen.feature;
 
 import com.mojang.serialization.Codec;
-import com.teamabnormals.blueprint.common.block.wood.LogBlock;
 import com.teamabnormals.blueprint.common.levelgen.feature.BlueprintTreeFeature;
 import com.teamabnormals.environmental.common.block.WisteriaLeavesBlock;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
@@ -64,17 +63,18 @@ public class WisteriaTreeFeature extends BlueprintTreeFeature {
 		this.addLog(mutablePos.set(mutablePos.relative(direction)));
 		this.addLog(mutablePos.set(mutablePos.relative(direction).above()));
 
-		this.createLeafLayer(mutablePos.above(), false, direction, random, EnvironmentalBlocks.WISTERIA_LEAVES.get().defaultBlockState());
-		this.createLeafLayer(mutablePos, true, direction, random, config.foliageProvider.getState(random, pos).setValue(WisteriaLeavesBlock.HALF, Half.TOP));
-		this.createLeafLayer(mutablePos.below(), true, direction, random, config.foliageProvider.getState(random, pos));
-		this.createLeafLayer(mutablePos.below(2), true, direction, random, config.foliageProvider.getState(random, pos), 3);
+		this.createLeafLayer(mutablePos.above(), false, random, EnvironmentalBlocks.WISTERIA_LEAVES.get().defaultBlockState());
+		this.createLeafLayer(mutablePos.above(), true, random, EnvironmentalBlocks.WISTERIA_LEAVES.get().defaultBlockState(), 3);
+		this.createLeafLayer(mutablePos, true, random, config.foliageProvider.getState(random, pos).setValue(WisteriaLeavesBlock.HALF, Half.TOP));
+		this.createLeafLayer(mutablePos.below(), true, random, config.foliageProvider.getState(random, pos));
+		this.createLeafLayer(mutablePos.below(2), true, random, config.foliageProvider.getState(random, pos), 3);
 	}
 
-	private void createLeafLayer(BlockPos pos, boolean square, Direction direction, RandomSource random, BlockState state) {
-		this.createLeafLayer(pos, square, direction, random, state, 0);
+	private void createLeafLayer(BlockPos pos, boolean square, RandomSource random, BlockState state) {
+		this.createLeafLayer(pos, square, random, state, 0);
 	}
 
-	private void createLeafLayer(BlockPos pos, boolean square, Direction direction, RandomSource random, BlockState state, int chance) {
+	private void createLeafLayer(BlockPos pos, boolean square, RandomSource random, BlockState state, int chance) {
 		int leafSize = 1;
 		for (int i = -leafSize; i <= leafSize; ++i) {
 			for (int k = -leafSize; k <= leafSize; ++k) {
