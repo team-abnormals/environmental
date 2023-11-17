@@ -30,10 +30,7 @@ public class WisteriaLeavesBlock extends LeavesBlock {
 
 	@Override
 	public BlockState updateShape(BlockState state, Direction direction, BlockState offsetState, LevelAccessor level, BlockPos pos, BlockPos offsetPos) {
-		if (direction == Direction.UP)
-			return offsetState.is(EnvironmentalBlocks.WISTERIA_LEAVES.get()) ? state.setValue(HALF, Half.TOP) : state.setValue(HALF, Half.BOTTOM);
-		else
-			return super.updateShape(state, direction, offsetState, level, pos, offsetPos);
+		return super.updateShape(state, direction, offsetState, level, pos, offsetPos);
 	}
 
 	@Override
