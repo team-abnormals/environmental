@@ -60,6 +60,20 @@
             },
             "trigger": "minecraft:bred_animals"
           },
+          "environmental:tapir": {
+            "conditions": {
+              "child": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "type": "environmental:tapir"
+                  }
+                }
+              ]
+            },
+            "trigger": "minecraft:bred_animals"
+          },
           "environmental:yak": {
             "conditions": {
               "child": [
@@ -68,6 +82,20 @@
                   "entity": "this",
                   "predicate": {
                     "type": "environmental:yak"
+                  }
+                }
+              ]
+            },
+            "trigger": "minecraft:bred_animals"
+          },
+          "environmental:zebra": {
+            "conditions": {
+              "child": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "type": "environmental:zebra"
                   }
                 }
               ]
@@ -90,6 +118,12 @@
           ],
           [
             "environmental:yak"
+          ],
+          [
+            "environmental:tapir"
+          ],
+          [
+            "environmental:zebra"
           ]
         ],
         "should_replace_requirements": false
