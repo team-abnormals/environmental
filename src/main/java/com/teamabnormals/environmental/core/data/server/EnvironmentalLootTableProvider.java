@@ -422,16 +422,17 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			consumer.accept(new ResourceLocation(Environmental.MOD_ID, "chests/log_cabin_junk"), LootTable.lootTable()
 					.withPool(LootPool.lootPool().setRolls(UniformGenerator.between(4.0F, 6.0F))
 							.add(LootItem.lootTableItem(Items.STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 6.0F))))
-							.add(LootItem.lootTableItem(PINE_PLANKS.get()).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(6.0F, 12.0F))))
-							.add(LootItem.lootTableItem(PINE_LOG.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 6.0F))))
-							.add(LootItem.lootTableItem(STRIPPED_PINE_LOG.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 6.0F))))
+							.add(LootItem.lootTableItem(PINE_PLANKS.get()).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(6.0F, 12.0F))))
+							.add(LootItem.lootTableItem(PINE_LOG.get()).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 6.0F))))
+							.add(LootItem.lootTableItem(STRIPPED_PINE_LOG.get()).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 6.0F))))
 							.add(LootItem.lootTableItem(PINE_LEAVES.get()).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 8.0F))))
 					)
 					.withPool(LootPool.lootPool().setRolls(UniformGenerator.between(2.0F, 3.0F))
-							.add(LootItem.lootTableItem(Items.FLOWER_POT).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
-							.add(LootItem.lootTableItem(PINE_TRAPDOOR.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
+							.add(LootItem.lootTableItem(Items.LANTERN).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
+							.add(LootItem.lootTableItem(Items.FLOWER_POT).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
+							.add(LootItem.lootTableItem(PINE_TRAPDOOR.get()).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
 							.add(LootItem.lootTableItem(PINE_SAPLING.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
-							.add(LootItem.lootTableItem(PINECONE.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))))
+							.add(LootItem.lootTableItem(PINECONE.get()).setWeight(2).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))))
 					)
 			);
 
@@ -446,10 +447,15 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 					)
 					.withPool(LootPool.lootPool().setRolls(UniformGenerator.between(5.0F, 6.0F))
 							.add(LootItem.lootTableItem(Items.ROTTEN_FLESH).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
-							.add(LootItem.lootTableItem(Items.STICK).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 6.0F))))
+							.add(LootItem.lootTableItem(Items.STICK).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 6.0F))))
+							.add(LootItem.lootTableItem(Items.COAL).setWeight(4).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
+							.add(LootItem.lootTableItem(Items.LEATHER).setWeight(4).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
 							.add(LootItem.lootTableItem(EnvironmentalItems.VENISON.get()).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
-							.add(LootItem.lootTableItem(EnvironmentalItems.COOKED_VENISON.get()).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
-							.add(LootItem.lootTableItem(Items.CAMPFIRE).setWeight(3))
+							.add(LootItem.lootTableItem(EnvironmentalItems.COOKED_VENISON.get()).setWeight(1).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
+							.add(LootItem.lootTableItem(Items.RABBIT_HIDE).setWeight(4).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
+							.add(LootItem.lootTableItem(Items.RABBIT).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
+							.add(LootItem.lootTableItem(Items.COOKED_RABBIT).setWeight(1).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
+							.add(LootItem.lootTableItem(Items.CAMPFIRE).setWeight(4))
 					)
 
 					.withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 2.0F))
@@ -464,12 +470,8 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			);
 
 
-			consumer.accept(new ResourceLocation(Environmental.MOD_ID, "chests/log_cabin_dispenser"), LootTable.lootTable()
-					.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
-							.add(LootItem.lootTableItem(Items.CARVED_PUMPKIN))
-					)
-			);
-
+			consumer.accept(new ResourceLocation(Environmental.MOD_ID, "chests/log_cabin_dispenser"), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.CARVED_PUMPKIN))));
+			consumer.accept(new ResourceLocation(Environmental.MOD_ID, "chests/log_cabin_dropper"), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(PINE_SAPLING.get()))));
 		}
 	}
 }

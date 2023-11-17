@@ -33,6 +33,22 @@
             }
           ],
           "name": "environmental:pine_planks",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 6.0,
+                "min": 3.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "environmental:pine_log",
           "weight": 2
         },
         {
@@ -48,22 +64,8 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "environmental:pine_log"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 6.0,
-                "min": 3.0
-              },
-              "function": "minecraft:set_count"
-            }
-          ],
-          "name": "environmental:stripped_pine_log"
+          "name": "environmental:stripped_pine_log",
+          "weight": 2
         },
         {
           "type": "minecraft:item",
@@ -98,13 +100,29 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:lantern"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
                 "max": 3.0,
                 "min": 1.0
               },
               "function": "minecraft:set_count"
             }
           ],
-          "name": "minecraft:flower_pot"
+          "name": "minecraft:flower_pot",
+          "weight": 2
         },
         {
           "type": "minecraft:item",
@@ -119,7 +137,8 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "environmental:pine_trapdoor"
+          "name": "environmental:pine_trapdoor",
+          "weight": 2
         },
         {
           "type": "minecraft:item",
@@ -145,7 +164,8 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "environmental:pinecone"
+          "name": "environmental:pinecone",
+          "weight": 2
         }
       ],
       "rolls": {
