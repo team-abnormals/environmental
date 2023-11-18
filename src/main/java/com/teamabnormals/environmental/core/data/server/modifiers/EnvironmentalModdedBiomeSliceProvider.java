@@ -5,11 +5,9 @@ import com.teamabnormals.blueprint.common.world.modification.ModdedBiomeSlicePro
 import com.teamabnormals.blueprint.core.registry.BlueprintBiomes;
 import com.teamabnormals.blueprint.core.util.BiomeUtil;
 import com.teamabnormals.environmental.core.Environmental;
-import com.teamabnormals.environmental.core.registry.EnvironmentalBiomes;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.biome.Climate;
 import net.minecraft.world.level.dimension.LevelStem;
 
@@ -52,7 +50,7 @@ public class EnvironmentalModdedBiomeSliceProvider extends ModdedBiomeSliceProvi
 		private final ResourceKey<Biome> VANILLA = BlueprintBiomes.ORIGINAL_SOURCE_MARKER.getKey();
 		private final ResourceKey<Biome>[][] OCEANS = new ResourceKey[][]{{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA}, {VANILLA, VANILLA, VANILLA, VANILLA, VANILLA}};
 		private final ResourceKey<Biome>[][] MIDDLE_BIOMES = new ResourceKey[][]{
-				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA},
+				{VANILLA, VANILLA, VANILLA, SNOWY_PINE_BARRENS.getKey(), VANILLA},
 				{VANILLA, VANILLA, VANILLA, PINE_BARRENS.getKey(), PINE_BARRENS.getKey()},
 				{VANILLA, VANILLA, VANILLA, BLOSSOM_WOODS.getKey(), VANILLA},
 				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA},
@@ -64,7 +62,7 @@ public class EnvironmentalModdedBiomeSliceProvider extends ModdedBiomeSliceProvi
 				{null, null, null, null, null},
 				{null, null, null, null, null}};
 		private final ResourceKey<Biome>[][] PLATEAU_BIOMES = new ResourceKey[][]{
-				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA},
+				{VANILLA, VANILLA, VANILLA, SNOWY_PINE_BARRENS.getKey(), SNOWY_PINE_BARRENS.getKey()},
 				{VANILLA, VANILLA, BLOSSOM_WOODS.getKey(), PINE_BARRENS.getKey(), PINE_BARRENS.getKey()},
 				{VANILLA, VANILLA, BLOSSOM_WOODS.getKey(), BLOSSOM_WOODS.getKey(), VANILLA},
 				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA},

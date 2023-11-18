@@ -22,7 +22,7 @@ public class EnvironmentalChunkGeneratorModifierProvider extends ChunkGeneratorM
 
     @Override
     protected void registerEntries() {
-        ConditionSource isPineBarrens = isBiome(EnvironmentalBiomes.PINE_BARRENS.getKey());
+        ConditionSource isPineBarrens = isBiome(EnvironmentalBiomes.PINE_BARRENS.getKey(), EnvironmentalBiomes.SNOWY_PINE_BARRENS.getKey());
 
         RuleSource stone = state(Blocks.STONE.defaultBlockState());
 

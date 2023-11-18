@@ -4,6 +4,7 @@ import com.teamabnormals.environmental.core.registry.EnvironmentalBiomes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalNoiseParameters;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.biome.Biome;
@@ -50,7 +51,8 @@ public abstract class SurfaceSystemMixin {
     @Inject(method = "buildSurface", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/biome/BiomeManager;getBiome(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/Holder;", shift = At.Shift.BEFORE, ordinal = 0), locals = LocalCapture.CAPTURE_FAILHARD)
     private void collectRaises(RandomState randomState, BiomeManager biomeManager, Registry<Biome> registry, boolean useLegacyRandomSource, WorldGenerationContext context, final ChunkAccess chunkAccess, NoiseChunk noiseChunk, SurfaceRules.RuleSource ruleSource, CallbackInfo ci, final BlockPos.MutableBlockPos mutable, ChunkPos chunkPos, int i, int j, BlockColumn blockColumn, SurfaceRules.Context surfaceRulesContext, SurfaceRules.SurfaceRule surfaceRule, BlockPos.MutableBlockPos mutable1, int k, int l, int i1, int j1) {
         int y = chunkAccess.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, k, l) + 1;
-        if (biomeManager.getBiome(mutable1.set(i1, y - 1, j1)).is(EnvironmentalBiomes.PINE_BARRENS.getKey())) {
+        Holder<Biome> biome = biomeManager.getBiome(mutable1.set(i1, y - 1, j1));
+        if (biome.is(EnvironmentalBiomes.PINE_BARRENS.getKey()) || biome.is(EnvironmentalBiomes.SNOWY_PINE_BARRENS.getKey())) {
             double noise = this.getNoiseAt(i1, j1);
             boolean flag = noise > 0.0D;
             this.pineBarrensStoneRaises[k][l] = new int[]{y, y + getRaise(noise), flag ? 1 : 0};

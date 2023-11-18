@@ -46,8 +46,7 @@ public class PineTreeFeature extends BlueprintTreeFeature {
 			BlockPos blockpos = origin.above(y);
 
 			if (leafbranches > 0) {
-				Direction direction = branchdirections.get(random.nextInt(branchdirections.size()));
-				branchdirections.remove(direction);
+				Direction direction = branchdirections.remove(random.nextInt(branchdirections.size()));
 				this.createBranchWithLeaves(blockpos, direction, random, config);
 				leafbranches--;
 

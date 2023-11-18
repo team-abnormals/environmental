@@ -67,6 +67,22 @@
               ]
             },
             "trigger": "minecraft:location"
+          },
+          "environmental:snowy_pine_barrens": {
+            "conditions": {
+              "player": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "location": {
+                      "biome": "environmental:snowy_pine_barrens"
+                    }
+                  }
+                }
+              ]
+            },
+            "trigger": "minecraft:location"
           }
         },
         "requirements": [
@@ -81,6 +97,9 @@
           ],
           [
             "environmental:pine_barrens"
+          ],
+          [
+            "environmental:snowy_pine_barrens"
           ]
         ],
         "should_replace_requirements": false

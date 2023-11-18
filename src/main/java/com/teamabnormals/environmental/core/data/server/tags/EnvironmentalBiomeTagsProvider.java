@@ -45,8 +45,16 @@ public class EnvironmentalBiomeTagsProvider extends BiomeTagsProvider {
 
 		this.tag(EnvironmentalBiomes.PINE_BARRENS.get(),
 				BiomeTags.IS_OVERWORLD, BiomeTags.IS_TAIGA,
-				BiomeTags.HAS_MINESHAFT, BiomeTags.STRONGHOLD_BIASED_TO, BiomeTags.HAS_RUINED_PORTAL_STANDARD,
+				BiomeTags.HAS_MINESHAFT, BiomeTags.STRONGHOLD_BIASED_TO,
 				Tags.Biomes.IS_COLD_OVERWORLD, Tags.Biomes.IS_CONIFEROUS,
+				EnvironmentalBiomeTags.HAS_LOG_CABIN
+		);
+
+		this.tag(EnvironmentalBiomes.SNOWY_PINE_BARRENS.get(),
+				BiomeTags.IS_OVERWORLD, BiomeTags.IS_TAIGA,
+				BiomeTags.HAS_MINESHAFT, BiomeTags.STRONGHOLD_BIASED_TO,
+				BiomeTags.SPAWNS_COLD_VARIANT_FROGS,
+				Tags.Biomes.IS_COLD_OVERWORLD, Tags.Biomes.IS_SNOWY, Tags.Biomes.IS_CONIFEROUS,
 				EnvironmentalBiomeTags.HAS_LOG_CABIN
 		);
 

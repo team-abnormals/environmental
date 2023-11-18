@@ -37,13 +37,10 @@ public class WeepingWillowTreeFeature extends BlueprintTreeFeature {
 		Plane.HORIZONTAL.forEach(branchDirections::add);
 
 		for (int i = 0; i < branches; i++) {
-			int branchHeight = branchHeights.get(random.nextInt(branchHeights.size()));
-			Direction direction = branchDirections.get(random.nextInt(branchDirections.size()));
+			int branchHeight = branchHeights.remove(random.nextInt(branchHeights.size()));
+			Direction direction = branchDirections.remove(random.nextInt(branchDirections.size()));
 
 			this.createBranch(origin.above(branchHeight), direction, random, config);
-
-			branchHeights.remove(Integer.valueOf(branchHeight));
-			branchDirections.remove(direction);
 		}
 
 		Direction direction = branchDirections.get(random.nextInt(branchDirections.size()));

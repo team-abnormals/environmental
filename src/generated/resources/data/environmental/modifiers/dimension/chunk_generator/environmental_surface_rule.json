@@ -13,7 +13,8 @@
             "if_true": {
               "type": "minecraft:biome",
               "biome_is": [
-                "environmental:pine_barrens"
+                "environmental:pine_barrens",
+                "environmental:snowy_pine_barrens"
               ]
             },
             "then_run": {

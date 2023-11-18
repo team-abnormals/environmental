@@ -41,6 +41,10 @@
         {
           "type": "environmental:biome",
           "biome": "minecraft:snowy_slopes"
+        },
+        {
+          "type": "environmental:biome",
+          "biome": "environmental:snowy_pine_barrens"
         }
       ]
     }

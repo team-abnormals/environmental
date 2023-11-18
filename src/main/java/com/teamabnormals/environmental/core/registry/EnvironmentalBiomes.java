@@ -26,7 +26,8 @@ public class EnvironmentalBiomes {
 	public static final KeyedBiome BLOSSOM_WOODS = HELPER.createBiome("blossom_woods", () -> blossomBiome(false));
 	public static final KeyedBiome BLOSSOM_VALLEYS = HELPER.createBiome("blossom_valleys", () -> blossomBiome(true));
 
-	public static final KeyedBiome PINE_BARRENS = HELPER.createBiome("pine_barrens", EnvironmentalBiomes::pineBarrens);
+	public static final KeyedBiome PINE_BARRENS = HELPER.createBiome("pine_barrens", () -> pineBarrens(false));
+	public static final KeyedBiome SNOWY_PINE_BARRENS = HELPER.createBiome("snowy_pine_barrens", () -> pineBarrens(true));
 
 	private static Biome marsh() {
 		BiomeGenerationSettings.Builder generation = new BiomeGenerationSettings.Builder();
@@ -54,9 +55,9 @@ public class EnvironmentalBiomes {
 		return biome(Precipitation.RAIN, 0.45F, 0.8F, 5938278, 5216182, 335411, spawns, generation, null);
 	}
 
-	private static Biome pineBarrens() {
+	private static Biome pineBarrens(boolean snowy) {
 		BiomeGenerationSettings.Builder generation = new BiomeGenerationSettings.Builder();
-		EnvironmentalGeneration.pineBarrens(generation);
+		EnvironmentalGeneration.pineBarrens(generation, snowy);
 
 		MobSpawnSettings.Builder spawns = new MobSpawnSettings.Builder();
 		BiomeDefaultFeatures.farmAnimals(spawns);
@@ -64,7 +65,7 @@ public class EnvironmentalBiomes {
 		spawns.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.WOLF, 8, 4, 4));
 		spawns.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.RABBIT, 4, 2, 3));
 
-		return biome(Precipitation.RAIN, 0.4F, 0.6F, 9090929, 6725203, 4159204, 329011, 12638463, spawns, generation, null);
+		return biome(snowy ? Precipitation.SNOW : Precipitation.RAIN, snowy ? -0.2F : 0.4F, snowy ? 0.4F : 0.6F, snowy ? 8697226 : 9090929, 6725203, 4159204, 329011, 12638463, spawns, generation, null);
 	}
 
 	private static Biome biome(Precipitation precipitation, float temperature, float downfall, int waterColor, int waterFogColor, MobSpawnSettings.Builder spawns, BiomeGenerationSettings.Builder generation, @Nullable Music music) {

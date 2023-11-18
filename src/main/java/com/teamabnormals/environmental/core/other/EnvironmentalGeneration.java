@@ -61,7 +61,7 @@ public class EnvironmentalGeneration {
 		}
 	}
 
-	public static void pineBarrens(BiomeGenerationSettings.Builder generation) {
+	public static void pineBarrens(BiomeGenerationSettings.Builder generation, boolean snowy) {
 		OverworldBiomes.globalOverworldGeneration(generation);
 		BiomeDefaultFeatures.addFerns(generation);
 		BiomeDefaultFeatures.addDefaultOres(generation);
@@ -72,7 +72,7 @@ public class EnvironmentalGeneration {
 		generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_PINE_BARRENS.getHolder().get());
 		generation.addFeature(Decoration.VEGETAL_DECORATION, VegetationPlacements.BROWN_MUSHROOM_TAIGA);
 		generation.addFeature(Decoration.VEGETAL_DECORATION, VegetationPlacements.RED_MUSHROOM_TAIGA);
-		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_GRASS_PINE_BARRENS.getHolder().get());
+		generation.addFeature(Decoration.VEGETAL_DECORATION, snowy ? PATCH_GRASS_SNOWY_PINE_BARRENS.getHolder().get() : PATCH_GRASS_PINE_BARRENS.getHolder().get());
 		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_CUP_LICHEN_STONE.getHolder().get());
 		BiomeDefaultFeatures.addDefaultExtraVegetation(generation);
 	}
