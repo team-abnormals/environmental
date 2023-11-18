@@ -31,14 +31,46 @@
               "add": false,
               "damage": {
                 "type": "minecraft:uniform",
-                "max": 0.8,
-                "min": 0.5
+                "max": 1.0,
+                "min": 0.8
               },
               "function": "minecraft:set_damage"
             }
           ],
-          "name": "minecraft:shears"
+          "name": "minecraft:shears",
+          "weight": 2
         },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 0.8,
+                "min": 0.5
+              },
+              "function": "minecraft:set_damage"
+            },
+            {
+              "enchantments": [
+                "minecraft:unbreaking"
+              ],
+              "function": "minecraft:enchant_randomly"
+            }
+          ],
+          "name": "minecraft:shears"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 2.0,
+        "min": 1.0
+      }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
         {
           "type": "minecraft:item",
           "functions": [
@@ -57,8 +89,8 @@
       ],
       "rolls": {
         "type": "minecraft:uniform",
-        "max": 2.0,
-        "min": 1.0
+        "max": 1.0,
+        "min": 0.0
       }
     },
     {
