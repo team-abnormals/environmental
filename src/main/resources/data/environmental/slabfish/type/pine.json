@@ -13,8 +13,17 @@
       ]
     },
     {
-      "type": "environmental:biome",
-      "biome": "environmental:pine_barrens"
+      "type": "environmental:or",
+      "conditions": [
+        {
+          "type": "environmental:biome",
+          "biome": "environmental:pine_barrens"
+        },
+        {
+          "type": "environmental:biome",
+          "biome": "environmental:snowy_pine_barrens"
+        }
+      ]
     }
   ]
 }
