@@ -1,6 +1,9 @@
 {
   "type": "forge:add_features",
   "biomes": "#minecraft:is_jungle",
-  "features": "environmental:patch_giant_tall_grass_jungle",
+  "features": [
+    "environmental:patch_giant_tall_grass_jungle",
+    "environmental:patch_large_fern_jungle"
+  ],
   "step": "vegetal_decoration"
 }

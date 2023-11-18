@@ -27,7 +27,7 @@ public class CoarseDirtOnStoneFeature extends Feature<NoneFeatureConfiguration> 
         for (int x = -r; x <= r; ++x) {
             for (int y = -r; y <= r; ++y) {
                 int d = x * x + y * y;
-                if (d <= r * r && ((Math.abs(x) != r && Math.abs(y) != r) || random.nextInt(7) > 0)) {
+                if (d <= r * r && ((Math.abs(x) != r && Math.abs(y) != r) || random.nextInt(6) > 0)) {
                     int x1 = x + pos.getX();
                     int y1 = y + pos.getZ();
                     blockpos$mutable.set(x1, level.getHeight(Heightmap.Types.WORLD_SURFACE_WG, x1, y1) - 1, y1);
