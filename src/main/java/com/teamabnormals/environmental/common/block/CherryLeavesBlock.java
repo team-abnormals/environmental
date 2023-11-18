@@ -24,7 +24,9 @@ public class CherryLeavesBlock extends BlueprintLeavesBlock {
 		double d1 = random.nextGaussian() * 0.02D;
 		double d2 = random.nextGaussian() * 0.02D;
 
-		if (random.nextFloat() < 0.025F) {
+		float rate = level.isThundering() ? 0.2F : level.isRaining() ? 0.05F : 0.025F;
+
+		if (random.nextFloat() < rate) {
 			BlockPos blockpos = pos.below();
 			if (level.isEmptyBlock(blockpos)) {
 				double d3 = (float) pos.getX() + random.nextFloat();

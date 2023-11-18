@@ -13,6 +13,8 @@ public class CherryBlossomParticle extends TextureSheetParticle {
 	private final float rotSpeed;
 	private int waterTicks;
 	private boolean isInWater;
+	private boolean thunder;
+	private boolean rain;
 
 	private CherryBlossomParticle(ClientLevel level, double xCoordIn, double yCoordIn, double zCoordIn) {
 		super(level, xCoordIn, yCoordIn, zCoordIn);
@@ -33,6 +35,13 @@ public class CherryBlossomParticle extends TextureSheetParticle {
 		if (this.age++ >= this.lifetime) {
 			this.remove();
 		} else {
+			if (this.thunder) {
+				this.xd -= 0.0125F;
+				this.yd -= 0.0075F;
+			} else if (this.rain) {
+				this.xd -= 0.001F;
+			}
+
 			this.move(this.xd, this.yd, this.zd);
 			this.yd -= 0.001F;
 			this.yd = Math.max(this.yd, -0.08F);
@@ -61,9 +70,11 @@ public class CherryBlossomParticle extends TextureSheetParticle {
 			this.spriteSet = sprite;
 		}
 
-		public Particle createParticle(SimpleParticleType typeIn, ClientLevel worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-			CherryBlossomParticle particle = new CherryBlossomParticle(worldIn, x, y, z);
+		public Particle createParticle(SimpleParticleType typeIn, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+			CherryBlossomParticle particle = new CherryBlossomParticle(level, x, y, z);
 			particle.pickSprite(this.spriteSet);
+			particle.thunder = level.isThundering();
+			particle.rain = level.isRaining();
 			return particle;
 		}
 	}
