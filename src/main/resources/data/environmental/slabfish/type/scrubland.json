@@ -1,0 +1,30 @@
+{
+  "rarity": "rare",
+  "priority": 1,
+  "displayName": {
+    "translate": "entity.environmental.slabfish.type.scrubland"
+  },
+  "mod": "atmospheric",
+  "conditions": [
+    {
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:or",
+      "conditions": [
+        {
+          "type": "environmental:biome",
+          "biome": "atmospheric:scrubland"
+        },
+        {
+          "type": "environmental:biome",
+          "biome": "atmospheric:snowy_scrubland"
+        }
+      ]
+    }
+  ]
+}

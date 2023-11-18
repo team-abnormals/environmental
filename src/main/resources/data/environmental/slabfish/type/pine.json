@@ -1,0 +1,20 @@
+{
+  "rarity": "uncommon",
+  "priority": 1,
+  "displayName": {
+    "translate": "entity.environmental.slabfish.type.pine"
+  },
+  "conditions": [
+    {
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:biome",
+      "biome": "environmental:pine_barrens"
+    }
+  ]
+}
