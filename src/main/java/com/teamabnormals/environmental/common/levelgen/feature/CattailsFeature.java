@@ -3,6 +3,7 @@ package com.teamabnormals.environmental.common.levelgen.feature;
 import com.mojang.serialization.Codec;
 import com.teamabnormals.environmental.common.block.CattailBlock;
 import com.teamabnormals.environmental.common.block.CattailStalkBlock;
+import com.teamabnormals.environmental.core.other.tags.EnvironmentalBlockTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
@@ -37,7 +38,7 @@ public class CattailsFeature extends Feature<NoneFeatureConfiguration> {
 
 			int stalkCount = this.getStalkCount(random);
 			BlockState belowState = level.getBlockState(pos.below());
-			if ((belowState.is(BlockTags.DIRT) || belowState.is(BlockTags.SAND) || belowState.is(Blocks.FARMLAND)) && (level.isWaterAt(pos) || level.isEmptyBlock(pos)) && (level.isEmptyBlock(pos.above()) || (level.isWaterAt(pos.above()) && level.isEmptyBlock(pos.above(2))))) {
+			if (belowState.is(EnvironmentalBlockTags.CATTAIL_PLANTABLE_ON) && (level.isWaterAt(pos) || level.isEmptyBlock(pos)) && (level.isEmptyBlock(pos.above()) || (level.isWaterAt(pos.above()) && level.isEmptyBlock(pos.above(2))))) {
 				boolean fluffy = belowState.is(Blocks.MUD);
 				level.setBlock(pos, EnvironmentalBlocks.CATTAIL_STALK.get().defaultBlockState().setValue(CattailBlock.CATTAILS, stalkCount).setValue(BlockStateProperties.WATERLOGGED, level.getFluidState(pos).getType() == Fluids.WATER), 2);
 				if (level.isWaterAt(pos.above()) || (level.isEmptyBlock(pos.above(2)) && random.nextBoolean())) {

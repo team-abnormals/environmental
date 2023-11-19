@@ -1,5 +1,6 @@
 package com.teamabnormals.environmental.common.block;
 
+import com.teamabnormals.environmental.core.other.tags.EnvironmentalBlockTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -53,7 +54,7 @@ public class CattailStalkBlock extends BushBlock implements SimpleWaterloggedBlo
 
 	@Override
 	protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
-		return state.is(BlockTags.DIRT) || state.is(BlockTags.SAND) || state.is(Blocks.FARMLAND) || state.is(this);
+		return state.is(EnvironmentalBlockTags.CATTAIL_PLANTABLE_ON) || state.is(this);
 	}
 
 	@Override
