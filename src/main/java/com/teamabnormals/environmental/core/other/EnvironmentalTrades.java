@@ -32,10 +32,14 @@ public class EnvironmentalTrades {
 
 				new BlueprintTrade(5, EnvironmentalBlocks.WILLOW_SAPLING.get().asItem(), 1, 8, 1),
 				new BlueprintTrade(5, EnvironmentalBlocks.CHERRY_SAPLING.get().asItem(), 1, 8, 1),
+				new BlueprintTrade(5, EnvironmentalBlocks.CHEERFUL_CHERRY_SAPLING.get().asItem(), 1, 8, 1),
+				new BlueprintTrade(5, EnvironmentalBlocks.MOODY_CHERRY_SAPLING.get().asItem(), 1, 8, 1),
 				new BlueprintTrade(5, EnvironmentalBlocks.BLUE_WISTERIA_SAPLING.get().asItem(), 1, 8, 1),
 				new BlueprintTrade(5, EnvironmentalBlocks.PINK_WISTERIA_SAPLING.get().asItem(), 1, 8, 1),
 				new BlueprintTrade(5, EnvironmentalBlocks.PURPLE_WISTERIA_SAPLING.get().asItem(), 1, 8, 1),
 				new BlueprintTrade(5, EnvironmentalBlocks.WHITE_WISTERIA_SAPLING.get().asItem(), 1, 8, 1),
+				new BlueprintTrade(5, EnvironmentalBlocks.PINE_SAPLING.get().asItem(), 1, 8, 1),
+				new BlueprintTrade(5, EnvironmentalBlocks.PINECONE.get().asItem(), 1, 8, 1),
 
 				new BlueprintTrade(1, EnvironmentalBlocks.CARTWHEEL.get().asItem(), 1, 5, 1),
 				new BlueprintTrade(1, EnvironmentalBlocks.VIOLET.get().asItem(), 1, 12, 1),
@@ -49,7 +53,8 @@ public class EnvironmentalTrades {
 				new BlueprintTrade(1, EnvironmentalBlocks.RED_HIBISCUS.get().asItem(), 1, 12, 1),
 				new BlueprintTrade(1, EnvironmentalBlocks.PINK_HIBISCUS.get().asItem(), 1, 12, 1),
 				new BlueprintTrade(1, EnvironmentalBlocks.MAGENTA_HIBISCUS.get().asItem(), 1, 12, 1),
-				new BlueprintTrade(1, EnvironmentalBlocks.PURPLE_HIBISCUS.get().asItem(), 1, 12, 1)
+				new BlueprintTrade(1, EnvironmentalBlocks.PURPLE_HIBISCUS.get().asItem(), 1, 12, 1),
+				new BlueprintTrade(1, EnvironmentalBlocks.CUP_LICHEN.get().asItem(), 1, 8, 1)					
 		);
 
 		TradeUtil.addRareWandererTrades(event,
