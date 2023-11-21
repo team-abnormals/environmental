@@ -224,8 +224,8 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> PINE_LEAF_CARPET = HELPER.createCompatBlock("quark", "pine_leaf_carpet", () -> new LeafCarpetBlock(EnvironmentalProperties.PINE.leafCarpet()), CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> PINE_HEDGE = HELPER.createCompatFuelBlock("quark", "pine_hedge", () -> new HedgeBlock(EnvironmentalProperties.PINE.log()), 300, CreativeModeTab.TAB_DECORATIONS);
 
-	public static final RegistryObject<Block> PINECONE = HELPER.createBlock("pinecone", () -> new PineconeBlock(Block.Properties.of(Material.WOOD, MaterialColor.DIRT).randomTicks().strength(1.5F).sound(SoundType.WOOD)), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> WAXED_PINECONE = HELPER.createBlock("waxed_pinecone", () -> new WaxedPineconeBlock(Block.Properties.of(Material.WOOD, MaterialColor.DIRT).strength(1.5F).sound(SoundType.WOOD)), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> PINECONE = HELPER.createBlock("pinecone", () -> new PineconeBlock(EnvironmentalProperties.PINECONE.randomTicks()), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> WAXED_PINECONE = HELPER.createBlock("waxed_pinecone", () -> new WaxedPineconeBlock(EnvironmentalProperties.PINECONE), CreativeModeTab.TAB_DECORATIONS);
 
 	// Cherry //
 
