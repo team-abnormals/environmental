@@ -39,11 +39,9 @@ public class HibiscusBushFeature extends Feature<NoneFeatureConfiguration> {
 		if (pos.getY() > context.chunkGenerator().getSeaLevel() + 20 && random.nextBoolean())
 			return false;
 
-		int bushes = 0;
-
-		for (int i = 0; i < 32 && bushes < 6; ++i) {
-			int x = pos.getX() + random.nextInt(16) - random.nextInt(16);
-			int z = pos.getZ() + random.nextInt(16) - random.nextInt(16);
+		for (int i = 0; i < 8; ++i) {
+			int x = pos.getX() + random.nextInt(8) - random.nextInt(8);
+			int z = pos.getZ() + random.nextInt(8) - random.nextInt(8);
 			mutablepos.set(x, level.getHeight(Heightmap.Types.WORLD_SURFACE_WG, x, z), z);
 
 			for (int j = 0; j < 2; ++j) {
@@ -56,11 +54,12 @@ public class HibiscusBushFeature extends Feature<NoneFeatureConfiguration> {
 			if (canBushGrowAt(level, mutablepos)) {
 				placeBush(level, mutablepos, random);
 				placeGroundHibiscuses(level, mutablepos, random);
-				bushes++;
+
+				return true;
 			}
 		}
 
-		return bushes > 0;
+		return false;
 	}
 
 	private static void placeBush(WorldGenLevel level, BlockPos pos, RandomSource random) {
