@@ -176,7 +176,7 @@ public class EnvironmentalEvents {
 			event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide()));
 			event.setCanceled(true);
 		} else if (stack.canPerformAction(ToolActions.HOE_TILL) && state.is(EnvironmentalBlocks.DIRT_PATH.get()) && !player.isSpectator() && level.isEmptyBlock(pos.above())) {
-			level.playSound(player, pos, SoundEvents.SHOVEL_FLATTEN, SoundSource.BLOCKS, 1.0F, 1.0F);
+			level.playSound(player, pos, SoundEvents.HOE_TILL, SoundSource.BLOCKS, 1.0F, 1.0F);
 			if (!level.isClientSide()) {
 				stack.hurtAndBreak(1, player, (damage) -> {
 					damage.broadcastBreakEvent(event.getHand());
