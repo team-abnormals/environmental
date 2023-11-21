@@ -460,9 +460,7 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 							.add(LootItem.lootTableItem(Items.COOKED_RABBIT).setWeight(1).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
 							.add(LootItem.lootTableItem(Items.CAMPFIRE).setWeight(4))
 					)
-					.withPool(LootPool.lootPool().setRolls(UniformGenerator.between(0.0F, 1.0F))
-							.add(LootItem.lootTableItem(EnvironmentalItems.WAXED_PINECONE.get()).setWeight(1).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))))
-            		)
+
 					.withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 2.0F))
 							.add(LootItem.lootTableItem(Items.LEATHER_HELMET).setWeight(3))
 							.add(LootItem.lootTableItem(Items.LEATHER_CHESTPLATE).setWeight(3))
