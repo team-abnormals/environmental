@@ -1,5 +1,6 @@
 {
   "values": [
+    "#forge:is_icy",
     "#minecraft:is_taiga"
   ]
 }

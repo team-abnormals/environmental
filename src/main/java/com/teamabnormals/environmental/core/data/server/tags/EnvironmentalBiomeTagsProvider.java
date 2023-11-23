@@ -75,7 +75,7 @@ public class EnvironmentalBiomeTagsProvider extends BiomeTagsProvider {
 		this.tag(EnvironmentalBiomeTags.WITHOUT_DEER).add(Biomes.GROVE).addOptional(new ResourceLocation("atmospheric", "aspen_parkland")).addOptional(new ResourceLocation("atmospheric", "grimwoods"));
 		this.tag(EnvironmentalBiomeTags.WITHOUT_RARE_DEER);
 		this.tag(EnvironmentalBiomeTags.WITHOUT_MUDDY_PIG);
-		this.tag(EnvironmentalBiomeTags.WITHOUT_REINDEER);
+		this.tag(EnvironmentalBiomeTags.WITHOUT_REINDEER).addOptional(new ResourceLocation("atmospheric", "kousa_jungle"));
 		this.tag(EnvironmentalBiomeTags.WITHOUT_YAK);
 		this.tag(EnvironmentalBiomeTags.WITHOUT_TAPIR);
 		this.tag(EnvironmentalBiomeTags.WITHOUT_ZEBRA);
@@ -91,12 +91,14 @@ public class EnvironmentalBiomeTagsProvider extends BiomeTagsProvider {
 		this.tag(EnvironmentalBiomeTags.WITHOUT_SHEEP);
 
 		this.tag(EnvironmentalBiomeTags.HAS_CATTAILS).add(Biomes.RIVER, Biomes.SWAMP, Biomes.MANGROVE_SWAMP);
-		this.tag(EnvironmentalBiomeTags.HAS_CUP_LICHEN).addTag(BiomeTags.IS_TAIGA);
+		this.tag(EnvironmentalBiomeTags.HAS_CUP_LICHEN).addTag(BlueprintBiomeTags.IS_ICY).addTag(BiomeTags.IS_TAIGA);
 		this.tag(EnvironmentalBiomeTags.HAS_BLUEBELL).add(Biomes.DARK_FOREST);
 		this.tag(EnvironmentalBiomeTags.HAS_VIOLET).addTag(BiomeTags.IS_TAIGA);
 		this.tag(EnvironmentalBiomeTags.HAS_TASSELFLOWER).addTag(BiomeTags.IS_SAVANNA);
 		this.tag(EnvironmentalBiomeTags.HAS_BIRD_OF_PARADISE).addTag(BiomeTags.IS_JUNGLE).addOptionalTag(new ResourceLocation("atmospheric", "is_rainforest"));
 		this.tag(EnvironmentalBiomeTags.HAS_HIBISCUS).add(Biomes.JUNGLE);
+
+		this.tag(EnvironmentalBiomeTags.WITHOUT_CUP_LICHEN).addOptional(new ResourceLocation("atmospheric", "kousa_jungle"));
 
 		this.tag(EnvironmentalBiomeTags.HAS_MUD_DISK).add(Biomes.SWAMP);
 	}
