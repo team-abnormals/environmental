@@ -52,21 +52,21 @@ public class EnvironmentalBiomeModifierProvider {
 	private static final HashMap<ResourceLocation, BiomeModifier> MODIFIERS = new HashMap<>();
 
 	public static JsonCodecProvider<BiomeModifier> create(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-		addSpawn("slabfish", EnvironmentalBiomeTags.HAS_SLABFISH, new SpawnerData(EnvironmentalEntityTypes.SLABFISH.get(), 16, 2, 4));
-		addSpawn("duck", EnvironmentalBiomeTags.HAS_DUCK, new SpawnerData(EnvironmentalEntityTypes.DUCK.get(), 10, 4, 4));
-		addSpawn("duck_river", Biomes.RIVER, new SpawnerData(EnvironmentalEntityTypes.DUCK.get(), 1, 1, 2));
+		addSpawnIgnore("slabfish", EnvironmentalBiomeTags.HAS_SLABFISH, EnvironmentalBiomeTags.WITHOUT_SLABFISH, new SpawnerData(EnvironmentalEntityTypes.SLABFISH.get(), 16, 2, 4));
+		addSpawnIgnore("duck", EnvironmentalBiomeTags.HAS_DUCK, EnvironmentalBiomeTags.WITHOUT_DUCK, new SpawnerData(EnvironmentalEntityTypes.DUCK.get(), 10, 4, 4));
+		addSpawnIgnore("duck_rare", EnvironmentalBiomeTags.HAS_RARE_DUCK, EnvironmentalBiomeTags.WITHOUT_RARE_DUCK, new SpawnerData(EnvironmentalEntityTypes.DUCK.get(), 1, 1, 2));
 		addSpawnIgnore("deer", EnvironmentalBiomeTags.HAS_DEER, EnvironmentalBiomeTags.WITHOUT_DEER, new SpawnerData(EnvironmentalEntityTypes.DEER.get(), 16, 4, 4));
-		addSpawn("reindeer", EnvironmentalBiomeTags.HAS_REINDEER, new SpawnerData(EnvironmentalEntityTypes.REINDEER.get(), 16, 4, 4));
-		addSpawn("tapir", BiomeTags.IS_JUNGLE, new SpawnerData(EnvironmentalEntityTypes.TAPIR.get(), 10, 2, 2));
-		addSpawn("yak", EnvironmentalBiomeTags.HAS_YAK, new SpawnerData(EnvironmentalEntityTypes.YAK.get(), 8, 4, 4));
-		addSpawn("deer_meadow", Biomes.MEADOW, new SpawnerData(EnvironmentalEntityTypes.DEER.get(), 1, 2, 4));
+		addSpawnIgnore("deer_rare", EnvironmentalBiomeTags.HAS_RARE_DEER, EnvironmentalBiomeTags.WITHOUT_RARE_DEER, new SpawnerData(EnvironmentalEntityTypes.DEER.get(), 1, 2, 4));
+		addSpawnIgnore("reindeer", EnvironmentalBiomeTags.HAS_REINDEER, EnvironmentalBiomeTags.WITHOUT_REINDEER, new SpawnerData(EnvironmentalEntityTypes.REINDEER.get(), 16, 4, 4));
+		addSpawnIgnore("tapir", EnvironmentalBiomeTags.HAS_TAPIR, EnvironmentalBiomeTags.WITHOUT_TAPIR, new SpawnerData(EnvironmentalEntityTypes.TAPIR.get(), 10, 2, 2));
+		addSpawnIgnore("yak", EnvironmentalBiomeTags.HAS_YAK, EnvironmentalBiomeTags.WITHOUT_YAK, new SpawnerData(EnvironmentalEntityTypes.YAK.get(), 8, 4, 4));
 		addSpawn("pig", Biomes.MANGROVE_SWAMP, new SpawnerData(EntityType.PIG, 10, 4, 4));
-		addFeature("zebra_dazzle", EnvironmentalBiomeTags.HAS_ZEBRA, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.ZEBRA_DAZZLE);
+		addFeatureIgnore("zebra_dazzle", EnvironmentalBiomeTags.HAS_ZEBRA, EnvironmentalBiomeTags.WITHOUT_ZEBRA, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.ZEBRA_DAZZLE);
 
-		removeSpawnInvertedIgnore("pig", EnvironmentalBiomeTags.HAS_PIG, Biomes.GROVE, EntityType.PIG);
-		removeSpawnInverted("sheep", EnvironmentalBiomeTags.HAS_SHEEP, EntityType.SHEEP);
-		removeSpawnInverted("cow", EnvironmentalBiomeTags.HAS_COW, EntityType.COW);
-		removeSpawnInvertedIgnore("chicken", EnvironmentalBiomeTags.HAS_CHICKEN, Biomes.GROVE, EntityType.CHICKEN);
+		removeSpawnInvertedIgnore("pig", EnvironmentalBiomeTags.HAS_PIG, EnvironmentalBiomeTags.WITHOUT_PIG, EntityType.PIG);
+		removeSpawnInvertedIgnore("sheep", EnvironmentalBiomeTags.HAS_SHEEP, EnvironmentalBiomeTags.WITHOUT_SHEEP, EntityType.SHEEP);
+		removeSpawnInvertedIgnore("cow", EnvironmentalBiomeTags.HAS_COW, EnvironmentalBiomeTags.WITHOUT_COW, EntityType.COW);
+		removeSpawnInvertedIgnore("chicken", EnvironmentalBiomeTags.HAS_CHICKEN, EnvironmentalBiomeTags.WITHOUT_CHICKEN, EntityType.CHICKEN);
 
 		addFeature("cattails", EnvironmentalBiomeTags.HAS_CATTAILS, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.CATTAILS);
 		addFeature("cup_lichen", EnvironmentalBiomeTags.HAS_CUP_LICHEN, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_CUP_LICHEN);
@@ -121,12 +121,16 @@ public class EnvironmentalBiomeModifierProvider {
 		addModifier("remove_spawn/" + name, new InvertedRemoveSpawnsIgnoreBiomeModifier(new HolderSet.Named<>(BIOMES, biomes), biomeSet(ignoredBiome), HolderSet.direct(Stream.of(spawns).map(type -> ENTITY_TYPES.getOrCreateHolderOrThrow(ENTITY_TYPES.getResourceKey(type).get())).collect(Collectors.toList()))));
 	}
 
-	private static void addSpawnIgnore(String name, TagKey<Biome> tagKey, TagKey<Biome> ignoredBiomes, MobSpawnSettings.SpawnerData... spawns) {
-		addModifier("add_spawn/" + name, new AddSpawnsIgnoreBiomeModifier(new HolderSet.Named<>(BIOMES, tagKey), new HolderSet.Named<>(BIOMES, ignoredBiomes), List.of(spawns)));
+	private static void removeSpawnInvertedIgnore(String name, TagKey<Biome> biomes, TagKey<Biome> ignoredBiomes, EntityType<?>... spawns) {
+		addModifier("remove_spawn/" + name, new InvertedRemoveSpawnsIgnoreBiomeModifier(new HolderSet.Named<>(BIOMES, biomes), new HolderSet.Named<>(BIOMES, ignoredBiomes), HolderSet.direct(Stream.of(spawns).map(type -> ENTITY_TYPES.getOrCreateHolderOrThrow(ENTITY_TYPES.getResourceKey(type).get())).collect(Collectors.toList()))));
 	}
 
 	private static void addSpawnIgnore(String name, TagKey<Biome> tagKey, ResourceKey<Biome> ignoredBiome, MobSpawnSettings.SpawnerData... spawns) {
 		addModifier("add_spawn/" + name, new AddSpawnsIgnoreBiomeModifier(new HolderSet.Named<>(BIOMES, tagKey), biomeSet(ignoredBiome), List.of(spawns)));
+	}
+
+	private static void addSpawnIgnore(String name, TagKey<Biome> tagKey, TagKey<Biome> ignoredBiomes, MobSpawnSettings.SpawnerData... spawns) {
+		addModifier("add_spawn/" + name, new AddSpawnsIgnoreBiomeModifier(new HolderSet.Named<>(BIOMES, tagKey), new HolderSet.Named<>(BIOMES, ignoredBiomes), List.of(spawns)));
 	}
 
 	@SafeVarargs

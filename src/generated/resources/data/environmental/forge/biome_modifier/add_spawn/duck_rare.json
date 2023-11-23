@@ -1,0 +1,11 @@
+{
+  "type": "environmental:add_spawns_ignore",
+  "biomes": "#environmental:has_animal/rare_duck",
+  "ignored_biomes": "#environmental:without_animal/rare_duck",
+  "spawners": {
+    "type": "environmental:duck",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 1
+  }
+}

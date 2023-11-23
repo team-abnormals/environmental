@@ -1,10 +1,11 @@
 {
-  "type": "forge:add_spawns",
+  "type": "environmental:add_spawns_ignore",
   "biomes": "#environmental:has_animal/yak",
+  "ignored_biomes": "#environmental:without_animal/yak",
   "spawners": {
     "type": "environmental:yak",
     "maxCount": 4,
-    "minCount": 2,
+    "minCount": 4,
     "weight": 8
   }
 }

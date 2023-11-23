@@ -1,6 +1,7 @@
 {
-  "type": "forge:add_spawns",
+  "type": "environmental:add_spawns_ignore",
   "biomes": "#environmental:has_animal/reindeer",
+  "ignored_biomes": "#environmental:without_animal/reindeer",
   "spawners": {
     "type": "environmental:reindeer",
     "maxCount": 4,
