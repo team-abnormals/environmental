@@ -290,5 +290,16 @@
       "entity/cow/milk3"
     ],
     "subtitle": "subtitles.environmental.entity.yak.milk"
+  },
+  "entity.tapir.leaf_step": {
+    "sounds": [
+      "step/grass1",
+      "step/grass2",
+      "step/grass3",
+      "step/grass4",
+      "step/grass5",
+      "step/grass6"
+    ],
+    "subtitle": "subtitles.environmental.entity.tapir.leaf_step"
   }
 }
