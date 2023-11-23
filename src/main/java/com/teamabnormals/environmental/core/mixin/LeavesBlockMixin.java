@@ -38,7 +38,9 @@ public abstract class LeavesBlockMixin extends Block {
 	public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
 		super.entityInside(state, level, pos, entity);
 		if (entity instanceof Tapir) {
-			entity.makeStuckInBlock(state, new Vec3(0.999D, 1.0D, 0.999D));
+			entity.resetFallDistance();
+			Vec3 vec3 = entity.getDeltaMovement();
+			entity.setDeltaMovement(vec3.x * 0.8D, Math.max(vec3.y, -0.08D), vec3.z * 0.8D);
 		}
 	}
 }
