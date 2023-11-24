@@ -27,7 +27,7 @@ public class EnvironmentalChunkGeneratorModifierProvider extends ChunkGeneratorM
         RuleSource stone = state(Blocks.STONE.defaultBlockState());
 
         this.entry("environmental_surface_rule").selects("minecraft:overworld")
-                .addModifier(new SurfaceRuleModifier(ifTrue(abovePreliminarySurface(), ifTrue(isPineBarrens, SurfaceRules.sequence(ifTrue(SurfaceRules.steep(), stone), ifTrue(surfaceNoiseAbove(Noises.SURFACE, 3.0F), ifTrue(not(noiseRange(EnvironmentalNoiseParameters.PINE_BARRENS_STONE.getKey(), -1.5F, 1.5F)), stone))))), false));
+                .addModifier(new SurfaceRuleModifier(ifTrue(abovePreliminarySurface(), ifTrue(isPineBarrens, SurfaceRules.sequence(ifTrue(SurfaceRules.steep(), stone), ifTrue(surfaceNoiseAbove(Noises.SURFACE, 3.0F), ifTrue(not(noiseRange(EnvironmentalNoiseParameters.PINE_BARRENS_STONE.getKey(), -1.25F, 1.25F)), stone))))), false));
     }
 
     private static ConditionSource noiseRange(ResourceKey<NormalNoise.NoiseParameters> noise, double low, double high) {

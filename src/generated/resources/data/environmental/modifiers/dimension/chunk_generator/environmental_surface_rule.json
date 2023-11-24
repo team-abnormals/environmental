@@ -46,8 +46,8 @@
                       "type": "minecraft:not",
                       "invert": {
                         "type": "minecraft:noise_threshold",
-                        "max_threshold": 0.18181818181818182,
-                        "min_threshold": -0.18181818181818182,
+                        "max_threshold": 0.15151515151515152,
+                        "min_threshold": -0.15151515151515152,
                         "noise": "environmental:pine_barrens_stone"
                       }
                     },
