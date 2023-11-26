@@ -4,11 +4,9 @@ import com.teamabnormals.environmental.common.entity.ai.goal.PineconeGolemGrabSa
 import com.teamabnormals.environmental.common.entity.ai.goal.PineconeGolemLookForSpotGoal;
 import com.teamabnormals.environmental.common.entity.ai.goal.PineconeGolemPlantSaplingGoal;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -24,10 +22,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class PineconeGolem extends AbstractGolem {
-    private static final EntityDataAccessor<Integer> SNIFFS = SynchedEntityData.defineId(PineconeGolem.class, EntityDataSerializers.INT);
-
-    private int sniffAnim;
-    private int sniffAnim0;
 
     public PineconeGolem(EntityType<? extends AbstractGolem> type, Level level) {
         super(type, level);
@@ -47,7 +41,6 @@ public class PineconeGolem extends AbstractGolem {
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
-        this.entityData.define(SNIFFS, 0);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -83,21 +76,16 @@ public class PineconeGolem extends AbstractGolem {
         return 5;
     }
 
-    private int getSniffs() {
-        return this.entityData.get(SNIFFS);
-    }
-
-    public void setSniffs(int sniffs) {
-        this.entityData.set(SNIFFS, sniffs);
-    }
-
     @Override
-    public void handleEntityEvent(byte id) {
-        if (id == 4) {
-            this.sniffAnim = 8;
-            this.sniffAnim0 = 8;
-        } else {
-            super.handleEntityEvent(id);
+    public void knockback(double force, double x, double z) {
+        super.knockback(force, x, z);
+        ItemStack itemstack = this.getMainHandItem();
+        if (!itemstack.isEmpty()) {
+            ItemEntity itementity = new ItemEntity(this.level, this.getX(), this.getY(), this.getZ(), itemstack);
+            itementity.setPickUpDelay(40);
+            itementity.setThrower(this.getUUID());
+            this.level.addFreshEntity(itementity);
+            this.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
         }
     }
 
