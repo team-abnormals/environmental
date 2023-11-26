@@ -63,12 +63,16 @@ public class HibiscusBushFeature extends Feature<NoneFeatureConfiguration> {
 	}
 
 	private static void placeBush(WorldGenLevel level, BlockPos pos, RandomSource random) {
-		int maxX = random.nextInt(2) + 1;
-		int maxY = random.nextInt(3);
-		int maxZ = random.nextInt(2) + 1;
+		int maxX = random.nextInt(3) == 0 ? 2 : 1;
+		int maxY = random.nextInt(2) + 1;
+		int maxZ = random.nextInt(3) == 0 ? 2 : 1;
 
-		if ((maxX == 2 || maxZ == 2) && maxY == 0)
-			maxY = 1;
+		if (maxX == 2 && maxZ == 2) {
+			if (random.nextBoolean())
+				maxX = 1;
+			else
+				maxZ = 1;
+		}
 
 		int minX = maxX == 2 ? -1 : -random.nextInt(2);
 		int minY = -1;
@@ -79,7 +83,7 @@ public class HibiscusBushFeature extends Feature<NoneFeatureConfiguration> {
 
 		placeLeafCube(level, pos, minX, minY, minZ, maxX, maxY, maxZ);
 
-		if (maxY > 0 && random.nextInt(3) > 0) {
+		if (random.nextInt(4) > 0) {
 			int offsetX = random.nextBoolean() ? -1 : 1;
 			int offsetY = random.nextBoolean() ? -1 : 1;
 
@@ -136,7 +140,7 @@ public class HibiscusBushFeature extends Feature<NoneFeatureConfiguration> {
 			for (int z = -3; z <= 3; ++z) {
 				for (int y = -1; y <= 3; ++y) {
 					mutablepos.setWithOffset(pos, x, y, z);
-					if (random.nextInt(4) > 0 && level.getBlockState(mutablepos).isAir()) {
+					if (random.nextInt(3) > 0 && level.getBlockState(mutablepos).isAir()) {
 						List<Direction> validdirections = Lists.newArrayList();
 						for (Direction direction : Direction.values()) {
 							if (direction != Direction.UP && level.getBlockState(mutablepos.relative(direction)).is(EnvironmentalBlocks.HIBISCUS_LEAVES.get())) {
