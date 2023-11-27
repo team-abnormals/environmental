@@ -65,7 +65,7 @@ public class EnvironmentalBiomes {
 		spawns.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.WOLF, 8, 4, 4));
 		spawns.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.RABBIT, 4, 2, 3));
 
-		return biome(snowy ? Precipitation.SNOW : Precipitation.RAIN, snowy ? -0.2F : 0.4F, snowy ? 0.4F : 0.6F, snowy ? 8697226 : 9090929, snowy ? 7710824 : 6725203, 4159204, 329011, 12638463, spawns, generation, null);
+		return biome(snowy ? Precipitation.SNOW : Precipitation.RAIN, snowy ? -0.2F : 0.4F, snowy ? 0.4F : 0.6F, snowy ? 8697226 : 9090929, snowy ? 6725203 : 6529101, 4159204, 329011, 12638463, spawns, generation, null);
 	}
 
 	private static Biome biome(Precipitation precipitation, float temperature, float downfall, int waterColor, int waterFogColor, MobSpawnSettings.Builder spawns, BiomeGenerationSettings.Builder generation, @Nullable Music music) {
