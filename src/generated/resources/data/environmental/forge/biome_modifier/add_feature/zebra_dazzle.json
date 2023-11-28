@@ -1,7 +1,6 @@
 {
-  "type": "environmental:add_features_ignore",
+  "type": "forge:add_features",
   "biomes": "#environmental:has_animal/zebra",
   "features": "environmental:zebra_dazzle",
-  "ignored_biomes": "#environmental:without_animal/zebra",
   "step": "vegetal_decoration"
 }

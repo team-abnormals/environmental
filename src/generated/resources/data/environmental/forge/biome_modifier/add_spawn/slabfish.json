@@ -1,7 +1,6 @@
 {
-  "type": "environmental:add_spawns_ignore",
+  "type": "forge:add_spawns",
   "biomes": "#environmental:has_animal/slabfish",
-  "ignored_biomes": "#environmental:without_animal/slabfish",
   "spawners": {
     "type": "environmental:slabfish",
     "maxCount": 4,

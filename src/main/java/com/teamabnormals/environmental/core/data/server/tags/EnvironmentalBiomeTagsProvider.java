@@ -60,35 +60,17 @@ public class EnvironmentalBiomeTagsProvider extends BiomeTagsProvider {
 
 		this.tag(EnvironmentalBiomeTags.HAS_SLABFISH).addTag(Tags.Biomes.IS_SWAMP);
 		this.tag(EnvironmentalBiomeTags.HAS_DUCK).addTag(Tags.Biomes.IS_SWAMP);
-		this.tag(EnvironmentalBiomeTags.HAS_RARE_DUCK).add(Biomes.RIVER);
 		this.tag(EnvironmentalBiomeTags.HAS_DEER).addTag(BiomeTags.IS_FOREST);
-		this.tag(EnvironmentalBiomeTags.HAS_RARE_DEER).add(Biomes.MEADOW);
+		this.tag(EnvironmentalBiomeTags.WITHOUT_DEER).add(Biomes.GROVE).addOptional(new ResourceLocation("atmospheric", "aspen_parkland")).addOptional(new ResourceLocation("atmospheric", "grimwoods"));
 		this.tag(EnvironmentalBiomeTags.HAS_MUDDY_PIG).addTag(Tags.Biomes.IS_SWAMP);
 		this.tag(EnvironmentalBiomeTags.HAS_REINDEER).addTag(BlueprintBiomeTags.IS_ICY).addTag(BiomeTags.IS_TAIGA).add(Biomes.GROVE);
 		this.tag(EnvironmentalBiomeTags.HAS_YAK).add(Biomes.STONY_PEAKS).addTag(BiomeTags.IS_HILL);
-		this.tag(EnvironmentalBiomeTags.HAS_TAPIR).addTag(BiomeTags.IS_JUNGLE);
 		this.tag(EnvironmentalBiomeTags.HAS_ZEBRA).addTag(BiomeTags.IS_SAVANNA);
 
-		this.tag(EnvironmentalBiomeTags.WITHOUT_SLABFISH);
-		this.tag(EnvironmentalBiomeTags.WITHOUT_DUCK);
-		this.tag(EnvironmentalBiomeTags.WITHOUT_RARE_DUCK);
-		this.tag(EnvironmentalBiomeTags.WITHOUT_DEER).add(Biomes.GROVE).addOptional(new ResourceLocation("atmospheric", "aspen_parkland")).addOptional(new ResourceLocation("atmospheric", "grimwoods"));
-		this.tag(EnvironmentalBiomeTags.WITHOUT_RARE_DEER);
-		this.tag(EnvironmentalBiomeTags.WITHOUT_MUDDY_PIG);
-		this.tag(EnvironmentalBiomeTags.WITHOUT_REINDEER);
-		this.tag(EnvironmentalBiomeTags.WITHOUT_YAK);
-		this.tag(EnvironmentalBiomeTags.WITHOUT_TAPIR);
-		this.tag(EnvironmentalBiomeTags.WITHOUT_ZEBRA);
-
-		this.tag(EnvironmentalBiomeTags.HAS_PIG).addTag(BiomeTags.IS_FOREST).addTag(Tags.Biomes.IS_SWAMP);
-		this.tag(EnvironmentalBiomeTags.HAS_COW).addTag(BlueprintBiomeTags.IS_GRASSLAND).addTag(BiomeTags.IS_SAVANNA);
-		this.tag(EnvironmentalBiomeTags.HAS_CHICKEN).addTag(BiomeTags.IS_FOREST).addTag(BiomeTags.IS_TAIGA).addTag(BiomeTags.IS_JUNGLE);
 		this.tag(EnvironmentalBiomeTags.HAS_SHEEP).addTag(BlueprintBiomeTags.IS_GRASSLAND).addTag(BiomeTags.IS_SAVANNA);
-
-		this.tag(EnvironmentalBiomeTags.WITHOUT_PIG).add(Biomes.GROVE);
-		this.tag(EnvironmentalBiomeTags.WITHOUT_COW);
-		this.tag(EnvironmentalBiomeTags.WITHOUT_CHICKEN).add(Biomes.GROVE);
-		this.tag(EnvironmentalBiomeTags.WITHOUT_SHEEP);
+		this.tag(EnvironmentalBiomeTags.HAS_COW).addTag(BlueprintBiomeTags.IS_GRASSLAND).addTag(BiomeTags.IS_SAVANNA);
+		this.tag(EnvironmentalBiomeTags.HAS_PIG).addTag(BiomeTags.IS_FOREST).addTag(Tags.Biomes.IS_SWAMP);
+		this.tag(EnvironmentalBiomeTags.HAS_CHICKEN).addTag(BiomeTags.IS_FOREST).addTag(BiomeTags.IS_TAIGA).addTag(BiomeTags.IS_JUNGLE);
 
 		this.tag(EnvironmentalBiomeTags.HAS_CATTAILS).add(Biomes.RIVER, Biomes.SWAMP, Biomes.MANGROVE_SWAMP);
 		this.tag(EnvironmentalBiomeTags.HAS_CUP_LICHEN).addTag(BiomeTags.IS_TAIGA);

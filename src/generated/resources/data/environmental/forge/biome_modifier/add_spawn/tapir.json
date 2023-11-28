@@ -1,7 +1,6 @@
 {
-  "type": "environmental:add_spawns_ignore",
-  "biomes": "#environmental:has_animal/tapir",
-  "ignored_biomes": "#environmental:without_animal/tapir",
+  "type": "forge:add_spawns",
+  "biomes": "#minecraft:is_jungle",
   "spawners": {
     "type": "environmental:tapir",
     "maxCount": 2,

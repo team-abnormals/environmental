@@ -12,35 +12,18 @@ public class EnvironmentalBiomeTags {
 
 	public static final TagKey<Biome> HAS_SLABFISH = biomeTag("has_animal/slabfish");
 	public static final TagKey<Biome> HAS_DUCK = biomeTag("has_animal/duck");
-	public static final TagKey<Biome> HAS_RARE_DUCK = biomeTag("has_animal/rare_duck");
 	public static final TagKey<Biome> HAS_DEER = biomeTag("has_animal/deer");
-	public static final TagKey<Biome> HAS_RARE_DEER = biomeTag("has_animal/rare_deer");
 	public static final TagKey<Biome> HAS_MUDDY_PIG = biomeTag("has_animal/muddy_pig");
 	public static final TagKey<Biome> HAS_REINDEER = biomeTag("has_animal/reindeer");
 	public static final TagKey<Biome> HAS_YAK = biomeTag("has_animal/yak");
-	public static final TagKey<Biome> HAS_TAPIR = biomeTag("has_animal/tapir");
 	public static final TagKey<Biome> HAS_ZEBRA = biomeTag("has_animal/zebra");
 
-	public static final TagKey<Biome> WITHOUT_SLABFISH = biomeTag("without_animal/slabfish");
-	public static final TagKey<Biome> WITHOUT_DUCK = biomeTag("without_animal/duck");
-	public static final TagKey<Biome> WITHOUT_RARE_DUCK = biomeTag("without_animal/rare_duck");
 	public static final TagKey<Biome> WITHOUT_DEER = biomeTag("without_animal/deer");
-	public static final TagKey<Biome> WITHOUT_RARE_DEER = biomeTag("without_animal/rare_deer");
-	public static final TagKey<Biome> WITHOUT_MUDDY_PIG = biomeTag("without_animal/muddy_pig");
-	public static final TagKey<Biome> WITHOUT_REINDEER = biomeTag("without_animal/reindeer");
-	public static final TagKey<Biome> WITHOUT_YAK = biomeTag("without_animal/yak");
-	public static final TagKey<Biome> WITHOUT_TAPIR = biomeTag("without_animal/tapir");
-	public static final TagKey<Biome> WITHOUT_ZEBRA = biomeTag("without_animal/zebra");
 
 	public static final TagKey<Biome> HAS_PIG = biomeTag("has_animal/pig");
 	public static final TagKey<Biome> HAS_COW = biomeTag("has_animal/cow");
 	public static final TagKey<Biome> HAS_CHICKEN = biomeTag("has_animal/chicken");
 	public static final TagKey<Biome> HAS_SHEEP = biomeTag("has_animal/sheep");
-
-	public static final TagKey<Biome> WITHOUT_PIG = biomeTag("without_animal/pig");
-	public static final TagKey<Biome> WITHOUT_COW = biomeTag("without_animal/cow");
-	public static final TagKey<Biome> WITHOUT_CHICKEN = biomeTag("without_animal/chicken");
-	public static final TagKey<Biome> WITHOUT_SHEEP = biomeTag("without_animal/sheep");
 
 	public static final TagKey<Biome> HAS_CATTAILS = biomeTag("has_feature/cattails");
 	public static final TagKey<Biome> HAS_CUP_LICHEN = biomeTag("has_feature/cup_lichen");

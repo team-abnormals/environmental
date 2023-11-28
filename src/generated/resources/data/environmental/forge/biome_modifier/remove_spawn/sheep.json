@@ -1,6 +1,5 @@
 {
-  "type": "environmental:remove_spawns_inverted_ignore",
+  "type": "environmental:remove_spawns_inverted",
   "entity_types": "minecraft:sheep",
-  "ignored_biomes": "#environmental:without_animal/sheep",
   "inverted_biomes": "#environmental:has_animal/sheep"
 }
