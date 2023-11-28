@@ -2,7 +2,7 @@
   "rarity": "epic",
   "priority": 1,
   "displayName": {
-    "translate": "entity.environmental.slabfish.type.spiny_thicket"
+    "translate": "entity.environmental.slabfish.type.spiny"
   },
   "mod": "atmospheric",
   "conditions": [
