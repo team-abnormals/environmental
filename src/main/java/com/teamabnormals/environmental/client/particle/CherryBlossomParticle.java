@@ -38,14 +38,17 @@ public class CherryBlossomParticle extends TextureSheetParticle {
 		if (this.age++ >= this.lifetime) {
 			this.remove();
 		} else {
+			float mult = this.onGround ? 0.02F + random.nextFloat() * 0.1F : 1.0F;
 			if (this.thunder) {
-				this.xd -= 0.0125F;
-				this.yd -= 0.0075F;
+				this.xd -= 0.0125F * mult;
+				this.yd -= 0.0075F * mult;
 			} else if (this.rain) {
-				this.xd -= 0.001F;
+				this.xd -= 0.001F * mult;
 			}
 
+			this.stoppedByCollision = false;
 			this.move(this.xd, this.yd, this.zd);
+
 			this.yd -= 0.001F;
 			this.yd = Math.max(this.yd, -0.08F);
 
@@ -58,8 +61,10 @@ public class CherryBlossomParticle extends TextureSheetParticle {
 			}
 
 			if (!this.onGround && !(this.isInWater && this.waterTicks >= 1)) {
-				this.roll += (float) Math.PI * this.rotSpeed * 1.6F;
-			} else {
+				this.roll += (float) Math.PI * this.rotSpeed * (this.thunder ? 2.6F : this.rain ? 2.0F : 1.6F);
+			}
+
+			if (this.isInWater && this.waterTicks >= 1) {
 				this.yd = 0.0D;
 			}
 		}
