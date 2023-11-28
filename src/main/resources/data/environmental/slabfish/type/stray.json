@@ -17,41 +17,8 @@
       "parentB": "environmental:skeleton"
     },
     {
-      "type": "environmental:or",
-      "conditions": [
-        {
-          "type": "environmental:biome",
-          "biome": "minecraft:snowy_plains"
-        },
-        {
-          "type": "environmental:biome",
-          "biome": "minecraft:ice_spikes"
-        },
-        {
-          "type": "environmental:biome",
-          "biome": "minecraft:frozen_river"
-        },
-        {
-          "type": "environmental:biome",
-          "biome": "minecraft:snowy_beach"
-        },
-        {
-          "type": "environmental:biome",
-          "biome": "minecraft:snowy_taiga"
-        },
-        {
-          "type": "environmental:biome",
-          "biome": "minecraft:frozen_peaks"
-        },
-        {
-          "type": "environmental:biome",
-          "biome": "minecraft:jagged_peaks"
-        },
-        {
-          "type": "environmental:biome",
-          "biome": "minecraft:snowy_slopes"
-        }
-      ]
+      "type": "environmental:biome",
+      "tag": "forge:is_snowy"
     }
   ]
 }

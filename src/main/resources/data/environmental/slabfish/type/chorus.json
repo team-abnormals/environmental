@@ -14,7 +14,7 @@
     },
     {
       "type": "environmental:biome",
-      "biome": "minecraft:end_highlands"
+      "tag": "forge:is_outer_end"
     }
   ]
 }

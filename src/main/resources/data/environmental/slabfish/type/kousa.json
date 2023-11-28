@@ -1,6 +1,6 @@
 {
-  "rarity": "rare",
-  "priority": 1,
+  "rarity": "epic",
+  "priority": 2,
   "displayName": {
     "translate": "entity.environmental.slabfish.type.kousa"
   },

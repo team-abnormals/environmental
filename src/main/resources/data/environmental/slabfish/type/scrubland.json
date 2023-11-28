@@ -1,6 +1,6 @@
 {
   "rarity": "rare",
-  "priority": 1,
+  "priority": 2,
   "displayName": {
     "translate": "entity.environmental.slabfish.type.scrubland"
   },
