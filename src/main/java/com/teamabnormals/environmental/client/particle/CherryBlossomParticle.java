@@ -5,6 +5,9 @@ import net.minecraft.client.particle.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.world.level.LightLayer;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.Heightmap.Types;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -73,8 +76,10 @@ public class CherryBlossomParticle extends TextureSheetParticle {
 		public Particle createParticle(SimpleParticleType typeIn, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
 			CherryBlossomParticle particle = new CherryBlossomParticle(level, x, y, z);
 			particle.pickSprite(this.spriteSet);
-			particle.thunder = level.isThundering();
-			particle.rain = level.isRaining();
+			if (level.getBrightness(LightLayer.SKY, new BlockPos(x, y, z)) > 8) {
+				particle.rain = level.isRaining();
+				particle.thunder = level.isThundering();
+			}
 			return particle;
 		}
 	}
