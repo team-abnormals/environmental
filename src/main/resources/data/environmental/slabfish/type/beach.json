@@ -12,8 +12,17 @@
       ]
     },
     {
-      "type": "environmental:biome",
-      "tag": "minecraft:is_beach"
+      "type": "environmental:or",
+      "conditions": [
+        {
+          "type": "environmental:biome",
+          "tag": "minecraft:is_beach"
+        },
+        {
+          "type": "environmental:biome",
+          "biome": "minecraft:stony_shore"
+        }
+      ]
     }
   ]
 }
