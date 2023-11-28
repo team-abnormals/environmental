@@ -252,7 +252,7 @@ public class EnvironmentalEvents {
 					}
 				}
 
-				if (stack.is(EnvironmentalItemTags.MUDDY_PIG_DRYING_ITEMS) && !dried) {
+				if (stack.is(EnvironmentalItemTags.MUDDY_PIG_DRYING_ITEMS) && !dried && !pig.isInWaterRainOrBubble() && !pig.getBlockStateOn().is(Blocks.MUD)) {
 					level.playSound(null, target, SoundEvents.PACKED_MUD_PLACE, SoundSource.PLAYERS, 1.0F, 1.0F);
 					if (!event.getEntity().isCreative()) stack.shrink(1);
 					data.setValue(EnvironmentalDataProcessors.MUD_DRYING_TIME, 0);
