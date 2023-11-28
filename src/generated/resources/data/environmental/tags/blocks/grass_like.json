@@ -4,10 +4,6 @@
     "minecraft:podzol",
     "minecraft:mycelium",
     {
-      "id": "quark:glowcelium",
-      "required": false
-    },
-    {
       "id": "atmospheric:crustose",
       "required": false
     }
