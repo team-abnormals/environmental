@@ -1,6 +1,7 @@
 package com.teamabnormals.environmental.common.levelgen.feature;
 
 import com.mojang.serialization.Codec;
+import com.teamabnormals.environmental.core.registry.EnvironmentalBiomes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
@@ -25,14 +26,15 @@ public class FallenLeavesFeature extends Feature<NoneFeatureConfiguration> {
 
 		float chance = random.nextFloat();
 		BlockState state = (chance < 0.3F ? EnvironmentalBlocks.CHEERFUL_CHERRY_LEAF_PILE.get() : chance < 0.6F ? EnvironmentalBlocks.MOODY_CHERRY_LEAF_PILE.get() : EnvironmentalBlocks.CHERRY_LEAF_PILE.get()).defaultBlockState();
-
 		int i = 0;
+
 		for (int x = -3; x <= 3; ++x) {
 			for (int z = -3; z <= 3; ++z) {
 				if (Math.abs(x) < 2 || Math.abs(z) < 2) {
 					for (int y = -3; y <= 3; ++y) {
 						BlockPos blockpos = pos.offset(x, y, z);
-						if (random.nextInt(3) > 0 && level.isEmptyBlock(blockpos) && blockpos.getY() < level.getMaxBuildHeight() && level.getBlockState(blockpos.below()).is(BlockTags.DIRT)) {
+						BlockState onState = level.getBlockState(blockpos.below());
+						if (random.nextInt(3) > 0 && level.isEmptyBlock(blockpos) && blockpos.getY() < level.getMaxBuildHeight() && (onState.is(BlockTags.DIRT) || onState.is(EnvironmentalBlocks.CHERRY_LOG.get()))) {
 							level.setBlock(blockpos, state
 									.setValue(PipeBlock.UP, false)
 									.setValue(PipeBlock.DOWN, true)
