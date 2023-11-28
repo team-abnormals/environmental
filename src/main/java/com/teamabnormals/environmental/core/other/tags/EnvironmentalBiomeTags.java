@@ -50,8 +50,6 @@ public class EnvironmentalBiomeTags {
 	public static final TagKey<Biome> HAS_BIRD_OF_PARADISE = biomeTag("has_feature/bird_of_paradise");
 	public static final TagKey<Biome> HAS_HIBISCUS = biomeTag("has_feature/hibiscus");
 
-	public static final TagKey<Biome> WITHOUT_CUP_LICHEN = biomeTag("without_feature/cup_lichen");
-
 	public static final TagKey<Biome> HAS_MUD_DISK = biomeTag("has_feature/mud_disk");
 
 	private static TagKey<Biome> biomeTag(String tagName) {
