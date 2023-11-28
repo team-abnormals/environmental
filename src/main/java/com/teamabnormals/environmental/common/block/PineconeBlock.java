@@ -12,12 +12,15 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.levelgen.feature.TreeFeature;
@@ -25,10 +28,18 @@ import net.minecraft.world.phys.BlockHitResult;
 
 import java.util.List;
 
-public class PineconeBlock extends WaxedPineconeBlock implements BonemealableBlock {
+public class PineconeBlock extends FallingBlock implements BonemealableBlock {
 
 	public PineconeBlock(Properties properties) {
 		super(properties);
+	}
+
+	@Override
+	public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+		if (canFall(level, pos) && pos.getY() >= level.getMinBuildHeight()) {
+			FallingBlockEntity fallingblockentity = FallingBlockEntity.fall(level, pos, state);
+			this.falling(fallingblockentity);
+		}
 	}
 
 	@Override
@@ -74,6 +85,19 @@ public class PineconeBlock extends WaxedPineconeBlock implements BonemealableBlo
 				}
 			}
 		}
+	}
+
+	@Override
+	public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+	}
+
+	public static boolean canFall(ServerLevel level, BlockPos pos) {
+		return !supportedFromAbove(level, pos) && isFree(level.getBlockState(pos.below()));
+	}
+
+	public static boolean supportedFromAbove(ServerLevel level, BlockPos pos) {
+		BlockState blockstate = level.getBlockState(pos.above());
+		return Block.isFaceFull(blockstate.getCollisionShape(level, pos.above()), Direction.DOWN) && !(blockstate.getBlock() instanceof FallingBlock);
 	}
 
 	@Override

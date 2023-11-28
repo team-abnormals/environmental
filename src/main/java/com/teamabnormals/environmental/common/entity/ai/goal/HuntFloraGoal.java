@@ -5,8 +5,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
-import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
@@ -126,7 +124,7 @@ public class HuntFloraGoal extends Goal {
 		Optional<BlockPos> optionalPos = this.tapir.getTrackingPos();
 		if (optionalPos.isPresent()) {
 			BlockPos pos = optionalPos.get();
-			this.tapir.getNavigation().moveTo((double) ((float) pos.getX()) + 0.5D, pos.getY() + 1, (double) ((float) pos.getZ()) + 0.5D, 1.1D);
+			this.tapir.getNavigation().moveTo((double) ((float) pos.getX()) + 0.5D, pos.getY() + 1, (double) ((float) pos.getZ()) + 0.5D, 1.3D);
 		}
 	}
 }
