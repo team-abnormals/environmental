@@ -1,10 +1,12 @@
 package com.teamabnormals.environmental.common.block;
 
 import com.teamabnormals.blueprint.core.util.BlockUtil;
+import com.teamabnormals.blueprint.core.util.MathUtil;
 import com.teamabnormals.blueprint.core.util.item.filling.TargetedItemCategoryFiller;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalBlockTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
+import com.teamabnormals.environmental.core.registry.EnvironmentalParticleTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -12,7 +14,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -38,6 +39,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.ToolActions;
 
@@ -225,5 +228,22 @@ public class CattailBlock extends BushBlock implements SimpleWaterloggedBlock, B
 	@Override
 	public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
 		FILLER.fillItem(this.asItem(), group, items);
+	}
+
+	@OnlyIn(Dist.CLIENT)
+	public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+		if (state.getValue(FLUFFY)) {
+			Vec3 offset = state.getOffset(level, pos);
+			double offsetX = MathUtil.makeNegativeRandomly(random.nextFloat() * 0.25F, random);
+			double offsetZ = MathUtil.makeNegativeRandomly(random.nextFloat() * 0.25F, random);
+
+			double x = pos.getX() + offset.x() + 0.5D + offsetX;
+			double y = pos.getY() + offset.y() + 0.75D + MathUtil.makeNegativeRandomly(random.nextFloat() * 0.05F, random);
+			double z = pos.getZ() + offset.z() + 0.5D + offsetZ;
+
+			if (random.nextInt(8) == 0) {
+				level.addParticle(EnvironmentalParticleTypes.CATTAIL_FLUFF.get(), x, y, z, random.nextDouble() * 0.01D * Math.abs(offsetX) / offsetX, 0.0D, random.nextDouble() * 0.01D * Math.abs(offsetZ) / offsetZ);
+			}
+		}
 	}
 }

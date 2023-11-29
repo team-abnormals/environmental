@@ -21,18 +21,17 @@ public class LotusFlowerBlock extends BlueprintFlowerBlock {
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, RandomSource rand) {
+	public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource rand) {
+		if (level.isClientSide()) {
+			for (int i = 0; i < 3; i++) {
+				double x = pos.getX() + 0.25D + (rand.nextFloat() * 0.6F);
+				double y = pos.getY() + 0.25D + (rand.nextFloat() * 0.05F);
+				double z = pos.getZ() + 0.25D + (rand.nextFloat() * 0.45F);
 
-		for (int i = 0; i < 3; i++) {
-			double offsetX = rand.nextFloat() * 0.6F;
-			double offsetZ = rand.nextFloat() * 0.45F;
-
-			double x = pos.getX() + 0.25D + offsetX;
-			double y = pos.getY() + 0.25D + (rand.nextFloat() * 0.05F);
-			double z = pos.getZ() + 0.25D + offsetZ;
-
-			if (worldIn.isClientSide && worldIn.getGameTime() % 9 == 0)
-				worldIn.addParticle(this.particle.get(), x, y, z, 0.03D, 0.0D, 0.03D);
+				if (level.getGameTime() % 9 == 0) {
+					level.addParticle(this.particle.get(), x, y, z, 0.03D, 0.0D, 0.03D);
+				}
+			}
 		}
 	}
 }
