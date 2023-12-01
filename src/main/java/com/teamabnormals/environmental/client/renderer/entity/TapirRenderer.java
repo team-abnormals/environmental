@@ -1,5 +1,6 @@
 package com.teamabnormals.environmental.client.renderer.entity;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.teamabnormals.environmental.client.model.TapirModel;
 import com.teamabnormals.environmental.common.entity.animal.Tapir;
 import com.teamabnormals.environmental.core.Environmental;
@@ -19,6 +20,13 @@ public class TapirRenderer extends MobRenderer<Tapir, TapirModel<Tapir>> {
 		super(context, new TapirModel<>(context.bakeLayer(EnvironmentalModelLayers.TAPIR)), 0.7F);
 	}
 
+	@Override
+	protected void scale(Tapir tapir, PoseStack poseStack, float partialTicks) {
+		super.scale(tapir, poseStack, partialTicks);
+		poseStack.scale(0.99F, 0.99F, 0.99F);
+	}
+
+	@Override
 	public ResourceLocation getTextureLocation(Tapir tapir) {
 		return tapir.hasBabyPattern() || tapir.isBaby() ? BABY_TAPIR : TAPIR;
 	}
