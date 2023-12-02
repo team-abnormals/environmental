@@ -32,12 +32,12 @@ public class TapirModel<T extends Entity> extends AgeableListModel<T> {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition root = meshdefinition.getRoot();
 
-		PartDefinition head = root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -4.0F, -6.0F, 8.0F, 7.0F, 7.0F, new CubeDeformation(0.0F)).texOffs(30, 9).mirror().addBox(3.0F, -6.0F, -2.0F, 3.0F, 4.0F, 1.0F).mirror(false).texOffs(30, 9).addBox(-6.0F, -6.0F, -2.0F, 3.0F, 4.0F, 1.0F), PartPose.offset(0.0F, 11.0F, -7.0F));
+		PartDefinition head = root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -4.0F, -6.0F, 8.0F, 7.0F, 7.0F).texOffs(30, 9).mirror().addBox(3.0F, -6.0F, -2.0F, 3.0F, 4.0F, 1.0F).mirror(false).texOffs(30, 9).addBox(-6.0F, -6.0F, -2.0F, 3.0F, 4.0F, 1.0F), PartPose.offset(0.0F, 11.0F, -8.0F));
 		head.addOrReplaceChild("snout", CubeListBuilder.create().texOffs(30, 0).addBox(-2.0F, -3.0F, -4.0F, 4.0F, 5.0F, 4.0F).texOffs(46, 1).addBox(-2.0F, -3.0F, -6.0F, 4.0F, 6.0F, 2.0F), PartPose.offset(0.0F, 1.0F, -5.0F));
 
-		root.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 14).addBox(-5.0F, 0.0F, -5.0F, 10.0F, 18.0F, 10.0F), PartPose.offsetAndRotation(0.0F, 13.0F, -8.0F, 1.5708F, 0.0F, 0.0F));
-		root.addOrReplaceChild("left_front_leg", CubeListBuilder.create().texOffs(30, 14).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F), PartPose.offset(3.0F, 18.0F, -5.0F));
-		root.addOrReplaceChild("right_front_leg", CubeListBuilder.create().texOffs(30, 14).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F), PartPose.offset(-3.0F, 18.0F, -5.0F));
+		root.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 14).addBox(-5.0F, -1.0F, -5.0F, 10.0F, 19.0F, 10.0F), PartPose.offsetAndRotation(0.0F, 13.0F, -8.0F, Mth.HALF_PI, 0.0F, 0.0F));
+		root.addOrReplaceChild("left_front_leg", CubeListBuilder.create().texOffs(30, 14).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F), PartPose.offset(3.0F, 18.0F, -6.0F));
+		root.addOrReplaceChild("right_front_leg", CubeListBuilder.create().texOffs(30, 14).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F), PartPose.offset(-3.0F, 18.0F, -6.0F));
 		root.addOrReplaceChild("left_hind_leg", CubeListBuilder.create().texOffs(30, 14).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F), PartPose.offset(3.0F, 18.0F, 6.0F));
 		root.addOrReplaceChild("right_hind_leg", CubeListBuilder.create().texOffs(30, 14).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F), PartPose.offset(-3.0F, 18.0F, 6.0F));
 
