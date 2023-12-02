@@ -14,6 +14,7 @@ public class ReindeerModel extends DeerModel<Reindeer> {
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition root = meshdefinition.getRoot();
+
 		PartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -8.0F, -9.0F, 8.0F, 8.0F, 17.0F).texOffs(14, 39).addBox(-4.0F, -8.0F, -9.0F, 8.0F, 8.0F, 17.0F, new CubeDeformation(0.25F)), PartPose.offsetAndRotation(0.0F, 14.0F, 0.0F, 0.0F, 0.0F, 0.0F));
 		body.addOrReplaceChild("tail", CubeListBuilder.create().texOffs(0, 37).addBox(0.0F, -3.0F, 0.0F, 0.0F, 3.0F, 3.0F), PartPose.offsetAndRotation(0.0F, -4.0F, 8.0F, 0.2618F, 0.0F, 0.0F));
 		root.addOrReplaceChild("neck", CubeListBuilder.create().texOffs(0, 25).addBox(-2.5F, -10.0F, -2.0F, 5.0F, 10.0F, 5.0F), PartPose.offsetAndRotation(0.0F, 10.0F, -7.0F, 0.0F, 0.0F, 0.0F));

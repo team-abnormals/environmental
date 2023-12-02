@@ -24,7 +24,6 @@ public class DeerModel<E extends AbstractDeer> extends AgeableListModel<E> {
 	private float hopAngle;
 
 	public final ModelPart body;
-	public final ModelPart tail;
 	public final ModelPart neck;
 	public final ModelPart head;
 	public final ModelPart rightAntler;
@@ -41,7 +40,6 @@ public class DeerModel<E extends AbstractDeer> extends AgeableListModel<E> {
 	public DeerModel(ModelPart root) {
 		super(true, 14.5F, 2.0F);
 		this.body = root.getChild("body");
-		this.tail = this.body.getChild("tail");
 		this.neck = root.getChild("neck");
 		this.head = root.getChild("head");
 		this.rightAntler = this.head.getChild("right_antler");
@@ -59,6 +57,7 @@ public class DeerModel<E extends AbstractDeer> extends AgeableListModel<E> {
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition root = meshdefinition.getRoot();
+
 		PartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -8.0F, -9.0F, 8.0F, 8.0F, 17.0F), PartPose.offsetAndRotation(0.0F, 14.0F, 0.0F, 0.0F, 0.0F, 0.0F));
 		body.addOrReplaceChild("tail", CubeListBuilder.create().texOffs(0, 40).addBox(-1.5F, -3.0F, 0.0F, 3.0F, 3.0F, 3.0F), PartPose.offsetAndRotation(0.0F, -4.0F, 8.0F, 0.2618F, 0.0F, 0.0F));
 		root.addOrReplaceChild("neck", CubeListBuilder.create().texOffs(0, 25).addBox(-2.5F, -10.0F, -2.0F, 5.0F, 10.0F, 5.0F), PartPose.offsetAndRotation(0.0F, 10.0F, -7.0F, 0.0F, 0.0F, 0.0F));
