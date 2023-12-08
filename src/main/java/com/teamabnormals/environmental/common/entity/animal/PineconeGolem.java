@@ -1,8 +1,8 @@
 package com.teamabnormals.environmental.common.entity.animal;
 
-import com.teamabnormals.environmental.common.entity.ai.goal.PineconeGolemGrabSaplingGoal;
-import com.teamabnormals.environmental.common.entity.ai.goal.PineconeGolemLookForSpotGoal;
-import com.teamabnormals.environmental.common.entity.ai.goal.PineconeGolemPlantSaplingGoal;
+import com.teamabnormals.environmental.common.entity.ai.goal.pineconegolem.PineconeGolemGrabSaplingGoal;
+import com.teamabnormals.environmental.common.entity.ai.goal.pineconegolem.PineconeGolemLookForSpotGoal;
+import com.teamabnormals.environmental.common.entity.ai.goal.pineconegolem.PineconeGolemPlantSaplingGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.ItemTags;

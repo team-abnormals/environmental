@@ -1,8 +1,6 @@
 package com.teamabnormals.environmental.common.entity.animal.slabfish;
 
-import com.teamabnormals.environmental.common.entity.ai.goal.SlabbyBreedGoal;
-import com.teamabnormals.environmental.common.entity.ai.goal.SlabbyFollowParentGoal;
-import com.teamabnormals.environmental.common.entity.ai.goal.SlabbyGrabItemGoal;
+import com.teamabnormals.environmental.common.entity.ai.goal.slabfish.*;
 import com.teamabnormals.environmental.common.inventory.SlabfishInventory;
 import com.teamabnormals.environmental.common.inventory.SlabfishInventoryMenu;
 import com.teamabnormals.environmental.common.network.message.SOpenSlabfishInventoryMessage;

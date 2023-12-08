@@ -1,4 +1,4 @@
-package com.teamabnormals.environmental.common.entity.ai.goal;
+package com.teamabnormals.environmental.common.entity.ai.goal.slabfish;
 
 import com.teamabnormals.environmental.common.entity.animal.slabfish.Slabfish;
 import com.teamabnormals.environmental.common.slabfish.SlabfishManager;

@@ -1,4 +1,4 @@
-package com.teamabnormals.environmental.common.entity.ai.goal;
+package com.teamabnormals.environmental.common.entity.ai.goal.deer;
 
 import com.teamabnormals.environmental.common.entity.animal.deer.AbstractDeer;
 import com.teamabnormals.environmental.common.entity.animal.deer.Reindeer;

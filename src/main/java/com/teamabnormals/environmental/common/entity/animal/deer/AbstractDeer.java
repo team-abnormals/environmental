@@ -1,6 +1,6 @@
 package com.teamabnormals.environmental.common.entity.animal.deer;
 
-import com.teamabnormals.environmental.common.entity.ai.goal.*;
+import com.teamabnormals.environmental.common.entity.ai.goal.deer.*;
 import com.teamabnormals.environmental.core.EnvironmentalConfig;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalBlockTags;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalEntityTypeTags;
@@ -33,7 +33,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -174,7 +173,6 @@ public abstract class AbstractDeer extends Animal {
 			}
 		}
 	}
-
 	@Override
 	public void tick() {
 		super.tick();
@@ -183,6 +181,7 @@ public abstract class AbstractDeer extends Animal {
 		this.updateSprintAnimation();
 		this.updateHopAnimation();
 	}
+
 
 	@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {

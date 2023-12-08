@@ -1,6 +1,7 @@
 package com.teamabnormals.environmental.client.model;
 
 import com.google.common.collect.ImmutableList;
+import com.teamabnormals.environmental.common.entity.animal.Tapir;
 import net.minecraft.client.model.AgeableListModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -8,7 +9,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 
-public class TapirModel<T extends Entity> extends AgeableListModel<T> {
+public class TapirModel<T extends Tapir> extends AgeableListModel<T> {
 	private final ModelPart head;
 	private final ModelPart snout;
 	private final ModelPart body;
@@ -45,9 +46,36 @@ public class TapirModel<T extends Entity> extends AgeableListModel<T> {
 	}
 
 	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.head.xRot = headPitch * Mth.DEG_TO_RAD;
+	public void setupAnim(T tapir, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		float partialTick = ageInTicks - tapir.tickCount;
+
+		// float sniffanim = 10 - tapir.getSniffAnim(partialTick);
+		float sniffamount = tapir.getSniffAmount(partialTick);
+		float snoutraiseanim = tapir.getSnoutRaiseAmount(partialTick);
+		float shakeheadanim = tapir.getHeadShakeAnim(partialTick);
+		float noanimamount = 1F - sniffamount;
+
+		this.head.y = 11F;
+		this.head.z = -8F;
+		this.head.xRot = headPitch * Mth.DEG_TO_RAD * noanimamount;
 		this.head.yRot = netHeadYaw * Mth.DEG_TO_RAD;
+
+		this.head.y += sniffamount;
+		this.head.z += -sniffamount;
+		
+		float f = tapir.tickCount % 50 + partialTick;
+		float f1 = f > 5 && f < 25 ? -1F : f > 30 && f < 50 ? 1F : Mth.cos(ageInTicks * Mth.PI * 0.2F);
+		this.head.xRot += (0.9F + f1 * 0.15F + Mth.sin(ageInTicks * 0.8F) * 0.015F) * sniffamount;
+
+		this.snout.xRot = Mth.sin(ageInTicks * 0.7F) * Mth.sin(ageInTicks * 0.2F) * 0.3F * sniffamount;
+		this.snout.yRot = Mth.cos(ageInTicks * 0.6F) * 0.05F * sniffamount;
+
+		this.snout.xRot += -0.4F * snoutraiseanim;
+
+		if (shakeheadanim > 0) {
+			this.head.yRot = Mth.sin(shakeheadanim * Mth.PI / 4) * 0.3F * noanimamount;
+		}
+
 		this.rightHindLeg.xRot = Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
 		this.leftHindLeg.xRot = Mth.cos(limbSwing * 0.6662F + Mth.PI) * 1.4F * limbSwingAmount;
 		this.rightFrontLeg.xRot = Mth.cos(limbSwing * 0.6662F + Mth.PI) * 1.4F * limbSwingAmount;

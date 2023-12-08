@@ -1,4 +1,4 @@
-package com.teamabnormals.environmental.common.entity.ai.goal;
+package com.teamabnormals.environmental.common.entity.ai.goal.pineconegolem;
 
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.PathfinderMob;

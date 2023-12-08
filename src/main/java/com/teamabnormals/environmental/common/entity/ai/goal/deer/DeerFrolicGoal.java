@@ -1,4 +1,4 @@
-package com.teamabnormals.environmental.common.entity.ai.goal;
+package com.teamabnormals.environmental.common.entity.ai.goal.deer;
 
 import com.teamabnormals.environmental.common.entity.animal.deer.AbstractDeer;
 import net.minecraft.world.entity.ai.goal.Goal;
@@ -16,7 +16,7 @@ public class DeerFrolicGoal extends Goal {
 
 	public DeerFrolicGoal(AbstractDeer deerIn) {
 		this.deer = deerIn;
-		this.setFlags(EnumSet.of(Goal.Flag.MOVE));
+		this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.JUMP));
 	}
 
 	@Override

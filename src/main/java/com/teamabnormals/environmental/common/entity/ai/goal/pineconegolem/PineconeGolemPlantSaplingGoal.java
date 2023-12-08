@@ -1,4 +1,4 @@
-package com.teamabnormals.environmental.common.entity.ai.goal;
+package com.teamabnormals.environmental.common.entity.ai.goal.pineconegolem;
 
 import com.google.common.collect.Lists;
 import com.teamabnormals.environmental.common.entity.animal.PineconeGolem;
