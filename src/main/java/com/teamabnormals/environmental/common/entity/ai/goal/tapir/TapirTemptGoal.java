@@ -1,6 +1,7 @@
 package com.teamabnormals.environmental.common.entity.ai.goal.tapir;
 
-import com.teamabnormals.environmental.common.entity.animal.Tapir;
+import com.teamabnormals.environmental.common.entity.animal.tapir.Tapir;
+import com.teamabnormals.environmental.common.entity.animal.tapir.TapirAnimation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
@@ -42,14 +43,14 @@ public class TapirTemptGoal extends Goal {
 
     @Override
     public void start() {
-        this.tapir.setBeingTempted(true);
+        this.tapir.setAnimation(TapirAnimation.RAISING_TRUNK);
     }
 
     @Override
     public void stop() {
         this.player = null;
         this.tapir.getNavigation().stop();
-        this.tapir.setBeingTempted(false);
+        this.tapir.setAnimation(TapirAnimation.DEFAULT);
         this.calmDown = reducedTickDelay(100);
     }
 

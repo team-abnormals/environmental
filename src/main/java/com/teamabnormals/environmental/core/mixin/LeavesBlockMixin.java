@@ -1,6 +1,6 @@
 package com.teamabnormals.environmental.core.mixin;
 
-import com.teamabnormals.environmental.common.entity.animal.Tapir;
+import com.teamabnormals.environmental.common.entity.animal.tapir.Tapir;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.BlockGetter;

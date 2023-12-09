@@ -2,7 +2,7 @@ package com.teamabnormals.environmental.client.renderer.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.teamabnormals.environmental.client.model.TapirModel;
-import com.teamabnormals.environmental.common.entity.animal.Tapir;
+import com.teamabnormals.environmental.common.entity.animal.tapir.Tapir;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.other.EnvironmentalModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

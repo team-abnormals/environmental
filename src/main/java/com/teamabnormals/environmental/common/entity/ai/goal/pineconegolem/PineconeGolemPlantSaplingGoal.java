@@ -44,7 +44,7 @@ public class PineconeGolemPlantSaplingGoal extends Goal {
             --this.nextStartTicks;
             return false;
         } else {
-            this.nextStartTicks = reducedTickDelay(20);
+            this.nextStartTicks = this.adjustedTickDelay(20);
             if (!net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.golem.level, this.golem))
                 return false;
 

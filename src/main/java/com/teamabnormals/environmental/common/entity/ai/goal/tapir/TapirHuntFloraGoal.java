@@ -1,6 +1,7 @@
 package com.teamabnormals.environmental.common.entity.ai.goal.tapir;
 
-import com.teamabnormals.environmental.common.entity.animal.Tapir;
+import com.teamabnormals.environmental.common.entity.animal.tapir.Tapir;
+import com.teamabnormals.environmental.common.entity.animal.tapir.TapirAnimation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
@@ -33,6 +34,7 @@ public class TapirHuntFloraGoal extends Goal {
 	@Override
 	public void stop() {
 		this.tapir.resetLove();
+		this.tapir.setAnimation(TapirAnimation.DEFAULT);
 		this.tapir.setRunning(false);
 		this.tapir.stopTracking();
 	}
@@ -42,7 +44,7 @@ public class TapirHuntFloraGoal extends Goal {
 		BlockPos florapos = this.tapir.getFloraPos();
 
 		if (florapos.closerThan(this.tapir.blockPosition(), 1.0D)) {
-			// this.tapir.stopTracking();
+			this.tapir.setAnimation(TapirAnimation.GRAZING);
 		} else {
 			BlockPos pos = this.tapir.getFloraPos();
 			this.moveToTarget();
@@ -68,7 +70,7 @@ public class TapirHuntFloraGoal extends Goal {
 
 		for(Tapir entity : list) {
 			double d1 = this.tapir.distanceToSqr(entity);
-			if (entity.isHuntingForFlora() && entity.getAge() == 0 && this.tapir.getFloraState().is(entity.getFloraState().getBlock()) && d1 < d0) {
+			if (entity.isTrackingFlora() && entity.getAge() == 0 && this.tapir.getFloraBlock() == entity.getFloraBlock() && d1 < d0) {
 				d0 = d1;
 				partner = entity;
 			}
@@ -79,6 +81,6 @@ public class TapirHuntFloraGoal extends Goal {
 
 	private void moveToTarget() {
 		BlockPos pos = this.tapir.getFloraPos();
-		this.tapir.getNavigation().moveTo((double) ((float) pos.getX()) + 0.5D, pos.getY() + 1, (double) ((float) pos.getZ()) + 0.5D, 1.0D);
+		this.tapir.getNavigation().moveTo((double) ((float) pos.getX()) + 0.5D, pos.getY() + 1, (double) ((float) pos.getZ()) + 0.5D, 1.1D);
 	}
 }

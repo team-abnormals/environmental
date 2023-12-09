@@ -1,13 +1,12 @@
 package com.teamabnormals.environmental.client.model;
 
 import com.google.common.collect.ImmutableList;
-import com.teamabnormals.environmental.common.entity.animal.Tapir;
+import com.teamabnormals.environmental.common.entity.animal.tapir.Tapir;
 import net.minecraft.client.model.AgeableListModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
 
 public class TapirModel<T extends Tapir> extends AgeableListModel<T> {
 	private final ModelPart head;
@@ -62,10 +61,8 @@ public class TapirModel<T extends Tapir> extends AgeableListModel<T> {
 
 		this.head.y += sniffamount;
 		this.head.z += -sniffamount;
-		
-		float f = tapir.tickCount % 50 + partialTick;
-		float f1 = f > 5 && f < 25 ? -1F : f > 30 && f < 50 ? 1F : Mth.cos(ageInTicks * Mth.PI * 0.2F);
-		this.head.xRot += (0.9F + f1 * 0.15F + Mth.sin(ageInTicks * 0.8F) * 0.015F) * sniffamount;
+
+		this.head.xRot += (1F + Mth.sin(ageInTicks * 0.8F) * 0.015F) * sniffamount;
 
 		this.snout.xRot = Mth.sin(ageInTicks * 0.7F) * Mth.sin(ageInTicks * 0.2F) * 0.3F * sniffamount;
 		this.snout.yRot = Mth.cos(ageInTicks * 0.6F) * 0.05F * sniffamount;
