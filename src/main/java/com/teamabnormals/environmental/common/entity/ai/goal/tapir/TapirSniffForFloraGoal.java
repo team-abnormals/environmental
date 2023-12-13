@@ -1,7 +1,6 @@
 package com.teamabnormals.environmental.common.entity.ai.goal.tapir;
 
-import com.teamabnormals.environmental.common.entity.animal.tapir.Tapir;
-import com.teamabnormals.environmental.common.entity.animal.tapir.TapirAnimation;
+import com.teamabnormals.environmental.common.entity.animal.Tapir;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.ai.goal.Goal;
@@ -33,75 +32,64 @@ public class TapirSniffForFloraGoal extends Goal {
 
     @Override
     public boolean canUse() {
-        return this.tapir.hasFloraBlock() && !this.tapir.hasFloraPos();
+        return this.tapir.hasFloraState() && !this.tapir.hasFloraPos();
     }
 
     @Override
     public boolean canContinueToUse() {
-        return (this.sniffTime >= 0 || this.animTime > 0) && super.canContinueToUse();
+        return (this.sniffTime > 0 || this.animTime > 0) && this.tapir.hasFloraState();
     }
 
     @Override
     public void start() {
         this.setWalkWait();
-        this.sniffTime = 300;
+        this.sniffTime = this.adjustedTickDelay(300);
         this.animTime = 0;
         this.foundTarget = false;
         this.origin = this.tapir.blockPosition();
+        this.tapir.setSniffing(true);
         this.pathNav.stop();
-        this.tapir.setAnimation(TapirAnimation.SNIFFING);
     }
 
     @Override
     public void stop() {
         if (!this.foundTarget)
-            this.tapir.setFloraBlock(null);
+            this.tapir.setFloraState(null);
+        this.tapir.setSniffing(false);
         this.pathNav.stop();
-        this.tapir.setAnimation(TapirAnimation.DEFAULT);
-    }
-
-    @Override
-    public boolean requiresUpdateEveryTick() {
-        return true;
     }
 
     @Override
     public void tick() {
         if (this.animTime > 0) {
-            this.animTime--;
+            --this.animTime;
             return;
         }
 
-        if (this.sniffTime < 0)
-            return;
-
-        this.sniffTime--;
-
-        if (this.sniffTime < 0) {
+        if (--this.sniffTime <= 0) {
             this.tapir.level.broadcastEntityEvent(this.tapir, (byte) 5);
+            this.tapir.level.broadcastEntityEvent(this.tapir, (byte) 6);
             this.tapir.playSound(SoundEvents.PIG_DEATH);
-            this.tapir.setAnimation(TapirAnimation.DEFAULT);
-            this.animTime = 20;
+            this.tapir.setSniffing(false);
+            this.animTime = this.adjustedTickDelay(20);
         } else {
-            if (this.sniffTime <= 256) {
-                if (this.sniffTime % 2 == 0) {
-                    int range = 128 - (this.sniffTime / 2);
-                    BlockPos targetpos = this.findNearestFlora(range);
-                    if (targetpos != null) {
-                        BlockPos partnerpos = this.findNearestPartnerFlora();
-                        if (partnerpos != null)
-                            targetpos = partnerpos;
+            if (this.sniffTime <= 129) {
+                BlockPos targetpos = this.findNearestFlora(128 - this.sniffTime + 1);
 
-                        this.tapir.setFloraPos(targetpos);
-                        this.tapir.setTrackingTime(1200);
-                        this.foundTarget = true;
-                        this.sniffTime = -1;
-                        this.animTime = 20;
-                    }
+                if (targetpos != null) {
+                    BlockPos partnerpos = this.findNearestPartnerFlora();
+                    if (partnerpos != null)
+                        targetpos = partnerpos;
+
+                    this.tapir.setFloraPos(targetpos);
+                    this.tapir.setTrackingTime(1200);
+                    this.foundTarget = true;
+                    this.sniffTime = 0;
+                    this.animTime = this.adjustedTickDelay(20);
                 }
             }
 
-            if (this.pathNav.isDone() && this.walkWait-- <= 0) {
+            if (this.pathNav.isDone() && --this.walkWait <= 0) {
                 Vec3 vec3 = LandRandomPos.getPos(this.tapir, 4, 2);
                 if (vec3 != null) {
                     this.pathNav.moveTo(vec3.x(), vec3.y(), vec3.z(), 0.6D);
@@ -112,7 +100,7 @@ public class TapirSniffForFloraGoal extends Goal {
     }
 
     private void setWalkWait() {
-        this.walkWait = 10 + this.tapir.getRandom().nextInt(20);
+        this.walkWait = this.adjustedTickDelay(10 + this.tapir.getRandom().nextInt(20));
     }
 
     private BlockPos findNearestFlora(int range) {

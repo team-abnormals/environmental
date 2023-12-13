@@ -1,10 +1,14 @@
-package com.teamabnormals.environmental.common.entity.animal.tapir;
+package com.teamabnormals.environmental.common.entity.animal;
 
-import com.teamabnormals.environmental.common.entity.ai.goal.tapir.*;
+import com.teamabnormals.environmental.common.entity.ai.goal.tapir.TapirHuntFloraGoal;
+import com.teamabnormals.environmental.common.entity.ai.goal.tapir.TapirPanicGoal;
+import com.teamabnormals.environmental.common.entity.ai.goal.tapir.TapirSniffForFloraGoal;
+import com.teamabnormals.environmental.common.entity.ai.goal.tapir.TapirTemptGoal;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalParticleTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSoundEvents;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -39,26 +43,26 @@ import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.level.pathfinder.PathFinder;
 import net.minecraft.world.level.pathfinder.WalkNodeEvaluator;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.Optional;
 
 public class Tapir extends Animal {
 	private static final EntityDataAccessor<Integer> TRACKING_TIME = SynchedEntityData.defineId(Tapir.class, EntityDataSerializers.INT);
-	private static final EntityDataAccessor<Byte> ANIMATION = SynchedEntityData.defineId(Tapir.class, EntityDataSerializers.BYTE);
+	private static final EntityDataAccessor<Byte> GRAZING_STATE = SynchedEntityData.defineId(Tapir.class, EntityDataSerializers.BYTE);
 	private static final EntityDataAccessor<Boolean> HAS_BABY_PATTERN = SynchedEntityData.defineId(Tapir.class, EntityDataSerializers.BOOLEAN);
+	private static final EntityDataAccessor<Boolean> BEING_TEMPTED = SynchedEntityData.defineId(Tapir.class, EntityDataSerializers.BOOLEAN);
+	private static final EntityDataAccessor<Boolean> IS_SNIFFING = SynchedEntityData.defineId(Tapir.class, EntityDataSerializers.BOOLEAN);
 	private static final EntityDataAccessor<Optional<BlockPos>> FLORA_POS = SynchedEntityData.defineId(Tapir.class, EntityDataSerializers.OPTIONAL_BLOCK_POS);
+	private static final EntityDataAccessor<Optional<BlockState>> FLORA_STATE = SynchedEntityData.defineId(Tapir.class, EntityDataSerializers.BLOCK_STATE);
 
 	private Player feeder;
-	private Block floraBlock;
 	private boolean running;
 
 	private int sniffTimer;
-    private int sniffAnim;
-    private int sniffAnim0;
     private float sniffAmount;
     private float sniffAmount0;
 
-	private int snoutRaiseTimer;
 	private float snoutRaiseAmount;
 	private float snoutRaiseAmount0;
 
@@ -73,8 +77,8 @@ public class Tapir extends Animal {
 		this.goalSelector.addGoal(0, new FloatGoal(this));
 		this.goalSelector.addGoal(1, new TapirPanicGoal(this));
 		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
-		this.goalSelector.addGoal(3, new TapirHuntFloraGoal(this));
-		this.goalSelector.addGoal(4, new TapirSniffForFloraGoal(this));
+		this.goalSelector.addGoal(3, new TapirSniffForFloraGoal(this));
+		this.goalSelector.addGoal(4, new TapirHuntFloraGoal(this));
 		this.goalSelector.addGoal(5, new TapirTemptGoal(this, 1.1D));
 		this.goalSelector.addGoal(6, new FollowParentGoal(this, 1.1D));
 		this.goalSelector.addGoal(7, new RandomStrollGoal(this, 1.0D));
@@ -86,9 +90,12 @@ public class Tapir extends Animal {
 	protected void defineSynchedData() {
 		super.defineSynchedData();
 		this.entityData.define(TRACKING_TIME, 0);
-		this.entityData.define(ANIMATION, (byte) 0);
+		this.entityData.define(GRAZING_STATE, (byte) 0);
 		this.entityData.define(HAS_BABY_PATTERN, false);
+		this.entityData.define(BEING_TEMPTED, false);
+		this.entityData.define(IS_SNIFFING, false);
 		this.entityData.define(FLORA_POS, Optional.empty());
+		this.entityData.define(FLORA_STATE, Optional.empty());
 	}
 
 	@Override
@@ -106,28 +113,56 @@ public class Tapir extends Animal {
 	public void stopTracking() {
 		this.setTrackingTime(0);
 		this.setFloraPos(null);
-		this.floraBlock = null;
+		this.setFloraState(null);
 		this.feeder = null;
 	}
 
 	public boolean isTrackingFlora() {
-		return this.hasFloraPos() && this.hasFloraBlock() && this.getTrackingTime() > 0;
+		return this.hasFloraPos() && this.hasFloraState() && this.getTrackingTime() > 0;
 	}
 
-	public void setHasBabyPattern(boolean hasBabyPattern) {
-		this.entityData.set(HAS_BABY_PATTERN, hasBabyPattern);
+	public int getTrackingTime() {
+		return this.entityData.get(TRACKING_TIME);
+	}
+
+	public void setTrackingTime(int time) {
+		this.entityData.set(TRACKING_TIME, time);
+	}
+
+	public boolean isGrazing() {
+		return this.getGrazingState() > 0;
+	}
+
+	public int getGrazingState() {
+		return this.entityData.get(GRAZING_STATE);
+	}
+
+	public void setGrazingState(byte state) {
+		this.entityData.set(GRAZING_STATE, state);
 	}
 
 	public boolean hasBabyPattern() {
 		return this.entityData.get(HAS_BABY_PATTERN);
 	}
 
-	public void setAnimation(TapirAnimation anim) {
-		this.entityData.set(ANIMATION, (byte) anim.getId());
+	public void setHasBabyPattern(boolean hasBabyPattern) {
+		this.entityData.set(HAS_BABY_PATTERN, hasBabyPattern);
 	}
 
-	public TapirAnimation getAnimation() {
-		return TapirAnimation.byId(this.entityData.get(ANIMATION));
+	public boolean isBeingTempted() {
+		return this.entityData.get(BEING_TEMPTED);
+	}
+
+	public void setBeingTempted(boolean tempted) {
+		this.entityData.set(BEING_TEMPTED, tempted);
+	}
+
+	public boolean isSniffing() {
+		return this.entityData.get(IS_SNIFFING);
+	}
+
+	public void setSniffing(boolean sniffing) {
+		this.entityData.set(IS_SNIFFING, sniffing);
 	}
 
 	public boolean hasFloraPos() {
@@ -142,29 +177,21 @@ public class Tapir extends Animal {
 		this.entityData.set(FLORA_POS, Optional.ofNullable(pos));
 	}
 
-	public boolean hasFloraBlock() {
-		return this.getFloraBlock() != null;
+	public boolean hasFloraState() {
+		return this.getFloraState() != null;
+	}
+
+	public BlockState getFloraState() {
+		return this.entityData.get(FLORA_STATE).orElse(null);
+	}
+
+	public void setFloraState(BlockState state) {
+		this.entityData.set(FLORA_STATE, Optional.ofNullable(state));
 	}
 
 	public Block getFloraBlock() {
-		return this.floraBlock;
+		return this.getFloraState() != null ? this.getFloraState().getBlock() : null;
 	}
-
-	public void setFloraBlock(Block block) {
-		this.floraBlock = block;
-	}
-
-	public int getTrackingTime() {
-		return this.entityData.get(TRACKING_TIME);
-	}
-
-	public void setTrackingTime(int time) {
-		this.entityData.set(TRACKING_TIME, time);
-	}
-
-    public float getSniffAnim(float partialTick) {
-        return Mth.lerp(partialTick, this.sniffAnim0, this.sniffAnim);
-    }
 
     public float getSniffAmount(float partialTick) {
         return Mth.lerp(partialTick, this.sniffAmount0, this.sniffAmount);
@@ -189,9 +216,9 @@ public class Tapir extends Animal {
 	@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
-		if (stack.getItem() instanceof BlockItem blockitem && !this.isBaby() && this.isFood(stack) && !this.hasFloraBlock()) {
+		if (stack.getItem() instanceof BlockItem blockitem && !this.isBaby() && this.isFood(stack) && !this.hasFloraState()) {
 			if (!this.level.isClientSide()) {
-				this.floraBlock = blockitem.getBlock();
+				this.setFloraState(blockitem.getBlock().defaultBlockState());
 				this.feeder = player;
 				this.level.broadcastEntityEvent(this, (byte) 4);
 			}
@@ -205,12 +232,8 @@ public class Tapir extends Animal {
     public void tick() {
         super.tick();
 
-        this.sniffAnim0 = this.sniffAnim;
-        if (this.sniffAnim > 0)
-            this.sniffAnim--;
-
         this.sniffAmount0 = this.sniffAmount;
-        if (this.getAnimation() == TapirAnimation.SNIFFING)
+        if (this.isSniffing() || this.getGrazingState() == 1)
             this.sniffAmount = Math.min(1.0F, this.sniffAmount + 0.25F);
         else
             this.sniffAmount = Math.max(0.0F, this.sniffAmount - 0.25F);
@@ -219,15 +242,8 @@ public class Tapir extends Animal {
 		if (this.headShakeAnim > 0)
 			this.headShakeAnim--;
 
-		/*
-		if (this.snoutRaiseTimer > 0)
-			this.snoutRaiseTimer--;
-		else if (this.isBeingTempted())
-			this.snoutRaiseTimer = 30 + this.random.nextInt(30);
-		*/
-
 		this.snoutRaiseAmount0 = this.snoutRaiseAmount;
-		if (this.getAnimation() == TapirAnimation.RAISING_TRUNK)
+		if (this.isBeingTempted() || this.isInWater())
 			this.snoutRaiseAmount = Math.min(1.0F, this.snoutRaiseAmount + 0.25F);
 		else
 			this.snoutRaiseAmount = Math.max(0.0F, this.snoutRaiseAmount - 0.25F);
@@ -243,14 +259,14 @@ public class Tapir extends Animal {
 	public void aiStep() {
 		super.aiStep();
 
-		if (this.getTrackingTime() > 0) {
-			this.setTrackingTime(this.getTrackingTime() - 1);
-			if (this.getTrackingTime() == 0)
-				this.stopTracking();
-		}
-
 		if (!this.level.isClientSide()) {
-			if (this.getAnimation() == TapirAnimation.SNIFFING) {
+            if (this.getTrackingTime() > 0 && !this.isGrazing()) {
+                this.setTrackingTime(this.getTrackingTime() - 1);
+                if (this.getTrackingTime() == 0)
+                    this.stopTracking();
+            }
+
+			if (this.isSniffing()) {
 				if (this.sniffTimer-- <= 0) {
 					this.playSound(EnvironmentalSoundEvents.PIG_SNIFF.get(), 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
 					this.sniffTimer = 10 + this.random.nextInt(20);
@@ -258,6 +274,11 @@ public class Tapir extends Animal {
 			} else {
 				this.sniffTimer = 0;
 			}
+
+            if (this.tickCount % 20 == 0 && this.getGrazingState() == 2 && this.hasFloraState()) {
+                this.playSound(SoundEvents.GENERIC_EAT, 0.5F + 0.5F * (float) this.random.nextInt(2), (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+                this.level.broadcastEntityEvent(this, (byte) 7);
+            }
 		}
 	}
 
@@ -271,16 +292,27 @@ public class Tapir extends Animal {
 				this.level.addParticle(EnvironmentalParticleTypes.TAPIR_FINDS_FLORA.get(), this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d0, d1, d2);
 			}
         } else if (id == 5) {
-			this.headShakeAnim = 20;
-			this.headShakeAnim0 = 20;
-
 			for (int i = 0; i < 7; ++i) {
 				double d0 = this.random.nextGaussian() * 0.02D;
 				double d1 = this.random.nextGaussian() * 0.02D;
 				double d2 = this.random.nextGaussian() * 0.02D;
 				this.level.addParticle(ParticleTypes.SMOKE, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d0, d1, d2);
 			}
-		} else {
+		} else if (id == 6) {
+			this.headShakeAnim = 20;
+			this.headShakeAnim0 = 20;
+		} else if (id == 7) {
+            for (int i = 0; i < 6; ++i) {
+                Vec3 vector3d = new Vec3((this.random.nextFloat() - 0.5D) * 0.1D, Math.random() * 0.1D + 0.1D, (this.random.nextFloat() - 0.5D) * 0.1D);
+                vector3d = vector3d.xRot(-this.getXRot() * Mth.DEG_TO_RAD);
+                vector3d = vector3d.yRot(-this.getYRot() * Mth.DEG_TO_RAD);
+                double d0 = -this.random.nextFloat() * 0.2D;
+                Vec3 vector3d1 = new Vec3((this.random.nextFloat() - 0.5D) * 0.2D, d0, 1.0D + (this.random.nextFloat() - 0.5D) * 0.2D);
+                vector3d1 = vector3d1.yRot(-this.yBodyRot * Mth.DEG_TO_RAD);
+                vector3d1 = vector3d1.add(this.getX(), this.getEyeY() - 0.2D, this.getZ());
+                this.level.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, this.getFloraState()), vector3d1.x, vector3d1.y, vector3d1.z, vector3d.x, vector3d.y + 0.05D, vector3d.z);
+            }
+        } else {
             super.handleEntityEvent(id);
         }
     }
@@ -296,13 +328,8 @@ public class Tapir extends Animal {
 	}
 
 	@Override
-	public int getMaxHeadXRot() {
-		return (this.getAnimation() == TapirAnimation.SNIFFING || this.getAnimation() == TapirAnimation.GRAZING) ? 0 : super.getMaxHeadXRot();
-	}
-
-	@Override
 	protected SoundEvent getAmbientSound() {
-		return this.getAnimation() == TapirAnimation.SNIFFING ? null : SoundEvents.PIG_AMBIENT;
+		return this.isSniffing() ? null : SoundEvents.PIG_AMBIENT;
 	}
 
 	@Override

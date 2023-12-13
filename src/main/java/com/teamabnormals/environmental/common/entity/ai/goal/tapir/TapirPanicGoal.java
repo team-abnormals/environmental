@@ -1,6 +1,6 @@
 package com.teamabnormals.environmental.common.entity.ai.goal.tapir;
 
-import com.teamabnormals.environmental.common.entity.animal.tapir.Tapir;
+import com.teamabnormals.environmental.common.entity.animal.Tapir;
 import net.minecraft.world.entity.ai.goal.PanicGoal;
 
 public class TapirPanicGoal extends PanicGoal {

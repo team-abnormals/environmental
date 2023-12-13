@@ -7,7 +7,7 @@ import com.teamabnormals.environmental.common.entity.animal.deer.Deer;
 import com.teamabnormals.environmental.common.entity.animal.deer.Reindeer;
 import com.teamabnormals.environmental.common.entity.animal.koi.Koi;
 import com.teamabnormals.environmental.common.entity.animal.slabfish.Slabfish;
-import com.teamabnormals.environmental.common.entity.animal.tapir.Tapir;
+import com.teamabnormals.environmental.common.entity.animal.Tapir;
 import com.teamabnormals.environmental.common.entity.projectile.ThrownDuckEgg;
 import com.teamabnormals.environmental.common.entity.projectile.ThrownMudBall;
 import com.teamabnormals.environmental.core.Environmental;

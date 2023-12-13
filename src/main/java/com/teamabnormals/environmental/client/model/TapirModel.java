@@ -1,11 +1,14 @@
 package com.teamabnormals.environmental.client.model;
 
 import com.google.common.collect.ImmutableList;
-import com.teamabnormals.environmental.common.entity.animal.tapir.Tapir;
+import com.teamabnormals.environmental.common.entity.animal.Tapir;
 import net.minecraft.client.model.AgeableListModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
-import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
 
 public class TapirModel<T extends Tapir> extends AgeableListModel<T> {
@@ -48,7 +51,6 @@ public class TapirModel<T extends Tapir> extends AgeableListModel<T> {
 	public void setupAnim(T tapir, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		float partialTick = ageInTicks - tapir.tickCount;
 
-		// float sniffanim = 10 - tapir.getSniffAnim(partialTick);
 		float sniffamount = tapir.getSniffAmount(partialTick);
 		float snoutraiseanim = tapir.getSnoutRaiseAmount(partialTick);
 		float shakeheadanim = tapir.getHeadShakeAnim(partialTick);
@@ -59,13 +61,20 @@ public class TapirModel<T extends Tapir> extends AgeableListModel<T> {
 		this.head.xRot = headPitch * Mth.DEG_TO_RAD * noanimamount;
 		this.head.yRot = netHeadYaw * Mth.DEG_TO_RAD;
 
+		this.snout.xRot = 0F;
+		this.snout.yRot = 0F;
+
 		this.head.y += sniffamount;
 		this.head.z += -sniffamount;
+		this.head.xRot += sniffamount;
 
-		this.head.xRot += (1F + Mth.sin(ageInTicks * 0.8F) * 0.015F) * sniffamount;
-
-		this.snout.xRot = Mth.sin(ageInTicks * 0.7F) * Mth.sin(ageInTicks * 0.2F) * 0.3F * sniffamount;
-		this.snout.yRot = Mth.cos(ageInTicks * 0.6F) * 0.05F * sniffamount;
+		if (tapir.isSniffing() || tapir.getGrazingState() == 1) {
+			this.head.xRot += Mth.sin(ageInTicks * 0.8F) * 0.015F;
+			this.snout.xRot = Mth.sin(ageInTicks * 0.7F) * Mth.sin(ageInTicks * 0.2F) * 0.3F;
+			this.snout.yRot = Mth.cos(ageInTicks * 0.6F) * 0.05F;
+		} else if (tapir.getGrazingState() == 2) {
+			this.snout.xRot = Mth.sin(ageInTicks * 0.6F) * 0.3F;
+		}
 
 		this.snout.xRot += -0.4F * snoutraiseanim;
 
