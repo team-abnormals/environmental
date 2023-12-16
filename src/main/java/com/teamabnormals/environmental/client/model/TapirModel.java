@@ -52,6 +52,7 @@ public class TapirModel<T extends Tapir> extends AgeableListModel<T> {
 		float partialTick = ageInTicks - tapir.tickCount;
 
 		float sniffamount = tapir.getSniffAmount(partialTick);
+		float grazeamount = tapir.getGrazeAmount(partialTick);
 		float snoutraiseanim = tapir.getSnoutRaiseAmount(partialTick);
 		float shakeheadanim = tapir.getHeadShakeAnim(partialTick);
 		float noanimamount = 1F - sniffamount;
@@ -68,12 +69,18 @@ public class TapirModel<T extends Tapir> extends AgeableListModel<T> {
 		this.head.z += -sniffamount;
 		this.head.xRot += sniffamount;
 
-		if (tapir.isSniffing() || tapir.getGrazingState() == 1) {
+		float f = Mth.cos(grazeamount * Mth.PI) * -0.5F + 0.5F;
+
+		this.head.y += f;
+		this.head.z += -f;
+		this.head.xRot += f * (0.6F + Mth.sin(ageInTicks * 0.5F) * 0.05F);
+
+		if (tapir.isSniffing()) {
 			this.head.xRot += Mth.sin(ageInTicks * 0.8F) * 0.015F;
 			this.snout.xRot = Mth.sin(ageInTicks * 0.7F) * Mth.sin(ageInTicks * 0.2F) * 0.3F;
 			this.snout.yRot = Mth.cos(ageInTicks * 0.6F) * 0.05F;
-		} else if (tapir.getGrazingState() == 2) {
-			this.snout.xRot = Mth.sin(ageInTicks * 0.6F) * 0.3F;
+		} else if (tapir.isGrazing()) {
+			this.snout.xRot = Mth.sin(ageInTicks * 0.5F) * 0.3F;
 		}
 
 		this.snout.xRot += -0.4F * snoutraiseanim;

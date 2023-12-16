@@ -13,12 +13,11 @@ import java.util.EnumSet;
 import java.util.List;
 
 public class TapirHuntFloraGoal extends Goal {
-	private final Tapir tapir;
-	private int bites;
-	private int munchTime;
-	private int grazeAnimWait;
-
 	private static final TargetingConditions PARTNER_TARGETING = TargetingConditions.forNonCombat().range(8.0D).ignoreLineOfSight();
+
+	private final Tapir tapir;
+	private int grazeTime;
+	private int delayCounter;
 
 	public TapirHuntFloraGoal(Tapir tapir) {
 		this.tapir = tapir;
@@ -33,64 +32,48 @@ public class TapirHuntFloraGoal extends Goal {
 	@Override
 	public void start() {
 		this.moveTo(this.tapir.getFloraPos());
-		this.tapir.setRunning(true);
-		this.munchTime = 0;
-		this.grazeAnimWait = 0;
-		this.bites = 3 + this.tapir.getRandom().nextInt(2);
+		this.grazeTime = this.adjustedTickDelay(200 + this.tapir.getRandom().nextInt(100));
+		this.delayCounter = 0;
 	}
 
 	@Override
 	public void stop() {
 		this.tapir.setRunning(false);
-		this.tapir.setGrazingState((byte) 0);
+		this.tapir.setGrazing(false);
 		this.tapir.stopTracking();
 	}
 
 	@Override
 	public void tick() {
 		BlockPos florapos = this.tapir.getFloraPos();
-		boolean floraexists = this.tapir.level.getBlockState(florapos).is(this.tapir.getFloraBlock());
 
-		if (florapos.closerThan(this.tapir.blockPosition(), 5.0D) && !this.tapir.isGrazing() && !floraexists) {
-			this.tapir.level.broadcastEntityEvent(this.tapir, (byte) 5);
-			this.tapir.playSound(SoundEvents.PIG_DEATH);
-			this.tapir.stopTracking();
-			return;
+		if (!this.tapir.level.getBlockState(florapos).is(this.tapir.getFloraBlock())) {
+			if (this.tapir.isGrazing()) {
+				this.tapir.stopTracking();
+				return;
+			} else if (florapos.closerThan(this.tapir.blockPosition(), 5.0D)) {
+				this.tapir.level.broadcastEntityEvent(this.tapir, (byte) 5);
+				this.tapir.playSound(SoundEvents.PIG_DEATH);
+				this.tapir.stopTracking();
+				return;
+			}
 		}
 
 		if (florapos.closerThan(this.tapir.blockPosition(), 1.25D)) {
-			this.tapir.getLookControl().setLookAt(florapos.getX(), this.tapir.getEyeY(), florapos.getZ(), 10.0F, this.tapir.getMaxHeadXRot());
+			this.tapir.getLookControl().setLookAt(florapos.getX() + 0.5D, this.tapir.getEyeY(), florapos.getZ() + 0.5D, 10.0F, this.tapir.getMaxHeadXRot());
 
 			if (!this.tapir.isGrazing()) {
 				this.tapir.setRunning(false);
-				this.tapir.setGrazingState((byte) 1);
-
-				this.munchTime = 0;
-				this.grazeAnimWait = 0;
-
+				this.tapir.setGrazing(true);
 				this.tapir.getNavigation().stop();
 			} else {
-				if (this.munchTime > 0) {
-					if (--this.munchTime <= 0) {
-						this.tapir.setGrazingState((byte) 2);
+				if (--this.grazeTime <= 0) {
+					this.tapir.level.destroyBlock(florapos, false);
+					this.tapir.stopTracking();
 
-						if (this.bites <= 0) {
-							this.tapir.level.destroyBlock(florapos, false);
-						}
-					}
-				} else if (--this.grazeAnimWait <= 0) {
-					if (this.bites > 0 && floraexists) {
-						--this.bites;
-						this.tapir.setGrazingState((byte) 1);
-						this.munchTime = this.adjustedTickDelay(20);
-						this.grazeAnimWait = this.adjustedTickDelay(80 + this.tapir.getRandom().nextInt(20));
-					} else {
-						this.tapir.stopTracking();
-
-						Vec3 vec3 = DefaultRandomPos.getPos(this.tapir, 10, 7);
-						if (vec3 != null)
-							this.moveTo(new BlockPos(vec3));
-					}
+					Vec3 vec3 = DefaultRandomPos.getPos(this.tapir, 10, 7);
+					if (vec3 != null)
+						this.moveTo(new BlockPos(vec3));
 				}
 
 				if (this.tapir.getAge() == 0 && !this.tapir.isInLove()) {
@@ -104,11 +87,14 @@ public class TapirHuntFloraGoal extends Goal {
 				}
 			}
 		} else {
-			this.moveTo(florapos);
-			this.tapir.getLookControl().setLookAt(florapos.getX(), florapos.getY(), florapos.getZ(), 10.0F, this.tapir.getMaxHeadXRot());
+			if (--this.delayCounter <= 0) {
+				this.delayCounter = this.adjustedTickDelay(10);
+				this.moveTo(florapos);
+				this.tapir.setRunning(true);
+			}
 
-			this.tapir.setRunning(true);
-			this.tapir.setGrazingState((byte) 0);
+			this.tapir.getLookControl().setLookAt(florapos.getX() + 0.5D, florapos.getY() + 0.5D, florapos.getZ() + 0.5D, 10.0F, this.tapir.getMaxHeadXRot());
+			this.tapir.setGrazing(false);
 		}
 	}
 
