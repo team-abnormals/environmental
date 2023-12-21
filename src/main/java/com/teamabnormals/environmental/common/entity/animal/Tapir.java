@@ -1,9 +1,6 @@
 package com.teamabnormals.environmental.common.entity.animal;
 
-import com.teamabnormals.environmental.common.entity.ai.goal.tapir.TapirHuntFloraGoal;
-import com.teamabnormals.environmental.common.entity.ai.goal.tapir.TapirPanicGoal;
-import com.teamabnormals.environmental.common.entity.ai.goal.tapir.TapirSniffForFloraGoal;
-import com.teamabnormals.environmental.common.entity.ai.goal.tapir.TapirTemptGoal;
+import com.teamabnormals.environmental.common.entity.ai.goal.tapir.*;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalParticleTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSoundEvents;
@@ -11,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -56,7 +54,6 @@ public class Tapir extends Animal {
 	private static final EntityDataAccessor<Optional<BlockPos>> FLORA_POS = SynchedEntityData.defineId(Tapir.class, EntityDataSerializers.OPTIONAL_BLOCK_POS);
 	private static final EntityDataAccessor<Optional<BlockState>> FLORA_STATE = SynchedEntityData.defineId(Tapir.class, EntityDataSerializers.BLOCK_STATE);
 
-	private Player feeder;
 	private boolean running;
 
 	private int sniffTimer;
@@ -79,14 +76,13 @@ public class Tapir extends Animal {
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new FloatGoal(this));
 		this.goalSelector.addGoal(1, new TapirPanicGoal(this));
-		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
-		this.goalSelector.addGoal(3, new TapirSniffForFloraGoal(this));
-		this.goalSelector.addGoal(4, new TapirHuntFloraGoal(this));
-		this.goalSelector.addGoal(5, new TapirTemptGoal(this, 1.1D));
-		this.goalSelector.addGoal(6, new FollowParentGoal(this, 1.1D));
-		this.goalSelector.addGoal(7, new RandomStrollGoal(this, 1.0D));
-		this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 6.0F));
-		this.goalSelector.addGoal(9, new RandomLookAroundGoal(this));
+		this.goalSelector.addGoal(2, new TapirSniffForFloraGoal(this));
+		this.goalSelector.addGoal(3, new TapirHuntFloraGoal(this));
+		this.goalSelector.addGoal(4, new TapirTemptGoal(this, 1.0D));
+		this.goalSelector.addGoal(5, new FollowParentGoal(this, 1.1D));
+		this.goalSelector.addGoal(6, new RandomStrollGoal(this, 1.0D));
+		this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
+		this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
 	}
 
 	@Override
@@ -105,19 +101,40 @@ public class Tapir extends Animal {
 	public void addAdditionalSaveData(CompoundTag compound) {
 		super.addAdditionalSaveData(compound);
 		compound.putBoolean("BabyPattern", this.hasBabyPattern());
+		BlockState florastate = this.getFloraState();
+		if (florastate != null) {
+			compound.put("FloraState", NbtUtils.writeBlockState(florastate));
+		}
+		BlockPos florapos = this.getFloraPos();
+		if (florapos != null) {
+			compound.putInt("FloraX", florapos.getX());
+			compound.putInt("FloraY", florapos.getY());
+			compound.putInt("FloraZ", florapos.getZ());
+		}
+		compound.putInt("TrackingTime", this.getTrackingTime());
 	}
 
 	@Override
 	public void readAdditionalSaveData(CompoundTag compound) {
 		super.readAdditionalSaveData(compound);
 		this.setHasBabyPattern(compound.getBoolean("BabyPattern"));
+		if (compound.contains("FloraState", 10)) {
+			BlockState florastate = NbtUtils.readBlockState(compound.getCompound("FloraState"));
+			if (!florastate.isAir())
+				this.setFloraState(florastate);
+		}
+		if (compound.contains("FloraX", 99) && compound.contains("FloraY", 99) && compound.contains("FloraZ", 99)) {
+			BlockPos blockpos = new BlockPos(compound.getInt("FloraX"), compound.getInt("FloraY"), compound.getInt("FloraZ"));
+			this.setFloraPos(blockpos);
+		}
+		this.setTrackingTime(compound.getInt("TrackingTime"));
 	}
 
 	public void stopTracking() {
 		this.setTrackingTime(0);
 		this.setFloraPos(null);
 		this.setFloraState(null);
-		this.feeder = null;
+		this.loveCause = null;
 	}
 
 	public boolean isTrackingFlora() {
@@ -208,10 +225,6 @@ public class Tapir extends Animal {
 		return Mth.lerp(partialTick, this.headShakeAnim0, this.headShakeAnim);
 	}
 
-	public Player getFeeder() {
-		return this.feeder;
-	}
-
 	public void setRunning(boolean running) {
 		this.running = running;
 	}
@@ -222,7 +235,7 @@ public class Tapir extends Animal {
 		if (stack.getItem() instanceof BlockItem blockitem && !this.isBaby() && this.isFood(stack) && !this.hasFloraState()) {
 			if (!this.level.isClientSide()) {
 				this.setFloraState(blockitem.getBlock().defaultBlockState());
-				this.feeder = player;
+				this.loveCause = player.getUUID();
 				this.level.broadcastEntityEvent(this, (byte) 4);
 			}
 			return InteractionResult.sidedSuccess(this.level.isClientSide);
@@ -288,6 +301,11 @@ public class Tapir extends Animal {
                 this.playSound(SoundEvents.GENERIC_EAT, 0.5F + 0.5F * (float) this.random.nextInt(2), (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
                 this.level.broadcastEntityEvent(this, (byte) 7);
             }
+		} else if (this.tickCount % 10 == 0 && this.isTrackingFlora()) {
+			double d0 = random.nextGaussian() * 0.02D;
+			double d1 = random.nextGaussian() * 0.02D;
+			double d2 = random.nextGaussian() * 0.02D;
+			level.addParticle(EnvironmentalParticleTypes.TAPIR_FINDS_FLORA.get(), this.getRandomX(0.5D), this.getRandomY() + 0.5D, this.getRandomZ(0.5D), d0, d1, d2);
 		}
 	}
 
@@ -333,7 +351,7 @@ public class Tapir extends Animal {
 
 	@Override
 	protected float getWaterSlowDown() {
-		return 0.98F;
+		return 0.96F;
 	}
 
 	@Override

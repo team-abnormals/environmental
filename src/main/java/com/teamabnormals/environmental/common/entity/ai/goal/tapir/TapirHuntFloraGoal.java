@@ -2,6 +2,7 @@ package com.teamabnormals.environmental.common.entity.ai.goal.tapir;
 
 import com.teamabnormals.environmental.common.entity.animal.Tapir;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
@@ -16,7 +17,9 @@ public class TapirHuntFloraGoal extends Goal {
 	private static final TargetingConditions PARTNER_TARGETING = TargetingConditions.forNonCombat().range(8.0D).ignoreLineOfSight();
 
 	private final Tapir tapir;
+	private Tapir partner;
 	private int grazeTime;
+	private int romanticDinnerTime;
 	private int delayCounter;
 
 	public TapirHuntFloraGoal(Tapir tapir) {
@@ -33,6 +36,7 @@ public class TapirHuntFloraGoal extends Goal {
 	public void start() {
 		this.moveTo(this.tapir.getFloraPos());
 		this.grazeTime = this.adjustedTickDelay(200 + this.tapir.getRandom().nextInt(100));
+		this.partner = null;
 		this.delayCounter = 0;
 	}
 
@@ -76,13 +80,24 @@ public class TapirHuntFloraGoal extends Goal {
 						this.moveTo(new BlockPos(vec3));
 				}
 
-				if (this.tapir.getAge() == 0 && !this.tapir.isInLove()) {
-					Tapir partner = this.findFreePartner();
+				if (this.tapir.getAge() == 0) {
+					if (this.partner == null) {
+						Tapir partner = this.findClosestPartner();
+						if (partner != null) {
+							this.partner = partner;
+							this.romanticDinnerTime = this.adjustedTickDelay(80);
 
-					if (partner != null) {
-						this.tapir.setInLove(this.tapir.getFeeder());
-						if (!partner.isInLove())
-							partner.setInLove(this.tapir.getFeeder());
+							if (this.grazeTime < this.adjustedTickDelay(200))
+								this.grazeTime = this.adjustedTickDelay(200);
+
+							if (!this.tapir.getFloraPos().equals(partner.getFloraPos()))
+								this.tapir.setFloraPos(partner.getFloraPos());
+						}
+					} else if (this.canBreedWith(this.partner) && this.tapir.getFloraPos().equals(this.partner.getFloraPos())) {
+						if (--this.romanticDinnerTime <= 0)
+							this.tapir.spawnChildFromBreeding((ServerLevel) this.tapir.level, this.partner);
+					} else {
+						this.partner = null;
 					}
 				}
 			}
@@ -99,20 +114,24 @@ public class TapirHuntFloraGoal extends Goal {
 	}
 
 	@Nullable
-	private Tapir findFreePartner() {
+	private Tapir findClosestPartner() {
 		List<? extends Tapir> list = this.tapir.level.getNearbyEntities(Tapir.class, PARTNER_TARGETING, this.tapir, this.tapir.getBoundingBox().inflate(8.0D));
 		double d0 = Double.MAX_VALUE;
 		Tapir partner = null;
 
 		for(Tapir entity : list) {
 			double d1 = this.tapir.distanceToSqr(entity);
-			if (entity.isGrazing() && entity.getAge() == 0 && this.tapir.getFloraBlock() == entity.getFloraBlock() && d1 < d0) {
+			if (this.canBreedWith(entity) && d1 < d0) {
 				d0 = d1;
 				partner = entity;
 			}
 		}
 
 		return partner;
+	}
+
+	private boolean canBreedWith(Tapir partner) {
+		return partner.isGrazing() && partner.getAge() == 0 && this.tapir.getFloraBlock() == partner.getFloraBlock();
 	}
 
 	private void moveTo(BlockPos pos) {

@@ -18,11 +18,11 @@ public class TapirSniffForFloraGoal extends Goal {
 
     private final Tapir tapir;
     private final PathNavigation pathNav;
-    private boolean foundTarget;
     private int walkWait;
     private int sniffTime;
-    private int animTime;
+    private int stopTime;
     private BlockPos origin;
+    private BlockPos foundPos;
 
     public TapirSniffForFloraGoal(Tapir tapir) {
         this.tapir = tapir;
@@ -37,15 +37,15 @@ public class TapirSniffForFloraGoal extends Goal {
 
     @Override
     public boolean canContinueToUse() {
-        return (this.sniffTime > 0 || this.animTime > 0) && this.tapir.hasFloraState();
+        return (this.sniffTime > 0 || this.stopTime > 0) && this.tapir.hasFloraState();
     }
 
     @Override
     public void start() {
         this.setWalkWait();
         this.sniffTime = this.adjustedTickDelay(300);
-        this.animTime = 0;
-        this.foundTarget = false;
+        this.stopTime = 0;
+        this.foundPos = null;
         this.origin = this.tapir.blockPosition();
         this.tapir.setSniffing(true);
         this.pathNav.stop();
@@ -53,39 +53,42 @@ public class TapirSniffForFloraGoal extends Goal {
 
     @Override
     public void stop() {
-        if (!this.foundTarget)
-            this.tapir.setFloraState(null);
+        if (this.foundPos != null && this.stopTime == 0) {
+            this.tapir.setFloraPos(this.foundPos);
+            this.tapir.setTrackingTime(1200);
+        } else {
+            this.tapir.stopTracking();
+        }
         this.tapir.setSniffing(false);
         this.pathNav.stop();
     }
 
     @Override
     public void tick() {
-        if (this.animTime > 0) {
-            --this.animTime;
+        if (this.stopTime > 0) {
+            --this.stopTime;
             return;
         }
 
         if (--this.sniffTime <= 0) {
+            for (int i = 0; i < 16; ++i) {
+                BlockPos targetpos = this.findNearestFlora(i);
+                if (targetpos != null) {
+                    this.findFlora(targetpos);
+                    return;
+                }
+            }
+
             this.tapir.level.broadcastEntityEvent(this.tapir, (byte) 5);
             this.tapir.level.broadcastEntityEvent(this.tapir, (byte) 6);
             this.tapir.playSound(SoundEvents.PIG_DEATH);
             this.tapir.setSniffing(false);
-            this.animTime = this.adjustedTickDelay(20);
+            this.stopTime = this.adjustedTickDelay(20);
         } else {
             if (this.sniffTime <= 129) {
                 BlockPos targetpos = this.findNearestFlora(128 - this.sniffTime + 1);
-
                 if (targetpos != null) {
-                    BlockPos partnerpos = this.findNearestPartnerFlora();
-                    if (partnerpos != null)
-                        targetpos = partnerpos;
-
-                    this.tapir.setFloraPos(targetpos);
-                    this.tapir.setTrackingTime(1200);
-                    this.foundTarget = true;
-                    this.sniffTime = 0;
-                    this.animTime = this.adjustedTickDelay(20);
+                    this.findFlora(targetpos);
                 }
             }
 
@@ -97,6 +100,17 @@ public class TapirSniffForFloraGoal extends Goal {
                 }
             }
         }
+    }
+
+    private void findFlora(BlockPos targetPos) {
+        BlockPos partnerpos = this.findNearestPartnerFlora();
+        if (partnerpos != null)
+            targetPos = partnerpos;
+
+        this.foundPos = targetPos;
+        this.tapir.level.broadcastEntityEvent(this.tapir, (byte) 4);
+        this.sniffTime = 0;
+        this.stopTime = this.adjustedTickDelay(20);
     }
 
     private void setWalkWait() {
