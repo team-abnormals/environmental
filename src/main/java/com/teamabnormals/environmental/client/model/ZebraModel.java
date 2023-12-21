@@ -54,7 +54,7 @@ public class ZebraModel<T extends AbstractHorse> extends AgeableListModel<T> {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 		PartDefinition body = partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 35).addBox(-4.5F, -6.0F, -17.0F, 9.0F, 9.0F, 20.0F, new CubeDeformation(0.05F)), PartPose.offset(0.0F, 10.0F, 5.5F));
-		PartDefinition headParts = partdefinition.addOrReplaceChild("head_parts", CubeListBuilder.create().texOffs(0, 38).addBox(-2.05F, -6.0F, -3.0F, 4.0F, 11.0F, 6.0F), PartPose.offsetAndRotation(0.0F, 6.0F, -12.0F, ((float) Math.PI / 6F), 0.0F, 0.0F));
+		PartDefinition headParts = partdefinition.addOrReplaceChild("head_parts", CubeListBuilder.create().texOffs(0, 38).addBox(-2.05F, -6.0F, -3.0F, 4.0F, 11.0F, 6.0F), PartPose.offsetAndRotation(0.0F, 6.0F, -12.0F, (Mth.PI / 6F), 0.0F, 0.0F));
 		PartDefinition head = headParts.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 16).addBox(-3.0F, -11.0F, -4.0F, 6.0F, 5.0F, 7.0F, deformation), PartPose.ZERO);
 		headParts.addOrReplaceChild("mane", CubeListBuilder.create().texOffs(50, 36).addBox(-1.0F, -11.0F, 3.01F, 2.0F, 15.0F, 3.0F, deformation), PartPose.ZERO);
 		headParts.addOrReplaceChild("upper_mouth", CubeListBuilder.create().texOffs(0, 28).addBox(-2.0F, -11.0F, -9.0F, 4.0F, 5.0F, 5.0F, deformation), PartPose.ZERO);
@@ -67,12 +67,12 @@ public class ZebraModel<T extends AbstractHorse> extends AgeableListModel<T> {
 		partdefinition.addOrReplaceChild("right_hind_baby_leg", CubeListBuilder.create().texOffs(48, 23).addBox(-0.5F, -0.01F, -2.0F, 3.0F, 10.0F, 3.0F, cubedeformation), PartPose.offset(-4.0F, 14.0F, 7.0F));
 		partdefinition.addOrReplaceChild("left_front_baby_leg", CubeListBuilder.create().texOffs(48, 23).mirror().addBox(-2.5F, -0.01F, 0.1F, 3.0F, 10.0F, 3.0F, cubedeformation), PartPose.offset(4.0F, 14.0F, -12.0F));
 		partdefinition.addOrReplaceChild("right_front_baby_leg", CubeListBuilder.create().texOffs(48, 23).addBox(-0.5F, -0.01F, 0.1F, 3.0F, 10.0F, 3.0F, cubedeformation), PartPose.offset(-4.0F, 14.0F, -12.0F));
-		body.addOrReplaceChild("tail", CubeListBuilder.create().texOffs(38, 38).addBox(-1.5F, -1.0F, 0.5F, 3.0F, 14.0F, 3.0F, deformation), PartPose.offsetAndRotation(0.0F, -2.5F, 3.0F, ((float) Math.PI / 6F), 0.0F, 0.0F));
+		body.addOrReplaceChild("tail", CubeListBuilder.create().texOffs(38, 38).addBox(-1.5F, -1.0F, 0.5F, 3.0F, 14.0F, 3.0F, deformation), PartPose.offsetAndRotation(0.0F, -2.5F, 3.0F, (Mth.PI / 6F), 0.0F, 0.0F));
 		body.addOrReplaceChild("saddle", CubeListBuilder.create().texOffs(26, 0).addBox(-4.5F, -6.0F, -9.5F, 9.0F, 9.0F, 9.0F, new CubeDeformation(0.5F)), PartPose.ZERO);
 		headParts.addOrReplaceChild("left_saddle_mouth", CubeListBuilder.create().texOffs(29, 5).addBox(2.0F, -10.0F, -7.0F, 1.0F, 2.0F, 2.0F, deformation), PartPose.ZERO);
 		headParts.addOrReplaceChild("right_saddle_mouth", CubeListBuilder.create().texOffs(29, 5).addBox(-3.0F, -10.0F, -7.0F, 1.0F, 2.0F, 2.0F, deformation), PartPose.ZERO);
-		headParts.addOrReplaceChild("left_saddle_line", CubeListBuilder.create().texOffs(32, 2).addBox(3.1F, -6.5F, -9.5F, 0.0F, 3.0F, 16.0F, deformation), PartPose.rotation((-(float) Math.PI / 6F), 0.0F, 0.0F));
-		headParts.addOrReplaceChild("right_saddle_line", CubeListBuilder.create().texOffs(32, 2).addBox(-3.1F, -6.5F, -9.5F, 0.0F, 3.0F, 16.0F, deformation), PartPose.rotation((-(float) Math.PI / 6F), 0.0F, 0.0F));
+		headParts.addOrReplaceChild("left_saddle_line", CubeListBuilder.create().texOffs(32, 2).addBox(3.1F, -6.5F, -9.5F, 0.0F, 3.0F, 16.0F, deformation), PartPose.rotation((-Mth.PI / 6F), 0.0F, 0.0F));
+		headParts.addOrReplaceChild("right_saddle_line", CubeListBuilder.create().texOffs(32, 2).addBox(-3.1F, -6.5F, -9.5F, 0.0F, 3.0F, 16.0F, deformation), PartPose.rotation((-Mth.PI / 6F), 0.0F, 0.0F));
 		headParts.addOrReplaceChild("head_saddle", CubeListBuilder.create().texOffs(0, 0).addBox(-3.0F, -11.0F, -3.9F, 6.0F, 5.0F, 7.0F, new CubeDeformation(0.2F)), PartPose.ZERO);
 		headParts.addOrReplaceChild("mouth_saddle_wrap", CubeListBuilder.create().texOffs(19, 0).addBox(-2.0F, -11.0F, -6.0F, 4.0F, 5.0F, 2.0F, new CubeDeformation(0.2F)), PartPose.ZERO);
 		head.addOrReplaceChild("left_ear", CubeListBuilder.create().texOffs(19, 19).addBox(0.55F, -14.0F, 2.0F, 2.0F, 3.0F, 1.0F, new CubeDeformation(-0.001F)), PartPose.ZERO);
@@ -107,62 +107,70 @@ public class ZebraModel<T extends AbstractHorse> extends AgeableListModel<T> {
 	}
 
 	@Override
-	public void prepareMobModel(T p_102780_, float p_102781_, float p_102782_, float p_102783_) {
-		super.prepareMobModel(p_102780_, p_102781_, p_102782_, p_102783_);
-		float f = Mth.rotlerp(p_102780_.yBodyRotO, p_102780_.yBodyRot, p_102783_);
-		float f1 = Mth.rotlerp(p_102780_.yHeadRotO, p_102780_.yHeadRot, p_102783_);
-		float f2 = Mth.lerp(p_102783_, p_102780_.xRotO, p_102780_.getXRot());
-		float f3 = f1 - f;
-		float f4 = f2 * ((float) Math.PI / 180F);
-		if (f3 > 20.0F) {
-			f3 = 20.0F;
+	public void prepareMobModel(T zebra, float limbSwing, float limbSwingAmount, float partialTick) {
+		super.prepareMobModel(zebra, limbSwing, limbSwingAmount, partialTick);
+		float bodyrot = Mth.rotlerp(zebra.yBodyRotO, zebra.yBodyRot, partialTick);
+		float headrot = Mth.rotlerp(zebra.yHeadRotO, zebra.yHeadRot, partialTick);
+		float deltarot = headrot - bodyrot;
+		float headxrot = Mth.lerp(partialTick, zebra.xRotO, zebra.getXRot()) * Mth.DEG_TO_RAD;
+
+		if (deltarot > 20.0F) {
+			deltarot = 20.0F;
 		}
 
-		if (f3 < -20.0F) {
-			f3 = -20.0F;
+		if (deltarot < -20.0F) {
+			deltarot = -20.0F;
 		}
 
-		if (p_102782_ > 0.2F) {
-			f4 += Mth.cos(p_102781_ * 0.4F) * 0.15F * p_102782_;
+		if (limbSwingAmount > 0.2F) {
+			headxrot += Mth.cos(limbSwing * 0.4F) * 0.15F * limbSwingAmount;
 		}
 
-		float f5 = p_102780_.getEatAnim(p_102783_);
-		float f6 = p_102780_.getStandAnim(p_102783_);
-		float f7 = 1.0F - f6;
-		float f8 = p_102780_.getMouthAnim(p_102783_);
-		boolean flag = p_102780_.tailCounter != 0;
-		float f9 = (float) p_102780_.tickCount + p_102783_;
+		float eatanim = zebra.getEatAnim(partialTick);
+		float standanim = zebra.getStandAnim(partialTick);
+		float nostandanim = 1.0F - standanim;
+		float mouthanim = zebra.getMouthAnim(partialTick);
+		boolean movingtail = zebra.tailCounter != 0;
+		float ageinticks = (float) zebra.tickCount + partialTick;
+
 		this.headParts.y = 6.0F;
 		this.headParts.z = -10.5F;
 		this.body.xRot = 0.0F;
-		this.headParts.xRot = ((float) Math.PI / 6F) + f4;
-		this.headParts.yRot = f3 * ((float) Math.PI / 180F);
-		float f10 = p_102780_.isInWater() ? 0.2F : 1.0F;
-		float f11 = Mth.cos(f10 * p_102781_ * 0.6662F + (float) Math.PI);
-		float f12 = f11 * 0.8F * p_102782_;
-		float f13 = (1.0F - Math.max(f6, f5)) * (((float) Math.PI / 6F) + f4 + f8 * Mth.sin(f9) * 0.05F);
-		this.headParts.xRot = f6 * (0.2617994F + f4) + f5 * (2.1816616F + Mth.sin(f9) * 0.05F) + f13;
-		this.headParts.yRot = f6 * f3 * ((float) Math.PI / 180F) + (1.0F - Math.max(f6, f5)) * this.headParts.yRot;
-		this.headParts.y = f6 * -4.0F + f5 * 11.0F + (1.0F - Math.max(f6, f5)) * this.headParts.y;
-		this.headParts.z = f6 * -4.0F + f5 * -12.0F + (1.0F - Math.max(f6, f5)) * this.headParts.z;
-		this.body.xRot = f6 * (-(float) Math.PI / 4F) + f7 * this.body.xRot;
-		float f14 = 0.2617994F * f6;
-		float f15 = Mth.cos(f9 * 0.6F + (float) Math.PI);
-		this.leftFrontLeg.y = 2.0F * f6 + 14.0F * f7;
-		this.leftFrontLeg.z = -6.0F * f6 - 10.0F * f7;
+		this.headParts.xRot = (Mth.PI / 6F) + headxrot;
+		this.headParts.yRot = deltarot * Mth.DEG_TO_RAD;
+
+		float waterlegswing = zebra.isInWater() ? 0.2F : 1.0F;
+		float hindlegswing = Mth.cos(waterlegswing * limbSwing * 0.6662F + Mth.PI);
+		float frontlegswing = hindlegswing * 0.8F * limbSwingAmount;
+		float headangle = (1.0F - Math.max(standanim, eatanim)) * ((Mth.PI / 6F) + headxrot + mouthanim * Mth.sin(ageinticks) * 0.05F);
+
+		this.headParts.xRot = standanim * (0.2617994F + headxrot) + eatanim * (2.1816616F + Mth.sin(ageinticks) * 0.05F) + headangle;
+		this.headParts.yRot = standanim * deltarot * Mth.DEG_TO_RAD + (1.0F - Math.max(standanim, eatanim)) * this.headParts.yRot;
+		this.headParts.y = standanim * -4.0F + eatanim * 11.0F + (1.0F - Math.max(standanim, eatanim)) * this.headParts.y;
+		this.headParts.z = standanim * -4.0F + eatanim * -12.0F + (1.0F - Math.max(standanim, eatanim)) * this.headParts.z;
+		this.body.xRot = standanim * (-Mth.PI / 4F) + nostandanim * this.body.xRot;
+
+		float standanim1 = 0.2617994F * standanim;
+		float standswing = Mth.cos(ageinticks * 0.6F + Mth.PI);
+
+		this.leftFrontLeg.y = 2.0F * standanim + 14.0F * nostandanim;
+		this.leftFrontLeg.z = -6.0F * standanim - 10.0F * nostandanim;
 		this.rightFrontLeg.y = this.leftFrontLeg.y;
 		this.rightFrontLeg.z = this.leftFrontLeg.z;
-		float f16 = ((-(float) Math.PI / 3F) + f15) * f6 + f12 * f7;
-		float f17 = ((-(float) Math.PI / 3F) - f15) * f6 - f12 * f7;
-		this.leftHindLeg.xRot = f14 - f11 * 0.5F * p_102782_ * f7;
-		this.rightHindLeg.xRot = f14 + f11 * 0.5F * p_102782_ * f7;
-		this.leftFrontLeg.xRot = f16;
-		this.rightFrontLeg.xRot = f17;
-		this.tail.xRot = ((float) Math.PI / 6F) + p_102782_ * 0.75F;
-		this.tail.y = -2.5F + p_102782_;
-		this.tail.z = 1.0F + p_102782_ * 2.0F;
-		if (flag) {
-			this.tail.yRot = Mth.cos(f9 * 0.7F);
+
+		float leftfrontlegangle = ((-Mth.PI / 3F) + standswing) * standanim + frontlegswing * nostandanim;
+		float rightfrontlegangle = ((-Mth.PI / 3F) - standswing) * standanim - frontlegswing * nostandanim;
+
+		this.leftHindLeg.xRot = standanim1 - hindlegswing * 0.5F * limbSwingAmount * nostandanim;
+		this.rightHindLeg.xRot = standanim1 + hindlegswing * 0.5F * limbSwingAmount * nostandanim;
+		this.leftFrontLeg.xRot = leftfrontlegangle;
+		this.rightFrontLeg.xRot = rightfrontlegangle;
+		this.tail.xRot = (Mth.PI / 6F) + limbSwingAmount * 0.75F;
+		this.tail.y = -2.5F + limbSwingAmount;
+		this.tail.z = 1.0F + limbSwingAmount * 2.0F;
+		
+		if (movingtail) {
+			this.tail.yRot = Mth.cos(ageinticks * 0.7F);
 		} else {
 			this.tail.yRot = 0.0F;
 		}
@@ -179,15 +187,17 @@ public class ZebraModel<T extends AbstractHorse> extends AgeableListModel<T> {
 		this.leftFrontBabyLeg.y = this.leftFrontLeg.y;
 		this.leftFrontBabyLeg.z = this.leftFrontLeg.z;
 		this.leftFrontBabyLeg.xRot = this.leftFrontLeg.xRot;
-		boolean flag1 = p_102780_.isBaby();
-		this.rightHindLeg.visible = !flag1;
-		this.leftHindLeg.visible = !flag1;
-		this.rightFrontLeg.visible = !flag1;
-		this.leftFrontLeg.visible = !flag1;
-		this.rightHindBabyLeg.visible = flag1;
-		this.leftHindBabyLeg.visible = flag1;
-		this.rightFrontBabyLeg.visible = flag1;
-		this.leftFrontBabyLeg.visible = flag1;
-		this.body.y = flag1 ? 10.8F : 0.0F;
+		
+		boolean isbaby = zebra.isBaby();
+		
+		this.rightHindLeg.visible = !isbaby;
+		this.leftHindLeg.visible = !isbaby;
+		this.rightFrontLeg.visible = !isbaby;
+		this.leftFrontLeg.visible = !isbaby;
+		this.rightHindBabyLeg.visible = isbaby;
+		this.leftHindBabyLeg.visible = isbaby;
+		this.rightFrontBabyLeg.visible = isbaby;
+		this.leftFrontBabyLeg.visible = isbaby;
+		this.body.y = isbaby ? 10.8F : 0.0F;
 	}
 }
