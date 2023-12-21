@@ -288,6 +288,9 @@ public class Tapir extends Animal {
                     this.stopTracking();
             }
 
+			if (this.isLeashed() && this.isTrackingFlora())
+				this.stopTracking();
+
 			if (this.isSniffing()) {
 				if (this.sniffTimer-- <= 0) {
 					this.playSound(EnvironmentalSoundEvents.PIG_SNIFF.get(), 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
