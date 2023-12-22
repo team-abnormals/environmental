@@ -1,6 +1,7 @@
 package com.teamabnormals.environmental.client.model;
 
 import com.google.common.collect.ImmutableList;
+import com.teamabnormals.environmental.common.entity.animal.Zebra;
 import net.minecraft.client.model.AgeableListModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -9,9 +10,8 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.animal.horse.AbstractHorse;
 
-public class ZebraModel<T extends AbstractHorse> extends AgeableListModel<T> {
+public class ZebraModel<T extends Zebra> extends AgeableListModel<T> {
 	protected final ModelPart body;
 	protected final ModelPart headParts;
 	private final ModelPart rightHindLeg;
@@ -92,8 +92,6 @@ public class ZebraModel<T extends AbstractHorse> extends AgeableListModel<T> {
 		for (ModelPart modelpart1 : this.ridingParts) {
 			modelpart1.visible = isVehicle && isSaddled;
 		}
-
-		this.body.y = 11.0F;
 	}
 
 	@Override
@@ -111,19 +109,19 @@ public class ZebraModel<T extends AbstractHorse> extends AgeableListModel<T> {
 		super.prepareMobModel(zebra, limbSwing, limbSwingAmount, partialTick);
 		float bodyrot = Mth.rotlerp(zebra.yBodyRotO, zebra.yBodyRot, partialTick);
 		float headrot = Mth.rotlerp(zebra.yHeadRotO, zebra.yHeadRot, partialTick);
-		float deltarot = headrot - bodyrot;
-		float headxrot = Mth.lerp(partialTick, zebra.xRotO, zebra.getXRot()) * Mth.DEG_TO_RAD;
+		float headyangle = headrot - bodyrot;
+		float headswing = Mth.lerp(partialTick, zebra.xRotO, zebra.getXRot()) * Mth.DEG_TO_RAD;
 
-		if (deltarot > 20.0F) {
-			deltarot = 20.0F;
+		if (headyangle > 20.0F) {
+			headyangle = 20.0F;
 		}
 
-		if (deltarot < -20.0F) {
-			deltarot = -20.0F;
+		if (headyangle < -20.0F) {
+			headyangle = -20.0F;
 		}
 
 		if (limbSwingAmount > 0.2F) {
-			headxrot += Mth.cos(limbSwing * 0.4F) * 0.15F * limbSwingAmount;
+			headswing += Mth.cos(limbSwing * 0.4F) * 0.15F * limbSwingAmount;
 		}
 
 		float eatanim = zebra.getEatAnim(partialTick);
@@ -136,38 +134,78 @@ public class ZebraModel<T extends AbstractHorse> extends AgeableListModel<T> {
 		this.headParts.y = 6.0F;
 		this.headParts.z = -10.5F;
 		this.body.xRot = 0.0F;
-		this.headParts.xRot = (Mth.PI / 6F) + headxrot;
-		this.headParts.yRot = deltarot * Mth.DEG_TO_RAD;
+		this.headParts.xRot = (Mth.PI / 6F) + headswing;
+		this.headParts.yRot = headyangle * Mth.DEG_TO_RAD;
 
-		float waterlegswing = zebra.isInWater() ? 0.2F : 1.0F;
-		float hindlegswing = Mth.cos(waterlegswing * limbSwing * 0.6662F + Mth.PI);
+		float legswingspeed = zebra.isInWater() ? 0.2F : 1.0F;
+		float hindlegswing = Mth.cos(legswingspeed * limbSwing * 0.6662F + Mth.PI);
 		float frontlegswing = hindlegswing * 0.8F * limbSwingAmount;
-		float headangle = (1.0F - Math.max(standanim, eatanim)) * ((Mth.PI / 6F) + headxrot + mouthanim * Mth.sin(ageinticks) * 0.05F);
+		float headxangle = (1.0F - Math.max(standanim, eatanim)) * ((Mth.PI / 6F) + headswing + mouthanim * Mth.sin(ageinticks) * 0.05F);
 
-		this.headParts.xRot = standanim * (0.2617994F + headxrot) + eatanim * (2.1816616F + Mth.sin(ageinticks) * 0.05F) + headangle;
-		this.headParts.yRot = standanim * deltarot * Mth.DEG_TO_RAD + (1.0F - Math.max(standanim, eatanim)) * this.headParts.yRot;
+		this.headParts.xRot = standanim * (0.2617994F + headswing) + eatanim * (2.1816616F + Mth.sin(ageinticks) * 0.05F) + headxangle;
+		this.headParts.yRot = standanim * headyangle * Mth.DEG_TO_RAD + (1.0F - Math.max(standanim, eatanim)) * this.headParts.yRot;
 		this.headParts.y = standanim * -4.0F + eatanim * 11.0F + (1.0F - Math.max(standanim, eatanim)) * this.headParts.y;
 		this.headParts.z = standanim * -4.0F + eatanim * -12.0F + (1.0F - Math.max(standanim, eatanim)) * this.headParts.z;
 		this.body.xRot = standanim * (-Mth.PI / 4F) + nostandanim * this.body.xRot;
 
-		float standanim1 = 0.2617994F * standanim;
+		float standlegangle = 0.2617994F * standanim;
 		float standswing = Mth.cos(ageinticks * 0.6F + Mth.PI);
 
 		this.leftFrontLeg.y = 2.0F * standanim + 14.0F * nostandanim;
 		this.leftFrontLeg.z = -6.0F * standanim - 10.0F * nostandanim;
-		this.rightFrontLeg.y = this.leftFrontLeg.y;
-		this.rightFrontLeg.z = this.leftFrontLeg.z;
 
 		float leftfrontlegangle = ((-Mth.PI / 3F) + standswing) * standanim + frontlegswing * nostandanim;
 		float rightfrontlegangle = ((-Mth.PI / 3F) - standswing) * standanim - frontlegswing * nostandanim;
 
-		this.leftHindLeg.xRot = standanim1 - hindlegswing * 0.5F * limbSwingAmount * nostandanim;
-		this.rightHindLeg.xRot = standanim1 + hindlegswing * 0.5F * limbSwingAmount * nostandanim;
+		this.leftHindLeg.xRot = standlegangle - hindlegswing * 0.5F * limbSwingAmount * nostandanim;
+		this.rightHindLeg.xRot = standlegangle + hindlegswing * 0.5F * limbSwingAmount * nostandanim;
 		this.leftFrontLeg.xRot = leftfrontlegangle;
 		this.rightFrontLeg.xRot = rightfrontlegangle;
 		this.tail.xRot = (Mth.PI / 6F) + limbSwingAmount * 0.75F;
 		this.tail.y = -2.5F + limbSwingAmount;
 		this.tail.z = 1.0F + limbSwingAmount * 2.0F;
+
+		// Zebra animations
+		float backkickbodyrot = zebra.getBackKickBodyRot(partialTick);
+		float backkicklegrot = zebra.getBackKickLegRot(partialTick);
+		backkickbodyrot *= nostandanim;
+		backkicklegrot *= nostandanim;
+
+		float frontkickbodyrot = zebra.getFrontKickBodyRot(partialTick);
+		float frontkicklegrot = zebra.getFrontKickBodyRot(partialTick);
+		frontkickbodyrot *= nostandanim;
+		frontkicklegrot *= nostandanim;
+
+		this.body.y = 11.0F;
+		this.body.z = 5.5F;
+		this.leftHindLeg.y = 14.0F;
+		this.leftHindLeg.z = 7.0F;
+
+		this.headParts.y += backkickbodyrot;
+		this.headParts.z += -3.5F * backkickbodyrot;
+		this.headParts.xRot += 0.15F * backkickbodyrot;
+		this.body.y += -14.0F * Mth.sin(Mth.PI / 6F * backkickbodyrot);
+		this.body.z += 14.0F * Mth.cos(Mth.PI / 6F * backkickbodyrot) - 14.0F - backkickbodyrot;
+		this.body.xRot += Mth.PI / 6F * backkickbodyrot;
+		this.leftHindLeg.y += -9.5F * backkickbodyrot;
+		this.leftHindLeg.z += -backkickbodyrot;
+		this.rightHindLeg.y = this.leftHindLeg.y;
+		this.rightHindLeg.z = this.leftHindLeg.z;
+		this.leftHindLeg.xRot += Mth.PI * 0.55F * backkicklegrot;
+		this.rightHindLeg.xRot += Mth.PI * 0.55F * backkicklegrot;
+
+		this.headParts.y += -6.0F * frontkickbodyrot;
+		this.headParts.z += 4.0F * frontkickbodyrot;
+		this.headParts.xRot += -0.1F * frontkickbodyrot;
+		this.body.xRot += -Mth.PI / 6F * frontkickbodyrot;
+		this.leftHindLeg.xRot += 0.2F * frontkickbodyrot;
+		this.rightHindLeg.xRot += 0.2F * frontkickbodyrot;
+		this.leftFrontLeg.y += -9.0F * frontkickbodyrot;
+		this.leftFrontLeg.z += frontkickbodyrot;
+		this.rightFrontLeg.y = this.leftFrontLeg.y;
+		this.rightFrontLeg.z = this.leftFrontLeg.z;
+		this.leftFrontLeg.xRot += (-Mth.PI * 0.55F + standswing * 0.3F) * frontkicklegrot;
+		this.rightFrontLeg.xRot += (-Mth.PI * 0.55F - standswing * 0.3F) * frontkicklegrot;
 		
 		if (movingtail) {
 			this.tail.yRot = Mth.cos(ageinticks * 0.7F);
@@ -198,6 +236,9 @@ public class ZebraModel<T extends AbstractHorse> extends AgeableListModel<T> {
 		this.leftHindBabyLeg.visible = isbaby;
 		this.rightFrontBabyLeg.visible = isbaby;
 		this.leftFrontBabyLeg.visible = isbaby;
-		this.body.y = isbaby ? 10.8F : 0.0F;
+	}
+
+	private static float interpolate(float min, float max, float progress) {
+		return 1F - Mth.square((progress - max) / (max - min));
 	}
 }
