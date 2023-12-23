@@ -172,7 +172,7 @@ public class ZebraModel<T extends Zebra> extends AgeableListModel<T> {
 		backkicklegrot *= nostandanim;
 
 		float frontkickbodyrot = zebra.getFrontKickBodyRot(partialTick);
-		float frontkicklegrot = zebra.getFrontKickBodyRot(partialTick);
+		float frontkicklegrot = zebra.getFrontKickLegRot(partialTick);
 		frontkickbodyrot *= nostandanim;
 		frontkicklegrot *= nostandanim;
 

@@ -23,10 +23,11 @@ public class EnvironmentalEntityTypeTagsProvider extends EntityTypeTagsProvider 
 	public void addTags() {
 		this.tag(EntityTypeTags.IMPACT_PROJECTILES).add(MUD_BALL.get(), DUCK_EGG.get());
 
+		this.tag(UNAFFECTED_BY_SERENITY);
 		this.tag(EnvironmentalEntityTypeTags.DEER).add(EnvironmentalEntityTypes.DEER.get(), REINDEER.get());
 		this.tag(SCARES_DEER).add(EntityType.PLAYER, EntityType.VILLAGER, EntityType.WANDERING_TRADER).addTag(SCARES_TRUSTING_DEER);
 		this.tag(SCARES_TRUSTING_DEER).add(EntityType.WOLF).addTag(EntityTypeTags.RAIDERS);
-		this.tag(UNAFFECTED_BY_SERENITY);
+		this.tag(ZEBRAS_DONT_KICK).add(EntityType.HORSE, EntityType.DONKEY, EntityType.MULE, ZEBRA.get());
 
 		this.tag(BlueprintEntityTypeTags.MILKABLE).add(YAK.get());
 		this.tag(BlueprintEntityTypeTags.FISHES).add(KOI.get());

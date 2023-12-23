@@ -1,5 +1,6 @@
 package com.teamabnormals.environmental.common.entity.animal;
 
+import com.teamabnormals.environmental.core.other.tags.EnvironmentalEntityTypeTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -13,10 +14,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.IndirectEntityDamageSource;
-import net.minecraft.world.entity.AgeableMob;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
@@ -37,7 +35,7 @@ import java.util.function.Predicate;
 public class Zebra extends AbstractHorse {
 	private static final UUID SPEED_MODIFIER_KICKING_ID = UUID.fromString("AF33F716-0F4D-43CA-9C8E-1068AE2F38E6");
 	private static final AttributeModifier SPEED_MODIFIER_KICKING = new AttributeModifier(SPEED_MODIFIER_KICKING_ID, "Kicking speed reduction", -0.8D, Operation.MULTIPLY_BASE);
-	private static final Predicate<LivingEntity> KICKABLE_TARGET_SELECTOR = living -> living.isAlive() && !living.isSpectator() && !living.isPassenger();
+	private final Predicate<LivingEntity> kickablePredicate;
 
 	private static final EntityDataAccessor<Integer> KICK_TIME = SynchedEntityData.defineId(Zebra.class, EntityDataSerializers.INT);
 
@@ -49,6 +47,7 @@ public class Zebra extends AbstractHorse {
 
 	public Zebra(EntityType<? extends AbstractHorse> entityType, Level level) {
 		super(entityType, level);
+		this.kickablePredicate = living -> living.isAlive() && living != this && !living.getType().is(EnvironmentalEntityTypeTags.ZEBRAS_DONT_KICK) && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(living) && !living.isPassenger();
 	}
 
 	@Override
@@ -76,24 +75,22 @@ public class Zebra extends AbstractHorse {
 			if (!this.isKicking()) {
 				LivingEntity rider = this.getControllingPassenger();
 				if (rider != null && !this.isStanding()) {
-					List<LivingEntity> nearby = this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.45F), KICKABLE_TARGET_SELECTOR);
+					List<LivingEntity> nearby = this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.45F), this.kickablePredicate);
 					boolean kicking = false;
 					boolean backkick = true;
 
 					for (LivingEntity living : nearby) {
-						if (living != this && living != rider) {
-							Vec3 attackAngleVector = living.position().subtract(this.position()).normalize();
-							attackAngleVector = new Vec3(attackAngleVector.x, 0.0D, attackAngleVector.z);
+						Vec3 attackAngleVector = living.position().subtract(this.position()).normalize();
+						attackAngleVector = new Vec3(attackAngleVector.x, 0.0D, attackAngleVector.z);
 
-							double angle = attackAngleVector.dot(this.getForward().normalize());
+						double angle = attackAngleVector.dot(this.getForward().normalize());
 
-							if (rider.zza > 0.0F && angle > 0.7D) {
-								kicking = true;
-								backkick = false;
-								break;
-							} else if (rider.zza <= 0.0F && angle < -0.7D) {
-								kicking = true;
-							}
+						if (rider.zza > 0.0F && angle > 0.7D) {
+							kicking = true;
+							backkick = false;
+							break;
+						} else if (rider.zza <= 0.0F && angle < -0.7D) {
+							kicking = true;
 						}
 					}
 
@@ -255,38 +252,35 @@ public class Zebra extends AbstractHorse {
 			this.level.broadcastEntityEvent(this, (byte) 9);
 		}
 
-		List<LivingEntity> nearby = this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.6F), KICKABLE_TARGET_SELECTOR);
+		List<LivingEntity> nearby = this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.6F), this.kickablePredicate);
 		for (LivingEntity living : nearby) {
-			LivingEntity rider = this.getControllingPassenger();
+			Vec3 attackAngleVector = living.position().subtract(this.position()).normalize();
+			attackAngleVector = new Vec3(attackAngleVector.x, 0.0D, attackAngleVector.z);
 
-			if (living != this && living != rider) {
-				Vec3 attackAngleVector = living.position().subtract(this.position()).normalize();
-				attackAngleVector = new Vec3(attackAngleVector.x, 0.0D, attackAngleVector.z);
+			float x = Mth.sin(this.getYRot() * Mth.DEG_TO_RAD);
+			float z = -Mth.cos(this.getYRot() * Mth.DEG_TO_RAD);
+			double angle = attackAngleVector.dot(this.getForward().normalize());
 
-				float x = Mth.sin(this.getYRot() * Mth.DEG_TO_RAD);
-				float z = -Mth.cos(this.getYRot() * Mth.DEG_TO_RAD);
-				double angle = attackAngleVector.dot(this.getForward().normalize());
+			if (!backKick && angle > 0.7D || backKick && angle < -0.7D) {
+				DamageSource source;
+				LivingEntity rider = this.getControllingPassenger();
+				if (rider != null)
+					source = new IndirectEntityDamageSource("zebraKick", this, rider);
+				else
+					source = DamageSource.mobAttack(this);
 
-				if (!backKick && angle > 0.7D || backKick && angle < -0.7D) {
-					DamageSource source;
-					if (rider != null)
-						source = new IndirectEntityDamageSource("zebraKick", this, rider);
+				int damage = (int)this.getAttributeValue(Attributes.ATTACK_DAMAGE);
+				if (backKick)
+					damage *= 2;
+
+				boolean flag = living.hurt(source, (float)damage);
+
+				if (flag) {
+					this.doEnchantDamageEffects(this, living);
+					if (!backKick)
+						living.knockback(0.8F, x, z);
 					else
-						source = DamageSource.mobAttack(this);
-
-					int damage = (int)this.getAttributeValue(Attributes.ATTACK_DAMAGE);
-					if (backKick)
-						damage *= 2;
-
-					boolean flag = living.hurt(source, (float)damage);
-
-					if (flag) {
-						this.doEnchantDamageEffects(this, living);
-						if (!backKick)
-							living.knockback(0.8F, x, z);
-						else
-							living.knockback(1.5F, -x, -z);
-					}
+						living.knockback(1.5F, -x, -z);
 				}
 			}
 		}
