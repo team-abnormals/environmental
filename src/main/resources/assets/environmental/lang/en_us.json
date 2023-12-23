@@ -294,6 +294,7 @@
 	"block.environmental.yak_hair_rug": "Yak Hair Rug",
 	"block.environmental.yellow_hibiscus": "Yellow Hibiscus",
 	"block.environmental.yellow_wall_hibiscus": "Yellow Wall Hibiscus",
+	"death.attack.ridingZebra": "%1$s was slain by %2$s using the hooves of %3$s",
 	"effect.environmental.panic": "Panic",
 	"effect.environmental.serenity": "Serenity",
 	"entity.environmental.deer": "Deer",

@@ -1,5 +1,6 @@
 package com.teamabnormals.environmental.common.entity.animal;
 
+import com.teamabnormals.environmental.common.damagesource.MountDamageSource;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalEntityTypeTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -13,7 +14,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.IndirectEntityDamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -159,23 +159,6 @@ public class Zebra extends AbstractHorse {
 		}
 	}
 
-	@Override
-	public boolean doHurtTarget(Entity target) {
-		DamageSource source;
-		LivingEntity rider = this.getControllingPassenger();
-		if (rider != null)
-			source = new IndirectEntityDamageSource("zebraKick", this, rider);
-		else
-			source = DamageSource.mobAttack(this);
-
-		boolean flag = target.hurt(source, (float)((int)this.getAttributeValue(Attributes.ATTACK_DAMAGE)));
-		if (flag) {
-			this.doEnchantDamageEffects(this, target);
-		}
-
-		return flag;
-	}
-
 	public boolean isKicking() {
 		return this.getKickTime() > 0;
 	}
@@ -265,7 +248,7 @@ public class Zebra extends AbstractHorse {
 				DamageSource source;
 				LivingEntity rider = this.getControllingPassenger();
 				if (rider != null)
-					source = new IndirectEntityDamageSource("zebraKick", this, rider);
+					source = new MountDamageSource("ridingZebra", this, rider);
 				else
 					source = DamageSource.mobAttack(this);
 
