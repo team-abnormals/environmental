@@ -75,7 +75,7 @@ public class Zebra extends AbstractHorse {
 			if (!this.isKicking()) {
 				LivingEntity rider = this.getControllingPassenger();
 				if (rider != null && !this.isStanding()) {
-					List<LivingEntity> nearby = this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.45F), this.kickablePredicate);
+					List<LivingEntity> nearby = this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.55F), this.kickablePredicate);
 					boolean kicking = false;
 					boolean backkick = true;
 
@@ -235,7 +235,7 @@ public class Zebra extends AbstractHorse {
 			this.level.broadcastEntityEvent(this, (byte) 9);
 		}
 
-		List<LivingEntity> nearby = this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.6F), this.kickablePredicate);
+		List<LivingEntity> nearby = this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.65F), this.kickablePredicate);
 		for (LivingEntity living : nearby) {
 			Vec3 attackAngleVector = living.position().subtract(this.position()).normalize();
 			attackAngleVector = new Vec3(attackAngleVector.x, 0.0D, attackAngleVector.z);
