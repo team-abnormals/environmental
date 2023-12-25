@@ -1,6 +1,7 @@
 package com.teamabnormals.environmental.common.entity.animal;
 
 import com.teamabnormals.environmental.common.damagesource.MountDamageSource;
+import com.teamabnormals.environmental.common.entity.ai.goal.HerdLandWanderGoal;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalEntityTypeTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -20,6 +21,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -48,6 +50,18 @@ public class Zebra extends AbstractHorse {
 	public Zebra(EntityType<? extends AbstractHorse> entityType, Level level) {
 		super(entityType, level);
 		this.kickablePredicate = living -> living.isAlive() && living != this && !living.getType().is(EnvironmentalEntityTypeTags.ZEBRAS_DONT_KICK) && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(living) && !living.isPassenger();
+	}
+
+	@Override
+	protected void registerGoals() {
+		this.goalSelector.addGoal(1, new PanicGoal(this, 1.2D));
+		this.goalSelector.addGoal(1, new RunAroundLikeCrazyGoal(this, 1.2D));
+		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D, AbstractHorse.class));
+		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.0D));
+		this.goalSelector.addGoal(6, new HerdLandWanderGoal(this, 0.7D));
+		this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
+		this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
+		this.addBehaviourGoals();
 	}
 
 	@Override
