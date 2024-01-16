@@ -2,8 +2,12 @@ package com.teamabnormals.environmental.common.entity.animal;
 
 import com.teamabnormals.environmental.common.damagesource.MountDamageSource;
 import com.teamabnormals.environmental.common.entity.ai.goal.HerdLandWanderGoal;
+import com.teamabnormals.environmental.common.entity.ai.goal.zebra.ZebraAttackGoal;
+import com.teamabnormals.environmental.common.entity.ai.goal.zebra.ZebraFleeGoal;
+import com.teamabnormals.environmental.common.entity.ai.goal.zebra.ZebraRunAroundLikeCrazyGoal;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalEntityTypeTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -12,6 +16,8 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.TimeUtil;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -21,7 +27,13 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.BreedGoal;
+import net.minecraft.world.entity.ai.goal.FollowParentGoal;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -29,17 +41,22 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
 import java.util.function.Predicate;
 
-public class Zebra extends AbstractHorse {
+public class Zebra extends AbstractHorse implements NeutralMob {
 	private static final UUID SPEED_MODIFIER_KICKING_ID = UUID.fromString("AF33F716-0F4D-43CA-9C8E-1068AE2F38E6");
 	private static final AttributeModifier SPEED_MODIFIER_KICKING = new AttributeModifier(SPEED_MODIFIER_KICKING_ID, "Kicking speed reduction", -0.8D, Operation.MULTIPLY_BASE);
 	private final Predicate<LivingEntity> kickablePredicate;
 
 	private static final EntityDataAccessor<Integer> KICK_TIME = SynchedEntityData.defineId(Zebra.class, EntityDataSerializers.INT);
+
+	private static final UniformInt PERSISTENT_ANGER_TIME = TimeUtil.rangeOfSeconds(16, 32);
+	private int remainingPersistentAngerTime;
+	private UUID persistentAngerTarget;
+
+	private int kickCounter = 20;
 
 	private float backKickAnim;
 	private float backKickAnimO;
@@ -54,13 +71,17 @@ public class Zebra extends AbstractHorse {
 
 	@Override
 	protected void registerGoals() {
-		this.goalSelector.addGoal(1, new PanicGoal(this, 1.2D));
-		this.goalSelector.addGoal(1, new RunAroundLikeCrazyGoal(this, 1.2D));
-		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D, AbstractHorse.class));
-		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.0D));
-		this.goalSelector.addGoal(6, new HerdLandWanderGoal(this, 0.7D));
+		this.goalSelector.addGoal(1, new ZebraFleeGoal(this, 1.6D));
+		this.goalSelector.addGoal(2, new ZebraRunAroundLikeCrazyGoal(this, 1.6D));
+		this.goalSelector.addGoal(3, new ZebraAttackGoal(this, 1.4D));
+		this.goalSelector.addGoal(4, new BreedGoal(this, 1.0D, AbstractHorse.class));
+		this.goalSelector.addGoal(5, new FollowParentGoal(this, 1.0D));
+		this.goalSelector.addGoal(6, new HerdLandWanderGoal(this, 0.7D, 8));
 		this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
 		this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
+		this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, false, this::isAngryAt));
+		this.targetSelector.addGoal(3, new ResetUniversalAngerTargetGoal<>(this, false));
 		this.addBehaviourGoals();
 	}
 
@@ -71,6 +92,18 @@ public class Zebra extends AbstractHorse {
 	}
 
 	@Override
+	public void addAdditionalSaveData(CompoundTag compound) {
+		super.addAdditionalSaveData(compound);
+		this.addPersistentAngerSaveData(compound);
+	}
+
+	@Override
+	public void readAdditionalSaveData(CompoundTag compound) {
+		super.readAdditionalSaveData(compound);
+		this.readPersistentAngerSaveData(this.level, compound);
+	}
+
+	@Override
 	protected void randomizeAttributes(RandomSource random) {
 		this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(this.generateRandomMaxHealth(random));
 		this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(this.generateRandomSpeed(random));
@@ -78,38 +111,47 @@ public class Zebra extends AbstractHorse {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
-		return AbstractHorse.createBaseHorseAttributes().add(Attributes.ATTACK_DAMAGE, 1.0D);
+		return AbstractHorse.createBaseHorseAttributes().add(Attributes.ATTACK_DAMAGE, 1.0D).add(Attributes.FOLLOW_RANGE, 8.0D);
 	}
 
 	@Override
 	public void tick() {
 		super.tick();
 
-		if (this.isEffectiveAi()) {
+		if (this.isEffectiveAi() && this.isAlive()) {
+			boolean resetkickcounter = true;
 			if (!this.isKicking()) {
 				LivingEntity rider = this.getControllingPassenger();
-				if (rider != null && !this.isStanding()) {
-					List<LivingEntity> nearby = this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.55F), this.kickablePredicate);
-					boolean kicking = false;
+				if (!this.isStanding()) {
+					List<LivingEntity> nearby = this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.9F), this.kickablePredicate);
+					boolean shouldkick = false;
 					boolean backkick = true;
 
 					for (LivingEntity living : nearby) {
 						Vec3 attackAngleVector = living.position().subtract(this.position()).normalize();
 						attackAngleVector = new Vec3(attackAngleVector.x, 0.0D, attackAngleVector.z);
+						double angle = attackAngleVector.dot(Vec3.directionFromRotation(0.0F, this.getVisualRotationYInDegrees()).normalize());
 
-						double angle = attackAngleVector.dot(this.getForward().normalize());
-
-						if (rider.zza > 0.0F && angle > 0.7D) {
-							kicking = true;
+						if (rider != null && rider.zza > 0.0F && angle > 0.7D) {
+							shouldkick = true;
 							backkick = false;
 							break;
-						} else if (rider.zza <= 0.0F && angle < -0.7D) {
-							kicking = true;
+						} else if (angle < -0.7D) {
+							if (rider == null) {
+								if (!living.isDiscrete() && --this.kickCounter <= 0)
+									shouldkick = true;
+								else
+									resetkickcounter = false;
+							} else if (rider.zza <= 0.0F) {
+								shouldkick = true;
+							}
 						}
 					}
 
-					if (kicking)
+					if (shouldkick) {
 						this.kick(backkick);
+						this.playKickingSound();
+					}
 				}
 			} else {
 				this.setKickTime(this.getKickTime() + 1);
@@ -117,6 +159,10 @@ public class Zebra extends AbstractHorse {
 					this.setKickTime(0);
 					this.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(SPEED_MODIFIER_KICKING);
 				}
+			}
+
+			if (resetkickcounter) {
+				this.kickCounter = 20;
 			}
 		}
 
@@ -127,6 +173,13 @@ public class Zebra extends AbstractHorse {
 		this.frontKickAnimO = this.frontKickAnim;
 		if (this.frontKickAnim > 0)
 			--this.frontKickAnim;
+	}
+
+	@Override
+	public void aiStep() {
+		super.aiStep();
+		if (!this.level.isClientSide)
+			this.updatePersistentAnger((ServerLevel)this.level, true);
 	}
 
 	@Override
@@ -144,7 +197,7 @@ public class Zebra extends AbstractHorse {
 		}
 
 		if (!stack.isEmpty()) {
-			if (this.isFood(stack)) {
+			if (this.isFood(stack) && this.getTarget() == null) {
 				return this.fedFood(player, stack);
 			}
 
@@ -153,7 +206,7 @@ public class Zebra extends AbstractHorse {
 				return result;
 			}
 
-			if (!this.isTamed()) {
+			if (!this.isTamed() && this.canAnimationInterrupt()) {
 				this.makeMad();
 				return InteractionResult.sidedSuccess(this.level.isClientSide);
 			}
@@ -165,11 +218,11 @@ public class Zebra extends AbstractHorse {
 			}
 		}
 
-		if (this.isBaby()) {
-			return super.mobInteract(player, hand);
-		} else {
+		if (!this.isBaby()) {
 			this.doPlayerRide(player);
 			return InteractionResult.sidedSuccess(this.level.isClientSide);
+		} else {
+			return InteractionResult.PASS;
 		}
 	}
 
@@ -231,11 +284,9 @@ public class Zebra extends AbstractHorse {
 		this.frontKickAnimO = this.frontKickAnim;
 	}
 
-	private void kick(boolean backKick) {
+	public void kick(boolean backKick) {
 		this.setKickTime(1);
 		this.setEating(false);
-
-		this.playSound(this.getAmbientSound(), this.getSoundVolume(), this.getVoicePitch());
 
 		AttributeInstance attributeinstance = this.getAttribute(Attributes.MOVEMENT_SPEED);
 		if (!attributeinstance.hasModifier(SPEED_MODIFIER_KICKING))
@@ -249,14 +300,15 @@ public class Zebra extends AbstractHorse {
 			this.level.broadcastEntityEvent(this, (byte) 9);
 		}
 
-		List<LivingEntity> nearby = this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.65F), this.kickablePredicate);
+		List<LivingEntity> nearby = this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(1.0F), this.kickablePredicate);
 		for (LivingEntity living : nearby) {
 			Vec3 attackAngleVector = living.position().subtract(this.position()).normalize();
 			attackAngleVector = new Vec3(attackAngleVector.x, 0.0D, attackAngleVector.z);
 
-			float x = Mth.sin(this.getYRot() * Mth.DEG_TO_RAD);
-			float z = -Mth.cos(this.getYRot() * Mth.DEG_TO_RAD);
-			double angle = attackAngleVector.dot(this.getForward().normalize());
+			float rot = this.getVisualRotationYInDegrees();
+			float x = Mth.sin(rot * Mth.DEG_TO_RAD);
+			float z = -Mth.cos(rot * Mth.DEG_TO_RAD);
+			double angle = attackAngleVector.dot(Vec3.directionFromRotation(0.0F, rot).normalize());
 
 			if (!backKick && angle > 0.7D || backKick && angle < -0.7D) {
 				DamageSource source;
@@ -283,32 +335,90 @@ public class Zebra extends AbstractHorse {
 		}
 	}
 
+	public void throwPassengers(boolean throwBack) {
+		for(int i = this.getPassengers().size() - 1; i >= 0; --i) {
+			Entity passenger = this.getPassengers().get(i);
+			passenger.removeVehicle();
+
+			float rot = this.getVisualRotationYInDegrees();
+			float x = Mth.sin(rot * Mth.DEG_TO_RAD);
+			float z = -Mth.cos(rot * Mth.DEG_TO_RAD);
+
+			if (throwBack) {
+				x *= -1;
+				z *= -1;
+			}
+
+			if (passenger instanceof LivingEntity)
+				((LivingEntity) passenger).knockback(1.0F, x, z);
+		}
+	}
+
+	private boolean canAnimationInterrupt() {
+		return !this.isKicking() && this.getMoveControl().getSpeedModifier() <= 1.2D;
+	}
+
 	@Override
 	public boolean canEatGrass() {
-		return !this.isKicking();
+		return this.canAnimationInterrupt();
+	}
+
+	@Override
+	public boolean canAttack(LivingEntity target) {
+		return (!this.isTamed() || !(target instanceof Player)) && super.canAttack(target);
+	}
+
+	@Override
+	public void stopBeingAngry() {
+		NeutralMob.super.stopBeingAngry();
+		this.setLastHurtByPlayer(null);
+	}
+
+	@Override
+	public void startPersistentAngerTimer() {
+		this.setRemainingPersistentAngerTime(PERSISTENT_ANGER_TIME.sample(this.random));
+	}
+
+	@Override
+	public void setRemainingPersistentAngerTime(int time) {
+		this.remainingPersistentAngerTime = time;
+	}
+
+	@Override
+	public int getRemainingPersistentAngerTime() {
+		return this.remainingPersistentAngerTime;
+	}
+
+	@Override
+	public void setPersistentAngerTarget(UUID target) {
+		this.persistentAngerTarget = target;
+	}
+
+	@Override
+	public UUID getPersistentAngerTarget() {
+		return this.persistentAngerTarget;
 	}
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		if (!this.isKicking())
+		if (this.canAnimationInterrupt())
 			super.getAmbientSound();
 		return SoundEvents.HORSE_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getAngrySound() {
-		super.getAngrySound();
+		if (this.canAnimationInterrupt())
+			super.getAngrySound();
 		return SoundEvents.HORSE_ANGRY;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		super.getDeathSound();
 		return SoundEvents.HORSE_DEATH;
 	}
 
 	@Override
-	@Nullable
 	protected SoundEvent getEatingSound() {
 		return SoundEvents.HORSE_EAT;
 	}
@@ -318,6 +428,14 @@ public class Zebra extends AbstractHorse {
 		if (!this.isKicking())
 			super.getHurtSound(source);
 		return SoundEvents.HORSE_HURT;
+	}
+
+	public void playKickingSound() {
+		this.playSound(this.getAmbientSound(), this.getSoundVolume(), this.getVoicePitch());
+	}
+
+	public void playAngrySound() {
+		this.playSound(this.getAngrySound(), this.getSoundVolume(), this.getVoicePitch());
 	}
 
 	@Override

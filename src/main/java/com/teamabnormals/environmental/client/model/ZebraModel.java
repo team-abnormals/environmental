@@ -237,8 +237,4 @@ public class ZebraModel<T extends Zebra> extends AgeableListModel<T> {
 		this.rightFrontBabyLeg.visible = isbaby;
 		this.leftFrontBabyLeg.visible = isbaby;
 	}
-
-	private static float interpolate(float min, float max, float progress) {
-		return 1F - Mth.square((progress - max) / (max - min));
-	}
 }

@@ -1,10 +1,13 @@
 package com.teamabnormals.environmental.core.other;
 
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.teamabnormals.blueprint.common.world.storage.tracking.IDataManager;
 import com.teamabnormals.blueprint.core.util.MathUtil;
 import com.teamabnormals.environmental.common.block.GiantLilyPadBlock;
 import com.teamabnormals.environmental.common.block.LargeLilyPadBlock;
+import com.teamabnormals.environmental.common.entity.ai.goal.HerdLandWanderGoal;
+import com.teamabnormals.environmental.common.entity.ai.goal.HerdWanderGoal;
 import com.teamabnormals.environmental.common.entity.ai.goal.HuntTruffleGoal;
 import com.teamabnormals.environmental.common.entity.animal.koi.Koi;
 import com.teamabnormals.environmental.common.entity.animal.slabfish.Slabfish;
@@ -17,6 +20,7 @@ import com.teamabnormals.environmental.core.other.tags.EnvironmentalBlockTags;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalEntityTypeTags;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalItemTags;
 import com.teamabnormals.environmental.core.registry.*;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
@@ -33,13 +37,14 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.ai.goal.GoalSelector;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.WrappedGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NonTameRandomTargetGoal;
-import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.Ocelot;
-import net.minecraft.world.entity.animal.Pig;
-import net.minecraft.world.entity.animal.Wolf;
+import net.minecraft.world.entity.animal.*;
+import net.minecraft.world.entity.animal.horse.*;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
@@ -81,13 +86,30 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
+import java.util.function.Function;
 
 @EventBusSubscriber(modid = Environmental.MOD_ID)
 public class EnvironmentalEvents {
+	private static final Map<String, Function<PathfinderMob, Goal>> HERD_ANIMAL_MAP = Util.make(Maps.newHashMap(), (map) -> {
+		map.put("minecraft:chicken", entity -> new HerdLandWanderGoal(entity, 1.0D, 4));
+		map.put("minecraft:cow", entity -> new HerdLandWanderGoal(entity, 1.0D, 4));
+		map.put("minecraft:mooshroom", entity -> new HerdLandWanderGoal(entity, 1.0D, 4));
+		map.put("minecraft:pig", entity -> new HerdLandWanderGoal(entity, 1.0D, 4));
+		map.put("minecraft:sheep", entity -> new HerdLandWanderGoal(entity, 1.0D, 4));
+		map.put("minecraft:llama", entity -> new HerdLandWanderGoal(entity, 0.7D, 4));
+		map.put("minecraft:trader_llama", entity -> new HerdLandWanderGoal(entity, 0.7D, 4));
+		map.put("minecraft:wolf", entity -> new HerdLandWanderGoal(entity, 1.0D, 4));
+		map.put("minecraft:horse", entity -> new HerdLandWanderGoal(entity, 0.7D, 6).setHerdPredicate(entity1 -> entity1 instanceof Horse || entity1 instanceof Mule));
+		map.put("minecraft:donkey", entity -> new HerdLandWanderGoal(entity, 0.7D, 3).setHerdPredicate(entity1 -> entity1 instanceof Donkey || entity1 instanceof Mule));
+		map.put("minecraft:mule", entity -> new HerdLandWanderGoal(entity, 0.7D, 3).setHerdPredicate(entity1 -> entity1 instanceof Horse || entity1 instanceof Donkey || entity1 instanceof Mule));
+		map.put("environmental:deer", entity -> new HerdLandWanderGoal(entity, 0.8D, 4));
+		map.put("environmental:reindeer", entity -> new HerdLandWanderGoal(entity, 0.8D, 4));
+		map.put("environmental:duck", entity -> new HerdWanderGoal(entity, 1.0D, 4));
+		map.put("environmental:yak", entity -> new HerdLandWanderGoal(entity, 1.0D, 4));
+		map.put("autumnity:turkey", entity -> new HerdLandWanderGoal(entity, 1.0D, 4));
+		map.put("buzzier_bees:moobloom", entity -> new HerdLandWanderGoal(entity, 1.0D, 4));
+	});
 
 	@SubscribeEvent
 	public static void onLivingSpawn(LivingSpawnEvent.CheckSpawn event) {
@@ -414,6 +436,15 @@ public class EnvironmentalEvents {
 		if (entity instanceof Pig pig && EnvironmentalConfig.COMMON.pigsHuntTruffles.get()) {
 			Set<WrappedGoal> goals = pig.goalSelector.availableGoals;
 			if (goals.stream().noneMatch((goal) -> goal.getGoal() instanceof HuntTruffleGoal)) pig.goalSelector.addGoal(2, new HuntTruffleGoal(pig));
+		}
+
+		String key = ForgeRegistries.ENTITY_TYPES.getKey(entity.getType()).toString();
+		if (HERD_ANIMAL_MAP.containsKey(key)) {
+			GoalSelector selector = ((PathfinderMob) entity).goalSelector;
+			selector.availableGoals.stream().filter(wrappedgoal -> wrappedgoal.getGoal() instanceof WaterAvoidingRandomStrollGoal).findFirst().ifPresent(wrappedgoal -> {
+				selector.removeGoal(wrappedgoal.getGoal());
+				selector.addGoal(wrappedgoal.getPriority(), HERD_ANIMAL_MAP.get(key).apply((PathfinderMob) entity));
+			});
 		}
 	}
 
