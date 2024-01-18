@@ -335,25 +335,6 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 		}
 	}
 
-	public void throwPassengers(boolean throwBack) {
-		for(int i = this.getPassengers().size() - 1; i >= 0; --i) {
-			Entity passenger = this.getPassengers().get(i);
-			passenger.removeVehicle();
-
-			float rot = this.getVisualRotationYInDegrees();
-			float x = Mth.sin(rot * Mth.DEG_TO_RAD);
-			float z = -Mth.cos(rot * Mth.DEG_TO_RAD);
-
-			if (throwBack) {
-				x *= -1;
-				z *= -1;
-			}
-
-			if (passenger instanceof LivingEntity)
-				((LivingEntity) passenger).knockback(1.0F, x, z);
-		}
-	}
-
 	private boolean canAnimationInterrupt() {
 		return !this.isKicking() && this.getMoveControl().getSpeedModifier() <= 1.2D;
 	}
