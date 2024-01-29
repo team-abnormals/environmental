@@ -4,9 +4,11 @@ import com.teamabnormals.environmental.common.damagesource.MountDamageSource;
 import com.teamabnormals.environmental.common.entity.ai.goal.HerdLandWanderGoal;
 import com.teamabnormals.environmental.common.entity.ai.goal.zebra.ZebraAttackGoal;
 import com.teamabnormals.environmental.common.entity.ai.goal.zebra.ZebraFleeGoal;
+import com.teamabnormals.environmental.common.entity.ai.goal.zebra.ZebraHurtByTargetGoal;
 import com.teamabnormals.environmental.common.entity.ai.goal.zebra.ZebraRunAroundLikeCrazyGoal;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalEntityTypeTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -31,7 +33,6 @@ import net.minecraft.world.entity.ai.goal.BreedGoal;
 import net.minecraft.world.entity.ai.goal.FollowParentGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
-import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
@@ -39,8 +40,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
+import javax.annotation.Nullable;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 import java.util.function.Predicate;
@@ -55,6 +61,8 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 	private static final UniformInt PERSISTENT_ANGER_TIME = TimeUtil.rangeOfSeconds(16, 32);
 	private int remainingPersistentAngerTime;
 	private UUID persistentAngerTarget;
+
+	private ZebraFleeGoal fleeGoal;
 
 	private int kickCounter = 20;
 
@@ -71,15 +79,16 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 
 	@Override
 	protected void registerGoals() {
-		this.goalSelector.addGoal(1, new ZebraFleeGoal(this, 1.6D));
-		this.goalSelector.addGoal(2, new ZebraRunAroundLikeCrazyGoal(this, 1.6D));
-		this.goalSelector.addGoal(3, new ZebraAttackGoal(this, 1.4D));
+		this.fleeGoal = new ZebraFleeGoal(this, 1.8D);
+		this.goalSelector.addGoal(1, new ZebraAttackGoal(this, 1.4D));
+		this.goalSelector.addGoal(2, this.fleeGoal);
+		this.goalSelector.addGoal(3, new ZebraRunAroundLikeCrazyGoal(this, 1.6D));
 		this.goalSelector.addGoal(4, new BreedGoal(this, 1.0D, AbstractHorse.class));
 		this.goalSelector.addGoal(5, new FollowParentGoal(this, 1.0D));
 		this.goalSelector.addGoal(6, new HerdLandWanderGoal(this, 0.7D, 8));
 		this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
 		this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
-		this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+		this.targetSelector.addGoal(1, new ZebraHurtByTargetGoal(this));
 		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, false, this::isAngryAt));
 		this.targetSelector.addGoal(3, new ResetUniversalAngerTargetGoal<>(this, false));
 		this.addBehaviourGoals();
@@ -111,7 +120,7 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
-		return AbstractHorse.createBaseHorseAttributes().add(Attributes.ATTACK_DAMAGE, 1.0D).add(Attributes.FOLLOW_RANGE, 8.0D);
+		return AbstractHorse.createBaseHorseAttributes().add(Attributes.ATTACK_DAMAGE, 1.0D).add(Attributes.ATTACK_KNOCKBACK, 1.0D).add(Attributes.FOLLOW_RANGE, 8.0D);
 	}
 
 	@Override
@@ -131,13 +140,18 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 						Vec3 attackAngleVector = living.position().subtract(this.position()).normalize();
 						attackAngleVector = new Vec3(attackAngleVector.x, 0.0D, attackAngleVector.z);
 						double angle = attackAngleVector.dot(Vec3.directionFromRotation(0.0F, this.getVisualRotationYInDegrees()).normalize());
+						boolean isfleeing = this.isFleeing() && !this.isImmobile() && !this.getNavigation().isDone();
 
-						if (rider != null && rider.zza > 0.0F && angle > 0.7D) {
-							shouldkick = true;
-							backkick = false;
-							break;
+						if (angle > 0.7D) {
+							if (isfleeing || (rider != null && rider.zza > 0.0F)) {
+								shouldkick = true;
+								backkick = false;
+								break;
+							}
 						} else if (angle < -0.7D) {
-							if (rider == null) {
+							if (isfleeing) {
+								shouldkick = true;
+							} else if (rider == null) {
 								if (!living.isDiscrete() && --this.kickCounter <= 0)
 									shouldkick = true;
 								else
@@ -183,6 +197,31 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 	}
 
 	@Override
+	public void setLastHurtByMob(@Nullable LivingEntity attacker) {
+		if (attacker != null && this.level instanceof ServerLevel) {
+			this.scareOthers(this.getRandom().nextInt(20) + 80, this.getRandom().nextFloat() * 360.0F);
+		}
+
+		super.setLastHurtByMob(attacker);
+	}
+
+	public void scareOthers(int fleeTime, float fleeDirection) {
+		List<Zebra> zebras = this.level.getEntitiesOfClass(Zebra.class, this.getBoundingBox().inflate(8.0D, 4.0D, 8.0D), zebra -> zebra != this && !zebra.isFleeing() && !zebra.isTamed() && zebra.getTarget() == null);
+		List<Zebra> closestzebras = zebras.stream().sorted(Comparator.comparingDouble(entity -> entity.distanceToSqr(this))).limit(3).toList();
+		for (Zebra zebra : closestzebras) {
+			zebra.getFleeGoal().trigger(fleeTime, fleeDirection);
+		}
+	}
+
+	public ZebraFleeGoal getFleeGoal() {
+		return this.fleeGoal;
+	}
+
+	public boolean isFleeing() {
+		return this.fleeGoal.running();
+	}
+
+	@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 		if (!this.isBaby()) {
@@ -206,7 +245,7 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 				return result;
 			}
 
-			if (!this.isTamed() && this.canAnimationInterrupt()) {
+			if (!this.isTamed() && this.canDoIdleAnimation()) {
 				this.makeMad();
 				return InteractionResult.sidedSuccess(this.level.isClientSide);
 			}
@@ -318,30 +357,31 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 				else
 					source = DamageSource.mobAttack(this);
 
-				int damage = (int)this.getAttributeValue(Attributes.ATTACK_DAMAGE);
+				float damage = (float)this.getAttributeValue(Attributes.ATTACK_DAMAGE);
 				if (backKick)
-					damage *= 2;
+					damage += 1.0F;
 
-				boolean flag = living.hurt(source, (float)damage);
+				boolean flag = living.hurt(source, damage);
 
 				if (flag) {
+					float knockback = (float)this.getAttributeValue(Attributes.ATTACK_KNOCKBACK);
 					this.doEnchantDamageEffects(this, living);
 					if (!backKick)
-						living.knockback(0.8F, x, z);
+						living.knockback(knockback * 0.8F, x, z);
 					else
-						living.knockback(1.5F, -x, -z);
+						living.knockback(knockback * 1.5F, -x, -z);
 				}
 			}
 		}
 	}
 
-	private boolean canAnimationInterrupt() {
-		return !this.isKicking() && this.getMoveControl().getSpeedModifier() <= 1.2D;
+	private boolean canDoIdleAnimation() {
+		return !this.isKicking() && this.getMoveControl().getSpeedModifier() <= 1.0D;
 	}
 
 	@Override
 	public boolean canEatGrass() {
-		return this.canAnimationInterrupt();
+		return this.canDoIdleAnimation();
 	}
 
 	@Override
@@ -382,14 +422,14 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		if (this.canAnimationInterrupt())
+		if (this.canDoIdleAnimation())
 			super.getAmbientSound();
 		return SoundEvents.HORSE_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getAngrySound() {
-		if (this.canAnimationInterrupt())
+		if (this.canDoIdleAnimation())
 			super.getAngrySound();
 		return SoundEvents.HORSE_ANGRY;
 	}
@@ -417,6 +457,30 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 
 	public void playAngrySound() {
 		this.playSound(this.getAngrySound(), this.getSoundVolume(), this.getVoicePitch());
+	}
+
+	@Override
+	protected void playStepSound(BlockPos pos, BlockState state) {
+		if (!state.getMaterial().isLiquid()) {
+			BlockState blockstate = this.level.getBlockState(pos.above());
+			SoundType soundtype = state.getSoundType(level, pos, this);
+			if (blockstate.is(Blocks.SNOW)) {
+				soundtype = blockstate.getSoundType(level, pos, this);
+			}
+
+			if ((this.isVehicle() || this.getMoveControl().getSpeedModifier() > 1.6D) && this.canGallop) {
+				++this.gallopSoundCounter;
+				if (this.gallopSoundCounter > 5 && this.gallopSoundCounter % 3 == 0) {
+					this.playGallopSound(soundtype);
+				} else if (this.gallopSoundCounter <= 5) {
+					this.playSound(SoundEvents.HORSE_STEP_WOOD, soundtype.getVolume() * 0.15F, soundtype.getPitch());
+				}
+			} else if (soundtype == SoundType.WOOD) {
+				this.playSound(SoundEvents.HORSE_STEP_WOOD, soundtype.getVolume() * 0.15F, soundtype.getPitch());
+			} else {
+				this.playSound(SoundEvents.HORSE_STEP, soundtype.getVolume() * 0.15F, soundtype.getPitch());
+			}
+		}
 	}
 
 	@Override
