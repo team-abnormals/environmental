@@ -54,8 +54,9 @@ public class TapirSniffForFloraGoal extends Goal {
     @Override
     public void stop() {
         if (this.foundPos != null && this.stopTime == 0) {
+            int time = (int) Math.sqrt(this.tapir.distanceToSqr(Vec3.atCenterOf(this.foundPos))) * 12;
             this.tapir.setFloraPos(this.foundPos);
-            this.tapir.setTrackingTime(1200);
+            this.tapir.setTrackingTime(Math.max(time, 200) + 100);
         } else {
             this.tapir.stopTracking();
         }
@@ -103,7 +104,7 @@ public class TapirSniffForFloraGoal extends Goal {
     }
 
     private void findFlora(BlockPos targetPos) {
-        BlockPos partnerpos = this.findNearestPartnerFlora();
+        BlockPos partnerpos = this.findNearestPartnersFlora();
         if (partnerpos != null)
             targetPos = partnerpos;
 
@@ -137,7 +138,7 @@ public class TapirSniffForFloraGoal extends Goal {
         return null;
     }
 
-    private BlockPos findNearestPartnerFlora() {
+    private BlockPos findNearestPartnersFlora() {
         List<Tapir> list = this.tapir.level.getNearbyEntities(Tapir.class, PARTNER_TARGETING, this.tapir, this.tapir.getBoundingBox().inflate(12.0D));
         Tapir partner = null;
         double d0 = Double.MAX_VALUE;

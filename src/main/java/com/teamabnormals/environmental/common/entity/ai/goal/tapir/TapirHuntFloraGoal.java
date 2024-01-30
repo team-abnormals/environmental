@@ -103,7 +103,7 @@ public class TapirHuntFloraGoal extends Goal {
 			}
 		} else {
 			if (--this.delayCounter <= 0) {
-				this.delayCounter = this.adjustedTickDelay(10);
+				this.delayCounter = this.adjustedTickDelay(5);
 				this.moveTo(florapos);
 				this.tapir.setRunning(true);
 			}

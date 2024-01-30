@@ -256,9 +256,9 @@ public class Tapir extends Animal {
 
         this.grazeAmount0 = this.grazeAmount;
         if (this.isGrazing())
-            this.grazeAmount = Math.min(1.0F, this.grazeAmount + 0.1F);
+            this.grazeAmount = Math.min(1.0F, this.grazeAmount + 0.15F);
         else
-            this.grazeAmount = Math.max(0.0F, this.grazeAmount - 0.1F);
+            this.grazeAmount = Math.max(0.0F, this.grazeAmount - 0.15F);
 
 		this.headShakeAnim0 = this.headShakeAnim;
 		if (this.headShakeAnim > 0)
@@ -283,13 +283,14 @@ public class Tapir extends Animal {
 
 		if (!this.level.isClientSide()) {
             if (this.getTrackingTime() > 0 && !this.isGrazing()) {
-                this.setTrackingTime(this.getTrackingTime() - 1);
+				if (this.isLeashed())
+                	this.setTrackingTime(this.getTrackingTime() - 3);
+				else
+					this.setTrackingTime(this.getTrackingTime() - 1);
+
                 if (this.getTrackingTime() == 0)
                     this.stopTracking();
             }
-
-			if (this.isLeashed() && this.isTrackingFlora())
-				this.stopTracking();
 
 			if (this.isSniffing()) {
 				if (this.sniffTimer-- <= 0) {
