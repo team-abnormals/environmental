@@ -3,6 +3,7 @@ package com.teamabnormals.environmental.common.entity.ai.goal.tapir;
 import com.teamabnormals.environmental.common.entity.animal.Tapir;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
@@ -21,6 +22,8 @@ public class TapirSniffForFloraGoal extends Goal {
     private int walkWait;
     private int sniffTime;
     private int stopTime;
+    private int outOfWaterTime;
+    private int delayCounter;
     private BlockPos origin;
     private BlockPos foundPos;
 
@@ -45,21 +48,25 @@ public class TapirSniffForFloraGoal extends Goal {
         this.setWalkWait();
         this.sniffTime = this.adjustedTickDelay(300);
         this.stopTime = 0;
+        this.outOfWaterTime = 0;
+        this.delayCounter = 0;
         this.foundPos = null;
         this.origin = this.tapir.blockPosition();
-        this.tapir.setSniffing(true);
         this.pathNav.stop();
     }
 
     @Override
     public void stop() {
-        if (this.foundPos != null && this.stopTime == 0) {
-            int time = (int) Math.sqrt(this.tapir.distanceToSqr(Vec3.atCenterOf(this.foundPos))) * 12;
-            this.tapir.setFloraPos(this.foundPos);
-            this.tapir.setTrackingTime(Math.max(time, 200) + 100);
-        } else {
-            this.tapir.stopTracking();
+        if (this.sniffTime <= 0) {
+            if (this.foundPos != null && this.stopTime == 0) {
+                int time = (int) Math.sqrt(this.tapir.distanceToSqr(Vec3.atCenterOf(this.foundPos))) * 12;
+                this.tapir.setFloraPos(this.foundPos);
+                this.tapir.setTrackingTime(Math.max(time, 200) + 100);
+            } else {
+                this.tapir.stopTracking();
+            }
         }
+
         this.tapir.setSniffing(false);
         this.pathNav.stop();
     }
@@ -71,6 +78,21 @@ public class TapirSniffForFloraGoal extends Goal {
             return;
         }
 
+        if (this.tapir.isInWaterOrBubble()) {
+            this.tapir.setSniffing(false);
+            this.outOfWaterTime = this.adjustedTickDelay(10);
+            if (this.pathNav.isDone() && --this.delayCounter <= 0) {
+                this.delayCounter = this.adjustedTickDelay(20);
+                Vec3 vec3 = LandRandomPos.getPos(this.tapir, 15, 7);
+                if (vec3 != null && !this.tapir.getLevel().getBlockState(new BlockPos(vec3)).getFluidState().is(FluidTags.WATER)) {
+                    this.pathNav.moveTo(vec3.x(), vec3.y(), vec3.z(), 1.0D);
+                }
+            }
+            return;
+        }
+
+        this.tapir.setSniffing(true);
+
         if (--this.sniffTime <= 0) {
             for (int i = 0; i < 16; ++i) {
                 BlockPos targetpos = this.findNearestFlora(i);
@@ -80,12 +102,12 @@ public class TapirSniffForFloraGoal extends Goal {
                 }
             }
 
+            this.tapir.setSniffing(false);
             this.tapir.level.broadcastEntityEvent(this.tapir, (byte) 5);
             this.tapir.level.broadcastEntityEvent(this.tapir, (byte) 6);
             this.tapir.playSound(SoundEvents.PIG_DEATH);
-            this.tapir.setSniffing(false);
             this.stopTime = this.adjustedTickDelay(20);
-        } else {
+        } else if (--this.outOfWaterTime <= 0) {
             if (this.sniffTime <= 129) {
                 BlockPos targetpos = this.findNearestFlora(128 - this.sniffTime + 1);
                 if (targetpos != null) {

@@ -54,6 +54,7 @@ public class Tapir extends Animal {
 	private static final EntityDataAccessor<Optional<BlockPos>> FLORA_POS = SynchedEntityData.defineId(Tapir.class, EntityDataSerializers.OPTIONAL_BLOCK_POS);
 	private static final EntityDataAccessor<Optional<BlockState>> FLORA_STATE = SynchedEntityData.defineId(Tapir.class, EntityDataSerializers.BLOCK_STATE);
 
+	private int forgetFloraTime;
 	private boolean running;
 
 	private int sniffTimer;
@@ -232,13 +233,17 @@ public class Tapir extends Animal {
 	@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
-		if (stack.getItem() instanceof BlockItem blockitem && !this.isBaby() && this.isFood(stack) && !this.hasFloraState()) {
-			if (!this.level.isClientSide()) {
-				this.setFloraState(blockitem.getBlock().defaultBlockState());
-				this.loveCause = player.getUUID();
-				this.level.broadcastEntityEvent(this, (byte) 4);
+		if (stack.getItem() instanceof BlockItem blockitem && !this.isBaby() && this.isFood(stack)) {
+			if (!this.hasFloraState()) {
+				if (!this.level.isClientSide()) {
+					this.setFloraState(blockitem.getBlock().defaultBlockState());
+					this.loveCause = player.getUUID();
+					this.forgetFloraTime = 300;
+					this.level.broadcastEntityEvent(this, (byte) 4);
+				}
+				return InteractionResult.sidedSuccess(this.level.isClientSide);
 			}
-			return InteractionResult.sidedSuccess(this.level.isClientSide);
+			return InteractionResult.PASS;
 		}
 
 		return super.mobInteract(player, hand);
@@ -265,7 +270,7 @@ public class Tapir extends Animal {
 			this.headShakeAnim--;
 
 		this.snoutRaiseAmount0 = this.snoutRaiseAmount;
-		if (this.isBeingTempted() || this.isInWater())
+		if (this.isBeingTempted())
 			this.snoutRaiseAmount = Math.min(1.0F, this.snoutRaiseAmount + 0.25F);
 		else
 			this.snoutRaiseAmount = Math.max(0.0F, this.snoutRaiseAmount - 0.25F);
@@ -282,6 +287,12 @@ public class Tapir extends Animal {
 		super.aiStep();
 
 		if (!this.level.isClientSide()) {
+			if (!this.isTrackingFlora() && !this.isSniffing() && this.forgetFloraTime > 0) {
+				this.forgetFloraTime--;
+				if (this.forgetFloraTime == 0)
+					this.stopTracking();
+			}
+
             if (this.getTrackingTime() > 0 && !this.isGrazing()) {
 				if (this.isLeashed())
                 	this.setTrackingTime(this.getTrackingTime() - 3);
@@ -355,7 +366,7 @@ public class Tapir extends Animal {
 
 	@Override
 	protected float getWaterSlowDown() {
-		return 0.96F;
+		return 0.98F;
 	}
 
 	@Override
