@@ -68,7 +68,7 @@ public class PineconeGolemGrabSaplingGoal extends Goal {
     @Override
     public void tick() {
         if (--this.delayCounter <= 0) {
-            this.delayCounter = this.adjustedTickDelay(10);
+            this.delayCounter = this.adjustedTickDelay(20);
             Path path = this.golem.getNavigation().createPath(this.itemEntity, 0);
             if (path != null) {
                 this.golem.getNavigation().moveTo(path, this.moveSpeed);

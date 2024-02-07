@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -18,6 +19,7 @@ import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.animal.AbstractGolem;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -76,6 +78,27 @@ public class PineconeGolem extends AbstractGolem {
     @Override
     public int getMaxHeadYRot() {
         return 5;
+    }
+
+    @Override
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        ItemStack stack = player.getItemInHand(hand);
+        ItemStack stack1 = this.getMainHandItem();
+        if (stack1.isEmpty()) {
+            if (stack.is(ItemTags.SAPLINGS)) {
+                ItemStack stack2 = stack.copy();
+                stack2.setCount(1);
+                this.setItemInHand(InteractionHand.MAIN_HAND, stack2);
+                if (!player.getAbilities().instabuild)
+                    stack.shrink(1);
+                return InteractionResult.SUCCESS;
+            }
+        } else if (hand == InteractionHand.MAIN_HAND && stack.isEmpty()) {
+            this.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
+            player.addItem(stack1);
+            return InteractionResult.SUCCESS;
+        }
+        return super.mobInteract(player, hand);
     }
 
     @Override
