@@ -3,6 +3,7 @@ package com.teamabnormals.environmental.common.entity.animal;
 import com.teamabnormals.environmental.common.entity.ai.goal.pineconegolem.PineconeGolemGrabSaplingGoal;
 import com.teamabnormals.environmental.common.entity.ai.goal.pineconegolem.PineconeGolemLookForSpotGoal;
 import com.teamabnormals.environmental.common.entity.ai.goal.pineconegolem.PineconeGolemPlantSaplingGoal;
+import com.teamabnormals.environmental.common.entity.ai.goal.pineconegolem.PineconeGolemTemptGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.ItemTags;
@@ -30,12 +31,13 @@ public class PineconeGolem extends AbstractGolem {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(0, new PineconeGolemPlantSaplingGoal(this, 1.0D));
-        this.goalSelector.addGoal(1, new PineconeGolemLookForSpotGoal(this, 1.0D));
-        this.goalSelector.addGoal(2, new PineconeGolemGrabSaplingGoal(this, 1.0D));
-        this.goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 1.0D));
-        this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 6.0F));
-        this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(0, new PineconeGolemTemptGoal(this, 1.0D));
+        this.goalSelector.addGoal(1, new PineconeGolemPlantSaplingGoal(this, 1.0D));
+        this.goalSelector.addGoal(2, new PineconeGolemLookForSpotGoal(this, 1.0D));
+        this.goalSelector.addGoal(3, new PineconeGolemGrabSaplingGoal(this, 1.0D));
+        this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 1.0D));
+        this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
     }
 
     @Override
