@@ -5,6 +5,7 @@ import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Vec3i;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -27,6 +28,8 @@ import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.phys.BlockHitResult;
 
 import java.util.List;
+import java.util.Queue;
+import java.util.Stack;
 
 public class PineconeBlock extends FallingBlock implements BonemealableBlock {
 
@@ -70,9 +73,6 @@ public class PineconeBlock extends FallingBlock implements BonemealableBlock {
 			List<BlockPos> list = Lists.newArrayList();
 			addPossibleSaplingPositionsFromNeighbors(4, 4, 4, list, level, pos.offset(-4, -4, -4), new BlockPos.MutableBlockPos(), new boolean[9][9][9]);
 
-			if (!list.isEmpty()) {
-				this.spawnBoneMealParticles(level, this.defaultBlockState(), pos);
-			}
 			for (int i = 0; i < 12; i++) {
 				if (list.isEmpty())
 					break;
@@ -80,6 +80,7 @@ public class PineconeBlock extends FallingBlock implements BonemealableBlock {
 				BlockPos blockpos = list.remove(random.nextInt(list.size()));
 				if (level.isAreaLoaded(blockpos, 1) && level.getMaxLocalRawBrightness(blockpos.above()) >= 9 && hasSpaceForTree(blockpos, level, false)) {
 					level.setBlockAndUpdate(blockpos, sapling);
+					this.spawnBoneMealParticles(level, this.defaultBlockState(), pos);
 					this.spawnBoneMealParticles(level, sapling, blockpos);
 					return;
 				}
@@ -133,7 +134,11 @@ public class PineconeBlock extends FallingBlock implements BonemealableBlock {
 		int amount = 15;
 		double d0 = 0.5D;
 		double d1;
-		if (state.isSolidRender(level, pos)) {
+		if (state.is(EnvironmentalBlocks.PINECONE.get())) {
+			amount *= 2;
+			d0 = 4.0D;
+			d1 = 1.5D;
+		} else if (state.isSolidRender(level, pos)) {
 			pos = pos.above();
 			amount *= 3;
 			d0 = 3.0D;
