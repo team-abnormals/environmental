@@ -2,10 +2,7 @@ package com.teamabnormals.environmental.common.entity.animal;
 
 import com.teamabnormals.environmental.common.damagesource.MountDamageSource;
 import com.teamabnormals.environmental.common.entity.ai.goal.HerdLandWanderGoal;
-import com.teamabnormals.environmental.common.entity.ai.goal.zebra.ZebraAttackGoal;
-import com.teamabnormals.environmental.common.entity.ai.goal.zebra.ZebraFleeGoal;
-import com.teamabnormals.environmental.common.entity.ai.goal.zebra.ZebraHurtByTargetGoal;
-import com.teamabnormals.environmental.common.entity.ai.goal.zebra.ZebraRunAroundLikeCrazyGoal;
+import com.teamabnormals.environmental.common.entity.ai.goal.zebra.*;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalEntityTypeTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import net.minecraft.core.BlockPos;
@@ -29,16 +26,14 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.BreedGoal;
-import net.minecraft.world.entity.ai.goal.FollowParentGoal;
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
@@ -92,6 +87,12 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, false, this::isAngryAt));
 		this.targetSelector.addGoal(3, new ResetUniversalAngerTargetGoal<>(this, false));
 		this.addBehaviourGoals();
+	}
+
+	@Override
+	protected void addBehaviourGoals() {
+		this.goalSelector.addGoal(0, new FloatGoal(this));
+		this.goalSelector.addGoal(3, new ZebraTemptGoal(this, 1.25D, Ingredient.of(Items.GOLDEN_CARROT, Items.GOLDEN_APPLE, Items.ENCHANTED_GOLDEN_APPLE)));
 	}
 
 	@Override
