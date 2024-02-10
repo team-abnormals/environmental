@@ -203,7 +203,7 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 		if (attacker != null && this.level instanceof ServerLevel) {
 			int fleetime = this.getRandom().nextInt(60) + 160;
 			float fleedirection = this.getRandom().nextFloat() * 360.0F;
-			this.fleeGoal.trigger(fleetime, fleedirection);
+			this.fleeGoal.trigger(fleetime, fleedirection, true);
 			this.alertOthers(fleetime, fleedirection);
 		}
 
@@ -214,7 +214,7 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 		List<Zebra> zebras = this.level.getEntitiesOfClass(Zebra.class, this.getBoundingBox().inflate(12.0D, 4.0D, 12.0D), zebra -> zebra != this && !zebra.isFleeing() && !zebra.isTamed() && zebra.getTarget() == null);
 		List<Zebra> closestzebras = zebras.stream().sorted(Comparator.comparingDouble(entity -> entity.distanceToSqr(this))).limit(3).toList();
 		for (Zebra zebra : closestzebras) {
-			zebra.getFleeGoal().trigger(fleeTime + this.getRandom().nextInt(20) - 20, fleeDirection);
+			zebra.getFleeGoal().trigger(fleeTime + this.getRandom().nextInt(20) - 20, fleeDirection, true);
 		}
 	}
 
@@ -276,6 +276,16 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 		} else {
 			return InteractionResult.PASS;
 		}
+	}
+
+	@Override
+	public InteractionResult fedFood(Player player, ItemStack stack) {
+		if (!this.isTamed() && !this.level.isClientSide) {
+			int fleetime = this.getRandom().nextInt(20) + 100;
+			float fleedirection = this.getRandom().nextFloat() * 360.0F;
+			this.fleeGoal.trigger(fleetime, fleedirection, false);
+		}
+		return super.fedFood(player, stack);
 	}
 
 	public boolean isKicking() {

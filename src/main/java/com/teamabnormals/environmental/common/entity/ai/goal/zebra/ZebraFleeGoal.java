@@ -17,6 +17,7 @@ public class ZebraFleeGoal extends Goal {
 
 	private boolean trigger;
 	private boolean running;
+	private boolean alertOthers;
 	private int fleeTime;
 	private int stuckTime;
 	private int alertOthersWait;
@@ -44,12 +45,13 @@ public class ZebraFleeGoal extends Goal {
 	public void start() {
 		this.running = true;
 		this.trigger = false;
-		this.alertOthersWait = this.adjustedTickDelay(10);
+		this.alertOthersWait = this.alertOthers ? this.adjustedTickDelay(10) : 0;
 		this.announceDirChangeWait = 0;
 		this.stuckTime = 0;
 		this.pathNav.stop();
 		this.zebra.setEating(false);
 		this.zebra.setStanding(false);
+		this.zebra.playAmbientSound();
 	}
 
 	@Override
@@ -106,10 +108,11 @@ public class ZebraFleeGoal extends Goal {
 		return this.running;
 	}
 
-	public void trigger(int fleeTime, float fleeDirection) {
+	public void trigger(int fleeTime, float fleeDirection, boolean alertOthers) {
 		this.trigger = true;
 		this.fleeTime = fleeTime;
 		this.fleeDirection = fleeDirection;
+		this.alertOthers = alertOthers;
 	}
 
 	public void changeDirection(float fleeDirection) {
