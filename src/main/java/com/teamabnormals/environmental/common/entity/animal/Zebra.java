@@ -81,8 +81,9 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 		this.goalSelector.addGoal(4, new BreedGoal(this, 1.0D, AbstractHorse.class));
 		this.goalSelector.addGoal(5, new FollowParentGoal(this, 1.0D));
 		this.goalSelector.addGoal(6, new HerdLandWanderGoal(this, 0.7D, 1.2D, 16));
-		this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
-		this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
+		this.goalSelector.addGoal(7, new ZebraAvoidEntityGoal<>(this, Player.class, 8.0F, 1.0D, 1.2D));
+		this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 6.0F));
+		this.goalSelector.addGoal(9, new RandomLookAroundGoal(this));
 		this.targetSelector.addGoal(1, new ZebraHurtByTargetGoal(this));
 		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, false, this::isAngryAt));
 		this.targetSelector.addGoal(3, new ResetUniversalAngerTargetGoal<>(this, false));
