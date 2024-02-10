@@ -60,7 +60,7 @@ public class TasselflowerPatchFeature extends Feature<NoneFeatureConfiguration> 
 	}
 
 	private static boolean isNearWater(WorldGenLevel level, BlockPos pos) {
-		for (BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-6, -4, -6), pos.offset(6, 0, 6))) {
+		for (BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-4, -4, -4), pos.offset(4, 0, 4))) {
 			FluidState ifluidstate = level.getFluidState(blockpos);
 			if (ifluidstate.is(FluidTags.WATER) && ifluidstate.getAmount() == 8)
 				return true;
