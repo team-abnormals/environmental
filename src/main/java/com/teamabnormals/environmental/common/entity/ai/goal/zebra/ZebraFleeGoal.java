@@ -2,6 +2,7 @@ package com.teamabnormals.environmental.common.entity.ai.goal.zebra;
 
 import com.teamabnormals.environmental.common.entity.animal.Zebra;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.util.DefaultRandomPos;
@@ -17,7 +18,9 @@ public class ZebraFleeGoal extends Goal {
 	private boolean trigger;
 	private boolean running;
 	private int fleeTime;
-	private int scareOthersWait;
+	private int stuckTime;
+	private int alertOthersWait;
+	private int announceDirChangeWait;
 	private float fleeDirection;
 
 	public ZebraFleeGoal(Zebra zebra, double speed) {
@@ -41,8 +44,12 @@ public class ZebraFleeGoal extends Goal {
 	public void start() {
 		this.running = true;
 		this.trigger = false;
-		this.scareOthersWait = this.adjustedTickDelay(10);
+		this.alertOthersWait = this.adjustedTickDelay(10);
+		this.announceDirChangeWait = 0;
+		this.stuckTime = 0;
 		this.pathNav.stop();
+		this.zebra.setEating(false);
+		this.zebra.setStanding(false);
 	}
 
 	@Override
@@ -52,10 +59,18 @@ public class ZebraFleeGoal extends Goal {
 
 	@Override
 	public void tick() {
-		if (this.scareOthersWait > 0) {
-			this.scareOthersWait--;
-			if (this.scareOthersWait == 0) {
-				this.zebra.scareOthers(this.fleeTime, this.fleeDirection);
+		if (this.alertOthersWait > 0) {
+			this.alertOthersWait--;
+			if (this.alertOthersWait == 0) {
+				this.zebra.alertOthers(this.fleeTime, this.fleeDirection);
+				this.zebra.playAmbientSound();
+			}
+		}
+
+		if (this.announceDirChangeWait > 0) {
+			this.announceDirChangeWait--;
+			if (this.announceDirChangeWait == 0) {
+				this.zebra.announceDirectionChange(this.fleeDirection);
 				this.zebra.playAmbientSound();
 			}
 		}
@@ -66,9 +81,23 @@ public class ZebraFleeGoal extends Goal {
 			for (int i = 0; i < 3; i++) {
 				Vec3 vec31 = DefaultRandomPos.getPosTowards(this.zebra, 16, 7, vec3, Math.PI / 6.0D);
 				if (vec31 != null) {
-					this.pathNav.moveTo(vec31.x, vec31.y, vec31.z, this.speedModifier);
+					double d0 = this.speedModifier;
+					double d1 = this.zebra.getAttribute(Attributes.MOVEMENT_SPEED).getBaseValue();
+					if (d1 < 0.225D && d1 != 0.0D)
+						d0 = 0.4D / d1;
+					this.pathNav.moveTo(vec31.x, vec31.y, vec31.z, d0);
+					this.stuckTime = 0;
 					return;
 				}
+			}
+			if (++this.stuckTime > this.adjustedTickDelay(30)) {
+				int i = this.zebra.getRandom().nextInt(4) - 2;
+				if (i >= 0)
+					i++;
+
+				this.fleeDirection = Mth.wrapDegrees(this.fleeDirection + i * 35.0F);
+				this.zebra.announceDirectionChange(this.fleeDirection);
+				this.zebra.playAmbientSound();
 			}
 		}
 	}
@@ -81,5 +110,13 @@ public class ZebraFleeGoal extends Goal {
 		this.trigger = true;
 		this.fleeTime = fleeTime;
 		this.fleeDirection = fleeDirection;
+	}
+
+	public void changeDirection(float fleeDirection) {
+		if (fleeDirection != this.fleeDirection) {
+			this.fleeDirection = fleeDirection;
+			this.announceDirChangeWait = this.adjustedTickDelay(10);
+			this.stuckTime = 0;
+		}
 	}
 }

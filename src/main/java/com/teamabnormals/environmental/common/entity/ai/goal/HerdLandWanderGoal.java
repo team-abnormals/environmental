@@ -8,12 +8,12 @@ import net.minecraft.world.phys.Vec3;
 public class HerdLandWanderGoal extends HerdWanderGoal {
 	protected final float probability;
 
-	public HerdLandWanderGoal(PathfinderMob mob, double speed, int herdSize) {
-		this(mob, speed, 0.001F, herdSize);
+	public HerdLandWanderGoal(PathfinderMob mob, double speed, double speedFar, int herdSize) {
+		this(mob, speed, speedFar, 0.001F, herdSize);
 	}
 
-	public HerdLandWanderGoal(PathfinderMob mob, double speed, float probability, int herdSize) {
-		super(mob, speed, herdSize);
+	public HerdLandWanderGoal(PathfinderMob mob, double speed, double speedFar, float probability, int herdSize) {
+		super(mob, speed, speedFar, herdSize);
 		this.probability = probability;
 	}
 

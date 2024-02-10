@@ -13,20 +13,25 @@ import java.util.function.Predicate;
 
 public class HerdWanderGoal extends RandomStrollGoal {
 	protected Predicate<PathfinderMob> herdPredicate = this.defaultHerdPredicate();
+	protected double speedModifierFar;
 	protected int preferredHerdSize;
+	protected boolean isHerdFar;
 
-	public HerdWanderGoal(PathfinderMob mob, double speed, int herdSize) {
+	public HerdWanderGoal(PathfinderMob mob, double speed, double speedFar, int herdSize) {
 		super(mob, speed);
+		this.speedModifierFar = speedFar;
 		this.preferredHerdSize = herdSize;
 	}
 
-	public HerdWanderGoal(PathfinderMob mob, double speed, int interval, int herdSize) {
+	public HerdWanderGoal(PathfinderMob mob, double speed, double speedFar, int interval, int herdSize) {
 		super(mob, speed, interval);
+		this.speedModifierFar = speedFar;
 		this.preferredHerdSize = herdSize;
 	}
 
-	public HerdWanderGoal(PathfinderMob mob, double speed, int interval, boolean checkNoActionTime, int herdSize) {
+	public HerdWanderGoal(PathfinderMob mob, double speed, double speedFar, int interval, boolean checkNoActionTime, int herdSize) {
 		super(mob, speed, interval, checkNoActionTime);
+		this.speedModifierFar = speedFar;
 		this.preferredHerdSize = herdSize;
 	}
 
@@ -62,14 +67,21 @@ public class HerdWanderGoal extends RandomStrollGoal {
 					int mindist = Math.max(maxdist - 4, 1);
 					for (int i = 0; i < 8; i++) {
 						Vec3 pos = DefaultRandomPos.getPosTowards(this.mob, maxdist, mindist, herdcenter, Math.PI / 2.0D);
-						if (pos != null)
+						if (pos != null) {
+							this.isHerdFar = herddist > 196.0D;
 							return pos;
+						}
 					}
 				}
 			}
 		}
 
 		return this.randomPosition();
+	}
+
+	@Override
+	public void start() {
+		this.mob.getNavigation().moveTo(this.wantedX, this.wantedY, this.wantedZ, this.isHerdFar ? this.speedModifierFar : this.speedModifier);
 	}
 
 	public HerdWanderGoal setHerdPredicate(Predicate<PathfinderMob> predicate) {
