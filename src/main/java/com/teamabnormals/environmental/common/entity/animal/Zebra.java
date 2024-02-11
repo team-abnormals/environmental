@@ -211,7 +211,7 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 	}
 
 	public void alertOthers(int fleeTime, float fleeDirection) {
-		List<Zebra> zebras = this.level.getEntitiesOfClass(Zebra.class, this.getBoundingBox().inflate(12.0D, 4.0D, 12.0D), zebra -> zebra != this && !zebra.isFleeing() && !zebra.isTamed() && zebra.getTarget() == null);
+		List<Zebra> zebras = this.level.getEntitiesOfClass(Zebra.class, this.getBoundingBox().inflate(8.0D, 4.0D, 8.0D), zebra -> zebra != this && !zebra.isFleeing() && !zebra.isTamed() && zebra.getTarget() == null);
 		List<Zebra> closestzebras = zebras.stream().sorted(Comparator.comparingDouble(entity -> entity.distanceToSqr(this))).limit(3).toList();
 		for (Zebra zebra : closestzebras) {
 			zebra.getFleeGoal().trigger(fleeTime + this.getRandom().nextInt(20) - 20, fleeDirection, true);
@@ -219,7 +219,7 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 	}
 
 	public void announceDirectionChange(float fleeDirection) {
-		List<Zebra> zebras = this.level.getEntitiesOfClass(Zebra.class, this.getBoundingBox().inflate(12.0D, 4.0D, 12.0D), zebra -> zebra != this && zebra.isFleeing());
+		List<Zebra> zebras = this.level.getEntitiesOfClass(Zebra.class, this.getBoundingBox().inflate(8.0D, 4.0D, 8.0D), zebra -> zebra != this && zebra.isFleeing());
 		List<Zebra> closestzebras = zebras.stream().sorted(Comparator.comparingDouble(entity -> entity.distanceToSqr(this))).limit(3).toList();
 		for (Zebra zebra : closestzebras) {
 			zebra.getFleeGoal().changeDirection(fleeDirection);
@@ -396,6 +396,13 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 				}
 			}
 		}
+	}
+
+	@Override
+	public void setLeashedTo(Entity entity, boolean broadcast) {
+		super.setLeashedTo(entity, broadcast);
+		if (entity instanceof LivingEntity)
+			this.setTarget((LivingEntity) entity);
 	}
 
 	private boolean canDoIdleAnimation() {
