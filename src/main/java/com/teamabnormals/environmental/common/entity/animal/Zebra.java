@@ -134,7 +134,7 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 
 		if (this.isEffectiveAi() && this.isAlive()) {
 			boolean resetkickcounter = true;
-			if (!this.isKicking()) {
+			if (!this.isBaby() && !this.isKicking()) {
 				LivingEntity rider = this.getControllingPassenger();
 				if (!this.isStanding()) {
 					List<LivingEntity> nearby = this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.9F), this.kickablePredicate);
