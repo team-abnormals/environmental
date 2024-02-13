@@ -26,7 +26,10 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.BreedGoal;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
@@ -79,7 +82,7 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 		this.goalSelector.addGoal(2, this.fleeGoal);
 		this.goalSelector.addGoal(3, new ZebraRunAroundLikeCrazyGoal(this, 1.6D));
 		this.goalSelector.addGoal(4, new BreedGoal(this, 1.0D, AbstractHorse.class));
-		this.goalSelector.addGoal(5, new FollowParentGoal(this, 1.0D));
+		this.goalSelector.addGoal(5, new ZebraFollowParentGoal(this, 1.0D));
 		this.goalSelector.addGoal(6, new HerdLandWanderGoal(this, 0.7D, 1.2D, 16));
 		this.goalSelector.addGoal(7, new ZebraAvoidEntityGoal<>(this, Player.class, 8.0F, 1.0D, 1.2D));
 		this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 6.0F));
@@ -201,29 +204,17 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 	@Override
 	public void setLastHurtByMob(@Nullable LivingEntity attacker) {
 		if (attacker != null && this.level instanceof ServerLevel) {
-			int fleetime = this.getRandom().nextInt(60) + 160;
+			int fleetime = this.getRandom().nextInt(40) + 100;
 			float fleedirection = this.getRandom().nextFloat() * 360.0F;
-			this.fleeGoal.trigger(fleetime, fleedirection, true);
-			this.alertOthers(fleetime, fleedirection);
-		}
 
+			List<Zebra> zebras = this.level.getEntitiesOfClass(Zebra.class, this.getBoundingBox().inflate(10.0D, 4.0D, 10.0D), zebra -> zebra != this && !zebra.isFleeing() && !zebra.isTamed() && zebra.getTarget() == null)
+					.stream().sorted(Comparator.comparingDouble(entity -> entity.distanceToSqr(this))).limit(3).toList();
+			for (Zebra zebra : zebras)
+				zebra.getFleeGoal().trigger(fleetime, fleedirection);
+
+			this.fleeGoal.trigger(fleetime, fleedirection);
+		}
 		super.setLastHurtByMob(attacker);
-	}
-
-	public void alertOthers(int fleeTime, float fleeDirection) {
-		List<Zebra> zebras = this.level.getEntitiesOfClass(Zebra.class, this.getBoundingBox().inflate(8.0D, 4.0D, 8.0D), zebra -> zebra != this && !zebra.isFleeing() && !zebra.isTamed() && zebra.getTarget() == null);
-		List<Zebra> closestzebras = zebras.stream().sorted(Comparator.comparingDouble(entity -> entity.distanceToSqr(this))).limit(3).toList();
-		for (Zebra zebra : closestzebras) {
-			zebra.getFleeGoal().trigger(fleeTime + this.getRandom().nextInt(20) - 20, fleeDirection, true);
-		}
-	}
-
-	public void announceDirectionChange(float fleeDirection) {
-		List<Zebra> zebras = this.level.getEntitiesOfClass(Zebra.class, this.getBoundingBox().inflate(8.0D, 4.0D, 8.0D), zebra -> zebra != this && zebra.isFleeing());
-		List<Zebra> closestzebras = zebras.stream().sorted(Comparator.comparingDouble(entity -> entity.distanceToSqr(this))).limit(3).toList();
-		for (Zebra zebra : closestzebras) {
-			zebra.getFleeGoal().changeDirection(fleeDirection);
-		}
 	}
 
 	public ZebraFleeGoal getFleeGoal() {
@@ -280,11 +271,8 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 
 	@Override
 	public InteractionResult fedFood(Player player, ItemStack stack) {
-		if (!this.isTamed() && !this.level.isClientSide) {
-			int fleetime = this.getRandom().nextInt(20) + 100;
-			float fleedirection = this.getRandom().nextFloat() * 360.0F;
-			this.fleeGoal.trigger(fleetime, fleedirection, false);
-		}
+		if (!this.isTamed() && !this.level.isClientSide)
+			this.fleeGoal.trigger(this.getRandom().nextInt(20) + 100, this.getRandom().nextFloat() * 360.0F);
 		return super.fedFood(player, stack);
 	}
 
