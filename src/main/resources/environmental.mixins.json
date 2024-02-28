@@ -11,6 +11,7 @@
     "BlockMixin",
     "CarvedPumpkinBlockMixin",
     "DuckMixin",
+    "GrassBlockMixin",
     "LeavesBlockMixin",
     "MobMixin",
     "MoveControlMixin",
