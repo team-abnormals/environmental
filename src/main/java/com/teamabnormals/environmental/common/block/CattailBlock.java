@@ -17,6 +17,8 @@ import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -121,7 +123,7 @@ public class CattailBlock extends BushBlock implements SimpleWaterloggedBlock, B
 
 	@Override
 	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-		if (!state.getValue(FLUFFY) && !state.getValue(WATERLOGGED) && ForgeHooks.onCropsGrowPre(level, pos, state, random.nextDouble() < 0.3D)) {
+		if (!state.getValue(FLUFFY) && !state.getValue(WATERLOGGED) && ForgeHooks.onCropsGrowPre(level, pos, state, random.nextDouble() < 0.1D)) {
 			for (int i = 1; this.isCattail(level, pos.below(i)) || this.canGrowFluff(level, pos.below(i)); i++) {
 				if (this.canGrowFluff(level, pos.below(i))) {
 					BlockState fluffyState = state.setValue(FLUFFY, true);
@@ -135,7 +137,7 @@ public class CattailBlock extends BushBlock implements SimpleWaterloggedBlock, B
 
 		BlockPos abovePos = pos.above();
 		boolean notMaxAge = state.getValue(AGE) < this.getMaxAge();
-		if ((notMaxAge || state.getValue(WATERLOGGED)) && ForgeHooks.onCropsGrowPre(level, abovePos, level.getBlockState(abovePos), random.nextDouble() < 0.2D)) {
+		if ((notMaxAge || state.getValue(WATERLOGGED)) && ForgeHooks.onCropsGrowPre(level, abovePos, level.getBlockState(abovePos), random.nextDouble() < 0.1D)) {
 			if (this.canGrowInto(level.getBlockState(abovePos))) {
 				BlockState newState = state.setValue(TOP, true).setValue(WATERLOGGED, level.getFluidState(abovePos).getType() == Fluids.WATER);
 				if (notMaxAge) {
@@ -177,6 +179,27 @@ public class CattailBlock extends BushBlock implements SimpleWaterloggedBlock, B
 			return InteractionResult.sidedSuccess(level.isClientSide);
 		} else {
 			return super.use(state, level, pos, player, hand, result);
+		}
+	}
+
+
+	@Override
+	public void entityInside(BlockState state, Level level, BlockPos pos, Entity entityIn) {
+		if (entityIn instanceof LivingEntity) {
+			RandomSource random = level.getRandom();
+			if (state.getValue(FLUFFY)) {
+				Vec3 offset = state.getOffset(level, pos);
+				double offsetX = MathUtil.makeNegativeRandomly(random.nextFloat() * 0.25F, random);
+				double offsetZ = MathUtil.makeNegativeRandomly(random.nextFloat() * 0.25F, random);
+
+				double x = pos.getX() + offset.x() + 0.5D + offsetX;
+				double y = pos.getY() + offset.y() + 0.75D + MathUtil.makeNegativeRandomly(random.nextFloat() * 0.05F, random);
+				double z = pos.getZ() + offset.z() + 0.5D + offsetZ;
+
+				if (random.nextInt(6 - state.getValue(CATTAILS)) == 0) {
+					level.addParticle(EnvironmentalParticleTypes.CATTAIL_FLUFF.get(), x, y, z, random.nextDouble() * 0.01D * Math.abs(offsetX) / offsetX, 0.0D, random.nextDouble() * 0.01D * Math.abs(offsetZ) / offsetZ);
+				}
+			}
 		}
 	}
 
@@ -241,7 +264,7 @@ public class CattailBlock extends BushBlock implements SimpleWaterloggedBlock, B
 			double y = pos.getY() + offset.y() + 0.75D + MathUtil.makeNegativeRandomly(random.nextFloat() * 0.05F, random);
 			double z = pos.getZ() + offset.z() + 0.5D + offsetZ;
 
-			if (random.nextInt(8) == 0) {
+			if (random.nextInt(15) == 0) {
 				level.addParticle(EnvironmentalParticleTypes.CATTAIL_FLUFF.get(), x, y, z, random.nextDouble() * 0.01D * Math.abs(offsetX) / offsetX, 0.0D, random.nextDouble() * 0.01D * Math.abs(offsetZ) / offsetZ);
 			}
 		}
