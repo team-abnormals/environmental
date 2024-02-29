@@ -301,5 +301,30 @@
       "step/grass6"
     ],
     "subtitle": "subtitles.environmental.entity.tapir.leaf_step"
+  },
+  "entity.tapir.ambient": {
+    "sounds": [
+      "environmental:mob/tapir/idle1",
+      "environmental:mob/tapir/idle2",
+      "environmental:mob/tapir/idle3",
+      "environmental:mob/tapir/idle4",
+      "environmental:mob/tapir/idle5"
+    ],
+    "subtitle": "subtitles.environmental.entity.tapir.ambient"
+  },
+  "entity.tapir.death": {
+    "sounds": [
+      "environmental:mob/tapir/death1",
+	  "environmental:mob/tapir/death2"
+    ],
+    "subtitle": "subtitles.environmental.entity.tapir.death"
+  },
+  "entity.tapir.hurt": {
+    "sounds": [
+      "environmental:mob/tapir/hurt1",
+      "environmental:mob/tapir/hurt2",
+      "environmental:mob/tapir/hurt3"
+    ],
+    "subtitle": "subtitles.environmental.entity.tapir.hurt"
   }
 }
