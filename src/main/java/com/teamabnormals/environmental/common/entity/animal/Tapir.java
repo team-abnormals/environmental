@@ -1,6 +1,9 @@
 package com.teamabnormals.environmental.common.entity.animal;
 
-import com.teamabnormals.environmental.common.entity.ai.goal.tapir.*;
+import com.teamabnormals.environmental.common.entity.ai.goal.tapir.TapirHuntFloraGoal;
+import com.teamabnormals.environmental.common.entity.ai.goal.tapir.TapirPanicGoal;
+import com.teamabnormals.environmental.common.entity.ai.goal.tapir.TapirSniffForFloraGoal;
+import com.teamabnormals.environmental.common.entity.ai.goal.tapir.TapirTemptGoal;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalParticleTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSoundEvents;
@@ -371,17 +374,17 @@ public class Tapir extends Animal {
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return this.isSniffing() ? null : SoundEvents.PIG_AMBIENT;
+		return this.isSniffing() ? null : EnvironmentalSoundEvents.TAPIR_AMBIENT.get();
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource source) {
-		return SoundEvents.PIG_HURT;
+		return EnvironmentalSoundEvents.TAPIR_HURT.get();
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return SoundEvents.PIG_DEATH;
+		return EnvironmentalSoundEvents.TAPIR_DEATH.get();
 	}
 
 	@Override
