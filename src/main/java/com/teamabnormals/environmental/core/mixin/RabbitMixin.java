@@ -26,6 +26,8 @@ public abstract class RabbitMixin extends Animal {
 		Holder<Biome> holder = level.getBiome(this.blockPosition());
 		if (holder.is(EnvironmentalBiomeTags.ONLY_ALLOWS_MUDDY_RABBITS)) {
 			cir.setReturnValue(EnvironmentalRabbitTypes.MUDDY.id());
+		} else if (holder.is(EnvironmentalBiomeTags.ONLY_ALLOWS_GRAY_RABBITS)) {
+			cir.setReturnValue(EnvironmentalRabbitTypes.GRAY.id());
 		}
 	}
 }

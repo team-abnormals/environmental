@@ -61,7 +61,8 @@ public class EnvironmentalBiomeTagsProvider extends BiomeTagsProvider {
 		this.tag(EnvironmentalBiomes.PINE_SLOPES.get(),
 				BiomeTags.IS_OVERWORLD, BiomeTags.IS_MOUNTAIN,
 				BiomeTags.HAS_MINESHAFT, BiomeTags.STRONGHOLD_BIASED_TO,
-				Tags.Biomes.IS_COLD_OVERWORLD, Tags.Biomes.IS_CONIFEROUS, Tags.Biomes.IS_SLOPE
+				Tags.Biomes.IS_COLD_OVERWORLD, Tags.Biomes.IS_CONIFEROUS, Tags.Biomes.IS_SLOPE,
+				EnvironmentalBiomeTags.ONLY_ALLOWS_GRAY_RABBITS
 		);
 
 		this.tag(EnvironmentalBiomeTags.HAS_SLABFISH).addTag(Tags.Biomes.IS_SWAMP);

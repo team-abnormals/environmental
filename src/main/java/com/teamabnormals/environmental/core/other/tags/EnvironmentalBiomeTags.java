@@ -7,6 +7,7 @@ import net.minecraft.world.level.biome.Biome;
 
 public class EnvironmentalBiomeTags {
 	public static final TagKey<Biome> ONLY_ALLOWS_MUDDY_RABBITS = biomeTag("only_allows_muddy_rabbits");
+	public static final TagKey<Biome> ONLY_ALLOWS_GRAY_RABBITS = biomeTag("only_allows_gray_rabbits");
 
 	public static final TagKey<Biome> HAS_LOG_CABIN = biomeTag("has_structure/log_cabin");
 
