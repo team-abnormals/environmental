@@ -67,7 +67,7 @@ public class EnvironmentalGeneration {
 		BiomeDefaultFeatures.addDefaultOres(generation);
 		BiomeDefaultFeatures.addDefaultSoftDisks(generation);
 		BiomeDefaultFeatures.addDefaultFlowers(generation);
-		generation.addFeature(Decoration.LOCAL_MODIFICATIONS, COARSE_DIRT_ON_STONE.getHolder().get());
+		generation.addFeature(Decoration.LOCAL_MODIFICATIONS, SMALL_COARSE_DIRT_ON_STONE.getHolder().get());
 		generation.addFeature(Decoration.VEGETAL_DECORATION, GRAINY_COARSE_DIRT.getHolder().get());
 		generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_PINE_BARRENS.getHolder().get());
 		generation.addFeature(Decoration.VEGETAL_DECORATION, VegetationPlacements.BROWN_MUSHROOM_TAIGA);
@@ -85,7 +85,7 @@ public class EnvironmentalGeneration {
 		generation.addFeature(Decoration.UNDERGROUND_DECORATION, PINE_SLOPES_BOULDER.getHolder().get());
 		generation.addFeature(Decoration.UNDERGROUND_DECORATION, PINE_SLOPES_ROCK.getHolder().get());
 		BiomeDefaultFeatures.addDefaultFlowers(generation);
-		generation.addFeature(Decoration.LOCAL_MODIFICATIONS, COARSE_DIRT_ON_STONE_PINE_SLOPES.getHolder().get());
+		generation.addFeature(Decoration.LOCAL_MODIFICATIONS, COARSE_DIRT_ON_STONE.getHolder().get());
 		generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_PINE_SLOPES.getHolder().get());
 		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_GRASS_PINE_SLOPES.getHolder().get());
 		BiomeDefaultFeatures.addDefaultExtraVegetation(generation);

@@ -25,7 +25,9 @@ public class PineSlopesBoulderFeature extends Feature<BlockStateConfiguration> {
 			if (pos.getY() <= 3)
 				return false;
 			else if (!level.isEmptyBlock(pos.below())) {
-				int i1 = random.nextInt(2) + random.nextInt(2);
+				int i1 = random.nextInt(2);
+				if (random.nextInt(4) == 0)
+					i1 += 1;
 
 				for (int l = 0; l < 3; ++l) {
 					int i = i1 + random.nextInt(2);

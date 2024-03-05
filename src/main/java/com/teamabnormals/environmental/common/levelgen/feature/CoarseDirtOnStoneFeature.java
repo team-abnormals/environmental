@@ -11,14 +11,12 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.Heightmap.Types;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
 public class CoarseDirtOnStoneFeature extends Feature<NoneFeatureConfiguration> {
-
     public CoarseDirtOnStoneFeature(Codec<NoneFeatureConfiguration> codec) {
         super(codec);
     }
@@ -67,7 +65,7 @@ public class CoarseDirtOnStoneFeature extends Feature<NoneFeatureConfiguration> 
                     if (d <= radius * radius) {
                         mutable.set(x, y, z);
                         BlockState state = level.getBlockState(mutable);
-                        if (state.is(BlockTags.BASE_STONE_OVERWORLD) || state.is(Blocks.GRAVEL)) {
+                        if (state.is(BlockTags.BASE_STONE_OVERWORLD)) {
                             level.setBlock(mutable, Blocks.COARSE_DIRT.defaultBlockState(), 2);
                         }
                     }

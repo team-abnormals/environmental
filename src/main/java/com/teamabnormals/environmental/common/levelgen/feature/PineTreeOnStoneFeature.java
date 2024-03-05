@@ -38,7 +38,7 @@ public class PineTreeOnStoneFeature extends PineTreeFeature {
 							BlockState blockstate = level.getBlockState(mutable);
 							BlockState abovestate = level.getBlockState(mutable.above());
 
-							if (abovestate.isAir() && (blockstate.is(BlockTags.BASE_STONE_OVERWORLD) || blockstate.is(Blocks.GRAVEL))) {
+							if (abovestate.isAir() && blockstate.is(BlockTags.BASE_STONE_OVERWORLD)) {
 								if (x == 0 || z == 0 || random.nextInt(3) == 0) {
 									level.setBlock(mutable, Blocks.COARSE_DIRT.defaultBlockState(), 2);
 								}
@@ -57,6 +57,6 @@ public class PineTreeOnStoneFeature extends PineTreeFeature {
 	@Override
 	public boolean canSurvive(WorldGenLevel level, BlockPos pos) {
 		BlockState state = level.getBlockState(pos.below());
-		return state.is(BlockTags.BASE_STONE_OVERWORLD) || state.is(Blocks.GRAVEL);
+		return state.is(BlockTags.BASE_STONE_OVERWORLD);
 	}
 }
