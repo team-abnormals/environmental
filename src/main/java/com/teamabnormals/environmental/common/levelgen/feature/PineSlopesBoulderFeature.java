@@ -2,8 +2,11 @@ package com.teamabnormals.environmental.common.levelgen.feature;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.BlockStateConfiguration;
@@ -29,6 +32,8 @@ public class PineSlopesBoulderFeature extends Feature<BlockStateConfiguration> {
 				if (random.nextInt(4) == 0)
 					i1 += 1;
 
+				boolean hasemeralds = i1 > 0 && random.nextInt(7) == 0;
+
 				for (int l = 0; l < 3; ++l) {
 					int i = i1 + random.nextInt(2);
 					int j = i1 + random.nextInt(2);
@@ -38,6 +43,22 @@ public class PineSlopesBoulderFeature extends Feature<BlockStateConfiguration> {
 					for (BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-i, -j, -k), pos.offset(i, j, k))) {
 						if (blockpos.distSqr(pos) <= (double) (f * f)) {
 							level.setBlock(blockpos, config.state, 4);
+						}
+					}
+
+					if (hasemeralds) {
+						for (int m = 0; m < 2; ++m) {
+							BlockPos blockpos = pos.offset(random.nextInt(i) - random.nextInt(i), random.nextInt(j) - random.nextInt(j), random.nextInt(k) - random.nextInt(k));
+							boolean genemerald = true;
+
+							for (Direction direction : Direction.values())
+								if (blockpos.relative(direction).distSqr(pos) > (double) (f * f))
+									genemerald = false;
+
+							if (genemerald) {
+								level.setBlock(blockpos, Blocks.EMERALD_ORE.defaultBlockState(), 4);
+								break;
+							}
 						}
 					}
 
