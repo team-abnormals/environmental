@@ -5,6 +5,7 @@ import com.mojang.serialization.Codec;
 import com.teamabnormals.blueprint.common.block.wood.LogBlock;
 import com.teamabnormals.blueprint.common.levelgen.feature.BlueprintTreeFeature;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
+import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures.EnvironmentalPlacedFeatures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Plane;

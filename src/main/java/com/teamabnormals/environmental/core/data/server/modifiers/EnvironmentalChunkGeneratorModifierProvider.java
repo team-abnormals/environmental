@@ -23,11 +23,15 @@ public class EnvironmentalChunkGeneratorModifierProvider extends ChunkGeneratorM
     @Override
     protected void registerEntries() {
         ConditionSource isPineBarrens = isBiome(EnvironmentalBiomes.PINE_BARRENS.getKey(), EnvironmentalBiomes.SNOWY_PINE_BARRENS.getKey());
+        ConditionSource isPineSlopes = isBiome(EnvironmentalBiomes.PINE_SLOPES.getKey());
 
         RuleSource stone = state(Blocks.STONE.defaultBlockState());
+        RuleSource gravel = state(Blocks.GRAVEL.defaultBlockState());
+        RuleSource mountainGravel = SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.ON_CEILING, stone), gravel);
 
         this.entry("environmental_surface_rule").selects("minecraft:overworld")
-                .addModifier(new SurfaceRuleModifier(ifTrue(abovePreliminarySurface(), ifTrue(isPineBarrens, SurfaceRules.sequence(ifTrue(SurfaceRules.steep(), stone), ifTrue(surfaceNoiseAbove(Noises.SURFACE, 3.0F), ifTrue(not(noiseRange(EnvironmentalNoiseParameters.PINE_BARRENS_STONE.getKey(), -1.25F, 1.25F)), stone))))), false));
+                .addModifier(new SurfaceRuleModifier(ifTrue(abovePreliminarySurface(), ifTrue(isPineBarrens, SurfaceRules.sequence(ifTrue(SurfaceRules.steep(), stone), ifTrue(surfaceNoiseAbove(Noises.SURFACE, 3.0F), ifTrue(not(noiseRange(EnvironmentalNoiseParameters.PINE_BARRENS_STONE.getKey(), -1.25F, 1.25F)), stone))))), false))
+                .addModifier(new SurfaceRuleModifier(ifTrue(abovePreliminarySurface(), ifTrue(isPineSlopes, SurfaceRules.sequence(SurfaceRules.ifTrue(surfaceNoiseAbove(Noises.SURFACE, 2.0D), mountainGravel), stone))), false));
     }
 
     private static ConditionSource noiseRange(ResourceKey<NormalNoise.NoiseParameters> noise, double low, double high) {

@@ -10,9 +10,9 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration;
 
-public class CoarseDirtFeature extends Feature<ProbabilityFeatureConfiguration> {
+public class GrainyCoarseDirtFeature extends Feature<ProbabilityFeatureConfiguration> {
 
-    public CoarseDirtFeature(Codec<ProbabilityFeatureConfiguration> codec) {
+    public GrainyCoarseDirtFeature(Codec<ProbabilityFeatureConfiguration> codec) {
         super(codec);
     }
 
@@ -33,7 +33,7 @@ public class CoarseDirtFeature extends Feature<ProbabilityFeatureConfiguration> 
                         int x1 = x + pos.getX();
                         int y1 = y + pos.getZ();
                         blockpos$mutable.set(x1, level.getHeight(Heightmap.Types.WORLD_SURFACE_WG, x1, y1) - 1, y1);
-                        if (isDirt(level.getBlockState(blockpos$mutable))) {
+                        if (canGenerateAt(level, blockpos$mutable)) {
                             level.setBlock(blockpos$mutable, Blocks.COARSE_DIRT.defaultBlockState(), 2);
                         }
                     }
@@ -44,5 +44,9 @@ public class CoarseDirtFeature extends Feature<ProbabilityFeatureConfiguration> 
         }
 
         return false;
+    }
+
+    protected boolean canGenerateAt(WorldGenLevel level, BlockPos pos) {
+        return isDirt(level.getBlockState(pos));
     }
 }

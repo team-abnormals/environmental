@@ -5,6 +5,7 @@ import com.teamabnormals.blueprint.common.world.modification.ModdedBiomeSlicePro
 import com.teamabnormals.blueprint.core.registry.BlueprintBiomes;
 import com.teamabnormals.blueprint.core.util.BiomeUtil;
 import com.teamabnormals.environmental.core.Environmental;
+import com.teamabnormals.environmental.core.registry.EnvironmentalBiomes;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
@@ -342,7 +343,7 @@ public class EnvironmentalModdedBiomeSliceProvider extends ModdedBiomeSliceProvi
 			if (p_187245_ >= 3) {
 				return this.pickPlateauBiome(p_187245_, p_187246_, p_187247_);
 			} else {
-				return VANILLA;
+				return p_187245_ < 1 ? VANILLA : PINE_SLOPES.getKey();
 			}
 		}
 

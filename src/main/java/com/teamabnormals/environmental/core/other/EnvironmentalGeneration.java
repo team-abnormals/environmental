@@ -68,7 +68,7 @@ public class EnvironmentalGeneration {
 		BiomeDefaultFeatures.addDefaultSoftDisks(generation);
 		BiomeDefaultFeatures.addDefaultFlowers(generation);
 		generation.addFeature(Decoration.LOCAL_MODIFICATIONS, COARSE_DIRT_ON_STONE.getHolder().get());
-		generation.addFeature(Decoration.VEGETAL_DECORATION, COARSE_DIRT.getHolder().get());
+		generation.addFeature(Decoration.VEGETAL_DECORATION, GRAINY_COARSE_DIRT.getHolder().get());
 		generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_PINE_BARRENS.getHolder().get());
 		generation.addFeature(Decoration.VEGETAL_DECORATION, VegetationPlacements.BROWN_MUSHROOM_TAIGA);
 		generation.addFeature(Decoration.VEGETAL_DECORATION, VegetationPlacements.RED_MUSHROOM_TAIGA);
@@ -76,5 +76,20 @@ public class EnvironmentalGeneration {
 		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_CUP_LICHEN_SMALL.getHolder().get());
 		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_CUP_LICHEN_STONE.getHolder().get());
 		BiomeDefaultFeatures.addDefaultExtraVegetation(generation);
+	}
+
+	public static void pineSlopes(BiomeGenerationSettings.Builder generation) {
+		OverworldBiomes.globalOverworldGeneration(generation);
+		BiomeDefaultFeatures.addDefaultOres(generation);
+		BiomeDefaultFeatures.addDefaultSoftDisks(generation);
+		generation.addFeature(Decoration.UNDERGROUND_DECORATION, PINE_SLOPES_BOULDER.getHolder().get());
+		generation.addFeature(Decoration.UNDERGROUND_DECORATION, PINE_SLOPES_ROCK.getHolder().get());
+		BiomeDefaultFeatures.addDefaultFlowers(generation);
+		generation.addFeature(Decoration.LOCAL_MODIFICATIONS, COARSE_DIRT_ON_STONE_PINE_SLOPES.getHolder().get());
+		generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_PINE_SLOPES.getHolder().get());
+		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_GRASS_PINE_SLOPES.getHolder().get());
+		BiomeDefaultFeatures.addDefaultExtraVegetation(generation);
+		BiomeDefaultFeatures.addExtraEmeralds(generation);
+		BiomeDefaultFeatures.addInfestedStone(generation);
 	}
 }
