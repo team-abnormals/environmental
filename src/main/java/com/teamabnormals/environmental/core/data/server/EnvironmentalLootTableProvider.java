@@ -26,12 +26,15 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.LootTable.Builder;
 import net.minecraft.world.level.storage.loot.ValidationContext;
+import net.minecraft.world.level.storage.loot.entries.AlternativesEntry;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.functions.*;
@@ -73,9 +76,12 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 
 	private static class EnvironmentalBlockLoot extends BlockLoot {
 		private static final LootItemCondition.Builder HAS_SILK_TOUCH = MatchTool.toolMatches(ItemPredicate.Builder.item().hasEnchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.Ints.atLeast(1))));
+		private static final LootItemCondition.Builder HAS_SHEARS = MatchTool.toolMatches(ItemPredicate.Builder.item().of(Items.SHEARS));
+		private static final LootItemCondition.Builder HAS_SHEARS_OR_SILK_TOUCH = HAS_SHEARS.or(HAS_SILK_TOUCH);
 		private static final LootItemCondition.Builder HAS_NO_SHEARS_OR_SILK_TOUCH = MatchTool.toolMatches(ItemPredicate.Builder.item().of(Items.SHEARS)).or(HAS_SILK_TOUCH).invert();
 
 		private static final float[] NORMAL_LEAVES_SAPLING_CHANCES = new float[]{0.05F, 0.0625F, 0.083333336F, 0.1F};
+		private static final float[] NORMAL_LEAVES_STICK_CHANCES = new float[]{0.02F, 0.022222223F, 0.025F, 0.033333335F, 0.1F};
 		private static final float[] DOUBLE_LEAVES_STICK_CHANCES = new float[]{0.04F, 0.044444446F, 0.05F, 0.066666670F, 0.2F};
 
 		@Override
@@ -272,21 +278,21 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.add(CHERRY_CHESTS.getSecond().get(), BlockLoot::createNameableBlockEntityTable);
 			this.add(CHERRY_BOOKSHELF.get(), (block) -> createSingleItemTableWithSilkTouch(block, Items.BOOK, ConstantValue.exactly(3.0F)));
 
-			this.add(CHERRY_LEAVES.get(), (block) -> createCherryLeavesDrop(block, CHERRY_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+			this.add(CHERRY_LEAVES.get(), (block) -> createCherryLeavesDrops(block, CHERRY_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 			this.dropSelf(CHERRY_HEDGE.get());
 			this.dropSelf(CHERRY_LEAF_CARPET.get());
 			this.add(CHERRY_LEAF_PILE.get(), EnvironmentalBlockLoot::createLeafPileDrops);
 			this.dropSelf(CHERRY_SAPLING.get());
 			this.dropPottedContents(POTTED_CHERRY_SAPLING.get());
 
-			this.add(CHEERFUL_CHERRY_LEAVES.get(), (block) -> createCherryLeavesDrop(block, CHEERFUL_CHERRY_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+			this.add(CHEERFUL_CHERRY_LEAVES.get(), (block) -> createCherryLeavesDrops(block, CHEERFUL_CHERRY_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 			this.dropSelf(CHEERFUL_CHERRY_HEDGE.get());
 			this.dropSelf(CHEERFUL_CHERRY_LEAF_CARPET.get());
 			this.add(CHEERFUL_CHERRY_LEAF_PILE.get(), EnvironmentalBlockLoot::createLeafPileDrops);
 			this.dropSelf(CHEERFUL_CHERRY_SAPLING.get());
 			this.dropPottedContents(POTTED_CHEERFUL_CHERRY_SAPLING.get());
 
-			this.add(MOODY_CHERRY_LEAVES.get(), (block) -> createCherryLeavesDrop(block, MOODY_CHERRY_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+			this.add(MOODY_CHERRY_LEAVES.get(), (block) -> createCherryLeavesDrops(block, MOODY_CHERRY_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 			this.dropSelf(MOODY_CHERRY_HEDGE.get());
 			this.dropSelf(MOODY_CHERRY_LEAF_CARPET.get());
 			this.add(MOODY_CHERRY_LEAF_PILE.get(), EnvironmentalBlockLoot::createLeafPileDrops);
@@ -346,10 +352,10 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.add(WISTERIA_CHESTS.getSecond().get(), BlockLoot::createNameableBlockEntityTable);
 			this.add(WISTERIA_BOOKSHELF.get(), (block) -> createSingleItemTableWithSilkTouch(block, Items.BOOK, ConstantValue.exactly(3.0F)));
 
-			this.add(PINK_WISTERIA_LEAVES.get(), (block) -> createLeavesDrops(block, PINK_WISTERIA_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
-			this.add(BLUE_WISTERIA_LEAVES.get(), (block) -> createLeavesDrops(block, BLUE_WISTERIA_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
-			this.add(PURPLE_WISTERIA_LEAVES.get(), (block) -> createLeavesDrops(block, PURPLE_WISTERIA_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
-			this.add(WHITE_WISTERIA_LEAVES.get(), (block) -> createLeavesDrops(block, WHITE_WISTERIA_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+			this.add(PINK_WISTERIA_LEAVES.get(), (block) -> createWisteriaLeavesDrops(block, PINK_WISTERIA_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+			this.add(BLUE_WISTERIA_LEAVES.get(), (block) -> createWisteriaLeavesDrops(block, BLUE_WISTERIA_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+			this.add(PURPLE_WISTERIA_LEAVES.get(), (block) -> createWisteriaLeavesDrops(block, PURPLE_WISTERIA_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+			this.add(WHITE_WISTERIA_LEAVES.get(), (block) -> createWisteriaLeavesDrops(block, WHITE_WISTERIA_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 
 			this.add(PINK_HANGING_WISTERIA_LEAVES.get(), BlockLoot::createShearsOnlyDrop);
 			this.add(BLUE_HANGING_WISTERIA_LEAVES.get(), BlockLoot::createShearsOnlyDrop);
@@ -363,8 +369,20 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			}))));
 		}
 
-		protected static LootTable.Builder createCherryLeavesDrop(Block block, Block sapling, float... saplingChances) {
+		protected static LootTable.Builder createCherryLeavesDrops(Block block, Block sapling, float... saplingChances) {
 			return createLeavesDrops(block, sapling, saplingChances).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(HAS_NO_SHEARS_OR_SILK_TOUCH).add(applyExplosionDecay(block, LootItem.lootTableItem(EnvironmentalItems.CHERRIES.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, 0.05F, 0.055555557F, 0.0625F, 0.08333334F, 0.25F))));
+		}
+
+		protected static LootTable.Builder createWisteriaLeavesDrops(Block block, Block sapling, float... saplingChances) {
+			LootItemCondition.Builder isBottom = LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BlockStateProperties.HALF, Half.BOTTOM));
+			LootItemCondition.Builder isTop = isBottom.invert();
+
+			LootPool.Builder coloredLeafPool = LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(isBottom).add(LootItem.lootTableItem(block).when(HAS_SHEARS_OR_SILK_TOUCH).otherwise(applyExplosionCondition(sapling, LootItem.lootTableItem(sapling)).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, saplingChances))));
+			LootPool.Builder greenLeafPool = LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(isTop).add(LootItem.lootTableItem(WISTERIA_LEAVES.get()).when(HAS_SHEARS_OR_SILK_TOUCH));
+			LootPool.Builder coloredStickPool = LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(isBottom).when(HAS_NO_SHEARS_OR_SILK_TOUCH).add(applyExplosionDecay(block, LootItem.lootTableItem(Items.STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, NORMAL_LEAVES_STICK_CHANCES)));
+			LootPool.Builder greenStickPool = LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(isTop).when(HAS_NO_SHEARS_OR_SILK_TOUCH).add(applyExplosionDecay(block, LootItem.lootTableItem(Items.STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, DOUBLE_LEAVES_STICK_CHANCES)));
+
+			return LootTable.lootTable().withPool(coloredLeafPool).withPool(greenLeafPool).withPool(coloredStickPool).withPool(greenStickPool);
 		}
 
 		protected static LootTable.Builder createLeafPileDrops(Block block) {

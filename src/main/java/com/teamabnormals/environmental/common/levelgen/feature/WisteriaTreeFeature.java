@@ -2,7 +2,7 @@ package com.teamabnormals.environmental.common.levelgen.feature;
 
 import com.mojang.serialization.Codec;
 import com.teamabnormals.blueprint.common.levelgen.feature.BlueprintTreeFeature;
-import com.teamabnormals.environmental.common.block.WisteriaLeavesBlock;
+import com.teamabnormals.environmental.common.block.ColoredWisteriaLeavesBlock;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
@@ -65,7 +65,7 @@ public class WisteriaTreeFeature extends BlueprintTreeFeature {
 
 		this.createLeafLayer(mutablePos.above(), false, random, EnvironmentalBlocks.WISTERIA_LEAVES.get().defaultBlockState());
 		this.createLeafLayer(mutablePos.above(), true, random, EnvironmentalBlocks.WISTERIA_LEAVES.get().defaultBlockState(), 3);
-		this.createLeafLayer(mutablePos, true, random, config.foliageProvider.getState(random, pos).setValue(WisteriaLeavesBlock.HALF, Half.TOP));
+		this.createLeafLayer(mutablePos, true, random, config.foliageProvider.getState(random, pos).setValue(ColoredWisteriaLeavesBlock.HALF, Half.TOP));
 		this.createLeafLayer(mutablePos.below(), true, random, config.foliageProvider.getState(random, pos));
 		this.createLeafLayer(mutablePos.below(2), true, random, config.foliageProvider.getState(random, pos), 3);
 	}
