@@ -47,7 +47,7 @@ public class ColoredWisteriaLeavesBlock extends LeavesBlock implements WisteriaL
 	public BlockState updateShape(BlockState state, Direction direction, BlockState offsetState, LevelAccessor level, BlockPos pos, BlockPos offsetPos) {
 		if (direction == Direction.DOWN && state.getValue(HALF) == Half.TOP) {
 			if (offsetState.getBlock() instanceof WisteriaLeafColorBlock leaves && leaves.causesBlendTexture(offsetState))
-				return getLeavesFromColor(leaves.getColor()).defaultBlockState().setValue(DISTANCE, state.getValue(DISTANCE)).setValue(PERSISTENT, state.getValue(PERSISTENT)).setValue(WATERLOGGED, state.getValue(WATERLOGGED)).setValue(BlockStateProperties.HALF, Half.TOP);
+				return getLeavesFromColor(leaves.getColor()).defaultBlockState().setValue(DISTANCE, state.getValue(DISTANCE)).setValue(PERSISTENT, state.getValue(PERSISTENT)).setValue(WATERLOGGED, state.getValue(WATERLOGGED)).setValue(HALF, Half.TOP);
 			else
 				return EnvironmentalBlocks.WISTERIA_LEAVES.get().defaultBlockState().setValue(DISTANCE, state.getValue(DISTANCE)).setValue(PERSISTENT, state.getValue(PERSISTENT)).setValue(WATERLOGGED, state.getValue(WATERLOGGED));
 		}
