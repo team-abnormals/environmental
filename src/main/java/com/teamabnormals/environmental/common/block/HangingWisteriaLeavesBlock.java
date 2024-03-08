@@ -1,5 +1,6 @@
 package com.teamabnormals.environmental.common.block;
 
+import com.teamabnormals.environmental.common.levelgen.util.WisteriaColor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -17,12 +18,15 @@ import net.minecraftforge.common.IForgeShearable;
 
 import javax.annotation.Nullable;
 
-public class HangingWisteriaLeavesBlock extends HangingLeavesBlock implements IForgeShearable {
+public class HangingWisteriaLeavesBlock extends HangingLeavesBlock implements IForgeShearable, WisteriaLeafColorBlock {
 	public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
 	protected static final VoxelShape TOP_SHAPE = Block.box(1, 0, 1, 15, 16, 15);
 
-	public HangingWisteriaLeavesBlock(Block.Properties properties) {
+	private final WisteriaColor color;
+
+	public HangingWisteriaLeavesBlock(Block.Properties properties, WisteriaColor color) {
 		super(properties);
+		this.color = color;
 		this.registerDefaultState(this.stateDefinition.any().setValue(HALF, DoubleBlockHalf.LOWER));
 	}
 
@@ -57,5 +61,10 @@ public class HangingWisteriaLeavesBlock extends HangingLeavesBlock implements IF
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(HALF);
+	}
+
+	@Override
+	public WisteriaColor getColor() {
+		return this.color;
 	}
 }

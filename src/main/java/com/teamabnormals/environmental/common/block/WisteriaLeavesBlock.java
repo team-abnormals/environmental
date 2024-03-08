@@ -18,17 +18,17 @@ public class WisteriaLeavesBlock extends LeavesBlock {
 
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
-		BlockState state = context.getLevel().getBlockState(context.getClickedPos().below());
-		if (state.getBlock() instanceof ColoredWisteriaLeavesBlock coloredblock && state.getValue(BlockStateProperties.HALF) == Half.BOTTOM)
-			return coloredblock.getStateForPlacement(context).setValue(BlockStateProperties.HALF, Half.TOP);
+		BlockState belowstate = context.getLevel().getBlockState(context.getClickedPos().below());
+		if (belowstate.getBlock() instanceof WisteriaLeafColorBlock leaves && leaves.causesBlendTexture(belowstate))
+			return ColoredWisteriaLeavesBlock.getLeavesFromColor(leaves.getColor()).getStateForPlacement(context).setValue(BlockStateProperties.HALF, Half.TOP);
 		else
 			return super.getStateForPlacement(context);
 	}
 
 	@Override
 	public BlockState updateShape(BlockState state, Direction direction, BlockState offsetState, LevelAccessor level, BlockPos pos, BlockPos offsetPos) {
-		if (direction == Direction.DOWN && offsetState.getBlock() instanceof ColoredWisteriaLeavesBlock coloredblock && offsetState.getValue(BlockStateProperties.HALF) == Half.BOTTOM)
-			return coloredblock.defaultBlockState().setValue(DISTANCE, state.getValue(DISTANCE)).setValue(PERSISTENT, state.getValue(PERSISTENT)).setValue(WATERLOGGED, state.getValue(WATERLOGGED)).setValue(BlockStateProperties.HALF, Half.TOP);
+		if (direction == Direction.DOWN && offsetState.getBlock() instanceof WisteriaLeafColorBlock leaves && leaves.causesBlendTexture(offsetState))
+			return ColoredWisteriaLeavesBlock.getLeavesFromColor(leaves.getColor()).defaultBlockState().setValue(DISTANCE, state.getValue(DISTANCE)).setValue(PERSISTENT, state.getValue(PERSISTENT)).setValue(WATERLOGGED, state.getValue(WATERLOGGED)).setValue(BlockStateProperties.HALF, Half.TOP);
 		else
 			return super.updateShape(state, direction, offsetState, level, pos, offsetPos);
 	}
