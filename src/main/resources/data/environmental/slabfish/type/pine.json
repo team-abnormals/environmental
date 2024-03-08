@@ -22,6 +22,18 @@
         {
           "type": "environmental:biome",
           "biome": "environmental:snowy_pine_barrens"
+        },
+		{
+          "type": "environmental:biome",
+          "biome": "environmental:old_growth_pine_barrens"
+        },
+		{
+          "type": "environmental:biome",
+          "biome": "environmental:snowy_old_growth_pine_barrens"
+        },
+		{
+          "type": "environmental:biome",
+          "biome": "environmental:pine_slopes"
         }
       ]
     }

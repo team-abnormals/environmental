@@ -38,6 +38,8 @@ public class PineTreeFeature extends BlueprintTreeFeature {
         
         if (trunkheight >= 14 && random.nextBoolean())
             leafbranches++;
+		if (trunkheight >= 16 && random.nextInt(3) != 0)
+			leafbranches++;
 
 		List<Direction> branchdirections = Lists.newArrayList();
 		Plane.HORIZONTAL.forEach(branchdirections::add);
@@ -55,7 +57,7 @@ public class PineTreeFeature extends BlueprintTreeFeature {
 					Plane.HORIZONTAL.forEach(branchdirections::add);
 					branchdirections.remove(direction);
 				}
-			} else if (random.nextInt(6) == 0) {
+			} else if (random.nextInt(trunkheight >= 16 && y > 6 ? 3 : 6) == 0) {
 				this.createBranch(blockpos, Plane.HORIZONTAL.getRandomDirection(random), random, config);
 			}
 
@@ -64,6 +66,9 @@ public class PineTreeFeature extends BlueprintTreeFeature {
 			else if (leafbranches == 1 && random.nextInt(3) == 0)
 				y -= 2;
 			else
+				y--;
+
+			if (trunkheight >= 16 && leafbranches == 1)
 				y--;
 		}
 

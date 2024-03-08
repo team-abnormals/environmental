@@ -26,8 +26,10 @@ public class EnvironmentalBiomes {
 	public static final KeyedBiome BLOSSOM_WOODS = HELPER.createBiome("blossom_woods", () -> blossomBiome(false));
 	public static final KeyedBiome BLOSSOM_VALLEYS = HELPER.createBiome("blossom_valleys", () -> blossomBiome(true));
 
-	public static final KeyedBiome PINE_BARRENS = HELPER.createBiome("pine_barrens", () -> pineBarrens(false));
-	public static final KeyedBiome SNOWY_PINE_BARRENS = HELPER.createBiome("snowy_pine_barrens", () -> pineBarrens(true));
+	public static final KeyedBiome PINE_BARRENS = HELPER.createBiome("pine_barrens", () -> pineBarrens(false, false));
+	public static final KeyedBiome SNOWY_PINE_BARRENS = HELPER.createBiome("snowy_pine_barrens", () -> pineBarrens(true, false));
+	public static final KeyedBiome OLD_GROWTH_PINE_BARRENS = HELPER.createBiome("old_growth_pine_barrens", () -> pineBarrens(false, true));
+	public static final KeyedBiome SNOWY_OLD_GROWTH_PINE_BARRENS = HELPER.createBiome("snowy_old_growth_pine_barrens", () -> pineBarrens(true, true));
 	public static final KeyedBiome PINE_SLOPES = HELPER.createBiome("pine_slopes", EnvironmentalBiomes::pineSlopes);
 
 	private static Biome marsh() {
@@ -56,9 +58,9 @@ public class EnvironmentalBiomes {
 		return biome(Precipitation.RAIN, 0.45F, 0.8F, 5938278, 5216182, 335411, spawns, generation, null);
 	}
 
-	private static Biome pineBarrens(boolean snowy) {
+	private static Biome pineBarrens(boolean snowy, boolean oldGrowth) {
 		BiomeGenerationSettings.Builder generation = new BiomeGenerationSettings.Builder();
-		EnvironmentalGeneration.pineBarrens(generation, snowy);
+		EnvironmentalGeneration.pineBarrens(generation, snowy, oldGrowth);
 
 		MobSpawnSettings.Builder spawns = new MobSpawnSettings.Builder();
 		BiomeDefaultFeatures.farmAnimals(spawns);

@@ -61,18 +61,19 @@ public class EnvironmentalGeneration {
 		}
 	}
 
-	public static void pineBarrens(BiomeGenerationSettings.Builder generation, boolean snowy) {
+	public static void pineBarrens(BiomeGenerationSettings.Builder generation, boolean snowy, boolean oldGrowth) {
 		OverworldBiomes.globalOverworldGeneration(generation);
 		BiomeDefaultFeatures.addFerns(generation);
 		BiomeDefaultFeatures.addDefaultOres(generation);
 		BiomeDefaultFeatures.addDefaultSoftDisks(generation);
 		BiomeDefaultFeatures.addDefaultFlowers(generation);
 		generation.addFeature(Decoration.LOCAL_MODIFICATIONS, SMALL_COARSE_DIRT_ON_STONE.getHolder().get());
-		generation.addFeature(Decoration.VEGETAL_DECORATION, GRAINY_COARSE_DIRT.getHolder().get());
-		generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_PINE_BARRENS.getHolder().get());
+		if (!oldGrowth)
+			generation.addFeature(Decoration.VEGETAL_DECORATION, GRAINY_COARSE_DIRT.getHolder().get());
+		generation.addFeature(Decoration.VEGETAL_DECORATION, oldGrowth ? TREES_OLD_GROWTH_PINE_BARRENS.getHolder().get() : TREES_PINE_BARRENS.getHolder().get());
 		generation.addFeature(Decoration.VEGETAL_DECORATION, VegetationPlacements.BROWN_MUSHROOM_TAIGA);
 		generation.addFeature(Decoration.VEGETAL_DECORATION, VegetationPlacements.RED_MUSHROOM_TAIGA);
-		generation.addFeature(Decoration.VEGETAL_DECORATION, snowy ? PATCH_GRASS_SNOWY_PINE_BARRENS.getHolder().get() : PATCH_GRASS_PINE_BARRENS.getHolder().get());
+		generation.addFeature(Decoration.VEGETAL_DECORATION, snowy ? PATCH_GRASS_SNOWY_PINE_BARRENS.getHolder().get() : oldGrowth ? PATCH_GRASS_OLD_GROWTH_PINE_BARRENS.getHolder().get() : PATCH_GRASS_PINE_BARRENS.getHolder().get());
 		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_CUP_LICHEN_SMALL.getHolder().get());
 		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_CUP_LICHEN_STONE.getHolder().get());
 		BiomeDefaultFeatures.addDefaultExtraVegetation(generation);

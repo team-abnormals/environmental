@@ -103684,7 +103684,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -103711,7 +103711,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -104008,7 +104008,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -104035,7 +104035,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -106762,7 +106762,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -106789,7 +106789,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -106870,7 +106870,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -106897,7 +106897,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -106924,7 +106924,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -106951,7 +106951,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -107032,7 +107032,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -107059,7 +107059,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -107086,7 +107086,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -107113,7 +107113,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -107140,7 +107140,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -107167,7 +107167,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -107194,7 +107194,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -107221,7 +107221,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -107302,7 +107302,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -107329,7 +107329,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -110110,7 +110110,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -110137,7 +110137,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -110164,7 +110164,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -110191,7 +110191,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -110218,7 +110218,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -110245,7 +110245,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -110272,7 +110272,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -110299,7 +110299,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -110380,7 +110380,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -110407,7 +110407,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -110434,7 +110434,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -110461,7 +110461,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -110488,7 +110488,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -110515,7 +110515,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -110542,7 +110542,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -110569,7 +110569,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -121288,7 +121288,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -121315,7 +121315,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -121342,7 +121342,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -121369,7 +121369,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -121450,7 +121450,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -121477,7 +121477,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -121504,7 +121504,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -121531,7 +121531,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -121558,7 +121558,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -121585,7 +121585,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -121612,7 +121612,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -121639,7 +121639,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -121666,7 +121666,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -121693,7 +121693,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -121774,7 +121774,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -121801,7 +121801,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -121828,7 +121828,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -121855,7 +121855,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -122152,7 +122152,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.3,
@@ -122179,7 +122179,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.3,
@@ -125500,7 +125500,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -125527,7 +125527,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -125554,7 +125554,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.3,
@@ -125581,7 +125581,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.3,
@@ -125608,7 +125608,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -125635,7 +125635,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -125662,7 +125662,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -125689,7 +125689,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -125716,7 +125716,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.3,
@@ -125743,7 +125743,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.3,
@@ -125770,7 +125770,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -125797,7 +125797,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -125824,7 +125824,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -125851,7 +125851,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -125878,7 +125878,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -125905,7 +125905,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -125932,7 +125932,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -125959,7 +125959,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -125986,7 +125986,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -126013,7 +126013,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -126094,7 +126094,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -126121,7 +126121,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -138784,7 +138784,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -138811,7 +138811,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -139054,7 +139054,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -139081,7 +139081,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -139162,7 +139162,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -139189,7 +139189,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -139270,7 +139270,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -139297,7 +139297,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -139324,7 +139324,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -139351,7 +139351,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -139432,7 +139432,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -139459,7 +139459,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -139810,7 +139810,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -139837,7 +139837,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -139918,7 +139918,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.3,
@@ -139945,7 +139945,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.3,
@@ -142996,7 +142996,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -143023,7 +143023,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -143158,7 +143158,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -143185,7 +143185,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -143266,7 +143266,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -143293,7 +143293,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -143320,7 +143320,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -143347,7 +143347,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -143374,7 +143374,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -143401,7 +143401,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -143428,7 +143428,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.3,
@@ -143455,7 +143455,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.3,
@@ -143482,7 +143482,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -143509,7 +143509,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -143536,7 +143536,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -143563,7 +143563,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -143644,7 +143644,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -143671,7 +143671,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -156172,7 +156172,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -156199,7 +156199,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -156280,7 +156280,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -156307,7 +156307,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -156388,7 +156388,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -156415,7 +156415,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -156550,7 +156550,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -156577,7 +156577,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -156820,7 +156820,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -156847,7 +156847,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -156928,7 +156928,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.3,
@@ -156955,7 +156955,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.3,
@@ -159628,7 +159628,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -159655,40 +159655,13 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
             0.03
           ],
           "depth": 1.0,
-          "erosion": [
-            -0.7799,
-            -0.375
-          ],
-          "humidity": [
-            0.3,
-            1.0
-          ],
-          "offset": 0.0,
-          "temperature": [
-            -0.45,
-            -0.15
-          ],
-          "weirdness": [
-            0.5666,
-            0.7666
-          ]
-        }
-      },
-      {
-        "biome": "blueprint:original_source_marker",
-        "parameters": {
-          "continentalness": [
-            0.03,
-            1.0
-          ],
-          "depth": 0.0,
           "erosion": [
             -0.7799,
             -0.375
@@ -159715,6 +159688,33 @@
             0.03,
             1.0
           ],
+          "depth": 0.0,
+          "erosion": [
+            -0.7799,
+            -0.375
+          ],
+          "humidity": [
+            0.3,
+            1.0
+          ],
+          "offset": 0.0,
+          "temperature": [
+            -0.45,
+            -0.15
+          ],
+          "weirdness": [
+            0.5666,
+            0.7666
+          ]
+        }
+      },
+      {
+        "biome": "blueprint:original_source_marker",
+        "parameters": {
+          "continentalness": [
+            0.03,
+            1.0
+          ],
           "depth": 1.0,
           "erosion": [
             -0.7799,
@@ -159736,7 +159736,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -159763,7 +159763,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -159790,7 +159790,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -159817,7 +159817,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -159844,7 +159844,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -159871,7 +159871,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -159898,7 +159898,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.3,
@@ -159925,7 +159925,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.3,
@@ -159952,7 +159952,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -159979,7 +159979,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -160114,7 +160114,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -160141,7 +160141,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -171184,7 +171184,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -171211,7 +171211,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -171454,7 +171454,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -171481,7 +171481,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -171562,7 +171562,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -171589,7 +171589,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -171670,7 +171670,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -171697,7 +171697,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -171724,7 +171724,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -171751,7 +171751,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -171832,7 +171832,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -171859,7 +171859,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -172210,7 +172210,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -172237,7 +172237,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -172318,7 +172318,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.3,
@@ -172345,7 +172345,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.3,
@@ -175396,7 +175396,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -175423,7 +175423,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -175558,7 +175558,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -175585,7 +175585,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -175666,7 +175666,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -175693,7 +175693,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -175720,7 +175720,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -175747,7 +175747,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -175774,7 +175774,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -175801,7 +175801,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -175828,7 +175828,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.3,
@@ -175855,7 +175855,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.3,
@@ -175882,7 +175882,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -175909,7 +175909,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -175936,7 +175936,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -175963,7 +175963,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -176044,7 +176044,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -176071,7 +176071,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -189166,7 +189166,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -189193,7 +189193,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -189220,7 +189220,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -189247,7 +189247,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -189328,7 +189328,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -189355,7 +189355,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -189382,7 +189382,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -189409,7 +189409,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -189436,7 +189436,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -189463,7 +189463,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -189490,7 +189490,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -189517,7 +189517,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -189544,7 +189544,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -189571,7 +189571,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -189652,7 +189652,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -189679,7 +189679,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -189706,7 +189706,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -189733,7 +189733,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -190030,7 +190030,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.3,
@@ -190057,7 +190057,7 @@
         }
       },
       {
-        "biome": "environmental:snowy_pine_barrens",
+        "biome": "environmental:snowy_old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.3,
@@ -193378,7 +193378,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -193405,7 +193405,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -193432,7 +193432,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.3,
@@ -193459,7 +193459,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.3,
@@ -193486,7 +193486,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -193513,7 +193513,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -193540,7 +193540,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -193567,7 +193567,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -193594,7 +193594,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.3,
@@ -193621,7 +193621,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.3,
@@ -193648,7 +193648,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -193675,7 +193675,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -193702,7 +193702,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -193729,7 +193729,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             0.03,
@@ -193756,7 +193756,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -193783,7 +193783,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -193810,7 +193810,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -193837,7 +193837,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -193864,7 +193864,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -193891,7 +193891,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.11,
@@ -193972,7 +193972,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,
@@ -193999,7 +193999,7 @@
         }
       },
       {
-        "biome": "environmental:pine_barrens",
+        "biome": "environmental:old_growth_pine_barrens",
         "parameters": {
           "continentalness": [
             -0.19,

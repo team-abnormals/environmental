@@ -52,7 +52,7 @@ public abstract class SurfaceSystemMixin {
     private void collectRaises(RandomState randomState, BiomeManager biomeManager, Registry<Biome> registry, boolean useLegacyRandomSource, WorldGenerationContext context, final ChunkAccess chunkAccess, NoiseChunk noiseChunk, SurfaceRules.RuleSource ruleSource, CallbackInfo ci, final BlockPos.MutableBlockPos mutable, ChunkPos chunkPos, int i, int j, BlockColumn blockColumn, SurfaceRules.Context surfaceRulesContext, SurfaceRules.SurfaceRule surfaceRule, BlockPos.MutableBlockPos mutable1, int k, int l, int i1, int j1) {
         int y = chunkAccess.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, k, l) + 1;
         Holder<Biome> biome = biomeManager.getBiome(mutable1.set(i1, y - 1, j1));
-        if (biome.is(EnvironmentalBiomes.PINE_BARRENS.getKey()) || biome.is(EnvironmentalBiomes.SNOWY_PINE_BARRENS.getKey())) {
+        if (biome.is(EnvironmentalBiomes.PINE_BARRENS.getKey()) || biome.is(EnvironmentalBiomes.SNOWY_PINE_BARRENS.getKey()) || biome.is(EnvironmentalBiomes.OLD_GROWTH_PINE_BARRENS.getKey()) || biome.is(EnvironmentalBiomes.SNOWY_OLD_GROWTH_PINE_BARRENS.getKey())) {
             double noise = this.getNoiseAt(i1, j1);
             boolean flag = noise > 0.0D;
             this.pineBarrensStoneRaises[k][l] = new int[]{y, y + getRaise(noise), flag ? 1 : 0};

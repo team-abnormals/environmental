@@ -1,5 +1,7 @@
 {
   "values": [
-    "environmental:blossom_valleys"
+    "environmental:blossom_valleys",
+    "environmental:old_growth_pine_barrens",
+    "environmental:snowy_old_growth_pine_barrens"
   ]
 }
