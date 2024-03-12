@@ -1,6 +1,7 @@
 package com.teamabnormals.environmental.common.block;
 
 import com.google.common.collect.Maps;
+import com.teamabnormals.blueprint.common.block.wood.BlueprintLeavesBlock;
 import com.teamabnormals.environmental.common.levelgen.util.WisteriaColor;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.Util;
@@ -10,7 +11,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -20,7 +20,7 @@ import net.minecraft.world.level.block.state.properties.Half;
 import java.util.Map;
 import java.util.function.Supplier;
 
-public class ColoredWisteriaLeavesBlock extends LeavesBlock implements WisteriaLeafColorBlock {
+public class ColoredWisteriaLeavesBlock extends BlueprintLeavesBlock implements WisteriaLeafColorBlock {
 	private static final Map<WisteriaColor, Supplier<Block>> LEAVES = Util.make(Maps.newHashMap(), (map) -> {
 		map.put(WisteriaColor.PINK, EnvironmentalBlocks.PINK_WISTERIA_LEAVES);
 		map.put(WisteriaColor.BLUE, EnvironmentalBlocks.BLUE_WISTERIA_LEAVES);
