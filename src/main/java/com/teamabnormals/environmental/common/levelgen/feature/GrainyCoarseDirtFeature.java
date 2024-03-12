@@ -24,7 +24,7 @@ public class GrainyCoarseDirtFeature extends Feature<ProbabilityFeatureConfigura
         BlockPos pos = context.origin();
         BlockPos.MutableBlockPos blockpos$mutable = pos.mutable();
         if (random.nextFloat() < config.probability) {
-            int r = random.nextInt(3) + random.nextInt(2) + 1;
+            int r = getRadius(random);
             int r1 = Math.max(r - 2, 0);
             for (int x = -r; x <= r; ++x) {
                 for (int y = -r; y <= r; ++y) {
@@ -48,5 +48,9 @@ public class GrainyCoarseDirtFeature extends Feature<ProbabilityFeatureConfigura
 
     protected boolean canGenerateAt(WorldGenLevel level, BlockPos pos) {
         return isDirt(level.getBlockState(pos));
+    }
+
+    protected int getRadius(RandomSource random) {
+        return random.nextInt(3) + 1;
     }
 }

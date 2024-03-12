@@ -10,6 +10,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Noises;
 import net.minecraft.world.level.levelgen.SurfaceRules;
+import net.minecraft.world.level.levelgen.placement.CaveSurface;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
 import static net.minecraft.world.level.levelgen.SurfaceRules.*;
@@ -23,12 +24,14 @@ public class EnvironmentalChunkGeneratorModifierProvider extends ChunkGeneratorM
     @Override
     protected void registerEntries() {
         ConditionSource isPineBarrens = isBiome(EnvironmentalBiomes.PINE_BARRENS.getKey(), EnvironmentalBiomes.SNOWY_PINE_BARRENS.getKey(), EnvironmentalBiomes.OLD_GROWTH_PINE_BARRENS.getKey(), EnvironmentalBiomes.SNOWY_OLD_GROWTH_PINE_BARRENS.getKey());
+        ConditionSource isOldGrowthPineBarrens = isBiome(EnvironmentalBiomes.OLD_GROWTH_PINE_BARRENS.getKey(), EnvironmentalBiomes.SNOWY_OLD_GROWTH_PINE_BARRENS.getKey());
         ConditionSource isPineSlopes = isBiome(EnvironmentalBiomes.PINE_SLOPES.getKey());
 
         RuleSource stone = state(Blocks.STONE.defaultBlockState());
+        RuleSource nearSurfaceStone = ifTrue(not(ON_FLOOR), stone);
 
         this.entry("environmental_surface_rule").selects("minecraft:overworld")
-                .addModifier(new SurfaceRuleModifier(ifTrue(abovePreliminarySurface(), ifTrue(isPineBarrens, SurfaceRules.sequence(ifTrue(SurfaceRules.steep(), stone), ifTrue(surfaceNoiseAbove(Noises.SURFACE, 3.0F), ifTrue(not(noiseRange(EnvironmentalNoiseParameters.PINE_BARRENS_STONE.getKey(), -1.25F, 1.25F)), stone))))), false))
+                .addModifier(new SurfaceRuleModifier(ifTrue(abovePreliminarySurface(), ifTrue(isPineBarrens, SurfaceRules.sequence(ifTrue(SurfaceRules.steep(), stone), ifTrue(surfaceNoiseAbove(Noises.SURFACE, 3.0F), ifTrue(not(noiseRange(EnvironmentalNoiseParameters.PINE_BARRENS_STONE.getKey(), -1.25F, 1.25F)), stone)), ifTrue(surfaceNoiseAbove(Noises.SURFACE, 2.0F), nearSurfaceStone), ifTrue(not(stoneDepthCheck(-1, true, CaveSurface.FLOOR)), nearSurfaceStone)))), false))
                 .addModifier(new SurfaceRuleModifier(ifTrue(abovePreliminarySurface(), ifTrue(isPineSlopes, stone)), false));
     }
 

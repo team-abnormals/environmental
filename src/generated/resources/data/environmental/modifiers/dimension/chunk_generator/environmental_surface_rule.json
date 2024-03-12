@@ -60,6 +60,66 @@
                       }
                     }
                   }
+                },
+                {
+                  "type": "minecraft:condition",
+                  "if_true": {
+                    "type": "minecraft:noise_threshold",
+                    "max_threshold": 1.7976931348623157E308,
+                    "min_threshold": 0.24242424242424243,
+                    "noise": "minecraft:surface"
+                  },
+                  "then_run": {
+                    "type": "minecraft:condition",
+                    "if_true": {
+                      "type": "minecraft:not",
+                      "invert": {
+                        "type": "minecraft:stone_depth",
+                        "add_surface_depth": false,
+                        "offset": 0,
+                        "secondary_depth_range": 0,
+                        "surface_type": "floor"
+                      }
+                    },
+                    "then_run": {
+                      "type": "minecraft:block",
+                      "result_state": {
+                        "Name": "minecraft:stone"
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "minecraft:condition",
+                  "if_true": {
+                    "type": "minecraft:not",
+                    "invert": {
+                      "type": "minecraft:stone_depth",
+                      "add_surface_depth": true,
+                      "offset": -1,
+                      "secondary_depth_range": 0,
+                      "surface_type": "floor"
+                    }
+                  },
+                  "then_run": {
+                    "type": "minecraft:condition",
+                    "if_true": {
+                      "type": "minecraft:not",
+                      "invert": {
+                        "type": "minecraft:stone_depth",
+                        "add_surface_depth": false,
+                        "offset": 0,
+                        "secondary_depth_range": 0,
+                        "surface_type": "floor"
+                      }
+                    },
+                    "then_run": {
+                      "type": "minecraft:block",
+                      "result_state": {
+                        "Name": "minecraft:stone"
+                      }
+                    }
+                  }
                 }
               ]
             }
