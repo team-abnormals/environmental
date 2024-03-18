@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "minecraft:sparse_jungle",
+  "spawners": {
+    "type": "environmental:tapir",
+    "maxCount": 2,
+    "minCount": 2,
+    "weight": 4
+  }
+}
