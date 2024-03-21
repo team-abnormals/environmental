@@ -24,8 +24,4 @@ public class MyceliumSproutsBlock extends BushBlock {
 	protected boolean mayPlaceOn(BlockState state, BlockGetter worldIn, BlockPos pos) {
 		return state.is(Blocks.MYCELIUM) || super.mayPlaceOn(state, worldIn, pos);
 	}
-
-	public BlockBehaviour.OffsetType getOffsetType() {
-		return BlockBehaviour.OffsetType.XZ;
-	}
 }

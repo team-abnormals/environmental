@@ -1,5 +1,6 @@
 {
-  "type": "environmental:remove_spawns_inverted",
+  "type": "environmental:remove_spawns_inverted_ignore",
   "entity_types": "minecraft:chicken",
+  "ignored_biomes": "minecraft:grove",
   "inverted_biomes": "#environmental:has_animal/chicken"
 }

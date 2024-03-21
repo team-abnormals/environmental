@@ -1,0 +1,57 @@
+{
+  "variants": {
+    "face=floor,facing=east": {
+      "model": "environmental:block/yellow_wall_hibiscus",
+      "y": 90
+    },
+    "face=floor,facing=west": {
+      "model": "environmental:block/yellow_wall_hibiscus",
+      "y": 270
+    },
+    "face=floor,facing=south": {
+      "model": "environmental:block/yellow_wall_hibiscus",
+      "y": 180
+    },
+    "face=floor,facing=north": {
+      "model": "environmental:block/yellow_wall_hibiscus"
+    },
+    "face=wall,facing=east": {
+      "model": "environmental:block/yellow_wall_hibiscus",
+      "x": 90,
+      "y": 90
+    },
+    "face=wall,facing=west": {
+      "model": "environmental:block/yellow_wall_hibiscus",
+      "x": 90,
+      "y": 270
+    },
+    "face=wall,facing=south": {
+      "model": "environmental:block/yellow_wall_hibiscus",
+      "x": 90,
+      "y": 180
+    },
+    "face=wall,facing=north": {
+      "model": "environmental:block/yellow_wall_hibiscus",
+      "x": 90
+    },
+    "face=ceiling,facing=east": {
+      "model": "environmental:block/yellow_wall_hibiscus",
+      "x": 180,
+      "y": 270
+    },
+    "face=ceiling,facing=west": {
+      "model": "environmental:block/yellow_wall_hibiscus",
+      "x": 180,
+      "y": 90
+    },
+    "face=ceiling,facing=south": {
+      "model": "environmental:block/yellow_wall_hibiscus",
+      "x": 180
+    },
+    "face=ceiling,facing=north": {
+      "model": "environmental:block/yellow_wall_hibiscus",
+      "x": 180,
+      "y": 180
+    }
+  }
+}

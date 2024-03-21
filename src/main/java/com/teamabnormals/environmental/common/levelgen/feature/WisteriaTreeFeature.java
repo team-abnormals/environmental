@@ -1,191 +1,109 @@
 package com.teamabnormals.environmental.common.levelgen.feature;
 
-import com.google.common.collect.Sets;
+import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
-import com.teamabnormals.blueprint.core.util.TreeUtil;
-import com.teamabnormals.environmental.common.block.HangingWisteriaLeavesBlock;
-import com.teamabnormals.environmental.common.levelgen.util.WisteriaTreeUtil;
+import com.teamabnormals.blueprint.common.levelgen.feature.BlueprintTreeFeature;
+import com.teamabnormals.environmental.common.block.ColoredWisteriaLeavesBlock;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
-import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Direction.Plane;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.LevelSimulatedRW;
-import net.minecraft.world.level.LevelSimulatedReader;
-import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
-import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 
+import java.util.List;
 import java.util.Set;
-import java.util.function.BiConsumer;
 
-public class WisteriaTreeFeature extends Feature<TreeConfiguration> {
-	private Set<BlockPos> logPosSet;
+public class WisteriaTreeFeature extends BlueprintTreeFeature {
 
-	public WisteriaTreeFeature(Codec<TreeConfiguration> configFactoryIn) {
-		super(configFactoryIn);
+	public WisteriaTreeFeature(Codec<TreeConfiguration> config) {
+		super(config);
 	}
 
 	@Override
-	public boolean place(FeaturePlaceContext<TreeConfiguration> context) {
-		WorldGenLevel world = context.level();
-		RandomSource random = context.random();
-		BlockPos pos = context.origin();
+	public void doPlace(FeaturePlaceContext<TreeConfiguration> context) {
 		TreeConfiguration config = context.config();
+		RandomSource random = context.random();
+		BlockPos origin = context.origin();
 
-		if (random.nextInt(5) == 0 && EnvironmentalFeatures.BIG_WISTERIA_TREE.get().place(context)) {
-			return true;
+		int trunkHeight = config.trunkPlacer.getTreeHeight(random);
+		for (int y = 0; y < trunkHeight; y++) {
+			this.addLog(origin.above(y));
 		}
 
-		BlockState vine = getHangingWisteriaLeavesState(random, pos, config);
-		this.logPosSet = Sets.newHashSet();
-		int height = random.nextInt(7) + 5;
-		boolean flag = true;
-		if (pos.getY() >= 1 && pos.getY() + height + 1 <= world.getMaxBuildHeight()) {
-			for (int j = pos.getY(); j <= pos.getY() + 1 + height; ++j) {
-				int k = 1;
-				if (j == pos.getY()) {
-					k = 0;
-				}
-				if (j >= pos.getY() + 1 + height - 2) {
-					k = 2;
-				}
-				BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-				for (int l = pos.getX() - k; l <= pos.getX() + k && flag; ++l) {
-					for (int i1 = pos.getZ() - k; i1 <= pos.getZ() + k && flag; ++i1) {
-						if (j >= 0 && j < world.getMaxBuildHeight()) {
-							if (!TreeUtil.isAirOrLeaves(world, blockpos$mutableblockpos.set(l, j, i1))) {
-								flag = false;
-							}
-						} else {
-							flag = false;
-						}
-					}
-				}
-			}
-			if (!flag) {
-				return false;
-			} else if (TreeUtil.isValidGround(world, pos.below(), (SaplingBlock) EnvironmentalBlocks.WHITE_WISTERIA_SAPLING.get()) && pos.getY() < world.getMaxBuildHeight() - height - 1) {
-				TreeUtil.setDirtAt(world, pos.below());
-				for (int y = 4; y > -4; --y) {
-					for (int x = 4; x > -4; --x) {
-						for (int z = 4; z > -4; --z) {
-							if (Math.sqrt((x * x) + (y > 0 ? (y * y) : 0) + (z * z)) <= 4) {
-								BlockPos leafPos = pos.offset(x, y + height, z);
-								boolean place = true;
-								if (y < 0) {
-									place = TreeUtil.isLeaves(world, leafPos.offset(0, 1, 0));
-									if (place && random.nextInt(Math.abs(y) + 1) != 0) {
-										place = false;
-										if (random.nextInt(4) == 0 && !TreeUtil.isLog(world, leafPos)) {
-											WisteriaTreeUtil.placeVines(world, random, leafPos, config.foliageProvider.getState(random, pos));
-										}
-									}
-								}
-								if (place) {
-									WisteriaTreeUtil.placeLeafAt(world, leafPos, config.foliageProvider.getState(random, pos));
-								}
-							}
-						}
-					}
-				}
-				for (int i2 = 0; i2 < height; ++i2) {
-					if (TreeUtil.isAirOrLeaves(world, pos.above(i2))) {
-						TreeUtil.placeLogAt(world, pos.above(i2), random, config);
-						logPosSet.add(pos.above(i2).immutable());
-					}
-				}
-				placeBranch(world, random, pos.below(), pos.above(height).getY(), config);
-				if (random.nextInt(4) == 0) placeBranch(world, random, pos.below(), pos.above(height).getY(), config);
+		Direction direction = Plane.HORIZONTAL.getRandomDirection(random);
+		MutableBlockPos pos = new MutableBlockPos();
+		pos.set(origin.above(trunkHeight - 2).relative(direction));
 
-				BlockPos startPos = pos.above(height);
-
-				for (BlockPos blockpos : BlockPos.betweenClosed(startPos.getX() - 10, startPos.getY() - 10, startPos.getZ() - 10, startPos.getX() + 10, startPos.getY() + 10, startPos.getZ() + 10)) {
-					if (world.getBlockState(blockpos).isAir() && isLeaves(world, blockpos.above(), config, random) && random.nextInt(4) == 0) {
-						if (world.getBlockState(blockpos).isAir())
-							TreeUtil.setForcedState(world, blockpos, vine.setValue(HangingWisteriaLeavesBlock.HALF, DoubleBlockHalf.UPPER));
-						if (world.getBlockState(blockpos.below()).isAir() && random.nextInt(2) == 0)
-							TreeUtil.setForcedState(world, blockpos.below(), vine.setValue(HangingWisteriaLeavesBlock.HALF, DoubleBlockHalf.LOWER));
-					}
-				}
-
-				WisteriaTreeUtil.updateLeaves(world, this.logPosSet);
-
-				Set<BlockPos> set3 = Sets.newHashSet();
-				BiConsumer<BlockPos, BlockState> biconsumer3 = (p_225290_, p_225291_) -> {
-					set3.add(p_225290_.immutable());
-					world.setBlock(p_225290_, p_225291_, 19);
-				};
-
-				if (!config.decorators.isEmpty()) {
-					TreeDecorator.Context decoratorContext = new TreeDecorator.Context(world, biconsumer3, random, this.logPosSet, Sets.newHashSet(), Sets.newHashSet());
-					config.decorators.forEach((decorator) -> decorator.place(decoratorContext));
-				}
-
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			return false;
+		for (int y = 0; y < 3; y++) {
+			this.addLog(pos.set(pos.above()));
 		}
-	}
 
-	public static boolean isLeaves(LevelSimulatedReader worldIn, BlockPos pos, TreeConfiguration config, RandomSource random) {
-		if (worldIn instanceof net.minecraft.world.level.LevelReader) // FORGE: Redirect to state method when possible
-			return worldIn.isStateAtPosition(pos, state -> state == config.foliageProvider.getState(random, pos));
-		return worldIn.isStateAtPosition(pos, (p_227223_0_) -> {
-			return config.foliageProvider.getState(random, pos) == p_227223_0_;
+		List<Direction> rootDirections = Lists.newArrayList();
+		for (Direction direction1 : Plane.HORIZONTAL) {
+			if (isGrassOrDirt(context.level(), origin.relative(direction1).below()) && (trunkHeight > 2 || direction1 != direction))
+				rootDirections.add(direction1);
+		}
+
+		if (!rootDirections.isEmpty()) {
+			this.addLog(origin.relative(rootDirections.get(random.nextInt(rootDirections.size()))));
+		}
+
+		pos.set(pos.below().relative(Plane.HORIZONTAL.getRandomDirection(random)));
+		for (int y = 0; y < 3; y++) {
+			this.addLog(pos.set(pos.above()));
+		}
+
+		Direction direction1 = Plane.HORIZONTAL.getRandomDirection(random);
+		Direction offset = direction1.getClockWise().getOpposite();
+		Set<Direction> directions = Set.of(direction1, direction1.getOpposite(), direction1.getClockWise());
+		directions.forEach(branchDirection -> {
+			BlockPos branchPos = branchDirection == direction1 ? pos.relative(offset) : pos;
+			int height = random.nextInt(2);
+			if (height > 0)
+				this.addLog(pos.above());
+			this.createBranch(branchPos.relative(branchDirection).above(height), branchDirection, random, config);
 		});
 	}
 
-	private void placeBranch(LevelSimulatedRW world, RandomSource random, BlockPos pos, int treeHeight, TreeConfiguration config) {
-		int heightOffset = random.nextInt(3);
-		BlockPos[] startPositions = new BlockPos[]{
-				new BlockPos(pos.getX() - 1, treeHeight - heightOffset, pos.getZ()),
-				new BlockPos(pos.getX() + 1, treeHeight - heightOffset, pos.getZ()),
-				new BlockPos(pos.getX(), treeHeight - heightOffset, pos.getZ() - 1),
-				new BlockPos(pos.getX(), treeHeight - heightOffset, pos.getZ() + 1),
-				new BlockPos(pos.getX() - 1, treeHeight - heightOffset, pos.getZ() - 1),
-				new BlockPos(pos.getX() + 1, treeHeight - heightOffset, pos.getZ() - 1),
-				new BlockPos(pos.getX() - 1, treeHeight - heightOffset, pos.getZ() + 1),
-				new BlockPos(pos.getX() + 1, treeHeight - heightOffset, pos.getZ() + 1)
-		};
-		BlockPos startPos = startPositions[random.nextInt(8)];
-		if (WisteriaTreeUtil.isAirOrLeavesOrReplaceable(world, startPos)) {
-			boolean vines = random.nextInt(6) != 5;
-			BlockPos placePos = startPos;
-			for (int y = (treeHeight - heightOffset); y <= treeHeight; ++y) {
-				placePos = new BlockPos(startPos.getX(), y, startPos.getZ());
-				if (WisteriaTreeUtil.isAirOrLeavesOrReplaceable(world, placePos)) {
-					TreeUtil.placeLogAt(world, placePos, random, config);
-					logPosSet.add(placePos.immutable());
+	private void createBranch(BlockPos pos, Direction direction, RandomSource random, TreeConfiguration config) {
+		MutableBlockPos mutablePos = new MutableBlockPos();
+		mutablePos.set(pos);
+
+		this.addLog(mutablePos);
+		this.addLog(mutablePos.set(mutablePos.relative(direction)));
+		this.addLog(mutablePos.set(mutablePos.relative(direction).above()));
+
+		this.createLeaves(mutablePos, direction, random, config);
+	}
+
+	private void createLeaves(BlockPos pos, Direction direction, RandomSource random, TreeConfiguration config) {
+		for (int x = -1; x <= 1; ++x) {
+			for (int z = -1; z <= 1; ++z) {
+				int i = -1 - (random.nextInt(3) == 0 ? 1 : 0);
+				int j = i < -1 && random.nextInt(2) == 0 ? -1 : 0;
+				for (int y = 1; y >= i; --y) {
+					if (y <= 0 || x == 0 || z == 0 || random.nextInt(3) == 0) {
+						BlockPos blockpos = pos.offset(x, y, z);
+						if (y > j || (y == 0 && x == -direction.getStepX() && z == -direction.getStepZ()))
+							this.addSpecialFoliage(blockpos, EnvironmentalBlocks.WISTERIA_LEAVES.get().defaultBlockState());
+						else if (y == j)
+							this.addSpecialFoliage(blockpos, config.foliageProvider.getState(random, blockpos).setValue(ColoredWisteriaLeavesBlock.HALF, Half.TOP));
+						else
+							this.addSpecialFoliage(blockpos, config.foliageProvider.getState(random, blockpos));
+					}
 				}
 			}
-			WisteriaTreeUtil.placeLeafAt(world, placePos.above(), config.foliageProvider.getState(random, pos));
-			if (vines)
-				WisteriaTreeUtil.placeVines(world, random, startPos.below(), config.foliageProvider.getState(random, pos));
 		}
 	}
 
-	public static BlockState getHangingWisteriaLeavesState(RandomSource random, BlockPos pos, TreeConfiguration config) {
-		BlockState leafState = config.foliageProvider.getState(random, pos);
-		if (leafState.is(EnvironmentalBlocks.PINK_WISTERIA_LEAVES.get())) {
-			return EnvironmentalBlocks.PINK_HANGING_WISTERIA_LEAVES.get().defaultBlockState();
-		}
-
-		if (leafState.is(EnvironmentalBlocks.BLUE_WISTERIA_LEAVES.get())) {
-			return EnvironmentalBlocks.BLUE_HANGING_WISTERIA_LEAVES.get().defaultBlockState();
-		}
-
-		if (leafState.is(EnvironmentalBlocks.PURPLE_WISTERIA_LEAVES.get())) {
-			return EnvironmentalBlocks.PURPLE_HANGING_WISTERIA_LEAVES.get().defaultBlockState();
-		}
-
-		return EnvironmentalBlocks.WHITE_HANGING_WISTERIA_LEAVES.get().defaultBlockState();
+	@Override
+	public BlockState getSapling() {
+		return EnvironmentalBlocks.BLUE_WISTERIA_SAPLING.get().defaultBlockState();
 	}
 }

@@ -15,9 +15,8 @@ import java.util.function.Supplier;
  *
  * @author Ocelot
  */
-public class SSyncSweaterTypeMessage implements EnvironmentalLoginMessage {
+public class SSyncSweaterTypeMessage extends EnvironmentalLoginMessage {
 	private final SweaterType[] sweaterTypes;
-	private int loginIndex;
 
 	public SSyncSweaterTypeMessage() {
 		this(SlabfishManager.get(LogicalSide.SERVER).getAllSweaterTypes());
@@ -27,13 +26,13 @@ public class SSyncSweaterTypeMessage implements EnvironmentalLoginMessage {
 		this.sweaterTypes = sweaterTypes;
 	}
 
-	public static void serialize(SSyncSweaterTypeMessage msg, FriendlyByteBuf buf) {
+	public static void encode(SSyncSweaterTypeMessage msg, FriendlyByteBuf buf) {
 		buf.writeVarInt(msg.sweaterTypes.length);
 		for (int i = 0; i < msg.sweaterTypes.length; i++)
 			msg.sweaterTypes[i].writeTo(buf);
 	}
 
-	public static SSyncSweaterTypeMessage deserialize(FriendlyByteBuf buf) {
+	public static SSyncSweaterTypeMessage decode(FriendlyByteBuf buf) {
 		SweaterType[] slabfishTypes = new SweaterType[buf.readVarInt()];
 		for (int i = 0; i < slabfishTypes.length; i++)
 			slabfishTypes[i] = SweaterType.readFrom(buf);
@@ -56,15 +55,5 @@ public class SSyncSweaterTypeMessage implements EnvironmentalLoginMessage {
 	 */
 	public SweaterType[] getSweaterTypes() {
 		return sweaterTypes;
-	}
-
-	@Override
-	public int getLoginIndex() {
-		return loginIndex;
-	}
-
-	@Override
-	public void setLoginIndex(int loginIndex) {
-		this.loginIndex = loginIndex;
 	}
 }

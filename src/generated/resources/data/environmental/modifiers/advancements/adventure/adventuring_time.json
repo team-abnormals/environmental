@@ -51,6 +51,86 @@
               ]
             },
             "trigger": "minecraft:location"
+          },
+          "environmental:old_growth_pine_barrens": {
+            "conditions": {
+              "player": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "location": {
+                      "biome": "environmental:old_growth_pine_barrens"
+                    }
+                  }
+                }
+              ]
+            },
+            "trigger": "minecraft:location"
+          },
+          "environmental:pine_barrens": {
+            "conditions": {
+              "player": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "location": {
+                      "biome": "environmental:pine_barrens"
+                    }
+                  }
+                }
+              ]
+            },
+            "trigger": "minecraft:location"
+          },
+          "environmental:pine_slopes": {
+            "conditions": {
+              "player": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "location": {
+                      "biome": "environmental:pine_slopes"
+                    }
+                  }
+                }
+              ]
+            },
+            "trigger": "minecraft:location"
+          },
+          "environmental:snowy_old_growth_pine_barrens": {
+            "conditions": {
+              "player": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "location": {
+                      "biome": "environmental:snowy_old_growth_pine_barrens"
+                    }
+                  }
+                }
+              ]
+            },
+            "trigger": "minecraft:location"
+          },
+          "environmental:snowy_pine_barrens": {
+            "conditions": {
+              "player": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "location": {
+                      "biome": "environmental:snowy_pine_barrens"
+                    }
+                  }
+                }
+              ]
+            },
+            "trigger": "minecraft:location"
           }
         },
         "requirements": [
@@ -62,6 +142,21 @@
           ],
           [
             "environmental:blossom_valleys"
+          ],
+          [
+            "environmental:pine_barrens"
+          ],
+          [
+            "environmental:snowy_pine_barrens"
+          ],
+          [
+            "environmental:old_growth_pine_barrens"
+          ],
+          [
+            "environmental:snowy_old_growth_pine_barrens"
+          ],
+          [
+            "environmental:pine_slopes"
           ]
         ],
         "should_replace_requirements": false

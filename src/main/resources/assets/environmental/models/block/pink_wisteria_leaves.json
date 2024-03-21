@@ -1,6 +1,6 @@
 {
-    "parent": "block/leaves",
-    "textures": {
-        "all": "environmental:block/pink_wisteria_flowers"
-    }
+  "parent": "block/leaves",
+  "textures": {
+    "all": "environmental:block/pink_wisteria_flowers"
+  }
 }

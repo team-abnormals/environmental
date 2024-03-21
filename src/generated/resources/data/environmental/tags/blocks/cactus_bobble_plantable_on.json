@@ -1,0 +1,9 @@
+{
+  "values": [
+    "minecraft:cactus",
+    {
+      "id": "atmospheric:snowy_cactus",
+      "required": false
+    }
+  ]
+}

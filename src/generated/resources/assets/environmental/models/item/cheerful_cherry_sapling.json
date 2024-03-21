@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "environmental:block/cheerful_cherry_sapling"
+  }
+}

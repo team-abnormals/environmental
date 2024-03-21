@@ -1,0 +1,40 @@
+{
+  "parent": "minecraft:husbandry/root",
+  "criteria": {
+    "shear_cattail": {
+      "conditions": {
+        "item": {
+          "tag": "forge:shears"
+        },
+        "location": {
+          "block": {
+            "blocks": [
+              "environmental:cattail"
+            ]
+          }
+        }
+      },
+      "trigger": "minecraft:item_used_on_block"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.environmental.husbandry.shear_cattail.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "environmental:cattail_fluff"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.environmental.husbandry.shear_cattail.title"
+    }
+  },
+  "requirements": [
+    [
+      "shear_cattail"
+    ]
+  ]
+}

@@ -1,6 +1,7 @@
 {
   "values": [
     "environmental:willow_slab",
+    "environmental:pine_slab",
     "environmental:wisteria_slab",
     "environmental:cherry_slab"
   ]

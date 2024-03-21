@@ -12,11 +12,11 @@
         "type": "minecraft:crafting_shapeless",
         "ingredients": [
           {
-            "item": "environmental:willow_slab"
+            "item": "environmental:willow_vertical_slab"
           }
         ],
         "result": {
-          "item": "environmental:willow_vertical_slab"
+          "item": "environmental:willow_slab"
         }
       }
     }

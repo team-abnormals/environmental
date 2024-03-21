@@ -1,0 +1,178 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "environmental:block/cattail_one"
+      },
+      "when": {
+        "cattails": "1",
+        "top": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "environmental:block/cattail_top_one"
+      },
+      "when": {
+        "cattails": "1",
+        "top": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "environmental:block/cattail_head_one"
+      },
+      "when": {
+        "cattails": "1",
+        "fluffy": "false",
+        "top": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "environmental:block/cattail_head_top_one"
+      },
+      "when": {
+        "cattails": "1",
+        "fluffy": "false",
+        "top": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "environmental:block/cattail_head_fluffy_one"
+      },
+      "when": {
+        "cattails": "1",
+        "fluffy": "true",
+        "top": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "environmental:block/cattail_head_fluffy_top_one"
+      },
+      "when": {
+        "cattails": "1",
+        "fluffy": "true",
+        "top": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "environmental:block/cattail_two"
+      },
+      "when": {
+        "cattails": "2",
+        "top": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "environmental:block/cattail_top_two"
+      },
+      "when": {
+        "cattails": "2",
+        "top": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "environmental:block/cattail_head_two"
+      },
+      "when": {
+        "cattails": "2",
+        "fluffy": "false",
+        "top": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "environmental:block/cattail_head_top_two"
+      },
+      "when": {
+        "cattails": "2",
+        "fluffy": "false",
+        "top": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "environmental:block/cattail_head_fluffy_two"
+      },
+      "when": {
+        "cattails": "2",
+        "fluffy": "true",
+        "top": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "environmental:block/cattail_head_fluffy_top_two"
+      },
+      "when": {
+        "cattails": "2",
+        "fluffy": "true",
+        "top": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "environmental:block/cattail_three"
+      },
+      "when": {
+        "cattails": "3",
+        "top": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "environmental:block/cattail_top_three"
+      },
+      "when": {
+        "cattails": "3",
+        "top": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "environmental:block/cattail_head_three"
+      },
+      "when": {
+        "cattails": "3",
+        "fluffy": "false",
+        "top": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "environmental:block/cattail_head_top_three"
+      },
+      "when": {
+        "cattails": "3",
+        "fluffy": "false",
+        "top": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "environmental:block/cattail_head_fluffy_three"
+      },
+      "when": {
+        "cattails": "3",
+        "fluffy": "true",
+        "top": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "environmental:block/cattail_head_fluffy_top_three"
+      },
+      "when": {
+        "cattails": "3",
+        "fluffy": "true",
+        "top": "true"
+      }
+    }
+  ]
+}

@@ -1,15 +1,14 @@
 package com.teamabnormals.environmental.common.block;
 
 import com.teamabnormals.blueprint.common.block.wood.BlueprintLeavesBlock;
+import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.teamabnormals.environmental.core.registry.EnvironmentalParticleTypes;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-
-import java.util.Random;
-import net.minecraft.util.RandomSource;
 
 public class CherryLeavesBlock extends BlueprintLeavesBlock {
 
@@ -18,22 +17,22 @@ public class CherryLeavesBlock extends BlueprintLeavesBlock {
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, RandomSource rand) {
-		super.animateTick(stateIn, worldIn, pos, rand);
+	public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+		super.animateTick(state, level, pos, random);
 
-		int color = worldIn.getBiome(pos).value().getFoliageColor();
+		double d0 = random.nextGaussian() * 0.02D;
+		double d1 = random.nextGaussian() * 0.02D;
+		double d2 = random.nextGaussian() * 0.02D;
 
-		double d0 = (color >> 16 & 255) / 255.0F;
-		double d1 = (color >> 8 & 255) / 255.0F;
-		double d2 = (color & 255) / 255.0F;
+		float rate = level.isThundering() ? 0.2F : level.isRaining() ? 0.05F : 0.025F;
 
-		if (rand.nextInt(50) == 0) {
+		if (random.nextFloat() < rate) {
 			BlockPos blockpos = pos.below();
-			if (worldIn.isEmptyBlock(blockpos)) {
-				double d3 = (float) pos.getX() + rand.nextFloat();
+			if (level.isEmptyBlock(blockpos)) {
+				double d3 = (float) pos.getX() + random.nextFloat();
 				double d4 = (double) pos.getY() - 0.05D;
-				double d6 = (float) pos.getZ() + rand.nextFloat();
-				worldIn.addParticle(EnvironmentalParticleTypes.CHERRY_BLOSSOM.get(), d3, d4, d6, d0, d1, d2);
+				double d6 = (float) pos.getZ() + random.nextFloat();
+				level.addParticle(state.is(EnvironmentalBlocks.CHEERFUL_CHERRY_LEAVES.get()) ? EnvironmentalParticleTypes.CHEERFUL_CHERRY_BLOSSOM.get() : state.is(EnvironmentalBlocks.MOODY_CHERRY_LEAVES.get()) ? EnvironmentalParticleTypes.MOODY_CHERRY_BLOSSOM.get() : EnvironmentalParticleTypes.CHERRY_BLOSSOM.get(), d3, d4, d6, d0, d1, d2);
 			}
 		}
 	}

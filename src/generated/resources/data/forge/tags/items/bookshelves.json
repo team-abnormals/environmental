@@ -1,6 +1,7 @@
 {
   "values": [
     "environmental:willow_bookshelf",
+    "environmental:pine_bookshelf",
     "environmental:wisteria_bookshelf",
     "environmental:cherry_bookshelf"
   ]

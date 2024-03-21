@@ -1,0 +1,29 @@
+{
+  "parent": "environmental:husbandry/saddle_pig",
+  "criteria": {
+    "when_pigs_fly": {
+      "trigger": "environmental:when_pigs_fly"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.environmental.husbandry.when_pigs_fly.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:carrot_on_a_stick",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.environmental.husbandry.when_pigs_fly.title"
+    }
+  },
+  "requirements": [
+    [
+      "when_pigs_fly"
+    ]
+  ]
+}

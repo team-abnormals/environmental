@@ -1,0 +1,6 @@
+{
+  "parent": "environmental:block/template_cactus_bobble",
+  "textures": {
+    "all": "environmental:block/cactus_bobble"
+  }
+}

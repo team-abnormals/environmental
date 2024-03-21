@@ -1,0 +1,6 @@
+{
+  "parent": "blueprint:block/hedge_extend",
+  "textures": {
+    "leaf": "environmental:block/cheerful_cherry_leaves"
+  }
+}

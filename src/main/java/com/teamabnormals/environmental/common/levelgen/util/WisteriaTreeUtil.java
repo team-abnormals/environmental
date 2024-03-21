@@ -3,7 +3,7 @@ package com.teamabnormals.environmental.common.levelgen.util;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.teamabnormals.blueprint.core.util.TreeUtil;
-import com.teamabnormals.environmental.common.block.WisteriaLeavesBlock;
+import com.teamabnormals.environmental.common.block.ColoredWisteriaLeavesBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
@@ -77,9 +77,9 @@ public class WisteriaTreeUtil {
 				mutablePos.setWithOffset(pos, direction);
 				if (!logPositions.contains(mutablePos)) {
 					BlockState state = level.getBlockState(mutablePos);
-					if (state.hasProperty(WisteriaLeavesBlock.DISTANCE)) {
+					if (state.hasProperty(ColoredWisteriaLeavesBlock.DISTANCE)) {
 						list.get(0).add(mutablePos.immutable());
-						TreeUtil.setForcedState(level, mutablePos, state.setValue(WisteriaLeavesBlock.DISTANCE, 1));
+						TreeUtil.setForcedState(level, mutablePos, state.setValue(ColoredWisteriaLeavesBlock.DISTANCE, 1));
 					}
 				}
 			}
@@ -94,10 +94,10 @@ public class WisteriaTreeUtil {
 					mutablePos.setWithOffset(pos, direction1);
 					if (!set.contains(mutablePos) && !set1.contains(mutablePos)) {
 						BlockState state = level.getBlockState(mutablePos);
-						if (state.hasProperty(WisteriaLeavesBlock.DISTANCE)) {
-							int k = state.getValue(WisteriaLeavesBlock.DISTANCE);
+						if (state.hasProperty(ColoredWisteriaLeavesBlock.DISTANCE)) {
+							int k = state.getValue(ColoredWisteriaLeavesBlock.DISTANCE);
 							if (k > l + 1) {
-								TreeUtil.setForcedState(level, mutablePos, state.setValue(WisteriaLeavesBlock.DISTANCE, l + 1));
+								TreeUtil.setForcedState(level, mutablePos, state.setValue(ColoredWisteriaLeavesBlock.DISTANCE, l + 1));
 								set1.add(mutablePos.immutable());
 							}
 						}

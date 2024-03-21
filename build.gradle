@@ -61,7 +61,7 @@ minecraft {
             property "mixin.env.remapRefMap", "true"
             property "mixin.env.refMapRemappingFile", "${projectDir}/build/createSrgToMcp/output.srg"
             property "blueprint.indev", "true"
-            args "--mod", project.modId, "--all", "--output", file("src/generated/resources/"), "--existing", file("src/main/resources")
+            args "--mod", project.modId, "--all", "--output", file("src/generated/resources/"), "--existing", file("src/main/resources"), "--existing-mod", "blueprint"
             mods {
                 environmental {
                     source sourceSets.main
@@ -80,7 +80,7 @@ dependencies {
     implementation fg.deobf("com.teamabnormals:blueprint:${project.minecraft}-${project.blueprint}")
 
     compileOnly fg.deobf("curse.maven:incubation-361718:3906687")
-    compileOnly fg.deobf("com.teamabnormals:boatload:1.19-${project.boatload}")
+    compileOnly fg.deobf("com.teamabnormals:boatload:${project.minecraft}-${project.boatload}")
     compileOnly fg.deobf("mezz.jei:jei-${project.minecraft}-common-api:${project.jei}")
     compileOnly fg.deobf("mezz.jei:jei-${project.minecraft}-forge-api:${project.jei}")
     runtimeOnly fg.deobf("mezz.jei:jei-${project.minecraft}-forge:${project.jei}")

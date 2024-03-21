@@ -50,7 +50,6 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 	public static final QuarkFlagRecipeCondition WOODEN_POSTS = quarkFlag("wooden_posts");
 	public static final QuarkFlagRecipeCondition BERRY_SACK = quarkFlag("berry_sack");
 	public static final QuarkFlagRecipeCondition APPLE_CRATE = quarkFlag("apple_crate");
-	public static final QuarkFlagRecipeCondition GOLDEN_APPLE_CRATE = quarkFlag("golden_apple_crate");
 	public static final AndCondition WOOD_TO_CHEST_RECIPES = new AndCondition(quarkFlag("variant_chests"), quarkFlag("wood_to_chest_recipes"));
 
 	public EnvironmentalRecipeProvider(DataGenerator generator) {
@@ -70,6 +69,7 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 		oneToOneConversionRecipe(consumer, Items.PURPLE_DYE, EnvironmentalBlocks.VIOLET.get(), "purple_dye");
 		oneToOneConversionRecipe(consumer, Items.RED_DYE, EnvironmentalBlocks.RED_LOTUS_FLOWER.get(), "red_dye");
 		oneToOneConversionRecipe(consumer, Items.WHITE_DYE, EnvironmentalBlocks.WHITE_LOTUS_FLOWER.get(), "white_dye");
+		oneToOneConversionRecipe(consumer, Items.ORANGE_DYE, EnvironmentalBlocks.TASSELFLOWER.get(), "purple_dye");
 		oneToOneConversionRecipe(consumer, Items.MAGENTA_DYE, EnvironmentalBlocks.MAGENTA_HIBISCUS.get(), "magenta_dye");
 		oneToOneConversionRecipe(consumer, Items.ORANGE_DYE, EnvironmentalBlocks.ORANGE_HIBISCUS.get(), "orange_dye");
 		oneToOneConversionRecipe(consumer, Items.PINK_DYE, EnvironmentalBlocks.PINK_HIBISCUS.get(), "pink_dye");
@@ -77,18 +77,17 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 		oneToOneConversionRecipe(consumer, Items.RED_DYE, EnvironmentalBlocks.RED_HIBISCUS.get(), "red_dye");
 		oneToOneConversionRecipe(consumer, Items.PURPLE_DYE, EnvironmentalBlocks.PURPLE_HIBISCUS.get(), "purple_dye");
 
+		// conditionalLeafPileRecipes(consumer, EnvironmentalBlocks.HIBISCUS_LEAVES.get(), EnvironmentalBlocks.HIBISCUS_LEAF_PILE.get());
+		leafCarpetRecipe(consumer, EnvironmentalBlocks.HIBISCUS_LEAVES.get(), EnvironmentalBlocks.HIBISCUS_LEAF_CARPET.get());
+
 		foodCookingRecipes(consumer, EnvironmentalItems.DUCK.get(), EnvironmentalItems.COOKED_DUCK.get());
 		foodCookingRecipes(consumer, EnvironmentalItems.VENISON.get(), EnvironmentalItems.COOKED_VENISON.get());
 		conditionalNineBlockStorageRecipes(consumer, INCUBATION_LOADED, EnvironmentalItems.DUCK_EGG.get(), EnvironmentalBlocks.DUCK_EGG_CRATE.get());
 		conditionalNineBlockStorageRecipes(consumer, APPLE_CRATE, EnvironmentalItems.CHERRIES.get(), EnvironmentalBlocks.CHERRY_CRATE.get());
-		conditionalNineBlockStorageRecipes(consumer, GOLDEN_APPLE_CRATE, EnvironmentalItems.TRUFFLE.get(), EnvironmentalBlocks.TRUFFLE_CRATE.get());
-		conditionalNineBlockStorageRecipes(consumer, BERRY_SACK, EnvironmentalItems.CATTAIL_SEEDS.get(), EnvironmentalBlocks.CATTAIL_SEED_SACK.get());
+		nineBlockStorageRecipes(consumer, EnvironmentalItems.CATTAIL_FLUFF.get(), EnvironmentalBlocks.CATTAIL_FLUFF_BLOCK.get());
 
-		ShapelessRecipeBuilder.shapeless(Items.STRING).requires(EnvironmentalItems.CATTAIL_SEEDS.get(), 3).unlockedBy("has_cattail_seeds", has(EnvironmentalItems.CATTAIL_SEEDS.get())).save(consumer, getModConversionRecipeName(Items.STRING, EnvironmentalItems.CATTAIL_SEEDS.get()));
-		ShapelessRecipeBuilder.shapeless(EnvironmentalItems.APPLE_PIE.get()).requires(Items.APPLE, 2).requires(Items.SUGAR).requires(BlueprintItemTags.EGGS).unlockedBy("has_apple", has(Items.APPLE)).save(consumer);
+		ShapelessRecipeBuilder.shapeless(Items.STRING).requires(EnvironmentalItems.CATTAIL_FLUFF.get(), 5).unlockedBy("has_cattail_seeds", has(EnvironmentalItems.CATTAIL_FLUFF.get())).save(consumer, getModConversionRecipeName(Items.STRING, EnvironmentalItems.CATTAIL_FLUFF.get()));
 		ShapelessRecipeBuilder.shapeless(EnvironmentalItems.CHERRY_PIE.get()).requires(Ingredient.of(EnvironmentalItemTags.FRUITS_CHERRY), 3).requires(Items.SUGAR).requires(BlueprintItemTags.EGGS).unlockedBy("has_cherry", has(EnvironmentalItemTags.FRUITS_CHERRY)).save(consumer);
-		ShapelessRecipeBuilder.shapeless(EnvironmentalItems.TRUFFLE_PIE.get()).requires(EnvironmentalItems.TRUFFLE.get()).requires(Items.BROWN_MUSHROOM, 2).requires(Items.SUGAR).requires(BlueprintItemTags.EGGS).unlockedBy("has_truffle", has(EnvironmentalItems.TRUFFLE.get())).save(consumer);
-		ShapelessRecipeBuilder.shapeless(EnvironmentalItems.TRUFFLE_MASH.get()).requires(EnvironmentalItems.TRUFFLE.get()).requires(Items.BAKED_POTATO, 3).requires(BlueprintItemTags.MILK).requires(Items.BOWL).unlockedBy("has_truffle", has(EnvironmentalItems.TRUFFLE.get())).save(consumer);
 
 		ShapedRecipeBuilder.shaped(EnvironmentalBlocks.GRASS_THATCH.get(), 4).define('W', Items.WHEAT).define('G', Blocks.GRASS).pattern("WG").pattern("GW").group("grass_thatch").unlockedBy("has_grass", has(Blocks.GRASS)).save(consumer);
 		ShapedRecipeBuilder.shaped(EnvironmentalBlocks.GRASS_THATCH.get(), 6).define('W', Items.WHEAT).define('G', Blocks.TALL_GRASS).pattern("WG").pattern("GW").group("grass_thatch").unlockedBy("has_tall_grass", has(Blocks.TALL_GRASS)).save(consumer, getModConversionRecipeName(EnvironmentalBlocks.GRASS_THATCH.get(), Blocks.GRASS));
@@ -103,6 +102,37 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 		ShapedRecipeBuilder.shaped(EnvironmentalBlocks.DUCKWEED_THATCH.get(), 4).define('#', EnvironmentalBlocks.DUCKWEED.get()).pattern("##").pattern("##").unlockedBy("has_duckweed", has(EnvironmentalBlocks.DUCKWEED.get())).save(consumer);
 		generateRecipes(consumer, EnvironmentalBlockFamilies.DUCKWEED_THATCH_FAMILY);
 		verticalSlabRecipes(consumer, EnvironmentalBlockFamilies.DUCKWEED_THATCH_FAMILY, EnvironmentalBlocks.DUCKWEED_THATCH_VERTICAL_SLAB.get());
+
+		ShapedRecipeBuilder.shaped(EnvironmentalBlocks.DIRT_BRICKS.get(), 4).define('#', Blocks.DIRT).pattern("##").pattern("##").unlockedBy(getHasName(Blocks.DIRT), has(Blocks.DIRT)).save(consumer);
+		generateRecipes(consumer, EnvironmentalBlockFamilies.DIRT_BRICK_FAMILY);
+		verticalSlabRecipes(consumer, EnvironmentalBlockFamilies.DIRT_BRICK_FAMILY, EnvironmentalBlocks.DIRT_BRICK_VERTICAL_SLAB.get());
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_BRICK_SLAB.get(), EnvironmentalBlocks.DIRT_BRICKS.get(), 2);
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_BRICK_STAIRS.get(), EnvironmentalBlocks.DIRT_BRICKS.get());
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_BRICK_WALL.get(), EnvironmentalBlocks.DIRT_BRICKS.get());
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_BRICKS.get(), Blocks.DIRT);
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_BRICK_SLAB.get(), Blocks.DIRT, 2);
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_BRICK_STAIRS.get(), Blocks.DIRT);
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_BRICK_WALL.get(), Blocks.DIRT);
+		conditionalStonecuttingRecipe(consumer, VERTICAL_SLABS, EnvironmentalBlocks.DIRT_BRICK_VERTICAL_SLAB.get(), Blocks.DIRT, 2);
+		conditionalStonecuttingRecipe(consumer, VERTICAL_SLABS, EnvironmentalBlocks.DIRT_BRICK_VERTICAL_SLAB.get(), EnvironmentalBlocks.DIRT_BRICKS.get(), 2);
+		
+		ShapedRecipeBuilder.shaped(EnvironmentalBlocks.DIRT_TILES.get(), 4).define('#', EnvironmentalBlocks.DIRT_BRICKS.get()).pattern("##").pattern("##").unlockedBy(getHasName(EnvironmentalBlocks.DIRT_BRICKS.get()), has(EnvironmentalBlocks.DIRT_BRICKS.get())).save(consumer);
+		generateRecipes(consumer, EnvironmentalBlockFamilies.DIRT_TILE_FAMILY);
+		verticalSlabRecipes(consumer, EnvironmentalBlockFamilies.DIRT_TILE_FAMILY, EnvironmentalBlocks.DIRT_TILE_VERTICAL_SLAB.get());
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_TILE_SLAB.get(), EnvironmentalBlocks.DIRT_TILES.get(), 2);
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_TILE_STAIRS.get(), EnvironmentalBlocks.DIRT_TILES.get());
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_TILE_WALL.get(), EnvironmentalBlocks.DIRT_TILES.get());
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_TILES.get(), EnvironmentalBlocks.DIRT_BRICKS.get());
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_TILE_SLAB.get(), EnvironmentalBlocks.DIRT_BRICKS.get(), 2);
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_TILE_STAIRS.get(), EnvironmentalBlocks.DIRT_BRICKS.get());
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_TILE_WALL.get(), EnvironmentalBlocks.DIRT_BRICKS.get());
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_TILES.get(), Blocks.DIRT);
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_TILE_SLAB.get(), Blocks.DIRT, 2);
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_TILE_STAIRS.get(), Blocks.DIRT);
+		stonecutterResultFromBase(consumer, EnvironmentalBlocks.DIRT_TILE_WALL.get(), Blocks.DIRT);
+		conditionalStonecuttingRecipe(consumer, VERTICAL_SLABS, EnvironmentalBlocks.DIRT_TILE_VERTICAL_SLAB.get(), Blocks.DIRT, 2);
+		conditionalStonecuttingRecipe(consumer, VERTICAL_SLABS, EnvironmentalBlocks.DIRT_TILE_VERTICAL_SLAB.get(), EnvironmentalBlocks.DIRT_BRICKS.get(), 2);
+		conditionalStonecuttingRecipe(consumer, VERTICAL_SLABS, EnvironmentalBlocks.DIRT_TILE_VERTICAL_SLAB.get(), EnvironmentalBlocks.DIRT_TILES.get(), 2);
 
 		ShapedRecipeBuilder.shaped(Blocks.MUD).define('#', EnvironmentalItems.MUD_BALL.get()).pattern("##").pattern("##").unlockedBy("has_mud_ball", has(EnvironmentalItems.MUD_BALL.get())).save(consumer, new ResourceLocation(Environmental.MOD_ID, RecipeBuilder.getDefaultRecipeId(Blocks.MUD).getPath()));
 		oneToOneConversionRecipeBuilder(EnvironmentalItems.MUD_BALL.get(), Blocks.MUD, 4).group("mud_ball").save(consumer);
@@ -119,7 +149,7 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 		ShapedRecipeBuilder.shaped(Blocks.BROWN_WOOL).define('#', EnvironmentalItems.YAK_HAIR.get()).pattern("##").pattern("##").unlockedBy("has_yak_hair", has(EnvironmentalItems.YAK_HAIR.get())).save(consumer, new ResourceLocation(Environmental.MOD_ID, getItemName(Blocks.BROWN_WOOL)));
 		nineBlockStorageRecipes(consumer, EnvironmentalItems.YAK_HAIR.get(), EnvironmentalBlocks.YAK_HAIR_BLOCK.get());
 		ShapedRecipeBuilder.shaped(EnvironmentalBlocks.YAK_HAIR_RUG.get()).define('#', EnvironmentalItems.YAK_HAIR.get()).pattern("###").unlockedBy("has_yak_hair", has(EnvironmentalItems.YAK_HAIR.get())).save(consumer);
-		ShapedRecipeBuilder.shaped(EnvironmentalItems.YAK_PANTS.get()).define('#', EnvironmentalItems.YAK_HAIR.get()).pattern("###").pattern("# #").pattern("# #").unlockedBy("has_yak_hair", has(EnvironmentalItems.YAK_HAIR.get())).save(consumer);
+		ShapedRecipeBuilder.shaped(EnvironmentalItems.YAK_PANTS.get()).define('#', Items.LEATHER).define('B', EnvironmentalBlocks.YAK_HAIR_BLOCK.get()).pattern("BBB").pattern("# #").pattern("# #").unlockedBy("has_yak_hair", has(EnvironmentalItems.YAK_HAIR.get())).save(consumer);
 
 		generateRecipes(consumer, EnvironmentalBlockFamilies.WILLOW_PLANKS_FAMILY);
 		planksFromLogs(consumer, EnvironmentalBlocks.WILLOW_PLANKS.get(), EnvironmentalItemTags.WILLOW_LOGS);
@@ -128,7 +158,7 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 		ShapedRecipeBuilder.shaped(EnvironmentalBlocks.HANGING_WILLOW_LEAVES.get(), 3).define('#', EnvironmentalBlocks.WILLOW_LEAVES.get()).pattern("#").pattern("#").pattern("#").unlockedBy(getHasName(EnvironmentalBlocks.WILLOW_LEAVES.get()), has(EnvironmentalBlocks.WILLOW_LEAVES.get())).save(consumer);
 		//conditionalLeafPileRecipes(consumer, EnvironmentalBlocks.WILLOW_LEAVES.get(), EnvironmentalBlocks.WILLOW_LEAF_PILE.get());
 		verticalSlabRecipes(consumer, EnvironmentalBlockFamilies.WILLOW_PLANKS_FAMILY, EnvironmentalBlocks.WILLOW_VERTICAL_SLAB.get());
-		leafCarpetRecipe(consumer, EnvironmentalBlocks.WILLOW_LEAVES.get(), EnvironmentalBlocks.WILLOW_LEAF_CARPET.get(), EnvironmentalBlocks.WILLOW_HEDGE.get(), EnvironmentalItemTags.WILLOW_LOGS);
+		leafCarpetAndHedgeRecipe(consumer, EnvironmentalBlocks.WILLOW_LEAVES.get(), EnvironmentalBlocks.WILLOW_LEAF_CARPET.get(), EnvironmentalBlocks.WILLOW_HEDGE.get(), EnvironmentalItemTags.WILLOW_LOGS);
 		woodenBoat(consumer, EnvironmentalItems.WILLOW_BOAT.getFirst().get(), EnvironmentalBlocks.WILLOW_PLANKS.get());
 		chestBoat(consumer, EnvironmentalItems.WILLOW_BOAT.getSecond().get(), EnvironmentalItems.WILLOW_BOAT.getFirst().get());
 		conditionalRecipe(consumer, BOATLOAD_LOADED, ShapelessRecipeBuilder.shapeless(EnvironmentalItems.WILLOW_FURNACE_BOAT.get()).requires(Blocks.FURNACE).requires(EnvironmentalItems.WILLOW_BOAT.getFirst().get()).group("furnace_boat").unlockedBy("has_boat", has(ItemTags.BOATS)));
@@ -145,6 +175,31 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 		conditionalRecipe(consumer, WOODEN_POSTS, ShapedRecipeBuilder.shaped(EnvironmentalBlocks.STRIPPED_WILLOW_POST.get(), 8).define('#', EnvironmentalBlocks.STRIPPED_WILLOW_WOOD.get()).pattern("#").pattern("#").pattern("#").group("wooden_post").unlockedBy(getHasName(EnvironmentalBlocks.STRIPPED_WILLOW_WOOD.get()), has(EnvironmentalBlocks.STRIPPED_WILLOW_WOOD.get())));
 		conditionalRecipe(consumer, WOOD_TO_CHEST_RECIPES, ShapedRecipeBuilder.shaped(EnvironmentalBlocks.WILLOW_CHESTS.getFirst().get(), 4).define('#', EnvironmentalItemTags.WILLOW_LOGS).pattern("###").pattern("# #").pattern("###").group("wooden_chest").unlockedBy("has_lots_of_items", new InventoryChangeTrigger.TriggerInstance(EntityPredicate.Composite.ANY, MinMaxBounds.Ints.atLeast(10), MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, new ItemPredicate[0])), new ResourceLocation(RecipeBuilder.getDefaultRecipeId(EnvironmentalBlocks.WILLOW_CHESTS.getFirst().get()) + "_wood"));
 
+		generateRecipes(consumer, EnvironmentalBlockFamilies.PINE_PLANKS_FAMILY);
+		planksFromLogs(consumer, EnvironmentalBlocks.PINE_PLANKS.get(), EnvironmentalItemTags.PINE_LOGS);
+		woodFromLogs(consumer, EnvironmentalBlocks.PINE_WOOD.get(), EnvironmentalBlocks.PINE_LOG.get());
+		woodFromLogs(consumer, EnvironmentalBlocks.STRIPPED_PINE_WOOD.get(), EnvironmentalBlocks.STRIPPED_PINE_LOG.get());
+		//conditionalLeafPileRecipes(consumer, EnvironmentalBlocks.PINE_LEAVES.get(), EnvironmentalBlocks.PINE_LEAF_PILE.get());
+		verticalSlabRecipes(consumer, EnvironmentalBlockFamilies.PINE_PLANKS_FAMILY, EnvironmentalBlocks.PINE_VERTICAL_SLAB.get());
+		leafCarpetAndHedgeRecipe(consumer, EnvironmentalBlocks.PINE_LEAVES.get(), EnvironmentalBlocks.PINE_LEAF_CARPET.get(), EnvironmentalBlocks.PINE_HEDGE.get(), EnvironmentalItemTags.PINE_LOGS);
+		woodenBoat(consumer, EnvironmentalItems.PINE_BOAT.getFirst().get(), EnvironmentalBlocks.PINE_PLANKS.get());
+		chestBoat(consumer, EnvironmentalItems.PINE_BOAT.getSecond().get(), EnvironmentalItems.PINE_BOAT.getFirst().get());
+		conditionalRecipe(consumer, BOATLOAD_LOADED, ShapelessRecipeBuilder.shapeless(EnvironmentalItems.PINE_FURNACE_BOAT.get()).requires(Blocks.FURNACE).requires(EnvironmentalItems.PINE_BOAT.getFirst().get()).group("furnace_boat").unlockedBy("has_boat", has(ItemTags.BOATS)));
+		conditionalRecipe(consumer, BOATLOAD_LOADED, ShapedRecipeBuilder.shaped(EnvironmentalItems.LARGE_PINE_BOAT.get()).define('#', EnvironmentalBlocks.PINE_PLANKS.get()).define('B', EnvironmentalItems.PINE_BOAT.getFirst().get()).pattern("#B#").pattern("###").group("large_boat").unlockedBy("has_boat", has(ItemTags.BOATS)));
+		//conditionalRecipe(consumer, WOODWORKS_LOADED, ShapedRecipeBuilder.shaped(EnvironmentalBlocks.PINE_BOARDS.get(), 3).define('#', EnvironmentalBlocks.PINE_PLANKS.get()).pattern("#").pattern("#").pattern("#").group("wooden_boards").unlockedBy(getHasName(EnvironmentalBlocks.PINE_PLANKS.get()), has(EnvironmentalBlocks.PINE_PLANKS.get())));
+		//conditionalRecipe(consumer, WOODEN_BOOKSHELVES, ShapedRecipeBuilder.shaped(EnvironmentalBlocks.PINE_BOOKSHELF.get()).define('#', EnvironmentalBlocks.PINE_PLANKS.get()).define('X', Items.BOOK).pattern("###").pattern("XXX").pattern("###").group("wooden_bookshelf").unlockedBy("has_book", has(Items.BOOK)));
+		//conditionalRecipe(consumer, WOODEN_LADDERS, ShapedRecipeBuilder.shaped(EnvironmentalBlocks.PINE_LADDER.get(), 4).define('#', EnvironmentalBlocks.PINE_PLANKS.get()).define('S', Items.STICK).pattern("S S").pattern("S#S").pattern("S S").group("wooden_ladder").unlockedBy("has_stick", has(Items.STICK)));
+		//conditionalRecipe(consumer, WOODWORKS_LOADED, ShapedRecipeBuilder.shaped(EnvironmentalBlocks.PINE_BEEHIVE.get()).define('#', EnvironmentalBlocks.PINE_PLANKS.get()).define('H', Items.HONEYCOMB).pattern("###").pattern("HHH").pattern("###").group("wooden_beehive").unlockedBy("has_honeycomb", has(Items.HONEYCOMB)));
+		//conditionalRecipe(consumer, WOODEN_CHESTS, ShapedRecipeBuilder.shaped(EnvironmentalBlocks.PINE_CHESTS.getFirst().get()).define('#', EnvironmentalBlocks.PINE_PLANKS.get()).pattern("###").pattern("# #").pattern("###").group("wooden_chest").unlockedBy("has_lots_of_items", new InventoryChangeTrigger.TriggerInstance(EntityPredicate.Composite.ANY, MinMaxBounds.Ints.atLeast(10), MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, new ItemPredicate[0])));
+		//conditionalRecipe(consumer, WOODEN_CHESTS, ShapelessRecipeBuilder.shapeless(EnvironmentalBlocks.PINE_CHESTS.getSecond().get()).requires(EnvironmentalBlocks.PINE_CHESTS.getFirst().get()).requires(Blocks.TRIPWIRE_HOOK).group("wooden_trapped_chest").unlockedBy("has_tripwire_hook", has(Blocks.TRIPWIRE_HOOK)));
+		conditionalRecipe(consumer, VERTICAL_PLANKS, ShapedRecipeBuilder.shaped(EnvironmentalBlocks.VERTICAL_PINE_PLANKS.get(), 3).define('#', EnvironmentalBlocks.PINE_PLANKS.get()).pattern("#").pattern("#").pattern("#").group("vertical_planks").unlockedBy(getHasName(EnvironmentalBlocks.PINE_PLANKS.get()), has(EnvironmentalBlocks.PINE_PLANKS.get())));
+		conditionalRecipe(consumer, VERTICAL_PLANKS, ShapelessRecipeBuilder.shapeless(EnvironmentalBlocks.VERTICAL_PINE_PLANKS.get()).requires(EnvironmentalBlocks.PINE_PLANKS.get()).unlockedBy(getHasName(EnvironmentalBlocks.VERTICAL_PINE_PLANKS.get()), has(EnvironmentalBlocks.VERTICAL_PINE_PLANKS.get())), new ResourceLocation(RecipeBuilder.getDefaultRecipeId(EnvironmentalBlocks.VERTICAL_PINE_PLANKS.get()) + "_revert"));
+		conditionalRecipe(consumer, WOODEN_POSTS, ShapedRecipeBuilder.shaped(EnvironmentalBlocks.PINE_POST.get(), 8).define('#', EnvironmentalBlocks.PINE_WOOD.get()).pattern("#").pattern("#").pattern("#").group("wooden_post").unlockedBy(getHasName(EnvironmentalBlocks.PINE_WOOD.get()), has(EnvironmentalBlocks.PINE_WOOD.get())));
+		conditionalRecipe(consumer, WOODEN_POSTS, ShapedRecipeBuilder.shaped(EnvironmentalBlocks.STRIPPED_PINE_POST.get(), 8).define('#', EnvironmentalBlocks.STRIPPED_PINE_WOOD.get()).pattern("#").pattern("#").pattern("#").group("wooden_post").unlockedBy(getHasName(EnvironmentalBlocks.STRIPPED_PINE_WOOD.get()), has(EnvironmentalBlocks.STRIPPED_PINE_WOOD.get())));
+		conditionalRecipe(consumer, WOOD_TO_CHEST_RECIPES, ShapedRecipeBuilder.shaped(EnvironmentalBlocks.PINE_CHESTS.getFirst().get(), 4).define('#', EnvironmentalItemTags.PINE_LOGS).pattern("###").pattern("# #").pattern("###").group("wooden_chest").unlockedBy("has_lots_of_items", new InventoryChangeTrigger.TriggerInstance(EntityPredicate.Composite.ANY, MinMaxBounds.Ints.atLeast(10), MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, new ItemPredicate[0])), new ResourceLocation(RecipeBuilder.getDefaultRecipeId(EnvironmentalBlocks.PINE_CHESTS.getFirst().get()) + "_wood"));
+
+		ShapelessRecipeBuilder.shapeless(EnvironmentalBlocks.WAXED_PINECONE.get()).requires(EnvironmentalBlocks.PINECONE.get()).requires(Items.HONEYCOMB).unlockedBy(getHasName(EnvironmentalBlocks.PINECONE.get()), has(EnvironmentalBlocks.PINECONE.get())).save(consumer, getConversionRecipeName(EnvironmentalBlocks.WAXED_PINECONE.get(), Items.HONEYCOMB));
+
 		generateRecipes(consumer, EnvironmentalBlockFamilies.WISTERIA_PLANKS_FAMILY);
 		planksFromLogs(consumer, EnvironmentalBlocks.WISTERIA_PLANKS.get(), EnvironmentalItemTags.WISTERIA_LOGS);
 		woodFromLogs(consumer, EnvironmentalBlocks.WISTERIA_WOOD.get(), EnvironmentalBlocks.WISTERIA_LOG.get());
@@ -153,15 +208,15 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 		ShapedRecipeBuilder.shaped(EnvironmentalBlocks.BLUE_HANGING_WISTERIA_LEAVES.get(), 3).define('#', EnvironmentalBlocks.BLUE_WISTERIA_LEAVES.get()).pattern("#").pattern("#").pattern("#").unlockedBy(getHasName(EnvironmentalBlocks.BLUE_WISTERIA_LEAVES.get()), has(EnvironmentalBlocks.BLUE_WISTERIA_LEAVES.get())).save(consumer);
 		ShapedRecipeBuilder.shaped(EnvironmentalBlocks.PURPLE_HANGING_WISTERIA_LEAVES.get(), 3).define('#', EnvironmentalBlocks.PURPLE_WISTERIA_LEAVES.get()).pattern("#").pattern("#").pattern("#").unlockedBy(getHasName(EnvironmentalBlocks.PURPLE_WISTERIA_LEAVES.get()), has(EnvironmentalBlocks.PURPLE_WISTERIA_LEAVES.get())).save(consumer);
 		ShapedRecipeBuilder.shaped(EnvironmentalBlocks.WHITE_HANGING_WISTERIA_LEAVES.get(), 3).define('#', EnvironmentalBlocks.WHITE_WISTERIA_LEAVES.get()).pattern("#").pattern("#").pattern("#").unlockedBy(getHasName(EnvironmentalBlocks.WHITE_WISTERIA_LEAVES.get()), has(EnvironmentalBlocks.WHITE_WISTERIA_LEAVES.get())).save(consumer);
-		//conditionalLeafPileRecipes(consumer, EnvironmentalBlocks.WHITE_WISTERIA_LEAVES.get(), EnvironmentalBlocks.WHITE_WISTERIA_LEAF_PILE.get());
+		//conditionalLeafPileRecipes(consumer, EnvironmentalBlocks.PINK_WISTERIA_LEAVES.get(), EnvironmentalBlocks.PINK_WISTERIA_LEAF_PILE.get());
 		//conditionalLeafPileRecipes(consumer, EnvironmentalBlocks.BLUE_WISTERIA_LEAVES.get(), EnvironmentalBlocks.BLUE_WISTERIA_LEAF_PILE.get());
 		//conditionalLeafPileRecipes(consumer, EnvironmentalBlocks.PURPLE_WISTERIA_LEAVES.get(), EnvironmentalBlocks.PURPLE_WISTERIA_LEAF_PILE.get());
 		//conditionalLeafPileRecipes(consumer, EnvironmentalBlocks.WHITE_WISTERIA_LEAVES.get(), EnvironmentalBlocks.WHITE_WISTERIA_LEAF_PILE.get());
 		verticalSlabRecipes(consumer, EnvironmentalBlockFamilies.WISTERIA_PLANKS_FAMILY, EnvironmentalBlocks.WISTERIA_VERTICAL_SLAB.get());
-		leafCarpetRecipe(consumer, EnvironmentalBlocks.PINK_WISTERIA_LEAVES.get(), EnvironmentalBlocks.PINK_WISTERIA_LEAF_CARPET.get(), EnvironmentalBlocks.PINK_WISTERIA_HEDGE.get(), EnvironmentalItemTags.WISTERIA_LOGS);
-		leafCarpetRecipe(consumer, EnvironmentalBlocks.BLUE_WISTERIA_LEAVES.get(), EnvironmentalBlocks.BLUE_WISTERIA_LEAF_CARPET.get(), EnvironmentalBlocks.BLUE_WISTERIA_HEDGE.get(), EnvironmentalItemTags.WISTERIA_LOGS);
-		leafCarpetRecipe(consumer, EnvironmentalBlocks.PURPLE_WISTERIA_LEAVES.get(), EnvironmentalBlocks.PURPLE_WISTERIA_LEAF_CARPET.get(), EnvironmentalBlocks.PURPLE_WISTERIA_HEDGE.get(), EnvironmentalItemTags.WISTERIA_LOGS);
-		leafCarpetRecipe(consumer, EnvironmentalBlocks.WHITE_WISTERIA_LEAVES.get(), EnvironmentalBlocks.WHITE_WISTERIA_LEAF_CARPET.get(), EnvironmentalBlocks.WHITE_WISTERIA_HEDGE.get(), EnvironmentalItemTags.WISTERIA_LOGS);
+		leafCarpetAndHedgeRecipe(consumer, EnvironmentalBlocks.PINK_WISTERIA_LEAVES.get(), EnvironmentalBlocks.PINK_WISTERIA_LEAF_CARPET.get(), EnvironmentalBlocks.PINK_WISTERIA_HEDGE.get(), EnvironmentalItemTags.WISTERIA_LOGS);
+		leafCarpetAndHedgeRecipe(consumer, EnvironmentalBlocks.BLUE_WISTERIA_LEAVES.get(), EnvironmentalBlocks.BLUE_WISTERIA_LEAF_CARPET.get(), EnvironmentalBlocks.BLUE_WISTERIA_HEDGE.get(), EnvironmentalItemTags.WISTERIA_LOGS);
+		leafCarpetAndHedgeRecipe(consumer, EnvironmentalBlocks.PURPLE_WISTERIA_LEAVES.get(), EnvironmentalBlocks.PURPLE_WISTERIA_LEAF_CARPET.get(), EnvironmentalBlocks.PURPLE_WISTERIA_HEDGE.get(), EnvironmentalItemTags.WISTERIA_LOGS);
+		leafCarpetAndHedgeRecipe(consumer, EnvironmentalBlocks.WHITE_WISTERIA_LEAVES.get(), EnvironmentalBlocks.WHITE_WISTERIA_LEAF_CARPET.get(), EnvironmentalBlocks.WHITE_WISTERIA_HEDGE.get(), EnvironmentalItemTags.WISTERIA_LOGS);
 		woodenBoat(consumer, EnvironmentalItems.WISTERIA_BOAT.getFirst().get(), EnvironmentalBlocks.WISTERIA_PLANKS.get());
 		chestBoat(consumer, EnvironmentalItems.WISTERIA_BOAT.getSecond().get(), EnvironmentalItems.WISTERIA_BOAT.getFirst().get());
 		conditionalRecipe(consumer, BOATLOAD_LOADED, ShapelessRecipeBuilder.shapeless(EnvironmentalItems.WISTERIA_FURNACE_BOAT.get()).requires(Blocks.FURNACE).requires(EnvironmentalItems.WISTERIA_BOAT.getFirst().get()).group("furnace_boat").unlockedBy("has_boat", has(ItemTags.BOATS)));
@@ -178,13 +233,16 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 		conditionalRecipe(consumer, WOODEN_POSTS, ShapedRecipeBuilder.shaped(EnvironmentalBlocks.STRIPPED_WISTERIA_POST.get(), 8).define('#', EnvironmentalBlocks.STRIPPED_WISTERIA_WOOD.get()).pattern("#").pattern("#").pattern("#").group("wooden_post").unlockedBy(getHasName(EnvironmentalBlocks.STRIPPED_WISTERIA_WOOD.get()), has(EnvironmentalBlocks.STRIPPED_WISTERIA_WOOD.get())));
 		conditionalRecipe(consumer, WOOD_TO_CHEST_RECIPES, ShapedRecipeBuilder.shaped(EnvironmentalBlocks.WISTERIA_CHESTS.getFirst().get(), 4).define('#', EnvironmentalItemTags.WISTERIA_LOGS).pattern("###").pattern("# #").pattern("###").group("wooden_chest").unlockedBy("has_lots_of_items", new InventoryChangeTrigger.TriggerInstance(EntityPredicate.Composite.ANY, MinMaxBounds.Ints.atLeast(10), MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, new ItemPredicate[0])), new ResourceLocation(RecipeBuilder.getDefaultRecipeId(EnvironmentalBlocks.WISTERIA_CHESTS.getFirst().get()) + "_wood"));
 
+		//conditionalLeafPileRecipes(consumer, EnvironmentalBlocks.WISTERIA_LEAVES.get(), EnvironmentalBlocks.WISTERIA_LEAF_PILE.get());
+		leafCarpetAndHedgeRecipe(consumer, EnvironmentalBlocks.WISTERIA_LEAVES.get(), EnvironmentalBlocks.WISTERIA_LEAF_CARPET.get(), EnvironmentalBlocks.WISTERIA_HEDGE.get(), EnvironmentalItemTags.WISTERIA_LOGS);
+
 		generateRecipes(consumer, EnvironmentalBlockFamilies.CHERRY_PLANKS_FAMILY);
 		planksFromLogs(consumer, EnvironmentalBlocks.CHERRY_PLANKS.get(), EnvironmentalItemTags.CHERRY_LOGS);
 		woodFromLogs(consumer, EnvironmentalBlocks.CHERRY_WOOD.get(), EnvironmentalBlocks.CHERRY_LOG.get());
 		woodFromLogs(consumer, EnvironmentalBlocks.STRIPPED_CHERRY_WOOD.get(), EnvironmentalBlocks.STRIPPED_CHERRY_LOG.get());
 		leafPileRecipes(consumer, EnvironmentalBlocks.CHERRY_LEAVES.get(), EnvironmentalBlocks.CHERRY_LEAF_PILE.get());
 		verticalSlabRecipes(consumer, EnvironmentalBlockFamilies.CHERRY_PLANKS_FAMILY, EnvironmentalBlocks.CHERRY_VERTICAL_SLAB.get());
-		leafCarpetRecipe(consumer, EnvironmentalBlocks.CHERRY_LEAVES.get(), EnvironmentalBlocks.CHERRY_LEAF_CARPET.get(), EnvironmentalBlocks.CHERRY_HEDGE.get(), EnvironmentalItemTags.CHERRY_LOGS);
+		leafCarpetAndHedgeRecipe(consumer, EnvironmentalBlocks.CHERRY_LEAVES.get(), EnvironmentalBlocks.CHERRY_LEAF_CARPET.get(), EnvironmentalBlocks.CHERRY_HEDGE.get(), EnvironmentalItemTags.CHERRY_LOGS);
 		woodenBoat(consumer, EnvironmentalItems.CHERRY_BOAT.getFirst().get(), EnvironmentalBlocks.CHERRY_PLANKS.get());
 		chestBoat(consumer, EnvironmentalItems.CHERRY_BOAT.getSecond().get(), EnvironmentalItems.CHERRY_BOAT.getFirst().get());
 		conditionalRecipe(consumer, BOATLOAD_LOADED, ShapelessRecipeBuilder.shapeless(EnvironmentalItems.CHERRY_FURNACE_BOAT.get()).requires(Blocks.FURNACE).requires(EnvironmentalItems.CHERRY_BOAT.getFirst().get()).group("furnace_boat").unlockedBy("has_boat", has(ItemTags.BOATS)));
@@ -201,6 +259,12 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 		conditionalRecipe(consumer, WOODEN_POSTS, ShapedRecipeBuilder.shaped(EnvironmentalBlocks.STRIPPED_CHERRY_POST.get(), 8).define('#', EnvironmentalBlocks.STRIPPED_CHERRY_WOOD.get()).pattern("#").pattern("#").pattern("#").group("wooden_post").unlockedBy(getHasName(EnvironmentalBlocks.STRIPPED_CHERRY_WOOD.get()), has(EnvironmentalBlocks.STRIPPED_CHERRY_WOOD.get())));
 		conditionalRecipe(consumer, WOOD_TO_CHEST_RECIPES, ShapedRecipeBuilder.shaped(EnvironmentalBlocks.CHERRY_CHESTS.getFirst().get(), 4).define('#', EnvironmentalItemTags.CHERRY_LOGS).pattern("###").pattern("# #").pattern("###").group("wooden_chest").unlockedBy("has_lots_of_items", new InventoryChangeTrigger.TriggerInstance(EntityPredicate.Composite.ANY, MinMaxBounds.Ints.atLeast(10), MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, new ItemPredicate[0])), new ResourceLocation(RecipeBuilder.getDefaultRecipeId(EnvironmentalBlocks.CHERRY_CHESTS.getFirst().get()) + "_wood"));
 
+		leafPileRecipes(consumer, EnvironmentalBlocks.CHEERFUL_CHERRY_LEAVES.get(), EnvironmentalBlocks.CHEERFUL_CHERRY_LEAF_PILE.get());
+		leafCarpetAndHedgeRecipe(consumer, EnvironmentalBlocks.CHEERFUL_CHERRY_LEAVES.get(), EnvironmentalBlocks.CHEERFUL_CHERRY_LEAF_CARPET.get(), EnvironmentalBlocks.CHEERFUL_CHERRY_HEDGE.get(), EnvironmentalItemTags.CHERRY_LOGS);
+		
+		leafPileRecipes(consumer, EnvironmentalBlocks.MOODY_CHERRY_LEAVES.get(), EnvironmentalBlocks.MOODY_CHERRY_LEAF_PILE.get());
+		leafCarpetAndHedgeRecipe(consumer, EnvironmentalBlocks.MOODY_CHERRY_LEAVES.get(), EnvironmentalBlocks.MOODY_CHERRY_LEAF_CARPET.get(), EnvironmentalBlocks.MOODY_CHERRY_HEDGE.get(), EnvironmentalItemTags.CHERRY_LOGS);
+
 		ShapedRecipeBuilder.shaped(Blocks.CAKE).define('A', BlueprintItemTags.BUCKETS_MILK).define('B', Items.SUGAR).define('C', Items.WHEAT).define('E', BlueprintItemTags.EGGS).pattern("AAA").pattern("BEB").pattern("CCC").unlockedBy("has_egg", has(Items.EGG)).save(consumer);
 		ShapelessRecipeBuilder.shapeless(Items.PUMPKIN_PIE).requires(BlueprintItemTags.PUMPKINS).requires(Items.SUGAR).requires(BlueprintItemTags.EGGS).unlockedBy("has_carved_pumpkin", has(Blocks.CARVED_PUMPKIN)).unlockedBy("has_pumpkin", has(BlueprintItemTags.PUMPKINS)).save(consumer);
 	}
@@ -210,8 +274,8 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 	}
 
 	public static void verticalSlabRecipes(Consumer<FinishedRecipe> consumer, BlockFamily family, ItemLike verticalSlab) {
-		conditionalRecipe(consumer, VERTICAL_SLABS, ShapedRecipeBuilder.shaped(verticalSlab, 6).define('#', family.getBaseBlock()).pattern("#").pattern("#").pattern("#").unlockedBy(getHasName(family.getBaseBlock()), has(family.getBaseBlock())));
-		conditionalRecipe(consumer, VERTICAL_SLABS, ShapelessRecipeBuilder.shapeless(verticalSlab).requires(family.get(Variant.SLAB)).unlockedBy(getHasName(verticalSlab), has(verticalSlab)), new ResourceLocation(RecipeBuilder.getDefaultRecipeId(verticalSlab) + "_revert"));
+		conditionalRecipe(consumer, VERTICAL_SLABS, ShapedRecipeBuilder.shaped(verticalSlab, 6).define('#', family.get(Variant.SLAB)).pattern("#").pattern("#").pattern("#").unlockedBy(getHasName(family.getBaseBlock()), has(family.getBaseBlock())));
+		conditionalRecipe(consumer, VERTICAL_SLABS, ShapelessRecipeBuilder.shapeless(family.get(Variant.SLAB)).requires(verticalSlab).unlockedBy(getHasName(verticalSlab), has(verticalSlab)), new ResourceLocation(RecipeBuilder.getDefaultRecipeId(verticalSlab) + "_revert"));
 	}
 
 	public static void nineBlockStorageRecipes(Consumer<FinishedRecipe> consumer, ItemLike item, ItemLike storage) {
@@ -250,7 +314,11 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 		ShapelessRecipeBuilder.shapeless(chestBoat).requires(Tags.Items.CHESTS_WOODEN).requires(boat).group("chest_boat").unlockedBy("has_boat", has(ItemTags.BOATS)).save(consumer);
 	}
 
-	public static void leafCarpetRecipe(Consumer<FinishedRecipe> consumer, ItemLike leaves, ItemLike leafCarpet, ItemLike hedge, TagKey<Item> logTag) {
+	public static void leafCarpetRecipe(Consumer<FinishedRecipe> consumer, ItemLike leaves, ItemLike leafCarpet) {
+		conditionalRecipe(consumer, LEAF_CARPETS, ShapedRecipeBuilder.shaped(leafCarpet, 3).define('#', leaves).pattern("##").group("leaf_carpet").unlockedBy(getHasName(leaves), has(leaves)));
+	}
+
+	public static void leafCarpetAndHedgeRecipe(Consumer<FinishedRecipe> consumer, ItemLike leaves, ItemLike leafCarpet, ItemLike hedge, TagKey<Item> logTag) {
 		conditionalRecipe(consumer, LEAF_CARPETS, ShapedRecipeBuilder.shaped(leafCarpet, 3).define('#', leaves).pattern("##").group("leaf_carpet").unlockedBy(getHasName(leaves), has(leaves)));
 		conditionalRecipe(consumer, HEDGES, ShapedRecipeBuilder.shaped(hedge, 2).define('#', leaves).define('L', logTag).pattern("#").pattern("L").group("hedge").unlockedBy(getHasName(leaves), has(leaves)));
 	}

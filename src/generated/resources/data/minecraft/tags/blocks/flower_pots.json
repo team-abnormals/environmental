@@ -1,17 +1,21 @@
 {
   "values": [
     "environmental:potted_willow_sapling",
+    "environmental:potted_pine_sapling",
     "environmental:potted_pink_wisteria_sapling",
     "environmental:potted_blue_wisteria_sapling",
     "environmental:potted_purple_wisteria_sapling",
     "environmental:potted_white_wisteria_sapling",
     "environmental:potted_cherry_sapling",
+    "environmental:potted_cheerful_cherry_sapling",
+    "environmental:potted_moody_cherry_sapling",
     "environmental:potted_cartwheel",
     "environmental:potted_bluebell",
     "environmental:potted_violet",
     "environmental:potted_dianthus",
     "environmental:potted_red_lotus_flower",
     "environmental:potted_white_lotus_flower",
+    "environmental:potted_tasselflower",
     "environmental:potted_yellow_hibiscus",
     "environmental:potted_orange_hibiscus",
     "environmental:potted_red_hibiscus",
@@ -23,6 +27,7 @@
     "environmental:potted_blue_delphinium",
     "environmental:potted_purple_delphinium",
     "environmental:potted_white_delphinium",
-    "environmental:potted_cattail"
+    "environmental:potted_cattail",
+    "environmental:potted_cup_lichen"
   ]
 }

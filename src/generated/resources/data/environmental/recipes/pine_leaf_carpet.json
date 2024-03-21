@@ -1,0 +1,29 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "blueprint:quark_flag",
+          "flag": "leaf_carpet"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "group": "leaf_carpet",
+        "key": {
+          "#": {
+            "item": "environmental:pine_leaves"
+          }
+        },
+        "pattern": [
+          "##"
+        ],
+        "result": {
+          "count": 3,
+          "item": "environmental:pine_leaf_carpet"
+        }
+      }
+    }
+  ]
+}

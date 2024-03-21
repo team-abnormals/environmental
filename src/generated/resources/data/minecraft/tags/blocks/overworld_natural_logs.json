@@ -1,6 +1,7 @@
 {
   "values": [
     "environmental:willow_log",
+    "environmental:pine_log",
     "environmental:wisteria_log",
     "environmental:cherry_log"
   ]

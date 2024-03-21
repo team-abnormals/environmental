@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "environmental:block/cattail_fluff_block"
+    }
+  }
+}

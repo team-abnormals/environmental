@@ -1,10 +1,15 @@
 {
   "values": [
     "environmental:willow_leaves",
+    "environmental:pine_leaves",
+    "environmental:wisteria_leaves",
     "environmental:pink_wisteria_leaves",
     "environmental:blue_wisteria_leaves",
     "environmental:purple_wisteria_leaves",
     "environmental:white_wisteria_leaves",
-    "environmental:cherry_leaves"
+    "environmental:cherry_leaves",
+    "environmental:cheerful_cherry_leaves",
+    "environmental:moody_cherry_leaves",
+    "environmental:hibiscus_leaves"
   ]
 }

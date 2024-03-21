@@ -1,6 +1,7 @@
 {
   "values": [
     "environmental:snake_block",
-    "environmental:slabfish"
+    "environmental:slabfish",
+    "environmental:archive"
   ]
 }

@@ -3,6 +3,15 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "environmental:purple_wisteria_leaves",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "half": "bottom"
+          }
+        }
+      ],
       "entries": [
         {
           "type": "minecraft:alternatives",
@@ -69,6 +78,63 @@
         {
           "condition": "minecraft:inverted",
           "term": {
+            "block": "environmental:purple_wisteria_leaves",
+            "condition": "minecraft:block_state_property",
+            "properties": {
+              "half": "bottom"
+            }
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:alternative",
+              "terms": [
+                {
+                  "condition": "minecraft:match_tool",
+                  "predicate": {
+                    "items": [
+                      "minecraft:shears"
+                    ]
+                  }
+                },
+                {
+                  "condition": "minecraft:match_tool",
+                  "predicate": {
+                    "enchantments": [
+                      {
+                        "enchantment": "minecraft:silk_touch",
+                        "levels": {
+                          "min": 1
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ],
+          "name": "environmental:wisteria_leaves"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "environmental:purple_wisteria_leaves",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "half": "bottom"
+          }
+        },
+        {
+          "condition": "minecraft:inverted",
+          "term": {
             "condition": "minecraft:alternative",
             "terms": [
               {
@@ -107,6 +173,84 @@
                 0.025,
                 0.033333335,
                 0.1
+              ],
+              "condition": "minecraft:table_bonus",
+              "enchantment": "minecraft:fortune"
+            }
+          ],
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            },
+            {
+              "function": "minecraft:explosion_decay"
+            }
+          ],
+          "name": "minecraft:stick"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:inverted",
+          "term": {
+            "block": "environmental:purple_wisteria_leaves",
+            "condition": "minecraft:block_state_property",
+            "properties": {
+              "half": "bottom"
+            }
+          }
+        },
+        {
+          "condition": "minecraft:inverted",
+          "term": {
+            "condition": "minecraft:alternative",
+            "terms": [
+              {
+                "condition": "minecraft:match_tool",
+                "predicate": {
+                  "items": [
+                    "minecraft:shears"
+                  ]
+                }
+              },
+              {
+                "condition": "minecraft:match_tool",
+                "predicate": {
+                  "enchantments": [
+                    {
+                      "enchantment": "minecraft:silk_touch",
+                      "levels": {
+                        "min": 1
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "chances": [
+                0.04,
+                0.044444446,
+                0.05,
+                0.06666667,
+                0.2
               ],
               "condition": "minecraft:table_bonus",
               "enchantment": "minecraft:fortune"

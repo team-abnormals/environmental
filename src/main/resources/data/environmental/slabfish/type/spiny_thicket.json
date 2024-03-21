@@ -1,0 +1,21 @@
+{
+  "rarity": "epic",
+  "priority": 1,
+  "displayName": {
+    "translate": "entity.environmental.slabfish.type.spiny_thicket"
+  },
+  "mod": "atmospheric",
+  "conditions": [
+    {
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:biome",
+      "biome": "atmospheric:spiny_thicket"
+    }
+  ]
+}

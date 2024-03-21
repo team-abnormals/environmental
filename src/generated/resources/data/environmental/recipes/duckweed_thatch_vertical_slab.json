@@ -12,7 +12,7 @@
         "type": "minecraft:crafting_shaped",
         "key": {
           "#": {
-            "item": "environmental:duckweed_thatch"
+            "item": "environmental:duckweed_thatch_slab"
           }
         },
         "pattern": [

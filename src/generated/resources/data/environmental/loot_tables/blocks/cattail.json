@@ -5,46 +5,41 @@
       "bonus_rolls": 0.0,
       "entries": [
         {
-          "type": "minecraft:alternatives",
-          "children": [
+          "type": "minecraft:item",
+          "functions": [
             {
-              "type": "minecraft:item",
+              "add": false,
               "conditions": [
                 {
-                  "condition": "minecraft:match_tool",
-                  "predicate": {
-                    "items": [
-                      "minecraft:shears"
-                    ]
+                  "block": "environmental:cattail",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "cattails": "2"
                   }
                 }
               ],
-              "name": "environmental:cattail"
+              "count": 2.0,
+              "function": "minecraft:set_count"
             },
             {
-              "type": "minecraft:item",
+              "add": false,
               "conditions": [
                 {
-                  "chance": 0.25,
-                  "condition": "minecraft:random_chance"
-                }
-              ],
-              "functions": [
-                {
-                  "enchantment": "minecraft:fortune",
-                  "formula": "minecraft:uniform_bonus_count",
-                  "function": "minecraft:apply_bonus",
-                  "parameters": {
-                    "bonusMultiplier": 2
+                  "block": "environmental:cattail",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "cattails": "3"
                   }
-                },
-                {
-                  "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "environmental:cattail_seeds"
+              "count": 3.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "function": "minecraft:explosion_decay"
             }
-          ]
+          ],
+          "name": "environmental:cattail"
         }
       ],
       "rolls": 1.0

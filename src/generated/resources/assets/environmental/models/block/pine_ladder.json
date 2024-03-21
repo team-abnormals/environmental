@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/ladder",
+  "textures": {
+    "particle": "environmental:block/pine_ladder",
+    "texture": "environmental:block/pine_ladder"
+  }
+}

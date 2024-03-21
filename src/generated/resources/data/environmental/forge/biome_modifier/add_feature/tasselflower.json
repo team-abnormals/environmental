@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#environmental:has_feature/tasselflower",
+  "features": "environmental:patch_tasselflower",
+  "step": "vegetal_decoration"
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "environmental:dirt_bricks"
+  },
+  "result": "environmental:dirt_tile_slab"
+}

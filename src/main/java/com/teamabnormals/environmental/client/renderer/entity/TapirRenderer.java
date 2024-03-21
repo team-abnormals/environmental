@@ -1,5 +1,6 @@
 package com.teamabnormals.environmental.client.renderer.entity;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.teamabnormals.environmental.client.model.TapirModel;
 import com.teamabnormals.environmental.common.entity.animal.Tapir;
 import com.teamabnormals.environmental.core.Environmental;
@@ -12,13 +13,21 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class TapirRenderer extends MobRenderer<Tapir, TapirModel<Tapir>> {
-	private static final ResourceLocation TAPIR_LOCATION = new ResourceLocation(Environmental.MOD_ID, "textures/entity/tapir.png");
+	private static final ResourceLocation TAPIR = new ResourceLocation(Environmental.MOD_ID, "textures/entity/tapir/tapir.png");
+	private static final ResourceLocation BABY_TAPIR = new ResourceLocation(Environmental.MOD_ID, "textures/entity/tapir/baby_tapir.png");
 
 	public TapirRenderer(EntityRendererProvider.Context context) {
 		super(context, new TapirModel<>(context.bakeLayer(EnvironmentalModelLayers.TAPIR)), 0.7F);
 	}
 
+	@Override
+	protected void scale(Tapir tapir, PoseStack poseStack, float partialTicks) {
+		super.scale(tapir, poseStack, partialTicks);
+		poseStack.scale(0.99F, 0.99F, 0.99F);
+	}
+
+	@Override
 	public ResourceLocation getTextureLocation(Tapir tapir) {
-		return TAPIR_LOCATION;
+		return tapir.hasBabyPattern() ? BABY_TAPIR : TAPIR;
 	}
 }

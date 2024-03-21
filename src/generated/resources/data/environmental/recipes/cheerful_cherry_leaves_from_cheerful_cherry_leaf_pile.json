@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "leaves",
+  "key": {
+    "#": {
+      "item": "environmental:cheerful_cherry_leaf_pile"
+    }
+  },
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "result": {
+    "item": "environmental:cheerful_cherry_leaves"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "parent": "environmental:adventure/obtain_explorer_gear",
+  "criteria": {
+    "upgrade_thief_hood": {
+      "conditions": {
+        "item": {
+          "items": [
+            "environmental:thief_hood"
+          ]
+        }
+      },
+      "trigger": "environmental:upgrade_gear"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.environmental.adventure.upgrade_thief_hood.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "environmental:thief_hood",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.environmental.adventure.upgrade_thief_hood.title"
+    }
+  },
+  "requirements": [
+    [
+      "upgrade_thief_hood"
+    ]
+  ]
+}

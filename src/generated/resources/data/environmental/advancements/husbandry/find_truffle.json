@@ -1,0 +1,37 @@
+{
+  "parent": "environmental:husbandry/truffle_shuffle",
+  "criteria": {
+    "find_truffle": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "environmental:truffle"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.environmental.husbandry.find_truffle.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "environmental:truffle"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.environmental.husbandry.find_truffle.title"
+    }
+  },
+  "requirements": [
+    [
+      "find_truffle"
+    ]
+  ]
+}

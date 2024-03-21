@@ -5,6 +5,7 @@ import com.teamabnormals.blueprint.core.other.tags.BlueprintItemTags;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalBlockTags;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalItemTags;
+import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
@@ -28,16 +29,31 @@ public class EnvironmentalItemTagsProvider extends ItemTagsProvider {
 	@Override
 	public void addTags() {
 		this.copy(EnvironmentalBlockTags.WILLOW_LOGS, EnvironmentalItemTags.WILLOW_LOGS);
+		this.copy(EnvironmentalBlockTags.PINE_LOGS, EnvironmentalItemTags.PINE_LOGS);
 		this.copy(EnvironmentalBlockTags.WISTERIA_LOGS, EnvironmentalItemTags.WISTERIA_LOGS);
 		this.copy(EnvironmentalBlockTags.CHERRY_LOGS, EnvironmentalItemTags.CHERRY_LOGS);
 		this.tag(EnvironmentalItemTags.DUCK_FOOD).add(Items.SEAGRASS, EnvironmentalItems.DUCKWEED.get()).addOptionalTag(new ResourceLocation("forge", "crops/rice"));
-		this.tag(EnvironmentalItemTags.DEER_FOOD).add(Items.APPLE, Items.SWEET_BERRIES).addTag(EnvironmentalItemTags.FRUITS_CHERRY).addOptionalTag(new ResourceLocation("forge", "fruits/tomato")).addOptionalTag(new ResourceLocation("forge", "vegetables/tomato")).addOptionalTag(new ResourceLocation("forge", "fruits/strawberry"));
+		this.tag(EnvironmentalItemTags.DEER_FOOD).add(Items.SWEET_BERRIES).addTag(EnvironmentalItemTags.FRUITS_CHERRY).addOptionalTag(new ResourceLocation("forge", "fruits/strawberry"));
 		this.tag(EnvironmentalItemTags.DEER_PLANTABLES).addTag(ItemTags.SMALL_FLOWERS).addTag(ItemTags.TALL_FLOWERS);
-		this.tag(EnvironmentalItemTags.DEER_TEMPT_ITEMS).add(Items.MELON_SLICE, Items.GLISTERING_MELON_SLICE).addTag(EnvironmentalItemTags.DEER_FOOD).addTag(EnvironmentalItemTags.DEER_PLANTABLES);
+		this.tag(EnvironmentalItemTags.DEER_TEMPT_ITEMS).addTag(EnvironmentalItemTags.DEER_FOOD).addTag(EnvironmentalItemTags.DEER_PLANTABLES).addTag(EnvironmentalItemTags.DEER_FLOWER_ITEMS);
+		this.tag(EnvironmentalItemTags.REINDEER_FOOD).add(EnvironmentalBlocks.CUP_LICHEN.get().asItem(), Items.CARROT);
+		this.tag(EnvironmentalItemTags.REINDEER_TEMPT_ITEMS).addTag(EnvironmentalItemTags.REINDEER_FOOD).addTag(EnvironmentalItemTags.DEER_PLANTABLES).addTag(EnvironmentalItemTags.DEER_FLOWER_ITEMS);
 		this.tag(EnvironmentalItemTags.SLABFISH_FOOD).addTag(ItemTags.FISHES);
 		this.tag(EnvironmentalItemTags.SLABFISH_TAME_ITEMS).add(Items.TROPICAL_FISH);
-		this.tag(EnvironmentalItemTags.SLABFISH_SNACKS).add(Items.CHORUS_FRUIT).addOptional(new ResourceLocation("atmospheric", "passionfruit")).addOptional(new ResourceLocation("atmospheric", "shimmering_passionfruit")).addOptional(new ResourceLocation("endergetic", "bolloom_fruit"));
+		this.tag(EnvironmentalItemTags.SLABFISH_SNACKS).add(Items.CHORUS_FRUIT).addOptional(new ResourceLocation("atmospheric", "passionfruit")).addOptional(new ResourceLocation("atmospheric", "shimmering_passionfruit")).addOptional(new ResourceLocation("endergetic", "bolloom_fruit")).addOptional(new ResourceLocation("caverns_and_chasms", "bejeweled_apple"));
 		this.tag(EnvironmentalItemTags.YAK_FOOD).add(Items.WHEAT);
+		this.tag(EnvironmentalItemTags.MUDDY_PIG_DECORATIONS).addTag(ItemTags.SMALL_FLOWERS).addTag(ItemTags.SAPLINGS).addTag(Tags.Items.MUSHROOMS).add(Items.LILY_PAD, Items.DEAD_BUSH, Items.FERN, Items.BIG_DRIPLEAF, CATTAIL.get().asItem());
+		this.tag(EnvironmentalItemTags.SPAWNS_ON_MUDDY_PIG).add(Items.BLUE_ORCHID, DIANTHUS.get().asItem(), Items.POPPY, Items.DANDELION, Items.RED_MUSHROOM, Items.BROWN_MUSHROOM, CATTAIL.get().asItem(), Items.LILY_PAD);
+		this.tag(EnvironmentalItemTags.MUDDY_PIG_DRYING_ITEMS).add(Items.WHEAT).addOptional(new ResourceLocation("farmersdelight", "straw"));
+		this.tag(EnvironmentalItemTags.PIG_TRUFFLE_ITEMS).add(Items.GOLDEN_CARROT);
+		this.tag(BlueprintItemTags.PIG_FOOD).addTag(EnvironmentalItemTags.PIG_TRUFFLE_ITEMS);
+		this.tag(EnvironmentalItemTags.DEER_FLOWER_ITEMS).add(Items.APPLE).addTag(EnvironmentalItemTags.DEER_STRONG_FLOWER_ITEMS).addTag(EnvironmentalItemTags.DEER_SUPER_FLOWER_ITEMS);
+		this.tag(EnvironmentalItemTags.DEER_STRONG_FLOWER_ITEMS).add(Items.GOLDEN_APPLE);
+		this.tag(EnvironmentalItemTags.DEER_SUPER_FLOWER_ITEMS).add(Items.ENCHANTED_GOLDEN_APPLE);
+		this.tag(Tags.Items.ARMORS_HELMETS).add(THIEF_HOOD.get());
+		this.tag(Tags.Items.ARMORS_CHESTPLATES).add(HEALER_POUCH.get());
+		this.tag(Tags.Items.ARMORS_LEGGINGS).add(ARCHITECT_BELT.get(), YAK_PANTS.get());
+		this.tag(Tags.Items.ARMORS_BOOTS).add(WANDERER_BOOTS.get());
 
 		this.copy(BlockTags.PLANKS, ItemTags.PLANKS);
 		this.copy(BlockTags.WOODEN_BUTTONS, ItemTags.WOODEN_BUTTONS);
@@ -54,21 +70,24 @@ public class EnvironmentalItemTagsProvider extends ItemTagsProvider {
 		this.copy(BlockTags.STAIRS, ItemTags.STAIRS);
 		this.copy(BlockTags.LEAVES, ItemTags.LEAVES);
 		this.copy(BlockTags.WOODEN_TRAPDOORS, ItemTags.WOODEN_TRAPDOORS);
-		this.copy(BlockTags.SMALL_FLOWERS, ItemTags.SMALL_FLOWERS);
+		this.tag(ItemTags.SMALL_FLOWERS).add(EnvironmentalBlocks.CARTWHEEL.get().asItem(), EnvironmentalBlocks.BLUEBELL.get().asItem(), EnvironmentalBlocks.VIOLET.get().asItem(), EnvironmentalBlocks.DIANTHUS.get().asItem(), EnvironmentalBlocks.RED_LOTUS_FLOWER.get().asItem(), EnvironmentalBlocks.WHITE_LOTUS_FLOWER.get().asItem(), EnvironmentalBlocks.TASSELFLOWER.get().asItem(), EnvironmentalBlocks.YELLOW_HIBISCUS.get().asItem(), EnvironmentalBlocks.ORANGE_HIBISCUS.get().asItem(), EnvironmentalBlocks.RED_HIBISCUS.get().asItem(), EnvironmentalBlocks.PINK_HIBISCUS.get().asItem(), EnvironmentalBlocks.MAGENTA_HIBISCUS.get().asItem(), EnvironmentalBlocks.PURPLE_HIBISCUS.get().asItem());
 		this.copy(BlockTags.TALL_FLOWERS, ItemTags.TALL_FLOWERS);
 		this.copy(BlockTags.STANDING_SIGNS, ItemTags.SIGNS);
 		this.copy(BlockTags.OVERWORLD_NATURAL_LOGS, ItemTags.OVERWORLD_NATURAL_LOGS);
 		this.copy(BlockTags.DAMPENS_VIBRATIONS, ItemTags.DAMPENS_VIBRATIONS);
-		this.tag(ItemTags.BOATS).add(WILLOW_BOAT.getFirst().get(), WISTERIA_BOAT.getFirst().get(), CHERRY_BOAT.getFirst().get());
-		this.tag(ItemTags.CHEST_BOATS).add(WILLOW_BOAT.getSecond().get(), WISTERIA_BOAT.getSecond().get(), CHERRY_BOAT.getSecond().get());
+		this.tag(ItemTags.BOATS).add(WILLOW_BOAT.getFirst().get(), PINE_BOAT.getFirst().get(), WISTERIA_BOAT.getFirst().get(), CHERRY_BOAT.getFirst().get());
+		this.tag(ItemTags.CHEST_BOATS).add(WILLOW_BOAT.getSecond().get(), PINE_BOAT.getSecond().get(), WISTERIA_BOAT.getSecond().get(), CHERRY_BOAT.getSecond().get());
+		this.tag(BlueprintItemTags.FURNACE_BOATS).add(WILLOW_FURNACE_BOAT.get(), PINE_FURNACE_BOAT.get(), WISTERIA_FURNACE_BOAT.get(), CHERRY_FURNACE_BOAT.get());
+		this.tag(BlueprintItemTags.LARGE_BOATS).add(LARGE_WILLOW_BOAT.get(), LARGE_PINE_BOAT.get(), LARGE_WISTERIA_BOAT.get(), LARGE_CHERRY_BOAT.get());
 		this.tag(ItemTags.MUSIC_DISCS).add(MUSIC_DISC_LEAVING_HOME.get(), MUSIC_DISC_SLABRAVE.get());
 		this.tag(ItemTags.FISHES).add(KOI.get());
+		this.copy(BlockTags.DIRT, ItemTags.DIRT);
 
 		this.copy(Tags.Blocks.CHESTS_WOODEN, Tags.Items.CHESTS_WOODEN);
 		this.copy(Tags.Blocks.CHESTS_TRAPPED, Tags.Items.CHESTS_TRAPPED);
 		this.copy(Tags.Blocks.FENCE_GATES_WOODEN, Tags.Items.FENCE_GATES_WOODEN);
 		this.copy(Tags.Blocks.FENCES_WOODEN, Tags.Items.FENCES_WOODEN);
-		this.tag(Tags.Items.BOOKSHELVES).add(WILLOW_BOOKSHELF.get().asItem(), WISTERIA_BOOKSHELF.get().asItem(), CHERRY_BOOKSHELF.get().asItem());
+		this.tag(Tags.Items.BOOKSHELVES).add(WILLOW_BOOKSHELF.get().asItem(), PINE_BOOKSHELF.get().asItem(), WISTERIA_BOOKSHELF.get().asItem(), CHERRY_BOOKSHELF.get().asItem());
 		this.tag(EnvironmentalItemTags.FRUITS).addTag(EnvironmentalItemTags.FRUITS_CHERRY);
 		this.tag(EnvironmentalItemTags.FRUITS_CHERRY).add(CHERRIES.get());
 		this.tag(EnvironmentalItemTags.RAW_DUCK).add(DUCK.get());
@@ -83,7 +102,7 @@ public class EnvironmentalItemTagsProvider extends ItemTagsProvider {
 		this.copy(BlueprintBlockTags.HEDGES, BlueprintItemTags.HEDGES);
 		this.copy(BlueprintBlockTags.VERTICAL_SLABS, BlueprintItemTags.VERTICAL_SLABS);
 		this.copy(BlueprintBlockTags.WOODEN_VERTICAL_SLABS, BlueprintItemTags.WOODEN_VERTICAL_SLABS);
-		this.tag(BlueprintItemTags.BOATABLE_CHESTS).add(WILLOW_CHESTS.getFirst().get().asItem(), WISTERIA_CHESTS.getFirst().get().asItem(), CHERRY_CHESTS.getFirst().get().asItem());
-		this.tag(BlueprintItemTags.REVERTABLE_CHESTS).add(WILLOW_CHESTS.getFirst().get().asItem(), WISTERIA_CHESTS.getFirst().get().asItem(), CHERRY_CHESTS.getFirst().get().asItem());
+		this.tag(BlueprintItemTags.BOATABLE_CHESTS).add(WILLOW_CHESTS.getFirst().get().asItem(), PINE_CHESTS.getFirst().get().asItem(), WISTERIA_CHESTS.getFirst().get().asItem(), CHERRY_CHESTS.getFirst().get().asItem());
+		this.tag(BlueprintItemTags.REVERTABLE_CHESTS).add(WILLOW_CHESTS.getFirst().get().asItem(), PINE_CHESTS.getFirst().get().asItem(), WISTERIA_CHESTS.getFirst().get().asItem(), CHERRY_CHESTS.getFirst().get().asItem());
 	}
 }

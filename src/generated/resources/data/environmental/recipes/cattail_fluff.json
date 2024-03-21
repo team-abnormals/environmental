@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "environmental:cattail_fluff_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "environmental:cattail_fluff"
+  }
+}

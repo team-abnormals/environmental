@@ -1,10 +1,14 @@
 {
   "values": [
     "environmental:willow_hedge",
+    "environmental:pine_hedge",
+    "environmental:wisteria_hedge",
     "environmental:pink_wisteria_hedge",
     "environmental:blue_wisteria_hedge",
     "environmental:purple_wisteria_hedge",
     "environmental:white_wisteria_hedge",
-    "environmental:cherry_hedge"
+    "environmental:cherry_hedge",
+    "environmental:cheerful_cherry_hedge",
+    "environmental:moody_cherry_hedge"
   ]
 }

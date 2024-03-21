@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+    "all": "environmental:block/cheerful_cherry_leaves"
+  }
+}

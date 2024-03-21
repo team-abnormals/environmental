@@ -25,7 +25,7 @@ import net.minecraftforge.common.util.BlockSnapshot;
 import net.minecraftforge.event.ForgeEventFactory;
 
 public class LargeLilyPadItem extends BlockItem {
-	
+
 	public LargeLilyPadItem(Item.Properties builder) {
 		super(EnvironmentalBlocks.LARGE_LILY_PAD.get(), builder);
 	}

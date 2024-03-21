@@ -1,6 +1,7 @@
 {
   "values": [
     "environmental:willow_fence_gate",
+    "environmental:pine_fence_gate",
     "environmental:wisteria_fence_gate",
     "environmental:cherry_fence_gate"
   ]

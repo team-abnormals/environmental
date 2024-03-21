@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "minecraft:meadow",
+  "spawners": {
+    "type": "environmental:deer",
+    "maxCount": 4,
+    "minCount": 2,
+    "weight": 1
+  }
+}

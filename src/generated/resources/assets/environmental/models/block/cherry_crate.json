@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "environmental:block/cherry_crate_bottom",
+    "side": "environmental:block/cherry_crate_side",
+    "top": "environmental:block/cherry_crate_top"
+  }
+}

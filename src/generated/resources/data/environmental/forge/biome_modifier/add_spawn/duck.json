@@ -4,7 +4,7 @@
   "spawners": {
     "type": "environmental:duck",
     "maxCount": 4,
-    "minCount": 3,
+    "minCount": 4,
     "weight": 10
   }
 }

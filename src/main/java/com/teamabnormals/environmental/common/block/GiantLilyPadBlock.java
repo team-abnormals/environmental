@@ -194,53 +194,29 @@ public class GiantLilyPadBlock extends BushBlock implements IPlantable {
 
 	public static BlockPos posToBlockPos(LilyPadPosition position, BlockPos pos, boolean revert) {
 		if (!revert) {
-			switch (position) {
-
-				case NORTH:
-					return pos.relative(Direction.NORTH);
-				case EAST:
-					return pos.relative(Direction.EAST);
-				case SOUTH:
-					return pos.relative(Direction.SOUTH);
-				case WEST:
-					return pos.relative(Direction.WEST);
-
-				case NORTHEAST:
-					return pos.relative(Direction.NORTH).relative(Direction.EAST);
-				case NORTHWEST:
-					return pos.relative(Direction.NORTH).relative(Direction.WEST);
-				case SOUTHEAST:
-					return pos.relative(Direction.SOUTH).relative(Direction.EAST);
-				case SOUTHWEST:
-					return pos.relative(Direction.SOUTH).relative(Direction.WEST);
-				case CENTER:
-				default:
-					return pos;
-			}
+			return switch (position) {
+				case NORTH -> pos.relative(Direction.NORTH);
+				case EAST -> pos.relative(Direction.EAST);
+				case SOUTH -> pos.relative(Direction.SOUTH);
+				case WEST -> pos.relative(Direction.WEST);
+				case NORTHEAST -> pos.relative(Direction.NORTH).relative(Direction.EAST);
+				case NORTHWEST -> pos.relative(Direction.NORTH).relative(Direction.WEST);
+				case SOUTHEAST -> pos.relative(Direction.SOUTH).relative(Direction.EAST);
+				case SOUTHWEST -> pos.relative(Direction.SOUTH).relative(Direction.WEST);
+				case CENTER -> pos;
+			};
 		} else {
-			switch (position) {
-
-				case NORTH:
-					return pos.relative(Direction.SOUTH);
-				case EAST:
-					return pos.relative(Direction.WEST);
-				case SOUTH:
-					return pos.relative(Direction.NORTH);
-				case WEST:
-					return pos.relative(Direction.EAST);
-
-				case NORTHEAST:
-					return pos.relative(Direction.SOUTH).relative(Direction.WEST);
-				case NORTHWEST:
-					return pos.relative(Direction.SOUTH).relative(Direction.EAST);
-				case SOUTHEAST:
-					return pos.relative(Direction.NORTH).relative(Direction.WEST);
-				case SOUTHWEST:
-					return pos.relative(Direction.NORTH).relative(Direction.EAST);
-				case CENTER:
-				default:
-					return pos;
-			}
+			return switch (position) {
+				case NORTH -> pos.relative(Direction.SOUTH);
+				case EAST -> pos.relative(Direction.WEST);
+				case SOUTH -> pos.relative(Direction.NORTH);
+				case WEST -> pos.relative(Direction.EAST);
+				case NORTHEAST -> pos.relative(Direction.SOUTH).relative(Direction.WEST);
+				case NORTHWEST -> pos.relative(Direction.SOUTH).relative(Direction.EAST);
+				case SOUTHEAST -> pos.relative(Direction.NORTH).relative(Direction.WEST);
+				case SOUTHWEST -> pos.relative(Direction.NORTH).relative(Direction.EAST);
+				case CENTER -> pos;
+			};
 		}
 	}
 

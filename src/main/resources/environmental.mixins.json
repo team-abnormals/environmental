@@ -1,21 +1,30 @@
 {
   "required": true,
   "package": "com.teamabnormals.environmental.core.mixin",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
   "refmap": "environmental.refmap.json",
   "plugin": "com.teamabnormals.environmental.core.mixin.EnvironmentalMixinPlugin",
   "mixins": [
-    "AbstractSkeletonEntityMixin",
-    "DoublePlantBlockMixin",
+    "AbstractSkeletonMixin",
+    "BlockColumnFeatureMixin",
+    "BlockMixin",
+    "CarvedPumpkinBlockMixin",
     "DuckMixin",
-    "LilyPadBlockMixin",
-    "LivingEntityMixin",
-    "MobEntityMixin",
-    "MyceliumBlockMixin",
-    "PigEntityMixin",
-    "PlayerEntityMixin",
+    "GrassBlockMixin",
+    "LeavesBlockMixin",
+    "MobMixin",
+    "MoveControlMixin",
+    "MudBlockMixin",
+    "PigMixin",
+    "PlayerMixin",
+    "RabbitMixin",
+    "ShearsItemMixin",
+    "SurfaceSystemMixin",
     "WitherSkeletonEntityMixin"
+  ],
+  "client": [
+    "client.PigRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

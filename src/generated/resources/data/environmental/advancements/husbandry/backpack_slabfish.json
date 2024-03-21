@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:husbandry/tame_an_animal",
+  "criteria": {
+    "backpack_slabfish": {
+      "trigger": "environmental:backpack_slabfish"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.environmental.husbandry.backpack_slabfish.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:chest"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.environmental.husbandry.backpack_slabfish.title"
+    }
+  },
+  "requirements": [
+    [
+      "backpack_slabfish"
+    ]
+  ]
+}
