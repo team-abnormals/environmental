@@ -87,17 +87,17 @@ public class PineTreeFeature extends BlueprintTreeFeature {
 	}
 
 	private void createBranchWithLeaves(BlockPos pos, Direction direction, RandomSource random, TreeConfiguration config) {
-		BlockPos.MutableBlockPos mutablepos = new BlockPos.MutableBlockPos();
+		BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
 		BlockPos blockpos = pos.relative(direction);
 
 		this.createBranch(pos, direction, random, config);
 
 		for (int x = -1; x <= 1; x++) {
 			for (int z = -1; z <= 1; z++) {
-				mutablepos.setWithOffset(blockpos, x, 0, z);
-				this.addFoliage(mutablepos);
+				mutable.setWithOffset(blockpos, x, 0, z);
+				this.addFoliage(mutable);
 				if ((x == 0 || z == 0)) {
-					this.addFoliage(mutablepos.above());
+					this.addFoliage(mutable.above());
 				}
 			}
 		}
@@ -108,15 +108,15 @@ public class PineTreeFeature extends BlueprintTreeFeature {
 	}
 
 	private void createTopLeaves(BlockPos pos) {
-		BlockPos.MutableBlockPos mutablepos = new BlockPos.MutableBlockPos();
+		BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
 
 		for (int y = 0; y <= 3; y++) {
 			int r = y < 3 ? y : 1;
 			for (int x = -r; x <= r; x++) {
 				for (int z = -r; z <= r; z++) {
 					if (Math.abs(x) + Math.abs(z) <= r) {
-						mutablepos.setWithOffset(pos, x, 1 - y, z);
-						this.addFoliage(mutablepos);
+						mutable.setWithOffset(pos, x, 1 - y, z);
+						this.addFoliage(mutable);
 					}
 				}
 			}
