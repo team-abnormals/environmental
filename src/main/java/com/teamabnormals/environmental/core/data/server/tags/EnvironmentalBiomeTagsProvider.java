@@ -86,7 +86,7 @@ public class EnvironmentalBiomeTagsProvider extends BiomeTagsProvider {
 		this.tag(EnvironmentalBiomeTags.WITHOUT_DEER).add(Biomes.GROVE).addOptional(new ResourceLocation("atmospheric", "aspen_parkland")).addOptional(new ResourceLocation("atmospheric", "grimwoods"));
 		this.tag(EnvironmentalBiomeTags.HAS_MUDDY_PIG).addTag(Tags.Biomes.IS_SWAMP);
 		this.tag(EnvironmentalBiomeTags.HAS_REINDEER).addTag(BlueprintBiomeTags.IS_ICY).addTag(BiomeTags.IS_TAIGA).add(Biomes.GROVE);
-		this.tag(EnvironmentalBiomeTags.HAS_TAPIR).addTag(BiomeTags.IS_JUNGLE);
+		this.tag(EnvironmentalBiomeTags.HAS_TAPIR).add(Biomes.JUNGLE, Biomes.BAMBOO_JUNGLE);
 		this.tag(EnvironmentalBiomeTags.HAS_YAK).add(Biomes.STONY_PEAKS).addTag(BiomeTags.IS_HILL);
 		this.tag(EnvironmentalBiomeTags.HAS_ZEBRA).addTag(BiomeTags.IS_SAVANNA);
 

@@ -9,6 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Plane;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Half;
@@ -45,11 +46,13 @@ public class WisteriaTreeFeature extends BlueprintTreeFeature {
 
 		List<Direction> rootDirections = Lists.newArrayList();
 		for (Direction direction1 : Plane.HORIZONTAL) {
-			if (trunkHeight > 2 || direction1 != direction)
+			if (isGrassOrDirt(context.level(), origin.relative(direction1).below()) && (trunkHeight > 2 || direction1 != direction))
 				rootDirections.add(direction1);
 		}
 
-		this.addLog(origin.relative(rootDirections.get(random.nextInt(rootDirections.size()))));
+		if (!rootDirections.isEmpty()) {
+			this.addLog(origin.relative(rootDirections.get(random.nextInt(rootDirections.size()))));
+		}
 
 		pos.set(pos.below().relative(Plane.HORIZONTAL.getRandomDirection(random)));
 		for (int y = 0; y < 3; y++) {
@@ -64,7 +67,7 @@ public class WisteriaTreeFeature extends BlueprintTreeFeature {
 			int height = random.nextInt(2);
 			if (height > 0)
 				this.addLog(pos.above());
-			createBranch(branchPos.relative(branchDirection).above(height), branchDirection, random, config);
+			this.createBranch(branchPos.relative(branchDirection).above(height), branchDirection, random, config);
 		});
 	}
 
