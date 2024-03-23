@@ -89,10 +89,12 @@ public class FallenPineTreeFeature extends Feature<NoneFeatureConfiguration> {
 			this.logPositions.put(origin.relative(direction, j), direction.getAxis());
 		}
 
-		if (random.nextInt(4) != 0)
+		boolean topleaves = random.nextInt(4) != 0;
+
+		if (topleaves)
 			this.createTopLeaves(level, origin.relative(direction, length), direction);
 
-		if (random.nextInt(5) != 0)
+		if (random.nextBoolean())
 			this.createRootDirt(level, random, origin.relative(direction.getOpposite()), direction);
 
 		float f = random.nextFloat();
@@ -101,7 +103,7 @@ public class FallenPineTreeFeature extends Feature<NoneFeatureConfiguration> {
 		List<Direction> branchdirections = Lists.newArrayList();
 		plane.forEach(branchdirections::add);
 
-		int l = length - 4;
+		int l = topleaves ? length - 4 : length - 2;
 		while (l > 0) {
 			BlockPos blockpos = origin.relative(direction, l);
 
