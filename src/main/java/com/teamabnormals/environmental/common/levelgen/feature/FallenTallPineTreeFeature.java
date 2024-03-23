@@ -11,6 +11,6 @@ public class FallenTallPineTreeFeature extends FallenPineTreeFeature {
 	}
 
 	protected int getLength(RandomSource random) {
-		return random.nextInt(10) != 0 ? 12 + random.nextInt(6) : super.getLength(random);
+		return random.nextInt(8) != 0 ? 12 + random.nextInt(6) : super.getLength(random);
 	}
 }

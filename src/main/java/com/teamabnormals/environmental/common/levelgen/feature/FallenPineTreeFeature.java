@@ -89,7 +89,7 @@ public class FallenPineTreeFeature extends Feature<NoneFeatureConfiguration> {
 			this.logPositions.put(origin.relative(direction, j), direction.getAxis());
 		}
 
-		boolean topleaves = random.nextInt(4) != 0;
+		boolean topleaves = random.nextInt(3) != 0;
 
 		if (topleaves)
 			this.createTopLeaves(level, origin.relative(direction, length), direction);
@@ -197,6 +197,6 @@ public class FallenPineTreeFeature extends Feature<NoneFeatureConfiguration> {
 	}
 
 	protected int getLength(RandomSource random) {
-		return 9 + random.nextInt(4);
+		return 7 + random.nextInt(6);
 	}
 }
