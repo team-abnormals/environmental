@@ -22,9 +22,9 @@ public class GrainyCoarseDirtFeature extends Feature<ProbabilityFeatureConfigura
         WorldGenLevel level = context.level();
         RandomSource random = context.random();
         BlockPos pos = context.origin();
-        BlockPos.MutableBlockPos blockpos$mutable = pos.mutable();
+        BlockPos.MutableBlockPos mutable = pos.mutable();
         if (random.nextFloat() < config.probability) {
-            int r = getRadius(random);
+            int r = random.nextInt(4) + 1;
             int r1 = Math.max(r - 2, 0);
             for (int x = -r; x <= r; ++x) {
                 for (int y = -r; y <= r; ++y) {
@@ -32,9 +32,9 @@ public class GrainyCoarseDirtFeature extends Feature<ProbabilityFeatureConfigura
                     if (d <= r1 * r1 || (d <= r * r && random.nextInt(3) > 0)) {
                         int x1 = x + pos.getX();
                         int y1 = y + pos.getZ();
-                        blockpos$mutable.set(x1, level.getHeight(Heightmap.Types.WORLD_SURFACE_WG, x1, y1) - 1, y1);
-                        if (canGenerateAt(level, blockpos$mutable)) {
-                            level.setBlock(blockpos$mutable, Blocks.COARSE_DIRT.defaultBlockState(), 2);
+                        mutable.set(x1, level.getHeight(Heightmap.Types.WORLD_SURFACE_WG, x1, y1) - 1, y1);
+                        if (isDirt(level.getBlockState(mutable))) {
+                            level.setBlock(mutable, Blocks.COARSE_DIRT.defaultBlockState(), 2);
                         }
                     }
                 }
@@ -44,13 +44,5 @@ public class GrainyCoarseDirtFeature extends Feature<ProbabilityFeatureConfigura
         }
 
         return false;
-    }
-
-    protected boolean canGenerateAt(WorldGenLevel level, BlockPos pos) {
-        return isDirt(level.getBlockState(pos));
-    }
-
-    protected int getRadius(RandomSource random) {
-        return random.nextInt(3) + 1;
     }
 }
