@@ -89,12 +89,12 @@ public class FallenPineTreeFeature extends Feature<NoneFeatureConfiguration> {
 			this.logPositions.put(origin.relative(direction, j), direction.getAxis());
 		}
 
-		boolean topleaves = random.nextInt(3) != 0;
+		boolean topleaves = random.nextBoolean();
 
 		if (topleaves)
 			this.createTopLeaves(level, origin.relative(direction, length), direction);
 
-		if (random.nextBoolean())
+		if (random.nextInt(3) == 0)
 			this.createRootDirt(level, random, origin.relative(direction.getOpposite()), direction);
 
 		float f = random.nextFloat();
@@ -154,7 +154,7 @@ public class FallenPineTreeFeature extends Feature<NoneFeatureConfiguration> {
 
 		for (int h = 1; h >= -1; h--) {
 			for (int y = 1; y >= -1; y--) {
-				if (h == 0 || y == 0 || random.nextBoolean()) {
+				if (h == 0 || y == 0 || random.nextInt(3) == 0) {
 					if (axis == Axis.X)
 						mutable.setWithOffset(pos, 0, y, h);
 					else
@@ -197,6 +197,6 @@ public class FallenPineTreeFeature extends Feature<NoneFeatureConfiguration> {
 	}
 
 	protected int getLength(RandomSource random) {
-		return 7 + random.nextInt(6);
+		return 9 + random.nextInt(5);
 	}
 }
