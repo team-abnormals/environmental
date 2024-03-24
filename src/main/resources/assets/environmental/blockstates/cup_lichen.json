@@ -1,19 +1,70 @@
 {
   "variants": {
-    "": [
+    "cups=1": [
       {
-        "model": "environmental:block/cup_lichen"
+        "model": "environmental:block/cup_lichen_one"
       },
       {
-        "model": "environmental:block/cup_lichen",
+        "model": "environmental:block/cup_lichen_one",
         "y": 90
       },
       {
-        "model": "environmental:block/cup_lichen",
+        "model": "environmental:block/cup_lichen_one",
         "y": 180
       },
       {
-        "model": "environmental:block/cup_lichen",
+        "model": "environmental:block/cup_lichen_one",
+        "y": 270
+      }
+    ],
+    "cups=2": [
+      {
+        "model": "environmental:block/cup_lichen_two"
+      },
+      {
+        "model": "environmental:block/cup_lichen_two",
+        "y": 90
+      },
+      {
+        "model": "environmental:block/cup_lichen_two",
+        "y": 180
+      },
+      {
+        "model": "environmental:block/cup_lichen_two",
+        "y": 270
+      }
+    ],
+    "cups=3": [
+      {
+        "model": "environmental:block/cup_lichen_three"
+      },
+      {
+        "model": "environmental:block/cup_lichen_three",
+        "y": 90
+      },
+      {
+        "model": "environmental:block/cup_lichen_three",
+        "y": 180
+      },
+      {
+        "model": "environmental:block/cup_lichen_three",
+        "y": 270
+      }
+    ],
+    "cups=4": [
+      {
+        "model": "environmental:block/cup_lichen_four"
+      },
+      {
+        "model": "environmental:block/cup_lichen_four",
+        "y": 90
+      },
+      {
+        "model": "environmental:block/cup_lichen_four",
+        "y": 180
+      },
+      {
+        "model": "environmental:block/cup_lichen_four",
         "y": 270
       }
     ]

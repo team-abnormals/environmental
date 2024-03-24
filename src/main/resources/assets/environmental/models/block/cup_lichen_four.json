@@ -1,0 +1,89 @@
+{
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "environmental:block/cup_lichen",
+		"lichen": "environmental:block/cup_lichen"
+	},
+	"elements": [
+		{
+			"from": [3, 0, -4],
+			"to": [11, 8, -4],
+			"shade": false,
+			"rotation": {"angle": -45, "axis": "y", "origin": [0, 0, 0], "rescale": true},
+			"faces": {
+				"north": {"uv": [0, 0, 8, 8], "texture": "#lichen"},
+				"south": {"uv": [0, 0, 8, 8], "texture": "#lichen"}
+			}
+		},
+		{
+			"from": [7, 0, -8],
+			"to": [7, 8, 0],
+			"shade": false,
+			"rotation": {"angle": -45, "axis": "y", "origin": [0, 0, 0], "rescale": true},
+			"faces": {
+				"east": {"uv": [0, 0, 8, 8], "texture": "#lichen"},
+				"west": {"uv": [0, 0, 8, 8], "texture": "#lichen"}
+			}
+		},
+		{
+			"from": [4, 0, 4],
+			"to": [12, 8, 4],
+			"shade": false,
+			"rotation": {"angle": -45, "axis": "y", "origin": [0, 0, 0], "rescale": true},
+			"faces": {
+				"north": {"uv": [0, 8, 8, 16], "texture": "#lichen"},
+				"south": {"uv": [0, 8, 8, 16], "texture": "#lichen"}
+			}
+		},
+		{
+			"from": [8, 0, 0],
+			"to": [8, 8, 8],
+			"shade": false,
+			"rotation": {"angle": -45, "axis": "y", "origin": [0, 0, 0], "rescale": true},
+			"faces": {
+				"east": {"uv": [0, 8, 8, 16], "texture": "#lichen"},
+				"west": {"uv": [0, 8, 8, 16], "texture": "#lichen"}
+			}
+		},
+		{
+			"from": [12, 0, -4],
+			"to": [12, 8, 4],
+			"shade": false,
+			"rotation": {"angle": -45, "axis": "y", "origin": [0, 0, 0], "rescale": true},
+			"faces": {
+				"east": {"uv": [8, 0, 16, 8], "texture": "#lichen"},
+				"west": {"uv": [8, 0, 16, 8], "texture": "#lichen"}
+			}
+		},
+		{
+			"from": [8, 0, 0],
+			"to": [16, 8, 0],
+			"shade": false,
+			"rotation": {"angle": -45, "axis": "y", "origin": [0, 0, 0], "rescale": true},
+			"faces": {
+				"north": {"uv": [8, 0, 16, 8], "texture": "#lichen"},
+				"south": {"uv": [8, 0, 16, 8], "texture": "#lichen"}
+			}
+		},
+		{
+			"from": [4, 0, -3],
+			"to": [4, 8, 5],
+			"shade": false,
+			"rotation": {"angle": -45, "axis": "y", "origin": [0, 0, 0], "rescale": true},
+			"faces": {
+				"east": {"uv": [8, 8, 16, 16], "texture": "#lichen"},
+				"west": {"uv": [8, 8, 16, 16], "texture": "#lichen"}
+			}
+		},
+		{
+			"from": [0, 0, 1],
+			"to": [8, 8, 1],
+			"shade": false,
+			"rotation": {"angle": -45, "axis": "y", "origin": [0, 0, 0], "rescale": true},
+			"faces": {
+				"north": {"uv": [8, 8, 16, 16], "texture": "#lichen"},
+				"south": {"uv": [8, 8, 16, 16], "texture": "#lichen"}
+			}
+		}
+	]
+}
