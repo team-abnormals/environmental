@@ -68,7 +68,7 @@ public class EnvironmentalBiomes {
 		spawns.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.WOLF, 8, 4, 4));
 		spawns.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.RABBIT, 4, 2, 3));
 
-		return biome(snowy ? Precipitation.SNOW : Precipitation.RAIN, snowy ? -0.2F : 0.4F, snowy ? 0.4F : 0.6F, snowy ? 8828286 : 9221482, snowy ? 6789454 : 7380555, 4159204, 329011, 12638463, spawns, generation, null);
+		return biome(snowy ? Precipitation.SNOW : Precipitation.RAIN, snowy ? -0.2F : 0.4F, snowy ? 0.4F : 0.6F, snowy ? 8828286 : oldGrowth ? 9221482 : 9746278, snowy ? 6789454 : 7315015, 4159204, 329011, 12638463, spawns, generation, null);
 	}
 
 	private static Biome pineSlopes() {

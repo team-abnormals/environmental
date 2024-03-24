@@ -234,7 +234,7 @@ public class EnvironmentalClientCompat {
 		DataUtil.registerBlockColor(blockColors, (x, world, pos, u) -> world != null && pos != null ? 2129968 : 7181897, waterLilyColors);
 
 		DataUtil.registerBlockItemColor(itemColors, (color, items) -> GrassColor.get(0.5D, 1.0D), grassColors);
-		DataUtil.registerBlockItemColor(itemColors, (color, items) -> 7379785, pineFoliageItemColors);
+		DataUtil.registerBlockItemColor(itemColors, (color, items) -> 7315015, pineFoliageItemColors);
 		DataUtil.registerBlockItemColor(itemColors, (color, items) -> 6975545, willowFoliageItemColors);
 		DataUtil.registerBlockItemColor(itemColors, (block, tintIndex) -> {
 			BlockState blockstate = ((BlockItem) block.getItem()).getBlock().defaultBlockState();
