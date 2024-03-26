@@ -267,9 +267,14 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 				return result;
 			}
 
-			if (!this.isTamed() && this.canDoIdleAnimation()) {
-				this.makeMad();
-				return InteractionResult.sidedSuccess(this.level.isClientSide);
+			if (!this.isTamed()) {
+				if (this.getTarget() == null) {
+					this.makeMad();
+					this.setTarget(player);
+					return InteractionResult.sidedSuccess(this.level.isClientSide);
+				} else {
+					return InteractionResult.CONSUME;
+				}
 			}
 
 			boolean flag = !this.isBaby() && !this.isSaddled() && stack.is(Items.SADDLE);
@@ -289,8 +294,11 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 
 	@Override
 	public InteractionResult fedFood(Player player, ItemStack stack) {
-		if (!this.isTamed() && !this.level.isClientSide)
-			this.fleeGoal.trigger(this.getRandom().nextInt(20) + 100, this.getRandom().nextFloat() * 360.0F);
+		if (!this.isTamed()) {
+			this.makeMad();
+			this.setTarget(player);
+			return InteractionResult.sidedSuccess(this.level.isClientSide);
+		}
 		return super.fedFood(player, stack);
 	}
 
