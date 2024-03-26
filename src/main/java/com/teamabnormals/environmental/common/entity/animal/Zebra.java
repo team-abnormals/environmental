@@ -156,13 +156,13 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 						double angle = attackAngleVector.dot(Vec3.directionFromRotation(0.0F, this.getVisualRotationYInDegrees()).normalize());
 						boolean isfleeing = this.isFleeing() && !this.isImmobile() && !this.getNavigation().isDone();
 
-						if (angle > 0.7D || jumpkick) {
+						if (angle > 0.7D) {
 							if (isfleeing || jumpkick || (rider != null && rider.zza > 0.0F)) {
 								shouldkick = true;
 								backkick = false;
 								break;
 							}
-						} else if (angle < -0.7D) {
+						} else if (angle < -0.7D && !jumpkick) {
 							if (isfleeing) {
 								shouldkick = true;
 							} else if (rider == null) {
@@ -177,7 +177,7 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 					}
 
 					if (shouldkick) {
-						this.kick(backkick, rider.zza);
+						this.kick(backkick, rider != null ? rider.zza : 0.0F);
 						this.playKickingSound();
 					}
 				}
@@ -355,6 +355,10 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 		this.frontKickAnimO = this.frontKickAnim;
 	}
 
+	public void kick(boolean backKick) {
+		this.kick(backKick, 0.0F);
+	}
+
 	public void kick(boolean backKick, double riderSpeed) {
 		this.setKickTime(1);
 		this.setEating(false);
@@ -394,19 +398,20 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 				float knockback = (float) this.getAttributeValue(Attributes.ATTACK_KNOCKBACK);
 
 				if (jumpkick) {
-					float f = this.jumpStrength * 6.0F;
+					float f = this.jumpStrength;
 					if (riderSpeed <= 0.0F)
 						f *= 0.5F;
-					damage += f;
-					knockback = knockback * 0.8F + this.jumpStrength * 1.1F;
+					damage += f * 6.0F;
+					knockback = knockback * 0.8F + f * 1.1F;
 				} else if (backKick) {
 					damage += 2.0F;
-					knockback *= 1.5F;
+					knockback *= 1.2F;
 				} else {
 					knockback *= 0.8F;
 				}
 
 				boolean flag = living.hurt(source, (int) damage);
+				System.out.println((int) damage);
 
 				if (flag) {
 					this.doEnchantDamageEffects(this, living);
