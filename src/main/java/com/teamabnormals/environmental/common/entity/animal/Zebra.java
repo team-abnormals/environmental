@@ -229,7 +229,8 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 			for (Zebra zebra : zebras)
 				zebra.getFleeGoal().trigger(fleetime, fleedirection);
 
-			this.fleeGoal.trigger(fleetime, fleedirection);
+			if (this.isBaby())
+				this.fleeGoal.trigger(fleetime, fleedirection);
 		}
 		super.setLastHurtByMob(attacker);
 	}
