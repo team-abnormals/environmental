@@ -144,6 +144,7 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 			if (!this.isBaby() && !this.isKicking()) {
 				LivingEntity rider = this.getControllingPassenger();
 				boolean jumpkick = this.canJumpKick();
+				boolean isfleeing = this.isFleeing() && !this.isImmobile() && !this.getNavigation().isDone();
 
 				if (!this.isStanding() || jumpkick) {
 					List<LivingEntity> nearby = this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.9F), this.kickablePredicate);
@@ -154,7 +155,6 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 						Vec3 attackAngleVector = living.position().subtract(this.position()).normalize();
 						attackAngleVector = new Vec3(attackAngleVector.x, 0.0D, attackAngleVector.z);
 						double angle = attackAngleVector.dot(Vec3.directionFromRotation(0.0F, this.getVisualRotationYInDegrees()).normalize());
-						boolean isfleeing = this.isFleeing() && !this.isImmobile() && !this.getNavigation().isDone();
 
 						if (angle > 0.7D) {
 							if (isfleeing || jumpkick || (rider != null && rider.zza > 0.0F)) {
@@ -177,7 +177,7 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 					}
 
 					if (shouldkick) {
-						this.kick(backkick, rider != null ? rider.zza : 0.0F);
+						this.kick(backkick, rider == null && !isfleeing);
 						this.playKickingSound();
 					}
 				}
@@ -365,10 +365,10 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 	}
 
 	public void kick(boolean backKick) {
-		this.kick(backKick, 0.0F);
+		this.kick(backKick, false);
 	}
 
-	public void kick(boolean backKick, double riderSpeed) {
+	public void kick(boolean backKick, boolean softBackKick) {
 		this.setKickTime(1);
 		this.setEating(false);
 
@@ -408,12 +408,15 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 
 				if (jumpkick) {
 					float f = this.jumpStrength;
-					if (riderSpeed <= 0.0F)
+					if (rider != null && rider.zza <= 0.0F)
 						f *= 0.5F;
 					damage += f * 6.0F;
 					knockback = knockback * 0.8F + f * 1.1F;
 				} else if (backKick) {
-					damage += 2.0F;
+					if (!softBackKick)
+						damage += 2.0F;
+					else if (damage > 1.0F)
+						damage = 1.0F;
 					knockback *= 1.2F;
 				} else {
 					knockback *= 0.8F;
