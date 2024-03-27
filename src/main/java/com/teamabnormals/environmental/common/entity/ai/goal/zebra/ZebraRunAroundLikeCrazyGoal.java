@@ -33,8 +33,9 @@ public class ZebraRunAroundLikeCrazyGoal extends RunAroundLikeCrazyGoal {
 				this.zebra.modifyTemper(5);
 			}
 
-			this.zebra.kick(this.zebra.getRandom().nextBoolean());
-			this.zebra.ejectPassengers();
+			boolean backfling = this.zebra.getRandom().nextBoolean();
+			this.zebra.kick(backfling);
+			this.zebra.flingPassengers(backfling);
 			this.zebra.playAngrySound();
 			this.zebra.level.broadcastEntityEvent(this.zebra, (byte)6);
 		}

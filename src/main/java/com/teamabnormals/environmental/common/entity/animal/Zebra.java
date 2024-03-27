@@ -420,7 +420,6 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 				}
 
 				boolean flag = living.hurt(source, (int) damage);
-				System.out.println((int) damage);
 
 				if (flag) {
 					this.doEnchantDamageEffects(this, living);
@@ -430,6 +429,22 @@ public class Zebra extends AbstractHorse implements NeutralMob {
 						living.knockback(knockback, -x, -z);
 				}
 			}
+		}
+	}
+
+	public void flingPassengers(boolean backFling) {
+		float rot = this.getVisualRotationYInDegrees();
+		float x = Mth.sin(rot * Mth.DEG_TO_RAD);
+		float z = -Mth.cos(rot * Mth.DEG_TO_RAD);
+
+		for (int i = this.getPassengers().size() - 1; i >= 0; --i) {
+			Entity passenger = this.getPassengers().get(i);
+			passenger.stopRiding();
+			Vec3 vec3 = (new Vec3(x, 0.0D, z)).scale(0.8F);
+			if (backFling)
+				vec3 = vec3.scale(-1.0D);
+			passenger.push(vec3.x, 0.8D, vec3.z);
+			passenger.hurtMarked = true;
 		}
 	}
 
