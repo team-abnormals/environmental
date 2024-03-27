@@ -20,7 +20,7 @@ public class ZebraRunAroundLikeCrazyGoal extends RunAroundLikeCrazyGoal {
 		if (entity == null)
 			return;
 
-		if (!this.zebra.isTamed() && this.zebra.getRandom().nextInt(this.adjustedTickDelay(50)) == 0) {
+		if (!this.zebra.isTamed() && this.zebra.getRandom().nextInt(this.adjustedTickDelay(30)) == 0) {
 			if (entity instanceof Player) {
 				int i = this.zebra.getTemper();
 				int j = this.zebra.getMaxTemper();
