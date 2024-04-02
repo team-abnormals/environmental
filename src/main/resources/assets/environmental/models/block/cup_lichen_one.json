@@ -1,0 +1,29 @@
+{
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "environmental:block/cup_lichen",
+		"lichen": "environmental:block/cup_lichen"
+	},
+	"elements": [
+		{
+			"from": [2, 0, 1],
+			"to": [10, 8, 1],
+			"shade": false,
+			"rotation": {"angle": -45, "axis": "y", "origin": [0, 0, 0], "rescale": true},
+			"faces": {
+				"north": {"uv": [0, 8, 8, 16], "texture": "#lichen"},
+				"south": {"uv": [0, 8, 8, 16], "texture": "#lichen"}
+			}
+		},
+		{
+			"from": [6, 0, -3],
+			"to": [6, 8, 5],
+			"shade": false,
+			"rotation": {"angle": -45, "axis": "y", "origin": [0, 0, 0], "rescale": true},
+			"faces": {
+				"east": {"uv": [0, 8, 8, 16], "texture": "#lichen"},
+				"west": {"uv": [0, 8, 8, 16], "texture": "#lichen"}
+			}
+		}
+	]
+}

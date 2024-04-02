@@ -7,6 +7,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.ai.util.DefaultRandomPos;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
@@ -29,7 +30,7 @@ public class TapirHuntFloraGoal extends Goal {
 
 	@Override
 	public boolean canUse() {
-		return this.tapir.isTrackingFlora();
+		return this.tapir.getTrackingTime() > 0 && this.tapir.hasFloraPos();
 	}
 
 	@Override
@@ -50,8 +51,9 @@ public class TapirHuntFloraGoal extends Goal {
 	@Override
 	public void tick() {
 		BlockPos florapos = this.tapir.getFloraPos();
+		BlockState florastate = this.tapir.level.getBlockState(florapos);
 
-		if (!this.tapir.level.getBlockState(florapos).is(this.tapir.getFloraBlock())) {
+		if (!florastate.getBlock().getCloneItemStack(this.tapir.level, florapos, florastate).is(this.tapir.getFloraItem())) {
 			if (this.tapir.isGrazing()) {
 				this.tapir.stopTracking();
 				return;
@@ -63,7 +65,7 @@ public class TapirHuntFloraGoal extends Goal {
 			}
 		}
 
-		if (florapos.closerThan(this.tapir.blockPosition(), 1.25D)) {
+		if (florapos.closerThan(this.tapir.blockPosition(), 1.5D)) {
 			this.tapir.getLookControl().setLookAt(florapos.getX() + 0.5D, this.tapir.getEyeY(), florapos.getZ() + 0.5D, 10.0F, this.tapir.getMaxHeadXRot());
 
 			if (!this.tapir.isGrazing()) {
@@ -131,7 +133,7 @@ public class TapirHuntFloraGoal extends Goal {
 	}
 
 	private boolean canBreedWith(Tapir partner) {
-		return partner.isGrazing() && partner.getAge() == 0 && this.tapir.getFloraBlock() == partner.getFloraBlock();
+		return partner.isGrazing() && partner.getAge() == 0 && this.tapir.getFloraItem() == partner.getFloraItem();
 	}
 
 	private void moveTo(BlockPos pos) {

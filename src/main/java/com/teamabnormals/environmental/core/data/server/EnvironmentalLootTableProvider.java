@@ -6,6 +6,7 @@ import com.mojang.datafixers.util.Pair;
 import com.teamabnormals.blueprint.common.block.VerticalSlabBlock;
 import com.teamabnormals.blueprint.common.block.VerticalSlabBlock.VerticalSlabType;
 import com.teamabnormals.environmental.common.block.CattailBlock;
+import com.teamabnormals.environmental.common.block.CupLichenBlock;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
 import net.minecraft.advancements.critereon.*;
@@ -34,7 +35,6 @@ import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.LootTable.Builder;
 import net.minecraft.world.level.storage.loot.ValidationContext;
-import net.minecraft.world.level.storage.loot.entries.AlternativesEntry;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.functions.*;
@@ -179,7 +179,7 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.add(MYCELIUM_SPROUTS.get(), BlockLoot::createShearsOnlyDrop);
 			this.add(DUCKWEED.get(), BlockLoot::createShearsOnlyDrop);
 			this.add(GIANT_TALL_GRASS.get(), (block) -> createDoublePlantWithOtherDrop(block, Blocks.GRASS, Items.WHEAT_SEEDS, 3, 0.125F));
-			this.dropSelf(CUP_LICHEN.get());
+			this.add(CUP_LICHEN.get(), EnvironmentalBlockLoot::createCupLichenDrops);
 			this.add(CACTUS_BOBBLE.get(), noDrop());
 
 			this.dropSelf(CATTAIL_FLUFF_BLOCK.get());
@@ -361,6 +361,12 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.add(BLUE_HANGING_WISTERIA_LEAVES.get(), BlockLoot::createShearsOnlyDrop);
 			this.add(PURPLE_HANGING_WISTERIA_LEAVES.get(), BlockLoot::createShearsOnlyDrop);
 			this.add(WHITE_HANGING_WISTERIA_LEAVES.get(), BlockLoot::createShearsOnlyDrop);
+		}
+
+		protected static LootTable.Builder createCupLichenDrops(Block block) {
+			return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(applyExplosionDecay(block, LootItem.lootTableItem(block).apply(List.of(2, 3, 4), (cups) -> {
+				return SetItemCountFunction.setCount(ConstantValue.exactly((float) cups.intValue())).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CupLichenBlock.CUPS, cups)));
+			}))));
 		}
 
 		protected static LootTable.Builder createCattailDrops(Block block, ItemLike drop) {

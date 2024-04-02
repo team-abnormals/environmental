@@ -8,7 +8,8 @@ import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.ai.util.LandRandomPos;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.EnumSet;
@@ -35,12 +36,12 @@ public class TapirSniffForFloraGoal extends Goal {
 
     @Override
     public boolean canUse() {
-        return this.tapir.hasFloraState() && !this.tapir.hasFloraPos();
+        return this.tapir.getTrackingTime() > 0 && !this.tapir.hasFloraPos();
     }
 
     @Override
     public boolean canContinueToUse() {
-        return (this.sniffTime > 0 || this.stopTime > 0) && this.tapir.hasFloraState();
+        return this.sniffTime > 0 || this.stopTime > 0;
     }
 
     @Override
@@ -142,7 +143,7 @@ public class TapirSniffForFloraGoal extends Goal {
 
     private BlockPos findNearestFlora(int range) {
         BlockPos.MutableBlockPos mutablepos = new BlockPos.MutableBlockPos();
-        Block block = this.tapir.getFloraBlock();
+        Item item = this.tapir.getFloraItem();
 
         for (int height = 0; height <= 12; height++) {
             for (int i = 0; i < 2; i++) {
@@ -150,7 +151,8 @@ public class TapirSniffForFloraGoal extends Goal {
                 for(int x = 0; x <= range; x = x > 0 ? -x : 1 - x) {
                     for(int z = x < range && x > -range ? range : 0; z <= range; z = z > 0 ? -z : 1 - z) {
                         mutablepos.setWithOffset(this.origin, x, y, z);
-                        if (this.tapir.level.getBlockState(mutablepos).is(block))
+                        BlockState blockstate = this.tapir.level.getBlockState(mutablepos);
+                        if (blockstate.getBlock().getCloneItemStack(this.tapir.level, mutablepos, blockstate).is(item))
                             return mutablepos;
                     }
                 }
@@ -167,7 +169,7 @@ public class TapirSniffForFloraGoal extends Goal {
 
         for (Tapir entity : list) {
             double d1 = this.tapir.distanceToSqr(entity);
-            if (entity.isTrackingFlora() && entity.getAge() == 0 && this.tapir.getFloraBlock() == entity.getFloraBlock() && d1 < d0) {
+            if (entity.hasFloraPos() && entity.getAge() == 0 && this.tapir.getFloraItem() == entity.getFloraItem() && d1 < d0) {
                 d0 = d1;
                 partner = entity;
             }

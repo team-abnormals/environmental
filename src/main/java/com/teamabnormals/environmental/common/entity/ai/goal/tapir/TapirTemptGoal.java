@@ -37,7 +37,7 @@ public class TapirTemptGoal extends Goal {
     }
 
     private boolean shouldFollow(LivingEntity entity) {
-        return (this.tapir.isFood(entity.getMainHandItem()) || this.tapir.isFood(entity.getOffhandItem())) && !this.tapir.hasFloraState();
+        return (this.tapir.isFood(entity.getMainHandItem()) || this.tapir.isFood(entity.getOffhandItem())) && !this.tapir.hasFloraItem();
     }
 
     @Override

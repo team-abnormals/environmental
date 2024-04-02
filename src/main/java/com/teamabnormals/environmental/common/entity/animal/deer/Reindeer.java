@@ -71,7 +71,7 @@ public class Reindeer extends AbstractDeer {
 		Reindeer entity = EnvironmentalEntityTypes.REINDEER.get().create(level);
 		Reindeer partner = (Reindeer) ageable;
 		if (entity != null) {
-			entity.setHasAntlers(this.random.nextBoolean());
+			entity.setHasAntlers(true);
 			entity.setTrusting(this.isTrusting() || partner.isTrusting());
 			entity.setHoliday(this.isHolidayCriteria());
 		}

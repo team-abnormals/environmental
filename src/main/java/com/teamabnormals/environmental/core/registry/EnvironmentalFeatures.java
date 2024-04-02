@@ -3,6 +3,7 @@ package com.teamabnormals.environmental.core.registry;
 import com.google.common.collect.ImmutableList;
 import com.teamabnormals.environmental.common.block.CartwheelBlock;
 import com.teamabnormals.environmental.common.levelgen.feature.*;
+import com.teamabnormals.environmental.common.levelgen.placement.BetterNoiseBasedCountPlacement;
 import com.teamabnormals.environmental.common.levelgen.treedecorators.HangingWillowDecorator;
 import com.teamabnormals.environmental.common.levelgen.treedecorators.HangingWisteriaDecorator;
 import com.teamabnormals.environmental.common.levelgen.treedecorators.PineconeDecorator;
@@ -66,8 +67,14 @@ public class EnvironmentalFeatures {
 	public static final RegistryObject<Feature<NoneFeatureConfiguration>> COARSE_DIRT_ON_STONE = FEATURES.register("coarse_dirt_on_stone", () -> new CoarseDirtOnStoneFeature(NoneFeatureConfiguration.CODEC));
 	public static final RegistryObject<Feature<NoneFeatureConfiguration>> SMALL_COARSE_DIRT_ON_STONE = FEATURES.register("small_coarse_dirt_on_stone", () -> new SmallCoarseDirtOnStoneFeature(NoneFeatureConfiguration.CODEC));
 	public static final RegistryObject<Feature<BlockStateConfiguration>> PINE_SLOPES_BOULDER = FEATURES.register("pine_slopes_boulder", () -> new PineSlopesBoulderFeature(BlockStateConfiguration.CODEC));
+	public static final RegistryObject<Feature<NoneFeatureConfiguration>> FALLEN_PINE_TREE = FEATURES.register("fallen_pine_tree", () -> new FallenPineTreeFeature(NoneFeatureConfiguration.CODEC));
+	public static final RegistryObject<Feature<NoneFeatureConfiguration>> FALLEN_TALL_PINE_TREE = FEATURES.register("fallen_tall_pine_tree", () -> new FallenTallPineTreeFeature(NoneFeatureConfiguration.CODEC));
 	public static final RegistryObject<Feature<SimpleBlockConfiguration>> CARTWHEEL = FEATURES.register("cartwheel", () -> new CartwheelFeature(SimpleBlockConfiguration.CODEC));
 	public static final RegistryObject<Feature<ProbabilityFeatureConfiguration>> SHORT_BAMBOO = FEATURES.register("short_bamboo", () -> new ShortBambooFeature(ProbabilityFeatureConfiguration.CODEC));
+
+	public static final RegistryObject<Feature<NoneFeatureConfiguration>> CUP_LICHEN_PATCH = FEATURES.register("cup_lichen_patch", () -> new CupLichenPatchFeature(NoneFeatureConfiguration.CODEC));
+	public static final RegistryObject<Feature<NoneFeatureConfiguration>> SMALL_CUP_LICHEN_PATCH = FEATURES.register("small_cup_lichen_patch", () -> new SmallCupLichenPatchFeature(NoneFeatureConfiguration.CODEC));
+	public static final RegistryObject<Feature<NoneFeatureConfiguration>> STONE_CUP_LICHEN_PATCH = FEATURES.register("stone_cup_lichen_patch", () -> new StoneCupLichenPatchFeature(NoneFeatureConfiguration.CODEC));
 
 	public static final RegistryObject<Feature<TreeConfiguration>> WEEPING_WILLOW_TREE = FEATURES.register("weeping_willow_tree", () -> new WeepingWillowTreeFeature(TreeConfiguration.CODEC));
 	public static final RegistryObject<Feature<TreeConfiguration>> CHERRY_TREE = FEATURES.register("cherry_tree", () -> new CherryTreeFeature(TreeConfiguration.CODEC));
@@ -149,7 +156,7 @@ public class EnvironmentalFeatures {
 		}
 
 		private static TreeConfigurationBuilder createTallPine() {
-			return createCustomTree(EnvironmentalBlocks.PINE_LOG.get(), new StraightTrunkPlacer(17, 4, 1), EnvironmentalBlocks.PINE_LEAVES.get());
+			return createCustomTree(EnvironmentalBlocks.PINE_LOG.get(), new StraightTrunkPlacer(16, 3, 1), EnvironmentalBlocks.PINE_LEAVES.get());
 		}
 
 		private static TreeConfigurationBuilder createWhiteWisteria() {
@@ -240,15 +247,19 @@ public class EnvironmentalFeatures {
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> PINE_ON_STONE = register("pine_on_stone", () -> new ConfiguredFeature<>(EnvironmentalFeatures.PINE_TREE_ON_STONE.get(), Configs.PINE));
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> TALL_PINE = register("tall_pine", () -> new ConfiguredFeature<>(EnvironmentalFeatures.PINE_TREE.get(), Configs.TALL_PINE));
 		public static final RegistryObject<ConfiguredFeature<RandomFeatureConfiguration, ?>> TREES_PINE_BARRENS = register("trees_pine_barrens", () -> new ConfiguredFeature<>(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(TreePlacements.SPRUCE_CHECKED, 0.18F)), EnvironmentalPlacedFeatures.PINE.getHolder().get())));
-		public static final RegistryObject<ConfiguredFeature<RandomFeatureConfiguration, ?>> TREES_OLD_GROWTH_PINE_BARRENS = register("trees_old_growth_pine_barrens", () -> new ConfiguredFeature<>(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(TreePlacements.SPRUCE_CHECKED, 0.1F)), EnvironmentalPlacedFeatures.TALL_PINE.getHolder().get())));
+		public static final RegistryObject<ConfiguredFeature<RandomFeatureConfiguration, ?>> TREES_OLD_GROWTH_PINE_BARRENS = register("trees_old_growth_pine_barrens", () -> new ConfiguredFeature<>(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(TreePlacements.SPRUCE_CHECKED, 0.15F)), EnvironmentalPlacedFeatures.TALL_PINE.getHolder().get())));
 
 		public static final RegistryObject<ConfiguredFeature<ProbabilityFeatureConfiguration, ?>> GRAINY_COARSE_DIRT = register("grainy_coarse_dirt", () -> new ConfiguredFeature<>(EnvironmentalFeatures.GRAINY_COARSE_DIRT.get(), new ProbabilityFeatureConfiguration(0.1F)));
 		public static final RegistryObject<ConfiguredFeature<NoneFeatureConfiguration, ?>> COARSE_DIRT_ON_STONE = register("coarse_dirt_on_stone", () -> new ConfiguredFeature<>(EnvironmentalFeatures.COARSE_DIRT_ON_STONE.get(), NoneFeatureConfiguration.NONE));
 		public static final RegistryObject<ConfiguredFeature<NoneFeatureConfiguration, ?>> SMALL_COARSE_DIRT_ON_STONE = register("small_coarse_dirt_on_stone", () -> new ConfiguredFeature<>(EnvironmentalFeatures.SMALL_COARSE_DIRT_ON_STONE.get(), NoneFeatureConfiguration.NONE));
 
-		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> PATCH_CUP_LICHEN = register("patch_cup_lichen", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(80, 5, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(EnvironmentalBlocks.CUP_LICHEN.get()))))));
-		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> PATCH_CUP_LICHEN_SMALL = register("patch_cup_lichen_small", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(40, 3, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(EnvironmentalBlocks.CUP_LICHEN.get()))))));
-		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> PATCH_CUP_LICHEN_STONE = register("patch_cup_lichen_stone", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(32, 4, 2, PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(EnvironmentalBlocks.CUP_LICHEN.get())), BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, BlockPredicate.matchesTag(Direction.DOWN.getNormal(), BlockTags.BASE_STONE_OVERWORLD))))));
+		public static final RegistryObject<ConfiguredFeature<NoneFeatureConfiguration, ?>> FALLEN_PINE_TREE = register("fallen_pine_tree", () -> new ConfiguredFeature<>(EnvironmentalFeatures.FALLEN_PINE_TREE.get(), NoneFeatureConfiguration.INSTANCE));
+		public static final RegistryObject<ConfiguredFeature<NoneFeatureConfiguration, ?>> FALLEN_TALL_PINE_TREE = register("fallen_tall_pine_tree", () -> new ConfiguredFeature<>(EnvironmentalFeatures.FALLEN_TALL_PINE_TREE.get(), NoneFeatureConfiguration.INSTANCE));
+
+		public static final RegistryObject<ConfiguredFeature<NoneFeatureConfiguration, ?>> PATCH_CUP_LICHEN = register("patch_cup_lichen", () -> new ConfiguredFeature<>(EnvironmentalFeatures.CUP_LICHEN_PATCH.get(), NoneFeatureConfiguration.INSTANCE));
+		public static final RegistryObject<ConfiguredFeature<NoneFeatureConfiguration, ?>> PATCH_CUP_LICHEN_SMALL = register("patch_cup_lichen_small", () -> new ConfiguredFeature<>(EnvironmentalFeatures.SMALL_CUP_LICHEN_PATCH.get(), NoneFeatureConfiguration.INSTANCE));
+		public static final RegistryObject<ConfiguredFeature<NoneFeatureConfiguration, ?>> PATCH_CUP_LICHEN_STONE = register("patch_cup_lichen_stone", () -> new ConfiguredFeature<>(EnvironmentalFeatures.STONE_CUP_LICHEN_PATCH.get(), NoneFeatureConfiguration.INSTANCE));
+		public static final RegistryObject<ConfiguredFeature<RandomFeatureConfiguration, ?>> PATCH_CUP_LICHEN_NOISE = register("patch_cup_lichen_noise", () -> new ConfiguredFeature<>(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(PlacementUtils.inlinePlaced(PATCH_CUP_LICHEN_SMALL.getHolder().get()), 0.8F)), PlacementUtils.inlinePlaced(PATCH_CUP_LICHEN.getHolder().get()))));
 
 		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> FLOWER_BLUE_ORCHID = register("flower_blue_orchid", () -> new ConfiguredFeature<>(Feature.FLOWER, new RandomPatchConfiguration(64, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.BLUE_ORCHID))))));
 		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> FLOWER_CORNFLOWER = register("flower_cornflower", () -> new ConfiguredFeature<>(Feature.FLOWER, new RandomPatchConfiguration(64, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.CORNFLOWER))))));
@@ -280,8 +291,9 @@ public class EnvironmentalFeatures {
 		public static final RegistryObject<ConfiguredFeature<NoneFeatureConfiguration, ?>> FALLEN_CHERRY_LEAVES = register("fallen_cherry_leaves", () -> new ConfiguredFeature<>(EnvironmentalFeatures.FALLEN_LEAVES.get(), NoneFeatureConfiguration.NONE));
 
 		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> PATCH_MYCELIUM_SPROUTS = register("patch_mycelium_sprouts", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, grassPatch(BlockStateProvider.simple(EnvironmentalBlocks.MYCELIUM_SPROUTS.get()), 32)));
-		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> PATCH_PINE_BARRENS_GRASS = register("patch_pine_barrens_grass", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, grassPatch(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder().add(Blocks.GRASS.defaultBlockState(), 3).add(Blocks.FERN.defaultBlockState(), 1)), 32)));
-        public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> PATCH_JUNGLE_LARGE_FERN = register("patch_jungle_large_fern", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.LARGE_FERN)))));
+		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> PATCH_PINE_BARRENS_GRASS = register("patch_pine_barrens_grass", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, grassPatch(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder().add(Blocks.GRASS.defaultBlockState(), 3).add(Blocks.FERN.defaultBlockState(), 2)), 32)));
+		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> PATCH_PINE_BARRENS_TALL_GRASS = register("patch_pine_barrens_tall_grass", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.TALL_GRASS)))));
+		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> PATCH_JUNGLE_LARGE_FERN = register("patch_jungle_large_fern", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.LARGE_FERN)))));
 
 		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> PATCH_WATERLILY = register("patch_waterlily", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(10, 7, 3, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.LILY_PAD))))));
 		public static final RegistryObject<ConfiguredFeature<RandomPatchConfiguration, ?>> PATCH_SUGAR_CANE = register("patch_sugar_cane", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(20, 4, 0, PlacementUtils.inlinePlaced(Feature.BLOCK_COLUMN, BlockColumnConfiguration.simple(BiasedToBottomInt.of(2, 4), BlockStateProvider.simple(Blocks.SUGAR_CANE)), BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, BlockPredicate.wouldSurvive(Blocks.SUGAR_CANE.defaultBlockState(), BlockPos.ZERO), BlockPredicate.anyOf(BlockPredicate.matchesFluids(new BlockPos(1, -1, 0), Fluids.WATER, Fluids.FLOWING_WATER), BlockPredicate.matchesFluids(new BlockPos(-1, -1, 0), Fluids.WATER, Fluids.FLOWING_WATER), BlockPredicate.matchesFluids(new BlockPos(0, -1, 1), Fluids.WATER, Fluids.FLOWING_WATER), BlockPredicate.matchesFluids(new BlockPos(0, -1, -1), Fluids.WATER, Fluids.FLOWING_WATER))))))));
@@ -300,6 +312,9 @@ public class EnvironmentalFeatures {
 
 	public static final class EnvironmentalPlacedFeatures {
 		public static final DeferredRegister<PlacedFeature> PLACED_FEATURES = DeferredRegister.create(Registry.PLACED_FEATURE_REGISTRY, Environmental.MOD_ID);
+
+		private static final PlacementFilter PINE_PLACEMENT_FILTER = BlockPredicateFilter.forPredicate(BlockPredicate.not(BlockPredicate.matchesBlocks(Direction.DOWN.getNormal(), Blocks.ROOTED_DIRT)));
+		private static final PlacementFilter PINE_ON_STONE_PLACEMENT_FILTER = BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(Direction.DOWN.getNormal(), BlockTags.BASE_STONE_OVERWORLD));
 
 		public static final RegistryObject<PlacedFeature> ORE_MUD = register("ore_mud", EnvironmentalConfiguredFeatures.ORE_MUD, RarityFilter.onAverageOnceEvery(3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_TOP_SOLID, BlockPredicateFilter.forPredicate(BlockPredicate.matchesFluids(Fluids.WATER)), BiomeFilter.biome());
 		public static final RegistryObject<PlacedFeature> SEAGRASS_MARSH = register("seagrass_marsh", EnvironmentalConfiguredFeatures.SEAGRASS_MID, AquaticPlacements.seagrassPlacement(128));
@@ -360,17 +375,22 @@ public class EnvironmentalFeatures {
 
 		public static final RegistryObject<PlacedFeature> PINE = register("pine", EnvironmentalConfiguredFeatures.PINE, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
 		public static final RegistryObject<PlacedFeature> TALL_PINE = register("tall_pine", EnvironmentalConfiguredFeatures.TALL_PINE, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
-		public static final RegistryObject<PlacedFeature> TREES_PINE_BARRENS = register("trees_pine_barrens", EnvironmentalConfiguredFeatures.TREES_PINE_BARRENS, VegetationPlacements.treePlacement(PlacementUtils.countExtra(14, 0.1F, 1)));
-		public static final RegistryObject<PlacedFeature> TREES_OLD_GROWTH_PINE_BARRENS = register("trees_old_growth_pine_barrens", EnvironmentalConfiguredFeatures.TREES_OLD_GROWTH_PINE_BARRENS, VegetationPlacements.treePlacement(PlacementUtils.countExtra(22, 0.1F, 1)));
-		public static final RegistryObject<PlacedFeature> TREES_PINE_SLOPES = register("trees_pine_slopes", EnvironmentalConfiguredFeatures.PINE_ON_STONE, PlacementUtils.countExtra(6, 0.1F, 1), InSquarePlacement.spread(), VegetationPlacements.TREE_THRESHOLD, PlacementUtils.HEIGHTMAP_OCEAN_FLOOR, BiomeFilter.biome(), BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(Direction.DOWN.getNormal(), BlockTags.BASE_STONE_OVERWORLD)));
+		public static final RegistryObject<PlacedFeature> TREES_PINE_BARRENS = register("trees_pine_barrens", EnvironmentalConfiguredFeatures.TREES_PINE_BARRENS, treePlacement(PlacementUtils.countExtra(16, 0.1F, 1), PINE_PLACEMENT_FILTER));
+		public static final RegistryObject<PlacedFeature> TREES_OLD_GROWTH_PINE_BARRENS = register("trees_old_growth_pine_barrens", EnvironmentalConfiguredFeatures.TREES_OLD_GROWTH_PINE_BARRENS, treePlacement(PlacementUtils.countExtra(22, 0.1F, 1), PINE_PLACEMENT_FILTER));
+		public static final RegistryObject<PlacedFeature> TREES_PINE_BARRENS_ON_STONE = register("trees_pine_barrens_on_stone", EnvironmentalConfiguredFeatures.PINE_ON_STONE, treePlacement(PlacementUtils.countExtra(3, 0.1F, 1), PINE_ON_STONE_PLACEMENT_FILTER));
+		public static final RegistryObject<PlacedFeature> TREES_PINE_SLOPES = register("trees_pine_slopes", EnvironmentalConfiguredFeatures.PINE_ON_STONE, treePlacement(PlacementUtils.countExtra(6, 0.1F, 1), PINE_ON_STONE_PLACEMENT_FILTER));
 
-		public static final RegistryObject<PlacedFeature> GRAINY_COARSE_DIRT = register("grainy_coarse_dirt", EnvironmentalConfiguredFeatures.GRAINY_COARSE_DIRT, CountPlacement.of(40), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
+		public static final RegistryObject<PlacedFeature> GRAINY_COARSE_DIRT = register("grainy_coarse_dirt", EnvironmentalConfiguredFeatures.GRAINY_COARSE_DIRT, CountPlacement.of(56), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
 		public static final RegistryObject<PlacedFeature> COARSE_DIRT_ON_STONE = register("coarse_dirt_on_stone", EnvironmentalConfiguredFeatures.COARSE_DIRT_ON_STONE, CountPlacement.of(3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
 		public static final RegistryObject<PlacedFeature> SMALL_COARSE_DIRT_ON_STONE = register("small_coarse_dirt_on_stone", EnvironmentalConfiguredFeatures.SMALL_COARSE_DIRT_ON_STONE, CountPlacement.of(4), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
 
+		public static final RegistryObject<PlacedFeature> FALLEN_PINE_TREE = register("fallen_pine_tree", EnvironmentalConfiguredFeatures.FALLEN_PINE_TREE, RarityFilter.onAverageOnceEvery(12), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
+		public static final RegistryObject<PlacedFeature> FALLEN_TALL_PINE_TREE = register("fallen_tall_pine_tree", EnvironmentalConfiguredFeatures.FALLEN_TALL_PINE_TREE, RarityFilter.onAverageOnceEvery(5), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
+
 		public static final RegistryObject<PlacedFeature> PATCH_CUP_LICHEN = register("patch_cup_lichen", EnvironmentalConfiguredFeatures.PATCH_CUP_LICHEN, RarityFilter.onAverageOnceEvery(32), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
-		public static final RegistryObject<PlacedFeature> PATCH_CUP_LICHEN_SMALL = register("patch_cup_lichen_small", EnvironmentalConfiguredFeatures.PATCH_CUP_LICHEN_SMALL, RarityFilter.onAverageOnceEvery(32), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
+		public static final RegistryObject<PlacedFeature> PATCH_CUP_LICHEN_SMALL = register("patch_cup_lichen_small", EnvironmentalConfiguredFeatures.PATCH_CUP_LICHEN_SMALL, RarityFilter.onAverageOnceEvery(16), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 		public static final RegistryObject<PlacedFeature> PATCH_CUP_LICHEN_STONE = register("patch_cup_lichen_stone", EnvironmentalConfiguredFeatures.PATCH_CUP_LICHEN_STONE, RarityFilter.onAverageOnceEvery(3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
+		public static final RegistryObject<PlacedFeature> PATCH_CUP_LICHEN_NOISE = register("patch_cup_lichen_noise", EnvironmentalConfiguredFeatures.PATCH_CUP_LICHEN_NOISE, new BetterNoiseBasedCountPlacement(EnvironmentalNoiseParameters.NOISE_CUP_LICHEN.getHolder().orElseThrow(), 16, -0.4F), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 
 		public static final RegistryObject<PlacedFeature> PINE_SLOPES_ROCK = register("pine_slopes_rock", EnvironmentalConfiguredFeatures.STONE_ROCK, CountPlacement.of(2), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
 		public static final RegistryObject<PlacedFeature> PINE_SLOPES_BOULDER = register("pine_slopes_boulder", EnvironmentalConfiguredFeatures.PINE_SLOPES_BOULDER, CountPlacement.of(1), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
@@ -383,10 +403,11 @@ public class EnvironmentalFeatures {
 		public static final RegistryObject<PlacedFeature> PATCH_GRASS_MARSH = register("patch_grass_marsh", EnvironmentalConfiguredFeatures.PATCH_GRASS, VegetationPlacements.worldSurfaceSquaredWithCount(5));
 		public static final RegistryObject<PlacedFeature> PATCH_GRASS_BLOSSOM_WOODS = register("patch_grass_blossom_woods", EnvironmentalConfiguredFeatures.PATCH_GRASS, VegetationPlacements.worldSurfaceSquaredWithCount(12));
 		public static final RegistryObject<PlacedFeature> PATCH_MYCELIUM_SPROUTS = register("patch_mycelium_sprouts", EnvironmentalConfiguredFeatures.PATCH_MYCELIUM_SPROUTS, NoiseThresholdCountPlacement.of(-0.8D, 5, 10), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
-		public static final RegistryObject<PlacedFeature> PATCH_GRASS_PINE_BARRENS = register("patch_grass_pine_barrens", EnvironmentalConfiguredFeatures.PATCH_PINE_BARRENS_GRASS, VegetationPlacements.worldSurfaceSquaredWithCount(5));
+		public static final RegistryObject<PlacedFeature> PATCH_GRASS_PINE_BARRENS = register("patch_grass_pine_barrens", EnvironmentalConfiguredFeatures.PATCH_PINE_BARRENS_GRASS, VegetationPlacements.worldSurfaceSquaredWithCount(3));
 		public static final RegistryObject<PlacedFeature> PATCH_GRASS_SNOWY_PINE_BARRENS = register("patch_grass_snowy_pine_barrens", EnvironmentalConfiguredFeatures.PATCH_PINE_BARRENS_GRASS, InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
-		public static final RegistryObject<PlacedFeature> PATCH_GRASS_OLD_GROWTH_PINE_BARRENS = register("patch_grass_old_growth_pine_barrens", EnvironmentalConfiguredFeatures.PATCH_PINE_BARRENS_GRASS, VegetationPlacements.worldSurfaceSquaredWithCount(10));
+		public static final RegistryObject<PlacedFeature> PATCH_GRASS_OLD_GROWTH_PINE_BARRENS = register("patch_grass_old_growth_pine_barrens", EnvironmentalConfiguredFeatures.PATCH_PINE_BARRENS_GRASS, VegetationPlacements.worldSurfaceSquaredWithCount(8));
 		public static final RegistryObject<PlacedFeature> PATCH_GRASS_PINE_SLOPES = register("patch_grass_pine_slopes", EnvironmentalConfiguredFeatures.PATCH_GRASS, VegetationPlacements.worldSurfaceSquaredWithCount(26));
+		public static final RegistryObject<PlacedFeature> PATCH_TALL_GRASS_PINE_BARRENS = register("patch_pine_barrens_tall_grass", EnvironmentalConfiguredFeatures.PATCH_PINE_BARRENS_TALL_GRASS, RarityFilter.onAverageOnceEvery(6), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 		public static final RegistryObject<PlacedFeature> PATCH_LARGE_FERN_JUNGLE = register("patch_large_fern_jungle", EnvironmentalConfiguredFeatures.PATCH_JUNGLE_LARGE_FERN, RarityFilter.onAverageOnceEvery(4), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 
 		public static final RegistryObject<PlacedFeature> PATCH_GIANT_TALL_GRASS_PLAINS = register("patch_giant_tall_grass_plains", EnvironmentalConfiguredFeatures.PATCH_GIANT_TALL_GRASS, RarityFilter.onAverageOnceEvery(16), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
@@ -397,6 +418,10 @@ public class EnvironmentalFeatures {
 		public static final RegistryObject<PlacedFeature> CATTAILS = register("cattails", EnvironmentalConfiguredFeatures.CATTAILS, RarityFilter.onAverageOnceEvery(2), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 		public static final RegistryObject<PlacedFeature> CATTAILS_DENSE = register("cattails_dense", EnvironmentalConfiguredFeatures.CATTAILS_DENSE, RarityFilter.onAverageOnceEvery(5), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 		public static final RegistryObject<PlacedFeature> PATCH_SUGAR_CANE_BLOSSOM = register("patch_sugar_cane_blossom", EnvironmentalConfiguredFeatures.PATCH_SUGAR_CANE, RarityFilter.onAverageOnceEvery(2), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
+
+		private static ImmutableList<PlacementModifier> treePlacement(PlacementModifier modifier, PlacementModifier... extraModifiers) {
+			return ImmutableList.<PlacementModifier>builder().add(modifier).add(InSquarePlacement.spread()).add(VegetationPlacements.TREE_THRESHOLD).add(PlacementUtils.HEIGHTMAP_OCEAN_FLOOR).add(BiomeFilter.biome()).add(extraModifiers).build();
+		}
 
 		private static RegistryObject<PlacedFeature> register(String name, RegistryObject<? extends ConfiguredFeature<?, ?>> feature, PlacementModifier... placementModifiers) {
 			return register(name, feature, List.of(placementModifiers));

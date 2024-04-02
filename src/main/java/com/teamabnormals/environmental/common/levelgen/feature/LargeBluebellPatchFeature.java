@@ -28,23 +28,23 @@ public class LargeBluebellPatchFeature extends Feature<NoneFeatureConfiguration>
 	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
 		RandomSource random = context.random();
 		WorldGenLevel level = context.level();
-		BlockPos pos = context.origin();
+		BlockPos origin = context.origin();
 
 		int flowers = 0;
-		BlockPos.MutableBlockPos blockpos = new BlockPos.MutableBlockPos();
+		BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
 
 		for (int x = -16; x <= 16; ++x) {
 			for (int z = -16; z <= 16; ++z) {
-				blockpos.set(x + pos.getX(), level.getHeight(Heightmap.Types.WORLD_SURFACE_WG, x + pos.getX(), z + pos.getZ()), z + pos.getZ());
-				double d0 = getNoiseAtPos(pos, blockpos);
+				mutable.set(x + origin.getX(), level.getHeight(Heightmap.Types.WORLD_SURFACE_WG, x + origin.getX(), z + origin.getZ()), z + origin.getZ());
+				double d0 = getNoiseAtPos(origin, mutable);
 
-				if (random.nextInt(10) > 0 && blockpos.distSqr(pos) < 324.0D && (d0 > 0.5D || (d0 > 0.05D && random.nextInt(4) == 0))) {
+				if (random.nextInt(10) > 0 && mutable.distSqr(origin) < 324.0D && (d0 > 0.5D || (d0 > 0.05D && random.nextInt(4) == 0))) {
 					BlockState blockstate = EnvironmentalBlocks.BLUEBELL.get().defaultBlockState();
 					if (random.nextInt(6) == 0)
 						blockstate = random.nextInt(3) > 0 ? Blocks.GRASS.defaultBlockState() : Blocks.FERN.defaultBlockState();
 
-					if (level.isEmptyBlock(blockpos) && blockstate.canSurvive(level, blockpos)) {
-						level.setBlock(blockpos, blockstate, 2);
+					if (level.isEmptyBlock(mutable) && blockstate.canSurvive(level, mutable)) {
+						level.setBlock(mutable, blockstate, 2);
 						++flowers;
 					}
 				}

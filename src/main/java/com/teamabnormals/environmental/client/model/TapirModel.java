@@ -51,11 +51,10 @@ public class TapirModel<T extends Tapir> extends AgeableListModel<T> {
 	public void setupAnim(T tapir, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		float partialTick = ageInTicks - tapir.tickCount;
 
-		float sniffamount = tapir.getSniffAmount(partialTick);
-		float grazeamount = tapir.getGrazeAmount(partialTick);
 		float snoutraiseanim = tapir.getSnoutRaiseAmount(partialTick);
 		float shakeheadanim = tapir.getHeadShakeAnim(partialTick);
-		float noanimamount = 1F - sniffamount;
+		float neckangle = tapir.getNeckAngle(partialTick);
+		float noanimamount = 1F - tapir.getNoAnimAmount(partialTick);
 
 		this.head.y = 11F;
 		this.head.z = -8F;
@@ -65,21 +64,16 @@ public class TapirModel<T extends Tapir> extends AgeableListModel<T> {
 		this.snout.xRot = 0F;
 		this.snout.yRot = 0F;
 
-		this.head.y += sniffamount;
-		this.head.z += -sniffamount;
-		this.head.xRot += sniffamount;
-
-		float f = Mth.cos(grazeamount * Mth.PI) * -0.5F + 0.5F;
-
-		this.head.y += f;
-		this.head.z += -f;
-		this.head.xRot += f * (0.6F + Mth.sin(ageInTicks * 0.5F) * 0.05F);
+		this.head.y += neckangle;
+		this.head.z += -neckangle;
+		this.head.xRot += neckangle * 0.7F;
 
 		if (tapir.isSniffing()) {
 			this.head.xRot += Mth.sin(ageInTicks * 0.8F) * 0.015F;
 			this.snout.xRot = Mth.sin(ageInTicks * 0.7F) * Mth.sin(ageInTicks * 0.2F) * 0.3F;
 			this.snout.yRot = Mth.cos(ageInTicks * 0.6F) * 0.05F;
 		} else if (tapir.isGrazing()) {
+			this.head.xRot += Mth.sin(ageInTicks * 0.5F) * 0.05F;
 			this.snout.xRot = Mth.sin(ageInTicks * 0.5F) * 0.3F;
 		}
 

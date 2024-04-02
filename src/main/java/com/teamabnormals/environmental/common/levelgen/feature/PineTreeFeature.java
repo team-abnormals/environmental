@@ -35,10 +35,14 @@ public class PineTreeFeature extends BlueprintTreeFeature {
 
 		float f = random.nextFloat();
 		int leafbranches = f > 0.6F ? 4 : f > 0.25F ? 3 : f > 0.05F ? 2 : 1;
-        
+
         if (trunkheight >= 14 && random.nextBoolean())
             leafbranches++;
-		if (trunkheight >= 16 && random.nextInt(3) != 0)
+		if (trunkheight >= 16)
+			leafbranches++;
+		if (trunkheight >= 16 && leafbranches < 4)
+			leafbranches = 4;
+		if (trunkheight >= 18)
 			leafbranches++;
 
 		List<Direction> branchdirections = Lists.newArrayList();
@@ -57,7 +61,7 @@ public class PineTreeFeature extends BlueprintTreeFeature {
 					Plane.HORIZONTAL.forEach(branchdirections::add);
 					branchdirections.remove(direction);
 				}
-			} else if (random.nextInt(trunkheight >= 16 && y > 6 ? 3 : 6) == 0) {
+			} else if (random.nextInt(y > 5 ? 2 : 6) == 0) {
 				this.createBranch(blockpos, Plane.HORIZONTAL.getRandomDirection(random), random, config);
 			}
 
@@ -66,9 +70,6 @@ public class PineTreeFeature extends BlueprintTreeFeature {
 			else if (leafbranches == 1 && random.nextInt(3) == 0)
 				y -= 2;
 			else
-				y--;
-
-			if (trunkheight >= 16 && leafbranches == 1)
 				y--;
 		}
 
@@ -86,17 +87,17 @@ public class PineTreeFeature extends BlueprintTreeFeature {
 	}
 
 	private void createBranchWithLeaves(BlockPos pos, Direction direction, RandomSource random, TreeConfiguration config) {
-		BlockPos.MutableBlockPos mutablepos = new BlockPos.MutableBlockPos();
+		BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
 		BlockPos blockpos = pos.relative(direction);
 
 		this.createBranch(pos, direction, random, config);
 
 		for (int x = -1; x <= 1; x++) {
 			for (int z = -1; z <= 1; z++) {
-				mutablepos.setWithOffset(blockpos, x, 0, z);
-				this.addFoliage(mutablepos);
+				mutable.setWithOffset(blockpos, x, 0, z);
+				this.addFoliage(mutable);
 				if ((x == 0 || z == 0)) {
-					this.addFoliage(mutablepos.above());
+					this.addFoliage(mutable.above());
 				}
 			}
 		}
@@ -107,15 +108,15 @@ public class PineTreeFeature extends BlueprintTreeFeature {
 	}
 
 	private void createTopLeaves(BlockPos pos) {
-		BlockPos.MutableBlockPos mutablepos = new BlockPos.MutableBlockPos();
+		BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
 
 		for (int y = 0; y <= 3; y++) {
 			int r = y < 3 ? y : 1;
 			for (int x = -r; x <= r; x++) {
 				for (int z = -r; z <= r; z++) {
 					if (Math.abs(x) + Math.abs(z) <= r) {
-						mutablepos.setWithOffset(pos, x, 1 - y, z);
-						this.addFoliage(mutablepos);
+						mutable.setWithOffset(pos, x, 1 - y, z);
+						this.addFoliage(mutable);
 					}
 				}
 			}
