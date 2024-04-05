@@ -63,7 +63,7 @@ public class CupLichenBlock extends BushBlock implements BonemealableBlock {
 
 	@Override
 	public boolean canBeReplaced(BlockState state, BlockPlaceContext context) {
-		return !context.isSecondaryUseActive() && context.getItemInHand().is(this.asItem()) && state.getValue(CUPS) < 4 ? true : super.canBeReplaced(state, context);
+		return !context.isSecondaryUseActive() && context.getItemInHand().is(this.asItem()) && state.getValue(CUPS) < 4 || super.canBeReplaced(state, context);
 	}
 
 	@Override

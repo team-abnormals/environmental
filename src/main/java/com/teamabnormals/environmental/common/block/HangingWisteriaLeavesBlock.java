@@ -53,7 +53,7 @@ public class HangingWisteriaLeavesBlock extends HangingLeavesBlock implements IF
 		Level level = context.getLevel();
 		BlockPos pos = context.getClickedPos();
 		if (level.getBlockState(pos.above()) == this.defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER) && !level.isWaterAt(pos)) {
-			level.setBlockAndUpdate(pos.above(), level.getBlockState(pos.above()).setValue(HALF, DoubleBlockHalf.UPPER));
+			level.setBlock(pos.above(), level.getBlockState(pos.above()).setValue(HALF, DoubleBlockHalf.UPPER), 2);
 		}
 		return super.getStateForPlacement(context);
 	}

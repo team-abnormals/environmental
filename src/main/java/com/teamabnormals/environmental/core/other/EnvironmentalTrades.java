@@ -54,7 +54,8 @@ public class EnvironmentalTrades {
 				new BlueprintTrade(1, EnvironmentalBlocks.PINK_HIBISCUS.get().asItem(), 1, 12, 1),
 				new BlueprintTrade(1, EnvironmentalBlocks.MAGENTA_HIBISCUS.get().asItem(), 1, 12, 1),
 				new BlueprintTrade(1, EnvironmentalBlocks.PURPLE_HIBISCUS.get().asItem(), 1, 12, 1),
-				new BlueprintTrade(1, EnvironmentalBlocks.CUP_LICHEN.get().asItem(), 1, 8, 1)					
+				new BlueprintTrade(1, EnvironmentalBlocks.CUP_LICHEN.get().asItem(), 1, 8, 1),
+				new BlueprintTrade(1, EnvironmentalBlocks.DWARF_SPRUCE.get().asItem(), 1, 8, 1)
 		);
 
 		TradeUtil.addRareWandererTrades(event,

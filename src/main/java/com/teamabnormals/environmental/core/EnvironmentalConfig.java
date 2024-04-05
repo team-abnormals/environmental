@@ -21,6 +21,10 @@ public class EnvironmentalConfig {
 		public final BooleanValue largerPigLitters;
 		public final IntValue minimumAdditionalPiglets;
 		public final IntValue maximumAdditionalPiglets;
+		
+		public final BooleanValue largerHoglinLitters;
+		public final IntValue minimumAdditionalHoglets;
+		public final IntValue maximumAdditionalHoglets;
 
 		public final BooleanValue muddyPigs;
 		public final BooleanValue naturalMuddyPigs;
@@ -58,6 +62,13 @@ public class EnvironmentalConfig {
 			decoratableMuddyPigs = builder.comment("If Muddy Pigs can be decorated with various flowers, saplings, and plants").define("Decoratable Muddy Pigs", true);
 			muddyPigsDryOverTime = builder.comment("If Muddy Pigs become dry naturally over time").define("Muddy Pigs dry over time", true);
 			muddyPigsOnlyDryInTheNether = builder.comment("If Muddy Pigs only naturally dry when in the Nether").define("Muddy Pigs only dry in the Nether", true);
+			builder.pop();
+			builder.pop();
+			builder.push("hoglin");
+			largerHoglinLitters = builder.comment("If Hoglins should spawn more babies upon breeding").define("Larger Hoglin litters", true);
+			builder.push("larger_litters");
+			minimumAdditionalHoglets = builder.comment("The minimum amount of baby hoglins that can spawn in addition to the original child").defineInRange("Minimum additional babies", 1, 0, Integer.MAX_VALUE);
+			maximumAdditionalHoglets = builder.comment("The maximum amount of baby hoglins that can spawn in addition to the original child").defineInRange("Maximum additional babies", 2, 0, Integer.MAX_VALUE);
 			builder.pop();
 			builder.pop();
 			builder.pop();

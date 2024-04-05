@@ -41,6 +41,7 @@ import net.minecraft.world.entity.animal.Ocelot;
 import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.monster.hoglin.Hoglin;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.entity.projectile.ThrownPotion;
@@ -391,6 +392,20 @@ public class EnvironmentalEvents {
 				if (baby != null) {
 					baby.setBaby(true);
 					baby.moveTo(pig.getX(), pig.getY(), pig.getZ(), 0.0F, 0.0F);
+					level.addFreshEntity(baby);
+				}
+			}
+		}
+
+		if (event.getParentA() instanceof Hoglin hoglin && event.getParentB() instanceof Hoglin && EnvironmentalConfig.COMMON.largerHoglinLitters.get()) {
+			Level level = hoglin.getLevel();
+			int minBonus = EnvironmentalConfig.COMMON.minimumAdditionalHoglets.get();
+			int piglets = minBonus + level.random.nextInt(EnvironmentalConfig.COMMON.maximumAdditionalHoglets.get() + 1 - minBonus);
+			for (int i = 0; i < piglets; ++i) {
+				Hoglin baby = EntityType.HOGLIN.create(level);
+				if (baby != null) {
+					baby.setBaby(true);
+					baby.moveTo(hoglin.getX(), hoglin.getY(), hoglin.getZ(), 0.0F, 0.0F);
 					level.addFreshEntity(baby);
 				}
 			}

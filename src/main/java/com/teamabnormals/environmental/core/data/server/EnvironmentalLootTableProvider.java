@@ -131,6 +131,7 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.dropPottedContents(POTTED_WHITE_DELPHINIUM.get());
 			this.dropPottedContents(POTTED_CATTAIL.get());
 			this.dropPottedContents(POTTED_CUP_LICHEN.get());
+			this.dropPottedContents(POTTED_DWARF_SPRUCE.get());
 
 			this.dropSelf(DIRT_BRICKS.get());
 			this.dropSelf(DIRT_BRICK_STAIRS.get());
@@ -181,6 +182,8 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.add(GIANT_TALL_GRASS.get(), (block) -> createDoublePlantWithOtherDrop(block, Blocks.GRASS, Items.WHEAT_SEEDS, 3, 0.125F));
 			this.add(CUP_LICHEN.get(), EnvironmentalBlockLoot::createCupLichenDrops);
 			this.add(CACTUS_BOBBLE.get(), noDrop());
+			this.add(DWARF_SPRUCE.get(), EnvironmentalBlockLoot::createDwarfSpruceDrops);
+			this.add(TALL_DWARF_SPRUCE.get(), EnvironmentalBlockLoot::createDwarfSpruceDrops);
 
 			this.dropSelf(CATTAIL_FLUFF_BLOCK.get());
 			this.dropSelf(CHERRY_CRATE.get());
@@ -367,6 +370,9 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(applyExplosionDecay(block, LootItem.lootTableItem(block).apply(List.of(2, 3, 4), (cups) -> {
 				return SetItemCountFunction.setCount(ConstantValue.exactly((float) cups.intValue())).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CupLichenBlock.CUPS, cups)));
 			}))));
+		}
+		protected static LootTable.Builder createDwarfSpruceDrops(Block block) {
+			return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(DWARF_SPRUCE.get()).when(HAS_SHEARS).otherwise(applyExplosionDecay(block, LootItem.lootTableItem(Items.STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F)))))));
 		}
 
 		protected static LootTable.Builder createCattailDrops(Block block, ItemLike drop) {

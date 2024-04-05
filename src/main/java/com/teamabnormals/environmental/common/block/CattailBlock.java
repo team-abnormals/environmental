@@ -170,7 +170,7 @@ public class CattailBlock extends BushBlock implements SimpleWaterloggedBlock, B
 				if (level.random.nextInt(900) < 5) {
 					level.playSound(null, pos, SoundEvents.CAT_AMBIENT, SoundSource.BLOCKS, 2.0F, (level.random.nextFloat() - level.random.nextFloat()) * 0.2F + 1.0F);
 				}
-				popResource(level, pos, new ItemStack(EnvironmentalItems.CATTAIL_FLUFF.get(), 2 + level.random.nextInt(2)));
+				popResource(level, pos, new ItemStack(EnvironmentalItems.CATTAIL_FLUFF.get(), 1 + level.random.nextInt(state.getValue(CATTAILS))));
 				level.setBlockAndUpdate(pos, state.setValue(FLUFFY, false));
 				stack.hurtAndBreak(1, player, (p_55287_) -> p_55287_.broadcastBreakEvent(hand));
 				level.gameEvent(player, GameEvent.SHEAR, pos);

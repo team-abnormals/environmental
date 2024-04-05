@@ -68,8 +68,13 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> MYCELIUM_SPROUTS = HELPER.createBlock("mycelium_sprouts", () -> new MyceliumSproutsBlock(EnvironmentalProperties.MYCELIUM_SPROUTS), CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> GIANT_TALL_GRASS = HELPER.createBlock("giant_tall_grass", () -> new DoublePlantBlock(Block.Properties.copy(Blocks.TALL_GRASS)), CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> CUP_LICHEN = HELPER.createBlock("cup_lichen", () -> new CupLichenBlock(EnvironmentalProperties.CUP_LICHEN), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> POTTED_CUP_LICHEN = HELPER.createBlockNoItem("potted_cup_lichen", () -> new FlowerPotBlock(EnvironmentalBlocks.CUP_LICHEN.get(), PropertyUtil.flowerPot()));
 	public static final RegistryObject<Block> CACTUS_BOBBLE = HELPER.createBlockNoItem("cactus_bobble", () -> new CactusBobbleBlock(EnvironmentalProperties.CACTUS_BOBBLE));
+
+	public static final RegistryObject<Block> DWARF_SPRUCE = HELPER.createFuelBlock("dwarf_spruce", () -> new DwarfSpruceBlock(EnvironmentalProperties.DWARF_SPRUCE), 100, CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> TALL_DWARF_SPRUCE = HELPER.createBlockNoItem("tall_dwarf_spruce", () -> new DwarfSpruceTallBlock(EnvironmentalProperties.DWARF_SPRUCE));
+
+	public static final RegistryObject<Block> POTTED_CUP_LICHEN = HELPER.createBlockNoItem("potted_cup_lichen", () -> new FlowerPotBlock(EnvironmentalBlocks.CUP_LICHEN.get(), PropertyUtil.flowerPot()));
+	public static final RegistryObject<Block> POTTED_DWARF_SPRUCE = HELPER.createBlockNoItem("potted_dwarf_spruce", () -> new FlowerPotBlock(EnvironmentalBlocks.DWARF_SPRUCE.get(), PropertyUtil.flowerPot()));
 
 	// Misc //
 

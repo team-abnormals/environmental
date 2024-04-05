@@ -442,6 +442,7 @@ public class Tapir extends Animal {
 					|| material == Material.LEAVES
 					|| material == Material.CACTUS
 					|| material == Material.MOSS
+					|| material == Material.VEGETABLE
 			);
 		}
 

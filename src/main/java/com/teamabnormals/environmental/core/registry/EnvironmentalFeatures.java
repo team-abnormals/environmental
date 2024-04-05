@@ -6,6 +6,7 @@ import com.teamabnormals.environmental.common.levelgen.feature.*;
 import com.teamabnormals.environmental.common.levelgen.placement.BetterNoiseBasedCountPlacement;
 import com.teamabnormals.environmental.common.levelgen.treedecorators.HangingWillowDecorator;
 import com.teamabnormals.environmental.common.levelgen.treedecorators.HangingWisteriaDecorator;
+import com.teamabnormals.environmental.common.levelgen.treedecorators.PinePodzolDecorator;
 import com.teamabnormals.environmental.common.levelgen.treedecorators.PineconeDecorator;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalBlockTags;
@@ -89,6 +90,7 @@ public class EnvironmentalFeatures {
 	public static final RegistryObject<TreeDecoratorType<?>> HANGING_WILLOW_LEAVES = TREE_DECORATORS.register("hanging_willow_leaves", () -> new TreeDecoratorType<>(HangingWillowDecorator.CODEC));
 	public static final RegistryObject<TreeDecoratorType<?>> HANGING_WISTERIA_LEAVES = TREE_DECORATORS.register("hanging_wisteria_leaves", () -> new TreeDecoratorType<>(HangingWisteriaDecorator.CODEC));
 	public static final RegistryObject<TreeDecoratorType<?>> PINECONE = TREE_DECORATORS.register("pinecone", () -> new TreeDecoratorType<>(PineconeDecorator.CODEC));
+	public static final RegistryObject<TreeDecoratorType<?>> PINE_PODZOL = TREE_DECORATORS.register("pine_podzol", () -> new TreeDecoratorType<>(PinePodzolDecorator.CODEC));
 
 	public static final class Configs {
 		private static final BeehiveDecorator BEEHIVE_0002 = new BeehiveDecorator(0.002F);
@@ -138,6 +140,7 @@ public class EnvironmentalFeatures {
 		public static final TreeConfiguration PINE = createPine().decorators(List.of(PINECONE)).build();
 		public static final TreeConfiguration PINE_BEES_0002 = createPine().decorators(List.of(PINECONE, BEEHIVE_0002)).build();
 		public static final TreeConfiguration TALL_PINE = createTallPine().decorators(List.of(PINECONE)).build();
+		public static final TreeConfiguration TALL_PINE_WITH_PODZOL = createTallPine().decorators(List.of(PINECONE, PinePodzolDecorator.INSTANCE)).build();
 
 		private static TreeConfigurationBuilder createCherry() {
 			return createCustomTree(EnvironmentalBlocks.CHERRY_LOG.get(), new StraightTrunkPlacer(4, 2, 0), EnvironmentalBlocks.CHERRY_LEAVES.get());
@@ -246,8 +249,9 @@ public class EnvironmentalFeatures {
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> PINE_BEES_0002 = register("pine_bees_0002", () -> new ConfiguredFeature<>(EnvironmentalFeatures.PINE_TREE.get(), Configs.PINE_BEES_0002));
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> PINE_ON_STONE = register("pine_on_stone", () -> new ConfiguredFeature<>(EnvironmentalFeatures.PINE_TREE_ON_STONE.get(), Configs.PINE));
 		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> TALL_PINE = register("tall_pine", () -> new ConfiguredFeature<>(EnvironmentalFeatures.PINE_TREE.get(), Configs.TALL_PINE));
+		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> TALL_PINE_WITH_PODZOL = register("tall_pine_with_podzol", () -> new ConfiguredFeature<>(EnvironmentalFeatures.PINE_TREE.get(), Configs.TALL_PINE_WITH_PODZOL));
 		public static final RegistryObject<ConfiguredFeature<RandomFeatureConfiguration, ?>> TREES_PINE_BARRENS = register("trees_pine_barrens", () -> new ConfiguredFeature<>(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(TreePlacements.SPRUCE_CHECKED, 0.18F)), EnvironmentalPlacedFeatures.PINE.getHolder().get())));
-		public static final RegistryObject<ConfiguredFeature<RandomFeatureConfiguration, ?>> TREES_OLD_GROWTH_PINE_BARRENS = register("trees_old_growth_pine_barrens", () -> new ConfiguredFeature<>(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(TreePlacements.SPRUCE_CHECKED, 0.15F)), EnvironmentalPlacedFeatures.TALL_PINE.getHolder().get())));
+		public static final RegistryObject<ConfiguredFeature<RandomFeatureConfiguration, ?>> TREES_OLD_GROWTH_PINE_BARRENS = register("trees_old_growth_pine_barrens", () -> new ConfiguredFeature<>(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(TreePlacements.SPRUCE_CHECKED, 0.15F)), EnvironmentalPlacedFeatures.TALL_PINE_WITH_PODZOL.getHolder().get())));
 
 		public static final RegistryObject<ConfiguredFeature<ProbabilityFeatureConfiguration, ?>> GRAINY_COARSE_DIRT = register("grainy_coarse_dirt", () -> new ConfiguredFeature<>(EnvironmentalFeatures.GRAINY_COARSE_DIRT.get(), new ProbabilityFeatureConfiguration(0.1F)));
 		public static final RegistryObject<ConfiguredFeature<NoneFeatureConfiguration, ?>> COARSE_DIRT_ON_STONE = register("coarse_dirt_on_stone", () -> new ConfiguredFeature<>(EnvironmentalFeatures.COARSE_DIRT_ON_STONE.get(), NoneFeatureConfiguration.NONE));
@@ -374,7 +378,7 @@ public class EnvironmentalFeatures {
 		public static final RegistryObject<PlacedFeature> BLOSSOM_WOODS_ROCK = register("blossom_woods_rock", EnvironmentalConfiguredFeatures.STONE_ROCK, RarityFilter.onAverageOnceEvery(3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 
 		public static final RegistryObject<PlacedFeature> PINE = register("pine", EnvironmentalConfiguredFeatures.PINE, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
-		public static final RegistryObject<PlacedFeature> TALL_PINE = register("tall_pine", EnvironmentalConfiguredFeatures.TALL_PINE, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
+		public static final RegistryObject<PlacedFeature> TALL_PINE_WITH_PODZOL = register("tall_pine_with_podzol", EnvironmentalConfiguredFeatures.TALL_PINE_WITH_PODZOL, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
 		public static final RegistryObject<PlacedFeature> TREES_PINE_BARRENS = register("trees_pine_barrens", EnvironmentalConfiguredFeatures.TREES_PINE_BARRENS, treePlacement(PlacementUtils.countExtra(16, 0.1F, 1), PINE_PLACEMENT_FILTER));
 		public static final RegistryObject<PlacedFeature> TREES_OLD_GROWTH_PINE_BARRENS = register("trees_old_growth_pine_barrens", EnvironmentalConfiguredFeatures.TREES_OLD_GROWTH_PINE_BARRENS, treePlacement(PlacementUtils.countExtra(22, 0.1F, 1), PINE_PLACEMENT_FILTER));
 		public static final RegistryObject<PlacedFeature> TREES_PINE_BARRENS_ON_STONE = register("trees_pine_barrens_on_stone", EnvironmentalConfiguredFeatures.PINE_ON_STONE, treePlacement(PlacementUtils.countExtra(3, 0.1F, 1), PINE_ON_STONE_PLACEMENT_FILTER));

@@ -80,6 +80,7 @@ public class EnvironmentalCompat {
 		DataUtil.registerCompostable(EnvironmentalBlocks.GIANT_TALL_GRASS.get(), 0.65F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.MYCELIUM_SPROUTS.get(), 0.50F);
 		DataUtil.registerCompostable(EnvironmentalBlocks.CUP_LICHEN.get(), 0.30F);
+		DataUtil.registerCompostable(EnvironmentalBlocks.DWARF_SPRUCE.get(), 0.50F);
 
 		DataUtil.registerCompostable(EnvironmentalItems.TRUFFLE.get(), 0.65F);
 
@@ -249,6 +250,8 @@ public class EnvironmentalCompat {
 		DataUtil.registerFlammable(EnvironmentalBlocks.GIANT_TALL_GRASS.get(), 60, 100);
 		DataUtil.registerFlammable(EnvironmentalBlocks.MYCELIUM_SPROUTS.get(), 60, 100);
 		DataUtil.registerFlammable(EnvironmentalBlocks.CUP_LICHEN.get(), 60, 100);
+		DataUtil.registerFlammable(EnvironmentalBlocks.DWARF_SPRUCE.get(), 60, 100);
+		DataUtil.registerFlammable(EnvironmentalBlocks.TALL_DWARF_SPRUCE.get(), 60, 100);
 
 		DataUtil.registerFlammable(EnvironmentalBlocks.WISTERIA_LEAVES.get(), 30, 60);
 		DataUtil.registerFlammable(EnvironmentalBlocks.WISTERIA_LEAF_CARPET.get(), 30, 60);

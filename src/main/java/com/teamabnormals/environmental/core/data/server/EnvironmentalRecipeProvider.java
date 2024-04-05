@@ -86,7 +86,7 @@ public class EnvironmentalRecipeProvider extends RecipeProvider {
 		conditionalNineBlockStorageRecipes(consumer, APPLE_CRATE, EnvironmentalItems.CHERRIES.get(), EnvironmentalBlocks.CHERRY_CRATE.get());
 		nineBlockStorageRecipes(consumer, EnvironmentalItems.CATTAIL_FLUFF.get(), EnvironmentalBlocks.CATTAIL_FLUFF_BLOCK.get());
 
-		ShapelessRecipeBuilder.shapeless(Items.STRING).requires(EnvironmentalItems.CATTAIL_FLUFF.get(), 5).unlockedBy("has_cattail_seeds", has(EnvironmentalItems.CATTAIL_FLUFF.get())).save(consumer, getModConversionRecipeName(Items.STRING, EnvironmentalItems.CATTAIL_FLUFF.get()));
+		ShapelessRecipeBuilder.shapeless(Items.STRING).requires(EnvironmentalItems.CATTAIL_FLUFF.get(), 7).unlockedBy("has_cattail_seeds", has(EnvironmentalItems.CATTAIL_FLUFF.get())).save(consumer, getModConversionRecipeName(Items.STRING, EnvironmentalItems.CATTAIL_FLUFF.get()));
 		ShapelessRecipeBuilder.shapeless(EnvironmentalItems.CHERRY_PIE.get()).requires(Ingredient.of(EnvironmentalItemTags.FRUITS_CHERRY), 3).requires(Items.SUGAR).requires(BlueprintItemTags.EGGS).unlockedBy("has_cherry", has(EnvironmentalItemTags.FRUITS_CHERRY)).save(consumer);
 
 		ShapedRecipeBuilder.shaped(EnvironmentalBlocks.GRASS_THATCH.get(), 4).define('W', Items.WHEAT).define('G', Blocks.GRASS).pattern("WG").pattern("GW").group("grass_thatch").unlockedBy("has_grass", has(Blocks.GRASS)).save(consumer);

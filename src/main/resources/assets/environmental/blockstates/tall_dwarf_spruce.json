@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "half=lower": { "model": "environmental:block/tall_dwarf_spruce_bottom" },
+        "half=upper":    { "model": "environmental:block/tall_dwarf_spruce_top" }
+    }
+}
