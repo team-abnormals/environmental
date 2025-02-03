@@ -1,6 +1,6 @@
 {
   "type": "environmental:add_features_ignore",
-  "biomes": "#environmental:has_feature/dwarf_spruce_sparse",
+  "biomes": "#environmental:has_feature/dwarf_spruce",
   "features": [
     "environmental:dwarf_spruce_taiga",
     "environmental:dwarf_spruce_taiga_dense"
