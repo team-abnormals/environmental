@@ -58,23 +58,24 @@ public class EnvironmentalBiomeModifiers {
 
 		addFeature(context, "cattails", EnvironmentalBiomeTags.HAS_CATTAILS, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.CATTAILS);
 		addFeature(context, "cup_lichen", EnvironmentalBiomeTags.HAS_CUP_LICHEN, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_CUP_LICHEN);
-		addFeatureIgnore(context, "dwarf_spruce_taiga", EnvironmentalBiomeTags.HAS_SPARSE_DWARF_SPRUCE, EnvironmentalBiomeTags.IS_PINE_BARRENS, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.DWARF_SPRUCE_TAIGA, EnvironmentalPlacedFeatures.DWARF_SPRUCE_TAIGA_DENSE);
+		addFeatureIgnore(context, "dwarf_spruce", EnvironmentalBiomeTags.HAS_DWARF_SPRUCE, EnvironmentalBiomeTags.IS_PINE_BARRENS, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.DWARF_SPRUCE_TAIGA, EnvironmentalPlacedFeatures.DWARF_SPRUCE_TAIGA_DENSE);
 		addFeature(context, "bluebell", EnvironmentalBiomeTags.HAS_BLUEBELL, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_BLUEBELL, EnvironmentalPlacedFeatures.FLOWER_BLUEBELL_LARGE);
 		addFeature(context, "violet", EnvironmentalBiomeTags.HAS_VIOLET, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_VIOLET);
 		addFeature(context, "tasselflower", EnvironmentalBiomeTags.HAS_TASSELFLOWER, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_TASSELFLOWER);
 		addFeature(context, "bird_of_paradise", EnvironmentalBiomeTags.HAS_BIRD_OF_PARADISE, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_BIRD_OF_PARADISE);
 		addFeature(context, "hibiscus_bush", EnvironmentalBiomeTags.HAS_HIBISCUS, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.HIBISCUS_BUSH);
-		addFeature(context, "cartwheel", BiomeTags.IS_OVERWORLD, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_CARTWHEEL);
+		addFeature(context, "cartwheel", EnvironmentalBiomeTags.HAS_CARTWHEEL, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_CARTWHEEL);
 
-		addFeature(context, "mycelium_sprouts", Biomes.MUSHROOM_FIELDS, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_MYCELIUM_SPROUTS);
+		addFeature(context, "mycelium_sprouts", Biomes.HAS_MYCELIUM_SPROUTS, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_MYCELIUM_SPROUTS);
 		addFeature(context, "mud_disk", EnvironmentalBiomeTags.HAS_MUD_DISK, Decoration.UNDERGROUND_ORES, EnvironmentalPlacedFeatures.ORE_MUD);
 
 		removeFeature(context, "swamp_oak", Biomes.SWAMP, Decoration.VEGETAL_DECORATION, VegetationPlacements.TREES_SWAMP);
-		addFeature(context, "swamp_vegetation", Biomes.SWAMP, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.TREES_SWAMP, EnvironmentalPlacedFeatures.PATCH_DUCKWEED_SWAMP);
-		addFeature(context, "flower_forest_vegetation", Biomes.FLOWER_FOREST, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_DELPHINIUMS, EnvironmentalPlacedFeatures.TREES_WISTERIA);
-		addFeature(context, "savanna_vegetation", BiomeTags.IS_SAVANNA, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_GIANT_TALL_GRASS_SAVANNA);
-		addFeature(context, "plains_vegetation", BlueprintBiomeTags.IS_GRASSLAND, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_GIANT_TALL_GRASS_PLAINS);
-		addFeature(context, "jungle_vegetation", BiomeTags.IS_JUNGLE, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_GIANT_TALL_GRASS_JUNGLE, EnvironmentalPlacedFeatures.PATCH_LARGE_FERN_JUNGLE);
+		
+		addFeature(context, "swamp_vegetation", EnvironmentalBiomeTags.HAS_SWAMP_VEGETATION, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.TREES_SWAMP, EnvironmentalPlacedFeatures.PATCH_DUCKWEED_SWAMP);
+		addFeature(context, "flower_forest_vegetation", EnvironmentalBiomeTags.HAS_FLOWER_FOREST_VEGETATION, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_DELPHINIUMS, EnvironmentalPlacedFeatures.TREES_WISTERIA);
+		addFeature(context, "savanna_vegetation", EnvironmentalBiomeTags.HAS_SAVANNA_VEGETATION, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_GIANT_TALL_GRASS_SAVANNA);
+		addFeature(context, "plains_vegetation", EnvironmentalBiomeTags.HAS_PLAINS_VEGETATION, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_GIANT_TALL_GRASS_PLAINS);
+		addFeature(context, "jungle_vegetation", EnvironmentalBiomeTags.HAS_JUNGLE_VEGETATION, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_GIANT_TALL_GRASS_JUNGLE, EnvironmentalPlacedFeatures.PATCH_LARGE_FERN_JUNGLE);
 	}
 
 	@SafeVarargs
