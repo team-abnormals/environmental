@@ -59,6 +59,7 @@ public class EnvironmentalBiomeModifiers {
 		addFeature(context, "cattails", EnvironmentalBiomeTags.HAS_CATTAILS, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.CATTAILS);
 		addFeature(context, "cup_lichen", EnvironmentalBiomeTags.HAS_CUP_LICHEN, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_CUP_LICHEN);
 		addFeatureIgnore(context, "dwarf_spruce", EnvironmentalBiomeTags.HAS_DWARF_SPRUCE, EnvironmentalBiomeTags.IS_PINE_BARRENS, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.DWARF_SPRUCE_TAIGA, EnvironmentalPlacedFeatures.DWARF_SPRUCE_TAIGA_DENSE);
+		addFeature(context, "mycelium_sprouts", Biomes.HAS_MYCELIUM_SPROUTS, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_MYCELIUM_SPROUTS);
 		addFeature(context, "bluebell", EnvironmentalBiomeTags.HAS_BLUEBELL, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_BLUEBELL, EnvironmentalPlacedFeatures.FLOWER_BLUEBELL_LARGE);
 		addFeature(context, "violet", EnvironmentalBiomeTags.HAS_VIOLET, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_VIOLET);
 		addFeature(context, "tasselflower", EnvironmentalBiomeTags.HAS_TASSELFLOWER, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_TASSELFLOWER);
@@ -66,7 +67,6 @@ public class EnvironmentalBiomeModifiers {
 		addFeature(context, "hibiscus_bush", EnvironmentalBiomeTags.HAS_HIBISCUS, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.HIBISCUS_BUSH);
 		addFeature(context, "cartwheel", EnvironmentalBiomeTags.HAS_CARTWHEEL, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_CARTWHEEL);
 
-		addFeature(context, "mycelium_sprouts", Biomes.HAS_MYCELIUM_SPROUTS, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_MYCELIUM_SPROUTS);
 		addFeature(context, "mud_disk", EnvironmentalBiomeTags.HAS_MUD_DISK, Decoration.UNDERGROUND_ORES, EnvironmentalPlacedFeatures.ORE_MUD);
 
 		removeFeature(context, "swamp_oak", Biomes.SWAMP, Decoration.VEGETAL_DECORATION, VegetationPlacements.TREES_SWAMP);
