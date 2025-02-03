@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "minecraft:swamp",
+  "biomes": "#environmental:has_feature/swamp_vegetation",
   "features": [
     "environmental:trees_swamp",
     "environmental:patch_duckweed_swamp"
