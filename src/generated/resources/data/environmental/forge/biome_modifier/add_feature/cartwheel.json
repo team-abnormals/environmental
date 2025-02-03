@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "#minecraft:is_overworld",
+  "biomes": "#environmental:has_feature/cartwheel",
   "features": "environmental:flower_cartwheel",
   "step": "vegetal_decoration"
 }
