@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#environmental:has_feature/red_lotus",
-  "features": "environmental:flower_red_lotus",
-  "step": "vegetal_decoration"
-}
