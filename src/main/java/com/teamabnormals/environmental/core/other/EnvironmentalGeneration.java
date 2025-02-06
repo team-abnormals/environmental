@@ -21,7 +21,6 @@ public class EnvironmentalGeneration {
 		generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_MARSH);
 		generation.addFeature(Decoration.VEGETAL_DECORATION, FLOWER_BLUE_ORCHID);
 		generation.addFeature(Decoration.VEGETAL_DECORATION, FLOWER_CORNFLOWER);
-		generation.addFeature(Decoration.VEGETAL_DECORATION, FLOWER_DIANTHUS);
 		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_WATERLILY_MARSH);
 		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_GRASS_MARSH);
 		generation.addFeature(Decoration.VEGETAL_DECORATION, CATTAILS_DENSE);
@@ -50,14 +49,12 @@ public class EnvironmentalGeneration {
 			generation.addFeature(Decoration.VEGETAL_DECORATION, FALLEN_PLUM_LEAVES_BLOSSOM_WOODS);
 			generation.addFeature(Decoration.VEGETAL_DECORATION, BAMBOO_BLOSSOM_WOODS);
 			generation.addFeature(Decoration.VEGETAL_DECORATION, BAMBOO_LIGHT_BLOSSOM_WOODS);
-			generation.addFeature(Decoration.VEGETAL_DECORATION, FLOWER_RED_LOTUS);
 		} else {
 			generation.addFeature(Decoration.VEGETAL_DECORATION, PINE_TREES_BLOSSOM_VALLEYS);
 			generation.addFeature(Decoration.VEGETAL_DECORATION, PLUM_TREES_BLOSSOM_VALLEYS);
 			generation.addFeature(Decoration.VEGETAL_DECORATION, FALLEN_PLUM_LEAVES_BLOSSOM_VALLEYS);
 			generation.addFeature(Decoration.VEGETAL_DECORATION, BAMBOO_BLOSSOM_VALLEYS);
 			generation.addFeature(Decoration.VEGETAL_DECORATION, BAMBOO_LIGHT_BLOSSOM_VALLEYS);
-			generation.addFeature(Decoration.VEGETAL_DECORATION, FLOWER_WHITE_LOTUS);
 		}
 	}
 
