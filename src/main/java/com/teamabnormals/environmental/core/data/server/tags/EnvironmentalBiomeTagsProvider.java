@@ -109,9 +109,6 @@ public class EnvironmentalBiomeTagsProvider extends BiomeTagsProvider {
 		this.tag(EnvironmentalBiomeTags.HAS_BIRD_OF_PARADISE).addTag(BiomeTags.IS_JUNGLE).addTag(EnvironmentalBiomeTags.IS_RAINFOREST);
 		this.tag(EnvironmentalBiomeTags.HAS_HIBISCUS).add(Biomes.JUNGLE);
 		this.tag(EnvironmentalBiomeTags.HAS_CARTWHEEL).add(BiomeTags.IS_OVERWORLD);
-		this.tag(EnvironmentalBiomeTags.HAS_DIANTHUS).add(EnvironmentalBiomes.MARSH);
-		this.tag(EnvironmentalBiomeTags.HAS_RED_LOTUS).add(BiomeTags.EnvironmentalBiomes.BLOSSOM_WOODS);
-		this.tag(EnvironmentalBiomeTags.HAS_WHITE_LOTUS).add(EnvironmentalBiomes.BLOSSOM_VALLEYS);
 
 		this.tag(EnvironmentalBiomeTags.HAS_SWAMP_VEGETATION).add(Biomes.SWAMP);
 		this.tag(EnvironmentalBiomeTags.HAS_FLOWER_FOREST_VEGETATION).add(Biomes.FLOWER_FOREST);
