@@ -86,8 +86,7 @@
       "environmental:plum_tree_blossom_woods",
       "environmental:fallen_plum_leaves_blossom_woods",
       "environmental:bamboo_blossom_woods",
-      "environmental:bamboo_light_blossom_woods",
-      "environmental:flower_red_lotus"
+      "environmental:bamboo_light_blossom_woods"
     ],
     [
       "minecraft:freeze_top_layer"
