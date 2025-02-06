@@ -32,12 +32,20 @@ public class EnvironmentalBiomeTags {
 
 	public static final TagKey<Biome> HAS_CATTAILS = biomeTag("has_feature/cattails");
 	public static final TagKey<Biome> HAS_CUP_LICHEN = biomeTag("has_feature/cup_lichen");
-	public static final TagKey<Biome> HAS_SPARSE_DWARF_SPRUCE = biomeTag("has_feature/dwarf_spruce_sparse");
+	public static final TagKey<Biome> HAS_DWARF_SPRUCE = biomeTag("has_feature/dwarf_spruce");
+	public static final TagKey<Biome> HAS_MYCELIUM_SPROUTS = biomeTag("has_feature/mycelium_sprouts");
 	public static final TagKey<Biome> HAS_BLUEBELL = biomeTag("has_feature/bluebell");
 	public static final TagKey<Biome> HAS_VIOLET = biomeTag("has_feature/violet");
 	public static final TagKey<Biome> HAS_TASSELFLOWER = biomeTag("has_feature/tasselflower");
 	public static final TagKey<Biome> HAS_BIRD_OF_PARADISE = biomeTag("has_feature/bird_of_paradise");
 	public static final TagKey<Biome> HAS_HIBISCUS = biomeTag("has_feature/hibiscus");
+	public static final TagKey<Biome> HAS_CARTWHEEL = biomeTag("has_feature/cartwheel");
+
+	public static final TagKey<Biome> HAS_SWAMP_VEGETATION = biomeTag("has_feature/swamp_vegetation");
+	public static final TagKey<Biome> HAS_FLOWER_FOREST_VEGETATION = biomeTag("has_feature/flower_forest_vegetation");
+	public static final TagKey<Biome> HAS_SAVANNA_VEGETATION = biomeTag("has_feature/savanna_vegetation");
+	public static final TagKey<Biome> HAS_PLAINS_VEGETATION = biomeTag("has_feature/plains_vegetation");
+	public static final TagKey<Biome> HAS_JUNGLE_VEGETATION = biomeTag("has_feature/jungle_vegetation");
 
 	public static final TagKey<Biome> HAS_MUD_DISK = biomeTag("has_feature/mud_disk");
 
