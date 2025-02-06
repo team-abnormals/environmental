@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#environmental:has_feature/dianthus",
-  "features": "environmental:flower_dianthus",
-  "step": "vegetal_decoration"
-}
