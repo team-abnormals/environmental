@@ -66,9 +66,6 @@ public class EnvironmentalBiomeModifiers {
 		addFeature(context, "bird_of_paradise", EnvironmentalBiomeTags.HAS_BIRD_OF_PARADISE, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_BIRD_OF_PARADISE);
 		addFeature(context, "hibiscus_bush", EnvironmentalBiomeTags.HAS_HIBISCUS, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.HIBISCUS_BUSH);
 		addFeature(context, "cartwheel", EnvironmentalBiomeTags.HAS_CARTWHEEL, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_CARTWHEEL);
-		addFeature(context, "dianthus", EnvironmentalBiomeTags.HAS_DIANTHUS, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_DIANTHUS);
-		addFeature(context, "red_lotus", EnvironmentalBiomeTags.HAS_RED_LOTUS, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_RED_LOTUS);
-		addFeature(context, "white_lotus", EnvironmentalBiomeTags.HAS_WHITE_LOTUS, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_WHITE_LOTUS);
 
 		addFeature(context, "mud_disk", EnvironmentalBiomeTags.HAS_MUD_DISK, Decoration.UNDERGROUND_ORES, EnvironmentalPlacedFeatures.ORE_MUD);
 
