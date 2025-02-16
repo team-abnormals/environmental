@@ -40,6 +40,7 @@ public class EnvironmentalItemTagsProvider extends BlueprintItemTagsProvider {
 		this.tag(EnvironmentalItemTags.DUCK_FOOD).add(Items.SEAGRASS, EnvironmentalItems.DUCKWEED.get()).addOptionalTag(new ResourceLocation("forge", "crops/rice"));
 		this.tag(EnvironmentalItemTags.DEER_FOOD).add(Items.SWEET_BERRIES).addTag(EnvironmentalItemTags.FRUITS_CHERRY).addOptionalTag(new ResourceLocation("forge", "fruits/strawberry"));
 		this.tag(EnvironmentalItemTags.DEER_PLANTABLES).addTag(ItemTags.SMALL_FLOWERS).addTag(ItemTags.TALL_FLOWERS);
+		this.tag(EnvironmentalItemTags.DEER_CANNOT_PLANT);
 		this.tag(EnvironmentalItemTags.DEER_TEMPT_ITEMS).addTag(EnvironmentalItemTags.DEER_FOOD).addTag(EnvironmentalItemTags.DEER_PLANTABLES).addTag(EnvironmentalItemTags.DEER_FLOWER_ITEMS);
 		this.tag(EnvironmentalItemTags.REINDEER_FOOD).add(EnvironmentalBlocks.CUP_LICHEN.get().asItem(), Items.CARROT);
 		this.tag(EnvironmentalItemTags.REINDEER_TEMPT_ITEMS).addTag(EnvironmentalItemTags.REINDEER_FOOD).addTag(EnvironmentalItemTags.DEER_PLANTABLES).addTag(EnvironmentalItemTags.DEER_FLOWER_ITEMS);

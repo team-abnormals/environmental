@@ -199,7 +199,7 @@ public abstract class AbstractDeer extends Animal {
 				this.particleCloud(ParticleTypes.HAPPY_VILLAGER);
 				this.usePlayerItem(player, hand, stack);
 				return InteractionResult.SUCCESS;
-			} else if (this.getFlowerAmount() > 0 && stack.is(EnvironmentalItemTags.DEER_PLANTABLES) && item instanceof BlockItem block) {
+			} else if (this.getFlowerAmount() > 0 && stack.is(EnvironmentalItemTags.DEER_PLANTABLES) && !stack.is(EnvironmentalItemTags.DEER_CANNOT_PLANT) && item instanceof BlockItem block) {
 				if (!this.flowers.contains(block.getBlock().defaultBlockState())) {
 					this.flowers.add(block.getBlock().defaultBlockState());
 					this.floweringTime = Math.max(600, this.floweringTime);
