@@ -7,16 +7,16 @@
       "tag": "forge:buckets/water"
     },
     {
-      "item": "minecraft:dirt"
+      "tag": "environmental:convertable_to_mud"
     },
     {
-      "item": "minecraft:dirt"
+      "tag": "environmental:convertable_to_mud"
     },
     {
-      "item": "minecraft:dirt"
+      "tag": "environmental:convertable_to_mud"
     },
     {
-      "item": "minecraft:dirt"
+      "tag": "environmental:convertable_to_mud"
     }
   ],
   "result": {

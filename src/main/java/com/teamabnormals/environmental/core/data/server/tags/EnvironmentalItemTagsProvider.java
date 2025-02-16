@@ -15,6 +15,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
@@ -71,6 +72,7 @@ public class EnvironmentalItemTagsProvider extends BlueprintItemTagsProvider {
 		this.tag(ItemTags.MUSIC_DISCS).add(MUSIC_DISC_LEAVING_HOME.get(), MUSIC_DISC_SLABRAVE.get());
 		this.tag(ItemTags.FISHES).add(KOI.get());
 		this.copy(BlockTags.DIRT, ItemTags.DIRT);
+		this.tag(EnvironmentalItemTags.CONVERTABLE_TO_MUD).add(Blocks.DIRT.asItem(), Blocks.COARSE_DIRT.asItem(), Blocks.ROOTED_DIRT.asItem());
 
 		this.tag(EnvironmentalItemTags.FRUITS).addTag(EnvironmentalItemTags.FRUITS_CHERRY);
 		this.tag(EnvironmentalItemTags.FRUITS_CHERRY).add(CHERRIES.get());
