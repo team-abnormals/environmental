@@ -106,7 +106,7 @@ public class EnvironmentalSlabfishTypes {
 	public static final List<ResourceKey<SlabfishType>> COMPAT_SLABFISH = Stream.concat(Stream.concat(ATMOSPHERIC_SLABFISH.stream(), AUTUMNITY_SLABFISH.stream()), ENDERGETIC_SLABFISH.stream()).collect(Collectors.toList());
 
 	public static void bootstrap(BootstapContext<SlabfishType> context) {
-		register(context, SWAMP, -1);
+		register(context, SWAMP, -1, Tags.Biomes.IS_SWAMP);
 
 		register(context, BADLANDS, 0, BiomeTags.IS_BADLANDS);
 		register(context, BAMBOO, 1, Biomes.BAMBOO_JUNGLE);

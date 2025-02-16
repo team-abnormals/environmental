@@ -1,5 +1,17 @@
 {
-  "conditions": [],
+  "conditions": [
+    {
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:in_biome",
+      "biomes": "#forge:is_swamp"
+    }
+  ],
   "description": {
     "translate": "slabfish.type.environmental.swamp"
   },

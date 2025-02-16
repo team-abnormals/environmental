@@ -183,14 +183,6 @@ public class EnvironmentalEvents {
 		Level level = event.getLevel();
 		RandomSource random = level.getRandom();
 
-		if (target instanceof Slabfish slabby && stack.is(Items.NAME_TAG)) {
-			if (stack.hasCustomHoverName()) {
-				if (!slabby.hasCustomName() || slabby.getCustomName() == null || !slabby.getCustomName().getString().equals(stack.getHoverName().getString())) {
-					slabby.playTransformSound();
-				}
-			}
-		}
-
 		if (target instanceof Pig pig && target.isAlive()) {
 			IDataManager data = ((IDataManager) target);
 			if (!pig.isLeashed() && stack.is(EnvironmentalItemTags.PIG_TRUFFLE_ITEMS) && !pig.isBaby() && EnvironmentalConfig.COMMON.pigsHuntTruffles.get()) {

@@ -591,11 +591,6 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 		}
 	}
 
-	public void playTransformSound() {
-		this.playSound(EnvironmentalSoundEvents.SLABFISH_TRANSFORM.get(), 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
-		this.particleCloud(ParticleTypes.CAMPFIRE_COSY_SMOKE);
-	}
-
 	@Override
 	public void thunderHit(ServerLevel world, LightningBolt lightningBolt) {
 		UUID uuid = lightningBolt.getUUID();
@@ -640,7 +635,7 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 				return spawnDataIn;
 			} else {
 				Registry<SlabfishType> registry = SlabfishHelper.slabfishTypes(this.level());
-				SlabfishType type = SlabfishHelper.getSlabfishType(registry, SlabfishConditionContext.spawned(this)).get();
+				SlabfishType type = SlabfishHelper.getSlabfishType(registry, SlabfishConditionContext.spawned(this)).orElse(registry.get(EnvironmentalSlabfishTypes.SWAMP));
 
 				spawnDataIn = new SlabfishData(type);
 				this.setSlabfishType(type);

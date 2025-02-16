@@ -4,6 +4,7 @@ import com.teamabnormals.environmental.common.entity.animal.slabfish.Slabfish;
 import com.teamabnormals.environmental.common.slabfish.SlabfishHelper;
 import com.teamabnormals.environmental.common.slabfish.SlabfishType;
 import com.teamabnormals.environmental.common.slabfish.condition.SlabfishConditionContext;
+import com.teamabnormals.environmental.core.registry.slabfish.EnvironmentalSlabfishTypes;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.Registry;
 import net.minecraft.server.level.ServerLevel;
@@ -119,7 +120,7 @@ public class SlabbyBreedGoal extends Goal {
 			slabby.moveTo(this.animal.getX(), this.animal.getY(), this.animal.getZ(), 0.0F, 0.0F);
 
 			Registry<SlabfishType> registry = SlabfishHelper.slabfishTypes(this.animal.level());
-			SlabfishType slabfishType = SlabfishHelper.getSlabfishType(registry, SlabfishConditionContext.breeding(slabby, this.animal.getLoveCause(), this.animal, this.targetMate)).get();
+			SlabfishType slabfishType = SlabfishHelper.getSlabfishType(registry, SlabfishConditionContext.breeding(slabby, this.animal.getLoveCause(), this.animal, this.targetMate)).orElse(registry.get(EnvironmentalSlabfishTypes.SWAMP));
 			slabby.setSlabfishType(slabfishType);
 
 			if (player != null) {
