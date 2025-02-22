@@ -93,7 +93,7 @@ public class Yak extends Animal implements IForgeShearable, Shearable, NeutralMo
 	@Override
 	public void addAdditionalSaveData(CompoundTag compound) {
 		super.addAdditionalSaveData(compound);
-		compound.putBoolean("Sheared", this.getSheared());
+		compound.putBoolean("Sheared", this.isSheared());
 		this.addPersistentAngerSaveData(compound);
 	}
 
@@ -185,7 +185,7 @@ public class Yak extends Animal implements IForgeShearable, Shearable, NeutralMo
 		}
 	}
 
-	public boolean getSheared() {
+	public boolean isSheared() {
 		return this.entityData.get(SHEARED);
 	}
 
@@ -194,7 +194,7 @@ public class Yak extends Animal implements IForgeShearable, Shearable, NeutralMo
 	}
 
 	public boolean readyForShearing() {
-		return this.isAlive() && !this.getSheared() && !this.isBaby();
+		return this.isAlive() && !this.isSheared() && !this.isBaby();
 	}
 
 	@Override
