@@ -81,7 +81,9 @@ public class CatLeapAtDwarfSpruceGoal extends Goal {
 				BlockState blockstate = this.cat.level().getBlockState(this.targetPos);
 				DwarfSpruceBlock block = (DwarfSpruceBlock) blockstate.getBlock();
 				this.cat.level().setBlockAndUpdate(this.targetPos, block.getWithoutTorchesState(blockstate));
-				Block.popResource(this.cat.level(), this.targetPos, new ItemStack(block.getTorch()));
+				if (block.getTorch() != null) {
+					Block.popResource(this.cat.level(), this.targetPos, new ItemStack(block.getTorch()));
+				}
 			}
 		} else {
 			int patience = 1;
