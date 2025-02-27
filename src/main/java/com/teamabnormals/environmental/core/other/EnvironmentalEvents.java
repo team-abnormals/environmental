@@ -34,6 +34,7 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NonTameRandomTargetGoal;
 import net.minecraft.world.entity.animal.*;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.hoglin.Hoglin;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
@@ -57,6 +58,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+import net.minecraftforge.event.entity.EntityMobGriefingEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -76,13 +78,17 @@ import java.util.Set;
 
 @EventBusSubscriber(modid = Environmental.MOD_ID)
 public class EnvironmentalEvents {
+	public static final List<MobSpawnType> VALID_SPAWNS = List.of(MobSpawnType.NATURAL, MobSpawnType.CHUNK_GENERATION, MobSpawnType.JOCKEY, MobSpawnType.REINFORCEMENT, MobSpawnType.PATROL);
 
 	@SubscribeEvent
 	public static void onLivingSpawn(MobSpawnEvent.FinalizeSpawn event) {
 		Mob entity = event.getEntity();
 		ServerLevelAccessor level = event.getLevel();
 
-		if (!(EnvironmentalConfig.COMMON.blockOnlyNaturalSpawns.get() && event.getSpawnType() == MobSpawnType.SPAWNER) && entity.getType().getCategory() == MobCategory.MONSTER && !entity.getType().is(EnvironmentalEntityTypeTags.UNAFFECTED_BY_SERENITY)) {
+		boolean natural = VALID_SPAWNS.contains(event.getSpawnType());
+		boolean spawner = !EnvironmentalConfig.COMMON.blockOnlyNaturalSpawns.get() && event.getSpawnType() == MobSpawnType.SPAWNER;
+
+		if ((natural || spawner) && entity.getType().getCategory() == MobCategory.MONSTER && !entity.getType().is(EnvironmentalEntityTypeTags.UNAFFECTED_BY_SERENITY)) {
 			int horizontalRange = EnvironmentalConfig.COMMON.koiHorizontalSerenityRange.get();
 			int verticalRange = EnvironmentalConfig.COMMON.koiVerticalSerenityRange.get();
 			for (Koi koi : level.getEntitiesOfClass(Koi.class, entity.getBoundingBox().inflate(horizontalRange, verticalRange, horizontalRange))) {
@@ -92,6 +98,13 @@ public class EnvironmentalEvents {
 					break;
 				}
 			}
+		}
+	}
+
+	@SubscribeEvent
+	public static void onEndermanPlaceBlock(EntityMobGriefingEvent event) {
+		if (event.getEntity() instanceof EnderMan enderman && enderman.hasEffect(EnvironmentalMobEffects.SERENITY.get())) {
+			event.setResult(Result.DENY);
 		}
 	}
 

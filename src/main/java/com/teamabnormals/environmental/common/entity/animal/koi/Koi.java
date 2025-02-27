@@ -25,7 +25,9 @@ import net.minecraft.world.entity.ai.goal.PanicGoal;
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.animal.AbstractFish;
+import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -158,6 +160,8 @@ public class Koi extends AbstractFish {
 		return Mth.lerp(0.2F, prevRot, rot);
 	}
 
+	public static final TargetingConditions PLAYERS_OR_ENDERMEN = TargetingConditions.forNonCombat().selector(entity -> entity instanceof Player || entity instanceof EnderMan).ignoreLineOfSight().ignoreInvisibilityTesting();
+
 	@Override
 	public void aiStep() {
 		if (!this.isInWater() && this.onGround() && this.verticalCollision) {
@@ -169,14 +173,16 @@ public class Koi extends AbstractFish {
 		if (this.level().getGameTime() % 20 == 0 && EnvironmentalConfig.COMMON.serenityEffect.get()) {
 			int horizontalRange = EnvironmentalConfig.COMMON.koiHorizontalSerenityRange.get();
 			int verticalRange = EnvironmentalConfig.COMMON.koiVerticalSerenityRange.get();
-			for (Player player : this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(horizontalRange, verticalRange, horizontalRange))) {
-				if (!this.level().isClientSide())
-					player.addEffect(new MobEffectInstance(EnvironmentalMobEffects.SERENITY.get(), 100, 0, true, false, true));
+			for (LivingEntity living : this.level().getNearbyEntities(LivingEntity.class, PLAYERS_OR_ENDERMEN, this, this.getBoundingBox().inflate(horizontalRange, verticalRange, horizontalRange))) {
+				if (!this.level().isClientSide()) {
+					living.addEffect(new MobEffectInstance(EnvironmentalMobEffects.SERENITY.get(), 100, 0, true, false, true));
+				}
 			}
 		}
 		super.aiStep();
 	}
 
+	@Override
 	public SoundEvent getFlopSound() {
 		return EnvironmentalSoundEvents.KOI_FLOP.get();
 	}
