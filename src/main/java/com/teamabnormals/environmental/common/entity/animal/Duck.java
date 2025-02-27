@@ -1,6 +1,7 @@
 package com.teamabnormals.environmental.common.entity.animal;
 
 import com.teamabnormals.blueprint.core.api.EggLayer;
+import com.teamabnormals.environmental.common.entity.ai.goal.DuckAvoidEntityGoal;
 import com.teamabnormals.environmental.common.entity.ai.goal.DuckSwimGoal;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalBlockTags;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalItemTags;
@@ -35,6 +36,8 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import java.util.function.Predicate;
+
 public class Duck extends Animal implements EggLayer {
 	private static final EntityDataAccessor<Integer> EATING = SynchedEntityData.defineId(Duck.class, EntityDataSerializers.INT);
 	private float wingRotation;
@@ -52,6 +55,8 @@ public class Duck extends Animal implements EggLayer {
 		this.setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
 	}
 
+	private static final Predicate<Entity> AVOID_PLAYERS = (entity) -> !entity.isDiscrete() && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(entity);
+
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new FloatGoal(this));
@@ -59,10 +64,11 @@ public class Duck extends Animal implements EggLayer {
 		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
 		this.goalSelector.addGoal(3, new TemptGoal(this, 1.0D, Ingredient.of(EnvironmentalItemTags.DUCK_FOOD), false));
 		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
-		this.goalSelector.addGoal(5, new DuckSwimGoal(this));
-		this.goalSelector.addGoal(6, new RandomStrollGoal(this, 1.0D));
-		this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
-		this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
+		this.goalSelector.addGoal(5, new DuckAvoidEntityGoal<>(this, Player.class, 2.0F, 1.0D, 1.0D, AVOID_PLAYERS::test));
+		this.goalSelector.addGoal(6, new DuckSwimGoal(this));
+		this.goalSelector.addGoal(7, new RandomStrollGoal(this, 1.0D));
+		this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 6.0F));
+		this.goalSelector.addGoal(9, new RandomLookAroundGoal(this));
 	}
 
 	@Override
@@ -232,14 +238,10 @@ public class Duck extends Animal implements EggLayer {
 		super.positionRider(passenger, function);
 		float f = Mth.sin(this.yBodyRot * ((float) Math.PI / 180F));
 		float f1 = Mth.cos(this.yBodyRot * ((float) Math.PI / 180F));
-		function.accept(passenger, this.getX() + (double) (0.1F * f), this.getY(0.5D) + passenger.getMyRidingOffset() + 0.0D, this.getZ() - (double) (0.1F * f1));
-		if (passenger instanceof LivingEntity) {
-			((LivingEntity) passenger).yBodyRot = this.yBodyRot;
+		function.accept(passenger, this.getX() + (double) (0.1F * f), this.getY(0.15D) + passenger.getMyRidingOffset() + 0.0D, this.getZ() - (double) (0.1F * f1));
+		if (passenger instanceof LivingEntity living) {
+			living.yBodyRot = this.yBodyRot;
 		}
-	}
-
-	public void setDuckJockey(boolean jockey) {
-		this.duckJockey = jockey;
 	}
 
 	@Override

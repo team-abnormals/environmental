@@ -33,7 +33,7 @@ public class EnvironmentalEntityTypes {
 	public static final EntitySubRegistryHelper HELPER = Environmental.REGISTRY_HELPER.getEntitySubHelper();
 
 	public static final RegistryObject<EntityType<Slabfish>> SLABFISH = HELPER.createLivingEntity("slabfish", Slabfish::new, MobCategory.CREATURE, 0.45F, 0.9F);
-	public static final RegistryObject<EntityType<Duck>> DUCK = HELPER.createLivingEntity("duck", Duck::new, MobCategory.CREATURE, 0.5F, 0.8F);
+	public static final RegistryObject<EntityType<Duck>> DUCK = HELPER.createLivingEntity("duck", Duck::new, MobCategory.CREATURE, 0.5F, 0.75F);
 	public static final RegistryObject<EntityType<Deer>> DEER = HELPER.createLivingEntity("deer", Deer::new, MobCategory.CREATURE, 0.8F, 1.6F);
 	public static final RegistryObject<EntityType<Reindeer>> REINDEER = HELPER.createLivingEntity("reindeer", Reindeer::new, MobCategory.CREATURE, 0.8F, 1.6F);
 	public static final RegistryObject<EntityType<Yak>> YAK = HELPER.createLivingEntity("yak", Yak::new, MobCategory.CREATURE, 1.2F, 1.4F);
