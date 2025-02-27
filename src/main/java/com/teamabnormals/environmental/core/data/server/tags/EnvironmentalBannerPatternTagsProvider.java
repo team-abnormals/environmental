@@ -19,5 +19,6 @@ public class EnvironmentalBannerPatternTagsProvider extends BannerPatternTagsPro
 	@Override
 	public void addTags(Provider provider) {
 		this.tag(EnvironmentalBannerPatternTags.PATTERN_ITEM_LUMBERER).add(EnvironmentalBannerPatterns.LUMBERER.getKey());
+		this.tag(EnvironmentalBannerPatternTags.PATTERN_ITEM_HELPER).add(EnvironmentalBannerPatterns.HELPER.getKey());
 	}
 }

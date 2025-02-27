@@ -71,6 +71,7 @@ public class EnvironmentalItems {
 	public static final RegistryObject<Item> MUSIC_DISC_LEAVING_HOME = HELPER.createItem("music_disc_leaving_home", () -> new BlueprintRecordItem(6, EnvironmentalSoundEvents.MUSIC_DISC_LEAVING_HOME, new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 144));
 	public static final RegistryObject<Item> MUSIC_DISC_SLABRAVE = HELPER.createItem("music_disc_slabrave", () -> new BlueprintRecordItem(13, EnvironmentalSoundEvents.MUSIC_DISC_SLABRAVE, new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 111));
 	public static final RegistryObject<Item> LUMBERER_BANNER_PATTERN = HELPER.createItem("lumberer_banner_pattern", () -> new BannerPatternItem(EnvironmentalBannerPatternTags.PATTERN_ITEM_LUMBERER, new Item.Properties().stacksTo(1)));
+	public static final RegistryObject<Item> HELPER_BANNER_PATTERN = HELPER.createItem("helper_banner_pattern", () -> new BannerPatternItem(EnvironmentalBannerPatternTags.PATTERN_ITEM_HELPER, new Item.Properties().stacksTo(1)));
 
 	public static final RegistryObject<Item> LARGE_LILY_PAD = HELPER.createItem("large_lily_pad", () -> new LargeLilyPadItem(new Item.Properties()));
 	public static final RegistryObject<Item> GIANT_LILY_PAD = HELPER.createItem("giant_lily_pad", () -> new GiantLilyPadItem(new Item.Properties()));
@@ -122,7 +123,7 @@ public class EnvironmentalItems {
 				.addItemsBefore(of(Items.ROTTEN_FLESH), TRUFFLE)
 				.addItemsBefore(of(Items.TROPICAL_FISH), KOI)
 				.tab(INGREDIENTS)
-				.addItemsAfter(of(Items.GLOBE_BANNER_PATTERN), LUMBERER_BANNER_PATTERN)
+				.addItemsAfter(of(Items.GLOBE_BANNER_PATTERN), LUMBERER_BANNER_PATTERN, HELPER_BANNER_PATTERN)
 				.addItemsAfter(of(Items.EGG), DUCK_EGG)
 				.addItemsBefore(of(Items.LEATHER), YAK_HAIR)
 				.addItemsAfter(of(Items.CLAY_BALL), MUD_BALL)
