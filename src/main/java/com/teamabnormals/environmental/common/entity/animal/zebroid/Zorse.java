@@ -157,7 +157,7 @@ public class Zorse extends AbstractUnchestedZebroid implements VariantHolder<Var
 		if (!this.level().isClientSide) {
 			this.getAttribute(Attributes.ARMOR).removeModifier(ARMOR_MODIFIER_UUID);
 			if (this.isArmor(stack)) {
-				int i = ((HorseArmorItem)stack.getItem()).getProtection();
+				int i = ((HorseArmorItem) stack.getItem()).getProtection();
 				if (i != 0) {
 					this.getAttribute(Attributes.ARMOR).addTransientModifier(new AttributeModifier(ARMOR_MODIFIER_UUID, "Horse armor bonus", i, AttributeModifier.Operation.ADDITION));
 				}

@@ -86,8 +86,8 @@ public class EnvironmentalProperties {
 			Block block = state.getBlock();
 			long i = Mth.getSeed(pos.getX(), pos.getY(), pos.getZ());
 			float f = block.getMaxHorizontalOffset();
-			double d0 = Mth.clamp(((double)((float)(i & 15L) / 15.0F) - 0.5D) * 0.4D, -f, f);
-			double d1 = Mth.clamp(((double)((float)(i >> 8 & 15L) / 15.0F) - 0.5D) * 0.4D, -f, f);
+			double d0 = Mth.clamp(((double) ((float) (i & 15L) / 15.0F) - 0.5D) * 0.4D, -f, f);
+			double d1 = Mth.clamp(((double) ((float) (i >> 8 & 15L) / 15.0F) - 0.5D) * 0.4D, -f, f);
 
 			Direction facing = state.getValue(WallHibiscusBlock.FACING);
 			Axis axis = facing.getAxis();

@@ -32,7 +32,7 @@ public class ZorseArmorLayer extends RenderLayer<Zorse, ZorseModel<Zorse>> {
 	public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, Zorse zorse, float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks, float netHeadYaw, float headPitch) {
 		ItemStack itemstack = zorse.getArmor();
 		if (itemstack.getItem() instanceof HorseArmorItem) {
-			HorseArmorItem horsearmoritem = (HorseArmorItem)itemstack.getItem();
+			HorseArmorItem horsearmoritem = (HorseArmorItem) itemstack.getItem();
 			this.getParentModel().copyPropertiesTo(this.model);
 			this.model.prepareMobModel(zorse, limbSwing, limbSwingAmount, partialTick);
 			this.model.setupAnim(zorse, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
@@ -40,10 +40,10 @@ public class ZorseArmorLayer extends RenderLayer<Zorse, ZorseModel<Zorse>> {
 			float f1;
 			float f2;
 			if (horsearmoritem instanceof DyeableHorseArmorItem) {
-				int i = ((DyeableHorseArmorItem)horsearmoritem).getColor(itemstack);
-				f = (float)(i >> 16 & 255) / 255.0F;
-				f1 = (float)(i >> 8 & 255) / 255.0F;
-				f2 = (float)(i & 255) / 255.0F;
+				int i = ((DyeableHorseArmorItem) horsearmoritem).getColor(itemstack);
+				f = (float) (i >> 16 & 255) / 255.0F;
+				f1 = (float) (i >> 8 & 255) / 255.0F;
+				f2 = (float) (i & 255) / 255.0F;
 			} else {
 				f = 1.0F;
 				f1 = 1.0F;

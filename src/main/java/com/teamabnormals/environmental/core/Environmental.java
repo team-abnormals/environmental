@@ -133,7 +133,6 @@ public class Environmental {
 		generator.addProvider(server, blockTags);
 		generator.addProvider(server, new EnvironmentalItemTagsProvider(output, provider, blockTags.contentsGetter(), helper));
 		generator.addProvider(server, new EnvironmentalEntityTypeTagsProvider(output, provider, helper));
-		generator.addProvider(server, new EnvironmentalStructureTagsProvider(output, provider, helper));
 		generator.addProvider(server, new EnvironmentalBiomeTagsProvider(output, provider, helper));
 		generator.addProvider(server, new EnvironmentalBannerPatternTagsProvider(output, provider, helper));
 		generator.addProvider(server, new EnvironmentalPaintingVariantTagsProvider(output, provider, helper));
@@ -168,7 +167,6 @@ public class Environmental {
 		event.registerLayerDefinition(EnvironmentalModelLayers.DUCK, DuckModel::createBodyLayer);
 		event.registerLayerDefinition(EnvironmentalModelLayers.DEER, DeerModel::createBodyLayer);
 		event.registerLayerDefinition(EnvironmentalModelLayers.REINDEER, ReindeerModel::createBodyLayer);
-		event.registerLayerDefinition(EnvironmentalModelLayers.FENNEC_FOX, FennecFoxModel::createBodyLayer);
 		event.registerLayerDefinition(EnvironmentalModelLayers.KOI, KoiModel::createBodyLayer);
 		event.registerLayerDefinition(EnvironmentalModelLayers.SLABFISH, SlabfishModel::createBodyLayer);
 		event.registerLayerDefinition(EnvironmentalModelLayers.YAK, YakModel::createBodyLayer);
@@ -179,11 +177,6 @@ public class Environmental {
 		event.registerLayerDefinition(EnvironmentalModelLayers.ZORSE_ARMOR, () -> LayerDefinition.create(ZorseModel.createBodyMesh(new CubeDeformation(0.1F)), 64, 64));
 		event.registerLayerDefinition(EnvironmentalModelLayers.MULE_ARMOR, () -> MuleArmorModel.createBodyLayer(new CubeDeformation(0.1F)));
 		event.registerLayerDefinition(EnvironmentalModelLayers.PINECONE_GOLEM, PineconeGolemModel::createBodyLayer);
-
-		event.registerLayerDefinition(EnvironmentalModelLayers.THIEF_HOOD, ThiefHoodModel::createBodyLayer);
-		event.registerLayerDefinition(EnvironmentalModelLayers.HEALER_POUCH, HealerPouchModel::createBodyLayer);
-		event.registerLayerDefinition(EnvironmentalModelLayers.ARCHITECT_BELT, ArchitectBeltModel::createBodyLayer);
-		event.registerLayerDefinition(EnvironmentalModelLayers.WANDERER_BOOTS, WandererBootsModel::createBodyLayer);
 	}
 
 	@OnlyIn(Dist.CLIENT)
@@ -194,7 +187,6 @@ public class Environmental {
 		event.registerEntityRenderer(EnvironmentalEntityTypes.REINDEER.get(), ReindeerRenderer::new);
 		event.registerEntityRenderer(EnvironmentalEntityTypes.YAK.get(), YakRenderer::new);
 		event.registerEntityRenderer(EnvironmentalEntityTypes.KOI.get(), KoiRenderer::new);
-		// event.registerEntityRenderer(EnvironmentalEntityTypes.FENNEC_FOX.get(), FennecFoxRenderer::new);
 		event.registerEntityRenderer(EnvironmentalEntityTypes.TAPIR.get(), TapirRenderer::new);
 		event.registerEntityRenderer(EnvironmentalEntityTypes.ZEBRA.get(), ZebraRenderer::new);
 		event.registerEntityRenderer(EnvironmentalEntityTypes.ZORSE.get(), ZorseRenderer::new);

@@ -2,8 +2,6 @@ package com.teamabnormals.environmental.common.block;
 
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.core.BlockPos;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;

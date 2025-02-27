@@ -29,7 +29,8 @@ import java.util.function.Predicate;
 public interface Zebroid {
 	UUID SPEED_MODIFIER_KICKING_ID = UUID.fromString("AF33F716-0F4D-43CA-9C8E-1068AE2F38E6");
 	AttributeModifier SPEED_MODIFIER_KICKING = new AttributeModifier(SPEED_MODIFIER_KICKING_ID, "Kicking speed reduction", -0.8D, Operation.MULTIPLY_BASE);
-	Predicate<LivingEntity> KICKABLE_PREDICATE = living -> living.isAlive() && !living.getType().is(EnvironmentalEntityTypeTags.ZEBROIDS_DONT_KICK) && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(living) && !living.isPassenger();;
+	Predicate<LivingEntity> KICKABLE_PREDICATE = living -> living.isAlive() && !living.getType().is(EnvironmentalEntityTypeTags.ZEBROIDS_DONT_KICK) && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(living) && !living.isPassenger();
+	;
 
 	// Kicking
 	void setKickTime(int time);

@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.teamabnormals.environmental.client.model.ZonkeyModel;
 import com.teamabnormals.environmental.client.renderer.entity.layers.ZonkeyStripesRenderLayer;
 import com.teamabnormals.environmental.common.entity.animal.zebroid.Zonkey;
-import com.teamabnormals.environmental.common.entity.animal.zebroid.Zorse;
 import com.teamabnormals.environmental.core.other.EnvironmentalModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;

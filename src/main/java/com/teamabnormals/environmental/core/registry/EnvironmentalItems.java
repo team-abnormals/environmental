@@ -97,7 +97,6 @@ public class EnvironmentalItems {
 	public static final RegistryObject<ForgeSpawnEggItem> ZORSE_SPAWN_EGG = HELPER.createSpawnEggItem("zorse", EnvironmentalEntityTypes.ZORSE::get, 0xC09E7D, 0x342E2B);
 	public static final RegistryObject<ForgeSpawnEggItem> ZONKEY_SPAWN_EGG = HELPER.createSpawnEggItem("zonkey", EnvironmentalEntityTypes.ZONKEY::get, 0x534539, 0x342E2B);
 	public static final RegistryObject<ForgeSpawnEggItem> PINECONE_GOLEM_SPAWN_EGG = HELPER.createSpawnEggItem("pinecone_golem", EnvironmentalEntityTypes.PINECONE_GOLEM::get, 0x775D49, 0x8FA147);
-	// public static final RegistryObject<ForgeSpawnEggItem> FENNEC_FOX_SPAWN_EGG = HELPER.createSpawnEggItem("fennec_fox", EnvironmentalEntityTypes.FENNEC_FOX::get, 0xFBDB9E, 0xFFFFFF);
 
 	public static final class EnvironmentalFoods {
 		public static final FoodProperties CHERRIES = new FoodProperties.Builder().nutrition(1).saturationMod(0.1F).fast().build();

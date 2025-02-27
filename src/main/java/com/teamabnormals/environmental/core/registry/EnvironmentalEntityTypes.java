@@ -38,7 +38,6 @@ public class EnvironmentalEntityTypes {
 	public static final RegistryObject<EntityType<Reindeer>> REINDEER = HELPER.createLivingEntity("reindeer", Reindeer::new, MobCategory.CREATURE, 0.8F, 1.6F);
 	public static final RegistryObject<EntityType<Yak>> YAK = HELPER.createLivingEntity("yak", Yak::new, MobCategory.CREATURE, 1.2F, 1.4F);
 	public static final RegistryObject<EntityType<Koi>> KOI = HELPER.createLivingEntity("koi", Koi::new, MobCategory.WATER_AMBIENT, 0.75F, 0.4F);
-	// public static final RegistryObject<EntityType<FennecFox>> FENNEC_FOX = HELPER.createLivingEntity("fennec_fox", FennecFox::new, MobCategory.CREATURE, 0.75F, 0.5F);
 	public static final RegistryObject<EntityType<Tapir>> TAPIR = HELPER.createLivingEntity("tapir", Tapir::new, MobCategory.CREATURE, 0.9F, 0.98F);
 	public static final RegistryObject<EntityType<Zebra>> ZEBRA = HELPER.createLivingEntity("zebra", Zebra::new, MobCategory.CREATURE, 1.3964844F, 1.5F);
 	public static final RegistryObject<EntityType<Zorse>> ZORSE = HELPER.createLivingEntity("zorse", Zorse::new, MobCategory.CREATURE, 1.3964844F, 1.6F);
@@ -56,7 +55,6 @@ public class EnvironmentalEntityTypes {
 		event.register(DEER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AbstractDeer::checkDeerSpawnRules, Operation.AND);
 		event.register(REINDEER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AbstractDeer::checkDeerSpawnRules, Operation.AND);
 		event.register(KOI.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Koi::canKoiSpawn, Operation.AND);
-		// event.register(FENNEC_FOX.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, Operation.AND);
 		event.register(TAPIR.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, Operation.AND);
 		event.register(ZEBRA.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, Operation.AND);
 	}
@@ -69,7 +67,6 @@ public class EnvironmentalEntityTypes {
 		event.put(DUCK.get(), Duck.registerAttributes().build());
 		event.put(YAK.get(), Yak.registerAttributes().build());
 		event.put(KOI.get(), Koi.registerAttributes().build());
-		// event.put(FENNEC_FOX.get(), Fox.createAttributes().build());
 		event.put(TAPIR.get(), Tapir.createAttributes().build());
 		event.put(ZEBRA.get(), Zebra.createAttributes().build());
 		event.put(ZORSE.get(), Zorse.createAttributes().build());

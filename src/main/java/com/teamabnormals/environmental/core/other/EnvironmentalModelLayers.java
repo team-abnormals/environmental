@@ -8,7 +8,6 @@ public class EnvironmentalModelLayers {
 	public static final ModelLayerLocation DEER = register("deer");
 	public static final ModelLayerLocation REINDEER = register("reindeer");
 	public static final ModelLayerLocation DUCK = register("duck");
-	public static final ModelLayerLocation FENNEC_FOX = register("fennec_fox");
 	public static final ModelLayerLocation KOI = register("koi");
 	public static final ModelLayerLocation SLABFISH = register("slabfish");
 	public static final ModelLayerLocation TAPIR = register("tapir");
@@ -19,11 +18,6 @@ public class EnvironmentalModelLayers {
 	public static final ModelLayerLocation ZORSE_ARMOR = register("zorse_armor");
 	public static final ModelLayerLocation MULE_ARMOR = register("mule_armor");
 	public static final ModelLayerLocation PINECONE_GOLEM = register("pinecone_golem");
-
-	public static final ModelLayerLocation THIEF_HOOD = register("thief_hood", "armor");
-	public static final ModelLayerLocation HEALER_POUCH = register("healer_pouch", "armor");
-	public static final ModelLayerLocation ARCHITECT_BELT = register("architect_belt", "armor");
-	public static final ModelLayerLocation WANDERER_BOOTS = register("wanderer_boots", "armor");
 
 	public static ModelLayerLocation register(String name) {
 		return register(name, "main");
