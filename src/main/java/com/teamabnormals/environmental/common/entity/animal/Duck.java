@@ -76,6 +76,11 @@ public class Duck extends Animal implements EggLayer {
 		return this.isBaby() ? sizeIn.height * 0.85F : sizeIn.height * 0.92F;
 	}
 
+	@Override
+	public double getFluidJumpThreshold() {
+		return this.isBaby() ? 0.2D : 0.4D;
+	}
+
 	public static AttributeSupplier.Builder registerAttributes() {
 		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 4.0D).add(Attributes.MOVEMENT_SPEED, 0.25D);
 	}

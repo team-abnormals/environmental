@@ -14,21 +14,21 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class DuckRenderer extends MobRenderer<Duck, DuckModel<Duck>> {
+	private static final ResourceLocation DUCK = new ResourceLocation(Environmental.MOD_ID, "textures/entity/duck/duck.png");
+	private static final ResourceLocation DUCKLING = new ResourceLocation(Environmental.MOD_ID, "textures/entity/duck/duckling.png");
 
 	public DuckRenderer(EntityRendererProvider.Context context) {
 		super(context, new DuckModel<>(context.bakeLayer(EnvironmentalModelLayers.DUCK)), 0.3F);
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation(Duck entity) {
-		return new ResourceLocation(Environmental.MOD_ID, "textures/entity/duck.png");
+	public ResourceLocation getTextureLocation(Duck duck) {
+		return duck.isBaby() ? DUCKLING : DUCK;
 	}
 
 	@Override
-	protected void setupRotations(Duck entityLiving, PoseStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
-		if (entityLiving.isInWater())
-			matrixStackIn.translate(0.0D, Mth.cos(ageInTicks * 0.08F) * 0.02F, 0.0D);
-
-		super.setupRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
+	protected void setupRotations(Duck duck, PoseStack poseStack, float ageInTicks, float rotationYaw, float partialTicks) {
+		if (duck.isInWater()) poseStack.translate(0.0D, Mth.cos(ageInTicks * 0.08F) * 0.02F, 0.0D);
+		super.setupRotations(duck, poseStack, ageInTicks, rotationYaw, partialTicks);
 	}
 }
