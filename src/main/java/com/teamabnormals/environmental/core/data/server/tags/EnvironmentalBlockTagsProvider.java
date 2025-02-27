@@ -26,7 +26,8 @@ public class EnvironmentalBlockTagsProvider extends BlockTagsProvider {
 	public void addTags(Provider provider) {
 		this.tag(BlockTags.MINEABLE_WITH_AXE).add(
 				CATTAIL_SPROUT.get(), CATTAIL.get(), LARGE_LILY_PAD.get(), GIANT_LILY_PAD.get(), GIANT_TALL_GRASS.get(), MYCELIUM_SPROUTS.get(), CUP_LICHEN.get(), DWARF_SPRUCE.get(), DWARF_SPRUCE_PLANT.get(), DWARF_SPRUCE_TORCH.get(), DWARF_SPRUCE_PLANT_TORCH.get(), DWARF_SPRUCE_SOUL_TORCH.get(), DWARF_SPRUCE_PLANT_SOUL_TORCH.get(), DWARF_SPRUCE_REDSTONE_TORCH.get(), DWARF_SPRUCE_PLANT_REDSTONE_TORCH.get(), DWARF_SPRUCE_ENDER_TORCH.get(), DWARF_SPRUCE_PLANT_ENDER_TORCH.get(), DWARF_SPRUCE_CUPRIC_TORCH.get(), DWARF_SPRUCE_PLANT_CUPRIC_TORCH.get(),
-				DUCK_EGG_CRATE.get(), YAK_HAIR_BLOCK.get(), YAK_HAIR_RUG.get()
+				DUCK_EGG_CRATE.get(), YAK_HAIR_BLOCK.get(), YAK_HAIR_RUG.get(),
+				CHERRY_CRATE.get(), PLUM_CRATE.get()
 		);
 
 		this.tag(BlockTags.MINEABLE_WITH_HOE).add(

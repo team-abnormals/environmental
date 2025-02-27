@@ -21,6 +21,8 @@
     "environmental:dwarf_spruce_plant_cupric_torch",
     "environmental:duck_egg_crate",
     "environmental:yak_hair_block",
-    "environmental:yak_hair_rug"
+    "environmental:yak_hair_rug",
+    "environmental:cherry_crate",
+    "environmental:plum_crate"
   ]
 }
