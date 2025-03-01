@@ -5,6 +5,6 @@
     "type": "environmental:reindeer",
     "maxCount": 4,
     "minCount": 4,
-    "weight": 12
+    "weight": 10
   }
 }

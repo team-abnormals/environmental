@@ -11,6 +11,8 @@ public class EnvironmentalBiomeTags {
 
 	public static final TagKey<Biome> SPAWNS_MUDDY_RABBITS = biomeTag("spawns_muddy_rabbits");
 	public static final TagKey<Biome> SPAWNS_GRAY_RABBITS = biomeTag("spawns_gray_rabbits");
+	public static final TagKey<Biome> SPAWNS_CHESTNUT_DEER = biomeTag("spawns_chestnut_deer");
+	public static final TagKey<Biome> SPAWNS_GRAY_DEER = biomeTag("spawns_gray_deer");
 
 	public static final TagKey<Biome> HAS_LOG_CABIN = biomeTag("has_structure/log_cabin");
 

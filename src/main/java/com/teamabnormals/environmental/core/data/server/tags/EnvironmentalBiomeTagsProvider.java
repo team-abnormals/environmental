@@ -15,6 +15,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import org.violetmoon.zeta.multiloader.Env;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -38,13 +39,15 @@ public class EnvironmentalBiomeTagsProvider extends BiomeTagsProvider {
 		this.tag(EnvironmentalBiomes.BLOSSOM_WOODS,
 				BiomeTags.IS_OVERWORLD, BiomeTags.IS_FOREST,
 				BiomeTags.HAS_MINESHAFT, BiomeTags.STRONGHOLD_BIASED_TO,
-				Tags.Biomes.IS_DENSE_OVERWORLD
+				Tags.Biomes.IS_DENSE_OVERWORLD,
+				EnvironmentalBiomeTags.SPAWNS_CHESTNUT_DEER
 		);
 
 		this.tag(EnvironmentalBiomes.BLOSSOM_VALLEYS,
 				BiomeTags.IS_OVERWORLD, BiomeTags.IS_FOREST,
 				BiomeTags.HAS_MINESHAFT, BiomeTags.STRONGHOLD_BIASED_TO,
-				BlueprintBiomeTags.IS_GRASSLAND, Tags.Biomes.IS_RARE, Tags.Biomes.IS_PLAINS
+				BlueprintBiomeTags.IS_GRASSLAND, Tags.Biomes.IS_RARE, Tags.Biomes.IS_PLAINS,
+				EnvironmentalBiomeTags.SPAWNS_CHESTNUT_DEER
 		);
 
 		this.tag(EnvironmentalBiomes.PINE_BARRENS,
@@ -109,6 +112,8 @@ public class EnvironmentalBiomeTagsProvider extends BiomeTagsProvider {
 		this.tag(EnvironmentalBiomeTags.HAS_HIBISCUS).add(Biomes.JUNGLE);
 
 		this.tag(EnvironmentalBiomeTags.HAS_MUD_DISK).add(Biomes.SWAMP);
+
+		this.tag(EnvironmentalBiomeTags.SPAWNS_GRAY_DEER).add(Biomes.DARK_FOREST);
 
 		this.tag(EnvironmentalBiomeTags.IS_RAINFOREST);
 		this.tag(EnvironmentalBiomeTags.IS_DUNES);

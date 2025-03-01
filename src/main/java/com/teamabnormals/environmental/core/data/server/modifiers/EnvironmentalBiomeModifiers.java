@@ -42,8 +42,8 @@ public class EnvironmentalBiomeModifiers {
 		addSpawn(context, "slabfish", EnvironmentalBiomeTags.HAS_SLABFISH, new SpawnerData(EnvironmentalEntityTypes.SLABFISH.get(), 12, 4, 4));
 		addSpawn(context, "duck", EnvironmentalBiomeTags.HAS_DUCK, new SpawnerData(EnvironmentalEntityTypes.DUCK.get(), 10, 4, 4));
 		addSpawn(context, "duck_rare", Biomes.RIVER, new SpawnerData(EnvironmentalEntityTypes.DUCK.get(), 1, 1, 2));
-		addSpawnIgnore(context, "deer", EnvironmentalBiomeTags.HAS_DEER, EnvironmentalBiomeTags.WITHOUT_DEER, new SpawnerData(EnvironmentalEntityTypes.DEER.get(), 12, 4, 4));
-		addSpawn(context, "reindeer", EnvironmentalBiomeTags.HAS_REINDEER, new SpawnerData(EnvironmentalEntityTypes.REINDEER.get(), 12, 4, 4));
+		addSpawnIgnore(context, "deer", EnvironmentalBiomeTags.HAS_DEER, EnvironmentalBiomeTags.WITHOUT_DEER, new SpawnerData(EnvironmentalEntityTypes.DEER.get(), 10, 4, 4));
+		addSpawn(context, "reindeer", EnvironmentalBiomeTags.HAS_REINDEER, new SpawnerData(EnvironmentalEntityTypes.REINDEER.get(), 10, 4, 4));
 		addSpawn(context, "tapir", EnvironmentalBiomeTags.HAS_TAPIR, new SpawnerData(EnvironmentalEntityTypes.TAPIR.get(), 10, 2, 2));
 		addSpawn(context, "tapir_rare", Biomes.SPARSE_JUNGLE, new SpawnerData(EnvironmentalEntityTypes.TAPIR.get(), 4, 2, 2));
 		addSpawn(context, "yak", EnvironmentalBiomeTags.HAS_YAK, new SpawnerData(EnvironmentalEntityTypes.YAK.get(), 8, 4, 4));

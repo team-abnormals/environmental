@@ -1,7 +1,9 @@
 package com.teamabnormals.environmental.common.entity.animal.deer;
 
+import com.teamabnormals.environmental.core.other.tags.EnvironmentalBiomeTags;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalItemTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
+import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -16,6 +18,7 @@ import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.biome.Biome;
 
 import javax.annotation.Nullable;
 
@@ -90,20 +93,25 @@ public class Deer extends AbstractDeer {
 
 	@Nullable
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
-		int deerCoatColor;
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
 		if (spawnDataIn instanceof DeerSpawnGroupData deerSpawnGroupData) {
-			deerCoatColor = deerSpawnGroupData.coatColor;
+			this.setCoatColor(deerSpawnGroupData.coatColor);
 		} else {
-			deerCoatColor = this.random.nextInt(DeerCoatColors.values().length);
-			spawnDataIn = new DeerSpawnGroupData(deerCoatColor);
+			Holder<Biome> holder = level.getBiome(this.blockPosition());
+			if (holder.is(EnvironmentalBiomeTags.SPAWNS_CHESTNUT_DEER)) {
+				this.setCoatColor(DeerCoatColors.CHESTNUT.getId());
+			} else if (holder.is(EnvironmentalBiomeTags.SPAWNS_GRAY_DEER)) {
+				this.setCoatColor(DeerCoatColors.GRAY.getId());
+			} else {
+				this.setCoatColor(DeerCoatColors.CREAMY.getId());
+			}
+
+			spawnDataIn = new DeerSpawnGroupData(this.getCoatColor());
 		}
 
-		this.setCoatColor(deerCoatColor);
 		this.setCoatType(this.random.nextInt(DeerCoatTypes.values().length));
 		this.setHasAntlers(this.random.nextBoolean());
-
-		return super.finalizeSpawn(worldIn, difficulty, reason, spawnDataIn, dataTag);
+		return super.finalizeSpawn(level, difficulty, reason, spawnDataIn, dataTag);
 	}
 
 	public static class DeerSpawnGroupData extends AgeableMobGroupData implements SpawnGroupData {
