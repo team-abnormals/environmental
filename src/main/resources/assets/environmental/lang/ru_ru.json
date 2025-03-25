@@ -295,8 +295,8 @@
 
   "item.environmental.mud_ball": "Грязевой шарик",
   "entity.environmental.mud_ball": "Брошенный грязевой шарик",
-  "block.environmental.chiseled_mud_bricks": "Резные саман",
-  "block.environmental.smooth_mud": "Гладкие саман",
+  "block.environmental.chiseled_mud_bricks": "Резной саман",
+  "block.environmental.smooth_mud": "Гладкий саман",
   "block.environmental.smooth_mud_slab": "Плита из гладкого самана",
   "block.environmental.dirt_brick_slab": "Плита из земляного кирпича",
   "block.environmental.dirt_brick_stairs": "Ступеньки из земляного кирпича",
