@@ -2,7 +2,7 @@ package com.teamabnormals.environmental.common.entity.animal;
 
 import com.teamabnormals.blueprint.core.api.EggLayer;
 import com.teamabnormals.environmental.common.entity.ai.goal.DuckAvoidEntityGoal;
-import com.teamabnormals.environmental.common.entity.ai.goal.DuckFollowLineGoal;
+import com.teamabnormals.environmental.common.entity.ai.goal.DucksInARowGoal;
 import com.teamabnormals.environmental.common.entity.ai.goal.DuckSwimGoal;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalBlockTags;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalItemTags;
@@ -53,9 +53,9 @@ public class Duck extends Animal implements EggLayer {
 	public boolean duckJockey;
 
 	@Nullable
-	private Duck leader;
+	private Duck rowHead;
 	@Nullable
-	private Duck follower;
+	private Duck rowTail;
 
 	public Duck(EntityType<? extends Animal> type, Level worldIn) {
 		super(type, worldIn);
@@ -68,9 +68,9 @@ public class Duck extends Animal implements EggLayer {
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new FloatGoal(this));
 		this.goalSelector.addGoal(1, new PanicGoal(this, 1.4D));
-		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
-		this.goalSelector.addGoal(3, new TemptGoal(this, 1.0D, Ingredient.of(EnvironmentalItemTags.DUCK_FOOD), false));
-		this.goalSelector.addGoal(4, new DuckFollowLineGoal(this));
+		this.goalSelector.addGoal(2, new DucksInARowGoal(this, 1.1D));
+		this.goalSelector.addGoal(3, new BreedGoal(this, 1.0D));
+		this.goalSelector.addGoal(4, new TemptGoal(this, 1.0D, Ingredient.of(EnvironmentalItemTags.DUCK_FOOD), false));
 		this.goalSelector.addGoal(5, new DuckAvoidEntityGoal<>(this, Player.class, 2.0F, 1.0D, 1.0D, AVOID_PLAYERS::test));
 		this.goalSelector.addGoal(6, new DuckSwimGoal(this));
 		this.goalSelector.addGoal(7, new RandomStrollGoal(this, 1.0D));
@@ -98,42 +98,36 @@ public class Duck extends Animal implements EggLayer {
 		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 4.0D).add(Attributes.MOVEMENT_SPEED, 0.25D);
 	}
 
-	public boolean isFollower() {
-		return this.leader != null && this.leader.isAlive();
+	public void leaveRow() {
+		if (this.rowHead != null) {
+			this.rowHead.rowTail = null;
+		}
+
+		this.rowHead = null;
 	}
 
-	public void removeFromDuckLine() {
-		if (this.leader != null && this.leader.follower == this) {
-			this.leader.follower = this.follower;
-		}
-		if (this.follower != null) {
-			this.follower.leader = this.leader;
-		}
+	public void joinRow(Duck p_30767_) {
+		this.rowHead = p_30767_;
+		this.rowHead.rowTail = this;
 	}
 
-	public boolean inRangeOfLeader() {
-		return this.distanceToSqr(this.leader) <= (double) 64.0F;
+	public boolean hasRow() {
+		return this.rowTail != null;
 	}
 
-	public void pathToLeader() {
-		if (this.isFollower()) {
-			this.getNavigation().moveTo(this.leader, 1.1F);
-		}
+	public boolean inRow() {
+		return this.rowHead != null;
 	}
 
-	public void joinDuckLine(Duck duck) {
-		Duck curr = duck;
-		while (curr.follower != null) {
-			curr = curr.follower;
-		}
-		this.leader = curr;
-		curr.follower = this;
+	@Nullable
+	public Duck getRowHead() {
+		return this.rowHead;
 	}
 
 	@Override
 	public void remove(Entity.RemovalReason reason) {
-		if (!this.level().isClientSide() && this.isDeadOrDying() && this.isFollower()) {
-			this.removeFromDuckLine();
+		if (!this.level().isClientSide() && this.isDeadOrDying()) {
+			this.leaveRow();
 		}
 		super.remove(reason);
 	}
