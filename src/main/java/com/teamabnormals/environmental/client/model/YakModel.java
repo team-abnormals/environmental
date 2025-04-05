@@ -24,7 +24,7 @@ public class YakModel<E extends Yak> extends QuadrupedModel<E> {
 	public ModelPart coat;
 
 	public YakModel(ModelPart root) {
-		super(root, false, 9.0F, 5.0F, 2.0F, 2.0F, 24);
+		super(root, false, 8.0F, 5.0F, 2.0F, 2.0F, 24);
 		this.coat = root.getChild("body").getChild("coat");
 	}
 

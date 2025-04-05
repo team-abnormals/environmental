@@ -23,7 +23,7 @@ public class DuckModel<T extends Duck> extends AgeableListModel<T> {
 	public ModelPart leftWing;
 
 	public DuckModel(ModelPart root) {
-		super(true, 8.6F, 1.2F, 1.8F, 2.0F, 24.0F);
+		super(true, 10.5F, 1.0F, 2.0F, 2.0F, 24.0F);
 		this.head = root.getChild("head");
 		this.body = root.getChild("body");
 		this.rightLeg = root.getChild("right_leg");
