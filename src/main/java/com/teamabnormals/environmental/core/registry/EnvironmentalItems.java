@@ -86,12 +86,12 @@ public class EnvironmentalItems {
 	public static final RegistryObject<Item> MAGENTA_HIBISCUS = HELPER.createItem("magenta_hibiscus", () -> new HibiscusBlockItem(EnvironmentalBlocks.MAGENTA_HIBISCUS.get(), EnvironmentalBlocks.MAGENTA_WALL_HIBISCUS.get(), new Item.Properties()));
 	public static final RegistryObject<Item> PURPLE_HIBISCUS = HELPER.createItem("purple_hibiscus", () -> new HibiscusBlockItem(EnvironmentalBlocks.PURPLE_HIBISCUS.get(), EnvironmentalBlocks.PURPLE_WALL_HIBISCUS.get(), new Item.Properties()));
 
-	public static final RegistryObject<ForgeSpawnEggItem> SLABFISH_SPAWN_EGG = HELPER.createSpawnEggItem("slabfish", EnvironmentalEntityTypes.SLABFISH::get, 6263617, 13940616);
-	public static final RegistryObject<ForgeSpawnEggItem> DUCK_SPAWN_EGG = HELPER.createSpawnEggItem("duck", EnvironmentalEntityTypes.DUCK::get, 1138489, 16754947);
-	public static final RegistryObject<ForgeSpawnEggItem> DEER_SPAWN_EGG = HELPER.createSpawnEggItem("deer", EnvironmentalEntityTypes.DEER::get, 10057035, 15190442);
-	public static final RegistryObject<ForgeSpawnEggItem> REINDEER_SPAWN_EGG = HELPER.createSpawnEggItem("reindeer", EnvironmentalEntityTypes.REINDEER::get, 7360069, 15388873);
+	public static final RegistryObject<ForgeSpawnEggItem> SLABFISH_SPAWN_EGG = HELPER.createSpawnEggItem("slabfish", EnvironmentalEntityTypes.SLABFISH::get, 0x5F9341, 0xD4B788);
+	public static final RegistryObject<ForgeSpawnEggItem> DUCK_SPAWN_EGG = HELPER.createSpawnEggItem("duck", EnvironmentalEntityTypes.DUCK::get, 0x2A5B36, 0xF2C937);
+	public static final RegistryObject<ForgeSpawnEggItem> DEER_SPAWN_EGG = HELPER.createSpawnEggItem("deer", EnvironmentalEntityTypes.DEER::get, 0xA17A4A, 0xE6CBA6);
+	public static final RegistryObject<ForgeSpawnEggItem> REINDEER_SPAWN_EGG = HELPER.createSpawnEggItem("reindeer", EnvironmentalEntityTypes.REINDEER::get, 0x704E45, 0xEAD0C9);
 	public static final RegistryObject<ForgeSpawnEggItem> YAK_SPAWN_EGG = HELPER.createSpawnEggItem("yak", EnvironmentalEntityTypes.YAK::get, 0x443934, 0xD9A565);
-	public static final RegistryObject<ForgeSpawnEggItem> KOI_SPAWN_EGG = HELPER.createSpawnEggItem("koi", EnvironmentalEntityTypes.KOI::get, 5392966, 16754947);
+	public static final RegistryObject<ForgeSpawnEggItem> KOI_SPAWN_EGG = HELPER.createSpawnEggItem("koi", EnvironmentalEntityTypes.KOI::get, 0x37363D, 0xFF926B);
 	public static final RegistryObject<ForgeSpawnEggItem> TAPIR_SPAWN_EGG = HELPER.createSpawnEggItem("tapir", EnvironmentalEntityTypes.TAPIR::get, 0x38373D, 0xC6CACE);
 	public static final RegistryObject<ForgeSpawnEggItem> ZEBRA_SPAWN_EGG = HELPER.createSpawnEggItem("zebra", EnvironmentalEntityTypes.ZEBRA::get, 0xD4CBC6, 0x342E2B);
 	public static final RegistryObject<ForgeSpawnEggItem> ZORSE_SPAWN_EGG = HELPER.createSpawnEggItem("zorse", EnvironmentalEntityTypes.ZORSE::get, 0xC09E7D, 0x342E2B);
