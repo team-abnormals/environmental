@@ -51,7 +51,7 @@ public class DucksInARowGoal extends Goal {
 
 			if (duck == null) {
 				return false;
-			} else if (d0 < (double) 1.0F) {
+			} else if (d0 < (double) 0.25F) {
 				return false;
 			} else if (duck.isBaby() && !this.firstIsAdult(duck, 1)) {
 				return false;
@@ -98,7 +98,7 @@ public class DucksInARowGoal extends Goal {
 		if (this.duck.inRow()) {
 			Duck duck = this.duck.getRowHead();
 			double d0 = this.duck.distanceTo(duck);
-			Vec3 vec3 = (new Vec3(duck.getX() - this.duck.getX(), duck.getY() - this.duck.getY(), duck.getZ() - this.duck.getZ())).normalize().scale(Math.max(d0 - 0.5F, 0.0F));
+			Vec3 vec3 = (new Vec3(duck.getX() - this.duck.getX(), duck.getY() - this.duck.getY(), duck.getZ() - this.duck.getZ())).normalize().scale(Math.max(d0 - 0.25F, 0.0F));
 			this.duck.getNavigation().moveTo(this.duck.getX() + vec3.x, this.duck.getY() + vec3.y, this.duck.getZ() + vec3.z, this.speedModifier);
 		}
 	}
