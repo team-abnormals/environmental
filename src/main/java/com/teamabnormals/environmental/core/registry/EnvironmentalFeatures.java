@@ -1,10 +1,10 @@
 package com.teamabnormals.environmental.core.registry;
 
 import com.google.common.collect.ImmutableList;
+import com.teamabnormals.blueprint.common.levelgen.placement.BetterNoiseBasedCountPlacement;
 import com.teamabnormals.environmental.common.block.CartwheelBlock;
 import com.teamabnormals.environmental.common.levelgen.feature.*;
 import com.teamabnormals.environmental.common.levelgen.feature.configurations.DwarfSpruceConfiguration;
-import com.teamabnormals.environmental.common.levelgen.placement.BetterNoiseBasedCountPlacement;
 import com.teamabnormals.environmental.common.levelgen.treedecorators.HangingWillowDecorator;
 import com.teamabnormals.environmental.common.levelgen.treedecorators.HangingWisteriaDecorator;
 import com.teamabnormals.environmental.common.levelgen.treedecorators.PinePodzolDecorator;
@@ -546,9 +546,6 @@ public class EnvironmentalFeatures {
 		public static final ResourceKey<PlacedFeature> CATTAILS = createKey("cattails");
 		public static final ResourceKey<PlacedFeature> CATTAILS_DENSE = createKey("cattails_dense");
 		public static final ResourceKey<PlacedFeature> PATCH_SUGAR_CANE_BLOSSOM = createKey("patch_sugar_cane_blossom");
-
-
-		////
 
 		public static void bootstrap(BootstapContext<PlacedFeature> context) {
 			HolderGetter<NoiseParameters> noise = context.lookup(Registries.NOISE);

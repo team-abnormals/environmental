@@ -2,7 +2,7 @@
   "feature": "environmental:patch_cup_lichen_noise",
   "placement": [
     {
-      "type": "environmental:better_noise_based_count",
+      "type": "blueprint:better_noise_based_count",
       "noise": "environmental:noise_cup_lichen",
       "noise_offset": -0.6000000238418579,
       "noise_to_count_ratio": 18

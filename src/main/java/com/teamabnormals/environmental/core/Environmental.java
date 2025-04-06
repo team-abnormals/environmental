@@ -74,7 +74,6 @@ public class Environmental {
 		EnvironmentalPaintingVariants.PAINTING_VARIANTS.register(bus);
 		EnvironmentalFeatures.FEATURES.register(bus);
 		EnvironmentalFeatures.TREE_DECORATORS.register(bus);
-		EnvironmentalPlacementModifierTypes.PLACEMENT_MODIFIER_TYPES.register(bus);
 		EnvironmentalAttributes.ATTRIBUTES.register(bus);
 		EnvironmentalMobEffects.MOB_EFFECTS.register(bus);
 		EnvironmentalMenuTypes.MENU_TYPES.register(bus);
