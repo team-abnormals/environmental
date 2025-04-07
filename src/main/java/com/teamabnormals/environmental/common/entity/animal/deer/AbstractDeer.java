@@ -190,48 +190,43 @@ public abstract class AbstractDeer extends Animal {
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 		Item item = stack.getItem();
-		boolean flag = player.isCreative() || this.temptGoal == null || this.temptGoal.isRunning();
 
-		if (!this.isBaby() && (this.isTrusting() || flag) && EnvironmentalConfig.COMMON.deerFlowerReproducing.get()) {
-			if (stack.is(EnvironmentalItemTags.DEER_FLOWER_ITEMS)) {
-				this.setFlowerAmount(this.getFlowerAmount() + (stack.is(EnvironmentalItemTags.DEER_SUPER_FLOWER_ITEMS) ? 64 : stack.is(EnvironmentalItemTags.DEER_STRONG_FLOWER_ITEMS) ? 16 : 4));
-				this.floweringTime += 2400;
-				this.particleCloud(ParticleTypes.HAPPY_VILLAGER);
-				this.usePlayerItem(player, hand, stack);
-				return InteractionResult.SUCCESS;
-			} else if (this.getFlowerAmount() > 0 && stack.is(EnvironmentalItemTags.DEER_PLANTABLES) && !stack.is(EnvironmentalItemTags.DEER_CANNOT_PLANT) && item instanceof BlockItem block) {
-				if (!this.flowers.contains(block.getBlock().defaultBlockState())) {
-					this.flowers.add(block.getBlock().defaultBlockState());
-					this.floweringTime = Math.max(600, this.floweringTime);
+		if (this.isTrusting()) {
+			if (!this.isBaby() && EnvironmentalConfig.COMMON.deerFlowerReproducing.get()) {
+				if (stack.is(EnvironmentalItemTags.DEER_FLOWER_ITEMS)) {
+					this.setFlowerAmount(this.getFlowerAmount() + (stack.is(EnvironmentalItemTags.DEER_SUPER_FLOWER_ITEMS) ? 64 : stack.is(EnvironmentalItemTags.DEER_STRONG_FLOWER_ITEMS) ? 16 : 4));
+					this.floweringTime += 2400;
 					this.particleCloud(ParticleTypes.HAPPY_VILLAGER);
 					this.usePlayerItem(player, hand, stack);
 					return InteractionResult.SUCCESS;
-				} else {
-					return InteractionResult.PASS;
-				}
-			}
-		}
-
-		if (!this.isTrusting()) {
-			if (flag && this.isFood(stack)) {
-				if (!this.level().isClientSide) {
-					this.usePlayerItem(player, hand, stack);
-					if (this.random.nextInt(3) == 0 && !ForgeEventFactory.onAnimalTame(this, player)) {
-						this.setTrusting(true);
-						this.spawnTrustingParticles(true);
-						this.level().broadcastEntityEvent(this, (byte) 5);
+				} else if (this.getFlowerAmount() > 0 && stack.is(EnvironmentalItemTags.DEER_PLANTABLES) && !stack.is(EnvironmentalItemTags.DEER_CANNOT_PLANT) && item instanceof BlockItem block) {
+					if (!this.flowers.contains(block.getBlock().defaultBlockState())) {
+						this.flowers.add(block.getBlock().defaultBlockState());
+						this.floweringTime = Math.max(600, this.floweringTime);
+						this.particleCloud(ParticleTypes.HAPPY_VILLAGER);
+						this.usePlayerItem(player, hand, stack);
+						return InteractionResult.SUCCESS;
 					} else {
-						this.spawnTrustingParticles(false);
-						this.level().broadcastEntityEvent(this, (byte) 6);
+						return InteractionResult.PASS;
 					}
 				}
-
-				return InteractionResult.sidedSuccess(this.level().isClientSide);
-			} else {
-				return InteractionResult.PASS;
 			}
-		} else {
 			return super.mobInteract(player, hand);
+		} else if ((player.isCreative() || this.temptGoal == null || this.temptGoal.isRunning()) && this.isFood(stack)) {
+			if (!this.level().isClientSide) {
+				this.usePlayerItem(player, hand, stack);
+				if (this.random.nextInt(3) == 0 && !ForgeEventFactory.onAnimalTame(this, player)) {
+					this.setTrusting(true);
+					this.spawnTrustingParticles(true);
+					this.level().broadcastEntityEvent(this, (byte) 5);
+				} else {
+					this.spawnTrustingParticles(false);
+					this.level().broadcastEntityEvent(this, (byte) 6);
+				}
+			}
+			return InteractionResult.sidedSuccess(this.level().isClientSide);
+		} else {
+			return InteractionResult.PASS;
 		}
 	}
 
