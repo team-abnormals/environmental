@@ -25,6 +25,6 @@
   "description": {
     "translate": "slabfish.type.environmental.drowned"
   },
-  "priority": 2,
+  "priority": 10,
   "texture": "environmental:type/drowned"
 }

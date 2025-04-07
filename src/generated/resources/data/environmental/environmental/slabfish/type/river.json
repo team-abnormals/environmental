@@ -9,7 +9,7 @@
     },
     {
       "type": "environmental:in_biome",
-      "biomes": "#minecraft:is_river"
+      "biomes": "minecraft:river"
     }
   ],
   "description": {

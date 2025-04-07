@@ -10,6 +10,6 @@
   "description": {
     "translate": "slabfish.type.environmental.skeleton"
   },
-  "priority": 2,
+  "priority": 10,
   "texture": "environmental:type/skeleton"
 }

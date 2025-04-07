@@ -21,6 +21,6 @@
   "description": {
     "translate": "slabfish.type.environmental.sky"
   },
-  "priority": 2,
+  "priority": 4,
   "texture": "environmental:type/sky"
 }

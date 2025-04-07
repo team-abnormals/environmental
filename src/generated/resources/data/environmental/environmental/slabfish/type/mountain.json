@@ -24,5 +24,6 @@
   "description": {
     "translate": "slabfish.type.environmental.mountain"
   },
+  "priority": 1,
   "texture": "environmental:type/mountain"
 }

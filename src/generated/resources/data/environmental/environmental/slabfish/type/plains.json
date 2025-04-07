@@ -8,17 +8,8 @@
       ]
     },
     {
-      "type": "environmental:or",
-      "conditions": [
-        {
-          "type": "environmental:in_biome",
-          "biomes": "minecraft:plains"
-        },
-        {
-          "type": "environmental:in_biome",
-          "biomes": "minecraft:sunflower_plains"
-        }
-      ]
+      "type": "environmental:in_biome",
+      "biomes": "#forge:is_plains"
     }
   ],
   "description": {

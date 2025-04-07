@@ -19,6 +19,6 @@
   "description": {
     "translate": "slabfish.type.environmental.wither"
   },
-  "priority": 2,
+  "priority": 10,
   "texture": "environmental:type/wither"
 }

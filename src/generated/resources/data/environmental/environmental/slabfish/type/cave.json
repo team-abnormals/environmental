@@ -10,7 +10,8 @@
     {
       "type": "environmental:height",
       "value": {
-        "max": 48
+        "max": 48,
+        "min": 0
       }
     },
     {
@@ -28,6 +29,6 @@
   "description": {
     "translate": "slabfish.type.environmental.cave"
   },
-  "priority": 2,
+  "priority": 4,
   "texture": "environmental:type/cave"
 }
