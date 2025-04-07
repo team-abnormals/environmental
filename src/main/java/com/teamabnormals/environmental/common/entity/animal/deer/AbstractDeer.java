@@ -212,7 +212,7 @@ public abstract class AbstractDeer extends Animal {
 				}
 			}
 			return super.mobInteract(player, hand);
-		} else if ((player.isCreative() || this.temptGoal == null || this.temptGoal.isRunning()) && this.isFood(stack)) {
+		} else if ((player.isCreative() || this.temptGoal == null || this.temptGoal.isRunning()) && (this.isFood(stack) || stack.is(EnvironmentalItemTags.DEER_FLOWER_ITEMS))) {
 			if (!this.level().isClientSide) {
 				this.usePlayerItem(player, hand, stack);
 				if (this.random.nextInt(3) == 0 && !ForgeEventFactory.onAnimalTame(this, player)) {
