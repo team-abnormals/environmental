@@ -1,8 +1,23 @@
 {
-    "variants": {
-        "facing=north": { "model": "environmental:block/potted_cartwheel" },
-        "facing=east": { "model": "environmental:block/potted_cartwheel", "y": 90 },
-        "facing=south": { "model": "environmental:block/potted_cartwheel", "y": 180 },
-        "facing=west": { "model": "environmental:block/potted_cartwheel", "y": 270 }
+  "variants": {
+    "facing=north": {
+      "model": "environmental:block/potted_cartwheel",
+      "uvlock": true
+    },
+    "facing=east": {
+      "model": "environmental:block/potted_cartwheel",
+      "y": 90,
+      "uvlock": true
+    },
+    "facing=south": {
+      "model": "environmental:block/potted_cartwheel",
+      "y": 180,
+      "uvlock": true
+    },
+    "facing=west": {
+      "model": "environmental:block/potted_cartwheel",
+      "y": 270,
+      "uvlock": true
     }
+  }
 }

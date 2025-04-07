@@ -6,24 +6,27 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FlowerPotBlock;
+import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = Environmental.MOD_ID)
 public class PottedCartwheelBlock extends FlowerPotBlock {
-	public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
 	public PottedCartwheelBlock(Block flower, Properties properties) {
 		super(flower, properties);
@@ -33,11 +36,6 @@ public class PottedCartwheelBlock extends FlowerPotBlock {
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
-	}
-
-	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
-		return SHAPE;
 	}
 
 	@Override
@@ -51,19 +49,22 @@ public class PottedCartwheelBlock extends FlowerPotBlock {
 	}
 
 	@SubscribeEvent
-	public static void interact(PlayerInteractEvent.RightClickBlock event) {
+	public static void interact(RightClickBlock event) {
 		Level level = event.getLevel();
 		ItemStack stack = event.getItemStack();
 		BlockPos pos = event.getPos();
-		if (level.getBlockState(pos).getBlock() == Blocks.FLOWER_POT && stack.getItem() == EnvironmentalBlocks.CARTWHEEL.get().asItem()) {
-			System.out.println(event.getEntity().getDirection().getOpposite());
-			level.setBlock(pos, EnvironmentalBlocks.POTTED_CARTWHEEL.get().defaultBlockState().setValue(FACING, event.getEntity().getDirection().getOpposite()), 0);
-			event.getEntity().awardStat(Stats.POT_FLOWER);
-			if (!event.getEntity().getAbilities().instabuild) {
+		Player player = event.getEntity();
+
+		if (level.getBlockState(pos).is(Blocks.FLOWER_POT) && stack.is(EnvironmentalBlocks.CARTWHEEL.get().asItem())) {
+			level.setBlock(pos, EnvironmentalBlocks.POTTED_CARTWHEEL.get().defaultBlockState().setValue(FACING, player.getDirection().getOpposite()), 3);
+			level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
+			player.awardStat(Stats.POT_FLOWER);
+			if (!player.getAbilities().instabuild) {
 				stack.shrink(1);
 			}
+
 			event.setUseBlock(Event.Result.DENY);
-			event.setCancellationResult(InteractionResult.SUCCESS);
+			event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide()));
 			event.setCanceled(true);
 		}
 	}
