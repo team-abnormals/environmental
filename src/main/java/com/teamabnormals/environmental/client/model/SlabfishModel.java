@@ -64,22 +64,23 @@ public class SlabfishModel<E extends Slabfish> extends AgeableListModel<E> {
 	}
 
 	@Override
-	public void setupAnim(E entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.fin.visible = !entityIn.hasBackpack();
+	public void setupAnim(E slabfish, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		this.fin.visible = !slabfish.hasBackpack();
 		this.body.zRot = 0.1F * Mth.sin(limbSwing * 0.5F) * 1.25F * limbSwingAmount;
 
-		if (!entityIn.isInWater()) {
-			if (entityIn.isPartying()) {
-				float f = Mth.cos((float) entityIn.tickCount + partialTicks);
-				float f1 = Mth.sin((float) entityIn.tickCount + partialTicks);
-				this.body.z = f;
-				this.body.y = 19.75F - f1;
-			}
+		if (slabfish.isPartying() && !slabfish.isInWater()) {
+			this.body.z = Mth.cos((float) slabfish.tickCount + partialTicks);
+			this.body.y = 19.75F - Mth.sin((float) slabfish.tickCount + partialTicks);
+		} else {
+			this.body.z = 0.0F;
+			this.body.y = 19.0F;
+		}
 
+		if (!slabfish.isInWater()) {
 			this.rightArm.zRot = ageInTicks;
 			this.leftArm.zRot = -ageInTicks;
-			this.rightLeg.xRot = (entityIn.isInSittingPose() || entityIn.getVehicle() != null) ? -1.57F : Mth.cos(limbSwing * 0.6662F) * 1.5F * limbSwingAmount;
-			this.leftLeg.xRot = (entityIn.isInSittingPose() || entityIn.getVehicle() != null) ? -1.57F : Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.5F * limbSwingAmount;
+			this.rightLeg.xRot = (slabfish.isInSittingPose() || slabfish.getVehicle() != null) ? -1.57F : Mth.cos(limbSwing * 0.6662F) * 1.5F * limbSwingAmount;
+			this.leftLeg.xRot = (slabfish.isInSittingPose() || slabfish.getVehicle() != null) ? -1.57F : Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.5F * limbSwingAmount;
 		} else {
 			this.rightLeg.xRot = Mth.cos(limbSwing * 0.6662F) * 1.7F * limbSwingAmount;
 			this.leftLeg.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.7F * limbSwingAmount;
