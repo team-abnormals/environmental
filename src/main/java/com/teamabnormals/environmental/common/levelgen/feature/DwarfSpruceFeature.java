@@ -9,21 +9,15 @@ import com.teamabnormals.environmental.core.registry.EnvironmentalNoiseParameter
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
-import net.minecraft.world.level.levelgen.synth.NormalNoise.NoiseParameters;
 
 public class DwarfSpruceFeature extends Feature<DwarfSpruceConfiguration> {
-	private volatile boolean initialized;
-	private NormalNoise densityNoise;
-	private NormalNoise heightNoise;
 
 	public DwarfSpruceFeature(Codec<DwarfSpruceConfiguration> config) {
 		super(config);
@@ -31,24 +25,17 @@ public class DwarfSpruceFeature extends Feature<DwarfSpruceConfiguration> {
 
 	@Override
 	public boolean place(FeaturePlaceContext<DwarfSpruceConfiguration> context) {
-		if (!this.initialized) {
-			synchronized (this) {
-				if (!this.initialized) {
-					Registry<NoiseParameters> noise = context.level().registryAccess().registryOrThrow(Registries.NOISE);
-					this.densityNoise = NormalNoise.create(WorldgenRandom.Algorithm.LEGACY.newInstance(context.level().getSeed()).forkPositional().fromHashOf(EnvironmentalNoiseParameters.DWARF_SPRUCE_DENSITY.location()), noise.getOrThrow(EnvironmentalNoiseParameters.DWARF_SPRUCE_DENSITY));
-					this.heightNoise = NormalNoise.create(WorldgenRandom.Algorithm.LEGACY.newInstance(context.level().getSeed()).forkPositional().fromHashOf(EnvironmentalNoiseParameters.DWARF_SPRUCE_HEIGHT_NOISE.location()), noise.getOrThrow(EnvironmentalNoiseParameters.DWARF_SPRUCE_HEIGHT_NOISE));
-					this.initialized = true;
-				}
-			}
-		}
-
 		WorldGenLevel level = context.level();
 		RandomSource random = context.random();
 		BlockPos origin = context.origin();
 		DwarfSpruceConfiguration config = context.config();
 
-		int count = Math.max(0, (int) Math.ceil((this.densityNoise.getValue(origin.getX(), 0.0F, origin.getZ()) + config.noiseToCountRatio()) * config.density()));
-		float patchheight = (float) this.heightNoise.getValue(origin.getX(), 0.0F, origin.getZ()) * 1.25F + 1.75F;
+		ServerLevel serverlevel = level.getLevel();
+		NormalNoise densitynoise = EnvironmentalNoiseParameters.DWARF_SPRUCE_DENSITY_RECEIVER.get(serverlevel);
+		NormalNoise heightnoise = EnvironmentalNoiseParameters.DWARF_SPRUCE_HEIGHT_RECEIVER.get(serverlevel);
+
+		int count = Math.max(0, (int) Math.ceil((densitynoise.getValue(origin.getX(), 0.0F, origin.getZ()) + config.noiseToCountRatio()) * config.density()));
+		float patchheight = (float) heightnoise.getValue(origin.getX(), 0.0F, origin.getZ()) * 1.25F + 1.75F;
 
 		MutableBlockPos mutable = new MutableBlockPos();
 		boolean placed = false;
