@@ -80,6 +80,7 @@ public class Environmental {
 		EnvironmentalParticleTypes.PARTICLE_TYPES.register(bus);
 		EnvironmentalSlabfishConditions.SLABFISH_CONDITIONS.register(bus);
 		EnvironmentalDataSerializers.DATA_SERIALIZERS.register(bus);
+		EnvironmentalPlacementModifierTypes.PLACEMENT_MODIFIER_TYPES.register(bus);
 		EnvironmentalBiomeModifierTypes.BIOME_MODIFIER_SERIALIZERS.register(bus);
 		EnvironmentalBannerPatterns.BANNER_PATTERNS.register(bus);
 

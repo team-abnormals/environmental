@@ -1,20 +1,13 @@
 {
-  "type": "minecraft:random_selector",
+  "type": "environmental:best_noises_selector",
   "config": {
-    "default": "environmental:white_wisteria_bees_002",
+    "blending": 0.6,
     "features": [
-      {
-        "chance": 0.25,
-        "feature": "environmental:pink_wisteria_bees_002"
-      },
-      {
-        "chance": 0.25,
-        "feature": "environmental:blue_wisteria_bees_002"
-      },
-      {
-        "chance": 0.25,
-        "feature": "environmental:purple_wisteria_bees_002"
-      }
-    ]
+      "environmental:pink_wisteria_bees_002",
+      "environmental:blue_wisteria_bees_002",
+      "environmental:purple_wisteria_bees_002",
+      "environmental:white_wisteria_bees_002"
+    ],
+    "noise": "environmental:wisteria_color"
   }
 }

@@ -2,20 +2,10 @@
   "feature": "environmental:trees_wisteria",
   "placement": [
     {
-      "type": "minecraft:count",
-      "count": {
-        "type": "minecraft:weighted_list",
-        "distribution": [
-          {
-            "data": 0,
-            "weight": 3
-          },
-          {
-            "data": 2,
-            "weight": 1
-          }
-        ]
-      }
+      "type": "environmental:noise_density",
+      "density": 0.85,
+      "noise": "environmental:wisteria_density",
+      "noise_offset": 1.0
     },
     {
       "type": "minecraft:in_square"

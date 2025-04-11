@@ -5,6 +5,9 @@ import com.teamabnormals.blueprint.common.levelgen.placement.BetterNoiseBasedCou
 import com.teamabnormals.environmental.common.block.CartwheelBlock;
 import com.teamabnormals.environmental.common.levelgen.feature.*;
 import com.teamabnormals.environmental.common.levelgen.feature.configurations.DwarfSpruceConfiguration;
+import com.teamabnormals.environmental.common.levelgen.feature.configurations.BestNoisesSelectorFeatureConfiguration;
+import com.teamabnormals.environmental.common.levelgen.feature.configurations.NoiseSelectorFeatureConfiguration;
+import com.teamabnormals.environmental.common.levelgen.feature.placement.NoiseDensityPlacement;
 import com.teamabnormals.environmental.common.levelgen.treedecorators.HangingWillowDecorator;
 import com.teamabnormals.environmental.common.levelgen.treedecorators.HangingWisteriaDecorator;
 import com.teamabnormals.environmental.common.levelgen.treedecorators.PinePodzolDecorator;
@@ -50,7 +53,6 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorTy
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraft.world.level.levelgen.placement.*;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraft.world.level.levelgen.synth.NormalNoise.NoiseParameters;
 import net.minecraft.world.level.material.Fluids;
@@ -95,6 +97,9 @@ public class EnvironmentalFeatures {
 	public static final RegistryObject<Feature<NoneFeatureConfiguration>> WILLOW_TREE_PLACER = FEATURES.register("willow_tree_placer", () -> new WillowTreePlacerFeature(NoneFeatureConfiguration.CODEC));
 
 	public static final RegistryObject<Feature<NoneFeatureConfiguration>> ZEBRA_DAZZLE = FEATURES.register("zebra_dazzle", () -> new ZebraDazzleFeature(NoneFeatureConfiguration.CODEC));
+
+	public static final RegistryObject<Feature<NoiseSelectorFeatureConfiguration>> NOISE_SELECTOR = FEATURES.register("noise_selector", () -> new NoiseSelectorFeature(NoiseSelectorFeatureConfiguration.CODEC));
+	public static final RegistryObject<Feature<BestNoisesSelectorFeatureConfiguration>> MULTI_NOISE_SELECTOR = FEATURES.register("best_noises_selector", () -> new BestNoisesSelectorFeature(BestNoisesSelectorFeatureConfiguration.CODEC));
 
 	public static final RegistryObject<TreeDecoratorType<?>> HANGING_WILLOW_LEAVES = TREE_DECORATORS.register("hanging_willow_leaves", () -> new TreeDecoratorType<>(HangingWillowDecorator.CODEC));
 	public static final RegistryObject<TreeDecoratorType<?>> HANGING_WISTERIA_LEAVES = TREE_DECORATORS.register("hanging_wisteria_leaves", () -> new TreeDecoratorType<>(HangingWisteriaDecorator.CODEC));
@@ -318,7 +323,7 @@ public class EnvironmentalFeatures {
 		public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
 			HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 			HolderGetter<PlacedFeature> placedFeatures = context.lookup(Registries.PLACED_FEATURE);
-			HolderGetter<StructureProcessorList> processors = context.lookup(Registries.PROCESSOR_LIST);
+			HolderGetter<NoiseParameters> noises = context.lookup(Registries.NOISE);
 
 			register(context, WILLOW, Feature.TREE, Configs.WILLOW);
 			register(context, WEEPING_WILLOW, EnvironmentalFeatures.WEEPING_WILLOW_TREE.get(), Configs.WEEPING_WILLOW);
@@ -357,7 +362,7 @@ public class EnvironmentalFeatures {
 			register(context, PINK_WISTERIA, EnvironmentalFeatures.WISTERIA_TREE.get(), Configs.PINK_WISTERIA);
 			register(context, PINK_WISTERIA_BEES_002, EnvironmentalFeatures.WISTERIA_TREE.get(), Configs.PINK_WISTERIA_BEES_002);
 			register(context, PINK_WISTERIA_BEES_005, EnvironmentalFeatures.WISTERIA_TREE.get(), Configs.PINK_WISTERIA_BEES_005);
-			register(context, TREES_WISTERIA, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placedFeatures.getOrThrow(EnvironmentalPlacedFeatures.PINK_WISTERIA_BEES_002), 0.25F), new WeightedPlacedFeature(placedFeatures.getOrThrow(EnvironmentalPlacedFeatures.BLUE_WISTERIA_BEES_002), 0.25F), new WeightedPlacedFeature(placedFeatures.getOrThrow(EnvironmentalPlacedFeatures.PURPLE_WISTERIA_BEES_002), 0.25F)), placedFeatures.getOrThrow(EnvironmentalPlacedFeatures.WHITE_WISTERIA_BEES_002)));
+			register(context, TREES_WISTERIA, EnvironmentalFeatures.MULTI_NOISE_SELECTOR.get(), new BestNoisesSelectorFeatureConfiguration(noises.getOrThrow(EnvironmentalNoiseParameters.WISTERIA_COLOR), 0.6F, List.of(placedFeatures.getOrThrow(EnvironmentalPlacedFeatures.PINK_WISTERIA_BEES_002), placedFeatures.getOrThrow(EnvironmentalPlacedFeatures.BLUE_WISTERIA_BEES_002), placedFeatures.getOrThrow(EnvironmentalPlacedFeatures.PURPLE_WISTERIA_BEES_002), placedFeatures.getOrThrow(EnvironmentalPlacedFeatures.WHITE_WISTERIA_BEES_002))));
 
 			register(context, PINE, EnvironmentalFeatures.PINE_TREE.get(), Configs.PINE);
 			register(context, PINE_BEES_0002, EnvironmentalFeatures.PINE_TREE.get(), Configs.PINE_BEES_0002);
@@ -548,7 +553,7 @@ public class EnvironmentalFeatures {
 		public static final ResourceKey<PlacedFeature> PATCH_SUGAR_CANE_BLOSSOM = createKey("patch_sugar_cane_blossom");
 
 		public static void bootstrap(BootstapContext<PlacedFeature> context) {
-			HolderGetter<NoiseParameters> noise = context.lookup(Registries.NOISE);
+			HolderGetter<NoiseParameters> noises = context.lookup(Registries.NOISE);
 
 			register(context, ORE_MUD, EnvironmentalConfiguredFeatures.ORE_MUD, RarityFilter.onAverageOnceEvery(3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_TOP_SOLID, BlockPredicateFilter.forPredicate(BlockPredicate.matchesFluids(Fluids.WATER)), BiomeFilter.biome());
 			register(context, SEAGRASS_MARSH, EnvironmentalConfiguredFeatures.SEAGRASS_MID, InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_TOP_SOLID, CountPlacement.of(128), BiomeFilter.biome());
@@ -580,7 +585,7 @@ public class EnvironmentalFeatures {
 			register(context, PINK_WISTERIA_BEES_002, EnvironmentalConfiguredFeatures.PINK_WISTERIA_BEES_002, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
 			register(context, PURPLE_WISTERIA_BEES_002, EnvironmentalConfiguredFeatures.PURPLE_WISTERIA_BEES_002, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
 			register(context, BLUE_WISTERIA_BEES_002, EnvironmentalConfiguredFeatures.BLUE_WISTERIA_BEES_002, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
-			register(context, TREES_WISTERIA, EnvironmentalConfiguredFeatures.TREES_WISTERIA, VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.25F, 2)));
+			register(context, TREES_WISTERIA, EnvironmentalConfiguredFeatures.TREES_WISTERIA, VegetationPlacements.treePlacement(new NoiseDensityPlacement(noises.getOrThrow(EnvironmentalNoiseParameters.WISTERIA_DENSITY), 0.85D, 1.0D)));
 
 			register(context, TREES_WILLOW, EnvironmentalConfiguredFeatures.TREES_WILLOW, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
 			register(context, SWAMP_OAK, EnvironmentalConfiguredFeatures.SWAMP_OAK, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
@@ -629,7 +634,7 @@ public class EnvironmentalFeatures {
 			register(context, PATCH_CUP_LICHEN, EnvironmentalConfiguredFeatures.PATCH_CUP_LICHEN, RarityFilter.onAverageOnceEvery(32), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 			register(context, PATCH_CUP_LICHEN_SMALL, EnvironmentalConfiguredFeatures.PATCH_CUP_LICHEN_SMALL, RarityFilter.onAverageOnceEvery(16), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 			register(context, PATCH_CUP_LICHEN_STONE, EnvironmentalConfiguredFeatures.PATCH_CUP_LICHEN_STONE, RarityFilter.onAverageOnceEvery(3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
-			register(context, PATCH_CUP_LICHEN_NOISE, EnvironmentalConfiguredFeatures.PATCH_CUP_LICHEN_NOISE, new BetterNoiseBasedCountPlacement(noise.getOrThrow(EnvironmentalNoiseParameters.NOISE_CUP_LICHEN), 18, -0.6F), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
+			register(context, PATCH_CUP_LICHEN_NOISE, EnvironmentalConfiguredFeatures.PATCH_CUP_LICHEN_NOISE, new BetterNoiseBasedCountPlacement(noises.getOrThrow(EnvironmentalNoiseParameters.NOISE_CUP_LICHEN), 18, -0.6F), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 
 			register(context, PINE_SLOPES_ROCK, EnvironmentalConfiguredFeatures.STONE_ROCK, CountPlacement.of(2), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
 			register(context, PINE_SLOPES_BOULDER, EnvironmentalConfiguredFeatures.PINE_SLOPES_BOULDER, CountPlacement.of(1), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
