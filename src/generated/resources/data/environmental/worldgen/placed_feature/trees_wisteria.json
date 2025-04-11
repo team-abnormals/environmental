@@ -3,9 +3,9 @@
   "placement": [
     {
       "type": "environmental:noise_density",
-      "density": 0.85,
+      "density": 1.25,
       "noise": "environmental:wisteria_density",
-      "noise_offset": 1.0
+      "noise_offset": 0.5
     },
     {
       "type": "minecraft:in_square"

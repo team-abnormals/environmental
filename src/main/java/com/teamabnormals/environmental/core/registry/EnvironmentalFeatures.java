@@ -585,7 +585,7 @@ public class EnvironmentalFeatures {
 			register(context, PINK_WISTERIA_BEES_002, EnvironmentalConfiguredFeatures.PINK_WISTERIA_BEES_002, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
 			register(context, PURPLE_WISTERIA_BEES_002, EnvironmentalConfiguredFeatures.PURPLE_WISTERIA_BEES_002, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
 			register(context, BLUE_WISTERIA_BEES_002, EnvironmentalConfiguredFeatures.BLUE_WISTERIA_BEES_002, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
-			register(context, TREES_WISTERIA, EnvironmentalConfiguredFeatures.TREES_WISTERIA, VegetationPlacements.treePlacement(new NoiseDensityPlacement(noises.getOrThrow(EnvironmentalNoiseParameters.WISTERIA_DENSITY), 0.85D, 1.0D)));
+			register(context, TREES_WISTERIA, EnvironmentalConfiguredFeatures.TREES_WISTERIA, VegetationPlacements.treePlacement(new NoiseDensityPlacement(noises.getOrThrow(EnvironmentalNoiseParameters.WISTERIA_DENSITY), 1.25D, 0.5D)));
 
 			register(context, TREES_WILLOW, EnvironmentalConfiguredFeatures.TREES_WILLOW, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
 			register(context, SWAMP_OAK, EnvironmentalConfiguredFeatures.SWAMP_OAK, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
