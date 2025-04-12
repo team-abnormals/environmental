@@ -1,10 +1,12 @@
 package com.teamabnormals.environmental.core.registry;
 
+import com.teamabnormals.blueprint.common.world.storage.receiver.LevelNoiseReceiver;
 import com.teamabnormals.environmental.core.Environmental;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.levelgen.WorldgenRandom.Algorithm;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 import net.minecraft.world.level.levelgen.synth.NormalNoise.NoiseParameters;
 
@@ -15,6 +17,9 @@ public class EnvironmentalNoiseParameters {
 	public static final ResourceKey<NoiseParameters> DWARF_SPRUCE_HEIGHT = createKey("dwarf_spruce_height");
 	public static final ResourceKey<NoiseParameters> WISTERIA_DENSITY = createKey("wisteria_density");
 	public static final ResourceKey<NoiseParameters> WISTERIA_COLOR = createKey("wisteria_color");
+
+	public static final LevelNoiseReceiver DWARF_SPRUCE_DENSITY_RECEIVER = new LevelNoiseReceiver(Algorithm.LEGACY, DWARF_SPRUCE_DENSITY);
+	public static final LevelNoiseReceiver DWARF_SPRUCE_HEIGHT_RECEIVER = new LevelNoiseReceiver(Algorithm.LEGACY, DWARF_SPRUCE_HEIGHT);
 
 	public static void bootstrap(BootstapContext<NoiseParameters> context) {
 		context.register(PINE_BARRENS_STONE, new NormalNoise.NoiseParameters(-4, 1.0D));
