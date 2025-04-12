@@ -1,4 +1,8 @@
 {
   "type": "environmental:cup_lichen_patch",
-  "config": {}
+  "config": {
+    "tries": 64,
+    "xz_spread": 3,
+    "y_spread": 2
+  }
 }
