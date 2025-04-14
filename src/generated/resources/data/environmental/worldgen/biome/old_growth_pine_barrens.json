@@ -74,9 +74,6 @@
     ],
     [
       "minecraft:glow_lichen",
-      "environmental:patch_cup_lichen",
-      "environmental:patch_cup_lichen_small",
-      "environmental:patch_cup_lichen_noise",
       "minecraft:patch_large_fern",
       "minecraft:flower_default",
       "environmental:fallen_tall_pine_tree",
@@ -88,7 +85,10 @@
       "environmental:dwarf_spruce_dense",
       "environmental:patch_grass_old_growth_pine_barrens",
       "minecraft:patch_sugar_cane",
-      "minecraft:patch_pumpkin"
+      "minecraft:patch_pumpkin",
+      "environmental:patch_cup_lichen",
+      "environmental:patch_cup_lichen_small",
+      "environmental:patch_cup_lichen_noise"
     ],
     [
       "minecraft:freeze_top_layer"
