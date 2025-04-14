@@ -516,6 +516,7 @@ public class EnvironmentalFeatures {
 		public static final ResourceKey<PlacedFeature> DWARF_SPRUCE_TAIGA_DENSE = createKey("dwarf_spruce_taiga_dense");
 
 		public static final ResourceKey<PlacedFeature> PATCH_CUP_LICHEN = createKey("patch_cup_lichen");
+		public static final ResourceKey<PlacedFeature> PATCH_CUP_LICHEN_TAIGA = createKey("patch_cup_lichen_taiga");
 		public static final ResourceKey<PlacedFeature> PATCH_CUP_LICHEN_SMALL = createKey("patch_cup_lichen_small");
 		public static final ResourceKey<PlacedFeature> PATCH_CUP_LICHEN_NOISE = createKey("patch_cup_lichen_noise");
 
@@ -626,6 +627,7 @@ public class EnvironmentalFeatures {
 			register(context, DWARF_SPRUCE_TAIGA_DENSE, EnvironmentalConfiguredFeatures.DWARF_SPRUCE_DENSE, PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 
 			register(context, PATCH_CUP_LICHEN, EnvironmentalConfiguredFeatures.PATCH_CUP_LICHEN, RarityFilter.onAverageOnceEvery(22), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
+			register(context, PATCH_CUP_LICHEN_TAIGA, EnvironmentalConfiguredFeatures.PATCH_CUP_LICHEN, RarityFilter.onAverageOnceEvery(22), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 			register(context, PATCH_CUP_LICHEN_SMALL, EnvironmentalConfiguredFeatures.PATCH_CUP_LICHEN_SMALL, RarityFilter.onAverageOnceEvery(8), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 			register(context, PATCH_CUP_LICHEN_NOISE, EnvironmentalConfiguredFeatures.PATCH_CUP_LICHEN, new BetterNoiseBasedCountPlacement(noises.getOrThrow(EnvironmentalNoiseParameters.CUP_LICHEN_NOISE), 30, -0.7D), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 
