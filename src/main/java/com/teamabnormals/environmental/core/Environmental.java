@@ -23,6 +23,7 @@ import com.teamabnormals.environmental.core.other.*;
 import com.teamabnormals.environmental.core.registry.*;
 import com.teamabnormals.gallery.core.data.client.GalleryAssetsRemolderProvider;
 import com.teamabnormals.gallery.core.data.client.GalleryItemModelProvider;
+import net.minecraft.SharedConstants;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
@@ -83,6 +84,8 @@ public class Environmental {
 		EnvironmentalPlacementModifierTypes.PLACEMENT_MODIFIER_TYPES.register(bus);
 		EnvironmentalBiomeModifierTypes.BIOME_MODIFIER_SERIALIZERS.register(bus);
 		EnvironmentalBannerPatterns.BANNER_PATTERNS.register(bus);
+		EnvironmentalMemoryModuleTypes.MEMORY_MODULE_TYPES.register(bus);
+		EnvironmentalSensorTypes.SENSOR_TYPES.register(bus);
 
 		MinecraftForge.EVENT_BUS.register(this);
 

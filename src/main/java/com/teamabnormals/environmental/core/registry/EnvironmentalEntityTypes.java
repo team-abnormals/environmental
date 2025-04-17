@@ -4,7 +4,7 @@ import com.teamabnormals.blueprint.core.util.registry.EntitySubRegistryHelper;
 import com.teamabnormals.environmental.common.entity.animal.Duck;
 import com.teamabnormals.environmental.common.entity.animal.PineconeGolem;
 import com.teamabnormals.environmental.common.entity.animal.Tapir;
-import com.teamabnormals.environmental.common.entity.animal.Yak;
+import com.teamabnormals.environmental.common.entity.animal.yak.Yak;
 import com.teamabnormals.environmental.common.entity.animal.deer.AbstractDeer;
 import com.teamabnormals.environmental.common.entity.animal.deer.Deer;
 import com.teamabnormals.environmental.common.entity.animal.deer.Reindeer;

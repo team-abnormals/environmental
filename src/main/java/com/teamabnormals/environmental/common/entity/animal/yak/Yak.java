@@ -1,12 +1,15 @@
-package com.teamabnormals.environmental.common.entity.animal;
+package com.teamabnormals.environmental.common.entity.animal.yak;
 
+import com.mojang.serialization.Dynamic;
 import com.teamabnormals.environmental.common.item.YakPantsItem;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalItemTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
+import com.teamabnormals.environmental.core.registry.EnvironmentalMemoryModuleTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.game.DebugPackets;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -17,18 +20,16 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.TimeUtil;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.*;
-import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -37,6 +38,7 @@ import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.common.IForgeShearable;
@@ -56,7 +58,6 @@ public class Yak extends Animal implements IForgeShearable, Shearable, NeutralMo
 	private static final UUID SPEED_UUID = UUID.fromString("49455A49-7EC5-45BA-B886-3B90B23A1718");
 	private static final AttributeModifier ATTACKING_SPEED_BOOST = new AttributeModifier(SPEED_UUID, "Attacking speed boost", 0.05D, AttributeModifier.Operation.ADDITION);
 
-	private EatBlockGoal eatGrassGoal;
 	private UUID lastHurtBy;
 	private int grassEatTimer;
 
@@ -65,22 +66,30 @@ public class Yak extends Animal implements IForgeShearable, Shearable, NeutralMo
 	}
 
 	@Override
-	protected void registerGoals() {
-		this.eatGrassGoal = new EatBlockGoal(this);
-		this.goalSelector.addGoal(0, new FloatGoal(this));
-//		this.goalSelector.addGoal(1, new YakChargeGoal(this));
-		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0D, false));
-		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
-		this.goalSelector.addGoal(3, new TemptGoal(this, 1.1D, Ingredient.of(EnvironmentalItemTags.YAK_FOOD), false));
-		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
-		this.goalSelector.addGoal(6, this.eatGrassGoal);
-		this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
-		this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
-		this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
+	protected Brain.Provider<Yak> brainProvider() {
+		return Yaktelligence.createProvider();
+	}
 
-		this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, false, this::isAngryAt));
-		this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers());
-		this.targetSelector.addGoal(2, new ResetUniversalAngerTargetGoal<>(this, true));
+	@Override
+	protected Brain<?> makeBrain(Dynamic<?> dynamic) {
+		return Yaktelligence.createBrain(this.brainProvider().makeBrain(dynamic));
+	}
+
+	@Override
+	public Brain<Yak> getBrain() {
+		return (Brain<Yak>) super.getBrain();
+	}
+
+	@Override
+	protected void sendDebugPackets() {
+		super.sendDebugPackets();
+		DebugPackets.sendEntityBrain(this);
+	}
+
+	@Override
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, SpawnGroupData spawnData, CompoundTag tag) {
+		Yaktelligence.createMemories(this, level.getRandom());
+		return super.finalizeSpawn(level, difficulty, spawnType, spawnData, tag);
 	}
 
 	@Override
@@ -106,7 +115,10 @@ public class Yak extends Animal implements IForgeShearable, Shearable, NeutralMo
 
 	@Override
 	protected void customServerAiStep() {
-		this.grassEatTimer = this.eatGrassGoal.getEatAnimationTick();
+		this.level().getProfiler().push("yakBrain");
+		Yaktelligence.tick(this);
+		this.level().getProfiler().pop();
+
 		AttributeInstance modifiableattributeinstance = this.getAttribute(Attributes.MOVEMENT_SPEED);
 		if (this.isAngry()) {
 			if (!this.isBaby() && !modifiableattributeinstance.hasModifier(ATTACKING_SPEED_BOOST)) {
@@ -134,10 +146,10 @@ public class Yak extends Animal implements IForgeShearable, Shearable, NeutralMo
 
 	@Override
 	public void handleEntityEvent(byte id) {
-		if (id == 10) {
-			this.grassEatTimer = 40;
-		} else {
-			super.handleEntityEvent(id);
+		switch (id) {
+			case 10 -> this.grassEatTimer = 40;
+			case 11 -> this.grassEatTimer = 0;
+			default -> super.handleEntityEvent(id);
 		}
 	}
 

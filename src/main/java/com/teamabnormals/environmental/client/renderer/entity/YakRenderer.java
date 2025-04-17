@@ -1,7 +1,7 @@
 package com.teamabnormals.environmental.client.renderer.entity;
 
 import com.teamabnormals.environmental.client.model.YakModel;
-import com.teamabnormals.environmental.common.entity.animal.Yak;
+import com.teamabnormals.environmental.common.entity.animal.yak.Yak;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.other.EnvironmentalModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -19,7 +19,7 @@ public class YakRenderer extends MobRenderer<Yak, YakModel<Yak>> {
 
 	@Override
 	public ResourceLocation getTextureLocation(Yak entity) {
-		if (entity.isSheared())
+		if (entity.isSheared() || entity.isBaby())
 			return new ResourceLocation(Environmental.MOD_ID, "textures/entity/yak/yak_sheared.png");
 		return new ResourceLocation(Environmental.MOD_ID, "textures/entity/yak/yak.png");
 	}

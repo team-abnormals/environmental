@@ -1,6 +1,6 @@
 package com.teamabnormals.environmental.client.model;
 
-import com.teamabnormals.environmental.common.entity.animal.Yak;
+import com.teamabnormals.environmental.common.entity.animal.yak.Yak;
 import net.minecraft.client.model.QuadrupedModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -51,7 +51,7 @@ public class YakModel<E extends Yak> extends QuadrupedModel<E> {
 	@Override
 	public void prepareMobModel(E yak, float limbSwing, float limbSwingAmount, float partialTicks) {
 		super.prepareMobModel(yak, limbSwing, limbSwingAmount, partialTicks);
-		this.coat.visible = !yak.isSheared();
+		this.coat.visible = !yak.isSheared() && !yak.isBaby();
 
 	}
 
