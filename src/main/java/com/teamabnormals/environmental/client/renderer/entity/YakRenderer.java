@@ -19,7 +19,7 @@ public class YakRenderer extends MobRenderer<Yak, YakModel<Yak>> {
 
 	@Override
 	public ResourceLocation getTextureLocation(Yak entity) {
-		if (entity.isSheared() || entity.isBaby())
+		if (entity.isSheared())
 			return new ResourceLocation(Environmental.MOD_ID, "textures/entity/yak/yak_sheared.png");
 		return new ResourceLocation(Environmental.MOD_ID, "textures/entity/yak/yak.png");
 	}

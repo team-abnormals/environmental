@@ -1,6 +1,7 @@
-package com.teamabnormals.environmental.common.entity.animal.yak;
+package com.teamabnormals.environmental.common.entity.ai.brain.yak;
 
 import com.google.common.collect.ImmutableMap;
+import com.teamabnormals.environmental.common.entity.animal.yak.Yak;
 import com.teamabnormals.environmental.core.registry.EnvironmentalMemoryModuleTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -23,7 +24,7 @@ public class YakGrazeBehavior extends Behavior<Yak> {
     private static final int GRAZING_TIME = 40;
     private static final Predicate<BlockState> IS_TALL_GRASS = BlockStatePredicate.forBlock(Blocks.GRASS);
 
-    YakGrazeBehavior() {
+    public YakGrazeBehavior() {
         super(ImmutableMap.of(
                 EnvironmentalMemoryModuleTypes.GRAZING_TICKS.get(), MemoryStatus.VALUE_ABSENT,
                 MemoryModuleType.PATH, MemoryStatus.VALUE_ABSENT,
@@ -32,7 +33,7 @@ public class YakGrazeBehavior extends Behavior<Yak> {
         ), GRAZING_TIME);
     }
 
-    static BehaviorControl<Yak> createGrazeController() {
+    public static BehaviorControl<Yak> createGrazeController() {
         return BehaviorBuilder.create(
                 (instance) -> instance.group(
                         instance.present(EnvironmentalMemoryModuleTypes.GRAZING_TICKS.get())
@@ -56,7 +57,7 @@ public class YakGrazeBehavior extends Behavior<Yak> {
     @Override
     protected boolean checkExtraStartConditions(ServerLevel level, Yak yak) {
         // TODO: use brain cooldown for this?
-        if (yak.getRandom().nextInt(yak.isBaby() ? 5 : 10) != 0)
+        if (yak.getRandom().nextInt(yak.isBaby() ? 50 : 1000) != 0)
             return false;
 
         Brain<Yak> brain = yak.getBrain();
@@ -80,7 +81,7 @@ public class YakGrazeBehavior extends Behavior<Yak> {
 
     @Override
     protected void stop(ServerLevel level, Yak yak, long gameTime) {
-        yak.getBrain().setMemory(EnvironmentalMemoryModuleTypes.GRAZING_TICKS.get(), 0);
+        yak.getBrain().eraseMemory(EnvironmentalMemoryModuleTypes.GRAZING_TICKS.get());
     }
 
     protected void tick(ServerLevel level, Yak yak, long gameTime) {

@@ -1,4 +1,4 @@
-package com.teamabnormals.environmental.common.entity.animal.yak;
+package com.teamabnormals.environmental.common.entity.ai.brain.yak;
 
 import com.google.common.collect.ImmutableMap;
 import com.teamabnormals.environmental.common.entity.animal.yak.Yak;

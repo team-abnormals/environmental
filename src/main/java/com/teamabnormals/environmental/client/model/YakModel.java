@@ -51,7 +51,7 @@ public class YakModel<E extends Yak> extends QuadrupedModel<E> {
 	@Override
 	public void prepareMobModel(E yak, float limbSwing, float limbSwingAmount, float partialTicks) {
 		super.prepareMobModel(yak, limbSwing, limbSwingAmount, partialTicks);
-		this.coat.visible = !yak.isSheared() && !yak.isBaby();
+		this.coat.visible = !yak.isSheared();
 
 	}
 
