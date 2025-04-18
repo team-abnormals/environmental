@@ -5,7 +5,6 @@ import com.teamabnormals.environmental.common.item.YakPantsItem;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalItemTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
-import com.teamabnormals.environmental.core.registry.EnvironmentalMemoryModuleTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -59,7 +58,7 @@ public class Yak extends Animal implements IForgeShearable, Shearable, NeutralMo
 	private static final AttributeModifier ATTACKING_SPEED_BOOST = new AttributeModifier(SPEED_UUID, "Attacking speed boost", 0.05D, AttributeModifier.Operation.ADDITION);
 
 	private UUID lastHurtBy;
-	private int grassEatTimer;
+	private int grazeTimer;
 
 	public Yak(EntityType<? extends Yak> type, Level worldIn) {
 		super(type, worldIn);
@@ -138,8 +137,8 @@ public class Yak extends Animal implements IForgeShearable, Shearable, NeutralMo
 
 	@Override
 	public void aiStep() {
-		if (this.level().isClientSide && this.grassEatTimer > 0) {
-			this.grassEatTimer--;
+		if (this.level().isClientSide && this.grazeTimer > 0) {
+			this.grazeTimer--;
 		}
 		super.aiStep();
 	}
@@ -147,8 +146,8 @@ public class Yak extends Animal implements IForgeShearable, Shearable, NeutralMo
 	@Override
 	public void handleEntityEvent(byte id) {
 		switch (id) {
-			case 10 -> this.grassEatTimer = 40;
-			case 11 -> this.grassEatTimer = 0;
+			case 10 -> this.grazeTimer = 40;
+			case 11 -> this.grazeTimer = 0;
 			default -> super.handleEntityEvent(id);
 		}
 	}
@@ -172,20 +171,20 @@ public class Yak extends Animal implements IForgeShearable, Shearable, NeutralMo
 	}
 
 	public float getHeadEatingOffset(float partialTicks) {
-		if (this.grassEatTimer <= 0) {
+		if (this.grazeTimer <= 0) {
 			return 0.0F;
-		} else if (this.grassEatTimer >= 4 && this.grassEatTimer <= 36) {
+		} else if (this.grazeTimer >= 4 && this.grazeTimer <= 36) {
 			return 1.0F;
 		} else {
-			return this.grassEatTimer < 4 ? ((float) this.grassEatTimer - partialTicks) / 4.0F : -((float) (this.grassEatTimer - 40) - partialTicks) / 4.0F;
+			return this.grazeTimer < 4 ? ((float) this.grazeTimer - partialTicks) / 4.0F : -((float) (this.grazeTimer - 40) - partialTicks) / 4.0F;
 		}
 	}
 
 	public float getHeadPitch(float partialTicks) {
-		if (this.grassEatTimer > 4 && this.grassEatTimer <= 36) {
-			return ((float) Math.PI / 5F) + 0.22F * Mth.sin((((float) (this.grassEatTimer - 4) - partialTicks) / 32.0F) * 28.7F);
+		if (this.grazeTimer > 4 && this.grazeTimer <= 36) {
+			return ((float) Math.PI / 5F) + 0.22F * Mth.sin((((float) (this.grazeTimer - 4) - partialTicks) / 32.0F) * 28.7F);
 		} else {
-			return this.grassEatTimer > 0 ? ((float) Math.PI / 5F) : Mth.lerp(partialTicks, this.xRotO, this.getXRot()) * ((float) Math.PI / 180F);
+			return this.grazeTimer > 0 ? ((float) Math.PI / 5F) : Mth.lerp(partialTicks, this.xRotO, this.getXRot()) * ((float) Math.PI / 180F);
 		}
 	}
 

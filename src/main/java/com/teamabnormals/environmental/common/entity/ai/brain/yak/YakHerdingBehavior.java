@@ -50,8 +50,8 @@ public class YakHerdingBehavior extends Behavior<Yak> {
                             // Set the memory to expire to trigger a herd check
                             Vector4d herdVec = herd.stream()
                                     .map(Yak::position)
-                                    .reduce(new Vector4d(), (a, b) -> a.add(b.x, b.y, b.z, 1), Vector4d::add);
-                            herdVec = herdVec.mul(1.0 / herdVec.w);
+                                    .reduce(new Vector4d(0, 0, 0, 0), (a, b) -> a.add(b.x, b.y, b.z, 1), Vector4d::add);
+                            herdVec = herdVec.div(herdVec.w);
                             herdPos.setWithExpiry(BlockPos.containing(herdVec.x, herdVec.y, herdVec.z), Yaktelligence.HERD_MEMORY_EXPIRATION);
                         }
                     }

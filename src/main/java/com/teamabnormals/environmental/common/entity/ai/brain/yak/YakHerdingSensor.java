@@ -15,10 +15,12 @@ import java.util.Set;
 
 public class YakHerdingSensor extends Sensor<Yak> {
 
+    @Override
     public Set<MemoryModuleType<?>> requires() {
         return ImmutableSet.of(EnvironmentalMemoryModuleTypes.NEAREST_VISIBLE_YAKS.get(), MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES);
     }
 
+    @Override
     protected void doTick(ServerLevel level, Yak yak) {
         yak.getBrain().getMemory(MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES).ifPresent((entities) -> {
             List<Yak> nearest = entities.find(

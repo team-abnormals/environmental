@@ -84,6 +84,7 @@ public class YakGrazeBehavior extends Behavior<Yak> {
         yak.getBrain().eraseMemory(EnvironmentalMemoryModuleTypes.GRAZING_TICKS.get());
     }
 
+    @Override
     protected void tick(ServerLevel level, Yak yak, long gameTime) {
         this.dementia(yak);
         if (!yak.getBrain().isMemoryValue(EnvironmentalMemoryModuleTypes.GRAZING_TICKS.get(), Mth.positiveCeilDiv(4, 2)))

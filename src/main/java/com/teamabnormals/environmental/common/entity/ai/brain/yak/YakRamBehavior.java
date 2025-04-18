@@ -44,14 +44,17 @@ public class YakRamBehavior extends Behavior<Yak> {
         this.ramDirection = Vec3.ZERO;
     }
 
+    @Override
     protected boolean checkExtraStartConditions(ServerLevel level, Yak yak) {
         return yak.getBrain().hasMemoryValue(MemoryModuleType.RAM_TARGET);
     }
 
+    @Override
     protected boolean canStillUse(ServerLevel level, Yak yak, long gameTime) {
         return yak.getBrain().hasMemoryValue(MemoryModuleType.RAM_TARGET);
     }
 
+    @Override
     protected void start(ServerLevel level, Yak yak, long gameTime) {
         BlockPos pos = yak.blockPosition();
         Brain<?> brain = yak.getBrain();
@@ -60,6 +63,7 @@ public class YakRamBehavior extends Behavior<Yak> {
         brain.setMemory(MemoryModuleType.WALK_TARGET, new WalkTarget(ramTargetPos, this.speed, 0));
     }
 
+    @Override
     protected void tick(ServerLevel level, Yak yak, long gameTime) {
         List<LivingEntity> potentialTargets = level.getNearbyEntities(LivingEntity.class, this.ramTargeting, yak, yak.getBoundingBox());
         Brain<?> brain = yak.getBrain();
