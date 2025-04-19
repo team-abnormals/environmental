@@ -26,7 +26,7 @@ public class YakHerdingBehavior extends Behavior<Yak> {
     public static BehaviorControl<Yak> createHerdingController() {
         return BehaviorBuilder.create(
                 (instance) -> instance.group(
-                        instance.present(EnvironmentalMemoryModuleTypes.NEAREST_VISIBLE_YAKS.get()),
+                        instance.present(EnvironmentalMemoryModuleTypes.NEAREST_VISIBLE_ADULT_YAKS.get()),
                         instance.registered(EnvironmentalMemoryModuleTypes.SINCE_LAST_HERD.get()),
                         instance.registered(EnvironmentalMemoryModuleTypes.HERDING_POSITION.get())
                 ).apply(instance, (nearest, herdTicks, herdPos) -> (level, yak, gameTime) -> {
