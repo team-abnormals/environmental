@@ -3,10 +3,7 @@ package com.teamabnormals.environmental.common.entity.animal.yak;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
-import com.teamabnormals.environmental.common.entity.ai.brain.yak.YakGrazeBehavior;
-import com.teamabnormals.environmental.common.entity.ai.brain.yak.YakHerdingBehavior;
-import com.teamabnormals.environmental.common.entity.ai.brain.yak.YakMoveToRestrictionBehavior;
-import com.teamabnormals.environmental.common.entity.ai.brain.yak.YakRamBehavior;
+import com.teamabnormals.environmental.common.entity.ai.brain.yak.*;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalMemoryModuleTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSensorTypes;
@@ -18,14 +15,13 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.*;
+import net.minecraft.world.entity.ai.behavior.declarative.BehaviorBuilder;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
+import net.minecraft.world.entity.ai.memory.NearestVisibleLivingEntities;
+import net.minecraft.world.entity.ai.memory.WalkTarget;
 import net.minecraft.world.entity.ai.sensing.Sensor;
 import net.minecraft.world.entity.ai.sensing.SensorType;
-import net.minecraft.world.entity.ai.targeting.TargetingConditions;
-import net.minecraft.world.entity.monster.piglin.AbstractPiglin;
-import net.minecraft.world.entity.monster.piglin.Piglin;
-import net.minecraft.world.entity.monster.piglin.PiglinAi;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.level.GameRules;
@@ -36,17 +32,11 @@ import java.util.Optional;
 
 // yak 🧠
 public class Yaktelligence {
-    public static final int RAM_PREPARE_TIME = 20;
-    public static final int RAM_MAX_DISTANCE = 7;
-    public static final int RAM_MIN_DISTANCE = 4;
-    public static final float ADULT_RAM_KNOCKBACK_FORCE = 2.5F;
-    public static final float BABY_RAM_KNOCKBACK_FORCE = 1.0F;
-    private static final UniformInt TIME_BETWEEN_RAMS = UniformInt.of(600, 6000);
-    private static final TargetingConditions RAM_TARGET_CONDITIONS = TargetingConditions.forCombat().selector(
-            (entity) -> !entity.getType().equals(EnvironmentalEntityTypes.YAK.get()) &&
-                    entity.level().getWorldBorder().isWithinBounds(entity.getBoundingBox()));
+    public static final int RAM_PREPARE_TIME = 10;
+    public static final float RAM_KNOCKBACK_FORCE = 2.5F;
+    private static final UniformInt TIME_BETWEEN_RAMS = UniformInt.of(20, 200);
 
-    private static final int ATTACK_COOLDOWN = 20;
+    private static final int MELEE_ATTACK_COOLDOWN = 20;
 
     public static final int HERD_RADIUS = 10;
     public static final int HERD_SEARCH_RADIUS = 12;
@@ -57,11 +47,10 @@ public class Yaktelligence {
     private static final float SPEED_MULTIPLIER_WHEN_MAKING_LOVE = SPEED_MULTIPLIER_WHEN_IDLING;
     private static final float SPEED_MULTIPLIER_WHEN_HERDING = SPEED_MULTIPLIER_WHEN_IDLING;
     private static final float SPEED_MULTIPLIER_WHEN_FOLLOWING_ADULT = 1.1F;
+    private static final float SPEED_MULTIPLIER_WHEN_AVOIDING = 1.1F;
     private static final float SPEED_MULTIPLIER_WHEN_TEMPTED = 1.1F;
-    private static final float SPEED_MULTIPLIER_WHEN_PREPARING_TO_RAM = 1.1F;
     private static final float SPEED_MULTIPLIER_WHEN_RAMMING = 3.0F;
-    private static final float SPEED_MULTIPLIER_WHEN_FIGHTING = 1.05F;
-    private static final float SPEED_MULTIPLIER_WHEN_AVOIDING = 1.3F;
+    private static final float SPEED_MULTIPLIER_WHEN_FIGHTING = 1.1F;
 
     private static final UniformInt ADULT_FOLLOW_RANGE = UniformInt.of(5, 16);
 
@@ -203,35 +192,33 @@ public class Yaktelligence {
     private static void learnFightActivities(Yak yak, Brain<Yak> brain) {
         brain.addActivityAndRemoveMemoryWhenStopped(Activity.FIGHT, 10, ImmutableList.of(
                 StopAttackingIfTargetInvalid.create((target) -> !isNearestValidAttackTarget(yak, target)),
-                SetWalkTargetFromAttackTargetIfTargetOutOfReach.create(SPEED_MULTIPLIER_WHEN_FIGHTING),
-                MeleeAttack.create(Yaktelligence.ATTACK_COOLDOWN)
-                // TODO: Ram attack
-        ), MemoryModuleType.ATTACK_TARGET);
-    }
-
-    private static void learnRamActivities(Brain<Yak> brain) {
-        brain.addActivityWithConditions(Activity.RAM,
-
-                // Behaviors
-                ImmutableList.of(
-                        Pair.of(0, new YakRamBehavior(
-                                (yak) -> TIME_BETWEEN_RAMS, RAM_TARGET_CONDITIONS, SPEED_MULTIPLIER_WHEN_RAMMING,
-                                (yak) -> yak.isBaby() ? BABY_RAM_KNOCKBACK_FORCE : ADULT_RAM_KNOCKBACK_FORCE,
-                                (yak) -> SoundEvents.GOAT_RAM_IMPACT
-                        )),
-                        Pair.of(1, new PrepareRamNearestTarget<>((yak) ->
-                                TIME_BETWEEN_RAMS.getMinValue(), RAM_MIN_DISTANCE, RAM_MAX_DISTANCE, SPEED_MULTIPLIER_WHEN_PREPARING_TO_RAM, RAM_TARGET_CONDITIONS, RAM_PREPARE_TIME,
-                                (yak) -> SoundEvents.GOAT_PREPARE_RAM
-                        ))
+                new YakRamBehavior(
+                        (y) -> TIME_BETWEEN_RAMS,
+                        SPEED_MULTIPLIER_WHEN_RAMMING,
+                        (y) -> RAM_KNOCKBACK_FORCE,
+                        (y) -> SoundEvents.GOAT_RAM_IMPACT
                 ),
+                new YakPrepareRamBehavior((y) -> TIME_BETWEEN_RAMS.getMinValue(), RAM_PREPARE_TIME, (y) -> SoundEvents.GOAT_PREPARE_RAM),
+                BehaviorBuilder.create((instance) -> instance.group(
+                        instance.registered(MemoryModuleType.WALK_TARGET),
+                        instance.registered(MemoryModuleType.LOOK_TARGET),
+                        instance.present(MemoryModuleType.ATTACK_TARGET),
+                        instance.registered(MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES),
+                        instance.absent(MemoryModuleType.RAM_TARGET) // Don't try to walk somewhere if we're ramming
+                ).apply(instance, (walkTarget, lookTarget, attackTarget, nearestVisibleLivingEntities, ramTarget) -> (level, y, gameTime) -> {
+                    LivingEntity entity = instance.get(attackTarget);
+                    Optional<NearestVisibleLivingEntities> visibleEntities = instance.tryGet(nearestVisibleLivingEntities);
+                    if (visibleEntities.isPresent() && visibleEntities.get().contains(entity) && BehaviorUtils.isWithinAttackRange(yak, entity, 1)) {
+                        walkTarget.erase();
+                    } else {
+                        lookTarget.set(new EntityTracker(entity, true));
+                        walkTarget.set(new WalkTarget(new EntityTracker(entity, false), SPEED_MULTIPLIER_WHEN_FIGHTING, 0));
+                    }
 
-                // Conditions
-                ImmutableSet.of(
-                        Pair.of(MemoryModuleType.TEMPTING_PLAYER, MemoryStatus.VALUE_ABSENT),
-                        Pair.of(MemoryModuleType.BREED_TARGET, MemoryStatus.VALUE_ABSENT),
-                        Pair.of(MemoryModuleType.RAM_COOLDOWN_TICKS, MemoryStatus.VALUE_ABSENT)
-                )
-        );
+                    return true;
+                })),
+                MeleeAttack.create(Yaktelligence.MELEE_ATTACK_COOLDOWN)
+        ), MemoryModuleType.ATTACK_TARGET);
     }
 
     public static boolean isFighting(Brain<Yak> brain) {
@@ -262,6 +249,7 @@ public class Yaktelligence {
             broadcastRetreat(yak, target);
         } else {
             Yaktelligence.retaliate(yak, target);
+            broadcastRetreat(yak, target);
         }
     }
 

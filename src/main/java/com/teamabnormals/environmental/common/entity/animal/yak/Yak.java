@@ -25,16 +25,11 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.Brain;
-import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.behavior.warden.SonicBoom;
-import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.monster.piglin.PiglinAi;
-import net.minecraft.world.entity.monster.warden.AngerLevel;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
@@ -56,13 +51,10 @@ import java.util.UUID;
 public class Yak extends Animal implements IForgeShearable, Shearable {
     private static final EntityDataAccessor<Boolean> SHEARED = SynchedEntityData.defineId(Yak.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> ANGER_TIME = SynchedEntityData.defineId(Yak.class, EntityDataSerializers.INT);
-    private static final UniformInt ANGER_RANGE = TimeUtil.rangeOfSeconds(20, 39);
 
-    private static final UUID SPEED_UUID = UUID.fromString("49455A49-7EC5-45BA-B886-3B90B23A1718");
-    private static final AttributeModifier ATTACKING_SPEED_BOOST = new AttributeModifier(SPEED_UUID, "Attacking speed boost", 0.05D, AttributeModifier.Operation.ADDITION);
-
-    private UUID lastHurtBy;
     private int grazeTimer;
+    private boolean ramming;
+    private int rammingTick;
 
     public Yak(EntityType<? extends Yak> type, Level worldIn) {
         super(type, worldIn);
@@ -128,9 +120,18 @@ public class Yak extends Animal implements IForgeShearable, Shearable {
 
     @Override
     public void aiStep() {
-        if (this.level().isClientSide && this.grazeTimer > 0) {
-            this.grazeTimer--;
+        if (this.level().isClientSide) {
+            if (this.grazeTimer > 0)
+                this.grazeTimer--;
+
+            if (this.ramming) {
+                ++this.rammingTick;
+            } else {
+                this.rammingTick -= 2;
+            }
+            this.rammingTick = Mth.clamp(this.rammingTick, 0, Yaktelligence.RAM_PREPARE_TIME);
         }
+
         super.aiStep();
     }
 
@@ -139,6 +140,8 @@ public class Yak extends Animal implements IForgeShearable, Shearable {
         switch (id) {
             case 10 -> this.grazeTimer = 40;
             case 11 -> this.grazeTimer = 0;
+            case 58 -> this.ramming = true;
+            case 59 -> this.ramming = false;
             default -> super.handleEntityEvent(id);
         }
     }
@@ -172,6 +175,10 @@ public class Yak extends Animal implements IForgeShearable, Shearable {
     }
 
     public float getHeadPitch(float partialTicks) {
+        float rammingPitch = (float) this.rammingTick / Yaktelligence.RAM_PREPARE_TIME * 30.0F * (float) Math.PI / 180F;
+        if (rammingPitch != 0)
+            return rammingPitch;
+
         if (this.grazeTimer > 4 && this.grazeTimer <= 36) {
             return ((float) Math.PI / 5F) + 0.22F * Mth.sin((((float) (this.grazeTimer - 4) - partialTicks) / 32.0F) * 28.7F);
         } else {
