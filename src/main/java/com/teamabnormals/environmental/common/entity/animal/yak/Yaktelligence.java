@@ -49,7 +49,7 @@ public class Yaktelligence {
     private static final float SPEED_MULTIPLIER_WHEN_FOLLOWING_ADULT = 1.1F;
     private static final float SPEED_MULTIPLIER_WHEN_AVOIDING = 1.1F;
     private static final float SPEED_MULTIPLIER_WHEN_TEMPTED = 1.1F;
-    private static final float SPEED_MULTIPLIER_WHEN_RAMMING = 3.0F;
+    private static final float SPEED_MULTIPLIER_WHEN_RAMMING = 2.0F;
     private static final float SPEED_MULTIPLIER_WHEN_FIGHTING = 1.1F;
 
     private static final UniformInt ADULT_FOLLOW_RANGE = UniformInt.of(5, 16);
