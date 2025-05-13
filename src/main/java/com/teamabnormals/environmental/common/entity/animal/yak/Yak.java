@@ -251,14 +251,17 @@ public class Yak extends Animal implements IForgeShearable, Shearable {
         world.playSound(null, this, SoundEvents.SHEEP_SHEAR, player == null ? SoundSource.BLOCKS : SoundSource.PLAYERS, 1.0F, 1.0F);
         if (!world.isClientSide) {
             this.setSheared(true);
-            if (!player.getAbilities().instabuild && !(player.getItemBySlot(EquipmentSlot.LEGS).getItem() instanceof YakPantsItem))
-                this.setTarget(player);
-            int i = 4 + this.random.nextInt(12);
+            if (player != null && !player.isCreative() && !(player.getItemBySlot(EquipmentSlot.LEGS).getItem() instanceof YakPantsItem)) {
+                Yaktelligence.retaliate(this, player);
+            }
 
             List<ItemStack> items = new ArrayList<>();
+
+            int i = 4 + this.random.nextInt(12);
             for (int j = 0; j < i; ++j) {
                 items.add(new ItemStack(EnvironmentalItems.YAK_HAIR.get()));
             }
+
             return items;
         }
         return Collections.emptyList();
@@ -272,11 +275,6 @@ public class Yak extends Animal implements IForgeShearable, Shearable {
     @Override
     protected float getStandingEyeHeight(Pose pose, EntityDimensions size) {
         return this.isBaby() ? size.height * 0.95F : 1.3F;
-    }
-
-    @Override
-    public ItemStack getPickedResult(HitResult target) {
-        return new ItemStack(EnvironmentalItems.YAK_SPAWN_EGG.get());
     }
 
     @Override

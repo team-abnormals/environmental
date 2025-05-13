@@ -241,9 +241,6 @@ public class Yaktelligence {
         if (target instanceof Yak)
             return;
 
-        Brain<Yak> brain = yak.getBrain();
-        brain.eraseMemory(EnvironmentalMemoryModuleTypes.HERDING_POSITION.get());
-
         if (yak.isBaby()) {
             retreatAndAlert(yak, target);
             broadcastRetreat(yak, target);
@@ -256,6 +253,9 @@ public class Yaktelligence {
     protected static void retaliate(Yak yak, LivingEntity target) {
         if (yak.getBrain().isActive(Activity.AVOID))
             return;
+
+        Brain<Yak> brain = yak.getBrain();
+        brain.eraseMemory(EnvironmentalMemoryModuleTypes.HERDING_POSITION.get());
 
         if (Sensor.isEntityAttackableIgnoringLineOfSight(yak, target)) {
             if (!BehaviorUtils.isOtherTargetMuchFurtherAwayThanCurrentAttackTarget(yak, target, 4.0D)) {
