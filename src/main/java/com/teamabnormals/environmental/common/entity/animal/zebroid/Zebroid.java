@@ -298,7 +298,7 @@ public interface Zebroid {
 		AbstractHorse horse = (AbstractHorse) this;
 
 		if (!wasJumping && horse.isJumping() && horse.getControllingPassenger() instanceof Player)
-			Environmental.PLAY.sendToServer(new C2SZebraJumpMessage((float) horse.getDeltaMovement().y));
+			Environmental.CHANNEL.sendToServer(new C2SZebraJumpMessage((float) horse.getDeltaMovement().y));
 	}
 
 	default void handleLeashed(Entity entity) {

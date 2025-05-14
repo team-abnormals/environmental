@@ -82,12 +82,32 @@ public class EnvironmentalConfig {
 		}
 	}
 
+
+	public static class Client {
+		public final BooleanValue babyChickenTexture;
+
+		public Client(ForgeConfigSpec.Builder builder) {
+			builder.push("mobs");
+			builder.push("chicken");
+			babyChickenTexture = builder.comment("If Chickens have a different texture when they are babies").define("Baby chicken texture", true);
+			builder.pop();
+			builder.pop();
+		}
+	}
+
 	public static final ForgeConfigSpec COMMON_SPEC;
 	public static final Common COMMON;
 
+	public static final ForgeConfigSpec CLIENT_SPEC;
+	public static final Client CLIENT;
+
 	static {
-		final Pair<Common, ForgeConfigSpec> commonSpecPair = new ForgeConfigSpec.Builder().configure(Common::new);
+		Pair<Common, ForgeConfigSpec> commonSpecPair = new ForgeConfigSpec.Builder().configure(Common::new);
 		COMMON_SPEC = commonSpecPair.getRight();
 		COMMON = commonSpecPair.getLeft();
+
+		Pair<Client, ForgeConfigSpec> clientSpecPair = new ForgeConfigSpec.Builder().configure(Client::new);
+		CLIENT_SPEC = clientSpecPair.getRight();
+		CLIENT = clientSpecPair.getLeft();
 	}
 }

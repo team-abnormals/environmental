@@ -21,7 +21,7 @@ import net.minecraft.world.level.block.DispenserBlock;
 
 public class EnvironmentalCompat {
 
-	public static void registerCompat() {
+	public static void register() {
 		registerCompostables();
 		registerFlammables();
 		registerDispenserBehaviors();

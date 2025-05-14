@@ -1,6 +1,7 @@
 package com.teamabnormals.environmental.core.mixin.client;
 
 import com.teamabnormals.environmental.core.Environmental;
+import com.teamabnormals.environmental.core.EnvironmentalConfig;
 import net.minecraft.client.model.ChickenModel;
 import net.minecraft.client.renderer.entity.ChickenRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
@@ -22,7 +23,7 @@ public abstract class ChickenRendererMixin extends MobRenderer<Chicken, ChickenM
 
 	@Inject(method = "getTextureLocation(Lnet/minecraft/world/entity/animal/Chicken;)Lnet/minecraft/resources/ResourceLocation;", at = @At("RETURN"), cancellable = true)
 	private void getTextureLocation(Chicken chicken, CallbackInfoReturnable<ResourceLocation> cir) {
-		if (chicken.isBaby()) {
+		if (chicken.isBaby() && EnvironmentalConfig.CLIENT.babyChickenTexture.get()) {
 			cir.setReturnValue(CHICK);
 		}
 	}

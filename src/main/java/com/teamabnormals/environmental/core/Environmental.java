@@ -5,8 +5,6 @@ import com.teamabnormals.environmental.client.model.*;
 import com.teamabnormals.environmental.client.renderer.entity.*;
 import com.teamabnormals.environmental.client.resources.SlabfishSpriteUploader;
 import com.teamabnormals.environmental.common.network.message.C2SZebraJumpMessage;
-import com.teamabnormals.environmental.common.network.message.CAcknowledgeEnvironmentalMessage;
-import com.teamabnormals.environmental.common.network.message.EnvironmentalLoginMessage;
 import com.teamabnormals.environmental.common.network.message.SOpenSlabfishInventoryMessage;
 import com.teamabnormals.environmental.core.data.client.EnvironmentalBlockStateProvider;
 import com.teamabnormals.environmental.core.data.client.EnvironmentalItemModelProvider;
@@ -23,7 +21,6 @@ import com.teamabnormals.environmental.core.other.*;
 import com.teamabnormals.environmental.core.registry.*;
 import com.teamabnormals.gallery.core.data.client.GalleryAssetsRemolderProvider;
 import com.teamabnormals.gallery.core.data.client.GalleryItemModelProvider;
-import net.minecraft.SharedConstants;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
@@ -42,11 +39,10 @@ import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.config.ModConfig.Type;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.network.HandshakeHandler;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
@@ -61,8 +57,7 @@ public class Environmental {
 	public static final String NETWORK_PROTOCOL = "ENV1";
 	public static final RegistryHelper REGISTRY_HELPER = new RegistryHelper(MOD_ID);
 
-	public static final SimpleChannel PLAY = NetworkRegistry.ChannelBuilder.named(new ResourceLocation(MOD_ID, "play")).networkProtocolVersion(() -> NETWORK_PROTOCOL).clientAcceptedVersions(NETWORK_PROTOCOL::equals).serverAcceptedVersions(NETWORK_PROTOCOL::equals).simpleChannel();
-	public static final SimpleChannel LOGIN = NetworkRegistry.ChannelBuilder.named(new ResourceLocation(MOD_ID, "login")).networkProtocolVersion(() -> NETWORK_PROTOCOL).clientAcceptedVersions(NETWORK_PROTOCOL::equals).serverAcceptedVersions(NETWORK_PROTOCOL::equals).simpleChannel();
+	public static final SimpleChannel CHANNEL = NetworkRegistry.ChannelBuilder.named(new ResourceLocation(MOD_ID, "play")).networkProtocolVersion(() -> NETWORK_PROTOCOL).clientAcceptedVersions(NETWORK_PROTOCOL::equals).serverAcceptedVersions(NETWORK_PROTOCOL::equals).simpleChannel();
 
 	public Environmental() {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -103,21 +98,19 @@ public class Environmental {
 			bus.addListener(this::registerRenderers);
 		});
 
-		context.registerConfig(ModConfig.Type.COMMON, EnvironmentalConfig.COMMON_SPEC);
+		context.registerConfig(Type.COMMON, EnvironmentalConfig.COMMON_SPEC);
+		context.registerConfig(Type.CLIENT, EnvironmentalConfig.CLIENT_SPEC);
 	}
 
 	private void commonSetup(FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
-			this.setupLoginMessages();
-			EnvironmentalCompat.registerCompat();
+			EnvironmentalCompat.register();
 			EnvironmentalVillagers.registerVillagerTypes();
 		});
 	}
 
 	private void clientSetup(FMLClientSetupEvent event) {
-		event.enqueueWork(() -> {
-			EnvironmentalClientCompat.registerClientCompat();
-		});
+		event.enqueueWork(EnvironmentalClientCompat::register);
 	}
 
 	private void dataSetup(GatherDataEvent event) {
@@ -157,12 +150,8 @@ public class Environmental {
 	}
 
 	private void setupPlayMessages() {
-		PLAY.registerMessage(3, SOpenSlabfishInventoryMessage.class, SOpenSlabfishInventoryMessage::serialize, SOpenSlabfishInventoryMessage::deserialize, SOpenSlabfishInventoryMessage::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
-		PLAY.registerMessage(4, C2SZebraJumpMessage.class, C2SZebraJumpMessage::serialize, C2SZebraJumpMessage::deserialize, C2SZebraJumpMessage::handle);
-	}
-
-	private void setupLoginMessages() {
-		LOGIN.messageBuilder(CAcknowledgeEnvironmentalMessage.class, 99, NetworkDirection.LOGIN_TO_SERVER).loginIndex(EnvironmentalLoginMessage::getLoginIndex, EnvironmentalLoginMessage::setLoginIndex).encoder(CAcknowledgeEnvironmentalMessage::encode).decoder(CAcknowledgeEnvironmentalMessage::decode).consumerNetworkThread(HandshakeHandler.indexFirst(CAcknowledgeEnvironmentalMessage::handle)).add();
+		CHANNEL.registerMessage(3, SOpenSlabfishInventoryMessage.class, SOpenSlabfishInventoryMessage::serialize, SOpenSlabfishInventoryMessage::deserialize, SOpenSlabfishInventoryMessage::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+		CHANNEL.registerMessage(4, C2SZebraJumpMessage.class, C2SZebraJumpMessage::serialize, C2SZebraJumpMessage::deserialize, C2SZebraJumpMessage::handle);
 	}
 
 	@OnlyIn(Dist.CLIENT)

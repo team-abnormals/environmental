@@ -812,7 +812,7 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 			player.closeContainer();
 
 		player.nextContainerCounter();
-		Environmental.PLAY.send(PacketDistributor.PLAYER.with(() -> player), new SOpenSlabfishInventoryMessage(this, player.containerCounter));
+		Environmental.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new SOpenSlabfishInventoryMessage(this, player.containerCounter));
 		player.containerMenu = new SlabfishInventoryMenu(player.containerCounter, player.getInventory(), this.slabfishBackpack, this);
 		player.initMenu(player.containerMenu);
 		MinecraftForge.EVENT_BUS.post(new PlayerContainerEvent.Open(player, player.containerMenu));

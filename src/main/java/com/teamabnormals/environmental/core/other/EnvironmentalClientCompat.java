@@ -24,7 +24,7 @@ import java.util.List;
 
 public class EnvironmentalClientCompat {
 
-	public static void registerClientCompat() {
+	public static void register() {
 		registerRenderLayers();
 		registerBlockColors();
 		registerItemProperties();
