@@ -39,6 +39,8 @@ public class EnvironmentalSoundEvents {
 	public static final RegistryObject<SoundEvent> YAK_MILK = HELPER.createSoundEvent("entity.yak.milk");
 	public static final RegistryObject<SoundEvent> YAK_HURT = HELPER.createSoundEvent("entity.yak.hurt");
 	public static final RegistryObject<SoundEvent> YAK_DEATH = HELPER.createSoundEvent("entity.yak.death");
+	public static final RegistryObject<SoundEvent> YAK_CHARGE = HELPER.createSoundEvent("entity.yak.charge");
+	public static final RegistryObject<SoundEvent> YAK_RAM = HELPER.createSoundEvent("entity.yak.ram");
 
 	public static final RegistryObject<SoundEvent> TAPIR_AMBIENT = HELPER.createSoundEvent("entity.tapir.ambient");
 	public static final RegistryObject<SoundEvent> TAPIR_HURT = HELPER.createSoundEvent("entity.tapir.hurt");

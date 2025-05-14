@@ -303,6 +303,36 @@
     ],
     "subtitle": "subtitles.environmental.entity.yak.milk"
   },
+  "entity.yak.charge": {
+    "sounds": [
+      {
+        "name": "environmental:mob/yak/say1",
+        "volume": 0.8
+      },
+      {
+        "name": "environmental:mob/yak/say2",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.environmental.entity.yak.charge"
+  },
+  "entity.yak.ram": {
+    "sounds": [
+      {
+        "name": "mob/goat/impact1",
+        "volume": 0.8
+      },
+      {
+        "name": "mob/goat/impact2",
+        "volume": 0.8
+      },
+      {
+        "name": "mob/goat/impact2",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.environmental.entity.yak.ram"
+  },
   "entity.tapir.leaf_step": {
     "sounds": [
       "step/grass1",

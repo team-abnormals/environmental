@@ -7,6 +7,7 @@ import com.teamabnormals.environmental.common.entity.ai.brain.yak.*;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalMemoryModuleTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSensorTypes;
+import com.teamabnormals.environmental.core.registry.EnvironmentalSoundEvents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
@@ -196,9 +197,9 @@ public class Yaktelligence {
                         (y) -> TIME_BETWEEN_RAMS,
                         SPEED_MULTIPLIER_WHEN_RAMMING,
                         (y) -> RAM_KNOCKBACK_FORCE,
-                        (y) -> SoundEvents.GOAT_RAM_IMPACT
+                        (y) -> EnvironmentalSoundEvents.YAK_RAM.get()
                 ),
-                new YakPrepareRamBehavior((y) -> TIME_BETWEEN_RAMS.getMinValue(), RAM_PREPARE_TIME, (y) -> SoundEvents.GOAT_PREPARE_RAM),
+                new YakPrepareRamBehavior((y) -> TIME_BETWEEN_RAMS.getMinValue(), RAM_PREPARE_TIME, (y) -> EnvironmentalSoundEvents.YAK_CHARGE.get()),
                 BehaviorBuilder.create((instance) -> instance.group(
                         instance.registered(MemoryModuleType.WALK_TARGET),
                         instance.registered(MemoryModuleType.LOOK_TARGET),
