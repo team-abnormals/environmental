@@ -208,7 +208,7 @@ public class Koi extends AbstractFish {
 	}
 
 	public static AttributeSupplier.Builder registerAttributes() {
-		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 10);
+		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 5);
 	}
 
 	public static boolean canKoiSpawn(EntityType<? extends AbstractFish> type, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, RandomSource randomIn) {
