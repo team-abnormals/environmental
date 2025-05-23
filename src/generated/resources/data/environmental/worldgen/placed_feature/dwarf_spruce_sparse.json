@@ -1,5 +1,5 @@
 {
-  "feature": "environmental:dwarf_spruce_dense",
+  "feature": "environmental:dwarf_spruce_sparse",
   "placement": [
     {
       "type": "minecraft:heightmap",

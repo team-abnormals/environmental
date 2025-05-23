@@ -2,6 +2,7 @@
   "type": "environmental:dwarf_spruce",
   "config": {
     "density": 5,
-    "noise_to_count_ratio": 0.6000000238418579
+    "noise_to_count_ratio": 0.6000000238418579,
+    "use_noise": true
   }
 }

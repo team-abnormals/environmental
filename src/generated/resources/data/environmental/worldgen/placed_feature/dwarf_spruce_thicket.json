@@ -1,11 +1,13 @@
 {
-  "feature": "environmental:patch_cup_lichen",
+  "feature": "environmental:dwarf_spruce_thicket",
   "placement": [
     {
-      "type": "blueprint:better_noise_based_count",
-      "noise": "environmental:cup_lichen_noise",
-      "noise_offset": -0.7,
-      "noise_to_count_ratio": 30
+      "type": "minecraft:rarity_filter",
+      "chance": 128
+    },
+    {
+      "type": "minecraft:count",
+      "count": 4
     },
     {
       "type": "minecraft:in_square"

@@ -34,7 +34,7 @@ public class DwarfSpruceFeature extends Feature<DwarfSpruceConfiguration> {
 		NormalNoise densitynoise = EnvironmentalNoiseParameters.DWARF_SPRUCE_DENSITY_RECEIVER.get(serverlevel);
 		NormalNoise heightnoise = EnvironmentalNoiseParameters.DWARF_SPRUCE_HEIGHT_RECEIVER.get(serverlevel);
 
-		int count = Math.max(0, (int) Math.ceil((densitynoise.getValue(origin.getX(), 0.0F, origin.getZ()) + config.noiseToCountRatio()) * config.density()));
+		int count = !config.useNoise() ? config.density() : Math.max(0, (int) Math.ceil((densitynoise.getValue(origin.getX(), 0.0F, origin.getZ()) + config.noiseToCountRatio()) * config.density()));
 		float patchheight = (float) heightnoise.getValue(origin.getX(), 0.0F, origin.getZ()) * 1.25F + 1.75F;
 
 		MutableBlockPos mutable = new MutableBlockPos();

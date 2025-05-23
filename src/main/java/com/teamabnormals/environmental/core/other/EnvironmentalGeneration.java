@@ -65,7 +65,6 @@ public class EnvironmentalGeneration {
 		OverworldBiomes.globalOverworldGeneration(generation);
 		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_CUP_LICHEN);
 		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_CUP_LICHEN_SMALL);
-		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_CUP_LICHEN_NOISE);
 		if (oldGrowth)
 			BiomeDefaultFeatures.addFerns(generation);
 		else
@@ -85,7 +84,7 @@ public class EnvironmentalGeneration {
 		generation.addFeature(Decoration.VEGETAL_DECORATION, VegetationPlacements.BROWN_MUSHROOM_TAIGA);
 		generation.addFeature(Decoration.VEGETAL_DECORATION, VegetationPlacements.RED_MUSHROOM_TAIGA);
 		generation.addFeature(Decoration.VEGETAL_DECORATION, DWARF_SPRUCE);
-		generation.addFeature(Decoration.VEGETAL_DECORATION, DWARF_SPRUCE_DENSE);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, DWARF_SPRUCE_THICKET);
 		if (oldGrowth)
 			generation.addFeature(Decoration.VEGETAL_DECORATION, snowy ? PATCH_GRASS_PINE_BARRENS : PATCH_GRASS_OLD_GROWTH_PINE_BARRENS);
 		else

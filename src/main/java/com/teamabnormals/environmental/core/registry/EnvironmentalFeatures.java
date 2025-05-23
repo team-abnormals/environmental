@@ -1,7 +1,6 @@
 package com.teamabnormals.environmental.core.registry;
 
 import com.google.common.collect.ImmutableList;
-import com.teamabnormals.blueprint.common.levelgen.placement.BetterNoiseBasedCountPlacement;
 import com.teamabnormals.environmental.common.block.CartwheelBlock;
 import com.teamabnormals.environmental.common.levelgen.feature.*;
 import com.teamabnormals.environmental.common.levelgen.feature.configurations.BestNoisesSelectorFeatureConfiguration;
@@ -272,8 +271,8 @@ public class EnvironmentalFeatures {
 		public static final ResourceKey<ConfiguredFeature<?, ?>> FALLEN_TALL_PINE_TREE = createKey("fallen_tall_pine_tree");
 
 		public static final ResourceKey<ConfiguredFeature<?, ?>> DWARF_SPRUCE = createKey("dwarf_spruce");
-		public static final ResourceKey<ConfiguredFeature<?, ?>> DWARF_SPRUCE_DENSE = createKey("dwarf_spruce_dense");
-		public static final ResourceKey<ConfiguredFeature<?, ?>> DWARF_SPRUCE_TAIGA = createKey("dwarf_spruce_taiga");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> DWARF_SPRUCE_THICKET = createKey("dwarf_spruce_thicket");
+		public static final ResourceKey<ConfiguredFeature<?, ?>> DWARF_SPRUCE_SPARSE = createKey("dwarf_spruce_sparse");
 
 		public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_CUP_LICHEN = createKey("patch_cup_lichen");
 		public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_CUP_LICHEN_SMALL = createKey("patch_cup_lichen_small");
@@ -376,9 +375,9 @@ public class EnvironmentalFeatures {
 			register(context, FALLEN_PINE_TREE, EnvironmentalFeatures.FALLEN_PINE_TREE.get(), NoneFeatureConfiguration.INSTANCE);
 			register(context, FALLEN_TALL_PINE_TREE, EnvironmentalFeatures.FALLEN_TALL_PINE_TREE.get(), NoneFeatureConfiguration.INSTANCE);
 
-			register(context, DWARF_SPRUCE, EnvironmentalFeatures.DWARF_SPRUCE.get(), new DwarfSpruceConfiguration(5, 0.6F));
-			register(context, DWARF_SPRUCE_DENSE, EnvironmentalFeatures.DWARF_SPRUCE.get(), new DwarfSpruceConfiguration(96, -0.8F));
-			register(context, DWARF_SPRUCE_TAIGA, EnvironmentalFeatures.DWARF_SPRUCE.get(), new DwarfSpruceConfiguration(3, 0.0F));
+			register(context, DWARF_SPRUCE, EnvironmentalFeatures.DWARF_SPRUCE.get(), new DwarfSpruceConfiguration(5, 0.6F, true));
+			register(context, DWARF_SPRUCE_THICKET, EnvironmentalFeatures.DWARF_SPRUCE.get(), new DwarfSpruceConfiguration(12, 0.0F, false));
+			register(context, DWARF_SPRUCE_SPARSE, EnvironmentalFeatures.DWARF_SPRUCE.get(), new DwarfSpruceConfiguration(3, 0.0F, true));
 
 			register(context, PATCH_CUP_LICHEN, EnvironmentalFeatures.CUP_LICHEN_PATCH.get(), new CupLichenPatchConfiguration(64, 3, 2));
 			register(context, PATCH_CUP_LICHEN_SMALL, EnvironmentalFeatures.CUP_LICHEN_PATCH.get(), new CupLichenPatchConfiguration(32, 2, 2));
@@ -511,14 +510,12 @@ public class EnvironmentalFeatures {
 		public static final ResourceKey<PlacedFeature> FALLEN_TALL_PINE_TREE = createKey("fallen_tall_pine_tree");
 
 		public static final ResourceKey<PlacedFeature> DWARF_SPRUCE = createKey("dwarf_spruce");
-		public static final ResourceKey<PlacedFeature> DWARF_SPRUCE_DENSE = createKey("dwarf_spruce_dense");
-		public static final ResourceKey<PlacedFeature> DWARF_SPRUCE_TAIGA = createKey("dwarf_spruce_taiga");
-		public static final ResourceKey<PlacedFeature> DWARF_SPRUCE_TAIGA_DENSE = createKey("dwarf_spruce_taiga_dense");
+		public static final ResourceKey<PlacedFeature> DWARF_SPRUCE_THICKET = createKey("dwarf_spruce_thicket");
+		public static final ResourceKey<PlacedFeature> DWARF_SPRUCE_SPARSE = createKey("dwarf_spruce_sparse");
 
 		public static final ResourceKey<PlacedFeature> PATCH_CUP_LICHEN = createKey("patch_cup_lichen");
 		public static final ResourceKey<PlacedFeature> PATCH_CUP_LICHEN_TAIGA = createKey("patch_cup_lichen_taiga");
 		public static final ResourceKey<PlacedFeature> PATCH_CUP_LICHEN_SMALL = createKey("patch_cup_lichen_small");
-		public static final ResourceKey<PlacedFeature> PATCH_CUP_LICHEN_NOISE = createKey("patch_cup_lichen_noise");
 
 		public static final ResourceKey<PlacedFeature> PINE_SLOPES_ROCK = createKey("pine_slopes_rock");
 		public static final ResourceKey<PlacedFeature> PINE_SLOPES_BOULDER = createKey("pine_slopes_boulder");
@@ -622,14 +619,12 @@ public class EnvironmentalFeatures {
 			register(context, FALLEN_TALL_PINE_TREE, EnvironmentalConfiguredFeatures.FALLEN_TALL_PINE_TREE, RarityFilter.onAverageOnceEvery(5), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 
 			register(context, DWARF_SPRUCE, EnvironmentalConfiguredFeatures.DWARF_SPRUCE, PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
-			register(context, DWARF_SPRUCE_DENSE, EnvironmentalConfiguredFeatures.DWARF_SPRUCE_DENSE, PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
-			register(context, DWARF_SPRUCE_TAIGA, EnvironmentalConfiguredFeatures.DWARF_SPRUCE_TAIGA, PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
-			register(context, DWARF_SPRUCE_TAIGA_DENSE, EnvironmentalConfiguredFeatures.DWARF_SPRUCE_DENSE, PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
+			register(context, DWARF_SPRUCE_THICKET, EnvironmentalConfiguredFeatures.DWARF_SPRUCE_THICKET, RarityFilter.onAverageOnceEvery(128), CountPlacement.of(4), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
+			register(context, DWARF_SPRUCE_SPARSE, EnvironmentalConfiguredFeatures.DWARF_SPRUCE_SPARSE, PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 
 			register(context, PATCH_CUP_LICHEN, EnvironmentalConfiguredFeatures.PATCH_CUP_LICHEN, RarityFilter.onAverageOnceEvery(22), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 			register(context, PATCH_CUP_LICHEN_TAIGA, EnvironmentalConfiguredFeatures.PATCH_CUP_LICHEN, RarityFilter.onAverageOnceEvery(22), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 			register(context, PATCH_CUP_LICHEN_SMALL, EnvironmentalConfiguredFeatures.PATCH_CUP_LICHEN_SMALL, RarityFilter.onAverageOnceEvery(8), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
-			register(context, PATCH_CUP_LICHEN_NOISE, EnvironmentalConfiguredFeatures.PATCH_CUP_LICHEN, new BetterNoiseBasedCountPlacement(noises.getOrThrow(EnvironmentalNoiseParameters.CUP_LICHEN_NOISE), 30, -0.7D), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 
 			register(context, PINE_SLOPES_ROCK, EnvironmentalConfiguredFeatures.STONE_ROCK, CountPlacement.of(2), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
 			register(context, PINE_SLOPES_BOULDER, EnvironmentalConfiguredFeatures.PINE_SLOPES_BOULDER, CountPlacement.of(1), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());

@@ -58,7 +58,7 @@ public class EnvironmentalBiomeModifiers {
 
 		addFeature(context, "cattails", EnvironmentalBiomeTags.HAS_CATTAILS, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.CATTAILS);
 		addFeature(context, "cup_lichen", EnvironmentalBiomeTags.HAS_CUP_LICHEN, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_CUP_LICHEN_TAIGA);
-		addFeatureIgnore(context, "dwarf_spruce_taiga", EnvironmentalBiomeTags.HAS_SPARSE_DWARF_SPRUCE, EnvironmentalBiomeTags.IS_PINE_BARRENS, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.DWARF_SPRUCE_TAIGA, EnvironmentalPlacedFeatures.DWARF_SPRUCE_TAIGA_DENSE);
+		addFeatureIgnore(context, "dwarf_spruce_sparse", EnvironmentalBiomeTags.HAS_SPARSE_DWARF_SPRUCE, EnvironmentalBiomeTags.IS_PINE_BARRENS, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.DWARF_SPRUCE_SPARSE);
 		addFeature(context, "bluebell", EnvironmentalBiomeTags.HAS_BLUEBELL, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_BLUEBELL, EnvironmentalPlacedFeatures.FLOWER_BLUEBELL_LARGE);
 		addFeature(context, "violet", EnvironmentalBiomeTags.HAS_VIOLET, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.FLOWER_VIOLET);
 		addFeature(context, "tasselflower", EnvironmentalBiomeTags.HAS_TASSELFLOWER, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_TASSELFLOWER);
