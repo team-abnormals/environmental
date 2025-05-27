@@ -104,12 +104,20 @@ public class EnvironmentalBiomeTagsProvider extends BiomeTagsProvider {
 
 		this.tag(EnvironmentalBiomeTags.HAS_CATTAILS).add(Biomes.RIVER, Biomes.SWAMP, Biomes.MANGROVE_SWAMP);
 		this.tag(EnvironmentalBiomeTags.HAS_CUP_LICHEN).addTag(BiomeTags.IS_TAIGA);
-		this.tag(EnvironmentalBiomeTags.HAS_SPARSE_DWARF_SPRUCE).addTag(BiomeTags.IS_TAIGA);
+		this.tag(EnvironmentalBiomeTags.HAS_DWARF_SPRUCE).addTag(BiomeTags.IS_TAIGA);
 		this.tag(EnvironmentalBiomeTags.HAS_BLUEBELL).add(Biomes.DARK_FOREST);
 		this.tag(EnvironmentalBiomeTags.HAS_VIOLET).addTag(BiomeTags.IS_TAIGA);
 		this.tag(EnvironmentalBiomeTags.HAS_TASSELFLOWER).addTag(BiomeTags.IS_SAVANNA);
 		this.tag(EnvironmentalBiomeTags.HAS_BIRD_OF_PARADISE).addTag(BiomeTags.IS_JUNGLE).addTag(EnvironmentalBiomeTags.IS_RAINFOREST);
 		this.tag(EnvironmentalBiomeTags.HAS_HIBISCUS).add(Biomes.JUNGLE);
+		this.tag(EnvironmentalBiomeTags.HAS_MYCELIUM_SPROUTS).add(Biomes.MUSHROOM_FIELDS);
+		this.tag(EnvironmentalBiomeTags.HAS_CARTWHEEL).add(BiomeTags.IS_OVERWORLD);
+
+		this.tag(EnvironmentalBiomeTags.HAS_SWAMP_VEGETATION).add(Biomes.SWAMP);
+		this.tag(EnvironmentalBiomeTags.HAS_FOREST_VEGETATION).add(Biomes.FLOWER_FOREST);
+		this.tag(EnvironmentalBiomeTags.HAS_SAVANNA_VEGETATION).add(BiomeTags.IS_SAVANNA);
+		this.tag(EnvironmentalBiomeTags.HAS_PLAINS_VEGETATION).add(BlueprintBiomeTags.IS_GRASSLAND);
+		this.tag(EnvironmentalBiomeTags.HAS_JUNGLE_VEGETATION).add(BiomeTags.IS_JUNGLE);
 
 		this.tag(EnvironmentalBiomeTags.HAS_MUD_DISK).add(Biomes.SWAMP);
 
