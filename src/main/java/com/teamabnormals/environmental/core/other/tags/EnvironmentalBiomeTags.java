@@ -34,7 +34,7 @@ public class EnvironmentalBiomeTags {
 
 	public static final TagKey<Biome> HAS_CATTAILS = biomeTag("has_feature/cattails");
 	public static final TagKey<Biome> HAS_CUP_LICHEN = biomeTag("has_feature/cup_lichen");
-	public static final TagKey<Biome> HAS_DWARF_SPRUCE_SPARSE = biomeTag("has_feature/dwarf_spruce_sparse");
+	public static final TagKey<Biome> HAS_SPARSE_DWARF_SPRUCE = biomeTag("has_feature/dwarf_spruce_sparse");
 	public static final TagKey<Biome> HAS_BLUEBELL = biomeTag("has_feature/bluebell");
 	public static final TagKey<Biome> HAS_VIOLET = biomeTag("has_feature/violet");
 	public static final TagKey<Biome> HAS_TASSELFLOWER = biomeTag("has_feature/tasselflower");

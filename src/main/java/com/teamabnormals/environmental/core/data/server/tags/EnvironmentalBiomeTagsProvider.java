@@ -104,7 +104,7 @@ public class EnvironmentalBiomeTagsProvider extends BiomeTagsProvider {
 
 		this.tag(EnvironmentalBiomeTags.HAS_CATTAILS).add(Biomes.RIVER, Biomes.SWAMP, Biomes.MANGROVE_SWAMP);
 		this.tag(EnvironmentalBiomeTags.HAS_CUP_LICHEN).addTag(BiomeTags.IS_TAIGA);
-		this.tag(EnvironmentalBiomeTags.HAS_DWARF_SPRUCE).addTag(BiomeTags.IS_TAIGA);
+		this.tag(EnvironmentalBiomeTags.HAS_SPARSE_DWARF_SPRUCE).addTag(BiomeTags.IS_TAIGA);
 		this.tag(EnvironmentalBiomeTags.HAS_BLUEBELL).add(Biomes.DARK_FOREST);
 		this.tag(EnvironmentalBiomeTags.HAS_VIOLET).addTag(BiomeTags.IS_TAIGA);
 		this.tag(EnvironmentalBiomeTags.HAS_TASSELFLOWER).addTag(BiomeTags.IS_SAVANNA);
