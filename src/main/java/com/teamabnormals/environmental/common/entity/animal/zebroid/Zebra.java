@@ -18,7 +18,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.horse.*;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.SoundType;
 
 import javax.annotation.Nullable;
 import java.util.Comparator;
@@ -61,12 +60,12 @@ public class Zebra extends AbstractUnchestedZebroid {
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return !this.canDoIdleAnimation() ? EnvironmentalSoundEvents.ZEBRA_AMBIENT.get() : null;
+		return EnvironmentalSoundEvents.ZEBRA_AMBIENT.get();
 	}
 
 	@Override
 	protected SoundEvent getAngrySound() {
-		return !this.canDoIdleAnimation() ? EnvironmentalSoundEvents.ZEBRA_ANGRY.get() : null;
+		return EnvironmentalSoundEvents.ZEBRA_ANGRY.get();
 	}
 
 	@Override

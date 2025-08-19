@@ -314,15 +314,11 @@ public class Zonkey extends AbstractChestedHorse implements NeutralMob, Zebroid 
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		if (this.canDoIdleAnimation())
-			super.getAmbientSound();
 		return EnvironmentalSoundEvents.ZONKEY_AMBIENT.get();
 	}
 
 	@Override
 	protected SoundEvent getAngrySound() {
-		if (this.canDoIdleAnimation())
-			super.getAngrySound();
 		return EnvironmentalSoundEvents.ZONKEY_ANGRY.get();
 	}
 

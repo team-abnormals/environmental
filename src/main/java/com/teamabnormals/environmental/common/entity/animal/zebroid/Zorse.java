@@ -151,12 +151,12 @@ public class Zorse extends AbstractUnchestedZebroid implements VariantHolder<Var
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return !this.canDoIdleAnimation() ? EnvironmentalSoundEvents.ZORSE_AMBIENT.get() : null;
+		return EnvironmentalSoundEvents.ZORSE_AMBIENT.get();
 	}
 
 	@Override
 	protected SoundEvent getAngrySound() {
-		return !this.canDoIdleAnimation() ? EnvironmentalSoundEvents.ZORSE_ANGRY.get() : null;
+		return EnvironmentalSoundEvents.ZORSE_ANGRY.get();
 	}
 
 	@Override
