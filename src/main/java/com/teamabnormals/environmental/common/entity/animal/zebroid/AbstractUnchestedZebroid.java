@@ -282,37 +282,6 @@ public abstract class AbstractUnchestedZebroid extends AbstractHorse implements 
 	}
 
 	@Override
-	protected SoundEvent getAmbientSound() {
-		if (this.canDoIdleAnimation())
-			super.getAmbientSound();
-		return EnvironmentalSoundEvents.ZEBRA_AMBIENT.get();
-	}
-
-	@Override
-	protected SoundEvent getAngrySound() {
-		if (this.canDoIdleAnimation())
-			super.getAngrySound();
-		return EnvironmentalSoundEvents.ZEBRA_ANGRY.get();
-	}
-
-	@Override
-	protected SoundEvent getDeathSound() {
-		return EnvironmentalSoundEvents.ZEBRA_DEATH.get();
-	}
-
-	@Override
-	protected SoundEvent getEatingSound() {
-		return EnvironmentalSoundEvents.ZEBRA_EAT.get();
-	}
-
-	@Override
-	protected SoundEvent getHurtSound(DamageSource source) {
-		if (!this.isKicking())
-			super.getHurtSound(source);
-		return EnvironmentalSoundEvents.ZEBRA_HURT.get();
-	}
-
-	@Override
 	public void playKickingSound() {
 		this.playSound(this.getAmbientSound(), this.getSoundVolume(), this.getVoicePitch());
 	}
@@ -323,11 +292,6 @@ public abstract class AbstractUnchestedZebroid extends AbstractHorse implements 
 	}
 
 	@Override
-	protected void playJumpSound() {
-		this.playSound(EnvironmentalSoundEvents.ZEBRA_JUMP.get(), 0.4F, 1.0F);
-	}
-
-	@Override
 	protected void playStepSound(BlockPos pos, BlockState state) {
 		this.handleStepSound(pos, state);
 	}
@@ -335,14 +299,6 @@ public abstract class AbstractUnchestedZebroid extends AbstractHorse implements 
 	@Override
 	public void playZebroidGallopSound(SoundType soundType) {
 		this.playGallopSound(soundType);
-	}
-
-	@Override
-	public void playGallopSound(SoundType soundType) {
-		this.playSound(EnvironmentalSoundEvents.ZEBRA_GALLOP.get(), soundType.getVolume() * 0.15F, soundType.getPitch());
-		if (this.random.nextInt(10) == 0) {
-			this.playSound(EnvironmentalSoundEvents.ZEBRA_BREATHE.get(), soundType.getVolume() * 0.6F, soundType.getPitch());
-		}
 	}
 
 	@Override

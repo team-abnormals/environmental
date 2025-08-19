@@ -2,16 +2,20 @@ package com.teamabnormals.environmental.common.entity.animal.zebroid;
 
 import com.teamabnormals.environmental.common.entity.ai.goal.zebroid.ZebroidPanicGoal;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
+import com.teamabnormals.environmental.core.registry.EnvironmentalSoundEvents;
 import net.minecraft.Util;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -26,6 +30,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
@@ -141,6 +147,42 @@ public class Zorse extends AbstractUnchestedZebroid implements VariantHolder<Var
 
 	public void randomizeStripeOpacity(RandomSource random) {
 		this.setStripeOpacity(33 + random.nextInt(68));
+	}
+
+	@Override
+	protected SoundEvent getAmbientSound() {
+		return !this.canDoIdleAnimation() ? EnvironmentalSoundEvents.ZORSE_AMBIENT.get() : null;
+	}
+
+	@Override
+	protected SoundEvent getAngrySound() {
+		return !this.canDoIdleAnimation() ? EnvironmentalSoundEvents.ZORSE_ANGRY.get() : null;
+	}
+
+	@Override
+	protected SoundEvent getDeathSound() {
+		return EnvironmentalSoundEvents.ZORSE_DEATH.get();
+	}
+
+	@Override
+	protected SoundEvent getEatingSound() {
+		return EnvironmentalSoundEvents.ZORSE_EAT.get();
+	}
+
+	@Override
+	protected SoundEvent getHurtSound(DamageSource source) {
+		if (!this.isKicking())
+			super.getHurtSound(source);
+		return EnvironmentalSoundEvents.ZORSE_HURT.get();
+	}
+
+	@Override
+	protected void playGallopSound(SoundType soundType) {
+		super.playGallopSound(soundType);
+
+		ItemStack stack = this.inventory.getItem(1);
+		if (isArmor(stack))
+			stack.onHorseArmorTick(level(), this);
 	}
 
 	@Override

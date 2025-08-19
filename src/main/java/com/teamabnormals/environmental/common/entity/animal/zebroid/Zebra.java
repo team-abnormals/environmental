@@ -4,9 +4,12 @@ import com.teamabnormals.environmental.common.entity.ai.goal.HerdLandWanderGoal;
 import com.teamabnormals.environmental.common.entity.ai.goal.zebroid.ZebraFleeGoal;
 import com.teamabnormals.environmental.common.entity.ai.goal.zebroid.ZebroidFollowParentGoal;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
+import com.teamabnormals.environmental.core.registry.EnvironmentalSoundEvents;
 import net.minecraft.Util;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -15,6 +18,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.horse.*;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.SoundType;
 
 import javax.annotation.Nullable;
 import java.util.Comparator;
@@ -53,6 +57,33 @@ public class Zebra extends AbstractUnchestedZebroid {
 
 	private static float generateAttackDamage(IntUnaryOperator random) {
 		return 1.0F + random.applyAsInt(2) + random.applyAsInt(2) + random.applyAsInt(2);
+	}
+
+	@Override
+	protected SoundEvent getAmbientSound() {
+		return !this.canDoIdleAnimation() ? EnvironmentalSoundEvents.ZEBRA_AMBIENT.get() : null;
+	}
+
+	@Override
+	protected SoundEvent getAngrySound() {
+		return !this.canDoIdleAnimation() ? EnvironmentalSoundEvents.ZEBRA_ANGRY.get() : null;
+	}
+
+	@Override
+	protected SoundEvent getDeathSound() {
+		return EnvironmentalSoundEvents.ZEBRA_DEATH.get();
+	}
+
+	@Override
+	protected SoundEvent getEatingSound() {
+		return EnvironmentalSoundEvents.ZEBRA_EAT.get();
+	}
+
+	@Override
+	protected SoundEvent getHurtSound(DamageSource source) {
+		if (!this.isKicking())
+			super.getHurtSound(source);
+		return EnvironmentalSoundEvents.ZEBRA_HURT.get();
 	}
 
 	@Override

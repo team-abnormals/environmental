@@ -56,12 +56,21 @@ public class EnvironmentalSoundEvents {
 
 	public static final RegistryObject<SoundEvent> ZEBRA_AMBIENT = HELPER.createSoundEvent("entity.zebra.ambient");
 	public static final RegistryObject<SoundEvent> ZEBRA_ANGRY = HELPER.createSoundEvent("entity.zebra.angry");
-	public static final RegistryObject<SoundEvent> ZEBRA_BREATHE = HELPER.createSoundEvent("entity.zebra.breathe");
 	public static final RegistryObject<SoundEvent> ZEBRA_DEATH = HELPER.createSoundEvent("entity.zebra.death");
 	public static final RegistryObject<SoundEvent> ZEBRA_EAT = HELPER.createSoundEvent("entity.zebra.eat");
-	public static final RegistryObject<SoundEvent> ZEBRA_GALLOP = HELPER.createSoundEvent("entity.zebra.gallop");
 	public static final RegistryObject<SoundEvent> ZEBRA_HURT = HELPER.createSoundEvent("entity.zebra.hurt");
-	public static final RegistryObject<SoundEvent> ZEBRA_JUMP = HELPER.createSoundEvent("entity.zebra.jump");
+
+	public static final RegistryObject<SoundEvent> ZORSE_AMBIENT = HELPER.createSoundEvent("entity.zorse.ambient");
+	public static final RegistryObject<SoundEvent> ZORSE_ANGRY = HELPER.createSoundEvent("entity.zorse.angry");
+	public static final RegistryObject<SoundEvent> ZORSE_DEATH = HELPER.createSoundEvent("entity.zorse.death");
+	public static final RegistryObject<SoundEvent> ZORSE_EAT = HELPER.createSoundEvent("entity.zorse.eat");
+	public static final RegistryObject<SoundEvent> ZORSE_HURT = HELPER.createSoundEvent("entity.zorse.hurt");
+
+	public static final RegistryObject<SoundEvent> ZONKEY_AMBIENT = HELPER.createSoundEvent("entity.zonkey.ambient");
+	public static final RegistryObject<SoundEvent> ZONKEY_ANGRY = HELPER.createSoundEvent("entity.zonkey.angry");
+	public static final RegistryObject<SoundEvent> ZONKEY_DEATH = HELPER.createSoundEvent("entity.zonkey.death");
+	public static final RegistryObject<SoundEvent> ZONKEY_EAT = HELPER.createSoundEvent("entity.zonkey.eat");
+	public static final RegistryObject<SoundEvent> ZONKEY_HURT = HELPER.createSoundEvent("entity.zonkey.hurt");
 
 	public static final RegistryObject<SoundEvent> PIG_SNIFF = HELPER.createSoundEvent("entity.pig.sniff");
 

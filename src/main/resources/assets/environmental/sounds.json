@@ -437,29 +437,21 @@
   },
   "entity.zebra.ambient": {
     "sounds": [
-      "mob/horse/idle1",
-      "mob/horse/idle2",
-      "mob/horse/idle3"
+      "environmental:mob/zebra/idle1",
+      "environmental:mob/zebra/idle2",
+      "environmental:mob/zebra/idle3"
     ],
     "subtitle": "subtitles.environmental.entity.zebra.ambient"
   },
   "entity.zebra.angry": {
     "sounds": [
-      "mob/horse/angry1"
+      "environmental:mob/zebra/angry1"
     ],
     "subtitle": "subtitles.environmental.entity.zebra.angry"
   },
-  "entity.zebra.breathe": {
-    "sounds": [
-      "mob/horse/breathe1",
-      "mob/horse/breathe2",
-      "mob/horse/breathe3"
-    ],
-    "subtitle": "subtitles.environmental.entity.zebra.breathe"
-  },
   "entity.zebra.death": {
     "sounds": [
-      "mob/horse/death"
+      "environmental:mob/zebra/death"
     ],
     "subtitle": "subtitles.environmental.entity.zebra.death"
   },
@@ -473,29 +465,100 @@
     ],
     "subtitle": "subtitles.environmental.entity.zebra.eat"
   },
-  "entity.zebra.gallop": {
-    "sounds": [
-      "mob/horse/gallop1",
-      "mob/horse/gallop2",
-      "mob/horse/gallop3",
-      "mob/horse/gallop4"
-    ],
-    "subtitle": "subtitles.environmental.entity.zebra.gallop"
-  },
   "entity.zebra.hurt": {
     "sounds": [
-      "mob/horse/hit1",
-      "mob/horse/hit2",
-      "mob/horse/hit3",
-      "mob/horse/hit4"
+      "environmental:mob/zebra/hit1",
+      "environmental:mob/zebra/hit2",
+      "environmental:mob/zebra/hit3",
+      "environmental:mob/zebra/hit4"
     ],
     "subtitle": "subtitles.environmental.entity.zebra.hurt"
   },
-  "entity.zebra.jump": {
+  "entity.zorse.ambient": {
     "sounds": [
-      "mob/horse/jump"
+      "environmental:mob/zebra/idle1",
+      "environmental:mob/zebra/idle2",
+      "environmental:mob/zebra/idle3"
     ],
-    "subtitle": "subtitles.environmental.entity.zebra.jump"
+    "subtitle": "subtitles.environmental.entity.zorse.ambient"
+  },
+  "entity.zorse.angry": {
+    "sounds": [
+      "environmental:mob/zebra/angry1"
+    ],
+    "subtitle": "subtitles.environmental.entity.zorse.angry"
+  },
+  "entity.zorse.breathe": {
+    "sounds": [
+      "environmental:mob/zebra/breathe1",
+      "environmental:mob/zebra/breathe2",
+      "environmental:mob/zebra/breathe3"
+    ],
+    "subtitle": "subtitles.environmental.entity.zorse.breathe"
+  },
+  "entity.zorse.death": {
+    "sounds": [
+      "environmental:mob/zebra/death"
+    ],
+    "subtitle": "subtitles.environmental.entity.zorse.death"
+  },
+  "entity.zorse.eat": {
+    "sounds": [
+      "entity/horse/eat1",
+      "entity/horse/eat2",
+      "entity/horse/eat3",
+      "entity/horse/eat4",
+      "entity/horse/eat5"
+    ],
+    "subtitle": "subtitles.environmental.entity.zorse.eat"
+  },
+  "entity.zorse.hurt": {
+    "sounds": [
+      "environmental:mob/zebra/hit1",
+      "environmental:mob/zebra/hit2",
+      "environmental:mob/zebra/hit3",
+      "environmental:mob/zebra/hit4"
+    ],
+    "subtitle": "subtitles.environmental.entity.zorse.hurt"
+  },
+  "entity.zonkey.ambient": {
+    "sounds": [
+      "environmental:mob/zebra/idle1",
+      "environmental:mob/zebra/idle2",
+      "environmental:mob/zebra/idle3"
+    ],
+    "subtitle": "subtitles.environmental.entity.zonkey.ambient"
+  },
+  "entity.zonkey.angry": {
+    "sounds": [
+      "environmental:mob/zebra/angry1"
+    ],
+    "subtitle": "subtitles.environmental.entity.zonkey.angry"
+  },
+  "entity.zonkey.death": {
+    "sounds": [
+      "environmental:mob/zebra/death"
+    ],
+    "subtitle": "subtitles.environmental.entity.zonkey.death"
+  },
+  "entity.zonkey.eat": {
+    "sounds": [
+      "entity/horse/eat1",
+      "entity/horse/eat2",
+      "entity/horse/eat3",
+      "entity/horse/eat4",
+      "entity/horse/eat5"
+    ],
+    "subtitle": "subtitles.environmental.entity.zonkey.eat"
+  },
+  "entity.zonkey.hurt": {
+    "sounds": [
+      "environmental:mob/zebra/hit1",
+      "environmental:mob/zebra/hit2",
+      "environmental:mob/zebra/hit3",
+      "environmental:mob/zebra/hit4"
+    ],
+    "subtitle": "subtitles.environmental.entity.zonkey.hurt"
   },
   "block.cattail.meow": {
     "sounds": [
