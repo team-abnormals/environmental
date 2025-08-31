@@ -212,7 +212,11 @@ public class Yak extends Animal implements IForgeShearable, Shearable {
     }
 
     public static AttributeSupplier.Builder registerAttributes() {
-        return Animal.createMobAttributes().add(Attributes.MAX_HEALTH, 25.0D).add(Attributes.MOVEMENT_SPEED, 0.2F).add(Attributes.ATTACK_DAMAGE, 3.0F).add(Attributes.ATTACK_KNOCKBACK, 1.2F);
+        return Animal.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 25.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.2F)
+                .add(Attributes.ATTACK_DAMAGE, 3.0F)
+                .add(Attributes.ATTACK_KNOCKBACK, 2.5F);
     }
 
     @Override
