@@ -1,11 +1,9 @@
 package com.teamabnormals.environmental.common.entity.ai.brain.yak;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.teamabnormals.environmental.common.entity.animal.yak.Yak;
 import com.teamabnormals.environmental.common.entity.animal.yak.Yaktelligence;
 import com.teamabnormals.environmental.core.registry.EnvironmentalMemoryModuleTypes;
-import it.unimi.dsi.fastutil.objects.ObjectImmutableList;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.sensing.Sensor;
@@ -18,29 +16,29 @@ import java.util.Set;
 
 public class YakHerdingSensor extends Sensor<Yak> {
 
-    @Override
-    public Set<MemoryModuleType<?>> requires() {
-        return ImmutableSet.of(EnvironmentalMemoryModuleTypes.NEAREST_VISIBLE_YAKS.get(), MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES);
-    }
+	@Override
+	public Set<MemoryModuleType<?>> requires() {
+		return ImmutableSet.of(EnvironmentalMemoryModuleTypes.NEAREST_VISIBLE_YAKS.get(), MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES);
+	}
 
-    @Override
-    protected void doTick(ServerLevel level, Yak yak) {
-        yak.getBrain().getMemory(MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES).ifPresent((entities) -> {
-            List<Yak> nearest = entities.find(
-                    (entity) -> entity.getType() == yak.getType() &&
-                            yak.distanceToSqr(entity) < Yaktelligence.HERD_SEARCH_RADIUS * Yaktelligence.HERD_SEARCH_RADIUS
-            ).map(Yak.class::cast).sorted(Comparator.comparing(yak::distanceToSqr)).toList();
+	@Override
+	protected void doTick(ServerLevel level, Yak yak) {
+		yak.getBrain().getMemory(MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES).ifPresent((entities) -> {
+			List<Yak> nearest = entities.find(
+					(entity) -> entity.getType() == yak.getType() &&
+							yak.distanceToSqr(entity) < Yaktelligence.HERD_SEARCH_RADIUS * Yaktelligence.HERD_SEARCH_RADIUS
+			).map(Yak.class::cast).sorted(Comparator.comparing(yak::distanceToSqr)).toList();
 
-            List<Yak> babyYaks = new ArrayList<>();
-            List<Yak> adultYaks = new ArrayList();
-            nearest.forEach(y -> {
-                if (y.isBaby()) babyYaks.add(y);
-                else adultYaks.add(y);
-            });
+			List<Yak> babyYaks = new ArrayList<>();
+			List<Yak> adultYaks = new ArrayList();
+			nearest.forEach(y -> {
+				if (y.isBaby()) babyYaks.add(y);
+				else adultYaks.add(y);
+			});
 
-            yak.getBrain().setMemory(EnvironmentalMemoryModuleTypes.NEAREST_VISIBLE_YAKS.get(), nearest);
-            yak.getBrain().setMemory(EnvironmentalMemoryModuleTypes.NEAREST_VISIBLE_ADULT_YAKS.get(), adultYaks);
-            yak.getBrain().setMemory(EnvironmentalMemoryModuleTypes.NEAREST_VISIBLE_BABY_YAKS.get(), babyYaks);
-        });
-    }
+			yak.getBrain().setMemory(EnvironmentalMemoryModuleTypes.NEAREST_VISIBLE_YAKS.get(), nearest);
+			yak.getBrain().setMemory(EnvironmentalMemoryModuleTypes.NEAREST_VISIBLE_ADULT_YAKS.get(), adultYaks);
+			yak.getBrain().setMemory(EnvironmentalMemoryModuleTypes.NEAREST_VISIBLE_BABY_YAKS.get(), babyYaks);
+		});
+	}
 }

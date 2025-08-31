@@ -29,7 +29,7 @@ public class CupLichenPatchFeature extends Feature<CupLichenPatchConfiguration> 
 		int xzspread = config.xzSpread() + 1;
 		int yspread = config.ySpread() + 1;
 
-		for(int i = 0; i < config.tries(); ++i) {
+		for (int i = 0; i < config.tries(); ++i) {
 			mutable.setWithOffset(origin, random.nextInt(xzspread) - random.nextInt(xzspread), random.nextInt(yspread) - random.nextInt(yspread), random.nextInt(xzspread) - random.nextInt(xzspread));
 			BlockState offsetstate = level.getBlockState(mutable);
 			if (EnvironmentalBlocks.CUP_LICHEN.get().defaultBlockState().canSurvive(level, mutable)) {

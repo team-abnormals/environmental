@@ -17,15 +17,12 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
-import net.minecraft.util.TimeUtil;
-import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.Brain;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Animal;
@@ -38,7 +35,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.common.IForgeShearable;
 
 import javax.annotation.Nonnull;
@@ -46,263 +42,262 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 
 public class Yak extends Animal implements IForgeShearable, Shearable {
-    private static final EntityDataAccessor<Boolean> SHEARED = SynchedEntityData.defineId(Yak.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<Integer> ANGER_TIME = SynchedEntityData.defineId(Yak.class, EntityDataSerializers.INT);
+	private static final EntityDataAccessor<Boolean> SHEARED = SynchedEntityData.defineId(Yak.class, EntityDataSerializers.BOOLEAN);
+	private static final EntityDataAccessor<Integer> ANGER_TIME = SynchedEntityData.defineId(Yak.class, EntityDataSerializers.INT);
 
-    private int grazeTimer;
-    private boolean ramming;
-    private int rammingTick;
+	private int grazeTimer;
+	private boolean ramming;
+	private int rammingTick;
 
-    public Yak(EntityType<? extends Yak> type, Level worldIn) {
-        super(type, worldIn);
-    }
+	public Yak(EntityType<? extends Yak> type, Level worldIn) {
+		super(type, worldIn);
+	}
 
-    @Override
-    protected Brain.Provider<Yak> brainProvider() {
-        return Yaktelligence.createProvider();
-    }
+	@Override
+	protected Brain.Provider<Yak> brainProvider() {
+		return Yaktelligence.createProvider();
+	}
 
-    @Override
-    protected Brain<?> makeBrain(Dynamic<?> dynamic) {
-        return Yaktelligence.createBrain(this, this.brainProvider().makeBrain(dynamic));
-    }
+	@Override
+	protected Brain<?> makeBrain(Dynamic<?> dynamic) {
+		return Yaktelligence.createBrain(this, this.brainProvider().makeBrain(dynamic));
+	}
 
-    @Override
-    public Brain<Yak> getBrain() {
-        return (Brain<Yak>) super.getBrain();
-    }
+	@Override
+	public Brain<Yak> getBrain() {
+		return (Brain<Yak>) super.getBrain();
+	}
 
-    @Override
-    protected void sendDebugPackets() {
-        super.sendDebugPackets();
-        DebugPackets.sendEntityBrain(this);
-    }
+	@Override
+	protected void sendDebugPackets() {
+		super.sendDebugPackets();
+		DebugPackets.sendEntityBrain(this);
+	}
 
-    @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, SpawnGroupData spawnData, CompoundTag tag) {
-        Yaktelligence.createMemories(this, level.getRandom());
-        return super.finalizeSpawn(level, difficulty, spawnType, spawnData, tag);
-    }
+	@Override
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, SpawnGroupData spawnData, CompoundTag tag) {
+		Yaktelligence.createMemories(this, level.getRandom());
+		return super.finalizeSpawn(level, difficulty, spawnType, spawnData, tag);
+	}
 
-    @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(SHEARED, false);
-        this.entityData.define(ANGER_TIME, 0);
-    }
+	@Override
+	protected void defineSynchedData() {
+		super.defineSynchedData();
+		this.entityData.define(SHEARED, false);
+		this.entityData.define(ANGER_TIME, 0);
+	}
 
-    @Override
-    public void addAdditionalSaveData(CompoundTag compound) {
-        super.addAdditionalSaveData(compound);
-        compound.putBoolean("Sheared", this.isSheared());
-    }
+	@Override
+	public void addAdditionalSaveData(CompoundTag compound) {
+		super.addAdditionalSaveData(compound);
+		compound.putBoolean("Sheared", this.isSheared());
+	}
 
-    @Override
-    public void readAdditionalSaveData(CompoundTag compound) {
-        super.readAdditionalSaveData(compound);
-        this.setSheared(compound.getBoolean("Sheared"));
-    }
+	@Override
+	public void readAdditionalSaveData(CompoundTag compound) {
+		super.readAdditionalSaveData(compound);
+		this.setSheared(compound.getBoolean("Sheared"));
+	}
 
-    @Override
-    protected void customServerAiStep() {
-        this.level().getProfiler().push("yakBrain");
-        Yaktelligence.tick(this);
-        this.level().getProfiler().pop();
+	@Override
+	protected void customServerAiStep() {
+		this.level().getProfiler().push("yakBrain");
+		Yaktelligence.tick(this);
+		this.level().getProfiler().pop();
 
-        if (Yaktelligence.isFighting(this.getBrain())) {
-            this.lastHurtByPlayerTime = this.tickCount;
-        }
-        super.customServerAiStep();
-    }
+		if (Yaktelligence.isFighting(this.getBrain())) {
+			this.lastHurtByPlayerTime = this.tickCount;
+		}
+		super.customServerAiStep();
+	}
 
-    @Override
-    public void aiStep() {
-        if (this.level().isClientSide) {
-            if (this.grazeTimer > 0)
-                this.grazeTimer--;
+	@Override
+	public void aiStep() {
+		if (this.level().isClientSide) {
+			if (this.grazeTimer > 0)
+				this.grazeTimer--;
 
-            if (this.ramming) {
-                ++this.rammingTick;
-            } else {
-                this.rammingTick -= 2;
-            }
-            this.rammingTick = Mth.clamp(this.rammingTick, 0, Yaktelligence.RAM_PREPARE_TIME);
-        }
+			if (this.ramming) {
+				++this.rammingTick;
+			} else {
+				this.rammingTick -= 2;
+			}
+			this.rammingTick = Mth.clamp(this.rammingTick, 0, Yaktelligence.RAM_PREPARE_TIME);
+		}
 
-        super.aiStep();
-    }
+		super.aiStep();
+	}
 
-    @Override
-    public void handleEntityEvent(byte id) {
-        switch (id) {
-            case 10 -> this.grazeTimer = 40;
-            case 11 -> this.grazeTimer = 0;
-            case 58 -> this.ramming = true;
-            case 59 -> this.ramming = false;
-            default -> super.handleEntityEvent(id);
-        }
-    }
+	@Override
+	public void handleEntityEvent(byte id) {
+		switch (id) {
+			case 10 -> this.grazeTimer = 40;
+			case 11 -> this.grazeTimer = 0;
+			case 58 -> this.ramming = true;
+			case 59 -> this.ramming = false;
+			default -> super.handleEntityEvent(id);
+		}
+	}
 
-    @Override
-    public InteractionResult mobInteract(Player player, InteractionHand hand) {
-        ItemStack stack = player.getItemInHand(hand);
-        if (stack.is(Items.BUCKET) && !this.isBaby()) {
-            player.playSound(EnvironmentalSoundEvents.YAK_MILK.get(), 1.0F, 1.0F);
-            ItemStack newStack = ItemUtils.createFilledResult(stack, player, Items.MILK_BUCKET.getDefaultInstance());
-            player.setItemInHand(hand, newStack);
-            return InteractionResult.sidedSuccess(this.level().isClientSide);
-        } else {
-            return super.mobInteract(player, hand);
-        }
-    }
+	@Override
+	public InteractionResult mobInteract(Player player, InteractionHand hand) {
+		ItemStack stack = player.getItemInHand(hand);
+		if (stack.is(Items.BUCKET) && !this.isBaby()) {
+			player.playSound(EnvironmentalSoundEvents.YAK_MILK.get(), 1.0F, 1.0F);
+			ItemStack newStack = ItemUtils.createFilledResult(stack, player, Items.MILK_BUCKET.getDefaultInstance());
+			player.setItemInHand(hand, newStack);
+			return InteractionResult.sidedSuccess(this.level().isClientSide);
+		} else {
+			return super.mobInteract(player, hand);
+		}
+	}
 
-    @Override
-    public boolean isFood(ItemStack stack) {
-        return Ingredient.of(EnvironmentalItemTags.YAK_FOOD).test(stack);
-    }
+	@Override
+	public boolean isFood(ItemStack stack) {
+		return Ingredient.of(EnvironmentalItemTags.YAK_FOOD).test(stack);
+	}
 
-    public float getHeadEatingOffset(float partialTicks) {
-        if (this.grazeTimer <= 0) {
-            return 0.0F;
-        } else if (this.grazeTimer >= 4 && this.grazeTimer <= 36) {
-            return 1.0F;
-        } else {
-            return this.grazeTimer < 4 ? ((float) this.grazeTimer - partialTicks) / 4.0F : -((float) (this.grazeTimer - 40) - partialTicks) / 4.0F;
-        }
-    }
+	public float getHeadEatingOffset(float partialTicks) {
+		if (this.grazeTimer <= 0) {
+			return 0.0F;
+		} else if (this.grazeTimer >= 4 && this.grazeTimer <= 36) {
+			return 1.0F;
+		} else {
+			return this.grazeTimer < 4 ? ((float) this.grazeTimer - partialTicks) / 4.0F : -((float) (this.grazeTimer - 40) - partialTicks) / 4.0F;
+		}
+	}
 
-    public float getHeadPitch(float partialTicks) {
-        float rammingPitch = (float) this.rammingTick / Yaktelligence.RAM_PREPARE_TIME * 30.0F * (float) Math.PI / 180F;
-        if (rammingPitch != 0)
-            return rammingPitch;
+	public float getHeadPitch(float partialTicks) {
+		float rammingPitch = (float) this.rammingTick / Yaktelligence.RAM_PREPARE_TIME * 30.0F * (float) Math.PI / 180F;
+		if (rammingPitch != 0)
+			return rammingPitch;
 
-        if (this.grazeTimer > 4 && this.grazeTimer <= 36) {
-            return ((float) Math.PI / 5F) + 0.22F * Mth.sin((((float) (this.grazeTimer - 4) - partialTicks) / 32.0F) * 28.7F);
-        } else {
-            return this.grazeTimer > 0 ? ((float) Math.PI / 5F) : Mth.lerp(partialTicks, this.xRotO, this.getXRot()) * ((float) Math.PI / 180F);
-        }
-    }
+		if (this.grazeTimer > 4 && this.grazeTimer <= 36) {
+			return ((float) Math.PI / 5F) + 0.22F * Mth.sin((((float) (this.grazeTimer - 4) - partialTicks) / 32.0F) * 28.7F);
+		} else {
+			return this.grazeTimer > 0 ? ((float) Math.PI / 5F) : Mth.lerp(partialTicks, this.xRotO, this.getXRot()) * ((float) Math.PI / 180F);
+		}
+	}
 
-    @Override
-    public void ate() {
-        this.setSheared(false);
-        if (this.isBaby()) {
-            this.ageUp(60);
-        }
-    }
+	@Override
+	public void ate() {
+		this.setSheared(false);
+		if (this.isBaby()) {
+			this.ageUp(60);
+		}
+	}
 
-    public boolean isSheared() {
-        return this.entityData.get(SHEARED);
-    }
+	public boolean isSheared() {
+		return this.entityData.get(SHEARED);
+	}
 
-    public void setSheared(boolean sheared) {
-        this.entityData.set(SHEARED, sheared);
-    }
+	public void setSheared(boolean sheared) {
+		this.entityData.set(SHEARED, sheared);
+	}
 
-    public boolean readyForShearing() {
-        return this.isAlive() && !this.isSheared() && !this.isBaby();
-    }
+	public boolean readyForShearing() {
+		return this.isAlive() && !this.isSheared() && !this.isBaby();
+	}
 
-    @Override
-    public boolean isShearable(ItemStack item, Level world, BlockPos pos) {
-        return readyForShearing();
-    }
+	@Override
+	public boolean isShearable(ItemStack item, Level world, BlockPos pos) {
+		return readyForShearing();
+	}
 
-    public static AttributeSupplier.Builder registerAttributes() {
-        return Animal.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 25.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.2F)
-                .add(Attributes.ATTACK_DAMAGE, 3.0F)
-                .add(Attributes.ATTACK_KNOCKBACK, 2.5F);
-    }
+	public static AttributeSupplier.Builder registerAttributes() {
+		return Animal.createMobAttributes()
+				.add(Attributes.MAX_HEALTH, 25.0D)
+				.add(Attributes.MOVEMENT_SPEED, 0.2F)
+				.add(Attributes.ATTACK_DAMAGE, 3.0F)
+				.add(Attributes.ATTACK_KNOCKBACK, 2.5F);
+	}
 
-    @Override
-    protected SoundEvent getAmbientSound() {
-        return EnvironmentalSoundEvents.YAK_AMBIENT.get();
-    }
+	@Override
+	protected SoundEvent getAmbientSound() {
+		return EnvironmentalSoundEvents.YAK_AMBIENT.get();
+	}
 
-    @Override
-    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return EnvironmentalSoundEvents.YAK_HURT.get();
-    }
+	@Override
+	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+		return EnvironmentalSoundEvents.YAK_HURT.get();
+	}
 
-    @Override
-    protected SoundEvent getDeathSound() {
-        return EnvironmentalSoundEvents.YAK_DEATH.get();
-    }
+	@Override
+	protected SoundEvent getDeathSound() {
+		return EnvironmentalSoundEvents.YAK_DEATH.get();
+	}
 
-    @Override
-    protected void playStepSound(BlockPos pos, BlockState blockIn) {
-        this.playSound(SoundEvents.COW_STEP, 0.15F, 1.0F);
-    }
+	@Override
+	protected void playStepSound(BlockPos pos, BlockState blockIn) {
+		this.playSound(SoundEvents.COW_STEP, 0.15F, 1.0F);
+	}
 
-    @Override
-    protected float getSoundVolume() {
-        return 0.4F;
-    }
+	@Override
+	protected float getSoundVolume() {
+		return 0.4F;
+	}
 
-    @Override
-    public float getVoicePitch() {
-        return 0.8F;
-    }
+	@Override
+	public float getVoicePitch() {
+		return 0.8F;
+	}
 
-    @Nonnull
-    @Override
-    public List<ItemStack> onSheared(@Nullable Player player, @Nonnull ItemStack item, Level world, BlockPos pos, int fortune) {
-        world.playSound(null, this, SoundEvents.SHEEP_SHEAR, player == null ? SoundSource.BLOCKS : SoundSource.PLAYERS, 1.0F, 1.0F);
-        if (!world.isClientSide) {
-            this.setSheared(true);
-            if (player != null && !player.isCreative() && !(player.getItemBySlot(EquipmentSlot.LEGS).getItem() instanceof YakPantsItem)) {
-                Yaktelligence.retaliate(this, player);
-            }
+	@Nonnull
+	@Override
+	public List<ItemStack> onSheared(@Nullable Player player, @Nonnull ItemStack item, Level world, BlockPos pos, int fortune) {
+		world.playSound(null, this, SoundEvents.SHEEP_SHEAR, player == null ? SoundSource.BLOCKS : SoundSource.PLAYERS, 1.0F, 1.0F);
+		if (!world.isClientSide) {
+			this.setSheared(true);
+			if (player != null && !player.isCreative() && !(player.getItemBySlot(EquipmentSlot.LEGS).getItem() instanceof YakPantsItem)) {
+				Yaktelligence.retaliate(this, player);
+			}
 
-            List<ItemStack> items = new ArrayList<>();
+			List<ItemStack> items = new ArrayList<>();
 
-            int i = 4 + this.random.nextInt(12);
-            for (int j = 0; j < i; ++j) {
-                items.add(new ItemStack(EnvironmentalItems.YAK_HAIR.get()));
-            }
+			int i = 4 + this.random.nextInt(12);
+			for (int j = 0; j < i; ++j) {
+				items.add(new ItemStack(EnvironmentalItems.YAK_HAIR.get()));
+			}
 
-            return items;
-        }
-        return Collections.emptyList();
-    }
+			return items;
+		}
+		return Collections.emptyList();
+	}
 
-    @Override
-    public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob ageable) {
-        return EnvironmentalEntityTypes.YAK.get().create(world);
-    }
+	@Override
+	public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob ageable) {
+		return EnvironmentalEntityTypes.YAK.get().create(world);
+	}
 
-    @Override
-    protected float getStandingEyeHeight(Pose pose, EntityDimensions size) {
-        return this.isBaby() ? size.height * 0.95F : 1.3F;
-    }
+	@Override
+	protected float getStandingEyeHeight(Pose pose, EntityDimensions size) {
+		return this.isBaby() ? size.height * 0.95F : 1.3F;
+	}
 
-    @Override
-    public void shear(SoundSource category) {
-        this.level().playSound(null, this, SoundEvents.SHEEP_SHEAR, category, 1.0F, 1.0F);
-        this.setSheared(true);
-        int i = 4 + this.random.nextInt(12);
+	@Override
+	public void shear(SoundSource category) {
+		this.level().playSound(null, this, SoundEvents.SHEEP_SHEAR, category, 1.0F, 1.0F);
+		this.setSheared(true);
+		int i = 4 + this.random.nextInt(12);
 
-        for (int j = 0; j < i; ++j) {
-            ItemEntity itementity = this.spawnAtLocation(EnvironmentalItems.YAK_HAIR.get(), 1);
-            if (itementity != null) {
-                itementity.setDeltaMovement(itementity.getDeltaMovement().add((this.random.nextFloat() - this.random.nextFloat()) * 0.1F, this.random.nextFloat() * 0.05F, (this.random.nextFloat() - this.random.nextFloat()) * 0.1F));
-            }
-        }
+		for (int j = 0; j < i; ++j) {
+			ItemEntity itementity = this.spawnAtLocation(EnvironmentalItems.YAK_HAIR.get(), 1);
+			if (itementity != null) {
+				itementity.setDeltaMovement(itementity.getDeltaMovement().add((this.random.nextFloat() - this.random.nextFloat()) * 0.1F, this.random.nextFloat() * 0.05F, (this.random.nextFloat() - this.random.nextFloat()) * 0.1F));
+			}
+		}
 
-    }
+	}
 
-    @Override
-    public boolean hurt(DamageSource damageSource, float damage) {
-        boolean wasHurt = super.hurt(damageSource, damage);
-        if (!this.level().isClientSide() && wasHurt && damageSource.getEntity() instanceof LivingEntity entity) {
-            Yaktelligence.wasHurtBy(this, entity);
-        }
+	@Override
+	public boolean hurt(DamageSource damageSource, float damage) {
+		boolean wasHurt = super.hurt(damageSource, damage);
+		if (!this.level().isClientSide() && wasHurt && damageSource.getEntity() instanceof LivingEntity entity) {
+			Yaktelligence.wasHurtBy(this, entity);
+		}
 
-        return wasHurt;
-    }
+		return wasHurt;
+	}
 }
