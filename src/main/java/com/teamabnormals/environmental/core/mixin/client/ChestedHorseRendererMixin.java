@@ -20,7 +20,7 @@ public abstract class ChestedHorseRendererMixin<T extends AbstractChestedHorse> 
 	}
 
 	@Inject(method = "<init>", at = @At("TAIL"))
-	private void getTextureLocation(EntityRendererProvider.Context context, float p_173949_, ModelLayerLocation p_173950_, CallbackInfo ci) {
+	private void init(EntityRendererProvider.Context context, float p_173949_, ModelLayerLocation p_173950_, CallbackInfo ci) {
 		this.addLayer(new MuleArmorLayer<>(this, context.getModelSet()));
 	}
 }

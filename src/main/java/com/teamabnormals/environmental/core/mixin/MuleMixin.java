@@ -1,5 +1,6 @@
 package com.teamabnormals.environmental.core.mixin;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.EntityType;
@@ -41,6 +42,27 @@ public abstract class MuleMixin extends AbstractChestedHorse {
 	private void setArmor(ItemStack stack) {
 		this.setItemSlot(EquipmentSlot.CHEST, stack);
 		this.setDropChance(EquipmentSlot.CHEST, 0.0F);
+	}
+
+	@Override
+	public void addAdditionalSaveData(CompoundTag tag) {
+		super.addAdditionalSaveData(tag);
+		if (!this.inventory.getItem(1).isEmpty()) {
+			tag.put("ArmorItem", this.inventory.getItem(1).save(new CompoundTag()));
+		}
+	}
+
+	@Override
+	public void readAdditionalSaveData(CompoundTag tag) {
+		super.readAdditionalSaveData(tag);
+		if (tag.contains("ArmorItem", 10)) {
+			ItemStack itemstack = ItemStack.of(tag.getCompound("ArmorItem"));
+			if (!itemstack.isEmpty() && this.isArmor(itemstack)) {
+				this.inventory.setItem(1, itemstack);
+			}
+		}
+
+		this.updateContainerEquipment();
 	}
 
 	@Override
