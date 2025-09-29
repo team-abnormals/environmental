@@ -1,5 +1,6 @@
 package com.teamabnormals.environmental.common.entity.animal.deer;
 
+import com.teamabnormals.environmental.core.EnvironmentalConfig;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalBiomeTags;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalItemTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
@@ -84,7 +85,7 @@ public class Deer extends AbstractDeer {
 		if (entity != null) {
 			entity.setCoatColor(this.random.nextBoolean() ? partner.getCoatColor() : this.getCoatColor());
 			entity.setCoatType(this.random.nextBoolean() ? partner.getCoatType() : this.getCoatType());
-			entity.setHasAntlers(this.random.nextBoolean());
+			entity.setHasAntlers(this.random.nextFloat() < EnvironmentalConfig.COMMON.deerAntlerChance.get());
 			entity.setTrusting(this.isTrusting() || partner.isTrusting());
 		}
 
@@ -110,7 +111,7 @@ public class Deer extends AbstractDeer {
 		}
 
 		this.setCoatType(this.random.nextInt(DeerCoatTypes.values().length));
-		this.setHasAntlers(this.random.nextBoolean());
+		this.setHasAntlers(this.random.nextFloat() < EnvironmentalConfig.COMMON.deerAntlerChance.get());
 		return super.finalizeSpawn(level, difficulty, reason, spawnDataIn, dataTag);
 	}
 

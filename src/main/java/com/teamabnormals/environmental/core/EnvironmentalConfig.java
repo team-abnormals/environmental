@@ -12,6 +12,7 @@ public class EnvironmentalConfig {
 
 	public static class Common {
 		public final BooleanValue deerFlowerReproducing;
+		public final DoubleValue deerAntlerChance;
 
 		public final BooleanValue blockOnlyNaturalSpawns;
 		public final IntValue koiHorizontalSerenityRange;
@@ -43,6 +44,7 @@ public class EnvironmentalConfig {
 			builder.push("mobs");
 			builder.push("deer");
 			deerFlowerReproducing = builder.comment("If Deer can reproduce and spread flowers by feeding them an Apple followed by a flower").define("Deer flower reproducing", true);
+			deerAntlerChance = builder.comment("The chance Deer have to spawn with Antlers; 0.0 for never, 1.0 for always").defineInRange("Deer Antler chance", 0.5D, 0.0D, 1.0D);
 			builder.pop();
 			builder.push("koi");
 			blockOnlyNaturalSpawns = builder.comment("Make Koi only block natural spawns").define("Block only natural spawns", true);
