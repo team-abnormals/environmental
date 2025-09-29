@@ -28,6 +28,6 @@ public class EnvironmentalSlabfishSweaters {
 	}
 
 	public static ResourceKey<SweaterType> createKey(String name) {
-		return ResourceKey.create(EnvironmentalRegistries.SLABFISH_SWEATER, new ResourceLocation(Environmental.MOD_ID, name));
+		return ResourceKey.create(EnvironmentalRegistries.SLABFISH_SWEATER, Environmental.location(name));
 	}
 }

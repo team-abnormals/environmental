@@ -236,6 +236,6 @@ public class EnvironmentalSlabfishTypes {
 	}
 
 	public static ResourceKey<SlabfishType> createKey(String name) {
-		return ResourceKey.create(EnvironmentalRegistries.SLABFISH_TYPE, new ResourceLocation(Environmental.MOD_ID, name));
+		return ResourceKey.create(EnvironmentalRegistries.SLABFISH_TYPE, Environmental.location(name));
 	}
 }

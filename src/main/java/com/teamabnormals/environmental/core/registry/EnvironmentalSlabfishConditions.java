@@ -12,8 +12,8 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.function.Supplier;
 
 public class EnvironmentalSlabfishConditions {
-	public static final DeferredRegister<SlabfishConditionType> SLABFISH_CONDITIONS = DeferredRegister.create(new ResourceLocation(Environmental.MOD_ID, "slabfish_condition"), Environmental.MOD_ID);
-	public static final Supplier<IForgeRegistry<SlabfishConditionType>> SLABFISH_CONDITIONS_REGISTRY = SLABFISH_CONDITIONS.makeRegistry(() -> new RegistryBuilder<SlabfishConditionType>().setDefaultKey(new ResourceLocation(Environmental.MOD_ID, "impossible")));
+	public static final DeferredRegister<SlabfishConditionType> SLABFISH_CONDITIONS = DeferredRegister.create(Environmental.location("slabfish_condition"), Environmental.MOD_ID);
+	public static final Supplier<IForgeRegistry<SlabfishConditionType>> SLABFISH_CONDITIONS_REGISTRY = SLABFISH_CONDITIONS.makeRegistry(() -> new RegistryBuilder<SlabfishConditionType>().setDefaultKey(Environmental.location("impossible")));
 
 	public static final RegistryObject<SlabfishConditionType> IMPOSSIBLE = SLABFISH_CONDITIONS.register("impossible", () -> new SlabfishConditionType(SlabfishImpossibleCondition.CODEC));
 	public static final RegistryObject<SlabfishConditionType> AND = SLABFISH_CONDITIONS.register("and", () -> new SlabfishConditionType(SlabfishAndCondition.CODEC));

@@ -119,7 +119,7 @@ public class EnvironmentalBiomeModifiers {
 	}
 
 	private static void register(BootstapContext<BiomeModifier> context, String name, Supplier<? extends BiomeModifier> modifier) {
-		context.register(ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, new ResourceLocation(Environmental.MOD_ID, name)), modifier.get());
+		context.register(ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, Environmental.location(name)), modifier.get());
 	}
 
 	@SafeVarargs

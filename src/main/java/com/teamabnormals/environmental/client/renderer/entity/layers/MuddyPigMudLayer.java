@@ -17,8 +17,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class MuddyPigMudLayer<E extends Pig, M extends EntityModel<E>> extends RenderLayer<E, M> {
-	private static final ResourceLocation MUDDY_PIG_LOCATION = new ResourceLocation(Environmental.MOD_ID, "textures/entity/pig/muddy_pig.png");
-	private static final ResourceLocation DRIED_MUDDY_PIG_LOCATION = new ResourceLocation(Environmental.MOD_ID, "textures/entity/pig/dried_muddy_pig.png");
+	private static final ResourceLocation MUDDY_PIG_LOCATION = Environmental.location("textures/entity/pig/muddy_pig.png");
+	private static final ResourceLocation DRIED_MUDDY_PIG_LOCATION = Environmental.location("textures/entity/pig/dried_muddy_pig.png");
 
 	public MuddyPigMudLayer(RenderLayerParent<E, M> entityRenderer) {
 		super(entityRenderer);

@@ -23,13 +23,13 @@ import java.util.Map;
 @OnlyIn(Dist.CLIENT)
 public class ZorseStripesRenderLayer extends RenderLayer<Zorse, ZorseModel<Zorse>> {
 	private static final Map<Variant, ResourceLocation> LOCATION_BY_VARIANT = Util.make(Maps.newEnumMap(Variant.class), (map) -> {
-		map.put(Variant.WHITE, new ResourceLocation(Environmental.MOD_ID, "textures/entity/zebroid/zorse_overlay_white.png"));
-		map.put(Variant.CREAMY, new ResourceLocation(Environmental.MOD_ID, "textures/entity/zebroid/zorse_overlay_creamy.png"));
-		map.put(Variant.CHESTNUT, new ResourceLocation(Environmental.MOD_ID, "textures/entity/zebroid/zorse_overlay_chestnut.png"));
-		map.put(Variant.BROWN, new ResourceLocation(Environmental.MOD_ID, "textures/entity/zebroid/zorse_overlay_brown.png"));
-		map.put(Variant.BLACK, new ResourceLocation(Environmental.MOD_ID, "textures/entity/zebroid/zorse_overlay_black.png"));
-		map.put(Variant.GRAY, new ResourceLocation(Environmental.MOD_ID, "textures/entity/zebroid/zorse_overlay_gray.png"));
-		map.put(Variant.DARK_BROWN, new ResourceLocation(Environmental.MOD_ID, "textures/entity/zebroid/zorse_overlay_darkbrown.png"));
+		map.put(Variant.WHITE, Environmental.location("textures/entity/zebroid/zorse_overlay_white.png"));
+		map.put(Variant.CREAMY, Environmental.location("textures/entity/zebroid/zorse_overlay_creamy.png"));
+		map.put(Variant.CHESTNUT, Environmental.location("textures/entity/zebroid/zorse_overlay_chestnut.png"));
+		map.put(Variant.BROWN, Environmental.location("textures/entity/zebroid/zorse_overlay_brown.png"));
+		map.put(Variant.BLACK, Environmental.location("textures/entity/zebroid/zorse_overlay_black.png"));
+		map.put(Variant.GRAY, Environmental.location("textures/entity/zebroid/zorse_overlay_gray.png"));
+		map.put(Variant.DARK_BROWN, Environmental.location("textures/entity/zebroid/zorse_overlay_darkbrown.png"));
 	});
 
 	public ZorseStripesRenderLayer(RenderLayerParent<Zorse, ZorseModel<Zorse>> entityRenderer) {

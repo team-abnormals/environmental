@@ -96,7 +96,7 @@ public class EnvironmentalRecipeProvider extends BlueprintRecipeProvider {
 		stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, DIRT_TILE_STAIRS.get(), Blocks.DIRT);
 		stonecutterRecipe(consumer, RecipeCategory.DECORATIONS, DIRT_TILE_WALL.get(), Blocks.DIRT);
 
-		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, Blocks.MUD).define('#', EnvironmentalItems.MUD_BALL.get()).pattern("##").pattern("##").unlockedBy("has_mud_ball", has(EnvironmentalItems.MUD_BALL.get())).save(consumer, new ResourceLocation(Environmental.MOD_ID, RecipeBuilder.getDefaultRecipeId(Blocks.MUD).getPath()));
+		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, Blocks.MUD).define('#', EnvironmentalItems.MUD_BALL.get()).pattern("##").pattern("##").unlockedBy("has_mud_ball", has(EnvironmentalItems.MUD_BALL.get())).save(consumer, Environmental.location(RecipeBuilder.getDefaultRecipeId(Blocks.MUD).getPath()));
 		conversionRecipeBuilder(EnvironmentalItems.MUD_BALL.get(), Blocks.MUD, 4).group("mud_ball").save(consumer);
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, EnvironmentalItems.MUD_BALL.get(), 16).requires(BlueprintItemTags.BUCKETS_WATER).requires(EnvironmentalItemTags.CONVERTABLE_TO_MUD).requires(EnvironmentalItemTags.CONVERTABLE_TO_MUD).requires(EnvironmentalItemTags.CONVERTABLE_TO_MUD).requires(EnvironmentalItemTags.CONVERTABLE_TO_MUD).group("mud_ball").unlockedBy("has_convertable_to_mud", has(EnvironmentalItemTags.CONVERTABLE_TO_MUD)).save(consumer, getModConversionRecipeName(EnvironmentalItems.MUD_BALL.get(), Blocks.DIRT));
 		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, SLABFISH_EFFIGY.get()).define('#', Blocks.MUD_BRICKS).define('S', Blocks.MUD_BRICK_SLAB).pattern(" S ").pattern("S#S").unlockedBy("has_mud_bricks", has(Blocks.MUD_BRICKS)).save(consumer);
@@ -106,7 +106,7 @@ public class EnvironmentalRecipeProvider extends BlueprintRecipeProvider {
 		chiseled(consumer, RecipeCategory.BUILDING_BLOCKS, CHISELED_MUD_BRICKS.get(), Blocks.MUD_BRICK_SLAB);
 		stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, CHISELED_MUD_BRICKS.get(), Blocks.MUD_BRICKS);
 
-		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, Blocks.BROWN_WOOL).define('#', EnvironmentalItems.YAK_HAIR.get()).pattern("##").pattern("##").unlockedBy("has_yak_hair", has(EnvironmentalItems.YAK_HAIR.get())).save(consumer, new ResourceLocation(Environmental.MOD_ID, getItemName(Blocks.BROWN_WOOL)));
+		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, Blocks.BROWN_WOOL).define('#', EnvironmentalItems.YAK_HAIR.get()).pattern("##").pattern("##").unlockedBy("has_yak_hair", has(EnvironmentalItems.YAK_HAIR.get())).save(consumer, Environmental.location(getItemName(Blocks.BROWN_WOOL)));
 		storageRecipes(consumer, RecipeCategory.MISC, EnvironmentalItems.YAK_HAIR.get(), RecipeCategory.BUILDING_BLOCKS, YAK_HAIR_BLOCK.get());
 		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, YAK_HAIR_RUG.get()).define('#', EnvironmentalItems.YAK_HAIR.get()).pattern("###").unlockedBy("has_yak_hair", has(EnvironmentalItems.YAK_HAIR.get())).save(consumer);
 		ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, EnvironmentalItems.YAK_PANTS.get()).define('#', Items.LEATHER).define('B', YAK_HAIR_BLOCK.get()).pattern("BBB").pattern("# #").pattern("# #").unlockedBy("has_yak_hair", has(EnvironmentalItems.YAK_HAIR.get())).save(consumer);

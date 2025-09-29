@@ -138,7 +138,7 @@ public class EnvironmentalBlockStateProvider extends BlueprintBlockStateProvider
 
 	public ModelFile cattailStalkModel(String name, ResourceLocation texture, int stalks, boolean top) {
 		String stalkSuffix = getStalkSuffix(stalks);
-		ModelFile stalkParent = new UncheckedModelFile(new ResourceLocation(Environmental.MOD_ID, "block/template_cattail_stalk" + stalkSuffix));
+		ModelFile stalkParent = new UncheckedModelFile(Environmental.location("block/template_cattail_stalk" + stalkSuffix));
 		BlockModelBuilder builder = this.models().getBuilder(name + stalkSuffix).parent(stalkParent);
 		for (int i = 1; i <= stalks; i++) {
 			String suffix = getStalkSuffix(i);
@@ -153,11 +153,11 @@ public class EnvironmentalBlockStateProvider extends BlueprintBlockStateProvider
 
 	public ModelFile cattailHeadModel(String name, ResourceLocation texture, boolean top, int stalks) {
 		String stalkSuffix = stalks == 3 ? "_three" : stalks == 2 ? "_two" : "_one";
-		ModelFile cattailParent = new UncheckedModelFile(new ResourceLocation(Environmental.MOD_ID, "block/template_" + (top ? "cattail_top" : "cattail") + stalkSuffix));
+		ModelFile cattailParent = new UncheckedModelFile(Environmental.location("block/template_" + (top ? "cattail_top" : "cattail") + stalkSuffix));
 		return this.models().getBuilder(name + (top ? "_top" : "") + stalkSuffix).parent(cattailParent).texture("cattail", texture);
 	}
 
 	public void cactusBobble(RegistryObject<Block> cactusBobble) {
-		this.simpleBlock(cactusBobble.get(), models().getBuilder(name(cactusBobble.get())).parent(new UncheckedModelFile(new ResourceLocation(Environmental.MOD_ID, "block/template_cactus_bobble"))).texture("all", blockTexture(cactusBobble.get())));
+		this.simpleBlock(cactusBobble.get(), models().getBuilder(name(cactusBobble.get())).parent(new UncheckedModelFile(Environmental.location("block/template_cactus_bobble"))).texture("all", blockTexture(cactusBobble.get())));
 	}
 }

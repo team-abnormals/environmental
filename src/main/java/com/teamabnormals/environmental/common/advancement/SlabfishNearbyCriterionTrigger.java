@@ -15,7 +15,7 @@ import net.minecraft.server.level.ServerPlayer;
  */
 public class SlabfishNearbyCriterionTrigger extends SimpleCriterionTrigger<SlabfishNearbyCriterionTrigger.Instance> {
 
-	private static final ResourceLocation ID = new ResourceLocation(Environmental.MOD_ID, "slabfish");
+	private static final ResourceLocation ID = Environmental.location("slabfish");
 
 	public ResourceLocation getId() {
 		return ID;

@@ -31,6 +31,6 @@ public class EnvironmentalNoiseParameters {
 	}
 
 	public static ResourceKey<NoiseParameters> createKey(String name) {
-		return ResourceKey.create(Registries.NOISE, new ResourceLocation(Environmental.MOD_ID, name));
+		return ResourceKey.create(Registries.NOISE, Environmental.location(name));
 	}
 }

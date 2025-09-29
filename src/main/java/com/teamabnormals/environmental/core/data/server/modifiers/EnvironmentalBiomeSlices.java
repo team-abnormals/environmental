@@ -59,7 +59,7 @@ public class EnvironmentalBiomeSlices {
 
 
 	public static ResourceKey<ModdedBiomeSlice> createKey(String name) {
-		return ResourceKey.create(BlueprintDataPackRegistries.MODDED_BIOME_SLICES, new ResourceLocation(Environmental.MOD_ID, name));
+		return ResourceKey.create(BlueprintDataPackRegistries.MODDED_BIOME_SLICES, Environmental.location(name));
 	}
 
 	//Modified version of OverworldBiomeBuilder to simplify Environmental's slice

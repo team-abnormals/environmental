@@ -30,7 +30,7 @@ public class SlabfishBucketModel implements BakedModel {
 	private final ItemOverrides overrideList;
 
 	public SlabfishBucketModel(Map<ResourceLocation, BakedModel> modelManager) {
-		this.model = modelManager.get(new ResourceLocation(Environmental.MOD_ID, "models/item/slabfish_bucket/swamp"));
+		this.model = modelManager.get(Environmental.location("models/item/slabfish_bucket/swamp"));
 		this.overrideList = new Overrides(modelManager);
 	}
 
@@ -77,7 +77,7 @@ public class SlabfishBucketModel implements BakedModel {
 
 		private Overrides(Map<ResourceLocation, BakedModel> modelManager) {
 			this.modelManager = modelManager;
-			this.model = modelManager.get(new ResourceLocation(Environmental.MOD_ID, "item/slabfish_bucket/swamp"));
+			this.model = modelManager.get(Environmental.location("item/slabfish_bucket/swamp"));
 			this.locationCache = new HashMap<>();
 			this.modelLocations = new HashMap<>();
 			for (ResourceLocation location : Minecraft.getInstance().getResourceManager().listResources("models/item/slabfish_bucket", s -> s.getPath().endsWith(".json")).keySet())

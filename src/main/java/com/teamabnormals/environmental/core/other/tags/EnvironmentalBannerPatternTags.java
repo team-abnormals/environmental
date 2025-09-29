@@ -11,6 +11,6 @@ public class EnvironmentalBannerPatternTags {
 	public static final TagKey<BannerPattern> PATTERN_ITEM_HELPER = bannerPatternTag("pattern_item/helper");
 
 	private static TagKey<BannerPattern> bannerPatternTag(String name) {
-		return TagKey.create(Registries.BANNER_PATTERN, new ResourceLocation(Environmental.MOD_ID, name));
+		return TagKey.create(Registries.BANNER_PATTERN, Environmental.location(name));
 	}
 }

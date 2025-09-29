@@ -18,9 +18,9 @@ import javax.annotation.Nullable;
 public class SlabfishInventoryMenu extends AbstractContainerMenu {
 
 	private static final ResourceLocation[] SLOT_INDEX_NAMES = {
-			new ResourceLocation(Environmental.MOD_ID, "item/slabfish_sweater_slot"),
-			new ResourceLocation(Environmental.MOD_ID, "item/slabfish_backpack_slot"),
-			new ResourceLocation(Environmental.MOD_ID, "item/slabfish_backpack_type_slot")
+			Environmental.location("item/slabfish_sweater_slot"),
+			Environmental.location("item/slabfish_backpack_slot"),
+			Environmental.location("item/slabfish_backpack_type_slot")
 	};
 
 	private final Container slabfishInventory;

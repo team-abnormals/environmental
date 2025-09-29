@@ -16,7 +16,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class PineconeGolemRenderer extends MobRenderer<PineconeGolem, PineconeGolemModel<PineconeGolem>> {
-	private static final ResourceLocation PINECONE_GOLEM_LOCATION = new ResourceLocation(Environmental.MOD_ID, "textures/entity/pinecone_golem.png");
+	private static final ResourceLocation PINECONE_GOLEM_LOCATION = Environmental.location("textures/entity/pinecone_golem.png");
 
 	public PineconeGolemRenderer(EntityRendererProvider.Context context) {
 		super(context, new PineconeGolemModel<>(context.bakeLayer(EnvironmentalModelLayers.PINECONE_GOLEM)), 0.4F);

@@ -18,13 +18,13 @@ public class EnvironmentalDataProcessors {
 	public static final TrackedData<ResourceLocation> MUDDY_PIG_DECORATION = TrackedData.Builder.create(DataProcessors.RESOURCE_LOCATION, () -> new ResourceLocation("empty")).enableSaving().build();
 
 	public static void registerTrackedData() {
-		TrackedDataManager.INSTANCE.registerData(new ResourceLocation(Environmental.MOD_ID, "truffle_hunting_time"), TRUFFLE_HUNTING_TIME);
-		TrackedDataManager.INSTANCE.registerData(new ResourceLocation(Environmental.MOD_ID, "sniff_sound_time"), SNIFF_SOUND_TIME);
-		TrackedDataManager.INSTANCE.registerData(new ResourceLocation(Environmental.MOD_ID, "truffle_pos"), TRUFFLE_POS);
-		TrackedDataManager.INSTANCE.registerData(new ResourceLocation(Environmental.MOD_ID, "has_truffle_target"), HAS_TRUFFLE_TARGET);
-		TrackedDataManager.INSTANCE.registerData(new ResourceLocation(Environmental.MOD_ID, "looking_for_truffle"), LOOKING_FOR_TRUFFLE);
-		TrackedDataManager.INSTANCE.registerData(new ResourceLocation(Environmental.MOD_ID, "is_muddy"), IS_MUDDY);
-		TrackedDataManager.INSTANCE.registerData(new ResourceLocation(Environmental.MOD_ID, "mud_drying_time"), MUD_DRYING_TIME);
-		TrackedDataManager.INSTANCE.registerData(new ResourceLocation(Environmental.MOD_ID, "muddy_pig_decoration"), MUDDY_PIG_DECORATION);
+		TrackedDataManager.INSTANCE.registerData(Environmental.location("truffle_hunting_time"), TRUFFLE_HUNTING_TIME);
+		TrackedDataManager.INSTANCE.registerData(Environmental.location("sniff_sound_time"), SNIFF_SOUND_TIME);
+		TrackedDataManager.INSTANCE.registerData(Environmental.location("truffle_pos"), TRUFFLE_POS);
+		TrackedDataManager.INSTANCE.registerData(Environmental.location("has_truffle_target"), HAS_TRUFFLE_TARGET);
+		TrackedDataManager.INSTANCE.registerData(Environmental.location("looking_for_truffle"), LOOKING_FOR_TRUFFLE);
+		TrackedDataManager.INSTANCE.registerData(Environmental.location("is_muddy"), IS_MUDDY);
+		TrackedDataManager.INSTANCE.registerData(Environmental.location("mud_drying_time"), MUD_DRYING_TIME);
+		TrackedDataManager.INSTANCE.registerData(Environmental.location("muddy_pig_decoration"), MUDDY_PIG_DECORATION);
 	}
 }

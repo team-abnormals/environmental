@@ -430,7 +430,7 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 
 		@Override
 		public void generate(BiConsumer<ResourceLocation, Builder> consumer) {
-			consumer.accept(new ResourceLocation(Environmental.MOD_ID, "chests/log_cabin_junk"), LootTable.lootTable()
+			consumer.accept(Environmental.location("chests/log_cabin_junk"), LootTable.lootTable()
 					.withPool(LootPool.lootPool().setRolls(UniformGenerator.between(4.0F, 6.0F))
 							.add(LootItem.lootTableItem(Items.STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 6.0F))))
 							.add(LootItem.lootTableItem(DWARF_SPRUCE.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
@@ -448,7 +448,7 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 					)
 			);
 
-			consumer.accept(new ResourceLocation(Environmental.MOD_ID, "chests/log_cabin"), LootTable.lootTable()
+			consumer.accept(Environmental.location("chests/log_cabin"), LootTable.lootTable()
 					.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
 							.add(LootItem.lootTableItem(Items.STONE_AXE).setWeight(3).apply(EnchantRandomlyFunction.randomApplicableEnchantment()))
 							.add(LootItem.lootTableItem(Items.IRON_AXE))
@@ -488,8 +488,8 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			);
 
 
-			consumer.accept(new ResourceLocation(Environmental.MOD_ID, "chests/log_cabin_dispenser"), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.CARVED_PUMPKIN))));
-			consumer.accept(new ResourceLocation(Environmental.MOD_ID, "chests/log_cabin_dropper"), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(PINE_SAPLING.get()))));
+			consumer.accept(Environmental.location("chests/log_cabin_dispenser"), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.CARVED_PUMPKIN))));
+			consumer.accept(Environmental.location("chests/log_cabin_dropper"), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(PINE_SAPLING.get()))));
 		}
 	}
 }

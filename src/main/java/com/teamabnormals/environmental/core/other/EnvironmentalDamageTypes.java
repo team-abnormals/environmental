@@ -29,7 +29,7 @@ public class EnvironmentalDamageTypes {
 	}
 
 	public static ResourceKey<DamageType> createKey(String name) {
-		return ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(Environmental.MOD_ID, name));
+		return ResourceKey.create(Registries.DAMAGE_TYPE, Environmental.location(name));
 	}
 
 }

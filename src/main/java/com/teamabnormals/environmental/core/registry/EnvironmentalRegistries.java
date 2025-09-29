@@ -21,6 +21,6 @@ public final class EnvironmentalRegistries {
 	}
 
 	private static <T> ResourceKey<Registry<T>> key(String name) {
-		return ResourceKey.createRegistryKey(new ResourceLocation(Environmental.MOD_ID, name));
+		return ResourceKey.createRegistryKey(Environmental.location(name));
 	}
 }

@@ -12,7 +12,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class ZebraRenderer extends MobRenderer<Zebra, ZebraModel<Zebra>> {
-	private static final ResourceLocation ZEBRA_LOCATION = new ResourceLocation(Environmental.MOD_ID, "textures/entity/zebroid/zebra.png");
+	private static final ResourceLocation ZEBRA_LOCATION = Environmental.location("textures/entity/zebroid/zebra.png");
 
 	public ZebraRenderer(EntityRendererProvider.Context context) {
 		super(context, new ZebraModel<>(context.bakeLayer(EnvironmentalModelLayers.ZEBRA)), 0.75F);

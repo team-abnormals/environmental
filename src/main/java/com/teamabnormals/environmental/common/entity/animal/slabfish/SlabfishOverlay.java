@@ -17,8 +17,8 @@ public enum SlabfishOverlay implements StringRepresentable {
 	private static final SlabfishOverlay[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(SlabfishOverlay::getId)).toArray(SlabfishOverlay[]::new);
 	private final int id;
 	private final String name;
-	private final LazyLoadedValue<ResourceLocation> textureLocation = new LazyLoadedValue<>(() -> new ResourceLocation(Environmental.MOD_ID, "overlay/" + this.getSerializedName()));
-	private final LazyLoadedValue<ResourceLocation> backpackTextureLocation = new LazyLoadedValue<>(() -> new ResourceLocation(Environmental.MOD_ID, "overlay/" + this.getSerializedName() + "_backpack"));
+	private final LazyLoadedValue<ResourceLocation> textureLocation = new LazyLoadedValue<>(() -> Environmental.location("overlay/" + this.getSerializedName()));
+	private final LazyLoadedValue<ResourceLocation> backpackTextureLocation = new LazyLoadedValue<>(() -> Environmental.location("overlay/" + this.getSerializedName() + "_backpack"));
 
 	SlabfishOverlay(int id, String name) {
 		this.id = id;

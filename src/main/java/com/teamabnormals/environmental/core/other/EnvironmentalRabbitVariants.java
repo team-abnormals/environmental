@@ -10,6 +10,6 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 public class EnvironmentalRabbitVariants extends BlueprintRabbitVariants {
 	private static final int UNIQUE_OFFSET = 9415;
 
-	public static final BlueprintRabbitVariant MUDDY = BlueprintRabbitVariants.register(UNIQUE_OFFSET, new ResourceLocation(Environmental.MOD_ID, "muddy"), context -> getBiome(context).is(EnvironmentalBiomeTags.SPAWNS_MUDDY_RABBITS));
-	public static final BlueprintRabbitVariant GRAY = BlueprintRabbitVariants.register(UNIQUE_OFFSET + 1, new ResourceLocation(Environmental.MOD_ID, "gray"), context -> getBiome(context).is(EnvironmentalBiomeTags.SPAWNS_GRAY_RABBITS));
+	public static final BlueprintRabbitVariant MUDDY = BlueprintRabbitVariants.register(UNIQUE_OFFSET, Environmental.location("muddy"), context -> getBiome(context).is(EnvironmentalBiomeTags.SPAWNS_MUDDY_RABBITS));
+	public static final BlueprintRabbitVariant GRAY = BlueprintRabbitVariants.register(UNIQUE_OFFSET + 1, Environmental.location("gray"), context -> getBiome(context).is(EnvironmentalBiomeTags.SPAWNS_GRAY_RABBITS));
 }

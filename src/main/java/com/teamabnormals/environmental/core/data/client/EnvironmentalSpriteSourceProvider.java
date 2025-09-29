@@ -18,9 +18,9 @@ public final class EnvironmentalSpriteSourceProvider extends SpriteSourceProvide
 	@Override
 	protected void addSources() {
 		this.atlas(BLOCKS_ATLAS)
-				.addSource(new SingleFile(new ResourceLocation(Environmental.MOD_ID, "item/slabfish_sweater_slot"), Optional.empty()))
-				.addSource(new SingleFile(new ResourceLocation(Environmental.MOD_ID, "item/slabfish_backpack_slot"), Optional.empty()))
-				.addSource(new SingleFile(new ResourceLocation(Environmental.MOD_ID, "item/slabfish_backpack_type_slot"), Optional.empty()));
+				.addSource(new SingleFile(Environmental.location("item/slabfish_sweater_slot"), Optional.empty()))
+				.addSource(new SingleFile(Environmental.location("item/slabfish_backpack_slot"), Optional.empty()))
+				.addSource(new SingleFile(Environmental.location("item/slabfish_backpack_type_slot"), Optional.empty()));
 
 	}
 }

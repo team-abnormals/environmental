@@ -16,7 +16,7 @@ public enum KoiBreed {
 	private static final KoiBreed[] VALUES = values();
 
 	private final int id;
-	private final LazyLoadedValue<ResourceLocation> textureLocation = new LazyLoadedValue<>(() -> new ResourceLocation(Environmental.MOD_ID, "textures/entity/koi/" + this.name().toLowerCase(Locale.ROOT) + ".png"));
+	private final LazyLoadedValue<ResourceLocation> textureLocation = new LazyLoadedValue<>(() -> Environmental.location("textures/entity/koi/" + this.name().toLowerCase(Locale.ROOT) + ".png"));
 
 	KoiBreed(int id) {
 		this.id = id;

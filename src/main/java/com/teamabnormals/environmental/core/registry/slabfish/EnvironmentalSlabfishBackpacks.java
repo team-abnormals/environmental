@@ -24,6 +24,6 @@ public class EnvironmentalSlabfishBackpacks {
 	}
 
 	public static ResourceKey<BackpackType> createKey(String name) {
-		return ResourceKey.create(EnvironmentalRegistries.SLABFISH_BACKPACK, new ResourceLocation(Environmental.MOD_ID, name));
+		return ResourceKey.create(EnvironmentalRegistries.SLABFISH_BACKPACK, Environmental.location(name));
 	}
 }

@@ -25,7 +25,7 @@ public class EnvironmentalPlugin implements IModPlugin {
 
 	@Override
 	public ResourceLocation getPluginUid() {
-		return new ResourceLocation(Environmental.MOD_ID, Environmental.MOD_ID);
+		return Environmental.location(Environmental.MOD_ID);
 	}
 
 	@Override

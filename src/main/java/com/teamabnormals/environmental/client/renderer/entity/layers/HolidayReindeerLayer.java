@@ -16,7 +16,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class HolidayReindeerLayer<E extends Reindeer, M extends EntityModel<E>> extends RenderLayer<E, M> {
-	private static final ResourceLocation LOCATION = new ResourceLocation(Environmental.MOD_ID, "textures/entity/deer/reindeer_holiday_overlay.png");
+	private static final ResourceLocation LOCATION = Environmental.location("textures/entity/deer/reindeer_holiday_overlay.png");
 
 	public HolidayReindeerLayer(RenderLayerParent<E, M> entityRenderer) {
 		super(entityRenderer);

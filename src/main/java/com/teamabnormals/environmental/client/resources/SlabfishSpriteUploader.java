@@ -18,12 +18,12 @@ import net.minecraftforge.eventbus.api.IEventBus;
  * @author Ocelot
  */
 public final class SlabfishSpriteUploader extends TextureAtlasHolder {
-	public static final ResourceLocation ATLAS_LOCATION = new ResourceLocation(Environmental.MOD_ID, "textures/atlas/slabfish.png");
+	public static final ResourceLocation ATLAS_LOCATION = Environmental.location("textures/atlas/slabfish.png");
 
 	private static SlabfishSpriteUploader spriteUploader;
 
 	private SlabfishSpriteUploader(TextureManager textureManager) {
-		super(textureManager, ATLAS_LOCATION, new ResourceLocation(Environmental.MOD_ID, "slabfish"));
+		super(textureManager, ATLAS_LOCATION, Environmental.location("slabfish"));
 	}
 
 	@Override

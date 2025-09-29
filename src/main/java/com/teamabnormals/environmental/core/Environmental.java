@@ -1,8 +1,6 @@
 package com.teamabnormals.environmental.core;
 
 import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
-import com.teamabnormals.environmental.client.model.*;
-import com.teamabnormals.environmental.client.renderer.entity.*;
 import com.teamabnormals.environmental.client.resources.SlabfishSpriteUploader;
 import com.teamabnormals.environmental.common.network.message.C2SZebraJumpMessage;
 import com.teamabnormals.environmental.common.network.message.SOpenSlabfishInventoryMessage;
@@ -17,20 +15,18 @@ import com.teamabnormals.environmental.core.data.server.modifiers.EnvironmentalA
 import com.teamabnormals.environmental.core.data.server.modifiers.EnvironmentalChunkGeneratorModifierProvider;
 import com.teamabnormals.environmental.core.data.server.modifiers.EnvironmentalLootModifierProvider;
 import com.teamabnormals.environmental.core.data.server.tags.*;
-import com.teamabnormals.environmental.core.other.*;
+import com.teamabnormals.environmental.core.other.EnvironmentalClientCompat;
+import com.teamabnormals.environmental.core.other.EnvironmentalCompat;
+import com.teamabnormals.environmental.core.other.EnvironmentalDataProcessors;
+import com.teamabnormals.environmental.core.other.EnvironmentalDataSerializers;
 import com.teamabnormals.environmental.core.registry.*;
 import com.teamabnormals.gallery.core.data.client.GalleryAssetsRemolderProvider;
 import com.teamabnormals.gallery.core.data.client.GalleryItemModelProvider;
-import net.minecraft.client.model.geom.builders.CubeDeformation;
-import net.minecraft.client.model.geom.builders.LayerDefinition;
-import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
@@ -94,8 +90,6 @@ public class Environmental {
 			EnvironmentalItems.setupTabEditors();
 			EnvironmentalBlocks.setupTabEditors();
 			SlabfishSpriteUploader.init(bus);
-			bus.addListener(this::registerLayerDefinitions);
-			bus.addListener(this::registerRenderers);
 		});
 
 		context.registerConfig(Type.COMMON, EnvironmentalConfig.COMMON_SPEC);
@@ -154,38 +148,7 @@ public class Environmental {
 		CHANNEL.registerMessage(4, C2SZebraJumpMessage.class, C2SZebraJumpMessage::serialize, C2SZebraJumpMessage::deserialize, C2SZebraJumpMessage::handle);
 	}
 
-	@OnlyIn(Dist.CLIENT)
-	private void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
-		event.registerLayerDefinition(EnvironmentalModelLayers.DUCK, DuckModel::createBodyLayer);
-		event.registerLayerDefinition(EnvironmentalModelLayers.DEER, DeerModel::createBodyLayer);
-		event.registerLayerDefinition(EnvironmentalModelLayers.REINDEER, ReindeerModel::createBodyLayer);
-		event.registerLayerDefinition(EnvironmentalModelLayers.KOI, KoiModel::createBodyLayer);
-		event.registerLayerDefinition(EnvironmentalModelLayers.SLABFISH, SlabfishModel::createBodyLayer);
-		event.registerLayerDefinition(EnvironmentalModelLayers.YAK, YakModel::createBodyLayer);
-		event.registerLayerDefinition(EnvironmentalModelLayers.TAPIR, TapirModel::createBodyLayer);
-		event.registerLayerDefinition(EnvironmentalModelLayers.ZEBRA, () -> LayerDefinition.create(ZebraModel.createBodyMesh(CubeDeformation.NONE), 64, 64));
-		event.registerLayerDefinition(EnvironmentalModelLayers.ZORSE, () -> LayerDefinition.create(ZorseModel.createBodyMesh(CubeDeformation.NONE), 64, 64));
-		event.registerLayerDefinition(EnvironmentalModelLayers.ZONKEY, () -> LayerDefinition.create(ZonkeyModel.createBodyMesh(CubeDeformation.NONE), 64, 64));
-		event.registerLayerDefinition(EnvironmentalModelLayers.ZORSE_ARMOR, () -> LayerDefinition.create(ZorseModel.createBodyMesh(new CubeDeformation(0.1F)), 64, 64));
-		event.registerLayerDefinition(EnvironmentalModelLayers.MULE_ARMOR, () -> MuleArmorModel.createBodyLayer(new CubeDeformation(0.1F)));
-		event.registerLayerDefinition(EnvironmentalModelLayers.PINECONE_GOLEM, PineconeGolemModel::createBodyLayer);
-	}
-
-	@OnlyIn(Dist.CLIENT)
-	private void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-		event.registerEntityRenderer(EnvironmentalEntityTypes.SLABFISH.get(), SlabfishRenderer::new);
-		event.registerEntityRenderer(EnvironmentalEntityTypes.DUCK.get(), DuckRenderer::new);
-		event.registerEntityRenderer(EnvironmentalEntityTypes.DEER.get(), DeerRenderer::new);
-		event.registerEntityRenderer(EnvironmentalEntityTypes.REINDEER.get(), ReindeerRenderer::new);
-		event.registerEntityRenderer(EnvironmentalEntityTypes.YAK.get(), YakRenderer::new);
-		event.registerEntityRenderer(EnvironmentalEntityTypes.KOI.get(), KoiRenderer::new);
-		event.registerEntityRenderer(EnvironmentalEntityTypes.TAPIR.get(), TapirRenderer::new);
-		event.registerEntityRenderer(EnvironmentalEntityTypes.ZEBRA.get(), ZebraRenderer::new);
-		event.registerEntityRenderer(EnvironmentalEntityTypes.ZORSE.get(), ZorseRenderer::new);
-		event.registerEntityRenderer(EnvironmentalEntityTypes.ZONKEY.get(), ZonkeyRenderer::new);
-		event.registerEntityRenderer(EnvironmentalEntityTypes.PINECONE_GOLEM.get(), PineconeGolemRenderer::new);
-
-		event.registerEntityRenderer(EnvironmentalEntityTypes.DUCK_EGG.get(), ThrownItemRenderer::new);
-		event.registerEntityRenderer(EnvironmentalEntityTypes.MUD_BALL.get(), ThrownItemRenderer::new);
+	public static ResourceLocation location(String path) {
+		return new ResourceLocation(MOD_ID, path);
 	}
 }

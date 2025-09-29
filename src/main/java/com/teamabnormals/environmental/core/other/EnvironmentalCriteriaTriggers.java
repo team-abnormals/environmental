@@ -16,6 +16,6 @@ public class EnvironmentalCriteriaTriggers {
 	public static final SlabfishNearbyCriterionTrigger SLABFISH = CriteriaTriggers.register(new SlabfishNearbyCriterionTrigger());
 
 	private static ResourceLocation prefix(String name) {
-		return new ResourceLocation(Environmental.MOD_ID, name);
+		return Environmental.location(name);
 	}
 }	

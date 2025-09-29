@@ -75,7 +75,7 @@ public class EnvironmentalAdvancementModifierProvider extends AdvancementModifie
 	}
 
 	public void compatSlabfishModifier(String modid, List<ResourceKey<SlabfishType>> slabfishTypes) {
-		ConditionedResourceSelector selector = new ConditionedResourceSelector(new NamesResourceSelector(new ResourceLocation(Environmental.MOD_ID, "husbandry/tame_all_slabfish")), new ModLoadedCondition(modid));
+		ConditionedResourceSelector selector = new ConditionedResourceSelector(new NamesResourceSelector(Environmental.location("husbandry/tame_all_slabfish")), new ModLoadedCondition(modid));
 		CriteriaModifier.Builder tameAllSlabfish = CriteriaModifier.builder(this.modId);
 		slabfishTypes.forEach(slabfish -> {
 			tameAllSlabfish.addCriterion(slabfish.location().getPath(), EnvironmentalAdvancementProvider.slabfishCriterion(slabfish));

@@ -14,8 +14,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class DuckRenderer extends MobRenderer<Duck, DuckModel<Duck>> {
-	private static final ResourceLocation DUCK = new ResourceLocation(Environmental.MOD_ID, "textures/entity/duck/duck.png");
-	private static final ResourceLocation DUCKLING = new ResourceLocation(Environmental.MOD_ID, "textures/entity/duck/duckling.png");
+	private static final ResourceLocation DUCK = Environmental.location("textures/entity/duck/duck.png");
+	private static final ResourceLocation DUCKLING = Environmental.location("textures/entity/duck/duckling.png");
 
 	public DuckRenderer(EntityRendererProvider.Context context) {
 		super(context, new DuckModel<>(context.bakeLayer(EnvironmentalModelLayers.DUCK)), 0.3F);

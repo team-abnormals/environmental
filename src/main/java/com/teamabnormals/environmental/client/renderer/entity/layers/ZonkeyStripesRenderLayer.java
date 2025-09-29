@@ -17,7 +17,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class ZonkeyStripesRenderLayer extends RenderLayer<Zonkey, ZonkeyModel<Zonkey>> {
-	private static final ResourceLocation STRIPES_LOCATION = new ResourceLocation(Environmental.MOD_ID, "textures/entity/zebroid/zonkey_overlay.png");
+	private static final ResourceLocation STRIPES_LOCATION = Environmental.location("textures/entity/zebroid/zonkey_overlay.png");
 
 	public ZonkeyStripesRenderLayer(RenderLayerParent<Zonkey, ZonkeyModel<Zonkey>> entityRenderer) {
 		super(entityRenderer);

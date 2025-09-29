@@ -31,7 +31,7 @@ public class EnvironmentalClientCompat {
 	}
 
 	private static void registerItemProperties() {
-		ItemProperties.register(EnvironmentalItems.KOI_BUCKET.get(), new ResourceLocation(Environmental.MOD_ID, "variant"), (stack, world, entity, hash) -> stack.getOrCreateTag().getInt("BucketVariantTag"));
+		ItemProperties.register(EnvironmentalItems.KOI_BUCKET.get(), Environmental.location("variant"), (stack, world, entity, hash) -> stack.getOrCreateTag().getInt("BucketVariantTag"));
 	}
 
 	private static void registerRenderLayers() {

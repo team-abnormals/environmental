@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ChickenRenderer.class)
 public abstract class ChickenRendererMixin extends MobRenderer<Chicken, ChickenModel<Chicken>> {
-	private static final ResourceLocation CHICK = new ResourceLocation(Environmental.MOD_ID, "textures/entity/chicken/chick.png");
+	private static final ResourceLocation CHICK = Environmental.location("textures/entity/chicken/chick.png");
 
 	public ChickenRendererMixin(Context context, ChickenModel<Chicken> model, float shadowSize) {
 		super(context, model, shadowSize);

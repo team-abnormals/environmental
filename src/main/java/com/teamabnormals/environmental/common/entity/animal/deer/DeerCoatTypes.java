@@ -11,7 +11,7 @@ public enum DeerCoatTypes {
 
 	private static final DeerCoatTypes[] VALUES = values();
 	private final int id;
-	private final LazyLoadedValue<ResourceLocation> texture = new LazyLoadedValue<>(() -> new ResourceLocation(Environmental.MOD_ID, "textures/entity/deer/deer_markings_" + this.name().toLowerCase(Locale.ROOT) + ".png"));
+	private final LazyLoadedValue<ResourceLocation> texture = new LazyLoadedValue<>(() -> Environmental.location("textures/entity/deer/deer_markings_" + this.name().toLowerCase(Locale.ROOT) + ".png"));
 
 	DeerCoatTypes(int id) {
 		this.id = id;

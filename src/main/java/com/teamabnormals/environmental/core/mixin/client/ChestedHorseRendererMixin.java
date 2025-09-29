@@ -15,12 +15,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ChestedHorseRenderer.class)
 public abstract class ChestedHorseRendererMixin<T extends AbstractChestedHorse> extends AbstractHorseRenderer<T, ChestedHorseModel<T>> {
 
-	public ChestedHorseRendererMixin(EntityRendererProvider.Context context, float scale, ModelLayerLocation p_173950_) {
-		super(context, new ChestedHorseModel<>(context.bakeLayer(p_173950_)), scale);
+	public ChestedHorseRendererMixin(EntityRendererProvider.Context context, ChestedHorseModel<T> model, float scale) {
+		super(context, model, scale);
 	}
 
 	@Inject(method = "<init>", at = @At("TAIL"))
-	private void init(EntityRendererProvider.Context context, float p_173949_, ModelLayerLocation p_173950_, CallbackInfo ci) {
+	private void init(EntityRendererProvider.Context context, float scale, ModelLayerLocation p_173950_, CallbackInfo ci) {
 		this.addLayer(new MuleArmorLayer<>(this, context.getModelSet()));
 	}
 }

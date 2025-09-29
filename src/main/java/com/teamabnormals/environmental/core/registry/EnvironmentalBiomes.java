@@ -55,7 +55,7 @@ public class EnvironmentalBiomes {
 	}
 
 	public static ResourceKey<Biome> createKey(String name) {
-		return ResourceKey.create(Registries.BIOME, new ResourceLocation(Environmental.MOD_ID, name));
+		return ResourceKey.create(Registries.BIOME, Environmental.location(name));
 	}
 
 	private static Biome marsh(HolderGetter<PlacedFeature> features, HolderGetter<ConfiguredWorldCarver<?>> carvers) {
