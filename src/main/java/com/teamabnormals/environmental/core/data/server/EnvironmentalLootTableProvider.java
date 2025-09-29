@@ -75,6 +75,7 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 		public static final LootItemCondition.Builder HAS_NO_SHEARS_OR_SILK_TOUCH = MatchTool.toolMatches(ItemPredicate.Builder.item().of(Items.SHEARS)).or(HAS_SILK_TOUCH).invert();
 
 		private static final float[] NORMAL_LEAVES_SAPLING_CHANCES = new float[]{0.05F, 0.0625F, 0.083333336F, 0.1F};
+		private static final float[] DOUBLE_LEAVES_SAPLING_CHANCES = new float[]{0.1F, 1.25F, 0.166666672F, 0.2F};
 		private static final float[] NORMAL_LEAVES_STICK_CHANCES = new float[]{0.02F, 0.022222223F, 0.025F, 0.033333335F, 0.1F};
 		private static final float[] DOUBLE_LEAVES_STICK_CHANCES = new float[]{0.04F, 0.044444446F, 0.05F, 0.066666670F, 0.2F};
 
@@ -330,10 +331,10 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.add(WISTERIA_BOOKSHELF.get(), (block) -> createSingleItemTableWithSilkTouch(block, Items.BOOK, ConstantValue.exactly(3.0F)));
 			this.dropWhenSilkTouch(CHISELED_WISTERIA_BOOKSHELF.get());
 
-			this.add(PINK_WISTERIA_LEAVES.get(), (block) -> createWisteriaLeavesDrops(block, PINK_WISTERIA_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
-			this.add(BLUE_WISTERIA_LEAVES.get(), (block) -> createWisteriaLeavesDrops(block, BLUE_WISTERIA_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
-			this.add(PURPLE_WISTERIA_LEAVES.get(), (block) -> createWisteriaLeavesDrops(block, PURPLE_WISTERIA_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
-			this.add(WHITE_WISTERIA_LEAVES.get(), (block) -> createWisteriaLeavesDrops(block, WHITE_WISTERIA_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+			this.add(PINK_WISTERIA_LEAVES.get(), (block) -> createWisteriaLeavesDrops(block, PINK_WISTERIA_SAPLING.get(), DOUBLE_LEAVES_SAPLING_CHANCES));
+			this.add(BLUE_WISTERIA_LEAVES.get(), (block) -> createWisteriaLeavesDrops(block, BLUE_WISTERIA_SAPLING.get(), DOUBLE_LEAVES_SAPLING_CHANCES));
+			this.add(PURPLE_WISTERIA_LEAVES.get(), (block) -> createWisteriaLeavesDrops(block, PURPLE_WISTERIA_SAPLING.get(), DOUBLE_LEAVES_SAPLING_CHANCES));
+			this.add(WHITE_WISTERIA_LEAVES.get(), (block) -> createWisteriaLeavesDrops(block, WHITE_WISTERIA_SAPLING.get(), DOUBLE_LEAVES_SAPLING_CHANCES));
 
 			this.add(PINK_HANGING_WISTERIA_LEAVES.get(), BlockLootSubProvider::createShearsOnlyDrop);
 			this.add(BLUE_HANGING_WISTERIA_LEAVES.get(), BlockLootSubProvider::createShearsOnlyDrop);
