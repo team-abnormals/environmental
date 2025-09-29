@@ -277,10 +277,10 @@ public class EnvironmentalBlocks {
 	public static final RegistryObject<Block> POTTED_CHEERFUL_PLUM_SAPLING = HELPER.createBlockNoItem("potted_cheerful_plum_sapling", () -> new FlowerPotBlock(CHEERFUL_PLUM_SAPLING.get(), PropertyUtil.flowerPot()));
 	public static final RegistryObject<Block> CHEERFUL_PLUM_LEAF_PILE = HELPER.createBlock("cheerful_plum_leaf_pile", () -> new LeafPileBlock(EnvironmentalProperties.PLUM.leafPile()));
 
-	public static final RegistryObject<Block> MOODY_PLUM_LEAVES = HELPER.createBlock("moody_plum_leaves", () -> new PlumLeavesBlock(EnvironmentalProperties.PLUM.leaves()));
-	public static final RegistryObject<Block> MOODY_PLUM_SAPLING = HELPER.createBlock("moody_plum_sapling", () -> new SaplingBlock(new MoodyPlumTreeGrower(), EnvironmentalProperties.PLUM.sapling()));
+	public static final RegistryObject<Block> MOODY_PLUM_LEAVES = HELPER.createBlock("moody_plum_leaves", () -> new PlumLeavesBlock(EnvironmentalProperties.PLUM.leaves().mapColor(MapColor.TERRACOTTA_PINK)));
+	public static final RegistryObject<Block> MOODY_PLUM_SAPLING = HELPER.createBlock("moody_plum_sapling", () -> new SaplingBlock(new MoodyPlumTreeGrower(), EnvironmentalProperties.PLUM.sapling().mapColor(MapColor.TERRACOTTA_PINK)));
 	public static final RegistryObject<Block> POTTED_MOODY_PLUM_SAPLING = HELPER.createBlockNoItem("potted_moody_plum_sapling", () -> new FlowerPotBlock(MOODY_PLUM_SAPLING.get(), PropertyUtil.flowerPot()));
-	public static final RegistryObject<Block> MOODY_PLUM_LEAF_PILE = HELPER.createBlock("moody_plum_leaf_pile", () -> new LeafPileBlock(EnvironmentalProperties.PLUM.leafPile()));
+	public static final RegistryObject<Block> MOODY_PLUM_LEAF_PILE = HELPER.createBlock("moody_plum_leaf_pile", () -> new LeafPileBlock(EnvironmentalProperties.PLUM.leafPile().mapColor(MapColor.TERRACOTTA_PINK)));
 
 	public static final RegistryObject<Block> PLUM_CRATE = HELPER.createBlock("plum_crate", () -> new BlueprintDirectionalBlock(Block.Properties.of().mapColor(MapColor.COLOR_RED).strength(1.5F).sound(SoundType.WOOD).ignitedByLava()));
 	public static final RegistryObject<Block> CHERRY_CRATE = HELPER.createBlock("cherry_crate", () -> new BlueprintDirectionalBlock(Block.Properties.of().mapColor(MapColor.TERRACOTTA_WHITE).strength(1.5F).sound(SoundType.WOOD).ignitedByLava()));
