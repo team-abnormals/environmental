@@ -3,7 +3,6 @@ package com.teamabnormals.environmental.core.other.tags;
 import com.teamabnormals.environmental.common.slabfish.SlabfishType;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.registry.EnvironmentalRegistries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 
 public class EnvironmentalSlabfishTypeTags {

@@ -3,7 +3,6 @@ package com.teamabnormals.environmental.core.other;
 import com.teamabnormals.blueprint.core.api.BlueprintRabbitVariants;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalBiomeTags;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 @EventBusSubscriber(modid = Environmental.MOD_ID)

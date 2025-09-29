@@ -6,7 +6,6 @@ import com.teamabnormals.environmental.common.slabfish.SweaterType;
 import com.teamabnormals.environmental.core.Environmental;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.DataPackRegistryEvent;
 
 public final class EnvironmentalRegistries {
