@@ -1,6 +1,8 @@
 package com.teamabnormals.environmental.core.mixin;
 
 import com.google.common.collect.ImmutableList;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
@@ -11,7 +13,6 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
 
 import java.util.List;
 import java.util.Random;
@@ -23,13 +24,13 @@ public abstract class GrassBlockMixin extends Block {
 		super(properties);
 	}
 
-	@Redirect(method = "performBonemeal", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/biome/BiomeGenerationSettings;getFlowerFeatures()Ljava/util/List;"))
-	private List<ConfiguredFeature<?, ?>> getFlowerFeatures(BiomeGenerationSettings biomeGenerationSettings) {
-		return biomeGenerationSettings.features().stream().flatMap(HolderSet::stream).map(Holder::value).flatMap(PlacedFeature::getFeatures).filter((configuredFeature) -> configuredFeature.feature() == Feature.FLOWER).collect(ImmutableList.toImmutableList());
+	@WrapOperation(method = "performBonemeal", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/biome/BiomeGenerationSettings;getFlowerFeatures()Ljava/util/List;"))
+	private List<ConfiguredFeature<?, ?>> getFlowerFeatures(BiomeGenerationSettings settings, Operation<List<ConfiguredFeature<?, ?>>> original) {
+		return settings.features().stream().flatMap(HolderSet::stream).map(Holder::value).flatMap(PlacedFeature::getFeatures).filter((configuredFeature) -> configuredFeature.feature() == Feature.FLOWER).collect(ImmutableList.toImmutableList());
 	}
 
-	@Redirect(method = "performBonemeal", at = @At(value = "INVOKE", target = "Ljava/util/List;get(I)Ljava/lang/Object;"))
-	private Object get(List list, int index) {
+	@WrapOperation(method = "performBonemeal", at = @At(value = "INVOKE", target = "Ljava/util/List;get(I)Ljava/lang/Object;"))
+	private Object get(List list, int index, Operation<Object> original) {
 		return list.get(new Random().nextInt(list.size()));
 	}
 }

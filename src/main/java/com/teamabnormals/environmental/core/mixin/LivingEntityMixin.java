@@ -1,5 +1,7 @@
 package com.teamabnormals.environmental.core.mixin;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.teamabnormals.environmental.common.entity.animal.MuddyPig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffect;
@@ -14,7 +16,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Collection;
@@ -23,15 +24,13 @@ import java.util.Map;
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
 
-	@Redirect(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;getFriction(Lnet/minecraft/world/level/LevelReader;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/Entity;)F"))
-	private float getFriction(BlockState state, LevelReader level, BlockPos pos, Entity entity) {
-		if (entity instanceof Pig pig) {
-			if (MuddyPig.isMuddy(pig) && MuddyPig.getDryingTime(pig) > 0) {
-				return 0.999F;
-			}
+	@WrapOperation(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;getFriction(Lnet/minecraft/world/level/LevelReader;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/Entity;)F"))
+	private float getFriction(BlockState state, LevelReader level, BlockPos pos, Entity entity, Operation<Float> original) {
+		if (entity instanceof Pig pig && MuddyPig.isMuddy(pig) && MuddyPig.getDryingTime(pig) > 0) {
+			return 0.999F;
 		}
 
-		return state.getFriction(level, pos, entity);
+		return original.call(state, level, pos, entity);
 	}
 
 	@Shadow
