@@ -1,8 +1,6 @@
 {
   "values": [
-    "environmental:zebra",
-    "environmental:zorse",
-    "environmental:zonkey",
+    "#environmental:zebroids",
     "minecraft:horse",
     "minecraft:donkey",
     "minecraft:mule",

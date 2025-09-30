@@ -4,6 +4,7 @@ import com.teamabnormals.blueprint.core.util.TagUtil;
 import com.teamabnormals.environmental.core.Environmental;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.block.Block;
 
 public class EnvironmentalEntityTypeTags {
 	public static final TagKey<EntityType<?>> UNAFFECTED_BY_SERENITY = entityTypeTag("unaffected_by_serenity");
@@ -11,6 +12,10 @@ public class EnvironmentalEntityTypeTags {
 	public static final TagKey<EntityType<?>> SCARES_DEER = entityTypeTag("scares_deer");
 	public static final TagKey<EntityType<?>> SCARES_TRUSTING_DEER = entityTypeTag("scares_trusting_deer");
 	public static final TagKey<EntityType<?>> ZEBROIDS_DONT_KICK = entityTypeTag("zebroids_dont_kick");
+	public static final TagKey<EntityType<?>> ZEBROIDS = entityTypeTag("zebroids");
+
+	public static final TagKey<EntityType<?>> HORSE_FEED_TEMPTED = TagUtil.entityTypeTag("farmersdelight", "horse_feed_tempted");
+	public static final TagKey<EntityType<?>> HORSE_FEED_USERS = TagUtil.entityTypeTag("farmersdelight", "horse_feed_users");
 
 	private static TagKey<EntityType<?>> entityTypeTag(String tagName) {
 		return TagUtil.entityTypeTag(Environmental.MOD_ID, tagName);
