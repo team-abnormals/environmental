@@ -2,6 +2,7 @@ package com.teamabnormals.environmental.core.data.server.tags;
 
 import com.teamabnormals.blueprint.core.other.tags.BlueprintBlockTags;
 import com.teamabnormals.environmental.core.Environmental;
+import com.teamabnormals.environmental.core.other.tags.EnvironmentalBlockTags;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -53,6 +54,9 @@ public class EnvironmentalBlockTagsProvider extends BlockTagsProvider {
 		);
 
 		this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(DIRT_BRICKS.get(), DIRT_BRICK_STAIRS.get(), DIRT_BRICK_SLAB.get(), DIRT_BRICK_WALL.get(), DIRT_TILES.get(), DIRT_TILE_STAIRS.get(), DIRT_TILE_SLAB.get(), DIRT_TILE_WALL.get(), BURIED_TRUFFLE.get(), DIRT_PATH.get(), PODZOL_PATH.get(), MYCELIUM_PATH.get());
+
+		this.tag(MINEABLE_WITH_KNIFE).add(YAK_HAIR_BLOCK.get(), YAK_HAIR_RUG.get());
+		this.tag(COMPOST_ACTIVATORS).add(MYCELIUM_SPROUTS.get());
 
 		this.tag(BlockTags.SLABS).add(GRASS_THATCH_SLAB.get(), CATTAIL_THATCH_SLAB.get(), DUCKWEED_THATCH_SLAB.get(), DIRT_BRICK_SLAB.get(), DIRT_TILE_SLAB.get(), SMOOTH_MUD_SLAB.get());
 		this.tag(BlockTags.STAIRS).add(GRASS_THATCH_STAIRS.get(), CATTAIL_THATCH_STAIRS.get(), DUCKWEED_THATCH_STAIRS.get(), DIRT_BRICK_STAIRS.get(), DIRT_TILE_STAIRS.get());

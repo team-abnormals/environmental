@@ -26,6 +26,9 @@ public class EnvironmentalBlockTags {
 
 	public static final TagKey<Block> STRIPPED_LOGS = TagUtil.blockTag("forge", "stripped_logs");
 
+	public static final TagKey<Block> MINEABLE_WITH_KNIFE = TagUtil.blockTag("farmersdelight", "mineable/knife");
+	public static final TagKey<Block> COMPOST_ACTIVATORS = TagUtil.blockTag("farmersdelight", "compost_activators");
+
 	private static TagKey<Block> blockTag(String tagName) {
 		return TagUtil.blockTag(Environmental.MOD_ID, tagName);
 	}
