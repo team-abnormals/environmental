@@ -196,6 +196,10 @@ public class EnvironmentalEvents {
 		Level level = event.getLevel();
 		RandomSource random = level.getRandom();
 
+		if (target instanceof Mob mob && target instanceof Bucketable && stack.is(Items.WATER_BUCKET) && target.isAlive()) {
+			mob.dropLeash(true, true);
+		}
+
 		if (target instanceof Pig pig && target.isAlive()) {
 			IDataManager data = ((IDataManager) target);
 			if (!pig.isLeashed() && stack.is(EnvironmentalItemTags.PIG_TRUFFLE_ITEMS) && !pig.isBaby() && EnvironmentalConfig.COMMON.pigsHuntTruffles.get()) {
