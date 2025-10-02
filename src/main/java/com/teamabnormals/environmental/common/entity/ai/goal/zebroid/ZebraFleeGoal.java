@@ -80,7 +80,7 @@ public class ZebraFleeGoal extends Goal {
 
 	@Override
 	public void tick() {
-		if (this.pathNav.isDone() || this.pathNav.getTargetPos().closerToCenterThan(this.zebra.position(), 5.0D)) {
+		if (this.pathNav.isDone() || (this.pathNav.getTargetPos() != null && this.pathNav.getTargetPos().closerToCenterThan(this.zebra.position(), 5.0D))) {
 			float f = this.fleeDirection * Mth.DEG_TO_RAD;
 			Vec3 vec3 = this.zebra.position().add(new Vec3(Math.sin(f) * 32.0D, 0.0D, Math.cos(f) * 32.0D));
 			for (int i = 0; i < 3; i++) {
