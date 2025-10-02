@@ -21,7 +21,6 @@
     "SurfaceSystemMixin"
   ],
   "client": [
-    "client.ChestedHorseRendererMixin",
     "client.ChickenRendererMixin",
     "client.PigRendererMixin"
   ],

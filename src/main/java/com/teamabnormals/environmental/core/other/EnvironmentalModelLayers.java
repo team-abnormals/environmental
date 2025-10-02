@@ -2,12 +2,16 @@ package com.teamabnormals.environmental.core.other;
 
 import com.teamabnormals.environmental.client.model.*;
 import com.teamabnormals.environmental.client.renderer.entity.*;
+import com.teamabnormals.environmental.client.renderer.entity.layers.MuleArmorLayer;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.renderer.entity.ChestedHorseRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.animal.horse.Mule;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -28,6 +32,14 @@ public class EnvironmentalModelLayers {
 	public static final ModelLayerLocation ZORSE_ARMOR = register("zorse_armor");
 	public static final ModelLayerLocation MULE_ARMOR = register("mule_armor");
 	public static final ModelLayerLocation PINECONE_GOLEM = register("pinecone_golem");
+
+	@SubscribeEvent
+	public static void registerLayers(EntityRenderersEvent.AddLayers event) {
+		ChestedHorseRenderer<Mule> muleRenderer = event.getRenderer(EntityType.MULE);
+		if (muleRenderer != null) {
+			muleRenderer.addLayer(new MuleArmorLayer<>(muleRenderer, event.getEntityModels()));
+		}
+	}
 
 	@SubscribeEvent
 	public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
