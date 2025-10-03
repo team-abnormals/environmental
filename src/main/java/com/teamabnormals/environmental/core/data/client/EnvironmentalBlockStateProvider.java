@@ -103,6 +103,12 @@ public class EnvironmentalBlockStateProvider extends BlueprintBlockStateProvider
 		this.crossBlockWithPot(RED_LOTUS_FLOWER, POTTED_RED_LOTUS_FLOWER);
 	}
 
+	@Override
+	public void leavesBlock(RegistryObject<Block> leaves) {
+		this.simpleBlock(leaves.get(), models().getBuilder(name(leaves.get())).parent(new UncheckedModelFile(new ResourceLocation("block/leaves"))).texture("all", blockTexture(leaves.get())));
+		this.blockItem(leaves);
+	}
+
 	public void cubeColumnBlock(RegistryObject<Block> block) {
 		this.cubeColumnBlock(block, block);
 	}

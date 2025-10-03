@@ -40,7 +40,7 @@ public abstract class HorseMixin extends AbstractHorse {
 
 	@Inject(method = "getBreedOffspring", at = @At("HEAD"), cancellable = true)
 	public void getBreedOffspring(ServerLevel level, AgeableMob otherParent, CallbackInfoReturnable<AgeableMob> cir) {
-		if (otherParent instanceof Zebra) {
+		if (otherParent instanceof Zebra zebra) {
 			Zorse zorse = EnvironmentalEntityTypes.ZORSE.get().create(level);
 			if (zorse != null) {
 				int i = this.random.nextInt(9);
@@ -63,7 +63,7 @@ public abstract class HorseMixin extends AbstractHorse {
 
 				zorse.setVariantAndMarkings(variant, markings);
 				zorse.randomizeStripeOpacity(level.getRandom());
-				((Zebra) otherParent).setOffspringAttributes(this, zorse);
+				zebra.setOffspringAttributes(this, zorse);
 			}
 			cir.setReturnValue(zorse);
 		}
