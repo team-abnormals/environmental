@@ -11,8 +11,9 @@ import net.minecraft.core.BlockSource;
 import net.minecraft.core.Position;
 import net.minecraft.core.dispenser.AbstractProjectileDispenseBehavior;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
+import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.item.DispensibleContainerItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -250,6 +251,23 @@ public class EnvironmentalCompat {
 		DataUtil.registerFlammable(EnvironmentalBlocks.PURPLE_WISTERIA_LEAF_PILE.get(), 30, 60);
 	}
 
+	public static DispenseItemBehavior EMPTY_FISH_BUCKET_BEHAVIOR = new DefaultDispenseItemBehavior() {
+		private final DefaultDispenseItemBehavior defaultDispenseItemBehavior = new DefaultDispenseItemBehavior();
+
+		@Override
+		public ItemStack execute(BlockSource source, ItemStack stack) {
+			DispensibleContainerItem item = (DispensibleContainerItem) stack.getItem();
+			BlockPos pos = source.getPos().relative(source.getBlockState().getValue(DispenserBlock.FACING));
+			Level level = source.getLevel();
+			if (item.emptyContents(null, level, pos, null, stack)) {
+				item.checkExtraContent(null, level, stack, pos);
+				return new ItemStack(Items.BUCKET);
+			} else {
+				return this.defaultDispenseItemBehavior.dispense(source, stack);
+			}
+		}
+	};
+
 	public static void registerDispenserBehaviors() {
 		DispenserBlock.registerBehavior(EnvironmentalItems.DUCK_EGG.get(), new AbstractProjectileDispenseBehavior() {
 			protected Projectile getProjectile(Level worldIn, Position position, ItemStack stackIn) {
@@ -263,19 +281,7 @@ public class EnvironmentalCompat {
 			}
 		});
 
-		DispenserBlock.registerBehavior(EnvironmentalItems.SLABFISH_BUCKET.get(), new DefaultDispenseItemBehavior() {
-			@Override
-			protected ItemStack execute(BlockSource source, ItemStack stack) {
-				BucketItem bucket = (BucketItem) stack.getItem();
-				BlockPos pos = source.getPos().relative(source.getBlockState().getValue(DispenserBlock.FACING));
-				Level world = source.getLevel();
-				if (bucket.emptyContents(null, world, pos, null)) {
-					bucket.checkExtraContent(null, world, stack, pos);
-					return new ItemStack(Items.BUCKET);
-				} else {
-					return super.dispense(source, stack);
-				}
-			}
-		});
+		DispenserBlock.registerBehavior(EnvironmentalItems.KOI_BUCKET.get(), EMPTY_FISH_BUCKET_BEHAVIOR);
+		DispenserBlock.registerBehavior(EnvironmentalItems.SLABFISH_BUCKET.get(), EMPTY_FISH_BUCKET_BEHAVIOR);
 	}
 }
