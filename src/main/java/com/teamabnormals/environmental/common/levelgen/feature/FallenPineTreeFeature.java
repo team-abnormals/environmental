@@ -13,6 +13,7 @@ import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.Direction.Plane;
 import net.minecraft.core.Vec3i;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -52,13 +53,26 @@ public class FallenPineTreeFeature extends Feature<NoneFeatureConfiguration> {
 		int xOffset = direction.getAxis() == Axis.X ? length / 2 : 0;
 		int zOffset = direction.getAxis() == Axis.Z ? length / 2 : 0;
 
-		for (int i = 0; i < 6; i++) {
+		generate:
+		for (int i = 0; i < 8; i++) {
 			BlockPos pos = origin.offset(random.nextInt(4) - random.nextInt(4) - xOffset, random.nextInt(2) - random.nextInt(2), random.nextInt(4) - random.nextInt(4) - zOffset);
 			if (canGenerateAt(level, pos, direction, length)) {
 				this.logPositions = Maps.newHashMap();
 				this.leafPositions = Sets.newHashSet();
 
 				this.doPlace(level, random, pos, length, direction);
+
+				ChunkPos chunkPos = level.getChunk(origin).getPos();
+				for (BlockPos leafPos : this.leafPositions) {
+					if (!checkChunkDistance(level, chunkPos, leafPos)) {
+						continue generate;
+					}
+				}
+				for (BlockPos logPos : this.logPositions.keySet()) {
+					if (!checkChunkDistance(level, chunkPos, logPos)) {
+						continue generate;
+					}
+				}
 
 				for (BlockPos leafPos : this.leafPositions) {
 					level.setBlock(leafPos, EnvironmentalBlocks.PINE_LEAVES.get().defaultBlockState(), 19);
@@ -80,6 +94,10 @@ public class FallenPineTreeFeature extends Feature<NoneFeatureConfiguration> {
 		}
 
 		return false;
+	}
+
+	private boolean checkChunkDistance(WorldGenLevel level, ChunkPos chunkPos, BlockPos pos) {
+		return Math.abs(chunkPos.x - level.getChunk(pos).getPos().x) <= 1 && Math.abs(chunkPos.z - level.getChunk(pos).getPos().z) <= 1;
 	}
 
 	private void doPlace(WorldGenLevel level, RandomSource random, BlockPos origin, int length, Direction direction) {
