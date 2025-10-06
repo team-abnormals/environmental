@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "minecraft:leather"
+    },
+    "B": {
+      "item": "environmental:yak_hair_block"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "# #",
+    "# #"
+  ],
+  "result": {
+    "count": 1,
+    "id": "environmental:yak_pants"
+  }
+}

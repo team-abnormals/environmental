@@ -11,8 +11,8 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class PineconeGolemRenderer extends MobRenderer<PineconeGolem, PineconeGolemModel<PineconeGolem>> {
@@ -29,8 +29,8 @@ public class PineconeGolemRenderer extends MobRenderer<PineconeGolem, PineconeGo
 	}
 
 	@Override
-	protected void setupRotations(PineconeGolem pineconeGolem, PoseStack poseStack, float ageInTicks, float rotationYaw, float partialTicks) {
-		super.setupRotations(pineconeGolem, poseStack, ageInTicks, rotationYaw, partialTicks);
+	protected void setupRotations(PineconeGolem pineconeGolem, PoseStack poseStack, float ageInTicks, float rotationYaw, float partialTicks, float scale) {
+		super.setupRotations(pineconeGolem, poseStack, ageInTicks, rotationYaw, partialTicks, scale);
 		float limbswing = pineconeGolem.walkAnimation.position() - pineconeGolem.walkAnimation.speed() * (1.0F - partialTicks);
 		float limbswingamount = Math.min(Mth.lerp(partialTicks, pineconeGolem.walkAnimation.speedOld, pineconeGolem.walkAnimation.speed()), 1.0F);
 		float yRot = Mth.cos(limbswing + Mth.PI) * 0.15F * limbswingamount;

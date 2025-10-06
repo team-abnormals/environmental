@@ -2,6 +2,6 @@
   "description": {
     "translate": "slabfish.backpack.environmental.blue"
   },
-  "tag": "forge:dyes/blue",
+  "tag": "c:dyes/blue",
   "texture": "environmental:backpack/blue"
 }

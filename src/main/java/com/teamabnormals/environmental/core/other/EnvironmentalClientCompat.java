@@ -1,36 +1,61 @@
 package com.teamabnormals.environmental.core.other;
 
-import com.teamabnormals.blueprint.core.util.DataUtil;
+import com.teamabnormals.blueprint.client.model.DynamicItemModel;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
+import com.teamabnormals.environmental.core.registry.slabfish.EnvironmentalSlabfishTypes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColors;
-import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.GrassColor;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.ModelEvent;
+import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 
-import java.util.Arrays;
-import java.util.List;
-
+@EventBusSubscriber(modid = Environmental.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class EnvironmentalClientCompat {
 
 	public static void register() {
+		EnvironmentalItems.setupTabEditors();
+		EnvironmentalBlocks.setupTabEditors();
 		registerRenderLayers();
-		registerBlockColors();
 		registerItemProperties();
 	}
 
+	@SubscribeEvent
+	public static void registerAdditional(ModelEvent.RegisterAdditional event) {
+		DynamicItemModel.register(event, "slabfish_bucket");
+	}
+
+	@SubscribeEvent
+	public static void modifyBakingResult(ModelEvent.ModifyBakingResult event) {
+		DynamicItemModel.bake(event, EnvironmentalItems.SLABFISH_BUCKET.getId(), "slabfish_bucket", ModelResourceLocation.standalone(EnvironmentalSlabfishTypes.SWAMP.location().withPrefix("item/slabfish_bucket/")), DynamicItemModel.fishBucket());
+	}
+
 	private static void registerItemProperties() {
-		ItemProperties.register(EnvironmentalItems.KOI_BUCKET.get(), Environmental.location("variant"), (stack, world, entity, hash) -> stack.getOrCreateTag().getInt("BucketVariantTag"));
+		ItemProperties.register(EnvironmentalItems.KOI_BUCKET.asItem(), Environmental.location("variant"), (stack, world, entity, num) -> {
+			CustomData data = stack.get(DataComponents.BUCKET_ENTITY_DATA);
+			if (data != null) {
+				CompoundTag tag = data.copyTag();
+				if (tag.contains("BucketVariantTag")) {
+					return tag.getInt("BucketVariantTag");
+				}
+			}
+			return 0;
+		});
 	}
 
 	private static void registerRenderLayers() {
@@ -192,35 +217,29 @@ public class EnvironmentalClientCompat {
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.PURPLE_WISTERIA_LEAF_PILE.get(), RenderType.cutout());
 	}
 
-	private static void registerBlockColors() {
+	@SubscribeEvent
+	public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
+		event.register((state, level, pos, tintIndex) -> level != null && pos != null ? BiomeColors.getAverageGrassColor(level, pos) : GrassColor.get(0.5D, 1.0D),
+				EnvironmentalBlocks.GIANT_TALL_GRASS.get()
+		);
+		event.register((state, level, pos, tintIndex) -> level != null && pos != null ? BiomeColors.getAverageFoliageColor(level, pos) : FoliageColor.get(0.5D, 1.0D),
+				EnvironmentalBlocks.WILLOW_LEAVES.get(), EnvironmentalBlocks.HANGING_WILLOW_LEAVES.get(), EnvironmentalBlocks.WILLOW_LEAF_PILE.get(),
+				EnvironmentalBlocks.PINE_LEAVES.get(), EnvironmentalBlocks.PINE_LEAF_PILE.get()
+		);
+		event.register((state, level, pos, tintIndex) -> level != null && pos != null ? 2129968 : 7181897,
+				EnvironmentalBlocks.LARGE_LILY_PAD.get(), EnvironmentalBlocks.GIANT_LILY_PAD.get()
+		);
+	}
+
+	@SubscribeEvent
+	public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
 		BlockColors blockColors = Minecraft.getInstance().getBlockColors();
-		ItemColors itemColors = Minecraft.getInstance().getItemColors();
-
-		List<RegistryObject<Block>> grassColors = Arrays.asList(EnvironmentalBlocks.GIANT_TALL_GRASS);
-		List<RegistryObject<Block>> foliageColors = Arrays.asList(
-				EnvironmentalBlocks.WILLOW_LEAVES, EnvironmentalBlocks.HANGING_WILLOW_LEAVES, EnvironmentalBlocks.WILLOW_LEAF_PILE,
-				EnvironmentalBlocks.PINE_LEAVES, EnvironmentalBlocks.PINE_LEAF_PILE
-		);
-		List<RegistryObject<Block>> waterLilyColors = Arrays.asList(EnvironmentalBlocks.LARGE_LILY_PAD, EnvironmentalBlocks.GIANT_LILY_PAD);
-
-		List<RegistryObject<Block>> willowFoliageItemColors = Arrays.asList(
-				EnvironmentalBlocks.WILLOW_LEAVES, EnvironmentalBlocks.HANGING_WILLOW_LEAVES, EnvironmentalBlocks.WILLOW_LEAF_PILE
-		);
-		List<RegistryObject<Block>> pineFoliageItemColors = Arrays.asList(
-				EnvironmentalBlocks.PINE_LEAVES, EnvironmentalBlocks.PINE_LEAF_PILE
-		);
-
-		DataUtil.registerBlockColor(blockColors, (x, world, pos, u) -> world != null && pos != null ? BiomeColors.getAverageGrassColor(world, pos) : GrassColor.get(0.5D, 1.0D), grassColors);
-		DataUtil.registerBlockColor(blockColors, (x, world, pos, u) -> world != null && pos != null ? BiomeColors.getAverageFoliageColor(world, pos) : FoliageColor.get(0.5D, 1.0D), foliageColors);
-		DataUtil.registerBlockColor(blockColors, (x, world, pos, u) -> world != null && pos != null ? 2129968 : 7181897, waterLilyColors);
-
-		DataUtil.registerBlockItemColor(itemColors, (color, items) -> GrassColor.get(0.5D, 1.0D), grassColors);
-		DataUtil.registerBlockItemColor(itemColors, (color, items) -> 7578444, pineFoliageItemColors);
-		DataUtil.registerBlockItemColor(itemColors, (color, items) -> 6975545, willowFoliageItemColors);
-		DataUtil.registerBlockItemColor(itemColors, (block, tintIndex) -> {
-			BlockState blockstate = ((BlockItem) block.getItem()).getBlock().defaultBlockState();
-			return blockColors.getColor(blockstate, null, null, tintIndex);
-		}, waterLilyColors);
-
+		event.register((item, tintIndex) -> GrassColor.get(0.5D, 1.0D), EnvironmentalBlocks.GIANT_TALL_GRASS);
+		event.register((item, tintIndex) -> 7578444, EnvironmentalBlocks.PINE_LEAVES, EnvironmentalBlocks.PINE_LEAF_PILE);
+		event.register((item, tintIndex) -> 6975545, EnvironmentalBlocks.WILLOW_LEAVES, EnvironmentalBlocks.HANGING_WILLOW_LEAVES, EnvironmentalBlocks.WILLOW_LEAF_PILE);
+		event.register((item, tintIndex) -> {
+			BlockState state = ((BlockItem) item.getItem()).getBlock().defaultBlockState();
+			return blockColors.getColor(state, null, null, tintIndex);
+		}, EnvironmentalBlocks.LARGE_LILY_PAD, EnvironmentalBlocks.GIANT_LILY_PAD);
 	}
 }

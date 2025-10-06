@@ -1,6 +1,7 @@
 package com.teamabnormals.environmental.common.slabfish.condition;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamabnormals.environmental.common.slabfish.SlabfishConditionType;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSlabfishConditions;
@@ -10,20 +11,10 @@ import com.teamabnormals.environmental.core.registry.EnvironmentalSlabfishCondit
  *
  * @author Ocelot
  */
-public class SlabfishRandomCondition implements SlabfishCondition {
-	public static final Codec<SlabfishRandomCondition> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-			Codec.FLOAT.fieldOf("chance").forGetter(SlabfishRandomCondition::getChance)
+public record SlabfishRandomCondition(float chance) implements SlabfishCondition {
+	public static final MapCodec<SlabfishRandomCondition> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+			Codec.FLOAT.fieldOf("chance").forGetter(SlabfishRandomCondition::chance)
 	).apply(instance, SlabfishRandomCondition::new));
-
-	private final float chance;
-
-	private SlabfishRandomCondition(float chance) {
-		this.chance = chance;
-	}
-
-	public float getChance() {
-		return chance;
-	}
 
 	@Override
 	public boolean test(SlabfishConditionContext context) {

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "mud_ball",
+  "ingredients": [
+    {
+      "tag": "c:buckets/water"
+    },
+    {
+      "tag": "environmental:convertable_to_mud"
+    },
+    {
+      "tag": "environmental:convertable_to_mud"
+    },
+    {
+      "tag": "environmental:convertable_to_mud"
+    },
+    {
+      "tag": "environmental:convertable_to_mud"
+    }
+  ],
+  "result": {
+    "count": 16,
+    "id": "environmental:mud_ball"
+  }
+}

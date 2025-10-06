@@ -6,7 +6,7 @@ import com.teamabnormals.environmental.common.slabfish.SweaterType;
 import com.teamabnormals.environmental.core.Environmental;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
-import net.minecraftforge.registries.DataPackRegistryEvent;
+import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 
 public final class EnvironmentalRegistries {
 	public static final ResourceKey<Registry<SlabfishType>> SLABFISH_TYPE = key("slabfish/type");

@@ -15,8 +15,8 @@ import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.entity.living.BabyEntitySpawnEvent;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
@@ -93,10 +93,10 @@ public class SlabbyBreedGoal extends Goal {
 
 	@Deprecated
 	protected void spawnBaby() {
-		Slabfish slabby = (Slabfish) this.animal.getBreedOffspring((ServerLevel) this.world, this.targetMate);
+		Slabfish slabby = this.animal.getBreedOffspring((ServerLevel) this.world, this.targetMate);
 
 		final BabyEntitySpawnEvent event = new BabyEntitySpawnEvent(animal, targetMate, slabby);
-		final boolean cancelled = MinecraftForge.EVENT_BUS.post(event);
+		final boolean cancelled = NeoForge.EVENT_BUS.post(event).isCanceled();
 		slabby = (Slabfish) event.getChild();
 		if (cancelled) {
 			//Reset the "inLove" state for the animals

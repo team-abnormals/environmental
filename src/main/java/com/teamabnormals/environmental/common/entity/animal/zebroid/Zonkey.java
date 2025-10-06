@@ -84,11 +84,11 @@ public class Zonkey extends AbstractChestedHorse implements NeutralMob, Zebroid 
 	}
 
 	@Override
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		this.entityData.define(KICK_TIME, 0);
-		this.entityData.define(STRIPE_OPACITY, 100);
-		this.entityData.define(ANGRY_AT, Optional.empty());
+	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+		super.defineSynchedData(builder);
+		builder.define(KICK_TIME, 0);
+		builder.define(STRIPE_OPACITY, 100);
+		builder.define(ANGRY_AT, Optional.empty());
 	}
 
 	@Override
@@ -377,9 +377,9 @@ public class Zonkey extends AbstractChestedHorse implements NeutralMob, Zebroid 
 	}
 
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData groupData, @Nullable CompoundTag tag) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData groupData) {
 		this.randomizeStripeOpacity(level.getRandom());
-		return super.finalizeSpawn(level, difficulty, spawnType, groupData, tag);
+		return super.finalizeSpawn(level, difficulty, spawnType, groupData);
 	}
 
 	@Override
@@ -399,12 +399,7 @@ public class Zonkey extends AbstractChestedHorse implements NeutralMob, Zebroid 
 	}
 
 	@Override
-	protected int getInventorySize() {
-		return this.hasChest() ? 11 : 2;
-	}
-
-	@Override
 	public int getInventoryColumns() {
-		return 3;
+		return this.hasChest() ? 3 : 0;
 	}
 }

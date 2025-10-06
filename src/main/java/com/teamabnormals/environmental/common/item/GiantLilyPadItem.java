@@ -21,8 +21,8 @@ import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.minecraftforge.common.util.BlockSnapshot;
-import net.minecraftforge.event.ForgeEventFactory;
+import net.neoforged.neoforge.common.util.BlockSnapshot;
+import net.neoforged.neoforge.event.EventHooks;
 
 public class GiantLilyPadItem extends BlockItem {
 
@@ -54,8 +54,8 @@ public class GiantLilyPadItem extends BlockItem {
 					BlockSnapshot blocksnapshot = BlockSnapshot.create(level.dimension(), level, abovePos);
 					if (!level.isClientSide())
 						GiantLilyPadBlock.placeAt(level, abovePos, this.getBlock().defaultBlockState(), 18);
-					if (ForgeEventFactory.onBlockPlace(player, blocksnapshot, Direction.UP)) {
-						blocksnapshot.restore(true, false);
+					if (EventHooks.onBlockPlace(player, blocksnapshot, Direction.UP)) {
+						blocksnapshot.restore();
 						return InteractionResultHolder.fail(stack);
 					}
 

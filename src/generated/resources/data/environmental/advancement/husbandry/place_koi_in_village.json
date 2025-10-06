@@ -1,0 +1,42 @@
+{
+  "parent": "minecraft:husbandry/tactical_fishing",
+  "criteria": {
+    "place_koi_in_village": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "structures": "#minecraft:village"
+            }
+          },
+          {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "items": "environmental:koi_bucket"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:item_used_on_block"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.environmental.husbandry.place_koi_in_village.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "environmental:koi_bucket"
+    },
+    "title": {
+      "translate": "advancements.environmental.husbandry.place_koi_in_village.title"
+    }
+  },
+  "requirements": [
+    [
+      "place_koi_in_village"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -16,13 +16,13 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.predicate.BlockStatePredicate;
-import net.minecraftforge.event.ForgeEventFactory;
+import net.neoforged.neoforge.event.EventHooks;
 
 import java.util.function.Predicate;
 
 public class YakGrazeBehavior extends Behavior<Yak> {
 	private static final int GRAZING_TIME = 40;
-	private static final Predicate<BlockState> IS_TALL_GRASS = BlockStatePredicate.forBlock(Blocks.GRASS);
+	private static final Predicate<BlockState> IS_TALL_GRASS = BlockStatePredicate.forBlock(Blocks.SHORT_GRASS);
 
 	public YakGrazeBehavior() {
 		super(ImmutableMap.of(
@@ -92,7 +92,7 @@ public class YakGrazeBehavior extends Behavior<Yak> {
 
 		BlockPos pos = yak.blockPosition();
 		if (IS_TALL_GRASS.test(level.getBlockState(pos))) {
-			if (ForgeEventFactory.getMobGriefingEvent(level, yak)) {
+			if (EventHooks.canEntityGrief(level, yak)) {
 				level.destroyBlock(pos, false);
 			}
 
@@ -103,7 +103,7 @@ public class YakGrazeBehavior extends Behavior<Yak> {
 
 		pos = pos.below();
 		if (level.getBlockState(pos).is(Blocks.GRASS_BLOCK)) {
-			if (ForgeEventFactory.getMobGriefingEvent(level, yak)) {
+			if (EventHooks.canEntityGrief(level, yak)) {
 				level.levelEvent(2001, pos, Block.getId(Blocks.GRASS_BLOCK.defaultBlockState()));
 				level.setBlock(pos, Blocks.DIRT.defaultBlockState(), 2);
 			}

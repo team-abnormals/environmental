@@ -12,13 +12,14 @@ import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.world.item.DyeableHorseArmorItem;
-import net.minecraft.world.item.HorseArmorItem;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.util.FastColor;
+import net.minecraft.world.item.AnimalArmorItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.ModList;
-import org.violetmoon.quark.content.tools.module.ColorRunesModule;
+import net.minecraft.world.item.component.DyedItemColor;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.fml.ModList;
 
 @OnlyIn(Dist.CLIENT)
 public class ZorseArmorLayer extends RenderLayer<Zorse, ZorseModel<Zorse>> {
@@ -30,35 +31,25 @@ public class ZorseArmorLayer extends RenderLayer<Zorse, ZorseModel<Zorse>> {
 	}
 
 	public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, Zorse zorse, float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks, float netHeadYaw, float headPitch) {
-		ItemStack itemstack = zorse.getArmor();
-		if (itemstack.getItem() instanceof HorseArmorItem) {
-			HorseArmorItem horsearmoritem = (HorseArmorItem) itemstack.getItem();
+		ItemStack stack = zorse.getBodyArmorItem();
+		if (stack.getItem() instanceof AnimalArmorItem animalArmor && animalArmor.getBodyType() == AnimalArmorItem.BodyType.EQUESTRIAN) {
 			this.getParentModel().copyPropertiesTo(this.model);
 			this.model.prepareMobModel(zorse, limbSwing, limbSwingAmount, partialTick);
 			this.model.setupAnim(zorse, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-			float f;
-			float f1;
-			float f2;
-			if (horsearmoritem instanceof DyeableHorseArmorItem) {
-				int i = ((DyeableHorseArmorItem) horsearmoritem).getColor(itemstack);
-				f = (float) (i >> 16 & 255) / 255.0F;
-				f1 = (float) (i >> 8 & 255) / 255.0F;
-				f2 = (float) (i & 255) / 255.0F;
-			} else {
-				f = 1.0F;
-				f1 = 1.0F;
-				f2 = 1.0F;
+			int i = -1;
+			if (stack.is(ItemTags.DYEABLE)) {
+				i = FastColor.ARGB32.opaque(DyedItemColor.getOrDefault(stack, -6265536));
 			}
 
-			ItemStack stack = zorse.getArmor();
 			setColorRuneTarget(stack);
-			HorseArmorItem horseArmorItem = (HorseArmorItem) stack.getItem();
-			VertexConsumer vertexconsumer = ItemRenderer.getFoilBufferDirect(buffer, RenderType.entityCutoutNoCull(horseArmorItem.getTexture()), false, stack.hasFoil());
-			this.model.renderToBuffer(poseStack, vertexconsumer, packedLight, OverlayTexture.NO_OVERLAY, f, f1, f2, 1.0F);
+			VertexConsumer vertexConsumer = ItemRenderer.getFoilBufferDirect(buffer, RenderType.entityCutoutNoCull(animalArmor.getTexture()), false, stack.hasFoil());
+			this.model.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY, i);
 		}
 	}
 
 	private static void setColorRuneTarget(ItemStack stack) {
-		if (ModList.get().isLoaded("quark")) ColorRunesModule.setTargetStack(stack);
+		if (ModList.get().isLoaded("quark")) {
+			// ColorRunesModule.setTargetStack(stack);
+		}
 	}
 }

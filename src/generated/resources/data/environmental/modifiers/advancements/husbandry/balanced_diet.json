@@ -7,9 +7,7 @@
           "environmental:cherries": {
             "conditions": {
               "item": {
-                "items": [
-                  "environmental:cherries"
-                ]
+                "items": "environmental:cherries"
               }
             },
             "trigger": "minecraft:consume_item"
@@ -17,9 +15,7 @@
           "environmental:cooked_duck": {
             "conditions": {
               "item": {
-                "items": [
-                  "environmental:cooked_duck"
-                ]
+                "items": "environmental:cooked_duck"
               }
             },
             "trigger": "minecraft:consume_item"
@@ -27,9 +23,7 @@
           "environmental:cooked_venison": {
             "conditions": {
               "item": {
-                "items": [
-                  "environmental:cooked_venison"
-                ]
+                "items": "environmental:cooked_venison"
               }
             },
             "trigger": "minecraft:consume_item"
@@ -37,9 +31,7 @@
           "environmental:duck": {
             "conditions": {
               "item": {
-                "items": [
-                  "environmental:duck"
-                ]
+                "items": "environmental:duck"
               }
             },
             "trigger": "minecraft:consume_item"
@@ -47,9 +39,7 @@
           "environmental:koi": {
             "conditions": {
               "item": {
-                "items": [
-                  "environmental:koi"
-                ]
+                "items": "environmental:koi"
               }
             },
             "trigger": "minecraft:consume_item"
@@ -57,9 +47,7 @@
           "environmental:plum": {
             "conditions": {
               "item": {
-                "items": [
-                  "environmental:plum"
-                ]
+                "items": "environmental:plum"
               }
             },
             "trigger": "minecraft:consume_item"
@@ -67,9 +55,7 @@
           "environmental:truffle": {
             "conditions": {
               "item": {
-                "items": [
-                  "environmental:truffle"
-                ]
+                "items": "environmental:truffle"
               }
             },
             "trigger": "minecraft:consume_item"
@@ -77,14 +63,13 @@
           "environmental:venison": {
             "conditions": {
               "item": {
-                "items": [
-                  "environmental:venison"
-                ]
+                "items": "environmental:venison"
               }
             },
             "trigger": "minecraft:consume_item"
           }
         },
+        "indexed_requirements": [],
         "requirements": [
           [
             "environmental:cherries"

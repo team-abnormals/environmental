@@ -1,0 +1,10 @@
+{
+  "values": [
+    "minecraft:seagrass",
+    "environmental:duckweed",
+    {
+      "id": "#c:crops/rice",
+      "required": false
+    }
+  ]
+}

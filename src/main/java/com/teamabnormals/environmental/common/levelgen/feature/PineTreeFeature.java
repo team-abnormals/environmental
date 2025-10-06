@@ -22,14 +22,14 @@ public class PineTreeFeature extends BlueprintTreeFeature {
 	}
 
 	@Override
-	public void doPlace(FeaturePlaceContext<TreeConfiguration> context) {
+	public void doPlace(FeaturePlaceContext<TreeConfiguration> context, TreeInfo info) {
 		TreeConfiguration config = context.config();
 		BlockPos origin = context.origin();
 		RandomSource random = context.random();
 
 		int trunkheight = config.trunkPlacer.getTreeHeight(random);
 		for (int y = 0; y < trunkheight; y++) {
-			this.addLog(origin.above(y));
+			info.addLog(origin.above(y));
 		}
 
 		float f = random.nextFloat();
@@ -53,7 +53,7 @@ public class PineTreeFeature extends BlueprintTreeFeature {
 
 			if (leafbranches > 0) {
 				Direction direction = branchdirections.remove(random.nextInt(branchdirections.size()));
-				this.createBranchWithLeaves(blockpos, direction, random, config);
+				this.createBranchWithLeaves(blockpos, direction, random, config, info);
 				leafbranches--;
 
 				if (branchdirections.isEmpty()) {
@@ -61,7 +61,7 @@ public class PineTreeFeature extends BlueprintTreeFeature {
 					branchdirections.remove(direction);
 				}
 			} else if (random.nextInt(y > 5 ? 2 : 6) == 0) {
-				this.createBranch(blockpos, Plane.HORIZONTAL.getRandomDirection(random), random, config);
+				this.createBranch(blockpos, Plane.HORIZONTAL.getRandomDirection(random), random, config, info);
 			}
 
 			if (leafbranches == 0)
@@ -72,7 +72,7 @@ public class PineTreeFeature extends BlueprintTreeFeature {
 				y--;
 		}
 
-		this.createTopLeaves(origin.above(trunkheight));
+		this.createTopLeaves(origin.above(trunkheight), info);
 	}
 
 	@Override
@@ -80,33 +80,33 @@ public class PineTreeFeature extends BlueprintTreeFeature {
 		return EnvironmentalBlocks.PINE_SAPLING.get().defaultBlockState();
 	}
 
-	private void createBranch(BlockPos pos, Direction direction, RandomSource random, TreeConfiguration config) {
+	private void createBranch(BlockPos pos, Direction direction, RandomSource random, TreeConfiguration config, TreeInfo info) {
 		BlockPos blockpos = pos.relative(direction);
-		this.addSpecialLog(blockpos, config.trunkProvider.getState(random, blockpos).setValue(RotatedPillarBlock.AXIS, direction.getAxis()));
+		info.addLog(blockpos, config.trunkProvider.getState(random, blockpos).setValue(RotatedPillarBlock.AXIS, direction.getAxis()));
 	}
 
-	private void createBranchWithLeaves(BlockPos pos, Direction direction, RandomSource random, TreeConfiguration config) {
+	private void createBranchWithLeaves(BlockPos pos, Direction direction, RandomSource random, TreeConfiguration config, TreeInfo info) {
 		BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
 		BlockPos blockpos = pos.relative(direction);
 
-		this.createBranch(pos, direction, random, config);
+		this.createBranch(pos, direction, random, config, info);
 
 		for (int x = -1; x <= 1; x++) {
 			for (int z = -1; z <= 1; z++) {
 				mutable.setWithOffset(blockpos, x, 0, z);
-				this.addFoliage(mutable);
+				info.addFoliage(mutable);
 				if ((x == 0 || z == 0)) {
-					this.addFoliage(mutable.above());
+					info.addFoliage(mutable.above());
 				}
 			}
 		}
 
 		if (random.nextInt(3) == 0) {
-			this.addFoliage(blockpos.relative(direction, 2));
+			info.addFoliage(blockpos.relative(direction, 2));
 		}
 	}
 
-	private void createTopLeaves(BlockPos pos) {
+	private void createTopLeaves(BlockPos pos, TreeInfo info) {
 		BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
 
 		for (int y = 0; y <= 3; y++) {
@@ -115,7 +115,7 @@ public class PineTreeFeature extends BlueprintTreeFeature {
 				for (int z = -r; z <= r; z++) {
 					if (Math.abs(x) + Math.abs(z) <= r) {
 						mutable.setWithOffset(pos, x, 1 - y, z);
-						this.addFoliage(mutable);
+						info.addFoliage(mutable);
 					}
 				}
 			}

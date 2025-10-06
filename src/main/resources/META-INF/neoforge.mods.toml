@@ -1,0 +1,42 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+issueTrackerURL = "https://github.com/team-abnormals/environmental/issues"
+license = "https://github.com/team-abnormals/environmental/blob/main/LICENSE.txt"
+
+[[mixins]]
+    config = "environmental.mixins.json"
+
+[[mods]]
+    modId = "environmental"
+    version = "${mod_version}"
+    logoFile = "logo.png"
+    itemIcon = "environmental:slabfish_effigy"
+    configBackground = "environmental:textures/block/willow_planks.png"
+    authors = "Team Abnormals"
+    credits = "bageldotjpg, Farcr, hatsondogs, Jackson, Ocelot, Echolite, five"
+    displayURL = "https://www.teamabnormals.com/mods/environmental"
+    displayName = "Environmental"
+    description = '''
+    Expanding the environment. New wood, new blocks, new friends.
+    '''
+
+[[dependencies.environmental]]
+    modId = "minecraft"
+    type = "required"
+    versionRange = "[${mc_version}]"
+    ordering = "AFTER"
+    side = "BOTH"
+
+[[dependencies.environmental]]
+    modId = "neoforge"
+    type = "required"
+    versionRange = "[${neoforge},)"
+    ordering = "AFTER"
+    side = "BOTH"
+
+[[dependencies.environmental]]
+    modId = "blueprint"
+    type = "required"
+    versionRange = "[${blueprint},)"
+    ordering = "AFTER"
+    side = "BOTH"

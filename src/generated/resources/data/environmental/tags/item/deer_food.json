@@ -1,0 +1,10 @@
+{
+  "values": [
+    "minecraft:sweet_berries",
+    "#c:foods/cherry",
+    {
+      "id": "#c:foods/strawberry",
+      "required": false
+    }
+  ]
+}

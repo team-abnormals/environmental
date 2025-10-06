@@ -1,21 +1,28 @@
 package com.teamabnormals.environmental.core.other;
 
-import com.teamabnormals.blueprint.common.advancement.EmptyTrigger;
-import com.teamabnormals.environmental.common.advancement.SlabfishNearbyCriterionTrigger;
 import com.teamabnormals.environmental.core.Environmental;
-import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraft.advancements.Criterion;
+import net.minecraft.advancements.CriterionTrigger;
+import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.advancements.critereon.PlayerTrigger;
+import net.minecraft.advancements.critereon.PlayerTrigger.TriggerInstance;
+import net.minecraft.core.registries.Registries;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
-@EventBusSubscriber(modid = Environmental.MOD_ID)
+import java.util.Optional;
+
 public class EnvironmentalCriteriaTriggers {
-	public static final EmptyTrigger BACKPACK_SLABFISH = CriteriaTriggers.register(new EmptyTrigger(prefix("backpack_slabfish")));
-	public static final EmptyTrigger PLACE_KOI_IN_VILLAGE = CriteriaTriggers.register(new EmptyTrigger(prefix("place_koi_in_village")));
-	public static final EmptyTrigger WHEN_PIGS_FLY = CriteriaTriggers.register(new EmptyTrigger(prefix("when_pigs_fly")));
+	public static final DeferredRegister<CriterionTrigger<?>> TRIGGERS = DeferredRegister.create(Registries.TRIGGER_TYPE, Environmental.MOD_ID);
 
-	public static final SlabfishNearbyCriterionTrigger SLABFISH = CriteriaTriggers.register(new SlabfishNearbyCriterionTrigger());
+	public static final DeferredHolder<CriterionTrigger<?>, PlayerTrigger> BACKPACK_SLABFISH = TRIGGERS.register("backpack_slabfish", PlayerTrigger::new);
+	public static final DeferredHolder<CriterionTrigger<?>, PlayerTrigger> WHEN_PIGS_FLY = TRIGGERS.register("when_pigs_fly", PlayerTrigger::new);
 
-	private static ResourceLocation prefix(String name) {
-		return Environmental.location(name);
+	public static Criterion<TriggerInstance> backpackSlabfish() {
+		return BACKPACK_SLABFISH.get().createCriterion(new PlayerTrigger.TriggerInstance(EntityPredicate.wrap(Optional.empty())));
+	}
+
+	public static Criterion<TriggerInstance> whenPigsFly() {
+		return WHEN_PIGS_FLY.get().createCriterion(new PlayerTrigger.TriggerInstance(EntityPredicate.wrap(Optional.empty())));
 	}
 }	

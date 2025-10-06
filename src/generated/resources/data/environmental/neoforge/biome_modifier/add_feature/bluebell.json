@@ -1,0 +1,9 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#environmental:has_feature/bluebell",
+  "features": [
+    "environmental:flower_bluebell",
+    "environmental:flower_bluebell_large"
+  ],
+  "step": "vegetal_decoration"
+}

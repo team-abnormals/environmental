@@ -13,8 +13,8 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.Mth;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 /**
  * ModelSlabfish - Farcr
@@ -90,8 +90,8 @@ public class SlabfishModel<E extends Slabfish> extends AgeableListModel<E> {
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		super.renderToBuffer(matrixStack, this.sprite.wrap(buffer), packedLight, packedOverlay, red, green, blue, alpha);
+	public void renderToBuffer(PoseStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
+		super.renderToBuffer(matrixStack, this.sprite.wrap(buffer), packedLight, packedOverlay, color);
 	}
 
 	@Override

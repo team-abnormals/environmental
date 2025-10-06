@@ -24,7 +24,7 @@ public class WeepingWillowTreeFeature extends BlueprintTreeFeature {
 	}
 
 	@Override
-	public void doPlace(FeaturePlaceContext<TreeConfiguration> context) {
+	public void doPlace(FeaturePlaceContext<TreeConfiguration> context, TreeInfo info) {
 		TreeConfiguration config = context.config();
 		BlockPos origin = context.origin();
 		RandomSource random = context.random();
@@ -40,22 +40,22 @@ public class WeepingWillowTreeFeature extends BlueprintTreeFeature {
 			int branchHeight = branchHeights.remove(random.nextInt(branchHeights.size()));
 			Direction direction = branchDirections.remove(random.nextInt(branchDirections.size()));
 
-			this.createBranch(origin.above(branchHeight), direction, random, config);
+			this.createBranch(origin.above(branchHeight), direction, random, config, info);
 		}
 
 		Direction direction = branchDirections.get(random.nextInt(branchDirections.size()));
 
 		for (int i = 0; i < trunkHeight; i++) {
 			if (i < trunkHeight - 5)
-				this.addLog(origin.above(i));
+				info.addLog(origin.above(i));
 			else
-				this.addLog(origin.above(i).relative(direction));
+				info.addLog(origin.above(i).relative(direction));
 		}
 
-		this.createTopLeafBlob(origin.above(trunkHeight).relative(direction), random, direction);
+		this.createTopLeafBlob(origin.above(trunkHeight).relative(direction), random, direction, info);
 	}
 
-	private void createBranch(BlockPos pos, Direction direction, RandomSource random, TreeConfiguration config) {
+	private void createBranch(BlockPos pos, Direction direction, RandomSource random, TreeConfiguration config, TreeInfo info) {
 		int length = 3 + random.nextInt(2);
 		int offsetpos = 1 + random.nextInt(length - 1);
 
@@ -65,13 +65,13 @@ public class WeepingWillowTreeFeature extends BlueprintTreeFeature {
 		for (int i = 0; i < length; i++) {
 			if (i == offsetpos)
 				mutablepos.set(mutablepos.above());
-			this.addSpecialLog(mutablepos.set(mutablepos.relative(direction)), config.trunkProvider.getState(random, mutablepos).setValue(RotatedPillarBlock.AXIS, direction.getAxis()));
+			info.addLog(mutablepos.set(mutablepos.relative(direction)), config.trunkProvider.getState(random, mutablepos).setValue(RotatedPillarBlock.AXIS, direction.getAxis()));
 		}
 
-		this.createBranchLeafBlob(mutablepos, random, direction, length <= 3);
+		this.createBranchLeafBlob(mutablepos, random, direction, info, length <= 3);
 	}
 
-	private void createTopLeafBlob(BlockPos pos, RandomSource random, Direction direction) {
+	private void createTopLeafBlob(BlockPos pos, RandomSource random, Direction direction, TreeInfo info) {
 		BlockPos.MutableBlockPos mutablepos = new BlockPos.MutableBlockPos();
 
 		for (int y = 0; y >= -3; y--) {
@@ -80,16 +80,16 @@ public class WeepingWillowTreeFeature extends BlueprintTreeFeature {
 				for (int z = -r; z <= r; z++) {
 					if (Math.abs(x) != r || Math.abs(z) != r || (random.nextInt(2) == 0 && y != 0)) {
 						mutablepos.setWithOffset(pos, x, y, z);
-						this.addFoliage(mutablepos);
+						info.addFoliage(mutablepos);
 					}
 				}
 			}
 		}
 
-		this.createLeafWall(pos.below(4), random, direction, 3, 2);
+		this.createLeafWall(pos.below(4), random, direction, info, 3, 2);
 	}
 
-	private void createBranchLeafBlob(BlockPos pos, RandomSource random, Direction direction, boolean small) {
+	private void createBranchLeafBlob(BlockPos pos, RandomSource random, Direction direction, TreeInfo info, boolean small) {
 		BlockPos.MutableBlockPos mutablepos = new BlockPos.MutableBlockPos();
 		int i = small ? 1 : 2;
 
@@ -97,7 +97,7 @@ public class WeepingWillowTreeFeature extends BlueprintTreeFeature {
 			for (int z = -1; z <= 1; z++) {
 				if (Math.abs(x) != 1 || Math.abs(z) != 1 || random.nextInt(4) == 0) {
 					mutablepos.setWithOffset(pos, x, i, z);
-					this.addFoliage(mutablepos);
+					info.addFoliage(mutablepos);
 				}
 			}
 		}
@@ -107,16 +107,16 @@ public class WeepingWillowTreeFeature extends BlueprintTreeFeature {
 				for (int z = -i; z <= i; z++) {
 					if (Math.abs(x) != 2 || Math.abs(z) != 2) {
 						mutablepos.setWithOffset(pos, x, y, z);
-						this.addFoliage(mutablepos);
+						info.addFoliage(mutablepos);
 					}
 				}
 			}
 		}
 
-		this.createLeafWall(pos.below(), random, direction, i, 3);
+		this.createLeafWall(pos.below(), random, direction, info, i, 3);
 	}
 
-	private void createLeafWall(BlockPos pos, RandomSource random, Direction direction, int width, int maxLength) {
+	private void createLeafWall(BlockPos pos, RandomSource random, Direction direction, TreeInfo info, int width, int maxLength) {
 		BlockPos.MutableBlockPos mutablepos = new BlockPos.MutableBlockPos();
 
 		for (int x = -width; x <= width; x++) {
@@ -127,7 +127,7 @@ public class WeepingWillowTreeFeature extends BlueprintTreeFeature {
 
 					for (int y = 0; y > -i; y--) {
 						mutablepos.setWithOffset(pos, x, y, z);
-						this.addFoliage(mutablepos);
+						info.addFoliage(mutablepos);
 					}
 				}
 			}

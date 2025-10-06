@@ -1,6 +1,7 @@
 {
   "values": [
-    "#forge:is_grassland",
-    "#minecraft:is_savanna"
+    "#c:is_plains",
+    "#minecraft:is_savanna",
+    "minecraft:meadow"
   ]
 }

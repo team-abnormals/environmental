@@ -1,6 +1,7 @@
 package com.teamabnormals.environmental.common.block;
 
 import com.google.common.collect.Lists;
+import com.mojang.serialization.MapCodec;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
@@ -11,7 +12,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -35,6 +36,11 @@ public class PineconeBlock extends FallingBlock implements BonemealableBlock {
 	}
 
 	@Override
+	protected MapCodec<? extends FallingBlock> codec() {
+		return null;
+	}
+
+	@Override
 	public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
 		if (canFall(level, pos) && pos.getY() >= level.getMinBuildHeight()) {
 			FallingBlockEntity fallingblockentity = FallingBlockEntity.fall(level, pos, state);
@@ -43,8 +49,7 @@ public class PineconeBlock extends FallingBlock implements BonemealableBlock {
 	}
 
 	@Override
-	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
-		ItemStack stack = player.getItemInHand(hand);
+	public ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
 		if (stack.is(Items.HONEYCOMB)) {
 			if (player instanceof ServerPlayer) {
 				CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer) player, pos, stack);
@@ -57,10 +62,10 @@ public class PineconeBlock extends FallingBlock implements BonemealableBlock {
 			level.setBlock(pos, newState, 11);
 			level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, newState));
 			level.levelEvent(player, 3003, pos, 0);
-			return InteractionResult.sidedSuccess(level.isClientSide);
+			return ItemInteractionResult.sidedSuccess(level.isClientSide);
 		}
 
-		return super.use(state, level, pos, player, hand, result);
+		return super.useItemOn(stack, state, level, pos, player, hand, result);
 	}
 
 	@Override
@@ -99,7 +104,7 @@ public class PineconeBlock extends FallingBlock implements BonemealableBlock {
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(LevelReader p_50897_, BlockPos p_50898_, BlockState p_50899_, boolean p_50900_) {
+	public boolean isValidBonemealTarget(LevelReader p_50897_, BlockPos p_50898_, BlockState p_50899_) {
 		return true;
 	}
 

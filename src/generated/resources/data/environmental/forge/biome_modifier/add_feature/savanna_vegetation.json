@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#minecraft:is_savanna",
-  "features": "environmental:patch_giant_tall_grass_savanna",
-  "step": "vegetal_decoration"
-}

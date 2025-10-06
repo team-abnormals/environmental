@@ -1,5 +1,6 @@
 package com.teamabnormals.environmental.common.block;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -14,13 +15,17 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.PlantType;
 
 public class DuckweedBlock extends BushBlock implements BonemealableBlock {
 	protected static final VoxelShape DUCKWEED_AABB = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 1.5D, 15.0D);
 
 	public DuckweedBlock(Block.Properties builder) {
 		super(builder);
+	}
+
+	@Override
+	protected MapCodec<? extends BushBlock> codec() {
+		return null;
 	}
 
 	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
@@ -33,12 +38,7 @@ public class DuckweedBlock extends BushBlock implements BonemealableBlock {
 		return ifluidstate.getType() == Fluids.WATER;
 	}
 
-	@Override
-	public PlantType getPlantType(BlockGetter world, BlockPos pos) {
-		return PlantType.WATER;
-	}
-
-	public boolean isValidBonemealTarget(LevelReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(LevelReader worldIn, BlockPos pos, BlockState state) {
 		return worldIn.getBlockState(pos.above()).isAir();
 	}
 

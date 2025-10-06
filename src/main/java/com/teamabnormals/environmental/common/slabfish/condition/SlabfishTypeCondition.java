@@ -1,6 +1,6 @@
 package com.teamabnormals.environmental.common.slabfish.condition;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamabnormals.environmental.common.slabfish.SlabfishConditionType;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSlabfishConditions;
@@ -13,20 +13,10 @@ import java.util.Arrays;
  *
  * @author Ocelot
  */
-public class SlabfishTypeCondition implements SlabfishCondition {
-	public static final Codec<SlabfishTypeCondition> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-			ResourceLocation.CODEC.listOf().xmap(list -> list.toArray(ResourceLocation[]::new), Arrays::asList).fieldOf("types").forGetter(SlabfishTypeCondition::getTypes)
+public record SlabfishTypeCondition(ResourceLocation... types) implements SlabfishCondition {
+	public static final MapCodec<SlabfishTypeCondition> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+			ResourceLocation.CODEC.listOf().xmap(list -> list.toArray(ResourceLocation[]::new), Arrays::asList).fieldOf("types").forGetter(SlabfishTypeCondition::types)
 	).apply(instance, SlabfishTypeCondition::new));
-
-	private final ResourceLocation[] types;
-
-	public SlabfishTypeCondition(ResourceLocation... types) {
-		this.types = types;
-	}
-
-	public ResourceLocation[] getTypes() {
-		return types;
-	}
 
 	@Override
 	public boolean test(SlabfishConditionContext context) {

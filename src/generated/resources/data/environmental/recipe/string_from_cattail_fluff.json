@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "environmental:cattail_fluff"
+    },
+    {
+      "item": "environmental:cattail_fluff"
+    },
+    {
+      "item": "environmental:cattail_fluff"
+    },
+    {
+      "item": "environmental:cattail_fluff"
+    },
+    {
+      "item": "environmental:cattail_fluff"
+    },
+    {
+      "item": "environmental:cattail_fluff"
+    },
+    {
+      "item": "environmental:cattail_fluff"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:string"
+  }
+}

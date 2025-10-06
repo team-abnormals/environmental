@@ -13,7 +13,7 @@
     },
     {
       "type": "environmental:in_biome",
-      "biomes": "#forge:is_snowy"
+      "biomes": "#c:is_snowy"
     }
   ],
   "description": {

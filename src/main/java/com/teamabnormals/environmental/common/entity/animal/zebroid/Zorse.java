@@ -16,7 +16,6 @@ import net.minecraft.world.Container;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FollowParentGoal;
@@ -24,7 +23,6 @@ import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.animal.horse.Markings;
 import net.minecraft.world.entity.animal.horse.Variant;
-import net.minecraft.world.item.HorseArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -32,14 +30,12 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.SoundType;
 
 import javax.annotation.Nullable;
-import java.util.UUID;
 import java.util.function.IntUnaryOperator;
 
 public class Zorse extends AbstractUnchestedZebroid implements VariantHolder<Variant> {
 	public static final float MIN_DAMAGE = generateAttackDamage(value -> 0);
 	public static final float MAX_DAMAGE = generateAttackDamage(value -> value - 1);
 
-	private static final UUID ARMOR_MODIFIER_UUID = UUID.fromString("6CEF6F73-493A-491E-B49C-BA4B2F8ABEB6");
 	private static final EntityDataAccessor<Integer> DATA_ID_TYPE_VARIANT = SynchedEntityData.defineId(Zorse.class, EntityDataSerializers.INT);
 	private static final EntityDataAccessor<Integer> STRIPE_OPACITY = SynchedEntityData.defineId(Zorse.class, EntityDataSerializers.INT);
 
@@ -71,10 +67,10 @@ public class Zorse extends AbstractUnchestedZebroid implements VariantHolder<Var
 	}
 
 	@Override
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		this.entityData.define(DATA_ID_TYPE_VARIANT, 0);
-		this.entityData.define(STRIPE_OPACITY, 100);
+	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+		super.defineSynchedData(builder);
+		builder.define(DATA_ID_TYPE_VARIANT, 0);
+		builder.define(STRIPE_OPACITY, 100);
 	}
 
 	@Override
@@ -82,9 +78,6 @@ public class Zorse extends AbstractUnchestedZebroid implements VariantHolder<Var
 		super.addAdditionalSaveData(compound);
 		compound.putInt("Variant", this.getTypeVariant());
 		compound.putInt("StripeOpacity", this.getStripeOpacity());
-		if (!this.inventory.getItem(1).isEmpty()) {
-			compound.put("ArmorItem", this.inventory.getItem(1).save(new CompoundTag()));
-		}
 	}
 
 	@Override
@@ -92,23 +85,6 @@ public class Zorse extends AbstractUnchestedZebroid implements VariantHolder<Var
 		super.readAdditionalSaveData(compound);
 		this.setTypeVariant(compound.getInt("Variant"));
 		this.setStripeOpacity(compound.getInt("StripeOpacity"));
-		if (compound.contains("ArmorItem", 10)) {
-			ItemStack itemstack = ItemStack.of(compound.getCompound("ArmorItem"));
-			if (!itemstack.isEmpty() && this.isArmor(itemstack)) {
-				this.inventory.setItem(1, itemstack);
-			}
-		}
-
-		this.updateContainerEquipment();
-	}
-
-	public ItemStack getArmor() {
-		return this.getItemBySlot(EquipmentSlot.CHEST);
-	}
-
-	private void setArmor(ItemStack stack) {
-		this.setItemSlot(EquipmentSlot.CHEST, stack);
-		this.setDropChance(EquipmentSlot.CHEST, 0.0F);
 	}
 
 	private void setTypeVariant(int p_30737_) {
@@ -177,60 +153,34 @@ public class Zorse extends AbstractUnchestedZebroid implements VariantHolder<Var
 	@Override
 	protected void playGallopSound(SoundType soundType) {
 		super.playGallopSound(soundType);
-
-		ItemStack stack = this.inventory.getItem(1);
-		if (isArmor(stack))
-			stack.onHorseArmorTick(level(), this);
-	}
-
-	@Override
-	protected void updateContainerEquipment() {
-		if (!this.level().isClientSide) {
-			super.updateContainerEquipment();
-			this.setArmorEquipment(this.inventory.getItem(1));
-			this.setDropChance(EquipmentSlot.CHEST, 0.0F);
-		}
-	}
-
-	private void setArmorEquipment(ItemStack stack) {
-		this.setArmor(stack);
-		if (!this.level().isClientSide) {
-			this.getAttribute(Attributes.ARMOR).removeModifier(ARMOR_MODIFIER_UUID);
-			if (this.isArmor(stack)) {
-				int i = ((HorseArmorItem) stack.getItem()).getProtection();
-				if (i != 0) {
-					this.getAttribute(Attributes.ARMOR).addTransientModifier(new AttributeModifier(ARMOR_MODIFIER_UUID, "Horse armor bonus", i, AttributeModifier.Operation.ADDITION));
-				}
-			}
-		}
 	}
 
 	@Override
 	public void containerChanged(Container container) {
-		ItemStack itemstack = this.getArmor();
+		ItemStack itemstack = this.getBodyArmorItem();
 		super.containerChanged(container);
-		ItemStack itemstack1 = this.getArmor();
-		if (this.tickCount > 20 && this.isArmor(itemstack1) && itemstack != itemstack1) {
+		ItemStack itemstack1 = this.getBodyArmorItem();
+		if (this.tickCount > 20 && this.isBodyArmorItem(itemstack1) && itemstack != itemstack1) {
 			this.playSound(SoundEvents.HORSE_ARMOR, 0.5F, 1.0F);
 		}
 	}
 
 	@Override
-	public boolean canWearArmor() {
+	public boolean canUseSlot(EquipmentSlot slot) {
 		return true;
 	}
 
 	@Override
-	public boolean isArmor(ItemStack stack) {
+	public boolean isBodyArmorItem(ItemStack stack) {
 		return stack.is(Items.LEATHER_HORSE_ARMOR);
 	}
 
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData groupData, @Nullable CompoundTag tag) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData groupData) {
 		RandomSource random = level.getRandom();
 		this.setVariantAndMarkings(Util.getRandom(Variant.values(), random), Util.getRandom(Markings.values(), random));
 		this.randomizeStripeOpacity(level.getRandom());
-		return super.finalizeSpawn(level, difficulty, spawnType, groupData, tag);
+		return super.finalizeSpawn(level, difficulty, spawnType, groupData);
 	}
 
 	@Override
@@ -269,10 +219,5 @@ public class Zorse extends AbstractUnchestedZebroid implements VariantHolder<Var
 	public void setOffspringAttributes(AgeableMob otherParent, AbstractHorse child) {
 		super.setOffspringAttributes(otherParent, child);
 		this.setOffspringAttribute(otherParent, child, Attributes.ATTACK_DAMAGE, MIN_DAMAGE, MAX_DAMAGE);
-	}
-
-	@Override
-	public double getPassengersRidingOffset() {
-		return super.getPassengersRidingOffset() - 0.1D;
 	}
 }

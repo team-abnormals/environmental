@@ -1,5 +1,6 @@
 package com.teamabnormals.environmental.common.block;
 
+import com.mojang.serialization.MapCodec;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -26,17 +27,20 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.common.PlantType;
 
 import javax.annotation.Nullable;
 
-public class LargeLilyPadBlock extends BushBlock implements IPlantable {
+public class LargeLilyPadBlock extends BushBlock {
 	protected static final VoxelShape GIANT_LILY_PAD_AABB = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 3.2001D, 16.0D);
 	public static final EnumProperty<LilyPadPosition> POSITION = EnumProperty.create("position", LilyPadPosition.class);
 
 	public LargeLilyPadBlock(BlockBehaviour.Properties builder) {
 		super(builder);
+	}
+
+	@Override
+	protected MapCodec<? extends BushBlock> codec() {
+		return null;
 	}
 
 	@Override
@@ -106,7 +110,7 @@ public class LargeLilyPadBlock extends BushBlock implements IPlantable {
 	public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
 		BlockPos blockpos = pos.below();
 		if (state.getBlock() == this) {
-			return worldIn.getBlockState(blockpos).canSustainPlant(worldIn, blockpos, Direction.UP, this);
+			return worldIn.getBlockState(blockpos).canSustainPlant(worldIn, blockpos, Direction.UP, state).isTrue();
 		}
 		return this.mayPlaceOn(worldIn.getBlockState(blockpos), worldIn, blockpos);
 	}
@@ -127,7 +131,7 @@ public class LargeLilyPadBlock extends BushBlock implements IPlantable {
 	}
 
 	@Override
-	public void playerWillDestroy(Level worldIn, BlockPos pos, BlockState state, Player player) {
+	public BlockState playerWillDestroy(Level worldIn, BlockPos pos, BlockState state, Player player) {
 		if (!worldIn.isClientSide) {
 			if (player.isCreative()) {
 				removeEachBlock(worldIn, pos, state, player);
@@ -135,7 +139,7 @@ public class LargeLilyPadBlock extends BushBlock implements IPlantable {
 				dropResources(state, worldIn, pos, null, player, player.getMainHandItem());
 			}
 		}
-		super.playerWillDestroy(worldIn, pos, state, player);
+		return super.playerWillDestroy(worldIn, pos, state, player);
 	}
 
 	private static void removeEachBlock(Level world, BlockPos pos, BlockState state, Player player) {
@@ -176,11 +180,6 @@ public class LargeLilyPadBlock extends BushBlock implements IPlantable {
 				case SOUTHWEST -> pos;
 			};
 		}
-	}
-
-	@Override
-	public PlantType getPlantType(BlockGetter world, BlockPos pos) {
-		return PlantType.WATER;
 	}
 
 	public enum LilyPadPosition implements StringRepresentable {

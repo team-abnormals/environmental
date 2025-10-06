@@ -1,5 +1,6 @@
 package com.teamabnormals.environmental.common.block;
 
+import com.mojang.serialization.MapCodec;
 import com.teamabnormals.blueprint.core.util.BlockUtil;
 import com.teamabnormals.blueprint.core.util.MathUtil;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalBlockTags;
@@ -14,7 +15,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -38,10 +39,10 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.common.ToolActions;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.common.CommonHooks;
+import net.neoforged.neoforge.common.ItemAbilities;
 
 public class CattailBlock extends BushBlock implements SimpleWaterloggedBlock, BonemealableBlock {
 	protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
@@ -54,6 +55,11 @@ public class CattailBlock extends BushBlock implements SimpleWaterloggedBlock, B
 	public CattailBlock(Properties properties) {
 		super(properties);
 		this.registerDefaultState(this.defaultBlockState().setValue(CATTAILS, 1).setValue(TOP, false).setValue(FLUFFY, false).setValue(WATERLOGGED, false).setValue(AGE, 0));
+	}
+
+	@Override
+	protected MapCodec<? extends BushBlock> codec() {
+		return null;
 	}
 
 	@Override
@@ -119,13 +125,13 @@ public class CattailBlock extends BushBlock implements SimpleWaterloggedBlock, B
 
 	@Override
 	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-		if (!state.getValue(FLUFFY) && !state.getValue(WATERLOGGED) && ForgeHooks.onCropsGrowPre(level, pos, state, random.nextDouble() < 0.1D)) {
+		if (!state.getValue(FLUFFY) && !state.getValue(WATERLOGGED) && CommonHooks.canCropGrow(level, pos, state, random.nextDouble() < 0.1D)) {
 			for (int i = 1; this.isCattail(level, pos.below(i)) || this.canGrowFluff(level, pos.below(i)); i++) {
 				if (this.canGrowFluff(level, pos.below(i))) {
 					BlockState fluffyState = state.setValue(FLUFFY, true);
 					level.setBlock(pos, fluffyState, 2);
 					level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(fluffyState));
-					ForgeHooks.onCropsGrowPost(level, pos, state);
+					CommonHooks.fireCropGrowPost(level, pos, state);
 					break;
 				}
 			}
@@ -133,14 +139,14 @@ public class CattailBlock extends BushBlock implements SimpleWaterloggedBlock, B
 
 		BlockPos abovePos = pos.above();
 		boolean notMaxAge = state.getValue(AGE) < this.getMaxAge();
-		if ((notMaxAge || state.getValue(WATERLOGGED)) && ForgeHooks.onCropsGrowPre(level, abovePos, level.getBlockState(abovePos), random.nextDouble() < 0.1D)) {
+		if ((notMaxAge || state.getValue(WATERLOGGED)) && CommonHooks.canCropGrow(level, abovePos, level.getBlockState(abovePos), random.nextDouble() < 0.1D)) {
 			if (this.canGrowInto(level.getBlockState(abovePos))) {
 				BlockState newState = state.setValue(TOP, true).setValue(WATERLOGGED, level.getFluidState(abovePos).getType() == Fluids.WATER);
 				if (notMaxAge) {
 					newState = newState.cycle(AGE);
 				}
 				level.setBlockAndUpdate(abovePos, newState);
-				ForgeHooks.onCropsGrowPost(level, abovePos, level.getBlockState(abovePos));
+				CommonHooks.fireCropGrowPost(level, abovePos, level.getBlockState(abovePos));
 			}
 		}
 	}
@@ -155,12 +161,11 @@ public class CattailBlock extends BushBlock implements SimpleWaterloggedBlock, B
 	}
 
 	@Override
-	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
+	public ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
 		boolean fluffy = state.getValue(FLUFFY);
-		ItemStack stack = player.getItemInHand(hand);
 		if (!fluffy && stack.is(Items.BONE_MEAL)) {
-			return InteractionResult.PASS;
-		} else if (fluffy && stack.canPerformAction(ToolActions.SHEARS_CARVE)) {
+			return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
+		} else if (fluffy && stack.canPerformAction(ItemAbilities.SHEARS_CARVE)) {
 			if (!level.isClientSide()) {
 				level.playSound(null, pos, EnvironmentalSoundEvents.CATTAIL_HARVEST.get(), SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
 				if (level.random.nextInt(900) < 5) {
@@ -168,13 +173,13 @@ public class CattailBlock extends BushBlock implements SimpleWaterloggedBlock, B
 				}
 				popResource(level, pos, new ItemStack(EnvironmentalItems.CATTAIL_FLUFF.get(), 1 + level.random.nextInt(state.getValue(CATTAILS))));
 				level.setBlockAndUpdate(pos, state.setValue(FLUFFY, false));
-				stack.hurtAndBreak(1, player, (p_55287_) -> p_55287_.broadcastBreakEvent(hand));
+				stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
 				level.gameEvent(player, GameEvent.SHEAR, pos);
 				player.awardStat(Stats.ITEM_USED.get(Items.SHEARS));
 			}
-			return InteractionResult.sidedSuccess(level.isClientSide);
+			return ItemInteractionResult.sidedSuccess(level.isClientSide);
 		} else {
-			return super.use(state, level, pos, player, hand, result);
+			return super.useItemOn(stack, state, level, pos, player, hand, result);
 		}
 	}
 
@@ -200,7 +205,7 @@ public class CattailBlock extends BushBlock implements SimpleWaterloggedBlock, B
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
 		return this.canGrowInto(level.getBlockState(pos.above())) || (!state.getValue(FLUFFY) && !state.getValue(WATERLOGGED));
 	}
 

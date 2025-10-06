@@ -3,10 +3,11 @@ package com.teamabnormals.environmental.common.slabfish.condition;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamabnormals.environmental.common.slabfish.SlabfishConditionType;
+import com.teamabnormals.environmental.common.slabfish.XorMapCodec;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSlabfishConditions;
-import net.minecraft.util.ExtraCodecs;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
@@ -19,7 +20,7 @@ import java.util.regex.PatternSyntaxException;
  * @author Ocelot
  */
 public class SlabfishRenameCondition implements SlabfishCondition {
-	private static final Codec<SlabfishRenameCondition> PATTERN_CODEC = RecordCodecBuilder.create(instance -> instance.group(
+	private static final MapCodec<SlabfishRenameCondition> PATTERN_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 			Codec.STRING.comapFlatMap((string) -> {
 				try {
 					return DataResult.success(Pattern.compile(string));
@@ -29,12 +30,12 @@ public class SlabfishRenameCondition implements SlabfishCondition {
 			}, Pattern::pattern).fieldOf("pattern").forGetter(SlabfishRenameCondition::getPattern)
 	).apply(instance, SlabfishRenameCondition::new));
 
-	private static final Codec<SlabfishRenameCondition> NAMES_CODEC = RecordCodecBuilder.create(instance -> instance.group(
+	private static final MapCodec<SlabfishRenameCondition> NAMES_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 			Codec.STRING.listOf().xmap(list -> list.toArray(String[]::new), Arrays::asList).fieldOf("names").forGetter(SlabfishRenameCondition::getNames),
 			Codec.BOOL.optionalFieldOf("case_sensitive", false).forGetter(SlabfishRenameCondition::isCaseSensitive)
 	).apply(instance, SlabfishRenameCondition::new));
 
-	public static final Codec<SlabfishRenameCondition> CODEC = ExtraCodecs.xor(SlabfishRenameCondition.NAMES_CODEC, SlabfishRenameCondition.PATTERN_CODEC).xmap(
+	public static final MapCodec<SlabfishRenameCondition> CODEC = XorMapCodec.xor(SlabfishRenameCondition.NAMES_CODEC, SlabfishRenameCondition.PATTERN_CODEC).xmap(
 			c -> c.left().isPresent() ? c.left().get() : c.right().get(),
 			c -> c.getNames() == null ? Either.right(c) : Either.left(c)
 	);

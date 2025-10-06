@@ -12,6 +12,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -38,17 +39,16 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.level.pathfinder.PathFinder;
+import net.minecraft.world.level.pathfinder.PathType;
+import net.minecraft.world.level.pathfinder.PathfindingContext;
 import net.minecraft.world.level.pathfinder.WalkNodeEvaluator;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
@@ -98,14 +98,14 @@ public class Tapir extends Animal {
 	}
 
 	@Override
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		this.entityData.define(TRACKING_TIME, 0);
-		this.entityData.define(HAS_BABY_PATTERN, false);
-		this.entityData.define(BEING_TEMPTED, false);
-		this.entityData.define(IS_SNIFFING, false);
-		this.entityData.define(IS_GRAZING, false);
-		this.entityData.define(FLORA_POS, Optional.empty());
+	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+		super.defineSynchedData(builder);
+		builder.define(TRACKING_TIME, 0);
+		builder.define(HAS_BABY_PATTERN, false);
+		builder.define(BEING_TEMPTED, false);
+		builder.define(IS_SNIFFING, false);
+		builder.define(IS_GRAZING, false);
+		builder.define(FLORA_POS, Optional.empty());
 	}
 
 	@Override
@@ -113,7 +113,7 @@ public class Tapir extends Animal {
 		super.addAdditionalSaveData(compound);
 		compound.putBoolean("BabyPattern", this.hasBabyPattern());
 		if (this.floraItem != null)
-			compound.putString("FloraItem", ForgeRegistries.ITEMS.getKey(this.floraItem).toString());
+			compound.putString("FloraItem", BuiltInRegistries.ITEM.getKey(this.floraItem).toString());
 		BlockPos florapos = this.getFloraPos();
 		if (florapos != null) {
 			compound.putInt("FloraX", florapos.getX());
@@ -127,9 +127,9 @@ public class Tapir extends Animal {
 	public void readAdditionalSaveData(CompoundTag compound) {
 		super.readAdditionalSaveData(compound);
 		this.setHasBabyPattern(compound.getBoolean("BabyPattern"));
-		Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(compound.getString("FloraItem")));
+		Item item = BuiltInRegistries.ITEM.get(ResourceLocation.parse(compound.getString("FloraItem")));
 		if (item != Items.AIR)
-			this.floraItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation(compound.getString("FloraItem")));
+			this.floraItem = BuiltInRegistries.ITEM.get(ResourceLocation.parse(compound.getString("FloraItem")));
 		if (compound.contains("FloraX", 99) && compound.contains("FloraY", 99) && compound.contains("FloraZ", 99)) {
 			BlockPos blockpos = new BlockPos(compound.getInt("FloraX"), compound.getInt("FloraY"), compound.getInt("FloraZ"));
 			this.setFloraPos(blockpos);
@@ -439,8 +439,8 @@ public class Tapir extends Animal {
 	}
 
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData groupData, @Nullable CompoundTag tag) {
-		SpawnGroupData data = super.finalizeSpawn(level, difficulty, spawnType, groupData, tag);
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData groupData) {
+		SpawnGroupData data = super.finalizeSpawn(level, difficulty, spawnType, groupData);
 		if (this.isBaby())
 			this.setHasBabyPattern(true);
 		return data;
@@ -465,9 +465,11 @@ public class Tapir extends Animal {
 	}
 
 	public static class TapirNodeEvaluator extends WalkNodeEvaluator {
+
 		@Override
-		protected BlockPathTypes evaluateBlockPathType(BlockGetter level, BlockPos p_33390_, BlockPathTypes p_33391_) {
-			return p_33391_ == BlockPathTypes.LEAVES ? BlockPathTypes.WALKABLE : super.evaluateBlockPathType(level, p_33390_, p_33391_);
+		public PathType getPathType(PathfindingContext context, int x, int y, int z) {
+			PathType type = super.getPathType(context, x, y, z);
+			return type == PathType.LEAVES ? PathType.WALKABLE : type;
 		}
 	}
 }

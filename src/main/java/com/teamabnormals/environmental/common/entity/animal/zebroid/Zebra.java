@@ -179,9 +179,4 @@ public class Zebra extends AbstractUnchestedZebroid {
 			d0 = createOffspringAttribute(this.getAttributeBaseValue(Attributes.ATTACK_DAMAGE), 0.0D, MIN_DAMAGE, MAX_DAMAGE, this.random);
 		child.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(d0);
 	}
-
-	@Override
-	public double getPassengersRidingOffset() {
-		return super.getPassengersRidingOffset() - 0.175D;
-	}
 }

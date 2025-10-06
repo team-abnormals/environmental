@@ -32,10 +32,10 @@ public class Deer extends AbstractDeer {
 	}
 
 	@Override
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		this.entityData.define(DEER_COAT_COLOR, 0);
-		this.entityData.define(DEER_COAT_TYPE, 0);
+	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+		super.defineSynchedData(builder);
+		builder.define(DEER_COAT_COLOR, 0);
+		builder.define(DEER_COAT_TYPE, 0);
 	}
 
 	@Override
@@ -94,7 +94,7 @@ public class Deer extends AbstractDeer {
 
 	@Nullable
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn) {
 		if (spawnDataIn instanceof DeerSpawnGroupData deerSpawnGroupData) {
 			this.setCoatColor(deerSpawnGroupData.coatColor);
 		} else {
@@ -112,7 +112,7 @@ public class Deer extends AbstractDeer {
 
 		this.setCoatType(this.random.nextInt(DeerCoatTypes.values().length));
 		this.setHasAntlers(this.random.nextFloat() < EnvironmentalConfig.COMMON.deerAntlerChance.get());
-		return super.finalizeSpawn(level, difficulty, reason, spawnDataIn, dataTag);
+		return super.finalizeSpawn(level, difficulty, reason, spawnDataIn);
 	}
 
 	public static class DeerSpawnGroupData extends AgeableMobGroupData implements SpawnGroupData {

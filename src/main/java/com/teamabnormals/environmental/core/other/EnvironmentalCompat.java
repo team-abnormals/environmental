@@ -1,18 +1,13 @@
 package com.teamabnormals.environmental.core.other;
 
 import com.teamabnormals.blueprint.core.util.DataUtil;
-import com.teamabnormals.environmental.common.entity.projectile.ThrownDuckEgg;
-import com.teamabnormals.environmental.common.entity.projectile.ThrownMudBall;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.BlockSource;
-import net.minecraft.core.Position;
-import net.minecraft.core.dispenser.AbstractProjectileDispenseBehavior;
+import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
-import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.DispensibleContainerItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -257,11 +252,11 @@ public class EnvironmentalCompat {
 		@Override
 		public ItemStack execute(BlockSource source, ItemStack stack) {
 			DispensibleContainerItem item = (DispensibleContainerItem) stack.getItem();
-			BlockPos pos = source.getPos().relative(source.getBlockState().getValue(DispenserBlock.FACING));
-			Level level = source.getLevel();
+			BlockPos pos = source.pos().relative(source.state().getValue(DispenserBlock.FACING));
+			Level level = source.level();
 			if (item.emptyContents(null, level, pos, null, stack)) {
 				item.checkExtraContent(null, level, stack, pos);
-				return new ItemStack(Items.BUCKET);
+				return this.consumeWithRemainder(source, stack, new ItemStack(Items.BUCKET));
 			} else {
 				return this.defaultDispenseItemBehavior.dispense(source, stack);
 			}
@@ -269,18 +264,8 @@ public class EnvironmentalCompat {
 	};
 
 	public static void registerDispenserBehaviors() {
-		DispenserBlock.registerBehavior(EnvironmentalItems.DUCK_EGG.get(), new AbstractProjectileDispenseBehavior() {
-			protected Projectile getProjectile(Level worldIn, Position position, ItemStack stackIn) {
-				return new ThrownDuckEgg(worldIn, position.x(), position.y(), position.z());
-			}
-		});
-
-		DispenserBlock.registerBehavior(EnvironmentalItems.MUD_BALL.get(), new AbstractProjectileDispenseBehavior() {
-			protected Projectile getProjectile(Level worldIn, Position position, ItemStack stackIn) {
-				return new ThrownMudBall(worldIn, position.x(), position.y(), position.z());
-			}
-		});
-
+		DispenserBlock.registerProjectileBehavior(EnvironmentalItems.DUCK_EGG.get());
+		DispenserBlock.registerProjectileBehavior(EnvironmentalItems.MUD_BALL.get());
 		DispenserBlock.registerBehavior(EnvironmentalItems.KOI_BUCKET.get(), EMPTY_FISH_BUCKET_BEHAVIOR);
 		DispenserBlock.registerBehavior(EnvironmentalItems.SLABFISH_BUCKET.get(), EMPTY_FISH_BUCKET_BEHAVIOR);
 	}

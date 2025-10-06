@@ -1,7 +1,7 @@
 package com.teamabnormals.environmental.core.mixin;
 
-import com.teamabnormals.environmental.core.registry.EnvironmentalBiomes;
-import com.teamabnormals.environmental.core.registry.EnvironmentalNoiseParameters;
+import com.teamabnormals.environmental.core.registry.datapack.EnvironmentalBiomes;
+import com.teamabnormals.environmental.core.registry.datapack.EnvironmentalNoiseParameters;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;

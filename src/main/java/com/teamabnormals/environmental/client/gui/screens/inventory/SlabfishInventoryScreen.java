@@ -12,13 +12,15 @@ import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class SlabfishInventoryScreen extends AbstractContainerScreen<SlabfishInventoryMenu> {
 	private static final ResourceLocation SLABFISH_GUI_TEXTURE = Environmental.location("textures/gui/container/slabfish.png");
 	private final Slabfish slabfish;
+	private float xMouse;
+	private float yMouse;
 
 	public SlabfishInventoryScreen(SlabfishInventoryMenu screenContainer, Inventory playerInventory, Slabfish slabfish) {
 		super(screenContainer, playerInventory, slabfish.getDisplayName());
@@ -42,12 +44,13 @@ public class SlabfishInventoryScreen extends AbstractContainerScreen<SlabfishInv
 				guiGraphics.blit(SLABFISH_GUI_TEXTURE, i + 7, j + 53, 0, 220, 18, 18);
 		}
 
-		InventoryScreen.renderEntityInInventoryFollowsMouse(guiGraphics, i + 51, j + 60, 32, i + 51 - mouseX, j + 25 - mouseY, this.slabfish);
+		InventoryScreen.renderEntityInInventoryFollowsMouse(guiGraphics, i + 51, j + 60, 32, i + 51, j + 25, 0.25F, this.xMouse, this.yMouse, this.slabfish);
 	}
 
 	@Override
 	public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
-		this.renderBackground(guiGraphics);
+		this.xMouse = (float) mouseX;
+		this.yMouse = (float) mouseY;
 		super.render(guiGraphics, mouseX, mouseY, partialTicks);
 		this.renderTooltip(guiGraphics, mouseX, mouseY);
 	}

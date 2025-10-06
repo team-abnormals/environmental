@@ -7,8 +7,6 @@ import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -19,10 +17,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.network.NetworkHooks;
-import net.minecraftforge.network.PlayMessages;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 public class ThrownMudBall extends ThrowableItemProjectile {
 	public ThrownMudBall(EntityType<? extends ThrownMudBall> entity, Level world) {
@@ -35,10 +31,6 @@ public class ThrownMudBall extends ThrowableItemProjectile {
 
 	public ThrownMudBall(Level worldIn, double x, double y, double z) {
 		super(EnvironmentalEntityTypes.MUD_BALL.get(), x, y, z, worldIn);
-	}
-
-	public ThrownMudBall(PlayMessages.SpawnEntity spawnEntity, Level world) {
-		this(EnvironmentalEntityTypes.MUD_BALL.get(), world);
 	}
 
 	@Override
@@ -82,10 +74,5 @@ public class ThrownMudBall extends ThrowableItemProjectile {
 	@Override
 	public ItemStack getItem() {
 		return new ItemStack(EnvironmentalItems.MUD_BALL.get());
-	}
-
-	@Override
-	public Packet<ClientGamePacketListener> getAddEntityPacket() {
-		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 }

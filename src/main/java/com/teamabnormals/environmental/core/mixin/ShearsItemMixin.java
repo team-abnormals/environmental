@@ -22,10 +22,11 @@ public abstract class ShearsItemMixin {
 		}
 	}
 
-	@Inject(method = "getDestroySpeed", at = @At("RETURN"), cancellable = true)
-	private void getDestroySpeed(ItemStack stack, BlockState state, CallbackInfoReturnable<Float> cir) {
-		if (state.getBlock() instanceof HangingLeavesBlock) {
-			cir.setReturnValue(15.0F);
-		}
-	}
+	//TODO: Port
+//	@Inject(method = "getDestroySpeed", at = @At("RETURN"), cancellable = true)
+//	private void getDestroySpeed(ItemStack stack, BlockState state, CallbackInfoReturnable<Float> cir) {
+//		if (state.getBlock() instanceof HangingLeavesBlock) {
+//			cir.setReturnValue(15.0F);
+//		}
+//	}
 }

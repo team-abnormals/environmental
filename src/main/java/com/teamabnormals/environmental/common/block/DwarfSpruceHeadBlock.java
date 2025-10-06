@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -11,7 +12,8 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -29,8 +31,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.ToolActions;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.common.ItemAbilities;
 
 import java.util.Map;
 import java.util.function.Supplier;
@@ -48,7 +49,7 @@ public class DwarfSpruceHeadBlock extends DwarfSpruceBlock {
 	}
 
 	public DwarfSpruceHeadBlock(Properties properties, ResourceLocation torch) {
-		this(properties, () -> ForgeRegistries.ITEMS.getValue(torch));
+		this(properties, () -> BuiltInRegistries.ITEM.get(torch));
 	}
 
 	public DwarfSpruceHeadBlock(Properties properties, Supplier<Item> torch) {
@@ -108,22 +109,21 @@ public class DwarfSpruceHeadBlock extends DwarfSpruceBlock {
 	}
 
 	@Override
-	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
-		ItemStack itemstack = player.getItemInHand(hand);
-		Item item = itemstack.getItem();
+	public ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
+		Item item = stack.getItem();
 
-		if (itemstack.canPerformAction(ToolActions.SHEARS_HARVEST) && state.getValue(STAR)) {
+		if (stack.canPerformAction(ItemAbilities.SHEARS_HARVEST) && state.getValue(STAR)) {
 			popResource(level, pos, new ItemStack(Items.NETHER_STAR));
 			level.setBlockAndUpdate(pos, state.setValue(STAR, false));
 
-			itemstack.hurtAndBreak(1, player, (player1) -> player1.broadcastBreakEvent(hand));
+			stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
 			level.playSound(null, pos, SoundEvents.SNOW_GOLEM_SHEAR, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
 			level.gameEvent(player, GameEvent.SHEAR, pos);
 			player.awardStat(Stats.ITEM_USED.get(item));
-			return InteractionResult.sidedSuccess(level.isClientSide);
+			return ItemInteractionResult.sidedSuccess(level.isClientSide);
 		} else if (!state.getValue(STAR) && item == Items.NETHER_STAR) {
 			if (!player.isCreative())
-				itemstack.shrink(1);
+				stack.shrink(1);
 
 			level.setBlockAndUpdate(pos, state.setValue(STAR, true));
 
@@ -132,10 +132,10 @@ public class DwarfSpruceHeadBlock extends DwarfSpruceBlock {
 
 			level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
 			player.awardStat(Stats.ITEM_USED.get(item));
-			return InteractionResult.sidedSuccess(level.isClientSide);
+			return ItemInteractionResult.sidedSuccess(level.isClientSide);
 		}
 
-		return super.use(state, level, pos, player, hand, result);
+		return super.useItemOn(stack, state, level, pos, player, hand, result);
 	}
 
 	@Override
@@ -144,7 +144,7 @@ public class DwarfSpruceHeadBlock extends DwarfSpruceBlock {
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
 		return level.getBlockState(pos.above()).isAir();
 	}
 

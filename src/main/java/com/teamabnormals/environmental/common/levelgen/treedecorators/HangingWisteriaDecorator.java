@@ -1,6 +1,7 @@
 package com.teamabnormals.environmental.common.levelgen.treedecorators;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.teamabnormals.environmental.common.block.HangingWisteriaLeavesBlock;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures;
@@ -13,7 +14,7 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 
 public class HangingWisteriaDecorator extends TreeDecorator {
-	public static final Codec<HangingWisteriaDecorator> CODEC = Codec.floatRange(0.0F, 1.0F).fieldOf("probability").xmap(HangingWisteriaDecorator::new, (decorator) -> decorator.probability).codec();
+	public static final MapCodec<HangingWisteriaDecorator> CODEC = Codec.floatRange(0.0F, 1.0F).fieldOf("probability").xmap(HangingWisteriaDecorator::new, (decorator) -> decorator.probability);
 	private final float probability;
 
 	public HangingWisteriaDecorator(float probability) {

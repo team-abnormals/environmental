@@ -1,0 +1,53 @@
+{
+  "parent": "minecraft:husbandry/root",
+  "criteria": {
+    "shear_yak_with_pants": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "environmental:yak"
+            }
+          }
+        ],
+        "item": {
+          "items": "#c:tools/shear"
+        },
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "equipment": {
+                "legs": {
+                  "items": "environmental:yak_pants"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.environmental.husbandry.shear_yak_with_pants.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "environmental:yak_pants"
+    },
+    "title": {
+      "translate": "advancements.environmental.husbandry.shear_yak_with_pants.title"
+    }
+  },
+  "requirements": [
+    [
+      "shear_yak_with_pants"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -6,13 +6,13 @@ import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
 import com.teamabnormals.environmental.core.registry.slabfish.EnvironmentalSlabfishTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.client.model.generators.ItemModelBuilder;
-import net.minecraftforge.client.model.generators.ModelFile.UncheckedModelFile;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
+import net.neoforged.neoforge.client.model.generators.ModelFile.UncheckedModelFile;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
@@ -60,11 +60,11 @@ public class EnvironmentalItemModelProvider extends BlueprintItemModelProvider {
 	}
 
 	private void koiBuckets() {
-		String path = ForgeRegistries.ITEMS.getKey(EnvironmentalItems.KOI_BUCKET.get()).getPath();
-		ItemModelBuilder model = this.withExistingParent(path, "item/generated").texture("layer0", new ResourceLocation(this.modid, "item/" + path + "/" + KoiBreed.KOHAKU.name().toLowerCase(Locale.ROOT)));
+		String path = BuiltInRegistries.ITEM.getKey(EnvironmentalItems.KOI_BUCKET.get()).getPath();
+		ItemModelBuilder model = this.withExistingParent(path, "item/generated").texture("layer0", ResourceLocation.fromNamespaceAndPath(this.modid, "item/" + path + "/" + KoiBreed.KOHAKU.name().toLowerCase(Locale.ROOT)));
 		for (KoiBreed breed : KoiBreed.values()) {
-			ResourceLocation name = new ResourceLocation(this.modid, "item/" + path + "/" + breed.name().toLowerCase(Locale.ROOT));
-			model.override().model(new UncheckedModelFile(name)).predicate(new ResourceLocation(this.modid, "variant"), breed.getId());
+			ResourceLocation name = ResourceLocation.fromNamespaceAndPath(this.modid, "item/" + path + "/" + breed.name().toLowerCase(Locale.ROOT));
+			model.override().model(new UncheckedModelFile(name)).predicate(ResourceLocation.fromNamespaceAndPath(this.modid, "variant"), breed.getId());
 			this.withExistingParent(name.getPath(), "item/generated").texture("layer0", name);
 		}
 	}

@@ -1,6 +1,6 @@
 package com.teamabnormals.environmental.common.levelgen.treedecorators;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
@@ -13,7 +13,7 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 
 public class PinePodzolDecorator extends TreeDecorator {
-	public static final Codec<PinePodzolDecorator> CODEC;
+	public static final MapCodec<PinePodzolDecorator> CODEC;
 	public static final PinePodzolDecorator INSTANCE = new PinePodzolDecorator();
 
 	@Override
@@ -35,7 +35,7 @@ public class PinePodzolDecorator extends TreeDecorator {
 							context.setBlock(mutable, Blocks.PODZOL.defaultBlockState());
 							mutable.move(Direction.UP);
 							if (level.isStateAtPosition(mutable, BlockStateBase::isAir))
-								context.setBlock(mutable, Blocks.GRASS.defaultBlockState());
+								context.setBlock(mutable, Blocks.SHORT_GRASS.defaultBlockState());
 						}
 					}
 				}
@@ -44,6 +44,6 @@ public class PinePodzolDecorator extends TreeDecorator {
 	}
 
 	static {
-		CODEC = Codec.unit(() -> INSTANCE);
+		CODEC = MapCodec.unit(() -> INSTANCE);
 	}
 }

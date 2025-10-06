@@ -1,6 +1,7 @@
 package com.teamabnormals.environmental.common.levelgen.feature.placement;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamabnormals.environmental.core.registry.EnvironmentalPlacementModifierTypes;
 import net.minecraft.core.BlockPos;
@@ -17,7 +18,7 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class NoiseDensityPlacement extends PlacementModifier {
-	public static final Codec<NoiseDensityPlacement> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
+	public static final MapCodec<NoiseDensityPlacement> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
 					NoiseParameters.CODEC.fieldOf("noise").forGetter((placement) -> placement.noiseParameters),
 					Codec.DOUBLE.fieldOf("density").forGetter((placement) -> placement.density),
 					Codec.DOUBLE.fieldOf("noise_offset").orElse(0.0D).forGetter((placement) -> placement.noiseOffset))
@@ -34,6 +35,7 @@ public class NoiseDensityPlacement extends PlacementModifier {
 		this.noiseOffset = noiseOffset;
 	}
 
+	@Override
 	public Stream<BlockPos> getPositions(PlacementContext context, RandomSource random, BlockPos pos) {
 		if (!this.initialized) {
 			synchronized (this) {
@@ -50,6 +52,7 @@ public class NoiseDensityPlacement extends PlacementModifier {
 		return IntStream.range(0, count).mapToObj((i) -> pos);
 	}
 
+	@Override
 	public PlacementModifierType<?> type() {
 		return EnvironmentalPlacementModifierTypes.NOISE_DENSITY.get();
 	}

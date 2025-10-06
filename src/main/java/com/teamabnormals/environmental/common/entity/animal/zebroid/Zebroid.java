@@ -1,9 +1,9 @@
 package com.teamabnormals.environmental.common.entity.animal.zebroid;
 
-import com.teamabnormals.environmental.common.network.message.C2SZebraJumpMessage;
+import com.teamabnormals.environmental.common.network.message.ZebraJumpPayload;
 import com.teamabnormals.environmental.core.Environmental;
-import com.teamabnormals.environmental.core.other.EnvironmentalDamageTypes;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalEntityTypeTags;
+import com.teamabnormals.environmental.core.registry.datapack.EnvironmentalDamageTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
@@ -21,16 +21,14 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.function.Predicate;
 
 public interface Zebroid {
-	UUID SPEED_MODIFIER_KICKING_ID = UUID.fromString("AF33F716-0F4D-43CA-9C8E-1068AE2F38E6");
-	AttributeModifier SPEED_MODIFIER_KICKING = new AttributeModifier(SPEED_MODIFIER_KICKING_ID, "Kicking speed reduction", -0.8D, Operation.MULTIPLY_BASE);
+	AttributeModifier SPEED_MODIFIER_KICKING = new AttributeModifier(Environmental.location("kicking_speed_reduction"), -0.8D, Operation.ADD_MULTIPLIED_BASE);
 	Predicate<LivingEntity> KICKABLE_PREDICATE = living -> living.isAlive() && !living.getType().is(EnvironmentalEntityTypeTags.ZEBROIDS_DONT_KICK) && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(living) && !living.isPassenger();
-	;
 
 	// Kicking
 	void setKickTime(int time);
@@ -213,7 +211,7 @@ public interface Zebroid {
 		horse.setEating(false);
 
 		AttributeInstance attributeinstance = horse.getAttribute(Attributes.MOVEMENT_SPEED);
-		if (!attributeinstance.hasModifier(SPEED_MODIFIER_KICKING))
+		if (!attributeinstance.hasModifier(SPEED_MODIFIER_KICKING.id()))
 			attributeinstance.addTransientModifier(SPEED_MODIFIER_KICKING);
 
 		if (!backKick) {
@@ -265,7 +263,8 @@ public interface Zebroid {
 				boolean flag = living.hurt(source, (int) damage);
 
 				if (flag) {
-					horse.doEnchantDamageEffects(horse, living);
+					//TODO: Reimplement?
+					//horse.doEnchantDamageEffects(horse, living);
 					if (!backKick)
 						living.knockback(knockback, x, z);
 					else
@@ -298,7 +297,7 @@ public interface Zebroid {
 		AbstractHorse horse = (AbstractHorse) this;
 
 		if (!wasJumping && horse.isJumping() && horse.getControllingPassenger() instanceof Player)
-			Environmental.CHANNEL.sendToServer(new C2SZebraJumpMessage((float) horse.getDeltaMovement().y));
+			PacketDistributor.sendToServer(new ZebraJumpPayload((float) horse.getDeltaMovement().y));
 	}
 
 	default void handleLeashed(Entity entity) {
@@ -365,7 +364,8 @@ public interface Zebroid {
 			f3 += 0.15F * rot * nostandanim;
 		}
 
-		function.accept(rider, horse.getX() + (double) (f2 * f), horse.getY() + horse.getPassengersRidingOffset() + rider.getMyRidingOffset() + (double) f3, horse.getZ() - (double) (f2 * f1));
+		Vec3 vec3 = horse.getPassengerRidingPosition(rider).add(rider.getVehicleAttachmentPoint(horse));
+		function.accept(rider, horse.getX() + vec3.x() + (double) (f2 * f), horse.getY() + vec3.y() + (double) f3, horse.getZ() + vec3.z() - (double) (f2 * f1));
 	}
 
 	static float smoothAnim(float min, float max, float progress) {

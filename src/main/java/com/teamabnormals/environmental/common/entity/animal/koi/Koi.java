@@ -5,6 +5,7 @@ import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
 import com.teamabnormals.environmental.core.registry.EnvironmentalMobEffects;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSoundEvents;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -30,6 +31,7 @@ import net.minecraft.world.entity.animal.AbstractFish;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -37,7 +39,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.LegacyRandomSource;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
@@ -49,7 +51,7 @@ public class Koi extends AbstractFish {
 	public Koi(EntityType<? extends AbstractFish> type, Level world) {
 		super(type, world);
 		this.moveControl = new MoveHelperController(this);
-		this.setPathfindingMalus(BlockPathTypes.WATER, 0.4F);
+		this.setPathfindingMalus(PathType.WATER, 0.4F);
 	}
 
 	@Override
@@ -61,9 +63,9 @@ public class Koi extends AbstractFish {
 	}
 
 	@Override
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		this.entityData.define(BREED, 0);
+	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+		super.defineSynchedData(builder);
+		builder.define(BREED, 0);
 	}
 
 	@Override
@@ -78,10 +80,18 @@ public class Koi extends AbstractFish {
 		this.setVariant(tag.getInt("Variant"));
 	}
 
+	@Override
 	public void saveToBucketTag(ItemStack stack) {
 		super.saveToBucketTag(stack);
-		CompoundTag compoundtag = stack.getOrCreateTag();
-		compoundtag.putInt("BucketVariantTag", this.getVariant());
+		CustomData.update(DataComponents.BUCKET_ENTITY_DATA, stack, tag -> tag.putInt("BucketVariantTag", this.getVariant()));
+	}
+
+	@Override
+	public void loadFromBucketTag(CompoundTag tag) {
+		super.loadFromBucketTag(tag);
+		if (tag.contains("BucketVariantTag", 3)) {
+			this.setVariant(tag.getInt("BucketVariantTag"));
+		}
 	}
 
 	public void setVariant(int id) {
@@ -94,17 +104,14 @@ public class Koi extends AbstractFish {
 
 	@Nullable
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData, @Nullable CompoundTag tag) {
-		spawnGroupData = super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData, tag);
-		if (spawnType == MobSpawnType.BUCKET && tag != null && tag.contains("BucketVariantTag", 3)) {
-			this.setVariant(tag.getInt("BucketVariantTag"));
-		} else if (spawnType == MobSpawnType.BUCKET) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData) {
+		if (spawnType == MobSpawnType.BUCKET) {
 			this.setVariant(random.nextInt(KoiBreed.values().length));
 		} else {
 			this.setVariant(getNoiseVariant(this.blockPosition()));
 		}
 
-		return spawnGroupData;
+		return super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
 	}
 
 	public static int getNoiseVariant(BlockPos pos) {
@@ -175,7 +182,7 @@ public class Koi extends AbstractFish {
 			int verticalRange = EnvironmentalConfig.COMMON.koiVerticalSerenityRange.get();
 			for (LivingEntity living : this.level().getNearbyEntities(LivingEntity.class, PLAYERS_OR_ENDERMEN, this, this.getBoundingBox().inflate(horizontalRange, verticalRange, horizontalRange))) {
 				if (!this.level().isClientSide()) {
-					living.addEffect(new MobEffectInstance(EnvironmentalMobEffects.SERENITY.get(), 100, 0, true, false, true));
+					living.addEffect(new MobEffectInstance(EnvironmentalMobEffects.SERENITY, 100, 0, true, false, true));
 				}
 			}
 		}

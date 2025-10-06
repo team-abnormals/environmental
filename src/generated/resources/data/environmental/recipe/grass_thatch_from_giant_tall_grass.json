@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "grass_thatch",
+  "key": {
+    "G": {
+      "item": "environmental:giant_tall_grass"
+    },
+    "W": {
+      "item": "minecraft:wheat"
+    }
+  },
+  "pattern": [
+    "WG",
+    "GW"
+  ],
+  "result": {
+    "count": 8,
+    "id": "environmental:grass_thatch"
+  }
+}

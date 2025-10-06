@@ -1,7 +1,6 @@
 package com.teamabnormals.environmental.core.data.server;
 
 import com.teamabnormals.blueprint.core.data.server.BlueprintRecipeProvider;
-import com.teamabnormals.blueprint.core.other.tags.BlueprintItemTags;
 import com.teamabnormals.boatload.core.data.server.BoatloadRecipeProvider;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.other.EnvironmentalBlockFamilies;
@@ -9,14 +8,16 @@ import com.teamabnormals.environmental.core.other.tags.EnvironmentalItemTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
 import com.teamabnormals.environmental.integration.boatload.EnvironmentalBoatTypes;
 import com.teamabnormals.woodworks.core.data.server.WoodworksRecipeProvider;
+import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
+import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
 
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 
 import static com.teamabnormals.environmental.core.registry.EnvironmentalBlocks.*;
 
@@ -24,12 +25,12 @@ public class EnvironmentalRecipeProvider extends BlueprintRecipeProvider {
 	public static final ModLoadedCondition INCUBATION_LOADED = new ModLoadedCondition("incubation");
 	public static final ModLoadedCondition BERRY_GOOD_LOADED = new ModLoadedCondition("berry_good");
 
-	public EnvironmentalRecipeProvider(PackOutput output) {
-		super(Environmental.MOD_ID, output);
+	public EnvironmentalRecipeProvider(PackOutput output, CompletableFuture<Provider> provider) {
+		super(Environmental.MOD_ID, output, provider);
 	}
 
 	@Override
-	public void buildRecipes(Consumer<FinishedRecipe> consumer) {
+	public void buildRecipes(RecipeOutput consumer) {
 		conversionRecipe(consumer, Items.LIGHT_BLUE_DYE, BLUE_DELPHINIUM.get(), "light_blue_dye", 2);
 		conversionRecipe(consumer, Items.PINK_DYE, PINK_DELPHINIUM.get(), "pink_dye", 2);
 		conversionRecipe(consumer, Items.WHITE_DYE, WHITE_DELPHINIUM.get(), "white_dye", 2);
@@ -49,7 +50,7 @@ public class EnvironmentalRecipeProvider extends BlueprintRecipeProvider {
 		conversionRecipe(consumer, Items.RED_DYE, RED_HIBISCUS.get(), "red_dye");
 		conversionRecipe(consumer, Items.PURPLE_DYE, PURPLE_HIBISCUS.get(), "purple_dye");
 
-		WoodworksRecipeProvider.leafPileRecipes(consumer, HIBISCUS_LEAVES.get(), HIBISCUS_LEAF_PILE.get(), Environmental.MOD_ID);
+		WoodworksRecipeProvider.conditionalLeafPileRecipes(consumer, HIBISCUS_LEAVES.get(), HIBISCUS_LEAF_PILE.get(), Environmental.MOD_ID);
 
 		foodCookingRecipes(consumer, EnvironmentalItems.DUCK.get(), EnvironmentalItems.COOKED_DUCK.get());
 		foodCookingRecipes(consumer, EnvironmentalItems.VENISON.get(), EnvironmentalItems.COOKED_VENISON.get());
@@ -60,8 +61,8 @@ public class EnvironmentalRecipeProvider extends BlueprintRecipeProvider {
 
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.STRING).requires(EnvironmentalItems.CATTAIL_FLUFF.get(), 7).unlockedBy("has_cattail_seeds", has(EnvironmentalItems.CATTAIL_FLUFF.get())).save(consumer, getModConversionRecipeName(Items.STRING, EnvironmentalItems.CATTAIL_FLUFF.get()));
 
-		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, GRASS_THATCH.get(), 4).define('W', Items.WHEAT).define('G', Blocks.GRASS).pattern("WG").pattern("GW").group("grass_thatch").unlockedBy("has_grass", has(Blocks.GRASS)).save(consumer);
-		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, GRASS_THATCH.get(), 6).define('W', Items.WHEAT).define('G', Blocks.TALL_GRASS).pattern("WG").pattern("GW").group("grass_thatch").unlockedBy("has_tall_grass", has(Blocks.TALL_GRASS)).save(consumer, getModConversionRecipeName(GRASS_THATCH.get(), Blocks.GRASS));
+		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, GRASS_THATCH.get(), 4).define('W', Items.WHEAT).define('G', Blocks.SHORT_GRASS).pattern("WG").pattern("GW").group("grass_thatch").unlockedBy("has_grass", has(Blocks.SHORT_GRASS)).save(consumer);
+		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, GRASS_THATCH.get(), 6).define('W', Items.WHEAT).define('G', Blocks.TALL_GRASS).pattern("WG").pattern("GW").group("grass_thatch").unlockedBy("has_tall_grass", has(Blocks.TALL_GRASS)).save(consumer, getModConversionRecipeName(GRASS_THATCH.get(), Blocks.SHORT_GRASS));
 		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, GRASS_THATCH.get(), 8).define('W', Items.WHEAT).define('G', GIANT_TALL_GRASS.get()).pattern("WG").pattern("GW").group("grass_thatch").unlockedBy("has_giant_tall_grass", has(GIANT_TALL_GRASS.get())).save(consumer, getModConversionRecipeName(GRASS_THATCH.get(), GIANT_TALL_GRASS.get()));
 		generateRecipes(consumer, EnvironmentalBlockFamilies.GRASS_THATCH_FAMILY);
 
@@ -97,7 +98,7 @@ public class EnvironmentalRecipeProvider extends BlueprintRecipeProvider {
 
 		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, Blocks.MUD).define('#', EnvironmentalItems.MUD_BALL.get()).pattern("##").pattern("##").unlockedBy("has_mud_ball", has(EnvironmentalItems.MUD_BALL.get())).save(consumer, Environmental.location(RecipeBuilder.getDefaultRecipeId(Blocks.MUD).getPath()));
 		conversionRecipeBuilder(EnvironmentalItems.MUD_BALL.get(), Blocks.MUD, 4).group("mud_ball").save(consumer);
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, EnvironmentalItems.MUD_BALL.get(), 16).requires(BlueprintItemTags.BUCKETS_WATER).requires(EnvironmentalItemTags.CONVERTABLE_TO_MUD).requires(EnvironmentalItemTags.CONVERTABLE_TO_MUD).requires(EnvironmentalItemTags.CONVERTABLE_TO_MUD).requires(EnvironmentalItemTags.CONVERTABLE_TO_MUD).group("mud_ball").unlockedBy("has_convertable_to_mud", has(EnvironmentalItemTags.CONVERTABLE_TO_MUD)).save(consumer, getModConversionRecipeName(EnvironmentalItems.MUD_BALL.get(), Blocks.DIRT));
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, EnvironmentalItems.MUD_BALL.get(), 16).requires(Tags.Items.BUCKETS_WATER).requires(EnvironmentalItemTags.CONVERTABLE_TO_MUD).requires(EnvironmentalItemTags.CONVERTABLE_TO_MUD).requires(EnvironmentalItemTags.CONVERTABLE_TO_MUD).requires(EnvironmentalItemTags.CONVERTABLE_TO_MUD).group("mud_ball").unlockedBy("has_convertable_to_mud", has(EnvironmentalItemTags.CONVERTABLE_TO_MUD)).save(consumer, getModConversionRecipeName(EnvironmentalItems.MUD_BALL.get(), Blocks.DIRT));
 		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, SLABFISH_EFFIGY.get()).define('#', Blocks.MUD_BRICKS).define('S', Blocks.MUD_BRICK_SLAB).pattern(" S ").pattern("S#S").unlockedBy("has_mud_bricks", has(Blocks.MUD_BRICKS)).save(consumer);
 		SimpleCookingRecipeBuilder.smelting(Ingredient.of(Blocks.PACKED_MUD), RecipeCategory.BUILDING_BLOCKS, SMOOTH_MUD.get().asItem(), 0.1F, 200).unlockedBy("has_packed_mud", has(Blocks.PACKED_MUD)).save(consumer);
 		generateRecipes(consumer, EnvironmentalBlockFamilies.SMOOTH_MUD_FAMILY);
@@ -116,7 +117,7 @@ public class EnvironmentalRecipeProvider extends BlueprintRecipeProvider {
 		woodFromLogs(consumer, STRIPPED_WILLOW_WOOD.get(), STRIPPED_WILLOW_LOG.get());
 		hangingSign(consumer, WILLOW_HANGING_SIGNS.getFirst().get(), STRIPPED_WILLOW_LOG.get());
 		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, HANGING_WILLOW_LEAVES.get(), 3).define('#', WILLOW_LEAVES.get()).pattern("#").pattern("#").pattern("#").unlockedBy(getHasName(WILLOW_LEAVES.get()), has(WILLOW_LEAVES.get())).save(consumer);
-		WoodworksRecipeProvider.leafPileRecipes(consumer, WILLOW_LEAVES.get(), WILLOW_LEAF_PILE.get(), Environmental.MOD_ID);
+		WoodworksRecipeProvider.conditionalLeafPileRecipes(consumer, WILLOW_LEAVES.get(), WILLOW_LEAF_PILE.get(), Environmental.MOD_ID);
 		BoatloadRecipeProvider.boatRecipes(consumer, EnvironmentalBoatTypes.WILLOW);
 		WoodworksRecipeProvider.baseRecipes(consumer, WILLOW_PLANKS.get(), WILLOW_SLAB.get(), WILLOW_BOARDS.get(), WILLOW_BOOKSHELF.get(), CHISELED_WILLOW_BOOKSHELF.get(), WILLOW_LADDER.get(), WILLOW_BEEHIVE.get(), WILLOW_CHEST.get(), TRAPPED_WILLOW_CHEST.get(), Environmental.MOD_ID);
 		WoodworksRecipeProvider.sawmillRecipes(consumer, EnvironmentalBlockFamilies.WILLOW_PLANKS_FAMILY, EnvironmentalItemTags.WILLOW_LOGS, WILLOW_BOARDS.get(), WILLOW_LADDER.get(), Environmental.MOD_ID);
@@ -126,7 +127,7 @@ public class EnvironmentalRecipeProvider extends BlueprintRecipeProvider {
 		woodFromLogs(consumer, PINE_WOOD.get(), PINE_LOG.get());
 		woodFromLogs(consumer, STRIPPED_PINE_WOOD.get(), STRIPPED_PINE_LOG.get());
 		hangingSign(consumer, PINE_HANGING_SIGNS.getFirst().get(), STRIPPED_PINE_LOG.get());
-		WoodworksRecipeProvider.leafPileRecipes(consumer, PINE_LEAVES.get(), PINE_LEAF_PILE.get(), Environmental.MOD_ID);
+		WoodworksRecipeProvider.conditionalLeafPileRecipes(consumer, PINE_LEAVES.get(), PINE_LEAF_PILE.get(), Environmental.MOD_ID);
 		BoatloadRecipeProvider.boatRecipes(consumer, EnvironmentalBoatTypes.PINE);
 		WoodworksRecipeProvider.baseRecipes(consumer, PINE_PLANKS.get(), PINE_SLAB.get(), PINE_BOARDS.get(), PINE_BOOKSHELF.get(), CHISELED_PINE_BOOKSHELF.get(), PINE_LADDER.get(), PINE_BEEHIVE.get(), PINE_CHEST.get(), TRAPPED_PINE_CHEST.get(), Environmental.MOD_ID);
 		WoodworksRecipeProvider.sawmillRecipes(consumer, EnvironmentalBlockFamilies.PINE_PLANKS_FAMILY, EnvironmentalItemTags.PINE_LOGS, PINE_BOARDS.get(), PINE_LADDER.get(), Environmental.MOD_ID);
@@ -154,11 +155,11 @@ public class EnvironmentalRecipeProvider extends BlueprintRecipeProvider {
 		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, BLUE_HANGING_WISTERIA_LEAVES.get(), 3).define('#', BLUE_WISTERIA_LEAVES.get()).pattern("#").pattern("#").pattern("#").unlockedBy(getHasName(BLUE_WISTERIA_LEAVES.get()), has(BLUE_WISTERIA_LEAVES.get())).save(consumer);
 		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, PURPLE_HANGING_WISTERIA_LEAVES.get(), 3).define('#', PURPLE_WISTERIA_LEAVES.get()).pattern("#").pattern("#").pattern("#").unlockedBy(getHasName(PURPLE_WISTERIA_LEAVES.get()), has(PURPLE_WISTERIA_LEAVES.get())).save(consumer);
 		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, WHITE_HANGING_WISTERIA_LEAVES.get(), 3).define('#', WHITE_WISTERIA_LEAVES.get()).pattern("#").pattern("#").pattern("#").unlockedBy(getHasName(WHITE_WISTERIA_LEAVES.get()), has(WHITE_WISTERIA_LEAVES.get())).save(consumer);
-		WoodworksRecipeProvider.leafPileRecipes(consumer, PINK_WISTERIA_LEAVES.get(), PINK_WISTERIA_LEAF_PILE.get(), Environmental.MOD_ID);
-		WoodworksRecipeProvider.leafPileRecipes(consumer, BLUE_WISTERIA_LEAVES.get(), BLUE_WISTERIA_LEAF_PILE.get(), Environmental.MOD_ID);
-		WoodworksRecipeProvider.leafPileRecipes(consumer, PURPLE_WISTERIA_LEAVES.get(), PURPLE_WISTERIA_LEAF_PILE.get(), Environmental.MOD_ID);
-		WoodworksRecipeProvider.leafPileRecipes(consumer, WHITE_WISTERIA_LEAVES.get(), WHITE_WISTERIA_LEAF_PILE.get(), Environmental.MOD_ID);
-		WoodworksRecipeProvider.leafPileRecipes(consumer, WISTERIA_LEAVES.get(), WISTERIA_LEAF_PILE.get(), Environmental.MOD_ID);
+		WoodworksRecipeProvider.conditionalLeafPileRecipes(consumer, PINK_WISTERIA_LEAVES.get(), PINK_WISTERIA_LEAF_PILE.get(), Environmental.MOD_ID);
+		WoodworksRecipeProvider.conditionalLeafPileRecipes(consumer, BLUE_WISTERIA_LEAVES.get(), BLUE_WISTERIA_LEAF_PILE.get(), Environmental.MOD_ID);
+		WoodworksRecipeProvider.conditionalLeafPileRecipes(consumer, PURPLE_WISTERIA_LEAVES.get(), PURPLE_WISTERIA_LEAF_PILE.get(), Environmental.MOD_ID);
+		WoodworksRecipeProvider.conditionalLeafPileRecipes(consumer, WHITE_WISTERIA_LEAVES.get(), WHITE_WISTERIA_LEAF_PILE.get(), Environmental.MOD_ID);
+		WoodworksRecipeProvider.conditionalLeafPileRecipes(consumer, WISTERIA_LEAVES.get(), WISTERIA_LEAF_PILE.get(), Environmental.MOD_ID);
 		BoatloadRecipeProvider.boatRecipes(consumer, EnvironmentalBoatTypes.WISTERIA);
 		WoodworksRecipeProvider.baseRecipes(consumer, WISTERIA_PLANKS.get(), WISTERIA_SLAB.get(), WISTERIA_BOARDS.get(), WISTERIA_BOOKSHELF.get(), CHISELED_WISTERIA_BOOKSHELF.get(), WISTERIA_LADDER.get(), WISTERIA_BEEHIVE.get(), WISTERIA_CHEST.get(), TRAPPED_WISTERIA_CHEST.get(), Environmental.MOD_ID);
 		WoodworksRecipeProvider.sawmillRecipes(consumer, EnvironmentalBlockFamilies.WISTERIA_PLANKS_FAMILY, EnvironmentalItemTags.WISTERIA_LOGS, WISTERIA_BOARDS.get(), WISTERIA_LADDER.get(), Environmental.MOD_ID);

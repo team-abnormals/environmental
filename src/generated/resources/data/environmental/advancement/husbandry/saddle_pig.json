@@ -1,0 +1,40 @@
+{
+  "parent": "minecraft:husbandry/root",
+  "criteria": {
+    "saddle_pig": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:pig"
+            }
+          }
+        ],
+        "item": {
+          "items": "minecraft:saddle"
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.environmental.husbandry.saddle_pig.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:saddle"
+    },
+    "title": {
+      "translate": "advancements.environmental.husbandry.saddle_pig.title"
+    }
+  },
+  "requirements": [
+    [
+      "saddle_pig"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

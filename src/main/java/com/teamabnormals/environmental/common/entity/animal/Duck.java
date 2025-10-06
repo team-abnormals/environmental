@@ -32,10 +32,10 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.function.Predicate;
@@ -59,7 +59,7 @@ public class Duck extends Animal implements EggLayer {
 
 	public Duck(EntityType<? extends Animal> type, Level worldIn) {
 		super(type, worldIn);
-		this.setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
+		this.setPathfindingMalus(PathType.WATER, 0.0F);
 	}
 
 	private static final Predicate<Entity> AVOID_PLAYERS = (entity) -> !entity.isDiscrete() && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(entity);
@@ -79,14 +79,9 @@ public class Duck extends Animal implements EggLayer {
 	}
 
 	@Override
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		this.entityData.define(EATING, 0);
-	}
-
-	@Override
-	protected float getStandingEyeHeight(Pose poseIn, EntityDimensions sizeIn) {
-		return this.isBaby() ? sizeIn.height * 0.85F : sizeIn.height * 0.92F;
+	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+		super.defineSynchedData(builder);
+		builder.define(EATING, 0);
 	}
 
 	@Override
@@ -249,8 +244,8 @@ public class Duck extends Animal implements EggLayer {
 	}
 
 	@Override
-	public int getExperienceReward() {
-		return this.isBirdJockey() ? 10 : super.getExperienceReward();
+	public int getBaseExperienceReward() {
+		return this.isBirdJockey() ? 10 : super.getBaseExperienceReward();
 	}
 
 	@Override
@@ -275,11 +270,8 @@ public class Duck extends Animal implements EggLayer {
 	}
 
 	@Override
-	public void positionRider(Entity passenger, Entity.MoveFunction function) {
-		super.positionRider(passenger, function);
-		float f = Mth.sin(this.yBodyRot * ((float) Math.PI / 180F));
-		float f1 = Mth.cos(this.yBodyRot * ((float) Math.PI / 180F));
-		function.accept(passenger, this.getX() + (double) (0.1F * f), this.getY(0.15D) + passenger.getMyRidingOffset() + 0.0D, this.getZ() - (double) (0.1F * f1));
+	protected void positionRider(Entity passenger, Entity.MoveFunction callback) {
+		super.positionRider(passenger, callback);
 		if (passenger instanceof LivingEntity living) {
 			living.yBodyRot = this.yBodyRot;
 		}
@@ -303,6 +295,11 @@ public class Duck extends Animal implements EggLayer {
 	@Override
 	public boolean isBirdJockey() {
 		return this.duckJockey;
+	}
+
+	@Override
+	public void setBirdJockey(boolean jockey) {
+		this.duckJockey = jockey;
 	}
 
 	@Override

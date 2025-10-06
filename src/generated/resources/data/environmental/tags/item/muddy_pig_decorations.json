@@ -1,0 +1,12 @@
+{
+  "values": [
+    "#minecraft:small_flowers",
+    "#minecraft:saplings",
+    "#c:mushrooms",
+    "minecraft:lily_pad",
+    "minecraft:dead_bush",
+    "minecraft:fern",
+    "minecraft:big_dripleaf",
+    "environmental:cattail"
+  ]
+}

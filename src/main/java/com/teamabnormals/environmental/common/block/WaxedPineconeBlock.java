@@ -7,8 +7,8 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.ToolAction;
-import net.minecraftforge.common.ToolActions;
+import net.neoforged.neoforge.common.ItemAbilities;
+import net.neoforged.neoforge.common.ItemAbility;
 
 public class WaxedPineconeBlock extends Block {
 
@@ -17,8 +17,8 @@ public class WaxedPineconeBlock extends Block {
 	}
 
 	@Override
-	public BlockState getToolModifiedState(BlockState state, UseOnContext context, ToolAction action, boolean simulate) {
-		if (action == ToolActions.AXE_STRIP) {
+	public BlockState getToolModifiedState(BlockState state, UseOnContext context, ItemAbility action, boolean simulate) {
+		if (action == ItemAbilities.AXE_STRIP) {
 			Level level = context.getLevel();
 			Player player = context.getPlayer();
 			BlockPos pos = context.getClickedPos();

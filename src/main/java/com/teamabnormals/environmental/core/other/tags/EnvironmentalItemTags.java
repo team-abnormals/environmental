@@ -11,16 +11,15 @@ public class EnvironmentalItemTags {
 	public static final TagKey<Item> WISTERIA_LOGS = itemTag("wisteria_logs");
 	public static final TagKey<Item> PLUM_LOGS = itemTag("plum_logs");
 
-	public static final TagKey<Item> FRUITS = TagUtil.itemTag("forge", "fruits");
-	public static final TagKey<Item> FRUITS_CHERRY = TagUtil.itemTag("forge", "fruits/cherry");
-	public static final TagKey<Item> FRUITS_PLUM = TagUtil.itemTag("forge", "fruits/plum");
+	public static final TagKey<Item> FOODS_CHERRY = TagUtil.itemTag("c", "foods/cherry");
+	public static final TagKey<Item> FOODS_PLUM = TagUtil.itemTag("c", "foods/plum");
 
-	public static final TagKey<Item> RAW_DUCK = TagUtil.itemTag("forge", "raw_duck");
-	public static final TagKey<Item> RAW_VENISON = TagUtil.itemTag("forge", "raw_venison");
-	public static final TagKey<Item> RAW_FISHES = TagUtil.itemTag("forge", "raw_fishes");
-	public static final TagKey<Item> RAW_FISHES_KOI = TagUtil.itemTag("forge", "raw_fishes/koi");
-	public static final TagKey<Item> COOKED_DUCK = TagUtil.itemTag("forge", "cooked_duck");
-	public static final TagKey<Item> COOKED_VENISON = TagUtil.itemTag("forge", "cooked_venison");
+	public static final TagKey<Item> RAW_DUCK = TagUtil.itemTag("c", "raw_duck");
+	public static final TagKey<Item> RAW_VENISON = TagUtil.itemTag("c", "raw_venison");
+	public static final TagKey<Item> RAW_FISHES = TagUtil.itemTag("c", "raw_fishes");
+	public static final TagKey<Item> RAW_FISHES_KOI = TagUtil.itemTag("c", "raw_fishes/koi");
+	public static final TagKey<Item> COOKED_DUCK = TagUtil.itemTag("c", "cooked_duck");
+	public static final TagKey<Item> COOKED_VENISON = TagUtil.itemTag("c", "cooked_venison");
 
 	public static final TagKey<Item> DUCK_FOOD = itemTag("duck_food");
 	public static final TagKey<Item> DEER_FOOD = itemTag("deer_food");

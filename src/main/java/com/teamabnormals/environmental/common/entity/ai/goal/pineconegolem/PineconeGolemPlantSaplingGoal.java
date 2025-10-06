@@ -15,8 +15,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.pathfinder.Path;
-import net.minecraftforge.common.util.BlockSnapshot;
-import net.minecraftforge.event.ForgeEventFactory;
+import net.neoforged.neoforge.common.util.BlockSnapshot;
+import net.neoforged.neoforge.event.EventHooks;
 
 import java.util.EnumSet;
 import java.util.List;
@@ -45,7 +45,7 @@ public class PineconeGolemPlantSaplingGoal extends Goal {
 			return false;
 		} else {
 			this.nextStartTicks = this.adjustedTickDelay(20);
-			if (!ForgeEventFactory.getMobGriefingEvent(this.golem.level(), this.golem))
+			if (!EventHooks.canEntityGrief(this.golem.level(), this.golem))
 				return false;
 
 			ItemStack itemstack = this.golem.getMainHandItem();
@@ -117,7 +117,7 @@ public class PineconeGolemPlantSaplingGoal extends Goal {
 					this.canPlant = false;
 			}
 		} else {
-			if (this.hasSpaceForTree(this.targetPos) && !ForgeEventFactory.onBlockPlace(this.golem, BlockSnapshot.create(this.golem.level().dimension(), this.golem.level(), this.targetPos.below()), net.minecraft.core.Direction.UP)) {
+			if (this.hasSpaceForTree(this.targetPos) && !EventHooks.onBlockPlace(this.golem, BlockSnapshot.create(this.golem.level().dimension(), this.golem.level(), this.targetPos.below()), net.minecraft.core.Direction.UP)) {
 				this.golem.level().setBlockAndUpdate(this.targetPos, this.saplingState);
 				SoundType soundtype = this.saplingState.getSoundType(this.golem.level(), this.targetPos, this.golem);
 				this.golem.level().playSound(null, this.targetPos, this.saplingState.getSoundType(this.golem.level(), this.targetPos, this.golem).getPlaceSound(), SoundSource.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
@@ -130,7 +130,7 @@ public class PineconeGolemPlantSaplingGoal extends Goal {
 	}
 
 	private boolean isValidTarget(BlockPos pos, BlockState state) {
-		return this.golem.level().isEmptyBlock(pos) && state.getBlock().canSurvive(state, this.golem.level(), pos);
+		return this.golem.level().isEmptyBlock(pos) && state.canSurvive(this.golem.level(), pos);
 	}
 
 	private boolean hasSpaceForTree(BlockPos pos) {

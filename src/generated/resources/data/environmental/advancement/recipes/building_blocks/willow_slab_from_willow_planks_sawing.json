@@ -1,0 +1,47 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "blueprint:and",
+      "values": [
+        {
+          "type": "neoforge:mod_loaded",
+          "modid": "woodworks"
+        },
+        {
+          "type": "woodworks:config",
+          "value": "sawmill"
+        }
+      ]
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "environmental:willow_slab_from_willow_planks_sawing"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_willow_planks": {
+      "conditions": {
+        "items": [
+          {
+            "items": "environmental:willow_planks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_willow_planks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "environmental:willow_slab_from_willow_planks_sawing"
+    ]
+  }
+}

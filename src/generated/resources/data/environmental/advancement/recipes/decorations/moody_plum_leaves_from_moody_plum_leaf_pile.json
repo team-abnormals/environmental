@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_moody_plum_leaf_pile": {
+      "conditions": {
+        "items": [
+          {
+            "items": "environmental:moody_plum_leaf_pile"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "environmental:moody_plum_leaves_from_moody_plum_leaf_pile"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_moody_plum_leaf_pile"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "environmental:moody_plum_leaves_from_moody_plum_leaf_pile"
+    ]
+  }
+}

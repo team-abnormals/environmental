@@ -1,0 +1,50 @@
+{
+  "parent": "environmental:husbandry/saddle_pig",
+  "criteria": {
+    "throw_mud_at_pig": {
+      "conditions": {
+        "damage": {
+          "type": {
+            "direct_entity": {
+              "type": "environmental:mud_ball"
+            },
+            "tags": [
+              {
+                "expected": true,
+                "id": "minecraft:is_projectile"
+              }
+            ]
+          }
+        },
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:pig"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_hurt_entity"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.environmental.husbandry.throw_mud_at_pig.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "environmental:mud_ball"
+    },
+    "title": {
+      "translate": "advancements.environmental.husbandry.throw_mud_at_pig.title"
+    }
+  },
+  "requirements": [
+    [
+      "throw_mud_at_pig"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -9,7 +9,7 @@
     },
     {
       "type": "environmental:in_biome",
-      "biomes": "#forge:is_swamp"
+      "biomes": "#c:is_swamp"
     }
   ],
   "description": {

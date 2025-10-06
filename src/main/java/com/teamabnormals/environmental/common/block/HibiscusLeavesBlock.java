@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
@@ -11,7 +12,6 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class HibiscusLeavesBlock extends LeavesBlock implements BonemealableBloc
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(LevelReader blockGetter, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(LevelReader blockGetter, BlockPos pos, BlockState state) {
 		for (Direction direction : Direction.values()) {
 			if (blockGetter.getBlockState(pos.relative(direction)).isAir()) {
 				return true;
@@ -48,8 +48,8 @@ public class HibiscusLeavesBlock extends LeavesBlock implements BonemealableBloc
 
 		if (!directions.isEmpty()) {
 			Direction direction = directions.get(random.nextInt(directions.size()));
-			ForgeRegistries.BLOCKS.tags().getTag(EnvironmentalBlockTags.WALL_HIBISCUSES).getRandomElement(random).ifPresent((block) -> {
-				level.setBlockAndUpdate(pos.relative(direction), WallHibiscusBlock.setPropertiesForDirection(block.defaultBlockState(), direction, random));
+			BuiltInRegistries.BLOCK.getTag(EnvironmentalBlockTags.WALL_HIBISCUSES).get().getRandomElement(random).ifPresent((block) -> {
+				level.setBlockAndUpdate(pos.relative(direction), WallHibiscusBlock.setPropertiesForDirection(block.value().defaultBlockState(), direction, random));
 			});
 		}
 	}

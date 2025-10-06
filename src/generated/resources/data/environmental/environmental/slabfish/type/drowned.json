@@ -13,9 +13,7 @@
     },
     {
       "type": "environmental:height",
-      "value": {
-        "max": 48
-      }
+      "max": 48
     },
     {
       "type": "environmental:in_fluid",

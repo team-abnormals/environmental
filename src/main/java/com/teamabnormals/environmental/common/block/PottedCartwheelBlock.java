@@ -19,12 +19,13 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
-import net.minecraftforge.eventbus.api.Event;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.Event;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.common.util.TriState;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 
-@Mod.EventBusSubscriber(modid = Environmental.MOD_ID)
+@EventBusSubscriber(modid = Environmental.MOD_ID)
 public class PottedCartwheelBlock extends FlowerPotBlock {
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
@@ -63,7 +64,7 @@ public class PottedCartwheelBlock extends FlowerPotBlock {
 				stack.shrink(1);
 			}
 
-			event.setUseBlock(Event.Result.DENY);
+			event.setUseBlock(TriState.FALSE);
 			event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide()));
 			event.setCanceled(true);
 		}

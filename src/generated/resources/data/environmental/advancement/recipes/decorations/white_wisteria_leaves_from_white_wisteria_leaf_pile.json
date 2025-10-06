@@ -1,0 +1,47 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "blueprint:and",
+      "values": [
+        {
+          "type": "neoforge:mod_loaded",
+          "modid": "woodworks"
+        },
+        {
+          "type": "woodworks:config",
+          "value": "leaf_piles"
+        }
+      ]
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "environmental:white_wisteria_leaves_from_white_wisteria_leaf_pile"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_white_wisteria_leaf_pile": {
+      "conditions": {
+        "items": [
+          {
+            "items": "environmental:white_wisteria_leaf_pile"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_white_wisteria_leaf_pile"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "environmental:white_wisteria_leaves_from_white_wisteria_leaf_pile"
+    ]
+  }
+}

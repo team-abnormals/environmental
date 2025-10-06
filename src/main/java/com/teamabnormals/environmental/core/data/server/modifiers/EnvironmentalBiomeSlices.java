@@ -6,8 +6,8 @@ import com.teamabnormals.blueprint.core.registry.BlueprintBiomes;
 import com.teamabnormals.blueprint.core.registry.BlueprintDataPackRegistries;
 import com.teamabnormals.blueprint.core.util.BiomeUtil.MultiNoiseModdedBiomeProvider;
 import com.teamabnormals.environmental.core.Environmental;
-import com.teamabnormals.environmental.core.registry.EnvironmentalBiomes;
-import net.minecraft.data.worldgen.BootstapContext;
+import com.teamabnormals.environmental.core.registry.datapack.EnvironmentalBiomes;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Climate;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-import static com.teamabnormals.environmental.core.registry.EnvironmentalBiomes.*;
+import static com.teamabnormals.environmental.core.registry.datapack.EnvironmentalBiomes.*;
 
 public class EnvironmentalBiomeSlices {
 	public static final ResourceKey<ModdedBiomeSlice> MARSH_SLICE = createKey("marsh");
@@ -33,7 +33,7 @@ public class EnvironmentalBiomeSlices {
 	public static final ResourceKey<Biome> SNOWY_OLD_GROWTH_PINE_BARRENS_AREA = EnvironmentalBiomes.createKey("snowy_old_growth_pine_barrens_area");
 	public static final ResourceKey<Biome> PINE_SLOPES_AREA = EnvironmentalBiomes.createKey("pine_slopes_area");
 
-	public static void bootstrap(BootstapContext<ModdedBiomeSlice> context) {
+	public static void bootstrap(BootstrapContext<ModdedBiomeSlice> context) {
 		List<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> entries = new ArrayList<>();
 		new EnvironmentalBiomeBuilder().addBiomes(entries::add);
 

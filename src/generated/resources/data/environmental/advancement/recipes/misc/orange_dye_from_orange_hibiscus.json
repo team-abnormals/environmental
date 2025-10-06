@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_orange_hibiscus": {
+      "conditions": {
+        "items": [
+          {
+            "items": "environmental:orange_hibiscus"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "environmental:orange_dye_from_orange_hibiscus"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_orange_hibiscus"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "environmental:orange_dye_from_orange_hibiscus"
+    ]
+  }
+}

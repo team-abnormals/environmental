@@ -1,7 +1,7 @@
 package com.teamabnormals.environmental.integration.jei;
 
 import com.teamabnormals.environmental.core.Environmental;
-import com.teamabnormals.environmental.core.other.EnvironmentalTiers.EnvironmentalArmorMaterials;
+import com.teamabnormals.environmental.core.other.EnvironmentalArmorMaterials;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -30,7 +30,8 @@ public class EnvironmentalPlugin implements IModPlugin {
 
 	@Override
 	public void registerItemSubtypes(ISubtypeRegistration registration) {
-		registration.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, EnvironmentalItems.SLABFISH_BUCKET.get(), (stack, context) -> stack.getTag() != null && stack.getTag().contains("SlabfishType", Tag.TAG_STRING) ? stack.getTag().getString("SlabfishType") : IIngredientSubtypeInterpreter.NONE);
+		//TODO: idk
+		// registration.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, EnvironmentalItems.SLABFISH_BUCKET.get(), (stack, context) -> stack.getTag() != null && stack.getTag().contains("SlabfishType", Tag.TAG_STRING) ? stack.getTag().getString("SlabfishType") : IIngredientSubtypeInterpreter.NONE);
 	}
 
 	@Override
@@ -40,7 +41,7 @@ public class EnvironmentalPlugin implements IModPlugin {
 
 	private static Stream<RepairData> getRepairData() {
 		return Stream.of(
-				new RepairData(EnvironmentalArmorMaterials.YAK.getRepairIngredient(),
+				new RepairData(EnvironmentalArmorMaterials.YAK.get().repairIngredient().get(),
 						new ItemStack(EnvironmentalItems.YAK_PANTS.get())
 				)
 		);

@@ -12,9 +12,9 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
-import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.level.Level;
 
 import java.util.Arrays;
@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-public record SlabfishType(Component displayName, ResourceLocation texture, Optional<ResourceLocation> backpack, int priority, SlabfishCondition[] conditions) implements Predicate<SlabfishConditionContext> {
+public record SlabfishType(Component description, ResourceLocation texture, Optional<ResourceLocation> backpack, int priority, SlabfishCondition[] conditions) implements Predicate<SlabfishConditionContext> {
 
 	public static final Map<TagKey<SlabfishType>, Pair<Float, ChatFormatting>> RARITIES = Util.make(new HashMap<>(), map -> {
 		map.put(EnvironmentalSlabfishTypeTags.COMMON, Pair.of(1.0F, ChatFormatting.GRAY));
@@ -35,7 +35,7 @@ public record SlabfishType(Component displayName, ResourceLocation texture, Opti
 
 	public static final Codec<SlabfishType> CODEC = RecordCodecBuilder.create(instance -> {
 		return instance.group(
-				ExtraCodecs.COMPONENT.fieldOf("description").forGetter(entry -> entry.displayName),
+				ComponentSerialization.CODEC.fieldOf("description").forGetter(entry -> entry.description),
 				ResourceLocation.CODEC.fieldOf("texture").forGetter(entry -> entry.texture),
 				ResourceLocation.CODEC.optionalFieldOf("backpack").forGetter(entry -> entry.backpack),
 				Codec.INT.optionalFieldOf("priority", 0).forGetter(entry -> entry.priority),
@@ -44,7 +44,7 @@ public record SlabfishType(Component displayName, ResourceLocation texture, Opti
 	});
 
 	public static final Codec<SlabfishType> NETWORK_CODEC = RecordCodecBuilder.create(instance -> instance.group(
-			ExtraCodecs.COMPONENT.fieldOf("description").forGetter(entry -> entry.displayName),
+			ComponentSerialization.CODEC.fieldOf("description").forGetter(entry -> entry.description),
 			ResourceLocation.CODEC.fieldOf("texture").forGetter(entry -> entry.texture),
 			ResourceLocation.CODEC.optionalFieldOf("backpack").forGetter(entry -> entry.backpack)
 	).apply(instance, (displayName, texture, backpack) -> new SlabfishType(displayName, texture, backpack, -1, new SlabfishCondition[0])));
@@ -61,7 +61,7 @@ public record SlabfishType(Component displayName, ResourceLocation texture, Opti
 	public String toString() {
 		return "SlabfishType{" +
 				//"registryName=" + registryName +
-				", displayName=" + displayName.getString() +
+				", description=" + description.getString() +
 				//", modLoaded=" + modLoaded +
 				", priority=" + priority +
 				'}';

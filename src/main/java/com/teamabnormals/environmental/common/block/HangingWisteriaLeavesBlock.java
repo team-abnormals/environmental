@@ -14,11 +14,11 @@ import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.IForgeShearable;
+import net.neoforged.neoforge.common.IShearable;
 
 import javax.annotation.Nullable;
 
-public class HangingWisteriaLeavesBlock extends HangingLeavesBlock implements IForgeShearable, WisteriaLeafColorBlock {
+public class HangingWisteriaLeavesBlock extends HangingLeavesBlock implements IShearable, WisteriaLeafColorBlock {
 	public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
 	protected static final VoxelShape TOP_SHAPE = Block.box(1, 0, 1, 15, 16, 15);
 

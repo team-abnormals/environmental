@@ -1,6 +1,5 @@
 package com.teamabnormals.environmental.core.data.server.modifiers;
 
-import com.teamabnormals.blueprint.core.other.tags.BlueprintBiomeTags;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalBiomeTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBiomeModifierTypes.AddFeaturesIgnoreBiomeModifier;
@@ -10,8 +9,9 @@ import com.teamabnormals.environmental.core.registry.EnvironmentalBiomeModifierT
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures.EnvironmentalPlacedFeatures;
 import net.minecraft.core.HolderSet;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BiomeTags;
@@ -23,11 +23,12 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings.SpawnerData;
 import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-import net.minecraftforge.common.world.BiomeModifier;
-import net.minecraftforge.common.world.ForgeBiomeModifiers.AddFeaturesBiomeModifier;
-import net.minecraftforge.common.world.ForgeBiomeModifiers.AddSpawnsBiomeModifier;
-import net.minecraftforge.common.world.ForgeBiomeModifiers.RemoveFeaturesBiomeModifier;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.world.BiomeModifier;
+import net.neoforged.neoforge.common.world.BiomeModifiers.AddFeaturesBiomeModifier;
+import net.neoforged.neoforge.common.world.BiomeModifiers.AddSpawnsBiomeModifier;
+import net.neoforged.neoforge.common.world.BiomeModifiers.RemoveFeaturesBiomeModifier;
+import net.neoforged.neoforge.registries.NeoForgeRegistries.Keys;
 
 import java.util.List;
 import java.util.Set;
@@ -37,7 +38,7 @@ import java.util.stream.Stream;
 
 public class EnvironmentalBiomeModifiers {
 
-	public static void bootstrap(BootstapContext<BiomeModifier> context) {
+	public static void bootstrap(BootstrapContext<BiomeModifier> context) {
 		addSpawn(context, "slabfish", EnvironmentalBiomeTags.HAS_SLABFISH, new SpawnerData(EnvironmentalEntityTypes.SLABFISH.get(), 12, 4, 4));
 		addSpawn(context, "duck", EnvironmentalBiomeTags.HAS_DUCK, new SpawnerData(EnvironmentalEntityTypes.DUCK.get(), 10, 4, 4));
 		addSpawn(context, "duck_rare", Biomes.RIVER, new SpawnerData(EnvironmentalEntityTypes.DUCK.get(), 1, 1, 2));
@@ -72,57 +73,57 @@ public class EnvironmentalBiomeModifiers {
 		addFeature(context, "swamp_vegetation", Biomes.SWAMP, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.TREES_SWAMP, EnvironmentalPlacedFeatures.PATCH_DUCKWEED_SWAMP);
 		addFeature(context, "flower_forest_vegetation", Biomes.FLOWER_FOREST, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_DELPHINIUMS, EnvironmentalPlacedFeatures.TREES_WISTERIA);
 		addFeature(context, "savanna_vegetation", BiomeTags.IS_SAVANNA, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_GIANT_TALL_GRASS_SAVANNA);
-		addFeature(context, "plains_vegetation", BlueprintBiomeTags.IS_GRASSLAND, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_GIANT_TALL_GRASS_PLAINS);
+		addFeature(context, "plains_vegetation", Tags.Biomes.IS_PLAINS, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_GIANT_TALL_GRASS_PLAINS);
 		addFeature(context, "jungle_vegetation", BiomeTags.IS_JUNGLE, Decoration.VEGETAL_DECORATION, EnvironmentalPlacedFeatures.PATCH_GIANT_TALL_GRASS_JUNGLE, EnvironmentalPlacedFeatures.PATCH_LARGE_FERN_JUNGLE);
 	}
 
 	@SafeVarargs
-	private static void removeFeature(BootstapContext<BiomeModifier> context, String name, ResourceKey<Biome> biome, Decoration step, ResourceKey<PlacedFeature>... features) {
+	private static void removeFeature(BootstrapContext<BiomeModifier> context, String name, ResourceKey<Biome> biome, Decoration step, ResourceKey<PlacedFeature>... features) {
 		register(context, "remove_feature/" + name, () -> new RemoveFeaturesBiomeModifier(HolderSet.direct(context.lookup(Registries.BIOME).getOrThrow(biome)), featureSet(context, features), Set.of(step)));
 	}
 
-	private static void removeSpawnInverted(BootstapContext<BiomeModifier> context, String name, TagKey<Biome> biomes, EntityType<?>... types) {
-		register(context, "remove_spawn/" + name, () -> new InvertedRemoveSpawnsBiomeModifier(context.lookup(Registries.BIOME).getOrThrow(biomes), HolderSet.direct(Stream.of(types).map(type -> ForgeRegistries.ENTITY_TYPES.getHolder(type).get()).collect(Collectors.toList()))));
+	private static void removeSpawnInverted(BootstrapContext<BiomeModifier> context, String name, TagKey<Biome> biomes, EntityType<?>... types) {
+		register(context, "remove_spawn/" + name, () -> new InvertedRemoveSpawnsBiomeModifier(context.lookup(Registries.BIOME).getOrThrow(biomes), HolderSet.direct(Stream.of(types).map(BuiltInRegistries.ENTITY_TYPE::wrapAsHolder).collect(Collectors.toList()))));
 	}
 
-	private static void removeSpawnInvertedIgnore(BootstapContext<BiomeModifier> context, String name, TagKey<Biome> biomes, ResourceKey<Biome> ignoredBiome, EntityType<?>... types) {
-		register(context, "remove_spawn/" + name, () -> new InvertedRemoveSpawnsIgnoreBiomeModifier(context.lookup(Registries.BIOME).getOrThrow(biomes), HolderSet.direct(context.lookup(Registries.BIOME).getOrThrow(ignoredBiome)), HolderSet.direct(Stream.of(types).map(type -> ForgeRegistries.ENTITY_TYPES.getHolder(type).get()).collect(Collectors.toList()))));
+	private static void removeSpawnInvertedIgnore(BootstrapContext<BiomeModifier> context, String name, TagKey<Biome> biomes, ResourceKey<Biome> ignoredBiome, EntityType<?>... types) {
+		register(context, "remove_spawn/" + name, () -> new InvertedRemoveSpawnsIgnoreBiomeModifier(context.lookup(Registries.BIOME).getOrThrow(biomes), HolderSet.direct(context.lookup(Registries.BIOME).getOrThrow(ignoredBiome)), HolderSet.direct(Stream.of(types).map(BuiltInRegistries.ENTITY_TYPE::wrapAsHolder).collect(Collectors.toList()))));
 	}
 
 	@SafeVarargs
-	private static void addFeatureIgnore(BootstapContext<BiomeModifier> context, String name, TagKey<Biome> biomes, TagKey<Biome> ignoredBiomes, Decoration step, ResourceKey<PlacedFeature>... features) {
+	private static void addFeatureIgnore(BootstrapContext<BiomeModifier> context, String name, TagKey<Biome> biomes, TagKey<Biome> ignoredBiomes, Decoration step, ResourceKey<PlacedFeature>... features) {
 		register(context, "add_feature/" + name, () -> new AddFeaturesIgnoreBiomeModifier(context.lookup(Registries.BIOME).getOrThrow(biomes), context.lookup(Registries.BIOME).getOrThrow(ignoredBiomes), featureSet(context, features), step));
 	}
 
 	@SafeVarargs
-	private static void addFeature(BootstapContext<BiomeModifier> context, String name, TagKey<Biome> biomes, Decoration step, ResourceKey<PlacedFeature>... features) {
+	private static void addFeature(BootstrapContext<BiomeModifier> context, String name, TagKey<Biome> biomes, Decoration step, ResourceKey<PlacedFeature>... features) {
 		register(context, "add_feature/" + name, () -> new AddFeaturesBiomeModifier(context.lookup(Registries.BIOME).getOrThrow(biomes), featureSet(context, features), step));
 	}
 
 	@SafeVarargs
-	private static void addFeature(BootstapContext<BiomeModifier> context, String name, ResourceKey<Biome> biome, Decoration step, ResourceKey<PlacedFeature>... features) {
+	private static void addFeature(BootstrapContext<BiomeModifier> context, String name, ResourceKey<Biome> biome, Decoration step, ResourceKey<PlacedFeature>... features) {
 		register(context, "add_feature/" + name, () -> new AddFeaturesBiomeModifier(HolderSet.direct(context.lookup(Registries.BIOME).getOrThrow(biome)), featureSet(context, features), step));
 	}
 
-	private static void addSpawn(BootstapContext<BiomeModifier> context, String name, TagKey<Biome> biomes, MobSpawnSettings.SpawnerData... spawns) {
+	private static void addSpawn(BootstrapContext<BiomeModifier> context, String name, TagKey<Biome> biomes, MobSpawnSettings.SpawnerData... spawns) {
 		register(context, "add_spawn/" + name, () -> new AddSpawnsBiomeModifier(context.lookup(Registries.BIOME).getOrThrow(biomes), List.of(spawns)));
 	}
 
-	private static void addSpawn(BootstapContext<BiomeModifier> context, String name, ResourceKey<Biome> biome, MobSpawnSettings.SpawnerData... spawns) {
+	private static void addSpawn(BootstrapContext<BiomeModifier> context, String name, ResourceKey<Biome> biome, MobSpawnSettings.SpawnerData... spawns) {
 		register(context, "add_spawn/" + name, () -> new AddSpawnsBiomeModifier(HolderSet.direct(context.lookup(Registries.BIOME).getOrThrow(biome)), List.of(spawns)));
 	}
 
 
-	private static void addSpawnIgnore(BootstapContext<BiomeModifier> context, String name, TagKey<Biome> biomes, TagKey<Biome> ignoredBiome, MobSpawnSettings.SpawnerData... spawns) {
+	private static void addSpawnIgnore(BootstrapContext<BiomeModifier> context, String name, TagKey<Biome> biomes, TagKey<Biome> ignoredBiome, MobSpawnSettings.SpawnerData... spawns) {
 		register(context, "add_spawn/" + name, () -> new AddSpawnsIgnoreBiomeModifier(context.lookup(Registries.BIOME).getOrThrow(biomes), context.lookup(Registries.BIOME).getOrThrow(ignoredBiome), List.of(spawns)));
 	}
 
-	private static void register(BootstapContext<BiomeModifier> context, String name, Supplier<? extends BiomeModifier> modifier) {
-		context.register(ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, Environmental.location(name)), modifier.get());
+	private static void register(BootstrapContext<BiomeModifier> context, String name, Supplier<? extends BiomeModifier> modifier) {
+		context.register(ResourceKey.create(Keys.BIOME_MODIFIERS, Environmental.location(name)), modifier.get());
 	}
 
 	@SafeVarargs
-	private static HolderSet<PlacedFeature> featureSet(BootstapContext<?> context, ResourceKey<PlacedFeature>... features) {
+	private static HolderSet<PlacedFeature> featureSet(BootstrapContext<?> context, ResourceKey<PlacedFeature>... features) {
 		return HolderSet.direct(Stream.of(features).map(key -> context.lookup(Registries.PLACED_FEATURE).getOrThrow(key)).collect(Collectors.toList()));
 	}
 }

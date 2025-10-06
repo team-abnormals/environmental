@@ -1,6 +1,5 @@
 package com.teamabnormals.environmental.core.registry.slabfish;
 
-import com.teamabnormals.blueprint.core.other.tags.BlueprintBiomeTags;
 import com.teamabnormals.environmental.common.slabfish.SlabfishType;
 import com.teamabnormals.environmental.common.slabfish.condition.*;
 import com.teamabnormals.environmental.common.slabfish.condition.SlabfishConditionContext.Event;
@@ -8,12 +7,12 @@ import com.teamabnormals.environmental.common.slabfish.condition.SlabfishConditi
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.other.EnvironmentalConstants;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalBiomeTags;
-import com.teamabnormals.environmental.core.registry.EnvironmentalBiomes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalRegistries;
+import com.teamabnormals.environmental.core.registry.datapack.EnvironmentalBiomes;
 import net.minecraft.Util;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -25,7 +24,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 import net.minecraft.world.level.dimension.DimensionType;
-import net.minecraftforge.common.Tags;
+import net.neoforged.neoforge.common.Tags;
 
 import java.util.Arrays;
 import java.util.List;
@@ -105,7 +104,7 @@ public class EnvironmentalSlabfishTypes {
 
 	public static final List<ResourceKey<SlabfishType>> COMPAT_SLABFISH = Stream.concat(Stream.concat(ATMOSPHERIC_SLABFISH.stream(), AUTUMNITY_SLABFISH.stream()), ENDERGETIC_SLABFISH.stream()).collect(Collectors.toList());
 
-	public static void bootstrap(BootstapContext<SlabfishType> context) {
+	public static void bootstrap(BootstrapContext<SlabfishType> context) {
 		register(context, SWAMP, -1, Tags.Biomes.IS_SWAMP);
 
 		register(context, BADLANDS, 0, BiomeTags.IS_BADLANDS);
@@ -172,30 +171,30 @@ public class EnvironmentalSlabfishTypes {
 		register(context, GHOST, 0, new SlabfishImpossibleCondition());
 
 		register(context, END, 0, spawn(), dimension(BuiltinDimensionTypes.END));
-		register(context, CHORUS, 1, BlueprintBiomeTags.IS_OUTER_END);
+		register(context, CHORUS, 1, Tags.Biomes.IS_OUTER_END_ISLAND);
 		register(context, POISE, 1, EnvironmentalConstants.ENDERGETIC, EnvironmentalConstants.POISE_FOREST);
 	}
 
-	public static void register(BootstapContext<SlabfishType> context, ResourceKey<SlabfishType> key, int priority, SlabfishCondition... conditions) {
+	public static void register(BootstrapContext<SlabfishType> context, ResourceKey<SlabfishType> key, int priority, SlabfishCondition... conditions) {
 		context.register(key, new SlabfishType(
 				Component.translatable(Util.makeDescriptionId("slabfish.type", key.location())),
-				new ResourceLocation(key.location().getNamespace(), "type/" + key.location().getPath()),
+				ResourceLocation.fromNamespaceAndPath(key.location().getNamespace(), "type/" + key.location().getPath()),
 				Optional.empty(), priority, Arrays.stream(conditions).toArray(SlabfishCondition[]::new)));
 	}
 
-	public static void register(BootstapContext<SlabfishType> context, ResourceKey<SlabfishType> key, int priority, TagKey<Biome> biomes) {
+	public static void register(BootstrapContext<SlabfishType> context, ResourceKey<SlabfishType> key, int priority, TagKey<Biome> biomes) {
 		register(context, key, priority, spawn(), biome(context, biomes));
 	}
 
-	public static void register(BootstapContext<SlabfishType> context, ResourceKey<SlabfishType> key, int priority, ResourceKey<Biome> biome) {
+	public static void register(BootstrapContext<SlabfishType> context, ResourceKey<SlabfishType> key, int priority, ResourceKey<Biome> biome) {
 		register(context, key, priority, spawn(), biome(context, biome));
 	}
 
-	public static void register(BootstapContext<SlabfishType> context, ResourceKey<SlabfishType> key, int priority, String modid, TagKey<Biome> biomes) {
+	public static void register(BootstrapContext<SlabfishType> context, ResourceKey<SlabfishType> key, int priority, String modid, TagKey<Biome> biomes) {
 		register(context, key, priority, modLoaded(modid), spawn(), biome(context, biomes));
 	}
 
-	public static void register(BootstapContext<SlabfishType> context, ResourceKey<SlabfishType> key, int priority, String modid, ResourceLocation biome) {
+	public static void register(BootstrapContext<SlabfishType> context, ResourceKey<SlabfishType> key, int priority, String modid, ResourceLocation biome) {
 		register(context, key, priority, modLoaded(modid), spawn(), biome(biome));
 	}
 
@@ -211,11 +210,11 @@ public class EnvironmentalSlabfishTypes {
 		return new SlabfishAndCondition(conditions);
 	}
 
-	public static SlabfishInBiomeCondition biome(BootstapContext<SlabfishType> context, ResourceKey<Biome> biome) {
+	public static SlabfishInBiomeCondition biome(BootstrapContext<SlabfishType> context, ResourceKey<Biome> biome) {
 		return new SlabfishInBiomeCondition(HolderSet.direct(context.lookup(Registries.BIOME).getOrThrow(biome)));
 	}
 
-	public static SlabfishInBiomeCondition biome(BootstapContext<SlabfishType> context, TagKey<Biome> biomes) {
+	public static SlabfishInBiomeCondition biome(BootstrapContext<SlabfishType> context, TagKey<Biome> biomes) {
 		return new SlabfishInBiomeCondition(context.lookup(Registries.BIOME).getOrThrow(biomes));
 	}
 

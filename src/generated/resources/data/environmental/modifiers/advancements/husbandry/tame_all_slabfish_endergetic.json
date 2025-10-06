@@ -20,6 +20,7 @@
             "trigger": "minecraft:tame_animal"
           }
         },
+        "indexed_requirements": [],
         "requirements": [
           [
             "environmental:poise"
@@ -34,7 +35,7 @@
     "type": "names",
     "conditions": [
       {
-        "type": "forge:mod_loaded",
+        "type": "neoforge:mod_loaded",
         "modid": "endergetic"
       }
     ],

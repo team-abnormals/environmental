@@ -6,21 +6,29 @@ import com.teamabnormals.environmental.common.block.CattailBlock;
 import com.teamabnormals.environmental.common.block.CupLichenBlock;
 import com.teamabnormals.environmental.common.block.DwarfSpruceHeadBlock;
 import com.teamabnormals.environmental.core.Environmental;
+import com.teamabnormals.environmental.core.other.EnvironmentalLootTables;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup.Provider;
+import net.minecraft.core.HolderLookup.RegistryLookup;
+import net.minecraft.core.WritableRegistry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.loot.EntityLootSubProvider;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.data.loot.LootTableSubProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.EntityTypeTags;
+import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -29,8 +37,12 @@ import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.Half;
-import net.minecraft.world.level.storage.loot.*;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
+import net.minecraft.world.level.storage.loot.LootContext.EntityTarget;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.LootTable.Builder;
+import net.minecraft.world.level.storage.loot.ValidationContext;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.functions.*;
@@ -38,12 +50,11 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.*;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.common.Tags;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -53,38 +64,46 @@ import static com.teamabnormals.environmental.core.registry.EnvironmentalEntityT
 
 public class EnvironmentalLootTableProvider extends LootTableProvider {
 
-	public EnvironmentalLootTableProvider(PackOutput output) {
+	public EnvironmentalLootTableProvider(PackOutput output, CompletableFuture<Provider> provider) {
 		super(output, BuiltInLootTables.all(), ImmutableList.of(
 				new LootTableProvider.SubProviderEntry(EnvironmentalBlockLoot::new, LootContextParamSets.BLOCK),
 				new LootTableProvider.SubProviderEntry(EnvironmentalEntityLoot::new, LootContextParamSets.ENTITY),
 				new LootTableProvider.SubProviderEntry(EnvironmentalChestLoot::new, LootContextParamSets.CHEST)
-		));
+		), provider);
 	}
 
-
 	@Override
-	protected void validate(Map<ResourceLocation, LootTable> map, ValidationContext context) {
+	protected void validate(WritableRegistry<LootTable> registry, ValidationContext context, ProblemReporter.Collector collector) {
 	}
 
 	public static class EnvironmentalBlockLoot extends BlockLootSubProvider {
-		private static final Set<Item> EXPLOSION_RESISTANT = Stream.of(Blocks.DRAGON_EGG, Blocks.BEACON, Blocks.CONDUIT, Blocks.SKELETON_SKULL, Blocks.WITHER_SKELETON_SKULL, Blocks.PLAYER_HEAD, Blocks.ZOMBIE_HEAD, Blocks.CREEPER_HEAD, Blocks.DRAGON_HEAD, Blocks.PIGLIN_HEAD, Blocks.SHULKER_BOX, Blocks.BLACK_SHULKER_BOX, Blocks.BLUE_SHULKER_BOX, Blocks.BROWN_SHULKER_BOX, Blocks.CYAN_SHULKER_BOX, Blocks.GRAY_SHULKER_BOX, Blocks.GREEN_SHULKER_BOX, Blocks.LIGHT_BLUE_SHULKER_BOX, Blocks.LIGHT_GRAY_SHULKER_BOX, Blocks.LIME_SHULKER_BOX, Blocks.MAGENTA_SHULKER_BOX, Blocks.ORANGE_SHULKER_BOX, Blocks.PINK_SHULKER_BOX, Blocks.PURPLE_SHULKER_BOX, Blocks.RED_SHULKER_BOX, Blocks.WHITE_SHULKER_BOX, Blocks.YELLOW_SHULKER_BOX).map(ItemLike::asItem).collect(Collectors.toSet());
+		private static final LootItemCondition.Builder HAS_SHEARS = MatchTool.toolMatches(ItemPredicate.Builder.item().of(net.neoforged.neoforge.common.Tags.Items.TOOLS_SHEAR));
 
-		public static final LootItemCondition.Builder HAS_SILK_TOUCH = MatchTool.toolMatches(ItemPredicate.Builder.item().hasEnchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.Ints.atLeast(1))));
-		public static final LootItemCondition.Builder HAS_SHEARS = MatchTool.toolMatches(ItemPredicate.Builder.item().of(Items.SHEARS));
-		public static final LootItemCondition.Builder HAS_SHEARS_OR_SILK_TOUCH = HAS_SHEARS.or(HAS_SILK_TOUCH);
-		public static final LootItemCondition.Builder HAS_NO_SHEARS_OR_SILK_TOUCH = MatchTool.toolMatches(ItemPredicate.Builder.item().of(Items.SHEARS)).or(HAS_SILK_TOUCH).invert();
+		protected LootItemCondition.Builder doesNotHaveSilkTouch() {
+			return this.hasSilkTouch().invert();
+		}
+
+		private LootItemCondition.Builder hasShearsOrSilkTouch() {
+			return HAS_SHEARS.or(this.hasSilkTouch());
+		}
+
+		private LootItemCondition.Builder doesNotHaveShearsOrSilkTouch() {
+			return this.hasShearsOrSilkTouch().invert();
+		}
 
 		private static final float[] NORMAL_LEAVES_SAPLING_CHANCES = new float[]{0.05F, 0.0625F, 0.083333336F, 0.1F};
 		private static final float[] DOUBLE_LEAVES_SAPLING_CHANCES = new float[]{0.1F, 1.25F, 0.166666672F, 0.2F};
 		private static final float[] NORMAL_LEAVES_STICK_CHANCES = new float[]{0.02F, 0.022222223F, 0.025F, 0.033333335F, 0.1F};
 		private static final float[] DOUBLE_LEAVES_STICK_CHANCES = new float[]{0.04F, 0.044444446F, 0.05F, 0.066666670F, 0.2F};
 
-		protected EnvironmentalBlockLoot() {
-			super(EXPLOSION_RESISTANT, FeatureFlags.REGISTRY.allFlags());
+		protected EnvironmentalBlockLoot(Provider provider) {
+			super(Set.of(), FeatureFlags.REGISTRY.allFlags(), provider);
 		}
 
 		@Override
 		public void generate() {
+			RegistryLookup<Enchantment> enchantments = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
+
 			this.dropSelf(CARTWHEEL.get());
 			this.dropSelf(BLUEBELL.get());
 			this.dropSelf(VIOLET.get());
@@ -166,12 +185,12 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.add(CATTAIL.get(), block -> createCattailDrops(block, block));
 			this.add(CATTAIL_STALK.get(), noDrop());
 
-			this.add(HIBISCUS_LEAVES.get(), (block) -> createSilkTouchOrShearsDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Items.STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, DOUBLE_LEAVES_STICK_CHANCES))));
+			this.add(HIBISCUS_LEAVES.get(), (block) -> createSilkTouchOrShearsDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Items.STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))).when(BonusLevelTableCondition.bonusLevelFlatChance(enchantments.getOrThrow(Enchantments.FORTUNE), DOUBLE_LEAVES_STICK_CHANCES))));
 			this.add(HIBISCUS_LEAF_PILE.get(), this::createLeafPileDrops);
 
 			this.add(MYCELIUM_SPROUTS.get(), BlockLootSubProvider::createShearsOnlyDrop);
 			this.add(DUCKWEED.get(), BlockLootSubProvider::createShearsOnlyDrop);
-			this.add(GIANT_TALL_GRASS.get(), (block) -> createDoublePlantWithOtherDrop(block, Blocks.GRASS, Items.WHEAT_SEEDS, 3, 0.125F));
+			this.add(GIANT_TALL_GRASS.get(), (block) -> createDoublePlantWithOtherDrop(block, Blocks.SHORT_GRASS, Items.WHEAT_SEEDS, 3, 0.125F));
 			this.add(CUP_LICHEN.get(), this::createCupLichenDrops);
 			this.add(CACTUS_BOBBLE.get(), noDrop());
 
@@ -217,7 +236,7 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.dropSelf(WILLOW_LADDER.get());
 			this.add(WILLOW_SLAB.get(), this::createSlabItemTable);
 			this.add(WILLOW_DOOR.get(), this::createDoorTable);
-			this.add(WILLOW_BEEHIVE.get(), BlockLootSubProvider::createBeeHiveDrop);
+			this.add(WILLOW_BEEHIVE.get(), this::createBeeHiveDrop);
 			this.add(WILLOW_CHEST.get(), this::createNameableBlockEntityTable);
 			this.add(TRAPPED_WILLOW_CHEST.get(), this::createNameableBlockEntityTable);
 			this.add(WILLOW_BOOKSHELF.get(), (block) -> createSingleItemTableWithSilkTouch(block, Items.BOOK, ConstantValue.exactly(3.0F)));
@@ -245,7 +264,7 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.dropSelf(PINE_LADDER.get());
 			this.add(PINE_SLAB.get(), this::createSlabItemTable);
 			this.add(PINE_DOOR.get(), this::createDoorTable);
-			this.add(PINE_BEEHIVE.get(), BlockLootSubProvider::createBeeHiveDrop);
+			this.add(PINE_BEEHIVE.get(), this::createBeeHiveDrop);
 			this.add(PINE_CHEST.get(), this::createNameableBlockEntityTable);
 			this.add(TRAPPED_PINE_CHEST.get(), this::createNameableBlockEntityTable);
 			this.add(PINE_BOOKSHELF.get(), (block) -> createSingleItemTableWithSilkTouch(block, Items.BOOK, ConstantValue.exactly(3.0F)));
@@ -269,7 +288,7 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.dropSelf(PLUM_LADDER.get());
 			this.add(PLUM_SLAB.get(), this::createSlabItemTable);
 			this.add(PLUM_DOOR.get(), this::createDoorTable);
-			this.add(PLUM_BEEHIVE.get(), BlockLootSubProvider::createBeeHiveDrop);
+			this.add(PLUM_BEEHIVE.get(), this::createBeeHiveDrop);
 			this.add(PLUM_CHEST.get(), this::createNameableBlockEntityTable);
 			this.add(TRAPPED_PLUM_CHEST.get(), this::createNameableBlockEntityTable);
 			this.add(PLUM_BOOKSHELF.get(), (block) -> createSingleItemTableWithSilkTouch(block, Items.BOOK, ConstantValue.exactly(3.0F)));
@@ -309,7 +328,7 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.add(PURPLE_WISTERIA_LEAF_PILE.get(), this::createLeafPileDrops);
 			this.add(WHITE_WISTERIA_LEAF_PILE.get(), this::createLeafPileDrops);
 
-			this.add(WISTERIA_LEAVES.get(), (block) -> createSilkTouchOrShearsDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Items.STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, DOUBLE_LEAVES_STICK_CHANCES))));
+			this.add(WISTERIA_LEAVES.get(), (block) -> createSilkTouchOrShearsDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(Items.STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))).when(BonusLevelTableCondition.bonusLevelFlatChance(enchantments.getOrThrow(Enchantments.FORTUNE), DOUBLE_LEAVES_STICK_CHANCES))));
 			this.add(WISTERIA_LEAF_PILE.get(), this::createLeafPileDrops);
 
 			this.dropSelf(PINK_WISTERIA_SAPLING.get());
@@ -325,7 +344,7 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.dropSelf(WISTERIA_LADDER.get());
 			this.add(WISTERIA_SLAB.get(), this::createSlabItemTable);
 			this.add(WISTERIA_DOOR.get(), this::createDoorTable);
-			this.add(WISTERIA_BEEHIVE.get(), BlockLootSubProvider::createBeeHiveDrop);
+			this.add(WISTERIA_BEEHIVE.get(), this::createBeeHiveDrop);
 			this.add(WISTERIA_CHEST.get(), this::createNameableBlockEntityTable);
 			this.add(TRAPPED_WISTERIA_CHEST.get(), this::createNameableBlockEntityTable);
 			this.add(WISTERIA_BOOKSHELF.get(), (block) -> createSingleItemTableWithSilkTouch(block, Items.BOOK, ConstantValue.exactly(3.0F)));
@@ -362,62 +381,64 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 		}
 
 		protected LootTable.Builder createPlumLeavesDrops(Block block, Block sapling, float... saplingChances) {
-			return createLeavesDrops(block, sapling, saplingChances).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(HAS_NO_SHEARS_OR_SILK_TOUCH).add(applyExplosionDecay(block, LootItem.lootTableItem(EnvironmentalItems.PLUM.get())).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, 0.05F, 0.055555557F, 0.0625F, 0.08333334F, 0.25F))));
+			RegistryLookup<Enchantment> enchantments = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
+			return createLeavesDrops(block, sapling, saplingChances).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(this.doesNotHaveShearsOrSilkTouch()).add(applyExplosionDecay(block, LootItem.lootTableItem(EnvironmentalItems.PLUM.get())).when(BonusLevelTableCondition.bonusLevelFlatChance(enchantments.getOrThrow(Enchantments.FORTUNE), 0.05F, 0.055555557F, 0.0625F, 0.08333334F, 0.25F))));
 		}
 
 		protected LootTable.Builder createWisteriaLeavesDrops(Block block, Block sapling, float... saplingChances) {
+			RegistryLookup<Enchantment> enchantments = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
 			LootItemCondition.Builder isBottom = LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BlockStateProperties.HALF, Half.BOTTOM));
 			LootItemCondition.Builder isTop = isBottom.invert();
 
-			LootPool.Builder coloredLeafPool = LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(isBottom).add(LootItem.lootTableItem(block).when(HAS_SHEARS_OR_SILK_TOUCH).otherwise(applyExplosionCondition(sapling, LootItem.lootTableItem(sapling)).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, saplingChances))));
-			LootPool.Builder greenLeafPool = LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(isTop).add(LootItem.lootTableItem(WISTERIA_LEAVES.get()).when(HAS_SHEARS_OR_SILK_TOUCH));
-			LootPool.Builder coloredStickPool = LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(isBottom).when(HAS_NO_SHEARS_OR_SILK_TOUCH).add(applyExplosionDecay(block, LootItem.lootTableItem(Items.STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, NORMAL_LEAVES_STICK_CHANCES)));
-			LootPool.Builder greenStickPool = LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(isTop).when(HAS_NO_SHEARS_OR_SILK_TOUCH).add(applyExplosionDecay(block, LootItem.lootTableItem(Items.STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))).when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, DOUBLE_LEAVES_STICK_CHANCES)));
+			LootPool.Builder coloredLeafPool = LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(isBottom).add(LootItem.lootTableItem(block).when(this.hasShearsOrSilkTouch()).otherwise(applyExplosionCondition(sapling, LootItem.lootTableItem(sapling)).when(BonusLevelTableCondition.bonusLevelFlatChance(enchantments.getOrThrow(Enchantments.FORTUNE), saplingChances))));
+			LootPool.Builder greenLeafPool = LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(isTop).add(LootItem.lootTableItem(WISTERIA_LEAVES.get()).when(this.hasShearsOrSilkTouch()));
+			LootPool.Builder coloredStickPool = LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(isBottom).when(this.doesNotHaveShearsOrSilkTouch()).add(applyExplosionDecay(block, LootItem.lootTableItem(Items.STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))).when(BonusLevelTableCondition.bonusLevelFlatChance(enchantments.getOrThrow(Enchantments.FORTUNE), NORMAL_LEAVES_STICK_CHANCES)));
+			LootPool.Builder greenStickPool = LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(isTop).when(this.doesNotHaveShearsOrSilkTouch()).add(applyExplosionDecay(block, LootItem.lootTableItem(Items.STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))).when(BonusLevelTableCondition.bonusLevelFlatChance(enchantments.getOrThrow(Enchantments.FORTUNE), DOUBLE_LEAVES_STICK_CHANCES)));
 
 			return LootTable.lootTable().withPool(coloredLeafPool).withPool(greenLeafPool).withPool(coloredStickPool).withPool(greenStickPool);
 		}
 
 		protected LootTable.Builder createLeafPileDrops(Block block) {
-			return createMultifaceBlockDrops(block, MatchTool.toolMatches(ItemPredicate.Builder.item().of(Tags.Items.SHEARS)));
+			return createMultifaceBlockDrops(block, HAS_SHEARS);
 		}
 
 		protected LootTable.Builder createDoublePlantWithOtherDrop(Block block, Block grass, Item drop, int count, float chance) {
-			LootPoolEntryContainer.Builder<?> builder = LootItem.lootTableItem(grass).apply(SetItemCountFunction.setCount(ConstantValue.exactly(count))).when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(Tags.Items.SHEARS))).otherwise(applyExplosionCondition(block, LootItem.lootTableItem(drop)).when(LootItemRandomChanceCondition.randomChance(chance)));
-			return LootTable.lootTable().withPool(LootPool.lootPool().add(builder).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER))).when(LocationCheck.checkLocation(LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER).build()).build()), new BlockPos(0, 1, 0)))).withPool(LootPool.lootPool().add(builder).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER))).when(LocationCheck.checkLocation(LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER).build()).build()), new BlockPos(0, -1, 0))));
+			LootPoolEntryContainer.Builder<?> builder = LootItem.lootTableItem(grass).apply(SetItemCountFunction.setCount(ConstantValue.exactly(count))).when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(Tags.Items.TOOLS_SHEAR))).otherwise(applyExplosionCondition(block, LootItem.lootTableItem(drop)).when(LootItemRandomChanceCondition.randomChance(chance)));
+			return LootTable.lootTable().withPool(LootPool.lootPool().add(builder).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER))).when(LocationCheck.checkLocation(LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER))), new BlockPos(0, 1, 0)))).withPool(LootPool.lootPool().add(builder).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER))).when(LocationCheck.checkLocation(LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER))), new BlockPos(0, -1, 0))));
 		}
 
 		@Override
 		public Iterable<Block> getKnownBlocks() {
-			return ForgeRegistries.BLOCKS.getValues().stream().filter(block -> ForgeRegistries.BLOCKS.getKey(block).getNamespace().equals(Environmental.MOD_ID)).collect(Collectors.toSet());
+			return BuiltInRegistries.BLOCK.stream().filter(block -> BuiltInRegistries.BLOCK.getKey(block).getNamespace().equals(Environmental.MOD_ID)).collect(Collectors.toSet());
 		}
 	}
 
 	private static class EnvironmentalEntityLoot extends EntityLootSubProvider {
 		private static final Set<EntityType<?>> SPECIAL_LOOT_TABLE_TYPES = ImmutableSet.of(PINECONE_GOLEM.get());
 
-		protected EnvironmentalEntityLoot() {
-			super(FeatureFlags.REGISTRY.allFlags());
+		protected EnvironmentalEntityLoot(Provider provider) {
+			super(FeatureFlags.REGISTRY.allFlags(), provider);
 		}
 
 		@Override
 		public void generate() {
-			this.add(DEER.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.LEATHER).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(EnvironmentalItems.VENISON.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))).apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))));
-			this.add(REINDEER.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.LEATHER).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(EnvironmentalItems.VENISON.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))).apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))));
-			this.add(DUCK.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.FEATHER).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(EnvironmentalItems.DUCK.get()).apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))));
+			this.add(DEER.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.LEATHER).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))).apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0.0F, 1.0F))))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(EnvironmentalItems.VENISON.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))).apply(SmeltItemFunction.smelted().when(this.shouldSmeltLoot())).apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0.0F, 1.0F))))));
+			this.add(REINDEER.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.LEATHER).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))).apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0.0F, 1.0F))))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(EnvironmentalItems.VENISON.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))).apply(SmeltItemFunction.smelted().when(this.shouldSmeltLoot())).apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0.0F, 1.0F))))));
+			this.add(DUCK.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.FEATHER).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))).apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0.0F, 1.0F))))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(EnvironmentalItems.DUCK.get()).apply(SmeltItemFunction.smelted().when(this.shouldSmeltLoot())).apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0.0F, 1.0F))))));
 			this.add(KOI.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(EnvironmentalItems.KOI.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.BONE_MEAL)).when(LootItemRandomChanceCondition.randomChance(0.05F))));
 			this.add(SLABFISH.get(), LootTable.lootTable());
 			this.add(TAPIR.get(), LootTable.lootTable());
-			this.add(YAK.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(EnvironmentalItems.YAK_HAIR.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 5.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(1.0F, 3.0F))))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.BEEF).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))).apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))));
-			this.add(ZEBRA.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.LEATHER).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))));
-			this.add(ZORSE.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.LEATHER).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))));
-			this.add(ZONKEY.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.LEATHER).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))));
+			this.add(YAK.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(EnvironmentalItems.YAK_HAIR.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 5.0F))).apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(1.0F, 3.0F))))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.BEEF).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))).apply(SmeltItemFunction.smelted().when(this.shouldSmeltLoot())).apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0.0F, 1.0F))))));
+			this.add(ZEBRA.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.LEATHER).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))).apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0.0F, 1.0F))))));
+			this.add(ZORSE.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.LEATHER).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))).apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0.0F, 1.0F))))));
+			this.add(ZONKEY.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.LEATHER).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))).apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0.0F, 1.0F))))));
 			this.add(PINECONE_GOLEM.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(PINE_SAPLING.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))))));
-			this.add(EntityType.WANDERING_TRADER, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(EnvironmentalItems.MUSIC_DISC_LEAVING_HOME.get())).when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.KILLER, EntityPredicate.Builder.entity().of(EntityTypeTags.SKELETONS)))));
+			this.add(EntityType.WANDERING_TRADER, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(EnvironmentalItems.MUSIC_DISC_LEAVING_HOME.get())).when(LootItemEntityPropertyCondition.hasProperties(EntityTarget.ATTACKER, EntityPredicate.Builder.entity().of(EntityTypeTags.SKELETONS)))));
 		}
 
 		@Override
 		public Stream<EntityType<?>> getKnownEntityTypes() {
-			return ForgeRegistries.ENTITY_TYPES.getValues().stream().filter(entity -> ForgeRegistries.ENTITY_TYPES.getKey(entity).getNamespace().equals(Environmental.MOD_ID) || entity == EntityType.WANDERING_TRADER);
+			return BuiltInRegistries.ENTITY_TYPE.stream().filter(entity -> BuiltInRegistries.ENTITY_TYPE.getKey(entity).getNamespace().equals(Environmental.MOD_ID) || entity == EntityType.WANDERING_TRADER);
 		}
 
 		@Override
@@ -426,11 +447,13 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 		}
 	}
 
-	private static class EnvironmentalChestLoot implements LootTableSubProvider {
+	private record EnvironmentalChestLoot(Provider registries) implements LootTableSubProvider {
 
 		@Override
-		public void generate(BiConsumer<ResourceLocation, Builder> consumer) {
-			consumer.accept(Environmental.location("chests/log_cabin_junk"), LootTable.lootTable()
+		public void generate(BiConsumer<ResourceKey<LootTable>, Builder> consumer) {
+			RegistryLookup<Enchantment> enchantments = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
+
+			consumer.accept(EnvironmentalLootTables.LOG_CABIN_JUNK, LootTable.lootTable()
 					.withPool(LootPool.lootPool().setRolls(UniformGenerator.between(4.0F, 6.0F))
 							.add(LootItem.lootTableItem(Items.STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 6.0F))))
 							.add(LootItem.lootTableItem(DWARF_SPRUCE.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
@@ -448,14 +471,14 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 					)
 			);
 
-			consumer.accept(Environmental.location("chests/log_cabin"), LootTable.lootTable()
+			consumer.accept(EnvironmentalLootTables.LOG_CABIN, LootTable.lootTable()
 					.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
-							.add(LootItem.lootTableItem(Items.STONE_AXE).setWeight(3).apply(EnchantRandomlyFunction.randomApplicableEnchantment()))
+							.add(LootItem.lootTableItem(Items.STONE_AXE).setWeight(3).apply(EnchantRandomlyFunction.randomApplicableEnchantment(this.registries)))
 							.add(LootItem.lootTableItem(Items.IRON_AXE))
 					)
 					.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
-							.add(LootItem.lootTableItem(Items.SHEARS).setWeight(2).apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.8F, 1.0F))).apply((new EnchantRandomlyFunction.Builder()).withEnchantment(Enchantments.UNBREAKING)))
-							.add(LootItem.lootTableItem(Items.SHEARS).apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.5F, 0.8F))).apply((new EnchantRandomlyFunction.Builder()).withEnchantment(Enchantments.UNBREAKING)).apply((new EnchantRandomlyFunction.Builder()).withEnchantment(Enchantments.BLOCK_EFFICIENCY)))
+							.add(LootItem.lootTableItem(Items.SHEARS).setWeight(2).apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.8F, 1.0F))).apply((new EnchantRandomlyFunction.Builder()).withEnchantment(enchantments.getOrThrow(Enchantments.UNBREAKING))))
+							.add(LootItem.lootTableItem(Items.SHEARS).apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.5F, 0.8F))).apply((new EnchantRandomlyFunction.Builder()).withEnchantment(enchantments.getOrThrow(Enchantments.UNBREAKING))).apply((new EnchantRandomlyFunction.Builder()).withEnchantment(enchantments.getOrThrow(Enchantments.EFFICIENCY))))
 					)
 					.withPool(LootPool.lootPool().setRolls(UniformGenerator.between(0.0F, 1.0F))
 							.add(LootItem.lootTableItem(Items.FLINT_AND_STEEL).apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.5F, 0.8F))))
@@ -481,15 +504,15 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 							.add(LootItem.lootTableItem(Items.LEATHER_CHESTPLATE).setWeight(3))
 							.add(LootItem.lootTableItem(Items.LEATHER_LEGGINGS).setWeight(3))
 							.add(LootItem.lootTableItem(Items.LEATHER_BOOTS).setWeight(3))
-							.add(LootItem.lootTableItem(Items.LEATHER_HELMET).apply(EnchantRandomlyFunction.randomApplicableEnchantment()))
-							.add(LootItem.lootTableItem(Items.LEATHER_CHESTPLATE).apply(EnchantRandomlyFunction.randomApplicableEnchantment()))
-							.add(LootItem.lootTableItem(Items.LEATHER_LEGGINGS).apply(EnchantRandomlyFunction.randomApplicableEnchantment()))
-							.add(LootItem.lootTableItem(Items.LEATHER_BOOTS).apply(EnchantRandomlyFunction.randomApplicableEnchantment())))
+							.add(LootItem.lootTableItem(Items.LEATHER_HELMET).apply(EnchantRandomlyFunction.randomApplicableEnchantment(this.registries)))
+							.add(LootItem.lootTableItem(Items.LEATHER_CHESTPLATE).apply(EnchantRandomlyFunction.randomApplicableEnchantment(this.registries)))
+							.add(LootItem.lootTableItem(Items.LEATHER_LEGGINGS).apply(EnchantRandomlyFunction.randomApplicableEnchantment(this.registries)))
+							.add(LootItem.lootTableItem(Items.LEATHER_BOOTS).apply(EnchantRandomlyFunction.randomApplicableEnchantment(this.registries))))
 			);
 
 
-			consumer.accept(Environmental.location("chests/log_cabin_dispenser"), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.CARVED_PUMPKIN))));
-			consumer.accept(Environmental.location("chests/log_cabin_dropper"), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(PINE_SAPLING.get()))));
+			consumer.accept(EnvironmentalLootTables.LOG_CABIN_DISPENSER, LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.CARVED_PUMPKIN))));
+			consumer.accept(EnvironmentalLootTables.LOG_CABIN_DROPPER, LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(PINE_SAPLING.get()))));
 		}
 	}
 }

@@ -9,20 +9,30 @@ import com.teamabnormals.environmental.common.slabfish.SlabfishType;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.data.server.EnvironmentalAdvancementProvider;
 import com.teamabnormals.environmental.core.other.EnvironmentalConstants;
-import com.teamabnormals.environmental.core.registry.*;
+import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
+import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
+import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
+import com.teamabnormals.environmental.core.registry.EnvironmentalMobEffects;
+import com.teamabnormals.environmental.core.registry.datapack.EnvironmentalBiomes;
 import com.teamabnormals.environmental.core.registry.slabfish.EnvironmentalSlabfishTypes;
-import net.minecraft.advancements.RequirementsStrategy;
+import net.minecraft.advancements.AdvancementRequirements.Strategy;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.core.HolderLookup.Provider;
+import net.minecraft.core.HolderLookup.RegistryLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.world.level.biome.Biome;
+import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class EnvironmentalAdvancementModifierProvider extends AdvancementModifierProvider {
@@ -34,34 +44,33 @@ public class EnvironmentalAdvancementModifierProvider extends AdvancementModifie
 
 	@Override
 	protected void registerEntries(Provider provider) {
-		this.entry("nether/all_effects").selects("nether/all_effects").addModifier(new EffectsChangedModifier("all_effects", false, MobEffectsPredicate.effects().and(MobEffects.HEALTH_BOOST).and(EnvironmentalMobEffects.SERENITY.get())));
-		this.entry("nether/all_potions").selects("nether/all_potions").addModifier(new EffectsChangedModifier("all_effects", false, MobEffectsPredicate.effects().and(MobEffects.HEALTH_BOOST)));
+		this.entry("nether/all_effects").selects("nether/all_effects").addModifier(new EffectsChangedModifier("all_effects", false, MobEffectsPredicate.Builder.effects().and(MobEffects.HEALTH_BOOST).and(EnvironmentalMobEffects.SERENITY).build().get()));
+		this.entry("nether/all_potions").selects("nether/all_potions").addModifier(new EffectsChangedModifier("all_effects", false, MobEffectsPredicate.Builder.effects().and(MobEffects.HEALTH_BOOST).build().get()));
 
 		CriteriaModifier.Builder balancedDiet = CriteriaModifier.builder(this.modId);
-		EnvironmentalItems.HELPER.getDeferredRegister().getEntries().forEach(registryObject -> {
-			Item item = registryObject.get();
-			if (item.isEdible()) {
-				balancedDiet.addCriterion(ForgeRegistries.ITEMS.getKey(item).getPath(), ConsumeItemTrigger.TriggerInstance.usedItem(item));
-			}
+		Collection<DeferredHolder<Item, ? extends Item>> items = EnvironmentalItems.ITEMS.getDeferredRegister().getEntries().stream().filter(i -> i.get().getDefaultInstance().getFoodProperties(null) != null).toList();
+		items.forEach(item -> {
+			balancedDiet.addCriterion(BuiltInRegistries.ITEM.getKey(item.get()).getPath(), ConsumeItemTrigger.TriggerInstance.usedItem(item.get()));
 		});
-		this.entry("husbandry/balanced_diet").selects("husbandry/balanced_diet").addModifier(balancedDiet.requirements(RequirementsStrategy.AND).build());
+		this.entry("husbandry/balanced_diet").selects("husbandry/balanced_diet").addModifier(balancedDiet.requirements(Strategy.AND).build());
 
 		CriteriaModifier.Builder breedAllAnimals = CriteriaModifier.builder(this.modId);
 		for (EntityType<?> entityType : BREEDABLE_ANIMALS) {
-			breedAllAnimals.addCriterion(ForgeRegistries.ENTITY_TYPES.getKey(entityType).getPath(), BredAnimalsTrigger.TriggerInstance.bredAnimals(EntityPredicate.Builder.entity().of(entityType)));
+			breedAllAnimals.addCriterion(BuiltInRegistries.ENTITY_TYPE.getKey(entityType).getPath(), BredAnimalsTrigger.TriggerInstance.bredAnimals(EntityPredicate.Builder.entity().of(entityType)));
 		}
-		this.entry("husbandry/bred_all_animals").selects("husbandry/bred_all_animals").addModifier(breedAllAnimals.requirements(RequirementsStrategy.AND).build());
+		this.entry("husbandry/bred_all_animals").selects("husbandry/bred_all_animals").addModifier(breedAllAnimals.requirements(Strategy.AND).build());
 
 		CriteriaModifier.Builder adventuringTime = CriteriaModifier.builder(this.modId);
+		RegistryLookup<Biome> biomes = provider.lookupOrThrow(Registries.BIOME);
 		EnvironmentalBiomes.NATURAL_BIOMES.forEach(biome -> {
-			adventuringTime.addCriterion(biome.location().toString(), PlayerTrigger.TriggerInstance.located(LocationPredicate.inBiome(biome)));
+			adventuringTime.addCriterion(biome.location().toString(), PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(biome))));
 		});
-		this.entry("adventure/adventuring_time").selects("adventure/adventuring_time").addModifier(adventuringTime.requirements(RequirementsStrategy.AND).build());
+		this.entry("adventure/adventuring_time").selects("adventure/adventuring_time").addModifier(adventuringTime.requirements(Strategy.AND).build());
 
-		this.entry("husbandry/fishy_business").selects("husbandry/fishy_business").addModifier(CriteriaModifier.builder(this.modId).addCriterion("koi", FishingRodHookedTrigger.TriggerInstance.fishedItem(ItemPredicate.ANY, EntityPredicate.ANY, ItemPredicate.Builder.item().of(EnvironmentalItems.KOI.get()).build())).addIndexedRequirements(0, false, "koi").build());
+		this.entry("husbandry/fishy_business").selects("husbandry/fishy_business").addModifier(CriteriaModifier.builder(this.modId).addCriterion("koi", FishingRodHookedTrigger.TriggerInstance.fishedItem(Optional.empty(), Optional.empty(), Optional.of(ItemPredicate.Builder.item().of(EnvironmentalItems.KOI.get()).build()))).addIndexedRequirements(0, false, "koi").build());
 		this.entry("husbandry/tactical_fishing").selects("husbandry/tactical_fishing").addModifier(CriteriaModifier.builder(this.modId)
-				.addCriterion("koi_bucket", FilledBucketTrigger.TriggerInstance.filledBucket(ItemPredicate.Builder.item().of(EnvironmentalItems.KOI_BUCKET.get()).build()))
-				.addCriterion("slabfish_bucket", FilledBucketTrigger.TriggerInstance.filledBucket(ItemPredicate.Builder.item().of(EnvironmentalItems.SLABFISH_BUCKET.get()).build()))
+				.addCriterion("koi_bucket", FilledBucketTrigger.TriggerInstance.filledBucket(ItemPredicate.Builder.item().of(EnvironmentalItems.KOI_BUCKET.get())))
+				.addCriterion("slabfish_bucket", FilledBucketTrigger.TriggerInstance.filledBucket(ItemPredicate.Builder.item().of(EnvironmentalItems.SLABFISH_BUCKET.get())))
 				.addIndexedRequirements(0, false, "koi_bucket", "slabfish_bucket").build());
 
 		this.entry("husbandry/plant_seed").selects("husbandry/plant_seed").addModifier(CriteriaModifier.builder(this.modId)
@@ -79,6 +88,6 @@ public class EnvironmentalAdvancementModifierProvider extends AdvancementModifie
 		slabfishTypes.forEach(slabfish -> {
 			tameAllSlabfish.addCriterion(slabfish.location().getPath(), EnvironmentalAdvancementProvider.slabfishCriterion(slabfish));
 		});
-		this.entry("husbandry/tame_all_slabfish_" + modid).selector(selector).addModifier(tameAllSlabfish.requirements(RequirementsStrategy.AND).build());
+		this.entry("husbandry/tame_all_slabfish_" + modid).selector(selector).addModifier(tameAllSlabfish.requirements(Strategy.AND).build());
 	}
 }

@@ -1,5 +1,6 @@
 package com.teamabnormals.environmental.common.block;
 
+import com.mojang.serialization.MapCodec;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -29,6 +30,11 @@ public class CupLichenBlock extends BushBlock implements BonemealableBlock {
 	}
 
 	@Override
+	protected MapCodec<? extends BushBlock> codec() {
+		return null;
+	}
+
+	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		return SHAPE;
 	}
@@ -39,7 +45,7 @@ public class CupLichenBlock extends BushBlock implements BonemealableBlock {
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(LevelReader blockGetter, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(LevelReader blockGetter, BlockPos pos, BlockState state) {
 		return state.getValue(CUPS) < 4;
 	}
 

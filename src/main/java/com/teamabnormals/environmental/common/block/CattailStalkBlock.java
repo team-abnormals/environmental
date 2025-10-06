@@ -1,5 +1,6 @@
 package com.teamabnormals.environmental.common.block;
 
+import com.mojang.serialization.MapCodec;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalBlockTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.core.BlockPos;
@@ -43,6 +44,11 @@ public class CattailStalkBlock extends BushBlock implements SimpleWaterloggedBlo
 	}
 
 	@Override
+	protected MapCodec<? extends BushBlock> codec() {
+		return null;
+	}
+
+	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		Vec3 vec3 = state.getOffset(level, pos);
 		return SHAPE.move(vec3.x, vec3.y, vec3.z);
@@ -76,12 +82,12 @@ public class CattailStalkBlock extends BushBlock implements SimpleWaterloggedBlo
 	}
 
 	@Override
-	public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
+	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
 		return new ItemStack(this.getHeadBlock());
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
 		Optional<BlockPos> optional = this.getHeadPos(level, pos, state.getBlock());
 		return optional.isPresent() && this.getHeadBlock().canGrowInto(level.getBlockState(optional.get().above()));
 	}

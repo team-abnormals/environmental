@@ -9,13 +9,14 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraftforge.client.model.generators.BlockModelBuilder;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraftforge.client.model.generators.ModelFile;
-import net.minecraftforge.client.model.generators.ModelFile.UncheckedModelFile;
-import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
+import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.client.model.generators.ModelFile.UncheckedModelFile;
+import net.neoforged.neoforge.client.model.generators.MultiPartBlockStateBuilder;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.registries.DeferredBlock;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import static com.teamabnormals.environmental.core.registry.EnvironmentalBlocks.*;
 
@@ -104,21 +105,21 @@ public class EnvironmentalBlockStateProvider extends BlueprintBlockStateProvider
 	}
 
 	@Override
-	public void leavesBlock(RegistryObject<Block> leaves) {
-		this.simpleBlock(leaves.get(), models().getBuilder(name(leaves.get())).parent(new UncheckedModelFile(new ResourceLocation("block/leaves"))).texture("all", blockTexture(leaves.get())));
+	public void leavesBlock(DeferredHolder<Block, ?> leaves) {
+		this.simpleBlock(leaves.get(), models().getBuilder(name(leaves.get())).parent(new UncheckedModelFile(ResourceLocation.withDefaultNamespace("block/leaves"))).texture("all", blockTexture(leaves.get())));
 		this.blockItem(leaves);
 	}
 
-	public void cubeColumnBlock(RegistryObject<Block> block) {
+	public void cubeColumnBlock(DeferredBlock<Block> block) {
 		this.cubeColumnBlock(block, block);
 	}
 
-	public void cubeColumnBlock(RegistryObject<Block> block, RegistryObject<Block> parent) {
+	public void cubeColumnBlock(DeferredBlock<Block> block, DeferredBlock<Block> parent) {
 		this.simpleBlock(block.get(), this.models().cubeColumn(name(block.get()), suffix(blockTexture(parent.get()), "_side"), suffix(blockTexture(parent.get()), "_end")));
 		this.blockItem(block);
 	}
 
-	public void cattail(RegistryObject<Block> cattailSproutObject, RegistryObject<Block> cattailObject, RegistryObject<Block> cattailStalkObject) {
+	public void cattail(DeferredBlock<Block> cattailSproutObject, DeferredBlock<Block> cattailObject, DeferredBlock<Block> cattailStalkObject) {
 		Block cattailSprout = cattailSproutObject.get();
 		Block cattail = cattailObject.get();
 		Block cattailStalk = cattailStalkObject.get();
@@ -163,7 +164,7 @@ public class EnvironmentalBlockStateProvider extends BlueprintBlockStateProvider
 		return this.models().getBuilder(name + (top ? "_top" : "") + stalkSuffix).parent(cattailParent).texture("cattail", texture);
 	}
 
-	public void cactusBobble(RegistryObject<Block> cactusBobble) {
+	public void cactusBobble(DeferredBlock<Block> cactusBobble) {
 		this.simpleBlock(cactusBobble.get(), models().getBuilder(name(cactusBobble.get())).parent(new UncheckedModelFile(Environmental.location("block/template_cactus_bobble"))).texture("all", blockTexture(cactusBobble.get())));
 	}
 }

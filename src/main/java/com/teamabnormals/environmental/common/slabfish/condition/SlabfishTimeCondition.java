@@ -1,6 +1,7 @@
 package com.teamabnormals.environmental.common.slabfish.condition;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamabnormals.environmental.common.slabfish.SlabfishConditionType;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSlabfishConditions;
@@ -10,20 +11,10 @@ import com.teamabnormals.environmental.core.registry.EnvironmentalSlabfishCondit
  *
  * @author Ocelot
  */
-public class SlabfishTimeCondition implements SlabfishCondition {
-	public static final Codec<SlabfishTimeCondition> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-			SlabfishConditionContext.Time.CODEC.fieldOf("time").forGetter(SlabfishTimeCondition::getTime)
+public record SlabfishTimeCondition(SlabfishConditionContext.Time time) implements SlabfishCondition {
+	public static final MapCodec<SlabfishTimeCondition> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+			SlabfishConditionContext.Time.CODEC.fieldOf("time").forGetter(SlabfishTimeCondition::time)
 	).apply(instance, SlabfishTimeCondition::new));
-
-	private final SlabfishConditionContext.Time time;
-
-	public SlabfishTimeCondition(SlabfishConditionContext.Time time) {
-		this.time = time;
-	}
-
-	public SlabfishConditionContext.Time getTime() {
-		return time;
-	}
 
 	@Override
 	public boolean test(SlabfishConditionContext context) {

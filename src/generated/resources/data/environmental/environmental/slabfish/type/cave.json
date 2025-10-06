@@ -9,17 +9,13 @@
     },
     {
       "type": "environmental:height",
-      "value": {
-        "max": 48,
-        "min": 0
-      }
+      "max": 48,
+      "min": 0
     },
     {
       "type": "environmental:light_level",
-      "value": {
-        "light_type": "sky",
-        "value": 0
-      }
+      "light_type": "sky",
+      "value": 0
     },
     {
       "type": "environmental:dimension",

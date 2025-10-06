@@ -18,45 +18,45 @@ import com.teamabnormals.environmental.common.entity.projectile.ThrownMudBall;
 import com.teamabnormals.environmental.core.Environmental;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
-import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
-import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent.Operation;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent.Operation;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 @EventBusSubscriber(modid = Environmental.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class EnvironmentalEntityTypes {
-	public static final EntitySubRegistryHelper HELPER = Environmental.REGISTRY_HELPER.getEntitySubHelper();
+	public static final EntitySubRegistryHelper ENTITY_TYPES = Environmental.REGISTRY_HELPER.getEntitySubHelper();
 
-	public static final RegistryObject<EntityType<Slabfish>> SLABFISH = HELPER.createLivingEntity("slabfish", Slabfish::new, MobCategory.CREATURE, 0.45F, 0.9F);
-	public static final RegistryObject<EntityType<Duck>> DUCK = HELPER.createLivingEntity("duck", Duck::new, MobCategory.CREATURE, 0.5F, 0.75F);
-	public static final RegistryObject<EntityType<Deer>> DEER = HELPER.createLivingEntity("deer", Deer::new, MobCategory.CREATURE, 0.8F, 1.6F);
-	public static final RegistryObject<EntityType<Reindeer>> REINDEER = HELPER.createLivingEntity("reindeer", Reindeer::new, MobCategory.CREATURE, 0.8F, 1.6F);
-	public static final RegistryObject<EntityType<Yak>> YAK = HELPER.createLivingEntity("yak", Yak::new, MobCategory.CREATURE, 1.2F, 1.4F);
-	public static final RegistryObject<EntityType<Koi>> KOI = HELPER.createLivingEntity("koi", Koi::new, MobCategory.WATER_AMBIENT, 0.75F, 0.4F);
-	public static final RegistryObject<EntityType<Tapir>> TAPIR = HELPER.createLivingEntity("tapir", Tapir::new, MobCategory.CREATURE, 0.9F, 0.98F);
-	public static final RegistryObject<EntityType<Zebra>> ZEBRA = HELPER.createLivingEntity("zebra", Zebra::new, MobCategory.CREATURE, 1.3964844F, 1.5F);
-	public static final RegistryObject<EntityType<Zorse>> ZORSE = HELPER.createLivingEntity("zorse", Zorse::new, MobCategory.CREATURE, 1.3964844F, 1.6F);
-	public static final RegistryObject<EntityType<Zonkey>> ZONKEY = HELPER.createLivingEntity("zonkey", Zonkey::new, MobCategory.CREATURE, 1.3964844F, 1.5F);
-	public static final RegistryObject<EntityType<PineconeGolem>> PINECONE_GOLEM = HELPER.createLivingEntity("pinecone_golem", PineconeGolem::new, MobCategory.MISC, 0.65F, 0.65F);
+	public static final DeferredHolder<EntityType<?>, EntityType<Slabfish>> SLABFISH = ENTITY_TYPES.createEntity("slabfish", Slabfish::new, MobCategory.CREATURE, 0.45F, 0.9F);
+	public static final DeferredHolder<EntityType<?>, EntityType<Duck>> DUCK = ENTITY_TYPES.createEntity("duck", Duck::new, MobCategory.CREATURE, 0.5F, 0.75F);
+	public static final DeferredHolder<EntityType<?>, EntityType<Deer>> DEER = ENTITY_TYPES.createEntity("deer", Deer::new, MobCategory.CREATURE, 0.8F, 1.6F);
+	public static final DeferredHolder<EntityType<?>, EntityType<Reindeer>> REINDEER = ENTITY_TYPES.createEntity("reindeer", Reindeer::new, MobCategory.CREATURE, 0.8F, 1.6F);
+	public static final DeferredHolder<EntityType<?>, EntityType<Yak>> YAK = ENTITY_TYPES.createEntity("yak", Yak::new, MobCategory.CREATURE, 1.2F, 1.4F);
+	public static final DeferredHolder<EntityType<?>, EntityType<Koi>> KOI = ENTITY_TYPES.createEntity("koi", Koi::new, MobCategory.WATER_AMBIENT, 0.75F, 0.4F);
+	public static final DeferredHolder<EntityType<?>, EntityType<Tapir>> TAPIR = ENTITY_TYPES.createEntity("tapir", Tapir::new, MobCategory.CREATURE, 0.9F, 0.98F);
+	public static final DeferredHolder<EntityType<?>, EntityType<Zebra>> ZEBRA = ENTITY_TYPES.createEntity("zebra", Zebra::new, MobCategory.CREATURE, 1.3964844F, 1.5F);
+	public static final DeferredHolder<EntityType<?>, EntityType<Zorse>> ZORSE = ENTITY_TYPES.createEntity("zorse", Zorse::new, MobCategory.CREATURE, 1.3964844F, 1.6F);
+	public static final DeferredHolder<EntityType<?>, EntityType<Zonkey>> ZONKEY = ENTITY_TYPES.createEntity("zonkey", Zonkey::new, MobCategory.CREATURE, 1.3964844F, 1.5F);
+	public static final DeferredHolder<EntityType<?>, EntityType<PineconeGolem>> PINECONE_GOLEM = ENTITY_TYPES.createEntity("pinecone_golem", PineconeGolem::new, MobCategory.MISC, 0.65F, 0.65F);
 
-	public static final RegistryObject<EntityType<ThrownDuckEgg>> DUCK_EGG = HELPER.createEntity("duck_egg", ThrownDuckEgg::new, ThrownDuckEgg::new, MobCategory.MISC, 0.25F, 0.25F);
-	public static final RegistryObject<EntityType<ThrownMudBall>> MUD_BALL = HELPER.createEntity("mud_ball", ThrownMudBall::new, ThrownMudBall::new, MobCategory.MISC, 0.25F, 0.25F);
+	public static final DeferredHolder<EntityType<?>, EntityType<ThrownDuckEgg>> DUCK_EGG = ENTITY_TYPES.createEntity("duck_egg", ThrownDuckEgg::new, MobCategory.MISC, 0.25F, 0.25F);
+	public static final DeferredHolder<EntityType<?>, EntityType<ThrownMudBall>> MUD_BALL = ENTITY_TYPES.createEntity("mud_ball", ThrownMudBall::new, MobCategory.MISC, 0.25F, 0.25F);
 
 	@SubscribeEvent
-	public static void registerSpawnPlacements(SpawnPlacementRegisterEvent event) {
-		event.register(SLABFISH.get(), SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Duck::checkDuckSpawnRules, Operation.AND);
-		event.register(YAK.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, Operation.AND);
-		event.register(DUCK.get(), SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Duck::checkDuckSpawnRules, Operation.AND);
-		event.register(DEER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AbstractDeer::checkDeerSpawnRules, Operation.AND);
-		event.register(REINDEER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AbstractDeer::checkDeerSpawnRules, Operation.AND);
-		event.register(KOI.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Koi::canKoiSpawn, Operation.AND);
-		event.register(TAPIR.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, Operation.AND);
-		event.register(ZEBRA.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, Operation.AND);
+	public static void registerSpawnPlacements(RegisterSpawnPlacementsEvent event) {
+		event.register(SLABFISH.get(), SpawnPlacementTypes.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Duck::checkDuckSpawnRules, Operation.AND);
+		event.register(YAK.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, Operation.AND);
+		event.register(DUCK.get(), SpawnPlacementTypes.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Duck::checkDuckSpawnRules, Operation.AND);
+		event.register(DEER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AbstractDeer::checkDeerSpawnRules, Operation.AND);
+		event.register(REINDEER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AbstractDeer::checkDeerSpawnRules, Operation.AND);
+		event.register(KOI.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Koi::canKoiSpawn, Operation.AND);
+		event.register(TAPIR.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, Operation.AND);
+		event.register(ZEBRA.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, Operation.AND);
 	}
 
 	@SubscribeEvent

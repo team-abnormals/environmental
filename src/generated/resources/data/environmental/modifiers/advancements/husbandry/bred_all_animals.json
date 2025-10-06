@@ -103,6 +103,7 @@
             "trigger": "minecraft:bred_animals"
           }
         },
+        "indexed_requirements": [],
         "requirements": [
           [
             "environmental:slabfish"

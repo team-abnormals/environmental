@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "mud_ball",
+  "ingredients": [
+    {
+      "item": "minecraft:mud"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "id": "environmental:mud_ball"
+  }
+}

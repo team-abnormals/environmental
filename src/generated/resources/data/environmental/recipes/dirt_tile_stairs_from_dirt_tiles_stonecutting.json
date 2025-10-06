@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 1,
-  "ingredient": {
-    "item": "environmental:dirt_tiles"
-  },
-  "result": "environmental:dirt_tile_stairs"
-}

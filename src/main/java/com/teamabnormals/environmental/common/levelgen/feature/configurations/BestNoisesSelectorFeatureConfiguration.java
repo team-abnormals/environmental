@@ -58,6 +58,6 @@ public class BestNoisesSelectorFeatureConfiguration implements FeatureConfigurat
 
 	@Override
 	public Stream<ConfiguredFeature<?, ?>> getFeatures() {
-		return this.features.stream().flatMap(holder -> holder.get().getFeatures());
+		return this.features.stream().flatMap(holder -> holder.value().getFeatures());
 	}
 }

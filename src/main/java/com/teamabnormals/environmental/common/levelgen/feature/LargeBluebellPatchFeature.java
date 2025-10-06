@@ -39,7 +39,7 @@ public class LargeBluebellPatchFeature extends Feature<NoneFeatureConfiguration>
 				if (random.nextInt(10) > 0 && mutable.distSqr(origin) < 324.0D && (d0 > 0.5D || (d0 > 0.05D && random.nextInt(4) == 0))) {
 					BlockState blockstate = EnvironmentalBlocks.BLUEBELL.get().defaultBlockState();
 					if (random.nextInt(6) == 0)
-						blockstate = random.nextInt(3) > 0 ? Blocks.GRASS.defaultBlockState() : Blocks.FERN.defaultBlockState();
+						blockstate = random.nextInt(3) > 0 ? Blocks.SHORT_GRASS.defaultBlockState() : Blocks.FERN.defaultBlockState();
 
 					if (level.isEmptyBlock(mutable) && blockstate.canSurvive(level, mutable)) {
 						level.setBlock(mutable, blockstate, 2);

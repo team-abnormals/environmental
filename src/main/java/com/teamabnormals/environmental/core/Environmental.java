@@ -2,104 +2,87 @@ package com.teamabnormals.environmental.core;
 
 import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
 import com.teamabnormals.environmental.client.resources.SlabfishSpriteUploader;
-import com.teamabnormals.environmental.common.network.message.C2SZebraJumpMessage;
-import com.teamabnormals.environmental.common.network.message.SOpenSlabfishInventoryMessage;
+import com.teamabnormals.environmental.common.network.message.OpenSlabfishInventoryPayload;
+import com.teamabnormals.environmental.common.network.message.ZebraJumpPayload;
 import com.teamabnormals.environmental.core.data.client.EnvironmentalBlockStateProvider;
 import com.teamabnormals.environmental.core.data.client.EnvironmentalItemModelProvider;
 import com.teamabnormals.environmental.core.data.client.EnvironmentalSpriteSourceProvider;
 import com.teamabnormals.environmental.core.data.server.EnvironmentalAdvancementProvider;
-import com.teamabnormals.environmental.core.data.server.EnvironmentalDatapackBuiltinEntriesProvider;
+import com.teamabnormals.environmental.core.data.server.EnvironmentalDatapackProvider;
 import com.teamabnormals.environmental.core.data.server.EnvironmentalLootTableProvider;
 import com.teamabnormals.environmental.core.data.server.EnvironmentalRecipeProvider;
 import com.teamabnormals.environmental.core.data.server.modifiers.EnvironmentalAdvancementModifierProvider;
 import com.teamabnormals.environmental.core.data.server.modifiers.EnvironmentalChunkGeneratorModifierProvider;
-import com.teamabnormals.environmental.core.data.server.modifiers.EnvironmentalLootModifierProvider;
 import com.teamabnormals.environmental.core.data.server.tags.*;
-import com.teamabnormals.environmental.core.other.EnvironmentalClientCompat;
-import com.teamabnormals.environmental.core.other.EnvironmentalCompat;
-import com.teamabnormals.environmental.core.other.EnvironmentalDataProcessors;
-import com.teamabnormals.environmental.core.other.EnvironmentalDataSerializers;
+import com.teamabnormals.environmental.core.other.*;
 import com.teamabnormals.environmental.core.registry.*;
-import com.teamabnormals.gallery.core.data.client.GalleryAssetsRemolderProvider;
 import com.teamabnormals.gallery.core.data.client.GalleryItemModelProvider;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.config.ModConfig.Type;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.network.NetworkDirection;
-import net.minecraftforge.network.NetworkRegistry;
-import net.minecraftforge.network.simple.SimpleChannel;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig.Type;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.fml.loading.FMLEnvironment;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.items.wrapper.InvWrapper;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 @Mod(Environmental.MOD_ID)
-@EventBusSubscriber(modid = Environmental.MOD_ID)
 public class Environmental {
 	public static final String MOD_ID = "environmental";
-	public static final String NETWORK_PROTOCOL = "ENV1";
 	public static final RegistryHelper REGISTRY_HELPER = new RegistryHelper(MOD_ID);
 
-	public static final SimpleChannel CHANNEL = NetworkRegistry.ChannelBuilder.named(new ResourceLocation(MOD_ID, "play")).networkProtocolVersion(() -> NETWORK_PROTOCOL).clientAcceptedVersions(NETWORK_PROTOCOL::equals).serverAcceptedVersions(NETWORK_PROTOCOL::equals).simpleChannel();
-
-	public Environmental() {
-		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-		ModLoadingContext context = ModLoadingContext.get();
-
-		this.setupPlayMessages();
+	public Environmental(IEventBus bus, ModContainer container) {
 		EnvironmentalDataProcessors.registerTrackedData();
 
-		REGISTRY_HELPER.register(bus);
-		EnvironmentalPaintingVariants.PAINTING_VARIANTS.register(bus);
+		EnvironmentalBlocks.BLOCKS.register(bus);
+		EnvironmentalItems.ITEMS.register(bus);
+		EnvironmentalEntityTypes.ENTITY_TYPES.register(bus);
+		EnvironmentalSoundEvents.SOUND_EVENTS.register(bus);
 		EnvironmentalFeatures.FEATURES.register(bus);
 		EnvironmentalFeatures.TREE_DECORATORS.register(bus);
-		EnvironmentalAttributes.ATTRIBUTES.register(bus);
 		EnvironmentalMobEffects.MOB_EFFECTS.register(bus);
-		EnvironmentalMenuTypes.MENU_TYPES.register(bus);
+		EnvironmentalMenuTypes.MENUS.register(bus);
 		EnvironmentalParticleTypes.PARTICLE_TYPES.register(bus);
 		EnvironmentalSlabfishConditions.SLABFISH_CONDITIONS.register(bus);
 		EnvironmentalDataSerializers.DATA_SERIALIZERS.register(bus);
 		EnvironmentalPlacementModifierTypes.PLACEMENT_MODIFIER_TYPES.register(bus);
 		EnvironmentalBiomeModifierTypes.BIOME_MODIFIER_SERIALIZERS.register(bus);
-		EnvironmentalBannerPatterns.BANNER_PATTERNS.register(bus);
 		EnvironmentalMemoryModuleTypes.MEMORY_MODULE_TYPES.register(bus);
 		EnvironmentalSensorTypes.SENSOR_TYPES.register(bus);
+		EnvironmentalCriteriaTriggers.TRIGGERS.register(bus);
 
-		MinecraftForge.EVENT_BUS.register(this);
-
+		bus.addListener(this::registerCapabilities);
+		bus.addListener(this::registerPayloadHandlers);
 		bus.addListener(EnvironmentalRegistries::registerRegistries);
 
 		bus.addListener(this::commonSetup);
 		bus.addListener(this::clientSetup);
 		bus.addListener(this::dataSetup);
 
-		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
-			EnvironmentalItems.setupTabEditors();
-			EnvironmentalBlocks.setupTabEditors();
+		if (FMLEnvironment.dist == Dist.CLIENT) {
 			SlabfishSpriteUploader.init(bus);
-		});
+		}
 
-		context.registerConfig(Type.COMMON, EnvironmentalConfig.COMMON_SPEC);
-		context.registerConfig(Type.CLIENT, EnvironmentalConfig.CLIENT_SPEC);
+		container.registerConfig(Type.COMMON, EnvironmentalConfig.COMMON_SPEC);
+		container.registerConfig(Type.CLIENT, EnvironmentalConfig.CLIENT_SPEC);
 	}
 
 	private void commonSetup(FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
 			EnvironmentalCompat.register();
-			EnvironmentalVillagers.registerVillagerTypes();
 		});
 	}
 
@@ -115,7 +98,7 @@ public class Environmental {
 
 		boolean server = event.includeServer();
 
-		EnvironmentalDatapackBuiltinEntriesProvider datapackEntries = new EnvironmentalDatapackBuiltinEntriesProvider(output, provider);
+		EnvironmentalDatapackProvider datapackEntries = new EnvironmentalDatapackProvider(output, provider);
 		generator.addProvider(server, datapackEntries);
 		provider = datapackEntries.getRegistryProvider();
 
@@ -127,28 +110,32 @@ public class Environmental {
 		generator.addProvider(server, new EnvironmentalBannerPatternTagsProvider(output, provider, helper));
 		generator.addProvider(server, new EnvironmentalPaintingVariantTagsProvider(output, provider, helper));
 		generator.addProvider(server, new EnvironmentalSlabfishTypeTagsProvider(output, provider, helper));
-		generator.addProvider(server, new EnvironmentalRecipeProvider(output));
+		generator.addProvider(server, new EnvironmentalRecipeProvider(output, provider));
 		generator.addProvider(server, EnvironmentalAdvancementProvider.create(output, provider, helper));
 		generator.addProvider(server, new EnvironmentalAdvancementModifierProvider(output, provider));
 		generator.addProvider(server, new EnvironmentalChunkGeneratorModifierProvider(output, provider));
-		generator.addProvider(server, new EnvironmentalLootTableProvider(output));
-		generator.addProvider(server, new EnvironmentalLootModifierProvider(output, provider));
+		generator.addProvider(server, new EnvironmentalLootTableProvider(output, provider));
+		// generator.addProvider(server, new EnvironmentalLootModifierProvider(output, provider));
 
 		boolean client = event.includeClient();
 		generator.addProvider(client, new EnvironmentalItemModelProvider(output, helper));
 		generator.addProvider(client, new EnvironmentalBlockStateProvider(output, helper));
-		generator.addProvider(client, new EnvironmentalSpriteSourceProvider(output, helper));
+		generator.addProvider(client, new EnvironmentalSpriteSourceProvider(output, provider, helper));
 
-		generator.addProvider(client, new GalleryItemModelProvider(MOD_ID, output, helper));
-		generator.addProvider(client, new GalleryAssetsRemolderProvider(MOD_ID, output, provider));
+		generator.addProvider(client, new GalleryItemModelProvider(MOD_ID, output, helper, provider));
 	}
 
-	private void setupPlayMessages() {
-		CHANNEL.registerMessage(3, SOpenSlabfishInventoryMessage.class, SOpenSlabfishInventoryMessage::serialize, SOpenSlabfishInventoryMessage::deserialize, SOpenSlabfishInventoryMessage::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
-		CHANNEL.registerMessage(4, C2SZebraJumpMessage.class, C2SZebraJumpMessage::serialize, C2SZebraJumpMessage::deserialize, C2SZebraJumpMessage::handle);
+	private void registerPayloadHandlers(RegisterPayloadHandlersEvent event) {
+		PayloadRegistrar registrar = event.registrar("1");
+		registrar.playToServer(ZebraJumpPayload.TYPE, ZebraJumpPayload.STREAM_CODEC, ZebraJumpPayload::handle);
+		registrar.playToClient(OpenSlabfishInventoryPayload.TYPE, OpenSlabfishInventoryPayload.STREAM_CODEC, OpenSlabfishInventoryPayload::handle);
+	}
+
+	private void registerCapabilities(RegisterCapabilitiesEvent event) {
+		event.registerEntity(Capabilities.ItemHandler.ENTITY, EnvironmentalEntityTypes.SLABFISH.get(), (entity, ctx) -> new InvWrapper(entity.slabfishBackpack));
 	}
 
 	public static ResourceLocation location(String path) {
-		return new ResourceLocation(MOD_ID, path);
+		return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
 	}
 }

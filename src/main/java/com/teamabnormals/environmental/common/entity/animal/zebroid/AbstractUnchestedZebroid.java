@@ -75,10 +75,10 @@ public abstract class AbstractUnchestedZebroid extends AbstractHorse implements 
 	}
 
 	@Override
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		this.entityData.define(KICK_TIME, 0);
-		this.entityData.define(ANGRY_AT, Optional.empty());
+	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+		super.defineSynchedData(builder);
+		builder.define(KICK_TIME, 0);
+		builder.define(ANGRY_AT, Optional.empty());
 	}
 
 	@Override

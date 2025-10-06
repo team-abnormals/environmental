@@ -1,6 +1,7 @@
 package com.teamabnormals.environmental.common.levelgen.treedecorators;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures;
 import net.minecraft.core.BlockPos;
@@ -13,7 +14,7 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorTy
 import java.util.List;
 
 public class PineconeDecorator extends TreeDecorator {
-	public static final Codec<PineconeDecorator> CODEC = Codec.floatRange(0.0F, 1.0F).fieldOf("probability").xmap(PineconeDecorator::new, (decorator) -> decorator.probability).codec();
+	public static final MapCodec<PineconeDecorator> CODEC = Codec.floatRange(0.0F, 1.0F).fieldOf("probability").xmap(PineconeDecorator::new, (decorator) -> decorator.probability);
 	private final float probability;
 
 	public PineconeDecorator(float probability) {

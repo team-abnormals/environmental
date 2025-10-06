@@ -27,7 +27,7 @@ public class SlabbyGrabItemGoal extends Goal implements ContainerListener {
 	private boolean canPickupItem(Container inventory, ItemStack stack) {
 		for (int i = 3; i < inventory.getContainerSize(); i++) {
 			ItemStack stackInSlot = inventory.getItem(i);
-			if (stackInSlot.isEmpty() || (ItemStack.isSameItem(stack, stackInSlot) && ItemStack.isSameItemSameTags(stackInSlot, stack) && stackInSlot.getCount() < Math.min(stackInSlot.getMaxStackSize(), inventory.getMaxStackSize())))
+			if (stackInSlot.isEmpty() || (ItemStack.isSameItem(stack, stackInSlot) && ItemStack.isSameItemSameComponents(stackInSlot, stack) && stackInSlot.getCount() < Math.min(stackInSlot.getMaxStackSize(), inventory.getMaxStackSize())))
 				return true;
 		}
 		return false;

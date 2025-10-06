@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -17,7 +18,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Map;
 import java.util.function.Supplier;
@@ -34,7 +34,7 @@ public class DwarfSprucePlantBlock extends DwarfSpruceBlock {
 	}
 
 	public DwarfSprucePlantBlock(Properties properties, ResourceLocation torch, DwarfSpruceHeadBlock headBlock) {
-		this(properties, () -> ForgeRegistries.ITEMS.getValue(torch), headBlock);
+		this(properties, () -> BuiltInRegistries.ITEM.get(torch), headBlock);
 	}
 
 	public DwarfSprucePlantBlock(Properties properties, Supplier<Item> torch, DwarfSpruceHeadBlock headBlock) {
@@ -76,7 +76,7 @@ public class DwarfSprucePlantBlock extends DwarfSpruceBlock {
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
 		BlockPos headpos = getHeadPos(level, pos);
 		return headpos != null && level.getBlockState(headpos.above()).isAir();
 	}

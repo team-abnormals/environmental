@@ -1,6 +1,6 @@
 package com.teamabnormals.environmental.common.levelgen.treedecorators;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures;
 import net.minecraft.core.BlockPos;
@@ -9,7 +9,7 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 
 public class HangingWillowDecorator extends TreeDecorator {
-	public static final Codec<HangingWillowDecorator> CODEC;
+	public static final MapCodec<HangingWillowDecorator> CODEC;
 	public static final HangingWillowDecorator INSTANCE = new HangingWillowDecorator();
 
 	@Override
@@ -29,6 +29,6 @@ public class HangingWillowDecorator extends TreeDecorator {
 	}
 
 	static {
-		CODEC = Codec.unit(() -> INSTANCE);
+		CODEC = MapCodec.unit(() -> INSTANCE);
 	}
 }

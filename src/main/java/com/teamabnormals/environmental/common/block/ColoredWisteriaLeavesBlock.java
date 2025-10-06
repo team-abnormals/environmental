@@ -9,6 +9,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -55,7 +56,7 @@ public class ColoredWisteriaLeavesBlock extends LeavesBlock implements WisteriaL
 	}
 
 	@Override
-	public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
+	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
 		return state.getValue(HALF) == Half.TOP ? new ItemStack(EnvironmentalBlocks.WISTERIA_LEAVES.get()) : super.getCloneItemStack(level, pos, state);
 	}
 

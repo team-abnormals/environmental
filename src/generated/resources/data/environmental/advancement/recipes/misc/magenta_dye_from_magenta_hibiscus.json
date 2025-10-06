@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_magenta_hibiscus": {
+      "conditions": {
+        "items": [
+          {
+            "items": "environmental:magenta_hibiscus"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "environmental:magenta_dye_from_magenta_hibiscus"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_magenta_hibiscus"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "environmental:magenta_dye_from_magenta_hibiscus"
+    ]
+  }
+}

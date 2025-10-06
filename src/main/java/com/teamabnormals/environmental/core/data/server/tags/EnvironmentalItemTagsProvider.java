@@ -16,8 +16,8 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -37,8 +37,8 @@ public class EnvironmentalItemTagsProvider extends BlueprintItemTagsProvider {
 		this.copy(EnvironmentalBlockTags.PINE_LOGS, EnvironmentalItemTags.PINE_LOGS);
 		this.copy(EnvironmentalBlockTags.WISTERIA_LOGS, EnvironmentalItemTags.WISTERIA_LOGS);
 		this.copy(EnvironmentalBlockTags.PLUM_LOGS, EnvironmentalItemTags.PLUM_LOGS);
-		this.tag(EnvironmentalItemTags.DUCK_FOOD).add(Items.SEAGRASS, EnvironmentalItems.DUCKWEED.get()).addOptionalTag(new ResourceLocation("forge", "crops/rice"));
-		this.tag(EnvironmentalItemTags.DEER_FOOD).add(Items.SWEET_BERRIES).addTag(EnvironmentalItemTags.FRUITS_CHERRY).addOptionalTag(new ResourceLocation("forge", "fruits/strawberry"));
+		this.tag(EnvironmentalItemTags.DUCK_FOOD).add(Items.SEAGRASS, EnvironmentalItems.DUCKWEED.get()).addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "crops/rice"));
+		this.tag(EnvironmentalItemTags.DEER_FOOD).add(Items.SWEET_BERRIES).addTag(EnvironmentalItemTags.FOODS_CHERRY).addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "foods/strawberry"));
 		this.tag(EnvironmentalItemTags.DEER_PLANTABLES).addTag(ItemTags.SMALL_FLOWERS).addTag(ItemTags.TALL_FLOWERS);
 		this.tag(EnvironmentalItemTags.DEER_CANNOT_PLANT);
 		this.tag(EnvironmentalItemTags.DEER_TEMPT_ITEMS).addTag(EnvironmentalItemTags.DEER_FOOD).addTag(EnvironmentalItemTags.DEER_PLANTABLES).addTag(EnvironmentalItemTags.DEER_FLOWER_ITEMS);
@@ -46,17 +46,17 @@ public class EnvironmentalItemTagsProvider extends BlueprintItemTagsProvider {
 		this.tag(EnvironmentalItemTags.REINDEER_TEMPT_ITEMS).addTag(EnvironmentalItemTags.REINDEER_FOOD).addTag(EnvironmentalItemTags.DEER_PLANTABLES).addTag(EnvironmentalItemTags.DEER_FLOWER_ITEMS);
 		this.tag(EnvironmentalItemTags.SLABFISH_FOOD).addTag(ItemTags.FISHES);
 		this.tag(EnvironmentalItemTags.SLABFISH_TAME_ITEMS).add(Items.TROPICAL_FISH);
-		this.tag(EnvironmentalItemTags.SLABFISH_SNACKS).add(Items.CHORUS_FRUIT).addOptional(new ResourceLocation("atmospheric", "passion_fruit")).addOptional(new ResourceLocation("atmospheric", "shimmering_passion_fruit")).addOptional(new ResourceLocation("endergetic", "bolloom_fruit")).addOptional(new ResourceLocation("caverns_and_chasms", "bejeweled_apple"));
+		this.tag(EnvironmentalItemTags.SLABFISH_SNACKS).add(Items.CHORUS_FRUIT).addOptional(ResourceLocation.fromNamespaceAndPath("atmospheric", "passion_fruit")).addOptional(ResourceLocation.fromNamespaceAndPath("atmospheric", "shimmering_passion_fruit")).addOptional(ResourceLocation.fromNamespaceAndPath("endergetic", "bolloom_fruit")).addOptional(ResourceLocation.fromNamespaceAndPath("caverns_and_chasms", "bejeweled_apple"));
 		this.tag(EnvironmentalItemTags.YAK_FOOD).add(Items.WHEAT);
 		this.tag(EnvironmentalItemTags.MUDDY_PIG_DECORATIONS).addTag(ItemTags.SMALL_FLOWERS).addTag(ItemTags.SAPLINGS).addTag(Tags.Items.MUSHROOMS).add(Items.LILY_PAD, Items.DEAD_BUSH, Items.FERN, Items.BIG_DRIPLEAF, CATTAIL.get().asItem());
 		this.tag(EnvironmentalItemTags.SPAWNS_ON_MUDDY_PIG).add(Items.BLUE_ORCHID, DIANTHUS.get().asItem(), Items.POPPY, Items.DANDELION, Items.RED_MUSHROOM, Items.BROWN_MUSHROOM, CATTAIL.get().asItem(), Items.LILY_PAD);
-		this.tag(EnvironmentalItemTags.MUDDY_PIG_DRYING_ITEMS).add(Items.WHEAT).addOptional(new ResourceLocation("farmersdelight", "straw"));
+		this.tag(EnvironmentalItemTags.MUDDY_PIG_DRYING_ITEMS).add(Items.WHEAT).addOptional(ResourceLocation.fromNamespaceAndPath("farmersdelight", "straw"));
 		this.tag(EnvironmentalItemTags.PIG_TRUFFLE_ITEMS).add(Items.GOLDEN_CARROT);
-		this.tag(BlueprintItemTags.PIG_FOOD).addTag(EnvironmentalItemTags.PIG_TRUFFLE_ITEMS);
+		this.tag(ItemTags.PIG_FOOD).addTag(EnvironmentalItemTags.PIG_TRUFFLE_ITEMS);
 		this.tag(EnvironmentalItemTags.DEER_FLOWER_ITEMS).add(Items.APPLE).addTag(EnvironmentalItemTags.DEER_STRONG_FLOWER_ITEMS).addTag(EnvironmentalItemTags.DEER_SUPER_FLOWER_ITEMS);
 		this.tag(EnvironmentalItemTags.DEER_STRONG_FLOWER_ITEMS).add(Items.GOLDEN_APPLE);
 		this.tag(EnvironmentalItemTags.DEER_SUPER_FLOWER_ITEMS).add(Items.ENCHANTED_GOLDEN_APPLE);
-		this.tag(Tags.Items.ARMORS_LEGGINGS).add(YAK_PANTS.get());
+		this.tag(ItemTags.LEG_ARMOR).add(YAK_PANTS.get());
 
 		this.copyWoodsetTags();
 		this.copy(Tags.Blocks.FENCE_GATES_WOODEN, Tags.Items.FENCE_GATES_WOODEN);
@@ -70,13 +70,14 @@ public class EnvironmentalItemTagsProvider extends BlueprintItemTagsProvider {
 		this.tag(ItemTags.CHEST_BOATS).add(WILLOW_BOAT.getSecond().get(), PINE_BOAT.getSecond().get(), WISTERIA_BOAT.getSecond().get(), PLUM_BOAT.getSecond().get());
 		this.tag(BlueprintItemTags.FURNACE_BOATS).add(WILLOW_FURNACE_BOAT.get(), PINE_FURNACE_BOAT.get(), WISTERIA_FURNACE_BOAT.get(), PLUM_FURNACE_BOAT.get());
 		this.tag(BlueprintItemTags.LARGE_BOATS).add(LARGE_WILLOW_BOAT.get(), LARGE_PINE_BOAT.get(), LARGE_WISTERIA_BOAT.get(), LARGE_PLUM_BOAT.get());
-		this.tag(ItemTags.MUSIC_DISCS).add(MUSIC_DISC_LEAVING_HOME.get(), MUSIC_DISC_SLABRAVE.get());
+		this.tag(Tags.Items.MUSIC_DISCS).add(MUSIC_DISC_LEAVING_HOME.get(), MUSIC_DISC_SLABRAVE.get());
 		this.tag(ItemTags.FISHES).add(KOI.get());
 		this.copy(BlockTags.DIRT, ItemTags.DIRT);
 		this.tag(EnvironmentalItemTags.CONVERTABLE_TO_MUD).add(Blocks.DIRT.asItem(), Blocks.COARSE_DIRT.asItem(), Blocks.ROOTED_DIRT.asItem());
 
-		this.tag(EnvironmentalItemTags.FRUITS).addTag(EnvironmentalItemTags.FRUITS_CHERRY);
-		this.tag(EnvironmentalItemTags.FRUITS_CHERRY).add(CHERRIES.get());
+		this.tag(Tags.Items.FOODS_FRUIT).addTag(EnvironmentalItemTags.FOODS_CHERRY).addTag(EnvironmentalItemTags.FOODS_PLUM);
+		this.tag(EnvironmentalItemTags.FOODS_PLUM).add(PLUM.get());
+		this.tag(EnvironmentalItemTags.FOODS_CHERRY).add(CHERRIES.get());
 		this.tag(EnvironmentalItemTags.RAW_DUCK).add(DUCK.get());
 		this.tag(EnvironmentalItemTags.COOKED_DUCK).add(COOKED_DUCK.get());
 		this.tag(EnvironmentalItemTags.RAW_VENISON).add(VENISON.get());

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "leaves",
+  "key": {
+    "#": {
+      "item": "environmental:plum_leaf_pile"
+    }
+  },
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "result": {
+    "count": 1,
+    "id": "environmental:plum_leaves"
+  }
+}

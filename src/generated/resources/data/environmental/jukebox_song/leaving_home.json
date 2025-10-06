@@ -1,0 +1,8 @@
+{
+  "comparator_output": 6,
+  "description": {
+    "translate": "jukebox_song.environmental.leaving_home"
+  },
+  "length_in_seconds": 144.0,
+  "sound_event": "environmental:music_disc.leaving_home"
+}

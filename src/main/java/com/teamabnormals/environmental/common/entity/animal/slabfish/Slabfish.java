@@ -5,7 +5,7 @@ import com.teamabnormals.environmental.common.entity.ai.goal.slabfish.SlabbyFoll
 import com.teamabnormals.environmental.common.entity.ai.goal.slabfish.SlabbyGrabItemGoal;
 import com.teamabnormals.environmental.common.inventory.SlabfishInventory;
 import com.teamabnormals.environmental.common.inventory.SlabfishInventoryMenu;
-import com.teamabnormals.environmental.common.network.message.SOpenSlabfishInventoryMessage;
+import com.teamabnormals.environmental.common.network.message.OpenSlabfishInventoryPayload;
 import com.teamabnormals.environmental.common.slabfish.BackpackType;
 import com.teamabnormals.environmental.common.slabfish.SlabfishHelper;
 import com.teamabnormals.environmental.common.slabfish.SlabfishType;
@@ -22,8 +22,8 @@ import com.teamabnormals.environmental.core.registry.slabfish.EnvironmentalSlabf
 import com.teamabnormals.environmental.core.registry.slabfish.EnvironmentalSlabfishSweaters;
 import com.teamabnormals.environmental.core.registry.slabfish.EnvironmentalSlabfishTypes;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
@@ -54,41 +54,37 @@ import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.event.entity.player.PlayerContainerEvent;
-import net.minecraftforge.items.wrapper.InvWrapper;
-import net.minecraftforge.network.PacketDistributor;
+import net.minecraft.world.level.pathfinder.PathType;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.event.EventHooks;
+import net.neoforged.neoforge.event.entity.player.PlayerContainerEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 public class Slabfish extends TamableAnimal implements ContainerListener, Bucketable {
-	private static final EntityDataAccessor<ResourceLocation> SLABFISH_TYPE = SynchedEntityData.defineId(Slabfish.class, EnvironmentalDataSerializers.RESOURCE_LOCATION);
+	private static final EntityDataAccessor<ResourceLocation> SLABFISH_TYPE = SynchedEntityData.defineId(Slabfish.class, EnvironmentalDataSerializers.RESOURCE_LOCATION.get());
 	private static final EntityDataAccessor<Integer> SLABFISH_OVERLAY = SynchedEntityData.defineId(Slabfish.class, EntityDataSerializers.INT);
 	private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(Slabfish.class, EntityDataSerializers.BOOLEAN);
 
-	private static final EntityDataAccessor<ResourceLocation> BACKPACK = SynchedEntityData.defineId(Slabfish.class, EnvironmentalDataSerializers.RESOURCE_LOCATION);
+	private static final EntityDataAccessor<ResourceLocation> BACKPACK = SynchedEntityData.defineId(Slabfish.class, EnvironmentalDataSerializers.RESOURCE_LOCATION.get());
 	private static final EntityDataAccessor<Boolean> HAS_BACKPACK = SynchedEntityData.defineId(Slabfish.class, EntityDataSerializers.BOOLEAN);
-	private static final EntityDataAccessor<ResourceLocation> SWEATER = SynchedEntityData.defineId(Slabfish.class, EnvironmentalDataSerializers.RESOURCE_LOCATION);
+	private static final EntityDataAccessor<ResourceLocation> SWEATER = SynchedEntityData.defineId(Slabfish.class, EnvironmentalDataSerializers.RESOURCE_LOCATION.get());
 
 	public static final EntityDimensions SIZE_SWIMMING = EntityDimensions.fixed(0.7F, 0.6F);
 	public static final EntityDimensions SIZE_SITTING = EntityDimensions.fixed(0.45F, 0.6F);
@@ -109,10 +105,9 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 
 	public Slabfish(EntityType<? extends Slabfish> type, Level worldIn) {
 		super(type, worldIn);
-		this.setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
+		this.setPathfindingMalus(PathType.WATER, 0.0F);
 		this.slabfishBackpack = new SlabfishInventory(this);
 		this.slabfishBackpack.addListener(this);
-		this.itemHandler = LazyOptional.of(() -> new InvWrapper(this.slabfishBackpack));
 	}
 
 	public static AttributeSupplier.Builder registerAttributes() {
@@ -137,15 +132,15 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 	}
 
 	@Override
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		this.getEntityData().define(SLABFISH_TYPE, EnvironmentalSlabfishTypes.SWAMP.location());
-		this.getEntityData().define(SLABFISH_OVERLAY, 0);
-		this.getEntityData().define(FROM_BUCKET, false);
+	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+		super.defineSynchedData(builder);
+		builder.define(SLABFISH_TYPE, EnvironmentalSlabfishTypes.SWAMP.location());
+		builder.define(SLABFISH_OVERLAY, 0);
+		builder.define(FROM_BUCKET, false);
 
-		this.getEntityData().define(BACKPACK, EnvironmentalSlabfishBackpacks.BROWN.location());
-		this.getEntityData().define(HAS_BACKPACK, false);
-		this.getEntityData().define(SWEATER, EnvironmentalSlabfishSweaters.EMPTY.location());
+		builder.define(BACKPACK, EnvironmentalSlabfishBackpacks.BROWN.location());
+		builder.define(HAS_BACKPACK, false);
+		builder.define(SWEATER, EnvironmentalSlabfishSweaters.EMPTY.location());
 	}
 
 	@Override
@@ -161,16 +156,11 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 	}
 
 	@Override
-	public boolean canBeLeashed(Player player) {
-		return !this.isLeashed();
-	}
-
-	@Override
 	public void readAdditionalSaveData(CompoundTag compound) {
 		super.readAdditionalSaveData(compound);
-		this.setSlabfishTypeFromLocation(compound.contains("SlabfishType") ? new ResourceLocation(compound.getString("SlabfishType")) : EnvironmentalSlabfishTypes.SWAMP.location());
+		this.setSlabfishTypeFromLocation(compound.contains("SlabfishType") ? ResourceLocation.parse(compound.getString("SlabfishType")) : EnvironmentalSlabfishTypes.SWAMP.location());
 		this.setSlabfishOverlay(SlabfishOverlay.byId(compound.getInt("SlabfishOverlay")));
-		this.setBackpack(compound.contains("BackpackType", Tag.TAG_STRING) ? new ResourceLocation(compound.getString("BackpackType")) : EnvironmentalSlabfishBackpacks.BROWN.location());
+		this.setBackpack(compound.contains("BackpackType", Tag.TAG_STRING) ? ResourceLocation.parse(compound.getString("BackpackType")) : EnvironmentalSlabfishBackpacks.BROWN.location());
 		this.setFromBucket(compound.getBoolean("FromBucket"));
 
 		this.slabfishBackpack.read(compound);
@@ -239,8 +229,8 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 				if (!this.level().isClientSide()) {
 					this.slabfishBackpack.setItem(1, new ItemStack(item));
 					this.usePlayerItem(player, hand, stack);
-					if (player instanceof ServerPlayer)
-						EnvironmentalCriteriaTriggers.BACKPACK_SLABFISH.trigger((ServerPlayer) player);
+					if (player instanceof ServerPlayer serverPlayer)
+						EnvironmentalCriteriaTriggers.BACKPACK_SLABFISH.get().trigger(serverPlayer);
 				}
 				return InteractionResult.SUCCESS;
 			}
@@ -254,7 +244,7 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 				return InteractionResult.SUCCESS;
 			}
 
-			if (player.isSecondaryUseActive() && stack.is(Tags.Items.SHEARS) && this.hasBackpack()) {
+			if (player.isSecondaryUseActive() && stack.is(Tags.Items.TOOLS_SHEAR) && this.hasBackpack()) {
 				this.dropBackpack();
 				return InteractionResult.SUCCESS;
 			}
@@ -262,7 +252,7 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 			if (this.isFood(stack) && this.getHealth() < this.getMaxHealth()) {
 				this.usePlayerItem(player, hand, stack);
 				this.level().playLocalSound(this.getX(), this.getY(), this.getZ(), EnvironmentalSoundEvents.SLABFISH_EAT.get(), SoundSource.NEUTRAL, 1F, 1F, true);
-				this.heal(item.getFoodProperties(stack, player).getNutrition());
+				this.heal(item.getFoodProperties(stack, player).nutrition());
 				this.particleCloud(ParticleTypes.COMPOSTER);
 				return InteractionResult.SUCCESS;
 			}
@@ -317,7 +307,7 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 				stack.shrink(1);
 			}
 
-			if (this.random.nextInt(3) == 0 && !ForgeEventFactory.onAnimalTame(this, player)) {
+			if (this.random.nextInt(3) == 0 && !EventHooks.onAnimalTame(this, player)) {
 				this.tame(player);
 				this.setOrderedToSit(true);
 				this.level().broadcastEntityEvent(this, (byte) 7);
@@ -342,36 +332,6 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 	public boolean isPartying() {
 		return this.isPartying;
 	}
-
-	// TODO: Check if removing this was a problem
-//	public void die(DamageSource cause) {
-//		if (ForgeHooks.onLivingDeath(this, cause))
-//			return;
-//		if (!this.isRemoved() && !this.dead) {
-//			Entity entity = cause.getEntity();
-//			LivingEntity livingentity = this.getKillCredit();
-//			if (this.deathScore >= 0 && livingentity != null) {
-//				livingentity.awardKillScore(this, this.deathScore, cause);
-//			}
-//
-//			if (this.isSleeping()) {
-//				this.stopSleeping();
-//			}
-//
-//			this.dead = true;
-//			this.getCombatTracker().recheckStatus();
-//			if (this.level() instanceof ServerLevel serverLevel) {
-//				if (entity == null || entity.killedEntity(serverLevel, this)) {
-//					this.gameEvent(GameEvent.ENTITY_DIE);
-//					this.dropAllDeathLoot(cause);
-//					this.createWitherRose(livingentity);
-//				}
-//
-//				this.level().broadcastEntityEvent(this, (byte) 3);
-//			}
-//			this.setPose(Pose.DYING);
-//		}
-//	}
 
 	@Override
 	public void setRecordPlayingNearby(BlockPos pos, boolean isPartying) {
@@ -408,16 +368,6 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 			}
 		}
 
-		List<Player> playerList = this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(5.0D, 5.0D, 5.0D));
-
-		for (Player player : playerList) {
-			if (player instanceof ServerPlayer serverPlayer) {
-				if (!this.level().isClientSide()) {
-					EnvironmentalCriteriaTriggers.SLABFISH.trigger(serverPlayer, this);
-				}
-			}
-		}
-
 		this.refreshDimensions();
 		this.setCanPickUpLoot(this.hasBackpack());
 
@@ -439,17 +389,6 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 
 	private boolean isMoving() {
 		return this.getDeltaMovement().x() > 0 || this.getDeltaMovement().y() > 0 || this.getDeltaMovement().z() > 0;
-	}
-
-	@Override
-	public double getMyRidingOffset() {
-		if (this.getVehicle() != null) {
-			if (this.getVehicle() instanceof Boat)
-				return this.isBaby() ? 0.43D : 0.3D;
-			else
-				return this.isBaby() ? 0.70F : 0.52F;
-		}
-		return super.getMyRidingOffset();
 	}
 
 	@Override
@@ -533,7 +472,7 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 			baby.setSlabfishType(this.getSlabfishType());
 			if (uuid != null) {
 				baby.setOwnerUUID(uuid);
-				baby.setTame(true);
+				baby.setTame(true, true);
 			}
 		}
 		return baby;
@@ -542,21 +481,6 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 	@Override
 	public boolean isFood(ItemStack stack) {
 		return !Ingredient.of(EnvironmentalItemTags.SLABFISH_TAME_ITEMS).test(stack) && Ingredient.of(EnvironmentalItemTags.SLABFISH_FOOD).test(stack);
-	}
-
-	@Override
-	public EntityDimensions getDimensions(Pose pose) {
-		return this.isInWater() ? this.isBaby() ? SIZE_SWIMMING_CHILD : SIZE_SWIMMING : (this.isInSittingPose() || this.getVehicle() != null) ? this.isBaby() ? SIZE_SITTING_CHILD : SIZE_SITTING : super.getDimensions(pose);
-	}
-
-	@Override
-	protected float getStandingEyeHeight(Pose poseIn, EntityDimensions sizeIn) {
-		return this.isInSittingPose() ? sizeIn.height * 0.6F : this.isInWater() ? (this.isBaby() ? sizeIn.height * 1.4F : sizeIn.height * 0.855F) : sizeIn.height * 0.8F;
-	}
-
-	@Override
-	public boolean canBreatheUnderwater() {
-		return true;
 	}
 
 	@Override
@@ -627,12 +551,12 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 
 	@Nullable
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType reason, SpawnGroupData spawnDataIn, CompoundTag dataTag) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType reason, SpawnGroupData spawnDataIn) {
 		if (reason == MobSpawnType.BUCKET) {
 			return spawnDataIn;
 		} else {
-			if (spawnDataIn instanceof Slabfish.SlabfishData) {
-				this.setSlabfishType(((Slabfish.SlabfishData) spawnDataIn).type);
+			if (spawnDataIn instanceof Slabfish.SlabfishData slabfishData) {
+				this.setSlabfishType(slabfishData.type);
 				return spawnDataIn;
 			} else {
 				Registry<SlabfishType> registry = SlabfishHelper.slabfishTypes(this.level());
@@ -640,7 +564,7 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 
 				spawnDataIn = new SlabfishData(type);
 				this.setSlabfishType(type);
-				return super.finalizeSpawn(world, difficulty, reason, spawnDataIn, dataTag);
+				return super.finalizeSpawn(world, difficulty, reason, spawnDataIn);
 			}
 		}
 	}
@@ -679,16 +603,16 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 			if (tag.contains("Age"))
 				this.setAge(tag.getInt("Age"));
 			if (tag.contains("Owner")) {
-				this.setTame(true);
+				this.setTame(true, true);
 				this.setOwnerUUID(tag.getUUID("Owner"));
 			}
-			this.setSlabfishTypeFromLocation(new ResourceLocation(tag.getString("SlabfishType")));
+			this.setSlabfishTypeFromLocation(ResourceLocation.parse(tag.getString("SlabfishType")));
 
 			if (tag.contains("BackpackType", Tag.TAG_STRING))
-				this.setBackpack(new ResourceLocation(tag.getString("BackpackType")));
+				this.setBackpack(ResourceLocation.parse(tag.getString("BackpackType")));
 
 			if (tag.contains("SweaterType", Tag.TAG_STRING))
-				this.setBackpack(new ResourceLocation(tag.getString("SweaterType")));
+				this.setBackpack(ResourceLocation.parse(tag.getString("SweaterType")));
 
 			this.slabfishBackpack.read(tag);
 			this.updateSweater();
@@ -709,28 +633,22 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 	@Override
 	public void saveToBucketTag(ItemStack bucket) {
 		Bucketable.saveDefaultDataToBucketTag(this, bucket);
+		CustomData.update(DataComponents.BUCKET_ENTITY_DATA, bucket, tag -> {
+			tag.putInt("Age", this.getAge());
 
-		if (this.hasCustomName()) {
-			bucket.setHoverName(this.getCustomName());
-		}
+			if (this.getOwnerUUID() != null && this.isTame())
+				tag.putUUID("Owner", this.getOwnerUUID());
 
-		CompoundTag compound = bucket.getOrCreateTag();
+			tag.putString("SlabfishType", this.getSlabfishTypeLocation().toString());
 
-		compound.putFloat("Health", this.getHealth());
-		compound.putInt("Age", this.getAge());
+			if (this.hasBackpack())
+				tag.putString("BackpackType", this.getBackpackLocation().toString());
 
-		if (this.getOwnerUUID() != null && this.isTame())
-			compound.putUUID("Owner", this.getOwnerUUID());
+			if (this.hasSweater())
+				tag.putString("SweaterType", this.getSweaterLocation().toString());
 
-		compound.putString("SlabfishType", this.getSlabfishTypeLocation().toString());
-
-		if (this.hasBackpack())
-			compound.putString("BackpackType", this.getBackpackLocation().toString());
-
-		if (this.hasSweater())
-			compound.putString("SweaterType", this.getSweaterLocation().toString());
-
-		this.slabfishBackpack.write(compound);
+			this.slabfishBackpack.write(tag);
+		});
 	}
 
 	// DATA //
@@ -813,10 +731,10 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 			player.closeContainer();
 
 		player.nextContainerCounter();
-		Environmental.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new SOpenSlabfishInventoryMessage(this, player.containerCounter));
+		PacketDistributor.sendToPlayer(player, new OpenSlabfishInventoryPayload(this, player.containerCounter));
 		player.containerMenu = new SlabfishInventoryMenu(player.containerCounter, player.getInventory(), this.slabfishBackpack, this);
 		player.initMenu(player.containerMenu);
-		MinecraftForge.EVENT_BUS.post(new PlayerContainerEvent.Open(player, player.containerMenu));
+		NeoForge.EVENT_BUS.post(new PlayerContainerEvent.Open(player, player.containerMenu));
 	}
 
 	@Override
@@ -832,7 +750,7 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 	@Override
 	protected void dropEquipment() {
 		ItemStack itemstack = this.slabfishBackpack.removeItemNoUpdate(0);
-		if (!itemstack.isEmpty() && !EnchantmentHelper.hasVanishingCurse(itemstack)) {
+		if (!itemstack.isEmpty() && !EnchantmentHelper.has(itemstack, EnchantmentEffectComponents.PREVENT_EQUIPMENT_DROP)) {
 			this.spawnAtLocation(itemstack);
 		}
 		this.dropBackpack();
@@ -844,7 +762,7 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 			if (this.slabfishBackpack != null) {
 				for (int i = this.slabfishBackpack.getContainerSize(); i > 0; --i) {
 					ItemStack itemstack = this.slabfishBackpack.removeItemNoUpdate(i);
-					if (!itemstack.isEmpty() && !EnchantmentHelper.hasVanishingCurse(itemstack)) {
+					if (!itemstack.isEmpty() && !EnchantmentHelper.has(itemstack, EnchantmentEffectComponents.PREVENT_EQUIPMENT_DROP)) {
 						this.spawnAtLocation(itemstack);
 					}
 				}
@@ -906,25 +824,6 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 			}
 		} else {
 			this.backpackFull = false;
-		}
-	}
-
-	private LazyOptional<?> itemHandler = null;
-
-	@Override
-	public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction facing) {
-		if (this.isAlive() && capability == ForgeCapabilities.ITEM_HANDLER && itemHandler != null)
-			return itemHandler.cast();
-		return super.getCapability(capability, facing);
-	}
-
-	@Override
-	public void invalidateCaps() {
-		super.invalidateCaps();
-		if (itemHandler != null) {
-			LazyOptional<?> oldHandler = itemHandler;
-			itemHandler = null;
-			oldHandler.invalidate();
 		}
 	}
 

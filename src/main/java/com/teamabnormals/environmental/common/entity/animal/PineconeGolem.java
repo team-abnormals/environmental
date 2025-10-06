@@ -6,12 +6,15 @@ import com.teamabnormals.environmental.common.entity.ai.goal.pineconegolem.Pinec
 import com.teamabnormals.environmental.common.entity.ai.goal.pineconegolem.PineconeGolemTemptGoal;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSoundEvents;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
@@ -43,8 +46,8 @@ public class PineconeGolem extends AbstractGolem {
 	}
 
 	@Override
-	protected void defineSynchedData() {
-		super.defineSynchedData();
+	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+		super.defineSynchedData(builder);
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -67,11 +70,6 @@ public class PineconeGolem extends AbstractGolem {
 	}
 
 	@Override
-	protected float getStandingEyeHeight(Pose pose, EntityDimensions size) {
-		return size.height * 0.5F;
-	}
-
-	@Override
 	public int getMaxHeadXRot() {
 		return 0;
 	}
@@ -79,11 +77,6 @@ public class PineconeGolem extends AbstractGolem {
 	@Override
 	public int getMaxHeadYRot() {
 		return 5;
-	}
-
-	@Override
-	public double getMyRidingOffset() {
-		return 0.28D;
 	}
 
 	@Override
@@ -114,7 +107,7 @@ public class PineconeGolem extends AbstractGolem {
 		if (!itemstack.isEmpty()) {
 			ItemEntity itementity = new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), itemstack);
 			itementity.setPickUpDelay(40);
-			itementity.setThrower(this.getUUID());
+			itementity.setThrower(this);
 			this.level().addFreshEntity(itementity);
 			this.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
 		}

@@ -1,6 +1,6 @@
 package com.teamabnormals.environmental.common.slabfish.condition;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamabnormals.environmental.common.slabfish.SlabfishConditionType;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSlabfishConditions;
@@ -11,20 +11,10 @@ import net.minecraft.resources.ResourceLocation;
  *
  * @author Ocelot
  */
-public class SlabfishDimensionCondition implements SlabfishCondition {
-	public static final Codec<SlabfishDimensionCondition> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-			ResourceLocation.CODEC.fieldOf("dimension").forGetter(SlabfishDimensionCondition::getDimension)
+public record SlabfishDimensionCondition(ResourceLocation dimensionRegistryName) implements SlabfishCondition {
+	public static final MapCodec<SlabfishDimensionCondition> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+			ResourceLocation.CODEC.fieldOf("dimension").forGetter(SlabfishDimensionCondition::dimensionRegistryName)
 	).apply(instance, SlabfishDimensionCondition::new));
-
-	private final ResourceLocation dimensionRegistryName;
-
-	public SlabfishDimensionCondition(ResourceLocation dimensionRegistryName) {
-		this.dimensionRegistryName = dimensionRegistryName;
-	}
-
-	public ResourceLocation getDimension() {
-		return dimensionRegistryName;
-	}
 
 	@Override
 	public boolean test(SlabfishConditionContext context) {

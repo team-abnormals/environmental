@@ -35,7 +35,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.IForgeShearable;
+import net.neoforged.neoforge.common.IShearable;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -43,7 +43,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Yak extends Animal implements IForgeShearable, Shearable {
+public class Yak extends Animal implements IShearable, Shearable {
 	private static final EntityDataAccessor<Boolean> SHEARED = SynchedEntityData.defineId(Yak.class, EntityDataSerializers.BOOLEAN);
 	private static final EntityDataAccessor<Integer> ANGER_TIME = SynchedEntityData.defineId(Yak.class, EntityDataSerializers.INT);
 
@@ -77,16 +77,16 @@ public class Yak extends Animal implements IForgeShearable, Shearable {
 	}
 
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, SpawnGroupData spawnData, CompoundTag tag) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, SpawnGroupData spawnData) {
 		Yaktelligence.createMemories(this, level.getRandom());
-		return super.finalizeSpawn(level, difficulty, spawnType, spawnData, tag);
+		return super.finalizeSpawn(level, difficulty, spawnType, spawnData);
 	}
 
 	@Override
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		this.entityData.define(SHEARED, false);
-		this.entityData.define(ANGER_TIME, 0);
+	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+		super.defineSynchedData(builder);
+		builder.define(SHEARED, false);
+		builder.define(ANGER_TIME, 0);
 	}
 
 	@Override
@@ -197,13 +197,14 @@ public class Yak extends Animal implements IForgeShearable, Shearable {
 		this.entityData.set(SHEARED, sheared);
 	}
 
+	@Override
 	public boolean readyForShearing() {
 		return this.isAlive() && !this.isSheared() && !this.isBaby();
 	}
 
 	@Override
-	public boolean isShearable(ItemStack item, Level world, BlockPos pos) {
-		return readyForShearing();
+	public boolean isShearable(@Nullable Player player, ItemStack item, Level world, BlockPos pos) {
+		return this.readyForShearing();
 	}
 
 	public static AttributeSupplier.Builder registerAttributes() {
@@ -246,9 +247,9 @@ public class Yak extends Animal implements IForgeShearable, Shearable {
 
 	@Nonnull
 	@Override
-	public List<ItemStack> onSheared(@Nullable Player player, @Nonnull ItemStack item, Level world, BlockPos pos, int fortune) {
-		world.playSound(null, this, SoundEvents.SHEEP_SHEAR, player == null ? SoundSource.BLOCKS : SoundSource.PLAYERS, 1.0F, 1.0F);
-		if (!world.isClientSide) {
+	public List<ItemStack> onSheared(@Nullable Player player, @Nonnull ItemStack item, Level level, BlockPos pos) {
+		level.playSound(null, this, SoundEvents.SHEEP_SHEAR, player == null ? SoundSource.BLOCKS : SoundSource.PLAYERS, 1.0F, 1.0F);
+		if (!level.isClientSide) {
 			this.setSheared(true);
 			if (player != null && !player.isCreative() && !(player.getItemBySlot(EquipmentSlot.LEGS).getItem() instanceof YakPantsItem)) {
 				Yaktelligence.retaliate(this, player);
@@ -269,11 +270,6 @@ public class Yak extends Animal implements IForgeShearable, Shearable {
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob ageable) {
 		return EnvironmentalEntityTypes.YAK.get().create(world);
-	}
-
-	@Override
-	protected float getStandingEyeHeight(Pose pose, EntityDimensions size) {
-		return this.isBaby() ? size.height * 0.95F : 1.3F;
 	}
 
 	@Override

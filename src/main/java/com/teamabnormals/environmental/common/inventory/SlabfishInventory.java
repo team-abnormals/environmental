@@ -6,7 +6,7 @@ import com.teamabnormals.environmental.common.slabfish.SlabfishHelper;
 import com.teamabnormals.environmental.common.slabfish.SlabfishType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.Tags;
+import net.neoforged.neoforge.common.Tags;
 
 /**
  * <p>An implementation of {@link DynamicInventory} for {@link Slabfish}.</p>
@@ -17,6 +17,7 @@ public class SlabfishInventory extends DynamicInventory {
 	private final Slabfish slabfish;
 
 	public SlabfishInventory(Slabfish slabfish) {
+		super(slabfish.registryAccess());
 		this.slabfish = slabfish;
 	}
 

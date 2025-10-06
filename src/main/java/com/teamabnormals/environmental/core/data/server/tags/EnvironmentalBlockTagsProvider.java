@@ -2,15 +2,14 @@ package com.teamabnormals.environmental.core.data.server.tags;
 
 import com.teamabnormals.blueprint.core.other.tags.BlueprintBlockTags;
 import com.teamabnormals.environmental.core.Environmental;
-import com.teamabnormals.environmental.core.other.tags.EnvironmentalBlockTags;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.data.BlockTagsProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.data.BlockTagsProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -97,9 +96,9 @@ public class EnvironmentalBlockTagsProvider extends BlockTagsProvider {
 
 		this.tag(DEER_SPAWNABLE_ON).add(Blocks.GRASS_BLOCK, Blocks.SNOW, Blocks.SNOW_BLOCK);
 		this.tag(WATER_ANIMALS_SPAWNABLE_ON).addTag(BlockTags.ANIMALS_SPAWNABLE_ON).add(Blocks.WATER, Blocks.MUD);
-		this.tag(GRASS_LIKE).add(Blocks.GRASS_BLOCK, Blocks.PODZOL, Blocks.MYCELIUM).addOptional(new ResourceLocation("atmospheric", "crustose"));
-		this.tag(CUP_LICHEN_PLANTABLE_ON).addTag(BlockTags.DIRT).addTag(Tags.Blocks.STONE).addTag(Tags.Blocks.ORES).addTag(BlockTags.LOGS);
-		this.tag(CACTUS_BOBBLE_PLANTABLE_ON).add(Blocks.CACTUS).addOptional(new ResourceLocation("atmospheric", "snowy_cactus"));
+		this.tag(GRASS_LIKE).add(Blocks.GRASS_BLOCK, Blocks.PODZOL, Blocks.MYCELIUM).addOptional(ResourceLocation.fromNamespaceAndPath("atmospheric", "crustose"));
+		this.tag(CUP_LICHEN_PLANTABLE_ON).addTag(BlockTags.DIRT).addTag(Tags.Blocks.STONES).addTag(Tags.Blocks.ORES).addTag(BlockTags.LOGS);
+		this.tag(CACTUS_BOBBLE_PLANTABLE_ON).add(Blocks.CACTUS).addOptional(ResourceLocation.fromNamespaceAndPath("atmospheric", "snowy_cactus"));
 		this.tag(CATTAIL_PLANTABLE_ON).addTag(BlockTags.DIRT).addTag(BlockTags.SAND).add(Blocks.FARMLAND);
 		this.tag(MUD_REPLACEABLES).add(Blocks.GRASS_BLOCK, Blocks.DIRT, Blocks.SAND, Blocks.CLAY);
 		this.tag(PINECONE_GOLEM_BASE_BLOCKS).add(PINECONE.get());

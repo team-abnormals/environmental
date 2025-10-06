@@ -1,13 +1,14 @@
 package com.teamabnormals.environmental.common.entity.animal;
 
 import com.teamabnormals.blueprint.common.world.storage.tracking.IDataManager;
-import com.teamabnormals.blueprint.core.other.tags.BlueprintItemTags;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.EnvironmentalConfig;
 import com.teamabnormals.environmental.core.other.EnvironmentalDataProcessors;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalBiomeTags;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalItemTags;
+import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -31,15 +32,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraftforge.common.ToolActions;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingTickEvent;
-import net.minecraftforge.event.entity.living.MobSpawnEvent.FinalizeSpawn;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract;
-import net.minecraftforge.eventbus.api.Event.Result;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.common.ItemAbilities;
+import net.neoforged.neoforge.common.Tags.Items;
+import net.neoforged.neoforge.event.entity.living.FinalizeSpawnEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.EntityInteract;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
 import java.util.Optional;
 
@@ -81,7 +81,7 @@ public class MuddyPig {
 
 	public static void removeDecoration(Pig pig) {
 		IDataManager data = (IDataManager) pig;
-		data.setValue(EnvironmentalDataProcessors.MUDDY_PIG_DECORATION, new ResourceLocation("empty"));
+		data.setValue(EnvironmentalDataProcessors.MUDDY_PIG_DECORATION, ResourceLocation.withDefaultNamespace("empty"));
 	}
 
 	public static boolean isDry(Pig pig) {
@@ -92,7 +92,7 @@ public class MuddyPig {
 		IDataManager data = (IDataManager) pig;
 		if (isMuddy(pig)) {
 			ResourceLocation decoration = data.getValue(EnvironmentalDataProcessors.MUDDY_PIG_DECORATION);
-			Item item = ForgeRegistries.ITEMS.getValue(decoration);
+			Item item = BuiltInRegistries.ITEM.get(decoration);
 			if (item instanceof BlockItem) {
 				return Optional.of(item);
 			}
@@ -102,30 +102,29 @@ public class MuddyPig {
 	}
 
 	@SubscribeEvent
-	public static void onLivingSpawn(FinalizeSpawn event) {
+	public static void onLivingSpawn(FinalizeSpawnEvent event) {
 		Mob entity = event.getEntity();
 		ServerLevelAccessor level = event.getLevel();
-		if (event.getResult() != Result.DENY) {
+		if (!event.isSpawnCancelled()) {
 			RandomSource random = level.getRandom();
 			if (entity instanceof Pig pig && enabled() && EnvironmentalConfig.COMMON.naturalMuddyPigs.get() && level.getBiome(entity.blockPosition()).is(EnvironmentalBiomeTags.HAS_MUDDY_PIG)) {
 				IDataManager data = (IDataManager) entity;
 				setMuddy(pig, true);
 				setDryingTime(pig, MAX_DRYING_TIME);
 				if (random.nextFloat() < EnvironmentalConfig.COMMON.muddyPigDecorationChance.get()) {
-					Optional<Item> item = ForgeRegistries.ITEMS.tags().getTag(EnvironmentalItemTags.SPAWNS_ON_MUDDY_PIG).getRandomElement(random);
-					item.ifPresent(value -> data.setValue(EnvironmentalDataProcessors.MUDDY_PIG_DECORATION, ForgeRegistries.ITEMS.getKey(value)));
+					Optional<Holder<Item>> item = BuiltInRegistries.ITEM.getTag(EnvironmentalItemTags.SPAWNS_ON_MUDDY_PIG).get().getRandomElement(random);
+					item.ifPresent(value -> data.setValue(EnvironmentalDataProcessors.MUDDY_PIG_DECORATION, BuiltInRegistries.ITEM.getKey(value.value())));
 				}
 			}
 		}
 	}
 
 	@SubscribeEvent
-	public static void onLivingTick(LivingTickEvent event) {
+	public static void onLivingTick(EntityTickEvent.Post event) {
 		Entity entity = event.getEntity();
 		Level level = entity.getCommandSenderWorld();
 
 		if (entity instanceof Pig pig && entity.isAlive() && isMuddy(pig)) {
-			int mudDryingTime = getDryingTime(pig);
 			if (canGetWet(pig)) {
 				updateDryingTime(pig, 1);
 			} else if (EnvironmentalConfig.COMMON.muddyPigsDryOverTime.get() && (!EnvironmentalConfig.COMMON.muddyPigsOnlyDryInTheNether.get() || level.dimensionType().ultraWarm())) {
@@ -158,19 +157,19 @@ public class MuddyPig {
 				if (allowDecorating) {
 					if (decoration.isEmpty()) {
 						if (stack.is(EnvironmentalItemTags.MUDDY_PIG_DECORATIONS)) {
-							data.setValue(EnvironmentalDataProcessors.MUDDY_PIG_DECORATION, ForgeRegistries.ITEMS.getKey(stack.getItem()));
+							data.setValue(EnvironmentalDataProcessors.MUDDY_PIG_DECORATION, BuiltInRegistries.ITEM.getKey(stack.getItem()));
 							level.playSound(null, target, dried ? SoundEvents.PACKED_MUD_PLACE : SoundEvents.MUD_PLACE, SoundSource.PLAYERS, 1.0F, 1.0F);
 							if (!event.getEntity().isCreative()) stack.shrink(1);
 							event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide()));
 							event.setCanceled(true);
 						}
-					} else if (stack.canPerformAction(ToolActions.SHEARS_CARVE)) {
+					} else if (stack.canPerformAction(ItemAbilities.SHEARS_CARVE)) {
 						level.playSound(null, target, SoundEvents.SNOW_GOLEM_SHEAR, SoundSource.PLAYERS, 1.0F, 1.0F);
 						target.gameEvent(GameEvent.SHEAR, player);
 						if (!level.isClientSide()) {
 							ItemEntity item = target.spawnAtLocation(new ItemStack(decoration.get()), 1.0F);
 							item.setDeltaMovement(item.getDeltaMovement().add((random.nextFloat() - random.nextFloat()) * 0.1F, random.nextFloat() * 0.05F, (random.nextFloat() - random.nextFloat()) * 0.1F));
-							stack.hurtAndBreak(1, player, e -> e.broadcastBreakEvent(hand));
+							stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
 						}
 						removeDecoration(pig);
 						event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide()));
@@ -184,7 +183,7 @@ public class MuddyPig {
 					setDryingTime(pig, 0);
 					event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide()));
 					event.setCanceled(true);
-				} else if (stack.is(BlueprintItemTags.BUCKETS_WATER)) {
+				} else if (stack.is(Items.BUCKETS_WATER)) {
 					level.playSound(null, target, SoundEvents.GENERIC_SPLASH, SoundSource.PLAYERS, 1.0F, 1.0F);
 					player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player, stack.getCraftingRemainingItem()));
 					player.awardStat(Stats.ITEM_USED.get(stack.getItem()));
@@ -202,7 +201,7 @@ public class MuddyPig {
 						if (!level.isClientSide()) {
 							ItemEntity item = target.spawnAtLocation(new ItemStack(decoration.get()), 1.0F);
 							item.setDeltaMovement(item.getDeltaMovement().add((random.nextFloat() - random.nextFloat()) * 0.1F, random.nextFloat() * 0.05F, (random.nextFloat() - random.nextFloat()) * 0.1F));
-							stack.hurtAndBreak(1, player, e -> e.broadcastBreakEvent(hand));
+							stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
 						}
 						removeDecoration(pig);
 					}

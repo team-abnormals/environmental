@@ -7,9 +7,7 @@
           "environmental:koi_bucket": {
             "conditions": {
               "item": {
-                "items": [
-                  "environmental:koi_bucket"
-                ]
+                "items": "environmental:koi_bucket"
               }
             },
             "trigger": "minecraft:filled_bucket"
@@ -17,9 +15,7 @@
           "environmental:slabfish_bucket": {
             "conditions": {
               "item": {
-                "items": [
-                  "environmental:slabfish_bucket"
-                ]
+                "items": "environmental:slabfish_bucket"
               }
             },
             "trigger": "minecraft:filled_bucket"
@@ -34,7 +30,8 @@
               "environmental:slabfish_bucket"
             ]
           }
-        ]
+        ],
+        "should_replace_requirements": false
       }
     }
   ],

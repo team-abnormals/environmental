@@ -1,6 +1,7 @@
 package com.teamabnormals.environmental.common.slabfish;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.world.Container;
@@ -19,8 +20,10 @@ import java.util.Set;
 public abstract class DynamicInventory implements Container {
 	private final Int2ObjectOpenHashMap<ItemStack> inventory;
 	private Set<ContainerListener> listeners;
+	private RegistryAccess registry;
 
-	public DynamicInventory() {
+	public DynamicInventory(RegistryAccess registryAccess) {
+		this.registry = registryAccess;
 		this.inventory = new Int2ObjectOpenHashMap<>();
 		this.listeners = null;
 	}
@@ -89,7 +92,7 @@ public abstract class DynamicInventory implements Container {
 		ItemStack copy = stack.copy();
 		for (int i = loopStart; i < loopEnd; i++) {
 			ItemStack stackInSlot = this.getItem(i);
-			if (this.canPlaceItem(i, stack) && ItemStack.isSameItem(stackInSlot, copy) && ItemStack.isSameItemSameTags(stackInSlot, copy)) {
+			if (this.canPlaceItem(i, stack) && ItemStack.isSameItem(stackInSlot, copy) && ItemStack.isSameItemSameComponents(stackInSlot, copy)) {
 				this.mergeStacks(copy, stackInSlot, i);
 				if (copy.isEmpty()) {
 					this.setChanged();
@@ -191,7 +194,7 @@ public abstract class DynamicInventory implements Container {
 			if (!stack.isEmpty()) {
 				CompoundTag slotNbt = new CompoundTag();
 				slotNbt.putByte("Slot", (byte) i);
-				stack.save(slotNbt);
+				stack.save(this.registry, slotNbt);
 				list.add(slotNbt);
 			}
 		}
@@ -211,7 +214,7 @@ public abstract class DynamicInventory implements Container {
 			CompoundTag slotNbt = list.getCompound(i);
 			int index = slotNbt.getByte("Slot") & 255;
 			if (index < this.getContainerSize()) {
-				this.inventory.put(index, ItemStack.of(slotNbt));
+				this.inventory.put(index, ItemStack.parse(this.registry, slotNbt).get());
 			}
 		}
 	}

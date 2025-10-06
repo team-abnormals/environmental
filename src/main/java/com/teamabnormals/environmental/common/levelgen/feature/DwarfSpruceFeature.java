@@ -5,7 +5,7 @@ import com.teamabnormals.environmental.common.block.DwarfSpruceHeadBlock;
 import com.teamabnormals.environmental.common.block.DwarfSprucePlantBlock;
 import com.teamabnormals.environmental.common.levelgen.feature.configurations.DwarfSpruceConfiguration;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
-import com.teamabnormals.environmental.core.registry.EnvironmentalNoiseParameters;
+import com.teamabnormals.environmental.core.registry.datapack.EnvironmentalNoiseParameters;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;

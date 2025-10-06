@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cheerful_plum_leaf_pile": {
+      "conditions": {
+        "items": [
+          {
+            "items": "environmental:cheerful_plum_leaf_pile"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "environmental:cheerful_plum_leaves_from_cheerful_plum_leaf_pile"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_cheerful_plum_leaf_pile"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "environmental:cheerful_plum_leaves_from_cheerful_plum_leaf_pile"
+    ]
+  }
+}

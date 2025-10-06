@@ -1,6 +1,6 @@
 package com.teamabnormals.environmental.common.slabfish.condition;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamabnormals.environmental.common.slabfish.SlabfishConditionType;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSlabfishConditions;
@@ -13,7 +13,7 @@ import java.util.Arrays;
  * @author Ocelot
  */
 public class SlabfishEventCondition implements SlabfishCondition {
-	public static final Codec<SlabfishEventCondition> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+	public static final MapCodec<SlabfishEventCondition> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 			SlabfishConditionContext.Event.CODEC.listOf().xmap(list -> list.toArray(SlabfishConditionContext.Event[]::new), Arrays::asList).fieldOf("events").forGetter(SlabfishEventCondition::getEvents)
 	).apply(instance, SlabfishEventCondition::new));
 

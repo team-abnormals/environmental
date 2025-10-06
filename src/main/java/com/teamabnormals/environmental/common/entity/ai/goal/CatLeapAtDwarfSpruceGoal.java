@@ -5,6 +5,7 @@ import com.teamabnormals.environmental.common.block.DwarfSpruceHeadBlock;
 import com.teamabnormals.environmental.common.block.DwarfSprucePlantBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.animal.Cat;
 import net.minecraft.world.item.ItemStack;
@@ -12,7 +13,6 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.ForgeMod;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -95,7 +95,7 @@ public class CatLeapAtDwarfSpruceGoal extends Goal {
 					if (vec31.lengthSqr() > 1.0E-7D)
 						vec31 = vec31.normalize().scale(0.3D).add(vec3.scale(0.2D));
 					double yd = Math.max(this.targetPos.getY() + 0.5D - this.cat.getY(), 0.8D);
-					this.cat.setDeltaMovement(vec31.x, Math.sqrt(2.0D * this.cat.getAttributeValue(ForgeMod.ENTITY_GRAVITY.get()) * yd), vec31.z);
+					this.cat.setDeltaMovement(vec31.x, Math.sqrt(2.0D * this.cat.getAttributeValue(Attributes.GRAVITY) * yd), vec31.z);
 					this.leaping = true;
 					return;
 				}

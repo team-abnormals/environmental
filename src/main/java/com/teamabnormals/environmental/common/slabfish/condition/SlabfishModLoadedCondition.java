@@ -1,13 +1,14 @@
 package com.teamabnormals.environmental.common.slabfish.condition;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamabnormals.environmental.common.slabfish.SlabfishConditionType;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSlabfishConditions;
-import net.minecraftforge.fml.ModList;
+import net.neoforged.fml.ModList;
 
 public class SlabfishModLoadedCondition implements SlabfishCondition {
-	public static final Codec<SlabfishModLoadedCondition> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+	public static final MapCodec<SlabfishModLoadedCondition> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 			Codec.STRING.fieldOf("modid").forGetter(SlabfishModLoadedCondition::getModId)
 	).apply(instance, SlabfishModLoadedCondition::new));
 

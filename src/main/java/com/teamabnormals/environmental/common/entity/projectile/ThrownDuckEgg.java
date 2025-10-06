@@ -5,8 +5,6 @@ import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
@@ -15,10 +13,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.network.NetworkHooks;
-import net.minecraftforge.network.PlayMessages;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 public class ThrownDuckEgg extends ThrowableItemProjectile {
 
@@ -32,10 +28,6 @@ public class ThrownDuckEgg extends ThrowableItemProjectile {
 
 	public ThrownDuckEgg(Level worldIn, double x, double y, double z) {
 		super(EnvironmentalEntityTypes.DUCK_EGG.get(), x, y, z, worldIn);
-	}
-
-	public ThrownDuckEgg(PlayMessages.SpawnEntity spawnEntity, Level world) {
-		this(EnvironmentalEntityTypes.DUCK_EGG.get(), world);
 	}
 
 	@OnlyIn(Dist.CLIENT)
@@ -83,10 +75,5 @@ public class ThrownDuckEgg extends ThrowableItemProjectile {
 	@Override
 	public ItemStack getItem() {
 		return new ItemStack(EnvironmentalItems.DUCK_EGG.get());
-	}
-
-	@Override
-	public Packet<ClientGamePacketListener> getAddEntityPacket() {
-		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 }

@@ -1,21 +1,22 @@
 package com.teamabnormals.environmental.common.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.FlowerBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 import java.util.function.Supplier;
 
 public class LotusFlowerBlock extends FlowerBlock {
 	private final Supplier<ParticleOptions> particle;
 
-	public LotusFlowerBlock(Supplier<ParticleOptions> particle, Supplier<MobEffect> stewEffect, int stewEffectDuration, Properties properties) {
+	public LotusFlowerBlock(Supplier<ParticleOptions> particle, Holder<MobEffect> stewEffect, int stewEffectDuration, Properties properties) {
 		super(stewEffect, stewEffectDuration, properties);
 		this.particle = particle;
 	}

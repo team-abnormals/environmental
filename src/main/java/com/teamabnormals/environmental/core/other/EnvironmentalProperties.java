@@ -19,8 +19,6 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.Optional;
-
 public class EnvironmentalProperties {
 	public static final BlockSetType WILLOW_BLOCK_SET = blockSetType("willow");
 	public static final BlockSetType PINE_BLOCK_SET = blockSetType("pine");
@@ -82,8 +80,8 @@ public class EnvironmentalProperties {
 
 	public static BlockBehaviour.Properties wallHibiscus() {
 		BlockBehaviour.Properties properties = Block.Properties.of().noCollission().instabreak().sound(SoundType.GRASS).ignitedByLava().pushReaction(PushReaction.DESTROY);
-		properties.offsetFunction = Optional.of((state, level, pos) -> {
-			Block block = state.getBlock();
+		properties.offsetFunction = (state, level, pos) -> {
+			WallHibiscusBlock block = (WallHibiscusBlock) state.getBlock();
 			long i = Mth.getSeed(pos.getX(), pos.getY(), pos.getZ());
 			float f = block.getMaxHorizontalOffset();
 			double d0 = Mth.clamp(((double) ((float) (i & 15L) / 15.0F) - 0.5D) * 0.4D, -f, f);
@@ -94,7 +92,7 @@ public class EnvironmentalProperties {
 			Vec3 vec3 = state.getValue(WallHibiscusBlock.FACE) != AttachFace.WALL ? new Vec3(d0, 0.0F, d1) : axis == Axis.X ? new Vec3(0.0F, d0, d1) : new Vec3(d0, d1, 0.0F);
 
 			return vec3;
-		});
+		};
 		return properties;
 	}
 }

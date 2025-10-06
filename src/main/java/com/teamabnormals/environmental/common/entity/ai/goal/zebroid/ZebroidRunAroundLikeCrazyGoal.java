@@ -7,6 +7,7 @@ import net.minecraft.world.entity.NeutralMob;
 import net.minecraft.world.entity.ai.goal.RunAroundLikeCrazyGoal;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
+import net.neoforged.neoforge.event.EventHooks;
 
 public class ZebroidRunAroundLikeCrazyGoal<Z extends AbstractHorse & NeutralMob & Zebroid> extends RunAroundLikeCrazyGoal {
 	private final Z zebroid;
@@ -26,7 +27,7 @@ public class ZebroidRunAroundLikeCrazyGoal<Z extends AbstractHorse & NeutralMob 
 			if (entity instanceof Player) {
 				int i = this.zebroid.getTemper();
 				int j = this.zebroid.getMaxTemper();
-				if (j > 0 && this.zebroid.getRandom().nextInt(j) < i && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this.zebroid, (Player) entity)) {
+				if (j > 0 && this.zebroid.getRandom().nextInt(j) < i && !EventHooks.onAnimalTame(this.zebroid, (Player) entity)) {
 					this.zebroid.tameWithName((Player) entity);
 					this.zebroid.stopBeingAngry();
 					return;

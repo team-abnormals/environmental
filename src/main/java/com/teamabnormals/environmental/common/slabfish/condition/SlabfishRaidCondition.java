@@ -1,6 +1,6 @@
 package com.teamabnormals.environmental.common.slabfish.condition;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.teamabnormals.environmental.common.slabfish.SlabfishConditionType;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSlabfishConditions;
 
@@ -9,12 +9,8 @@ import com.teamabnormals.environmental.core.registry.EnvironmentalSlabfishCondit
  *
  * @author Ocelot
  */
-public class SlabfishRaidCondition implements SlabfishCondition {
-	public static final Codec<SlabfishRaidCondition> CODEC = Codec.unit(SlabfishRaidCondition::new);
-
-	public SlabfishRaidCondition() {
-	}
-
+public record SlabfishRaidCondition() implements SlabfishCondition {
+	public static final MapCodec<SlabfishRaidCondition> CODEC = MapCodec.unit(SlabfishRaidCondition::new);
 
 	@Override
 	public boolean test(SlabfishConditionContext context) {

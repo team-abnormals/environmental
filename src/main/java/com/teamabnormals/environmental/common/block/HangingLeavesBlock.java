@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.IForgeShearable;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.common.IShearable;
 
-public class HangingLeavesBlock extends Block implements IForgeShearable {
+public class HangingLeavesBlock extends Block implements IShearable {
 	protected static final VoxelShape SHAPE = Block.box(2.0, 7.0, 2.0, 14.0, 16.0, 14.0);
 
 	public HangingLeavesBlock(Block.Properties properties) {

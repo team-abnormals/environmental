@@ -7,6 +7,8 @@ import com.teamabnormals.environmental.core.other.tags.EnvironmentalBlockTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
@@ -18,7 +20,6 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
 import java.util.Optional;
@@ -117,9 +118,9 @@ public class HibiscusBushFeature extends Feature<NoneFeatureConfiguration> {
 	private static void placeGroundHibiscuses(WorldGenLevel level, BlockPos pos, RandomSource random) {
 		BlockPos.MutableBlockPos blockpos = new BlockPos.MutableBlockPos();
 		for (int i = 0; i < 64; ++i) {
-			Optional<Block> block = ForgeRegistries.BLOCKS.tags().getTag(EnvironmentalBlockTags.HIBISCUSES).getRandomElement(random);
+			Optional<Holder<Block>> block = BuiltInRegistries.BLOCK.getTag(EnvironmentalBlockTags.HIBISCUSES).get().getRandomElement(random);
 			if (block.isPresent()) {
-				BlockState blockstate = block.get().defaultBlockState();
+				BlockState blockstate = block.get().value().defaultBlockState();
 				blockpos.setWithOffset(pos, random.nextInt(10) - random.nextInt(10), random.nextInt(4) - random.nextInt(4), random.nextInt(10) - random.nextInt(10));
 
 				if (level.getBlockState(blockpos).isAir() && blockstate.canSurvive(level, blockpos))
@@ -162,8 +163,8 @@ public class HibiscusBushFeature extends Feature<NoneFeatureConfiguration> {
 
 						if (!validdirections.isEmpty()) {
 							Direction direction = validdirections.get(random.nextInt(validdirections.size())).getOpposite();
-							ForgeRegistries.BLOCKS.tags().getTag(EnvironmentalBlockTags.WALL_HIBISCUSES).getRandomElement(random).ifPresent((block) -> {
-								level.setBlock(mutablepos, WallHibiscusBlock.setPropertiesForDirection(block.defaultBlockState(), direction, random), 2);
+							BuiltInRegistries.BLOCK.getTag(EnvironmentalBlockTags.WALL_HIBISCUSES).get().getRandomElement(random).ifPresent((block) -> {
+								level.setBlock(mutablepos, WallHibiscusBlock.setPropertiesForDirection(block.value().defaultBlockState(), direction, random), 2);
 							});
 						}
 					}

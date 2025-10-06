@@ -9,9 +9,7 @@
     },
     {
       "type": "environmental:height",
-      "value": {
-        "min": 256
-      }
+      "min": 256
     },
     {
       "type": "environmental:dimension",

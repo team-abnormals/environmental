@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#environmental:has_feature/cup_lichen",
-  "features": "environmental:patch_cup_lichen_taiga",
-  "step": "vegetal_decoration"
-}

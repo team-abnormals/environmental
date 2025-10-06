@@ -1,13 +1,11 @@
 package com.teamabnormals.environmental.core;
 
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
-import net.minecraftforge.common.ForgeConfigSpec.DoubleValue;
-import net.minecraftforge.common.ForgeConfigSpec.IntValue;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.neoforged.neoforge.common.ModConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec.BooleanValue;
+import net.neoforged.neoforge.common.ModConfigSpec.DoubleValue;
+import net.neoforged.neoforge.common.ModConfigSpec.IntValue;
 import org.apache.commons.lang3.tuple.Pair;
 
-@EventBusSubscriber(modid = Environmental.MOD_ID)
 public class EnvironmentalConfig {
 
 	public static class Common {
@@ -40,7 +38,7 @@ public class EnvironmentalConfig {
 
 		public final BooleanValue cactusBobble;
 
-		Common(ForgeConfigSpec.Builder builder) {
+		Common(ModConfigSpec.Builder builder) {
 			builder.push("mobs");
 			builder.push("deer");
 			deerFlowerReproducing = builder.comment("If Deer can reproduce and spread flowers by feeding them an Apple followed by a flower").define("Deer flower reproducing", true);
@@ -88,7 +86,7 @@ public class EnvironmentalConfig {
 	public static class Client {
 		public final BooleanValue babyChickenTexture;
 
-		public Client(ForgeConfigSpec.Builder builder) {
+		public Client(ModConfigSpec.Builder builder) {
 			builder.push("mobs");
 			builder.push("chicken");
 			babyChickenTexture = builder.comment("If Chickens have a different texture when they are babies").define("Baby chicken texture", true);
@@ -97,18 +95,18 @@ public class EnvironmentalConfig {
 		}
 	}
 
-	public static final ForgeConfigSpec COMMON_SPEC;
+	public static final ModConfigSpec COMMON_SPEC;
 	public static final Common COMMON;
 
-	public static final ForgeConfigSpec CLIENT_SPEC;
+	public static final ModConfigSpec CLIENT_SPEC;
 	public static final Client CLIENT;
 
 	static {
-		Pair<Common, ForgeConfigSpec> commonSpecPair = new ForgeConfigSpec.Builder().configure(Common::new);
+		Pair<Common, ModConfigSpec> commonSpecPair = new ModConfigSpec.Builder().configure(Common::new);
 		COMMON_SPEC = commonSpecPair.getRight();
 		COMMON = commonSpecPair.getLeft();
 
-		Pair<Client, ForgeConfigSpec> clientSpecPair = new ForgeConfigSpec.Builder().configure(Client::new);
+		Pair<Client, ModConfigSpec> clientSpecPair = new ModConfigSpec.Builder().configure(Client::new);
 		CLIENT_SPEC = clientSpecPair.getRight();
 		CLIENT = clientSpecPair.getLeft();
 	}

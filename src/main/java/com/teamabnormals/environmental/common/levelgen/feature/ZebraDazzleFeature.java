@@ -40,7 +40,7 @@ public class ZebraDazzleFeature extends Feature<NoneFeatureConfiguration> {
 			BlockPos spawnPos = level.getHeightmapPos(Types.MOTION_BLOCKING_NO_LEAVES, new BlockPos((int) d0, pos.getY(), (int) d2));
 			double d1 = spawnPos.getY();
 
-			if (level.noCollision(EnvironmentalEntityTypes.ZEBRA.get().getAABB(d0, d1, d2))) {
+			if (level.noCollision(EnvironmentalEntityTypes.ZEBRA.get().getSpawnAABB(d0, d1, d2))) {
 				if (spawnedZebras < zebraCount && level.getBlockState(spawnPos.below()).is(BlockTags.ANIMALS_SPAWNABLE_ON)) { // && SpawnPlacements.checkSpawnRules(EnvironmentalEntityTypes.ZEBRA.get(), level, MobSpawnType.STRUCTURE, BlockPos.containing(d0, d1, d2), level.getRandom())) {
 					Zebra zebra = EnvironmentalEntityTypes.ZEBRA.get().create(level.getLevel());
 					if (zebra != null) {
@@ -56,7 +56,7 @@ public class ZebraDazzleFeature extends Feature<NoneFeatureConfiguration> {
 				Zebra zebra = pair.getFirst();
 				Vec3 zebraPos = pair.getSecond();
 				zebra.moveTo(zebraPos.x(), zebraPos.y(), zebraPos.z(), level.getRandom().nextFloat() * 360.0F, 0.0F);
-				zebra.finalizeSpawn(level, level.getCurrentDifficultyAt(zebra.blockPosition()), MobSpawnType.STRUCTURE, null, null);
+				zebra.finalizeSpawn(level, level.getCurrentDifficultyAt(zebra.blockPosition()), MobSpawnType.STRUCTURE, null);
 				zebra.setBaby(random.nextFloat() < 0.1F);
 				level.addFreshEntity(zebra);
 				zebra.spawnAnim();

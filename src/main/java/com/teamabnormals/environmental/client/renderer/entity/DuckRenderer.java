@@ -9,8 +9,8 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class DuckRenderer extends MobRenderer<Duck, DuckModel<Duck>> {
@@ -27,8 +27,8 @@ public class DuckRenderer extends MobRenderer<Duck, DuckModel<Duck>> {
 	}
 
 	@Override
-	protected void setupRotations(Duck duck, PoseStack poseStack, float ageInTicks, float rotationYaw, float partialTicks) {
+	protected void setupRotations(Duck duck, PoseStack poseStack, float ageInTicks, float rotationYaw, float partialTicks, float scale) {
 		if (duck.isInWater()) poseStack.translate(0.0D, Mth.cos(ageInTicks * 0.08F) * 0.02F, 0.0D);
-		super.setupRotations(duck, poseStack, ageInTicks, rotationYaw, partialTicks);
+		super.setupRotations(duck, poseStack, ageInTicks, rotationYaw, partialTicks, scale);
 	}
 }

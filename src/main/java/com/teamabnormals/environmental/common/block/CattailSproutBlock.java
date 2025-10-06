@@ -1,5 +1,6 @@
 package com.teamabnormals.environmental.common.block;
 
+import com.mojang.serialization.MapCodec;
 import com.teamabnormals.blueprint.core.util.BlockUtil;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalBlockTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
@@ -23,7 +24,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.ForgeHooks;
+import net.neoforged.neoforge.common.CommonHooks;
 
 public class CattailSproutBlock extends BushBlock implements SimpleWaterloggedBlock, BonemealableBlock {
 	protected static final VoxelShape SHAPE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 6.0D, 11.0D);
@@ -33,6 +34,11 @@ public class CattailSproutBlock extends BushBlock implements SimpleWaterloggedBl
 	public CattailSproutBlock(Properties properties) {
 		super(properties);
 		this.registerDefaultState(this.defaultBlockState().setValue(CATTAILS, 1).setValue(WATERLOGGED, false));
+	}
+
+	@Override
+	protected MapCodec<? extends BushBlock> codec() {
+		return null;
 	}
 
 	@Override
@@ -66,9 +72,9 @@ public class CattailSproutBlock extends BushBlock implements SimpleWaterloggedBl
 
 	@Override
 	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-		if (ForgeHooks.onCropsGrowPre(level, pos, level.getBlockState(pos), random.nextDouble() < 0.2D)) {
+		if (CommonHooks.canCropGrow(level, pos, level.getBlockState(pos), random.nextDouble() < 0.2D)) {
 			level.setBlock(pos, BlockUtil.transferAllBlockStates(state, EnvironmentalBlocks.CATTAIL.get().defaultBlockState().setValue(CattailBlock.AGE, level.getRandom().nextInt(2))), 2);
-			ForgeHooks.onCropsGrowPost(level, pos, level.getBlockState(pos));
+			CommonHooks.fireCropGrowPost(level, pos, level.getBlockState(pos));
 		}
 	}
 
@@ -88,7 +94,7 @@ public class CattailSproutBlock extends BushBlock implements SimpleWaterloggedBl
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
 		return true;
 	}
 

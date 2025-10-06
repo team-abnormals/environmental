@@ -9,7 +9,7 @@
     },
     {
       "type": "environmental:in_biome",
-      "biomes": "#forge:is_outer_end"
+      "biomes": "#c:is_outer_end_island"
     }
   ],
   "description": {

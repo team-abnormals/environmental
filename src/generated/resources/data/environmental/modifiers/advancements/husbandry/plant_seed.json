@@ -24,7 +24,8 @@
               "environmental:cattail_sprouts"
             ]
           }
-        ]
+        ],
+        "should_replace_requirements": false
       }
     }
   ],

@@ -8,12 +8,12 @@ import com.teamabnormals.environmental.core.other.EnvironmentalModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class ZonkeyRenderer extends MobRenderer<Zonkey, ZonkeyModel<Zonkey>> {
-	private static final ResourceLocation DONKEY_LOCATION = new ResourceLocation("textures/entity/horse/donkey.png");
+	private static final ResourceLocation DONKEY_LOCATION = ResourceLocation.withDefaultNamespace("textures/entity/horse/donkey.png");
 
 	public ZonkeyRenderer(EntityRendererProvider.Context context) {
 		super(context, new ZonkeyModel<>(context.bakeLayer(EnvironmentalModelLayers.ZONKEY)), 0.75F);

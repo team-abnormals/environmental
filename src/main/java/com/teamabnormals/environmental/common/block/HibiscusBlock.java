@@ -1,6 +1,7 @@
 package com.teamabnormals.environmental.common.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.level.BlockGetter;
@@ -12,7 +13,7 @@ import java.util.function.Supplier;
 public class HibiscusBlock extends AbstractHibiscusBlock {
 	private final Block wallHibiscus;
 
-	public HibiscusBlock(Supplier<MobEffect> stewEffect, int stewEffectDuration, Block wallHibiscus, Properties properties) {
+	public HibiscusBlock(Holder<MobEffect> stewEffect, int stewEffectDuration, Block wallHibiscus, Properties properties) {
 		super(stewEffect, stewEffectDuration, properties);
 		this.wallHibiscus = wallHibiscus;
 	}

@@ -40,7 +40,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.event.ForgeEventFactory;
+import net.neoforged.neoforge.event.EventHooks;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -84,7 +84,6 @@ public abstract class AbstractDeer extends Animal {
 
 	public AbstractDeer(EntityType<? extends Animal> type, Level level) {
 		super(type, level);
-		this.setMaxUpStep(1.0F);
 		this.neckAngle = 15F;
 		this.neckAngleO = 15F;
 		this.floweringTime = 0;
@@ -107,12 +106,12 @@ public abstract class AbstractDeer extends Animal {
 	}
 
 	@Override
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		this.entityData.define(TARGET_NECK_ANGLE, 15);
-		this.entityData.define(FLOWER_AMOUNT, 0);
-		this.entityData.define(HAS_ANTLERS, true);
-		this.entityData.define(TRUSTING, false);
+	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+		super.defineSynchedData(builder);
+		builder.define(TARGET_NECK_ANGLE, 15);
+		builder.define(FLOWER_AMOUNT, 0);
+		builder.define(HAS_ANTLERS, true);
+		builder.define(TRUSTING, false);
 	}
 
 	@Override
@@ -150,7 +149,7 @@ public abstract class AbstractDeer extends Animal {
 	}
 
 	public static AttributeSupplier.Builder registerAttributes() {
-		return Animal.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0D).add(Attributes.MOVEMENT_SPEED, 0.2D);
+		return Animal.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0D).add(Attributes.MOVEMENT_SPEED, 0.2D).add(Attributes.STEP_HEIGHT, 1.0);
 	}
 
 	@Override
@@ -215,7 +214,7 @@ public abstract class AbstractDeer extends Animal {
 		} else if ((player.isCreative() || this.temptGoal == null || this.temptGoal.isRunning()) && (this.isFood(stack) || stack.is(EnvironmentalItemTags.DEER_FLOWER_ITEMS))) {
 			if (!this.level().isClientSide) {
 				this.usePlayerItem(player, hand, stack);
-				if (this.random.nextInt(3) == 0 && !ForgeEventFactory.onAnimalTame(this, player)) {
+				if (this.random.nextInt(3) == 0 && !EventHooks.onAnimalTame(this, player)) {
 					this.setTrusting(true);
 					this.spawnTrustingParticles(true);
 					this.level().broadcastEntityEvent(this, (byte) 5);
@@ -354,20 +353,6 @@ public abstract class AbstractDeer extends Animal {
 			this.hopAmount = Math.min(1.0F, this.hopAmount + 0.25F);
 		} else {
 			this.hopAmount = Math.max(0.0F, this.hopAmount - 0.25F);
-		}
-	}
-
-	@Override
-	protected float getStandingEyeHeight(Pose pose, EntityDimensions dimensions) {
-		return this.isGrazing() ? dimensions.height * 0.3F : dimensions.height * 0.95F;
-	}
-
-	@Override
-	public EntityDimensions getDimensions(Pose pose) {
-		if (this.isGrazing()) {
-			return GRAZING_DIMENSIONS.scale(this.getScale());
-		} else {
-			return super.getDimensions(pose);
 		}
 	}
 

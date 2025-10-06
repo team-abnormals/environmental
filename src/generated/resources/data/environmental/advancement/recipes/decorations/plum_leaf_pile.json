@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_plum_leaves": {
+      "conditions": {
+        "items": [
+          {
+            "items": "environmental:plum_leaves"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "environmental:plum_leaf_pile"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_plum_leaves"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "environmental:plum_leaf_pile"
+    ]
+  }
+}

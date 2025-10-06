@@ -12,7 +12,7 @@
                   "entity": "this",
                   "predicate": {
                     "location": {
-                      "biome": "environmental:blossom_valleys"
+                      "biomes": "environmental:blossom_valleys"
                     }
                   }
                 }
@@ -28,7 +28,7 @@
                   "entity": "this",
                   "predicate": {
                     "location": {
-                      "biome": "environmental:blossom_woods"
+                      "biomes": "environmental:blossom_woods"
                     }
                   }
                 }
@@ -44,7 +44,7 @@
                   "entity": "this",
                   "predicate": {
                     "location": {
-                      "biome": "environmental:marsh"
+                      "biomes": "environmental:marsh"
                     }
                   }
                 }
@@ -60,7 +60,7 @@
                   "entity": "this",
                   "predicate": {
                     "location": {
-                      "biome": "environmental:old_growth_pine_barrens"
+                      "biomes": "environmental:old_growth_pine_barrens"
                     }
                   }
                 }
@@ -76,7 +76,7 @@
                   "entity": "this",
                   "predicate": {
                     "location": {
-                      "biome": "environmental:pine_barrens"
+                      "biomes": "environmental:pine_barrens"
                     }
                   }
                 }
@@ -92,7 +92,7 @@
                   "entity": "this",
                   "predicate": {
                     "location": {
-                      "biome": "environmental:pine_slopes"
+                      "biomes": "environmental:pine_slopes"
                     }
                   }
                 }
@@ -108,7 +108,7 @@
                   "entity": "this",
                   "predicate": {
                     "location": {
-                      "biome": "environmental:snowy_old_growth_pine_barrens"
+                      "biomes": "environmental:snowy_old_growth_pine_barrens"
                     }
                   }
                 }
@@ -124,7 +124,7 @@
                   "entity": "this",
                   "predicate": {
                     "location": {
-                      "biome": "environmental:snowy_pine_barrens"
+                      "biomes": "environmental:snowy_pine_barrens"
                     }
                   }
                 }
@@ -133,6 +133,7 @@
             "trigger": "minecraft:location"
           }
         },
+        "indexed_requirements": [],
         "requirements": [
           [
             "environmental:environmental:marsh"

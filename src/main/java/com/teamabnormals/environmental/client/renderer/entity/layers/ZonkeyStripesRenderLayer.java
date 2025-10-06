@@ -11,9 +11,10 @@ import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class ZonkeyStripesRenderLayer extends RenderLayer<Zonkey, ZonkeyModel<Zonkey>> {
@@ -27,7 +28,7 @@ public class ZonkeyStripesRenderLayer extends RenderLayer<Zonkey, ZonkeyModel<Zo
 		if (!zonkey.isInvisible()) {
 			VertexConsumer builder = buffer.getBuffer(RenderType.entityTranslucent(STRIPES_LOCATION));
 			float f = Mth.clamp(zonkey.getStripeOpacity() / 100.0F, 0.0F, 1.0F);
-			this.getParentModel().renderToBuffer(poseStack, builder, packedLight, LivingEntityRenderer.getOverlayCoords(zonkey, 0.0F), 1.0F, 1.0F, 1.0F, f);
+			this.getParentModel().renderToBuffer(poseStack, builder, packedLight, LivingEntityRenderer.getOverlayCoords(zonkey, 0.0F), FastColor.ARGB32.alpha(FastColor.as8BitChannel(f)));
 		}
 	}
 }

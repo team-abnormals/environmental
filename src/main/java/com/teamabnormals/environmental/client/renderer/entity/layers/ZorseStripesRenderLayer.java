@@ -13,10 +13,11 @@ import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.animal.horse.Variant;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 import java.util.Map;
 
@@ -40,7 +41,7 @@ public class ZorseStripesRenderLayer extends RenderLayer<Zorse, ZorseModel<Zorse
 		if (!zorse.isInvisible()) {
 			VertexConsumer builder = buffer.getBuffer(RenderType.entityTranslucent(LOCATION_BY_VARIANT.get(zorse.getVariant())));
 			float f = Mth.clamp(zorse.getStripeOpacity() / 100.0F, 0.0F, 1.0F);
-			this.getParentModel().renderToBuffer(poseStack, builder, packedLight, LivingEntityRenderer.getOverlayCoords(zorse, 0.0F), 1.0F, 1.0F, 1.0F, f);
+			this.getParentModel().renderToBuffer(poseStack, builder, packedLight, LivingEntityRenderer.getOverlayCoords(zorse, 0.0F), FastColor.ARGB32.alpha(FastColor.as8BitChannel(f)));
 		}
 	}
 }

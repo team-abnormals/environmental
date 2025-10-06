@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "leaves",
+  "key": {
+    "#": {
+      "item": "environmental:moody_plum_leaf_pile"
+    }
+  },
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "result": {
+    "count": 1,
+    "id": "environmental:moody_plum_leaves"
+  }
+}

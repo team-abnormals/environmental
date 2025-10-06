@@ -5,11 +5,11 @@ import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.PaintingVariantTagsProvider;
 import net.minecraft.tags.PaintingVariantTags;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.CompletableFuture;
 
-import static com.teamabnormals.environmental.core.registry.EnvironmentalPaintingVariants.*;
+import static com.teamabnormals.environmental.core.registry.datapack.EnvironmentalPaintingVariants.*;
 
 public class EnvironmentalPaintingVariantTagsProvider extends PaintingVariantTagsProvider {
 
@@ -20,9 +20,9 @@ public class EnvironmentalPaintingVariantTagsProvider extends PaintingVariantTag
 	@Override
 	public void addTags(Provider provider) {
 		this.tag(PaintingVariantTags.PLACEABLE).add(
-				SNAKE_BLOCK.getKey(), SLABFISH.getKey(), ARCHIVE.getKey(),
-				OPTIMAL_AERODYNAMICS.getKey(), IN_PLAINS_SIGHT.getKey(), THE_PLACE_WITHIN_THE_PINES.getKey(),
-				BOUQUET.getKey(), BOUQUET2.getKey(), LONE_PLUM.getKey(), MARSHPATH.getKey()
+				SNAKE_BLOCK, SLABFISH, ARCHIVE,
+				OPTIMAL_AERODYNAMICS, IN_PLAINS_SIGHT, THE_PLACE_WITHIN_THE_PINES,
+				BOUQUET, BOUQUET2, LONE_PLUM, MARSHPATH
 		);
 	}
 }

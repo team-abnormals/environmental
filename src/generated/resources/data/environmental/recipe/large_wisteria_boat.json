@@ -1,0 +1,27 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "boatload"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "large_boat",
+  "key": {
+    "#": {
+      "item": "environmental:wisteria_planks"
+    },
+    "B": {
+      "item": "environmental:wisteria_boat"
+    }
+  },
+  "pattern": [
+    "#B#",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "environmental:large_wisteria_boat"
+  }
+}

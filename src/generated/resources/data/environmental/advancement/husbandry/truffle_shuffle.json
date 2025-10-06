@@ -1,0 +1,40 @@
+{
+  "parent": "environmental:husbandry/saddle_pig",
+  "criteria": {
+    "truffle_shuffle": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:pig"
+            }
+          }
+        ],
+        "item": {
+          "items": "minecraft:golden_carrot"
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.environmental.husbandry.truffle_shuffle.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:golden_carrot"
+    },
+    "title": {
+      "translate": "advancements.environmental.husbandry.truffle_shuffle.title"
+    }
+  },
+  "requirements": [
+    [
+      "truffle_shuffle"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

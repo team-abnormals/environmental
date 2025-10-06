@@ -1,0 +1,9 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "minecraft:flower_forest",
+  "features": [
+    "environmental:patch_delphiniums",
+    "environmental:trees_wisteria"
+  ],
+  "step": "vegetal_decoration"
+}

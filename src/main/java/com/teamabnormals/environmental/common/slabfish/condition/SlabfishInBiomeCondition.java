@@ -1,6 +1,7 @@
 package com.teamabnormals.environmental.common.slabfish.condition;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamabnormals.environmental.common.slabfish.SlabfishConditionType;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSlabfishConditions;
@@ -14,16 +15,10 @@ import net.minecraft.world.level.biome.Biome;
  *
  * @author Ocelot
  */
-public class SlabfishInBiomeCondition implements SlabfishCondition {
-	public static final Codec<SlabfishInBiomeCondition> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+public record SlabfishInBiomeCondition(HolderSet<Biome> biomes) implements SlabfishCondition {
+	public static final MapCodec<SlabfishInBiomeCondition> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 			RegistryCodecs.homogeneousList(Registries.BIOME).fieldOf("biomes").forGetter(entry -> entry.biomes)
 	).apply(instance, SlabfishInBiomeCondition::new));
-
-	private final HolderSet<Biome> biomes;
-
-	public SlabfishInBiomeCondition(HolderSet<Biome> biomes) {
-		this.biomes = biomes;
-	}
 
 	@Override
 	public boolean test(SlabfishConditionContext context) {

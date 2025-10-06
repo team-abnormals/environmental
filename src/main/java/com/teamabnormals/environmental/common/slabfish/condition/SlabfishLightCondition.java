@@ -3,10 +3,11 @@ package com.teamabnormals.environmental.common.slabfish.condition;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamabnormals.environmental.common.slabfish.SlabfishConditionType;
+import com.teamabnormals.environmental.common.slabfish.XorMapCodec;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSlabfishConditions;
-import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.level.LightLayer;
 
 import javax.annotation.Nullable;
@@ -28,18 +29,18 @@ public class SlabfishLightCondition implements SlabfishCondition {
 		return DataResult.error(() -> "Invalid light type: " + name);
 	}, lightLayer -> lightLayer.name().toLowerCase(Locale.ROOT));
 
-	private static final Codec<SlabfishLightCondition> VALUE_CODEC = RecordCodecBuilder.create(instance -> instance.group(
+	private static final MapCodec<SlabfishLightCondition> VALUE_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 			Codec.INT.fieldOf("value").forGetter(SlabfishLightCondition::getMax),
 			SlabfishLightCondition.LIGHT_LAYER_CODEC.optionalFieldOf("light_type").forGetter(c -> Optional.ofNullable(c.getLightLayer()))
 	).apply(instance, (value, light) -> new SlabfishLightCondition(value, value, light.orElse(null))));
 
-	private static final Codec<SlabfishLightCondition> MIN_MAX_CODEC = RecordCodecBuilder.create(instance -> instance.group(
+	private static final MapCodec<SlabfishLightCondition> MIN_MAX_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 			Codec.INT.fieldOf("min").forGetter(SlabfishLightCondition::getMin),
 			Codec.INT.fieldOf("max").forGetter(SlabfishLightCondition::getMax),
 			SlabfishLightCondition.LIGHT_LAYER_CODEC.optionalFieldOf("light_type").forGetter(c -> Optional.ofNullable(c.getLightLayer()))
 	).apply(instance, (min, max, light) -> new SlabfishLightCondition(min, max, light.orElse(null))));
 
-	public static final Codec<SlabfishLightCondition> CODEC = ExtraCodecs.xor(SlabfishLightCondition.VALUE_CODEC, SlabfishLightCondition.MIN_MAX_CODEC).xmap(
+	public static final MapCodec<SlabfishLightCondition> CODEC = XorMapCodec.xor(SlabfishLightCondition.VALUE_CODEC, SlabfishLightCondition.MIN_MAX_CODEC).xmap(
 			c -> c.left().isPresent() ? c.left().get() : c.right().orElse(null),
 			c -> c.getMin() == c.getMax() ? Either.left(c) : Either.right(c)
 	);

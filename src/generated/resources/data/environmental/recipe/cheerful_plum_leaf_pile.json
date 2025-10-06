@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "leaf_pile",
+  "ingredients": [
+    {
+      "item": "environmental:cheerful_plum_leaves"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "id": "environmental:cheerful_plum_leaf_pile"
+  }
+}

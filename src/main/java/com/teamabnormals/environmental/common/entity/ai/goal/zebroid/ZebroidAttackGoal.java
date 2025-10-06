@@ -50,12 +50,12 @@ public class ZebroidAttackGoal<Z extends AbstractHorse & Zebroid> extends MeleeA
 			}
 
 			this.ticksUntilNextAttack = Math.max(this.ticksUntilNextAttack - 1, 0);
-			this.checkAndPerformAttack(livingentity, d0);
+			this.checkAndPerformAttack(livingentity);
 		}
 	}
 
 	@Override
-	protected void checkAndPerformAttack(LivingEntity target, double distance) {
+	protected void checkAndPerformAttack(LivingEntity target) {
 		if (this.isTimeToAttack() && this.mob.getBoundingBox().inflate(1.0F).intersects(target.getBoundingBox())) {
 			this.resetAttackCooldown();
 			double x = target.getX() - this.mob.getX();

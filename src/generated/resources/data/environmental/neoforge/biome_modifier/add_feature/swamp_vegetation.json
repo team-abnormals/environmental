@@ -1,0 +1,9 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "minecraft:swamp",
+  "features": [
+    "environmental:trees_swamp",
+    "environmental:patch_duckweed_swamp"
+  ],
+  "step": "vegetal_decoration"
+}

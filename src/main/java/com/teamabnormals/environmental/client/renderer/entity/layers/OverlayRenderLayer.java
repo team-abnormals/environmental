@@ -11,8 +11,8 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class OverlayRenderLayer<E extends Slabfish, M extends SlabfishModel<E>> extends RenderLayer<E, M> {
@@ -28,6 +28,6 @@ public class OverlayRenderLayer<E extends Slabfish, M extends SlabfishModel<E>> 
 		VertexConsumer builder = buffer.getBuffer(RenderType.entityCutoutNoCull(SlabfishSpriteUploader.ATLAS_LOCATION));
 		this.getParentModel().sprite = SlabfishSpriteUploader.instance().getSprite(slabfish.getSlabfishOverlay().getTextureLocation());
 		this.getParentModel().setupAnim(slabfish, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-		this.getParentModel().renderToBuffer(matrixStack, builder, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+		this.getParentModel().renderToBuffer(matrixStack, builder, packedLightIn, OverlayTexture.NO_OVERLAY);
 	}
 }

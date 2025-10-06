@@ -1,0 +1,19 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "berry_good"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "environmental:plum_crate"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "environmental:plum"
+  }
+}

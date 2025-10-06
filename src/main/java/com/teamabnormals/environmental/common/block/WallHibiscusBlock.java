@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.Direction.Plane;
+import net.minecraft.core.Holder;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffect;
@@ -29,7 +30,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 import java.util.Map;
-import java.util.function.Supplier;
 
 public class WallHibiscusBlock extends AbstractHibiscusBlock {
 	public static final EnumProperty<AttachFace> FACE = BlockStateProperties.ATTACH_FACE;
@@ -37,7 +37,7 @@ public class WallHibiscusBlock extends AbstractHibiscusBlock {
 
 	private static final Map<Direction, VoxelShape> AABBS = Maps.newEnumMap(ImmutableMap.of(Direction.NORTH, Block.box(3.0D, 3.0D, 0.0D, 13.0D, 13.0D, 1.0D), Direction.SOUTH, Block.box(3.0D, 3.0D, 15.0D, 13.0D, 13.0D, 16.0D), Direction.WEST, Block.box(0.0D, 3.0D, 3.0D, 1.0D, 13.0D, 13.0D), Direction.EAST, Block.box(15.0D, 3.0D, 3.0D, 16.0D, 13.0D, 13.0D), Direction.UP, Block.box(3.0D, 15.0D, 3.0D, 13.0D, 16.0D, 13.0D), Direction.DOWN, Block.box(3.0D, 0.0D, 3.0D, 13.0D, 1.0D, 13.0D)));
 
-	public WallHibiscusBlock(Supplier<MobEffect> stewEffect, int stewEffectDuration, Properties properties) {
+	public WallHibiscusBlock(Holder<MobEffect> stewEffect, int stewEffectDuration, Properties properties) {
 		super(stewEffect, stewEffectDuration, properties);
 		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(FACE, AttachFace.WALL));
 	}

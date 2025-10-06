@@ -25,14 +25,14 @@ public class WisteriaTreeFeature extends BlueprintTreeFeature {
 	}
 
 	@Override
-	public void doPlace(FeaturePlaceContext<TreeConfiguration> context) {
+	public void doPlace(FeaturePlaceContext<TreeConfiguration> context, TreeInfo info) {
 		TreeConfiguration config = context.config();
 		RandomSource random = context.random();
 		BlockPos origin = context.origin();
 
 		int trunkHeight = config.trunkPlacer.getTreeHeight(random);
 		for (int y = 0; y < trunkHeight; y++) {
-			this.addLog(origin.above(y));
+			info.addLog(origin.above(y));
 		}
 
 		Direction direction = Plane.HORIZONTAL.getRandomDirection(random);
@@ -40,7 +40,7 @@ public class WisteriaTreeFeature extends BlueprintTreeFeature {
 		pos.set(origin.above(trunkHeight - 2).relative(direction));
 
 		for (int y = 0; y < 3; y++) {
-			this.addLog(pos.set(pos.above()));
+			info.addLog(pos.set(pos.above()));
 		}
 
 		List<Direction> rootDirections = Lists.newArrayList();
@@ -50,12 +50,12 @@ public class WisteriaTreeFeature extends BlueprintTreeFeature {
 		}
 
 		if (!rootDirections.isEmpty()) {
-			this.addLog(origin.relative(rootDirections.get(random.nextInt(rootDirections.size()))));
+			info.addLog(origin.relative(rootDirections.get(random.nextInt(rootDirections.size()))));
 		}
 
 		pos.set(pos.below().relative(Plane.HORIZONTAL.getRandomDirection(random)));
 		for (int y = 0; y < 3; y++) {
-			this.addLog(pos.set(pos.above()));
+			info.addLog(pos.set(pos.above()));
 		}
 
 		Direction direction1 = Plane.HORIZONTAL.getRandomDirection(random);
@@ -65,23 +65,23 @@ public class WisteriaTreeFeature extends BlueprintTreeFeature {
 			BlockPos branchPos = branchDirection == direction1 ? pos.relative(offset) : pos;
 			int height = random.nextInt(2);
 			if (height > 0)
-				this.addLog(pos.above());
-			this.createBranch(branchPos.relative(branchDirection).above(height), branchDirection, random, config);
+				info.addLog(pos.above());
+			this.createBranch(branchPos.relative(branchDirection).above(height), branchDirection, random, config, info);
 		});
 	}
 
-	private void createBranch(BlockPos pos, Direction direction, RandomSource random, TreeConfiguration config) {
+	private void createBranch(BlockPos pos, Direction direction, RandomSource random, TreeConfiguration config, TreeInfo info) {
 		MutableBlockPos mutablePos = new MutableBlockPos();
 		mutablePos.set(pos);
 
-		this.addLog(mutablePos);
-		this.addLog(mutablePos.set(mutablePos.relative(direction)));
-		this.addLog(mutablePos.set(mutablePos.relative(direction).above()));
+		info.addLog(mutablePos);
+		info.addLog(mutablePos.set(mutablePos.relative(direction)));
+		info.addLog(mutablePos.set(mutablePos.relative(direction).above()));
 
-		this.createLeaves(mutablePos, direction, random, config);
+		this.createLeaves(mutablePos, direction, random, config, info);
 	}
 
-	private void createLeaves(BlockPos pos, Direction direction, RandomSource random, TreeConfiguration config) {
+	private void createLeaves(BlockPos pos, Direction direction, RandomSource random, TreeConfiguration config, TreeInfo info) {
 		for (int x = -1; x <= 1; ++x) {
 			for (int z = -1; z <= 1; ++z) {
 				int i = -1 - (random.nextInt(3) == 0 ? 1 : 0);
@@ -90,11 +90,11 @@ public class WisteriaTreeFeature extends BlueprintTreeFeature {
 					if (y <= 0 || x == 0 || z == 0 || random.nextInt(3) == 0) {
 						BlockPos blockpos = pos.offset(x, y, z);
 						if (y > j || (y == 0 && x == -direction.getStepX() && z == -direction.getStepZ()))
-							this.addSpecialFoliage(blockpos, EnvironmentalBlocks.WISTERIA_LEAVES.get().defaultBlockState());
+							info.addFoliage(blockpos, EnvironmentalBlocks.WISTERIA_LEAVES.get().defaultBlockState());
 						else if (y == j)
-							this.addSpecialFoliage(blockpos, config.foliageProvider.getState(random, blockpos).setValue(ColoredWisteriaLeavesBlock.HALF, Half.TOP));
+							info.addFoliage(blockpos, config.foliageProvider.getState(random, blockpos).setValue(ColoredWisteriaLeavesBlock.HALF, Half.TOP));
 						else
-							this.addSpecialFoliage(blockpos, config.foliageProvider.getState(random, blockpos));
+							info.addFoliage(blockpos, config.foliageProvider.getState(random, blockpos));
 					}
 				}
 			}
