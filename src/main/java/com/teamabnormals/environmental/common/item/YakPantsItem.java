@@ -32,7 +32,7 @@ public class YakPantsItem extends ArmorItem {
 		ItemAttributeModifiers modifiers = super.getDefaultAttributeModifiers(stack);
 		EquipmentSlotGroup slot = EquipmentSlotGroup.bySlot(type.getSlot());
 		ResourceLocation name = ResourceLocation.withDefaultNamespace("armor." + type.getName());
-		modifiers.withModifierAdded(Attributes.STEP_HEIGHT, new AttributeModifier(name, 0.4F, Operation.ADD_VALUE), slot);
+		modifiers = modifiers.withModifierAdded(Attributes.STEP_HEIGHT, new AttributeModifier(name, 0.4F, Operation.ADD_VALUE), slot);
 		return modifiers;
 	}
 

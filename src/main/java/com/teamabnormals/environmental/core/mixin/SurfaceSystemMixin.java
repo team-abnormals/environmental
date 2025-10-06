@@ -7,6 +7,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.LevelHeightAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeManager;
 import net.minecraft.world.level.block.Blocks;
@@ -28,10 +29,6 @@ public abstract class SurfaceSystemMixin {
 	private NormalNoise pineBarrensStoneNoise;
 	private int[][][] pineBarrensStoneRaises;
 	private boolean raisePineBarrensStone;
-
-	@Shadow
-	@Final
-	private BlockState defaultBlock;
 
 	@Shadow
 	@Final
@@ -63,8 +60,36 @@ public abstract class SurfaceSystemMixin {
 		}
 	}
 
-	@Inject(method = "buildSurface", at = @At("TAIL"), locals = LocalCapture.CAPTURE_FAILHARD)
-	private void generateRaisedStone(RandomState randomState, BiomeManager biomeManager, Registry<Biome> registry, boolean useLegacyRandomSource, WorldGenerationContext context, final ChunkAccess chunkAccess, NoiseChunk noiseChunk, SurfaceRules.RuleSource ruleSource, CallbackInfo ci, final BlockPos.MutableBlockPos mutable, ChunkPos chunkPos, int i, int j, BlockColumn blockColumn) {
+	//TODO: Make sure this didn't need locals
+	@Inject(method = "buildSurface", at = @At("TAIL"))
+	private void generateRaisedStone(RandomState randomState, BiomeManager biomeManager, Registry<Biome> registry, boolean useLegacyRandomSource, WorldGenerationContext context, final ChunkAccess chunk, NoiseChunk noiseChunk, SurfaceRules.RuleSource ruleSource, CallbackInfo ci) {
+		final BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
+		final ChunkPos chunkPos = chunk.getPos();
+		int i = chunkPos.getMinBlockX();
+		int j = chunkPos.getMinBlockZ();
+		BlockColumn blockColumn = new BlockColumn() {
+			@Override
+			public BlockState getBlock(int y) {
+				return chunk.getBlockState(mutable.setY(y));
+			}
+
+			@Override
+			public void setBlock(int y, BlockState state) {
+				LevelHeightAccessor heightAccessor = chunk.getHeightAccessorForGeneration();
+				if (y >= heightAccessor.getMinBuildHeight() && y < heightAccessor.getMaxBuildHeight()) {
+					chunk.setBlockState(mutable.setY(y), state, false);
+					if (!state.getFluidState().isEmpty()) {
+						chunk.markPosForPostprocessing(mutable);
+					}
+				}
+			}
+
+			@Override
+			public String toString() {
+				return "ChunkBlockColumn " + chunkPos;
+			}
+		};
+
 		if (this.raisePineBarrensStone) {
 			for (int x = 0; x < 16; ++x) {
 				for (int z = 0; z < 16; ++z) {

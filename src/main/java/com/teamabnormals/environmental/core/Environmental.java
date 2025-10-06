@@ -63,6 +63,7 @@ public class Environmental {
 		EnvironmentalMemoryModuleTypes.MEMORY_MODULE_TYPES.register(bus);
 		EnvironmentalSensorTypes.SENSOR_TYPES.register(bus);
 		EnvironmentalCriteriaTriggers.TRIGGERS.register(bus);
+		EnvironmentalArmorMaterials.ARMOR_MATERIALS.register(bus);
 
 		bus.addListener(this::registerCapabilities);
 		bus.addListener(this::registerPayloadHandlers);

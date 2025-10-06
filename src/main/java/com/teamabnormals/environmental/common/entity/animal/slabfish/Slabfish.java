@@ -606,7 +606,7 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 				this.setTame(true, true);
 				this.setOwnerUUID(tag.getUUID("Owner"));
 			}
-			this.setSlabfishTypeFromLocation(ResourceLocation.parse(tag.getString("SlabfishType")));
+			this.setSlabfishTypeFromLocation(ResourceLocation.parse(tag.getString("BucketVariantTag")));
 
 			if (tag.contains("BackpackType", Tag.TAG_STRING))
 				this.setBackpack(ResourceLocation.parse(tag.getString("BackpackType")));
@@ -639,7 +639,7 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 			if (this.getOwnerUUID() != null && this.isTame())
 				tag.putUUID("Owner", this.getOwnerUUID());
 
-			tag.putString("SlabfishType", this.getSlabfishTypeLocation().toString());
+			tag.putString("BucketVariantTag", this.getSlabfishTypeLocation().toString());
 
 			if (this.hasBackpack())
 				tag.putString("BackpackType", this.getBackpackLocation().toString());

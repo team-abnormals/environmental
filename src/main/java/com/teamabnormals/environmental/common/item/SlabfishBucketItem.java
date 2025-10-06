@@ -52,8 +52,8 @@ public class SlabfishBucketItem extends MobBucketItem {
 		if (context.level() != null) {
 			RegistryAccess registryAccess = context.level().registryAccess();
 			if (registryAccess != null) {
-				if (tag.contains("SlabfishType", CompoundTag.TAG_STRING)) {
-					Optional<Holder<SlabfishType>> holder = Optional.ofNullable(ResourceLocation.tryParse(tag.getString("SlabfishType")))
+				if (tag.contains("BucketVariantTag", CompoundTag.TAG_STRING)) {
+					Optional<Holder<SlabfishType>> holder = Optional.ofNullable(ResourceLocation.tryParse(tag.getString("BucketVariantTag")))
 							.map(loc -> ResourceKey.create(EnvironmentalRegistries.SLABFISH_TYPE, loc))
 							.flatMap(key -> registryAccess.registryOrThrow(EnvironmentalRegistries.SLABFISH_TYPE).getHolder(key));
 
