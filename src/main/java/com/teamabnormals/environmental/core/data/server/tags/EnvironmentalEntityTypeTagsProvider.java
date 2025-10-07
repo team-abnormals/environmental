@@ -27,6 +27,7 @@ public class EnvironmentalEntityTypeTagsProvider extends EntityTypeTagsProvider 
 		this.tag(EntityTypeTags.FALL_DAMAGE_IMMUNE).add(SLABFISH.get(), DUCK.get(), PINECONE_GOLEM.get());
 		this.tag(EntityTypeTags.IMPACT_PROJECTILES).add(MUD_BALL.get(), DUCK_EGG.get());
 		this.tag(EntityTypeTags.POWDER_SNOW_WALKABLE_MOBS).add(REINDEER.get());
+		this.tag(EntityTypeTags.CAN_BREATHE_UNDER_WATER).add(SLABFISH.get());
 
 		this.tag(UNAFFECTED_BY_SERENITY);
 		this.tag(EnvironmentalEntityTypeTags.DEER).add(EnvironmentalEntityTypes.DEER.get(), REINDEER.get());

@@ -7,10 +7,7 @@ import com.teamabnormals.environmental.common.network.message.ZebraJumpPayload;
 import com.teamabnormals.environmental.core.data.client.EnvironmentalBlockStateProvider;
 import com.teamabnormals.environmental.core.data.client.EnvironmentalItemModelProvider;
 import com.teamabnormals.environmental.core.data.client.EnvironmentalSpriteSourceProvider;
-import com.teamabnormals.environmental.core.data.server.EnvironmentalAdvancementProvider;
-import com.teamabnormals.environmental.core.data.server.EnvironmentalDatapackProvider;
-import com.teamabnormals.environmental.core.data.server.EnvironmentalLootTableProvider;
-import com.teamabnormals.environmental.core.data.server.EnvironmentalRecipeProvider;
+import com.teamabnormals.environmental.core.data.server.*;
 import com.teamabnormals.environmental.core.data.server.modifiers.EnvironmentalAdvancementModifierProvider;
 import com.teamabnormals.environmental.core.data.server.modifiers.EnvironmentalChunkGeneratorModifierProvider;
 import com.teamabnormals.environmental.core.data.server.tags.*;
@@ -82,9 +79,7 @@ public class Environmental {
 	}
 
 	private void commonSetup(FMLCommonSetupEvent event) {
-		event.enqueueWork(() -> {
-			EnvironmentalCompat.register();
-		});
+		event.enqueueWork(EnvironmentalCompat::register);
 	}
 
 	private void clientSetup(FMLClientSetupEvent event) {
@@ -116,6 +111,7 @@ public class Environmental {
 		generator.addProvider(server, new EnvironmentalAdvancementModifierProvider(output, provider));
 		generator.addProvider(server, new EnvironmentalChunkGeneratorModifierProvider(output, provider));
 		generator.addProvider(server, new EnvironmentalLootTableProvider(output, provider));
+		generator.addProvider(server, new EnvironmentalDataMapProvider(output, provider));
 		// generator.addProvider(server, new EnvironmentalLootModifierProvider(output, provider));
 
 		boolean client = event.includeClient();

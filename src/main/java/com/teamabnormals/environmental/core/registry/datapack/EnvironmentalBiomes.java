@@ -17,20 +17,19 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.*;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-import net.neoforged.fml.common.EventBusSubscriber;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
 public class EnvironmentalBiomes {
-	public static final ResourceKey<Biome> MARSH = createKey("marsh");
-	public static final ResourceKey<Biome> BLOSSOM_WOODS = createKey("blossom_woods");
-	public static final ResourceKey<Biome> BLOSSOM_VALLEYS = createKey("blossom_valleys");
-	public static final ResourceKey<Biome> PINE_BARRENS = createKey("pine_barrens");
-	public static final ResourceKey<Biome> SNOWY_PINE_BARRENS = createKey("snowy_pine_barrens");
-	public static final ResourceKey<Biome> OLD_GROWTH_PINE_BARRENS = createKey("old_growth_pine_barrens");
-	public static final ResourceKey<Biome> SNOWY_OLD_GROWTH_PINE_BARRENS = createKey("snowy_old_growth_pine_barrens");
-	public static final ResourceKey<Biome> PINE_SLOPES = createKey("pine_slopes");
+	public static final ResourceKey<Biome> MARSH = create("marsh");
+	public static final ResourceKey<Biome> BLOSSOM_WOODS = create("blossom_woods");
+	public static final ResourceKey<Biome> BLOSSOM_VALLEYS = create("blossom_valleys");
+	public static final ResourceKey<Biome> PINE_BARRENS = create("pine_barrens");
+	public static final ResourceKey<Biome> SNOWY_PINE_BARRENS = create("snowy_pine_barrens");
+	public static final ResourceKey<Biome> OLD_GROWTH_PINE_BARRENS = create("old_growth_pine_barrens");
+	public static final ResourceKey<Biome> SNOWY_OLD_GROWTH_PINE_BARRENS = create("snowy_old_growth_pine_barrens");
+	public static final ResourceKey<Biome> PINE_SLOPES = create("pine_slopes");
 
 	public static final List<ResourceKey<Biome>> NATURAL_BIOMES = List.of(
 			MARSH, BLOSSOM_WOODS, BLOSSOM_VALLEYS,
@@ -53,7 +52,7 @@ public class EnvironmentalBiomes {
 		context.register(PINE_SLOPES, pineSlopes(features, carvers));
 	}
 
-	public static ResourceKey<Biome> createKey(String name) {
+	public static ResourceKey<Biome> create(String name) {
 		return ResourceKey.create(Registries.BIOME, Environmental.location(name));
 	}
 

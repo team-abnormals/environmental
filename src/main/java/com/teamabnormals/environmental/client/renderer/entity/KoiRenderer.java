@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.teamabnormals.environmental.client.model.KoiModel;
 import com.teamabnormals.environmental.common.entity.animal.koi.Koi;
-import com.teamabnormals.environmental.common.entity.animal.koi.KoiBreed;
 import com.teamabnormals.environmental.core.other.EnvironmentalModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
@@ -22,7 +21,7 @@ public class KoiRenderer extends MobRenderer<Koi, KoiModel<Koi>> {
 
 	@Override
 	public ResourceLocation getTextureLocation(Koi koi) {
-		return KoiBreed.byId(koi.getVariant()).getTextureLocation();
+		return koi.getVariant().value().assetId().withPrefix("textures/").withSuffix(".png");
 	}
 
 	@Override

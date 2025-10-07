@@ -13,7 +13,7 @@ import net.minecraft.world.level.Level;
 import javax.annotation.Nullable;
 
 public class EnvironmentalDamageTypes {
-	public static final ResourceKey<DamageType> RIDING_ZEBRA = createKey("riding_zebra");
+	public static final ResourceKey<DamageType> RIDING_ZEBRA = create("riding_zebra");
 
 	public static void bootstrap(BootstrapContext<DamageType> context) {
 		register(context, RIDING_ZEBRA, "ridingZebra", 0.1F);
@@ -27,7 +27,7 @@ public class EnvironmentalDamageTypes {
 		return context.register(key, new DamageType(Environmental.MOD_ID + "." + localizationKey, exhaustion));
 	}
 
-	public static ResourceKey<DamageType> createKey(String name) {
+	public static ResourceKey<DamageType> create(String name) {
 		return ResourceKey.create(Registries.DAMAGE_TYPE, Environmental.location(name));
 	}
 

@@ -18,7 +18,6 @@ import net.minecraft.world.level.block.DispenserBlock;
 public class EnvironmentalCompat {
 
 	public static void register() {
-		registerCompostables();
 		registerFlammables();
 		registerDispenserBehaviors();
 		changeLocalization();
@@ -26,98 +25,6 @@ public class EnvironmentalCompat {
 
 	private static void changeLocalization() {
 		DataUtil.changeBlockLocalization(Blocks.DIRT_PATH, Environmental.MOD_ID, "grass_path");
-	}
-
-	public static void registerCompostables() {
-		DataUtil.registerCompostable(EnvironmentalBlocks.LARGE_LILY_PAD.get(), 0.85F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.GIANT_LILY_PAD.get(), 1.0F);
-
-		DataUtil.registerCompostable(EnvironmentalBlocks.WILLOW_LEAVES.get(), 0.30F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.WILLOW_SAPLING.get(), 0.30F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.HANGING_WILLOW_LEAVES.get(), 0.30F);
-
-		DataUtil.registerCompostable(EnvironmentalBlocks.PINE_LEAVES.get(), 0.30F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.PINE_SAPLING.get(), 0.30F);
-
-		DataUtil.registerCompostable(EnvironmentalBlocks.PINECONE.get(), 0.85F);
-
-		DataUtil.registerCompostable(EnvironmentalBlocks.PLUM_LEAVES.get(), 0.30F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.PLUM_SAPLING.get(), 0.30F);
-
-		DataUtil.registerCompostable(EnvironmentalBlocks.CHEERFUL_PLUM_LEAVES.get(), 0.30F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.CHEERFUL_PLUM_SAPLING.get(), 0.30F);
-
-		DataUtil.registerCompostable(EnvironmentalBlocks.MOODY_PLUM_LEAVES.get(), 0.30F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.MOODY_PLUM_SAPLING.get(), 0.30F);
-
-		DataUtil.registerCompostable(EnvironmentalItems.CHERRIES.get(), 0.30F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.CHERRY_CRATE.get(), 1.0F);
-
-		DataUtil.registerCompostable(EnvironmentalItems.PLUM.get(), 0.65F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.PLUM_CRATE.get(), 1.0F);
-
-		DataUtil.registerCompostable(EnvironmentalItems.CATTAIL_FLUFF.get(), 0.30F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.CATTAIL_FLUFF_BLOCK.get(), 1.0F);
-
-		DataUtil.registerCompostable(EnvironmentalBlocks.DUCKWEED.get(), 0.65F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.CATTAIL.get(), 0.65F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.GIANT_TALL_GRASS.get(), 0.65F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.MYCELIUM_SPROUTS.get(), 0.50F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.CUP_LICHEN.get(), 0.30F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.DWARF_SPRUCE.get(), 0.50F);
-
-		DataUtil.registerCompostable(EnvironmentalItems.TRUFFLE.get(), 0.65F);
-
-		DataUtil.registerCompostable(EnvironmentalBlocks.CATTAIL_THATCH.get(), 0.65F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.CATTAIL_THATCH_SLAB.get(), 0.65F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.CATTAIL_THATCH_STAIRS.get(), 0.65F);
-
-		DataUtil.registerCompostable(EnvironmentalBlocks.DUCKWEED_THATCH.get(), 0.65F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.DUCKWEED_THATCH_SLAB.get(), 0.65F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.DUCKWEED_THATCH_STAIRS.get(), 0.65F);
-
-		DataUtil.registerCompostable(EnvironmentalBlocks.GRASS_THATCH.get(), 0.65F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.GRASS_THATCH_SLAB.get(), 0.65F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.GRASS_THATCH_STAIRS.get(), 0.65F);
-
-		DataUtil.registerCompostable(EnvironmentalBlocks.WISTERIA_LEAVES.get(), 0.30F);
-
-		DataUtil.registerCompostable(EnvironmentalBlocks.BLUE_WISTERIA_LEAVES.get(), 0.30F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.WHITE_WISTERIA_LEAVES.get(), 0.30F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.PINK_WISTERIA_LEAVES.get(), 0.30F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.PURPLE_WISTERIA_LEAVES.get(), 0.30F);
-
-		DataUtil.registerCompostable(EnvironmentalBlocks.BLUE_HANGING_WISTERIA_LEAVES.get(), 0.30F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.WHITE_HANGING_WISTERIA_LEAVES.get(), 0.30F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.PINK_HANGING_WISTERIA_LEAVES.get(), 0.30F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.PURPLE_HANGING_WISTERIA_LEAVES.get(), 0.30F);
-
-		DataUtil.registerCompostable(EnvironmentalBlocks.BLUE_WISTERIA_SAPLING.get(), 0.30F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.WHITE_WISTERIA_SAPLING.get(), 0.30F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.PINK_WISTERIA_SAPLING.get(), 0.30F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.PURPLE_WISTERIA_SAPLING.get(), 0.30F);
-
-		DataUtil.registerCompostable(EnvironmentalBlocks.CARTWHEEL.get(), 0.65F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.VIOLET.get(), 0.65F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.DIANTHUS.get(), 0.65F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.RED_LOTUS_FLOWER.get(), 0.65F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.WHITE_LOTUS_FLOWER.get(), 0.65F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.BLUEBELL.get(), 0.65F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.TASSELFLOWER.get(), 0.65F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.YELLOW_HIBISCUS.get(), 0.65F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.ORANGE_HIBISCUS.get(), 0.65F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.RED_HIBISCUS.get(), 0.65F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.PINK_HIBISCUS.get(), 0.65F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.MAGENTA_HIBISCUS.get(), 0.65F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.PURPLE_HIBISCUS.get(), 0.65F);
-
-		DataUtil.registerCompostable(EnvironmentalBlocks.HIBISCUS_LEAVES.get(), 0.50F);
-
-		DataUtil.registerCompostable(EnvironmentalBlocks.BLUE_DELPHINIUM.get(), 0.65F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.WHITE_DELPHINIUM.get(), 0.65F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.PINK_DELPHINIUM.get(), 0.65F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.PURPLE_DELPHINIUM.get(), 0.65F);
-		DataUtil.registerCompostable(EnvironmentalBlocks.BIRD_OF_PARADISE.get(), 0.65F);
 	}
 
 	public static void registerFlammables() {

@@ -18,7 +18,6 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.ArmorItem.Type;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.fml.ModList;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredItem;
 

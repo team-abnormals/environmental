@@ -4,7 +4,6 @@ import com.teamabnormals.blueprint.core.util.TagUtil;
 import com.teamabnormals.environmental.core.Environmental;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.level.block.Block;
 
 public class EnvironmentalEntityTypeTags {
 	public static final TagKey<EntityType<?>> UNAFFECTED_BY_SERENITY = entityTypeTag("unaffected_by_serenity");

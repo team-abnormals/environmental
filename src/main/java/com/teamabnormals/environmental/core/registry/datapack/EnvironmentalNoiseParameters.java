@@ -10,12 +10,12 @@ import net.minecraft.world.level.levelgen.synth.NormalNoise;
 import net.minecraft.world.level.levelgen.synth.NormalNoise.NoiseParameters;
 
 public class EnvironmentalNoiseParameters {
-	public static final ResourceKey<NoiseParameters> PINE_BARRENS_STONE = createKey("pine_barrens_stone");
-	public static final ResourceKey<NoiseParameters> CUP_LICHEN_NOISE = createKey("cup_lichen_noise");
-	public static final ResourceKey<NoiseParameters> DWARF_SPRUCE_DENSITY = createKey("dwarf_spruce_density");
-	public static final ResourceKey<NoiseParameters> DWARF_SPRUCE_HEIGHT = createKey("dwarf_spruce_height");
-	public static final ResourceKey<NoiseParameters> WISTERIA_DENSITY = createKey("wisteria_density");
-	public static final ResourceKey<NoiseParameters> WISTERIA_COLOR = createKey("wisteria_color");
+	public static final ResourceKey<NoiseParameters> PINE_BARRENS_STONE = create("pine_barrens_stone");
+	public static final ResourceKey<NoiseParameters> CUP_LICHEN_NOISE = create("cup_lichen_noise");
+	public static final ResourceKey<NoiseParameters> DWARF_SPRUCE_DENSITY = create("dwarf_spruce_density");
+	public static final ResourceKey<NoiseParameters> DWARF_SPRUCE_HEIGHT = create("dwarf_spruce_height");
+	public static final ResourceKey<NoiseParameters> WISTERIA_DENSITY = create("wisteria_density");
+	public static final ResourceKey<NoiseParameters> WISTERIA_COLOR = create("wisteria_color");
 
 	public static final LevelNoiseReceiver DWARF_SPRUCE_DENSITY_RECEIVER = new LevelNoiseReceiver(Algorithm.LEGACY, DWARF_SPRUCE_DENSITY);
 	public static final LevelNoiseReceiver DWARF_SPRUCE_HEIGHT_RECEIVER = new LevelNoiseReceiver(Algorithm.LEGACY, DWARF_SPRUCE_HEIGHT);
@@ -29,7 +29,7 @@ public class EnvironmentalNoiseParameters {
 		context.register(WISTERIA_COLOR, new NormalNoise.NoiseParameters(-9, 1.0D));
 	}
 
-	public static ResourceKey<NoiseParameters> createKey(String name) {
+	public static ResourceKey<NoiseParameters> create(String name) {
 		return ResourceKey.create(Registries.NOISE, Environmental.location(name));
 	}
 }

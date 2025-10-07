@@ -14,12 +14,12 @@ import net.minecraft.world.item.DyeColor;
 import java.util.Optional;
 
 public class EnvironmentalSlabfishSweaters {
-	public static final ResourceKey<SweaterType> EMPTY = createKey("empty");
+	public static final ResourceKey<SweaterType> EMPTY = create("empty");
 
 	public static void bootstrap(BootstrapContext<SweaterType> context) {
 		context.register(EMPTY, new SweaterType(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty()));
 		for (DyeColor color : DyeColor.values()) {
-			ResourceKey<SweaterType> key = createKey(color.getName());
+			ResourceKey<SweaterType> key = create(color.getName());
 			context.register(key, SweaterType.create(
 					Component.translatable(Util.makeDescriptionId("slabfish.sweater", key.location())),
 					ResourceLocation.fromNamespaceAndPath(key.location().getNamespace(), "sweater/" + key.location().getPath()),
@@ -27,7 +27,7 @@ public class EnvironmentalSlabfishSweaters {
 		}
 	}
 
-	public static ResourceKey<SweaterType> createKey(String name) {
+	public static ResourceKey<SweaterType> create(String name) {
 		return ResourceKey.create(EnvironmentalRegistries.SLABFISH_SWEATER, Environmental.location(name));
 	}
 }

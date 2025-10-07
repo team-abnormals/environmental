@@ -364,8 +364,8 @@ public interface Zebroid {
 			f3 += 0.15F * rot * nostandanim;
 		}
 
-		Vec3 vec3 = horse.getPassengerRidingPosition(rider).add(rider.getVehicleAttachmentPoint(horse));
-		function.accept(rider, horse.getX() + vec3.x() + (double) (f2 * f), horse.getY() + vec3.y() + (double) f3, horse.getZ() + vec3.z() - (double) (f2 * f1));
+		Vec3 vec3 = horse.getPassengerRidingPosition(rider).subtract(rider.getVehicleAttachmentPoint(horse));
+		function.accept(rider, vec3.x() + (double) (f2 * f), vec3.y() + (double) f3, vec3.z() - (double) (f2 * f1));
 	}
 
 	static float smoothAnim(float min, float max, float progress) {

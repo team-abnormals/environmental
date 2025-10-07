@@ -1,0 +1,208 @@
+{
+  "values": {
+    "environmental:bird_of_paradise": {
+      "chance": 0.65
+    },
+    "environmental:blue_delphinium": {
+      "chance": 0.65
+    },
+    "environmental:blue_hanging_wisteria_leaves": {
+      "chance": 0.3
+    },
+    "environmental:blue_wisteria_leaves": {
+      "chance": 0.3
+    },
+    "environmental:blue_wisteria_sapling": {
+      "chance": 0.3
+    },
+    "environmental:bluebell": {
+      "chance": 0.65
+    },
+    "environmental:cartwheel": {
+      "chance": 0.65
+    },
+    "environmental:cattail": {
+      "chance": 0.65
+    },
+    "environmental:cattail_fluff": {
+      "chance": 0.3
+    },
+    "environmental:cattail_fluff_block": {
+      "chance": 1.0
+    },
+    "environmental:cattail_thatch": {
+      "chance": 0.65
+    },
+    "environmental:cattail_thatch_slab": {
+      "chance": 0.65
+    },
+    "environmental:cattail_thatch_stairs": {
+      "chance": 0.65
+    },
+    "environmental:cheerful_plum_leaves": {
+      "chance": 0.3
+    },
+    "environmental:cheerful_plum_sapling": {
+      "chance": 0.3
+    },
+    "environmental:cherries": {
+      "chance": 0.3
+    },
+    "environmental:cherry_crate": {
+      "chance": 1.0
+    },
+    "environmental:cup_lichen": {
+      "chance": 0.3
+    },
+    "environmental:dianthus": {
+      "chance": 0.65
+    },
+    "environmental:duckweed": {
+      "chance": 0.65
+    },
+    "environmental:duckweed_thatch": {
+      "chance": 0.65
+    },
+    "environmental:duckweed_thatch_slab": {
+      "chance": 0.65
+    },
+    "environmental:duckweed_thatch_stairs": {
+      "chance": 0.65
+    },
+    "environmental:dwarf_spruce": {
+      "chance": 0.5
+    },
+    "environmental:giant_lily_pad": {
+      "chance": 1.0
+    },
+    "environmental:giant_tall_grass": {
+      "chance": 0.65
+    },
+    "environmental:grass_thatch": {
+      "chance": 0.65
+    },
+    "environmental:grass_thatch_slab": {
+      "chance": 0.65
+    },
+    "environmental:grass_thatch_stairs": {
+      "chance": 0.65
+    },
+    "environmental:hanging_willow_leaves": {
+      "chance": 0.3
+    },
+    "environmental:hibiscus_leaves": {
+      "chance": 0.5
+    },
+    "environmental:large_lily_pad": {
+      "chance": 0.85
+    },
+    "environmental:magenta_hibiscus": {
+      "chance": 0.65
+    },
+    "environmental:moody_plum_leaves": {
+      "chance": 0.3
+    },
+    "environmental:moody_plum_sapling": {
+      "chance": 0.3
+    },
+    "environmental:mycelium_sprouts": {
+      "chance": 0.5
+    },
+    "environmental:orange_hibiscus": {
+      "chance": 0.65
+    },
+    "environmental:pine_leaves": {
+      "chance": 0.3
+    },
+    "environmental:pine_sapling": {
+      "chance": 0.3
+    },
+    "environmental:pinecone": {
+      "chance": 0.85
+    },
+    "environmental:pink_delphinium": {
+      "chance": 0.65
+    },
+    "environmental:pink_hanging_wisteria_leaves": {
+      "chance": 0.3
+    },
+    "environmental:pink_hibiscus": {
+      "chance": 0.65
+    },
+    "environmental:pink_wisteria_leaves": {
+      "chance": 0.3
+    },
+    "environmental:pink_wisteria_sapling": {
+      "chance": 0.3
+    },
+    "environmental:plum": {
+      "chance": 0.65
+    },
+    "environmental:plum_crate": {
+      "chance": 1.0
+    },
+    "environmental:plum_leaves": {
+      "chance": 0.3
+    },
+    "environmental:plum_sapling": {
+      "chance": 0.3
+    },
+    "environmental:purple_delphinium": {
+      "chance": 0.65
+    },
+    "environmental:purple_hanging_wisteria_leaves": {
+      "chance": 0.3
+    },
+    "environmental:purple_hibiscus": {
+      "chance": 0.65
+    },
+    "environmental:purple_wisteria_leaves": {
+      "chance": 0.3
+    },
+    "environmental:purple_wisteria_sapling": {
+      "chance": 0.3
+    },
+    "environmental:red_hibiscus": {
+      "chance": 0.65
+    },
+    "environmental:red_lotus_flower": {
+      "chance": 0.65
+    },
+    "environmental:tasselflower": {
+      "chance": 0.65
+    },
+    "environmental:truffle": {
+      "chance": 0.65
+    },
+    "environmental:violet": {
+      "chance": 0.65
+    },
+    "environmental:white_delphinium": {
+      "chance": 0.65
+    },
+    "environmental:white_hanging_wisteria_leaves": {
+      "chance": 0.3
+    },
+    "environmental:white_lotus_flower": {
+      "chance": 0.65
+    },
+    "environmental:white_wisteria_leaves": {
+      "chance": 0.3
+    },
+    "environmental:white_wisteria_sapling": {
+      "chance": 0.3
+    },
+    "environmental:willow_leaves": {
+      "chance": 0.3
+    },
+    "environmental:willow_sapling": {
+      "chance": 0.3
+    },
+    "environmental:wisteria_leaves": {
+      "chance": 0.3
+    },
+    "environmental:yellow_hibiscus": {
+      "chance": 0.65
+    }
+  }
+}

@@ -1,6 +1,5 @@
 package com.teamabnormals.environmental.common.slabfish.condition;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamabnormals.environmental.common.slabfish.SlabfishConditionType;

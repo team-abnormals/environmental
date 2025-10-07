@@ -1,15 +1,21 @@
 package com.teamabnormals.environmental.common.entity.animal.koi;
 
 import com.teamabnormals.environmental.core.EnvironmentalConfig;
+import com.teamabnormals.environmental.core.other.EnvironmentalDataSerializers;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
 import com.teamabnormals.environmental.core.registry.EnvironmentalMobEffects;
+import com.teamabnormals.environmental.core.registry.EnvironmentalRegistries;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSoundEvents;
+import com.teamabnormals.environmental.core.registry.datapack.EnvironmentalKoiVariants;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
@@ -43,9 +49,12 @@ import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
+import java.util.Optional;
 
-public class Koi extends AbstractFish {
-	private static final EntityDataAccessor<Integer> BREED = SynchedEntityData.defineId(Koi.class, EntityDataSerializers.INT);
+public class Koi extends AbstractFish implements VariantHolder<Holder<KoiVariant>> {
+	public static final String BUCKET_VARIANT_TAG = "BucketVariantTag";
+
+	private static final EntityDataAccessor<Holder<KoiVariant>> VARIANT = SynchedEntityData.defineId(Koi.class, EnvironmentalDataSerializers.KOI_VARIANT.get());
 	private static final NormalNoise NOISE = NormalNoise.create(new WorldgenRandom(new LegacyRandomSource(2345L)), new NormalNoise.NoiseParameters(-3, 1.3D));
 
 	public Koi(EntityType<? extends AbstractFish> type, Level world) {
@@ -65,59 +74,68 @@ public class Koi extends AbstractFish {
 	@Override
 	protected void defineSynchedData(SynchedEntityData.Builder builder) {
 		super.defineSynchedData(builder);
-		builder.define(BREED, 0);
+		Registry<KoiVariant> registry = this.registryAccess().registryOrThrow(EnvironmentalRegistries.KOI_VARIANT);
+		builder.define(VARIANT, registry.getHolder(EnvironmentalKoiVariants.DEFAULT).or(registry::getAny).orElseThrow());
 	}
 
 	@Override
-	public void addAdditionalSaveData(CompoundTag Tag) {
-		super.addAdditionalSaveData(Tag);
-		Tag.putInt("Variant", this.getVariant());
+	public void addAdditionalSaveData(CompoundTag tag) {
+		super.addAdditionalSaveData(tag);
+		this.getVariant().unwrapKey().ifPresent(variant -> tag.putString(BUCKET_VARIANT_TAG, variant.location().toString()));
 	}
 
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
-		this.setVariant(tag.getInt("Variant"));
+		Optional.ofNullable(ResourceLocation.tryParse(tag.getString(BUCKET_VARIANT_TAG)))
+				.map(loc -> ResourceKey.create(EnvironmentalRegistries.KOI_VARIANT, loc))
+				.flatMap(key -> this.registryAccess().registryOrThrow(EnvironmentalRegistries.KOI_VARIANT).getHolder(key))
+				.ifPresent(this::setVariant);
 	}
 
 	@Override
 	public void saveToBucketTag(ItemStack stack) {
 		super.saveToBucketTag(stack);
-		CustomData.update(DataComponents.BUCKET_ENTITY_DATA, stack, tag -> tag.putInt("BucketVariantTag", this.getVariant()));
+		CustomData.update(DataComponents.BUCKET_ENTITY_DATA, stack, tag -> {
+			this.getVariant().unwrapKey().ifPresent(variant -> tag.putString(BUCKET_VARIANT_TAG, variant.location().toString()));
+		});
 	}
 
 	@Override
 	public void loadFromBucketTag(CompoundTag tag) {
 		super.loadFromBucketTag(tag);
-		if (tag.contains("BucketVariantTag", 3)) {
-			this.setVariant(tag.getInt("BucketVariantTag"));
-		}
+		Optional.ofNullable(ResourceLocation.tryParse(tag.getString(BUCKET_VARIANT_TAG)))
+				.map(loc -> ResourceKey.create(EnvironmentalRegistries.KOI_VARIANT, loc))
+				.flatMap(key -> this.registryAccess().registryOrThrow(EnvironmentalRegistries.KOI_VARIANT).getHolder(key))
+				.ifPresent(this::setVariant);
 	}
 
-	public void setVariant(int id) {
-		this.entityData.set(BREED, id);
+	@Override
+	public void setVariant(Holder<KoiVariant> variant) {
+		this.entityData.set(VARIANT, variant);
 	}
 
-	public int getVariant() {
-		return this.entityData.get(BREED);
+	@Override
+	public Holder<KoiVariant> getVariant() {
+		return this.entityData.get(VARIANT);
 	}
 
 	@Nullable
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData) {
 		if (spawnType == MobSpawnType.BUCKET) {
-			this.setVariant(random.nextInt(KoiBreed.values().length));
+			this.setVariant(KoiVariant.getRandomVariant(this.registryAccess(), this.random));
 		} else {
-			this.setVariant(getNoiseVariant(this.blockPosition()));
+			this.setVariant(this.getNoiseVariant(this.blockPosition()));
 		}
 
 		return super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
 	}
 
-	public static int getNoiseVariant(BlockPos pos) {
+	public Holder<KoiVariant> getNoiseVariant(BlockPos pos) {
 		double d0 = getNoiseValue(pos, 0.25F);
 		double d1 = Mth.clamp((1.0D + d0) / 2.0D, 0.0D, 0.9999D);
-		return (int) (d1 * (double) KoiBreed.values().length);
+		return KoiVariant.getNoiseVariant(this.registryAccess(), d1);
 	}
 
 	protected static double getNoiseValue(BlockPos pos, double val) {

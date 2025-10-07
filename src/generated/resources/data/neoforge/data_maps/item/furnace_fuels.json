@@ -1,0 +1,13 @@
+{
+  "values": {
+    "environmental:dwarf_spruce": {
+      "burn_time": 100
+    },
+    "environmental:yak_hair_block": {
+      "burn_time": 200
+    },
+    "environmental:yak_hair_rug": {
+      "burn_time": 67
+    }
+  }
+}

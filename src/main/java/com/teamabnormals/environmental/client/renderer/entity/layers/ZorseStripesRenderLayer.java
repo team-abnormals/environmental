@@ -41,7 +41,7 @@ public class ZorseStripesRenderLayer extends RenderLayer<Zorse, ZorseModel<Zorse
 		if (!zorse.isInvisible()) {
 			VertexConsumer builder = buffer.getBuffer(RenderType.entityTranslucent(LOCATION_BY_VARIANT.get(zorse.getVariant())));
 			float f = Mth.clamp(zorse.getStripeOpacity() / 100.0F, 0.0F, 1.0F);
-			this.getParentModel().renderToBuffer(poseStack, builder, packedLight, LivingEntityRenderer.getOverlayCoords(zorse, 0.0F), FastColor.ARGB32.alpha(FastColor.as8BitChannel(f)));
+			this.getParentModel().renderToBuffer(poseStack, builder, packedLight, LivingEntityRenderer.getOverlayCoords(zorse, 0.0F), FastColor.ARGB32.colorFromFloat(f, 1.0F, 1.0F, 1.0F));
 		}
 	}
 }

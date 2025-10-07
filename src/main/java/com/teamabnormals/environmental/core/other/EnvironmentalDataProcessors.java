@@ -11,7 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 public class EnvironmentalDataProcessors {
 	public static final TrackedData<Integer> TRUFFLE_HUNTING_TIME = TrackedData.Builder.create(ByteBufCodecs.INT, () -> 0).enableSaving(Codec.INT.fieldOf("Integer")).build();
 	public static final TrackedData<Integer> SNIFF_SOUND_TIME = TrackedData.Builder.create(ByteBufCodecs.INT, () -> 0).build();
-	public static final TrackedData<BlockPos> TRUFFLE_POS = TrackedData.Builder.create(BlockPos.STREAM_CODEC, () -> BlockPos.ZERO).enableSaving(BlockPos.CODEC.fieldOf("x").fieldOf("y").fieldOf("z")).build();
+	public static final TrackedData<BlockPos> TRUFFLE_POS = TrackedData.Builder.create(BlockPos.STREAM_CODEC, () -> BlockPos.ZERO).enableSaving(BlockPos.CODEC.fieldOf("pos")).build();
 	public static final TrackedData<Boolean> HAS_TRUFFLE_TARGET = TrackedData.Builder.create(ByteBufCodecs.BOOL, () -> false).enableSaving(Codec.BOOL.fieldOf("Boolean")).build();
 	public static final TrackedData<Boolean> LOOKING_FOR_TRUFFLE = TrackedData.Builder.create(ByteBufCodecs.BOOL, () -> false).build();
 	public static final TrackedData<Boolean> IS_MUDDY = TrackedData.Builder.create(ByteBufCodecs.BOOL, () -> false).enableSaving(Codec.BOOL.fieldOf("Boolean")).build();

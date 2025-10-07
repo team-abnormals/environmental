@@ -10,12 +10,12 @@
     }
   },
   "result": {
-    "item": "farmersdelight:rope",
+    "id": "farmersdelight:rope",
     "count": 4
   },
-  "conditions": [
+  "neoforge:conditions": [
     {
-      "type": "forge:mod_loaded",
+      "type": "neoforge:mod_loaded",
       "modid": "farmersdelight"
     }
   ]

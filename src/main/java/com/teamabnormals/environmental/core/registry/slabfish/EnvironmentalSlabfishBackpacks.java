@@ -11,11 +11,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 
 public class EnvironmentalSlabfishBackpacks {
-	public static final ResourceKey<BackpackType> BROWN = createKey("brown");
+	public static final ResourceKey<BackpackType> BROWN = create("brown");
 
 	public static void bootstrap(BootstrapContext<BackpackType> context) {
 		for (DyeColor color : DyeColor.values()) {
-			ResourceKey<BackpackType> key = createKey(color.getName());
+			ResourceKey<BackpackType> key = create(color.getName());
 			context.register(key, BackpackType.create(
 					Component.translatable(Util.makeDescriptionId("slabfish.backpack", key.location())),
 					ResourceLocation.fromNamespaceAndPath(key.location().getNamespace(), "backpack/" + key.location().getPath()),
@@ -23,7 +23,7 @@ public class EnvironmentalSlabfishBackpacks {
 		}
 	}
 
-	public static ResourceKey<BackpackType> createKey(String name) {
+	public static ResourceKey<BackpackType> create(String name) {
 		return ResourceKey.create(EnvironmentalRegistries.SLABFISH_BACKPACK, Environmental.location(name));
 	}
 }

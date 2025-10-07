@@ -28,7 +28,7 @@ public class ZonkeyStripesRenderLayer extends RenderLayer<Zonkey, ZonkeyModel<Zo
 		if (!zonkey.isInvisible()) {
 			VertexConsumer builder = buffer.getBuffer(RenderType.entityTranslucent(STRIPES_LOCATION));
 			float f = Mth.clamp(zonkey.getStripeOpacity() / 100.0F, 0.0F, 1.0F);
-			this.getParentModel().renderToBuffer(poseStack, builder, packedLight, LivingEntityRenderer.getOverlayCoords(zonkey, 0.0F), FastColor.ARGB32.alpha(FastColor.as8BitChannel(f)));
+			this.getParentModel().renderToBuffer(poseStack, builder, packedLight, LivingEntityRenderer.getOverlayCoords(zonkey, 0.0F), FastColor.ARGB32.colorFromFloat(f, 1.0F, 1.0F, 1.0F));
 		}
 	}
 }

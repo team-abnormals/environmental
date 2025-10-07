@@ -24,8 +24,6 @@ public class EnvironmentalBlockTags {
 	public static final TagKey<Block> WISTERIA_LOGS = blockTag("wisteria_logs");
 	public static final TagKey<Block> PLUM_LOGS = blockTag("plum_logs");
 
-	public static final TagKey<Block> STRIPPED_LOGS = TagUtil.blockTag("forge", "stripped_logs");
-
 	public static final TagKey<Block> MINEABLE_WITH_KNIFE = TagUtil.blockTag("farmersdelight", "mineable/knife");
 	public static final TagKey<Block> COMPOST_ACTIVATORS = TagUtil.blockTag("farmersdelight", "compost_activators");
 

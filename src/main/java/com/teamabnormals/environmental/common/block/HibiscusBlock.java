@@ -8,8 +8,6 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.function.Supplier;
-
 public class HibiscusBlock extends AbstractHibiscusBlock {
 	private final Block wallHibiscus;
 

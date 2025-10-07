@@ -24,14 +24,14 @@ public class EnvironmentalBiomeSlices {
 	public static final ResourceKey<ModdedBiomeSlice> BLOSSOM_SLICE = createKey("blossom");
 	public static final ResourceKey<ModdedBiomeSlice> PINE_SLICE = createKey("pine_barrens");
 
-	public static final ResourceKey<Biome> MARSH_AREA = EnvironmentalBiomes.createKey("marsh_area");
-	public static final ResourceKey<Biome> BLOSSOM_WOODS_AREA = EnvironmentalBiomes.createKey("blossom_woods_area");
-	public static final ResourceKey<Biome> BLOSSOM_VALLEYS_AREA = EnvironmentalBiomes.createKey("blossom_valleys_area");
-	public static final ResourceKey<Biome> PINE_BARRENS_AREA = EnvironmentalBiomes.createKey("pine_barrens_area");
-	public static final ResourceKey<Biome> SNOWY_PINE_BARRENS_AREA = EnvironmentalBiomes.createKey("snowy_pine_barrens_area");
-	public static final ResourceKey<Biome> OLD_GROWTH_PINE_BARRENS_AREA = EnvironmentalBiomes.createKey("old_growth_pine_barrens_area");
-	public static final ResourceKey<Biome> SNOWY_OLD_GROWTH_PINE_BARRENS_AREA = EnvironmentalBiomes.createKey("snowy_old_growth_pine_barrens_area");
-	public static final ResourceKey<Biome> PINE_SLOPES_AREA = EnvironmentalBiomes.createKey("pine_slopes_area");
+	public static final ResourceKey<Biome> MARSH_AREA = EnvironmentalBiomes.create("marsh_area");
+	public static final ResourceKey<Biome> BLOSSOM_WOODS_AREA = EnvironmentalBiomes.create("blossom_woods_area");
+	public static final ResourceKey<Biome> BLOSSOM_VALLEYS_AREA = EnvironmentalBiomes.create("blossom_valleys_area");
+	public static final ResourceKey<Biome> PINE_BARRENS_AREA = EnvironmentalBiomes.create("pine_barrens_area");
+	public static final ResourceKey<Biome> SNOWY_PINE_BARRENS_AREA = EnvironmentalBiomes.create("snowy_pine_barrens_area");
+	public static final ResourceKey<Biome> OLD_GROWTH_PINE_BARRENS_AREA = EnvironmentalBiomes.create("old_growth_pine_barrens_area");
+	public static final ResourceKey<Biome> SNOWY_OLD_GROWTH_PINE_BARRENS_AREA = EnvironmentalBiomes.create("snowy_old_growth_pine_barrens_area");
+	public static final ResourceKey<Biome> PINE_SLOPES_AREA = EnvironmentalBiomes.create("pine_slopes_area");
 
 	public static void bootstrap(BootstrapContext<ModdedBiomeSlice> context) {
 		List<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> entries = new ArrayList<>();

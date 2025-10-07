@@ -33,70 +33,70 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class EnvironmentalSlabfishTypes {
-	public static final ResourceKey<SlabfishType> SWAMP = createKey("swamp");
-	public static final ResourceKey<SlabfishType> BADLANDS = createKey("badlands");
-	public static final ResourceKey<SlabfishType> BAMBOO = createKey("bamboo");
-	public static final ResourceKey<SlabfishType> BEACH = createKey("beach");
-	public static final ResourceKey<SlabfishType> DARK_FOREST = createKey("dark_forest");
-	public static final ResourceKey<SlabfishType> DESERT = createKey("desert");
-	public static final ResourceKey<SlabfishType> FLOWER_FOREST = createKey("flower_forest");
-	public static final ResourceKey<SlabfishType> FOREST = createKey("forest");
-	public static final ResourceKey<SlabfishType> HILL = createKey("hill");
-	public static final ResourceKey<SlabfishType> ICE_SPIKES = createKey("ice_spikes");
-	public static final ResourceKey<SlabfishType> JUNGLE = createKey("jungle");
-	public static final ResourceKey<SlabfishType> MANGROVE = createKey("mangrove");
-	public static final ResourceKey<SlabfishType> MOUNTAIN = createKey("mountain");
-	public static final ResourceKey<SlabfishType> PLAINS = createKey("plains");
-	public static final ResourceKey<SlabfishType> RIVER = createKey("river");
-	public static final ResourceKey<SlabfishType> SAVANNA = createKey("savanna");
-	public static final ResourceKey<SlabfishType> SNOWY = createKey("snowy");
-	public static final ResourceKey<SlabfishType> TAIGA = createKey("taiga");
-	public static final ResourceKey<SlabfishType> CHERRY_GROVE = createKey("cherry_grove");
+	public static final ResourceKey<SlabfishType> SWAMP = create("swamp");
+	public static final ResourceKey<SlabfishType> BADLANDS = create("badlands");
+	public static final ResourceKey<SlabfishType> BAMBOO = create("bamboo");
+	public static final ResourceKey<SlabfishType> BEACH = create("beach");
+	public static final ResourceKey<SlabfishType> DARK_FOREST = create("dark_forest");
+	public static final ResourceKey<SlabfishType> DESERT = create("desert");
+	public static final ResourceKey<SlabfishType> FLOWER_FOREST = create("flower_forest");
+	public static final ResourceKey<SlabfishType> FOREST = create("forest");
+	public static final ResourceKey<SlabfishType> HILL = create("hill");
+	public static final ResourceKey<SlabfishType> ICE_SPIKES = create("ice_spikes");
+	public static final ResourceKey<SlabfishType> JUNGLE = create("jungle");
+	public static final ResourceKey<SlabfishType> MANGROVE = create("mangrove");
+	public static final ResourceKey<SlabfishType> MOUNTAIN = create("mountain");
+	public static final ResourceKey<SlabfishType> PLAINS = create("plains");
+	public static final ResourceKey<SlabfishType> RIVER = create("river");
+	public static final ResourceKey<SlabfishType> SAVANNA = create("savanna");
+	public static final ResourceKey<SlabfishType> SNOWY = create("snowy");
+	public static final ResourceKey<SlabfishType> TAIGA = create("taiga");
+	public static final ResourceKey<SlabfishType> CHERRY_GROVE = create("cherry_grove");
 
-	public static final ResourceKey<SlabfishType> MARSH = createKey("marsh");
-	public static final ResourceKey<SlabfishType> PINE = createKey("pine");
-	public static final ResourceKey<SlabfishType> BLOSSOM = createKey("blossom");
+	public static final ResourceKey<SlabfishType> MARSH = create("marsh");
+	public static final ResourceKey<SlabfishType> PINE = create("pine");
+	public static final ResourceKey<SlabfishType> BLOSSOM = create("blossom");
 
-	public static final ResourceKey<SlabfishType> RAINFOREST = createKey("rainforest");
-	public static final ResourceKey<SlabfishType> DUNES = createKey("dunes");
-	public static final ResourceKey<SlabfishType> SCRUBLAND = createKey("scrubland");
-	public static final ResourceKey<SlabfishType> SPINY_THICKET = createKey("spiny_thicket");
-	public static final ResourceKey<SlabfishType> ASPEN = createKey("aspen");
-	public static final ResourceKey<SlabfishType> LAUREL = createKey("laurel");
-	public static final ResourceKey<SlabfishType> KOUSA = createKey("kousa");
+	public static final ResourceKey<SlabfishType> RAINFOREST = create("rainforest");
+	public static final ResourceKey<SlabfishType> DUNES = create("dunes");
+	public static final ResourceKey<SlabfishType> SCRUBLAND = create("scrubland");
+	public static final ResourceKey<SlabfishType> SPINY_THICKET = create("spiny_thicket");
+	public static final ResourceKey<SlabfishType> ASPEN = create("aspen");
+	public static final ResourceKey<SlabfishType> LAUREL = create("laurel");
+	public static final ResourceKey<SlabfishType> KOUSA = create("kousa");
 
-	public static final ResourceKey<SlabfishType> MAPLE = createKey("maple");
+	public static final ResourceKey<SlabfishType> MAPLE = create("maple");
 
-	public static final ResourceKey<SlabfishType> OCEAN = createKey("ocean");
-	public static final ResourceKey<SlabfishType> WARM_OCEAN = createKey("warm_ocean");
-	public static final ResourceKey<SlabfishType> FROZEN_OCEAN = createKey("frozen_ocean");
+	public static final ResourceKey<SlabfishType> OCEAN = create("ocean");
+	public static final ResourceKey<SlabfishType> WARM_OCEAN = create("warm_ocean");
+	public static final ResourceKey<SlabfishType> FROZEN_OCEAN = create("frozen_ocean");
 
-	public static final ResourceKey<SlabfishType> CAVE = createKey("cave");
-	public static final ResourceKey<SlabfishType> DEEPSLATE = createKey("deepslate");
-	public static final ResourceKey<SlabfishType> LUSH_CAVES = createKey("lush_caves");
-	public static final ResourceKey<SlabfishType> DRIPSTONE_CAVES = createKey("dripstone_caves");
-	public static final ResourceKey<SlabfishType> DEEP_DARK = createKey("deep_dark");
+	public static final ResourceKey<SlabfishType> CAVE = create("cave");
+	public static final ResourceKey<SlabfishType> DEEPSLATE = create("deepslate");
+	public static final ResourceKey<SlabfishType> LUSH_CAVES = create("lush_caves");
+	public static final ResourceKey<SlabfishType> DRIPSTONE_CAVES = create("dripstone_caves");
+	public static final ResourceKey<SlabfishType> DEEP_DARK = create("deep_dark");
 
-	public static final ResourceKey<SlabfishType> NETHER = createKey("nether");
-	public static final ResourceKey<SlabfishType> CRIMSON = createKey("crimson");
-	public static final ResourceKey<SlabfishType> WARPED = createKey("warped");
-	public static final ResourceKey<SlabfishType> BASALT_DELTAS = createKey("basalt_deltas");
-	public static final ResourceKey<SlabfishType> SOUL_SAND_VALLEY = createKey("soul_sand_valley");
-	public static final ResourceKey<SlabfishType> GHOST = createKey("ghost");
+	public static final ResourceKey<SlabfishType> NETHER = create("nether");
+	public static final ResourceKey<SlabfishType> CRIMSON = create("crimson");
+	public static final ResourceKey<SlabfishType> WARPED = create("warped");
+	public static final ResourceKey<SlabfishType> BASALT_DELTAS = create("basalt_deltas");
+	public static final ResourceKey<SlabfishType> SOUL_SAND_VALLEY = create("soul_sand_valley");
+	public static final ResourceKey<SlabfishType> GHOST = create("ghost");
 
-	public static final ResourceKey<SlabfishType> END = createKey("end");
-	public static final ResourceKey<SlabfishType> CHORUS = createKey("chorus");
-	public static final ResourceKey<SlabfishType> POISE = createKey("poise");
+	public static final ResourceKey<SlabfishType> END = create("end");
+	public static final ResourceKey<SlabfishType> CHORUS = create("chorus");
+	public static final ResourceKey<SlabfishType> POISE = create("poise");
 
-	public static final ResourceKey<SlabfishType> MUSHROOM = createKey("mushroom");
-	public static final ResourceKey<SlabfishType> BROWN_MUSHROOM = createKey("brown_mushroom");
-	public static final ResourceKey<SlabfishType> DROWNED = createKey("drowned");
-	public static final ResourceKey<SlabfishType> NIGHTMARE = createKey("nightmare");
-	public static final ResourceKey<SlabfishType> SKY = createKey("sky");
-	public static final ResourceKey<SlabfishType> SKELETON = createKey("skeleton");
-	public static final ResourceKey<SlabfishType> STRAY = createKey("stray");
-	public static final ResourceKey<SlabfishType> WITHER = createKey("wither");
-	public static final ResourceKey<SlabfishType> TOTEM = createKey("totem");
+	public static final ResourceKey<SlabfishType> MUSHROOM = create("mushroom");
+	public static final ResourceKey<SlabfishType> BROWN_MUSHROOM = create("brown_mushroom");
+	public static final ResourceKey<SlabfishType> DROWNED = create("drowned");
+	public static final ResourceKey<SlabfishType> NIGHTMARE = create("nightmare");
+	public static final ResourceKey<SlabfishType> SKY = create("sky");
+	public static final ResourceKey<SlabfishType> SKELETON = create("skeleton");
+	public static final ResourceKey<SlabfishType> STRAY = create("stray");
+	public static final ResourceKey<SlabfishType> WITHER = create("wither");
+	public static final ResourceKey<SlabfishType> TOTEM = create("totem");
 
 	public static final List<ResourceKey<SlabfishType>> ATMOSPHERIC_SLABFISH = List.of(RAINFOREST, DUNES, SCRUBLAND, SPINY_THICKET, ASPEN, KOUSA, LAUREL);
 	public static final List<ResourceKey<SlabfishType>> AUTUMNITY_SLABFISH = List.of(MAPLE);
@@ -234,7 +234,7 @@ public class EnvironmentalSlabfishTypes {
 		return new SlabfishModLoadedCondition(modid);
 	}
 
-	public static ResourceKey<SlabfishType> createKey(String name) {
+	public static ResourceKey<SlabfishType> create(String name) {
 		return ResourceKey.create(EnvironmentalRegistries.SLABFISH_TYPE, Environmental.location(name));
 	}
 }

@@ -11,7 +11,6 @@ import com.teamabnormals.environmental.common.slabfish.SlabfishHelper;
 import com.teamabnormals.environmental.common.slabfish.SlabfishType;
 import com.teamabnormals.environmental.common.slabfish.SweaterType;
 import com.teamabnormals.environmental.common.slabfish.condition.SlabfishConditionContext;
-import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.other.EnvironmentalCriteriaTriggers;
 import com.teamabnormals.environmental.core.other.EnvironmentalDataSerializers;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalItemTags;
@@ -86,10 +85,10 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 	private static final EntityDataAccessor<Boolean> HAS_BACKPACK = SynchedEntityData.defineId(Slabfish.class, EntityDataSerializers.BOOLEAN);
 	private static final EntityDataAccessor<ResourceLocation> SWEATER = SynchedEntityData.defineId(Slabfish.class, EnvironmentalDataSerializers.RESOURCE_LOCATION.get());
 
-	public static final EntityDimensions SIZE_SWIMMING = EntityDimensions.fixed(0.7F, 0.6F);
-	public static final EntityDimensions SIZE_SITTING = EntityDimensions.fixed(0.45F, 0.6F);
-	public static final EntityDimensions SIZE_SWIMMING_CHILD = EntityDimensions.fixed(0.35F, 0.3F);
-	public static final EntityDimensions SIZE_SITTING_CHILD = EntityDimensions.fixed(0.225F, 0.3F);
+	public static final EntityDimensions SIZE_SWIMMING = EntityDimensions.fixed(0.7F, 0.6F).withEyeHeight(0.513F);
+	public static final EntityDimensions SIZE_SITTING = EntityDimensions.fixed(0.45F, 0.6F).withEyeHeight(0.36F);
+	public static final EntityDimensions SIZE_SWIMMING_CHILD = EntityDimensions.fixed(0.35F, 0.3F).withEyeHeight(0.42F);
+	public static final EntityDimensions SIZE_SITTING_CHILD = EntityDimensions.fixed(0.225F, 0.3F).withEyeHeight(0.18F);
 
 	public SlabfishInventory slabfishBackpack;
 	public boolean backpackFull;
@@ -481,6 +480,11 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 	@Override
 	public boolean isFood(ItemStack stack) {
 		return !Ingredient.of(EnvironmentalItemTags.SLABFISH_TAME_ITEMS).test(stack) && Ingredient.of(EnvironmentalItemTags.SLABFISH_FOOD).test(stack);
+	}
+
+	@Override
+	public EntityDimensions getDefaultDimensions(Pose pose) {
+		return this.isInWater() ? this.isBaby() ? SIZE_SWIMMING_CHILD : SIZE_SWIMMING : (this.isInSittingPose() || this.getVehicle() != null) ? this.isBaby() ? SIZE_SITTING_CHILD : SIZE_SITTING : super.getDefaultDimensions(pose);
 	}
 
 	@Override

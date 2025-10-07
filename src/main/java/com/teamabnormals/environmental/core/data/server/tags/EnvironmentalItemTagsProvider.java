@@ -60,6 +60,8 @@ public class EnvironmentalItemTagsProvider extends BlueprintItemTagsProvider {
 
 		this.copyWoodsetTags();
 		this.copy(Tags.Blocks.FENCE_GATES_WOODEN, Tags.Items.FENCE_GATES_WOODEN);
+		this.copy(Tags.Blocks.STRIPPED_LOGS, Tags.Items.STRIPPED_LOGS);
+		this.copy(Tags.Blocks.STRIPPED_WOODS, Tags.Items.STRIPPED_WOODS);
 		this.copy(BlockTags.SLABS, ItemTags.SLABS);
 		this.copy(BlockTags.WALLS, ItemTags.WALLS);
 		this.copy(BlockTags.STAIRS, ItemTags.STAIRS);

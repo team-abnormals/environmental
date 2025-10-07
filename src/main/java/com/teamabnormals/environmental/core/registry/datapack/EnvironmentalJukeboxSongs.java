@@ -12,15 +12,15 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.JukeboxSong;
 
 public class EnvironmentalJukeboxSongs {
-	public static final ResourceKey<JukeboxSong> LEAVING_HOME = createKey("leaving_home");
-	public static final ResourceKey<JukeboxSong> SLABRAVE = createKey("slabrave");
+	public static final ResourceKey<JukeboxSong> LEAVING_HOME = create("leaving_home");
+	public static final ResourceKey<JukeboxSong> SLABRAVE = create("slabrave");
 
 	public static void bootstrap(BootstrapContext<JukeboxSong> context) {
 		register(context, LEAVING_HOME, EnvironmentalSoundEvents.MUSIC_DISC_LEAVING_HOME, 144, 6);
 		register(context, SLABRAVE, EnvironmentalSoundEvents.MUSIC_DISC_SLABRAVE, 111, 13);
 	}
 
-	private static ResourceKey<JukeboxSong> createKey(String name) {
+	private static ResourceKey<JukeboxSong> create(String name) {
 		return ResourceKey.create(Registries.JUKEBOX_SONG, Environmental.location(name));
 	}
 
