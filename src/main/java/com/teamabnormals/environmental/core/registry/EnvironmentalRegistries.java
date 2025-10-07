@@ -19,6 +19,8 @@ public final class EnvironmentalRegistries {
 	public static final ResourceKey<Registry<SweaterType>> SLABFISH_SWEATER = create("slabfish/sweater");
 
 	public static void registerRegistries(DataPackRegistryEvent.NewRegistry event) {
+		event.dataPackRegistry(KOI_VARIANT, KoiVariant.DIRECT_CODEC, KoiVariant.DIRECT_CODEC);
+
 		event.dataPackRegistry(SLABFISH_TYPE, SlabfishType.CODEC, SlabfishType.NETWORK_CODEC);
 		event.dataPackRegistry(SLABFISH_BACKPACK, BackpackType.CODEC, BackpackType.NETWORK_CODEC);
 		event.dataPackRegistry(SLABFISH_SWEATER, SweaterType.CODEC, SweaterType.NETWORK_CODEC);

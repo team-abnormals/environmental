@@ -1,22 +1,17 @@
 package com.teamabnormals.environmental.core.data.client;
 
 import com.teamabnormals.blueprint.core.data.client.BlueprintItemModelProvider;
-import com.teamabnormals.environmental.common.entity.animal.koi.KoiBreed;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
-import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
+import com.teamabnormals.environmental.core.registry.datapack.EnvironmentalKoiVariants;
 import com.teamabnormals.environmental.core.registry.slabfish.EnvironmentalSlabfishTypes;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
-import net.neoforged.neoforge.client.model.generators.ModelFile.UncheckedModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
-import java.util.Locale;
 
 import static com.teamabnormals.environmental.core.registry.EnvironmentalItems.*;
 
@@ -44,8 +39,6 @@ public class EnvironmentalItemModelProvider extends BlueprintItemModelProvider {
 
 		this.spawnEggItem(SLABFISH_SPAWN_EGG, DUCK_SPAWN_EGG, DEER_SPAWN_EGG, REINDEER_SPAWN_EGG, YAK_SPAWN_EGG, KOI_SPAWN_EGG, TAPIR_SPAWN_EGG, ZEBRA_SPAWN_EGG, ZORSE_SPAWN_EGG, ZONKEY_SPAWN_EGG, PINECONE_GOLEM_SPAWN_EGG);
 
-		this.koiBuckets();
-
 		this.getBuilder(name(SLABFISH_BUCKET.get()));
 		Arrays.stream(EnvironmentalSlabfishTypes.class.getDeclaredFields()).forEach(field -> {
 			if (Modifier.isStatic(field.getModifiers()) && ResourceKey.class.isAssignableFrom(field.getType())) {
@@ -57,15 +50,17 @@ public class EnvironmentalItemModelProvider extends BlueprintItemModelProvider {
 				}
 			}
 		});
-	}
 
-	private void koiBuckets() {
-		String path = BuiltInRegistries.ITEM.getKey(EnvironmentalItems.KOI_BUCKET.get()).getPath();
-		ItemModelBuilder model = this.withExistingParent(path, "item/generated").texture("layer0", ResourceLocation.fromNamespaceAndPath(this.modid, "item/" + path + "/" + KoiBreed.KOHAKU.name().toLowerCase(Locale.ROOT)));
-		for (KoiBreed breed : KoiBreed.values()) {
-			ResourceLocation name = ResourceLocation.fromNamespaceAndPath(this.modid, "item/" + path + "/" + breed.name().toLowerCase(Locale.ROOT));
-			model.override().model(new UncheckedModelFile(name)).predicate(ResourceLocation.fromNamespaceAndPath(this.modid, "variant"), breed.getId());
-			this.withExistingParent(name.getPath(), "item/generated").texture("layer0", name);
-		}
+		this.getBuilder(name(KOI_BUCKET.get()));
+		Arrays.stream(EnvironmentalKoiVariants.class.getDeclaredFields()).forEach(field -> {
+			if (Modifier.isStatic(field.getModifiers()) && ResourceKey.class.isAssignableFrom(field.getType())) {
+				try {
+					ResourceLocation location = ((ResourceKey<?>) field.get(null)).location().withPath(s -> "item/koi_bucket/" + s);
+					this.withExistingParent(location.getPath(), "item/generated").texture("layer0", location);
+				} catch (IllegalAccessException e) {
+					throw new RuntimeException(e);
+				}
+			}
+		});
 	}
 }

@@ -4,6 +4,7 @@ import com.teamabnormals.blueprint.client.model.DynamicItemModel;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
+import com.teamabnormals.environmental.core.registry.datapack.EnvironmentalKoiVariants;
 import com.teamabnormals.environmental.core.registry.slabfish.EnvironmentalSlabfishTypes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColors;
@@ -32,30 +33,18 @@ public class EnvironmentalClientCompat {
 		EnvironmentalItems.setupTabEditors();
 		EnvironmentalBlocks.setupTabEditors();
 		registerRenderLayers();
-		registerItemProperties();
 	}
 
 	@SubscribeEvent
 	public static void registerAdditional(ModelEvent.RegisterAdditional event) {
 		DynamicItemModel.register(event, "slabfish_bucket");
+		DynamicItemModel.register(event, "koi_bucket");
 	}
 
 	@SubscribeEvent
 	public static void modifyBakingResult(ModelEvent.ModifyBakingResult event) {
 		DynamicItemModel.bake(event, EnvironmentalItems.SLABFISH_BUCKET.getId(), "slabfish_bucket", ModelResourceLocation.standalone(EnvironmentalSlabfishTypes.SWAMP.location().withPrefix("item/slabfish_bucket/")), DynamicItemModel.fishBucket());
-	}
-
-	private static void registerItemProperties() {
-		ItemProperties.register(EnvironmentalItems.KOI_BUCKET.asItem(), Environmental.location("variant"), (stack, world, entity, num) -> {
-			CustomData data = stack.get(DataComponents.BUCKET_ENTITY_DATA);
-			if (data != null) {
-				CompoundTag tag = data.copyTag();
-				if (tag.contains("BucketVariantTag")) {
-					return tag.getInt("BucketVariantTag");
-				}
-			}
-			return 0;
-		});
+		DynamicItemModel.bake(event, EnvironmentalItems.KOI_BUCKET.getId(), "koi_bucket", ModelResourceLocation.standalone(EnvironmentalKoiVariants.KOHAKU.location().withPrefix("item/koi_bucket/")), DynamicItemModel.fishBucket());
 	}
 
 	private static void registerRenderLayers() {
