@@ -1,5 +1,6 @@
 package com.teamabnormals.environmental.core.other;
 
+import com.teamabnormals.environmental.common.entity.animal.deer.DeerVariant;
 import com.teamabnormals.environmental.common.entity.animal.koi.KoiVariant;
 import com.teamabnormals.environmental.core.Environmental;
 import net.minecraft.core.Holder;
@@ -15,4 +16,5 @@ public class EnvironmentalDataSerializers {
 	public static final DeferredHolder<EntityDataSerializer<?>, EntityDataSerializer<ResourceLocation>> RESOURCE_LOCATION = DATA_SERIALIZERS.register("resource_location", () -> EntityDataSerializer.forValueType(ResourceLocation.STREAM_CODEC));
 
 	public static final DeferredHolder<EntityDataSerializer<?>, EntityDataSerializer<Holder<KoiVariant>>> KOI_VARIANT = DATA_SERIALIZERS.register("koi_variant", () -> EntityDataSerializer.forValueType(KoiVariant.STREAM_CODEC));
+	public static final DeferredHolder<EntityDataSerializer<?>, EntityDataSerializer<Holder<DeerVariant>>> DEER_VARIANT = DATA_SERIALIZERS.register("deer_variant", () -> EntityDataSerializer.forValueType(DeerVariant.STREAM_CODEC));
 }

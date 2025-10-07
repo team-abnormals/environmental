@@ -19,7 +19,6 @@ import net.minecraft.util.RandomSource;
 import java.util.List;
 
 public record KoiVariant(ResourceLocation assetId, Component description) {
-
 	public static final Codec<KoiVariant> DIRECT_CODEC = RecordCodecBuilder.create(instance -> instance.group(
 					ResourceLocation.CODEC.fieldOf("asset_id").forGetter(KoiVariant::assetId),
 					ComponentSerialization.CODEC.fieldOf("description").forGetter(KoiVariant::description))

@@ -1,20 +1,22 @@
 package com.teamabnormals.environmental.common.entity.animal.deer;
 
 import com.teamabnormals.environmental.core.EnvironmentalConfig;
-import com.teamabnormals.environmental.core.other.tags.EnvironmentalBiomeTags;
+import com.teamabnormals.environmental.core.other.EnvironmentalDataSerializers;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalItemTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
+import com.teamabnormals.environmental.core.registry.EnvironmentalRegistries;
+import com.teamabnormals.environmental.core.registry.datapack.EnvironmentalDeerVariants;
 import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.entity.AgeableMob;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -22,10 +24,11 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 
 import javax.annotation.Nullable;
+import java.util.Optional;
 
-public class Deer extends AbstractDeer {
-	private static final EntityDataAccessor<Integer> DEER_COAT_COLOR = SynchedEntityData.defineId(Deer.class, EntityDataSerializers.INT);
-	private static final EntityDataAccessor<Integer> DEER_COAT_TYPE = SynchedEntityData.defineId(Deer.class, EntityDataSerializers.INT);
+public class Deer extends AbstractDeer implements VariantHolder<Holder<DeerVariant>> {
+	private static final EntityDataAccessor<Holder<DeerVariant>> VARIANT = SynchedEntityData.defineId(Deer.class, EnvironmentalDataSerializers.DEER_VARIANT.get());
+	private static final EntityDataAccessor<Boolean> SPOTTED = SynchedEntityData.defineId(Deer.class, EntityDataSerializers.BOOLEAN);
 
 	public Deer(EntityType<? extends Animal> type, Level level) {
 		super(type, level);
@@ -34,22 +37,26 @@ public class Deer extends AbstractDeer {
 	@Override
 	protected void defineSynchedData(SynchedEntityData.Builder builder) {
 		super.defineSynchedData(builder);
-		builder.define(DEER_COAT_COLOR, 0);
-		builder.define(DEER_COAT_TYPE, 0);
+		Registry<DeerVariant> registry = this.registryAccess().registryOrThrow(EnvironmentalRegistries.DEER_VARIANT);
+		builder.define(VARIANT, registry.getHolder(EnvironmentalDeerVariants.DEFAULT).or(registry::getAny).orElseThrow());
+		builder.define(SPOTTED, false);
 	}
 
 	@Override
-	public void addAdditionalSaveData(CompoundTag compound) {
-		super.addAdditionalSaveData(compound);
-		compound.putInt("CoatColor", this.getCoatColor());
-		compound.putInt("CoatType", this.getCoatType());
+	public void addAdditionalSaveData(CompoundTag tag) {
+		super.addAdditionalSaveData(tag);
+		this.getVariant().unwrapKey().ifPresent(variant -> tag.putString("variant", variant.location().toString()));
+		tag.putBoolean("spotted", this.hasSpots());
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag compound) {
-		super.readAdditionalSaveData(compound);
-		this.setCoatColor(compound.getInt("CoatColor"));
-		this.setCoatType(compound.getInt("CoatType"));
+	public void readAdditionalSaveData(CompoundTag tag) {
+		super.readAdditionalSaveData(tag);
+		Optional.ofNullable(ResourceLocation.tryParse(tag.getString("variant")))
+				.map(loc -> ResourceKey.create(EnvironmentalRegistries.DEER_VARIANT, loc))
+				.flatMap(key -> this.registryAccess().registryOrThrow(EnvironmentalRegistries.DEER_VARIANT).getHolder(key))
+				.ifPresent(this::setVariant);
+		this.setSpotted(tag.getBoolean("spotted"));
 	}
 
 	@Override
@@ -57,34 +64,30 @@ public class Deer extends AbstractDeer {
 		return stack.is(EnvironmentalItemTags.DEER_FOOD);
 	}
 
-	private void setCoatColor(int id) {
-		this.entityData.set(DEER_COAT_COLOR, id);
+	@Override
+	public void setVariant(Holder<DeerVariant> variant) {
+		this.entityData.set(VARIANT, variant);
 	}
 
-	public int getCoatColor() {
-		return this.entityData.get(DEER_COAT_COLOR);
+	@Override
+	public Holder<DeerVariant> getVariant() {
+		return this.entityData.get(VARIANT);
 	}
 
-	private void setCoatType(int id) {
-		int color = this.getCoatColor();
-		if (color == 2 && id == 1) {
-			this.entityData.set(DEER_COAT_TYPE, 0);
-		} else {
-			this.entityData.set(DEER_COAT_TYPE, id);
-		}
+	public void setSpotted(boolean spotted) {
+		this.entityData.set(SPOTTED, !this.getVariant().is(EnvironmentalDeerVariants.GRAY) && spotted);
 	}
 
-	public int getCoatType() {
-		return this.entityData.get(DEER_COAT_TYPE);
+	public boolean hasSpots() {
+		return this.entityData.get(SPOTTED);
 	}
 
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob ageable) {
 		Deer entity = EnvironmentalEntityTypes.DEER.get().create(level);
-		Deer partner = (Deer) ageable;
-		if (entity != null) {
-			entity.setCoatColor(this.random.nextBoolean() ? partner.getCoatColor() : this.getCoatColor());
-			entity.setCoatType(this.random.nextBoolean() ? partner.getCoatType() : this.getCoatType());
+		if (ageable instanceof Deer partner && entity != null) {
+			entity.setVariant(this.random.nextBoolean() ? partner.getVariant() : this.getVariant());
+			entity.setSpotted(this.random.nextBoolean() ? partner.hasSpots() : this.hasSpots());
 			entity.setHasAntlers(this.random.nextFloat() < EnvironmentalConfig.COMMON.deerAntlerChance.get());
 			entity.setTrusting(this.isTrusting() || partner.isTrusting());
 		}
@@ -94,33 +97,27 @@ public class Deer extends AbstractDeer {
 
 	@Nullable
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn) {
-		if (spawnDataIn instanceof DeerSpawnGroupData deerSpawnGroupData) {
-			this.setCoatColor(deerSpawnGroupData.coatColor);
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData) {
+		if (spawnData instanceof DeerSpawnGroupData deerSpawnGroupData) {
+			this.setVariant(deerSpawnGroupData.type);
 		} else {
-			Holder<Biome> holder = level.getBiome(this.blockPosition());
-			if (holder.is(EnvironmentalBiomeTags.SPAWNS_CHESTNUT_DEER)) {
-				this.setCoatColor(DeerCoatColors.CHESTNUT.getId());
-			} else if (holder.is(EnvironmentalBiomeTags.SPAWNS_GRAY_DEER)) {
-				this.setCoatColor(DeerCoatColors.GRAY.getId());
-			} else {
-				this.setCoatColor(DeerCoatColors.CREAMY.getId());
-			}
-
-			spawnDataIn = new DeerSpawnGroupData(this.getCoatColor());
+			Holder<Biome> biome = level.getBiome(this.blockPosition());
+			Holder<DeerVariant> variant = DeerVariant.getSpawnVariant(this.registryAccess(), biome);
+			spawnData = new DeerSpawnGroupData(variant);
+			this.setVariant(variant);
 		}
 
-		this.setCoatType(this.random.nextInt(DeerCoatTypes.values().length));
+		this.setSpotted(this.random.nextBoolean());
 		this.setHasAntlers(this.random.nextFloat() < EnvironmentalConfig.COMMON.deerAntlerChance.get());
-		return super.finalizeSpawn(level, difficulty, reason, spawnDataIn);
+		return super.finalizeSpawn(level, difficulty, reason, spawnData);
 	}
 
 	public static class DeerSpawnGroupData extends AgeableMobGroupData implements SpawnGroupData {
-		public final int coatColor;
+		public final Holder<DeerVariant> type;
 
-		public DeerSpawnGroupData(int coatColor) {
+		public DeerSpawnGroupData(Holder<DeerVariant> type) {
 			super(0.3F);
-			this.coatColor = coatColor;
+			this.type = type;
 		}
 	}
 }

@@ -1,0 +1,5 @@
+{
+  "asset_id": "environmental:entity/deer/deer_gray",
+  "biomes": "#environmental:spawns_gray_deer",
+  "priority": 1
+}
