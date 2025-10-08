@@ -14,23 +14,28 @@ import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
 import com.teamabnormals.environmental.core.registry.EnvironmentalMobEffects;
 import com.teamabnormals.environmental.core.registry.datapack.EnvironmentalBiomes;
-import com.teamabnormals.environmental.core.registry.slabfish.EnvironmentalSlabfishVariants;
+import com.teamabnormals.environmental.core.registry.datapack.slabfish.EnvironmentalSlabfishVariants;
 import net.minecraft.advancements.AdvancementRequirements.Strategy;
 import net.minecraft.advancements.critereon.*;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.HolderLookup.RegistryLookup;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.animal.WolfVariant;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
 import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -59,6 +64,8 @@ public class EnvironmentalAdvancementModifierProvider extends AdvancementModifie
 			breedAllAnimals.addCriterion(BuiltInRegistries.ENTITY_TYPE.getKey(entityType).getPath(), BredAnimalsTrigger.TriggerInstance.bredAnimals(EntityPredicate.Builder.entity().of(entityType)));
 		}
 		this.entry("husbandry/bred_all_animals").selects("husbandry/bred_all_animals").addModifier(breedAllAnimals.requirements(Strategy.AND).build());
+
+		this.entry("husbandry/whole_pack").selects("husbandry/whole_pack").addModifier(addTamedWolfVariants(provider).requirements(Strategy.AND).build());
 
 		CriteriaModifier.Builder adventuringTime = CriteriaModifier.builder(this.modId);
 		RegistryLookup<Biome> biomes = provider.lookupOrThrow(Registries.BIOME);
@@ -89,5 +96,19 @@ public class EnvironmentalAdvancementModifierProvider extends AdvancementModifie
 			tameAllSlabfish.addCriterion(slabfish.location().getPath(), EnvironmentalAdvancementProvider.slabfishCriterion(slabfish));
 		});
 		this.entry("husbandry/tame_all_slabfish_" + modid).selector(selector).addModifier(tameAllSlabfish.requirements(Strategy.AND).build());
+	}
+
+	private CriteriaModifier.Builder addTamedWolfVariants(HolderLookup.Provider registries) {
+		CriteriaModifier.Builder builder = CriteriaModifier.builder(this.modId);
+		HolderLookup.RegistryLookup<WolfVariant> registrylookup = registries.lookupOrThrow(Registries.WOLF_VARIANT);
+		registrylookup.listElementIds()
+				.filter(key -> key.location().getNamespace().equals(Environmental.MOD_ID))
+				.sorted(Comparator.comparing(ResourceKey::location))
+				.forEach(variant -> {
+							Holder<WolfVariant> holder = registrylookup.getOrThrow(variant);
+							builder.addCriterion(variant.location().toString(), TameAnimalTrigger.TriggerInstance.tamedAnimal(EntityPredicate.Builder.entity().subPredicate(EntitySubPredicates.wolfVariant(HolderSet.direct(holder)))));
+						}
+				);
+		return builder;
 	}
 }

@@ -8,10 +8,10 @@ import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures.Envir
 import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures.EnvironmentalPlacedFeatures;
 import com.teamabnormals.environmental.core.registry.EnvironmentalRegistries;
 import com.teamabnormals.environmental.core.registry.datapack.*;
-import com.teamabnormals.environmental.core.registry.slabfish.EnvironmentalSlabfishBackpacks;
-import com.teamabnormals.environmental.core.registry.slabfish.EnvironmentalSlabfishOverlays;
-import com.teamabnormals.environmental.core.registry.slabfish.EnvironmentalSlabfishSweaters;
-import com.teamabnormals.environmental.core.registry.slabfish.EnvironmentalSlabfishVariants;
+import com.teamabnormals.environmental.core.registry.datapack.slabfish.EnvironmentalSlabfishBackpacks;
+import com.teamabnormals.environmental.core.registry.datapack.slabfish.EnvironmentalSlabfishOverlays;
+import com.teamabnormals.environmental.core.registry.datapack.slabfish.EnvironmentalSlabfishSweaters;
+import com.teamabnormals.environmental.core.registry.datapack.slabfish.EnvironmentalSlabfishVariants;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
@@ -33,6 +33,7 @@ public class EnvironmentalDatapackProvider extends DatapackBuiltinEntriesProvide
 			.add(Registries.PAINTING_VARIANT, EnvironmentalPaintingVariants::bootstrap)
 			.add(Registries.BANNER_PATTERN, EnvironmentalBannerPatterns::bootstrap)
 			.add(Registries.JUKEBOX_SONG, EnvironmentalJukeboxSongs::bootstrap)
+			.add(Registries.WOLF_VARIANT, EnvironmentalWolfVariants::bootstrap)
 			.add(BlueprintDataPackRegistries.MODDED_BIOME_SLICES, EnvironmentalBiomeSlices::bootstrap)
 			.add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, EnvironmentalBiomeModifiers::bootstrap)
 			.add(EnvironmentalRegistries.KOI_VARIANT, EnvironmentalKoiVariants::bootstrap)

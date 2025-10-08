@@ -1,0 +1,117 @@
+{
+  "modifiers": [
+    {
+      "type": "criteria",
+      "config": {
+        "criteria": {
+          "environmental:environmental:gray": {
+            "conditions": {
+              "entity": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "type_specific": {
+                      "type": "minecraft:wolf",
+                      "variant": "environmental:gray"
+                    }
+                  }
+                }
+              ]
+            },
+            "trigger": "minecraft:tame_animal"
+          },
+          "environmental:environmental:horizon": {
+            "conditions": {
+              "entity": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "type_specific": {
+                      "type": "minecraft:wolf",
+                      "variant": "environmental:horizon"
+                    }
+                  }
+                }
+              ]
+            },
+            "trigger": "minecraft:tame_animal"
+          },
+          "environmental:environmental:ombre": {
+            "conditions": {
+              "entity": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "type_specific": {
+                      "type": "minecraft:wolf",
+                      "variant": "environmental:ombre"
+                    }
+                  }
+                }
+              ]
+            },
+            "trigger": "minecraft:tame_animal"
+          },
+          "environmental:environmental:tawny": {
+            "conditions": {
+              "entity": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "type_specific": {
+                      "type": "minecraft:wolf",
+                      "variant": "environmental:tawny"
+                    }
+                  }
+                }
+              ]
+            },
+            "trigger": "minecraft:tame_animal"
+          },
+          "environmental:environmental:timber": {
+            "conditions": {
+              "entity": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "type_specific": {
+                      "type": "minecraft:wolf",
+                      "variant": "environmental:timber"
+                    }
+                  }
+                }
+              ]
+            },
+            "trigger": "minecraft:tame_animal"
+          }
+        },
+        "indexed_requirements": [],
+        "requirements": [
+          [
+            "environmental:environmental:gray"
+          ],
+          [
+            "environmental:environmental:horizon"
+          ],
+          [
+            "environmental:environmental:ombre"
+          ],
+          [
+            "environmental:environmental:tawny"
+          ],
+          [
+            "environmental:environmental:timber"
+          ]
+        ],
+        "should_replace_requirements": false
+      }
+    }
+  ],
+  "priority": "normal",
+  "selector": "minecraft:husbandry/whole_pack"
+}

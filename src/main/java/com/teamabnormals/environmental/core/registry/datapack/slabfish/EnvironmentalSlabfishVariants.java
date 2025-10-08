@@ -1,4 +1,4 @@
-package com.teamabnormals.environmental.core.registry.slabfish;
+package com.teamabnormals.environmental.core.registry.datapack.slabfish;
 
 import com.teamabnormals.environmental.common.slabfish.SlabfishVariant;
 import com.teamabnormals.environmental.common.slabfish.condition.*;

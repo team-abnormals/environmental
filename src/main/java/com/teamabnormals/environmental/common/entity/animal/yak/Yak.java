@@ -66,6 +66,7 @@ public class Yak extends Animal implements IShearable, Shearable {
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public Brain<Yak> getBrain() {
 		return (Brain<Yak>) super.getBrain();
 	}

@@ -1,4 +1,4 @@
-package com.teamabnormals.environmental.core.registry.slabfish;
+package com.teamabnormals.environmental.core.registry.datapack.slabfish;
 
 import com.teamabnormals.environmental.common.slabfish.SlabfishSweater;
 import com.teamabnormals.environmental.core.Environmental;

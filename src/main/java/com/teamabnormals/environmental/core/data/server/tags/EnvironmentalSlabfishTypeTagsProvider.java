@@ -12,7 +12,7 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.CompletableFuture;
 
-import static com.teamabnormals.environmental.core.registry.slabfish.EnvironmentalSlabfishVariants.*;
+import static com.teamabnormals.environmental.core.registry.datapack.slabfish.EnvironmentalSlabfishVariants.*;
 
 public class EnvironmentalSlabfishTypeTagsProvider extends TagsProvider<SlabfishVariant> {
 

@@ -1,0 +1,6 @@
+{
+  "angry_texture": "environmental:entity/wolf/wolf_timber_angry",
+  "biomes": "environmental:snowy_old_growth_pine_barrens",
+  "tame_texture": "environmental:entity/wolf/wolf_timber_tame",
+  "wild_texture": "environmental:entity/wolf/wolf_timber"
+}

@@ -1,0 +1,6 @@
+{
+  "angry_texture": "environmental:entity/wolf/wolf_ombre_angry",
+  "biomes": "environmental:pine_slopes",
+  "tame_texture": "environmental:entity/wolf/wolf_ombre_tame",
+  "wild_texture": "environmental:entity/wolf/wolf_ombre"
+}

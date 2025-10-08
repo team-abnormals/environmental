@@ -17,9 +17,9 @@ import com.teamabnormals.environmental.core.other.tags.EnvironmentalSlabfishType
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSoundEvents;
-import com.teamabnormals.environmental.core.registry.slabfish.EnvironmentalSlabfishBackpacks;
-import com.teamabnormals.environmental.core.registry.slabfish.EnvironmentalSlabfishOverlays;
-import com.teamabnormals.environmental.core.registry.slabfish.EnvironmentalSlabfishVariants;
+import com.teamabnormals.environmental.core.registry.datapack.slabfish.EnvironmentalSlabfishBackpacks;
+import com.teamabnormals.environmental.core.registry.datapack.slabfish.EnvironmentalSlabfishOverlays;
+import com.teamabnormals.environmental.core.registry.datapack.slabfish.EnvironmentalSlabfishVariants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
