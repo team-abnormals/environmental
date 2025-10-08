@@ -5,7 +5,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamabnormals.environmental.common.slabfish.condition.SlabfishCondition;
 import com.teamabnormals.environmental.common.slabfish.condition.SlabfishConditionContext;
-import com.teamabnormals.environmental.core.other.tags.EnvironmentalSlabfishTypeTags;
+import com.teamabnormals.environmental.core.other.tags.EnvironmentalSlabfishVariantTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalRegistries;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
@@ -29,11 +29,11 @@ import java.util.function.Predicate;
 public record SlabfishVariant(Component description, ResourceLocation texture, Optional<Holder<SlabfishBackpack>> backpackOverride, int priority, SlabfishCondition[] conditions) implements Predicate<SlabfishConditionContext> {
 
 	public static final Map<TagKey<SlabfishVariant>, Pair<Float, ChatFormatting>> RARITIES = Util.make(new HashMap<>(), map -> {
-		map.put(EnvironmentalSlabfishTypeTags.COMMON, Pair.of(1.0F, ChatFormatting.GRAY));
-		map.put(EnvironmentalSlabfishTypeTags.UNCOMMON, Pair.of(0.60F, ChatFormatting.GREEN));
-		map.put(EnvironmentalSlabfishTypeTags.RARE, Pair.of(0.25F, ChatFormatting.AQUA));
-		map.put(EnvironmentalSlabfishTypeTags.EPIC, Pair.of(0.05F, ChatFormatting.LIGHT_PURPLE));
-		map.put(EnvironmentalSlabfishTypeTags.LEGENDARY, Pair.of(0.01F, ChatFormatting.GOLD));
+		map.put(EnvironmentalSlabfishVariantTags.COMMON, Pair.of(1.0F, ChatFormatting.GRAY));
+		map.put(EnvironmentalSlabfishVariantTags.UNCOMMON, Pair.of(0.60F, ChatFormatting.GREEN));
+		map.put(EnvironmentalSlabfishVariantTags.RARE, Pair.of(0.25F, ChatFormatting.AQUA));
+		map.put(EnvironmentalSlabfishVariantTags.EPIC, Pair.of(0.05F, ChatFormatting.LIGHT_PURPLE));
+		map.put(EnvironmentalSlabfishVariantTags.LEGENDARY, Pair.of(0.01F, ChatFormatting.GOLD));
 	});
 
 	public static final Codec<SlabfishVariant> DIRECT_CODEC = RecordCodecBuilder.create(instance -> {
@@ -66,16 +66,6 @@ public record SlabfishVariant(Component description, ResourceLocation texture, O
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "SlabfishType{" +
-				//"registryName=" + registryName +
-				", description=" + description.getString() +
-				//", modLoaded=" + modLoaded +
-				", priority=" + priority +
-				'}';
-	}
-
 	public Holder<SlabfishVariant> holder(Level level) {
 		Registry<SlabfishVariant> registry = SlabfishHelper.slabfishTypes(level.registryAccess());
 		return registry.getHolderOrThrow(registry.getResourceKey(this).get());
@@ -91,11 +81,11 @@ public record SlabfishVariant(Component description, ResourceLocation texture, O
 	}
 
 	public static boolean canBeSold(Holder<SlabfishVariant> variant) {
-		return !variant.is(EnvironmentalSlabfishTypeTags.NOT_SOLD_BY_WANDERING_TRADER);
+		return !variant.is(EnvironmentalSlabfishVariantTags.NOT_SOLD_BY_WANDERING_TRADER);
 	}
 
 	public static boolean isTranslucent(Holder<SlabfishVariant> variant) {
-		return variant.is(EnvironmentalSlabfishTypeTags.TRANSLUCENT);
+		return variant.is(EnvironmentalSlabfishVariantTags.TRANSLUCENT);
 	}
 
 	public static TagKey<SlabfishVariant> getRandomRarity(float chance) {
@@ -111,6 +101,6 @@ public record SlabfishVariant(Component description, ResourceLocation texture, O
 				return entry.getKey();
 		}
 
-		return EnvironmentalSlabfishTypeTags.COMMON;
+		return EnvironmentalSlabfishVariantTags.COMMON;
 	}
 }

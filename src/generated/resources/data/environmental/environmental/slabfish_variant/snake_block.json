@@ -1,0 +1,18 @@
+{
+  "backpack_override": "environmental:snake_block",
+  "conditions": [
+    {
+      "type": "environmental:rename",
+      "names": [
+        "snake",
+        "snake block",
+        "snakeblock"
+      ]
+    }
+  ],
+  "description": {
+    "translate": "slabfish_variant.environmental.snake_block"
+  },
+  "priority": 15,
+  "texture": "environmental:variant/snake_block"
+}

@@ -2,7 +2,7 @@ package com.teamabnormals.environmental.core.data.server.tags;
 
 import com.teamabnormals.environmental.common.slabfish.SlabfishVariant;
 import com.teamabnormals.environmental.core.Environmental;
-import com.teamabnormals.environmental.core.other.tags.EnvironmentalSlabfishTypeTags;
+import com.teamabnormals.environmental.core.other.tags.EnvironmentalSlabfishVariantTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalRegistries;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderLookup.Provider;
@@ -22,27 +22,28 @@ public class EnvironmentalSlabfishTypeTagsProvider extends TagsProvider<Slabfish
 
 	@Override
 	public void addTags(HolderLookup.Provider provider) {
-		this.tag(EnvironmentalSlabfishTypeTags.TRANSLUCENT).add(GHOST);
-		this.tag(EnvironmentalSlabfishTypeTags.NOT_SOLD_BY_WANDERING_TRADER);
+		this.tag(EnvironmentalSlabfishVariantTags.TRANSLUCENT).add(GHOST);
+		this.tag(EnvironmentalSlabfishVariantTags.NOT_SOLD_BY_WANDERING_TRADER).add(SNAKE_BLOCK);
 
-		this.tag(EnvironmentalSlabfishTypeTags.COMMON).add(SWAMP, MARSH, MANGROVE);
-		this.tag(EnvironmentalSlabfishTypeTags.UNCOMMON).add(
+		this.tag(EnvironmentalSlabfishVariantTags.COMMON).add(SWAMP, MARSH, MANGROVE);
+		this.tag(EnvironmentalSlabfishVariantTags.UNCOMMON).add(
 				PLAINS, SAVANNA, DESERT, FOREST, HILL, TAIGA, SNOWY,
-				RIVER, BEACH, OCEAN, CAVE
+				RIVER, BEACH, OCEAN, CAVE,
+				SNAKE_BLOCK
 		);
-		this.tag(EnvironmentalSlabfishTypeTags.RARE).add(
+		this.tag(EnvironmentalSlabfishVariantTags.RARE).add(
 				DARK_FOREST, FLOWER_FOREST, JUNGLE, BADLANDS, MOUNTAIN, CHERRY_GROVE,
 				BLOSSOM, PINE, MAPLE,
 				RAINFOREST, ASPEN, LAUREL, DUNES, SCRUBLAND,
 				WARM_OCEAN, FROZEN_OCEAN,
 				DEEPSLATE, LUSH_CAVES, DRIPSTONE_CAVES, NETHER
 		);
-		this.tag(EnvironmentalSlabfishTypeTags.EPIC).add(
+		this.tag(EnvironmentalSlabfishVariantTags.EPIC).add(
 				MUSHROOM, DEEP_DARK, ICE_SPIKES, BAMBOO, KOUSA, SPINY_THICKET,
-				SKELETON, DROWNED, NIGHTMARE, TOTEM,
+				SKELETON, DROWNED, NIGHTMARE, TOTEM, GOLEM,
 				CRIMSON, WARPED, SOUL_SAND_VALLEY, BASALT_DELTAS,
 				END, CHORUS, POISE
 		);
-		this.tag(EnvironmentalSlabfishTypeTags.LEGENDARY).add(BROWN_MUSHROOM, SKY, WITHER, STRAY, GHOST);
+		this.tag(EnvironmentalSlabfishVariantTags.LEGENDARY).add(BROWN_MUSHROOM, SKY, WITHER, STRAY, GHOST);
 	}
 }

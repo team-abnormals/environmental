@@ -1,0 +1,6 @@
+{
+  "description": {
+    "translate": "slabfish_backpack.environmental.snake_block"
+  },
+  "texture": "environmental:backpack/snake_block"
+}

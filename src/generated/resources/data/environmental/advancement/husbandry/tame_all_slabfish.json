@@ -316,6 +316,21 @@
       },
       "trigger": "minecraft:tame_animal"
     },
+    "environmental:golem": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "environmental:slabfish",
+              "nbt": "{SlabfishVariant:\"environmental:golem\"}"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:tame_animal"
+    },
     "environmental:hill": {
       "conditions": {
         "entity": [
@@ -571,6 +586,21 @@
       },
       "trigger": "minecraft:tame_animal"
     },
+    "environmental:snake_block": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "environmental:slabfish",
+              "nbt": "{SlabfishVariant:\"environmental:snake_block\"}"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:tame_animal"
+    },
     "environmental:snowy": {
       "conditions": {
         "entity": [
@@ -785,6 +815,9 @@
       "environmental:ghost"
     ],
     [
+      "environmental:golem"
+    ],
+    [
       "environmental:hill"
     ],
     [
@@ -834,6 +867,9 @@
     ],
     [
       "environmental:sky"
+    ],
+    [
+      "environmental:snake_block"
     ],
     [
       "environmental:snowy"

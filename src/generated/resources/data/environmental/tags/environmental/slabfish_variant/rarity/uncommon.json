@@ -10,6 +10,7 @@
     "environmental:river",
     "environmental:beach",
     "environmental:ocean",
-    "environmental:cave"
+    "environmental:cave",
+    "environmental:snake_block"
   ]
 }

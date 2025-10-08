@@ -31,8 +31,7 @@ public class SlabfishInventory extends DynamicInventory {
 			case 2:
 				if (SlabfishHelper.getBackpackType(SlabfishHelper.slabfishBackpacks(this.slabfish.registryAccess()), stack).isEmpty())
 					return false;
-				SlabfishVariant slabfishVariant = this.slabfish.getVariant().value();
-				return this.slabfish.hasBackpack() && slabfishVariant.backpackOverride().isEmpty();
+				return this.slabfish.hasBackpack();
 			default:
 				return super.canPlaceItem(index, stack);
 		}

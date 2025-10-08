@@ -1,5 +1,6 @@
 package com.teamabnormals.environmental.core.registry.datapack.slabfish;
 
+import com.teamabnormals.environmental.common.slabfish.SlabfishBackpack;
 import com.teamabnormals.environmental.common.slabfish.SlabfishVariant;
 import com.teamabnormals.environmental.common.slabfish.condition.*;
 import com.teamabnormals.environmental.common.slabfish.condition.SlabfishConditionContext.Event;
@@ -98,6 +99,9 @@ public class EnvironmentalSlabfishVariants {
 	public static final ResourceKey<SlabfishVariant> STRAY = create("stray");
 	public static final ResourceKey<SlabfishVariant> WITHER = create("wither");
 	public static final ResourceKey<SlabfishVariant> TOTEM = create("totem");
+	public static final ResourceKey<SlabfishVariant> GOLEM = create("golem");
+
+	public static final ResourceKey<SlabfishVariant> SNAKE_BLOCK = create("snake_block");
 
 	public static final List<ResourceKey<SlabfishVariant>> ATMOSPHERIC_SLABFISH = List.of(RAINFOREST, DUNES, SCRUBLAND, SPINY_THICKET, ASPEN, KOUSA, LAUREL);
 	public static final List<ResourceKey<SlabfishVariant>> AUTUMNITY_SLABFISH = List.of(MAPLE);
@@ -136,6 +140,7 @@ public class EnvironmentalSlabfishVariants {
 
 		register(context, TOTEM, 3, spawn(), new SlabfishRaidCondition());
 		register(context, NIGHTMARE, 3, spawn(), new SlabfishInsomniaCondition(), new SlabfishTimeCondition(Time.NIGHT));
+		register(context, GOLEM, 0, new SlabfishImpossibleCondition());
 
 		register(context, CAVE, 4, spawn(), new SlabfishHeightCondition(0, 48), new SlabfishLightCondition(0, 0, LightLayer.SKY), overworld());
 		register(context, DEEPSLATE, 4, spawn(), new SlabfishHeightCondition(Integer.MIN_VALUE, 0), new SlabfishLightCondition(0, 0, LightLayer.SKY), overworld());
@@ -175,13 +180,19 @@ public class EnvironmentalSlabfishVariants {
 		register(context, END, 0, spawn(), dimension(Level.END));
 		register(context, CHORUS, 1, Tags.Biomes.IS_OUTER_END_ISLAND);
 		register(context, POISE, 1, EnvironmentalConstants.ENDERGETIC, EnvironmentalConstants.POISE_FOREST);
+
+		register(context, SNAKE_BLOCK, 15, context.lookup(EnvironmentalRegistries.SLABFISH_BACKPACK).getOrThrow(EnvironmentalSlabfishBackpacks.SNAKE_BLOCK), new SlabfishRenameCondition(new String[]{"snake", "snake block", "snakeblock"}, false));
 	}
 
 	public static Reference<SlabfishVariant> register(BootstrapContext<SlabfishVariant> context, ResourceKey<SlabfishVariant> key, int priority, SlabfishCondition... conditions) {
+		return register(context, key, priority, null, conditions);
+	}
+
+	public static Reference<SlabfishVariant> register(BootstrapContext<SlabfishVariant> context, ResourceKey<SlabfishVariant> key, int priority, Holder<SlabfishBackpack> customBackpack, SlabfishCondition... conditions) {
 		return context.register(key, new SlabfishVariant(
 				Component.translatable(Util.makeDescriptionId("slabfish_variant", key.location())),
 				ResourceLocation.fromNamespaceAndPath(key.location().getNamespace(), "variant/" + key.location().getPath()),
-				Optional.empty(), priority, Arrays.stream(conditions).toArray(SlabfishCondition[]::new)));
+				Optional.ofNullable(customBackpack), priority, Arrays.stream(conditions).toArray(SlabfishCondition[]::new)));
 	}
 
 	public static Reference<SlabfishVariant> register(BootstrapContext<SlabfishVariant> context, ResourceKey<SlabfishVariant> key, int priority, TagKey<Biome> biomes) {

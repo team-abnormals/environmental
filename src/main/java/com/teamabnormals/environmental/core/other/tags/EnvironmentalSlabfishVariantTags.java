@@ -5,7 +5,7 @@ import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.registry.EnvironmentalRegistries;
 import net.minecraft.tags.TagKey;
 
-public class EnvironmentalSlabfishTypeTags {
+public class EnvironmentalSlabfishVariantTags {
 	public static final TagKey<SlabfishVariant> NOT_SOLD_BY_WANDERING_TRADER = slabfishTypeTag("not_sold_by_wandering_trader");
 	public static final TagKey<SlabfishVariant> TRANSLUCENT = slabfishTypeTag("translucent");
 

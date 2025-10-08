@@ -1,11 +1,14 @@
 package com.teamabnormals.environmental.common.block;
 
 import com.mojang.serialization.MapCodec;
+import com.teamabnormals.environmental.common.entity.animal.slabfish.Slabfish;
+import com.teamabnormals.environmental.common.slabfish.SlabfishHelper;
+import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
+import com.teamabnormals.environmental.core.registry.datapack.slabfish.EnvironmentalSlabfishVariants;
+import net.minecraft.commands.arguments.EntityAnchorArgument.Anchor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -14,11 +17,12 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -41,8 +45,8 @@ public class SlabfishEffigyBlock extends HorizontalDirectionalBlock implements S
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
-		return Shapes.or(SHAPE, state.getValue(FACING).getAxis() == Axis.X ? SLABFISH_SHAPE : SLABFISH_SHAPE_ROTATED);
+	public VoxelShape getShape(BlockState state, BlockGetter levelIn, BlockPos pos, CollisionContext context) {
+		return state.getValue(POWERED) ? SHAPE : Shapes.or(SHAPE, state.getValue(FACING).getAxis() == Axis.X ? SLABFISH_SHAPE : SLABFISH_SHAPE_ROTATED);
 	}
 
 	@Override
@@ -52,36 +56,30 @@ public class SlabfishEffigyBlock extends HorizontalDirectionalBlock implements S
 
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
-		return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite()).setValue(POWERED, context.getLevel().hasNeighborSignal(context.getClickedPos())).setValue(WATERLOGGED, context.getLevel().getFluidState(context.getClickedPos()).getType() == Fluids.WATER);
+		return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite()).setValue(WATERLOGGED, context.getLevel().getFluidState(context.getClickedPos()).getType() == Fluids.WATER);
 	}
 
-	@Override
-	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
-		if (stateIn.getValue(WATERLOGGED)) {
-			worldIn.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
-		}
-		return super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
-	}
-
-	@Override
-	public void neighborChanged(BlockState state, Level worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
-		if (!worldIn.isClientSide) {
-			boolean flag = state.getValue(POWERED);
-			if (flag != worldIn.hasNeighborSignal(pos)) {
-				if (flag) {
-					worldIn.scheduleTick(pos, this, 4);
-				} else {
-					worldIn.setBlock(pos, state.cycle(POWERED), 2);
-				}
+	public void onLightningStrike(BlockState state, Level level, BlockPos pos) {
+		if (!state.getValue(POWERED)) {
+			level.setBlock(pos, state.setValue(POWERED, true), 3);
+			Direction facing = state.getValue(FACING);
+			if (!level.isClientSide()) {
+				Slabfish slabfish = EnvironmentalEntityTypes.SLABFISH.get().create(level);
+				if (slabfish == null) return;
+				slabfish.moveTo(pos.getX() + 0.5F, pos.getY() + 0.125F, pos.getZ() + 0.5F, 0.0F, 0.0F);
+				slabfish.setVariant(SlabfishHelper.slabfishTypes(slabfish.registryAccess()).getHolderOrThrow(EnvironmentalSlabfishVariants.GOLEM));
+				slabfish.lookAt(Anchor.EYES, Vec3.atCenterOf(pos.relative(facing)));
+				level.addFreshEntity(slabfish);
 			}
 		}
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource rand) {
-		if (state.getValue(POWERED) && !worldIn.hasNeighborSignal(pos)) {
-			worldIn.setBlock(pos, state.cycle(POWERED), 2);
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor levelIn, BlockPos currentPos, BlockPos facingPos) {
+		if (stateIn.getValue(WATERLOGGED)) {
+			levelIn.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(levelIn));
 		}
+		return super.updateShape(stateIn, facing, facingState, levelIn, currentPos, facingPos);
 	}
 
 	@Override
@@ -90,7 +88,7 @@ public class SlabfishEffigyBlock extends HorizontalDirectionalBlock implements S
 	}
 
 	@Override
-	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
 		builder.add(FACING, POWERED, WATERLOGGED);
 	}
 

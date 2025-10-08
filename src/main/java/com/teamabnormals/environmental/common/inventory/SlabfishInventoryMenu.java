@@ -48,8 +48,7 @@ public class SlabfishInventoryMenu extends AbstractContainerMenu {
 					public boolean isActive() {
 						if (this.getSlotIndex() != 2)
 							return true;
-						SlabfishVariant slabfishVariant = slabfish.getVariant().value();
-						return slabfish.hasBackpack() && slabfishVariant.backpackOverride().isEmpty();
+						return slabfish.hasBackpack();
 					}
 				}).setBackground(InventoryMenu.BLOCK_ATLAS, SLOT_INDEX_NAMES[i]);
 			}

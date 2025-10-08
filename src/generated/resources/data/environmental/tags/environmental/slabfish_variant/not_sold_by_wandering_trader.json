@@ -1,3 +1,5 @@
 {
-  "values": []
+  "values": [
+    "environmental:snake_block"
+  ]
 }

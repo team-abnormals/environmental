@@ -12,12 +12,13 @@
     "DonkeyMixin",
     "GrassBlockMixin",
     "HorseMixin",
+    "ItemMixin",
+    "LightningBoltMixin",
     "LivingEntityMixin",
     "MoveControlMixin",
     "MuleMixin",
     "PigMixin",
     "PinkPetalsBlockMixin",
-    "ItemMixin",
     "SurfaceSystemMixin"
   ],
   "client": [
