@@ -20,6 +20,6 @@ public class DeerRenderer extends MobRenderer<Deer, DeerModel<Deer>> {
 
 	@Override
 	public ResourceLocation getTextureLocation(Deer entity) {
-		return entity.getVariant().value().assetId().withPrefix("textures/").withSuffix(".png");
+		return entity.getVariant().value().texture().withPrefix("textures/").withSuffix(".png");
 	}
 }

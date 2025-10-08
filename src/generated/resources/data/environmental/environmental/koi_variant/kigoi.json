@@ -1,6 +1,6 @@
 {
-  "asset_id": "environmental:entity/koi/kigoi",
   "description": {
     "translate": "koi_variant.environmental.kigoi"
-  }
+  },
+  "texture": "environmental:entity/koi/kigoi"
 }

@@ -10,6 +10,7 @@ import com.teamabnormals.environmental.core.data.client.EnvironmentalSpriteSourc
 import com.teamabnormals.environmental.core.data.server.*;
 import com.teamabnormals.environmental.core.data.server.modifiers.EnvironmentalAdvancementModifierProvider;
 import com.teamabnormals.environmental.core.data.server.modifiers.EnvironmentalChunkGeneratorModifierProvider;
+import com.teamabnormals.environmental.core.data.server.modifiers.EnvironmentalDataRemolderProvider;
 import com.teamabnormals.environmental.core.data.server.tags.*;
 import com.teamabnormals.environmental.core.other.*;
 import com.teamabnormals.environmental.core.registry.*;
@@ -112,7 +113,7 @@ public class Environmental {
 		generator.addProvider(server, new EnvironmentalChunkGeneratorModifierProvider(output, provider));
 		generator.addProvider(server, new EnvironmentalLootTableProvider(output, provider));
 		generator.addProvider(server, new EnvironmentalDataMapProvider(output, provider));
-		// generator.addProvider(server, new EnvironmentalLootModifierProvider(output, provider));
+		generator.addProvider(server, new EnvironmentalDataRemolderProvider(output, provider));
 
 		boolean client = event.includeClient();
 		generator.addProvider(client, new EnvironmentalItemModelProvider(output, helper));

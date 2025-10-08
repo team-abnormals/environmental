@@ -1,5 +1,6 @@
 package com.teamabnormals.environmental.core.data.server;
 
+import com.teamabnormals.environmental.common.entity.animal.slabfish.Slabfish;
 import com.teamabnormals.environmental.common.slabfish.SlabfishVariant;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.other.EnvironmentalCriteriaTriggers;
@@ -112,7 +113,7 @@ public class EnvironmentalAdvancementProvider implements AdvancementGenerator {
 
 	public static Criterion<TameAnimalTrigger.TriggerInstance> slabfishCriterion(ResourceKey<SlabfishVariant> slabfish) {
 		CompoundTag tag = new CompoundTag();
-		tag.putString("SlabfishType", slabfish.location().toString());
+		tag.putString(Slabfish.VARIANT_TAG, slabfish.location().toString());
 		return TameAnimalTrigger.TriggerInstance.tamedAnimal(EntityPredicate.Builder.entity().of(EnvironmentalEntityTypes.SLABFISH.get()).nbt(new NbtPredicate(tag)));
 	}
 

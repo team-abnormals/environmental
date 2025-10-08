@@ -1,6 +1,6 @@
 {
-  "asset_id": "environmental:entity/koi/kumonryu",
   "description": {
     "translate": "koi_variant.environmental.kumonryu"
-  }
+  },
+  "texture": "environmental:entity/koi/kumonryu"
 }

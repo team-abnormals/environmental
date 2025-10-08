@@ -1,0 +1,92 @@
+{
+  "molding": "json",
+  "remolder": {
+    "type": "replace",
+    "target": "pools",
+    "value": [
+      {
+        "bonus_rolls": 0.0,
+        "conditions": [
+          {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "items": "#c:tools/shear"
+            }
+          }
+        ],
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "functions": [
+              {
+                "add": false,
+                "conditions": [
+                  {
+                    "block": "minecraft:pink_petals",
+                    "condition": "minecraft:block_state_property",
+                    "properties": {
+                      "flower_amount": "1"
+                    }
+                  }
+                ],
+                "count": 1.0,
+                "function": "minecraft:set_count"
+              },
+              {
+                "add": false,
+                "conditions": [
+                  {
+                    "block": "minecraft:pink_petals",
+                    "condition": "minecraft:block_state_property",
+                    "properties": {
+                      "flower_amount": "2"
+                    }
+                  }
+                ],
+                "count": 2.0,
+                "function": "minecraft:set_count"
+              },
+              {
+                "add": false,
+                "conditions": [
+                  {
+                    "block": "minecraft:pink_petals",
+                    "condition": "minecraft:block_state_property",
+                    "properties": {
+                      "flower_amount": "3"
+                    }
+                  }
+                ],
+                "count": 3.0,
+                "function": "minecraft:set_count"
+              },
+              {
+                "add": false,
+                "conditions": [
+                  {
+                    "block": "minecraft:pink_petals",
+                    "condition": "minecraft:block_state_property",
+                    "properties": {
+                      "flower_amount": "4"
+                    }
+                  }
+                ],
+                "count": 4.0,
+                "function": "minecraft:set_count"
+              }
+            ],
+            "name": "minecraft:pink_petals"
+          }
+        ],
+        "functions": [
+          {
+            "function": "minecraft:explosion_decay"
+          }
+        ],
+        "name": "environmental:pink_petals",
+        "rolls": 1.0
+      }
+    ]
+  },
+  "selector": "minecraft:loot_table/blocks/pink_petals"
+}

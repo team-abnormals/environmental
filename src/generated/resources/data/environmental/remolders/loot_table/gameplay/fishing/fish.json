@@ -1,0 +1,24 @@
+{
+  "molding": "json",
+  "remolder": {
+    "type": "add",
+    "target": "pools[0].entries[]",
+    "value": {
+      "type": "minecraft:item",
+      "conditions": [
+        {
+          "condition": "minecraft:location_check",
+          "predicate": {
+            "biomes": [
+              "environmental:blossom_woods",
+              "environmental:blossom_valleys"
+            ]
+          }
+        }
+      ],
+      "name": "environmental:koi",
+      "weight": 70
+    }
+  },
+  "selector": "minecraft:loot_table/gameplay/fishing/fish"
+}

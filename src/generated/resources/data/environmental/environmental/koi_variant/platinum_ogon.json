@@ -1,6 +1,6 @@
 {
-  "asset_id": "environmental:entity/koi/platinum_ogon",
   "description": {
     "translate": "koi_variant.environmental.platinum_ogon"
-  }
+  },
+  "texture": "environmental:entity/koi/platinum_ogon"
 }

@@ -25,7 +25,6 @@ import net.minecraft.world.level.Level;
 
 import java.util.*;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public record SlabfishVariant(Component description, ResourceLocation texture, Optional<Holder<SlabfishBackpack>> backpackOverride, int priority, SlabfishCondition[] conditions) implements Predicate<SlabfishConditionContext> {
 

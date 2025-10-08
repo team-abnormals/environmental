@@ -1,6 +1,6 @@
 {
-  "asset_id": "environmental:entity/koi/doitsu_chagoi",
   "description": {
     "translate": "koi_variant.environmental.doitsu_chagoi"
-  }
+  },
+  "texture": "environmental:entity/koi/doitsu_chagoi"
 }

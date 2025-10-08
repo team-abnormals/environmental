@@ -1,5 +1,5 @@
 {
-  "asset_id": "environmental:entity/deer/deer_chestnut",
   "biomes": "#environmental:spawns_chestnut_deer",
-  "priority": 1
+  "priority": 1,
+  "texture": "environmental:entity/deer/deer_chestnut"
 }

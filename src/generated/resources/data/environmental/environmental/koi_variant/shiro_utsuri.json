@@ -1,6 +1,6 @@
 {
-  "asset_id": "environmental:entity/koi/shiro_utsuri",
   "description": {
     "translate": "koi_variant.environmental.shiro_utsuri"
-  }
+  },
+  "texture": "environmental:entity/koi/shiro_utsuri"
 }

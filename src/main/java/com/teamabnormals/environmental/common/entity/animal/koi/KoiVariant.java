@@ -18,14 +18,14 @@ import net.minecraft.util.RandomSource;
 
 import java.util.List;
 
-public record KoiVariant(ResourceLocation assetId, Component description) {
+public record KoiVariant(ResourceLocation texture, Component description) {
 	public static final Codec<KoiVariant> DIRECT_CODEC = RecordCodecBuilder.create(instance -> instance.group(
-					ResourceLocation.CODEC.fieldOf("asset_id").forGetter(KoiVariant::assetId),
+					ResourceLocation.CODEC.fieldOf("texture").forGetter(KoiVariant::texture),
 					ComponentSerialization.CODEC.fieldOf("description").forGetter(KoiVariant::description))
 			.apply(instance, KoiVariant::new));
 
 	public static final StreamCodec<RegistryFriendlyByteBuf, KoiVariant> DIRECT_STREAM_CODEC = StreamCodec.composite(
-			ResourceLocation.STREAM_CODEC, KoiVariant::assetId,
+			ResourceLocation.STREAM_CODEC, KoiVariant::texture,
 			ComponentSerialization.STREAM_CODEC, KoiVariant::description,
 			KoiVariant::new
 	);

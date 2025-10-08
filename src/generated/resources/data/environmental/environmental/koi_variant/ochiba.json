@@ -1,6 +1,6 @@
 {
-  "asset_id": "environmental:entity/koi/ochiba",
   "description": {
     "translate": "koi_variant.environmental.ochiba"
-  }
+  },
+  "texture": "environmental:entity/koi/ochiba"
 }

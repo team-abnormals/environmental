@@ -77,7 +77,7 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 	}
 
 	public static class EnvironmentalBlockLoot extends BlockLootSubProvider {
-		private static final LootItemCondition.Builder HAS_SHEARS = MatchTool.toolMatches(ItemPredicate.Builder.item().of(net.neoforged.neoforge.common.Tags.Items.TOOLS_SHEAR));
+		public static final LootItemCondition.Builder HAS_SHEARS = MatchTool.toolMatches(ItemPredicate.Builder.item().of(net.neoforged.neoforge.common.Tags.Items.TOOLS_SHEAR));
 
 		protected LootItemCondition.Builder doesNotHaveSilkTouch() {
 			return this.hasSilkTouch().invert();

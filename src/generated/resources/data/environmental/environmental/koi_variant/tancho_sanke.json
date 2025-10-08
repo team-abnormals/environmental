@@ -1,6 +1,6 @@
 {
-  "asset_id": "environmental:entity/koi/tancho_sanke",
   "description": {
     "translate": "koi_variant.environmental.tancho_sanke"
-  }
+  },
+  "texture": "environmental:entity/koi/tancho_sanke"
 }

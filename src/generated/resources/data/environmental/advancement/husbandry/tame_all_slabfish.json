@@ -9,7 +9,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:badlands\"}"
+              "nbt": "{SlabfishVariant:\"environmental:badlands\"}"
             }
           }
         ]
@@ -24,7 +24,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:bamboo\"}"
+              "nbt": "{SlabfishVariant:\"environmental:bamboo\"}"
             }
           }
         ]
@@ -39,7 +39,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:basalt_deltas\"}"
+              "nbt": "{SlabfishVariant:\"environmental:basalt_deltas\"}"
             }
           }
         ]
@@ -54,7 +54,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:beach\"}"
+              "nbt": "{SlabfishVariant:\"environmental:beach\"}"
             }
           }
         ]
@@ -69,7 +69,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:blossom\"}"
+              "nbt": "{SlabfishVariant:\"environmental:blossom\"}"
             }
           }
         ]
@@ -84,7 +84,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:brown_mushroom\"}"
+              "nbt": "{SlabfishVariant:\"environmental:brown_mushroom\"}"
             }
           }
         ]
@@ -99,7 +99,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:cave\"}"
+              "nbt": "{SlabfishVariant:\"environmental:cave\"}"
             }
           }
         ]
@@ -114,7 +114,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:cherry_grove\"}"
+              "nbt": "{SlabfishVariant:\"environmental:cherry_grove\"}"
             }
           }
         ]
@@ -129,7 +129,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:chorus\"}"
+              "nbt": "{SlabfishVariant:\"environmental:chorus\"}"
             }
           }
         ]
@@ -144,7 +144,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:crimson\"}"
+              "nbt": "{SlabfishVariant:\"environmental:crimson\"}"
             }
           }
         ]
@@ -159,7 +159,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:dark_forest\"}"
+              "nbt": "{SlabfishVariant:\"environmental:dark_forest\"}"
             }
           }
         ]
@@ -174,7 +174,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:deep_dark\"}"
+              "nbt": "{SlabfishVariant:\"environmental:deep_dark\"}"
             }
           }
         ]
@@ -189,7 +189,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:deepslate\"}"
+              "nbt": "{SlabfishVariant:\"environmental:deepslate\"}"
             }
           }
         ]
@@ -204,7 +204,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:desert\"}"
+              "nbt": "{SlabfishVariant:\"environmental:desert\"}"
             }
           }
         ]
@@ -219,7 +219,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:dripstone_caves\"}"
+              "nbt": "{SlabfishVariant:\"environmental:dripstone_caves\"}"
             }
           }
         ]
@@ -234,7 +234,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:drowned\"}"
+              "nbt": "{SlabfishVariant:\"environmental:drowned\"}"
             }
           }
         ]
@@ -249,7 +249,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:end\"}"
+              "nbt": "{SlabfishVariant:\"environmental:end\"}"
             }
           }
         ]
@@ -264,7 +264,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:flower_forest\"}"
+              "nbt": "{SlabfishVariant:\"environmental:flower_forest\"}"
             }
           }
         ]
@@ -279,7 +279,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:forest\"}"
+              "nbt": "{SlabfishVariant:\"environmental:forest\"}"
             }
           }
         ]
@@ -294,7 +294,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:frozen_ocean\"}"
+              "nbt": "{SlabfishVariant:\"environmental:frozen_ocean\"}"
             }
           }
         ]
@@ -309,7 +309,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:ghost\"}"
+              "nbt": "{SlabfishVariant:\"environmental:ghost\"}"
             }
           }
         ]
@@ -324,7 +324,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:hill\"}"
+              "nbt": "{SlabfishVariant:\"environmental:hill\"}"
             }
           }
         ]
@@ -339,7 +339,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:ice_spikes\"}"
+              "nbt": "{SlabfishVariant:\"environmental:ice_spikes\"}"
             }
           }
         ]
@@ -354,7 +354,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:jungle\"}"
+              "nbt": "{SlabfishVariant:\"environmental:jungle\"}"
             }
           }
         ]
@@ -369,7 +369,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:lush_caves\"}"
+              "nbt": "{SlabfishVariant:\"environmental:lush_caves\"}"
             }
           }
         ]
@@ -384,7 +384,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:mangrove\"}"
+              "nbt": "{SlabfishVariant:\"environmental:mangrove\"}"
             }
           }
         ]
@@ -399,7 +399,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:marsh\"}"
+              "nbt": "{SlabfishVariant:\"environmental:marsh\"}"
             }
           }
         ]
@@ -414,7 +414,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:mountain\"}"
+              "nbt": "{SlabfishVariant:\"environmental:mountain\"}"
             }
           }
         ]
@@ -429,7 +429,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:mushroom\"}"
+              "nbt": "{SlabfishVariant:\"environmental:mushroom\"}"
             }
           }
         ]
@@ -444,7 +444,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:nether\"}"
+              "nbt": "{SlabfishVariant:\"environmental:nether\"}"
             }
           }
         ]
@@ -459,7 +459,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:nightmare\"}"
+              "nbt": "{SlabfishVariant:\"environmental:nightmare\"}"
             }
           }
         ]
@@ -474,7 +474,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:ocean\"}"
+              "nbt": "{SlabfishVariant:\"environmental:ocean\"}"
             }
           }
         ]
@@ -489,7 +489,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:pine\"}"
+              "nbt": "{SlabfishVariant:\"environmental:pine\"}"
             }
           }
         ]
@@ -504,7 +504,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:plains\"}"
+              "nbt": "{SlabfishVariant:\"environmental:plains\"}"
             }
           }
         ]
@@ -519,7 +519,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:river\"}"
+              "nbt": "{SlabfishVariant:\"environmental:river\"}"
             }
           }
         ]
@@ -534,7 +534,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:savanna\"}"
+              "nbt": "{SlabfishVariant:\"environmental:savanna\"}"
             }
           }
         ]
@@ -549,7 +549,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:skeleton\"}"
+              "nbt": "{SlabfishVariant:\"environmental:skeleton\"}"
             }
           }
         ]
@@ -564,7 +564,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:sky\"}"
+              "nbt": "{SlabfishVariant:\"environmental:sky\"}"
             }
           }
         ]
@@ -579,7 +579,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:snowy\"}"
+              "nbt": "{SlabfishVariant:\"environmental:snowy\"}"
             }
           }
         ]
@@ -594,7 +594,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:soul_sand_valley\"}"
+              "nbt": "{SlabfishVariant:\"environmental:soul_sand_valley\"}"
             }
           }
         ]
@@ -609,7 +609,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:stray\"}"
+              "nbt": "{SlabfishVariant:\"environmental:stray\"}"
             }
           }
         ]
@@ -624,7 +624,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:swamp\"}"
+              "nbt": "{SlabfishVariant:\"environmental:swamp\"}"
             }
           }
         ]
@@ -639,7 +639,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:taiga\"}"
+              "nbt": "{SlabfishVariant:\"environmental:taiga\"}"
             }
           }
         ]
@@ -654,7 +654,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:totem\"}"
+              "nbt": "{SlabfishVariant:\"environmental:totem\"}"
             }
           }
         ]
@@ -669,7 +669,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:warm_ocean\"}"
+              "nbt": "{SlabfishVariant:\"environmental:warm_ocean\"}"
             }
           }
         ]
@@ -684,7 +684,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:warped\"}"
+              "nbt": "{SlabfishVariant:\"environmental:warped\"}"
             }
           }
         ]
@@ -699,7 +699,7 @@
             "entity": "this",
             "predicate": {
               "type": "environmental:slabfish",
-              "nbt": "{SlabfishType:\"environmental:wither\"}"
+              "nbt": "{SlabfishVariant:\"environmental:wither\"}"
             }
           }
         ]

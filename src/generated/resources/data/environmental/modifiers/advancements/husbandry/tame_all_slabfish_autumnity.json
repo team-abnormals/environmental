@@ -12,7 +12,7 @@
                   "entity": "this",
                   "predicate": {
                     "type": "environmental:slabfish",
-                    "nbt": "{SlabfishType:\"environmental:maple\"}"
+                    "nbt": "{SlabfishVariant:\"environmental:maple\"}"
                   }
                 }
               ]

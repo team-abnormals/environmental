@@ -26,7 +26,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public class KoiBucketItem extends MobBucketItem {
-	private static final Map<String, Optional<Holder<KoiVariant>>> TYPE_CACHE = new HashMap<>();
+	private static final Map<String, Optional<Holder<KoiVariant>>> VARIANT_CACHE = new HashMap<>();
 
 	public KoiBucketItem(Properties properties) {
 		super(EnvironmentalEntityTypes.KOI.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, properties);
@@ -43,12 +43,11 @@ public class KoiBucketItem extends MobBucketItem {
 		if (tag.contains(Koi.BUCKET_VARIANT_TAG, CompoundTag.TAG_STRING) && context.registries() != null) {
 			RegistryLookup<KoiVariant> registry = context.registries().lookupOrThrow(EnvironmentalRegistries.KOI_VARIANT);
 
-			Optional<Holder<KoiVariant>> koi = TYPE_CACHE.computeIfAbsent(tag.getString(Koi.BUCKET_VARIANT_TAG), s ->
-					Optional.ofNullable(ResourceLocation.tryParse(tag.getString(Koi.BUCKET_VARIANT_TAG)))
-							.map(loc -> ResourceKey.create(EnvironmentalRegistries.KOI_VARIANT, loc))
-							.flatMap(registry::get));
+			Optional<Holder<KoiVariant>> holder = VARIANT_CACHE.computeIfAbsent(tag.getString(Koi.BUCKET_VARIANT_TAG), s -> Optional.ofNullable(ResourceLocation.tryParse(s))
+					.map(loc -> ResourceKey.create(EnvironmentalRegistries.KOI_VARIANT, loc))
+					.flatMap(registry::get));
 
-			koi.ifPresent(koiVariantHolder -> tooltip.add(koiVariantHolder.value().description().copy().withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY)));
+			holder.ifPresent(koiVariantHolder -> tooltip.add(koiVariantHolder.value().description().copy().withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY)));
 		}
 	}
 }

@@ -12,7 +12,7 @@
                   "entity": "this",
                   "predicate": {
                     "type": "environmental:slabfish",
-                    "nbt": "{SlabfishType:\"environmental:aspen\"}"
+                    "nbt": "{SlabfishVariant:\"environmental:aspen\"}"
                   }
                 }
               ]
@@ -27,7 +27,7 @@
                   "entity": "this",
                   "predicate": {
                     "type": "environmental:slabfish",
-                    "nbt": "{SlabfishType:\"environmental:dunes\"}"
+                    "nbt": "{SlabfishVariant:\"environmental:dunes\"}"
                   }
                 }
               ]
@@ -42,7 +42,7 @@
                   "entity": "this",
                   "predicate": {
                     "type": "environmental:slabfish",
-                    "nbt": "{SlabfishType:\"environmental:kousa\"}"
+                    "nbt": "{SlabfishVariant:\"environmental:kousa\"}"
                   }
                 }
               ]
@@ -57,7 +57,7 @@
                   "entity": "this",
                   "predicate": {
                     "type": "environmental:slabfish",
-                    "nbt": "{SlabfishType:\"environmental:laurel\"}"
+                    "nbt": "{SlabfishVariant:\"environmental:laurel\"}"
                   }
                 }
               ]
@@ -72,7 +72,7 @@
                   "entity": "this",
                   "predicate": {
                     "type": "environmental:slabfish",
-                    "nbt": "{SlabfishType:\"environmental:rainforest\"}"
+                    "nbt": "{SlabfishVariant:\"environmental:rainforest\"}"
                   }
                 }
               ]
@@ -87,7 +87,7 @@
                   "entity": "this",
                   "predicate": {
                     "type": "environmental:slabfish",
-                    "nbt": "{SlabfishType:\"environmental:scrubland\"}"
+                    "nbt": "{SlabfishVariant:\"environmental:scrubland\"}"
                   }
                 }
               ]
@@ -102,7 +102,7 @@
                   "entity": "this",
                   "predicate": {
                     "type": "environmental:slabfish",
-                    "nbt": "{SlabfishType:\"environmental:spiny_thicket\"}"
+                    "nbt": "{SlabfishVariant:\"environmental:spiny_thicket\"}"
                   }
                 }
               ]

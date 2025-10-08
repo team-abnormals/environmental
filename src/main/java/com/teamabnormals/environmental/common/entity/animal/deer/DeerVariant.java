@@ -15,15 +15,15 @@ import net.minecraft.world.level.biome.Biome;
 
 import java.util.Comparator;
 
-public record DeerVariant(ResourceLocation assetId, HolderSet<Biome> biomes, int priority) {
+public record DeerVariant(ResourceLocation texture, HolderSet<Biome> biomes, int priority) {
 	public static final Codec<DeerVariant> DIRECT_CODEC = RecordCodecBuilder.create(instance -> instance.group(
-					ResourceLocation.CODEC.fieldOf("asset_id").forGetter(DeerVariant::assetId),
+					ResourceLocation.CODEC.fieldOf("texture").forGetter(DeerVariant::texture),
 					RegistryCodecs.homogeneousList(Registries.BIOME).fieldOf("biomes").forGetter(DeerVariant::biomes),
 					Codec.INT.optionalFieldOf("priority", 0).forGetter(DeerVariant::priority))
 			.apply(instance, DeerVariant::new));
 
 	public static final StreamCodec<RegistryFriendlyByteBuf, DeerVariant> DIRECT_STREAM_CODEC = StreamCodec.composite(
-			ResourceLocation.STREAM_CODEC, DeerVariant::assetId,
+			ResourceLocation.STREAM_CODEC, DeerVariant::texture,
 			ByteBufCodecs.holderSet(Registries.BIOME), DeerVariant::biomes,
 			ByteBufCodecs.INT, DeerVariant::priority,
 			DeerVariant::new

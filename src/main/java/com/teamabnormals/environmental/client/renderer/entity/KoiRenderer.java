@@ -21,7 +21,7 @@ public class KoiRenderer extends MobRenderer<Koi, KoiModel<Koi>> {
 
 	@Override
 	public ResourceLocation getTextureLocation(Koi koi) {
-		return koi.getVariant().value().assetId().withPrefix("textures/").withSuffix(".png");
+		return koi.getVariant().value().texture().withPrefix("textures/").withSuffix(".png");
 	}
 
 	@Override

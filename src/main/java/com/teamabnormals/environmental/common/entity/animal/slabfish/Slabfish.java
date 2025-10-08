@@ -90,6 +90,14 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 	public static final EntityDimensions SIZE_SWIMMING_CHILD = EntityDimensions.scalable(0.35F, 0.3F).withEyeHeight(0.42F);
 	public static final EntityDimensions SIZE_SITTING_CHILD = EntityDimensions.scalable(0.225F, 0.3F).withEyeHeight(0.18F);
 
+	public static final String VARIANT_TAG = "SlabfishVariant";
+	public static final String BACKPACK_TAG = "SlabfishBackpack";
+	public static final String SWEATER_TAG = "SlabfishSweater";
+	public static final String OVERLAY_TAG = "SlabfishOverlay";
+	
+	public static final String BUCKET_TAG = "FromBucket";
+	public static final String BUCKET_VARIANT_TAG = "BucketVariantTag";
+	
 	public SlabfishInventory slabfishBackpack;
 	public boolean backpackFull;
 	public int playersUsing;
@@ -144,12 +152,12 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 	@Override
 	public void addAdditionalSaveData(CompoundTag tag) {
 		super.addAdditionalSaveData(tag);
-		this.getVariant().unwrapKey().ifPresent(variant -> tag.putString("SlabfishType", variant.location().toString()));
-		this.getSweater().flatMap(Holder::unwrapKey).ifPresent(sweater -> tag.putString("SweaterType", sweater.location().toString()));
-		this.getBackpack().flatMap(Holder::unwrapKey).ifPresent(backpack -> tag.putString("BackpackType", backpack.location().toString()));
-		this.getOverlay().flatMap(Holder::unwrapKey).ifPresent(overlay -> tag.putString("SlabfishOverlay", overlay.location().toString()));
+		this.getVariant().unwrapKey().ifPresent(variant -> tag.putString(VARIANT_TAG, variant.location().toString()));
+		this.getSweater().flatMap(Holder::unwrapKey).ifPresent(sweater -> tag.putString(SWEATER_TAG, sweater.location().toString()));
+		this.getBackpack().flatMap(Holder::unwrapKey).ifPresent(backpack -> tag.putString(BACKPACK_TAG, backpack.location().toString()));
+		this.getOverlay().flatMap(Holder::unwrapKey).ifPresent(overlay -> tag.putString(OVERLAY_TAG, overlay.location().toString()));
 
-		tag.putBoolean("FromBucket", this.fromBucket());
+		tag.putBoolean(BUCKET_TAG, this.fromBucket());
 
 		this.slabfishBackpack.write(tag);
 	}
@@ -159,24 +167,24 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 		super.readAdditionalSaveData(tag);
 
 		Registry<SlabfishVariant> slabfishRegistry = SlabfishHelper.slabfishTypes(this.registryAccess());
-		Optional.ofNullable(ResourceLocation.tryParse(tag.getString("SlabfishType"))).flatMap(slabfishRegistry::getHolder).ifPresent(this::setVariant);
+		Optional.ofNullable(ResourceLocation.tryParse(tag.getString(VARIANT_TAG))).flatMap(slabfishRegistry::getHolder).ifPresent(this::setVariant);
 
 		Registry<SlabfishBackpack> backpackRegistry = SlabfishHelper.slabfishBackpacks(this.registryAccess());
-		Optional.ofNullable(ResourceLocation.tryParse(tag.getString("BackpackType")))
+		Optional.ofNullable(ResourceLocation.tryParse(tag.getString(BACKPACK_TAG)))
 				.flatMap(backpackRegistry::getHolder)
 				.ifPresent(this::setBackpack);
 
 		Registry<SlabfishSweater> sweaterRegistry = SlabfishHelper.slabfishSweaters(this.registryAccess());
-		Optional.ofNullable(ResourceLocation.tryParse(tag.getString("SweaterType")))
+		Optional.ofNullable(ResourceLocation.tryParse(tag.getString(SWEATER_TAG)))
 				.flatMap(sweaterRegistry::getHolder)
 				.ifPresent(this::setSweater);
 
 		Registry<SlabfishOverlay> overlayRegistry = SlabfishHelper.slabfishOverlays(this.registryAccess());
-		Optional.ofNullable(ResourceLocation.tryParse(tag.getString("SlabfishOverlay")))
+		Optional.ofNullable(ResourceLocation.tryParse(tag.getString(OVERLAY_TAG)))
 				.flatMap(overlayRegistry::getHolder)
 				.ifPresent(this::setOverlay);
 
-		this.setFromBucket(tag.getBoolean("FromBucket"));
+		this.setFromBucket(tag.getBoolean(BUCKET_TAG));
 
 		this.slabfishBackpack.read(tag);
 		this.updateSweater();
@@ -645,7 +653,7 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 	public void loadFromBucketTag(CompoundTag tag) {
 		Bucketable.loadDefaultDataFromBucketTag(this, tag);
 
-		if (tag.contains("BucketVariantTag", Tag.TAG_STRING)) {
+		if (tag.contains(BUCKET_VARIANT_TAG, Tag.TAG_STRING)) {
 			if (tag.contains("Age")) {
 				this.setAge(tag.getInt("Age"));
 			}
@@ -655,15 +663,15 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 				this.setOwnerUUID(tag.getUUID("Owner"));
 			}
 
-			Optional.ofNullable(ResourceLocation.tryParse(tag.getString("BucketVariantTag")))
+			Optional.ofNullable(ResourceLocation.tryParse(tag.getString(BUCKET_VARIANT_TAG)))
 					.flatMap(key -> SlabfishHelper.slabfishTypes(this.registryAccess()).getHolder(key))
 					.ifPresent(this::setVariant);
 
-			Optional.ofNullable(ResourceLocation.tryParse(tag.getString("BackpackType")))
+			Optional.ofNullable(ResourceLocation.tryParse(tag.getString(BACKPACK_TAG)))
 					.flatMap(key -> SlabfishHelper.slabfishBackpacks(this.registryAccess()).getHolder(key))
 					.ifPresent(this::setBackpack);
 
-			Optional.ofNullable(ResourceLocation.tryParse(tag.getString("SweaterType")))
+			Optional.ofNullable(ResourceLocation.tryParse(tag.getString(SWEATER_TAG)))
 					.flatMap(key -> SlabfishHelper.slabfishSweaters(this.registryAccess()).getHolder(key))
 					.ifPresent(this::setSweater);
 
@@ -692,9 +700,9 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 			if (this.getOwnerUUID() != null && this.isTame())
 				tag.putUUID("Owner", this.getOwnerUUID());
 
-			this.getVariant().unwrapKey().ifPresent(variant -> tag.putString("BucketVariantTag", variant.location().toString()));
-			this.getBackpack().flatMap(Holder::unwrapKey).ifPresent(backpack -> tag.putString("BackpackType", backpack.location().toString()));
-			this.getSweater().flatMap(Holder::unwrapKey).ifPresent(sweater -> tag.putString("SweaterType", sweater.location().toString()));
+			this.getVariant().unwrapKey().ifPresent(variant -> tag.putString(BUCKET_VARIANT_TAG, variant.location().toString()));
+			this.getBackpack().flatMap(Holder::unwrapKey).ifPresent(backpack -> tag.putString(BACKPACK_TAG, backpack.location().toString()));
+			this.getSweater().flatMap(Holder::unwrapKey).ifPresent(sweater -> tag.putString(SWEATER_TAG, sweater.location().toString()));
 
 			this.slabfishBackpack.write(tag);
 		});
