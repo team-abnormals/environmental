@@ -1,0 +1,19 @@
+{
+  "conditions": [
+    {
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:in_biome",
+      "biomes": "#minecraft:is_savanna"
+    }
+  ],
+  "description": {
+    "translate": "slabfish_variant.environmental.savanna"
+  },
+  "texture": "environmental:variant/savanna"
+}

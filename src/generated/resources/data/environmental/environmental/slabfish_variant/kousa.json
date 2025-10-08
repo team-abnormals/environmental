@@ -1,0 +1,24 @@
+{
+  "conditions": [
+    {
+      "type": "environmental:mod_loaded",
+      "modid": "atmospheric"
+    },
+    {
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:in_biome_key",
+      "biome": "atmospheric:kousa_jungle"
+    }
+  ],
+  "description": {
+    "translate": "slabfish_variant.environmental.kousa"
+  },
+  "priority": 2,
+  "texture": "environmental:variant/kousa"
+}

@@ -1,0 +1,19 @@
+{
+  "conditions": [
+    {
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:dimension",
+      "dimension": "minecraft:the_end"
+    }
+  ],
+  "description": {
+    "translate": "slabfish_variant.environmental.end"
+  },
+  "texture": "environmental:variant/end"
+}

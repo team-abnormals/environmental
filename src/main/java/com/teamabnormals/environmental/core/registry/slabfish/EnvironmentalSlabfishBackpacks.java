@@ -17,7 +17,7 @@ public class EnvironmentalSlabfishBackpacks {
 		for (DyeColor color : DyeColor.values()) {
 			ResourceKey<SlabfishBackpack> key = create(color.getName());
 			context.register(key, SlabfishBackpack.create(
-					Component.translatable(Util.makeDescriptionId("slabfish.backpack", key.location())),
+					Component.translatable(Util.makeDescriptionId("slabfish_backpack", key.location())),
 					ResourceLocation.fromNamespaceAndPath(key.location().getNamespace(), "backpack/" + key.location().getPath()),
 					color.getTag()));
 		}

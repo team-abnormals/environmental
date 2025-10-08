@@ -58,8 +58,8 @@ public record SlabfishVariant(Component description, ResourceLocation texture, O
 			SlabfishVariant::new
 	);
 
-	public static final Codec<Holder<SlabfishVariant>> CODEC = RegistryFileCodec.create(EnvironmentalRegistries.SLABFISH_TYPE, DIRECT_CODEC);
-	public static final StreamCodec<RegistryFriendlyByteBuf, Holder<SlabfishVariant>> STREAM_CODEC = ByteBufCodecs.holder(EnvironmentalRegistries.SLABFISH_TYPE, DIRECT_STREAM_CODEC);
+	public static final Codec<Holder<SlabfishVariant>> CODEC = RegistryFileCodec.create(EnvironmentalRegistries.SLABFISH_VARIANT, DIRECT_CODEC);
+	public static final StreamCodec<RegistryFriendlyByteBuf, Holder<SlabfishVariant>> STREAM_CODEC = ByteBufCodecs.holder(EnvironmentalRegistries.SLABFISH_VARIANT, DIRECT_STREAM_CODEC);
 
 	@Override
 	public boolean test(SlabfishConditionContext slabfishEntity) {

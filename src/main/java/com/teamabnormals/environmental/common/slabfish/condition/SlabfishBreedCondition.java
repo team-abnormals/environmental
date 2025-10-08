@@ -8,7 +8,6 @@ import com.teamabnormals.environmental.core.registry.EnvironmentalRegistries;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSlabfishConditions;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.RegistryFixedCodec;
-import net.minecraft.resources.ResourceLocation;
 import org.apache.commons.lang3.tuple.Pair;
 
 import javax.annotation.Nullable;
@@ -16,8 +15,8 @@ import java.util.Optional;
 
 public record SlabfishBreedCondition(Holder<SlabfishVariant> parent, @Nullable Holder<SlabfishVariant> partner) implements SlabfishCondition {
 	public static final MapCodec<SlabfishBreedCondition> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-			RegistryFixedCodec.create(EnvironmentalRegistries.SLABFISH_TYPE).fieldOf("parent").forGetter(SlabfishBreedCondition::parent),
-			RegistryFixedCodec.create(EnvironmentalRegistries.SLABFISH_TYPE).optionalFieldOf("partner").forGetter(c -> Optional.ofNullable(c.partner()))
+			RegistryFixedCodec.create(EnvironmentalRegistries.SLABFISH_VARIANT).fieldOf("parent").forGetter(SlabfishBreedCondition::parent),
+			RegistryFixedCodec.create(EnvironmentalRegistries.SLABFISH_VARIANT).optionalFieldOf("partner").forGetter(c -> Optional.ofNullable(c.partner()))
 	).apply(instance, (parent, partner) -> new SlabfishBreedCondition(parent, partner.orElse(null))));
 
 

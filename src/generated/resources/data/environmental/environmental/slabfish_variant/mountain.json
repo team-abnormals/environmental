@@ -1,0 +1,29 @@
+{
+  "conditions": [
+    {
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:or",
+      "conditions": [
+        {
+          "type": "environmental:in_biome",
+          "biomes": "minecraft:meadow"
+        },
+        {
+          "type": "environmental:in_biome",
+          "biomes": "minecraft:stony_peaks"
+        }
+      ]
+    }
+  ],
+  "description": {
+    "translate": "slabfish_variant.environmental.mountain"
+  },
+  "priority": 1,
+  "texture": "environmental:variant/mountain"
+}

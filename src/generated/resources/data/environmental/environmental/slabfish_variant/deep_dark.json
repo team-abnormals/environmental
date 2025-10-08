@@ -1,0 +1,20 @@
+{
+  "conditions": [
+    {
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:in_biome",
+      "biomes": "minecraft:deep_dark"
+    }
+  ],
+  "description": {
+    "translate": "slabfish_variant.environmental.deep_dark"
+  },
+  "priority": 5,
+  "texture": "environmental:variant/deep_dark"
+}

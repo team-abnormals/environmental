@@ -1,0 +1,19 @@
+{
+  "conditions": [
+    {
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:dimension",
+      "dimension": "minecraft:the_nether"
+    }
+  ],
+  "description": {
+    "translate": "slabfish_variant.environmental.nether"
+  },
+  "texture": "environmental:variant/nether"
+}

@@ -1,0 +1,7 @@
+{
+  "description": {
+    "translate": "slabfish_sweater.environmental.red"
+  },
+  "item": "minecraft:red_wool",
+  "texture": "environmental:sweater/red"
+}

@@ -1,0 +1,20 @@
+{
+  "conditions": [
+    {
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:in_biome",
+      "biomes": "minecraft:mangrove_swamp"
+    }
+  ],
+  "description": {
+    "translate": "slabfish_variant.environmental.mangrove"
+  },
+  "priority": 1,
+  "texture": "environmental:variant/mangrove"
+}

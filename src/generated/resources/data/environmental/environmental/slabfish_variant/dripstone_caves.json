@@ -1,0 +1,20 @@
+{
+  "conditions": [
+    {
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:in_biome",
+      "biomes": "minecraft:dripstone_caves"
+    }
+  ],
+  "description": {
+    "translate": "slabfish_variant.environmental.dripstone_caves"
+  },
+  "priority": 5,
+  "texture": "environmental:variant/dripstone_caves"
+}

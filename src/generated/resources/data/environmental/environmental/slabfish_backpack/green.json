@@ -1,0 +1,7 @@
+{
+  "description": {
+    "translate": "slabfish_backpack.environmental.green"
+  },
+  "tag": "c:dyes/green",
+  "texture": "environmental:backpack/green"
+}

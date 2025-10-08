@@ -16,6 +16,6 @@ public class EnvironmentalSlabfishTypeTags {
 	public static final TagKey<SlabfishVariant> LEGENDARY = slabfishTypeTag("rarity/legendary");
 
 	public static TagKey<SlabfishVariant> slabfishTypeTag(String name) {
-		return TagKey.create(EnvironmentalRegistries.SLABFISH_TYPE, Environmental.location(name));
+		return TagKey.create(EnvironmentalRegistries.SLABFISH_VARIANT, Environmental.location(name));
 	}
 }

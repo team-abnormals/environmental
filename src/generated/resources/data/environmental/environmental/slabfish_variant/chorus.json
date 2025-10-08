@@ -1,0 +1,20 @@
+{
+  "conditions": [
+    {
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:in_biome",
+      "biomes": "#c:is_outer_end_island"
+    }
+  ],
+  "description": {
+    "translate": "slabfish_variant.environmental.chorus"
+  },
+  "priority": 1,
+  "texture": "environmental:variant/chorus"
+}

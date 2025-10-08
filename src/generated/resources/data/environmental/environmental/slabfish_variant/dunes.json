@@ -1,0 +1,23 @@
+{
+  "conditions": [
+    {
+      "type": "environmental:mod_loaded",
+      "modid": "atmospheric"
+    },
+    {
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:in_biome",
+      "biomes": "#atmospheric:is_dunes"
+    }
+  ],
+  "description": {
+    "translate": "slabfish_variant.environmental.dunes"
+  },
+  "texture": "environmental:variant/dunes"
+}

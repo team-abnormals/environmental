@@ -1,0 +1,20 @@
+{
+  "conditions": [
+    {
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:in_biome",
+      "biomes": "#c:is_snowy"
+    }
+  ],
+  "description": {
+    "translate": "slabfish_variant.environmental.snowy"
+  },
+  "priority": 1,
+  "texture": "environmental:variant/snowy"
+}

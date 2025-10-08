@@ -104,7 +104,7 @@ public class EnvironmentalAdvancementProvider implements AdvancementGenerator {
 				.save(consumer, Environmental.MOD_ID + ":husbandry/feed_deer_flower");
 
 		Advancement.Builder tameSlabfish = createAdvancement("tame_all_slabfish", "husbandry", ResourceLocation.withDefaultNamespace("husbandry/tame_an_animal"), Items.TROPICAL_FISH, AdvancementType.CHALLENGE, true, true, false);
-		for (ResourceKey<SlabfishVariant> slabfish : provider.lookup(EnvironmentalRegistries.SLABFISH_TYPE).get().listElementIds().filter(key -> !EnvironmentalSlabfishVariants.COMPAT_SLABFISH.contains(key)).sorted().toList()) {
+		for (ResourceKey<SlabfishVariant> slabfish : provider.lookup(EnvironmentalRegistries.SLABFISH_VARIANT).get().listElementIds().filter(key -> !EnvironmentalSlabfishVariants.COMPAT_SLABFISH.contains(key)).sorted().toList()) {
 			tameSlabfish.addCriterion(slabfish.location().toString(), slabfishCriterion(slabfish));
 		}
 		tameSlabfish.save(consumer, Environmental.MOD_ID + ":husbandry/tame_all_slabfish");

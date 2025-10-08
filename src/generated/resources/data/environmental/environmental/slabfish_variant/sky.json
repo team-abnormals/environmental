@@ -1,0 +1,24 @@
+{
+  "conditions": [
+    {
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:height",
+      "min": 256
+    },
+    {
+      "type": "environmental:dimension",
+      "dimension": "minecraft:overworld"
+    }
+  ],
+  "description": {
+    "translate": "slabfish_variant.environmental.sky"
+  },
+  "priority": 4,
+  "texture": "environmental:variant/sky"
+}

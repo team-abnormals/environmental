@@ -1,0 +1,21 @@
+{
+  "conditions": [
+    {
+      "type": "environmental:event",
+      "events": [
+        "lightning"
+      ]
+    },
+    {
+      "type": "environmental:slabfish_type",
+      "types": [
+        "environmental:mushroom"
+      ]
+    }
+  ],
+  "description": {
+    "translate": "slabfish_variant.environmental.brown_mushroom"
+  },
+  "priority": 2,
+  "texture": "environmental:variant/brown_mushroom"
+}

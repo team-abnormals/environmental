@@ -1,0 +1,7 @@
+{
+  "description": {
+    "translate": "slabfish_backpack.environmental.lime"
+  },
+  "tag": "c:dyes/lime",
+  "texture": "environmental:backpack/lime"
+}

@@ -179,8 +179,8 @@ public class EnvironmentalSlabfishVariants {
 
 	public static Reference<SlabfishVariant> register(BootstrapContext<SlabfishVariant> context, ResourceKey<SlabfishVariant> key, int priority, SlabfishCondition... conditions) {
 		return context.register(key, new SlabfishVariant(
-				Component.translatable(Util.makeDescriptionId("slabfish.type", key.location())),
-				ResourceLocation.fromNamespaceAndPath(key.location().getNamespace(), "type/" + key.location().getPath()),
+				Component.translatable(Util.makeDescriptionId("slabfish_variant", key.location())),
+				ResourceLocation.fromNamespaceAndPath(key.location().getNamespace(), "variant/" + key.location().getPath()),
 				Optional.empty(), priority, Arrays.stream(conditions).toArray(SlabfishCondition[]::new)));
 	}
 
@@ -237,6 +237,6 @@ public class EnvironmentalSlabfishVariants {
 	}
 
 	public static ResourceKey<SlabfishVariant> create(String name) {
-		return ResourceKey.create(EnvironmentalRegistries.SLABFISH_TYPE, Environmental.location(name));
+		return ResourceKey.create(EnvironmentalRegistries.SLABFISH_VARIANT, Environmental.location(name));
 	}
 }

@@ -1,0 +1,29 @@
+{
+  "conditions": [
+    {
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:or",
+      "conditions": [
+        {
+          "type": "environmental:in_biome",
+          "biomes": "environmental:blossom_woods"
+        },
+        {
+          "type": "environmental:in_biome",
+          "biomes": "environmental:blossom_valleys"
+        }
+      ]
+    }
+  ],
+  "description": {
+    "translate": "slabfish_variant.environmental.blossom"
+  },
+  "priority": 1,
+  "texture": "environmental:variant/blossom"
+}

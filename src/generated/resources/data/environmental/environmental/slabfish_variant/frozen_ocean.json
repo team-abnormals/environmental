@@ -1,0 +1,29 @@
+{
+  "conditions": [
+    {
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:or",
+      "conditions": [
+        {
+          "type": "environmental:in_biome",
+          "biomes": "minecraft:frozen_ocean"
+        },
+        {
+          "type": "environmental:in_biome",
+          "biomes": "minecraft:deep_frozen_ocean"
+        }
+      ]
+    }
+  ],
+  "description": {
+    "translate": "slabfish_variant.environmental.frozen_ocean"
+  },
+  "priority": 2,
+  "texture": "environmental:variant/frozen_ocean"
+}

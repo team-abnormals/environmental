@@ -1,8 +1,8 @@
 package com.teamabnormals.environmental.common.item;
 
 import com.teamabnormals.environmental.common.slabfish.SlabfishBackpack;
-import com.teamabnormals.environmental.common.slabfish.SlabfishVariant;
 import com.teamabnormals.environmental.common.slabfish.SlabfishSweater;
+import com.teamabnormals.environmental.common.slabfish.SlabfishVariant;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalRegistries;
 import net.minecraft.ChatFormatting;
@@ -53,8 +53,8 @@ public class SlabfishBucketItem extends MobBucketItem {
 			if (registryAccess != null) {
 				if (tag.contains("BucketVariantTag", CompoundTag.TAG_STRING)) {
 					Optional<Holder<SlabfishVariant>> holder = Optional.ofNullable(ResourceLocation.tryParse(tag.getString("BucketVariantTag")))
-							.map(loc -> ResourceKey.create(EnvironmentalRegistries.SLABFISH_TYPE, loc))
-							.flatMap(key -> registryAccess.registryOrThrow(EnvironmentalRegistries.SLABFISH_TYPE).getHolder(key));
+							.map(loc -> ResourceKey.create(EnvironmentalRegistries.SLABFISH_VARIANT, loc))
+							.flatMap(key -> registryAccess.registryOrThrow(EnvironmentalRegistries.SLABFISH_VARIANT).getHolder(key));
 
 					if (holder.isPresent()) {
 						SlabfishVariant slabfishVariant = holder.get().value();

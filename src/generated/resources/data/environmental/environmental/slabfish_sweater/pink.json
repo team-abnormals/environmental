@@ -1,0 +1,7 @@
+{
+  "description": {
+    "translate": "slabfish_sweater.environmental.pink"
+  },
+  "item": "minecraft:pink_wool",
+  "texture": "environmental:sweater/pink"
+}

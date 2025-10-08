@@ -17,7 +17,7 @@ import static com.teamabnormals.environmental.core.registry.slabfish.Environment
 public class EnvironmentalSlabfishTypeTagsProvider extends TagsProvider<SlabfishVariant> {
 
 	public EnvironmentalSlabfishTypeTagsProvider(PackOutput output, CompletableFuture<Provider> provider, ExistingFileHelper helper) {
-		super(output, EnvironmentalRegistries.SLABFISH_TYPE, provider, Environmental.MOD_ID, helper);
+		super(output, EnvironmentalRegistries.SLABFISH_VARIANT, provider, Environmental.MOD_ID, helper);
 	}
 
 	@Override

@@ -1,0 +1,19 @@
+{
+  "conditions": [
+    {
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:in_biome",
+      "biomes": "minecraft:desert"
+    }
+  ],
+  "description": {
+    "translate": "slabfish_variant.environmental.desert"
+  },
+  "texture": "environmental:variant/desert"
+}

@@ -1,0 +1,29 @@
+{
+  "conditions": [
+    {
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:or",
+      "conditions": [
+        {
+          "type": "environmental:in_biome",
+          "biomes": "#environmental:is_pine_barrens"
+        },
+        {
+          "type": "environmental:in_biome",
+          "biomes": "environmental:pine_slopes"
+        }
+      ]
+    }
+  ],
+  "description": {
+    "translate": "slabfish_variant.environmental.pine"
+  },
+  "priority": 1,
+  "texture": "environmental:variant/pine"
+}

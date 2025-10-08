@@ -1,0 +1,19 @@
+{
+  "conditions": [
+    {
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:in_biome",
+      "biomes": "#minecraft:is_hill"
+    }
+  ],
+  "description": {
+    "translate": "slabfish_variant.environmental.hill"
+  },
+  "texture": "environmental:variant/hill"
+}

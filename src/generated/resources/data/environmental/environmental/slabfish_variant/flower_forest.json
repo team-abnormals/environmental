@@ -1,0 +1,20 @@
+{
+  "conditions": [
+    {
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:in_biome",
+      "biomes": "minecraft:flower_forest"
+    }
+  ],
+  "description": {
+    "translate": "slabfish_variant.environmental.flower_forest"
+  },
+  "priority": 1,
+  "texture": "environmental:variant/flower_forest"
+}

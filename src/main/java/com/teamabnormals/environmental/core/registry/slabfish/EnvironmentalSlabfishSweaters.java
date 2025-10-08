@@ -17,7 +17,7 @@ public class EnvironmentalSlabfishSweaters {
 		for (DyeColor color : DyeColor.values()) {
 			ResourceKey<SlabfishSweater> key = create(color.getName());
 			context.register(key, SlabfishSweater.create(
-					Component.translatable(Util.makeDescriptionId("slabfish.sweater", key.location())),
+					Component.translatable(Util.makeDescriptionId("slabfish_sweater", key.location())),
 					ResourceLocation.fromNamespaceAndPath(key.location().getNamespace(), "sweater/" + key.location().getPath()),
 					Sheep.ITEM_BY_DYE.get(color).asItem()));
 		}

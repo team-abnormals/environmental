@@ -1,0 +1,28 @@
+{
+  "conditions": [
+    {
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:or",
+      "conditions": [
+        {
+          "type": "environmental:in_biome",
+          "biomes": "#minecraft:is_beach"
+        },
+        {
+          "type": "environmental:in_biome",
+          "biomes": "minecraft:stony_shore"
+        }
+      ]
+    }
+  ],
+  "description": {
+    "translate": "slabfish_variant.environmental.beach"
+  },
+  "texture": "environmental:variant/beach"
+}

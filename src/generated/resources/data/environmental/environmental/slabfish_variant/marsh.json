@@ -1,0 +1,20 @@
+{
+  "conditions": [
+    {
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:in_biome",
+      "biomes": "environmental:marsh"
+    }
+  ],
+  "description": {
+    "translate": "slabfish_variant.environmental.marsh"
+  },
+  "priority": 1,
+  "texture": "environmental:variant/marsh"
+}

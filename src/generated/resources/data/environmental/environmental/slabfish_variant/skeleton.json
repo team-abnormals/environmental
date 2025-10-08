@@ -1,0 +1,15 @@
+{
+  "conditions": [
+    {
+      "type": "environmental:event",
+      "events": [
+        "lightning"
+      ]
+    }
+  ],
+  "description": {
+    "translate": "slabfish_variant.environmental.skeleton"
+  },
+  "priority": 10,
+  "texture": "environmental:variant/skeleton"
+}

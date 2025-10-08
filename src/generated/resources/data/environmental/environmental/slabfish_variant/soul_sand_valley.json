@@ -1,0 +1,20 @@
+{
+  "conditions": [
+    {
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:in_biome",
+      "biomes": "minecraft:soul_sand_valley"
+    }
+  ],
+  "description": {
+    "translate": "slabfish_variant.environmental.soul_sand_valley"
+  },
+  "priority": 1,
+  "texture": "environmental:variant/soul_sand_valley"
+}

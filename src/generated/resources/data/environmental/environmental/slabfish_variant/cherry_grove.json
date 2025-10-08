@@ -1,0 +1,20 @@
+{
+  "conditions": [
+    {
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:in_biome",
+      "biomes": "minecraft:cherry_grove"
+    }
+  ],
+  "description": {
+    "translate": "slabfish_variant.environmental.cherry_grove"
+  },
+  "priority": 1,
+  "texture": "environmental:variant/cherry_grove"
+}

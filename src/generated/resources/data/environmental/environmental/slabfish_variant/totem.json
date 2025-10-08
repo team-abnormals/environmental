@@ -1,0 +1,19 @@
+{
+  "conditions": [
+    {
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:raid"
+    }
+  ],
+  "description": {
+    "translate": "slabfish_variant.environmental.totem"
+  },
+  "priority": 3,
+  "texture": "environmental:variant/totem"
+}

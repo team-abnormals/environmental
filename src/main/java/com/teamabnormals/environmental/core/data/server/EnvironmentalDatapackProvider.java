@@ -37,7 +37,7 @@ public class EnvironmentalDatapackProvider extends DatapackBuiltinEntriesProvide
 			.add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, EnvironmentalBiomeModifiers::bootstrap)
 			.add(EnvironmentalRegistries.KOI_VARIANT, EnvironmentalKoiVariants::bootstrap)
 			.add(EnvironmentalRegistries.DEER_VARIANT, EnvironmentalDeerVariants::bootstrap)
-			.add(EnvironmentalRegistries.SLABFISH_TYPE, EnvironmentalSlabfishVariants::bootstrap)
+			.add(EnvironmentalRegistries.SLABFISH_VARIANT, EnvironmentalSlabfishVariants::bootstrap)
 			.add(EnvironmentalRegistries.SLABFISH_BACKPACK, EnvironmentalSlabfishBackpacks::bootstrap)
 			.add(EnvironmentalRegistries.SLABFISH_SWEATER, EnvironmentalSlabfishSweaters::bootstrap)
 			.add(EnvironmentalRegistries.SLABFISH_OVERLAY, EnvironmentalSlabfishOverlays::bootstrap);

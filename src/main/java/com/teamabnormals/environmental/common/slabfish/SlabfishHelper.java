@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class SlabfishHelper {
 
 	public static Registry<SlabfishVariant> slabfishTypes(RegistryAccess access) {
-		return access.registryOrThrow(EnvironmentalRegistries.SLABFISH_TYPE);
+		return access.registryOrThrow(EnvironmentalRegistries.SLABFISH_VARIANT);
 	}
 
 	public static Registry<SlabfishSweater> slabfishSweaters(RegistryAccess access) {
@@ -29,7 +29,7 @@ public class SlabfishHelper {
 	public static Registry<SlabfishBackpack> slabfishBackpacks(RegistryAccess access) {
 		return access.registryOrThrow(EnvironmentalRegistries.SLABFISH_BACKPACK);
 	}
-	
+
 	public static Registry<SlabfishOverlay> slabfishOverlays(RegistryAccess access) {
 		return access.registryOrThrow(EnvironmentalRegistries.SLABFISH_OVERLAY);
 	}

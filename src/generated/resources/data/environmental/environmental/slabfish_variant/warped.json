@@ -1,0 +1,20 @@
+{
+  "conditions": [
+    {
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:in_biome",
+      "biomes": "minecraft:warped_forest"
+    }
+  ],
+  "description": {
+    "translate": "slabfish_variant.environmental.warped"
+  },
+  "priority": 1,
+  "texture": "environmental:variant/warped"
+}

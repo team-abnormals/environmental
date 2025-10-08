@@ -1,7 +1,0 @@
-{
-  "description": {
-    "translate": "slabfish.backpack.environmental.yellow"
-  },
-  "tag": "c:dyes/yellow",
-  "texture": "environmental:backpack/yellow"
-}

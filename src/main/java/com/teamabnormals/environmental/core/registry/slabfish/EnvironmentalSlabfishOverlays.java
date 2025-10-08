@@ -2,7 +2,6 @@ package com.teamabnormals.environmental.core.registry.slabfish;
 
 import com.teamabnormals.environmental.common.entity.animal.slabfish.SlabfishOverlay;
 import com.teamabnormals.environmental.core.Environmental;
-import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
 import com.teamabnormals.environmental.core.registry.EnvironmentalRegistries;
 import net.minecraft.core.Holder;

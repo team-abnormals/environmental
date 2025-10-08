@@ -1,0 +1,19 @@
+{
+  "conditions": [
+    {
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:in_biome",
+      "biomes": "minecraft:river"
+    }
+  ],
+  "description": {
+    "translate": "slabfish_variant.environmental.river"
+  },
+  "texture": "environmental:variant/river"
+}

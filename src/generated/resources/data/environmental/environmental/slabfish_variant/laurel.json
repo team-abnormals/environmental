@@ -1,0 +1,24 @@
+{
+  "conditions": [
+    {
+      "type": "environmental:mod_loaded",
+      "modid": "atmospheric"
+    },
+    {
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:in_biome_key",
+      "biome": "atmospheric:laurel_forest"
+    }
+  ],
+  "description": {
+    "translate": "slabfish_variant.environmental.laurel"
+  },
+  "priority": 1,
+  "texture": "environmental:variant/laurel"
+}

@@ -1,0 +1,19 @@
+{
+  "conditions": [
+    {
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:in_biome",
+      "biomes": "#minecraft:is_jungle"
+    }
+  ],
+  "description": {
+    "translate": "slabfish_variant.environmental.jungle"
+  },
+  "texture": "environmental:variant/jungle"
+}

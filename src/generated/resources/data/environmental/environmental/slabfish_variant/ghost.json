@@ -1,0 +1,11 @@
+{
+  "conditions": [
+    {
+      "type": "environmental:impossible"
+    }
+  ],
+  "description": {
+    "translate": "slabfish_variant.environmental.ghost"
+  },
+  "texture": "environmental:variant/ghost"
+}

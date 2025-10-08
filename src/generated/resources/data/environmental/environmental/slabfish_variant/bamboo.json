@@ -1,0 +1,20 @@
+{
+  "conditions": [
+    {
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:in_biome",
+      "biomes": "minecraft:bamboo_jungle"
+    }
+  ],
+  "description": {
+    "translate": "slabfish_variant.environmental.bamboo"
+  },
+  "priority": 1,
+  "texture": "environmental:variant/bamboo"
+}
