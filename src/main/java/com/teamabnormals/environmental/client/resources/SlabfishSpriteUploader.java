@@ -37,12 +37,11 @@ public final class SlabfishSpriteUploader extends TextureAtlasHolder {
 	 * @param bus The bus to register on
 	 */
 	public static void init(IEventBus bus) {
-		bus.addListener(EventPriority.NORMAL, false, RegisterColorHandlersEvent.Block.class, event ->
-		{
+		bus.addListener(EventPriority.NORMAL, false, RegisterColorHandlersEvent.Block.class, event -> {
 			spriteUploader = new SlabfishSpriteUploader(Minecraft.getInstance().getTextureManager());
 			ResourceManager resourceManager = Minecraft.getInstance().getResourceManager();
-			if (resourceManager instanceof ReloadableResourceManager) {
-				((ReloadableResourceManager) resourceManager).registerReloadListener(spriteUploader);
+			if (resourceManager instanceof ReloadableResourceManager reloadableResourceManager) {
+				reloadableResourceManager.registerReloadListener(spriteUploader);
 			}
 		});
 	}

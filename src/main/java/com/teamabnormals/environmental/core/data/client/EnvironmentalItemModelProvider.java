@@ -4,7 +4,7 @@ import com.teamabnormals.blueprint.core.data.client.BlueprintItemModelProvider;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.teamabnormals.environmental.core.registry.datapack.EnvironmentalKoiVariants;
-import com.teamabnormals.environmental.core.registry.slabfish.EnvironmentalSlabfishTypes;
+import com.teamabnormals.environmental.core.registry.slabfish.EnvironmentalSlabfishVariants;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -40,7 +40,7 @@ public class EnvironmentalItemModelProvider extends BlueprintItemModelProvider {
 		this.spawnEggItem(SLABFISH_SPAWN_EGG, DUCK_SPAWN_EGG, DEER_SPAWN_EGG, REINDEER_SPAWN_EGG, YAK_SPAWN_EGG, KOI_SPAWN_EGG, TAPIR_SPAWN_EGG, ZEBRA_SPAWN_EGG, ZORSE_SPAWN_EGG, ZONKEY_SPAWN_EGG, PINECONE_GOLEM_SPAWN_EGG);
 
 		this.getBuilder(name(SLABFISH_BUCKET.get()));
-		Arrays.stream(EnvironmentalSlabfishTypes.class.getDeclaredFields()).forEach(field -> {
+		Arrays.stream(EnvironmentalSlabfishVariants.class.getDeclaredFields()).forEach(field -> {
 			if (Modifier.isStatic(field.getModifiers()) && ResourceKey.class.isAssignableFrom(field.getType())) {
 				try {
 					ResourceLocation location = ((ResourceKey<?>) field.get(null)).location().withPath(s -> "item/slabfish_bucket/" + s);

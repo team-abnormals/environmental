@@ -1,6 +1,6 @@
 package com.teamabnormals.environmental.core.data.server.tags;
 
-import com.teamabnormals.environmental.common.slabfish.SlabfishType;
+import com.teamabnormals.environmental.common.slabfish.SlabfishVariant;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalSlabfishTypeTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalRegistries;
@@ -12,9 +12,9 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.CompletableFuture;
 
-import static com.teamabnormals.environmental.core.registry.slabfish.EnvironmentalSlabfishTypes.*;
+import static com.teamabnormals.environmental.core.registry.slabfish.EnvironmentalSlabfishVariants.*;
 
-public class EnvironmentalSlabfishTypeTagsProvider extends TagsProvider<SlabfishType> {
+public class EnvironmentalSlabfishTypeTagsProvider extends TagsProvider<SlabfishVariant> {
 
 	public EnvironmentalSlabfishTypeTagsProvider(PackOutput output, CompletableFuture<Provider> provider, ExistingFileHelper helper) {
 		super(output, EnvironmentalRegistries.SLABFISH_TYPE, provider, Environmental.MOD_ID, helper);

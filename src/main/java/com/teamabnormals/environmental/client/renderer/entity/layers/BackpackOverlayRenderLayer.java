@@ -11,8 +11,11 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.core.Holder;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+
+import java.util.Optional;
 
 @OnlyIn(Dist.CLIENT)
 public class BackpackOverlayRenderLayer<E extends Slabfish, M extends SlabfishModel<E>> extends RenderLayer<E, M> {
@@ -23,11 +26,12 @@ public class BackpackOverlayRenderLayer<E extends Slabfish, M extends SlabfishMo
 
 	@Override
 	public void render(PoseStack matrixStack, MultiBufferSource buffer, int packedLightIn, E slabfish, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-		if (slabfish.getSlabfishOverlay() == SlabfishOverlay.NONE || slabfish.getSlabfishOverlay() == SlabfishOverlay.EGG || !slabfish.hasBackpack())
+		Optional<Holder<SlabfishOverlay>> overlay = slabfish.getOverlay();
+		if (!slabfish.hasBackpack() || overlay.isEmpty() || overlay.get().value().backpackTexture().isEmpty())
 			return;
 
 		VertexConsumer builder = buffer.getBuffer(RenderType.entityCutoutNoCull(SlabfishSpriteUploader.ATLAS_LOCATION));
-		this.getParentModel().sprite = SlabfishSpriteUploader.instance().getSprite(slabfish.getSlabfishOverlay().getBackpackTextureLocation());
+		this.getParentModel().sprite = SlabfishSpriteUploader.instance().getSprite(overlay.get().value().backpackTexture().get());
 		this.getParentModel().setupAnim(slabfish, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 		this.getParentModel().renderToBuffer(matrixStack, builder, packedLightIn, OverlayTexture.NO_OVERLAY);
 	}

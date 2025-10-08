@@ -3,18 +3,23 @@ package com.teamabnormals.environmental.common.slabfish.condition;
 import com.google.common.base.Suppliers;
 import com.mojang.serialization.Codec;
 import com.teamabnormals.environmental.common.entity.animal.slabfish.Slabfish;
+import com.teamabnormals.environmental.common.slabfish.SlabfishVariant;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -46,10 +51,10 @@ public class SlabfishConditionContext {
 	private final Supplier<Time> time;
 	private final Supplier<Integer> light;
 	private final Map<LightLayer, Supplier<Integer>> lightTypes;
-	private final Supplier<ResourceLocation> dimension;
-	private final Supplier<ResourceLocation> slabfishType;
+	private final Supplier<ResourceKey<Level>> dimension;
+	private final Supplier<Holder<SlabfishVariant>> slabfishType;
 	private final Supplier<Boolean> breederInsomnia;
-	private final Pair<ResourceLocation, ResourceLocation> parents;
+	private final Pair<Holder<SlabfishVariant>, Holder<SlabfishVariant>> parents;
 
 	private SlabfishConditionContext(Slabfish slabfish, Event event, @Nullable ServerPlayer breeder, @Nullable Slabfish parent1, @Nullable Slabfish parent2) {
 		this.level = (ServerLevel) slabfish.getCommandSenderWorld();
@@ -66,10 +71,10 @@ public class SlabfishConditionContext {
 		this.lightTypes = new HashMap<>();
 		for (LightLayer lightType : LightLayer.values())
 			this.lightTypes.put(lightType, Suppliers.memoize(() -> level.getBrightness(lightType, this.pos.get())));
-		this.dimension = Suppliers.memoize(() -> level.dimension().location());
-		this.slabfishType = Suppliers.memoize(slabfish::getSlabfishTypeLocation);
+		this.dimension = Suppliers.memoize(level::dimension);
+		this.slabfishType = Suppliers.memoize(slabfish::getVariant);
 		this.breederInsomnia = Suppliers.memoize(() -> breeder != null && breeder.getStats().getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)) >= 72000 && level.isNight());
-		this.parents = parent1 != null && parent2 != null ? new ImmutablePair<>(parent1.getSlabfishTypeLocation(), parent2.getSlabfishTypeLocation()) : null;
+		this.parents = parent1 != null && parent2 != null ? new ImmutablePair<>(parent1.getVariant(), parent2.getVariant()) : null;
 	}
 
 	/**
@@ -198,14 +203,14 @@ public class SlabfishConditionContext {
 	/**
 	 * @return The dimension the slabfish is in
 	 */
-	public ResourceLocation getDimension() {
+	public ResourceKey<Level> getDimension() {
 		return this.dimension.get();
 	}
 
 	/**
 	 * @return The type of slabfish this slabfish was before trying to undergo a change
 	 */
-	public ResourceLocation getSlabfishType() {
+	public Holder<SlabfishVariant> getSlabfishType() {
 		return this.slabfishType.get();
 	}
 
@@ -220,7 +225,7 @@ public class SlabfishConditionContext {
 	 * @return The types of slabfish the parents were or null if there are no parents
 	 */
 	@Nullable
-	public Pair<ResourceLocation, ResourceLocation> getParentTypes() {
+	public Pair<Holder<SlabfishVariant>, Holder<SlabfishVariant>> getParentTypes() {
 		return this.parents;
 	}
 

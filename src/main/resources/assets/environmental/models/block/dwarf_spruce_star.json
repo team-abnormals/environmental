@@ -1,5 +1,4 @@
 {
-	"loader": "blueprint:fullbright",
     "parent": "block/cross",
     "textures": {
         "cross": "environmental:block/dwarf_spruce_star",

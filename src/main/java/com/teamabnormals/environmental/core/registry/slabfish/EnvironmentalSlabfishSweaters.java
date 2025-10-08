@@ -1,6 +1,6 @@
 package com.teamabnormals.environmental.core.registry.slabfish;
 
-import com.teamabnormals.environmental.common.slabfish.SweaterType;
+import com.teamabnormals.environmental.common.slabfish.SlabfishSweater;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.registry.EnvironmentalRegistries;
 import net.minecraft.Util;
@@ -11,23 +11,19 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.item.DyeColor;
 
-import java.util.Optional;
-
 public class EnvironmentalSlabfishSweaters {
-	public static final ResourceKey<SweaterType> EMPTY = create("empty");
 
-	public static void bootstrap(BootstrapContext<SweaterType> context) {
-		context.register(EMPTY, new SweaterType(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty()));
+	public static void bootstrap(BootstrapContext<SlabfishSweater> context) {
 		for (DyeColor color : DyeColor.values()) {
-			ResourceKey<SweaterType> key = create(color.getName());
-			context.register(key, SweaterType.create(
+			ResourceKey<SlabfishSweater> key = create(color.getName());
+			context.register(key, SlabfishSweater.create(
 					Component.translatable(Util.makeDescriptionId("slabfish.sweater", key.location())),
 					ResourceLocation.fromNamespaceAndPath(key.location().getNamespace(), "sweater/" + key.location().getPath()),
 					Sheep.ITEM_BY_DYE.get(color).asItem()));
 		}
 	}
 
-	public static ResourceKey<SweaterType> create(String name) {
+	public static ResourceKey<SlabfishSweater> create(String name) {
 		return ResourceKey.create(EnvironmentalRegistries.SLABFISH_SWEATER, Environmental.location(name));
 	}
 }

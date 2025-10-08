@@ -5,7 +5,7 @@ import com.teamabnormals.blueprint.common.advancement.modification.modifiers.Cri
 import com.teamabnormals.blueprint.common.advancement.modification.modifiers.EffectsChangedModifier;
 import com.teamabnormals.blueprint.core.util.modification.selection.ConditionedResourceSelector;
 import com.teamabnormals.blueprint.core.util.modification.selection.selectors.NamesResourceSelector;
-import com.teamabnormals.environmental.common.slabfish.SlabfishType;
+import com.teamabnormals.environmental.common.slabfish.SlabfishVariant;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.data.server.EnvironmentalAdvancementProvider;
 import com.teamabnormals.environmental.core.other.EnvironmentalConstants;
@@ -14,7 +14,7 @@ import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
 import com.teamabnormals.environmental.core.registry.EnvironmentalMobEffects;
 import com.teamabnormals.environmental.core.registry.datapack.EnvironmentalBiomes;
-import com.teamabnormals.environmental.core.registry.slabfish.EnvironmentalSlabfishTypes;
+import com.teamabnormals.environmental.core.registry.slabfish.EnvironmentalSlabfishVariants;
 import net.minecraft.advancements.AdvancementRequirements.Strategy;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.core.HolderLookup.Provider;
@@ -77,12 +77,12 @@ public class EnvironmentalAdvancementModifierProvider extends AdvancementModifie
 				.addCriterion("cattail_sprouts", ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(EnvironmentalBlocks.CATTAIL_SPROUT.get()))
 				.addIndexedRequirements(0, false, "cattail_sprouts").build());
 
-		this.compatSlabfishModifier(EnvironmentalConstants.ATMOSPHERIC, EnvironmentalSlabfishTypes.ATMOSPHERIC_SLABFISH);
-		this.compatSlabfishModifier(EnvironmentalConstants.AUTUMNITY, EnvironmentalSlabfishTypes.AUTUMNITY_SLABFISH);
-		this.compatSlabfishModifier(EnvironmentalConstants.ENDERGETIC, EnvironmentalSlabfishTypes.ENDERGETIC_SLABFISH);
+		this.compatSlabfishModifier(EnvironmentalConstants.ATMOSPHERIC, EnvironmentalSlabfishVariants.ATMOSPHERIC_SLABFISH);
+		this.compatSlabfishModifier(EnvironmentalConstants.AUTUMNITY, EnvironmentalSlabfishVariants.AUTUMNITY_SLABFISH);
+		this.compatSlabfishModifier(EnvironmentalConstants.ENDERGETIC, EnvironmentalSlabfishVariants.ENDERGETIC_SLABFISH);
 	}
 
-	public void compatSlabfishModifier(String modid, List<ResourceKey<SlabfishType>> slabfishTypes) {
+	public void compatSlabfishModifier(String modid, List<ResourceKey<SlabfishVariant>> slabfishTypes) {
 		ConditionedResourceSelector selector = new ConditionedResourceSelector(new NamesResourceSelector(Environmental.location("husbandry/tame_all_slabfish")), new ModLoadedCondition(modid));
 		CriteriaModifier.Builder tameAllSlabfish = CriteriaModifier.builder(this.modId);
 		slabfishTypes.forEach(slabfish -> {

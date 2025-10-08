@@ -1,4 +1,4 @@
-package com.teamabnormals.environmental.common.entity.ai.goal;
+package com.teamabnormals.environmental.common.entity.ai.goal.duck;
 
 import com.teamabnormals.environmental.common.entity.animal.Duck;
 import net.minecraft.world.entity.Entity;

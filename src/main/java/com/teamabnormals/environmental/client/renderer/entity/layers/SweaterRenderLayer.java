@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.teamabnormals.environmental.client.model.SlabfishModel;
 import com.teamabnormals.environmental.client.resources.SlabfishSpriteUploader;
 import com.teamabnormals.environmental.common.entity.animal.slabfish.Slabfish;
-import com.teamabnormals.environmental.common.slabfish.SweaterType;
+import com.teamabnormals.environmental.common.slabfish.SlabfishSweater;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
@@ -25,12 +25,9 @@ public class SweaterRenderLayer<E extends Slabfish, M extends SlabfishModel<E>> 
 	public void render(PoseStack matrixStack, MultiBufferSource buffer, int packedLightIn, E slabby, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 		if (!slabby.hasSweater()) return;
 
-		SweaterType sweaterType = slabby.getSweater();
-		if (sweaterType.isEmpty())
-			return;
-
+		SlabfishSweater sweaterType = slabby.getSweater().get().value();
 		VertexConsumer builder = buffer.getBuffer(RenderType.entityCutoutNoCull(SlabfishSpriteUploader.ATLAS_LOCATION));
-		this.getParentModel().sprite = SlabfishSpriteUploader.instance().getSprite(sweaterType.texture().get());
+		this.getParentModel().sprite = SlabfishSpriteUploader.instance().getSprite(sweaterType.texture());
 		this.getParentModel().setupAnim(slabby, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 		this.getParentModel().renderToBuffer(matrixStack, builder, packedLightIn, OverlayTexture.NO_OVERLAY);
 	}

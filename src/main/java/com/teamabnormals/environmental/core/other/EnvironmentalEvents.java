@@ -10,16 +10,18 @@ import com.teamabnormals.environmental.common.entity.ai.goal.HuntTruffleGoal;
 import com.teamabnormals.environmental.common.entity.animal.koi.Koi;
 import com.teamabnormals.environmental.common.entity.animal.slabfish.Slabfish;
 import com.teamabnormals.environmental.common.entity.animal.slabfish.SlabfishOverlay;
+import com.teamabnormals.environmental.common.slabfish.SlabfishHelper;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.EnvironmentalConfig;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalBlockTags;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalEntityTypeTags;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalItemTags;
 import com.teamabnormals.environmental.core.registry.*;
-import com.teamabnormals.environmental.core.registry.slabfish.EnvironmentalSlabfishTypes;
+import com.teamabnormals.environmental.core.registry.slabfish.EnvironmentalSlabfishVariants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
+import net.minecraft.core.Holder.Reference;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
@@ -56,11 +58,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.HitResult;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.ItemAbilities;
-import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.EntityMobGriefingEvent;
 import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
@@ -122,20 +122,19 @@ public class EnvironmentalEvents {
 					List<Slabfish> slabs = thrownPotion.level().getEntitiesOfClass(Slabfish.class, axisalignedbb);
 					if (!slabs.isEmpty()) {
 						for (Slabfish slabfish : slabs) {
-							slabfish.setSlabfishOverlay(SlabfishOverlay.NONE);
+							slabfish.setOverlay(null);
 						}
 					}
 				}
 			}
 		}
 
-		if (event.getEntity() instanceof ThrowableItemProjectile projectile) {
-			if (event.getRayTraceResult() != null && event.getRayTraceResult().getType() == HitResult.Type.ENTITY) {
-				EntityHitResult entity = (EntityHitResult) event.getRayTraceResult();
-				if (entity.getEntity() instanceof Slabfish slabfish) {
-					ItemStack stack = projectile.getItem();
-					if (stack.is(Items.SNOWBALL)) slabfish.setSlabfishOverlay(SlabfishOverlay.SNOWY);
-					else if (stack.is(Tags.Items.EGGS)) slabfish.setSlabfishOverlay(SlabfishOverlay.EGG);
+		if (event.getEntity() instanceof ThrowableItemProjectile projectile && event.getRayTraceResult() instanceof EntityHitResult entity) {
+			if (entity.getEntity() instanceof Slabfish slabfish) {
+				ItemStack stack = projectile.getItem();
+				Optional<Reference<SlabfishOverlay>> overlay = SlabfishOverlay.getOverlayForItem(slabfish.registryAccess(), stack);
+				if (overlay.isPresent() && !(slabfish.getOverlay().isPresent() && slabfish.getOverlay().get().is(overlay.get()))) {
+					slabfish.setOverlay(overlay.get());
 				}
 			}
 		}
@@ -247,7 +246,7 @@ public class EnvironmentalEvents {
 
 		if (entity instanceof Slabfish slabfish) {
 			if (world.getBiome(entity.blockPosition()).is(Biomes.SOUL_SAND_VALLEY)) {
-				if (!slabfish.getSlabfishType().equals(EnvironmentalSlabfishTypes.GHOST.location())) {
+				if (!slabfish.getVariant().is(EnvironmentalSlabfishVariants.GHOST)) {
 					if (world.isClientSide()) {
 						for (int i = 0; i < 7; ++i) {
 							double d0 = rand.nextGaussian() * 0.02D;
@@ -269,7 +268,7 @@ public class EnvironmentalEvents {
 						ghost.moveTo(slabfish.getX(), slabfish.getY(), slabfish.getZ(), slabfish.getYRot(), slabfish.getXRot());
 						ghost.setNoAi(slabfish.isNoAi());
 						ghost.setAge(slabfish.getAge());
-						ghost.setSlabfishTypeFromLocation(EnvironmentalSlabfishTypes.GHOST.location());
+						ghost.setVariant(SlabfishHelper.slabfishTypes(slabfish.registryAccess()).getHolderOrThrow(EnvironmentalSlabfishVariants.GHOST));
 						ghost.extinguishFire();
 						if (slabfish.hasCustomName()) {
 							ghost.setCustomName(entity.getCustomName());

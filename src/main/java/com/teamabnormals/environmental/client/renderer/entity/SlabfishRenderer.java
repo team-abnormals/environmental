@@ -9,6 +9,7 @@ import com.teamabnormals.environmental.client.renderer.entity.layers.OverlayRend
 import com.teamabnormals.environmental.client.renderer.entity.layers.SweaterRenderLayer;
 import com.teamabnormals.environmental.client.resources.SlabfishSpriteUploader;
 import com.teamabnormals.environmental.common.entity.animal.slabfish.Slabfish;
+import com.teamabnormals.environmental.common.slabfish.SlabfishVariant;
 import com.teamabnormals.environmental.core.other.EnvironmentalModelLayers;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -40,7 +41,7 @@ public class SlabfishRenderer extends MobRenderer<Slabfish, SlabfishModel<Slabfi
 		if (p_230496_3_) {
 			return RenderType.itemEntityTranslucentCull(texture);
 		} else if (p_230496_2_) {
-			return slabby.getSlabfishType().translucent(slabby.level()) ? RenderType.entityTranslucent(texture) : this.model.renderType(texture);
+			return SlabfishVariant.isTranslucent(slabby.getVariant()) ? RenderType.entityTranslucent(texture) : this.model.renderType(texture);
 		} else {
 			return p_230496_4_ ? RenderType.outline(texture) : null;
 		}
@@ -54,7 +55,7 @@ public class SlabfishRenderer extends MobRenderer<Slabfish, SlabfishModel<Slabfi
 
 	@Override
 	protected void scale(Slabfish slabfish, PoseStack matrixStack, float partialTickTime) {
-		this.model.sprite = SlabfishSpriteUploader.instance().getSprite(slabfish.getSlabfishType().texture());
+		this.model.sprite = SlabfishSpriteUploader.instance().getSprite(slabfish.getVariant().value().texture());
 		if (slabfish.isInSittingPose() || slabfish.getVehicle() != null)
 			matrixStack.translate(0F, slabfish.isBaby() ? 0.15625F : 0.3125F, 0F);
 		if (slabfish.isInWater()) {

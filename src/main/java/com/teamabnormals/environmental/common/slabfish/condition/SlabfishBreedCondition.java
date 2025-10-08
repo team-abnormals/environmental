@@ -3,27 +3,31 @@ package com.teamabnormals.environmental.common.slabfish.condition;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamabnormals.environmental.common.slabfish.SlabfishConditionType;
+import com.teamabnormals.environmental.common.slabfish.SlabfishVariant;
+import com.teamabnormals.environmental.core.registry.EnvironmentalRegistries;
 import com.teamabnormals.environmental.core.registry.EnvironmentalSlabfishConditions;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.RegistryFixedCodec;
 import net.minecraft.resources.ResourceLocation;
 import org.apache.commons.lang3.tuple.Pair;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public record SlabfishBreedCondition(ResourceLocation parent, @Nullable ResourceLocation partner) implements SlabfishCondition {
+public record SlabfishBreedCondition(Holder<SlabfishVariant> parent, @Nullable Holder<SlabfishVariant> partner) implements SlabfishCondition {
 	public static final MapCodec<SlabfishBreedCondition> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-			ResourceLocation.CODEC.fieldOf("parent").forGetter(SlabfishBreedCondition::parent),
-			ResourceLocation.CODEC.optionalFieldOf("partner").forGetter(c -> Optional.ofNullable(c.partner()))
+			RegistryFixedCodec.create(EnvironmentalRegistries.SLABFISH_TYPE).fieldOf("parent").forGetter(SlabfishBreedCondition::parent),
+			RegistryFixedCodec.create(EnvironmentalRegistries.SLABFISH_TYPE).optionalFieldOf("partner").forGetter(c -> Optional.ofNullable(c.partner()))
 	).apply(instance, (parent, partner) -> new SlabfishBreedCondition(parent, partner.orElse(null))));
 
 
 	@Override
 	public boolean test(SlabfishConditionContext context) {
-		Pair<ResourceLocation, ResourceLocation> parentTypes = context.getParentTypes();
+		Pair<Holder<SlabfishVariant>, Holder<SlabfishVariant>> parentTypes = context.getParentTypes();
 		if (parentTypes == null)
 			return false;
 
-		if (!this.parent.equals(parentTypes.getLeft()) && !this.parent.equals(parentTypes.getRight()))
+		if (!this.parent.is(parentTypes.getLeft()) && !this.parent.is(parentTypes.getRight()))
 			return false;
 
 		if (this.partner == null)

@@ -1,8 +1,6 @@
 package com.teamabnormals.environmental.common.entity.projectile;
 
 import com.teamabnormals.environmental.common.entity.animal.MuddyPig;
-import com.teamabnormals.environmental.common.entity.animal.slabfish.Slabfish;
-import com.teamabnormals.environmental.common.entity.animal.slabfish.SlabfishOverlay;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
 import net.minecraft.core.particles.ItemParticleOption;
@@ -48,11 +46,6 @@ public class ThrownMudBall extends ThrowableItemProjectile {
 		if (result.getType() == HitResult.Type.ENTITY) {
 			Entity entity = ((EntityHitResult) result).getEntity();
 			entity.hurt(this.damageSources().thrown(this, this.getOwner()), (float) 0);
-			if (entity instanceof Slabfish slabby) {
-				if (slabby.getSlabfishOverlay() != SlabfishOverlay.MUDDY)
-					slabby.setSlabfishOverlay(SlabfishOverlay.MUDDY);
-			}
-
 			if (entity instanceof Pig pig && MuddyPig.enabled()) {
 				MuddyPig.setMuddy(pig, true);
 				MuddyPig.updateDryingTime(pig, 1200);

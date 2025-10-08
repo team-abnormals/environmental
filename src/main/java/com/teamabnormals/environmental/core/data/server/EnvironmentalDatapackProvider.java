@@ -9,8 +9,9 @@ import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures.Envir
 import com.teamabnormals.environmental.core.registry.EnvironmentalRegistries;
 import com.teamabnormals.environmental.core.registry.datapack.*;
 import com.teamabnormals.environmental.core.registry.slabfish.EnvironmentalSlabfishBackpacks;
+import com.teamabnormals.environmental.core.registry.slabfish.EnvironmentalSlabfishOverlays;
 import com.teamabnormals.environmental.core.registry.slabfish.EnvironmentalSlabfishSweaters;
-import com.teamabnormals.environmental.core.registry.slabfish.EnvironmentalSlabfishTypes;
+import com.teamabnormals.environmental.core.registry.slabfish.EnvironmentalSlabfishVariants;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
@@ -36,9 +37,10 @@ public class EnvironmentalDatapackProvider extends DatapackBuiltinEntriesProvide
 			.add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, EnvironmentalBiomeModifiers::bootstrap)
 			.add(EnvironmentalRegistries.KOI_VARIANT, EnvironmentalKoiVariants::bootstrap)
 			.add(EnvironmentalRegistries.DEER_VARIANT, EnvironmentalDeerVariants::bootstrap)
-			.add(EnvironmentalRegistries.SLABFISH_TYPE, EnvironmentalSlabfishTypes::bootstrap)
+			.add(EnvironmentalRegistries.SLABFISH_TYPE, EnvironmentalSlabfishVariants::bootstrap)
+			.add(EnvironmentalRegistries.SLABFISH_BACKPACK, EnvironmentalSlabfishBackpacks::bootstrap)
 			.add(EnvironmentalRegistries.SLABFISH_SWEATER, EnvironmentalSlabfishSweaters::bootstrap)
-			.add(EnvironmentalRegistries.SLABFISH_BACKPACK, EnvironmentalSlabfishBackpacks::bootstrap);
+			.add(EnvironmentalRegistries.SLABFISH_OVERLAY, EnvironmentalSlabfishOverlays::bootstrap);
 
 	public EnvironmentalDatapackProvider(PackOutput output, CompletableFuture<Provider> provider) {
 		super(output, provider, BUILDER, Set.of(Environmental.MOD_ID));

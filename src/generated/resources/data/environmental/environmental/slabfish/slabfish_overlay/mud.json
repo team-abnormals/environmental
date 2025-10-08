@@ -1,0 +1,5 @@
+{
+  "backpack_texture": "environmental:overlay/mud_backpack",
+  "projectile_item": "environmental:mud_ball",
+  "texture": "environmental:overlay/mud"
+}

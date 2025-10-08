@@ -190,12 +190,11 @@ public abstract class DynamicInventory implements Container {
 	public void write(CompoundTag nbt) {
 		ListTag list = new ListTag();
 		for (int i = 0; i < this.getContainerSize(); ++i) {
-			ItemStack stack = this.inventory.getOrDefault(i, ItemStack.EMPTY);
+			ItemStack stack = this.getItem(i);
 			if (!stack.isEmpty()) {
 				CompoundTag slotNbt = new CompoundTag();
 				slotNbt.putByte("Slot", (byte) i);
-				stack.save(this.registry, slotNbt);
-				list.add(slotNbt);
+				list.add(stack.save(this.registry, slotNbt));
 			}
 		}
 		nbt.put("Items", list);
@@ -214,7 +213,7 @@ public abstract class DynamicInventory implements Container {
 			CompoundTag slotNbt = list.getCompound(i);
 			int index = slotNbt.getByte("Slot") & 255;
 			if (index < this.getContainerSize()) {
-				this.inventory.put(index, ItemStack.parse(this.registry, slotNbt).get());
+				ItemStack.parse(this.registry, slotNbt).ifPresent(stack -> this.inventory.put(index, stack));
 			}
 		}
 	}

@@ -1,0 +1,5 @@
+{
+  "backpack_texture": "environmental:overlay/snow_backpack",
+  "projectile_item": "minecraft:snowball",
+  "texture": "environmental:overlay/snow"
+}

@@ -1,6 +1,6 @@
 package com.teamabnormals.environmental.core.data.server;
 
-import com.teamabnormals.environmental.common.slabfish.SlabfishType;
+import com.teamabnormals.environmental.common.slabfish.SlabfishVariant;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.other.EnvironmentalCriteriaTriggers;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalEntityTypeTags;
@@ -9,7 +9,7 @@ import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
 import com.teamabnormals.environmental.core.registry.EnvironmentalRegistries;
-import com.teamabnormals.environmental.core.registry.slabfish.EnvironmentalSlabfishTypes;
+import com.teamabnormals.environmental.core.registry.slabfish.EnvironmentalSlabfishVariants;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementType;
@@ -104,13 +104,13 @@ public class EnvironmentalAdvancementProvider implements AdvancementGenerator {
 				.save(consumer, Environmental.MOD_ID + ":husbandry/feed_deer_flower");
 
 		Advancement.Builder tameSlabfish = createAdvancement("tame_all_slabfish", "husbandry", ResourceLocation.withDefaultNamespace("husbandry/tame_an_animal"), Items.TROPICAL_FISH, AdvancementType.CHALLENGE, true, true, false);
-		for (ResourceKey<SlabfishType> slabfish : provider.lookup(EnvironmentalRegistries.SLABFISH_TYPE).get().listElementIds().filter(key -> !EnvironmentalSlabfishTypes.COMPAT_SLABFISH.contains(key)).sorted().toList()) {
+		for (ResourceKey<SlabfishVariant> slabfish : provider.lookup(EnvironmentalRegistries.SLABFISH_TYPE).get().listElementIds().filter(key -> !EnvironmentalSlabfishVariants.COMPAT_SLABFISH.contains(key)).sorted().toList()) {
 			tameSlabfish.addCriterion(slabfish.location().toString(), slabfishCriterion(slabfish));
 		}
 		tameSlabfish.save(consumer, Environmental.MOD_ID + ":husbandry/tame_all_slabfish");
 	}
 
-	public static Criterion<TameAnimalTrigger.TriggerInstance> slabfishCriterion(ResourceKey<SlabfishType> slabfish) {
+	public static Criterion<TameAnimalTrigger.TriggerInstance> slabfishCriterion(ResourceKey<SlabfishVariant> slabfish) {
 		CompoundTag tag = new CompoundTag();
 		tag.putString("SlabfishType", slabfish.location().toString());
 		return TameAnimalTrigger.TriggerInstance.tamedAnimal(EntityPredicate.Builder.entity().of(EnvironmentalEntityTypes.SLABFISH.get()).nbt(new NbtPredicate(tag)));

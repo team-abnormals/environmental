@@ -5,18 +5,14 @@ import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
 import com.teamabnormals.environmental.core.registry.datapack.EnvironmentalKoiVariants;
-import com.teamabnormals.environmental.core.registry.slabfish.EnvironmentalSlabfishTypes;
+import com.teamabnormals.environmental.core.registry.slabfish.EnvironmentalSlabfishVariants;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.GrassColor;
 import net.minecraft.world.level.block.state.BlockState;
@@ -43,7 +39,7 @@ public class EnvironmentalClientCompat {
 
 	@SubscribeEvent
 	public static void modifyBakingResult(ModelEvent.ModifyBakingResult event) {
-		DynamicItemModel.bake(event, EnvironmentalItems.SLABFISH_BUCKET.getId(), "slabfish_bucket", ModelResourceLocation.standalone(EnvironmentalSlabfishTypes.SWAMP.location().withPrefix("item/slabfish_bucket/")), DynamicItemModel.fishBucket());
+		DynamicItemModel.bake(event, EnvironmentalItems.SLABFISH_BUCKET.getId(), "slabfish_bucket", ModelResourceLocation.standalone(EnvironmentalSlabfishVariants.SWAMP.location().withPrefix("item/slabfish_bucket/")), DynamicItemModel.fishBucket());
 		DynamicItemModel.bake(event, EnvironmentalItems.KOI_BUCKET.getId(), "koi_bucket", ModelResourceLocation.standalone(EnvironmentalKoiVariants.KOHAKU.location().withPrefix("item/koi_bucket/")), DynamicItemModel.fishBucket());
 	}
 

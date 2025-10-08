@@ -5,7 +5,6 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.teamabnormals.environmental.client.model.SlabfishModel;
 import com.teamabnormals.environmental.client.resources.SlabfishSpriteUploader;
 import com.teamabnormals.environmental.common.entity.animal.slabfish.Slabfish;
-import com.teamabnormals.environmental.common.entity.animal.slabfish.SlabfishOverlay;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
@@ -23,10 +22,10 @@ public class OverlayRenderLayer<E extends Slabfish, M extends SlabfishModel<E>> 
 
 	@Override
 	public void render(PoseStack matrixStack, MultiBufferSource buffer, int packedLightIn, E slabfish, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-		if (slabfish.getSlabfishOverlay() == SlabfishOverlay.NONE) return;
+		if (!slabfish.hasOverlay()) return;
 
 		VertexConsumer builder = buffer.getBuffer(RenderType.entityCutoutNoCull(SlabfishSpriteUploader.ATLAS_LOCATION));
-		this.getParentModel().sprite = SlabfishSpriteUploader.instance().getSprite(slabfish.getSlabfishOverlay().getTextureLocation());
+		this.getParentModel().sprite = SlabfishSpriteUploader.instance().getSprite(slabfish.getOverlay().get().value().texture());
 		this.getParentModel().setupAnim(slabfish, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 		this.getParentModel().renderToBuffer(matrixStack, builder, packedLightIn, OverlayTexture.NO_OVERLAY);
 	}

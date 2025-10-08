@@ -1,9 +1,9 @@
 package com.teamabnormals.environmental.common.entity.animal;
 
 import com.teamabnormals.blueprint.core.api.EggLayer;
-import com.teamabnormals.environmental.common.entity.ai.goal.DuckAvoidEntityGoal;
-import com.teamabnormals.environmental.common.entity.ai.goal.DuckSwimGoal;
-import com.teamabnormals.environmental.common.entity.ai.goal.DucksInARowGoal;
+import com.teamabnormals.environmental.common.entity.ai.goal.duck.DuckAvoidEntityGoal;
+import com.teamabnormals.environmental.common.entity.ai.goal.duck.DuckSwimGoal;
+import com.teamabnormals.environmental.common.entity.ai.goal.duck.DucksInARowGoal;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalBlockTags;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalItemTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;

@@ -1,60 +1,53 @@
 package com.teamabnormals.environmental.common.entity.animal.slabfish;
 
-import com.teamabnormals.environmental.core.Environmental;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.teamabnormals.environmental.common.slabfish.SlabfishHelper;
+import com.teamabnormals.environmental.core.registry.EnvironmentalRegistries;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Holder.Reference;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.RegistryFileCodec;
+import net.minecraft.resources.RegistryFixedCodec;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.LazyLoadedValue;
-import net.minecraft.util.StringRepresentable;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.Optional;
 
-public enum SlabfishOverlay implements StringRepresentable {
-	NONE(0, "none"),
-	MUDDY(1, "mud"),
-	SNOWY(2, "snow"),
-	EGG(3, "egg");
+public record SlabfishOverlay(ResourceLocation texture, Optional<ResourceLocation> backpackTexture, Optional<Holder<Item>> item, Optional<TagKey<Item>> tagKey) {
+	public static final Codec<SlabfishOverlay> DIRECT_CODEC = RecordCodecBuilder.create(instance -> {
+		return instance.group(
+				ResourceLocation.CODEC.fieldOf("texture").forGetter(entry -> entry.texture),
+				ResourceLocation.CODEC.optionalFieldOf("backpack_texture").forGetter(entry -> entry.backpackTexture),
+				RegistryFixedCodec.create(Registries.ITEM).optionalFieldOf("projectile_item").forGetter(entry -> entry.item),
+				TagKey.codec(Registries.ITEM).optionalFieldOf("projectile_item_tag").forGetter(entry -> entry.tagKey)
+		).apply(instance, SlabfishOverlay::new);
+	});
 
-	private static final SlabfishOverlay[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(SlabfishOverlay::getId)).toArray(SlabfishOverlay[]::new);
-	private final int id;
-	private final String name;
-	private final LazyLoadedValue<ResourceLocation> textureLocation = new LazyLoadedValue<>(() -> Environmental.location("overlay/" + this.getSerializedName()));
-	private final LazyLoadedValue<ResourceLocation> backpackTextureLocation = new LazyLoadedValue<>(() -> Environmental.location("overlay/" + this.getSerializedName() + "_backpack"));
+	public static final StreamCodec<RegistryFriendlyByteBuf, SlabfishOverlay> DIRECT_STREAM_CODEC = StreamCodec.composite(
+			ResourceLocation.STREAM_CODEC, SlabfishOverlay::texture,
+			ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), SlabfishOverlay::backpackTexture,
+			ByteBufCodecs.optional(ByteBufCodecs.holderRegistry(Registries.ITEM)), SlabfishOverlay::item,
+			ByteBufCodecs.optional(ByteBufCodecs.fromCodec(TagKey.codec(Registries.ITEM))), SlabfishOverlay::tagKey,
+			SlabfishOverlay::new
+	);
 
-	SlabfishOverlay(int id, String name) {
-		this.id = id;
-		this.name = name;
-	}
+	public static final Codec<Holder<SlabfishOverlay>> CODEC = RegistryFileCodec.create(EnvironmentalRegistries.SLABFISH_OVERLAY, DIRECT_CODEC);
+	public static final StreamCodec<RegistryFriendlyByteBuf, Holder<SlabfishOverlay>> STREAM_CODEC = ByteBufCodecs.holder(EnvironmentalRegistries.SLABFISH_OVERLAY, DIRECT_STREAM_CODEC);
 
-	public int getId() {
-		return this.id;
-	}
-
-	@Override
-	public String getSerializedName() {
-		return this.name;
-	}
-
-	public ResourceLocation getTextureLocation() {
-		return this.textureLocation.get();
-	}
-
-	public ResourceLocation getBackpackTextureLocation() {
-		return this.backpackTextureLocation.get();
-	}
-
-	public static SlabfishOverlay byId(int id) {
-		if (id < 0 || id >= VALUES.length) {
-			id = 0;
+	public static Optional<Reference<SlabfishOverlay>> getOverlayForItem(RegistryAccess access, ItemStack item) {
+		Optional<Reference<SlabfishOverlay>> overlay;
+		overlay = SlabfishHelper.slabfishOverlays(access).holders().filter(holder -> holder.value().item.isPresent() && item.is(holder.value().item.get())).findAny();
+		if (overlay.isEmpty()) {
+			overlay = SlabfishHelper.slabfishOverlays(access).holders().filter(holder -> holder.value().tagKey.isPresent() && item.is(holder.value().tagKey().get())).findAny();
 		}
-		return VALUES[id];
+		return overlay;
 	}
 
-	public static SlabfishOverlay byTranslationKey(String key, SlabfishOverlay type) {
-		for (SlabfishOverlay slabfishtype : values()) {
-			if (slabfishtype.name.equals(key)) {
-				return slabfishtype;
-			}
-		}
-		return type;
-	}
 }
