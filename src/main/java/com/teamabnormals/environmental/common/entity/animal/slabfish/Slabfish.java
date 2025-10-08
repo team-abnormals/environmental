@@ -85,10 +85,10 @@ public class Slabfish extends TamableAnimal implements ContainerListener, Bucket
 
 	private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(Slabfish.class, EntityDataSerializers.BOOLEAN);
 
-	public static final EntityDimensions SIZE_SWIMMING = EntityDimensions.fixed(0.7F, 0.6F).withEyeHeight(0.513F);
-	public static final EntityDimensions SIZE_SITTING = EntityDimensions.fixed(0.45F, 0.6F).withEyeHeight(0.36F);
-	public static final EntityDimensions SIZE_SWIMMING_CHILD = EntityDimensions.fixed(0.35F, 0.3F).withEyeHeight(0.42F);
-	public static final EntityDimensions SIZE_SITTING_CHILD = EntityDimensions.fixed(0.225F, 0.3F).withEyeHeight(0.18F);
+	public static final EntityDimensions SIZE_SWIMMING = EntityDimensions.scalable(0.7F, 0.6F).withEyeHeight(0.513F);
+	public static final EntityDimensions SIZE_SITTING = EntityDimensions.scalable(0.45F, 0.6F).withEyeHeight(0.36F);
+	public static final EntityDimensions SIZE_SWIMMING_CHILD = EntityDimensions.scalable(0.35F, 0.3F).withEyeHeight(0.42F);
+	public static final EntityDimensions SIZE_SITTING_CHILD = EntityDimensions.scalable(0.225F, 0.3F).withEyeHeight(0.18F);
 
 	public SlabfishInventory slabfishBackpack;
 	public boolean backpackFull;

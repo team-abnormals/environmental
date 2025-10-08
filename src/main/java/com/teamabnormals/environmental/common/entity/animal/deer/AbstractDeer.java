@@ -48,7 +48,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public abstract class AbstractDeer extends Animal {
-	private static final EntityDimensions GRAZING_DIMENSIONS = EntityDimensions.scalable(0.8F, 1.2F);
+	private static final EntityDimensions GRAZING_DIMENSIONS = EntityDimensions.scalable(0.8F, 1.2F).withEyeHeight(0.36F);
 
 	private static final Predicate<LivingEntity> AVOID_ENTITY_PREDICATE = (entity) ->
 			entity.getType().is(EnvironmentalEntityTypeTags.SCARES_DEER) && !entity.isDiscrete() && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(entity);
@@ -353,6 +353,15 @@ public abstract class AbstractDeer extends Animal {
 			this.hopAmount = Math.min(1.0F, this.hopAmount + 0.25F);
 		} else {
 			this.hopAmount = Math.max(0.0F, this.hopAmount - 0.25F);
+		}
+	}
+
+	@Override
+	public EntityDimensions getDefaultDimensions(Pose pose) {
+		if (this.isGrazing()) {
+			return GRAZING_DIMENSIONS.scale(this.getAgeScale());
+		} else {
+			return super.getDefaultDimensions(pose);
 		}
 	}
 

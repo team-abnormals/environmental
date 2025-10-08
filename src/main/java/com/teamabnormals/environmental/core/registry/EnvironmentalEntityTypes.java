@@ -33,25 +33,33 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 public class EnvironmentalEntityTypes {
 	public static final EntitySubRegistryHelper ENTITY_TYPES = Environmental.REGISTRY_HELPER.getEntitySubHelper();
 
-	public static final DeferredHolder<EntityType<?>, EntityType<Slabfish>> SLABFISH = ENTITY_TYPES.createEntity("slabfish", Slabfish::new, MobCategory.CREATURE, builder -> builder
-			.sized(0.45F, 0.9F).eyeHeight(0.72F).clientTrackingRange(10));
-	public static final DeferredHolder<EntityType<?>, EntityType<Duck>> DUCK = ENTITY_TYPES.createEntity("duck", Duck::new, MobCategory.CREATURE, builder -> builder
-			.sized(0.5F, 0.75F).eyeHeight(0.644F).passengerAttachments(new Vec3(0.0F, 0.7F, -0.1F)).clientTrackingRange(10));
-	public static final DeferredHolder<EntityType<?>, EntityType<Deer>> DEER = ENTITY_TYPES.createEntity("deer", Deer::new, MobCategory.CREATURE, 0.8F, 1.6F);
-	public static final DeferredHolder<EntityType<?>, EntityType<Reindeer>> REINDEER = ENTITY_TYPES.createEntity("reindeer", Reindeer::new, MobCategory.CREATURE, 0.8F, 1.6F);
-	public static final DeferredHolder<EntityType<?>, EntityType<Yak>> YAK = ENTITY_TYPES.createEntity("yak", Yak::new, MobCategory.CREATURE, 1.2F, 1.4F);
-	public static final DeferredHolder<EntityType<?>, EntityType<Koi>> KOI = ENTITY_TYPES.createEntity("koi", Koi::new, MobCategory.WATER_AMBIENT, 0.75F, 0.4F);
-	public static final DeferredHolder<EntityType<?>, EntityType<Tapir>> TAPIR = ENTITY_TYPES.createEntity("tapir", Tapir::new, MobCategory.CREATURE, 0.9F, 0.98F);
-	public static final DeferredHolder<EntityType<?>, EntityType<Zebra>> ZEBRA = ENTITY_TYPES.createEntity("zebra", Zebra::new, MobCategory.CREATURE, builder -> builder
-			.sized(1.3964844F, 1.5F).eyeHeight(1.425F).passengerAttachments(1.1125F).clientTrackingRange(10));
-	public static final DeferredHolder<EntityType<?>, EntityType<Zorse>> ZORSE = ENTITY_TYPES.createEntity("zorse", Zorse::new, MobCategory.CREATURE, builder -> builder
-			.sized(1.3964844F, 1.5F).eyeHeight(1.52F).passengerAttachments(1.44375F).clientTrackingRange(10));
-	public static final DeferredHolder<EntityType<?>, EntityType<Zonkey>> ZONKEY = ENTITY_TYPES.createEntity("zonkey", Zonkey::new, MobCategory.CREATURE, builder -> builder
-			.sized(1.3964844F, 1.5F).eyeHeight(1.425F).passengerAttachments(1.1125F).clientTrackingRange(10));
-	public static final DeferredHolder<EntityType<?>, EntityType<PineconeGolem>> PINECONE_GOLEM = ENTITY_TYPES.createEntity("pinecone_golem", PineconeGolem::new, MobCategory.MISC, 0.65F, 0.65F);
+	public static final DeferredHolder<EntityType<?>, EntityType<Slabfish>> SLABFISH = ENTITY_TYPES.createEntity("slabfish", Slabfish::new, MobCategory.CREATURE, builder ->
+			builder.sized(0.45F, 0.9F).eyeHeight(0.72F).clientTrackingRange(10));
+	public static final DeferredHolder<EntityType<?>, EntityType<Duck>> DUCK = ENTITY_TYPES.createEntity("duck", Duck::new, MobCategory.CREATURE, builder ->
+			builder.sized(0.5F, 0.75F).eyeHeight(0.644F).passengerAttachments(new Vec3(0.0F, 0.45F, -0.2F)).clientTrackingRange(10));
+	public static final DeferredHolder<EntityType<?>, EntityType<Deer>> DEER = ENTITY_TYPES.createEntity("deer", Deer::new, MobCategory.CREATURE,
+			builder -> builder.sized(0.8F, 1.6F).eyeHeight(1.52F).passengerAttachments(1.1F).clientTrackingRange(10));
+	public static final DeferredHolder<EntityType<?>, EntityType<Reindeer>> REINDEER = ENTITY_TYPES.createEntity("reindeer", Reindeer::new, MobCategory.CREATURE,
+			builder -> builder.sized(0.8F, 1.6F).eyeHeight(1.52F).passengerAttachments(1.1F).clientTrackingRange(10));
+	public static final DeferredHolder<EntityType<?>, EntityType<Yak>> YAK = ENTITY_TYPES.createEntity("yak", Yak::new, MobCategory.CREATURE, builder ->
+			builder.sized(1.2F, 1.4F).eyeHeight(1.3F).passengerAttachments(1.36875F).clientTrackingRange(10));
+	public static final DeferredHolder<EntityType<?>, EntityType<Koi>> KOI = ENTITY_TYPES.createEntity("koi", Koi::new, MobCategory.WATER_AMBIENT, builder ->
+			builder.sized(0.75F, 0.4F).eyeHeight(0.26F).clientTrackingRange(4));
+	public static final DeferredHolder<EntityType<?>, EntityType<Tapir>> TAPIR = ENTITY_TYPES.createEntity("tapir", Tapir::new, MobCategory.CREATURE, builder ->
+			builder.sized(0.9F, 0.98F).passengerAttachments(0.96875F).clientTrackingRange(10));
+	public static final DeferredHolder<EntityType<?>, EntityType<Zebra>> ZEBRA = ENTITY_TYPES.createEntity("zebra", Zebra::new, MobCategory.CREATURE, builder ->
+			builder.sized(1.3964844F, 1.5F).eyeHeight(1.425F).passengerAttachments(1.1125F).clientTrackingRange(10));
+	public static final DeferredHolder<EntityType<?>, EntityType<Zorse>> ZORSE = ENTITY_TYPES.createEntity("zorse", Zorse::new, MobCategory.CREATURE, builder ->
+			builder.sized(1.3964844F, 1.6F).eyeHeight(1.52F).passengerAttachments(1.3125F).clientTrackingRange(10));
+	public static final DeferredHolder<EntityType<?>, EntityType<Zonkey>> ZONKEY = ENTITY_TYPES.createEntity("zonkey", Zonkey::new, MobCategory.CREATURE, builder ->
+			builder.sized(1.3964844F, 1.5F).eyeHeight(1.425F).passengerAttachments(1.1125F).clientTrackingRange(10));
+	public static final DeferredHolder<EntityType<?>, EntityType<PineconeGolem>> PINECONE_GOLEM = ENTITY_TYPES.createEntity("pinecone_golem", PineconeGolem::new, MobCategory.MISC, builder ->
+			builder.sized(0.65F, 0.65F).eyeHeight(0.325F).clientTrackingRange(10));
 
-	public static final DeferredHolder<EntityType<?>, EntityType<ThrownDuckEgg>> DUCK_EGG = ENTITY_TYPES.createEntity("duck_egg", ThrownDuckEgg::new, MobCategory.MISC, 0.25F, 0.25F);
-	public static final DeferredHolder<EntityType<?>, EntityType<ThrownMudBall>> MUD_BALL = ENTITY_TYPES.createEntity("mud_ball", ThrownMudBall::new, MobCategory.MISC, 0.25F, 0.25F);
+	public static final DeferredHolder<EntityType<?>, EntityType<ThrownDuckEgg>> DUCK_EGG = ENTITY_TYPES.createEntity("duck_egg", ThrownDuckEgg::new, MobCategory.MISC, builder ->
+			builder.sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10));
+	public static final DeferredHolder<EntityType<?>, EntityType<ThrownMudBall>> MUD_BALL = ENTITY_TYPES.createEntity("mud_ball", ThrownMudBall::new, MobCategory.MISC, builder ->
+			builder.sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10));
 
 	@SubscribeEvent
 	public static void registerSpawnPlacements(RegisterSpawnPlacementsEvent event) {

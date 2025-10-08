@@ -23,11 +23,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.Level;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public record SlabfishVariant(Component description, ResourceLocation texture, Optional<Holder<SlabfishBackpack>> backpackOverride, int priority, SlabfishCondition[] conditions) implements Predicate<SlabfishConditionContext> {
 
@@ -102,12 +100,10 @@ public record SlabfishVariant(Component description, ResourceLocation texture, O
 	}
 
 	public static TagKey<SlabfishVariant> getRandomRarity(float chance) {
-		for (Map.Entry<TagKey<SlabfishVariant>, Pair<Float, ChatFormatting>> entry : SlabfishVariant.RARITIES.entrySet()) {
-			if (chance <= entry.getValue().getFirst())
-				return entry.getKey();
-		}
-
-		return EnvironmentalSlabfishTypeTags.COMMON;
+		return SlabfishVariant.RARITIES.entrySet().stream()
+				.filter(value -> chance < value.getValue().getFirst())
+				.sorted(Comparator.comparingDouble(value -> value.getValue().getFirst()))
+				.toList().getFirst().getKey();
 	}
 
 	public TagKey<SlabfishVariant> getRarity(Level level) {
