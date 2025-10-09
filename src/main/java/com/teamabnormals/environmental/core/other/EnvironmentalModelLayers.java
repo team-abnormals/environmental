@@ -2,6 +2,8 @@ package com.teamabnormals.environmental.core.other;
 
 import com.teamabnormals.environmental.client.model.*;
 import com.teamabnormals.environmental.client.renderer.entity.*;
+import com.teamabnormals.environmental.client.renderer.entity.layers.MuddyPigDecorationLayer;
+import com.teamabnormals.environmental.client.renderer.entity.layers.MuddyPigMudLayer;
 import com.teamabnormals.environmental.client.renderer.entity.layers.MuleArmorLayer;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
@@ -9,6 +11,7 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.entity.ChestedHorseRenderer;
+import net.minecraft.client.renderer.entity.PigRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.horse.Mule;
@@ -38,6 +41,12 @@ public class EnvironmentalModelLayers {
 		ChestedHorseRenderer<Mule> muleRenderer = event.getRenderer(EntityType.MULE);
 		if (muleRenderer != null) {
 			muleRenderer.addLayer(new MuleArmorLayer<>(muleRenderer, event.getEntityModels()));
+		}
+
+		PigRenderer pigRenderer = event.getRenderer(EntityType.PIG);
+		if (pigRenderer != null) {
+			pigRenderer.addLayer(new MuddyPigMudLayer<>(pigRenderer));
+			pigRenderer.addLayer(new MuddyPigDecorationLayer<>(pigRenderer, event.getContext().getBlockRenderDispatcher()));
 		}
 	}
 

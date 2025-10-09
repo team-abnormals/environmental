@@ -3,7 +3,7 @@ package com.teamabnormals.environmental.client.renderer.entity.layers;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.teamabnormals.environmental.common.entity.animal.MuddyPig;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.PigModel;
+import net.minecraft.client.model.QuadrupedModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
@@ -22,10 +22,10 @@ import net.neoforged.api.distmarker.OnlyIn;
 import java.util.Optional;
 
 @OnlyIn(Dist.CLIENT)
-public class MuddyPigDecorationLayer<T extends Pig> extends RenderLayer<T, PigModel<T>> {
+public class MuddyPigDecorationLayer<T extends Pig, M extends QuadrupedModel<T>> extends RenderLayer<T, M> {
 	private final BlockRenderDispatcher blockRenderer;
 
-	public MuddyPigDecorationLayer(RenderLayerParent<T, PigModel<T>> parent, BlockRenderDispatcher renderer) {
+	public MuddyPigDecorationLayer(RenderLayerParent<T, M> parent, BlockRenderDispatcher renderer) {
 		super(parent);
 		this.blockRenderer = renderer;
 	}

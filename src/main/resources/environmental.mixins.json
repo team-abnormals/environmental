@@ -22,8 +22,7 @@
     "SurfaceSystemMixin"
   ],
   "client": [
-    "client.ChickenRendererMixin",
-    "client.PigRendererMixin"
+    "client.ChickenRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
