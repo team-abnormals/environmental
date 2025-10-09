@@ -31,12 +31,13 @@ public class MuddyPigMudLayer<T extends Pig, M extends EntityModel<T>> extends R
 		if (MuddyPig.enabled() && MuddyPig.isMuddy(pig)) {
 			VertexConsumer dried = buffer.getBuffer(RenderType.entityTranslucent(DRIED_MUDDY_PIG_LOCATION));
 			this.getParentModel().setupAnim(pig, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-			this.getParentModel().renderToBuffer(poseStack, dried, packedLightIn, LivingEntityRenderer.getOverlayCoords(pig, 0.0F));
+			float driedOpacity = 1.0F - Mth.clamp(((MuddyPig.getDryingTime(pig) - 250.0F) / 250.0F), 0.0F, 1.0F);
+			this.getParentModel().renderToBuffer(poseStack, dried, packedLightIn, LivingEntityRenderer.getOverlayCoords(pig, 0.0F), FastColor.ARGB32.colorFromFloat(driedOpacity, 1.0F, 1.0F, 1.0F));
 
 			VertexConsumer builder = buffer.getBuffer(RenderType.entityTranslucent(MUDDY_PIG_LOCATION));
 			this.getParentModel().setupAnim(pig, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-			float f = Mth.clamp((MuddyPig.getDryingTime(pig) - 60.0F) / (500.0F), 0.0F, 1.0F);
-			this.getParentModel().renderToBuffer(poseStack, builder, packedLightIn, LivingEntityRenderer.getOverlayCoords(pig, 0.0F), FastColor.ARGB32.colorFromFloat(f, 1.0F, 1.0F, 1.0F));
+			float opacity = Mth.clamp((MuddyPig.getDryingTime(pig) - 60.0F) / 500.0F, 0.0F, 1.0F);
+			this.getParentModel().renderToBuffer(poseStack, builder, packedLightIn, LivingEntityRenderer.getOverlayCoords(pig, 0.0F), FastColor.ARGB32.colorFromFloat(opacity, 1.0F, 1.0F, 1.0F));
 		}
 	}
 }

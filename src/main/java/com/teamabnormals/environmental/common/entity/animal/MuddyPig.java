@@ -76,16 +76,12 @@ public class MuddyPig {
 	}
 
 	public static boolean canGetWet(Pig pig) {
-		return (pig.isInWaterOrBubble() && EnvironmentalConfig.COMMON.muddyPigsGetWetInWater.get()) || ((pig.isInWaterOrRain() && !pig.isInWater()) && EnvironmentalConfig.COMMON.muddyPigsGetWetInRain.get());
+		return pig.getBlockStateOn().is(Blocks.MUD) || (pig.isInWaterOrBubble() && EnvironmentalConfig.COMMON.muddyPigsGetWetInWater.get()) || ((pig.isInWaterOrRain() && !pig.isInWater()) && EnvironmentalConfig.COMMON.muddyPigsGetWetInRain.get());
 	}
 
 	public static void removeDecoration(Pig pig) {
 		IDataManager data = (IDataManager) pig;
 		data.setValue(EnvironmentalDataProcessors.MUDDY_PIG_DECORATION, ResourceLocation.withDefaultNamespace("empty"));
-	}
-
-	public static boolean isDry(Pig pig) {
-		return getDryingTime(pig) < 60;
 	}
 
 	public static Optional<Item> getDecoration(Pig pig) {
@@ -177,7 +173,7 @@ public class MuddyPig {
 					}
 				}
 
-				if (stack.is(EnvironmentalItemTags.MUDDY_PIG_DRYING_ITEMS) && !dried && !canGetWet(pig) && !pig.getBlockStateOn().is(Blocks.MUD)) {
+				if (stack.is(EnvironmentalItemTags.MUDDY_PIG_DRYING_ITEMS) && !dried) {
 					level.playSound(null, target, SoundEvents.PACKED_MUD_PLACE, SoundSource.PLAYERS, 1.0F, 1.0F);
 					if (!event.getEntity().isCreative()) stack.shrink(1);
 					setDryingTime(pig, 0);
