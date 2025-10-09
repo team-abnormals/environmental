@@ -76,7 +76,7 @@ public class MuddyPig {
 	}
 
 	public static boolean canGetWet(Pig pig) {
-		return pig.getBlockStateOn().is(Blocks.MUD) || (pig.isInWaterOrBubble() && EnvironmentalConfig.COMMON.muddyPigsGetWetInWater.get()) || ((pig.isInWaterOrRain() && !pig.isInWater()) && EnvironmentalConfig.COMMON.muddyPigsGetWetInRain.get());
+		return (pig.isInWaterOrBubble() && EnvironmentalConfig.COMMON.muddyPigsGetWetInWater.get()) || ((pig.isInWaterOrRain() && !pig.isInWater()) && EnvironmentalConfig.COMMON.muddyPigsGetWetInRain.get());
 	}
 
 	public static void removeDecoration(Pig pig) {

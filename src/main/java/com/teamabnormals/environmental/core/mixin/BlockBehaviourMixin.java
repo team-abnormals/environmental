@@ -30,8 +30,12 @@ public class BlockBehaviourMixin {
 		BlockBehaviour block = (BlockBehaviour) (Object) this;
 
 		if (block instanceof MudBlock && entity instanceof Pig pig && MuddyPig.enabled()) {
-			MuddyPig.setMuddy(pig, true);
-			MuddyPig.updateDryingTime(pig, 20);
+			if (!MuddyPig.isMuddy(pig)) {
+				MuddyPig.setMuddy(pig, true);
+				MuddyPig.updateDryingTime(pig, 200);
+			} else {
+				MuddyPig.updateDryingTime(pig, 20);
+			}
 		}
 
 		if (block instanceof LeavesBlock && entity instanceof Tapir) {
