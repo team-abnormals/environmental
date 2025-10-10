@@ -22,6 +22,7 @@ public class EnvironmentalBlockTagsProvider extends BlockTagsProvider {
 		super(output, provider, Environmental.MOD_ID, helper);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void addTags(Provider provider) {
 		this.tag(BlockTags.MINEABLE_WITH_AXE).add(
@@ -130,5 +131,11 @@ public class EnvironmentalBlockTagsProvider extends BlockTagsProvider {
 		this.tag(Tags.Blocks.FENCE_GATES_WOODEN).add(WILLOW_FENCE_GATE.get(), PINE_FENCE_GATE.get(), WISTERIA_FENCE_GATE.get(), PLUM_FENCE_GATE.get());
 		this.tag(Tags.Blocks.STRIPPED_LOGS).add(STRIPPED_WILLOW_LOG.get(), STRIPPED_PINE_LOG.get(), STRIPPED_WISTERIA_LOG.get(), STRIPPED_PLUM_LOG.get());
 		this.tag(Tags.Blocks.STRIPPED_WOODS).add(STRIPPED_WILLOW_WOOD.get(), STRIPPED_PINE_WOOD.get(), STRIPPED_WISTERIA_WOOD.get(), STRIPPED_PLUM_WOOD.get());
+
+		this.tag(Tags.Blocks.STORAGE_BLOCKS).addTags(STORAGE_BLOCKS_CHERRY, STORAGE_BLOCKS_PLUM, STORAGE_BLOCKS_DUCK_EGG, STORAGE_BLOCKS_CATTAIL_FLUFF);
+		this.tag(STORAGE_BLOCKS_CHERRY).add(CHERRY_CRATE.get());
+		this.tag(STORAGE_BLOCKS_PLUM).add(PLUM_CRATE.get());
+		this.tag(STORAGE_BLOCKS_DUCK_EGG).add(DUCK_EGG_CRATE.get());
+		this.tag(STORAGE_BLOCKS_CATTAIL_FLUFF).add(CATTAIL_FLUFF_BLOCK.get());
 	}
 }

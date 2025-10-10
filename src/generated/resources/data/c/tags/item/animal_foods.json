@@ -1,0 +1,9 @@
+{
+  "values": [
+    "#environmental:slabfish_food",
+    "#environmental:duck_food",
+    "#environmental:deer_food",
+    "#environmental:reindeer_food",
+    "#environmental:yak_food"
+  ]
+}

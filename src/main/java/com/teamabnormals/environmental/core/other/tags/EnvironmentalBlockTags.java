@@ -27,6 +27,11 @@ public class EnvironmentalBlockTags {
 	public static final TagKey<Block> MINEABLE_WITH_KNIFE = TagUtil.blockTag("farmersdelight", "mineable/knife");
 	public static final TagKey<Block> COMPOST_ACTIVATORS = TagUtil.blockTag("farmersdelight", "compost_activators");
 
+	public static final TagKey<Block> STORAGE_BLOCKS_PLUM = TagUtil.blockTag("c", "storage_blocks/plum");
+	public static final TagKey<Block> STORAGE_BLOCKS_CHERRY = TagUtil.blockTag("c", "storage_blocks/cherry");
+	public static final TagKey<Block> STORAGE_BLOCKS_DUCK_EGG = TagUtil.blockTag("c", "storage_blocks/duck_egg");
+	public static final TagKey<Block> STORAGE_BLOCKS_CATTAIL_FLUFF = TagUtil.blockTag("c", "storage_blocks/cattail_fluff");
+
 	private static TagKey<Block> blockTag(String tagName) {
 		return TagUtil.blockTag(Environmental.MOD_ID, tagName);
 	}

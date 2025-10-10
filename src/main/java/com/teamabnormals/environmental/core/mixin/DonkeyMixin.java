@@ -31,11 +31,11 @@ public abstract class DonkeyMixin extends AbstractChestedHorse {
 
 	@Inject(method = "getBreedOffspring", at = @At("HEAD"), cancellable = true)
 	public void getBreedOffspring(ServerLevel level, AgeableMob otherParent, CallbackInfoReturnable<AgeableMob> cir) {
-		if (otherParent instanceof Zebra) {
+		if (otherParent instanceof Zebra zebra) {
 			Zonkey zonkey = EnvironmentalEntityTypes.ZONKEY.get().create(level);
 			if (zonkey != null) {
 				zonkey.randomizeStripeOpacity(level.getRandom());
-				((Zebra) otherParent).setOffspringAttributes(this, zonkey);
+				zebra.setOffspringAttributes(this, zonkey);
 			}
 			cir.setReturnValue(zonkey);
 		}

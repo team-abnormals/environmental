@@ -22,7 +22,7 @@ public abstract class MoveControlMixin {
 	protected Mob mob;
 
 	@WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;getCollisionShape(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/phys/shapes/VoxelShape;"))
-	private VoxelShape place(BlockState state, BlockGetter level, BlockPos pos, Operation<VoxelShape> original) {
+	private VoxelShape tick(BlockState state, BlockGetter level, BlockPos pos, Operation<VoxelShape> original) {
 		return state.getCollisionShape(level, pos, CollisionContext.of(this.mob));
 	}
 }

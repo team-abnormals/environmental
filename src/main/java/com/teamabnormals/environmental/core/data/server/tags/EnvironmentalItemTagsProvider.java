@@ -31,6 +31,7 @@ public class EnvironmentalItemTagsProvider extends BlueprintItemTagsProvider {
 		super(Environmental.MOD_ID, output, provider, lookup, helper);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void addTags(Provider provider) {
 		this.copy(EnvironmentalBlockTags.WILLOW_LOGS, EnvironmentalItemTags.WILLOW_LOGS);
@@ -77,15 +78,29 @@ public class EnvironmentalItemTagsProvider extends BlueprintItemTagsProvider {
 		this.copy(BlockTags.DIRT, ItemTags.DIRT);
 		this.tag(EnvironmentalItemTags.CONVERTABLE_TO_MUD).add(Blocks.DIRT.asItem(), Blocks.COARSE_DIRT.asItem(), Blocks.ROOTED_DIRT.asItem());
 
-		this.tag(Tags.Items.FOODS_FRUIT).addTag(EnvironmentalItemTags.FOODS_CHERRY).addTag(EnvironmentalItemTags.FOODS_PLUM);
+		this.copy(EnvironmentalBlockTags.STORAGE_BLOCKS_CHERRY, EnvironmentalItemTags.STORAGE_BLOCKS_CHERRY);
+		this.copy(EnvironmentalBlockTags.STORAGE_BLOCKS_PLUM, EnvironmentalItemTags.STORAGE_BLOCKS_PLUM);
+		this.copy(EnvironmentalBlockTags.STORAGE_BLOCKS_DUCK_EGG, EnvironmentalItemTags.STORAGE_BLOCKS_DUCK_EGG);
+		this.copy(EnvironmentalBlockTags.STORAGE_BLOCKS_CATTAIL_FLUFF, EnvironmentalItemTags.STORAGE_BLOCKS_CATTAIL_FLUFF);
+
+		this.tag(Tags.Items.FOODS_FRUIT).addTags(EnvironmentalItemTags.FOODS_CHERRY, EnvironmentalItemTags.FOODS_PLUM);
 		this.tag(EnvironmentalItemTags.FOODS_PLUM).add(PLUM.get());
 		this.tag(EnvironmentalItemTags.FOODS_CHERRY).add(CHERRIES.get());
+
+		this.tag(Tags.Items.FOODS).add(TRUFFLE.get());
+		this.tag(ItemTags.MEAT).add(DUCK.get(), COOKED_DUCK.get(), VENISON.get(), COOKED_VENISON.get());
+		this.tag(Tags.Items.FOODS_RAW_MEAT).addTags(EnvironmentalItemTags.RAW_DUCK, EnvironmentalItemTags.RAW_VENISON);
+		this.tag(Tags.Items.FOODS_COOKED_MEAT).addTags(EnvironmentalItemTags.COOKED_DUCK, EnvironmentalItemTags.COOKED_VENISON);
 		this.tag(EnvironmentalItemTags.RAW_DUCK).add(DUCK.get());
 		this.tag(EnvironmentalItemTags.COOKED_DUCK).add(COOKED_DUCK.get());
 		this.tag(EnvironmentalItemTags.RAW_VENISON).add(VENISON.get());
 		this.tag(EnvironmentalItemTags.COOKED_VENISON).add(COOKED_VENISON.get());
-		this.tag(EnvironmentalItemTags.RAW_FISHES).addTag(EnvironmentalItemTags.RAW_FISHES_KOI);
-		this.tag(EnvironmentalItemTags.RAW_FISHES_KOI).add(KOI.get());
+		this.tag(Tags.Items.FOODS_RAW_FISH).add(KOI.get());
+
 		this.tag(Tags.Items.EGGS).add(DUCK_EGG.get());
+
+		this.tag(Tags.Items.BUCKETS_ENTITY_WATER).add(KOI_BUCKET.get(), SLABFISH_BUCKET.get());
+
+		this.tag(Tags.Items.ANIMAL_FOODS).addTags(EnvironmentalItemTags.SLABFISH_FOOD, EnvironmentalItemTags.DUCK_FOOD, EnvironmentalItemTags.DEER_FOOD, EnvironmentalItemTags.REINDEER_FOOD, EnvironmentalItemTags.YAK_FOOD);
 	}
 }

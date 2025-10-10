@@ -4,6 +4,7 @@ import com.teamabnormals.blueprint.core.util.TagUtil;
 import com.teamabnormals.environmental.core.Environmental;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 
 public class EnvironmentalItemTags {
 	public static final TagKey<Item> WILLOW_LOGS = itemTag("willow_logs");
@@ -14,12 +15,15 @@ public class EnvironmentalItemTags {
 	public static final TagKey<Item> FOODS_CHERRY = TagUtil.itemTag("c", "foods/cherry");
 	public static final TagKey<Item> FOODS_PLUM = TagUtil.itemTag("c", "foods/plum");
 
-	public static final TagKey<Item> RAW_DUCK = TagUtil.itemTag("c", "raw_duck");
-	public static final TagKey<Item> RAW_VENISON = TagUtil.itemTag("c", "raw_venison");
-	public static final TagKey<Item> RAW_FISHES = TagUtil.itemTag("c", "raw_fishes");
-	public static final TagKey<Item> RAW_FISHES_KOI = TagUtil.itemTag("c", "raw_fishes/koi");
-	public static final TagKey<Item> COOKED_DUCK = TagUtil.itemTag("c", "cooked_duck");
-	public static final TagKey<Item> COOKED_VENISON = TagUtil.itemTag("c", "cooked_venison");
+	public static final TagKey<Item> RAW_DUCK = TagUtil.itemTag("c", "foods/raw_duck");
+	public static final TagKey<Item> RAW_VENISON = TagUtil.itemTag("c", "foods/raw_venison");
+	public static final TagKey<Item> COOKED_DUCK = TagUtil.itemTag("c", "foods/cooked_duck");
+	public static final TagKey<Item> COOKED_VENISON = TagUtil.itemTag("c", "foods/cooked_venison");
+
+	public static final TagKey<Item> STORAGE_BLOCKS_PLUM = TagUtil.itemTag("c", "storage_blocks/plum");
+	public static final TagKey<Item> STORAGE_BLOCKS_CHERRY = TagUtil.itemTag("c", "storage_blocks/cherry");
+	public static final TagKey<Item> STORAGE_BLOCKS_DUCK_EGG = TagUtil.itemTag("c", "storage_blocks/duck_egg");
+	public static final TagKey<Item> STORAGE_BLOCKS_CATTAIL_FLUFF = TagUtil.itemTag("c", "storage_blocks/cattail_fluff");
 
 	public static final TagKey<Item> DUCK_FOOD = itemTag("duck_food");
 	public static final TagKey<Item> DEER_FOOD = itemTag("deer_food");

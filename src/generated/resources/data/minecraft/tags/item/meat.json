@@ -1,0 +1,8 @@
+{
+  "values": [
+    "environmental:duck",
+    "environmental:cooked_duck",
+    "environmental:venison",
+    "environmental:cooked_venison"
+  ]
+}

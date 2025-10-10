@@ -27,7 +27,7 @@ public class EnvironmentalBiomeTagsProvider extends BiomeTagsProvider {
 	public void addTags(Provider provider) {
 		this.tag(EnvironmentalBiomes.MARSH,
 				BiomeTags.IS_OVERWORLD,
-				BiomeTags.HAS_MINESHAFT, BiomeTags.STRONGHOLD_BIASED_TO, BiomeTags.HAS_RUINED_PORTAL_SWAMP, BiomeTags.HAS_SWAMP_HUT,
+				BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO, BiomeTags.HAS_RUINED_PORTAL_SWAMP, BiomeTags.HAS_SWAMP_HUT,
 				BiomeTags.HAS_CLOSER_WATER_FOG, BiomeTags.WATER_ON_MAP_OUTLINES,
 				Tags.Biomes.IS_WET_OVERWORLD, Tags.Biomes.IS_SWAMP,
 				EnvironmentalBiomeTags.SPAWNS_MUDDY_RABBITS,
@@ -36,28 +36,28 @@ public class EnvironmentalBiomeTagsProvider extends BiomeTagsProvider {
 
 		this.tag(EnvironmentalBiomes.BLOSSOM_WOODS,
 				BiomeTags.IS_OVERWORLD, BiomeTags.IS_FOREST,
-				BiomeTags.HAS_MINESHAFT, BiomeTags.STRONGHOLD_BIASED_TO,
+				BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO,
 				Tags.Biomes.IS_DENSE_VEGETATION_OVERWORLD,
 				EnvironmentalBiomeTags.SPAWNS_CHESTNUT_DEER
 		);
 
 		this.tag(EnvironmentalBiomes.BLOSSOM_VALLEYS,
 				BiomeTags.IS_OVERWORLD, BiomeTags.IS_FOREST,
-				BiomeTags.HAS_MINESHAFT, BiomeTags.STRONGHOLD_BIASED_TO,
+				BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO,
 				Tags.Biomes.IS_RARE, Tags.Biomes.IS_PLAINS,
 				EnvironmentalBiomeTags.SPAWNS_CHESTNUT_DEER
 		);
 
 		this.tag(EnvironmentalBiomes.PINE_BARRENS,
 				BiomeTags.IS_OVERWORLD, BiomeTags.IS_TAIGA,
-				BiomeTags.HAS_MINESHAFT, BiomeTags.STRONGHOLD_BIASED_TO, BiomeTags.HAS_TRAIL_RUINS,
+				BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO, BiomeTags.HAS_TRAIL_RUINS,
 				Tags.Biomes.IS_COLD_OVERWORLD, Tags.Biomes.IS_CONIFEROUS_TREE,
 				EnvironmentalBiomeTags.IS_PINE_BARRENS, EnvironmentalBiomeTags.HAS_LOG_CABIN
 		);
 
 		this.tag(EnvironmentalBiomes.SNOWY_PINE_BARRENS,
 				BiomeTags.IS_OVERWORLD, BiomeTags.IS_TAIGA,
-				BiomeTags.HAS_MINESHAFT, BiomeTags.STRONGHOLD_BIASED_TO, BiomeTags.HAS_TRAIL_RUINS,
+				BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO, BiomeTags.HAS_TRAIL_RUINS,
 				BiomeTags.SPAWNS_COLD_VARIANT_FROGS,
 				Tags.Biomes.IS_COLD_OVERWORLD, Tags.Biomes.IS_SNOWY, Tags.Biomes.IS_CONIFEROUS_TREE,
 				EnvironmentalBiomeTags.IS_PINE_BARRENS, EnvironmentalBiomeTags.HAS_LOG_CABIN
@@ -65,14 +65,14 @@ public class EnvironmentalBiomeTagsProvider extends BiomeTagsProvider {
 
 		this.tag(EnvironmentalBiomes.OLD_GROWTH_PINE_BARRENS,
 				BiomeTags.IS_OVERWORLD, BiomeTags.IS_TAIGA,
-				BiomeTags.HAS_MINESHAFT, BiomeTags.STRONGHOLD_BIASED_TO, BiomeTags.HAS_TRAIL_RUINS,
+				BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO, BiomeTags.HAS_TRAIL_RUINS,
 				Tags.Biomes.IS_COLD_OVERWORLD, Tags.Biomes.IS_CONIFEROUS_TREE, Tags.Biomes.IS_DENSE_VEGETATION_OVERWORLD, Tags.Biomes.IS_RARE,
 				EnvironmentalBiomeTags.IS_PINE_BARRENS, EnvironmentalBiomeTags.HAS_LOG_CABIN
 		);
 
 		this.tag(EnvironmentalBiomes.SNOWY_OLD_GROWTH_PINE_BARRENS,
 				BiomeTags.IS_OVERWORLD, BiomeTags.IS_TAIGA,
-				BiomeTags.HAS_MINESHAFT, BiomeTags.STRONGHOLD_BIASED_TO, BiomeTags.HAS_TRAIL_RUINS,
+				BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO, BiomeTags.HAS_TRAIL_RUINS,
 				BiomeTags.SPAWNS_COLD_VARIANT_FROGS,
 				Tags.Biomes.IS_COLD_OVERWORLD, Tags.Biomes.IS_SNOWY, Tags.Biomes.IS_CONIFEROUS_TREE, Tags.Biomes.IS_DENSE_VEGETATION_OVERWORLD, Tags.Biomes.IS_RARE,
 				EnvironmentalBiomeTags.IS_PINE_BARRENS, EnvironmentalBiomeTags.HAS_LOG_CABIN
@@ -80,7 +80,7 @@ public class EnvironmentalBiomeTagsProvider extends BiomeTagsProvider {
 
 		this.tag(EnvironmentalBiomes.PINE_SLOPES,
 				BiomeTags.IS_OVERWORLD, BiomeTags.IS_MOUNTAIN,
-				BiomeTags.HAS_MINESHAFT, BiomeTags.STRONGHOLD_BIASED_TO,
+				BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO,
 				Tags.Biomes.IS_COLD_OVERWORLD, Tags.Biomes.IS_CONIFEROUS_TREE, Tags.Biomes.IS_MOUNTAIN_SLOPE,
 				EnvironmentalBiomeTags.SPAWNS_GRAY_RABBITS
 		);

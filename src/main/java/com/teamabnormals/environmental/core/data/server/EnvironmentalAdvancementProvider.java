@@ -51,7 +51,6 @@ public class EnvironmentalAdvancementProvider implements AdvancementGenerator {
 				.addCriterion("backpack_slabfish", EnvironmentalCriteriaTriggers.backpackSlabfish())
 				.save(consumer, Environmental.MOD_ID + ":husbandry/backpack_slabfish");
 
-
 		createAdvancement("place_koi_in_village", "husbandry", ResourceLocation.withDefaultNamespace("husbandry/tactical_fishing"), EnvironmentalItems.KOI_BUCKET.get(), AdvancementType.TASK, true, true, false)
 				.addCriterion("place_koi_in_village", ItemUsedOnLocationTrigger.TriggerInstance.itemUsedOnBlock(LocationPredicate.Builder.location().setStructures(provider.lookupOrThrow(Registries.STRUCTURE).get(StructureTags.VILLAGE).get()), ItemPredicate.Builder.item().of(EnvironmentalItems.KOI_BUCKET)))
 				.save(consumer, Environmental.MOD_ID + ":husbandry/place_koi_in_village");

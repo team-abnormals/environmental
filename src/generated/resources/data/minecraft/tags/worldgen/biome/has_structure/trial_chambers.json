@@ -1,0 +1,12 @@
+{
+  "values": [
+    "environmental:marsh",
+    "environmental:blossom_woods",
+    "environmental:blossom_valleys",
+    "environmental:pine_barrens",
+    "environmental:snowy_pine_barrens",
+    "environmental:old_growth_pine_barrens",
+    "environmental:snowy_old_growth_pine_barrens",
+    "environmental:pine_slopes"
+  ]
+}
