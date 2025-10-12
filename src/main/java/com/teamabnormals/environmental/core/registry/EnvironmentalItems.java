@@ -73,9 +73,6 @@ public class EnvironmentalItems {
 	public static final DeferredItem<Item> LUMBERER_BANNER_PATTERN = ITEMS.createItem("lumberer_banner_pattern", () -> new BannerPatternItem(EnvironmentalBannerPatternTags.PATTERN_ITEM_LUMBERER, new Item.Properties().stacksTo(1)));
 	public static final DeferredItem<Item> HELPER_BANNER_PATTERN = ITEMS.createItem("helper_banner_pattern", () -> new BannerPatternItem(EnvironmentalBannerPatternTags.PATTERN_ITEM_HELPER, new Item.Properties().stacksTo(1)));
 
-	public static final DeferredItem<Item> LARGE_LILY_PAD = ITEMS.createItem("large_lily_pad", () -> new LargeLilyPadItem(new Item.Properties()));
-	public static final DeferredItem<Item> GIANT_LILY_PAD = ITEMS.createItem("giant_lily_pad", () -> new GiantLilyPadItem(new Item.Properties()));
-
 	public static final DeferredItem<Item> SLABFISH_BUCKET = ITEMS.createItem("slabfish_bucket", () -> new SlabfishBucketItem(new Item.Properties().stacksTo(1)));
 	public static final DeferredItem<Item> KOI_BUCKET = ITEMS.createItem("koi_bucket", () -> new KoiBucketItem(new Item.Properties().stacksTo(1)));
 

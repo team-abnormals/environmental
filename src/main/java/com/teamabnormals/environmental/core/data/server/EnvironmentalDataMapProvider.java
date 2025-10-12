@@ -32,8 +32,6 @@ public class EnvironmentalDataMapProvider extends DataMapProvider {
 				.add(YAK_HAIR_RUG.getId(), new FurnaceFuel(67), false);
 
 		this.builder(NeoForgeDataMaps.COMPOSTABLES)
-				.add(LARGE_LILY_PAD.getId(), new Compostable(0.85F), false)
-				.add(GIANT_LILY_PAD.getId(), new Compostable(1.0F), false)
 				.add(WILLOW_LEAVES.getId(), new Compostable(0.30F), false)
 				.add(WILLOW_SAPLING.getId(), new Compostable(0.30F), false)
 				.add(HANGING_WILLOW_LEAVES.getId(), new Compostable(0.30F), false)

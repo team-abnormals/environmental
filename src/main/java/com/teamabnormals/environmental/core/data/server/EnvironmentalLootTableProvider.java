@@ -176,8 +176,6 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.add(DUCKWEED_THATCH_SLAB.get(), this::createSlabItemTable);
 
 			this.add(BURIED_TRUFFLE.get(), (block) -> createSingleItemTableWithSilkTouch(block, EnvironmentalItems.TRUFFLE.get()));
-			this.dropOther(LARGE_LILY_PAD.get(), Blocks.LILY_PAD);
-			this.dropOther(GIANT_LILY_PAD.get(), Blocks.LILY_PAD);
 			this.dropOther(DIRT_PATH.get(), Blocks.DIRT);
 			this.dropOther(MYCELIUM_PATH.get(), Blocks.DIRT);
 			this.dropOther(PODZOL_PATH.get(), Blocks.DIRT);

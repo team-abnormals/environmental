@@ -31,7 +31,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.MapColor;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -72,8 +71,6 @@ public class EnvironmentalBlocks {
 	// Foliage //
 
 	public static final DeferredBlock<Block> DUCKWEED = BLOCKS.createBlockNoItem("duckweed", () -> new DuckweedBlock(EnvironmentalProperties.DUCKWEED));
-	public static final DeferredBlock<Block> LARGE_LILY_PAD = BLOCKS.createBlockNoItem("large_lily_pad", () -> new LargeLilyPadBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.LILY_PAD)));
-	public static final DeferredBlock<Block> GIANT_LILY_PAD = BLOCKS.createBlockNoItem("giant_lily_pad", () -> new GiantLilyPadBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.LILY_PAD)));
 
 	public static final DeferredBlock<Block> MYCELIUM_SPROUTS = BLOCKS.createBlock("mycelium_sprouts", () -> new MyceliumSproutsBlock(EnvironmentalProperties.MYCELIUM_SPROUTS));
 	public static final DeferredBlock<Block> GIANT_TALL_GRASS = BLOCKS.createBlock("giant_tall_grass", () -> new DoublePlantBlock(Block.Properties.ofFullCopy(Blocks.TALL_GRASS)));
@@ -373,7 +370,7 @@ public class EnvironmentalBlocks {
 				.addItemsAfter(of(Blocks.MYCELIUM), MYCELIUM_PATH)
 				.addItemsAfter(of(Blocks.DIRT), DIRT_PATH)
 				.addItemsBefore(of(Blocks.FARMLAND), BURIED_TRUFFLE)
-				.addItemsAfter(of(Blocks.LILY_PAD), LARGE_LILY_PAD, GIANT_LILY_PAD, DUCKWEED)
+				.addItemsAfter(of(Blocks.LILY_PAD), DUCKWEED)
 				.addItemsAfter(of(Blocks.SUGAR_CANE), CATTAIL)
 				.addItemsAfter(of(Blocks.FERN), MYCELIUM_SPROUTS, DWARF_SPRUCE)
 				.addItemsAfter(of(Blocks.TALL_GRASS), GIANT_TALL_GRASS)

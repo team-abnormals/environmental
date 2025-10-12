@@ -12,10 +12,8 @@ import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.GrassColor;
-import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -50,8 +48,6 @@ public class EnvironmentalClientCompat {
 
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.MYCELIUM_SPROUTS.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.GIANT_TALL_GRASS.get(), RenderType.cutout());
-		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.LARGE_LILY_PAD.get(), RenderType.cutout());
-		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.GIANT_LILY_PAD.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.DUCKWEED.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.CACTUS_BOBBLE.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.CUP_LICHEN.get(), RenderType.cutout());
@@ -211,9 +207,6 @@ public class EnvironmentalClientCompat {
 				EnvironmentalBlocks.WILLOW_LEAVES.get(), EnvironmentalBlocks.HANGING_WILLOW_LEAVES.get(), EnvironmentalBlocks.WILLOW_LEAF_PILE.get(),
 				EnvironmentalBlocks.PINE_LEAVES.get(), EnvironmentalBlocks.PINE_LEAF_PILE.get()
 		);
-		event.register((state, level, pos, tintIndex) -> level != null && pos != null ? 2129968 : 7181897,
-				EnvironmentalBlocks.LARGE_LILY_PAD.get(), EnvironmentalBlocks.GIANT_LILY_PAD.get()
-		);
 	}
 
 	@SubscribeEvent
@@ -222,9 +215,5 @@ public class EnvironmentalClientCompat {
 		event.register((item, tintIndex) -> GrassColor.get(0.5D, 1.0D), EnvironmentalBlocks.GIANT_TALL_GRASS);
 		event.register((item, tintIndex) -> 7578444, EnvironmentalBlocks.PINE_LEAVES, EnvironmentalBlocks.PINE_LEAF_PILE);
 		event.register((item, tintIndex) -> 6975545, EnvironmentalBlocks.WILLOW_LEAVES, EnvironmentalBlocks.HANGING_WILLOW_LEAVES, EnvironmentalBlocks.WILLOW_LEAF_PILE);
-		event.register((item, tintIndex) -> {
-			BlockState state = ((BlockItem) item.getItem()).getBlock().defaultBlockState();
-			return blockColors.getColor(state, null, null, tintIndex);
-		}, EnvironmentalBlocks.LARGE_LILY_PAD, EnvironmentalBlocks.GIANT_LILY_PAD);
 	}
 }

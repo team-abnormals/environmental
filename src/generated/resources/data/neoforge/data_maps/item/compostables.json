@@ -72,9 +72,6 @@
     "environmental:dwarf_spruce": {
       "chance": 0.5
     },
-    "environmental:giant_lily_pad": {
-      "chance": 1.0
-    },
     "environmental:giant_tall_grass": {
       "chance": 0.65
     },
@@ -92,9 +89,6 @@
     },
     "environmental:hibiscus_leaves": {
       "chance": 0.5
-    },
-    "environmental:large_lily_pad": {
-      "chance": 0.85
     },
     "environmental:magenta_hibiscus": {
       "chance": 0.65

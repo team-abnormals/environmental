@@ -2,8 +2,6 @@
   "values": [
     "environmental:cattail_sprout",
     "environmental:cattail",
-    "environmental:large_lily_pad",
-    "environmental:giant_lily_pad",
     "environmental:giant_tall_grass",
     "environmental:mycelium_sprouts",
     "environmental:cup_lichen",

@@ -77,9 +77,6 @@ public class EnvironmentalSoundEvents {
 
 	public static final DeferredHolder<SoundEvent, SoundEvent> SHOVEL_DIG = SOUND_EVENTS.createSoundEvent("item.shovel.dig");
 
-	public static final DeferredHolder<SoundEvent, SoundEvent> LARGE_LILY_PAD_BOUNCE = SOUND_EVENTS.createSoundEvent("block.large_lily_pad.bounce");
-	public static final DeferredHolder<SoundEvent, SoundEvent> GIANT_LILY_PAD_BOUNCE = SOUND_EVENTS.createSoundEvent("block.giant_lily_pad.bounce");
-
 	public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_DISC_SLABRAVE = SOUND_EVENTS.createSoundEvent("music_disc.slabrave");
 	public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_DISC_LEAVING_HOME = SOUND_EVENTS.createSoundEvent("music_disc.leaving_home");
 }

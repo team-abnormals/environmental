@@ -3,8 +3,6 @@ package com.teamabnormals.environmental.core.other;
 import com.google.common.collect.Sets;
 import com.teamabnormals.blueprint.common.world.storage.tracking.IDataManager;
 import com.teamabnormals.blueprint.core.util.MathUtil;
-import com.teamabnormals.environmental.common.block.GiantLilyPadBlock;
-import com.teamabnormals.environmental.common.block.LargeLilyPadBlock;
 import com.teamabnormals.environmental.common.entity.ai.goal.CatLeapAtDwarfSpruceGoal;
 import com.teamabnormals.environmental.common.entity.ai.goal.HuntTruffleGoal;
 import com.teamabnormals.environmental.common.entity.animal.koi.Koi;
@@ -433,20 +431,6 @@ public class EnvironmentalEvents {
 		if (state.is(Blocks.TALL_GRASS)) {
 			if (!level.isClientSide()) {
 				DoublePlantBlock.placeAt(level, EnvironmentalBlocks.GIANT_TALL_GRASS.get().defaultBlockState(), state.getValue(DoublePlantBlock.HALF) == DoubleBlockHalf.LOWER ? pos : pos.below(), 2);
-			}
-			event.setSuccessful(true);
-			event.setCanceled(true);
-		}
-
-		if (state.is(Blocks.LILY_PAD)) {
-			if (!level.isClientSide() && random.nextInt(3) == 0) {
-				if (random.nextBoolean()) {
-					if (LargeLilyPadBlock.checkPositions(level, pos, EnvironmentalBlocks.LARGE_LILY_PAD.get().defaultBlockState())) {
-						LargeLilyPadBlock.placeAt(level, pos, EnvironmentalBlocks.LARGE_LILY_PAD.get().defaultBlockState(), 3);
-					}
-				} else if (GiantLilyPadBlock.checkPositions(level, pos, EnvironmentalBlocks.GIANT_LILY_PAD.get().defaultBlockState())) {
-					GiantLilyPadBlock.placeAt(level, pos, EnvironmentalBlocks.GIANT_LILY_PAD.get().defaultBlockState(), 3);
-				}
 			}
 			event.setSuccessful(true);
 			event.setCanceled(true);
