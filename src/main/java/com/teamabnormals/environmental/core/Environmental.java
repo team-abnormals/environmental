@@ -50,7 +50,7 @@ public class Environmental {
 		EnvironmentalEntityTypes.ENTITY_TYPES.register(bus);
 		EnvironmentalSoundEvents.SOUND_EVENTS.register(bus);
 		EnvironmentalFeatures.FEATURES.register(bus);
-		EnvironmentalFeatures.TREE_DECORATORS.register(bus);
+		EnvironmentalTreeDecorators.TREE_DECORATORS.register(bus);
 		EnvironmentalMobEffects.MOB_EFFECTS.register(bus);
 		EnvironmentalMenuTypes.MENUS.register(bus);
 		EnvironmentalParticleTypes.PARTICLE_TYPES.register(bus);

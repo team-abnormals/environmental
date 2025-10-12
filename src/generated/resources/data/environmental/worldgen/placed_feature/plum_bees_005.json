@@ -1,12 +1,12 @@
 {
-  "feature": "environmental:plum_bees_005",
+  "feature": "environmental:plum_bees_005_fallen_leaves",
   "placement": [
     {
       "type": "minecraft:block_predicate_filter",
       "predicate": {
         "type": "minecraft:would_survive",
         "state": {
-          "Name": "minecraft:oak_sapling",
+          "Name": "environmental:plum_sapling",
           "Properties": {
             "stage": "0"
           }

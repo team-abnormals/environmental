@@ -1,7 +1,7 @@
 package com.teamabnormals.environmental.common.levelgen.feature;
 
 import com.mojang.serialization.Codec;
-import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures.EnvironmentalConfiguredFeatures;
+import com.teamabnormals.environmental.core.registry.datapack.EnvironmentalConfiguredFeatures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.registries.Registries;

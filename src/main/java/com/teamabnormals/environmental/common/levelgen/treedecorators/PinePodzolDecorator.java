@@ -1,7 +1,7 @@
 package com.teamabnormals.environmental.common.levelgen.treedecorators;
 
 import com.mojang.serialization.MapCodec;
-import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures;
+import com.teamabnormals.environmental.core.registry.EnvironmentalTreeDecorators;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
@@ -18,7 +18,7 @@ public class PinePodzolDecorator extends TreeDecorator {
 
 	@Override
 	protected TreeDecoratorType<?> type() {
-		return EnvironmentalFeatures.PINE_PODZOL.get();
+		return EnvironmentalTreeDecorators.PINE_PODZOL.get();
 	}
 
 	@Override

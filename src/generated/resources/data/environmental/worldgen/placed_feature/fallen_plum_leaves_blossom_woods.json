@@ -1,9 +1,9 @@
 {
-  "feature": "environmental:fallen_plum_leaves",
+  "feature": "environmental:fallen_leaves_blossom_woods",
   "placement": [
     {
       "type": "minecraft:count",
-      "count": 3
+      "count": 1
     },
     {
       "type": "minecraft:in_square"

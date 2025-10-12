@@ -6,7 +6,7 @@ import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 
-import static com.teamabnormals.environmental.core.registry.EnvironmentalFeatures.EnvironmentalPlacedFeatures.*;
+import static com.teamabnormals.environmental.core.registry.datapack.EnvironmentalPlacedFeatures.*;
 
 public class EnvironmentalGeneration {
 

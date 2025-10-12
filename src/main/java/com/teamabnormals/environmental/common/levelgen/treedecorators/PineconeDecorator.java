@@ -3,7 +3,7 @@ package com.teamabnormals.environmental.common.levelgen.treedecorators;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
-import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures;
+import com.teamabnormals.environmental.core.registry.EnvironmentalTreeDecorators;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelSimulatedReader;
@@ -40,6 +40,6 @@ public class PineconeDecorator extends TreeDecorator {
 
 	@Override
 	protected TreeDecoratorType<?> type() {
-		return EnvironmentalFeatures.PINECONE.get();
+		return EnvironmentalTreeDecorators.PINECONE.get();
 	}
 }

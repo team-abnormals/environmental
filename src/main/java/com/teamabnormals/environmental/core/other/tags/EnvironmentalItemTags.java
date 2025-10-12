@@ -4,7 +4,6 @@ import com.teamabnormals.blueprint.core.util.TagUtil;
 import com.teamabnormals.environmental.core.Environmental;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
 
 public class EnvironmentalItemTags {
 	public static final TagKey<Item> WILLOW_LOGS = itemTag("willow_logs");

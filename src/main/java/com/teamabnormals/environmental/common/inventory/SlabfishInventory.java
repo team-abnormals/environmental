@@ -3,7 +3,6 @@ package com.teamabnormals.environmental.common.inventory;
 import com.teamabnormals.environmental.common.entity.animal.slabfish.Slabfish;
 import com.teamabnormals.environmental.common.slabfish.DynamicInventory;
 import com.teamabnormals.environmental.common.slabfish.SlabfishHelper;
-import com.teamabnormals.environmental.common.slabfish.SlabfishVariant;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.Tags;

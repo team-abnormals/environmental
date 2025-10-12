@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.teamabnormals.environmental.common.block.HangingWisteriaLeavesBlock;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
-import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures;
+import com.teamabnormals.environmental.core.registry.EnvironmentalTreeDecorators;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelSimulatedReader;
@@ -50,6 +50,6 @@ public class HangingWisteriaDecorator extends TreeDecorator {
 
 	@Override
 	protected TreeDecoratorType<?> type() {
-		return EnvironmentalFeatures.HANGING_WISTERIA_LEAVES.get();
+		return EnvironmentalTreeDecorators.HANGING_WISTERIA_LEAVES.get();
 	}
 }

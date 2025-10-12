@@ -5,6 +5,26 @@
       {
         "type": "minecraft:beehive",
         "probability": 0.002
+      },
+      {
+        "type": "environmental:fallen_leaves",
+        "provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "environmental:cheerful_plum_leaf_pile",
+            "Properties": {
+              "down": "true",
+              "east": "false",
+              "north": "false",
+              "south": "false",
+              "up": "false",
+              "waterlogged": "false",
+              "west": "false"
+            }
+          }
+        },
+        "radius": 4,
+        "y_spread": 3
       }
     ],
     "dirt_provider": {

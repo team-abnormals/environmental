@@ -4,7 +4,7 @@
     "provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "environmental:plum_leaf_pile",
+        "Name": "environmental:moody_plum_leaf_pile",
         "Properties": {
           "down": "true",
           "east": "false",

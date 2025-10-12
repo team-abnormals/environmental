@@ -41,13 +41,13 @@ public class EnvironmentalBiomeSlices {
 				.area(MARSH_AREA, MARSH)
 				.build(), LevelStem.OVERWORLD));
 
-		context.register(BLOSSOM_SLICE, new ModdedBiomeSlice(25, MultiNoiseModdedBiomeProvider.builder().biomes(entries::forEach)
+		context.register(BLOSSOM_SLICE, new ModdedBiomeSlice(30, MultiNoiseModdedBiomeProvider.builder().biomes(entries::forEach)
 				.area(BLOSSOM_WOODS_AREA, BLOSSOM_WOODS)
 				.area(BLOSSOM_VALLEYS_AREA, BLOSSOM_VALLEYS)
 				.build(), LevelStem.OVERWORLD));
 
 
-		context.register(PINE_SLICE, new ModdedBiomeSlice(25, MultiNoiseModdedBiomeProvider.builder().biomes(entries::forEach)
+		context.register(PINE_SLICE, new ModdedBiomeSlice(30, MultiNoiseModdedBiomeProvider.builder().biomes(entries::forEach)
 				.area(PINE_BARRENS_AREA, PINE_BARRENS)
 				.area(SNOWY_PINE_BARRENS_AREA, SNOWY_PINE_BARRENS)
 				.area(OLD_GROWTH_PINE_BARRENS_AREA, OLD_GROWTH_PINE_BARRENS)
@@ -83,25 +83,25 @@ public class EnvironmentalBiomeSlices {
 		private final ResourceKey<Biome>[][] MIDDLE_BIOMES = new ResourceKey[][]{
 				{VANILLA, VANILLA, VANILLA, SNOWY_PINE_BARRENS_AREA, VANILLA},
 				{VANILLA, VANILLA, VANILLA, PINE_BARRENS_AREA, PINE_BARRENS_AREA},
-				{VANILLA, VANILLA, VANILLA, BLOSSOM_WOODS_AREA, VANILLA},
+				{VANILLA, VANILLA, BLOSSOM_WOODS_AREA, BLOSSOM_WOODS_AREA, VANILLA},
 				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA},
 				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA}};
 		private final ResourceKey<Biome>[][] MIDDLE_BIOMES_VARIANT = new ResourceKey[][]{
 				{null, null, null, SNOWY_OLD_GROWTH_PINE_BARRENS_AREA, null},
 				{null, null, null, null, OLD_GROWTH_PINE_BARRENS_AREA},
-				{null, null, null, null, null},
+				{null, null, null, BLOSSOM_WOODS_AREA, null},
 				{null, null, null, null, null},
 				{null, null, null, null, null}};
 		private final ResourceKey<Biome>[][] PLATEAU_BIOMES = new ResourceKey[][]{
 				{VANILLA, VANILLA, VANILLA, SNOWY_PINE_BARRENS_AREA, SNOWY_PINE_BARRENS_AREA},
 				{VANILLA, VANILLA, BLOSSOM_WOODS_AREA, PINE_BARRENS_AREA, PINE_BARRENS_AREA},
-				{VANILLA, VANILLA, BLOSSOM_WOODS_AREA, BLOSSOM_WOODS_AREA, VANILLA},
+				{VANILLA, VANILLA, BLOSSOM_WOODS_AREA, BLOSSOM_VALLEYS_AREA, VANILLA},
 				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA},
 				{VANILLA, VANILLA, VANILLA, VANILLA, VANILLA}};
 		private final ResourceKey<Biome>[][] PLATEAU_BIOMES_VARIANT = new ResourceKey[][]{
 				{null, null, null, null, null},
-				{null, null, null, BLOSSOM_VALLEYS_AREA, null},
-				{null, null, BLOSSOM_WOODS_AREA, BLOSSOM_VALLEYS_AREA, null},
+				{null, null, BLOSSOM_VALLEYS_AREA, BLOSSOM_WOODS_AREA, null},
+				{null, null, BLOSSOM_VALLEYS_AREA, BLOSSOM_WOODS_AREA, null},
 				{null, null, null, null, null},
 				{null, null, null, null, null}};
 		private final ResourceKey<Biome>[][] SHATTERED_BIOMES = new ResourceKey[][]{

@@ -4,7 +4,7 @@
     "decorators": [
       {
         "type": "minecraft:beehive",
-        "probability": 0.002
+        "probability": 0.05
       },
       {
         "type": "environmental:fallen_leaves",

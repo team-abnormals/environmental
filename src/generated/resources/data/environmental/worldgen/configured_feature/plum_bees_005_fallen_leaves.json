@@ -4,14 +4,14 @@
     "decorators": [
       {
         "type": "minecraft:beehive",
-        "probability": 0.002
+        "probability": 0.05
       },
       {
         "type": "environmental:fallen_leaves",
         "provider": {
           "type": "minecraft:simple_state_provider",
           "state": {
-            "Name": "environmental:moody_plum_leaf_pile",
+            "Name": "environmental:plum_leaf_pile",
             "Properties": {
               "down": "true",
               "east": "false",
@@ -42,7 +42,7 @@
     "foliage_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "environmental:moody_plum_leaves",
+        "Name": "environmental:plum_leaves",
         "Properties": {
           "distance": "7",
           "persistent": "false",
@@ -60,8 +60,8 @@
     },
     "trunk_placer": {
       "type": "minecraft:straight_trunk_placer",
-      "base_height": 3,
-      "height_rand_a": 1,
+      "base_height": 4,
+      "height_rand_a": 2,
       "height_rand_b": 0
     },
     "trunk_provider": {

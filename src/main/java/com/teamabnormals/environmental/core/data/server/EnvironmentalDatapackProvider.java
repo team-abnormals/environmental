@@ -4,8 +4,6 @@ import com.teamabnormals.blueprint.core.registry.BlueprintDataPackRegistries;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.data.server.modifiers.EnvironmentalBiomeModifiers;
 import com.teamabnormals.environmental.core.data.server.modifiers.EnvironmentalBiomeSlices;
-import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures.EnvironmentalConfiguredFeatures;
-import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures.EnvironmentalPlacedFeatures;
 import com.teamabnormals.environmental.core.registry.EnvironmentalRegistries;
 import com.teamabnormals.environmental.core.registry.datapack.*;
 import com.teamabnormals.environmental.core.registry.datapack.slabfish.EnvironmentalSlabfishBackpacks;

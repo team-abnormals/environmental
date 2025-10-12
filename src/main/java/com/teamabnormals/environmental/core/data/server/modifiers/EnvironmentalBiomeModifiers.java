@@ -7,7 +7,7 @@ import com.teamabnormals.environmental.core.registry.EnvironmentalBiomeModifierT
 import com.teamabnormals.environmental.core.registry.EnvironmentalBiomeModifierTypes.InvertedRemoveSpawnsBiomeModifier;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBiomeModifierTypes.InvertedRemoveSpawnsIgnoreBiomeModifier;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
-import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures.EnvironmentalPlacedFeatures;
+import com.teamabnormals.environmental.core.registry.datapack.EnvironmentalPlacedFeatures;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;

@@ -1,6 +1,6 @@
 package com.teamabnormals.environmental.core.other;
 
-import com.teamabnormals.environmental.core.registry.EnvironmentalFeatures.EnvironmentalConfiguredFeatures;
+import com.teamabnormals.environmental.core.registry.datapack.EnvironmentalConfiguredFeatures;
 import net.minecraft.world.level.block.grower.TreeGrower;
 
 import java.util.Optional;
