@@ -5,6 +5,7 @@ import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalEntityTypeTags;
 import com.teamabnormals.environmental.core.registry.datapack.EnvironmentalDamageTypes;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
@@ -17,6 +18,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -260,11 +262,11 @@ public interface Zebroid {
 					knockback *= 0.8F;
 				}
 
-				boolean flag = living.hurt(source, (int) damage);
+				if (living.hurt(source, (int) damage)) {
+					if (horse.level() instanceof ServerLevel serverLevel) {
+						EnchantmentHelper.doPostAttackEffects(serverLevel, living, source);
+					}
 
-				if (flag) {
-					//TODO: Reimplement?
-					//horse.doEnchantDamageEffects(horse, living);
 					if (!backKick)
 						living.knockback(knockback, x, z);
 					else

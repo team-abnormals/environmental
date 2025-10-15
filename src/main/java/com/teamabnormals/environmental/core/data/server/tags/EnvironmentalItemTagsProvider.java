@@ -89,12 +89,12 @@ public class EnvironmentalItemTagsProvider extends BlueprintItemTagsProvider {
 
 		this.tag(Tags.Items.FOODS).add(TRUFFLE.get());
 		this.tag(ItemTags.MEAT).add(DUCK.get(), COOKED_DUCK.get(), VENISON.get(), COOKED_VENISON.get());
-		this.tag(Tags.Items.FOODS_RAW_MEAT).addTags(EnvironmentalItemTags.RAW_DUCK, EnvironmentalItemTags.RAW_VENISON);
-		this.tag(Tags.Items.FOODS_COOKED_MEAT).addTags(EnvironmentalItemTags.COOKED_DUCK, EnvironmentalItemTags.COOKED_VENISON);
-		this.tag(EnvironmentalItemTags.RAW_DUCK).add(DUCK.get());
-		this.tag(EnvironmentalItemTags.COOKED_DUCK).add(COOKED_DUCK.get());
-		this.tag(EnvironmentalItemTags.RAW_VENISON).add(VENISON.get());
-		this.tag(EnvironmentalItemTags.COOKED_VENISON).add(COOKED_VENISON.get());
+		this.tag(Tags.Items.FOODS_RAW_MEAT).addTags(EnvironmentalItemTags.FOODS_RAW_DUCK, EnvironmentalItemTags.FOODS_RAW_VENISON);
+		this.tag(Tags.Items.FOODS_COOKED_MEAT).addTags(EnvironmentalItemTags.FOODS_COOKED_DUCK, EnvironmentalItemTags.FOODS_COOKED_VENISON);
+		this.tag(EnvironmentalItemTags.FOODS_RAW_DUCK).add(DUCK.get());
+		this.tag(EnvironmentalItemTags.FOODS_COOKED_DUCK).add(COOKED_DUCK.get());
+		this.tag(EnvironmentalItemTags.FOODS_RAW_VENISON).add(VENISON.get());
+		this.tag(EnvironmentalItemTags.FOODS_COOKED_VENISON).add(COOKED_VENISON.get());
 		this.tag(Tags.Items.FOODS_RAW_FISH).add(KOI.get());
 
 		this.tag(Tags.Items.EGGS).add(DUCK_EGG.get());

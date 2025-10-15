@@ -14,10 +14,10 @@ public class EnvironmentalItemTags {
 	public static final TagKey<Item> FOODS_CHERRY = TagUtil.itemTag("c", "foods/cherry");
 	public static final TagKey<Item> FOODS_PLUM = TagUtil.itemTag("c", "foods/plum");
 
-	public static final TagKey<Item> RAW_DUCK = TagUtil.itemTag("c", "foods/raw_duck");
-	public static final TagKey<Item> RAW_VENISON = TagUtil.itemTag("c", "foods/raw_venison");
-	public static final TagKey<Item> COOKED_DUCK = TagUtil.itemTag("c", "foods/cooked_duck");
-	public static final TagKey<Item> COOKED_VENISON = TagUtil.itemTag("c", "foods/cooked_venison");
+	public static final TagKey<Item> FOODS_RAW_DUCK = TagUtil.itemTag("c", "foods/raw_duck");
+	public static final TagKey<Item> FOODS_RAW_VENISON = TagUtil.itemTag("c", "foods/raw_venison");
+	public static final TagKey<Item> FOODS_COOKED_DUCK = TagUtil.itemTag("c", "foods/cooked_duck");
+	public static final TagKey<Item> FOODS_COOKED_VENISON = TagUtil.itemTag("c", "foods/cooked_venison");
 
 	public static final TagKey<Item> STORAGE_BLOCKS_PLUM = TagUtil.itemTag("c", "storage_blocks/plum");
 	public static final TagKey<Item> STORAGE_BLOCKS_CHERRY = TagUtil.itemTag("c", "storage_blocks/cherry");
