@@ -16,7 +16,6 @@ import net.neoforged.neoforge.client.model.generators.ModelFile.UncheckedModelFi
 import net.neoforged.neoforge.client.model.generators.MultiPartBlockStateBuilder;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredBlock;
-import net.neoforged.neoforge.registries.DeferredHolder;
 
 import static com.teamabnormals.environmental.core.registry.EnvironmentalBlocks.*;
 
@@ -102,12 +101,6 @@ public class EnvironmentalBlockStateProvider extends BlueprintBlockStateProvider
 		this.crossBlockWithPot(TASSELFLOWER, POTTED_TASSELFLOWER);
 		this.crossBlockWithPot(WHITE_LOTUS_FLOWER, POTTED_WHITE_LOTUS_FLOWER);
 		this.crossBlockWithPot(RED_LOTUS_FLOWER, POTTED_RED_LOTUS_FLOWER);
-	}
-
-	@Override
-	public void leavesBlock(DeferredHolder<Block, ?> leaves) {
-		this.simpleBlock(leaves.get(), models().getBuilder(name(leaves.get())).parent(new UncheckedModelFile(ResourceLocation.withDefaultNamespace("block/leaves"))).texture("all", blockTexture(leaves.get())));
-		this.blockItem(leaves);
 	}
 
 	public void cubeColumnBlock(DeferredBlock<Block> block) {
