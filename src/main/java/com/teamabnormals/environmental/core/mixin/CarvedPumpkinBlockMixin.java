@@ -1,6 +1,7 @@
 package com.teamabnormals.environmental.core.mixin;
 
 import com.teamabnormals.environmental.common.entity.animal.PineconeGolem;
+import com.teamabnormals.environmental.core.EnvironmentalConfig;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalBlockTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -23,15 +24,16 @@ public final class CarvedPumpkinBlockMixin {
 
 	@Inject(method = "canSpawnGolem", at = @At("RETURN"), cancellable = true)
 	private void canSpawnGolem(LevelReader level, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-		if (level.getBlockState(pos.below()).is(EnvironmentalBlockTags.PINECONE_GOLEM_BASE_BLOCKS))
+		if (level.getBlockState(pos.below()).is(EnvironmentalBlockTags.PINECONE_GOLEM_BASE_BLOCKS) && EnvironmentalConfig.COMMON.pineconeGolems.get()) {
 			cir.setReturnValue(true);
+		}
 	}
 
 	@Inject(method = "trySpawnGolem", at = @At("HEAD"), cancellable = true)
 	private void trySpawnGolem(Level level, BlockPos pos, CallbackInfo ci) {
 		BlockPos belowpos = pos.below();
 		BlockState belowstate = level.getBlockState(pos.below());
-		if (belowstate.is(EnvironmentalBlockTags.PINECONE_GOLEM_BASE_BLOCKS)) {
+		if (belowstate.is(EnvironmentalBlockTags.PINECONE_GOLEM_BASE_BLOCKS) && EnvironmentalConfig.COMMON.pineconeGolems.get()) {
 			BlockState state = level.getBlockState(pos);
 			level.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
 			level.setBlock(belowpos, Blocks.AIR.defaultBlockState(), 2);

@@ -17,6 +17,7 @@ public class EnvironmentalConfig {
 		public final IntValue koiVerticalSerenityRange;
 		public final BooleanValue serenityEffect;
 
+		public final BooleanValue pigsHuntTruffles;
 		public final BooleanValue largerPigLitters;
 		public final IntValue minimumAdditionalPiglets;
 		public final IntValue maximumAdditionalPiglets;
@@ -34,15 +35,16 @@ public class EnvironmentalConfig {
 		public final BooleanValue muddyPigsDryOverTime;
 		public final BooleanValue muddyPigsOnlyDryInTheNether;
 
-		public final BooleanValue pigsHuntTruffles;
+		public final BooleanValue pineconeGolems;
 
 		public final BooleanValue cactusBobble;
 
 		Common(ModConfigSpec.Builder builder) {
 			builder.push("mobs");
+			pineconeGolems = builder.comment("If Pinecone Golems should be created when placing a Carved Pumpkin on top of a Pinecone").define("Pinecone Golems", true);
 			builder.push("deer");
 			deerFlowerReproducing = builder.comment("If Deer can reproduce and spread flowers by feeding them an Apple followed by a flower").define("Deer flower reproducing", true);
-			deerAntlerChance = builder.comment("The chance Deer have to spawn with Antlers; 0.0 for never, 1.0 for always").defineInRange("Deer Antler chance", 0.5D, 0.0D, 1.0D);
+			deerAntlerChance = builder.comment("The chance Deer have to spawn with Antlers; 0.0 for never, 1.0 for always").defineInRange("Deer antler chance", 0.5D, 0.0D, 1.0D);
 			builder.pop();
 			builder.push("koi");
 			blockOnlyNaturalSpawns = builder.comment("Make Koi only block natural spawns").define("Block only natural spawns", true);
