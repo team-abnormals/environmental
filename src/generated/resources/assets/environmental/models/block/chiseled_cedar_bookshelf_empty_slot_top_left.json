@@ -1,0 +1,6 @@
+{
+  "parent": "environmental:block/chiseled_cedar_bookshelf_slot_top_left",
+  "textures": {
+    "texture": "environmental:block/chiseled_cedar_bookshelf_empty"
+  }
+}

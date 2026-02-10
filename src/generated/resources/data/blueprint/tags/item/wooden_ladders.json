@@ -2,6 +2,7 @@
   "values": [
     "environmental:willow_ladder",
     "environmental:pine_ladder",
+    "environmental:cedar_ladder",
     "environmental:wisteria_ladder",
     "environmental:plum_ladder"
   ]

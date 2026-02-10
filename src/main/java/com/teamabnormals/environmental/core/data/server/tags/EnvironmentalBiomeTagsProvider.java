@@ -85,6 +85,39 @@ public class EnvironmentalBiomeTagsProvider extends BiomeTagsProvider {
 				EnvironmentalBiomeTags.SPAWNS_GRAY_RABBITS
 		);
 
+		this.tag(EnvironmentalBiomes.CEDAR_SWAMP,
+				BiomeTags.IS_OVERWORLD,
+				BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO, BiomeTags.HAS_RUINED_PORTAL_SWAMP, BiomeTags.HAS_SWAMP_HUT,
+				BiomeTags.HAS_CLOSER_WATER_FOG, BiomeTags.WATER_ON_MAP_OUTLINES,
+				Tags.Biomes.IS_WET_OVERWORLD, Tags.Biomes.IS_SWAMP,
+				EnvironmentalBiomeTags.SPAWNS_MUDDY_RABBITS,
+				EnvironmentalBiomeTags.HAS_MUD_DISK
+		);
+
+		this.tag(EnvironmentalBiomes.CEDAR_RIVER,
+				BiomeTags.IS_OVERWORLD,
+				BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO, BiomeTags.HAS_RUINED_PORTAL_SWAMP,
+				BiomeTags.HAS_CLOSER_WATER_FOG, BiomeTags.WATER_ON_MAP_OUTLINES,
+				Tags.Biomes.IS_WET_OVERWORLD, Tags.Biomes.IS_RIVER,
+				EnvironmentalBiomeTags.SPAWNS_MUDDY_RABBITS
+		);
+
+		this.tag(EnvironmentalBiomes.CEDAR_BANK,
+				BiomeTags.IS_OVERWORLD,
+				BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO, BiomeTags.HAS_RUINED_PORTAL_SWAMP,
+				BiomeTags.WATER_ON_MAP_OUTLINES,
+				Tags.Biomes.IS_WET_OVERWORLD, Tags.Biomes.IS_RIVER, Tags.Biomes.IS_SWAMP,
+				EnvironmentalBiomeTags.SPAWNS_MUDDY_RABBITS
+		);
+
+		this.tag(EnvironmentalBiomes.CEDAR_RIVERINE,
+				BiomeTags.IS_OVERWORLD,
+				BiomeTags.HAS_MINESHAFT, BiomeTags.HAS_TRIAL_CHAMBERS, BiomeTags.STRONGHOLD_BIASED_TO, BiomeTags.HAS_RUINED_PORTAL_SWAMP,
+				BiomeTags.WATER_ON_MAP_OUTLINES,
+				Tags.Biomes.IS_WET_OVERWORLD, Tags.Biomes.IS_RIVER, Tags.Biomes.IS_SWAMP,
+				EnvironmentalBiomeTags.SPAWNS_MUDDY_RABBITS
+		);
+
 		this.tag(EnvironmentalBiomeTags.HAS_SLABFISH).addTag(Tags.Biomes.IS_SWAMP);
 		this.tag(EnvironmentalBiomeTags.HAS_DUCK).addTag(Tags.Biomes.IS_SWAMP);
 		this.tag(EnvironmentalBiomeTags.HAS_DEER).addTag(BiomeTags.IS_FOREST);
@@ -100,7 +133,7 @@ public class EnvironmentalBiomeTagsProvider extends BiomeTagsProvider {
 		this.tag(EnvironmentalBiomeTags.HAS_PIG).addTag(BiomeTags.IS_FOREST).addTag(Tags.Biomes.IS_SWAMP);
 		this.tag(EnvironmentalBiomeTags.HAS_CHICKEN).addTag(BiomeTags.IS_FOREST).addTag(BiomeTags.IS_TAIGA).addTag(BiomeTags.IS_JUNGLE);
 
-		this.tag(EnvironmentalBiomeTags.HAS_CATTAILS).add(Biomes.RIVER, Biomes.SWAMP, Biomes.MANGROVE_SWAMP);
+		this.tag(EnvironmentalBiomeTags.HAS_CATTAILS).add(EnvironmentalBiomes.CEDAR_BANK, Biomes.RIVER, Biomes.SWAMP, Biomes.MANGROVE_SWAMP);
 		this.tag(EnvironmentalBiomeTags.HAS_CUP_LICHEN).addTag(BiomeTags.IS_TAIGA);
 		this.tag(EnvironmentalBiomeTags.HAS_SPARSE_DWARF_SPRUCE).addTag(BiomeTags.IS_TAIGA);
 		this.tag(EnvironmentalBiomeTags.HAS_BLUEBELL).add(Biomes.DARK_FOREST);

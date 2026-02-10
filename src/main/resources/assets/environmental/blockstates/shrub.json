@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "part=bottom,size=1": { "model": "environmental:block/shrub" },
+    "part=middle,size=1": { "model": "environmental:block/shrub" },
+    "part=top,size=1": { "model": "environmental:block/shrub" },
+    "part=bottom,size=2": { "model": "environmental:block/medium_shrub_bottom" },
+    "part=middle,size=2": { "model": "environmental:block/medium_shrub_top" },
+    "part=top,size=2": { "model": "environmental:block/medium_shrub_top" },
+    "part=bottom,size=3": { "model": "environmental:block/large_shrub_bottom" },
+    "part=middle,size=3": { "model": "environmental:block/large_shrub_top" },
+    "part=top,size=3": { "model": "environmental:block/large_shrub_top" },
+    "part=bottom,size=4": { "model": "environmental:block/huge_shrub_bottom" },
+    "part=middle,size=4": { "model": "environmental:block/huge_shrub_middle" },
+    "part=top,size=4": { "model": "environmental:block/huge_shrub_top" }
+  }
+}

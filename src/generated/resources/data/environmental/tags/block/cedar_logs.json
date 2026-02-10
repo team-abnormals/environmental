@@ -1,0 +1,8 @@
+{
+  "values": [
+    "environmental:cedar_log",
+    "environmental:cedar_wood",
+    "environmental:stripped_cedar_log",
+    "environmental:stripped_cedar_wood"
+  ]
+}

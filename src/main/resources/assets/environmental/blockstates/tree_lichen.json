@@ -1,0 +1,399 @@
+{
+  "multipart": [
+    {
+      "apply": { "model": "environmental:block/tree_lichen_0" },
+      "when": { "north": "true", "age": "0" }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_1" },
+      "when": { "north": "true", "age": "1" }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_2" },
+      "when": { "north": "true", "age": "2" }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_3" },
+      "when": { "north": "true", "age": "3" }
+    },
+
+    {
+      "apply": { "model": "environmental:block/tree_lichen_0" },
+      "when": {
+        "age": "0",
+        "down": "false",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_1" },
+      "when": {
+        "age": "1",
+        "down": "false",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_2" },
+      "when": {
+        "age": "2",
+        "down": "false",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_3" },
+      "when": {
+        "age": "3",
+        "down": "false",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+
+    {
+      "apply": { "model": "environmental:block/tree_lichen_0", "uvlock": true, "y": 90 },
+      "when": { "east": "true", "age": "0" }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_1", "uvlock": true, "y": 90 },
+      "when": { "east": "true", "age": "1" }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_2", "uvlock": true, "y": 90 },
+      "when": { "east": "true", "age": "2" }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_3", "uvlock": true, "y": 90 },
+      "when": { "east": "true", "age": "3" }
+    },
+
+    {
+      "apply": { "model": "environmental:block/tree_lichen_0", "uvlock": true, "y": 90 },
+      "when": {
+        "age": "0",
+        "down": "false",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_1", "uvlock": true, "y": 90 },
+      "when": {
+        "age": "1",
+        "down": "false",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_2", "uvlock": true, "y": 90 },
+      "when": {
+        "age": "2",
+        "down": "false",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_3", "uvlock": true, "y": 90 },
+      "when": {
+        "age": "3",
+        "down": "false",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+
+    {
+      "apply": { "model": "environmental:block/tree_lichen_0", "uvlock": true, "y": 180 },
+      "when": { "south": "true", "age": "0" }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_1", "uvlock": true, "y": 180 },
+      "when": { "south": "true", "age": "1" }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_2", "uvlock": true, "y": 180 },
+      "when": { "south": "true", "age": "2" }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_3", "uvlock": true, "y": 180 },
+      "when": { "south": "true", "age": "3" }
+    },
+
+    {
+      "apply": { "model": "environmental:block/tree_lichen_0", "uvlock": true, "y": 180 },
+      "when": {
+        "age": "0",
+        "down": "false",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_1", "uvlock": true, "y": 180 },
+      "when": {
+        "age": "1",
+        "down": "false",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_2", "uvlock": true, "y": 180 },
+      "when": {
+        "age": "2",
+        "down": "false",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_3", "uvlock": true, "y": 180 },
+      "when": {
+        "age": "3",
+        "down": "false",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+
+    {
+      "apply": { "model": "environmental:block/tree_lichen_0", "uvlock": true, "y": 270 },
+      "when": { "west": "true", "age": "0" }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_1", "uvlock": true, "y": 270 },
+      "when": { "west": "true", "age": "1" }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_2", "uvlock": true, "y": 270 },
+      "when": { "west": "true", "age": "2" }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_3", "uvlock": true, "y": 270 },
+      "when": { "west": "true", "age": "3" }
+    },
+
+    {
+      "apply": { "model": "environmental:block/tree_lichen_0", "uvlock": true, "y": 270 },
+      "when": {
+        "age": "0",
+        "down": "false",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_1", "uvlock": true, "y": 270 },
+      "when": {
+        "age": "1",
+        "down": "false",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_2", "uvlock": true, "y": 270 },
+      "when": {
+        "age": "2",
+        "down": "false",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_3", "uvlock": true, "y": 270 },
+      "when": {
+        "age": "3",
+        "down": "false",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+
+    {
+      "apply": { "model": "environmental:block/tree_lichen_0", "uvlock": true, "x": 270 },
+      "when": { "up": "true", "age": "0" }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_1", "uvlock": true, "x": 270 },
+      "when": { "up": "true", "age": "1" }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_2", "uvlock": true, "x": 270 },
+      "when": { "up": "true", "age": "2" }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_3", "uvlock": true, "x": 270 },
+      "when": { "up": "true", "age": "3" }
+    },
+
+    {
+      "apply": { "model": "environmental:block/tree_lichen_0", "uvlock": true, "x": 270 },
+      "when": {
+        "age": "0",
+        "down": "false",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_1", "uvlock": true, "x": 270 },
+      "when": {
+        "age": "1",
+        "down": "false",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_2", "uvlock": true, "x": 270 },
+      "when": {
+        "age": "2",
+        "down": "false",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_3", "uvlock": true, "x": 270 },
+      "when": {
+        "age": "3",
+        "down": "false",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+
+    {
+      "apply": { "model": "environmental:block/tree_lichen_0", "uvlock": true, "x": 90 },
+      "when": { "down": "true", "age": "0" }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_1", "uvlock": true, "x": 90 },
+      "when": { "down": "true", "age": "1" }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_2", "uvlock": true, "x": 90 },
+      "when": { "down": "true", "age": "2" }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_3", "uvlock": true, "x": 90 },
+      "when": { "down": "true", "age": "3" }
+    },
+
+    {
+      "apply": { "model": "environmental:block/tree_lichen_0", "uvlock": true, "x": 90 },
+      "when": {
+        "age": "0",
+        "down": "false",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_1", "uvlock": true, "x": 90 },
+      "when": {
+        "age": "1",
+        "down": "false",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_2", "uvlock": true, "x": 90 },
+      "when": {
+        "age": "2",
+        "down": "false",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": { "model": "environmental:block/tree_lichen_3", "uvlock": true, "x": 90 },
+      "when": {
+        "age": "3",
+        "down": "false",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    }
+  ]
+}

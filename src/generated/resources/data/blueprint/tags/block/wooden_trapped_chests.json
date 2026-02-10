@@ -2,6 +2,7 @@
   "values": [
     "environmental:trapped_willow_chest",
     "environmental:trapped_pine_chest",
+    "environmental:trapped_cedar_chest",
     "environmental:trapped_wisteria_chest",
     "environmental:trapped_plum_chest"
   ]

@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "environmental:block/muddy_sand"
+      },
+      {
+        "model": "environmental:block/muddy_sand",
+        "y": 90
+      },
+      {
+        "model": "environmental:block/muddy_sand",
+        "y": 180
+      },
+      {
+        "model": "environmental:block/muddy_sand",
+        "y": 270
+      }
+    ]
+  }
+}

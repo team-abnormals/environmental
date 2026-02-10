@@ -2,6 +2,7 @@
   "values": [
     "environmental:willow_door",
     "environmental:pine_door",
+    "environmental:cedar_door",
     "environmental:wisteria_door",
     "environmental:plum_door"
   ]

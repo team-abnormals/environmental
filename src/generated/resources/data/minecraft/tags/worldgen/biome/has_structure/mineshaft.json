@@ -7,6 +7,10 @@
     "environmental:snowy_pine_barrens",
     "environmental:old_growth_pine_barrens",
     "environmental:snowy_old_growth_pine_barrens",
-    "environmental:pine_slopes"
+    "environmental:pine_slopes",
+    "environmental:cedar_swamp",
+    "environmental:cedar_river",
+    "environmental:cedar_bank",
+    "environmental:cedar_riverine"
   ]
 }

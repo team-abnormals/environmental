@@ -1,0 +1,6 @@
+{
+  "parent": "environmental:block/extended_cross",
+  "textures": {
+    "cross": "environmental:block/huge_shrub_top"
+  }
+}

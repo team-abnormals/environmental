@@ -1,0 +1,6 @@
+{
+  "parent": "block/tinted_cross",
+  "textures": {
+    "cross": "environmental:block/medium_shrub_top"
+  }
+}

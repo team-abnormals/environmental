@@ -80,6 +80,21 @@ public class EnvironmentalCompat {
 		DataUtil.registerFlammable(EnvironmentalBlocks.PINE_BOARDS.get(), 5, 20);
 		DataUtil.registerFlammable(EnvironmentalBlocks.PINECONE.get(), 5, 20);
 
+		DataUtil.registerFlammable(EnvironmentalBlocks.CEDAR_LEAVES.get(), 30, 60);
+		DataUtil.registerFlammable(EnvironmentalBlocks.CEDAR_LOG.get(), 5, 5);
+		DataUtil.registerFlammable(EnvironmentalBlocks.CEDAR_WOOD.get(), 5, 5);
+		DataUtil.registerFlammable(EnvironmentalBlocks.STRIPPED_CEDAR_LOG.get(), 5, 5);
+		DataUtil.registerFlammable(EnvironmentalBlocks.STRIPPED_CEDAR_WOOD.get(), 5, 5);
+		DataUtil.registerFlammable(EnvironmentalBlocks.CEDAR_PLANKS.get(), 5, 20);
+		DataUtil.registerFlammable(EnvironmentalBlocks.CEDAR_SLAB.get(), 5, 20);
+		DataUtil.registerFlammable(EnvironmentalBlocks.CEDAR_STAIRS.get(), 5, 20);
+		DataUtil.registerFlammable(EnvironmentalBlocks.CEDAR_FENCE.get(), 5, 20);
+		DataUtil.registerFlammable(EnvironmentalBlocks.CEDAR_FENCE_GATE.get(), 5, 20);
+		DataUtil.registerFlammable(EnvironmentalBlocks.CEDAR_BOOKSHELF.get(), 30, 20);
+		DataUtil.registerFlammable(EnvironmentalBlocks.CEDAR_BEEHIVE.get(), 5, 20);
+		DataUtil.registerFlammable(EnvironmentalBlocks.CEDAR_LEAF_PILE.get(), 30, 60);
+		DataUtil.registerFlammable(EnvironmentalBlocks.CEDAR_BOARDS.get(), 5, 20);
+
 		DataUtil.registerFlammable(EnvironmentalBlocks.PLUM_LEAVES.get(), 30, 60);
 		DataUtil.registerFlammable(EnvironmentalBlocks.PLUM_LOG.get(), 5, 5);
 		DataUtil.registerFlammable(EnvironmentalBlocks.PLUM_WOOD.get(), 5, 5);
@@ -106,6 +121,9 @@ public class EnvironmentalCompat {
 		DataUtil.registerFlammable(EnvironmentalBlocks.GIANT_TALL_GRASS.get(), 60, 100);
 		DataUtil.registerFlammable(EnvironmentalBlocks.MYCELIUM_SPROUTS.get(), 60, 100);
 		DataUtil.registerFlammable(EnvironmentalBlocks.CUP_LICHEN.get(), 60, 100);
+		DataUtil.registerFlammable(EnvironmentalBlocks.TREE_LICHEN.get(), 60, 100);
+		DataUtil.registerFlammable(EnvironmentalBlocks.SHRUB.get(), 60, 100);
+		DataUtil.registerFlammable(EnvironmentalBlocks.FLOWERING_SHRUB.get(), 60, 100);
 
 		DataUtil.registerFlammable(EnvironmentalBlocks.DWARF_SPRUCE.get(), 60, 100);
 		DataUtil.registerFlammable(EnvironmentalBlocks.DWARF_SPRUCE_PLANT.get(), 60, 100);

@@ -5,6 +5,7 @@ import com.google.common.collect.ImmutableSet;
 import com.teamabnormals.environmental.common.block.CattailBlock;
 import com.teamabnormals.environmental.common.block.CupLichenBlock;
 import com.teamabnormals.environmental.common.block.DwarfSpruceHeadBlock;
+import com.teamabnormals.environmental.common.block.ShrubBlock;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.other.EnvironmentalLootTables;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
@@ -149,6 +150,8 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.dropPottedContents(POTTED_WHITE_DELPHINIUM.get());
 			this.dropPottedContents(POTTED_CATTAIL.get());
 			this.dropPottedContents(POTTED_CUP_LICHEN.get());
+			this.dropPottedContents(POTTED_SHRUB.get());
+			this.dropPottedContents(POTTED_FLOWERING_SHRUB.get());
 			this.dropPottedContents(POTTED_DWARF_SPRUCE.get());
 
 			this.dropSelf(DIRT_BRICKS.get());
@@ -164,6 +167,8 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.add(SMOOTH_MUD_SLAB.get(), this::createSlabItemTable);
 			this.dropSelf(CHISELED_MUD_BRICKS.get());
 			this.dropSelf(SLABFISH_EFFIGY.get());
+
+			this.dropSelf(MUDDY_SAND.get());
 
 			this.dropSelf(GRASS_THATCH.get());
 			this.dropSelf(GRASS_THATCH_STAIRS.get());
@@ -190,6 +195,9 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.add(DUCKWEED.get(), BlockLootSubProvider::createShearsOnlyDrop);
 			this.add(GIANT_TALL_GRASS.get(), (block) -> createDoublePlantWithOtherDrop(block, Blocks.SHORT_GRASS, Items.WHEAT_SEEDS, 3, 0.125F));
 			this.add(CUP_LICHEN.get(), this::createCupLichenDrops);
+			this.add(TREE_LICHEN.get(), this::createTreeLichenDrops);
+			this.add(SHRUB.get(), this::createShrubDrops);
+			this.add(FLOWERING_SHRUB.get(), this::createShrubDrops);
 			this.add(CACTUS_BOBBLE.get(), noDrop());
 
 			this.add(DWARF_SPRUCE.get(), (block) -> createDwarfSpruceDrops(block, true));
@@ -268,6 +276,33 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.add(PINE_BOOKSHELF.get(), (block) -> createSingleItemTableWithSilkTouch(block, Items.BOOK, ConstantValue.exactly(3.0F)));
 			this.dropWhenSilkTouch(CHISELED_PINE_BOOKSHELF.get());
 			this.add(PINE_LEAVES.get(), (block) -> createLeavesDrops(block, PINE_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+
+			this.dropSelf(CEDAR_PLANKS.get());
+			this.dropSelf(CEDAR_LOG.get());
+			this.dropSelf(CEDAR_WOOD.get());
+			this.dropSelf(STRIPPED_CEDAR_LOG.get());
+			this.dropSelf(STRIPPED_CEDAR_WOOD.get());
+			this.dropSelf(CEDAR_SIGNS.getFirst().get());
+			this.dropSelf(CEDAR_HANGING_SIGNS.getFirst().get());
+			this.dropSelf(CEDAR_PRESSURE_PLATE.get());
+			this.dropSelf(CEDAR_TRAPDOOR.get());
+			this.dropSelf(CEDAR_BUTTON.get());
+			this.dropSelf(CEDAR_STAIRS.get());
+			this.dropSelf(CEDAR_FENCE.get());
+			this.dropSelf(CEDAR_FENCE_GATE.get());
+			this.dropSelf(CEDAR_BOARDS.get());
+			this.add(CEDAR_LEAF_PILE.get(), this::createLeafPileDrops);
+			this.dropSelf(CEDAR_SAPLING.get());
+			this.dropPottedContents(POTTED_CEDAR_SAPLING.get());
+			this.dropSelf(CEDAR_LADDER.get());
+			this.add(CEDAR_SLAB.get(), this::createSlabItemTable);
+			this.add(CEDAR_DOOR.get(), this::createDoorTable);
+			this.add(CEDAR_BEEHIVE.get(), this::createBeeHiveDrop);
+			this.add(CEDAR_CHEST.get(), this::createNameableBlockEntityTable);
+			this.add(TRAPPED_CEDAR_CHEST.get(), this::createNameableBlockEntityTable);
+			this.add(CEDAR_BOOKSHELF.get(), (block) -> createSingleItemTableWithSilkTouch(block, Items.BOOK, ConstantValue.exactly(3.0F)));
+			this.dropWhenSilkTouch(CHISELED_CEDAR_BOOKSHELF.get());
+			this.add(CEDAR_LEAVES.get(), (block) -> createLeavesDrops(block, CEDAR_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 
 			this.dropSelf(PLUM_PLANKS.get());
 			this.dropSelf(PLUM_LOG.get());
@@ -365,6 +400,12 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			}))));
 		}
 
+		protected LootTable.Builder createTreeLichenDrops(Block block) {
+			return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(applyExplosionDecay(block, LootItem.lootTableItem(block).apply(List.of(1, 2, 3), (age) -> {
+				return SetItemCountFunction.setCount(ConstantValue.exactly((float) age.intValue())).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BlockStateProperties.AGE_3, age)));
+			}))));
+		}
+
 		protected LootTable.Builder createDwarfSpruceDrops(Block block, boolean isHead) {
 			LootTable.Builder builder = LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(DWARF_SPRUCE.get()).when(HAS_SHEARS).otherwise(applyExplosionDecay(block, LootItem.lootTableItem(Items.STICK).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F)))))));
 			if (isHead)
@@ -403,6 +444,18 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 		protected LootTable.Builder createDoublePlantWithOtherDrop(Block block, Block grass, Item drop, int count, float chance) {
 			LootPoolEntryContainer.Builder<?> builder = LootItem.lootTableItem(grass).apply(SetItemCountFunction.setCount(ConstantValue.exactly(count))).when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(Tags.Items.TOOLS_SHEAR))).otherwise(applyExplosionCondition(block, LootItem.lootTableItem(drop)).when(LootItemRandomChanceCondition.randomChance(chance)));
 			return LootTable.lootTable().withPool(LootPool.lootPool().add(builder).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER))).when(LocationCheck.checkLocation(LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER))), new BlockPos(0, 1, 0)))).withPool(LootPool.lootPool().add(builder).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER))).when(LocationCheck.checkLocation(LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER))), new BlockPos(0, -1, 0))));
+		}
+
+		protected LootTable.Builder createShrubDrops(Block block) {
+			return LootTable.lootTable()
+					.withPool(this.applyExplosionCondition(block, LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+							.add(LootItem.lootTableItem(block))
+					)).withPool(this.applyExplosionCondition(block, LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+							.add(LootItem.lootTableItem(block).when(AnyOfCondition.anyOf(
+									LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(ShrubBlock.PART, ShrubBlock.Part.MIDDLE)),
+									LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(ShrubBlock.PART, ShrubBlock.Part.TOP).hasProperty(ShrubBlock.SIZE, 3))
+							))))
+					);
 		}
 
 		@Override

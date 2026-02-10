@@ -2,6 +2,7 @@ package com.teamabnormals.environmental.core.other;
 
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.biome.OverworldBiomes;
+import net.minecraft.data.worldgen.placement.AquaticPlacements;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
@@ -105,5 +106,44 @@ public class EnvironmentalGeneration {
 		BiomeDefaultFeatures.addDefaultExtraVegetation(generation);
 		BiomeDefaultFeatures.addExtraEmeralds(generation);
 		BiomeDefaultFeatures.addInfestedStone(generation);
+	}
+
+	public static void cedarCreek(BiomeGenerationSettings.Builder generation, boolean edge) {
+		OverworldBiomes.globalOverworldGeneration(generation);
+		BiomeDefaultFeatures.addDefaultOres(generation);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, AquaticPlacements.SEAGRASS_RIVER);
+		if (edge) {
+			generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_WATERLILY_CEDAR_RIVER);
+			generation.addFeature(Decoration.VEGETAL_DECORATION, CATTAILS_DENSE);
+			generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_CEDAR_RIVER);
+			generation.addFeature(Decoration.VEGETAL_DECORATION, SHRUB_PATCH);
+		} else {
+			generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_CEDAR_RIVER);
+		}
+		generation.addFeature(Decoration.LOCAL_MODIFICATIONS, MUDDY_SAND);
+	}
+
+	public static void cedarRiverine(BiomeGenerationSettings.Builder generation) {
+		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_CUP_LICHEN);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_CUP_LICHEN_SMALL);
+		BiomeDefaultFeatures.addFerns(generation);
+		BiomeDefaultFeatures.addDefaultOres(generation);
+		BiomeDefaultFeatures.addDefaultSoftDisks(generation);
+		BiomeDefaultFeatures.addDefaultFlowers(generation);
+		generation.addFeature(Decoration.LOCAL_MODIFICATIONS, SMALL_COARSE_DIRT_ON_STONE);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, FALLEN_PINE_TREE);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_PINE_RIVER);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, VegetationPlacements.BROWN_MUSHROOM_TAIGA);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, VegetationPlacements.RED_MUSHROOM_TAIGA);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, DWARF_SPRUCE);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, DWARF_SPRUCE_THICKET);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_GRASS_OLD_GROWTH_PINE_BARRENS);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_GRASS_PINE_BARRENS);
+		BiomeDefaultFeatures.addDefaultExtraVegetation(generation);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_WATERLILY_CEDAR_RIVER);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, CATTAILS_DENSE);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_CEDAR_RIVER);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, SHRUB_PATCH);
+		generation.addFeature(Decoration.LOCAL_MODIFICATIONS, MUDDY_SAND);
 	}
 }

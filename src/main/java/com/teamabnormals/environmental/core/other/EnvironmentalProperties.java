@@ -4,6 +4,7 @@ import com.teamabnormals.blueprint.core.api.BlockSetTypeRegistryHelper;
 import com.teamabnormals.blueprint.core.api.WoodTypeRegistryHelper;
 import com.teamabnormals.blueprint.core.util.PropertyUtil;
 import com.teamabnormals.blueprint.core.util.PropertyUtil.WoodSetProperties;
+import com.teamabnormals.environmental.common.block.ShrubBlock;
 import com.teamabnormals.environmental.common.block.WallHibiscusBlock;
 import com.teamabnormals.environmental.core.Environmental;
 import net.minecraft.core.Direction;
@@ -22,16 +23,19 @@ import net.minecraft.world.phys.Vec3;
 public class EnvironmentalProperties {
 	public static final BlockSetType WILLOW_BLOCK_SET = blockSetType("willow");
 	public static final BlockSetType PINE_BLOCK_SET = blockSetType("pine");
+	public static final BlockSetType CEDAR_BLOCK_SET = blockSetType("cedar");
 	public static final BlockSetType PLUM_BLOCK_SET = blockSetType("plum");
 	public static final BlockSetType WISTERIA_BLOCK_SET = blockSetType("wisteria");
 
 	public static final WoodType WILLOW_WOOD_TYPE = woodSetType(WILLOW_BLOCK_SET);
 	public static final WoodType PINE_WOOD_TYPE = woodSetType(PINE_BLOCK_SET);
+	public static final WoodType CEDAR_WOOD_TYPE = woodSetType(CEDAR_BLOCK_SET);
 	public static final WoodType PLUM_WOOD_TYPE = woodSetType(PLUM_BLOCK_SET);
 	public static final WoodType WISTERIA_WOOD_TYPE = woodSetType(WISTERIA_BLOCK_SET);
 
 	public static final WoodSetProperties WILLOW = WoodSetProperties.builder(MapColor.TERRACOTTA_GREEN, MapColor.WOOD).build();
 	public static final WoodSetProperties PINE = WoodSetProperties.builder(MapColor.TERRACOTTA_LIGHT_GRAY, MapColor.WOOD).build();
+	public static final WoodSetProperties CEDAR = WoodSetProperties.builder(MapColor.TERRACOTTA_GRAY, MapColor.WOOD).build();
 	public static final WoodSetProperties PLUM = WoodSetProperties.builder(MapColor.TERRACOTTA_RED, MapColor.WOOD).leavesColor(MapColor.COLOR_PINK).build();
 	public static final WoodSetProperties WISTERIA = WoodSetProperties.builder(MapColor.TERRACOTTA_WHITE, MapColor.TERRACOTTA_CYAN).leavesColor(MapColor.SNOW).build();
 	public static final WoodSetProperties PINK_WISTERIA = WoodSetProperties.builder(MapColor.TERRACOTTA_WHITE, MapColor.TERRACOTTA_CYAN).leavesColor(MapColor.COLOR_PINK).build();
@@ -46,7 +50,9 @@ public class EnvironmentalProperties {
 	public static final BlockBehaviour.Properties DUCKWEED = BlockBehaviour.Properties.of().instabreak().noCollission().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY);
 	public static final BlockBehaviour.Properties MYCELIUM_SPROUTS = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_PURPLE).replaceable().noCollission().instabreak().sound(SoundType.NETHER_SPROUTS).offsetType(BlockBehaviour.OffsetType.XZ).ignitedByLava().pushReaction(PushReaction.DESTROY);
 	public static final BlockBehaviour.Properties CUP_LICHEN = BlockBehaviour.Properties.of().mapColor(MapColor.GLOW_LICHEN).replaceable().noCollission().instabreak().sound(SoundType.NETHER_SPROUTS).ignitedByLava().pushReaction(PushReaction.DESTROY);
+	public static final BlockBehaviour.Properties TREE_LICHEN = BlockBehaviour.Properties.of().mapColor(MapColor.GLOW_LICHEN).replaceable().noCollission().instabreak().sound(SoundType.NETHER_SPROUTS).ignitedByLava().pushReaction(PushReaction.DESTROY);
 	public static final BlockBehaviour.Properties CACTUS_BOBBLE = BlockBehaviour.Properties.of().replaceable().noCollission().instabreak().sound(SoundType.WOOL).ignitedByLava().pushReaction(PushReaction.DESTROY);
+	public static final BlockBehaviour.Properties SHRUB = shrub();
 	public static final BlockBehaviour.Properties DWARF_SPRUCE = BlockBehaviour.Properties.of().noCollission().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY);
 
 	public static final BlockBehaviour.Properties TALL_FLOWERS = PropertyUtil.flower().ignitedByLava();
@@ -92,6 +98,42 @@ public class EnvironmentalProperties {
 			Vec3 vec3 = state.getValue(WallHibiscusBlock.FACE) != AttachFace.WALL ? new Vec3(d0, 0.0F, d1) : axis == Axis.X ? new Vec3(0.0F, d0, d1) : new Vec3(d0, d1, 0.0F);
 
 			return vec3;
+		};
+		return properties;
+	}
+
+	private static BlockBehaviour.Properties shrub() {
+		BlockBehaviour.Properties properties = BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).replaceable().noCollission().sound(SoundType.SWEET_BERRY_BUSH).pushReaction(PushReaction.DESTROY);
+		properties.offsetFunction = (state, blockGetter, pos) -> {
+			double xOffset;
+			double zOffset;
+			int x = pos.getX();
+			int z = pos.getZ();
+			if (state.getValue(ShrubBlock.CENTERED)) {
+				xOffset = zOffset = 0.0D;
+			} else {
+				long i = Mth.getSeed(x, 0, z);
+				xOffset = Mth.clamp(((double)((float)(i & 15L) / 15.0F) - 0.5) * 0.5, -0.25D, 0.25D);
+				zOffset = Mth.clamp(((double)((float)(i >> 8 & 15L) / 15.0F) - 0.5) * 0.5, -0.25D, 0.25D);
+			}
+			// Fixes z fighting
+			xOffset += (double) (((x & 1) << 1) | (z & 1)) * 0.0005D;
+			return new Vec3(xOffset, 0.0, zOffset);
+		};
+		return properties;
+	}
+
+	public static BlockBehaviour.Properties applyBetterXZOffset(BlockBehaviour.Properties properties) {
+		properties.offsetFunction = (state, blockGetter, pos) -> {
+			long i = Mth.getSeed(pos.getX(), 0, pos.getZ());
+			double xOffset = Mth.clamp(((double)((float)(i & 15L) / 15.0F) - 0.5) * 0.5, -0.25D, 0.25D);
+			double zOffset = Mth.clamp(((double)((float)(i >> 8 & 15L) / 15.0F) - 0.5) * 0.5, -0.25D, 0.25D);
+			// Fix rare z-fighting
+			if (pos.getX() % 2 == 0)
+				zOffset += 0.001D;
+			if (pos.getZ() % 2 == 0)
+				xOffset += 0.001D;
+			return new Vec3(xOffset, 0.0, zOffset);
 		};
 		return properties;
 	}

@@ -21,6 +21,7 @@ public class EnvironmentalBlockTags {
 
 	public static final TagKey<Block> WILLOW_LOGS = blockTag("willow_logs");
 	public static final TagKey<Block> PINE_LOGS = blockTag("pine_logs");
+	public static final TagKey<Block> CEDAR_LOGS = blockTag("cedar_logs");
 	public static final TagKey<Block> WISTERIA_LOGS = blockTag("wisteria_logs");
 	public static final TagKey<Block> PLUM_LOGS = blockTag("plum_logs");
 

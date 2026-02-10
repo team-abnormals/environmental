@@ -1,0 +1,21 @@
+{
+  "feature": "minecraft:patch_waterlily",
+  "placement": [
+    {
+      "type": "environmental:noise_density",
+      "density": 1.0,
+      "noise": "environmental:cedar_river_waterlily_density",
+      "noise_offset": 1.3329999446868896
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "WORLD_SURFACE_WG"
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

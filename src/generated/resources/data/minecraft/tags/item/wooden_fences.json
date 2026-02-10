@@ -2,6 +2,7 @@
   "values": [
     "environmental:willow_fence",
     "environmental:pine_fence",
+    "environmental:cedar_fence",
     "environmental:wisteria_fence",
     "environmental:plum_fence"
   ]

@@ -1,0 +1,6 @@
+{
+  "type": "environmental:shrub_patch",
+  "config": {
+    "extra_radius": 1
+  }
+}

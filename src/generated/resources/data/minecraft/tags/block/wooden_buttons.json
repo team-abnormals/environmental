@@ -2,6 +2,7 @@
   "values": [
     "environmental:willow_button",
     "environmental:pine_button",
+    "environmental:cedar_button",
     "environmental:wisteria_button",
     "environmental:plum_button"
   ]

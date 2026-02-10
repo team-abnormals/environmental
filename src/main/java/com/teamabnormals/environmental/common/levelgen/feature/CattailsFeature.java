@@ -39,7 +39,7 @@ public class CattailsFeature extends Feature<NoneFeatureConfiguration> {
 			int stalkCount = this.getStalkCount(random);
 			BlockState belowState = level.getBlockState(pos.below());
 			if (belowState.is(EnvironmentalBlockTags.CATTAIL_PLANTABLE_ON) && (level.isWaterAt(pos) || (level.isEmptyBlock(pos) && !belowState.is(BlockTags.SAND))) && (level.isEmptyBlock(pos.above()) || (level.isWaterAt(pos.above()) && level.isEmptyBlock(pos.above(2))))) {
-				boolean fluffy = belowState.is(Blocks.MUD);
+				boolean fluffy = belowState.is(Blocks.MUD) || belowState.is(EnvironmentalBlocks.MUDDY_SAND);
 				level.setBlock(pos, EnvironmentalBlocks.CATTAIL_STALK.get().defaultBlockState().setValue(CattailBlock.CATTAILS, stalkCount).setValue(BlockStateProperties.WATERLOGGED, level.getFluidState(pos).getType() == Fluids.WATER), 2);
 				if (level.isWaterAt(pos.above()) || (level.isEmptyBlock(pos.above(2)) && random.nextBoolean())) {
 					level.setBlock(pos.above(), EnvironmentalBlocks.CATTAIL_STALK.get().defaultBlockState().setValue(CattailBlock.CATTAILS, stalkCount).setValue(CattailStalkBlock.BOTTOM, false).setValue(BlockStateProperties.WATERLOGGED, level.getFluidState(pos.above()).getType() == Fluids.WATER), 2);

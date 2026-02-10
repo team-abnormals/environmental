@@ -29,12 +29,15 @@ public class EnvironmentalFeatures {
 	public static final DeferredHolder<Feature<?>, Feature<DwarfSpruceConfiguration>> DWARF_SPRUCE = FEATURES.register("dwarf_spruce", () -> new DwarfSpruceFeature(DwarfSpruceConfiguration.CODEC));
 
 	public static final DeferredHolder<Feature<?>, Feature<CupLichenPatchConfiguration>> CUP_LICHEN_PATCH = FEATURES.register("cup_lichen_patch", () -> new CupLichenPatchFeature(CupLichenPatchConfiguration.CODEC));
+	public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> MUDDY_SAND = FEATURES.register("muddy_sand", () -> new MuddySandFeature(NoneFeatureConfiguration.CODEC));
+	public static final DeferredHolder<Feature<?>, Feature<ShrubPatchConfiguration>> SHRUB_PATCH = FEATURES.register("shrub_patch", () -> new ShrubPatchFeature(ShrubPatchConfiguration.CODEC));
 
 	public static final DeferredHolder<Feature<?>, Feature<TreeConfiguration>> WEEPING_WILLOW_TREE = FEATURES.register("weeping_willow_tree", () -> new WeepingWillowTreeFeature(TreeConfiguration.CODEC));
 	public static final DeferredHolder<Feature<?>, Feature<TreeConfiguration>> PLUM_TREE = FEATURES.register("plum_tree", () -> new PlumTreeFeature(TreeConfiguration.CODEC));
 	public static final DeferredHolder<Feature<?>, Feature<TreeConfiguration>> WISTERIA_TREE = FEATURES.register("wisteria_tree", () -> new WisteriaTreeFeature(TreeConfiguration.CODEC));
 	public static final DeferredHolder<Feature<?>, Feature<TreeConfiguration>> PINE_TREE = FEATURES.register("pine_tree", () -> new PineTreeFeature(TreeConfiguration.CODEC));
 	public static final DeferredHolder<Feature<?>, Feature<TreeConfiguration>> PINE_TREE_ON_STONE = FEATURES.register("pine_tree_on_stone", () -> new PineTreeOnStoneFeature(TreeConfiguration.CODEC));
+	public static final DeferredHolder<Feature<?>, Feature<TreeConfiguration>> CEDAR_TREE = FEATURES.register("cedar_tree", () -> new CedarTreeFeature(TreeConfiguration.CODEC));
 
 	public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> WILLOW_TREE_PLACER = FEATURES.register("willow_tree_placer", () -> new WillowTreePlacerFeature(NoneFeatureConfiguration.CODEC));
 

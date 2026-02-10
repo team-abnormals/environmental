@@ -14,6 +14,9 @@
     "environmental:white_delphinium",
     "environmental:bird_of_paradise",
     "environmental:cup_lichen",
+    "environmental:tree_lichen",
+    "environmental:shrub",
+    "environmental:flowering_shrub",
     "environmental:duckweed",
     "environmental:cactus_bobble"
   ]

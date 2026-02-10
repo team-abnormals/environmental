@@ -1,5 +1,6 @@
 {
   "values": [
+    "environmental:cedar_bank",
     "minecraft:river",
     "minecraft:swamp",
     "minecraft:mangrove_swamp"

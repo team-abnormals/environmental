@@ -24,7 +24,11 @@ public class EnvironmentalBiomeSlices {
 	public static final ResourceKey<ModdedBiomeSlice> BLOSSOM_SLICE = createKey("blossom");
 	public static final ResourceKey<ModdedBiomeSlice> PINE_SLICE = createKey("pine_barrens");
 
-	public static final ResourceKey<Biome> MARSH_AREA = EnvironmentalBiomes.create("marsh_area");
+	public static final ResourceKey<Biome> TEMPERATE_SWAMP_AREA = EnvironmentalBiomes.create("temperate_swamp_area");
+	public static final ResourceKey<Biome> CEDAR_RIVER_AREA = EnvironmentalBiomes.create("cedar_river_area");
+	public static final ResourceKey<Biome> CEDAR_BANK_AREA = EnvironmentalBiomes.create("cedar_bank_area");
+	public static final ResourceKey<Biome> CEDAR_RIVERINE_AREA = EnvironmentalBiomes.create("cedar_riverine_area");
+	public static final ResourceKey<Biome> WARM_SWAMP_AREA = EnvironmentalBiomes.create("warm_swamp_area");
 	public static final ResourceKey<Biome> BLOSSOM_WOODS_AREA = EnvironmentalBiomes.create("blossom_woods_area");
 	public static final ResourceKey<Biome> BLOSSOM_VALLEYS_AREA = EnvironmentalBiomes.create("blossom_valleys_area");
 	public static final ResourceKey<Biome> PINE_BARRENS_AREA = EnvironmentalBiomes.create("pine_barrens_area");
@@ -38,7 +42,8 @@ public class EnvironmentalBiomeSlices {
 		new EnvironmentalBiomeBuilder().addBiomes(entries::add);
 
 		context.register(MARSH_SLICE, new ModdedBiomeSlice(25, MultiNoiseModdedBiomeProvider.builder().biomes(entries::forEach)
-				.area(MARSH_AREA, MARSH)
+				.area(TEMPERATE_SWAMP_AREA, MARSH)
+				.area(WARM_SWAMP_AREA, MARSH)
 				.build(), LevelStem.OVERWORLD));
 
 		context.register(BLOSSOM_SLICE, new ModdedBiomeSlice(30, MultiNoiseModdedBiomeProvider.builder().biomes(entries::forEach)
@@ -46,13 +51,16 @@ public class EnvironmentalBiomeSlices {
 				.area(BLOSSOM_VALLEYS_AREA, BLOSSOM_VALLEYS)
 				.build(), LevelStem.OVERWORLD));
 
-
 		context.register(PINE_SLICE, new ModdedBiomeSlice(30, MultiNoiseModdedBiomeProvider.builder().biomes(entries::forEach)
 				.area(PINE_BARRENS_AREA, PINE_BARRENS)
 				.area(SNOWY_PINE_BARRENS_AREA, SNOWY_PINE_BARRENS)
 				.area(OLD_GROWTH_PINE_BARRENS_AREA, OLD_GROWTH_PINE_BARRENS)
 				.area(SNOWY_OLD_GROWTH_PINE_BARRENS_AREA, SNOWY_OLD_GROWTH_PINE_BARRENS)
 				.area(PINE_SLOPES_AREA, PINE_SLOPES)
+				.area(TEMPERATE_SWAMP_AREA, CEDAR_SWAMP)
+				.area(CEDAR_RIVER_AREA, CEDAR_RIVER)
+				.area(CEDAR_BANK_AREA, CEDAR_BANK)
+				.area(CEDAR_RIVERINE_AREA, CEDAR_RIVERINE)
 				.build(), LevelStem.OVERWORLD));
 	}
 
@@ -92,6 +100,12 @@ public class EnvironmentalBiomeSlices {
 				{null, null, null, BLOSSOM_WOODS_AREA, null},
 				{null, null, null, null, null},
 				{null, null, null, null, null}};
+		private final ResourceKey<Biome>[][][] RIVER_BIOMES = new ResourceKey[][][]{
+				{null, null, null, null, null},
+				{null, null, null, null, {CEDAR_RIVER_AREA, CEDAR_BANK_AREA, CEDAR_RIVERINE_AREA}},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null}};
 		private final ResourceKey<Biome>[][] PLATEAU_BIOMES = new ResourceKey[][]{
 				{VANILLA, VANILLA, VANILLA, SNOWY_PINE_BARRENS_AREA, SNOWY_PINE_BARRENS_AREA},
 				{VANILLA, VANILLA, BLOSSOM_WOODS_AREA, PINE_BARRENS_AREA, PINE_BARRENS_AREA},
@@ -127,20 +141,26 @@ public class EnvironmentalBiomeSlices {
 			}
 		}
 
-		private void addInlandBiomes(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> p_187216_) {
-			this.addMidSlice(p_187216_, Climate.Parameter.span(-1.0F, -0.93333334F));
-			this.addHighSlice(p_187216_, Climate.Parameter.span(-0.93333334F, -0.7666667F));
-			this.addPeaks(p_187216_, Climate.Parameter.span(-0.7666667F, -0.56666666F));
-			this.addHighSlice(p_187216_, Climate.Parameter.span(-0.56666666F, -0.4F));
-			this.addMidSlice(p_187216_, Climate.Parameter.span(-0.4F, -0.26666668F));
-			this.addLowSlice(p_187216_, Climate.Parameter.span(-0.26666668F, -0.05F));
-			this.addValleys(p_187216_, Climate.Parameter.span(-0.05F, 0.05F));
-			this.addLowSlice(p_187216_, Climate.Parameter.span(0.05F, 0.26666668F));
-			this.addMidSlice(p_187216_, Climate.Parameter.span(0.26666668F, 0.4F));
-			this.addHighSlice(p_187216_, Climate.Parameter.span(0.4F, 0.56666666F));
-			this.addPeaks(p_187216_, Climate.Parameter.span(0.56666666F, 0.7666667F));
-			this.addHighSlice(p_187216_, Climate.Parameter.span(0.7666667F, 0.93333334F));
-			this.addMidSlice(p_187216_, Climate.Parameter.span(0.93333334F, 1.0F));
+		private void addInlandBiomes(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> consumer) {
+			this.addMidSlice(consumer, Climate.Parameter.span(-1.0F, -0.93333334F));
+			this.addHighSlice(consumer, Climate.Parameter.span(-0.93333334F, -0.7666667F));
+			this.addPeaks(consumer, Climate.Parameter.span(-0.7666667F, -0.56666666F));
+			this.addHighSlice(consumer, Climate.Parameter.span(-0.56666666F, -0.4F));
+			this.addMidSlice(consumer, Climate.Parameter.span(-0.4F, -0.26666668F));
+			this.addLowSlice(consumer, Climate.Parameter.span(-0.26666668F, -0.075F));
+
+			this.addValleys(consumer, Climate.Parameter.span(-0.1F, -0.05F), 2);
+			this.addValleys(consumer, Climate.Parameter.span(-0.05F, -0.037F), 1);
+			this.addValleys(consumer, Climate.Parameter.span(-0.037F, 0.037F), 0);
+			this.addValleys(consumer, Climate.Parameter.span(0.037F, 0.05F), 1);
+			this.addValleys(consumer, Climate.Parameter.span(0.05F, 0.1F), 2);
+
+			this.addLowSlice(consumer, Climate.Parameter.span(0.075F, 0.26666668F));
+			this.addMidSlice(consumer, Climate.Parameter.span(0.26666668F, 0.4F));
+			this.addHighSlice(consumer, Climate.Parameter.span(0.4F, 0.56666666F));
+			this.addPeaks(consumer, Climate.Parameter.span(0.56666666F, 0.7666667F));
+			this.addHighSlice(consumer, Climate.Parameter.span(0.7666667F, 0.93333334F));
+			this.addMidSlice(consumer, Climate.Parameter.span(0.93333334F, 1.0F));
 		}
 
 		private void addPeaks(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> p_187178_, Climate.Parameter p_187179_) {
@@ -206,7 +226,8 @@ public class EnvironmentalBiomeSlices {
 
 		private void addMidSlice(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> p_187218_, Climate.Parameter p_187219_) {
 			this.addSurfaceBiome(p_187218_, this.FULL_RANGE, this.FULL_RANGE, this.coastContinentalness, Climate.Parameter.span(this.erosions[0], this.erosions[2]), p_187219_, 0.0F, VANILLA);
-			this.addSurfaceBiome(p_187218_, this.UNFROZEN_RANGE, this.FULL_RANGE, Climate.Parameter.span(this.nearInlandContinentalness, this.farInlandContinentalness), this.erosions[6], p_187219_, 0.0F, MARSH_AREA);
+			this.addSurfaceBiome(p_187218_, Climate.Parameter.span(this.temperatures[1], this.temperatures[2]), this.FULL_RANGE, Climate.Parameter.span(this.nearInlandContinentalness, this.farInlandContinentalness), this.erosions[6], p_187219_, 0.0F, TEMPERATE_SWAMP_AREA);
+			this.addSurfaceBiome(p_187218_, Climate.Parameter.span(this.temperatures[3], this.temperatures[4]), this.FULL_RANGE, Climate.Parameter.span(this.nearInlandContinentalness, this.farInlandContinentalness), this.erosions[6], p_187219_, 0.0F, WARM_SWAMP_AREA);
 
 			for (int i = 0; i < this.temperatures.length; ++i) {
 				Climate.Parameter climate$parameter = this.temperatures[i];
@@ -256,7 +277,8 @@ public class EnvironmentalBiomeSlices {
 
 		private void addLowSlice(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> p_187229_, Climate.Parameter p_187230_) {
 			this.addSurfaceBiome(p_187229_, this.FULL_RANGE, this.FULL_RANGE, this.coastContinentalness, Climate.Parameter.span(this.erosions[0], this.erosions[2]), p_187230_, 0.0F, VANILLA);
-			this.addSurfaceBiome(p_187229_, this.UNFROZEN_RANGE, this.FULL_RANGE, Climate.Parameter.span(this.nearInlandContinentalness, this.farInlandContinentalness), this.erosions[6], p_187230_, 0.0F, MARSH_AREA);
+			this.addSurfaceBiome(p_187229_, Climate.Parameter.span(this.temperatures[1], this.temperatures[2]), this.FULL_RANGE, Climate.Parameter.span(this.nearInlandContinentalness, this.farInlandContinentalness), this.erosions[6], p_187230_, 0.0F, TEMPERATE_SWAMP_AREA);
+			this.addSurfaceBiome(p_187229_, Climate.Parameter.span(this.temperatures[3], this.temperatures[4]), this.FULL_RANGE, Climate.Parameter.span(this.nearInlandContinentalness, this.farInlandContinentalness), this.erosions[6], p_187230_, 0.0F, WARM_SWAMP_AREA);
 
 			for (int i = 0; i < this.temperatures.length; ++i) {
 				Climate.Parameter climate$parameter = this.temperatures[i];
@@ -287,16 +309,23 @@ public class EnvironmentalBiomeSlices {
 
 		}
 
-		private void addValleys(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> p_187238_, Climate.Parameter p_187239_) {
-			this.addSurfaceBiome(p_187238_, this.FROZEN_RANGE, this.FULL_RANGE, this.coastContinentalness, Climate.Parameter.span(this.erosions[0], this.erosions[1]), p_187239_, 0.0F, VANILLA);
-			this.addSurfaceBiome(p_187238_, this.UNFROZEN_RANGE, this.FULL_RANGE, this.coastContinentalness, Climate.Parameter.span(this.erosions[0], this.erosions[1]), p_187239_, 0.0F, VANILLA);
-			this.addSurfaceBiome(p_187238_, this.FROZEN_RANGE, this.FULL_RANGE, this.nearInlandContinentalness, Climate.Parameter.span(this.erosions[0], this.erosions[1]), p_187239_, 0.0F, VANILLA);
-			this.addSurfaceBiome(p_187238_, this.UNFROZEN_RANGE, this.FULL_RANGE, this.nearInlandContinentalness, Climate.Parameter.span(this.erosions[0], this.erosions[1]), p_187239_, 0.0F, VANILLA);
-			this.addSurfaceBiome(p_187238_, this.FROZEN_RANGE, this.FULL_RANGE, Climate.Parameter.span(this.coastContinentalness, this.farInlandContinentalness), Climate.Parameter.span(this.erosions[2], this.erosions[5]), p_187239_, 0.0F, VANILLA);
-			this.addSurfaceBiome(p_187238_, this.UNFROZEN_RANGE, this.FULL_RANGE, Climate.Parameter.span(this.coastContinentalness, this.farInlandContinentalness), Climate.Parameter.span(this.erosions[2], this.erosions[5]), p_187239_, 0.0F, VANILLA);
-			this.addSurfaceBiome(p_187238_, this.FROZEN_RANGE, this.FULL_RANGE, this.coastContinentalness, this.erosions[6], p_187239_, 0.0F, VANILLA);
-			this.addSurfaceBiome(p_187238_, this.UNFROZEN_RANGE, this.FULL_RANGE, this.coastContinentalness, this.erosions[6], p_187239_, 0.0F, VANILLA);
-			this.addSurfaceBiome(p_187238_, this.UNFROZEN_RANGE, this.FULL_RANGE, Climate.Parameter.span(this.inlandContinentalness, this.farInlandContinentalness), this.erosions[6], p_187239_, 0.0F, MARSH_AREA);
+		private void addValleys(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> p_187238_, Climate.Parameter p_187239_, int riverIndex) {
+			for (int i = 0; i < this.temperatures.length; ++i) {
+				Climate.Parameter temperature = this.temperatures[i];
+				var riversForTemp = RIVER_BIOMES[i];
+				for (int j = 0; j < this.humidities.length; ++j) {
+					Climate.Parameter humidity = this.humidities[j];
+					var riverBiomes = riversForTemp[j];
+					var river = riverBiomes != null ? (riverBiomes[riverIndex]) : VANILLA;
+					this.addSurfaceBiome(p_187238_, temperature, humidity, this.coastContinentalness, Climate.Parameter.span(this.erosions[0], this.erosions[1]), p_187239_, 0.0F, river);
+					this.addSurfaceBiome(p_187238_, temperature, humidity, this.nearInlandContinentalness, Climate.Parameter.span(this.erosions[0], this.erosions[1]), p_187239_, 0.0F, river);
+					this.addSurfaceBiome(p_187238_, temperature, humidity, Climate.Parameter.span(this.coastContinentalness, this.farInlandContinentalness), Climate.Parameter.span(this.erosions[2], this.erosions[5]), p_187239_, 0.0F, river);
+					this.addSurfaceBiome(p_187238_, temperature, humidity, this.coastContinentalness, this.erosions[6], p_187239_, 0.0F, river);
+				}
+			}
+
+			this.addSurfaceBiome(p_187238_, Climate.Parameter.span(this.temperatures[1], this.temperatures[2]), this.FULL_RANGE, Climate.Parameter.span(this.inlandContinentalness, this.farInlandContinentalness), this.erosions[6], p_187239_, 0.0F, TEMPERATE_SWAMP_AREA);
+			this.addSurfaceBiome(p_187238_, Climate.Parameter.span(this.temperatures[3], this.temperatures[4]), this.FULL_RANGE, Climate.Parameter.span(this.inlandContinentalness, this.farInlandContinentalness), this.erosions[6], p_187239_, 0.0F, VANILLA);
 			this.addSurfaceBiome(p_187238_, this.FROZEN_RANGE, this.FULL_RANGE, Climate.Parameter.span(this.inlandContinentalness, this.farInlandContinentalness), this.erosions[6], p_187239_, 0.0F, VANILLA);
 
 			for (int i = 0; i < this.temperatures.length; ++i) {
@@ -308,7 +337,6 @@ public class EnvironmentalBiomeSlices {
 					this.addSurfaceBiome(p_187238_, climate$parameter, climate$parameter1, Climate.Parameter.span(this.midInlandContinentalness, this.farInlandContinentalness), Climate.Parameter.span(this.erosions[0], this.erosions[1]), p_187239_, 0.0F, resourcekey);
 				}
 			}
-
 		}
 
 		private void addUndergroundBiomes(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> p_187227_) {

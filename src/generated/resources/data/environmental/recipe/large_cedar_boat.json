@@ -1,0 +1,27 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "boatload"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "large_boat",
+  "key": {
+    "#": {
+      "item": "environmental:cedar_planks"
+    },
+    "B": {
+      "item": "environmental:cedar_boat"
+    }
+  },
+  "pattern": [
+    "#B#",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "environmental:large_cedar_boat"
+  }
+}

@@ -1,5 +1,14 @@
 {
   "values": {
+    "environmental:cedar_bank": {
+      "villager_type": "minecraft:swamp"
+    },
+    "environmental:cedar_river": {
+      "villager_type": "minecraft:swamp"
+    },
+    "environmental:cedar_swamp": {
+      "villager_type": "minecraft:swamp"
+    },
     "environmental:marsh": {
       "villager_type": "minecraft:swamp"
     }

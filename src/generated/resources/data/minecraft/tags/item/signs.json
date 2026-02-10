@@ -2,6 +2,7 @@
   "values": [
     "environmental:willow_sign",
     "environmental:pine_sign",
+    "environmental:cedar_sign",
     "environmental:wisteria_sign",
     "environmental:plum_sign"
   ]

@@ -1,0 +1,38 @@
+{
+  "format_version": "1.21.11",
+  "credit": "SmellyModder",
+  "ambientocclusion": false,
+  "textures": {
+    "particle": "#cross"
+  },
+  "elements": [
+    {
+      "from": [-2.8, 0, 8],
+      "to": [18.8, 16, 8],
+      "shade": false,
+      "rotation": {"angle": 45, "axis": "y", "origin": [8, 24, 8], "rescale": true},
+      "faces": {
+        "north": {"uv": [0, 0, 16, 16], "texture": "#cross", "tintindex": 0},
+        "east": {"uv": [0, 0, 0, 0], "texture": "#cross", "tintindex": 0},
+        "south": {"uv": [0, 0, 16, 16], "texture": "#cross", "tintindex": 0},
+        "west": {"uv": [0, 0, 0, 0], "texture": "#cross", "tintindex": 0},
+        "up": {"uv": [0, 0, 0, 0], "texture": "#cross", "tintindex": 0},
+        "down": {"uv": [0, 0, 0, 0], "texture": "#cross", "tintindex": 0}
+      }
+    },
+    {
+      "from": [8, 0, -2.8],
+      "to": [8, 16, 18.8],
+      "shade": false,
+      "rotation": {"angle": 45, "axis": "y", "origin": [8, 24, 8], "rescale": true},
+      "faces": {
+        "north": {"uv": [0, 0, 0, 0], "texture": "#cross", "tintindex": 0},
+        "east": {"uv": [0, 0, 16, 16], "texture": "#cross", "tintindex": 0},
+        "south": {"uv": [0, 0, 0, 0], "texture": "#cross", "tintindex": 0},
+        "west": {"uv": [0, 0, 16, 16], "texture": "#cross", "tintindex": 0},
+        "up": {"uv": [0, 0, 0, 0], "texture": "#cross", "tintindex": 0},
+        "down": {"uv": [0, 0, 0, 0], "texture": "#cross", "tintindex": 0}
+      }
+    }
+  ]
+}
