@@ -1,0 +1,21 @@
+{
+  "feature": "environmental:shrub_patch",
+  "placement": [
+    {
+      "type": "environmental:noise_density",
+      "density": 16.0,
+      "noise": "environmental:shrub_density",
+      "noise_offset": 0.5
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "MOTION_BLOCKING"
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

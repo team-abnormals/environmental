@@ -1,0 +1,14 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "environmental:block/cedar_boards_horizontal",
+      "y": 270
+    },
+    "axis=y": {
+      "model": "environmental:block/cedar_boards"
+    },
+    "axis=z": {
+      "model": "environmental:block/cedar_boards_horizontal"
+    }
+  }
+}

@@ -31,7 +31,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
@@ -60,6 +62,8 @@ public class EnvironmentalBlocks {
 	public static final DeferredBlock<Block> CHISELED_MUD_BRICKS = BLOCKS.createBlock("chiseled_mud_bricks", () -> new Block(EnvironmentalProperties.MUD_BRICKS));
 	public static final DeferredBlock<Block> SLABFISH_EFFIGY = BLOCKS.createBlock("slabfish_effigy", () -> new SlabfishEffigyBlock(PropertyUtil.flowerPot().sound(SoundType.MUD_BRICKS)));
 
+	public static final DeferredBlock<Block> MUDDY_SAND = BLOCKS.createBlock("muddy_sand", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND).instrument(NoteBlockInstrument.SNARE).strength(0.5F).sound(SoundType.MUD)));
+
 	// Crops //
 
 	public static final DeferredBlock<Block> CATTAIL_SPROUT = BLOCKS.createBlockNoItem("cattail_sprout", () -> new CattailSproutBlock(EnvironmentalProperties.CATTAIL));
@@ -73,9 +77,12 @@ public class EnvironmentalBlocks {
 	public static final DeferredBlock<Block> DUCKWEED = BLOCKS.createBlockNoItem("duckweed", () -> new DuckweedBlock(EnvironmentalProperties.DUCKWEED));
 
 	public static final DeferredBlock<Block> MYCELIUM_SPROUTS = BLOCKS.createBlock("mycelium_sprouts", () -> new MyceliumSproutsBlock(EnvironmentalProperties.MYCELIUM_SPROUTS));
-	public static final DeferredBlock<Block> GIANT_TALL_GRASS = BLOCKS.createBlock("giant_tall_grass", () -> new DoublePlantBlock(Block.Properties.ofFullCopy(Blocks.TALL_GRASS)));
+	public static final DeferredBlock<Block> GIANT_TALL_GRASS = BLOCKS.createBlock("giant_tall_grass", () -> new DoublePlantBlock(EnvironmentalProperties.applyBetterXZOffset(Block.Properties.ofFullCopy(Blocks.TALL_GRASS))));
 	public static final DeferredBlock<Block> CUP_LICHEN = BLOCKS.createBlock("cup_lichen", () -> new CupLichenBlock(EnvironmentalProperties.CUP_LICHEN));
+	public static final DeferredBlock<Block> TREE_LICHEN = BLOCKS.createBlock("tree_lichen",  () -> new TreeLichenBlock(EnvironmentalProperties.TREE_LICHEN));
 	public static final DeferredBlock<Block> CACTUS_BOBBLE = BLOCKS.createBlockNoItem("cactus_bobble", () -> new CactusBobbleBlock(EnvironmentalProperties.CACTUS_BOBBLE));
+	public static final DeferredBlock<Block> SHRUB = BLOCKS.createBlock("shrub", () -> new ShrubBlock(EnvironmentalProperties.SHRUB));
+	public static final DeferredBlock<Block> FLOWERING_SHRUB = BLOCKS.createBlock("flowering_shrub", () -> new ShrubBlock(EnvironmentalProperties.SHRUB));
 
 	public static final DeferredBlock<Block> DWARF_SPRUCE = BLOCKS.createBlock("dwarf_spruce", () -> new DwarfSpruceHeadBlock(EnvironmentalProperties.DWARF_SPRUCE));
 	public static final DeferredBlock<Block> DWARF_SPRUCE_PLANT = BLOCKS.createBlockNoItem("dwarf_spruce_plant", () -> new DwarfSprucePlantBlock(EnvironmentalProperties.DWARF_SPRUCE, (DwarfSpruceHeadBlock) DWARF_SPRUCE.get()));
@@ -91,6 +98,8 @@ public class EnvironmentalBlocks {
 	public static final DeferredBlock<Block> DWARF_SPRUCE_PLANT_CUPRIC_TORCH = BLOCKS.createBlockNoItem("dwarf_spruce_plant_cupric_torch", () -> new DwarfSprucePlantBlock(EnvironmentalProperties.DWARF_SPRUCE.lightLevel(state -> 10), EnvironmentalConstants.CUPRIC_TORCH, (DwarfSpruceHeadBlock) DWARF_SPRUCE_CUPRIC_TORCH.get()));
 
 	public static final DeferredBlock<Block> POTTED_CUP_LICHEN = BLOCKS.createBlockNoItem("potted_cup_lichen", () -> new FlowerPotBlock(EnvironmentalBlocks.CUP_LICHEN.get(), PropertyUtil.flowerPot()));
+	public static final DeferredBlock<Block> POTTED_SHRUB = BLOCKS.createBlockNoItem("potted_shrub", () -> new FlowerPotBlock(EnvironmentalBlocks.SHRUB.get(), PropertyUtil.flowerPot()));
+	public static final DeferredBlock<Block> POTTED_FLOWERING_SHRUB = BLOCKS.createBlockNoItem("potted_flowering_shrub", () -> new FlowerPotBlock(EnvironmentalBlocks.FLOWERING_SHRUB.get(), PropertyUtil.flowerPot()));
 	public static final DeferredBlock<Block> POTTED_DWARF_SPRUCE = BLOCKS.createBlockNoItem("potted_dwarf_spruce", () -> new FlowerPotBlock(EnvironmentalBlocks.DWARF_SPRUCE.get(), PropertyUtil.flowerPot()));
 
 	// Misc //
@@ -237,6 +246,36 @@ public class EnvironmentalBlocks {
 	public static final DeferredBlock<Block> PINECONE = BLOCKS.createBlock("pinecone", () -> new PineconeBlock(EnvironmentalProperties.PINECONE.randomTicks()));
 	public static final DeferredBlock<Block> WAXED_PINECONE = BLOCKS.createBlock("waxed_pinecone", () -> new WaxedPineconeBlock(EnvironmentalProperties.PINECONE));
 
+	// Cedar //
+
+	public static final DeferredBlock<Block> STRIPPED_CEDAR_LOG = BLOCKS.createBlock("stripped_cedar_log", () -> new RotatedPillarBlock(EnvironmentalProperties.CEDAR.log()));
+	public static final DeferredBlock<Block> STRIPPED_CEDAR_WOOD = BLOCKS.createBlock("stripped_cedar_wood", () -> new RotatedPillarBlock(EnvironmentalProperties.CEDAR.log()));
+	public static final DeferredBlock<Block> CEDAR_LOG = BLOCKS.createBlock("cedar_log", () -> new LogBlock(STRIPPED_CEDAR_LOG, EnvironmentalProperties.CEDAR.log()));
+	public static final DeferredBlock<Block> CEDAR_WOOD = BLOCKS.createBlock("cedar_wood", () -> new LogBlock(STRIPPED_CEDAR_WOOD, EnvironmentalProperties.CEDAR.log()));
+	public static final DeferredBlock<Block> CEDAR_LEAVES = BLOCKS.createBlock("cedar_leaves", () -> new LeavesBlock(EnvironmentalProperties.CEDAR.leaves()));
+	public static final DeferredBlock<Block> CEDAR_SAPLING = BLOCKS.createBlock("cedar_sapling", () -> new CedarSaplingBlock(EnvironmentalTreeGrowers.CEDAR, EnvironmentalProperties.CEDAR.sapling()));
+	public static final DeferredBlock<Block> POTTED_CEDAR_SAPLING = BLOCKS.createBlockNoItem("potted_cedar_sapling", () -> new FlowerPotBlock(CEDAR_SAPLING.get(), PropertyUtil.flowerPot()));
+	public static final DeferredBlock<Block> CEDAR_PLANKS = BLOCKS.createBlock("cedar_planks", () -> new Block(EnvironmentalProperties.CEDAR.planks()));
+	public static final DeferredBlock<Block> CEDAR_STAIRS = BLOCKS.createBlock("cedar_stairs", () -> new StairBlock(CEDAR_PLANKS.get().defaultBlockState(), EnvironmentalProperties.CEDAR.planks()));
+	public static final DeferredBlock<Block> CEDAR_SLAB = BLOCKS.createBlock("cedar_slab", () -> new SlabBlock(EnvironmentalProperties.CEDAR.planks()));
+	public static final DeferredBlock<Block> CEDAR_PRESSURE_PLATE = BLOCKS.createBlock("cedar_pressure_plate", () -> new PressurePlateBlock(EnvironmentalProperties.CEDAR_BLOCK_SET, EnvironmentalProperties.CEDAR.pressurePlate()));
+	public static final DeferredBlock<Block> CEDAR_BUTTON = BLOCKS.createBlock("cedar_button", () -> new ButtonBlock(EnvironmentalProperties.CEDAR_BLOCK_SET, 30, EnvironmentalProperties.CEDAR.button()));
+	public static final DeferredBlock<Block> CEDAR_FENCE = BLOCKS.createBlock("cedar_fence", () -> new FenceBlock(EnvironmentalProperties.CEDAR.planks()));
+	public static final DeferredBlock<Block> CEDAR_FENCE_GATE = BLOCKS.createBlock("cedar_fence_gate", () -> new FenceGateBlock(EnvironmentalProperties.CEDAR_WOOD_TYPE, EnvironmentalProperties.CEDAR.planks()));
+	public static final DeferredBlock<Block> CEDAR_DOOR = BLOCKS.createBlock("cedar_door", () -> new DoorBlock(EnvironmentalProperties.CEDAR_BLOCK_SET, EnvironmentalProperties.CEDAR.door()));
+	public static final DeferredBlock<Block> CEDAR_TRAPDOOR = BLOCKS.createBlock("cedar_trapdoor", () -> new TrapDoorBlock(EnvironmentalProperties.CEDAR_BLOCK_SET, EnvironmentalProperties.CEDAR.trapdoor()));
+	public static final Pair<DeferredBlock<BlueprintStandingSignBlock>, DeferredBlock<BlueprintWallSignBlock>> CEDAR_SIGNS = BLOCKS.createSignBlock("cedar", EnvironmentalProperties.CEDAR_WOOD_TYPE, EnvironmentalProperties.CEDAR.sign());
+	public static final Pair<DeferredBlock<BlueprintCeilingHangingSignBlock>, DeferredBlock<BlueprintWallHangingSignBlock>> CEDAR_HANGING_SIGNS = BLOCKS.createHangingSignBlock("cedar", EnvironmentalProperties.CEDAR_WOOD_TYPE, EnvironmentalProperties.CEDAR.hangingSign());
+
+	public static final DeferredBlock<Block> CEDAR_BOARDS = BLOCKS.createBlock("cedar_boards", () -> new RotatedPillarBlock(EnvironmentalProperties.CEDAR.planks()));
+	public static final DeferredBlock<Block> CEDAR_BOOKSHELF = BLOCKS.createBlock("cedar_bookshelf", () -> new Block(EnvironmentalProperties.CEDAR.bookshelf()));
+	public static final DeferredBlock<Block> CHISELED_CEDAR_BOOKSHELF = BLOCKS.createBlock("chiseled_cedar_bookshelf", () -> new ChiseledPineBookShelfBlock(EnvironmentalProperties.CEDAR.chiseledBookshelf()));
+	public static final DeferredBlock<Block> CEDAR_LADDER = BLOCKS.createBlock("cedar_ladder", () -> new LadderBlock(EnvironmentalProperties.CEDAR.ladder()));
+	public static final DeferredBlock<Block> CEDAR_BEEHIVE = BLOCKS.createBlock("cedar_beehive", () -> new BlueprintBeehiveBlock(EnvironmentalProperties.CEDAR.beehive()));
+	public static final DeferredBlock<Block> CEDAR_LEAF_PILE = BLOCKS.createBlock("cedar_leaf_pile", () -> new LeafPileBlock(EnvironmentalProperties.CEDAR.leafPile()));
+	public static final DeferredBlock<BlueprintChestBlock> CEDAR_CHEST = BLOCKS.createChestBlock("cedar", EnvironmentalProperties.CEDAR.chest());
+	public static final DeferredBlock<BlueprintTrappedChestBlock> TRAPPED_CEDAR_CHEST = BLOCKS.createTrappedChestBlock("cedar", EnvironmentalProperties.CEDAR.chest());
+
 	// Plum //
 
 	public static final DeferredBlock<Block> STRIPPED_PLUM_LOG = BLOCKS.createBlock("stripped_plum_log", () -> new RotatedPillarBlock(EnvironmentalProperties.PLUM.log()));
@@ -341,15 +380,23 @@ public class EnvironmentalBlocks {
 				.addItemsBefore(modLoaded(Blocks.BAMBOO_BLOCK, "woodworks"), WILLOW_BOARDS)
 				.addItemsBefore(of(Blocks.BAMBOO_BLOCK),
 						WILLOW_STAIRS, WILLOW_SLAB, WILLOW_FENCE, WILLOW_FENCE_GATE, WILLOW_DOOR, WILLOW_TRAPDOOR, WILLOW_PRESSURE_PLATE, WILLOW_BUTTON,
-						PINE_LOG, PINE_WOOD, STRIPPED_PINE_LOG, STRIPPED_PINE_WOOD, PINE_PLANKS)
+						CEDAR_LOG, CEDAR_WOOD, STRIPPED_CEDAR_LOG, STRIPPED_CEDAR_WOOD, CEDAR_PLANKS
+				)
+				.addItemsBefore(modLoaded(Blocks.BAMBOO_BLOCK, "woodworks"), CEDAR_BOARDS)
+				.addItemsBefore(of(Blocks.BAMBOO_BLOCK),
+						CEDAR_STAIRS, CEDAR_SLAB, CEDAR_FENCE, CEDAR_FENCE_GATE, CEDAR_DOOR, CEDAR_TRAPDOOR, CEDAR_PRESSURE_PLATE, CEDAR_BUTTON,
+						PINE_LOG, PINE_WOOD, STRIPPED_PINE_LOG, STRIPPED_PINE_WOOD, PINE_PLANKS
+				)
 				.addItemsBefore(modLoaded(Blocks.BAMBOO_BLOCK, "woodworks"), PINE_BOARDS)
 				.addItemsBefore(of(Blocks.BAMBOO_BLOCK),
 						PINE_STAIRS, PINE_SLAB, PINE_FENCE, PINE_FENCE_GATE, PINE_DOOR, PINE_TRAPDOOR, PINE_PRESSURE_PLATE, PINE_BUTTON,
-						PLUM_LOG, PLUM_WOOD, STRIPPED_PLUM_LOG, STRIPPED_PLUM_WOOD, PLUM_PLANKS)
+						PLUM_LOG, PLUM_WOOD, STRIPPED_PLUM_LOG, STRIPPED_PLUM_WOOD, PLUM_PLANKS
+				)
 				.addItemsBefore(modLoaded(Blocks.BAMBOO_BLOCK, "woodworks"), PLUM_BOARDS)
 				.addItemsBefore(of(Blocks.BAMBOO_BLOCK),
 						PLUM_STAIRS, PLUM_SLAB, PLUM_FENCE, PLUM_FENCE_GATE, PLUM_DOOR, PLUM_TRAPDOOR, PLUM_PRESSURE_PLATE, PLUM_BUTTON,
-						WISTERIA_LOG, WISTERIA_WOOD, STRIPPED_WISTERIA_LOG, STRIPPED_WISTERIA_WOOD, WISTERIA_PLANKS)
+						WISTERIA_LOG, WISTERIA_WOOD, STRIPPED_WISTERIA_LOG, STRIPPED_WISTERIA_WOOD, WISTERIA_PLANKS
+				)
 				.addItemsBefore(modLoaded(Blocks.BAMBOO_BLOCK, "woodworks"), WISTERIA_BOARDS)
 				.addItemsBefore(of(Blocks.BAMBOO_BLOCK),
 						WISTERIA_STAIRS, WISTERIA_SLAB, WISTERIA_FENCE, WISTERIA_FENCE_GATE, WISTERIA_DOOR, WISTERIA_TRAPDOOR, WISTERIA_PRESSURE_PLATE, WISTERIA_BUTTON
@@ -359,12 +406,14 @@ public class EnvironmentalBlocks {
 				.addItemsBefore(of(Blocks.BAMBOO_SIGN),
 						WILLOW_SIGNS.getFirst(), WILLOW_HANGING_SIGNS.getFirst(),
 						PINE_SIGNS.getFirst(), PINE_HANGING_SIGNS.getFirst(),
+						CEDAR_SIGNS.getFirst(), CEDAR_HANGING_SIGNS.getFirst(),
 						PLUM_SIGNS.getFirst(), PLUM_HANGING_SIGNS.getFirst(),
 						WISTERIA_SIGNS.getFirst(), WISTERIA_HANGING_SIGNS.getFirst()
 				)
 				.addItemsBefore(of(Items.ARMOR_STAND), SLABFISH_EFFIGY)
 				.tab(NATURAL_BLOCKS)
 				.editor(event -> event.remove(new ItemStack(Blocks.DIRT_PATH), TabVisibility.PARENT_AND_SEARCH_TABS))
+				.addItemsAfter(of(Blocks.MUD), MUDDY_SAND)
 				.addItemsAfter(of(Blocks.GRASS_BLOCK), () -> Blocks.DIRT_PATH)
 				.addItemsAfter(of(Blocks.PODZOL), PODZOL_PATH)
 				.addItemsAfter(of(Blocks.MYCELIUM), MYCELIUM_PATH)
@@ -375,10 +424,12 @@ public class EnvironmentalBlocks {
 				.addItemsAfter(of(Blocks.FERN), MYCELIUM_SPROUTS, DWARF_SPRUCE)
 				.addItemsAfter(of(Blocks.TALL_GRASS), GIANT_TALL_GRASS)
 				.addItemsAfter(of(Blocks.GLOW_LICHEN), CUP_LICHEN)
+				.addItemsAfter(of(Blocks.GLOW_LICHEN), TREE_LICHEN)
+				.addItemsAfter(of(Blocks.LARGE_FERN), SHRUB, FLOWERING_SHRUB)
 				.addItemsBefore(of(Blocks.TORCHFLOWER), BLUEBELL, DIANTHUS, VIOLET, TASSELFLOWER, RED_LOTUS_FLOWER, WHITE_LOTUS_FLOWER, CARTWHEEL,
 						YELLOW_HIBISCUS, ORANGE_HIBISCUS, RED_HIBISCUS, PINK_HIBISCUS, MAGENTA_HIBISCUS, PURPLE_HIBISCUS)
 				.addItemsBefore(of(Blocks.PITCHER_PLANT), PINK_DELPHINIUM, PURPLE_DELPHINIUM, BLUE_DELPHINIUM, WHITE_DELPHINIUM, BIRD_OF_PARADISE)
-				.addItemsBefore(of(Blocks.MUSHROOM_STEM), WILLOW_LOG, PINE_LOG, PLUM_LOG, WISTERIA_LOG)
+				.addItemsBefore(of(Blocks.MUSHROOM_STEM), WILLOW_LOG, PINE_LOG, CEDAR_LOG, PLUM_LOG, WISTERIA_LOG)
 				.addItemsBefore(of(Blocks.MELON), PINECONE, WAXED_PINECONE)
 				.addItemsAfter(modLoaded(Blocks.HAY_BLOCK, "berry_good"), PLUM_CRATE, CHERRY_CRATE)
 				.addItemsAfter(of(Blocks.HAY_BLOCK), CATTAIL_FLUFF_BLOCK, YAK_HAIR_BLOCK, YAK_HAIR_RUG)
@@ -387,6 +438,8 @@ public class EnvironmentalBlocks {
 				.addItemsBefore(modLoaded(Blocks.AZALEA_LEAVES, "woodworks"), WILLOW_LEAF_PILE)
 				.addItemsBefore(of(Blocks.AZALEA_LEAVES), PINE_LEAVES)
 				.addItemsBefore(modLoaded(Blocks.AZALEA_LEAVES, "woodworks"), PINE_LEAF_PILE)
+				.addItemsBefore(of(Blocks.AZALEA_LEAVES), CEDAR_LEAVES)
+				.addItemsBefore(modLoaded(Blocks.AZALEA_LEAVES, "woodworks"), CEDAR_LEAF_PILE)
 				.addItemsBefore(of(Blocks.AZALEA_LEAVES), CHEERFUL_PLUM_LEAVES)
 				.addItemsBefore(modLoaded(Blocks.AZALEA_LEAVES, "woodworks"), CHEERFUL_PLUM_LEAF_PILE)
 				.addItemsBefore(of(Blocks.AZALEA_LEAVES), PLUM_LEAVES)
@@ -405,7 +458,7 @@ public class EnvironmentalBlocks {
 				.addItemsBefore(modLoaded(Blocks.AZALEA_LEAVES, "woodworks"), WHITE_WISTERIA_LEAF_PILE)
 				.addItemsBefore(of(Blocks.AZALEA_LEAVES), HIBISCUS_LEAVES)
 				.addItemsBefore(modLoaded(Blocks.AZALEA_LEAVES, "woodworks"), HIBISCUS_LEAF_PILE)
-				.addItemsBefore(of(Blocks.AZALEA), WILLOW_SAPLING, PINE_SAPLING, CHEERFUL_PLUM_SAPLING, PLUM_SAPLING, MOODY_PLUM_SAPLING, PINK_WISTERIA_SAPLING, PURPLE_WISTERIA_SAPLING, BLUE_WISTERIA_SAPLING, WHITE_WISTERIA_SAPLING);
+				.addItemsBefore(of(Blocks.AZALEA), WILLOW_SAPLING, PINE_SAPLING, CEDAR_SAPLING, CHEERFUL_PLUM_SAPLING, PLUM_SAPLING, MOODY_PLUM_SAPLING, PINK_WISTERIA_SAPLING, PURPLE_WISTERIA_SAPLING, BLUE_WISTERIA_SAPLING, WHITE_WISTERIA_SAPLING);
 
 		CreativeModeTabContentsPopulator.mod("incubation_" + Environmental.MOD_ID)
 				.tab(NATURAL_BLOCKS)
@@ -413,12 +466,12 @@ public class EnvironmentalBlocks {
 
 		CreativeModeTabContentsPopulator.mod("woodworks_" + Environmental.MOD_ID)
 				.tab(FUNCTIONAL_BLOCKS)
-				.addItemsBefore(ofID(EnvironmentalConstants.BAMBOO_LADDER), WILLOW_LADDER, PINE_LADDER, PLUM_LADDER, WISTERIA_LADDER)
-				.addItemsBefore(ofID(EnvironmentalConstants.BAMBOO_BEEHIVE), WILLOW_BEEHIVE, PINE_BEEHIVE, PLUM_BEEHIVE, WISTERIA_BEEHIVE)
-				.addItemsBefore(ofID(EnvironmentalConstants.BAMBOO_BOOKSHELF), WILLOW_BOOKSHELF, CHISELED_WILLOW_BOOKSHELF, PINE_BOOKSHELF, CHISELED_PINE_BOOKSHELF, PLUM_BOOKSHELF, CHISELED_PLUM_BOOKSHELF, WISTERIA_BOOKSHELF, CHISELED_WISTERIA_BOOKSHELF)
-				.addItemsBefore(ofID(EnvironmentalConstants.BAMBOO_CLOSET), WILLOW_CHEST, PINE_CHEST, PLUM_CHEST, WISTERIA_CHEST)
+				.addItemsBefore(ofID(EnvironmentalConstants.BAMBOO_LADDER), WILLOW_LADDER, PINE_LADDER, CEDAR_LADDER, PLUM_LADDER, WISTERIA_LADDER)
+				.addItemsBefore(ofID(EnvironmentalConstants.BAMBOO_BEEHIVE), WILLOW_BEEHIVE, PINE_BEEHIVE, CEDAR_BEEHIVE, PLUM_BEEHIVE, WISTERIA_BEEHIVE)
+				.addItemsBefore(ofID(EnvironmentalConstants.BAMBOO_BOOKSHELF), WILLOW_BOOKSHELF, CHISELED_WILLOW_BOOKSHELF, PINE_BOOKSHELF, CHISELED_PINE_BOOKSHELF, CEDAR_BOOKSHELF, CHISELED_CEDAR_BOOKSHELF, PLUM_BOOKSHELF, CHISELED_PLUM_BOOKSHELF, WISTERIA_BOOKSHELF, CHISELED_WISTERIA_BOOKSHELF)
+				.addItemsBefore(ofID(EnvironmentalConstants.BAMBOO_CLOSET), WILLOW_CHEST, PINE_CHEST, CEDAR_CHEST, PLUM_CHEST, WISTERIA_CHEST)
 				.tab(REDSTONE_BLOCKS)
-				.addItemsBefore(ofID(EnvironmentalConstants.TRAPPED_BAMBOO_CLOSET), TRAPPED_WILLOW_CHEST, TRAPPED_PINE_CHEST, TRAPPED_PLUM_CHEST, TRAPPED_WISTERIA_CHEST);
+				.addItemsBefore(ofID(EnvironmentalConstants.TRAPPED_BAMBOO_CLOSET), TRAPPED_WILLOW_CHEST, TRAPPED_PINE_CHEST, TRAPPED_CEDAR_CHEST, TRAPPED_PLUM_CHEST, TRAPPED_WISTERIA_CHEST);
 	}
 
 	public static Predicate<ItemStack> modLoaded(ItemLike item, String... modids) {

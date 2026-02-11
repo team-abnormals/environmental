@@ -1,0 +1,8 @@
+{
+  "feature": "environmental:muddy_sand",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

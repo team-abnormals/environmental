@@ -52,6 +52,11 @@ public class EnvironmentalClientCompat {
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.CACTUS_BOBBLE.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.CUP_LICHEN.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.POTTED_CUP_LICHEN.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.TREE_LICHEN.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.SHRUB.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.POTTED_SHRUB.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.FLOWERING_SHRUB.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.POTTED_FLOWERING_SHRUB.get(), RenderType.cutout());
 
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.DWARF_SPRUCE.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.DWARF_SPRUCE_PLANT.get(), RenderType.cutout());
@@ -140,6 +145,14 @@ public class EnvironmentalClientCompat {
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.POTTED_PINE_SAPLING.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.PINE_LEAF_PILE.get(), RenderType.cutout());
 
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.CEDAR_DOOR.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.CEDAR_TRAPDOOR.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.CEDAR_LADDER.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.CEDAR_LEAVES.get(), RenderType.cutoutMipped());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.CEDAR_SAPLING.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.POTTED_CEDAR_SAPLING.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.CEDAR_LEAF_PILE.get(), RenderType.cutout());
+
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.PLUM_DOOR.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.PLUM_TRAPDOOR.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.PLUM_LADDER.get(), RenderType.cutout());
@@ -201,7 +214,9 @@ public class EnvironmentalClientCompat {
 	@SubscribeEvent
 	public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
 		event.register((state, level, pos, tintIndex) -> level != null && pos != null ? BiomeColors.getAverageGrassColor(level, pos) : GrassColor.get(0.5D, 1.0D),
-				EnvironmentalBlocks.GIANT_TALL_GRASS.get()
+				EnvironmentalBlocks.GIANT_TALL_GRASS.get(),
+				EnvironmentalBlocks.SHRUB.get(), EnvironmentalBlocks.FLOWERING_SHRUB.get(),
+				EnvironmentalBlocks.POTTED_SHRUB.get(), EnvironmentalBlocks.POTTED_FLOWERING_SHRUB.get()
 		);
 		event.register((state, level, pos, tintIndex) -> level != null && pos != null ? BiomeColors.getAverageFoliageColor(level, pos) : FoliageColor.get(0.5D, 1.0D),
 				EnvironmentalBlocks.WILLOW_LEAVES.get(), EnvironmentalBlocks.HANGING_WILLOW_LEAVES.get(), EnvironmentalBlocks.WILLOW_LEAF_PILE.get(),
@@ -213,6 +228,7 @@ public class EnvironmentalClientCompat {
 	public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
 		BlockColors blockColors = Minecraft.getInstance().getBlockColors();
 		event.register((item, tintIndex) -> GrassColor.get(0.5D, 1.0D), EnvironmentalBlocks.GIANT_TALL_GRASS);
+		event.register((item, tintIndex) -> tintIndex == 0 ? GrassColor.get(0.5D, 1.0D) : -1, EnvironmentalBlocks.SHRUB, EnvironmentalBlocks.FLOWERING_SHRUB);
 		event.register((item, tintIndex) -> 7578444, EnvironmentalBlocks.PINE_LEAVES, EnvironmentalBlocks.PINE_LEAF_PILE);
 		event.register((item, tintIndex) -> 6975545, EnvironmentalBlocks.WILLOW_LEAVES, EnvironmentalBlocks.HANGING_WILLOW_LEAVES, EnvironmentalBlocks.WILLOW_LEAF_PILE);
 	}

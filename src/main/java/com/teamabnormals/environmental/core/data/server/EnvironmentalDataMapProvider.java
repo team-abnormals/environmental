@@ -24,7 +24,10 @@ public class EnvironmentalDataMapProvider extends DataMapProvider {
 	@Override
 	protected void gather(Provider provider) {
 		this.builder(NeoForgeDataMaps.VILLAGER_TYPES)
-				.add(EnvironmentalBiomes.MARSH, new BiomeVillagerType(VillagerType.SWAMP), false);
+				.add(EnvironmentalBiomes.MARSH, new BiomeVillagerType(VillagerType.SWAMP), false)
+				.add(EnvironmentalBiomes.CEDAR_SWAMP, new BiomeVillagerType(VillagerType.SWAMP), false)
+				.add(EnvironmentalBiomes.CEDAR_RIVER, new BiomeVillagerType(VillagerType.SWAMP), false)
+				.add(EnvironmentalBiomes.CEDAR_BANK, new BiomeVillagerType(VillagerType.SWAMP), false);
 
 		this.builder(NeoForgeDataMaps.FURNACE_FUELS)
 				.add(DWARF_SPRUCE.getId(), new FurnaceFuel(100), false)
@@ -38,6 +41,8 @@ public class EnvironmentalDataMapProvider extends DataMapProvider {
 				.add(PINE_LEAVES.getId(), new Compostable(0.30F), false)
 				.add(PINE_SAPLING.getId(), new Compostable(0.30F), false)
 				.add(PINECONE.getId(), new Compostable(0.85F), false)
+				.add(CEDAR_LEAVES.getId(), new Compostable(0.30F), false)
+				.add(CEDAR_SAPLING.getId(), new Compostable(0.30F), false)
 				.add(PLUM_LEAVES.getId(), new Compostable(0.30F), false)
 				.add(PLUM_SAPLING.getId(), new Compostable(0.30F), false)
 				.add(CHEERFUL_PLUM_LEAVES.getId(), new Compostable(0.30F), false)
@@ -55,6 +60,9 @@ public class EnvironmentalDataMapProvider extends DataMapProvider {
 				.add(GIANT_TALL_GRASS.getId(), new Compostable(0.65F), false)
 				.add(MYCELIUM_SPROUTS.getId(), new Compostable(0.50F), false)
 				.add(CUP_LICHEN.getId(), new Compostable(0.30F), false)
+				.add(TREE_LICHEN.getId(), new Compostable(0.30F), false)
+				.add(SHRUB.getId(), new Compostable(0.50F), false)
+				.add(FLOWERING_SHRUB.getId(), new Compostable(0.50F), false)
 				.add(DWARF_SPRUCE.getId(), new Compostable(0.50F), false)
 				.add(EnvironmentalItems.TRUFFLE, new Compostable(0.65F), false)
 				.add(CATTAIL_THATCH.getId(), new Compostable(0.65F), false)

@@ -1,0 +1,6 @@
+{
+  "parent": "environmental:block/tree_lichen_0",
+  "textures": {
+    "wall": "environmental:block/tree_lichen_2"
+  }
+}

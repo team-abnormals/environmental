@@ -1,0 +1,58 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "environmental:flowering_shrub"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:any_of",
+              "terms": [
+                {
+                  "block": "environmental:flowering_shrub",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "part": "middle"
+                  }
+                },
+                {
+                  "block": "environmental:flowering_shrub",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "part": "top",
+                    "size": "3"
+                  }
+                }
+              ]
+            }
+          ],
+          "name": "environmental:flowering_shrub"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "environmental:blocks/flowering_shrub"
+}

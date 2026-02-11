@@ -2,6 +2,7 @@
   "values": [
     "environmental:willow_pressure_plate",
     "environmental:pine_pressure_plate",
+    "environmental:cedar_pressure_plate",
     "environmental:wisteria_pressure_plate",
     "environmental:plum_pressure_plate"
   ]

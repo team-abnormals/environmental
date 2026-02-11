@@ -57,6 +57,10 @@ public class EnvironmentalItems {
 	public static final DeferredItem<Item> PINE_FURNACE_BOAT = ITEMS.createItem("pine_furnace_boat", ModList.get().isLoaded("boatload") ? EnvironmentalBoatTypes.PINE_FURNACE_BOAT : () -> new Item(new Item.Properties()));
 	public static final DeferredItem<Item> LARGE_PINE_BOAT = ITEMS.createItem("large_pine_boat", ModList.get().isLoaded("boatload") ? EnvironmentalBoatTypes.LARGE_PINE_BOAT : () -> new Item(new Item.Properties()));
 
+	public static final Pair<DeferredItem<BlueprintBoatItem>, DeferredItem<BlueprintBoatItem>> CEDAR_BOAT = ITEMS.createBoatAndChestBoatItem("cedar", EnvironmentalBlocks.CEDAR_PLANKS);
+	public static final DeferredItem<Item> CEDAR_FURNACE_BOAT = ITEMS.createItem("cedar_furnace_boat", ModList.get().isLoaded("boatload") ? EnvironmentalBoatTypes.CEDAR_FURNACE_BOAT : () -> new Item(new Item.Properties()));
+	public static final DeferredItem<Item> LARGE_CEDAR_BOAT = ITEMS.createItem("large_cedar_boat", ModList.get().isLoaded("boatload") ? EnvironmentalBoatTypes.LARGE_CEDAR_BOAT : () -> new Item(new Item.Properties()));
+
 	public static final Pair<DeferredItem<BlueprintBoatItem>, DeferredItem<BlueprintBoatItem>> WISTERIA_BOAT = ITEMS.createBoatAndChestBoatItem("wisteria", EnvironmentalBlocks.WISTERIA_PLANKS);
 	public static final DeferredItem<Item> WISTERIA_FURNACE_BOAT = ITEMS.createItem("wisteria_furnace_boat", ModList.get().isLoaded("boatload") ? EnvironmentalBoatTypes.WISTERIA_FURNACE_BOAT : () -> new Item(new Item.Properties()));
 	public static final DeferredItem<Item> LARGE_WISTERIA_BOAT = ITEMS.createItem("large_wisteria_boat", ModList.get().isLoaded("boatload") ? EnvironmentalBoatTypes.LARGE_WISTERIA_BOAT : () -> new Item(new Item.Properties()));
@@ -134,6 +138,8 @@ public class EnvironmentalItems {
 				.addItemsBefore(modLoaded(Items.BAMBOO_RAFT, "boatload"), WILLOW_FURNACE_BOAT, LARGE_WILLOW_BOAT)
 				.addItemsBefore(of(Items.BAMBOO_RAFT), PINE_BOAT.getFirst(), PINE_BOAT.getSecond())
 				.addItemsBefore(modLoaded(Items.BAMBOO_RAFT, "boatload"), PINE_FURNACE_BOAT, LARGE_PINE_BOAT)
+				.addItemsBefore(of(Items.BAMBOO_RAFT), CEDAR_BOAT.getFirst(), CEDAR_BOAT.getSecond())
+				.addItemsBefore(modLoaded(Items.BAMBOO_RAFT, "boatload"), CEDAR_FURNACE_BOAT, LARGE_CEDAR_BOAT)
 				.addItemsBefore(of(Items.BAMBOO_RAFT), PLUM_BOAT.getFirst(), PLUM_BOAT.getSecond())
 				.addItemsBefore(modLoaded(Items.BAMBOO_RAFT, "boatload"), PLUM_FURNACE_BOAT, LARGE_PLUM_BOAT)
 				.addItemsBefore(of(Items.BAMBOO_RAFT), WISTERIA_BOAT.getFirst(), WISTERIA_BOAT.getSecond())

@@ -40,6 +40,7 @@ public class EnvironmentalTrades {
 				new BlueprintTrade(5, EnvironmentalBlocks.WHITE_WISTERIA_SAPLING.get().asItem(), 1, 8, 1),
 				new BlueprintTrade(5, EnvironmentalBlocks.PINE_SAPLING.get().asItem(), 1, 8, 1),
 				new BlueprintTrade(5, EnvironmentalBlocks.PINECONE.get().asItem(), 1, 8, 1),
+				new BlueprintTrade(5, EnvironmentalBlocks.CEDAR_SAPLING.get().asItem(), 1, 8, 1),
 
 				new BlueprintTrade(1, EnvironmentalBlocks.CARTWHEEL.get().asItem(), 1, 5, 1),
 				new BlueprintTrade(1, EnvironmentalBlocks.VIOLET.get().asItem(), 1, 12, 1),
@@ -55,6 +56,7 @@ public class EnvironmentalTrades {
 				new BlueprintTrade(1, EnvironmentalBlocks.MAGENTA_HIBISCUS.get().asItem(), 1, 12, 1),
 				new BlueprintTrade(1, EnvironmentalBlocks.PURPLE_HIBISCUS.get().asItem(), 1, 12, 1),
 				new BlueprintTrade(1, EnvironmentalBlocks.CUP_LICHEN.get().asItem(), 1, 8, 1),
+				new BlueprintTrade(1, EnvironmentalBlocks.TREE_LICHEN.get().asItem(), 1, 8, 1),
 				new BlueprintTrade(1, EnvironmentalBlocks.DWARF_SPRUCE.get().asItem(), 1, 8, 1)
 		);
 

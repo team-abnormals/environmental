@@ -36,6 +36,38 @@
             },
             "trigger": "minecraft:location"
           },
+          "environmental:environmental:cedar_river": {
+            "conditions": {
+              "player": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "location": {
+                      "biomes": "environmental:cedar_river"
+                    }
+                  }
+                }
+              ]
+            },
+            "trigger": "minecraft:location"
+          },
+          "environmental:environmental:cedar_swamp": {
+            "conditions": {
+              "player": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "location": {
+                      "biomes": "environmental:cedar_swamp"
+                    }
+                  }
+                }
+              ]
+            },
+            "trigger": "minecraft:location"
+          },
           "environmental:environmental:marsh": {
             "conditions": {
               "player": [
@@ -158,6 +190,12 @@
           ],
           [
             "environmental:environmental:pine_slopes"
+          ],
+          [
+            "environmental:environmental:cedar_swamp"
+          ],
+          [
+            "environmental:environmental:cedar_river"
           ]
         ],
         "should_replace_requirements": false

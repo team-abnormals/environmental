@@ -13,6 +13,7 @@ import java.util.function.Supplier;
 public class EnvironmentalBoatTypes {
 	public static final BoatloadBoatType WILLOW = BoatloadBoatType.register(BoatloadBoatType.create(Environmental.location("willow"), () -> EnvironmentalBlocks.WILLOW_PLANKS.get().asItem(), () -> EnvironmentalItems.WILLOW_BOAT.getFirst().get(), () -> EnvironmentalItems.WILLOW_BOAT.getSecond().get(), () -> EnvironmentalItems.WILLOW_FURNACE_BOAT.get(), () -> EnvironmentalItems.LARGE_WILLOW_BOAT.get()));
 	public static final BoatloadBoatType PINE = BoatloadBoatType.register(BoatloadBoatType.create(Environmental.location("pine"), () -> EnvironmentalBlocks.PINE_PLANKS.get().asItem(), () -> EnvironmentalItems.PINE_BOAT.getFirst().get(), () -> EnvironmentalItems.PINE_BOAT.getSecond().get(), () -> EnvironmentalItems.PINE_FURNACE_BOAT.get(), () -> EnvironmentalItems.LARGE_PINE_BOAT.get()));
+	public static final BoatloadBoatType CEDAR = BoatloadBoatType.register(BoatloadBoatType.create(Environmental.location("cedar"), () -> EnvironmentalBlocks.CEDAR_PLANKS.get().asItem(), () -> EnvironmentalItems.CEDAR_BOAT.getFirst().get(), () -> EnvironmentalItems.CEDAR_BOAT.getSecond().get(), () -> EnvironmentalItems.CEDAR_FURNACE_BOAT.get(), () -> EnvironmentalItems.LARGE_CEDAR_BOAT.get()));
 	public static final BoatloadBoatType WISTERIA = BoatloadBoatType.register(BoatloadBoatType.create(Environmental.location("wisteria"), () -> EnvironmentalBlocks.WISTERIA_PLANKS.get().asItem(), () -> EnvironmentalItems.WISTERIA_BOAT.getFirst().get(), () -> EnvironmentalItems.WISTERIA_BOAT.getSecond().get(), () -> EnvironmentalItems.WISTERIA_FURNACE_BOAT.get(), () -> EnvironmentalItems.LARGE_WISTERIA_BOAT.get()));
 	public static final BoatloadBoatType PLUM = BoatloadBoatType.register(BoatloadBoatType.create(Environmental.location("plum"), () -> EnvironmentalBlocks.PLUM_PLANKS.get().asItem(), () -> EnvironmentalItems.PLUM_BOAT.getFirst().get(), () -> EnvironmentalItems.PLUM_BOAT.getSecond().get(), () -> EnvironmentalItems.PLUM_FURNACE_BOAT.get(), () -> EnvironmentalItems.LARGE_PLUM_BOAT.get()));
 
@@ -21,6 +22,9 @@ public class EnvironmentalBoatTypes {
 
 	public static final Supplier<Item> PINE_FURNACE_BOAT = () -> new FurnaceBoatItem(PINE);
 	public static final Supplier<Item> LARGE_PINE_BOAT = () -> new LargeBoatItem(PINE);
+
+	public static final Supplier<Item> CEDAR_FURNACE_BOAT = () -> new FurnaceBoatItem(CEDAR);
+	public static final Supplier<Item> LARGE_CEDAR_BOAT = () -> new LargeBoatItem(CEDAR);
 
 	public static final Supplier<Item> WISTERIA_FURNACE_BOAT = () -> new FurnaceBoatItem(WISTERIA);
 	public static final Supplier<Item> LARGE_WISTERIA_BOAT = () -> new LargeBoatItem(WISTERIA);

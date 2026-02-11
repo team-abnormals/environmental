@@ -157,7 +157,8 @@ public class CattailBlock extends BushBlock implements SimpleWaterloggedBlock, B
 	}
 
 	public boolean canGrowFluff(ServerLevel level, BlockPos pos) {
-		return level.getBlockState(pos).is(Blocks.MUD);
+		BlockState state = level.getBlockState(pos);
+		return state.is(Blocks.MUD) || state.is(EnvironmentalBlocks.MUDDY_SAND);
 	}
 
 	@Override

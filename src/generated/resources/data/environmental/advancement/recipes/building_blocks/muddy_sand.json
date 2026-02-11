@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_mud_ball": {
+      "conditions": {
+        "items": [
+          {
+            "items": "environmental:mud_ball"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "environmental:muddy_sand"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_mud_ball"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "environmental:muddy_sand"
+    ]
+  }
+}

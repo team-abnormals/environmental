@@ -1,0 +1,6 @@
+{
+  "parent": "environmental:block/potted_shrub",
+  "textures": {
+    "overlay2": "environmental:block/potted_shrub_flowers"
+  }
+}

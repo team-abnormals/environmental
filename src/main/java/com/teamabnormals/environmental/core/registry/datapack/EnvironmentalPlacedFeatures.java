@@ -9,6 +9,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.features.VegetationFeatures;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
@@ -94,6 +95,7 @@ public class EnvironmentalPlacedFeatures {
 	public static final ResourceKey<PlacedFeature> TREES_OLD_GROWTH_PINE_BARRENS = createKey("trees_old_growth_pine_barrens");
 	public static final ResourceKey<PlacedFeature> TREES_PINE_BARRENS_ON_STONE = createKey("trees_pine_barrens_on_stone");
 	public static final ResourceKey<PlacedFeature> TREES_PINE_SLOPES = createKey("trees_pine_slopes");
+	public static final ResourceKey<PlacedFeature> TREES_PINE_RIVER = createKey("trees_pine_river");
 
 	public static final ResourceKey<PlacedFeature> GRAINY_COARSE_DIRT = createKey("grainy_coarse_dirt");
 	public static final ResourceKey<PlacedFeature> COARSE_DIRT_ON_STONE = createKey("coarse_dirt_on_stone");
@@ -101,6 +103,9 @@ public class EnvironmentalPlacedFeatures {
 
 	public static final ResourceKey<PlacedFeature> FALLEN_PINE_TREE = createKey("fallen_pine_tree");
 	public static final ResourceKey<PlacedFeature> FALLEN_TALL_PINE_TREE = createKey("fallen_tall_pine_tree");
+
+	public static final ResourceKey<PlacedFeature> CEDAR = createKey("cedar");
+	public static final ResourceKey<PlacedFeature> TREES_CEDAR_RIVER = createKey("trees_cedar_river");
 
 	public static final ResourceKey<PlacedFeature> DWARF_SPRUCE = createKey("dwarf_spruce");
 	public static final ResourceKey<PlacedFeature> DWARF_SPRUCE_THICKET = createKey("dwarf_spruce_thicket");
@@ -112,6 +117,9 @@ public class EnvironmentalPlacedFeatures {
 
 	public static final ResourceKey<PlacedFeature> PINE_SLOPES_ROCK = createKey("pine_slopes_rock");
 	public static final ResourceKey<PlacedFeature> PINE_SLOPES_BOULDER = createKey("pine_slopes_boulder");
+
+	public static final ResourceKey<PlacedFeature> MUDDY_SAND = createKey("muddy_sand");
+	public static final ResourceKey<PlacedFeature> SHRUB_PATCH = createKey("shrub_patch");
 
 	public static final ResourceKey<PlacedFeature> BAMBOO_BLOSSOM_WOODS = createKey("bamboo_blossom_woods");
 	public static final ResourceKey<PlacedFeature> BAMBOO_LIGHT_BLOSSOM_WOODS = createKey("bamboo_light_blossom_woods");
@@ -136,6 +144,8 @@ public class EnvironmentalPlacedFeatures {
 	public static final ResourceKey<PlacedFeature> CATTAILS = createKey("cattails");
 	public static final ResourceKey<PlacedFeature> CATTAILS_DENSE = createKey("cattails_dense");
 	public static final ResourceKey<PlacedFeature> PATCH_SUGAR_CANE_BLOSSOM = createKey("patch_sugar_cane_blossom");
+
+	public static final ResourceKey<PlacedFeature> PATCH_WATERLILY_CEDAR_RIVER = createKey("patch_waterlily_cedar_river");
 
 	public static void bootstrap(BootstrapContext<PlacedFeature> context) {
 		HolderGetter<NoiseParameters> noises = context.lookup(Registries.NOISE);
@@ -207,6 +217,10 @@ public class EnvironmentalPlacedFeatures {
 		register(context, TREES_OLD_GROWTH_PINE_BARRENS, EnvironmentalConfiguredFeatures.TREES_OLD_GROWTH_PINE_BARRENS, treePlacement(PlacementUtils.countExtra(22, 0.1F, 1)));
 		register(context, TREES_PINE_BARRENS_ON_STONE, EnvironmentalConfiguredFeatures.PINE_ON_STONE, treePlacement(PlacementUtils.countExtra(3, 0.1F, 1), ON_STONE_PLACEMENT_FILTER));
 		register(context, TREES_PINE_SLOPES, EnvironmentalConfiguredFeatures.PINE_ON_STONE, treePlacement(PlacementUtils.countExtra(6, 0.1F, 1), ON_STONE_PLACEMENT_FILTER));
+		register(context, TREES_PINE_RIVER, EnvironmentalConfiguredFeatures.TREES_PINE_BARRENS, treePlacement(PlacementUtils.countExtra(7, 0.1F, 1)));
+
+		register(context, CEDAR, EnvironmentalConfiguredFeatures.CEDAR, PlacementUtils.filteredByBlockSurvival(EnvironmentalBlocks.CEDAR_SAPLING.get()));
+		register(context, TREES_CEDAR_RIVER, EnvironmentalConfiguredFeatures.CEDAR_BEES_005, treePlacement(PlacementUtils.countExtra(7, 0.1F, 1)));
 
 		register(context, GRAINY_COARSE_DIRT, EnvironmentalConfiguredFeatures.GRAINY_COARSE_DIRT, CountPlacement.of(56), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
 		register(context, COARSE_DIRT_ON_STONE, EnvironmentalConfiguredFeatures.COARSE_DIRT_ON_STONE, CountPlacement.of(3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
@@ -222,6 +236,9 @@ public class EnvironmentalPlacedFeatures {
 		register(context, PATCH_CUP_LICHEN, EnvironmentalConfiguredFeatures.PATCH_CUP_LICHEN, RarityFilter.onAverageOnceEvery(22), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 		register(context, PATCH_CUP_LICHEN_TAIGA, EnvironmentalConfiguredFeatures.PATCH_CUP_LICHEN, RarityFilter.onAverageOnceEvery(22), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 		register(context, PATCH_CUP_LICHEN_SMALL, EnvironmentalConfiguredFeatures.PATCH_CUP_LICHEN_SMALL, RarityFilter.onAverageOnceEvery(8), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
+
+		register(context, SHRUB_PATCH, EnvironmentalConfiguredFeatures.SHRUB_PATCH, new NoiseDensityPlacement(noises.getOrThrow(EnvironmentalNoiseParameters.SHRUB_DENSITY), 16.0F, 0.5F), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
+		register(context, MUDDY_SAND, EnvironmentalConfiguredFeatures.MUDDY_SAND, BiomeFilter.biome());
 
 		register(context, PINE_SLOPES_ROCK, EnvironmentalConfiguredFeatures.STONE_ROCK, CountPlacement.of(2), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
 		register(context, PINE_SLOPES_BOULDER, EnvironmentalConfiguredFeatures.PINE_SLOPES_BOULDER, CountPlacement.of(1), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
@@ -249,6 +266,8 @@ public class EnvironmentalPlacedFeatures {
 		register(context, CATTAILS, EnvironmentalConfiguredFeatures.CATTAILS, RarityFilter.onAverageOnceEvery(2), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 		register(context, CATTAILS_DENSE, EnvironmentalConfiguredFeatures.CATTAILS_DENSE, RarityFilter.onAverageOnceEvery(5), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 		register(context, PATCH_SUGAR_CANE_BLOSSOM, EnvironmentalConfiguredFeatures.PATCH_SUGAR_CANE, RarityFilter.onAverageOnceEvery(2), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
+
+		register(context, PATCH_WATERLILY_CEDAR_RIVER, VegetationFeatures.PATCH_WATERLILY, new NoiseDensityPlacement(noises.getOrThrow(EnvironmentalNoiseParameters.CEDAR_RIVER_WATERLILY_DENSITY), 1.0F, 1.333F), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
 	}
 
 	private static ImmutableList<PlacementModifier> treePlacement(PlacementModifier modifier, PlacementModifier... extraModifiers) {

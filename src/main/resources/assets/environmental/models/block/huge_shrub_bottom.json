@@ -1,0 +1,8 @@
+{
+  "parent": "environmental:block/extended_cross_overlayed",
+  "textures": {
+    "cross": "environmental:block/huge_shrub_bottom",
+    "overlay": "environmental:block/huge_shrub_bottom_overlay",
+    "overlay2": "environmental:block/huge_shrub_bottom_overlay"
+  }
+}

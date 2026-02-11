@@ -2,10 +2,7 @@ package com.teamabnormals.environmental.core.registry.datapack;
 
 import com.google.common.collect.ImmutableList;
 import com.teamabnormals.environmental.common.block.CartwheelBlock;
-import com.teamabnormals.environmental.common.levelgen.feature.configurations.BestNoisesSelectorFeatureConfiguration;
-import com.teamabnormals.environmental.common.levelgen.feature.configurations.CupLichenPatchConfiguration;
-import com.teamabnormals.environmental.common.levelgen.feature.configurations.DwarfSpruceConfiguration;
-import com.teamabnormals.environmental.common.levelgen.feature.configurations.FallenLeavesConfiguration;
+import com.teamabnormals.environmental.common.levelgen.feature.configurations.*;
 import com.teamabnormals.environmental.common.levelgen.treedecorators.*;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalBlockTags;
@@ -104,6 +101,9 @@ public class EnvironmentalConfiguredFeatures {
 	public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_PINE_BARRENS = createKey("trees_pine_barrens");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_OLD_GROWTH_PINE_BARRENS = createKey("trees_old_growth_pine_barrens");
 
+	public static final ResourceKey<ConfiguredFeature<?, ?>> CEDAR = createKey("cedar");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> CEDAR_BEES_005 = createKey("cedar_bees_005");
+
 	public static final ResourceKey<ConfiguredFeature<?, ?>> GRAINY_COARSE_DIRT = createKey("grainy_coarse_dirt");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> COARSE_DIRT_ON_STONE = createKey("coarse_dirt_on_stone");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> SMALL_COARSE_DIRT_ON_STONE = createKey("small_coarse_dirt_on_stone");
@@ -117,6 +117,9 @@ public class EnvironmentalConfiguredFeatures {
 
 	public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_CUP_LICHEN = createKey("patch_cup_lichen");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_CUP_LICHEN_SMALL = createKey("patch_cup_lichen_small");
+
+	public static final ResourceKey<ConfiguredFeature<?, ?>> MUDDY_SAND = createKey("muddy_sand");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> SHRUB_PATCH = createKey("shrub_patch");
 
 	public static final ResourceKey<ConfiguredFeature<?, ?>> FLOWER_BLUE_ORCHID = createKey("flower_blue_orchid");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> FLOWER_CORNFLOWER = createKey("flower_cornflower");
@@ -219,6 +222,9 @@ public class EnvironmentalConfiguredFeatures {
 		register(context, TREES_PINE_BARRENS, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placedFeatures.getOrThrow(TreePlacements.SPRUCE_CHECKED), 0.2F)), placedFeatures.getOrThrow(EnvironmentalPlacedFeatures.PINE)));
 		register(context, TREES_OLD_GROWTH_PINE_BARRENS, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placedFeatures.getOrThrow(TreePlacements.SPRUCE_CHECKED), 0.15F)), placedFeatures.getOrThrow(EnvironmentalPlacedFeatures.TALL_PINE_WITH_PODZOL)));
 
+		register(context, CEDAR, EnvironmentalFeatures.CEDAR_TREE.get(), Configs.CEDAR);
+		register(context, CEDAR_BEES_005, EnvironmentalFeatures.CEDAR_TREE.get(), Configs.CEDAR_BEES_005);
+
 		register(context, GRAINY_COARSE_DIRT, EnvironmentalFeatures.GRAINY_COARSE_DIRT.get(), new ProbabilityFeatureConfiguration(0.1F));
 		register(context, COARSE_DIRT_ON_STONE, EnvironmentalFeatures.COARSE_DIRT_ON_STONE.get(), NoneFeatureConfiguration.NONE);
 		register(context, SMALL_COARSE_DIRT_ON_STONE, EnvironmentalFeatures.SMALL_COARSE_DIRT_ON_STONE.get(), NoneFeatureConfiguration.NONE);
@@ -232,6 +238,9 @@ public class EnvironmentalConfiguredFeatures {
 
 		register(context, PATCH_CUP_LICHEN, EnvironmentalFeatures.CUP_LICHEN_PATCH.get(), new CupLichenPatchConfiguration(64, 3, 2));
 		register(context, PATCH_CUP_LICHEN_SMALL, EnvironmentalFeatures.CUP_LICHEN_PATCH.get(), new CupLichenPatchConfiguration(32, 2, 2));
+
+		register(context, SHRUB_PATCH, EnvironmentalFeatures.SHRUB_PATCH.get(), new ShrubPatchConfiguration(1, true));
+		register(context, MUDDY_SAND, EnvironmentalFeatures.MUDDY_SAND.get(), NoneFeatureConfiguration.NONE);
 
 		register(context, FLOWER_BLUE_ORCHID, Feature.FLOWER, new RandomPatchConfiguration(64, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.BLUE_ORCHID)))));
 		register(context, FLOWER_CORNFLOWER, Feature.FLOWER, new RandomPatchConfiguration(64, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.CORNFLOWER)))));
@@ -341,6 +350,9 @@ public class EnvironmentalConfiguredFeatures {
 		public static final TreeConfiguration TALL_PINE = createTallPine().decorators(List.of(PINECONE)).build();
 		public static final TreeConfiguration TALL_PINE_WITH_PODZOL = createTallPine().decorators(List.of(PINECONE, PinePodzolDecorator.INSTANCE)).build();
 
+		public static final TreeConfiguration CEDAR = createCedar().build();
+		public static final TreeConfiguration CEDAR_BEES_005 = createCedar().decorators(List.of(BEEHIVE_005, PinePodzolDecorator.INSTANCE)).build();
+
 		private static TreeConfigurationBuilder createPlum() {
 			return createCustomTree(EnvironmentalBlocks.PLUM_LOG.get(), new StraightTrunkPlacer(4, 2, 0), EnvironmentalBlocks.PLUM_LEAVES.get());
 		}
@@ -359,6 +371,10 @@ public class EnvironmentalConfiguredFeatures {
 
 		private static TreeConfigurationBuilder createTallPine() {
 			return createCustomTree(EnvironmentalBlocks.PINE_LOG.get(), new StraightTrunkPlacer(16, 3, 1), EnvironmentalBlocks.PINE_LEAVES.get());
+		}
+
+		private static TreeConfigurationBuilder createCedar() {
+			return createCustomTree(EnvironmentalBlocks.CEDAR_LOG.get(), new StraightTrunkPlacer(13, 3, 1), EnvironmentalBlocks.CEDAR_LEAVES.get());
 		}
 
 		private static TreeConfigurationBuilder createWhiteWisteria() {

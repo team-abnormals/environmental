@@ -52,6 +52,15 @@ public class EnvironmentalBlockStateProvider extends BlueprintBlockStateProvider
 		this.cubeColumnBlock(PINECONE);
 		this.cubeColumnBlock(WAXED_PINECONE, PINECONE);
 
+		this.blockFamily(EnvironmentalBlockFamilies.CEDAR_PLANKS_FAMILY);
+		this.logBlocks(CEDAR_LOG, CEDAR_WOOD);
+		this.logBlocks(STRIPPED_CEDAR_LOG, STRIPPED_CEDAR_WOOD);
+		this.hangingSignBlocks(STRIPPED_CEDAR_LOG, CEDAR_HANGING_SIGNS);
+		this.leavesBlocks(CEDAR_LEAVES, CEDAR_LEAF_PILE);
+		this.crossBlockWithPot(CEDAR_SAPLING, POTTED_CEDAR_SAPLING);
+		this.woodworksBlocks(CEDAR_PLANKS, CEDAR_BOARDS, CEDAR_LADDER, CEDAR_BOOKSHELF, CEDAR_BEEHIVE, CEDAR_CHEST, TRAPPED_CEDAR_CHEST);
+		this.chiseledBookshelfBlock(CHISELED_CEDAR_BOOKSHELF, ALTERNATE_BOOKSHELF_POSITIONS);
+
 		this.blockFamily(EnvironmentalBlockFamilies.PLUM_PLANKS_FAMILY);
 		this.logBlocks(PLUM_LOG, PLUM_WOOD);
 		this.logBlocks(STRIPPED_PLUM_LOG, STRIPPED_PLUM_WOOD);

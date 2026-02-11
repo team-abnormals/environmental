@@ -2,6 +2,7 @@
   "values": [
     "environmental:willow_boards",
     "environmental:pine_boards",
+    "environmental:cedar_boards",
     "environmental:wisteria_boards",
     "environmental:plum_boards"
   ]

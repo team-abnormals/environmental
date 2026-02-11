@@ -1,5 +1,9 @@
 {
   "values": [
-    "environmental:marsh"
+    "environmental:marsh",
+    "environmental:cedar_swamp",
+    "environmental:cedar_river",
+    "environmental:cedar_bank",
+    "environmental:cedar_riverine"
   ]
 }

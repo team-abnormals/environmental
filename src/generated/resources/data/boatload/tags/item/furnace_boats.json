@@ -2,6 +2,7 @@
   "values": [
     "environmental:willow_furnace_boat",
     "environmental:pine_furnace_boat",
+    "environmental:cedar_furnace_boat",
     "environmental:wisteria_furnace_boat",
     "environmental:plum_furnace_boat"
   ]

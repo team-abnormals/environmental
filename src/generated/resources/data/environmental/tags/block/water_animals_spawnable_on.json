@@ -2,6 +2,7 @@
   "values": [
     "#minecraft:animals_spawnable_on",
     "minecraft:water",
-    "minecraft:mud"
+    "minecraft:mud",
+    "environmental:muddy_sand"
   ]
 }

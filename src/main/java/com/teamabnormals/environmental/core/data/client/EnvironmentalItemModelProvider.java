@@ -26,6 +26,7 @@ public class EnvironmentalItemModelProvider extends BlueprintItemModelProvider {
 		this.generatedItem(
 				WILLOW_BOAT.getFirst(), WILLOW_BOAT.getSecond(), WILLOW_FURNACE_BOAT, LARGE_WILLOW_BOAT,
 				PINE_BOAT.getFirst(), PINE_BOAT.getSecond(), PINE_FURNACE_BOAT, LARGE_PINE_BOAT,
+				CEDAR_BOAT.getFirst(), CEDAR_BOAT.getSecond(), CEDAR_FURNACE_BOAT, LARGE_CEDAR_BOAT,
 				WISTERIA_BOAT.getFirst(), WISTERIA_BOAT.getSecond(), WISTERIA_FURNACE_BOAT, LARGE_WISTERIA_BOAT,
 				PLUM_BOAT.getFirst(), PLUM_BOAT.getSecond(), PLUM_FURNACE_BOAT, LARGE_PLUM_BOAT,
 				LUMBERER_BANNER_PATTERN, HELPER_BANNER_PATTERN,

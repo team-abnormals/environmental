@@ -106,6 +106,8 @@ public class EnvironmentalRecipeProvider extends BlueprintRecipeProvider {
 		chiseled(consumer, RecipeCategory.BUILDING_BLOCKS, CHISELED_MUD_BRICKS.get(), Blocks.MUD_BRICK_SLAB);
 		stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, CHISELED_MUD_BRICKS.get(), Blocks.MUD_BRICKS);
 
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, MUDDY_SAND.get()).requires(EnvironmentalItems.MUD_BALL.get()).requires(Blocks.SAND).unlockedBy("has_mud_ball", has(EnvironmentalItems.MUD_BALL.get())).save(consumer);
+
 		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, Blocks.BROWN_WOOL).define('#', EnvironmentalItems.YAK_HAIR.get()).pattern("##").pattern("##").unlockedBy("has_yak_hair", has(EnvironmentalItems.YAK_HAIR.get())).save(consumer, Environmental.location(getItemName(Blocks.BROWN_WOOL)));
 		storageRecipes(consumer, RecipeCategory.MISC, EnvironmentalItems.YAK_HAIR.get(), RecipeCategory.BUILDING_BLOCKS, YAK_HAIR_BLOCK.get());
 		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, YAK_HAIR_RUG.get()).define('#', EnvironmentalItems.YAK_HAIR.get()).pattern("###").unlockedBy("has_yak_hair", has(EnvironmentalItems.YAK_HAIR.get())).save(consumer);
@@ -133,6 +135,16 @@ public class EnvironmentalRecipeProvider extends BlueprintRecipeProvider {
 		WoodworksRecipeProvider.sawmillRecipes(consumer, EnvironmentalBlockFamilies.PINE_PLANKS_FAMILY, EnvironmentalItemTags.PINE_LOGS, PINE_BOARDS.get(), PINE_LADDER.get(), Environmental.MOD_ID);
 
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, WAXED_PINECONE.get()).requires(PINECONE.get()).requires(Items.HONEYCOMB).unlockedBy(getHasName(PINECONE.get()), has(PINECONE.get())).save(consumer, getConversionRecipeName(WAXED_PINECONE.get(), Items.HONEYCOMB));
+
+		generateRecipes(consumer, EnvironmentalBlockFamilies.CEDAR_PLANKS_FAMILY);
+		planksFromLogs(consumer, CEDAR_PLANKS.get(), EnvironmentalItemTags.CEDAR_LOGS, 4);
+		woodFromLogs(consumer, CEDAR_WOOD.get(), CEDAR_LOG.get());
+		woodFromLogs(consumer, STRIPPED_CEDAR_WOOD.get(), STRIPPED_CEDAR_LOG.get());
+		hangingSign(consumer, CEDAR_HANGING_SIGNS.getFirst().get(), STRIPPED_CEDAR_LOG.get());
+		WoodworksRecipeProvider.conditionalLeafPileRecipes(consumer, CEDAR_LEAVES.get(), CEDAR_LEAF_PILE.get(), Environmental.MOD_ID);
+		BoatloadRecipeProvider.boatRecipes(consumer, EnvironmentalBoatTypes.CEDAR);
+		WoodworksRecipeProvider.baseRecipes(consumer, CEDAR_PLANKS.get(), CEDAR_SLAB.get(), CEDAR_BOARDS.get(), CEDAR_BOOKSHELF.get(), CHISELED_CEDAR_BOOKSHELF.get(), CEDAR_LADDER.get(), CEDAR_BEEHIVE.get(), CEDAR_CHEST.get(), TRAPPED_CEDAR_CHEST.get(), Environmental.MOD_ID);
+		WoodworksRecipeProvider.sawmillRecipes(consumer, EnvironmentalBlockFamilies.CEDAR_PLANKS_FAMILY, EnvironmentalItemTags.CEDAR_LOGS, CEDAR_BOARDS.get(), CEDAR_LADDER.get(), Environmental.MOD_ID);
 
 		generateRecipes(consumer, EnvironmentalBlockFamilies.PLUM_PLANKS_FAMILY);
 		planksFromLogs(consumer, PLUM_PLANKS.get(), EnvironmentalItemTags.PLUM_LOGS, 4);

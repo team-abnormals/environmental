@@ -12,6 +12,7 @@ public class EnvironmentalTreeGrowers {
 	public static final TreeGrower WILLOW = new TreeGrower("environmental:willow", Optional.empty(), Optional.of(EnvironmentalConfiguredFeatures.WILLOW), Optional.empty());
 	public static final TreeGrower WEEPING_WILLOW = new TreeGrower("environmental:weeping_willow", Optional.empty(), Optional.of(EnvironmentalConfiguredFeatures.WEEPING_WILLOW), Optional.empty());
 
+	public static final TreeGrower CEDAR = new TreeGrower("environmental:cedar", Optional.empty(), Optional.of(EnvironmentalConfiguredFeatures.CEDAR), Optional.empty());
 
 	public static final TreeGrower PLUM = new TreeGrower("environmental:plum", Optional.empty(), Optional.of(EnvironmentalConfiguredFeatures.PLUM), Optional.of(EnvironmentalConfiguredFeatures.PLUM_BEES_005));
 	public static final TreeGrower CHEERFUL_PLUM = new TreeGrower("environmental:cheerful_plum", Optional.empty(), Optional.of(EnvironmentalConfiguredFeatures.CHEERFUL_PLUM), Optional.of(EnvironmentalConfiguredFeatures.CHEERFUL_PLUM_BEES_005));

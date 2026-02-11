@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "environmental:block/cedar_slab"
+    },
+    "type=double": {
+      "model": "environmental:block/cedar_planks"
+    },
+    "type=top": {
+      "model": "environmental:block/cedar_slab_top"
+    }
+  }
+}
