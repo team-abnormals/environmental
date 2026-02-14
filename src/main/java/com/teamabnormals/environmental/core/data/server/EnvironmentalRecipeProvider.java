@@ -49,6 +49,10 @@ public class EnvironmentalRecipeProvider extends BlueprintRecipeProvider {
 		conversionRecipe(consumer, Items.YELLOW_DYE, YELLOW_HIBISCUS.get(), "yellow_dye");
 		conversionRecipe(consumer, Items.RED_DYE, RED_HIBISCUS.get(), "red_dye");
 		conversionRecipe(consumer, Items.PURPLE_DYE, PURPLE_HIBISCUS.get(), "purple_dye");
+		conversionRecipe(consumer, Items.YELLOW_DYE, BLAZING_SUNFLOWER.get(), "yellow_dye", 2);
+		conversionRecipe(consumer, Items.YELLOW_DYE, BEAMING_SUNFLOWER.get(), "yellow_dye", 2);
+		conversionRecipe(consumer, Items.YELLOW_DYE, ECLIPSED_SUNFLOWER.get(), "yellow_dye", 2);
+		conversionRecipe(consumer, Items.YELLOW_DYE, RADIANT_SUNFLOWER.get(), "yellow_dye", 2);
 
 		WoodworksRecipeProvider.conditionalLeafPileRecipes(consumer, HIBISCUS_LEAVES.get(), HIBISCUS_LEAF_PILE.get(), Environmental.MOD_ID);
 

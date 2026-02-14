@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "environmental:block/eclipsed_sunflower_bottom"
+    },
+    "half=upper": {
+      "model": "environmental:block/eclipsed_sunflower_top"
+    }
+  }
+}

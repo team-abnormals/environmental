@@ -84,6 +84,11 @@ public class EnvironmentalBlocks {
 	public static final DeferredBlock<Block> SHRUB = BLOCKS.createBlock("shrub", () -> new ShrubBlock(EnvironmentalProperties.SHRUB));
 	public static final DeferredBlock<Block> FLOWERING_SHRUB = BLOCKS.createBlock("flowering_shrub", () -> new ShrubBlock(EnvironmentalProperties.SHRUB));
 
+	public static final DeferredBlock<Block> BLAZING_SUNFLOWER = BLOCKS.createBlock("blazing_sunflower", () -> new DoublePlantBlock(Block.Properties.ofFullCopy(Blocks.SUNFLOWER)));
+	public static final DeferredBlock<Block> BEAMING_SUNFLOWER = BLOCKS.createBlock("beaming_sunflower", () -> new DoublePlantBlock(Block.Properties.ofFullCopy(Blocks.SUNFLOWER)));
+	public static final DeferredBlock<Block> ECLIPSED_SUNFLOWER = BLOCKS.createBlock("eclipsed_sunflower", () -> new DoublePlantBlock(Block.Properties.ofFullCopy(Blocks.SUNFLOWER)));
+	public static final DeferredBlock<Block> RADIANT_SUNFLOWER = BLOCKS.createBlock("radiant_sunflower", () -> new DoublePlantBlock(Block.Properties.ofFullCopy(Blocks.SUNFLOWER)));
+
 	public static final DeferredBlock<Block> DWARF_SPRUCE = BLOCKS.createBlock("dwarf_spruce", () -> new DwarfSpruceHeadBlock(EnvironmentalProperties.DWARF_SPRUCE));
 	public static final DeferredBlock<Block> DWARF_SPRUCE_PLANT = BLOCKS.createBlockNoItem("dwarf_spruce_plant", () -> new DwarfSprucePlantBlock(EnvironmentalProperties.DWARF_SPRUCE, (DwarfSpruceHeadBlock) DWARF_SPRUCE.get()));
 	public static final DeferredBlock<Block> DWARF_SPRUCE_TORCH = BLOCKS.createBlockNoItem("dwarf_spruce_torch", () -> new DwarfSpruceHeadBlock(EnvironmentalProperties.DWARF_SPRUCE.lightLevel(state -> 14), () -> Items.TORCH));
@@ -426,6 +431,7 @@ public class EnvironmentalBlocks {
 				.addItemsAfter(of(Blocks.GLOW_LICHEN), CUP_LICHEN)
 				.addItemsAfter(of(Blocks.GLOW_LICHEN), TREE_LICHEN)
 				.addItemsAfter(of(Blocks.LARGE_FERN), SHRUB, FLOWERING_SHRUB)
+				.addItemsAfter(of(Blocks.SUNFLOWER), RADIANT_SUNFLOWER, BEAMING_SUNFLOWER, ECLIPSED_SUNFLOWER, BLAZING_SUNFLOWER)
 				.addItemsBefore(of(Blocks.TORCHFLOWER), BLUEBELL, DIANTHUS, VIOLET, TASSELFLOWER, RED_LOTUS_FLOWER, WHITE_LOTUS_FLOWER, CARTWHEEL,
 						YELLOW_HIBISCUS, ORANGE_HIBISCUS, RED_HIBISCUS, PINK_HIBISCUS, MAGENTA_HIBISCUS, PURPLE_HIBISCUS)
 				.addItemsBefore(of(Blocks.PITCHER_PLANT), PINK_DELPHINIUM, PURPLE_DELPHINIUM, BLUE_DELPHINIUM, WHITE_DELPHINIUM, BIRD_OF_PARADISE)

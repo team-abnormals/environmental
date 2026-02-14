@@ -8,7 +8,9 @@ import com.teamabnormals.environmental.core.other.EnvironmentalBlockFamilies;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
@@ -110,6 +112,11 @@ public class EnvironmentalBlockStateProvider extends BlueprintBlockStateProvider
 		this.crossBlockWithPot(TASSELFLOWER, POTTED_TASSELFLOWER);
 		this.crossBlockWithPot(WHITE_LOTUS_FLOWER, POTTED_WHITE_LOTUS_FLOWER);
 		this.crossBlockWithPot(RED_LOTUS_FLOWER, POTTED_RED_LOTUS_FLOWER);
+
+		this.sunflower(BLAZING_SUNFLOWER);
+		this.sunflower(BEAMING_SUNFLOWER);
+		this.sunflower(ECLIPSED_SUNFLOWER);
+		this.sunflower(RADIANT_SUNFLOWER);
 	}
 
 	public void cubeColumnBlock(DeferredBlock<Block> block) {
@@ -119,6 +126,24 @@ public class EnvironmentalBlockStateProvider extends BlueprintBlockStateProvider
 	public void cubeColumnBlock(DeferredBlock<Block> block, DeferredBlock<Block> parent) {
 		this.simpleBlock(block.get(), this.models().cubeColumn(name(block.get()), suffix(blockTexture(parent.get()), "_side"), suffix(blockTexture(parent.get()), "_end")));
 		this.blockItem(block);
+	}
+
+	public void sunflower(DeferredBlock<Block> block) {
+		ModelFile sunflowerTop = new UncheckedModelFile("block/sunflower_top");
+
+		ResourceLocation frontTexture = blockTexture(block.get()).withSuffix("_front");
+		ModelFile top = this.models().getBuilder(name(block.get()) + "_top").parent(sunflowerTop).renderType("cutout")
+				.texture("particle", frontTexture)
+				.texture("cross", blockTexture(block.get()).withSuffix("_top"))
+				.texture("back", blockTexture(block.get()).withSuffix("_back"))
+				.texture("front", frontTexture);
+		ModelFile bottom = this.models().cross(name(block.get()) + "_bottom", blockTexture(block.get()).withSuffix("_bottom")).renderType("cutout");
+
+		this.getVariantBuilder(block.get()).forAllStates(state -> {
+			return ConfiguredModel.builder().modelFile(state.getValue(DoublePlantBlock.HALF) == DoubleBlockHalf.LOWER ? bottom : top).build();
+		});
+
+		this.generatedItem(block, frontTexture);
 	}
 
 	public void cattail(DeferredBlock<Block> cattailSproutObject, DeferredBlock<Block> cattailObject, DeferredBlock<Block> cattailStalkObject) {

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_radiant_sunflower": {
+      "conditions": {
+        "items": [
+          {
+            "items": "environmental:radiant_sunflower"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "environmental:yellow_dye_from_radiant_sunflower"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_radiant_sunflower"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "environmental:yellow_dye_from_radiant_sunflower"
+    ]
+  }
+}

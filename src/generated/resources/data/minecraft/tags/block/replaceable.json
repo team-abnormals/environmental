@@ -16,6 +16,10 @@
     "environmental:blue_delphinium",
     "environmental:purple_delphinium",
     "environmental:white_delphinium",
-    "environmental:cactus_bobble"
+    "environmental:cactus_bobble",
+    "environmental:beaming_sunflower",
+    "environmental:blazing_sunflower",
+    "environmental:eclipsed_sunflower",
+    "environmental:radiant_sunflower"
   ]
 }

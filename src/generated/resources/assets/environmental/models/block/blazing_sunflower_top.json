@@ -1,0 +1,10 @@
+{
+  "parent": "minecraft:block/sunflower_top",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "back": "environmental:block/blazing_sunflower_back",
+    "cross": "environmental:block/blazing_sunflower_top",
+    "front": "environmental:block/blazing_sunflower_front",
+    "particle": "environmental:block/blazing_sunflower_front"
+  }
+}

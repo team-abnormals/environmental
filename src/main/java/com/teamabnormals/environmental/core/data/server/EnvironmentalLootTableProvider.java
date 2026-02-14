@@ -130,6 +130,11 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.add(PURPLE_DELPHINIUM.get(), (block) -> createSinglePropConditionTable(block, DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
 			this.add(WHITE_DELPHINIUM.get(), (block) -> createSinglePropConditionTable(block, DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
 
+			this.add(BLAZING_SUNFLOWER.get(), (block) -> createSinglePropConditionTable(block, DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
+			this.add(BEAMING_SUNFLOWER.get(), (block) -> createSinglePropConditionTable(block, DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
+			this.add(ECLIPSED_SUNFLOWER.get(), (block) -> createSinglePropConditionTable(block, DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
+			this.add(RADIANT_SUNFLOWER.get(), (block) -> createSinglePropConditionTable(block, DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
+
 			this.dropPottedContents(POTTED_CARTWHEEL.get());
 			this.dropPottedContents(POTTED_BLUEBELL.get());
 			this.dropPottedContents(POTTED_VIOLET.get());
