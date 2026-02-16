@@ -1,0 +1,6 @@
+{
+  "type": "environmental:tree_lichen",
+  "config": {
+    "probability": 1.0
+  }
+}

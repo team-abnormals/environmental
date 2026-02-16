@@ -1,0 +1,8 @@
+{
+  "feature": "environmental:tree_lichen",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

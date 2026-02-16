@@ -91,6 +91,7 @@ public class EnvironmentalGeneration {
 		else
 			generation.addFeature(Decoration.VEGETAL_DECORATION, snowy ? PATCH_GRASS_SNOWY_PINE_BARRENS : PATCH_GRASS_PINE_BARRENS);
 		BiomeDefaultFeatures.addDefaultExtraVegetation(generation);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, TREE_LICHEN_UNCOMMON);
 	}
 
 	public static void pineSlopes(BiomeGenerationSettings.Builder generation) {
@@ -106,6 +107,7 @@ public class EnvironmentalGeneration {
 		BiomeDefaultFeatures.addDefaultExtraVegetation(generation);
 		BiomeDefaultFeatures.addExtraEmeralds(generation);
 		BiomeDefaultFeatures.addInfestedStone(generation);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, TREE_LICHEN_UNCOMMON);
 	}
 
 	public static void cedarCreek(BiomeGenerationSettings.Builder generation, boolean edge) {
@@ -120,6 +122,7 @@ public class EnvironmentalGeneration {
 		} else {
 			generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_CEDAR_RIVER);
 		}
+		generation.addFeature(Decoration.VEGETAL_DECORATION, TREE_LICHEN);
 		generation.addFeature(Decoration.LOCAL_MODIFICATIONS, MUDDY_SAND);
 	}
 
@@ -144,6 +147,7 @@ public class EnvironmentalGeneration {
 		generation.addFeature(Decoration.VEGETAL_DECORATION, CATTAILS_DENSE);
 		generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_CEDAR_RIVER);
 		generation.addFeature(Decoration.VEGETAL_DECORATION, SHRUB_PATCH);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, TREE_LICHEN);
 		generation.addFeature(Decoration.LOCAL_MODIFICATIONS, MUDDY_SAND);
 	}
 }

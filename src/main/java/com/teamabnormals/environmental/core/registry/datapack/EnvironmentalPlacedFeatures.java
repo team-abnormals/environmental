@@ -120,6 +120,8 @@ public class EnvironmentalPlacedFeatures {
 
 	public static final ResourceKey<PlacedFeature> MUDDY_SAND = createKey("muddy_sand");
 	public static final ResourceKey<PlacedFeature> SHRUB_PATCH = createKey("shrub_patch");
+	public static final ResourceKey<PlacedFeature> TREE_LICHEN = createKey("tree_lichen");
+	public static final ResourceKey<PlacedFeature> TREE_LICHEN_UNCOMMON = createKey("tree_lichen_uncommon");
 
 	public static final ResourceKey<PlacedFeature> BAMBOO_BLOSSOM_WOODS = createKey("bamboo_blossom_woods");
 	public static final ResourceKey<PlacedFeature> BAMBOO_LIGHT_BLOSSOM_WOODS = createKey("bamboo_light_blossom_woods");
@@ -239,6 +241,8 @@ public class EnvironmentalPlacedFeatures {
 
 		register(context, SHRUB_PATCH, EnvironmentalConfiguredFeatures.SHRUB_PATCH, new NoiseDensityPlacement(noises.getOrThrow(EnvironmentalNoiseParameters.SHRUB_DENSITY), 16.0F, 0.5F), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 		register(context, MUDDY_SAND, EnvironmentalConfiguredFeatures.MUDDY_SAND, BiomeFilter.biome());
+		register(context, TREE_LICHEN, EnvironmentalConfiguredFeatures.TREE_LICHEN, BiomeFilter.biome());
+		register(context, TREE_LICHEN_UNCOMMON, EnvironmentalConfiguredFeatures.TREE_LICHEN_UNCOMMON, BiomeFilter.biome());
 
 		register(context, PINE_SLOPES_ROCK, EnvironmentalConfiguredFeatures.STONE_ROCK, CountPlacement.of(2), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
 		register(context, PINE_SLOPES_BOULDER, EnvironmentalConfiguredFeatures.PINE_SLOPES_BOULDER, CountPlacement.of(1), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());

@@ -149,11 +149,11 @@ public class EnvironmentalBiomeSlices {
 			this.addMidSlice(consumer, Climate.Parameter.span(-0.4F, -0.26666668F));
 			this.addLowSlice(consumer, Climate.Parameter.span(-0.26666668F, -0.075F));
 
-			this.addValleys(consumer, Climate.Parameter.span(-0.1F, -0.05F), 2);
+			this.addValleys(consumer, Climate.Parameter.span(-0.125F, -0.05F), 2);
 			this.addValleys(consumer, Climate.Parameter.span(-0.05F, -0.037F), 1);
 			this.addValleys(consumer, Climate.Parameter.span(-0.037F, 0.037F), 0);
 			this.addValleys(consumer, Climate.Parameter.span(0.037F, 0.05F), 1);
-			this.addValleys(consumer, Climate.Parameter.span(0.05F, 0.1F), 2);
+			this.addValleys(consumer, Climate.Parameter.span(0.05F, 0.125F), 2);
 
 			this.addLowSlice(consumer, Climate.Parameter.span(0.075F, 0.26666668F));
 			this.addMidSlice(consumer, Climate.Parameter.span(0.26666668F, 0.4F));

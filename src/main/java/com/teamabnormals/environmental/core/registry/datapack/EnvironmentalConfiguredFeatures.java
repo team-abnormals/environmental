@@ -120,6 +120,8 @@ public class EnvironmentalConfiguredFeatures {
 
 	public static final ResourceKey<ConfiguredFeature<?, ?>> MUDDY_SAND = createKey("muddy_sand");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> SHRUB_PATCH = createKey("shrub_patch");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_LICHEN = createKey("tree_lichen");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_LICHEN_UNCOMMON = createKey("tree_lichen_uncommon");
 
 	public static final ResourceKey<ConfiguredFeature<?, ?>> FLOWER_BLUE_ORCHID = createKey("flower_blue_orchid");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> FLOWER_CORNFLOWER = createKey("flower_cornflower");
@@ -241,6 +243,8 @@ public class EnvironmentalConfiguredFeatures {
 
 		register(context, SHRUB_PATCH, EnvironmentalFeatures.SHRUB_PATCH.get(), new ShrubPatchConfiguration(1, true));
 		register(context, MUDDY_SAND, EnvironmentalFeatures.MUDDY_SAND.get(), NoneFeatureConfiguration.NONE);
+		register(context, TREE_LICHEN, EnvironmentalFeatures.TREE_LICHEN.get(), new ProbabilityFeatureConfiguration(1.0F));
+		register(context, TREE_LICHEN_UNCOMMON, EnvironmentalFeatures.TREE_LICHEN.get(), new ProbabilityFeatureConfiguration(0.5F));
 
 		register(context, FLOWER_BLUE_ORCHID, Feature.FLOWER, new RandomPatchConfiguration(64, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.BLUE_ORCHID)))));
 		register(context, FLOWER_CORNFLOWER, Feature.FLOWER, new RandomPatchConfiguration(64, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.CORNFLOWER)))));
