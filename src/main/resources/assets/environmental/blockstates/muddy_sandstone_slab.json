@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "environmental:block/muddy_sandstone_slab"
+    },
+    "type=double": {
+      "model": "environmental:block/muddy_sandstone_slab_full"
+    },
+    "type=top": {
+      "model": "environmental:block/muddy_sandstone_slab_top"
+    }
+  }
+}

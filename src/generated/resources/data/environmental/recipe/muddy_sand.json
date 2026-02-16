@@ -3,14 +3,14 @@
   "category": "building",
   "ingredients": [
     {
-      "item": "environmental:mud_ball"
+      "item": "minecraft:mud"
     },
     {
       "item": "minecraft:sand"
     }
   ],
   "result": {
-    "count": 1,
+    "count": 2,
     "id": "environmental:muddy_sand"
   }
 }

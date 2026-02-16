@@ -62,7 +62,19 @@ public class EnvironmentalBlocks {
 	public static final DeferredBlock<Block> CHISELED_MUD_BRICKS = BLOCKS.createBlock("chiseled_mud_bricks", () -> new Block(EnvironmentalProperties.MUD_BRICKS));
 	public static final DeferredBlock<Block> SLABFISH_EFFIGY = BLOCKS.createBlock("slabfish_effigy", () -> new SlabfishEffigyBlock(PropertyUtil.flowerPot().sound(SoundType.MUD_BRICKS)));
 
-	public static final DeferredBlock<Block> MUDDY_SAND = BLOCKS.createBlock("muddy_sand", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND).instrument(NoteBlockInstrument.SNARE).strength(0.5F).sound(SoundType.MUD)));
+	public static final DeferredBlock<Block> MUDDY_SAND = BLOCKS.createBlock("muddy_sand", () -> new MuddySandBlock(BlockBehaviour.Properties.of().mapColor(MapColor.SAND).instrument(NoteBlockInstrument.SNARE).strength(0.5F).sound(SoundType.MUD)));
+	public static final DeferredBlock<Block> MUDDY_SANDSTONE = BLOCKS.createBlock("muddy_sandstone", () -> new Block(EnvironmentalProperties.MUDDY_SANDSTONE));
+	public static final DeferredBlock<Block> MUDDY_SANDSTONE_SLAB = BLOCKS.createBlock("muddy_sandstone_slab", () -> new SlabBlock(EnvironmentalProperties.MUDDY_SANDSTONE));
+	public static final DeferredBlock<Block> MUDDY_SANDSTONE_STAIRS = BLOCKS.createBlock("muddy_sandstone_stairs", () -> new StairBlock(MUDDY_SANDSTONE.get().defaultBlockState(), EnvironmentalProperties.MUDDY_SANDSTONE));
+	public static final DeferredBlock<Block> MUDDY_SANDSTONE_WALL = BLOCKS.createBlock("muddy_sandstone_wall", () -> new WallBlock(EnvironmentalProperties.MUDDY_SANDSTONE_WALL));
+	public static final DeferredBlock<Block> CHISELED_MUDDY_SANDSTONE = BLOCKS.createBlock("chiseled_muddy_sandstone", () -> new Block(EnvironmentalProperties.MUDDY_SANDSTONE));
+	public static final DeferredBlock<Block> CUT_MUDDY_SANDSTONE = BLOCKS.createBlock("cut_muddy_sandstone", () -> new Block(EnvironmentalProperties.MUDDY_SANDSTONE));
+	public static final DeferredBlock<Block> CUT_MUDDY_SANDSTONE_SLAB = BLOCKS.createBlock("cut_muddy_sandstone_slab", () -> new SlabBlock(EnvironmentalProperties.MUDDY_SANDSTONE));
+	public static final DeferredBlock<Block> SMOOTH_MUDDY_SANDSTONE = BLOCKS.createBlock("smooth_muddy_sandstone", () -> new Block(EnvironmentalProperties.MUDDY_SANDSTONE));
+	public static final DeferredBlock<Block> SMOOTH_MUDDY_SANDSTONE_SLAB = BLOCKS.createBlock("smooth_muddy_sandstone_slab", () -> new SlabBlock(EnvironmentalProperties.MUDDY_SANDSTONE));
+	public static final DeferredBlock<Block> SMOOTH_MUDDY_SANDSTONE_STAIRS = BLOCKS.createBlock("smooth_muddy_sandstone_stairs", () -> new StairBlock(SMOOTH_MUDDY_SANDSTONE.get().defaultBlockState(), EnvironmentalProperties.MUDDY_SANDSTONE));
+	public static final DeferredBlock<Block> MUDGLASS = BLOCKS.createBlock("mudglass", () -> new HalfTransparentBlock(BlockBehaviour.Properties.ofLegacyCopy(Blocks.GLASS).mapColor(MapColor.COLOR_BROWN).noOcclusion().isValidSpawn(Blocks::never).isRedstoneConductor(EnvironmentalProperties::never).isSuffocating(EnvironmentalProperties::never).isViewBlocking(EnvironmentalProperties::never)));
+	public static final DeferredBlock<Block> MUDGLASS_PANE = BLOCKS.createBlock("mudglass_pane", () -> new IronBarsBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN).instrument(NoteBlockInstrument.HAT).strength(0.3F).sound(SoundType.GLASS).noOcclusion()));
 
 	// Crops //
 
@@ -406,7 +418,12 @@ public class EnvironmentalBlocks {
 				.addItemsBefore(of(Blocks.BAMBOO_BLOCK),
 						WISTERIA_STAIRS, WISTERIA_SLAB, WISTERIA_FENCE, WISTERIA_FENCE_GATE, WISTERIA_DOOR, WISTERIA_TRAPDOOR, WISTERIA_PRESSURE_PLATE, WISTERIA_BUTTON
 				)
-				.addItemsBefore(of(Blocks.SANDSTONE), GRASS_THATCH, GRASS_THATCH_STAIRS, GRASS_THATCH_SLAB, CATTAIL_THATCH, CATTAIL_THATCH_STAIRS, CATTAIL_THATCH_SLAB, DUCKWEED_THATCH, DUCKWEED_THATCH_STAIRS, DUCKWEED_THATCH_SLAB)
+				.addItemsBefore(of(Blocks.SANDSTONE),
+						GRASS_THATCH, GRASS_THATCH_STAIRS, GRASS_THATCH_SLAB,
+						CATTAIL_THATCH, CATTAIL_THATCH_STAIRS, CATTAIL_THATCH_SLAB,
+						DUCKWEED_THATCH, DUCKWEED_THATCH_STAIRS, DUCKWEED_THATCH_SLAB,
+						MUDDY_SANDSTONE, MUDDY_SANDSTONE_STAIRS, MUDDY_SANDSTONE_SLAB, MUDDY_SANDSTONE_WALL, CHISELED_MUDDY_SANDSTONE, SMOOTH_MUDDY_SANDSTONE, SMOOTH_MUDDY_SANDSTONE_STAIRS, SMOOTH_MUDDY_SANDSTONE_SLAB, CUT_MUDDY_SANDSTONE, CUT_MUDDY_SANDSTONE_SLAB
+				)
 				.tab(FUNCTIONAL_BLOCKS)
 				.addItemsBefore(of(Blocks.BAMBOO_SIGN),
 						WILLOW_SIGNS.getFirst(), WILLOW_HANGING_SIGNS.getFirst(),
@@ -418,7 +435,7 @@ public class EnvironmentalBlocks {
 				.addItemsBefore(of(Items.ARMOR_STAND), SLABFISH_EFFIGY)
 				.tab(NATURAL_BLOCKS)
 				.editor(event -> event.remove(new ItemStack(Blocks.DIRT_PATH), TabVisibility.PARENT_AND_SEARCH_TABS))
-				.addItemsAfter(of(Blocks.MUD), MUDDY_SAND)
+				.addItemsAfter(of(Blocks.MUD), MUDDY_SAND, MUDDY_SANDSTONE)
 				.addItemsAfter(of(Blocks.GRASS_BLOCK), () -> Blocks.DIRT_PATH)
 				.addItemsAfter(of(Blocks.PODZOL), PODZOL_PATH)
 				.addItemsAfter(of(Blocks.MYCELIUM), MYCELIUM_PATH)
@@ -464,7 +481,10 @@ public class EnvironmentalBlocks {
 				.addItemsBefore(modLoaded(Blocks.AZALEA_LEAVES, "woodworks"), WHITE_WISTERIA_LEAF_PILE)
 				.addItemsBefore(of(Blocks.AZALEA_LEAVES), HIBISCUS_LEAVES)
 				.addItemsBefore(modLoaded(Blocks.AZALEA_LEAVES, "woodworks"), HIBISCUS_LEAF_PILE)
-				.addItemsBefore(of(Blocks.AZALEA), WILLOW_SAPLING, PINE_SAPLING, CEDAR_SAPLING, CHEERFUL_PLUM_SAPLING, PLUM_SAPLING, MOODY_PLUM_SAPLING, PINK_WISTERIA_SAPLING, PURPLE_WISTERIA_SAPLING, BLUE_WISTERIA_SAPLING, WHITE_WISTERIA_SAPLING);
+				.addItemsBefore(of(Blocks.AZALEA), WILLOW_SAPLING, PINE_SAPLING, CEDAR_SAPLING, CHEERFUL_PLUM_SAPLING, PLUM_SAPLING, MOODY_PLUM_SAPLING, PINK_WISTERIA_SAPLING, PURPLE_WISTERIA_SAPLING, BLUE_WISTERIA_SAPLING, WHITE_WISTERIA_SAPLING)
+				.tab(COLORED_BLOCKS)
+				.addItemsAfter(of(Blocks.GLASS), MUDGLASS)
+				.addItemsAfter(of(Blocks.GLASS_PANE), MUDGLASS_PANE);
 
 		CreativeModeTabContentsPopulator.mod("incubation_" + Environmental.MOD_ID)
 				.tab(NATURAL_BLOCKS)

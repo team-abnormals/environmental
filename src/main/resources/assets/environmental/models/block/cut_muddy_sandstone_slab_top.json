@@ -1,0 +1,8 @@
+{
+  "parent": "block/slab_top",
+  "textures": {
+    "bottom": "environmental:block/muddy_sandstone_bottom",
+    "top": "environmental:block/muddy_sandstone_top",
+    "side": "environmental:block/cut_muddy_sandstone_slab"
+  }
+}

@@ -73,7 +73,8 @@
     [
       "minecraft:glow_lichen",
       "minecraft:seagrass_river",
-      "environmental:trees_cedar_river"
+      "environmental:trees_cedar_river",
+      "environmental:tree_lichen"
     ],
     [
       "minecraft:freeze_top_layer"

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "environmental:block/muddy_sandstone_top",
+    "side": "environmental:block/cut_muddy_sandstone"
+  }
+}

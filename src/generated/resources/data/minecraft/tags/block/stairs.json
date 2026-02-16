@@ -4,6 +4,8 @@
     "environmental:cattail_thatch_stairs",
     "environmental:duckweed_thatch_stairs",
     "environmental:dirt_brick_stairs",
-    "environmental:dirt_tile_stairs"
+    "environmental:dirt_tile_stairs",
+    "environmental:muddy_sandstone_stairs",
+    "environmental:smooth_muddy_sandstone_stairs"
   ]
 }

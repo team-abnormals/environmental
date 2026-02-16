@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "environmental:block/smooth_muddy_sandstone",
+    "side": "environmental:block/smooth_muddy_sandstone",
+    "top": "environmental:block/smooth_muddy_sandstone"
+  }
+}

@@ -21,8 +21,7 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.CompletableFuture;
 
-import static com.teamabnormals.environmental.core.registry.EnvironmentalBlocks.CATTAIL;
-import static com.teamabnormals.environmental.core.registry.EnvironmentalBlocks.DIANTHUS;
+import static com.teamabnormals.environmental.core.registry.EnvironmentalBlocks.*;
 import static com.teamabnormals.environmental.core.registry.EnvironmentalItems.*;
 
 public class EnvironmentalItemTagsProvider extends BlueprintItemTagsProvider {
@@ -76,8 +75,15 @@ public class EnvironmentalItemTagsProvider extends BlueprintItemTagsProvider {
 		this.tag(BlueprintItemTags.LARGE_BOATS).add(LARGE_WILLOW_BOAT.get(), LARGE_PINE_BOAT.get(), LARGE_CEDAR_BOAT.get(), LARGE_WISTERIA_BOAT.get(), LARGE_PLUM_BOAT.get());
 		this.tag(Tags.Items.MUSIC_DISCS).add(MUSIC_DISC_LEAVING_HOME.get(), MUSIC_DISC_SLABRAVE.get());
 		this.tag(ItemTags.FISHES).add(KOI.get());
+
+		this.copy(Tags.Blocks.GLASS_BLOCKS, Tags.Items.GLASS_BLOCKS);
+		this.copy(Tags.Blocks.GLASS_PANES, Tags.Items.GLASS_PANES);
+
 		this.copy(BlockTags.DIRT, ItemTags.DIRT);
 		this.tag(EnvironmentalItemTags.CONVERTABLE_TO_MUD).add(Blocks.DIRT.asItem(), Blocks.COARSE_DIRT.asItem(), Blocks.ROOTED_DIRT.asItem());
+		this.tag(Tags.Items.SANDSTONE_BLOCKS).add(MUDDY_SANDSTONE.get().asItem(), CUT_MUDDY_SANDSTONE.get().asItem(), CHISELED_MUDDY_SANDSTONE.get().asItem(), SMOOTH_MUDDY_SANDSTONE.get().asItem());
+		this.tag(Tags.Items.SANDSTONE_STAIRS).add(MUDDY_SANDSTONE_STAIRS.get().asItem(), SMOOTH_MUDDY_SANDSTONE_STAIRS.get().asItem());
+		this.tag(Tags.Items.SANDSTONE_SLABS).add(MUDDY_SANDSTONE_SLAB.get().asItem(), CUT_MUDDY_SANDSTONE_SLAB.get().asItem(), SMOOTH_MUDDY_SANDSTONE_SLAB.get().asItem());
 
 		this.copy(EnvironmentalBlockTags.STORAGE_BLOCKS_CHERRY, EnvironmentalItemTags.STORAGE_BLOCKS_CHERRY);
 		this.copy(EnvironmentalBlockTags.STORAGE_BLOCKS_PLUM, EnvironmentalItemTags.STORAGE_BLOCKS_PLUM);

@@ -1,11 +1,19 @@
 package com.teamabnormals.environmental.core.data.server;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
 import com.teamabnormals.environmental.core.registry.datapack.EnvironmentalBiomes;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup.Provider;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.RegistryFixedCodec;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.npc.VillagerType;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.DataMapProvider;
+import net.neoforged.neoforge.registries.datamaps.DataMapType;
 import net.neoforged.neoforge.registries.datamaps.builtin.BiomeVillagerType;
 import net.neoforged.neoforge.registries.datamaps.builtin.Compostable;
 import net.neoforged.neoforge.registries.datamaps.builtin.FurnaceFuel;
@@ -106,5 +114,13 @@ public class EnvironmentalDataMapProvider extends DataMapProvider {
 				.add(PINK_DELPHINIUM.getId(), new Compostable(0.65F), false)
 				.add(PURPLE_DELPHINIUM.getId(), new Compostable(0.65F), false)
 				.add(BIRD_OF_PARADISE.getId(), new Compostable(0.65F), false);
+
+		var bubbleColumnRenewables = DataMapType.builder(ResourceLocation.fromNamespaceAndPath("upgrade_aquatic", "bubble_column_renewables"), Registries.BLOCK, BubbleColumnRenewable.CODEC).build();
+		this.builder(bubbleColumnRenewables)
+				.add(MUDDY_SANDSTONE.getId(), new BubbleColumnRenewable(MUDDY_SAND), false);
+	}
+
+	private record BubbleColumnRenewable(Holder<Block> fallingBlock) {
+		private static final Codec<BubbleColumnRenewable> CODEC = RecordCodecBuilder.create((in) -> in.group(RegistryFixedCodec.create(Registries.BLOCK).fieldOf("falling_block").forGetter(BubbleColumnRenewable::fallingBlock)).apply(in, BubbleColumnRenewable::new));
 	}
 }

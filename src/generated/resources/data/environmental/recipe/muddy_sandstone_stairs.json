@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": [
+      {
+        "item": "environmental:muddy_sandstone"
+      },
+      {
+        "item": "environmental:chiseled_muddy_sandstone"
+      },
+      {
+        "item": "environmental:cut_muddy_sandstone"
+      }
+    ]
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "id": "environmental:muddy_sandstone_stairs"
+  }
+}

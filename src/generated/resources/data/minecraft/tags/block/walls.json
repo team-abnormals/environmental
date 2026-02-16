@@ -1,6 +1,7 @@
 {
   "values": [
     "environmental:dirt_brick_wall",
-    "environmental:dirt_tile_wall"
+    "environmental:dirt_tile_wall",
+    "environmental:muddy_sandstone_wall"
   ]
 }

@@ -9,6 +9,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.IronBarsBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
@@ -32,6 +33,11 @@ public class EnvironmentalBlockStateProvider extends BlueprintBlockStateProvider
 	protected void registerStatesAndModels() {
 		this.blockFamily(EnvironmentalBlockFamilies.DIRT_BRICK_FAMILY);
 		this.blockFamily(EnvironmentalBlockFamilies.DIRT_TILE_FAMILY);
+
+		this.blockFamily(EnvironmentalBlockFamilies.SMOOTH_MUDDY_SANDSTONE_FAMILY);
+		this.block(MUDGLASS);
+		this.paneBlock((IronBarsBlock) MUDGLASS_PANE.get(), this.modLoc("block/mudglass"), this.modLoc("block/mudglass_pane_side"));
+		this.generatedItem(MUDGLASS_PANE.get(), this.modLoc("block/mudglass"));
 
 		this.blockFamily(EnvironmentalBlockFamilies.WILLOW_PLANKS_FAMILY);
 		this.logBlocks(WILLOW_LOG, WILLOW_WOOD);

@@ -76,7 +76,8 @@
       "environmental:patch_waterlily_cedar_river",
       "environmental:cattails_dense",
       "environmental:trees_cedar_river",
-      "environmental:shrub_patch"
+      "environmental:shrub_patch",
+      "environmental:tree_lichen"
     ],
     [
       "minecraft:freeze_top_layer"

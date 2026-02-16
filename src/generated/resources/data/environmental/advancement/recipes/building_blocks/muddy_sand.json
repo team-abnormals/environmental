@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_mud_ball": {
+    "has_mud": {
       "conditions": {
         "items": [
           {
-            "items": "environmental:mud_ball"
+            "items": "minecraft:mud"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_mud_ball"
+      "has_mud"
     ]
   ],
   "rewards": {

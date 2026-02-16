@@ -173,7 +173,19 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.dropSelf(CHISELED_MUD_BRICKS.get());
 			this.dropSelf(SLABFISH_EFFIGY.get());
 
+			this.dropWhenSilkTouch(MUDGLASS.get());
+			this.dropWhenSilkTouch(MUDGLASS_PANE.get());
 			this.dropSelf(MUDDY_SAND.get());
+			this.dropSelf(MUDDY_SANDSTONE.get());
+			this.dropSelf(MUDDY_SANDSTONE_STAIRS.get());
+			this.dropSelf(MUDDY_SANDSTONE_WALL.get());
+			this.add(MUDDY_SANDSTONE_SLAB.get(), this::createSlabItemTable);
+			this.dropSelf(CHISELED_MUDDY_SANDSTONE.get());
+			this.dropSelf(CUT_MUDDY_SANDSTONE.get());
+			this.add(CUT_MUDDY_SANDSTONE_SLAB.get(), this::createSlabItemTable);
+			this.dropSelf(SMOOTH_MUDDY_SANDSTONE.get());
+			this.dropSelf(SMOOTH_MUDDY_SANDSTONE_STAIRS.get());
+			this.add(SMOOTH_MUDDY_SANDSTONE_SLAB.get(), this::createSlabItemTable);
 
 			this.dropSelf(GRASS_THATCH.get());
 			this.dropSelf(GRASS_THATCH_STAIRS.get());

@@ -7,14 +7,18 @@ import com.teamabnormals.blueprint.core.util.PropertyUtil.WoodSetProperties;
 import com.teamabnormals.environmental.common.block.ShrubBlock;
 import com.teamabnormals.environmental.common.block.WallHibiscusBlock;
 import com.teamabnormals.environmental.core.Environmental;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.util.Mth;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
@@ -66,6 +70,8 @@ public class EnvironmentalProperties {
 
 	public static final BlockBehaviour.Properties DIRT_BRICKS = BlockBehaviour.Properties.of().mapColor(MapColor.DIRT).strength(0.5F).sound(SoundType.GRAVEL);
 	public static final BlockBehaviour.Properties MUD_BRICKS = BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_LIGHT_GRAY).requiresCorrectToolForDrops().strength(1.5F, 3.0F).sound(SoundType.MUD_BRICKS);
+	public static final BlockBehaviour.Properties MUDDY_SANDSTONE = BlockBehaviour.Properties.of().mapColor(MapColor.SAND).requiresCorrectToolForDrops().instrument(NoteBlockInstrument.SNARE).strength(1.5F, 3.0F).sound(SoundType.MUD_BRICKS);
+	public static final BlockBehaviour.Properties MUDDY_SANDSTONE_WALL = BlockBehaviour.Properties.of().forceSolidOn().mapColor(MapColor.SAND).requiresCorrectToolForDrops().instrument(NoteBlockInstrument.SNARE).strength(1.5F, 3.0F).sound(SoundType.MUD_BRICKS);
 
 	public static final BlockBehaviour.Properties YAK_HAIR_BLOCK = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN).strength(0.8F).sound(SoundType.WOOL).noOcclusion().ignitedByLava();
 	public static final BlockBehaviour.Properties YAK_HAIR_RUG = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN).strength(0.1F).sound(SoundType.WOOL).noOcclusion().ignitedByLava();
@@ -136,5 +142,9 @@ public class EnvironmentalProperties {
 			return new Vec3(xOffset, 0.0, zOffset);
 		};
 		return properties;
+	}
+
+	public static boolean never(BlockState state, BlockGetter blockGetter, BlockPos pos) {
+		return false;
 	}
 }

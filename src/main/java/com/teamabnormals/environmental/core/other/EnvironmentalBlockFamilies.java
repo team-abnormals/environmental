@@ -16,4 +16,6 @@ public class EnvironmentalBlockFamilies {
 	public static final BlockFamily DUCKWEED_THATCH_FAMILY = new BlockFamily.Builder(DUCKWEED_THATCH.get()).stairs(DUCKWEED_THATCH_STAIRS.get()).slab(DUCKWEED_THATCH_SLAB.get()).getFamily();
 	public static final BlockFamily DIRT_BRICK_FAMILY = new BlockFamily.Builder(DIRT_BRICKS.get()).stairs(DIRT_BRICK_STAIRS.get()).slab(DIRT_BRICK_SLAB.get()).wall(DIRT_BRICK_WALL.get()).getFamily();
 	public static final BlockFamily DIRT_TILE_FAMILY = new BlockFamily.Builder(DIRT_TILES.get()).stairs(DIRT_TILE_STAIRS.get()).slab(DIRT_TILE_SLAB.get()).wall(DIRT_TILE_WALL.get()).getFamily();
+	public static final BlockFamily CUT_MUDDY_SANDSTONE_FAMILY = new BlockFamily.Builder(CUT_MUDDY_SANDSTONE.get()).slab(CUT_MUDDY_SANDSTONE_SLAB.get()).getFamily();
+	public static final BlockFamily SMOOTH_MUDDY_SANDSTONE_FAMILY = new BlockFamily.Builder(SMOOTH_MUDDY_SANDSTONE.get()).stairs(SMOOTH_MUDDY_SANDSTONE_STAIRS.get()).slab(SMOOTH_MUDDY_SANDSTONE_SLAB.get()).getFamily();
 }

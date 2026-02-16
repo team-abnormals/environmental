@@ -82,7 +82,8 @@
       "environmental:trees_pine_slopes",
       "environmental:patch_grass_pine_slopes",
       "minecraft:patch_sugar_cane",
-      "minecraft:patch_pumpkin"
+      "minecraft:patch_pumpkin",
+      "environmental:tree_lichen_uncommon"
     ],
     [
       "minecraft:freeze_top_layer"

@@ -209,6 +209,9 @@ public class EnvironmentalClientCompat {
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.POTTED_PURPLE_WISTERIA_SAPLING.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.POTTED_PURPLE_DELPHINIUM.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.PURPLE_WISTERIA_LEAF_PILE.get(), RenderType.cutout());
+
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.MUDGLASS.get(), RenderType.translucent());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.MUDGLASS_PANE.get(), RenderType.translucent());
 	}
 
 	@SubscribeEvent

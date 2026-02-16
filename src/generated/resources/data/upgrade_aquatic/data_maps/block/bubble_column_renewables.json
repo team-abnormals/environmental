@@ -1,0 +1,7 @@
+{
+  "values": {
+    "environmental:muddy_sandstone": {
+      "falling_block": "environmental:muddy_sand"
+    }
+  }
+}

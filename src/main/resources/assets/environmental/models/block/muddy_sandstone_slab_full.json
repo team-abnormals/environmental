@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "bottom": "environmental:block/muddy_sandstone_bottom",
+    "top": "environmental:block/muddy_sandstone_top",
+    "side": "environmental:block/muddy_sandstone_slab"
+  }
+}

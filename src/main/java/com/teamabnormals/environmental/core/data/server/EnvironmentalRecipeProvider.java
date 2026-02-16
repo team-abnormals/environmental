@@ -2,6 +2,7 @@ package com.teamabnormals.environmental.core.data.server;
 
 import com.teamabnormals.blueprint.core.data.server.BlueprintRecipeProvider;
 import com.teamabnormals.boatload.core.data.server.BoatloadRecipeProvider;
+import com.teamabnormals.clayworks.core.data.server.ClayworksRecipeProvider;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.other.EnvironmentalBlockFamilies;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalItemTags;
@@ -110,7 +111,47 @@ public class EnvironmentalRecipeProvider extends BlueprintRecipeProvider {
 		chiseled(consumer, RecipeCategory.BUILDING_BLOCKS, CHISELED_MUD_BRICKS.get(), Blocks.MUD_BRICK_SLAB);
 		stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, CHISELED_MUD_BRICKS.get(), Blocks.MUD_BRICKS);
 
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, MUDDY_SAND.get()).requires(EnvironmentalItems.MUD_BALL.get()).requires(Blocks.SAND).unlockedBy("has_mud_ball", has(EnvironmentalItems.MUD_BALL.get())).save(consumer);
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, MUDDY_SAND.get(), 2).requires(Blocks.MUD).requires(Blocks.SAND).unlockedBy("has_mud", has(Blocks.MUD)).save(consumer);
+		SimpleCookingRecipeBuilder.smelting(Ingredient.of(MUDDY_SAND), RecipeCategory.BUILDING_BLOCKS, MUDGLASS.asItem(), 0.1F, 200)
+				.unlockedBy("has_smelts_to_mudglass", has(MUDDY_SAND))
+				.save(consumer);
+		ClayworksRecipeProvider.bakingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, MUDDY_SAND, MUDGLASS, 0.1F, 100, Environmental.MOD_ID);
+		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, MUDGLASS_PANE, 16)
+				.define('#', MUDGLASS)
+				.pattern("###")
+				.pattern("###")
+				.unlockedBy("has_mudglass", has(MUDGLASS))
+				.save(consumer);
+		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, MUDDY_SANDSTONE).define('#', MUDDY_SAND).pattern("##").pattern("##").unlockedBy("has_muddy_sandstone", has(MUDDY_SANDSTONE)).save(consumer, Environmental.location(getItemName(MUDDY_SANDSTONE)));
+		slabBuilder(RecipeCategory.BUILDING_BLOCKS, MUDDY_SANDSTONE_SLAB, Ingredient.of(MUDDY_SANDSTONE, CHISELED_MUDDY_SANDSTONE))
+				.unlockedBy("has_muddy_sandstone", has(MUDDY_SANDSTONE))
+				.unlockedBy("has_chiseled_muddy_sandstone", has(CHISELED_MUDDY_SANDSTONE))
+				.save(consumer);
+		stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, MUDDY_SANDSTONE_SLAB, MUDDY_SANDSTONE, 2);
+		stairBuilder(MUDDY_SANDSTONE_STAIRS, Ingredient.of(MUDDY_SANDSTONE, CHISELED_MUDDY_SANDSTONE, CUT_MUDDY_SANDSTONE))
+				.unlockedBy("has_muddy_sandstone", has(MUDDY_SANDSTONE))
+				.unlockedBy("has_chiseled_muddy_sandstone", has(CHISELED_MUDDY_SANDSTONE))
+				.unlockedBy("has_cut_muddy_sandstone", has(CUT_MUDDY_SANDSTONE))
+				.save(consumer);
+		stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, MUDDY_SANDSTONE_STAIRS, MUDDY_SANDSTONE);
+		wall(consumer, RecipeCategory.DECORATIONS, MUDDY_SANDSTONE_WALL, MUDDY_SANDSTONE);
+		stonecutterRecipe(consumer, RecipeCategory.DECORATIONS, MUDDY_SANDSTONE_WALL, MUDDY_SANDSTONE);
+		chiseledBuilder(RecipeCategory.BUILDING_BLOCKS, CHISELED_MUDDY_SANDSTONE, Ingredient.of(MUDDY_SANDSTONE_SLAB))
+				.unlockedBy("has_muddy_sandstone", has(MUDDY_SANDSTONE))
+				.unlockedBy("has_chiseled_muddy_sandstone", has(CHISELED_MUDDY_SANDSTONE))
+				.unlockedBy("has_cut_muddy_sandstone", has(CUT_MUDDY_SANDSTONE))
+				.save(consumer);
+		stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, CHISELED_MUDDY_SANDSTONE, MUDDY_SANDSTONE);
+		SimpleCookingRecipeBuilder.smelting(Ingredient.of(MUDDY_SANDSTONE), RecipeCategory.BUILDING_BLOCKS, SMOOTH_MUDDY_SANDSTONE.get().asItem(), 0.1F, 200).unlockedBy("has_muddy_sandstone", has(MUDDY_SANDSTONE)).save(consumer);
+		ClayworksRecipeProvider.bakingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, MUDDY_SANDSTONE, SMOOTH_MUDDY_SANDSTONE, 0.1F, 100, Environmental.MOD_ID);
+		generateRecipes(consumer, EnvironmentalBlockFamilies.SMOOTH_MUDDY_SANDSTONE_FAMILY);
+		stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, SMOOTH_MUDDY_SANDSTONE_SLAB.get(), SMOOTH_MUDDY_SANDSTONE.get(), 2);
+		stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, SMOOTH_MUDDY_SANDSTONE_STAIRS.get(), SMOOTH_MUDDY_SANDSTONE.get(), 1);
+		generateRecipes(consumer, EnvironmentalBlockFamilies.CUT_MUDDY_SANDSTONE_FAMILY);
+		cut(consumer, RecipeCategory.BUILDING_BLOCKS, CUT_MUDDY_SANDSTONE, MUDDY_SANDSTONE);
+		stonecutterRecipe(consumer, RecipeCategory.DECORATIONS, CUT_MUDDY_SANDSTONE, MUDDY_SANDSTONE);
+		stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, CUT_MUDDY_SANDSTONE_SLAB, MUDDY_SANDSTONE, 2);
+		stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, CUT_MUDDY_SANDSTONE_SLAB, CUT_MUDDY_SANDSTONE, 2);
 
 		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, Blocks.BROWN_WOOL).define('#', EnvironmentalItems.YAK_HAIR.get()).pattern("##").pattern("##").unlockedBy("has_yak_hair", has(EnvironmentalItems.YAK_HAIR.get())).save(consumer, Environmental.location(getItemName(Blocks.BROWN_WOOL)));
 		storageRecipes(consumer, RecipeCategory.MISC, EnvironmentalItems.YAK_HAIR.get(), RecipeCategory.BUILDING_BLOCKS, YAK_HAIR_BLOCK.get());
