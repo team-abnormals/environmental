@@ -26,19 +26,24 @@ public class PointedDripstoneBlockMixin {
 	@Inject(method = "maybeTransferFluid", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/PointedDripstoneBlock;findFillableCauldronBelowStalactiteTip(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/material/Fluid;)Lnet/minecraft/core/BlockPos;", shift = At.Shift.BEFORE), locals = LocalCapture.CAPTURE_FAILSOFT, allow = 1, cancellable = true)
 	private static void transformMuddySandToMud(BlockState state, ServerLevel level, BlockPos pos, float randChance, CallbackInfo info, Optional<PointedDripstoneBlock.FluidInfo> fluidInfoOptional, Fluid fluid, float f, FluidType.DripstoneDripInfo dripInfo, BlockPos tip) {
 		var fluidInfo = fluidInfoOptional.get();
-		if (fluidInfo.sourceState().is(EnvironmentalBlocks.MUDDY_SAND) && fluidInfo.fluid() == Fluids.WATER) {
-			BlockState newState = Blocks.MUD.defaultBlockState();
-			level.setBlockAndUpdate(fluidInfo.pos(), newState);
-			Block.pushEntitiesUp(fluidInfo.sourceState(), newState, level, fluidInfo.pos());
-			level.gameEvent(GameEvent.BLOCK_CHANGE, fluidInfo.pos(), GameEvent.Context.of(newState));
-			level.levelEvent(1504, tip, 0);
-			info.cancel();
-		}
+		if (fluidInfo.fluid() != Fluids.WATER) return;
+		BlockState sourceState = fluidInfo.sourceState();
+		BlockState newState;
+		if (sourceState.is(EnvironmentalBlocks.MUDDY_SAND)) {
+			newState = Blocks.MUD.defaultBlockState();
+		} else if (sourceState.is(EnvironmentalBlocks.MUDDY_PODZOL)) {
+			newState = Blocks.CLAY.defaultBlockState();
+		} else return;
+		level.setBlockAndUpdate(fluidInfo.pos(), newState);
+		Block.pushEntitiesUp(sourceState, newState, level, fluidInfo.pos());
+		level.gameEvent(GameEvent.BLOCK_CHANGE, fluidInfo.pos(), GameEvent.Context.of(newState));
+		level.levelEvent(1504, tip, 0);
+		info.cancel();
 	}
 
 	@Inject(method = "Lnet/minecraft/world/level/block/PointedDripstoneBlock;lambda$getFluidAboveStalactite$11(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/PointedDripstoneBlock$FluidInfo;", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/world/level/Level;getBlockState(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;"), locals = LocalCapture.CAPTURE_FAILSOFT, allow = 1, cancellable = true)
 	private static void getConvertibleBlockAboveStalactite(Level level, BlockPos pos, CallbackInfoReturnable<PointedDripstoneBlock.FluidInfo> info, BlockPos above, BlockState aboveState) {
-		if (aboveState.is(EnvironmentalBlocks.MUDDY_SAND) && !level.dimensionType().ultraWarm())
+		if ((aboveState.is(EnvironmentalBlocks.MUDDY_SAND) || aboveState.is(EnvironmentalBlocks.MUDDY_PODZOL)) && !level.dimensionType().ultraWarm())
 			info.setReturnValue(new PointedDripstoneBlock.FluidInfo(above, Fluids.WATER, aboveState));
 	}
 }

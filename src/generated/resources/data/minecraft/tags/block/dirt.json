@@ -8,6 +8,7 @@
     "environmental:dirt_tile_stairs",
     "environmental:dirt_tile_slab",
     "environmental:dirt_tile_wall",
-    "environmental:muddy_sand"
+    "environmental:muddy_sand",
+    "environmental:muddy_podzol"
   ]
 }

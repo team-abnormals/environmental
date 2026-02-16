@@ -1,6 +1,7 @@
 package com.teamabnormals.environmental.common.levelgen.treedecorators;
 
 import com.mojang.serialization.MapCodec;
+import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.teamabnormals.environmental.core.registry.EnvironmentalTreeDecorators;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
@@ -31,7 +32,9 @@ public class PinePodzolDecorator extends TreeDecorator {
 				if (Math.abs(x) != 1 || Math.abs(z) != 1) {
 					if (x == 0 && z == 0 || context.random().nextInt(4) == 0) {
 						mutable.set(origin.offset(x, 0, z));
-						if (Feature.isGrassOrDirt(level, mutable)) {
+						if (level.isStateAtPosition(mutable, state -> state.getBlock() == Blocks.MUD)) {
+							context.setBlock(mutable, EnvironmentalBlocks.MUDDY_PODZOL.get().defaultBlockState());
+						} else if (Feature.isGrassOrDirt(level, mutable)) {
 							context.setBlock(mutable, Blocks.PODZOL.defaultBlockState());
 							mutable.move(Direction.UP);
 							if (level.isStateAtPosition(mutable, BlockStateBase::isAir))

@@ -1,0 +1,9 @@
+{
+    "parent": "block/dirt_path",
+    "textures": {
+        "particle": "environmental:block/muddy_podzol",
+        "top": "environmental:block/muddy_podzol_path_top",
+        "side": "environmental:block/muddy_podzol_path_side",
+        "bottom": "environmental:block/muddy_podzol"
+    }
+}

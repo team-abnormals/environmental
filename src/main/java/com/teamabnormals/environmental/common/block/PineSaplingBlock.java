@@ -1,5 +1,6 @@
 package com.teamabnormals.environmental.common.block;
 
+import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -21,7 +22,8 @@ public class PineSaplingBlock extends SaplingBlock {
 		if (state.getValue(STAGE) == 0) {
 			level.setBlock(pos, state.cycle(STAGE), 4);
 		} else {
-			TreeGrower treeGrower = level.getBlockState(pos.below()).is(Blocks.PODZOL) ? this.tallTreeGrower : this.treeGrower;
+			BlockState belowState = level.getBlockState(pos.below());
+			TreeGrower treeGrower = belowState.is(Blocks.PODZOL) || belowState.is(EnvironmentalBlocks.MUDDY_PODZOL) ? this.tallTreeGrower : this.treeGrower;
 			treeGrower.growTree(level, level.getChunkSource().getGenerator(), pos, state, random);
 		}
 	}

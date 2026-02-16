@@ -3,6 +3,7 @@
     "#minecraft:animals_spawnable_on",
     "minecraft:water",
     "minecraft:mud",
-    "environmental:muddy_sand"
+    "environmental:muddy_sand",
+    "environmental:muddy_podzol"
   ]
 }

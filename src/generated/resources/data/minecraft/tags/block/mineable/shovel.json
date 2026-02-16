@@ -9,9 +9,12 @@
     "environmental:dirt_tile_slab",
     "environmental:dirt_tile_wall",
     "environmental:muddy_sand",
+    "environmental:muddy_podzol",
     "environmental:buried_truffle",
     "environmental:dirt_path",
     "environmental:podzol_path",
-    "environmental:mycelium_path"
+    "environmental:mycelium_path",
+    "environmental:mud_path",
+    "environmental:muddy_podzol_path"
   ]
 }

@@ -55,7 +55,7 @@ public class EnvironmentalBlockTagsProvider extends BlockTagsProvider {
 				MUDDY_SANDSTONE.get(), MUDDY_SANDSTONE_STAIRS.get(), MUDDY_SANDSTONE_SLAB.get(), MUDDY_SANDSTONE_WALL.get(), CHISELED_MUDDY_SANDSTONE.get(), SMOOTH_MUDDY_SANDSTONE.get(), SMOOTH_MUDDY_SANDSTONE_STAIRS.get(), SMOOTH_MUDDY_SANDSTONE_SLAB.get(), CUT_MUDDY_SANDSTONE.get(), CUT_MUDDY_SANDSTONE_SLAB.get()
 		);
 
-		this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(DIRT_BRICKS.get(), DIRT_BRICK_STAIRS.get(), DIRT_BRICK_SLAB.get(), DIRT_BRICK_WALL.get(), DIRT_TILES.get(), DIRT_TILE_STAIRS.get(), DIRT_TILE_SLAB.get(), DIRT_TILE_WALL.get(), MUDDY_SAND.get(), BURIED_TRUFFLE.get(), DIRT_PATH.get(), PODZOL_PATH.get(), MYCELIUM_PATH.get());
+		this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(DIRT_BRICKS.get(), DIRT_BRICK_STAIRS.get(), DIRT_BRICK_SLAB.get(), DIRT_BRICK_WALL.get(), DIRT_TILES.get(), DIRT_TILE_STAIRS.get(), DIRT_TILE_SLAB.get(), DIRT_TILE_WALL.get(), MUDDY_SAND.get(), MUDDY_PODZOL.get(), BURIED_TRUFFLE.get(), DIRT_PATH.get(), PODZOL_PATH.get(), MYCELIUM_PATH.get(), MUD_PATH.get(), MUDDY_PODZOL_PATH.get());
 
 		this.tag(MINEABLE_WITH_KNIFE).add(YAK_HAIR_BLOCK.get(), YAK_HAIR_RUG.get());
 		this.tag(COMPOST_ACTIVATORS).add(MYCELIUM_SPROUTS.get());
@@ -67,12 +67,12 @@ public class EnvironmentalBlockTagsProvider extends BlockTagsProvider {
 		this.tag(Tags.Blocks.GLASS_BLOCKS).add(MUDGLASS.get());
 		this.tag(Tags.Blocks.GLASS_PANES).add(MUDGLASS_PANE.get());
 
-		this.tag(BlockTags.DIRT).add(DIRT_BRICKS.get(), DIRT_BRICK_STAIRS.get(), DIRT_BRICK_SLAB.get(), DIRT_BRICK_WALL.get(), DIRT_TILES.get(), DIRT_TILE_STAIRS.get(), DIRT_TILE_SLAB.get(), DIRT_TILE_WALL.get(), MUDDY_SAND.get());
+		this.tag(BlockTags.DIRT).add(DIRT_BRICKS.get(), DIRT_BRICK_STAIRS.get(), DIRT_BRICK_SLAB.get(), DIRT_BRICK_WALL.get(), DIRT_TILES.get(), DIRT_TILE_STAIRS.get(), DIRT_TILE_SLAB.get(), DIRT_TILE_WALL.get(), MUDDY_SAND.get(), MUDDY_PODZOL.get());
 		this.tag(BlockTags.SAND).add(MUDDY_SAND.get());
 		this.tag(Tags.Blocks.SANDSTONE_BLOCKS).add(MUDDY_SANDSTONE.get(), CUT_MUDDY_SANDSTONE.get(), CHISELED_MUDDY_SANDSTONE.get(), SMOOTH_MUDDY_SANDSTONE.get());
 		this.tag(Tags.Blocks.SANDSTONE_STAIRS).add(MUDDY_SANDSTONE_STAIRS.get(), SMOOTH_MUDDY_SANDSTONE_STAIRS.get());
 		this.tag(Tags.Blocks.SANDSTONE_SLABS).add(MUDDY_SANDSTONE_SLAB.get(), CUT_MUDDY_SANDSTONE_SLAB.get(), SMOOTH_MUDDY_SANDSTONE_SLAB.get());
-		this.tag(BlockTags.SNIFFER_DIGGABLE_BLOCK).add(MUDDY_SAND.get());
+		this.tag(BlockTags.SNIFFER_DIGGABLE_BLOCK).add(MUDDY_SAND.get(), MUDDY_PODZOL.get());
 		this.tag(BlockTags.FLOWER_POTS).add(
 				POTTED_WILLOW_SAPLING.get(), POTTED_PINE_SAPLING.get(), POTTED_CEDAR_SAPLING.get(), POTTED_PINK_WISTERIA_SAPLING.get(), POTTED_BLUE_WISTERIA_SAPLING.get(), POTTED_PURPLE_WISTERIA_SAPLING.get(), POTTED_WHITE_WISTERIA_SAPLING.get(),
 				POTTED_PLUM_SAPLING.get(), POTTED_CHEERFUL_PLUM_SAPLING.get(), POTTED_MOODY_PLUM_SAPLING.get(),
@@ -89,6 +89,7 @@ public class EnvironmentalBlockTagsProvider extends BlockTagsProvider {
 		this.tag(BlockTags.LEAVES).add(WILLOW_LEAVES.get(), PINE_LEAVES.get(), CEDAR_LEAVES.get(), WISTERIA_LEAVES.get(), PINK_WISTERIA_LEAVES.get(), BLUE_WISTERIA_LEAVES.get(), PURPLE_WISTERIA_LEAVES.get(), WHITE_WISTERIA_LEAVES.get(), PLUM_LEAVES.get(), CHEERFUL_PLUM_LEAVES.get(), MOODY_PLUM_LEAVES.get(), HIBISCUS_LEAVES.get());
 		this.tag(BlockTags.OVERWORLD_NATURAL_LOGS).add(WILLOW_LOG.get(), PINE_LOG.get(), CEDAR_LOG.get(), WISTERIA_LOG.get(), PLUM_LOG.get());
 		this.tag(BlockTags.LOGS_THAT_BURN).addTags(WILLOW_LOGS, PINE_LOGS, CEDAR_LOGS, WISTERIA_LOGS, PLUM_LOGS);
+		this.tag(BlockTags.MUSHROOM_GROW_BLOCK).add(MUDDY_PODZOL.get());
 
 		this.tag(BlockTags.PLANKS).add(WILLOW_PLANKS.get(), PINE_PLANKS.get(), CEDAR_PLANKS.get(), WISTERIA_PLANKS.get(), PLUM_PLANKS.get());
 		this.tag(BlockTags.WOODEN_BUTTONS).add(WILLOW_BUTTON.get(), PINE_BUTTON.get(), CEDAR_BUTTON.get(), WISTERIA_BUTTON.get(), PLUM_BUTTON.get());
@@ -116,11 +117,12 @@ public class EnvironmentalBlockTagsProvider extends BlockTagsProvider {
 		this.tag(BlockTags.OCCLUDES_VIBRATION_SIGNALS).add(YAK_HAIR_BLOCK.get());
 		this.tag(BlockTags.DAMPENS_VIBRATIONS).add(YAK_HAIR_BLOCK.get(), YAK_HAIR_RUG.get());
 		this.tag(BlockTags.IMPERMEABLE).add(MUDGLASS.get());
+		this.tag(BlockTags.SNOW_LAYER_CAN_SURVIVE_ON).add(MUDDY_PODZOL.get());
 
 		this.tag(DEER_SPAWNABLE_ON).add(Blocks.GRASS_BLOCK, Blocks.SNOW, Blocks.SNOW_BLOCK);
-		this.tag(WATER_ANIMALS_SPAWNABLE_ON).addTag(BlockTags.ANIMALS_SPAWNABLE_ON).add(Blocks.WATER, Blocks.MUD, MUDDY_SAND.get());
-		this.tag(BlockTags.FROGS_SPAWNABLE_ON).add(MUDDY_SAND.get());
-		this.tag(GRASS_LIKE).add(Blocks.GRASS_BLOCK, Blocks.PODZOL, Blocks.MYCELIUM).addOptional(ResourceLocation.fromNamespaceAndPath("atmospheric", "crustose"));
+		this.tag(WATER_ANIMALS_SPAWNABLE_ON).addTag(BlockTags.ANIMALS_SPAWNABLE_ON).add(Blocks.WATER, Blocks.MUD, MUDDY_SAND.get(), MUDDY_PODZOL.get());
+		this.tag(BlockTags.FROGS_SPAWNABLE_ON).add(MUDDY_SAND.get(), MUDDY_PODZOL.get());
+		this.tag(GRASS_LIKE).add(Blocks.GRASS_BLOCK, Blocks.PODZOL, Blocks.MYCELIUM, MUDDY_PODZOL.get()).addOptional(ResourceLocation.fromNamespaceAndPath("atmospheric", "crustose"));
 		this.tag(CUP_LICHEN_PLANTABLE_ON).addTag(BlockTags.DIRT).addTag(Tags.Blocks.STONES).addTag(Tags.Blocks.ORES).addTag(BlockTags.LOGS);
 		this.tag(CACTUS_BOBBLE_PLANTABLE_ON).add(Blocks.CACTUS).addOptional(ResourceLocation.fromNamespaceAndPath("atmospheric", "snowy_cactus"));
 		this.tag(CATTAIL_PLANTABLE_ON).addTag(BlockTags.DIRT).addTag(BlockTags.SAND).add(Blocks.FARMLAND);
@@ -156,6 +158,12 @@ public class EnvironmentalBlockTagsProvider extends BlockTagsProvider {
 		this.tag(Tags.Blocks.FENCE_GATES_WOODEN).add(WILLOW_FENCE_GATE.get(), PINE_FENCE_GATE.get(), CEDAR_FENCE_GATE.get(), WISTERIA_FENCE_GATE.get(), PLUM_FENCE_GATE.get());
 		this.tag(Tags.Blocks.STRIPPED_LOGS).add(STRIPPED_WILLOW_LOG.get(), STRIPPED_PINE_LOG.get(), STRIPPED_CEDAR_LOG.get(), STRIPPED_WISTERIA_LOG.get(), STRIPPED_PLUM_LOG.get());
 		this.tag(Tags.Blocks.STRIPPED_WOODS).add(STRIPPED_WILLOW_WOOD.get(), STRIPPED_PINE_WOOD.get(), STRIPPED_CEDAR_WOOD.get(), STRIPPED_WISTERIA_WOOD.get(), STRIPPED_PLUM_WOOD.get());
+
+		this.tag(DIRT_PATHABLE).add(Blocks.DIRT, Blocks.COARSE_DIRT, Blocks.ROOTED_DIRT);
+		this.tag(PODZOL_PATHABLE).add(Blocks.PODZOL);
+		this.tag(MYCELIUM_PATHABLE).add(Blocks.MYCELIUM);
+		this.tag(MUD_PATHABLE).add(Blocks.MUD, Blocks.MUDDY_MANGROVE_ROOTS);
+		this.tag(MUDDY_PODZOL_PATHABLE).add(MUDDY_PODZOL.get());
 
 		this.tag(Tags.Blocks.STORAGE_BLOCKS).addTags(STORAGE_BLOCKS_CHERRY, STORAGE_BLOCKS_PLUM, STORAGE_BLOCKS_DUCK_EGG, STORAGE_BLOCKS_CATTAIL_FLUFF);
 		this.tag(STORAGE_BLOCKS_CHERRY).add(CHERRY_CRATE.get());

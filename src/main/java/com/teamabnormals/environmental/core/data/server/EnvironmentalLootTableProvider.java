@@ -173,6 +173,7 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.dropSelf(CHISELED_MUD_BRICKS.get());
 			this.dropSelf(SLABFISH_EFFIGY.get());
 
+			this.add(MUDDY_PODZOL.get(), block -> this.createSingleItemTableWithSilkTouch(block, Blocks.MUD));
 			this.dropWhenSilkTouch(MUDGLASS.get());
 			this.dropWhenSilkTouch(MUDGLASS_PANE.get());
 			this.dropSelf(MUDDY_SAND.get());
@@ -201,6 +202,8 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.dropOther(DIRT_PATH.get(), Blocks.DIRT);
 			this.dropOther(MYCELIUM_PATH.get(), Blocks.DIRT);
 			this.dropOther(PODZOL_PATH.get(), Blocks.DIRT);
+			this.dropOther(MUD_PATH.get(), Blocks.MUD);
+			this.dropOther(MUDDY_PODZOL_PATH.get(), Blocks.MUD);
 			this.add(CATTAIL_SPROUT.get(), block -> createCattailDrops(block, EnvironmentalItems.CATTAIL_FLUFF.get()));
 			this.add(CATTAIL.get(), block -> createCattailDrops(block, block));
 			this.add(CATTAIL_STALK.get(), noDrop());

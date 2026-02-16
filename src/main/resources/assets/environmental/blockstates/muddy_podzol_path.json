@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "environmental:block/muddy_podzol_path"
+      },
+      {
+        "model": "environmental:block/muddy_podzol_path",
+        "y": 90
+      },
+      {
+        "model": "environmental:block/muddy_podzol_path",
+        "y": 180
+      },
+      {
+        "model": "environmental:block/muddy_podzol_path",
+        "y": 270
+      }
+    ]
+  }
+}

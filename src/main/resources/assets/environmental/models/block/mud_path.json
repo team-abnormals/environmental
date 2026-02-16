@@ -1,0 +1,9 @@
+{
+    "parent": "block/dirt_path",
+    "textures": {
+        "particle": "minecraft:block/mud",
+        "top": "environmental:block/mud_path_top",
+        "side": "environmental:block/mud_path_side",
+        "bottom": "minecraft:block/mud"
+    }
+}

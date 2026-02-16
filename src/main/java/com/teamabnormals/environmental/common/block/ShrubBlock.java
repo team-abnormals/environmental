@@ -41,11 +41,6 @@ public class ShrubBlock extends BushBlock implements BonemealableBlock, IShearab
 	}
 
 	@Override
-	protected float getMaxHorizontalOffset() {
-		return super.getMaxHorizontalOffset();
-	}
-
-	@Override
 	protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		return switch (state.getValue(SIZE)) {
 			case 1 -> SMALL_SHAPE;

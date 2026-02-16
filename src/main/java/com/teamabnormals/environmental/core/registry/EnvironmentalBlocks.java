@@ -62,6 +62,7 @@ public class EnvironmentalBlocks {
 	public static final DeferredBlock<Block> CHISELED_MUD_BRICKS = BLOCKS.createBlock("chiseled_mud_bricks", () -> new Block(EnvironmentalProperties.MUD_BRICKS));
 	public static final DeferredBlock<Block> SLABFISH_EFFIGY = BLOCKS.createBlock("slabfish_effigy", () -> new SlabfishEffigyBlock(PropertyUtil.flowerPot().sound(SoundType.MUD_BRICKS)));
 
+	public static final DeferredBlock<Block> MUDDY_PODZOL = BLOCKS.createBlock("muddy_podzol", () -> new MudBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MUD).mapColor(MapColor.PODZOL)));
 	public static final DeferredBlock<Block> MUDDY_SAND = BLOCKS.createBlock("muddy_sand", () -> new MuddySandBlock(BlockBehaviour.Properties.of().mapColor(MapColor.SAND).instrument(NoteBlockInstrument.SNARE).strength(0.5F).sound(SoundType.MUD)));
 	public static final DeferredBlock<Block> MUDDY_SANDSTONE = BLOCKS.createBlock("muddy_sandstone", () -> new Block(EnvironmentalProperties.MUDDY_SANDSTONE));
 	public static final DeferredBlock<Block> MUDDY_SANDSTONE_SLAB = BLOCKS.createBlock("muddy_sandstone_slab", () -> new SlabBlock(EnvironmentalProperties.MUDDY_SANDSTONE));
@@ -129,6 +130,8 @@ public class EnvironmentalBlocks {
 	public static final DeferredBlock<Block> DIRT_PATH = BLOCKS.createBlock("dirt_path", () -> new DirtPathBlock(EnvironmentalProperties.DIRT_PATH));
 	public static final DeferredBlock<Block> PODZOL_PATH = BLOCKS.createBlock("podzol_path", () -> new DirtPathBlock(EnvironmentalProperties.PODZOL_PATH));
 	public static final DeferredBlock<Block> MYCELIUM_PATH = BLOCKS.createBlock("mycelium_path", () -> new DirtPathBlock(EnvironmentalProperties.MYCELIUM_PATH));
+	public static final DeferredBlock<Block> MUD_PATH = BLOCKS.createBlock("mud_path", () -> new MudPathBlock(EnvironmentalProperties.MUD_PATH));
+	public static final DeferredBlock<Block> MUDDY_PODZOL_PATH = BLOCKS.createBlock("muddy_podzol_path", () -> new MudPathBlock(EnvironmentalProperties.MUDDY_PODZOL_PATH));
 	public static final DeferredBlock<Block> YAK_HAIR_BLOCK = BLOCKS.createBlock("yak_hair_block", () -> new ThatchBlock(EnvironmentalProperties.YAK_HAIR_BLOCK));
 	public static final DeferredBlock<Block> YAK_HAIR_RUG = BLOCKS.createBlock("yak_hair_rug", () -> new RugBlock(EnvironmentalProperties.YAK_HAIR_RUG));
 
@@ -440,6 +443,7 @@ public class EnvironmentalBlocks {
 				.addItemsAfter(of(Blocks.PODZOL), PODZOL_PATH)
 				.addItemsAfter(of(Blocks.MYCELIUM), MYCELIUM_PATH)
 				.addItemsAfter(of(Blocks.DIRT), DIRT_PATH)
+				.addItemsAfter(of(Blocks.MUD), MUD_PATH, MUDDY_PODZOL, MUDDY_PODZOL_PATH)
 				.addItemsBefore(of(Blocks.FARMLAND), BURIED_TRUFFLE)
 				.addItemsAfter(of(Blocks.LILY_PAD), DUCKWEED)
 				.addItemsAfter(of(Blocks.SUGAR_CANE), CATTAIL)

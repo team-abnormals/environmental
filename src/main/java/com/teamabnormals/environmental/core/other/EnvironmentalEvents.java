@@ -1,7 +1,9 @@
 package com.teamabnormals.environmental.core.other;
 
 import com.google.common.collect.Sets;
+import com.mojang.datafixers.util.Pair;
 import com.teamabnormals.blueprint.common.world.storage.tracking.IDataManager;
+import com.teamabnormals.blueprint.core.util.DataUtil;
 import com.teamabnormals.blueprint.core.util.MathUtil;
 import com.teamabnormals.environmental.common.entity.ai.goal.CatLeapAtDwarfSpruceGoal;
 import com.teamabnormals.environmental.common.entity.ai.goal.HuntTruffleGoal;
@@ -22,10 +24,15 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.Holder.Reference;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.dispenser.BlockSource;
+import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -42,6 +49,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.entity.projectile.ThrownPotion;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionContents;
@@ -51,9 +59,11 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -75,10 +85,43 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Supplier;
 
 @EventBusSubscriber(modid = Environmental.MOD_ID)
 public class EnvironmentalEvents {
 	public static final List<MobSpawnType> VALID_SPAWNS = List.of(MobSpawnType.NATURAL, MobSpawnType.CHUNK_GENERATION, MobSpawnType.JOCKEY, MobSpawnType.REINFORCEMENT, MobSpawnType.PATROL);
+	private static final List<Pair<TagKey<Block>, Supplier<? extends Block>>> FLATTENABLES = List.of(
+			Pair.of(EnvironmentalBlockTags.DIRT_PATHABLE, EnvironmentalBlocks.DIRT_PATH),
+			Pair.of(EnvironmentalBlockTags.PODZOL_PATHABLE, EnvironmentalBlocks.PODZOL_PATH),
+			Pair.of(EnvironmentalBlockTags.MYCELIUM_PATHABLE, EnvironmentalBlocks.MYCELIUM_PATH),
+			Pair.of(EnvironmentalBlockTags.MUD_PATHABLE, EnvironmentalBlocks.MUD_PATH),
+			Pair.of(EnvironmentalBlockTags.MUDDY_PODZOL_PATHABLE, EnvironmentalBlocks.MUDDY_PODZOL_PATH)
+	);
+
+	static {
+		DataUtil.registerAlternativeDispenseBehavior(new DataUtil.AlternativeDispenseBehavior(
+				Environmental.MOD_ID,
+				Items.POTION,
+				(source, stack) -> {
+					return stack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).is(Potions.WATER) && source.level().getBlockState(source.pos().relative(source.state().getValue(DispenserBlock.FACING))).is(Blocks.PODZOL);
+				},
+				new DefaultDispenseItemBehavior() {
+					@Override
+					public ItemStack execute(BlockSource source, ItemStack stack) {
+						ServerLevel serverLevel = source.level();
+						BlockPos pos = source.pos();
+						BlockPos relativePos = source.pos().relative(source.state().getValue(DispenserBlock.FACING));
+						for (int i = 0; i < 5; i++) {
+							serverLevel.sendParticles(ParticleTypes.SPLASH, (double)pos.getX() + serverLevel.random.nextDouble(), pos.getY() + 1, (double)pos.getZ() + serverLevel.random.nextDouble(), 1, 0.0, 0.0, 0.0, 1.0);
+						}
+						serverLevel.playSound(null, pos, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
+						serverLevel.gameEvent(null, GameEvent.FLUID_PLACE, pos);
+						serverLevel.setBlockAndUpdate(relativePos, EnvironmentalBlocks.MUDDY_PODZOL.get().defaultBlockState());
+						return this.consumeWithRemainder(source, stack, new ItemStack(Items.GLASS_BOTTLE));
+					}
+				}
+		));
+	}
 
 	@SubscribeEvent
 	public static void onLivingSpawn(FinalizeSpawnEvent event) {
@@ -171,15 +214,33 @@ public class EnvironmentalEvents {
 			event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide()));
 			event.setCanceled(true);
 		} else if (event.getFace() != Direction.DOWN && stack.canPerformAction(ItemAbilities.SHOVEL_FLATTEN) && !player.isSpectator() && level.isEmptyBlock(pos.above())) {
-			if (state.is(Blocks.PODZOL) || state.is(Blocks.MYCELIUM) || state.is(Blocks.DIRT) || state.is(Blocks.COARSE_DIRT) || state.is(Blocks.ROOTED_DIRT)) {
+			for (var flattenable : FLATTENABLES) {
+				if (!state.is(flattenable.getFirst())) continue;
 				level.playSound(player, pos, SoundEvents.SHOVEL_FLATTEN, SoundSource.BLOCKS, 1.0F, 1.0F);
 				if (!level.isClientSide) {
 					stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(event.getHand()));
-					level.setBlock(pos, state.is(Blocks.PODZOL) ? EnvironmentalBlocks.PODZOL_PATH.get().defaultBlockState() : state.is(Blocks.MYCELIUM) ? EnvironmentalBlocks.MYCELIUM_PATH.get().defaultBlockState() : EnvironmentalBlocks.DIRT_PATH.get().defaultBlockState(), 11);
+					level.setBlock(pos, flattenable.getSecond().get().defaultBlockState(), 11);
 				}
 				event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide()));
 				event.setCanceled(true);
+				break;
 			}
+		} else if (event.getFace() != Direction.DOWN && state.is(Blocks.PODZOL) && stack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).is(Potions.WATER)) {
+			level.playSound(null, pos, SoundEvents.GENERIC_SPLASH, SoundSource.BLOCKS, 1.0F, 1.0F);
+			player.setItemInHand(event.getHand(), ItemUtils.createFilledResult(stack, player, new ItemStack(Items.GLASS_BOTTLE)));
+			player.awardStat(Stats.ITEM_USED.get(stack.getItem()));
+			if (!level.isClientSide) {
+				ServerLevel serverlevel = (ServerLevel) level;
+				for (int i = 0; i < 5; i++) {
+					serverlevel.sendParticles(ParticleTypes.SPLASH, (double) pos.getX() + level.random.nextDouble(), pos.getY() + 1, (double) pos.getZ() + level.random.nextDouble(), 1, 0.0, 0.0, 0.0, 1.0);
+				}
+			}
+
+			level.playSound(null, pos, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
+			level.gameEvent(null, GameEvent.FLUID_PLACE, pos);
+			level.setBlockAndUpdate(pos, EnvironmentalBlocks.MUDDY_PODZOL.get().defaultBlockState());
+			event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide));
+			event.setCanceled(true);
 		}
 	}
 
