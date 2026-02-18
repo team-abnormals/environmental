@@ -88,6 +88,8 @@ public class EnvironmentalItems {
 	public static final DeferredItem<Item> MAGENTA_HIBISCUS = ITEMS.createItem("magenta_hibiscus", () -> new HibiscusBlockItem(EnvironmentalBlocks.MAGENTA_HIBISCUS.get(), EnvironmentalBlocks.MAGENTA_WALL_HIBISCUS.get(), new Item.Properties()));
 	public static final DeferredItem<Item> PURPLE_HIBISCUS = ITEMS.createItem("purple_hibiscus", () -> new HibiscusBlockItem(EnvironmentalBlocks.PURPLE_HIBISCUS.get(), EnvironmentalBlocks.PURPLE_WALL_HIBISCUS.get(), new Item.Properties()));
 
+	public static final DeferredItem<Item> BOG_IRON = ITEMS.createItem("bog_iron", () -> new Item(new Item.Properties()));
+
 	public static final DeferredItem<Item> KEEPER_ARMOR_TRIM_SMITHING_TEMPLATE = ITEMS.createItem("keeper_armor_trim_smithing_template", () -> SmithingTemplateItem.createArmorTrimTemplate(EnvironmentalTrimPatterns.KEEPER));
 
 	public static final DeferredItem<DeferredSpawnEggItem> SLABFISH_SPAWN_EGG = ITEMS.createSpawnEggItem("slabfish", EnvironmentalEntityTypes.SLABFISH::get, 0x5F9341, 0xD4B788);
@@ -131,6 +133,7 @@ public class EnvironmentalItems {
 				.addItemsBefore(of(Items.LEATHER), YAK_HAIR)
 				.addItemsAfter(of(Items.CLAY_BALL), MUD_BALL)
 				.addItemsBefore(of(Items.STRING), CATTAIL_FLUFF)
+				.addItemsAfter(of(Items.RAW_IRON), BOG_IRON)
 				.addItemsAfter(of(Items.DUNE_ARMOR_TRIM_SMITHING_TEMPLATE), KEEPER_ARMOR_TRIM_SMITHING_TEMPLATE)
 				.tab(COMBAT)
 				.addItemsAfter(of(Items.EGG), MUD_BALL)

@@ -6,22 +6,17 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:raw_iron",
-          "weight": 22
+          "name": "environmental:bog_iron",
+          "weight": 26
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:brown_dye",
-          "weight": 12
+          "weight": 15
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:iron_nugget",
-          "weight": 11
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:raw_iron_block",
+          "name": "environmental:bog_iron_block",
           "weight": 3
         },
         {

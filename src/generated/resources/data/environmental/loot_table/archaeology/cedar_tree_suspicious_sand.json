@@ -11,7 +11,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:iron_nugget",
+          "name": "environmental:bog_iron",
           "weight": 2
         }
       ],

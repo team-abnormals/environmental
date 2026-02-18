@@ -1,0 +1,9 @@
+{
+  "asset_name": "environmental_bog_iron",
+  "description": {
+    "color": "#915D4A",
+    "translate": "trim_material.environmental.bog_iron"
+  },
+  "ingredient": "environmental:bog_iron",
+  "item_model_index": -1.0
+}

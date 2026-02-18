@@ -38,12 +38,9 @@ import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.Half;
-import net.minecraft.world.level.storage.loot.BuiltInLootTables;
+import net.minecraft.world.level.storage.loot.*;
 import net.minecraft.world.level.storage.loot.LootContext.EntityTarget;
-import net.minecraft.world.level.storage.loot.LootPool;
-import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.LootTable.Builder;
-import net.minecraft.world.level.storage.loot.ValidationContext;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.functions.*;
@@ -188,6 +185,7 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.dropSelf(SMOOTH_MUDDY_SANDSTONE.get());
 			this.dropSelf(SMOOTH_MUDDY_SANDSTONE_STAIRS.get());
 			this.add(SMOOTH_MUDDY_SANDSTONE_SLAB.get(), this::createSlabItemTable);
+			this.add(BOG_IRON_BLOCK.get(), block -> this.createBogIronBlockDrops(block, enchantments));
 
 			this.dropSelf(GRASS_THATCH.get());
 			this.dropSelf(GRASS_THATCH_STAIRS.get());
@@ -415,6 +413,26 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.add(WHITE_HANGING_WISTERIA_LEAVES.get(), BlockLootSubProvider::createShearsOnlyDrop);
 		}
 
+		protected LootTable.Builder createBogIronBlockDrops(Block block, RegistryLookup<Enchantment> enchantments) {
+			var silkTouch = this.hasSilkTouch();
+			var doesNotHaveSilkTouch = silkTouch.invert();
+			var uniformFortuneBonus = ApplyBonusCount.addUniformBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE));
+			return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+					.add(LootItem.lootTableItem(block).when(silkTouch))
+					.add(LootItem.lootTableItem(EnvironmentalItems.BOG_IRON)
+							.apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 8.0F)))
+							.apply(uniformFortuneBonus)
+							.apply(LimitCount.limitCount(IntRange.range(2, 8)))
+							.when(doesNotHaveSilkTouch)
+					)
+			).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.IRON_NUGGET)
+					.apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 6.0F)))
+					.apply(uniformFortuneBonus)
+					.apply(LimitCount.limitCount(IntRange.range(1, 9)))
+					.when(doesNotHaveSilkTouch)
+			));
+		}
+
 		protected LootTable.Builder createCupLichenDrops(Block block) {
 			return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(applyExplosionDecay(block, LootItem.lootTableItem(block).apply(List.of(2, 3, 4), (cups) -> {
 				return SetItemCountFunction.setCount(ConstantValue.exactly((float) cups.intValue())).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CupLichenBlock.CUPS, cups)));
@@ -588,17 +606,16 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 
 			consumer.accept(EnvironmentalLootTables.CEDAR_BOG_ORE, LootTable.lootTable()
 					.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
-							.add(LootItem.lootTableItem(Items.RAW_IRON).setWeight(22))
-							.add(LootItem.lootTableItem(Items.BROWN_DYE).setWeight(12))
-							.add(LootItem.lootTableItem(Items.IRON_NUGGET).setWeight(11))
-							.add(LootItem.lootTableItem(Items.RAW_IRON_BLOCK).setWeight(3))
+							.add(LootItem.lootTableItem(EnvironmentalItems.BOG_IRON).setWeight(26))
+							.add(LootItem.lootTableItem(Items.BROWN_DYE).setWeight(15))
+							.add(LootItem.lootTableItem(BOG_IRON_BLOCK).setWeight(3))
 							.add(LootItem.lootTableItem(EnvironmentalItems.KEEPER_ARMOR_TRIM_SMITHING_TEMPLATE.get()))
 					)
 			);
 			consumer.accept(EnvironmentalLootTables.CEDAR_TREE_SUSPICIOUS_SAND, LootTable.lootTable()
 					.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
 							.add(LootItem.lootTableItem(Items.BROWN_DYE).setWeight(3))
-							.add(LootItem.lootTableItem(Items.IRON_NUGGET).setWeight(2))
+							.add(LootItem.lootTableItem(EnvironmentalItems.BOG_IRON).setWeight(2))
 					)
 			);
 		}

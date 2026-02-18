@@ -80,6 +80,7 @@ public class EnvironmentalBlocks {
 	public static final DeferredBlock<Block> SMOOTH_MUDDY_SANDSTONE_STAIRS = BLOCKS.createBlock("smooth_muddy_sandstone_stairs", () -> new StairBlock(SMOOTH_MUDDY_SANDSTONE.get().defaultBlockState(), EnvironmentalProperties.MUDDY_SANDSTONE));
 	public static final DeferredBlock<Block> MUDGLASS = BLOCKS.createBlock("mudglass", () -> new HalfTransparentBlock(BlockBehaviour.Properties.ofLegacyCopy(Blocks.GLASS).mapColor(MapColor.COLOR_BROWN).noOcclusion().isValidSpawn(Blocks::never).isRedstoneConductor(EnvironmentalProperties::never).isSuffocating(EnvironmentalProperties::never).isViewBlocking(EnvironmentalProperties::never)));
 	public static final DeferredBlock<Block> MUDGLASS_PANE = BLOCKS.createBlock("mudglass_pane", () -> new IronBarsBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN).instrument(NoteBlockInstrument.HAT).strength(0.3F).sound(SoundType.GLASS).noOcclusion()));
+	public static final DeferredBlock<Block> BOG_IRON_BLOCK = BLOCKS.createBlock("bog_iron_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.RAW_IRON_BLOCK)));
 
 	// Crops //
 
@@ -453,6 +454,7 @@ public class EnvironmentalBlocks {
 				.addItemsAfter(of(Blocks.MYCELIUM), MYCELIUM_PATH)
 				.addItemsAfter(of(Blocks.DIRT), DIRT_PATH)
 				.addItemsAfter(of(Blocks.MUD), MUD_PATH, MUDDY_PODZOL, MUDDY_PODZOL_PATH)
+				.addItemsAfter(of(Blocks.RAW_IRON_BLOCK), BOG_IRON_BLOCK)
 				.addItemsBefore(of(Blocks.FARMLAND), BURIED_TRUFFLE)
 				.addItemsAfter(of(Blocks.LILY_PAD), DUCKWEED)
 				.addItemsAfter(of(Blocks.SUGAR_CANE), CATTAIL)

@@ -23,6 +23,20 @@
         "environmental:trims/models/armor/keeper",
         "environmental:trims/models/armor/keeper_leggings"
       ]
+    },
+    {
+      "type": "blueprint:paletted_permutations",
+      "palette_key": "minecraft:trims/color_palettes/trim_palette",
+      "permutations": {
+        "environmental_bog_iron": "environmental:trims/color_palettes/bog_iron"
+      },
+      "sources": [
+        {
+          "type": "minecraft:directory",
+          "prefix": "trims/models/armor/",
+          "source": "trims/models/armor"
+        }
+      ]
     }
   ]
 }

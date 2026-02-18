@@ -13,6 +13,7 @@
     "environmental:smooth_muddy_sandstone_stairs",
     "environmental:smooth_muddy_sandstone_slab",
     "environmental:cut_muddy_sandstone",
-    "environmental:cut_muddy_sandstone_slab"
+    "environmental:cut_muddy_sandstone_slab",
+    "environmental:bog_iron_block"
   ]
 }

@@ -3,6 +3,7 @@
     "#c:storage_blocks/cherry",
     "#c:storage_blocks/plum",
     "#c:storage_blocks/duck_egg",
-    "#c:storage_blocks/cattail_fluff"
+    "#c:storage_blocks/cattail_fluff",
+    "environmental:bog_iron_block"
   ]
 }

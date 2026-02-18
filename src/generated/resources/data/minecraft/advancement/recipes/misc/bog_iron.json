@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_bog_iron_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": "environmental:bog_iron_block"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:bog_iron"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_bog_iron_block"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:bog_iron"
+    ]
+  }
+}

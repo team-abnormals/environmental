@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "environmental:block/bog_iron_block"
+    }
+  }
+}

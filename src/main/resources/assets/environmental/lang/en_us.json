@@ -45,6 +45,7 @@
   "block.environmental.blue_wisteria_leaves": "Blue Wisteria Leaves",
   "block.environmental.blue_wisteria_sapling": "Blue Wisteria Sapling",
   "block.environmental.bluebell": "Bluebell",
+  "block.environmental.bog_iron_block": "Bog Iron Block",
   "block.environmental.buried_truffle": "Buried Truffle",
   "block.environmental.cactus_bobble": "Cactus Bobble",
   "block.environmental.cartwheel": "Cartwheel",
@@ -378,6 +379,7 @@
   "entity.environmental.zebra": "Zebra",
   "entity.environmental.zonkey": "Zonkey",
   "entity.environmental.zorse": "Zorse",
+  "item.environmental.bog_iron": "Bog Iron",
   "item.environmental.cattail_fluff": "Cattail Fluff",
   "item.environmental.cedar_boat": "Cedar Boat",
   "item.environmental.cedar_chest_boat": "Cedar Boat with Chest",
@@ -614,5 +616,6 @@
   "subtitles.environmental.entity.zorse.eat": "Zorse eats",
   "subtitles.environmental.entity.zorse.hurt": "Zorse hurts",
   "subtitles.environmental.item.shovel.dig": "Shovel digs",
+  "trim_material.environmental.bog_iron": "Bog Iron Material",
   "trim_pattern.environmental.keeper": "Keeper Armor Trim"
 }

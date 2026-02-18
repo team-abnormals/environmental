@@ -107,6 +107,7 @@ public class Environmental {
 		generator.addProvider(server, new EnvironmentalBiomeTagsProvider(output, provider, helper));
 		generator.addProvider(server, new EnvironmentalBannerPatternTagsProvider(output, provider, helper));
 		generator.addProvider(server, new EnvironmentalPaintingVariantTagsProvider(output, provider, helper));
+		generator.addProvider(server, new EnvironmentalTrimMaterialsTagsProvider(output, provider, helper));
 		generator.addProvider(server, new EnvironmentalSlabfishTypeTagsProvider(output, provider, helper));
 		generator.addProvider(server, new EnvironmentalRecipeProvider(output, provider));
 		generator.addProvider(server, EnvironmentalAdvancementProvider.create(output, provider, helper));

@@ -11,6 +11,19 @@
     {
       "type": "minecraft:single",
       "resource": "environmental:item/slabfish_backpack_type_slot"
+    },
+    {
+      "type": "blueprint:paletted_permutations",
+      "palette_key": "minecraft:trims/color_palettes/trim_palette",
+      "permutations": {
+        "environmental_bog_iron": "environmental:trims/color_palettes/bog_iron"
+      },
+      "textures": [
+        "minecraft:trims/items/helmet_trim",
+        "minecraft:trims/items/chestplate_trim",
+        "minecraft:trims/items/leggings_trim",
+        "minecraft:trims/items/boots_trim"
+      ]
     }
   ]
 }

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "environmental:bog_iron_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "environmental:bog_iron"
+  }
+}
