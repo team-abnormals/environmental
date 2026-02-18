@@ -74,6 +74,7 @@ public class EnvironmentalItemTagsProvider extends BlueprintItemTagsProvider {
 		this.tag(BlueprintItemTags.FURNACE_BOATS).add(WILLOW_FURNACE_BOAT.get(), PINE_FURNACE_BOAT.get(), CEDAR_FURNACE_BOAT.get(), WISTERIA_FURNACE_BOAT.get(), PLUM_FURNACE_BOAT.get());
 		this.tag(BlueprintItemTags.LARGE_BOATS).add(LARGE_WILLOW_BOAT.get(), LARGE_PINE_BOAT.get(), LARGE_CEDAR_BOAT.get(), LARGE_WISTERIA_BOAT.get(), LARGE_PLUM_BOAT.get());
 		this.tag(Tags.Items.MUSIC_DISCS).add(MUSIC_DISC_LEAVING_HOME.get(), MUSIC_DISC_SLABRAVE.get());
+		this.tag(ItemTags.TRIM_TEMPLATES).add(KEEPER_ARMOR_TRIM_SMITHING_TEMPLATE.get());
 		this.tag(ItemTags.FISHES).add(KOI.get());
 
 		this.copy(Tags.Blocks.GLASS_BLOCKS, Tags.Items.GLASS_BLOCKS);

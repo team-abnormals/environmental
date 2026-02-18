@@ -84,6 +84,11 @@ public class EnvironmentalAdvancementModifierProvider extends AdvancementModifie
 				.addCriterion("cattail_sprouts", ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(EnvironmentalBlocks.CATTAIL_SPROUT.get()))
 				.addIndexedRequirements(0, false, "cattail_sprouts").build());
 
+		String entry = "armor_trimmed_" + EnvironmentalItems.KEEPER_ARMOR_TRIM_SMITHING_TEMPLATE.getId();
+		this.entry("adventure/trim_with_any_armor_pattern").selects("adventure/trim_with_any_armor_pattern").addModifier(CriteriaModifier.builder(this.modId)
+				.addCriterion(entry, RecipeCraftedTrigger.TriggerInstance.craftedItem(EnvironmentalItems.KEEPER_ARMOR_TRIM_SMITHING_TEMPLATE.getId()))
+				.addIndexedRequirements(0, false, entry).build());
+
 		this.compatSlabfishModifier(EnvironmentalConstants.ATMOSPHERIC, EnvironmentalSlabfishVariants.ATMOSPHERIC_SLABFISH);
 		this.compatSlabfishModifier(EnvironmentalConstants.AUTUMNITY, EnvironmentalSlabfishVariants.AUTUMNITY_SLABFISH);
 		this.compatSlabfishModifier(EnvironmentalConstants.ENDERGETIC, EnvironmentalSlabfishVariants.ENDERGETIC_SLABFISH);

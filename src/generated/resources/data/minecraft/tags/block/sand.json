@@ -1,5 +1,6 @@
 {
   "values": [
-    "environmental:muddy_sand"
+    "environmental:muddy_sand",
+    "environmental:suspicious_muddy_sand"
   ]
 }

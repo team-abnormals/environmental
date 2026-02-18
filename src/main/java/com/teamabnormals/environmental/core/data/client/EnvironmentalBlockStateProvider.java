@@ -5,6 +5,7 @@ import com.teamabnormals.environmental.common.block.CattailBlock;
 import com.teamabnormals.environmental.common.block.CattailStalkBlock;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.other.EnvironmentalBlockFamilies;
+import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -34,6 +35,7 @@ public class EnvironmentalBlockStateProvider extends BlueprintBlockStateProvider
 		this.blockFamily(EnvironmentalBlockFamilies.DIRT_BRICK_FAMILY);
 		this.blockFamily(EnvironmentalBlockFamilies.DIRT_TILE_FAMILY);
 
+		this.brushableBlock(EnvironmentalBlocks.SUSPICIOUS_MUDDY_SAND);
 		this.blockFamily(EnvironmentalBlockFamilies.SMOOTH_MUDDY_SANDSTONE_FAMILY);
 		this.block(MUDGLASS);
 		this.paneBlock((IronBarsBlock) MUDGLASS_PANE.get(), this.modLoc("block/mudglass"), this.modLoc("block/mudglass_pane_side"));

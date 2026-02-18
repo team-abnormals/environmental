@@ -28,6 +28,7 @@ public class EnvironmentalDatapackProvider extends DatapackBuiltinEntriesProvide
 			.add(Registries.NOISE, EnvironmentalNoiseParameters::bootstrap)
 			.add(Registries.BIOME, EnvironmentalBiomes::bootstrap)
 			.add(Registries.DAMAGE_TYPE, EnvironmentalDamageTypes::bootstrap)
+			.add(Registries.TRIM_PATTERN, EnvironmentalTrimPatterns::bootstrap)
 			.add(Registries.PAINTING_VARIANT, EnvironmentalPaintingVariants::bootstrap)
 			.add(Registries.BANNER_PATTERN, EnvironmentalBannerPatterns::bootstrap)
 			.add(Registries.JUKEBOX_SONG, EnvironmentalJukeboxSongs::bootstrap)

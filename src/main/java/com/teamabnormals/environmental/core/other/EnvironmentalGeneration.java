@@ -124,6 +124,7 @@ public class EnvironmentalGeneration {
 		}
 		generation.addFeature(Decoration.VEGETAL_DECORATION, TREE_LICHEN);
 		generation.addFeature(Decoration.LOCAL_MODIFICATIONS, MUDDY_SAND);
+		generation.addFeature(Decoration.UNDERGROUND_ORES, CEDAR_BOG_ORE);
 	}
 
 	public static void cedarRiverine(BiomeGenerationSettings.Builder generation) {
@@ -149,5 +150,6 @@ public class EnvironmentalGeneration {
 		generation.addFeature(Decoration.VEGETAL_DECORATION, SHRUB_PATCH);
 		generation.addFeature(Decoration.VEGETAL_DECORATION, TREE_LICHEN);
 		generation.addFeature(Decoration.LOCAL_MODIFICATIONS, MUDDY_SAND);
+		generation.addFeature(Decoration.UNDERGROUND_ORES, CEDAR_BOG_ORE);
 	}
 }

@@ -111,6 +111,7 @@ public class EnvironmentalRecipeProvider extends BlueprintRecipeProvider {
 		chiseled(consumer, RecipeCategory.BUILDING_BLOCKS, CHISELED_MUD_BRICKS.get(), Blocks.MUD_BRICK_SLAB);
 		stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, CHISELED_MUD_BRICKS.get(), Blocks.MUD_BRICKS);
 
+		trimRecipes(consumer, EnvironmentalItems.KEEPER_ARMOR_TRIM_SMITHING_TEMPLATE, MUDDY_SANDSTONE);
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, MUDDY_SAND.get(), 2).requires(Blocks.MUD).requires(Blocks.SAND).unlockedBy("has_mud", has(Blocks.MUD)).save(consumer);
 		SimpleCookingRecipeBuilder.smelting(Ingredient.of(MUDDY_SAND), RecipeCategory.BUILDING_BLOCKS, MUDGLASS.asItem(), 0.1F, 200)
 				.unlockedBy("has_smelts_to_mudglass", has(MUDDY_SAND))

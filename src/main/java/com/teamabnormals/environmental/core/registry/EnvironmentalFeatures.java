@@ -30,6 +30,7 @@ public class EnvironmentalFeatures {
 
 	public static final DeferredHolder<Feature<?>, Feature<CupLichenPatchConfiguration>> CUP_LICHEN_PATCH = FEATURES.register("cup_lichen_patch", () -> new CupLichenPatchFeature(CupLichenPatchConfiguration.CODEC));
 	public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> MUDDY_SAND = FEATURES.register("muddy_sand", () -> new MuddySandFeature(NoneFeatureConfiguration.CODEC));
+	public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> SUSPICIOUS_MUDDY_SAND = FEATURES.register("suspicious_muddy_sand", () -> new SuspiciousMuddySandFeature(NoneFeatureConfiguration.CODEC));
 	public static final DeferredHolder<Feature<?>, Feature<ShrubPatchConfiguration>> SHRUB_PATCH = FEATURES.register("shrub_patch", () -> new ShrubPatchFeature(ShrubPatchConfiguration.CODEC));
 	public static final DeferredHolder<Feature<?>, Feature<ProbabilityFeatureConfiguration>> TREE_LICHEN = FEATURES.register("tree_lichen", () -> new TreeLichenFeature(ProbabilityFeatureConfiguration.CODEC));
 

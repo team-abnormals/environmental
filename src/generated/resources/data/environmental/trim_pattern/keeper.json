@@ -1,0 +1,8 @@
+{
+  "asset_id": "environmental:keeper",
+  "decal": false,
+  "description": {
+    "translate": "trim_pattern.environmental.keeper"
+  },
+  "template_item": "environmental:keeper_armor_trim_smithing_template"
+}

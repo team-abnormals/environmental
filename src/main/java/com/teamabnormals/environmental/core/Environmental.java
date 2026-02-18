@@ -65,6 +65,7 @@ public class Environmental {
 
 		bus.addListener(this::registerCapabilities);
 		bus.addListener(this::registerPayloadHandlers);
+		bus.addListener(EnvironmentalBlocks::addToBlockEntityValidBlocks);
 		bus.addListener(EnvironmentalRegistries::registerRegistries);
 
 		bus.addListener(this::commonSetup);

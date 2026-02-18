@@ -265,6 +265,7 @@
   "block.environmental.stripped_willow_wood": "Stripped Willow Wood",
   "block.environmental.stripped_wisteria_log": "Stripped Wisteria Log",
   "block.environmental.stripped_wisteria_wood": "Stripped Wisteria Wood",
+  "block.environmental.suspicious_muddy_sand": "Suspicious Muddy Sand",
   "block.environmental.tasselflower": "Tasselflower",
   "block.environmental.trapped_cedar_chest": "Trapped Cedar Chest",
   "block.environmental.trapped_pine_chest": "Trapped Pine Chest",
@@ -391,6 +392,7 @@
   "item.environmental.duck_spawn_egg": "Duck Spawn Egg",
   "item.environmental.helper_banner_pattern": "Banner Pattern",
   "item.environmental.helper_banner_pattern.desc": "Helper",
+  "item.environmental.keeper_armor_trim_smithing_template": "Smithing Template",
   "item.environmental.koi": "Koi",
   "item.environmental.koi_bucket": "Bucket of Koi",
   "item.environmental.koi_spawn_egg": "Koi Spawn Egg",
@@ -611,5 +613,6 @@
   "subtitles.environmental.entity.zorse.death": "Zorse dies",
   "subtitles.environmental.entity.zorse.eat": "Zorse eats",
   "subtitles.environmental.entity.zorse.hurt": "Zorse hurts",
-  "subtitles.environmental.item.shovel.dig": "Shovel digs"
+  "subtitles.environmental.item.shovel.dig": "Shovel digs",
+  "trim_pattern.environmental.keeper": "Keeper Armor Trim"
 }

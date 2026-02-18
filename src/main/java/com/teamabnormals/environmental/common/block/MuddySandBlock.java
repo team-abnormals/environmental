@@ -40,7 +40,7 @@ public class MuddySandBlock extends FallingBlock {
 		return 20;
 	}
 
-	private static boolean shouldFall(Level level, BlockPos pos) {
+	public static boolean shouldFall(Level level, BlockPos pos) {
 		BlockState state = level.getBlockState(pos.below());
 		if (state.liquid()) return true;
 		if (state.isAir() || state.is(BlockTags.FIRE) || state.canBeReplaced()) {

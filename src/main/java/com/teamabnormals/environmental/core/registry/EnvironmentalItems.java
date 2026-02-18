@@ -10,6 +10,7 @@ import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.other.EnvironmentalArmorMaterials;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalBannerPatternTags;
 import com.teamabnormals.environmental.core.registry.datapack.EnvironmentalJukeboxSongs;
+import com.teamabnormals.environmental.core.registry.datapack.EnvironmentalTrimPatterns;
 import com.teamabnormals.environmental.integration.boatload.EnvironmentalBoatTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -87,6 +88,8 @@ public class EnvironmentalItems {
 	public static final DeferredItem<Item> MAGENTA_HIBISCUS = ITEMS.createItem("magenta_hibiscus", () -> new HibiscusBlockItem(EnvironmentalBlocks.MAGENTA_HIBISCUS.get(), EnvironmentalBlocks.MAGENTA_WALL_HIBISCUS.get(), new Item.Properties()));
 	public static final DeferredItem<Item> PURPLE_HIBISCUS = ITEMS.createItem("purple_hibiscus", () -> new HibiscusBlockItem(EnvironmentalBlocks.PURPLE_HIBISCUS.get(), EnvironmentalBlocks.PURPLE_WALL_HIBISCUS.get(), new Item.Properties()));
 
+	public static final DeferredItem<Item> KEEPER_ARMOR_TRIM_SMITHING_TEMPLATE = ITEMS.createItem("keeper_armor_trim_smithing_template", () -> SmithingTemplateItem.createArmorTrimTemplate(EnvironmentalTrimPatterns.KEEPER));
+
 	public static final DeferredItem<DeferredSpawnEggItem> SLABFISH_SPAWN_EGG = ITEMS.createSpawnEggItem("slabfish", EnvironmentalEntityTypes.SLABFISH::get, 0x5F9341, 0xD4B788);
 	public static final DeferredItem<DeferredSpawnEggItem> DUCK_SPAWN_EGG = ITEMS.createSpawnEggItem("duck", EnvironmentalEntityTypes.DUCK::get, 0x2A5B36, 0xF2C937);
 	public static final DeferredItem<DeferredSpawnEggItem> DEER_SPAWN_EGG = ITEMS.createSpawnEggItem("deer", EnvironmentalEntityTypes.DEER::get, 0xA17A4A, 0xE6CBA6);
@@ -128,6 +131,7 @@ public class EnvironmentalItems {
 				.addItemsBefore(of(Items.LEATHER), YAK_HAIR)
 				.addItemsAfter(of(Items.CLAY_BALL), MUD_BALL)
 				.addItemsBefore(of(Items.STRING), CATTAIL_FLUFF)
+				.addItemsAfter(of(Items.DUNE_ARMOR_TRIM_SMITHING_TEMPLATE), KEEPER_ARMOR_TRIM_SMITHING_TEMPLATE)
 				.tab(COMBAT)
 				.addItemsAfter(of(Items.EGG), MUD_BALL)
 				.addItemsBefore(of(Items.LEATHER_HORSE_ARMOR), YAK_PANTS)

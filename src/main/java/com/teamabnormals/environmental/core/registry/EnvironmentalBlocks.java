@@ -31,10 +31,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
+import net.neoforged.neoforge.event.BlockEntityTypeAddBlocksEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 import java.util.function.Predicate;
@@ -64,6 +67,7 @@ public class EnvironmentalBlocks {
 
 	public static final DeferredBlock<Block> MUDDY_PODZOL = BLOCKS.createBlock("muddy_podzol", () -> new MudBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MUD).mapColor(MapColor.PODZOL)));
 	public static final DeferredBlock<Block> MUDDY_SAND = BLOCKS.createBlock("muddy_sand", () -> new MuddySandBlock(BlockBehaviour.Properties.of().mapColor(MapColor.SAND).instrument(NoteBlockInstrument.SNARE).strength(0.5F).sound(SoundType.MUD)));
+	public static final DeferredBlock<Block> SUSPICIOUS_MUDDY_SAND = BLOCKS.createBlock("suspicious_muddy_sand", () -> new SuspiciousMuddySandBlock(BlockBehaviour.Properties.of().mapColor(MapColor.SAND).instrument(NoteBlockInstrument.SNARE).strength(0.25F).sound(SoundType.SUSPICIOUS_SAND).pushReaction(PushReaction.DESTROY)));
 	public static final DeferredBlock<Block> MUDDY_SANDSTONE = BLOCKS.createBlock("muddy_sandstone", () -> new Block(EnvironmentalProperties.MUDDY_SANDSTONE));
 	public static final DeferredBlock<Block> MUDDY_SANDSTONE_SLAB = BLOCKS.createBlock("muddy_sandstone_slab", () -> new SlabBlock(EnvironmentalProperties.MUDDY_SANDSTONE));
 	public static final DeferredBlock<Block> MUDDY_SANDSTONE_STAIRS = BLOCKS.createBlock("muddy_sandstone_stairs", () -> new StairBlock(MUDDY_SANDSTONE.get().defaultBlockState(), EnvironmentalProperties.MUDDY_SANDSTONE));
@@ -390,6 +394,10 @@ public class EnvironmentalBlocks {
 	public static final DeferredBlock<BlueprintChestBlock> WISTERIA_CHEST = BLOCKS.createChestBlock("wisteria", EnvironmentalProperties.WISTERIA.chest());
 	public static final DeferredBlock<BlueprintTrappedChestBlock> TRAPPED_WISTERIA_CHEST = BLOCKS.createTrappedChestBlock("wisteria", EnvironmentalProperties.WISTERIA.chest());
 
+	public static void addToBlockEntityValidBlocks(BlockEntityTypeAddBlocksEvent event) {
+		event.modify(BlockEntityType.BRUSHABLE_BLOCK, SUSPICIOUS_MUDDY_SAND.get());
+	}
+
 	public static void setupTabEditors() {
 		CreativeModeTabContentsPopulator.mod(Environmental.MOD_ID)
 				.tab(BUILDING_BLOCKS)
@@ -436,6 +444,7 @@ public class EnvironmentalBlocks {
 						WISTERIA_SIGNS.getFirst(), WISTERIA_HANGING_SIGNS.getFirst()
 				)
 				.addItemsBefore(of(Items.ARMOR_STAND), SLABFISH_EFFIGY)
+				.addItemsAfter(of(Blocks.SUSPICIOUS_SAND), SUSPICIOUS_MUDDY_SAND)
 				.tab(NATURAL_BLOCKS)
 				.editor(event -> event.remove(new ItemStack(Blocks.DIRT_PATH), TabVisibility.PARENT_AND_SEARCH_TABS))
 				.addItemsAfter(of(Blocks.MUD), MUDDY_SAND, MUDDY_SANDSTONE)

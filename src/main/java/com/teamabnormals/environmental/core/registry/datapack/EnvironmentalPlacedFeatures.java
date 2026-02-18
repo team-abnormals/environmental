@@ -17,6 +17,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.ClampedInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.*;
@@ -119,6 +120,7 @@ public class EnvironmentalPlacedFeatures {
 	public static final ResourceKey<PlacedFeature> PINE_SLOPES_BOULDER = createKey("pine_slopes_boulder");
 
 	public static final ResourceKey<PlacedFeature> MUDDY_SAND = createKey("muddy_sand");
+	public static final ResourceKey<PlacedFeature> CEDAR_BOG_ORE = createKey("cedar_bog_ore");
 	public static final ResourceKey<PlacedFeature> SHRUB_PATCH = createKey("shrub_patch");
 	public static final ResourceKey<PlacedFeature> TREE_LICHEN = createKey("tree_lichen");
 	public static final ResourceKey<PlacedFeature> TREE_LICHEN_UNCOMMON = createKey("tree_lichen_uncommon");
@@ -241,6 +243,7 @@ public class EnvironmentalPlacedFeatures {
 
 		register(context, SHRUB_PATCH, EnvironmentalConfiguredFeatures.SHRUB_PATCH, new NoiseDensityPlacement(noises.getOrThrow(EnvironmentalNoiseParameters.SHRUB_DENSITY), 16.0F, 0.5F), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 		register(context, MUDDY_SAND, EnvironmentalConfiguredFeatures.MUDDY_SAND, BiomeFilter.biome());
+		register(context, CEDAR_BOG_ORE, EnvironmentalConfiguredFeatures.CEDAR_BOG_ORE, commonOrePlacement(100, HeightRangePlacement.triangle(VerticalAnchor.absolute(50), VerticalAnchor.absolute(69))));
 		register(context, TREE_LICHEN, EnvironmentalConfiguredFeatures.TREE_LICHEN, BiomeFilter.biome());
 		register(context, TREE_LICHEN_UNCOMMON, EnvironmentalConfiguredFeatures.TREE_LICHEN_UNCOMMON, BiomeFilter.biome());
 
@@ -276,6 +279,14 @@ public class EnvironmentalPlacedFeatures {
 
 	private static ImmutableList<PlacementModifier> treePlacement(PlacementModifier modifier, PlacementModifier... extraModifiers) {
 		return ImmutableList.<PlacementModifier>builder().add(modifier).add(InSquarePlacement.spread()).add(SurfaceWaterDepthFilter.forMaxDepth(0)).add(PlacementUtils.HEIGHTMAP_OCEAN_FLOOR).add(BiomeFilter.biome()).add(extraModifiers).build();
+	}
+
+	private static List<PlacementModifier> orePlacement(PlacementModifier countPlacement, PlacementModifier heightRange) {
+		return List.of(countPlacement, InSquarePlacement.spread(), heightRange, BiomeFilter.biome());
+	}
+
+	private static List<PlacementModifier> commonOrePlacement(int count, PlacementModifier heightRange) {
+		return orePlacement(CountPlacement.of(count), heightRange);
 	}
 
 	public static ResourceKey<PlacedFeature> createKey(String name) {

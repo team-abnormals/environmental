@@ -119,6 +119,7 @@ public class EnvironmentalConfiguredFeatures {
 	public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_CUP_LICHEN_SMALL = createKey("patch_cup_lichen_small");
 
 	public static final ResourceKey<ConfiguredFeature<?, ?>> MUDDY_SAND = createKey("muddy_sand");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> CEDAR_BOG_ORE = createKey("cedar_bog_ore");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> SHRUB_PATCH = createKey("shrub_patch");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_LICHEN = createKey("tree_lichen");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_LICHEN_UNCOMMON = createKey("tree_lichen_uncommon");
@@ -243,6 +244,7 @@ public class EnvironmentalConfiguredFeatures {
 
 		register(context, SHRUB_PATCH, EnvironmentalFeatures.SHRUB_PATCH.get(), new ShrubPatchConfiguration(1, true));
 		register(context, MUDDY_SAND, EnvironmentalFeatures.MUDDY_SAND.get(), NoneFeatureConfiguration.NONE);
+		register(context, CEDAR_BOG_ORE, EnvironmentalFeatures.SUSPICIOUS_MUDDY_SAND.get(), NoneFeatureConfiguration.NONE);
 		register(context, TREE_LICHEN, EnvironmentalFeatures.TREE_LICHEN.get(), new ProbabilityFeatureConfiguration(1.0F));
 		register(context, TREE_LICHEN_UNCOMMON, EnvironmentalFeatures.TREE_LICHEN.get(), new ProbabilityFeatureConfiguration(0.5F));
 
@@ -354,7 +356,7 @@ public class EnvironmentalConfiguredFeatures {
 		public static final TreeConfiguration TALL_PINE = createTallPine().decorators(List.of(PINECONE)).build();
 		public static final TreeConfiguration TALL_PINE_WITH_PODZOL = createTallPine().decorators(List.of(PINECONE, PinePodzolDecorator.INSTANCE)).build();
 
-		public static final TreeConfiguration CEDAR = createCedar().build();
+		public static final TreeConfiguration CEDAR = createCedar().decorators(List.of(SuspiciousMuddySandDecorator.INSTANCE)).build();
 		public static final TreeConfiguration CEDAR_BEES_005 = createCedar().decorators(List.of(BEEHIVE_005, PinePodzolDecorator.INSTANCE)).build();
 
 		private static TreeConfigurationBuilder createPlum() {

@@ -177,6 +177,7 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.dropWhenSilkTouch(MUDGLASS.get());
 			this.dropWhenSilkTouch(MUDGLASS_PANE.get());
 			this.dropSelf(MUDDY_SAND.get());
+			this.add(SUSPICIOUS_MUDDY_SAND.get(), noDrop());
 			this.dropSelf(MUDDY_SANDSTONE.get());
 			this.dropSelf(MUDDY_SANDSTONE_STAIRS.get());
 			this.dropSelf(MUDDY_SANDSTONE_WALL.get());
@@ -584,6 +585,22 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 
 			consumer.accept(EnvironmentalLootTables.LOG_CABIN_DISPENSER, LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.CARVED_PUMPKIN))));
 			consumer.accept(EnvironmentalLootTables.LOG_CABIN_DROPPER, LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(PINE_SAPLING.get()))));
+
+			consumer.accept(EnvironmentalLootTables.CEDAR_BOG_ORE, LootTable.lootTable()
+					.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+							.add(LootItem.lootTableItem(Items.RAW_IRON).setWeight(22))
+							.add(LootItem.lootTableItem(Items.BROWN_DYE).setWeight(12))
+							.add(LootItem.lootTableItem(Items.IRON_NUGGET).setWeight(11))
+							.add(LootItem.lootTableItem(Items.RAW_IRON_BLOCK).setWeight(3))
+							.add(LootItem.lootTableItem(EnvironmentalItems.KEEPER_ARMOR_TRIM_SMITHING_TEMPLATE.get()))
+					)
+			);
+			consumer.accept(EnvironmentalLootTables.CEDAR_TREE_SUSPICIOUS_SAND, LootTable.lootTable()
+					.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+							.add(LootItem.lootTableItem(Items.BROWN_DYE).setWeight(3))
+							.add(LootItem.lootTableItem(Items.IRON_NUGGET).setWeight(2))
+					)
+			);
 		}
 	}
 }

@@ -1,0 +1,29 @@
+{
+  "modifiers": [
+    {
+      "type": "criteria",
+      "config": {
+        "criteria": {
+          "environmental:armor_trimmed_environmental:keeper_armor_trim_smithing_template": {
+            "conditions": {
+              "recipe_id": "environmental:keeper_armor_trim_smithing_template"
+            },
+            "trigger": "minecraft:recipe_crafted"
+          }
+        },
+        "indexed_requirements": [
+          {
+            "index": 0,
+            "replace": false,
+            "requirements": [
+              "environmental:armor_trimmed_environmental:keeper_armor_trim_smithing_template"
+            ]
+          }
+        ],
+        "should_replace_requirements": false
+      }
+    }
+  ],
+  "priority": "normal",
+  "selector": "minecraft:adventure/trim_with_any_armor_pattern"
+}
