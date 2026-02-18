@@ -1,13 +1,14 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
+  "group": "bog_iron",
   "ingredients": [
     {
       "item": "environmental:bog_iron_block"
     }
   ],
   "result": {
-    "count": 9,
+    "count": 4,
     "id": "environmental:bog_iron"
   }
 }

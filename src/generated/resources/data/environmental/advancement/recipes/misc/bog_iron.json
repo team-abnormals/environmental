@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_bog_iron": {
+    "has_bog_iron_block": {
       "conditions": {
         "items": [
           {
-            "items": "environmental:bog_iron"
+            "items": "environmental:bog_iron_block"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:bog_iron_block"
+        "recipe": "environmental:bog_iron"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_bog_iron"
+      "has_bog_iron_block"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:bog_iron_block"
+      "environmental:bog_iron"
     ]
   }
 }
