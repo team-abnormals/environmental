@@ -617,5 +617,10 @@
   "subtitles.environmental.entity.zorse.hurt": "Zorse hurts",
   "subtitles.environmental.item.shovel.dig": "Shovel digs",
   "trim_material.environmental.bog_iron": "Bog Iron Material",
-  "trim_pattern.environmental.keeper": "Keeper Armor Trim"
+  "trim_pattern.environmental.keeper": "Keeper Armor Trim",
+  "wolf_variant.environmental.gray": "Gray",
+  "wolf_variant.environmental.horizon": "Horizon",
+  "wolf_variant.environmental.ombre": "Ombre",
+  "wolf_variant.environmental.tawny": "Tawny",
+  "wolf_variant.environmental.timber": "Timber"
 }
