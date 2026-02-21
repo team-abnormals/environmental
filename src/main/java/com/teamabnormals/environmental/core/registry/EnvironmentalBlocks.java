@@ -161,6 +161,7 @@ public class EnvironmentalBlocks {
 	public static final DeferredBlock<Block> RED_LOTUS_FLOWER = BLOCKS.createBlock("red_lotus_flower", () -> new LotusFlowerBlock(EnvironmentalParticleTypes.RED_LOTUS_BLOSSOM::get, MobEffects.SLOW_FALLING, 5, PropertyUtil.flower()));
 	public static final DeferredBlock<Block> WHITE_LOTUS_FLOWER = BLOCKS.createBlock("white_lotus_flower", () -> new LotusFlowerBlock(EnvironmentalParticleTypes.WHITE_LOTUS_BLOSSOM::get, MobEffects.SLOW_FALLING, 5, PropertyUtil.flower()));
 	public static final DeferredBlock<Block> TASSELFLOWER = BLOCKS.createBlock("tasselflower", () -> new FlowerBlock(MobEffects.DIG_SLOWDOWN, 6, PropertyUtil.flower()));
+	public static final DeferredBlock<Block> ESTUARY_MARIGOLD = BLOCKS.createBlock("estuary_marigold", () -> new FlowerBlock(MobEffects.ABSORPTION, 5, PropertyUtil.flower()));
 
 	public static final DeferredBlock<Block> HIBISCUS_LEAVES = BLOCKS.createBlock("hibiscus_leaves", () -> new HibiscusLeavesBlock(EnvironmentalProperties.HIBISCUS.leaves()));
 	public static final DeferredBlock<Block> HIBISCUS_LEAF_PILE = BLOCKS.createBlock("hibiscus_leaf_pile", () -> new LeafPileBlock(EnvironmentalProperties.HIBISCUS.leafPile()));
@@ -186,6 +187,7 @@ public class EnvironmentalBlocks {
 	public static final DeferredBlock<Block> POTTED_RED_LOTUS_FLOWER = BLOCKS.createBlockNoItem("potted_red_lotus_flower", () -> new FlowerPotBlock(RED_LOTUS_FLOWER.get(), PropertyUtil.flowerPot()));
 	public static final DeferredBlock<Block> POTTED_WHITE_LOTUS_FLOWER = BLOCKS.createBlockNoItem("potted_white_lotus_flower", () -> new FlowerPotBlock(WHITE_LOTUS_FLOWER.get(), PropertyUtil.flowerPot()));
 	public static final DeferredBlock<Block> POTTED_TASSELFLOWER = BLOCKS.createBlockNoItem("potted_tasselflower", () -> new FlowerPotBlock(TASSELFLOWER.get(), PropertyUtil.flowerPot()));
+	public static final DeferredBlock<Block> POTTED_ESTUARY_MARIGOLD = BLOCKS.createBlockNoItem("potted_estuary_marigold", () -> new FlowerPotBlock(ESTUARY_MARIGOLD.get(), PropertyUtil.flowerPot()));
 	public static final DeferredBlock<Block> POTTED_YELLOW_HIBISCUS = BLOCKS.createBlockNoItem("potted_yellow_hibiscus", () -> new FlowerPotBlock(YELLOW_HIBISCUS.get(), PropertyUtil.flowerPot()));
 	public static final DeferredBlock<Block> POTTED_ORANGE_HIBISCUS = BLOCKS.createBlockNoItem("potted_orange_hibiscus", () -> new FlowerPotBlock(ORANGE_HIBISCUS.get(), PropertyUtil.flowerPot()));
 	public static final DeferredBlock<Block> POTTED_RED_HIBISCUS = BLOCKS.createBlockNoItem("potted_red_hibiscus", () -> new FlowerPotBlock(RED_HIBISCUS.get(), PropertyUtil.flowerPot()));
@@ -464,7 +466,7 @@ public class EnvironmentalBlocks {
 				.addItemsAfter(of(Blocks.GLOW_LICHEN), TREE_LICHEN)
 				.addItemsAfter(of(Blocks.LARGE_FERN), SHRUB, FLOWERING_SHRUB)
 				.addItemsAfter(of(Blocks.SUNFLOWER), RADIANT_SUNFLOWER, BEAMING_SUNFLOWER, ECLIPSED_SUNFLOWER, BLAZING_SUNFLOWER)
-				.addItemsBefore(of(Blocks.TORCHFLOWER), BLUEBELL, DIANTHUS, VIOLET, TASSELFLOWER, RED_LOTUS_FLOWER, WHITE_LOTUS_FLOWER, CARTWHEEL,
+				.addItemsBefore(of(Blocks.TORCHFLOWER), BLUEBELL, DIANTHUS, VIOLET, ESTUARY_MARIGOLD, TASSELFLOWER, RED_LOTUS_FLOWER, WHITE_LOTUS_FLOWER, CARTWHEEL,
 						YELLOW_HIBISCUS, ORANGE_HIBISCUS, RED_HIBISCUS, PINK_HIBISCUS, MAGENTA_HIBISCUS, PURPLE_HIBISCUS)
 				.addItemsBefore(of(Blocks.PITCHER_PLANT), PINK_DELPHINIUM, PURPLE_DELPHINIUM, BLUE_DELPHINIUM, WHITE_DELPHINIUM, BIRD_OF_PARADISE)
 				.addItemsBefore(of(Blocks.MUSHROOM_STEM), WILLOW_LOG, PINE_LOG, CEDAR_LOG, PLUM_LOG, WISTERIA_LOG)

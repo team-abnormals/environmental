@@ -124,7 +124,7 @@ public class EnvironmentalConfiguredFeatures {
 	public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_LICHEN = createKey("tree_lichen");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_LICHEN_UNCOMMON = createKey("tree_lichen_uncommon");
 
-	public static final ResourceKey<ConfiguredFeature<?, ?>> FLOWER_BLUE_ORCHID = createKey("flower_blue_orchid");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> FLOWER_ESTUARY_MARIGOLD = createKey("flower_estuary_marigold");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> FLOWER_CORNFLOWER = createKey("flower_cornflower");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> FLOWER_DIANTHUS = createKey("flower_dianthus");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> FLOWER_BLUEBELL = createKey("flower_bluebell");
@@ -248,7 +248,7 @@ public class EnvironmentalConfiguredFeatures {
 		register(context, TREE_LICHEN, EnvironmentalFeatures.TREE_LICHEN.get(), new ProbabilityFeatureConfiguration(1.0F));
 		register(context, TREE_LICHEN_UNCOMMON, EnvironmentalFeatures.TREE_LICHEN.get(), new ProbabilityFeatureConfiguration(0.5F));
 
-		register(context, FLOWER_BLUE_ORCHID, Feature.FLOWER, new RandomPatchConfiguration(64, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.BLUE_ORCHID)))));
+		register(context, FLOWER_ESTUARY_MARIGOLD, Feature.FLOWER, new RandomPatchConfiguration(64, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(EnvironmentalBlocks.ESTUARY_MARIGOLD.get())))));
 		register(context, FLOWER_CORNFLOWER, Feature.FLOWER, new RandomPatchConfiguration(64, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.CORNFLOWER)))));
 		register(context, FLOWER_DIANTHUS, Feature.FLOWER, new RandomPatchConfiguration(64, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(EnvironmentalBlocks.DIANTHUS.get())))));
 		register(context, FLOWER_BLUEBELL, Feature.FLOWER, new RandomPatchConfiguration(128, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(EnvironmentalBlocks.BLUEBELL.get())))));

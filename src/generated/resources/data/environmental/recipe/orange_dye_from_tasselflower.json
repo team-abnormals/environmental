@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
-  "group": "purple_dye",
+  "group": "orange_dye",
   "ingredients": [
     {
       "item": "environmental:tasselflower"

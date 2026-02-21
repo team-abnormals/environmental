@@ -20,7 +20,7 @@ public class EnvironmentalGeneration {
 		BiomeDefaultFeatures.addDefaultMushrooms(generation);
 		BiomeDefaultFeatures.addSwampExtraVegetation(generation);
 		generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_MARSH);
-		generation.addFeature(Decoration.VEGETAL_DECORATION, FLOWER_BLUE_ORCHID);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, FLOWER_ESTUARY_MARIGOLD);
 		generation.addFeature(Decoration.VEGETAL_DECORATION, FLOWER_CORNFLOWER);
 		generation.addFeature(Decoration.VEGETAL_DECORATION, FLOWER_DIANTHUS);
 		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_WATERLILY_MARSH);

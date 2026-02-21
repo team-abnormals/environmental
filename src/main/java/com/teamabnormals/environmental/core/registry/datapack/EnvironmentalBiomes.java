@@ -102,7 +102,7 @@ public class EnvironmentalBiomes {
 		spawns.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.WOLF, 8, 4, 4));
 		spawns.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.RABBIT, 4, 2, 3));
 
-		return biome(true, snowy ? -0.2F : 0.4F, snowy ? 0.4F : 0.6F, snowy ? 8828286 : oldGrowth ? 9221482 : 9484136, snowy ? 6789454 : 7578444, 4159204, 329011, 12638463, spawns, generation, null);
+		return biome(true, snowy ? -0.2F : 0.4F, snowy ? 0.4F : 0.6F, snowy ? 8828286 : oldGrowth ? 9221482 : 9484136, snowy ? 6789454 : 7578444, 2439501, 2569799, 12638463, spawns, generation, null);
 	}
 
 	private static Biome pineSlopes(HolderGetter<PlacedFeature> features, HolderGetter<ConfiguredWorldCarver<?>> carvers) {
@@ -114,7 +114,7 @@ public class EnvironmentalBiomes {
 		spawns.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.WOLF, 8, 4, 4));
 		spawns.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.RABBIT, 4, 2, 3));
 
-		return biome(true, 0.4F, 0.3F, 4159204, 329011, spawns, generation, null);
+		return biome(true, 0.4F, 0.3F, 2439501, 2569799, spawns, generation, null);
 	}
 
 	private static Biome cedarSwamp(HolderGetter<PlacedFeature> features, HolderGetter<ConfiguredWorldCarver<?>> carvers) {

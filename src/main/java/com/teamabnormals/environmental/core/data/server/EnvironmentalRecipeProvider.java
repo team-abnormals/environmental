@@ -43,7 +43,8 @@ public class EnvironmentalRecipeProvider extends BlueprintRecipeProvider {
 		conversionRecipe(consumer, Items.PURPLE_DYE, VIOLET.get(), "purple_dye");
 		conversionRecipe(consumer, Items.RED_DYE, RED_LOTUS_FLOWER.get(), "red_dye");
 		conversionRecipe(consumer, Items.WHITE_DYE, WHITE_LOTUS_FLOWER.get(), "white_dye");
-		conversionRecipe(consumer, Items.ORANGE_DYE, TASSELFLOWER.get(), "purple_dye");
+		conversionRecipe(consumer, Items.ORANGE_DYE, TASSELFLOWER.get(), "orange_dye");
+		conversionRecipe(consumer, Items.YELLOW_DYE, ESTUARY_MARIGOLD.get(), "yellow_dye");
 		conversionRecipe(consumer, Items.MAGENTA_DYE, MAGENTA_HIBISCUS.get(), "magenta_dye");
 		conversionRecipe(consumer, Items.ORANGE_DYE, ORANGE_HIBISCUS.get(), "orange_dye");
 		conversionRecipe(consumer, Items.PINK_DYE, PINK_HIBISCUS.get(), "pink_dye");

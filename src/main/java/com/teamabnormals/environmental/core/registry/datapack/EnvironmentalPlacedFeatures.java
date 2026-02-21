@@ -35,7 +35,7 @@ public class EnvironmentalPlacedFeatures {
 	public static final ResourceKey<PlacedFeature> PATCH_DUCKWEED = createKey("patch_duckweed");
 	public static final ResourceKey<PlacedFeature> PATCH_DUCKWEED_SWAMP = createKey("patch_duckweed_swamp");
 
-	public static final ResourceKey<PlacedFeature> FLOWER_BLUE_ORCHID = createKey("flower_blue_orchid");
+	public static final ResourceKey<PlacedFeature> FLOWER_ESTUARY_MARIGOLD = createKey("flower_estuary_marigold");
 	public static final ResourceKey<PlacedFeature> FLOWER_CORNFLOWER = createKey("flower_cornflower");
 	public static final ResourceKey<PlacedFeature> FLOWER_DIANTHUS = createKey("flower_dianthus");
 	public static final ResourceKey<PlacedFeature> FLOWER_BLUEBELL = createKey("flower_bluebell");
@@ -160,7 +160,7 @@ public class EnvironmentalPlacedFeatures {
 		register(context, PATCH_DUCKWEED, EnvironmentalConfiguredFeatures.PATCH_DUCKWEED, PlacementUtils.countExtra(0, 0.25F, 1), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
 		register(context, PATCH_DUCKWEED_SWAMP, EnvironmentalConfiguredFeatures.PATCH_DUCKWEED, PlacementUtils.countExtra(0, 0.25F, 1), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
 
-		register(context, FLOWER_BLUE_ORCHID, EnvironmentalConfiguredFeatures.FLOWER_BLUE_ORCHID, RarityFilter.onAverageOnceEvery(32), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
+		register(context, FLOWER_ESTUARY_MARIGOLD, EnvironmentalConfiguredFeatures.FLOWER_ESTUARY_MARIGOLD, RarityFilter.onAverageOnceEvery(32), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 		register(context, FLOWER_CORNFLOWER, EnvironmentalConfiguredFeatures.FLOWER_CORNFLOWER, RarityFilter.onAverageOnceEvery(32), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 		register(context, FLOWER_DIANTHUS, EnvironmentalConfiguredFeatures.FLOWER_DIANTHUS, RarityFilter.onAverageOnceEvery(32), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 		register(context, FLOWER_BLUEBELL, EnvironmentalConfiguredFeatures.FLOWER_BLUEBELL, RarityFilter.onAverageOnceEvery(32), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());

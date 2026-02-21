@@ -119,6 +119,7 @@ public class EnvironmentalBlockStateProvider extends BlueprintBlockStateProvider
 		this.crossBlockWithPot(DIANTHUS, POTTED_DIANTHUS);
 		this.crossBlockWithPot(VIOLET, POTTED_VIOLET);
 		this.crossBlockWithPot(TASSELFLOWER, POTTED_TASSELFLOWER);
+		this.crossBlockWithPot(ESTUARY_MARIGOLD, POTTED_ESTUARY_MARIGOLD);
 		this.crossBlockWithPot(WHITE_LOTUS_FLOWER, POTTED_WHITE_LOTUS_FLOWER);
 		this.crossBlockWithPot(RED_LOTUS_FLOWER, POTTED_RED_LOTUS_FLOWER);
 

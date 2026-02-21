@@ -109,6 +109,7 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.dropSelf(RED_LOTUS_FLOWER.get());
 			this.dropSelf(WHITE_LOTUS_FLOWER.get());
 			this.dropSelf(TASSELFLOWER.get());
+			this.dropSelf(ESTUARY_MARIGOLD.get());
 			this.dropSelf(YELLOW_HIBISCUS.get());
 			this.dropSelf(ORANGE_HIBISCUS.get());
 			this.dropSelf(RED_HIBISCUS.get());
@@ -139,6 +140,7 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.dropPottedContents(POTTED_RED_LOTUS_FLOWER.get());
 			this.dropPottedContents(POTTED_WHITE_LOTUS_FLOWER.get());
 			this.dropPottedContents(POTTED_TASSELFLOWER.get());
+			this.dropPottedContents(POTTED_ESTUARY_MARIGOLD.get());
 			this.dropPottedContents(POTTED_YELLOW_HIBISCUS.get());
 			this.dropPottedContents(POTTED_ORANGE_HIBISCUS.get());
 			this.dropPottedContents(POTTED_RED_HIBISCUS.get());
