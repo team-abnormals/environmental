@@ -1,6 +1,8 @@
 package com.teamabnormals.environmental.core.registry.datapack;
 
 import com.google.common.collect.ImmutableList;
+import com.teamabnormals.environmental.common.levelgen.feature.placement.CedarSwampDarknessPlacement;
+import com.teamabnormals.environmental.common.levelgen.feature.placement.CedarSwampTreePlacement;
 import com.teamabnormals.environmental.common.levelgen.feature.placement.NoiseDensityPlacement;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
@@ -106,6 +108,8 @@ public class EnvironmentalPlacedFeatures {
 	public static final ResourceKey<PlacedFeature> FALLEN_TALL_PINE_TREE = createKey("fallen_tall_pine_tree");
 
 	public static final ResourceKey<PlacedFeature> CEDAR = createKey("cedar");
+	public static final ResourceKey<PlacedFeature> TREES_CEDAR_SWAMP = createKey("trees_cedar_swamp");
+	public static final ResourceKey<PlacedFeature> TREES_CEDAR_SWAMP_EXTRA = createKey("trees_cedar_swamp_extra");
 	public static final ResourceKey<PlacedFeature> TREES_CEDAR_RIVER = createKey("trees_cedar_river");
 
 	public static final ResourceKey<PlacedFeature> DWARF_SPRUCE = createKey("dwarf_spruce");
@@ -121,6 +125,7 @@ public class EnvironmentalPlacedFeatures {
 
 	public static final ResourceKey<PlacedFeature> MUDDY_SAND = createKey("muddy_sand");
 	public static final ResourceKey<PlacedFeature> CEDAR_BOG_ORE = createKey("cedar_bog_ore");
+	public static final ResourceKey<PlacedFeature> MUDDY_EDGES = createKey("muddy_edges");
 	public static final ResourceKey<PlacedFeature> SHRUB_PATCH = createKey("shrub_patch");
 	public static final ResourceKey<PlacedFeature> TREE_LICHEN = createKey("tree_lichen");
 	public static final ResourceKey<PlacedFeature> TREE_LICHEN_UNCOMMON = createKey("tree_lichen_uncommon");
@@ -224,6 +229,8 @@ public class EnvironmentalPlacedFeatures {
 		register(context, TREES_PINE_RIVER, EnvironmentalConfiguredFeatures.TREES_PINE_BARRENS, treePlacement(PlacementUtils.countExtra(7, 0.1F, 1)));
 
 		register(context, CEDAR, EnvironmentalConfiguredFeatures.CEDAR, PlacementUtils.filteredByBlockSurvival(EnvironmentalBlocks.CEDAR_SAPLING.get()));
+		register(context, TREES_CEDAR_SWAMP, EnvironmentalConfiguredFeatures.SWAMPY_CEDAR, ImmutableList.<PlacementModifier>builder().add(CedarSwampTreePlacement.INSTANCE).add(SurfaceWaterDepthFilter.forMaxDepth(0)).add(PlacementUtils.HEIGHTMAP_OCEAN_FLOOR).add(BiomeFilter.biome()).build());
+		register(context, TREES_CEDAR_SWAMP_EXTRA, EnvironmentalConfiguredFeatures.SWAMPY_CEDAR, ImmutableList.<PlacementModifier>builder().add(CedarSwampDarknessPlacement.INSTANCE).add(BiomeFilter.biome()).build());
 		register(context, TREES_CEDAR_RIVER, EnvironmentalConfiguredFeatures.CEDAR_BEES_005, treePlacement(PlacementUtils.countExtra(7, 0.1F, 1)));
 
 		register(context, GRAINY_COARSE_DIRT, EnvironmentalConfiguredFeatures.GRAINY_COARSE_DIRT, CountPlacement.of(56), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
@@ -244,6 +251,7 @@ public class EnvironmentalPlacedFeatures {
 		register(context, SHRUB_PATCH, EnvironmentalConfiguredFeatures.SHRUB_PATCH, new NoiseDensityPlacement(noises.getOrThrow(EnvironmentalNoiseParameters.SHRUB_DENSITY), 16.0F, 0.5F), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 		register(context, MUDDY_SAND, EnvironmentalConfiguredFeatures.MUDDY_SAND, BiomeFilter.biome());
 		register(context, CEDAR_BOG_ORE, EnvironmentalConfiguredFeatures.CEDAR_BOG_ORE, commonOrePlacement(100, HeightRangePlacement.triangle(VerticalAnchor.absolute(50), VerticalAnchor.absolute(69))));
+		register(context, MUDDY_EDGES, EnvironmentalConfiguredFeatures.MUDDY_EDGES, BiomeFilter.biome());
 		register(context, TREE_LICHEN, EnvironmentalConfiguredFeatures.TREE_LICHEN, BiomeFilter.biome());
 		register(context, TREE_LICHEN_UNCOMMON, EnvironmentalConfiguredFeatures.TREE_LICHEN_UNCOMMON, BiomeFilter.biome());
 

@@ -102,6 +102,7 @@ public class EnvironmentalConfiguredFeatures {
 	public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_OLD_GROWTH_PINE_BARRENS = createKey("trees_old_growth_pine_barrens");
 
 	public static final ResourceKey<ConfiguredFeature<?, ?>> CEDAR = createKey("cedar");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> SWAMPY_CEDAR = createKey("swampy_cedar");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> CEDAR_BEES_005 = createKey("cedar_bees_005");
 
 	public static final ResourceKey<ConfiguredFeature<?, ?>> GRAINY_COARSE_DIRT = createKey("grainy_coarse_dirt");
@@ -120,6 +121,7 @@ public class EnvironmentalConfiguredFeatures {
 
 	public static final ResourceKey<ConfiguredFeature<?, ?>> MUDDY_SAND = createKey("muddy_sand");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> CEDAR_BOG_ORE = createKey("cedar_bog_ore");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> MUDDY_EDGES = createKey("muddy_edges");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> SHRUB_PATCH = createKey("shrub_patch");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_LICHEN = createKey("tree_lichen");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_LICHEN_UNCOMMON = createKey("tree_lichen_uncommon");
@@ -226,6 +228,7 @@ public class EnvironmentalConfiguredFeatures {
 		register(context, TREES_OLD_GROWTH_PINE_BARRENS, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(placedFeatures.getOrThrow(TreePlacements.SPRUCE_CHECKED), 0.15F)), placedFeatures.getOrThrow(EnvironmentalPlacedFeatures.TALL_PINE_WITH_PODZOL)));
 
 		register(context, CEDAR, EnvironmentalFeatures.CEDAR_TREE.get(), Configs.CEDAR);
+		register(context, SWAMPY_CEDAR, EnvironmentalFeatures.CEDAR_TREE.get(), Configs.SWAMPY_CEDAR);
 		register(context, CEDAR_BEES_005, EnvironmentalFeatures.CEDAR_TREE.get(), Configs.CEDAR_BEES_005);
 
 		register(context, GRAINY_COARSE_DIRT, EnvironmentalFeatures.GRAINY_COARSE_DIRT.get(), new ProbabilityFeatureConfiguration(0.1F));
@@ -245,6 +248,7 @@ public class EnvironmentalConfiguredFeatures {
 		register(context, SHRUB_PATCH, EnvironmentalFeatures.SHRUB_PATCH.get(), new ShrubPatchConfiguration(1, true));
 		register(context, MUDDY_SAND, EnvironmentalFeatures.MUDDY_SAND.get(), NoneFeatureConfiguration.NONE);
 		register(context, CEDAR_BOG_ORE, EnvironmentalFeatures.SUSPICIOUS_MUDDY_SAND.get(), NoneFeatureConfiguration.NONE);
+		register(context, MUDDY_EDGES, EnvironmentalFeatures.MUDDY_EDGES.get(), NoneFeatureConfiguration.NONE);
 		register(context, TREE_LICHEN, EnvironmentalFeatures.TREE_LICHEN.get(), new ProbabilityFeatureConfiguration(1.0F));
 		register(context, TREE_LICHEN_UNCOMMON, EnvironmentalFeatures.TREE_LICHEN.get(), new ProbabilityFeatureConfiguration(0.5F));
 
@@ -356,8 +360,9 @@ public class EnvironmentalConfiguredFeatures {
 		public static final TreeConfiguration TALL_PINE = createTallPine().decorators(List.of(PINECONE)).build();
 		public static final TreeConfiguration TALL_PINE_WITH_PODZOL = createTallPine().decorators(List.of(PINECONE, PinePodzolDecorator.INSTANCE)).build();
 
-		public static final TreeConfiguration CEDAR = createCedar().decorators(List.of(SuspiciousMuddySandDecorator.INSTANCE)).build();
-		public static final TreeConfiguration CEDAR_BEES_005 = createCedar().decorators(List.of(BEEHIVE_005, PinePodzolDecorator.INSTANCE)).build();
+		public static final TreeConfiguration CEDAR = createCedar(3, 1).decorators(List.of(SuspiciousMuddySandDecorator.INSTANCE)).build();
+		public static final TreeConfiguration SWAMPY_CEDAR = createCedar(6, 2).decorators(List.of(CedarPodzolDecorator.INSTANCE)).build();
+		public static final TreeConfiguration CEDAR_BEES_005 = createCedar(3, 1).decorators(List.of(BEEHIVE_005, PinePodzolDecorator.INSTANCE)).build();
 
 		private static TreeConfigurationBuilder createPlum() {
 			return createCustomTree(EnvironmentalBlocks.PLUM_LOG.get(), new StraightTrunkPlacer(4, 2, 0), EnvironmentalBlocks.PLUM_LEAVES.get());
@@ -379,8 +384,8 @@ public class EnvironmentalConfiguredFeatures {
 			return createCustomTree(EnvironmentalBlocks.PINE_LOG.get(), new StraightTrunkPlacer(16, 3, 1), EnvironmentalBlocks.PINE_LEAVES.get());
 		}
 
-		private static TreeConfigurationBuilder createCedar() {
-			return createCustomTree(EnvironmentalBlocks.CEDAR_LOG.get(), new StraightTrunkPlacer(13, 3, 1), EnvironmentalBlocks.CEDAR_LEAVES.get());
+		private static TreeConfigurationBuilder createCedar(int heightExtraA, int heightExtraB) {
+			return createCustomTree(EnvironmentalBlocks.CEDAR_LOG.get(), new StraightTrunkPlacer(13, heightExtraA, heightExtraB), EnvironmentalBlocks.CEDAR_LEAVES.get());
 		}
 
 		private static TreeConfigurationBuilder createWhiteWisteria() {

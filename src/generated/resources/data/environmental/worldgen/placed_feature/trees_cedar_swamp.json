@@ -1,0 +1,19 @@
+{
+  "feature": "environmental:swampy_cedar",
+  "placement": [
+    {
+      "type": "environmental:cedar_swamp_tree"
+    },
+    {
+      "type": "minecraft:surface_water_depth_filter",
+      "max_water_depth": 0
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "OCEAN_FLOOR"
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

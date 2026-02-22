@@ -11,6 +11,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Noises;
+import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.placement.CaveSurface;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
@@ -30,14 +31,18 @@ public class EnvironmentalChunkGeneratorModifierProvider extends ChunkGeneratorM
 		ConditionSource isPineBarrens = isBiome(EnvironmentalBiomes.PINE_BARRENS, EnvironmentalBiomes.SNOWY_PINE_BARRENS, EnvironmentalBiomes.OLD_GROWTH_PINE_BARRENS, EnvironmentalBiomes.SNOWY_OLD_GROWTH_PINE_BARRENS);
 		ConditionSource isPineSlopes = isBiome(EnvironmentalBiomes.PINE_SLOPES);
 		ConditionSource isCedarCreek = isBiome(EnvironmentalBiomes.CEDAR_RIVER, EnvironmentalBiomes.CEDAR_BANK);
+		ConditionSource isCedarSwamp = isBiome(EnvironmentalBiomes.CEDAR_SWAMP);
 
 		RuleSource stone = state(Blocks.STONE.defaultBlockState());
 		RuleSource nearSurfaceStone = ifTrue(not(ON_FLOOR), stone);
+
 		RuleSource sand = state(Blocks.SAND.defaultBlockState());
 		RuleSource sandstone = state(Blocks.SANDSTONE.defaultBlockState());
 		RuleSource muddySand = state(EnvironmentalBlocks.MUDDY_SAND.get().defaultBlockState());
 		RuleSource mud = state(Blocks.MUD.defaultBlockState());
 		RuleSource sandy = sequence(ifTrue(ON_CEILING, sandstone), sand);
+		RuleSource water = state(Blocks.WATER.defaultBlockState());
+		RuleSource muddyPodzol = state(EnvironmentalBlocks.MUDDY_PODZOL.get().defaultBlockState());
 		RuleSource sandyToMud = sequence(
 				ifTrue(
 						yBlockCheck(VerticalAnchor.aboveBottom(64 + 62), 0),
@@ -53,14 +58,44 @@ public class EnvironmentalChunkGeneratorModifierProvider extends ChunkGeneratorM
 				),
 				mud
 		);
+		SurfaceRules.ConditionSource aboveWaterLevel = SurfaceRules.yBlockCheck(VerticalAnchor.absolute(63), 0);
+		SurfaceRules.ConditionSource atWaterLevel = SurfaceRules.yBlockCheck(VerticalAnchor.absolute(62), 0);
 		ConditionSource barelyOutOfWater = waterBlockCheck(-1, 0);
 		ConditionSource roughlyShallow = waterStartCheck(-6, -1);
+		RuleSource cedarMuddy = sequence(
+				ifTrue(
+						noiseCondition(EnvironmentalNoiseParameters.CEDAR_SWAMP_MUD, -0.1D, 0.1D),
+						mud
+				),
+				muddyPodzol
+		);
+		RuleSource cedarVernalPools = sequence(
+				ifTrue(
+						aboveWaterLevel,
+						cedarMuddy
+				),
+				ifTrue(
+						atWaterLevel,
+						sequence(
+								ifTrue(
+										noiseCondition(EnvironmentalNoiseParameters.CEDAR_SWAMP_MUD, -0.1D, 0.1D),
+										water
+								),
+								ifTrue(
+										noiseCondition(EnvironmentalNoiseParameters.CEDAR_SWAMP_MUD, -0.175D, 0.175D),
+										mud
+								)
+						)
+				),
+				cedarMuddy
+		);
 
 		this.entry("environmental_surface_rule").selects("minecraft:overworld")
 				.addModifier(new SurfaceRuleModifier(ifTrue(abovePreliminarySurface(), sequence(
 						ifTrue(isPineBarrens, sequence(ifTrue(steep(), stone), ifTrue(surfaceNoiseAbove(Noises.SURFACE, 3.0F), ifTrue(not(noiseRange(EnvironmentalNoiseParameters.PINE_BARRENS_STONE, -1.25F, 1.25F)), stone)), ifTrue(surfaceNoiseAbove(Noises.SURFACE, 2.0F), nearSurfaceStone), ifTrue(not(stoneDepthCheck(-1, true, CaveSurface.FLOOR)), nearSurfaceStone))),
 						ifTrue(isPineSlopes, stone),
-						ifTrue(isCedarCreek, sequence(ifTrue(ON_FLOOR, ifTrue(barelyOutOfWater, sandyToMud)), ifTrue(roughlyShallow, ifTrue(UNDER_FLOOR, sandyToMud))))
+						ifTrue(isCedarCreek, sequence(ifTrue(ON_FLOOR, ifTrue(barelyOutOfWater, sandyToMud)), ifTrue(roughlyShallow, ifTrue(UNDER_FLOOR, sandyToMud)))),
+						ifTrue(isCedarSwamp, sequence(ifTrue(ON_FLOOR, ifTrue(barelyOutOfWater, cedarVernalPools)), ifTrue(roughlyShallow, ifTrue(UNDER_FLOOR, sequence(ifTrue(aboveWaterLevel, cedarMuddy), mud)))))
 				)), false));
 	}
 

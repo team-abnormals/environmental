@@ -16,12 +16,15 @@ public class EnvironmentalNoiseParameters {
 	public static final ResourceKey<NoiseParameters> DWARF_SPRUCE_HEIGHT = create("dwarf_spruce_height");
 	public static final ResourceKey<NoiseParameters> CEDAR_RIVER_MUD = create("cedar_river_mud");
 	public static final ResourceKey<NoiseParameters> CEDAR_RIVER_WATERLILY_DENSITY = create("cedar_river_waterlily_density");
+	public static final ResourceKey<NoiseParameters> CEDAR_SWAMP_SHADE = create("cedar_swamp_shade");
+	public static final ResourceKey<NoiseParameters> CEDAR_SWAMP_MUD = create("cedar_swamp_mud");
 	public static final ResourceKey<NoiseParameters> SHRUB_DENSITY = create("shrub_density");
 	public static final ResourceKey<NoiseParameters> WISTERIA_DENSITY = create("wisteria_density");
 	public static final ResourceKey<NoiseParameters> WISTERIA_COLOR = create("wisteria_color");
 
 	public static final LevelNoiseReceiver DWARF_SPRUCE_DENSITY_RECEIVER = new LevelNoiseReceiver(Algorithm.LEGACY, DWARF_SPRUCE_DENSITY);
 	public static final LevelNoiseReceiver DWARF_SPRUCE_HEIGHT_RECEIVER = new LevelNoiseReceiver(Algorithm.LEGACY, DWARF_SPRUCE_HEIGHT);
+	public static final LevelNoiseReceiver CEDAR_SWAMP_SHADE_RECEIVER = new LevelNoiseReceiver(Algorithm.LEGACY, CEDAR_SWAMP_SHADE);
 
 	public static void bootstrap(BootstrapContext<NoiseParameters> context) {
 		context.register(PINE_BARRENS_STONE, new NormalNoise.NoiseParameters(-4, 1.0D));
@@ -30,6 +33,8 @@ public class EnvironmentalNoiseParameters {
 		context.register(DWARF_SPRUCE_HEIGHT, new NormalNoise.NoiseParameters(-8, 1.0D, 1.0D));
 		context.register(CEDAR_RIVER_MUD, new NormalNoise.NoiseParameters(-3, 1.0D, 1.0D, 0.0D, 1.0D));
 		context.register(CEDAR_RIVER_WATERLILY_DENSITY, new NormalNoise.NoiseParameters(-3, 1.0D, 1.0D, 0.0D));
+		context.register(CEDAR_SWAMP_SHADE, new  NormalNoise.NoiseParameters(-6, 1.0D, 1.5D, 2.0D, 2.0D, 2.0D, 1.0D));
+		context.register(CEDAR_SWAMP_MUD, new NormalNoise.NoiseParameters(-4, 1.0D, 1.0D, 0.0D, 1.0D));
 		context.register(SHRUB_DENSITY, new NormalNoise.NoiseParameters(-3, 1.0D, 1.0D, 0.0D));
 		context.register(WISTERIA_DENSITY, new NormalNoise.NoiseParameters(-8, 1.0D));
 		context.register(WISTERIA_COLOR, new NormalNoise.NoiseParameters(-9, 1.0D));

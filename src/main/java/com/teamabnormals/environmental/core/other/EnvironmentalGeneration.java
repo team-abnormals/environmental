@@ -5,6 +5,7 @@ import net.minecraft.data.worldgen.biome.OverworldBiomes;
 import net.minecraft.data.worldgen.placement.AquaticPlacements;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
+import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 
 import static com.teamabnormals.environmental.core.registry.datapack.EnvironmentalPlacedFeatures.*;
@@ -108,6 +109,13 @@ public class EnvironmentalGeneration {
 		BiomeDefaultFeatures.addExtraEmeralds(generation);
 		BiomeDefaultFeatures.addInfestedStone(generation);
 		generation.addFeature(Decoration.VEGETAL_DECORATION, TREE_LICHEN_UNCOMMON);
+	}
+
+	public static void cedarSwamp(BiomeGenerationSettings.Builder generation) {
+		generation.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, MUDDY_EDGES);
+		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, TREES_CEDAR_SWAMP);
+		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, TREES_CEDAR_SWAMP_EXTRA);
+		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, TREE_LICHEN);
 	}
 
 	public static void cedarCreek(BiomeGenerationSettings.Builder generation, boolean edge) {

@@ -15,7 +15,24 @@
     "water_color": 6899245,
     "water_fog_color": 2233870
   },
-  "features": [],
+  "features": [
+    [],
+    [],
+    [
+      "environmental:muddy_edges"
+    ],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "environmental:trees_cedar_swamp",
+      "environmental:trees_cedar_swamp_extra",
+      "environmental:tree_lichen"
+    ]
+  ],
   "has_precipitation": true,
   "spawn_costs": {},
   "spawners": {

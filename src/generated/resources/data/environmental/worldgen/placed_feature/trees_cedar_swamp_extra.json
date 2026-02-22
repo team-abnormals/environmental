@@ -1,0 +1,11 @@
+{
+  "feature": "environmental:swampy_cedar",
+  "placement": [
+    {
+      "type": "environmental:cedar_swamp_darkness"
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "feature": "environmental:muddy_edges",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

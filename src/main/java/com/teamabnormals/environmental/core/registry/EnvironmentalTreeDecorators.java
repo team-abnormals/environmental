@@ -16,4 +16,5 @@ public class EnvironmentalTreeDecorators {
 	public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<?>> PINE_PODZOL = TREE_DECORATORS.register("pine_podzol", () -> new TreeDecoratorType<>(PinePodzolDecorator.CODEC));
 	public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<?>> FALLEN_LEAVES_DECORATOR = TREE_DECORATORS.register("fallen_leaves", () -> new TreeDecoratorType<>(FallenLeavesDecorator.CODEC));
 	public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<?>> SUSPICIOUS_MUDDY_SAND = TREE_DECORATORS.register("suspicious_muddy_sand", () -> new TreeDecoratorType<>(SuspiciousMuddySandDecorator.CODEC));
+	public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<?>> CEDAR_PODZOL = TREE_DECORATORS.register("cedar_podzol", () -> new TreeDecoratorType<>(CedarPodzolDecorator.CODEC));
 }

@@ -119,6 +119,7 @@ public class EnvironmentalBiomes {
 
 	private static Biome cedarSwamp(HolderGetter<PlacedFeature> features, HolderGetter<ConfiguredWorldCarver<?>> carvers) {
 		BiomeGenerationSettings.Builder generation = new BiomeGenerationSettings.Builder(features, carvers);
+		EnvironmentalGeneration.cedarSwamp(generation);
 
 		MobSpawnSettings.Builder spawns = new MobSpawnSettings.Builder();
 		BiomeDefaultFeatures.farmAnimals(spawns);
