@@ -126,9 +126,11 @@ public class EnvironmentalPlacedFeatures {
 	public static final ResourceKey<PlacedFeature> MUDDY_SAND = createKey("muddy_sand");
 	public static final ResourceKey<PlacedFeature> CEDAR_BOG_ORE = createKey("cedar_bog_ore");
 	public static final ResourceKey<PlacedFeature> MUDDY_EDGES = createKey("muddy_edges");
+	public static final ResourceKey<PlacedFeature> PATCH_CEDAR_SWAMP_FERN = createKey("patch_cedar_swamp_fern");
 	public static final ResourceKey<PlacedFeature> SHRUB_PATCH = createKey("shrub_patch");
 	public static final ResourceKey<PlacedFeature> TREE_LICHEN = createKey("tree_lichen");
 	public static final ResourceKey<PlacedFeature> TREE_LICHEN_UNCOMMON = createKey("tree_lichen_uncommon");
+	public static final ResourceKey<PlacedFeature> TREE_LICHEN_CEDAR_SWAMP = createKey("tree_lichen_cedar_swamp");
 
 	public static final ResourceKey<PlacedFeature> BAMBOO_BLOSSOM_WOODS = createKey("bamboo_blossom_woods");
 	public static final ResourceKey<PlacedFeature> BAMBOO_LIGHT_BLOSSOM_WOODS = createKey("bamboo_light_blossom_woods");
@@ -248,12 +250,14 @@ public class EnvironmentalPlacedFeatures {
 		register(context, PATCH_CUP_LICHEN_TAIGA, EnvironmentalConfiguredFeatures.PATCH_CUP_LICHEN, RarityFilter.onAverageOnceEvery(22), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 		register(context, PATCH_CUP_LICHEN_SMALL, EnvironmentalConfiguredFeatures.PATCH_CUP_LICHEN_SMALL, RarityFilter.onAverageOnceEvery(8), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 
+		register(context, PATCH_CEDAR_SWAMP_FERN, EnvironmentalConfiguredFeatures.PATCH_CEDAR_SWAMP_FERN, RarityFilter.onAverageOnceEvery(4), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 		register(context, SHRUB_PATCH, EnvironmentalConfiguredFeatures.SHRUB_PATCH, new NoiseDensityPlacement(noises.getOrThrow(EnvironmentalNoiseParameters.SHRUB_DENSITY), 16.0F, 0.5F), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 		register(context, MUDDY_SAND, EnvironmentalConfiguredFeatures.MUDDY_SAND, BiomeFilter.biome());
 		register(context, CEDAR_BOG_ORE, EnvironmentalConfiguredFeatures.CEDAR_BOG_ORE, commonOrePlacement(100, HeightRangePlacement.triangle(VerticalAnchor.absolute(50), VerticalAnchor.absolute(69))));
 		register(context, MUDDY_EDGES, EnvironmentalConfiguredFeatures.MUDDY_EDGES, BiomeFilter.biome());
 		register(context, TREE_LICHEN, EnvironmentalConfiguredFeatures.TREE_LICHEN, BiomeFilter.biome());
 		register(context, TREE_LICHEN_UNCOMMON, EnvironmentalConfiguredFeatures.TREE_LICHEN_UNCOMMON, BiomeFilter.biome());
+		register(context, TREE_LICHEN_CEDAR_SWAMP, EnvironmentalConfiguredFeatures.TREE_LICHEN_CEDAR_SWAMP, BiomeFilter.biome());
 
 		register(context, PINE_SLOPES_ROCK, EnvironmentalConfiguredFeatures.STONE_ROCK, CountPlacement.of(2), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
 		register(context, PINE_SLOPES_BOULDER, EnvironmentalConfiguredFeatures.PINE_SLOPES_BOULDER, CountPlacement.of(1), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());

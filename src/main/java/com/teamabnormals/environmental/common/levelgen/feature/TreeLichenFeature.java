@@ -1,8 +1,10 @@
 package com.teamabnormals.environmental.common.levelgen.feature;
 
 import com.mojang.serialization.Codec;
+import com.teamabnormals.environmental.common.levelgen.feature.configurations.TreeLichenConfiguration;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalBlockTags;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
+import com.teamabnormals.environmental.core.registry.datapack.EnvironmentalNoiseParameters;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
@@ -17,24 +19,35 @@ import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration;
+import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
-public class TreeLichenFeature extends Feature<ProbabilityFeatureConfiguration> {
+public class TreeLichenFeature extends Feature<TreeLichenConfiguration> {
 
-	public TreeLichenFeature(Codec<ProbabilityFeatureConfiguration> config) {
+	public TreeLichenFeature(Codec<TreeLichenConfiguration> config) {
 		super(config);
 	}
 
 	@Override
-	public boolean place(FeaturePlaceContext<ProbabilityFeatureConfiguration> context) {
+	public boolean place(FeaturePlaceContext<TreeLichenConfiguration> context) {
 		WorldGenLevel level = context.level();
-		DensityFunction vegetationFunction = level.getLevel().getChunkSource().randomState().router().vegetation();
+		TreeLichenConfiguration config = context.config();
+		PositionProbabilityFunction positionProbabilityFunction;
+		if (config.useCedarShadeNoise()) {
+			NormalNoise shadeNoise = EnvironmentalNoiseParameters.CEDAR_SWAMP_SHADE_RECEIVER.get(level.getLevel());
+			positionProbabilityFunction = (x, y, z) -> {
+				double shade = shadeNoise.getValue(0.25D * x, 0.0D, 0.25D * z);
+				return shade < 0.0D ? 0.3D : 0.3D + shade * 0.625D;
+			};
+		} else {
+			DensityFunction vegetationFunction = level.getLevel().getChunkSource().randomState().router().vegetation();
+			positionProbabilityFunction = (x, y, z) -> computeVegetationDensity(vegetationFunction.compute(new DensityFunction.SinglePointContext(x, 0, z)));
+		}
 		BlockPos origin = context.origin();
 		int originX = origin.getX();
 		int originZ = origin.getZ();
 		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
 		RandomSource random = context.random();
-		float probability = context.config().probability;
+		float probability = config.probability();
 		for (int x = 0; x < 16; x++) {
 			pos.setX(originX + x);
 			for (int z = 0; z < 16; z++) {
@@ -48,12 +61,7 @@ public class TreeLichenFeature extends Feature<ProbabilityFeatureConfiguration> 
 				} else if (state.is(BlockTags.LOGS)) {
 					amplified = random.nextInt(7) == 0;
 				} else continue;
-				double vegetation = vegetationFunction.compute(new DensityFunction.SinglePointContext(
-						pos.getX(),
-						height,
-						pos.getZ()
-				));
-				double density = computeDensity(vegetation);
+				double density = positionProbabilityFunction.sample(pos.getX(), height, pos.getZ());
 				if (random.nextDouble() > density * probability) continue;
 				int lichenExtraHeight = random.nextInt(5) + 3;
 				if (density > 0.35D && random.nextInt(4) != 0)
@@ -101,7 +109,7 @@ public class TreeLichenFeature extends Feature<ProbabilityFeatureConfiguration> 
 		return true;
 	}
 
-	private static double computeDensity(double vegetation) {
+	private static double computeVegetationDensity(double vegetation) {
 		if (vegetation < 0.0D) return 0.0D;
 		if (vegetation >= 1.0D) return 0.9D;
 		if (vegetation <= 0.3D) return 0.25D * smoothStep(vegetation / 0.3D);
@@ -207,5 +215,10 @@ public class TreeLichenFeature extends Feature<ProbabilityFeatureConfiguration> 
 			if (++h == height) break;
 			pos.move(Direction.UP);
 		}
+	}
+
+	@FunctionalInterface
+	private interface PositionProbabilityFunction {
+		double sample(int x, int y, int z);
 	}
 }

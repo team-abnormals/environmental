@@ -112,10 +112,14 @@ public class EnvironmentalGeneration {
 	}
 
 	public static void cedarSwamp(BiomeGenerationSettings.Builder generation) {
+		OverworldBiomes.globalOverworldGeneration(generation);
+		BiomeDefaultFeatures.addDefaultOres(generation);
 		generation.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, MUDDY_EDGES);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, AquaticPlacements.SEAGRASS_SWAMP);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_CEDAR_SWAMP_FERN);
 		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, TREES_CEDAR_SWAMP);
 		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, TREES_CEDAR_SWAMP_EXTRA);
-		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, TREE_LICHEN);
+		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, TREE_LICHEN_CEDAR_SWAMP);
 	}
 
 	public static void cedarCreek(BiomeGenerationSettings.Builder generation, boolean edge) {

@@ -37,8 +37,13 @@ public class CedarTreeFeature extends BlueprintTreeFeature {
 		for (int y = 0; y < trunkHeight; y++) {
 			info.addLog(origin.above(y));
 		}
-		int bottomFoliageTop = mainFoliageStart - 2;
+		MiddleFoliageType middleFoliageType;
 		if (trunkHeight > 13) {
+			if (trunkHeight > 14) {
+				if ((middleFoliageType = MiddleFoliageType.random(random)) != MiddleFoliageType.COMPRESSED)
+					mainFoliageStart--;
+			} else middleFoliageType = MiddleFoliageType.COMPRESSED;
+			int bottomFoliageTop = mainFoliageStart - 2;
 			if (random.nextBoolean()) {
 				BlockPos bottomFoliagePos = origin.above(bottomFoliageTop);
 				for (Direction horizontal : Direction.Plane.HORIZONTAL) {
@@ -48,23 +53,26 @@ public class CedarTreeFeature extends BlueprintTreeFeature {
 				}
 				encloseCloseSpottyLeaves(origin.above(bottomFoliageTop - 2), random, info, true);
 			} else encloseCloseSpottyLeaves(origin.above(bottomFoliageTop), random, info, true);
-		} else encloseCloseSpottyLeaves(origin.above(bottomFoliageTop), random, info, true);
-		encloseCloseLeaves(origin.above(mainFoliageStart), info);
+		} else {
+			middleFoliageType = MiddleFoliageType.COMPRESSED;
+			encloseCloseSpottyLeaves(origin.above(mainFoliageStart - 2), random, info, true);
+		}
+		encloseCloseLeaves(origin.above(mainFoliageStart), random, info);
 		encloseSpottyLeaves(origin.above(mainFoliageStart + 1), random, info);
-		encloseCloseLeaves(origin.above(mainFoliageStart + 2), info);
+		encloseCloseLeaves(origin.above(mainFoliageStart + 2), random, info);
 		encloseLargeLeaves(origin.above(mainFoliageStart + 3), random, info);
-		encloseCloseLeaves(origin.above(mainFoliageStart + 4), info);
+		if (middleFoliageType == MiddleFoliageType.INVERTED_CONE) {
+			encloseCloseLeaves(origin.above(++mainFoliageStart + 3), random, info);
+			encloseMediumLeaves(origin.above(mainFoliageStart + 4), random, info, 2);
+		} else {
+			if (middleFoliageType == MiddleFoliageType.CONE)
+				encloseMediumLeaves(origin.above(++mainFoliageStart + 3), random, info, 2);
+			encloseCloseLeaves(origin.above(mainFoliageStart + 4), random, info);
+		}
 		encloseLargeLeaves(origin.above(mainFoliageStart + 5), random, info);
 		// Top leaves
 		origin = origin.above(mainFoliageStart + 6);
-		for (int x = -2; x <= 2; x++) {
-			for (int z = -2; z <= 2; z++) {
-				int distanceSquared = x * x + z * z;
-				if (distanceSquared > 4) continue;
-				if (distanceSquared > 1 && random.nextBoolean()) continue;
-				info.addFoliage(origin.offset(x, 0, z));
-			}
-		}
+		encloseMediumLeaves(origin, random, info, random.nextInt(4) + 5);
 		origin = origin.above();
 		for (int x = -3; x <= 3; x++) {
 			for (int z = -3; z <= 3; z++) {
@@ -90,9 +98,13 @@ public class CedarTreeFeature extends BlueprintTreeFeature {
 		}
 	}
 
-	private static void encloseCloseLeaves(BlockPos pos, TreeInfo info) {
+	private static void encloseCloseLeaves(BlockPos pos, RandomSource random, TreeInfo info) {
 		for (Direction horizontal : Direction.Plane.HORIZONTAL) {
 			info.addFoliage(pos.relative(horizontal));
+		}
+		if (random.nextInt(5) != 0) {
+			Direction horizontal = Direction.Plane.HORIZONTAL.getRandomDirection(random);
+			info.addFoliage(pos.relative(horizontal).relative(random.nextBoolean() ? horizontal.getClockWise() : horizontal.getCounterClockWise()));
 		}
 	}
 
@@ -102,6 +114,20 @@ public class CedarTreeFeature extends BlueprintTreeFeature {
 				int distanceSquared = x * x + z * z;
 				if (distanceSquared == 5 && random.nextBoolean()) continue;
 				if (distanceSquared > 4) continue;
+				info.addFoliage(pos.offset(x, 0, z));
+			}
+		}
+	}
+
+	private static void encloseMediumLeaves(BlockPos pos, RandomSource random, TreeInfo info, int maxDecay) {
+		for (int x = -2; x <= 2; x++) {
+			for (int z = -2; z <= 2; z++) {
+				int distanceSquared = x * x + z * z;
+				if (distanceSquared > 4) continue;
+				if (distanceSquared > 1 && maxDecay > 0 && random.nextBoolean()) {
+					maxDecay--;
+					continue;
+				}
 				info.addFoliage(pos.offset(x, 0, z));
 			}
 		}
@@ -135,4 +161,15 @@ public class CedarTreeFeature extends BlueprintTreeFeature {
 		}
 	}
 
+	private enum MiddleFoliageType {
+		COMPRESSED,
+		CONE,
+		INVERTED_CONE;
+
+		private static final MiddleFoliageType[] VALUES = values();
+
+		private static MiddleFoliageType random(RandomSource random) {
+			return VALUES[random.nextInt(3)];
+		}
+	}
 }

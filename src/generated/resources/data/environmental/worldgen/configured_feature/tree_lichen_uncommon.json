@@ -1,6 +1,7 @@
 {
   "type": "environmental:tree_lichen",
   "config": {
-    "probability": 0.5
+    "probability": 0.5,
+    "use_cedar_shade_noise": false
   }
 }
