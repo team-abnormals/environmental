@@ -42,6 +42,8 @@ public class EnvironmentalBlockStateProvider extends BlueprintBlockStateProvider
 		this.generatedItem(MUDGLASS_PANE.get(), this.modLoc("block/mudglass"));
 		this.block(BOG_IRON_BLOCK);
 
+		this.block(SMOOTHCAP_MOSS_BLOCK);
+
 		this.blockFamily(EnvironmentalBlockFamilies.WILLOW_PLANKS_FAMILY);
 		this.logBlocks(WILLOW_LOG, WILLOW_WOOD);
 		this.logBlocks(STRIPPED_WILLOW_LOG, STRIPPED_WILLOW_WOOD);

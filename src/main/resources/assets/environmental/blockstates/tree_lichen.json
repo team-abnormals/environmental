@@ -16,7 +16,6 @@
       "apply": { "model": "environmental:block/tree_lichen_3" },
       "when": { "north": "true", "age": "3" }
     },
-
     {
       "apply": { "model": "environmental:block/tree_lichen_0" },
       "when": {

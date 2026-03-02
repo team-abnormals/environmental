@@ -1,0 +1,6 @@
+{
+  "parent": "environmental:block/flat_surface",
+  "textures": {
+    "surface": "environmental:block/smoothcap_moss_surface_0"
+  }
+}

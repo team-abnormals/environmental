@@ -71,6 +71,8 @@ public class EnvironmentalDataMapProvider extends DataMapProvider {
 				.add(TREE_LICHEN.getId(), new Compostable(0.30F), false)
 				.add(SHRUB.getId(), new Compostable(0.50F), false)
 				.add(FLOWERING_SHRUB.getId(), new Compostable(0.50F), false)
+				.add(SMOOTHCAP_MOSS.getId(), new Compostable(0.30F), false)
+				.add(SMOOTHCAP_MOSS_BLOCK.getId(), new Compostable(0.65F), false)
 				.add(DWARF_SPRUCE.getId(), new Compostable(0.50F), false)
 				.add(EnvironmentalItems.TRUFFLE, new Compostable(0.65F), false)
 				.add(CATTAIL_THATCH.getId(), new Compostable(0.65F), false)

@@ -56,7 +56,8 @@ public class EnvironmentalProperties {
 	public static final BlockBehaviour.Properties CUP_LICHEN = BlockBehaviour.Properties.of().mapColor(MapColor.GLOW_LICHEN).replaceable().noCollission().instabreak().sound(SoundType.NETHER_SPROUTS).ignitedByLava().pushReaction(PushReaction.DESTROY);
 	public static final BlockBehaviour.Properties TREE_LICHEN = BlockBehaviour.Properties.of().mapColor(MapColor.GLOW_LICHEN).replaceable().noCollission().instabreak().sound(SoundType.NETHER_SPROUTS).ignitedByLava().pushReaction(PushReaction.DESTROY);
 	public static final BlockBehaviour.Properties CACTUS_BOBBLE = BlockBehaviour.Properties.of().replaceable().noCollission().instabreak().sound(SoundType.WOOL).ignitedByLava().pushReaction(PushReaction.DESTROY);
-	public static final BlockBehaviour.Properties SHRUB = shrub();
+	public static final BlockBehaviour.Properties SHRUB = applyAntiZFightingXZOffset(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).replaceable().noCollission().sound(SoundType.SWEET_BERRY_BUSH).pushReaction(PushReaction.DESTROY), true);
+	public static final BlockBehaviour.Properties SMOOTHCAP_MOSS = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).replaceable().noCollission().instabreak().sound(SoundType.MOSS).ignitedByLava().pushReaction(PushReaction.DESTROY);
 	public static final BlockBehaviour.Properties DWARF_SPRUCE = BlockBehaviour.Properties.of().noCollission().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY);
 
 	public static final BlockBehaviour.Properties TALL_FLOWERS = PropertyUtil.flower().ignitedByLava();
@@ -110,14 +111,13 @@ public class EnvironmentalProperties {
 		return properties;
 	}
 
-	private static BlockBehaviour.Properties shrub() {
-		BlockBehaviour.Properties properties = BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).replaceable().noCollission().sound(SoundType.SWEET_BERRY_BUSH).pushReaction(PushReaction.DESTROY);
+	private static BlockBehaviour.Properties applyAntiZFightingXZOffset(BlockBehaviour.Properties properties, boolean centerable) {
 		properties.offsetFunction = (state, blockGetter, pos) -> {
 			double xOffset;
 			double zOffset;
 			int x = pos.getX();
 			int z = pos.getZ();
-			if (state.getValue(ShrubBlock.CENTERED)) {
+			if (centerable && state.getValue(ShrubBlock.CENTERED)) {
 				xOffset = zOffset = 0.0D;
 			} else {
 				long i = Mth.getSeed(x, 0, z);

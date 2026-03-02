@@ -1,6 +1,7 @@
 {
   "values": [
     "environmental:muddy_sand",
-    "environmental:muddy_podzol"
+    "environmental:muddy_podzol",
+    "environmental:smoothcap_moss_block"
   ]
 }

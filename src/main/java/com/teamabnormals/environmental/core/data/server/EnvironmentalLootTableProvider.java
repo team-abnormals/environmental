@@ -216,9 +216,11 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			this.add(DUCKWEED.get(), BlockLootSubProvider::createShearsOnlyDrop);
 			this.add(GIANT_TALL_GRASS.get(), (block) -> createDoublePlantWithOtherDrop(block, Blocks.SHORT_GRASS, Items.WHEAT_SEEDS, 3, 0.125F));
 			this.add(CUP_LICHEN.get(), this::createCupLichenDrops);
-			this.add(TREE_LICHEN.get(), this::createTreeLichenDrops);
+			this.add(TREE_LICHEN.get(), this::createAge3Drops);
 			this.add(SHRUB.get(), this::createShrubDrops);
 			this.add(FLOWERING_SHRUB.get(), this::createShrubDrops);
+			this.add(SMOOTHCAP_MOSS.get(), this::createAge3Drops);
+			this.dropSelf(SMOOTHCAP_MOSS_BLOCK.get());
 			this.add(CACTUS_BOBBLE.get(), noDrop());
 
 			this.add(DWARF_SPRUCE.get(), (block) -> createDwarfSpruceDrops(block, true));
@@ -441,9 +443,9 @@ public class EnvironmentalLootTableProvider extends LootTableProvider {
 			}))));
 		}
 
-		protected LootTable.Builder createTreeLichenDrops(Block block) {
-			return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(applyExplosionDecay(block, LootItem.lootTableItem(block).apply(List.of(1, 2, 3), (age) -> {
-				return SetItemCountFunction.setCount(ConstantValue.exactly((float) age.intValue())).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BlockStateProperties.AGE_3, age)));
+		protected LootTable.Builder createAge3Drops(Block block) {
+			return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(applyExplosionDecay(block, LootItem.lootTableItem(block).apply(List.of(0, 1, 2, 3), (age) -> {
+				return SetItemCountFunction.setCount(ConstantValue.exactly((float) age.intValue() + 1.0F)).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BlockStateProperties.AGE_3, age)));
 			}))));
 		}
 

@@ -101,6 +101,8 @@ public class EnvironmentalBlocks {
 	public static final DeferredBlock<Block> CACTUS_BOBBLE = BLOCKS.createBlockNoItem("cactus_bobble", () -> new CactusBobbleBlock(EnvironmentalProperties.CACTUS_BOBBLE));
 	public static final DeferredBlock<Block> SHRUB = BLOCKS.createBlock("shrub", () -> new ShrubBlock(EnvironmentalProperties.SHRUB));
 	public static final DeferredBlock<Block> FLOWERING_SHRUB = BLOCKS.createBlock("flowering_shrub", () -> new ShrubBlock(EnvironmentalProperties.SHRUB));
+	public static final DeferredBlock<Block> SMOOTHCAP_MOSS = BLOCKS.createBlock("smoothcap_moss", () -> new SmoothcapMossPlantBlock(EnvironmentalProperties.SMOOTHCAP_MOSS));
+	public static final DeferredBlock<Block> SMOOTHCAP_MOSS_BLOCK = BLOCKS.createBlock("smoothcap_moss_block", () -> new SmoothcapMossBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MOSS_BLOCK)));
 
 	public static final DeferredBlock<Block> BLAZING_SUNFLOWER = BLOCKS.createBlock("blazing_sunflower", () -> new DoublePlantBlock(Block.Properties.ofFullCopy(Blocks.SUNFLOWER)));
 	public static final DeferredBlock<Block> BEAMING_SUNFLOWER = BLOCKS.createBlock("beaming_sunflower", () -> new DoublePlantBlock(Block.Properties.ofFullCopy(Blocks.SUNFLOWER)));
@@ -465,6 +467,7 @@ public class EnvironmentalBlocks {
 				.addItemsAfter(of(Blocks.GLOW_LICHEN), CUP_LICHEN)
 				.addItemsAfter(of(Blocks.GLOW_LICHEN), TREE_LICHEN)
 				.addItemsAfter(of(Blocks.LARGE_FERN), SHRUB, FLOWERING_SHRUB)
+				.addItemsAfter(of(Blocks.MOSS_CARPET), SMOOTHCAP_MOSS_BLOCK, SMOOTHCAP_MOSS)
 				.addItemsAfter(of(Blocks.SUNFLOWER), RADIANT_SUNFLOWER, BEAMING_SUNFLOWER, ECLIPSED_SUNFLOWER, BLAZING_SUNFLOWER)
 				.addItemsBefore(of(Blocks.TORCHFLOWER), BLUEBELL, DIANTHUS, VIOLET, ESTUARY_MARIGOLD, TASSELFLOWER, RED_LOTUS_FLOWER, WHITE_LOTUS_FLOWER, CARTWHEEL,
 						YELLOW_HIBISCUS, ORANGE_HIBISCUS, RED_HIBISCUS, PINK_HIBISCUS, MAGENTA_HIBISCUS, PURPLE_HIBISCUS)

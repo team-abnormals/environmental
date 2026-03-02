@@ -1,6 +1,7 @@
 package com.teamabnormals.environmental.core.other;
 
 import com.teamabnormals.blueprint.client.model.DynamicItemModel;
+import com.teamabnormals.environmental.client.model.RandomOffsetBlockModel;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import com.teamabnormals.environmental.core.registry.EnvironmentalItems;
@@ -12,6 +13,7 @@ import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.GrassColor;
 import net.neoforged.api.distmarker.Dist;
@@ -27,6 +29,11 @@ public class EnvironmentalClientCompat {
 		EnvironmentalItems.setupTabEditors();
 		EnvironmentalBlocks.setupTabEditors();
 		registerRenderLayers();
+	}
+
+	@SubscribeEvent
+	public static void registerGeometryLoaders(ModelEvent.RegisterGeometryLoaders event) {
+		event.register(ResourceLocation.fromNamespaceAndPath(Environmental.MOD_ID, "random_offset"), RandomOffsetBlockModel.Loader.INSTANCE);
 	}
 
 	@SubscribeEvent
@@ -57,6 +64,7 @@ public class EnvironmentalClientCompat {
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.POTTED_SHRUB.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.FLOWERING_SHRUB.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.POTTED_FLOWERING_SHRUB.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.SMOOTHCAP_MOSS.get(), RenderType.cutout());
 
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.DWARF_SPRUCE.get(), RenderType.cutout());
 		ItemBlockRenderTypes.setRenderLayer(EnvironmentalBlocks.DWARF_SPRUCE_PLANT.get(), RenderType.cutout());

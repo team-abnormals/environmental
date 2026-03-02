@@ -39,6 +39,7 @@
     "environmental:duckweed_thatch_slab",
     "environmental:duckweed_thatch_stairs",
     "environmental:hibiscus_leaves",
-    "environmental:hibiscus_leaf_pile"
+    "environmental:hibiscus_leaf_pile",
+    "environmental:smoothcap_moss_block"
   ]
 }

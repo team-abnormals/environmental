@@ -2,6 +2,7 @@
   "values": [
     "#minecraft:sword_efficient",
     "minecraft:moss_block",
+    "environmental:smoothcap_moss_block",
     "minecraft:bamboo",
     "minecraft:bamboo_sapling",
     "minecraft:cactus",

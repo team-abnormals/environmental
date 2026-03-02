@@ -10,6 +10,7 @@
     "environmental:dirt_tile_wall",
     "environmental:muddy_sand",
     "environmental:suspicious_muddy_sand",
-    "environmental:muddy_podzol"
+    "environmental:muddy_podzol",
+    "environmental:smoothcap_moss_block"
   ]
 }
