@@ -36,7 +36,7 @@ public class TreeLichenFeature extends Feature<TreeLichenConfiguration> {
 			NormalNoise shadeNoise = EnvironmentalNoiseParameters.CEDAR_SWAMP_SHADE_RECEIVER.get(level.getLevel());
 			positionProbabilityFunction = (x, y, z) -> {
 				double shade = shadeNoise.getValue(0.25D * x, 0.0D, 0.25D * z);
-				return shade < 0.0D ? 0.3D : 0.3D + shade * 0.625D;
+				return shade < 0.0D ? 0.35D : 0.4D + shade * 0.525D;
 			};
 		} else {
 			DensityFunction vegetationFunction = level.getLevel().getChunkSource().randomState().router().vegetation();
