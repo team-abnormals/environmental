@@ -4,7 +4,7 @@
       "type": "criteria",
       "config": {
         "criteria": {
-          "environmental:environmental:blossom_valleys": {
+          "environmental:blossom_valleys": {
             "conditions": {
               "player": [
                 {
@@ -20,7 +20,7 @@
             },
             "trigger": "minecraft:location"
           },
-          "environmental:environmental:blossom_woods": {
+          "environmental:blossom_woods": {
             "conditions": {
               "player": [
                 {
@@ -36,7 +36,7 @@
             },
             "trigger": "minecraft:location"
           },
-          "environmental:environmental:cedar_river": {
+          "environmental:cedar_river": {
             "conditions": {
               "player": [
                 {
@@ -52,7 +52,7 @@
             },
             "trigger": "minecraft:location"
           },
-          "environmental:environmental:cedar_swamp": {
+          "environmental:cedar_swamp": {
             "conditions": {
               "player": [
                 {
@@ -68,7 +68,7 @@
             },
             "trigger": "minecraft:location"
           },
-          "environmental:environmental:marsh": {
+          "environmental:marsh": {
             "conditions": {
               "player": [
                 {
@@ -84,7 +84,7 @@
             },
             "trigger": "minecraft:location"
           },
-          "environmental:environmental:old_growth_pine_barrens": {
+          "environmental:old_growth_pine_barrens": {
             "conditions": {
               "player": [
                 {
@@ -100,7 +100,7 @@
             },
             "trigger": "minecraft:location"
           },
-          "environmental:environmental:pine_barrens": {
+          "environmental:pine_barrens": {
             "conditions": {
               "player": [
                 {
@@ -116,7 +116,7 @@
             },
             "trigger": "minecraft:location"
           },
-          "environmental:environmental:pine_slopes": {
+          "environmental:pine_slopes": {
             "conditions": {
               "player": [
                 {
@@ -132,7 +132,7 @@
             },
             "trigger": "minecraft:location"
           },
-          "environmental:environmental:snowy_old_growth_pine_barrens": {
+          "environmental:snowy_old_growth_pine_barrens": {
             "conditions": {
               "player": [
                 {
@@ -148,7 +148,7 @@
             },
             "trigger": "minecraft:location"
           },
-          "environmental:environmental:snowy_pine_barrens": {
+          "environmental:snowy_pine_barrens": {
             "conditions": {
               "player": [
                 {
@@ -168,34 +168,34 @@
         "indexed_requirements": [],
         "requirements": [
           [
-            "environmental:environmental:marsh"
+            "environmental:marsh"
           ],
           [
-            "environmental:environmental:blossom_woods"
+            "environmental:blossom_woods"
           ],
           [
-            "environmental:environmental:blossom_valleys"
+            "environmental:blossom_valleys"
           ],
           [
-            "environmental:environmental:pine_barrens"
+            "environmental:pine_barrens"
           ],
           [
-            "environmental:environmental:snowy_pine_barrens"
+            "environmental:snowy_pine_barrens"
           ],
           [
-            "environmental:environmental:old_growth_pine_barrens"
+            "environmental:old_growth_pine_barrens"
           ],
           [
-            "environmental:environmental:snowy_old_growth_pine_barrens"
+            "environmental:snowy_old_growth_pine_barrens"
           ],
           [
-            "environmental:environmental:pine_slopes"
+            "environmental:pine_slopes"
           ],
           [
-            "environmental:environmental:cedar_swamp"
+            "environmental:cedar_swamp"
           ],
           [
-            "environmental:environmental:cedar_river"
+            "environmental:cedar_river"
           ]
         ],
         "should_replace_requirements": false

@@ -70,7 +70,7 @@ public class EnvironmentalAdvancementModifierProvider extends AdvancementModifie
 		CriteriaModifier.Builder adventuringTime = CriteriaModifier.builder(this.modId);
 		RegistryLookup<Biome> biomes = provider.lookupOrThrow(Registries.BIOME);
 		EnvironmentalBiomes.NATURAL_BIOMES.forEach(biome -> {
-			adventuringTime.addCriterion(biome.location().toString(), PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(biome))));
+			adventuringTime.addCriterion(biome.location().getPath(), PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(biome))));
 		});
 		this.entry("adventure/adventuring_time").selects("adventure/adventuring_time").addModifier(adventuringTime.requirements(Strategy.AND).build());
 
