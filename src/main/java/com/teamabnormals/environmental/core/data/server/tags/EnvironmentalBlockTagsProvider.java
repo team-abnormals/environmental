@@ -123,7 +123,7 @@ public class EnvironmentalBlockTagsProvider extends BlockTagsProvider {
 		this.tag(BlockTags.IMPERMEABLE).add(MUDGLASS.get());
 		this.tag(BlockTags.SNOW_LAYER_CAN_SURVIVE_ON).add(MUDDY_PODZOL.get());
 
-		this.tag(DEER_SPAWNABLE_ON).add(Blocks.GRASS_BLOCK, Blocks.SNOW, Blocks.SNOW_BLOCK);
+		this.tag(DEER_SPAWNABLE_ON).add(Blocks.GRASS_BLOCK, Blocks.PODZOL, Blocks.SNOW, Blocks.SNOW_BLOCK);
 		this.tag(WATER_ANIMALS_SPAWNABLE_ON).addTag(BlockTags.ANIMALS_SPAWNABLE_ON).add(Blocks.WATER, Blocks.MUD, MUDDY_SAND.get(), MUDDY_PODZOL.get());
 		this.tag(BlockTags.FROGS_SPAWNABLE_ON).add(MUDDY_SAND.get(), MUDDY_PODZOL.get());
 		this.tag(GRASS_LIKE).add(Blocks.GRASS_BLOCK, Blocks.PODZOL, Blocks.MYCELIUM, MUDDY_PODZOL.get()).addOptional(ResourceLocation.fromNamespaceAndPath("atmospheric", "crustose"));
