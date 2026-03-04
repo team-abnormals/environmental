@@ -13,6 +13,7 @@ import com.teamabnormals.environmental.common.entity.animal.slabfish.SlabfishOve
 import com.teamabnormals.environmental.common.slabfish.SlabfishHelper;
 import com.teamabnormals.environmental.core.Environmental;
 import com.teamabnormals.environmental.core.EnvironmentalConfig;
+import com.teamabnormals.environmental.core.other.tags.EnvironmentalBiomeTags;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalBlockTags;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalEntityTypeTags;
 import com.teamabnormals.environmental.core.other.tags.EnvironmentalItemTags;
@@ -56,7 +57,6 @@ import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DispenserBlock;
@@ -304,7 +304,7 @@ public class EnvironmentalEvents {
 		RandomSource rand = RandomSource.create();
 
 		if (entity instanceof Slabfish slabfish) {
-			if (world.getBiome(entity.blockPosition()).is(Biomes.SOUL_SAND_VALLEY)) {
+			if (world.getBiome(entity.blockPosition()).is(EnvironmentalBiomeTags.SLABFISH_CAN_BECOME_GHOST_IN)) {
 				if (!slabfish.getVariant().is(EnvironmentalSlabfishVariants.GHOST)) {
 					if (world.isClientSide()) {
 						for (int i = 0; i < 7; ++i) {

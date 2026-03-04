@@ -145,6 +145,7 @@ public class EnvironmentalBiomeTagsProvider extends BiomeTagsProvider {
 		this.tag(EnvironmentalBiomeTags.HAS_MUD_DISK).add(Biomes.SWAMP);
 
 		this.tag(EnvironmentalBiomeTags.SPAWNS_GRAY_DEER).add(Biomes.DARK_FOREST);
+		this.tag(EnvironmentalBiomeTags.SLABFISH_CAN_BECOME_GHOST_IN).add(Biomes.SOUL_SAND_VALLEY);
 
 		this.tag(EnvironmentalBiomeTags.IS_RAINFOREST);
 		this.tag(EnvironmentalBiomeTags.IS_DUNES);

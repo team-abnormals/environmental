@@ -32,6 +32,8 @@ public class EnvironmentalBiomeTags {
 	public static final TagKey<Biome> HAS_CHICKEN = biomeTag("has_spawn/chicken");
 	public static final TagKey<Biome> HAS_SHEEP = biomeTag("has_spawn/sheep");
 
+	public static final TagKey<Biome> SLABFISH_CAN_BECOME_GHOST_IN = biomeTag("slabfish_can_become_ghost_in");
+
 	public static final TagKey<Biome> HAS_CATTAILS = biomeTag("has_feature/cattails");
 	public static final TagKey<Biome> HAS_CUP_LICHEN = biomeTag("has_feature/cup_lichen");
 	public static final TagKey<Biome> HAS_SPARSE_DWARF_SPRUCE = biomeTag("has_feature/dwarf_spruce_sparse");
