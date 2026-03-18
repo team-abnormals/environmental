@@ -123,10 +123,13 @@ public class EnvironmentalConfiguredFeatures {
 	public static final ResourceKey<ConfiguredFeature<?, ?>> CEDAR_BOG_ORE = createKey("cedar_bog_ore");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> MUDDY_EDGES = createKey("muddy_edges");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> SHRUB_PATCH = createKey("shrub_patch");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> CEDAR_SWAMP_SHRUB_PATCH = createKey("cedar_swamp_shrub_patch");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> CEDAR_SWAMP_RIVER_SHRUB_PATCH = createKey("cedar_swamp_river_shrub_patch");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_CEDAR_SWAMP_FERN = createKey("patch_cedar_swamp_fern");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_LICHEN = createKey("tree_lichen");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_LICHEN_UNCOMMON = createKey("tree_lichen_uncommon");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_LICHEN_CEDAR_SWAMP = createKey("tree_lichen_cedar_swamp");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> SMOOTHCAP_MOSS_CEDAR_SWAMP = createKey("smoothcap_moss_cedar_swamp");
 
 	public static final ResourceKey<ConfiguredFeature<?, ?>> FLOWER_ESTUARY_MARIGOLD = createKey("flower_estuary_marigold");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> FLOWER_CORNFLOWER = createKey("flower_cornflower");
@@ -247,13 +250,16 @@ public class EnvironmentalConfiguredFeatures {
 		register(context, PATCH_CUP_LICHEN, EnvironmentalFeatures.CUP_LICHEN_PATCH.get(), new CupLichenPatchConfiguration(64, 3, 2));
 		register(context, PATCH_CUP_LICHEN_SMALL, EnvironmentalFeatures.CUP_LICHEN_PATCH.get(), new CupLichenPatchConfiguration(32, 2, 2));
 
-		register(context, SHRUB_PATCH, EnvironmentalFeatures.SHRUB_PATCH.get(), new ShrubPatchConfiguration(1, true));
+		register(context, SHRUB_PATCH, EnvironmentalFeatures.SHRUB_PATCH.get(), new ShrubPatchConfiguration(1, true, false, false));
+		register(context, CEDAR_SWAMP_SHRUB_PATCH, EnvironmentalFeatures.SHRUB_PATCH.get(), new ShrubPatchConfiguration(1, true, true, true));
+		register(context, CEDAR_SWAMP_RIVER_SHRUB_PATCH, EnvironmentalFeatures.SHRUB_PATCH.get(), new ShrubPatchConfiguration(1, true, true, false));
 		register(context, MUDDY_SAND, EnvironmentalFeatures.MUDDY_SAND.get(), NoneFeatureConfiguration.NONE);
 		register(context, CEDAR_BOG_ORE, EnvironmentalFeatures.SUSPICIOUS_MUDDY_SAND.get(), NoneFeatureConfiguration.NONE);
 		register(context, MUDDY_EDGES, EnvironmentalFeatures.MUDDY_EDGES.get(), NoneFeatureConfiguration.NONE);
 		register(context, TREE_LICHEN, EnvironmentalFeatures.TREE_LICHEN.get(), new TreeLichenConfiguration(1.0F, false));
 		register(context, TREE_LICHEN_UNCOMMON, EnvironmentalFeatures.TREE_LICHEN.get(), new TreeLichenConfiguration(0.5F, false));
 		register(context, TREE_LICHEN_CEDAR_SWAMP, EnvironmentalFeatures.TREE_LICHEN.get(), new TreeLichenConfiguration(1.0F, true));
+		register(context, SMOOTHCAP_MOSS_CEDAR_SWAMP, EnvironmentalFeatures.SMOOTHCAP_MOSS.get(), NoneFeatureConfiguration.NONE);
 		register(context, PATCH_CEDAR_SWAMP_FERN, Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder().add(Blocks.LARGE_FERN.defaultBlockState()).add(Blocks.FERN.defaultBlockState()).build()))));
 
 		register(context, FLOWER_ESTUARY_MARIGOLD, Feature.FLOWER, new RandomPatchConfiguration(64, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(EnvironmentalBlocks.ESTUARY_MARIGOLD.get())))));

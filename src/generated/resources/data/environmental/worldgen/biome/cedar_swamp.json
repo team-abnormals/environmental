@@ -76,7 +76,10 @@
       "environmental:patch_cedar_swamp_fern",
       "environmental:trees_cedar_swamp",
       "environmental:trees_cedar_swamp_extra",
-      "environmental:tree_lichen_cedar_swamp"
+      "environmental:tree_lichen_cedar_swamp",
+      "environmental:smoothcap_moss_cedar_swamp",
+      "environmental:cedar_swamp_river_shrub_patch",
+      "environmental:cedar_swamp_shrub_patch"
     ],
     [
       "minecraft:freeze_top_layer"

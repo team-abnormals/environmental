@@ -1,0 +1,8 @@
+{
+  "type": "environmental:shrub_patch",
+  "config": {
+    "extra_radius": 1,
+    "flowers_in_light": true,
+    "noised_based_flowering": true
+  }
+}

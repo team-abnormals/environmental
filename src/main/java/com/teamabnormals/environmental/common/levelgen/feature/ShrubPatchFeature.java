@@ -4,10 +4,12 @@ import com.mojang.serialization.Codec;
 import com.teamabnormals.environmental.common.block.ShrubBlock;
 import com.teamabnormals.environmental.common.levelgen.feature.configurations.ShrubPatchConfiguration;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
+import com.teamabnormals.environmental.core.registry.datapack.EnvironmentalNoiseParameters;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
@@ -22,24 +24,31 @@ public class ShrubPatchFeature extends Feature<ShrubPatchConfiguration> {
 	public boolean place(FeaturePlaceContext<ShrubPatchConfiguration> context) {
 		WorldGenLevel level = context.level();
 		BlockPos pos = context.origin();
-		BlockState belowState = level.getBlockState(pos.below());
 		ShrubPatchConfiguration configuration = context.config();
 		RandomSource random = context.random();
-		int successfulPlacements = 0;
-		boolean capRadius = false;
-		if (belowState.is(BlockTags.SAND) || belowState.is(EnvironmentalBlocks.MUDDY_SAND)) {
-			if (placeShrub(level, pos, 4, configuration.conditionallyFlowers() && random.nextInt(5) != 0))
-				successfulPlacements++;
-		} else if (belowState.is(BlockTags.DIRT)) {
-			if (random.nextBoolean()) return false;
-			capRadius = true;
-			if (placeShrub(level, pos, 4, false))
-				successfulPlacements++;
-		} else return false;
-		BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
+		BlockState belowState = level.getBlockState(pos.below());
 		int originX = pos.getX();
-		int originY = pos.getY();
 		int originZ = pos.getZ();
+		int successfulPlacements = 0;
+		boolean canFlower = true;
+		if (configuration.noiseBasedFlowering()) {
+			double floweringProbabilityOverride = EnvironmentalNoiseParameters.SHRUB_FLOWER_POWER_RECEIVER.get(level.getLevel()).getValue(originX, 0.0D, originZ);
+			if (floweringProbabilityOverride < 0.0D) canFlower = random.nextInt(10) == 0;
+			else canFlower = random.nextDouble() < 0.1D + 1.8D * floweringProbabilityOverride;
+		}
+		boolean capRadius = false;
+		if (isAcidicSoil(belowState)) {
+			if (placeShrub(level, pos, 4, canFlower && (configuration.flowersOnSand() && random.nextInt(5) != 0) || configuration.shouldFlowerInLight(level, random, originX, originZ)))
+				successfulPlacements++;
+		} else {
+			if ((!belowState.is(Blocks.MUD) && !belowState.is(EnvironmentalBlocks.MUDDY_PODZOL)) && (!belowState.is(BlockTags.DIRT) || random.nextBoolean()))
+				return false;
+			capRadius = true;
+			if (placeShrub(level, pos, 4, configuration.shouldFlowerInLight(level, random, originX, originZ)))
+				successfulPlacements++;
+		}
+		BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
+		int originY = pos.getY();
 		int extraRadius = configuration.extraRadius();
 		int fullRadius = capRadius ? 3 : 3 + extraRadius;
 		int fullRadiusSquared = fullRadius * fullRadius;
@@ -51,9 +60,13 @@ public class ShrubPatchFeature extends Feature<ShrubPatchConfiguration> {
 					mutable.setZ(originZ + z);
 					BlockState state = level.getBlockState(mutable);
 					boolean flowering = false;
-					if (state.is(BlockTags.SAND) || state.is(EnvironmentalBlocks.MUDDY_SAND.get())) {
-						flowering = configuration.conditionallyFlowers() && random.nextInt(5) != 0;
-					} else if (!state.is(BlockTags.DIRT)) continue;
+					if (canFlower) {
+						if (isAcidicSoil(state)) {
+							flowering = configuration.flowersOnSand() && random.nextInt(5) != 0;
+						} else if (!state.is(BlockTags.DIRT)) continue;
+						flowering |= configuration.shouldFlowerInLight(level, random, mutable.getX(), mutable.getZ());
+					} else if (!isAcidicSoil(state) && !state.is(BlockTags.DIRT))
+						continue;
 					int horizontalDistanceSquared = x * x + z * z;
 					if (horizontalDistanceSquared > fullRadiusSquared) continue;
 					int size;
@@ -75,6 +88,10 @@ public class ShrubPatchFeature extends Feature<ShrubPatchConfiguration> {
 			}
 		}
 		return successfulPlacements > 0;
+	}
+
+	private static boolean isAcidicSoil(BlockState state) {
+		return state.is(BlockTags.SAND) || state.is(EnvironmentalBlocks.MUDDY_SAND);
 	}
 
 	private static boolean isShrub(BlockState state) {

@@ -1,0 +1,15 @@
+{
+  "feature": "environmental:smoothcap_moss_cedar_swamp",
+  "placement": [
+    {
+      "type": "environmental:cedar_swamp_smoothcap_moss"
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "WORLD_SURFACE_WG"
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

@@ -5,7 +5,6 @@ import net.minecraft.data.worldgen.biome.OverworldBiomes;
 import net.minecraft.data.worldgen.placement.AquaticPlacements;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
-import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 
 import static com.teamabnormals.environmental.core.registry.datapack.EnvironmentalPlacedFeatures.*;
@@ -114,12 +113,15 @@ public class EnvironmentalGeneration {
 	public static void cedarSwamp(BiomeGenerationSettings.Builder generation) {
 		OverworldBiomes.globalOverworldGeneration(generation);
 		BiomeDefaultFeatures.addDefaultOres(generation);
-		generation.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, MUDDY_EDGES);
+		generation.addFeature(Decoration.LOCAL_MODIFICATIONS, MUDDY_EDGES);
 		generation.addFeature(Decoration.VEGETAL_DECORATION, AquaticPlacements.SEAGRASS_SWAMP);
 		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_CEDAR_SWAMP_FERN);
-		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, TREES_CEDAR_SWAMP);
-		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, TREES_CEDAR_SWAMP_EXTRA);
-		generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, TREE_LICHEN_CEDAR_SWAMP);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_CEDAR_SWAMP);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_CEDAR_SWAMP_EXTRA);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, TREE_LICHEN_CEDAR_SWAMP);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, SMOOTHCAP_MOSS_CEDAR_SWAMP);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, CEDAR_SWAMP_RIVER_SHRUB_PATCH);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, CEDAR_SWAMP_SHRUB_PATCH);
 	}
 
 	public static void cedarCreek(BiomeGenerationSettings.Builder generation, boolean edge) {

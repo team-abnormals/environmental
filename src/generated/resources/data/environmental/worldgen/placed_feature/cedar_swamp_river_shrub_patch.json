@@ -1,0 +1,11 @@
+{
+  "feature": "environmental:cedar_swamp_river_shrub_patch",
+  "placement": [
+    {
+      "type": "environmental:cedar_swamp_shrub_river"
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}
