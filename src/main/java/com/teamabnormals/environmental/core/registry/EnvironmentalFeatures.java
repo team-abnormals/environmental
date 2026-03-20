@@ -41,7 +41,7 @@ public class EnvironmentalFeatures {
 	public static final DeferredHolder<Feature<?>, Feature<TreeConfiguration>> WISTERIA_TREE = FEATURES.register("wisteria_tree", () -> new WisteriaTreeFeature(TreeConfiguration.CODEC));
 	public static final DeferredHolder<Feature<?>, Feature<TreeConfiguration>> PINE_TREE = FEATURES.register("pine_tree", () -> new PineTreeFeature(TreeConfiguration.CODEC));
 	public static final DeferredHolder<Feature<?>, Feature<TreeConfiguration>> PINE_TREE_ON_STONE = FEATURES.register("pine_tree_on_stone", () -> new PineTreeOnStoneFeature(TreeConfiguration.CODEC));
-	public static final DeferredHolder<Feature<?>, Feature<TreeConfiguration>> CEDAR_TREE = FEATURES.register("cedar_tree", () -> new CedarTreeFeature(TreeConfiguration.CODEC));
+	public static final DeferredHolder<Feature<?>, Feature<TreeConfiguration>> CEDAR_TREE = FEATURES.register("cedar_tree", () -> new CedarTreeFeature(NoiseBeehivesTreeConfiguration.CODEC));
 
 	public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> WILLOW_TREE_PLACER = FEATURES.register("willow_tree_placer", () -> new WillowTreePlacerFeature(NoneFeatureConfiguration.CODEC));
 

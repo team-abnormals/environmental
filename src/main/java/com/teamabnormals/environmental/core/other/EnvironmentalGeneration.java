@@ -120,8 +120,12 @@ public class EnvironmentalGeneration {
 		generation.addFeature(Decoration.VEGETAL_DECORATION, TREES_CEDAR_SWAMP_EXTRA);
 		generation.addFeature(Decoration.VEGETAL_DECORATION, TREE_LICHEN_CEDAR_SWAMP);
 		generation.addFeature(Decoration.VEGETAL_DECORATION, SMOOTHCAP_MOSS_CEDAR_SWAMP);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, HUGE_BROWN_MUSHROOM_CEDAR_SWAMP);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, HUGE_RED_MUSHROOM_CEDAR_SWAMP);
 		generation.addFeature(Decoration.VEGETAL_DECORATION, CEDAR_SWAMP_RIVER_SHRUB_PATCH);
 		generation.addFeature(Decoration.VEGETAL_DECORATION, CEDAR_SWAMP_SHRUB_PATCH);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_BROWN_MUSHROOM_CEDAR_SWAMP);
+		generation.addFeature(Decoration.VEGETAL_DECORATION, PATCH_RED_MUSHROOM_CEDAR_SWAMP);
 	}
 
 	public static void cedarCreek(BiomeGenerationSettings.Builder generation, boolean edge) {

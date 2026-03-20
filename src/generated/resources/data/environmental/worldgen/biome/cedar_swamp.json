@@ -78,8 +78,12 @@
       "environmental:trees_cedar_swamp_extra",
       "environmental:tree_lichen_cedar_swamp",
       "environmental:smoothcap_moss_cedar_swamp",
+      "environmental:huge_brown_mushroom_cedar_swamp",
+      "environmental:huge_red_mushroom_cedar_swamp",
       "environmental:cedar_swamp_river_shrub_patch",
-      "environmental:cedar_swamp_shrub_patch"
+      "environmental:cedar_swamp_shrub_patch",
+      "environmental:patch_brown_mushroom_cedar_swamp",
+      "environmental:patch_red_mushroom_cedar_swamp"
     ],
     [
       "minecraft:freeze_top_layer"

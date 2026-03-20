@@ -1,0 +1,13 @@
+{
+  "feature": "environmental:compact_huge_brown_mushroom",
+  "placement": [
+    {
+      "type": "environmental:cedar_swamp_mushroom",
+      "compact": true,
+      "red": false
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

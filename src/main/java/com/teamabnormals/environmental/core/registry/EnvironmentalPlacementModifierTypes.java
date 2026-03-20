@@ -16,4 +16,5 @@ public class EnvironmentalPlacementModifierTypes {
 	public static final DeferredHolder<PlacementModifierType<?>, PlacementModifierType<CedarSwampSmoothcapMossPlacement>> CEDAR_SWAMP_SMOOTHCAP_MOSS = PLACEMENT_MODIFIER_TYPES.register("cedar_swamp_smoothcap_moss", () -> () -> CedarSwampSmoothcapMossPlacement.CODEC);
 	public static final DeferredHolder<PlacementModifierType<?>, PlacementModifierType<CedarSwampShrubPlacement>> CEDAR_SWAMP_SHRUB = PLACEMENT_MODIFIER_TYPES.register("cedar_swamp_shrub", () -> () -> CedarSwampShrubPlacement.CODEC);
 	public static final DeferredHolder<PlacementModifierType<?>, PlacementModifierType<CedarSwampShrubRiverPlacement>> CEDAR_SWAMP_SHRUB_RIVER = PLACEMENT_MODIFIER_TYPES.register("cedar_swamp_shrub_river", () -> () -> CedarSwampShrubRiverPlacement.CODEC);
+	public static final DeferredHolder<PlacementModifierType<?>, PlacementModifierType<CedarSwampMushroomPlacement>> CEDAR_SWAMP_MUSHROOM = PLACEMENT_MODIFIER_TYPES.register("cedar_swamp_mushroom", () -> () -> CedarSwampMushroomPlacement.CODEC);
 }

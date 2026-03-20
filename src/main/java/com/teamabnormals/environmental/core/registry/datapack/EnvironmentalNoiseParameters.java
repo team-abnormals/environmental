@@ -24,6 +24,7 @@ public class EnvironmentalNoiseParameters {
 	public static final ResourceKey<NoiseParameters> SMOOTHCAP_MOSS_FREQUENCY = create("smoothcap_moss_frequency");
 	public static final ResourceKey<NoiseParameters> SMOOTHCAP_MOSS_COVER = create("smoothcap_moss_cover");
 	public static final ResourceKey<NoiseParameters> SMOOTHCAP_MOSS_RADIUS = create("smoothcap_moss_radius");
+	public static final ResourceKey<NoiseParameters> CEDAR_SWAMP_MUSHROOM_DENSITY = create("cedar_swamp_mushroom_density");
 	public static final ResourceKey<NoiseParameters> WISTERIA_DENSITY = create("wisteria_density");
 	public static final ResourceKey<NoiseParameters> WISTERIA_COLOR = create("wisteria_color");
 
@@ -35,6 +36,7 @@ public class EnvironmentalNoiseParameters {
 	public static final LevelNoiseReceiver SMOOTHCAP_MOSS_FREQUENCY_RECEIVER = new LevelNoiseReceiver(Algorithm.LEGACY, SMOOTHCAP_MOSS_FREQUENCY);
 	public static final LevelNoiseReceiver SMOOTHCAP_MOSS_COVER_RECEIVER = new LevelNoiseReceiver(Algorithm.LEGACY, SMOOTHCAP_MOSS_COVER);
 	public static final LevelNoiseReceiver SMOOTHCAP_MOSS_RADIUS_RECEIVER = new LevelNoiseReceiver(Algorithm.LEGACY, SMOOTHCAP_MOSS_RADIUS);
+	public static final LevelNoiseReceiver CEDAR_SWAMP_MUSHROOM_DENSITY_RECEIVER = new LevelNoiseReceiver(Algorithm.LEGACY, CEDAR_SWAMP_MUSHROOM_DENSITY);
 
 	public static void bootstrap(BootstrapContext<NoiseParameters> context) {
 		context.register(PINE_BARRENS_STONE, new NormalNoise.NoiseParameters(-4, 1.0D));
@@ -51,6 +53,7 @@ public class EnvironmentalNoiseParameters {
 		context.register(SMOOTHCAP_MOSS_FREQUENCY, new NormalNoise.NoiseParameters(-7, 2.0D, 1.0D, 0.0D));
 		context.register(SMOOTHCAP_MOSS_COVER, new NormalNoise.NoiseParameters(-4, 1.0D, 1.0D, 0.0D));
 		context.register(SMOOTHCAP_MOSS_RADIUS, new NormalNoise.NoiseParameters(-5, 1.0D, 1.0D, 0.0D));
+		context.register(CEDAR_SWAMP_MUSHROOM_DENSITY, new NormalNoise.NoiseParameters(-7, 1.0D, 1.0D, 0.0D));
 		context.register(WISTERIA_DENSITY, new NormalNoise.NoiseParameters(-8, 1.0D));
 		context.register(WISTERIA_COLOR, new NormalNoise.NoiseParameters(-9, 1.0D));
 	}

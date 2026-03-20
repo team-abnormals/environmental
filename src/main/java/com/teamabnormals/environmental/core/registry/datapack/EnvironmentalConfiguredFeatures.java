@@ -154,6 +154,7 @@ public class EnvironmentalConfiguredFeatures {
 	public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_DUCKWEED = createKey("patch_duckweed");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_GIANT_TALL_GRASS = createKey("patch_giant_tall_grass");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> HUGE_BROWN_MUSHROOM = createKey("huge_brown_mushroom");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> COMPACT_HUGE_BROWN_MUSHROOM = createKey("compact_huge_brown_mushroom");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_MUD = createKey("ore_mud");
 
 	public static final ResourceKey<ConfiguredFeature<?, ?>> BAMBOO_SHORT = createKey("bamboo_short");
@@ -285,6 +286,7 @@ public class EnvironmentalConfiguredFeatures {
 		register(context, PATCH_DUCKWEED, Feature.RANDOM_PATCH, new RandomPatchConfiguration(1024, 8, 5, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(EnvironmentalBlocks.DUCKWEED.get())))));
 		register(context, PATCH_GIANT_TALL_GRASS, Feature.RANDOM_PATCH, grassPatch(BlockStateProvider.simple(EnvironmentalBlocks.GIANT_TALL_GRASS.get()), 64));
 		register(context, HUGE_BROWN_MUSHROOM, Feature.HUGE_BROWN_MUSHROOM, new HugeMushroomFeatureConfiguration(BlockStateProvider.simple(Blocks.BROWN_MUSHROOM_BLOCK.defaultBlockState().setValue(HugeMushroomBlock.UP, true).setValue(HugeMushroomBlock.DOWN, false)), BlockStateProvider.simple(Blocks.MUSHROOM_STEM.defaultBlockState().setValue(HugeMushroomBlock.UP, false).setValue(HugeMushroomBlock.DOWN, false)), 3));
+		register(context, COMPACT_HUGE_BROWN_MUSHROOM, Feature.HUGE_BROWN_MUSHROOM, new HugeMushroomFeatureConfiguration(BlockStateProvider.simple(Blocks.BROWN_MUSHROOM_BLOCK.defaultBlockState().setValue(HugeMushroomBlock.UP, true).setValue(HugeMushroomBlock.DOWN, false)), BlockStateProvider.simple(Blocks.MUSHROOM_STEM.defaultBlockState().setValue(HugeMushroomBlock.UP, false).setValue(HugeMushroomBlock.DOWN, false)), 2));
 		register(context, ORE_MUD, Feature.ORE, new OreConfiguration(new TagMatchTest(EnvironmentalBlockTags.MUD_REPLACEABLES), Blocks.MUD.defaultBlockState(), 64));
 
 		register(context, BAMBOO_SHORT, EnvironmentalFeatures.SHORT_BAMBOO.get(), new ProbabilityFeatureConfiguration(0.0F));
@@ -371,7 +373,7 @@ public class EnvironmentalConfiguredFeatures {
 		public static final TreeConfiguration TALL_PINE_WITH_PODZOL = createTallPine().decorators(List.of(PINECONE, PinePodzolDecorator.INSTANCE)).build();
 
 		public static final TreeConfiguration CEDAR = createCedar(3, 1).decorators(List.of(SuspiciousMuddySandDecorator.INSTANCE)).build();
-		public static final TreeConfiguration SWAMPY_CEDAR = createCedar(7, 1).decorators(List.of(CedarPodzolDecorator.INSTANCE)).build();
+		public static final TreeConfiguration SWAMPY_CEDAR = NoiseBeehivesTreeConfiguration.noised(createCedar(7, 1).decorators(List.of(CedarPodzolDecorator.INSTANCE)).build());
 		public static final TreeConfiguration CEDAR_BEES_005 = createCedar(3, 1).decorators(List.of(BEEHIVE_005, PinePodzolDecorator.INSTANCE)).build();
 
 		private static TreeConfigurationBuilder createPlum() {

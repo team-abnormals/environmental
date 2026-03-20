@@ -1,16 +1,26 @@
 package com.teamabnormals.environmental.common.levelgen.feature;
 
+import com.google.common.collect.Sets;
 import com.mojang.serialization.Codec;
 import com.teamabnormals.blueprint.common.levelgen.feature.BlueprintTreeFeature;
+import com.teamabnormals.environmental.common.levelgen.feature.configurations.NoiseBeehivesTreeConfiguration;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
+import com.teamabnormals.environmental.core.registry.datapack.EnvironmentalNoiseParameters;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.DensityFunction;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.treedecorators.BeehiveDecorator;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 
 public class CedarTreeFeature extends BlueprintTreeFeature {
+	private static final BeehiveDecorator BEEHIVE_DECORATOR = new BeehiveDecorator(1.0F);
 	private static final int[][][] LEAF_CORNERS = new int[][][]{
 			{{2, 2}, {1, 3}, {3, 1}},
 			{{-2, 2}, {-1, 3}, {-3, 1}},
@@ -88,6 +98,28 @@ public class CedarTreeFeature extends BlueprintTreeFeature {
 		if (random.nextInt(4) != 0) {
 			info.addFoliage(origin.above());
 		}
+	}
+
+	@Override
+	public void doPostPlace(FeaturePlaceContext<TreeConfiguration> context, TreeInfo info) {
+		RandomSource random = context.random();
+		// Only sample noise if base is even successful
+		if (random.nextFloat() > 0.0333 || !NoiseBeehivesTreeConfiguration.useNoiseBeehives(context.config())) return;
+		WorldGenLevel level = context.level();
+		ServerLevel serverLevel = level.getLevel();
+		DensityFunction weirdnessFunction = serverLevel.getChunkSource().randomState().sampler().weirdness();
+		BlockPos origin = context.origin();
+		int x = origin.getX();
+		int z = origin.getZ();
+		int height = level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x, z);
+		double weirdness = Math.abs(weirdnessFunction.compute(new DensityFunction.SinglePointContext(x, height, z)));
+		if (weirdness > 0.1D) {
+			double flowerPower = EnvironmentalNoiseParameters.SHRUB_FLOWER_POWER_RECEIVER.get(serverLevel).getValue(x, 0.0D, z);
+			if (random.nextFloat() > 0.1F + Math.max(flowerPower, 0.0F)) return;
+		}
+		BEEHIVE_DECORATOR.place(new TreeDecorator.Context(level, (decorationPos, state) -> {
+			level.setBlock(decorationPos, state, 19);
+		}, random, info.logMap().keySet(), info.foliageMap().keySet(), Sets.newHashSet()));
 	}
 
 	private static void encloseCloseSpottyLeaves(BlockPos pos, RandomSource random, TreeInfo info, boolean optional) {

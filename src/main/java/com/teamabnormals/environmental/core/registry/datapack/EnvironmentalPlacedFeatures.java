@@ -9,6 +9,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.features.TreeFeatures;
 import net.minecraft.data.worldgen.features.VegetationFeatures;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
@@ -132,6 +133,10 @@ public class EnvironmentalPlacedFeatures {
 	public static final ResourceKey<PlacedFeature> TREE_LICHEN_UNCOMMON = createKey("tree_lichen_uncommon");
 	public static final ResourceKey<PlacedFeature> TREE_LICHEN_CEDAR_SWAMP = createKey("tree_lichen_cedar_swamp");
 	public static final ResourceKey<PlacedFeature> SMOOTHCAP_MOSS_CEDAR_SWAMP = createKey("smoothcap_moss_cedar_swamp");
+	public static final ResourceKey<PlacedFeature> PATCH_BROWN_MUSHROOM_CEDAR_SWAMP = createKey("patch_brown_mushroom_cedar_swamp");
+	public static final ResourceKey<PlacedFeature> PATCH_RED_MUSHROOM_CEDAR_SWAMP = createKey("patch_red_mushroom_cedar_swamp");
+	public static final ResourceKey<PlacedFeature> HUGE_BROWN_MUSHROOM_CEDAR_SWAMP = createKey("huge_brown_mushroom_cedar_swamp");
+	public static final ResourceKey<PlacedFeature> HUGE_RED_MUSHROOM_CEDAR_SWAMP = createKey("huge_red_mushroom_cedar_swamp");
 
 	public static final ResourceKey<PlacedFeature> BAMBOO_BLOSSOM_WOODS = createKey("bamboo_blossom_woods");
 	public static final ResourceKey<PlacedFeature> BAMBOO_LIGHT_BLOSSOM_WOODS = createKey("bamboo_light_blossom_woods");
@@ -262,6 +267,10 @@ public class EnvironmentalPlacedFeatures {
 		register(context, TREE_LICHEN_UNCOMMON, EnvironmentalConfiguredFeatures.TREE_LICHEN_UNCOMMON, BiomeFilter.biome());
 		register(context, TREE_LICHEN_CEDAR_SWAMP, EnvironmentalConfiguredFeatures.TREE_LICHEN_CEDAR_SWAMP, BiomeFilter.biome());
 		register(context, SMOOTHCAP_MOSS_CEDAR_SWAMP, EnvironmentalConfiguredFeatures.SMOOTHCAP_MOSS_CEDAR_SWAMP, CedarSwampSmoothcapMossPlacement.INSTANCE, PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
+		register(context, PATCH_BROWN_MUSHROOM_CEDAR_SWAMP, VegetationFeatures.PATCH_BROWN_MUSHROOM, new CedarSwampMushroomPlacement(false, false), BiomeFilter.biome());
+		register(context, PATCH_RED_MUSHROOM_CEDAR_SWAMP, VegetationFeatures.PATCH_RED_MUSHROOM, new CedarSwampMushroomPlacement(true, false), BiomeFilter.biome());
+		register(context, HUGE_BROWN_MUSHROOM_CEDAR_SWAMP, EnvironmentalConfiguredFeatures.COMPACT_HUGE_BROWN_MUSHROOM, new CedarSwampMushroomPlacement(false, true), BiomeFilter.biome());
+		register(context, HUGE_RED_MUSHROOM_CEDAR_SWAMP, TreeFeatures.HUGE_RED_MUSHROOM, new CedarSwampMushroomPlacement(true, true), BiomeFilter.biome());
 
 		register(context, PINE_SLOPES_ROCK, EnvironmentalConfiguredFeatures.STONE_ROCK, CountPlacement.of(2), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
 		register(context, PINE_SLOPES_BOULDER, EnvironmentalConfiguredFeatures.PINE_SLOPES_BOULDER, CountPlacement.of(1), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
