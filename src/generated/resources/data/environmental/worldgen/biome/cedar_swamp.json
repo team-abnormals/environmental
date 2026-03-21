@@ -29,6 +29,7 @@
     ],
     [
       "minecraft:amethyst_geode",
+      "environmental:cedar_swamp_hummocks",
       "environmental:muddy_edges"
     ],
     [
@@ -83,7 +84,9 @@
       "environmental:cedar_swamp_river_shrub_patch",
       "environmental:cedar_swamp_shrub_patch",
       "environmental:patch_brown_mushroom_cedar_swamp",
-      "environmental:patch_red_mushroom_cedar_swamp"
+      "environmental:patch_red_mushroom_cedar_swamp",
+      "environmental:patch_waterlily_cedar_swamp",
+      "environmental:cattails_dense"
     ],
     [
       "minecraft:freeze_top_layer"

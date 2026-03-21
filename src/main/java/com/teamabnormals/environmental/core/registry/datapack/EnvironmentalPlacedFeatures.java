@@ -124,6 +124,7 @@ public class EnvironmentalPlacedFeatures {
 
 	public static final ResourceKey<PlacedFeature> MUDDY_SAND = createKey("muddy_sand");
 	public static final ResourceKey<PlacedFeature> CEDAR_BOG_ORE = createKey("cedar_bog_ore");
+	public static final ResourceKey<PlacedFeature> CEDAR_SWAMP_HUMMOCKS = createKey("cedar_swamp_hummocks");
 	public static final ResourceKey<PlacedFeature> MUDDY_EDGES = createKey("muddy_edges");
 	public static final ResourceKey<PlacedFeature> PATCH_CEDAR_SWAMP_FERN = createKey("patch_cedar_swamp_fern");
 	public static final ResourceKey<PlacedFeature> SHRUB_PATCH = createKey("shrub_patch");
@@ -163,6 +164,7 @@ public class EnvironmentalPlacedFeatures {
 	public static final ResourceKey<PlacedFeature> PATCH_SUGAR_CANE_BLOSSOM = createKey("patch_sugar_cane_blossom");
 
 	public static final ResourceKey<PlacedFeature> PATCH_WATERLILY_CEDAR_RIVER = createKey("patch_waterlily_cedar_river");
+	public static final ResourceKey<PlacedFeature> PATCH_WATERLILY_CEDAR_SWAMP = createKey("patch_waterlily_cedar_swamp");
 
 	public static void bootstrap(BootstrapContext<PlacedFeature> context) {
 		HolderGetter<NoiseParameters> noises = context.lookup(Registries.NOISE);
@@ -259,9 +261,10 @@ public class EnvironmentalPlacedFeatures {
 		register(context, PATCH_CEDAR_SWAMP_FERN, EnvironmentalConfiguredFeatures.PATCH_CEDAR_SWAMP_FERN, RarityFilter.onAverageOnceEvery(4), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 		register(context, SHRUB_PATCH, EnvironmentalConfiguredFeatures.SHRUB_PATCH, new NoiseDensityPlacement(noises.getOrThrow(EnvironmentalNoiseParameters.SHRUB_DENSITY), 16.0F, 0.5F), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 		register(context, CEDAR_SWAMP_SHRUB_PATCH, EnvironmentalConfiguredFeatures.CEDAR_SWAMP_SHRUB_PATCH, CedarSwampShrubPlacement.INSTANCE, BiomeFilter.biome());
-		register(context, CEDAR_SWAMP_RIVER_SHRUB_PATCH, EnvironmentalConfiguredFeatures.CEDAR_SWAMP_RIVER_SHRUB_PATCH, CedarSwampShrubRiverPlacement.INSTANCE, BiomeFilter.biome());
+		register(context, CEDAR_SWAMP_RIVER_SHRUB_PATCH, EnvironmentalConfiguredFeatures.CEDAR_SWAMP_RIVER_SHRUB_PATCH, new WeirdnessBandPlacement(20, 65, 0.05D, 0.1D, 0.8F, 0.0F, 0.8F, 0.3F), BiomeFilter.biome());
 		register(context, MUDDY_SAND, EnvironmentalConfiguredFeatures.MUDDY_SAND, BiomeFilter.biome());
 		register(context, CEDAR_BOG_ORE, EnvironmentalConfiguredFeatures.CEDAR_BOG_ORE, commonOrePlacement(100, HeightRangePlacement.triangle(VerticalAnchor.absolute(50), VerticalAnchor.absolute(69))));
+		register(context, CEDAR_SWAMP_HUMMOCKS, EnvironmentalConfiguredFeatures.CEDAR_SWAMP_HUMMOCKS);
 		register(context, MUDDY_EDGES, EnvironmentalConfiguredFeatures.MUDDY_EDGES, BiomeFilter.biome());
 		register(context, TREE_LICHEN, EnvironmentalConfiguredFeatures.TREE_LICHEN, BiomeFilter.biome());
 		register(context, TREE_LICHEN_UNCOMMON, EnvironmentalConfiguredFeatures.TREE_LICHEN_UNCOMMON, BiomeFilter.biome());
@@ -300,6 +303,7 @@ public class EnvironmentalPlacedFeatures {
 		register(context, PATCH_SUGAR_CANE_BLOSSOM, EnvironmentalConfiguredFeatures.PATCH_SUGAR_CANE, RarityFilter.onAverageOnceEvery(2), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 
 		register(context, PATCH_WATERLILY_CEDAR_RIVER, VegetationFeatures.PATCH_WATERLILY, new NoiseDensityPlacement(noises.getOrThrow(EnvironmentalNoiseParameters.CEDAR_RIVER_WATERLILY_DENSITY), 1.0F, 1.333F), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
+		register(context, PATCH_WATERLILY_CEDAR_SWAMP, VegetationFeatures.PATCH_WATERLILY, WeirdnessBandPlacement.riverConstant(2, 0.0333D, 0.1D, 0.5F), BiomeFilter.biome());
 	}
 
 	private static ImmutableList<PlacementModifier> treePlacement(PlacementModifier modifier, PlacementModifier... extraModifiers) {

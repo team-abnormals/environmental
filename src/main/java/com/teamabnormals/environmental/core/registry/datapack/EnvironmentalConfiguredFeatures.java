@@ -121,6 +121,7 @@ public class EnvironmentalConfiguredFeatures {
 
 	public static final ResourceKey<ConfiguredFeature<?, ?>> MUDDY_SAND = createKey("muddy_sand");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> CEDAR_BOG_ORE = createKey("cedar_bog_ore");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> CEDAR_SWAMP_HUMMOCKS = createKey("cedar_swamp_hummocks");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> MUDDY_EDGES = createKey("muddy_edges");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> SHRUB_PATCH = createKey("shrub_patch");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> CEDAR_SWAMP_SHRUB_PATCH = createKey("cedar_swamp_shrub_patch");
@@ -256,6 +257,7 @@ public class EnvironmentalConfiguredFeatures {
 		register(context, CEDAR_SWAMP_RIVER_SHRUB_PATCH, EnvironmentalFeatures.SHRUB_PATCH.get(), new ShrubPatchConfiguration(1, true, true, false));
 		register(context, MUDDY_SAND, EnvironmentalFeatures.MUDDY_SAND.get(), NoneFeatureConfiguration.NONE);
 		register(context, CEDAR_BOG_ORE, EnvironmentalFeatures.SUSPICIOUS_MUDDY_SAND.get(), NoneFeatureConfiguration.NONE);
+		register(context, CEDAR_SWAMP_HUMMOCKS, EnvironmentalFeatures.CEDAR_SWAMP_HUMMOCKS.get(), NoneFeatureConfiguration.NONE);
 		register(context, MUDDY_EDGES, EnvironmentalFeatures.MUDDY_EDGES.get(), NoneFeatureConfiguration.NONE);
 		register(context, TREE_LICHEN, EnvironmentalFeatures.TREE_LICHEN.get(), new TreeLichenConfiguration(1.0F, false));
 		register(context, TREE_LICHEN_UNCOMMON, EnvironmentalFeatures.TREE_LICHEN.get(), new TreeLichenConfiguration(0.5F, false));

@@ -1,0 +1,15 @@
+{
+  "feature": "minecraft:patch_waterlily",
+  "placement": [
+    {
+      "type": "environmental:weirdness_band",
+      "max_weirdness": 0.1,
+      "min_weirdness": 0.0333,
+      "probability_at_max": 0.5,
+      "probability_at_min": 0.5
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

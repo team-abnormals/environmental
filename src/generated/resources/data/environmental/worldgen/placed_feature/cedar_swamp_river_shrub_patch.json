@@ -2,7 +2,13 @@
   "feature": "environmental:cedar_swamp_river_shrub_patch",
   "placement": [
     {
-      "type": "environmental:cedar_swamp_shrub_river"
+      "type": "environmental:weirdness_band",
+      "count": 20,
+      "max_weirdness": 0.1,
+      "min_weirdness": 0.05,
+      "probability_at_max": 0.3,
+      "probability_at_min": 0.8,
+      "probability_below_min": 0.8
     },
     {
       "type": "minecraft:biome"

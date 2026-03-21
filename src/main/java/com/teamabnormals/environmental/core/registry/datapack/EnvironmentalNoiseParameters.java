@@ -18,6 +18,7 @@ public class EnvironmentalNoiseParameters {
 	public static final ResourceKey<NoiseParameters> CEDAR_RIVER_WATERLILY_DENSITY = create("cedar_river_waterlily_density");
 	public static final ResourceKey<NoiseParameters> CEDAR_SWAMP_SHADE = create("cedar_swamp_shade");
 	public static final ResourceKey<NoiseParameters> CEDAR_SWAMP_MUD = create("cedar_swamp_mud");
+	public static final ResourceKey<NoiseParameters> CEDAR_SWAMP_HUMMOCKS = create("cedar_swamp_hummocks");
 	public static final ResourceKey<NoiseParameters> SHRUB_DENSITY = create("shrub_density");
 	public static final ResourceKey<NoiseParameters> SHRUB_FLOWER_POWER = create("shrub_flower_power");
 	public static final ResourceKey<NoiseParameters> SMOOTHCAP_MOSS_OCCURRENCE = create("smoothcap_moss_occurrence");
@@ -31,6 +32,7 @@ public class EnvironmentalNoiseParameters {
 	public static final LevelNoiseReceiver DWARF_SPRUCE_DENSITY_RECEIVER = new LevelNoiseReceiver(Algorithm.LEGACY, DWARF_SPRUCE_DENSITY);
 	public static final LevelNoiseReceiver DWARF_SPRUCE_HEIGHT_RECEIVER = new LevelNoiseReceiver(Algorithm.LEGACY, DWARF_SPRUCE_HEIGHT);
 	public static final LevelNoiseReceiver CEDAR_SWAMP_SHADE_RECEIVER = new LevelNoiseReceiver(Algorithm.LEGACY, CEDAR_SWAMP_SHADE);
+	public static final LevelNoiseReceiver CEDAR_SWAMP_HUMMOCKS_RECEIVER = new LevelNoiseReceiver(Algorithm.LEGACY, CEDAR_SWAMP_HUMMOCKS);
 	public static final LevelNoiseReceiver SHRUB_FLOWER_POWER_RECEIVER = new LevelNoiseReceiver(Algorithm.LEGACY, SHRUB_FLOWER_POWER);
 	public static final LevelNoiseReceiver SMOOTHCAP_MOSS_OCCURRENCE_RECEIVER = new LevelNoiseReceiver(Algorithm.LEGACY, SMOOTHCAP_MOSS_OCCURRENCE);
 	public static final LevelNoiseReceiver SMOOTHCAP_MOSS_FREQUENCY_RECEIVER = new LevelNoiseReceiver(Algorithm.LEGACY, SMOOTHCAP_MOSS_FREQUENCY);
@@ -47,6 +49,7 @@ public class EnvironmentalNoiseParameters {
 		context.register(CEDAR_RIVER_WATERLILY_DENSITY, new NormalNoise.NoiseParameters(-3, 1.0D, 1.0D, 0.0D));
 		context.register(CEDAR_SWAMP_SHADE, new  NormalNoise.NoiseParameters(-6, 1.0D, 1.5D, 2.0D, 2.0D, 2.0D, 1.0D));
 		context.register(CEDAR_SWAMP_MUD, new NormalNoise.NoiseParameters(-4, 1.0D, 1.0D, 0.0D, 1.0D));
+		context.register(CEDAR_SWAMP_HUMMOCKS, new NormalNoise.NoiseParameters(-2, 2.0D, 1.0D, 0.0D));
 		context.register(SHRUB_DENSITY, new NormalNoise.NoiseParameters(-3, 1.0D, 1.0D, 0.0D));
 		context.register(SHRUB_FLOWER_POWER, new NormalNoise.NoiseParameters(-7, 2.0D, 1.0D, 0.0D));
 		context.register(SMOOTHCAP_MOSS_OCCURRENCE, new NormalNoise.NoiseParameters(-4, 1.0D, 1.0D, 0.0D));

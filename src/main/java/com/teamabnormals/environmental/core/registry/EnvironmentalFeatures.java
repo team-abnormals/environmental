@@ -31,6 +31,7 @@ public class EnvironmentalFeatures {
 	public static final DeferredHolder<Feature<?>, Feature<CupLichenPatchConfiguration>> CUP_LICHEN_PATCH = FEATURES.register("cup_lichen_patch", () -> new CupLichenPatchFeature(CupLichenPatchConfiguration.CODEC));
 	public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> MUDDY_SAND = FEATURES.register("muddy_sand", () -> new MuddySandFeature(NoneFeatureConfiguration.CODEC));
 	public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> SUSPICIOUS_MUDDY_SAND = FEATURES.register("suspicious_muddy_sand", () -> new SuspiciousMuddySandFeature(NoneFeatureConfiguration.CODEC));
+	public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> CEDAR_SWAMP_HUMMOCKS = FEATURES.register("cedar_swamp_hummocks", () -> new CedarSwampHummocksFeature(NoneFeatureConfiguration.CODEC));
 	public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> MUDDY_EDGES = FEATURES.register("muddy_edges", () -> new MuddyEdgesFeature(NoneFeatureConfiguration.CODEC));
 	public static final DeferredHolder<Feature<?>, Feature<ShrubPatchConfiguration>> SHRUB_PATCH = FEATURES.register("shrub_patch", () -> new ShrubPatchFeature(ShrubPatchConfiguration.CODEC));
 	public static final DeferredHolder<Feature<?>, Feature<TreeLichenConfiguration>> TREE_LICHEN = FEATURES.register("tree_lichen", () -> new TreeLichenFeature(TreeLichenConfiguration.CODEC));
