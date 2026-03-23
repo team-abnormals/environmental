@@ -30,7 +30,8 @@ public class EnvironmentalChunkGeneratorModifierProvider extends ChunkGeneratorM
 	protected void registerEntries(Provider provider) {
 		ConditionSource isPineBarrens = isBiome(EnvironmentalBiomes.PINE_BARRENS, EnvironmentalBiomes.SNOWY_PINE_BARRENS, EnvironmentalBiomes.OLD_GROWTH_PINE_BARRENS, EnvironmentalBiomes.SNOWY_OLD_GROWTH_PINE_BARRENS);
 		ConditionSource isPineSlopes = isBiome(EnvironmentalBiomes.PINE_SLOPES);
-		ConditionSource isCedarCreek = isBiome(EnvironmentalBiomes.CEDAR_RIVER, EnvironmentalBiomes.CEDAR_BANK);
+		ConditionSource isCedarRiver = isBiome(EnvironmentalBiomes.CEDAR_RIVER, EnvironmentalBiomes.CEDAR_BANK);
+		ConditionSource isCedarRiverine = isBiome(EnvironmentalBiomes.CEDAR_RIVERINE);
 		ConditionSource isCedarSwamp = isBiome(EnvironmentalBiomes.CEDAR_SWAMP);
 
 		RuleSource stone = state(Blocks.STONE.defaultBlockState());
@@ -43,24 +44,28 @@ public class EnvironmentalChunkGeneratorModifierProvider extends ChunkGeneratorM
 		RuleSource sandy = sequence(ifTrue(ON_CEILING, sandstone), sand);
 		RuleSource water = state(Blocks.WATER.defaultBlockState());
 		RuleSource muddyPodzol = state(EnvironmentalBlocks.MUDDY_PODZOL.get().defaultBlockState());
+		RuleSource shallowSand = ifTrue(
+				yBlockCheck(VerticalAnchor.aboveBottom(64 + 62), 0),
+				sandy
+		);
+		RuleSource deepMuddiedSand = ifTrue(
+				yBlockCheck(VerticalAnchor.aboveBottom(64 + 58), 0),
+				sequence(ifTrue(noiseCondition(EnvironmentalNoiseParameters.CEDAR_RIVER_MUD, 0.0F), muddySand), sandy)
+		);
+		RuleSource muddierSand = sequence(ifTrue(noiseCondition(EnvironmentalNoiseParameters.CEDAR_RIVER_MUD, 0.0F), mud), muddySand);
+		RuleSource sandyToMuddy = sequence(shallowSand, deepMuddiedSand, muddierSand);
 		RuleSource sandyToMud = sequence(
-				ifTrue(
-						yBlockCheck(VerticalAnchor.aboveBottom(64 + 62), 0),
-						sandy
-				),
-				ifTrue(
-						yBlockCheck(VerticalAnchor.aboveBottom(64 + 58), 0),
-						sequence(ifTrue(noiseCondition(EnvironmentalNoiseParameters.CEDAR_RIVER_MUD, 0.0F), muddySand), sandy)
-				),
+				shallowSand, deepMuddiedSand,
 				ifTrue(
 						yBlockCheck(VerticalAnchor.aboveBottom(64 + 55), 0),
-						sequence(ifTrue(noiseCondition(EnvironmentalNoiseParameters.CEDAR_RIVER_MUD, 0.0F), mud), muddySand)
+						muddierSand
 				),
 				mud
 		);
 		SurfaceRules.ConditionSource aboveWaterLevel = SurfaceRules.yBlockCheck(VerticalAnchor.absolute(63), 0);
 		SurfaceRules.ConditionSource atWaterLevel = SurfaceRules.yBlockCheck(VerticalAnchor.absolute(62), 0);
-		ConditionSource barelyOutOfWater = waterBlockCheck(-1, 0);
+		ConditionSource underwater = not(waterBlockCheck(0, 0));
+		ConditionSource shallow = waterBlockCheck(-1, 0);
 		ConditionSource roughlyShallow = waterStartCheck(-6, -1);
 		RuleSource cedarMuddy = sequence(
 				ifTrue(
@@ -70,10 +75,7 @@ public class EnvironmentalChunkGeneratorModifierProvider extends ChunkGeneratorM
 				muddyPodzol
 		);
 		RuleSource cedarVernalPools = sequence(
-				ifTrue(
-						aboveWaterLevel,
-						cedarMuddy
-				),
+				ifTrue(aboveWaterLevel, cedarMuddy),
 				ifTrue(
 						atWaterLevel,
 						sequence(
@@ -94,8 +96,9 @@ public class EnvironmentalChunkGeneratorModifierProvider extends ChunkGeneratorM
 				.addModifier(new SurfaceRuleModifier(ifTrue(abovePreliminarySurface(), sequence(
 						ifTrue(isPineBarrens, sequence(ifTrue(steep(), stone), ifTrue(surfaceNoiseAbove(Noises.SURFACE, 3.0F), ifTrue(not(noiseRange(EnvironmentalNoiseParameters.PINE_BARRENS_STONE, -1.25F, 1.25F)), stone)), ifTrue(surfaceNoiseAbove(Noises.SURFACE, 2.0F), nearSurfaceStone), ifTrue(not(stoneDepthCheck(-1, true, CaveSurface.FLOOR)), nearSurfaceStone))),
 						ifTrue(isPineSlopes, stone),
-						ifTrue(isCedarCreek, sequence(ifTrue(ON_FLOOR, ifTrue(barelyOutOfWater, sandyToMud)), ifTrue(roughlyShallow, ifTrue(UNDER_FLOOR, sandyToMud)))),
-						ifTrue(isCedarSwamp, sequence(ifTrue(ON_FLOOR, ifTrue(barelyOutOfWater, cedarVernalPools)), ifTrue(roughlyShallow, ifTrue(UNDER_FLOOR, sequence(ifTrue(aboveWaterLevel, cedarMuddy), mud)))))
+						ifTrue(isCedarRiver, sequence(ifTrue(ON_FLOOR, ifTrue(shallow, sandyToMud)), ifTrue(roughlyShallow, ifTrue(UNDER_FLOOR, sandyToMud)))),
+						ifTrue(isCedarRiverine, ifTrue(underwater, sequence(ifTrue(ON_FLOOR, ifTrue(shallow, sandyToMuddy)), ifTrue(roughlyShallow, ifTrue(UNDER_FLOOR, sandyToMuddy))))),
+						ifTrue(isCedarSwamp, sequence(ifTrue(ON_FLOOR, ifTrue(shallow, cedarVernalPools)), ifTrue(roughlyShallow, ifTrue(UNDER_FLOOR, sequence(ifTrue(aboveWaterLevel, cedarMuddy), mud)))))
 				)), false));
 	}
 
