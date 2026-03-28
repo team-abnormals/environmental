@@ -341,7 +341,6 @@ public class Zonkey extends AbstractChestedHorse implements NeutralMob, Zebroid 
 
 	@Override
 	public void playKickingSound() {
-		this.playSound(this.getAmbientSound(), this.getSoundVolume(), this.getVoicePitch());
 	}
 
 	@Override

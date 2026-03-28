@@ -280,7 +280,6 @@ public abstract class AbstractUnchestedZebroid extends AbstractHorse implements 
 
 	@Override
 	public void playKickingSound() {
-		this.playSound(this.getAmbientSound(), this.getSoundVolume(), this.getVoicePitch());
 	}
 
 	@Override
