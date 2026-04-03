@@ -131,15 +131,9 @@ publishMods {
         requires("blueprint")
     }
 
-    discord("ping") {
+    discord() {
         webhookUrl = providers.gradleProperty("DISCORD_WEBHOOK")
-        username = "Team Abnormals"
-        //content = "<@&932681333510139924>" // Update Ping
-        content = "<@&932681381648150599>" // Patch Ping
-        setPlatforms()
-    }
-    discord("main") {
-        webhookUrl = providers.gradleProperty("DISCORD_WEBHOOK")
+        dryRunWebhookUrl = providers.gradleProperty("DISCORD_WEBHOOK_ALT")
         username = "Team Abnormals"
         content = changelog.map {
             "## ${project.mod_name} ${project.mc_version} - ${project.mod_version}\n" + it
