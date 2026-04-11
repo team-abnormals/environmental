@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.teamabnormals.environmental.common.entity.animal.zebroid.Zebra;
+import com.teamabnormals.environmental.core.EnvironmentalConfig;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
@@ -32,7 +33,12 @@ public class ZebraDazzleFeature extends Feature<NoneFeatureConfiguration> {
 		List<Pair<Zebra, Vec3>> zebras = Lists.newArrayList();
 
 		int spawnedZebras = 0;
-		int zebraCount = 18 + random.nextInt(3) + random.nextInt(3) + random.nextInt(3);
+		//int zebraCount = 18 + random.nextInt(3) + random.nextInt(3) + random.nextInt(3);
+		int zebraCount = EnvironmentalConfig.COMMON.zebraGroupSize.get()
+				+ EnvironmentalConfig.COMMON.zebraExtraSpawns.get()
+				+ EnvironmentalConfig.COMMON.zebraExtraSpawns.get()
+				+ EnvironmentalConfig.COMMON.zebraExtraSpawns.get();
+
 		for (int i = 0; i < 64; ++i) {
 			int spawnRange = 8;
 			double d0 = (double) pos.getX() + (random.nextDouble() - random.nextDouble()) * (double) spawnRange + 0.5D;
@@ -51,6 +57,7 @@ public class ZebraDazzleFeature extends Feature<NoneFeatureConfiguration> {
 			}
 		}
 
+		//If zebra group is larger than 16, spawn some babies
 		if (zebras.size() > 16) {
 			for (Pair<Zebra, Vec3> pair : zebras) {
 				Zebra zebra = pair.getFirst();
