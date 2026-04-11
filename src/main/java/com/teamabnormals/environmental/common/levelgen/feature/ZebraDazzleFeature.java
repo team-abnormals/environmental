@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.teamabnormals.environmental.common.entity.animal.zebroid.Zebra;
+import com.teamabnormals.environmental.core.EnvironmentalConfig;
 import com.teamabnormals.environmental.core.registry.EnvironmentalEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
@@ -26,13 +27,31 @@ public class ZebraDazzleFeature extends Feature<NoneFeatureConfiguration> {
 
 	@Override
 	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
+
+		if(EnvironmentalConfig.COMMON.enableZebraDazzles.get() == false
+		|| (EnvironmentalConfig.COMMON.zebraGroupSize.get() == 0
+		&& EnvironmentalConfig.COMMON.zebraExtraSpawns.get() == 0))
+		{
+			return false;
+		}
+
 		BlockPos pos = context.origin();
 		WorldGenLevel level = context.level();
 		RandomSource random = context.random();
 		List<Pair<Zebra, Vec3>> zebras = Lists.newArrayList();
 
 		int spawnedZebras = 0;
-		int zebraCount = 18 + random.nextInt(3) + random.nextInt(3) + random.nextInt(3);
+
+		int extraZebras = EnvironmentalConfig.COMMON.zebraExtraSpawns.get();
+		int zebraCount = EnvironmentalConfig.COMMON.zebraGroupSize.get();
+
+		if(extraZebras > 0)
+		{
+			zebraCount += random.nextInt(extraZebras + 1);
+			zebraCount += random.nextInt(extraZebras + 1);
+			zebraCount += random.nextInt(extraZebras + 1);
+		}
+
 		for (int i = 0; i < 64; ++i) {
 			int spawnRange = 8;
 			double d0 = (double) pos.getX() + (random.nextDouble() - random.nextDouble()) * (double) spawnRange + 0.5D;
@@ -51,7 +70,9 @@ public class ZebraDazzleFeature extends Feature<NoneFeatureConfiguration> {
 			}
 		}
 
-		if (zebras.size() > 16) {
+		/* Check if zebra group size is equal to or greater than size set in config.
+		   previously checked for greater than 16? magic numbers bad!*/
+		if (zebras.size() >= EnvironmentalConfig.COMMON.zebraGroupSize.get()) {
 			for (Pair<Zebra, Vec3> pair : zebras) {
 				Zebra zebra = pair.getFirst();
 				Vec3 zebraPos = pair.getSecond();

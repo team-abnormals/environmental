@@ -6,6 +6,7 @@ import net.minecraftforge.common.ForgeConfigSpec.DoubleValue;
 import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import org.apache.commons.lang3.tuple.Pair;
+import org.checkerframework.common.value.qual.IntVal;
 
 @EventBusSubscriber(modid = Environmental.MOD_ID)
 public class EnvironmentalConfig {
@@ -27,6 +28,10 @@ public class EnvironmentalConfig {
 		public final IntValue minimumAdditionalHoglets;
 		public final IntValue maximumAdditionalHoglets;
 
+		public final BooleanValue enableZebraDazzles;
+		public final IntValue zebraGroupSize;
+		public final IntValue zebraExtraSpawns;
+
 		public final BooleanValue muddyPigs;
 		public final BooleanValue naturalMuddyPigs;
 		public final DoubleValue muddyPigDecorationChance;
@@ -42,6 +47,11 @@ public class EnvironmentalConfig {
 
 		Common(ForgeConfigSpec.Builder builder) {
 			builder.push("mobs");
+			builder.push("zebra");
+			enableZebraDazzles = builder.comment("Whether or not to spawn Zebra Dazzles").define("Spawn Zebra Dazzles", true);
+			zebraGroupSize = builder.comment("Define group size for zebras dazzles").defineInRange("Zebra Group Size", 18, 0, 100);
+			zebraExtraSpawns = builder.comment("Random range which spawns extra zebras. default is 3. set to 0 to spawn exactly the amount of zebras specified in group size with no variation").defineInRange("Extra Zebra Ranges", 3, 0, 100);
+			builder.pop();
 			builder.push("deer");
 			deerFlowerReproducing = builder.comment("If Deer can reproduce and spread flowers by feeding them an Apple followed by a flower").define("Deer flower reproducing", true);
 			deerAntlerChance = builder.comment("The chance Deer have to spawn with Antlers; 0.0 for never, 1.0 for always").defineInRange("Deer Antler chance", 0.5D, 0.0D, 1.0D);
