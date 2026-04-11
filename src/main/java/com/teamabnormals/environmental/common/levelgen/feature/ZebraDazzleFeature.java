@@ -33,7 +33,6 @@ public class ZebraDazzleFeature extends Feature<NoneFeatureConfiguration> {
 		List<Pair<Zebra, Vec3>> zebras = Lists.newArrayList();
 
 		int spawnedZebras = 0;
-		//int zebraCount = 18 + random.nextInt(3) + random.nextInt(3) + random.nextInt(3);
 		int zebraCount = EnvironmentalConfig.COMMON.zebraGroupSize.get()
 				+ EnvironmentalConfig.COMMON.zebraExtraSpawns.get()
 				+ EnvironmentalConfig.COMMON.zebraExtraSpawns.get()
@@ -57,8 +56,9 @@ public class ZebraDazzleFeature extends Feature<NoneFeatureConfiguration> {
 			}
 		}
 
-		//If zebra group is larger than 16, spawn some babies
-		if (zebras.size() > 16) {
+		/* Check if zebra group size is equal to or greater than size set in config.
+		   previously checked for greater than 16? magic numbers bad!*/
+		if (zebras.size() >= EnvironmentalConfig.COMMON.zebraGroupSize.get()) {
 			for (Pair<Zebra, Vec3> pair : zebras) {
 				Zebra zebra = pair.getFirst();
 				Vec3 zebraPos = pair.getSecond();
