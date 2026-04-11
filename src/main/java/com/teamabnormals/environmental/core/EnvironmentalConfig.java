@@ -28,6 +28,7 @@ public class EnvironmentalConfig {
 		public final IntValue minimumAdditionalHoglets;
 		public final IntValue maximumAdditionalHoglets;
 
+		public final BooleanValue enableZebraDazzles;
 		public final IntValue zebraGroupSize;
 		public final IntValue zebraExtraSpawns;
 
@@ -47,6 +48,7 @@ public class EnvironmentalConfig {
 		Common(ForgeConfigSpec.Builder builder) {
 			builder.push("mobs");
 			builder.push("zebra");
+			enableZebraDazzles = builder.comment("Whether or not to spawn Zebra Dazzles").define("Spawn Zebra Dazzles", true);
 			zebraGroupSize = builder.comment("Define group size for zebras dazzles").defineInRange("Zebra Group Size", 18, 0, 100);
 			zebraExtraSpawns = builder.comment("Random range which spawns extra zebras. default is 3. set to 0 to spawn exactly the amount of zebras specified in group size with no variation").defineInRange("Extra Zebra Ranges", 3, 0, 100);
 			builder.pop();

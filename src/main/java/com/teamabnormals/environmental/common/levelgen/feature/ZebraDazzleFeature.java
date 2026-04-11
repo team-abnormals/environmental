@@ -27,16 +27,30 @@ public class ZebraDazzleFeature extends Feature<NoneFeatureConfiguration> {
 
 	@Override
 	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
+
+		if(EnvironmentalConfig.COMMON.enableZebraDazzles.get() == false
+		|| (EnvironmentalConfig.COMMON.zebraGroupSize.get() == 0
+		&& EnvironmentalConfig.COMMON.zebraExtraSpawns.get() == 0))
+		{
+			return false;
+		}
+
 		BlockPos pos = context.origin();
 		WorldGenLevel level = context.level();
 		RandomSource random = context.random();
 		List<Pair<Zebra, Vec3>> zebras = Lists.newArrayList();
 
 		int spawnedZebras = 0;
-		int zebraCount = EnvironmentalConfig.COMMON.zebraGroupSize.get()
-				+ EnvironmentalConfig.COMMON.zebraExtraSpawns.get()
-				+ EnvironmentalConfig.COMMON.zebraExtraSpawns.get()
-				+ EnvironmentalConfig.COMMON.zebraExtraSpawns.get();
+
+		int extraZebras = EnvironmentalConfig.COMMON.zebraExtraSpawns.get();
+		int zebraCount = EnvironmentalConfig.COMMON.zebraGroupSize.get();
+
+		if(extraZebras > 0)
+		{
+			zebraCount += random.nextInt(extraZebras + 1);
+			zebraCount += random.nextInt(extraZebras + 1);
+			zebraCount += random.nextInt(extraZebras + 1);
+		}
 
 		for (int i = 0; i < 64; ++i) {
 			int spawnRange = 8;
