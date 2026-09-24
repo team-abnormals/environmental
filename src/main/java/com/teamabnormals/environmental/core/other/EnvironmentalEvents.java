@@ -442,9 +442,9 @@ public class EnvironmentalEvents {
 		if (EnvironmentalConfig.COMMON.cactusBobble.get() && state.is(EnvironmentalBlockTags.CACTUS_BOBBLE_PLANTABLE_ON) && level.getBlockState(pos.above()).isAir()) {
 			if (!level.isClientSide()) {
 				level.setBlockAndUpdate(pos.above(), EnvironmentalBlocks.CACTUS_BOBBLE.get().defaultBlockState());
+				consumeBonemeal(event);
 			}
 			event.setSuccessful(true);
-			event.setCanceled(true);
 		}
 
 		if (state.is(Blocks.DIRT) && level.getBlockState(pos.above()).propagatesSkylightDown(level, pos)) {
@@ -458,9 +458,9 @@ public class EnvironmentalEvents {
 			if (!potentialStates.isEmpty()) {
 				if (!level.isClientSide()) {
 					level.setBlock(pos, potentialStates.get(level.getRandom().nextInt(potentialStates.size())), 3);
+					consumeBonemeal(event);
 				}
 				event.setSuccessful(true);
-				event.setCanceled(true);
 			}
 		}
 
@@ -483,18 +483,33 @@ public class EnvironmentalEvents {
 						}
 					}
 				}
+				consumeBonemeal(event);
 			}
 
 			event.setSuccessful(true);
-			event.setCanceled(true);
 		}
 
 		if (state.is(Blocks.TALL_GRASS)) {
 			if (!level.isClientSide()) {
 				DoublePlantBlock.placeAt(level, EnvironmentalBlocks.GIANT_TALL_GRASS.get().defaultBlockState(), state.getValue(DoublePlantBlock.HALF) == DoubleBlockHalf.LOWER ? pos : pos.below(), 2);
+				consumeBonemeal(event);
 			}
 			event.setSuccessful(true);
-			event.setCanceled(true);
+		}
+	}
+
+	public static void consumeBonemeal(BonemealEvent event) {
+		Player player = event.getPlayer();
+		Level level = event.getLevel();
+		BlockPos pos = event.getPos();
+		if (player == null || !player.getAbilities().instabuild) {
+			event.getStack().shrink(1);
+		}
+		if (level instanceof ServerLevel serverLevel) {
+			serverLevel.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
+			serverLevel.sendParticles(ParticleTypes.HAPPY_VILLAGER,
+				pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
+				15, 0.4, 0.4, 0.4, 0.0);
 		}
 	}
 }
