@@ -406,7 +406,7 @@ public class EnvironmentalBlocks {
 	public static void setupTabEditors() {
 		CreativeModeTabContentsPopulator.mod(Environmental.MOD_ID)
 				.tab(BUILDING_BLOCKS)
-				.addItemsBefore(of(Blocks.PACKED_MUD), () -> Blocks.DIRT, DIRT_BRICKS, DIRT_BRICK_STAIRS, DIRT_BRICK_SLAB, DIRT_BRICK_WALL, DIRT_TILE_STAIRS, DIRT_TILES, DIRT_TILE_SLAB, DIRT_TILE_WALL)
+				.addItemsBefore(of(Blocks.PACKED_MUD), () -> Blocks.DIRT, DIRT_BRICKS, DIRT_BRICK_STAIRS, DIRT_BRICK_SLAB, DIRT_BRICK_WALL, DIRT_TILES, DIRT_TILE_STAIRS, DIRT_TILE_SLAB, DIRT_TILE_WALL)
 				.addItemsBefore(of(Blocks.MUD_BRICKS), SMOOTH_MUD, SMOOTH_MUD_SLAB)
 				.addItemsAfter(of(Blocks.MUD_BRICK_WALL), CHISELED_MUD_BRICKS)
 				.addItemsBefore(of(Blocks.BAMBOO_BLOCK), WILLOW_LOG, WILLOW_WOOD, STRIPPED_WILLOW_LOG, STRIPPED_WILLOW_WOOD, WILLOW_PLANKS)
