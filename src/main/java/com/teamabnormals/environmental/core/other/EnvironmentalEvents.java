@@ -45,6 +45,7 @@ import net.minecraft.world.entity.ai.goal.target.NonTameRandomTargetGoal;
 import net.minecraft.world.entity.animal.*;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.EnderMan;
+import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.monster.hoglin.Hoglin;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
@@ -80,7 +81,6 @@ import net.neoforged.neoforge.event.entity.player.BonemealEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -128,7 +128,7 @@ public class EnvironmentalEvents {
 		Mob entity = event.getEntity();
 		ServerLevelAccessor level = event.getLevel();
 
-		boolean natural = VALID_SPAWNS.contains(event.getSpawnType());
+		boolean natural = VALID_SPAWNS.contains(event.getSpawnType())  || (event.getSpawnType() == MobSpawnType.EVENT && entity instanceof Zombie);
 		boolean spawner = !EnvironmentalConfig.COMMON.blockOnlyNaturalSpawns.get() && event.getSpawnType() == MobSpawnType.SPAWNER;
 
 		if ((natural || spawner) && entity.getType().getCategory() == MobCategory.MONSTER && !entity.getType().is(EnvironmentalEntityTypeTags.UNAFFECTED_BY_SERENITY)) {
