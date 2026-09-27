@@ -443,8 +443,7 @@
     "sounds": [
       "environmental:mob/zebra/hit1",
       "environmental:mob/zebra/hit2",
-      "environmental:mob/zebra/hit3",
-      "environmental:mob/zebra/hit4"
+      "environmental:mob/zebra/hit3"
     ],
     "subtitle": "subtitles.environmental.entity.zebra.hurt"
   },
@@ -490,8 +489,7 @@
     "sounds": [
       "environmental:mob/zebra/hit1",
       "environmental:mob/zebra/hit2",
-      "environmental:mob/zebra/hit3",
-      "environmental:mob/zebra/hit4"
+      "environmental:mob/zebra/hit3"
     ],
     "subtitle": "subtitles.environmental.entity.zorse.hurt"
   },
@@ -529,8 +527,7 @@
     "sounds": [
       "environmental:mob/zebra/hit1",
       "environmental:mob/zebra/hit2",
-      "environmental:mob/zebra/hit3",
-      "environmental:mob/zebra/hit4"
+      "environmental:mob/zebra/hit3"
     ],
     "subtitle": "subtitles.environmental.entity.zonkey.hurt"
   },
