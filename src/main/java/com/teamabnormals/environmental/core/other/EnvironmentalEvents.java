@@ -2,11 +2,9 @@ package com.teamabnormals.environmental.core.other;
 
 import com.google.common.collect.Sets;
 import com.mojang.datafixers.util.Pair;
-import com.teamabnormals.blueprint.common.network.particle.SpawnParticlesPayload;
 import com.teamabnormals.blueprint.common.world.storage.tracking.IDataManager;
 import com.teamabnormals.blueprint.core.util.DataUtil;
 import com.teamabnormals.blueprint.core.util.MathUtil;
-import com.teamabnormals.blueprint.core.util.NetworkUtil;
 import com.teamabnormals.environmental.common.entity.ai.goal.CatLeapAtDwarfSpruceGoal;
 import com.teamabnormals.environmental.common.entity.ai.goal.HuntTruffleGoal;
 import com.teamabnormals.environmental.common.entity.animal.koi.Koi;
@@ -29,7 +27,6 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
-import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -37,6 +34,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.ParticleUtils;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -438,8 +436,8 @@ public class EnvironmentalEvents {
 		if (EnvironmentalConfig.COMMON.cactusBobble.get() && state.is(EnvironmentalBlockTags.CACTUS_BOBBLE_PLANTABLE_ON) && level.getBlockState(pos.above()).isAir()) {
 			if (!level.isClientSide()) {
 				level.setBlockAndUpdate(pos.above(), EnvironmentalBlocks.CACTUS_BOBBLE.get().defaultBlockState());
-				consumeBonemeal(event, Type.GROWER);
 			}
+			consumeBonemeal(event, Type.GROWER);
 			event.setSuccessful(true);
 		}
 
@@ -454,8 +452,8 @@ public class EnvironmentalEvents {
 			if (!potentialStates.isEmpty()) {
 				if (!level.isClientSide()) {
 					level.setBlock(pos, potentialStates.get(level.getRandom().nextInt(potentialStates.size())), 3);
-					consumeBonemeal(event, Type.NEIGHBOR_SPREADER);
 				}
+				consumeBonemeal(event, Type.NEIGHBOR_SPREADER);
 				event.setSuccessful(true);
 			}
 		}
@@ -481,18 +479,17 @@ public class EnvironmentalEvents {
 						}
 					}
 				}
-
-				consumeBonemeal(event, Type.NEIGHBOR_SPREADER);
 			}
 
+			consumeBonemeal(event, Type.NEIGHBOR_SPREADER);
 			event.setSuccessful(true);
 		}
 
 		if (state.is(Blocks.TALL_GRASS)) {
 			if (!level.isClientSide()) {
 				DoublePlantBlock.placeAt(level, EnvironmentalBlocks.GIANT_TALL_GRASS.get().defaultBlockState(), state.getValue(DoublePlantBlock.HALF) == DoubleBlockHalf.LOWER ? pos : pos.below(), 2);
-				consumeBonemeal(event, Type.GROWER);
 			}
+			consumeBonemeal(event, Type.GROWER);
 			event.setSuccessful(true);
 		}
 	}
@@ -501,45 +498,20 @@ public class EnvironmentalEvents {
 		Player player = event.getPlayer();
 		Level level = event.getLevel();
 		BlockPos pos = event.getPos();
-		if (player == null || !player.getAbilities().instabuild) {
-			event.getStack().shrink(1);
-		}
-
-		int data = 15;
 		if (level instanceof ServerLevel serverLevel) {
+			if (player == null || !player.getAbilities().instabuild) {
+				event.getStack().shrink(1);
+			}
 			serverLevel.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
+		} else {
+			int data = 15;
 			switch (type) {
 				case NEIGHBOR_SPREADER:
-					spawnParticles(serverLevel, pos.above(), data * 3, 3.0, 1.0, false, ParticleTypes.HAPPY_VILLAGER);
+					ParticleUtils.spawnParticles(level, pos.above(), data * 3, 3.0, 1.0, false, ParticleTypes.HAPPY_VILLAGER);
 					break;
 				case GROWER:
-					spawnParticleInBlock(serverLevel, pos, data, ParticleTypes.HAPPY_VILLAGER);
+					ParticleUtils.spawnParticleInBlock(level, pos, data, ParticleTypes.HAPPY_VILLAGER);
 			}
-		}
-	}
-
-	public static void spawnParticleInBlock(ServerLevel level, BlockPos pos, int count, ParticleOptions particle) {
-		BlockState blockstate = level.getBlockState(pos);
-		double ySpread = blockstate.isAir() ? 1.0 : blockstate.getShape(level, pos).max(Direction.Axis.Y);
-		spawnParticles(level, pos, count, 0.5, ySpread, true, particle);
-	}
-
-	public static void spawnParticles(ServerLevel level, BlockPos pos, int count, double xzSpread, double ySpread, boolean allowInAir, ParticleOptions particle) {
-		RandomSource random = level.getRandom();
-		List<SpawnParticlesPayload.ParticleInstance> instances = new ArrayList<>();
-
-		for (int i = 0; i < count; i++) {
-			double offset = 0.5 - xzSpread;
-			double x = pos.getX() + offset + random.nextDouble() * xzSpread * 2.0;
-			double y = pos.getY() + random.nextDouble() * ySpread;
-			double z = pos.getZ() + offset + random.nextDouble() * xzSpread * 2.0;
-			if (allowInAir || !level.getBlockState(BlockPos.containing(x, y, z).below()).isAir()) {
-				instances.add(new SpawnParticlesPayload.ParticleInstance(x, y, z, random.nextGaussian() * 0.02, random.nextGaussian() * 0.02, random.nextGaussian() * 0.02));
-			}
-		}
-
-		if (!instances.isEmpty()) {
-			NetworkUtil.spawnParticle(level, particle, instances);
 		}
 	}
 }
