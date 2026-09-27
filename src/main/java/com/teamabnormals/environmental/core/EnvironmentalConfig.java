@@ -39,6 +39,8 @@ public class EnvironmentalConfig {
 
 		public final BooleanValue cactusBobble;
 
+		public final BooleanValue pinkPetalsSpreadWithBoneMeal;
+
 		Common(ModConfigSpec.Builder builder) {
 			builder.push("mobs");
 			pineconeGolems = builder.comment("If Pinecone Golems should be created when placing a Carved Pumpkin on top of a Pinecone").define("Pinecone Golems", true);
@@ -80,6 +82,7 @@ public class EnvironmentalConfig {
 			builder.pop();
 			builder.push("blocks");
 			cactusBobble = builder.comment("Cacti generate with a Cactus Bobble on top to prevent natural growth").define("Cactus bobble", true);
+			pinkPetalsSpreadWithBoneMeal = builder.comment("If Pink Petals can spread to nearby blocks when Bone Meal is used on them instead of always popping a new item").define("Pink Petals spread with Bone Meal", true);
 			builder.pop();
 		}
 	}

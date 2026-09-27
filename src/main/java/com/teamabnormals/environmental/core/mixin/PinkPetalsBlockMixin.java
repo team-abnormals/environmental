@@ -1,11 +1,12 @@
 package com.teamabnormals.environmental.core.mixin;
 
+import com.teamabnormals.environmental.core.EnvironmentalConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction.Plane;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.PinkPetalsBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
@@ -16,6 +17,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Mixin(PinkPetalsBlock.class)
@@ -28,21 +30,24 @@ public class PinkPetalsBlockMixin {
 
 	@Inject(method = "performBonemeal", at = @At("HEAD"), cancellable = true)
 	public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state, CallbackInfo ci) {
-		if (state.getValue(PinkPetalsBlock.AMOUNT) >= 4) {
+		if (state.getValue(PinkPetalsBlock.AMOUNT) >= 4 && EnvironmentalConfig.COMMON.pinkPetalsSpreadWithBoneMeal.get()) {
+			Block thisBlock = (Block) (Object) this;
+
 			List<BlockPos> blocks = BlockPos.betweenClosedStream(pos.offset(-2, -1, -2), pos.offset(2, 1, 2))
 					.filter(newPos -> Mth.abs(pos.getX() - newPos.getX()) != 2 || Mth.abs(pos.getZ() - newPos.getZ()) != 2)
-					.filter(newPos -> state.canSurvive(level, newPos) && (level.isEmptyBlock(newPos) || (level.getBlockState(newPos).is(Blocks.PINK_PETALS) && level.getBlockState(newPos).getValue(PinkPetalsBlock.AMOUNT) < 4)))
+					.filter(newPos -> state.canSurvive(level, newPos) && (level.isEmptyBlock(newPos) || (level.getBlockState(newPos).is(thisBlock) && level.getBlockState(newPos).getValue(PinkPetalsBlock.AMOUNT) < 4)))
 					.map(BlockPos::immutable)
+					.sorted(Comparator.comparingDouble(newPos -> newPos.distSqr(pos)))
 					.toList();
 
 			if (!blocks.isEmpty()) {
-				BlockPos newPos = blocks.get(random.nextInt(blocks.size()));
+				BlockPos newPos = blocks.get(random.nextInt(Math.min(blocks.size(), 4)));
 
 				BlockState currentState = level.getBlockState(newPos);
-				if (currentState.is(Blocks.PINK_PETALS)) {
+				if (currentState.is(thisBlock)) {
 					level.setBlockAndUpdate(newPos, currentState.setValue(PinkPetalsBlock.AMOUNT, level.getBlockState(newPos).getValue(PinkPetalsBlock.AMOUNT) + 1));
 				} else if (level.isEmptyBlock(newPos)) {
-					level.setBlockAndUpdate(newPos, Blocks.PINK_PETALS.defaultBlockState().setValue(PinkPetalsBlock.FACING, Plane.HORIZONTAL.getRandomDirection(random)));
+					level.setBlockAndUpdate(newPos, thisBlock.defaultBlockState().setValue(PinkPetalsBlock.FACING, Plane.HORIZONTAL.getRandomDirection(random)));
 				}
 
 				ci.cancel();

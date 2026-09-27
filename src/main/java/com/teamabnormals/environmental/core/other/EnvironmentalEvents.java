@@ -2,9 +2,11 @@ package com.teamabnormals.environmental.core.other;
 
 import com.google.common.collect.Sets;
 import com.mojang.datafixers.util.Pair;
+import com.teamabnormals.blueprint.common.network.particle.SpawnParticlesPayload;
 import com.teamabnormals.blueprint.common.world.storage.tracking.IDataManager;
 import com.teamabnormals.blueprint.core.util.DataUtil;
 import com.teamabnormals.blueprint.core.util.MathUtil;
+import com.teamabnormals.blueprint.core.util.NetworkUtil;
 import com.teamabnormals.environmental.common.entity.ai.goal.CatLeapAtDwarfSpruceGoal;
 import com.teamabnormals.environmental.common.entity.ai.goal.HuntTruffleGoal;
 import com.teamabnormals.environmental.common.entity.animal.koi.Koi;
@@ -27,6 +29,7 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -58,10 +61,8 @@ import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.DispenserBlock;
-import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.BonemealableBlock.Type;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -81,6 +82,7 @@ import net.neoforged.neoforge.event.entity.player.BonemealEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -95,32 +97,26 @@ public class EnvironmentalEvents {
 			Pair.of(EnvironmentalBlockTags.PODZOL_PATHABLE, EnvironmentalBlocks.PODZOL_PATH),
 			Pair.of(EnvironmentalBlockTags.MYCELIUM_PATHABLE, EnvironmentalBlocks.MYCELIUM_PATH),
 			Pair.of(EnvironmentalBlockTags.MUD_PATHABLE, EnvironmentalBlocks.MUD_PATH),
-			Pair.of(EnvironmentalBlockTags.MUDDY_PODZOL_PATHABLE, EnvironmentalBlocks.MUDDY_PODZOL_PATH)
-	);
+			Pair.of(EnvironmentalBlockTags.MUDDY_PODZOL_PATHABLE, EnvironmentalBlocks.MUDDY_PODZOL_PATH));
 
 	static {
-		DataUtil.registerAlternativeDispenseBehavior(new DataUtil.AlternativeDispenseBehavior(
-				Environmental.MOD_ID,
-				Items.POTION,
-				(source, stack) -> {
-					return stack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).is(Potions.WATER) && source.level().getBlockState(source.pos().relative(source.state().getValue(DispenserBlock.FACING))).is(Blocks.PODZOL);
-				},
-				new DefaultDispenseItemBehavior() {
-					@Override
-					public ItemStack execute(BlockSource source, ItemStack stack) {
-						ServerLevel serverLevel = source.level();
-						BlockPos pos = source.pos();
-						BlockPos relativePos = source.pos().relative(source.state().getValue(DispenserBlock.FACING));
-						for (int i = 0; i < 5; i++) {
-							serverLevel.sendParticles(ParticleTypes.SPLASH, (double)pos.getX() + serverLevel.random.nextDouble(), pos.getY() + 1, (double)pos.getZ() + serverLevel.random.nextDouble(), 1, 0.0, 0.0, 0.0, 1.0);
-						}
-						serverLevel.playSound(null, pos, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
-						serverLevel.gameEvent(null, GameEvent.FLUID_PLACE, pos);
-						serverLevel.setBlockAndUpdate(relativePos, EnvironmentalBlocks.MUDDY_PODZOL.get().defaultBlockState());
-						return this.consumeWithRemainder(source, stack, new ItemStack(Items.GLASS_BOTTLE));
-					}
+		DataUtil.registerAlternativeDispenseBehavior(new DataUtil.AlternativeDispenseBehavior(Environmental.MOD_ID, Items.POTION, (source, stack) -> {
+			return stack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).is(Potions.WATER) && source.level().getBlockState(source.pos().relative(source.state().getValue(DispenserBlock.FACING))).is(Blocks.PODZOL);
+		}, new DefaultDispenseItemBehavior() {
+			@Override
+			public ItemStack execute(BlockSource source, ItemStack stack) {
+				ServerLevel serverLevel = source.level();
+				BlockPos pos = source.pos();
+				BlockPos relativePos = source.pos().relative(source.state().getValue(DispenserBlock.FACING));
+				for (int i = 0; i < 5; i++) {
+					serverLevel.sendParticles(ParticleTypes.SPLASH, (double) pos.getX() + serverLevel.random.nextDouble(), pos.getY() + 1, (double) pos.getZ() + serverLevel.random.nextDouble(), 1, 0.0, 0.0, 0.0, 1.0);
 				}
-		));
+				serverLevel.playSound(null, pos, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
+				serverLevel.gameEvent(null, GameEvent.FLUID_PLACE, pos);
+				serverLevel.setBlockAndUpdate(relativePos, EnvironmentalBlocks.MUDDY_PODZOL.get().defaultBlockState());
+				return this.consumeWithRemainder(source, stack, new ItemStack(Items.GLASS_BOTTLE));
+			}
+		}));
 	}
 
 	@SubscribeEvent
@@ -128,7 +124,7 @@ public class EnvironmentalEvents {
 		Mob entity = event.getEntity();
 		ServerLevelAccessor level = event.getLevel();
 
-		boolean natural = VALID_SPAWNS.contains(event.getSpawnType())  || (event.getSpawnType() == MobSpawnType.EVENT && entity instanceof Zombie);
+		boolean natural = VALID_SPAWNS.contains(event.getSpawnType()) || (event.getSpawnType() == MobSpawnType.EVENT && entity instanceof Zombie);
 		boolean spawner = !EnvironmentalConfig.COMMON.blockOnlyNaturalSpawns.get() && event.getSpawnType() == MobSpawnType.SPAWNER;
 
 		if ((natural || spawner) && entity.getType().getCategory() == MobCategory.MONSTER && !entity.getType().is(EnvironmentalEntityTypeTags.UNAFFECTED_BY_SERENITY)) {
@@ -442,7 +438,7 @@ public class EnvironmentalEvents {
 		if (EnvironmentalConfig.COMMON.cactusBobble.get() && state.is(EnvironmentalBlockTags.CACTUS_BOBBLE_PLANTABLE_ON) && level.getBlockState(pos.above()).isAir()) {
 			if (!level.isClientSide()) {
 				level.setBlockAndUpdate(pos.above(), EnvironmentalBlocks.CACTUS_BOBBLE.get().defaultBlockState());
-				consumeBonemeal(event);
+				consumeBonemeal(event, Type.GROWER);
 			}
 			event.setSuccessful(true);
 		}
@@ -458,7 +454,7 @@ public class EnvironmentalEvents {
 			if (!potentialStates.isEmpty()) {
 				if (!level.isClientSide()) {
 					level.setBlock(pos, potentialStates.get(level.getRandom().nextInt(potentialStates.size())), 3);
-					consumeBonemeal(event);
+					consumeBonemeal(event, Type.NEIGHBOR_SPREADER);
 				}
 				event.setSuccessful(true);
 			}
@@ -467,13 +463,15 @@ public class EnvironmentalEvents {
 		if (state.is(Blocks.MYCELIUM) && level.getBlockState(pos.above()).isAir()) {
 			if (!level.isClientSide()) {
 				BlockPos abovePos = pos.above();
+
+				label:
 				for (int i = 0; i < 128; ++i) {
 					BlockPos newPos = abovePos;
 
 					for (int j = 0; j < i / 16; ++j) {
 						newPos = newPos.offset(random.nextInt(3) - 1, (random.nextInt(3) - 1) * random.nextInt(3) / 2, random.nextInt(3) - 1);
 						if (!level.getBlockState(newPos.below()).is(Blocks.MYCELIUM) || level.getBlockState(newPos).isCollisionShapeFullBlock(level, newPos)) {
-							break;
+							continue label;
 						}
 					}
 
@@ -483,7 +481,8 @@ public class EnvironmentalEvents {
 						}
 					}
 				}
-				consumeBonemeal(event);
+
+				consumeBonemeal(event, Type.NEIGHBOR_SPREADER);
 			}
 
 			event.setSuccessful(true);
@@ -492,24 +491,55 @@ public class EnvironmentalEvents {
 		if (state.is(Blocks.TALL_GRASS)) {
 			if (!level.isClientSide()) {
 				DoublePlantBlock.placeAt(level, EnvironmentalBlocks.GIANT_TALL_GRASS.get().defaultBlockState(), state.getValue(DoublePlantBlock.HALF) == DoubleBlockHalf.LOWER ? pos : pos.below(), 2);
-				consumeBonemeal(event);
+				consumeBonemeal(event, Type.GROWER);
 			}
 			event.setSuccessful(true);
 		}
 	}
 
-	public static void consumeBonemeal(BonemealEvent event) {
+	public static void consumeBonemeal(BonemealEvent event, BonemealableBlock.Type type) {
 		Player player = event.getPlayer();
 		Level level = event.getLevel();
 		BlockPos pos = event.getPos();
 		if (player == null || !player.getAbilities().instabuild) {
 			event.getStack().shrink(1);
 		}
+
+		int data = 15;
 		if (level instanceof ServerLevel serverLevel) {
 			serverLevel.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
-			serverLevel.sendParticles(ParticleTypes.HAPPY_VILLAGER,
-				pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
-				15, 0.4, 0.4, 0.4, 0.0);
+			switch (type) {
+				case NEIGHBOR_SPREADER:
+					spawnParticles(serverLevel, pos.above(), data * 3, 3.0, 1.0, false, ParticleTypes.HAPPY_VILLAGER);
+					break;
+				case GROWER:
+					spawnParticleInBlock(serverLevel, pos, data, ParticleTypes.HAPPY_VILLAGER);
+			}
+		}
+	}
+
+	public static void spawnParticleInBlock(ServerLevel level, BlockPos pos, int count, ParticleOptions particle) {
+		BlockState blockstate = level.getBlockState(pos);
+		double ySpread = blockstate.isAir() ? 1.0 : blockstate.getShape(level, pos).max(Direction.Axis.Y);
+		spawnParticles(level, pos, count, 0.5, ySpread, true, particle);
+	}
+
+	public static void spawnParticles(ServerLevel level, BlockPos pos, int count, double xzSpread, double ySpread, boolean allowInAir, ParticleOptions particle) {
+		RandomSource random = level.getRandom();
+		List<SpawnParticlesPayload.ParticleInstance> instances = new ArrayList<>();
+
+		for (int i = 0; i < count; i++) {
+			double offset = 0.5 - xzSpread;
+			double x = pos.getX() + offset + random.nextDouble() * xzSpread * 2.0;
+			double y = pos.getY() + random.nextDouble() * ySpread;
+			double z = pos.getZ() + offset + random.nextDouble() * xzSpread * 2.0;
+			if (allowInAir || !level.getBlockState(BlockPos.containing(x, y, z).below()).isAir()) {
+				instances.add(new SpawnParticlesPayload.ParticleInstance(x, y, z, random.nextGaussian() * 0.02, random.nextGaussian() * 0.02, random.nextGaussian() * 0.02));
+			}
+		}
+
+		if (!instances.isEmpty()) {
+			NetworkUtil.spawnParticle(level, particle, instances);
 		}
 	}
 }
